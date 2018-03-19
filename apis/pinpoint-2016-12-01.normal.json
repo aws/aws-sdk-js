@@ -66,6 +66,34 @@
       } ],
       "documentation" : "Creates or updates a campaign."
     },
+    "CreateExportJob" : {
+      "name" : "CreateExportJob",
+      "http" : {
+        "method" : "POST",
+        "requestUri" : "/v1/apps/{application-id}/jobs/export",
+        "responseCode" : 202
+      },
+      "input" : {
+        "shape" : "CreateExportJobRequest"
+      },
+      "output" : {
+        "shape" : "CreateExportJobResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Creates an export job."
+    },
     "CreateImportJob" : {
       "name" : "CreateImportJob",
       "http" : {
@@ -374,6 +402,41 @@
       } ],
       "documentation" : "Delete an email channel"
     },
+    "DeleteEndpoint" : {
+      "name" : "DeleteEndpoint",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/v1/apps/{application-id}/endpoints/{endpoint-id}",
+        "responseCode" : 202
+      },
+      "input" : {
+        "shape" : "DeleteEndpointRequest"
+      },
+      "output" : {
+        "shape" : "DeleteEndpointResponse",
+        "documentation" : "202 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
+      }, {
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
+      }, {
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
+      }, {
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
+      }, {
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
+      }, {
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
+      } ],
+      "documentation" : "Deletes an endpoint."
+    },
     "DeleteEventStream" : {
       "name" : "DeleteEventStream",
       "http" : {
@@ -624,7 +687,7 @@
       }, {
         "shape" : "TooManyRequestsException"
       } ],
-      "documentation" : "Get an APNS VoipSandbox channel"
+      "documentation" : "Get an APNS VoIPSandbox channel"
     },
     "GetApp" : {
       "name" : "GetApp",
@@ -962,6 +1025,62 @@
       } ],
       "documentation" : "Returns the event stream for an app."
     },
+    "GetExportJob" : {
+      "name" : "GetExportJob",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}/jobs/export/{job-id}",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetExportJobRequest"
+      },
+      "output" : {
+        "shape" : "GetExportJobResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Returns information about an export job."
+    },
+    "GetExportJobs" : {
+      "name" : "GetExportJobs",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}/jobs/export",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetExportJobsRequest"
+      },
+      "output" : {
+        "shape" : "GetExportJobsResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Returns information about your export jobs."
+    },
     "GetGcmChannel" : {
       "name" : "GetGcmChannel",
       "http" : {
@@ -1073,6 +1192,34 @@
         "shape" : "TooManyRequestsException"
       } ],
       "documentation" : "Returns information about a segment."
+    },
+    "GetSegmentExportJobs" : {
+      "name" : "GetSegmentExportJobs",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}/segments/{segment-id}/jobs/export",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetSegmentExportJobsRequest"
+      },
+      "output" : {
+        "shape" : "GetSegmentExportJobsResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Returns a list of export jobs for a specific segment."
     },
     "GetSegmentImportJobs" : {
       "name" : "GetSegmentImportJobs",
@@ -1715,7 +1862,7 @@
       "members" : {
         "ApplicationId" : {
           "shape" : "__string",
-          "documentation" : "Application id"
+          "documentation" : "The ID of the application to which the channel applies."
         },
         "CreationDate" : {
           "shape" : "__string",
@@ -1727,7 +1874,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a credential for authentication."
+          "documentation" : "Indicates whether the channel is configured with ADM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with ADM. Provide your credentials by setting the ClientId and ClientSecret attributes."
         },
         "Id" : {
           "shape" : "__string",
@@ -1885,11 +2032,11 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a credential for authentication."
+          "documentation" : "Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes."
         },
         "HasTokenKey" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a token key for authentication."
+          "documentation" : "Indicates whether the channel is configured with a key for APNs token authentication. Provide a token key by setting the TokenKey attribute."
         },
         "Id" : {
           "shape" : "__string",
@@ -1939,7 +2086,7 @@
         },
         "CollapseId" : {
           "shape" : "__string",
-          "documentation" : "Multiple notifications with the same collapse identifier are displayed to the user as a single notification. The value of this key must not exceed 64 bytes."
+          "documentation" : "An ID that, if assigned to multiple messages, causes APNs to coalesce the messages into a single push notification instead of delivering each message individually. The value must not exceed 64 bytes. Amazon Pinpoint uses this value to set the apns-collapse-id request header when it sends the message to APNs."
         },
         "Data" : {
           "shape" : "MapOf__string",
@@ -1955,7 +2102,7 @@
         },
         "Priority" : {
           "shape" : "__string",
-          "documentation" : "Is this a transaction priority message or lower priority."
+          "documentation" : "The message priority. Amazon Pinpoint uses this value to set the apns-priority request header when it sends the message to APNs. Accepts the following values:\n\n\"5\" - Low priority. Messages might be delayed, delivered in groups, and throttled.\n\n\"10\" - High priority. Messages are sent immediately. High priority messages must cause an alert, sound, or badge on the receiving device.\n\nThe default value is \"10\".\n\nThe equivalent values for FCM or GCM messages are \"normal\" and \"high\". Amazon Pinpoint accepts these values for APNs messages and converts them.\n\nFor more information about the apns-priority parameter, see Communicating with APNs in the APNs Local and Remote Notification Programming Guide."
         },
         "RawContent" : {
           "shape" : "__string",
@@ -1979,7 +2126,7 @@
         },
         "TimeToLive" : {
           "shape" : "__integer",
-          "documentation" : "This parameter specifies how long (in seconds) the message should be kept if APNS is unable to deliver the notification the first time. If the value is 0, APNS treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to APNS"
+          "documentation" : "The length of time (in seconds) that APNs stores and attempts to deliver the message. If the value is 0, APNs does not store the message or attempt to deliver it more than once. Amazon Pinpoint uses this value to set the apns-expiration request header when it sends the message to APNs."
         },
         "Title" : {
           "shape" : "__string",
@@ -2035,7 +2182,7 @@
       "members" : {
         "ApplicationId" : {
           "shape" : "__string",
-          "documentation" : "Application id"
+          "documentation" : "The ID of the application to which the channel applies."
         },
         "CreationDate" : {
           "shape" : "__string",
@@ -2051,11 +2198,11 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a credential for authentication."
+          "documentation" : "Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes."
         },
         "HasTokenKey" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a token key for authentication."
+          "documentation" : "Indicates whether the channel is configured with a key for APNs token authentication. Provide a token key by setting the TokenKey attribute."
         },
         "Id" : {
           "shape" : "__string",
@@ -2349,7 +2496,7 @@
         },
         "ChannelType" : {
           "shape" : "ChannelType",
-          "documentation" : "The channel type.\n\nValid values: GCM | APNS | SMS | EMAIL"
+          "documentation" : "The channel type.\n\nValid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU"
         },
         "Context" : {
           "shape" : "MapOf__string",
@@ -2390,6 +2537,10 @@
         "ApplicationId" : {
           "shape" : "__string",
           "documentation" : "The unique ID for the application."
+        },
+        "CampaignHook" : {
+          "shape" : "CampaignHook",
+          "documentation" : "Default campaign hook."
         },
         "LastModifiedDate" : {
           "shape" : "__string",
@@ -2495,7 +2646,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a credential for authentication."
+          "documentation" : "Indicates whether the channel is configured with Baidu Cloud Push credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with Baidu Cloud Push. Provide your credentials by setting the ApiKey and SecretKey attributes."
         },
         "Id" : {
           "shape" : "__string",
@@ -2604,6 +2755,23 @@
       },
       "documentation" : "The email message configuration."
     },
+    "CampaignHook" : {
+      "type" : "structure",
+      "members" : {
+        "LambdaFunctionName" : {
+          "shape" : "__string",
+          "documentation" : "Lambda function name or arn to be called for delivery"
+        },
+        "Mode" : {
+          "shape" : "Mode",
+          "documentation" : "What mode Lambda should be invoked in."
+        },
+        "WebUrl" : {
+          "shape" : "__string",
+          "documentation" : "Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request"
+        }
+      }
+    },
     "CampaignLimits" : {
       "type" : "structure",
       "members" : {
@@ -2613,11 +2781,11 @@
         },
         "MaximumDuration" : {
           "shape" : "__integer",
-          "documentation" : "The maximum duration of a campaign from the scheduled start. Must be a minimum of 60 seconds."
+          "documentation" : "The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60."
         },
         "MessagesPerSecond" : {
           "shape" : "__integer",
-          "documentation" : "The maximum number of messages per second that the campaign will send. This is a best effort maximum cap and can go as high as 20000 and as low as 50"
+          "documentation" : "The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000."
         },
         "Total" : {
           "shape" : "__integer",
@@ -2652,6 +2820,10 @@
         "HoldoutPercent" : {
           "shape" : "__integer",
           "documentation" : "The allocated percentage of end users who will not receive messages from this campaign."
+        },
+        "Hook" : {
+          "shape" : "CampaignHook",
+          "documentation" : "Campaign hook information."
         },
         "Id" : {
           "shape" : "__string",
@@ -2756,7 +2928,7 @@
     },
     "ChannelType" : {
       "type" : "string",
-      "enum" : [ "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU"]
+      "enum" : [ "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM" ]
     },
     "CreateAppRequest" : {
       "type" : "structure",
@@ -2812,6 +2984,31 @@
       },
       "required" : [ "CampaignResponse" ],
       "payload" : "CampaignResponse"
+    },
+    "CreateExportJobRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        },
+        "ExportJobRequest" : {
+          "shape" : "ExportJobRequest"
+        }
+      },
+      "required" : [ "ApplicationId", "ExportJobRequest" ],
+      "payload" : "ExportJobRequest"
+    },
+    "CreateExportJobResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ExportJobResponse" : {
+          "shape" : "ExportJobResponse"
+        }
+      },
+      "required" : [ "ExportJobResponse" ],
+      "payload" : "ExportJobResponse"
     },
     "CreateImportJobRequest" : {
       "type" : "structure",
@@ -3118,6 +3315,32 @@
       "required" : [ "ApplicationId" ],
       "documentation" : "DeleteEventStream Request"
     },
+    "DeleteEndpointRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        },
+        "EndpointId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "endpoint-id"
+        }
+      },
+      "required" : [ "ApplicationId", "EndpointId" ]
+    },
+    "DeleteEndpointResponse" : {
+      "type" : "structure",
+      "members" : {
+        "EndpointResponse" : {
+          "shape" : "EndpointResponse"
+        }
+      },
+      "required" : [ "EndpointResponse" ],
+      "payload" : "EndpointResponse"
+    },
     "DeleteEventStreamResponse" : {
       "type" : "structure",
       "members" : {
@@ -3331,11 +3554,11 @@
         },
         "Attributes" : {
           "shape" : "MapOfListOf__string",
-          "documentation" : "Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment."
+          "documentation" : "Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named \"interests\" might have the values [\"science\", \"politics\", \"travel\"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.\n\nThe following characters are not recommended in attribute names: # : ? \\ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values."
         },
         "ChannelType" : {
           "shape" : "ChannelType",
-          "documentation" : "The channel type.\n\nValid values: GCM | APNS | SMS | EMAIL"
+          "documentation" : "The channel type.\n\nValid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU"
         },
         "Demographic" : {
           "shape" : "EndpointDemographic",
@@ -3489,11 +3712,11 @@
         },
         "Attributes" : {
           "shape" : "MapOfListOf__string",
-          "documentation" : "Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment."
+          "documentation" : "Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named \"interests\" might have the values [\"science\", \"politics\", \"travel\"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.\n\nThe following characters are not recommended in attribute names: # : ? \\ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values."
         },
         "ChannelType" : {
           "shape" : "ChannelType",
-          "documentation" : "The channel type.\n\nValid values: GCM | APNS | SMS | EMAIL"
+          "documentation" : "The channel type.\n\nValid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU"
         },
         "Demographic" : {
           "shape" : "EndpointDemographic",
@@ -3543,11 +3766,11 @@
         },
         "Attributes" : {
           "shape" : "MapOfListOf__string",
-          "documentation" : "Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment."
+          "documentation" : "Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named \"interests\" might have the values [\"science\", \"politics\", \"travel\"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.\n\nThe following characters are not recommended in attribute names: # : ? \\ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values."
         },
         "ChannelType" : {
           "shape" : "ChannelType",
-          "documentation" : "The channel type.\n\nValid values: GCM | APNS | SMS | EMAIL"
+          "documentation" : "The channel type.\n\nValid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU"
         },
         "CohortId" : {
           "shape" : "__string",
@@ -3627,7 +3850,7 @@
       "members" : {
         "UserAttributes" : {
           "shape" : "MapOfListOf__string",
-          "documentation" : "Custom attributes specific to the user."
+          "documentation" : "Custom attributes that describe an end user by associating a name with an array of values. For example, an attribute named \"interests\" might have the values [\"science\", \"politics\", \"travel\"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.\n\nThe following characters are not recommended in attribute names: # : ? \\ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values."
         },
         "UserId" : {
           "shape" : "__string",
@@ -3649,7 +3872,7 @@
         },
         "ExternalId" : {
           "shape" : "__string",
-          "documentation" : "The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream."
+          "documentation" : "DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint."
         },
         "LastModifiedDate" : {
           "shape" : "__string",
@@ -3665,6 +3888,111 @@
         }
       },
       "documentation" : "Model for an event publishing subscription export."
+    },
+    "ExportJobRequest" : {
+      "type" : "structure",
+      "members" : {
+        "RoleArn" : {
+          "shape" : "__string",
+          "documentation" : "The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to."
+        },
+        "S3UrlPrefix" : {
+          "shape" : "__string",
+          "documentation" : "A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.\nThe URL should follow this format: s3://bucket-name/folder-name/\n\nAmazon Pinpoint will export endpoints to this location."
+        },
+        "SegmentId" : {
+          "shape" : "__string",
+          "documentation" : "The ID of the segment to export endpoints from. If not present all endpoints will be exported."
+        }
+      }
+    },
+    "ExportJobResource" : {
+      "type" : "structure",
+      "members" : {
+        "RoleArn" : {
+          "shape" : "__string",
+          "documentation" : "The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to."
+        },
+        "S3UrlPrefix" : {
+          "shape" : "__string",
+          "documentation" : "A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.\nThe URL should follow this format: s3://bucket-name/folder-name/\n\nAmazon Pinpoint will export endpoints to this location."
+        },
+        "SegmentId" : {
+          "shape" : "__string",
+          "documentation" : "The ID of the segment to export endpoints from. If not present, all endpoints are exported."
+        }
+      }
+    },
+    "ExportJobResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "documentation" : "The unique ID of the application to which the job applies."
+        },
+        "CompletedPieces" : {
+          "shape" : "__integer",
+          "documentation" : "The number of pieces that have successfully completed as of the time of the request."
+        },
+        "CompletionDate" : {
+          "shape" : "__string",
+          "documentation" : "The date the job completed in ISO 8601 format."
+        },
+        "CreationDate" : {
+          "shape" : "__string",
+          "documentation" : "The date the job was created in ISO 8601 format."
+        },
+        "Definition" : {
+          "shape" : "ExportJobResource",
+          "documentation" : "The export job settings."
+        },
+        "FailedPieces" : {
+          "shape" : "__integer",
+          "documentation" : "The number of pieces that failed to be processed as of the time of the request."
+        },
+        "Failures" : {
+          "shape" : "ListOf__string",
+          "documentation" : "Provides up to 100 of the first failed entries for the job, if any exist."
+        },
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "The unique ID of the job."
+        },
+        "JobStatus" : {
+          "shape" : "JobStatus",
+          "documentation" : "The status of the job.\nValid values: CREATED, INITIALIZING, PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED\n\nThe job status is FAILED if one or more pieces failed."
+        },
+        "TotalFailures" : {
+          "shape" : "__integer",
+          "documentation" : "The number of endpoints that were not processed; for example, because of syntax errors."
+        },
+        "TotalPieces" : {
+          "shape" : "__integer",
+          "documentation" : "The total number of pieces that must be processed to finish the job. Each piece is an approximately equal portion of the endpoints."
+        },
+        "TotalProcessed" : {
+          "shape" : "__integer",
+          "documentation" : "The number of endpoints that were processed by the job."
+        },
+        "Type" : {
+          "shape" : "__string",
+          "documentation" : "The job type. Will be 'EXPORT'."
+        }
+      }
+    },
+    "ExportJobsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Item" : {
+          "shape" : "ListOfExportJobResponse",
+          "documentation" : "A list of export jobs for the application."
+        },
+        "NextToken" : {
+          "shape" : "__string",
+          "documentation" : "The string that you use in a subsequent request to get the next page of results in a paginated response."
+        }
+      },
+      "documentation" : "Export job list."
     },
     "ForbiddenException" : {
       "type" : "structure",
@@ -3727,7 +4055,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a credential for authentication."
+          "documentation" : "Indicates whether the channel is configured with FCM or GCM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with FCM or GCM. Provide your credentials by setting the ApiKey attribute."
         },
         "Id" : {
           "shape" : "__string",
@@ -3789,7 +4117,7 @@
         },
         "Priority" : {
           "shape" : "__string",
-          "documentation" : "Is this a transaction priority message or lower priority."
+          "documentation" : "The message priority. Amazon Pinpoint uses this value to set the FCM or GCM priority parameter when it sends the message. Accepts the following values:\n\n\"Normal\" - Messages might be delayed. Delivery is optimized for battery usage on the receiving device. Use normal priority unless immediate delivery is required.\n\n\"High\" - Messages are sent immediately and might wake a sleeping device.\n\nThe equivalent values for APNs messages are \"5\" and \"10\". Amazon Pinpoint accepts these values here and converts them.\n\nFor more information, see About FCM Messages in the Firebase documentation."
         },
         "RawContent" : {
           "shape" : "__string",
@@ -3817,7 +4145,7 @@
         },
         "TimeToLive" : {
           "shape" : "__integer",
-          "documentation" : "This parameter specifies how long (in seconds) the message should be kept in GCM storage if the device is offline. The maximum time to live supported is 4 weeks, and the default value is 4 weeks."
+          "documentation" : "The length of time (in seconds) that FCM or GCM stores and attempts to deliver the message. If unspecified, the value defaults to the maximum, which is 2,419,200 seconds (28 days). Amazon Pinpoint uses this value to set the FCM or GCM time_to_live parameter."
         },
         "Title" : {
           "shape" : "__string",
@@ -4259,6 +4587,65 @@
       "required" : [ "EventStream" ],
       "payload" : "EventStream"
     },
+    "GetExportJobRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        },
+        "JobId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "job-id"
+        }
+      },
+      "required" : [ "ApplicationId", "JobId" ]
+    },
+    "GetExportJobResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ExportJobResponse" : {
+          "shape" : "ExportJobResponse"
+        }
+      },
+      "required" : [ "ExportJobResponse" ],
+      "payload" : "ExportJobResponse"
+    },
+    "GetExportJobsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        },
+        "PageSize" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "page-size",
+          "documentation" : "The number of entries you want on each page in the response."
+        },
+        "Token" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "token",
+          "documentation" : "The NextToken string returned on a previous page that you use to get the next page of results in a paginated response."
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "GetExportJobsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ExportJobsResponse" : {
+          "shape" : "ExportJobsResponse"
+        }
+      },
+      "required" : [ "ExportJobsResponse" ],
+      "payload" : "ExportJobsResponse"
+    },
     "GetGcmChannelRequest" : {
       "type" : "structure",
       "members" : {
@@ -4338,6 +4725,44 @@
       },
       "required" : [ "ImportJobsResponse" ],
       "payload" : "ImportJobsResponse"
+    },
+    "GetSegmentExportJobsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        },
+        "PageSize" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "page-size",
+          "documentation" : "The number of entries you want on each page in the response."
+        },
+        "SegmentId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "segment-id"
+        },
+        "Token" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "token",
+          "documentation" : "The NextToken string returned on a previous page that you use to get the next page of results in a paginated response."
+        }
+      },
+      "required" : [ "SegmentId", "ApplicationId" ]
+    },
+    "GetSegmentExportJobsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ExportJobsResponse" : {
+          "shape" : "ExportJobsResponse"
+        }
+      },
+      "required" : [ "ExportJobsResponse" ],
+      "payload" : "ExportJobsResponse"
     },
     "GetSegmentImportJobsRequest" : {
       "type" : "structure",
@@ -4535,7 +4960,7 @@
         },
         "ExternalId" : {
           "shape" : "__string",
-          "documentation" : "A unique, custom ID assigned to the IAM role that restricts who can assume the role.\t"
+          "documentation" : "DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint."
         },
         "Format" : {
           "shape" : "Format",
@@ -4572,7 +4997,7 @@
         },
         "ExternalId" : {
           "shape" : "__string",
-          "documentation" : "A unique, custom ID assigned to the IAM role that restricts who can assume the role.\t"
+          "documentation" : "DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint."
         },
         "Format" : {
           "shape" : "Format",
@@ -4715,6 +5140,12 @@
       "type" : "list",
       "member" : {
         "shape" : "EndpointBatchItem"
+      }
+    },
+    "ListOfExportJobResponse" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ExportJobResponse"
       }
     },
     "ListOfImportJobResponse" : {
@@ -5022,6 +5453,10 @@
         "httpStatusCode" : 405
       }
     },
+    "Mode" : {
+      "type" : "string",
+      "enum" : [ "DELIVERY", "FILTER" ]
+    },
     "NotFoundException" : {
       "type" : "structure",
       "members" : {
@@ -5182,9 +5617,13 @@
           "shape" : "MessageType",
           "documentation" : "Is this a transaction priority message or lower priority."
         },
+        "OriginationNumber" : {
+          "shape" : "__string",
+          "documentation" : "The phone number that the SMS message originates from. Specify one of the dedicated long codes or short codes that you requested from AWS Support and that is assigned to your account. If this attribute is not specified, Amazon Pinpoint randomly assigns a long code."
+        },
         "SenderId" : {
           "shape" : "__string",
-          "documentation" : "Sender ID of sent message."
+          "documentation" : "The sender ID that is shown as the message sender on the recipient's device. Support for sender IDs varies by country or region."
         },
         "Substitutions" : {
           "shape" : "MapOfListOf__string",
@@ -5298,7 +5737,7 @@
         },
         "ExternalId" : {
           "shape" : "__string",
-          "documentation" : "A unique, custom ID assigned to the IAM role that restricts who can assume the role."
+          "documentation" : "DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint."
         },
         "Format" : {
           "shape" : "Format",
@@ -5909,6 +6348,10 @@
     "WriteApplicationSettingsRequest" : {
       "type" : "structure",
       "members" : {
+        "CampaignHook" : {
+          "shape" : "CampaignHook",
+          "documentation" : "Default campaign hook information."
+        },
         "Limits" : {
           "shape" : "CampaignLimits",
           "documentation" : "The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own."
@@ -5934,6 +6377,10 @@
         "HoldoutPercent" : {
           "shape" : "__integer",
           "documentation" : "The allocated percentage of end users who will not receive messages from this campaign."
+        },
+        "Hook" : {
+          "shape" : "CampaignHook",
+          "documentation" : "Campaign hook information."
         },
         "IsPaused" : {
           "shape" : "__boolean",

@@ -1306,6 +1306,9 @@ declare namespace Iot {
      * Whether the CA certificate configured for auto registration of device certificates. Valid values are "ENABLE" and "DISABLE"
      */
     autoRegistrationStatus?: AutoRegistrationStatus;
+    lastModifiedDate?: DateType;
+    customerVersion?: CustomerVersion;
+    generationId?: GenerationId;
   }
   export type CACertificateStatus = "ACTIVE"|"INACTIVE"|string;
   export type CACertificates = CACertificate[];
@@ -1397,10 +1400,12 @@ declare namespace Iot {
      * The date and time the certificate was last modified.
      */
     lastModifiedDate?: DateType;
+    customerVersion?: CustomerVersion;
     /**
      * The transfer data.
      */
     transferData?: TransferData;
+    generationId?: GenerationId;
   }
   export type CertificateId = string;
   export type CertificateName = string;
@@ -1916,6 +1921,7 @@ declare namespace Iot {
      */
     signatureAlgorithm?: SignatureAlgorithm;
   }
+  export type CustomerVersion = number;
   export type DateType = Date;
   export interface DeleteAuthorizerRequest {
     /**
@@ -2557,6 +2563,7 @@ declare namespace Iot {
   export type ForceDelete = boolean;
   export type FunctionArn = string;
   export type GEMaxResults = number;
+  export type GenerationId = string;
   export interface GetEffectivePoliciesRequest {
     /**
      * The principal.
@@ -2644,6 +2651,9 @@ declare namespace Iot {
      * The default policy version ID.
      */
     defaultVersionId?: PolicyVersionId;
+    creationDate?: DateType;
+    lastModifiedDate?: DateType;
+    generationId?: GenerationId;
   }
   export interface GetPolicyVersionRequest {
     /**
@@ -2676,6 +2686,9 @@ declare namespace Iot {
      * Specifies whether the policy version is the default.
      */
     isDefaultVersion?: IsDefaultVersion;
+    creationDate?: DateType;
+    lastModifiedDate?: DateType;
+    generationId?: GenerationId;
   }
   export interface GetRegistrationCodeRequest {
   }
@@ -4154,6 +4167,7 @@ declare namespace Iot {
      * The role alias.
      */
     roleAlias?: RoleAlias;
+    roleAliasArn?: RoleAliasArn;
     /**
      * The role ARN.
      */

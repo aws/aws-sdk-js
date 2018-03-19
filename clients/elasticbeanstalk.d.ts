@@ -128,6 +128,10 @@ declare class ElasticBeanstalk extends Service {
    */
   deletePlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DeletePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DeletePlatformVersionResult, AWSError>;
   /**
+   * 
+   */
+  describeAccountAttributes(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeAccountAttributesResult) => void): Request<ElasticBeanstalk.Types.DescribeAccountAttributesResult, AWSError>;
+  /**
    * Retrieve a list of application versions.
    */
   describeApplicationVersions(params: ElasticBeanstalk.Types.DescribeApplicationVersionsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage, AWSError>;
@@ -1059,6 +1063,9 @@ declare namespace ElasticBeanstalk {
     DeploymentTime?: DeploymentTimestamp;
   }
   export type DeploymentTimestamp = Date;
+  export interface DescribeAccountAttributesResult {
+    ResourceQuotas?: ResourceQuotas;
+  }
   export interface DescribeApplicationVersionsMessage {
     /**
      * Specify an application name to show only application versions for that application.
@@ -2097,6 +2104,16 @@ declare namespace ElasticBeanstalk {
   export type ResourceArn = string;
   export type ResourceId = string;
   export type ResourceName = string;
+  export interface ResourceQuota {
+    Maximum?: BoxedInt;
+  }
+  export interface ResourceQuotas {
+    ApplicationQuota?: ResourceQuota;
+    ApplicationVersionQuota?: ResourceQuota;
+    EnvironmentQuota?: ResourceQuota;
+    ConfigurationTemplateQuota?: ResourceQuota;
+    CustomPlatformQuota?: ResourceQuota;
+  }
   export interface ResourceTagsDescriptionMessage {
     /**
      * The Amazon Resource Name (ARN) of the resouce for which a tag list was requested.

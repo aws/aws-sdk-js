@@ -73,7 +73,20 @@
       "errors":[
         {"shape":"ResourceLimitExceeded"}
       ],
-      "documentation":"<p>Creates an Amazon SageMaker notebook instance. A notebook instance is an ML compute instance running on a Jupyter notebook. </p> <p>In a <code>CreateNotebookInstance</code> request, you specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance. </p> <p>Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific an algorithm or with a machine learning framework. </p> <p>After receiving the request, Amazon SageMaker does the following:</p> <ol> <li> <p>Creates a network interface in the Amazon SageMaker VPC.</p> </li> <li> <p>(Option) If you specified <code>SubnetId</code>, creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.</p> </li> <li> <p>Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified <code>SubnetId</code> of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.</p> </li> </ol> <p>After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN).</p> <p>After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
+      "documentation":"<p>Creates an Amazon SageMaker notebook instance. A notebook instance is a machine learning (ML) compute instance running on a Jupyter notebook. </p> <p>In a <code>CreateNotebookInstance</code> request, specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance. </p> <p>Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific algorithm or with a machine learning framework. </p> <p>After receiving the request, Amazon SageMaker does the following:</p> <ol> <li> <p>Creates a network interface in the Amazon SageMaker VPC.</p> </li> <li> <p>(Option) If you specified <code>SubnetId</code>, Amazon SageMaker creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.</p> </li> <li> <p>Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified <code>SubnetId</code> of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.</p> </li> </ol> <p>After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN).</p> <p>After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
+    },
+    "CreateNotebookInstanceLifecycleConfig":{
+      "name":"CreateNotebookInstanceLifecycleConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateNotebookInstanceLifecycleConfigInput"},
+      "output":{"shape":"CreateNotebookInstanceLifecycleConfigOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p>Creates a lifecycle configuration that you can associate with a notebook instance. A <i>lifecycle configuration</i> is a collection of shell scripts that run when you create or start a notebook instance.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>"
     },
     "CreatePresignedNotebookInstanceUrl":{
       "name":"CreatePresignedNotebookInstanceUrl",
@@ -135,6 +148,15 @@
       "input":{"shape":"DeleteNotebookInstanceInput"},
       "documentation":"<p> Deletes an Amazon SageMaker notebook instance. Before you can delete a notebook instance, you must call the <code>StopNotebookInstance</code> API. </p> <important> <p>When you delete a notebook instance, you lose all of your data. Amazon SageMaker removes the ML compute instance, and deletes the ML storage volume and the network interface associated with the notebook instance. </p> </important>"
     },
+    "DeleteNotebookInstanceLifecycleConfig":{
+      "name":"DeleteNotebookInstanceLifecycleConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteNotebookInstanceLifecycleConfigInput"},
+      "documentation":"<p>Deletes a notebook instance lifecycle configuration.</p>"
+    },
     "DeleteTags":{
       "name":"DeleteTags",
       "http":{
@@ -185,6 +207,16 @@
       "output":{"shape":"DescribeNotebookInstanceOutput"},
       "documentation":"<p>Returns information about a notebook instance.</p>"
     },
+    "DescribeNotebookInstanceLifecycleConfig":{
+      "name":"DescribeNotebookInstanceLifecycleConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeNotebookInstanceLifecycleConfigInput"},
+      "output":{"shape":"DescribeNotebookInstanceLifecycleConfigOutput"},
+      "documentation":"<p>Returns a description of a notebook instance lifecycle configuration.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>"
+    },
     "DescribeTrainingJob":{
       "name":"DescribeTrainingJob",
       "http":{
@@ -227,6 +259,16 @@
       "input":{"shape":"ListModelsInput"},
       "output":{"shape":"ListModelsOutput"},
       "documentation":"<p>Lists models created with the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html\">CreateModel</a> API.</p>"
+    },
+    "ListNotebookInstanceLifecycleConfigs":{
+      "name":"ListNotebookInstanceLifecycleConfigs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListNotebookInstanceLifecycleConfigsInput"},
+      "output":{"shape":"ListNotebookInstanceLifecycleConfigsOutput"},
+      "documentation":"<p>Lists notebook instance lifestyle configurations created with the API.</p>"
     },
     "ListNotebookInstances":{
       "name":"ListNotebookInstances",
@@ -329,6 +371,19 @@
         {"shape":"ResourceLimitExceeded"}
       ],
       "documentation":"<p>Updates a notebook instance. NotebookInstance updates include upgrading or downgrading the ML compute instance used for your notebook instance to accommodate changes in your workload requirements. You can also update the VPC security groups.</p>"
+    },
+    "UpdateNotebookInstanceLifecycleConfig":{
+      "name":"UpdateNotebookInstanceLifecycleConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateNotebookInstanceLifecycleConfigInput"},
+      "output":{"shape":"UpdateNotebookInstanceLifecycleConfigOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p>Updates a notebook instance lifecycle configuration created with the API.</p>"
     }
   },
   "shapes":{
@@ -341,7 +396,7 @@
       "members":{
         "ResourceArn":{
           "shape":"ResourceArn",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the resource that you want to tag. </p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource that you want to tag.</p>"
         },
         "Tags":{
           "shape":"TagList",
@@ -375,7 +430,7 @@
         },
         "TrainingInputMode":{
           "shape":"TrainingInputMode",
-          "documentation":"<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accomodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won't be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>"
+          "documentation":"<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accommodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won't be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>"
         }
       },
       "documentation":"<p>Specifies the training algorithm to use in a <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html\">CreateTrainingJob</a> request. </p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about using your own algorithms, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html\">Bring Your Own Algorithms </a>. </p>"
@@ -592,6 +647,41 @@
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>A list of tags to associate with the notebook instance. You can add tags later by using the <code>CreateTags</code> API.</p>"
+        },
+        "LifecycleConfigName":{
+          "shape":"NotebookInstanceLifecycleConfigName",
+          "documentation":"<p>The name of a lifecycle configuration to associate with the notebook instance. For information about lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>"
+        },
+        "DirectInternetAccess":{
+          "shape":"DirectInternetAccess",
+          "documentation":"<p>Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to <code>Disabled</code> this notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.</p> <p>For more information, see <a>appendix-notebook-and-internet-access</a>. You can set the value of this parameter to <code>Disabled</code> only if you set a value for the <code>SubnetId</code> parameter.</p>"
+        }
+      }
+    },
+    "CreateNotebookInstanceLifecycleConfigInput":{
+      "type":"structure",
+      "required":["NotebookInstanceLifecycleConfigName"],
+      "members":{
+        "NotebookInstanceLifecycleConfigName":{
+          "shape":"NotebookInstanceLifecycleConfigName",
+          "documentation":"<p>The name of the lifecycle configuration.</p>"
+        },
+        "OnCreate":{
+          "shape":"NotebookInstanceLifecycleConfigList",
+          "documentation":"<p>A shell script that runs only once, when you create a notebook instance.</p>"
+        },
+        "OnStart":{
+          "shape":"NotebookInstanceLifecycleConfigList",
+          "documentation":"<p>A shell script that runs every time you start a notebook instance, including when you create the notebook instance.</p>"
+        }
+      }
+    },
+    "CreateNotebookInstanceLifecycleConfigOutput":{
+      "type":"structure",
+      "members":{
+        "NotebookInstanceLifecycleConfigArn":{
+          "shape":"NotebookInstanceLifecycleConfigArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the lifecycle configuration.</p>"
         }
       }
     },
@@ -736,6 +826,16 @@
         "NotebookInstanceName":{
           "shape":"NotebookInstanceName",
           "documentation":"<p>The name of the Amazon SageMaker notebook instance to delete.</p>"
+        }
+      }
+    },
+    "DeleteNotebookInstanceLifecycleConfigInput":{
+      "type":"structure",
+      "required":["NotebookInstanceLifecycleConfigName"],
+      "members":{
+        "NotebookInstanceLifecycleConfigName":{
+          "shape":"NotebookInstanceLifecycleConfigName",
+          "documentation":"<p>The name of the lifecycle configuration to delete.</p>"
         }
       }
     },
@@ -909,6 +1009,45 @@
         }
       }
     },
+    "DescribeNotebookInstanceLifecycleConfigInput":{
+      "type":"structure",
+      "required":["NotebookInstanceLifecycleConfigName"],
+      "members":{
+        "NotebookInstanceLifecycleConfigName":{
+          "shape":"NotebookInstanceLifecycleConfigName",
+          "documentation":"<p>The name of the lifecycle configuration to describe.</p>"
+        }
+      }
+    },
+    "DescribeNotebookInstanceLifecycleConfigOutput":{
+      "type":"structure",
+      "members":{
+        "NotebookInstanceLifecycleConfigArn":{
+          "shape":"NotebookInstanceLifecycleConfigArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the lifecycle configuration.</p>"
+        },
+        "NotebookInstanceLifecycleConfigName":{
+          "shape":"NotebookInstanceLifecycleConfigName",
+          "documentation":"<p>The name of the lifecycle configuration.</p>"
+        },
+        "OnCreate":{
+          "shape":"NotebookInstanceLifecycleConfigList",
+          "documentation":"<p>The shell script that runs only once, when you create a notebook instance.</p>"
+        },
+        "OnStart":{
+          "shape":"NotebookInstanceLifecycleConfigList",
+          "documentation":"<p>The shell script that runs every time you start a notebook instance, including when you create the notebook instance.</p>"
+        },
+        "LastModifiedTime":{
+          "shape":"LastModifiedTime",
+          "documentation":"<p>A timestamp that tells when the lifecycle configuration was last modified.</p>"
+        },
+        "CreationTime":{
+          "shape":"CreationTime",
+          "documentation":"<p>A timestamp that tells when the lifecycle configuration was created.</p>"
+        }
+      }
+    },
     "DescribeNotebookInstanceOutput":{
       "type":"structure",
       "members":{
@@ -926,7 +1065,7 @@
         },
         "FailureReason":{
           "shape":"FailureReason",
-          "documentation":"<p>If staus is failed, the reason it failed.</p>"
+          "documentation":"<p>If status is failed, the reason it failed.</p>"
         },
         "Url":{
           "shape":"NotebookInstanceUrl",
@@ -963,6 +1102,14 @@
         "CreationTime":{
           "shape":"CreationTime",
           "documentation":"<p>A timestamp. Use this parameter to return the time when the notebook instance was created</p>"
+        },
+        "NotebookInstanceLifecycleConfigName":{
+          "shape":"NotebookInstanceLifecycleConfigName",
+          "documentation":"<p>Returns the name of a notebook instance lifecycle configuration.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>"
+        },
+        "DirectInternetAccess":{
+          "shape":"DirectInternetAccess",
+          "documentation":"<p>Describes whether the notebook instance has internet access.</p> <p>For more information, see <a>appendix-notebook-and-internet-access</a>.</p>"
         }
       }
     },
@@ -1084,6 +1231,13 @@
       "type":"list",
       "member":{"shape":"DesiredWeightAndCapacity"},
       "min":1
+    },
+    "DirectInternetAccess":{
+      "type":"string",
+      "enum":[
+        "Enabled",
+        "Disabled"
+      ]
     },
     "EndpointArn":{
       "type":"string",
@@ -1246,7 +1400,8 @@
       "enum":[
         "ml.t2.medium",
         "ml.m4.xlarge",
-        "ml.p2.xlarge"
+        "ml.p2.xlarge",
+        "ml.p3.2xlarge"
       ]
     },
     "KmsKeyId":{
@@ -1407,6 +1562,60 @@
         }
       }
     },
+    "ListNotebookInstanceLifecycleConfigsInput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If the result of a <code>ListNotebookInstanceLifecycleConfigs</code> request was truncated, the response includes a <code>NextToken</code>. To get the next set of lifecycle configurations, use the token in the next request.</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of lifecycle configurations to return in the response.</p>"
+        },
+        "SortBy":{
+          "shape":"NotebookInstanceLifecycleConfigSortKey",
+          "documentation":"<p>Sorts the list of results. The default is <code>CreationTime</code>.</p>"
+        },
+        "SortOrder":{
+          "shape":"NotebookInstanceLifecycleConfigSortOrder",
+          "documentation":"<p>The sort order for results.</p>"
+        },
+        "NameContains":{
+          "shape":"NotebookInstanceLifecycleConfigNameContains",
+          "documentation":"<p>A string in the lifecycle configuration name. This filter returns only lifecycle configurations whose name contains the specified string.</p>"
+        },
+        "CreationTimeBefore":{
+          "shape":"CreationTime",
+          "documentation":"<p>A filter that returns only lifecycle configurations that were created before the specified time (timestamp).</p>"
+        },
+        "CreationTimeAfter":{
+          "shape":"CreationTime",
+          "documentation":"<p>A filter that returns only lifecycle configurations that were created after the specified time (timestamp).</p>"
+        },
+        "LastModifiedTimeBefore":{
+          "shape":"LastModifiedTime",
+          "documentation":"<p>A filter that returns only lifecycle configurations that were modified before the specified time (timestamp).</p>"
+        },
+        "LastModifiedTimeAfter":{
+          "shape":"LastModifiedTime",
+          "documentation":"<p>A filter that returns only lifecycle configurations that were modified after the specified time (timestamp).</p>"
+        }
+      }
+    },
+    "ListNotebookInstanceLifecycleConfigsOutput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If the response is truncated, Amazon SageMaker returns this token. To get the next set of lifecycle configurations, use it in the next request. </p>"
+        },
+        "NotebookInstanceLifecycleConfigs":{
+          "shape":"NotebookInstanceLifecycleConfigSummaryList",
+          "documentation":"<p>An array of <code>NotebookInstanceLifecycleConfiguration</code> objects, each listing a lifecycle configuration.</p>"
+        }
+      }
+    },
     "ListNotebookInstancesInput":{
       "type":"structure",
       "members":{
@@ -1428,7 +1637,7 @@
         },
         "NameContains":{
           "shape":"NotebookInstanceNameContains",
-          "documentation":"<p>A string in the notebook instances' name. This filter returns only notebook instances whose name contains the specified string. </p>"
+          "documentation":"<p>A string in the notebook instances' name. This filter returns only notebook instances whose name contains the specified string.</p>"
         },
         "CreationTimeBefore":{
           "shape":"CreationTime",
@@ -1449,6 +1658,10 @@
         "StatusEquals":{
           "shape":"NotebookInstanceStatus",
           "documentation":"<p>A filter that returns only notebook instances with the specified status.</p>"
+        },
+        "NotebookInstanceLifecycleConfigNameContains":{
+          "shape":"NotebookInstanceLifecycleConfigName",
+          "documentation":"<p>A string in the name of a notebook instances lifecycle configuration associated with this notebook instance. This filter returns only notebook instances associated with a lifecycle configuration with a name that contains the specified string.</p>"
         }
       }
     },
@@ -1642,6 +1855,84 @@
       "type":"string",
       "max":256
     },
+    "NotebookInstanceLifecycleConfigArn":{
+      "type":"string",
+      "max":256
+    },
+    "NotebookInstanceLifecycleConfigContent":{
+      "type":"string",
+      "max":16384,
+      "min":1
+    },
+    "NotebookInstanceLifecycleConfigList":{
+      "type":"list",
+      "member":{"shape":"NotebookInstanceLifecycleHook"},
+      "max":1
+    },
+    "NotebookInstanceLifecycleConfigName":{
+      "type":"string",
+      "max":63,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "NotebookInstanceLifecycleConfigNameContains":{
+      "type":"string",
+      "pattern":"[a-zA-Z0-9-]+"
+    },
+    "NotebookInstanceLifecycleConfigSortKey":{
+      "type":"string",
+      "enum":[
+        "Name",
+        "CreationTime",
+        "LastModifiedTime"
+      ]
+    },
+    "NotebookInstanceLifecycleConfigSortOrder":{
+      "type":"string",
+      "enum":[
+        "Ascending",
+        "Descending"
+      ]
+    },
+    "NotebookInstanceLifecycleConfigSummary":{
+      "type":"structure",
+      "required":[
+        "NotebookInstanceLifecycleConfigName",
+        "NotebookInstanceLifecycleConfigArn"
+      ],
+      "members":{
+        "NotebookInstanceLifecycleConfigName":{
+          "shape":"NotebookInstanceLifecycleConfigName",
+          "documentation":"<p>The name of the lifecycle configuration.</p>"
+        },
+        "NotebookInstanceLifecycleConfigArn":{
+          "shape":"NotebookInstanceLifecycleConfigArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the lifecycle configuration.</p>"
+        },
+        "CreationTime":{
+          "shape":"CreationTime",
+          "documentation":"<p>A timestamp that tells when the lifecycle configuration was created.</p>"
+        },
+        "LastModifiedTime":{
+          "shape":"LastModifiedTime",
+          "documentation":"<p>A timestamp that tells when the lifecycle configuration was last modified.</p>"
+        }
+      },
+      "documentation":"<p>Provides a summary of a notebook instance lifecycle configuration.</p>"
+    },
+    "NotebookInstanceLifecycleConfigSummaryList":{
+      "type":"list",
+      "member":{"shape":"NotebookInstanceLifecycleConfigSummary"}
+    },
+    "NotebookInstanceLifecycleHook":{
+      "type":"structure",
+      "members":{
+        "Content":{
+          "shape":"NotebookInstanceLifecycleConfigContent",
+          "documentation":"<p>A base64-encoded string that contains a shell script for a notebook instance lifecycle configuration.</p>"
+        }
+      },
+      "documentation":"<p>Contains the notebook instance lifecycle configuration script.</p> <p>This script runs in the path <code>/sbin:bin:/usr/sbin:/usr/bin</code>.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>"
+    },
     "NotebookInstanceName":{
       "type":"string",
       "max":63,
@@ -1711,6 +2002,10 @@
         "LastModifiedTime":{
           "shape":"LastModifiedTime",
           "documentation":"<p>A timestamp that shows when the notebook instance was last modified.</p>"
+        },
+        "NotebookInstanceLifecycleConfigName":{
+          "shape":"NotebookInstanceLifecycleConfigName",
+          "documentation":"<p>The name of a notebook instance lifecycle configuration associated with this notebook instance.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>"
         }
       },
       "documentation":"<p>Provides summary information for an Amazon SageMaker notebook instance.</p>"
@@ -1820,7 +2115,7 @@
         },
         "DesiredWeight":{
           "shape":"VariantWeight",
-          "documentation":"<p>The requested weight, as specified in the <code>UpdateWeightAndCapacities</code> request. </p>"
+          "documentation":"<p>The requested weight, as specified in the <code>UpdateEndpointWeightsAndCapacities</code> request. </p>"
         },
         "CurrentInstanceCount":{
           "shape":"TaskCount",
@@ -1828,10 +2123,10 @@
         },
         "DesiredInstanceCount":{
           "shape":"TaskCount",
-          "documentation":"<p>The number of instances requested in the <code>UpdateWeightAndCapacities</code> request. </p>"
+          "documentation":"<p>The number of instances requested in the <code>UpdateEndpointWeightsAndCapacities</code> request. </p>"
         }
       },
-      "documentation":"<p>Describes weight and capacities for a production variant associated with an endpoint. If you sent a request to the <code>UpdateWeightAndCapacities</code> API and the endpoint status is <code>Updating</code>, you get different desired and current values. </p>"
+      "documentation":"<p>Describes weight and capacities for a production variant associated with an endpoint. If you sent a request to the <code>UpdateEndpointWeightsAndCapacities</code> API and the endpoint status is <code>Updating</code>, you get different desired and current values. </p>"
     },
     "ProductionVariantSummaryList":{
       "type":"list",
@@ -2245,6 +2540,29 @@
           "shape":"RoleArn",
           "documentation":"<p>Amazon Resource Name (ARN) of the IAM role to associate with the instance.</p>"
         }
+      }
+    },
+    "UpdateNotebookInstanceLifecycleConfigInput":{
+      "type":"structure",
+      "required":["NotebookInstanceLifecycleConfigName"],
+      "members":{
+        "NotebookInstanceLifecycleConfigName":{
+          "shape":"NotebookInstanceLifecycleConfigName",
+          "documentation":"<p>The name of the lifecycle configuration.</p>"
+        },
+        "OnCreate":{
+          "shape":"NotebookInstanceLifecycleConfigList",
+          "documentation":"<p>The shell script that runs only once, when you create a notebook instance</p>"
+        },
+        "OnStart":{
+          "shape":"NotebookInstanceLifecycleConfigList",
+          "documentation":"<p>The shell script that runs every time you start a notebook instance, including when you create the notebook instance.</p>"
+        }
+      }
+    },
+    "UpdateNotebookInstanceLifecycleConfigOutput":{
+      "type":"structure",
+      "members":{
       }
     },
     "UpdateNotebookInstanceOutput":{

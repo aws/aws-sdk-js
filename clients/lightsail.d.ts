@@ -28,19 +28,19 @@ declare class Lightsail extends Service {
    */
   attachDisk(callback?: (err: AWSError, data: Lightsail.Types.AttachDiskResult) => void): Request<Lightsail.Types.AttachDiskResult, AWSError>;
   /**
-   * Attaches one or more Lightsail instances to a load balancer.
+   * Attaches one or more Lightsail instances to a load balancer. After some time, the instances are attached to the load balancer and the health check status is available.
    */
   attachInstancesToLoadBalancer(params: Lightsail.Types.AttachInstancesToLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachInstancesToLoadBalancerResult) => void): Request<Lightsail.Types.AttachInstancesToLoadBalancerResult, AWSError>;
   /**
-   * Attaches one or more Lightsail instances to a load balancer.
+   * Attaches one or more Lightsail instances to a load balancer. After some time, the instances are attached to the load balancer and the health check status is available.
    */
   attachInstancesToLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.AttachInstancesToLoadBalancerResult) => void): Request<Lightsail.Types.AttachInstancesToLoadBalancerResult, AWSError>;
   /**
-   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).
+   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the AttachLoadBalancerTlsCertificate operation with the non-attached certificate, and it will replace the existing one and become the attached certificate.
    */
   attachLoadBalancerTlsCertificate(params: Lightsail.Types.AttachLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.AttachLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).
+   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the AttachLoadBalancerTlsCertificate operation with the non-attached certificate, and it will replace the existing one and become the attached certificate.
    */
   attachLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.AttachLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.AttachLoadBalancerTlsCertificateResult, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class Lightsail extends Service {
    */
   createKeyPair(callback?: (err: AWSError, data: Lightsail.Types.CreateKeyPairResult) => void): Request<Lightsail.Types.CreateKeyPairResult, AWSError>;
   /**
-   * Creates a Lightsail load balancer. When you create a load balancer, you can specify certificates and port settings. You can create up to 5 load balancers per AWS Region in your account.
+   * Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see Configure your Lightsail instances for load balancing. You can create up to 5 load balancers per AWS Region in your account. When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the UpdateLoadBalancerAttribute operation.
    */
   createLoadBalancer(params: Lightsail.Types.CreateLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerResult) => void): Request<Lightsail.Types.CreateLoadBalancerResult, AWSError>;
   /**
-   * Creates a Lightsail load balancer. When you create a load balancer, you can specify certificates and port settings. You can create up to 5 load balancers per AWS Region in your account.
+   * Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see Configure your Lightsail instances for load balancing. You can create up to 5 load balancers per AWS Region in your account. When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the UpdateLoadBalancerAttribute operation.
    */
   createLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerResult) => void): Request<Lightsail.Types.CreateLoadBalancerResult, AWSError>;
   /**
@@ -204,19 +204,19 @@ declare class Lightsail extends Service {
    */
   deleteKeyPair(callback?: (err: AWSError, data: Lightsail.Types.DeleteKeyPairResult) => void): Request<Lightsail.Types.DeleteKeyPairResult, AWSError>;
   /**
-   * Deletes a Lightsail load balancer.
+   * Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again.
    */
   deleteLoadBalancer(params: Lightsail.Types.DeleteLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerResult) => void): Request<Lightsail.Types.DeleteLoadBalancerResult, AWSError>;
   /**
-   * Deletes a Lightsail load balancer.
+   * Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again.
    */
   deleteLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerResult) => void): Request<Lightsail.Types.DeleteLoadBalancerResult, AWSError>;
   /**
-   * Deletes a TLS/SSL certificate associated with a Lightsail load balancer.
+   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer.
    */
   deleteLoadBalancerTlsCertificate(params: Lightsail.Types.DeleteLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.DeleteLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Deletes a TLS/SSL certificate associated with a Lightsail load balancer.
+   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer.
    */
   deleteLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.DeleteLoadBalancerTlsCertificateResult, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class Lightsail extends Service {
    */
   detachDisk(callback?: (err: AWSError, data: Lightsail.Types.DetachDiskResult) => void): Request<Lightsail.Types.DetachDiskResult, AWSError>;
   /**
-   * Detaches the specified instances from a Lightsail load balancer.
+   * Detaches the specified instances from a Lightsail load balancer. This operation waits until the instances are no longer needed before they are detached from the load balancer.
    */
   detachInstancesFromLoadBalancer(params: Lightsail.Types.DetachInstancesFromLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.DetachInstancesFromLoadBalancerResult) => void): Request<Lightsail.Types.DetachInstancesFromLoadBalancerResult, AWSError>;
   /**
-   * Detaches the specified instances from a Lightsail load balancer.
+   * Detaches the specified instances from a Lightsail load balancer. This operation waits until the instances are no longer needed before they are detached from the load balancer.
    */
   detachInstancesFromLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.DetachInstancesFromLoadBalancerResult) => void): Request<Lightsail.Types.DetachInstancesFromLoadBalancerResult, AWSError>;
   /**
@@ -420,11 +420,11 @@ declare class Lightsail extends Service {
    */
   getLoadBalancerMetricData(callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerMetricDataResult) => void): Request<Lightsail.Types.GetLoadBalancerMetricDataResult, AWSError>;
   /**
-   * Returns information about the TLS certificates that are associated with the specified Lightsail load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).
+   * Returns information about the TLS certificates that are associated with the specified Lightsail load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). You can have a maximum of 2 certificates associated with a Lightsail load balancer. One is active and the other is inactive.
    */
   getLoadBalancerTlsCertificates(params: Lightsail.Types.GetLoadBalancerTlsCertificatesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsCertificatesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsCertificatesResult, AWSError>;
   /**
-   * Returns information about the TLS certificates that are associated with the specified Lightsail load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).
+   * Returns information about the TLS certificates that are associated with the specified Lightsail load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). You can have a maximum of 2 certificates associated with a Lightsail load balancer. One is active and the other is inactive.
    */
   getLoadBalancerTlsCertificates(callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsCertificatesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsCertificatesResult, AWSError>;
   /**
@@ -572,11 +572,11 @@ declare class Lightsail extends Service {
    */
   updateDomainEntry(callback?: (err: AWSError, data: Lightsail.Types.UpdateDomainEntryResult) => void): Request<Lightsail.Types.UpdateDomainEntryResult, AWSError>;
   /**
-   * Updates the specified attribute for a load balancer.
+   * Updates the specified attribute for a load balancer. You can only update one attribute at a time.
    */
   updateLoadBalancerAttribute(params: Lightsail.Types.UpdateLoadBalancerAttributeRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateLoadBalancerAttributeResult) => void): Request<Lightsail.Types.UpdateLoadBalancerAttributeResult, AWSError>;
   /**
-   * Updates the specified attribute for a load balancer.
+   * Updates the specified attribute for a load balancer. You can only update one attribute at a time.
    */
   updateLoadBalancerAttribute(callback?: (err: AWSError, data: Lightsail.Types.UpdateLoadBalancerAttributeResult) => void): Request<Lightsail.Types.UpdateLoadBalancerAttributeResult, AWSError>;
 }
@@ -620,7 +620,7 @@ declare namespace Lightsail {
      */
     loadBalancerName: ResourceName;
     /**
-     * An array of strings representing the instance name(s) you want to attach to your load balancer.
+     * An array of strings representing the instance name(s) you want to attach to your load balancer. An instance must be running before you can attach it to your load balancer. There are no additional limits on the number of instances you can attach to your load balancer, aside from the limit of Lightsail instances you can create in your account (20).
      */
     instanceNames: ResourceNameList;
   }
@@ -632,17 +632,17 @@ declare namespace Lightsail {
   }
   export interface AttachLoadBalancerTlsCertificateRequest {
     /**
-     * The name of the load balancer to which you want to associate the TLS/SSL certificate.
+     * The name of the load balancer to which you want to associate the SSL/TLS certificate.
      */
     loadBalancerName: ResourceName;
     /**
-     * The name of your TLS/SSL certificate.
+     * The name of your SSL/TLS certificate.
      */
     certificateName: ResourceName;
   }
   export interface AttachLoadBalancerTlsCertificateResult {
     /**
-     * An object representing the API operations.
+     * An object representing the API operations. These SSL/TLS certificates are only usable by Lightsail load balancers. You can't get the certificate and use it for another purpose.
      */
     operations?: OperationList;
   }
@@ -1000,11 +1000,11 @@ declare namespace Lightsail {
      */
     instancePort: Port;
     /**
-     * The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., "/").
+     * The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., "/"). You may want to specify a custom health check path other than the root of your application if your home page loads slowly or has a lot of media or scripting on it.
      */
     healthCheckPath?: string;
     /**
-     * The name of the TLS/SSL certificate. If you specify certificateName, then certificateDomainName is required (and vice-versa).
+     * The name of the SSL/TLS certificate. If you specify certificateName, then certificateDomainName is required (and vice-versa).
      */
     certificateName?: ResourceName;
     /**
@@ -1012,7 +1012,7 @@ declare namespace Lightsail {
      */
     certificateDomainName?: DomainName;
     /**
-     * The alternative domain names to use with your TLS/SSL certificate (e.g., www.example.com, www.ejemplo.com, ejemplo.com).
+     * The optional alternative domains and subdomains to use with your SSL/TLS certificate (e.g., www.example.com, example.com, m.example.com, blog.example.com).
      */
     certificateAlternativeNames?: DomainNameList;
   }
@@ -1024,19 +1024,19 @@ declare namespace Lightsail {
   }
   export interface CreateLoadBalancerTlsCertificateRequest {
     /**
-     * The load balancer name where you want to create the TLS/SSL certificate.
+     * The load balancer name where you want to create the SSL/TLS certificate.
      */
     loadBalancerName: ResourceName;
     /**
-     * The TLS/SSL certificate name.
+     * The SSL/TLS certificate name. You can have up to 10 certificates in your account at one time. Each Lightsail load balancer can have up to 2 certificates associated with it at one time. There is also an overall limit to the number of certificates that can be issue in a 365-day period. For more information, see Limits.
      */
     certificateName: ResourceName;
     /**
-     * The domain name (e.g., example.com) for your TLS/SSL certificate.
+     * The domain name (e.g., example.com) for your SSL/TLS certificate.
      */
     certificateDomainName: DomainName;
     /**
-     * An array of strings listing alternative domain names for your TLS/SSL certificate.
+     * An array of strings listing alternative domains and subdomains for your SSL/TLS certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9 alternative names (in addition to the 1 primary domain). We do not support wildcards (e.g., *.example.com).
      */
     certificateAlternativeNames?: DomainNameList;
   }
@@ -1152,11 +1152,11 @@ declare namespace Lightsail {
      */
     loadBalancerName: ResourceName;
     /**
-     * The TLS/SSL certificate name.
+     * The SSL/TLS certificate name.
      */
     certificateName: ResourceName;
     /**
-     * When true, forces the deletion of a TLS/SSL certificate.
+     * When true, forces the deletion of an SSL/TLS certificate. There can be two certificates associated with a Lightsail load balancer: the primary and the backup. The force parameter is required when the primary SSL/TLS certificate is in use by an instance attached to the load balancer.
      */
     force?: boolean;
   }
@@ -1369,11 +1369,11 @@ declare namespace Lightsail {
      */
     name?: DomainName;
     /**
-     * The target AWS name server (e.g., ns-111.awsdns-22.com.).
+     * The target AWS name server (e.g., ns-111.awsdns-22.com.). For Lightsail load balancers, the value looks like ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. Be sure to also set isAlias to true when setting up an A record for a load balancer.
      */
     target?: string;
     /**
-     * When true, specifies whether the domain entry is an alias used by the Lightsail load balancer.
+     * When true, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer
      */
     isAlias?: boolean;
     /**
@@ -1734,13 +1734,13 @@ declare namespace Lightsail {
      */
     unit: MetricUnit;
     /**
-     * An array of statistics that you want to request metrics for. Valid values are listed below.
+     * An array of statistics that you want to request metrics for. Valid values are listed below.     SampleCount  - The count (number) of data points used for the statistical calculation.     Average  - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum. This comparison helps you to know when to increase or decrease your resources as needed.     Sum  - All values submitted for the matching metric added together. This statistic can be useful for determining the total volume of a metric.     Minimum  - The lowest value observed during the specified period. You can use this value to determine low volumes of activity for your application.     Maximum  - The highest value observed during the specified period. You can use this value to determine high volumes of activity for your application.  
      */
     statistics: MetricStatisticList;
   }
   export interface GetLoadBalancerMetricDataResult {
     /**
-     * The metric about which you are receiving information. Valid values are listed below.
+     * The metric about which you are receiving information. Valid values are listed below, along with the most useful statistics to include in your request.     ClientTLSNegotiationErrorCount  - The number of TLS connections initiated by the client that did not establish a session with the load balancer. Possible causes include a mismatch of ciphers or protocols.  Statistics: The most useful statistic is Sum.     HealthyHostCount  - The number of target instances that are considered healthy.  Statistics: The most useful statistic are Average, Minimum, and Maximum.     UnhealthyHostCount  - The number of target instances that are considered unhealthy.  Statistics: The most useful statistic are Average, Minimum, and Maximum.     HTTPCode_LB_4XX_Count  - The number of HTTP 4XX client error codes that originate from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests have not been received by the target instance. This count does not include any response codes generated by the target instances.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.     HTTPCode_LB_5XX_Count  - The number of HTTP 5XX server error codes that originate from the load balancer. This count does not include any response codes generated by the target instances.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1. Note that Minimum, Maximum, and Average all return 1.     HTTPCode_Instance_2XX_Count  - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.     HTTPCode_Instance_3XX_Count  - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.   Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.     HTTPCode_Instance_4XX_Count  - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.     HTTPCode_Instance_5XX_Count  - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.     InstanceResponseTime  - The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.  Statistics: The most useful statistic is Average.     RejectedConnectionCount  - The number of connections that were rejected because the load balancer had reached its maximum number of connections.  Statistics: The most useful statistic is Sum.     RequestCount  - The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  
      */
     metricName?: LoadBalancerMetricName;
     /**
@@ -1762,13 +1762,13 @@ declare namespace Lightsail {
   }
   export interface GetLoadBalancerTlsCertificatesRequest {
     /**
-     * The name of the load balancer where you stored your TLS/SSL certificate.
+     * The name of the load balancer you associated with your SSL/TLS certificate.
      */
     loadBalancerName: ResourceName;
   }
   export interface GetLoadBalancerTlsCertificatesResult {
     /**
-     * An array of LoadBalancerTlsCertificate objects describing your TLS/SSL certificates.
+     * An array of LoadBalancerTlsCertificate objects describing your SSL/TLS certificates.
      */
     tlsCertificates?: LoadBalancerTlsCertificateList;
   }
@@ -2035,7 +2035,7 @@ declare namespace Lightsail {
      */
     instanceHealth?: InstanceHealthState;
     /**
-     * More information about the instance health. Valid values are below.
+     * More information about the instance health. If the instanceHealth is healthy, then an instanceHealthReason value is not provided. If  instanceHealth  is initial, the  instanceHealthReason  value can be one of the following:     Lb.RegistrationInProgress  - The target instance is in the process of being registered with the load balancer.     Lb.InitialHealthChecking  - The Lightsail load balancer is still sending the target instance the minimum number of health checks required to determine its health status.   If  instanceHealth  is unhealthy, the  instanceHealthReason  value can be one of the following:     Instance.ResponseCodeMismatch  - The health checks did not return an expected HTTP code.     Instance.Timeout  - The health check requests timed out.     Instance.FailedHealthChecks  - The health checks failed because the connection to the target instance timed out, the target instance response was malformed, or the target instance failed the health check for an unknown reason.     Lb.InternalError  - The health checks failed due to an internal error.   If  instanceHealth  is unused, the  instanceHealthReason  value can be one of the following:     Instance.NotRegistered  - The target instance is not registered with the target group.     Instance.NotInUse  - The target group is not used by any load balancer, or the target instance is in an Availability Zone that is not enabled for its load balancer.     Instance.IpUnusable  - The target IP address is reserved for use by a Lightsail load balancer.     Instance.InvalidState  - The target is in the stopped or terminated state.   If  instanceHealth  is draining, the  instanceHealthReason  value can be one of the following:     Instance.DeregistrationInProgress  - The target instance is in the process of being deregistered and the deregistration delay period has not expired.  
      */
     instanceHealthReason?: InstanceHealthReason;
   }
@@ -2234,7 +2234,7 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * The AWS Region and Availability Zone where your load balancer was created (e.g., us-east-2a).
+     * The AWS Region where your load balancer was created (e.g., us-east-2a). Lightsail automatically creates your load balancer across Availability Zones.
      */
     location?: ResourceLocation;
     /**
@@ -2250,11 +2250,11 @@ declare namespace Lightsail {
      */
     state?: LoadBalancerState;
     /**
-     * The protocol you have enabled for your load balancer. Valid values are below.
+     * The protocol you have enabled for your load balancer. Valid values are below. You can't just have HTTP_HTTPS, but you can have just HTTP.
      */
     protocol?: LoadBalancerProtocol;
     /**
-     * An array of public port settings for your load balancer.
+     * An array of public port settings for your load balancer. For HTTP, use port 80. For HTTPS, use port 443.
      */
     publicPorts?: PortList;
     /**
@@ -2262,7 +2262,7 @@ declare namespace Lightsail {
      */
     healthCheckPath?: NonEmptyString;
     /**
-     * The instance port where the load balancer is listening.
+     * The port where the load balancer will direct traffic to your Lightsail instances. For HTTP traffic, it's port 80. For HTTPS traffic, it's port 443.
      */
     instancePort?: integer;
     /**
@@ -2270,7 +2270,7 @@ declare namespace Lightsail {
      */
     instanceHealthSummary?: InstanceHealthSummaryList;
     /**
-     * An array of LoadBalancerTlsCertificateSummary objects that provide additional information about the TLS/SSL certificates.
+     * An array of LoadBalancerTlsCertificateSummary objects that provide additional information about the SSL/TLS certificates. For example, if true, the certificate is attached to the load balancer.
      */
     tlsCertificateSummaries?: LoadBalancerTlsCertificateSummaryList;
     /**
@@ -2286,19 +2286,19 @@ declare namespace Lightsail {
   export type LoadBalancerState = "active"|"provisioning"|"active_impaired"|"failed"|"unknown"|string;
   export interface LoadBalancerTlsCertificate {
     /**
-     * The name of the TLS/SSL certificate (e.g., my-certificate).
+     * The name of the SSL/TLS certificate (e.g., my-certificate).
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the TLS/SSL certificate.
+     * The Amazon Resource Name (ARN) of the SSL/TLS certificate.
      */
     arn?: NonEmptyString;
     /**
-     * The support code. Include this code in your email to support when you have questions about your Lightsail load balancer or TLS/SSL certificate. This code enables our support team to look up your Lightsail information more easily.
+     * The support code. Include this code in your email to support when you have questions about your Lightsail load balancer or SSL/TLS certificate. This code enables our support team to look up your Lightsail information more easily.
      */
     supportCode?: string;
     /**
-     * The time when you created your TLS/SSL certificate.
+     * The time when you created your SSL/TLS certificate.
      */
     createdAt?: IsoDate;
     /**
@@ -2306,23 +2306,23 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The resource type (e.g., LoadBalancerTlsCertificate.
+     * The resource type (e.g., LoadBalancerTlsCertificate).     Instance  - A Lightsail instance (a virtual private server)     StaticIp  - A static IP address     KeyPair  - The key pair used to connect to a Lightsail instance     InstanceSnapshot  - A Lightsail instance snapshot     Domain  - A DNS zone     PeeredVpc  - A peered VPC     LoadBalancer  - A Lightsail load balancer     LoadBalancerTlsCertificate  - An SSL/TLS certificate associated with a Lightsail load balancer     Disk  - A Lightsail block storage disk     DiskSnapshot  - A block storage disk snapshot  
      */
     resourceType?: ResourceType;
     /**
-     * The load balancer name where your TLS/SSL certificate is attached.
+     * The load balancer name where your SSL/TLS certificate is attached.
      */
     loadBalancerName?: ResourceName;
     /**
-     * When true, the TLS/SSL certificate is attached to the Lightsail load balancer.
+     * When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
      */
     isAttached?: boolean;
     /**
-     * The status of the TLS/SSL certificate. Valid values are below.
+     * The status of the SSL/TLS certificate. Valid values are below.
      */
     status?: LoadBalancerTlsCertificateStatus;
     /**
-     * The domain name for your TLS/SSL certificate.
+     * The domain name for your SSL/TLS certificate.
      */
     domainName?: DomainName;
     /**
@@ -2330,11 +2330,11 @@ declare namespace Lightsail {
      */
     domainValidationRecords?: LoadBalancerTlsCertificateDomainValidationRecordList;
     /**
-     * The reason for the TLS/SSL certificate validation failure.
+     * The reason for the SSL/TLS certificate validation failure.
      */
     failureReason?: LoadBalancerTlsCertificateFailureReason;
     /**
-     * The time when the TLS/SSL certificate was issued.
+     * The time when the SSL/TLS certificate was issued.
      */
     issuedAt?: IsoDate;
     /**
@@ -2346,11 +2346,11 @@ declare namespace Lightsail {
      */
     keyAlgorithm?: NonEmptyString;
     /**
-     * The timestamp when the TLS/SSL certificate expires.
+     * The timestamp when the SSL/TLS certificate expires.
      */
     notAfter?: IsoDate;
     /**
-     * The timestamp when the TLS/SSL certificate is first valid.
+     * The timestamp when the SSL/TLS certificate is first valid.
      */
     notBefore?: IsoDate;
     /**
@@ -2362,7 +2362,7 @@ declare namespace Lightsail {
      */
     revocationReason?: LoadBalancerTlsCertificateRevocationReason;
     /**
-     * The timestamp when the TLS/SSL certificate was revoked.
+     * The timestamp when the SSL/TLS certificate was revoked.
      */
     revokedAt?: IsoDate;
     /**
@@ -2378,14 +2378,14 @@ declare namespace Lightsail {
      */
     subject?: NonEmptyString;
     /**
-     * One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website.
+     * One or more domains or subdomains included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CNAME) of the certificate and additional domain names that can be used to connect to the website, such as example.com, www.example.com, or m.example.com.
      */
     subjectAlternativeNames?: StringList;
   }
   export type LoadBalancerTlsCertificateDomainStatus = "PENDING_VALIDATION"|"FAILED"|"SUCCESS"|string;
   export interface LoadBalancerTlsCertificateDomainValidationOption {
     /**
-     * A fully qualified domain name in the certificate request.
+     * The fully qualified domain name in the certificate request.
      */
     domainName?: DomainName;
     /**
@@ -2412,7 +2412,7 @@ declare namespace Lightsail {
      */
     validationStatus?: LoadBalancerTlsCertificateDomainStatus;
     /**
-     * The domain name against which your TLS/SSL certificate was validated.
+     * The domain name against which your SSL/TLS certificate was validated.
      */
     domainName?: DomainName;
   }
@@ -2434,11 +2434,11 @@ declare namespace Lightsail {
   export type LoadBalancerTlsCertificateStatus = "PENDING_VALIDATION"|"ISSUED"|"INACTIVE"|"EXPIRED"|"VALIDATION_TIMED_OUT"|"REVOKED"|"FAILED"|"UNKNOWN"|string;
   export interface LoadBalancerTlsCertificateSummary {
     /**
-     * The name of the TLS/SSL certificate.
+     * The name of the SSL/TLS certificate.
      */
     name?: ResourceName;
     /**
-     * When true, the TLS/SSL certificate is attached to the Lightsail load balancer.
+     * When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
      */
     isAttached?: boolean;
   }
@@ -2553,7 +2553,7 @@ declare namespace Lightsail {
     errorDetails?: string;
   }
   export type OperationList = Operation[];
-  export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|string;
+  export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|"Succeeded"|string;
   export type OperationType = "DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|string;
   export interface PasswordData {
     /**
@@ -2616,7 +2616,7 @@ declare namespace Lightsail {
   }
   export interface RebootInstanceResult {
     /**
-     * An array of key-value pairs containing information about the request operation.
+     * An array of key-value pairs containing information about the request operations.
      */
     operations?: OperationList;
   }
@@ -2643,7 +2643,7 @@ declare namespace Lightsail {
     availabilityZones?: AvailabilityZoneList;
   }
   export type RegionList = Region[];
-  export type RegionName = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-central-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|string;
+  export type RegionName = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|string;
   export interface ReleaseStaticIpRequest {
     /**
      * The name of the static IP to delete.
@@ -2764,7 +2764,7 @@ declare namespace Lightsail {
   }
   export interface UpdateLoadBalancerAttributeRequest {
     /**
-     * The name of the load balancer that you want to modify.
+     * The name of the load balancer that you want to modify (e.g., my-load-balancer.
      */
     loadBalancerName: ResourceName;
     /**

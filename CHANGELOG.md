@@ -1,6 +1,30 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.205.0-->
+<!--LATEST=2.211.0-->
 <!--ENTRYINSERT-->
+
+## 2.211.0
+* feature: ElasticBeanstalk: AWS Elastic Beanstalk is launching a new public API named DescribeAccountAttributes which allows customers to access account level attributes. In this release, the API will support quotas for resources such as applications, application versions, and environments.
+
+## 2.210.0
+* feature: Organizations: This release adds additional reason codes to improve clarity to exceptions that can occur.
+* feature: Pinpoint: With this release, you can delete endpoints from your Amazon Pinpoint projects. Customers can now specify one of their leased dedicated long or short codes to send text messages.
+* feature: SageMaker: This release provides support for ml.p3.xlarge instance types for notebook instances.  Lifecycle configuration is now available to customize your notebook instances on start; the configuration can be reused between multiple notebooks.  If a notebook instance is attached to a VPC you can now opt out of internet access that by default is provided by SageMaker.
+
+## 2.209.0
+* feature: ServiceDiscovery: This release adds support for custom health checks, which let you check the health of resources that aren't accessible over the internet. For example, you can use a custom health check when the instance is in an Amazon VPC.
+
+## 2.208.0
+* feature: CloudHSMV2: CreateCluster can now take both 8 and 17 character Subnet IDs. DeleteHsm can now take both 8 and 17 character ENI IDs.
+* feature: Iot: We added new fields to the response of the following APIs. (1) describe-certificate: added new generationId, customerVersion fields (2) describe-ca-certificate: added new generationId, customerVersion and lastModifiedDate fields (3) get-policy: added generationId, creationDate and lastModifiedDate fields
+* feature: Redshift: DescribeClusterSnapshotsMessage with ClusterExists flag returns snapshots of existing clusters. Else both existing and deleted cluster snapshots are returned
+
+## 2.207.0
+* feature: ECS: Amazon Elastic Container Service (ECS) now supports container health checks. Customers can now specify a docker container health check command and parameters in their task definition. ECS will monitor, report and take scheduling action based on the health status.
+* feature: MigrationHub: Unused key LABEL removed from ResourceAttrbute
+* feature: Pinpoint: With this release, you can export endpoints from your Amazon Pinpoint projects. You can export a) all of the endpoints assigned to a project or b) the subset of endpoints assigned to a segment.
+
+## 2.206.0
+* feature: MediaLive: Updates API to model required traits and minimum/maximum constraints.
 
 ## 2.205.0
 * feature: CloudWatchEvents: Added BatchParameters to the PutTargets API
