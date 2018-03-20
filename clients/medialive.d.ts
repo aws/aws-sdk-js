@@ -131,6 +131,22 @@ declare class MediaLive extends Service {
    * Updates a channel.
    */
   updateChannel(callback?: (err: AWSError, data: MediaLive.Types.UpdateChannelResponse) => void): Request<MediaLive.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates an input.
+   */
+  updateInput(params: MediaLive.Types.UpdateInputRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateInputResponse) => void): Request<MediaLive.Types.UpdateInputResponse, AWSError>;
+  /**
+   * Updates an input.
+   */
+  updateInput(callback?: (err: AWSError, data: MediaLive.Types.UpdateInputResponse) => void): Request<MediaLive.Types.UpdateInputResponse, AWSError>;
+  /**
+   * Update an Input Security Group's Whilelists.
+   */
+  updateInputSecurityGroup(params: MediaLive.Types.UpdateInputSecurityGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateInputSecurityGroupResponse) => void): Request<MediaLive.Types.UpdateInputSecurityGroupResponse, AWSError>;
+  /**
+   * Update an Input Security Group's Whilelists.
+   */
+  updateInputSecurityGroup(callback?: (err: AWSError, data: MediaLive.Types.UpdateInputSecurityGroupResponse) => void): Request<MediaLive.Types.UpdateInputSecurityGroupResponse, AWSError>;
 }
 declare namespace MediaLive {
   export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1"|string;
@@ -975,6 +991,14 @@ one destination per packager.
      * The Id of the Input Security Group
      */
     Id?: __string;
+    /**
+     * The list of inputs currently using this Input Security Group.
+     */
+    Inputs?: __listOf__string;
+    /**
+     * The current state of the Input Security Group.
+     */
+    State?: InputSecurityGroupState;
     /**
      * Whitelist rules and their sync status
      */
@@ -1891,10 +1915,19 @@ to.
      */
     Id?: __string;
     /**
+     * The list of inputs currently using this Input Security Group.
+     */
+    Inputs?: __listOf__string;
+    /**
+     * The current state of the Input Security Group.
+     */
+    State?: InputSecurityGroupState;
+    /**
      * Whitelist rules and their sync status
      */
     WhitelistRules?: __listOfInputWhitelistRule;
   }
+  export type InputSecurityGroupState = "IDLE"|"IN_USE"|"UPDATING"|"DELETED"|string;
   export interface InputSecurityGroupWhitelistRequest {
     /**
      * List of IPv4 CIDR addresses to whitelist
@@ -1999,7 +2032,7 @@ pulled from.
   }
   export interface InputWhitelistRuleCidr {
     /**
-     * The IPv4 CIDR to whitelist
+     * The IPv4 CIDR to whitelist.
      */
     Cidr?: __string;
   }
@@ -2792,6 +2825,7 @@ one destination per packager.
      * The encoder settings for this channel.
      */
     EncoderSettings?: EncoderSettings;
+    InputAttachments?: __listOfInputAttachment;
     /**
      * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
      */
@@ -2818,6 +2852,7 @@ one destination per packager.
      * The encoder settings for this channel.
      */
     EncoderSettings?: EncoderSettings;
+    InputAttachments?: __listOfInputAttachment;
     /**
      * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
      */
@@ -2836,6 +2871,74 @@ one destination per packager.
   }
   export interface UpdateChannelResultModel {
     Channel?: Channel;
+  }
+  export interface UpdateInput {
+    /**
+     * Destination settings for PUSH type inputs.
+     */
+    Destinations?: __listOfInputDestinationRequest;
+    /**
+     * A list of security groups referenced by IDs to attach to the input.
+     */
+    InputSecurityGroups?: __listOf__string;
+    /**
+     * Name of the input.
+     */
+    Name?: __string;
+    /**
+     * The source URLs for a PULL-type input. Every PULL type input needs
+exactly two source URLs for redundancy.
+Only specify sources for PULL type Inputs. Leave Destinations empty.
+
+     */
+    Sources?: __listOfInputSourceRequest;
+  }
+  export interface UpdateInputRequest {
+    /**
+     * Destination settings for PUSH type inputs.
+     */
+    Destinations?: __listOfInputDestinationRequest;
+    /**
+     * Unique ID of the input.
+     */
+    InputId: __string;
+    /**
+     * A list of security groups referenced by IDs to attach to the input.
+     */
+    InputSecurityGroups?: __listOf__string;
+    /**
+     * Name of the input.
+     */
+    Name?: __string;
+    /**
+     * The source URLs for a PULL-type input. Every PULL type input needs
+exactly two source URLs for redundancy.
+Only specify sources for PULL type Inputs. Leave Destinations empty.
+
+     */
+    Sources?: __listOfInputSourceRequest;
+  }
+  export interface UpdateInputResponse {
+    Input?: Input;
+  }
+  export interface UpdateInputResultModel {
+    Input?: Input;
+  }
+  export interface UpdateInputSecurityGroupRequest {
+    /**
+     * The id of the Input Security Group to update.
+     */
+    InputSecurityGroupId: __string;
+    /**
+     * List of IPv4 CIDR addresses to whitelist
+     */
+    WhitelistRules?: __listOfInputWhitelistRuleCidr;
+  }
+  export interface UpdateInputSecurityGroupResponse {
+    SecurityGroup?: InputSecurityGroup;
+  }
+  export interface UpdateInputSecurityGroupResultModel {
+    SecurityGroup?: InputSecurityGroup;
   }
   export interface ValidationError {
     ElementPath?: __string;

@@ -256,7 +256,8 @@
       },
       "errors":[
         {"shape":"InsufficientPrivilegesException"}
-      ]
+      ],
+      "documentation":"<p>Returns attributes related to AWS Elastic Beanstalk that are associated with the calling AWS account.</p> <p>The result currently has one set of attributes—resource quotas.</p>"
     },
     "DescribeApplicationVersions":{
       "name":"DescribeApplicationVersions",
@@ -1696,7 +1697,10 @@
     "DescribeAccountAttributesResult":{
       "type":"structure",
       "members":{
-        "ResourceQuotas":{"shape":"ResourceQuotas"}
+        "ResourceQuotas":{
+          "shape":"ResourceQuotas",
+          "documentation":"<p>The Elastic Beanstalk resource quotas associated with the calling AWS account.</p>"
+        }
       }
     },
     "DescribeApplicationVersionsMessage":{
@@ -2557,7 +2561,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The specified account does not have sufficient privileges for one of more AWS services.</p>",
+      "documentation":"<p>The specified account does not have sufficient privileges for one or more AWS services.</p>",
       "error":{
         "code":"InsufficientPrivilegesException",
         "httpStatusCode":403,
@@ -3233,18 +3237,38 @@
     "ResourceQuota":{
       "type":"structure",
       "members":{
-        "Maximum":{"shape":"BoxedInt"}
-      }
+        "Maximum":{
+          "shape":"BoxedInt",
+          "documentation":"<p>The maximum number of instances of this Elastic Beanstalk resource type that an AWS account can use.</p>"
+        }
+      },
+      "documentation":"<p>The AWS Elastic Beanstalk quota information for a single resource type in an AWS account. It reflects the resource's limits for this account.</p>"
     },
     "ResourceQuotas":{
       "type":"structure",
       "members":{
-        "ApplicationQuota":{"shape":"ResourceQuota"},
-        "ApplicationVersionQuota":{"shape":"ResourceQuota"},
-        "EnvironmentQuota":{"shape":"ResourceQuota"},
-        "ConfigurationTemplateQuota":{"shape":"ResourceQuota"},
-        "CustomPlatformQuota":{"shape":"ResourceQuota"}
-      }
+        "ApplicationQuota":{
+          "shape":"ResourceQuota",
+          "documentation":"<p>The quota for applications in the AWS account.</p>"
+        },
+        "ApplicationVersionQuota":{
+          "shape":"ResourceQuota",
+          "documentation":"<p>The quota for application versions in the AWS account.</p>"
+        },
+        "EnvironmentQuota":{
+          "shape":"ResourceQuota",
+          "documentation":"<p>The quota for environments in the AWS account.</p>"
+        },
+        "ConfigurationTemplateQuota":{
+          "shape":"ResourceQuota",
+          "documentation":"<p>The quota for configuration templates in the AWS account.</p>"
+        },
+        "CustomPlatformQuota":{
+          "shape":"ResourceQuota",
+          "documentation":"<p>The quota for custom platforms in the AWS account.</p>"
+        }
+      },
+      "documentation":"<p>A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS account. They reflect Elastic Beanstalk resource limits for this account.</p>"
     },
     "ResourceTagsDescriptionMessage":{
       "type":"structure",

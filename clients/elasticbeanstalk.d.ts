@@ -128,7 +128,7 @@ declare class ElasticBeanstalk extends Service {
    */
   deletePlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DeletePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DeletePlatformVersionResult, AWSError>;
   /**
-   * 
+   * Returns attributes related to AWS Elastic Beanstalk that are associated with the calling AWS account. The result currently has one set of attributes—resource quotas.
    */
   describeAccountAttributes(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeAccountAttributesResult) => void): Request<ElasticBeanstalk.Types.DescribeAccountAttributesResult, AWSError>;
   /**
@@ -1064,6 +1064,9 @@ declare namespace ElasticBeanstalk {
   }
   export type DeploymentTimestamp = Date;
   export interface DescribeAccountAttributesResult {
+    /**
+     * The Elastic Beanstalk resource quotas associated with the calling AWS account.
+     */
     ResourceQuotas?: ResourceQuotas;
   }
   export interface DescribeApplicationVersionsMessage {
@@ -2105,13 +2108,31 @@ declare namespace ElasticBeanstalk {
   export type ResourceId = string;
   export type ResourceName = string;
   export interface ResourceQuota {
+    /**
+     * The maximum number of instances of this Elastic Beanstalk resource type that an AWS account can use.
+     */
     Maximum?: BoxedInt;
   }
   export interface ResourceQuotas {
+    /**
+     * The quota for applications in the AWS account.
+     */
     ApplicationQuota?: ResourceQuota;
+    /**
+     * The quota for application versions in the AWS account.
+     */
     ApplicationVersionQuota?: ResourceQuota;
+    /**
+     * The quota for environments in the AWS account.
+     */
     EnvironmentQuota?: ResourceQuota;
+    /**
+     * The quota for configuration templates in the AWS account.
+     */
     ConfigurationTemplateQuota?: ResourceQuota;
+    /**
+     * The quota for custom platforms in the AWS account.
+     */
     CustomPlatformQuota?: ResourceQuota;
   }
   export interface ResourceTagsDescriptionMessage {

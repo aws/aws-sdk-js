@@ -12,6 +12,20 @@
     "uid":"config-2014-11-12"
   },
   "operations":{
+    "BatchGetResourceConfig":{
+      "name":"BatchGetResourceConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchGetResourceConfigRequest"},
+      "output":{"shape":"BatchGetResourceConfigResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"NoAvailableConfigurationRecorderException"}
+      ],
+      "documentation":"<p>Returns the current configuration for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list. </p> <note> <ul> <li> <p>The API does not return results for deleted resources.</p> </li> <li> <p> The API does not return any tags for the requested resources. This information is filtered out of the supplementaryConfiguration section of the API response.</p> </li> </ul> </note>"
+    },
     "DeleteConfigRule":{
       "name":"DeleteConfigRule",
       "http":{
@@ -400,10 +414,99 @@
     "AllSupported":{"type":"boolean"},
     "AvailabilityZone":{"type":"string"},
     "AwsRegion":{"type":"string"},
+    "BaseConfigurationItem":{
+      "type":"structure",
+      "members":{
+        "version":{
+          "shape":"Version",
+          "documentation":"<p>The version number of the resource configuration.</p>"
+        },
+        "accountId":{
+          "shape":"AccountId",
+          "documentation":"<p>The 12 digit AWS account ID associated with the resource.</p>"
+        },
+        "configurationItemCaptureTime":{
+          "shape":"ConfigurationItemCaptureTime",
+          "documentation":"<p>The time when the configuration recording was initiated.</p>"
+        },
+        "configurationItemStatus":{
+          "shape":"ConfigurationItemStatus",
+          "documentation":"<p>The configuration item status.</p>"
+        },
+        "configurationStateId":{
+          "shape":"ConfigurationStateId",
+          "documentation":"<p>An identifier that indicates the ordering of the configuration items of a resource.</p>"
+        },
+        "arn":{
+          "shape":"ARN",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource.</p>"
+        },
+        "resourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The type of AWS resource.</p>"
+        },
+        "resourceId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The ID of the resource (for example., sg-xxxxxx).</p>"
+        },
+        "resourceName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The custom name of the resource, if available.</p>"
+        },
+        "awsRegion":{
+          "shape":"AwsRegion",
+          "documentation":"<p>The region where the resource resides.</p>"
+        },
+        "availabilityZone":{
+          "shape":"AvailabilityZone",
+          "documentation":"<p>The Availability Zone associated with the resource.</p>"
+        },
+        "resourceCreationTime":{
+          "shape":"ResourceCreationTime",
+          "documentation":"<p>The time stamp when the resource was created.</p>"
+        },
+        "configuration":{
+          "shape":"Configuration",
+          "documentation":"<p>The description of the resource configuration.</p>"
+        },
+        "supplementaryConfiguration":{
+          "shape":"SupplementaryConfiguration",
+          "documentation":"<p>Configuration attributes that AWS Config returns for certain resource types to supplement the information returned for the configuration parameter.</p>"
+        }
+      },
+      "documentation":"<p>The detailed configuration of a specified resource.</p>"
+    },
+    "BaseConfigurationItems":{
+      "type":"list",
+      "member":{"shape":"BaseConfigurationItem"}
+    },
     "BaseResourceId":{
       "type":"string",
       "max":768,
       "min":1
+    },
+    "BatchGetResourceConfigRequest":{
+      "type":"structure",
+      "required":["resourceKeys"],
+      "members":{
+        "resourceKeys":{
+          "shape":"ResourceKeys",
+          "documentation":"<p>A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID.</p>"
+        }
+      }
+    },
+    "BatchGetResourceConfigResponse":{
+      "type":"structure",
+      "members":{
+        "baseConfigurationItems":{
+          "shape":"BaseConfigurationItems",
+          "documentation":"<p>A list that contains the current configuration of one or more resources.</p>"
+        },
+        "unprocessedResourceKeys":{
+          "shape":"ResourceKeys",
+          "documentation":"<p>A list of resource keys that were not processed with the current response. The unprocessesResourceKeys value is in the same form as ResourceKeys, so the value can be directly provided to a subsequent BatchGetResourceConfig operation. If there are no unprocessed resource keys, the response contains an empty unprocessedResourceKeys list. </p>"
+        }
+      }
     },
     "Boolean":{"type":"boolean"},
     "ChannelName":{
@@ -1070,7 +1173,7 @@
         },
         "ComplianceTypes":{
           "shape":"ComplianceTypes",
-          "documentation":"<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code>.</p>"
+          "documentation":"<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>"
         },
         "Limit":{
           "shape":"Limit",
@@ -1990,6 +2093,30 @@
       "documentation":"<p>The rule is currently being deleted or the rule is deleting your evaluation results. Try your request again later.</p>",
       "exception":true
     },
+    "ResourceKey":{
+      "type":"structure",
+      "required":[
+        "resourceType",
+        "resourceId"
+      ],
+      "members":{
+        "resourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The resource type.</p>"
+        },
+        "resourceId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The ID of the resource (for example., sg-xxxxxx). </p>"
+        }
+      },
+      "documentation":"<p>The details that identify a resource within AWS Config, including the resource type and resource ID.</p>"
+    },
+    "ResourceKeys":{
+      "type":"list",
+      "member":{"shape":"ResourceKey"},
+      "max":100,
+      "min":1
+    },
     "ResourceName":{"type":"string"},
     "ResourceNotDiscoveredException":{
       "type":"structure",
@@ -2121,11 +2248,11 @@
         },
         "MessageType":{
           "shape":"MessageType",
-          "documentation":"<p>The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:</p> <ul> <li> <p> <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.</p> </li> <li> <p> <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p> </li> <li> <p> <code>ScheduledNotification</code> - Triggers a periodic evaluation at the frequency specified for <code>MaximumExecutionFrequency</code>.</p> </li> <li> <p> <code>ConfigurationSnapshotDeliveryCompleted</code> - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.</p> </li> </ul> <p>If you want your custom rule to be triggered by configuration changes, specify both <code>ConfigurationItemChangeNotification</code> and <code>OversizedConfigurationItemChangeNotification</code>. </p>"
+          "documentation":"<p>The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:</p> <ul> <li> <p> <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.</p> </li> <li> <p> <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p> </li> <li> <p> <code>ScheduledNotification</code> - Triggers a periodic evaluation at the frequency specified for <code>MaximumExecutionFrequency</code>.</p> </li> <li> <p> <code>ConfigurationSnapshotDeliveryCompleted</code> - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.</p> </li> </ul> <p>If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for <code>ConfigurationItemChangeNotification</code> and one for <code>OversizedConfigurationItemChangeNotification</code>.</p>"
         },
         "MaximumExecutionFrequency":{
           "shape":"MaximumExecutionFrequency",
-          "documentation":"<p>The frequency that you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for <code>MaximumExecutionFrequency</code>, then <code>MessageType</code> must use the <code>ScheduledNotification</code> value.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> </note>"
+          "documentation":"<p>The frequency that you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for <code>MaximumExecutionFrequency</code>, then <code>MessageType</code> must use the <code>ScheduledNotification</code> value.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> <p>Based on the valid value you choose, AWS Config runs evaluations once for each valid value. For example, if you choose <code>Three_Hours</code>, AWS Config runs evaluations once every three hours. In this case, <code>Three_Hours</code> is the frequency of this rule. </p> </note>"
         }
       },
       "documentation":"<p>Provides the source and the message types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic. You can specify the parameter values for <code>SourceDetail</code> only for custom rules. </p>"

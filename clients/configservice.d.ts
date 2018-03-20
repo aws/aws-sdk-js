@@ -12,6 +12,14 @@ declare class ConfigService extends Service {
   constructor(options?: ConfigService.Types.ClientConfiguration)
   config: Config & ConfigService.Types.ClientConfiguration;
   /**
+   * Returns the current configuration for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list.     The API does not return results for deleted resources.    The API does not return any tags for the requested resources. This information is filtered out of the supplementaryConfiguration section of the API response.   
+   */
+  batchGetResourceConfig(params: ConfigService.Types.BatchGetResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.BatchGetResourceConfigResponse) => void): Request<ConfigService.Types.BatchGetResourceConfigResponse, AWSError>;
+  /**
+   * Returns the current configuration for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list.     The API does not return results for deleted resources.    The API does not return any tags for the requested resources. This information is filtered out of the supplementaryConfiguration section of the API response.   
+   */
+  batchGetResourceConfig(callback?: (err: AWSError, data: ConfigService.Types.BatchGetResourceConfigResponse) => void): Request<ConfigService.Types.BatchGetResourceConfigResponse, AWSError>;
+  /**
    * Deletes the specified AWS Config rule and all of its evaluation results. AWS Config sets the state of a rule to DELETING until the deletion is complete. You cannot update a rule while it is in this state. If you make a PutConfigRule or DeleteConfigRule request for the rule, you will receive a ResourceInUseException. You can check the state of a rule by using the DescribeConfigRules request.
    */
   deleteConfigRule(params: ConfigService.Types.DeleteConfigRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -230,7 +238,82 @@ declare namespace ConfigService {
   export type AllSupported = boolean;
   export type AvailabilityZone = string;
   export type AwsRegion = string;
+  export interface BaseConfigurationItem {
+    /**
+     * The version number of the resource configuration.
+     */
+    version?: Version;
+    /**
+     * The 12 digit AWS account ID associated with the resource.
+     */
+    accountId?: AccountId;
+    /**
+     * The time when the configuration recording was initiated.
+     */
+    configurationItemCaptureTime?: ConfigurationItemCaptureTime;
+    /**
+     * The configuration item status.
+     */
+    configurationItemStatus?: ConfigurationItemStatus;
+    /**
+     * An identifier that indicates the ordering of the configuration items of a resource.
+     */
+    configurationStateId?: ConfigurationStateId;
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    arn?: ARN;
+    /**
+     * The type of AWS resource.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The ID of the resource (for example., sg-xxxxxx).
+     */
+    resourceId?: ResourceId;
+    /**
+     * The custom name of the resource, if available.
+     */
+    resourceName?: ResourceName;
+    /**
+     * The region where the resource resides.
+     */
+    awsRegion?: AwsRegion;
+    /**
+     * The Availability Zone associated with the resource.
+     */
+    availabilityZone?: AvailabilityZone;
+    /**
+     * The time stamp when the resource was created.
+     */
+    resourceCreationTime?: ResourceCreationTime;
+    /**
+     * The description of the resource configuration.
+     */
+    configuration?: Configuration;
+    /**
+     * Configuration attributes that AWS Config returns for certain resource types to supplement the information returned for the configuration parameter.
+     */
+    supplementaryConfiguration?: SupplementaryConfiguration;
+  }
+  export type BaseConfigurationItems = BaseConfigurationItem[];
   export type BaseResourceId = string;
+  export interface BatchGetResourceConfigRequest {
+    /**
+     * A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID.
+     */
+    resourceKeys: ResourceKeys;
+  }
+  export interface BatchGetResourceConfigResponse {
+    /**
+     * A list that contains the current configuration of one or more resources.
+     */
+    baseConfigurationItems?: BaseConfigurationItems;
+    /**
+     * A list of resource keys that were not processed with the current response. The unprocessesResourceKeys value is in the same form as ResourceKeys, so the value can be directly provided to a subsequent BatchGetResourceConfig operation. If there are no unprocessed resource keys, the response contains an empty unprocessedResourceKeys list. 
+     */
+    unprocessedResourceKeys?: ResourceKeys;
+  }
   export type Boolean = boolean;
   export type ChannelName = string;
   export type ChronologicalOrder = "Reverse"|"Forward"|string;
@@ -694,7 +777,7 @@ declare namespace ConfigService {
      */
     ResourceId?: BaseResourceId;
     /**
-     * Filters the results by compliance. The allowed values are COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA.
+     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT.
      */
     ComplianceTypes?: ComplianceTypes;
     /**
@@ -1185,6 +1268,17 @@ declare namespace ConfigService {
     resourceDeletionTime?: ResourceDeletionTime;
   }
   export type ResourceIdentifierList = ResourceIdentifier[];
+  export interface ResourceKey {
+    /**
+     * The resource type.
+     */
+    resourceType: ResourceType;
+    /**
+     * The ID of the resource (for example., sg-xxxxxx). 
+     */
+    resourceId: ResourceId;
+  }
+  export type ResourceKeys = ResourceKey[];
   export type ResourceName = string;
   export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::EventSubscription"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::S3::Bucket"|"AWS::SSM::ManagedInstanceInventory"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::DynamoDB::Table"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|string;
   export type ResourceTypeList = ResourceType[];
@@ -1228,11 +1322,11 @@ declare namespace ConfigService {
      */
     EventSource?: EventSource;
     /**
-     * The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:    ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.    OversizedConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.    ScheduledNotification - Triggers a periodic evaluation at the frequency specified for MaximumExecutionFrequency.    ConfigurationSnapshotDeliveryCompleted - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.   If you want your custom rule to be triggered by configuration changes, specify both ConfigurationItemChangeNotification and OversizedConfigurationItemChangeNotification. 
+     * The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:    ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.    OversizedConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.    ScheduledNotification - Triggers a periodic evaluation at the frequency specified for MaximumExecutionFrequency.    ConfigurationSnapshotDeliveryCompleted - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.   If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for ConfigurationItemChangeNotification and one for OversizedConfigurationItemChangeNotification.
      */
     MessageType?: MessageType;
     /**
-     * The frequency that you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for MaximumExecutionFrequency, then MessageType must use the ScheduledNotification value.  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. 
+     * The frequency that you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for MaximumExecutionFrequency, then MessageType must use the ScheduledNotification value.  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. Based on the valid value you choose, AWS Config runs evaluations once for each valid value. For example, if you choose Three_Hours, AWS Config runs evaluations once every three hours. In this case, Three_Hours is the frequency of this rule.  
      */
     MaximumExecutionFrequency?: MaximumExecutionFrequency;
   }

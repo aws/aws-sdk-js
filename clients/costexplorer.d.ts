@@ -12,35 +12,43 @@ declare class CostExplorer extends Service {
   constructor(options?: CostExplorer.Types.ClientConfiguration)
   config: Config & CostExplorer.Types.ClientConfiguration;
   /**
-   * Retrieve cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. See the GetDimensionValues action for a complete list of the valid dimensions. Master accounts in an organization have access to all member accounts.
+   * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the  GetDimensionValues  operation. Master accounts in an organization in AWS Organizations have access to all member accounts.
    */
   getCostAndUsage(params: CostExplorer.Types.GetCostAndUsageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageResponse) => void): Request<CostExplorer.Types.GetCostAndUsageResponse, AWSError>;
   /**
-   * Retrieve cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. See the GetDimensionValues action for a complete list of the valid dimensions. Master accounts in an organization have access to all member accounts.
+   * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the  GetDimensionValues  operation. Master accounts in an organization in AWS Organizations have access to all member accounts.
    */
   getCostAndUsage(callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageResponse) => void): Request<CostExplorer.Types.GetCostAndUsageResponse, AWSError>;
   /**
-   * You can use GetDimensionValues to retrieve all available filter values for a specific filter over a period of time. You can search the dimension values for an arbitrary string. 
+   * Retrieves all available filter values for a specific filter over a period of time. You can search the dimension values for an arbitrary string. 
    */
   getDimensionValues(params: CostExplorer.Types.GetDimensionValuesRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetDimensionValuesResponse) => void): Request<CostExplorer.Types.GetDimensionValuesResponse, AWSError>;
   /**
-   * You can use GetDimensionValues to retrieve all available filter values for a specific filter over a period of time. You can search the dimension values for an arbitrary string. 
+   * Retrieves all available filter values for a specific filter over a period of time. You can search the dimension values for an arbitrary string. 
    */
   getDimensionValues(callback?: (err: AWSError, data: CostExplorer.Types.GetDimensionValuesResponse) => void): Request<CostExplorer.Types.GetDimensionValuesResponse, AWSError>;
   /**
-   * Retrieve the reservation coverage for your account. An organization's master account has access to the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions.    AZ   INSTANCE_TYPE   LINKED_ACCOUNT   PLATFORM   REGION   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
+   * Retrieves the reservation coverage for your account. This allows you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization's master account can see the coverage of the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions:   AZ   INSTANCE_TYPE   LINKED_ACCOUNT   PLATFORM   REGION   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
    */
   getReservationCoverage(params: CostExplorer.Types.GetReservationCoverageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetReservationCoverageResponse) => void): Request<CostExplorer.Types.GetReservationCoverageResponse, AWSError>;
   /**
-   * Retrieve the reservation coverage for your account. An organization's master account has access to the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions.    AZ   INSTANCE_TYPE   LINKED_ACCOUNT   PLATFORM   REGION   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
+   * Retrieves the reservation coverage for your account. This allows you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization's master account can see the coverage of the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions:   AZ   INSTANCE_TYPE   LINKED_ACCOUNT   PLATFORM   REGION   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
    */
   getReservationCoverage(callback?: (err: AWSError, data: CostExplorer.Types.GetReservationCoverageResponse) => void): Request<CostExplorer.Types.GetReservationCoverageResponse, AWSError>;
   /**
-   * You can retrieve the Reservation utilization for your account. Master accounts in an organization have access to their associated member accounts. You can filter data by dimensions in a time period. You can use GetDimensionValues to determine the possible dimension values. Currently, you can group only by SUBSCRIPTION_ID. 
+   * Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing. AWS generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After AWS has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings.  For example, AWS automatically aggregates your EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. AWS recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. AWS also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for c4.large, because that is the smallest size instance in the c4 instance family.
+   */
+  getReservationPurchaseRecommendation(params: CostExplorer.Types.GetReservationPurchaseRecommendationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetReservationPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetReservationPurchaseRecommendationResponse, AWSError>;
+  /**
+   * Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing. AWS generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After AWS has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings.  For example, AWS automatically aggregates your EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. AWS recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. AWS also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for c4.large, because that is the smallest size instance in the c4 instance family.
+   */
+  getReservationPurchaseRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetReservationPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetReservationPurchaseRecommendationResponse, AWSError>;
+  /**
+   * You can retrieve the reservation utilization for your account. Master accounts in an organization in AWS Organizations have access to their associated member accounts. You can filter data by dimensions in a time period. You can use GetDimensionValues to determine the possible dimension values. Currently, you can group only by SUBSCRIPTION_ID. 
    */
   getReservationUtilization(params: CostExplorer.Types.GetReservationUtilizationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetReservationUtilizationResponse) => void): Request<CostExplorer.Types.GetReservationUtilizationResponse, AWSError>;
   /**
-   * You can retrieve the Reservation utilization for your account. Master accounts in an organization have access to their associated member accounts. You can filter data by dimensions in a time period. You can use GetDimensionValues to determine the possible dimension values. Currently, you can group only by SUBSCRIPTION_ID. 
+   * You can retrieve the reservation utilization for your account. Master accounts in an organization in AWS Organizations have access to their associated member accounts. You can filter data by dimensions in a time period. You can use GetDimensionValues to determine the possible dimension values. Currently, you can group only by SUBSCRIPTION_ID. 
    */
   getReservationUtilization(callback?: (err: AWSError, data: CostExplorer.Types.GetReservationUtilizationResponse) => void): Request<CostExplorer.Types.GetReservationUtilizationResponse, AWSError>;
   /**
@@ -53,6 +61,7 @@ declare class CostExplorer extends Service {
   getTags(callback?: (err: AWSError, data: CostExplorer.Types.GetTagsResponse) => void): Request<CostExplorer.Types.GetTagsResponse, AWSError>;
 }
 declare namespace CostExplorer {
+  export type AccountScope = "PAYER"|string;
   export type AttributeType = string;
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
@@ -69,7 +78,7 @@ declare namespace CostExplorer {
      */
     TimePeriod?: DateInterval;
     /**
-     * The group of instances that a reservation covered.
+     * The groups of instances that are covered by a reservation.
      */
     Groups?: ReservationCoverageGroups;
     /**
@@ -79,11 +88,11 @@ declare namespace CostExplorer {
   }
   export interface CoverageHours {
     /**
-     * The number of instance running hours covered by On-Demand Instances.
+     * The number of instance running hours that are covered by On-Demand Instances.
      */
     OnDemandHours?: OnDemandHours;
     /**
-     * The number of instance running hours covered by reservations.
+     * The number of instance running hours that are covered by reservations.
      */
     ReservedHours?: ReservedHours;
     /**
@@ -91,7 +100,7 @@ declare namespace CostExplorer {
      */
     TotalRunningHours?: TotalRunningHours;
     /**
-     * The percentage of instance hours covered by a reservation.
+     * The percentage of instance hours that are covered by a reservation.
      */
     CoverageHoursPercentage?: CoverageHoursPercentage;
   }
@@ -99,11 +108,11 @@ declare namespace CostExplorer {
   export type CoveragesByTime = CoverageByTime[];
   export interface DateInterval {
     /**
-     * The beginning of the time period that you want the usage and costs for. The start date is inclusive. For example, if start is 2017-01-01, then the cost and usage data is retrieved starting at 2017-01-01 up to the end date.
+     * The beginning of the time period that you want the usage and costs for. The start date is inclusive. For example, if start is 2017-01-01, AWS retrieves cost and usage data starting at 2017-01-01 up to the end date.
      */
     Start: YearMonthDay;
     /**
-     * The end of the time period that you want the usage and costs for. The end date is exclusive. For example, if the end is 2017-05-01, then the cost and usage data is retrieved from the start date but not including 2017-05-01.
+     * The end of the time period that you want the usage and costs for. The end date is exclusive. For example, if end is 2017-05-01, AWS retrieves cost and usage data from the start date up to, but not including, 2017-05-01.
      */
     End: YearMonthDay;
   }
@@ -129,12 +138,52 @@ declare namespace CostExplorer {
     Attributes?: Attributes;
   }
   export type DimensionValuesWithAttributesList = DimensionValuesWithAttributes[];
+  export interface EC2InstanceDetails {
+    /**
+     * The instance family of the recommended reservation.
+     */
+    Family?: GenericString;
+    /**
+     * The type of instance that AWS recommends.
+     */
+    InstanceType?: GenericString;
+    /**
+     * The AWS Region of the recommended reservation.
+     */
+    Region?: GenericString;
+    /**
+     * The Availability Zone of the recommended reservation.
+     */
+    AvailabilityZone?: GenericString;
+    /**
+     * The platform of the recommended reservation. The platform is the specific combination of operating system, license model, and software on an instance.
+     */
+    Platform?: GenericString;
+    /**
+     * Whether the recommended reservation is dedicated or shared.
+     */
+    Tenancy?: GenericString;
+    /**
+     * Whether the recommendation is for a current generation instance. 
+     */
+    CurrentGeneration?: GenericBoolean;
+    /**
+     * Whether the recommended reservation is size flexible.
+     */
+    SizeFlexEligible?: GenericBoolean;
+  }
+  export interface EC2Specification {
+    /**
+     * Whether you want a recommendation for standard or convertible reservations.
+     */
+    OfferingClass?: OfferingClass;
+  }
   export type Entity = string;
   export type ErrorMessage = string;
   export type Estimated = boolean;
   export interface Expression {
     /**
-     * Return results that match either Dimension.
+     * Return results that match either Dimension object.
      */
     Or?: Expressions;
     /**
@@ -142,7 +191,7 @@ declare namespace CostExplorer {
      */
     And?: Expressions;
     /**
-     * Return results that don't match Dimension.
+     * Return results that don't match a Dimension object.
      */
     Not?: Expression;
     /**
@@ -155,6 +204,8 @@ declare namespace CostExplorer {
     Tags?: TagValues;
   }
   export type Expressions = Expression[];
+  export type GenericBoolean = boolean;
+  export type GenericString = string;
   export interface GetCostAndUsageRequest {
     /**
      * Sets the start and end dates for retrieving AWS costs. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01.
@@ -165,15 +216,15 @@ declare namespace CostExplorer {
      */
     Granularity?: Granularity;
     /**
-     * Filters AWS costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression. 
+     * Filters AWS costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression. 
      */
     Filter?: Expression;
     /**
-     * Which metrics are returned in the query. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values are BlendedCost, UnblendedCost, and UsageQuantity.  If you return the UsageQuantity metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate usageQuantity across all of EC2, the results aren't meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful UsageQuantity metrics, filter by UsageType or UsageTypeGroups.  
+     * Which metrics are returned in the query. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values are BlendedCost, UnblendedCost, and UsageQuantity.  If you return the UsageQuantity metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate usageQuantity across all of EC2, the results aren't meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful UsageQuantity metrics, filter by UsageType or UsageTypeGroups.    Metrics is required for GetCostAndUsage requests.
      */
     Metrics?: MetricNames;
     /**
-     * You can group AWS costs using up to two different groups, either dimensions, tag keys, or both. When you group by tag key, you get all tag values, including empty strings. Valid values are AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY, and USAGE_TYPE.
+     * You can group AWS costs using up to two different groups, either dimensions, tag keys, or both. When you group by tag key, you get all tag values, including empty strings. Valid values are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY, and USAGE_TYPE.
      */
     GroupBy?: GroupDefinitions;
     /**
@@ -187,11 +238,11 @@ declare namespace CostExplorer {
      */
     NextPageToken?: NextPageToken;
     /**
-     * The groups specified by the the Filter or GroupBy parameters in the request.
+     * The groups that are specified by the Filter or GroupBy parameters in the request.
      */
     GroupDefinitions?: GroupDefinitions;
     /**
-     * The time period covered by the results in the response.
+     * The time period that is covered by the results in the response.
      */
     ResultsByTime?: ResultsByTime;
   }
@@ -205,11 +256,11 @@ declare namespace CostExplorer {
      */
     TimePeriod: DateInterval;
     /**
-     * The name of the dimension. Each Dimensionsis available for different a Context. For more information, see Context.
+     * The name of the dimension. Each Dimension is available for different a Context. For more information, see Context.
      */
     Dimension: Dimension;
     /**
-     * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization action. If the context is set to COST_AND_USAGE, the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to CostAndUsage, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include: On Demand Instances and Standard Reserved Instances   SERVICE - The AWS service such as DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues action includes a unit attribute, examples of which include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this action includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account   PLATFORM - The operating system. Examples are Windows or Linux.   REGION - The AWS region.   SCOPE - The scope of a reserved instance (RI). Values are regional or a single availability zone.   TENANCY - The tenancy of a resource. Examples are shared or dedicated.  
+     * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization operation. If the context is set to COST_AND_USAGE the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to CostAndUsage, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   INSTANCE_TYPE - The type of instance. An example is an EC2 m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute, examples of which include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   INSTANCE_TYPE - The type of instance. An example is an EC2 m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The specific combination of operating system, license model, and software on an instance. For example, a Windows instance with SQL Server Web and no license, or a Red Hat Enterprise Linux instance.   REGION - The AWS Region.   SCOPE - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TENANCY - The tenancy of a resource. Examples are shared or dedicated.  
      */
     Context?: Context;
     /**
@@ -219,7 +270,7 @@ declare namespace CostExplorer {
   }
   export interface GetDimensionValuesResponse {
     /**
-     * The filters that you used to filter your request. Some dimensions are available only for a specific context: If you set the context to CostAndUsage, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include: On Demand Instances and Standard Reserved Instances   SERVICE - The AWS service such as DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues action includes a unit attribute, examples of which include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this action includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account   PLATFORM - The operating system. Examples are Windows or Linux.   REGION - The AWS region.   SCOPE - The scope of a reserved instance (RI). Values are regional or a single availability zone.   TENANCY - The tenancy of a resource. Examples are shared or dedicated.  
+     * The filters that you used to filter your request. Some dimensions are available only for a specific context: If you set the context to CostAndUsage, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   INSTANCE_TYPE - The type of instance. An example is an EC2 m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute, examples of which include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   INSTANCE_TYPE - The type of instance. An example is an EC2 m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The specific combination of operating system, license model, and software on an instance. For example, a Windows instance with SQL Server Web and no license, or a Red Hat Enterprise Linux instance.   REGION - The AWS Region.   SCOPE - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TENANCY - The tenancy of a resource. Examples are shared or dedicated.  
      */
     DimensionValues: DimensionValuesWithAttributesList;
     /**
@@ -237,11 +288,11 @@ declare namespace CostExplorer {
   }
   export interface GetReservationCoverageRequest {
     /**
-     * The start and end dates of the period for which you want to retrieve data about reservation coverage. You can retrieve data for a maximum of 13 months-the last 12 months and the current month. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01. 
+     * The start and end dates of the period for which you want to retrieve data about reservation coverage. You can retrieve data for a maximum of 13 months: the last 12 months and the current month. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01. 
      */
     TimePeriod: DateInterval;
     /**
-     * You can group the data by the following attributes.    AZ   INSTANCE_TYPE   LINKED_ACCOUNT   PLATFORM   REGION   TENANCY  
+     * You can group the data by the following attributes:   AZ   INSTANCE_TYPE   LINKED_ACCOUNT   PLATFORM   REGION   TENANCY  
      */
     GroupBy?: GroupDefinitions;
     /**
@@ -249,7 +300,7 @@ declare namespace CostExplorer {
      */
     Granularity?: Granularity;
     /**
-     * Filters utilization data by dimensions. You can filter by the following dimensions.   AZ   INSTANCE_TYPE   LINKED_ACCOUNT   PLATFORM   REGION   TENANCY    GetReservationCoverage uses the same Expression object as the other operations, but only AND is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR'd together.
+     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   INSTANCE_TYPE   LINKED_ACCOUNT   PLATFORM   REGION   TENANCY    GetReservationCoverage uses the same  Expression  object as the other operations, but only AND is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR'd together.
      */
     Filter?: Expression;
     /**
@@ -263,11 +314,63 @@ declare namespace CostExplorer {
      */
     CoveragesByTime: CoveragesByTime;
     /**
-     * The total amount of instance usage covered by a reservation.
+     * The total amount of instance usage that is covered by a reservation.
      */
     Total?: Coverage;
     /**
      * The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     */
+    NextPageToken?: NextPageToken;
+  }
+  export interface GetReservationPurchaseRecommendationRequest {
+    /**
+     * The account ID that is associated with the recommendation. 
+     */
+    AccountId?: GenericString;
+    /**
+     * The specific service that you want recommendations for.
+     */
+    Service: GenericString;
+    /**
+     * The account scope that you want recommendations for. The only valid value is Payer. This means that AWS includes the master account and any member accounts when it calculates its recommendations.
+     */
+    AccountScope?: AccountScope;
+    /**
+     * The number of previous days that you want AWS to consider when it calculates your recommendations.
+     */
+    LookbackPeriodInDays?: LookbackPeriodInDays;
+    /**
+     * The reservation term that you want recommendations for.
+     */
+    TermInYears?: TermInYears;
+    /**
+     * The reservation purchase option that you want recommendations for.
+     */
+    PaymentOption?: PaymentOption;
+    /**
+     * The specific service, such as EC2, that you want recommendations for.
+     */
+    ServiceSpecification?: ServiceSpecification;
+    /**
+     * The number of recommendations that you want returned in a single response object.
+     */
+    PageSize?: NonNegativeInteger;
+    /**
+     * The pagination token that indicates the next set of results that you want to retrieve.
+     */
+    NextPageToken?: NextPageToken;
+  }
+  export interface GetReservationPurchaseRecommendationResponse {
+    /**
+     * Information about this specific recommendation call, such as the time stamp for when Cost Explorer generated this recommendation.
+     */
+    Metadata?: ReservationPurchaseRecommendationMetadata;
+    /**
+     * Recommendations for reservations to purchase.
+     */
+    Recommendations?: ReservationPurchaseRecommendations;
+    /**
+     * The pagination token for the next set of retrievable results.
      */
     NextPageToken?: NextPageToken;
   }
@@ -285,7 +388,7 @@ declare namespace CostExplorer {
      */
     Granularity?: Granularity;
     /**
-     * Filters utilization data by using different dimensions. GetReservationUtilization uses the same Expression object as the other operations, but only AND is supported among each dimension, and nesting is supported up to only one level deep. If there are multiple values for a dimension, they are OR'd together.
+     * Filters utilization data by using different dimensions. GetReservationUtilization uses the same  Expression  object as the other operations, but only AND is supported among each dimension, and nesting is supported to only one level deep. If there are multiple values for a dimension, they are OR'd together.
      */
     Filter?: Expression;
     /**
@@ -346,11 +449,11 @@ declare namespace CostExplorer {
   export type Granularity = "DAILY"|"MONTHLY"|string;
   export interface Group {
     /**
-     * The keys included in this group.
+     * The keys that are included in this group.
      */
     Keys?: Keys;
     /**
-     * The metrics included in this group.
+     * The metrics that are included in this group.
      */
     Metrics?: Metrics;
   }
@@ -368,8 +471,15 @@ declare namespace CostExplorer {
   export type GroupDefinitionType = "DIMENSION"|"TAG"|string;
   export type GroupDefinitions = GroupDefinition[];
   export type Groups = Group[];
+  export interface InstanceDetails {
+    /**
+     * The EC2 instances that AWS recommends that you purchase.
+     */
+    EC2InstanceDetails?: EC2InstanceDetails;
+  }
   export type Key = string;
   export type Keys = Key[];
+  export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string;
   export type MetricAmount = string;
   export type MetricName = string;
   export type MetricNames = MetricName[];
@@ -386,8 +496,11 @@ declare namespace CostExplorer {
   }
   export type Metrics = {[key: string]: MetricValue};
   export type NextPageToken = string;
+  export type NonNegativeInteger = number;
+  export type OfferingClass = "STANDARD"|"CONVERTIBLE"|string;
   export type OnDemandHours = string;
   export type PageSize = number;
+  export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|string;
   export type PurchasedHours = string;
   export interface ReservationAggregates {
     /**
@@ -395,7 +508,7 @@ declare namespace CostExplorer {
      */
     UtilizationPercentage?: UtilizationPercentage;
     /**
-     * How many RI hours you purchased.
+     * How many RI hours that you purchased.
      */
     PurchasedHours?: PurchasedHours;
     /**
@@ -420,6 +533,136 @@ declare namespace CostExplorer {
   export type ReservationCoverageGroups = ReservationCoverageGroup[];
   export type ReservationGroupKey = string;
   export type ReservationGroupValue = string;
+  export interface ReservationPurchaseRecommendation {
+    /**
+     * The account scope that AWS recommends that you purchase this instance for. For example, you can purchase this reservation for an entire organization in AWS Organizations.
+     */
+    AccountScope?: AccountScope;
+    /**
+     * How many days of previous usage that AWS takes into consideration when making this recommendation.
+     */
+    LookbackPeriodInDays?: LookbackPeriodInDays;
+    /**
+     * The term of the reservation that you want recommendations for, in years.
+     */
+    TermInYears?: TermInYears;
+    /**
+     * The payment option for the reservation. For example, AllUpfront or NoUpfront.
+     */
+    PaymentOption?: PaymentOption;
+    /**
+     * Hardware specifications for the service that you want recommendations for.
+     */
+    ServiceSpecification?: ServiceSpecification;
+    /**
+     * Details about the recommended purchases.
+     */
+    RecommendationDetails?: ReservationPurchaseRecommendationDetails;
+    /**
+     * A summary about the recommended purchase.
+     */
+    RecommendationSummary?: ReservationPurchaseRecommendationSummary;
+  }
+  export interface ReservationPurchaseRecommendationDetail {
+    /**
+     * Details about the instances that AWS recommends that you purchase.
+     */
+    InstanceDetails?: InstanceDetails;
+    /**
+     * The number of instances that AWS recommends that you purchase.
+     */
+    RecommendedNumberOfInstancesToPurchase?: GenericString;
+    /**
+     * The number of normalized units that AWS recommends that you purchase.
+     */
+    RecommendedNormalizedUnitsToPurchase?: GenericString;
+    /**
+     * The minimum number of instances that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     */
+    MinimumNumberOfInstancesUsedPerHour?: GenericString;
+    /**
+     * The minimum number of hours that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     */
+    MinimumNormalizedUnitsUsedPerHour?: GenericString;
+    /**
+     * The maximum number of instances that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     */
+    MaximumNumberOfInstancesUsedPerHour?: GenericString;
+    /**
+     * The maximum number of normalized units that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     */
+    MaximumNormalizedUnitsUsedPerHour?: GenericString;
+    /**
+     * The average number of instances that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     */
+    AverageNumberOfInstancesUsedPerHour?: GenericString;
+    /**
+     * The average number of normalized units that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     */
+    AverageNormalizedUnitsUsedPerHour?: GenericString;
+    /**
+     * The average utilization of your instances. AWS uses this to calculate your recommended reservation purchases.
+     */
+    AverageUtilization?: GenericString;
+    /**
+     * How long AWS estimates that it takes for this instance to start saving you money, in months.
+     */
+    EstimatedBreakEvenInMonths?: GenericString;
+    /**
+     * The currency code that AWS used to calculate the costs for this instance.
+     */
+    CurrencyCode?: GenericString;
+    /**
+     * How much AWS estimates that this specific recommendation could save you in a month.
+     */
+    EstimatedMonthlySavingsAmount?: GenericString;
+    /**
+     * How much AWS estimates that this specific recommendation could save you in a month, as a percentage of your overall costs.
+     */
+    EstimatedMonthlySavingsPercentage?: GenericString;
+    /**
+     * How much AWS estimates that you spend on On-Demand Instances in a month.
+     */
+    EstimatedMonthlyOnDemandCost?: GenericString;
+    /**
+     * How much AWS estimates that you spent on Reserved Instances during the specified historical period.
+     */
+    EstimatedReservationCostForLookbackPeriod?: GenericString;
+    /**
+     * How much purchasing this instance costs you upfront.
+     */
+    UpfrontCost?: GenericString;
+    /**
+     * How much purchasing this instance costs you on a monthly basis.
+     */
+    RecurringStandardMonthlyCost?: GenericString;
+  }
+  export type ReservationPurchaseRecommendationDetails = ReservationPurchaseRecommendationDetail[];
+  export interface ReservationPurchaseRecommendationMetadata {
+    /**
+     * The ID for this specific recommendation.
+     */
+    RecommendationId?: GenericString;
+    /**
+     * The time stamp for when AWS made this recommendation.
+     */
+    GenerationTimestamp?: GenericString;
+  }
+  export interface ReservationPurchaseRecommendationSummary {
+    /**
+     * The total amount that AWS estimates that this recommendation could save you in a month.
+     */
+    TotalEstimatedMonthlySavingsAmount?: GenericString;
+    /**
+     * The total amount that AWS estimates that this recommendation could save you in a month, as a percentage of your costs.
+     */
+    TotalEstimatedMonthlySavingsPercentage?: GenericString;
+    /**
+     * The currency code used for this recommendation.
+     */
+    CurrencyCode?: GenericString;
+  }
+  export type ReservationPurchaseRecommendations = ReservationPurchaseRecommendation[];
   export interface ReservationUtilizationGroup {
     /**
      * The key for a specific RI attribute.
@@ -454,12 +697,18 @@ declare namespace CostExplorer {
      */
     Groups?: Groups;
     /**
-     * Whether or not this result is estimated.
+     * Whether this result is estimated.
      */
     Estimated?: Estimated;
   }
   export type ResultsByTime = ResultByTime[];
   export type SearchString = string;
+  export interface ServiceSpecification {
+    /**
+     * The EC2 hardware specifications that you want AWS to provide recommendations for.
+     */
+    EC2Specification?: EC2Specification;
+  }
   export type TagKey = string;
   export type TagList = Entity[];
   export interface TagValues {
@@ -472,6 +721,7 @@ declare namespace CostExplorer {
      */
     Values?: Values;
   }
+  export type TermInYears = "ONE_YEAR"|"THREE_YEARS"|string;
   export type TotalActualHours = string;
   export type TotalRunningHours = string;
   export type UnusedHours = string;

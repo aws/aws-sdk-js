@@ -28,12 +28,12 @@
       },
       "errors": [
         {
-          "shape": "BadRequestException",
-          "documentation": "This request was invalid."
-        },
-        {
           "shape": "UnprocessableEntityException",
           "documentation": "The Channel failed validation and could not be created."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
         },
         {
           "shape": "InternalServerErrorException",
@@ -672,12 +672,12 @@
       },
       "errors": [
         {
-          "shape": "BadRequestException",
-          "documentation": "This request was invalid."
-        },
-        {
           "shape": "UnprocessableEntityException",
           "documentation": "The channel configuration failed validation and could not be updated."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
         },
         {
           "shape": "InternalServerErrorException",
@@ -701,6 +701,98 @@
         }
       ],
       "documentation": "Updates a channel."
+    },
+    "UpdateInput": {
+      "name": "UpdateInput",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/prod/inputs/{inputId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateInputRequest"
+      },
+      "output": {
+        "shape": "UpdateInputResponse",
+        "documentation": "The input update is successfully initiated."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request to update the input was invalid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal Service Error"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "The requester does not have permission to update an input."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad Gateway Error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "The input was not found."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The input was unable to be updated at this time due to an issue with input resources."
+        }
+      ],
+      "documentation": "Updates an input."
+    },
+    "UpdateInputSecurityGroup": {
+      "name": "UpdateInputSecurityGroup",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/prod/inputSecurityGroups/{inputSecurityGroupId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateInputSecurityGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateInputSecurityGroupResponse",
+        "documentation": "Successfully initiated the update of the Input Security Group."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request to update the Input Security Group was invalid"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal Server Error"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "The requester does not have permission to update an Input Security Group"
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad Gateway Error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "The Input Security Group was not found."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The Input Security Group was unable to be updated due to an issue with input security group resources."
+        }
+      ],
+      "documentation": "Update an Input Security Group's Whilelists."
     }
   },
   "shapes": {
@@ -2383,6 +2475,16 @@
           "shape": "__string",
           "locationName": "id",
           "documentation": "The Id of the Input Security Group"
+        },
+        "Inputs": {
+          "shape": "__listOf__string",
+          "locationName": "inputs",
+          "documentation": "The list of inputs currently using this Input Security Group."
+        },
+        "State": {
+          "shape": "InputSecurityGroupState",
+          "locationName": "state",
+          "documentation": "The current state of the Input Security Group."
         },
         "WhitelistRules": {
           "shape": "__listOfInputWhitelistRule",
@@ -4282,6 +4384,16 @@
           "locationName": "id",
           "documentation": "The Id of the Input Security Group"
         },
+        "Inputs": {
+          "shape": "__listOf__string",
+          "locationName": "inputs",
+          "documentation": "The list of inputs currently using this Input Security Group."
+        },
+        "State": {
+          "shape": "InputSecurityGroupState",
+          "locationName": "state",
+          "documentation": "The current state of the Input Security Group."
+        },
         "WhitelistRules": {
           "shape": "__listOfInputWhitelistRule",
           "locationName": "whitelistRules",
@@ -4289,6 +4401,16 @@
         }
       },
       "documentation": "An Input Security Group"
+    },
+    "InputSecurityGroupState": {
+      "type": "string",
+      "enum": [
+        "IDLE",
+        "IN_USE",
+        "UPDATING",
+        "DELETED"
+      ],
+      "documentation": "Placeholder documentation for InputSecurityGroupState"
     },
     "InputSecurityGroupWhitelistRequest": {
       "type": "structure",
@@ -4462,7 +4584,7 @@
         "Cidr": {
           "shape": "__string",
           "locationName": "cidr",
-          "documentation": "The IPv4 CIDR to whitelist"
+          "documentation": "The IPv4 CIDR to whitelist."
         }
       },
       "documentation": "An IPv4 CIDR to whitelist."
@@ -6085,6 +6207,10 @@
           "locationName": "encoderSettings",
           "documentation": "The encoder settings for this channel."
         },
+        "InputAttachments": {
+          "shape": "__listOfInputAttachment",
+          "locationName": "inputAttachments"
+        },
         "InputSpecification": {
           "shape": "InputSpecification",
           "locationName": "inputSpecification",
@@ -6121,6 +6247,10 @@
           "shape": "EncoderSettings",
           "locationName": "encoderSettings",
           "documentation": "The encoder settings for this channel."
+        },
+        "InputAttachments": {
+          "shape": "__listOfInputAttachment",
+          "locationName": "inputAttachments"
         },
         "InputSpecification": {
           "shape": "InputSpecification",
@@ -6162,6 +6292,127 @@
         }
       },
       "documentation": "The updated channel's description."
+    },
+    "UpdateInput": {
+      "type": "structure",
+      "members": {
+        "Destinations": {
+          "shape": "__listOfInputDestinationRequest",
+          "locationName": "destinations",
+          "documentation": "Destination settings for PUSH type inputs."
+        },
+        "InputSecurityGroups": {
+          "shape": "__listOf__string",
+          "locationName": "inputSecurityGroups",
+          "documentation": "A list of security groups referenced by IDs to attach to the input."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "Name of the input."
+        },
+        "Sources": {
+          "shape": "__listOfInputSourceRequest",
+          "locationName": "sources",
+          "documentation": "The source URLs for a PULL-type input. Every PULL type input needs\nexactly two source URLs for redundancy.\nOnly specify sources for PULL type Inputs. Leave Destinations empty.\n"
+        }
+      },
+      "documentation": "Placeholder documentation for UpdateInput"
+    },
+    "UpdateInputRequest": {
+      "type": "structure",
+      "members": {
+        "Destinations": {
+          "shape": "__listOfInputDestinationRequest",
+          "locationName": "destinations",
+          "documentation": "Destination settings for PUSH type inputs."
+        },
+        "InputId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "inputId",
+          "documentation": "Unique ID of the input."
+        },
+        "InputSecurityGroups": {
+          "shape": "__listOf__string",
+          "locationName": "inputSecurityGroups",
+          "documentation": "A list of security groups referenced by IDs to attach to the input."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "Name of the input."
+        },
+        "Sources": {
+          "shape": "__listOfInputSourceRequest",
+          "locationName": "sources",
+          "documentation": "The source URLs for a PULL-type input. Every PULL type input needs\nexactly two source URLs for redundancy.\nOnly specify sources for PULL type Inputs. Leave Destinations empty.\n"
+        }
+      },
+      "documentation": "A request to update an input.",
+      "required": [
+        "InputId"
+      ]
+    },
+    "UpdateInputResponse": {
+      "type": "structure",
+      "members": {
+        "Input": {
+          "shape": "Input",
+          "locationName": "input"
+        }
+      },
+      "documentation": "Placeholder documentation for UpdateInputResponse"
+    },
+    "UpdateInputResultModel": {
+      "type": "structure",
+      "members": {
+        "Input": {
+          "shape": "Input",
+          "locationName": "input"
+        }
+      },
+      "documentation": "Placeholder documentation for UpdateInputResultModel"
+    },
+    "UpdateInputSecurityGroupRequest": {
+      "type": "structure",
+      "members": {
+        "InputSecurityGroupId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "inputSecurityGroupId",
+          "documentation": "The id of the Input Security Group to update."
+        },
+        "WhitelistRules": {
+          "shape": "__listOfInputWhitelistRuleCidr",
+          "locationName": "whitelistRules",
+          "documentation": "List of IPv4 CIDR addresses to whitelist"
+        }
+      },
+      "documentation": "The request to update some combination of the Input Security Group name and the IPv4 CIDRs the Input Security Group should allow.",
+      "required": [
+        "InputSecurityGroupId"
+      ]
+    },
+    "UpdateInputSecurityGroupResponse": {
+      "type": "structure",
+      "members": {
+        "SecurityGroup": {
+          "shape": "InputSecurityGroup",
+          "locationName": "securityGroup"
+        }
+      },
+      "documentation": "Placeholder documentation for UpdateInputSecurityGroupResponse"
+    },
+    "UpdateInputSecurityGroupResultModel": {
+      "type": "structure",
+      "members": {
+        "SecurityGroup": {
+          "shape": "InputSecurityGroup",
+          "locationName": "securityGroup"
+        }
+      },
+      "documentation": "Placeholder documentation for UpdateInputSecurityGroupResultModel"
     },
     "ValidationError": {
       "type": "structure",

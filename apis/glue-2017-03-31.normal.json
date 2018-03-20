@@ -2271,8 +2271,7 @@
       "type":"structure",
       "required":[
         "EndpointName",
-        "RoleArn",
-        "PublicKey"
+        "RoleArn"
       ],
       "members":{
         "EndpointName":{
@@ -3006,13 +3005,17 @@
           "shape":"GenericString",
           "documentation":"<p>The YARN endpoint address used by this DevEndpoint.</p>"
         },
+        "PrivateAddress":{
+          "shape":"GenericString",
+          "documentation":"<p>The private address used by this DevEndpoint.</p>"
+        },
         "ZeppelinRemoteSparkInterpreterPort":{
           "shape":"IntegerValue",
           "documentation":"<p>The Apache Zeppelin port for the remote Apache Spark interpreter.</p>"
         },
         "PublicAddress":{
           "shape":"GenericString",
-          "documentation":"<p>The public address used by this DevEndpoint.</p>"
+          "documentation":"<p>The public VPC address used by this DevEndpoint.</p>"
         },
         "Status":{
           "shape":"GenericString",

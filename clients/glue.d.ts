@@ -1266,7 +1266,7 @@ declare namespace Glue {
     /**
      * The public key to use for authentication.
      */
-    PublicKey: GenericString;
+    PublicKey?: GenericString;
     /**
      * The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
      */
@@ -1752,11 +1752,15 @@ declare namespace Glue {
      */
     YarnEndpointAddress?: GenericString;
     /**
+     * The private address used by this DevEndpoint.
+     */
+    PrivateAddress?: GenericString;
+    /**
      * The Apache Zeppelin port for the remote Apache Spark interpreter.
      */
     ZeppelinRemoteSparkInterpreterPort?: IntegerValue;
     /**
-     * The public address used by this DevEndpoint.
+     * The public VPC address used by this DevEndpoint.
      */
     PublicAddress?: GenericString;
     /**

@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.211.1-->
+<!--LATEST=2.212.1-->
 <!--ENTRYINSERT-->
+
+## 2.212.1
+* feature: CloudWatchEvents: Added SQS FIFO queue target support
+* feature: ConfigService: AWS Config adds support for BatchGetResourceConfig API, allowing you to batch-retrieve the current state of one or more of your resources.
+* feature: CostExplorer: This launch will allow customers to access their Amazon EC2 Reserved Instance (RI) purchase recommendations programmatically via the AWS Cost Explorer API. 
+* feature: ECS: Amazon ECS users can now mount a temporary volume in memory in containers and specify the shared memory that a container can use through the use of docker's 'tmpfs' and 'shm-size' features respectively. These fields can be specified under linuxParameters in ContainerDefinition in the Task Definition Template.
+* feature: Glue: API Updates for DevEndpoint: PublicKey is now optional for CreateDevEndpoint. The new DevEndpoint field PrivateAddress will be populated for DevEndpoints associated with a VPC.
+* feature: MediaLive: AWS Elemental MediaLive has added support for updating Inputs and Input Security Groups. You can update Input Security Groups at any time and it will update all channels using that Input Security Group. Inputs can be updated as long as they are not attached to a currently running channel.
 
 ## 2.211.1
 * bugfix: dependency: Pins ieee754 to 1.1.8 to avoid timestamp issue reported in issue #1977
