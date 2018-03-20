@@ -2369,7 +2369,7 @@ describe('AWS.S3', function() {
         s3 = new AWS.S3({responseChecksumAlgorithm: 'md5'});
         req = s3.getObject(params).build();
         headers = req.httpRequest.headers;
-        expect(headers).to.equal('append-md5');
+        expect(headers['x-amz-te']).to.equal('append-md5');
       });
 
       it('should not append md5 checksum header when set to undefined', function() {
@@ -2588,7 +2588,7 @@ describe('AWS.S3', function() {
           error = e;
           expect(error).to.not.be['null'];
           expect(error.code).to.equal('ValidationError');
-          expect(error.message).to.equal('Cannot validate response header: append-crc32c')
+          expect(error.message).to.equal('Cannot validate response header: append-crc32c, expect \'append-md5\'')
           done();
         });
         s.on('readable', function() {

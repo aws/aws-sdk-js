@@ -1154,7 +1154,7 @@ describe('AWS.Request', function() {
           resp.write(new Buffer(512 * 1024));
           resp.end();
         };
-        service.config.httpOptions.timeout = 5;
+        service.config.httpOptions.timeout = 4;
         request = service.makeRequest('mockMethod');
         s = request.createReadStream();
         s.on('error', function (e) {
