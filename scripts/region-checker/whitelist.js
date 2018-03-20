@@ -1,8 +1,8 @@
 var whitelist = {
     '/config.js': [
+        24,
         25,
-        26,
-        171
+        165
     ],
     '/credentials/cognito_identity_credentials.js': [
         78,
@@ -27,13 +27,13 @@ var whitelist = {
     '/services/s3.js': [
         68,
         69,
-        570,
-        572,
-        691,
-        702,
-        703,
-        704,
-        709
+        533,
+        535,
+        654,
+        665,
+        666,
+        667,
+        672
     ]
 };
 

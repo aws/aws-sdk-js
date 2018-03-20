@@ -2389,19 +2389,20 @@ describe('AWS.S3', function() {
   
       beforeEach(function() {
         responseData = new Uint8Array([116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 111, 141, 181, 153, 222, 152, 111, 171, 122, 33, 98, 91, 121, 22, 88, 156]);
-        s3 = new AWS.S3({disableTrailingChecksum: false});
+        s3 = new AWS.S3({responseChecksumAlgorithm: 'md5'});
         request = s3.getObject({
           Bucket: 'bucket',
           Key: 'key',
         });
       })
-  
-      it('should validate md5 checksum the strip checksum out of body', function() {
+
+      it('should validate md5 checksum the strip checksum out of body', function(done) {
         helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-md5', 'content-length': 27}, responseData);
         request.send(function(err, data) {
           expect(err).not.to.exist;
           expect(data.Body.toString('utf8')).to.equal('test string');
           expect(data.ContentLength).to.equal(11);
+          done();
         })
       })
   
