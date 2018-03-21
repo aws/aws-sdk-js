@@ -483,7 +483,7 @@
         "SpdxLicenseId" : {
           "shape" : "__string",
           "locationName" : "spdxLicenseId",
-          "documentation" : "<p>A valid identifier from <a href=\"\"https://spdx.org/licenses/\"\">https://spdx.org/licenses/</a>.</p>"
+          "documentation" : "<p>A valid identifier from <a href=\"https://spdx.org/licenses/\">https://spdx.org/licenses/</a>.</p>"
         }
       },
       "documentation" : "<p>Summary of details about the application.</p>",
@@ -542,7 +542,7 @@
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>"
         },
         "StackId" : {
           "shape" : "__string",
@@ -624,7 +624,7 @@
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
@@ -634,7 +634,7 @@
         "SpdxLicenseId" : {
           "shape" : "__string",
           "locationName" : "spdxLicenseId",
-          "documentation" : "<p>A valid identifier from <a href=\"\"https://spdx.org/licenses/\"\">https://spdx.org/licenses/</a>.</p>"
+          "documentation" : "<p>A valid identifier from <a href=\"https://spdx.org/licenses/\">https://spdx.org/licenses/</a>.</p>"
         },
         "TemplateBody" : {
           "shape" : "__string",
@@ -701,7 +701,7 @@
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
@@ -711,7 +711,7 @@
         "SpdxLicenseId" : {
           "shape" : "__string",
           "locationName" : "spdxLicenseId",
-          "documentation" : "<p>A valid identifier from <a href=\"\"https://spdx.org/licenses/\"\">https://spdx.org/licenses/</a>.</p>"
+          "documentation" : "<p>A valid identifier from <a href=\"https://spdx.org/licenses/\">https://spdx.org/licenses/</a>.</p>"
         },
         "TemplateBody" : {
           "shape" : "__string",
@@ -860,7 +860,7 @@
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
@@ -885,7 +885,7 @@
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>"
         },
         "StackName" : {
           "shape" : "__string",
@@ -913,7 +913,7 @@
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>"
         },
         "StackName" : {
           "shape" : "__string",
@@ -939,7 +939,7 @@
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>"
         },
         "StackId" : {
           "shape" : "__string",
@@ -1491,7 +1491,7 @@
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
@@ -1523,7 +1523,7 @@
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
