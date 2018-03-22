@@ -176,4 +176,701 @@
     });
   }
 
+  if (AWS.util.isNode()) {
+    describe('validate Trailing Checksum (Node)', function() {
+      var app;
+      var data;
+      var error;
+      var service;
+      var rawData;
+      var responseData;
+      var streamsApiVersion = AWS.HttpClient.streamsApiVersion;
+      var getport;
+      var server;
+      getport = function(cb, startport) {
+        var port, srv;
+        port = startport || 54321;
+        srv = require('net').createServer();
+        srv.on('error', function() {
+          return getport(cb, port + 1);
+        });
+        return srv.listen(port, function() {
+          srv.once('close', function() {
+            return cb(port);
+          });
+          return srv.close();
+        });
+      }
+      server = require('http').createServer(function(req, resp) {
+        return app(req, resp);
+      });
+
+      beforeEach(function(done) {
+        data = '';
+        error = null;
+        rawData = new Uint8Array([116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 111, 141, 181, 153, 222, 152, 111, 171, 122, 33, 98, 91, 121, 22, 88, 156]);
+        responseData = new require('buffer').Buffer(rawData);
+        // server.setTimeout(1);
+        app = function(req, resp) {
+          resp.writeHead(200, {
+            'x-amz-transfer-encoding': 'append-md5',
+            'content-length': 27,
+            'x-amz-content-range': 'bytes=0-11/12345'
+          });
+          resp.write(responseData);
+          return resp.end();
+        };
+        return getport(function(port) {
+          server.listen(port);
+          service = new helpers.MockService({
+            endpoint: 'http://localhost:' + port
+          });
+          done();
+        });
+      });
+
+      afterEach(function() {
+        AWS.HttpClient.streamsApiVersion = streamsApiVersion;
+        return server.close();
+      });
+
+      describe('in streaming mode', function () {
+        it('should validate md5 trailing checksum and chop off trailing checksum', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.be['null'];
+          });
+          s.on('readable', function() {
+            var chunk, e;
+            try {
+              chunk = s.read();
+              if (chunk) {
+                return data += chunk;
+              }
+            } catch (error1) {
+              e = error1;
+              return console.log(e.stack);
+            }
+          });
+          return s.on('end', function() {
+            expect(error).to.be['null'];
+            expect(data).to.equal('test string');
+            expect(request.response.httpResponse.headers['content-length']).to.equal(11);
+            expect(request.response.httpResponse.headers['content-range']).to.equal('bytes=0-11/12345');
+            done();
+          });
+        });
+
+        it('should raise error when hashing algorithm is not supported', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          app = function(req, resp) {
+            resp.writeHead(200, {
+              'x-amz-transfer-encoding': 'append-crc32c',
+              'content-length': 27,
+            });
+            resp.write(responseData);
+            return resp.end();
+          };
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.not.be['null'];
+            expect(error.code).to.equal('ValidationError');
+            expect(error.message).to.equal('Cannot validate response header: append-crc32c, expect \'append-md5\'');
+            done();
+          });
+          s.on('readable', function() {
+            var chunk, e;
+            try {
+              chunk = s.read();
+              if (chunk) {
+                return data += chunk;
+              }
+            } catch (error1) {
+              e = error1;
+              return console.log(e.stack);
+            }
+          });
+          s.on('end', function() {
+            expect(error).to.not.be['null'];
+          });
+        });
+
+        it('should raise error when checksum is invalid', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          responseData = new require('buffer').Buffer(rawData);
+          app = function(req, resp) {
+            resp.writeHead(200, {
+              'x-amz-transfer-encoding': 'append-md5',
+              'content-length': 27,
+            });
+            rawData[0] = 0;
+            responseData = new require('buffer').Buffer(rawData);
+            resp.write(responseData);
+            return resp.end();
+          };
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.not.be['null'];
+            expect(error.code).to.equal('ValidationError');
+            expect(error.message).to.equal('Response fails integrity check.')
+            done();
+          });
+          s.on('readable', function() {
+            var chunk, e;
+            try {
+              chunk = s.read();
+              if (chunk) {
+                return data += chunk;
+              }
+            } catch (error1) {
+              e = error1;
+              return console.log(e.stack);
+            }
+          });
+          s.on('end', function() {
+            expect(error).to.not.be['null'];
+          });
+        });
+  
+        it('do not support validating trailing checksum', function(done) {
+          AWS.HttpClient.streamsApiVersion = 1
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.be['null'];
+          });
+          s.on('data', function(dat) {
+            if(dat.length > 0) {
+              data += dat.toString();
+            }
+          });
+          s.on('end', function() {
+            expect(error).to.be['null'];
+            expect(data).to.equal(responseData.toString());
+            expect(request.response.httpResponse.headers['content-length']).to.equal('27');
+            done();
+          });
+        });
+      })
+
+      describe('in callback mode', function () {
+        it('should validate md5 trailing checksum and chop off trailing checksum', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          var request = service.makeRequest('mockMethod');
+          request.send(function(err, data) {
+            expect(err).to.be['null'];
+            expect(data).to.equal('test string');
+            expect(request.response.httpResponse.headers['content-length']).to.equal(11);
+            expect(request.response.httpResponse.headers['content-range']).to.equal('bytes=0-11/12345');
+            expect(request.response.retryCount).to.equal(0);
+            done();
+          })
+        });
+
+        it('should raise error when hashing algorithm is not supported', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          app = function(req, resp) {
+            resp.writeHead(200, {
+              'x-amz-transfer-encoding': 'append-crc32c',
+              'content-length': 27,
+            });
+            resp.write(responseData);
+            return resp.end();
+          };
+          var request = service.makeRequest('mockMethod')
+          request.send(function(err, data) {
+            expect(data).to.be['null'];
+            expect(err).to.not.be['null'];
+            expect(err.code).to.equal('ValidationError');
+            expect(err.message).to.equal('Cannot validate response header: append-crc32c, expect \'append-md5\'');
+            expect(request.response.retryCount).to.equal(3);
+            done();
+          })
+        });
+
+        it('should raise error when checksum is invalid', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          responseData = new require('buffer').Buffer(rawData);
+          app = function(req, resp) {
+            resp.writeHead(200, {
+              'x-amz-transfer-encoding': 'append-md5',
+              'content-length': 27,
+            });
+            rawData[0] = 0;
+            responseData = new require('buffer').Buffer(rawData);
+            resp.write(responseData);
+            return resp.end();
+          };
+          var request = service.makeRequest('mockMethod')
+          request.send(function(err, data) {
+            expect(data).to.be['null'];
+            expect(err).to.not.be['null'];
+            expect(err.code).to.equal('ValidationError');
+            expect(err.message).to.equal('Response fails integrity check.');
+            expect(request.response.retryCount).to.equal(3);
+            done();
+          });
+        });
+
+        it('should raise error when response is shorter than checksum', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          responseData = new require('buffer').Buffer(rawData);
+          app = function(req, resp) {
+            resp.writeHead(200, {
+              'x-amz-transfer-encoding': 'append-md5',
+              'content-length': 11,
+            });
+            rawData = rawData.slice(0, 11);
+            responseData = new require('buffer').Buffer(rawData);
+            resp.write(responseData);
+            return resp.end();
+          };
+          var request = service.makeRequest('mockMethod')
+          request.send(function(err, data) {
+            expect(data).to.be['null'];
+            expect(err).to.not.be['null'];
+            expect(err.code).to.equal('ValidationError');
+            expect(err.message).to.equal('Response fails integrity check.');
+            expect(request.response.retryCount).to.equal(3);
+            done();
+          });
+        });
+
+        it('do not support validating trailing checksum', function(done) {
+          AWS.HttpClient.streamsApiVersion = 1;
+          var request = service.makeRequest('mockMethod');
+          request.send(function(err, data) {
+            expect(err).to.be['null'];
+            expect(data).to.equal(responseData.toString());
+            expect(request.response.httpResponse.headers['content-length']).to.equal('27');
+            done();
+          });
+        });
+      })
+    })
+    
+    describe('validate content-length (Node)', function() {
+      var streamsApiVersion = AWS.HttpClient.streamsApiVersion;;
+      var app;
+      var data;
+      var error;
+      var service = new helpers.MockService;
+      var responseData;
+      var getport;
+      var server
+      var getport = function(cb, startport) {
+        var port, srv;
+        port = startport || 34567;
+        srv = require('net').createServer();
+        srv.on('error', function() {
+          return getport(cb, port + 1);
+        });
+        return srv.listen(port, function() {
+          srv.once('close', function() {
+            return cb(port);
+          });
+          return srv.close();
+        });
+      }
+      var server = require('http').createServer(function(req, resp) {
+        return app(req, resp);
+      });
+
+      beforeEach(function(done) {
+        data = '';
+        error = null;
+        responseData = new require('buffer').Buffer('test string');
+        // server.setTimeout(1);
+        app = function(req, resp) {
+          resp.writeHead(200, {'content-length': 11});
+          resp.end(responseData);
+        };
+        return getport(function(port) {
+          server.listen(port);
+          service = new helpers.MockService({
+            endpoint: 'http://localhost:' + port
+          });
+          done();
+        });
+      });
+
+      afterEach(function() {
+        AWS.HttpClient.streamsApiVersion = streamsApiVersion;
+        return server.close();
+      });
+
+      describe('in streaming mode', function () {
+        it ('should pass with correct content-length', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.be['null'];
+          });
+          s.on('readable', function() {
+            var chunk, e;
+            try {
+              chunk = s.read();
+              if (chunk) {
+                return data += chunk;
+              }
+            } catch (error1) {
+              e = error1;
+              return console.log(e.stack);
+            }
+          });
+          return s.on('end', function() {
+            expect(error).to.be['null'];
+            expect(data).to.equal('test string');
+            expect(request.response.httpResponse.headers['content-length']).to.equal('11');
+            done();
+          });
+        });
+
+        it ('should pass without content-length header', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          app = function(req, resp) {
+            resp.writeHead(200, {});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.be['null'];
+          });
+          s.on('readable', function() {
+            var chunk, e;
+            try {
+              chunk = s.read();
+              if (chunk) {
+                return data += chunk;
+              }
+            } catch (error1) {
+              e = error1;
+              return console.log(e.stack);
+            }
+          });
+          return s.on('end', function() {
+            expect(error).to.be['null'];
+            expect(data).to.equal('test string');
+            done();
+          });
+        });
+
+        it ('should raise error when content-lenth header is smaller than response, response truncated', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          app = function(req, resp) {
+            resp.writeHead(200, {'content-length': 10});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.not.be['null'];
+            expect(error.code).to.equal('NetworkingError');
+            expect(error.message).to.equal('Parse Error');
+            done();
+          });
+          s.on('readable', function() {
+            var chunk, e;
+            try {
+              chunk = s.read();
+              if (chunk) {
+                return data += chunk;
+              }
+            } catch (error1) {
+              e = error1;
+              return console.log(e.stack);
+            }
+          });
+          return s.on('end', function() {
+            expect(error).to.not.be['null'];
+            expect(data).to.equal('test strin');
+          });
+        });
+
+        it ('should raise error when content-lenth header is larger than response', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          app = function(req, resp) {
+            resp.writeHead(200, {'content-length': 12});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.not.be['null'];
+            expect(error.code).to.equal('StreamContentLengthMismatch');
+            expect(error.message).to.equal('Stream content length mismatch. Received 11 of 12 bytes.');
+            done();
+          });
+          s.on('readable', function() {
+            var chunk, e;
+            try {
+              chunk = s.read();
+              if (chunk) {
+                return data += chunk;
+              }
+            } catch (error1) {
+              e = error1;
+              return console.log(e.stack);
+            }
+          });
+          return s.on('end', function() {
+            expect(error).to.not.be['null'];
+            expect(data).to.equal('test string');
+          });
+        });
+
+        it ('should pass without content-length header(old stream api)', function(done) {
+          AWS.HttpClient.streamsApiVersion = 1;
+          app = function(req, resp) {
+            resp.writeHead(200, {});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.be['null'];
+          });
+          s.on('data', function(dat) {
+            if (dat) {
+              return data += dat;
+            }
+          });
+          return s.on('end', function() {
+            expect(error).to.be['null'];
+            expect(data).to.equal('test string');
+            done();
+          });
+        });
+
+        it ('should raise error when content-lenth header is smaller than response, response truncated(old stream api)', function(done) {
+          AWS.HttpClient.streamsApiVersion = 1;
+          app = function(req, resp) {
+            resp.writeHead(200, {'content-length': 10});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.not.be['null'];
+            expect(error.code).to.equal('NetworkingError');
+            expect(error.message).to.equal('Parse Error');
+            done();
+          });
+          s.on('data', function(dat) {
+            if (dat) {
+              return data += dat;
+            }
+          });
+          return s.on('end', function() {
+            expect(error).to.not.be['null'];
+            expect(data).to.equal('test strin');
+          });
+        });
+
+        it ('should raise error when content-lenth header is larger than response', function(done) {
+          AWS.HttpClient.streamsApiVersion = 1;
+          app = function(req, resp) {
+            resp.writeHead(200, {'content-length': 12});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          var s = request.createReadStream();
+          s.on('error', function(e) {
+            error = e;
+            expect(error).to.not.be['null'];
+            expect(error.code).to.equal('StreamContentLengthMismatch');
+            expect(error.message).to.equal('Stream content length mismatch. Received 11 of 12 bytes.');
+            done();
+          });
+          s.on('data', function(dat) {
+            if (dat) {
+              return data += dat;
+            }
+          });
+          return s.on('end', function() {
+            expect(error).to.not.be['null'];
+            expect(data).to.equal('test string');
+          });
+        });
+      });
+
+      describe('in callback mode', function () {
+        it ('should pass with correct content-length', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          var request = service.makeRequest('mockMethod')
+          request.send(function(err, dat) {
+            error = err;
+            data = dat;
+            expect(error).to.be['null'];
+            expect(data).to.equal('test string');
+            expect(request.response.httpResponse.headers['content-length']).to.equal('11');
+            expect(request.response.retryCount).to.equal(0);
+            done();
+          });
+        });
+
+        it ('should pass without content-length header', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          app = function(req, resp) {
+            resp.writeHead(200, {});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          request.send(function(err, dat) {
+            error = err;
+            data = dat;
+            expect(error).to.be['null'];
+            expect(data).to.equal('test string');
+            expect(request.response.retryCount).to.equal(0);
+            done();
+          });
+        });
+
+        it ('should raise error when content-lenth header is smaller than response, response truncated', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          app = function(req, resp) {
+            resp.writeHead(200, {'content-length': 10});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          request.send(function(err, dat) {
+            error = err;
+            data = dat;
+            expect(error).to.not.be['null'];
+            expect(error.code).to.equal('NetworkingError');
+            expect(error.message).to.equal('Parse Error');
+            expect(data).to.be['null'];
+            expect(request.response.retryCount).to.equal(3);
+            done();
+          })
+        });
+
+        it ('should raise error when content-lenth header is larger than response', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          app = function(req, resp) {
+            resp.writeHead(200, {'content-length': 12});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          request.send(function(err, dat) {
+            error = err; data = dat;
+            expect(error).to.not.be['null'];
+            expect(error.code).to.equal('StreamContentLengthMismatch');
+            expect(error.message).to.equal('Stream content length mismatch. Received 11 of 12 bytes.');
+            expect(data).to.be['null'];
+            expect(request.response.retryCount).to.equal(3);
+            done();
+          })
+        });
+
+        it ('should pass with correct content-length(old stream api)', function(done) {
+          AWS.HttpClient.streamsApiVersion = 1;
+          var request = service.makeRequest('mockMethod')
+          request.send(function(err, dat) {
+            error = err; data = dat;
+            expect(error).to.be['null'];
+            expect(data).to.equal('test string');
+            expect(request.response.httpResponse.headers['content-length']).to.equal('11');
+            done();
+          });
+        });
+
+        it ('should pass without content-length header(old stream api)', function(done) {
+          AWS.HttpClient.streamsApiVersion = 1;
+          app = function(req, resp) {
+            resp.writeHead(200, {});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          request.send(function(err, dat) {
+            error = err; data = dat;
+            expect(error).to.be['null'];
+            expect(data).to.equal('test string');
+            done();
+          });
+        });
+
+        if (AWS.HttpClient.streamsApiVersion === 1) {
+          it ('will not raise error when content-lenth header is smaller than response, response truncated(old stream api)', function(done) {
+            app = function(req, resp) {
+              resp.writeHead(200, {'content-length': 10});
+              return resp.end(responseData);
+            };
+            var request = service.makeRequest('mockMethod')
+            request.send(function(err, dat) {
+              error = err; data = dat;
+              expect(error).to.be['null'];
+              expect(data).to.equal('test strin')
+              done();
+            })
+          });
+        }        
+
+        it ('should raise error when content-lenth header is larger than response(old stream api)', function(done) {
+          AWS.HttpClient.streamsApiVersion = 1;
+          app = function(req, resp) {
+            resp.writeHead(200, {'content-length': 12});
+            return resp.end(responseData);
+          };
+          var request = service.makeRequest('mockMethod')
+          request.send(function(err, dat) {
+            error = err; data = dat;
+            expect(error).to.not.be['null'];
+            expect(error.code).to.equal('StreamContentLengthMismatch');
+            expect(error.message).to.equal('Stream content length mismatch. Received 11 of 12 bytes.');
+            expect(data).to.be['null'];
+            expect(request.response.retryCount).to.equal(3);
+            done();
+          })
+        });
+      })
+    });
+  }
+
 }).call(this);
