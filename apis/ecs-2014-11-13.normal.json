@@ -1114,6 +1114,10 @@
           "shape":"LoadBalancers",
           "documentation":"<p>A load balancer object representing the load balancer to use with your service. Currently, you are limited to one load balancer or target group per service. After you create a service, the load balancer name or target group ARN, container name, and container port specified in the service definition are immutable.</p> <p>For Classic Load Balancers, this object must contain the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer. When a task from this service is placed on a container instance, the container instance is registered with the load balancer specified here.</p> <p>For Application Load Balancers and Network Load Balancers, this object must contain the load balancer target group ARN, the container name (as it appears in a container definition), and the container port to access from the load balancer. When a task from this service is placed on a container instance, the container instance and port combination is registered as a target in the target group specified here.</p>"
         },
+        "serviceRegistries":{
+          "shape":"ServiceRegistries",
+          "documentation":"<p>The details of the service discovery registries you want to assign to this service. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguideservice-discovery.html\">Service Discovery</a>.</p>"
+        },
         "desiredCount":{
           "shape":"BoxedInteger",
           "documentation":"<p>The number of instantiations of the specified task definition to place and keep running on your cluster.</p>"
@@ -2471,6 +2475,10 @@
           "shape":"LoadBalancers",
           "documentation":"<p>A list of Elastic Load Balancing load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.</p>"
         },
+        "serviceRegistries":{
+          "shape":"ServiceRegistries",
+          "documentation":"<p/>"
+        },
         "status":{
           "shape":"String",
           "documentation":"<p>The status of the service. The valid values are <code>ACTIVE</code>, <code>DRAINING</code>, or <code>INACTIVE</code>.</p>"
@@ -2573,6 +2581,24 @@
       },
       "documentation":"<p>The specified service could not be found. You can view your available services with <a>ListServices</a>. Amazon ECS services are cluster-specific and region-specific.</p>",
       "exception":true
+    },
+    "ServiceRegistries":{
+      "type":"list",
+      "member":{"shape":"ServiceRegistry"}
+    },
+    "ServiceRegistry":{
+      "type":"structure",
+      "members":{
+        "registryArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Service Registry. The currently supported service registry is Amazon Route 53 Auto Naming Service. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_autonaming_Service.html\">Service</a>.</p>"
+        },
+        "port":{
+          "shape":"BoxedInteger",
+          "documentation":"<p>The port value used if your Service Discovery service specified an SRV record.</p>"
+        }
+      },
+      "documentation":"<p>Details of the service registry.</p>"
     },
     "Services":{
       "type":"list",

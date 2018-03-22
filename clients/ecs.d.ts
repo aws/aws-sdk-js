@@ -696,6 +696,10 @@ declare namespace ECS {
      */
     loadBalancers?: LoadBalancers;
     /**
+     * The details of the service discovery registries you want to assign to this service. For more information, see Service Discovery.
+     */
+    serviceRegistries?: ServiceRegistries;
+    /**
      * The number of instantiations of the specified task definition to place and keep running on your cluster.
      */
     desiredCount: BoxedInteger;
@@ -1656,6 +1660,10 @@ declare namespace ECS {
      */
     loadBalancers?: LoadBalancers;
     /**
+     * 
+     */
+    serviceRegistries?: ServiceRegistries;
+    /**
      * The status of the service. The valid values are ACTIVE, DRAINING, or INACTIVE.
      */
     status?: String;
@@ -1735,6 +1743,17 @@ declare namespace ECS {
     message?: String;
   }
   export type ServiceEvents = ServiceEvent[];
+  export type ServiceRegistries = ServiceRegistry[];
+  export interface ServiceRegistry {
+    /**
+     * The Amazon Resource Name (ARN) of the Service Registry. The currently supported service registry is Amazon Route 53 Auto Naming Service. For more information, see Service.
+     */
+    registryArn?: String;
+    /**
+     * The port value used if your Service Discovery service specified an SRV record.
+     */
+    port?: BoxedInteger;
+  }
   export type Services = Service[];
   export type SortOrder = "ASC"|"DESC"|string;
   export interface StartTaskRequest {

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.212.1-->
+<!--LATEST=2.213.1-->
 <!--ENTRYINSERT-->
+
+## 2.213.1
+* feature: AppStream: Feedback URL allows admins to provide a feedback link or a survey link for collecting user feedback while streaming sessions. When a feedback link is provided, streaming users will see a "Send Feedback" choice in their streaming session toolbar. On selecting this choice, user will be redirected to the link provided in a new browser tab. If a feedback link is not provided, users will not see the "Send Feedback" option. 
+* feature: CodeBuild: Adding support for branch filtering when using webhooks with AWS CodeBuild. 
+* feature: ECS: Amazon Elastic Container Service (ECS) now includes integrated Service Discovery using Route 53 Auto Naming. Customers can now specify a Route 53 Auto Naming service as part of an ECS service. ECS will register task IPs with Route 53, making them available via DNS in your VPC.
 
 ## 2.212.1
 * feature: CloudWatchEvents: Added SQS FIFO queue target support

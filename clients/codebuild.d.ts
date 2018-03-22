@@ -131,6 +131,14 @@ declare class CodeBuild extends Service {
    * Changes the settings of a build project.
    */
   updateProject(callback?: (err: AWSError, data: CodeBuild.Types.UpdateProjectOutput) => void): Request<CodeBuild.Types.UpdateProjectOutput, AWSError>;
+  /**
+   *  Updates the webhook associated with an AWS CodeBuild build project. 
+   */
+  updateWebhook(params: CodeBuild.Types.UpdateWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.UpdateWebhookOutput) => void): Request<CodeBuild.Types.UpdateWebhookOutput, AWSError>;
+  /**
+   *  Updates the webhook associated with an AWS CodeBuild build project. 
+   */
+  updateWebhook(callback?: (err: AWSError, data: CodeBuild.Types.UpdateWebhookOutput) => void): Request<CodeBuild.Types.UpdateWebhookOutput, AWSError>;
 }
 declare namespace CodeBuild {
   export type ArtifactNamespace = "NONE"|"BUILD_ID"|string;
@@ -215,7 +223,7 @@ declare namespace CodeBuild {
      */
     sourceVersion?: NonEmptyString;
     /**
-     * The name of the build project.
+     * The name of the AWS CodeBuild project.
      */
     projectName?: NonEmptyString;
     /**
@@ -378,9 +386,13 @@ declare namespace CodeBuild {
   }
   export interface CreateWebhookInput {
     /**
-     * The name of the build project.
+     * The name of the AWS CodeBuild project.
      */
     projectName: ProjectName;
+    /**
+     * A regular expression used to determine which branches in a repository are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If it doesn't match, then it is not. If branchFilter is empty, then all branches are built.
+     */
+    branchFilter?: String;
   }
   export interface CreateWebhookOutput {
     /**
@@ -398,7 +410,7 @@ declare namespace CodeBuild {
   }
   export interface DeleteWebhookInput {
     /**
-     * The name of the build project.
+     * The name of the AWS CodeBuild project.
      */
     projectName: ProjectName;
   }
@@ -462,7 +474,7 @@ declare namespace CodeBuild {
   export type ImageVersions = String[];
   export interface InvalidateProjectCacheInput {
     /**
-     * The name of the build project that the cache will be reset for.
+     * The name of the AWS CodeBuild build project that the cache will be reset for.
      */
     projectName: NonEmptyString;
   }
@@ -472,7 +484,7 @@ declare namespace CodeBuild {
   export type LanguageType = "JAVA"|"PYTHON"|"NODE_JS"|"RUBY"|"GOLANG"|"DOCKER"|"ANDROID"|"DOTNET"|"BASE"|string;
   export interface ListBuildsForProjectInput {
     /**
-     * The name of the build project.
+     * The name of the AWS CodeBuild project.
      */
     projectName: NonEmptyString;
     /**
@@ -714,7 +726,7 @@ declare namespace CodeBuild {
      */
     environmentVariables?: EnvironmentVariables;
     /**
-     * If set to true, enables running the Docker daemon inside a Docker container; otherwise, false or not specified (the default). This value must be set to true only if this build project will be used to build Docker images, and the specified build environment image is not one provided by AWS CodeBuild with Docker support. Otherwise, all associated builds that attempt to interact with the Docker daemon will fail. Note that you must also start the Docker daemon so that your builds can interact with it as needed. One way to do this is to initialize the Docker daemon in the install phase of your build spec by running the following build commands. (Do not run the following build commands if the specified build environment image is provided by AWS CodeBuild with Docker support.)  - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp; - timeout -t 15 sh -c "until docker info; do echo .; sleep 1; done" 
+     * Enables running the Docker daemon inside a Docker container. Set to true only if the build project is be used to build Docker images, and the specified build environment image is not provided by AWS CodeBuild with Docker support. Otherwise, all associated builds that attempt to interact with the Docker daemon will fail. Note that you must also start the Docker daemon so that builds can interact with it. One way to do this is to initialize the Docker daemon during the install phase of your build spec by running the following build commands. (Do not run the following build commands if the specified build environment image is provided by AWS CodeBuild with Docker support.)  - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp; - timeout -t 15 sh -c "until docker info; do echo .; sleep 1; done" 
      */
     privilegedMode?: WrapperBoolean;
     /**
@@ -768,7 +780,7 @@ declare namespace CodeBuild {
   export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|string;
   export interface StartBuildInput {
     /**
-     * The name of the build project to start running a build.
+     * The name of the AWS CodeBuild build project to start running a build.
      */
     projectName: NonEmptyString;
     /**
@@ -886,6 +898,26 @@ declare namespace CodeBuild {
      */
     project?: Project;
   }
+  export interface UpdateWebhookInput {
+    /**
+     * The name of the AWS CodeBuild project.
+     */
+    projectName: ProjectName;
+    /**
+     * A regular expression used to determine which branches in a repository are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If it doesn't match, then it is not. If branchFilter is empty, then all branches are built.
+     */
+    branchFilter?: String;
+    /**
+     *  A boolean value that specifies whether the associated repository's secret token should be updated. 
+     */
+    rotateSecret?: Boolean;
+  }
+  export interface UpdateWebhookOutput {
+    /**
+     *  Information about a repository's webhook that is associated with a project in AWS CodeBuild. 
+     */
+    webhook?: Webhook;
+  }
   export type ValueInput = string;
   export interface VpcConfig {
     /**
@@ -907,13 +939,21 @@ declare namespace CodeBuild {
      */
     url?: NonEmptyString;
     /**
-     * This is the server endpoint that will receive the webhook payload.
+     *  The CodeBuild endpoint where webhook events are sent.
      */
     payloadUrl?: NonEmptyString;
     /**
-     * Use this secret while creating a webhook in GitHub for Enterprise. The secret allows webhook requests sent by GitHub for Enterprise to be authenticated by AWS CodeBuild.
+     *  The secret token of the associated repository. 
      */
     secret?: NonEmptyString;
+    /**
+     * A regular expression used to determine which branches in a repository are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If it doesn't match, then it is not. If branchFilter is empty, then all branches are built.
+     */
+    branchFilter?: String;
+    /**
+     *  A timestamp indicating the last time a repository's secret token was modified. 
+     */
+    lastModifiedSecret?: Timestamp;
   }
   export type WrapperBoolean = boolean;
   export type WrapperInt = number;

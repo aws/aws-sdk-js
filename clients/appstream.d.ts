@@ -330,7 +330,7 @@ declare namespace AppStream {
   export type Arn = string;
   export interface AssociateFleetRequest {
     /**
-     * The name of the fleet.
+     * The name of the fleet. 
      */
     FleetName: String;
     /**
@@ -549,9 +549,13 @@ declare namespace AppStream {
      */
     StorageConnectors?: StorageConnectorList;
     /**
-     * The URL the user is redirected to after the streaming session ends.
+     * The URL that users are redirected to after their streaming session ends.
      */
     RedirectURL?: RedirectURL;
+    /**
+     * The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
+     */
+    FeedbackURL?: FeedbackURL;
   }
   export interface CreateStackResult {
     /**
@@ -833,6 +837,7 @@ declare namespace AppStream {
   }
   export interface ExpireSessionResult {
   }
+  export type FeedbackURL = string;
   export interface Fleet {
     /**
      * The ARN for the fleet.
@@ -1204,15 +1209,19 @@ declare namespace AppStream {
      */
     StorageConnectors?: StorageConnectorList;
     /**
-     * The URL the user is redirected to after the streaming session ends.
+     * The URL that users are redirected to after their streaming session ends.
      */
     RedirectURL?: RedirectURL;
+    /**
+     * The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
+     */
+    FeedbackURL?: FeedbackURL;
     /**
      * The errors for the stack.
      */
     StackErrors?: StackErrors;
   }
-  export type StackAttribute = "STORAGE_CONNECTORS"|"REDIRECT_URL"|string;
+  export type StackAttribute = "STORAGE_CONNECTORS"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|string;
   export type StackAttributes = StackAttribute[];
   export interface StackError {
     /**
@@ -1418,9 +1427,13 @@ declare namespace AppStream {
      */
     DeleteStorageConnectors?: Boolean;
     /**
-     * The URL the user is redirected to after the streaming session ends.
+     * The URL that users are redirected to after their streaming session ends.
      */
     RedirectURL?: RedirectURL;
+    /**
+     * The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
+     */
+    FeedbackURL?: FeedbackURL;
     /**
      * The stack attributes to delete.
      */

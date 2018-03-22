@@ -23,6 +23,7 @@
       "output":{"shape":"AssociateFleetResult"},
       "errors":[
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccountStatusException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ConcurrentModificationException"},
         {"shape":"IncompatibleImageException"},
@@ -43,6 +44,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceNotAvailableException"},
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccountStatusException"},
         {"shape":"IncompatibleImageException"}
       ],
       "documentation":"<p>Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.</p>"
@@ -57,7 +59,8 @@
       "output":{"shape":"CreateDirectoryConfigResult"},
       "errors":[
         {"shape":"ResourceAlreadyExistsException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccountStatusException"}
       ],
       "documentation":"<p>Creates a directory configuration.</p>"
     },
@@ -74,6 +77,7 @@
         {"shape":"ResourceNotAvailableException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccountStatusException"},
         {"shape":"InvalidRoleException"},
         {"shape":"ConcurrentModificationException"},
         {"shape":"InvalidParameterCombinationException"},
@@ -91,6 +95,7 @@
       "output":{"shape":"CreateImageBuilderResult"},
       "errors":[
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccountStatusException"},
         {"shape":"ResourceAlreadyExistsException"},
         {"shape":"ResourceNotAvailableException"},
         {"shape":"ResourceNotFoundException"},
@@ -125,6 +130,7 @@
       "output":{"shape":"CreateStackResult"},
       "errors":[
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccountStatusException"},
         {"shape":"ResourceAlreadyExistsException"},
         {"shape":"ConcurrentModificationException"},
         {"shape":"InvalidRoleException"},
@@ -372,6 +378,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"OperationNotPermittedException"},
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccountStatusException"},
         {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Starts the specified fleet.</p>"
@@ -388,6 +395,7 @@
         {"shape":"ResourceNotAvailableException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ConcurrentModificationException"},
+        {"shape":"InvalidAccountStatusException"},
         {"shape":"IncompatibleImageException"}
       ],
       "documentation":"<p>Starts the specified image builder.</p>"
@@ -431,6 +439,7 @@
       "output":{"shape":"TagResourceResponse"},
       "errors":[
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccountStatusException"},
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>. To disassociate tags from your resources, use <a>UntagResource</a>.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
@@ -474,6 +483,7 @@
       "errors":[
         {"shape":"ResourceInUseException"},
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccountStatusException"},
         {"shape":"InvalidRoleException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceNotAvailableException"},
@@ -498,6 +508,7 @@
         {"shape":"InvalidRoleException"},
         {"shape":"InvalidParameterCombinationException"},
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccountStatusException"},
         {"shape":"IncompatibleImageException"}
       ],
       "documentation":"<p>Updates the specified stack.</p>"
@@ -571,7 +582,7 @@
       "members":{
         "FleetName":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet.</p>"
+          "documentation":"<p>The name of the fleet. </p>"
         },
         "StackName":{
           "shape":"String",
@@ -874,7 +885,11 @@
         },
         "RedirectURL":{
           "shape":"RedirectURL",
-          "documentation":"<p>The URL the user is redirected to after the streaming session ends.</p>"
+          "documentation":"<p>The URL that users are redirected to after their streaming session ends.</p>"
+        },
+        "FeedbackURL":{
+          "shape":"FeedbackURL",
+          "documentation":"<p>The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.</p>"
         }
       }
     },
@@ -1288,6 +1303,10 @@
       "members":{
       }
     },
+    "FeedbackURL":{
+      "type":"string",
+      "max":1000
+    },
     "Fleet":{
       "type":"structure",
       "required":[
@@ -1664,6 +1683,14 @@
       "exception":true
     },
     "Integer":{"type":"integer"},
+    "InvalidAccountStatusException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>The resource cannot be created because your AWS account is suspended. For assistance, contact AWS Support. </p>",
+      "exception":true
+    },
     "InvalidParameterCombinationException":{
       "type":"structure",
       "members":{
@@ -1964,7 +1991,11 @@
         },
         "RedirectURL":{
           "shape":"RedirectURL",
-          "documentation":"<p>The URL the user is redirected to after the streaming session ends.</p>"
+          "documentation":"<p>The URL that users are redirected to after their streaming session ends.</p>"
+        },
+        "FeedbackURL":{
+          "shape":"FeedbackURL",
+          "documentation":"<p>The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.</p>"
         },
         "StackErrors":{
           "shape":"StackErrors",
@@ -1977,7 +2008,9 @@
       "type":"string",
       "enum":[
         "STORAGE_CONNECTORS",
-        "REDIRECT_URL"
+        "REDIRECT_URL",
+        "FEEDBACK_URL",
+        "THEME_NAME"
       ]
     },
     "StackAttributes":{
@@ -2323,7 +2356,11 @@
         },
         "RedirectURL":{
           "shape":"RedirectURL",
-          "documentation":"<p>The URL the user is redirected to after the streaming session ends.</p>"
+          "documentation":"<p>The URL that users are redirected to after their streaming session ends.</p>"
+        },
+        "FeedbackURL":{
+          "shape":"FeedbackURL",
+          "documentation":"<p>The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.</p>"
         },
         "AttributesToDelete":{
           "shape":"StackAttributes",
