@@ -24,6 +24,7 @@
           https.globalAgent.maxSockets += 1;
           return expect(https.globalAgent.maxSockets).to.equal(agent.maxSockets);
         });
+
         it('overrides globalAgent value if global is set to Infinity', function() {
           var agent, https;
           https = require('https');
@@ -31,7 +32,8 @@
           https.globalAgent.maxSockets = 2e308;
           return expect(agent.maxSockets).to.equal(50);
         });
-        return it('overrides globalAgent value if global is set to false', function() {
+
+        it('overrides globalAgent value if global is set to false', function() {
           var agent, https, oldGlobal;
           https = require('https');
           oldGlobal = https.globalAgent;
@@ -41,7 +43,8 @@
           return https.globalAgent = oldGlobal;
         });
       });
-      return describe('handleRequest', function() {
+
+      describe('handleRequest', function() {
         it('emits error event', function(done) {
           var req;
           req = new AWS.HttpRequest('http://invalid');
@@ -50,6 +53,7 @@
             return done();
           });
         });
+
         it('supports timeout in httpOptions', function() {
           var numCalls, req;
           numCalls = 0;
@@ -63,6 +67,7 @@
             return expect(numCalls).to.equal(1);
           });
         });
+
         it('supports connectTimeout in httpOptions', function() {
           var numCalls, req;
           numCalls = 0;
@@ -76,6 +81,7 @@
             return expect(numCalls).to.equal(1);
           });
         });
+
         describe('timeout', function() {
           it('is obeyed even after response headers are recieved', function(done) {
             // a mock server with 'ShakyStream' allows us to simulate a period of socket inactivity
@@ -733,6 +739,67 @@
       });
 
       describe('in callback mode', function () {
+        it('should handle error event and destroy connection', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          app = function(req, resp) {
+            resp.writeHead(200, {
+              'x-amz-transfer-encoding': 'append-md5',
+              'content-length': 28,
+            });
+            resp.write(responseData);
+            return resp.end();
+          };
+          var request = service.makeRequest('mockMethod');
+          request.send(function(err, data) {
+            expect(err).to.not.be['null'];
+            expect(data).to.be['null'];
+            done();
+          })
+        })
+
+        it('should handle error event from IncomingMessage and destroy connection', function(done) {
+          if (AWS.HttpClient.streamsApiVersion === 1) {
+            done();
+          }
+          var oldRequest = httpModule.request;
+          var mockMessage = new (require('stream')).Readable();
+          mockMessage._read = function(size) {
+            this.push('foo');
+          }
+          mockMessage._destroy = function(){};
+          mockMessage.headers = {'content-length': 11};
+          var unpipeSpy = helpers.spyOn(mockMessage, 'unpipe').andCallThrough();
+          var destroySpy = helpers.spyOn(mockMessage, 'destroy').andCallThrough();
+          var mockClientRequest = function (option, cb) {
+            cb.call(this, mockMessage);
+            mockMessage.emit('error', new Error('MockError'));
+            return {}
+          }
+          mockClientRequest.setTimeout = function() {
+            return {};
+          };
+          mockClientRequest.on = function() {
+            return {};
+          };
+          mockClientRequest.end = function() {
+            return {};
+          };
+          helpers.spyOn(httpModule, 'request').andCallFake(mockClientRequest).andReturn({})
+          var req = new AWS.HttpRequest('http://localhost:'+ service.config.endpoint.split(':')[2]);
+          var http = new AWS.NodeHttpClient();
+          try {
+            http.handleRequest(req, {}, null, function() {return {}});
+          } catch (err) {
+            expect(err.message).to.equal('MockError');
+          }
+          expect(unpipeSpy.calls.length).to.equal(1);
+          expect(destroySpy.calls.length).to.equal(1);
+          httpModule.request = oldRequest;
+          done();
+        })
+
         it ('should pass with correct content-length', function(done) {
           if (AWS.HttpClient.streamsApiVersion === 1) {
             done();
