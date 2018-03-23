@@ -1129,7 +1129,7 @@ describe('AWS.Request', function() {
         var request = service.makeRequest('mockMethod');
         request.addListener('validate', function(req) {
           throw AWS.util.error(new Error(), {
-            code: 'ValidationError',
+            code: 'ResponseChecksumMismatch',
             message: 'Invalid!'
           });
         });
@@ -1138,7 +1138,7 @@ describe('AWS.Request', function() {
 
         s.on('error', function(e) {
           expect(e).to.be.defined;
-          expect(e.code).to.equal('ValidationError');
+          expect(e.code).to.equal('ResponseChecksumMismatch');
           done();
         });
 

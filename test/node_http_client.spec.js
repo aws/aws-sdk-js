@@ -283,7 +283,7 @@
           s.on('error', function(e) {
             error = e;
             expect(error).to.not.be['null'];
-            expect(error.code).to.equal('ValidationError');
+            expect(error.code).to.equal('UnsupportedHashingAlgorithm');
             expect(error.message).to.equal('Cannot validate response header: append-crc32c, expect \'append-md5\'');
             done();
           });
@@ -324,7 +324,7 @@
           s.on('error', function(e) {
             error = e;
             expect(error).to.not.be['null'];
-            expect(error.code).to.equal('ValidationError');
+            expect(error.code).to.equal('ResponseChecksumMismatch');
             expect(error.message).to.equal('Response fails integrity check.')
             done();
           });
@@ -399,7 +399,7 @@
           request.send(function(err, data) {
             expect(data).to.be['null'];
             expect(err).to.not.be['null'];
-            expect(err.code).to.equal('ValidationError');
+            expect(err.code).to.equal('UnsupportedHashingAlgorithm');
             expect(err.message).to.equal('Cannot validate response header: append-crc32c, expect \'append-md5\'');
             expect(request.response.retryCount).to.equal(3);
             done();
@@ -425,7 +425,7 @@
           request.send(function(err, data) {
             expect(data).to.be['null'];
             expect(err).to.not.be['null'];
-            expect(err.code).to.equal('ValidationError');
+            expect(err.code).to.equal('ResponseChecksumMismatch');
             expect(err.message).to.equal('Response fails integrity check.');
             expect(request.response.retryCount).to.equal(3);
             done();
@@ -451,7 +451,7 @@
           request.send(function(err, data) {
             expect(data).to.be['null'];
             expect(err).to.not.be['null'];
-            expect(err.code).to.equal('ValidationError');
+            expect(err.code).to.equal('ResponseChecksumMismatch');
             expect(err.message).to.equal('Response fails integrity check.');
             expect(request.response.retryCount).to.equal(3);
             done();
