@@ -2353,6 +2353,22 @@ describe('AWS.S3', function() {
         var headers = req.httpRequest.headers;
         expect(headers['x-amz-te']).to.equal('append-md5');
       });
+
+      it('should extract Range parameter', function () {
+        var rawData = new Uint8Array([116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 111, 141, 181, 153, 222, 152, 111, 171, 122, 33, 98, 91, 121, 22, 88, 156]);
+        var responseData = new require('buffer').Buffer(rawData);
+        helpers.mockHttpResponse(200, {
+          'x-amz-content-range': 'bytes=0-10/100',
+          'content-length': '27',
+          'x-amz-transfer-encoding': 'append-md5',
+        }, responseData);
+        s3 = new AWS.S3();
+        s3.getObject({Bucket: 'bucket', Key: 'key'}, function(err, data) {
+          expect(err).to.be['null'];
+          expect(data).to.not.be['null'];
+          expect(data.Range).to.equal('bytes=0-10/100');
+        })
+      })
     } else {
       it('should default not to add s3 trailing checksum header on Browser', function() {
         s3 = new AWS.S3();

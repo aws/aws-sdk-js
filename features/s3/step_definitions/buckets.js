@@ -202,7 +202,7 @@ module.exports = function() {
   });
 
   this.Then(/^the object "([^"]*)" should have content range of "([^"]*)"$/, function(key, contentRange, next) {
-    this.assert.equal(this.data.ContentRange.toString().replace('\n', ''), contentRange);
+    this.assert.equal(this.data.Range.toString().replace('\n', ''), contentRange);
     next();
   });
 

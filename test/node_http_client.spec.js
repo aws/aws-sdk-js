@@ -216,7 +216,6 @@
         error = null;
         rawData = new Uint8Array([116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 111, 141, 181, 153, 222, 152, 111, 171, 122, 33, 98, 91, 121, 22, 88, 156]);
         responseData = new require('buffer').Buffer(rawData);
-        // server.setTimeout(1);
         app = function(req, resp) {
           resp.writeHead(200, {
             'x-amz-transfer-encoding': 'append-md5',
@@ -267,7 +266,6 @@
             expect(error).to.be['null'];
             expect(data).to.equal('test string');
             expect(request.response.httpResponse.headers['content-length']).to.equal(11);
-            expect(request.response.httpResponse.headers['content-range']).to.equal('bytes=0-11/12345');
             done();
           });
         });
@@ -383,7 +381,6 @@
             expect(err).to.be['null'];
             expect(data).to.equal('test string');
             expect(request.response.httpResponse.headers['content-length']).to.equal(11);
-            expect(request.response.httpResponse.headers['content-range']).to.equal('bytes=0-11/12345');
             expect(request.response.retryCount).to.equal(0);
             done();
           })
@@ -508,7 +505,6 @@
         data = '';
         error = null;
         responseData = new require('buffer').Buffer('test string');
-        // server.setTimeout(1);
         app = function(req, resp) {
           resp.writeHead(200, {'content-length': 11});
           resp.end(responseData);
