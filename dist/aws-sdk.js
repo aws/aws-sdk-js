@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.213.1
+// AWS SDK for JavaScript v2.214.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
@@ -27477,7 +27477,7 @@ module.exports={
         "type": "structure",
         "members": {
           "BackupDescription": {
-            "shape": "S36"
+            "shape": "S35"
           }
         }
       }
@@ -27495,7 +27495,7 @@ module.exports={
             "shape": "S6"
           },
           "Expected": {
-            "shape": "S3j"
+            "shape": "S3i"
           },
           "ConditionalOperator": {},
           "ReturnValues": {},
@@ -27506,7 +27506,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3r"
+            "shape": "S3q"
           }
         }
       },
@@ -27558,7 +27558,7 @@ module.exports={
         "type": "structure",
         "members": {
           "BackupDescription": {
-            "shape": "S36"
+            "shape": "S35"
           }
         }
       }
@@ -27577,13 +27577,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ContinuousBackupsDescription": {
-            "type": "structure",
-            "required": [
-              "ContinuousBackupsStatus"
-            ],
-            "members": {
-              "ContinuousBackupsStatus": {}
-            }
+            "shape": "S3z"
           }
         }
       }
@@ -27663,7 +27657,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TimeToLiveDescription": {
-            "shape": "S3f"
+            "shape": "S3e"
           }
         }
       }
@@ -27815,7 +27809,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Tags": {
-            "shape": "S4w"
+            "shape": "S4x"
           },
           "NextToken": {}
         }
@@ -27834,7 +27828,7 @@ module.exports={
             "shape": "S14"
           },
           "Expected": {
-            "shape": "S3j"
+            "shape": "S3i"
           },
           "ReturnValues": {},
           "ReturnConsumedCapacity": {},
@@ -27845,7 +27839,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3r"
+            "shape": "S3q"
           }
         }
       },
@@ -27887,11 +27881,11 @@ module.exports={
             "type": "map",
             "key": {},
             "value": {
-              "shape": "S55"
+              "shape": "S56"
             }
           },
           "QueryFilter": {
-            "shape": "S56"
+            "shape": "S57"
           },
           "ConditionalOperator": {},
           "ScanIndexForward": {
@@ -27908,7 +27902,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3r"
+            "shape": "S3q"
           }
         }
       },
@@ -27954,6 +27948,33 @@ module.exports={
         }
       }
     },
+    "RestoreTableToPointInTime": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "SourceTableName",
+          "TargetTableName"
+        ],
+        "members": {
+          "SourceTableName": {},
+          "TargetTableName": {},
+          "UseLatestRestorableTime": {
+            "type": "boolean"
+          },
+          "RestoreDateTime": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TableDescription": {
+            "shape": "S2l"
+          }
+        }
+      }
+    },
     "Scan": {
       "input": {
         "type": "structure",
@@ -27971,7 +27992,7 @@ module.exports={
           },
           "Select": {},
           "ScanFilter": {
-            "shape": "S56"
+            "shape": "S57"
           },
           "ConditionalOperator": {},
           "ExclusiveStartKey": {
@@ -27990,7 +28011,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3r"
+            "shape": "S3q"
           },
           "ConsistentRead": {
             "type": "boolean"
@@ -28028,7 +28049,7 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "Tags": {
-            "shape": "S4w"
+            "shape": "S4x"
           }
         }
       }
@@ -28045,6 +28066,37 @@ module.exports={
           "TagKeys": {
             "type": "list",
             "member": {}
+          }
+        }
+      }
+    },
+    "UpdateContinuousBackups": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "TableName",
+          "PointInTimeRecoverySpecification"
+        ],
+        "members": {
+          "TableName": {},
+          "PointInTimeRecoverySpecification": {
+            "type": "structure",
+            "required": [
+              "PointInTimeRecoveryEnabled"
+            ],
+            "members": {
+              "PointInTimeRecoveryEnabled": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ContinuousBackupsDescription": {
+            "shape": "S3z"
           }
         }
       }
@@ -28121,7 +28173,7 @@ module.exports={
             }
           },
           "Expected": {
-            "shape": "S3j"
+            "shape": "S3i"
           },
           "ConditionalOperator": {},
           "ReturnValues": {},
@@ -28133,7 +28185,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3r"
+            "shape": "S3q"
           }
         }
       },
@@ -28241,7 +28293,7 @@ module.exports={
         "members": {
           "TableName": {},
           "TimeToLiveSpecification": {
-            "shape": "S63"
+            "shape": "S69"
           }
         }
       },
@@ -28249,7 +28301,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TimeToLiveSpecification": {
-            "shape": "S63"
+            "shape": "S69"
           }
         }
       }
@@ -28664,7 +28716,7 @@ module.exports={
           }
         },
         "SSEDescription": {
-          "shape": "S32"
+          "shape": "S31"
         }
       }
     },
@@ -28688,13 +28740,13 @@ module.exports={
         }
       }
     },
-    "S32": {
+    "S31": {
       "type": "structure",
       "members": {
         "Status": {}
       }
     },
-    "S36": {
+    "S35": {
       "type": "structure",
       "members": {
         "BackupDetails": {
@@ -28770,23 +28822,23 @@ module.exports={
               "shape": "S2f"
             },
             "TimeToLiveDescription": {
-              "shape": "S3f"
+              "shape": "S3e"
             },
             "SSEDescription": {
-              "shape": "S32"
+              "shape": "S31"
             }
           }
         }
       }
     },
-    "S3f": {
+    "S3e": {
       "type": "structure",
       "members": {
         "TimeToLiveStatus": {},
         "AttributeName": {}
       }
     },
-    "S3j": {
+    "S3i": {
       "type": "map",
       "key": {},
       "value": {
@@ -28800,25 +28852,46 @@ module.exports={
           },
           "ComparisonOperator": {},
           "AttributeValueList": {
-            "shape": "S3n"
+            "shape": "S3m"
           }
         }
       }
     },
-    "S3n": {
+    "S3m": {
       "type": "list",
       "member": {
         "shape": "S8"
       }
     },
-    "S3r": {
+    "S3q": {
       "type": "map",
       "key": {},
       "value": {
         "shape": "S8"
       }
     },
-    "S4w": {
+    "S3z": {
+      "type": "structure",
+      "required": [
+        "ContinuousBackupsStatus"
+      ],
+      "members": {
+        "ContinuousBackupsStatus": {},
+        "PointInTimeRecoveryDescription": {
+          "type": "structure",
+          "members": {
+            "PointInTimeRecoveryStatus": {},
+            "EarliestRestorableDateTime": {
+              "type": "timestamp"
+            },
+            "LatestRestorableDateTime": {
+              "type": "timestamp"
+            }
+          }
+        }
+      }
+    },
+    "S4x": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -28832,26 +28905,26 @@ module.exports={
         }
       }
     },
-    "S55": {
+    "S56": {
       "type": "structure",
       "required": [
         "ComparisonOperator"
       ],
       "members": {
         "AttributeValueList": {
-          "shape": "S3n"
+          "shape": "S3m"
         },
         "ComparisonOperator": {}
       }
     },
-    "S56": {
+    "S57": {
       "type": "map",
       "key": {},
       "value": {
-        "shape": "S55"
+        "shape": "S56"
       }
     },
-    "S63": {
+    "S69": {
       "type": "structure",
       "required": [
         "Enabled",
@@ -122484,7 +122557,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.213.1',
+  VERSION: '2.214.1',
 
   /**
    * @api private
@@ -146399,7 +146472,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.213.1
+// AWS SDK for JavaScript v2.214.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

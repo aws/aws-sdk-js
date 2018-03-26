@@ -42,7 +42,7 @@
         {"shape":"ItemCollectionSizeLimitExceededException"},
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>The <code>BatchWriteItem</code> operation puts or deletes multiple items in one or more tables. A single call to <code>BatchWriteItem</code> can write up to 16 MB of data, which can comprise as many as 25 put or delete requests. Individual items to be written can be as large as 400 KB.</p> <note> <p> <code>BatchWriteItem</code> cannot update items. To update items, use the <code>UpdateItem</code> action.</p> </note> <p>The individual <code>PutItem</code> and <code>DeleteItem</code> operations specified in <code>BatchWriteItem</code> are atomic; however <code>BatchWriteItem</code> as a whole is not. If any requested operations fail because the table's provisioned throughput is exceeded or an internal processing failure occurs, the failed operations are returned in the <code>UnprocessedItems</code> response parameter. You can investigate and optionally resend the requests. Typically, you would call <code>BatchWriteItem</code> in a loop. Each iteration would check for unprocessed items and submit a new <code>BatchWriteItem</code> request with those unprocessed items until all items have been processed.</p> <p>Note that if <i>none</i> of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then <code>BatchWriteItem</code> will return a <code>ProvisionedThroughputExceededException</code>.</p> <important> <p>If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, <i>we strongly recommend that you use an exponential backoff algorithm</i>. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations\">Batch Operations and Error Handling</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p> </important> <p>With <code>BatchWriteItem</code>, you can efficiently write or delete large amounts of data, such as from Amazon Elastic MapReduce (EMR), or copy data from another database into DynamoDB. In order to improve performance with these large-scale operations, <code>BatchWriteItem</code> does not behave in the same way as individual <code>PutItem</code> and <code>DeleteItem</code> calls would. For example, you cannot specify conditions on individual put and delete requests, and <code>BatchWriteItem</code> does not return deleted items in the response.</p> <p>If you use a programming language that supports concurrency, you can use threads to write items in parallel. Your application must include the necessary logic to manage the threads. With languages that don't support threading, you must update or delete the specified items one at a time. In both situations, <code>BatchWriteItem</code> performs the specified put and delete operations in parallel, giving you the power of the thread pool approach without having to introduce complexity into your application.</p> <p>Parallel processing reduces latency, but each specified put and delete request consumes the same number of write capacity units whether it is processed in parallel or not. Delete operations on nonexistent items consume one write capacity unit.</p> <p>If one or more of the following is true, DynamoDB rejects the entire batch write operation:</p> <ul> <li> <p>One or more tables specified in the <code>BatchWriteItem</code> request does not exist.</p> </li> <li> <p>Primary key attributes specified on an item in the request do not match those in the corresponding table's primary key schema.</p> </li> <li> <p>You try to perform multiple operations on the same item in the same <code>BatchWriteItem</code> request. For example, you cannot put and delete the same item in the same <code>BatchWriteItem</code> request. </p> </li> <li> <p>There are more than 25 requests in the batch.</p> </li> <li> <p>Any individual item in a batch exceeds 400 KB.</p> </li> <li> <p>The total request size exceeds 16 MB.</p> </li> </ul>"
+      "documentation":"<p>The <code>BatchWriteItem</code> operation puts or deletes multiple items in one or more tables. A single call to <code>BatchWriteItem</code> can write up to 16 MB of data, which can comprise as many as 25 put or delete requests. Individual items to be written can be as large as 400 KB.</p> <note> <p> <code>BatchWriteItem</code> cannot update items. To update items, use the <code>UpdateItem</code> action.</p> </note> <p>The individual <code>PutItem</code> and <code>DeleteItem</code> operations specified in <code>BatchWriteItem</code> are atomic; however <code>BatchWriteItem</code> as a whole is not. If any requested operations fail because the table's provisioned throughput is exceeded or an internal processing failure occurs, the failed operations are returned in the <code>UnprocessedItems</code> response parameter. You can investigate and optionally resend the requests. Typically, you would call <code>BatchWriteItem</code> in a loop. Each iteration would check for unprocessed items and submit a new <code>BatchWriteItem</code> request with those unprocessed items until all items have been processed.</p> <p>Note that if <i>none</i> of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then <code>BatchWriteItem</code> will return a <code>ProvisionedThroughputExceededException</code>.</p> <important> <p>If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, <i>we strongly recommend that you use an exponential backoff algorithm</i>. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations\">Batch Operations and Error Handling</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p> </important> <p>With <code>BatchWriteItem</code>, you can efficiently write or delete large amounts of data, such as from Amazon Elastic MapReduce (EMR), or copy data from another database into DynamoDB. In order to improve performance with these large-scale operations, <code>BatchWriteItem</code> does not behave in the same way as individual <code>PutItem</code> and <code>DeleteItem</code> calls would. For example, you cannot specify conditions on individual put and delete requests, and <code>BatchWriteItem</code> does not return deleted items in the response.</p> <p>If you use a programming language that supports concurrency, you can use threads to write items in parallel. Your application must include the necessary logic to manage the threads. With languages that don't support threading, you must update or delete the specified items one at a time. In both situations, <code>BatchWriteItem</code> performs the specified put and delete operations in parallel, giving you the power of the thread pool approach without having to introduce complexity into your application.</p> <p>Parallel processing reduces latency, but each specified put and delete request consumes the same number of write capacity units whether it is processed in parallel or not. Delete operations on nonexistent items consume one write capacity unit.</p> <p>If one or more of the following is true, DynamoDB rejects the entire batch write operation:</p> <ul> <li> <p>One or more tables specified in the <code>BatchWriteItem</code> request does not exist.</p> </li> <li> <p>Primary key attributes specified on an item in the request do not match those in the corresponding table's primary key schema.</p> </li> <li> <p>You try to perform multiple operations on the same item in the same <code>BatchWriteItem</code> request. For example, you cannot put and delete the same item in the same <code>BatchWriteItem</code> request. </p> </li> <li> <p> Your request contains at least two items with identical hash and range keys (which essentially is two put operations). </p> </li> <li> <p>There are more than 25 requests in the batch.</p> </li> <li> <p>Any individual item in a batch exceeds 400 KB.</p> </li> <li> <p>The total request size exceeds 16 MB.</p> </li> </ul>"
     },
     "CreateBackup":{
       "name":"CreateBackup",
@@ -168,7 +168,7 @@
         {"shape":"TableNotFoundException"},
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>Checks the status of the backup restore settings on the specified table. If backups are enabled, <code>ContinuousBackupsStatus</code> will bet set to ENABLED.</p> <p>You can call <code>DescribeContinuousBackups</code> at a maximum rate of 10 times per second.</p>"
+      "documentation":"<p>Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are <code>ENABLED</code> on all tables at table creation. If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p> <p> Once continuous backups and point in time recovery are enabled, you can restore to any point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. </p> <p> <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days with a 1-minute granularity. </p> <p>You can call <code>DescribeContinuousBackups</code> at a maximum rate of 10 times per second.</p>"
     },
     "DescribeGlobalTable":{
       "name":"DescribeGlobalTable",
@@ -341,7 +341,26 @@
         {"shape":"LimitExceededException"},
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>Creates a new table from an existing backup. Any number of users can execute up to 10 concurrent restores in a given account. </p> <p>You can call <code>RestoreTableFromBackup</code> at a maximum rate of 10 times per second.</p> <p>You must manually set up the following on the restored table:</p> <ul> <li> <p>Auto scaling policies</p> </li> <li> <p>IAM policies</p> </li> <li> <p>Cloudwatch metrics and alarms</p> </li> <li> <p>Tags</p> </li> <li> <p>Stream settings</p> </li> <li> <p>Time to Live (TTL) settings</p> </li> </ul>"
+      "documentation":"<p>Creates a new table from an existing backup. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account. </p> <p>You can call <code>RestoreTableFromBackup</code> at a maximum rate of 10 times per second.</p> <p>You must manually set up the following on the restored table:</p> <ul> <li> <p>Auto scaling policies</p> </li> <li> <p>IAM policies</p> </li> <li> <p>Cloudwatch metrics and alarms</p> </li> <li> <p>Tags</p> </li> <li> <p>Stream settings</p> </li> <li> <p>Time to Live (TTL) settings</p> </li> </ul>"
+    },
+    "RestoreTableToPointInTime":{
+      "name":"RestoreTableToPointInTime",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RestoreTableToPointInTimeInput"},
+      "output":{"shape":"RestoreTableToPointInTimeOutput"},
+      "errors":[
+        {"shape":"TableAlreadyExistsException"},
+        {"shape":"TableNotFoundException"},
+        {"shape":"TableInUseException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidRestoreTimeException"},
+        {"shape":"PointInTimeRecoveryUnavailableException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Restores the specified table to the specified point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. You can restore your table to any point in time during the last 35 days with a 1-minute granularity. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account. </p> <p>You must manually set up the following on the restored table:</p> <ul> <li> <p>Auto scaling policies</p> </li> <li> <p>IAM policies</p> </li> <li> <p>Cloudwatch metrics and alarms</p> </li> <li> <p>Tags</p> </li> <li> <p>Stream settings</p> </li> <li> <p>Time to Live (TTL) settings</p> </li> <li> <p>Point in time recovery settings</p> </li> </ul>"
     },
     "Scan":{
       "name":"Scan",
@@ -388,6 +407,21 @@
       ],
       "documentation":"<p>Removes the association of tags from an Amazon DynamoDB resource. You can call UntagResource up to 5 times per second, per account. </p> <p>For an overview on tagging DynamoDB resources, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html\">Tagging for DynamoDB</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
     },
+    "UpdateContinuousBackups":{
+      "name":"UpdateContinuousBackups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateContinuousBackupsInput"},
+      "output":{"shape":"UpdateContinuousBackupsOutput"},
+      "errors":[
+        {"shape":"TableNotFoundException"},
+        {"shape":"ContinuousBackupsUnavailableException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p> <code>UpdateContinuousBackups</code> enables or disables point in time recovery for the specified table. A successful <code>UpdateContinuousBackups</code> call returns the current <code>ContinuousBackupsDescription</code>. Continuous backups are <code>ENABLED</code> on all tables at table creation. If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p> <p> Once continuous backups and point in time recovery are enabled, you can restore to any point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. </p> <p> <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days with a 1-minute granularity. </p>"
+    },
     "UpdateGlobalTable":{
       "name":"UpdateGlobalTable",
       "http":{
@@ -403,7 +437,7 @@
         {"shape":"ReplicaNotFoundException"},
         {"shape":"TableNotFoundException"}
       ],
-      "documentation":"<p>Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, must have the same name as the global table, must have the same key schema, must have DynamoDB Streams enabled, and cannot have any local secondary indexes (LSIs).</p> <note> <p>Although you can use <code>UpdateGlobalTable</code> to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.</p> </note>"
+      "documentation":"<p>Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, must have the same name as the global table, must have the same key schema, and must have DynamoDB Streams enabled.</p> <note> <p>Although you can use <code>UpdateGlobalTable</code> to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.</p> </note>"
     },
     "UpdateItem":{
       "name":"UpdateItem",
@@ -897,10 +931,14 @@
       "members":{
         "ContinuousBackupsStatus":{
           "shape":"ContinuousBackupsStatus",
-          "documentation":"<p>ContinuousBackupsStatus can be one of the following states : ENABLED, DISABLED</p>"
+          "documentation":"<p> <code>ContinuousBackupsStatus</code> can be one of the following states : ENABLED, DISABLED</p>"
+        },
+        "PointInTimeRecoveryDescription":{
+          "shape":"PointInTimeRecoveryDescription",
+          "documentation":"<p>The description of the point in time recovery settings applied to the table.</p>"
         }
       },
-      "documentation":"<p>Represents the backup and restore settings on the table when the backup was created.</p>"
+      "documentation":"<p>Represents the continuous backups and point in time recovery settings on the table.</p>"
     },
     "ContinuousBackupsStatus":{
       "type":"string",
@@ -1226,7 +1264,7 @@
       "members":{
         "TableName":{
           "shape":"TableName",
-          "documentation":"<p>Name of the table for which the customer wants to check the backup and restore settings.</p>"
+          "documentation":"<p>Name of the table for which the customer wants to check the continuous backups and point in time recovery settings.</p>"
         }
       }
     },
@@ -1644,6 +1682,14 @@
       "exception":true,
       "fault":true
     },
+    "InvalidRestoreTimeException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>An invalid restore time was specified. RestoreDateTime must be between EarliestRestorableDateTime and LatestRestorableDateTime.</p>",
+      "exception":true
+    },
     "ItemCollectionKeyAttributeMap":{
       "type":"map",
       "key":{"shape":"AttributeName"},
@@ -1784,7 +1830,7 @@
           "documentation":"<p>Too many operations for a given subscriber.</p>"
         }
       },
-      "documentation":"<p>Up to 50 <code>CreateBackup</code> operations are allowed per second, per account. There is no limit to the number of daily on-demand backups that can be taken. </p> <p>Up to 10 simultaneous table operations are allowed per account. These operations include <code>CreateTable</code>, <code>UpdateTable</code>, <code>DeleteTable</code>,<code>UpdateTimeToLive</code>, and <code>RestoreTableFromBackup</code>. </p> <p>For tables with secondary indexes, only one of those tables can be in the <code>CREATING</code> state at any point in time. Do not attempt to create more than one such table simultaneously.</p> <p>The total limit of tables in the <code>ACTIVE</code> state is 250.</p> <p>For tables with secondary indexes, only one of those tables can be in the <code>CREATING</code> state at any point in time. Do not attempt to create more than one such table simultaneously.</p> <p>The total limit of tables in the <code>ACTIVE</code> state is 250.</p>",
+      "documentation":"<p>Up to 50 <code>CreateBackup</code> operations are allowed per second, per account. There is no limit to the number of daily on-demand backups that can be taken. </p> <p>Up to 10 simultaneous table operations are allowed per account. These operations include <code>CreateTable</code>, <code>UpdateTable</code>, <code>DeleteTable</code>,<code>UpdateTimeToLive</code>, <code>RestoreTableFromBackup</code>, and <code>RestoreTableToPointInTime</code>. </p> <p>For tables with secondary indexes, only one of those tables can be in the <code>CREATING</code> state at any point in time. Do not attempt to create more than one such table simultaneously.</p> <p>The total limit of tables in the <code>ACTIVE</code> state is 250.</p>",
       "exception":true
     },
     "ListAttributeValue":{
@@ -2026,6 +2072,50 @@
       "type":"list",
       "member":{"shape":"NumberAttributeValue"}
     },
+    "PointInTimeRecoveryDescription":{
+      "type":"structure",
+      "members":{
+        "PointInTimeRecoveryStatus":{
+          "shape":"PointInTimeRecoveryStatus",
+          "documentation":"<p>The current state of point in time recovery:</p> <ul> <li> <p> <code>ENABLING</code> - Point in time recovery is being enabled.</p> </li> <li> <p> <code>ENABLED</code> - Point in time recovery is enabled.</p> </li> <li> <p> <code>DISABLED</code> - Point in time recovery is disabled.</p> </li> </ul>"
+        },
+        "EarliestRestorableDateTime":{
+          "shape":"Date",
+          "documentation":"<p>Specifies the earliest point in time you can restore your table to. It is equal to the maximum of point in time recovery enabled time and <code>CurrentTime</code> - <code>PointInTimeRecoveryPeriod</code>.</p>"
+        },
+        "LatestRestorableDateTime":{
+          "shape":"Date",
+          "documentation":"<p> <code>LatestRestorableDateTime</code> is 5 minutes from now and there is a +/- 1 minute fuzziness on the restore times. </p>"
+        }
+      },
+      "documentation":"<p>The description of the point in time settings applied to the table.</p>"
+    },
+    "PointInTimeRecoverySpecification":{
+      "type":"structure",
+      "required":["PointInTimeRecoveryEnabled"],
+      "members":{
+        "PointInTimeRecoveryEnabled":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Indicates whether point in time recovery is enabled (true) or disabled (false) on the table.</p>"
+        }
+      },
+      "documentation":"<p>Represents the settings used to enable point in time recovery.</p>"
+    },
+    "PointInTimeRecoveryStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "PointInTimeRecoveryUnavailableException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>Point in time recovery has not yet been enabled for this source table.</p>",
+      "exception":true
+    },
     "PositiveIntegerObject":{
       "type":"integer",
       "min":1
@@ -2235,7 +2325,7 @@
         },
         "ScanIndexForward":{
           "shape":"BooleanObject",
-          "documentation":"<p>Specifies the order for index traversal: If <code>true</code> (default), the traversal is performed in ascending order; if <code>false</code>, the traversal is performed in descending order. </p> <p>Items with the same partition key value are stored in sorted order by sort key. If the sort key data type is Number, the results are stored in numeric order. For type String, the results are stored in order of ASCII character code values. For type Binary, DynamoDB treats each byte of the binary data as unsigned.</p> <p>If <code>ScanIndexForward</code> is <code>true</code>, DynamoDB returns the results in the order in which they are stored (by sort key value). This is the default behavior. If <code>ScanIndexForward</code> is <code>false</code>, DynamoDB reads the results in reverse order by sort key value, and then returns the results to the client.</p>"
+          "documentation":"<p>Specifies the order for index traversal: If <code>true</code> (default), the traversal is performed in ascending order; if <code>false</code>, the traversal is performed in descending order. </p> <p>Items with the same partition key value are stored in sorted order by sort key. If the sort key data type is Number, the results are stored in numeric order. For type String, the results are stored in order of UTF-8 bytes. For type Binary, DynamoDB treats each byte of the binary data as unsigned.</p> <p>If <code>ScanIndexForward</code> is <code>true</code>, DynamoDB returns the results in the order in which they are stored (by sort key value). This is the default behavior. If <code>ScanIndexForward</code> is <code>false</code>, DynamoDB reads the results in reverse order by sort key value, and then returns the results to the client.</p>"
         },
         "ExclusiveStartKey":{
           "shape":"Key",
@@ -2381,7 +2471,6 @@
       "documentation":"<p>The operation tried to access a nonexistent table or index. The resource might not be specified correctly, or its status might not be <code>ACTIVE</code>.</p>",
       "exception":true
     },
-    "RestoreDateTime":{"type":"timestamp"},
     "RestoreInProgress":{"type":"boolean"},
     "RestoreSummary":{
       "type":"structure",
@@ -2399,7 +2488,7 @@
           "documentation":"<p>ARN of the source table of the backup that is being restored.</p>"
         },
         "RestoreDateTime":{
-          "shape":"RestoreDateTime",
+          "shape":"Date",
           "documentation":"<p>Point in time or source backup time.</p>"
         },
         "RestoreInProgress":{
@@ -2432,6 +2521,40 @@
         "TableDescription":{
           "shape":"TableDescription",
           "documentation":"<p>The description of the table created from an existing backup.</p>"
+        }
+      }
+    },
+    "RestoreTableToPointInTimeInput":{
+      "type":"structure",
+      "required":[
+        "SourceTableName",
+        "TargetTableName"
+      ],
+      "members":{
+        "SourceTableName":{
+          "shape":"TableName",
+          "documentation":"<p>Name of the source table that is being restored.</p>"
+        },
+        "TargetTableName":{
+          "shape":"TableName",
+          "documentation":"<p>The name of the new table to which it must be restored to.</p>"
+        },
+        "UseLatestRestorableTime":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Restore the table to the latest possible time. <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. </p>"
+        },
+        "RestoreDateTime":{
+          "shape":"Date",
+          "documentation":"<p>Time in the past to restore the table to.</p>"
+        }
+      }
+    },
+    "RestoreTableToPointInTimeOutput":{
+      "type":"structure",
+      "members":{
+        "TableDescription":{
+          "shape":"TableDescription",
+          "documentation":"<p>Represents the properties of a table.</p>"
         }
       }
     },
@@ -2729,7 +2852,7 @@
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
-      "documentation":"<p>A table with the name already exists. </p>",
+      "documentation":"<p>A target table with the specified name already exists. </p>",
       "exception":true
     },
     "TableArn":{"type":"string"},
@@ -2817,7 +2940,7 @@
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
-      "documentation":"<p>A table by that name is either being created or deleted. </p>",
+      "documentation":"<p>A target table with the specified name is either being created or deleted. </p>",
       "exception":true
     },
     "TableName":{
@@ -2835,7 +2958,7 @@
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
-      "documentation":"<p>A table with the name <code>TableName</code> does not currently exist within the subscriber's account.</p>",
+      "documentation":"<p>A source table with the name <code>TableName</code> does not currently exist within the subscriber's account.</p>",
       "exception":true
     },
     "TableStatus":{
@@ -2963,6 +3086,32 @@
         "TagKeys":{
           "shape":"TagKeyList",
           "documentation":"<p>A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the Amazon DynamoDB resource.</p>"
+        }
+      }
+    },
+    "UpdateContinuousBackupsInput":{
+      "type":"structure",
+      "required":[
+        "TableName",
+        "PointInTimeRecoverySpecification"
+      ],
+      "members":{
+        "TableName":{
+          "shape":"TableName",
+          "documentation":"<p>The name of the table.</p>"
+        },
+        "PointInTimeRecoverySpecification":{
+          "shape":"PointInTimeRecoverySpecification",
+          "documentation":"<p>Represents the settings used to enable point in time recovery.</p>"
+        }
+      }
+    },
+    "UpdateContinuousBackupsOutput":{
+      "type":"structure",
+      "members":{
+        "ContinuousBackupsDescription":{
+          "shape":"ContinuousBackupsDescription",
+          "documentation":"<p>Represents the continuous backups and point in time recovery settings on the table.</p>"
         }
       }
     },

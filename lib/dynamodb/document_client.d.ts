@@ -321,9 +321,13 @@ export namespace DocumentClient {
   export type ConsumedCapacityUnits = number;
   export interface ContinuousBackupsDescription {
     /**
-     * ContinuousBackupsStatus can be one of the following states : ENABLED, DISABLED
+     *  ContinuousBackupsStatus can be one of the following states : ENABLED, DISABLED
      */
     ContinuousBackupsStatus: ContinuousBackupsStatus;
+    /**
+     * The description of the point in time recovery settings applied to the table.
+     */
+    PointInTimeRecoveryDescription?: PointInTimeRecoveryDescription;
   }
   export type ContinuousBackupsStatus = "ENABLED"|"DISABLED"|string;
   export interface CreateBackupInput {
@@ -532,7 +536,7 @@ export namespace DocumentClient {
   }
   export interface DescribeContinuousBackupsInput {
     /**
-     * Name of the table for which the customer wants to check the backup and restore settings.
+     * Name of the table for which the customer wants to check the continuous backups and point in time recovery settings.
      */
     TableName: TableName;
   }
@@ -1009,6 +1013,27 @@ export namespace DocumentClient {
   export type NullAttributeValue = boolean;
   export type NumberAttributeValue = string;
   export type NumberSetAttributeValue = NumberAttributeValue[];
+  export interface PointInTimeRecoveryDescription {
+    /**
+     * The current state of point in time recovery:    ENABLING - Point in time recovery is being enabled.    ENABLED - Point in time recovery is enabled.    DISABLED - Point in time recovery is disabled.  
+     */
+    PointInTimeRecoveryStatus?: PointInTimeRecoveryStatus;
+    /**
+     * Specifies the earliest point in time you can restore your table to. It is equal to the maximum of point in time recovery enabled time and CurrentTime - PointInTimeRecoveryPeriod.
+     */
+    EarliestRestorableDateTime?: _Date;
+    /**
+     *  LatestRestorableDateTime is 5 minutes from now and there is a +/- 1 minute fuzziness on the restore times. 
+     */
+    LatestRestorableDateTime?: _Date;
+  }
+  export interface PointInTimeRecoverySpecification {
+    /**
+     * Indicates whether point in time recovery is enabled (true) or disabled (false) on the table.
+     */
+    PointInTimeRecoveryEnabled: BooleanObject;
+  }
+  export type PointInTimeRecoveryStatus = "ENABLED"|"DISABLED"|string;
   export type PositiveIntegerObject = number;
   export type PositiveLongObject = number;
   export interface Projection {
@@ -1153,7 +1178,7 @@ export namespace DocumentClient {
      */
     ConditionalOperator?: ConditionalOperator;
     /**
-     * Specifies the order for index traversal: If true (default), the traversal is performed in ascending order; if false, the traversal is performed in descending order.  Items with the same partition key value are stored in sorted order by sort key. If the sort key data type is Number, the results are stored in numeric order. For type String, the results are stored in order of ASCII character code values. For type Binary, DynamoDB treats each byte of the binary data as unsigned. If ScanIndexForward is true, DynamoDB returns the results in the order in which they are stored (by sort key value). This is the default behavior. If ScanIndexForward is false, DynamoDB reads the results in reverse order by sort key value, and then returns the results to the client.
+     * Specifies the order for index traversal: If true (default), the traversal is performed in ascending order; if false, the traversal is performed in descending order.  Items with the same partition key value are stored in sorted order by sort key. If the sort key data type is Number, the results are stored in numeric order. For type String, the results are stored in order of UTF-8 bytes. For type Binary, DynamoDB treats each byte of the binary data as unsigned. If ScanIndexForward is true, DynamoDB returns the results in the order in which they are stored (by sort key value). This is the default behavior. If ScanIndexForward is false, DynamoDB reads the results in reverse order by sort key value, and then returns the results to the client.
      */
     ScanIndexForward?: BooleanObject;
     /**
@@ -1231,7 +1256,6 @@ export namespace DocumentClient {
   }
   export type ReplicaUpdateList = ReplicaUpdate[];
   export type ResourceArnString = string;
-  export type RestoreDateTime = Date;
   export type RestoreInProgress = boolean;
   export interface RestoreSummary {
     /**
@@ -1245,7 +1269,7 @@ export namespace DocumentClient {
     /**
      * Point in time or source backup time.
      */
-    RestoreDateTime: RestoreDateTime;
+    RestoreDateTime: _Date;
     /**
      * Indicates if a restore is in progress or not.
      */
@@ -1264,6 +1288,30 @@ export namespace DocumentClient {
   export interface RestoreTableFromBackupOutput {
     /**
      * The description of the table created from an existing backup.
+     */
+    TableDescription?: TableDescription;
+  }
+  export interface RestoreTableToPointInTimeInput {
+    /**
+     * Name of the source table that is being restored.
+     */
+    SourceTableName: TableName;
+    /**
+     * The name of the new table to which it must be restored to.
+     */
+    TargetTableName: TableName;
+    /**
+     * Restore the table to the latest possible time. LatestRestorableDateTime is typically 5 minutes before the current time. 
+     */
+    UseLatestRestorableTime?: BooleanObject;
+    /**
+     * Time in the past to restore the table to.
+     */
+    RestoreDateTime?: _Date;
+  }
+  export interface RestoreTableToPointInTimeOutput {
+    /**
+     * Represents the properties of a table.
      */
     TableDescription?: TableDescription;
   }
@@ -1580,6 +1628,22 @@ export namespace DocumentClient {
      * A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the Amazon DynamoDB resource.
      */
     TagKeys: TagKeyList;
+  }
+  export interface UpdateContinuousBackupsInput {
+    /**
+     * The name of the table.
+     */
+    TableName: TableName;
+    /**
+     * Represents the settings used to enable point in time recovery.
+     */
+    PointInTimeRecoverySpecification: PointInTimeRecoverySpecification;
+  }
+  export interface UpdateContinuousBackupsOutput {
+    /**
+     * Represents the continuous backups and point in time recovery settings on the table.
+     */
+    ContinuousBackupsDescription?: ContinuousBackupsDescription;
   }
   export type UpdateExpression = string;
   export interface UpdateGlobalSecondaryIndexAction {
