@@ -41,7 +41,7 @@ export class AWSError extends Error {
     /**
      * Second request ID associated with the response from S3.
      */
-    extendedRequstId: string;
+    extendedRequestId: string;
     /**
      * CloudFront request ID associated with the response.
      */
