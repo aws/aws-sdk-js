@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.215.1
+// AWS SDK for JavaScript v2.216.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
@@ -75856,6 +75856,7 @@ module.exports={
     "protocol": "json",
     "serviceAbbreviation": "Amazon MTurk",
     "serviceFullName": "Amazon Mechanical Turk",
+    "serviceId": "MTurk",
     "signatureVersion": "v4",
     "targetPrefix": "MTurkRequesterServiceV20170117",
     "uid": "mturk-requester-2017-01-17"
@@ -75976,14 +75977,14 @@ module.exports={
           },
           "UniqueRequestToken": {},
           "AssignmentReviewPolicy": {
-            "shape": "Sp"
+            "shape": "Sq"
           },
           "HITReviewPolicy": {
-            "shape": "Sp"
+            "shape": "Sq"
           },
           "HITLayoutId": {},
           "HITLayoutParameters": {
-            "shape": "Sv"
+            "shape": "Sw"
           }
         }
       },
@@ -75991,7 +75992,7 @@ module.exports={
         "type": "structure",
         "members": {
           "HIT": {
-            "shape": "Sy"
+            "shape": "Sz"
           }
         }
       }
@@ -76048,14 +76049,14 @@ module.exports={
           "RequesterAnnotation": {},
           "UniqueRequestToken": {},
           "AssignmentReviewPolicy": {
-            "shape": "Sp"
+            "shape": "Sq"
           },
           "HITReviewPolicy": {
-            "shape": "Sp"
+            "shape": "Sq"
           },
           "HITLayoutId": {},
           "HITLayoutParameters": {
-            "shape": "Sv"
+            "shape": "Sw"
           }
         }
       },
@@ -76063,7 +76064,7 @@ module.exports={
         "type": "structure",
         "members": {
           "HIT": {
-            "shape": "Sy"
+            "shape": "Sz"
           }
         }
       }
@@ -76101,7 +76102,7 @@ module.exports={
         "type": "structure",
         "members": {
           "QualificationType": {
-            "shape": "S19"
+            "shape": "S1a"
           }
         }
       }
@@ -76218,10 +76219,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Assignment": {
-            "shape": "S1o"
+            "shape": "S1p"
           },
           "HIT": {
-            "shape": "Sy"
+            "shape": "Sz"
           }
         }
       },
@@ -76261,7 +76262,7 @@ module.exports={
         "type": "structure",
         "members": {
           "HIT": {
-            "shape": "Sy"
+            "shape": "Sz"
           }
         }
       },
@@ -76283,7 +76284,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Qualification": {
-            "shape": "S1w"
+            "shape": "S1x"
           }
         }
       },
@@ -76303,7 +76304,7 @@ module.exports={
         "type": "structure",
         "members": {
           "QualificationType": {
-            "shape": "S19"
+            "shape": "S1a"
           }
         }
       },
@@ -76337,7 +76338,7 @@ module.exports={
           "Assignments": {
             "type": "list",
             "member": {
-              "shape": "S1o"
+              "shape": "S1p"
             }
           }
         }
@@ -76400,7 +76401,7 @@ module.exports={
             "type": "integer"
           },
           "HITs": {
-            "shape": "S2c"
+            "shape": "S2d"
           }
         }
       },
@@ -76428,7 +76429,7 @@ module.exports={
             "type": "integer"
           },
           "HITs": {
-            "shape": "S2c"
+            "shape": "S2d"
           }
         }
       },
@@ -76502,7 +76503,7 @@ module.exports={
           "QualificationTypes": {
             "type": "list",
             "member": {
-              "shape": "S19"
+              "shape": "S1a"
             }
           }
         }
@@ -76538,16 +76539,16 @@ module.exports={
         "members": {
           "HITId": {},
           "AssignmentReviewPolicy": {
-            "shape": "Sp"
+            "shape": "Sq"
           },
           "HITReviewPolicy": {
-            "shape": "Sp"
+            "shape": "Sq"
           },
           "AssignmentReviewReport": {
-            "shape": "S2q"
+            "shape": "S2r"
           },
           "HITReviewReport": {
-            "shape": "S2q"
+            "shape": "S2r"
           },
           "NextToken": {}
         }
@@ -76574,7 +76575,7 @@ module.exports={
             "type": "integer"
           },
           "HITs": {
-            "shape": "S2c"
+            "shape": "S2d"
           }
         }
       },
@@ -76636,7 +76637,7 @@ module.exports={
           "Qualifications": {
             "type": "list",
             "member": {
-              "shape": "S1w"
+              "shape": "S1x"
             }
           }
         }
@@ -76742,7 +76743,7 @@ module.exports={
         ],
         "members": {
           "Notification": {
-            "shape": "S3j"
+            "shape": "S3k"
           },
           "TestEventType": {}
         }
@@ -76818,7 +76819,7 @@ module.exports={
         "members": {
           "HITTypeId": {},
           "Notification": {
-            "shape": "S3j"
+            "shape": "S3k"
           },
           "Active": {
             "type": "boolean"
@@ -76861,7 +76862,7 @@ module.exports={
         "type": "structure",
         "members": {
           "QualificationType": {
-            "shape": "S19"
+            "shape": "S1a"
           }
         }
       }
@@ -76892,8 +76893,10 @@ module.exports={
             }
           },
           "RequiredToPreview": {
+            "deprecated": true,
             "type": "boolean"
-          }
+          },
+          "ActionsGuarded": {}
         }
       }
     },
@@ -76907,7 +76910,7 @@ module.exports={
         "Subdivision": {}
       }
     },
-    "Sp": {
+    "Sq": {
       "type": "structure",
       "required": [
         "PolicyName"
@@ -76921,7 +76924,7 @@ module.exports={
             "members": {
               "Key": {},
               "Values": {
-                "shape": "Ss"
+                "shape": "St"
               },
               "MapEntries": {
                 "type": "list",
@@ -76930,7 +76933,7 @@ module.exports={
                   "members": {
                     "Key": {},
                     "Values": {
-                      "shape": "Ss"
+                      "shape": "St"
                     }
                   }
                 }
@@ -76940,11 +76943,11 @@ module.exports={
         }
       }
     },
-    "Ss": {
+    "St": {
       "type": "list",
       "member": {}
     },
-    "Sv": {
+    "Sw": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -76958,7 +76961,7 @@ module.exports={
         }
       }
     },
-    "Sy": {
+    "Sz": {
       "type": "structure",
       "members": {
         "HITId": {},
@@ -77002,7 +77005,7 @@ module.exports={
         }
       }
     },
-    "S19": {
+    "S1a": {
       "type": "structure",
       "members": {
         "QualificationTypeId": {},
@@ -77032,7 +77035,7 @@ module.exports={
         }
       }
     },
-    "S1o": {
+    "S1p": {
       "type": "structure",
       "members": {
         "AssignmentId": {},
@@ -77061,7 +77064,7 @@ module.exports={
         "RequesterFeedback": {}
       }
     },
-    "S1w": {
+    "S1x": {
       "type": "structure",
       "members": {
         "QualificationTypeId": {},
@@ -77078,13 +77081,13 @@ module.exports={
         "Status": {}
       }
     },
-    "S2c": {
+    "S2d": {
       "type": "list",
       "member": {
-        "shape": "Sy"
+        "shape": "Sz"
       }
     },
-    "S2q": {
+    "S2r": {
       "type": "structure",
       "members": {
         "ReviewResults": {
@@ -77121,7 +77124,7 @@ module.exports={
         }
       }
     },
-    "S3j": {
+    "S3k": {
       "type": "structure",
       "required": [
         "Destination",
@@ -122584,7 +122587,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.215.1',
+  VERSION: '2.216.1',
 
   /**
    * @api private
@@ -146499,7 +146502,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.215.1
+// AWS SDK for JavaScript v2.216.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

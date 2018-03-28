@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.215.1-->
+<!--LATEST=2.216.1-->
 <!--ENTRYINSERT-->
+
+## 2.216.1
+* feature: IAM: Add support for Longer Role Sessions. Four APIs manage max session duration: GetRole, ListRoles, CreateRole, and the new API UpdateRole. The max session duration integer attribute is measured in seconds.
+* feature: MTurk: Added a new attribute "ActionsGuarded" to QualificationRequirement: This update allows MTurk Requester customers using the AWS SDK to control which Workers can see and preview their HITs. We now support hiding HITs from unqualified Workers' search results.
+* feature: STS: Change utilizes the Max Session Duration attribute introduced for IAM Roles and allows STS customers to request session duration up to the Max Session Duration of 12 hours from AssumeRole based APIs.
 
 ## 2.215.1
 * feature: ACM: AWS Certificate Manager has added support for customers to disable Certificate Transparency logging on a per-certificate basis.
