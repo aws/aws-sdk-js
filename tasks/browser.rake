@@ -50,7 +50,7 @@ namespace :browser do
   end
 
   task :build_all => [:setup_dist_tools, :dist_path] do
-    sh({"MINIFY" => ""}, "#{$BUILDER} all > dist/aws-sdk-all.js")
+    sh({"MINIFY" => "1"}, "#{$BUILDER} all > dist/aws-sdk-all.js")
   end
 
   desc 'Caches assets to the dist-tools build server'

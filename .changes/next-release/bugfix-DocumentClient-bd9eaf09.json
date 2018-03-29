@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "DocumentClient",
+  "description": "Fixes a bug with the minified version of the browser SDK where sending Sets of data with the DynamoDB DocumentClient would cause an error to be returned from the service."
+}
