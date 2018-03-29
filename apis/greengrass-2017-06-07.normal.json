@@ -22,16 +22,16 @@
       },
       "output" : {
         "shape" : "AssociateRoleToGroupResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "User Error"
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "Server Error"
+        "documentation" : "server error"
       } ],
-      "documentation" : "Associates a role with a group. The role will be used by the AWS Greengrass core in order to access AWS cloud services. The role's permissions will allow Greengrass core Lambda functions to perform actions against the cloud."
+      "documentation" : "Associates a role with a group. Your AWS Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud."
     },
     "AssociateServiceRoleToAccount" : {
       "name" : "AssociateServiceRoleToAccount",
@@ -45,16 +45,16 @@
       },
       "output" : {
         "shape" : "AssociateServiceRoleToAccountResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "User Error"
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "Server Error"
+        "documentation" : "server error"
       } ],
-      "documentation" : "Associates a role which is used by AWS Greengrass. AWS Greengrass uses the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. It needs to have minimum permissions in policy ``AWSGreengrassResourceAccessRolePolicy``"
+      "documentation" : "Associates a role with your account. AWS Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''."
     },
     "CreateCoreDefinition" : {
       "name" : "CreateCoreDefinition",
@@ -71,9 +71,9 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Creates a core definition. You may optionally provide the initial version of the core definition or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core."
+      "documentation" : "Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass groups must each contain exactly one AWS Greengrass core."
     },
     "CreateCoreDefinitionVersion" : {
       "name" : "CreateCoreDefinitionVersion",
@@ -90,9 +90,9 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Creates a version of a core definition that has already been defined. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core."
+      "documentation" : "Creates a version of a core definition that has already been defined. AWS Greengrass groups must each contain exactly one AWS Greengrass core."
     },
     "CreateDeployment" : {
       "name" : "CreateDeployment",
@@ -106,11 +106,11 @@
       },
       "output" : {
         "shape" : "CreateDeploymentResponse",
-        "documentation" : "Successfully deployed the given group"
+        "documentation" : "Success. The group was deployed."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "This request was invalid."
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Creates a deployment."
     },
@@ -129,9 +129,9 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Creates a device definition. You may optinally provide the initial version of the device definition or use ``CreateDeviceDefinitionVersion`` at a later time."
+      "documentation" : "Creates a device definition. You may provide the initial version of the device definition now or use ''CreateDeviceDefinitionVersion'' at a later time."
     },
     "CreateDeviceDefinitionVersion" : {
       "name" : "CreateDeviceDefinitionVersion",
@@ -148,7 +148,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Creates a version of a device definition that has already been defined."
     },
@@ -167,9 +167,9 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ``CreateFunctionDefinitionVersion`` later."
+      "documentation" : "Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ''CreateFunctionDefinitionVersion'' later."
     },
     "CreateFunctionDefinitionVersion" : {
       "name" : "CreateFunctionDefinitionVersion",
@@ -186,9 +186,9 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Create a version of a Lambda function definition that has already been defined."
+      "documentation" : "Creates a version of a Lambda function definition that has already been defined."
     },
     "CreateGroup" : {
       "name" : "CreateGroup",
@@ -202,13 +202,13 @@
       },
       "output" : {
         "shape" : "CreateGroupResponse",
-        "documentation" : "Group created successfully"
+        "documentation" : "Success. The group was created."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Creates a group. You may optionally provide the initial version of the group or use ''CreateGroupVersion'' at a later time."
+      "documentation" : "Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time."
     },
     "CreateGroupCertificateAuthority" : {
       "name" : "CreateGroupCertificateAuthority",
@@ -222,14 +222,14 @@
       },
       "output" : {
         "shape" : "CreateGroupCertificateAuthorityResponse",
-        "documentation" : "The response body contains the new active CA ARN"
+        "documentation" : "Success. The response body contains the new active CA ARN."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "This request was invalid."
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "The server encountered an unexpected error."
+        "documentation" : "server error"
       } ],
       "documentation" : "Creates a CA for the group. If a CA already exists, it will rotate the existing CA."
     },
@@ -245,11 +245,11 @@
       },
       "output" : {
         "shape" : "CreateGroupVersionResponse",
-        "documentation" : "the requested version of the Group"
+        "documentation" : "Success. The response contains information about the group version."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Creates a version of a group which has already been defined."
     },
@@ -268,9 +268,9 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Creates a logger definition. You may optionally provide the initial version of the logger definition or use ``CreateLoggerDefinitionVersion`` at a later time."
+      "documentation" : "Creates a logger definition. You may provide the initial version of the logger definition now or use ''CreateLoggerDefinitionVersion'' at a later time."
     },
     "CreateLoggerDefinitionVersion" : {
       "name" : "CreateLoggerDefinitionVersion",
@@ -287,7 +287,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Creates a version of a logger definition that has already been defined."
     },
@@ -306,9 +306,9 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ``CreateResourceDefinitionVersion`` later."
+      "documentation" : "Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ''CreateResourceDefinitionVersion'' later."
     },
     "CreateResourceDefinitionVersion" : {
       "name" : "CreateResourceDefinitionVersion",
@@ -325,9 +325,9 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Create a version of a resource definition that has already been defined."
+      "documentation" : "Creates a version of a resource definition that has already been defined."
     },
     "CreateSoftwareUpdateJob" : {
       "name" : "CreateSoftwareUpdateJob",
@@ -341,16 +341,16 @@
       },
       "output" : {
         "shape" : "CreateSoftwareUpdateJobResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "server error"
       } ],
-      "documentation" : "Creates an Iot Job that will trigger your Greengrass Cores to update the software they are running."
+      "documentation" : "Creates a software update for a core or group of cores (specified as an IoT thing group.) Use this to update the OTA Agent as well as the Greengrass core software. It makes use of the IoT Jobs feature which provides additional commands to manage a Greengrass core software update job."
     },
     "CreateSubscriptionDefinition" : {
       "name" : "CreateSubscriptionDefinition",
@@ -367,9 +367,9 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Creates a subscription definition. You may optionally provide the initial version of the subscription definition or use ``CreateSubscriptionDefinitionVersion`` at a later time."
+      "documentation" : "Creates a subscription definition. You may provide the initial version of the subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a later time."
     },
     "CreateSubscriptionDefinitionVersion" : {
       "name" : "CreateSubscriptionDefinitionVersion",
@@ -386,7 +386,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Creates a version of a subscription definition which has already been defined."
     },
@@ -402,13 +402,13 @@
       },
       "output" : {
         "shape" : "DeleteCoreDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Deletes a core definition. The core definition must not have been used in a deployment."
+      "documentation" : "Deletes a core definition."
     },
     "DeleteDeviceDefinition" : {
       "name" : "DeleteDeviceDefinition",
@@ -422,13 +422,13 @@
       },
       "output" : {
         "shape" : "DeleteDeviceDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Deletes a device definition. The device definition must not have been used in a deployment."
+      "documentation" : "Deletes a device definition."
     },
     "DeleteFunctionDefinition" : {
       "name" : "DeleteFunctionDefinition",
@@ -442,13 +442,13 @@
       },
       "output" : {
         "shape" : "DeleteFunctionDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Deletes a Lambda function definition. The Lambda function definition must not have been used in a deployment."
+      "documentation" : "Deletes a Lambda function definition."
     },
     "DeleteGroup" : {
       "name" : "DeleteGroup",
@@ -462,13 +462,13 @@
       },
       "output" : {
         "shape" : "DeleteGroupResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Deletes a group. The group must not have been used in deployment."
+      "documentation" : "Deletes a group."
     },
     "DeleteLoggerDefinition" : {
       "name" : "DeleteLoggerDefinition",
@@ -482,13 +482,13 @@
       },
       "output" : {
         "shape" : "DeleteLoggerDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Deletes a logger definition. The logger definition must not have been used in a deployment."
+      "documentation" : "Deletes a logger definition."
     },
     "DeleteResourceDefinition" : {
       "name" : "DeleteResourceDefinition",
@@ -502,11 +502,11 @@
       },
       "output" : {
         "shape" : "DeleteResourceDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Deletes a resource definition."
     },
@@ -522,13 +522,13 @@
       },
       "output" : {
         "shape" : "DeleteSubscriptionDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Deletes a subscription definition. The subscription definition must not have been used in a deployment."
+      "documentation" : "Deletes a subscription definition."
     },
     "DisassociateRoleFromGroup" : {
       "name" : "DisassociateRoleFromGroup",
@@ -542,14 +542,14 @@
       },
       "output" : {
         "shape" : "DisassociateRoleFromGroupResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "User Error"
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "Server Error"
+        "documentation" : "server error"
       } ],
       "documentation" : "Disassociates the role from a group."
     },
@@ -565,13 +565,13 @@
       },
       "output" : {
         "shape" : "DisassociateServiceRoleFromAccountResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "InternalServerErrorException",
-        "documentation" : "Server Error"
+        "documentation" : "server error"
       } ],
-      "documentation" : "Disassociates the service role from the account. Without a service role, deployments will not work."
+      "documentation" : "Disassociates the service role from your account. Without a service role, deployments will not work."
     },
     "GetAssociatedRole" : {
       "name" : "GetAssociatedRole",
@@ -585,14 +585,14 @@
       },
       "output" : {
         "shape" : "GetAssociatedRoleResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "User Error"
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "Server Error"
+        "documentation" : "server error"
       } ],
       "documentation" : "Retrieves the role associated with a particular group."
     },
@@ -608,14 +608,14 @@
       },
       "output" : {
         "shape" : "GetConnectivityInfoResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "server error"
       } ],
       "documentation" : "Retrieves the connectivity information for a core."
     },
@@ -634,7 +634,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Retrieves information about a core definition version."
     },
@@ -650,11 +650,11 @@
       },
       "output" : {
         "shape" : "GetCoreDefinitionVersionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Retrieves information about a core definition version."
     },
@@ -670,11 +670,11 @@
       },
       "output" : {
         "shape" : "GetDeploymentStatusResponse",
-        "documentation" : "The response body contains the status of a deployment for a group."
+        "documentation" : "Success. The response body contains the status of the deployment for the group."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "This request was invalid."
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Returns the status of a deployment."
     },
@@ -693,7 +693,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Retrieves information about a device definition."
     },
@@ -712,7 +712,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Retrieves information about a device definition version."
     },
@@ -728,13 +728,13 @@
       },
       "output" : {
         "shape" : "GetFunctionDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Retrieves information about a Lambda function definition, such as its creation time and latest version."
+      "documentation" : "Retrieves information about a Lambda function definition, including its creation time and latest version."
     },
     "GetFunctionDefinitionVersion" : {
       "name" : "GetFunctionDefinitionVersion",
@@ -748,13 +748,13 @@
       },
       "output" : {
         "shape" : "GetFunctionDefinitionVersionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Retrieves information about a Lambda function definition version, such as which Lambda functions are included in the version and their configurations."
+      "documentation" : "Retrieves information about a Lambda function definition version, including which Lambda functions are included in the version and their configurations."
     },
     "GetGroup" : {
       "name" : "GetGroup",
@@ -768,11 +768,11 @@
       },
       "output" : {
         "shape" : "GetGroupResponse",
-        "documentation" : "the requested Group"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Retrieves information about a group."
     },
@@ -788,14 +788,14 @@
       },
       "output" : {
         "shape" : "GetGroupCertificateAuthorityResponse",
-        "documentation" : "The response body contains the PKI Configuration"
+        "documentation" : "Success. The response body contains the PKI Configuration."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "This request was invalid."
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "This request was invalid."
+        "documentation" : "server error"
       } ],
       "documentation" : "Retreives the CA associated with a group. Returns the public key of the CA."
     },
@@ -811,14 +811,14 @@
       },
       "output" : {
         "shape" : "GetGroupCertificateConfigurationResponse",
-        "documentation" : "The response body contains the PKI Configuration"
+        "documentation" : "Success. The response body contains the PKI Configuration."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "This request was invalid."
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "This request was invalid."
+        "documentation" : "server error"
       } ],
       "documentation" : "Retrieves the current configuration for the CA used by the group."
     },
@@ -834,11 +834,11 @@
       },
       "output" : {
         "shape" : "GetGroupVersionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Retrieves information about a group version."
     },
@@ -857,7 +857,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Retrieves information about a logger definition."
     },
@@ -873,11 +873,11 @@
       },
       "output" : {
         "shape" : "GetLoggerDefinitionVersionResponse",
-        "documentation" : "test"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Retrieves information about a logger definition version."
     },
@@ -893,13 +893,13 @@
       },
       "output" : {
         "shape" : "GetResourceDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Retrieves information about a resource definition, such as its creation time and latest version."
+      "documentation" : "Retrieves information about a resource definition, including its creation time and latest version."
     },
     "GetResourceDefinitionVersion" : {
       "name" : "GetResourceDefinitionVersion",
@@ -913,13 +913,13 @@
       },
       "output" : {
         "shape" : "GetResourceDefinitionVersionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Retrieves information about a resource definition version, such as which resources are included in the version."
+      "documentation" : "Retrieves information about a resource definition version, including which resources are included in the version."
     },
     "GetServiceRoleForAccount" : {
       "name" : "GetServiceRoleForAccount",
@@ -933,13 +933,13 @@
       },
       "output" : {
         "shape" : "GetServiceRoleForAccountResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "InternalServerErrorException",
-        "documentation" : "Server Error"
+        "documentation" : "server error"
       } ],
-      "documentation" : "Retrieves the service role that is attached to the account."
+      "documentation" : "Retrieves the service role that is attached to your account."
     },
     "GetSubscriptionDefinition" : {
       "name" : "GetSubscriptionDefinition",
@@ -956,7 +956,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Retrieves information about a subscription definition."
     },
@@ -975,7 +975,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Retrieves information about a subscription definition version."
     },
@@ -994,9 +994,9 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "Lists versions of a core definition."
+      "documentation" : "Lists the versions of a core definition."
     },
     "ListCoreDefinitions" : {
       "name" : "ListCoreDefinitions",
@@ -1026,11 +1026,11 @@
       },
       "output" : {
         "shape" : "ListDeploymentsResponse",
-        "documentation" : "The response body contains the list of deployments for the given group Id"
+        "documentation" : "Success. The response body contains the list of deployments for the given group."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "This request was invalid."
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Returns a history of deployments for the group."
     },
@@ -1049,7 +1049,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Lists the versions of a device definition."
     },
@@ -1081,11 +1081,11 @@
       },
       "output" : {
         "shape" : "ListFunctionDefinitionVersionsResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Lists the versions of a Lambda function definition."
     },
@@ -1101,7 +1101,7 @@
       },
       "output" : {
         "shape" : "ListFunctionDefinitionsResponse",
-        "documentation" : "The Ids of all the Greengrass Function Definitions in this account."
+        "documentation" : "Success. The response contains the IDs of all the Greengrass Lambda function definitions in this account."
       },
       "errors" : [ ],
       "documentation" : "Retrieves a list of Lambda function definitions."
@@ -1118,14 +1118,14 @@
       },
       "output" : {
         "shape" : "ListGroupCertificateAuthoritiesResponse",
-        "documentation" : "The response body contains the PKI Configuration"
+        "documentation" : "Success. The response body contains the PKI Configuration."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "This request was invalid."
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "This request was invalid."
+        "documentation" : "server error"
       } ],
       "documentation" : "Retrieves the current CAs for a group."
     },
@@ -1141,13 +1141,13 @@
       },
       "output" : {
         "shape" : "ListGroupVersionsResponse",
-        "documentation" : "the list of versions and metadata for the given group Id"
+        "documentation" : "Success. The response contains the list of versions and metadata for the given group."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
-      "documentation" : "List the versions of a group."
+      "documentation" : "Lists the versions of a group."
     },
     "ListGroups" : {
       "name" : "ListGroups",
@@ -1180,7 +1180,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Lists the versions of a logger definition."
     },
@@ -1212,11 +1212,11 @@
       },
       "output" : {
         "shape" : "ListResourceDefinitionVersionsResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Lists the versions of a resource definition."
     },
@@ -1232,7 +1232,7 @@
       },
       "output" : {
         "shape" : "ListResourceDefinitionsResponse",
-        "documentation" : "The Ids of all the Greengrass Resource Definitions in this account."
+        "documentation" : "The IDs of all the Greengrass resource definitions in this account."
       },
       "errors" : [ ],
       "documentation" : "Retrieves a list of resource definitions."
@@ -1252,7 +1252,7 @@
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Lists the versions of a subscription definition."
     },
@@ -1304,14 +1304,14 @@
       },
       "output" : {
         "shape" : "UpdateConnectivityInfoResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "server error"
       } ],
       "documentation" : "Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it."
     },
@@ -1327,11 +1327,11 @@
       },
       "output" : {
         "shape" : "UpdateCoreDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Updates a core definition."
     },
@@ -1347,11 +1347,11 @@
       },
       "output" : {
         "shape" : "UpdateDeviceDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Updates a device definition."
     },
@@ -1367,11 +1367,11 @@
       },
       "output" : {
         "shape" : "UpdateFunctionDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Updates a Lambda function definition."
     },
@@ -1387,11 +1387,11 @@
       },
       "output" : {
         "shape" : "UpdateGroupResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Updates a group."
     },
@@ -1407,16 +1407,16 @@
       },
       "output" : {
         "shape" : "UpdateGroupCertificateConfigurationResponse",
-        "documentation" : "The response body contains the PKI Configuration"
+        "documentation" : "Success. The response body contains the PKI Configuration."
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "This request was invalid."
+        "documentation" : "invalid request"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "This request was invalid."
+        "documentation" : "server error"
       } ],
-      "documentation" : "Updates the Cert expiry time for a group."
+      "documentation" : "Updates the Certificate expiry time for a group."
     },
     "UpdateLoggerDefinition" : {
       "name" : "UpdateLoggerDefinition",
@@ -1430,11 +1430,11 @@
       },
       "output" : {
         "shape" : "UpdateLoggerDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Updates a logger definition."
     },
@@ -1450,11 +1450,11 @@
       },
       "output" : {
         "shape" : "UpdateResourceDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Updates a resource definition."
     },
@@ -1470,11 +1470,11 @@
       },
       "output" : {
         "shape" : "UpdateSubscriptionDefinitionResponse",
-        "documentation" : "200 response"
+        "documentation" : "success"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "user error"
+        "documentation" : "invalid request"
       } ],
       "documentation" : "Updates a subscription definition."
     }
@@ -1487,11 +1487,11 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         },
         "RoleArn" : {
           "shape" : "__string",
-          "documentation" : "Role arn you wish to associate with this group."
+          "documentation" : "The ARN of the role you wish to associate with this group."
         }
       },
       "required" : [ "GroupId" ]
@@ -1501,7 +1501,7 @@
       "members" : {
         "AssociatedAt" : {
           "shape" : "__string",
-          "documentation" : "Time the role arn was associated to your group."
+          "documentation" : "The time, in milliseconds since the epoch, when the role ARN was associated with the group."
         }
       }
     },
@@ -1510,7 +1510,7 @@
       "members" : {
         "RoleArn" : {
           "shape" : "__string",
-          "documentation" : "Role arn you wish to associate with this account."
+          "documentation" : "The ARN of the service role you wish to associate with your account."
         }
       }
     },
@@ -1519,7 +1519,7 @@
       "members" : {
         "AssociatedAt" : {
           "shape" : "__string",
-          "documentation" : "Time when the service role was associated to the account."
+          "documentation" : "The time when the service role was associated with the account."
         }
       }
     },
@@ -1528,14 +1528,14 @@
       "members" : {
         "ErrorDetails" : {
           "shape" : "ErrorDetails",
-          "documentation" : "Error Details"
+          "documentation" : "Details about the error."
         },
         "Message" : {
           "shape" : "__string",
-          "documentation" : "Message containing information about the error"
+          "documentation" : "A message containing information about the error."
         }
       },
-      "documentation" : "General Error",
+      "documentation" : "General error information.",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 400
@@ -1546,11 +1546,11 @@
       "members" : {
         "HostAddress" : {
           "shape" : "__string",
-          "documentation" : "Endpoint for the GGC. Can be an IP address or DNS."
+          "documentation" : "The endpoint for the Greengrass core. Can be an IP address or DNS."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Element Id for this entry in the list."
+          "documentation" : "The ID of the connectivity information."
         },
         "Metadata" : {
           "shape" : "__string",
@@ -1558,42 +1558,43 @@
         },
         "PortNumber" : {
           "shape" : "__integer",
-          "documentation" : "Port of the GGC. Usually 8883."
+          "documentation" : "The port of the Greengrass core. Usually 8883."
         }
       },
-      "documentation" : "Connectivity Info"
+      "documentation" : "Information about a Greengrass core's connectivity."
     },
     "Core" : {
       "type" : "structure",
       "members" : {
         "CertificateArn" : {
           "shape" : "__string",
-          "documentation" : "Certificate arn of the core."
+          "documentation" : "The ARN of the certificate associated with the core."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Element Id for this entry in the list."
+          "documentation" : "The ID of the core."
         },
         "SyncShadow" : {
           "shape" : "__boolean",
-          "documentation" : "If true, the local shadow value automatically syncs with the cloud's shadow state."
+          "documentation" : "If true, the core's local shadow is automatically synced with the cloud."
         },
         "ThingArn" : {
           "shape" : "__string",
-          "documentation" : "Thing arn of the core."
+          "documentation" : "The ARN of the thing which is the core."
         }
       },
-      "documentation" : "Information on the core"
+      "documentation" : "Information about a core.",
+      "required" : [ ]
     },
     "CoreDefinitionVersion" : {
       "type" : "structure",
       "members" : {
         "Cores" : {
-          "shape" : "ListOfCore",
-          "documentation" : "Cores in the definition version."
+          "shape" : "__listOfCore",
+          "documentation" : "A list of cores in the core definition version."
         }
       },
-      "documentation" : "Information on core definition version"
+      "documentation" : "Information about a core definition version."
     },
     "CreateCoreDefinitionRequest" : {
       "type" : "structure",
@@ -1602,49 +1603,49 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "InitialVersion" : {
           "shape" : "CoreDefinitionVersion",
-          "documentation" : "Information on the initial version"
+          "documentation" : "Information about the initial version of the core definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the core definition"
+          "documentation" : "The name of the core definition."
         }
       },
-      "documentation" : "Information on the core definition request"
+      "documentation" : "Information needed to create a core definition."
     },
     "CreateCoreDefinitionResponse" : {
       "type" : "structure",
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -1655,17 +1656,17 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "CoreDefinitionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "CoreDefinitionId",
-          "documentation" : "core definition Id"
+          "documentation" : "The ID of the core definition."
         },
         "Cores" : {
-          "shape" : "ListOfCore",
-          "documentation" : "Cores in the definition version."
+          "shape" : "__listOfCore",
+          "documentation" : "A list of cores in the core definition version."
         }
       },
       "required" : [ "CoreDefinitionId" ]
@@ -1675,19 +1676,19 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the version."
+          "documentation" : "The ARN of the version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the version was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the resource container."
+          "documentation" : "The ID of the version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Unique Id of a version."
+          "documentation" : "The unique ID of the version."
         }
       }
     },
@@ -1698,25 +1699,25 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "DeploymentId" : {
           "shape" : "__string",
-          "documentation" : "Id of the deployment if you wish to redeploy a previous deployment."
+          "documentation" : "The ID of the deployment if you wish to redeploy a previous deployment."
         },
         "DeploymentType" : {
           "shape" : "DeploymentType",
-          "documentation" : "Type of deployment. When used in CreateDeployment, only NewDeployment and Redeployment are valid. "
+          "documentation" : "The type of deployment. When used in ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid."
         },
         "GroupId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         },
         "GroupVersionId" : {
           "shape" : "__string",
-          "documentation" : "Group Version you wish to deploy."
+          "documentation" : "The ID of the group version to be deployed."
         }
       },
       "required" : [ "GroupId" ]
@@ -1726,11 +1727,11 @@
       "members" : {
         "DeploymentArn" : {
           "shape" : "__string",
-          "documentation" : "The arn of the deployment."
+          "documentation" : "The ARN of the deployment."
         },
         "DeploymentId" : {
           "shape" : "__string",
-          "documentation" : "The id of the deployment."
+          "documentation" : "The ID of the deployment."
         }
       }
     },
@@ -1741,15 +1742,15 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "InitialVersion" : {
           "shape" : "DeviceDefinitionVersion",
-          "documentation" : "Information on the initial version"
+          "documentation" : "Information about the initial version of the device definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the device definition"
+          "documentation" : "The name of the device definition."
         }
       }
     },
@@ -1758,31 +1759,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -1793,17 +1794,17 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "DeviceDefinitionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "DeviceDefinitionId",
-          "documentation" : "device definition Id"
+          "documentation" : "The ID of the device definition."
         },
         "Devices" : {
-          "shape" : "ListOfDevice",
-          "documentation" : "Devices in the definition version."
+          "shape" : "__listOfDevice",
+          "documentation" : "A list of devices in the definition version."
         }
       },
       "required" : [ "DeviceDefinitionId" ]
@@ -1813,19 +1814,19 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the version."
+          "documentation" : "The ARN of the version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the version was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the resource container."
+          "documentation" : "The ID of the version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Unique Id of a version."
+          "documentation" : "The unique ID of the version."
         }
       }
     },
@@ -1836,15 +1837,15 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "InitialVersion" : {
           "shape" : "FunctionDefinitionVersion",
-          "documentation" : "Information on the initial version"
+          "documentation" : "Information about the initial version of the function definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the function definition"
+          "documentation" : "The name of the function definition."
         }
       }
     },
@@ -1853,31 +1854,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -1888,20 +1889,20 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "FunctionDefinitionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "FunctionDefinitionId",
-          "documentation" : "the unique Id of the lambda definition"
+          "documentation" : "The ID of the Lambda function definition."
         },
         "Functions" : {
-          "shape" : "ListOfFunction",
-          "documentation" : "Lambda functions in this function definition version."
+          "shape" : "__listOfFunction",
+          "documentation" : "A list of Lambda functions in this function definition version."
         }
       },
-      "documentation" : "Function definition version",
+      "documentation" : "Information needed to create a function definition version.",
       "required" : [ "FunctionDefinitionId" ]
     },
     "CreateFunctionDefinitionVersionResponse" : {
@@ -1909,19 +1910,19 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the version."
+          "documentation" : "The ARN of the version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the version was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the resource container."
+          "documentation" : "The ID of the version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Unique Id of a version."
+          "documentation" : "The unique ID of the version."
         }
       }
     },
@@ -1932,13 +1933,13 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "GroupId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
       "required" : [ "GroupId" ]
@@ -1948,7 +1949,7 @@
       "members" : {
         "GroupCertificateAuthorityArn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the group certificate authority."
+          "documentation" : "The ARN of the group certificate authority."
         }
       }
     },
@@ -1959,15 +1960,15 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "InitialVersion" : {
           "shape" : "GroupVersion",
-          "documentation" : "Information on the initial version"
+          "documentation" : "Information about the initial version of the group."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the group"
+          "documentation" : "The name of the group."
         }
       }
     },
@@ -1976,31 +1977,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -2011,37 +2012,37 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "CoreDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Core definition version arn for this group."
+          "documentation" : "The ARN of the core definition version for this group."
         },
         "DeviceDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Device definition version arn for this group."
+          "documentation" : "The ARN of the device definition version for this group."
         },
         "FunctionDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Function definition version arn for this group."
+          "documentation" : "The ARN of the function definition version for this group."
         },
         "GroupId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         },
         "LoggerDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Logger definition version arn for this group."
+          "documentation" : "The ARN of the logger definition version for this group."
         },
         "ResourceDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Resource definition version arn for this group."
+          "documentation" : "The resource definition version ARN for this group."
         },
         "SubscriptionDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Subscription definition version arn for this group."
+          "documentation" : "The ARN of the subscription definition version for this group."
         }
       },
       "required" : [ "GroupId" ]
@@ -2051,19 +2052,19 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the version."
+          "documentation" : "The ARN of the version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the version was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the resource container."
+          "documentation" : "The ID of the version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Unique Id of a version."
+          "documentation" : "The unique ID of the version."
         }
       }
     },
@@ -2074,15 +2075,15 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "InitialVersion" : {
           "shape" : "LoggerDefinitionVersion",
-          "documentation" : "Information on the initial version"
+          "documentation" : "Information about the initial version of the logger definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the logger definition"
+          "documentation" : "The name of the logger definition."
         }
       }
     },
@@ -2091,31 +2092,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -2126,17 +2127,17 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "LoggerDefinitionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "LoggerDefinitionId",
-          "documentation" : "logger definition Id"
+          "documentation" : "The ID of the logger definition."
         },
         "Loggers" : {
-          "shape" : "ListOfLogger",
-          "documentation" : "List of loggers."
+          "shape" : "__listOfLogger",
+          "documentation" : "A list of loggers."
         }
       },
       "required" : [ "LoggerDefinitionId" ]
@@ -2146,19 +2147,19 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the version."
+          "documentation" : "The ARN of the version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the version was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the resource container."
+          "documentation" : "The ID of the version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Unique Id of a version."
+          "documentation" : "The unique ID of the version."
         }
       }
     },
@@ -2169,15 +2170,15 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "InitialVersion" : {
           "shape" : "ResourceDefinitionVersion",
-          "documentation" : "Information on the initial version"
+          "documentation" : "Information about the initial version of the resource definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the resource definition"
+          "documentation" : "The name of the resource definition."
         }
       }
     },
@@ -2186,31 +2187,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -2221,17 +2222,17 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "ResourceDefinitionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "ResourceDefinitionId",
-          "documentation" : "Resource definition Id."
+          "documentation" : "The ID of the resource definition."
         },
         "Resources" : {
-          "shape" : "ListOfResource",
-          "documentation" : "List of resources."
+          "shape" : "__listOfResource",
+          "documentation" : "A list of resources."
         }
       },
       "required" : [ "ResourceDefinitionId" ]
@@ -2241,19 +2242,19 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the version."
+          "documentation" : "The ARN of the version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the version was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the resource container."
+          "documentation" : "The ID of the version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Unique Id of a version."
+          "documentation" : "The unique ID of the version."
         }
       }
     },
@@ -2264,7 +2265,7 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "S3UrlSignerRole" : {
           "shape" : "S3UrlSignerRole"
@@ -2291,11 +2292,11 @@
       "members" : {
         "IotJobArn" : {
           "shape" : "__string",
-          "documentation" : "The Iot Job Arn corresponding to this update."
+          "documentation" : "The IoT Job ARN corresponding to this update."
         },
         "IotJobId" : {
           "shape" : "__string",
-          "documentation" : "The Iot Job Id corresponding to this update."
+          "documentation" : "The IoT Job Id corresponding to this update."
         }
       }
     },
@@ -2306,15 +2307,15 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "InitialVersion" : {
           "shape" : "SubscriptionDefinitionVersion",
-          "documentation" : "Information on the initial version"
+          "documentation" : "Information about the initial version of the subscription definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the subscription definition"
+          "documentation" : "The name of the subscription definition."
         }
       }
     },
@@ -2323,31 +2324,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -2358,17 +2359,17 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "SubscriptionDefinitionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "SubscriptionDefinitionId",
-          "documentation" : "subscription definition Id"
+          "documentation" : "The ID of the subscription definition."
         },
         "Subscriptions" : {
-          "shape" : "ListOfSubscription",
-          "documentation" : "Subscriptions in the version."
+          "shape" : "__listOfSubscription",
+          "documentation" : "A list of subscriptions."
         }
       },
       "required" : [ "SubscriptionDefinitionId" ]
@@ -2378,19 +2379,19 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the version."
+          "documentation" : "The ARN of the version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the version was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the resource container."
+          "documentation" : "The ID of the version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Unique Id of a version."
+          "documentation" : "The unique ID of the version."
         }
       }
     },
@@ -2399,34 +2400,34 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       },
-      "documentation" : "Information on the Definition"
+      "documentation" : "Information about a definition."
     },
     "DeleteCoreDefinitionRequest" : {
       "type" : "structure",
@@ -2435,7 +2436,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "CoreDefinitionId",
-          "documentation" : "core definition Id"
+          "documentation" : "The ID of the core definition."
         }
       },
       "required" : [ "CoreDefinitionId" ]
@@ -2451,7 +2452,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "DeviceDefinitionId",
-          "documentation" : "device definition Id"
+          "documentation" : "The ID of the device definition."
         }
       },
       "required" : [ "DeviceDefinitionId" ]
@@ -2467,7 +2468,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "FunctionDefinitionId",
-          "documentation" : "the unique Id of the lambda definition"
+          "documentation" : "The ID of the Lambda function definition."
         }
       },
       "required" : [ "FunctionDefinitionId" ]
@@ -2483,7 +2484,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
       "required" : [ "GroupId" ]
@@ -2499,7 +2500,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "LoggerDefinitionId",
-          "documentation" : "logger definition Id"
+          "documentation" : "The ID of the logger definition."
         }
       },
       "required" : [ "LoggerDefinitionId" ]
@@ -2515,7 +2516,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "ResourceDefinitionId",
-          "documentation" : "Resource definition Id."
+          "documentation" : "The ID of the resource definition."
         }
       },
       "required" : [ "ResourceDefinitionId" ]
@@ -2531,7 +2532,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "SubscriptionDefinitionId",
-          "documentation" : "subscription definition Id"
+          "documentation" : "The ID of the subscription definition."
         }
       },
       "required" : [ "SubscriptionDefinitionId" ]
@@ -2545,26 +2546,26 @@
       "members" : {
         "CreatedAt" : {
           "shape" : "__string",
-          "documentation" : "Timestamp when the deployment was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the deployment was created."
         },
         "DeploymentArn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the deployment."
+          "documentation" : "The ARN of the deployment."
         },
         "DeploymentId" : {
           "shape" : "__string",
-          "documentation" : "Id of the deployment."
+          "documentation" : "The ID of the deployment."
         },
         "DeploymentType" : {
           "shape" : "DeploymentType",
-          "documentation" : "The type of deployment."
+          "documentation" : "The type of the deployment."
         },
         "GroupArn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the group for this deployment."
+          "documentation" : "The ARN of the group for this deployment."
         }
       },
-      "documentation" : "Information on the deployment"
+      "documentation" : "Information about a deployment."
     },
     "DeploymentType" : {
       "type" : "string",
@@ -2581,32 +2582,33 @@
       "members" : {
         "CertificateArn" : {
           "shape" : "__string",
-          "documentation" : "Certificate arn of the device."
+          "documentation" : "The ARN of the certificate associated with the device."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Element Id for this entry in the list."
+          "documentation" : "The ID of the device."
         },
         "SyncShadow" : {
           "shape" : "__boolean",
-          "documentation" : "If true, the local shadow value automatically syncs with the cloud's shadow state."
+          "documentation" : "If true, the device's local shadow will be automatically synced with the cloud."
         },
         "ThingArn" : {
           "shape" : "__string",
-          "documentation" : "Thing arn of the device."
+          "documentation" : "The thing ARN of the device."
         }
       },
-      "documentation" : "Information on a Device"
+      "documentation" : "Information about a device.",
+      "required" : [ ]
     },
     "DeviceDefinitionVersion" : {
       "type" : "structure",
       "members" : {
         "Devices" : {
-          "shape" : "ListOfDevice",
-          "documentation" : "Devices in the definition version."
+          "shape" : "__listOfDevice",
+          "documentation" : "A list of devices in the definition version."
         }
       },
-      "documentation" : "Information on device definition version"
+      "documentation" : "Information about a device definition version."
     },
     "DisassociateRoleFromGroupRequest" : {
       "type" : "structure",
@@ -2615,7 +2617,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
       "required" : [ "GroupId" ]
@@ -2625,7 +2627,7 @@
       "members" : {
         "DisassociatedAt" : {
           "shape" : "__string",
-          "documentation" : "Time when the role was disassociated from the group."
+          "documentation" : "The time, in milliseconds since the epoch, when the role was disassociated from the group."
         }
       }
     },
@@ -2638,7 +2640,7 @@
       "members" : {
         "DisassociatedAt" : {
           "shape" : "__string",
-          "documentation" : "Time when the service role was disassociated from the account."
+          "documentation" : "The time when the service role was disassociated from the account."
         }
       }
     },
@@ -2647,23 +2649,27 @@
       "members" : { },
       "documentation" : "Empty"
     },
+    "EncodingType" : {
+      "type" : "string",
+      "enum" : [ "binary", "json" ]
+    },
     "ErrorDetail" : {
       "type" : "structure",
       "members" : {
         "DetailedErrorCode" : {
           "shape" : "__string",
-          "documentation" : "Detailed Error Code"
+          "documentation" : "A detailed error code."
         },
         "DetailedErrorMessage" : {
           "shape" : "__string",
-          "documentation" : "Detailed Error Message"
+          "documentation" : "A detailed error message."
         }
       },
-      "documentation" : "ErrorDetail"
+      "documentation" : "Details about the error."
     },
     "ErrorDetails" : {
       "type" : "list",
-      "documentation" : "Error Details",
+      "documentation" : "A list of error details.",
       "member" : {
         "shape" : "ErrorDetail"
       }
@@ -2673,90 +2679,95 @@
       "members" : {
         "FunctionArn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the Lambda function."
+          "documentation" : "The ARN of the Lambda function."
         },
         "FunctionConfiguration" : {
           "shape" : "FunctionConfiguration",
-          "documentation" : "Configuration of the function"
+          "documentation" : "The configuration of the Lambda function."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the function in this version."
+          "documentation" : "The ID of the Lambda function."
         }
       },
-      "documentation" : "Information on function"
+      "documentation" : "Information about a Lambda function.",
+      "required" : [ ]
     },
     "FunctionConfiguration" : {
       "type" : "structure",
       "members" : {
+        "EncodingType" : {
+          "shape" : "EncodingType",
+          "documentation" : "The expected encoding type of the input payload for the function. The default is ''json''."
+        },
         "Environment" : {
           "shape" : "FunctionConfigurationEnvironment",
-          "documentation" : "Environment of the function configuration"
+          "documentation" : "The environment configuration of the function."
         },
         "ExecArgs" : {
           "shape" : "__string",
-          "documentation" : "Execution Arguments"
+          "documentation" : "The execution arguments."
         },
         "Executable" : {
           "shape" : "__string",
-          "documentation" : "Executable"
+          "documentation" : "The name of the function executable."
         },
         "MemorySize" : {
           "shape" : "__integer",
-          "documentation" : "The memory size, in KB, you configured for the function."
+          "documentation" : "The memory size, in KB, which the function requires."
         },
         "Pinned" : {
           "shape" : "__boolean",
-          "documentation" : "Whether the function is pinned or not. Pinned means the function is long-lived and starts when the core starts."
+          "documentation" : "True if the function is pinned. Pinned means the function is long-lived and starts when the core starts."
         },
         "Timeout" : {
           "shape" : "__integer",
-          "documentation" : "The function execution time at which Lambda should terminate the function. This timeout still applies to pinned lambdas for each request."
+          "documentation" : "The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned lambdas for each request."
         }
       },
-      "documentation" : "Configuration of the function"
+      "documentation" : "The configuration of the Lambda function."
     },
     "FunctionConfigurationEnvironment" : {
       "type" : "structure",
       "members" : {
         "AccessSysfs" : {
           "shape" : "__boolean",
-          "documentation" : "Flag to allow lambda access sys filesystem."
+          "documentation" : "If true, the Lambda function is allowed to access the host's /sys folder. Use this when the Lambda function needs to read device information from /sys."
         },
         "ResourceAccessPolicies" : {
-          "shape" : "ListOfResourceAccessPolicy",
-          "documentation" : "Policies for the function to access resources."
+          "shape" : "__listOfResourceAccessPolicy",
+          "documentation" : "A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources."
         },
         "Variables" : {
-          "shape" : "MapOf__string",
-          "documentation" : "Environment variables for the lambda function."
+          "shape" : "__mapOf__string",
+          "documentation" : "Environment variables for the Lambda function's configuration."
         }
       },
-      "documentation" : "Environment of the function configuration"
+      "documentation" : "The environment configuration of the function."
     },
     "FunctionDefinitionVersion" : {
       "type" : "structure",
       "members" : {
         "Functions" : {
-          "shape" : "ListOfFunction",
-          "documentation" : "Lambda functions in this function definition version."
+          "shape" : "__listOfFunction",
+          "documentation" : "A list of Lambda functions in this function definition version."
         }
       },
-      "documentation" : "Information on the function definition version"
+      "documentation" : "Information about a function definition version."
     },
     "GeneralError" : {
       "type" : "structure",
       "members" : {
         "ErrorDetails" : {
           "shape" : "ErrorDetails",
-          "documentation" : "Error Details"
+          "documentation" : "Details about the error."
         },
         "Message" : {
           "shape" : "__string",
-          "documentation" : "Message containing information about the error"
+          "documentation" : "A message containing information about the error."
         }
       },
-      "documentation" : "General Error"
+      "documentation" : "General error information."
     },
     "GetAssociatedRoleRequest" : {
       "type" : "structure",
@@ -2765,7 +2776,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
       "required" : [ "GroupId" ]
@@ -2775,11 +2786,11 @@
       "members" : {
         "AssociatedAt" : {
           "shape" : "__string",
-          "documentation" : "Time when the role was associated for the group."
+          "documentation" : "The time when the role was associated with the group."
         },
         "RoleArn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the role that is associated with the group."
+          "documentation" : "The ARN of the role that is associated with the group."
         }
       }
     },
@@ -2790,7 +2801,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "ThingName",
-          "documentation" : "Thing Name"
+          "documentation" : "The thing name."
         }
       },
       "required" : [ "ThingName" ]
@@ -2799,13 +2810,13 @@
       "type" : "structure",
       "members" : {
         "ConnectivityInfo" : {
-          "shape" : "ListOfConnectivityInfo",
-          "documentation" : "Connectivity info list"
+          "shape" : "__listOfConnectivityInfo",
+          "documentation" : "Connectivity info list."
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "Response Text"
+          "documentation" : "A message about the connectivity info request."
         }
       }
     },
@@ -2816,7 +2827,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "CoreDefinitionId",
-          "documentation" : "core definition Id"
+          "documentation" : "The ID of the core definition."
         }
       },
       "required" : [ "CoreDefinitionId" ]
@@ -2826,31 +2837,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -2861,13 +2872,13 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "CoreDefinitionId",
-          "documentation" : "core definition Id"
+          "documentation" : "The ID of the core definition."
         },
         "CoreDefinitionVersionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "CoreDefinitionVersionId",
-          "documentation" : "core definition version Id"
+          "documentation" : "The ID of the core definition version."
         }
       },
       "required" : [ "CoreDefinitionId", "CoreDefinitionVersionId" ]
@@ -2877,23 +2888,23 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the core definition version."
+          "documentation" : "The ARN of the core definition version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the core definition version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the core definition version was created."
         },
         "Definition" : {
           "shape" : "CoreDefinitionVersion",
-          "documentation" : "Information on definition"
+          "documentation" : "Information about the core definition version."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the core definition the version belongs to."
+          "documentation" : "The ID of the core definition version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Version of the core definition version."
+          "documentation" : "The version of the core definition version."
         }
       }
     },
@@ -2904,13 +2915,13 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "DeploymentId",
-          "documentation" : "the deployment Id"
+          "documentation" : "The ID of the deployment."
         },
         "GroupId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
       "required" : [ "GroupId", "DeploymentId" ]
@@ -2920,7 +2931,7 @@
       "members" : {
         "DeploymentStatus" : {
           "shape" : "__string",
-          "documentation" : "Status of the deployment."
+          "documentation" : "The status of the deployment."
         },
         "DeploymentType" : {
           "shape" : "DeploymentType",
@@ -2928,15 +2939,15 @@
         },
         "ErrorDetails" : {
           "shape" : "ErrorDetails",
-          "documentation" : "The error Details"
+          "documentation" : "Error details"
         },
         "ErrorMessage" : {
           "shape" : "__string",
-          "documentation" : "Error Message"
+          "documentation" : "Error message"
         },
         "UpdatedAt" : {
           "shape" : "__string",
-          "documentation" : "Last time the deployment status was updated."
+          "documentation" : "The time, in milliseconds since the epoch, when the deployment status was updated."
         }
       }
     },
@@ -2947,7 +2958,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "DeviceDefinitionId",
-          "documentation" : "device definition Id"
+          "documentation" : "The ID of the device definition."
         }
       },
       "required" : [ "DeviceDefinitionId" ]
@@ -2957,31 +2968,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -2992,13 +3003,13 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "DeviceDefinitionId",
-          "documentation" : "device definition Id"
+          "documentation" : "The ID of the device definition."
         },
         "DeviceDefinitionVersionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "DeviceDefinitionVersionId",
-          "documentation" : "device definition version Id"
+          "documentation" : "The ID of the device definition version."
         }
       },
       "required" : [ "DeviceDefinitionVersionId", "DeviceDefinitionId" ]
@@ -3008,23 +3019,23 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the device definition version."
+          "documentation" : "The ARN of the device definition version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the device definition version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the device definition version was created."
         },
         "Definition" : {
           "shape" : "DeviceDefinitionVersion",
-          "documentation" : "Device definition version"
+          "documentation" : "Information about the device definition version."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the device definition the version belongs to."
+          "documentation" : "The ID of the device definition version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Version of the device definition version."
+          "documentation" : "The version of the device definition version."
         }
       }
     },
@@ -3035,7 +3046,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "FunctionDefinitionId",
-          "documentation" : "the unique Id of the lambda definition"
+          "documentation" : "The ID of the Lambda function definition."
         }
       },
       "required" : [ "FunctionDefinitionId" ]
@@ -3045,31 +3056,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -3080,13 +3091,13 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "FunctionDefinitionId",
-          "documentation" : "the unique Id of the lambda definition"
+          "documentation" : "The ID of the Lambda function definition."
         },
         "FunctionDefinitionVersionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "FunctionDefinitionVersionId",
-          "documentation" : "Function definition version Id"
+          "documentation" : "The ID of the function definition version."
         }
       },
       "required" : [ "FunctionDefinitionId", "FunctionDefinitionVersionId" ]
@@ -3096,23 +3107,23 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the function definition version."
+          "documentation" : "The ARN of the function definition version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp when the funtion definition version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the function definition version was created."
         },
         "Definition" : {
           "shape" : "FunctionDefinitionVersion",
-          "documentation" : "Information on the definition"
+          "documentation" : "Information on the definition."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the function definition the version belongs to."
+          "documentation" : "The ID of the function definition version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Version of the function definition version."
+          "documentation" : "The version of the function definition version."
         }
       }
     },
@@ -3123,13 +3134,13 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "CertificateAuthorityId",
-          "documentation" : "certificate authority Id"
+          "documentation" : "The ID of the certificate authority."
         },
         "GroupId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
       "required" : [ "CertificateAuthorityId", "GroupId" ]
@@ -3139,15 +3150,15 @@
       "members" : {
         "GroupCertificateAuthorityArn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the certificate authority for the group."
+          "documentation" : "The ARN of the certificate authority for the group."
         },
         "GroupCertificateAuthorityId" : {
           "shape" : "__string",
-          "documentation" : "Id of the certificate authority for the group."
+          "documentation" : "The ID of the certificate authority for the group."
         },
         "PemEncodedCertificate" : {
           "shape" : "__string",
-          "documentation" : "PEM encoded certificate for the group."
+          "documentation" : "The PEM encoded certificate for the group."
         }
       }
     },
@@ -3158,7 +3169,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
       "required" : [ "GroupId" ]
@@ -3168,15 +3179,15 @@
       "members" : {
         "CertificateAuthorityExpiryInMilliseconds" : {
           "shape" : "__string",
-          "documentation" : "Amount of time when the certificate authority expires in milliseconds."
+          "documentation" : "The amount of time remaining before the certificate authority expires, in milliseconds."
         },
         "CertificateExpiryInMilliseconds" : {
           "shape" : "__string",
-          "documentation" : "Amount of time when the certificate expires in milliseconds."
+          "documentation" : "The amount of time remaining before the certificate expires, in milliseconds."
         },
         "GroupId" : {
           "shape" : "__string",
-          "documentation" : "Id of the group the certificate configuration belongs to."
+          "documentation" : "The ID of the group certificate configuration."
         }
       }
     },
@@ -3187,7 +3198,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
       "required" : [ "GroupId" ]
@@ -3197,31 +3208,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -3232,13 +3243,13 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         },
         "GroupVersionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupVersionId",
-          "documentation" : "Group version Id"
+          "documentation" : "The ID of the group version."
         }
       },
       "required" : [ "GroupVersionId", "GroupId" ]
@@ -3248,23 +3259,23 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the group version."
+          "documentation" : "The ARN of the group version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp when the group version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the group version was created."
         },
         "Definition" : {
           "shape" : "GroupVersion",
-          "documentation" : "Information on the definition"
+          "documentation" : "Information about the group version definition."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the group version."
+          "documentation" : "The ID of the group version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Unique Id for a version of the Group."
+          "documentation" : "The unique ID for the version of the group."
         }
       }
     },
@@ -3275,7 +3286,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "LoggerDefinitionId",
-          "documentation" : "logger definition Id"
+          "documentation" : "The ID of the logger definition."
         }
       },
       "required" : [ "LoggerDefinitionId" ]
@@ -3285,31 +3296,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -3320,13 +3331,13 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "LoggerDefinitionId",
-          "documentation" : "logger definition Id"
+          "documentation" : "The ID of the logger definition."
         },
         "LoggerDefinitionVersionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "LoggerDefinitionVersionId",
-          "documentation" : "logger definition version Id"
+          "documentation" : "The ID of the logger definition version."
         }
       },
       "required" : [ "LoggerDefinitionVersionId", "LoggerDefinitionId" ]
@@ -3336,23 +3347,23 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the logger definition version."
+          "documentation" : "The ARN of the logger definition version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the logger definition version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the logger definition version was created."
         },
         "Definition" : {
           "shape" : "LoggerDefinitionVersion",
-          "documentation" : "Information on definition"
+          "documentation" : "Information about the logger definition version."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the logger definition the version belongs to."
+          "documentation" : "The ID of the logger definition version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Version of the logger definition version."
+          "documentation" : "The version of the logger definition version."
         }
       }
     },
@@ -3363,7 +3374,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "ResourceDefinitionId",
-          "documentation" : "Resource definition Id."
+          "documentation" : "The ID of the resource definition."
         }
       },
       "required" : [ "ResourceDefinitionId" ]
@@ -3373,31 +3384,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -3408,13 +3419,13 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "ResourceDefinitionId",
-          "documentation" : "Resource definition Id."
+          "documentation" : "The ID of the resource definition."
         },
         "ResourceDefinitionVersionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "ResourceDefinitionVersionId",
-          "documentation" : "Resource definition version Id."
+          "documentation" : "The ID of the resource definition version."
         }
       },
       "required" : [ "ResourceDefinitionVersionId", "ResourceDefinitionId" ]
@@ -3428,19 +3439,19 @@
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the resource definition version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the resource definition version was created."
         },
         "Definition" : {
           "shape" : "ResourceDefinitionVersion",
-          "documentation" : "Information on definition."
+          "documentation" : "Information about the definition."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the resource definition the version belongs to."
+          "documentation" : "The ID of the resource definition version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Version of the resource definition version."
+          "documentation" : "The version of the resource definition version."
         }
       }
     },
@@ -3453,11 +3464,11 @@
       "members" : {
         "AssociatedAt" : {
           "shape" : "__string",
-          "documentation" : "Time when the service role was associated to the account."
+          "documentation" : "The time when the service role was associated with the account."
         },
         "RoleArn" : {
           "shape" : "__string",
-          "documentation" : "Role arn which is associated to the account."
+          "documentation" : "The ARN of the role which is associated with the account."
         }
       }
     },
@@ -3468,7 +3479,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "SubscriptionDefinitionId",
-          "documentation" : "subscription definition Id"
+          "documentation" : "The ID of the subscription definition."
         }
       },
       "required" : [ "SubscriptionDefinitionId" ]
@@ -3478,31 +3489,31 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the definition."
+          "documentation" : "The ARN of the definition."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the definition was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the definition."
+          "documentation" : "The ID of the definition."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the definition."
+          "documentation" : "The time, in milliseconds since the epoch, when the definition was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the definition."
+          "documentation" : "The latest version of the definition."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the definition."
+          "documentation" : "The ARN of the latest version of the definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of the definition."
+          "documentation" : "The name of the definition."
         }
       }
     },
@@ -3513,13 +3524,13 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "SubscriptionDefinitionId",
-          "documentation" : "subscription definition Id"
+          "documentation" : "The ID of the subscription definition."
         },
         "SubscriptionDefinitionVersionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "SubscriptionDefinitionVersionId",
-          "documentation" : "subscription definition version Id"
+          "documentation" : "The ID of the subscription definition version."
         }
       },
       "required" : [ "SubscriptionDefinitionId", "SubscriptionDefinitionVersionId" ]
@@ -3529,23 +3540,23 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the subscription definition version."
+          "documentation" : "The ARN of the subscription definition version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the subscription definition version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the subscription definition version was created."
         },
         "Definition" : {
           "shape" : "SubscriptionDefinitionVersion",
-          "documentation" : "Information on the definition"
+          "documentation" : "Information about the subscription definition version."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the subscription definition the version belongs to."
+          "documentation" : "The ID of the subscription definition version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Version of the subscription definition version."
+          "documentation" : "The version of the subscription definition version."
         }
       }
     },
@@ -3554,77 +3565,77 @@
       "members" : {
         "GroupCertificateAuthorityArn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the certificate authority for the group."
+          "documentation" : "The ARN of the certificate authority for the group."
         },
         "GroupCertificateAuthorityId" : {
           "shape" : "__string",
-          "documentation" : "Id of the certificate authority for the group."
+          "documentation" : "The ID of the certificate authority for the group."
         }
       },
-      "documentation" : "Information on group certificate authority properties"
+      "documentation" : "Information about a certificate authority for a group."
     },
     "GroupCertificateConfiguration" : {
       "type" : "structure",
       "members" : {
         "CertificateAuthorityExpiryInMilliseconds" : {
           "shape" : "__string",
-          "documentation" : "Amount of time when the certificate authority expires in milliseconds."
+          "documentation" : "The amount of time remaining before the certificate authority expires, in milliseconds."
         },
         "CertificateExpiryInMilliseconds" : {
           "shape" : "__string",
-          "documentation" : "Amount of time when the certificate expires in milliseconds."
+          "documentation" : "The amount of time remaining before the certificate expires, in milliseconds."
         },
         "GroupId" : {
           "shape" : "__string",
-          "documentation" : "Id of the group the certificate configuration belongs to."
+          "documentation" : "The ID of the group certificate configuration."
         }
       },
-      "documentation" : "Information on the group certificate configuration"
+      "documentation" : "Information about a group certificate configuration."
     },
     "GroupInformation" : {
       "type" : "structure",
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of a group."
+          "documentation" : "The ARN of the group."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the group was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the group was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of a group."
+          "documentation" : "The ID of the group."
         },
         "LastUpdatedTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Last updated timestamp of the group."
+          "documentation" : "The time, in milliseconds since the epoch, when the group was last updated."
         },
         "LatestVersion" : {
           "shape" : "__string",
-          "documentation" : "Last version of the group."
+          "documentation" : "The latest version of the group."
         },
         "LatestVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Latest version arn of the group."
+          "documentation" : "The ARN of the latest version of the group."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "Name of a group."
+          "documentation" : "The name of the group."
         }
       },
-      "documentation" : "Information on the group"
+      "documentation" : "Information about a group."
     },
     "GroupOwnerSetting" : {
       "type" : "structure",
       "members" : {
         "AutoAddGroupOwner" : {
           "shape" : "__boolean",
-          "documentation" : "Eanble the auto added group owner."
+          "documentation" : "If true, GreenGrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group."
         },
         "GroupOwner" : {
           "shape" : "__string",
-          "documentation" : "Name of the group owner."
+          "documentation" : "The name of the Linux OS group whose privileges will be added to the Lambda process. This field is optional."
         }
       },
       "documentation" : "Group owner related settings for local resources."
@@ -3634,44 +3645,44 @@
       "members" : {
         "CoreDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Core definition version arn for this group."
+          "documentation" : "The ARN of the core definition version for this group."
         },
         "DeviceDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Device definition version arn for this group."
+          "documentation" : "The ARN of the device definition version for this group."
         },
         "FunctionDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Function definition version arn for this group."
+          "documentation" : "The ARN of the function definition version for this group."
         },
         "LoggerDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Logger definition version arn for this group."
+          "documentation" : "The ARN of the logger definition version for this group."
         },
         "ResourceDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Resource definition version arn for this group."
+          "documentation" : "The resource definition version ARN for this group."
         },
         "SubscriptionDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Subscription definition version arn for this group."
+          "documentation" : "The ARN of the subscription definition version for this group."
         }
       },
-      "documentation" : "Information on group version"
+      "documentation" : "Information about a group version."
     },
     "InternalServerErrorException" : {
       "type" : "structure",
       "members" : {
         "ErrorDetails" : {
           "shape" : "ErrorDetails",
-          "documentation" : "Error Details"
+          "documentation" : "Details about the error."
         },
         "Message" : {
           "shape" : "__string",
-          "documentation" : "Message containing information about the error"
+          "documentation" : "A message containing information about the error."
         }
       },
-      "documentation" : "General Error",
+      "documentation" : "General error information.",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 500
@@ -3684,19 +3695,19 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "CoreDefinitionId",
-          "documentation" : "core definition Id"
+          "documentation" : "The ID of the core definition."
         },
         "MaxResults" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       },
       "required" : [ "CoreDefinitionId" ]
@@ -3709,8 +3720,8 @@
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         },
         "Versions" : {
-          "shape" : "ListOfVersionInformation",
-          "documentation" : "Versions"
+          "shape" : "__listOfVersionInformation",
+          "documentation" : "Information about a version."
         }
       }
     },
@@ -3721,13 +3732,13 @@
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       }
     },
@@ -3735,8 +3746,8 @@
       "type" : "structure",
       "members" : {
         "Definitions" : {
-          "shape" : "ListOfDefinitionInformation",
-          "documentation" : "Definitions"
+          "shape" : "__listOfDefinitionInformation",
+          "documentation" : "Information about a definition."
         },
         "NextToken" : {
           "shape" : "__string",
@@ -3748,15 +3759,15 @@
       "type" : "structure",
       "members" : {
         "Definitions" : {
-          "shape" : "ListOfDefinitionInformation",
-          "documentation" : "Definitions"
+          "shape" : "__listOfDefinitionInformation",
+          "documentation" : "Information about a definition."
         },
         "NextToken" : {
           "shape" : "__string",
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       },
-      "documentation" : "List of definition responses"
+      "documentation" : "A list of definitions."
     },
     "ListDeploymentsRequest" : {
       "type" : "structure",
@@ -3765,19 +3776,19 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         },
         "MaxResults" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       },
       "required" : [ "GroupId" ]
@@ -3787,7 +3798,7 @@
       "members" : {
         "Deployments" : {
           "shape" : "Deployments",
-          "documentation" : "List of deployments for the requested groups"
+          "documentation" : "A list of deployments for the requested groups."
         },
         "NextToken" : {
           "shape" : "__string",
@@ -3802,19 +3813,19 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "DeviceDefinitionId",
-          "documentation" : "device definition Id"
+          "documentation" : "The ID of the device definition."
         },
         "MaxResults" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       },
       "required" : [ "DeviceDefinitionId" ]
@@ -3827,8 +3838,8 @@
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         },
         "Versions" : {
-          "shape" : "ListOfVersionInformation",
-          "documentation" : "Versions"
+          "shape" : "__listOfVersionInformation",
+          "documentation" : "Information about a version."
         }
       }
     },
@@ -3839,13 +3850,13 @@
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       }
     },
@@ -3853,8 +3864,8 @@
       "type" : "structure",
       "members" : {
         "Definitions" : {
-          "shape" : "ListOfDefinitionInformation",
-          "documentation" : "Definitions"
+          "shape" : "__listOfDefinitionInformation",
+          "documentation" : "Information about a definition."
         },
         "NextToken" : {
           "shape" : "__string",
@@ -3869,19 +3880,19 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "FunctionDefinitionId",
-          "documentation" : "the unique Id of the lambda definition"
+          "documentation" : "The ID of the Lambda function definition."
         },
         "MaxResults" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       },
       "required" : [ "FunctionDefinitionId" ]
@@ -3894,8 +3905,8 @@
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         },
         "Versions" : {
-          "shape" : "ListOfVersionInformation",
-          "documentation" : "Versions"
+          "shape" : "__listOfVersionInformation",
+          "documentation" : "Information about a version."
         }
       }
     },
@@ -3906,13 +3917,13 @@
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       }
     },
@@ -3920,8 +3931,8 @@
       "type" : "structure",
       "members" : {
         "Definitions" : {
-          "shape" : "ListOfDefinitionInformation",
-          "documentation" : "Definitions"
+          "shape" : "__listOfDefinitionInformation",
+          "documentation" : "Information about a definition."
         },
         "NextToken" : {
           "shape" : "__string",
@@ -3936,7 +3947,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
       "required" : [ "GroupId" ]
@@ -3945,8 +3956,8 @@
       "type" : "structure",
       "members" : {
         "GroupCertificateAuthorities" : {
-          "shape" : "ListOfGroupCertificateAuthorityProperties",
-          "documentation" : "List of certificate authorities associated with the group."
+          "shape" : "__listOfGroupCertificateAuthorityProperties",
+          "documentation" : "A list of certificate authorities associated with the group."
         }
       }
     },
@@ -3957,19 +3968,19 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         },
         "MaxResults" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       },
       "required" : [ "GroupId" ]
@@ -3982,8 +3993,8 @@
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         },
         "Versions" : {
-          "shape" : "ListOfVersionInformation",
-          "documentation" : "Versions"
+          "shape" : "__listOfVersionInformation",
+          "documentation" : "Information about a version."
         }
       }
     },
@@ -3994,13 +4005,13 @@
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       }
     },
@@ -4008,8 +4019,8 @@
       "type" : "structure",
       "members" : {
         "Groups" : {
-          "shape" : "ListOfGroupInformation",
-          "documentation" : "Groups"
+          "shape" : "__listOfGroupInformation",
+          "documentation" : "Information about a group."
         },
         "NextToken" : {
           "shape" : "__string",
@@ -4024,19 +4035,19 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "LoggerDefinitionId",
-          "documentation" : "logger definition Id"
+          "documentation" : "The ID of the logger definition."
         },
         "MaxResults" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       },
       "required" : [ "LoggerDefinitionId" ]
@@ -4049,8 +4060,8 @@
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         },
         "Versions" : {
-          "shape" : "ListOfVersionInformation",
-          "documentation" : "Versions"
+          "shape" : "__listOfVersionInformation",
+          "documentation" : "Information about a version."
         }
       }
     },
@@ -4061,13 +4072,13 @@
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       }
     },
@@ -4075,85 +4086,13 @@
       "type" : "structure",
       "members" : {
         "Definitions" : {
-          "shape" : "ListOfDefinitionInformation",
-          "documentation" : "Definitions"
+          "shape" : "__listOfDefinitionInformation",
+          "documentation" : "Information about a definition."
         },
         "NextToken" : {
           "shape" : "__string",
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
-      }
-    },
-    "ListOfConnectivityInfo" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ConnectivityInfo"
-      }
-    },
-    "ListOfCore" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "Core"
-      }
-    },
-    "ListOfDefinitionInformation" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "DefinitionInformation"
-      }
-    },
-    "ListOfDevice" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "Device"
-      }
-    },
-    "ListOfFunction" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "Function"
-      }
-    },
-    "ListOfGroupCertificateAuthorityProperties" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "GroupCertificateAuthorityProperties"
-      }
-    },
-    "ListOfGroupInformation" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "GroupInformation"
-      }
-    },
-    "ListOfLogger" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "Logger"
-      }
-    },
-    "ListOfResource" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "Resource"
-      }
-    },
-    "ListOfResourceAccessPolicy" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ResourceAccessPolicy"
-      }
-    },
-    "ListOfSubscription" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "Subscription"
-      }
-    },
-    "ListOfVersionInformation" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "VersionInformation"
       }
     },
     "ListResourceDefinitionVersionsRequest" : {
@@ -4163,19 +4102,19 @@
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         },
         "ResourceDefinitionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "ResourceDefinitionId",
-          "documentation" : "Resource definition Id."
+          "documentation" : "The ID of the resource definition."
         }
       },
       "required" : [ "ResourceDefinitionId" ]
@@ -4188,8 +4127,8 @@
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         },
         "Versions" : {
-          "shape" : "ListOfVersionInformation",
-          "documentation" : "Versions"
+          "shape" : "__listOfVersionInformation",
+          "documentation" : "Information about a version."
         }
       }
     },
@@ -4200,13 +4139,13 @@
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       }
     },
@@ -4214,8 +4153,8 @@
       "type" : "structure",
       "members" : {
         "Definitions" : {
-          "shape" : "ListOfDefinitionInformation",
-          "documentation" : "Definitions"
+          "shape" : "__listOfDefinitionInformation",
+          "documentation" : "Information about a definition."
         },
         "NextToken" : {
           "shape" : "__string",
@@ -4230,19 +4169,19 @@
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         },
         "SubscriptionDefinitionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "SubscriptionDefinitionId",
-          "documentation" : "subscription definition Id"
+          "documentation" : "The ID of the subscription definition."
         }
       },
       "required" : [ "SubscriptionDefinitionId" ]
@@ -4255,8 +4194,8 @@
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         },
         "Versions" : {
-          "shape" : "ListOfVersionInformation",
-          "documentation" : "Versions"
+          "shape" : "__listOfVersionInformation",
+          "documentation" : "Information about a version."
         }
       }
     },
@@ -4267,13 +4206,13 @@
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "MaxResults",
-          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+          "documentation" : "The maximum number of results to be returned per request."
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "NextToken",
-          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       }
     },
@@ -4281,8 +4220,8 @@
       "type" : "structure",
       "members" : {
         "Definitions" : {
-          "shape" : "ListOfDefinitionInformation",
-          "documentation" : "Definitions"
+          "shape" : "__listOfDefinitionInformation",
+          "documentation" : "Information about a definition."
         },
         "NextToken" : {
           "shape" : "__string",
@@ -4298,69 +4237,70 @@
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         },
         "Versions" : {
-          "shape" : "ListOfVersionInformation",
-          "documentation" : "Versions"
+          "shape" : "__listOfVersionInformation",
+          "documentation" : "Information about a version."
         }
       },
-      "documentation" : "List of versions response"
+      "documentation" : "A list of versions."
     },
     "LocalDeviceResourceData" : {
       "type" : "structure",
       "members" : {
         "GroupOwnerSetting" : {
           "shape" : "GroupOwnerSetting",
-          "documentation" : "Group owner related settings for local resources."
+          "documentation" : "Group/owner related settings for local resources."
         },
         "SourcePath" : {
           "shape" : "__string",
-          "documentation" : "Local source path of the resource."
+          "documentation" : "The local absolute path of the device resource. The source path for a device resource can refer only to a character device or block device under ''/dev''."
         }
       },
-      "documentation" : "Attributes that define the Local Device Resource."
+      "documentation" : "Attributes that define a local device resource."
     },
     "LocalVolumeResourceData" : {
       "type" : "structure",
       "members" : {
         "DestinationPath" : {
           "shape" : "__string",
-          "documentation" : "Local destination path of the resource."
+          "documentation" : "The absolute local path of the resource inside the lambda environment."
         },
         "GroupOwnerSetting" : {
           "shape" : "GroupOwnerSetting",
-          "documentation" : "Group owner related settings for local resources."
+          "documentation" : "Allows you to configure additional group privileges for the Lambda process. This field is optional."
         },
         "SourcePath" : {
           "shape" : "__string",
-          "documentation" : "Local source path of the resource."
+          "documentation" : "The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/proc'' or ''/sys''."
         }
       },
-      "documentation" : "Attributes that define the Local Volume Resource."
+      "documentation" : "Attributes that define a local volume resource."
     },
     "Logger" : {
       "type" : "structure",
       "members" : {
         "Component" : {
           "shape" : "LoggerComponent",
-          "documentation" : "The component that will be subject to logs"
+          "documentation" : "The component that will be subject to logging."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Element Id for this entry in the list."
+          "documentation" : "The id of the logger."
         },
         "Level" : {
           "shape" : "LoggerLevel",
-          "documentation" : "The level of the logs"
+          "documentation" : "The level of the logs."
         },
         "Space" : {
           "shape" : "__integer",
-          "documentation" : "Amount of hardware space, in KB, to use if file system is used for logging purposes."
+          "documentation" : "The amount of file space, in KB, to use if the local file system is used for logging purposes."
         },
         "Type" : {
           "shape" : "LoggerType",
-          "documentation" : "The type which will be use for log output"
+          "documentation" : "The type of log output which will be used."
         }
       },
-      "documentation" : "Information on the Logger"
+      "documentation" : "Information about a logger",
+      "required" : [ ]
     },
     "LoggerComponent" : {
       "type" : "string",
@@ -4370,11 +4310,11 @@
       "type" : "structure",
       "members" : {
         "Loggers" : {
-          "shape" : "ListOfLogger",
-          "documentation" : "List of loggers."
+          "shape" : "__listOfLogger",
+          "documentation" : "A list of loggers."
         }
       },
-      "documentation" : "Information on logger definition version"
+      "documentation" : "Information about a logger definition version."
     },
     "LoggerLevel" : {
       "type" : "string",
@@ -4384,18 +4324,9 @@
       "type" : "string",
       "enum" : [ "FileSystem", "AWSCloudWatch" ]
     },
-    "MapOf__string" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "__string"
-      }
-    },
     "Permission" : {
       "type" : "string",
-      "documentation" : "Type of permissions a function could have to access a resource.",
+      "documentation" : "The type of permission a function has to access a resource.",
       "enum" : [ "ro", "rw" ]
     },
     "ResetDeploymentsRequest" : {
@@ -4405,20 +4336,20 @@
           "shape" : "__string",
           "location" : "header",
           "locationName" : "X-Amzn-Client-Token",
-          "documentation" : "The client token used to request idempotent operations."
+          "documentation" : "A client token used to correlate requests and responses."
         },
         "Force" : {
           "shape" : "__boolean",
-          "documentation" : "When set to true, perform a best-effort only core reset."
+          "documentation" : "If true, performs a best-effort only core reset."
         },
         "GroupId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
-      "documentation" : "Information needed to perform a reset of a group's deployments.",
+      "documentation" : "Information needed to reset deployments.",
       "required" : [ "GroupId" ]
     },
     "ResetDeploymentsResponse" : {
@@ -4426,11 +4357,11 @@
       "members" : {
         "DeploymentArn" : {
           "shape" : "__string",
-          "documentation" : "The arn of the reset deployment."
+          "documentation" : "The ARN of the deployment."
         },
         "DeploymentId" : {
           "shape" : "__string",
-          "documentation" : "The id of the reset deployment."
+          "documentation" : "The ID of the deployment."
         }
       }
     },
@@ -4439,64 +4370,102 @@
       "members" : {
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Resource Id."
+          "documentation" : "The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "A descriptive resource name."
+          "documentation" : "The descriptive resource name, which is displayed on the Greengrass console. Max length 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group."
         },
         "ResourceDataContainer" : {
           "shape" : "ResourceDataContainer",
           "documentation" : "A container of data for all resource types."
         }
       },
-      "documentation" : "Information on the resource."
+      "documentation" : "Information about a resource.",
+      "required" : [ ]
     },
     "ResourceAccessPolicy" : {
       "type" : "structure",
       "members" : {
         "Permission" : {
           "shape" : "Permission",
-          "documentation" : "The function's access permission to the resource."
+          "documentation" : "The permissions that the Lambda function has to the resource. Can be one of ''rw'' (read/write) or ''ro'' (read-only)."
         },
         "ResourceId" : {
           "shape" : "__string",
-          "documentation" : "Id of the resource. A reference to the resource definiton."
+          "documentation" : "The ID of the resource. (This ID is assigned to the resource when you create the resource definiton.)"
         }
       },
-      "documentation" : "Policy for the function to access a resource."
+      "documentation" : "A policy used by the function to access a resource.",
+      "required" : [ ]
     },
     "ResourceDataContainer" : {
       "type" : "structure",
       "members" : {
         "LocalDeviceResourceData" : {
           "shape" : "LocalDeviceResourceData",
-          "documentation" : "Attributes that define the Local Device Resource."
+          "documentation" : "Attributes that define the local device resource."
         },
         "LocalVolumeResourceData" : {
           "shape" : "LocalVolumeResourceData",
-          "documentation" : "Attributes that define the Local Volume Resource."
+          "documentation" : "Attributes that define the local volume resource."
+        },
+        "S3MachineLearningModelResourceData" : {
+          "shape" : "S3MachineLearningModelResourceData",
+          "documentation" : "Attributes that define an S3 machine learning resource."
+        },
+        "SageMakerMachineLearningModelResourceData" : {
+          "shape" : "SageMakerMachineLearningModelResourceData",
+          "documentation" : "Attributes that define an SageMaker machine learning resource."
         }
       },
-      "documentation" : "A container of data for all resource types."
+      "documentation" : "A container for resource data. The container takes only one of the following supported resource data types: ''LocalDeviceResourceData'', ''LocalVolumeResourceData'', ''SageMakerMachineLearningModelResourceData'', ''S3MachineLearningModelResourceData''."
     },
     "ResourceDefinitionVersion" : {
       "type" : "structure",
       "members" : {
         "Resources" : {
-          "shape" : "ListOfResource",
-          "documentation" : "List of resources."
+          "shape" : "__listOfResource",
+          "documentation" : "A list of resources."
         }
       },
-      "documentation" : "Information on resource definition version"
+      "documentation" : "Information about a resource definition version."
+    },
+    "S3MachineLearningModelResourceData" : {
+      "type" : "structure",
+      "members" : {
+        "DestinationPath" : {
+          "shape" : "__string",
+          "documentation" : "The absolute local path of the resource inside the Lambda environment."
+        },
+        "S3Uri" : {
+          "shape" : "__string",
+          "documentation" : "The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format."
+        }
+      },
+      "documentation" : "Attributes that define an S3 machine learning resource."
     },
     "S3UrlSignerRole" : {
       "type" : "string",
       "documentation" : "The IAM Role that Greengrass will use to create pre-signed URLs pointing towards the update artifact."
     },
+    "SageMakerMachineLearningModelResourceData" : {
+      "type" : "structure",
+      "members" : {
+        "DestinationPath" : {
+          "shape" : "__string",
+          "documentation" : "The absolute local path of the resource inside the Lambda environment."
+        },
+        "SageMakerJobArn" : {
+          "shape" : "__string",
+          "documentation" : "The ARN of the SageMaker training job that represents the source model."
+        }
+      },
+      "documentation" : "Attributes that define an SageMaker machine learning resource."
+    },
     "SoftwareToUpdate" : {
       "type" : "string",
-      "documentation" : "The piece of software on the Greengrass Core that will be updated.",
+      "documentation" : "The piece of software on the Greengrass core that will be updated.",
       "enum" : [ "core", "ota_agent" ]
     },
     "Subscription" : {
@@ -4504,32 +4473,33 @@
       "members" : {
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Element Id for this entry in the list."
+          "documentation" : "The id of the subscription."
         },
         "Source" : {
           "shape" : "__string",
-          "documentation" : "Source of the subscription. Can be a thing arn, lambda arn or word 'cloud'"
+          "documentation" : "The source of the subscription. Can be a thing ARN, a Lambda function ARN, 'cloud' (which represents the IoT cloud), or 'GGShadowService'."
         },
         "Subject" : {
           "shape" : "__string",
-          "documentation" : "Subject of the message."
+          "documentation" : "The subject of the message."
         },
         "Target" : {
           "shape" : "__string",
-          "documentation" : "Where the message is sent to. Can be a thing arn, lambda arn or word 'cloud'."
+          "documentation" : "Where the message is sent to. Can be a thing ARN, a Lambda function ARN, 'cloud' (which represents the IoT cloud), or 'GGShadowService'."
         }
       },
-      "documentation" : "Information on subscription"
+      "documentation" : "Information about a subscription.",
+      "required" : [ ]
     },
     "SubscriptionDefinitionVersion" : {
       "type" : "structure",
       "members" : {
         "Subscriptions" : {
-          "shape" : "ListOfSubscription",
-          "documentation" : "Subscriptions in the version."
+          "shape" : "__listOfSubscription",
+          "documentation" : "A list of subscriptions."
         }
       },
-      "documentation" : "Information on subscription definition version"
+      "documentation" : "Information about a subscription definition version."
     },
     "UpdateAgentLogLevel" : {
       "type" : "string",
@@ -4540,17 +4510,17 @@
       "type" : "structure",
       "members" : {
         "ConnectivityInfo" : {
-          "shape" : "ListOfConnectivityInfo",
-          "documentation" : "Connectivity info list"
+          "shape" : "__listOfConnectivityInfo",
+          "documentation" : "A list of connectivity info."
         },
         "ThingName" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "ThingName",
-          "documentation" : "Thing Name"
+          "documentation" : "The thing name."
         }
       },
-      "documentation" : "connectivity info request",
+      "documentation" : "Connectivity information.",
       "required" : [ "ThingName" ]
     },
     "UpdateConnectivityInfoResponse" : {
@@ -4559,11 +4529,11 @@
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "Response Text"
+          "documentation" : "A message about the connectivity info update request."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "New Version"
+          "documentation" : "The new version of the connectivity info."
         }
       }
     },
@@ -4574,11 +4544,11 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "CoreDefinitionId",
-          "documentation" : "core definition Id"
+          "documentation" : "The ID of the core definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the definition"
+          "documentation" : "The name of the definition."
         }
       },
       "required" : [ "CoreDefinitionId" ]
@@ -4594,11 +4564,11 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "DeviceDefinitionId",
-          "documentation" : "device definition Id"
+          "documentation" : "The ID of the device definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the definition"
+          "documentation" : "The name of the definition."
         }
       },
       "required" : [ "DeviceDefinitionId" ]
@@ -4614,11 +4584,11 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "FunctionDefinitionId",
-          "documentation" : "the unique Id of the lambda definition"
+          "documentation" : "The ID of the Lambda function definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the definition"
+          "documentation" : "The name of the definition."
         }
       },
       "required" : [ "FunctionDefinitionId" ]
@@ -4632,13 +4602,13 @@
       "members" : {
         "CertificateExpiryInMilliseconds" : {
           "shape" : "__string",
-          "documentation" : "Amount of time when the certificate expires in milliseconds."
+          "documentation" : "The amount of time remaining before the certificate expires, in milliseconds."
         },
         "GroupId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         }
       },
       "required" : [ "GroupId" ]
@@ -4648,15 +4618,15 @@
       "members" : {
         "CertificateAuthorityExpiryInMilliseconds" : {
           "shape" : "__string",
-          "documentation" : "Amount of time when the certificate authority expires in milliseconds."
+          "documentation" : "The amount of time remaining before the certificate authority expires, in milliseconds."
         },
         "CertificateExpiryInMilliseconds" : {
           "shape" : "__string",
-          "documentation" : "Amount of time when the certificate expires in milliseconds."
+          "documentation" : "The amount of time remaining before the certificate expires, in milliseconds."
         },
         "GroupId" : {
           "shape" : "__string",
-          "documentation" : "Id of the group the certificate configuration belongs to."
+          "documentation" : "The ID of the group certificate configuration."
         }
       }
     },
@@ -4667,11 +4637,11 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "GroupId",
-          "documentation" : "The unique Id of the AWS Greengrass Group"
+          "documentation" : "The ID of the AWS Greengrass group."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the definition"
+          "documentation" : "The name of the definition."
         }
       },
       "required" : [ "GroupId" ]
@@ -4687,11 +4657,11 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "LoggerDefinitionId",
-          "documentation" : "logger definition Id"
+          "documentation" : "The ID of the logger definition."
         },
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the definition"
+          "documentation" : "The name of the definition."
         }
       },
       "required" : [ "LoggerDefinitionId" ]
@@ -4705,13 +4675,13 @@
       "members" : {
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the definition"
+          "documentation" : "The name of the definition."
         },
         "ResourceDefinitionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "ResourceDefinitionId",
-          "documentation" : "Resource definition Id."
+          "documentation" : "The ID of the resource definition."
         }
       },
       "required" : [ "ResourceDefinitionId" ]
@@ -4725,13 +4695,13 @@
       "members" : {
         "Name" : {
           "shape" : "__string",
-          "documentation" : "name of the definition"
+          "documentation" : "The name of the definition."
         },
         "SubscriptionDefinitionId" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "SubscriptionDefinitionId",
-          "documentation" : "subscription definition Id"
+          "documentation" : "The ID of the subscription definition."
         }
       },
       "required" : [ "SubscriptionDefinitionId" ]
@@ -4742,19 +4712,19 @@
     },
     "UpdateTargets" : {
       "type" : "list",
-      "documentation" : "The target arns that this update will be applied to.",
+      "documentation" : "The ARNs of the targets (IoT things or IoT thing groups) that this update will be applied to.",
       "member" : {
         "shape" : "__string"
       }
     },
     "UpdateTargetsArchitecture" : {
       "type" : "string",
-      "documentation" : "The architecture of the Cores in the targets of an update",
+      "documentation" : "The architecture of the cores which are the targets of an update.",
       "enum" : [ "armv7l", "x86_64", "aarch64" ]
     },
     "UpdateTargetsOperatingSystem" : {
       "type" : "string",
-      "documentation" : "The operating system of the Cores in the targets of an update",
+      "documentation" : "The operating system of the cores which are the targets of an update.",
       "enum" : [ "ubuntu", "raspbian", "amazon_linux" ]
     },
     "VersionInformation" : {
@@ -4762,22 +4732,22 @@
       "members" : {
         "Arn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the version."
+          "documentation" : "The ARN of the version."
         },
         "CreationTimestamp" : {
           "shape" : "__string",
-          "documentation" : "Timestamp of when the version was created."
+          "documentation" : "The time, in milliseconds since the epoch, when the version was created."
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Id of the resource container."
+          "documentation" : "The ID of the version."
         },
         "Version" : {
           "shape" : "__string",
-          "documentation" : "Unique Id of a version."
+          "documentation" : "The unique ID of the version."
         }
       },
-      "documentation" : "Information on the version"
+      "documentation" : "Information about a version."
     },
     "__boolean" : {
       "type" : "boolean"
@@ -4787,6 +4757,90 @@
     },
     "__integer" : {
       "type" : "integer"
+    },
+    "__listOfConnectivityInfo" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ConnectivityInfo"
+      }
+    },
+    "__listOfCore" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "Core"
+      }
+    },
+    "__listOfDefinitionInformation" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "DefinitionInformation"
+      }
+    },
+    "__listOfDevice" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "Device"
+      }
+    },
+    "__listOfFunction" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "Function"
+      }
+    },
+    "__listOfGroupCertificateAuthorityProperties" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "GroupCertificateAuthorityProperties"
+      }
+    },
+    "__listOfGroupInformation" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "GroupInformation"
+      }
+    },
+    "__listOfLogger" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "Logger"
+      }
+    },
+    "__listOfResource" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "Resource"
+      }
+    },
+    "__listOfResourceAccessPolicy" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ResourceAccessPolicy"
+      }
+    },
+    "__listOfSubscription" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "Subscription"
+      }
+    },
+    "__listOfVersionInformation" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "VersionInformation"
+      }
+    },
+    "__long" : {
+      "type" : "long"
+    },
+    "__mapOf__string" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__string"
+      }
     },
     "__string" : {
       "type" : "string"

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.216.1-->
+<!--LATEST=2.217.1-->
 <!--ENTRYINSERT-->
+
+## 2.217.1
+* bugfix: DocumentClient: Fixes a bug with the minified version of the browser SDK where sending Sets of data with the DynamoDB DocumentClient would cause an error to be returned from the service.
+* feature: AlexaForBusiness: Adds operations for creating and managing address books of phone contacts for use in A4B managed shared devices.
+* feature: CloudFormation: Enabling resource level permission control for StackSets APIs. Adding support for customers to use customized AdministrationRole to create security boundaries between different users.
+* feature: Greengrass: Greengrass APIs now support creating Machine Learning resource types and configuring binary data as the input payload for Greengrass Lambda functions.
+* feature: SSM: This Patch Manager release supports creating patch baselines for CentOS.
 
 ## 2.216.1
 * feature: IAM: Add support for Longer Role Sessions. Four APIs manage max session duration: GetRole, ListRoles, CreateRole, and the new API UpdateRole. The max session duration integer attribute is measured in seconds.

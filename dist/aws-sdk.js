@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.216.1
+// AWS SDK for JavaScript v2.217.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
@@ -7299,6 +7299,7 @@ module.exports={
           "Tags": {
             "shape": "Sv"
           },
+          "AdministrationRoleARN": {},
           "ClientRequestToken": {
             "idempotencyToken": true
           }
@@ -7704,7 +7705,9 @@ module.exports={
               },
               "Tags": {
                 "shape": "Sv"
-              }
+              },
+              "StackSetARN": {},
+              "AdministrationRoleARN": {}
             }
           }
         }
@@ -7739,6 +7742,7 @@ module.exports={
               "RetainStacks": {
                 "type": "boolean"
               },
+              "AdministrationRoleARN": {},
               "CreationTimestamp": {
                 "type": "timestamp"
               },
@@ -7958,7 +7962,7 @@ module.exports={
           "Version": {},
           "Metadata": {},
           "DeclaredTransforms": {
-            "shape": "S4u"
+            "shape": "S4v"
           }
         }
       }
@@ -8446,6 +8450,7 @@ module.exports={
           "OperationPreferences": {
             "shape": "S1k"
           },
+          "AdministrationRoleARN": {},
           "OperationId": {
             "idempotencyToken": true
           }
@@ -8513,7 +8518,7 @@ module.exports={
           },
           "CapabilitiesReason": {},
           "DeclaredTransforms": {
-            "shape": "S4u"
+            "shape": "S4v"
           }
         }
       }
@@ -8610,7 +8615,7 @@ module.exports={
         }
       }
     },
-    "S4u": {
+    "S4v": {
       "type": "list",
       "member": {}
     }
@@ -122587,7 +122592,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.216.1',
+  VERSION: '2.217.1',
 
   /**
    * @api private
@@ -124593,6 +124598,7 @@ var util = require('../core').util;
  */
 var DynamoDBNumberValue = util.inherit({
   constructor: function NumberValue(value) {
+    this.wrapperName = 'NumberValue';
     this.value = value.toString();
   },
 
@@ -124641,6 +124647,7 @@ var DynamoDBSet = util.inherit({
 
   constructor: function Set(list, options) {
     options = options || {};
+    this.wrapperName = 'Set';
     this.initialize(list, options.validate);
   },
 
@@ -124776,7 +124783,7 @@ function typeOf(data) {
   } else if (data !== undefined && isBinary(data)) {
     return 'Binary';
   } else if (data !== undefined && data.constructor) {
-    return util.typeName(data.constructor);
+    return data.wrapperName || util.typeName(data.constructor);
   } else if (data !== undefined && typeof data === 'object') {
     // this object is the result of Object.create(null), hence the absence of a
     // defined constructor
@@ -146502,7 +146509,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.216.1
+// AWS SDK for JavaScript v2.217.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

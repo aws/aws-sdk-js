@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "DocumentClient",
+        "description": "Fixes a bug with the minified version of the browser SDK where sending Sets of data with the DynamoDB DocumentClient would cause an error to be returned from the service."
+    },
+    {
+        "type": "feature",
+        "category": "AlexaForBusiness",
+        "description": "Adds operations for creating and managing address books of phone contacts for use in A4B managed shared devices."
+    },
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "Enabling resource level permission control for StackSets APIs. Adding support for customers to use customized AdministrationRole to create security boundaries between different users."
+    },
+    {
+        "type": "feature",
+        "category": "Greengrass",
+        "description": "Greengrass APIs now support creating Machine Learning resource types and configuring binary data as the input payload for Greengrass Lambda functions."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "This Patch Manager release supports creating patch baselines for CentOS."
+    }
+]

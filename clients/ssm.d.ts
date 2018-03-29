@@ -4810,7 +4810,7 @@ declare namespace SSM {
   export type NotificationEvent = "All"|"InProgress"|"Success"|"TimedOut"|"Cancelled"|"Failed"|string;
   export type NotificationEventList = NotificationEvent[];
   export type NotificationType = "Command"|"Invocation"|string;
-  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|string;
+  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|string;
   export type OwnerInformation = string;
   export type PSParameterName = string;
   export type PSParameterValue = string;

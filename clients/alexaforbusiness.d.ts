@@ -12,6 +12,14 @@ declare class AlexaForBusiness extends Service {
   constructor(options?: AlexaForBusiness.Types.ClientConfiguration)
   config: Config & AlexaForBusiness.Types.ClientConfiguration;
   /**
+   * Associates a contact to a given address book.
+   */
+  associateContactWithAddressBook(params: AlexaForBusiness.Types.AssociateContactWithAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateContactWithAddressBookResponse) => void): Request<AlexaForBusiness.Types.AssociateContactWithAddressBookResponse, AWSError>;
+  /**
+   * Associates a contact to a given address book.
+   */
+  associateContactWithAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateContactWithAddressBookResponse) => void): Request<AlexaForBusiness.Types.AssociateContactWithAddressBookResponse, AWSError>;
+  /**
    * Associates a device to a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or a manual sync is required. 
    */
   associateDeviceWithRoom(params: AlexaForBusiness.Types.AssociateDeviceWithRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateDeviceWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateDeviceWithRoomResponse, AWSError>;
@@ -27,6 +35,22 @@ declare class AlexaForBusiness extends Service {
    * Associates a skill group to a given room. This enables all skills in the associated skill group on all devices in the room.
    */
   associateSkillGroupWithRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse, AWSError>;
+  /**
+   * Creates an address book with the specified details.
+   */
+  createAddressBook(params: AlexaForBusiness.Types.CreateAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateAddressBookResponse) => void): Request<AlexaForBusiness.Types.CreateAddressBookResponse, AWSError>;
+  /**
+   * Creates an address book with the specified details.
+   */
+  createAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateAddressBookResponse) => void): Request<AlexaForBusiness.Types.CreateAddressBookResponse, AWSError>;
+  /**
+   * Creates a contact with the specified details.
+   */
+  createContact(params: AlexaForBusiness.Types.CreateContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateContactResponse) => void): Request<AlexaForBusiness.Types.CreateContactResponse, AWSError>;
+  /**
+   * Creates a contact with the specified details.
+   */
+  createContact(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateContactResponse) => void): Request<AlexaForBusiness.Types.CreateContactResponse, AWSError>;
   /**
    * Creates a new room profile with the specified details.
    */
@@ -59,6 +83,22 @@ declare class AlexaForBusiness extends Service {
    * Creates a user.
    */
   createUser(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateUserResponse) => void): Request<AlexaForBusiness.Types.CreateUserResponse, AWSError>;
+  /**
+   * Deletes an address book by the address book ARN.
+   */
+  deleteAddressBook(params: AlexaForBusiness.Types.DeleteAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteAddressBookResponse) => void): Request<AlexaForBusiness.Types.DeleteAddressBookResponse, AWSError>;
+  /**
+   * Deletes an address book by the address book ARN.
+   */
+  deleteAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteAddressBookResponse) => void): Request<AlexaForBusiness.Types.DeleteAddressBookResponse, AWSError>;
+  /**
+   * Deletes a contact by the contact ARN.
+   */
+  deleteContact(params: AlexaForBusiness.Types.DeleteContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteContactResponse) => void): Request<AlexaForBusiness.Types.DeleteContactResponse, AWSError>;
+  /**
+   * Deletes a contact by the contact ARN.
+   */
+  deleteContact(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteContactResponse) => void): Request<AlexaForBusiness.Types.DeleteContactResponse, AWSError>;
   /**
    * Deletes a room profile by the profile ARN.
    */
@@ -100,6 +140,14 @@ declare class AlexaForBusiness extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteUserResponse) => void): Request<AlexaForBusiness.Types.DeleteUserResponse, AWSError>;
   /**
+   * Disassociates a contact from a given address book.
+   */
+  disassociateContactFromAddressBook(params: AlexaForBusiness.Types.DisassociateContactFromAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateContactFromAddressBookResponse) => void): Request<AlexaForBusiness.Types.DisassociateContactFromAddressBookResponse, AWSError>;
+  /**
+   * Disassociates a contact from a given address book.
+   */
+  disassociateContactFromAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateContactFromAddressBookResponse) => void): Request<AlexaForBusiness.Types.DisassociateContactFromAddressBookResponse, AWSError>;
+  /**
    * Disassociates a device from its current room. The device continues to be connected to the Wi-Fi network and is still registered to the account. The device settings and skills are removed from the room.
    */
   disassociateDeviceFromRoom(params: AlexaForBusiness.Types.DisassociateDeviceFromRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateDeviceFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateDeviceFromRoomResponse, AWSError>;
@@ -115,6 +163,22 @@ declare class AlexaForBusiness extends Service {
    * Disassociates a skill group from a specified room. This disables all skills in the skill group on all devices in the room.
    */
   disassociateSkillGroupFromRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse, AWSError>;
+  /**
+   * Gets address the book details by the address book ARN.
+   */
+  getAddressBook(params: AlexaForBusiness.Types.GetAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetAddressBookResponse) => void): Request<AlexaForBusiness.Types.GetAddressBookResponse, AWSError>;
+  /**
+   * Gets address the book details by the address book ARN.
+   */
+  getAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetAddressBookResponse) => void): Request<AlexaForBusiness.Types.GetAddressBookResponse, AWSError>;
+  /**
+   * Gets the contact details by the contact ARN.
+   */
+  getContact(params: AlexaForBusiness.Types.GetContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetContactResponse) => void): Request<AlexaForBusiness.Types.GetContactResponse, AWSError>;
+  /**
+   * Gets the contact details by the contact ARN.
+   */
+  getContact(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetContactResponse) => void): Request<AlexaForBusiness.Types.GetContactResponse, AWSError>;
   /**
    * Gets the details of a device by device ARN.
    */
@@ -196,6 +260,22 @@ declare class AlexaForBusiness extends Service {
    */
   revokeInvitation(callback?: (err: AWSError, data: AlexaForBusiness.Types.RevokeInvitationResponse) => void): Request<AlexaForBusiness.Types.RevokeInvitationResponse, AWSError>;
   /**
+   * Searches address books and lists the ones that meet a set of filter and sort criteria.
+   */
+  searchAddressBooks(params: AlexaForBusiness.Types.SearchAddressBooksRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchAddressBooksResponse) => void): Request<AlexaForBusiness.Types.SearchAddressBooksResponse, AWSError>;
+  /**
+   * Searches address books and lists the ones that meet a set of filter and sort criteria.
+   */
+  searchAddressBooks(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchAddressBooksResponse) => void): Request<AlexaForBusiness.Types.SearchAddressBooksResponse, AWSError>;
+  /**
+   * Searches contacts and lists the ones that meet a set of filter and sort criteria.
+   */
+  searchContacts(params: AlexaForBusiness.Types.SearchContactsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchContactsResponse) => void): Request<AlexaForBusiness.Types.SearchContactsResponse, AWSError>;
+  /**
+   * Searches contacts and lists the ones that meet a set of filter and sort criteria.
+   */
+  searchContacts(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchContactsResponse) => void): Request<AlexaForBusiness.Types.SearchContactsResponse, AWSError>;
+  /**
    * Searches devices and lists the ones that meet a set of filter criteria.
    */
   searchDevices(params: AlexaForBusiness.Types.SearchDevicesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchDevicesResponse) => void): Request<AlexaForBusiness.Types.SearchDevicesResponse, AWSError>;
@@ -268,6 +348,22 @@ declare class AlexaForBusiness extends Service {
    */
   untagResource(callback?: (err: AWSError, data: AlexaForBusiness.Types.UntagResourceResponse) => void): Request<AlexaForBusiness.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates address book details by the address book ARN.
+   */
+  updateAddressBook(params: AlexaForBusiness.Types.UpdateAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateAddressBookResponse) => void): Request<AlexaForBusiness.Types.UpdateAddressBookResponse, AWSError>;
+  /**
+   * Updates address book details by the address book ARN.
+   */
+  updateAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateAddressBookResponse) => void): Request<AlexaForBusiness.Types.UpdateAddressBookResponse, AWSError>;
+  /**
+   * Updates the contact details by the contact ARN.
+   */
+  updateContact(params: AlexaForBusiness.Types.UpdateContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateContactResponse) => void): Request<AlexaForBusiness.Types.UpdateContactResponse, AWSError>;
+  /**
+   * Updates the contact details by the contact ARN.
+   */
+  updateContact(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateContactResponse) => void): Request<AlexaForBusiness.Types.UpdateContactResponse, AWSError>;
+  /**
    * Updates the device name by device ARN.
    */
   updateDevice(params: AlexaForBusiness.Types.UpdateDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateDeviceResponse) => void): Request<AlexaForBusiness.Types.UpdateDeviceResponse, AWSError>;
@@ -302,7 +398,50 @@ declare class AlexaForBusiness extends Service {
 }
 declare namespace AlexaForBusiness {
   export type Address = string;
+  export interface AddressBook {
+    /**
+     * The ARN of the address book.
+     */
+    AddressBookArn?: Arn;
+    /**
+     * The name of the address book.
+     */
+    Name?: AddressBookName;
+    /**
+     * The description of the address book.
+     */
+    Description?: AddressBookDescription;
+  }
+  export interface AddressBookData {
+    /**
+     * The ARN of the address book.
+     */
+    AddressBookArn?: Arn;
+    /**
+     * The name of the address book.
+     */
+    Name?: AddressBookName;
+    /**
+     * The description of the address book.
+     */
+    Description?: AddressBookDescription;
+  }
+  export type AddressBookDataList = AddressBookData[];
+  export type AddressBookDescription = string;
+  export type AddressBookName = string;
   export type Arn = string;
+  export interface AssociateContactWithAddressBookRequest {
+    /**
+     * The ARN of the contact to associate with an address book.
+     */
+    ContactArn: Arn;
+    /**
+     * The ARN of the address book with which to associate the contact.
+     */
+    AddressBookArn: Arn;
+  }
+  export interface AssociateContactWithAddressBookResponse {
+  }
   export interface AssociateDeviceWithRoomRequest {
     /**
      * The ARN of the device to associate to a room. Required.
@@ -329,6 +468,100 @@ declare namespace AlexaForBusiness {
   }
   export type Boolean = boolean;
   export type ClientRequestToken = string;
+  export interface Contact {
+    /**
+     * The ARN of the contact.
+     */
+    ContactArn?: Arn;
+    /**
+     * The name of the contact to display on the AWS management console.
+     */
+    DisplayName?: ContactName;
+    /**
+     * The first name of the contact that is used to call the contact on the device.
+     */
+    FirstName?: ContactName;
+    /**
+     * The last name of the contact that is used to call the contact on the device.
+     */
+    LastName?: ContactName;
+    /**
+     * The phone number of the contact.
+     */
+    PhoneNumber?: E164PhoneNumber;
+  }
+  export interface ContactData {
+    /**
+     * The ARN of the contact.
+     */
+    ContactArn?: Arn;
+    /**
+     * The name of the contact to display on the AWS management console.
+     */
+    DisplayName?: ContactName;
+    /**
+     * The first name of the contact that is used to call the contact on the device.
+     */
+    FirstName?: ContactName;
+    /**
+     * The last name of the contact that is used to call the contact on the device.
+     */
+    LastName?: ContactName;
+    /**
+     * The phone number of the contact.
+     */
+    PhoneNumber?: E164PhoneNumber;
+  }
+  export type ContactDataList = ContactData[];
+  export type ContactName = string;
+  export interface CreateAddressBookRequest {
+    /**
+     * The name of the address book.
+     */
+    Name: AddressBookName;
+    /**
+     * The description of the address book.
+     */
+    Description?: AddressBookDescription;
+    /**
+     * A unique, user-specified identifier for the request that ensures idempotency.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateAddressBookResponse {
+    /**
+     * The ARN of the newly created address book.
+     */
+    AddressBookArn?: Arn;
+  }
+  export interface CreateContactRequest {
+    /**
+     * The name of the contact to display on the AWS management console.
+     */
+    DisplayName?: ContactName;
+    /**
+     * The first name of the contact that is used to call the contact on the device.
+     */
+    FirstName: ContactName;
+    /**
+     * The last name of the contact that is used to call the contact on the device.
+     */
+    LastName?: ContactName;
+    /**
+     * The phone number of the contact in E164 format.
+     */
+    PhoneNumber: E164PhoneNumber;
+    /**
+     * A unique, user-specified identifier for this request that ensures idempotency.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateContactResponse {
+    /**
+     * The ARN of the newly created address book.
+     */
+    ContactArn?: Arn;
+  }
   export interface CreateProfileRequest {
     /**
      * The name of a room profile.
@@ -460,6 +693,22 @@ declare namespace AlexaForBusiness {
      * The ARN of the newly created user in the response.
      */
     UserArn?: Arn;
+  }
+  export interface DeleteAddressBookRequest {
+    /**
+     * The ARN of the address book to delete.
+     */
+    AddressBookArn: Arn;
+  }
+  export interface DeleteAddressBookResponse {
+  }
+  export interface DeleteContactRequest {
+    /**
+     * The ARN of the contact to delete.
+     */
+    ContactArn: Arn;
+  }
+  export interface DeleteContactResponse {
   }
   export interface DeleteProfileRequest {
     /**
@@ -612,6 +861,18 @@ declare namespace AlexaForBusiness {
     DeviceStatusDetails?: DeviceStatusDetails;
   }
   export type DeviceType = string;
+  export interface DisassociateContactFromAddressBookRequest {
+    /**
+     * The ARN of the contact to disassociate from an address book.
+     */
+    ContactArn: Arn;
+    /**
+     * The ARN of the address from which to disassociate the contact.
+     */
+    AddressBookArn: Arn;
+  }
+  export interface DisassociateContactFromAddressBookResponse {
+  }
   export interface DisassociateDeviceFromRoomRequest {
     /**
      * The ARN of the device to disassociate from a room. Required.
@@ -633,6 +894,7 @@ declare namespace AlexaForBusiness {
   export interface DisassociateSkillGroupFromRoomResponse {
   }
   export type DistanceUnit = "METRIC"|"IMPERIAL"|string;
+  export type E164PhoneNumber = string;
   export type Email = string;
   export type EnrollmentId = string;
   export type EnrollmentStatus = "INITIALIZED"|"PENDING"|"REGISTERED"|"DEREGISTERING"|string;
@@ -653,6 +915,30 @@ declare namespace AlexaForBusiness {
   export type FilterList = Filter[];
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
+  export interface GetAddressBookRequest {
+    /**
+     * The ARN of the address book for which to request details.
+     */
+    AddressBookArn: Arn;
+  }
+  export interface GetAddressBookResponse {
+    /**
+     * The details of the requested address book.
+     */
+    AddressBook?: AddressBook;
+  }
+  export interface GetContactRequest {
+    /**
+     * The ARN of the contact for which to request details.
+     */
+    ContactArn: Arn;
+  }
+  export interface GetContactResponse {
+    /**
+     * The details of the requested contact.
+     */
+    Contact?: Contact;
+  }
   export interface GetDeviceRequest {
     /**
      * The ARN of the device for which to request details. Required.
@@ -964,6 +1250,70 @@ declare namespace AlexaForBusiness {
   export type RoomSkillParameterKey = string;
   export type RoomSkillParameterValue = string;
   export type RoomSkillParameters = RoomSkillParameter[];
+  export interface SearchAddressBooksRequest {
+    /**
+     * The filters to use to list a specified set of address books. The supported filter key is AddressBookName.
+     */
+    Filters?: FilterList;
+    /**
+     * The sort order to use in listing the specified set of address books. The supported sort key is AddressBookName.
+     */
+    SortCriteria?: SortList;
+    /**
+     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface SearchAddressBooksResponse {
+    /**
+     * The address books that meet the specified set of filter criteria, in sort order.
+     */
+    AddressBooks?: AddressBookDataList;
+    /**
+     * The token returned to indicate that there is more data available.
+     */
+    NextToken?: NextToken;
+    /**
+     * The total number of address books returned.
+     */
+    TotalCount?: TotalCount;
+  }
+  export interface SearchContactsRequest {
+    /**
+     * The filters to use to list a specified set of address books. The supported filter keys are DisplayName, FirstName, LastName, and AddressBookArns.
+     */
+    Filters?: FilterList;
+    /**
+     * The sort order to use in listing the specified set of contacts. The supported sort keys are DisplayName, FirstName, and LastName.
+     */
+    SortCriteria?: SortList;
+    /**
+     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface SearchContactsResponse {
+    /**
+     * The contacts that meet the specified set of filter criteria, in sort order.
+     */
+    Contacts?: ContactDataList;
+    /**
+     * The token returned to indicate that there is more data available.
+     */
+    NextToken?: NextToken;
+    /**
+     * The total number of contacts returned.
+     */
+    TotalCount?: TotalCount;
+  }
   export interface SearchDevicesRequest {
     /**
      * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
@@ -1251,6 +1601,46 @@ declare namespace AlexaForBusiness {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateAddressBookRequest {
+    /**
+     * The ARN of the room to update.
+     */
+    AddressBookArn: Arn;
+    /**
+     * The updated name of the room.
+     */
+    Name?: AddressBookName;
+    /**
+     * The updated description of the room.
+     */
+    Description?: AddressBookDescription;
+  }
+  export interface UpdateAddressBookResponse {
+  }
+  export interface UpdateContactRequest {
+    /**
+     * The ARN of the contact to update.
+     */
+    ContactArn: Arn;
+    /**
+     * The updated display name of the contact.
+     */
+    DisplayName?: ContactName;
+    /**
+     * The updated first name of the contact.
+     */
+    FirstName?: ContactName;
+    /**
+     * The updated last name of the contact.
+     */
+    LastName?: ContactName;
+    /**
+     * The updated phone number of the contact.
+     */
+    PhoneNumber?: E164PhoneNumber;
+  }
+  export interface UpdateContactResponse {
   }
   export interface UpdateDeviceRequest {
     /**

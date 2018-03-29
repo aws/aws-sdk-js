@@ -11,6 +11,16 @@
     "uid":"alexaforbusiness-2017-11-09"
   },
   "operations":{
+    "AssociateContactWithAddressBook":{
+      "name":"AssociateContactWithAddressBook",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateContactWithAddressBookRequest"},
+      "output":{"shape":"AssociateContactWithAddressBookResponse"},
+      "documentation":"<p>Associates a contact to a given address book.</p>"
+    },
     "AssociateDeviceWithRoom":{
       "name":"AssociateDeviceWithRoom",
       "http":{
@@ -33,6 +43,34 @@
       "input":{"shape":"AssociateSkillGroupWithRoomRequest"},
       "output":{"shape":"AssociateSkillGroupWithRoomResponse"},
       "documentation":"<p>Associates a skill group to a given room. This enables all skills in the associated skill group on all devices in the room.</p>"
+    },
+    "CreateAddressBook":{
+      "name":"CreateAddressBook",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateAddressBookRequest"},
+      "output":{"shape":"CreateAddressBookResponse"},
+      "errors":[
+        {"shape":"AlreadyExistsException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates an address book with the specified details.</p>"
+    },
+    "CreateContact":{
+      "name":"CreateContact",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateContactRequest"},
+      "output":{"shape":"CreateContactResponse"},
+      "errors":[
+        {"shape":"AlreadyExistsException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a contact with the specified details.</p>"
     },
     "CreateProfile":{
       "name":"CreateProfile",
@@ -89,6 +127,32 @@
         {"shape":"LimitExceededException"}
       ],
       "documentation":"<p>Creates a user.</p>"
+    },
+    "DeleteAddressBook":{
+      "name":"DeleteAddressBook",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteAddressBookRequest"},
+      "output":{"shape":"DeleteAddressBookResponse"},
+      "errors":[
+        {"shape":"NotFoundException"}
+      ],
+      "documentation":"<p>Deletes an address book by the address book ARN.</p>"
+    },
+    "DeleteContact":{
+      "name":"DeleteContact",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteContactRequest"},
+      "output":{"shape":"DeleteContactResponse"},
+      "errors":[
+        {"shape":"NotFoundException"}
+      ],
+      "documentation":"<p>Deletes a contact by the contact ARN.</p>"
     },
     "DeleteProfile":{
       "name":"DeleteProfile",
@@ -152,6 +216,16 @@
       ],
       "documentation":"<p>Deletes a specified user by user ARN and enrollment ARN.</p>"
     },
+    "DisassociateContactFromAddressBook":{
+      "name":"DisassociateContactFromAddressBook",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateContactFromAddressBookRequest"},
+      "output":{"shape":"DisassociateContactFromAddressBookResponse"},
+      "documentation":"<p>Disassociates a contact from a given address book.</p>"
+    },
     "DisassociateDeviceFromRoom":{
       "name":"DisassociateDeviceFromRoom",
       "http":{
@@ -171,6 +245,32 @@
       "input":{"shape":"DisassociateSkillGroupFromRoomRequest"},
       "output":{"shape":"DisassociateSkillGroupFromRoomResponse"},
       "documentation":"<p>Disassociates a skill group from a specified room. This disables all skills in the skill group on all devices in the room.</p>"
+    },
+    "GetAddressBook":{
+      "name":"GetAddressBook",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetAddressBookRequest"},
+      "output":{"shape":"GetAddressBookResponse"},
+      "errors":[
+        {"shape":"NotFoundException"}
+      ],
+      "documentation":"<p>Gets address the book details by the address book ARN.</p>"
+    },
+    "GetContact":{
+      "name":"GetContact",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetContactRequest"},
+      "output":{"shape":"GetContactResponse"},
+      "errors":[
+        {"shape":"NotFoundException"}
+      ],
+      "documentation":"<p>Gets the contact details by the contact ARN.</p>"
     },
     "GetDevice":{
       "name":"GetDevice",
@@ -296,6 +396,26 @@
       ],
       "documentation":"<p>Revokes an invitation and invalidates the enrollment URL.</p>"
     },
+    "SearchAddressBooks":{
+      "name":"SearchAddressBooks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SearchAddressBooksRequest"},
+      "output":{"shape":"SearchAddressBooksResponse"},
+      "documentation":"<p>Searches address books and lists the ones that meet a set of filter and sort criteria.</p>"
+    },
+    "SearchContacts":{
+      "name":"SearchContacts",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SearchContactsRequest"},
+      "output":{"shape":"SearchContactsResponse"},
+      "documentation":"<p>Searches contacts and lists the ones that meet a set of filter and sort criteria.</p>"
+    },
     "SearchDevices":{
       "name":"SearchDevices",
       "http":{
@@ -396,6 +516,33 @@
       ],
       "documentation":"<p>Removes metadata tags from a specified resource.</p>"
     },
+    "UpdateAddressBook":{
+      "name":"UpdateAddressBook",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateAddressBookRequest"},
+      "output":{"shape":"UpdateAddressBookResponse"},
+      "errors":[
+        {"shape":"NotFoundException"},
+        {"shape":"NameInUseException"}
+      ],
+      "documentation":"<p>Updates address book details by the address book ARN.</p>"
+    },
+    "UpdateContact":{
+      "name":"UpdateContact",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateContactRequest"},
+      "output":{"shape":"UpdateContactResponse"},
+      "errors":[
+        {"shape":"NotFoundException"}
+      ],
+      "documentation":"<p>Updates the contact details by the contact ARN.</p>"
+    },
     "UpdateDevice":{
       "name":"UpdateDevice",
       "http":{
@@ -458,6 +605,58 @@
       "max":500,
       "min":1
     },
+    "AddressBook":{
+      "type":"structure",
+      "members":{
+        "AddressBookArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the address book.</p>"
+        },
+        "Name":{
+          "shape":"AddressBookName",
+          "documentation":"<p>The name of the address book.</p>"
+        },
+        "Description":{
+          "shape":"AddressBookDescription",
+          "documentation":"<p>The description of the address book.</p>"
+        }
+      },
+      "documentation":"<p>An address book with attributes.</p>"
+    },
+    "AddressBookData":{
+      "type":"structure",
+      "members":{
+        "AddressBookArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the address book.</p>"
+        },
+        "Name":{
+          "shape":"AddressBookName",
+          "documentation":"<p>The name of the address book.</p>"
+        },
+        "Description":{
+          "shape":"AddressBookDescription",
+          "documentation":"<p>The description of the address book.</p>"
+        }
+      },
+      "documentation":"<p>Information related to an address book.</p>"
+    },
+    "AddressBookDataList":{
+      "type":"list",
+      "member":{"shape":"AddressBookData"}
+    },
+    "AddressBookDescription":{
+      "type":"string",
+      "max":200,
+      "min":1,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
+    "AddressBookName":{
+      "type":"string",
+      "max":100,
+      "min":1,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
     "AlreadyExistsException":{
       "type":"structure",
       "members":{
@@ -469,6 +668,28 @@
     "Arn":{
       "type":"string",
       "pattern":"arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+    },
+    "AssociateContactWithAddressBookRequest":{
+      "type":"structure",
+      "required":[
+        "ContactArn",
+        "AddressBookArn"
+      ],
+      "members":{
+        "ContactArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the contact to associate with an address book.</p>"
+        },
+        "AddressBookArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the address book with which to associate the contact.</p>"
+        }
+      }
+    },
+    "AssociateContactWithAddressBookResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "AssociateDeviceWithRoomRequest":{
       "type":"structure",
@@ -513,6 +734,135 @@
       "max":150,
       "min":10,
       "pattern":"[a-zA-Z0-9][a-zA-Z0-9_-]*"
+    },
+    "Contact":{
+      "type":"structure",
+      "members":{
+        "ContactArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the contact.</p>"
+        },
+        "DisplayName":{
+          "shape":"ContactName",
+          "documentation":"<p>The name of the contact to display on the AWS management console.</p>"
+        },
+        "FirstName":{
+          "shape":"ContactName",
+          "documentation":"<p>The first name of the contact that is used to call the contact on the device.</p>"
+        },
+        "LastName":{
+          "shape":"ContactName",
+          "documentation":"<p>The last name of the contact that is used to call the contact on the device.</p>"
+        },
+        "PhoneNumber":{
+          "shape":"E164PhoneNumber",
+          "documentation":"<p>The phone number of the contact.</p>"
+        }
+      },
+      "documentation":"<p>A contact with attributes.</p>"
+    },
+    "ContactData":{
+      "type":"structure",
+      "members":{
+        "ContactArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the contact.</p>"
+        },
+        "DisplayName":{
+          "shape":"ContactName",
+          "documentation":"<p>The name of the contact to display on the AWS management console.</p>"
+        },
+        "FirstName":{
+          "shape":"ContactName",
+          "documentation":"<p>The first name of the contact that is used to call the contact on the device.</p>"
+        },
+        "LastName":{
+          "shape":"ContactName",
+          "documentation":"<p>The last name of the contact that is used to call the contact on the device.</p>"
+        },
+        "PhoneNumber":{
+          "shape":"E164PhoneNumber",
+          "documentation":"<p>The phone number of the contact.</p>"
+        }
+      },
+      "documentation":"<p>Information related to a contact.</p>"
+    },
+    "ContactDataList":{
+      "type":"list",
+      "member":{"shape":"ContactData"}
+    },
+    "ContactName":{
+      "type":"string",
+      "max":100,
+      "min":1,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
+    "CreateAddressBookRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"AddressBookName",
+          "documentation":"<p>The name of the address book.</p>"
+        },
+        "Description":{
+          "shape":"AddressBookDescription",
+          "documentation":"<p>The description of the address book.</p>"
+        },
+        "ClientRequestToken":{
+          "shape":"ClientRequestToken",
+          "documentation":"<p>A unique, user-specified identifier for the request that ensures idempotency.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateAddressBookResponse":{
+      "type":"structure",
+      "members":{
+        "AddressBookArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the newly created address book.</p>"
+        }
+      }
+    },
+    "CreateContactRequest":{
+      "type":"structure",
+      "required":[
+        "FirstName",
+        "PhoneNumber"
+      ],
+      "members":{
+        "DisplayName":{
+          "shape":"ContactName",
+          "documentation":"<p>The name of the contact to display on the AWS management console.</p>"
+        },
+        "FirstName":{
+          "shape":"ContactName",
+          "documentation":"<p>The first name of the contact that is used to call the contact on the device.</p>"
+        },
+        "LastName":{
+          "shape":"ContactName",
+          "documentation":"<p>The last name of the contact that is used to call the contact on the device.</p>"
+        },
+        "PhoneNumber":{
+          "shape":"E164PhoneNumber",
+          "documentation":"<p>The phone number of the contact in E164 format.</p>"
+        },
+        "ClientRequestToken":{
+          "shape":"ClientRequestToken",
+          "documentation":"<p>A unique, user-specified identifier for this request that ensures idempotency.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateContactResponse":{
+      "type":"structure",
+      "members":{
+        "ContactArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the newly created address book.</p>"
+        }
+      }
     },
     "CreateProfileRequest":{
       "type":"structure",
@@ -683,6 +1033,36 @@
           "shape":"Arn",
           "documentation":"<p>The ARN of the newly created user in the response.</p>"
         }
+      }
+    },
+    "DeleteAddressBookRequest":{
+      "type":"structure",
+      "required":["AddressBookArn"],
+      "members":{
+        "AddressBookArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the address book to delete.</p>"
+        }
+      }
+    },
+    "DeleteAddressBookResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteContactRequest":{
+      "type":"structure",
+      "required":["ContactArn"],
+      "members":{
+        "ContactArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the contact to delete.</p>"
+        }
+      }
+    },
+    "DeleteContactResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "DeleteProfileRequest":{
@@ -917,6 +1297,28 @@
       "type":"string",
       "pattern":"[a-zA-Z0-9]{1,200}"
     },
+    "DisassociateContactFromAddressBookRequest":{
+      "type":"structure",
+      "required":[
+        "ContactArn",
+        "AddressBookArn"
+      ],
+      "members":{
+        "ContactArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the contact to disassociate from an address book.</p>"
+        },
+        "AddressBookArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the address from which to disassociate the contact.</p>"
+        }
+      }
+    },
+    "DisassociateContactFromAddressBookResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DisassociateDeviceFromRoomRequest":{
       "type":"structure",
       "members":{
@@ -955,6 +1357,10 @@
         "METRIC",
         "IMPERIAL"
       ]
+    },
+    "E164PhoneNumber":{
+      "type":"string",
+      "pattern":"^\\+\\d{8,}$"
     },
     "Email":{
       "type":"string",
@@ -1029,6 +1435,44 @@
       "type":"list",
       "member":{"shape":"FilterValue"},
       "max":5
+    },
+    "GetAddressBookRequest":{
+      "type":"structure",
+      "required":["AddressBookArn"],
+      "members":{
+        "AddressBookArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the address book for which to request details.</p>"
+        }
+      }
+    },
+    "GetAddressBookResponse":{
+      "type":"structure",
+      "members":{
+        "AddressBook":{
+          "shape":"AddressBook",
+          "documentation":"<p>The details of the requested address book.</p>"
+        }
+      }
+    },
+    "GetContactRequest":{
+      "type":"structure",
+      "required":["ContactArn"],
+      "members":{
+        "ContactArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the contact for which to request details.</p>"
+        }
+      }
+    },
+    "GetContactResponse":{
+      "type":"structure",
+      "members":{
+        "Contact":{
+          "shape":"Contact",
+          "documentation":"<p>The details of the requested contact.</p>"
+        }
+      }
     },
     "GetDeviceRequest":{
       "type":"structure",
@@ -1523,6 +1967,82 @@
       "type":"list",
       "member":{"shape":"RoomSkillParameter"}
     },
+    "SearchAddressBooksRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>The filters to use to list a specified set of address books. The supported filter key is AddressBookName.</p>"
+        },
+        "SortCriteria":{
+          "shape":"SortList",
+          "documentation":"<p>The sort order to use in listing the specified set of address books. The supported sort key is AddressBookName.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>"
+        }
+      }
+    },
+    "SearchAddressBooksResponse":{
+      "type":"structure",
+      "members":{
+        "AddressBooks":{
+          "shape":"AddressBookDataList",
+          "documentation":"<p>The address books that meet the specified set of filter criteria, in sort order.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token returned to indicate that there is more data available.</p>"
+        },
+        "TotalCount":{
+          "shape":"TotalCount",
+          "documentation":"<p>The total number of address books returned.</p>"
+        }
+      }
+    },
+    "SearchContactsRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>The filters to use to list a specified set of address books. The supported filter keys are DisplayName, FirstName, LastName, and AddressBookArns.</p>"
+        },
+        "SortCriteria":{
+          "shape":"SortList",
+          "documentation":"<p>The sort order to use in listing the specified set of contacts. The supported sort keys are DisplayName, FirstName, and LastName.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>"
+        }
+      }
+    },
+    "SearchContactsResponse":{
+      "type":"structure",
+      "members":{
+        "Contacts":{
+          "shape":"ContactDataList",
+          "documentation":"<p>The contacts that meet the specified set of filter criteria, in sort order.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token returned to indicate that there is more data available.</p>"
+        },
+        "TotalCount":{
+          "shape":"TotalCount",
+          "documentation":"<p>The total number of contacts returned.</p>"
+        }
+      }
+    },
     "SearchDevicesRequest":{
       "type":"structure",
       "members":{
@@ -1962,6 +2482,60 @@
       }
     },
     "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateAddressBookRequest":{
+      "type":"structure",
+      "required":["AddressBookArn"],
+      "members":{
+        "AddressBookArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the room to update.</p>"
+        },
+        "Name":{
+          "shape":"AddressBookName",
+          "documentation":"<p>The updated name of the room.</p>"
+        },
+        "Description":{
+          "shape":"AddressBookDescription",
+          "documentation":"<p>The updated description of the room.</p>"
+        }
+      }
+    },
+    "UpdateAddressBookResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateContactRequest":{
+      "type":"structure",
+      "required":["ContactArn"],
+      "members":{
+        "ContactArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the contact to update.</p>"
+        },
+        "DisplayName":{
+          "shape":"ContactName",
+          "documentation":"<p>The updated display name of the contact.</p>"
+        },
+        "FirstName":{
+          "shape":"ContactName",
+          "documentation":"<p>The updated first name of the contact.</p>"
+        },
+        "LastName":{
+          "shape":"ContactName",
+          "documentation":"<p>The updated last name of the contact.</p>"
+        },
+        "PhoneNumber":{
+          "shape":"E164PhoneNumber",
+          "documentation":"<p>The updated phone number of the contact.</p>"
+        }
+      }
+    },
+    "UpdateContactResponse":{
       "type":"structure",
       "members":{
       }
