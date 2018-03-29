@@ -429,7 +429,7 @@ describe('AWS.DynamoDB.Converter', function() {
         'should convert StringSetAttributeValues into sets with strings',
         function() {
           var converted = output({SS: ['a', 'b', 'c']});
-          expect(converted).to.have.keys('values', 'type');
+          expect(converted).to.have.keys('values', 'type', 'wrapperName');
           expect(converted.type).to.equal('String');
           expect(converted.values).to.deep.equal(['a', 'b', 'c']);
         }
@@ -441,7 +441,7 @@ describe('AWS.DynamoDB.Converter', function() {
         'should convert NumberSetAttributeValues into sets with numbers',
         function() {
           var converted = output({NS: ['1', '2', '3']});
-          expect(converted).to.have.keys('values', 'type');
+          expect(converted).to.have.keys('values', 'type', 'wrapperName');
           expect(converted.type).to.equal('Number');
           expect(converted.values).to.deep.equal([1, 2, 3]);
         }
@@ -456,7 +456,7 @@ describe('AWS.DynamoDB.Converter', function() {
               {wrapNumbers: true}
             );
 
-            expect(converted).to.have.keys('values', 'type');
+            expect(converted).to.have.keys('values', 'type', 'wrapperName');
             expect(converted.type).to.equal('Number');
             for (var i = 0; i < converted.values.length; i++) {
               expect(converted.values[i].toString()).to.equal(unsafeInteger);
@@ -471,7 +471,7 @@ describe('AWS.DynamoDB.Converter', function() {
         function() {
           var b64Strings = ['dead', 'beef', 'face'];
           var converted = output({BS: b64Strings.map(AWS.util.base64.decode)});
-          expect(converted).to.have.keys('values', 'type');
+          expect(converted).to.have.keys('values', 'type', 'wrapperName');
           expect(converted.type).to.equal('Binary');
           expect(converted.values.map(AWS.util.base64.encode))
             .to.deep.equal(b64Strings);
