@@ -131,5 +131,6 @@ module.exports = {
   ServiceDiscovery: require('./servicediscovery'),
   WorkMail: require('./workmail'),
   AutoScalingPlans: require('./autoscalingplans'),
-  TranscribeService: require('./transcribeservice')
+  TranscribeService: require('./transcribeservice'),
+  Connect: require('./connect')
 };

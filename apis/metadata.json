@@ -540,5 +540,8 @@
   "transcribeservice": {
     "prefix": "transcribe",
     "name": "TranscribeService"
+  },
+  "connect": {
+    "name": "Connect"
   }
 }

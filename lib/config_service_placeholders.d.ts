@@ -132,6 +132,7 @@ export abstract class ConfigurationServicePlaceholders {
   workmail?: AWS.WorkMail.Types.ClientConfiguration;
   autoscalingplans?: AWS.AutoScalingPlans.Types.ClientConfiguration;
   transcribeservice?: AWS.TranscribeService.Types.ClientConfiguration;
+  connect?: AWS.Connect.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -266,4 +267,5 @@ export interface ConfigurationServiceApiVersions {
   workmail?: AWS.WorkMail.Types.apiVersion;
   autoscalingplans?: AWS.AutoScalingPlans.Types.apiVersion;
   transcribeservice?: AWS.TranscribeService.Types.apiVersion;
+  connect?: AWS.Connect.Types.apiVersion;
 }

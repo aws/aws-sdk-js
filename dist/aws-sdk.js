@@ -1,7 +1,7 @@
-// AWS SDK for JavaScript v2.217.1
+// AWS SDK for JavaScript v2.218.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
-(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -11,6 +11,7 @@ module.exports={
     "protocol": "json",
     "serviceAbbreviation": "ACM",
     "serviceFullName": "AWS Certificate Manager",
+    "serviceId": "ACM",
     "signatureVersion": "v4",
     "targetPrefix": "CertificateManager",
     "uid": "acm-2015-12-08"
@@ -75096,6 +75097,9 @@ module.exports={
   "transcribeservice": {
     "prefix": "transcribe",
     "name": "TranscribeService"
+  },
+  "connect": {
+    "name": "Connect"
   }
 }
 },{}],108:[function(require,module,exports){
@@ -122592,7 +122596,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.217.1',
+  VERSION: '2.218.1',
 
   /**
    * @api private
@@ -146509,7 +146513,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.217.1
+// AWS SDK for JavaScript v2.218.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

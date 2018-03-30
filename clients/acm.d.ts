@@ -76,11 +76,11 @@ declare class ACM extends Service {
    */
   removeTagsFromCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Requests an ACM certificate for use with other AWS services. To request an ACM certificate, you must specify the fully qualified domain name (FQDN) for your site in the DomainName parameter. You can also specify additional FQDNs in the SubjectAlternativeNames parameter if users can reach your site by using other names.  For each domain name you specify, email is sent to the domain owner to request approval to issue the certificate. Email is sent to three registered contact addresses in the WHOIS database and to five common system administration addresses formed from the DomainName you enter or the optional ValidationDomain parameter. For more information, see Validate Domain Ownership.  After receiving approval from the domain owner, the ACM certificate is issued. For more information, see the AWS Certificate Manager User Guide. 
+   * Requests an ACM certificate for use with other AWS services. To request an ACM certificate, you must specify the fully qualified domain name (FQDN) for your site in the DomainName parameter. You can also specify additional FQDNs in the SubjectAlternativeNames parameter.  Each domain name that you specify must be validated to verify that you own or control the domain. You can use DNS validation or email validation. We recommend that you use DNS validation.  If you choose email validation, email is sent to the domain owner to request approval to issue the certificate. Email is sent to three registered contact addresses in the WHOIS database and to five common system administration addresses formed from the DomainName you enter or the optional ValidationDomain parameter. For more information, see Validate with Email.  After receiving approval from the domain owner, the ACM certificate is issued.
    */
   requestCertificate(params: ACM.Types.RequestCertificateRequest, callback?: (err: AWSError, data: ACM.Types.RequestCertificateResponse) => void): Request<ACM.Types.RequestCertificateResponse, AWSError>;
   /**
-   * Requests an ACM certificate for use with other AWS services. To request an ACM certificate, you must specify the fully qualified domain name (FQDN) for your site in the DomainName parameter. You can also specify additional FQDNs in the SubjectAlternativeNames parameter if users can reach your site by using other names.  For each domain name you specify, email is sent to the domain owner to request approval to issue the certificate. Email is sent to three registered contact addresses in the WHOIS database and to five common system administration addresses formed from the DomainName you enter or the optional ValidationDomain parameter. For more information, see Validate Domain Ownership.  After receiving approval from the domain owner, the ACM certificate is issued. For more information, see the AWS Certificate Manager User Guide. 
+   * Requests an ACM certificate for use with other AWS services. To request an ACM certificate, you must specify the fully qualified domain name (FQDN) for your site in the DomainName parameter. You can also specify additional FQDNs in the SubjectAlternativeNames parameter.  Each domain name that you specify must be validated to verify that you own or control the domain. You can use DNS validation or email validation. We recommend that you use DNS validation.  If you choose email validation, email is sent to the domain owner to request approval to issue the certificate. Email is sent to three registered contact addresses in the WHOIS database and to five common system administration addresses formed from the DomainName you enter or the optional ValidationDomain parameter. For more information, see Validate with Email.  After receiving approval from the domain owner, the ACM certificate is issued.
    */
   requestCertificate(callback?: (err: AWSError, data: ACM.Types.RequestCertificateResponse) => void): Request<ACM.Types.RequestCertificateResponse, AWSError>;
   /**
@@ -210,7 +210,7 @@ declare namespace ACM {
      */
     ExtendedKeyUsages?: ExtendedKeyUsageList;
     /**
-     * Value that specifies whether to add the certificate to a transparency log. Certificate transparency makes it possible to detect SSL certificates that have been mistakenly or maliciously issued. A browser might respond to certificate that has not been logged by showing an error message. The logs are cryptographicaly secure. 
+     * Value that specifies whether to add the certificate to a transparency log. Certificate transparency makes it possible to detect SSL certificates that have been mistakenly or maliciously issued. A browser might respond to certificate that has not been logged by showing an error message. The logs are cryptographically secure. 
      */
     Options?: CertificateOptions;
   }
@@ -446,7 +446,7 @@ declare namespace ACM {
      */
     DomainName: DomainNameString;
     /**
-     * The method you want to use to validate your domain.
+     * The method you want to use to validate that you own or control domain. You can validate with DNS or validate with email. We recommend that you use DNS validation. 
      */
     ValidationMethod?: ValidationMethod;
     /**
@@ -462,7 +462,7 @@ declare namespace ACM {
      */
     DomainValidationOptions?: DomainValidationOptionList;
     /**
-     * Currently, you can use this parameter to specify whether to add the certificate to a certificate transparency log. Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. For more information, see  Opting Out of Certificate Transparency Logging. 
+     * Currently, you can use this parameter to specify whether to add the certificate to a certificate transparency log. Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. For more information, see Opting Out of Certificate Transparency Logging.
      */
     Options?: CertificateOptions;
   }
