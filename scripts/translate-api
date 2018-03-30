@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var Translator = require('./lib/translator');
+var removeEventStreamOperations = require('./lib/remove-event-stream-ops').removeEventStreamOperations;
 var util = require('util');
 
 var basePath = __dirname + '/../apis/';
@@ -12,6 +13,11 @@ paths.forEach(function (path) {
   if (path.match(new RegExp(modelName + ".+\\.normal\\.json$"))) {
     var opath = path.replace(/\.normal\.json$/, '.min.json');
     var data = JSON.parse(fs.readFileSync(basePath + path).toString());
+    var didModify = removeEventStreamOperations(data);
+    if (didModify) {
+      // original model modified, replace existing normal.json so docs/ts definitions are accurate
+      fs.writeFileSync(basePath + path, JSON.stringify(data, null, '  '));
+    }
     var translated = new Translator(data, {documentation: false});
     var json = JSON.stringify(translated, null, '  ');
     fs.writeFileSync(basePath + opath, json);
