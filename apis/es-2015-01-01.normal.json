@@ -5,6 +5,7 @@
     "endpointPrefix":"es",
     "protocol":"rest-json",
     "serviceFullName":"Amazon Elasticsearch Service",
+    "serviceId":"Elasticsearch Service",
     "signatureVersion":"v4",
     "uid":"es-2015-01-01"
   },
@@ -330,6 +331,46 @@
       "type":"string",
       "documentation":"<p>ARN of the Cloudwatch log group to which log needs to be published.</p>"
     },
+    "CognitoOptions":{
+      "type":"structure",
+      "members":{
+        "Enabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies the option to enable Cognito for Kibana authentication.</p>"
+        },
+        "UserPoolId":{
+          "shape":"UserPoolId",
+          "documentation":"<p>Specifies the Cognito user pool ID for Kibana authentication.</p>"
+        },
+        "IdentityPoolId":{
+          "shape":"IdentityPoolId",
+          "documentation":"<p>Specifies the Cognito identity pool ID for Kibana authentication.</p>"
+        },
+        "RoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.</p>"
+        }
+      },
+      "documentation":"<p>Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html\" target=\"_blank\">Amazon Cognito Authentication for Kibana</a>.</p>"
+    },
+    "CognitoOptionsStatus":{
+      "type":"structure",
+      "required":[
+        "Options",
+        "Status"
+      ],
+      "members":{
+        "Options":{
+          "shape":"CognitoOptions",
+          "documentation":"<p>Specifies the Cognito options for the specified Elasticsearch domain.</p>"
+        },
+        "Status":{
+          "shape":"OptionStatus",
+          "documentation":"<p>Specifies the status of the Cognito options for the specified Elasticsearch domain.</p>"
+        }
+      },
+      "documentation":"<p>Status of the Cognito options for the specified Elasticsearch domain.</p>"
+    },
     "CreateElasticsearchDomainRequest":{
       "type":"structure",
       "required":["DomainName"],
@@ -361,6 +402,10 @@
         "VPCOptions":{
           "shape":"VPCOptions",
           "documentation":"<p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc\" target=\"_blank\">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i></p>"
+        },
+        "CognitoOptions":{
+          "shape":"CognitoOptions",
+          "documentation":"<p>Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html\" target=\"_blank\">Amazon Cognito Authentication for Kibana</a>.</p>"
         },
         "EncryptionAtRestOptions":{
           "shape":"EncryptionAtRestOptions",
@@ -714,6 +759,10 @@
           "shape":"VPCDerivedInfoStatus",
           "documentation":"<p>The <code>VPCOptions</code> for the specified domain. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html\" target=\"_blank\">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>"
         },
+        "CognitoOptions":{
+          "shape":"CognitoOptionsStatus",
+          "documentation":"<p>The <code>CognitoOptions</code> for the specified domain. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html\" target=\"_blank\">Amazon Cognito Authentication for Kibana</a>.</p>"
+        },
         "EncryptionAtRestOptions":{
           "shape":"EncryptionAtRestOptionsStatus",
           "documentation":"<p>Specifies the <code>EncryptionAtRestOptions</code> for the Elasticsearch domain.</p>"
@@ -790,6 +839,10 @@
         "VPCOptions":{
           "shape":"VPCDerivedInfo",
           "documentation":"<p>The <code>VPCOptions</code> for the specified domain. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html\" target=\"_blank\">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>"
+        },
+        "CognitoOptions":{
+          "shape":"CognitoOptions",
+          "documentation":"<p>The <code>CognitoOptions</code> for the specified domain. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html\" target=\"_blank\">Amazon Cognito Authentication for Kibana</a>.</p>"
         },
         "EncryptionAtRestOptions":{
           "shape":"EncryptionAtRestOptions",
@@ -878,6 +931,12 @@
       "value":{"shape":"ServiceUrl"}
     },
     "ErrorMessage":{"type":"string"},
+    "IdentityPoolId":{
+      "type":"string",
+      "max":55,
+      "min":1,
+      "pattern":"[\\w-]+:[0-9a-f-]+"
+    },
     "InstanceCountLimits":{
       "type":"structure",
       "members":{
@@ -1187,6 +1246,11 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
+    "RoleArn":{
+      "type":"string",
+      "max":2048,
+      "min":20
+    },
     "ServiceUrl":{
       "type":"string",
       "documentation":"<p>The endpoint to which service requests are submitted. For example, <code>search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.es.amazonaws.com</code> or <code>doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.es.amazonaws.com</code>.</p>"
@@ -1331,6 +1395,10 @@
           "shape":"VPCOptions",
           "documentation":"<p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc\" target=\"_blank\">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i></p>"
         },
+        "CognitoOptions":{
+          "shape":"CognitoOptions",
+          "documentation":"<p>Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html\" target=\"_blank\">Amazon Cognito Authentication for Kibana</a>.</p>"
+        },
         "AdvancedOptions":{
           "shape":"AdvancedOptions",
           "documentation":"<p>Modifies the advanced option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options\" target=\"_blank\">Configuration Advanced Options</a> for more information.</p>"
@@ -1358,6 +1426,12 @@
       "documentation":"<p>The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.</p>"
     },
     "UpdateTimestamp":{"type":"timestamp"},
+    "UserPoolId":{
+      "type":"string",
+      "max":55,
+      "min":1,
+      "pattern":"[\\w-]+_[0-9a-zA-Z]+"
+    },
     "VPCDerivedInfo":{
       "type":"structure",
       "members":{

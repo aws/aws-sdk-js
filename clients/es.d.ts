@@ -162,6 +162,34 @@ declare namespace ES {
   }
   export type Boolean = boolean;
   export type CloudWatchLogsLogGroupArn = string;
+  export interface CognitoOptions {
+    /**
+     * Specifies the option to enable Cognito for Kibana authentication.
+     */
+    Enabled?: Boolean;
+    /**
+     * Specifies the Cognito user pool ID for Kibana authentication.
+     */
+    UserPoolId?: UserPoolId;
+    /**
+     * Specifies the Cognito identity pool ID for Kibana authentication.
+     */
+    IdentityPoolId?: IdentityPoolId;
+    /**
+     * Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.
+     */
+    RoleArn?: RoleArn;
+  }
+  export interface CognitoOptionsStatus {
+    /**
+     * Specifies the Cognito options for the specified Elasticsearch domain.
+     */
+    Options: CognitoOptions;
+    /**
+     * Specifies the status of the Cognito options for the specified Elasticsearch domain.
+     */
+    Status: OptionStatus;
+  }
   export interface CreateElasticsearchDomainRequest {
     /**
      * The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
@@ -191,6 +219,10 @@ declare namespace ES {
      * Options to specify the subnets and security groups for VPC endpoint. For more information, see Creating a VPC in VPC Endpoints for Amazon Elasticsearch Service Domains
      */
     VPCOptions?: VPCOptions;
+    /**
+     * Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see Amazon Cognito Authentication for Kibana.
+     */
+    CognitoOptions?: CognitoOptions;
     /**
      * Specifies the Encryption At Rest Options.
      */
@@ -376,6 +408,10 @@ declare namespace ES {
      */
     VPCOptions?: VPCDerivedInfoStatus;
     /**
+     * The CognitoOptions for the specified domain. For more information, see Amazon Cognito Authentication for Kibana.
+     */
+    CognitoOptions?: CognitoOptionsStatus;
+    /**
      * Specifies the EncryptionAtRestOptions for the Elasticsearch domain.
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptionsStatus;
@@ -443,6 +479,10 @@ declare namespace ES {
      */
     VPCOptions?: VPCDerivedInfo;
     /**
+     * The CognitoOptions for the specified domain. For more information, see Amazon Cognito Authentication for Kibana.
+     */
+    CognitoOptions?: CognitoOptions;
+    /**
      *  Specifies the status of the EncryptionAtRestOptions.
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptions;
@@ -491,6 +531,7 @@ declare namespace ES {
   }
   export type EndpointsMap = {[key: string]: ServiceUrl};
   export type ErrorMessage = string;
+  export type IdentityPoolId = string;
   export interface InstanceCountLimits {
     MinimumInstanceCount?: MinimumInstanceCount;
     MaximumInstanceCount?: MaximumInstanceCount;
@@ -630,6 +671,7 @@ declare namespace ES {
      */
     TagKeys: StringList;
   }
+  export type RoleArn = string;
   export type ServiceUrl = string;
   export interface SnapshotOptions {
     /**
@@ -707,6 +749,10 @@ declare namespace ES {
      */
     VPCOptions?: VPCOptions;
     /**
+     * Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see Amazon Cognito Authentication for Kibana.
+     */
+    CognitoOptions?: CognitoOptions;
+    /**
      * Modifies the advanced option to allow references to indices in an HTTP request body. Must be false when configuring access to individual sub-resources. By default, the value is true. See Configuration Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptions;
@@ -726,6 +772,7 @@ declare namespace ES {
     DomainConfig: ElasticsearchDomainConfig;
   }
   export type UpdateTimestamp = Date;
+  export type UserPoolId = string;
   export interface VPCDerivedInfo {
     /**
      * The VPC Id for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
