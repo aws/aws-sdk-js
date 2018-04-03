@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.219.1
+// AWS SDK for JavaScript v2.220.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -26438,6 +26438,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "AWS Device Farm",
+    "serviceId": "Device Farm",
     "signatureVersion": "v4",
     "targetPrefix": "DeviceFarm_20150623",
     "uid": "devicefarm-2015-06-23"
@@ -26465,6 +26466,35 @@ module.exports={
         "members": {
           "devicePool": {
             "shape": "Sb"
+          }
+        }
+      }
+    },
+    "CreateInstanceProfile": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {},
+          "description": {},
+          "packageCleanup": {
+            "type": "boolean"
+          },
+          "excludeAppPackagesFromCleanup": {
+            "shape": "Sf"
+          },
+          "rebootAfterUse": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "instanceProfile": {
+            "shape": "Sh"
           }
         }
       }
@@ -26511,7 +26541,7 @@ module.exports={
         "type": "structure",
         "members": {
           "networkProfile": {
-            "shape": "Si"
+            "shape": "Sn"
           }
         }
       }
@@ -26533,7 +26563,7 @@ module.exports={
         "type": "structure",
         "members": {
           "project": {
-            "shape": "Sm"
+            "shape": "Sr"
           }
         }
       }
@@ -26548,6 +26578,7 @@ module.exports={
         "members": {
           "projectArn": {},
           "deviceArn": {},
+          "instanceArn": {},
           "sshPublicKey": {},
           "remoteDebugEnabled": {
             "type": "boolean"
@@ -26564,14 +26595,17 @@ module.exports={
               "billingMethod": {}
             }
           },
-          "interactionMode": {}
+          "interactionMode": {},
+          "skipAppResign": {
+            "type": "boolean"
+          }
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "remoteAccessSession": {
-            "shape": "Sw"
+            "shape": "S10"
           }
         }
       }
@@ -26595,12 +26629,27 @@ module.exports={
         "type": "structure",
         "members": {
           "upload": {
-            "shape": "S1c"
+            "shape": "S1l"
           }
         }
       }
     },
     "DeleteDevicePool": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteInstanceProfile": {
       "input": {
         "type": "structure",
         "required": [
@@ -26703,10 +26752,10 @@ module.exports={
             "members": {
               "awsAccountNumber": {},
               "unmeteredDevices": {
-                "shape": "S1w"
+                "shape": "S27"
               },
               "unmeteredRemoteAccessDevices": {
-                "shape": "S1w"
+                "shape": "S27"
               },
               "maxJobTimeoutMinutes": {
                 "type": "integer"
@@ -26731,6 +26780,9 @@ module.exports={
               },
               "defaultJobTimeoutMinutes": {
                 "type": "integer"
+              },
+              "skipAppResign": {
+                "type": "boolean"
               }
             }
           }
@@ -26751,7 +26803,26 @@ module.exports={
         "type": "structure",
         "members": {
           "device": {
-            "shape": "Sz"
+            "shape": "S13"
+          }
+        }
+      }
+    },
+    "GetDeviceInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "deviceInstance": {
+            "shape": "S1b"
           }
         }
       }
@@ -26786,7 +26857,7 @@ module.exports={
           "appArn": {},
           "testType": {},
           "test": {
-            "shape": "S25"
+            "shape": "S2i"
           }
         }
       },
@@ -26794,10 +26865,29 @@ module.exports={
         "type": "structure",
         "members": {
           "compatibleDevices": {
-            "shape": "S29"
+            "shape": "S2m"
           },
           "incompatibleDevices": {
-            "shape": "S29"
+            "shape": "S2m"
+          }
+        }
+      }
+    },
+    "GetInstanceProfile": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "instanceProfile": {
+            "shape": "Sh"
           }
         }
       }
@@ -26816,7 +26906,7 @@ module.exports={
         "type": "structure",
         "members": {
           "job": {
-            "shape": "S2f"
+            "shape": "S2u"
           }
         }
       }
@@ -26835,7 +26925,7 @@ module.exports={
         "type": "structure",
         "members": {
           "networkProfile": {
-            "shape": "Si"
+            "shape": "Sn"
           }
         }
       }
@@ -26851,10 +26941,10 @@ module.exports={
         "type": "structure",
         "members": {
           "current": {
-            "shape": "S2m"
+            "shape": "S31"
           },
           "nextPeriod": {
-            "shape": "S2m"
+            "shape": "S31"
           },
           "nextToken": {}
         }
@@ -26874,7 +26964,7 @@ module.exports={
         "type": "structure",
         "members": {
           "project": {
-            "shape": "Sm"
+            "shape": "Sr"
           }
         }
       }
@@ -26893,7 +26983,7 @@ module.exports={
         "type": "structure",
         "members": {
           "remoteAccessSession": {
-            "shape": "Sw"
+            "shape": "S10"
           }
         }
       }
@@ -26912,7 +27002,7 @@ module.exports={
         "type": "structure",
         "members": {
           "run": {
-            "shape": "S33"
+            "shape": "S3i"
           }
         }
       }
@@ -26931,7 +27021,7 @@ module.exports={
         "type": "structure",
         "members": {
           "suite": {
-            "shape": "S3d"
+            "shape": "S3s"
           }
         }
       }
@@ -26950,7 +27040,7 @@ module.exports={
         "type": "structure",
         "members": {
           "test": {
-            "shape": "S3g"
+            "shape": "S3v"
           }
         }
       }
@@ -26969,7 +27059,7 @@ module.exports={
         "type": "structure",
         "members": {
           "upload": {
-            "shape": "S1c"
+            "shape": "S1l"
           }
         }
       }
@@ -26990,7 +27080,7 @@ module.exports={
         "type": "structure",
         "members": {
           "appUpload": {
-            "shape": "S1c"
+            "shape": "S1l"
           }
         }
       }
@@ -27023,6 +27113,26 @@ module.exports={
                 "url": {}
               }
             }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListDeviceInstances": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "deviceInstances": {
+            "shape": "S1a"
           },
           "nextToken": {}
         }
@@ -27067,7 +27177,30 @@ module.exports={
           "devices": {
             "type": "list",
             "member": {
-              "shape": "Sz"
+              "shape": "S13"
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListInstanceProfiles": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "instanceProfiles": {
+            "type": "list",
+            "member": {
+              "shape": "Sh"
             }
           },
           "nextToken": {}
@@ -27091,7 +27224,7 @@ module.exports={
           "jobs": {
             "type": "list",
             "member": {
-              "shape": "S2f"
+              "shape": "S2u"
             }
           },
           "nextToken": {}
@@ -27116,7 +27249,7 @@ module.exports={
           "networkProfiles": {
             "type": "list",
             "member": {
-              "shape": "Si"
+              "shape": "Sn"
             }
           },
           "nextToken": {}
@@ -27160,7 +27293,7 @@ module.exports={
           "offeringTransactions": {
             "type": "list",
             "member": {
-              "shape": "S4b"
+              "shape": "S4v"
             }
           },
           "nextToken": {}
@@ -27180,7 +27313,7 @@ module.exports={
           "offerings": {
             "type": "list",
             "member": {
-              "shape": "S2q"
+              "shape": "S35"
             }
           },
           "nextToken": {}
@@ -27201,7 +27334,7 @@ module.exports={
           "projects": {
             "type": "list",
             "member": {
-              "shape": "Sm"
+              "shape": "Sr"
             }
           },
           "nextToken": {}
@@ -27225,7 +27358,7 @@ module.exports={
           "remoteAccessSessions": {
             "type": "list",
             "member": {
-              "shape": "Sw"
+              "shape": "S10"
             }
           },
           "nextToken": {}
@@ -27249,7 +27382,7 @@ module.exports={
           "runs": {
             "type": "list",
             "member": {
-              "shape": "S33"
+              "shape": "S3i"
             }
           },
           "nextToken": {}
@@ -27302,7 +27435,7 @@ module.exports={
           "suites": {
             "type": "list",
             "member": {
-              "shape": "S3d"
+              "shape": "S3s"
             }
           },
           "nextToken": {}
@@ -27326,7 +27459,7 @@ module.exports={
           "tests": {
             "type": "list",
             "member": {
-              "shape": "S3g"
+              "shape": "S3v"
             }
           },
           "nextToken": {}
@@ -27362,19 +27495,19 @@ module.exports={
                       "type": "structure",
                       "members": {
                         "run": {
-                          "shape": "S57"
+                          "shape": "S5r"
                         },
                         "job": {
-                          "shape": "S57"
+                          "shape": "S5r"
                         },
                         "suite": {
-                          "shape": "S57"
+                          "shape": "S5r"
                         },
                         "test": {
-                          "shape": "S57"
+                          "shape": "S5r"
                         },
                         "device": {
-                          "shape": "Sz"
+                          "shape": "S13"
                         },
                         "result": {},
                         "message": {}
@@ -27406,7 +27539,7 @@ module.exports={
           "uploads": {
             "type": "list",
             "member": {
-              "shape": "S1c"
+              "shape": "S1l"
             }
           },
           "nextToken": {}
@@ -27428,7 +27561,7 @@ module.exports={
         "type": "structure",
         "members": {
           "offeringTransaction": {
-            "shape": "S4b"
+            "shape": "S4v"
           }
         }
       }
@@ -27447,7 +27580,7 @@ module.exports={
         "type": "structure",
         "members": {
           "offeringTransaction": {
-            "shape": "S4b"
+            "shape": "S4v"
           }
         }
       }
@@ -27466,7 +27599,7 @@ module.exports={
           "devicePoolArn": {},
           "name": {},
           "test": {
-            "shape": "S25"
+            "shape": "S2i"
           },
           "configuration": {
             "type": "structure",
@@ -27475,13 +27608,13 @@ module.exports={
               "networkProfileArn": {},
               "locale": {},
               "location": {
-                "shape": "S36"
+                "shape": "S3l"
               },
               "customerArtifactPaths": {
-                "shape": "S37"
+                "shape": "S3m"
               },
               "radios": {
-                "shape": "S35"
+                "shape": "S3k"
               },
               "auxiliaryApps": {
                 "type": "list",
@@ -27501,6 +27634,9 @@ module.exports={
               },
               "appPackagesCleanup": {
                 "type": "boolean"
+              },
+              "skipAppResign": {
+                "type": "boolean"
               }
             }
           }
@@ -27510,7 +27646,7 @@ module.exports={
         "type": "structure",
         "members": {
           "run": {
-            "shape": "S33"
+            "shape": "S3i"
           }
         }
       }
@@ -27529,7 +27665,7 @@ module.exports={
         "type": "structure",
         "members": {
           "remoteAccessSession": {
-            "shape": "Sw"
+            "shape": "S10"
           }
         }
       }
@@ -27548,7 +27684,30 @@ module.exports={
         "type": "structure",
         "members": {
           "run": {
-            "shape": "S33"
+            "shape": "S3i"
+          }
+        }
+      }
+    },
+    "UpdateDeviceInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {},
+          "profileArn": {},
+          "labels": {
+            "shape": "S1c"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "deviceInstance": {
+            "shape": "S1b"
           }
         }
       }
@@ -27573,6 +27732,36 @@ module.exports={
         "members": {
           "devicePool": {
             "shape": "Sb"
+          }
+        }
+      }
+    },
+    "UpdateInstanceProfile": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {},
+          "name": {},
+          "description": {},
+          "packageCleanup": {
+            "type": "boolean"
+          },
+          "excludeAppPackagesFromCleanup": {
+            "shape": "Sf"
+          },
+          "rebootAfterUse": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "instanceProfile": {
+            "shape": "Sh"
           }
         }
       }
@@ -27618,7 +27807,7 @@ module.exports={
         "type": "structure",
         "members": {
           "networkProfile": {
-            "shape": "Si"
+            "shape": "Sn"
           }
         }
       }
@@ -27641,7 +27830,7 @@ module.exports={
         "type": "structure",
         "members": {
           "project": {
-            "shape": "Sm"
+            "shape": "Sr"
           }
         }
       }
@@ -27671,7 +27860,28 @@ module.exports={
         }
       }
     },
-    "Si": {
+    "Sf": {
+      "type": "list",
+      "member": {}
+    },
+    "Sh": {
+      "type": "structure",
+      "members": {
+        "arn": {},
+        "packageCleanup": {
+          "type": "boolean"
+        },
+        "excludeAppPackagesFromCleanup": {
+          "shape": "Sf"
+        },
+        "rebootAfterUse": {
+          "type": "boolean"
+        },
+        "name": {},
+        "description": {}
+      }
+    },
+    "Sn": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -27704,7 +27914,7 @@ module.exports={
         }
       }
     },
-    "Sm": {
+    "Sr": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -27717,7 +27927,7 @@ module.exports={
         }
       }
     },
-    "Sw": {
+    "S10": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -27735,8 +27945,9 @@ module.exports={
           "type": "timestamp"
         },
         "device": {
-          "shape": "Sz"
+          "shape": "S13"
         },
+        "instanceArn": {},
         "remoteDebugEnabled": {
           "type": "boolean"
         },
@@ -27748,14 +27959,17 @@ module.exports={
         "clientId": {},
         "billingMethod": {},
         "deviceMinutes": {
-          "shape": "S17"
+          "shape": "S1f"
         },
         "endpoint": {},
         "deviceUdid": {},
-        "interactionMode": {}
+        "interactionMode": {},
+        "skipAppResign": {
+          "type": "boolean"
+        }
       }
     },
-    "Sz": {
+    "S13": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -27803,10 +28017,38 @@ module.exports={
           "type": "boolean"
         },
         "fleetType": {},
-        "fleetName": {}
+        "fleetName": {},
+        "instances": {
+          "shape": "S1a"
+        }
       }
     },
-    "S17": {
+    "S1a": {
+      "type": "list",
+      "member": {
+        "shape": "S1b"
+      }
+    },
+    "S1b": {
+      "type": "structure",
+      "members": {
+        "arn": {},
+        "deviceArn": {},
+        "labels": {
+          "shape": "S1c"
+        },
+        "status": {},
+        "udid": {},
+        "instanceProfile": {
+          "shape": "Sh"
+        }
+      }
+    },
+    "S1c": {
+      "type": "list",
+      "member": {}
+    },
+    "S1f": {
       "type": "structure",
       "members": {
         "total": {
@@ -27820,7 +28062,7 @@ module.exports={
         }
       }
     },
-    "S1c": {
+    "S1l": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -27836,14 +28078,14 @@ module.exports={
         "message": {}
       }
     },
-    "S1w": {
+    "S27": {
       "type": "map",
       "key": {},
       "value": {
         "type": "integer"
       }
     },
-    "S25": {
+    "S2i": {
       "type": "structure",
       "required": [
         "type"
@@ -27859,13 +28101,13 @@ module.exports={
         }
       }
     },
-    "S29": {
+    "S2m": {
       "type": "list",
       "member": {
         "type": "structure",
         "members": {
           "device": {
-            "shape": "Sz"
+            "shape": "S13"
           },
           "compatible": {
             "type": "boolean"
@@ -27883,7 +28125,7 @@ module.exports={
         }
       }
     },
-    "S2f": {
+    "S2u": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -27901,18 +28143,19 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S2g"
+          "shape": "S2v"
         },
         "message": {},
         "device": {
-          "shape": "Sz"
+          "shape": "S13"
         },
+        "instanceArn": {},
         "deviceMinutes": {
-          "shape": "S17"
+          "shape": "S1f"
         }
       }
     },
-    "S2g": {
+    "S2v": {
       "type": "structure",
       "members": {
         "total": {
@@ -27938,19 +28181,19 @@ module.exports={
         }
       }
     },
-    "S2m": {
+    "S31": {
       "type": "map",
       "key": {},
       "value": {
-        "shape": "S2o"
+        "shape": "S33"
       }
     },
-    "S2o": {
+    "S33": {
       "type": "structure",
       "members": {
         "type": {},
         "offering": {
-          "shape": "S2q"
+          "shape": "S35"
         },
         "quantity": {
           "type": "integer"
@@ -27960,7 +28203,7 @@ module.exports={
         }
       }
     },
-    "S2q": {
+    "S35": {
       "type": "structure",
       "members": {
         "id": {},
@@ -27973,7 +28216,7 @@ module.exports={
             "type": "structure",
             "members": {
               "cost": {
-                "shape": "S2u"
+                "shape": "S39"
               },
               "frequency": {}
             }
@@ -27981,7 +28224,7 @@ module.exports={
         }
       }
     },
-    "S2u": {
+    "S39": {
       "type": "structure",
       "members": {
         "amount": {
@@ -27990,7 +28233,7 @@ module.exports={
         "currencyCode": {}
       }
     },
-    "S33": {
+    "S3i": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -28009,7 +28252,7 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S2g"
+          "shape": "S2v"
         },
         "message": {},
         "totalJobs": {
@@ -28020,10 +28263,10 @@ module.exports={
         },
         "billingMethod": {},
         "deviceMinutes": {
-          "shape": "S17"
+          "shape": "S1f"
         },
         "networkProfile": {
-          "shape": "Si"
+          "shape": "Sn"
         },
         "parsingResultUrl": {},
         "resultCode": {},
@@ -28040,18 +28283,21 @@ module.exports={
         "devicePoolArn": {},
         "locale": {},
         "radios": {
-          "shape": "S35"
+          "shape": "S3k"
         },
         "location": {
-          "shape": "S36"
+          "shape": "S3l"
         },
         "customerArtifactPaths": {
-          "shape": "S37"
+          "shape": "S3m"
         },
-        "webUrl": {}
+        "webUrl": {},
+        "skipAppResign": {
+          "type": "boolean"
+        }
       }
     },
-    "S35": {
+    "S3k": {
       "type": "structure",
       "members": {
         "wifi": {
@@ -28068,7 +28314,7 @@ module.exports={
         }
       }
     },
-    "S36": {
+    "S3l": {
       "type": "structure",
       "required": [
         "latitude",
@@ -28083,7 +28329,7 @@ module.exports={
         }
       }
     },
-    "S37": {
+    "S3m": {
       "type": "structure",
       "members": {
         "iosPaths": {
@@ -28100,7 +28346,7 @@ module.exports={
         }
       }
     },
-    "S3d": {
+    "S3s": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -28118,15 +28364,15 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S2g"
+          "shape": "S2v"
         },
         "message": {},
         "deviceMinutes": {
-          "shape": "S17"
+          "shape": "S1f"
         }
       }
     },
-    "S3g": {
+    "S3v": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -28144,19 +28390,19 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S2g"
+          "shape": "S2v"
         },
         "message": {},
         "deviceMinutes": {
-          "shape": "S17"
+          "shape": "S1f"
         }
       }
     },
-    "S4b": {
+    "S4v": {
       "type": "structure",
       "members": {
         "offeringStatus": {
-          "shape": "S2o"
+          "shape": "S33"
         },
         "transactionId": {},
         "offeringPromotionId": {},
@@ -28164,11 +28410,11 @@ module.exports={
           "type": "timestamp"
         },
         "cost": {
-          "shape": "S2u"
+          "shape": "S39"
         }
       }
     },
-    "S57": {
+    "S5r": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -125471,7 +125717,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.219.1',
+  VERSION: '2.220.1',
 
   /**
    * @api private
@@ -149388,7 +149634,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":474,"lodash/assign":431}],490:[function(require,module,exports){
-// AWS SDK for JavaScript v2.219.1
+// AWS SDK for JavaScript v2.220.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

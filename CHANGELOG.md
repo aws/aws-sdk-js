@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.219.1-->
+<!--LATEST=2.220.1-->
 <!--ENTRYINSERT-->
+
+## 2.220.1
+* feature: DeviceFarm: Added Private Device Management feature. Customers can now manage their private devices efficiently - view their status, set labels and apply profiles on them. Customers can also schedule automated tests and remote access sessions on individual instances in their private device fleet.
+* feature: Lambda: added nodejs8.10 as a valid runtime
+* feature: Translate: This release increases the maximum size of input text to 5,000 bytes. Amazon Translate now supports automatic language detection of the input text. The translation models have been improved to increase accuracy. See the documentation for more information.
 
 ## 2.219.1
 * feature: APIGateway: Amazon API Gateway now supports resource policies for APIs making it easier to set access controls for invoking APIs.

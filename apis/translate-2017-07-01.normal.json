@@ -26,17 +26,30 @@
         {"shape":"TextSizeLimitExceededException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"UnsupportedLanguagePairException"},
+        {"shape":"DetectedLanguageLowConfidenceException"},
         {"shape":"InternalServerException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Translates input text from the source language to the target language. You can translate between English (en) and one of the following languages, or between one of the following languages and English.</p> <ul> <li> <p>Arabic (ar)</p> </li> <li> <p>Chinese (Simplified) (zh)</p> </li> <li> <p>French (fr)</p> </li> <li> <p>German (de)</p> </li> <li> <p>Portuguese (pt)</p> </li> <li> <p>Spanish (es)</p> </li> </ul>"
+      "documentation":"<p>Translates input text from the source language to the target language. You can translate between English (en) and one of the following languages, or between one of the following languages and English.</p> <ul> <li> <p>Arabic (ar)</p> </li> <li> <p>Chinese (Simplified) (zh)</p> </li> <li> <p>French (fr)</p> </li> <li> <p>German (de)</p> </li> <li> <p>Portuguese (pt)</p> </li> <li> <p>Spanish (es)</p> </li> </ul> <p>To have Amazon Translate determine the source language of your text, you can specify <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify <code>auto</code>, Amazon Translate will call Amazon Comprehend to determine the source language.</p>"
     }
   },
   "shapes":{
     "BoundedLengthString":{
       "type":"string",
-      "max":1000,
+      "max":5000,
       "min":1
+    },
+    "DetectedLanguageLowConfidenceException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"},
+        "DetectedLanguageCode":{
+          "shape":"LanguageCodeString",
+          "documentation":"<p>Auto detected language code from Comprehend.</p>"
+        }
+      },
+      "documentation":"<p>The confidence that Amazon Comprehend accurately detected the source language is low. If a low confidence level is acceptable for your application, you can use the language in the exception to call Amazon Translate again. For more information, see the <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectDominantLanguage.html\">DetectDominantLanguage</a> operation in the <i>Amazon Comprehend Developer Guide</i>.</p>",
+      "exception":true
     },
     "InternalServerException":{
       "type":"structure",
@@ -102,7 +115,7 @@
         },
         "SourceLanguageCode":{
           "shape":"LanguageCodeString",
-          "documentation":"<p>One of the supported language codes for the source text. If the <code>TargetLanguageCode</code> is not \"en\", the <code>SourceLanguageCode</code> must be \"en\".</p>"
+          "documentation":"<p>One of the supported language codes for the source text. If the <code>TargetLanguageCode</code> is not \"en\", the <code>SourceLanguageCode</code> must be \"en\".</p> <p>To have Amazon Translate determine the source language of your text, you can specify <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify <code>auto</code>, Amazon Translate will call Amazon Comprehend to determine the source language.</p>"
         },
         "TargetLanguageCode":{
           "shape":"LanguageCodeString",

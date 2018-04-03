@@ -20,6 +20,14 @@ declare class DeviceFarm extends Service {
    */
   createDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.CreateDevicePoolResult) => void): Request<DeviceFarm.Types.CreateDevicePoolResult, AWSError>;
   /**
+   * Creates a profile that can be applied to one or more private fleet device instances.
+   */
+  createInstanceProfile(params: DeviceFarm.Types.CreateInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateInstanceProfileResult) => void): Request<DeviceFarm.Types.CreateInstanceProfileResult, AWSError>;
+  /**
+   * Creates a profile that can be applied to one or more private fleet device instances.
+   */
+  createInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.CreateInstanceProfileResult) => void): Request<DeviceFarm.Types.CreateInstanceProfileResult, AWSError>;
+  /**
    * Creates a network profile.
    */
   createNetworkProfile(params: DeviceFarm.Types.CreateNetworkProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateNetworkProfileResult) => void): Request<DeviceFarm.Types.CreateNetworkProfileResult, AWSError>;
@@ -59,6 +67,14 @@ declare class DeviceFarm extends Service {
    * Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
    */
   deleteDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteDevicePoolResult) => void): Request<DeviceFarm.Types.DeleteDevicePoolResult, AWSError>;
+  /**
+   * Deletes a profile that can be applied to one or more private device instances.
+   */
+  deleteInstanceProfile(params: DeviceFarm.Types.DeleteInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteInstanceProfileResult) => void): Request<DeviceFarm.Types.DeleteInstanceProfileResult, AWSError>;
+  /**
+   * Deletes a profile that can be applied to one or more private device instances.
+   */
+  deleteInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteInstanceProfileResult) => void): Request<DeviceFarm.Types.DeleteInstanceProfileResult, AWSError>;
   /**
    * Deletes a network profile.
    */
@@ -116,6 +132,14 @@ declare class DeviceFarm extends Service {
    */
   getDevice(callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceResult) => void): Request<DeviceFarm.Types.GetDeviceResult, AWSError>;
   /**
+   * Returns information about a device instance belonging to a private device fleet.
+   */
+  getDeviceInstance(params: DeviceFarm.Types.GetDeviceInstanceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceInstanceResult) => void): Request<DeviceFarm.Types.GetDeviceInstanceResult, AWSError>;
+  /**
+   * Returns information about a device instance belonging to a private device fleet.
+   */
+  getDeviceInstance(callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceInstanceResult) => void): Request<DeviceFarm.Types.GetDeviceInstanceResult, AWSError>;
+  /**
    * Gets information about a device pool.
    */
   getDevicePool(params: DeviceFarm.Types.GetDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDevicePoolResult) => void): Request<DeviceFarm.Types.GetDevicePoolResult, AWSError>;
@@ -131,6 +155,14 @@ declare class DeviceFarm extends Service {
    * Gets information about compatibility with a device pool.
    */
   getDevicePoolCompatibility(callback?: (err: AWSError, data: DeviceFarm.Types.GetDevicePoolCompatibilityResult) => void): Request<DeviceFarm.Types.GetDevicePoolCompatibilityResult, AWSError>;
+  /**
+   * Returns information about the specified instance profile.
+   */
+  getInstanceProfile(params: DeviceFarm.Types.GetInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetInstanceProfileResult) => void): Request<DeviceFarm.Types.GetInstanceProfileResult, AWSError>;
+  /**
+   * Returns information about the specified instance profile.
+   */
+  getInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.GetInstanceProfileResult) => void): Request<DeviceFarm.Types.GetInstanceProfileResult, AWSError>;
   /**
    * Gets information about a job.
    */
@@ -220,6 +252,14 @@ declare class DeviceFarm extends Service {
    */
   listArtifacts(callback?: (err: AWSError, data: DeviceFarm.Types.ListArtifactsResult) => void): Request<DeviceFarm.Types.ListArtifactsResult, AWSError>;
   /**
+   * Returns information about the private device instances associated with one or more AWS accounts.
+   */
+  listDeviceInstances(params: DeviceFarm.Types.ListDeviceInstancesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListDeviceInstancesResult) => void): Request<DeviceFarm.Types.ListDeviceInstancesResult, AWSError>;
+  /**
+   * Returns information about the private device instances associated with one or more AWS accounts.
+   */
+  listDeviceInstances(callback?: (err: AWSError, data: DeviceFarm.Types.ListDeviceInstancesResult) => void): Request<DeviceFarm.Types.ListDeviceInstancesResult, AWSError>;
+  /**
    * Gets information about device pools.
    */
   listDevicePools(params: DeviceFarm.Types.ListDevicePoolsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicePoolsResult) => void): Request<DeviceFarm.Types.ListDevicePoolsResult, AWSError>;
@@ -235,6 +275,14 @@ declare class DeviceFarm extends Service {
    * Gets information about unique device types.
    */
   listDevices(callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicesResult) => void): Request<DeviceFarm.Types.ListDevicesResult, AWSError>;
+  /**
+   * Returns information about all the instance profiles in an AWS account.
+   */
+  listInstanceProfiles(params: DeviceFarm.Types.ListInstanceProfilesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListInstanceProfilesResult) => void): Request<DeviceFarm.Types.ListInstanceProfilesResult, AWSError>;
+  /**
+   * Returns information about all the instance profiles in an AWS account.
+   */
+  listInstanceProfiles(callback?: (err: AWSError, data: DeviceFarm.Types.ListInstanceProfilesResult) => void): Request<DeviceFarm.Types.ListInstanceProfilesResult, AWSError>;
   /**
    * Gets information about jobs for a given test run.
    */
@@ -380,6 +428,14 @@ declare class DeviceFarm extends Service {
    */
   stopRun(callback?: (err: AWSError, data: DeviceFarm.Types.StopRunResult) => void): Request<DeviceFarm.Types.StopRunResult, AWSError>;
   /**
+   * Updates information about an existing private device instance.
+   */
+  updateDeviceInstance(params: DeviceFarm.Types.UpdateDeviceInstanceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDeviceInstanceResult) => void): Request<DeviceFarm.Types.UpdateDeviceInstanceResult, AWSError>;
+  /**
+   * Updates information about an existing private device instance.
+   */
+  updateDeviceInstance(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDeviceInstanceResult) => void): Request<DeviceFarm.Types.UpdateDeviceInstanceResult, AWSError>;
+  /**
    * Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).
    */
   updateDevicePool(params: DeviceFarm.Types.UpdateDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDevicePoolResult) => void): Request<DeviceFarm.Types.UpdateDevicePoolResult, AWSError>;
@@ -387,6 +443,14 @@ declare class DeviceFarm extends Service {
    * Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).
    */
   updateDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDevicePoolResult) => void): Request<DeviceFarm.Types.UpdateDevicePoolResult, AWSError>;
+  /**
+   * Updates information about an existing private device instance profile.
+   */
+  updateInstanceProfile(params: DeviceFarm.Types.UpdateInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateInstanceProfileResult) => void): Request<DeviceFarm.Types.UpdateInstanceProfileResult, AWSError>;
+  /**
+   * Updates information about an existing private device instance profile.
+   */
+  updateInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateInstanceProfileResult) => void): Request<DeviceFarm.Types.UpdateInstanceProfileResult, AWSError>;
   /**
    * Updates the network profile with specific settings.
    */
@@ -435,6 +499,10 @@ declare namespace DeviceFarm {
      * The default number of minutes (at the account level) a test run will execute before it times out. Default value is 60 minutes.
      */
     defaultJobTimeoutMinutes?: JobTimeoutMinutes;
+    /**
+     * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
+     */
+    skipAppResign?: SkipAppResign;
   }
   export type AccountsCleanup = boolean;
   export type AmazonResourceName = string;
@@ -538,6 +606,34 @@ declare namespace DeviceFarm {
      */
     devicePool?: DevicePool;
   }
+  export interface CreateInstanceProfileRequest {
+    /**
+     * The name of your instance profile.
+     */
+    name: Name;
+    /**
+     * The description of your instance profile.
+     */
+    description?: Message;
+    /**
+     * When set to true, Device Farm will remove app packages after a test run. The default value is false for private devices.
+     */
+    packageCleanup?: Boolean;
+    /**
+     * An array of strings specifying the list of app packages that should not be cleaned up from the device after a test run is over. The list of packages is only considered if you set packageCleanup to true.
+     */
+    excludeAppPackagesFromCleanup?: PackageIds;
+    /**
+     * When set to true, Device Farm will reboot the instance after a test run. The default value is true.
+     */
+    rebootAfterUse?: Boolean;
+  }
+  export interface CreateInstanceProfileResult {
+    /**
+     * An object containing information about your instance profile.
+     */
+    instanceProfile?: InstanceProfile;
+  }
   export interface CreateNetworkProfileRequest {
     /**
      * The Amazon Resource Name (ARN) of the project for which you want to create a network profile.
@@ -612,7 +708,7 @@ declare namespace DeviceFarm {
   }
   export interface CreateRemoteAccessSessionConfiguration {
     /**
-     * Returns the billing method for purposes of configuring a remote access session.
+     * The billing method for the remote access session.
      */
     billingMethod?: BillingMethod;
   }
@@ -625,6 +721,10 @@ declare namespace DeviceFarm {
      * The Amazon Resource Name (ARN) of the device for which you want to create a remote access session.
      */
     deviceArn: AmazonResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the device instance for which you want to create a remote access session.
+     */
+    instanceArn?: AmazonResourceName;
     /**
      * The public key of the ssh key pair you want to use for connecting to remote devices in your remote debugging session. This is only required if remoteDebugEnabled is set to true.
      */
@@ -657,6 +757,10 @@ declare namespace DeviceFarm {
      * The interaction mode of the remote access session. Valid values are:   INTERACTIVE: You can interact with the iOS device by viewing, touching, and rotating the screen. You cannot run XCUITest framework-based tests in this mode.   NO_VIDEO: You are connected to the device but cannot interact with it or view the screen. This mode has the fastest test execution speed. You can run XCUITest framework-based tests in this mode.   VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You can run XCUITest framework-based tests and watch the screen in this mode.  
      */
     interactionMode?: InteractionMode;
+    /**
+     * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
+     */
+    skipAppResign?: Boolean;
   }
   export interface CreateRemoteAccessSessionResult {
     /**
@@ -711,6 +815,14 @@ declare namespace DeviceFarm {
     arn: AmazonResourceName;
   }
   export interface DeleteDevicePoolResult {
+  }
+  export interface DeleteInstanceProfileRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the instance profile you are requesting to delete.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface DeleteInstanceProfileResult {
   }
   export interface DeleteNetworkProfileRequest {
     /**
@@ -829,10 +941,41 @@ declare namespace DeviceFarm {
      * The name of the fleet to which this device belongs.
      */
     fleetName?: String;
+    /**
+     * The instances belonging to this device.
+     */
+    instances?: DeviceInstances;
   }
-  export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"APPIUM_VERSION"|string;
+  export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"APPIUM_VERSION"|"INSTANCE_ARN"|"INSTANCE_LABELS"|string;
   export type DeviceFormFactor = "PHONE"|"TABLET"|string;
   export type DeviceHostPaths = String[];
+  export interface DeviceInstance {
+    /**
+     * The Amazon Resource Name (ARN) of the device instance.
+     */
+    arn?: AmazonResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the device.
+     */
+    deviceArn?: AmazonResourceName;
+    /**
+     * An array of strings describing the device instance.
+     */
+    labels?: InstanceLabels;
+    /**
+     * The status of the device instance. Valid values are listed below.
+     */
+    status?: InstanceStatus;
+    /**
+     * Unique device identifier for the device instance.
+     */
+    udid?: String;
+    /**
+     * A object containing information about the instance profile.
+     */
+    instanceProfile?: InstanceProfile;
+  }
+  export type DeviceInstances = DeviceInstance[];
   export interface DeviceMinutes {
     /**
      * When specified, represents the total minutes used by the resource to run tests.
@@ -902,6 +1045,10 @@ declare namespace DeviceFarm {
      * True if app package cleanup is enabled at the beginning of the test; otherwise, false.
      */
     appPackagesCleanup?: AppPackagesCleanup;
+    /**
+     * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
+     */
+    skipAppResign?: SkipAppResign;
   }
   export type ExecutionResult = "PENDING"|"PASSED"|"WARNED"|"FAILED"|"SKIPPED"|"ERRORED"|"STOPPED"|string;
   export type ExecutionResultCode = "PARSING_FAILED"|string;
@@ -914,6 +1061,18 @@ declare namespace DeviceFarm {
      * The account settings.
      */
     accountSettings?: AccountSettings;
+  }
+  export interface GetDeviceInstanceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the instance you're requesting information about.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface GetDeviceInstanceResult {
+    /**
+     * An object containing information about your device instance.
+     */
+    deviceInstance?: DeviceInstance;
   }
   export interface GetDevicePoolCompatibilityRequest {
     /**
@@ -966,6 +1125,18 @@ declare namespace DeviceFarm {
      * An object containing information about the requested device.
      */
     device?: Device;
+  }
+  export interface GetInstanceProfileRequest {
+    /**
+     * The Amazon Resource Name (ARN) of your instance profile.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface GetInstanceProfileResult {
+    /**
+     * An object containing information about your instance profile.
+     */
+    instanceProfile?: InstanceProfile;
   }
   export interface GetJobRequest {
     /**
@@ -1111,6 +1282,35 @@ declare namespace DeviceFarm {
      */
     appUpload?: Upload;
   }
+  export type InstanceLabels = String[];
+  export interface InstanceProfile {
+    /**
+     * The Amazon Resource Name (ARN) of the instance profile.
+     */
+    arn?: AmazonResourceName;
+    /**
+     * When set to true, Device Farm will remove app packages after a test run. The default value is false for private devices.
+     */
+    packageCleanup?: Boolean;
+    /**
+     * An array of strings specifying the list of app packages that should not be cleaned up from the device after a test run is over. The list of packages is only considered if you set packageCleanup to true.
+     */
+    excludeAppPackagesFromCleanup?: PackageIds;
+    /**
+     * When set to true, Device Farm will reboot the instance after a test run. The default value is true.
+     */
+    rebootAfterUse?: Boolean;
+    /**
+     * The name of the instance profile.
+     */
+    name?: Name;
+    /**
+     * The description of the instance profile.
+     */
+    description?: Message;
+  }
+  export type InstanceProfiles = InstanceProfile[];
+  export type InstanceStatus = "IN_USE"|"PREPARING"|"AVAILABLE"|"NOT_AVAILABLE"|string;
   export type Integer = number;
   export type InteractionMode = "INTERACTIVE"|"NO_VIDEO"|"VIDEO_ONLY"|string;
   export type IosPaths = String[];
@@ -1160,6 +1360,10 @@ declare namespace DeviceFarm {
      */
     device?: Device;
     /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    instanceArn?: AmazonResourceName;
+    /**
      * Represents the total (metered or unmetered) minutes used by the job.
      */
     deviceMinutes?: DeviceMinutes;
@@ -1187,6 +1391,26 @@ declare namespace DeviceFarm {
     artifacts?: Artifacts;
     /**
      * If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListDeviceInstancesRequest {
+    /**
+     * An integer specifying the maximum number of items you want to return in the API response.
+     */
+    maxResults?: Integer;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListDeviceInstancesResult {
+    /**
+     * An object containing information about your device instances.
+     */
+    deviceInstances?: DeviceInstances;
+    /**
+     * An identifier that can be used in the next call to this operation to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
   }
@@ -1231,6 +1455,26 @@ declare namespace DeviceFarm {
     devices?: Devices;
     /**
      * If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListInstanceProfilesRequest {
+    /**
+     * An integer specifying the maximum number of items you want to return in the API response.
+     */
+    maxResults?: Integer;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListInstanceProfilesResult {
+    /**
+     * An object containing information about your instance profiles.
+     */
+    instanceProfiles?: InstanceProfiles;
+    /**
+     * An identifier that can be used in the next call to this operation to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
   }
@@ -1643,6 +1887,7 @@ declare namespace DeviceFarm {
   export type OfferingTransactions = OfferingTransaction[];
   export type OfferingType = "RECURRING"|string;
   export type Offerings = Offering[];
+  export type PackageIds = String[];
   export type PaginationToken = string;
   export type PercentInteger = number;
   export interface Problem {
@@ -1794,6 +2039,10 @@ declare namespace DeviceFarm {
      */
     device?: Device;
     /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    instanceArn?: AmazonResourceName;
+    /**
      * This flag is set to true if remote debugging is enabled for the remote access session.
      */
     remoteDebugEnabled?: Boolean;
@@ -1833,6 +2082,10 @@ declare namespace DeviceFarm {
      * The interaction mode of the remote access session. Valid values are:   INTERACTIVE: You can interact with the iOS device by viewing, touching, and rotating the screen. You cannot run XCUITest framework-based tests in this mode.   NO_VIDEO: You are connected to the device but cannot interact with it or view the screen. This mode has the fastest test execution speed. You can run XCUITest framework-based tests in this mode.   VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You can run XCUITest framework-based tests and watch the screen in this mode.  
      */
     interactionMode?: InteractionMode;
+    /**
+     * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
+     */
+    skipAppResign?: SkipAppResign;
   }
   export type RemoteAccessSessions = RemoteAccessSession[];
   export interface RenewOfferingRequest {
@@ -1863,7 +2116,7 @@ declare namespace DeviceFarm {
   }
   export interface Rule {
     /**
-     * The rule's stringified attribute. For example, specify the value as "\"abc\"". Allowed values include:   ARN: The ARN.   FORM_FACTOR: The form factor (for example, phone or tablet).   MANUFACTURER: The manufacturer.   PLATFORM: The platform (for example, Android or iOS).   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.   APPIUM_VERSION: The Appium version for the test.  
+     * The rule's stringified attribute. For example, specify the value as "\"abc\"". Allowed values include:   ARN: The ARN.   FORM_FACTOR: The form factor (for example, phone or tablet).   MANUFACTURER: The manufacturer.   PLATFORM: The platform (for example, Android or iOS).   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.   APPIUM_VERSION: The Appium version for the test.   INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.   INSTANCE_LABELS: The label of the device instance.  
      */
     attribute?: DeviceAttribute;
     /**
@@ -1987,9 +2240,13 @@ declare namespace DeviceFarm {
      */
     customerArtifactPaths?: CustomerArtifactPaths;
     /**
-     * A pre-signed Amazon S3 URL that can be used with a corresponding GET request to download the symbol file for the run.
+     * The Device Farm console URL for the recording of the run.
      */
     webUrl?: String;
+    /**
+     * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
+     */
+    skipAppResign?: SkipAppResign;
   }
   export type Runs = Run[];
   export interface Sample {
@@ -2096,6 +2353,7 @@ declare namespace DeviceFarm {
      */
     parameters?: TestParameters;
   }
+  export type SkipAppResign = boolean;
   export type SshPublicKey = string;
   export interface StopRemoteAccessSessionRequest {
     /**
@@ -2242,6 +2500,26 @@ declare namespace DeviceFarm {
   }
   export type UniqueProblems = UniqueProblem[];
   export type UniqueProblemsByExecutionResultMap = {[key: string]: UniqueProblems};
+  export interface UpdateDeviceInstanceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the device instance.
+     */
+    arn: AmazonResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the profile that you want to associate with the device instance.
+     */
+    profileArn?: AmazonResourceName;
+    /**
+     * An array of strings that you want to associate with the device instance.
+     */
+    labels?: InstanceLabels;
+  }
+  export interface UpdateDeviceInstanceResult {
+    /**
+     * An object containing information about your device instance.
+     */
+    deviceInstance?: DeviceInstance;
+  }
   export interface UpdateDevicePoolRequest {
     /**
      * The Amazon Resourc Name (ARN) of the Device Farm device pool you wish to update.
@@ -2265,6 +2543,38 @@ declare namespace DeviceFarm {
      * The device pool you just updated.
      */
     devicePool?: DevicePool;
+  }
+  export interface UpdateInstanceProfileRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the instance profile.
+     */
+    arn: AmazonResourceName;
+    /**
+     * The updated name for your instance profile.
+     */
+    name?: Name;
+    /**
+     * The updated description for your instance profile.
+     */
+    description?: Message;
+    /**
+     * The updated choice for whether you want to specify package cleanup. The default value is false for private devices.
+     */
+    packageCleanup?: Boolean;
+    /**
+     * An array of strings specifying the list of app packages that should not be cleaned up from the device after a test run is over. The list of packages is only considered if you set packageCleanup to true.
+     */
+    excludeAppPackagesFromCleanup?: PackageIds;
+    /**
+     * The updated choice for whether you want to reboot the device after use. The default value is true.
+     */
+    rebootAfterUse?: Boolean;
+  }
+  export interface UpdateInstanceProfileResult {
+    /**
+     * An object containing information about your instance profile.
+     */
+    instanceProfile?: InstanceProfile;
   }
   export interface UpdateNetworkProfileRequest {
     /**
