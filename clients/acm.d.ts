@@ -36,6 +36,14 @@ declare class ACM extends Service {
    */
   describeCertificate(callback?: (err: AWSError, data: ACM.Types.DescribeCertificateResponse) => void): Request<ACM.Types.DescribeCertificateResponse, AWSError>;
   /**
+   * Exports a certificate for use anywhere. You can export the certificate, the certificate chain, and the encrypted private key associated with the public key embedded in the certificate. You must store the private key securely. The private key is a 2048 bit RSA key. You must provide a passphrase for the private key when exporting it. You can use the following OpenSSL command to decrypt it later. Provide the passphrase when prompted.   openssl rsa -in encrypted_key.pem -out decrypted_key.pem 
+   */
+  exportCertificate(params: ACM.Types.ExportCertificateRequest, callback?: (err: AWSError, data: ACM.Types.ExportCertificateResponse) => void): Request<ACM.Types.ExportCertificateResponse, AWSError>;
+  /**
+   * Exports a certificate for use anywhere. You can export the certificate, the certificate chain, and the encrypted private key associated with the public key embedded in the certificate. You must store the private key securely. The private key is a 2048 bit RSA key. You must provide a passphrase for the private key when exporting it. You can use the following OpenSSL command to decrypt it later. Provide the passphrase when prompted.   openssl rsa -in encrypted_key.pem -out decrypted_key.pem 
+   */
+  exportCertificate(callback?: (err: AWSError, data: ACM.Types.ExportCertificateResponse) => void): Request<ACM.Types.ExportCertificateResponse, AWSError>;
+  /**
    * Retrieves a certificate specified by an ARN and its certificate chain . The chain is an ordered list of certificates that contains the end entity certificate, intermediate certificates of subordinate CAs, and the root certificate in that order. The certificate and certificate chain are base64 encoded. If you want to decode the certificate to see the individual fields, you can use OpenSSL.
    */
   getCertificate(params: ACM.Types.GetCertificateRequest, callback?: (err: AWSError, data: ACM.Types.GetCertificateResponse) => void): Request<ACM.Types.GetCertificateResponse, AWSError>;
@@ -210,6 +218,14 @@ declare namespace ACM {
      */
     ExtendedKeyUsages?: ExtendedKeyUsageList;
     /**
+     * The Amazon Resource Name (ARN) of the ACM PCA private certificate authority (CA) that issued the certificate. This has the following format:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 
+     */
+    CertificateAuthorityArn?: Arn;
+    /**
+     * Specifies whether the certificate is eligible for renewal.
+     */
+    RenewalEligibility?: RenewalEligibility;
+    /**
      * Value that specifies whether to add the certificate to a transparency log. Certificate transparency makes it possible to detect SSL certificates that have been mistakenly or maliciously issued. A browser might respond to certificate that has not been logged by showing an error message. The logs are cryptographically secure. 
      */
     Options?: CertificateOptions;
@@ -234,7 +250,7 @@ declare namespace ACM {
   }
   export type CertificateSummaryList = CertificateSummary[];
   export type CertificateTransparencyLoggingPreference = "ENABLED"|"DISABLED"|string;
-  export type CertificateType = "IMPORTED"|"AMAZON_ISSUED"|string;
+  export type CertificateType = "IMPORTED"|"AMAZON_ISSUED"|"PRIVATE"|string;
   export interface DeleteCertificateRequest {
     /**
      * String that contains the ARN of the ACM certificate to be deleted. This must be of the form:  arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012  For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
@@ -294,6 +310,30 @@ declare namespace ACM {
     ValidationDomain: DomainNameString;
   }
   export type DomainValidationOptionList = DomainValidationOption[];
+  export interface ExportCertificateRequest {
+    /**
+     * An Amazon Resource Name (ARN) of the issued certificate. This must be of the form:  arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012 
+     */
+    CertificateArn: Arn;
+    /**
+     * Passphrase to associate with the encrypted exported private key. If you want to later decrypt the private key, you must have the passphrase. You can use the following OpenSSL command to decrypt a private key:   openssl rsa -in encrypted_key.pem -out decrypted_key.pem 
+     */
+    Passphrase: PassphraseBlob;
+  }
+  export interface ExportCertificateResponse {
+    /**
+     * The base64 PEM-encoded certificate.
+     */
+    Certificate?: CertificateBody;
+    /**
+     * The base64 PEM-encoded certificate chain. This does not include the certificate that you are exporting.
+     */
+    CertificateChain?: CertificateChain;
+    /**
+     * The PEM-encoded private key associated with the public key in the certificate.
+     */
+    PrivateKey?: PrivateKey;
+  }
   export interface ExtendedKeyUsage {
     /**
      * The name of an Extended Key Usage value.
@@ -307,7 +347,7 @@ declare namespace ACM {
   export type ExtendedKeyUsageFilterList = ExtendedKeyUsageName[];
   export type ExtendedKeyUsageList = ExtendedKeyUsage[];
   export type ExtendedKeyUsageName = "TLS_WEB_SERVER_AUTHENTICATION"|"TLS_WEB_CLIENT_AUTHENTICATION"|"CODE_SIGNING"|"EMAIL_PROTECTION"|"TIME_STAMPING"|"OCSP_SIGNING"|"IPSEC_END_SYSTEM"|"IPSEC_TUNNEL"|"IPSEC_USER"|"ANY"|"NONE"|"CUSTOM"|string;
-  export type FailureReason = "NO_AVAILABLE_CONTACTS"|"ADDITIONAL_VERIFICATION_REQUIRED"|"DOMAIN_NOT_ALLOWED"|"INVALID_PUBLIC_DOMAIN"|"CAA_ERROR"|"OTHER"|string;
+  export type FailureReason = "NO_AVAILABLE_CONTACTS"|"ADDITIONAL_VERIFICATION_REQUIRED"|"DOMAIN_NOT_ALLOWED"|"INVALID_PUBLIC_DOMAIN"|"CAA_ERROR"|"PCA_LIMIT_EXCEEDED"|"PCA_INVALID_ARN"|"PCA_INVALID_STATE"|"PCA_REQUEST_FAILED"|"PCA_RESOURCE_NOT_FOUND"|"PCA_INVALID_ARGS"|"OTHER"|string;
   export interface Filters {
     /**
      * Specify one or more ExtendedKeyUsage extension values.
@@ -417,6 +457,8 @@ declare namespace ACM {
   }
   export type MaxItems = number;
   export type NextToken = string;
+  export type PassphraseBlob = Buffer|Uint8Array|Blob|string;
+  export type PrivateKey = string;
   export type PrivateKeyBlob = Buffer|Uint8Array|Blob|string;
   export type RecordType = "CNAME"|string;
   export interface RemoveTagsFromCertificateRequest {
@@ -429,6 +471,7 @@ declare namespace ACM {
      */
     Tags: TagList;
   }
+  export type RenewalEligibility = "ELIGIBLE"|"INELIGIBLE"|string;
   export type RenewalStatus = "PENDING_AUTO_RENEWAL"|"PENDING_VALIDATION"|"SUCCESS"|"FAILED"|string;
   export interface RenewalSummary {
     /**
@@ -465,6 +508,10 @@ declare namespace ACM {
      * Currently, you can use this parameter to specify whether to add the certificate to a certificate transparency log. Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. For more information, see Opting Out of Certificate Transparency Logging.
      */
     Options?: CertificateOptions;
+    /**
+     * The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate. For more information about private CAs, see the AWS Certificate Manager Private Certificate Authority (PCA) user guide. The ARN must have the following form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 
+     */
+    CertificateAuthorityArn?: Arn;
   }
   export interface RequestCertificateResponse {
     /**

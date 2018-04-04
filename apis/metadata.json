@@ -544,5 +544,15 @@
   },
   "connect": {
     "name": "Connect"
+  },
+  "acmpca": {
+    "prefix": "acm-pca",
+    "name": "ACMPCA"
+  },
+  "fms": {
+    "name": "FMS"
+  },
+  "secretsmanager": {
+    "name": "SecretsManager"
   }
 }

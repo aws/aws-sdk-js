@@ -798,6 +798,8 @@ declare namespace S3 {
   export type BucketName = string;
   export type BucketVersioningStatus = "Enabled"|"Suspended"|string;
   export type Buckets = Bucket[];
+  export type BytesProcessed = number;
+  export type BytesScanned = number;
   export interface CORSConfiguration {
     CORSRules: CORSRules;
   }
@@ -935,6 +937,7 @@ declare namespace S3 {
     PartNumber?: PartNumber;
   }
   export type CompletedPartList = CompletedPart[];
+  export type CompressionType = "NONE"|"GZIP"|string;
   export interface Condition {
     /**
      * The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied. Required when parent element Condition is specified and sibling KeyPrefixEquals is not specified. If both are specified, then both must be true for the redirect to be applied.
@@ -953,6 +956,8 @@ declare namespace S3 {
   export type ContentMD5 = string;
   export type ContentRange = string;
   export type ContentType = string;
+  export interface ContinuationEvent {
+  }
   export interface CopyObjectOutput {
     CopyObjectResult?: CopyObjectResult;
     /**
@@ -1468,6 +1473,7 @@ declare namespace S3 {
   export type DisplayName = string;
   export type ETag = string;
   export type EmailAddress = string;
+  export type EnableRequestProgress = boolean;
   export type EncodingType = "url"|string;
   export interface Encryption {
     /**
@@ -1488,6 +1494,8 @@ declare namespace S3 {
      * The id of the KMS key used to encrypt the replica object.
      */
     ReplicaKmsKeyID?: ReplicaKmsKeyID;
+  }
+  export interface EndEvent {
   }
   export interface Error {
     Key?: ObjectKey;
@@ -2107,6 +2115,14 @@ declare namespace S3 {
      * Describes the serialization of a CSV-encoded object.
      */
     CSV?: CSVInput;
+    /**
+     * Specifies object's compression format. Valid values: NONE, GZIP. Default Value: NONE.
+     */
+    CompressionType?: CompressionType;
+    /**
+     * Specifies JSON as object's input serialization format.
+     */
+    JSON?: JSONInput;
   }
   export interface InventoryConfiguration {
     /**
@@ -2198,6 +2214,19 @@ declare namespace S3 {
   export type IsEnabled = boolean;
   export type IsLatest = boolean;
   export type IsTruncated = boolean;
+  export interface JSONInput {
+    /**
+     * The type of JSON. Valid values: Document, Lines.
+     */
+    Type?: JSONType;
+  }
+  export interface JSONOutput {
+    /**
+     * The value used to separate individual records in the output.
+     */
+    RecordDelimiter?: RecordDelimiter;
+  }
+  export type JSONType = "DOCUMENT"|"LINES"|string;
   export type KMSContext = string;
   export type KeyCount = number;
   export type KeyMarker = string;
@@ -2682,12 +2711,12 @@ declare namespace S3 {
     /**
      * Specifies the bucket where you want Amazon S3 to store server access logs. You can have your logs delivered to any bucket that you own, including the same bucket that is being logged. You can also configure multiple buckets to deliver their logs to the same target bucket. In this case you should choose a different TargetPrefix for each source bucket so that the delivered log files can be distinguished by key.
      */
-    TargetBucket?: TargetBucket;
+    TargetBucket: TargetBucket;
     TargetGrants?: TargetGrants;
     /**
      * This element lets you specify a prefix for the keys that the log files will be stored under.
      */
-    TargetPrefix?: TargetPrefix;
+    TargetPrefix: TargetPrefix;
   }
   export type MFA = string;
   export type MFADelete = "Enabled"|"Disabled"|string;
@@ -2830,7 +2859,7 @@ declare namespace S3 {
   export type ObjectIdentifierList = ObjectIdentifier[];
   export type ObjectKey = string;
   export type ObjectList = Object[];
-  export type ObjectStorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|string;
+  export type ObjectStorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|string;
   export interface ObjectVersion {
     ETag?: ETag;
     /**
@@ -2873,6 +2902,10 @@ declare namespace S3 {
      * Describes the serialization of CSV-encoded Select results.
      */
     CSV?: CSVOutput;
+    /**
+     * Specifies JSON as request's output serialization format.
+     */
+    JSON?: JSONOutput;
   }
   export interface Owner {
     DisplayName?: DisplayName;
@@ -2905,6 +2938,22 @@ declare namespace S3 {
   export type Permission = "FULL_CONTROL"|"WRITE"|"WRITE_ACP"|"READ"|"READ_ACP"|string;
   export type Policy = string;
   export type Prefix = string;
+  export interface Progress {
+    /**
+     * Current number of object bytes scanned.
+     */
+    BytesScanned?: BytesScanned;
+    /**
+     * Current number of uncompressed object bytes processed.
+     */
+    BytesProcessed?: BytesProcessed;
+  }
+  export interface ProgressEvent {
+    /**
+     * The Progress event details.
+     */
+    Details?: Progress;
+  }
   export type Protocol = "http"|"https"|string;
   export interface PutBucketAccelerateConfigurationRequest {
     /**
@@ -3272,6 +3321,12 @@ declare namespace S3 {
   export type QuoteFields = "ALWAYS"|"ASNEEDED"|string;
   export type Range = string;
   export type RecordDelimiter = string;
+  export interface RecordsEvent {
+    /**
+     * The byte array of partial, one or more result records.
+     */
+    Payload?: Body;
+  }
   export interface Redirect {
     /**
      * The host name to use in the redirect request.
@@ -3349,6 +3404,12 @@ declare namespace S3 {
      * Specifies who pays for the download and request fees.
      */
     Payer: Payer;
+  }
+  export interface RequestProgress {
+    /**
+     * Specifies whether periodic QueryProgress frames should be sent. Valid values: TRUE, FALSE. Default value: FALSE.
+     */
+    Enabled?: EnableRequestProgress;
   }
   export type ResponseCacheControl = string;
   export type ResponseContentDisposition = string;
@@ -3481,6 +3542,73 @@ declare namespace S3 {
   export type SSEKMSKeyId = string;
   export interface SSES3 {
   }
+  export interface SelectObjectContentEventStream {
+    /**
+     * The Records Event.
+     */
+    Records?: RecordsEvent;
+    /**
+     * The Stats Event.
+     */
+    Stats?: StatsEvent;
+    /**
+     * The Progress Event.
+     */
+    Progress?: ProgressEvent;
+    /**
+     * The Continuation Event.
+     */
+    Cont?: ContinuationEvent;
+    /**
+     * The End Event.
+     */
+    End?: EndEvent;
+  }
+  export interface SelectObjectContentOutput {
+    Payload?: SelectObjectContentEventStream;
+  }
+  export interface SelectObjectContentRequest {
+    /**
+     * The S3 Bucket.
+     */
+    Bucket: BucketName;
+    /**
+     * The Object Key.
+     */
+    Key: ObjectKey;
+    /**
+     * The SSE Algorithm used to encrypt the object. For more information, go to  Server-Side Encryption (Using Customer-Provided Encryption Keys.
+     */
+    SSECustomerAlgorithm?: SSECustomerAlgorithm;
+    /**
+     * The SSE Customer Key. For more information, go to  Server-Side Encryption (Using Customer-Provided Encryption Keys.
+     */
+    SSECustomerKey?: SSECustomerKey;
+    /**
+     * The SSE Customer Key MD5. For more information, go to  Server-Side Encryption (Using Customer-Provided Encryption Keys.
+     */
+    SSECustomerKeyMD5?: SSECustomerKeyMD5;
+    /**
+     * The expression that is used to query the object.
+     */
+    Expression: Expression;
+    /**
+     * The type of the provided expression (e.g., SQL).
+     */
+    ExpressionType: ExpressionType;
+    /**
+     * Specifies if periodic request progress information should be enabled.
+     */
+    RequestProgress?: RequestProgress;
+    /**
+     * Describes the format of the data in the object that is being queried.
+     */
+    InputSerialization: InputSerialization;
+    /**
+     * Describes the format of the data that you want Amazon S3 to return in response.
+     */
+    OutputSerialization: OutputSerialization;
+  }
   export interface SelectParameters {
     /**
      * Describes the serialization format of the object.
@@ -3538,7 +3666,23 @@ declare namespace S3 {
   }
   export type SseKmsEncryptedObjectsStatus = "Enabled"|"Disabled"|string;
   export type StartAfter = string;
-  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|string;
+  export interface Stats {
+    /**
+     * Total number of object bytes scanned.
+     */
+    BytesScanned?: BytesScanned;
+    /**
+     * Total number of uncompressed object bytes processed.
+     */
+    BytesProcessed?: BytesProcessed;
+  }
+  export interface StatsEvent {
+    /**
+     * The Stats event details.
+     */
+    Details?: Stats;
+  }
+  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|string;
   export interface StorageClassAnalysis {
     /**
      * A container used to describe how data related to the storage class analysis should be exported.
@@ -3624,7 +3768,7 @@ declare namespace S3 {
     StorageClass?: TransitionStorageClass;
   }
   export type TransitionList = Transition[];
-  export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|string;
+  export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|string;
   export type Type = "CanonicalUser"|"AmazonCustomerByEmail"|"Group"|string;
   export type URI = string;
   export type UploadIdMarker = string;

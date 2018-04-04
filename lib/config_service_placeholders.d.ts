@@ -133,6 +133,9 @@ export abstract class ConfigurationServicePlaceholders {
   autoscalingplans?: AWS.AutoScalingPlans.Types.ClientConfiguration;
   transcribeservice?: AWS.TranscribeService.Types.ClientConfiguration;
   connect?: AWS.Connect.Types.ClientConfiguration;
+  acmpca?: AWS.ACMPCA.Types.ClientConfiguration;
+  fms?: AWS.FMS.Types.ClientConfiguration;
+  secretsmanager?: AWS.SecretsManager.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -268,4 +271,7 @@ export interface ConfigurationServiceApiVersions {
   autoscalingplans?: AWS.AutoScalingPlans.Types.apiVersion;
   transcribeservice?: AWS.TranscribeService.Types.apiVersion;
   connect?: AWS.Connect.Types.apiVersion;
+  acmpca?: AWS.ACMPCA.Types.apiVersion;
+  fms?: AWS.FMS.Types.apiVersion;
+  secretsmanager?: AWS.SecretsManager.Types.apiVersion;
 }

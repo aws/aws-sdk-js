@@ -132,5 +132,8 @@ module.exports = {
   WorkMail: require('./workmail'),
   AutoScalingPlans: require('./autoscalingplans'),
   TranscribeService: require('./transcribeservice'),
-  Connect: require('./connect')
+  Connect: require('./connect'),
+  ACMPCA: require('./acmpca'),
+  FMS: require('./fms'),
+  SecretsManager: require('./secretsmanager')
 };

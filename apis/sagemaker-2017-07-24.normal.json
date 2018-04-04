@@ -86,7 +86,7 @@
       "errors":[
         {"shape":"ResourceLimitExceeded"}
       ],
-      "documentation":"<p>Creates a lifecycle configuration that you can associate with a notebook instance. A <i>lifecycle configuration</i> is a collection of shell scripts that run when you create or start a notebook instance.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>"
+      "documentation":"<p>Creates a lifecycle configuration that you can associate with a notebook instance. A <i>lifecycle configuration</i> is a collection of shell scripts that run when you create or start a notebook instance.</p> <p>Each lifecycle configuration script has a limit of 16384 characters.</p> <p>The value of the <code>$PATH</code> environment variable that is available to both scripts is <code>/sbin:bin:/usr/sbin:/usr/bin</code>.</p> <p>View CloudWatch Logs for notebook instance lifecycle configurations in log group <code>/aws/sagemaker/NotebookInstances</code> in log stream <code>[notebook-instance-name]/[LifecycleConfigHook]</code>.</p> <p>Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>"
     },
     "CreatePresignedNotebookInstanceUrl":{
       "name":"CreatePresignedNotebookInstanceUrl",
@@ -426,14 +426,14 @@
       "members":{
         "TrainingImage":{
           "shape":"AlgorithmImage",
-          "documentation":"<p>The registry path of the Docker image that contains the training algorithm. For information about using your own algorithms, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos-docker-registry-paths.html\">Docker Registry Paths for Algorithms Provided by Amazon SageMaker </a>. </p>"
+          "documentation":"<p>The registry path of the Docker image that contains the training algorithm. For information about docker registry paths for built-in algorithms, see <a>sagemaker-algo-docker-registry-paths</a>.</p>"
         },
         "TrainingInputMode":{
           "shape":"TrainingInputMode",
           "documentation":"<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accommodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won't be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>"
         }
       },
-      "documentation":"<p>Specifies the training algorithm to use in a <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html\">CreateTrainingJob</a> request. </p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about using your own algorithms, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html\">Bring Your Own Algorithms </a>. </p>"
+      "documentation":"<p>Specifies the training algorithm to use in a <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html\">CreateTrainingJob</a> request. </p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about using your own algorithms, see <a>your-algorithms</a>. </p>"
     },
     "Channel":{
       "type":"structure",
@@ -739,7 +739,7 @@
         },
         "AlgorithmSpecification":{
           "shape":"AlgorithmSpecification",
-          "documentation":"<p>The registry path of the Docker image that contains the training algorithm and algorithm-specific metadata, including the input mode. For more information about algorithms provided by Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about providing your own algorithms, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html\">Bring Your Own Algorithms </a>. </p>"
+          "documentation":"<p>The registry path of the Docker image that contains the training algorithm and algorithm-specific metadata, including the input mode. For more information about algorithms provided by Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about providing your own algorithms, see <a>your-algorithms</a>. </p>"
         },
         "RoleArn":{
           "shape":"RoleArn",
@@ -1109,7 +1109,7 @@
         },
         "DirectInternetAccess":{
           "shape":"DirectInternetAccess",
-          "documentation":"<p>Describes whether the notebook instance has internet access.</p> <p>For more information, see <a>appendix-notebook-and-internet-access</a>.</p>"
+          "documentation":"<p>Describes whether Amazon SageMaker provides internet access to the notebook instance. If this value is set to <i>Disabled, he notebook instance does not have internet access, and cannot connect to Amazon SageMaker training and endpoint services</i>.</p> <p>For more information, see <a>appendix-notebook-and-internet-access</a>.</p>"
         }
       }
     },
@@ -1399,9 +1399,20 @@
       "type":"string",
       "enum":[
         "ml.t2.medium",
+        "ml.t2.large",
+        "ml.t2.xlarge",
+        "ml.t2.2xlarge",
         "ml.m4.xlarge",
+        "ml.m4.2xlarge",
+        "ml.m4.4xlarge",
+        "ml.m4.10xlarge",
+        "ml.m4.16xlarge",
         "ml.p2.xlarge",
-        "ml.p3.2xlarge"
+        "ml.p2.8xlarge",
+        "ml.p2.16xlarge",
+        "ml.p3.2xlarge",
+        "ml.p3.8xlarge",
+        "ml.p3.16xlarge"
       ]
     },
     "KmsKeyId":{
@@ -1931,7 +1942,7 @@
           "documentation":"<p>A base64-encoded string that contains a shell script for a notebook instance lifecycle configuration.</p>"
         }
       },
-      "documentation":"<p>Contains the notebook instance lifecycle configuration script.</p> <p>This script runs in the path <code>/sbin:bin:/usr/sbin:/usr/bin</code>.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>"
+      "documentation":"<p>Contains the notebook instance lifecycle configuration script.</p> <p>Each lifecycle configuration script has a limit of 16384 characters.</p> <p>The value of the <code>$PATH</code> environment variable that is available to both scripts is <code>/sbin:bin:/usr/sbin:/usr/bin</code>.</p> <p>View CloudWatch Logs for notebook instance lifecycle configurations in log group <code>/aws/sagemaker/NotebookInstances</code> in log stream <code>[notebook-instance-name]/[LifecycleConfigHook]</code>.</p> <p>Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started.</p> <p>For information about notebook instance lifestyle configurations, see <a>notebook-lifecycle-config</a>.</p>"
     },
     "NotebookInstanceName":{
       "type":"string",
@@ -2084,16 +2095,38 @@
     "ProductionVariantInstanceType":{
       "type":"string",
       "enum":[
-        "ml.c4.2xlarge",
-        "ml.c4.8xlarge",
-        "ml.c4.xlarge",
-        "ml.c5.2xlarge",
-        "ml.c5.9xlarge",
-        "ml.c5.xlarge",
+        "ml.t2.medium",
+        "ml.t2.large",
+        "ml.t2.xlarge",
+        "ml.t2.2xlarge",
         "ml.m4.xlarge",
+        "ml.m4.2xlarge",
+        "ml.m4.4xlarge",
+        "ml.m4.10xlarge",
+        "ml.m4.16xlarge",
+        "ml.m5.large",
+        "ml.m5.xlarge",
+        "ml.m5.2xlarge",
+        "ml.m5.4xlarge",
+        "ml.m5.12xlarge",
+        "ml.m5.24xlarge",
+        "ml.c4.large",
+        "ml.c4.xlarge",
+        "ml.c4.2xlarge",
+        "ml.c4.4xlarge",
+        "ml.c4.8xlarge",
         "ml.p2.xlarge",
+        "ml.p2.8xlarge",
+        "ml.p2.16xlarge",
         "ml.p3.2xlarge",
-        "ml.t2.medium"
+        "ml.p3.8xlarge",
+        "ml.p3.16xlarge",
+        "ml.c5.large",
+        "ml.c5.xlarge",
+        "ml.c5.2xlarge",
+        "ml.c5.4xlarge",
+        "ml.c5.9xlarge",
+        "ml.c5.18xlarge"
       ]
     },
     "ProductionVariantList":{
@@ -2391,10 +2424,19 @@
       "type":"string",
       "enum":[
         "ml.m4.xlarge",
+        "ml.m4.2xlarge",
         "ml.m4.4xlarge",
         "ml.m4.10xlarge",
+        "ml.m4.16xlarge",
+        "ml.m5.large",
+        "ml.m5.xlarge",
+        "ml.m5.2xlarge",
+        "ml.m5.4xlarge",
+        "ml.m5.12xlarge",
+        "ml.m5.24xlarge",
         "ml.c4.xlarge",
         "ml.c4.2xlarge",
+        "ml.c4.4xlarge",
         "ml.c4.8xlarge",
         "ml.p2.xlarge",
         "ml.p2.8xlarge",
@@ -2412,7 +2454,7 @@
     "TrainingJobArn":{
       "type":"string",
       "max":256,
-      "pattern":"arn:aws:sagemaker:[\\p{Alnum}\\-]*:[0-9]{12}:training-job/.*"
+      "pattern":"arn:aws[a-z\\-]*:sagemaker:[\\p{Alnum}\\-]*:[0-9]{12}:training-job/.*"
     },
     "TrainingJobName":{
       "type":"string",

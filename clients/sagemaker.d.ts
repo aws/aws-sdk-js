@@ -52,11 +52,11 @@ declare class SageMaker extends Service {
    */
   createNotebookInstance(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceOutput, AWSError>;
   /**
-   * Creates a lifecycle configuration that you can associate with a notebook instance. A lifecycle configuration is a collection of shell scripts that run when you create or start a notebook instance. For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+   * Creates a lifecycle configuration that you can associate with a notebook instance. A lifecycle configuration is a collection of shell scripts that run when you create or start a notebook instance. Each lifecycle configuration script has a limit of 16384 characters. The value of the $PATH environment variable that is available to both scripts is /sbin:bin:/usr/sbin:/usr/bin. View CloudWatch Logs for notebook instance lifecycle configurations in log group /aws/sagemaker/NotebookInstances in log stream [notebook-instance-name]/[LifecycleConfigHook]. Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started. For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
    */
   createNotebookInstanceLifecycleConfig(params: SageMaker.Types.CreateNotebookInstanceLifecycleConfigInput, callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
-   * Creates a lifecycle configuration that you can associate with a notebook instance. A lifecycle configuration is a collection of shell scripts that run when you create or start a notebook instance. For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+   * Creates a lifecycle configuration that you can associate with a notebook instance. A lifecycle configuration is a collection of shell scripts that run when you create or start a notebook instance. Each lifecycle configuration script has a limit of 16384 characters. The value of the $PATH environment variable that is available to both scripts is /sbin:bin:/usr/sbin:/usr/bin. View CloudWatch Logs for notebook instance lifecycle configurations in log group /aws/sagemaker/NotebookInstances in log stream [notebook-instance-name]/[LifecycleConfigHook]. Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started. For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
    */
   createNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
@@ -352,7 +352,7 @@ declare namespace SageMaker {
   export type AlgorithmImage = string;
   export interface AlgorithmSpecification {
     /**
-     * The registry path of the Docker image that contains the training algorithm. For information about using your own algorithms, see Docker Registry Paths for Algorithms Provided by Amazon SageMaker . 
+     * The registry path of the Docker image that contains the training algorithm. For information about docker registry paths for built-in algorithms, see sagemaker-algo-docker-registry-paths.
      */
     TrainingImage: AlgorithmImage;
     /**
@@ -562,7 +562,7 @@ declare namespace SageMaker {
      */
     HyperParameters?: HyperParameters;
     /**
-     * The registry path of the Docker image that contains the training algorithm and algorithm-specific metadata, including the input mode. For more information about algorithms provided by Amazon SageMaker, see Algorithms. For information about providing your own algorithms, see Bring Your Own Algorithms . 
+     * The registry path of the Docker image that contains the training algorithm and algorithm-specific metadata, including the input mode. For more information about algorithms provided by Amazon SageMaker, see Algorithms. For information about providing your own algorithms, see your-algorithms. 
      */
     AlgorithmSpecification: AlgorithmSpecification;
     /**
@@ -837,7 +837,7 @@ declare namespace SageMaker {
      */
     NotebookInstanceLifecycleConfigName?: NotebookInstanceLifecycleConfigName;
     /**
-     * Describes whether the notebook instance has internet access. For more information, see appendix-notebook-and-internet-access.
+     * Describes whether Amazon SageMaker provides internet access to the notebook instance. If this value is set to Disabled, he notebook instance does not have internet access, and cannot connect to Amazon SageMaker training and endpoint services. For more information, see appendix-notebook-and-internet-access.
      */
     DirectInternetAccess?: DirectInternetAccess;
   }
@@ -987,7 +987,7 @@ declare namespace SageMaker {
   export type HyperParameters = {[key: string]: ParameterValue};
   export type Image = string;
   export type InputDataConfig = Channel[];
-  export type InstanceType = "ml.t2.medium"|"ml.m4.xlarge"|"ml.p2.xlarge"|"ml.p3.2xlarge"|string;
+  export type InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|string;
   export type KmsKeyId = string;
   export type LastModifiedTime = Date;
   export interface ListEndpointConfigsInput {
@@ -1443,7 +1443,7 @@ declare namespace SageMaker {
      */
     InitialVariantWeight?: VariantWeight;
   }
-  export type ProductionVariantInstanceType = "ml.c4.2xlarge"|"ml.c4.8xlarge"|"ml.c4.xlarge"|"ml.c5.2xlarge"|"ml.c5.9xlarge"|"ml.c5.xlarge"|"ml.m4.xlarge"|"ml.p2.xlarge"|"ml.p3.2xlarge"|"ml.t2.medium"|string;
+  export type ProductionVariantInstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|string;
   export type ProductionVariantList = ProductionVariant[];
   export interface ProductionVariantSummary {
     /**
@@ -1555,7 +1555,7 @@ declare namespace SageMaker {
   export type Timestamp = Date;
   export type TrainingInputMode = "Pipe"|"File"|string;
   export type TrainingInstanceCount = number;
-  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|string;
+  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|string;
   export type TrainingJobArn = string;
   export type TrainingJobName = string;
   export type TrainingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;

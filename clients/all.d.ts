@@ -131,3 +131,6 @@ export import WorkMail = require('./workmail');
 export import AutoScalingPlans = require('./autoscalingplans');
 export import TranscribeService = require('./transcribeservice');
 export import Connect = require('./connect');
+export import ACMPCA = require('./acmpca');
+export import FMS = require('./fms');
+export import SecretsManager = require('./secretsmanager');

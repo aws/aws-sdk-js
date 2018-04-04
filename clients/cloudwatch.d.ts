@@ -76,6 +76,14 @@ declare class CloudWatch extends Service {
    */
   getDashboard(callback?: (err: AWSError, data: CloudWatch.Types.GetDashboardOutput) => void): Request<CloudWatch.Types.GetDashboardOutput, AWSError>;
   /**
+   * You can use the GetMetricData API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 datapoints. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Calls to the GetMetricData API have a different pricing structure than calls to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch Pricing.
+   */
+  getMetricData(params: CloudWatch.Types.GetMetricDataInput, callback?: (err: AWSError, data: CloudWatch.Types.GetMetricDataOutput) => void): Request<CloudWatch.Types.GetMetricDataOutput, AWSError>;
+  /**
+   * You can use the GetMetricData API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 datapoints. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Calls to the GetMetricData API have a different pricing structure than calls to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch Pricing.
+   */
+  getMetricData(callback?: (err: AWSError, data: CloudWatch.Types.GetMetricDataOutput) => void): Request<CloudWatch.Types.GetMetricDataOutput, AWSError>;
+  /**
    * Gets statistics for the specified metric. The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. Data points are not returned in chronological order. CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned. CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:   The SampleCount value of the statistic set is 1.   The Min and the Max values of the statistic set are equal.   Amazon CloudWatch retains metric data as follows:   Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a StorageResolution of 1.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).   Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour. CloudWatch started retaining 5-minute and 1-hour metric data as of July 9, 2016. For information about metrics and dimensions supported by AWS services, see the Amazon CloudWatch Metrics and Dimensions Reference in the Amazon CloudWatch User Guide.
    */
   getMetricStatistics(params: CloudWatch.Types.GetMetricStatisticsInput, callback?: (err: AWSError, data: CloudWatch.Types.GetMetricStatisticsOutput) => void): Request<CloudWatch.Types.GetMetricStatisticsOutput, AWSError>;
@@ -246,6 +254,7 @@ declare namespace CloudWatch {
   }
   export type DatapointValue = number;
   export type DatapointValueMap = {[key: string]: DatapointValue};
+  export type DatapointValues = DatapointValue[];
   export type Datapoints = Datapoint[];
   export type DatapointsToAlarm = number;
   export interface DeleteAlarmsInput {
@@ -432,6 +441,43 @@ declare namespace CloudWatch {
      */
     DashboardName?: DashboardName;
   }
+  export interface GetMetricDataInput {
+    /**
+     * The metric queries to be returned. A single GetMetricData call can include as many as 100 MetricDataQuery structures. Each of these structures can specify either a metric to retrieve, or a math expression to perform on retrieved data. 
+     */
+    MetricDataQueries: MetricDataQueries;
+    /**
+     * The time stamp indicating the earliest data to be returned.
+     */
+    StartTime: Timestamp;
+    /**
+     * The time stamp indicating the latest data to be returned.
+     */
+    EndTime: Timestamp;
+    /**
+     * Include this value, if it was returned by the previous call, to get the next set of data points.
+     */
+    NextToken?: NextToken;
+    /**
+     * The order in which data points should be returned. TimestampDescending returns the newest data first and paginates when the MaxDatapoints limit is reached. TimestampAscending returns the oldest data first and paginates when the MaxDatapoints limit is reached.
+     */
+    ScanBy?: ScanBy;
+    /**
+     * The maximum number of data points the request should return before paginating. If you omit this, the default of 100,800 is used.
+     */
+    MaxDatapoints?: GetMetricDataMaxDatapoints;
+  }
+  export type GetMetricDataMaxDatapoints = number;
+  export interface GetMetricDataOutput {
+    /**
+     * The metrics that are returned, including the metric name, namespace, and dimensions.
+     */
+    MetricDataResults?: MetricDataResults;
+    /**
+     * A token that marks the next batch of returned results.
+     */
+    NextToken?: NextToken;
+  }
   export interface GetMetricStatisticsInput {
     /**
      * The namespace of the metric, with or without spaces.
@@ -466,7 +512,7 @@ declare namespace CloudWatch {
      */
     ExtendedStatistics?: ExtendedStatistics;
     /**
-     * The unit for a given metric. Metrics may be reported in multiple units. Not supplying a unit results in all units being returned. If the metric only ever reports one unit, specifying a unit has no effect.
+     * The unit for a given metric. Metrics may be reported in multiple units. Not supplying a unit results in all units being returned. If you specify only a unit that the metric does not report, the results of the call are null.
      */
     Unit?: StandardUnit;
   }
@@ -534,6 +580,18 @@ declare namespace CloudWatch {
   }
   export type MaxRecords = number;
   export type Message = string;
+  export interface MessageData {
+    /**
+     * The error code or status code associated with the message.
+     */
+    Code?: MessageDataCode;
+    /**
+     * The message text.
+     */
+    Value?: MessageDataValue;
+  }
+  export type MessageDataCode = string;
+  export type MessageDataValue = string;
   export interface Metric {
     /**
      * The namespace of the metric.
@@ -652,6 +710,57 @@ declare namespace CloudWatch {
   }
   export type MetricAlarms = MetricAlarm[];
   export type MetricData = MetricDatum[];
+  export type MetricDataQueries = MetricDataQuery[];
+  export interface MetricDataQuery {
+    /**
+     * A short name used to tie this structure to the results in the response. This name must be unique within a single call to GetMetricData. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.
+     */
+    Id: MetricId;
+    /**
+     * The metric to be returned, along with statistics, period, and units. Use this parameter only if this structure is performing a data retrieval and not performing a math expression on the returned data. Within one MetricDataQuery structure, you must specify either Expression or MetricStat but not both.
+     */
+    MetricStat?: MetricStat;
+    /**
+     * The math expression to be performed on the returned data, if this structure is performing a math expression. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Within one MetricDataQuery structure, you must specify either Expression or MetricStat but not both.
+     */
+    Expression?: MetricExpression;
+    /**
+     * A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch generates a default.
+     */
+    Label?: MetricLabel;
+    /**
+     * Indicates whether to return the time stamps and raw data values of this metric. If you are performing this call just to do math expressions and do not also need the raw data returned, you can specify False. If you omit this, the default of True is used.
+     */
+    ReturnData?: ReturnData;
+  }
+  export interface MetricDataResult {
+    /**
+     * The short name you specified to represent this metric.
+     */
+    Id?: MetricId;
+    /**
+     * The human-readable label associated with the data.
+     */
+    Label?: MetricLabel;
+    /**
+     * The time stamps for the data points, formatted in Unix timestamp format. The number of time stamps always matches the number of values and the value for Timestamps[x] is Values[x].
+     */
+    Timestamps?: Timestamps;
+    /**
+     * The data points for the metric corresponding to Timestamps. The number of values always matches the number of time stamps and the time stamp for Values[x] is Timestamps[x].
+     */
+    Values?: DatapointValues;
+    /**
+     * The status of the returned data. Complete indicates that all data points in the requested time range were returned. PartialData means that an incomplete set of data points were returned. You can use the NextToken value that was returned and repeat your request to get more data points. NextToken is not returned if you are performing a math expression. InternalError indicates that an error occurred. Retry your request using NextToken, if present.
+     */
+    StatusCode?: StatusCode;
+    /**
+     * A list of messages with additional information about the data returned.
+     */
+    Messages?: MetricDataResultMessages;
+  }
+  export type MetricDataResultMessages = MessageData[];
+  export type MetricDataResults = MetricDataResult[];
   export interface MetricDatum {
     /**
      * The name of the metric.
@@ -682,8 +791,28 @@ declare namespace CloudWatch {
      */
     StorageResolution?: StorageResolution;
   }
+  export type MetricExpression = string;
+  export type MetricId = string;
   export type MetricLabel = string;
   export type MetricName = string;
+  export interface MetricStat {
+    /**
+     * The metric to return, including the metric name, namespace, and dimensions.
+     */
+    Metric: Metric;
+    /**
+     * The period to use when retrieving the metric.
+     */
+    Period: Period;
+    /**
+     * The statistic to return. It can include any CloudWatch statistic or extended statistic.
+     */
+    Stat: Stat;
+    /**
+     * The unit to use for the returned data points.
+     */
+    Unit?: StandardUnit;
+  }
   export type Metrics = Metric[];
   export type Namespace = string;
   export type NextToken = string;
@@ -750,7 +879,7 @@ declare namespace CloudWatch {
      */
     Dimensions?: Dimensions;
     /**
-     * The period, in seconds, over which the specified statistic is applied. Valid values are 10, 30, and any multiple of 60. Be sure to specify 10 or 30 only for metrics that are stored by a PutMetricData call with a StorageResolution of 1. If you specify a Period of 10 or 30 for a metric that does not have sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case, it does not receive data for the attempts that do not correspond to a one-minute data resolution, and the alarm may often lapse into INSUFFICENT_DATA status. Specifying 10 or 30 also sets this alarm as a high-resolution alarm, which has a higher charge than other alarms. For more information about pricing, see Amazon CloudWatch Pricing. An alarm's total current evaluation period can be no longer than one day, so Period multiplied by EvaluationPeriods cannot be more than 86,400 seconds.
+     * The period, in seconds, over which the specified statistic is applied. Valid values are 10, 30, and any multiple of 60. Be sure to specify 10 or 30 only for metrics that are stored by a PutMetricData call with a StorageResolution of 1. If you specify a period of 10 or 30 for a metric that does not have sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case, it does not receive data for the attempts that do not correspond to a one-minute data resolution, and the alarm may often lapse into INSUFFICENT_DATA status. Specifying 10 or 30 also sets this alarm as a high-resolution alarm, which has a higher charge than other alarms. For more information about pricing, see Amazon CloudWatch Pricing. An alarm's total current evaluation period can be no longer than one day, so Period multiplied by EvaluationPeriods cannot be more than 86,400 seconds.
      */
     Period: Period;
     /**
@@ -758,11 +887,11 @@ declare namespace CloudWatch {
      */
     Unit?: StandardUnit;
     /**
-     * The number of periods over which data is compared to the specified threshold. An alarm's total current evaluation period can be no longer than one day, so this number multiplied by Period cannot be more than 86,400 seconds.
+     * The number of periods over which data is compared to the specified threshold. If you are setting an alarm which requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an "M out of N" alarm, this value is the N. An alarm's total current evaluation period can be no longer than one day, so this number multiplied by Period cannot be more than 86,400 seconds.
      */
     EvaluationPeriods: EvaluationPeriods;
     /**
-     * The number of datapoints that must be breaching to trigger the alarm.
+     * The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an "M out of N" alarm. In that case, this value is the M. For more information, see Evaluating an Alarm in the Amazon CloudWatch User Guide.
      */
     DatapointsToAlarm?: DatapointsToAlarm;
     /**
@@ -794,6 +923,8 @@ declare namespace CloudWatch {
   }
   export type ResourceList = ResourceName[];
   export type ResourceName = string;
+  export type ReturnData = boolean;
+  export type ScanBy = "TimestampDescending"|"TimestampAscending"|string;
   export interface SetAlarmStateInput {
     /**
      * The name for the alarm. This name must be unique within the AWS account. The maximum length is 255 characters.
@@ -814,6 +945,7 @@ declare namespace CloudWatch {
   }
   export type Size = number;
   export type StandardUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
+  export type Stat = string;
   export type StateReason = string;
   export type StateReasonData = string;
   export type StateValue = "OK"|"ALARM"|"INSUFFICIENT_DATA"|string;
@@ -837,9 +969,11 @@ declare namespace CloudWatch {
     Maximum: DatapointValue;
   }
   export type Statistics = Statistic[];
+  export type StatusCode = "Complete"|"InternalError"|"PartialData"|string;
   export type StorageResolution = number;
   export type Threshold = number;
   export type Timestamp = Date;
+  export type Timestamps = Timestamp[];
   export type TreatMissingData = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

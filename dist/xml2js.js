@@ -5564,6 +5564,16 @@ module.exports =
 	  return this;
 	};
 
+	Object.defineProperty(Readable.prototype, 'readableHighWaterMark', {
+	  // making it explicit this property is not enumerable
+	  // because otherwise some prototype manipulation in
+	  // userland will fail
+	  enumerable: false,
+	  get: function () {
+	    return this._readableState.highWaterMark;
+	  }
+	});
+
 	// exposed for testing purposes only.
 	Readable._fromList = fromList;
 
@@ -5686,12 +5696,6 @@ module.exports =
 	    state.endEmitted = true;
 	    stream.readable = false;
 	    stream.emit('end');
-	  }
-	}
-
-	function forEach(xs, f) {
-	  for (var i = 0, l = xs.length; i < l; i++) {
-	    f(xs[i], i);
 	  }
 	}
 
@@ -6366,10 +6370,13 @@ module.exports =
 
 	util.inherits(Duplex, Readable);
 
-	var keys = objectKeys(Writable.prototype);
-	for (var v = 0; v < keys.length; v++) {
-	  var method = keys[v];
-	  if (!Duplex.prototype[method]) Duplex.prototype[method] = Writable.prototype[method];
+	{
+	  // avoid scope creep, the keys array can then be collected
+	  var keys = objectKeys(Writable.prototype);
+	  for (var v = 0; v < keys.length; v++) {
+	    var method = keys[v];
+	    if (!Duplex.prototype[method]) Duplex.prototype[method] = Writable.prototype[method];
+	  }
 	}
 
 	function Duplex(options) {
@@ -6387,6 +6394,16 @@ module.exports =
 
 	  this.once('end', onend);
 	}
+
+	Object.defineProperty(Duplex.prototype, 'writableHighWaterMark', {
+	  // making it explicit this property is not enumerable
+	  // because otherwise some prototype manipulation in
+	  // userland will fail
+	  enumerable: false,
+	  get: function () {
+	    return this._writableState.highWaterMark;
+	  }
+	});
 
 	// the no-half-open enforcer
 	function onend() {
@@ -6430,12 +6447,6 @@ module.exports =
 
 	  pna.nextTick(cb, err);
 	};
-
-	function forEach(xs, f) {
-	  for (var i = 0, l = xs.length; i < l; i++) {
-	    f(xs[i], i);
-	  }
-	}
 
 /***/ }),
 /* 22 */
@@ -6810,6 +6821,16 @@ module.exports =
 	  }
 	  return chunk;
 	}
+
+	Object.defineProperty(Writable.prototype, 'writableHighWaterMark', {
+	  // making it explicit this property is not enumerable
+	  // because otherwise some prototype manipulation in
+	  // userland will fail
+	  enumerable: false,
+	  get: function () {
+	    return this._writableState.highWaterMark;
+	  }
+	});
 
 	// if we're already writing something, then just put this
 	// in the queue, and wait our turn.  Otherwise, call _write
@@ -7458,9 +7479,33 @@ module.exports =
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 	'use strict';
 
+	/*<replacement>*/
+
 	var Buffer = __webpack_require__(15).Buffer;
+	/*</replacement>*/
 
 	var isEncoding = Buffer.isEncoding || function (encoding) {
 	  encoding = '' + encoding;
@@ -7572,10 +7617,10 @@ module.exports =
 	};
 
 	// Checks the type of a UTF-8 byte, whether it's ASCII, a leading byte, or a
-	// continuation byte.
+	// continuation byte. If an invalid byte is detected, -2 is returned.
 	function utf8CheckByte(byte) {
 	  if (byte <= 0x7F) return 0;else if (byte >> 5 === 0x06) return 2;else if (byte >> 4 === 0x0E) return 3;else if (byte >> 3 === 0x1E) return 4;
-	  return -1;
+	  return byte >> 6 === 0x02 ? -1 : -2;
 	}
 
 	// Checks at most 3 bytes at the end of a Buffer in order to detect an
@@ -7589,13 +7634,13 @@ module.exports =
 	    if (nb > 0) self.lastNeed = nb - 1;
 	    return nb;
 	  }
-	  if (--j < i) return 0;
+	  if (--j < i || nb === -2) return 0;
 	  nb = utf8CheckByte(buf[j]);
 	  if (nb >= 0) {
 	    if (nb > 0) self.lastNeed = nb - 2;
 	    return nb;
 	  }
-	  if (--j < i) return 0;
+	  if (--j < i || nb === -2) return 0;
 	  nb = utf8CheckByte(buf[j]);
 	  if (nb >= 0) {
 	    if (nb > 0) {
@@ -7609,7 +7654,7 @@ module.exports =
 	// Validates as many continuation bytes for a multi-byte UTF-8 character as
 	// needed or are available. If we see a non-continuation byte where we expect
 	// one, we "replace" the validated continuation bytes we've seen so far with
-	// UTF-8 replacement characters ('\ufffd'), to match v8's UTF-8 decoding
+	// a single UTF-8 replacement character ('\ufffd'), to match v8's UTF-8 decoding
 	// behavior. The continuation byte check is included three times in the case
 	// where all of the continuation bytes for a character exist in the same buffer.
 	// It is also done this way as a slight performance increase instead of using a
@@ -7617,17 +7662,17 @@ module.exports =
 	function utf8CheckExtraBytes(self, buf, p) {
 	  if ((buf[0] & 0xC0) !== 0x80) {
 	    self.lastNeed = 0;
-	    return '\ufffd'.repeat(p);
+	    return '\ufffd';
 	  }
 	  if (self.lastNeed > 1 && buf.length > 1) {
 	    if ((buf[1] & 0xC0) !== 0x80) {
 	      self.lastNeed = 1;
-	      return '\ufffd'.repeat(p + 1);
+	      return '\ufffd';
 	    }
 	    if (self.lastNeed > 2 && buf.length > 2) {
 	      if ((buf[2] & 0xC0) !== 0x80) {
 	        self.lastNeed = 2;
-	        return '\ufffd'.repeat(p + 2);
+	        return '\ufffd';
 	      }
 	    }
 	  }
@@ -7658,11 +7703,11 @@ module.exports =
 	  return buf.toString('utf8', i, end);
 	}
 
-	// For UTF-8, a replacement character for each buffered byte of a (partial)
-	// character needs to be added to the output.
+	// For UTF-8, a replacement character is added when ending on a partial
+	// character.
 	function utf8End(buf) {
 	  var r = buf && buf.length ? this.write(buf) : '';
-	  if (this.lastNeed) return r + '\ufffd'.repeat(this.lastTotal - this.lastNeed);
+	  if (this.lastNeed) return r + '\ufffd';
 	  return r;
 	}
 

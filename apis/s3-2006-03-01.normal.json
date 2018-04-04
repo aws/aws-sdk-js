@@ -1457,6 +1457,12 @@
         "locationName": "Bucket"
       }
     },
+    "BytesProcessed": {
+      "type": "long"
+    },
+    "BytesScanned": {
+      "type": "long"
+    },
     "CORSConfiguration": {
       "type": "structure",
       "required": [
@@ -1731,6 +1737,13 @@
       },
       "flattened": true
     },
+    "CompressionType": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "GZIP"
+      ]
+    },
     "Condition": {
       "type": "structure",
       "members": {
@@ -1767,6 +1780,11 @@
     },
     "ContentType": {
       "type": "string"
+    },
+    "ContinuationEvent": {
+      "type": "structure",
+      "members": {},
+      "event": true
     },
     "CopyObjectOutput": {
       "type": "structure",
@@ -2809,6 +2827,9 @@
     "EmailAddress": {
       "type": "string"
     },
+    "EnableRequestProgress": {
+      "type": "boolean"
+    },
     "EncodingType": {
       "type": "string",
       "documentation": "Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.",
@@ -2846,6 +2867,11 @@
         }
       },
       "documentation": "Container for information regarding encryption based configuration for replicas."
+    },
+    "EndEvent": {
+      "type": "structure",
+      "members": {},
+      "event": true
     },
     "Error": {
       "type": "structure",
@@ -4222,6 +4248,14 @@
         "CSV": {
           "shape": "CSVInput",
           "documentation": "Describes the serialization of a CSV-encoded object."
+        },
+        "CompressionType": {
+          "shape": "CompressionType",
+          "documentation": "Specifies object's compression format. Valid values: NONE, GZIP. Default Value: NONE."
+        },
+        "JSON": {
+          "shape": "JSONInput",
+          "documentation": "Specifies JSON as object's input serialization format."
         }
       },
       "documentation": "Describes the serialization format of the object."
@@ -4405,6 +4439,31 @@
     },
     "IsTruncated": {
       "type": "boolean"
+    },
+    "JSONInput": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "JSONType",
+          "documentation": "The type of JSON. Valid values: Document, Lines."
+        }
+      }
+    },
+    "JSONOutput": {
+      "type": "structure",
+      "members": {
+        "RecordDelimiter": {
+          "shape": "RecordDelimiter",
+          "documentation": "The value used to separate individual records in the output."
+        }
+      }
+    },
+    "JSONType": {
+      "type": "string",
+      "enum": [
+        "DOCUMENT",
+        "LINES"
+      ]
     },
     "KMSContext": {
       "type": "string"
@@ -5217,6 +5276,10 @@
     },
     "LoggingEnabled": {
       "type": "structure",
+      "required": [
+        "TargetBucket",
+        "TargetPrefix"
+      ],
       "members": {
         "TargetBucket": {
           "shape": "TargetBucket",
@@ -5229,7 +5292,8 @@
           "shape": "TargetPrefix",
           "documentation": "This element lets you specify a prefix for the keys that the log files will be stored under."
         }
-      }
+      },
+      "documentation": "Container for logging information. Presence of this element indicates that logging is enabled. Parameters TargetBucket and TargetPrefix are required in this case."
     },
     "MFA": {
       "type": "string"
@@ -5457,7 +5521,7 @@
           "documentation": "The class of storage used to store the object."
         }
       },
-      "documentation": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA or GLACIER storage class at a specific period in the object's lifetime."
+      "documentation": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA or GLACIER storage class at a specific period in the object's lifetime."
     },
     "NoncurrentVersionTransitionList": {
       "type": "list",
@@ -5599,7 +5663,9 @@
       "enum": [
         "STANDARD",
         "REDUCED_REDUNDANCY",
-        "GLACIER"
+        "GLACIER",
+        "STANDARD_IA",
+        "ONEZONE_IA"
       ]
     },
     "ObjectVersion": {
@@ -5669,6 +5735,10 @@
         "CSV": {
           "shape": "CSVOutput",
           "documentation": "Describes the serialization of CSV-encoded Select results."
+        },
+        "JSON": {
+          "shape": "JSONOutput",
+          "documentation": "Specifies JSON as request's output serialization format."
         }
       },
       "documentation": "Describes how results of the Select job are serialized."
@@ -5749,6 +5819,30 @@
     },
     "Prefix": {
       "type": "string"
+    },
+    "Progress": {
+      "type": "structure",
+      "members": {
+        "BytesScanned": {
+          "shape": "BytesScanned",
+          "documentation": "Current number of object bytes scanned."
+        },
+        "BytesProcessed": {
+          "shape": "BytesProcessed",
+          "documentation": "Current number of uncompressed object bytes processed."
+        }
+      }
+    },
+    "ProgressEvent": {
+      "type": "structure",
+      "members": {
+        "Details": {
+          "shape": "Progress",
+          "documentation": "The Progress event details.",
+          "eventpayload": true
+        }
+      },
+      "event": true
     },
     "Protocol": {
       "type": "string",
@@ -6715,6 +6809,17 @@
     "RecordDelimiter": {
       "type": "string"
     },
+    "RecordsEvent": {
+      "type": "structure",
+      "members": {
+        "Payload": {
+          "shape": "Body",
+          "documentation": "The byte array of partial, one or more result records.",
+          "eventpayload": true
+        }
+      },
+      "event": true
+    },
     "Redirect": {
       "type": "structure",
       "members": {
@@ -6861,6 +6966,15 @@
         "Payer": {
           "shape": "Payer",
           "documentation": "Specifies who pays for the download and request fees."
+        }
+      }
+    },
+    "RequestProgress": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "EnableRequestProgress",
+          "documentation": "Specifies whether periodic QueryProgress frames should be sent. Valid values: TRUE, FALSE. Default value: FALSE."
         }
       }
     },
@@ -7135,6 +7249,105 @@
       "documentation": "Specifies the use of SSE-S3 to encrypt delievered Inventory reports.",
       "locationName": "SSE-S3"
     },
+    "SelectObjectContentEventStream": {
+      "type": "structure",
+      "members": {
+        "Records": {
+          "shape": "RecordsEvent",
+          "documentation": "The Records Event."
+        },
+        "Stats": {
+          "shape": "StatsEvent",
+          "documentation": "The Stats Event."
+        },
+        "Progress": {
+          "shape": "ProgressEvent",
+          "documentation": "The Progress Event."
+        },
+        "Cont": {
+          "shape": "ContinuationEvent",
+          "documentation": "The Continuation Event."
+        },
+        "End": {
+          "shape": "EndEvent",
+          "documentation": "The End Event."
+        }
+      },
+      "eventstream": true
+    },
+    "SelectObjectContentOutput": {
+      "type": "structure",
+      "members": {
+        "Payload": {
+          "shape": "SelectObjectContentEventStream"
+        }
+      },
+      "payload": "Payload"
+    },
+    "SelectObjectContentRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Key",
+        "Expression",
+        "ExpressionType",
+        "InputSerialization",
+        "OutputSerialization"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The S3 Bucket.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Key": {
+          "shape": "ObjectKey",
+          "documentation": "The Object Key.",
+          "location": "uri",
+          "locationName": "Key"
+        },
+        "SSECustomerAlgorithm": {
+          "shape": "SSECustomerAlgorithm",
+          "documentation": "The SSE Algorithm used to encrypt the object. For more information, go to <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\"> Server-Side Encryption (Using Customer-Provided Encryption Keys</a>.",
+          "location": "header",
+          "locationName": "x-amz-server-side-encryption-customer-algorithm"
+        },
+        "SSECustomerKey": {
+          "shape": "SSECustomerKey",
+          "documentation": "The SSE Customer Key. For more information, go to <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\"> Server-Side Encryption (Using Customer-Provided Encryption Keys</a>.",
+          "location": "header",
+          "locationName": "x-amz-server-side-encryption-customer-key"
+        },
+        "SSECustomerKeyMD5": {
+          "shape": "SSECustomerKeyMD5",
+          "documentation": "The SSE Customer Key MD5. For more information, go to <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\"> Server-Side Encryption (Using Customer-Provided Encryption Keys</a>.",
+          "location": "header",
+          "locationName": "x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "Expression": {
+          "shape": "Expression",
+          "documentation": "The expression that is used to query the object."
+        },
+        "ExpressionType": {
+          "shape": "ExpressionType",
+          "documentation": "The type of the provided expression (e.g., SQL)."
+        },
+        "RequestProgress": {
+          "shape": "RequestProgress",
+          "documentation": "Specifies if periodic request progress information should be enabled."
+        },
+        "InputSerialization": {
+          "shape": "InputSerialization",
+          "documentation": "Describes the format of the data in the object that is being queried."
+        },
+        "OutputSerialization": {
+          "shape": "OutputSerialization",
+          "documentation": "Describes the format of the data that you want Amazon S3 to return in response."
+        }
+      },
+      "documentation": "Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, go to <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html\">S3Select API Documentation</a>."
+    },
     "SelectParameters": {
       "type": "structure",
       "required": [
@@ -7254,12 +7467,37 @@
     "StartAfter": {
       "type": "string"
     },
+    "Stats": {
+      "type": "structure",
+      "members": {
+        "BytesScanned": {
+          "shape": "BytesScanned",
+          "documentation": "Total number of object bytes scanned."
+        },
+        "BytesProcessed": {
+          "shape": "BytesProcessed",
+          "documentation": "Total number of uncompressed object bytes processed."
+        }
+      }
+    },
+    "StatsEvent": {
+      "type": "structure",
+      "members": {
+        "Details": {
+          "shape": "Stats",
+          "documentation": "The Stats event details.",
+          "eventpayload": true
+        }
+      },
+      "event": true
+    },
     "StorageClass": {
       "type": "string",
       "enum": [
         "STANDARD",
         "REDUCED_REDUNDANCY",
-        "STANDARD_IA"
+        "STANDARD_IA",
+        "ONEZONE_IA"
       ]
     },
     "StorageClassAnalysis": {
@@ -7465,7 +7703,8 @@
       "type": "string",
       "enum": [
         "GLACIER",
-        "STANDARD_IA"
+        "STANDARD_IA",
+        "ONEZONE_IA"
       ]
     },
     "Type": {

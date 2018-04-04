@@ -122,6 +122,22 @@
       ],
       "documentation":"<p>Displays the details of the dashboard that you specify.</p> <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code> to create the copy.</p>"
     },
+    "GetMetricData":{
+      "name":"GetMetricData",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetMetricDataInput"},
+      "output":{
+        "shape":"GetMetricDataOutput",
+        "resultWrapper":"GetMetricDataResult"
+      },
+      "errors":[
+        {"shape":"InvalidNextToken"}
+      ],
+      "documentation":"<p>You can use the <code>GetMetricData</code> API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 datapoints. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than calls to <code>GetMetricStatistics</code>. For more information about pricing, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>"
+    },
     "GetMetricStatistics":{
       "name":"GetMetricStatistics",
       "http":{
@@ -440,6 +456,10 @@
       "key":{"shape":"ExtendedStatistic"},
       "value":{"shape":"DatapointValue"}
     },
+    "DatapointValues":{
+      "type":"list",
+      "member":{"shape":"DatapointValue"}
+    },
     "Datapoints":{
       "type":"list",
       "member":{"shape":"Datapoint"}
@@ -732,6 +752,54 @@
         }
       }
     },
+    "GetMetricDataInput":{
+      "type":"structure",
+      "required":[
+        "MetricDataQueries",
+        "StartTime",
+        "EndTime"
+      ],
+      "members":{
+        "MetricDataQueries":{
+          "shape":"MetricDataQueries",
+          "documentation":"<p>The metric queries to be returned. A single <code>GetMetricData</code> call can include as many as 100 <code>MetricDataQuery</code> structures. Each of these structures can specify either a metric to retrieve, or a math expression to perform on retrieved data. </p>"
+        },
+        "StartTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time stamp indicating the earliest data to be returned.</p>"
+        },
+        "EndTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time stamp indicating the latest data to be returned.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>Include this value, if it was returned by the previous call, to get the next set of data points.</p>"
+        },
+        "ScanBy":{
+          "shape":"ScanBy",
+          "documentation":"<p>The order in which data points should be returned. <code>TimestampDescending</code> returns the newest data first and paginates when the <code>MaxDatapoints</code> limit is reached. <code>TimestampAscending</code> returns the oldest data first and paginates when the <code>MaxDatapoints</code> limit is reached.</p>"
+        },
+        "MaxDatapoints":{
+          "shape":"GetMetricDataMaxDatapoints",
+          "documentation":"<p>The maximum number of data points the request should return before paginating. If you omit this, the default of 100,800 is used.</p>"
+        }
+      }
+    },
+    "GetMetricDataMaxDatapoints":{"type":"integer"},
+    "GetMetricDataOutput":{
+      "type":"structure",
+      "members":{
+        "MetricDataResults":{
+          "shape":"MetricDataResults",
+          "documentation":"<p>The metrics that are returned, including the metric name, namespace, and dimensions.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token that marks the next batch of returned results.</p>"
+        }
+      }
+    },
     "GetMetricStatisticsInput":{
       "type":"structure",
       "required":[
@@ -776,7 +844,7 @@
         },
         "Unit":{
           "shape":"StandardUnit",
-          "documentation":"<p>The unit for a given metric. Metrics may be reported in multiple units. Not supplying a unit results in all units being returned. If the metric only ever reports one unit, specifying a unit has no effect.</p>"
+          "documentation":"<p>The unit for a given metric. Metrics may be reported in multiple units. Not supplying a unit results in all units being returned. If you specify only a unit that the metric does not report, the results of the call are null.</p>"
         }
       }
     },
@@ -978,6 +1046,22 @@
       "min":1
     },
     "Message":{"type":"string"},
+    "MessageData":{
+      "type":"structure",
+      "members":{
+        "Code":{
+          "shape":"MessageDataCode",
+          "documentation":"<p>The error code or status code associated with the message.</p>"
+        },
+        "Value":{
+          "shape":"MessageDataValue",
+          "documentation":"<p>The message text.</p>"
+        }
+      },
+      "documentation":"<p>A message returned by the <code>GetMetricData</code>API, including a code and a description.</p>"
+    },
+    "MessageDataCode":{"type":"string"},
+    "MessageDataValue":{"type":"string"},
     "Metric":{
       "type":"structure",
       "members":{
@@ -1142,6 +1226,75 @@
       "type":"list",
       "member":{"shape":"MetricDatum"}
     },
+    "MetricDataQueries":{
+      "type":"list",
+      "member":{"shape":"MetricDataQuery"}
+    },
+    "MetricDataQuery":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "Id":{
+          "shape":"MetricId",
+          "documentation":"<p>A short name used to tie this structure to the results in the response. This name must be unique within a single call to <code>GetMetricData</code>. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.</p>"
+        },
+        "MetricStat":{
+          "shape":"MetricStat",
+          "documentation":"<p>The metric to be returned, along with statistics, period, and units. Use this parameter only if this structure is performing a data retrieval and not performing a math expression on the returned data.</p> <p>Within one MetricDataQuery structure, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>"
+        },
+        "Expression":{
+          "shape":"MetricExpression",
+          "documentation":"<p>The math expression to be performed on the returned data, if this structure is performing a math expression. For more information about metric math expressions, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Within one MetricDataQuery structure, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>"
+        },
+        "Label":{
+          "shape":"MetricLabel",
+          "documentation":"<p>A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch generates a default.</p>"
+        },
+        "ReturnData":{
+          "shape":"ReturnData",
+          "documentation":"<p>Indicates whether to return the time stamps and raw data values of this metric. If you are performing this call just to do math expressions and do not also need the raw data returned, you can specify <code>False</code>. If you omit this, the default of <code>True</code> is used.</p>"
+        }
+      },
+      "documentation":"<p>This structure indicates the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a math expression on metric data. A single <code>GetMetricData</code> call can include up to 100 <code>MetricDataQuery</code> structures.</p>"
+    },
+    "MetricDataResult":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"MetricId",
+          "documentation":"<p>The short name you specified to represent this metric.</p>"
+        },
+        "Label":{
+          "shape":"MetricLabel",
+          "documentation":"<p>The human-readable label associated with the data.</p>"
+        },
+        "Timestamps":{
+          "shape":"Timestamps",
+          "documentation":"<p>The time stamps for the data points, formatted in Unix timestamp format. The number of time stamps always matches the number of values and the value for Timestamps[x] is Values[x].</p>"
+        },
+        "Values":{
+          "shape":"DatapointValues",
+          "documentation":"<p>The data points for the metric corresponding to <code>Timestamps</code>. The number of values always matches the number of time stamps and the time stamp for Values[x] is Timestamps[x].</p>"
+        },
+        "StatusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>The status of the returned data. <code>Complete</code> indicates that all data points in the requested time range were returned. <code>PartialData</code> means that an incomplete set of data points were returned. You can use the <code>NextToken</code> value that was returned and repeat your request to get more data points. <code>NextToken</code> is not returned if you are performing a math expression. <code>InternalError</code> indicates that an error occurred. Retry your request using <code>NextToken</code>, if present.</p>"
+        },
+        "Messages":{
+          "shape":"MetricDataResultMessages",
+          "documentation":"<p>A list of messages with additional information about the data returned.</p>"
+        }
+      },
+      "documentation":"<p>A <code>GetMetricData</code> call returns an array of <code>MetricDataResult</code> structures. Each of these structures includes the data points for that metric, along with the time stamps of those data points and other identifying information.</p>"
+    },
+    "MetricDataResultMessages":{
+      "type":"list",
+      "member":{"shape":"MessageData"}
+    },
+    "MetricDataResults":{
+      "type":"list",
+      "member":{"shape":"MetricDataResult"}
+    },
     "MetricDatum":{
       "type":"structure",
       "required":["MetricName"],
@@ -1177,11 +1330,48 @@
       },
       "documentation":"<p>Encapsulates the information sent to either create a metric or add new values to be aggregated into an existing metric.</p>"
     },
+    "MetricExpression":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "MetricId":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
     "MetricLabel":{"type":"string"},
     "MetricName":{
       "type":"string",
       "max":255,
       "min":1
+    },
+    "MetricStat":{
+      "type":"structure",
+      "required":[
+        "Metric",
+        "Period",
+        "Stat"
+      ],
+      "members":{
+        "Metric":{
+          "shape":"Metric",
+          "documentation":"<p>The metric to return, including the metric name, namespace, and dimensions.</p>"
+        },
+        "Period":{
+          "shape":"Period",
+          "documentation":"<p>The period to use when retrieving the metric.</p>"
+        },
+        "Stat":{
+          "shape":"Stat",
+          "documentation":"<p>The statistic to return. It can include any CloudWatch statistic or extended statistic.</p>"
+        },
+        "Unit":{
+          "shape":"StandardUnit",
+          "documentation":"<p>The unit to use for the returned data points.</p>"
+        }
+      },
+      "documentation":"<p>This structure defines the metric to be returned, along with the statistics, period, and units.</p>"
     },
     "Metrics":{
       "type":"list",
@@ -1302,7 +1492,7 @@
         },
         "Period":{
           "shape":"Period",
-          "documentation":"<p>The period, in seconds, over which the specified statistic is applied. Valid values are 10, 30, and any multiple of 60.</p> <p>Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a <code>StorageResolution</code> of 1. If you specify a Period of 10 or 30 for a metric that does not have sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case, it does not receive data for the attempts that do not correspond to a one-minute data resolution, and the alarm may often lapse into INSUFFICENT_DATA status. Specifying 10 or 30 also sets this alarm as a high-resolution alarm, which has a higher charge than other alarms. For more information about pricing, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> <p>An alarm's total current evaluation period can be no longer than one day, so <code>Period</code> multiplied by <code>EvaluationPeriods</code> cannot be more than 86,400 seconds.</p>"
+          "documentation":"<p>The period, in seconds, over which the specified statistic is applied. Valid values are 10, 30, and any multiple of 60.</p> <p>Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a <code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case, it does not receive data for the attempts that do not correspond to a one-minute data resolution, and the alarm may often lapse into INSUFFICENT_DATA status. Specifying 10 or 30 also sets this alarm as a high-resolution alarm, which has a higher charge than other alarms. For more information about pricing, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> <p>An alarm's total current evaluation period can be no longer than one day, so <code>Period</code> multiplied by <code>EvaluationPeriods</code> cannot be more than 86,400 seconds.</p>"
         },
         "Unit":{
           "shape":"StandardUnit",
@@ -1310,11 +1500,11 @@
         },
         "EvaluationPeriods":{
           "shape":"EvaluationPeriods",
-          "documentation":"<p>The number of periods over which data is compared to the specified threshold. An alarm's total current evaluation period can be no longer than one day, so this number multiplied by <code>Period</code> cannot be more than 86,400 seconds.</p>"
+          "documentation":"<p>The number of periods over which data is compared to the specified threshold. If you are setting an alarm which requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an \"M out of N\" alarm, this value is the N.</p> <p>An alarm's total current evaluation period can be no longer than one day, so this number multiplied by <code>Period</code> cannot be more than 86,400 seconds.</p>"
         },
         "DatapointsToAlarm":{
           "shape":"DatapointsToAlarm",
-          "documentation":"<p>The number of datapoints that must be breaching to trigger the alarm.</p>"
+          "documentation":"<p>The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an \"M out of N\" alarm. In that case, this value is the M. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation\">Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
         },
         "Threshold":{
           "shape":"Threshold",
@@ -1377,6 +1567,14 @@
       },
       "exception":true
     },
+    "ReturnData":{"type":"boolean"},
+    "ScanBy":{
+      "type":"string",
+      "enum":[
+        "TimestampDescending",
+        "TimestampAscending"
+      ]
+    },
     "SetAlarmStateInput":{
       "type":"structure",
       "required":[
@@ -1436,6 +1634,7 @@
         "None"
       ]
     },
+    "Stat":{"type":"string"},
     "StateReason":{
       "type":"string",
       "max":1023,
@@ -1498,12 +1697,24 @@
       "max":5,
       "min":1
     },
+    "StatusCode":{
+      "type":"string",
+      "enum":[
+        "Complete",
+        "InternalError",
+        "PartialData"
+      ]
+    },
     "StorageResolution":{
       "type":"integer",
       "min":1
     },
     "Threshold":{"type":"double"},
     "Timestamp":{"type":"timestamp"},
+    "Timestamps":{
+      "type":"list",
+      "member":{"shape":"Timestamp"}
+    },
     "TreatMissingData":{
       "type":"string",
       "max":255,
