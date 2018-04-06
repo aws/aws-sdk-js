@@ -201,11 +201,11 @@ declare namespace Batch {
      */
     container?: AttemptContainerDetail;
     /**
-     * The Unix time stamp for when the attempt was started (when the attempt transitioned from the STARTING state to the RUNNING state).
+     * The Unix time stamp (in seconds and milliseconds) for when the attempt was started (when the attempt transitioned from the STARTING state to the RUNNING state).
      */
     startedAt?: Long;
     /**
-     * The Unix time stamp for when the attempt was stopped (when the attempt transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
+     * The Unix time stamp (in seconds and milliseconds) for when the attempt was stopped (when the attempt transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
      */
     stoppedAt?: Long;
     /**
@@ -447,7 +447,7 @@ declare namespace Batch {
      */
     vcpus: Integer;
     /**
-     * The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. You must specify at least 4 MiB of memory for a job.
+     * The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. You must specify at least 4 MiB of memory for a job.  If you are trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see Memory Management in the AWS Batch User Guide. 
      */
     memory: Integer;
     /**
@@ -716,6 +716,10 @@ declare namespace Batch {
      * An object with various properties specific to container-based jobs. 
      */
     containerProperties?: ContainerProperties;
+    /**
+     * The timeout configuration for jobs that are submitted with this job definition. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished.
+     */
+    timeout?: JobTimeout;
   }
   export type JobDefinitionList = JobDefinition[];
   export type JobDefinitionType = "container"|string;
@@ -756,7 +760,7 @@ declare namespace Batch {
      */
     statusReason?: String;
     /**
-     * The Unix time stamp for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
+     * The Unix time stamp (in seconds and milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
      */
     createdAt?: Long;
     /**
@@ -764,11 +768,11 @@ declare namespace Batch {
      */
     retryStrategy?: RetryStrategy;
     /**
-     * The Unix time stamp for when the job was started (when the job transitioned from the STARTING state to the RUNNING state).
+     * The Unix time stamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the STARTING state to the RUNNING state).
      */
     startedAt: Long;
     /**
-     * The Unix time stamp for when the job was stopped (when the job transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
+     * The Unix time stamp (in seconds and milliseconds) for when the job was stopped (when the job transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
      */
     stoppedAt?: Long;
     /**
@@ -791,6 +795,10 @@ declare namespace Batch {
      * The array properties of the job, if it is an array job.
      */
     arrayProperties?: ArrayPropertiesDetail;
+    /**
+     * The timeout configuration for the job. 
+     */
+    timeout?: JobTimeout;
   }
   export type JobDetailList = JobDetail[];
   export interface JobQueueDetail {
@@ -864,6 +872,12 @@ declare namespace Batch {
     arrayProperties?: ArrayPropertiesSummary;
   }
   export type JobSummaryList = JobSummary[];
+  export interface JobTimeout {
+    /**
+     * The time duration in seconds (measured from the job attempt's startedAt timestamp) after which AWS Batch terminates your jobs if they have not finished.
+     */
+    attemptDurationSeconds?: Integer;
+  }
   export interface KeyValuePair {
     /**
      * The name of the key-value pair. For environment variables, this is the name of the environment variable.
@@ -941,9 +955,13 @@ declare namespace Batch {
      */
     containerProperties?: ContainerProperties;
     /**
-     * The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a SubmitJob operation overrides the retry strategy defined here.
+     * The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a SubmitJob operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried. 
      */
     retryStrategy?: RetryStrategy;
+    /**
+     * The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a SubmitJob operation overrides the timeout configuration defined here. For more information, see Job Timeouts in the Amazon Elastic Container Service Developer Guide.
+     */
+    timeout?: JobTimeout;
   }
   export interface RegisterJobDefinitionResponse {
     /**
@@ -1000,6 +1018,10 @@ declare namespace Batch {
      * The retry strategy to use for failed jobs from this SubmitJob operation. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition.
      */
     retryStrategy?: RetryStrategy;
+    /**
+     * The timeout configuration for this SubmitJob operation. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. This configuration overrides any timeout configuration specified in the job definition. For array jobs, child jobs have the same timeout configuration as the parent job. For more information, see Job Timeouts in the Amazon Elastic Container Service Developer Guide.
+     */
+    timeout?: JobTimeout;
   }
   export interface SubmitJobResponse {
     /**

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.221.1-->
+<!--LATEST=2.222.1-->
 <!--ENTRYINSERT-->
+
+## 2.222.1
+* feature: Batch: Support for Timeout in SubmitJob and RegisterJobDefinition
 
 ## 2.221.1
 * feature: ACM: AWS Certificate Manager has added support for AWS Certificate Manager Private Certificate Authority (CA). Customers can now request private certificates with the RequestCertificate API, and also export private certificates with the ExportCertificate API.
