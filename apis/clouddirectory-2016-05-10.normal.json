@@ -30,7 +30,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"FacetValidationException"}
       ],
-      "documentation":"<p>Adds a new <a>Facet</a> to an object.</p>"
+      "documentation":"<p>Adds a new <a>Facet</a> to an object. An object can have more than one facet applied on it.</p>"
     },
     "ApplySchema":{
       "name":"ApplySchema",
@@ -95,7 +95,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotPolicyException"}
       ],
@@ -118,6 +117,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
+        {"shape":"InvalidAttachmentException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"LinkNameAlreadyInUseException"},
         {"shape":"IndexedAttributeMissingException"},
@@ -207,7 +207,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryAlreadyExistsException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Creates a <a>Directory</a> by copying the published schema into the directory. A directory cannot be created without a schema.</p>"
@@ -276,7 +275,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"FacetValidationException"},
         {"shape":"LinkNameAlreadyInUseException"},
@@ -476,7 +474,8 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotNodeException"}
       ],
       "documentation":"<p>Detaches a given object from the parent object. The object that is to be detached from the parent is specified by the link name.</p>"
     },
@@ -497,7 +496,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotPolicyException"}
       ],
@@ -625,6 +623,28 @@
         {"shape":"FacetNotFoundException"}
       ],
       "documentation":"<p>Gets details of the <a>Facet</a>, such as facet name, attributes, <a>Rule</a>s, or <code>ObjectType</code>. You can call this on all kinds of schema facets -- published, development, or applied.</p>"
+    },
+    "GetObjectAttributes":{
+      "name":"GetObjectAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/object/attributes/get",
+        "responseCode":200
+      },
+      "input":{"shape":"GetObjectAttributesRequest"},
+      "output":{"shape":"GetObjectAttributesResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"DirectoryNotEnabledException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"FacetValidationException"}
+      ],
+      "documentation":"<p>Retrieves attributes within a facet that are associated with an object.</p>"
     },
     "GetObjectInformation":{
       "name":"GetObjectInformation",
@@ -852,14 +872,16 @@
         {"shape":"InternalServiceException"},
         {"shape":"InvalidArnException"},
         {"shape":"RetryableConflictException"},
+        {"shape":"FacetValidationException"},
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
+        {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotIndexException"}
       ],
-      "documentation":"<p>Lists objects and indexed values attached to the index.</p>"
+      "documentation":"<p>Lists objects attached to the specified index.</p>"
     },
     "ListObjectAttributes":{
       "name":"ListObjectAttributes",
@@ -878,7 +900,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"FacetValidationException"}
@@ -902,7 +923,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"NotNodeException"}
@@ -948,7 +968,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"CannotListParentOfRootException"}
@@ -1017,7 +1036,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotPolicyException"}
@@ -1043,7 +1061,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p>Lists schema major versions for a published schema. If <code>SchemaArn</code> is provided, lists the minor version.</p>"
+      "documentation":"<p>Lists the major version families of each published schema. If a major version ARN is provided as <code>SchemaArn</code>, the minor version revisions in that family are listed instead.</p>"
     },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
@@ -1126,7 +1144,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"}
       ],
@@ -1492,6 +1509,7 @@
     "AttachPolicyRequest":{
       "type":"structure",
       "required":[
+        "DirectoryArn",
         "PolicyReference",
         "ObjectReference"
       ],
@@ -1870,10 +1888,7 @@
       "type":"structure",
       "required":[
         "SchemaFacet",
-        "ObjectAttributeList",
-        "ParentReference",
-        "LinkName",
-        "BatchReferenceName"
+        "ObjectAttributeList"
       ],
       "members":{
         "SchemaFacet":{
@@ -1958,8 +1973,7 @@
       "type":"structure",
       "required":[
         "ParentReference",
-        "LinkName",
-        "BatchReferenceName"
+        "LinkName"
       ],
       "members":{
         "ParentReference":{
@@ -2027,6 +2041,39 @@
       "members":{
       },
       "documentation":"<p>Represents the output of a <a>DetachTypedLink</a> response operation.</p>"
+    },
+    "BatchGetObjectAttributes":{
+      "type":"structure",
+      "required":[
+        "ObjectReference",
+        "SchemaFacet",
+        "AttributeNames"
+      ],
+      "members":{
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Reference that identifies the object whose attributes will be retrieved.</p>"
+        },
+        "SchemaFacet":{
+          "shape":"SchemaFacet",
+          "documentation":"<p>Identifier for the facet whose attributes will be retrieved. See <a>SchemaFacet</a> for details.</p>"
+        },
+        "AttributeNames":{
+          "shape":"AttributeNameList",
+          "documentation":"<p>List of attribute names whose values will be retrieved.</p>"
+        }
+      },
+      "documentation":"<p>Retrieves attributes within a facet that are associated with an object inside an <a>BatchRead</a> operation. For more information, see <a>GetObjectAttributes</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchGetObjectAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "Attributes":{
+          "shape":"AttributeKeyAndValueList",
+          "documentation":"<p>The attribute values that are associated with an object.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>GetObjectAttributes</a> response operation.</p>"
     },
     "BatchGetObjectInformation":{
       "type":"structure",
@@ -2463,6 +2510,10 @@
           "shape":"BatchGetObjectInformation",
           "documentation":"<p>Retrieves metadata about an object.</p>"
         },
+        "GetObjectAttributes":{
+          "shape":"BatchGetObjectAttributes",
+          "documentation":"<p>Retrieves attributes within a facet that are associated with an object.</p>"
+        },
         "ListObjectPolicies":{
           "shape":"BatchListObjectPolicies",
           "documentation":"<p>Returns policies attached to an object in pagination fashion.</p>"
@@ -2560,6 +2611,10 @@
         "GetObjectInformation":{
           "shape":"BatchGetObjectInformationResponse",
           "documentation":"<p>Retrieves metadata about an object.</p>"
+        },
+        "GetObjectAttributes":{
+          "shape":"BatchGetObjectAttributesResponse",
+          "documentation":"<p>Retrieves attributes within a facet that are associated with an object.</p>"
         },
         "ListAttachedIndices":{
           "shape":"BatchListAttachedIndicesResponse",
@@ -2673,6 +2728,7 @@
         "AccessDeniedException",
         "InvalidAttachmentException",
         "NotIndexException",
+        "NotNodeException",
         "IndexedAttributeMissingException",
         "ObjectAlreadyDetachedException",
         "NotPolicyException",
@@ -3359,7 +3415,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>An operation can only operate on a directory that is not enabled.</p>",
+      "documentation":"<p>Operations are only permitted on enabled directories.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3428,7 +3484,7 @@
           "documentation":"<p>The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.</p>"
         }
       },
-      "documentation":"<p>A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <a>Rule</a>s, and <code>ObjectTypes</code>.</p>"
+      "documentation":"<p>A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <code> <a>Rule</a>s</code>, and <code>ObjectTypes</code>. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html\">Facets</a> for more information.</p>"
     },
     "FacetAlreadyExistsException":{
       "type":"structure",
@@ -3638,6 +3694,50 @@
         "Facet":{
           "shape":"Facet",
           "documentation":"<p>The <a>Facet</a> structure that is associated with the facet.</p>"
+        }
+      }
+    },
+    "GetObjectAttributesRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryArn",
+        "ObjectReference",
+        "SchemaFacet",
+        "AttributeNames"
+      ],
+      "members":{
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where the object resides.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Reference that identifies the object whose attributes will be retrieved.</p>"
+        },
+        "ConsistencyLevel":{
+          "shape":"ConsistencyLevel",
+          "documentation":"<p>The consistency level at which to retrieve the attributes on an object.</p>",
+          "location":"header",
+          "locationName":"x-amz-consistency-level"
+        },
+        "SchemaFacet":{
+          "shape":"SchemaFacet",
+          "documentation":"<p>Identifier for the facet whose attributes will be retrieved. See <a>SchemaFacet</a> for details.</p>"
+        },
+        "AttributeNames":{
+          "shape":"AttributeNameList",
+          "documentation":"<p>List of attribute names whose values will be retrieved.</p>"
+        }
+      }
+    },
+    "GetObjectAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "Attributes":{
+          "shape":"AttributeKeyAndValueList",
+          "documentation":"<p>The attributes that are associated with the object.</p>"
         }
       }
     },
@@ -5195,7 +5295,7 @@
           "documentation":"<p>The attribute value to terminate the range at.</p>"
         }
       },
-      "documentation":"<p>A range of attribute values.</p>"
+      "documentation":"<p>A range of attribute values. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters\">Range Filters</a>.</p>"
     },
     "TypedLinkAttributeDefinition":{
       "type":"structure",

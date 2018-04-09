@@ -12,11 +12,11 @@ declare class CloudDirectory extends Service {
   constructor(options?: CloudDirectory.Types.ClientConfiguration)
   config: Config & CloudDirectory.Types.ClientConfiguration;
   /**
-   * Adds a new Facet to an object.
+   * Adds a new Facet to an object. An object can have more than one facet applied on it.
    */
   addFacetToObject(params: CloudDirectory.Types.AddFacetToObjectRequest, callback?: (err: AWSError, data: CloudDirectory.Types.AddFacetToObjectResponse) => void): Request<CloudDirectory.Types.AddFacetToObjectResponse, AWSError>;
   /**
-   * Adds a new Facet to an object.
+   * Adds a new Facet to an object. An object can have more than one facet applied on it.
    */
   addFacetToObject(callback?: (err: AWSError, data: CloudDirectory.Types.AddFacetToObjectResponse) => void): Request<CloudDirectory.Types.AddFacetToObjectResponse, AWSError>;
   /**
@@ -236,6 +236,14 @@ declare class CloudDirectory extends Service {
    */
   getFacet(callback?: (err: AWSError, data: CloudDirectory.Types.GetFacetResponse) => void): Request<CloudDirectory.Types.GetFacetResponse, AWSError>;
   /**
+   * Retrieves attributes within a facet that are associated with an object.
+   */
+  getObjectAttributes(params: CloudDirectory.Types.GetObjectAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetObjectAttributesResponse) => void): Request<CloudDirectory.Types.GetObjectAttributesResponse, AWSError>;
+  /**
+   * Retrieves attributes within a facet that are associated with an object.
+   */
+  getObjectAttributes(callback?: (err: AWSError, data: CloudDirectory.Types.GetObjectAttributesResponse) => void): Request<CloudDirectory.Types.GetObjectAttributesResponse, AWSError>;
+  /**
    * Retrieves metadata about an object.
    */
   getObjectInformation(params: CloudDirectory.Types.GetObjectInformationRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetObjectInformationResponse) => void): Request<CloudDirectory.Types.GetObjectInformationResponse, AWSError>;
@@ -316,11 +324,11 @@ declare class CloudDirectory extends Service {
    */
   listIncomingTypedLinks(callback?: (err: AWSError, data: CloudDirectory.Types.ListIncomingTypedLinksResponse) => void): Request<CloudDirectory.Types.ListIncomingTypedLinksResponse, AWSError>;
   /**
-   * Lists objects and indexed values attached to the index.
+   * Lists objects attached to the specified index.
    */
   listIndex(params: CloudDirectory.Types.ListIndexRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListIndexResponse) => void): Request<CloudDirectory.Types.ListIndexResponse, AWSError>;
   /**
-   * Lists objects and indexed values attached to the index.
+   * Lists objects attached to the specified index.
    */
   listIndex(callback?: (err: AWSError, data: CloudDirectory.Types.ListIndexResponse) => void): Request<CloudDirectory.Types.ListIndexResponse, AWSError>;
   /**
@@ -380,11 +388,11 @@ declare class CloudDirectory extends Service {
    */
   listPolicyAttachments(callback?: (err: AWSError, data: CloudDirectory.Types.ListPolicyAttachmentsResponse) => void): Request<CloudDirectory.Types.ListPolicyAttachmentsResponse, AWSError>;
   /**
-   * Lists schema major versions for a published schema. If SchemaArn is provided, lists the minor version.
+   * Lists the major version families of each published schema. If a major version ARN is provided as SchemaArn, the minor version revisions in that family are listed instead.
    */
   listPublishedSchemaArns(params: CloudDirectory.Types.ListPublishedSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListPublishedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListPublishedSchemaArnsResponse, AWSError>;
   /**
-   * Lists schema major versions for a published schema. If SchemaArn is provided, lists the minor version.
+   * Lists the major version families of each published schema. If a major version ARN is provided as SchemaArn, the minor version revisions in that family are listed instead.
    */
   listPublishedSchemaArns(callback?: (err: AWSError, data: CloudDirectory.Types.ListPublishedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListPublishedSchemaArnsResponse, AWSError>;
   /**
@@ -579,7 +587,7 @@ declare namespace CloudDirectory {
     /**
      * The Amazon Resource Name (ARN) that is associated with the Directory where both objects reside. For more information, see arns.
      */
-    DirectoryArn?: Arn;
+    DirectoryArn: Arn;
     /**
      * The reference that is associated with the policy object.
      */
@@ -806,15 +814,15 @@ declare namespace CloudDirectory {
     /**
      * If specified, the parent reference to which this object will be attached.
      */
-    ParentReference: ObjectReference;
+    ParentReference?: ObjectReference;
     /**
      * The name of the link.
      */
-    LinkName: LinkName;
+    LinkName?: LinkName;
     /**
      * The batch reference name. See Batches for more information.
      */
-    BatchReferenceName: BatchReferenceName;
+    BatchReferenceName?: BatchReferenceName;
   }
   export interface BatchCreateObjectResponse {
     /**
@@ -858,7 +866,7 @@ declare namespace CloudDirectory {
     /**
      * The batch reference name. See Batches for more information.
      */
-    BatchReferenceName: BatchReferenceName;
+    BatchReferenceName?: BatchReferenceName;
   }
   export interface BatchDetachObjectResponse {
     /**
@@ -885,6 +893,26 @@ declare namespace CloudDirectory {
     TypedLinkSpecifier: TypedLinkSpecifier;
   }
   export interface BatchDetachTypedLinkResponse {
+  }
+  export interface BatchGetObjectAttributes {
+    /**
+     * Reference that identifies the object whose attributes will be retrieved.
+     */
+    ObjectReference: ObjectReference;
+    /**
+     * Identifier for the facet whose attributes will be retrieved. See SchemaFacet for details.
+     */
+    SchemaFacet: SchemaFacet;
+    /**
+     * List of attribute names whose values will be retrieved.
+     */
+    AttributeNames: AttributeNameList;
+  }
+  export interface BatchGetObjectAttributesResponse {
+    /**
+     * The attribute values that are associated with an object.
+     */
+    Attributes?: AttributeKeyAndValueList;
   }
   export interface BatchGetObjectInformation {
     /**
@@ -1200,6 +1228,10 @@ declare namespace CloudDirectory {
      */
     GetObjectInformation?: BatchGetObjectInformation;
     /**
+     * Retrieves attributes within a facet that are associated with an object.
+     */
+    GetObjectAttributes?: BatchGetObjectAttributes;
+    /**
      * Returns policies attached to an object in pagination fashion.
      */
     ListObjectPolicies?: BatchListObjectPolicies;
@@ -1270,6 +1302,10 @@ declare namespace CloudDirectory {
      */
     GetObjectInformation?: BatchGetObjectInformationResponse;
     /**
+     * Retrieves attributes within a facet that are associated with an object.
+     */
+    GetObjectAttributes?: BatchGetObjectAttributesResponse;
+    /**
      * Lists indices attached to an object.
      */
     ListAttachedIndices?: BatchListAttachedIndicesResponse;
@@ -1331,7 +1367,7 @@ declare namespace CloudDirectory {
      */
     ObjectIdentifier?: ObjectIdentifier;
   }
-  export type BatchWriteExceptionType = "InternalServiceException"|"ValidationException"|"InvalidArnException"|"LinkNameAlreadyInUseException"|"StillContainsLinksException"|"FacetValidationException"|"ObjectNotDetachedException"|"ResourceNotFoundException"|"AccessDeniedException"|"InvalidAttachmentException"|"NotIndexException"|"IndexedAttributeMissingException"|"ObjectAlreadyDetachedException"|"NotPolicyException"|"DirectoryNotEnabledException"|"LimitExceededException"|"UnsupportedIndexTypeException"|string;
+  export type BatchWriteExceptionType = "InternalServiceException"|"ValidationException"|"InvalidArnException"|"LinkNameAlreadyInUseException"|"StillContainsLinksException"|"FacetValidationException"|"ObjectNotDetachedException"|"ResourceNotFoundException"|"AccessDeniedException"|"InvalidAttachmentException"|"NotIndexException"|"NotNodeException"|"IndexedAttributeMissingException"|"ObjectAlreadyDetachedException"|"NotPolicyException"|"DirectoryNotEnabledException"|"LimitExceededException"|"UnsupportedIndexTypeException"|string;
   export interface BatchWriteOperation {
     /**
      * Creates an object.
@@ -1883,6 +1919,34 @@ declare namespace CloudDirectory {
      * The Facet structure that is associated with the facet.
      */
     Facet?: Facet;
+  }
+  export interface GetObjectAttributesRequest {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the Directory where the object resides.
+     */
+    DirectoryArn: Arn;
+    /**
+     * Reference that identifies the object whose attributes will be retrieved.
+     */
+    ObjectReference: ObjectReference;
+    /**
+     * The consistency level at which to retrieve the attributes on an object.
+     */
+    ConsistencyLevel?: ConsistencyLevel;
+    /**
+     * Identifier for the facet whose attributes will be retrieved. See SchemaFacet for details.
+     */
+    SchemaFacet: SchemaFacet;
+    /**
+     * List of attribute names whose values will be retrieved.
+     */
+    AttributeNames: AttributeNameList;
+  }
+  export interface GetObjectAttributesResponse {
+    /**
+     * The attributes that are associated with the object.
+     */
+    Attributes?: AttributeKeyAndValueList;
   }
   export interface GetObjectInformationRequest {
     /**
