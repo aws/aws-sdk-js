@@ -172,6 +172,24 @@
       "documentation":"<p>Deletes a group from Amazon WorkMail.</p>",
       "idempotent":true
     },
+    "DeleteMailboxPermissions":{
+      "name":"DeleteMailboxPermissions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteMailboxPermissionsRequest"},
+      "output":{"shape":"DeleteMailboxPermissionsResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"EntityStateException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"OrganizationNotFoundException"},
+        {"shape":"OrganizationStateException"}
+      ],
+      "documentation":"<p>Deletes permissions granted to a user or group.</p>",
+      "idempotent":true
+    },
     "DeleteResource":{
       "name":"DeleteResource",
       "http":{
@@ -385,6 +403,23 @@
       "documentation":"<p>Returns summaries of the organization's groups.</p>",
       "idempotent":true
     },
+    "ListMailboxPermissions":{
+      "name":"ListMailboxPermissions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListMailboxPermissionsRequest"},
+      "output":{"shape":"ListMailboxPermissionsResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"OrganizationNotFoundException"},
+        {"shape":"OrganizationStateException"}
+      ],
+      "documentation":"<p>Lists the mailbox permissions associated with a mailbox.</p>",
+      "idempotent":true
+    },
     "ListOrganizations":{
       "name":"ListOrganizations",
       "http":{
@@ -447,6 +482,24 @@
         {"shape":"OrganizationStateException"}
       ],
       "documentation":"<p>Returns summaries of the organization's users.</p>",
+      "idempotent":true
+    },
+    "PutMailboxPermissions":{
+      "name":"PutMailboxPermissions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutMailboxPermissionsRequest"},
+      "output":{"shape":"PutMailboxPermissionsResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"EntityStateException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"OrganizationNotFoundException"},
+        {"shape":"OrganizationStateException"}
+      ],
+      "documentation":"<p>Sets permissions for a user or group. This replaces any pre-existing permissions set for the entity.</p>",
       "idempotent":true
     },
     "RegisterToWorkMail":{
@@ -805,6 +858,33 @@
       }
     },
     "DeleteGroupResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteMailboxPermissionsRequest":{
+      "type":"structure",
+      "required":[
+        "OrganizationId",
+        "EntityId",
+        "GranteeId"
+      ],
+      "members":{
+        "OrganizationId":{
+          "shape":"OrganizationId",
+          "documentation":"<p>The identifier of the organization under which the entity (user or group) exists.</p>"
+        },
+        "EntityId":{
+          "shape":"WorkMailIdentifier",
+          "documentation":"<p>The identifier of the entity (user or group) for which to delete mailbox permissions.</p>"
+        },
+        "GranteeId":{
+          "shape":"WorkMailIdentifier",
+          "documentation":"<p>The identifier of the entity (user or group) for which to delete granted permissions.</p>"
+        }
+      }
+    },
+    "DeleteMailboxPermissionsResponse":{
       "type":"structure",
       "members":{
       }
@@ -1363,6 +1443,44 @@
         }
       }
     },
+    "ListMailboxPermissionsRequest":{
+      "type":"structure",
+      "required":[
+        "OrganizationId",
+        "EntityId"
+      ],
+      "members":{
+        "OrganizationId":{
+          "shape":"OrganizationId",
+          "documentation":"<p>The identifier of the organization under which the entity (user or group) exists.</p>"
+        },
+        "EntityId":{
+          "shape":"WorkMailIdentifier",
+          "documentation":"<p>The identifier of the entity (user or group) for which to list mailbox permissions.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use to retrieve the next page of results. The first call does not contain any tokens.</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to return in a single call.</p>"
+        }
+      }
+    },
+    "ListMailboxPermissionsResponse":{
+      "type":"structure",
+      "members":{
+        "Permissions":{
+          "shape":"Permissions",
+          "documentation":"<p>One page of the entity's mailbox permissions.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use to retrieve the next page of results. The value is \"null\" when there are no more results to return.</p>"
+        }
+      }
+    },
     "ListOrganizationsRequest":{
       "type":"structure",
       "members":{
@@ -1622,6 +1740,77 @@
       "max":256,
       "pattern":"[\\u0020-\\u00FF]+",
       "sensitive":true
+    },
+    "Permission":{
+      "type":"structure",
+      "required":[
+        "GranteeId",
+        "GranteeType",
+        "PermissionValues"
+      ],
+      "members":{
+        "GranteeId":{
+          "shape":"WorkMailIdentifier",
+          "documentation":"<p>The identifier of the entity (user or group) to which the permissions are granted.</p>"
+        },
+        "GranteeType":{
+          "shape":"MemberType",
+          "documentation":"<p>The type of entity (user, group) of the entity referred to in GranteeId.</p>"
+        },
+        "PermissionValues":{
+          "shape":"PermissionValues",
+          "documentation":"<p>The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.</p>"
+        }
+      },
+      "documentation":"<p>Permission granted to an entity (user, group) to access a certain aspect of another entity's mailbox.</p>"
+    },
+    "PermissionType":{
+      "type":"string",
+      "enum":[
+        "FULL_ACCESS",
+        "SEND_AS",
+        "SEND_ON_BEHALF"
+      ]
+    },
+    "PermissionValues":{
+      "type":"list",
+      "member":{"shape":"PermissionType"}
+    },
+    "Permissions":{
+      "type":"list",
+      "member":{"shape":"Permission"}
+    },
+    "PutMailboxPermissionsRequest":{
+      "type":"structure",
+      "required":[
+        "OrganizationId",
+        "EntityId",
+        "GranteeId",
+        "PermissionValues"
+      ],
+      "members":{
+        "OrganizationId":{
+          "shape":"OrganizationId",
+          "documentation":"<p>The identifier of the organization under which the entity (user or group) exists.</p>"
+        },
+        "EntityId":{
+          "shape":"WorkMailIdentifier",
+          "documentation":"<p>The identifier of the entity (user or group) for which to update mailbox permissions.</p>"
+        },
+        "GranteeId":{
+          "shape":"WorkMailIdentifier",
+          "documentation":"<p>The identifier of the entity (user or group) to which to grant the permissions.</p>"
+        },
+        "PermissionValues":{
+          "shape":"PermissionValues",
+          "documentation":"<p>The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.</p>"
+        }
+      }
+    },
+    "PutMailboxPermissionsResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "RegisterToWorkMailRequest":{
       "type":"structure",

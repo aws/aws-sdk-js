@@ -60,11 +60,11 @@ declare class Glue extends Service {
    */
   batchGetPartition(callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
   /**
-   * Stops one or more job runs for a specified Job.
+   * Stops one or more job runs for a specified job definition.
    */
   batchStopJobRun(params: Glue.Types.BatchStopJobRunRequest, callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
-   * Stops one or more job runs for a specified Job.
+   * Stops one or more job runs for a specified job definition.
    */
   batchStopJobRun(callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class Glue extends Service {
    */
   createDevEndpoint(callback?: (err: AWSError, data: Glue.Types.CreateDevEndpointResponse) => void): Request<Glue.Types.CreateDevEndpointResponse, AWSError>;
   /**
-   * Creates a new job.
+   * Creates a new job definition.
    */
   createJob(params: Glue.Types.CreateJobRequest, callback?: (err: AWSError, data: Glue.Types.CreateJobResponse) => void): Request<Glue.Types.CreateJobResponse, AWSError>;
   /**
-   * Creates a new job.
+   * Creates a new job definition.
    */
   createJob(callback?: (err: AWSError, data: Glue.Types.CreateJobResponse) => void): Request<Glue.Types.CreateJobResponse, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class Glue extends Service {
    */
   deleteDevEndpoint(callback?: (err: AWSError, data: Glue.Types.DeleteDevEndpointResponse) => void): Request<Glue.Types.DeleteDevEndpointResponse, AWSError>;
   /**
-   * Deletes a specified job. If the job is not found, no exception is thrown.
+   * Deletes a specified job definition. If the job definition is not found, no exception is thrown.
    */
   deleteJob(params: Glue.Types.DeleteJobRequest, callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
-   * Deletes a specified job. If the job is not found, no exception is thrown.
+   * Deletes a specified job definition. If the job definition is not found, no exception is thrown.
    */
   deleteJob(callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
@@ -364,19 +364,19 @@ declare class Glue extends Service {
    */
   getJobRun(callback?: (err: AWSError, data: Glue.Types.GetJobRunResponse) => void): Request<Glue.Types.GetJobRunResponse, AWSError>;
   /**
-   * Retrieves metadata for all runs of a given job.
+   * Retrieves metadata for all runs of a given job definition.
    */
   getJobRuns(params: Glue.Types.GetJobRunsRequest, callback?: (err: AWSError, data: Glue.Types.GetJobRunsResponse) => void): Request<Glue.Types.GetJobRunsResponse, AWSError>;
   /**
-   * Retrieves metadata for all runs of a given job.
+   * Retrieves metadata for all runs of a given job definition.
    */
   getJobRuns(callback?: (err: AWSError, data: Glue.Types.GetJobRunsResponse) => void): Request<Glue.Types.GetJobRunsResponse, AWSError>;
   /**
-   * Retrieves all current jobs.
+   * Retrieves all current job definitions.
    */
   getJobs(params: Glue.Types.GetJobsRequest, callback?: (err: AWSError, data: Glue.Types.GetJobsResponse) => void): Request<Glue.Types.GetJobsResponse, AWSError>;
   /**
-   * Retrieves all current jobs.
+   * Retrieves all current job definitions.
    */
   getJobs(callback?: (err: AWSError, data: Glue.Types.GetJobsResponse) => void): Request<Glue.Types.GetJobsResponse, AWSError>;
   /**
@@ -508,11 +508,11 @@ declare class Glue extends Service {
    */
   startCrawlerSchedule(callback?: (err: AWSError, data: Glue.Types.StartCrawlerScheduleResponse) => void): Request<Glue.Types.StartCrawlerScheduleResponse, AWSError>;
   /**
-   * Runs a job.
+   * Starts a job run using a job definition.
    */
   startJobRun(params: Glue.Types.StartJobRunRequest, callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
   /**
-   * Runs a job.
+   * Starts a job run using a job definition.
    */
   startJobRun(callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
   /**
@@ -646,6 +646,10 @@ declare namespace Glue {
      * Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
+    /**
+     * The job run timeout in minutes. It overrides the timeout value of the job.
+     */
+    Timeout?: Timeout;
   }
   export type ActionList = Action[];
   export type AttemptCount = number;
@@ -795,11 +799,11 @@ declare namespace Glue {
   export type BatchGetPartitionValueList = PartitionValueList[];
   export interface BatchStopJobRunError {
     /**
-     * The name of the Job in question.
+     * The name of the job definition used in the job run in question.
      */
     JobName?: NameString;
     /**
-     * The JobRunId of the JobRun in question.
+     * The JobRunId of the job run in question.
      */
     JobRunId?: IdString;
     /**
@@ -811,11 +815,11 @@ declare namespace Glue {
   export type BatchStopJobRunJobRunIdList = IdString[];
   export interface BatchStopJobRunRequest {
     /**
-     * The name of the Job in question.
+     * The name of the job definition for which to stop job runs.
      */
     JobName: NameString;
     /**
-     * A list of the JobRunIds that should be stopped for that Job.
+     * A list of the JobRunIds that should be stopped for that job definition.
      */
     JobRunIds: BatchStopJobRunJobRunIdList;
   }
@@ -831,11 +835,11 @@ declare namespace Glue {
   }
   export interface BatchStopJobRunSuccessfulSubmission {
     /**
-     * The Name of the Job in question.
+     * The name of the job definition used in the job run that was stopped.
      */
     JobName?: NameString;
     /**
-     * The JobRunId of the JobRun in question.
+     * The JobRunId of the job run that was stopped.
      */
     JobRunId?: IdString;
   }
@@ -967,7 +971,7 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED and FAILED.
+     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED.
      */
     State?: JobRunState;
   }
@@ -1358,11 +1362,11 @@ declare namespace Glue {
   }
   export interface CreateJobRequest {
     /**
-     * The name you assign to this job. It must be unique in your account.
+     * The name you assign to this job definition. It must be unique in your account.
      */
     Name: NameString;
     /**
-     * Description of the job.
+     * Description of the job being defined.
      */
     Description?: DescriptionString;
     /**
@@ -1370,7 +1374,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name of the IAM role associated with this job.
+     * The name or ARN of the IAM role associated with this job.
      */
     Role: RoleString;
     /**
@@ -1397,10 +1401,14 @@ declare namespace Glue {
      * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
+    /**
+     * The job timeout in minutes. The default is 2880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
   }
   export interface CreateJobResponse {
     /**
-     * The unique name that was provided.
+     * The unique name that was provided for this job definition.
      */
     Name?: NameString;
   }
@@ -1499,6 +1507,10 @@ declare namespace Glue {
      * A description of the new trigger.
      */
     Description?: DescriptionString;
+    /**
+     * Set to true to start SCHEDULED and CONDITIONAL triggers when created. True not supported for ON_DEMAND triggers.
+     */
+    StartOnCreation?: BooleanValue;
   }
   export interface CreateTriggerResponse {
     /**
@@ -1634,13 +1646,13 @@ declare namespace Glue {
   }
   export interface DeleteJobRequest {
     /**
-     * The name of the job to delete.
+     * The name of the job definition to delete.
      */
     JobName: NameString;
   }
   export interface DeleteJobResponse {
     /**
-     * The name of the job that was deleted.
+     * The name of the job definition that was deleted.
      */
     JobName?: NameString;
   }
@@ -1833,7 +1845,7 @@ declare namespace Glue {
   export type ErrorString = string;
   export interface ExecutionProperty {
     /**
-     * The maximum number of concurrent runs allowed for a job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
+     * The maximum number of concurrent runs allowed for the job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
      */
     MaxConcurrentRuns?: MaxConcurrentRuns;
   }
@@ -2086,7 +2098,7 @@ declare namespace Glue {
   }
   export interface GetJobRequest {
     /**
-     * The name of the job to retrieve.
+     * The name of the job definition to retrieve.
      */
     JobName: NameString;
   }
@@ -2098,7 +2110,7 @@ declare namespace Glue {
   }
   export interface GetJobRunRequest {
     /**
-     * Name of the job being run.
+     * Name of the job definition being run.
      */
     JobName: NameString;
     /**
@@ -2118,7 +2130,7 @@ declare namespace Glue {
   }
   export interface GetJobRunsRequest {
     /**
-     * The name of the job for which to retrieve all job runs.
+     * The name of the job definition for which to retrieve all job runs.
      */
     JobName: NameString;
     /**
@@ -2152,11 +2164,11 @@ declare namespace Glue {
   }
   export interface GetJobsResponse {
     /**
-     * A list of jobs.
+     * A list of job definitions.
      */
     Jobs?: JobList;
     /**
-     * A continuation token, if not all jobs have yet been returned.
+     * A continuation token, if not all job definitions have yet been returned.
      */
     NextToken?: GenericString;
   }
@@ -2533,11 +2545,11 @@ declare namespace Glue {
   export type JdbcTargetList = JdbcTarget[];
   export interface Job {
     /**
-     * The name you assign to this job.
+     * The name you assign to this job definition.
      */
     Name?: NameString;
     /**
-     * Description of this job.
+     * Description of the job being defined.
      */
     Description?: DescriptionString;
     /**
@@ -2545,15 +2557,15 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name of the IAM role associated with this job.
+     * The name or ARN of the IAM role associated with this job.
      */
     Role?: RoleString;
     /**
-     * The time and date that this job specification was created.
+     * The time and date that this job definition was created.
      */
     CreatedOn?: TimestampValue;
     /**
-     * The last point in time when this job specification was modified.
+     * The last point in time when this job definition was modified.
      */
     LastModifiedOn?: TimestampValue;
     /**
@@ -2573,13 +2585,17 @@ declare namespace Glue {
      */
     Connections?: ConnectionsList;
     /**
-     * The maximum number of times to retry this job if it fails.
+     * The maximum number of times to retry this job after a JobRun fails.
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of AWS Glue data processing units (DPUs) allocated to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
+    /**
+     * The job timeout in minutes.
+     */
+    Timeout?: Timeout;
   }
   export interface JobBookmarkEntry {
     /**
@@ -2633,7 +2649,7 @@ declare namespace Glue {
      */
     TriggerName?: NameString;
     /**
-     * The name of the job being run.
+     * The name of the job definition being used in this run.
      */
     JobName?: NameString;
     /**
@@ -2668,12 +2684,20 @@ declare namespace Glue {
      * The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
+    /**
+     * The amount of time (in seconds) that the job run consumed resources.
+     */
+    ExecutionTime?: IntegerValue;
+    /**
+     * The job run timeout in minutes.
+     */
+    Timeout?: Timeout;
   }
   export type JobRunList = JobRun[];
-  export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|string;
+  export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
   export interface JobUpdate {
     /**
-     * Description of the job.
+     * Description of the job being defined.
      */
     Description?: DescriptionString;
     /**
@@ -2681,7 +2705,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name of the IAM role associated with this job (required).
+     * The name or ARN of the IAM role associated with this job (required).
      */
     Role?: RoleString;
     /**
@@ -2708,6 +2732,10 @@ declare namespace Glue {
      * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
+    /**
+     * The job timeout in minutes. The default is 2880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
   }
   export interface JsonClassifier {
     /**
@@ -2922,7 +2950,7 @@ declare namespace Glue {
   }
   export interface Predecessor {
     /**
-     * The name of the predecessor job.
+     * The name of the job definition used by the predecessor job run.
      */
     JobName?: NameString;
     /**
@@ -2933,7 +2961,7 @@ declare namespace Glue {
   export type PredecessorList = Predecessor[];
   export interface Predicate {
     /**
-     * Currently "OR" is not supported.
+     * Optional field if only one condition is listed. If multiple conditions are listed, then this field is required.
      */
     Logical?: Logical;
     /**
@@ -3064,7 +3092,7 @@ declare namespace Glue {
   }
   export interface StartJobRunRequest {
     /**
-     * The name of the job to start.
+     * The name of the job definition to use.
      */
     JobName: NameString;
     /**
@@ -3072,13 +3100,17 @@ declare namespace Glue {
      */
     JobRunId?: IdString;
     /**
-     * The job arguments specifically for this run. They override the equivalent default arguments set for the job itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments specifically for this run. They override the equivalent default arguments set for in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
      * The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
+    /**
+     * The job run timeout in minutes. It overrides the timeout value of the job.
+     */
+    Timeout?: Timeout;
   }
   export interface StartJobRunResponse {
     /**
@@ -3333,6 +3365,7 @@ declare namespace Glue {
     ErrorDetail?: ErrorDetail;
   }
   export type TableVersionErrors = TableVersionError[];
+  export type Timeout = number;
   export type Timestamp = Date;
   export type TimestampValue = Date;
   export type Token = string;
@@ -3546,13 +3579,13 @@ declare namespace Glue {
      */
     JobName: NameString;
     /**
-     * Specifies the values with which to update the job.
+     * Specifies the values with which to update the job definition.
      */
     JobUpdate: JobUpdate;
   }
   export interface UpdateJobResponse {
     /**
-     * Returns the name of the updated job.
+     * Returns the name of the updated job definition.
      */
     JobName?: NameString;
   }

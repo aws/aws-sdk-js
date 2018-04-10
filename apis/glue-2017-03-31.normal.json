@@ -120,7 +120,7 @@
         {"shape":"InternalServiceException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Stops one or more job runs for a specified Job.</p>"
+      "documentation":"<p>Stops one or more job runs for a specified job definition.</p>"
     },
     "CreateClassifier":{
       "name":"CreateClassifier",
@@ -223,7 +223,7 @@
         {"shape":"ResourceNumberLimitExceededException"},
         {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Creates a new job.</p>"
+      "documentation":"<p>Creates a new job definition.</p>"
     },
     "CreatePartition":{
       "name":"CreatePartition",
@@ -402,7 +402,7 @@
         {"shape":"InternalServiceException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Deletes a specified job. If the job is not found, no exception is thrown.</p>"
+      "documentation":"<p>Deletes a specified job definition. If the job definition is not found, no exception is thrown.</p>"
     },
     "DeletePartition":{
       "name":"DeletePartition",
@@ -717,7 +717,7 @@
         {"shape":"InternalServiceException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Retrieves metadata for all runs of a given job.</p>"
+      "documentation":"<p>Retrieves metadata for all runs of a given job definition.</p>"
     },
     "GetJobs":{
       "name":"GetJobs",
@@ -733,7 +733,7 @@
         {"shape":"InternalServiceException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Retrieves all current jobs.</p>"
+      "documentation":"<p>Retrieves all current job definitions.</p>"
     },
     "GetMapping":{
       "name":"GetMapping",
@@ -1004,7 +1004,7 @@
         {"shape":"ResourceNumberLimitExceededException"},
         {"shape":"ConcurrentRunsExceededException"}
       ],
-      "documentation":"<p>Runs a job.</p>"
+      "documentation":"<p>Starts a job run using a job definition.</p>"
     },
     "StartTrigger":{
       "name":"StartTrigger",
@@ -1277,7 +1277,11 @@
         },
         "Arguments":{
           "shape":"GenericMap",
-          "documentation":"<p>Arguments to be passed to the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+          "documentation":"<p>Arguments to be passed to the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+        },
+        "Timeout":{
+          "shape":"Timeout",
+          "documentation":"<p>The job run timeout in minutes. It overrides the timeout value of the job.</p>"
         }
       },
       "documentation":"<p>Defines an action to be initiated by a trigger.</p>"
@@ -1528,18 +1532,18 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the Job in question.</p>"
+          "documentation":"<p>The name of the job definition used in the job run in question.</p>"
         },
         "JobRunId":{
           "shape":"IdString",
-          "documentation":"<p>The JobRunId of the JobRun in question.</p>"
+          "documentation":"<p>The JobRunId of the job run in question.</p>"
         },
         "ErrorDetail":{
           "shape":"ErrorDetail",
           "documentation":"<p>Specifies details about the error that was encountered.</p>"
         }
       },
-      "documentation":"<p>Records an error that occurred when attempting to stop a specified JobRun.</p>"
+      "documentation":"<p>Records an error that occurred when attempting to stop a specified job run.</p>"
     },
     "BatchStopJobRunErrorList":{
       "type":"list",
@@ -1560,11 +1564,11 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the Job in question.</p>"
+          "documentation":"<p>The name of the job definition for which to stop job runs.</p>"
         },
         "JobRunIds":{
           "shape":"BatchStopJobRunJobRunIdList",
-          "documentation":"<p>A list of the JobRunIds that should be stopped for that Job.</p>"
+          "documentation":"<p>A list of the JobRunIds that should be stopped for that job definition.</p>"
         }
       }
     },
@@ -1586,11 +1590,11 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>The Name of the Job in question.</p>"
+          "documentation":"<p>The name of the job definition used in the job run that was stopped.</p>"
         },
         "JobRunId":{
           "shape":"IdString",
-          "documentation":"<p>The JobRunId of the JobRun in question.</p>"
+          "documentation":"<p>The JobRunId of the job run that was stopped.</p>"
         }
       },
       "documentation":"<p>Records a successful request to stop a specified JobRun.</p>"
@@ -1842,7 +1846,7 @@
         },
         "State":{
           "shape":"JobRunState",
-          "documentation":"<p>The condition state. Currently, the values supported are SUCCEEDED, STOPPED and FAILED.</p>"
+          "documentation":"<p>The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED.</p>"
         }
       },
       "documentation":"<p>Defines a condition under which a trigger fires.</p>"
@@ -2406,11 +2410,11 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>The name you assign to this job. It must be unique in your account.</p>"
+          "documentation":"<p>The name you assign to this job definition. It must be unique in your account.</p>"
         },
         "Description":{
           "shape":"DescriptionString",
-          "documentation":"<p>Description of the job.</p>"
+          "documentation":"<p>Description of the job being defined.</p>"
         },
         "LogUri":{
           "shape":"UriString",
@@ -2418,7 +2422,7 @@
         },
         "Role":{
           "shape":"RoleString",
-          "documentation":"<p>The name of the IAM role associated with this job.</p>"
+          "documentation":"<p>The name or ARN of the IAM role associated with this job.</p>"
         },
         "ExecutionProperty":{
           "shape":"ExecutionProperty",
@@ -2430,7 +2434,7 @@
         },
         "DefaultArguments":{
           "shape":"GenericMap",
-          "documentation":"<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+          "documentation":"<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
         },
         "Connections":{
           "shape":"ConnectionsList",
@@ -2443,6 +2447,10 @@
         "AllocatedCapacity":{
           "shape":"IntegerValue",
           "documentation":"<p>The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>"
+        },
+        "Timeout":{
+          "shape":"Timeout",
+          "documentation":"<p>The job timeout in minutes. The default is 2880 minutes (48 hours).</p>"
         }
       }
     },
@@ -2451,7 +2459,7 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>The unique name that was provided.</p>"
+          "documentation":"<p>The unique name that was provided for this job definition.</p>"
         }
       }
     },
@@ -2591,6 +2599,10 @@
         "Description":{
           "shape":"DescriptionString",
           "documentation":"<p>A description of the new trigger.</p>"
+        },
+        "StartOnCreation":{
+          "shape":"BooleanValue",
+          "documentation":"<p>Set to true to start SCHEDULED and CONDITIONAL triggers when created. True not supported for ON_DEMAND triggers.</p>"
         }
       }
     },
@@ -2824,7 +2836,7 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the job to delete.</p>"
+          "documentation":"<p>The name of the job definition to delete.</p>"
         }
       }
     },
@@ -2833,7 +2845,7 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the job that was deleted.</p>"
+          "documentation":"<p>The name of the job definition that was deleted.</p>"
         }
       }
     },
@@ -3118,7 +3130,7 @@
       "members":{
         "MaxConcurrentRuns":{
           "shape":"MaxConcurrentRuns",
-          "documentation":"<p>The maximum number of concurrent runs allowed for a job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.</p>"
+          "documentation":"<p>The maximum number of concurrent runs allowed for the job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.</p>"
         }
       },
       "documentation":"<p>An execution property of a job.</p>"
@@ -3477,7 +3489,7 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the job to retrieve.</p>"
+          "documentation":"<p>The name of the job definition to retrieve.</p>"
         }
       }
     },
@@ -3499,7 +3511,7 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>Name of the job being run.</p>"
+          "documentation":"<p>Name of the job definition being run.</p>"
         },
         "RunId":{
           "shape":"IdString",
@@ -3526,7 +3538,7 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the job for which to retrieve all job runs.</p>"
+          "documentation":"<p>The name of the job definition for which to retrieve all job runs.</p>"
         },
         "NextToken":{
           "shape":"GenericString",
@@ -3569,11 +3581,11 @@
       "members":{
         "Jobs":{
           "shape":"JobList",
-          "documentation":"<p>A list of jobs.</p>"
+          "documentation":"<p>A list of job definitions.</p>"
         },
         "NextToken":{
           "shape":"GenericString",
-          "documentation":"<p>A continuation token, if not all jobs have yet been returned.</p>"
+          "documentation":"<p>A continuation token, if not all job definitions have yet been returned.</p>"
         }
       }
     },
@@ -4135,11 +4147,11 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>The name you assign to this job.</p>"
+          "documentation":"<p>The name you assign to this job definition.</p>"
         },
         "Description":{
           "shape":"DescriptionString",
-          "documentation":"<p>Description of this job.</p>"
+          "documentation":"<p>Description of the job being defined.</p>"
         },
         "LogUri":{
           "shape":"UriString",
@@ -4147,15 +4159,15 @@
         },
         "Role":{
           "shape":"RoleString",
-          "documentation":"<p>The name of the IAM role associated with this job.</p>"
+          "documentation":"<p>The name or ARN of the IAM role associated with this job.</p>"
         },
         "CreatedOn":{
           "shape":"TimestampValue",
-          "documentation":"<p>The time and date that this job specification was created.</p>"
+          "documentation":"<p>The time and date that this job definition was created.</p>"
         },
         "LastModifiedOn":{
           "shape":"TimestampValue",
-          "documentation":"<p>The last point in time when this job specification was modified.</p>"
+          "documentation":"<p>The last point in time when this job definition was modified.</p>"
         },
         "ExecutionProperty":{
           "shape":"ExecutionProperty",
@@ -4167,7 +4179,7 @@
         },
         "DefaultArguments":{
           "shape":"GenericMap",
-          "documentation":"<p>The default arguments for this job, specified as name-value pairs.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+          "documentation":"<p>The default arguments for this job, specified as name-value pairs.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
         },
         "Connections":{
           "shape":"ConnectionsList",
@@ -4175,14 +4187,18 @@
         },
         "MaxRetries":{
           "shape":"MaxRetries",
-          "documentation":"<p>The maximum number of times to retry this job if it fails.</p>"
+          "documentation":"<p>The maximum number of times to retry this job after a JobRun fails.</p>"
         },
         "AllocatedCapacity":{
           "shape":"IntegerValue",
-          "documentation":"<p>The number of AWS Glue data processing units (DPUs) allocated to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>"
+          "documentation":"<p>The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>"
+        },
+        "Timeout":{
+          "shape":"Timeout",
+          "documentation":"<p>The job timeout in minutes.</p>"
         }
       },
-      "documentation":"<p>Specifies a job.</p>"
+      "documentation":"<p>Specifies a job definition.</p>"
     },
     "JobBookmarkEntry":{
       "type":"structure",
@@ -4222,7 +4238,7 @@
           "documentation":"<p>Specifies the S3 path to a script that executes a job (required).</p>"
         }
       },
-      "documentation":"<p>Specifies code that executes a job.</p>"
+      "documentation":"<p>Specifies code executed when a job is run.</p>"
     },
     "JobList":{
       "type":"list",
@@ -4250,7 +4266,7 @@
         },
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the job being run.</p>"
+          "documentation":"<p>The name of the job definition being used in this run.</p>"
         },
         "StartedOn":{
           "shape":"TimestampValue",
@@ -4270,7 +4286,7 @@
         },
         "Arguments":{
           "shape":"GenericMap",
-          "documentation":"<p>The job arguments associated with this run. These override equivalent default arguments set for the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+          "documentation":"<p>The job arguments associated with this run. These override equivalent default arguments set for the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
         },
         "ErrorMessage":{
           "shape":"ErrorString",
@@ -4283,6 +4299,14 @@
         "AllocatedCapacity":{
           "shape":"IntegerValue",
           "documentation":"<p>The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>"
+        },
+        "ExecutionTime":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The amount of time (in seconds) that the job run consumed resources.</p>"
+        },
+        "Timeout":{
+          "shape":"Timeout",
+          "documentation":"<p>The job run timeout in minutes.</p>"
         }
       },
       "documentation":"<p>Contains information about a job run.</p>"
@@ -4299,7 +4323,8 @@
         "STOPPING",
         "STOPPED",
         "SUCCEEDED",
-        "FAILED"
+        "FAILED",
+        "TIMEOUT"
       ]
     },
     "JobUpdate":{
@@ -4307,7 +4332,7 @@
       "members":{
         "Description":{
           "shape":"DescriptionString",
-          "documentation":"<p>Description of the job.</p>"
+          "documentation":"<p>Description of the job being defined.</p>"
         },
         "LogUri":{
           "shape":"UriString",
@@ -4315,7 +4340,7 @@
         },
         "Role":{
           "shape":"RoleString",
-          "documentation":"<p>The name of the IAM role associated with this job (required).</p>"
+          "documentation":"<p>The name or ARN of the IAM role associated with this job (required).</p>"
         },
         "ExecutionProperty":{
           "shape":"ExecutionProperty",
@@ -4327,7 +4352,7 @@
         },
         "DefaultArguments":{
           "shape":"GenericMap",
-          "documentation":"<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+          "documentation":"<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
         },
         "Connections":{
           "shape":"ConnectionsList",
@@ -4340,9 +4365,13 @@
         "AllocatedCapacity":{
           "shape":"IntegerValue",
           "documentation":"<p>The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>"
+        },
+        "Timeout":{
+          "shape":"Timeout",
+          "documentation":"<p>The job timeout in minutes. The default is 2880 minutes (48 hours).</p>"
         }
       },
-      "documentation":"<p>Specifies information used to update an existing job. Note that the previous job definition will be completely overwritten by this information.</p>"
+      "documentation":"<p>Specifies information used to update an existing job definition. Note that the previous job definition will be completely overwritten by this information.</p>"
     },
     "JsonClassifier":{
       "type":"structure",
@@ -4732,7 +4761,7 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the predecessor job.</p>"
+          "documentation":"<p>The name of the job definition used by the predecessor job run.</p>"
         },
         "RunId":{
           "shape":"IdString",
@@ -4750,7 +4779,7 @@
       "members":{
         "Logical":{
           "shape":"Logical",
-          "documentation":"<p>Currently \"OR\" is not supported.</p>"
+          "documentation":"<p>Optional field if only one condition is listed. If multiple conditions are listed, then this field is required.</p>"
         },
         "Conditions":{
           "shape":"ConditionList",
@@ -5025,7 +5054,7 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the job to start.</p>"
+          "documentation":"<p>The name of the job definition to use.</p>"
         },
         "JobRunId":{
           "shape":"IdString",
@@ -5033,11 +5062,15 @@
         },
         "Arguments":{
           "shape":"GenericMap",
-          "documentation":"<p>The job arguments specifically for this run. They override the equivalent default arguments set for the job itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+          "documentation":"<p>The job arguments specifically for this run. They override the equivalent default arguments set for in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
         },
         "AllocatedCapacity":{
           "shape":"IntegerValue",
           "documentation":"<p>The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>"
+        },
+        "Timeout":{
+          "shape":"Timeout",
+          "documentation":"<p>The job run timeout in minutes. It overrides the timeout value of the job.</p>"
         }
       }
     },
@@ -5370,6 +5403,11 @@
       "type":"list",
       "member":{"shape":"TableVersionError"}
     },
+    "Timeout":{
+      "type":"integer",
+      "box":true,
+      "min":1
+    },
     "Timestamp":{"type":"timestamp"},
     "TimestampValue":{"type":"timestamp"},
     "Token":{"type":"string"},
@@ -5687,7 +5725,7 @@
         },
         "JobUpdate":{
           "shape":"JobUpdate",
-          "documentation":"<p>Specifies the values with which to update the job.</p>"
+          "documentation":"<p>Specifies the values with which to update the job definition.</p>"
         }
       }
     },
@@ -5696,7 +5734,7 @@
       "members":{
         "JobName":{
           "shape":"NameString",
-          "documentation":"<p>Returns the name of the updated job.</p>"
+          "documentation":"<p>Returns the name of the updated job definition.</p>"
         }
       }
     },

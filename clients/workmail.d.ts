@@ -76,6 +76,14 @@ declare class WorkMail extends Service {
    */
   deleteGroup(callback?: (err: AWSError, data: WorkMail.Types.DeleteGroupResponse) => void): Request<WorkMail.Types.DeleteGroupResponse, AWSError>;
   /**
+   * Deletes permissions granted to a user or group.
+   */
+  deleteMailboxPermissions(params: WorkMail.Types.DeleteMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteMailboxPermissionsResponse) => void): Request<WorkMail.Types.DeleteMailboxPermissionsResponse, AWSError>;
+  /**
+   * Deletes permissions granted to a user or group.
+   */
+  deleteMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.DeleteMailboxPermissionsResponse) => void): Request<WorkMail.Types.DeleteMailboxPermissionsResponse, AWSError>;
+  /**
    * Deletes the specified resource. 
    */
   deleteResource(params: WorkMail.Types.DeleteResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteResourceResponse) => void): Request<WorkMail.Types.DeleteResourceResponse, AWSError>;
@@ -172,6 +180,14 @@ declare class WorkMail extends Service {
    */
   listGroups(callback?: (err: AWSError, data: WorkMail.Types.ListGroupsResponse) => void): Request<WorkMail.Types.ListGroupsResponse, AWSError>;
   /**
+   * Lists the mailbox permissions associated with a mailbox.
+   */
+  listMailboxPermissions(params: WorkMail.Types.ListMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMailboxPermissionsResponse) => void): Request<WorkMail.Types.ListMailboxPermissionsResponse, AWSError>;
+  /**
+   * Lists the mailbox permissions associated with a mailbox.
+   */
+  listMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.ListMailboxPermissionsResponse) => void): Request<WorkMail.Types.ListMailboxPermissionsResponse, AWSError>;
+  /**
    * Returns summaries of the customer's non-deleted organizations.
    */
   listOrganizations(params: WorkMail.Types.ListOrganizationsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListOrganizationsResponse) => void): Request<WorkMail.Types.ListOrganizationsResponse, AWSError>;
@@ -203,6 +219,14 @@ declare class WorkMail extends Service {
    * Returns summaries of the organization's users.
    */
   listUsers(callback?: (err: AWSError, data: WorkMail.Types.ListUsersResponse) => void): Request<WorkMail.Types.ListUsersResponse, AWSError>;
+  /**
+   * Sets permissions for a user or group. This replaces any pre-existing permissions set for the entity.
+   */
+  putMailboxPermissions(params: WorkMail.Types.PutMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.PutMailboxPermissionsResponse) => void): Request<WorkMail.Types.PutMailboxPermissionsResponse, AWSError>;
+  /**
+   * Sets permissions for a user or group. This replaces any pre-existing permissions set for the entity.
+   */
+  putMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.PutMailboxPermissionsResponse) => void): Request<WorkMail.Types.PutMailboxPermissionsResponse, AWSError>;
   /**
    * Registers an existing and disabled user, group, or resource/entity for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the entity is enabled and fails if the entity is deleted. This operation results in the accumulation of costs. For more information, see Pricing. The equivalent console functionality for this operation is Enable. Users can either be created by calling the CreateUser API or they can be synchronized from your directory. For more information, see DeregisterFromWorkMail.
    */
@@ -398,6 +422,22 @@ declare namespace WorkMail {
     GroupId: WorkMailIdentifier;
   }
   export interface DeleteGroupResponse {
+  }
+  export interface DeleteMailboxPermissionsRequest {
+    /**
+     * The identifier of the organization under which the entity (user or group) exists.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier of the entity (user or group) for which to delete mailbox permissions.
+     */
+    EntityId: WorkMailIdentifier;
+    /**
+     * The identifier of the entity (user or group) for which to delete granted permissions.
+     */
+    GranteeId: WorkMailIdentifier;
+  }
+  export interface DeleteMailboxPermissionsResponse {
   }
   export interface DeleteResourceRequest {
     /**
@@ -741,6 +781,34 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export interface ListMailboxPermissionsRequest {
+    /**
+     * The identifier of the organization under which the entity (user or group) exists.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier of the entity (user or group) for which to list mailbox permissions.
+     */
+    EntityId: WorkMailIdentifier;
+    /**
+     * The token to use to retrieve the next page of results. The first call does not contain any tokens.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListMailboxPermissionsResponse {
+    /**
+     * One page of the entity's mailbox permissions.
+     */
+    Permissions?: Permissions;
+    /**
+     * The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListOrganizationsRequest {
     /**
      * The token to use to retrieve the next page of results. The first call does not contain any tokens.
@@ -889,6 +957,43 @@ declare namespace WorkMail {
     State?: String;
   }
   export type Password = string;
+  export interface Permission {
+    /**
+     * The identifier of the entity (user or group) to which the permissions are granted.
+     */
+    GranteeId: WorkMailIdentifier;
+    /**
+     * The type of entity (user, group) of the entity referred to in GranteeId.
+     */
+    GranteeType: MemberType;
+    /**
+     * The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.
+     */
+    PermissionValues: PermissionValues;
+  }
+  export type PermissionType = "FULL_ACCESS"|"SEND_AS"|"SEND_ON_BEHALF"|string;
+  export type PermissionValues = PermissionType[];
+  export type Permissions = Permission[];
+  export interface PutMailboxPermissionsRequest {
+    /**
+     * The identifier of the organization under which the entity (user or group) exists.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier of the entity (user or group) for which to update mailbox permissions.
+     */
+    EntityId: WorkMailIdentifier;
+    /**
+     * The identifier of the entity (user or group) to which to grant the permissions.
+     */
+    GranteeId: WorkMailIdentifier;
+    /**
+     * The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.
+     */
+    PermissionValues: PermissionValues;
+  }
+  export interface PutMailboxPermissionsResponse {
+  }
   export interface RegisterToWorkMailRequest {
     /**
      * The identifier for the organization under which the Amazon WorkMail entity exists.

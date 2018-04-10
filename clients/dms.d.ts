@@ -12,11 +12,11 @@ declare class DMS extends Service {
   constructor(options?: DMS.Types.ClientConfiguration)
   config: Config & DMS.Types.ClientConfiguration;
   /**
-   * Adds metadata tags to a DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.
+   * Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.
    */
   addTagsToResource(params: DMS.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: DMS.Types.AddTagsToResourceResponse) => void): Request<DMS.Types.AddTagsToResourceResponse, AWSError>;
   /**
-   * Adds metadata tags to a DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.
+   * Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.
    */
   addTagsToResource(callback?: (err: AWSError, data: DMS.Types.AddTagsToResourceResponse) => void): Request<DMS.Types.AddTagsToResourceResponse, AWSError>;
   /**
@@ -484,7 +484,7 @@ declare namespace DMS {
      */
     EndpointType: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
+     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName: String;
     /**
@@ -528,11 +528,19 @@ declare namespace DMS {
      */
     SslMode?: DmsSslModeValue;
     /**
+     *  The Amazon Resource Name (ARN) for the service access role you want to use to create the endpoint. 
+     */
+    ServiceAccessRoleArn?: String;
+    /**
+     * The external table definition. 
+     */
+    ExternalTableDefinition?: String;
+    /**
      * Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the Using Object Mapping to Migrate Data to DynamoDB section at  Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service. 
      */
     DynamoDbSettings?: DynamoDbSettings;
     /**
-     * Settings in JSON format for the target S3 endpoint. For more information about the available settings, see the Extra Connection Attributes section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
+     * Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see the Extra Connection Attributes section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
      */
     S3Settings?: S3Settings;
     /**
@@ -548,7 +556,7 @@ declare namespace DMS {
   }
   export interface CreateEventSubscriptionMessage {
     /**
-     * The name of the DMS event notification subscription.  Constraints: The name must be less than 255 characters. 
+     * The name of the AWS DMS event notification subscription.  Constraints: The name must be less than 255 characters. 
      */
     SubscriptionName: String;
     /**
@@ -696,9 +704,17 @@ declare namespace DMS {
      */
     ReplicationTaskSettings?: String;
     /**
-     * The start time for the Change Data Capture (CDC) operation.
+     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
      */
     CdcStartTime?: TStamp;
+    /**
+     * Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.  The value can be in date, checkpoint, or LSN/SCN format. Date Example: --cdc-start-position “2018-03-08T12:12:12” Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93" LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+     */
+    CdcStartPosition?: String;
+    /**
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
+     */
+    CdcStopPosition?: String;
     /**
      * Tags to be added to the replication instance.
      */
@@ -1026,7 +1042,7 @@ declare namespace DMS {
      */
     ReplicationInstanceArn?: String;
     /**
-     * An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes).
+     * An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes). 
      */
     ReplicationInstanceTaskLogs?: ReplicationInstanceTaskLogsList;
     /**
@@ -1207,9 +1223,13 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
+     * The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName?: String;
+    /**
+     * The expanded name for the engine name. For example, if the EngineName parameter is "aurora," this value would be "Amazon Aurora MySQL."
+     */
+    EngineDisplayName?: String;
     /**
      * The user name used to connect to the endpoint.
      */
@@ -1250,6 +1270,14 @@ declare namespace DMS {
      * The SSL mode used to connect to the endpoint. SSL mode can be one of four values: none, require, verify-ca, verify-full.  The default value is none.
      */
     SslMode?: DmsSslModeValue;
+    /**
+     * The Amazon Resource Name (ARN) used by the service access IAM role.
+     */
+    ServiceAccessRoleArn?: String;
+    /**
+     * The external table definition.
+     */
+    ExternalTableDefinition?: String;
     /**
      *  Value returned by a call to CreateEndpoint that can be used for cross-account validation. Use it on a subsequent call to CreateEndpoint to create the endpoint with a cross-account. 
      */
@@ -1410,7 +1438,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
+     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName?: String;
     /**
@@ -1445,6 +1473,14 @@ declare namespace DMS {
      * The SSL mode to be used. SSL mode can be one of four values: none, require, verify-ca, verify-full.  The default value is none.
      */
     SslMode?: DmsSslModeValue;
+    /**
+     *  The Amazon Resource Name (ARN) for the service access role you want to use to modify the endpoint. 
+     */
+    ServiceAccessRoleArn?: String;
+    /**
+     * The external table definition.
+     */
+    ExternalTableDefinition?: String;
     /**
      * Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the Using Object Mapping to Migrate Data to DynamoDB section at  Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service. 
      */
@@ -1586,9 +1622,17 @@ declare namespace DMS {
      */
     ReplicationTaskSettings?: String;
     /**
-     * The start time for the Change Data Capture (CDC) operation.
+     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
      */
     CdcStartTime?: TStamp;
+    /**
+     * Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.  The value can be in date, checkpoint, or LSN/SCN format. Date Example: --cdc-start-position “2018-03-08T12:12:12” Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93" LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+     */
+    CdcStartPosition?: String;
+    /**
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
+     */
+    CdcStopPosition?: String;
   }
   export interface ModifyReplicationTaskResponse {
     /**
@@ -1641,6 +1685,10 @@ declare namespace DMS {
      *  The MongoDB database name. This attribute is not used when authType=NO.  The default is admin.
      */
     AuthSource?: String;
+    /**
+     *  The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. 
+     */
+    KmsKeyId?: String;
   }
   export type NestingLevelValue = "none"|"one"|string;
   export interface OrderableReplicationInstance {
@@ -1843,6 +1891,10 @@ declare namespace DMS {
      * The availability zone of the standby replication instance in a Multi-AZ deployment.
      */
     SecondaryAvailabilityZone?: String;
+    /**
+     *  The expiration date of the free replication instance that is part of the Free DMS program. 
+     */
+    FreeUntil?: TStamp;
   }
   export type ReplicationInstanceList = ReplicationInstance[];
   export type ReplicationInstancePrivateIpAddressList = String[];
@@ -1953,6 +2005,18 @@ declare namespace DMS {
      */
     ReplicationTaskStartDate?: TStamp;
     /**
+     * Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.  The value can be in date, checkpoint, or LSN/SCN format. Date Example: --cdc-start-position “2018-03-08T12:12:12” Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93" LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+     */
+    CdcStartPosition?: String;
+    /**
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
+     */
+    CdcStopPosition?: String;
+    /**
+     * Indicates the last checkpoint that occurred during a change data capture (CDC) operation. You can provide this value to the CdcStartPosition parameter to start a CDC operation that begins at that checkpoint.
+     */
+    RecoveryCheckpoint?: String;
+    /**
      * The Amazon Resource Name (ARN) of the replication task.
      */
     ReplicationTaskArn?: String;
@@ -2025,7 +2089,7 @@ declare namespace DMS {
      */
     ServiceAccessRoleArn?: String;
     /**
-     *  
+     *  The external table definition. 
      */
     ExternalTableDefinition?: String;
     /**
@@ -2075,9 +2139,17 @@ declare namespace DMS {
      */
     StartReplicationTaskType: StartReplicationTaskTypeValue;
     /**
-     * The start time for the Change Data Capture (CDC) operation.
+     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
      */
     CdcStartTime?: TStamp;
+    /**
+     * Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.  The value can be in date, checkpoint, or LSN/SCN format. Date Example: --cdc-start-position “2018-03-08T12:12:12” Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93" LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+     */
+    CdcStartPosition?: String;
+    /**
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
+     */
+    CdcStopPosition?: String;
   }
   export interface StartReplicationTaskResponse {
     /**
@@ -2117,7 +2189,7 @@ declare namespace DMS {
   export type SubnetList = Subnet[];
   export interface SupportedEndpointType {
     /**
-     * The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
+     * The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName?: String;
     /**
@@ -2128,6 +2200,10 @@ declare namespace DMS {
      * The type of endpoint.
      */
     EndpointType?: ReplicationEndpointTypeValue;
+    /**
+     * The expanded name for the engine name. For example, if the EngineName parameter is "aurora," this value would be "Amazon Aurora MySQL."
+     */
+    EngineDisplayName?: String;
   }
   export type SupportedEndpointTypeList = SupportedEndpointType[];
   export type TStamp = Date;
