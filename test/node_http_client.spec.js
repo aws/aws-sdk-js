@@ -183,6 +183,121 @@
   }
 
   if (AWS.util.isNode()) {
+    //supplemental unit test for Node client integrityChecker.js
+    describe('Node client integrityChecker', function() {
+      var IntegrityCheckerStream = require('../lib/http/response-validator/integrityChecker');
+      var integrityCheckerStream;
+      var rawData;
+      var data;
+      var error;
+      beforeEach(function() {
+        integrityCheckerStream = new IntegrityCheckerStream('append-md5', 27);
+        //rawData is 'test string' with trailing md5 checksum
+        rawData = new Uint8Array([116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 111, 141, 181, 153, 222, 152, 111, 171, 122, 33, 98, 91, 121, 22, 88, 156]);
+        data = '';
+        error = null;
+      })
+    
+      it('should validate response data splitted in different chunks', function(done) {
+        if (AWS.HttpClient.streamApiVersion === 1) {
+          done();
+        }
+        var chunk1 = rawData.slice(0, 6);
+        var chunk2 = rawData.slice(6, 27);
+        integrityCheckerStream.on('readable', function() {
+          var chunk = integrityCheckerStream.read();
+          if (chunk) 
+            data += chunk.toString('utf8')
+        })
+        integrityCheckerStream.on('error', function(e) {
+          error = e;
+        });
+        integrityCheckerStream.on('end', function() {
+          expect(error).to.be['null'];
+          expect(data).to.equal('test string');
+          done();
+        })
+        integrityCheckerStream.write(new require('buffer').Buffer(chunk1));
+        integrityCheckerStream.write(new require('buffer').Buffer(chunk2));
+        integrityCheckerStream.end();
+      });
+    
+      it ('should faild when checksum is incorrect', function(done) {
+        if (AWS.HttpClient.streamApiVersion === 1) {
+          done();
+        }
+        rawData[0] =  0;
+        var chunk1 = rawData.slice(0, 6);
+        var chunk2 = rawData.slice(6, 27);
+        integrityCheckerStream.on('readable', function() {
+          var chunk = integrityCheckerStream.read();
+          if (chunk) 
+            data += chunk.toString('utf8')
+        })
+        integrityCheckerStream.on('error', function(e) {
+          error = e;
+          expect(error.code).to.equal('ResponseChecksumMismatch');
+          done();
+        });
+        integrityCheckerStream.on('end', function() {
+          expect(error).to.not.be['null'];
+        })
+        integrityCheckerStream.write(new require('buffer').Buffer(chunk1));
+        integrityCheckerStream.write(new require('buffer').Buffer(chunk2));
+        integrityCheckerStream.end();
+      })
+    
+      it('should validate response when checksum is splitted in different chunks', function(done) {
+        if (AWS.HttpClient.streamApiVersion === 1) {
+          done();
+        }
+        var chunk1 = rawData.slice(0, 20);
+        var chunk2 = rawData.slice(20);
+        integrityCheckerStream.on('readable', function() {
+          var chunk = integrityCheckerStream.read();
+          if (chunk) 
+            data += chunk.toString('utf8')
+        })
+        integrityCheckerStream.on('error', function(e) {
+          error = e;
+        });
+        integrityCheckerStream.on('end', function() {
+          expect(error).to.be['null'];
+          expect(data).to.equal('test string');
+          done();
+        })
+        integrityCheckerStream.write(new require('buffer').Buffer(chunk1));
+        integrityCheckerStream.write(new require('buffer').Buffer(chunk2));
+        integrityCheckerStream.end();
+      })
+    
+      it('should validate response when splitted in 3 chunks and checksum is splitted in different chunks', function(done) {
+        if (AWS.HttpClient.streamApiVersion === 1) {
+          done();
+        }
+        var chunk0 = rawData.slice(0, 11);
+        var chunk1 = rawData.slice(11, 20);
+        var chunk2 = rawData.slice(20);
+        integrityCheckerStream.on('readable', function() {
+          var chunk = integrityCheckerStream.read();
+          if (chunk) 
+            data += chunk.toString('utf8')
+        })
+        integrityCheckerStream.on('error', function(e) {
+          error = e;
+        });
+        integrityCheckerStream.on('end', function() {
+          expect(error).to.be['null'];
+          expect(data).to.equal('test string');
+          done();
+        })
+        integrityCheckerStream.write(new require('buffer').Buffer(chunk0));
+        integrityCheckerStream.write(new require('buffer').Buffer(chunk1));
+        integrityCheckerStream.write(new require('buffer').Buffer(chunk2));
+        integrityCheckerStream.end();
+      })
+    })
+
     describe('validate Trailing Checksum (Node)', function() {
       var app;
       var data;
@@ -288,7 +403,7 @@
             error = e;
             expect(error).to.not.be['null'];
             expect(error.code).to.equal('UnsupportedHashingAlgorithm');
-            expect(error.message).to.equal('Cannot validate response header: append-crc32c, expect \'append-md5\'');
+            expect(error.message).to.equal('Cannot validate response header: append-crc32c, expected \'append-md5\'');
             done();
           });
           s.on('readable', function() {
@@ -403,7 +518,7 @@
             expect(data).to.be['null'];
             expect(err).to.not.be['null'];
             expect(err.code).to.equal('UnsupportedHashingAlgorithm');
-            expect(err.message).to.equal('Cannot validate response header: append-crc32c, expect \'append-md5\'');
+            expect(err.message).to.equal('Cannot validate response header: append-crc32c, expected \'append-md5\'');
             expect(request.response.retryCount).to.equal(3);
             done();
           })
