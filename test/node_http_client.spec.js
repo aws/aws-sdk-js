@@ -183,6 +183,7 @@
   }
 
   if (AWS.util.isNode()) {
+    var uintArraySliceFn = helpers.uintArraySliceFn;
     //supplemental unit test for Node client integrityChecker.js
     describe('Node client integrityChecker', function() {
       var IntegrityCheckerStream = require('../lib/http/response-validator/integrityChecker');
@@ -202,8 +203,8 @@
         if (AWS.HttpClient.streamApiVersion === 1) {
           done();
         }
-        var chunk1 = rawData.slice(0, 6);
-        var chunk2 = rawData.slice(6, 27);
+        var chunk1 = typeof rawData.slice === 'function' ? rawData.slice(0, 6) : uintArraySliceFn.call(rawData, 0, 6);
+        var chunk2 = typeof rawData.slice === 'function' ? rawData.slice(6, 27) : uintArraySliceFn.call(rawData, 6, 27);
         integrityCheckerStream.on('readable', function() {
           var chunk = integrityCheckerStream.read();
           if (chunk) 
@@ -227,8 +228,8 @@
           done();
         }
         rawData[0] =  0;
-        var chunk1 = rawData.slice(0, 6);
-        var chunk2 = rawData.slice(6, 27);
+        var chunk1 = typeof rawData.slice === 'function' ? rawData.slice(0, 6) : uintArraySliceFn.call(rawData, 0, 6);
+        var chunk2 = typeof rawData.slice === 'function' ? rawData.slice(6, 27) : uintArraySliceFn.call(rawData, 6, 27);
         integrityCheckerStream.on('readable', function() {
           var chunk = integrityCheckerStream.read();
           if (chunk) 
@@ -251,8 +252,8 @@
         if (AWS.HttpClient.streamApiVersion === 1) {
           done();
         }
-        var chunk1 = rawData.slice(0, 20);
-        var chunk2 = rawData.slice(20);
+        var chunk1 = typeof rawData.slice === 'function' ? rawData.slice(0, 20) : uintArraySliceFn.call(rawData, 0, 20);
+        var chunk2 = typeof rawData.slice === 'function' ? rawData.slice(20) : uintArraySliceFn.call(rawData, 20);
         integrityCheckerStream.on('readable', function() {
           var chunk = integrityCheckerStream.read();
           if (chunk) 
@@ -275,9 +276,9 @@
         if (AWS.HttpClient.streamApiVersion === 1) {
           done();
         }
-        var chunk0 = rawData.slice(0, 11);
-        var chunk1 = rawData.slice(11, 20);
-        var chunk2 = rawData.slice(20);
+        var chunk0 = typeof rawData.slice === 'function' ? rawData.slice(0, 11) : uintArraySliceFn.call(rawData, 0, 11);
+        var chunk1 = typeof rawData.slice === 'function' ? rawData.slice(11, 20) : uintArraySliceFn.call(rawData, 11, 20);
+        var chunk2 = typeof rawData.slice === 'function' ? rawData.slice(20) : uintArraySliceFn.call(rawData, 20);
         integrityCheckerStream.on('readable', function() {
           var chunk = integrityCheckerStream.read();
           if (chunk) 
@@ -519,7 +520,7 @@
             expect(err).to.not.be['null'];
             expect(err.code).to.equal('UnsupportedHashingAlgorithm');
             expect(err.message).to.equal('Cannot validate response header: append-crc32c, expected \'append-md5\'');
-            expect(request.response.retryCount).to.equal(3);
+            expect(request.response.retryCount).to.equal(0);
             done();
           })
         });
@@ -560,10 +561,10 @@
               'x-amz-transfer-encoding': 'append-md5',
               'content-length': 11,
             });
-            rawData = rawData.slice(0, 11);
-            responseData = new require('buffer').Buffer(rawData);
+            var chunk1 = typeof rawData.slice === 'function' ? rawData.slice(0, 11) : uintArraySliceFn.call(rawData, 0, 11);
+            responseData = new require('buffer').Buffer(chunk1);
             resp.write(responseData);
-            return resp.end();
+            return resp.end(); 
           };
           var request = service.makeRequest('mockMethod')
           request.send(function(err, data) {
