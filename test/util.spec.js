@@ -688,7 +688,7 @@
         e: 5
       });
     });
-    return it('should return the merged object', function() {
+    it('should return the merged object', function() {
       var obj;
       obj = {
         a: 1,
@@ -696,8 +696,20 @@
       };
       return expect(AWS.util.update(obj, {
         c: 3
-      })).to.equal(obj);
+      })).to.eql({a: 1, b: 2, c: 3});
     });
+    it('should merge an object into undefined object', function() {
+      var obj;
+      expect(AWS.util.update(obj, {
+        a: 1,
+        b: 2,
+        c: 3
+      })).to.eql({
+        a: 1,
+        b: 2,
+        c: 3
+      })
+    })
   });
 
   describe('AWS.util.inherit', function() {
