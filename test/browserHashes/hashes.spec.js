@@ -1,8 +1,8 @@
 var Buffer = require('buffer/').Buffer;
-var Hmac = require('../lib/browserHmac');
-var Md5 = require('../lib/browserMd5');
-var Sha1 = require('../lib/browserSha1');
-var Sha256 = require('../lib/browserSha256');
+var Hmac = require('../../lib/browserHmac');
+var Md5 = require('../../lib/browserMd5');
+var Sha1 = require('../../lib/browserSha1');
+var Sha256 = require('../../lib/browserSha256');
 var hashVectors = require('hash-test-vectors');
 var hmacVectors = require('hash-test-vectors/hmac');
 
@@ -21,7 +21,7 @@ describe('Browser hash implementations', function() {
                     return function() {
                         var hash = new ctor();
                         hash.update(input);
-                        expect(hash.digest()).to.eql(new Buffer(expected, 'hex'));
+                        expect(hash.digest('hex')).to.equal(expected);
                     }
                 })(
                     new Buffer(hashVectors[i].input, 'base64'),
@@ -43,11 +43,7 @@ describe('Browser hash implementations', function() {
                         if (truncate) {
                             digest = digest.slice(0, truncate);
                         }
-                        //in node <= 0.10 digest sometimes returns a Dataview, should be buffer.
-                        if (digest.toString() === '[object Uint8Array]') {
-                            digest = new Buffer(digest);
-                        }
-                        expect(digest).to.eql(new Buffer(expected, 'hex'));
+                        expect(digest.toString('hex')).to.equal(expected);
                     }
                 })(
                     new Buffer(hmacVectors[i].key, 'hex'),

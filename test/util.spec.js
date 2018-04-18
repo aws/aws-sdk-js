@@ -640,7 +640,7 @@
   });
 
   describe('AWS.util.merge', function() {
-    return it('should merge an object into another and return new object', function() {
+    it('should merge an object into another and return new object', function() {
       var newObj, obj;
       obj = {
         a: 1,
@@ -698,18 +698,6 @@
         c: 3
       })).to.eql({a: 1, b: 2, c: 3});
     });
-    it('should merge an object into undefined object', function() {
-      var obj;
-      expect(AWS.util.update(obj, {
-        a: 1,
-        b: 2,
-        c: 3
-      })).to.eql({
-        a: 1,
-        b: 2,
-        c: 3
-      })
-    })
   });
 
   describe('AWS.util.inherit', function() {
