@@ -1108,6 +1108,7 @@ declare namespace CodePipeline {
      * The date and time of the last change to the pipeline execution, in timestamp format.
      */
     lastUpdateTime?: Timestamp;
+    sourceRevisions?: SourceRevisionList;
   }
   export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
   export type PipelineList = PipelineSummary[];
@@ -1345,6 +1346,13 @@ declare namespace CodePipeline {
   export type S3ObjectKey = string;
   export type SecretAccessKey = string;
   export type SessionToken = string;
+  export interface SourceRevision {
+    actionName: ActionName;
+    revisionId?: Revision;
+    revisionSummary?: RevisionSummary;
+    revisionUrl?: Url;
+  }
+  export type SourceRevisionList = SourceRevision[];
   export type StageActionDeclarationList = ActionDeclaration[];
   export type StageBlockerDeclarationList = BlockerDeclaration[];
   export interface StageContext {

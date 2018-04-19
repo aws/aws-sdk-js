@@ -60,6 +60,14 @@ declare class DeviceFarm extends Service {
    */
   createUpload(callback?: (err: AWSError, data: DeviceFarm.Types.CreateUploadResult) => void): Request<DeviceFarm.Types.CreateUploadResult, AWSError>;
   /**
+   * Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  createVPCEConfiguration(params: DeviceFarm.Types.CreateVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.CreateVPCEConfigurationResult, AWSError>;
+  /**
+   * Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  createVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.CreateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.CreateVPCEConfigurationResult, AWSError>;
+  /**
    * Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
    */
   deleteDevicePool(params: DeviceFarm.Types.DeleteDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteDevicePoolResult) => void): Request<DeviceFarm.Types.DeleteDevicePoolResult, AWSError>;
@@ -115,6 +123,14 @@ declare class DeviceFarm extends Service {
    * Deletes an upload given the upload ARN.
    */
   deleteUpload(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteUploadResult) => void): Request<DeviceFarm.Types.DeleteUploadResult, AWSError>;
+  /**
+   * Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  deleteVPCEConfiguration(params: DeviceFarm.Types.DeleteVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteVPCEConfigurationResult) => void): Request<DeviceFarm.Types.DeleteVPCEConfigurationResult, AWSError>;
+  /**
+   * Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  deleteVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteVPCEConfigurationResult) => void): Request<DeviceFarm.Types.DeleteVPCEConfigurationResult, AWSError>;
   /**
    * Returns the number of unmetered iOS and/or unmetered Android devices that have been purchased by the account.
    */
@@ -235,6 +251,14 @@ declare class DeviceFarm extends Service {
    * Gets information about an upload.
    */
   getUpload(callback?: (err: AWSError, data: DeviceFarm.Types.GetUploadResult) => void): Request<DeviceFarm.Types.GetUploadResult, AWSError>;
+  /**
+   * Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  getVPCEConfiguration(params: DeviceFarm.Types.GetVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetVPCEConfigurationResult) => void): Request<DeviceFarm.Types.GetVPCEConfigurationResult, AWSError>;
+  /**
+   * Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  getVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.GetVPCEConfigurationResult) => void): Request<DeviceFarm.Types.GetVPCEConfigurationResult, AWSError>;
   /**
    * Installs an application to the device in a remote access session. For Android applications, the file must be in .apk format. For iOS applications, the file must be in .ipa format.
    */
@@ -388,6 +412,14 @@ declare class DeviceFarm extends Service {
    */
   listUploads(callback?: (err: AWSError, data: DeviceFarm.Types.ListUploadsResult) => void): Request<DeviceFarm.Types.ListUploadsResult, AWSError>;
   /**
+   * Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
+   */
+  listVPCEConfigurations(params: DeviceFarm.Types.ListVPCEConfigurationsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListVPCEConfigurationsResult) => void): Request<DeviceFarm.Types.ListVPCEConfigurationsResult, AWSError>;
+  /**
+   * Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
+   */
+  listVPCEConfigurations(callback?: (err: AWSError, data: DeviceFarm.Types.ListVPCEConfigurationsResult) => void): Request<DeviceFarm.Types.ListVPCEConfigurationsResult, AWSError>;
+  /**
    * Immediately purchases offerings for an AWS account. Offerings renew with the latest total purchased quantity for an offering, unless the renewal was overridden. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
   purchaseOffering(params: DeviceFarm.Types.PurchaseOfferingRequest, callback?: (err: AWSError, data: DeviceFarm.Types.PurchaseOfferingResult) => void): Request<DeviceFarm.Types.PurchaseOfferingResult, AWSError>;
@@ -467,6 +499,14 @@ declare class DeviceFarm extends Service {
    * Modifies the specified project name, given the project ARN and a new name.
    */
   updateProject(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateProjectResult) => void): Request<DeviceFarm.Types.UpdateProjectResult, AWSError>;
+  /**
+   * Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.
+   */
+  updateVPCEConfiguration(params: DeviceFarm.Types.UpdateVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.UpdateVPCEConfigurationResult, AWSError>;
+  /**
+   * Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.
+   */
+  updateVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.UpdateVPCEConfigurationResult, AWSError>;
 }
 declare namespace DeviceFarm {
   export type AWSAccountNumber = string;
@@ -792,6 +832,30 @@ declare namespace DeviceFarm {
      */
     upload?: Upload;
   }
+  export interface CreateVPCEConfigurationRequest {
+    /**
+     * The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.
+     */
+    vpceConfigurationName: VPCEConfigurationName;
+    /**
+     * The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+     */
+    vpceServiceName: VPCEServiceName;
+    /**
+     * The DNS name of the service running in your VPC that you want Device Farm to test.
+     */
+    serviceDnsName: ServiceDnsName;
+    /**
+     * An optional description, providing more details about your VPC endpoint configuration.
+     */
+    vpceConfigurationDescription?: VPCEConfigurationDescription;
+  }
+  export interface CreateVPCEConfigurationResult {
+    /**
+     * An object containing information about your VPC endpoint configuration.
+     */
+    vpceConfiguration?: VPCEConfiguration;
+  }
   export type CurrencyCode = "USD"|string;
   export interface CustomerArtifactPaths {
     /**
@@ -863,6 +927,14 @@ declare namespace DeviceFarm {
     arn: AmazonResourceName;
   }
   export interface DeleteUploadResult {
+  }
+  export interface DeleteVPCEConfigurationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to delete.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface DeleteVPCEConfigurationResult {
   }
   export interface Device {
     /**
@@ -946,7 +1018,7 @@ declare namespace DeviceFarm {
      */
     instances?: DeviceInstances;
   }
-  export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"APPIUM_VERSION"|"INSTANCE_ARN"|"INSTANCE_LABELS"|string;
+  export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"APPIUM_VERSION"|"INSTANCE_ARN"|"INSTANCE_LABELS"|"FLEET_TYPE"|string;
   export type DeviceFormFactor = "PHONE"|"TABLET"|string;
   export type DeviceHostPaths = String[];
   export interface DeviceInstance {
@@ -1051,7 +1123,7 @@ declare namespace DeviceFarm {
     skipAppResign?: SkipAppResign;
   }
   export type ExecutionResult = "PENDING"|"PASSED"|"WARNED"|"FAILED"|"SKIPPED"|"ERRORED"|"STOPPED"|string;
-  export type ExecutionResultCode = "PARSING_FAILED"|string;
+  export type ExecutionResultCode = "PARSING_FAILED"|"VPC_ENDPOINT_SETUP_FAILED"|string;
   export type ExecutionStatus = "PENDING"|"PENDING_CONCURRENCY"|"PENDING_DEVICE"|"PROCESSING"|"SCHEDULING"|"PREPARING"|"RUNNING"|"COMPLETED"|"STOPPING"|string;
   export type Filter = string;
   export interface GetAccountSettingsRequest {
@@ -1091,6 +1163,10 @@ declare namespace DeviceFarm {
      * Information about the uploaded test to be run against the device pool.
      */
     test?: ScheduleRunTest;
+    /**
+     * An object containing information about the settings for a run.
+     */
+    configuration?: ScheduleRunConfiguration;
   }
   export interface GetDevicePoolCompatibilityResult {
     /**
@@ -1253,6 +1329,18 @@ declare namespace DeviceFarm {
      * An app or a set of one or more tests to upload or that have been uploaded.
      */
     upload?: Upload;
+  }
+  export interface GetVPCEConfigurationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to describe.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface GetVPCEConfigurationResult {
+    /**
+     * An object containing information about your VPC endpoint configuration.
+     */
+    vpceConfiguration?: VPCEConfiguration;
   }
   export type HostAddress = string;
   export interface IncompatibilityMessage {
@@ -1727,6 +1815,26 @@ declare namespace DeviceFarm {
     uploads?: Uploads;
     /**
      * If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListVPCEConfigurationsRequest {
+    /**
+     * An integer specifying the maximum number of items you want to return in the API response.
+     */
+    maxResults?: Integer;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListVPCEConfigurationsResult {
+    /**
+     * An array of VPCEConfiguration objects containing information about your VPC endpoint configuration.
+     */
+    vpceConfigurations?: VPCEConfigurations;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
   }
@@ -2283,6 +2391,10 @@ declare namespace DeviceFarm {
      */
     location?: Location;
     /**
+     * An array of Amazon Resource Names (ARNs) for your VPC endpoint configurations.
+     */
+    vpceConfigurationArns?: AmazonResourceNames;
+    /**
      * Input CustomerArtifactPaths object for the scheduled run configuration.
      */
     customerArtifactPaths?: CustomerArtifactPaths;
@@ -2353,6 +2465,7 @@ declare namespace DeviceFarm {
      */
     parameters?: TestParameters;
   }
+  export type ServiceDnsName = string;
   export type SkipAppResign = boolean;
   export type SshPublicKey = string;
   export interface StopRemoteAccessSessionRequest {
@@ -2652,6 +2765,34 @@ declare namespace DeviceFarm {
      */
     project?: Project;
   }
+  export interface UpdateVPCEConfigurationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to update.
+     */
+    arn: AmazonResourceName;
+    /**
+     * The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.
+     */
+    vpceConfigurationName?: VPCEConfigurationName;
+    /**
+     * The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+     */
+    vpceServiceName?: VPCEServiceName;
+    /**
+     * The DNS (domain) name used to connect to your private service in your Amazon VPC. The DNS name must not already be in use on the Internet.
+     */
+    serviceDnsName?: ServiceDnsName;
+    /**
+     * An optional description, providing more details about your VPC endpoint configuration.
+     */
+    vpceConfigurationDescription?: VPCEConfigurationDescription;
+  }
+  export interface UpdateVPCEConfigurationResult {
+    /**
+     * An object containing information about your VPC endpoint configuration.
+     */
+    vpceConfiguration?: VPCEConfiguration;
+  }
   export interface Upload {
     /**
      * The upload's ARN.
@@ -2693,6 +2834,32 @@ declare namespace DeviceFarm {
   export type UploadStatus = "INITIALIZED"|"PROCESSING"|"SUCCEEDED"|"FAILED"|string;
   export type UploadType = "ANDROID_APP"|"IOS_APP"|"WEB_APP"|"EXTERNAL_DATA"|"APPIUM_JAVA_JUNIT_TEST_PACKAGE"|"APPIUM_JAVA_TESTNG_TEST_PACKAGE"|"APPIUM_PYTHON_TEST_PACKAGE"|"APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"|"APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"|"APPIUM_WEB_PYTHON_TEST_PACKAGE"|"CALABASH_TEST_PACKAGE"|"INSTRUMENTATION_TEST_PACKAGE"|"UIAUTOMATION_TEST_PACKAGE"|"UIAUTOMATOR_TEST_PACKAGE"|"XCTEST_TEST_PACKAGE"|"XCTEST_UI_TEST_PACKAGE"|string;
   export type Uploads = Upload[];
+  export interface VPCEConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC endpoint configuration.
+     */
+    arn?: AmazonResourceName;
+    /**
+     * The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.
+     */
+    vpceConfigurationName?: VPCEConfigurationName;
+    /**
+     * The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+     */
+    vpceServiceName?: VPCEServiceName;
+    /**
+     * The DNS name that maps to the private IP address of the service you want to access.
+     */
+    serviceDnsName?: ServiceDnsName;
+    /**
+     * An optional description, providing more details about your VPC endpoint configuration.
+     */
+    vpceConfigurationDescription?: VPCEConfigurationDescription;
+  }
+  export type VPCEConfigurationDescription = string;
+  export type VPCEConfigurationName = string;
+  export type VPCEConfigurations = VPCEConfiguration[];
+  export type VPCEServiceName = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

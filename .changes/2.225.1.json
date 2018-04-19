@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "Added new SourceRevision structure to Execution Summary with accompanying definitions as needed in the AWS CodePipeline API Guide."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Starting today, you can identify opportunities for Amazon RDS cost savings using AWS Cost Explorer's API to access your Amazon RDS Reserved Instance Purchase Recommendations"
+    },
+    {
+        "type": "feature",
+        "category": "DeviceFarm",
+        "description": "Adding support for VPCEndpoint feature. Allows customers to be able to access their private endpoints/services running in their VPC during test automation."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Added support for customers to see the time at which a Dedicated Host was allocated or released."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "The ModifyDBCluster operation now includes an EngineVersion parameter. You can use this to upgrade the engine for a clustered database."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Added new APIs DeleteInventory and DescribeInventoryDeletions, for customers to delete their custom inventory data."
+    }
+]

@@ -108,6 +108,21 @@
       ],
       "documentation":"<p>Uploads an app or test scripts.</p>"
     },
+    "CreateVPCEConfiguration":{
+      "name":"CreateVPCEConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateVPCEConfigurationRequest"},
+      "output":{"shape":"CreateVPCEConfigurationResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.</p>"
+    },
     "DeleteDevicePool":{
       "name":"DeleteDevicePool",
       "http":{
@@ -219,6 +234,22 @@
         {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Deletes an upload given the upload ARN.</p>"
+    },
+    "DeleteVPCEConfiguration":{
+      "name":"DeleteVPCEConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteVPCEConfigurationRequest"},
+      "output":{"shape":"DeleteVPCEConfigurationResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ServiceAccountException"},
+        {"shape":"InvalidOperationException"}
+      ],
+      "documentation":"<p>Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.</p>"
     },
     "GetAccountSettings":{
       "name":"GetAccountSettings",
@@ -460,6 +491,21 @@
         {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about an upload.</p>"
+    },
+    "GetVPCEConfiguration":{
+      "name":"GetVPCEConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetVPCEConfigurationRequest"},
+      "output":{"shape":"GetVPCEConfigurationResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.</p>"
     },
     "InstallToRemoteAccessSession":{
       "name":"InstallToRemoteAccessSession",
@@ -768,6 +814,20 @@
       ],
       "documentation":"<p>Gets information about uploads, given an AWS Device Farm project ARN.</p>"
     },
+    "ListVPCEConfigurations":{
+      "name":"ListVPCEConfigurations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListVPCEConfigurationsRequest"},
+      "output":{"shape":"ListVPCEConfigurationsResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.</p>"
+    },
     "PurchaseOffering":{
       "name":"PurchaseOffering",
       "http":{
@@ -930,6 +990,22 @@
         {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Modifies the specified project name, given the project ARN and a new name.</p>"
+    },
+    "UpdateVPCEConfiguration":{
+      "name":"UpdateVPCEConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateVPCEConfigurationRequest"},
+      "output":{"shape":"UpdateVPCEConfigurationResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ServiceAccountException"},
+        {"shape":"InvalidOperationException"}
+      ],
+      "documentation":"<p>Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.</p>"
     }
   },
   "shapes":{
@@ -1419,6 +1495,41 @@
       },
       "documentation":"<p>Represents the result of a create upload request.</p>"
     },
+    "CreateVPCEConfigurationRequest":{
+      "type":"structure",
+      "required":[
+        "vpceConfigurationName",
+        "vpceServiceName",
+        "serviceDnsName"
+      ],
+      "members":{
+        "vpceConfigurationName":{
+          "shape":"VPCEConfigurationName",
+          "documentation":"<p>The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.</p>"
+        },
+        "vpceServiceName":{
+          "shape":"VPCEServiceName",
+          "documentation":"<p>The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.</p>"
+        },
+        "serviceDnsName":{
+          "shape":"ServiceDnsName",
+          "documentation":"<p>The DNS name of the service running in your VPC that you want Device Farm to test.</p>"
+        },
+        "vpceConfigurationDescription":{
+          "shape":"VPCEConfigurationDescription",
+          "documentation":"<p>An optional description, providing more details about your VPC endpoint configuration.</p>"
+        }
+      }
+    },
+    "CreateVPCEConfigurationResult":{
+      "type":"structure",
+      "members":{
+        "vpceConfiguration":{
+          "shape":"VPCEConfiguration",
+          "documentation":"<p>An object containing information about your VPC endpoint configuration.</p>"
+        }
+      }
+    },
     "CurrencyCode":{
       "type":"string",
       "enum":["USD"]
@@ -1557,6 +1668,21 @@
       },
       "documentation":"<p>Represents the result of a delete upload request.</p>"
     },
+    "DeleteVPCEConfigurationRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteVPCEConfigurationResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "Device":{
       "type":"structure",
       "members":{
@@ -1654,7 +1780,8 @@
         "REMOTE_DEBUG_ENABLED",
         "APPIUM_VERSION",
         "INSTANCE_ARN",
-        "INSTANCE_LABELS"
+        "INSTANCE_LABELS",
+        "FLEET_TYPE"
       ]
     },
     "DeviceFormFactor":{
@@ -1827,7 +1954,10 @@
     },
     "ExecutionResultCode":{
       "type":"string",
-      "enum":["PARSING_FAILED"]
+      "enum":[
+        "PARSING_FAILED",
+        "VPC_ENDPOINT_SETUP_FAILED"
+      ]
     },
     "ExecutionStatus":{
       "type":"string",
@@ -1902,6 +2032,10 @@
         "test":{
           "shape":"ScheduleRunTest",
           "documentation":"<p>Information about the uploaded test to be run against the device pool.</p>"
+        },
+        "configuration":{
+          "shape":"ScheduleRunConfiguration",
+          "documentation":"<p>An object containing information about the settings for a run.</p>"
         }
       },
       "documentation":"<p>Represents a request to the get device pool compatibility operation.</p>"
@@ -2175,6 +2309,25 @@
       },
       "documentation":"<p>Represents the result of a get upload request.</p>"
     },
+    "GetVPCEConfigurationRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to describe.</p>"
+        }
+      }
+    },
+    "GetVPCEConfigurationResult":{
+      "type":"structure",
+      "members":{
+        "vpceConfiguration":{
+          "shape":"VPCEConfiguration",
+          "documentation":"<p>An object containing information about your VPC endpoint configuration.</p>"
+        }
+      }
+    },
     "HostAddress":{
       "type":"string",
       "max":1024
@@ -2293,6 +2446,14 @@
       ],
       "max":64,
       "min":0
+    },
+    "InvalidOperationException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"Message"}
+      },
+      "documentation":"<p>There was an error with the update request, or you do not have sufficient permissions to update this VPC endpoint configuration.</p>",
+      "exception":true
     },
     "IosPaths":{
       "type":"list",
@@ -2881,6 +3042,32 @@
         }
       },
       "documentation":"<p>Represents the result of a list uploads request.</p>"
+    },
+    "ListVPCEConfigurationsRequest":{
+      "type":"structure",
+      "members":{
+        "maxResults":{
+          "shape":"Integer",
+          "documentation":"<p>An integer specifying the maximum number of items you want to return in the API response.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
+    },
+    "ListVPCEConfigurationsResult":{
+      "type":"structure",
+      "members":{
+        "vpceConfigurations":{
+          "shape":"VPCEConfigurations",
+          "documentation":"<p>An array of <code>VPCEConfiguration</code> objects containing information about your VPC endpoint configuration.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
     },
     "Location":{
       "type":"structure",
@@ -3670,6 +3857,10 @@
           "shape":"Location",
           "documentation":"<p>Information about the location that is used for the run.</p>"
         },
+        "vpceConfigurationArns":{
+          "shape":"AmazonResourceNames",
+          "documentation":"<p>An array of Amazon Resource Names (ARNs) for your VPC endpoint configurations.</p>"
+        },
         "customerArtifactPaths":{
           "shape":"CustomerArtifactPaths",
           "documentation":"<p>Input <code>CustomerArtifactPaths</code> object for the scheduled run configuration.</p>"
@@ -3771,6 +3962,11 @@
       },
       "documentation":"<p>There was a problem with the service account.</p>",
       "exception":true
+    },
+    "ServiceDnsName":{
+      "type":"string",
+      "max":2048,
+      "min":0
     },
     "SkipAppResign":{"type":"boolean"},
     "SshPublicKey":{
@@ -4193,6 +4389,41 @@
       },
       "documentation":"<p>Represents the result of an update project request.</p>"
     },
+    "UpdateVPCEConfigurationRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to update.</p>"
+        },
+        "vpceConfigurationName":{
+          "shape":"VPCEConfigurationName",
+          "documentation":"<p>The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.</p>"
+        },
+        "vpceServiceName":{
+          "shape":"VPCEServiceName",
+          "documentation":"<p>The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.</p>"
+        },
+        "serviceDnsName":{
+          "shape":"ServiceDnsName",
+          "documentation":"<p>The DNS (domain) name used to connect to your private service in your Amazon VPC. The DNS name must not already be in use on the Internet.</p>"
+        },
+        "vpceConfigurationDescription":{
+          "shape":"VPCEConfigurationDescription",
+          "documentation":"<p>An optional description, providing more details about your VPC endpoint configuration.</p>"
+        }
+      }
+    },
+    "UpdateVPCEConfigurationResult":{
+      "type":"structure",
+      "members":{
+        "vpceConfiguration":{
+          "shape":"VPCEConfiguration",
+          "documentation":"<p>An object containing information about your VPC endpoint configuration.</p>"
+        }
+      }
+    },
     "Upload":{
       "type":"structure",
       "members":{
@@ -4268,6 +4499,51 @@
     "Uploads":{
       "type":"list",
       "member":{"shape":"Upload"}
+    },
+    "VPCEConfiguration":{
+      "type":"structure",
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the VPC endpoint configuration.</p>"
+        },
+        "vpceConfigurationName":{
+          "shape":"VPCEConfigurationName",
+          "documentation":"<p>The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.</p>"
+        },
+        "vpceServiceName":{
+          "shape":"VPCEServiceName",
+          "documentation":"<p>The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.</p>"
+        },
+        "serviceDnsName":{
+          "shape":"ServiceDnsName",
+          "documentation":"<p>The DNS name that maps to the private IP address of the service you want to access.</p>"
+        },
+        "vpceConfigurationDescription":{
+          "shape":"VPCEConfigurationDescription",
+          "documentation":"<p>An optional description, providing more details about your VPC endpoint configuration.</p>"
+        }
+      },
+      "documentation":"<p>Represents an Amazon Virtual Private Cloud (VPC) endpoint configuration.</p>"
+    },
+    "VPCEConfigurationDescription":{
+      "type":"string",
+      "max":2048,
+      "min":0
+    },
+    "VPCEConfigurationName":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "VPCEConfigurations":{
+      "type":"list",
+      "member":{"shape":"VPCEConfiguration"}
+    },
+    "VPCEServiceName":{
+      "type":"string",
+      "max":2048,
+      "min":0
     }
   },
   "documentation":"<p>AWS Device Farm is a service that enables mobile app developers to test Android, iOS, and Fire OS apps on physical phones, tablets, and other devices in the cloud.</p>"

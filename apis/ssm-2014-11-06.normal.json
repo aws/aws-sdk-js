@@ -218,6 +218,23 @@
       ],
       "documentation":"<p>Deletes the Systems Manager document and all instance associations to the document.</p> <p>Before you delete the document, we recommend that you use <a>DeleteAssociation</a> to disassociate all instances that are associated with the document.</p>"
     },
+    "DeleteInventory":{
+      "name":"DeleteInventory",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteInventoryRequest"},
+      "output":{"shape":"DeleteInventoryResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidTypeNameException"},
+        {"shape":"InvalidOptionException"},
+        {"shape":"InvalidDeleteInventoryParametersException"},
+        {"shape":"InvalidInventoryRequestException"}
+      ],
+      "documentation":"<p>Delete a custom inventory type, or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.</p>"
+    },
     "DeleteMaintenanceWindow":{
       "name":"DeleteMaintenanceWindow",
       "http":{
@@ -558,6 +575,21 @@
         {"shape":"InvalidNextToken"}
       ],
       "documentation":"<p>Retrieves information about the patches on the specified instance and their state relative to the patch baseline being used for the instance.</p>"
+    },
+    "DescribeInventoryDeletions":{
+      "name":"DescribeInventoryDeletions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeInventoryDeletionsRequest"},
+      "output":{"shape":"DescribeInventoryDeletionsResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidDeletionIdException"},
+        {"shape":"InvalidNextToken"}
+      ],
+      "documentation":"<p>Describes a specific delete inventory operation.</p>"
     },
     "DescribeMaintenanceWindowExecutionTaskInvocations":{
       "name":"DescribeMaintenanceWindowExecutionTaskInvocations",
@@ -1505,7 +1537,7 @@
         {"shape":"DoesNotExistException"},
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>Modifies a task assigned to a Maintenance Window. You can't change the task type, but you can change the following values:</p> <p>Task ARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> <p>Service role ARN.</p> <p>Task parameters.</p> <p>Task priority.</p> <p>Task MaxConcurrency and MaxErrors.</p> <p>Log location.</p> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.</p>"
+      "documentation":"<p>Modifies a task assigned to a Maintenance Window. You can't change the task type, but you can change the following values:</p> <ul> <li> <p>TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> </li> <li> <p>ServiceRoleArn</p> </li> <li> <p>TaskInvocationParameters</p> </li> <li> <p>Priority</p> </li> <li> <p>MaxConcurrency</p> </li> <li> <p>MaxErrors</p> </li> </ul> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the <a>RegisterTaskWithMaintenanceWindow</a> action are required for this request. Optional fields that aren't specified are set to null.</p>"
     },
     "UpdateManagedInstanceRole":{
       "name":"UpdateManagedInstanceRole",
@@ -1624,7 +1656,7 @@
         },
         "Tags":{
           "shape":"TagList",
-          "documentation":"<p> One or more tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. </p>"
+          "documentation":"<p> One or more tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. </p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>"
         }
       }
     },
@@ -2365,7 +2397,7 @@
         },
         "ExpiresAfter":{
           "shape":"DateTime",
-          "documentation":"<p>If this time is reached and the command has not already started executing, it will not execute. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API.</p>"
+          "documentation":"<p>If this time is reached and the command has not already started executing, it will not run. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API.</p>"
         },
         "Parameters":{
           "shape":"Parameters",
@@ -2925,11 +2957,11 @@
       "members":{
         "Description":{
           "shape":"ActivationDescription",
-          "documentation":"<p>A userdefined description of the resource that you want to register with Amazon EC2. </p>"
+          "documentation":"<p>A userdefined description of the resource that you want to register with Amazon EC2. </p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>"
         },
         "DefaultInstanceName":{
           "shape":"DefaultInstanceName",
-          "documentation":"<p>The name of the registered, managed instance as it will appear in the Amazon EC2 console or when you use the AWS command line tools to list EC2 resources.</p>"
+          "documentation":"<p>The name of the registered, managed instance as it will appear in the Amazon EC2 console or when you use the AWS command line tools to list EC2 resources.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>"
         },
         "IamRole":{
           "shape":"IamRole",
@@ -3311,6 +3343,46 @@
     "DeleteDocumentResult":{
       "type":"structure",
       "members":{
+      }
+    },
+    "DeleteInventoryRequest":{
+      "type":"structure",
+      "required":["TypeName"],
+      "members":{
+        "TypeName":{
+          "shape":"InventoryItemTypeName",
+          "documentation":"<p>The name of the custom inventory type for which you want to delete either all previously collected data, or the inventory type itself. </p>"
+        },
+        "SchemaDeleteOption":{
+          "shape":"InventorySchemaDeleteOption",
+          "documentation":"<p>Use the <code>SchemaDeleteOption</code> to delete a custom inventory type (schema). If you don't choose this option, the system only deletes existing inventory data associated with the custom inventory type. Choose one of the following options:</p> <p>DisableSchema: If you choose this option, the system ignores all inventory data for the specified version, and any earlier versions. To enable this schema again, you must call the <code>PutInventory</code> action for a version greater than the disbled version.</p> <p>DeleteSchema: This option deletes the specified custom type from the Inventory service. You can recreate the schema later, if you want.</p>"
+        },
+        "DryRun":{
+          "shape":"DryRun",
+          "documentation":"<p>Use this option to view a summary of the deletion request without deleting any data or the data type. This option is useful when you only want to understand what will be deleted. Once you validate that the data to be deleted is what you intend to delete, you can run the same command without specifying the <code>DryRun</code> option.</p>"
+        },
+        "ClientToken":{
+          "shape":"ClientToken",
+          "documentation":"<p>User-provided idempotency token.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "DeleteInventoryResult":{
+      "type":"structure",
+      "members":{
+        "DeletionId":{
+          "shape":"InventoryDeletionId",
+          "documentation":"<p>Every <code>DeleteInventory</code> action is assigned a unique ID. This option returns a unique ID. You can use this ID to query the status of a delete operation. This option is useful for ensuring that a delete operation has completed before you begin other actions. </p>"
+        },
+        "TypeName":{
+          "shape":"InventoryItemTypeName",
+          "documentation":"<p>The name of the inventory data type specified in the request.</p>"
+        },
+        "DeletionSummary":{
+          "shape":"InventoryDeletionSummary",
+          "documentation":"<p>A summary of the delete operation. For more information about this summary, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary\">Understanding the Delete Inventory Summary</a>.</p>"
+        }
       }
     },
     "DeleteMaintenanceWindowRequest":{
@@ -3985,6 +4057,37 @@
         "NextToken":{
           "shape":"NextToken",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
+    "DescribeInventoryDeletionsRequest":{
+      "type":"structure",
+      "members":{
+        "DeletionId":{
+          "shape":"InventoryDeletionId",
+          "documentation":"<p>Specify the delete inventory ID for which you want information. This ID was returned by the <code>DeleteInventory</code> action.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token to start the list. Use this token to get the next set of results. </p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box":true
+        }
+      }
+    },
+    "DescribeInventoryDeletionsResult":{
+      "type":"structure",
+      "members":{
+        "InventoryDeletions":{
+          "shape":"InventoryDeletionsList",
+          "documentation":"<p>A list of status items for deleted inventory.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
         }
       }
     },
@@ -4723,6 +4826,7 @@
       "documentation":"<p>Error returned when the ID specified for a resource, such as a Maintenance Window or Patch baseline, doesn't exist.</p> <p>For information about resource limits in Systems Manager, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_ssm\">AWS Systems Manager Limits</a>.</p>",
       "exception":true
     },
+    "DryRun":{"type":"boolean"},
     "DuplicateDocumentContent":{
       "type":"structure",
       "members":{
@@ -4907,7 +5011,7 @@
         },
         "Status":{
           "shape":"CommandInvocationStatus",
-          "documentation":"<p>The status of the parent command for this invocation. This status can be different than StatusDetails.</p>"
+          "documentation":"<p>The status of this invocation plugin. This status can be different than StatusDetails.</p>"
         },
         "StatusDetails":{
           "shape":"StatusDetails",
@@ -5274,7 +5378,7 @@
         },
         "TaskParameters":{
           "shape":"MaintenanceWindowTaskParametersList",
-          "documentation":"<p>The parameters passed to the task when it was executed. The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>"
+          "documentation":"<p>The parameters passed to the task when it was executed.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note> <p>The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>"
         },
         "Priority":{
           "shape":"MaintenanceWindowTaskPriority",
@@ -5407,7 +5511,7 @@
         },
         "TaskParameters":{
           "shape":"MaintenanceWindowTaskParameters",
-          "documentation":"<p>The parameters to pass to the task when it executes.</p>"
+          "documentation":"<p>The parameters to pass to the task when it executes.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>"
         },
         "TaskInvocationParameters":{
           "shape":"MaintenanceWindowTaskInvocationParameters",
@@ -5427,7 +5531,7 @@
         },
         "LoggingInfo":{
           "shape":"LoggingInfo",
-          "documentation":"<p>The location in Amazon S3 where the task results are logged.</p>"
+          "documentation":"<p>The location in Amazon S3 where the task results are logged.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>"
         },
         "Name":{
           "shape":"MaintenanceWindowName",
@@ -5515,12 +5619,12 @@
         },
         "Recursive":{
           "shape":"Boolean",
-          "documentation":"<p>Retrieve all parameters within a hierarchy.</p>",
+          "documentation":"<p>Retrieve all parameters within a hierarchy.</p> <important> <p>If a user has access to a path, then the user can access all levels of that path. For example, if a user has permission to access path /a, then the user can also access /a/b. Even if a user has explicitly been denied access in IAM for parameter /a, they can still call the GetParametersByPath API action recursively and view /a/b.</p> </important>",
           "box":true
         },
         "ParameterFilters":{
           "shape":"ParameterStringFilterList",
-          "documentation":"<p>Filters to limit the request results.</p>"
+          "documentation":"<p>Filters to limit the request results.</p> <note> <p>You can't filter using the parameter name.</p> </note>"
         },
         "WithDecryption":{
           "shape":"Boolean",
@@ -6232,6 +6336,22 @@
       },
       "exception":true
     },
+    "InvalidDeleteInventoryParametersException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>One or more of the parameters specified for the delete operation is not valid. Verify all parameters and try again.</p>",
+      "exception":true
+    },
+    "InvalidDeletionIdException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The ID specified for the delete operation does not exist or is not valide. Verify the ID and try again.</p>",
+      "exception":true
+    },
     "InvalidDocument":{
       "type":"structure",
       "members":{
@@ -6336,6 +6456,14 @@
       "documentation":"<p>You specified invalid keys or values in the <code>Context</code> attribute for <code>InventoryItem</code>. Verify the keys and values, and try again.</p>",
       "exception":true
     },
+    "InvalidInventoryRequestException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The request is not valid.</p>",
+      "exception":true
+    },
     "InvalidItemContentException":{
       "type":"structure",
       "members":{
@@ -6367,6 +6495,14 @@
         "Message":{"shape":"String"}
       },
       "documentation":"<p>One or more configuration items is not valid. Verify that a valid Amazon Resource Name (ARN) was provided for an Amazon SNS topic.</p>",
+      "exception":true
+    },
+    "InvalidOptionException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The delete inventory option specified is not valid. Verify the option and try again.</p>",
       "exception":true
     },
     "InvalidOutputFolder":{
@@ -6499,6 +6635,95 @@
         "string",
         "number"
       ]
+    },
+    "InventoryDeletionId":{"type":"string"},
+    "InventoryDeletionLastStatusMessage":{"type":"string"},
+    "InventoryDeletionLastStatusUpdateTime":{"type":"timestamp"},
+    "InventoryDeletionStartTime":{"type":"timestamp"},
+    "InventoryDeletionStatus":{
+      "type":"string",
+      "enum":[
+        "InProgress",
+        "Complete"
+      ]
+    },
+    "InventoryDeletionStatusItem":{
+      "type":"structure",
+      "members":{
+        "DeletionId":{
+          "shape":"InventoryDeletionId",
+          "documentation":"<p>The deletion ID returned by the <code>DeleteInventory</code> action.</p>"
+        },
+        "TypeName":{
+          "shape":"InventoryItemTypeName",
+          "documentation":"<p>The name of the inventory data type.</p>"
+        },
+        "DeletionStartTime":{
+          "shape":"InventoryDeletionStartTime",
+          "documentation":"<p>The UTC timestamp when the delete operation started.</p>"
+        },
+        "LastStatus":{
+          "shape":"InventoryDeletionStatus",
+          "documentation":"<p>The status of the operation. Possible values are InProgress and Complete.</p>"
+        },
+        "LastStatusMessage":{
+          "shape":"InventoryDeletionLastStatusMessage",
+          "documentation":"<p>Information about the status.</p>"
+        },
+        "DeletionSummary":{
+          "shape":"InventoryDeletionSummary",
+          "documentation":"<p>Information about the delete operation. For more information about this summary, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary\">Understanding the Delete Inventory Summary</a>.</p>"
+        },
+        "LastStatusUpdateTime":{
+          "shape":"InventoryDeletionLastStatusUpdateTime",
+          "documentation":"<p>The UTC timestamp of when the last status report.</p>"
+        }
+      },
+      "documentation":"<p>Status information returned by the <code>DeleteInventory</code> action.</p>"
+    },
+    "InventoryDeletionSummary":{
+      "type":"structure",
+      "members":{
+        "TotalCount":{
+          "shape":"TotalCount",
+          "documentation":"<p>The total number of items to delete. This count does not change during the delete operation.</p>"
+        },
+        "RemainingCount":{
+          "shape":"RemainingCount",
+          "documentation":"<p>Remaining number of items to delete.</p>"
+        },
+        "SummaryItems":{
+          "shape":"InventoryDeletionSummaryItems",
+          "documentation":"<p>A list of counts and versions for deleted items.</p>"
+        }
+      },
+      "documentation":"<p>Information about the delete operation.</p>"
+    },
+    "InventoryDeletionSummaryItem":{
+      "type":"structure",
+      "members":{
+        "Version":{
+          "shape":"InventoryItemSchemaVersion",
+          "documentation":"<p>The inventory type version.</p>"
+        },
+        "Count":{
+          "shape":"ResourceCount",
+          "documentation":"<p>A count of the number of deleted items.</p>"
+        },
+        "RemainingCount":{
+          "shape":"RemainingCount",
+          "documentation":"<p>The remaining number of items to delete.</p>"
+        }
+      },
+      "documentation":"<p>Either a count, remaining count, or a version number in a delete inventory summary.</p>"
+    },
+    "InventoryDeletionSummaryItems":{
+      "type":"list",
+      "member":{"shape":"InventoryDeletionSummaryItem"}
+    },
+    "InventoryDeletionsList":{
+      "type":"list",
+      "member":{"shape":"InventoryDeletionStatusItem"}
     },
     "InventoryFilter":{
       "type":"structure",
@@ -6744,6 +6969,13 @@
       "type":"map",
       "key":{"shape":"InventoryResultItemKey"},
       "value":{"shape":"InventoryResultItem"}
+    },
+    "InventorySchemaDeleteOption":{
+      "type":"string",
+      "enum":[
+        "DisableSchema",
+        "DeleteSchema"
+      ]
     },
     "InventoryTypeDisplayName":{"type":"string"},
     "InvocationDoesNotExist":{
@@ -7236,7 +7468,7 @@
           "documentation":"<p>The region where the Amazon S3 bucket is located.</p>"
         }
       },
-      "documentation":"<p>Information about an Amazon S3 bucket to write instance-level logs to.</p>"
+      "documentation":"<p>Information about an Amazon S3 bucket to write instance-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>"
     },
     "Long":{"type":"long"},
     "MaintenanceWindowAllowUnassociatedTargets":{"type":"boolean"},
@@ -7249,7 +7481,7 @@
         },
         "Parameters":{
           "shape":"AutomationParameterMap",
-          "documentation":"<p>The parameters for the AUTOMATION task.</p>"
+          "documentation":"<p>The parameters for the AUTOMATION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For AUTOMATION task types, Systems Manager ignores any values specified for these parameters.</p> </note>"
         }
       },
       "documentation":"<p>The parameters for an AUTOMATION task type.</p>"
@@ -7545,7 +7777,7 @@
           "documentation":"<p>JSON to provide to your Lambda function as input.</p>"
         }
       },
-      "documentation":"<p>The parameters for a LAMBDA task type.</p>"
+      "documentation":"<p>The parameters for a LAMBDA task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and LoggingInfo.</p> </note>"
     },
     "MaintenanceWindowLambdaPayload":{
       "type":"blob",
@@ -7613,7 +7845,7 @@
           "box":true
         }
       },
-      "documentation":"<p>The parameters for a RUN_COMMAND task type.</p>"
+      "documentation":"<p>The parameters for a RUN_COMMAND task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Run Command tasks, Systems Manager uses specified values for <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for <code>TaskInvocationParameters</code>. </p> </note>"
     },
     "MaintenanceWindowSchedule":{
       "type":"string",
@@ -7642,7 +7874,7 @@
           "documentation":"<p>The name of the STEP_FUNCTION task.</p>"
         }
       },
-      "documentation":"<p>The parameters for the STEP_FUNCTION execution.</p>"
+      "documentation":"<p>The parameters for a STEP_FUNCTION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Step Functions tasks, Systems Manager ignores any values specified for <code>TaskParameters</code> and <code>LoggingInfo</code>.</p> </note>"
     },
     "MaintenanceWindowTarget":{
       "type":"structure",
@@ -7713,7 +7945,7 @@
         },
         "TaskParameters":{
           "shape":"MaintenanceWindowTaskParameters",
-          "documentation":"<p>The parameters that should be passed to the task when it is executed.</p>"
+          "documentation":"<p>The parameters that should be passed to the task when it is executed.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>"
         },
         "Priority":{
           "shape":"MaintenanceWindowTaskPriority",
@@ -7721,7 +7953,7 @@
         },
         "LoggingInfo":{
           "shape":"LoggingInfo",
-          "documentation":"<p>Information about an Amazon S3 bucket to write task-level logs to.</p>"
+          "documentation":"<p>Information about an Amazon S3 bucket to write task-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>"
         },
         "ServiceRoleArn":{
           "shape":"ServiceRole",
@@ -7766,7 +7998,7 @@
         },
         "Automation":{
           "shape":"MaintenanceWindowAutomationParameters",
-          "documentation":"<p>The parameters for a AUTOMATION task type.</p>"
+          "documentation":"<p>The parameters for an AUTOMATION task type.</p>"
         },
         "StepFunctions":{
           "shape":"MaintenanceWindowStepFunctionsParameters",
@@ -8781,6 +9013,7 @@
       "members":{
       }
     },
+    "PutInventoryMessage":{"type":"string"},
     "PutInventoryRequest":{
       "type":"structure",
       "required":[
@@ -8801,6 +9034,10 @@
     "PutInventoryResult":{
       "type":"structure",
       "members":{
+        "Message":{
+          "shape":"PutInventoryMessage",
+          "documentation":"<p>Information about the request.</p>"
+        }
       }
     },
     "PutParameterRequest":{
@@ -8817,7 +9054,7 @@
         },
         "Description":{
           "shape":"ParameterDescription",
-          "documentation":"<p>Information about the parameter that you want to add to the system.</p>"
+          "documentation":"<p>Information about the parameter that you want to add to the system.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>"
         },
         "Value":{
           "shape":"PSParameterValue",
@@ -8982,7 +9219,7 @@
         },
         "TaskParameters":{
           "shape":"MaintenanceWindowTaskParameters",
-          "documentation":"<p>The parameters that should be passed to the task when it is executed.</p>"
+          "documentation":"<p>The parameters that should be passed to the task when it is executed.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>"
         },
         "TaskInvocationParameters":{
           "shape":"MaintenanceWindowTaskInvocationParameters",
@@ -9003,7 +9240,7 @@
         },
         "LoggingInfo":{
           "shape":"LoggingInfo",
-          "documentation":"<p>A structure containing information about an Amazon S3 bucket to write instance-level logs to. </p>"
+          "documentation":"<p>A structure containing information about an Amazon S3 bucket to write instance-level logs to. </p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>"
         },
         "Name":{
           "shape":"MaintenanceWindowName",
@@ -9039,6 +9276,7 @@
       "max":1000,
       "min":1
     },
+    "RemainingCount":{"type":"integer"},
     "RemoveTagsFromResourceRequest":{
       "type":"structure",
       "required":[
@@ -9122,6 +9360,7 @@
       "type":"list",
       "member":{"shape":"ResourceComplianceSummaryItem"}
     },
+    "ResourceCount":{"type":"integer"},
     "ResourceDataSyncAWSKMSKeyARN":{
       "type":"string",
       "max":512,
@@ -9406,7 +9645,7 @@
         },
         "TimeoutSeconds":{
           "shape":"TimeoutSeconds",
-          "documentation":"<p>If this time is reached and the command has not already started executing, it will not execute.</p>",
+          "documentation":"<p>If this time is reached and the command has not already started executing, it will not run.</p>",
           "box":true
         },
         "Comment":{
@@ -9856,6 +10095,7 @@
       "documentation":"<p>There are concurrent updates for a resource that supports one update at a time.</p>",
       "exception":true
     },
+    "TotalCount":{"type":"integer"},
     "TotalSizeLimitExceededException":{
       "type":"structure",
       "members":{
@@ -10231,7 +10471,7 @@
         },
         "TaskParameters":{
           "shape":"MaintenanceWindowTaskParameters",
-          "documentation":"<p>The parameters to modify. The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>"
+          "documentation":"<p>The parameters to modify.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note> <p>The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>"
         },
         "TaskInvocationParameters":{
           "shape":"MaintenanceWindowTaskInvocationParameters",
@@ -10252,7 +10492,7 @@
         },
         "LoggingInfo":{
           "shape":"LoggingInfo",
-          "documentation":"<p>The new logging location in Amazon S3 to specify.</p>"
+          "documentation":"<p>The new logging location in Amazon S3 to specify.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>"
         },
         "Name":{
           "shape":"MaintenanceWindowName",
@@ -10294,7 +10534,7 @@
         },
         "TaskParameters":{
           "shape":"MaintenanceWindowTaskParameters",
-          "documentation":"<p>The updated parameter values.</p>"
+          "documentation":"<p>The updated parameter values.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>"
         },
         "TaskInvocationParameters":{
           "shape":"MaintenanceWindowTaskInvocationParameters",
@@ -10314,7 +10554,7 @@
         },
         "LoggingInfo":{
           "shape":"LoggingInfo",
-          "documentation":"<p>The updated logging information in Amazon S3.</p>"
+          "documentation":"<p>The updated logging information in Amazon S3.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>"
         },
         "Name":{
           "shape":"MaintenanceWindowName",

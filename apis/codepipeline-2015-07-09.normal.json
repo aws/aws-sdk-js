@@ -1979,7 +1979,8 @@
         "lastUpdateTime":{
           "shape":"Timestamp",
           "documentation":"<p>The date and time of the last change to the pipeline execution, in timestamp format.</p>"
-        }
+        },
+        "sourceRevisions":{"shape":"SourceRevisionList"}
       },
       "documentation":"<p>Summary information about a pipeline execution.</p>"
     },
@@ -2386,6 +2387,20 @@
     "S3ObjectKey":{"type":"string"},
     "SecretAccessKey":{"type":"string"},
     "SessionToken":{"type":"string"},
+    "SourceRevision":{
+      "type":"structure",
+      "required":["actionName"],
+      "members":{
+        "actionName":{"shape":"ActionName"},
+        "revisionId":{"shape":"Revision"},
+        "revisionSummary":{"shape":"RevisionSummary"},
+        "revisionUrl":{"shape":"Url"}
+      }
+    },
+    "SourceRevisionList":{
+      "type":"list",
+      "member":{"shape":"SourceRevision"}
+    },
     "StageActionDeclarationList":{
       "type":"list",
       "member":{"shape":"ActionDeclaration"}

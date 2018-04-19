@@ -108,6 +108,14 @@ declare class SSM extends Service {
    */
   deleteDocument(callback?: (err: AWSError, data: SSM.Types.DeleteDocumentResult) => void): Request<SSM.Types.DeleteDocumentResult, AWSError>;
   /**
+   * Delete a custom inventory type, or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.
+   */
+  deleteInventory(params: SSM.Types.DeleteInventoryRequest, callback?: (err: AWSError, data: SSM.Types.DeleteInventoryResult) => void): Request<SSM.Types.DeleteInventoryResult, AWSError>;
+  /**
+   * Delete a custom inventory type, or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.
+   */
+  deleteInventory(callback?: (err: AWSError, data: SSM.Types.DeleteInventoryResult) => void): Request<SSM.Types.DeleteInventoryResult, AWSError>;
+  /**
    * Deletes a Maintenance Window.
    */
   deleteMaintenanceWindow(params: SSM.Types.DeleteMaintenanceWindowRequest, callback?: (err: AWSError, data: SSM.Types.DeleteMaintenanceWindowResult) => void): Request<SSM.Types.DeleteMaintenanceWindowResult, AWSError>;
@@ -291,6 +299,14 @@ declare class SSM extends Service {
    * Retrieves information about the patches on the specified instance and their state relative to the patch baseline being used for the instance.
    */
   describeInstancePatches(callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchesResult) => void): Request<SSM.Types.DescribeInstancePatchesResult, AWSError>;
+  /**
+   * Describes a specific delete inventory operation.
+   */
+  describeInventoryDeletions(params: SSM.Types.DescribeInventoryDeletionsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInventoryDeletionsResult) => void): Request<SSM.Types.DescribeInventoryDeletionsResult, AWSError>;
+  /**
+   * Describes a specific delete inventory operation.
+   */
+  describeInventoryDeletions(callback?: (err: AWSError, data: SSM.Types.DescribeInventoryDeletionsResult) => void): Request<SSM.Types.DescribeInventoryDeletionsResult, AWSError>;
   /**
    * Retrieves the individual task executions (one per target) for a particular task executed as part of a Maintenance Window execution.
    */
@@ -764,11 +780,11 @@ declare class SSM extends Service {
    */
   updateMaintenanceWindowTarget(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTargetResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTargetResult, AWSError>;
   /**
-   * Modifies a task assigned to a Maintenance Window. You can't change the task type, but you can change the following values: Task ARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript. Service role ARN. Task parameters. Task priority. Task MaxConcurrency and MaxErrors. Log location. If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.
+   * Modifies a task assigned to a Maintenance Window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors   If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.
    */
   updateMaintenanceWindowTask(params: SSM.Types.UpdateMaintenanceWindowTaskRequest, callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
   /**
-   * Modifies a task assigned to a Maintenance Window. You can't change the task type, but you can change the following values: Task ARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript. Service role ARN. Task parameters. Task priority. Task MaxConcurrency and MaxErrors. Log location. If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.
+   * Modifies a task assigned to a Maintenance Window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors   If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.
    */
   updateMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
   /**
@@ -843,7 +859,7 @@ declare namespace SSM {
      */
     ResourceId: ResourceId;
     /**
-     *  One or more tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. 
+     *  One or more tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.   Do not enter personally identifiable information in this field. 
      */
     Tags: TagList;
   }
@@ -1284,7 +1300,7 @@ declare namespace SSM {
      */
     Comment?: Comment;
     /**
-     * If this time is reached and the command has not already started executing, it will not execute. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API.
+     * If this time is reached and the command has not already started executing, it will not run. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API.
      */
     ExpiresAfter?: DateTime;
     /**
@@ -1619,11 +1635,11 @@ declare namespace SSM {
   export type ComputerName = string;
   export interface CreateActivationRequest {
     /**
-     * A userdefined description of the resource that you want to register with Amazon EC2. 
+     * A userdefined description of the resource that you want to register with Amazon EC2.   Do not enter personally identifiable information in this field. 
      */
     Description?: ActivationDescription;
     /**
-     * The name of the registered, managed instance as it will appear in the Amazon EC2 console or when you use the AWS command line tools to list EC2 resources.
+     * The name of the registered, managed instance as it will appear in the Amazon EC2 console or when you use the AWS command line tools to list EC2 resources.  Do not enter personally identifiable information in this field. 
      */
     DefaultInstanceName?: DefaultInstanceName;
     /**
@@ -1903,6 +1919,38 @@ declare namespace SSM {
     Name: DocumentName;
   }
   export interface DeleteDocumentResult {
+  }
+  export interface DeleteInventoryRequest {
+    /**
+     * The name of the custom inventory type for which you want to delete either all previously collected data, or the inventory type itself. 
+     */
+    TypeName: InventoryItemTypeName;
+    /**
+     * Use the SchemaDeleteOption to delete a custom inventory type (schema). If you don't choose this option, the system only deletes existing inventory data associated with the custom inventory type. Choose one of the following options: DisableSchema: If you choose this option, the system ignores all inventory data for the specified version, and any earlier versions. To enable this schema again, you must call the PutInventory action for a version greater than the disbled version. DeleteSchema: This option deletes the specified custom type from the Inventory service. You can recreate the schema later, if you want.
+     */
+    SchemaDeleteOption?: InventorySchemaDeleteOption;
+    /**
+     * Use this option to view a summary of the deletion request without deleting any data or the data type. This option is useful when you only want to understand what will be deleted. Once you validate that the data to be deleted is what you intend to delete, you can run the same command without specifying the DryRun option.
+     */
+    DryRun?: DryRun;
+    /**
+     * User-provided idempotency token.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface DeleteInventoryResult {
+    /**
+     * Every DeleteInventory action is assigned a unique ID. This option returns a unique ID. You can use this ID to query the status of a delete operation. This option is useful for ensuring that a delete operation has completed before you begin other actions. 
+     */
+    DeletionId?: InventoryDeletionId;
+    /**
+     * The name of the inventory data type specified in the request.
+     */
+    TypeName?: InventoryItemTypeName;
+    /**
+     * A summary of the delete operation. For more information about this summary, see Understanding the Delete Inventory Summary.
+     */
+    DeletionSummary?: InventoryDeletionSummary;
   }
   export interface DeleteMaintenanceWindowRequest {
     /**
@@ -2381,6 +2429,30 @@ declare namespace SSM {
     Patches?: PatchComplianceDataList;
     /**
      * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeInventoryDeletionsRequest {
+    /**
+     * Specify the delete inventory ID for which you want information. This ID was returned by the DeleteInventory action.
+     */
+    DeletionId?: InventoryDeletionId;
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface DescribeInventoryDeletionsResult {
+    /**
+     * A list of status items for deleted inventory.
+     */
+    InventoryDeletions?: InventoryDeletionsList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -2871,6 +2943,7 @@ declare namespace SSM {
   }
   export type DocumentVersionList = DocumentVersionInfo[];
   export type DocumentVersionNumber = string;
+  export type DryRun = boolean;
   export type EffectiveInstanceAssociationMaxResults = number;
   export interface EffectivePatch {
     /**
@@ -2980,7 +3053,7 @@ declare namespace SSM {
      */
     ExecutionEndDateTime?: StringDateTime;
     /**
-     * The status of the parent command for this invocation. This status can be different than StatusDetails.
+     * The status of this invocation plugin. This status can be different than StatusDetails.
      */
     Status?: CommandInvocationStatus;
     /**
@@ -3277,7 +3350,7 @@ declare namespace SSM {
      */
     Type?: MaintenanceWindowTaskType;
     /**
-     * The parameters passed to the task when it was executed. The map has the following format: Key: string, between 1 and 255 characters Value: an array of strings, each string is between 1 and 255 characters
+     * The parameters passed to the task when it was executed.   TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.  The map has the following format: Key: string, between 1 and 255 characters Value: an array of strings, each string is between 1 and 255 characters
      */
     TaskParameters?: MaintenanceWindowTaskParametersList;
     /**
@@ -3393,7 +3466,7 @@ declare namespace SSM {
      */
     TaskType?: MaintenanceWindowTaskType;
     /**
-     * The parameters to pass to the task when it executes.
+     * The parameters to pass to the task when it executes.   TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     TaskParameters?: MaintenanceWindowTaskParameters;
     /**
@@ -3413,7 +3486,7 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * The location in Amazon S3 where the task results are logged.
+     * The location in Amazon S3 where the task results are logged.   LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**
@@ -3476,11 +3549,11 @@ declare namespace SSM {
      */
     Path: PSParameterName;
     /**
-     * Retrieve all parameters within a hierarchy.
+     * Retrieve all parameters within a hierarchy.  If a user has access to a path, then the user can access all levels of that path. For example, if a user has permission to access path /a, then the user can also access /a/b. Even if a user has explicitly been denied access in IAM for parameter /a, they can still call the GetParametersByPath API action recursively and view /a/b. 
      */
     Recursive?: Boolean;
     /**
-     * Filters to limit the request results.
+     * Filters to limit the request results.  You can't filter using the parameter name. 
      */
     ParameterFilters?: ParameterStringFilterList;
     /**
@@ -3909,6 +3982,71 @@ declare namespace SSM {
   export type InventoryAggregatorExpression = string;
   export type InventoryAggregatorList = InventoryAggregator[];
   export type InventoryAttributeDataType = "string"|"number"|string;
+  export type InventoryDeletionId = string;
+  export type InventoryDeletionLastStatusMessage = string;
+  export type InventoryDeletionLastStatusUpdateTime = Date;
+  export type InventoryDeletionStartTime = Date;
+  export type InventoryDeletionStatus = "InProgress"|"Complete"|string;
+  export interface InventoryDeletionStatusItem {
+    /**
+     * The deletion ID returned by the DeleteInventory action.
+     */
+    DeletionId?: InventoryDeletionId;
+    /**
+     * The name of the inventory data type.
+     */
+    TypeName?: InventoryItemTypeName;
+    /**
+     * The UTC timestamp when the delete operation started.
+     */
+    DeletionStartTime?: InventoryDeletionStartTime;
+    /**
+     * The status of the operation. Possible values are InProgress and Complete.
+     */
+    LastStatus?: InventoryDeletionStatus;
+    /**
+     * Information about the status.
+     */
+    LastStatusMessage?: InventoryDeletionLastStatusMessage;
+    /**
+     * Information about the delete operation. For more information about this summary, see Understanding the Delete Inventory Summary.
+     */
+    DeletionSummary?: InventoryDeletionSummary;
+    /**
+     * The UTC timestamp of when the last status report.
+     */
+    LastStatusUpdateTime?: InventoryDeletionLastStatusUpdateTime;
+  }
+  export interface InventoryDeletionSummary {
+    /**
+     * The total number of items to delete. This count does not change during the delete operation.
+     */
+    TotalCount?: TotalCount;
+    /**
+     * Remaining number of items to delete.
+     */
+    RemainingCount?: RemainingCount;
+    /**
+     * A list of counts and versions for deleted items.
+     */
+    SummaryItems?: InventoryDeletionSummaryItems;
+  }
+  export interface InventoryDeletionSummaryItem {
+    /**
+     * The inventory type version.
+     */
+    Version?: InventoryItemSchemaVersion;
+    /**
+     * A count of the number of deleted items.
+     */
+    Count?: ResourceCount;
+    /**
+     * The remaining number of items to delete.
+     */
+    RemainingCount?: RemainingCount;
+  }
+  export type InventoryDeletionSummaryItems = InventoryDeletionSummaryItem[];
+  export type InventoryDeletionsList = InventoryDeletionStatusItem[];
   export interface InventoryFilter {
     /**
      * The name of the filter key.
@@ -4030,6 +4168,7 @@ declare namespace SSM {
   }
   export type InventoryResultItemKey = string;
   export type InventoryResultItemMap = {[key: string]: InventoryResultItem};
+  export type InventorySchemaDeleteOption = "DisableSchema"|"DeleteSchema"|string;
   export type InventoryTypeDisplayName = string;
   export type InvocationTraceOutput = string;
   export type IsSubTypeSchema = boolean;
@@ -4392,7 +4531,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The parameters for the AUTOMATION task.
+     * The parameters for the AUTOMATION task. For information about specifying and updating task parameters, see RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.   LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.  TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters. For AUTOMATION task types, Systems Manager ignores any values specified for these parameters. 
      */
     Parameters?: AutomationParameterMap;
   }
@@ -4688,7 +4827,7 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
-     * The parameters that should be passed to the task when it is executed.
+     * The parameters that should be passed to the task when it is executed.   TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     TaskParameters?: MaintenanceWindowTaskParameters;
     /**
@@ -4696,7 +4835,7 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * Information about an Amazon S3 bucket to write task-level logs to.
+     * Information about an Amazon S3 bucket to write task-level logs to.   LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**
@@ -4728,7 +4867,7 @@ declare namespace SSM {
      */
     RunCommand?: MaintenanceWindowRunCommandParameters;
     /**
-     * The parameters for a AUTOMATION task type.
+     * The parameters for an AUTOMATION task type.
      */
     Automation?: MaintenanceWindowAutomationParameters;
     /**
@@ -5216,6 +5355,7 @@ declare namespace SSM {
   }
   export interface PutComplianceItemsResult {
   }
+  export type PutInventoryMessage = string;
   export interface PutInventoryRequest {
     /**
      * One or more instance IDs where you want to add or update inventory items.
@@ -5227,6 +5367,10 @@ declare namespace SSM {
     Items: InventoryItemList;
   }
   export interface PutInventoryResult {
+    /**
+     * Information about the request.
+     */
+    Message?: PutInventoryMessage;
   }
   export interface PutParameterRequest {
     /**
@@ -5234,7 +5378,7 @@ declare namespace SSM {
      */
     Name: PSParameterName;
     /**
-     * Information about the parameter that you want to add to the system.
+     * Information about the parameter that you want to add to the system.  Do not enter personally identifiable information in this field. 
      */
     Description?: ParameterDescription;
     /**
@@ -5354,7 +5498,7 @@ declare namespace SSM {
      */
     TaskType: MaintenanceWindowTaskType;
     /**
-     * The parameters that should be passed to the task when it is executed.
+     * The parameters that should be passed to the task when it is executed.   TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     TaskParameters?: MaintenanceWindowTaskParameters;
     /**
@@ -5374,7 +5518,7 @@ declare namespace SSM {
      */
     MaxErrors: MaxErrors;
     /**
-     * A structure containing information about an Amazon S3 bucket to write instance-level logs to. 
+     * A structure containing information about an Amazon S3 bucket to write instance-level logs to.    LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**
@@ -5398,6 +5542,7 @@ declare namespace SSM {
   }
   export type RegistrationLimit = number;
   export type RegistrationsCount = number;
+  export type RemainingCount = number;
   export interface RemoveTagsFromResourceRequest {
     /**
      * The type of resource of which you want to remove a tag.
@@ -5459,6 +5604,7 @@ declare namespace SSM {
     NonCompliantSummary?: NonCompliantSummary;
   }
   export type ResourceComplianceSummaryItemList = ResourceComplianceSummaryItem[];
+  export type ResourceCount = number;
   export type ResourceDataSyncAWSKMSKeyARN = string;
   export type ResourceDataSyncCreatedTime = Date;
   export interface ResourceDataSyncItem {
@@ -5592,7 +5738,7 @@ declare namespace SSM {
      */
     DocumentHashType?: DocumentHashType;
     /**
-     * If this time is reached and the command has not already started executing, it will not execute.
+     * If this time is reached and the command has not already started executing, it will not run.
      */
     TimeoutSeconds?: TimeoutSeconds;
     /**
@@ -5846,6 +5992,7 @@ declare namespace SSM {
   export type TargetValues = TargetValue[];
   export type Targets = Target[];
   export type TimeoutSeconds = number;
+  export type TotalCount = number;
   export interface UpdateAssociationRequest {
     /**
      * The ID of the association you want to update. 
@@ -6104,7 +6251,7 @@ declare namespace SSM {
      */
     ServiceRoleArn?: ServiceRole;
     /**
-     * The parameters to modify. The map has the following format: Key: string, between 1 and 255 characters Value: an array of strings, each string is between 1 and 255 characters
+     * The parameters to modify.   TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.  The map has the following format: Key: string, between 1 and 255 characters Value: an array of strings, each string is between 1 and 255 characters
      */
     TaskParameters?: MaintenanceWindowTaskParameters;
     /**
@@ -6124,7 +6271,7 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * The new logging location in Amazon S3 to specify.
+     * The new logging location in Amazon S3 to specify.   LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**
@@ -6162,7 +6309,7 @@ declare namespace SSM {
      */
     ServiceRoleArn?: ServiceRole;
     /**
-     * The updated parameter values.
+     * The updated parameter values.   TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     TaskParameters?: MaintenanceWindowTaskParameters;
     /**
@@ -6182,7 +6329,7 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * The updated logging information in Amazon S3.
+     * The updated logging information in Amazon S3.   LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**

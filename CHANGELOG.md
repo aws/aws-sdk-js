@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.224.1-->
+<!--LATEST=2.225.1-->
 <!--ENTRYINSERT-->
+
+## 2.225.1
+* feature: CodePipeline: Added new SourceRevision structure to Execution Summary with accompanying definitions as needed in the AWS CodePipeline API Guide.
+* feature: CostExplorer: Starting today, you can identify opportunities for Amazon RDS cost savings using AWS Cost Explorer's API to access your Amazon RDS Reserved Instance Purchase Recommendations
+* feature: DeviceFarm: Adding support for VPCEndpoint feature. Allows customers to be able to access their private endpoints/services running in their VPC during test automation.
+* feature: EC2: Added support for customers to see the time at which a Dedicated Host was allocated or released.
+* feature: RDS: The ModifyDBCluster operation now includes an EngineVersion parameter. You can use this to upgrade the engine for a clustered database.
+* feature: SSM: Added new APIs DeleteInventory and DescribeInventoryDeletions, for customers to delete their custom inventory data.
 
 ## 2.224.1
 * feature: DMS: Native Change Data Capture start point and task recovery support in Database Migration Service.  
