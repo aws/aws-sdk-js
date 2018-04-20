@@ -1355,6 +1355,14 @@
       ],
       "documentation": "Placeholder documentation for AudioType"
     },
+    "AuthenticationScheme": {
+      "type": "string",
+      "enum": [
+        "AKAMAI",
+        "COMMON"
+      ],
+      "documentation": "Placeholder documentation for AuthenticationScheme"
+    },
     "AvailBlanking": {
       "type": "structure",
       "members": {
@@ -1686,6 +1694,10 @@
         "EmbeddedPlusScte20DestinationSettings": {
           "shape": "EmbeddedPlusScte20DestinationSettings",
           "locationName": "embeddedPlusScte20DestinationSettings"
+        },
+        "RtmpCaptionInfoDestinationSettings": {
+          "shape": "RtmpCaptionInfoDestinationSettings",
+          "locationName": "rtmpCaptionInfoDestinationSettings"
         },
         "Scte20PlusEmbeddedDestinationSettings": {
           "shape": "Scte20PlusEmbeddedDestinationSettings",
@@ -4276,7 +4288,7 @@
         "Uri": {
           "shape": "__string",
           "locationName": "uri",
-          "documentation": "Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a rtmpEndpoint should have a uri simliar to: \"rtmp://fmsserver/live\"."
+          "documentation": "Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a RTMP destination should have a uri simliar to: \"rtmp://fmsserver/live\"."
         },
         "Username": {
           "shape": "__string",
@@ -5245,6 +5257,11 @@
           "locationName": "timedMetadataBehavior",
           "documentation": "When set to passthrough, timed metadata is passed through from input to output."
         },
+        "TimedMetadataPid": {
+          "shape": "__string",
+          "locationName": "timedMetadataPid",
+          "documentation": "Packet Identifier (PID) of the timed metadata stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6)."
+        },
         "TransportStreamId": {
           "shape": "__integerMin0Max65535",
           "locationName": "transportStreamId",
@@ -5317,7 +5334,7 @@
         "CertificateMode": {
           "shape": "SmoothGroupCertificateMode",
           "locationName": "certificateMode",
-          "documentation": "If set to verifyAuthenticity, verify the https certificate chain to a trusted Certificate Authority (CA).  This will cause https outputs to self-signed certificates to fail unless those certificates are manually added to the OS trusted keystore."
+          "documentation": "If set to verifyAuthenticity, verify the https certificate chain to a trusted Certificate Authority (CA).  This will cause https outputs to self-signed certificates to fail."
         },
         "ConnectionRetryInterval": {
           "shape": "__integerMin0",
@@ -5512,6 +5529,11 @@
           "locationName": "passwordParam",
           "documentation": "key used to extract the password from EC2 Parameter store"
         },
+        "StreamName": {
+          "shape": "__string",
+          "locationName": "streamName",
+          "documentation": "Stream name for RTMP destinations (URLs of type rtmp://)"
+        },
         "Url": {
           "shape": "__string",
           "locationName": "url",
@@ -5564,6 +5586,10 @@
           "shape": "MsSmoothGroupSettings",
           "locationName": "msSmoothGroupSettings"
         },
+        "RtmpGroupSettings": {
+          "shape": "RtmpGroupSettings",
+          "locationName": "rtmpGroupSettings"
+        },
         "UdpGroupSettings": {
           "shape": "UdpGroupSettings",
           "locationName": "udpGroupSettings"
@@ -5595,6 +5621,10 @@
         "MsSmoothOutputSettings": {
           "shape": "MsSmoothOutputSettings",
           "locationName": "msSmoothOutputSettings"
+        },
+        "RtmpOutputSettings": {
+          "shape": "RtmpOutputSettings",
+          "locationName": "rtmpOutputSettings"
         },
         "UdpOutputSettings": {
           "shape": "UdpOutputSettings",
@@ -5652,6 +5682,97 @@
         }
       },
       "documentation": "Placeholder documentation for ResourceNotFound"
+    },
+    "RtmpCacheFullBehavior": {
+      "type": "string",
+      "enum": [
+        "DISCONNECT_IMMEDIATELY",
+        "WAIT_FOR_SERVER"
+      ],
+      "documentation": "Placeholder documentation for RtmpCacheFullBehavior"
+    },
+    "RtmpCaptionData": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "FIELD1_608",
+        "FIELD1_AND_FIELD2_608"
+      ],
+      "documentation": "Placeholder documentation for RtmpCaptionData"
+    },
+    "RtmpCaptionInfoDestinationSettings": {
+      "type": "structure",
+      "members": {
+      },
+      "documentation": "Placeholder documentation for RtmpCaptionInfoDestinationSettings"
+    },
+    "RtmpGroupSettings": {
+      "type": "structure",
+      "members": {
+        "AuthenticationScheme": {
+          "shape": "AuthenticationScheme",
+          "locationName": "authenticationScheme",
+          "documentation": "Authentication scheme to use when connecting with CDN"
+        },
+        "CacheFullBehavior": {
+          "shape": "RtmpCacheFullBehavior",
+          "locationName": "cacheFullBehavior",
+          "documentation": "Controls behavior when content cache fills up. If remote origin server stalls the RTMP connection and does not accept content fast enough the 'Media Cache' will fill up. When the cache reaches the duration specified by cacheLength the cache will stop accepting new content. If set to disconnectImmediately, the RTMP output will force a disconnect. Clear the media cache, and reconnect after restartDelay seconds. If set to waitForServer, the RTMP output will wait up to 5 minutes to allow the origin server to begin accepting data again."
+        },
+        "CacheLength": {
+          "shape": "__integerMin30",
+          "locationName": "cacheLength",
+          "documentation": "Cache length, in seconds, is used to calculate buffer size."
+        },
+        "CaptionData": {
+          "shape": "RtmpCaptionData",
+          "locationName": "captionData",
+          "documentation": "Controls the types of data that passes to onCaptionInfo outputs.  If set to 'all' then 608 and 708 carried DTVCC data will be passed.  If set to 'field1AndField2608' then DTVCC data will be stripped out, but 608 data from both fields will be passed. If set to 'field1608' then only the data carried in 608 from field 1 video will be passed."
+        },
+        "RestartDelay": {
+          "shape": "__integerMin0",
+          "locationName": "restartDelay",
+          "documentation": "If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart."
+        }
+      },
+      "documentation": "Placeholder documentation for RtmpGroupSettings"
+    },
+    "RtmpOutputCertificateMode": {
+      "type": "string",
+      "enum": [
+        "SELF_SIGNED",
+        "VERIFY_AUTHENTICITY"
+      ],
+      "documentation": "Placeholder documentation for RtmpOutputCertificateMode"
+    },
+    "RtmpOutputSettings": {
+      "type": "structure",
+      "members": {
+        "CertificateMode": {
+          "shape": "RtmpOutputCertificateMode",
+          "locationName": "certificateMode",
+          "documentation": "If set to verifyAuthenticity, verify the tls certificate chain to a trusted Certificate Authority (CA).  This will cause rtmps outputs with self-signed certificates to fail."
+        },
+        "ConnectionRetryInterval": {
+          "shape": "__integerMin1",
+          "locationName": "connectionRetryInterval",
+          "documentation": "Number of seconds to wait before retrying a connection to the Flash Media server if the connection is lost."
+        },
+        "Destination": {
+          "shape": "OutputLocationRef",
+          "locationName": "destination",
+          "documentation": "The RTMP endpoint excluding the stream name (eg. rtmp://host/appname). For connection to Akamai, a username and password must be supplied. URI fields accept format identifiers."
+        },
+        "NumRetries": {
+          "shape": "__integerMin0",
+          "locationName": "numRetries",
+          "documentation": "Number of retry attempts."
+        }
+      },
+      "required": [
+        "Destination"
+      ],
+      "documentation": "Placeholder documentation for RtmpOutputSettings"
     },
     "Scte20Convert608To708": {
       "type": "string",
@@ -6790,6 +6911,11 @@
       "type": "integer",
       "min": 3,
       "documentation": "Placeholder documentation for __integerMin3"
+    },
+    "__integerMin30": {
+      "type": "integer",
+      "min": 30,
+      "documentation": "Placeholder documentation for __integerMin30"
     },
     "__integerMin4Max20": {
       "type": "integer",

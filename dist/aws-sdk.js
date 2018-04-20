@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.225.1
+// AWS SDK for JavaScript v2.226.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -62431,6 +62431,39 @@ module.exports={
         }
       }
     },
+    "ListTagsForDeliveryStream": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DeliveryStreamName"
+        ],
+        "members": {
+          "DeliveryStreamName": {},
+          "ExclusiveStartTagKey": {},
+          "Limit": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Tags",
+          "HasMoreTags"
+        ],
+        "members": {
+          "Tags": {
+            "type": "list",
+            "member": {
+              "shape": "S2l"
+            }
+          },
+          "HasMoreTags": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
     "PutRecord": {
       "input": {
         "type": "structure",
@@ -62441,7 +62474,7 @@ module.exports={
         "members": {
           "DeliveryStreamName": {},
           "Record": {
-            "shape": "S2h"
+            "shape": "S2o"
           }
         }
       },
@@ -62467,7 +62500,7 @@ module.exports={
           "Records": {
             "type": "list",
             "member": {
-              "shape": "S2h"
+              "shape": "S2o"
             }
           }
         }
@@ -62496,6 +62529,48 @@ module.exports={
         }
       }
     },
+    "TagDeliveryStream": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DeliveryStreamName",
+          "Tags"
+        ],
+        "members": {
+          "DeliveryStreamName": {},
+          "Tags": {
+            "type": "list",
+            "member": {
+              "shape": "S2l"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagDeliveryStream": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DeliveryStreamName",
+          "TagKeys"
+        ],
+        "members": {
+          "DeliveryStreamName": {},
+          "TagKeys": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "UpdateDestination": {
       "input": {
         "type": "structure",
@@ -62509,7 +62584,7 @@ module.exports={
           "CurrentDeliveryStreamVersionId": {},
           "DestinationId": {},
           "S3DestinationUpdate": {
-            "shape": "S2u",
+            "shape": "S37",
             "deprecated": true
           },
           "ExtendedS3DestinationUpdate": {
@@ -62533,7 +62608,7 @@ module.exports={
               },
               "S3BackupMode": {},
               "S3BackupUpdate": {
-                "shape": "S2u"
+                "shape": "S37"
               }
             }
           },
@@ -62555,14 +62630,14 @@ module.exports={
                 "shape": "S14"
               },
               "S3Update": {
-                "shape": "S2u"
+                "shape": "S37"
               },
               "ProcessingConfiguration": {
                 "shape": "Sn"
               },
               "S3BackupMode": {},
               "S3BackupUpdate": {
-                "shape": "S2u"
+                "shape": "S37"
               },
               "CloudWatchLoggingOptions": {
                 "shape": "Si"
@@ -62584,7 +62659,7 @@ module.exports={
                 "shape": "S1f"
               },
               "S3Update": {
-                "shape": "S2u"
+                "shape": "S37"
               },
               "ProcessingConfiguration": {
                 "shape": "Sn"
@@ -62608,7 +62683,7 @@ module.exports={
               },
               "S3BackupMode": {},
               "S3Update": {
-                "shape": "S2u"
+                "shape": "S37"
               },
               "ProcessingConfiguration": {
                 "shape": "Sn"
@@ -62798,7 +62873,17 @@ module.exports={
         }
       }
     },
-    "S2h": {
+    "S2l": {
+      "type": "structure",
+      "required": [
+        "Key"
+      ],
+      "members": {
+        "Key": {},
+        "Value": {}
+      }
+    },
+    "S2o": {
       "type": "structure",
       "required": [
         "Data"
@@ -62809,7 +62894,7 @@ module.exports={
         }
       }
     },
-    "S2u": {
+    "S37": {
       "type": "structure",
       "members": {
         "RoleARN": {},
@@ -126531,7 +126616,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.225.1',
+  VERSION: '2.226.1',
 
   /**
    * @api private
@@ -150483,7 +150568,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":474,"lodash/assign":431}],490:[function(require,module,exports){
-// AWS SDK for JavaScript v2.225.1
+// AWS SDK for JavaScript v2.226.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

@@ -405,6 +405,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     AudioPidSelection?: AudioPidSelection;
   }
   export type AudioType = "CLEAN_EFFECTS"|"HEARING_IMPAIRED"|"UNDEFINED"|"VISUAL_IMPAIRED_COMMENTARY"|string;
+  export type AuthenticationScheme = "AKAMAI"|"COMMON"|string;
   export interface AvailBlanking {
     /**
      * Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
@@ -554,6 +555,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     DvbSubDestinationSettings?: DvbSubDestinationSettings;
     EmbeddedDestinationSettings?: EmbeddedDestinationSettings;
     EmbeddedPlusScte20DestinationSettings?: EmbeddedPlusScte20DestinationSettings;
+    RtmpCaptionInfoDestinationSettings?: RtmpCaptionInfoDestinationSettings;
     Scte20PlusEmbeddedDestinationSettings?: Scte20PlusEmbeddedDestinationSettings;
     Scte27DestinationSettings?: Scte27DestinationSettings;
     SmpteTtDestinationSettings?: SmpteTtDestinationSettings;
@@ -1869,7 +1871,7 @@ to.
      */
     PasswordParam?: __string;
     /**
-     * Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a rtmpEndpoint should have a uri simliar to: "rtmp://fmsserver/live".
+     * Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a RTMP destination should have a uri simliar to: "rtmp://fmsserver/live".
      */
     Uri: __string;
     /**
@@ -2354,6 +2356,10 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      */
     TimedMetadataBehavior?: M3u8TimedMetadataBehavior;
     /**
+     * Packet Identifier (PID) of the timed metadata stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+     */
+    TimedMetadataPid?: __string;
+    /**
      * The value of the transport stream ID field in the Program Map Table.
      */
     TransportStreamId?: __integerMin0Max65535;
@@ -2389,7 +2395,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      */
     AudioOnlyTimecodeControl?: SmoothGroupAudioOnlyTimecodeControl;
     /**
-     * If set to verifyAuthenticity, verify the https certificate chain to a trusted Certificate Authority (CA).  This will cause https outputs to self-signed certificates to fail unless those certificates are manually added to the OS trusted keystore.
+     * If set to verifyAuthenticity, verify the https certificate chain to a trusted Certificate Authority (CA).  This will cause https outputs to self-signed certificates to fail.
      */
     CertificateMode?: SmoothGroupCertificateMode;
     /**
@@ -2521,6 +2527,10 @@ Options:
      */
     PasswordParam?: __string;
     /**
+     * Stream name for RTMP destinations (URLs of type rtmp://)
+     */
+    StreamName?: __string;
+    /**
      * A URL specifying a destination
      */
     Url?: __string;
@@ -2544,6 +2554,7 @@ Options:
     ArchiveGroupSettings?: ArchiveGroupSettings;
     HlsGroupSettings?: HlsGroupSettings;
     MsSmoothGroupSettings?: MsSmoothGroupSettings;
+    RtmpGroupSettings?: RtmpGroupSettings;
     UdpGroupSettings?: UdpGroupSettings;
   }
   export interface OutputLocationRef {
@@ -2553,6 +2564,7 @@ Options:
     ArchiveOutputSettings?: ArchiveOutputSettings;
     HlsOutputSettings?: HlsOutputSettings;
     MsSmoothOutputSettings?: MsSmoothOutputSettings;
+    RtmpOutputSettings?: RtmpOutputSettings;
     UdpOutputSettings?: UdpOutputSettings;
   }
   export interface PassThroughSettings {
@@ -2577,6 +2589,51 @@ Valid values: 1, 2, 4, 6, 8
   }
   export interface ResourceNotFound {
     Message?: __string;
+  }
+  export type RtmpCacheFullBehavior = "DISCONNECT_IMMEDIATELY"|"WAIT_FOR_SERVER"|string;
+  export type RtmpCaptionData = "ALL"|"FIELD1_608"|"FIELD1_AND_FIELD2_608"|string;
+  export interface RtmpCaptionInfoDestinationSettings {
+  }
+  export interface RtmpGroupSettings {
+    /**
+     * Authentication scheme to use when connecting with CDN
+     */
+    AuthenticationScheme?: AuthenticationScheme;
+    /**
+     * Controls behavior when content cache fills up. If remote origin server stalls the RTMP connection and does not accept content fast enough the 'Media Cache' will fill up. When the cache reaches the duration specified by cacheLength the cache will stop accepting new content. If set to disconnectImmediately, the RTMP output will force a disconnect. Clear the media cache, and reconnect after restartDelay seconds. If set to waitForServer, the RTMP output will wait up to 5 minutes to allow the origin server to begin accepting data again.
+     */
+    CacheFullBehavior?: RtmpCacheFullBehavior;
+    /**
+     * Cache length, in seconds, is used to calculate buffer size.
+     */
+    CacheLength?: __integerMin30;
+    /**
+     * Controls the types of data that passes to onCaptionInfo outputs.  If set to 'all' then 608 and 708 carried DTVCC data will be passed.  If set to 'field1AndField2608' then DTVCC data will be stripped out, but 608 data from both fields will be passed. If set to 'field1608' then only the data carried in 608 from field 1 video will be passed.
+     */
+    CaptionData?: RtmpCaptionData;
+    /**
+     * If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
+     */
+    RestartDelay?: __integerMin0;
+  }
+  export type RtmpOutputCertificateMode = "SELF_SIGNED"|"VERIFY_AUTHENTICITY"|string;
+  export interface RtmpOutputSettings {
+    /**
+     * If set to verifyAuthenticity, verify the tls certificate chain to a trusted Certificate Authority (CA).  This will cause rtmps outputs with self-signed certificates to fail.
+     */
+    CertificateMode?: RtmpOutputCertificateMode;
+    /**
+     * Number of seconds to wait before retrying a connection to the Flash Media server if the connection is lost.
+     */
+    ConnectionRetryInterval?: __integerMin1;
+    /**
+     * The RTMP endpoint excluding the stream name (eg. rtmp://host/appname). For connection to Akamai, a username and password must be supplied. URI fields accept format identifiers.
+     */
+    Destination: OutputLocationRef;
+    /**
+     * Number of retry attempts.
+     */
+    NumRetries?: __integerMin0;
   }
   export type Scte20Convert608To708 = "DISABLED"|"UPCONVERT"|string;
   export interface Scte20PlusEmbeddedDestinationSettings {
@@ -3051,6 +3108,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __integerMin25Max10000 = number;
   export type __integerMin25Max2000 = number;
   export type __integerMin3 = number;
+  export type __integerMin30 = number;
   export type __integerMin4Max20 = number;
   export type __integerMin96Max600 = number;
   export type __integerMinNegative1000Max1000 = number;
