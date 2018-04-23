@@ -134,3 +134,4 @@ export import Connect = require('./connect');
 export import ACMPCA = require('./acmpca');
 export import FMS = require('./fms');
 export import SecretsManager = require('./secretsmanager');
+export import IoTAnalytics = require('./iotanalytics');

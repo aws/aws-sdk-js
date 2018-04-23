@@ -156,11 +156,11 @@ declare class Iot extends Service {
    */
   createStream(callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
-   * Creates a thing record in the thing registry.
+   * Creates a thing record in the registry.
    */
   createThing(params: Iot.Types.CreateThingRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
-   * Creates a thing record in the thing registry.
+   * Creates a thing record in the registry.
    */
   createThing(callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
@@ -999,7 +999,7 @@ declare class Iot extends Service {
 declare namespace Iot {
   export interface AcceptCertificateTransferRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
     /**
@@ -1060,6 +1060,10 @@ declare namespace Iot {
      * Send a message to a Salesforce IoT Cloud Input Stream.
      */
     salesforce?: SalesforceAction;
+    /**
+     * Sends message data to an AWS IoT Analytics channel.
+     */
+    iotAnalytics?: IotAnalyticsAction;
   }
   export type ActionList = Action[];
   export type ActionType = "PUBLISH"|"SUBSCRIBE"|"RECEIVE"|"CONNECT"|string;
@@ -1306,15 +1310,24 @@ declare namespace Iot {
      * Whether the CA certificate configured for auto registration of device certificates. Valid values are "ENABLE" and "DISABLE"
      */
     autoRegistrationStatus?: AutoRegistrationStatus;
+    /**
+     * The date the CA certificate was last modified.
+     */
     lastModifiedDate?: DateType;
+    /**
+     * The customer version of the CA certificate.
+     */
     customerVersion?: CustomerVersion;
+    /**
+     * The generation ID of the CA certificate.
+     */
     generationId?: GenerationId;
   }
   export type CACertificateStatus = "ACTIVE"|"INACTIVE"|string;
   export type CACertificates = CACertificate[];
   export interface CancelCertificateTransferRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
   }
@@ -1350,7 +1363,7 @@ declare namespace Iot {
      */
     certificateArn?: CertificateArn;
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId?: CertificateId;
     /**
@@ -1400,11 +1413,17 @@ declare namespace Iot {
      * The date and time the certificate was last modified.
      */
     lastModifiedDate?: DateType;
+    /**
+     * The customer version of the certificate.
+     */
     customerVersion?: CustomerVersion;
     /**
      * The transfer data.
      */
     transferData?: TransferData;
+    /**
+     * The generation ID of the certificate.
+     */
     generationId?: GenerationId;
   }
   export type CertificateId = string;
@@ -1413,6 +1432,7 @@ declare namespace Iot {
   export type CertificateSigningRequest = string;
   export type CertificateStatus = "ACTIVE"|"INACTIVE"|"REVOKED"|"PENDING_TRANSFER"|"REGISTER_INACTIVE"|"PENDING_ACTIVATION"|string;
   export type Certificates = Certificate[];
+  export type ChannelName = string;
   export interface ClearDefaultAuthorizerRequest {
   }
   export interface ClearDefaultAuthorizerResponse {
@@ -1933,7 +1953,7 @@ declare namespace Iot {
   }
   export interface DeleteCACertificateRequest {
     /**
-     * The ID of the certificate to delete.
+     * The ID of the certificate to delete. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
   }
@@ -1941,7 +1961,7 @@ declare namespace Iot {
   }
   export interface DeleteCertificateRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
     /**
@@ -2095,7 +2115,7 @@ declare namespace Iot {
   }
   export interface DescribeCertificateRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
   }
@@ -2651,8 +2671,17 @@ declare namespace Iot {
      * The default policy version ID.
      */
     defaultVersionId?: PolicyVersionId;
+    /**
+     * The date the policy was created.
+     */
     creationDate?: DateType;
+    /**
+     * The date the policy was last modified.
+     */
     lastModifiedDate?: DateType;
+    /**
+     * The generation ID of the policy.
+     */
     generationId?: GenerationId;
   }
   export interface GetPolicyVersionRequest {
@@ -2686,8 +2715,17 @@ declare namespace Iot {
      * Specifies whether the policy version is the default.
      */
     isDefaultVersion?: IsDefaultVersion;
+    /**
+     * The date the policy version was created.
+     */
     creationDate?: DateType;
+    /**
+     * The date the policy version was last modified.
+     */
     lastModifiedDate?: DateType;
+    /**
+     * The generation ID of the policy version.
+     */
     generationId?: GenerationId;
   }
   export interface GetRegistrationCodeRequest {
@@ -2755,6 +2793,20 @@ declare namespace Iot {
   export type IndexSchema = string;
   export type IndexStatus = "ACTIVE"|"BUILDING"|"REBUILDING"|string;
   export type InlineDocument = string;
+  export interface IotAnalyticsAction {
+    /**
+     * (deprecated) The ARN of the IoT Analytics channel to which message data will be sent.
+     */
+    channelArn?: AwsArn;
+    /**
+     * The name of the IoT Analytics channel to which message data will be sent.
+     */
+    channelName?: ChannelName;
+    /**
+     * The ARN of the role which has a policy that grants IoT permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).
+     */
+    roleArn?: AwsArn;
+  }
   export type IsAuthenticated = boolean;
   export type IsDefaultVersion = boolean;
   export type IsDisabled = boolean;
@@ -3270,7 +3322,7 @@ declare namespace Iot {
      */
     maxResults?: MaxResults;
     /**
-     * A token used to retreive the next set of results.
+     * A token used to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -4071,11 +4123,11 @@ declare namespace Iot {
   }
   export interface RegisterThingRequest {
     /**
-     * The provisioning template. 
+     * The provisioning template. See Programmatic Provisioning for more information.
      */
     templateBody: TemplateBody;
     /**
-     * The parameters for provisioning a thing.
+     * The parameters for provisioning a thing. See Programmatic Provisioning for more information.
      */
     parameters?: Parameters;
   }
@@ -4102,7 +4154,7 @@ declare namespace Iot {
   export type RegistryS3KeyName = string;
   export interface RejectCertificateTransferRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
     /**
@@ -4167,6 +4219,9 @@ declare namespace Iot {
      * The role alias.
      */
     roleAlias?: RoleAlias;
+    /**
+     * The ARN of the role alias.
+     */
     roleAliasArn?: RoleAliasArn;
     /**
      * The role ARN.
@@ -4605,7 +4660,7 @@ declare namespace Iot {
      */
     attributes?: Attributes;
     /**
-     * The thing shadow.
+     * The shadow.
      */
     shadow?: JsonDocument;
   }
@@ -4788,7 +4843,7 @@ declare namespace Iot {
   }
   export interface TransferCertificateRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
     /**
@@ -4885,7 +4940,7 @@ declare namespace Iot {
   }
   export interface UpdateCertificateRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
     /**

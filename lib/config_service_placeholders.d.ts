@@ -136,6 +136,7 @@ export abstract class ConfigurationServicePlaceholders {
   acmpca?: AWS.ACMPCA.Types.ClientConfiguration;
   fms?: AWS.FMS.Types.ClientConfiguration;
   secretsmanager?: AWS.SecretsManager.Types.ClientConfiguration;
+  iotanalytics?: AWS.IoTAnalytics.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -274,4 +275,5 @@ export interface ConfigurationServiceApiVersions {
   acmpca?: AWS.ACMPCA.Types.apiVersion;
   fms?: AWS.FMS.Types.apiVersion;
   secretsmanager?: AWS.SecretsManager.Types.apiVersion;
+  iotanalytics?: AWS.IoTAnalytics.Types.apiVersion;
 }

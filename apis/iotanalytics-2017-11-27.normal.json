@@ -1,0 +1,2182 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2017-11-27",
+    "endpointPrefix":"iotanalytics",
+    "protocol":"rest-json",
+    "serviceFullName":"AWS IoT Analytics",
+    "serviceId":"IoTAnalytics",
+    "signatureVersion":"v4",
+    "signingName":"iotanalytics",
+    "uid":"iotanalytics-2017-11-27"
+  },
+  "operations":{
+    "BatchPutMessage":{
+      "name":"BatchPutMessage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/messages/batch",
+        "responseCode":200
+      },
+      "input":{"shape":"BatchPutMessageRequest"},
+      "output":{"shape":"BatchPutMessageResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Sends messages to a channel.</p>"
+    },
+    "CancelPipelineReprocessing":{
+      "name":"CancelPipelineReprocessing",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/pipelines/{pipelineName}/reprocessing/{reprocessingId}"
+      },
+      "input":{"shape":"CancelPipelineReprocessingRequest"},
+      "output":{"shape":"CancelPipelineReprocessingResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Cancels the reprocessing of data through the pipeline.</p>"
+    },
+    "CreateChannel":{
+      "name":"CreateChannel",
+      "http":{
+        "method":"POST",
+        "requestUri":"/channels",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateChannelRequest"},
+      "output":{"shape":"CreateChannelResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.</p>"
+    },
+    "CreateDataset":{
+      "name":"CreateDataset",
+      "http":{
+        "method":"POST",
+        "requestUri":"/datasets",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateDatasetRequest"},
+      "output":{"shape":"CreateDatasetResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a data set. A data set stores data retrieved from a data store by applying an SQL action.</p> <note> <p>This operation creates the skeleton of a data set. To populate the data set, call \"CreateDatasetContent\".</p> </note>"
+    },
+    "CreateDatasetContent":{
+      "name":"CreateDatasetContent",
+      "http":{
+        "method":"POST",
+        "requestUri":"/datasets/{datasetName}/content"
+      },
+      "input":{"shape":"CreateDatasetContentRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Creates the content of a data set by applying an SQL action.</p>"
+    },
+    "CreateDatastore":{
+      "name":"CreateDatastore",
+      "http":{
+        "method":"POST",
+        "requestUri":"/datastores",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateDatastoreRequest"},
+      "output":{"shape":"CreateDatastoreResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a data store, which is a repository for messages.</p>"
+    },
+    "CreatePipeline":{
+      "name":"CreatePipeline",
+      "http":{
+        "method":"POST",
+        "requestUri":"/pipelines",
+        "responseCode":201
+      },
+      "input":{"shape":"CreatePipelineRequest"},
+      "output":{"shape":"CreatePipelineResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store.</p>"
+    },
+    "DeleteChannel":{
+      "name":"DeleteChannel",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/channels/{channelName}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteChannelRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Deletes the specified channel.</p>"
+    },
+    "DeleteDataset":{
+      "name":"DeleteDataset",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/datasets/{datasetName}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteDatasetRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Deletes the specified data set.</p> <p>You do not have to delete the content of the data set before you perform this operation.</p>"
+    },
+    "DeleteDatasetContent":{
+      "name":"DeleteDatasetContent",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/datasets/{datasetName}/content",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteDatasetContentRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Deletes the content of the specified data set.</p>"
+    },
+    "DeleteDatastore":{
+      "name":"DeleteDatastore",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/datastores/{datastoreName}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteDatastoreRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Deletes the specified data store.</p>"
+    },
+    "DeletePipeline":{
+      "name":"DeletePipeline",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/pipelines/{pipelineName}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeletePipelineRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Deletes the specified pipeline.</p>"
+    },
+    "DescribeChannel":{
+      "name":"DescribeChannel",
+      "http":{
+        "method":"GET",
+        "requestUri":"/channels/{channelName}"
+      },
+      "input":{"shape":"DescribeChannelRequest"},
+      "output":{"shape":"DescribeChannelResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves information about a channel.</p>"
+    },
+    "DescribeDataset":{
+      "name":"DescribeDataset",
+      "http":{
+        "method":"GET",
+        "requestUri":"/datasets/{datasetName}"
+      },
+      "input":{"shape":"DescribeDatasetRequest"},
+      "output":{"shape":"DescribeDatasetResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves information about a data set.</p>"
+    },
+    "DescribeDatastore":{
+      "name":"DescribeDatastore",
+      "http":{
+        "method":"GET",
+        "requestUri":"/datastores/{datastoreName}"
+      },
+      "input":{"shape":"DescribeDatastoreRequest"},
+      "output":{"shape":"DescribeDatastoreResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves information about a data store.</p>"
+    },
+    "DescribeLoggingOptions":{
+      "name":"DescribeLoggingOptions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/logging"
+      },
+      "input":{"shape":"DescribeLoggingOptionsRequest"},
+      "output":{"shape":"DescribeLoggingOptionsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves the current settings of the AWS IoT Analytics logging options.</p>"
+    },
+    "DescribePipeline":{
+      "name":"DescribePipeline",
+      "http":{
+        "method":"GET",
+        "requestUri":"/pipelines/{pipelineName}"
+      },
+      "input":{"shape":"DescribePipelineRequest"},
+      "output":{"shape":"DescribePipelineResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves information about a pipeline.</p>"
+    },
+    "GetDatasetContent":{
+      "name":"GetDatasetContent",
+      "http":{
+        "method":"GET",
+        "requestUri":"/datasets/{datasetName}/content"
+      },
+      "input":{"shape":"GetDatasetContentRequest"},
+      "output":{"shape":"GetDatasetContentResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves the contents of a data set as pre-signed URIs.</p>"
+    },
+    "ListChannels":{
+      "name":"ListChannels",
+      "http":{
+        "method":"GET",
+        "requestUri":"/channels"
+      },
+      "input":{"shape":"ListChannelsRequest"},
+      "output":{"shape":"ListChannelsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves a list of channels.</p>"
+    },
+    "ListDatasets":{
+      "name":"ListDatasets",
+      "http":{
+        "method":"GET",
+        "requestUri":"/datasets"
+      },
+      "input":{"shape":"ListDatasetsRequest"},
+      "output":{"shape":"ListDatasetsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves information about data sets.</p>"
+    },
+    "ListDatastores":{
+      "name":"ListDatastores",
+      "http":{
+        "method":"GET",
+        "requestUri":"/datastores"
+      },
+      "input":{"shape":"ListDatastoresRequest"},
+      "output":{"shape":"ListDatastoresResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves a list of data stores.</p>"
+    },
+    "ListPipelines":{
+      "name":"ListPipelines",
+      "http":{
+        "method":"GET",
+        "requestUri":"/pipelines"
+      },
+      "input":{"shape":"ListPipelinesRequest"},
+      "output":{"shape":"ListPipelinesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves a list of pipelines.</p>"
+    },
+    "PutLoggingOptions":{
+      "name":"PutLoggingOptions",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/logging"
+      },
+      "input":{"shape":"PutLoggingOptionsRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Sets or updates the AWS IoT Analytics logging options.</p>"
+    },
+    "RunPipelineActivity":{
+      "name":"RunPipelineActivity",
+      "http":{
+        "method":"POST",
+        "requestUri":"/pipelineactivities/run"
+      },
+      "input":{"shape":"RunPipelineActivityRequest"},
+      "output":{"shape":"RunPipelineActivityResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Simulates the results of running a pipeline activity on a message payload.</p>"
+    },
+    "SampleChannelData":{
+      "name":"SampleChannelData",
+      "http":{
+        "method":"GET",
+        "requestUri":"/channels/{channelName}/sample"
+      },
+      "input":{"shape":"SampleChannelDataRequest"},
+      "output":{"shape":"SampleChannelDataResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Retrieves a sample of messages from the specified channel ingested during the specified timeframe. Up to 10 messages can be retrieved.</p>"
+    },
+    "StartPipelineReprocessing":{
+      "name":"StartPipelineReprocessing",
+      "http":{
+        "method":"POST",
+        "requestUri":"/pipelines/{pipelineName}/reprocessing"
+      },
+      "input":{"shape":"StartPipelineReprocessingRequest"},
+      "output":{"shape":"StartPipelineReprocessingResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Starts the reprocessing of raw message data through the pipeline.</p>"
+    },
+    "UpdateChannel":{
+      "name":"UpdateChannel",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/channels/{channelName}"
+      },
+      "input":{"shape":"UpdateChannelRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Updates the settings of a channel.</p>"
+    },
+    "UpdateDataset":{
+      "name":"UpdateDataset",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/datasets/{datasetName}"
+      },
+      "input":{"shape":"UpdateDatasetRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Updates the settings of a data set.</p>"
+    },
+    "UpdateDatastore":{
+      "name":"UpdateDatastore",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/datastores/{datastoreName}"
+      },
+      "input":{"shape":"UpdateDatastoreRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Updates the settings of a data store.</p>"
+    },
+    "UpdatePipeline":{
+      "name":"UpdatePipeline",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/pipelines/{pipelineName}"
+      },
+      "input":{"shape":"UpdatePipelineRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Updates the settings of a pipeline.</p>"
+    }
+  },
+  "shapes":{
+    "ActivityBatchSize":{
+      "type":"integer",
+      "max":1000,
+      "min":1
+    },
+    "ActivityName":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "AddAttributesActivity":{
+      "type":"structure",
+      "required":[
+        "name",
+        "attributes"
+      ],
+      "members":{
+        "name":{
+          "shape":"ActivityName",
+          "documentation":"<p>The name of the 'addAttributes' activity.</p>"
+        },
+        "attributes":{
+          "shape":"AttributeNameMapping",
+          "documentation":"<p>A list of 1-50 \"AttributeNameMapping\" objects that map an existing attribute to a new attribute.</p> <note> <p>The existing attributes remain in the message, so if you want to remove the originals, use \"RemoveAttributeActivity\".</p> </note>"
+        },
+        "next":{
+          "shape":"ActivityName",
+          "documentation":"<p>The next activity in the pipeline.</p>"
+        }
+      },
+      "documentation":"<p>An activity that adds other attributes based on existing attributes in the message.</p>"
+    },
+    "AttributeName":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "AttributeNameMapping":{
+      "type":"map",
+      "key":{"shape":"AttributeName"},
+      "value":{"shape":"AttributeName"},
+      "max":50,
+      "min":1
+    },
+    "AttributeNames":{
+      "type":"list",
+      "member":{"shape":"AttributeName"},
+      "max":50,
+      "min":1
+    },
+    "BatchPutMessageErrorEntries":{
+      "type":"list",
+      "member":{"shape":"BatchPutMessageErrorEntry"}
+    },
+    "BatchPutMessageErrorEntry":{
+      "type":"structure",
+      "members":{
+        "messageId":{
+          "shape":"MessageId",
+          "documentation":"<p>The ID of the message that caused the error. (See the value corresponding to the \"messageId\" key in the message object.)</p>"
+        },
+        "errorCode":{
+          "shape":"ErrorCode",
+          "documentation":"<p>The code associated with the error.</p>"
+        },
+        "errorMessage":{
+          "shape":"ErrorMessage",
+          "documentation":"<p>The message associated with the error.</p>"
+        }
+      },
+      "documentation":"<p>Contains informations about errors.</p>"
+    },
+    "BatchPutMessageRequest":{
+      "type":"structure",
+      "required":[
+        "channelName",
+        "messages"
+      ],
+      "members":{
+        "channelName":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel where the messages are sent.</p>"
+        },
+        "messages":{
+          "shape":"Messages",
+          "documentation":"<p>The list of messages to be sent. Each message has format: '{ \"messageId\": \"string\", \"payload\": \"string\"}'.</p>"
+        }
+      }
+    },
+    "BatchPutMessageResponse":{
+      "type":"structure",
+      "members":{
+        "batchPutMessageErrorEntries":{
+          "shape":"BatchPutMessageErrorEntries",
+          "documentation":"<p>A list of any errors encountered when sending the messages to the channel.</p>"
+        }
+      }
+    },
+    "CancelPipelineReprocessingRequest":{
+      "type":"structure",
+      "required":[
+        "pipelineName",
+        "reprocessingId"
+      ],
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of pipeline for which data reprocessing is canceled.</p>",
+          "location":"uri",
+          "locationName":"pipelineName"
+        },
+        "reprocessingId":{
+          "shape":"ReprocessingId",
+          "documentation":"<p>The ID of the reprocessing task (returned by \"StartPipelineReprocessing\").</p>",
+          "location":"uri",
+          "locationName":"reprocessingId"
+        }
+      }
+    },
+    "CancelPipelineReprocessingResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "Channel":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel.</p>"
+        },
+        "arn":{
+          "shape":"ChannelArn",
+          "documentation":"<p>The ARN of the channel.</p>"
+        },
+        "status":{
+          "shape":"ChannelStatus",
+          "documentation":"<p>The status of the channel.</p>"
+        },
+        "retentionPeriod":{
+          "shape":"RetentionPeriod",
+          "documentation":"<p>How long, in days, message data is kept for the channel.</p>"
+        },
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>When the channel was created.</p>"
+        },
+        "lastUpdateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>When the channel was last updated.</p>"
+        }
+      },
+      "documentation":"<p>A collection of data from an MQTT topic. Channels archive the raw, unprocessed messages before publishing the data to a pipeline.</p>"
+    },
+    "ChannelActivity":{
+      "type":"structure",
+      "required":[
+        "name",
+        "channelName"
+      ],
+      "members":{
+        "name":{
+          "shape":"ActivityName",
+          "documentation":"<p>The name of the 'channel' activity.</p>"
+        },
+        "channelName":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel from which the messages are processed.</p>"
+        },
+        "next":{
+          "shape":"ActivityName",
+          "documentation":"<p>The next activity in the pipeline.</p>"
+        }
+      },
+      "documentation":"<p>The activity that determines the source of the messages to be processed.</p>"
+    },
+    "ChannelArn":{"type":"string"},
+    "ChannelName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_]+$"
+    },
+    "ChannelStatus":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "ACTIVE",
+        "DELETING"
+      ]
+    },
+    "ChannelSummaries":{
+      "type":"list",
+      "member":{"shape":"ChannelSummary"}
+    },
+    "ChannelSummary":{
+      "type":"structure",
+      "members":{
+        "channelName":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel.</p>"
+        },
+        "status":{
+          "shape":"ChannelStatus",
+          "documentation":"<p>The status of the channel.</p>"
+        },
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>When the channel was created.</p>"
+        },
+        "lastUpdateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time the channel was updated.</p>"
+        }
+      },
+      "documentation":"<p>A summary of information about a channel.</p>"
+    },
+    "CreateChannelRequest":{
+      "type":"structure",
+      "required":["channelName"],
+      "members":{
+        "channelName":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel.</p>"
+        },
+        "retentionPeriod":{
+          "shape":"RetentionPeriod",
+          "documentation":"<p>How long, in days, message data is kept for the channel.</p>"
+        }
+      }
+    },
+    "CreateChannelResponse":{
+      "type":"structure",
+      "members":{
+        "channelName":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel.</p>"
+        },
+        "channelArn":{
+          "shape":"ChannelArn",
+          "documentation":"<p>The ARN of the channel.</p>"
+        },
+        "retentionPeriod":{
+          "shape":"RetentionPeriod",
+          "documentation":"<p>How long, in days, message data is kept for the channel.</p>"
+        }
+      }
+    },
+    "CreateDatasetContentRequest":{
+      "type":"structure",
+      "required":["datasetName"],
+      "members":{
+        "datasetName":{
+          "shape":"DatasetName",
+          "documentation":"<p>The name of the data set.</p>",
+          "location":"uri",
+          "locationName":"datasetName"
+        }
+      }
+    },
+    "CreateDatasetRequest":{
+      "type":"structure",
+      "required":[
+        "datasetName",
+        "actions"
+      ],
+      "members":{
+        "datasetName":{
+          "shape":"DatasetName",
+          "documentation":"<p>The name of the data set.</p>"
+        },
+        "actions":{
+          "shape":"DatasetActions",
+          "documentation":"<p>A list of actions that create the data set. Only one action is supported at this time.</p>"
+        },
+        "triggers":{
+          "shape":"DatasetTriggers",
+          "documentation":"<p>A list of triggers. A trigger causes data set content to be populated at a specified time or time interval. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.</p>"
+        }
+      }
+    },
+    "CreateDatasetResponse":{
+      "type":"structure",
+      "members":{
+        "datasetName":{
+          "shape":"DatasetName",
+          "documentation":"<p>The name of the data set.</p>"
+        },
+        "datasetArn":{
+          "shape":"DatasetArn",
+          "documentation":"<p>The ARN of the data set.</p>"
+        }
+      }
+    },
+    "CreateDatastoreRequest":{
+      "type":"structure",
+      "required":["datastoreName"],
+      "members":{
+        "datastoreName":{
+          "shape":"DatastoreName",
+          "documentation":"<p>The name of the data store.</p>"
+        },
+        "retentionPeriod":{
+          "shape":"RetentionPeriod",
+          "documentation":"<p>How long, in days, message data is kept for the data store.</p>"
+        }
+      }
+    },
+    "CreateDatastoreResponse":{
+      "type":"structure",
+      "members":{
+        "datastoreName":{
+          "shape":"DatastoreName",
+          "documentation":"<p>The name of the data store.</p>"
+        },
+        "datastoreArn":{
+          "shape":"DatastoreArn",
+          "documentation":"<p>The ARN of the data store.</p>"
+        },
+        "retentionPeriod":{
+          "shape":"RetentionPeriod",
+          "documentation":"<p>How long, in days, message data is kept for the data store.</p>"
+        }
+      }
+    },
+    "CreatePipelineRequest":{
+      "type":"structure",
+      "required":[
+        "pipelineName",
+        "pipelineActivities"
+      ],
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline.</p>"
+        },
+        "pipelineActivities":{
+          "shape":"PipelineActivities",
+          "documentation":"<p>A list of pipeline activities.</p> <p>The list can be 1-25 <b>PipelineActivity</b> objects. Activities perform transformations on your messages, such as removing, renaming, or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p>"
+        }
+      }
+    },
+    "CreatePipelineResponse":{
+      "type":"structure",
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline.</p>"
+        },
+        "pipelineArn":{
+          "shape":"PipelineArn",
+          "documentation":"<p>The ARN of the pipeline.</p>"
+        }
+      }
+    },
+    "Dataset":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"DatasetName",
+          "documentation":"<p>The name of the data set.</p>"
+        },
+        "arn":{
+          "shape":"DatasetArn",
+          "documentation":"<p>The ARN of the data set.</p>"
+        },
+        "actions":{
+          "shape":"DatasetActions",
+          "documentation":"<p>The \"DatasetAction\" objects that create the data set.</p>"
+        },
+        "triggers":{
+          "shape":"DatasetTriggers",
+          "documentation":"<p>The \"DatasetTrigger\" objects that specify when the data set is automatically updated.</p>"
+        },
+        "status":{
+          "shape":"DatasetStatus",
+          "documentation":"<p>The status of the data set.</p>"
+        },
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>When the data set was created.</p>"
+        },
+        "lastUpdateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time the data set was updated.</p>"
+        }
+      },
+      "documentation":"<p>Information about a data set.</p>"
+    },
+    "DatasetAction":{
+      "type":"structure",
+      "members":{
+        "actionName":{
+          "shape":"DatasetActionName",
+          "documentation":"<p>The name of the data set action.</p>"
+        },
+        "queryAction":{
+          "shape":"SqlQueryDatasetAction",
+          "documentation":"<p>An \"SqlQueryDatasetAction\" object that contains the SQL query to modify the message.</p>"
+        }
+      },
+      "documentation":"<p>A \"DatasetAction\" object specifying the query that creates the data set content.</p>"
+    },
+    "DatasetActionName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_]+$"
+    },
+    "DatasetActions":{
+      "type":"list",
+      "member":{"shape":"DatasetAction"},
+      "max":1,
+      "min":1
+    },
+    "DatasetArn":{"type":"string"},
+    "DatasetContentState":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "SUCCEEDED",
+        "FAILED"
+      ]
+    },
+    "DatasetContentStatus":{
+      "type":"structure",
+      "members":{
+        "state":{
+          "shape":"DatasetContentState",
+          "documentation":"<p>The state of the data set. Can be one of \"CREATING\", \"SUCCEEDED\" or \"FAILED\".</p>"
+        },
+        "reason":{
+          "shape":"Reason",
+          "documentation":"<p>The reason the data set is in this state.</p>"
+        }
+      },
+      "documentation":"<p>The state of the data set and the reason it is in this state.</p>"
+    },
+    "DatasetContentVersion":{"type":"string"},
+    "DatasetEntries":{
+      "type":"list",
+      "member":{"shape":"DatasetEntry"}
+    },
+    "DatasetEntry":{
+      "type":"structure",
+      "members":{
+        "entryName":{
+          "shape":"EntryName",
+          "documentation":"<p>The name of the data set item.</p>"
+        },
+        "dataURI":{
+          "shape":"PresignedURI",
+          "documentation":"<p>The pre-signed URI of the data set item.</p>"
+        }
+      },
+      "documentation":"<p>The reference to a data set entry.</p>"
+    },
+    "DatasetName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_]+$"
+    },
+    "DatasetStatus":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "ACTIVE",
+        "DELETING"
+      ]
+    },
+    "DatasetSummaries":{
+      "type":"list",
+      "member":{"shape":"DatasetSummary"}
+    },
+    "DatasetSummary":{
+      "type":"structure",
+      "members":{
+        "datasetName":{
+          "shape":"DatasetName",
+          "documentation":"<p>The name of the data set.</p>"
+        },
+        "status":{
+          "shape":"DatasetStatus",
+          "documentation":"<p>The status of the data set.</p>"
+        },
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time the data set was created.</p>"
+        },
+        "lastUpdateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time the data set was updated.</p>"
+        }
+      },
+      "documentation":"<p>A summary of information about a data set.</p>"
+    },
+    "DatasetTrigger":{
+      "type":"structure",
+      "members":{
+        "schedule":{
+          "shape":"Schedule",
+          "documentation":"<p>The \"Schedule\" when the trigger is initiated.</p>"
+        }
+      },
+      "documentation":"<p>The \"DatasetTrigger\" that specifies when the data set is automatically updated.</p>"
+    },
+    "DatasetTriggers":{
+      "type":"list",
+      "member":{"shape":"DatasetTrigger"},
+      "max":5,
+      "min":0
+    },
+    "Datastore":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"DatastoreName",
+          "documentation":"<p>The name of the data store.</p>"
+        },
+        "arn":{
+          "shape":"DatastoreArn",
+          "documentation":"<p>The ARN of the data store.</p>"
+        },
+        "status":{
+          "shape":"DatastoreStatus",
+          "documentation":"<p>The status of a data store:</p> <dl> <dt>CREATING</dt> <dd> <p>The data store is being created.</p> </dd> <dt>ACTIVE</dt> <dd> <p>The data store has been created and can be used.</p> </dd> <dt>DELETING</dt> <dd> <p>The data store is being deleted.</p> </dd> </dl>"
+        },
+        "retentionPeriod":{
+          "shape":"RetentionPeriod",
+          "documentation":"<p>How long, in days, message data is kept for the data store.</p>"
+        },
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>When the data store was created.</p>"
+        },
+        "lastUpdateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time the data store was updated.</p>"
+        }
+      },
+      "documentation":"<p>Information about a data store.</p>"
+    },
+    "DatastoreActivity":{
+      "type":"structure",
+      "required":[
+        "name",
+        "datastoreName"
+      ],
+      "members":{
+        "name":{
+          "shape":"ActivityName",
+          "documentation":"<p>The name of the 'datastore' activity.</p>"
+        },
+        "datastoreName":{
+          "shape":"DatastoreName",
+          "documentation":"<p>The name of the data store where processed messages are stored.</p>"
+        }
+      },
+      "documentation":"<p>The 'datastore' activity that specifies where to store the processed data.</p>"
+    },
+    "DatastoreArn":{"type":"string"},
+    "DatastoreName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_]+$"
+    },
+    "DatastoreStatus":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "ACTIVE",
+        "DELETING"
+      ]
+    },
+    "DatastoreSummaries":{
+      "type":"list",
+      "member":{"shape":"DatastoreSummary"}
+    },
+    "DatastoreSummary":{
+      "type":"structure",
+      "members":{
+        "datastoreName":{
+          "shape":"DatastoreName",
+          "documentation":"<p>The name of the data store.</p>"
+        },
+        "status":{
+          "shape":"DatastoreStatus",
+          "documentation":"<p>The status of the data store.</p>"
+        },
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>When the data store was created.</p>"
+        },
+        "lastUpdateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time the data store was updated.</p>"
+        }
+      },
+      "documentation":"<p>A summary of information about a data store.</p>"
+    },
+    "DeleteChannelRequest":{
+      "type":"structure",
+      "required":["channelName"],
+      "members":{
+        "channelName":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel to delete.</p>",
+          "location":"uri",
+          "locationName":"channelName"
+        }
+      }
+    },
+    "DeleteDatasetContentRequest":{
+      "type":"structure",
+      "required":["datasetName"],
+      "members":{
+        "datasetName":{
+          "shape":"DatasetName",
+          "documentation":"<p>The name of the data set whose content is deleted.</p>",
+          "location":"uri",
+          "locationName":"datasetName"
+        },
+        "versionId":{
+          "shape":"DatasetContentVersion",
+          "documentation":"<p>The version of the data set whose content is deleted. You can also use the strings \"$LATEST\" or \"$LATEST_SUCCEEDED\" to delete the latest or latest successfully completed data set. If not specified, \"$LATEST_SUCCEEDED\" is the default.</p>",
+          "location":"querystring",
+          "locationName":"versionId"
+        }
+      }
+    },
+    "DeleteDatasetRequest":{
+      "type":"structure",
+      "required":["datasetName"],
+      "members":{
+        "datasetName":{
+          "shape":"DatasetName",
+          "documentation":"<p>The name of the data set to delete.</p>",
+          "location":"uri",
+          "locationName":"datasetName"
+        }
+      }
+    },
+    "DeleteDatastoreRequest":{
+      "type":"structure",
+      "required":["datastoreName"],
+      "members":{
+        "datastoreName":{
+          "shape":"DatastoreName",
+          "documentation":"<p>The name of the data store to delete.</p>",
+          "location":"uri",
+          "locationName":"datastoreName"
+        }
+      }
+    },
+    "DeletePipelineRequest":{
+      "type":"structure",
+      "required":["pipelineName"],
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline to delete.</p>",
+          "location":"uri",
+          "locationName":"pipelineName"
+        }
+      }
+    },
+    "DescribeChannelRequest":{
+      "type":"structure",
+      "required":["channelName"],
+      "members":{
+        "channelName":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel whose information is retrieved.</p>",
+          "location":"uri",
+          "locationName":"channelName"
+        }
+      }
+    },
+    "DescribeChannelResponse":{
+      "type":"structure",
+      "members":{
+        "channel":{
+          "shape":"Channel",
+          "documentation":"<p>An object that contains information about the channel.</p>"
+        }
+      }
+    },
+    "DescribeDatasetRequest":{
+      "type":"structure",
+      "required":["datasetName"],
+      "members":{
+        "datasetName":{
+          "shape":"DatasetName",
+          "documentation":"<p>The name of the data set whose information is retrieved.</p>",
+          "location":"uri",
+          "locationName":"datasetName"
+        }
+      }
+    },
+    "DescribeDatasetResponse":{
+      "type":"structure",
+      "members":{
+        "dataset":{
+          "shape":"Dataset",
+          "documentation":"<p>An object that contains information about the data set.</p>"
+        }
+      }
+    },
+    "DescribeDatastoreRequest":{
+      "type":"structure",
+      "required":["datastoreName"],
+      "members":{
+        "datastoreName":{
+          "shape":"DatastoreName",
+          "documentation":"<p>The name of the data store</p>",
+          "location":"uri",
+          "locationName":"datastoreName"
+        }
+      }
+    },
+    "DescribeDatastoreResponse":{
+      "type":"structure",
+      "members":{
+        "datastore":{
+          "shape":"Datastore",
+          "documentation":"<p>Information about the data store.</p>"
+        }
+      }
+    },
+    "DescribeLoggingOptionsRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeLoggingOptionsResponse":{
+      "type":"structure",
+      "members":{
+        "loggingOptions":{
+          "shape":"LoggingOptions",
+          "documentation":"<p>The current settings of the AWS IoT Analytics logging options.</p>"
+        }
+      }
+    },
+    "DescribePipelineRequest":{
+      "type":"structure",
+      "required":["pipelineName"],
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline whose information is retrieved.</p>",
+          "location":"uri",
+          "locationName":"pipelineName"
+        }
+      }
+    },
+    "DescribePipelineResponse":{
+      "type":"structure",
+      "members":{
+        "pipeline":{
+          "shape":"Pipeline",
+          "documentation":"<p>A \"Pipeline\" object that contains information about the pipeline.</p>"
+        }
+      }
+    },
+    "DeviceRegistryEnrichActivity":{
+      "type":"structure",
+      "required":[
+        "name",
+        "attribute",
+        "thingName",
+        "roleArn"
+      ],
+      "members":{
+        "name":{
+          "shape":"ActivityName",
+          "documentation":"<p>The name of the 'deviceRegistryEnrich' activity.</p>"
+        },
+        "attribute":{
+          "shape":"AttributeName",
+          "documentation":"<p>The name of the attribute that is added to the message.</p>"
+        },
+        "thingName":{
+          "shape":"AttributeName",
+          "documentation":"<p>The name of the IoT device whose registry information is added to the message.</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The ARN of the role that allows access to the device's registry information.</p>"
+        },
+        "next":{
+          "shape":"ActivityName",
+          "documentation":"<p>The next activity in the pipeline.</p>"
+        }
+      },
+      "documentation":"<p>An activity that adds data from the AWS IoT device registry to your message.</p>"
+    },
+    "DeviceShadowEnrichActivity":{
+      "type":"structure",
+      "required":[
+        "name",
+        "attribute",
+        "thingName",
+        "roleArn"
+      ],
+      "members":{
+        "name":{
+          "shape":"ActivityName",
+          "documentation":"<p>The name of the 'deviceShadowEnrich' activity.</p>"
+        },
+        "attribute":{
+          "shape":"AttributeName",
+          "documentation":"<p>The name of the attribute that is added to the message.</p>"
+        },
+        "thingName":{
+          "shape":"AttributeName",
+          "documentation":"<p>The name of the IoT device whose shadow information is added to the message.</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The ARN of the role that allows access to the device's shadow.</p>"
+        },
+        "next":{
+          "shape":"ActivityName",
+          "documentation":"<p>The next activity in the pipeline.</p>"
+        }
+      },
+      "documentation":"<p>An activity that adds information from the AWS IoT Device Shadows service to a message.</p>"
+    },
+    "EndTime":{"type":"timestamp"},
+    "EntryName":{"type":"string"},
+    "ErrorCode":{"type":"string"},
+    "ErrorMessage":{"type":"string"},
+    "FilterActivity":{
+      "type":"structure",
+      "required":[
+        "name",
+        "filter"
+      ],
+      "members":{
+        "name":{
+          "shape":"ActivityName",
+          "documentation":"<p>The name of the 'filter' activity.</p>"
+        },
+        "filter":{
+          "shape":"FilterExpression",
+          "documentation":"<p>An expression that looks like an SQL WHERE clause that must return a Boolean value.</p>"
+        },
+        "next":{
+          "shape":"ActivityName",
+          "documentation":"<p>The next activity in the pipeline.</p>"
+        }
+      },
+      "documentation":"<p>An activity that filters a message based on its attributes.</p>"
+    },
+    "FilterExpression":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "GetDatasetContentRequest":{
+      "type":"structure",
+      "required":["datasetName"],
+      "members":{
+        "datasetName":{
+          "shape":"DatasetName",
+          "documentation":"<p>The name of the data set whose contents are retrieved.</p>",
+          "location":"uri",
+          "locationName":"datasetName"
+        },
+        "versionId":{
+          "shape":"DatasetContentVersion",
+          "documentation":"<p>The version of the data set whose contents are retrieved. You can also use the strings \"$LATEST\" or \"$LATEST_SUCCEEDED\" to retrieve the contents of the latest or latest successfully completed data set. If not specified, \"$LATEST_SUCCEEDED\" is the default.</p>",
+          "location":"querystring",
+          "locationName":"versionId"
+        }
+      }
+    },
+    "GetDatasetContentResponse":{
+      "type":"structure",
+      "members":{
+        "entries":{
+          "shape":"DatasetEntries",
+          "documentation":"<p>A list of \"DatasetEntry\" objects.</p>"
+        },
+        "timestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time when the request was made.</p>"
+        },
+        "status":{
+          "shape":"DatasetContentStatus",
+          "documentation":"<p>The status of the data set content.</p>"
+        }
+      }
+    },
+    "InternalFailureException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>There was an internal failure.</p>",
+      "error":{"httpStatusCode":500},
+      "exception":true,
+      "fault":true
+    },
+    "InvalidRequestException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The request was not valid.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "LambdaActivity":{
+      "type":"structure",
+      "required":[
+        "name",
+        "lambdaName",
+        "batchSize"
+      ],
+      "members":{
+        "name":{
+          "shape":"ActivityName",
+          "documentation":"<p>The name of the 'lambda' activity.</p>"
+        },
+        "lambdaName":{
+          "shape":"LambdaName",
+          "documentation":"<p>The name of the Lambda function that is run on the message.</p>"
+        },
+        "batchSize":{
+          "shape":"ActivityBatchSize",
+          "documentation":"<p>The number of messages passed to the Lambda function for processing.</p> <p>The AWS Lambda function must be able to process all of these messages within five minutes, which is the maximum timeout duration for Lambda functions.</p>"
+        },
+        "next":{
+          "shape":"ActivityName",
+          "documentation":"<p>The next activity in the pipeline.</p>"
+        }
+      },
+      "documentation":"<p>An activity that runs a Lambda function to modify the message.</p>"
+    },
+    "LambdaName":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_-]+$"
+    },
+    "LimitExceededException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The command caused an internal limit to be exceeded.</p>",
+      "error":{"httpStatusCode":410},
+      "exception":true
+    },
+    "ListChannelsRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to return in this request.</p> <p>The default value is 100.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListChannelsResponse":{
+      "type":"structure",
+      "members":{
+        "channelSummaries":{
+          "shape":"ChannelSummaries",
+          "documentation":"<p>A list of \"ChannelSummary\" objects.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to retrieve the next set of results, or <code>null</code> if there are no more results.</p>"
+        }
+      }
+    },
+    "ListDatasetsRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to return in this request.</p> <p>The default value is 100.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListDatasetsResponse":{
+      "type":"structure",
+      "members":{
+        "datasetSummaries":{
+          "shape":"DatasetSummaries",
+          "documentation":"<p>A list of \"DatasetSummary\" objects.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to retrieve the next set of results, or <code>null</code> if there are no more results.</p>"
+        }
+      }
+    },
+    "ListDatastoresRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to return in this request.</p> <p>The default value is 100.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListDatastoresResponse":{
+      "type":"structure",
+      "members":{
+        "datastoreSummaries":{
+          "shape":"DatastoreSummaries",
+          "documentation":"<p>A list of \"DatastoreSummary\" objects.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to retrieve the next set of results, or <code>null</code> if there are no more results.</p>"
+        }
+      }
+    },
+    "ListPipelinesRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to return in this request.</p> <p>The default value is 100.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListPipelinesResponse":{
+      "type":"structure",
+      "members":{
+        "pipelineSummaries":{
+          "shape":"PipelineSummaries",
+          "documentation":"<p>A list of \"PipelineSummary\" objects.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to retrieve the next set of results, or <code>null</code> if there are no more results.</p>"
+        }
+      }
+    },
+    "LogResult":{"type":"string"},
+    "LoggingEnabled":{"type":"boolean"},
+    "LoggingLevel":{
+      "type":"string",
+      "enum":["ERROR"]
+    },
+    "LoggingOptions":{
+      "type":"structure",
+      "required":[
+        "roleArn",
+        "level",
+        "enabled"
+      ],
+      "members":{
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The ARN of the role that grants permission to AWS IoT Analytics to perform logging.</p>"
+        },
+        "level":{
+          "shape":"LoggingLevel",
+          "documentation":"<p>The logging level. Currently, only \"ERROR\" is supported.</p>"
+        },
+        "enabled":{
+          "shape":"LoggingEnabled",
+          "documentation":"<p>If true, logging is enabled for AWS IoT Analytics.</p>"
+        }
+      },
+      "documentation":"<p>Information about logging options.</p>"
+    },
+    "MathActivity":{
+      "type":"structure",
+      "required":[
+        "name",
+        "attribute",
+        "math"
+      ],
+      "members":{
+        "name":{
+          "shape":"ActivityName",
+          "documentation":"<p>The name of the 'math' activity.</p>"
+        },
+        "attribute":{
+          "shape":"AttributeName",
+          "documentation":"<p>The name of the attribute that will contain the result of the math operation.</p>"
+        },
+        "math":{
+          "shape":"MathExpression",
+          "documentation":"<p>An expression that uses one or more existing attributes and must return an integer value.</p>"
+        },
+        "next":{
+          "shape":"ActivityName",
+          "documentation":"<p>The next activity in the pipeline.</p>"
+        }
+      },
+      "documentation":"<p>An activity that computes an arithmetic expression using the message's attributes.</p>"
+    },
+    "MathExpression":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "MaxMessages":{
+      "type":"integer",
+      "max":10,
+      "min":1
+    },
+    "MaxResults":{
+      "type":"integer",
+      "max":250,
+      "min":1
+    },
+    "Message":{
+      "type":"structure",
+      "required":[
+        "messageId",
+        "payload"
+      ],
+      "members":{
+        "messageId":{
+          "shape":"MessageId",
+          "documentation":"<p>The ID you wish to assign to the message.</p>"
+        },
+        "payload":{
+          "shape":"MessagePayload",
+          "documentation":"<p>The payload of the message.</p>"
+        }
+      },
+      "documentation":"<p>Information about a message.</p>"
+    },
+    "MessageId":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "MessagePayload":{"type":"blob"},
+    "MessagePayloads":{
+      "type":"list",
+      "member":{"shape":"MessagePayload"},
+      "max":10,
+      "min":1
+    },
+    "Messages":{
+      "type":"list",
+      "member":{"shape":"Message"}
+    },
+    "NextToken":{"type":"string"},
+    "Pipeline":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline.</p>"
+        },
+        "arn":{
+          "shape":"PipelineArn",
+          "documentation":"<p>The ARN of the pipeline.</p>"
+        },
+        "activities":{
+          "shape":"PipelineActivities",
+          "documentation":"<p>The activities that perform transformations on the messages.</p>"
+        },
+        "reprocessingSummaries":{
+          "shape":"ReprocessingSummaries",
+          "documentation":"<p>A summary of information about the pipeline reprocessing.</p>"
+        },
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>When the pipeline was created.</p>"
+        },
+        "lastUpdateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time the pipeline was updated.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about a pipeline.</p>"
+    },
+    "PipelineActivities":{
+      "type":"list",
+      "member":{"shape":"PipelineActivity"},
+      "max":25,
+      "min":1
+    },
+    "PipelineActivity":{
+      "type":"structure",
+      "members":{
+        "channel":{
+          "shape":"ChannelActivity",
+          "documentation":"<p>Determines the source of the messages to be processed.</p>"
+        },
+        "lambda":{
+          "shape":"LambdaActivity",
+          "documentation":"<p>Runs a Lambda function to modify the message.</p>"
+        },
+        "datastore":{
+          "shape":"DatastoreActivity",
+          "documentation":"<p>Specifies where to store the processed message data.</p>"
+        },
+        "addAttributes":{
+          "shape":"AddAttributesActivity",
+          "documentation":"<p>Adds other attributes based on existing attributes in the message.</p>"
+        },
+        "removeAttributes":{
+          "shape":"RemoveAttributesActivity",
+          "documentation":"<p>Removes attributes from a message.</p>"
+        },
+        "selectAttributes":{
+          "shape":"SelectAttributesActivity",
+          "documentation":"<p>Creates a new message using only the specified attributes from the original message. </p>"
+        },
+        "filter":{
+          "shape":"FilterActivity",
+          "documentation":"<p>Filters a message based on its attributes.</p>"
+        },
+        "math":{
+          "shape":"MathActivity",
+          "documentation":"<p>Computes an arithmetic expression using the message's attributes and adds it to the message.</p>"
+        },
+        "deviceRegistryEnrich":{
+          "shape":"DeviceRegistryEnrichActivity",
+          "documentation":"<p>Adds data from the AWS IoT device registry to your message.</p>"
+        },
+        "deviceShadowEnrich":{
+          "shape":"DeviceShadowEnrichActivity",
+          "documentation":"<p>Adds information from the AWS IoT Device Shadows service to a message.</p>"
+        }
+      },
+      "documentation":"<p>An activity that performs a transformation on a message.</p>"
+    },
+    "PipelineArn":{"type":"string"},
+    "PipelineName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_]+$"
+    },
+    "PipelineSummaries":{
+      "type":"list",
+      "member":{"shape":"PipelineSummary"}
+    },
+    "PipelineSummary":{
+      "type":"structure",
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline.</p>"
+        },
+        "reprocessingSummaries":{
+          "shape":"ReprocessingSummaries",
+          "documentation":"<p>A summary of information about the pipeline reprocessing.</p>"
+        },
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>When the pipeline was created.</p>"
+        },
+        "lastUpdateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>When the pipeline was last updated.</p>"
+        }
+      },
+      "documentation":"<p>A summary of information about a pipeline.</p>"
+    },
+    "PresignedURI":{"type":"string"},
+    "PutLoggingOptionsRequest":{
+      "type":"structure",
+      "required":["loggingOptions"],
+      "members":{
+        "loggingOptions":{
+          "shape":"LoggingOptions",
+          "documentation":"<p>The new values of the AWS IoT Analytics logging options.</p>"
+        }
+      }
+    },
+    "Reason":{"type":"string"},
+    "RemoveAttributesActivity":{
+      "type":"structure",
+      "required":[
+        "name",
+        "attributes"
+      ],
+      "members":{
+        "name":{
+          "shape":"ActivityName",
+          "documentation":"<p>The name of the 'removeAttributes' activity.</p>"
+        },
+        "attributes":{
+          "shape":"AttributeNames",
+          "documentation":"<p>A list of 1-50 attributes to remove from the message.</p>"
+        },
+        "next":{
+          "shape":"ActivityName",
+          "documentation":"<p>The next activity in the pipeline.</p>"
+        }
+      },
+      "documentation":"<p>An activity that removes attributes from a message.</p>"
+    },
+    "ReprocessingId":{"type":"string"},
+    "ReprocessingStatus":{
+      "type":"string",
+      "enum":[
+        "RUNNING",
+        "SUCCEEDED",
+        "CANCELLED",
+        "FAILED"
+      ]
+    },
+    "ReprocessingSummaries":{
+      "type":"list",
+      "member":{"shape":"ReprocessingSummary"}
+    },
+    "ReprocessingSummary":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"ReprocessingId",
+          "documentation":"<p>The 'reprocessingId' returned by \"StartPipelineReprocessing\".</p>"
+        },
+        "status":{
+          "shape":"ReprocessingStatus",
+          "documentation":"<p>The status of the pipeline reprocessing.</p>"
+        },
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time the pipeline reprocessing was created.</p>"
+        }
+      },
+      "documentation":"<p>Information about pipeline reprocessing.</p>"
+    },
+    "ResourceAlreadyExistsException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"},
+        "resourceId":{
+          "shape":"resourceId",
+          "documentation":"<p>The ID of the resource.</p>"
+        },
+        "resourceArn":{
+          "shape":"resourceArn",
+          "documentation":"<p>The ARN of the resource.</p>"
+        }
+      },
+      "documentation":"<p>A resource with the same name already exists.</p>",
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>A resource with the specified name could not be found.</p>",
+      "error":{"httpStatusCode":404},
+      "exception":true
+    },
+    "RetentionPeriod":{
+      "type":"structure",
+      "members":{
+        "unlimited":{
+          "shape":"UnlimitedRetentionPeriod",
+          "documentation":"<p>If true, message data is kept indefinitely.</p>"
+        },
+        "numberOfDays":{
+          "shape":"RetentionPeriodInDays",
+          "documentation":"<p>The number of days that message data is kept. The \"unlimited\" parameter must be false.</p>"
+        }
+      },
+      "documentation":"<p>How long, in days, message data is kept.</p>"
+    },
+    "RetentionPeriodInDays":{
+      "type":"integer",
+      "min":1
+    },
+    "RoleArn":{
+      "type":"string",
+      "max":2048,
+      "min":20
+    },
+    "RunPipelineActivityRequest":{
+      "type":"structure",
+      "required":[
+        "pipelineActivity",
+        "payloads"
+      ],
+      "members":{
+        "pipelineActivity":{
+          "shape":"PipelineActivity",
+          "documentation":"<p>The pipeline activity that is run. This must not be a 'channel' activity or a 'datastore' activity because these activities are used in a pipeline only to load the original message and to store the (possibly) transformed message. If a 'lambda' activity is specified, only short-running Lambda functions (those with a timeout of less than 30 seconds or less) can be used.</p>"
+        },
+        "payloads":{
+          "shape":"MessagePayloads",
+          "documentation":"<p>The sample message payloads on which the pipeline activity is run.</p>"
+        }
+      }
+    },
+    "RunPipelineActivityResponse":{
+      "type":"structure",
+      "members":{
+        "payloads":{
+          "shape":"MessagePayloads",
+          "documentation":"<p>The enriched or transformed sample message payloads as base64-encoded strings. (The results of running the pipeline activity on each input sample message payload, encoded in base64.)</p>"
+        },
+        "logResult":{
+          "shape":"LogResult",
+          "documentation":"<p>In case the pipeline activity fails, the log message that is generated.</p>"
+        }
+      }
+    },
+    "SampleChannelDataRequest":{
+      "type":"structure",
+      "required":["channelName"],
+      "members":{
+        "channelName":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel whose message samples are retrieved.</p>",
+          "location":"uri",
+          "locationName":"channelName"
+        },
+        "maxMessages":{
+          "shape":"MaxMessages",
+          "documentation":"<p>The number of sample messages to be retrieved. The limit is 10, the default is also 10.</p>",
+          "location":"querystring",
+          "locationName":"maxMessages"
+        },
+        "startTime":{
+          "shape":"StartTime",
+          "documentation":"<p>The start of the time window from which sample messages are retrieved.</p>",
+          "location":"querystring",
+          "locationName":"startTime"
+        },
+        "endTime":{
+          "shape":"EndTime",
+          "documentation":"<p>The end of the time window from which sample messages are retrieved.</p>",
+          "location":"querystring",
+          "locationName":"endTime"
+        }
+      }
+    },
+    "SampleChannelDataResponse":{
+      "type":"structure",
+      "members":{
+        "payloads":{
+          "shape":"MessagePayloads",
+          "documentation":"<p>The list of message samples. Each sample message is returned as a base64-encoded string.</p>"
+        }
+      }
+    },
+    "Schedule":{
+      "type":"structure",
+      "members":{
+        "expression":{
+          "shape":"ScheduleExpression",
+          "documentation":"<p>The expression that defines when to trigger an update. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\"> Schedule Expressions for Rules</a> in the Amazon CloudWatch documentation.</p>"
+        }
+      },
+      "documentation":"<p>The schedule for when to trigger an update.</p>"
+    },
+    "ScheduleExpression":{"type":"string"},
+    "SelectAttributesActivity":{
+      "type":"structure",
+      "required":[
+        "name",
+        "attributes"
+      ],
+      "members":{
+        "name":{
+          "shape":"ActivityName",
+          "documentation":"<p>The name of the 'selectAttributes' activity.</p>"
+        },
+        "attributes":{
+          "shape":"AttributeNames",
+          "documentation":"<p>A list of the attributes to select from the message.</p>"
+        },
+        "next":{
+          "shape":"ActivityName",
+          "documentation":"<p>The next activity in the pipeline.</p>"
+        }
+      },
+      "documentation":"<p>Creates a new message using only the specified attributes from the original message.</p>"
+    },
+    "ServiceUnavailableException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The service is temporarily unavailable.</p>",
+      "error":{"httpStatusCode":503},
+      "exception":true,
+      "fault":true
+    },
+    "SqlQuery":{"type":"string"},
+    "SqlQueryDatasetAction":{
+      "type":"structure",
+      "required":["sqlQuery"],
+      "members":{
+        "sqlQuery":{
+          "shape":"SqlQuery",
+          "documentation":"<p>An SQL query string.</p>"
+        }
+      },
+      "documentation":"<p>The SQL query to modify the message.</p>"
+    },
+    "StartPipelineReprocessingRequest":{
+      "type":"structure",
+      "required":["pipelineName"],
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline on which to start reprocessing.</p>",
+          "location":"uri",
+          "locationName":"pipelineName"
+        },
+        "startTime":{
+          "shape":"StartTime",
+          "documentation":"<p>The start time (inclusive) of raw message data that is reprocessed.</p>"
+        },
+        "endTime":{
+          "shape":"EndTime",
+          "documentation":"<p>The end time (exclusive) of raw message data that is reprocessed.</p>"
+        }
+      }
+    },
+    "StartPipelineReprocessingResponse":{
+      "type":"structure",
+      "members":{
+        "reprocessingId":{
+          "shape":"ReprocessingId",
+          "documentation":"<p>The ID of the pipeline reprocessing activity that was started.</p>"
+        }
+      }
+    },
+    "StartTime":{"type":"timestamp"},
+    "ThrottlingException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The request was denied due to request throttling.</p>",
+      "error":{"httpStatusCode":429},
+      "exception":true
+    },
+    "Timestamp":{"type":"timestamp"},
+    "UnlimitedRetentionPeriod":{"type":"boolean"},
+    "UpdateChannelRequest":{
+      "type":"structure",
+      "required":["channelName"],
+      "members":{
+        "channelName":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel to be updated.</p>",
+          "location":"uri",
+          "locationName":"channelName"
+        },
+        "retentionPeriod":{
+          "shape":"RetentionPeriod",
+          "documentation":"<p>How long, in days, message data is kept for the channel.</p>"
+        }
+      }
+    },
+    "UpdateDatasetRequest":{
+      "type":"structure",
+      "required":[
+        "datasetName",
+        "actions"
+      ],
+      "members":{
+        "datasetName":{
+          "shape":"DatasetName",
+          "documentation":"<p>The name of the data set to update.</p>",
+          "location":"uri",
+          "locationName":"datasetName"
+        },
+        "actions":{
+          "shape":"DatasetActions",
+          "documentation":"<p>A list of \"DatasetAction\" objects. Only one action is supported at this time.</p>"
+        },
+        "triggers":{
+          "shape":"DatasetTriggers",
+          "documentation":"<p>A list of \"DatasetTrigger\" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.</p>"
+        }
+      }
+    },
+    "UpdateDatastoreRequest":{
+      "type":"structure",
+      "required":["datastoreName"],
+      "members":{
+        "datastoreName":{
+          "shape":"DatastoreName",
+          "documentation":"<p>The name of the data store to be updated.</p>",
+          "location":"uri",
+          "locationName":"datastoreName"
+        },
+        "retentionPeriod":{
+          "shape":"RetentionPeriod",
+          "documentation":"<p>How long, in days, message data is kept for the data store.</p>"
+        }
+      }
+    },
+    "UpdatePipelineRequest":{
+      "type":"structure",
+      "required":[
+        "pipelineName",
+        "pipelineActivities"
+      ],
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline to update.</p>",
+          "location":"uri",
+          "locationName":"pipelineName"
+        },
+        "pipelineActivities":{
+          "shape":"PipelineActivities",
+          "documentation":"<p>A list of \"PipelineActivity\" objects.</p> <p>The list can be 1-25 <b>PipelineActivity</b> objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p>"
+        }
+      }
+    },
+    "errorMessage":{"type":"string"},
+    "resourceArn":{"type":"string"},
+    "resourceId":{"type":"string"}
+  },
+  "documentation":"<p>AWS IoT Analytics provides advanced data analysis for AWS IoT. It allows you to collect large amounts of device data, process messages, store them, and then query the data and run sophisticated analytics to make accurate decisions in your IoT applications and machine learning use cases. AWS IoT Analytics enables advanced data exploration through integration with Jupyter Notebooks and data visualization through integration with Amazon QuickSight.</p> <p>Traditional analytics and business intelligence tools are designed to process structured data. IoT data often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result, the data from these devices can have significant gaps, corrupted messages, and false readings that must be cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data from external sources. </p> <p>AWS IoT Analytics automates each of the steps required to analyze data from IoT devices. AWS IoT Analytics filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You can set up the service to collect only the data you need from your devices, apply mathematical transforms to process the data, and enrich the data with device-specific metadata such as device type and location before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, or perform more complex analytics and machine learning inference. AWS IoT Analytics includes models for common IoT use cases so you can answer questions like which devices are about to fail or which customers are at risk of abandoning their wearable devices.</p>"
+}

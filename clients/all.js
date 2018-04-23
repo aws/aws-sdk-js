@@ -135,5 +135,6 @@ module.exports = {
   Connect: require('./connect'),
   ACMPCA: require('./acmpca'),
   FMS: require('./fms'),
-  SecretsManager: require('./secretsmanager')
+  SecretsManager: require('./secretsmanager'),
+  IoTAnalytics: require('./iotanalytics')
 };

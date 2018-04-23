@@ -43,6 +43,14 @@ declare class AutoScalingPlans extends Service {
    * Describes the specified scaling plans or all of your scaling plans.
    */
   describeScalingPlans(callback?: (err: AWSError, data: AutoScalingPlans.Types.DescribeScalingPlansResponse) => void): Request<AutoScalingPlans.Types.DescribeScalingPlansResponse, AWSError>;
+  /**
+   * Updates the scaling plan for the specified scaling plan. You cannot update a scaling plan if it is in the process of being created, updated, or deleted.
+   */
+  updateScalingPlan(params: AutoScalingPlans.Types.UpdateScalingPlanRequest, callback?: (err: AWSError, data: AutoScalingPlans.Types.UpdateScalingPlanResponse) => void): Request<AutoScalingPlans.Types.UpdateScalingPlanResponse, AWSError>;
+  /**
+   * Updates the scaling plan for the specified scaling plan. You cannot update a scaling plan if it is in the process of being created, updated, or deleted.
+   */
+  updateScalingPlan(callback?: (err: AWSError, data: AutoScalingPlans.Types.UpdateScalingPlanResponse) => void): Request<AutoScalingPlans.Types.UpdateScalingPlanResponse, AWSError>;
 }
 declare namespace AutoScalingPlans {
   export interface ApplicationSource {
@@ -50,16 +58,20 @@ declare namespace AutoScalingPlans {
      * The Amazon Resource Name (ARN) of a CloudFormation stack.
      */
     CloudFormationStackARN?: XmlString;
+    /**
+     * A set of tags (up to 50).
+     */
+    TagFilters?: TagFilters;
   }
   export type ApplicationSources = ApplicationSource[];
   export type Cooldown = number;
   export interface CreateScalingPlanRequest {
     /**
-     * The name of the scaling plan.
+     * The name of the scaling plan. Names cannot contain vertical bars, colons, or forward slashes.
      */
     ScalingPlanName: ScalingPlanName;
     /**
-     * The source for the application.
+     * A CloudFormation stack or set of tags. You can create one scaling plan per application source.
      */
     ApplicationSource: ApplicationSource;
     /**
@@ -197,7 +209,7 @@ declare namespace AutoScalingPlans {
      */
     PredefinedScalingMetricType: ScalingMetricType;
     /**
-     * Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ALBRequestCountPerTarget and there is a target group attached to the Auto Scaling group, Spot Fleet request, or ECS service. The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN   targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.  
+     * Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ALBRequestCountPerTarget and there is a target group for an Application Load Balancer attached to the Auto Scaling group, Spot Fleet request, or ECS service. The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN   targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.  
      */
     ResourceLabel?: ResourceLabel;
   }
@@ -259,6 +271,10 @@ declare namespace AutoScalingPlans {
      */
     StatusMessage?: XmlString;
     /**
+     * The Unix timestamp when the scaling plan entered the current status.
+     */
+    StatusStartTime?: TimestampType;
+    /**
      * The Unix timestamp when the scaling plan was created.
      */
     CreationTime?: TimestampType;
@@ -300,7 +316,7 @@ declare namespace AutoScalingPlans {
     ScalingStatusMessage?: XmlString;
   }
   export type ScalingPlanResources = ScalingPlanResource[];
-  export type ScalingPlanStatusCode = "Active"|"ActiveWithProblems"|"CreationInProgress"|"CreationFailed"|"DeletionInProgress"|"DeletionFailed"|string;
+  export type ScalingPlanStatusCode = "Active"|"ActiveWithProblems"|"CreationInProgress"|"CreationFailed"|"DeletionInProgress"|"DeletionFailed"|"UpdateInProgress"|"UpdateFailed"|string;
   export type ScalingPlanVersion = number;
   export type ScalingPlans = ScalingPlan[];
   export type ScalingPolicies = ScalingPolicy[];
@@ -320,6 +336,18 @@ declare namespace AutoScalingPlans {
   }
   export type ScalingStatusCode = "Inactive"|"PartiallyActive"|"Active"|string;
   export type ServiceNamespace = "autoscaling"|"ecs"|"ec2"|"rds"|"dynamodb"|string;
+  export interface TagFilter {
+    /**
+     * The tag key.
+     */
+    Key?: XmlStringMaxLen128;
+    /**
+     * The tag values (0 to 20).
+     */
+    Values?: TagValues;
+  }
+  export type TagFilters = TagFilter[];
+  export type TagValues = XmlStringMaxLen256[];
   export interface TargetTrackingConfiguration {
     /**
      * A predefined metric.
@@ -352,7 +380,29 @@ declare namespace AutoScalingPlans {
   }
   export type TargetTrackingConfigurations = TargetTrackingConfiguration[];
   export type TimestampType = Date;
+  export interface UpdateScalingPlanRequest {
+    /**
+     * A CloudFormation stack or set of tags.
+     */
+    ApplicationSource?: ApplicationSource;
+    /**
+     * The name of the scaling plan.
+     */
+    ScalingPlanName: ScalingPlanName;
+    /**
+     * The scaling instructions.
+     */
+    ScalingInstructions?: ScalingInstructions;
+    /**
+     * The version number.
+     */
+    ScalingPlanVersion: ScalingPlanVersion;
+  }
+  export interface UpdateScalingPlanResponse {
+  }
   export type XmlString = string;
+  export type XmlStringMaxLen128 = string;
+  export type XmlStringMaxLen256 = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

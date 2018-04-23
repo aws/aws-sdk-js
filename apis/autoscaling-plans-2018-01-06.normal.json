@@ -76,6 +76,22 @@
         {"shape":"InternalServiceException"}
       ],
       "documentation":"<p>Describes the specified scaling plans or all of your scaling plans.</p>"
+    },
+    "UpdateScalingPlan":{
+      "name":"UpdateScalingPlan",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateScalingPlanRequest"},
+      "output":{"shape":"UpdateScalingPlanResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ConcurrentUpdateException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"ObjectNotFoundException"}
+      ],
+      "documentation":"<p>Updates the scaling plan for the specified scaling plan.</p> <p>You cannot update a scaling plan if it is in the process of being created, updated, or deleted.</p>"
     }
   },
   "shapes":{
@@ -85,6 +101,10 @@
         "CloudFormationStackARN":{
           "shape":"XmlString",
           "documentation":"<p>The Amazon Resource Name (ARN) of a CloudFormation stack.</p>"
+        },
+        "TagFilters":{
+          "shape":"TagFilters",
+          "documentation":"<p>A set of tags (up to 50).</p>"
         }
       },
       "documentation":"<p>Represents an application source.</p>"
@@ -112,11 +132,11 @@
       "members":{
         "ScalingPlanName":{
           "shape":"ScalingPlanName",
-          "documentation":"<p>The name of the scaling plan.</p>"
+          "documentation":"<p>The name of the scaling plan. Names cannot contain vertical bars, colons, or forward slashes.</p>"
         },
         "ApplicationSource":{
           "shape":"ApplicationSource",
-          "documentation":"<p>The source for the application.</p>"
+          "documentation":"<p>A CloudFormation stack or set of tags. You can create one scaling plan per application source.</p>"
         },
         "ScalingInstructions":{
           "shape":"ScalingInstructions",
@@ -357,7 +377,7 @@
         },
         "ResourceLabel":{
           "shape":"ResourceLabel",
-          "documentation":"<p>Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group attached to the Auto Scaling group, Spot Fleet request, or ECS service.</p> <p>The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul>"
+          "documentation":"<p>Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group for an Application Load Balancer attached to the Auto Scaling group, Spot Fleet request, or ECS service.</p> <p>The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul>"
         }
       },
       "documentation":"<p>Represents a predefined metric for a target tracking policy.</p>"
@@ -481,6 +501,10 @@
           "shape":"XmlString",
           "documentation":"<p>A simple message about the current status of the scaling plan.</p>"
         },
+        "StatusStartTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>The Unix timestamp when the scaling plan entered the current status.</p>"
+        },
         "CreationTime":{
           "shape":"TimestampType",
           "documentation":"<p>The Unix timestamp when the scaling plan was created.</p>"
@@ -492,7 +516,7 @@
       "type":"string",
       "max":128,
       "min":1,
-      "pattern":"[\\p{Print}&&[^|]]+"
+      "pattern":"[\\p{Print}&&[^|:/]]+"
     },
     "ScalingPlanNames":{
       "type":"list",
@@ -556,7 +580,9 @@
         "CreationInProgress",
         "CreationFailed",
         "DeletionInProgress",
-        "DeletionFailed"
+        "DeletionFailed",
+        "UpdateInProgress",
+        "UpdateFailed"
       ]
     },
     "ScalingPlanVersion":{"type":"long"},
@@ -608,6 +634,28 @@
         "dynamodb"
       ]
     },
+    "TagFilter":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"XmlStringMaxLen128",
+          "documentation":"<p>The tag key.</p>"
+        },
+        "Values":{
+          "shape":"TagValues",
+          "documentation":"<p>The tag values (0 to 20).</p>"
+        }
+      },
+      "documentation":"<p>Represents a tag.</p>"
+    },
+    "TagFilters":{
+      "type":"list",
+      "member":{"shape":"TagFilter"}
+    },
+    "TagValues":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen256"}
+    },
     "TargetTrackingConfiguration":{
       "type":"structure",
       "required":["TargetValue"],
@@ -648,6 +696,36 @@
       "member":{"shape":"TargetTrackingConfiguration"}
     },
     "TimestampType":{"type":"timestamp"},
+    "UpdateScalingPlanRequest":{
+      "type":"structure",
+      "required":[
+        "ScalingPlanName",
+        "ScalingPlanVersion"
+      ],
+      "members":{
+        "ApplicationSource":{
+          "shape":"ApplicationSource",
+          "documentation":"<p>A CloudFormation stack or set of tags.</p>"
+        },
+        "ScalingPlanName":{
+          "shape":"ScalingPlanName",
+          "documentation":"<p>The name of the scaling plan.</p>"
+        },
+        "ScalingInstructions":{
+          "shape":"ScalingInstructions",
+          "documentation":"<p>The scaling instructions.</p>"
+        },
+        "ScalingPlanVersion":{
+          "shape":"ScalingPlanVersion",
+          "documentation":"<p>The version number.</p>"
+        }
+      }
+    },
+    "UpdateScalingPlanResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "ValidationException":{
       "type":"structure",
       "members":{
@@ -659,7 +737,19 @@
     "XmlString":{
       "type":"string",
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMaxLen128":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMaxLen256":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     }
   },
-  "documentation":"<p>Use AWS Auto Scaling to quickly discover all the scalable AWS resources for your application and configure dynamic scaling for your scalable resources.</p> <p>To get started, create a scaling plan with a set of instructions used to configure dynamic scaling for the scalable resources in your application. AWS Auto Scaling creates target tracking scaling policies for the scalable resources in your scaling plan. Target tracking scaling policies adjust the capacity of your scalable resource as required to maintain resource utilization at the target value that you specified.</p>"
+  "documentation":"<fullname>AWS Auto Scaling</fullname> <p>Use AWS Auto Scaling to quickly discover all the scalable AWS resources for your application and configure dynamic scaling for your scalable resources.</p> <p>To get started, create a scaling plan with a set of instructions used to configure dynamic scaling for the scalable resources in your application. AWS Auto Scaling creates target tracking scaling policies for the scalable resources in your scaling plan. Target tracking scaling policies adjust the capacity of your scalable resource as required to maintain resource utilization at the target value that you specified.</p>"
 }

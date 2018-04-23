@@ -554,5 +554,8 @@
   },
   "secretsmanager": {
     "name": "SecretsManager"
+  },
+  "iotanalytics": {
+    "name": "IoTAnalytics"
   }
 }
