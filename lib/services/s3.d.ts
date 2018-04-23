@@ -1,5 +1,6 @@
 import {Service} from '../service';
 import {ManagedUpload} from '../s3/managed_upload';
+import {AWSError} from '../lib/error';
 import S3 = require('../../clients/s3');
 
 export class S3Customizations extends Service {
@@ -31,7 +32,7 @@ export class S3Customizations extends Service {
      * is the only operation for which the SDK can retry requests with stream
      * bodies.
      */
-    upload(params: S3.Types.PutObjectRequest, options?: ManagedUpload.ManagedUploadOptions, callback?: (err: AwsError, data: ManagedUpload.SendData) => void): ManagedUpload;
+    upload(params: S3.Types.PutObjectRequest, options?: ManagedUpload.ManagedUploadOptions, callback?: (err: AWSError, data: ManagedUpload.SendData) => void): ManagedUpload;
     /**
      * Uploads an arbitrarily sized buffer, blob, or stream, using intelligent
      * concurrent handling of parts if the payload is large enough. You can
@@ -39,6 +40,6 @@ export class S3Customizations extends Service {
      * is the only operation for which the SDK can retry requests with stream
      * bodies.
      */
-    upload(params: S3.Types.PutObjectRequest, callback?: (err: AwsError, data: ManagedUpload.SendData) => void): ManagedUpload;
+    upload(params: S3.Types.PutObjectRequest, callback?: (err: AWSError, data: ManagedUpload.SendData) => void): ManagedUpload;
     static ManagedUpload: typeof ManagedUpload;
 }
