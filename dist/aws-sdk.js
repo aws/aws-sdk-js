@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.227.1
+// AWS SDK for JavaScript v2.228.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -52199,10 +52199,10 @@ module.exports={
           "VersionLabel": {},
           "Description": {},
           "SourceBuildInformation": {
-            "shape": "S1i"
+            "shape": "S1j"
           },
           "SourceBundle": {
-            "shape": "S1m"
+            "shape": "S1n"
           },
           "BuildConfiguration": {
             "type": "structure",
@@ -52229,7 +52229,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1u",
+        "shape": "S1v",
         "resultWrapper": "CreateApplicationVersionResult"
       }
     },
@@ -52255,12 +52255,12 @@ module.exports={
           "EnvironmentId": {},
           "Description": {},
           "OptionSettings": {
-            "shape": "S1z"
+            "shape": "S21"
           }
         }
       },
       "output": {
-        "shape": "S25",
+        "shape": "S27",
         "resultWrapper": "CreateConfigurationTemplateResult"
       }
     },
@@ -52282,7 +52282,7 @@ module.exports={
           "Tags": {
             "type": "list",
             "member": {
-              "shape": "S29"
+              "shape": "S2b"
             }
           },
           "VersionLabel": {},
@@ -52290,10 +52290,10 @@ module.exports={
           "SolutionStackName": {},
           "PlatformArn": {},
           "OptionSettings": {
-            "shape": "S1z"
+            "shape": "S21"
           },
           "OptionsToRemove": {
-            "shape": "S2c"
+            "shape": "S2e"
           }
         }
       },
@@ -52314,11 +52314,11 @@ module.exports={
           "PlatformName": {},
           "PlatformVersion": {},
           "PlatformDefinitionBundle": {
-            "shape": "S1m"
+            "shape": "S1n"
           },
           "EnvironmentName": {},
           "OptionSettings": {
-            "shape": "S1z"
+            "shape": "S21"
           }
         }
       },
@@ -52327,7 +52327,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PlatformSummary": {
-            "shape": "S2i"
+            "shape": "S2k"
           },
           "Builder": {
             "type": "structure",
@@ -52415,7 +52415,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PlatformSummary": {
-            "shape": "S2i"
+            "shape": "S2k"
           }
         }
       }
@@ -52429,19 +52429,19 @@ module.exports={
             "type": "structure",
             "members": {
               "ApplicationQuota": {
-                "shape": "S35"
+                "shape": "S37"
               },
               "ApplicationVersionQuota": {
-                "shape": "S35"
+                "shape": "S37"
               },
               "EnvironmentQuota": {
-                "shape": "S35"
+                "shape": "S37"
               },
               "ConfigurationTemplateQuota": {
-                "shape": "S35"
+                "shape": "S37"
               },
               "CustomPlatformQuota": {
-                "shape": "S35"
+                "shape": "S37"
               }
             }
           }
@@ -52454,7 +52454,7 @@ module.exports={
         "members": {
           "ApplicationName": {},
           "VersionLabels": {
-            "shape": "S1f"
+            "shape": "S1g"
           },
           "MaxRecords": {
             "type": "integer"
@@ -52469,7 +52469,7 @@ module.exports={
           "ApplicationVersions": {
             "type": "list",
             "member": {
-              "shape": "S1v"
+              "shape": "S1w"
             }
           },
           "NextToken": {}
@@ -52509,7 +52509,7 @@ module.exports={
           "SolutionStackName": {},
           "PlatformArn": {},
           "Options": {
-            "shape": "S2c"
+            "shape": "S2e"
           }
         }
       },
@@ -52577,7 +52577,7 @@ module.exports={
           "ConfigurationSettings": {
             "type": "list",
             "member": {
-              "shape": "S25"
+              "shape": "S27"
             }
           }
         }
@@ -52604,10 +52604,10 @@ module.exports={
           "Status": {},
           "Color": {},
           "Causes": {
-            "shape": "S41"
+            "shape": "S43"
           },
           "ApplicationMetrics": {
-            "shape": "S43"
+            "shape": "S45"
           },
           "InstancesHealth": {
             "type": "structure",
@@ -52899,13 +52899,13 @@ module.exports={
                 "HealthStatus": {},
                 "Color": {},
                 "Causes": {
-                  "shape": "S41"
+                  "shape": "S43"
                 },
                 "LaunchedAt": {
                   "type": "timestamp"
                 },
                 "ApplicationMetrics": {
-                  "shape": "S43"
+                  "shape": "S45"
                 },
                 "System": {
                   "type": "structure",
@@ -53031,10 +53031,10 @@ module.exports={
                 }
               },
               "SupportedTierList": {
-                "shape": "S2o"
+                "shape": "S2q"
               },
               "SupportedAddonList": {
-                "shape": "S2q"
+                "shape": "S2s"
               }
             }
           }
@@ -53097,7 +53097,7 @@ module.exports={
           "PlatformSummaryList": {
             "type": "list",
             "member": {
-              "shape": "S2i"
+              "shape": "S2k"
             }
           },
           "NextToken": {}
@@ -53120,7 +53120,7 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "ResourceTags": {
-            "shape": "S6t"
+            "shape": "S6v"
           }
         }
       }
@@ -53274,7 +53274,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1u",
+        "shape": "S1v",
         "resultWrapper": "UpdateApplicationVersionResult"
       }
     },
@@ -53290,15 +53290,15 @@ module.exports={
           "TemplateName": {},
           "Description": {},
           "OptionSettings": {
-            "shape": "S1z"
+            "shape": "S21"
           },
           "OptionsToRemove": {
-            "shape": "S2c"
+            "shape": "S2e"
           }
         }
       },
       "output": {
-        "shape": "S25",
+        "shape": "S27",
         "resultWrapper": "UpdateConfigurationTemplateResult"
       }
     },
@@ -53319,10 +53319,10 @@ module.exports={
           "SolutionStackName": {},
           "PlatformArn": {},
           "OptionSettings": {
-            "shape": "S1z"
+            "shape": "S21"
           },
           "OptionsToRemove": {
-            "shape": "S2c"
+            "shape": "S2e"
           }
         }
       },
@@ -53340,7 +53340,7 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "TagsToAdd": {
-            "shape": "S6t"
+            "shape": "S6v"
           },
           "TagsToRemove": {
             "type": "list",
@@ -53361,7 +53361,7 @@ module.exports={
           "TemplateName": {},
           "EnvironmentName": {},
           "OptionSettings": {
-            "shape": "S1z"
+            "shape": "S21"
           }
         }
       },
@@ -53527,6 +53527,7 @@ module.exports={
     "S1e": {
       "type": "structure",
       "members": {
+        "ApplicationArn": {},
         "ApplicationName": {},
         "Description": {},
         "DateCreated": {
@@ -53536,7 +53537,7 @@ module.exports={
           "type": "timestamp"
         },
         "Versions": {
-          "shape": "S1f"
+          "shape": "S1g"
         },
         "ConfigurationTemplates": {
           "type": "list",
@@ -53547,11 +53548,11 @@ module.exports={
         }
       }
     },
-    "S1f": {
+    "S1g": {
       "type": "list",
       "member": {}
     },
-    "S1i": {
+    "S1j": {
       "type": "structure",
       "required": [
         "SourceType",
@@ -53564,33 +53565,34 @@ module.exports={
         "SourceLocation": {}
       }
     },
-    "S1m": {
+    "S1n": {
       "type": "structure",
       "members": {
         "S3Bucket": {},
         "S3Key": {}
       }
     },
-    "S1u": {
-      "type": "structure",
-      "members": {
-        "ApplicationVersion": {
-          "shape": "S1v"
-        }
-      }
-    },
     "S1v": {
       "type": "structure",
       "members": {
+        "ApplicationVersion": {
+          "shape": "S1w"
+        }
+      }
+    },
+    "S1w": {
+      "type": "structure",
+      "members": {
+        "ApplicationVersionArn": {},
         "ApplicationName": {},
         "Description": {},
         "VersionLabel": {},
         "SourceBuildInformation": {
-          "shape": "S1i"
+          "shape": "S1j"
         },
         "BuildArn": {},
         "SourceBundle": {
-          "shape": "S1m"
+          "shape": "S1n"
         },
         "DateCreated": {
           "type": "timestamp"
@@ -53601,7 +53603,7 @@ module.exports={
         "Status": {}
       }
     },
-    "S1z": {
+    "S21": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -53613,7 +53615,7 @@ module.exports={
         }
       }
     },
-    "S25": {
+    "S27": {
       "type": "structure",
       "members": {
         "SolutionStackName": {},
@@ -53630,18 +53632,18 @@ module.exports={
           "type": "timestamp"
         },
         "OptionSettings": {
-          "shape": "S1z"
+          "shape": "S21"
         }
       }
     },
-    "S29": {
+    "S2b": {
       "type": "structure",
       "members": {
         "Key": {},
         "Value": {}
       }
     },
-    "S2c": {
+    "S2e": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -53652,7 +53654,7 @@ module.exports={
         }
       }
     },
-    "S2i": {
+    "S2k": {
       "type": "structure",
       "members": {
         "PlatformArn": {},
@@ -53662,22 +53664,22 @@ module.exports={
         "OperatingSystemName": {},
         "OperatingSystemVersion": {},
         "SupportedTierList": {
-          "shape": "S2o"
+          "shape": "S2q"
         },
         "SupportedAddonList": {
-          "shape": "S2q"
+          "shape": "S2s"
         }
       }
-    },
-    "S2o": {
-      "type": "list",
-      "member": {}
     },
     "S2q": {
       "type": "list",
       "member": {}
     },
-    "S35": {
+    "S2s": {
+      "type": "list",
+      "member": {}
+    },
+    "S37": {
       "type": "structure",
       "members": {
         "Maximum": {
@@ -53685,11 +53687,11 @@ module.exports={
         }
       }
     },
-    "S41": {
+    "S43": {
       "type": "list",
       "member": {}
     },
-    "S43": {
+    "S45": {
       "type": "structure",
       "members": {
         "Duration": {
@@ -53746,10 +53748,10 @@ module.exports={
         }
       }
     },
-    "S6t": {
+    "S6v": {
       "type": "list",
       "member": {
-        "shape": "S29"
+        "shape": "S2b"
       }
     }
   }
@@ -126627,7 +126629,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.227.1',
+  VERSION: '2.228.1',
 
   /**
    * @api private
@@ -145017,6 +145019,14 @@ var freeProcess = moduleExports && freeGlobal.process;
 /** Used to access faster Node.js helpers. */
 var nodeUtil = (function() {
   try {
+    // Use `util.types` for Node.js 10+.
+    var types = freeModule && freeModule.require && freeModule.require('util').types;
+
+    if (types) {
+      return types;
+    }
+
+    // Legacy `process.binding('util')` for Node.js < 10.
     return freeProcess && freeProcess.binding && freeProcess.binding('util');
   } catch (e) {}
 }());
@@ -150579,7 +150589,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":474,"lodash/assign":431}],490:[function(require,module,exports){
-// AWS SDK for JavaScript v2.227.1
+// AWS SDK for JavaScript v2.228.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

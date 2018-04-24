@@ -709,9 +709,14 @@
         "Unknown"
       ]
     },
+    "ApplicationArn":{"type":"string"},
     "ApplicationDescription":{
       "type":"structure",
       "members":{
+        "ApplicationArn":{
+          "shape":"ApplicationArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the application.</p>"
+        },
         "ApplicationName":{
           "shape":"ApplicationName",
           "documentation":"<p>The name of the application.</p>"
@@ -825,9 +830,14 @@
         }
       }
     },
+    "ApplicationVersionArn":{"type":"string"},
     "ApplicationVersionDescription":{
       "type":"structure",
       "members":{
+        "ApplicationVersionArn":{
+          "shape":"ApplicationVersionArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the application version.</p>"
+        },
         "ApplicationName":{
           "shape":"ApplicationName",
           "documentation":"<p>The name of the application to which the application version belongs.</p>"
@@ -2167,7 +2177,7 @@
         },
         "EnvironmentArn":{
           "shape":"EnvironmentArn",
-          "documentation":"<p>The environment's Amazon Resource Name (ARN), which can be used in other API reuqests that require an ARN.</p>"
+          "documentation":"<p>The environment's Amazon Resource Name (ARN), which can be used in other API requests that require an ARN.</p>"
         }
       },
       "documentation":"<p>Describes the properties of an environment.</p>"

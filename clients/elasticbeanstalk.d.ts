@@ -368,7 +368,12 @@ declare namespace ElasticBeanstalk {
   export type ActionHistoryStatus = "Completed"|"Failed"|"Unknown"|string;
   export type ActionStatus = "Scheduled"|"Pending"|"Running"|"Unknown"|string;
   export type ActionType = "InstanceRefresh"|"PlatformUpdate"|"Unknown"|string;
+  export type ApplicationArn = string;
   export interface ApplicationDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationArn?: ApplicationArn;
     /**
      * The name of the application.
      */
@@ -451,7 +456,12 @@ declare namespace ElasticBeanstalk {
      */
     ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig;
   }
+  export type ApplicationVersionArn = string;
   export interface ApplicationVersionDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the application version.
+     */
+    ApplicationVersionArn?: ApplicationVersionArn;
     /**
      * The name of the application to which the application version belongs.
      */
@@ -1449,7 +1459,7 @@ declare namespace ElasticBeanstalk {
      */
     EnvironmentLinks?: EnvironmentLinks;
     /**
-     * The environment's Amazon Resource Name (ARN), which can be used in other API reuqests that require an ARN.
+     * The environment's Amazon Resource Name (ARN), which can be used in other API requests that require an ARN.
      */
     EnvironmentArn?: EnvironmentArn;
   }

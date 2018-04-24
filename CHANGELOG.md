@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.227.1-->
+<!--LATEST=2.228.1-->
 <!--ENTRYINSERT-->
+
+## 2.228.1
+* feature: ElasticBeanstalk: Support tracking Elastic Beanstalk resources in AWS Config.
 
 ## 2.227.1
 * feature: AutoScalingPlans: The release adds the operation UpdateScalingPlan for updating a scaling plan and the support for tag filters as an application source.
