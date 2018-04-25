@@ -447,13 +447,14 @@
           return expect(err.message).to.match(/source_profile fake using profile default does not exist/);
         });
       });
-      it('will fail if source profile config lacks credentials', function() {
+      it('will fail if source profile config lacks credentials', function(done) {
         var creds, mock;
         mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn\nsource_profile = foo\n[foo]\naws_access_key_id = akid2';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         creds = new AWS.SharedIniFileCredentials();
         return creds.refresh(function(err) {
-          return expect(err.message).to.match(/Credentials not set in source_profile foo using profile default/);
+          expect(err.message).to.match(/Credentials not set in source_profile foo using profile default/);
+          done();
         });
       });
       it('will return credentials for assumed role', function(done) {

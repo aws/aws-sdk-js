@@ -640,7 +640,7 @@
   });
 
   describe('AWS.util.merge', function() {
-    return it('should merge an object into another and return new object', function() {
+    it('should merge an object into another and return new object', function() {
       var newObj, obj;
       obj = {
         a: 1,
@@ -688,7 +688,7 @@
         e: 5
       });
     });
-    return it('should return the merged object', function() {
+    it('should return the merged object', function() {
       var obj;
       obj = {
         a: 1,
@@ -696,7 +696,7 @@
       };
       return expect(AWS.util.update(obj, {
         c: 3
-      })).to.equal(obj);
+      })).to.eql({a: 1, b: 2, c: 3});
     });
   });
 

@@ -1,8 +1,8 @@
 var Buffer = require('buffer/').Buffer;
-var Hmac = require('../lib/browserHmac');
-var Md5 = require('../lib/browserMd5');
-var Sha1 = require('../lib/browserSha1');
-var Sha256 = require('../lib/browserSha256');
+var Hmac = require('../../lib/browserHmac');
+var Md5 = require('../../lib/browserMd5');
+var Sha1 = require('../../lib/browserSha1');
+var Sha256 = require('../../lib/browserSha256');
 var hashVectors = require('hash-test-vectors');
 var hmacVectors = require('hash-test-vectors/hmac');
 
