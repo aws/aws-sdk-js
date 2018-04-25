@@ -108,11 +108,11 @@ declare class Rekognition extends Service {
    */
   getCelebrityInfo(callback?: (err: AWSError, data: Rekognition.Types.GetCelebrityInfoResponse) => void): Request<Rekognition.Types.GetCelebrityInfoResponse, AWSError>;
   /**
-   * Gets the celebrity recognition results for a Rekognition Video analysis started by . Celebrity recognition in a video is an asynchronous operation. Analysis is started by a call to which returns a job identifier (JobId). When the celebrity recognition operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartCelebrityRecognition. To get the results of the celebrity recognition analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetCelebrityDetection and pass the job identifier (JobId) from the initial call to StartCelebrityDetection. For more information, see video.  GetCelebrityRecognition returns detected celebrities and the time(s) they are detected in an array (Celebrities) of objects. Each CelebrityRecognition contains information about the celebrity in a object and the time, Timestamp, the celebrity was detected.  By default, the Celebrities array is sorted by time (milliseconds from the start of the video). You can also sort the array by celebrity by specifying the value ID in the SortBy input parameter. The CelebrityDetail object includes the celebrity identifer and additional information urls. If you don't store the additional information urls, you can get them later by calling with the celebrity identifer. No information is returned for faces not recognized as celebrities. Use MaxResults parameter to limit the number of labels returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetCelebrityDetection and populate the NextToken request parameter with the token value returned from the previous call to GetCelebrityRecognition.
+   * Gets the celebrity recognition results for a Rekognition Video analysis started by . Celebrity recognition in a video is an asynchronous operation. Analysis is started by a call to which returns a job identifier (JobId). When the celebrity recognition operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartCelebrityRecognition. To get the results of the celebrity recognition analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetCelebrityDetection and pass the job identifier (JobId) from the initial call to StartCelebrityDetection. For more information, see video.  GetCelebrityRecognition returns detected celebrities and the time(s) they are detected in an array (Celebrities) of objects. Each CelebrityRecognition contains information about the celebrity in a object and the time, Timestamp, the celebrity was detected.    GetCelebrityRecognition only returns the default facial attributes (BoundingBox, Confidence, Landmarks, Pose, and Quality). The other facial attributes listed in the Face object of the following response syntax are not returned. For more information, see .   By default, the Celebrities array is sorted by time (milliseconds from the start of the video). You can also sort the array by celebrity by specifying the value ID in the SortBy input parameter. The CelebrityDetail object includes the celebrity identifer and additional information urls. If you don't store the additional information urls, you can get them later by calling with the celebrity identifer. No information is returned for faces not recognized as celebrities. Use MaxResults parameter to limit the number of labels returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetCelebrityDetection and populate the NextToken request parameter with the token value returned from the previous call to GetCelebrityRecognition.
    */
   getCelebrityRecognition(params: Rekognition.Types.GetCelebrityRecognitionRequest, callback?: (err: AWSError, data: Rekognition.Types.GetCelebrityRecognitionResponse) => void): Request<Rekognition.Types.GetCelebrityRecognitionResponse, AWSError>;
   /**
-   * Gets the celebrity recognition results for a Rekognition Video analysis started by . Celebrity recognition in a video is an asynchronous operation. Analysis is started by a call to which returns a job identifier (JobId). When the celebrity recognition operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartCelebrityRecognition. To get the results of the celebrity recognition analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetCelebrityDetection and pass the job identifier (JobId) from the initial call to StartCelebrityDetection. For more information, see video.  GetCelebrityRecognition returns detected celebrities and the time(s) they are detected in an array (Celebrities) of objects. Each CelebrityRecognition contains information about the celebrity in a object and the time, Timestamp, the celebrity was detected.  By default, the Celebrities array is sorted by time (milliseconds from the start of the video). You can also sort the array by celebrity by specifying the value ID in the SortBy input parameter. The CelebrityDetail object includes the celebrity identifer and additional information urls. If you don't store the additional information urls, you can get them later by calling with the celebrity identifer. No information is returned for faces not recognized as celebrities. Use MaxResults parameter to limit the number of labels returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetCelebrityDetection and populate the NextToken request parameter with the token value returned from the previous call to GetCelebrityRecognition.
+   * Gets the celebrity recognition results for a Rekognition Video analysis started by . Celebrity recognition in a video is an asynchronous operation. Analysis is started by a call to which returns a job identifier (JobId). When the celebrity recognition operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartCelebrityRecognition. To get the results of the celebrity recognition analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetCelebrityDetection and pass the job identifier (JobId) from the initial call to StartCelebrityDetection. For more information, see video.  GetCelebrityRecognition returns detected celebrities and the time(s) they are detected in an array (Celebrities) of objects. Each CelebrityRecognition contains information about the celebrity in a object and the time, Timestamp, the celebrity was detected.    GetCelebrityRecognition only returns the default facial attributes (BoundingBox, Confidence, Landmarks, Pose, and Quality). The other facial attributes listed in the Face object of the following response syntax are not returned. For more information, see .   By default, the Celebrities array is sorted by time (milliseconds from the start of the video). You can also sort the array by celebrity by specifying the value ID in the SortBy input parameter. The CelebrityDetail object includes the celebrity identifer and additional information urls. If you don't store the additional information urls, you can get them later by calling with the celebrity identifer. No information is returned for faces not recognized as celebrities. Use MaxResults parameter to limit the number of labels returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetCelebrityDetection and populate the NextToken request parameter with the token value returned from the previous call to GetCelebrityRecognition.
    */
   getCelebrityRecognition(callback?: (err: AWSError, data: Rekognition.Types.GetCelebrityRecognitionResponse) => void): Request<Rekognition.Types.GetCelebrityRecognitionResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class Rekognition extends Service {
    */
   getFaceDetection(callback?: (err: AWSError, data: Rekognition.Types.GetFaceDetectionResponse) => void): Request<Rekognition.Types.GetFaceDetectionResponse, AWSError>;
   /**
-   * Gets the face search results for Rekognition Video face search started by . The search returns faces in a collection that match the faces of persons detected in a video. It also includes the time(s) that faces are matched in the video. Face search in a video is an asynchronous operation. You start face search by calling to which returns a job identifier (JobId). When the search operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartFaceSearch. To get the search results, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetFaceSearch and pass the job identifier (JobId) from the initial call to StartFaceSearch. For more information, see collections. The search results are retured in an array, Persons, of objects. EachPersonMatch element contains details about the matching faces in the input collection, person information for the matched person, and the time the person was matched in the video. By default, the Persons array is sorted by the time, in milliseconds from the start of the video, persons are matched. You can also sort by persons by specifying INDEX for the SORTBY input parameter.
+   * Gets the face search results for Rekognition Video face search started by . The search returns faces in a collection that match the faces of persons detected in a video. It also includes the time(s) that faces are matched in the video. Face search in a video is an asynchronous operation. You start face search by calling to which returns a job identifier (JobId). When the search operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartFaceSearch. To get the search results, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetFaceSearch and pass the job identifier (JobId) from the initial call to StartFaceSearch. For more information, see collections. The search results are retured in an array, Persons, of objects. EachPersonMatch element contains details about the matching faces in the input collection, person information (facial attributes, bounding boxes, and person identifer) for the matched person, and the time the person was matched in the video.   GetFaceSearch only returns the default facial attributes (BoundingBox, Confidence, Landmarks, Pose, and Quality). The other facial attributes listed in the Face object of the following response syntax are not returned. For more information, see .   By default, the Persons array is sorted by the time, in milliseconds from the start of the video, persons are matched. You can also sort by persons by specifying INDEX for the SORTBY input parameter.
    */
   getFaceSearch(params: Rekognition.Types.GetFaceSearchRequest, callback?: (err: AWSError, data: Rekognition.Types.GetFaceSearchResponse) => void): Request<Rekognition.Types.GetFaceSearchResponse, AWSError>;
   /**
-   * Gets the face search results for Rekognition Video face search started by . The search returns faces in a collection that match the faces of persons detected in a video. It also includes the time(s) that faces are matched in the video. Face search in a video is an asynchronous operation. You start face search by calling to which returns a job identifier (JobId). When the search operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartFaceSearch. To get the search results, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetFaceSearch and pass the job identifier (JobId) from the initial call to StartFaceSearch. For more information, see collections. The search results are retured in an array, Persons, of objects. EachPersonMatch element contains details about the matching faces in the input collection, person information for the matched person, and the time the person was matched in the video. By default, the Persons array is sorted by the time, in milliseconds from the start of the video, persons are matched. You can also sort by persons by specifying INDEX for the SORTBY input parameter.
+   * Gets the face search results for Rekognition Video face search started by . The search returns faces in a collection that match the faces of persons detected in a video. It also includes the time(s) that faces are matched in the video. Face search in a video is an asynchronous operation. You start face search by calling to which returns a job identifier (JobId). When the search operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartFaceSearch. To get the search results, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetFaceSearch and pass the job identifier (JobId) from the initial call to StartFaceSearch. For more information, see collections. The search results are retured in an array, Persons, of objects. EachPersonMatch element contains details about the matching faces in the input collection, person information (facial attributes, bounding boxes, and person identifer) for the matched person, and the time the person was matched in the video.   GetFaceSearch only returns the default facial attributes (BoundingBox, Confidence, Landmarks, Pose, and Quality). The other facial attributes listed in the Face object of the following response syntax are not returned. For more information, see .   By default, the Persons array is sorted by the time, in milliseconds from the start of the video, persons are matched. You can also sort by persons by specifying INDEX for the SORTBY input parameter.
    */
   getFaceSearch(callback?: (err: AWSError, data: Rekognition.Types.GetFaceSearchResponse) => void): Request<Rekognition.Types.GetFaceSearchResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class Rekognition extends Service {
    */
   getLabelDetection(callback?: (err: AWSError, data: Rekognition.Types.GetLabelDetectionResponse) => void): Request<Rekognition.Types.GetLabelDetectionResponse, AWSError>;
   /**
-   * Gets the person tracking results of a Rekognition Video analysis started by . The person detection operation is started by a call to StartPersonTracking which returns a job identifier (JobId). When the person detection operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartPersonTracking. To get the results of the person tracking operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call and pass the job identifier (JobId) from the initial call to StartPersonTracking.  GetPersonTracking returns an array, Persons, of tracked persons and the time(s) they were tracked in the video.  By default, the array is sorted by the time(s) a person is tracked in the video. You can sort by tracked persons by specifying INDEX for the SortBy input parameter. Use the MaxResults parameter to limit the number of items returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetPersonTracking and populate the NextToken request parameter with the token value returned from the previous call to GetPersonTracking.
+   * Gets the person tracking results of a Rekognition Video analysis started by . The person detection operation is started by a call to StartPersonTracking which returns a job identifier (JobId). When the person detection operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartPersonTracking. To get the results of the person tracking operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call and pass the job identifier (JobId) from the initial call to StartPersonTracking.  GetPersonTracking returns an array, Persons, of tracked persons and the time(s) they were tracked in the video.    GetPersonTracking only returns the default facial attributes (BoundingBox, Confidence, Landmarks, Pose, and Quality). The other facial attributes listed in the Face object of the following response syntax are not returned. For more information, see .   By default, the array is sorted by the time(s) a person is tracked in the video. You can sort by tracked persons by specifying INDEX for the SortBy input parameter. Use the MaxResults parameter to limit the number of items returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetPersonTracking and populate the NextToken request parameter with the token value returned from the previous call to GetPersonTracking.
    */
   getPersonTracking(params: Rekognition.Types.GetPersonTrackingRequest, callback?: (err: AWSError, data: Rekognition.Types.GetPersonTrackingResponse) => void): Request<Rekognition.Types.GetPersonTrackingResponse, AWSError>;
   /**
-   * Gets the person tracking results of a Rekognition Video analysis started by . The person detection operation is started by a call to StartPersonTracking which returns a job identifier (JobId). When the person detection operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartPersonTracking. To get the results of the person tracking operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call and pass the job identifier (JobId) from the initial call to StartPersonTracking.  GetPersonTracking returns an array, Persons, of tracked persons and the time(s) they were tracked in the video.  By default, the array is sorted by the time(s) a person is tracked in the video. You can sort by tracked persons by specifying INDEX for the SortBy input parameter. Use the MaxResults parameter to limit the number of items returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetPersonTracking and populate the NextToken request parameter with the token value returned from the previous call to GetPersonTracking.
+   * Gets the person tracking results of a Rekognition Video analysis started by . The person detection operation is started by a call to StartPersonTracking which returns a job identifier (JobId). When the person detection operation finishes, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartPersonTracking. To get the results of the person tracking operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call and pass the job identifier (JobId) from the initial call to StartPersonTracking.  GetPersonTracking returns an array, Persons, of tracked persons and the time(s) they were tracked in the video.    GetPersonTracking only returns the default facial attributes (BoundingBox, Confidence, Landmarks, Pose, and Quality). The other facial attributes listed in the Face object of the following response syntax are not returned. For more information, see .   By default, the array is sorted by the time(s) a person is tracked in the video. You can sort by tracked persons by specifying INDEX for the SortBy input parameter. Use the MaxResults parameter to limit the number of items returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetPersonTracking and populate the NextToken request parameter with the token value returned from the previous call to GetPersonTracking.
    */
   getPersonTracking(callback?: (err: AWSError, data: Rekognition.Types.GetPersonTrackingResponse) => void): Request<Rekognition.Types.GetPersonTrackingResponse, AWSError>;
   /**
@@ -739,7 +739,7 @@ declare namespace Rekognition {
   export type FaceAttributes = "DEFAULT"|"ALL"|string;
   export interface FaceDetail {
     /**
-     * Bounding box of the face.
+     * Bounding box of the face. Default attribute.
      */
     BoundingBox?: BoundingBox;
     /**
@@ -783,19 +783,19 @@ declare namespace Rekognition {
      */
     Emotions?: Emotions;
     /**
-     * Indicates the location of landmarks on the face.
+     * Indicates the location of landmarks on the face. Default attribute.
      */
     Landmarks?: Landmarks;
     /**
-     * Indicates the pose of the face as determined by its pitch, roll, and yaw.
+     * Indicates the pose of the face as determined by its pitch, roll, and yaw. Default attribute.
      */
     Pose?: Pose;
     /**
-     * Identifies image brightness and sharpness.
+     * Identifies image brightness and sharpness. Default attribute.
      */
     Quality?: ImageQuality;
     /**
-     * Confidence level that the bounding box contains a face (and not a different object such as a tree).
+     * Confidence level that the bounding box contains a face (and not a different object such as a tree). Default attribute.
      */
     Confidence?: Percent;
   }
@@ -892,7 +892,7 @@ declare namespace Rekognition {
      */
     JobId: JobId;
     /**
-     * Maximum number of celebrities you want Rekognition Video to return in the response. The default is 1000.
+     * Maximum number of results to return per paginated call. The largest value you can specify is 1000. If you specify a value greater than 1000, a maximum of 1000 results is returned. The default value is 1000.
      */
     MaxResults?: MaxResults;
     /**
@@ -932,7 +932,7 @@ declare namespace Rekognition {
      */
     JobId: JobId;
     /**
-     * Maximum number of content moderation labels to return. The default is 1000.
+     * Maximum number of results to return per paginated call. The largest value you can specify is 1000. If you specify a value greater than 1000, a maximum of 1000 results is returned. The default value is 1000.
      */
     MaxResults?: MaxResults;
     /**
@@ -972,7 +972,7 @@ declare namespace Rekognition {
      */
     JobId: JobId;
     /**
-     * Maximum number of detected faces to return. The default is 1000.
+     * Maximum number of results to return per paginated call. The largest value you can specify is 1000. If you specify a value greater than 1000, a maximum of 1000 results is returned. The default value is 1000.
      */
     MaxResults?: MaxResults;
     /**
@@ -1008,7 +1008,7 @@ declare namespace Rekognition {
      */
     JobId: JobId;
     /**
-     * Maximum number of search results you want Rekognition Video to return in the response. The default is 1000.
+     * Maximum number of results to return per paginated call. The largest value you can specify is 1000. If you specify a value greater than 1000, a maximum of 1000 results is returned. The default value is 1000.
      */
     MaxResults?: MaxResults;
     /**
@@ -1048,7 +1048,7 @@ declare namespace Rekognition {
      */
     JobId: JobId;
     /**
-     * Maximum number of labels you want Amazon Rekognition to return in the response. The default is 1000.
+     * Maximum number of results to return per paginated call. The largest value you can specify is 1000. If you specify a value greater than 1000, a maximum of 1000 results is returned. The default value is 1000.
      */
     MaxResults?: MaxResults;
     /**
@@ -1088,7 +1088,7 @@ declare namespace Rekognition {
      */
     JobId: JobId;
     /**
-     * Maximum number of tracked persons to return. The default is 1000. 
+     * Maximum number of results to return per paginated call. The largest value you can specify is 1000. If you specify a value greater than 1000, a maximum of 1000 results is returned. The default value is 1000.
      */
     MaxResults?: MaxResults;
     /**

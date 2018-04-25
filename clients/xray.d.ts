@@ -20,6 +20,14 @@ declare class XRay extends Service {
    */
   batchGetTraces(callback?: (err: AWSError, data: XRay.Types.BatchGetTracesResult) => void): Request<XRay.Types.BatchGetTracesResult, AWSError>;
   /**
+   * Retrieves the current encryption configuration for X-Ray data.
+   */
+  getEncryptionConfig(params: XRay.Types.GetEncryptionConfigRequest, callback?: (err: AWSError, data: XRay.Types.GetEncryptionConfigResult) => void): Request<XRay.Types.GetEncryptionConfigResult, AWSError>;
+  /**
+   * Retrieves the current encryption configuration for X-Ray data.
+   */
+  getEncryptionConfig(callback?: (err: AWSError, data: XRay.Types.GetEncryptionConfigResult) => void): Request<XRay.Types.GetEncryptionConfigResult, AWSError>;
+  /**
    * Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the AWS X-Ray SDK. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.
    */
   getServiceGraph(params: XRay.Types.GetServiceGraphRequest, callback?: (err: AWSError, data: XRay.Types.GetServiceGraphResult) => void): Request<XRay.Types.GetServiceGraphResult, AWSError>;
@@ -43,6 +51,14 @@ declare class XRay extends Service {
    * Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the AWS X-Ray Developer Guide.
    */
   getTraceSummaries(callback?: (err: AWSError, data: XRay.Types.GetTraceSummariesResult) => void): Request<XRay.Types.GetTraceSummariesResult, AWSError>;
+  /**
+   * Updates the encryption configuration for X-Ray data.
+   */
+  putEncryptionConfig(params: XRay.Types.PutEncryptionConfigRequest, callback?: (err: AWSError, data: XRay.Types.PutEncryptionConfigResult) => void): Request<XRay.Types.PutEncryptionConfigResult, AWSError>;
+  /**
+   * Updates the encryption configuration for X-Ray data.
+   */
+  putEncryptionConfig(callback?: (err: AWSError, data: XRay.Types.PutEncryptionConfigResult) => void): Request<XRay.Types.PutEncryptionConfigResult, AWSError>;
   /**
    * Used by the AWS X-Ray daemon to upload telemetry.
    */
@@ -194,6 +210,23 @@ declare namespace XRay {
      */
     TotalResponseTime?: NullableDouble;
   }
+  export interface EncryptionConfig {
+    /**
+     * The ID of the customer master key (CMK) used for encryption, if applicable.
+     */
+    KeyId?: String;
+    /**
+     * The encryption status. After modifying encryption configuration with PutEncryptionConfig, the status can be UPDATING for up to one hour before X-Ray starts encrypting data with the new key.
+     */
+    Status?: EncryptionStatus;
+    /**
+     * The type of encryption. Set to KMS for encryption with CMKs. Set to NONE for default encryption.
+     */
+    Type?: EncryptionType;
+  }
+  export type EncryptionKeyId = string;
+  export type EncryptionStatus = "UPDATING"|"ACTIVE"|string;
+  export type EncryptionType = "NONE"|"KMS"|string;
   export type ErrorMessage = string;
   export interface ErrorStatistics {
     /**
@@ -220,6 +253,14 @@ declare namespace XRay {
     TotalCount?: NullableLong;
   }
   export type FilterExpression = string;
+  export interface GetEncryptionConfigRequest {
+  }
+  export interface GetEncryptionConfigResult {
+    /**
+     * The encryption configuration document.
+     */
+    EncryptionConfig?: EncryptionConfig;
+  }
   export interface GetServiceGraphRequest {
     /**
      * The start of the time frame for which to generate a graph.
@@ -304,7 +345,7 @@ declare namespace XRay {
      */
     ApproximateTime?: Timestamp;
     /**
-     * The number of traces that were processed to get this set of summaries.
+     * The total number of traces processed, including traces that did not match the specified filter expression.
      */
     TracesProcessedCount?: NullableLong;
     /**
@@ -351,6 +392,22 @@ declare namespace XRay {
   export type NullableDouble = number;
   export type NullableInteger = number;
   export type NullableLong = number;
+  export interface PutEncryptionConfigRequest {
+    /**
+     * An AWS KMS customer master key (CMK) in one of the following formats:    Alias - The name of the key. For example, alias/MyKey.    Key ID - The KMS key ID of the key. For example, ae4aa6d49-a4d8-9df9-a475-4ff6d7898456.    ARN - The full Amazon Resource Name of the key ID or alias. For example, arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456. Use this format to specify a key in a different account.   Omit this key if you set Type to NONE.
+     */
+    KeyId?: EncryptionKeyId;
+    /**
+     * The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
+     */
+    Type: EncryptionType;
+  }
+  export interface PutEncryptionConfigResult {
+    /**
+     * The new encryption configuration.
+     */
+    EncryptionConfig?: EncryptionConfig;
+  }
   export interface PutTelemetryRecordsRequest {
     /**
      * 
@@ -390,7 +447,7 @@ declare namespace XRay {
      */
     Id?: SegmentId;
     /**
-     * The segment document
+     * The segment document.
      */
     Document?: SegmentDocument;
   }

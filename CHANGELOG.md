@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.228.1-->
+<!--LATEST=2.229.1-->
 <!--ENTRYINSERT-->
+
+## 2.229.1
+* feature: CodeDeploy: AWS CodeDeploy has a new exception that indicates when a GitHub token is not valid.
+* feature: XRay: Added PutEncryptionConfig and GetEncryptionConfig APIs for managing data encryption settings. Use PutEncryptionConfig to configure X-Ray to use an AWS Key Management Service customer master key to encrypt trace data at rest.
 
 ## 2.228.1
 * feature: ElasticBeanstalk: Support tracking Elastic Beanstalk resources in AWS Config.
