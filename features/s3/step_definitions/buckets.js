@@ -10,16 +10,6 @@ module.exports = function() {
     callback();
   });
 
-  this.Given(/^I am using the S3 "([^"]*)" region with responseChecksumAlgorithm configured to "([^"]*)"$/, function(region, hashingAlgorithm, callback) {
-    this.s3 = new this.AWS.S3({region: region, responseChecksumAlgorithm: hashingAlgorithm});
-    callback();
-  })
-
-  this.Given(/^I am using the S3 "([^"]*)" region with responseChecksumAlgorithm as null$/, function(region, callback) {
-    this.s3 = new this.AWS.S3({region: region, responseChecksumAlgorithm: null});
-    callback();
-  })
-
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(location, callback) {
     this.bucket = this.uniqueName('aws-sdk-js-integration');
     var params = {
@@ -132,17 +122,6 @@ module.exports = function() {
     this.request('s3', 'getBucketTagging', {Bucket: this.bucket}, callback);
   });
 
-  this.When(/^I get the object "([^"]*)" with Range "([^"]*)"$/, function(key, range, callback) {
-    var params = {Bucket: this.bucket, Key: key, Range: range};
-    this.request('s3', 'getObject', params, callback, false);
-  })
-
-  this.When(/^I get the object "([^"]*)" from bucket$/, function(key, next) {
-    var params = {Bucket: this.bucket, Key: key};
-    this.request('s3', 'getObject', params, next, false);
-  });
-
-
   this.Then(/^the first tag in the tag set should have key and value "([^"]*)", "([^"]*)"$/, function(key, value, callback) {
     this.assert.equal(this.data.TagSet[0].Key, key);
     this.assert.equal(this.data.TagSet[0].Value, value);
@@ -201,13 +180,5 @@ module.exports = function() {
     });
   });
 
-  this.Then(/^the object "([^"]*)" should have content range of "([^"]*)"$/, function(key, contentRange, next) {
-    this.assert.equal(this.data.Range.toString().replace('\n', ''), contentRange);
-    next();
-  });
 
-  this.Then(/^the HTTP response should have a content length of (\d+)$/, function(contentLength, next) {
-    this.assert.equal(this.response.httpResponse.body.length, parseInt(contentLength));
-    next();
-  });
 };

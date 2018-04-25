@@ -15,7 +15,7 @@
   "devDependencies": {
     "@types/node": "^6.0.46",
     "browserify": "13.1.0",
-    "chai": "^3.0",
+    "chai": "^3.0.0",
     "codecov": "^1.0.1",
     "coffee-script": "1.6.3",
     "coffeeify": "*",
@@ -126,7 +126,7 @@
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds",
     "browsertest": "rake browser:test && karma start",
     "buildertest": "mocha --compilers coffee:coffee-script -s 1000 -t 10000 dist-tools/test",
-    "integration": "cucumber.js",
+    "integration": "mocha -R spec --recursive test/integration_test && cucumber.js",
     "lint": "eslint lib dist-tools/*.js",
     "console": "./scripts/console",
     "testfiles": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`",

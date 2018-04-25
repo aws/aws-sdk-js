@@ -75,27 +75,3 @@ Feature: Working with Buckets
     Then the object "largeobject" should exist in the bucket
     Then I delete the object "largeobject" from the bucket
     Then I delete the bucket
-
-  @trailingchecksum @checksum
-  Scenario: GetObject with md5 trailing checksum
-    Given I am using the S3 "us-east-1" region with responseChecksumAlgorithm configured to "md5"
-    And I create a bucket
-    When I put "TEST STRING" to the key "test_trailing_checksum" in the bucket
-    Then the object "test_trailing_checksum" should exist in the bucket
-    When I get the object "test_trailing_checksum" with Range "bytes=0-5"
-    Then the object "test_trailing_checksum" should contain "TEST S"
-    Then the object "test_trailing_checksum" should have content range of "bytes 0-5/11"
-    Then the HTTP response should have a content length of 6
-    Then I delete the object "test_trailing_checksum" from the bucket
-    Then I delete the bucket
-
-  @trailingchecksum @checksum
-  Scenario: GetObject with no trailing checksum
-    Given I am using the S3 "us-east-1" region with responseChecksumAlgorithm as null
-    And I create a bucket
-    When I put "TEST STRING" to the key "test_trailing_checksum" in the bucket
-    Then the object "test_trailing_checksum" should exist in the bucket
-    When I get the object "test_trailing_checksum" from bucket
-    Then the object "test_trailing_checksum" should contain "TEST STRING"
-    Then I delete the object "test_trailing_checksum" from the bucket
-    Then I delete the bucket
