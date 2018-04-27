@@ -1,23 +1,29 @@
-var helpers = require('../helpers');
-var AWS = helpers.AWS;
-var baseName = helpers.bucketBaseName;
+var expect = require('chai').expect;
+var baseName = 'aws-sdk-js-integration';
+var AWS = require('../../../lib/aws');
 describe('download integrity', function() {
   var params;
   var s3;
-  function putObject(customParams, done) {
-    params = {
-      Bucket: customParams.Bucket || params.Bucket,
-      Key: customParams.Key || params.Key,
-    };
+  function createBucket(customParams, done) {
+    params.Bucket = customParams.Bucket || params.Bucket;
     s3.createBucket({Bucket: params.Bucket}).promise().then(function() {
       return s3.waitFor('bucketExists', {Bucket: params.Bucket}).promise()
     }).then(function() {
-      return s3.putObject({
-        Bucket: params.Bucket,
-        Key: params.Key,
-        Body: customParams.Body || params.Body
-      }).promise();
-    }).then(function() {
+      if (typeof done === 'function') done();
+    }).catch(function(err) {
+      throw new Error('Cannot create bucket: ' + err);
+      process.exit(1);
+    })
+  }
+
+  function putObject(customParams, done) {
+    params.Key = customParams.Key || params.Key;
+    params.Body = customParams.Body || params.Body;
+    s3.putObject({
+      Bucket: params.Bucket,
+      Key: params.Key,
+      Body: params.Body
+    }).promise().then(function() {
       return s3.waitFor('objectExists', {
         Bucket: params.Bucket,
         Key: params.Key,
@@ -74,7 +80,11 @@ describe('download integrity', function() {
       Key: 'key',
     };
     s3 = new AWS.S3({responseChecksumAlgorithm: 'md5'});
-    putObject({Body: 'this is a test!'}, done);
+    createBucket({}, done);
+  })
+
+  beforeEach('set up default object in default key', function(done) {
+    putObject({Body: 'this is a test!', Key: 'key'}, done);
   })
 
   after('delete bucket...', function(done) {
@@ -159,7 +169,10 @@ describe('download integrity', function() {
 
   it('should correctly stream big file', function(done) {
     this.timeout(30000);
-    putObject({Body: helpers.createBuffer('10MB'), Key: 'bigBuffer'});
+    putObject({
+      Body: new Buffer(10 * 1024 * 1024).fill('X'),
+      Key: 'bigBuffer',
+    });
     s3.waitFor('objectExists', {Bucket: params.Bucket, Key: 'bigBuffer'}, function(waitError, waitData) {
       expect(waitError === null).to.equal(true);
       var data = '';
@@ -189,7 +202,10 @@ describe('download integrity', function() {
 
   it('should buffer big file in callback', function(done) {
     this.timeout(30000);
-    putObject({Body: helpers.createBuffer('10MB'), Key: 'bigBuffer'});
+    putObject({
+      Body: new Buffer(10 * 1024 * 1024).fill('X'),
+      Key: 'bigBuffer',
+    });
     s3.waitFor('objectExists', {Bucket: params.Bucket, Key: 'bigBuffer'}, function(waitError, waitData) {
       expect(waitError === null).to.equal(true);
       s3.getObject({
