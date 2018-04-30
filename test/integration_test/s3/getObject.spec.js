@@ -12,7 +12,6 @@ describe('download integrity', function() {
       if (typeof done === 'function') done();
     }).catch(function(err) {
       throw new Error('Cannot create bucket: ' + err);
-      process.exit(1);
     })
   }
 
@@ -32,7 +31,6 @@ describe('download integrity', function() {
       if (typeof done === 'function') done();
     }).catch(function(err) {
       throw new Error('Cannot put object: ' + err);
-      process.exit(1);
     });
   }
 
@@ -70,7 +68,6 @@ describe('download integrity', function() {
       if (typeof done === 'function') done();
     }).catch(function(err) {
       throw new Error('Cannot delete bucket: ' + err);
-      process.exit(1);
     })
   }
 
@@ -80,7 +77,7 @@ describe('download integrity', function() {
       Key: 'key',
     };
     s3 = new AWS.S3({responseChecksumAlgorithm: 'md5'});
-    createBucket({}, done);
+    createBucket({Bucket: params.Bucket}, done);
   })
 
   beforeEach('set up default object in default key', function(done) {
@@ -170,6 +167,7 @@ describe('download integrity', function() {
   it('should correctly stream big file', function(done) {
     this.timeout(30000);
     putObject({
+      Bucket: params.Bucket,
       Body: new Buffer(10 * 1024 * 1024).fill('X'),
       Key: 'bigBuffer',
     });
@@ -203,6 +201,7 @@ describe('download integrity', function() {
   it('should buffer big file in callback', function(done) {
     this.timeout(30000);
     putObject({
+      Bucket: params.Bucket,
       Body: new Buffer(10 * 1024 * 1024).fill('X'),
       Key: 'bigBuffer',
     });
