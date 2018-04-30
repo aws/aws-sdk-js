@@ -260,11 +260,11 @@ declare class GuardDuty extends Service {
    */
   startMonitoringMembers(callback?: (err: AWSError, data: GuardDuty.Types.StartMonitoringMembersResponse) => void): Request<GuardDuty.Types.StartMonitoringMembersResponse, AWSError>;
   /**
-   * Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members' findings.
+   * Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members’ findings.
    */
   stopMonitoringMembers(params: GuardDuty.Types.StopMonitoringMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.StopMonitoringMembersResponse) => void): Request<GuardDuty.Types.StopMonitoringMembersResponse, AWSError>;
   /**
-   * Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members' findings.
+   * Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members’ findings.
    */
   stopMonitoringMembers(callback?: (err: AWSError, data: GuardDuty.Types.StopMonitoringMembersResponse) => void): Request<GuardDuty.Types.StopMonitoringMembersResponse, AWSError>;
   /**
@@ -347,11 +347,11 @@ declare namespace GuardDuty {
     /**
      * Member account ID.
      */
-    AccountId?: AccountId;
+    AccountId: AccountId;
     /**
      * Member account's email address.
      */
-    Email?: Email;
+    Email: Email;
   }
   export type AccountDetails = AccountDetail[];
   export type AccountId = string;
@@ -674,11 +674,11 @@ declare namespace GuardDuty {
     /**
      * AWS account ID where the activity occurred that prompted GuardDuty to generate a finding.
      */
-    AccountId?: __string;
+    AccountId: __string;
     /**
      * The ARN of a finding described by the action.
      */
-    Arn?: __string;
+    Arn: __string;
     /**
      * The confidence level of a finding.
      */
@@ -686,7 +686,7 @@ declare namespace GuardDuty {
     /**
      * The time stamp at which a finding was generated.
      */
-    CreatedAt?: CreatedAt;
+    CreatedAt: CreatedAt;
     /**
      * The description of a finding.
      */
@@ -694,7 +694,7 @@ declare namespace GuardDuty {
     /**
      * The identifier that corresponds to a finding described by the action.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * The AWS resource partition.
      */
@@ -702,15 +702,15 @@ declare namespace GuardDuty {
     /**
      * The AWS region where the activity occurred that prompted GuardDuty to generate a finding.
      */
-    Region?: __string;
+    Region: __string;
     /**
      * The AWS resource associated with the activity that prompted GuardDuty to generate a finding.
      */
-    Resource?: Resource;
+    Resource: Resource;
     /**
      * Findings' schema version.
      */
-    SchemaVersion?: __string;
+    SchemaVersion: __string;
     /**
      * Additional information assigned to the generated finding by GuardDuty.
      */
@@ -718,7 +718,7 @@ declare namespace GuardDuty {
     /**
      * The severity of a finding.
      */
-    Severity?: __double;
+    Severity: __double;
     /**
      * The title of a finding.
      */
@@ -726,17 +726,17 @@ declare namespace GuardDuty {
     /**
      * The type of a finding described by the action.
      */
-    Type?: __string;
+    Type: __string;
     /**
      * The time stamp at which a finding was last updated.
      */
-    UpdatedAt?: UpdatedAt;
+    UpdatedAt: UpdatedAt;
   }
   export interface FindingCriteria {
     /**
      * Represents a map of finding properties that match specified conditions and values when querying findings.
      */
-    Criterion?: MapOfCondition;
+    Criterion?: __mapOfCondition;
   }
   export type FindingId = string;
   export type FindingIds = FindingId[];
@@ -746,7 +746,7 @@ declare namespace GuardDuty {
     /**
      * Represents a map of severity to count statistic for a set of findings
      */
-    CountBySeverity?: MapOfCountBySeverityFindingStatistic;
+    CountBySeverity?: __mapOfCountBySeverityFindingStatistic;
   }
   export type FindingType = string;
   export type FindingTypes = FindingType[];
@@ -982,8 +982,9 @@ declare namespace GuardDuty {
      * The unique ID of the detector of the GuardDuty account with which you want to invite members.
      */
     DetectorId: __string;
+    DisableEmailNotification?: __boolean;
     /**
-     * The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
+     * The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
      */
     Message?: Message;
   }
@@ -1094,7 +1095,6 @@ declare namespace GuardDuty {
     Members?: Members;
     NextToken?: NextToken;
   }
-  export type ListOfPortProbeDetail = PortProbeDetail[];
   export interface ListThreatIntelSetsRequest {
     /**
      * The detectorID that specifies the GuardDuty service whose ThreatIntelSets you want to list.
@@ -1124,8 +1124,6 @@ declare namespace GuardDuty {
     PortName?: __string;
   }
   export type Location = string;
-  export type MapOfCondition = {[key: string]: Condition};
-  export type MapOfCountBySeverityFindingStatistic = {[key: string]: CountBySeverityFindingStatistic};
   export interface Master {
     /**
      * Master account ID
@@ -1147,22 +1145,22 @@ declare namespace GuardDuty {
   export type MasterId = string;
   export type MaxResults = number;
   export interface Member {
-    AccountId?: AccountId;
+    AccountId: AccountId;
     DetectorId?: DetectorId;
     /**
      * Member account's email address.
      */
-    Email?: Email;
+    Email: Email;
     /**
      * Timestamp at which the invitation was sent
      */
     InvitedAt?: InvitedAt;
-    MasterId?: MasterId;
+    MasterId: MasterId;
     /**
      * The status of the relationship between the member and the master.
      */
-    RelationshipStatus?: __string;
-    UpdatedAt?: UpdatedAt;
+    RelationshipStatus: __string;
+    UpdatedAt: UpdatedAt;
   }
   export type Members = Member[];
   export type Message = string;
@@ -1261,7 +1259,7 @@ declare namespace GuardDuty {
     /**
      * A list of port probe details objects.
      */
-    PortProbeDetails?: ListOfPortProbeDetail;
+    PortProbeDetails?: __listOfPortProbeDetail;
   }
   export interface PortProbeDetail {
     /**
@@ -1460,11 +1458,11 @@ declare namespace GuardDuty {
     /**
      * AWS Account ID.
      */
-    AccountId?: __string;
+    AccountId: __string;
     /**
      * A reason why the account hasn't been processed.
      */
-    Result?: __string;
+    Result: __string;
   }
   export type UnprocessedAccounts = UnprocessedAccount[];
   export interface UpdateDetectorRequest {
@@ -1551,6 +1549,10 @@ declare namespace GuardDuty {
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;
+  export type __listOfPortProbeDetail = PortProbeDetail[];
+  export type __long = number;
+  export type __mapOfCondition = {[key: string]: Condition};
+  export type __mapOfCountBySeverityFindingStatistic = {[key: string]: CountBySeverityFindingStatistic};
   export type __string = string;
   export type __timestamp = Date;
   /**

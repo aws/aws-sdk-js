@@ -28,11 +28,11 @@ declare class SageMaker extends Service {
    */
   createEndpoint(callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointOutput) => void): Request<SageMaker.Types.CreateEndpointOutput, AWSError>;
   /**
-   * Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the CreateModel API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the CreateEndpoint API.    Use this API only if you want to use Amazon SageMaker hosting services to deploy models into production.   In the request, you define one or more ProductionVariants, each of which identifies a model. Each ProductionVariant parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy.  If you are hosting multiple models, you also assign a VariantWeight to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. 
+   * Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the CreateModel API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the CreateEndpoint API.   Use this API only if you want to use Amazon SageMaker hosting services to deploy models into production.   In the request, you define one or more ProductionVariants, each of which identifies a model. Each ProductionVariant parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy.  If you are hosting multiple models, you also assign a VariantWeight to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. 
    */
   createEndpointConfig(params: SageMaker.Types.CreateEndpointConfigInput, callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointConfigOutput) => void): Request<SageMaker.Types.CreateEndpointConfigOutput, AWSError>;
   /**
-   * Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the CreateModel API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the CreateEndpoint API.    Use this API only if you want to use Amazon SageMaker hosting services to deploy models into production.   In the request, you define one or more ProductionVariants, each of which identifies a model. Each ProductionVariant parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy.  If you are hosting multiple models, you also assign a VariantWeight to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. 
+   * Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the CreateModel API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the CreateEndpoint API.   Use this API only if you want to use Amazon SageMaker hosting services to deploy models into production.   In the request, you define one or more ProductionVariants, each of which identifies a model. Each ProductionVariant parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy.  If you are hosting multiple models, you also assign a VariantWeight to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. 
    */
   createEndpointConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointConfigOutput) => void): Request<SageMaker.Types.CreateEndpointConfigOutput, AWSError>;
   /**
@@ -465,6 +465,10 @@ declare namespace SageMaker {
      * An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide. 
      */
     Tags?: TagList;
+    /**
+     * A object that specifies the VPC that you want your model to connect to. Control access to and from your training container by configuring the VPC. For more information, see host-vpc.
+     */
+    VpcConfig?: VpcConfig;
   }
   export interface CreateModelOutput {
     /**
@@ -581,6 +585,10 @@ declare namespace SageMaker {
      * The resources, including the ML compute instances and ML storage volumes, to use for model training.  ML storage volumes store model artifacts and incremental states. Training algorithms might also use ML storage volumes for scratch space. If you want Amazon SageMaker to use the ML storage volume to store the training data, choose File as the TrainingInputMode in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.
      */
     ResourceConfig: ResourceConfig;
+    /**
+     * A object that specifies the VPC that you want your training job to connect to. Control access to and from your training container by configuring the VPC. For more information, see train-vpc 
+     */
+    VpcConfig?: VpcConfig;
     /**
      * Sets a duration for training. Use this parameter to cap model training costs. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts.  When Amazon SageMaker terminates a job because the stopping condition has been met, training algorithms provided by Amazon SageMaker save the intermediate results of the job. This intermediate data is a valid model artifact. You can use it to create a model using the CreateModel API. 
      */
@@ -732,6 +740,10 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
      */
     ExecutionRoleArn: RoleArn;
+    /**
+     * A object that specifies the VPC that this model has access to. For more information, see host-vpc 
+     */
+    VpcConfig?: VpcConfig;
     /**
      * A timestamp that shows when the model was created.
      */
@@ -896,6 +908,10 @@ declare namespace SageMaker {
      * Resources, including ML compute instances and ML storage volumes, that are configured for model training. 
      */
     ResourceConfig: ResourceConfig;
+    /**
+     * A object that specifies the VPC that this training job has access to. For more information, see train-vpc.
+     */
+    VpcConfig?: VpcConfig;
     /**
      * The condition under which to stop the training job. 
      */
@@ -1537,6 +1553,7 @@ declare namespace SageMaker {
     MaxRuntimeInSeconds?: MaxRuntimeInSeconds;
   }
   export type SubnetId = string;
+  export type Subnets = SubnetId[];
   export interface Tag {
     /**
      * The tag key.
@@ -1654,6 +1671,17 @@ declare namespace SageMaker {
   export type VariantName = string;
   export type VariantWeight = number;
   export type VolumeSizeInGB = number;
+  export interface VpcConfig {
+    /**
+     * The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.
+     */
+    SecurityGroupIds: VpcSecurityGroupIds;
+    /**
+     * The ID of the subnets in the VPC to which you want to connect your training job or model.
+     */
+    Subnets: Subnets;
+  }
+  export type VpcSecurityGroupIds = SecurityGroupId[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -12,27 +12,27 @@ declare class AlexaForBusiness extends Service {
   constructor(options?: AlexaForBusiness.Types.ClientConfiguration)
   config: Config & AlexaForBusiness.Types.ClientConfiguration;
   /**
-   * Associates a contact to a given address book.
+   * Associates a contact with a given address book.
    */
   associateContactWithAddressBook(params: AlexaForBusiness.Types.AssociateContactWithAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateContactWithAddressBookResponse) => void): Request<AlexaForBusiness.Types.AssociateContactWithAddressBookResponse, AWSError>;
   /**
-   * Associates a contact to a given address book.
+   * Associates a contact with a given address book.
    */
   associateContactWithAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateContactWithAddressBookResponse) => void): Request<AlexaForBusiness.Types.AssociateContactWithAddressBookResponse, AWSError>;
   /**
-   * Associates a device to a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or a manual sync is required. 
+   * Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. 
    */
   associateDeviceWithRoom(params: AlexaForBusiness.Types.AssociateDeviceWithRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateDeviceWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateDeviceWithRoomResponse, AWSError>;
   /**
-   * Associates a device to a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or a manual sync is required. 
+   * Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. 
    */
   associateDeviceWithRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateDeviceWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateDeviceWithRoomResponse, AWSError>;
   /**
-   * Associates a skill group to a given room. This enables all skills in the associated skill group on all devices in the room.
+   * Associates a skill group with a given room. This enables all skills in the associated skill group on all devices in the room.
    */
   associateSkillGroupWithRoom(params: AlexaForBusiness.Types.AssociateSkillGroupWithRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse, AWSError>;
   /**
-   * Associates a skill group to a given room. This enables all skills in the associated skill group on all devices in the room.
+   * Associates a skill group with a given room. This enables all skills in the associated skill group on all devices in the room.
    */
   associateSkillGroupWithRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse, AWSError>;
   /**
@@ -220,6 +220,14 @@ declare class AlexaForBusiness extends Service {
    */
   getSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetSkillGroupResponse) => void): Request<AlexaForBusiness.Types.GetSkillGroupResponse, AWSError>;
   /**
+   * Lists the Device Event history for up to 30 days. If EventType isn't specified in the request, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. 
+   */
+  listDeviceEvents(params: AlexaForBusiness.Types.ListDeviceEventsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListDeviceEventsResponse) => void): Request<AlexaForBusiness.Types.ListDeviceEventsResponse, AWSError>;
+  /**
+   * Lists the Device Event history for up to 30 days. If EventType isn't specified in the request, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. 
+   */
+  listDeviceEvents(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListDeviceEventsResponse) => void): Request<AlexaForBusiness.Types.ListDeviceEventsResponse, AWSError>;
+  /**
    * Lists all enabled skills in a specific skill group.
    */
   listSkills(params: AlexaForBusiness.Types.ListSkillsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsResponse) => void): Request<AlexaForBusiness.Types.ListSkillsResponse, AWSError>;
@@ -324,11 +332,11 @@ declare class AlexaForBusiness extends Service {
    */
   sendInvitation(callback?: (err: AWSError, data: AlexaForBusiness.Types.SendInvitationResponse) => void): Request<AlexaForBusiness.Types.SendInvitationResponse, AWSError>;
   /**
-   * Resets a device and its account to the known default settings by clearing all information and settings set by previous users.
+   * Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.
    */
   startDeviceSync(params: AlexaForBusiness.Types.StartDeviceSyncRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.StartDeviceSyncResponse) => void): Request<AlexaForBusiness.Types.StartDeviceSyncResponse, AWSError>;
   /**
-   * Resets a device and its account to the known default settings by clearing all information and settings set by previous users.
+   * Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.
    */
   startDeviceSync(callback?: (err: AWSError, data: AlexaForBusiness.Types.StartDeviceSyncResponse) => void): Request<AlexaForBusiness.Types.StartDeviceSyncResponse, AWSError>;
   /**
@@ -468,21 +476,22 @@ declare namespace AlexaForBusiness {
   }
   export type Boolean = boolean;
   export type ClientRequestToken = string;
+  export type ConnectionStatus = "ONLINE"|"OFFLINE"|string;
   export interface Contact {
     /**
      * The ARN of the contact.
      */
     ContactArn?: Arn;
     /**
-     * The name of the contact to display on the AWS management console.
+     * The name of the contact to display on the console.
      */
     DisplayName?: ContactName;
     /**
-     * The first name of the contact that is used to call the contact on the device.
+     * The first name of the contact, used to call the contact on the device.
      */
     FirstName?: ContactName;
     /**
-     * The last name of the contact that is used to call the contact on the device.
+     * The last name of the contact, used to call the contact on the device.
      */
     LastName?: ContactName;
     /**
@@ -496,15 +505,15 @@ declare namespace AlexaForBusiness {
      */
     ContactArn?: Arn;
     /**
-     * The name of the contact to display on the AWS management console.
+     * The name of the contact to display on the console.
      */
     DisplayName?: ContactName;
     /**
-     * The first name of the contact that is used to call the contact on the device.
+     * The first name of the contact, used to call the contact on the device.
      */
     FirstName?: ContactName;
     /**
-     * The last name of the contact that is used to call the contact on the device.
+     * The last name of the contact, used to call the contact on the device.
      */
     LastName?: ContactName;
     /**
@@ -536,7 +545,7 @@ declare namespace AlexaForBusiness {
   }
   export interface CreateContactRequest {
     /**
-     * The name of the contact to display on the AWS management console.
+     * The name of the contact to display on the console.
      */
     DisplayName?: ContactName;
     /**
@@ -548,7 +557,7 @@ declare namespace AlexaForBusiness {
      */
     LastName?: ContactName;
     /**
-     * The phone number of the contact in E164 format.
+     * The phone number of the contact in E.164 format.
      */
     PhoneNumber: E164PhoneNumber;
     /**
@@ -792,7 +801,7 @@ declare namespace AlexaForBusiness {
      */
     RoomArn?: Arn;
     /**
-     * The status of a device. If the status is not READY, check the DeviceStatusInfo for details.
+     * The status of a device. If the status is not READY, check the DeviceStatusInfo value for details.
      */
     DeviceStatus?: DeviceStatus;
     /**
@@ -843,6 +852,23 @@ declare namespace AlexaForBusiness {
     DeviceStatusInfo?: DeviceStatusInfo;
   }
   export type DeviceDataList = DeviceData[];
+  export interface DeviceEvent {
+    /**
+     * The type of device event.
+     */
+    Type?: DeviceEventType;
+    /**
+     * The value of the event.
+     */
+    Value?: DeviceEventValue;
+    /**
+     * The time (in epoch) when the event occurred. 
+     */
+    Timestamp?: Timestamp;
+  }
+  export type DeviceEventList = DeviceEvent[];
+  export type DeviceEventType = "CONNECTION_STATUS"|string;
+  export type DeviceEventValue = string;
   export type DeviceName = string;
   export type DeviceSerialNumber = string;
   export type DeviceStatus = "READY"|"PENDING"|"WAS_OFFLINE"|string;
@@ -859,6 +885,10 @@ declare namespace AlexaForBusiness {
      * One or more device status detail descriptions.
      */
     DeviceStatusDetails?: DeviceStatusDetails;
+    /**
+     * The latest available information about the connection status of a device. 
+     */
+    ConnectionStatus?: ConnectionStatus;
   }
   export type DeviceType = string;
   export interface DisassociateContactFromAddressBookRequest {
@@ -897,7 +927,7 @@ declare namespace AlexaForBusiness {
   export type E164PhoneNumber = string;
   export type Email = string;
   export type EnrollmentId = string;
-  export type EnrollmentStatus = "INITIALIZED"|"PENDING"|"REGISTERED"|"DEREGISTERING"|string;
+  export type EnrollmentStatus = "INITIALIZED"|"PENDING"|"REGISTERED"|"DISASSOCIATING"|"DEREGISTERING"|string;
   export type ErrorMessage = string;
   export type Feature = "BLUETOOTH"|"VOLUME"|"NOTIFICATIONS"|"LISTS"|"SKILLS"|"ALL"|string;
   export type Features = Feature[];
@@ -1006,6 +1036,34 @@ declare namespace AlexaForBusiness {
      * The details of the skill group requested. Required.
      */
     SkillGroup?: SkillGroup;
+  }
+  export interface ListDeviceEventsRequest {
+    /**
+     * The ARN of a device.
+     */
+    DeviceArn: Arn;
+    /**
+     * The event type to filter device events.
+     */
+    EventType?: DeviceEventType;
+    /**
+     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. Required. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListDeviceEventsResponse {
+    /**
+     * 
+     */
+    DeviceEvents?: DeviceEventList;
+    /**
+     * 
+     */
+    NextToken?: NextToken;
   }
   export interface ListSkillsRequest {
     /**
@@ -1324,11 +1382,11 @@ declare namespace AlexaForBusiness {
      */
     MaxResults?: MaxResults;
     /**
-     * The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.
+     * The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).
      */
     Filters?: FilterList;
     /**
-     * The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, and DeviceSerialNumber.
+     * The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and ConnectionStatus.
      */
     SortCriteria?: SortList;
   }
@@ -1588,6 +1646,7 @@ declare namespace AlexaForBusiness {
   }
   export type TagValue = string;
   export type TemperatureUnit = "FAHRENHEIT"|"CELSIUS"|string;
+  export type Timestamp = Date;
   export type Timezone = string;
   export type TotalCount = number;
   export interface UntagResourceRequest {

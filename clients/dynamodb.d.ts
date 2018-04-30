@@ -38,11 +38,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   createBackup(callback?: (err: AWSError, data: DynamoDB.Types.CreateBackupOutput) => void): Request<DynamoDB.Types.CreateBackupOutput, AWSError>;
   /**
-   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions.   Tables can only be added as the replicas of a global table group under the following conditions:     The tables must have the same name.     The tables must contain no items.     The tables must have the same hash key and sort key (if present).     The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES).   
+   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions.   Tables can only be added as the replicas of a global table group under the following conditions:     The tables must have the same name.     The tables must contain no items.     The tables must have the same hash key and sort key (if present).     The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES).     The tables must have same provisioned and maximum write capacity units.     If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
    */
   createGlobalTable(params: DynamoDB.Types.CreateGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.CreateGlobalTableOutput) => void): Request<DynamoDB.Types.CreateGlobalTableOutput, AWSError>;
   /**
-   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions.   Tables can only be added as the replicas of a global table group under the following conditions:     The tables must have the same name.     The tables must contain no items.     The tables must have the same hash key and sort key (if present).     The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES).   
+   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions.   Tables can only be added as the replicas of a global table group under the following conditions:     The tables must have the same name.     The tables must contain no items.     The tables must have the same hash key and sort key (if present).     The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES).     The tables must have same provisioned and maximum write capacity units.     If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
    */
   createGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.CreateGlobalTableOutput) => void): Request<DynamoDB.Types.CreateGlobalTableOutput, AWSError>;
   /**
@@ -86,11 +86,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeBackup(callback?: (err: AWSError, data: DynamoDB.Types.DescribeBackupOutput) => void): Request<DynamoDB.Types.DescribeBackupOutput, AWSError>;
   /**
-   * Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are ENABLED on all tables at table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus will be set to ENABLED.  Once continuous backups and point in time recovery are enabled, you can restore to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.   LatestRestorableDateTime is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days with a 1-minute granularity.  You can call DescribeContinuousBackups at a maximum rate of 10 times per second.
+   * Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are ENABLED on all tables at table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus will be set to ENABLED.  Once continuous backups and point in time recovery are enabled, you can restore to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.   LatestRestorableDateTime is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days.  You can call DescribeContinuousBackups at a maximum rate of 10 times per second.
    */
   describeContinuousBackups(params: DynamoDB.Types.DescribeContinuousBackupsInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeContinuousBackupsOutput) => void): Request<DynamoDB.Types.DescribeContinuousBackupsOutput, AWSError>;
   /**
-   * Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are ENABLED on all tables at table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus will be set to ENABLED.  Once continuous backups and point in time recovery are enabled, you can restore to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.   LatestRestorableDateTime is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days with a 1-minute granularity.  You can call DescribeContinuousBackups at a maximum rate of 10 times per second.
+   * Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are ENABLED on all tables at table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus will be set to ENABLED.  Once continuous backups and point in time recovery are enabled, you can restore to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.   LatestRestorableDateTime is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days.  You can call DescribeContinuousBackups at a maximum rate of 10 times per second.
    */
   describeContinuousBackups(callback?: (err: AWSError, data: DynamoDB.Types.DescribeContinuousBackupsOutput) => void): Request<DynamoDB.Types.DescribeContinuousBackupsOutput, AWSError>;
   /**
@@ -101,6 +101,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * Returns information about the specified global table.
    */
   describeGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
+  /**
+   * Describes region specific settings for a global table.
+   */
+  describeGlobalTableSettings(params: DynamoDB.Types.DescribeGlobalTableSettingsInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableSettingsOutput, AWSError>;
+  /**
+   * Describes region specific settings for a global table.
+   */
+  describeGlobalTableSettings(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableSettingsOutput, AWSError>;
   /**
    * Returns the current provisioned-capacity limits for your AWS account in a region, both for the region as a whole and for any one DynamoDB table that you create there. When you establish an AWS account, the account has initial limits on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given region. Also, there are per-table limits that apply when you create a table there. For more information, see Limits page in the Amazon DynamoDB Developer Guide. Although you can increase these limits by filing a case at AWS Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those limits imposed by your account so that you have enough time to apply for an increase before you hit a limit. For example, you could use one of the AWS SDKs to do the following:   Call DescribeLimits for a particular region to obtain your current account limits on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account limits for that region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level limits. The per-table limits apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB will not let you increase provisioned capacity extremely rapidly, but the only upper limit that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account limits.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
    */
@@ -190,11 +198,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   restoreTableFromBackup(callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableFromBackupOutput) => void): Request<DynamoDB.Types.RestoreTableFromBackupOutput, AWSError>;
   /**
-   * Restores the specified table to the specified point in time within EarliestRestorableDateTime and LatestRestorableDateTime. You can restore your table to any point in time during the last 35 days with a 1-minute granularity. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.  You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Cloudwatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings   Point in time recovery settings  
+   * Restores the specified table to the specified point in time within EarliestRestorableDateTime and LatestRestorableDateTime. You can restore your table to any point in time during the last 35 days. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.   When you restore using point in time recovery, DynamoDB restores your table data to the state based on the selected date and time (day:hour:minute:second) to a new table.   Along with data, the following are also included on the new restored table using point in time recovery:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Provisioned read and write capacity   Encryption settings   All these settings come from the current settings of the source table at the time of restore.     You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Cloudwatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings   Point in time recovery settings  
    */
   restoreTableToPointInTime(params: DynamoDB.Types.RestoreTableToPointInTimeInput, callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableToPointInTimeOutput) => void): Request<DynamoDB.Types.RestoreTableToPointInTimeOutput, AWSError>;
   /**
-   * Restores the specified table to the specified point in time within EarliestRestorableDateTime and LatestRestorableDateTime. You can restore your table to any point in time during the last 35 days with a 1-minute granularity. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.  You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Cloudwatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings   Point in time recovery settings  
+   * Restores the specified table to the specified point in time within EarliestRestorableDateTime and LatestRestorableDateTime. You can restore your table to any point in time during the last 35 days. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.   When you restore using point in time recovery, DynamoDB restores your table data to the state based on the selected date and time (day:hour:minute:second) to a new table.   Along with data, the following are also included on the new restored table using point in time recovery:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Provisioned read and write capacity   Encryption settings   All these settings come from the current settings of the source table at the time of restore.     You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Cloudwatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings   Point in time recovery settings  
    */
   restoreTableToPointInTime(callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableToPointInTimeOutput) => void): Request<DynamoDB.Types.RestoreTableToPointInTimeOutput, AWSError>;
   /**
@@ -222,21 +230,29 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  UpdateContinuousBackups enables or disables point in time recovery for the specified table. A successful UpdateContinuousBackups call returns the current ContinuousBackupsDescription. Continuous backups are ENABLED on all tables at table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus will be set to ENABLED.  Once continuous backups and point in time recovery are enabled, you can restore to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.   LatestRestorableDateTime is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days with a 1-minute granularity. 
+   *  UpdateContinuousBackups enables or disables point in time recovery for the specified table. A successful UpdateContinuousBackups call returns the current ContinuousBackupsDescription. Continuous backups are ENABLED on all tables at table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus will be set to ENABLED.  Once continuous backups and point in time recovery are enabled, you can restore to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.   LatestRestorableDateTime is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days.. 
    */
   updateContinuousBackups(params: DynamoDB.Types.UpdateContinuousBackupsInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateContinuousBackupsOutput) => void): Request<DynamoDB.Types.UpdateContinuousBackupsOutput, AWSError>;
   /**
-   *  UpdateContinuousBackups enables or disables point in time recovery for the specified table. A successful UpdateContinuousBackups call returns the current ContinuousBackupsDescription. Continuous backups are ENABLED on all tables at table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus will be set to ENABLED.  Once continuous backups and point in time recovery are enabled, you can restore to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.   LatestRestorableDateTime is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days with a 1-minute granularity. 
+   *  UpdateContinuousBackups enables or disables point in time recovery for the specified table. A successful UpdateContinuousBackups call returns the current ContinuousBackupsDescription. Continuous backups are ENABLED on all tables at table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus will be set to ENABLED.  Once continuous backups and point in time recovery are enabled, you can restore to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.   LatestRestorableDateTime is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days.. 
    */
   updateContinuousBackups(callback?: (err: AWSError, data: DynamoDB.Types.UpdateContinuousBackupsOutput) => void): Request<DynamoDB.Types.UpdateContinuousBackupsOutput, AWSError>;
   /**
-   * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, must have the same name as the global table, must have the same key schema, and must have DynamoDB Streams enabled.  Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas. 
+   * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, must have the same name as the global table, must have the same key schema, and must have DynamoDB Streams enabled and must have same provisioned and maximum write capacity units.  Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.   If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
    */
   updateGlobalTable(params: DynamoDB.Types.UpdateGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableOutput, AWSError>;
   /**
-   * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, must have the same name as the global table, must have the same key schema, and must have DynamoDB Streams enabled.  Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas. 
+   * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, must have the same name as the global table, must have the same key schema, and must have DynamoDB Streams enabled and must have same provisioned and maximum write capacity units.  Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.   If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
    */
   updateGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableOutput, AWSError>;
+  /**
+   * Updates settings for a global table.
+   */
+  updateGlobalTableSettings(params: DynamoDB.Types.UpdateGlobalTableSettingsInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableSettingsOutput, AWSError>;
+  /**
+   * Updates settings for a global table.
+   */
+  updateGlobalTableSettings(callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableSettingsOutput, AWSError>;
   /**
    * Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn't exist, or replace an existing name-value pair if it has certain expected attribute values). You can also return the item's attribute values in the same UpdateItem operation using the ReturnValues parameter.
    */
@@ -766,6 +782,22 @@ declare namespace DynamoDB {
      */
     GlobalTableDescription?: GlobalTableDescription;
   }
+  export interface DescribeGlobalTableSettingsInput {
+    /**
+     * The name of the global table to describe.
+     */
+    GlobalTableName: TableName;
+  }
+  export interface DescribeGlobalTableSettingsOutput {
+    /**
+     * The name of the global table.
+     */
+    GlobalTableName?: TableName;
+    /**
+     * The region specific settings for the global table.
+     */
+    ReplicaSettings?: ReplicaSettingsDescriptionList;
+  }
   export interface DescribeLimitsInput {
   }
   export interface DescribeLimitsOutput {
@@ -997,6 +1029,17 @@ declare namespace DynamoDB {
      */
     GlobalTableName?: TableName;
   }
+  export interface GlobalTableGlobalSecondaryIndexSettingsUpdate {
+    /**
+     * The name of the global secondary index. The name must be unique among all other indexes on this table.
+     */
+    IndexName: IndexName;
+    /**
+     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. 
+     */
+    ProvisionedWriteCapacityUnits?: PositiveLongObject;
+  }
+  export type GlobalTableGlobalSecondaryIndexSettingsUpdateList = GlobalTableGlobalSecondaryIndexSettingsUpdate[];
   export type GlobalTableList = GlobalTable[];
   export type GlobalTableStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|string;
   export type IndexName = string;
@@ -1227,11 +1270,11 @@ declare namespace DynamoDB {
      */
     PointInTimeRecoveryStatus?: PointInTimeRecoveryStatus;
     /**
-     * Specifies the earliest point in time you can restore your table to. It is equal to the maximum of point in time recovery enabled time and CurrentTime - PointInTimeRecoveryPeriod.
+     * Specifies the earliest point in time you can restore your table to. It You can restore your table to any point in time during the last 35 days. 
      */
     EarliestRestorableDateTime?: _Date;
     /**
-     *  LatestRestorableDateTime is 5 minutes from now and there is a +/- 1 minute fuzziness on the restore times. 
+     *  LatestRestorableDateTime is typically 5 minutes before the current time. 
      */
     LatestRestorableDateTime?: _Date;
   }
@@ -1451,7 +1494,76 @@ declare namespace DynamoDB {
     RegionName?: RegionName;
   }
   export type ReplicaDescriptionList = ReplicaDescription[];
+  export interface ReplicaGlobalSecondaryIndexSettingsDescription {
+    /**
+     * The name of the global secondary index. The name must be unique among all other indexes on this table.
+     */
+    IndexName: IndexName;
+    /**
+     *  The current status of the global secondary index:    CREATING - The global secondary index is being created.    UPDATING - The global secondary index is being updated.    DELETING - The global secondary index is being deleted.    ACTIVE - The global secondary index is ready for use.  
+     */
+    IndexStatus?: IndexStatus;
+    /**
+     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException.
+     */
+    ProvisionedReadCapacityUnits?: PositiveLongObject;
+    /**
+     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException.
+     */
+    ProvisionedWriteCapacityUnits?: PositiveLongObject;
+  }
+  export type ReplicaGlobalSecondaryIndexSettingsDescriptionList = ReplicaGlobalSecondaryIndexSettingsDescription[];
+  export interface ReplicaGlobalSecondaryIndexSettingsUpdate {
+    /**
+     * The name of the global secondary index. The name must be unique among all other indexes on this table.
+     */
+    IndexName: IndexName;
+    /**
+     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException.
+     */
+    ProvisionedReadCapacityUnits?: PositiveLongObject;
+  }
+  export type ReplicaGlobalSecondaryIndexSettingsUpdateList = ReplicaGlobalSecondaryIndexSettingsUpdate[];
   export type ReplicaList = Replica[];
+  export interface ReplicaSettingsDescription {
+    /**
+     * The region name of the replica.
+     */
+    RegionName: RegionName;
+    /**
+     * The current state of the region:    CREATING - The region is being created.    UPDATING - The region is being updated.    DELETING - The region is being deleted.    ACTIVE - The region is ready for use.  
+     */
+    ReplicaStatus?: ReplicaStatus;
+    /**
+     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide. 
+     */
+    ReplicaProvisionedReadCapacityUnits?: PositiveLongObject;
+    /**
+     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide.
+     */
+    ReplicaProvisionedWriteCapacityUnits?: PositiveLongObject;
+    /**
+     * Replica global secondary index settings for the global table.
+     */
+    ReplicaGlobalSecondaryIndexSettings?: ReplicaGlobalSecondaryIndexSettingsDescriptionList;
+  }
+  export type ReplicaSettingsDescriptionList = ReplicaSettingsDescription[];
+  export interface ReplicaSettingsUpdate {
+    /**
+     * The region of the replica to be added.
+     */
+    RegionName: RegionName;
+    /**
+     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide. 
+     */
+    ReplicaProvisionedReadCapacityUnits?: PositiveLongObject;
+    /**
+     * Represents the settings of a global secondary index for a global table that will be modified.
+     */
+    ReplicaGlobalSecondaryIndexSettingsUpdate?: ReplicaGlobalSecondaryIndexSettingsUpdateList;
+  }
+  export type ReplicaSettingsUpdateList = ReplicaSettingsUpdate[];
+  export type ReplicaStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
   export interface ReplicaUpdate {
     /**
      * The parameters required for creating a replica on an existing global table.
@@ -1879,6 +1991,34 @@ declare namespace DynamoDB {
      * Contains the details of the global table.
      */
     GlobalTableDescription?: GlobalTableDescription;
+  }
+  export interface UpdateGlobalTableSettingsInput {
+    /**
+     * The name of the global table
+     */
+    GlobalTableName: TableName;
+    /**
+     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. 
+     */
+    GlobalTableProvisionedWriteCapacityUnits?: PositiveLongObject;
+    /**
+     * Represents the settings of a global secondary index for a global table that will be modified.
+     */
+    GlobalTableGlobalSecondaryIndexSettingsUpdate?: GlobalTableGlobalSecondaryIndexSettingsUpdateList;
+    /**
+     * Represents the settings for a global table in a region that will be modified.
+     */
+    ReplicaSettingsUpdate?: ReplicaSettingsUpdateList;
+  }
+  export interface UpdateGlobalTableSettingsOutput {
+    /**
+     * The name of the global table.
+     */
+    GlobalTableName?: TableName;
+    /**
+     * The region specific settings for the global table.
+     */
+    ReplicaSettings?: ReplicaSettingsDescriptionList;
   }
   export interface UpdateItemInput {
     /**

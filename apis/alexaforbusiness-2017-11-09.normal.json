@@ -19,7 +19,10 @@
       },
       "input":{"shape":"AssociateContactWithAddressBookRequest"},
       "output":{"shape":"AssociateContactWithAddressBookResponse"},
-      "documentation":"<p>Associates a contact to a given address book.</p>"
+      "errors":[
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Associates a contact with a given address book.</p>"
     },
     "AssociateDeviceWithRoom":{
       "name":"AssociateDeviceWithRoom",
@@ -32,7 +35,7 @@
       "errors":[
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Associates a device to a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or a manual sync is required. </p>"
+      "documentation":"<p>Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. </p>"
     },
     "AssociateSkillGroupWithRoom":{
       "name":"AssociateSkillGroupWithRoom",
@@ -42,7 +45,7 @@
       },
       "input":{"shape":"AssociateSkillGroupWithRoomRequest"},
       "output":{"shape":"AssociateSkillGroupWithRoomResponse"},
-      "documentation":"<p>Associates a skill group to a given room. This enables all skills in the associated skill group on all devices in the room.</p>"
+      "documentation":"<p>Associates a skill group with a given room. This enables all skills in the associated skill group on all devices in the room.</p>"
     },
     "CreateAddressBook":{
       "name":"CreateAddressBook",
@@ -337,6 +340,19 @@
       ],
       "documentation":"<p>Gets skill group details by skill group ARN.</p>"
     },
+    "ListDeviceEvents":{
+      "name":"ListDeviceEvents",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListDeviceEventsRequest"},
+      "output":{"shape":"ListDeviceEventsResponse"},
+      "errors":[
+        {"shape":"NotFoundException"}
+      ],
+      "documentation":"<p>Lists the Device Event history for up to 30 days. If EventType isn't specified in the request, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. </p>"
+    },
     "ListSkills":{
       "name":"ListSkills",
       "http":{
@@ -488,7 +504,7 @@
       },
       "input":{"shape":"StartDeviceSyncRequest"},
       "output":{"shape":"StartDeviceSyncResponse"},
-      "documentation":"<p>Resets a device and its account to the known default settings by clearing all information and settings set by previous users.</p>"
+      "documentation":"<p>Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.</p>"
     },
     "TagResource":{
       "name":"TagResource",
@@ -735,6 +751,13 @@
       "min":10,
       "pattern":"[a-zA-Z0-9][a-zA-Z0-9_-]*"
     },
+    "ConnectionStatus":{
+      "type":"string",
+      "enum":[
+        "ONLINE",
+        "OFFLINE"
+      ]
+    },
     "Contact":{
       "type":"structure",
       "members":{
@@ -744,15 +767,15 @@
         },
         "DisplayName":{
           "shape":"ContactName",
-          "documentation":"<p>The name of the contact to display on the AWS management console.</p>"
+          "documentation":"<p>The name of the contact to display on the console.</p>"
         },
         "FirstName":{
           "shape":"ContactName",
-          "documentation":"<p>The first name of the contact that is used to call the contact on the device.</p>"
+          "documentation":"<p>The first name of the contact, used to call the contact on the device.</p>"
         },
         "LastName":{
           "shape":"ContactName",
-          "documentation":"<p>The last name of the contact that is used to call the contact on the device.</p>"
+          "documentation":"<p>The last name of the contact, used to call the contact on the device.</p>"
         },
         "PhoneNumber":{
           "shape":"E164PhoneNumber",
@@ -770,15 +793,15 @@
         },
         "DisplayName":{
           "shape":"ContactName",
-          "documentation":"<p>The name of the contact to display on the AWS management console.</p>"
+          "documentation":"<p>The name of the contact to display on the console.</p>"
         },
         "FirstName":{
           "shape":"ContactName",
-          "documentation":"<p>The first name of the contact that is used to call the contact on the device.</p>"
+          "documentation":"<p>The first name of the contact, used to call the contact on the device.</p>"
         },
         "LastName":{
           "shape":"ContactName",
-          "documentation":"<p>The last name of the contact that is used to call the contact on the device.</p>"
+          "documentation":"<p>The last name of the contact, used to call the contact on the device.</p>"
         },
         "PhoneNumber":{
           "shape":"E164PhoneNumber",
@@ -834,7 +857,7 @@
       "members":{
         "DisplayName":{
           "shape":"ContactName",
-          "documentation":"<p>The name of the contact to display on the AWS management console.</p>"
+          "documentation":"<p>The name of the contact to display on the console.</p>"
         },
         "FirstName":{
           "shape":"ContactName",
@@ -846,7 +869,7 @@
         },
         "PhoneNumber":{
           "shape":"E164PhoneNumber",
-          "documentation":"<p>The phone number of the contact in E164 format.</p>"
+          "documentation":"<p>The phone number of the contact in E.164 format.</p>"
         },
         "ClientRequestToken":{
           "shape":"ClientRequestToken",
@@ -1185,7 +1208,7 @@
         },
         "DeviceStatus":{
           "shape":"DeviceStatus",
-          "documentation":"<p>The status of a device. If the status is not READY, check the DeviceStatusInfo for details.</p>"
+          "documentation":"<p>The status of a device. If the status is not READY, check the DeviceStatusInfo value for details.</p>"
         },
         "DeviceStatusInfo":{
           "shape":"DeviceStatusInfo",
@@ -1244,6 +1267,33 @@
       "type":"list",
       "member":{"shape":"DeviceData"}
     },
+    "DeviceEvent":{
+      "type":"structure",
+      "members":{
+        "Type":{
+          "shape":"DeviceEventType",
+          "documentation":"<p>The type of device event.</p>"
+        },
+        "Value":{
+          "shape":"DeviceEventValue",
+          "documentation":"<p>The value of the event.</p>"
+        },
+        "Timestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time (in epoch) when the event occurred. </p>"
+        }
+      },
+      "documentation":"<p>The list of device events.</p>"
+    },
+    "DeviceEventList":{
+      "type":"list",
+      "member":{"shape":"DeviceEvent"}
+    },
+    "DeviceEventType":{
+      "type":"string",
+      "enum":["CONNECTION_STATUS"]
+    },
+    "DeviceEventValue":{"type":"string"},
     "DeviceName":{
       "type":"string",
       "max":100,
@@ -1289,6 +1339,10 @@
         "DeviceStatusDetails":{
           "shape":"DeviceStatusDetails",
           "documentation":"<p>One or more device status detail descriptions.</p>"
+        },
+        "ConnectionStatus":{
+          "shape":"ConnectionStatus",
+          "documentation":"<p>The latest available information about the connection status of a device. </p>"
         }
       },
       "documentation":"<p>Detailed information about a device's status.</p>"
@@ -1379,6 +1433,7 @@
         "INITIALIZED",
         "PENDING",
         "REGISTERED",
+        "DISASSOCIATING",
         "DEREGISTERING"
       ]
     },
@@ -1591,6 +1646,41 @@
       },
       "documentation":"<p>You are performing an action that would put you beyond your account's limits. HTTP Status Code: 400</p>",
       "exception":true
+    },
+    "ListDeviceEventsRequest":{
+      "type":"structure",
+      "required":["DeviceArn"],
+      "members":{
+        "DeviceArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of a device.</p>"
+        },
+        "EventType":{
+          "shape":"DeviceEventType",
+          "documentation":"<p>The event type to filter device events.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. Required. </p>"
+        }
+      }
+    },
+    "ListDeviceEventsResponse":{
+      "type":"structure",
+      "members":{
+        "DeviceEvents":{
+          "shape":"DeviceEventList",
+          "documentation":"<p/>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p/>"
+        }
+      }
     },
     "ListSkillsRequest":{
       "type":"structure",
@@ -2056,11 +2146,11 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.</p>"
+          "documentation":"<p>The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).</p>"
         },
         "SortCriteria":{
           "shape":"SortList",
-          "documentation":"<p>The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, and DeviceSerialNumber.</p>"
+          "documentation":"<p>The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and ConnectionStatus.</p>"
         }
       }
     },
@@ -2458,6 +2548,7 @@
         "CELSIUS"
       ]
     },
+    "Timestamp":{"type":"timestamp"},
     "Timezone":{
       "type":"string",
       "max":100,
@@ -2727,5 +2818,5 @@
       "pattern":"[a-zA-Z0-9@_+.-]*"
     }
   },
-  "documentation":"<p>Alexa for Business makes it easy for you to use Alexa in your organization. Alexa for Business gives you the tools you need to manage Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit, and the Alexa for Business APIs, and you can make these available as private skills for your organization. Alexa for Business also makes it easy to voice-enable your products and services, providing context-aware voice experiences for your customers.</p>"
+  "documentation":"<p>Alexa for Business makes it easy for you to use Alexa in your organization. Alexa for Business gives you the tools you need for managing Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit and the Alexa for Business API operations. You can make also these available as private skills for your organization. Alexa for Business makes it easy to voice-enable your products and services, providing context-aware voice experiences for your customers.</p>"
 }

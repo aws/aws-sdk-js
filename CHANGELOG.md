@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.229.1-->
+<!--LATEST=2.230.1-->
 <!--ENTRYINSERT-->
+
+## 2.230.1
+* feature: AlexaForBusiness: Adds ListDeviceEvents API to get a paginated list of device events (such as ConnectionStatus). This release also adds ConnectionStatus field to GetDevice and SearchDevices API.
+* feature: DynamoDB: Adds two new APIs UpdateGlobalTableSettings and DescribeGlobalTableSettings. This update introduces new constraints in the CreateGlobalTable and UpdateGlobalTable APIs . Tables must have the same write capacity units. If Global Secondary Indexes exist then they must have the same write capacity units and key schema.
+* feature: GuardDuty: You can disable the email notification when inviting GuardDuty members using the disableEmailNotification parameter in the InviteMembers operation.
+* feature: Route53Domains: This release adds a SubmittedSince attribute to the ListOperations API, so you can list operations that were submitted after a specified date and time.
+* feature: SageMaker: SageMaker has added support for VPC configuration for both Endpoints and Training Jobs. This allows you to connect from the instances running the Endpoint or Training Job to your VPC and any resources reachable in the VPC rather than being restricted to resources that were internet accessible.
+* feature: WorkSpaces: Added new IP Access Control APIs, an API to change the state of a Workspace, and the ADMIN_MAINTENANCE WorkSpace state. With the new IP Access Control APIs, you can now create/delete IP Access Control Groups, add/delete/update rules for IP Access Control Groups, Associate/Disassociate IP Access Control Groups to/from a WorkSpaces Directory, and Describe IP Based Access Control Groups.
 
 ## 2.229.1
 * feature: CodeDeploy: AWS CodeDeploy has a new exception that indicates when a GitHub token is not valid.

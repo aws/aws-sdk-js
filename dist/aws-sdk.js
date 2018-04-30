@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.229.1
+// AWS SDK for JavaScript v2.230.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -31326,6 +31326,26 @@ module.exports={
         }
       }
     },
+    "DescribeGlobalTableSettings": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalTableName"
+        ],
+        "members": {
+          "GlobalTableName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GlobalTableName": {},
+          "ReplicaSettings": {
+            "shape": "S47"
+          }
+        }
+      }
+    },
     "DescribeLimits": {
       "input": {
         "type": "structure",
@@ -31534,7 +31554,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Tags": {
-            "shape": "S4x"
+            "shape": "S54"
           },
           "NextToken": {}
         }
@@ -31606,11 +31626,11 @@ module.exports={
             "type": "map",
             "key": {},
             "value": {
-              "shape": "S56"
+              "shape": "S5d"
             }
           },
           "QueryFilter": {
-            "shape": "S57"
+            "shape": "S5e"
           },
           "ConditionalOperator": {},
           "ScanIndexForward": {
@@ -31717,7 +31737,7 @@ module.exports={
           },
           "Select": {},
           "ScanFilter": {
-            "shape": "S57"
+            "shape": "S5e"
           },
           "ConditionalOperator": {},
           "ExclusiveStartKey": {
@@ -31774,7 +31794,7 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "Tags": {
-            "shape": "S4x"
+            "shape": "S54"
           }
         }
       }
@@ -31868,6 +31888,74 @@ module.exports={
         "members": {
           "GlobalTableDescription": {
             "shape": "S1r"
+          }
+        }
+      }
+    },
+    "UpdateGlobalTableSettings": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalTableName"
+        ],
+        "members": {
+          "GlobalTableName": {},
+          "GlobalTableProvisionedWriteCapacityUnits": {
+            "type": "long"
+          },
+          "GlobalTableGlobalSecondaryIndexSettingsUpdate": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "IndexName"
+              ],
+              "members": {
+                "IndexName": {},
+                "ProvisionedWriteCapacityUnits": {
+                  "type": "long"
+                }
+              }
+            }
+          },
+          "ReplicaSettingsUpdate": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "RegionName"
+              ],
+              "members": {
+                "RegionName": {},
+                "ReplicaProvisionedReadCapacityUnits": {
+                  "type": "long"
+                },
+                "ReplicaGlobalSecondaryIndexSettingsUpdate": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "required": [
+                      "IndexName"
+                    ],
+                    "members": {
+                      "IndexName": {},
+                      "ProvisionedReadCapacityUnits": {
+                        "type": "long"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GlobalTableName": {},
+          "ReplicaSettings": {
+            "shape": "S47"
           }
         }
       }
@@ -32018,7 +32106,7 @@ module.exports={
         "members": {
           "TableName": {},
           "TimeToLiveSpecification": {
-            "shape": "S69"
+            "shape": "S6o"
           }
         }
       },
@@ -32026,7 +32114,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TimeToLiveSpecification": {
-            "shape": "S69"
+            "shape": "S6o"
           }
         }
       }
@@ -32616,7 +32704,45 @@ module.exports={
         }
       }
     },
-    "S4x": {
+    "S47": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "RegionName"
+        ],
+        "members": {
+          "RegionName": {},
+          "ReplicaStatus": {},
+          "ReplicaProvisionedReadCapacityUnits": {
+            "type": "long"
+          },
+          "ReplicaProvisionedWriteCapacityUnits": {
+            "type": "long"
+          },
+          "ReplicaGlobalSecondaryIndexSettings": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "IndexName"
+              ],
+              "members": {
+                "IndexName": {},
+                "IndexStatus": {},
+                "ProvisionedReadCapacityUnits": {
+                  "type": "long"
+                },
+                "ProvisionedWriteCapacityUnits": {
+                  "type": "long"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S54": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -32630,7 +32756,7 @@ module.exports={
         }
       }
     },
-    "S56": {
+    "S5d": {
       "type": "structure",
       "required": [
         "ComparisonOperator"
@@ -32642,14 +32768,14 @@ module.exports={
         "ComparisonOperator": {}
       }
     },
-    "S57": {
+    "S5e": {
       "type": "map",
       "key": {},
       "value": {
-        "shape": "S56"
+        "shape": "S5d"
       }
     },
-    "S69": {
+    "S6o": {
       "type": "structure",
       "required": [
         "Enabled",
@@ -103827,6 +103953,9 @@ module.exports={
       "input": {
         "type": "structure",
         "members": {
+          "SubmittedSince": {
+            "type": "timestamp"
+          },
           "Marker": {},
           "MaxItems": {
             "type": "integer"
@@ -126629,7 +126758,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.229.1',
+  VERSION: '2.230.1',
 
   /**
    * @api private
@@ -150589,7 +150718,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":474,"lodash/assign":431}],490:[function(require,module,exports){
-// AWS SDK for JavaScript v2.229.1
+// AWS SDK for JavaScript v2.230.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

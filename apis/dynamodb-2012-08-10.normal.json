@@ -76,7 +76,7 @@
         {"shape":"GlobalTableAlreadyExistsException"},
         {"shape":"TableNotFoundException"}
       ],
-      "documentation":"<p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions. </p> <p> Tables can only be added as the replicas of a global table group under the following conditions: </p> <ul> <li> <p> The tables must have the same name. </p> </li> <li> <p> The tables must contain no items. </p> </li> <li> <p> The tables must have the same hash key and sort key (if present). </p> </li> <li> <p> The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES). </p> </li> </ul>"
+      "documentation":"<p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions. </p> <p> Tables can only be added as the replicas of a global table group under the following conditions: </p> <ul> <li> <p> The tables must have the same name. </p> </li> <li> <p> The tables must contain no items. </p> </li> <li> <p> The tables must have the same hash key and sort key (if present). </p> </li> <li> <p> The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES). </p> </li> <li> <p> The tables must have same provisioned and maximum write capacity units. </p> </li> </ul> <p> If global secondary indexes are specified, then the following conditions must also be met: </p> <ul> <li> <p> The global secondary indexes must have the same name. </p> </li> <li> <p> The global secondary indexes must have the same hash key and sort key (if present). </p> </li> <li> <p> The global secondary indexes must have the same provisioned and maximum write capacity units. </p> </li> </ul>"
     },
     "CreateTable":{
       "name":"CreateTable",
@@ -168,7 +168,7 @@
         {"shape":"TableNotFoundException"},
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are <code>ENABLED</code> on all tables at table creation. If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p> <p> Once continuous backups and point in time recovery are enabled, you can restore to any point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. </p> <p> <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days with a 1-minute granularity. </p> <p>You can call <code>DescribeContinuousBackups</code> at a maximum rate of 10 times per second.</p>"
+      "documentation":"<p>Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are <code>ENABLED</code> on all tables at table creation. If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p> <p> Once continuous backups and point in time recovery are enabled, you can restore to any point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. </p> <p> <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days. </p> <p>You can call <code>DescribeContinuousBackups</code> at a maximum rate of 10 times per second.</p>"
     },
     "DescribeGlobalTable":{
       "name":"DescribeGlobalTable",
@@ -183,6 +183,20 @@
         {"shape":"GlobalTableNotFoundException"}
       ],
       "documentation":"<p>Returns information about the specified global table.</p>"
+    },
+    "DescribeGlobalTableSettings":{
+      "name":"DescribeGlobalTableSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeGlobalTableSettingsInput"},
+      "output":{"shape":"DescribeGlobalTableSettingsOutput"},
+      "errors":[
+        {"shape":"GlobalTableNotFoundException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Describes region specific settings for a global table.</p>"
     },
     "DescribeLimits":{
       "name":"DescribeLimits",
@@ -360,7 +374,7 @@
         {"shape":"PointInTimeRecoveryUnavailableException"},
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>Restores the specified table to the specified point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. You can restore your table to any point in time during the last 35 days with a 1-minute granularity. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account. </p> <p>You must manually set up the following on the restored table:</p> <ul> <li> <p>Auto scaling policies</p> </li> <li> <p>IAM policies</p> </li> <li> <p>Cloudwatch metrics and alarms</p> </li> <li> <p>Tags</p> </li> <li> <p>Stream settings</p> </li> <li> <p>Time to Live (TTL) settings</p> </li> <li> <p>Point in time recovery settings</p> </li> </ul>"
+      "documentation":"<p>Restores the specified table to the specified point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. You can restore your table to any point in time during the last 35 days. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account. </p> <p> When you restore using point in time recovery, DynamoDB restores your table data to the state based on the selected date and time (day:hour:minute:second) to a new table. </p> <p> Along with data, the following are also included on the new restored table using point in time recovery: </p> <ul> <li> <p>Global secondary indexes (GSIs)</p> </li> <li> <p>Local secondary indexes (LSIs)</p> </li> <li> <p>Provisioned read and write capacity</p> </li> <li> <p>Encryption settings</p> <important> <p> All these settings come from the current settings of the source table at the time of restore. </p> </important> </li> </ul> <p>You must manually set up the following on the restored table:</p> <ul> <li> <p>Auto scaling policies</p> </li> <li> <p>IAM policies</p> </li> <li> <p>Cloudwatch metrics and alarms</p> </li> <li> <p>Tags</p> </li> <li> <p>Stream settings</p> </li> <li> <p>Time to Live (TTL) settings</p> </li> <li> <p>Point in time recovery settings</p> </li> </ul>"
     },
     "Scan":{
       "name":"Scan",
@@ -420,7 +434,7 @@
         {"shape":"ContinuousBackupsUnavailableException"},
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p> <code>UpdateContinuousBackups</code> enables or disables point in time recovery for the specified table. A successful <code>UpdateContinuousBackups</code> call returns the current <code>ContinuousBackupsDescription</code>. Continuous backups are <code>ENABLED</code> on all tables at table creation. If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p> <p> Once continuous backups and point in time recovery are enabled, you can restore to any point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. </p> <p> <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days with a 1-minute granularity. </p>"
+      "documentation":"<p> <code>UpdateContinuousBackups</code> enables or disables point in time recovery for the specified table. A successful <code>UpdateContinuousBackups</code> call returns the current <code>ContinuousBackupsDescription</code>. Continuous backups are <code>ENABLED</code> on all tables at table creation. If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p> <p> Once continuous backups and point in time recovery are enabled, you can restore to any point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. </p> <p> <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days.. </p>"
     },
     "UpdateGlobalTable":{
       "name":"UpdateGlobalTable",
@@ -437,7 +451,25 @@
         {"shape":"ReplicaNotFoundException"},
         {"shape":"TableNotFoundException"}
       ],
-      "documentation":"<p>Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, must have the same name as the global table, must have the same key schema, and must have DynamoDB Streams enabled.</p> <note> <p>Although you can use <code>UpdateGlobalTable</code> to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.</p> </note>"
+      "documentation":"<p>Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, must have the same name as the global table, must have the same key schema, and must have DynamoDB Streams enabled and must have same provisioned and maximum write capacity units.</p> <note> <p>Although you can use <code>UpdateGlobalTable</code> to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.</p> </note> <p> If global secondary indexes are specified, then the following conditions must also be met: </p> <ul> <li> <p> The global secondary indexes must have the same name. </p> </li> <li> <p> The global secondary indexes must have the same hash key and sort key (if present). </p> </li> <li> <p> The global secondary indexes must have the same provisioned and maximum write capacity units. </p> </li> </ul>"
+    },
+    "UpdateGlobalTableSettings":{
+      "name":"UpdateGlobalTableSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateGlobalTableSettingsInput"},
+      "output":{"shape":"UpdateGlobalTableSettingsOutput"},
+      "errors":[
+        {"shape":"GlobalTableNotFoundException"},
+        {"shape":"ReplicaNotFoundException"},
+        {"shape":"IndexNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Updates settings for a global table.</p>"
     },
     "UpdateItem":{
       "name":"UpdateItem",
@@ -1296,6 +1328,29 @@
         }
       }
     },
+    "DescribeGlobalTableSettingsInput":{
+      "type":"structure",
+      "required":["GlobalTableName"],
+      "members":{
+        "GlobalTableName":{
+          "shape":"TableName",
+          "documentation":"<p>The name of the global table to describe.</p>"
+        }
+      }
+    },
+    "DescribeGlobalTableSettingsOutput":{
+      "type":"structure",
+      "members":{
+        "GlobalTableName":{
+          "shape":"TableName",
+          "documentation":"<p>The name of the global table.</p>"
+        },
+        "ReplicaSettings":{
+          "shape":"ReplicaSettingsDescriptionList",
+          "documentation":"<p>The region specific settings for the global table.</p>"
+        }
+      }
+    },
     "DescribeLimitsInput":{
       "type":"structure",
       "members":{
@@ -1633,6 +1688,27 @@
       },
       "documentation":"<p>Contains details about the global table.</p>"
     },
+    "GlobalTableGlobalSecondaryIndexSettingsUpdate":{
+      "type":"structure",
+      "required":["IndexName"],
+      "members":{
+        "IndexName":{
+          "shape":"IndexName",
+          "documentation":"<p>The name of the global secondary index. The name must be unique among all other indexes on this table.</p>"
+        },
+        "ProvisionedWriteCapacityUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException.</code> </p>"
+        }
+      },
+      "documentation":"<p>Represents the settings of a global secondary index for a global table that will be modified.</p>"
+    },
+    "GlobalTableGlobalSecondaryIndexSettingsUpdateList":{
+      "type":"list",
+      "member":{"shape":"GlobalTableGlobalSecondaryIndexSettingsUpdate"},
+      "max":20,
+      "min":1
+    },
     "GlobalTableList":{
       "type":"list",
       "member":{"shape":"GlobalTable"}
@@ -1659,6 +1735,14 @@
       "max":255,
       "min":3,
       "pattern":"[a-zA-Z0-9_.-]+"
+    },
+    "IndexNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>The operation tried to access a nonexistent index.</p>",
+      "exception":true
     },
     "IndexStatus":{
       "type":"string",
@@ -2081,11 +2165,11 @@
         },
         "EarliestRestorableDateTime":{
           "shape":"Date",
-          "documentation":"<p>Specifies the earliest point in time you can restore your table to. It is equal to the maximum of point in time recovery enabled time and <code>CurrentTime</code> - <code>PointInTimeRecoveryPeriod</code>.</p>"
+          "documentation":"<p>Specifies the earliest point in time you can restore your table to. It You can restore your table to any point in time during the last 35 days. </p>"
         },
         "LatestRestorableDateTime":{
           "shape":"Date",
-          "documentation":"<p> <code>LatestRestorableDateTime</code> is 5 minutes from now and there is a +/- 1 minute fuzziness on the restore times. </p>"
+          "documentation":"<p> <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. </p>"
         }
       },
       "documentation":"<p>The description of the point in time settings applied to the table.</p>"
@@ -2414,6 +2498,54 @@
       "type":"list",
       "member":{"shape":"ReplicaDescription"}
     },
+    "ReplicaGlobalSecondaryIndexSettingsDescription":{
+      "type":"structure",
+      "required":["IndexName"],
+      "members":{
+        "IndexName":{
+          "shape":"IndexName",
+          "documentation":"<p>The name of the global secondary index. The name must be unique among all other indexes on this table.</p>"
+        },
+        "IndexStatus":{
+          "shape":"IndexStatus",
+          "documentation":"<p> The current status of the global secondary index:</p> <ul> <li> <p> <code>CREATING</code> - The global secondary index is being created.</p> </li> <li> <p> <code>UPDATING</code> - The global secondary index is being updated.</p> </li> <li> <p> <code>DELETING</code> - The global secondary index is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The global secondary index is ready for use.</p> </li> </ul>"
+        },
+        "ProvisionedReadCapacityUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>.</p>"
+        },
+        "ProvisionedWriteCapacityUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>.</p>"
+        }
+      },
+      "documentation":"<p>Represents the properties of a global secondary index.</p>"
+    },
+    "ReplicaGlobalSecondaryIndexSettingsDescriptionList":{
+      "type":"list",
+      "member":{"shape":"ReplicaGlobalSecondaryIndexSettingsDescription"}
+    },
+    "ReplicaGlobalSecondaryIndexSettingsUpdate":{
+      "type":"structure",
+      "required":["IndexName"],
+      "members":{
+        "IndexName":{
+          "shape":"IndexName",
+          "documentation":"<p>The name of the global secondary index. The name must be unique among all other indexes on this table.</p>"
+        },
+        "ProvisionedReadCapacityUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>.</p>"
+        }
+      },
+      "documentation":"<p>Represents the settings of a global secondary index for a global table that will be modified.</p>"
+    },
+    "ReplicaGlobalSecondaryIndexSettingsUpdateList":{
+      "type":"list",
+      "member":{"shape":"ReplicaGlobalSecondaryIndexSettingsUpdate"},
+      "max":20,
+      "min":1
+    },
     "ReplicaList":{
       "type":"list",
       "member":{"shape":"Replica"}
@@ -2425,6 +2557,71 @@
       },
       "documentation":"<p>The specified replica is no longer part of the global table.</p>",
       "exception":true
+    },
+    "ReplicaSettingsDescription":{
+      "type":"structure",
+      "required":["RegionName"],
+      "members":{
+        "RegionName":{
+          "shape":"RegionName",
+          "documentation":"<p>The region name of the replica.</p>"
+        },
+        "ReplicaStatus":{
+          "shape":"ReplicaStatus",
+          "documentation":"<p>The current state of the region:</p> <ul> <li> <p> <code>CREATING</code> - The region is being created.</p> </li> <li> <p> <code>UPDATING</code> - The region is being updated.</p> </li> <li> <p> <code>DELETING</code> - The region is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The region is ready for use.</p> </li> </ul>"
+        },
+        "ReplicaProvisionedReadCapacityUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>. </p>"
+        },
+        "ReplicaProvisionedWriteCapacityUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+        },
+        "ReplicaGlobalSecondaryIndexSettings":{
+          "shape":"ReplicaGlobalSecondaryIndexSettingsDescriptionList",
+          "documentation":"<p>Replica global secondary index settings for the global table.</p>"
+        }
+      },
+      "documentation":"<p>Represents the properties of a replica.</p>"
+    },
+    "ReplicaSettingsDescriptionList":{
+      "type":"list",
+      "member":{"shape":"ReplicaSettingsDescription"}
+    },
+    "ReplicaSettingsUpdate":{
+      "type":"structure",
+      "required":["RegionName"],
+      "members":{
+        "RegionName":{
+          "shape":"RegionName",
+          "documentation":"<p>The region of the replica to be added.</p>"
+        },
+        "ReplicaProvisionedReadCapacityUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>. </p>"
+        },
+        "ReplicaGlobalSecondaryIndexSettingsUpdate":{
+          "shape":"ReplicaGlobalSecondaryIndexSettingsUpdateList",
+          "documentation":"<p>Represents the settings of a global secondary index for a global table that will be modified.</p>"
+        }
+      },
+      "documentation":"<p>Represents the settings for a global table in a region that will be modified.</p>"
+    },
+    "ReplicaSettingsUpdateList":{
+      "type":"list",
+      "member":{"shape":"ReplicaSettingsUpdate"},
+      "max":50,
+      "min":1
+    },
+    "ReplicaStatus":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "UPDATING",
+        "DELETING",
+        "ACTIVE"
+      ]
     },
     "ReplicaUpdate":{
       "type":"structure",
@@ -3157,6 +3354,41 @@
         "GlobalTableDescription":{
           "shape":"GlobalTableDescription",
           "documentation":"<p>Contains the details of the global table.</p>"
+        }
+      }
+    },
+    "UpdateGlobalTableSettingsInput":{
+      "type":"structure",
+      "required":["GlobalTableName"],
+      "members":{
+        "GlobalTableName":{
+          "shape":"TableName",
+          "documentation":"<p>The name of the global table</p>"
+        },
+        "GlobalTableProvisionedWriteCapacityUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException.</code> </p>"
+        },
+        "GlobalTableGlobalSecondaryIndexSettingsUpdate":{
+          "shape":"GlobalTableGlobalSecondaryIndexSettingsUpdateList",
+          "documentation":"<p>Represents the settings of a global secondary index for a global table that will be modified.</p>"
+        },
+        "ReplicaSettingsUpdate":{
+          "shape":"ReplicaSettingsUpdateList",
+          "documentation":"<p>Represents the settings for a global table in a region that will be modified.</p>"
+        }
+      }
+    },
+    "UpdateGlobalTableSettingsOutput":{
+      "type":"structure",
+      "members":{
+        "GlobalTableName":{
+          "shape":"TableName",
+          "documentation":"<p>The name of the global table.</p>"
+        },
+        "ReplicaSettings":{
+          "shape":"ReplicaSettingsDescriptionList",
+          "documentation":"<p>The region specific settings for the global table.</p>"
         }
       }
     },

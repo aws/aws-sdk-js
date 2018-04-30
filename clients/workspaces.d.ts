@@ -12,11 +12,35 @@ declare class WorkSpaces extends Service {
   constructor(options?: WorkSpaces.Types.ClientConfiguration)
   config: Config & WorkSpaces.Types.ClientConfiguration;
   /**
-   * Creates tags for the specified WorkSpace.
+   * Associates the specified IP access control group with the specified directory.
+   */
+  associateIpGroups(params: WorkSpaces.Types.AssociateIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateIpGroupsResult) => void): Request<WorkSpaces.Types.AssociateIpGroupsResult, AWSError>;
+  /**
+   * Associates the specified IP access control group with the specified directory.
+   */
+  associateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.AssociateIpGroupsResult) => void): Request<WorkSpaces.Types.AssociateIpGroupsResult, AWSError>;
+  /**
+   * Adds one or more rules to the specified IP access control group. This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.
+   */
+  authorizeIpRules(params: WorkSpaces.Types.AuthorizeIpRulesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AuthorizeIpRulesResult) => void): Request<WorkSpaces.Types.AuthorizeIpRulesResult, AWSError>;
+  /**
+   * Adds one or more rules to the specified IP access control group. This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.
+   */
+  authorizeIpRules(callback?: (err: AWSError, data: WorkSpaces.Types.AuthorizeIpRulesResult) => void): Request<WorkSpaces.Types.AuthorizeIpRulesResult, AWSError>;
+  /**
+   * Creates an IP access control group. An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using AuthorizeIpRules. There is a default IP access control group associated with your directory. If you don't associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.
+   */
+  createIpGroup(params: WorkSpaces.Types.CreateIpGroupRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateIpGroupResult) => void): Request<WorkSpaces.Types.CreateIpGroupResult, AWSError>;
+  /**
+   * Creates an IP access control group. An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using AuthorizeIpRules. There is a default IP access control group associated with your directory. If you don't associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.
+   */
+  createIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.CreateIpGroupResult) => void): Request<WorkSpaces.Types.CreateIpGroupResult, AWSError>;
+  /**
+   * Creates the specified tags for the specified WorkSpace.
    */
   createTags(params: WorkSpaces.Types.CreateTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
-   * Creates tags for the specified WorkSpace.
+   * Creates the specified tags for the specified WorkSpace.
    */
   createTags(callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
@@ -28,19 +52,35 @@ declare class WorkSpaces extends Service {
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**
-   * Deletes the specified tags from a WorkSpace.
+   * Deletes the specified IP access control group. You cannot delete an IP access control group that is associated with a directory.
+   */
+  deleteIpGroup(params: WorkSpaces.Types.DeleteIpGroupRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteIpGroupResult) => void): Request<WorkSpaces.Types.DeleteIpGroupResult, AWSError>;
+  /**
+   * Deletes the specified IP access control group. You cannot delete an IP access control group that is associated with a directory.
+   */
+  deleteIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteIpGroupResult) => void): Request<WorkSpaces.Types.DeleteIpGroupResult, AWSError>;
+  /**
+   * Deletes the specified tags from the specified WorkSpace.
    */
   deleteTags(params: WorkSpaces.Types.DeleteTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
-   * Deletes the specified tags from a WorkSpace.
+   * Deletes the specified tags from the specified WorkSpace.
    */
   deleteTags(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
-   * Describes the tags for the specified WorkSpace.
+   * Describes one or more of your IP access control groups.
+   */
+  describeIpGroups(params: WorkSpaces.Types.DescribeIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeIpGroupsResult) => void): Request<WorkSpaces.Types.DescribeIpGroupsResult, AWSError>;
+  /**
+   * Describes one or more of your IP access control groups.
+   */
+  describeIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeIpGroupsResult) => void): Request<WorkSpaces.Types.DescribeIpGroupsResult, AWSError>;
+  /**
+   * Describes the specified tags for the specified WorkSpace.
    */
   describeTags(params: WorkSpaces.Types.DescribeTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
   /**
-   * Describes the tags for the specified WorkSpace.
+   * Describes the specified tags for the specified WorkSpace.
    */
   describeTags(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
   /**
@@ -76,6 +116,14 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspacesConnectionStatus(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult, AWSError>;
   /**
+   * Disassociates the specified IP access control group from the specified directory.
+   */
+  disassociateIpGroups(params: WorkSpaces.Types.DisassociateIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
+  /**
+   * Disassociates the specified IP access control group from the specified directory.
+   */
+  disassociateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
+  /**
    * Modifies the specified WorkSpace properties.
    */
   modifyWorkspaceProperties(params: WorkSpaces.Types.ModifyWorkspacePropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
@@ -84,21 +132,37 @@ declare class WorkSpaces extends Service {
    */
   modifyWorkspaceProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
   /**
-   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE, IMPAIRED, or INOPERABLE. This operation is asynchronous and returns before the WorkSpaces have rebooted.
+   * Sets the state of the specified WorkSpace. To maintain a WorkSpace without being interrupted, set the WorkSpace state to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the ADMIN_MAINTENANCE state.
+   */
+  modifyWorkspaceState(params: WorkSpaces.Types.ModifyWorkspaceStateRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceStateResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceStateResult, AWSError>;
+  /**
+   * Sets the state of the specified WorkSpace. To maintain a WorkSpace without being interrupted, set the WorkSpace state to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the ADMIN_MAINTENANCE state.
+   */
+  modifyWorkspaceState(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceStateResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceStateResult, AWSError>;
+  /**
+   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE or UNHEALTHY. This operation is asynchronous and returns before the WorkSpaces have rebooted.
    */
   rebootWorkspaces(params: WorkSpaces.Types.RebootWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
   /**
-   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE, IMPAIRED, or INOPERABLE. This operation is asynchronous and returns before the WorkSpaces have rebooted.
+   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE or UNHEALTHY. This operation is asynchronous and returns before the WorkSpaces have rebooted.
    */
   rebootWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
   /**
-   * Rebuilds the specified WorkSpaces. You cannot rebuild a WorkSpace unless its state is AVAILABLE or ERROR. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
+   * Rebuilds the specified WorkSpace. You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, or UNHEALTHY. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
    */
   rebuildWorkspaces(params: WorkSpaces.Types.RebuildWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
   /**
-   * Rebuilds the specified WorkSpaces. You cannot rebuild a WorkSpace unless its state is AVAILABLE or ERROR. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
+   * Rebuilds the specified WorkSpace. You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, or UNHEALTHY. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
    */
   rebuildWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
+  /**
+   * Removes one or more rules from the specified IP access control group.
+   */
+  revokeIpRules(params: WorkSpaces.Types.RevokeIpRulesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RevokeIpRulesResult) => void): Request<WorkSpaces.Types.RevokeIpRulesResult, AWSError>;
+  /**
+   * Removes one or more rules from the specified IP access control group.
+   */
+  revokeIpRules(callback?: (err: AWSError, data: WorkSpaces.Types.RevokeIpRulesResult) => void): Request<WorkSpaces.Types.RevokeIpRulesResult, AWSError>;
   /**
    * Starts the specified WorkSpaces. You cannot start a WorkSpace unless it has a running mode of AutoStop and a state of STOPPED.
    */
@@ -123,10 +187,42 @@ declare class WorkSpaces extends Service {
    * Terminates the specified WorkSpaces. Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace. You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated.
    */
   terminateWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
+  /**
+   * Replaces the current rules of the specified IP access control group with the specified rules.
+   */
+  updateRulesOfIpGroup(params: WorkSpaces.Types.UpdateRulesOfIpGroupRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateRulesOfIpGroupResult) => void): Request<WorkSpaces.Types.UpdateRulesOfIpGroupResult, AWSError>;
+  /**
+   * Replaces the current rules of the specified IP access control group with the specified rules.
+   */
+  updateRulesOfIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateRulesOfIpGroupResult) => void): Request<WorkSpaces.Types.UpdateRulesOfIpGroupResult, AWSError>;
 }
 declare namespace WorkSpaces {
   export type ARN = string;
   export type Alias = string;
+  export interface AssociateIpGroupsRequest {
+    /**
+     * The ID of the directory.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The IDs of one or more IP access control groups.
+     */
+    GroupIds: IpGroupIdList;
+  }
+  export interface AssociateIpGroupsResult {
+  }
+  export interface AuthorizeIpRulesRequest {
+    /**
+     * The ID of the group.
+     */
+    GroupId: IpGroupId;
+    /**
+     * The rules to add to the group.
+     */
+    UserRules: IpRuleList;
+  }
+  export interface AuthorizeIpRulesResult {
+  }
   export type BooleanObject = boolean;
   export type BundleId = string;
   export type BundleIdList = BundleId[];
@@ -141,13 +237,33 @@ declare namespace WorkSpaces {
   }
   export type ComputerName = string;
   export type ConnectionState = "CONNECTED"|"DISCONNECTED"|"UNKNOWN"|string;
+  export interface CreateIpGroupRequest {
+    /**
+     * The name of the group.
+     */
+    GroupName: IpGroupName;
+    /**
+     * The description of the group.
+     */
+    GroupDesc?: IpGroupDesc;
+    /**
+     * The rules to add to the group.
+     */
+    UserRules?: IpRuleList;
+  }
+  export interface CreateIpGroupResult {
+    /**
+     * The ID of the group.
+     */
+    GroupId?: IpGroupId;
+  }
   export interface CreateTagsRequest {
     /**
-     * The ID of the resource.
+     * The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
      */
     ResourceId: NonEmptyString;
     /**
-     * The tags. Each resource can have a maximum of 50 tags.
+     * The tags. Each WorkSpace can have a maximum of 50 tags.
      */
     Tags: TagList;
   }
@@ -155,7 +271,7 @@ declare namespace WorkSpaces {
   }
   export interface CreateWorkspacesRequest {
     /**
-     * Information about the WorkSpaces to create.
+     * The WorkSpaces to create. You can specify up to 25 WorkSpaces.
      */
     Workspaces: WorkspaceRequestList;
   }
@@ -192,9 +308,17 @@ declare namespace WorkSpaces {
      */
     UserEnabledAsLocalAdministrator?: BooleanObject;
   }
+  export interface DeleteIpGroupRequest {
+    /**
+     * The ID of the IP access control group.
+     */
+    GroupId: IpGroupId;
+  }
+  export interface DeleteIpGroupResult {
+  }
   export interface DeleteTagsRequest {
     /**
-     * The ID of the resource.
+     * The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
      */
     ResourceId: NonEmptyString;
     /**
@@ -204,9 +328,33 @@ declare namespace WorkSpaces {
   }
   export interface DeleteTagsResult {
   }
+  export interface DescribeIpGroupsRequest {
+    /**
+     * The IDs of one or more IP access control groups.
+     */
+    GroupIds?: IpGroupIdList;
+    /**
+     * The token for the next set of results. (You received this token from a previous call.)
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of items to return.
+     */
+    MaxResults?: Limit;
+  }
+  export interface DescribeIpGroupsResult {
+    /**
+     * Information about the IP access control groups.
+     */
+    Result?: WorkspacesIpGroupsList;
+    /**
+     * The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface DescribeTagsRequest {
     /**
-     * The ID of the resource.
+     * The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
      */
     ResourceId: NonEmptyString;
   }
@@ -262,7 +410,7 @@ declare namespace WorkSpaces {
   }
   export interface DescribeWorkspacesConnectionStatusRequest {
     /**
-     * The identifiers of the WorkSpaces.
+     * The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
      */
     WorkspaceIds?: WorkspaceIdList;
     /**
@@ -321,6 +469,18 @@ declare namespace WorkSpaces {
   export type DirectoryIdList = DirectoryId[];
   export type DirectoryList = WorkspaceDirectory[];
   export type DirectoryName = string;
+  export interface DisassociateIpGroupsRequest {
+    /**
+     * The ID of the directory.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The IDs of one or more IP access control groups.
+     */
+    GroupIds: IpGroupIdList;
+  }
+  export interface DisassociateIpGroupsResult {
+  }
   export type DnsIpAddresses = IpAddress[];
   export type ErrorType = string;
   export type ExceptionMessage = string;
@@ -359,6 +519,24 @@ declare namespace WorkSpaces {
     ErrorMessage?: Description;
   }
   export type IpAddress = string;
+  export type IpGroupDesc = string;
+  export type IpGroupId = string;
+  export type IpGroupIdList = IpGroupId[];
+  export type IpGroupName = string;
+  export type IpRevokedRuleList = IpRule[];
+  export type IpRule = string;
+  export type IpRuleDesc = string;
+  export interface IpRuleItem {
+    /**
+     * The IP address range, in CIDR notation.
+     */
+    ipRule?: IpRule;
+    /**
+     * The description.
+     */
+    ruleDesc?: IpRuleDesc;
+  }
+  export type IpRuleList = IpRuleItem[];
   export type Limit = number;
   export type ModificationResourceEnum = "ROOT_VOLUME"|"USER_VOLUME"|"COMPUTE_TYPE"|string;
   export interface ModificationState {
@@ -385,18 +563,30 @@ declare namespace WorkSpaces {
   }
   export interface ModifyWorkspacePropertiesResult {
   }
+  export interface ModifyWorkspaceStateRequest {
+    /**
+     * The ID of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * The WorkSpace state.
+     */
+    WorkspaceState: TargetWorkspaceState;
+  }
+  export interface ModifyWorkspaceStateResult {
+  }
   export type NonEmptyString = string;
   export type PaginationToken = string;
   export interface RebootRequest {
     /**
-     * The identifier of the WorkSpace.
+     * The ID of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
   }
   export type RebootWorkspaceRequests = RebootRequest[];
   export interface RebootWorkspacesRequest {
     /**
-     * The WorkSpaces to reboot.
+     * The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
      */
     RebootWorkspaceRequests: RebootWorkspaceRequests;
   }
@@ -408,24 +598,36 @@ declare namespace WorkSpaces {
   }
   export interface RebuildRequest {
     /**
-     * The identifier of the WorkSpace.
+     * The ID of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
   }
   export type RebuildWorkspaceRequests = RebuildRequest[];
   export interface RebuildWorkspacesRequest {
     /**
-     * The WorkSpaces to rebuild.
+     * The WorkSpace to rebuild. You can specify a single WorkSpace.
      */
     RebuildWorkspaceRequests: RebuildWorkspaceRequests;
   }
   export interface RebuildWorkspacesResult {
     /**
-     * Information about the WorkSpaces that could not be rebuilt.
+     * Information about the WorkSpace if it could not be rebuilt.
      */
     FailedRequests?: FailedRebuildWorkspaceRequests;
   }
   export type RegistrationCode = string;
+  export interface RevokeIpRulesRequest {
+    /**
+     * The ID of the group.
+     */
+    GroupId: IpGroupId;
+    /**
+     * The rules to remove from the group.
+     */
+    UserRules: IpRevokedRuleList;
+  }
+  export interface RevokeIpRulesResult {
+  }
   export interface RootStorage {
     /**
      * The size of the root volume.
@@ -445,7 +647,7 @@ declare namespace WorkSpaces {
   export type StartWorkspaceRequests = StartRequest[];
   export interface StartWorkspacesRequest {
     /**
-     * The WorkSpaces to start.
+     * The WorkSpaces to start. You can specify up to 25 WorkSpaces.
      */
     StartWorkspaceRequests: StartWorkspaceRequests;
   }
@@ -464,7 +666,7 @@ declare namespace WorkSpaces {
   export type StopWorkspaceRequests = StopRequest[];
   export interface StopWorkspacesRequest {
     /**
-     * The WorkSpaces to stop.
+     * The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
      */
     StopWorkspaceRequests: StopWorkspaceRequests;
   }
@@ -490,16 +692,17 @@ declare namespace WorkSpaces {
   export type TagKeyList = NonEmptyString[];
   export type TagList = Tag[];
   export type TagValue = string;
+  export type TargetWorkspaceState = "AVAILABLE"|"ADMIN_MAINTENANCE"|string;
   export interface TerminateRequest {
     /**
-     * The identifier of the WorkSpace.
+     * The ID of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
   }
   export type TerminateWorkspaceRequests = TerminateRequest[];
   export interface TerminateWorkspacesRequest {
     /**
-     * The WorkSpaces to terminate.
+     * The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
      */
     TerminateWorkspaceRequests: TerminateWorkspaceRequests;
   }
@@ -510,6 +713,18 @@ declare namespace WorkSpaces {
     FailedRequests?: FailedTerminateWorkspaceRequests;
   }
   export type Timestamp = Date;
+  export interface UpdateRulesOfIpGroupRequest {
+    /**
+     * The ID of the group.
+     */
+    GroupId: IpGroupId;
+    /**
+     * One or more rules.
+     */
+    UserRules: IpRuleList;
+  }
+  export interface UpdateRulesOfIpGroupResult {
+  }
   export type UserName = string;
   export interface UserStorage {
     /**
@@ -679,6 +894,10 @@ declare namespace WorkSpaces {
      * The default creation properties for all WorkSpaces in the directory.
      */
     WorkspaceCreationProperties?: DefaultWorkspaceCreationProperties;
+    /**
+     * The identifiers of the IP access control groups associated with the directory.
+     */
+    ipGroupIds?: IpGroupIdList;
   }
   export type WorkspaceDirectoryState = "REGISTERING"|"REGISTERED"|"DEREGISTERING"|"DEREGISTERED"|"ERROR"|string;
   export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|string;
@@ -743,7 +962,26 @@ declare namespace WorkSpaces {
     Tags?: TagList;
   }
   export type WorkspaceRequestList = WorkspaceRequest[];
-  export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
+  export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
+  export interface WorkspacesIpGroup {
+    /**
+     * The ID of the group.
+     */
+    groupId?: IpGroupId;
+    /**
+     * The name of the group.
+     */
+    groupName?: IpGroupName;
+    /**
+     * The description of the group.
+     */
+    groupDesc?: IpGroupDesc;
+    /**
+     * The rules.
+     */
+    userRules?: IpRuleList;
+  }
+  export type WorkspacesIpGroupsList = WorkspacesIpGroup[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

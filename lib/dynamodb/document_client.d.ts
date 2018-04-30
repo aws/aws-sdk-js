@@ -558,6 +558,22 @@ export namespace DocumentClient {
      */
     GlobalTableDescription?: GlobalTableDescription;
   }
+  export interface DescribeGlobalTableSettingsInput {
+    /**
+     * The name of the global table to describe.
+     */
+    GlobalTableName: TableName;
+  }
+  export interface DescribeGlobalTableSettingsOutput {
+    /**
+     * The name of the global table.
+     */
+    GlobalTableName?: TableName;
+    /**
+     * The region specific settings for the global table.
+     */
+    ReplicaSettings?: ReplicaSettingsDescriptionList;
+  }
   export interface DescribeLimitsInput {
   }
   export interface DescribeLimitsOutput {
@@ -789,6 +805,17 @@ export namespace DocumentClient {
      */
     GlobalTableName?: TableName;
   }
+  export interface GlobalTableGlobalSecondaryIndexSettingsUpdate {
+    /**
+     * The name of the global secondary index. The name must be unique among all other indexes on this table.
+     */
+    IndexName: IndexName;
+    /**
+     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. 
+     */
+    ProvisionedWriteCapacityUnits?: PositiveLongObject;
+  }
+  export type GlobalTableGlobalSecondaryIndexSettingsUpdateList = GlobalTableGlobalSecondaryIndexSettingsUpdate[];
   export type GlobalTableList = GlobalTable[];
   export type GlobalTableStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|string;
   export type IndexName = string;
@@ -1019,11 +1046,11 @@ export namespace DocumentClient {
      */
     PointInTimeRecoveryStatus?: PointInTimeRecoveryStatus;
     /**
-     * Specifies the earliest point in time you can restore your table to. It is equal to the maximum of point in time recovery enabled time and CurrentTime - PointInTimeRecoveryPeriod.
+     * Specifies the earliest point in time you can restore your table to. It You can restore your table to any point in time during the last 35 days. 
      */
     EarliestRestorableDateTime?: _Date;
     /**
-     *  LatestRestorableDateTime is 5 minutes from now and there is a +/- 1 minute fuzziness on the restore times. 
+     *  LatestRestorableDateTime is typically 5 minutes before the current time. 
      */
     LatestRestorableDateTime?: _Date;
   }
@@ -1243,7 +1270,76 @@ export namespace DocumentClient {
     RegionName?: RegionName;
   }
   export type ReplicaDescriptionList = ReplicaDescription[];
+  export interface ReplicaGlobalSecondaryIndexSettingsDescription {
+    /**
+     * The name of the global secondary index. The name must be unique among all other indexes on this table.
+     */
+    IndexName: IndexName;
+    /**
+     *  The current status of the global secondary index:    CREATING - The global secondary index is being created.    UPDATING - The global secondary index is being updated.    DELETING - The global secondary index is being deleted.    ACTIVE - The global secondary index is ready for use.  
+     */
+    IndexStatus?: IndexStatus;
+    /**
+     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException.
+     */
+    ProvisionedReadCapacityUnits?: PositiveLongObject;
+    /**
+     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException.
+     */
+    ProvisionedWriteCapacityUnits?: PositiveLongObject;
+  }
+  export type ReplicaGlobalSecondaryIndexSettingsDescriptionList = ReplicaGlobalSecondaryIndexSettingsDescription[];
+  export interface ReplicaGlobalSecondaryIndexSettingsUpdate {
+    /**
+     * The name of the global secondary index. The name must be unique among all other indexes on this table.
+     */
+    IndexName: IndexName;
+    /**
+     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException.
+     */
+    ProvisionedReadCapacityUnits?: PositiveLongObject;
+  }
+  export type ReplicaGlobalSecondaryIndexSettingsUpdateList = ReplicaGlobalSecondaryIndexSettingsUpdate[];
   export type ReplicaList = Replica[];
+  export interface ReplicaSettingsDescription {
+    /**
+     * The region name of the replica.
+     */
+    RegionName: RegionName;
+    /**
+     * The current state of the region:    CREATING - The region is being created.    UPDATING - The region is being updated.    DELETING - The region is being deleted.    ACTIVE - The region is ready for use.  
+     */
+    ReplicaStatus?: ReplicaStatus;
+    /**
+     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide. 
+     */
+    ReplicaProvisionedReadCapacityUnits?: PositiveLongObject;
+    /**
+     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide.
+     */
+    ReplicaProvisionedWriteCapacityUnits?: PositiveLongObject;
+    /**
+     * Replica global secondary index settings for the global table.
+     */
+    ReplicaGlobalSecondaryIndexSettings?: ReplicaGlobalSecondaryIndexSettingsDescriptionList;
+  }
+  export type ReplicaSettingsDescriptionList = ReplicaSettingsDescription[];
+  export interface ReplicaSettingsUpdate {
+    /**
+     * The region of the replica to be added.
+     */
+    RegionName: RegionName;
+    /**
+     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide. 
+     */
+    ReplicaProvisionedReadCapacityUnits?: PositiveLongObject;
+    /**
+     * Represents the settings of a global secondary index for a global table that will be modified.
+     */
+    ReplicaGlobalSecondaryIndexSettingsUpdate?: ReplicaGlobalSecondaryIndexSettingsUpdateList;
+  }
+  export type ReplicaSettingsUpdateList = ReplicaSettingsUpdate[];
+  export type ReplicaStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
   export interface ReplicaUpdate {
     /**
      * The parameters required for creating a replica on an existing global table.
@@ -1671,6 +1767,34 @@ export namespace DocumentClient {
      * Contains the details of the global table.
      */
     GlobalTableDescription?: GlobalTableDescription;
+  }
+  export interface UpdateGlobalTableSettingsInput {
+    /**
+     * The name of the global table
+     */
+    GlobalTableName: TableName;
+    /**
+     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. 
+     */
+    GlobalTableProvisionedWriteCapacityUnits?: PositiveLongObject;
+    /**
+     * Represents the settings of a global secondary index for a global table that will be modified.
+     */
+    GlobalTableGlobalSecondaryIndexSettingsUpdate?: GlobalTableGlobalSecondaryIndexSettingsUpdateList;
+    /**
+     * Represents the settings for a global table in a region that will be modified.
+     */
+    ReplicaSettingsUpdate?: ReplicaSettingsUpdateList;
+  }
+  export interface UpdateGlobalTableSettingsOutput {
+    /**
+     * The name of the global table.
+     */
+    GlobalTableName?: TableName;
+    /**
+     * The region specific settings for the global table.
+     */
+    ReplicaSettings?: ReplicaSettingsDescriptionList;
   }
   export interface UpdateItemInput {
     /**

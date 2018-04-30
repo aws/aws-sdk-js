@@ -745,7 +745,7 @@
         "shape" : "InternalServerErrorException",
         "documentation" : "500 response"
       } ],
-      "documentation" : "Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members' findings."
+      "documentation" : "Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members’ findings."
     },
     "UnarchiveFindings" : {
       "name" : "UnarchiveFindings",
@@ -931,7 +931,8 @@
           "documentation" : "Member account's email address."
         }
       },
-      "documentation" : "An object containing the member's accountId and email address."
+      "documentation" : "An object containing the member's accountId and email address.",
+      "required" : [ "Email", "AccountId" ]
     },
     "AccountDetails" : {
       "type" : "list",
@@ -1614,13 +1615,14 @@
           "documentation" : "The time stamp at which a finding was last updated."
         }
       },
-      "documentation" : "Representation of a abnormal or suspicious activity."
+      "documentation" : "Representation of a abnormal or suspicious activity.",
+      "required" : [ "AccountId", "SchemaVersion", "CreatedAt", "Resource", "Severity", "UpdatedAt", "Type", "Region", "Id", "Arn" ]
     },
     "FindingCriteria" : {
       "type" : "structure",
       "members" : {
         "Criterion" : {
-          "shape" : "MapOfCondition",
+          "shape" : "__mapOfCondition",
           "locationName" : "criterion",
           "documentation" : "Represents a map of finding properties that match specified conditions and values when querying findings."
         }
@@ -1654,7 +1656,7 @@
       "type" : "structure",
       "members" : {
         "CountBySeverity" : {
-          "shape" : "MapOfCountBySeverityFindingStatistic",
+          "shape" : "__mapOfCountBySeverityFindingStatistic",
           "locationName" : "countBySeverity",
           "documentation" : "Represents a map of severity to count statistic for a set of findings"
         }
@@ -2093,10 +2095,14 @@
           "locationName" : "detectorId",
           "documentation" : "The unique ID of the detector of the GuardDuty account with which you want to invite members."
         },
+        "DisableEmailNotification" : {
+          "shape" : "__boolean",
+          "locationName" : "disableEmailNotification"
+        },
         "Message" : {
           "shape" : "Message",
           "locationName" : "message",
-          "documentation" : "The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members."
+          "documentation" : "The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members."
         }
       },
       "documentation" : "InviteMembers request body.",
@@ -2334,12 +2340,6 @@
         }
       }
     },
-    "ListOfPortProbeDetail" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "PortProbeDetail"
-      }
-    },
     "ListThreatIntelSetsRequest" : {
       "type" : "structure",
       "members" : {
@@ -2396,24 +2396,6 @@
     "Location" : {
       "type" : "string",
       "documentation" : "The location of the S3 bucket where the list resides. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)"
-    },
-    "MapOfCondition" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "Condition"
-      }
-    },
-    "MapOfCountBySeverityFindingStatistic" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "CountBySeverityFindingStatistic"
-      }
     },
     "Master" : {
       "type" : "structure",
@@ -2485,7 +2467,8 @@
           "locationName" : "updatedAt"
         }
       },
-      "documentation" : "Contains details about the member account."
+      "documentation" : "Contains details about the member account.",
+      "required" : [ "Email", "AccountId", "MasterId", "UpdatedAt", "RelationshipStatus" ]
     },
     "Members" : {
       "type" : "list",
@@ -2496,7 +2479,7 @@
     },
     "Message" : {
       "type" : "string",
-      "documentation" : "The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members."
+      "documentation" : "The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members."
     },
     "Name" : {
       "type" : "string",
@@ -2646,7 +2629,7 @@
           "documentation" : "Port probe blocked information."
         },
         "PortProbeDetails" : {
-          "shape" : "ListOfPortProbeDetail",
+          "shape" : "__listOfPortProbeDetail",
           "locationName" : "portProbeDetails",
           "documentation" : "A list of port probe details objects."
         }
@@ -3019,7 +3002,8 @@
           "documentation" : "A reason why the account hasn't been processed."
         }
       },
-      "documentation" : "An object containing the unprocessed account and a result string explaining why it was unprocessed."
+      "documentation" : "An object containing the unprocessed account and a result string explaining why it was unprocessed.",
+      "required" : [ "AccountId", "Result" ]
     },
     "UnprocessedAccounts" : {
       "type" : "list",
@@ -3170,6 +3154,33 @@
     },
     "__integer" : {
       "type" : "integer"
+    },
+    "__listOfPortProbeDetail" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "PortProbeDetail"
+      }
+    },
+    "__long" : {
+      "type" : "long"
+    },
+    "__mapOfCondition" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "Condition"
+      }
+    },
+    "__mapOfCountBySeverityFindingStatistic" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "CountBySeverityFindingStatistic"
+      }
     },
     "__string" : {
       "type" : "string"
