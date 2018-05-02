@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "CodeBuild",
+  "description": "CodeBuild now supports CORS. The CodeBuild service is now included in the default browser version of the SDK."
+}
