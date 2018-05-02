@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.230.1-->
+<!--LATEST=2.231.1-->
 <!--ENTRYINSERT-->
+
+## 2.231.1
+* feature: CodePipeline: Added support for webhooks with accompanying definitions as needed in the AWS CodePipeline API Guide.
+* feature: EC2: Amazon EC2 Fleet is a new feature that simplifies the provisioning of Amazon EC2 capacity across different EC2 instance types, Availability Zones, and the On-Demand, Reserved Instance, and Spot Instance purchase models. With a single API call, you can now provision capacity to achieve desired scale, performance, and cost.
+* feature: SSM: Added support for new parameter, DocumentVersion, for SendCommand API. Users can now specify version of SSM document to be executed on the target(s).
 
 ## 2.230.1
 * feature: AlexaForBusiness: Adds ListDeviceEvents API to get a paginated list of device events (such as ConnectionStatus). This release also adds ConnectionStatus field to GetDevice and SearchDevices API.

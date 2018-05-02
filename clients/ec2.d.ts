@@ -228,11 +228,11 @@ declare class EC2 extends Service {
    */
   cancelSpotFleetRequests(callback?: (err: AWSError, data: EC2.Types.CancelSpotFleetRequestsResponse) => void): Request<EC2.Types.CancelSpotFleetRequestsResponse, AWSError>;
   /**
-   * Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.  Canceling a Spot Instance request does not terminate running Spot Instances associated with the request. 
+   * Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon EC2 User Guide for Linux Instances.  Canceling a Spot Instance request does not terminate running Spot Instances associated with the request. 
    */
   cancelSpotInstanceRequests(params: EC2.Types.CancelSpotInstanceRequestsRequest, callback?: (err: AWSError, data: EC2.Types.CancelSpotInstanceRequestsResult) => void): Request<EC2.Types.CancelSpotInstanceRequestsResult, AWSError>;
   /**
-   * Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.  Canceling a Spot Instance request does not terminate running Spot Instances associated with the request. 
+   * Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon EC2 User Guide for Linux Instances.  Canceling a Spot Instance request does not terminate running Spot Instances associated with the request. 
    */
   cancelSpotInstanceRequests(callback?: (err: AWSError, data: EC2.Types.CancelSpotInstanceRequestsResult) => void): Request<EC2.Types.CancelSpotInstanceRequestsResult, AWSError>;
   /**
@@ -307,6 +307,14 @@ declare class EC2 extends Service {
    * [IPv6 only] Creates an egress-only Internet gateway for your VPC. An egress-only Internet gateway is used to enable outbound communication over IPv6 from instances in your VPC to the Internet, and prevents hosts outside of your VPC from initiating an IPv6 connection with your instance.
    */
   createEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.CreateEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.CreateEgressOnlyInternetGatewayResult, AWSError>;
+  /**
+   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see Launching an EC2 Fleet in the Amazon Elastic Compute Cloud User Guide.
+   */
+  createFleet(params: EC2.Types.CreateFleetRequest, callback?: (err: AWSError, data: EC2.Types.CreateFleetResult) => void): Request<EC2.Types.CreateFleetResult, AWSError>;
+  /**
+   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see Launching an EC2 Fleet in the Amazon Elastic Compute Cloud User Guide.
+   */
+  createFleet(callback?: (err: AWSError, data: EC2.Types.CreateFleetResult) => void): Request<EC2.Types.CreateFleetResult, AWSError>;
   /**
    * Creates one or more flow logs to capture IP traffic for a specific network interface, subnet, or VPC. Flow logs are delivered to a specified log group in Amazon CloudWatch Logs. If you specify a VPC or subnet in the request, a log stream is created in CloudWatch Logs for each network interface in the subnet or VPC. Log streams can include information about accepted and rejected traffic to a network interface. You can view the data in your log streams using Amazon CloudWatch Logs. In your request, you must also specify an IAM role that has permission to publish logs to CloudWatch Logs. For more information, see VPC Flow Logs in the Amazon Virtual Private Cloud User Guide.
    */
@@ -460,11 +468,11 @@ declare class EC2 extends Service {
    */
   createSnapshot(callback?: (err: AWSError, data: EC2.Types.Snapshot) => void): Request<EC2.Types.Snapshot, AWSError>;
   /**
-   * Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see Spot Instance Data Feed in the Amazon EC2 User Guide for Linux Instances.
    */
   createSpotDatafeedSubscription(params: EC2.Types.CreateSpotDatafeedSubscriptionRequest, callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see Spot Instance Data Feed in the Amazon EC2 User Guide for Linux Instances.
    */
   createSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
   /**
@@ -579,6 +587,14 @@ declare class EC2 extends Service {
    * Deletes an egress-only Internet gateway.
    */
   deleteEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.DeleteEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.DeleteEgressOnlyInternetGatewayResult, AWSError>;
+  /**
+   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, the EC2 Fleet launches no new instances. You must specify whether the EC2 Fleet should also terminate its instances. If you terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. 
+   */
+  deleteFleets(params: EC2.Types.DeleteFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteFleetsResult) => void): Request<EC2.Types.DeleteFleetsResult, AWSError>;
+  /**
+   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, the EC2 Fleet launches no new instances. You must specify whether the EC2 Fleet should also terminate its instances. If you terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. 
+   */
+  deleteFleets(callback?: (err: AWSError, data: EC2.Types.DeleteFleetsResult) => void): Request<EC2.Types.DeleteFleetsResult, AWSError>;
   /**
    * Deletes one or more flow logs.
    */
@@ -907,6 +923,30 @@ declare class EC2 extends Service {
    * Describes one or more of your export tasks.
    */
   describeExportTasks(callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
+  /**
+   * Describes the events for the specified EC2 Fleet during the specified time.
+   */
+  describeFleetHistory(params: EC2.Types.DescribeFleetHistoryRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetHistoryResult) => void): Request<EC2.Types.DescribeFleetHistoryResult, AWSError>;
+  /**
+   * Describes the events for the specified EC2 Fleet during the specified time.
+   */
+  describeFleetHistory(callback?: (err: AWSError, data: EC2.Types.DescribeFleetHistoryResult) => void): Request<EC2.Types.DescribeFleetHistoryResult, AWSError>;
+  /**
+   * Describes the running instances for the specified EC2 Fleet.
+   */
+  describeFleetInstances(params: EC2.Types.DescribeFleetInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetInstancesResult) => void): Request<EC2.Types.DescribeFleetInstancesResult, AWSError>;
+  /**
+   * Describes the running instances for the specified EC2 Fleet.
+   */
+  describeFleetInstances(callback?: (err: AWSError, data: EC2.Types.DescribeFleetInstancesResult) => void): Request<EC2.Types.DescribeFleetInstancesResult, AWSError>;
+  /**
+   * Describes the specified EC2 Fleet.
+   */
+  describeFleets(params: EC2.Types.DescribeFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
+  /**
+   * Describes the specified EC2 Fleet.
+   */
+  describeFleets(callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
    * Describes one or more flow logs. To view the information in your flow logs (the log streams for the network interfaces), you must use the CloudWatch Logs console or the CloudWatch Logs API.
    */
@@ -1244,11 +1284,11 @@ declare class EC2 extends Service {
    */
   describeSnapshots(callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
   /**
-   * Describes the data feed for Spot Instances. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the data feed for Spot Instances. For more information, see Spot Instance Data Feed in the Amazon EC2 User Guide for Linux Instances.
    */
   describeSpotDatafeedSubscription(params: EC2.Types.DescribeSpotDatafeedSubscriptionRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.DescribeSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Describes the data feed for Spot Instances. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the data feed for Spot Instances. For more information, see Spot Instance Data Feed in the Amazon EC2 User Guide for Linux Instances.
    */
   describeSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.DescribeSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.DescribeSpotDatafeedSubscriptionResult, AWSError>;
   /**
@@ -1276,19 +1316,19 @@ declare class EC2 extends Service {
    */
   describeSpotFleetRequests(callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetRequestsResponse) => void): Request<EC2.Types.DescribeSpotFleetRequestsResponse, AWSError>;
   /**
-   * Describes the Spot Instance requests that belong to your account. Spot Instances are instances that Amazon EC2 launches when the Spot price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide. You can use DescribeSpotInstanceRequests to find a running Spot Instance by examining the response. If the status of the Spot Instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. Spot Instance requests are deleted 4 hours after they are canceled and their instances are terminated.
+   * Describes the Spot Instance requests that belong to your account. Spot Instances are instances that Amazon EC2 launches when the Spot price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon EC2 User Guide for Linux Instances. You can use DescribeSpotInstanceRequests to find a running Spot Instance by examining the response. If the status of the Spot Instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. Spot Instance requests are deleted four hours after they are canceled and their instances are terminated.
    */
   describeSpotInstanceRequests(params: EC2.Types.DescribeSpotInstanceRequestsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
   /**
-   * Describes the Spot Instance requests that belong to your account. Spot Instances are instances that Amazon EC2 launches when the Spot price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide. You can use DescribeSpotInstanceRequests to find a running Spot Instance by examining the response. If the status of the Spot Instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. Spot Instance requests are deleted 4 hours after they are canceled and their instances are terminated.
+   * Describes the Spot Instance requests that belong to your account. Spot Instances are instances that Amazon EC2 launches when the Spot price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon EC2 User Guide for Linux Instances. You can use DescribeSpotInstanceRequests to find a running Spot Instance by examining the response. If the status of the Spot Instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. Spot Instance requests are deleted four hours after they are canceled and their instances are terminated.
    */
   describeSpotInstanceRequests(callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
   /**
-   * Describes the Spot price history. For more information, see Spot Instance Pricing History in the Amazon Elastic Compute Cloud User Guide. When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.
+   * Describes the Spot price history. For more information, see Spot Instance Pricing History in the Amazon EC2 User Guide for Linux Instances. When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.
    */
   describeSpotPriceHistory(params: EC2.Types.DescribeSpotPriceHistoryRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotPriceHistoryResult) => void): Request<EC2.Types.DescribeSpotPriceHistoryResult, AWSError>;
   /**
-   * Describes the Spot price history. For more information, see Spot Instance Pricing History in the Amazon Elastic Compute Cloud User Guide. When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.
+   * Describes the Spot price history. For more information, see Spot Instance Pricing History in the Amazon EC2 User Guide for Linux Instances. When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.
    */
   describeSpotPriceHistory(callback?: (err: AWSError, data: EC2.Types.DescribeSpotPriceHistoryResult) => void): Request<EC2.Types.DescribeSpotPriceHistoryResult, AWSError>;
   /**
@@ -1676,6 +1716,14 @@ declare class EC2 extends Service {
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
   /**
+   * Modifies the specified EC2 Fleet. While the EC2 Fleet is being modified, it is in the modifying state.
+   */
+  modifyFleet(params: EC2.Types.ModifyFleetRequest, callback?: (err: AWSError, data: EC2.Types.ModifyFleetResult) => void): Request<EC2.Types.ModifyFleetResult, AWSError>;
+  /**
+   * Modifies the specified EC2 Fleet. While the EC2 Fleet is being modified, it is in the modifying state.
+   */
+  modifyFleet(callback?: (err: AWSError, data: EC2.Types.ModifyFleetResult) => void): Request<EC2.Types.ModifyFleetResult, AWSError>;
+  /**
    * Modifies the specified attribute of the specified Amazon FPGA Image (AFI).
    */
   modifyFpgaImageAttribute(params: EC2.Types.ModifyFpgaImageAttributeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyFpgaImageAttributeResult) => void): Request<EC2.Types.ModifyFpgaImageAttributeResult, AWSError>;
@@ -1996,19 +2044,19 @@ declare class EC2 extends Service {
    */
   reportInstanceStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a Spot Fleet request. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot Fleet requests Spot Instances in the Spot pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet. You can specify tags for the Spot Instances. You cannot tag other resource types in a Spot Fleet request; only the instance resource type is supported. For more information, see Spot Fleet Requests in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a Spot Fleet request. The Spot Fleet request specifies the total target capacity and the On-Demand target capacity. Amazon EC2 calculates the difference between the total capacity and On-Demand capacity, and launches the difference as Spot capacity. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot Fleet requests Spot Instances in the Spot pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet. You can specify tags for the Spot Instances. You cannot tag other resource types in a Spot Fleet request because only the instance resource type is supported. For more information, see Spot Fleet Requests in the Amazon EC2 User Guide for Linux Instances.
    */
   requestSpotFleet(params: EC2.Types.RequestSpotFleetRequest, callback?: (err: AWSError, data: EC2.Types.RequestSpotFleetResponse) => void): Request<EC2.Types.RequestSpotFleetResponse, AWSError>;
   /**
-   * Creates a Spot Fleet request. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot Fleet requests Spot Instances in the Spot pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet. You can specify tags for the Spot Instances. You cannot tag other resource types in a Spot Fleet request; only the instance resource type is supported. For more information, see Spot Fleet Requests in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a Spot Fleet request. The Spot Fleet request specifies the total target capacity and the On-Demand target capacity. Amazon EC2 calculates the difference between the total capacity and On-Demand capacity, and launches the difference as Spot capacity. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot Fleet requests Spot Instances in the Spot pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet. You can specify tags for the Spot Instances. You cannot tag other resource types in a Spot Fleet request because only the instance resource type is supported. For more information, see Spot Fleet Requests in the Amazon EC2 User Guide for Linux Instances.
    */
   requestSpotFleet(callback?: (err: AWSError, data: EC2.Types.RequestSpotFleetResponse) => void): Request<EC2.Types.RequestSpotFleetResponse, AWSError>;
   /**
-   * Creates a Spot Instance request. Spot Instances are instances that Amazon EC2 launches when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a Spot Instance request. Spot Instances are instances that Amazon EC2 launches when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon EC2 User Guide for Linux Instances.
    */
   requestSpotInstances(params: EC2.Types.RequestSpotInstancesRequest, callback?: (err: AWSError, data: EC2.Types.RequestSpotInstancesResult) => void): Request<EC2.Types.RequestSpotInstancesResult, AWSError>;
   /**
-   * Creates a Spot Instance request. Spot Instances are instances that Amazon EC2 launches when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a Spot Instance request. Spot Instances are instances that Amazon EC2 launches when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon EC2 User Guide for Linux Instances.
    */
   requestSpotInstances(callback?: (err: AWSError, data: EC2.Types.RequestSpotInstancesResult) => void): Request<EC2.Types.RequestSpotInstancesResult, AWSError>;
   /**
@@ -3642,6 +3690,62 @@ declare namespace EC2 {
      */
     EgressOnlyInternetGateway?: EgressOnlyInternetGateway;
   }
+  export interface CreateFleetRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Includes SpotAllocationStrategy and SpotInstanceInterruptionBehavior inside this structure.
+     */
+    SpotOptions?: SpotOptionsRequest;
+    /**
+     * Indicates whether running instances should be terminated if the total target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+     */
+    ExcessCapacityTerminationPolicy?: FleetExcessCapacityTerminationPolicy;
+    /**
+     * The configuration for the EC2 Fleet.
+     */
+    LaunchTemplateConfigs: FleetLaunchTemplateConfigListRequest;
+    /**
+     * The TotalTargetCapacity, OnDemandTargetCapacity, SpotTargetCapacity, and DefaultCapacityType structure.
+     */
+    TargetCapacitySpecification: TargetCapacitySpecificationRequest;
+    /**
+     * Indicates whether running instances should be terminated when the EC2 Fleet expires.
+     */
+    TerminateInstancesWithExpiration?: Boolean;
+    /**
+     * The type of request. Indicates whether the EC2 Fleet only requests the target capacity, or also attempts to maintain it. If you request a certain target capacity, EC2 Fleet only places the required requests. It does not attempt to replenish instances if capacity is diminished, and does not submit requests in alternative capacity pools if capacity is unavailable. To maintain a certain target capacity, EC2 Fleet places the required requests to meet this target capacity. It also automatically replenishes any interrupted Spot Instances. Default: maintain.
+     */
+    Type?: FleetType;
+    /**
+     * The start date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). The default is to start fulfilling the request immediately.
+     */
+    ValidFrom?: DateTime;
+    /**
+     * The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new EC2 Fleet requests are placed or able to fulfill the request. The default end date is 7 days from the current date.
+     */
+    ValidUntil?: DateTime;
+    /**
+     * Indicates whether EC2 Fleet should replace unhealthy instances.
+     */
+    ReplaceUnhealthyInstances?: Boolean;
+    /**
+     * The tags for an EC2 Fleet resource.
+     */
+    TagSpecifications?: TagSpecificationList;
+  }
+  export interface CreateFleetResult {
+    /**
+     * The ID of the EC2 Fleet.
+     */
+    FleetId?: FleetIdentifier;
+  }
   export interface CreateFlowLogsRequest {
     /**
      * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
@@ -4552,6 +4656,7 @@ declare namespace EC2 {
   export type CustomerGatewayList = CustomerGateway[];
   export type DatafeedSubscriptionState = "Active"|"Inactive"|string;
   export type DateTime = Date;
+  export type DefaultTargetCapacityType = "spot"|"on-demand"|string;
   export interface DeleteCustomerGatewayRequest {
     /**
      * The ID of the customer gateway.
@@ -4587,6 +4692,67 @@ declare namespace EC2 {
      * Returns true if the request succeeds; otherwise, it returns an error.
      */
     ReturnCode?: Boolean;
+  }
+  export interface DeleteFleetError {
+    /**
+     * The error code.
+     */
+    Code?: DeleteFleetErrorCode;
+    /**
+     * The description for the error code.
+     */
+    Message?: String;
+  }
+  export type DeleteFleetErrorCode = "fleetIdDoesNotExist"|"fleetIdMalformed"|"fleetNotInDeletableState"|"unexpectedError"|string;
+  export interface DeleteFleetErrorItem {
+    /**
+     * The error.
+     */
+    Error?: DeleteFleetError;
+    /**
+     * The ID of the EC2 Fleet.
+     */
+    FleetId?: FleetIdentifier;
+  }
+  export type DeleteFleetErrorSet = DeleteFleetErrorItem[];
+  export interface DeleteFleetSuccessItem {
+    /**
+     * The current state of the EC2 Fleet.
+     */
+    CurrentFleetState?: FleetStateCode;
+    /**
+     * The previous state of the EC2 Fleet.
+     */
+    PreviousFleetState?: FleetStateCode;
+    /**
+     * The ID of the EC2 Fleet.
+     */
+    FleetId?: FleetIdentifier;
+  }
+  export type DeleteFleetSuccessSet = DeleteFleetSuccessItem[];
+  export interface DeleteFleetsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The IDs of the EC2 Fleets.
+     */
+    FleetIds: FleetIdSet;
+    /**
+     * Indicates whether to terminate instances for an EC2 Fleet if it is deleted successfully.
+     */
+    TerminateInstances: Boolean;
+  }
+  export interface DeleteFleetsResult {
+    /**
+     * Information about the EC2 Fleets that are successfully deleted.
+     */
+    SuccessfulFleetDeletions?: DeleteFleetSuccessSet;
+    /**
+     * Information about the EC2 Fleets that are not successfully deleted.
+     */
+    UnsuccessfulFleetDeletions?: DeleteFleetErrorSet;
   }
   export interface DeleteFlowLogsRequest {
     /**
@@ -5264,6 +5430,122 @@ declare namespace EC2 {
      * Information about the export tasks.
      */
     ExportTasks?: ExportTaskList;
+  }
+  export interface DescribeFleetHistoryRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The type of events to describe. By default, all events are described.
+     */
+    EventType?: FleetEventType;
+    /**
+     * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * The ID of the EC2 Fleet.
+     */
+    FleetId: FleetIdentifier;
+    /**
+     * The start date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+     */
+    StartTime: DateTime;
+  }
+  export interface DescribeFleetHistoryResult {
+    /**
+     * Information about the events in the history of the EC2 Fleet.
+     */
+    HistoryRecords?: HistoryRecordSet;
+    /**
+     * The last date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). All records up to this time were retrieved. If nextToken indicates that there are more results, this value is not present.
+     */
+    LastEvaluatedTime?: DateTime;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * The ID of the EC Fleet.
+     */
+    FleetId?: FleetIdentifier;
+    /**
+     * The start date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+     */
+    StartTime?: DateTime;
+  }
+  export interface DescribeFleetInstancesRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * The ID of the EC2 Fleet.
+     */
+    FleetId: FleetIdentifier;
+    /**
+     * One or more filters.
+     */
+    Filters?: FilterList;
+  }
+  export interface DescribeFleetInstancesResult {
+    /**
+     * The running instances. This list is refreshed periodically and might be out of date.
+     */
+    ActiveInstances?: ActiveInstanceSet;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * The ID of the EC2 Fleet.
+     */
+    FleetId?: FleetIdentifier;
+  }
+  export interface DescribeFleetsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * The ID of the EC2 Fleets.
+     */
+    FleetIds?: FleetIdSet;
+    /**
+     * One or more filters.
+     */
+    Filters?: FilterList;
+  }
+  export interface DescribeFleetsResult {
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * The EC2 Fleets.
+     */
+    Fleets?: FleetSet;
   }
   export interface DescribeFlowLogsRequest {
     /**
@@ -6501,7 +6783,7 @@ declare namespace EC2 {
   }
   export interface DescribeSpotFleetInstancesResponse {
     /**
-     * The running instances. Note that this list is refreshed periodically and might be out of date.
+     * The running instances. This list is refreshed periodically and might be out of date.
      */
     ActiveInstances: ActiveInstanceSet;
     /**
@@ -6591,7 +6873,7 @@ declare namespace EC2 {
   }
   export interface DescribeSpotInstanceRequestsRequest {
     /**
-     * One or more filters.    availability-zone-group - The Availability Zone group.    create-time - The time stamp when the Spot Instance request was created.    fault-code - The fault code related to the request.    fault-message - The fault message related to the request.    instance-id - The ID of the instance that fulfilled the request.    launch-group - The Spot Instance launch group.    launch.block-device-mapping.delete-on-termination - Indicates whether the EBS volume is deleted on instance termination.    launch.block-device-mapping.device-name - The device name for the volume in the block device mapping (for example, /dev/sdh or xvdh).    launch.block-device-mapping.snapshot-id - The ID of the snapshot for the EBS volume.    launch.block-device-mapping.volume-size - The size of the EBS volume, in GiB.    launch.block-device-mapping.volume-type - The type of EBS volume: gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1for Cold HDD, or standard for Magnetic.    launch.group-id - The ID of the security group for the instance.    launch.group-name - The name of the security group for the instance.    launch.image-id - The ID of the AMI.    launch.instance-type - The type of instance (for example, m3.medium).    launch.kernel-id - The kernel ID.    launch.key-name - The name of the key pair the instance launched with.    launch.monitoring-enabled - Whether detailed monitoring is enabled for the Spot Instance.    launch.ramdisk-id - The RAM disk ID.    launched-availability-zone - The Availability Zone in which the request is launched.    network-interface.addresses.primary - Indicates whether the IP address is the primary private IP address.    network-interface.delete-on-termination - Indicates whether the network interface is deleted when the instance is terminated.    network-interface.description - A description of the network interface.    network-interface.device-index - The index of the device for the network interface attachment on the instance.    network-interface.group-id - The ID of the security group associated with the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.private-ip-address - The primary private IP address of the network interface.    network-interface.subnet-id - The ID of the subnet for the instance.    product-description - The product description associated with the instance (Linux/UNIX | Windows).    spot-instance-request-id - The Spot Instance request ID.    spot-price - The maximum hourly price for any Spot Instance launched to fulfill the request.    state - The state of the Spot Instance request (open | active | closed | cancelled | failed). Spot request status information can help you track your Amazon EC2 Spot Instance requests. For more information, see Spot Request Status in the Amazon Elastic Compute Cloud User Guide.    status-code - The short code describing the most recent evaluation of your Spot Instance request.    status-message - The message explaining the status of the Spot Instance request.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    type - The type of Spot Instance request (one-time | persistent).    valid-from - The start date of the request.    valid-until - The end date of the request.  
+     * One or more filters.    availability-zone-group - The Availability Zone group.    create-time - The time stamp when the Spot Instance request was created.    fault-code - The fault code related to the request.    fault-message - The fault message related to the request.    instance-id - The ID of the instance that fulfilled the request.    launch-group - The Spot Instance launch group.    launch.block-device-mapping.delete-on-termination - Indicates whether the EBS volume is deleted on instance termination.    launch.block-device-mapping.device-name - The device name for the volume in the block device mapping (for example, /dev/sdh or xvdh).    launch.block-device-mapping.snapshot-id - The ID of the snapshot for the EBS volume.    launch.block-device-mapping.volume-size - The size of the EBS volume, in GiB.    launch.block-device-mapping.volume-type - The type of EBS volume: gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1for Cold HDD, or standard for Magnetic.    launch.group-id - The ID of the security group for the instance.    launch.group-name - The name of the security group for the instance.    launch.image-id - The ID of the AMI.    launch.instance-type - The type of instance (for example, m3.medium).    launch.kernel-id - The kernel ID.    launch.key-name - The name of the key pair the instance launched with.    launch.monitoring-enabled - Whether detailed monitoring is enabled for the Spot Instance.    launch.ramdisk-id - The RAM disk ID.    launched-availability-zone - The Availability Zone in which the request is launched.    network-interface.addresses.primary - Indicates whether the IP address is the primary private IP address.    network-interface.delete-on-termination - Indicates whether the network interface is deleted when the instance is terminated.    network-interface.description - A description of the network interface.    network-interface.device-index - The index of the device for the network interface attachment on the instance.    network-interface.group-id - The ID of the security group associated with the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.private-ip-address - The primary private IP address of the network interface.    network-interface.subnet-id - The ID of the subnet for the instance.    product-description - The product description associated with the instance (Linux/UNIX | Windows).    spot-instance-request-id - The Spot Instance request ID.    spot-price - The maximum hourly price for any Spot Instance launched to fulfill the request.    state - The state of the Spot Instance request (open | active | closed | cancelled | failed). Spot request status information can help you track your Amazon EC2 Spot Instance requests. For more information, see Spot Request Status in the Amazon EC2 User Guide for Linux Instances.    status-code - The short code describing the most recent evaluation of your Spot Instance request.    status-message - The message explaining the status of the Spot Instance request.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    type - The type of Spot Instance request (one-time | persistent).    valid-from - The start date of the request.    valid-until - The end date of the request.  
      */
     Filters?: FilterList;
     /**
@@ -6611,7 +6893,7 @@ declare namespace EC2 {
   }
   export interface DescribeSpotPriceHistoryRequest {
     /**
-     * One or more filters.    availability-zone - The Availability Zone for which prices should be returned.    instance-type - The type of instance (for example, m3.medium).    product-description - The product description for the Spot price (Linux/UNIX | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows (Amazon VPC)).    spot-price - The Spot price. The value must match exactly (or use wildcards; greater than or less than comparison is not supported).    timestamp - The timestamp of the Spot price history, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?). Greater than or less than comparison is not supported.  
+     * One or more filters.    availability-zone - The Availability Zone for which prices should be returned.    instance-type - The type of instance (for example, m3.medium).    product-description - The product description for the Spot price (Linux/UNIX | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows (Amazon VPC)).    spot-price - The Spot price. The value must match exactly (or use wildcards; greater than or less than comparison is not supported).    timestamp - The time stamp of the Spot price history, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?). Greater than or less than comparison is not supported.  
      */
     Filters?: FilterList;
     /**
@@ -7691,7 +7973,7 @@ declare namespace EC2 {
      */
     EventDescription?: String;
     /**
-     * The event. The following are the error events:    iamFleetRoleInvalid - The Spot Fleet did not have the required permissions either to launch or terminate an instance.    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.   The following are the fleetRequestChange events:    active - The Spot Fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.    cancelled - The Spot Fleet is canceled and has no running Spot Instances. The Spot Fleet will be deleted two days after its instances were terminated.    cancelled_running - The Spot Fleet is canceled and will not launch additional Spot Instances, but its existing Spot Instances continue to run until they are interrupted or terminated.    cancelled_terminating - The Spot Fleet is canceled and its Spot Instances are terminating.    expired - The Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the Spot Fleet request was accepted and is in progress.    modify_successful - The Spot Fleet request was modified.    price_update - The price for a launch configuration was adjusted because it was too high. This change is permanent.    submitted - The Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.   The following are the instanceChange events:    launched - A request was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.    fleetProgressHalted - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.  
+     * The event. The following are the error events:    iamFleetRoleInvalid - The Spot Fleet did not have the required permissions either to launch or terminate an instance.    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.   The following are the fleetRequestChange events:    active - The Spot Fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.    cancelled - The Spot Fleet is canceled and has no running Spot Instances. The Spot Fleet will be deleted two days after its instances were terminated.    cancelled_running - The Spot Fleet is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.    cancelled_terminating - The Spot Fleet is canceled and its Spot Instances are terminating.    expired - The Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the Spot Fleet request was accepted and is in progress.    modify_successful - The Spot Fleet request was modified.    price_update - The price for a launch configuration was adjusted because it was too high. This change is permanent.    submitted - The Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.   The following are the instanceChange events:    launched - A request was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.    fleetProgressHalted - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.  
      */
     EventSubType?: String;
     /**
@@ -7779,6 +8061,149 @@ declare namespace EC2 {
     Values?: ValueStringList;
   }
   export type FilterList = Filter[];
+  export type FleetActivityStatus = "error"|"pending-fulfillment"|"pending-termination"|"fulfilled"|string;
+  export interface FleetData {
+    /**
+     * The progress of the EC2 Fleet. If there is an error, the status is error. After all requests are placed, the status is pending_fulfillment. If the size of the EC2 Fleet is equal to or greater than its target capacity, the status is fulfilled. If the size of the EC2 Fleet is decreased, the status is pending_termination while instances are terminating.
+     */
+    ActivityStatus?: FleetActivityStatus;
+    /**
+     * The creation date and time of the EC2 Fleet.
+     */
+    CreateTime?: DateTime;
+    /**
+     * The ID of the EC2 Fleet.
+     */
+    FleetId?: FleetIdentifier;
+    /**
+     * The state of the EC2 Fleet.
+     */
+    FleetState?: FleetStateCode;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency. Constraints: Maximum 64 ASCII characters
+     */
+    ClientToken?: String;
+    /**
+     * Indicates whether running instances should be terminated if the target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+     */
+    ExcessCapacityTerminationPolicy?: FleetExcessCapacityTerminationPolicy;
+    /**
+     * The number of units fulfilled by this request compared to the set target capacity.
+     */
+    FulfilledCapacity?: Double;
+    /**
+     * The number of units fulfilled by this request compared to the set target On-Demand capacity.
+     */
+    FulfilledOnDemandCapacity?: Double;
+    /**
+     * The launch template and overrides.
+     */
+    LaunchTemplateConfigs?: FleetLaunchTemplateConfigList;
+    /**
+     * The number of units to request. You can choose to set the target capacity in terms of instances or a performance characteristic that is important to your application workload, such as vCPUs, memory, or I/O. If the request type is maintain, you can specify a target capacity of 0 and add capacity later.
+     */
+    TargetCapacitySpecification?: TargetCapacitySpecification;
+    /**
+     * Indicates whether running instances should be terminated when the EC2 Fleet expires. 
+     */
+    TerminateInstancesWithExpiration?: Boolean;
+    /**
+     * The type of request. Indicates whether the EC2 Fleet only requests the target capacity, or also attempts to maintain it. If you request a certain target capacity, EC2 Fleet only places the required requests; it does not attempt to replenish instances if capacity is diminished, and does not submit requests in alternative capacity pools if capacity is unavailable. To maintain a certain target capacity, EC2 Fleet places the required requests to meet this target capacity. It also automatically replenishes any interrupted Spot Instances. Default: maintain.
+     */
+    Type?: FleetType;
+    /**
+     * The start date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). The default is to start fulfilling the request immediately. 
+     */
+    ValidFrom?: DateTime;
+    /**
+     * The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new instance requests are placed or able to fulfill the request. The default end date is 7 days from the current date. 
+     */
+    ValidUntil?: DateTime;
+    /**
+     * Indicates whether EC2 Fleet should replace unhealthy instances.
+     */
+    ReplaceUnhealthyInstances?: Boolean;
+    /**
+     * The configuration of Spot Instances in an EC2 Fleet.
+     */
+    SpotOptions?: SpotOptions;
+    /**
+     * The tags for an EC2 Fleet resource.
+     */
+    Tags?: TagList;
+  }
+  export type FleetEventType = "instance-change"|"fleet-change"|"service-error"|string;
+  export type FleetExcessCapacityTerminationPolicy = "no-termination"|"termination"|string;
+  export type FleetIdSet = FleetIdentifier[];
+  export type FleetIdentifier = string;
+  export interface FleetLaunchTemplateConfig {
+    /**
+     * The launch template.
+     */
+    LaunchTemplateSpecification?: FleetLaunchTemplateSpecification;
+    /**
+     * Any parameters that you specify override the same parameters in the launch template.
+     */
+    Overrides?: FleetLaunchTemplateOverridesList;
+  }
+  export type FleetLaunchTemplateConfigList = FleetLaunchTemplateConfig[];
+  export type FleetLaunchTemplateConfigListRequest = FleetLaunchTemplateConfigRequest[];
+  export interface FleetLaunchTemplateConfigRequest {
+    /**
+     * The launch template to use. You must specify either the launch template ID or launch template name in the request. 
+     */
+    LaunchTemplateSpecification?: FleetLaunchTemplateSpecificationRequest;
+    /**
+     * Any parameters that you specify override the same parameters in the launch template.
+     */
+    Overrides?: FleetLaunchTemplateOverridesListRequest;
+  }
+  export interface FleetLaunchTemplateOverrides {
+    /**
+     * The instance type.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance.
+     */
+    MaxPrice?: String;
+    /**
+     * The ID of the subnet in which to launch the instances.
+     */
+    SubnetId?: String;
+    /**
+     * The Availability Zone in which to launch the instances.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The number of units provided by the specified instance type.
+     */
+    WeightedCapacity?: Double;
+  }
+  export type FleetLaunchTemplateOverridesList = FleetLaunchTemplateOverrides[];
+  export type FleetLaunchTemplateOverridesListRequest = FleetLaunchTemplateOverridesRequest[];
+  export interface FleetLaunchTemplateOverridesRequest {
+    /**
+     * The instance type.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance.
+     */
+    MaxPrice?: String;
+    /**
+     * The ID of the subnet in which to launch the instances.
+     */
+    SubnetId?: String;
+    /**
+     * The Availability Zone in which to launch the instances.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The number of units provided by the specified instance type.
+     */
+    WeightedCapacity?: Double;
+  }
   export interface FleetLaunchTemplateSpecification {
     /**
      * The ID of the launch template. You must specify either a template ID or a template name.
@@ -7793,6 +8218,22 @@ declare namespace EC2 {
      */
     Version?: String;
   }
+  export interface FleetLaunchTemplateSpecificationRequest {
+    /**
+     * The ID of the launch template.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template.
+     */
+    LaunchTemplateName?: LaunchTemplateName;
+    /**
+     * The version number of the launch template. 
+     */
+    Version?: String;
+  }
+  export type FleetSet = FleetData[];
+  export type FleetStateCode = "submitted"|"active"|"deleted"|"failed"|"deleted-running"|"deleted-terminating"|"modifying"|string;
   export type FleetType = "request"|"maintain"|string;
   export type Float = number;
   export interface FlowLog {
@@ -8127,6 +8568,21 @@ declare namespace EC2 {
      */
     Timestamp: DateTime;
   }
+  export interface HistoryRecordEntry {
+    /**
+     * Information about the event.
+     */
+    EventInformation?: EventInformation;
+    /**
+     * The event type.
+     */
+    EventType?: FleetEventType;
+    /**
+     * The date and time of the event, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+     */
+    Timestamp?: DateTime;
+  }
+  export type HistoryRecordSet = HistoryRecordEntry[];
   export type HistoryRecords = HistoryRecord[];
   export interface Host {
     /**
@@ -10263,6 +10719,30 @@ declare namespace EC2 {
   export type Long = number;
   export type MarketType = "spot"|string;
   export type MaxResults = number;
+  export interface ModifyFleetRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Indicates whether running instances should be terminated if the total target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+     */
+    ExcessCapacityTerminationPolicy?: FleetExcessCapacityTerminationPolicy;
+    /**
+     * The ID of the EC2 Fleet.
+     */
+    FleetId: FleetIdentifier;
+    /**
+     * The size of the EC2 Fleet.
+     */
+    TargetCapacitySpecification: TargetCapacitySpecificationRequest;
+  }
+  export interface ModifyFleetResult {
+    /**
+     * Is true if the request succeeds, and an error otherwise. 
+     */
+    Return?: Boolean;
+  }
   export interface ModifyFpgaImageAttributeRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -12129,11 +12609,11 @@ declare namespace EC2 {
      */
     AvailabilityZoneGroup?: String;
     /**
-     * The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360). The duration period starts as soon as your Spot Instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot Instance for termination and provides a Spot Instance termination notice, which gives the instance a two-minute warning before it terminates. Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
+     * The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360). The duration period starts as soon as your Spot Instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot Instance for termination and provides a Spot Instance termination notice, which gives the instance a two-minute warning before it terminates. You can't specify an Availability Zone group or a launch group if you specify a duration.
      */
     BlockDurationMinutes?: Integer;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency in the Amazon Elastic Compute Cloud User Guide.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency in the Amazon EC2 User Guide for Linux Instances.
      */
     ClientToken?: String;
     /**
@@ -13062,7 +13542,7 @@ declare namespace EC2 {
      */
     TagSpecifications?: TagSpecificationList;
     /**
-     * The launch template to use to launch the instances. Any parameters that you specify in RunInstances override the same parameters in the launch template.
+     * The launch template to use to launch the instances. Any parameters that you specify in RunInstances override the same parameters in the launch template. You can specify either the name or ID of a launch template, but not both.
      */
     LaunchTemplate?: LaunchTemplateSpecification;
     /**
@@ -13812,6 +14292,7 @@ declare namespace EC2 {
      */
     UserBucket?: UserBucketDetails;
   }
+  export type SpotAllocationStrategy = "lowest-price"|"diversified"|string;
   export interface SpotDatafeedSubscription {
     /**
      * The Amazon S3 bucket where the Spot Instance data feed is located.
@@ -13942,7 +14423,7 @@ declare namespace EC2 {
      */
     AllocationStrategy?: AllocationStrategy;
     /**
-     * A unique, case-sensitive identifier you provide to ensure idempotency of your listings. This helps avoid duplicate listings. For more information, see Ensuring Idempotency.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of your listings. This helps to avoid duplicate listings. For more information, see Ensuring Idempotency.
      */
     ClientToken?: String;
     /**
@@ -13953,6 +14434,10 @@ declare namespace EC2 {
      * The number of units fulfilled by this request compared to the set target capacity.
      */
     FulfilledCapacity?: Double;
+    /**
+     * The number of On-Demand units fulfilled by this request compared to the set target On-Demand capacity.
+     */
+    OnDemandFulfilledCapacity?: Double;
     /**
      * Grants the Spot Fleet permission to terminate Spot Instances on your behalf when you cancel its Spot Fleet request using CancelSpotFleetRequests or when the Spot Fleet request expires, if you set terminateInstancesWithExpiration.
      */
@@ -13974,11 +14459,15 @@ declare namespace EC2 {
      */
     TargetCapacity: Integer;
     /**
+     * The number of On-Demand units to request. You can choose to set the target capacity in terms of instances or a performance characteristic that is important to your application workload, such as vCPUs, memory, or I/O. If the request type is maintain, you can specify a target capacity of 0 and add capacity later.
+     */
+    OnDemandTargetCapacity?: Integer;
+    /**
      * Indicates whether running Spot Instances should be terminated when the Spot Fleet request expires.
      */
     TerminateInstancesWithExpiration?: Boolean;
     /**
-     * The type of request. Indicates whether the fleet will only request the target capacity or also attempt to maintain it. When you request a certain target capacity, the fleet will only place the required requests. It will not attempt to replenish Spot Instances if capacity is diminished, nor will it submit requests in alternative Spot pools if capacity is not available. When you want to maintain a certain target capacity, fleet will place the required requests to meet this target capacity. It will also automatically replenish any interrupted instances. Default: maintain.
+     * The type of request. Indicates whether the Spot Fleet only requests the target capacity or also attempts to maintain it. When this value is request, the Spot Fleet only places the required requests. It does not attempt to replenish Spot Instances if capacity is diminished, nor does it submit requests in alternative Spot pools if capacity is not available. To maintain a certain target capacity, the Spot Fleet places the required requests to meet capacity and automatically replenishes any interrupted instances. Default: maintain.
      */
     Type?: FleetType;
     /**
@@ -14014,6 +14503,7 @@ declare namespace EC2 {
     Tags?: TagList;
   }
   export type SpotFleetTagSpecificationList = SpotFleetTagSpecification[];
+  export type SpotInstanceInterruptionBehavior = "hibernate"|"stop"|"terminate"|string;
   export interface SpotInstanceRequest {
     /**
      * If you specified a duration and your Spot Instance request was fulfilled, this is the fixed hourly price in effect for the Spot Instance while it runs.
@@ -14064,7 +14554,7 @@ declare namespace EC2 {
      */
     SpotPrice?: String;
     /**
-     * The state of the Spot Instance request. Spot status information can help you track your Spot Instance requests. For more information, see Spot Status in the Amazon Elastic Compute Cloud User Guide.
+     * The state of the Spot Instance request. Spot status information helps track your Spot Instance requests. For more information, see Spot Status in the Amazon EC2 User Guide for Linux Instances.
      */
     State?: SpotInstanceState;
     /**
@@ -14107,7 +14597,7 @@ declare namespace EC2 {
   }
   export interface SpotInstanceStatus {
     /**
-     * The status code. For a list of status codes, see Spot Status Codes in the Amazon Elastic Compute Cloud User Guide.
+     * The status code. For a list of status codes, see Spot Status Codes in the Amazon EC2 User Guide for Linux Instances.
      */
     Code?: String;
     /**
@@ -14141,6 +14631,26 @@ declare namespace EC2 {
      * The behavior when a Spot Instance is interrupted. The default is terminate.
      */
     InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
+  }
+  export interface SpotOptions {
+    /**
+     * Indicates how to allocate the target capacity across the Spot pools specified by the Spot Fleet request. The default is lowestPrice.
+     */
+    AllocationStrategy?: SpotAllocationStrategy;
+    /**
+     * The behavior when a Spot Instance is interrupted. The default is terminate.
+     */
+    InstanceInterruptionBehavior?: SpotInstanceInterruptionBehavior;
+  }
+  export interface SpotOptionsRequest {
+    /**
+     * Indicates how to allocate the target capacity across the Spot pools specified by the Spot Fleet request. The default is lowestPrice.
+     */
+    AllocationStrategy?: SpotAllocationStrategy;
+    /**
+     * The behavior when a Spot Instance is interrupted. The default is terminate.
+     */
+    InstanceInterruptionBehavior?: SpotInstanceInterruptionBehavior;
   }
   export interface SpotPlacement {
     /**
@@ -14428,6 +14938,42 @@ declare namespace EC2 {
     Tags?: TagList;
   }
   export type TagSpecificationList = TagSpecification[];
+  export interface TargetCapacitySpecification {
+    /**
+     * The number of units to request, filled using DefaultTargetCapacityType.
+     */
+    TotalTargetCapacity?: Integer;
+    /**
+     * The number of On-Demand units to request.
+     */
+    OnDemandTargetCapacity?: Integer;
+    /**
+     * The maximum number of Spot units to launch.
+     */
+    SpotTargetCapacity?: Integer;
+    /**
+     * The default TotalTargetCapacity, which is either Spot or On-Demand.
+     */
+    DefaultTargetCapacityType?: DefaultTargetCapacityType;
+  }
+  export interface TargetCapacitySpecificationRequest {
+    /**
+     * The number of units to request, filled using DefaultTargetCapacityType.
+     */
+    TotalTargetCapacity: Integer;
+    /**
+     * The number of On-Demand units to request.
+     */
+    OnDemandTargetCapacity?: Integer;
+    /**
+     * The number of Spot units to request.
+     */
+    SpotTargetCapacity?: Integer;
+    /**
+     * The default TotalTargetCapacity, which is either Spot or On-Demand.
+     */
+    DefaultTargetCapacityType?: DefaultTargetCapacityType;
+  }
   export interface TargetConfiguration {
     /**
      * The number of instances the Convertible Reserved Instance offering can be applied to. This parameter is reserved and cannot be specified in a request

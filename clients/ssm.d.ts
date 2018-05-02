@@ -404,11 +404,11 @@ declare class SSM extends Service {
    */
   getCommandInvocation(callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
   /**
-   * Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.
+   * Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system. If you do not specify an operating system value, the default patch baseline for Windows is returned.
    */
   getDefaultPatchBaseline(params: SSM.Types.GetDefaultPatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.GetDefaultPatchBaselineResult) => void): Request<SSM.Types.GetDefaultPatchBaselineResult, AWSError>;
   /**
-   * Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.
+   * Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system. If you do not specify an operating system value, the default patch baseline for Windows is returned.
    */
   getDefaultPatchBaseline(callback?: (err: AWSError, data: SSM.Types.GetDefaultPatchBaselineResult) => void): Request<SSM.Types.GetDefaultPatchBaselineResult, AWSError>;
   /**
@@ -652,11 +652,11 @@ declare class SSM extends Service {
    */
   putInventory(callback?: (err: AWSError, data: SSM.Types.PutInventoryResult) => void): Request<SSM.Types.PutInventoryResult, AWSError>;
   /**
-   * Add one or more parameters to the system.
+   * Add a parameter to the system.
    */
   putParameter(params: SSM.Types.PutParameterRequest, callback?: (err: AWSError, data: SSM.Types.PutParameterResult) => void): Request<SSM.Types.PutParameterResult, AWSError>;
   /**
-   * Add one or more parameters to the system.
+   * Add a parameter to the system.
    */
   putParameter(callback?: (err: AWSError, data: SSM.Types.PutParameterResult) => void): Request<SSM.Types.PutParameterResult, AWSError>;
   /**
@@ -851,11 +851,11 @@ declare namespace SSM {
   export type ActivationList = Activation[];
   export interface AddTagsToResourceRequest {
     /**
-     * Specifies the type of resource you are tagging.
+     * Specifies the type of resource you are tagging.  The ManagedInstance type for this API action is for on-premises managed instances. You must specify the the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
      */
     ResourceType: ResourceTypeForTagging;
     /**
-     * The resource ID you want to tag. For the ManagedInstance, MaintenanceWindow, and PatchBaseline values, use the ID of the resource, such as mw-01234361858c9b57b for a Maintenance Window. For the Document and Parameter values, use the name of the resource.
+     * The resource ID you want to tag. Use the ID of the resource. Here are some examples: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde For the Document and Parameter values, use the name of the resource.  The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
      */
     ResourceId: ResourceId;
     /**
@@ -1296,6 +1296,10 @@ declare namespace SSM {
      */
     DocumentName?: DocumentName;
     /**
+     * The SSM document version.
+     */
+    DocumentVersion?: DocumentVersion;
+    /**
      * User-specified information about the command, such as a brief description of what the command should do.
      */
     Comment?: Comment;
@@ -1403,6 +1407,10 @@ declare namespace SSM {
      * The document name that was requested for execution.
      */
     DocumentName?: DocumentName;
+    /**
+     * The SSM document version.
+     */
+    DocumentVersion?: DocumentVersion;
     /**
      * The time and date the request was sent to this instance.
      */
@@ -1529,11 +1537,11 @@ declare namespace SSM {
      */
     ResourceId?: ComplianceResourceId;
     /**
-     * An ID for the compliance item. For example, if the compliance item is a Windows patch, the ID could be the number of the KB article. Here's an example: KB4010320.
+     * An ID for the compliance item. For example, if the compliance item is a Windows patch, the ID could be the number of the KB article; for example: KB4010320.
      */
     Id?: ComplianceItemId;
     /**
-     * A title for the compliance item. For example, if the compliance item is a Windows patch, the title could be the title of the KB article for the patch. Here's an example: Security Update for Active Directory Federation Services.
+     * A title for the compliance item. For example, if the compliance item is a Windows patch, the title could be the title of the KB article for the patch; for example: Security Update for Active Directory Federation Services.
      */
     Title?: ComplianceItemTitle;
     /**
@@ -1561,7 +1569,7 @@ declare namespace SSM {
      */
     Id?: ComplianceItemId;
     /**
-     * The title of the compliance item. For example, if the compliance item is a Windows patch, the title could be the title of the KB article for the patch. Here's an example: Security Update for Active Directory Federation Services. 
+     * The title of the compliance item. For example, if the compliance item is a Windows patch, the title could be the title of the KB article for the patch; for example: Security Update for Active Directory Federation Services. 
      */
     Title?: ComplianceItemTitle;
     /**
@@ -1635,7 +1643,7 @@ declare namespace SSM {
   export type ComputerName = string;
   export interface CreateActivationRequest {
     /**
-     * A userdefined description of the resource that you want to register with Amazon EC2.   Do not enter personally identifiable information in this field. 
+     * A user-defined description of the resource that you want to register with Amazon EC2.   Do not enter personally identifiable information in this field. 
      */
     Description?: ActivationDescription;
     /**
@@ -1838,11 +1846,11 @@ declare namespace SSM {
      */
     ApprovalRules?: PatchRuleGroup;
     /**
-     * A list of explicitly approved patches for the baseline.
+     * A list of explicitly approved patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see Package Name Formats for Approved and Rejected Patch Lists in the AWS Systems Manager User Guide.
      */
     ApprovedPatches?: PatchIdList;
     /**
-     * Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. Valid compliance severity levels include the following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED. The default value is UNSPECIFIED.
+     * Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. The default value is UNSPECIFIED.
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
@@ -1850,7 +1858,7 @@ declare namespace SSM {
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
-     * A list of explicitly rejected patches for the baseline.
+     * A list of explicitly rejected patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see Package Name Formats for Approved and Rejected Patch Lists in the AWS Systems Manager User Guide.
      */
     RejectedPatches?: PatchIdList;
     /**
@@ -3033,6 +3041,10 @@ declare namespace SSM {
      */
     DocumentName?: DocumentName;
     /**
+     * The SSM document version used in the request.
+     */
+    DocumentVersion?: DocumentVersion;
+    /**
      * The name of the plugin for which you want detailed results. For example, aws:RunShellScript is a plugin.
      */
     PluginName?: CommandPluginName;
@@ -3910,7 +3922,7 @@ declare namespace SSM {
      */
     SnapshotId?: SnapshotId;
     /**
-     * Placeholder information, this field will always be empty in the current release of the service.
+     * Placeholder information. This field will always be empty in the current release of the service.
      */
     OwnerInformation?: OwnerInformation;
     /**
@@ -5450,7 +5462,7 @@ declare namespace SSM {
      */
     ResourceType: MaintenanceWindowResourceType;
     /**
-     * The targets (either instances or tags). Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+     * The targets (either instances or tags).  Specify instances using the following format:  Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;  Specify tags using either of the following formats:  Key=tag:&lt;tag-key&gt;,Values=&lt;tag-value-1&gt;,&lt;tag-value-2&gt;   Key=tag-key,Values=&lt;tag-key-1&gt;,&lt;tag-key-2&gt; 
      */
     Targets: Targets;
     /**
@@ -5478,11 +5490,11 @@ declare namespace SSM {
   }
   export interface RegisterTaskWithMaintenanceWindowRequest {
     /**
-     * The id of the Maintenance Window the task should be added to.
+     * The ID of the Maintenance Window the task should be added to.
      */
     WindowId: MaintenanceWindowId;
     /**
-     * The targets (either instances or tags). Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+     * The targets (either instances or Maintenance Window targets). Specify instances using the following format:   Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;  Specify Maintenance Window targets using the following format:  Key=&lt;WindowTargetIds&gt;,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt; 
      */
     Targets: Targets;
     /**
@@ -5545,11 +5557,11 @@ declare namespace SSM {
   export type RemainingCount = number;
   export interface RemoveTagsFromResourceRequest {
     /**
-     * The type of resource of which you want to remove a tag.
+     * The type of resource of which you want to remove a tag.  The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
      */
     ResourceType: ResourceTypeForTagging;
     /**
-     * The resource ID for which you want to remove tags.
+     * The resource ID for which you want to remove tags. Use the ID of the resource. Here are some examples: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde For the Document and Parameter values, use the name of the resource.  The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
      */
     ResourceId: ResourceId;
     /**
@@ -5729,6 +5741,10 @@ declare namespace SSM {
      * Required. The name of the Systems Manager document to execute. This can be a public document or a custom document.
      */
     DocumentName: DocumentARN;
+    /**
+     * The SSM document version to use in the request. You can specify Default, Latest, or a specific version number. 
+     */
+    DocumentVersion?: DocumentVersion;
     /**
      * The Sha256 or Sha1 hash created by the system when the document was created.   Sha1 hashes have been deprecated. 
      */
@@ -6371,7 +6387,7 @@ declare namespace SSM {
      */
     ApprovalRules?: PatchRuleGroup;
     /**
-     * A list of explicitly approved patches for the baseline.
+     * A list of explicitly approved patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see Package Name Formats for Approved and Rejected Patch Lists in the AWS Systems Manager User Guide.
      */
     ApprovedPatches?: PatchIdList;
     /**
@@ -6383,7 +6399,7 @@ declare namespace SSM {
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
-     * A list of explicitly rejected patches for the baseline.
+     * A list of explicitly rejected patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see Package Name Formats for Approved and Rejected Patch Lists in the AWS Systems Manager User Guide.
      */
     RejectedPatches?: PatchIdList;
     /**
