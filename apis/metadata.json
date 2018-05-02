@@ -87,7 +87,8 @@
     "cors": true
   },
   "codebuild": {
-    "name": "CodeBuild"
+    "name": "CodeBuild",
+    "cors": true
   },
   "codecommit": {
     "name": "CodeCommit",
