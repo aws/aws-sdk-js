@@ -9,6 +9,7 @@ export import CloudTrail = require('./cloudtrail');
 export import CloudWatch = require('./cloudwatch');
 export import CloudWatchEvents = require('./cloudwatchevents');
 export import CloudWatchLogs = require('./cloudwatchlogs');
+export import CodeBuild = require('./codebuild');
 export import CodeCommit = require('./codecommit');
 export import CodeDeploy = require('./codedeploy');
 export import CodePipeline = require('./codepipeline');

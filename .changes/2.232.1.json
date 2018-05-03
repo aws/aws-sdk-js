@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "This release adds support for authorizing your AWS AppSync endpoint with an OpenID Connect compliant service and also to configure your AWS AppSync endpoint to log requests to Amazon CloudWatch Logs."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "CodeBuild now supports CORS. The CodeBuild service is now included in the default browser version of the SDK."
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Update ResourceType enum with values for Lambda, ElasticBeanstalk, WAF and ElasticLoadBalancing resources"
+    }
+]

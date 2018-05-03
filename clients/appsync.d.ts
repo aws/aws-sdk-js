@@ -140,11 +140,11 @@ declare class AppSync extends Service {
    */
   getType(callback?: (err: AWSError, data: AppSync.Types.GetTypeResponse) => void): Request<AppSync.Types.GetTypeResponse, AWSError>;
   /**
-   * Lists the API keys for a given API.
+   * Lists the API keys for a given API.  API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
    */
   listApiKeys(params: AppSync.Types.ListApiKeysRequest, callback?: (err: AWSError, data: AppSync.Types.ListApiKeysResponse) => void): Request<AppSync.Types.ListApiKeysResponse, AWSError>;
   /**
-   * Lists the API keys for a given API.
+   * Lists the API keys for a given API.  API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
    */
   listApiKeys(callback?: (err: AWSError, data: AppSync.Types.ListApiKeysResponse) => void): Request<AppSync.Types.ListApiKeysResponse, AWSError>;
   /**
@@ -244,7 +244,7 @@ declare namespace AppSync {
     expires?: Long;
   }
   export type ApiKeys = ApiKey[];
-  export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|string;
+  export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|string;
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
   export interface CreateApiKeyRequest {
@@ -257,7 +257,7 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time.
+     * The time from creation time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .
      */
     expires?: Long;
   }
@@ -313,6 +313,10 @@ declare namespace AppSync {
      */
     name: String;
     /**
+     * The Amazon CloudWatch logs configuration.
+     */
+    logConfig?: LogConfig;
+    /**
      * The authentication type: API key, IAM, or Amazon Cognito User Pools.
      */
     authenticationType: AuthenticationType;
@@ -320,6 +324,10 @@ declare namespace AppSync {
      * The Amazon Cognito User Pool configuration.
      */
     userPoolConfig?: UserPoolConfig;
+    /**
+     * The Open Id Connect configuration configuration.
+     */
+    openIDConnectConfig?: OpenIDConnectConfig;
   }
   export interface CreateGraphqlApiResponse {
     /**
@@ -393,7 +401,7 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an AWS Lambda function.    NONE: There is no data source. This type is used when the required information can be computed on the fly without connecting to a back-end data source.  
+     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an AWS Lambda function.    NONE: There is no data source. This type is used when when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.  
      */
     type?: DataSourceType;
     /**
@@ -501,6 +509,7 @@ declare namespace AppSync {
     awsRegion: String;
   }
   export type ErrorMessage = string;
+  export type FieldLogLevel = "NONE"|"ERROR"|"ALL"|string;
   export interface GetDataSourceRequest {
     /**
      * The API ID.
@@ -615,9 +624,17 @@ declare namespace AppSync {
      */
     authenticationType?: AuthenticationType;
     /**
+     * The Amazon CloudWatch Logs configuration.
+     */
+    logConfig?: LogConfig;
+    /**
      * The Amazon Cognito User Pool configuration.
      */
     userPoolConfig?: UserPoolConfig;
+    /**
+     * The Open Id Connect configuration.
+     */
+    openIDConnectConfig?: OpenIDConnectConfig;
     /**
      * The ARN.
      */
@@ -758,10 +775,38 @@ declare namespace AppSync {
      */
     nextToken?: PaginationToken;
   }
+  export interface LogConfig {
+    /**
+     * The field logging level. Values can be NONE, ERROR, ALL.     NONE: No field-level logs are captured.    ERROR: Logs the following information only for the fields that are in error:   The error section in the server response.   Field-level errors.   The generated request/response functions that got resolved for error fields.      ALL: The following information is logged for all fields in the query:   Field-level tracing information.   The generated request/response functions that got resolved for each field.    
+     */
+    fieldLogLevel: FieldLogLevel;
+    /**
+     * The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. 
+     */
+    cloudWatchLogsRoleArn: String;
+  }
   export type Long = number;
   export type MapOfStringToString = {[key: string]: String};
   export type MappingTemplate = string;
   export type MaxResults = number;
+  export interface OpenIDConnectConfig {
+    /**
+     * The issuer for the open id connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
+     */
+    issuer: String;
+    /**
+     * The client identifier of the Relying party at the OpenID Provider. This identifier is typically obtained when the Relying party is registered with the OpenID Provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time
+     */
+    clientId?: String;
+    /**
+     * The number of milliseconds a token is valid after being issued to a user.
+     */
+    iatTTL?: Long;
+    /**
+     * The number of milliseconds a token is valid after being authenticated.
+     */
+    authTTL?: Long;
+  }
   export type OutputType = "SDL"|"JSON"|string;
   export type PaginationToken = string;
   export interface Resolver {
@@ -848,7 +893,7 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The time after which the API key expires. The date is represented as seconds since the epoch.
+     * The time from update time after which the API key expires. The date is represented as seconds since the epoch. For more information, see .
      */
     expires?: Long;
   }
@@ -908,6 +953,10 @@ declare namespace AppSync {
      */
     name: String;
     /**
+     * The Amazon CloudWatch logs configuration for the GraphqlApi object.
+     */
+    logConfig?: LogConfig;
+    /**
      * The new authentication type for the GraphqlApi object.
      */
     authenticationType?: AuthenticationType;
@@ -915,6 +964,10 @@ declare namespace AppSync {
      * The new Amazon Cognito User Pool configuration for the GraphqlApi object.
      */
     userPoolConfig?: UserPoolConfig;
+    /**
+     * The Open Id Connect configuration configuration for the GraphqlApi object.
+     */
+    openIDConnectConfig?: OpenIDConnectConfig;
   }
   export interface UpdateGraphqlApiResponse {
     /**

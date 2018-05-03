@@ -11,6 +11,7 @@ module.exports = {
   CloudWatch: require('./cloudwatch'),
   CloudWatchEvents: require('./cloudwatchevents'),
   CloudWatchLogs: require('./cloudwatchlogs'),
+  CodeBuild: require('./codebuild'),
   CodeCommit: require('./codecommit'),
   CodeDeploy: require('./codedeploy'),
   CodePipeline: require('./codepipeline'),

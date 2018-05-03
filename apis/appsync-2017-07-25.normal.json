@@ -63,7 +63,6 @@
         {"shape":"ConcurrentModificationException"},
         {"shape":"UnauthorizedException"},
         {"shape":"InternalFailureException"},
-        {"shape":"LimitExceededException"},
         {"shape":"ApiLimitExceededException"}
       ],
       "documentation":"<p>Creates a <code>GraphqlApi</code> object.</p>"
@@ -295,7 +294,7 @@
         {"shape":"UnauthorizedException"},
         {"shape":"InternalFailureException"}
       ],
-      "documentation":"<p>Lists the API keys for a given API.</p>"
+      "documentation":"<p>Lists the API keys for a given API.</p> <note> <p>API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call <code>DeleteApiKey</code> to manually delete a key before it's automatically deleted.</p> </note>"
     },
     "ListDataSources":{
       "name":"ListDataSources",
@@ -481,7 +480,7 @@
           "documentation":"<p>The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.</p>"
         }
       },
-      "documentation":"<p>Describes an API key.</p>"
+      "documentation":"<p>Describes an API key.</p> <p>Customers invoke AWS AppSync GraphQL APIs with API keys as an identity mechanism. There are two key versions:</p> <p> <b>da1</b>: This version was introduced at launch in November 2017. These keys always expire after 7 days. Key expiration is managed by DynamoDB TTL. The keys will cease to be valid after Feb 21, 2018 and should not be used after that date.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>UpdateApiKey</code> is not available for this key version.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in DynamoDB as milliseconds. This results in a bug where keys are not automatically deleted because DynamoDB expects the TTL to be stored in seconds. As a one-time action, we will delete these keys from the table after Feb 21, 2018.</p> </li> </ul> <p> <b>da2</b>: This version was introduced in February 2018 when AppSync added support to extend key expiration.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in seconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in seconds and accepts a user-provided expiration time in seconds.</p> </li> <li> <p> <code>UpdateApiKey</code> returns the expiration time in seconds and accepts a user-provided expiration time in seconds. Key expiration can only be updated while the key has not expired.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in DynamoDB as seconds.</p> </li> </ul>"
     },
     "ApiKeyLimitExceededException":{
       "type":"structure",
@@ -497,7 +496,7 @@
       "members":{
         "message":{"shape":"String"}
       },
-      "documentation":"<p>The API key expiration must be set to a value between 1 and 365 days.</p>",
+      "documentation":"<p>The API key expiration must be set to a value between 1 and 365 days from creation (for <code>CreateApiKey</code>) or from update (for <code>UpdateApiKey</code>).</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -519,7 +518,8 @@
       "enum":[
         "API_KEY",
         "AWS_IAM",
-        "AMAZON_COGNITO_USER_POOLS"
+        "AMAZON_COGNITO_USER_POOLS",
+        "OPENID_CONNECT"
       ]
     },
     "BadRequestException":{
@@ -558,7 +558,7 @@
         },
         "expires":{
           "shape":"Long",
-          "documentation":"<p>The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time.</p>"
+          "documentation":"<p>The time from creation time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .</p>"
         }
       }
     },
@@ -635,6 +635,10 @@
           "shape":"String",
           "documentation":"<p>A user-supplied name for the <code>GraphqlApi</code>.</p>"
         },
+        "logConfig":{
+          "shape":"LogConfig",
+          "documentation":"<p>The Amazon CloudWatch logs configuration.</p>"
+        },
         "authenticationType":{
           "shape":"AuthenticationType",
           "documentation":"<p>The authentication type: API key, IAM, or Amazon Cognito User Pools.</p>"
@@ -642,6 +646,10 @@
         "userPoolConfig":{
           "shape":"UserPoolConfig",
           "documentation":"<p>The Amazon Cognito User Pool configuration.</p>"
+        },
+        "openIDConnectConfig":{
+          "shape":"OpenIDConnectConfig",
+          "documentation":"<p>The Open Id Connect configuration configuration.</p>"
         }
       }
     },
@@ -753,7 +761,7 @@
         },
         "type":{
           "shape":"DataSourceType",
-          "documentation":"<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when the required information can be computed on the fly without connecting to a back-end data source.</p> </li> </ul>"
+          "documentation":"<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.</p> </li> </ul>"
         },
         "serviceRoleArn":{
           "shape":"String",
@@ -963,6 +971,14 @@
       "documentation":"<p>Describes an Elasticsearch data source configuration.</p>"
     },
     "ErrorMessage":{"type":"string"},
+    "FieldLogLevel":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "ERROR",
+        "ALL"
+      ]
+    },
     "GetDataSourceRequest":{
       "type":"structure",
       "required":[
@@ -1168,9 +1184,17 @@
           "shape":"AuthenticationType",
           "documentation":"<p>The authentication type.</p>"
         },
+        "logConfig":{
+          "shape":"LogConfig",
+          "documentation":"<p>The Amazon CloudWatch Logs configuration.</p>"
+        },
         "userPoolConfig":{
           "shape":"UserPoolConfig",
           "documentation":"<p>The Amazon Cognito User Pool configuration.</p>"
+        },
+        "openIDConnectConfig":{
+          "shape":"OpenIDConnectConfig",
+          "documentation":"<p>The Open Id Connect configuration.</p>"
         },
         "arn":{
           "shape":"String",
@@ -1413,6 +1437,24 @@
         }
       }
     },
+    "LogConfig":{
+      "type":"structure",
+      "required":[
+        "fieldLogLevel",
+        "cloudWatchLogsRoleArn"
+      ],
+      "members":{
+        "fieldLogLevel":{
+          "shape":"FieldLogLevel",
+          "documentation":"<p>The field logging level. Values can be NONE, ERROR, ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>"
+        },
+        "cloudWatchLogsRoleArn":{
+          "shape":"String",
+          "documentation":"<p>The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. </p>"
+        }
+      },
+      "documentation":"<p>The CloudWatch Logs configuration.</p>"
+    },
     "Long":{"type":"long"},
     "MapOfStringToString":{
       "type":"map",
@@ -1422,7 +1464,7 @@
     "MappingTemplate":{
       "type":"string",
       "max":65536,
-      "min":0
+      "min":1
     },
     "MaxResults":{
       "type":"integer",
@@ -1437,6 +1479,29 @@
       "documentation":"<p>The resource specified in the request was not found. Check the resource and try again.</p>",
       "error":{"httpStatusCode":404},
       "exception":true
+    },
+    "OpenIDConnectConfig":{
+      "type":"structure",
+      "required":["issuer"],
+      "members":{
+        "issuer":{
+          "shape":"String",
+          "documentation":"<p>The issuer for the open id connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.</p>"
+        },
+        "clientId":{
+          "shape":"String",
+          "documentation":"<p>The client identifier of the Relying party at the OpenID Provider. This identifier is typically obtained when the Relying party is registered with the OpenID Provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time</p>"
+        },
+        "iatTTL":{
+          "shape":"Long",
+          "documentation":"<p>The number of milliseconds a token is valid after being issued to a user.</p>"
+        },
+        "authTTL":{
+          "shape":"Long",
+          "documentation":"<p>The number of milliseconds a token is valid after being authenticated.</p>"
+        }
+      },
+      "documentation":"<p>Describes an Open Id Connect configuration.</p>"
     },
     "OutputType":{
       "type":"string",
@@ -1595,7 +1660,7 @@
         },
         "expires":{
           "shape":"Long",
-          "documentation":"<p>The time after which the API key expires. The date is represented as seconds since the epoch.</p>"
+          "documentation":"<p>The time from update time after which the API key expires. The date is represented as seconds since the epoch. For more information, see .</p>"
         }
       }
     },
@@ -1680,6 +1745,10 @@
           "shape":"String",
           "documentation":"<p>The new name for the <code>GraphqlApi</code> object.</p>"
         },
+        "logConfig":{
+          "shape":"LogConfig",
+          "documentation":"<p>The Amazon CloudWatch logs configuration for the <code>GraphqlApi</code> object.</p>"
+        },
         "authenticationType":{
           "shape":"AuthenticationType",
           "documentation":"<p>The new authentication type for the <code>GraphqlApi</code> object.</p>"
@@ -1687,6 +1756,10 @@
         "userPoolConfig":{
           "shape":"UserPoolConfig",
           "documentation":"<p>The new Amazon Cognito User Pool configuration for the <code>GraphqlApi</code> object.</p>"
+        },
+        "openIDConnectConfig":{
+          "shape":"OpenIDConnectConfig",
+          "documentation":"<p>The Open Id Connect configuration configuration for the <code>GraphqlApi</code> object.</p>"
         }
       }
     },
