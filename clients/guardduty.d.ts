@@ -36,6 +36,14 @@ declare class GuardDuty extends Service {
    */
   createDetector(callback?: (err: AWSError, data: GuardDuty.Types.CreateDetectorResponse) => void): Request<GuardDuty.Types.CreateDetectorResponse, AWSError>;
   /**
+   * Creates a filter using the specified finding criteria.
+   */
+  createFilter(params: GuardDuty.Types.CreateFilterRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateFilterResponse) => void): Request<GuardDuty.Types.CreateFilterResponse, AWSError>;
+  /**
+   * Creates a filter using the specified finding criteria.
+   */
+  createFilter(callback?: (err: AWSError, data: GuardDuty.Types.CreateFilterResponse) => void): Request<GuardDuty.Types.CreateFilterResponse, AWSError>;
+  /**
    * Creates a new IPSet - a list of trusted IP addresses that have been whitelisted for secure communication with AWS infrastructure and applications.
    */
   createIPSet(params: GuardDuty.Types.CreateIPSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateIPSetResponse) => void): Request<GuardDuty.Types.CreateIPSetResponse, AWSError>;
@@ -83,6 +91,14 @@ declare class GuardDuty extends Service {
    * Deletes a Amazon GuardDuty detector specified by the detector ID.
    */
   deleteDetector(callback?: (err: AWSError, data: GuardDuty.Types.DeleteDetectorResponse) => void): Request<GuardDuty.Types.DeleteDetectorResponse, AWSError>;
+  /**
+   * Deletes the filter specified by the filter name.
+   */
+  deleteFilter(params: GuardDuty.Types.DeleteFilterRequest, callback?: (err: AWSError, data: GuardDuty.Types.DeleteFilterResponse) => void): Request<GuardDuty.Types.DeleteFilterResponse, AWSError>;
+  /**
+   * Deletes the filter specified by the filter name.
+   */
+  deleteFilter(callback?: (err: AWSError, data: GuardDuty.Types.DeleteFilterResponse) => void): Request<GuardDuty.Types.DeleteFilterResponse, AWSError>;
   /**
    * Deletes the IPSet specified by the IPSet ID.
    */
@@ -139,6 +155,14 @@ declare class GuardDuty extends Service {
    * Retrieves an Amazon GuardDuty detector specified by the detectorId.
    */
   getDetector(callback?: (err: AWSError, data: GuardDuty.Types.GetDetectorResponse) => void): Request<GuardDuty.Types.GetDetectorResponse, AWSError>;
+  /**
+   * Returns the details of the filter specified by the filter name.
+   */
+  getFilter(params: GuardDuty.Types.GetFilterRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetFilterResponse) => void): Request<GuardDuty.Types.GetFilterResponse, AWSError>;
+  /**
+   * Returns the details of the filter specified by the filter name.
+   */
+  getFilter(callback?: (err: AWSError, data: GuardDuty.Types.GetFilterResponse) => void): Request<GuardDuty.Types.GetFilterResponse, AWSError>;
   /**
    * Describes Amazon GuardDuty findings specified by finding IDs.
    */
@@ -212,6 +236,14 @@ declare class GuardDuty extends Service {
    */
   listDetectors(callback?: (err: AWSError, data: GuardDuty.Types.ListDetectorsResponse) => void): Request<GuardDuty.Types.ListDetectorsResponse, AWSError>;
   /**
+   * Returns a paginated list of the current filters.
+   */
+  listFilters(params: GuardDuty.Types.ListFiltersRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListFiltersResponse) => void): Request<GuardDuty.Types.ListFiltersResponse, AWSError>;
+  /**
+   * Returns a paginated list of the current filters.
+   */
+  listFilters(callback?: (err: AWSError, data: GuardDuty.Types.ListFiltersResponse) => void): Request<GuardDuty.Types.ListFiltersResponse, AWSError>;
+  /**
    * Lists Amazon GuardDuty findings for the specified detector ID.
    */
   listFindings(params: GuardDuty.Types.ListFindingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListFindingsResponse) => void): Request<GuardDuty.Types.ListFindingsResponse, AWSError>;
@@ -283,6 +315,14 @@ declare class GuardDuty extends Service {
    * Updates an Amazon GuardDuty detector specified by the detectorId.
    */
   updateDetector(callback?: (err: AWSError, data: GuardDuty.Types.UpdateDetectorResponse) => void): Request<GuardDuty.Types.UpdateDetectorResponse, AWSError>;
+  /**
+   * Updates the filter specified by the filter name.
+   */
+  updateFilter(params: GuardDuty.Types.UpdateFilterRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateFilterResponse) => void): Request<GuardDuty.Types.UpdateFilterResponse, AWSError>;
+  /**
+   * Updates the filter specified by the filter name.
+   */
+  updateFilter(callback?: (err: AWSError, data: GuardDuty.Types.UpdateFilterResponse) => void): Request<GuardDuty.Types.UpdateFilterResponse, AWSError>;
   /**
    * Marks specified Amazon GuardDuty findings as useful or not useful.
    */
@@ -469,6 +509,42 @@ declare namespace GuardDuty {
      */
     DetectorId?: DetectorId;
   }
+  export interface CreateFilterRequest {
+    /**
+     * Specifies the action that is to be applied to the findings that match the filter.
+     */
+    Action?: FilterAction;
+    /**
+     * The idempotency token for the create request.
+     */
+    ClientToken?: __stringMin0Max64;
+    /**
+     * The description of the filter.
+     */
+    Description?: FilterDescription;
+    /**
+     * The unique ID of the detector that you want to update.
+     */
+    DetectorId: __string;
+    /**
+     * Represents the criteria to be used in the filter for querying findings.
+     */
+    FindingCriteria?: FindingCriteria;
+    /**
+     * The name of the filter.
+     */
+    Name?: FilterName;
+    /**
+     * Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
+     */
+    Rank?: FilterRank;
+  }
+  export interface CreateFilterResponse {
+    /**
+     * The name of the successfully created filter.
+     */
+    Name?: FilterName;
+  }
   export interface CreateIPSetRequest {
     /**
      * A boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
@@ -567,6 +643,18 @@ declare namespace GuardDuty {
     DetectorId: __string;
   }
   export interface DeleteDetectorResponse {
+  }
+  export interface DeleteFilterRequest {
+    /**
+     * The unique ID that specifies the detector where you want to delete a filter.
+     */
+    DetectorId: __string;
+    /**
+     * The name of the filter.
+     */
+    FilterName: __string;
+  }
+  export interface DeleteFilterResponse {
   }
   export interface DeleteIPSetRequest {
     /**
@@ -670,6 +758,11 @@ declare namespace GuardDuty {
     Type?: __string;
   }
   export type Feedback = "USEFUL"|"NOT_USEFUL"|string;
+  export type FilterAction = "NOOP"|"ARCHIVE"|string;
+  export type FilterDescription = string;
+  export type FilterName = string;
+  export type FilterNames = FilterName[];
+  export type FilterRank = number;
   export interface Finding {
     /**
      * AWS account ID where the activity occurred that prompted GuardDuty to generate a finding.
@@ -772,6 +865,38 @@ declare namespace GuardDuty {
     ServiceRole?: ServiceRole;
     Status?: DetectorStatus;
     UpdatedAt?: UpdatedAt;
+  }
+  export interface GetFilterRequest {
+    /**
+     * The detector ID that specifies the GuardDuty service where you want to list the details of the specified filter.
+     */
+    DetectorId: __string;
+    /**
+     * The name of the filter whose details you want to get.
+     */
+    FilterName: __string;
+  }
+  export interface GetFilterResponse {
+    /**
+     * Specifies the action that is to be applied to the findings that match the filter.
+     */
+    Action?: FilterAction;
+    /**
+     * The description of the filter.
+     */
+    Description?: FilterDescription;
+    /**
+     * Represents the criteria to be used in the filter for querying findings.
+     */
+    FindingCriteria?: FindingCriteria;
+    /**
+     * The name of the filter.
+     */
+    Name?: FilterName;
+    /**
+     * Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
+     */
+    Rank?: FilterRank;
   }
   export interface GetFindingsRequest {
     /**
@@ -917,6 +1042,10 @@ declare namespace GuardDuty {
     AvailabilityZone?: __string;
     IamInstanceProfile?: IamInstanceProfile;
     /**
+     * The image description of the EC2 instance.
+     */
+    ImageDescription?: __string;
+    /**
      * The image ID of the EC2 instance.
      */
     ImageId?: __string;
@@ -982,6 +1111,9 @@ declare namespace GuardDuty {
      * The unique ID of the detector of the GuardDuty account with which you want to invite members.
      */
     DetectorId: __string;
+    /**
+     * A boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
+     */
     DisableEmailNotification?: __boolean;
     /**
      * The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
@@ -1013,6 +1145,24 @@ declare namespace GuardDuty {
   }
   export interface ListDetectorsResponse {
     DetectorIds?: DetectorIds;
+    NextToken?: NextToken;
+  }
+  export interface ListFiltersRequest {
+    /**
+     * The ID of the detector that specifies the GuardDuty service where you want to list filters.
+     */
+    DetectorId: __string;
+    /**
+     * Indicates the maximum number of items that you want in the response. The maximum value is 50.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Paginates results. Set the value of this parameter to NULL on your first call to the ListFilters operation.For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
+     */
+    NextToken?: __string;
+  }
+  export interface ListFiltersResponse {
+    FilterNames?: FilterNames;
     NextToken?: NextToken;
   }
   export interface ListFindingsRequest {
@@ -1198,6 +1348,10 @@ declare namespace GuardDuty {
      */
     Ipv6Addresses?: Ipv6Addresses;
     /**
+     * The ID of the network interface
+     */
+    NetworkInterfaceId?: NetworkInterfaceId;
+    /**
      * Private DNS name of the EC2 instance.
      */
     PrivateDnsName?: PrivateDnsName;
@@ -1230,6 +1384,7 @@ declare namespace GuardDuty {
      */
     VpcId?: __string;
   }
+  export type NetworkInterfaceId = string;
   export type NetworkInterfaces = NetworkInterface[];
   export type NextToken = string;
   export type OrderBy = "ASC"|"DESC"|string;
@@ -1477,6 +1632,38 @@ declare namespace GuardDuty {
   }
   export interface UpdateDetectorResponse {
   }
+  export interface UpdateFilterRequest {
+    /**
+     * Specifies the action that is to be applied to the findings that match the filter.
+     */
+    Action?: FilterAction;
+    /**
+     * The description of the filter.
+     */
+    Description?: FilterDescription;
+    /**
+     * The unique ID of the detector that specifies the GuardDuty service where you want to update a filter.
+     */
+    DetectorId: __string;
+    /**
+     * The name of the filter.
+     */
+    FilterName: __string;
+    /**
+     * Represents the criteria to be used in the filter for querying findings.
+     */
+    FindingCriteria?: FindingCriteria;
+    /**
+     * Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
+     */
+    Rank?: FilterRank;
+  }
+  export interface UpdateFilterResponse {
+    /**
+     * The name of the filter.
+     */
+    Name?: FilterName;
+  }
   export interface UpdateFindingsFeedbackRequest {
     /**
      * Additional feedback about the GuardDuty findings.
@@ -1554,6 +1741,7 @@ declare namespace GuardDuty {
   export type __mapOfCondition = {[key: string]: Condition};
   export type __mapOfCountBySeverityFindingStatistic = {[key: string]: CountBySeverityFindingStatistic};
   export type __string = string;
+  export type __stringMin0Max64 = string;
   export type __timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
