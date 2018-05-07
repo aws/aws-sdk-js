@@ -1460,6 +1460,9 @@
     "BytesProcessed": {
       "type": "long"
     },
+    "BytesReturned": {
+      "type": "long"
+    },
     "BytesScanned": {
       "type": "long"
     },
@@ -5830,6 +5833,10 @@
         "BytesProcessed": {
           "shape": "BytesProcessed",
           "documentation": "Current number of uncompressed object bytes processed."
+        },
+        "BytesReturned": {
+          "shape": "BytesReturned",
+          "documentation": "Current number of bytes of records payload data returned."
         }
       }
     },
@@ -7477,6 +7484,10 @@
         "BytesProcessed": {
           "shape": "BytesProcessed",
           "documentation": "Total number of uncompressed object bytes processed."
+        },
+        "BytesReturned": {
+          "shape": "BytesReturned",
+          "documentation": "Total number of bytes of records payload data returned."
         }
       }
     },

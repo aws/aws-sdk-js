@@ -72,6 +72,22 @@ declare class ES extends Service {
    */
   describeElasticsearchInstanceTypeLimits(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse) => void): Request<ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse, AWSError>;
   /**
+   * Lists available reserved Elasticsearch instance offerings.
+   */
+  describeReservedElasticsearchInstanceOfferings(params: ES.Types.DescribeReservedElasticsearchInstanceOfferingsRequest, callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse, AWSError>;
+  /**
+   * Lists available reserved Elasticsearch instance offerings.
+   */
+  describeReservedElasticsearchInstanceOfferings(callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse, AWSError>;
+  /**
+   * Returns information about reserved Elasticsearch instances for this account.
+   */
+  describeReservedElasticsearchInstances(params: ES.Types.DescribeReservedElasticsearchInstancesRequest, callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstancesResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstancesResponse, AWSError>;
+  /**
+   * Returns information about reserved Elasticsearch instances for this account.
+   */
+  describeReservedElasticsearchInstances(callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstancesResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstancesResponse, AWSError>;
+  /**
    * Returns the name of all Elasticsearch domains owned by the current user's account. 
    */
   listDomainNames(callback?: (err: AWSError, data: ES.Types.ListDomainNamesResponse) => void): Request<ES.Types.ListDomainNamesResponse, AWSError>;
@@ -99,6 +115,14 @@ declare class ES extends Service {
    * Returns all tags for the given Elasticsearch domain.
    */
   listTags(callback?: (err: AWSError, data: ES.Types.ListTagsResponse) => void): Request<ES.Types.ListTagsResponse, AWSError>;
+  /**
+   * Allows you to purchase reserved Elasticsearch instances.
+   */
+  purchaseReservedElasticsearchInstanceOffering(params: ES.Types.PurchaseReservedElasticsearchInstanceOfferingRequest, callback?: (err: AWSError, data: ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse) => void): Request<ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse, AWSError>;
+  /**
+   * Allows you to purchase reserved Elasticsearch instances.
+   */
+  purchaseReservedElasticsearchInstanceOffering(callback?: (err: AWSError, data: ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse) => void): Request<ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse, AWSError>;
   /**
    * Removes the specified set of tags from the specified Elasticsearch domain.
    */
@@ -307,6 +331,54 @@ declare namespace ES {
   export interface DescribeElasticsearchInstanceTypeLimitsResponse {
     LimitsByRole?: LimitsByRole;
   }
+  export interface DescribeReservedElasticsearchInstanceOfferingsRequest {
+    /**
+     * The offering identifier filter value. Use this parameter to show only the available offering that matches the specified reservation identifier.
+     */
+    ReservedElasticsearchInstanceOfferingId?: GUID;
+    /**
+     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * NextToken should be sent in case if earlier API call produced result containing NextToken. It is used for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeReservedElasticsearchInstanceOfferingsResponse {
+    /**
+     * Provides an identifier to allow retrieval of paginated results.
+     */
+    NextToken?: NextToken;
+    /**
+     * List of reserved Elasticsearch instance offerings
+     */
+    ReservedElasticsearchInstanceOfferings?: ReservedElasticsearchInstanceOfferingList;
+  }
+  export interface DescribeReservedElasticsearchInstancesRequest {
+    /**
+     * The reserved instance identifier filter value. Use this parameter to show only the reservation that matches the specified reserved Elasticsearch instance ID.
+     */
+    ReservedElasticsearchInstanceId?: GUID;
+    /**
+     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * NextToken should be sent in case if earlier API call produced result containing NextToken. It is used for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeReservedElasticsearchInstancesResponse {
+    /**
+     * Provides an identifier to allow retrieval of paginated results.
+     */
+    NextToken?: String;
+    /**
+     * List of reserved Elasticsearch instances.
+     */
+    ReservedElasticsearchInstances?: ReservedElasticsearchInstanceList;
+  }
   export type DomainId = string;
   export interface DomainInfo {
     /**
@@ -317,6 +389,7 @@ declare namespace ES {
   export type DomainInfoList = DomainInfo[];
   export type DomainName = string;
   export type DomainNameList = DomainName[];
+  export type Double = number;
   export interface EBSOptions {
     /**
      * Specifies whether EBS-based storage is enabled.
@@ -531,7 +604,9 @@ declare namespace ES {
   }
   export type EndpointsMap = {[key: string]: ServiceUrl};
   export type ErrorMessage = string;
+  export type GUID = string;
   export type IdentityPoolId = string;
+  export type InstanceCount = number;
   export interface InstanceCountLimits {
     MinimumInstanceCount?: MinimumInstanceCount;
     MaximumInstanceCount?: MaximumInstanceCount;
@@ -540,6 +615,7 @@ declare namespace ES {
     InstanceCountLimits?: InstanceCountLimits;
   }
   export type InstanceRole = string;
+  export type Integer = number;
   export type IntegerClass = number;
   export type KmsKeyId = string;
   export type LimitName = string;
@@ -661,6 +737,41 @@ declare namespace ES {
     PendingDeletion?: Boolean;
   }
   export type PolicyDocument = string;
+  export interface PurchaseReservedElasticsearchInstanceOfferingRequest {
+    /**
+     * The ID of the reserved Elasticsearch instance offering to purchase.
+     */
+    ReservedElasticsearchInstanceOfferingId: GUID;
+    /**
+     * A customer-specified identifier to track this reservation.
+     */
+    ReservationName: ReservationToken;
+    /**
+     * The number of Elasticsearch instances to reserve.
+     */
+    InstanceCount?: InstanceCount;
+  }
+  export interface PurchaseReservedElasticsearchInstanceOfferingResponse {
+    /**
+     * Details of the reserved Elasticsearch instance which was purchased.
+     */
+    ReservedElasticsearchInstanceId?: GUID;
+    /**
+     * The customer-specified identifier used to track this reservation.
+     */
+    ReservationName?: ReservationToken;
+  }
+  export interface RecurringCharge {
+    /**
+     * The monetary amount of the recurring charge.
+     */
+    RecurringChargeAmount?: Double;
+    /**
+     * The frequency of the recurring charge.
+     */
+    RecurringChargeFrequency?: String;
+  }
+  export type RecurringChargeList = RecurringCharge[];
   export interface RemoveTagsRequest {
     /**
      * Specifies the ARN for the Elasticsearch domain from which you want to delete the specified tags.
@@ -671,6 +782,98 @@ declare namespace ES {
      */
     TagKeys: StringList;
   }
+  export type ReservationToken = string;
+  export interface ReservedElasticsearchInstance {
+    /**
+     * The customer-specified identifier to track this reservation.
+     */
+    ReservationName?: ReservationToken;
+    /**
+     * The unique identifier for the reservation.
+     */
+    ReservedElasticsearchInstanceId?: GUID;
+    /**
+     * The offering identifier.
+     */
+    ReservedElasticsearchInstanceOfferingId?: String;
+    /**
+     * The Elasticsearch instance type offered by the reserved instance offering.
+     */
+    ElasticsearchInstanceType?: ESPartitionInstanceType;
+    /**
+     * The time the reservation started.
+     */
+    StartTime?: UpdateTimestamp;
+    /**
+     * The duration, in seconds, for which the Elasticsearch instance is reserved.
+     */
+    Duration?: Integer;
+    /**
+     * The upfront fixed charge you will paid to purchase the specific reserved Elasticsearch instance offering. 
+     */
+    FixedPrice?: Double;
+    /**
+     * The rate you are charged for each hour for the domain that is using this reserved instance.
+     */
+    UsagePrice?: Double;
+    /**
+     * The currency code for the reserved Elasticsearch instance offering.
+     */
+    CurrencyCode?: String;
+    /**
+     * The number of Elasticsearch instances that have been reserved.
+     */
+    ElasticsearchInstanceCount?: Integer;
+    /**
+     * The state of the reserved Elasticsearch instance.
+     */
+    State?: String;
+    /**
+     * The payment option as defined in the reserved Elasticsearch instance offering.
+     */
+    PaymentOption?: ReservedElasticsearchInstancePaymentOption;
+    /**
+     * The charge to your account regardless of whether you are creating any domains using the instance offering.
+     */
+    RecurringCharges?: RecurringChargeList;
+  }
+  export type ReservedElasticsearchInstanceList = ReservedElasticsearchInstance[];
+  export interface ReservedElasticsearchInstanceOffering {
+    /**
+     * The Elasticsearch reserved instance offering identifier.
+     */
+    ReservedElasticsearchInstanceOfferingId?: GUID;
+    /**
+     * The Elasticsearch instance type offered by the reserved instance offering.
+     */
+    ElasticsearchInstanceType?: ESPartitionInstanceType;
+    /**
+     * The duration, in seconds, for which the offering will reserve the Elasticsearch instance.
+     */
+    Duration?: Integer;
+    /**
+     * The upfront fixed charge you will pay to purchase the specific reserved Elasticsearch instance offering. 
+     */
+    FixedPrice?: Double;
+    /**
+     * The rate you are charged for each hour the domain that is using the offering is running.
+     */
+    UsagePrice?: Double;
+    /**
+     * The currency code for the reserved Elasticsearch instance offering.
+     */
+    CurrencyCode?: String;
+    /**
+     * Payment option for the reserved Elasticsearch instance offering
+     */
+    PaymentOption?: ReservedElasticsearchInstancePaymentOption;
+    /**
+     * The charge to your account regardless of whether you are creating any domains using the instance offering.
+     */
+    RecurringCharges?: RecurringChargeList;
+  }
+  export type ReservedElasticsearchInstanceOfferingList = ReservedElasticsearchInstanceOffering[];
+  export type ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string;
   export type RoleArn = string;
   export type ServiceUrl = string;
   export interface SnapshotOptions {

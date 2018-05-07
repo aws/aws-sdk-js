@@ -36,19 +36,19 @@ declare class Budgets extends Service {
    */
   createSubscriber(callback?: (err: AWSError, data: Budgets.Types.CreateSubscriberResponse) => void): Request<Budgets.Types.CreateSubscriberResponse, AWSError>;
   /**
-   * Deletes a budget. You can delete your budget at any time.  Deleting a budget also deletes the notifications and subscribers associated with that budget. 
+   * Deletes a budget. You can delete your budget at any time.  Deleting a budget also deletes the notifications and subscribers that are associated with that budget. 
    */
   deleteBudget(params: Budgets.Types.DeleteBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.DeleteBudgetResponse) => void): Request<Budgets.Types.DeleteBudgetResponse, AWSError>;
   /**
-   * Deletes a budget. You can delete your budget at any time.  Deleting a budget also deletes the notifications and subscribers associated with that budget. 
+   * Deletes a budget. You can delete your budget at any time.  Deleting a budget also deletes the notifications and subscribers that are associated with that budget. 
    */
   deleteBudget(callback?: (err: AWSError, data: Budgets.Types.DeleteBudgetResponse) => void): Request<Budgets.Types.DeleteBudgetResponse, AWSError>;
   /**
-   * Deletes a notification.  Deleting a notification also deletes the subscribers associated with the notification. 
+   * Deletes a notification.  Deleting a notification also deletes the subscribers that are associated with the notification. 
    */
   deleteNotification(params: Budgets.Types.DeleteNotificationRequest, callback?: (err: AWSError, data: Budgets.Types.DeleteNotificationResponse) => void): Request<Budgets.Types.DeleteNotificationResponse, AWSError>;
   /**
-   * Deletes a notification.  Deleting a notification also deletes the subscribers associated with the notification. 
+   * Deletes a notification.  Deleting a notification also deletes the subscribers that are associated with the notification. 
    */
   deleteNotification(callback?: (err: AWSError, data: Budgets.Types.DeleteNotificationResponse) => void): Request<Budgets.Types.DeleteNotificationResponse, AWSError>;
   /**
@@ -68,35 +68,35 @@ declare class Budgets extends Service {
    */
   describeBudget(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetResponse) => void): Request<Budgets.Types.DescribeBudgetResponse, AWSError>;
   /**
-   * Lists the budgets associated with an account.
+   * Lists the budgets that are associated with an account.
    */
   describeBudgets(params: Budgets.Types.DescribeBudgetsRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetsResponse) => void): Request<Budgets.Types.DescribeBudgetsResponse, AWSError>;
   /**
-   * Lists the budgets associated with an account.
+   * Lists the budgets that are associated with an account.
    */
   describeBudgets(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetsResponse) => void): Request<Budgets.Types.DescribeBudgetsResponse, AWSError>;
   /**
-   * Lists the notifications associated with a budget.
+   * Lists the notifications that are associated with a budget.
    */
   describeNotificationsForBudget(params: Budgets.Types.DescribeNotificationsForBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeNotificationsForBudgetResponse) => void): Request<Budgets.Types.DescribeNotificationsForBudgetResponse, AWSError>;
   /**
-   * Lists the notifications associated with a budget.
+   * Lists the notifications that are associated with a budget.
    */
   describeNotificationsForBudget(callback?: (err: AWSError, data: Budgets.Types.DescribeNotificationsForBudgetResponse) => void): Request<Budgets.Types.DescribeNotificationsForBudgetResponse, AWSError>;
   /**
-   * Lists the subscribers associated with a notification.
+   * Lists the subscribers that are associated with a notification.
    */
   describeSubscribersForNotification(params: Budgets.Types.DescribeSubscribersForNotificationRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeSubscribersForNotificationResponse) => void): Request<Budgets.Types.DescribeSubscribersForNotificationResponse, AWSError>;
   /**
-   * Lists the subscribers associated with a notification.
+   * Lists the subscribers that are associated with a notification.
    */
   describeSubscribersForNotification(callback?: (err: AWSError, data: Budgets.Types.DescribeSubscribersForNotificationResponse) => void): Request<Budgets.Types.DescribeSubscribersForNotificationResponse, AWSError>;
   /**
-   * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When a budget is modified, the calculatedSpend drops to zero until AWS has new usage data to use for forecasting.
+   * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until AWS has new usage data to use for forecasting.
    */
   updateBudget(params: Budgets.Types.UpdateBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetResponse) => void): Request<Budgets.Types.UpdateBudgetResponse, AWSError>;
   /**
-   * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When a budget is modified, the calculatedSpend drops to zero until AWS has new usage data to use for forecasting.
+   * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until AWS has new usage data to use for forecasting.
    */
   updateBudget(callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetResponse) => void): Request<Budgets.Types.UpdateBudgetResponse, AWSError>;
   /**
@@ -120,40 +120,40 @@ declare namespace Budgets {
   export type AccountId = string;
   export interface Budget {
     /**
-     * The name of a budget. Unique within accounts. : and \ characters are not allowed in the BudgetName.
+     * The name of a budget. The name must be unique within accounts. The : and \ characters are not allowed in BudgetName.
      */
     BudgetName: BudgetName;
     /**
-     * The total amount of cost, usage, or RI utilization that you want to track with your budget.  BudgetLimit is required for cost or usage budgets, but optional for RI utilization budgets. RI utilization budgets default to the only valid value for RI utilization budgets, which is 100.
+     * The total amount of cost, usage, RI utilization, or RI coverage that you want to track with your budget.  BudgetLimit is required for cost or usage budgets, but optional for RI utilization or coverage budgets. RI utilization or coverage budgets default to 100, which is the only valid value for RI utilization or coverage budgets.
      */
     BudgetLimit?: Spend;
     /**
-     * The cost filters applied to a budget, such as service or region.
+     * The cost filters, such as service or region, that are applied to a budget.
      */
     CostFilters?: CostFilters;
     /**
-     * The types of costs included in this budget.
+     * The types of costs that are included in this COST budget.  USAGE, RI_UTILIZATION, and RI_COVERAGE budgets do not have CostTypes.
      */
     CostTypes?: CostTypes;
     /**
-     * The length of time until a budget resets the actual and forecasted spend.
+     * The length of time until a budget resets the actual and forecasted spend. DAILY is available only for RI_UTILIZATION and RI_COVERAGE budgets.
      */
     TimeUnit: TimeUnit;
     /**
-     * The period of time covered by a budget. Has a start date and an end date. The start date must come before the end date. There are no restrictions on the end date.  If you created your budget and didn't specify a start date, AWS defaults to the start of your chosen time period (i.e. DAILY, MONTHLY, QUARTERLY, ANNUALLY). For example, if you created your budget on January 24th 2018, chose DAILY, and didn't set a start date, AWS set your start date to 01/24/18 00:00 UTC. If you chose MONTHLY, AWS set your start date to 01/01/18 00:00 UTC. If you didn't specify an end date, AWS set your end date to 06/15/87 00:00 UTC. The defaults are the same for the AWS Billing and Cost Management console and the API.  You can change either date with the UpdateBudget operation. After the end date, AWS deletes the budget and all associated notifications and subscribers.
+     * The period of time that is covered by a budget. The period has a start date and an end date. The start date must come before the end date. The end date must come before 06/15/87 00:00 UTC.  If you create your budget and don't specify a start date, AWS defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose DAILY, and didn't set a start date, AWS set your start date to 01/24/18 00:00 UTC. If you chose MONTHLY, AWS set your start date to 01/01/18 00:00 UTC. If you didn't specify an end date, AWS set your end date to 06/15/87 00:00 UTC. The defaults are the same for the AWS Billing and Cost Management console and the API.  You can change either date with the UpdateBudget operation. After the end date, AWS deletes the budget and all associated notifications and subscribers.
      */
     TimePeriod?: TimePeriod;
     /**
-     * The actual and forecasted cost or usage being tracked by a budget.
+     * The actual and forecasted cost or usage that the budget tracks.
      */
     CalculatedSpend?: CalculatedSpend;
     /**
-     * Whether this budget tracks monetary costs, usage, or RI utilization.
+     * Whether this budget tracks monetary costs, usage, RI utilization, or RI coverage.
      */
     BudgetType: BudgetType;
   }
   export type BudgetName = string;
-  export type BudgetType = "USAGE"|"COST"|"RI_UTILIZATION"|string;
+  export type BudgetType = "USAGE"|"COST"|"RI_UTILIZATION"|"RI_COVERAGE"|string;
   export type Budgets = Budget[];
   export interface CalculatedSpend {
     /**
@@ -177,7 +177,7 @@ declare namespace Budgets {
      */
     IncludeSubscription?: NullableBoolean;
     /**
-     * Specifies whether a budget uses blended rate. The default value is false.
+     * Specifies whether a budget uses a blended rate. The default value is false.
      */
     UseBlended?: NullableBoolean;
     /**
@@ -223,7 +223,7 @@ declare namespace Budgets {
      */
     Budget: Budget;
     /**
-     * A notification that you want to associate with a budget. A budget can have up to five notifications, and each notification can have one SNS subscriber and up to ten email subscribers. If you include notifications and subscribers in your CreateBudget call, AWS creates the notifications and subscribers for you.
+     * A notification that you want to associate with a budget. A budget can have up to five notifications, and each notification can have one SNS subscriber and up to 10 email subscribers. If you include notifications and subscribers in your CreateBudget call, AWS creates the notifications and subscribers for you.
      */
     NotificationsWithSubscribers?: NotificationWithSubscribersList;
   }
@@ -235,7 +235,7 @@ declare namespace Budgets {
      */
     AccountId: AccountId;
     /**
-     * The name of the budget that you want AWS to notified you about. Budget names must be unique within an account.
+     * The name of the budget that you want AWS to notify you about. Budget names must be unique within an account.
      */
     BudgetName: BudgetName;
     /**
@@ -243,7 +243,7 @@ declare namespace Budgets {
      */
     Notification: Notification;
     /**
-     * A list of subscribers that you want to associate with the notification. Each notification can have one SNS subscriber and up to ten email subscribers.
+     * A list of subscribers that you want to associate with the notification. Each notification can have one SNS subscriber and up to 10 email subscribers.
      */
     Subscribers: Subscribers;
   }
@@ -251,7 +251,7 @@ declare namespace Budgets {
   }
   export interface CreateSubscriberRequest {
     /**
-     * The accountId associated with the budget that you want to create a subscriber for.
+     * The accountId that is associated with the budget that you want to create a subscriber for.
      */
     AccountId: AccountId;
     /**
@@ -339,11 +339,11 @@ declare namespace Budgets {
      */
     AccountId: AccountId;
     /**
-     * Optional integer. Specifies the maximum number of results to return in response.
+     * Optional integer. Specifies the maximum number of results to return in a response.
      */
     MaxResults?: MaxResults;
     /**
-     * The pagination token that indicates the next set of results to retrieve.
+     * The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
      */
     NextToken?: GenericString;
   }
@@ -353,7 +353,7 @@ declare namespace Budgets {
      */
     Budgets?: Budgets;
     /**
-     * The pagination token that indicates the next set of results that you can retrieve.
+     * The pagination token in the service response that indicates the next set of results that you can retrieve.
      */
     NextToken?: GenericString;
   }
@@ -367,21 +367,21 @@ declare namespace Budgets {
      */
     BudgetName: BudgetName;
     /**
-     * Optional integer. Specifies the maximum number of results to return in response.
+     * Optional integer. Specifies the maximum number of results to return in a response.
      */
     MaxResults?: MaxResults;
     /**
-     * The pagination token that indicates the next set of results to retrieve.
+     * The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
      */
     NextToken?: GenericString;
   }
   export interface DescribeNotificationsForBudgetResponse {
     /**
-     * A list of notifications associated with a budget.
+     * A list of notifications that are associated with a budget.
      */
     Notifications?: Notifications;
     /**
-     * The pagination token that indicates the next set of results that you can retrieve.
+     * The pagination token in the service response that indicates the next set of results that you can retrieve.
      */
     NextToken?: GenericString;
   }
@@ -399,21 +399,21 @@ declare namespace Budgets {
      */
     Notification: Notification;
     /**
-     * Optional integer. Specifies the maximum number of results to return in response.
+     * Optional integer. Specifies the maximum number of results to return in a response.
      */
     MaxResults?: MaxResults;
     /**
-     * The pagination token that indicates the next set of results to retrieve.
+     * The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
      */
     NextToken?: GenericString;
   }
   export interface DescribeSubscribersForNotificationResponse {
     /**
-     * A list of subscribers associated with a notification.
+     * A list of subscribers that are associated with a notification.
      */
     Subscribers?: Subscribers;
     /**
-     * The pagination token that indicates the next set of results that you can retrieve.
+     * The pagination token in the service response that indicates the next set of results that you can retrieve.
      */
     NextToken?: GenericString;
   }
@@ -427,15 +427,15 @@ declare namespace Budgets {
      */
     NotificationType: NotificationType;
     /**
-     * The comparison used for this notification.
+     * The comparison that is used for this notification.
      */
     ComparisonOperator: ComparisonOperator;
     /**
-     * The threshold associated with a notification. Thresholds are always a percentage.
+     * The threshold that is associated with a notification. Thresholds are always a percentage.
      */
     Threshold: NotificationThreshold;
     /**
-     * The type of threshold for a notification. For ACTUAL thresholds, AWS notifies you when you go over the threshold, and for FORECASTED thresholds AWS notifies you when you are forecasted to go over the threshold.
+     * The type of threshold for a notification. For ACTUAL thresholds, AWS notifies you when you go over the threshold. For FORECASTED thresholds, AWS notifies you when you are forecasted to go over the threshold.
      */
     ThresholdType?: ThresholdType;
   }
@@ -443,7 +443,7 @@ declare namespace Budgets {
   export type NotificationType = "ACTUAL"|"FORECASTED"|string;
   export interface NotificationWithSubscribers {
     /**
-     * The notification associated with a budget.
+     * The notification that is associated with a budget.
      */
     Notification: Notification;
     /**
@@ -457,11 +457,11 @@ declare namespace Budgets {
   export type NumericValue = string;
   export interface Spend {
     /**
-     * The cost or usage amount associated with a budget forecast, actual spend, or budget threshold.
+     * The cost or usage amount that is associated with a budget forecast, actual spend, or budget threshold.
      */
     Amount: NumericValue;
     /**
-     * The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB.
+     * The unit of measurement that is used for the budget forecast, actual spend, or budget threshold, such as dollars or GB.
      */
     Unit: UnitValue;
   }
@@ -481,7 +481,7 @@ declare namespace Budgets {
   export type ThresholdType = "PERCENTAGE"|"ABSOLUTE_VALUE"|string;
   export interface TimePeriod {
     /**
-     * The start date for a budget. If you created your budget and didn't specify a start date, AWS defaults to the start of your chosen time period (i.e. DAILY, MONTHLY, QUARTERLY, ANNUALLY). For example, if you created your budget on January 24th 2018, chose DAILY, and didn't set a start date, AWS set your start date to 01/24/18 00:00 UTC. If you chose MONTHLY, AWS set your start date to 01/01/18 00:00 UTC. The defaults are the same for the AWS Billing and Cost Management console and the API. You can change your start date with the UpdateBudget operation.
+     * The start date for a budget. If you created your budget and didn't specify a start date, AWS defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose DAILY, and didn't set a start date, AWS set your start date to 01/24/18 00:00 UTC. If you chose MONTHLY, AWS set your start date to 01/01/18 00:00 UTC. The defaults are the same for the AWS Billing and Cost Management console and the API. You can change your start date with the UpdateBudget operation.
      */
     Start?: GenericTimestamp;
     /**
@@ -513,7 +513,7 @@ declare namespace Budgets {
      */
     BudgetName: BudgetName;
     /**
-     * The previous notification associated with a budget.
+     * The previous notification that is associated with a budget.
      */
     OldNotification: Notification;
     /**
@@ -537,11 +537,11 @@ declare namespace Budgets {
      */
     Notification: Notification;
     /**
-     * The previous subscriber associated with a budget notification.
+     * The previous subscriber that is associated with a budget notification.
      */
     OldSubscriber: Subscriber;
     /**
-     * The updated subscriber associated with a budget notification.
+     * The updated subscriber that is associated with a budget notification.
      */
     NewSubscriber: Subscriber;
   }

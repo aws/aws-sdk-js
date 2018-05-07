@@ -867,11 +867,11 @@ declare namespace AlexaForBusiness {
     Timestamp?: Timestamp;
   }
   export type DeviceEventList = DeviceEvent[];
-  export type DeviceEventType = "CONNECTION_STATUS"|string;
+  export type DeviceEventType = "CONNECTION_STATUS"|"DEVICE_STATUS"|string;
   export type DeviceEventValue = string;
   export type DeviceName = string;
   export type DeviceSerialNumber = string;
-  export type DeviceStatus = "READY"|"PENDING"|"WAS_OFFLINE"|string;
+  export type DeviceStatus = "READY"|"PENDING"|"WAS_OFFLINE"|"DEREGISTERED"|string;
   export interface DeviceStatusDetail {
     /**
      * The device status detail code.

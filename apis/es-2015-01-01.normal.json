@@ -138,6 +138,38 @@
       ],
       "documentation":"<p> Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the <code> <a>DomainName</a> </code> to know what Limits are supported for modifying. </p>"
     },
+    "DescribeReservedElasticsearchInstanceOfferings":{
+      "name":"DescribeReservedElasticsearchInstanceOfferings",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-01-01/es/reservedInstanceOfferings"
+      },
+      "input":{"shape":"DescribeReservedElasticsearchInstanceOfferingsRequest"},
+      "output":{"shape":"DescribeReservedElasticsearchInstanceOfferingsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"InternalException"}
+      ],
+      "documentation":"<p>Lists available reserved Elasticsearch instance offerings.</p>"
+    },
+    "DescribeReservedElasticsearchInstances":{
+      "name":"DescribeReservedElasticsearchInstances",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-01-01/es/reservedInstances"
+      },
+      "input":{"shape":"DescribeReservedElasticsearchInstancesRequest"},
+      "output":{"shape":"DescribeReservedElasticsearchInstancesResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalException"},
+        {"shape":"ValidationException"},
+        {"shape":"DisabledOperationException"}
+      ],
+      "documentation":"<p>Returns information about reserved Elasticsearch instances for this account.</p>"
+    },
     "ListDomainNames":{
       "name":"ListDomainNames",
       "http":{
@@ -198,6 +230,24 @@
         {"shape":"InternalException"}
       ],
       "documentation":"<p>Returns all tags for the given Elasticsearch domain.</p>"
+    },
+    "PurchaseReservedElasticsearchInstanceOffering":{
+      "name":"PurchaseReservedElasticsearchInstanceOffering",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2015-01-01/es/purchaseReservedInstanceOffering"
+      },
+      "input":{"shape":"PurchaseReservedElasticsearchInstanceOfferingRequest"},
+      "output":{"shape":"PurchaseReservedElasticsearchInstanceOfferingResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalException"}
+      ],
+      "documentation":"<p>Allows you to purchase reserved Elasticsearch instances.</p>"
     },
     "RemoveTags":{
       "name":"RemoveTags",
@@ -559,6 +609,82 @@
       },
       "documentation":"<p> Container for the parameters received from <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. </p>"
     },
+    "DescribeReservedElasticsearchInstanceOfferingsRequest":{
+      "type":"structure",
+      "members":{
+        "ReservedElasticsearchInstanceOfferingId":{
+          "shape":"GUID",
+          "documentation":"<p>The offering identifier filter value. Use this parameter to show only the available offering that matches the specified reservation identifier.</p>",
+          "location":"querystring",
+          "locationName":"offeringId"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>NextToken should be sent in case if earlier API call produced result containing NextToken. It is used for pagination.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      },
+      "documentation":"<p>Container for parameters to <code>DescribeReservedElasticsearchInstanceOfferings</code></p>"
+    },
+    "DescribeReservedElasticsearchInstanceOfferingsResponse":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>Provides an identifier to allow retrieval of paginated results.</p>"
+        },
+        "ReservedElasticsearchInstanceOfferings":{
+          "shape":"ReservedElasticsearchInstanceOfferingList",
+          "documentation":"<p>List of reserved Elasticsearch instance offerings</p>"
+        }
+      },
+      "documentation":"<p>Container for results from <code>DescribeReservedElasticsearchInstanceOfferings</code></p>"
+    },
+    "DescribeReservedElasticsearchInstancesRequest":{
+      "type":"structure",
+      "members":{
+        "ReservedElasticsearchInstanceId":{
+          "shape":"GUID",
+          "documentation":"<p>The reserved instance identifier filter value. Use this parameter to show only the reservation that matches the specified reserved Elasticsearch instance ID.</p>",
+          "location":"querystring",
+          "locationName":"reservationId"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>NextToken should be sent in case if earlier API call produced result containing NextToken. It is used for pagination.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      },
+      "documentation":"<p>Container for parameters to <code>DescribeReservedElasticsearchInstances</code></p>"
+    },
+    "DescribeReservedElasticsearchInstancesResponse":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>Provides an identifier to allow retrieval of paginated results.</p>"
+        },
+        "ReservedElasticsearchInstances":{
+          "shape":"ReservedElasticsearchInstanceList",
+          "documentation":"<p>List of reserved Elasticsearch instances.</p>"
+        }
+      },
+      "documentation":"<p>Container for results from <code>DescribeReservedElasticsearchInstances</code></p>"
+    },
     "DisabledOperationException":{
       "type":"structure",
       "members":{
@@ -599,6 +725,7 @@
       "member":{"shape":"DomainName"},
       "documentation":"<p>A list of Elasticsearch domain names.</p>"
     },
+    "Double":{"type":"double"},
     "EBSOptions":{
       "type":"structure",
       "members":{
@@ -931,11 +1058,20 @@
       "value":{"shape":"ServiceUrl"}
     },
     "ErrorMessage":{"type":"string"},
+    "GUID":{
+      "type":"string",
+      "pattern":"\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}"
+    },
     "IdentityPoolId":{
       "type":"string",
       "max":55,
       "min":1,
       "pattern":"[\\w-]+:[0-9a-f-]+"
+    },
+    "InstanceCount":{
+      "type":"integer",
+      "documentation":"<p>Specifies the number of EC2 instances in the Elasticsearch domain.</p>",
+      "min":1
     },
     "InstanceCountLimits":{
       "type":"structure",
@@ -953,6 +1089,7 @@
       "documentation":"<p>InstanceLimits represents the list of instance related attributes that are available for given InstanceType. </p>"
     },
     "InstanceRole":{"type":"string"},
+    "Integer":{"type":"integer"},
     "IntegerClass":{"type":"integer"},
     "InternalException":{
       "type":"structure",
@@ -1212,6 +1349,60 @@
       "type":"string",
       "documentation":"<p>Access policy rules for an Elasticsearch domain service endpoints. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies\" target=\"_blank\">Configuring Access Policies</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>. The maximum size of a policy document is 100 KB.</p>"
     },
+    "PurchaseReservedElasticsearchInstanceOfferingRequest":{
+      "type":"structure",
+      "required":[
+        "ReservedElasticsearchInstanceOfferingId",
+        "ReservationName"
+      ],
+      "members":{
+        "ReservedElasticsearchInstanceOfferingId":{
+          "shape":"GUID",
+          "documentation":"<p>The ID of the reserved Elasticsearch instance offering to purchase.</p>"
+        },
+        "ReservationName":{
+          "shape":"ReservationToken",
+          "documentation":"<p>A customer-specified identifier to track this reservation.</p>"
+        },
+        "InstanceCount":{
+          "shape":"InstanceCount",
+          "documentation":"<p>The number of Elasticsearch instances to reserve.</p>"
+        }
+      },
+      "documentation":"<p>Container for parameters to <code>PurchaseReservedElasticsearchInstanceOffering</code></p>"
+    },
+    "PurchaseReservedElasticsearchInstanceOfferingResponse":{
+      "type":"structure",
+      "members":{
+        "ReservedElasticsearchInstanceId":{
+          "shape":"GUID",
+          "documentation":"<p>Details of the reserved Elasticsearch instance which was purchased.</p>"
+        },
+        "ReservationName":{
+          "shape":"ReservationToken",
+          "documentation":"<p>The customer-specified identifier used to track this reservation.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <code>PurchaseReservedElasticsearchInstanceOffering</code> operation.</p>"
+    },
+    "RecurringCharge":{
+      "type":"structure",
+      "members":{
+        "RecurringChargeAmount":{
+          "shape":"Double",
+          "documentation":"<p>The monetary amount of the recurring charge.</p>"
+        },
+        "RecurringChargeFrequency":{
+          "shape":"String",
+          "documentation":"<p>The frequency of the recurring charge.</p>"
+        }
+      },
+      "documentation":"<p>Contains the specific price and frequency of a recurring charges for a reserved Elasticsearch instance, or for a reserved Elasticsearch instance offering.</p>"
+    },
+    "RecurringChargeList":{
+      "type":"list",
+      "member":{"shape":"RecurringCharge"}
+    },
     "RemoveTagsRequest":{
       "type":"structure",
       "required":[
@@ -1229,6 +1420,123 @@
         }
       },
       "documentation":"<p>Container for the parameters to the <code><a>RemoveTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain from which you want to remove the specified <code>TagKey</code>.</p>"
+    },
+    "ReservationToken":{
+      "type":"string",
+      "max":64,
+      "min":5
+    },
+    "ReservedElasticsearchInstance":{
+      "type":"structure",
+      "members":{
+        "ReservationName":{
+          "shape":"ReservationToken",
+          "documentation":"<p>The customer-specified identifier to track this reservation.</p>"
+        },
+        "ReservedElasticsearchInstanceId":{
+          "shape":"GUID",
+          "documentation":"<p>The unique identifier for the reservation.</p>"
+        },
+        "ReservedElasticsearchInstanceOfferingId":{
+          "shape":"String",
+          "documentation":"<p>The offering identifier.</p>"
+        },
+        "ElasticsearchInstanceType":{
+          "shape":"ESPartitionInstanceType",
+          "documentation":"<p>The Elasticsearch instance type offered by the reserved instance offering.</p>"
+        },
+        "StartTime":{
+          "shape":"UpdateTimestamp",
+          "documentation":"<p>The time the reservation started.</p>"
+        },
+        "Duration":{
+          "shape":"Integer",
+          "documentation":"<p>The duration, in seconds, for which the Elasticsearch instance is reserved.</p>"
+        },
+        "FixedPrice":{
+          "shape":"Double",
+          "documentation":"<p>The upfront fixed charge you will paid to purchase the specific reserved Elasticsearch instance offering. </p>"
+        },
+        "UsagePrice":{
+          "shape":"Double",
+          "documentation":"<p>The rate you are charged for each hour for the domain that is using this reserved instance.</p>"
+        },
+        "CurrencyCode":{
+          "shape":"String",
+          "documentation":"<p>The currency code for the reserved Elasticsearch instance offering.</p>"
+        },
+        "ElasticsearchInstanceCount":{
+          "shape":"Integer",
+          "documentation":"<p>The number of Elasticsearch instances that have been reserved.</p>"
+        },
+        "State":{
+          "shape":"String",
+          "documentation":"<p>The state of the reserved Elasticsearch instance.</p>"
+        },
+        "PaymentOption":{
+          "shape":"ReservedElasticsearchInstancePaymentOption",
+          "documentation":"<p>The payment option as defined in the reserved Elasticsearch instance offering.</p>"
+        },
+        "RecurringCharges":{
+          "shape":"RecurringChargeList",
+          "documentation":"<p>The charge to your account regardless of whether you are creating any domains using the instance offering.</p>"
+        }
+      },
+      "documentation":"<p>Details of a reserved Elasticsearch instance.</p>"
+    },
+    "ReservedElasticsearchInstanceList":{
+      "type":"list",
+      "member":{"shape":"ReservedElasticsearchInstance"}
+    },
+    "ReservedElasticsearchInstanceOffering":{
+      "type":"structure",
+      "members":{
+        "ReservedElasticsearchInstanceOfferingId":{
+          "shape":"GUID",
+          "documentation":"<p>The Elasticsearch reserved instance offering identifier.</p>"
+        },
+        "ElasticsearchInstanceType":{
+          "shape":"ESPartitionInstanceType",
+          "documentation":"<p>The Elasticsearch instance type offered by the reserved instance offering.</p>"
+        },
+        "Duration":{
+          "shape":"Integer",
+          "documentation":"<p>The duration, in seconds, for which the offering will reserve the Elasticsearch instance.</p>"
+        },
+        "FixedPrice":{
+          "shape":"Double",
+          "documentation":"<p>The upfront fixed charge you will pay to purchase the specific reserved Elasticsearch instance offering. </p>"
+        },
+        "UsagePrice":{
+          "shape":"Double",
+          "documentation":"<p>The rate you are charged for each hour the domain that is using the offering is running.</p>"
+        },
+        "CurrencyCode":{
+          "shape":"String",
+          "documentation":"<p>The currency code for the reserved Elasticsearch instance offering.</p>"
+        },
+        "PaymentOption":{
+          "shape":"ReservedElasticsearchInstancePaymentOption",
+          "documentation":"<p>Payment option for the reserved Elasticsearch instance offering</p>"
+        },
+        "RecurringCharges":{
+          "shape":"RecurringChargeList",
+          "documentation":"<p>The charge to your account regardless of whether you are creating any domains using the instance offering.</p>"
+        }
+      },
+      "documentation":"<p>Details of a reserved Elasticsearch instance offering.</p>"
+    },
+    "ReservedElasticsearchInstanceOfferingList":{
+      "type":"list",
+      "member":{"shape":"ReservedElasticsearchInstanceOffering"}
+    },
+    "ReservedElasticsearchInstancePaymentOption":{
+      "type":"string",
+      "enum":[
+        "ALL_UPFRONT",
+        "PARTIAL_UPFRONT",
+        "NO_UPFRONT"
+      ]
     },
     "ResourceAlreadyExistsException":{
       "type":"structure",

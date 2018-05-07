@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.233.1-->
+<!--LATEST=2.234.1-->
 <!--ENTRYINSERT-->
+
+## 2.234.1
+* feature: AlexaForBusiness: This release adds the new Device status "DEREGISTERED". This release also adds DEVICE_STATUS as the new DeviceEventType.
+* feature: Budgets: "With this release, customers can use AWS Budgets to monitor how much of their Amazon EC2, Amazon RDS, Amazon Redshift, and Amazon ElastiCache instance usage is covered by reservations, and receive alerts when their coverage falls below the threshold they define."
+* feature: ES: This change brings support for Reserved Instances to AWS Elasticsearch.
+* feature: S3: Added BytesReturned details for Progress and Stats Events for Amazon S3 Select . 
 
 ## 2.233.1
 * feature: GuardDuty: Amazon GuardDuty is adding five new API operations for creating and managing filters. For each filter, you can specify a criteria and an action. The action you specify is applied to findings that match the specified criteria.

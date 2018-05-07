@@ -799,6 +799,7 @@ declare namespace S3 {
   export type BucketVersioningStatus = "Enabled"|"Suspended"|string;
   export type Buckets = Bucket[];
   export type BytesProcessed = number;
+  export type BytesReturned = number;
   export type BytesScanned = number;
   export interface CORSConfiguration {
     CORSRules: CORSRules;
@@ -2947,6 +2948,10 @@ declare namespace S3 {
      * Current number of uncompressed object bytes processed.
      */
     BytesProcessed?: BytesProcessed;
+    /**
+     * Current number of bytes of records payload data returned.
+     */
+    BytesReturned?: BytesReturned;
   }
   export interface ProgressEvent {
     /**
@@ -3675,6 +3680,10 @@ declare namespace S3 {
      * Total number of uncompressed object bytes processed.
      */
     BytesProcessed?: BytesProcessed;
+    /**
+     * Total number of bytes of records payload data returned.
+     */
+    BytesReturned?: BytesReturned;
   }
   export interface StatsEvent {
     /**
