@@ -3459,7 +3459,7 @@ declare namespace EC2 {
     /**
      * The ID of the conversion task.
      */
-    ConversionTaskId: String;
+    ConversionTaskId?: String;
     /**
      * The time when the task expires. If the upload isn't complete before the expiration time, we automatically cancel the task.
      */
@@ -3475,7 +3475,7 @@ declare namespace EC2 {
     /**
      * The state of the conversion task.
      */
-    State: ConversionTaskState;
+    State?: ConversionTaskState;
     /**
      * The status message related to the conversion task.
      */
@@ -3597,6 +3597,26 @@ declare namespace EC2 {
      * The ID of the new snapshot.
      */
     SnapshotId?: String;
+  }
+  export interface CpuOptions {
+    /**
+     * The number of CPU cores for the instance.
+     */
+    CoreCount?: Integer;
+    /**
+     * The number of threads per CPU core.
+     */
+    ThreadsPerCore?: Integer;
+  }
+  export interface CpuOptionsRequest {
+    /**
+     * The number of CPU cores for the instance.
+     */
+    CoreCount?: Integer;
+    /**
+     * The number of threads per CPU core. To disable Intel Hyper-Threading Technology for the instance, specify a value of 1. Otherwise, specify the default value of 2.
+     */
+    ThreadsPerCore?: Integer;
   }
   export interface CreateCustomerGatewayRequest {
     /**
@@ -7728,15 +7748,15 @@ declare namespace EC2 {
     /**
      * The disk image format.
      */
-    Format: DiskImageFormat;
+    Format?: DiskImageFormat;
     /**
      * A presigned URL for the import manifest stored in Amazon S3. For information about creating a presigned URL for an Amazon S3 object, read the "Query String Request Authentication Alternative" section of the Authenticating REST Requests topic in the Amazon Simple Storage Service Developer Guide. For information about the import manifest referenced by this API action, see VM Import Manifest.
      */
-    ImportManifestUrl: String;
+    ImportManifestUrl?: String;
     /**
      * The size of the disk image, in GiB.
      */
-    Size: Long;
+    Size?: Long;
   }
   export interface DiskImageDetail {
     /**
@@ -7758,7 +7778,7 @@ declare namespace EC2 {
     /**
      * The volume identifier.
      */
-    Id: String;
+    Id?: String;
     /**
      * The size of the volume, in GiB.
      */
@@ -9207,7 +9227,7 @@ declare namespace EC2 {
     /**
      * One or more volumes.
      */
-    Volumes: ImportInstanceVolumeDetailSet;
+    Volumes?: ImportInstanceVolumeDetailSet;
   }
   export interface ImportInstanceVolumeDetailItem {
     /**
@@ -9352,11 +9372,11 @@ declare namespace EC2 {
     /**
      * The Availability Zone where the resulting volume will reside.
      */
-    AvailabilityZone: String;
+    AvailabilityZone?: String;
     /**
      * The number of bytes converted so far.
      */
-    BytesConverted: Long;
+    BytesConverted?: Long;
     /**
      * The description you provided when starting the import volume task.
      */
@@ -9364,11 +9384,11 @@ declare namespace EC2 {
     /**
      * The image.
      */
-    Image: DiskImageDescription;
+    Image?: DiskImageDescription;
     /**
      * The volume.
      */
-    Volume: DiskImageVolumeDescription;
+    Volume?: DiskImageVolumeDescription;
   }
   export interface Instance {
     /**
@@ -9527,6 +9547,10 @@ declare namespace EC2 {
      * The virtualization type of the instance.
      */
     VirtualizationType?: VirtualizationType;
+    /**
+     * The CPU options for the instance.
+     */
+    CpuOptions?: CpuOptions;
   }
   export interface InstanceAttribute {
     /**
@@ -13553,6 +13577,10 @@ declare namespace EC2 {
      * The credit option for CPU usage of the instance. Valid values are standard and unlimited. To change this attribute after launch, use ModifyInstanceCreditSpecification. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide. Default: standard 
      */
     CreditSpecification?: CreditSpecificationRequest;
+    /**
+     * The CPU options for the instance. For more information, see Optimizing CPU Options in the Amazon Elastic Compute Cloud User Guide.
+     */
+    CpuOptions?: CpuOptionsRequest;
   }
   export interface RunScheduledInstancesRequest {
     /**

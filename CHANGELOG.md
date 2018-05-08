@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.234.1-->
+<!--LATEST=2.235.1-->
 <!--ENTRYINSERT-->
+
+## 2.235.1
+* feature: EC2: Enable support for specifying CPU options during instance launch.
 
 ## 2.234.1
 * feature: AlexaForBusiness: This release adds the new Device status "DEREGISTERED". This release also adds DEVICE_STATUS as the new DeviceEventType.

@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Enable support for specifying CPU options during instance launch."
+    }
+]
