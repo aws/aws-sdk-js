@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "XML",
+  "description": "Replaces XMLBuilder dependency with a light-weight XML builder."
+}
