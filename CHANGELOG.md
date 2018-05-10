@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.236.1-->
+<!--LATEST=2.237.1-->
 <!--ENTRYINSERT-->
+
+## 2.237.1
+* feature: GameLift: AutoScaling Target Tracking scaling simplification along with StartFleetActions and StopFleetActions APIs to suspend and resume automatic scaling at will.
 
 ## 2.236.1
 * feature: Budgets: Updating the regex for the NumericValue fields.
