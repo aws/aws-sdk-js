@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.235.1-->
+<!--LATEST=2.236.1-->
 <!--ENTRYINSERT-->
+
+## 2.236.1
+* feature: Budgets: Updating the regex for the NumericValue fields.
+* feature: EC2: Enable support for latest flag with Get Console Output
+* feature: RDS: Changes to support the Aurora MySQL Backtrack feature.
 
 ## 2.235.1
 * feature: EC2: Enable support for specifying CPU options during instance launch.

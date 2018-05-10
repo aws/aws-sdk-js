@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.235.1
+// AWS SDK for JavaScript v2.236.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -41440,6 +41440,9 @@ module.exports={
           "InstanceId": {},
           "DryRun": {
             "locationName": "dryRun",
+            "type": "boolean"
+          },
+          "Latest": {
             "type": "boolean"
           }
         }
@@ -94232,6 +94235,31 @@ module.exports={
         }
       }
     },
+    "BacktrackDBCluster": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DBClusterIdentifier",
+          "BacktrackTo"
+        ],
+        "members": {
+          "DBClusterIdentifier": {},
+          "BacktrackTo": {
+            "type": "timestamp"
+          },
+          "Force": {
+            "type": "boolean"
+          },
+          "UseEarliestTimeOnPointInTimeUnavailable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "shape": "Sr",
+        "resultWrapper": "BacktrackDBClusterResult"
+      }
+    },
     "CopyDBClusterParameterGroup": {
       "input": {
         "type": "structure",
@@ -94254,7 +94282,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBClusterParameterGroup": {
-            "shape": "Sr"
+            "shape": "Su"
           }
         }
       }
@@ -94285,7 +94313,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBClusterSnapshot": {
-            "shape": "Sv"
+            "shape": "Sx"
           }
         }
       }
@@ -94312,7 +94340,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBParameterGroup": {
-            "shape": "S10"
+            "shape": "S12"
           }
         }
       }
@@ -94344,7 +94372,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBSnapshot": {
-            "shape": "S13"
+            "shape": "S15"
           }
         }
       }
@@ -94371,7 +94399,7 @@ module.exports={
         "type": "structure",
         "members": {
           "OptionGroup": {
-            "shape": "S17"
+            "shape": "S19"
           }
         }
       }
@@ -94385,7 +94413,7 @@ module.exports={
         ],
         "members": {
           "AvailabilityZones": {
-            "shape": "Sw"
+            "shape": "Sy"
           },
           "BackupRetentionPeriod": {
             "type": "integer"
@@ -94395,7 +94423,7 @@ module.exports={
           "DBClusterIdentifier": {},
           "DBClusterParameterGroupName": {},
           "VpcSecurityGroupIds": {
-            "shape": "S1h"
+            "shape": "S1j"
           },
           "DBSubnetGroupName": {},
           "Engine": {},
@@ -94420,6 +94448,9 @@ module.exports={
           "EnableIAMDatabaseAuthentication": {
             "type": "boolean"
           },
+          "BacktrackWindow": {
+            "type": "long"
+          },
           "SourceRegion": {}
         }
       },
@@ -94428,7 +94459,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1j"
+            "shape": "S1m"
           }
         }
       }
@@ -94455,7 +94486,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBClusterParameterGroup": {
-            "shape": "Sr"
+            "shape": "Su"
           }
         }
       }
@@ -94480,7 +94511,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBClusterSnapshot": {
-            "shape": "Sv"
+            "shape": "Sx"
           }
         }
       }
@@ -94504,10 +94535,10 @@ module.exports={
           "MasterUsername": {},
           "MasterUserPassword": {},
           "DBSecurityGroups": {
-            "shape": "S1w"
+            "shape": "S1z"
           },
           "VpcSecurityGroupIds": {
-            "shape": "S1h"
+            "shape": "S1j"
           },
           "AvailabilityZone": {},
           "DBSubnetGroupName": {},
@@ -94568,7 +94599,7 @@ module.exports={
           },
           "PerformanceInsightsKMSKeyId": {},
           "EnableCloudwatchLogsExports": {
-            "shape": "S1x"
+            "shape": "S20"
           }
         }
       },
@@ -94577,7 +94608,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -94632,7 +94663,7 @@ module.exports={
           },
           "PerformanceInsightsKMSKeyId": {},
           "EnableCloudwatchLogsExports": {
-            "shape": "S1x"
+            "shape": "S20"
           },
           "SourceRegion": {}
         }
@@ -94642,7 +94673,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -94669,7 +94700,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBParameterGroup": {
-            "shape": "S10"
+            "shape": "S12"
           }
         }
       }
@@ -94719,7 +94750,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBSnapshot": {
-            "shape": "S13"
+            "shape": "S15"
           }
         }
       }
@@ -94736,7 +94767,7 @@ module.exports={
           "DBSubnetGroupName": {},
           "DBSubnetGroupDescription": {},
           "SubnetIds": {
-            "shape": "S2q"
+            "shape": "S2t"
           },
           "Tags": {
             "shape": "Sa"
@@ -94748,7 +94779,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBSubnetGroup": {
-            "shape": "S23"
+            "shape": "S26"
           }
         }
       }
@@ -94812,7 +94843,7 @@ module.exports={
         "type": "structure",
         "members": {
           "OptionGroup": {
-            "shape": "S17"
+            "shape": "S19"
           }
         }
       }
@@ -94836,7 +94867,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1j"
+            "shape": "S1m"
           }
         }
       }
@@ -94867,7 +94898,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBClusterSnapshot": {
-            "shape": "Sv"
+            "shape": "Sx"
           }
         }
       }
@@ -94891,7 +94922,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -94933,7 +94964,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBSnapshot": {
-            "shape": "S13"
+            "shape": "S15"
           }
         }
       }
@@ -95015,7 +95046,7 @@ module.exports={
         "members": {
           "CertificateIdentifier": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95051,13 +95082,46 @@ module.exports={
         }
       }
     },
+    "DescribeDBClusterBacktracks": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DBClusterIdentifier"
+        ],
+        "members": {
+          "DBClusterIdentifier": {},
+          "BacktrackIdentifier": {},
+          "Filters": {
+            "shape": "S3k"
+          },
+          "MaxRecords": {
+            "type": "integer"
+          },
+          "Marker": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "DescribeDBClusterBacktracksResult",
+        "type": "structure",
+        "members": {
+          "Marker": {},
+          "DBClusterBacktracks": {
+            "type": "list",
+            "member": {
+              "shape": "Sr",
+              "locationName": "DBClusterBacktrack"
+            }
+          }
+        }
+      }
+    },
     "DescribeDBClusterParameterGroups": {
       "input": {
         "type": "structure",
         "members": {
           "DBClusterParameterGroupName": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95073,7 +95137,7 @@ module.exports={
           "DBClusterParameterGroups": {
             "type": "list",
             "member": {
-              "shape": "Sr",
+              "shape": "Su",
               "locationName": "DBClusterParameterGroup"
             }
           }
@@ -95090,7 +95154,7 @@ module.exports={
           "DBClusterParameterGroupName": {},
           "Source": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95103,7 +95167,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Parameters": {
-            "shape": "S3s"
+            "shape": "S3y"
           },
           "Marker": {}
         }
@@ -95124,7 +95188,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBClusterSnapshotAttributesResult": {
-            "shape": "S3x"
+            "shape": "S43"
           }
         }
       }
@@ -95137,7 +95201,7 @@ module.exports={
           "DBClusterSnapshotIdentifier": {},
           "SnapshotType": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95159,7 +95223,7 @@ module.exports={
           "DBClusterSnapshots": {
             "type": "list",
             "member": {
-              "shape": "Sv",
+              "shape": "Sx",
               "locationName": "DBClusterSnapshot"
             }
           }
@@ -95172,7 +95236,7 @@ module.exports={
         "members": {
           "DBClusterIdentifier": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95188,7 +95252,7 @@ module.exports={
           "DBClusters": {
             "type": "list",
             "member": {
-              "shape": "S1j",
+              "shape": "S1m",
               "locationName": "DBCluster"
             }
           }
@@ -95203,7 +95267,7 @@ module.exports={
           "EngineVersion": {},
           "DBParameterGroupFamily": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95237,12 +95301,12 @@ module.exports={
                 "DBEngineDescription": {},
                 "DBEngineVersionDescription": {},
                 "DefaultCharacterSet": {
-                  "shape": "S4b"
+                  "shape": "S4h"
                 },
                 "SupportedCharacterSets": {
                   "type": "list",
                   "member": {
-                    "shape": "S4b",
+                    "shape": "S4h",
                     "locationName": "CharacterSet"
                   }
                 },
@@ -95275,7 +95339,7 @@ module.exports={
                   }
                 },
                 "ExportableLogTypes": {
-                  "shape": "S1x"
+                  "shape": "S20"
                 },
                 "SupportsLogExportsToCloudwatchLogs": {
                   "type": "boolean"
@@ -95295,7 +95359,7 @@ module.exports={
         "members": {
           "DBInstanceIdentifier": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95311,7 +95375,7 @@ module.exports={
           "DBInstances": {
             "type": "list",
             "member": {
-              "shape": "S1z",
+              "shape": "S22",
               "locationName": "DBInstance"
             }
           }
@@ -95334,7 +95398,7 @@ module.exports={
             "type": "long"
           },
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95372,7 +95436,7 @@ module.exports={
         "members": {
           "DBParameterGroupName": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95388,7 +95452,7 @@ module.exports={
           "DBParameterGroups": {
             "type": "list",
             "member": {
-              "shape": "S10",
+              "shape": "S12",
               "locationName": "DBParameterGroup"
             }
           }
@@ -95405,7 +95469,7 @@ module.exports={
           "DBParameterGroupName": {},
           "Source": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95418,7 +95482,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Parameters": {
-            "shape": "S3s"
+            "shape": "S3y"
           },
           "Marker": {}
         }
@@ -95430,7 +95494,7 @@ module.exports={
         "members": {
           "DBSecurityGroupName": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95468,7 +95532,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBSnapshotAttributesResult": {
-            "shape": "S4y"
+            "shape": "S54"
           }
         }
       }
@@ -95481,7 +95545,7 @@ module.exports={
           "DBSnapshotIdentifier": {},
           "SnapshotType": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95503,7 +95567,7 @@ module.exports={
           "DBSnapshots": {
             "type": "list",
             "member": {
-              "shape": "S13",
+              "shape": "S15",
               "locationName": "DBSnapshot"
             }
           }
@@ -95516,7 +95580,7 @@ module.exports={
         "members": {
           "DBSubnetGroupName": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95532,7 +95596,7 @@ module.exports={
           "DBSubnetGroups": {
             "type": "list",
             "member": {
-              "shape": "S23",
+              "shape": "S26",
               "locationName": "DBSubnetGroup"
             }
           }
@@ -95548,7 +95612,7 @@ module.exports={
         "members": {
           "DBParameterGroupFamily": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95561,7 +95625,7 @@ module.exports={
         "type": "structure",
         "members": {
           "EngineDefaults": {
-            "shape": "S59"
+            "shape": "S5f"
           }
         }
       }
@@ -95575,7 +95639,7 @@ module.exports={
         "members": {
           "DBParameterGroupFamily": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95588,7 +95652,7 @@ module.exports={
         "type": "structure",
         "members": {
           "EngineDefaults": {
-            "shape": "S59"
+            "shape": "S5f"
           }
         }
       }
@@ -95599,7 +95663,7 @@ module.exports={
         "members": {
           "SourceType": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           }
         }
       },
@@ -95630,7 +95694,7 @@ module.exports={
         "members": {
           "SubscriptionName": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95672,7 +95736,7 @@ module.exports={
             "shape": "S7"
           },
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95717,7 +95781,7 @@ module.exports={
           "EngineName": {},
           "MajorEngineVersion": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95816,7 +95880,7 @@ module.exports={
         "members": {
           "OptionGroupName": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "Marker": {},
           "MaxRecords": {
@@ -95833,7 +95897,7 @@ module.exports={
           "OptionGroupsList": {
             "type": "list",
             "member": {
-              "shape": "S17",
+              "shape": "S19",
               "locationName": "OptionGroup"
             }
           },
@@ -95856,7 +95920,7 @@ module.exports={
             "type": "boolean"
           },
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95881,7 +95945,7 @@ module.exports={
                 "AvailabilityZones": {
                   "type": "list",
                   "member": {
-                    "shape": "S26",
+                    "shape": "S29",
                     "locationName": "AvailabilityZone"
                   }
                 },
@@ -95942,7 +96006,7 @@ module.exports={
         "members": {
           "ResourceIdentifier": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "Marker": {},
           "MaxRecords": {
@@ -95979,7 +96043,7 @@ module.exports={
             "type": "boolean"
           },
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -95995,7 +96059,7 @@ module.exports={
           "ReservedDBInstances": {
             "type": "list",
             "member": {
-              "shape": "S6d",
+              "shape": "S6j",
               "locationName": "ReservedDBInstance"
             }
           }
@@ -96015,7 +96079,7 @@ module.exports={
             "type": "boolean"
           },
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           },
           "MaxRecords": {
             "type": "integer"
@@ -96052,7 +96116,7 @@ module.exports={
                   "type": "boolean"
                 },
                 "RecurringCharges": {
-                  "shape": "S6f"
+                  "shape": "S6l"
                 }
               },
               "wrapper": true
@@ -96071,7 +96135,7 @@ module.exports={
           },
           "Marker": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           }
         }
       },
@@ -96120,10 +96184,10 @@ module.exports={
                   "members": {
                     "StorageType": {},
                     "StorageSize": {
-                      "shape": "S6u"
+                      "shape": "S70"
                     },
                     "ProvisionedIops": {
-                      "shape": "S6u"
+                      "shape": "S70"
                     },
                     "IopsToStorageRatio": {
                       "type": "list",
@@ -96190,7 +96254,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1j"
+            "shape": "S1m"
           }
         }
       }
@@ -96204,7 +96268,7 @@ module.exports={
         "members": {
           "ResourceName": {},
           "Filters": {
-            "shape": "S3h"
+            "shape": "S3k"
           }
         }
       },
@@ -96235,7 +96299,7 @@ module.exports={
           },
           "DBClusterParameterGroupName": {},
           "VpcSecurityGroupIds": {
-            "shape": "S1h"
+            "shape": "S1j"
           },
           "Port": {
             "type": "integer"
@@ -96247,6 +96311,9 @@ module.exports={
           "EnableIAMDatabaseAuthentication": {
             "type": "boolean"
           },
+          "BacktrackWindow": {
+            "type": "long"
+          },
           "EngineVersion": {}
         }
       },
@@ -96255,7 +96322,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1j"
+            "shape": "S1m"
           }
         }
       }
@@ -96270,12 +96337,12 @@ module.exports={
         "members": {
           "DBClusterParameterGroupName": {},
           "Parameters": {
-            "shape": "S3s"
+            "shape": "S3y"
           }
         }
       },
       "output": {
-        "shape": "S77",
+        "shape": "S7d",
         "resultWrapper": "ModifyDBClusterParameterGroupResult"
       }
     },
@@ -96290,10 +96357,10 @@ module.exports={
           "DBClusterSnapshotIdentifier": {},
           "AttributeName": {},
           "ValuesToAdd": {
-            "shape": "S40"
+            "shape": "S46"
           },
           "ValuesToRemove": {
-            "shape": "S40"
+            "shape": "S46"
           }
         }
       },
@@ -96302,7 +96369,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBClusterSnapshotAttributesResult": {
-            "shape": "S3x"
+            "shape": "S43"
           }
         }
       }
@@ -96321,10 +96388,10 @@ module.exports={
           "DBInstanceClass": {},
           "DBSubnetGroupName": {},
           "DBSecurityGroups": {
-            "shape": "S1w"
+            "shape": "S1z"
           },
           "VpcSecurityGroupIds": {
-            "shape": "S1h"
+            "shape": "S1j"
           },
           "ApplyImmediately": {
             "type": "boolean"
@@ -96385,10 +96452,10 @@ module.exports={
             "type": "structure",
             "members": {
               "EnableLogTypes": {
-                "shape": "S1x"
+                "shape": "S20"
               },
               "DisableLogTypes": {
-                "shape": "S1x"
+                "shape": "S20"
               }
             }
           }
@@ -96399,7 +96466,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -96414,12 +96481,12 @@ module.exports={
         "members": {
           "DBParameterGroupName": {},
           "Parameters": {
-            "shape": "S3s"
+            "shape": "S3y"
           }
         }
       },
       "output": {
-        "shape": "S7e",
+        "shape": "S7k",
         "resultWrapper": "ModifyDBParameterGroupResult"
       }
     },
@@ -96440,7 +96507,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBSnapshot": {
-            "shape": "S13"
+            "shape": "S15"
           }
         }
       }
@@ -96456,10 +96523,10 @@ module.exports={
           "DBSnapshotIdentifier": {},
           "AttributeName": {},
           "ValuesToAdd": {
-            "shape": "S40"
+            "shape": "S46"
           },
           "ValuesToRemove": {
-            "shape": "S40"
+            "shape": "S46"
           }
         }
       },
@@ -96468,7 +96535,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBSnapshotAttributesResult": {
-            "shape": "S4y"
+            "shape": "S54"
           }
         }
       }
@@ -96484,7 +96551,7 @@ module.exports={
           "DBSubnetGroupName": {},
           "DBSubnetGroupDescription": {},
           "SubnetIds": {
-            "shape": "S2q"
+            "shape": "S2t"
           }
         }
       },
@@ -96493,7 +96560,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBSubnetGroup": {
-            "shape": "S23"
+            "shape": "S26"
           }
         }
       }
@@ -96549,15 +96616,15 @@ module.exports={
                 },
                 "OptionVersion": {},
                 "DBSecurityGroupMemberships": {
-                  "shape": "S1w"
+                  "shape": "S1z"
                 },
                 "VpcSecurityGroupMemberships": {
-                  "shape": "S1h"
+                  "shape": "S1j"
                 },
                 "OptionSettings": {
                   "type": "list",
                   "member": {
-                    "shape": "S1b",
+                    "shape": "S1d",
                     "locationName": "OptionSetting"
                   }
                 }
@@ -96578,7 +96645,7 @@ module.exports={
         "type": "structure",
         "members": {
           "OptionGroup": {
-            "shape": "S17"
+            "shape": "S19"
           }
         }
       }
@@ -96602,7 +96669,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -96622,7 +96689,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1j"
+            "shape": "S1m"
           }
         }
       }
@@ -96649,7 +96716,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ReservedDBInstance": {
-            "shape": "S6d"
+            "shape": "S6j"
           }
         }
       }
@@ -96672,7 +96739,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -96740,12 +96807,12 @@ module.exports={
             "type": "boolean"
           },
           "Parameters": {
-            "shape": "S3s"
+            "shape": "S3y"
           }
         }
       },
       "output": {
-        "shape": "S77",
+        "shape": "S7d",
         "resultWrapper": "ResetDBClusterParameterGroupResult"
       }
     },
@@ -96761,12 +96828,12 @@ module.exports={
             "type": "boolean"
           },
           "Parameters": {
-            "shape": "S3s"
+            "shape": "S3y"
           }
         }
       },
       "output": {
-        "shape": "S7e",
+        "shape": "S7k",
         "resultWrapper": "ResetDBParameterGroupResult"
       }
     },
@@ -96785,7 +96852,7 @@ module.exports={
         ],
         "members": {
           "AvailabilityZones": {
-            "shape": "Sw"
+            "shape": "Sy"
           },
           "BackupRetentionPeriod": {
             "type": "integer"
@@ -96795,7 +96862,7 @@ module.exports={
           "DBClusterIdentifier": {},
           "DBClusterParameterGroupName": {},
           "VpcSecurityGroupIds": {
-            "shape": "S1h"
+            "shape": "S1j"
           },
           "DBSubnetGroupName": {},
           "Engine": {},
@@ -96822,7 +96889,10 @@ module.exports={
           "SourceEngineVersion": {},
           "S3BucketName": {},
           "S3Prefix": {},
-          "S3IngestionRoleArn": {}
+          "S3IngestionRoleArn": {},
+          "BacktrackWindow": {
+            "type": "long"
+          }
         }
       },
       "output": {
@@ -96830,7 +96900,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1j"
+            "shape": "S1m"
           }
         }
       }
@@ -96845,7 +96915,7 @@ module.exports={
         ],
         "members": {
           "AvailabilityZones": {
-            "shape": "Sw"
+            "shape": "Sy"
           },
           "DBClusterIdentifier": {},
           "SnapshotIdentifier": {},
@@ -96858,7 +96928,7 @@ module.exports={
           "DatabaseName": {},
           "OptionGroupName": {},
           "VpcSecurityGroupIds": {
-            "shape": "S1h"
+            "shape": "S1j"
           },
           "Tags": {
             "shape": "Sa"
@@ -96866,6 +96936,9 @@ module.exports={
           "KmsKeyId": {},
           "EnableIAMDatabaseAuthentication": {
             "type": "boolean"
+          },
+          "BacktrackWindow": {
+            "type": "long"
           }
         }
       },
@@ -96874,7 +96947,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1j"
+            "shape": "S1m"
           }
         }
       }
@@ -96902,7 +96975,7 @@ module.exports={
           "DBSubnetGroupName": {},
           "OptionGroupName": {},
           "VpcSecurityGroupIds": {
-            "shape": "S1h"
+            "shape": "S1j"
           },
           "Tags": {
             "shape": "Sa"
@@ -96910,6 +96983,9 @@ module.exports={
           "KmsKeyId": {},
           "EnableIAMDatabaseAuthentication": {
             "type": "boolean"
+          },
+          "BacktrackWindow": {
+            "type": "long"
           }
         }
       },
@@ -96918,7 +96994,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1j"
+            "shape": "S1m"
           }
         }
       }
@@ -96970,7 +97046,7 @@ module.exports={
             "type": "boolean"
           },
           "EnableCloudwatchLogsExports": {
-            "shape": "S1x"
+            "shape": "S20"
           }
         }
       },
@@ -96979,7 +97055,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -97007,10 +97083,10 @@ module.exports={
           "MasterUsername": {},
           "MasterUserPassword": {},
           "DBSecurityGroups": {
-            "shape": "S1w"
+            "shape": "S1z"
           },
           "VpcSecurityGroupIds": {
-            "shape": "S1h"
+            "shape": "S1j"
           },
           "AvailabilityZone": {},
           "DBSubnetGroupName": {},
@@ -97066,7 +97142,7 @@ module.exports={
           },
           "PerformanceInsightsKMSKeyId": {},
           "EnableCloudwatchLogsExports": {
-            "shape": "S1x"
+            "shape": "S20"
           }
         }
       },
@@ -97075,7 +97151,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -97133,7 +97209,7 @@ module.exports={
             "type": "boolean"
           },
           "EnableCloudwatchLogsExports": {
-            "shape": "S1x"
+            "shape": "S20"
           }
         }
       },
@@ -97142,7 +97218,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -97186,7 +97262,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -97207,7 +97283,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBInstance": {
-            "shape": "S1z"
+            "shape": "S22"
           }
         }
       }
@@ -97325,6 +97401,23 @@ module.exports={
     "Sr": {
       "type": "structure",
       "members": {
+        "DBClusterIdentifier": {},
+        "BacktrackIdentifier": {},
+        "BacktrackTo": {
+          "type": "timestamp"
+        },
+        "BacktrackedFrom": {
+          "type": "timestamp"
+        },
+        "BacktrackRequestCreationTime": {
+          "type": "timestamp"
+        },
+        "Status": {}
+      }
+    },
+    "Su": {
+      "type": "structure",
+      "members": {
         "DBClusterParameterGroupName": {},
         "DBParameterGroupFamily": {},
         "Description": {},
@@ -97332,11 +97425,11 @@ module.exports={
       },
       "wrapper": true
     },
-    "Sv": {
+    "Sx": {
       "type": "structure",
       "members": {
         "AvailabilityZones": {
-          "shape": "Sw"
+          "shape": "Sy"
         },
         "DBClusterSnapshotIdentifier": {},
         "DBClusterIdentifier": {},
@@ -97374,13 +97467,13 @@ module.exports={
       },
       "wrapper": true
     },
-    "Sw": {
+    "Sy": {
       "type": "list",
       "member": {
         "locationName": "AvailabilityZone"
       }
     },
-    "S10": {
+    "S12": {
       "type": "structure",
       "members": {
         "DBParameterGroupName": {},
@@ -97390,7 +97483,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S13": {
+    "S15": {
       "type": "structure",
       "members": {
         "DBSnapshotIdentifier": {},
@@ -97438,7 +97531,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S17": {
+    "S19": {
       "type": "structure",
       "members": {
         "OptionGroupName": {},
@@ -97466,15 +97559,15 @@ module.exports={
               "OptionSettings": {
                 "type": "list",
                 "member": {
-                  "shape": "S1b",
+                  "shape": "S1d",
                   "locationName": "OptionSetting"
                 }
               },
               "DBSecurityGroupMemberships": {
-                "shape": "S1c"
+                "shape": "S1e"
               },
               "VpcSecurityGroupMemberships": {
-                "shape": "S1e"
+                "shape": "S1g"
               }
             }
           }
@@ -97487,7 +97580,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S1b": {
+    "S1d": {
       "type": "structure",
       "members": {
         "Name": {},
@@ -97505,7 +97598,7 @@ module.exports={
         }
       }
     },
-    "S1c": {
+    "S1e": {
       "type": "list",
       "member": {
         "locationName": "DBSecurityGroup",
@@ -97516,7 +97609,7 @@ module.exports={
         }
       }
     },
-    "S1e": {
+    "S1g": {
       "type": "list",
       "member": {
         "locationName": "VpcSecurityGroupMembership",
@@ -97527,20 +97620,20 @@ module.exports={
         }
       }
     },
-    "S1h": {
+    "S1j": {
       "type": "list",
       "member": {
         "locationName": "VpcSecurityGroupId"
       }
     },
-    "S1j": {
+    "S1m": {
       "type": "structure",
       "members": {
         "AllocatedStorage": {
           "type": "integer"
         },
         "AvailabilityZones": {
-          "shape": "Sw"
+          "shape": "Sy"
         },
         "BackupRetentionPeriod": {
           "type": "integer"
@@ -97608,7 +97701,7 @@ module.exports={
           }
         },
         "VpcSecurityGroups": {
-          "shape": "S1e"
+          "shape": "S1g"
         },
         "HostedZoneId": {},
         "StorageEncrypted": {
@@ -97634,21 +97727,30 @@ module.exports={
         "CloneGroupId": {},
         "ClusterCreateTime": {
           "type": "timestamp"
+        },
+        "EarliestBacktrackTime": {
+          "type": "timestamp"
+        },
+        "BacktrackWindow": {
+          "type": "long"
+        },
+        "BacktrackConsumedChangeRecords": {
+          "type": "long"
         }
       },
       "wrapper": true
     },
-    "S1w": {
+    "S1z": {
       "type": "list",
       "member": {
         "locationName": "DBSecurityGroupName"
       }
     },
-    "S1x": {
+    "S20": {
       "type": "list",
       "member": {}
     },
-    "S1z": {
+    "S22": {
       "type": "structure",
       "members": {
         "DBInstanceIdentifier": {},
@@ -97678,10 +97780,10 @@ module.exports={
           "type": "integer"
         },
         "DBSecurityGroups": {
-          "shape": "S1c"
+          "shape": "S1e"
         },
         "VpcSecurityGroups": {
-          "shape": "S1e"
+          "shape": "S1g"
         },
         "DBParameterGroups": {
           "type": "list",
@@ -97696,7 +97798,7 @@ module.exports={
         },
         "AvailabilityZone": {},
         "DBSubnetGroup": {
-          "shape": "S23"
+          "shape": "S26"
         },
         "PreferredMaintenanceWindow": {},
         "PendingModifiedValues": {
@@ -97729,10 +97831,10 @@ module.exports={
               "type": "structure",
               "members": {
                 "LogTypesToEnable": {
-                  "shape": "S1x"
+                  "shape": "S20"
                 },
                 "LogTypesToDisable": {
-                  "shape": "S1x"
+                  "shape": "S20"
                 }
               }
             }
@@ -97842,12 +97944,12 @@ module.exports={
         },
         "PerformanceInsightsKMSKeyId": {},
         "EnabledCloudwatchLogsExports": {
-          "shape": "S1x"
+          "shape": "S20"
         }
       },
       "wrapper": true
     },
-    "S23": {
+    "S26": {
       "type": "structure",
       "members": {
         "DBSubnetGroupName": {},
@@ -97862,7 +97964,7 @@ module.exports={
             "members": {
               "SubnetIdentifier": {},
               "SubnetAvailabilityZone": {
-                "shape": "S26"
+                "shape": "S29"
               },
               "SubnetStatus": {}
             }
@@ -97872,20 +97974,20 @@ module.exports={
       },
       "wrapper": true
     },
-    "S26": {
+    "S29": {
       "type": "structure",
       "members": {
         "Name": {}
       },
       "wrapper": true
     },
-    "S2q": {
+    "S2t": {
       "type": "list",
       "member": {
         "locationName": "SubnetIdentifier"
       }
     },
-    "S3h": {
+    "S3k": {
       "type": "list",
       "member": {
         "locationName": "Filter",
@@ -97905,7 +98007,7 @@ module.exports={
         }
       }
     },
-    "S3s": {
+    "S3y": {
       "type": "list",
       "member": {
         "locationName": "Parameter",
@@ -97926,7 +98028,7 @@ module.exports={
         }
       }
     },
-    "S3x": {
+    "S43": {
       "type": "structure",
       "members": {
         "DBClusterSnapshotIdentifier": {},
@@ -97938,7 +98040,7 @@ module.exports={
             "members": {
               "AttributeName": {},
               "AttributeValues": {
-                "shape": "S40"
+                "shape": "S46"
               }
             }
           }
@@ -97946,20 +98048,20 @@ module.exports={
       },
       "wrapper": true
     },
-    "S40": {
+    "S46": {
       "type": "list",
       "member": {
         "locationName": "AttributeValue"
       }
     },
-    "S4b": {
+    "S4h": {
       "type": "structure",
       "members": {
         "CharacterSetName": {},
         "CharacterSetDescription": {}
       }
     },
-    "S4y": {
+    "S54": {
       "type": "structure",
       "members": {
         "DBSnapshotIdentifier": {},
@@ -97971,7 +98073,7 @@ module.exports={
             "members": {
               "AttributeName": {},
               "AttributeValues": {
-                "shape": "S40"
+                "shape": "S46"
               }
             },
             "wrapper": true
@@ -97980,18 +98082,18 @@ module.exports={
       },
       "wrapper": true
     },
-    "S59": {
+    "S5f": {
       "type": "structure",
       "members": {
         "DBParameterGroupFamily": {},
         "Marker": {},
         "Parameters": {
-          "shape": "S3s"
+          "shape": "S3y"
         }
       },
       "wrapper": true
     },
-    "S6d": {
+    "S6j": {
       "type": "structure",
       "members": {
         "ReservedDBInstanceId": {},
@@ -98020,13 +98122,13 @@ module.exports={
         },
         "State": {},
         "RecurringCharges": {
-          "shape": "S6f"
+          "shape": "S6l"
         },
         "ReservedDBInstanceArn": {}
       },
       "wrapper": true
     },
-    "S6f": {
+    "S6l": {
       "type": "list",
       "member": {
         "locationName": "RecurringCharge",
@@ -98040,7 +98142,7 @@ module.exports={
         "wrapper": true
       }
     },
-    "S6u": {
+    "S70": {
       "type": "list",
       "member": {
         "locationName": "Range",
@@ -98058,13 +98160,13 @@ module.exports={
         }
       }
     },
-    "S77": {
+    "S7d": {
       "type": "structure",
       "members": {
         "DBClusterParameterGroupName": {}
       }
     },
-    "S7e": {
+    "S7k": {
       "type": "structure",
       "members": {
         "DBParameterGroupName": {}
@@ -128120,7 +128222,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.235.1',
+  VERSION: '2.236.1',
 
   /**
    * @api private
@@ -152080,7 +152182,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":477,"lodash/assign":434}],493:[function(require,module,exports){
-// AWS SDK for JavaScript v2.235.1
+// AWS SDK for JavaScript v2.236.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

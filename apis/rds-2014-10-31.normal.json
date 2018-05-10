@@ -131,6 +131,29 @@
       ],
       "documentation": "<p>Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC security groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC instances. Second, IP ranges are available if the application accessing your database is running on the Internet. Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC).</p> <note> <p>You can't authorize ingress from an EC2 security group in one AWS Region to an Amazon RDS DB instance in another. You can't authorize ingress from a VPC security group in one VPC to an Amazon RDS DB instance in another.</p> </note> <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>"
     },
+    "BacktrackDBCluster": {
+      "name": "BacktrackDBCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BacktrackDBClusterMessage"
+      },
+      "output": {
+        "shape": "DBClusterBacktrack",
+        "resultWrapper": "BacktrackDBClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        }
+      ],
+      "documentation": "<p>Backtracks a DB cluster to a specific time, without creating a new DB cluster.</p> <p>For more information on backtracking, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Managing.Backtrack.html\"> Backtracking an Aurora DB Cluster</a> in the <i>Amazon RDS User Guide.</i> </p>"
+    },
     "CopyDBClusterParameterGroup": {
       "name": "CopyDBClusterParameterGroup",
       "http": {
@@ -971,6 +994,29 @@
         }
       ],
       "documentation": "<p>Lists the set of CA certificates provided by Amazon RDS for this AWS account.</p>"
+    },
+    "DescribeDBClusterBacktracks": {
+      "name": "DescribeDBClusterBacktracks",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDBClusterBacktracksMessage"
+      },
+      "output": {
+        "shape": "DBClusterBacktrackMessage",
+        "resultWrapper": "DescribeDBClusterBacktracksResult"
+      },
+      "errors": [
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "DBClusterBacktrackNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Returns information about backtracks for a DB cluster.</p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>"
     },
     "DescribeDBClusterParameterGroups": {
       "name": "DescribeDBClusterParameterGroups",
@@ -2735,7 +2781,7 @@
     "AuthorizationAlreadyExistsFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The specified CIDRIP or EC2 security group is already authorized for the specified DB security group.</p>",
+      "documentation": "<p>The specified CIDRIP or Amazon EC2 security group is already authorized for the specified DB security group.</p>",
       "error": {
         "code": "AuthorizationAlreadyExists",
         "httpStatusCode": 400,
@@ -2746,7 +2792,7 @@
     "AuthorizationNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Specified CIDRIP or EC2 security group is not authorized for the specified DB security group.</p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>",
+      "documentation": "<p>The specified CIDRIP or Amazon EC2 security group isn't authorized for the specified DB security group.</p> <p>RDS also may not be authorized by using IAM to perform necessary actions on your behalf.</p>",
       "error": {
         "code": "AuthorizationNotFound",
         "httpStatusCode": 404,
@@ -2757,7 +2803,7 @@
     "AuthorizationQuotaExceededFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>DB security group authorization quota has been reached.</p>",
+      "documentation": "<p>The DB security group authorization quota has been reached.</p>",
       "error": {
         "code": "AuthorizationQuotaExceeded",
         "httpStatusCode": 400,
@@ -2827,6 +2873,32 @@
         "locationName": "AvailabilityZone"
       }
     },
+    "BacktrackDBClusterMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterIdentifier",
+        "BacktrackTo"
+      ],
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster to be backtracked. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster1</code> </p>"
+        },
+        "BacktrackTo": {
+          "shape": "TStamp",
+          "documentation": "<p>The timestamp of the time to backtrack the DB cluster to, specified in ISO 8601 format. For more information about ISO 8601, see the <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO8601 Wikipedia page.</a> </p> <note> <p>If the specified time is not a consistent time for the DB cluster, Aurora automatically chooses the nearest possible consistent time for the DB cluster.</p> </note> <p>Constraints:</p> <ul> <li> <p>Must contain a valid ISO 8601 timestamp.</p> </li> <li> <p>Cannot contain a timestamp set in the future.</p> </li> </ul> <p>Example: <code>2017-07-08T18:00Z</code> </p>"
+        },
+        "Force": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that, if specified, forces the DB cluster to backtrack when binary logging is enabled. Otherwise, an error occurs when binary logging is enabled.</p>"
+        },
+        "UseEarliestTimeOnPointInTimeUnavailable": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>If <i>BacktrackTo</i> is set to a timestamp earlier than the earliest backtrack time, this value backtracks the DB cluster to the earliest possible backtrack time. Otherwise, an error occurs.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -2888,7 +2960,7 @@
     "CertificateNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>CertificateIdentifier</i> does not refer to an existing certificate. </p>",
+      "documentation": "<p> <i>CertificateIdentifier</i> doesn't refer to an existing certificate. </p>",
       "error": {
         "code": "CertificateNotFound",
         "httpStatusCode": 404,
@@ -3212,6 +3284,10 @@
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>"
+        },
+        "BacktrackWindow": {
+          "shape": "LongOptional",
+          "documentation": "<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0. </p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>"
         },
         "SourceRegion": {
           "shape": "String",
@@ -3841,7 +3917,7 @@
         },
         "EarliestRestorableTime": {
           "shape": "TStamp",
-          "documentation": "<p>Specifies the earliest time to which a database can be restored with point-in-time restore.</p>"
+          "documentation": "<p>The earliest time to which a database can be restored with point-in-time restore.</p>"
         },
         "Endpoint": {
           "shape": "String",
@@ -3938,6 +4014,18 @@
         "ClusterCreateTime": {
           "shape": "TStamp",
           "documentation": "<p>Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC).</p>"
+        },
+        "EarliestBacktrackTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The earliest time to which a DB cluster can be backtracked.</p>"
+        },
+        "BacktrackWindow": {
+          "shape": "LongOptional",
+          "documentation": "<p>The target backtrack window, in seconds. If this value is set to 0, backtracking is disabled for the DB cluster. Otherwise, backtracking is enabled.</p>"
+        },
+        "BacktrackConsumedChangeRecords": {
+          "shape": "LongOptional",
+          "documentation": "<p>The number of change records stored for Backtrack.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB cluster. </p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action. </p>",
@@ -3946,10 +4034,72 @@
     "DBClusterAlreadyExistsFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>User already has a DB cluster with the given identifier.</p>",
+      "documentation": "<p>The user already has a DB cluster with the given identifier.</p>",
       "error": {
         "code": "DBClusterAlreadyExistsFault",
         "httpStatusCode": 400,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "DBClusterBacktrack": {
+      "type": "structure",
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster.</p>"
+        },
+        "BacktrackIdentifier": {
+          "shape": "String",
+          "documentation": "<p>Contains the backtrack identifier.</p>"
+        },
+        "BacktrackTo": {
+          "shape": "TStamp",
+          "documentation": "<p>The timestamp of the time to which the DB cluster was backtracked.</p>"
+        },
+        "BacktrackedFrom": {
+          "shape": "TStamp",
+          "documentation": "<p>The timestamp of the time from which the DB cluster was backtracked.</p>"
+        },
+        "BacktrackRequestCreationTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The timestamp of the time at which the backtrack was requested.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The status of the backtrack. This property returns one of the following values:</p> <ul> <li> <p> <code>applying</code> - The backtrack is currently being applied to or rolled back from the DB cluster.</p> </li> <li> <p> <code>completed</code> - The backtrack has successfully been applied to or rolled back from the DB cluster.</p> </li> <li> <p> <code>failed</code> - An error occurred while the backtrack was applied to or rolled back from the DB cluster.</p> </li> <li> <p> <code>pending</code> - The backtrack is currently pending application to or rollback from the DB cluster.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>This data type is used as a response element in the <a>DescribeDBClusterBacktracks</a> action.</p>"
+    },
+    "DBClusterBacktrackList": {
+      "type": "list",
+      "member": {
+        "shape": "DBClusterBacktrack",
+        "locationName": "DBClusterBacktrack"
+      }
+    },
+    "DBClusterBacktrackMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A pagination token that can be used in a subsequent <a>DescribeDBClusterBacktracks</a> request.</p>"
+        },
+        "DBClusterBacktracks": {
+          "shape": "DBClusterBacktrackList",
+          "documentation": "<p>Contains a list of backtracks for the user.</p>"
+        }
+      },
+      "documentation": "<p>Contains the result of a successful invocation of the <a>DescribeDBClusterBacktracks</a> action.</p>"
+    },
+    "DBClusterBacktrackNotFoundFault": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p> <i>BacktrackIdentifier</i> doesn't refer to an existing backtrack. </p>",
+      "error": {
+        "code": "DBClusterBacktrackNotFoundFault",
+        "httpStatusCode": 404,
         "senderFault": true
       },
       "exception": true
@@ -4008,7 +4158,7 @@
     "DBClusterNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>DBClusterIdentifier</i> does not refer to an existing DB cluster. </p>",
+      "documentation": "<p> <i>DBClusterIdentifier</i> doesn't refer to an existing DB cluster. </p>",
       "error": {
         "code": "DBClusterNotFoundFault",
         "httpStatusCode": 404,
@@ -4094,7 +4244,7 @@
     "DBClusterParameterGroupNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>DBClusterParameterGroupName</i> does not refer to an existing DB Cluster parameter group. </p>",
+      "documentation": "<p> <i>DBClusterParameterGroupName</i> doesn't refer to an existing DB cluster parameter group. </p>",
       "error": {
         "code": "DBClusterParameterGroupNotFound",
         "httpStatusCode": 404,
@@ -4119,7 +4269,7 @@
     "DBClusterQuotaExceededFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>User attempted to create a new DB cluster and the user has already reached the maximum allowed DB cluster quota.</p>",
+      "documentation": "<p>The user attempted to create a new DB cluster and the user has already reached the maximum allowed DB cluster quota.</p>",
       "error": {
         "code": "DBClusterQuotaExceededFault",
         "httpStatusCode": 403,
@@ -4155,7 +4305,7 @@
     "DBClusterRoleNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The specified IAM role Amazon Resource Name (ARN) is not associated with the specified DB cluster.</p>",
+      "documentation": "<p>The specified IAM role Amazon Resource Name (ARN) isn't associated with the specified DB cluster.</p>",
       "error": {
         "code": "DBClusterRoleNotFound",
         "httpStatusCode": 404,
@@ -4271,7 +4421,7 @@
     "DBClusterSnapshotAlreadyExistsFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>User already has a DB cluster snapshot with the given identifier.</p>",
+      "documentation": "<p>The user already has a DB cluster snapshot with the given identifier.</p>",
       "error": {
         "code": "DBClusterSnapshotAlreadyExistsFault",
         "httpStatusCode": 400,
@@ -4339,7 +4489,7 @@
     "DBClusterSnapshotNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>DBClusterSnapshotIdentifier</i> does not refer to an existing DB cluster snapshot. </p>",
+      "documentation": "<p> <i>DBClusterSnapshotIdentifier</i> doesn't refer to an existing DB cluster snapshot. </p>",
       "error": {
         "code": "DBClusterSnapshotNotFoundFault",
         "httpStatusCode": 404,
@@ -4640,7 +4790,7 @@
     "DBInstanceAlreadyExistsFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>User already has a DB instance with the given identifier.</p>",
+      "documentation": "<p>The user already has a DB instance with the given identifier.</p>",
       "error": {
         "code": "DBInstanceAlreadyExists",
         "httpStatusCode": 400,
@@ -4672,7 +4822,7 @@
     "DBInstanceNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>",
+      "documentation": "<p> <i>DBInstanceIdentifier</i> doesn't refer to an existing DB instance. </p>",
       "error": {
         "code": "DBInstanceNotFound",
         "httpStatusCode": 404,
@@ -4712,7 +4862,7 @@
     "DBLogFileNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>LogFileName</i> does not refer to an existing DB log file.</p>",
+      "documentation": "<p> <i>LogFileName</i> doesn't refer to an existing DB log file.</p>",
       "error": {
         "code": "DBLogFileNotFoundFault",
         "httpStatusCode": 404,
@@ -4788,7 +4938,7 @@
     "DBParameterGroupNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>",
+      "documentation": "<p> <i>DBParameterGroupName</i> doesn't refer to an existing DB parameter group. </p>",
       "error": {
         "code": "DBParameterGroupNotFound",
         "httpStatusCode": 404,
@@ -4799,7 +4949,7 @@
     "DBParameterGroupQuotaExceededFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Request would result in user exceeding the allowed number of DB parameter groups.</p>",
+      "documentation": "<p>The request would result in the user exceeding the allowed number of DB parameter groups.</p>",
       "error": {
         "code": "DBParameterGroupQuotaExceeded",
         "httpStatusCode": 400,
@@ -4933,7 +5083,7 @@
     "DBSecurityGroupNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>",
+      "documentation": "<p> <i>DBSecurityGroupName</i> doesn't refer to an existing DB security group. </p>",
       "error": {
         "code": "DBSecurityGroupNotFound",
         "httpStatusCode": 404,
@@ -4944,7 +5094,7 @@
     "DBSecurityGroupNotSupportedFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>A DB security group is not allowed for this action.</p>",
+      "documentation": "<p>A DB security group isn't allowed for this action.</p>",
       "error": {
         "code": "DBSecurityGroupNotSupported",
         "httpStatusCode": 400,
@@ -4955,7 +5105,7 @@
     "DBSecurityGroupQuotaExceededFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Request would result in user exceeding the allowed number of DB security groups.</p>",
+      "documentation": "<p>The request would result in the user exceeding the allowed number of DB security groups.</p>",
       "error": {
         "code": "QuotaExceeded.DBSecurityGroup",
         "httpStatusCode": 400,
@@ -5153,7 +5303,7 @@
     "DBSnapshotNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>",
+      "documentation": "<p> <i>DBSnapshotIdentifier</i> doesn't refer to an existing DB snapshot. </p>",
       "error": {
         "code": "DBSnapshotNotFound",
         "httpStatusCode": 404,
@@ -5231,7 +5381,7 @@
     "DBSubnetGroupNotAllowedFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Indicates that the DBSubnetGroup should not be specified while creating read replicas that lie in the same region as the source instance.</p>",
+      "documentation": "<p>The DBSubnetGroup shouldn't be specified while creating read replicas that lie in the same region as the source instance.</p>",
       "error": {
         "code": "DBSubnetGroupNotAllowedFault",
         "httpStatusCode": 400,
@@ -5242,7 +5392,7 @@
     "DBSubnetGroupNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>",
+      "documentation": "<p> <i>DBSubnetGroupName</i> doesn't refer to an existing DB subnet group. </p>",
       "error": {
         "code": "DBSubnetGroupNotFoundFault",
         "httpStatusCode": 404,
@@ -5253,7 +5403,7 @@
     "DBSubnetGroupQuotaExceededFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Request would result in user exceeding the allowed number of DB subnet groups.</p>",
+      "documentation": "<p>The request would result in the user exceeding the allowed number of DB subnet groups.</p>",
       "error": {
         "code": "DBSubnetGroupQuotaExceeded",
         "httpStatusCode": 400,
@@ -5271,7 +5421,7 @@
     "DBSubnetQuotaExceededFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Request would result in user exceeding the allowed number of subnets in a DB subnet groups.</p>",
+      "documentation": "<p>The request would result in the user exceeding the allowed number of subnets in a DB subnet groups.</p>",
       "error": {
         "code": "DBSubnetQuotaExceededFault",
         "httpStatusCode": 400,
@@ -5282,7 +5432,7 @@
     "DBUpgradeDependencyFailureFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The DB upgrade failed because a resource the DB depends on could not be modified.</p>",
+      "documentation": "<p>The DB upgrade failed because a resource the DB depends on can't be modified.</p>",
       "error": {
         "code": "DBUpgradeDependencyFailure",
         "httpStatusCode": 400,
@@ -5503,6 +5653,35 @@
       },
       "documentation": "<p/>"
     },
+    "DescribeDBClusterBacktracksMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterIdentifier"
+      ],
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster to be described. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster1</code> </p>"
+        },
+        "BacktrackIdentifier": {
+          "shape": "String",
+          "documentation": "<p>If specified, this value is the backtrack identifier of the backtrack to be described.</p> <p>Constraints:</p> <ul> <li> <p>Must contain a valid universally unique identifier (UUID). For more information about UUIDs, see <a href=\"http://www.ietf.org/rfc/rfc4122.txt\">A Universally Unique Identifier (UUID) URN Namespace</a>.</p> </li> </ul> <p>Example: <code>123e4567-e89b-12d3-a456-426655440000</code> </p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>A filter that specifies one or more DB clusters to describe. Supported filters include the following:</p> <ul> <li> <p> <code>db-cluster-backtrack-id</code> - Accepts backtrack identifiers. The results list includes information about only the backtracks identified by these identifiers.</p> </li> <li> <p> <code>db-cluster-backtrack-status</code> - Accepts any of the following backtrack status values:</p> <ul> <li> <p> <code>applying</code> </p> </li> <li> <p> <code>completed</code> </p> </li> <li> <p> <code>failed</code> </p> </li> <li> <p> <code>pending</code> </p> </li> </ul> <p>The results list includes information about only the backtracks identified by these values. For more information about backtrack status values, see <a>DBClusterBacktrack</a>.</p> </li> </ul>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous <a>DescribeDBClusterBacktracks</a> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
     "DescribeDBClusterParameterGroupsMessage": {
       "type": "structure",
       "members": {
@@ -5652,7 +5831,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Not currently supported.</p>"
+          "documentation": "<p>This parameter is not currently supported.</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -5972,7 +6151,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Not currently supported.</p>"
+          "documentation": "<p>This parameter is not currently supported.</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -6357,7 +6536,7 @@
     "DomainNotFoundFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>Domain</i> does not refer to an existing Active Directory Domain. </p>",
+      "documentation": "<p> <i>Domain</i> doesn't refer to an existing Active Directory domain. </p>",
       "error": {
         "code": "DomainNotFoundFault",
         "httpStatusCode": 404,
@@ -6702,14 +6881,14 @@
       "members": {
         "Name": {
           "shape": "String",
-          "documentation": "<p>This parameter is not currently supported.</p>"
+          "documentation": "<p>The name of the filter. Filter names are case-sensitive.</p>"
         },
         "Values": {
           "shape": "FilterValueList",
-          "documentation": "<p>This parameter is not currently supported.</p>"
+          "documentation": "<p>One or more filter values. Filter values are case-sensitive.</p>"
         }
       },
-      "documentation": "<p>This type is not currently supported.</p>"
+      "documentation": "<p>A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as IDs. The filters supported by a describe operation are documented with the describe operation.</p> <note> <p>Currently, wildcards are not supported in filters.</p> </note> <p>The following actions can be filtered:</p> <ul> <li> <p> <a>DescribeDBClusterBacktracks</a> </p> </li> <li> <p> <a>DescribeDBClusters</a> </p> </li> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DescribePendingMaintenanceActions</a> </p> </li> </ul>"
     },
     "FilterList": {
       "type": "list",
@@ -6749,7 +6928,7 @@
     "InstanceQuotaExceededFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Request would result in user exceeding the allowed number of DB instances.</p>",
+      "documentation": "<p>The request would result in the user exceeding the allowed number of DB instances.</p>",
       "error": {
         "code": "InstanceQuotaExceeded",
         "httpStatusCode": 400,
@@ -6760,7 +6939,7 @@
     "InsufficientDBClusterCapacityFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The DB cluster does not have enough capacity for the current operation.</p>",
+      "documentation": "<p>The DB cluster doesn't have enough capacity for the current operation.</p>",
       "error": {
         "code": "InsufficientDBClusterCapacityFault",
         "httpStatusCode": 403,
@@ -6771,7 +6950,7 @@
     "InsufficientDBInstanceCapacityFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Specified DB instance class is not available in the specified Availability Zone.</p>",
+      "documentation": "<p>The specified DB instance class isn't available in the specified Availability Zone.</p>",
       "error": {
         "code": "InsufficientDBInstanceCapacity",
         "httpStatusCode": 400,
@@ -6782,7 +6961,7 @@
     "InsufficientStorageClusterCapacityFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>There is insufficient storage available for the current action. You may be able to resolve this error by updating your subnet group to use different Availability Zones that have more storage available.</p>",
+      "documentation": "<p>There is insufficient storage available for the current action. You might be able to resolve this error by updating your subnet group to use different Availability Zones that have more storage available.</p>",
       "error": {
         "code": "InsufficientStorageClusterCapacity",
         "httpStatusCode": 400,
@@ -6799,7 +6978,7 @@
     "InvalidDBClusterSnapshotStateFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The supplied value is not a valid DB cluster snapshot state.</p>",
+      "documentation": "<p>The supplied value isn't a valid DB cluster snapshot state.</p>",
       "error": {
         "code": "InvalidDBClusterSnapshotStateFault",
         "httpStatusCode": 400,
@@ -6810,7 +6989,7 @@
     "InvalidDBClusterStateFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The DB cluster is not in a valid state.</p>",
+      "documentation": "<p>The DB cluster isn't in a valid state.</p>",
       "error": {
         "code": "InvalidDBClusterStateFault",
         "httpStatusCode": 400,
@@ -6821,7 +7000,7 @@
     "InvalidDBInstanceStateFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> The specified DB instance is not in the <i>available</i> state. </p>",
+      "documentation": "<p> The specified DB instance isn't in the <i>available</i> state. </p>",
       "error": {
         "code": "InvalidDBInstanceState",
         "httpStatusCode": 400,
@@ -6832,7 +7011,7 @@
     "InvalidDBParameterGroupStateFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The DB parameter group is in use or is in an invalid state. If you are attempting to delete the parameter group, you cannot delete it when the parameter group is in this state.</p>",
+      "documentation": "<p>The DB parameter group is in use or is in an invalid state. If you are attempting to delete the parameter group, you can't delete it when the parameter group is in this state.</p>",
       "error": {
         "code": "InvalidDBParameterGroupState",
         "httpStatusCode": 400,
@@ -6843,7 +7022,7 @@
     "InvalidDBSecurityGroupStateFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The state of the DB security group does not allow deletion.</p>",
+      "documentation": "<p>The state of the DB security group doesn't allow deletion.</p>",
       "error": {
         "code": "InvalidDBSecurityGroupState",
         "httpStatusCode": 400,
@@ -6854,7 +7033,7 @@
     "InvalidDBSnapshotStateFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The state of the DB snapshot does not allow deletion.</p>",
+      "documentation": "<p>The state of the DB snapshot doesn't allow deletion.</p>",
       "error": {
         "code": "InvalidDBSnapshotState",
         "httpStatusCode": 400,
@@ -6865,7 +7044,7 @@
     "InvalidDBSubnetGroupFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Indicates the DBSubnetGroup does not belong to the same VPC as that of an existing cross region read replica of the same source instance.</p>",
+      "documentation": "<p>The DBSubnetGroup doesn't belong to the same VPC as that of an existing cross-region read replica of the same source instance.</p>",
       "error": {
         "code": "InvalidDBSubnetGroupFault",
         "httpStatusCode": 400,
@@ -6876,7 +7055,7 @@
     "InvalidDBSubnetGroupStateFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The DB subnet group cannot be deleted because it is in use.</p>",
+      "documentation": "<p>The DB subnet group cannot be deleted because it's in use.</p>",
       "error": {
         "code": "InvalidDBSubnetGroupStateFault",
         "httpStatusCode": 400,
@@ -6887,7 +7066,7 @@
     "InvalidDBSubnetStateFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> The DB subnet is not in the <i>available</i> state. </p>",
+      "documentation": "<p> The DB subnet isn't in the <i>available</i> state. </p>",
       "error": {
         "code": "InvalidDBSubnetStateFault",
         "httpStatusCode": 400,
@@ -6909,7 +7088,7 @@
     "InvalidOptionGroupStateFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> The option group is not in the <i>available</i> state. </p>",
+      "documentation": "<p> The option group isn't in the <i>available</i> state. </p>",
       "error": {
         "code": "InvalidOptionGroupStateFault",
         "httpStatusCode": 400,
@@ -6920,7 +7099,7 @@
     "InvalidRestoreFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Cannot restore from vpc backup to non-vpc DB instance.</p>",
+      "documentation": "<p>Cannot restore from VPC backup to non-VPC DB instance.</p>",
       "error": {
         "code": "InvalidRestoreFault",
         "httpStatusCode": 400,
@@ -6931,7 +7110,7 @@
     "InvalidS3BucketFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The specified Amazon S3 bucket name could not be found or Amazon RDS is not authorized to access the specified Amazon S3 bucket. Verify the <b>SourceS3BucketName</b> and <b>S3IngestionRoleArn</b> values and try again.</p>",
+      "documentation": "<p>The specified Amazon S3 bucket name can't be found or Amazon RDS isn't authorized to access the specified Amazon S3 bucket. Verify the <b>SourceS3BucketName</b> and <b>S3IngestionRoleArn</b> values and try again.</p>",
       "error": {
         "code": "InvalidS3BucketFault",
         "httpStatusCode": 400,
@@ -6953,7 +7132,7 @@
     "InvalidVPCNetworkStateFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>DB subnet group does not cover all Availability Zones after it is created because users' change.</p>",
+      "documentation": "<p>The DB subnet group doesn't cover all Availability Zones after it's created because of users' change.</p>",
       "error": {
         "code": "InvalidVPCNetworkStateFault",
         "httpStatusCode": 400,
@@ -6964,7 +7143,7 @@
     "KMSKeyNotAccessibleFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Error accessing KMS key.</p>",
+      "documentation": "<p>An error occurred accessing an AWS KMS key.</p>",
       "error": {
         "code": "KMSKeyNotAccessibleFault",
         "httpStatusCode": 400,
@@ -7002,6 +7181,9 @@
       }
     },
     "Long": {
+      "type": "long"
+    },
+    "LongOptional": {
       "type": "long"
     },
     "ModifyDBClusterMessage": {
@@ -7057,6 +7239,10 @@
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>"
+        },
+        "BacktrackWindow": {
+          "shape": "LongOptional",
+          "documentation": "<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>"
         },
         "EngineVersion": {
           "shape": "String",
@@ -8825,6 +9011,10 @@
         "S3IngestionRoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon RDS to access the Amazon S3 bucket on your behalf.</p>"
+        },
+        "BacktrackWindow": {
+          "shape": "LongOptional",
+          "documentation": "<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>"
         }
       }
     },
@@ -8895,6 +9085,10 @@
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>"
+        },
+        "BacktrackWindow": {
+          "shape": "LongOptional",
+          "documentation": "<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>"
         }
       },
       "documentation": "<p/>"
@@ -8960,6 +9154,10 @@
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>"
+        },
+        "BacktrackWindow": {
+          "shape": "LongOptional",
+          "documentation": "<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>"
         }
       },
       "documentation": "<p/>"
@@ -9460,7 +9658,7 @@
     "SnapshotQuotaExceededFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Request would result in user exceeding the allowed number of DB snapshots.</p>",
+      "documentation": "<p>The request would result in the user exceeding the allowed number of DB snapshots.</p>",
       "error": {
         "code": "SnapshotQuotaExceeded",
         "httpStatusCode": 400,
@@ -9583,7 +9781,7 @@
     "StorageQuotaExceededFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Request would result in user exceeding the allowed amount of storage available across all DB instances.</p>",
+      "documentation": "<p>The request would result in the user exceeding the allowed amount of storage available across all DB instances.</p>",
       "error": {
         "code": "StorageQuotaExceeded",
         "httpStatusCode": 400,
@@ -9594,7 +9792,7 @@
     "StorageTypeNotSupportedFault": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> <i>StorageType</i> specified cannot be associated with the DB Instance. </p>",
+      "documentation": "<p>Storage of the <i>StorageType</i> specified can't be associated with the DB instance. </p>",
       "error": {
         "code": "StorageTypeNotSupported",
         "httpStatusCode": 400,

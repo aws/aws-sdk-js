@@ -910,7 +910,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The specified CIDRIP or EC2 security group is already authorized for the specified DB security group.</p>",
+      "documentation":"<p>The specified CIDRIP or Amazon EC2 security group is already authorized for the specified DB security group.</p>",
       "error":{
         "code":"AuthorizationAlreadyExists",
         "httpStatusCode":400,
@@ -922,7 +922,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Specified CIDRIP or EC2 security group is not authorized for the specified DB security group.</p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>",
+      "documentation":"<p>The specified CIDRIP or Amazon EC2 security group isn't authorized for the specified DB security group.</p> <p>RDS also may not be authorized by using IAM to perform necessary actions on your behalf.</p>",
       "error":{
         "code":"AuthorizationNotFound",
         "httpStatusCode":404,
@@ -934,7 +934,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>DB security group authorization quota has been reached.</p>",
+      "documentation":"<p>The DB security group authorization quota has been reached.</p>",
       "error":{
         "code":"AuthorizationQuotaExceeded",
         "httpStatusCode":400,
@@ -1258,7 +1258,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>User already has a DB instance with the given identifier.</p>",
+      "documentation":"<p>The user already has a DB instance with the given identifier.</p>",
       "error":{
         "code":"DBInstanceAlreadyExists",
         "httpStatusCode":400,
@@ -1284,7 +1284,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>",
+      "documentation":"<p> <i>DBInstanceIdentifier</i> doesn't refer to an existing DB instance. </p>",
       "error":{
         "code":"DBInstanceNotFound",
         "httpStatusCode":404,
@@ -1312,7 +1312,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> <i>LogFileName</i> does not refer to an existing DB log file.</p>",
+      "documentation":"<p> <i>LogFileName</i> doesn't refer to an existing DB log file.</p>",
       "error":{
         "code":"DBLogFileNotFoundFault",
         "httpStatusCode":404,
@@ -1365,7 +1365,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>",
+      "documentation":"<p> <i>DBParameterGroupName</i> doesn't refer to an existing DB parameter group. </p>",
       "error":{
         "code":"DBParameterGroupNotFound",
         "httpStatusCode":404,
@@ -1377,7 +1377,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Request would result in user exceeding the allowed number of DB parameter groups.</p>",
+      "documentation":"<p>The request would result in the user exceeding the allowed number of DB parameter groups.</p>",
       "error":{
         "code":"DBParameterGroupQuotaExceeded",
         "httpStatusCode":400,
@@ -1462,7 +1462,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>",
+      "documentation":"<p> <i>DBSecurityGroupName</i> doesn't refer to an existing DB security group. </p>",
       "error":{
         "code":"DBSecurityGroupNotFound",
         "httpStatusCode":404,
@@ -1474,7 +1474,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>A DB security group is not allowed for this action.</p>",
+      "documentation":"<p>A DB security group isn't allowed for this action.</p>",
       "error":{
         "code":"DBSecurityGroupNotSupported",
         "httpStatusCode":400,
@@ -1486,7 +1486,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Request would result in user exceeding the allowed number of DB security groups.</p>",
+      "documentation":"<p>The request would result in the user exceeding the allowed number of DB security groups.</p>",
       "error":{
         "code":"QuotaExceeded.DBSecurityGroup",
         "httpStatusCode":400,
@@ -1555,7 +1555,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>",
+      "documentation":"<p> <i>DBSnapshotIdentifier</i> doesn't refer to an existing DB snapshot. </p>",
       "error":{
         "code":"DBSnapshotNotFound",
         "httpStatusCode":404,
@@ -1609,7 +1609,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Indicates that the DBSubnetGroup should not be specified while creating read replicas that lie in the same region as the source instance.</p>",
+      "documentation":"<p>The DBSubnetGroup shouldn't be specified while creating read replicas that lie in the same region as the source instance.</p>",
       "error":{
         "code":"DBSubnetGroupNotAllowedFault",
         "httpStatusCode":400,
@@ -1621,7 +1621,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>",
+      "documentation":"<p> <i>DBSubnetGroupName</i> doesn't refer to an existing DB subnet group. </p>",
       "error":{
         "code":"DBSubnetGroupNotFoundFault",
         "httpStatusCode":404,
@@ -1633,7 +1633,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Request would result in user exceeding the allowed number of DB subnet groups.</p>",
+      "documentation":"<p>The request would result in the user exceeding the allowed number of DB subnet groups.</p>",
       "error":{
         "code":"DBSubnetGroupQuotaExceeded",
         "httpStatusCode":400,
@@ -1652,7 +1652,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Request would result in user exceeding the allowed number of subnets in a DB subnet groups.</p>",
+      "documentation":"<p>The request would result in the user exceeding the allowed number of subnets in a DB subnet groups.</p>",
       "error":{
         "code":"DBSubnetQuotaExceededFault",
         "httpStatusCode":400,
@@ -1664,7 +1664,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The DB upgrade failed because a resource the DB depends on could not be modified.</p>",
+      "documentation":"<p>The DB upgrade failed because a resource the DB depends on can't be modified.</p>",
       "error":{
         "code":"DBUpgradeDependencyFailure",
         "httpStatusCode":400,
@@ -2148,7 +2148,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Request would result in user exceeding the allowed number of DB instances.</p>",
+      "documentation":"<p>The request would result in the user exceeding the allowed number of DB instances.</p>",
       "error":{
         "code":"InstanceQuotaExceeded",
         "httpStatusCode":400,
@@ -2160,7 +2160,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Specified DB instance class is not available in the specified Availability Zone.</p>",
+      "documentation":"<p>The specified DB instance class isn't available in the specified Availability Zone.</p>",
       "error":{
         "code":"InsufficientDBInstanceCapacity",
         "httpStatusCode":400,
@@ -2174,7 +2174,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> The specified DB instance is not in the <i>available</i> state. </p>",
+      "documentation":"<p> The specified DB instance isn't in the <i>available</i> state. </p>",
       "error":{
         "code":"InvalidDBInstanceState",
         "httpStatusCode":400,
@@ -2186,7 +2186,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The DB parameter group is in use or is in an invalid state. If you are attempting to delete the parameter group, you cannot delete it when the parameter group is in this state.</p>",
+      "documentation":"<p>The DB parameter group is in use or is in an invalid state. If you are attempting to delete the parameter group, you can't delete it when the parameter group is in this state.</p>",
       "error":{
         "code":"InvalidDBParameterGroupState",
         "httpStatusCode":400,
@@ -2198,7 +2198,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The state of the DB security group does not allow deletion.</p>",
+      "documentation":"<p>The state of the DB security group doesn't allow deletion.</p>",
       "error":{
         "code":"InvalidDBSecurityGroupState",
         "httpStatusCode":400,
@@ -2210,7 +2210,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The state of the DB snapshot does not allow deletion.</p>",
+      "documentation":"<p>The state of the DB snapshot doesn't allow deletion.</p>",
       "error":{
         "code":"InvalidDBSnapshotState",
         "httpStatusCode":400,
@@ -2222,7 +2222,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Indicates the DBSubnetGroup does not belong to the same VPC as that of an existing cross region read replica of the same source instance.</p>",
+      "documentation":"<p>The DBSubnetGroup doesn't belong to the same VPC as that of an existing cross-region read replica of the same source instance.</p>",
       "error":{
         "code":"InvalidDBSubnetGroupFault",
         "httpStatusCode":400,
@@ -2234,7 +2234,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The DB subnet group cannot be deleted because it is in use.</p>",
+      "documentation":"<p>The DB subnet group cannot be deleted because it's in use.</p>",
       "error":{
         "code":"InvalidDBSubnetGroupStateFault",
         "httpStatusCode":400,
@@ -2246,7 +2246,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> The DB subnet is not in the <i>available</i> state. </p>",
+      "documentation":"<p> The DB subnet isn't in the <i>available</i> state. </p>",
       "error":{
         "code":"InvalidDBSubnetStateFault",
         "httpStatusCode":400,
@@ -2270,7 +2270,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> The option group is not in the <i>available</i> state. </p>",
+      "documentation":"<p> The option group isn't in the <i>available</i> state. </p>",
       "error":{
         "code":"InvalidOptionGroupStateFault",
         "httpStatusCode":400,
@@ -2282,7 +2282,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Cannot restore from vpc backup to non-vpc DB instance.</p>",
+      "documentation":"<p>Cannot restore from VPC backup to non-VPC DB instance.</p>",
       "error":{
         "code":"InvalidRestoreFault",
         "httpStatusCode":400,
@@ -2306,7 +2306,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>DB subnet group does not cover all Availability Zones after it is created because users' change.</p>",
+      "documentation":"<p>The DB subnet group doesn't cover all Availability Zones after it's created because of users' change.</p>",
       "error":{
         "code":"InvalidVPCNetworkStateFault",
         "httpStatusCode":400,
@@ -3044,7 +3044,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Request would result in user exceeding the allowed number of DB snapshots.</p>",
+      "documentation":"<p>The request would result in the user exceeding the allowed number of DB snapshots.</p>",
       "error":{
         "code":"SnapshotQuotaExceeded",
         "httpStatusCode":400,
@@ -3084,7 +3084,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Request would result in user exceeding the allowed amount of storage available across all DB instances.</p>",
+      "documentation":"<p>The request would result in the user exceeding the allowed amount of storage available across all DB instances.</p>",
       "error":{
         "code":"StorageQuotaExceeded",
         "httpStatusCode":400,

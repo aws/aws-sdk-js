@@ -53,6 +53,14 @@ declare class RDS extends Service {
    */
   authorizeDBSecurityGroupIngress(callback?: (err: AWSError, data: RDS.Types.AuthorizeDBSecurityGroupIngressResult) => void): Request<RDS.Types.AuthorizeDBSecurityGroupIngressResult, AWSError>;
   /**
+   * Backtracks a DB cluster to a specific time, without creating a new DB cluster. For more information on backtracking, see  Backtracking an Aurora DB Cluster in the Amazon RDS User Guide. 
+   */
+  backtrackDBCluster(params: RDS.Types.BacktrackDBClusterMessage, callback?: (err: AWSError, data: RDS.Types.DBClusterBacktrack) => void): Request<RDS.Types.DBClusterBacktrack, AWSError>;
+  /**
+   * Backtracks a DB cluster to a specific time, without creating a new DB cluster. For more information on backtracking, see  Backtracking an Aurora DB Cluster in the Amazon RDS User Guide. 
+   */
+  backtrackDBCluster(callback?: (err: AWSError, data: RDS.Types.DBClusterBacktrack) => void): Request<RDS.Types.DBClusterBacktrack, AWSError>;
+  /**
    * Copies the specified DB cluster parameter group.
    */
   copyDBClusterParameterGroup(params: RDS.Types.CopyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: RDS.Types.CopyDBClusterParameterGroupResult) => void): Request<RDS.Types.CopyDBClusterParameterGroupResult, AWSError>;
@@ -276,6 +284,14 @@ declare class RDS extends Service {
    * Lists the set of CA certificates provided by Amazon RDS for this AWS account.
    */
   describeCertificates(callback?: (err: AWSError, data: RDS.Types.CertificateMessage) => void): Request<RDS.Types.CertificateMessage, AWSError>;
+  /**
+   * Returns information about backtracks for a DB cluster. For more information on Amazon Aurora, see Aurora on Amazon RDS in the Amazon RDS User Guide. 
+   */
+  describeDBClusterBacktracks(params: RDS.Types.DescribeDBClusterBacktracksMessage, callback?: (err: AWSError, data: RDS.Types.DBClusterBacktrackMessage) => void): Request<RDS.Types.DBClusterBacktrackMessage, AWSError>;
+  /**
+   * Returns information about backtracks for a DB cluster. For more information on Amazon Aurora, see Aurora on Amazon RDS in the Amazon RDS User Guide. 
+   */
+  describeDBClusterBacktracks(callback?: (err: AWSError, data: RDS.Types.DBClusterBacktrackMessage) => void): Request<RDS.Types.DBClusterBacktrackMessage, AWSError>;
   /**
    *  Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list will contain only the description of the specified DB cluster parameter group.  For more information on Amazon Aurora, see Aurora on Amazon RDS in the Amazon RDS User Guide. 
    */
@@ -883,6 +899,24 @@ declare namespace RDS {
   }
   export type AvailabilityZoneList = AvailabilityZone[];
   export type AvailabilityZones = String[];
+  export interface BacktrackDBClusterMessage {
+    /**
+     * The DB cluster identifier of the DB cluster to be backtracked. This parameter is stored as a lowercase string. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: my-cluster1 
+     */
+    DBClusterIdentifier: String;
+    /**
+     * The timestamp of the time to backtrack the DB cluster to, specified in ISO 8601 format. For more information about ISO 8601, see the ISO8601 Wikipedia page.   If the specified time is not a consistent time for the DB cluster, Aurora automatically chooses the nearest possible consistent time for the DB cluster.  Constraints:   Must contain a valid ISO 8601 timestamp.   Cannot contain a timestamp set in the future.   Example: 2017-07-08T18:00Z 
+     */
+    BacktrackTo: TStamp;
+    /**
+     * A value that, if specified, forces the DB cluster to backtrack when binary logging is enabled. Otherwise, an error occurs when binary logging is enabled.
+     */
+    Force?: BooleanOptional;
+    /**
+     * If BacktrackTo is set to a timestamp earlier than the earliest backtrack time, this value backtracks the DB cluster to the earliest possible backtrack time. Otherwise, an error occurs.
+     */
+    UseEarliestTimeOnPointInTimeUnavailable?: BooleanOptional;
+  }
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
   export interface Certificate {
@@ -1146,6 +1180,10 @@ declare namespace RDS {
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The target backtrack window, in seconds. To disable backtracking, set this value to 0.  Default: 0 Constraints:   If specified, this value must be set to a number from 0 to 259,200 (72 hours).  
+     */
+    BacktrackWindow?: LongOptional;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -1611,7 +1649,7 @@ declare namespace RDS {
      */
     PercentProgress?: String;
     /**
-     * Specifies the earliest time to which a database can be restored with point-in-time restore.
+     * The earliest time to which a database can be restored with point-in-time restore.
      */
     EarliestRestorableTime?: TStamp;
     /**
@@ -1710,6 +1748,55 @@ declare namespace RDS {
      * Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC).
      */
     ClusterCreateTime?: TStamp;
+    /**
+     * The earliest time to which a DB cluster can be backtracked.
+     */
+    EarliestBacktrackTime?: TStamp;
+    /**
+     * The target backtrack window, in seconds. If this value is set to 0, backtracking is disabled for the DB cluster. Otherwise, backtracking is enabled.
+     */
+    BacktrackWindow?: LongOptional;
+    /**
+     * The number of change records stored for Backtrack.
+     */
+    BacktrackConsumedChangeRecords?: LongOptional;
+  }
+  export interface DBClusterBacktrack {
+    /**
+     * Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * Contains the backtrack identifier.
+     */
+    BacktrackIdentifier?: String;
+    /**
+     * The timestamp of the time to which the DB cluster was backtracked.
+     */
+    BacktrackTo?: TStamp;
+    /**
+     * The timestamp of the time from which the DB cluster was backtracked.
+     */
+    BacktrackedFrom?: TStamp;
+    /**
+     * The timestamp of the time at which the backtrack was requested.
+     */
+    BacktrackRequestCreationTime?: TStamp;
+    /**
+     * The status of the backtrack. This property returns one of the following values:    applying - The backtrack is currently being applied to or rolled back from the DB cluster.    completed - The backtrack has successfully been applied to or rolled back from the DB cluster.    failed - An error occurred while the backtrack was applied to or rolled back from the DB cluster.    pending - The backtrack is currently pending application to or rollback from the DB cluster.  
+     */
+    Status?: String;
+  }
+  export type DBClusterBacktrackList = DBClusterBacktrack[];
+  export interface DBClusterBacktrackMessage {
+    /**
+     * A pagination token that can be used in a subsequent DescribeDBClusterBacktracks request.
+     */
+    Marker?: String;
+    /**
+     * Contains a list of backtracks for the user.
+     */
+    DBClusterBacktracks?: DBClusterBacktrackList;
   }
   export type DBClusterList = DBCluster[];
   export interface DBClusterMember {
@@ -2618,6 +2705,28 @@ declare namespace RDS {
      */
     Marker?: String;
   }
+  export interface DescribeDBClusterBacktracksMessage {
+    /**
+     * The DB cluster identifier of the DB cluster to be described. This parameter is stored as a lowercase string. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: my-cluster1 
+     */
+    DBClusterIdentifier: String;
+    /**
+     * If specified, this value is the backtrack identifier of the backtrack to be described. Constraints:   Must contain a valid universally unique identifier (UUID). For more information about UUIDs, see A Universally Unique Identifier (UUID) URN Namespace.   Example: 123e4567-e89b-12d3-a456-426655440000 
+     */
+    BacktrackIdentifier?: String;
+    /**
+     * A filter that specifies one or more DB clusters to describe. Supported filters include the following:    db-cluster-backtrack-id - Accepts backtrack identifiers. The results list includes information about only the backtracks identified by these identifiers.    db-cluster-backtrack-status - Accepts any of the following backtrack status values:    applying     completed     failed     pending    The results list includes information about only the backtracks identified by these values. For more information about backtrack status values, see DBClusterBacktrack.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     *  An optional pagination token provided by a previous DescribeDBClusterBacktracks request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
   export interface DescribeDBClusterParameterGroupsMessage {
     /**
      * The name of a specific DB cluster parameter group to return details for. Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
@@ -2733,7 +2842,7 @@ declare namespace RDS {
      */
     DBParameterGroupFamily?: String;
     /**
-     * Not currently supported.
+     * This parameter is not currently supported.
      */
     Filters?: FilterList;
     /**
@@ -2976,7 +3085,7 @@ declare namespace RDS {
      */
     DBParameterGroupFamily: String;
     /**
-     * Not currently supported.
+     * This parameter is not currently supported.
      */
     Filters?: FilterList;
     /**
@@ -3498,11 +3607,11 @@ declare namespace RDS {
   }
   export interface Filter {
     /**
-     * This parameter is not currently supported.
+     * The name of the filter. Filter names are case-sensitive.
      */
     Name: String;
     /**
-     * This parameter is not currently supported.
+     * One or more filter values. Filter values are case-sensitive.
      */
     Values: FilterValueList;
   }
@@ -3534,6 +3643,7 @@ declare namespace RDS {
   }
   export type LogTypeList = String[];
   export type Long = number;
+  export type LongOptional = number;
   export interface ModifyDBClusterMessage {
     /**
      * The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive. Constraints:   Must match the identifier of an existing DBCluster.  
@@ -3583,6 +3693,10 @@ declare namespace RDS {
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The target backtrack window, in seconds. To disable backtracking, set this value to 0. Default: 0 Constraints:   If specified, this value must be set to a number from 0 to 259,200 (72 hours).  
+     */
+    BacktrackWindow?: LongOptional;
     /**
      * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true. For a list of valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions.
      */
@@ -4779,6 +4893,10 @@ declare namespace RDS {
      * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon RDS to access the Amazon S3 bucket on your behalf.
      */
     S3IngestionRoleArn: String;
+    /**
+     * The target backtrack window, in seconds. To disable backtracking, set this value to 0. Default: 0 Constraints:   If specified, this value must be set to a number from 0 to 259,200 (72 hours).  
+     */
+    BacktrackWindow?: LongOptional;
   }
   export interface RestoreDBClusterFromS3Result {
     DBCluster?: DBCluster;
@@ -4836,6 +4954,10 @@ declare namespace RDS {
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The target backtrack window, in seconds. To disable backtracking, set this value to 0. Default: 0 Constraints:   If specified, this value must be set to a number from 0 to 259,200 (72 hours).  
+     */
+    BacktrackWindow?: LongOptional;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -4886,6 +5008,10 @@ declare namespace RDS {
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The target backtrack window, in seconds. To disable backtracking, set this value to 0. Default: 0 Constraints:   If specified, this value must be set to a number from 0 to 259,200 (72 hours).  
+     */
+    BacktrackWindow?: LongOptional;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
