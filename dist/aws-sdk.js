@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.237.1
+// AWS SDK for JavaScript v2.238.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -63541,6 +63541,9 @@ module.exports={
               "S3BackupMode": {},
               "S3BackupConfiguration": {
                 "shape": "S7"
+              },
+              "DataFormatConversionConfiguration": {
+                "shape": "Sw"
               }
             }
           },
@@ -63558,16 +63561,16 @@ module.exports={
               "RoleARN": {},
               "ClusterJDBCURL": {},
               "CopyCommand": {
-                "shape": "Sy"
+                "shape": "S1n"
               },
               "Username": {
-                "shape": "S12"
+                "shape": "S1r"
               },
               "Password": {
-                "shape": "S13"
+                "shape": "S1s"
               },
               "RetryOptions": {
-                "shape": "S14"
+                "shape": "S1t"
               },
               "S3Configuration": {
                 "shape": "S7"
@@ -63600,10 +63603,10 @@ module.exports={
               "TypeName": {},
               "IndexRotationPeriod": {},
               "BufferingHints": {
-                "shape": "S1c"
+                "shape": "S21"
               },
               "RetryOptions": {
-                "shape": "S1f"
+                "shape": "S24"
               },
               "S3BackupMode": {},
               "S3Configuration": {
@@ -63633,7 +63636,7 @@ module.exports={
                 "type": "integer"
               },
               "RetryOptions": {
-                "shape": "S1n"
+                "shape": "S2c"
               },
               "S3BackupMode": {},
               "S3Configuration": {
@@ -63739,7 +63742,7 @@ module.exports={
                   "members": {
                     "DestinationId": {},
                     "S3DestinationDescription": {
-                      "shape": "S27"
+                      "shape": "S2w"
                     },
                     "ExtendedS3DestinationDescription": {
                       "type": "structure",
@@ -63769,7 +63772,10 @@ module.exports={
                         },
                         "S3BackupMode": {},
                         "S3BackupDescription": {
-                          "shape": "S27"
+                          "shape": "S2w"
+                        },
+                        "DataFormatConversionConfiguration": {
+                          "shape": "Sw"
                         }
                       }
                     },
@@ -63786,23 +63792,23 @@ module.exports={
                         "RoleARN": {},
                         "ClusterJDBCURL": {},
                         "CopyCommand": {
-                          "shape": "Sy"
+                          "shape": "S1n"
                         },
                         "Username": {
-                          "shape": "S12"
+                          "shape": "S1r"
                         },
                         "RetryOptions": {
-                          "shape": "S14"
+                          "shape": "S1t"
                         },
                         "S3DestinationDescription": {
-                          "shape": "S27"
+                          "shape": "S2w"
                         },
                         "ProcessingConfiguration": {
                           "shape": "Sn"
                         },
                         "S3BackupMode": {},
                         "S3BackupDescription": {
-                          "shape": "S27"
+                          "shape": "S2w"
                         },
                         "CloudWatchLoggingOptions": {
                           "shape": "Si"
@@ -63818,14 +63824,14 @@ module.exports={
                         "TypeName": {},
                         "IndexRotationPeriod": {},
                         "BufferingHints": {
-                          "shape": "S1c"
+                          "shape": "S21"
                         },
                         "RetryOptions": {
-                          "shape": "S1f"
+                          "shape": "S24"
                         },
                         "S3BackupMode": {},
                         "S3DestinationDescription": {
-                          "shape": "S27"
+                          "shape": "S2w"
                         },
                         "ProcessingConfiguration": {
                           "shape": "Sn"
@@ -63845,11 +63851,11 @@ module.exports={
                           "type": "integer"
                         },
                         "RetryOptions": {
-                          "shape": "S1n"
+                          "shape": "S2c"
                         },
                         "S3BackupMode": {},
                         "S3DestinationDescription": {
-                          "shape": "S27"
+                          "shape": "S2w"
                         },
                         "ProcessingConfiguration": {
                           "shape": "Sn"
@@ -63922,7 +63928,7 @@ module.exports={
           "Tags": {
             "type": "list",
             "member": {
-              "shape": "S2l"
+              "shape": "S3a"
             }
           },
           "HasMoreTags": {
@@ -63941,7 +63947,7 @@ module.exports={
         "members": {
           "DeliveryStreamName": {},
           "Record": {
-            "shape": "S2o"
+            "shape": "S3d"
           }
         }
       },
@@ -63967,7 +63973,7 @@ module.exports={
           "Records": {
             "type": "list",
             "member": {
-              "shape": "S2o"
+              "shape": "S3d"
             }
           }
         }
@@ -64008,7 +64014,7 @@ module.exports={
           "Tags": {
             "type": "list",
             "member": {
-              "shape": "S2l"
+              "shape": "S3a"
             }
           }
         }
@@ -64051,7 +64057,7 @@ module.exports={
           "CurrentDeliveryStreamVersionId": {},
           "DestinationId": {},
           "S3DestinationUpdate": {
-            "shape": "S37",
+            "shape": "S3v",
             "deprecated": true
           },
           "ExtendedS3DestinationUpdate": {
@@ -64075,7 +64081,10 @@ module.exports={
               },
               "S3BackupMode": {},
               "S3BackupUpdate": {
-                "shape": "S37"
+                "shape": "S3v"
+              },
+              "DataFormatConversionConfiguration": {
+                "shape": "Sw"
               }
             }
           },
@@ -64085,26 +64094,26 @@ module.exports={
               "RoleARN": {},
               "ClusterJDBCURL": {},
               "CopyCommand": {
-                "shape": "Sy"
+                "shape": "S1n"
               },
               "Username": {
-                "shape": "S12"
+                "shape": "S1r"
               },
               "Password": {
-                "shape": "S13"
+                "shape": "S1s"
               },
               "RetryOptions": {
-                "shape": "S14"
+                "shape": "S1t"
               },
               "S3Update": {
-                "shape": "S37"
+                "shape": "S3v"
               },
               "ProcessingConfiguration": {
                 "shape": "Sn"
               },
               "S3BackupMode": {},
               "S3BackupUpdate": {
-                "shape": "S37"
+                "shape": "S3v"
               },
               "CloudWatchLoggingOptions": {
                 "shape": "Si"
@@ -64120,13 +64129,13 @@ module.exports={
               "TypeName": {},
               "IndexRotationPeriod": {},
               "BufferingHints": {
-                "shape": "S1c"
+                "shape": "S21"
               },
               "RetryOptions": {
-                "shape": "S1f"
+                "shape": "S24"
               },
               "S3Update": {
-                "shape": "S37"
+                "shape": "S3v"
               },
               "ProcessingConfiguration": {
                 "shape": "Sn"
@@ -64146,11 +64155,11 @@ module.exports={
                 "type": "integer"
               },
               "RetryOptions": {
-                "shape": "S1n"
+                "shape": "S2c"
               },
               "S3BackupMode": {},
               "S3Update": {
-                "shape": "S37"
+                "shape": "S3v"
               },
               "ProcessingConfiguration": {
                 "shape": "Sn"
@@ -64261,7 +64270,122 @@ module.exports={
         }
       }
     },
-    "Sy": {
+    "Sw": {
+      "type": "structure",
+      "members": {
+        "SchemaConfiguration": {
+          "type": "structure",
+          "members": {
+            "RoleARN": {},
+            "CatalogId": {},
+            "DatabaseName": {},
+            "TableName": {},
+            "Region": {},
+            "VersionId": {}
+          }
+        },
+        "InputFormatConfiguration": {
+          "type": "structure",
+          "members": {
+            "Deserializer": {
+              "type": "structure",
+              "members": {
+                "OpenXJsonSerDe": {
+                  "type": "structure",
+                  "members": {
+                    "ConvertDotsInJsonKeysToUnderscores": {
+                      "type": "boolean"
+                    },
+                    "CaseInsensitive": {
+                      "type": "boolean"
+                    },
+                    "ColumnToJsonKeyMappings": {
+                      "type": "map",
+                      "key": {},
+                      "value": {}
+                    }
+                  }
+                },
+                "HiveJsonSerDe": {
+                  "type": "structure",
+                  "members": {
+                    "TimestampFormats": {
+                      "type": "list",
+                      "member": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "OutputFormatConfiguration": {
+          "type": "structure",
+          "members": {
+            "Serializer": {
+              "type": "structure",
+              "members": {
+                "ParquetSerDe": {
+                  "type": "structure",
+                  "members": {
+                    "BlockSizeBytes": {
+                      "type": "integer"
+                    },
+                    "PageSizeBytes": {
+                      "type": "integer"
+                    },
+                    "Compression": {},
+                    "EnableDictionaryCompression": {
+                      "type": "boolean"
+                    },
+                    "MaxPaddingBytes": {
+                      "type": "integer"
+                    },
+                    "WriterVersion": {}
+                  }
+                },
+                "OrcSerDe": {
+                  "type": "structure",
+                  "members": {
+                    "StripeSizeBytes": {
+                      "type": "integer"
+                    },
+                    "BlockSizeBytes": {
+                      "type": "integer"
+                    },
+                    "RowIndexStride": {
+                      "type": "integer"
+                    },
+                    "EnablePadding": {
+                      "type": "boolean"
+                    },
+                    "PaddingTolerance": {
+                      "type": "double"
+                    },
+                    "Compression": {},
+                    "BloomFilterColumns": {
+                      "type": "list",
+                      "member": {}
+                    },
+                    "BloomFilterFalsePositiveProbability": {
+                      "type": "double"
+                    },
+                    "DictionaryKeyThreshold": {
+                      "type": "double"
+                    },
+                    "FormatVersion": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S1n": {
       "type": "structure",
       "required": [
         "DataTableName"
@@ -64272,15 +64396,15 @@ module.exports={
         "CopyOptions": {}
       }
     },
-    "S12": {
+    "S1r": {
       "type": "string",
       "sensitive": true
     },
-    "S13": {
+    "S1s": {
       "type": "string",
       "sensitive": true
     },
-    "S14": {
+    "S1t": {
       "type": "structure",
       "members": {
         "DurationInSeconds": {
@@ -64288,7 +64412,7 @@ module.exports={
         }
       }
     },
-    "S1c": {
+    "S21": {
       "type": "structure",
       "members": {
         "IntervalInSeconds": {
@@ -64299,7 +64423,7 @@ module.exports={
         }
       }
     },
-    "S1f": {
+    "S24": {
       "type": "structure",
       "members": {
         "DurationInSeconds": {
@@ -64307,7 +64431,7 @@ module.exports={
         }
       }
     },
-    "S1n": {
+    "S2c": {
       "type": "structure",
       "members": {
         "DurationInSeconds": {
@@ -64315,7 +64439,7 @@ module.exports={
         }
       }
     },
-    "S27": {
+    "S2w": {
       "type": "structure",
       "required": [
         "RoleARN",
@@ -64340,7 +64464,7 @@ module.exports={
         }
       }
     },
-    "S2l": {
+    "S3a": {
       "type": "structure",
       "required": [
         "Key"
@@ -64350,7 +64474,7 @@ module.exports={
         "Value": {}
       }
     },
-    "S2o": {
+    "S3d": {
       "type": "structure",
       "required": [
         "Data"
@@ -64361,7 +64485,7 @@ module.exports={
         }
       }
     },
-    "S37": {
+    "S3v": {
       "type": "structure",
       "members": {
         "RoleARN": {},
@@ -128281,7 +128405,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.237.1',
+  VERSION: '2.238.1',
 
   /**
    * @api private
@@ -152241,7 +152365,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":477,"lodash/assign":434}],493:[function(require,module,exports){
-// AWS SDK for JavaScript v2.237.1
+// AWS SDK for JavaScript v2.238.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
