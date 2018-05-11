@@ -31,6 +31,81 @@ describe('Publisher', function() {
 
             expect(publisher.clientId).to.equal('');
         });
+
+        it('trims "clientId" to 255 characters', function() {
+            var mockClientId = '';
+            for (var i = 0; i < 500; i++) {
+                mockClientId += 'a';
+            }
+
+            var publisher = new Publisher({
+                clientId: mockClientId
+            });
+
+            expect(publisher.clientId.length).to.equal(255);
+        });
+    });
+
+    describe('trimFields', function() {
+        var mockValue = '';
+        for (var i = 0; i < 1000; i++) {
+            mockValue += 'a';
+        }
+
+        it('trims UserAgent to 256 characters', function() {
+            var mockEvent = {UserAgent: mockValue};
+            var publisher = new Publisher({
+                clientId: 'Foo'
+            });
+
+            expect(mockEvent.UserAgent.length).to.equal(1000);
+            publisher.trimFields(mockEvent);
+            expect(mockEvent.UserAgent.length).to.equal(256);
+        });
+
+        it('trims SdkException to 128 characters', function() {
+            var mockEvent = {SdkException: mockValue};
+            var publisher = new Publisher({
+                clientId: 'Foo'
+            });
+
+            expect(mockEvent.SdkException.length).to.equal(1000);
+            publisher.trimFields(mockEvent);
+            expect(mockEvent.SdkException.length).to.equal(128);
+        });
+
+        it('trims SdkExceptionMessage to 512 characters', function() {
+            var mockEvent = {SdkExceptionMessage: mockValue};
+            var publisher = new Publisher({
+                clientId: 'Foo'
+            });
+
+            expect(mockEvent.SdkExceptionMessage.length).to.equal(1000);
+            publisher.trimFields(mockEvent);
+            expect(mockEvent.SdkExceptionMessage.length).to.equal(512);
+        });
+
+        it('trims AwsException to 128 characters', function() {
+            var mockEvent = {AwsException: mockValue};
+            var publisher = new Publisher({
+                clientId: 'Foo'
+            });
+
+            expect(mockEvent.AwsException.length).to.equal(1000);
+            publisher.trimFields(mockEvent);
+            expect(mockEvent.AwsException.length).to.equal(128);
+        });
+
+        it('trims AwsExceptionMessage to 512 characters', function() {
+            var mockEvent = {AwsExceptionMessage: mockValue};
+            var publisher = new Publisher({
+                clientId: 'Foo'
+            });
+
+            expect(mockEvent.AwsExceptionMessage.length).to.equal(1000);
+            publisher.trimFields(mockEvent);
+            expect(mockEvent.AwsExceptionMessage.length).to.equal(512);
+        });
     });
 
     describe('eventHandler', function() {
@@ -75,6 +150,29 @@ describe('Publisher', function() {
             var publishArgument = publishDatagramSpy.calls[0].arguments[0];
             expect(Buffer.isBuffer(publishArgument)).to.equal(true);
             expect(JSON.parse(publishArgument.toString())).to.eql(mockEvent);
+        });
+
+        it('trims messages before sending', function() {
+            var mockUserAgent = '';
+            for (var i = 0; i < 1000; i++) {
+                mockUserAgent += 'a';
+            }
+
+            var mockEvent = {foo: 'bar', UserAgent: mockUserAgent};
+            var publisher = new Publisher({
+                clientId: 'Foo'
+            });
+
+            var publishDatagramSpy = spyOn(publisher, 'publishDatagram');
+
+            publisher.eventHandler(mockEvent);
+
+            expect(mockEvent.ClientId).to.equal('Foo');
+            var publishArgument = publishDatagramSpy.calls[0].arguments[0];
+            expect(Buffer.isBuffer(publishArgument)).to.equal(true);
+            var parsedPublishArgument = JSON.parse(publishArgument.toString());
+            expect(parsedPublishArgument).to.eql(mockEvent);
+            expect(parsedPublishArgument.UserAgent.length).to.equal(256);
         });
     });
 
