@@ -901,14 +901,18 @@
       })
     })
 
-    it('should emit events corresponding to event interface', function() {
+
+    it('should emit api call events corresponding to event interface', function() {
       helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']); 
       var client = new MockService();
       client.on('apiCall', function apiCallListener(event) {
         expect(event.Type).to.equal('ApiCall');
-      });
-      client.on('apiCallAttempt', function apiCallListener(event) {
-        expect(event.Type).to.equal('ApiCallAttempt');
+        expect(event.Service).to.equal('MockService');
+        expect(event.Api).to.equal('operationName');
+        expect(Math.abs(event.Timestemp - Date.now()) < 100).to.equal(true);
+        expect(event.Version).to.equal(1);
+        expect(event.AttemptCount).to.equal(0);
+        expect(typeof event.Latency).to.equal('number');
       });
       client.makeRequest('operationName', function(err, data) {});
     })
