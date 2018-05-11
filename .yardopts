@@ -1,6 +1,10 @@
 -m markdown
 --markup-provider rdiscount
 --exclude lib/aws.js
+--exclude lib/browser.js
+--exclude lib/browser_loader.js
+--exclude lib/node_loader.js
+--exclude lib/react-native-loader.js
 --no-api private
 --api experimental
 --no-highlight
