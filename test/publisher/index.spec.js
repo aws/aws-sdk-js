@@ -137,15 +137,19 @@ describe('Publisher', function() {
         });
 
         it('converts the message to a Buffer before sending', function() {
+            // create mocks
             var mockEvent = {foo: 'bar'};
             var publisher = new Publisher({
                 clientId: 'Foo'
             });
 
+            // attach spy to verify the message is sent to the next function
             var publishDatagramSpy = spyOn(publisher, 'publishDatagram');
 
+            // trigger method being tested
             publisher.eventHandler(mockEvent);
 
+            // assertions
             expect(mockEvent.ClientId).to.equal('Foo');
             var publishArgument = publishDatagramSpy.calls[0].arguments[0];
             expect(Buffer.isBuffer(publishArgument)).to.equal(true);
