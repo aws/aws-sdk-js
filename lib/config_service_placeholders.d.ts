@@ -137,6 +137,8 @@ export abstract class ConfigurationServicePlaceholders {
   fms?: AWS.FMS.Types.ClientConfiguration;
   secretsmanager?: AWS.SecretsManager.Types.ClientConfiguration;
   iotanalytics?: AWS.IoTAnalytics.Types.ClientConfiguration;
+  iot1clickdevicesservice?: AWS.IoT1ClickDevicesService.Types.ClientConfiguration;
+  iot1clickprojects?: AWS.IoT1ClickProjects.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -276,4 +278,6 @@ export interface ConfigurationServiceApiVersions {
   fms?: AWS.FMS.Types.apiVersion;
   secretsmanager?: AWS.SecretsManager.Types.apiVersion;
   iotanalytics?: AWS.IoTAnalytics.Types.apiVersion;
+  iot1clickdevicesservice?: AWS.IoT1ClickDevicesService.Types.apiVersion;
+  iot1clickprojects?: AWS.IoT1ClickProjects.Types.apiVersion;
 }

@@ -558,5 +558,13 @@
   },
   "iotanalytics": {
     "name": "IoTAnalytics"
+  },
+  "iot1clickdevicesservice": {
+    "prefix": "iot1click-devices",
+    "name": "IoT1ClickDevicesService"
+  },
+  "iot1clickprojects": {
+    "prefix": "iot1click-projects",
+    "name": "IoT1ClickProjects"
   }
 }

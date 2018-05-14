@@ -135,3 +135,5 @@ export import ACMPCA = require('./acmpca');
 export import FMS = require('./fms');
 export import SecretsManager = require('./secretsmanager');
 export import IoTAnalytics = require('./iotanalytics');
+export import IoT1ClickDevicesService = require('./iot1clickdevicesservice');
+export import IoT1ClickProjects = require('./iot1clickprojects');

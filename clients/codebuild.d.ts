@@ -44,11 +44,11 @@ declare class CodeBuild extends Service {
    */
   createProject(callback?: (err: AWSError, data: CodeBuild.Types.CreateProjectOutput) => void): Request<CodeBuild.Types.CreateProjectOutput, AWSError>;
   /**
-   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 9 in Change a Build Project's Settings. 
+   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in Change a Build Project's Settings. 
    */
   createWebhook(params: CodeBuild.Types.CreateWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
   /**
-   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 9 in Change a Build Project's Settings. 
+   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in Change a Build Project's Settings. 
    */
   createWebhook(callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
   /**
@@ -246,6 +246,10 @@ declare namespace CodeBuild {
      * Information about the build environment for this build.
      */
     environment?: ProjectEnvironment;
+    /**
+     * The name of a service role used for this build.
+     */
+    serviceRole?: NonEmptyString;
     /**
      * Information about the build's logs in Amazon CloudWatch Logs.
      */
@@ -679,7 +683,7 @@ declare namespace CodeBuild {
      */
     namespaceType?: ArtifactNamespace;
     /**
-     * Along with path and namespaceType, the pattern that AWS CodeBuild will use to name and store the output artifact, as follows:   If type is set to CODEPIPELINE, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.   If type is set to NO_ARTIFACTS, then this value will be ignored if specified, because no build output will be produced.   If type is set to S3, this is the name of the output artifact object.   For example, if path is set to MyArtifacts, namespaceType is set to BUILD_ID, and name is set to MyArtifact.zip, then the output artifact would be stored in MyArtifacts/build-ID/MyArtifact.zip.
+     * Along with path and namespaceType, the pattern that AWS CodeBuild will use to name and store the output artifact, as follows:   If type is set to CODEPIPELINE, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.   If type is set to NO_ARTIFACTS, then this value will be ignored if specified, because no build output will be produced.   If type is set to S3, this is the name of the output artifact object. If you set the name to be a forward slash ("/"), then the artifact is stored in the root of the output bucket.   For example:    If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and name is set to MyArtifact.zip, then the output artifact would be stored in MyArtifacts/build-ID/MyArtifact.zip.     If path is empty, namespaceType is set to NONE, and name is set to "/", then the output artifact would be stored in the root of the output bucket.     If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and name is set to "/", then the output artifact would be stored in MyArtifacts/build-ID .   
      */
     name?: String;
     /**
@@ -796,6 +800,18 @@ declare namespace CodeBuild {
      */
     environmentVariablesOverride?: EnvironmentVariables;
     /**
+     * A source input type for this build that overrides the source input defined in the build project
+     */
+    sourceTypeOverride?: SourceType;
+    /**
+     * A location that overrides for this build the source location for the one defined in the build project.
+     */
+    sourceLocationOverride?: String;
+    /**
+     * An authorization type for this build that overrides the one defined in the build project. This override applies only if the build project's source is BitBucket or GitHub.
+     */
+    sourceAuthOverride?: SourceAuth;
+    /**
      * The user-defined depth of history, with a minimum value of 0, that overrides, for this build only, any previous depth of history defined in the build project.
      */
     gitCloneDepthOverride?: GitCloneDepth;
@@ -804,9 +820,45 @@ declare namespace CodeBuild {
      */
     buildspecOverride?: String;
     /**
+     * Enable this flag to override the insecure SSL setting that is specified in the build project. The insecure SSL setting determines whether to ignore SSL warnings while connecting to the project source code. This override applies only if the build's source is GitHub Enterprise.
+     */
+    insecureSslOverride?: WrapperBoolean;
+    /**
+     * A container type for this build that overrides the one specified in the build project.
+     */
+    environmentTypeOverride?: EnvironmentType;
+    /**
+     * The name of an image for this build that overrides the one specified in the build project.
+     */
+    imageOverride?: NonEmptyString;
+    /**
+     * The name of a compute type for this build that overrides the one specified in the build project.
+     */
+    computeTypeOverride?: ComputeType;
+    /**
+     * The name of a certificate for this build that overrides the one specified in the build project.
+     */
+    certificateOverride?: String;
+    /**
+     * A ProjectCache object specified for this build that overrides the one defined in the build project.
+     */
+    cacheOverride?: ProjectCache;
+    /**
+     * The name of a service role for this build that overrides the one specified in the build project.
+     */
+    serviceRoleOverride?: NonEmptyString;
+    /**
+     * Enable this flag to override privileged mode in the build project.
+     */
+    privilegedModeOverride?: WrapperBoolean;
+    /**
      * The number of build timeout minutes, from 5 to 480 (8 hours), that overrides, for this build only, the latest setting already defined in the build project.
      */
     timeoutInMinutesOverride?: TimeOut;
+    /**
+     * A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuild request. The token is included in the StartBuild request and is valid for 12 hours. If you repeat the StartBuild request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error. 
+     */
+    idempotencyToken?: String;
   }
   export interface StartBuildOutput {
     /**

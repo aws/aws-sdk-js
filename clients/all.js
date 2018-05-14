@@ -136,5 +136,7 @@ module.exports = {
   ACMPCA: require('./acmpca'),
   FMS: require('./fms'),
   SecretsManager: require('./secretsmanager'),
-  IoTAnalytics: require('./iotanalytics')
+  IoTAnalytics: require('./iotanalytics'),
+  IoT1ClickDevicesService: require('./iot1clickdevicesservice'),
+  IoT1ClickProjects: require('./iot1clickprojects')
 };
