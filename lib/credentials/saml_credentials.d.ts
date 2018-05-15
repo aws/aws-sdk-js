@@ -28,7 +28,7 @@ export class SAMLCredentials extends Credentials {
         /**
          * The duration, in seconds, of the role session.
          * The minimum duration is 15 minutes.
-         * The maximum duration is 1 hour.
+         * The maximum duration is 12 hours.
          */
         DurationSeconds?: number
     }
