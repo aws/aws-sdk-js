@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Update ResourceType enum with values for XRay resource"
+    }
+]

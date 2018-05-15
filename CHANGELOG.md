@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.239.1-->
+<!--LATEST=2.240.1-->
 <!--ENTRYINSERT-->
+
+## 2.240.1
+* feature: ConfigService: Update ResourceType enum with values for XRay resource
 
 ## 2.239.1
 * feature: CodeBuild: Adding support for more override fields for StartBuild API, add support for idempotency token field  for StartBuild API in AWS CodeBuild.
