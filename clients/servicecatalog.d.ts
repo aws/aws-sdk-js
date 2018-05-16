@@ -1441,6 +1441,10 @@ declare namespace ServiceCatalog {
      * The maximum number of items to return with this call.
      */
     PageSize?: PageSize;
+    /**
+     * The type of shared portfolios to list. The default is to list imported portfolios.    AWS_SERVICECATALOG - List default portfolios    IMPORTED - List imported portfolios  
+     */
+    PortfolioShareType?: PortfolioShareType;
   }
   export interface ListAcceptedPortfolioSharesOutput {
     /**
@@ -1822,6 +1826,7 @@ declare namespace ServiceCatalog {
   export type PortfolioDetails = PortfolioDetail[];
   export type PortfolioDisplayName = string;
   export type PortfolioName = string;
+  export type PortfolioShareType = "IMPORTED"|"AWS_SERVICECATALOG"|string;
   export interface Principal {
     /**
      * The ARN of the principal (IAM user, role, or group).

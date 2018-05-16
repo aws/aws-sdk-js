@@ -2260,6 +2260,10 @@
         "PageSize":{
           "shape":"PageSize",
           "documentation":"<p>The maximum number of items to return with this call.</p>"
+        },
+        "PortfolioShareType":{
+          "shape":"PortfolioShareType",
+          "documentation":"<p>The type of shared portfolios to list. The default is to list imported portfolios.</p> <ul> <li> <p> <code>AWS_SERVICECATALOG</code> - List default portfolios</p> </li> <li> <p> <code>IMPORTED</code> - List imported portfolios</p> </li> </ul>"
         }
       }
     },
@@ -2772,6 +2776,13 @@
       "min":1
     },
     "PortfolioName":{"type":"string"},
+    "PortfolioShareType":{
+      "type":"string",
+      "enum":[
+        "IMPORTED",
+        "AWS_SERVICECATALOG"
+      ]
+    },
     "Principal":{
       "type":"structure",
       "members":{

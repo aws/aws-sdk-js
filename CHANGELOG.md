@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.240.1-->
+<!--LATEST=2.241.1-->
 <!--ENTRYINSERT-->
+
+## 2.241.1
+* feature: ServiceCatalog: Users can now pass a new option to ListAcceptedPortfolioShares called portfolio-share-type with a value of AWS_SERVICECATALOG in order to access Getting Started Portfolios that contain selected products representing common customer use cases.
 
 ## 2.240.1
 * feature: ConfigService: Update ResourceType enum with values for XRay resource
