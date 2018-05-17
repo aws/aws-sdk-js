@@ -1135,7 +1135,7 @@
         },
         "terminationWaitTimeInMinutes":{
           "shape":"Duration",
-          "documentation":"<p>The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment.</p>"
+          "documentation":"<p>The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment. The maximum setting is 2880 minutes (2 days).</p>"
         }
       },
       "documentation":"<p>Information about whether instances in the original environment are terminated when a blue/green deployment is successful.</p>"
@@ -3211,11 +3211,11 @@
       "members":{
         "elbInfoList":{
           "shape":"ELBInfoList",
-          "documentation":"<p>An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.</p>"
+          "documentation":"<p>An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.</p> <note> <p> Adding more than one load balancer to the array is not supported. </p> </note>"
         },
         "targetGroupInfoList":{
           "shape":"TargetGroupInfoList",
-          "documentation":"<p>An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.</p>"
+          "documentation":"<p>An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.</p> <note> <p> Adding more than one target group to the array is not supported. </p> </note>"
         }
       },
       "documentation":"<p>Information about the Elastic Load Balancing load balancer or target group used in a deployment.</p>"

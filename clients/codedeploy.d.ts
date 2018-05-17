@@ -551,7 +551,7 @@ declare namespace CodeDeploy {
      */
     action?: InstanceAction;
     /**
-     * The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment.
+     * The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment. The maximum setting is 2880 minutes (2 days).
      */
     terminationWaitTimeInMinutes?: Duration;
   }
@@ -1575,11 +1575,11 @@ declare namespace CodeDeploy {
   export type ListStateFilterAction = "include"|"exclude"|"ignore"|string;
   export interface LoadBalancerInfo {
     /**
-     * An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.
+     * An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.   Adding more than one load balancer to the array is not supported.  
      */
     elbInfoList?: ELBInfoList;
     /**
-     * An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.
+     * An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.   Adding more than one target group to the array is not supported.  
      */
     targetGroupInfoList?: TargetGroupInfoList;
   }
