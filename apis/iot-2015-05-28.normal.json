@@ -462,6 +462,39 @@
       ],
       "documentation":"<p>Deletes the specified certificate.</p> <p>A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the <a>DetachPrincipalPolicy</a> API to detach all policies. Next, use the <a>UpdateCertificate</a> API to set the certificate to the INACTIVE status.</p>"
     },
+    "DeleteJob":{
+      "name":"DeleteJob",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/jobs/{jobId}"
+      },
+      "input":{"shape":"DeleteJobRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidStateTransitionException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Deletes a job and its related job executions.</p> <p>Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as \"DELETION_IN_PROGRESS\". Attempting to delete or cancel a job whose status is already \"DELETION_IN_PROGRESS\" will result in an error.</p> <p>Only 10 jobs may have status \"DELETION_IN_PROGRESS\" at the same time, or a LimitExceededException will occur.</p>"
+    },
+    "DeleteJobExecution":{
+      "name":"DeleteJobExecution",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/things/{thingName}/jobs/{jobId}/executionNumber/{executionNumber}"
+      },
+      "input":{"shape":"DeleteJobExecutionRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidStateTransitionException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Deletes a job execution.</p>"
+    },
     "DeleteOTAUpdate":{
       "name":"DeleteOTAUpdate",
       "http":{
@@ -3663,6 +3696,58 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
+    "DeleteJobExecutionRequest":{
+      "type":"structure",
+      "required":[
+        "jobId",
+        "thingName",
+        "executionNumber"
+      ],
+      "members":{
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The ID of the job whose execution on a particular device will be deleted.</p>",
+          "location":"uri",
+          "locationName":"jobId"
+        },
+        "thingName":{
+          "shape":"ThingName",
+          "documentation":"<p>The name of the thing whose job execution will be deleted.</p>",
+          "location":"uri",
+          "locationName":"thingName"
+        },
+        "executionNumber":{
+          "shape":"ExecutionNumber",
+          "documentation":"<p>The ID of the job execution to be deleted. The <code>executionNumber</code> refers to the execution of a particular job on a particular device.</p> <p>Note that once a job execution is deleted, the <code>executionNumber</code> may be reused by IoT, so be sure you get and use the correct value here.</p>",
+          "location":"uri",
+          "locationName":"executionNumber"
+        },
+        "force":{
+          "shape":"ForceFlag",
+          "documentation":"<p>(Optional) When true, you can delete a job execution which is \"IN_PROGRESS\". Otherwise, you can only delete a job execution which is in a terminal state (\"SUCCEEDED\", \"FAILED\", \"REJECTED\", \"REMOVED\" or \"CANCELED\") or an exception will occur. The default is false.</p> <note> <p>Deleting a job execution which is \"IN_PROGRESS\", will cause the device to be unable to access job information or update the job execution status. Use caution and ensure that the device is able to recover to a valid state.</p> </note>",
+          "location":"querystring",
+          "locationName":"force"
+        }
+      }
+    },
+    "DeleteJobRequest":{
+      "type":"structure",
+      "required":["jobId"],
+      "members":{
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The ID of the job to be deleted.</p> <p>After a job deletion is completed, you may reuse this jobId when you create a new job. However, this is not recommended, and you must ensure that your devices are not using the jobId to refer to the deleted job.</p>",
+          "location":"uri",
+          "locationName":"jobId"
+        },
+        "force":{
+          "shape":"ForceFlag",
+          "documentation":"<p>(Optional) When true, you can delete a job which is \"IN_PROGRESS\". Otherwise, you can only delete a job which is in a terminal state (\"COMPLETED\" or \"CANCELED\") or an exception will occur. The default is false.</p> <note> <p>Deleting a job which is \"IN_PROGRESS\", will cause a device which is executing the job to be unable to access job information or update the job execution status. Use caution and ensure that each device executing a job which is deleted is able to recover to a valid state.</p> </note>",
+          "location":"querystring",
+          "locationName":"force"
+        }
+      }
+    },
     "DeleteOTAUpdateRequest":{
       "type":"structure",
       "required":["otaUpdateId"],
@@ -4694,6 +4779,7 @@
     },
     "Flag":{"type":"boolean"},
     "ForceDelete":{"type":"boolean"},
+    "ForceFlag":{"type":"boolean"},
     "FunctionArn":{"type":"string"},
     "GEMaxResults":{
       "type":"integer",
@@ -5090,6 +5176,15 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "InvalidStateTransitionException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>An attempt was made to change to an invalid state, for example by deleting a job or a job execution which is \"IN_PROGRESS\" without setting the <code>force</code> parameter.</p>",
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
     "IotAnalyticsAction":{
       "type":"structure",
       "members":{
@@ -5103,10 +5198,10 @@
         },
         "roleArn":{
           "shape":"AwsArn",
-          "documentation":"<p>The ARN of the role which has a policy that grants IoT permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).</p>"
+          "documentation":"<p>The ARN of the role which has a policy that grants IoT Analytics permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).</p>"
         }
       },
-      "documentation":"<p>Sends message data to an AWS IoT Analytics channel.</p>"
+      "documentation":"<p>Sends messge data to an AWS IoT Analytics channel.</p>"
     },
     "IsAuthenticated":{"type":"boolean"},
     "IsDefaultVersion":{"type":"boolean"},
@@ -5498,7 +5593,7 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
-      "documentation":"<p>The number of attached entities exceeds the limit.</p>",
+      "documentation":"<p>A limit has been exceeded.</p>",
       "error":{"httpStatusCode":410},
       "exception":true
     },

@@ -28,19 +28,19 @@ declare class SES extends Service {
    */
   createConfigurationSet(callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetResponse) => void): Request<SES.Types.CreateConfigurationSetResponse, AWSError>;
   /**
-   * Creates a configuration set event destination.  When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Creates a configuration set event destination.  When you create or update an event destination, you must provide one, and only one, destination. The destination can be CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createConfigurationSetEventDestination(params: SES.Types.CreateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<SES.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Creates a configuration set event destination.  When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Creates a configuration set event destination.  When you create or update an event destination, you must provide one, and only one, destination. The destination can be CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createConfigurationSetEventDestination(callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<SES.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Creates an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.
+   * Creates an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using custom domains, see the Amazon SES Developer Guide.
    */
   createConfigurationSetTrackingOptions(params: SES.Types.CreateConfigurationSetTrackingOptionsRequest, callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.CreateConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
-   * Creates an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.
+   * Creates an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using custom domains, see the Amazon SES Developer Guide.
    */
   createConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.CreateConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class SES extends Service {
    */
   deleteConfigurationSetEventDestination(callback?: (err: AWSError, data: SES.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<SES.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Deletes an association between a configuration set and a custom domain for open and click event tracking. By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.  Deleting this kind of association will result in emails sent using the specified configuration set to capture open and click events using the standard, Amazon SES-operated domains. 
+   * Deletes an association between a configuration set and a custom domain for open and click event tracking. By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using custom domains, see the Amazon SES Developer Guide.  Deleting this kind of association will result in emails sent using the specified configuration set to capture open and click events using the standard, Amazon SES-operated domains. 
    */
   deleteConfigurationSetTrackingOptions(params: SES.Types.DeleteConfigurationSetTrackingOptionsRequest, callback?: (err: AWSError, data: SES.Types.DeleteConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.DeleteConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
-   * Deletes an association between a configuration set and a custom domain for open and click event tracking. By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.  Deleting this kind of association will result in emails sent using the specified configuration set to capture open and click events using the standard, Amazon SES-operated domains. 
+   * Deletes an association between a configuration set and a custom domain for open and click event tracking. By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using custom domains, see the Amazon SES Developer Guide.  Deleting this kind of association will result in emails sent using the specified configuration set to capture open and click events using the standard, Amazon SES-operated domains. 
    */
   deleteConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SES.Types.DeleteConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.DeleteConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
@@ -204,7 +204,7 @@ declare class SES extends Service {
    */
   describeReceiptRuleSet(callback?: (err: AWSError, data: SES.Types.DescribeReceiptRuleSetResponse) => void): Request<SES.Types.DescribeReceiptRuleSetResponse, AWSError>;
   /**
-   * Returns the email sending status of the Amazon SES account. You can execute this operation no more than once per second.
+   * Returns the email sending status of the Amazon SES account for the current region. You can execute this operation no more than once per second.
    */
   getAccountSendingEnabled(callback?: (err: AWSError, data: SES.Types.GetAccountSendingEnabledResponse) => void): Request<SES.Types.GetAccountSendingEnabledResponse, AWSError>;
   /**
@@ -260,7 +260,7 @@ declare class SES extends Service {
    */
   getSendQuota(callback?: (err: AWSError, data: SES.Types.GetSendQuotaResponse) => void): Request<SES.Types.GetSendQuotaResponse, AWSError>;
   /**
-   * Provides sending statistics for the Amazon SES account. The result is a list of data points, representing the last two weeks of sending activity. Each data point in the list contains statistics for a 15-minute period of time. You can execute this operation no more than once per second.
+   * Provides sending statistics for the current AWS Region. The result is a list of data points, representing the last two weeks of sending activity. Each data point in the list contains statistics for a 15-minute period of time. You can execute this operation no more than once per second.
    */
   getSendStatistics(callback?: (err: AWSError, data: SES.Types.GetSendStatisticsResponse) => void): Request<SES.Types.GetSendStatisticsResponse, AWSError>;
   /**
@@ -272,27 +272,27 @@ declare class SES extends Service {
    */
   getTemplate(callback?: (err: AWSError, data: SES.Types.GetTemplateResponse) => void): Request<SES.Types.GetTemplateResponse, AWSError>;
   /**
-   * Provides a list of the configuration sets associated with your Amazon SES account. For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.  You can execute this operation no more than once per second. This operation will return up to 1,000 configuration sets each time it is run. If your Amazon SES account has more than 1,000 configuration sets, this operation will also return a NextToken element. You can then execute the ListConfigurationSets operation again, passing the NextToken parameter and the value of the NextToken element to retrieve additional results.
+   * Provides a list of the configuration sets associated with your Amazon SES account in the current AWS Region. For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.  You can execute this operation no more than once per second. This operation will return up to 1,000 configuration sets each time it is run. If your Amazon SES account has more than 1,000 configuration sets, this operation will also return a NextToken element. You can then execute the ListConfigurationSets operation again, passing the NextToken parameter and the value of the NextToken element to retrieve additional results.
    */
   listConfigurationSets(params: SES.Types.ListConfigurationSetsRequest, callback?: (err: AWSError, data: SES.Types.ListConfigurationSetsResponse) => void): Request<SES.Types.ListConfigurationSetsResponse, AWSError>;
   /**
-   * Provides a list of the configuration sets associated with your Amazon SES account. For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.  You can execute this operation no more than once per second. This operation will return up to 1,000 configuration sets each time it is run. If your Amazon SES account has more than 1,000 configuration sets, this operation will also return a NextToken element. You can then execute the ListConfigurationSets operation again, passing the NextToken parameter and the value of the NextToken element to retrieve additional results.
+   * Provides a list of the configuration sets associated with your Amazon SES account in the current AWS Region. For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.  You can execute this operation no more than once per second. This operation will return up to 1,000 configuration sets each time it is run. If your Amazon SES account has more than 1,000 configuration sets, this operation will also return a NextToken element. You can then execute the ListConfigurationSets operation again, passing the NextToken parameter and the value of the NextToken element to retrieve additional results.
    */
   listConfigurationSets(callback?: (err: AWSError, data: SES.Types.ListConfigurationSetsResponse) => void): Request<SES.Types.ListConfigurationSetsResponse, AWSError>;
   /**
-   * Lists the existing custom verification email templates for your account. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Lists the existing custom verification email templates for your account in the current AWS Region. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listCustomVerificationEmailTemplates(params: SES.Types.ListCustomVerificationEmailTemplatesRequest, callback?: (err: AWSError, data: SES.Types.ListCustomVerificationEmailTemplatesResponse) => void): Request<SES.Types.ListCustomVerificationEmailTemplatesResponse, AWSError>;
   /**
-   * Lists the existing custom verification email templates for your account. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Lists the existing custom verification email templates for your account in the current AWS Region. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listCustomVerificationEmailTemplates(callback?: (err: AWSError, data: SES.Types.ListCustomVerificationEmailTemplatesResponse) => void): Request<SES.Types.ListCustomVerificationEmailTemplatesResponse, AWSError>;
   /**
-   * Returns a list containing all of the identities (email addresses and domains) for your AWS account, regardless of verification status. You can execute this operation no more than once per second.
+   * Returns a list containing all of the identities (email addresses and domains) for your AWS account in the current AWS Region, regardless of verification status. You can execute this operation no more than once per second.
    */
   listIdentities(params: SES.Types.ListIdentitiesRequest, callback?: (err: AWSError, data: SES.Types.ListIdentitiesResponse) => void): Request<SES.Types.ListIdentitiesResponse, AWSError>;
   /**
-   * Returns a list containing all of the identities (email addresses and domains) for your AWS account, regardless of verification status. You can execute this operation no more than once per second.
+   * Returns a list containing all of the identities (email addresses and domains) for your AWS account in the current AWS Region, regardless of verification status. You can execute this operation no more than once per second.
    */
   listIdentities(callback?: (err: AWSError, data: SES.Types.ListIdentitiesResponse) => void): Request<SES.Types.ListIdentitiesResponse, AWSError>;
   /**
@@ -304,27 +304,27 @@ declare class SES extends Service {
    */
   listIdentityPolicies(callback?: (err: AWSError, data: SES.Types.ListIdentityPoliciesResponse) => void): Request<SES.Types.ListIdentityPoliciesResponse, AWSError>;
   /**
-   * Lists the IP address filters associated with your AWS account. For information about managing IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Lists the IP address filters associated with your AWS account in the current AWS Region. For information about managing IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listReceiptFilters(params: SES.Types.ListReceiptFiltersRequest, callback?: (err: AWSError, data: SES.Types.ListReceiptFiltersResponse) => void): Request<SES.Types.ListReceiptFiltersResponse, AWSError>;
   /**
-   * Lists the IP address filters associated with your AWS account. For information about managing IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Lists the IP address filters associated with your AWS account in the current AWS Region. For information about managing IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listReceiptFilters(callback?: (err: AWSError, data: SES.Types.ListReceiptFiltersResponse) => void): Request<SES.Types.ListReceiptFiltersResponse, AWSError>;
   /**
-   * Lists the receipt rule sets that exist under your AWS account. If there are additional receipt rule sets to be retrieved, you will receive a NextToken that you can provide to the next call to ListReceiptRuleSets to retrieve the additional entries. For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Lists the receipt rule sets that exist under your AWS account in the current AWS Region. If there are additional receipt rule sets to be retrieved, you will receive a NextToken that you can provide to the next call to ListReceiptRuleSets to retrieve the additional entries. For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listReceiptRuleSets(params: SES.Types.ListReceiptRuleSetsRequest, callback?: (err: AWSError, data: SES.Types.ListReceiptRuleSetsResponse) => void): Request<SES.Types.ListReceiptRuleSetsResponse, AWSError>;
   /**
-   * Lists the receipt rule sets that exist under your AWS account. If there are additional receipt rule sets to be retrieved, you will receive a NextToken that you can provide to the next call to ListReceiptRuleSets to retrieve the additional entries. For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Lists the receipt rule sets that exist under your AWS account in the current AWS Region. If there are additional receipt rule sets to be retrieved, you will receive a NextToken that you can provide to the next call to ListReceiptRuleSets to retrieve the additional entries. For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listReceiptRuleSets(callback?: (err: AWSError, data: SES.Types.ListReceiptRuleSetsResponse) => void): Request<SES.Types.ListReceiptRuleSetsResponse, AWSError>;
   /**
-   * Lists the email templates present in your Amazon SES account. You can execute this operation no more than once per second.
+   * Lists the email templates present in your Amazon SES account in the current AWS Region. You can execute this operation no more than once per second.
    */
   listTemplates(params: SES.Types.ListTemplatesRequest, callback?: (err: AWSError, data: SES.Types.ListTemplatesResponse) => void): Request<SES.Types.ListTemplatesResponse, AWSError>;
   /**
-   * Lists the email templates present in your Amazon SES account. You can execute this operation no more than once per second.
+   * Lists the email templates present in your Amazon SES account in the current AWS Region. You can execute this operation no more than once per second.
    */
   listTemplates(callback?: (err: AWSError, data: SES.Types.ListTemplatesResponse) => void): Request<SES.Types.ListTemplatesResponse, AWSError>;
   /**
@@ -364,11 +364,11 @@ declare class SES extends Service {
    */
   sendBulkTemplatedEmail(callback?: (err: AWSError, data: SES.Types.SendBulkTemplatedEmailResponse) => void): Request<SES.Types.SendBulkTemplatedEmailResponse, AWSError>;
   /**
-   * Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Adds an email address to the list of identities for your Amazon SES account in the current AWS Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   sendCustomVerificationEmail(params: SES.Types.SendCustomVerificationEmailRequest, callback?: (err: AWSError, data: SES.Types.SendCustomVerificationEmailResponse) => void): Request<SES.Types.SendCustomVerificationEmailResponse, AWSError>;
   /**
-   * Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Adds an email address to the list of identities for your Amazon SES account in the current AWS Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   sendCustomVerificationEmail(callback?: (err: AWSError, data: SES.Types.SendCustomVerificationEmailResponse) => void): Request<SES.Types.SendCustomVerificationEmailResponse, AWSError>;
   /**
@@ -388,11 +388,11 @@ declare class SES extends Service {
    */
   sendRawEmail(callback?: (err: AWSError, data: SES.Types.SendRawEmailResponse) => void): Request<SES.Types.SendRawEmailResponse, AWSError>;
   /**
-   * Composes an email message using an email template and immediately queues it for sending. In order to send email using the SendTemplatedEmail operation, your call to the API must meet the following requirements:   The call must refer to an existing email template. You can create email templates using the CreateTemplate operation.   The message must be sent from a verified email address or domain.   If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be less than 10 MB.   Calls to the SendTemplatedEmail operation may only include one Destination parameter. A destination is a set of recipients who will receive the same version of the email. The Destination parameter can include up to 50 recipients, across the To:, CC: and BCC: fields.   The Destination parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.  
+   * Composes an email message using an email template and immediately queues it for sending. In order to send email using the SendTemplatedEmail operation, your call to the API must meet the following requirements:   The call must refer to an existing email template. You can create email templates using the CreateTemplate operation.   The message must be sent from a verified email address or domain.   If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be less than 10 MB.   Calls to the SendTemplatedEmail operation may only include one Destination parameter. A destination is a set of recipients who will receive the same version of the email. The Destination parameter can include up to 50 recipients, across the To:, CC: and BCC: fields.   The Destination parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.    If your call to the SendTemplatedEmail operation includes all of the required parameters, Amazon SES accepts it and returns a Message ID. However, if Amazon SES can't render the email because the template contains errors, it doesn't send the email. Additionally, because it already accepted the message, Amazon SES doesn't return a message stating that it was unable to send the email. For these reasons, we highly recommend that you set up Amazon SES to send you notifications when Rendering Failure events occur. For more information, see Sending Personalized Email Using the Amazon SES API in the Amazon Simple Email Service Developer Guide. 
    */
   sendTemplatedEmail(params: SES.Types.SendTemplatedEmailRequest, callback?: (err: AWSError, data: SES.Types.SendTemplatedEmailResponse) => void): Request<SES.Types.SendTemplatedEmailResponse, AWSError>;
   /**
-   * Composes an email message using an email template and immediately queues it for sending. In order to send email using the SendTemplatedEmail operation, your call to the API must meet the following requirements:   The call must refer to an existing email template. You can create email templates using the CreateTemplate operation.   The message must be sent from a verified email address or domain.   If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be less than 10 MB.   Calls to the SendTemplatedEmail operation may only include one Destination parameter. A destination is a set of recipients who will receive the same version of the email. The Destination parameter can include up to 50 recipients, across the To:, CC: and BCC: fields.   The Destination parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.  
+   * Composes an email message using an email template and immediately queues it for sending. In order to send email using the SendTemplatedEmail operation, your call to the API must meet the following requirements:   The call must refer to an existing email template. You can create email templates using the CreateTemplate operation.   The message must be sent from a verified email address or domain.   If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be less than 10 MB.   Calls to the SendTemplatedEmail operation may only include one Destination parameter. A destination is a set of recipients who will receive the same version of the email. The Destination parameter can include up to 50 recipients, across the To:, CC: and BCC: fields.   The Destination parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.    If your call to the SendTemplatedEmail operation includes all of the required parameters, Amazon SES accepts it and returns a Message ID. However, if Amazon SES can't render the email because the template contains errors, it doesn't send the email. Additionally, because it already accepted the message, Amazon SES doesn't return a message stating that it was unable to send the email. For these reasons, we highly recommend that you set up Amazon SES to send you notifications when Rendering Failure events occur. For more information, see Sending Personalized Email Using the Amazon SES API in the Amazon Simple Email Service Developer Guide. 
    */
   sendTemplatedEmail(callback?: (err: AWSError, data: SES.Types.SendTemplatedEmailResponse) => void): Request<SES.Types.SendTemplatedEmailResponse, AWSError>;
   /**
@@ -460,11 +460,11 @@ declare class SES extends Service {
    */
   testRenderTemplate(callback?: (err: AWSError, data: SES.Types.TestRenderTemplateResponse) => void): Request<SES.Types.TestRenderTemplateResponse, AWSError>;
   /**
-   * Enables or disables email sending across your entire Amazon SES account. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending across your Amazon SES account when reputation metrics (such as your bounce on complaint rate) reach certain thresholds. You can execute this operation no more than once per second.
+   * Enables or disables email sending across your entire Amazon SES account in the current AWS Region. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending across your Amazon SES account in a given AWS Region when reputation metrics (such as your bounce or complaint rates) reach certain thresholds. You can execute this operation no more than once per second.
    */
   updateAccountSendingEnabled(params: SES.Types.UpdateAccountSendingEnabledRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables or disables email sending across your entire Amazon SES account. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending across your Amazon SES account when reputation metrics (such as your bounce on complaint rate) reach certain thresholds. You can execute this operation no more than once per second.
+   * Enables or disables email sending across your entire Amazon SES account in the current AWS Region. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending across your Amazon SES account in a given AWS Region when reputation metrics (such as your bounce or complaint rates) reach certain thresholds. You can execute this operation no more than once per second.
    */
   updateAccountSendingEnabled(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -476,27 +476,27 @@ declare class SES extends Service {
    */
   updateConfigurationSetEventDestination(callback?: (err: AWSError, data: SES.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SES.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Enables or disables the publishing of reputation metrics for emails sent using a specific configuration set. Reputation metrics include bounce and complaint rates. These metrics are published to Amazon CloudWatch. By using Amazon CloudWatch, you can create alarms when bounce or complaint rates exceed a certain threshold. You can execute this operation no more than once per second.
+   * Enables or disables the publishing of reputation metrics for emails sent using a specific configuration set in a given AWS Region. Reputation metrics include bounce and complaint rates. These metrics are published to Amazon CloudWatch. By using CloudWatch, you can create alarms when bounce or complaint rates exceed certain thresholds. You can execute this operation no more than once per second.
    */
   updateConfigurationSetReputationMetricsEnabled(params: SES.Types.UpdateConfigurationSetReputationMetricsEnabledRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables or disables the publishing of reputation metrics for emails sent using a specific configuration set. Reputation metrics include bounce and complaint rates. These metrics are published to Amazon CloudWatch. By using Amazon CloudWatch, you can create alarms when bounce or complaint rates exceed a certain threshold. You can execute this operation no more than once per second.
+   * Enables or disables the publishing of reputation metrics for emails sent using a specific configuration set in a given AWS Region. Reputation metrics include bounce and complaint rates. These metrics are published to Amazon CloudWatch. By using CloudWatch, you can create alarms when bounce or complaint rates exceed certain thresholds. You can execute this operation no more than once per second.
    */
   updateConfigurationSetReputationMetricsEnabled(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables or disables email sending for messages sent using a specific configuration set. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending for a configuration set when the reputation metrics for that configuration set (such as your bounce on complaint rate) reach certain thresholds. You can execute this operation no more than once per second.
+   * Enables or disables email sending for messages sent using a specific configuration set in a given AWS Region. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending for a configuration set when the reputation metrics for that configuration set (such as your bounce on complaint rate) exceed certain thresholds. You can execute this operation no more than once per second.
    */
   updateConfigurationSetSendingEnabled(params: SES.Types.UpdateConfigurationSetSendingEnabledRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables or disables email sending for messages sent using a specific configuration set. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending for a configuration set when the reputation metrics for that configuration set (such as your bounce on complaint rate) reach certain thresholds. You can execute this operation no more than once per second.
+   * Enables or disables email sending for messages sent using a specific configuration set in a given AWS Region. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending for a configuration set when the reputation metrics for that configuration set (such as your bounce on complaint rate) exceed certain thresholds. You can execute this operation no more than once per second.
    */
   updateConfigurationSetSendingEnabled(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.
+   * Modifies an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using custom domains, see the Amazon SES Developer Guide.
    */
   updateConfigurationSetTrackingOptions(params: SES.Types.UpdateConfigurationSetTrackingOptionsRequest, callback?: (err: AWSError, data: SES.Types.UpdateConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.UpdateConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
-   * Modifies an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.
+   * Modifies an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using custom domains, see the Amazon SES Developer Guide.
    */
   updateConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SES.Types.UpdateConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.UpdateConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
@@ -532,11 +532,11 @@ declare class SES extends Service {
    */
   verifyDomainDkim(callback?: (err: AWSError, data: SES.Types.VerifyDomainDkimResponse) => void): Request<SES.Types.VerifyDomainDkimResponse, AWSError>;
   /**
-   * Adds a domain to the list of identities for your Amazon SES account and attempts to verify it. For more information about verifying domains, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Adds a domain to the list of identities for your Amazon SES account in the current AWS Region and attempts to verify it. For more information about verifying domains, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.  You can execute this operation no more than once per second.
    */
   verifyDomainIdentity(params: SES.Types.VerifyDomainIdentityRequest, callback?: (err: AWSError, data: SES.Types.VerifyDomainIdentityResponse) => void): Request<SES.Types.VerifyDomainIdentityResponse, AWSError>;
   /**
-   * Adds a domain to the list of identities for your Amazon SES account and attempts to verify it. For more information about verifying domains, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Adds a domain to the list of identities for your Amazon SES account in the current AWS Region and attempts to verify it. For more information about verifying domains, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.  You can execute this operation no more than once per second.
    */
   verifyDomainIdentity(callback?: (err: AWSError, data: SES.Types.VerifyDomainIdentityResponse) => void): Request<SES.Types.VerifyDomainIdentityResponse, AWSError>;
   /**
@@ -548,11 +548,11 @@ declare class SES extends Service {
    */
   verifyEmailAddress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. As a result of executing this operation, a verification email is sent to the specified address. You can execute this operation no more than once per second.
+   * Adds an email address to the list of identities for your Amazon SES account in the current AWS region and attempts to verify it. As a result of executing this operation, a verification email is sent to the specified address. You can execute this operation no more than once per second.
    */
   verifyEmailIdentity(params: SES.Types.VerifyEmailIdentityRequest, callback?: (err: AWSError, data: SES.Types.VerifyEmailIdentityResponse) => void): Request<SES.Types.VerifyEmailIdentityResponse, AWSError>;
   /**
-   * Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. As a result of executing this operation, a verification email is sent to the specified address. You can execute this operation no more than once per second.
+   * Adds an email address to the list of identities for your Amazon SES account in the current AWS region and attempts to verify it. As a result of executing this operation, a verification email is sent to the specified address. You can execute this operation no more than once per second.
    */
   verifyEmailIdentity(callback?: (err: AWSError, data: SES.Types.VerifyEmailIdentityResponse) => void): Request<SES.Types.VerifyEmailIdentityResponse, AWSError>;
   /**
@@ -1079,7 +1079,7 @@ declare namespace SES {
   export type FromAddress = string;
   export interface GetAccountSendingEnabledResponse {
     /**
-     * Describes whether email sending is enabled or disabled for your Amazon SES account.
+     * Describes whether email sending is enabled or disabled for your Amazon SES account in the current AWS Region.
      */
     Enabled?: Enabled;
   }
@@ -1521,7 +1521,7 @@ declare namespace SES {
      */
     BounceAction?: BounceAction;
     /**
-     * Calls Amazon WorkMail and, optionally, publishes a notification to Amazon SNS.
+     * Calls Amazon WorkMail and, optionally, publishes a notification to Amazon Amazon SNS.
      */
     WorkmailAction?: WorkmailAction;
     /**
@@ -1682,7 +1682,7 @@ declare namespace SES {
      */
     ObjectKeyPrefix?: S3KeyPrefix;
     /**
-     * The customer master key that Amazon SES should use to encrypt your emails before saving them to the Amazon S3 bucket. You can use the default master key or a custom master key you created in AWS KMS as follows:   To use the default master key, provide an ARN in the form of arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses. For example, if your AWS account ID is 123456789012 and you want to use the default master key in the US West (Oregon) region, the ARN of the default master key would be arn:aws:kms:us-west-2:123456789012:alias/aws/ses. If you use the default master key, you don't need to perform any extra steps to give Amazon SES permission to use the key.   To use a custom master key you created in AWS KMS, provide the ARN of the master key and ensure that you add a statement to your key's policy to give Amazon SES permission to use it. For more information about giving permissions, see the Amazon SES Developer Guide.   For more information about key policies, see the AWS KMS Developer Guide. If you do not specify a master key, Amazon SES will not encrypt your emails.  Your mail is encrypted by Amazon SES using the Amazon S3 encryption client before the mail is submitted to Amazon S3 for storage. It is not encrypted using Amazon S3 server-side encryption. This means that you must use the Amazon S3 encryption client to decrypt the email after retrieving it from Amazon S3, as the service has no access to use your AWS KMS keys for decryption. This encryption client is currently available with the AWS Java SDK and AWS Ruby SDK only. For more information about client-side encryption using AWS KMS master keys, see the Amazon S3 Developer Guide. 
+     * The customer master key that Amazon SES should use to encrypt your emails before saving them to the Amazon S3 bucket. You can use the default master key or a custom master key you created in AWS KMS as follows:   To use the default master key, provide an ARN in the form of arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses. For example, if your AWS account ID is 123456789012 and you want to use the default master key in the US West (Oregon) region, the ARN of the default master key would be arn:aws:kms:us-west-2:123456789012:alias/aws/ses. If you use the default master key, you don't need to perform any extra steps to give Amazon SES permission to use the key.   To use a custom master key you created in AWS KMS, provide the ARN of the master key and ensure that you add a statement to your key's policy to give Amazon SES permission to use it. For more information about giving permissions, see the Amazon SES Developer Guide.   For more information about key policies, see the AWS KMS Developer Guide. If you do not specify a master key, Amazon SES will not encrypt your emails.  Your mail is encrypted by Amazon SES using the Amazon S3 encryption client before the mail is submitted to Amazon S3 for storage. It is not encrypted using Amazon S3 server-side encryption. This means that you must use the Amazon S3 encryption client to decrypt the email after retrieving it from Amazon S3, as the service has no access to use your AWS KMS keys for decryption. This encryption client is currently available with the AWS SDK for Java and AWS SDK for Ruby only. For more information about client-side encryption using AWS KMS master keys, see the Amazon S3 Developer Guide. 
      */
     KmsKeyArn?: AmazonResourceName;
   }
@@ -2138,7 +2138,7 @@ declare namespace SES {
   }
   export interface UpdateAccountSendingEnabledRequest {
     /**
-     * Describes whether email sending is enabled or disabled for your Amazon SES account.
+     * Describes whether email sending is enabled or disabled for your Amazon SES account in the current AWS Region.
      */
     Enabled?: Enabled;
   }

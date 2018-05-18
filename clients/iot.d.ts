@@ -212,6 +212,22 @@ declare class Iot extends Service {
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur.
+   */
+  deleteJob(params: Iot.Types.DeleteJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur.
+   */
+  deleteJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a job execution.
+   */
+  deleteJobExecution(params: Iot.Types.DeleteJobExecutionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a job execution.
+   */
+  deleteJobExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Delete an OTA update.
    */
   deleteOTAUpdate(params: Iot.Types.DeleteOTAUpdateRequest, callback?: (err: AWSError, data: Iot.Types.DeleteOTAUpdateResponse) => void): Request<Iot.Types.DeleteOTAUpdateResponse, AWSError>;
@@ -1969,6 +1985,34 @@ declare namespace Iot {
      */
     forceDelete?: ForceDelete;
   }
+  export interface DeleteJobExecutionRequest {
+    /**
+     * The ID of the job whose execution on a particular device will be deleted.
+     */
+    jobId: JobId;
+    /**
+     * The name of the thing whose job execution will be deleted.
+     */
+    thingName: ThingName;
+    /**
+     * The ID of the job execution to be deleted. The executionNumber refers to the execution of a particular job on a particular device. Note that once a job execution is deleted, the executionNumber may be reused by IoT, so be sure you get and use the correct value here.
+     */
+    executionNumber: ExecutionNumber;
+    /**
+     * (Optional) When true, you can delete a job execution which is "IN_PROGRESS". Otherwise, you can only delete a job execution which is in a terminal state ("SUCCEEDED", "FAILED", "REJECTED", "REMOVED" or "CANCELED") or an exception will occur. The default is false.  Deleting a job execution which is "IN_PROGRESS", will cause the device to be unable to access job information or update the job execution status. Use caution and ensure that the device is able to recover to a valid state. 
+     */
+    force?: ForceFlag;
+  }
+  export interface DeleteJobRequest {
+    /**
+     * The ID of the job to be deleted. After a job deletion is completed, you may reuse this jobId when you create a new job. However, this is not recommended, and you must ensure that your devices are not using the jobId to refer to the deleted job.
+     */
+    jobId: JobId;
+    /**
+     * (Optional) When true, you can delete a job which is "IN_PROGRESS". Otherwise, you can only delete a job which is in a terminal state ("COMPLETED" or "CANCELED") or an exception will occur. The default is false.  Deleting a job which is "IN_PROGRESS", will cause a device which is executing the job to be unable to access job information or update the job execution status. Use caution and ensure that each device executing a job which is deleted is able to recover to a valid state. 
+     */
+    force?: ForceFlag;
+  }
   export interface DeleteOTAUpdateRequest {
     /**
      * The OTA update ID to delete.
@@ -2581,6 +2625,7 @@ declare namespace Iot {
   export type FirehoseSeparator = string;
   export type Flag = boolean;
   export type ForceDelete = boolean;
+  export type ForceFlag = boolean;
   export type FunctionArn = string;
   export type GEMaxResults = number;
   export type GenerationId = string;
@@ -2803,7 +2848,7 @@ declare namespace Iot {
      */
     channelName?: ChannelName;
     /**
-     * The ARN of the role which has a policy that grants IoT permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).
+     * The ARN of the role which has a policy that grants IoT Analytics permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).
      */
     roleArn?: AwsArn;
   }
