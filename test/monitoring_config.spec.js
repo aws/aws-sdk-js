@@ -100,13 +100,29 @@ describe('client side monitoring configuration resolving', function() {
         AWSCSMENABLED: '1',
         AWSCSMPORT: '54321',
       }
-      helpers.spyOn(AWS.util, 'readFileSync').andReturn('[profile role]\ncsm_enabled=false\ncsm_clientid=clientid')
+      helpers.spyOn(AWS.util, 'readFileSync').andReturn(
+        '[profile role]\ncsm_enabled=false\ncsm_clientid=clientid'
+      );
       expect(monitoringConfig()).to.eql({
         enabled: true,
         port: 54321,
         clientId: 'clientid',
       });
       process.env = {}
+    });
+
+    it('should not read shared config file if monitoring disabled from environment', function() {
+      process.env = {
+        AWS_PROFILE: 'role',
+        AWSCSMENABLED: 'false',
+      }
+      var ReadFileCalled = 0;
+      helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function() {
+        called++;
+        return '';
+      });
+      expect(monitoringConfig().enabled).to.equal(false);
+      expect(ReadFileCalled).to.equal(0)
     })
   })
 })
