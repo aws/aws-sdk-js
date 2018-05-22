@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.244.1
+// AWS SDK for JavaScript v2.245.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -50832,6 +50832,10 @@ module.exports={
           "registryArn": {},
           "port": {
             "type": "integer"
+          },
+          "containerName": {},
+          "containerPort": {
+            "type": "integer"
           }
         }
       }
@@ -66820,8 +66824,7 @@ module.exports={
       "input": {
         "type": "structure",
         "required": [
-          "assessmentTargetName",
-          "resourceGroupArn"
+          "assessmentTargetName"
         ],
         "members": {
           "assessmentTargetName": {},
@@ -67075,7 +67078,6 @@ module.exports={
               "required": [
                 "arn",
                 "name",
-                "resourceGroupArn",
                 "createdAt",
                 "updatedAt"
               ],
@@ -67925,8 +67927,7 @@ module.exports={
         "type": "structure",
         "required": [
           "assessmentTargetArn",
-          "assessmentTargetName",
-          "resourceGroupArn"
+          "assessmentTargetName"
         ],
         "members": {
           "assessmentTargetArn": {},
@@ -128538,7 +128539,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.244.1',
+  VERSION: '2.245.1',
 
   /**
    * @api private
@@ -147114,7 +147115,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":337,"./lib/rng":338}],341:[function(require,module,exports){
-// AWS SDK for JavaScript v2.244.1
+// AWS SDK for JavaScript v2.245.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

@@ -539,7 +539,7 @@ declare namespace Inspector {
     /**
      * The ARN that specifies the resource group that is associated with the assessment target.
      */
-    resourceGroupArn: Arn;
+    resourceGroupArn?: Arn;
     /**
      * The time at which the assessment target is created.
      */
@@ -664,7 +664,7 @@ declare namespace Inspector {
     /**
      * The ARN that specifies the resource group that is used to create the assessment target.
      */
-    resourceGroupArn: Arn;
+    resourceGroupArn?: Arn;
   }
   export interface CreateAssessmentTargetResponse {
     /**
@@ -1494,7 +1494,7 @@ declare namespace Inspector {
     /**
      * The ARN of the resource group that is used to specify the new resource group to associate with the assessment target.
      */
-    resourceGroupArn: Arn;
+    resourceGroupArn?: Arn;
   }
   export type Url = string;
   export type UserAttributeKeyList = AttributeKey[];
