@@ -149,11 +149,11 @@ declare class RDS extends Service {
    */
   createDBParameterGroup(callback?: (err: AWSError, data: RDS.Types.CreateDBParameterGroupResult) => void): Request<RDS.Types.CreateDBParameterGroupResult, AWSError>;
   /**
-   * Creates a new DB security group. DB security groups control access to a DB instance.
+   * Creates a new DB security group. DB security groups control access to a DB instance.  A DB security group controls access to EC2-Classic DB instances that are not in a VPC. 
    */
   createDBSecurityGroup(params: RDS.Types.CreateDBSecurityGroupMessage, callback?: (err: AWSError, data: RDS.Types.CreateDBSecurityGroupResult) => void): Request<RDS.Types.CreateDBSecurityGroupResult, AWSError>;
   /**
-   * Creates a new DB security group. DB security groups control access to a DB instance.
+   * Creates a new DB security group. DB security groups control access to a DB instance.  A DB security group controls access to EC2-Classic DB instances that are not in a VPC. 
    */
   createDBSecurityGroup(callback?: (err: AWSError, data: RDS.Types.CreateDBSecurityGroupResult) => void): Request<RDS.Types.CreateDBSecurityGroupResult, AWSError>;
   /**
@@ -1185,6 +1185,10 @@ declare namespace RDS {
      */
     BacktrackWindow?: LongOptional;
     /**
+     * The list of log types that need to be enabled for exporting to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
+    /**
      * The ID of the region that contains the source for the read replica.
      */
     SourceRegion?: String;
@@ -1382,7 +1386,7 @@ declare namespace RDS {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * True to enable Performance Insights for the DB instance, and otherwise false. 
+     * True to enable Performance Insights for the DB instance, and otherwise false.  For more information, see Using Amazon Performance Insights in the Amazon Relational Database Service User Guide. 
      */
     EnablePerformanceInsights?: BooleanOptional;
     /**
@@ -1469,7 +1473,7 @@ declare namespace RDS {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * True to enable Performance Insights for the read replica, and otherwise false. 
+     * True to enable Performance Insights for the read replica, and otherwise false.  For more information, see Using Amazon Performance Insights in the Amazon Relational Database Service User Guide. 
      */
     EnablePerformanceInsights?: BooleanOptional;
     /**
@@ -1760,6 +1764,10 @@ declare namespace RDS {
      * The number of change records stored for Backtrack.
      */
     BacktrackConsumedChangeRecords?: LongOptional;
+    /**
+     * A list of log types that this DB cluster is configured to export to CloudWatch Logs.
+     */
+    EnabledCloudwatchLogsExports?: LogTypeList;
   }
   export interface DBClusterBacktrack {
     /**
@@ -3698,6 +3706,10 @@ declare namespace RDS {
      */
     BacktrackWindow?: LongOptional;
     /**
+     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster.
+     */
+    CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
+    /**
      * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true. For a list of valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions.
      */
     EngineVersion?: String;
@@ -3870,7 +3882,7 @@ declare namespace RDS {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * True to enable Performance Insights for the DB instance, and otherwise false.
+     * True to enable Performance Insights for the DB instance, and otherwise false. For more information, see Using Amazon Performance Insights in the Amazon Relational Database Service User Guide. 
      */
     EnablePerformanceInsights?: BooleanOptional;
     /**
@@ -3878,7 +3890,7 @@ declare namespace RDS {
      */
     PerformanceInsightsKMSKeyId?: String;
     /**
-     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.
+     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
   }
@@ -4897,6 +4909,10 @@ declare namespace RDS {
      * The target backtrack window, in seconds. To disable backtracking, set this value to 0. Default: 0 Constraints:   If specified, this value must be set to a number from 0 to 259,200 (72 hours).  
      */
     BacktrackWindow?: LongOptional;
+    /**
+     * The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
   }
   export interface RestoreDBClusterFromS3Result {
     DBCluster?: DBCluster;
@@ -4958,6 +4974,10 @@ declare namespace RDS {
      * The target backtrack window, in seconds. To disable backtracking, set this value to 0. Default: 0 Constraints:   If specified, this value must be set to a number from 0 to 259,200 (72 hours).  
      */
     BacktrackWindow?: LongOptional;
+    /**
+     * The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -5012,6 +5032,10 @@ declare namespace RDS {
      * The target backtrack window, in seconds. To disable backtracking, set this value to 0. Default: 0 Constraints:   If specified, this value must be set to a number from 0 to 259,200 (72 hours).  
      */
     BacktrackWindow?: LongOptional;
+    /**
+     * The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
@@ -5256,7 +5280,7 @@ declare namespace RDS {
      */
     S3IngestionRoleArn: String;
     /**
-     * True to enable Performance Insights for the DB instance, and otherwise false. 
+     * True to enable Performance Insights for the DB instance, and otherwise false.  For more information, see Using Amazon Performance Insights in the Amazon Relational Database Service User Guide. 
      */
     EnablePerformanceInsights?: BooleanOptional;
     /**

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.245.1-->
+<!--LATEST=2.246.1-->
 <!--ENTRYINSERT-->
+
+## 2.246.1
+* feature: CodeBuild: AWS CodeBuild Adds Support for Windows Builds.
+* feature: RDS: This release adds CloudWatch Logs integration capabilities to RDS Aurora MySQL clusters
 
 ## 2.245.1
 * feature: ECS: Amazon Elastic Container Service (ECS) adds service discovery for services that use host or bridged network mode. ECS can now also register instance IPs for active tasks using bridged and host networking with Route 53, making them available via DNS.

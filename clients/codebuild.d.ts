@@ -457,7 +457,7 @@ declare namespace CodeBuild {
     languages?: EnvironmentLanguages;
   }
   export type EnvironmentPlatforms = EnvironmentPlatform[];
-  export type EnvironmentType = "LINUX_CONTAINER"|string;
+  export type EnvironmentType = "WINDOWS_CONTAINER"|"LINUX_CONTAINER"|string;
   export interface EnvironmentVariable {
     /**
      * The name or key of the environment variable.
@@ -598,7 +598,7 @@ declare namespace CodeBuild {
     message?: String;
   }
   export type PhaseContexts = PhaseContext[];
-  export type PlatformType = "DEBIAN"|"AMAZON_LINUX"|"UBUNTU"|string;
+  export type PlatformType = "DEBIAN"|"AMAZON_LINUX"|"UBUNTU"|"WINDOWS_SERVER"|string;
   export interface Project {
     /**
      * The name of the build project.

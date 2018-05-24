@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.245.1
+// AWS SDK for JavaScript v2.246.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -94735,6 +94735,9 @@ module.exports={
           "BacktrackWindow": {
             "type": "long"
           },
+          "EnableCloudwatchLogsExports": {
+            "shape": "S1l"
+          },
           "SourceRegion": {}
         }
       },
@@ -94743,7 +94746,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1m"
+            "shape": "S1n"
           }
         }
       }
@@ -94819,7 +94822,7 @@ module.exports={
           "MasterUsername": {},
           "MasterUserPassword": {},
           "DBSecurityGroups": {
-            "shape": "S1z"
+            "shape": "S20"
           },
           "VpcSecurityGroupIds": {
             "shape": "S1j"
@@ -94883,7 +94886,7 @@ module.exports={
           },
           "PerformanceInsightsKMSKeyId": {},
           "EnableCloudwatchLogsExports": {
-            "shape": "S20"
+            "shape": "S1l"
           }
         }
       },
@@ -94947,7 +94950,7 @@ module.exports={
           },
           "PerformanceInsightsKMSKeyId": {},
           "EnableCloudwatchLogsExports": {
-            "shape": "S20"
+            "shape": "S1l"
           },
           "SourceRegion": {}
         }
@@ -95151,7 +95154,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1m"
+            "shape": "S1n"
           }
         }
       }
@@ -95536,7 +95539,7 @@ module.exports={
           "DBClusters": {
             "type": "list",
             "member": {
-              "shape": "S1m",
+              "shape": "S1n",
               "locationName": "DBCluster"
             }
           }
@@ -95623,7 +95626,7 @@ module.exports={
                   }
                 },
                 "ExportableLogTypes": {
-                  "shape": "S20"
+                  "shape": "S1l"
                 },
                 "SupportsLogExportsToCloudwatchLogs": {
                   "type": "boolean"
@@ -96538,7 +96541,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1m"
+            "shape": "S1n"
           }
         }
       }
@@ -96598,6 +96601,9 @@ module.exports={
           "BacktrackWindow": {
             "type": "long"
           },
+          "CloudwatchLogsExportConfiguration": {
+            "shape": "S7b"
+          },
           "EngineVersion": {}
         }
       },
@@ -96606,7 +96612,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1m"
+            "shape": "S1n"
           }
         }
       }
@@ -96626,7 +96632,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S7d",
+        "shape": "S7e",
         "resultWrapper": "ModifyDBClusterParameterGroupResult"
       }
     },
@@ -96672,7 +96678,7 @@ module.exports={
           "DBInstanceClass": {},
           "DBSubnetGroupName": {},
           "DBSecurityGroups": {
-            "shape": "S1z"
+            "shape": "S20"
           },
           "VpcSecurityGroupIds": {
             "shape": "S1j"
@@ -96733,15 +96739,7 @@ module.exports={
           },
           "PerformanceInsightsKMSKeyId": {},
           "CloudwatchLogsExportConfiguration": {
-            "type": "structure",
-            "members": {
-              "EnableLogTypes": {
-                "shape": "S20"
-              },
-              "DisableLogTypes": {
-                "shape": "S20"
-              }
-            }
+            "shape": "S7b"
           }
         }
       },
@@ -96900,7 +96898,7 @@ module.exports={
                 },
                 "OptionVersion": {},
                 "DBSecurityGroupMemberships": {
-                  "shape": "S1z"
+                  "shape": "S20"
                 },
                 "VpcSecurityGroupMemberships": {
                   "shape": "S1j"
@@ -96973,7 +96971,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1m"
+            "shape": "S1n"
           }
         }
       }
@@ -97096,7 +97094,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S7d",
+        "shape": "S7e",
         "resultWrapper": "ResetDBClusterParameterGroupResult"
       }
     },
@@ -97176,6 +97174,9 @@ module.exports={
           "S3IngestionRoleArn": {},
           "BacktrackWindow": {
             "type": "long"
+          },
+          "EnableCloudwatchLogsExports": {
+            "shape": "S1l"
           }
         }
       },
@@ -97184,7 +97185,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1m"
+            "shape": "S1n"
           }
         }
       }
@@ -97223,6 +97224,9 @@ module.exports={
           },
           "BacktrackWindow": {
             "type": "long"
+          },
+          "EnableCloudwatchLogsExports": {
+            "shape": "S1l"
           }
         }
       },
@@ -97231,7 +97235,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1m"
+            "shape": "S1n"
           }
         }
       }
@@ -97270,6 +97274,9 @@ module.exports={
           },
           "BacktrackWindow": {
             "type": "long"
+          },
+          "EnableCloudwatchLogsExports": {
+            "shape": "S1l"
           }
         }
       },
@@ -97278,7 +97285,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBCluster": {
-            "shape": "S1m"
+            "shape": "S1n"
           }
         }
       }
@@ -97330,7 +97337,7 @@ module.exports={
             "type": "boolean"
           },
           "EnableCloudwatchLogsExports": {
-            "shape": "S20"
+            "shape": "S1l"
           }
         }
       },
@@ -97367,7 +97374,7 @@ module.exports={
           "MasterUsername": {},
           "MasterUserPassword": {},
           "DBSecurityGroups": {
-            "shape": "S1z"
+            "shape": "S20"
           },
           "VpcSecurityGroupIds": {
             "shape": "S1j"
@@ -97426,7 +97433,7 @@ module.exports={
           },
           "PerformanceInsightsKMSKeyId": {},
           "EnableCloudwatchLogsExports": {
-            "shape": "S20"
+            "shape": "S1l"
           }
         }
       },
@@ -97493,7 +97500,7 @@ module.exports={
             "type": "boolean"
           },
           "EnableCloudwatchLogsExports": {
-            "shape": "S20"
+            "shape": "S1l"
           }
         }
       },
@@ -97910,7 +97917,11 @@ module.exports={
         "locationName": "VpcSecurityGroupId"
       }
     },
-    "S1m": {
+    "S1l": {
+      "type": "list",
+      "member": {}
+    },
+    "S1n": {
       "type": "structure",
       "members": {
         "AllocatedStorage": {
@@ -98020,19 +98031,18 @@ module.exports={
         },
         "BacktrackConsumedChangeRecords": {
           "type": "long"
+        },
+        "EnabledCloudwatchLogsExports": {
+          "shape": "S1l"
         }
       },
       "wrapper": true
     },
-    "S1z": {
+    "S20": {
       "type": "list",
       "member": {
         "locationName": "DBSecurityGroupName"
       }
-    },
-    "S20": {
-      "type": "list",
-      "member": {}
     },
     "S22": {
       "type": "structure",
@@ -98115,10 +98125,10 @@ module.exports={
               "type": "structure",
               "members": {
                 "LogTypesToEnable": {
-                  "shape": "S20"
+                  "shape": "S1l"
                 },
                 "LogTypesToDisable": {
-                  "shape": "S20"
+                  "shape": "S1l"
                 }
               }
             }
@@ -98228,7 +98238,7 @@ module.exports={
         },
         "PerformanceInsightsKMSKeyId": {},
         "EnabledCloudwatchLogsExports": {
-          "shape": "S20"
+          "shape": "S1l"
         }
       },
       "wrapper": true
@@ -98444,7 +98454,18 @@ module.exports={
         }
       }
     },
-    "S7d": {
+    "S7b": {
+      "type": "structure",
+      "members": {
+        "EnableLogTypes": {
+          "shape": "S1l"
+        },
+        "DisableLogTypes": {
+          "shape": "S1l"
+        }
+      }
+    },
+    "S7e": {
       "type": "structure",
       "members": {
         "DBClusterParameterGroupName": {}
@@ -128539,7 +128560,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.245.1',
+  VERSION: '2.246.1',
 
   /**
    * @api private
@@ -147115,7 +147136,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":337,"./lib/rng":338}],341:[function(require,module,exports){
-// AWS SDK for JavaScript v2.245.1
+// AWS SDK for JavaScript v2.246.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

@@ -605,7 +605,7 @@
           "shape": "DBSecurityGroupNotSupportedFault"
         }
       ],
-      "documentation": "<p>Creates a new DB security group. DB security groups control access to a DB instance.</p>"
+      "documentation": "<p>Creates a new DB security group. DB security groups control access to a DB instance.</p> <note> <p>A DB security group controls access to EC2-Classic DB instances that are not in a VPC.</p> </note>"
     },
     "CreateDBSnapshot": {
       "name": "CreateDBSnapshot",
@@ -3289,6 +3289,10 @@
           "shape": "LongOptional",
           "documentation": "<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0. </p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>"
         },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of log types that need to be enabled for exporting to CloudWatch Logs.</p>"
+        },
         "SourceRegion": {
           "shape": "String",
           "documentation": "<p>The ID of the region that contains the source for the read replica.</p>"
@@ -3533,7 +3537,7 @@
         },
         "EnablePerformanceInsights": {
           "shape": "BooleanOptional",
-          "documentation": "<p>True to enable Performance Insights for the DB instance, and otherwise false. </p>"
+          "documentation": "<p>True to enable Performance Insights for the DB instance, and otherwise false. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\">Using Amazon Performance Insights</a> in the <i>Amazon Relational Database Service User Guide</i>. </p>"
         },
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
@@ -3630,7 +3634,7 @@
         },
         "EnablePerformanceInsights": {
           "shape": "BooleanOptional",
-          "documentation": "<p>True to enable Performance Insights for the read replica, and otherwise false. </p>"
+          "documentation": "<p>True to enable Performance Insights for the read replica, and otherwise false. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\">Using Amazon Performance Insights</a> in the <i>Amazon Relational Database Service User Guide</i>. </p>"
         },
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
@@ -4026,6 +4030,10 @@
         "BacktrackConsumedChangeRecords": {
           "shape": "LongOptional",
           "documentation": "<p>The number of change records stored for Backtrack.</p>"
+        },
+        "EnabledCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>A list of log types that this DB cluster is configured to export to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB cluster. </p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action. </p>",
@@ -7244,6 +7252,10 @@
           "shape": "LongOptional",
           "documentation": "<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>"
         },
+        "CloudwatchLogsExportConfiguration": {
+          "shape": "CloudwatchLogsExportConfiguration",
+          "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster.</p>"
+        },
         "EngineVersion": {
           "shape": "String",
           "documentation": "<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true.</p> <p>For a list of valid engine versions, see <a>CreateDBInstance</a>, or call <a>DescribeDBEngineVersions</a>.</p>"
@@ -7451,7 +7463,7 @@
         },
         "EnablePerformanceInsights": {
           "shape": "BooleanOptional",
-          "documentation": "<p>True to enable Performance Insights for the DB instance, and otherwise false.</p>"
+          "documentation": "<p>True to enable Performance Insights for the DB instance, and otherwise false.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\">Using Amazon Performance Insights</a> in the <i>Amazon Relational Database Service User Guide</i>. </p>"
         },
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
@@ -7459,7 +7471,7 @@
         },
         "CloudwatchLogsExportConfiguration": {
           "shape": "CloudwatchLogsExportConfiguration",
-          "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p>"
+          "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.</p>"
         }
       },
       "documentation": "<p/>"
@@ -9015,6 +9027,10 @@
         "BacktrackWindow": {
           "shape": "LongOptional",
           "documentation": "<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>"
+        },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of logs that the restored DB cluster is to export to CloudWatch Logs.</p>"
         }
       }
     },
@@ -9089,6 +9105,10 @@
         "BacktrackWindow": {
           "shape": "LongOptional",
           "documentation": "<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>"
+        },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of logs that the restored DB cluster is to export to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p/>"
@@ -9158,6 +9178,10 @@
         "BacktrackWindow": {
           "shape": "LongOptional",
           "documentation": "<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>"
+        },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of logs that the restored DB cluster is to export to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p/>"
@@ -9437,7 +9461,7 @@
         },
         "EnablePerformanceInsights": {
           "shape": "BooleanOptional",
-          "documentation": "<p>True to enable Performance Insights for the DB instance, and otherwise false. </p>"
+          "documentation": "<p>True to enable Performance Insights for the DB instance, and otherwise false. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\">Using Amazon Performance Insights</a> in the <i>Amazon Relational Database Service User Guide</i>. </p>"
         },
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
