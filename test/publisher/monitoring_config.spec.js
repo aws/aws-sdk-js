@@ -1,6 +1,6 @@
-var helpers = require('./helpers');
+var helpers = require('../helpers');
 var AWS = helpers.AWS;
-var monitoringConfig = require('../lib/monitoring_config');
+var monitoringConfig = require('../../lib/monitoring_config');
 describe('client side monitoring configuration resolving', function() {
   describe('get configurations from environmental variable', function() {
     beforeEach(function(done) {
