@@ -1282,6 +1282,10 @@
         "Timeout":{
           "shape":"Timeout",
           "documentation":"<p>The job run timeout in minutes. It overrides the timeout value of the job.</p>"
+        },
+        "NotificationProperty":{
+          "shape":"NotificationProperty",
+          "documentation":"<p>Specifies configuration properties of a job run notification.</p>"
         }
       },
       "documentation":"<p>Defines an action to be initiated by a trigger.</p>"
@@ -2451,6 +2455,10 @@
         "Timeout":{
           "shape":"Timeout",
           "documentation":"<p>The job timeout in minutes. The default is 2880 minutes (48 hours).</p>"
+        },
+        "NotificationProperty":{
+          "shape":"NotificationProperty",
+          "documentation":"<p>Specifies configuration properties of a job notification.</p>"
         }
       }
     },
@@ -3135,6 +3143,7 @@
       },
       "documentation":"<p>An execution property of a job.</p>"
     },
+    "ExecutionTime":{"type":"integer"},
     "FieldType":{"type":"string"},
     "FilterString":{
       "type":"string",
@@ -4196,6 +4205,10 @@
         "Timeout":{
           "shape":"Timeout",
           "documentation":"<p>The job timeout in minutes.</p>"
+        },
+        "NotificationProperty":{
+          "shape":"NotificationProperty",
+          "documentation":"<p>Specifies configuration properties of a job notification.</p>"
         }
       },
       "documentation":"<p>Specifies a job definition.</p>"
@@ -4301,12 +4314,16 @@
           "documentation":"<p>The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>"
         },
         "ExecutionTime":{
-          "shape":"IntegerValue",
+          "shape":"ExecutionTime",
           "documentation":"<p>The amount of time (in seconds) that the job run consumed resources.</p>"
         },
         "Timeout":{
           "shape":"Timeout",
           "documentation":"<p>The job run timeout in minutes.</p>"
+        },
+        "NotificationProperty":{
+          "shape":"NotificationProperty",
+          "documentation":"<p>Specifies configuration properties of a job run notification.</p>"
         }
       },
       "documentation":"<p>Contains information about a job run.</p>"
@@ -4369,6 +4386,10 @@
         "Timeout":{
           "shape":"Timeout",
           "documentation":"<p>The job timeout in minutes. The default is 2880 minutes (48 hours).</p>"
+        },
+        "NotificationProperty":{
+          "shape":"NotificationProperty",
+          "documentation":"<p>Specifies configuration properties of a job notification.</p>"
         }
       },
       "documentation":"<p>Specifies information used to update an existing job definition. Note that the previous job definition will be completely overwritten by this information.</p>"
@@ -4581,6 +4602,21 @@
     "NonNegativeInteger":{
       "type":"integer",
       "min":0
+    },
+    "NotificationProperty":{
+      "type":"structure",
+      "members":{
+        "NotifyDelayAfter":{
+          "shape":"NotifyDelayAfter",
+          "documentation":"<p>After a job run starts, the number of minutes to wait before sending a job run delay notification.</p>"
+        }
+      },
+      "documentation":"<p>Specifies configuration properties of a notification.</p>"
+    },
+    "NotifyDelayAfter":{
+      "type":"integer",
+      "box":true,
+      "min":1
     },
     "OperationTimeoutException":{
       "type":"structure",
@@ -5071,6 +5107,10 @@
         "Timeout":{
           "shape":"Timeout",
           "documentation":"<p>The job run timeout in minutes. It overrides the timeout value of the job.</p>"
+        },
+        "NotificationProperty":{
+          "shape":"NotificationProperty",
+          "documentation":"<p>Specifies configuration properties of a job run notification.</p>"
         }
       }
     },

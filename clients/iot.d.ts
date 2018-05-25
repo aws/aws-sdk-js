@@ -3044,7 +3044,7 @@ declare namespace Iot {
      */
     numberOfRemovedThings?: RemovedThings;
   }
-  export type JobStatus = "IN_PROGRESS"|"CANCELED"|"COMPLETED"|string;
+  export type JobStatus = "IN_PROGRESS"|"CANCELED"|"COMPLETED"|"DELETION_IN_PROGRESS"|string;
   export interface JobSummary {
     /**
      * The job ARN.

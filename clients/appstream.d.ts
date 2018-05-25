@@ -295,6 +295,7 @@ declare class AppStream extends Service {
 declare namespace AppStream {
   export type AccountName = string;
   export type AccountPassword = string;
+  export type Action = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"|"CLIPBOARD_COPY_TO_LOCAL_DEVICE"|"FILE_UPLOAD"|"FILE_DOWNLOAD"|"PRINTING_TO_LOCAL_DEVICE"|string;
   export interface Application {
     /**
      * The name of the application.
@@ -556,6 +557,10 @@ declare namespace AppStream {
      * The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
      */
     FeedbackURL?: FeedbackURL;
+    /**
+     * The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled. 
+     */
+    UserSettings?: UserSettingList;
   }
   export interface CreateStackResult {
     /**
@@ -1125,6 +1130,7 @@ declare namespace AppStream {
   export type Name = string;
   export type OrganizationalUnitDistinguishedName = string;
   export type OrganizationalUnitDistinguishedNamesList = OrganizationalUnitDistinguishedName[];
+  export type Permission = "ENABLED"|"DISABLED"|string;
   export type PlatformType = "WINDOWS"|string;
   export type RedirectURL = string;
   export type RegionName = string;
@@ -1220,8 +1226,12 @@ declare namespace AppStream {
      * The errors for the stack.
      */
     StackErrors?: StackErrors;
+    /**
+     * The actions that are enabled or disabled for users during their streaming sessions. By default these actions are enabled.
+     */
+    UserSettings?: UserSettingList;
   }
-  export type StackAttribute = "STORAGE_CONNECTORS"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|string;
+  export type StackAttribute = "STORAGE_CONNECTORS"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|string;
   export type StackAttributes = StackAttribute[];
   export interface StackError {
     /**
@@ -1438,6 +1448,10 @@ declare namespace AppStream {
      * The stack attributes to delete.
      */
     AttributesToDelete?: StackAttributes;
+    /**
+     * The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.
+     */
+    UserSettings?: UserSettingList;
   }
   export interface UpdateStackResult {
     /**
@@ -1446,6 +1460,17 @@ declare namespace AppStream {
     Stack?: Stack;
   }
   export type UserId = string;
+  export interface UserSetting {
+    /**
+     * The action that is enabled or disabled.
+     */
+    Action: Action;
+    /**
+     * Indicates whether the action is enabled or disabled.
+     */
+    Permission: Permission;
+  }
+  export type UserSettingList = UserSetting[];
   export type VisibilityType = "PUBLIC"|"PRIVATE"|string;
   export interface VpcConfig {
     /**

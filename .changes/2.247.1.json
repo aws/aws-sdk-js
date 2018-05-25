@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "This API update enables customers to control whether users can transfer data between their local devices and their streaming applications through file uploads and downloads, clipboard operations, or printing to local devices"
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "AWS Config adds support for retention period, allowing you to specify a retention period for your AWS Config configuration items."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "AWS Glue now sends a delay notification to Amazon CloudWatch Events when an ETL job runs longer than the specified delay notification threshold."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "We are exposing DELETION_IN_PROGRESS as a new job status in regards to the release of DeleteJob API."
+    }
+]

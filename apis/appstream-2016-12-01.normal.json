@@ -526,6 +526,16 @@
       "min":1,
       "sensitive":true
     },
+    "Action":{
+      "type":"string",
+      "enum":[
+        "CLIPBOARD_COPY_FROM_LOCAL_DEVICE",
+        "CLIPBOARD_COPY_TO_LOCAL_DEVICE",
+        "FILE_UPLOAD",
+        "FILE_DOWNLOAD",
+        "PRINTING_TO_LOCAL_DEVICE"
+      ]
+    },
     "Application":{
       "type":"structure",
       "members":{
@@ -890,6 +900,10 @@
         "FeedbackURL":{
           "shape":"FeedbackURL",
           "documentation":"<p>The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.</p>"
+        },
+        "UserSettings":{
+          "shape":"UserSettingList",
+          "documentation":"<p>The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled. </p>"
         }
       }
     },
@@ -1814,6 +1828,13 @@
       "type":"list",
       "member":{"shape":"OrganizationalUnitDistinguishedName"}
     },
+    "Permission":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "PlatformType":{
       "type":"string",
       "enum":["WINDOWS"]
@@ -2000,6 +2021,10 @@
         "StackErrors":{
           "shape":"StackErrors",
           "documentation":"<p>The errors for the stack.</p>"
+        },
+        "UserSettings":{
+          "shape":"UserSettingList",
+          "documentation":"<p>The actions that are enabled or disabled for users during their streaming sessions. By default these actions are enabled.</p>"
         }
       },
       "documentation":"<p>Describes a stack.</p>"
@@ -2010,7 +2035,8 @@
         "STORAGE_CONNECTORS",
         "REDIRECT_URL",
         "FEEDBACK_URL",
-        "THEME_NAME"
+        "THEME_NAME",
+        "USER_SETTINGS"
       ]
     },
     "StackAttributes":{
@@ -2365,6 +2391,10 @@
         "AttributesToDelete":{
           "shape":"StackAttributes",
           "documentation":"<p>The stack attributes to delete.</p>"
+        },
+        "UserSettings":{
+          "shape":"UserSettingList",
+          "documentation":"<p>The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.</p>"
         }
       }
     },
@@ -2381,6 +2411,29 @@
       "type":"string",
       "max":32,
       "min":2
+    },
+    "UserSetting":{
+      "type":"structure",
+      "required":[
+        "Action",
+        "Permission"
+      ],
+      "members":{
+        "Action":{
+          "shape":"Action",
+          "documentation":"<p>The action that is enabled or disabled.</p>"
+        },
+        "Permission":{
+          "shape":"Permission",
+          "documentation":"<p>Indicates whether the action is enabled or disabled.</p>"
+        }
+      },
+      "documentation":"<p>Describes an action and whether the action is enabled or disabled for users during their streaming sessions.</p>"
+    },
+    "UserSettingList":{
+      "type":"list",
+      "member":{"shape":"UserSetting"},
+      "min":1
     },
     "VisibilityType":{
       "type":"string",

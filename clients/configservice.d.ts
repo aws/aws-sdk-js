@@ -76,6 +76,14 @@ declare class ConfigService extends Service {
    */
   deletePendingAggregationRequest(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the retention configuration.
+   */
+  deleteRetentionConfiguration(params: ConfigService.Types.DeleteRetentionConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the retention configuration.
+   */
+  deleteRetentionConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the specified delivery channel. After the delivery has started, AWS Config sends the following notifications using an Amazon SNS topic that you have specified.   Notification of the start of the delivery.   Notification of the completion of the delivery, if the delivery was successfully completed.   Notification of delivery failure, if the delivery failed.  
    */
   deliverConfigSnapshot(params: ConfigService.Types.DeliverConfigSnapshotRequest, callback?: (err: AWSError, data: ConfigService.Types.DeliverConfigSnapshotResponse) => void): Request<ConfigService.Types.DeliverConfigSnapshotResponse, AWSError>;
@@ -188,6 +196,14 @@ declare class ConfigService extends Service {
    */
   describePendingAggregationRequests(callback?: (err: AWSError, data: ConfigService.Types.DescribePendingAggregationRequestsResponse) => void): Request<ConfigService.Types.DescribePendingAggregationRequestsResponse, AWSError>;
   /**
+   * Returns the details of one or more retention configurations. If the retention configuration name is not specified, this action returns the details for all the retention configurations for that account.  Currently, AWS Config supports only one retention configuration per region in your account. 
+   */
+  describeRetentionConfigurations(params: ConfigService.Types.DescribeRetentionConfigurationsRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeRetentionConfigurationsResponse) => void): Request<ConfigService.Types.DescribeRetentionConfigurationsResponse, AWSError>;
+  /**
+   * Returns the details of one or more retention configurations. If the retention configuration name is not specified, this action returns the details for all the retention configurations for that account.  Currently, AWS Config supports only one retention configuration per region in your account. 
+   */
+  describeRetentionConfigurations(callback?: (err: AWSError, data: ConfigService.Types.DescribeRetentionConfigurationsResponse) => void): Request<ConfigService.Types.DescribeRetentionConfigurationsResponse, AWSError>;
+  /**
    * Returns the evaluation results for the specified AWS Config rule for a specific resource in a rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.   The results can return an empty result page. But if you have a nextToken, the results are displayed on the next page. 
    */
   getAggregateComplianceDetailsByConfigRule(params: ConfigService.Types.GetAggregateComplianceDetailsByConfigRuleRequest, callback?: (err: AWSError, data: ConfigService.Types.GetAggregateComplianceDetailsByConfigRuleResponse) => void): Request<ConfigService.Types.GetAggregateComplianceDetailsByConfigRuleResponse, AWSError>;
@@ -240,11 +256,11 @@ declare class ConfigService extends Service {
    */
   getDiscoveredResourceCounts(callback?: (err: AWSError, data: ConfigService.Types.GetDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetDiscoveredResourceCountsResponse, AWSError>;
   /**
-   * Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
+   * Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your ConfigurationItems between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config returns the ConfigurationItems for the specified retention period.  The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
    */
   getResourceConfigHistory(params: ConfigService.Types.GetResourceConfigHistoryRequest, callback?: (err: AWSError, data: ConfigService.Types.GetResourceConfigHistoryResponse) => void): Request<ConfigService.Types.GetResourceConfigHistoryResponse, AWSError>;
   /**
-   * Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
+   * Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your ConfigurationItems between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config returns the ConfigurationItems for the specified retention period.  The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
    */
   getResourceConfigHistory(callback?: (err: AWSError, data: ConfigService.Types.GetResourceConfigHistoryResponse) => void): Request<ConfigService.Types.GetResourceConfigHistoryResponse, AWSError>;
   /**
@@ -304,6 +320,14 @@ declare class ConfigService extends Service {
    */
   putEvaluations(callback?: (err: AWSError, data: ConfigService.Types.PutEvaluationsResponse) => void): Request<ConfigService.Types.PutEvaluationsResponse, AWSError>;
   /**
+   * Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the RetentionConfiguration object and names the object as default. When you have a RetentionConfiguration object named default, calling the API modifies the default object.   Currently, AWS Config supports only one retention configuration per region in your account. 
+   */
+  putRetentionConfiguration(params: ConfigService.Types.PutRetentionConfigurationRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRetentionConfigurationResponse) => void): Request<ConfigService.Types.PutRetentionConfigurationResponse, AWSError>;
+  /**
+   * Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the RetentionConfiguration object and names the object as default. When you have a RetentionConfiguration object named default, calling the API modifies the default object.   Currently, AWS Config supports only one retention configuration per region in your account. 
+   */
+  putRetentionConfiguration(callback?: (err: AWSError, data: ConfigService.Types.PutRetentionConfigurationResponse) => void): Request<ConfigService.Types.PutRetentionConfigurationResponse, AWSError>;
+  /**
    * Runs an on-demand evaluation for the specified AWS Config rules against the last known configuration state of the resources. Use StartConfigRulesEvaluation when you want to test that a rule you updated is working as expected. StartConfigRulesEvaluation does not re-record the latest configuration state for your resources. It re-runs an evaluation against the last known state of your resources.  You can specify up to 25 AWS Config rules per request.  An existing StartConfigRulesEvaluation call for the specified rules must complete before you can call the API again. If you chose to have AWS Config stream to an Amazon SNS topic, you will receive a ConfigRuleEvaluationStarted notification when the evaluation starts.  You don't need to call the StartConfigRulesEvaluation API to run an evaluation for a new rule. When you create a rule, AWS Config evaluates your resources against the rule automatically.   The StartConfigRulesEvaluation API is useful if you want to run on-demand evaluations, such as the following example:   You have a custom rule that evaluates your IAM resources every 24 hours.   You update your Lambda function to add additional conditions to your rule.   Instead of waiting for the next periodic evaluation, you call the StartConfigRulesEvaluation API.   AWS Config invokes your Lambda function and evaluates your IAM resources.   Your custom rule will still run periodic evaluations every 24 hours.  
    */
   startConfigRulesEvaluation(params: ConfigService.Types.StartConfigRulesEvaluationRequest, callback?: (err: AWSError, data: ConfigService.Types.StartConfigRulesEvaluationResponse) => void): Request<ConfigService.Types.StartConfigRulesEvaluationResponse, AWSError>;
@@ -336,7 +360,7 @@ declare namespace ConfigService {
      */
     AccountIds: AccountAggregationSourceAccountList;
     /**
-     * If true, aggreagate existing AWS Config regions and future regions.
+     * If true, aggregate existing AWS Config regions and future regions.
      */
     AllAwsRegions?: Boolean;
     /**
@@ -1000,6 +1024,12 @@ declare namespace ConfigService {
      */
     RequesterAwsRegion: AwsRegion;
   }
+  export interface DeleteRetentionConfigurationRequest {
+    /**
+     * The name of the retention configuration to delete.
+     */
+    RetentionConfigurationName: RetentionConfigurationName;
+  }
   export interface DeliverConfigSnapshotRequest {
     /**
      * The name of the delivery channel through which the snapshot is delivered.
@@ -1224,7 +1254,7 @@ declare namespace ConfigService {
   }
   export interface DescribeConfigurationAggregatorSourcesStatusResponse {
     /**
-     * Retuns an AggregatedSourceStatus object. 
+     * Returns an AggregatedSourceStatus object. 
      */
     AggregatedSourceStatusList?: AggregatedSourceStatusList;
     /**
@@ -1324,6 +1354,26 @@ declare namespace ConfigService {
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
     NextToken?: String;
+  }
+  export interface DescribeRetentionConfigurationsRequest {
+    /**
+     * A list of names of retention configurations for which you want details. If you do not specify a name, AWS Config returns details for all the retention configurations for that account.  Currently, AWS Config supports only one retention configuration per region in your account. 
+     */
+    RetentionConfigurationNames?: RetentionConfigurationNameList;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeRetentionConfigurationsResponse {
+    /**
+     * Returns a retention configuration object.
+     */
+    RetentionConfigurations?: RetentionConfigurationList;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
+    NextToken?: NextToken;
   }
   export type EarlierTime = Date;
   export type EmptiableStringWithCharLimit256 = string;
@@ -1677,7 +1727,7 @@ declare namespace ConfigService {
      */
     AwsRegions?: AggregatorRegionList;
     /**
-     * If true, aggreagate existing AWS Config regions and future regions.
+     * If true, aggregate existing AWS Config regions and future regions.
      */
     AllAwsRegions?: Boolean;
   }
@@ -1767,6 +1817,18 @@ declare namespace ConfigService {
      */
     FailedEvaluations?: Evaluations;
   }
+  export interface PutRetentionConfigurationRequest {
+    /**
+     * Number of days AWS Config stores your historical information.  Currently, only applicable to the configuration item history. 
+     */
+    RetentionPeriodInDays: RetentionPeriodInDays;
+  }
+  export interface PutRetentionConfigurationResponse {
+    /**
+     * Returns a retention configuration object.
+     */
+    RetentionConfiguration?: RetentionConfiguration;
+  }
   export type RecorderName = string;
   export type RecorderStatus = "Pending"|"Success"|"Failure"|string;
   export interface RecordingGroup {
@@ -1855,6 +1917,20 @@ declare namespace ConfigService {
   export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::EventSubscription"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::S3::Bucket"|"AWS::SSM::ManagedInstanceInventory"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::DynamoDB::Table"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::WAF::RuleGroup"|"AWS::WAFRegional::RuleGroup"|"AWS::Lambda::Function"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::XRay::EncryptionConfig"|string;
   export type ResourceTypeList = ResourceType[];
   export type ResourceTypes = StringWithCharLimit256[];
+  export interface RetentionConfiguration {
+    /**
+     * The name of the retention configuration object.
+     */
+    Name: RetentionConfigurationName;
+    /**
+     * Number of days AWS Config stores your historical information.  Currently, only applicable to the configuration item history. 
+     */
+    RetentionPeriodInDays: RetentionPeriodInDays;
+  }
+  export type RetentionConfigurationList = RetentionConfiguration[];
+  export type RetentionConfigurationName = string;
+  export type RetentionConfigurationNameList = RetentionConfigurationName[];
+  export type RetentionPeriodInDays = number;
   export type RuleLimit = number;
   export interface Scope {
     /**

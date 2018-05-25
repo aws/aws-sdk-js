@@ -115,6 +115,19 @@
       ],
       "documentation":"<p>Deletes pending authorization requests for a specified aggregator account in a specified region.</p>"
     },
+    "DeleteRetentionConfiguration":{
+      "name":"DeleteRetentionConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteRetentionConfigurationRequest"},
+      "errors":[
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"NoSuchRetentionConfigurationException"}
+      ],
+      "documentation":"<p>Deletes the retention configuration.</p>"
+    },
     "DeliverConfigSnapshot":{
       "name":"DeliverConfigSnapshot",
       "http":{
@@ -318,6 +331,21 @@
       ],
       "documentation":"<p>Returns a list of all pending aggregation requests.</p>"
     },
+    "DescribeRetentionConfigurations":{
+      "name":"DescribeRetentionConfigurations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeRetentionConfigurationsRequest"},
+      "output":{"shape":"DescribeRetentionConfigurationsResponse"},
+      "errors":[
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"NoSuchRetentionConfigurationException"},
+        {"shape":"InvalidNextTokenException"}
+      ],
+      "documentation":"<p>Returns the details of one or more retention configurations. If the retention configuration name is not specified, this action returns the details for all the retention configurations for that account.</p> <note> <p>Currently, AWS Config supports only one retention configuration per region in your account.</p> </note>"
+    },
     "GetAggregateComplianceDetailsByConfigRule":{
       "name":"GetAggregateComplianceDetailsByConfigRule",
       "http":{
@@ -431,7 +459,7 @@
         {"shape":"NoAvailableConfigurationRecorderException"},
         {"shape":"ResourceNotDiscoveredException"}
       ],
-      "documentation":"<p>Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval.</p> <p>The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string. To get the next page of results, run the request again and specify the string for the <code>nextToken</code> parameter.</p> <note> <p>Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified <code>limit</code>. In such cases, you can make another call, using the <code>nextToken</code>.</p> </note>"
+      "documentation":"<p>Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your <code>ConfigurationItems</code> between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config returns the <code>ConfigurationItems</code> for the specified retention period. </p> <p>The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string. To get the next page of results, run the request again and specify the string for the <code>nextToken</code> parameter.</p> <note> <p>Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified <code>limit</code>. In such cases, you can make another call, using the <code>nextToken</code>.</p> </note>"
     },
     "ListDiscoveredResources":{
       "name":"ListDiscoveredResources",
@@ -544,6 +572,20 @@
       ],
       "documentation":"<p>Used by an AWS Lambda function to deliver evaluation results to AWS Config. This action is required in every AWS Lambda function that is invoked by an AWS Config rule.</p>"
     },
+    "PutRetentionConfiguration":{
+      "name":"PutRetentionConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutRetentionConfigurationRequest"},
+      "output":{"shape":"PutRetentionConfigurationResponse"},
+      "errors":[
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"MaxNumberOfRetentionConfigurationsExceededException"}
+      ],
+      "documentation":"<p>Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the <code>RetentionConfiguration</code> object and names the object as <b>default</b>. When you have a <code>RetentionConfiguration</code> object named <b>default</b>, calling the API modifies the default object. </p> <note> <p>Currently, AWS Config supports only one retention configuration per region in your account.</p> </note>"
+    },
     "StartConfigRulesEvaluation":{
       "name":"StartConfigRulesEvaluation",
       "http":{
@@ -598,7 +640,7 @@
         },
         "AllAwsRegions":{
           "shape":"Boolean",
-          "documentation":"<p>If true, aggreagate existing AWS Config regions and future regions.</p>"
+          "documentation":"<p>If true, aggregate existing AWS Config regions and future regions.</p>"
         },
         "AwsRegions":{
           "shape":"AggregatorRegionList",
@@ -1567,6 +1609,16 @@
         }
       }
     },
+    "DeleteRetentionConfigurationRequest":{
+      "type":"structure",
+      "required":["RetentionConfigurationName"],
+      "members":{
+        "RetentionConfigurationName":{
+          "shape":"RetentionConfigurationName",
+          "documentation":"<p>The name of the retention configuration to delete.</p>"
+        }
+      }
+    },
     "DeliverConfigSnapshotRequest":{
       "type":"structure",
       "required":["deliveryChannelName"],
@@ -1876,7 +1928,7 @@
       "members":{
         "AggregatedSourceStatusList":{
           "shape":"AggregatedSourceStatusList",
-          "documentation":"<p>Retuns an AggregatedSourceStatus object. </p>"
+          "documentation":"<p>Returns an AggregatedSourceStatus object. </p>"
         },
         "NextToken":{
           "shape":"String",
@@ -2022,6 +2074,32 @@
         "NextToken":{
           "shape":"String",
           "documentation":"<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "DescribeRetentionConfigurationsRequest":{
+      "type":"structure",
+      "members":{
+        "RetentionConfigurationNames":{
+          "shape":"RetentionConfigurationNameList",
+          "documentation":"<p>A list of names of retention configurations for which you want details. If you do not specify a name, AWS Config returns details for all the retention configurations for that account.</p> <note> <p>Currently, AWS Config supports only one retention configuration per region in your account.</p> </note>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
+        }
+      }
+    },
+    "DescribeRetentionConfigurationsResponse":{
+      "type":"structure",
+      "members":{
+        "RetentionConfigurations":{
+          "shape":"RetentionConfigurationList",
+          "documentation":"<p>Returns a retention configuration object.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
         }
       }
     },
@@ -2612,6 +2690,13 @@
       "documentation":"<p>You have reached the limit of the number of delivery channels you can create.</p>",
       "exception":true
     },
+    "MaxNumberOfRetentionConfigurationsExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Failed to add the retention configuration because a retention configuration with that name already exists.</p>",
+      "exception":true
+    },
     "MaximumExecutionFrequency":{
       "type":"string",
       "enum":[
@@ -2696,6 +2781,13 @@
       "documentation":"<p>You have specified a delivery channel that does not exist.</p>",
       "exception":true
     },
+    "NoSuchRetentionConfigurationException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>You have specified a retention configuration that does not exist.</p>",
+      "exception":true
+    },
     "OrderingTimestamp":{"type":"timestamp"},
     "OrganizationAccessDeniedException":{
       "type":"structure",
@@ -2718,7 +2810,7 @@
         },
         "AllAwsRegions":{
           "shape":"Boolean",
-          "documentation":"<p>If true, aggreagate existing AWS Config regions and future regions.</p>"
+          "documentation":"<p>If true, aggregate existing AWS Config regions and future regions.</p>"
         }
       },
       "documentation":"<p>This object contains regions to setup the aggregator and an IAM role to retrieve organization details.</p>"
@@ -2868,6 +2960,25 @@
         }
       },
       "documentation":"<p/>"
+    },
+    "PutRetentionConfigurationRequest":{
+      "type":"structure",
+      "required":["RetentionPeriodInDays"],
+      "members":{
+        "RetentionPeriodInDays":{
+          "shape":"RetentionPeriodInDays",
+          "documentation":"<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>"
+        }
+      }
+    },
+    "PutRetentionConfigurationResponse":{
+      "type":"structure",
+      "members":{
+        "RetentionConfiguration":{
+          "shape":"RetentionConfiguration",
+          "documentation":"<p>Returns a retention configuration object.</p>"
+        }
+      }
     },
     "RecorderName":{
       "type":"string",
@@ -3100,6 +3211,45 @@
       "member":{"shape":"StringWithCharLimit256"},
       "max":20,
       "min":0
+    },
+    "RetentionConfiguration":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "RetentionPeriodInDays"
+      ],
+      "members":{
+        "Name":{
+          "shape":"RetentionConfigurationName",
+          "documentation":"<p>The name of the retention configuration object.</p>"
+        },
+        "RetentionPeriodInDays":{
+          "shape":"RetentionPeriodInDays",
+          "documentation":"<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>"
+        }
+      },
+      "documentation":"<p>An object with the name of the retention configuration and the retention period in days. The object stores the configuration for data retention in AWS Config.</p>"
+    },
+    "RetentionConfigurationList":{
+      "type":"list",
+      "member":{"shape":"RetentionConfiguration"}
+    },
+    "RetentionConfigurationName":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"[\\w\\-]+"
+    },
+    "RetentionConfigurationNameList":{
+      "type":"list",
+      "member":{"shape":"RetentionConfigurationName"},
+      "max":1,
+      "min":0
+    },
+    "RetentionPeriodInDays":{
+      "type":"integer",
+      "max":2557,
+      "min":30
     },
     "RuleLimit":{
       "type":"integer",

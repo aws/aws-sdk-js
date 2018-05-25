@@ -650,6 +650,10 @@ declare namespace Glue {
      * The job run timeout in minutes. It overrides the timeout value of the job.
      */
     Timeout?: Timeout;
+    /**
+     * Specifies configuration properties of a job run notification.
+     */
+    NotificationProperty?: NotificationProperty;
   }
   export type ActionList = Action[];
   export type AttemptCount = number;
@@ -1405,6 +1409,10 @@ declare namespace Glue {
      * The job timeout in minutes. The default is 2880 minutes (48 hours).
      */
     Timeout?: Timeout;
+    /**
+     * Specifies configuration properties of a job notification.
+     */
+    NotificationProperty?: NotificationProperty;
   }
   export interface CreateJobResponse {
     /**
@@ -1849,6 +1857,7 @@ declare namespace Glue {
      */
     MaxConcurrentRuns?: MaxConcurrentRuns;
   }
+  export type ExecutionTime = number;
   export type FieldType = string;
   export type FilterString = string;
   export type FormatString = string;
@@ -2596,6 +2605,10 @@ declare namespace Glue {
      * The job timeout in minutes.
      */
     Timeout?: Timeout;
+    /**
+     * Specifies configuration properties of a job notification.
+     */
+    NotificationProperty?: NotificationProperty;
   }
   export interface JobBookmarkEntry {
     /**
@@ -2687,11 +2700,15 @@ declare namespace Glue {
     /**
      * The amount of time (in seconds) that the job run consumed resources.
      */
-    ExecutionTime?: IntegerValue;
+    ExecutionTime?: ExecutionTime;
     /**
      * The job run timeout in minutes.
      */
     Timeout?: Timeout;
+    /**
+     * Specifies configuration properties of a job run notification.
+     */
+    NotificationProperty?: NotificationProperty;
   }
   export type JobRunList = JobRun[];
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
@@ -2736,6 +2753,10 @@ declare namespace Glue {
      * The job timeout in minutes. The default is 2880 minutes (48 hours).
      */
     Timeout?: Timeout;
+    /**
+     * Specifies configuration properties of a job notification.
+     */
+    NotificationProperty?: NotificationProperty;
   }
   export interface JsonClassifier {
     /**
@@ -2843,6 +2864,13 @@ declare namespace Glue {
   export type NameStringList = NameString[];
   export type NonNegativeDouble = number;
   export type NonNegativeInteger = number;
+  export interface NotificationProperty {
+    /**
+     * After a job run starts, the number of minutes to wait before sending a job run delay notification.
+     */
+    NotifyDelayAfter?: NotifyDelayAfter;
+  }
+  export type NotifyDelayAfter = number;
   export interface Order {
     /**
      * The name of the column.
@@ -3111,6 +3139,10 @@ declare namespace Glue {
      * The job run timeout in minutes. It overrides the timeout value of the job.
      */
     Timeout?: Timeout;
+    /**
+     * Specifies configuration properties of a job run notification.
+     */
+    NotificationProperty?: NotificationProperty;
   }
   export interface StartJobRunResponse {
     /**
