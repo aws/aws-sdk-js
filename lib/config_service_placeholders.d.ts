@@ -139,6 +139,7 @@ export abstract class ConfigurationServicePlaceholders {
   iotanalytics?: AWS.IoTAnalytics.Types.ClientConfiguration;
   iot1clickdevicesservice?: AWS.IoT1ClickDevicesService.Types.ClientConfiguration;
   iot1clickprojects?: AWS.IoT1ClickProjects.Types.ClientConfiguration;
+  pi?: AWS.PI.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -280,4 +281,5 @@ export interface ConfigurationServiceApiVersions {
   iotanalytics?: AWS.IoTAnalytics.Types.apiVersion;
   iot1clickdevicesservice?: AWS.IoT1ClickDevicesService.Types.apiVersion;
   iot1clickprojects?: AWS.IoT1ClickProjects.Types.apiVersion;
+  pi?: AWS.PI.Types.apiVersion;
 }

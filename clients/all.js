@@ -138,5 +138,6 @@ module.exports = {
   SecretsManager: require('./secretsmanager'),
   IoTAnalytics: require('./iotanalytics'),
   IoT1ClickDevicesService: require('./iot1clickdevicesservice'),
-  IoT1ClickProjects: require('./iot1clickprojects')
+  IoT1ClickProjects: require('./iot1clickprojects'),
+  PI: require('./pi')
 };

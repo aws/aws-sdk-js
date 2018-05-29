@@ -566,5 +566,8 @@
   "iot1clickprojects": {
     "prefix": "iot1click-projects",
     "name": "IoT1ClickProjects"
+  },
+  "pi": {
+    "name": "PI"
   }
 }
