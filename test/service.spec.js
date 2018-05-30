@@ -915,6 +915,31 @@
         expect(typeof event.Latency).to.equal('number');
       });
       client.makeRequest('operationName', function(err, data) {});
+    });
+
+    it('should emit api call attempt events corresponding to event interface', function() {
+      helpers.mockHttpResponse(200, {
+        'x-amz-request-id': 'request-id',
+        'x-amzn-requestid': 'n-request-id'
+      }, ['FOO', 'BAR']); 
+      var client = new MockService();
+      client.on('apiCallAttempt', function apiCallListener(event) {
+        expect(event.Type).to.equal('ApiCallAttempt');
+        expect(event.Service).to.equal('MockService');
+        expect(event.Api).to.equal('operationName');
+        expect(Math.abs(event.Timestemp - Date.now()) < 100).to.equal(true);
+        expect(event.Version).to.equal(1);
+        expect(event.AttemptCount).to.equal(0);
+        expect(event.Fqdn).to.equal('mockservice.mock-region.amazonaws.com');
+        expect(event.XAmznRequestId).to.equal('n-request-id');
+        expect(event.XAmzRequestId).to.equal('request-id');
+        expect(event.HttpStatusCode).to.equal(200);
+        expect(event.AccessKey).to.equal('akid');
+        expect(event.Region).to.equal('mock-region');
+        expect(typeof event.UserAgent).to.equal('string');
+        expect(typeof event.AttemptLatency).to.equal('number');
+      });
+      client.makeRequest('operationName', function(err, data) {});
     })
   });
 
