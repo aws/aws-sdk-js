@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.248.1
+// AWS SDK for JavaScript v2.249.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -56930,7 +56930,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Listeners": {
-            "shape": "Sq"
+            "shape": "S1g"
           }
         }
       }
@@ -56944,13 +56944,13 @@ module.exports={
         "members": {
           "Name": {},
           "Subnets": {
-            "shape": "Su"
+            "shape": "S1k"
           },
           "SubnetMappings": {
-            "shape": "Sw"
+            "shape": "S1m"
           },
           "SecurityGroups": {
-            "shape": "Sz"
+            "shape": "S1p"
           },
           "Scheme": {},
           "Tags": {
@@ -56965,7 +56965,7 @@ module.exports={
         "type": "structure",
         "members": {
           "LoadBalancers": {
-            "shape": "S15"
+            "shape": "S1v"
           }
         }
       }
@@ -56982,7 +56982,7 @@ module.exports={
         "members": {
           "ListenerArn": {},
           "Conditions": {
-            "shape": "S1l"
+            "shape": "S2b"
           },
           "Priority": {
             "type": "integer"
@@ -56997,7 +56997,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Rules": {
-            "shape": "S1s"
+            "shape": "S2i"
           }
         }
       }
@@ -57034,7 +57034,7 @@ module.exports={
             "type": "integer"
           },
           "Matcher": {
-            "shape": "S24"
+            "shape": "S2u"
           },
           "TargetType": {}
         }
@@ -57044,7 +57044,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TargetGroups": {
-            "shape": "S28"
+            "shape": "S2y"
           }
         }
       }
@@ -57123,7 +57123,7 @@ module.exports={
         "members": {
           "TargetGroupArn": {},
           "Targets": {
-            "shape": "S2k"
+            "shape": "S3a"
           }
         }
       },
@@ -57206,7 +57206,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Listeners": {
-            "shape": "Sq"
+            "shape": "S1g"
           },
           "NextMarker": {}
         }
@@ -57227,7 +57227,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Attributes": {
-            "shape": "S33"
+            "shape": "S3t"
           }
         }
       }
@@ -57237,7 +57237,7 @@ module.exports={
         "type": "structure",
         "members": {
           "LoadBalancerArns": {
-            "shape": "S2a"
+            "shape": "S30"
           },
           "Names": {
             "type": "list",
@@ -57254,7 +57254,7 @@ module.exports={
         "type": "structure",
         "members": {
           "LoadBalancers": {
-            "shape": "S15"
+            "shape": "S1v"
           },
           "NextMarker": {}
         }
@@ -57280,7 +57280,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Rules": {
-            "shape": "S1s"
+            "shape": "S2i"
           },
           "NextMarker": {}
         }
@@ -57379,7 +57379,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Attributes": {
-            "shape": "S3u"
+            "shape": "S4k"
           }
         }
       }
@@ -57408,7 +57408,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TargetGroups": {
-            "shape": "S28"
+            "shape": "S2y"
           },
           "NextMarker": {}
         }
@@ -57423,7 +57423,7 @@ module.exports={
         "members": {
           "TargetGroupArn": {},
           "Targets": {
-            "shape": "S2k"
+            "shape": "S3a"
           }
         }
       },
@@ -57437,7 +57437,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "Target": {
-                  "shape": "S2l"
+                  "shape": "S3b"
                 },
                 "HealthCheckPort": {},
                 "TargetHealth": {
@@ -57480,7 +57480,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Listeners": {
-            "shape": "Sq"
+            "shape": "S1g"
           }
         }
       }
@@ -57495,7 +57495,7 @@ module.exports={
         "members": {
           "LoadBalancerArn": {},
           "Attributes": {
-            "shape": "S33"
+            "shape": "S3t"
           }
         }
       },
@@ -57504,7 +57504,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Attributes": {
-            "shape": "S33"
+            "shape": "S3t"
           }
         }
       }
@@ -57518,7 +57518,7 @@ module.exports={
         "members": {
           "RuleArn": {},
           "Conditions": {
-            "shape": "S1l"
+            "shape": "S2b"
           },
           "Actions": {
             "shape": "Sl"
@@ -57530,7 +57530,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Rules": {
-            "shape": "S1s"
+            "shape": "S2i"
           }
         }
       }
@@ -57559,7 +57559,7 @@ module.exports={
             "type": "integer"
           },
           "Matcher": {
-            "shape": "S24"
+            "shape": "S2u"
           }
         }
       },
@@ -57568,7 +57568,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TargetGroups": {
-            "shape": "S28"
+            "shape": "S2y"
           }
         }
       }
@@ -57583,7 +57583,7 @@ module.exports={
         "members": {
           "TargetGroupArn": {},
           "Attributes": {
-            "shape": "S3u"
+            "shape": "S4k"
           }
         }
       },
@@ -57592,7 +57592,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Attributes": {
-            "shape": "S3u"
+            "shape": "S4k"
           }
         }
       }
@@ -57607,7 +57607,7 @@ module.exports={
         "members": {
           "TargetGroupArn": {},
           "Targets": {
-            "shape": "S2k"
+            "shape": "S3a"
           }
         }
       },
@@ -57706,7 +57706,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Rules": {
-            "shape": "S1s"
+            "shape": "S2i"
           }
         }
       }
@@ -57721,7 +57721,7 @@ module.exports={
         "members": {
           "LoadBalancerArn": {},
           "SecurityGroups": {
-            "shape": "Sz"
+            "shape": "S1p"
           }
         }
       },
@@ -57730,7 +57730,7 @@ module.exports={
         "type": "structure",
         "members": {
           "SecurityGroupIds": {
-            "shape": "Sz"
+            "shape": "S1p"
           }
         }
       }
@@ -57739,16 +57739,15 @@ module.exports={
       "input": {
         "type": "structure",
         "required": [
-          "LoadBalancerArn",
-          "Subnets"
+          "LoadBalancerArn"
         ],
         "members": {
           "LoadBalancerArn": {},
           "Subnets": {
-            "shape": "Su"
+            "shape": "S1k"
           },
           "SubnetMappings": {
-            "shape": "Sw"
+            "shape": "S1m"
           }
         }
       },
@@ -57757,7 +57756,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AvailabilityZones": {
-            "shape": "S1e"
+            "shape": "S24"
           }
         }
       }
@@ -57798,16 +57797,72 @@ module.exports={
       "member": {
         "type": "structure",
         "required": [
-          "Type",
-          "TargetGroupArn"
+          "Type"
         ],
         "members": {
           "Type": {},
-          "TargetGroupArn": {}
+          "TargetGroupArn": {},
+          "AuthenticateOidcConfig": {
+            "type": "structure",
+            "required": [
+              "Issuer",
+              "AuthorizationEndpoint",
+              "TokenEndpoint",
+              "UserInfoEndpoint",
+              "ClientId",
+              "ClientSecret"
+            ],
+            "members": {
+              "Issuer": {},
+              "AuthorizationEndpoint": {},
+              "TokenEndpoint": {},
+              "UserInfoEndpoint": {},
+              "ClientId": {},
+              "ClientSecret": {},
+              "SessionCookieName": {},
+              "Scope": {},
+              "SessionTimeout": {
+                "type": "long"
+              },
+              "AuthenticationRequestExtraParams": {
+                "type": "map",
+                "key": {},
+                "value": {}
+              },
+              "OnUnauthenticatedRequest": {}
+            }
+          },
+          "AuthenticateCognitoConfig": {
+            "type": "structure",
+            "required": [
+              "UserPoolArn",
+              "UserPoolClientId",
+              "UserPoolDomain"
+            ],
+            "members": {
+              "UserPoolArn": {},
+              "UserPoolClientId": {},
+              "UserPoolDomain": {},
+              "SessionCookieName": {},
+              "Scope": {},
+              "SessionTimeout": {
+                "type": "long"
+              },
+              "AuthenticationRequestExtraParams": {
+                "type": "map",
+                "key": {},
+                "value": {}
+              },
+              "OnUnauthenticatedRequest": {}
+            }
+          },
+          "Order": {
+            "type": "integer"
+          }
         }
       }
     },
-    "Sq": {
+    "S1g": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -57828,11 +57883,11 @@ module.exports={
         }
       }
     },
-    "Su": {
+    "S1k": {
       "type": "list",
       "member": {}
     },
-    "Sw": {
+    "S1m": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -57842,11 +57897,11 @@ module.exports={
         }
       }
     },
-    "Sz": {
+    "S1p": {
       "type": "list",
       "member": {}
     },
-    "S15": {
+    "S1v": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -57869,16 +57924,16 @@ module.exports={
           },
           "Type": {},
           "AvailabilityZones": {
-            "shape": "S1e"
+            "shape": "S24"
           },
           "SecurityGroups": {
-            "shape": "Sz"
+            "shape": "S1p"
           },
           "IpAddressType": {}
         }
       }
     },
-    "S1e": {
+    "S24": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -57898,7 +57953,7 @@ module.exports={
         }
       }
     },
-    "S1l": {
+    "S2b": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -57911,7 +57966,7 @@ module.exports={
         }
       }
     },
-    "S1s": {
+    "S2i": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -57919,7 +57974,7 @@ module.exports={
           "RuleArn": {},
           "Priority": {},
           "Conditions": {
-            "shape": "S1l"
+            "shape": "S2b"
           },
           "Actions": {
             "shape": "Sl"
@@ -57930,7 +57985,7 @@ module.exports={
         }
       }
     },
-    "S24": {
+    "S2u": {
       "type": "structure",
       "required": [
         "HttpCode"
@@ -57939,7 +57994,7 @@ module.exports={
         "HttpCode": {}
       }
     },
-    "S28": {
+    "S2y": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -57967,26 +58022,26 @@ module.exports={
           },
           "HealthCheckPath": {},
           "Matcher": {
-            "shape": "S24"
+            "shape": "S2u"
           },
           "LoadBalancerArns": {
-            "shape": "S2a"
+            "shape": "S30"
           },
           "TargetType": {}
         }
       }
     },
-    "S2a": {
+    "S30": {
       "type": "list",
       "member": {}
     },
-    "S2k": {
+    "S3a": {
       "type": "list",
       "member": {
-        "shape": "S2l"
+        "shape": "S3b"
       }
     },
-    "S2l": {
+    "S3b": {
       "type": "structure",
       "required": [
         "Id"
@@ -57999,7 +58054,7 @@ module.exports={
         "AvailabilityZone": {}
       }
     },
-    "S33": {
+    "S3t": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -58009,7 +58064,7 @@ module.exports={
         }
       }
     },
-    "S3u": {
+    "S4k": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -80731,6 +80786,9 @@ module.exports={
   },
   "pi": {
     "name": "PI"
+  },
+  "neptune": {
+    "name": "Neptune"
   }
 }
 },{}],113:[function(require,module,exports){
@@ -128632,7 +128690,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.248.1',
+  VERSION: '2.249.1',
 
   /**
    * @api private
@@ -147208,7 +147266,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":337,"./lib/rng":338}],341:[function(require,module,exports){
-// AWS SDK for JavaScript v2.248.1
+// AWS SDK for JavaScript v2.249.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

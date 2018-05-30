@@ -138,3 +138,4 @@ export import IoTAnalytics = require('./iotanalytics');
 export import IoT1ClickDevicesService = require('./iot1clickdevicesservice');
 export import IoT1ClickProjects = require('./iot1clickprojects');
 export import PI = require('./pi');
+export import Neptune = require('./neptune');

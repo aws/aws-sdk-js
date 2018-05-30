@@ -73,7 +73,9 @@
         {"shape":"CertificateNotFoundException"},
         {"shape":"UnsupportedProtocolException"},
         {"shape":"TooManyRegistrationsForTargetIdException"},
-        {"shape":"TooManyTargetsException"}
+        {"shape":"TooManyTargetsException"},
+        {"shape":"TooManyActionsException"},
+        {"shape":"InvalidLoadBalancerActionException"}
       ],
       "documentation":"<p>Creates a listener for the specified Application Load Balancer or Network Load Balancer.</p> <p>To update a listener, use <a>ModifyListener</a>. When you are finished with a listener, you can delete it using <a>DeleteListener</a>. If you are finished with both the listener and the load balancer, you can delete them both using <a>DeleteLoadBalancer</a>.</p> <p>This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple listeners with the same settings, each call succeeds.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html\">Listeners for Your Application Load Balancers</a> in the <i>Application Load Balancers Guide</i> and <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html\">Listeners for Your Network Load Balancers</a> in the <i>Network Load Balancers Guide</i>.</p>"
     },
@@ -126,9 +128,12 @@
         {"shape":"TargetGroupNotFoundException"},
         {"shape":"InvalidConfigurationRequestException"},
         {"shape":"TooManyRegistrationsForTargetIdException"},
-        {"shape":"TooManyTargetsException"}
+        {"shape":"TooManyTargetsException"},
+        {"shape":"UnsupportedProtocolException"},
+        {"shape":"TooManyActionsException"},
+        {"shape":"InvalidLoadBalancerActionException"}
       ],
-      "documentation":"<p>Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer.</p> <p>Rules are evaluated in priority order, from the lowest value to the highest value. When the condition for a rule is met, the specified action is taken. If no conditions are met, the action for the default rule is taken. For more information, see <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules\">Listener Rules</a> in the <i>Application Load Balancers Guide</i>.</p> <p>To view your current rules, use <a>DescribeRules</a>. To update a rule, use <a>ModifyRule</a>. To set the priorities of your rules, use <a>SetRulePriorities</a>. To delete a rule, use <a>DeleteRule</a>.</p>"
+      "documentation":"<p>Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer.</p> <p>Rules are evaluated in priority order, from the lowest value to the highest value. When the conditions for a rule are met, its actions are performed. If the conditions for no rules are met, the actions for the default rule are performed. For more information, see <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules\">Listener Rules</a> in the <i>Application Load Balancers Guide</i>.</p> <p>To view your current rules, use <a>DescribeRules</a>. To update a rule, use <a>ModifyRule</a>. To set the priorities of your rules, use <a>SetRulePriorities</a>. To delete a rule, use <a>DeleteRule</a>.</p>"
     },
     "CreateTargetGroup":{
       "name":"CreateTargetGroup",
@@ -274,7 +279,8 @@
       },
       "errors":[
         {"shape":"ListenerNotFoundException"},
-        {"shape":"LoadBalancerNotFoundException"}
+        {"shape":"LoadBalancerNotFoundException"},
+        {"shape":"UnsupportedProtocolException"}
       ],
       "documentation":"<p>Describes the specified listeners or the listeners for the specified Application Load Balancer or Network Load Balancer. You must specify either a load balancer or one or more listeners.</p>"
     },
@@ -323,7 +329,8 @@
       },
       "errors":[
         {"shape":"ListenerNotFoundException"},
-        {"shape":"RuleNotFoundException"}
+        {"shape":"RuleNotFoundException"},
+        {"shape":"UnsupportedProtocolException"}
       ],
       "documentation":"<p>Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules.</p>"
     },
@@ -437,7 +444,9 @@
         {"shape":"InvalidConfigurationRequestException"},
         {"shape":"UnsupportedProtocolException"},
         {"shape":"TooManyRegistrationsForTargetIdException"},
-        {"shape":"TooManyTargetsException"}
+        {"shape":"TooManyTargetsException"},
+        {"shape":"TooManyActionsException"},
+        {"shape":"InvalidLoadBalancerActionException"}
       ],
       "documentation":"<p>Modifies the specified properties of the specified listener.</p> <p>Any properties that you do not specify retain their current values. However, changing the protocol from HTTPS to HTTP removes the security policy and SSL certificate properties. If you change the protocol from HTTP to HTTPS, you must add the security policy and server certificate.</p>"
     },
@@ -476,9 +485,12 @@
         {"shape":"OperationNotPermittedException"},
         {"shape":"TooManyRegistrationsForTargetIdException"},
         {"shape":"TooManyTargetsException"},
-        {"shape":"TargetGroupNotFoundException"}
+        {"shape":"TargetGroupNotFoundException"},
+        {"shape":"UnsupportedProtocolException"},
+        {"shape":"TooManyActionsException"},
+        {"shape":"InvalidLoadBalancerActionException"}
       ],
-      "documentation":"<p>Modifies the specified rule.</p> <p>Any existing properties that you do not modify retain their current values.</p> <p>To modify the default action, use <a>ModifyListener</a>.</p>"
+      "documentation":"<p>Modifies the specified rule.</p> <p>Any existing properties that you do not modify retain their current values.</p> <p>To modify the actions for the default rule, use <a>ModifyListener</a>.</p>"
     },
     "ModifyTargetGroup":{
       "name":"ModifyTargetGroup",
@@ -649,25 +661,43 @@
   "shapes":{
     "Action":{
       "type":"structure",
-      "required":[
-        "Type",
-        "TargetGroupArn"
-      ],
+      "required":["Type"],
       "members":{
         "Type":{
           "shape":"ActionTypeEnum",
-          "documentation":"<p>The type of action.</p>"
+          "documentation":"<p>The type of action. Each rule must include one forward action.</p>"
         },
         "TargetGroupArn":{
           "shape":"TargetGroupArn",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the target group.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the target group. Specify only when <code>Type</code> is <code>forward</code>.</p> <p>For a default rule, the protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p>"
+        },
+        "AuthenticateOidcConfig":{
+          "shape":"AuthenticateOidcActionConfig",
+          "documentation":"<p>[HTTPS listener] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when <code>Type</code> is <code>authenticate-oidc</code>.</p>"
+        },
+        "AuthenticateCognitoConfig":{
+          "shape":"AuthenticateCognitoActionConfig",
+          "documentation":"<p>[HTTPS listener] Information for using Amazon Cognito to authenticate users. Specify only when <code>Type</code> is <code>authenticate-cognito</code>.</p>"
+        },
+        "Order":{
+          "shape":"ActionOrder",
+          "documentation":"<p>The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. The forward action must be performed last.</p>"
         }
       },
       "documentation":"<p>Information about an action.</p>"
     },
+    "ActionOrder":{
+      "type":"integer",
+      "max":50000,
+      "min":1
+    },
     "ActionTypeEnum":{
       "type":"string",
-      "enum":["forward"]
+      "enum":[
+        "forward",
+        "authenticate-oidc",
+        "authenticate-cognito"
+      ]
     },
     "Actions":{
       "type":"list",
@@ -734,6 +764,152 @@
       },
       "exception":true
     },
+    "AuthenticateCognitoActionAuthenticationRequestExtraParams":{
+      "type":"map",
+      "key":{"shape":"AuthenticateCognitoActionAuthenticationRequestParamName"},
+      "value":{"shape":"AuthenticateCognitoActionAuthenticationRequestParamValue"}
+    },
+    "AuthenticateCognitoActionAuthenticationRequestParamName":{"type":"string"},
+    "AuthenticateCognitoActionAuthenticationRequestParamValue":{"type":"string"},
+    "AuthenticateCognitoActionConditionalBehaviorEnum":{
+      "type":"string",
+      "enum":[
+        "deny",
+        "allow",
+        "authenticate"
+      ]
+    },
+    "AuthenticateCognitoActionConfig":{
+      "type":"structure",
+      "required":[
+        "UserPoolArn",
+        "UserPoolClientId",
+        "UserPoolDomain"
+      ],
+      "members":{
+        "UserPoolArn":{
+          "shape":"AuthenticateCognitoActionUserPoolArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon Cognito user pool.</p>"
+        },
+        "UserPoolClientId":{
+          "shape":"AuthenticateCognitoActionUserPoolClientId",
+          "documentation":"<p>The ID of the Amazon Cognito user pool client.</p>"
+        },
+        "UserPoolDomain":{
+          "shape":"AuthenticateCognitoActionUserPoolDomain",
+          "documentation":"<p>The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.</p>"
+        },
+        "SessionCookieName":{
+          "shape":"AuthenticateCognitoActionSessionCookieName",
+          "documentation":"<p>The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.</p>"
+        },
+        "Scope":{
+          "shape":"AuthenticateCognitoActionScope",
+          "documentation":"<p>The set of user claims to be requested from the IdP. The default is <code>openid</code>.</p> <p>To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.</p>"
+        },
+        "SessionTimeout":{
+          "shape":"AuthenticateCognitoActionSessionTimeout",
+          "documentation":"<p>The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).</p>"
+        },
+        "AuthenticationRequestExtraParams":{
+          "shape":"AuthenticateCognitoActionAuthenticationRequestExtraParams",
+          "documentation":"<p>The query parameters (up to 10) to include in the redirect request to the authorization endpoint.</p>"
+        },
+        "OnUnauthenticatedRequest":{
+          "shape":"AuthenticateCognitoActionConditionalBehaviorEnum",
+          "documentation":"<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>"
+        }
+      },
+      "documentation":"<p>Request parameters to use when integrating with Amazon Cognito to authenticate users.</p>"
+    },
+    "AuthenticateCognitoActionScope":{"type":"string"},
+    "AuthenticateCognitoActionSessionCookieName":{"type":"string"},
+    "AuthenticateCognitoActionSessionTimeout":{"type":"long"},
+    "AuthenticateCognitoActionUserPoolArn":{"type":"string"},
+    "AuthenticateCognitoActionUserPoolClientId":{"type":"string"},
+    "AuthenticateCognitoActionUserPoolDomain":{"type":"string"},
+    "AuthenticateOidcActionAuthenticationRequestExtraParams":{
+      "type":"map",
+      "key":{"shape":"AuthenticateOidcActionAuthenticationRequestParamName"},
+      "value":{"shape":"AuthenticateOidcActionAuthenticationRequestParamValue"}
+    },
+    "AuthenticateOidcActionAuthenticationRequestParamName":{"type":"string"},
+    "AuthenticateOidcActionAuthenticationRequestParamValue":{"type":"string"},
+    "AuthenticateOidcActionAuthorizationEndpoint":{"type":"string"},
+    "AuthenticateOidcActionClientId":{"type":"string"},
+    "AuthenticateOidcActionClientSecret":{"type":"string"},
+    "AuthenticateOidcActionConditionalBehaviorEnum":{
+      "type":"string",
+      "enum":[
+        "deny",
+        "allow",
+        "authenticate"
+      ]
+    },
+    "AuthenticateOidcActionConfig":{
+      "type":"structure",
+      "required":[
+        "Issuer",
+        "AuthorizationEndpoint",
+        "TokenEndpoint",
+        "UserInfoEndpoint",
+        "ClientId",
+        "ClientSecret"
+      ],
+      "members":{
+        "Issuer":{
+          "shape":"AuthenticateOidcActionIssuer",
+          "documentation":"<p>The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.</p>"
+        },
+        "AuthorizationEndpoint":{
+          "shape":"AuthenticateOidcActionAuthorizationEndpoint",
+          "documentation":"<p>The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.</p>"
+        },
+        "TokenEndpoint":{
+          "shape":"AuthenticateOidcActionTokenEndpoint",
+          "documentation":"<p>The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.</p>"
+        },
+        "UserInfoEndpoint":{
+          "shape":"AuthenticateOidcActionUserInfoEndpoint",
+          "documentation":"<p>The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.</p>"
+        },
+        "ClientId":{
+          "shape":"AuthenticateOidcActionClientId",
+          "documentation":"<p>The OAuth 2.0 client identifier.</p>"
+        },
+        "ClientSecret":{
+          "shape":"AuthenticateOidcActionClientSecret",
+          "documentation":"<p>The OAuth 2.0 client secret.</p>"
+        },
+        "SessionCookieName":{
+          "shape":"AuthenticateOidcActionSessionCookieName",
+          "documentation":"<p>The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.</p>"
+        },
+        "Scope":{
+          "shape":"AuthenticateOidcActionScope",
+          "documentation":"<p>The set of user claims to be requested from the IdP. The default is <code>openid</code>.</p> <p>To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.</p>"
+        },
+        "SessionTimeout":{
+          "shape":"AuthenticateOidcActionSessionTimeout",
+          "documentation":"<p>The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).</p>"
+        },
+        "AuthenticationRequestExtraParams":{
+          "shape":"AuthenticateOidcActionAuthenticationRequestExtraParams",
+          "documentation":"<p>The query parameters (up to 10) to include in the redirect request to the authorization endpoint.</p>"
+        },
+        "OnUnauthenticatedRequest":{
+          "shape":"AuthenticateOidcActionConditionalBehaviorEnum",
+          "documentation":"<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>"
+        }
+      },
+      "documentation":"<p>Request parameters when using an identity provider (IdP) that is compliant with OpenID Connect (OIDC) to authenticate users.</p>"
+    },
+    "AuthenticateOidcActionIssuer":{"type":"string"},
+    "AuthenticateOidcActionScope":{"type":"string"},
+    "AuthenticateOidcActionSessionCookieName":{"type":"string"},
+    "AuthenticateOidcActionSessionTimeout":{"type":"long"},
+    "AuthenticateOidcActionTokenEndpoint":{"type":"string"},
+    "AuthenticateOidcActionUserInfoEndpoint":{"type":"string"},
     "AvailabilityZone":{
       "type":"structure",
       "members":{
@@ -851,11 +1027,11 @@
         },
         "Certificates":{
           "shape":"CertificateList",
-          "documentation":"<p>[HTTPS listeners] The SSL server certificate. You must provide exactly one certificate.</p>"
+          "documentation":"<p>[HTTPS listeners] The default SSL server certificate. You must provide exactly one certificate. To create a certificate list, use <a>AddListenerCertificates</a>.</p>"
         },
         "DefaultActions":{
           "shape":"Actions",
-          "documentation":"<p>The default action for the listener. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.</p>"
+          "documentation":"<p>The actions for the default rule. The rule must include one forward action.</p> <p>If the action type is <code>forward</code>, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>"
         }
       }
     },
@@ -934,11 +1110,11 @@
         },
         "Priority":{
           "shape":"RulePriority",
-          "documentation":"<p>The priority for the rule. A listener can't have multiple rules with the same priority.</p>"
+          "documentation":"<p>The rule priority. A listener can't have multiple rules with the same priority.</p>"
         },
         "Actions":{
           "shape":"Actions",
-          "documentation":"<p>An action. Each action has the type <code>forward</code> and specifies a target group.</p>"
+          "documentation":"<p>The actions. Each rule must include one forward action.</p> <p>If the action type is <code>forward</code>, you can specify a single target group.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>"
         }
       }
     },
@@ -1516,6 +1692,18 @@
       },
       "exception":true
     },
+    "InvalidLoadBalancerActionException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The requested action is not valid.</p>",
+      "error":{
+        "code":"InvalidLoadBalancerAction",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidSchemeException":{
       "type":"structure",
       "members":{
@@ -1844,15 +2032,15 @@
         },
         "SslPolicy":{
           "shape":"SslPolicyName",
-          "documentation":"<p>The security policy that defines which protocols and ciphers are supported. For more information, see <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies\">Security Policies</a> in the <i>Application Load Balancers Guide</i>.</p>"
+          "documentation":"<p>[HTTPS listeners] The security policy that defines which protocols and ciphers are supported. For more information, see <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies\">Security Policies</a> in the <i>Application Load Balancers Guide</i>.</p>"
         },
         "Certificates":{
           "shape":"CertificateList",
-          "documentation":"<p>The default SSL server certificate.</p>"
+          "documentation":"<p>[HTTPS listeners] The default SSL server certificate. You must provide exactly one certificate. To create a certificate list, use <a>AddListenerCertificates</a>.</p>"
         },
         "DefaultActions":{
           "shape":"Actions",
-          "documentation":"<p>The default action. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.</p>"
+          "documentation":"<p>The actions for the default rule. The rule must include one forward action.</p> <p>If the action type is <code>forward</code>, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>"
         }
       }
     },
@@ -1861,7 +2049,7 @@
       "members":{
         "Listeners":{
           "shape":"Listeners",
-          "documentation":"<p>Information about the modified listeners.</p>"
+          "documentation":"<p>Information about the modified listener.</p>"
         }
       }
     },
@@ -1901,11 +2089,11 @@
         },
         "Conditions":{
           "shape":"RuleConditionList",
-          "documentation":"<p>The conditions.</p>"
+          "documentation":"<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ \" ' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>"
         },
         "Actions":{
           "shape":"Actions",
-          "documentation":"<p>The actions. The target group must use the HTTP or HTTPS protocol.</p>"
+          "documentation":"<p>The actions.</p> <p>If the action type is <code>forward</code>, you can specify a single target group.</p> <p>If the action type is <code>authenticate-oidc</code>, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application.</p> <p>If the action type is <code>authenticate-cognito</code>, you can use Amazon Cognito to authenticate users as they access your application.</p>"
         }
       }
     },
@@ -1914,7 +2102,7 @@
       "members":{
         "Rules":{
           "shape":"Rules",
-          "documentation":"<p>Information about the rule.</p>"
+          "documentation":"<p>Information about the modified rule.</p>"
         }
       }
     },
@@ -1991,7 +2179,7 @@
       "members":{
         "TargetGroups":{
           "shape":"TargetGroups",
-          "documentation":"<p>Information about the target group.</p>"
+          "documentation":"<p>Information about the modified target group.</p>"
         }
       }
     },
@@ -2304,10 +2492,7 @@
     },
     "SetSubnetsInput":{
       "type":"structure",
-      "required":[
-        "LoadBalancerArn",
-        "Subnets"
-      ],
+      "required":["LoadBalancerArn"],
       "members":{
         "LoadBalancerArn":{
           "shape":"LoadBalancerArn",
@@ -2681,6 +2866,18 @@
         "instance",
         "ip"
       ]
+    },
+    "TooManyActionsException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>You've reached the limit on the number of actions per rule.</p>",
+      "error":{
+        "code":"TooManyActions",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
     },
     "TooManyCertificatesException":{
       "type":"structure",

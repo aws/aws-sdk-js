@@ -139,5 +139,6 @@ module.exports = {
   IoTAnalytics: require('./iotanalytics'),
   IoT1ClickDevicesService: require('./iot1clickdevicesservice'),
   IoT1ClickProjects: require('./iot1clickprojects'),
-  PI: require('./pi')
+  PI: require('./pi'),
+  Neptune: require('./neptune')
 };

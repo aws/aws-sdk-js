@@ -44,11 +44,11 @@ declare class ELBv2 extends Service {
    */
   createLoadBalancer(callback?: (err: AWSError, data: ELBv2.Types.CreateLoadBalancerOutput) => void): Request<ELBv2.Types.CreateLoadBalancerOutput, AWSError>;
   /**
-   * Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value. When the condition for a rule is met, the specified action is taken. If no conditions are met, the action for the default rule is taken. For more information, see Listener Rules in the Application Load Balancers Guide. To view your current rules, use DescribeRules. To update a rule, use ModifyRule. To set the priorities of your rules, use SetRulePriorities. To delete a rule, use DeleteRule.
+   * Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value. When the conditions for a rule are met, its actions are performed. If the conditions for no rules are met, the actions for the default rule are performed. For more information, see Listener Rules in the Application Load Balancers Guide. To view your current rules, use DescribeRules. To update a rule, use ModifyRule. To set the priorities of your rules, use SetRulePriorities. To delete a rule, use DeleteRule.
    */
   createRule(params: ELBv2.Types.CreateRuleInput, callback?: (err: AWSError, data: ELBv2.Types.CreateRuleOutput) => void): Request<ELBv2.Types.CreateRuleOutput, AWSError>;
   /**
-   * Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value. When the condition for a rule is met, the specified action is taken. If no conditions are met, the action for the default rule is taken. For more information, see Listener Rules in the Application Load Balancers Guide. To view your current rules, use DescribeRules. To update a rule, use ModifyRule. To set the priorities of your rules, use SetRulePriorities. To delete a rule, use DeleteRule.
+   * Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value. When the conditions for a rule are met, its actions are performed. If the conditions for no rules are met, the actions for the default rule are performed. For more information, see Listener Rules in the Application Load Balancers Guide. To view your current rules, use DescribeRules. To update a rule, use ModifyRule. To set the priorities of your rules, use SetRulePriorities. To delete a rule, use DeleteRule.
    */
   createRule(callback?: (err: AWSError, data: ELBv2.Types.CreateRuleOutput) => void): Request<ELBv2.Types.CreateRuleOutput, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class ELBv2 extends Service {
    */
   modifyLoadBalancerAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyLoadBalancerAttributesOutput) => void): Request<ELBv2.Types.ModifyLoadBalancerAttributesOutput, AWSError>;
   /**
-   * Modifies the specified rule. Any existing properties that you do not modify retain their current values. To modify the default action, use ModifyListener.
+   * Modifies the specified rule. Any existing properties that you do not modify retain their current values. To modify the actions for the default rule, use ModifyListener.
    */
   modifyRule(params: ELBv2.Types.ModifyRuleInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyRuleOutput) => void): Request<ELBv2.Types.ModifyRuleOutput, AWSError>;
   /**
-   * Modifies the specified rule. Any existing properties that you do not modify retain their current values. To modify the default action, use ModifyListener.
+   * Modifies the specified rule. Any existing properties that you do not modify retain their current values. To modify the actions for the default rule, use ModifyListener.
    */
   modifyRule(callback?: (err: AWSError, data: ELBv2.Types.ModifyRuleOutput) => void): Request<ELBv2.Types.ModifyRuleOutput, AWSError>;
   /**
@@ -327,15 +327,28 @@ declare class ELBv2 extends Service {
 declare namespace ELBv2 {
   export interface Action {
     /**
-     * The type of action.
+     * The type of action. Each rule must include one forward action.
      */
     Type: ActionTypeEnum;
     /**
-     * The Amazon Resource Name (ARN) of the target group.
+     * The Amazon Resource Name (ARN) of the target group. Specify only when Type is forward. For a default rule, the protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer.
      */
-    TargetGroupArn: TargetGroupArn;
+    TargetGroupArn?: TargetGroupArn;
+    /**
+     * [HTTPS listener] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when Type is authenticate-oidc.
+     */
+    AuthenticateOidcConfig?: AuthenticateOidcActionConfig;
+    /**
+     * [HTTPS listener] Information for using Amazon Cognito to authenticate users. Specify only when Type is authenticate-cognito.
+     */
+    AuthenticateCognitoConfig?: AuthenticateCognitoActionConfig;
+    /**
+     * The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. The forward action must be performed last.
+     */
+    Order?: ActionOrder;
   }
-  export type ActionTypeEnum = "forward"|string;
+  export type ActionOrder = number;
+  export type ActionTypeEnum = "forward"|"authenticate-oidc"|"authenticate-cognito"|string;
   export type Actions = Action[];
   export interface AddListenerCertificatesInput {
     /**
@@ -366,6 +379,109 @@ declare namespace ELBv2 {
   export interface AddTagsOutput {
   }
   export type AllocationId = string;
+  export type AuthenticateCognitoActionAuthenticationRequestExtraParams = {[key: string]: AuthenticateCognitoActionAuthenticationRequestParamValue};
+  export type AuthenticateCognitoActionAuthenticationRequestParamName = string;
+  export type AuthenticateCognitoActionAuthenticationRequestParamValue = string;
+  export type AuthenticateCognitoActionConditionalBehaviorEnum = "deny"|"allow"|"authenticate"|string;
+  export interface AuthenticateCognitoActionConfig {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Cognito user pool.
+     */
+    UserPoolArn: AuthenticateCognitoActionUserPoolArn;
+    /**
+     * The ID of the Amazon Cognito user pool client.
+     */
+    UserPoolClientId: AuthenticateCognitoActionUserPoolClientId;
+    /**
+     * The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.
+     */
+    UserPoolDomain: AuthenticateCognitoActionUserPoolDomain;
+    /**
+     * The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
+     */
+    SessionCookieName?: AuthenticateCognitoActionSessionCookieName;
+    /**
+     * The set of user claims to be requested from the IdP. The default is openid. To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.
+     */
+    Scope?: AuthenticateCognitoActionScope;
+    /**
+     * The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).
+     */
+    SessionTimeout?: AuthenticateCognitoActionSessionTimeout;
+    /**
+     * The query parameters (up to 10) to include in the redirect request to the authorization endpoint.
+     */
+    AuthenticationRequestExtraParams?: AuthenticateCognitoActionAuthenticationRequestExtraParams;
+    /**
+     * The behavior if the user is not authenticated. The following are possible values:   deny - Return an HTTP 401 Unauthorized error.   allow - Allow the request to be forwarded to the target.   authenticate - Redirect the request to the IdP authorization endpoint. This is the default value.  
+     */
+    OnUnauthenticatedRequest?: AuthenticateCognitoActionConditionalBehaviorEnum;
+  }
+  export type AuthenticateCognitoActionScope = string;
+  export type AuthenticateCognitoActionSessionCookieName = string;
+  export type AuthenticateCognitoActionSessionTimeout = number;
+  export type AuthenticateCognitoActionUserPoolArn = string;
+  export type AuthenticateCognitoActionUserPoolClientId = string;
+  export type AuthenticateCognitoActionUserPoolDomain = string;
+  export type AuthenticateOidcActionAuthenticationRequestExtraParams = {[key: string]: AuthenticateOidcActionAuthenticationRequestParamValue};
+  export type AuthenticateOidcActionAuthenticationRequestParamName = string;
+  export type AuthenticateOidcActionAuthenticationRequestParamValue = string;
+  export type AuthenticateOidcActionAuthorizationEndpoint = string;
+  export type AuthenticateOidcActionClientId = string;
+  export type AuthenticateOidcActionClientSecret = string;
+  export type AuthenticateOidcActionConditionalBehaviorEnum = "deny"|"allow"|"authenticate"|string;
+  export interface AuthenticateOidcActionConfig {
+    /**
+     * The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.
+     */
+    Issuer: AuthenticateOidcActionIssuer;
+    /**
+     * The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.
+     */
+    AuthorizationEndpoint: AuthenticateOidcActionAuthorizationEndpoint;
+    /**
+     * The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.
+     */
+    TokenEndpoint: AuthenticateOidcActionTokenEndpoint;
+    /**
+     * The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.
+     */
+    UserInfoEndpoint: AuthenticateOidcActionUserInfoEndpoint;
+    /**
+     * The OAuth 2.0 client identifier.
+     */
+    ClientId: AuthenticateOidcActionClientId;
+    /**
+     * The OAuth 2.0 client secret.
+     */
+    ClientSecret: AuthenticateOidcActionClientSecret;
+    /**
+     * The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
+     */
+    SessionCookieName?: AuthenticateOidcActionSessionCookieName;
+    /**
+     * The set of user claims to be requested from the IdP. The default is openid. To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.
+     */
+    Scope?: AuthenticateOidcActionScope;
+    /**
+     * The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).
+     */
+    SessionTimeout?: AuthenticateOidcActionSessionTimeout;
+    /**
+     * The query parameters (up to 10) to include in the redirect request to the authorization endpoint.
+     */
+    AuthenticationRequestExtraParams?: AuthenticateOidcActionAuthenticationRequestExtraParams;
+    /**
+     * The behavior if the user is not authenticated. The following are possible values:   deny - Return an HTTP 401 Unauthorized error.   allow - Allow the request to be forwarded to the target.   authenticate - Redirect the request to the IdP authorization endpoint. This is the default value.  
+     */
+    OnUnauthenticatedRequest?: AuthenticateOidcActionConditionalBehaviorEnum;
+  }
+  export type AuthenticateOidcActionIssuer = string;
+  export type AuthenticateOidcActionScope = string;
+  export type AuthenticateOidcActionSessionCookieName = string;
+  export type AuthenticateOidcActionSessionTimeout = number;
+  export type AuthenticateOidcActionTokenEndpoint = string;
+  export type AuthenticateOidcActionUserInfoEndpoint = string;
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone.
@@ -426,11 +542,11 @@ declare namespace ELBv2 {
      */
     SslPolicy?: SslPolicyName;
     /**
-     * [HTTPS listeners] The SSL server certificate. You must provide exactly one certificate.
+     * [HTTPS listeners] The default SSL server certificate. You must provide exactly one certificate. To create a certificate list, use AddListenerCertificates.
      */
     Certificates?: CertificateList;
     /**
-     * The default action for the listener. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.
+     * The actions for the default rule. The rule must include one forward action. If the action type is forward, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer. If the action type is authenticate-oidc, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application. If the action type is authenticate-cognito, you can use Amazon Cognito to authenticate users as they access your application.
      */
     DefaultActions: Actions;
   }
@@ -490,11 +606,11 @@ declare namespace ELBv2 {
      */
     Conditions: RuleConditionList;
     /**
-     * The priority for the rule. A listener can't have multiple rules with the same priority.
+     * The rule priority. A listener can't have multiple rules with the same priority.
      */
     Priority: RulePriority;
     /**
-     * An action. Each action has the type forward and specifies a target group.
+     * The actions. Each rule must include one forward action. If the action type is forward, you can specify a single target group. If the action type is authenticate-oidc, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application. If the action type is authenticate-cognito, you can use Amazon Cognito to authenticate users as they access your application.
      */
     Actions: Actions;
   }
@@ -1015,21 +1131,21 @@ declare namespace ELBv2 {
      */
     Protocol?: ProtocolEnum;
     /**
-     * The security policy that defines which protocols and ciphers are supported. For more information, see Security Policies in the Application Load Balancers Guide.
+     * [HTTPS listeners] The security policy that defines which protocols and ciphers are supported. For more information, see Security Policies in the Application Load Balancers Guide.
      */
     SslPolicy?: SslPolicyName;
     /**
-     * The default SSL server certificate.
+     * [HTTPS listeners] The default SSL server certificate. You must provide exactly one certificate. To create a certificate list, use AddListenerCertificates.
      */
     Certificates?: CertificateList;
     /**
-     * The default action. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.
+     * The actions for the default rule. The rule must include one forward action. If the action type is forward, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer. If the action type is authenticate-oidc, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application. If the action type is authenticate-cognito, you can use Amazon Cognito to authenticate users as they access your application.
      */
     DefaultActions?: Actions;
   }
   export interface ModifyListenerOutput {
     /**
-     * Information about the modified listeners.
+     * Information about the modified listener.
      */
     Listeners?: Listeners;
   }
@@ -1055,17 +1171,17 @@ declare namespace ELBv2 {
      */
     RuleArn: RuleArn;
     /**
-     * The conditions.
+     * The conditions. Each condition specifies a field name and a single value. If the field name is host-header, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.   A-Z, a-z, 0-9   - .   * (matches 0 or more characters)   ? (matches exactly 1 character)   If the field name is path-pattern, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
      */
     Conditions?: RuleConditionList;
     /**
-     * The actions. The target group must use the HTTP or HTTPS protocol.
+     * The actions. If the action type is forward, you can specify a single target group. If the action type is authenticate-oidc, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application. If the action type is authenticate-cognito, you can use Amazon Cognito to authenticate users as they access your application.
      */
     Actions?: Actions;
   }
   export interface ModifyRuleOutput {
     /**
-     * Information about the rule.
+     * Information about the modified rule.
      */
     Rules?: Rules;
   }
@@ -1125,7 +1241,7 @@ declare namespace ELBv2 {
   }
   export interface ModifyTargetGroupOutput {
     /**
-     * Information about the target group.
+     * Information about the modified target group.
      */
     TargetGroups?: TargetGroups;
   }
@@ -1274,7 +1390,7 @@ declare namespace ELBv2 {
     /**
      * The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
      */
-    Subnets: Subnets;
+    Subnets?: Subnets;
     /**
      * The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. You cannot specify Elastic IP addresses for your subnets.
      */
