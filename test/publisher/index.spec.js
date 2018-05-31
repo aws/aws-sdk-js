@@ -19,7 +19,7 @@ describe('Publisher', function () {
 
 			it('should correctly parse truthy value to true', function () {
 				for (var enabled of ['1', 'true', 'whatever', 'X', '99']) {
-					process.env.AWSCSMENABLED = enabled;
+					process.env.AWS_CSM_ENABLED = enabled;
 					helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
 					expect(monitoringConfig()).to.eql({
 						enabled: true,
@@ -31,7 +31,7 @@ describe('Publisher', function () {
 
 			it('should correctly parse falsy value to false', function () {
 				for (var disabled of ['0', 'false']) {
-					process.env.AWSCSMENABLED = disabled;
+					process.env.AWS_CSM_ENABLED = disabled;
 					helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
 					expect(monitoringConfig()).to.eql({
 						enabled: false,
@@ -42,7 +42,7 @@ describe('Publisher', function () {
 			});
 
 			it('should get port', function () {
-				process.env.AWSCSMPORT = '31001';
+				process.env.AWS_CSM_PORT = '31001';
 				helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
 				expect(monitoringConfig()).to.eql({
 					enabled: false,
@@ -109,8 +109,8 @@ describe('Publisher', function () {
 			it('should prefer environmental variables over config file', function () {
 				process.env = {
 					AWS_PROFILE: 'role',
-					AWSCSMENABLED: '1',
-					AWSCSMPORT: '54321',
+					AWS_CSM_ENABLED: '1',
+					AWS_CSM_PORT: '54321',
 				}
 				helpers.spyOn(AWS.util, 'readFileSync').andReturn(
 					'[profile role]\ncsm_enabled=false\ncsm_clientid=clientid'
@@ -126,7 +126,7 @@ describe('Publisher', function () {
 			it('should not read shared config file if monitoring disabled from environment', function () {
 				process.env = {
 					AWS_PROFILE: 'role',
-					AWSCSMENABLED: 'false',
+					AWS_CSM_ENABLED: 'false',
 				}
 				var ReadFileCalled = 0;
 				helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function () {
