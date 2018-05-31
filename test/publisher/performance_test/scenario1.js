@@ -1,11 +1,10 @@
 const AWS = require('../../../index');
-// const {createReadStream} = require('fs');
 const path = require('path');
-const {Buffer} = require('buffer')
+const {setupServer} = require('./setup_server');
 
-const MINUTE = 999 * 60;
-const run_duration = 10 //seconds
-const memory_scan_interval = 990 //ms
+const MINUTE = 1000 * 60;
+const run_duration = 300 //seconds
+const memory_scan_interval = MINUTE //ms
 const clientSideMonitoring = process.argv[2] === '1';
 const s3 = new AWS.S3({endpoint: 'http://localhost:8000', clientSideMonitoring: clientSideMonitoring});
 let apiCallsMade = 0;
@@ -36,8 +35,12 @@ async function run() {
   }
   inRunning = false;
 }
-run().then(() => {
-  console.log('ApiCallsMade\t', apiCallsMade);
-  console.log('ApiCallAttemptsMade\t', apiCallAttemptsMade);
-  clearInterval(timerId);
-})
+(async() => {
+  const server = await setupServer(0)
+  await run().then(() => {
+    console.log('ApiCallsMade\t', apiCallsMade);
+    console.log('ApiCallAttemptsMade\t', apiCallAttemptsMade);
+    clearInterval(timerId);
+  })
+  await Promise.resolve().then(() => server.kill(9));
+})()
