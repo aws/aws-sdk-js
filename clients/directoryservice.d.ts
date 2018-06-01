@@ -284,6 +284,14 @@ declare class DirectoryService extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: DirectoryService.Types.RemoveTagsFromResourceResult) => void): Request<DirectoryService.Types.RemoveTagsFromResourceResult, AWSError>;
   /**
+   * Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.
+   */
+  resetUserPassword(params: DirectoryService.Types.ResetUserPasswordRequest, callback?: (err: AWSError, data: DirectoryService.Types.ResetUserPasswordResult) => void): Request<DirectoryService.Types.ResetUserPasswordResult, AWSError>;
+  /**
+   * Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.
+   */
+  resetUserPassword(callback?: (err: AWSError, data: DirectoryService.Types.ResetUserPasswordResult) => void): Request<DirectoryService.Types.ResetUserPasswordResult, AWSError>;
+  /**
    * Restores a directory using an existing directory snapshot. When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten. This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the DescribeDirectories operation with the directory identifier. When the DirectoryDescription.Stage value changes to Active, the restore operation is complete.
    */
   restoreFromSnapshot(params: DirectoryService.Types.RestoreFromSnapshotRequest, callback?: (err: AWSError, data: DirectoryService.Types.RestoreFromSnapshotResult) => void): Request<DirectoryService.Types.RestoreFromSnapshotResult, AWSError>;
@@ -637,6 +645,7 @@ declare namespace DirectoryService {
     TrustId?: TrustId;
   }
   export type CreatedDateTime = Date;
+  export type CustomerUserName = string;
   export type DeleteAssociatedConditionalForwarder = boolean;
   export interface DeleteConditionalForwarderRequest {
     /**
@@ -1393,6 +1402,22 @@ declare namespace DirectoryService {
   }
   export type ReplicationScope = "Domain"|string;
   export type RequestId = string;
+  export interface ResetUserPasswordRequest {
+    /**
+     * Identifier of the AWS Managed Microsoft AD or Simple AD directory in which the user resides.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The username of the user whose password will be reset.
+     */
+    UserName: CustomerUserName;
+    /**
+     * The new password that will be reset.
+     */
+    NewPassword: UserPassword;
+  }
+  export interface ResetUserPasswordResult {
+  }
   export type ResourceId = string;
   export interface RestoreFromSnapshotRequest {
     /**
@@ -1628,6 +1653,7 @@ declare namespace DirectoryService {
   export type UpdateSecurityGroupForDirectoryControllers = boolean;
   export type UseSameUsername = boolean;
   export type UserName = string;
+  export type UserPassword = string;
   export interface VerifyTrustRequest {
     /**
      * The unique Trust ID of the trust relationship to verify.

@@ -572,5 +572,8 @@
   },
   "neptune": {
     "name": "Neptune"
+  },
+  "mediatailor": {
+    "name": "MediaTailor"
   }
 }

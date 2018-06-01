@@ -76,6 +76,14 @@ declare class Iot extends Service {
    */
   cancelJob(callback?: (err: AWSError, data: Iot.Types.CancelJobResponse) => void): Request<Iot.Types.CancelJobResponse, AWSError>;
   /**
+   * Cancels the execution of a job for a given thing.
+   */
+  cancelJobExecution(params: Iot.Types.CancelJobExecutionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Cancels the execution of a job for a given thing.
+   */
+  cancelJobExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Clears the default authorizer.
    */
   clearDefaultAuthorizer(params: Iot.Types.ClearDefaultAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.ClearDefaultAuthorizerResponse) => void): Request<Iot.Types.ClearDefaultAuthorizerResponse, AWSError>;
@@ -484,11 +492,11 @@ declare class Iot extends Service {
    */
   enableTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets effective policies.
+   * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the AWS IoT device gateway.
    */
   getEffectivePolicies(params: Iot.Types.GetEffectivePoliciesRequest, callback?: (err: AWSError, data: Iot.Types.GetEffectivePoliciesResponse) => void): Request<Iot.Types.GetEffectivePoliciesResponse, AWSError>;
   /**
-   * Gets effective policies.
+   * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the AWS IoT device gateway.
    */
   getEffectivePolicies(callback?: (err: AWSError, data: Iot.Types.GetEffectivePoliciesResponse) => void): Request<Iot.Types.GetEffectivePoliciesResponse, AWSError>;
   /**
@@ -908,19 +916,19 @@ declare class Iot extends Service {
    */
   stopThingRegistrationTask(callback?: (err: AWSError, data: Iot.Types.StopThingRegistrationTaskResponse) => void): Request<Iot.Types.StopThingRegistrationTaskResponse, AWSError>;
   /**
-   * Test custom authorization.
+   * Tests if a specified principal is authorized to perform an AWS IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the AWS IoT device gateway.
    */
   testAuthorization(params: Iot.Types.TestAuthorizationRequest, callback?: (err: AWSError, data: Iot.Types.TestAuthorizationResponse) => void): Request<Iot.Types.TestAuthorizationResponse, AWSError>;
   /**
-   * Test custom authorization.
+   * Tests if a specified principal is authorized to perform an AWS IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the AWS IoT device gateway.
    */
   testAuthorization(callback?: (err: AWSError, data: Iot.Types.TestAuthorizationResponse) => void): Request<Iot.Types.TestAuthorizationResponse, AWSError>;
   /**
-   * Invoke the specified custom authorizer for testing purposes.
+   * Tests a custom authorization behavior by invoking a specified custom authorizer. Use this to test and debug the custom authorization behavior of devices that connect to the AWS IoT device gateway.
    */
   testInvokeAuthorizer(params: Iot.Types.TestInvokeAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.TestInvokeAuthorizerResponse) => void): Request<Iot.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
-   * Invoke the specified custom authorizer for testing purposes.
+   * Tests a custom authorization behavior by invoking a specified custom authorizer. Use this to test and debug the custom authorization behavior of devices that connect to the AWS IoT device gateway.
    */
   testInvokeAuthorizer(callback?: (err: AWSError, data: Iot.Types.TestInvokeAuthorizerResponse) => void): Request<Iot.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
@@ -1347,6 +1355,28 @@ declare namespace Iot {
      */
     certificateId: CertificateId;
   }
+  export interface CancelJobExecutionRequest {
+    /**
+     * The ID of the job to be canceled.
+     */
+    jobId: JobId;
+    /**
+     * The name of the thing whose execution of the job will be canceled.
+     */
+    thingName: ThingName;
+    /**
+     * (Optional) If true the job execution will be canceled if it has status IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it has status QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS, and you do not set force to true, then an InvalidStateTransitionException will be thrown. The default is false. Canceling a job execution which is "IN_PROGRESS", will cause the device to be unable to update the job execution status. Use caution and ensure that the device is able to recover to a valid state.
+     */
+    force?: ForceFlag;
+    /**
+     * (Optional) The expected current version of the job execution. Each time you update the job execution, its version is incremented. If the version of the job execution stored in Jobs does not match, the update is rejected with a VersionMismatch error, and an ErrorResponse that contains the current job execution status data is returned. (This makes it unnecessary to perform a separate DescribeJobExecution request in order to obtain the job execution status data.)
+     */
+    expectedVersion?: ExpectedVersion;
+    /**
+     * A collection of name/value pairs that describe the status of the job execution. If not specified, the statusDetails are unchanged. You can specify at most 10 name/value pairs.
+     */
+    statusDetails?: DetailsMap;
+  }
   export interface CancelJobRequest {
     /**
      * The unique identifier you assigned to this job when it was created.
@@ -1356,6 +1386,10 @@ declare namespace Iot {
      * An optional comment string describing why the job was canceled.
      */
     comment?: Comment;
+    /**
+     * (Optional) If true job executions with status "IN_PROGRESS" and "QUEUED" are canceled, otherwise only job executions with status "QUEUED" are canceled. The default is false. Canceling a job which is "IN_PROGRESS", will cause a device which is executing the job to be unable to update the job execution status. Use caution and ensure that each device executing a job which is canceled is able to recover to a valid state.
+     */
+    force?: ForceFlag;
   }
   export interface CancelJobResponse {
     /**
@@ -2598,6 +2632,7 @@ declare namespace Iot {
   export type EventConfigurations = {[key: string]: Configuration};
   export type EventType = "THING"|"THING_GROUP"|"THING_TYPE"|"THING_GROUP_MEMBERSHIP"|"THING_GROUP_HIERARCHY"|"THING_TYPE_ASSOCIATION"|"JOB"|"JOB_EXECUTION"|string;
   export type ExecutionNumber = number;
+  export type ExpectedVersion = number;
   export type ExpiresInSec = number;
   export interface ExplicitDeny {
     /**
@@ -2626,6 +2661,7 @@ declare namespace Iot {
   export type Flag = boolean;
   export type ForceDelete = boolean;
   export type ForceFlag = boolean;
+  export type Forced = boolean;
   export type FunctionArn = string;
   export type GEMaxResults = number;
   export type GenerationId = string;
@@ -2873,6 +2909,10 @@ declare namespace Iot {
      */
     status?: JobStatus;
     /**
+     * Will be true if the job was canceled with the optional force parameter set to true.
+     */
+    forceCanceled?: Forced;
+    /**
      * If the job was updated, describes the reason for the update.
      */
     comment?: Comment;
@@ -2928,6 +2968,10 @@ declare namespace Iot {
      */
     status?: JobExecutionStatus;
     /**
+     * Will be true if the job execution was canceled with the optional force parameter set to true.
+     */
+    forceCanceled?: Forced;
+    /**
      * A collection of name/value pairs that describe the status of the job execution.
      */
     statusDetails?: JobExecutionStatusDetails;
@@ -2951,6 +2995,10 @@ declare namespace Iot {
      * A string (consisting of the digits "0" through "9") which identifies this particular job execution on this particular device. It can be used in commands which return or update job execution information. 
      */
     executionNumber?: ExecutionNumber;
+    /**
+     * The version of the job execution. Job execution versions are incremented each time they are updated by a device.
+     */
+    versionNumber?: VersionNumber;
   }
   export type JobExecutionStatus = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"REJECTED"|"REMOVED"|"CANCELED"|string;
   export interface JobExecutionStatusDetails {
@@ -3012,7 +3060,7 @@ declare namespace Iot {
   export type JobId = string;
   export interface JobProcessDetails {
     /**
-     * The devices on which the job is executing.
+     * The target devices to which the job execution is being rolled out. This value will be null after the job execution has finished rolling out to all the target devices.
      */
     processingTargets?: ProcessingTargetNameList;
     /**
@@ -4450,7 +4498,7 @@ declare namespace Iot {
      */
     roleArn: AwsArn;
     /**
-     * The message format of the message to publish. Optional. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see http://docs.aws.amazon.com/sns/latest/dg/json-formats.html refer to their official documentation.
+     * (Optional) The message format of the message to publish. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see http://docs.aws.amazon.com/sns/latest/dg/json-formats.html refer to their official documentation.
      */
     messageFormat?: MessageFormat;
   }
@@ -5132,6 +5180,7 @@ declare namespace Iot {
   export type UseBase64 = boolean;
   export type Value = string;
   export type Version = number;
+  export type VersionNumber = number;
   export type errorMessage = string;
   export type resourceArn = string;
   export type resourceId = string;

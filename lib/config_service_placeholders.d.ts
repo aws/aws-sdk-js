@@ -141,6 +141,7 @@ export abstract class ConfigurationServicePlaceholders {
   iot1clickprojects?: AWS.IoT1ClickProjects.Types.ClientConfiguration;
   pi?: AWS.PI.Types.ClientConfiguration;
   neptune?: AWS.Neptune.Types.ClientConfiguration;
+  mediatailor?: AWS.MediaTailor.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -284,4 +285,5 @@ export interface ConfigurationServiceApiVersions {
   iot1clickprojects?: AWS.IoT1ClickProjects.Types.apiVersion;
   pi?: AWS.PI.Types.apiVersion;
   neptune?: AWS.Neptune.Types.apiVersion;
+  mediatailor?: AWS.MediaTailor.Types.apiVersion;
 }

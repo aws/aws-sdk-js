@@ -585,6 +585,25 @@
       ],
       "documentation":"<p>Removes tags from a directory.</p>"
     },
+    "ResetUserPassword":{
+      "name":"ResetUserPassword",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ResetUserPasswordRequest"},
+      "output":{"shape":"ResetUserPasswordResult"},
+      "errors":[
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"UserDoesNotExistException"},
+        {"shape":"InvalidPasswordException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.</p>"
+    },
     "RestoreFromSnapshot":{
       "name":"RestoreFromSnapshot",
       "http":{
@@ -1204,6 +1223,12 @@
       "documentation":"<p>The result of a CreateTrust request.</p>"
     },
     "CreatedDateTime":{"type":"timestamp"},
+    "CustomerUserName":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^(?!.*\\\\|.*\"|.*\\/|.*\\[|.*\\]|.*:|.*;|.*\\||.*=|.*,|.*\\+|.*\\*|.*\\?|.*<|.*>|.*@).*$"
+    },
     "DeleteAssociatedConditionalForwarder":{"type":"boolean"},
     "DeleteConditionalForwarderRequest":{
       "type":"structure",
@@ -2114,6 +2139,15 @@
       "documentation":"<p>One or more parameters are not valid.</p>",
       "exception":true
     },
+    "InvalidPasswordException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ExceptionMessage"},
+        "RequestId":{"shape":"RequestId"}
+      },
+      "documentation":"<p>The new password provided by the user does not meet the password complexity requirements defined in your directory.</p>",
+      "exception":true
+    },
     "IpAddr":{
       "type":"string",
       "pattern":"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
@@ -2476,6 +2510,33 @@
       "type":"string",
       "documentation":"<p>The AWS request identifier.</p>",
       "pattern":"^([A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12})$"
+    },
+    "ResetUserPasswordRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "UserName",
+        "NewPassword"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>Identifier of the AWS Managed Microsoft AD or Simple AD directory in which the user resides.</p>"
+        },
+        "UserName":{
+          "shape":"CustomerUserName",
+          "documentation":"<p>The username of the user whose password will be reset.</p>"
+        },
+        "NewPassword":{
+          "shape":"UserPassword",
+          "documentation":"<p>The new password that will be reset.</p>"
+        }
+      }
+    },
+    "ResetUserPasswordResult":{
+      "type":"structure",
+      "members":{
+      }
     },
     "ResourceId":{
       "type":"string",
@@ -2968,10 +3029,25 @@
     },
     "UpdateSecurityGroupForDirectoryControllers":{"type":"boolean"},
     "UseSameUsername":{"type":"boolean"},
+    "UserDoesNotExistException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ExceptionMessage"},
+        "RequestId":{"shape":"RequestId"}
+      },
+      "documentation":"<p>The user provided a username that does not exist in your directory.</p>",
+      "exception":true
+    },
     "UserName":{
       "type":"string",
       "min":1,
       "pattern":"[a-zA-Z0-9._-]+"
+    },
+    "UserPassword":{
+      "type":"string",
+      "max":127,
+      "min":1,
+      "sensitive":true
     },
     "VerifyTrustRequest":{
       "type":"structure",
