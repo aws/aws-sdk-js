@@ -9,7 +9,7 @@ function validateEvents(events, expected) {
       equaledIndex ++;
     }
     if (equaledIndex === expected.length) {
-      return false;
+      throw new Error('Cannot validate the event: ' + event);
     } else {
       expected = expected.slice(0, equaledIndex).concat(expected.slice(equaledIndex + 1))
     }

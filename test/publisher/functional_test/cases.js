@@ -147,13 +147,12 @@ module.exports = {
           "params": {"Bucket": "bucket", "Key": "key"},
           "attemptResponses": [
             {
-              "sdkException": "ConnectionError",
-              "sdkExceptionMessage": "ConnectionError",
-              "retryable": true,
+              "sdkException": "NetworkingError",
+              "sdkExceptionMessage": "NetworkingError",
             },
             {
               "httpStatus": 200,
-              "resposneHeaders": {
+              "responseHeaders": {
                 "x-amzn-requestid": "request-id",
                 "x-amz-id-2": "request-id-2",
               },
@@ -184,7 +183,7 @@ module.exports = {
           "UserAgent" : "my-user-agent",
           "AccessKey" : "access-key",
           "AttemptLatency" : "ANY",
-          "SdkException" : "ConnectionError",
+          "SdkException" : "NetworkingError",
         },
         {
           "Service" : "S3",
@@ -376,7 +375,8 @@ module.exports = {
           "attemptResponses": [
             {
               "sdkException": "NonRetryableException",
-              "sdkExceptionMessage": "Unexpected exception was thrown"
+              "sdkExceptionMessage": "Unexpected exception was thrown",
+              "retryable": false,
             }
           ]
         }
