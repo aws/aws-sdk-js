@@ -1284,6 +1284,11 @@
       "type":"string",
       "max":100
     },
+    "Domain":{
+      "type":"string",
+      "documentation":"GSuite domain for GDrive integration.",
+      "max":64
+    },
     "DomainJoinInfo":{
       "type":"structure",
       "members":{
@@ -1297,6 +1302,11 @@
         }
       },
       "documentation":"<p>Contains the information needed to join a Microsoft Active Directory domain.</p>"
+    },
+    "DomainList":{
+      "type":"list",
+      "member":{"shape":"Domain"},
+      "max":10
     },
     "ErrorMessage":{
       "type":"string",
@@ -2033,6 +2043,8 @@
       "type":"string",
       "enum":[
         "STORAGE_CONNECTORS",
+        "STORAGE_CONNECTOR_HOMEFOLDERS",
+        "STORAGE_CONNECTOR_GOOGLE_DRIVE",
         "REDIRECT_URL",
         "FEEDBACK_URL",
         "THEME_NAME",
@@ -2157,9 +2169,13 @@
         "ResourceIdentifier":{
           "shape":"ResourceIdentifier",
           "documentation":"<p>The ARN of the storage connector.</p>"
+        },
+        "Domains":{
+          "shape":"DomainList",
+          "documentation":"<p>The names of the domains for the G Suite account.</p>"
         }
       },
-      "documentation":"<p>Describes a storage connector.</p>"
+      "documentation":"<p>Describes a connector to enable persistent storage for users.</p>"
     },
     "StorageConnectorList":{
       "type":"list",
@@ -2169,7 +2185,10 @@
     "StorageConnectorType":{
       "type":"string",
       "documentation":"<p>The type of storage connector.</p>",
-      "enum":["HOMEFOLDERS"]
+      "enum":[
+        "HOMEFOLDERS",
+        "GOOGLE_DRIVE"
+      ]
     },
     "StreamingUrlUserId":{
       "type":"string",

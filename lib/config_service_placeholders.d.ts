@@ -142,6 +142,7 @@ export abstract class ConfigurationServicePlaceholders {
   pi?: AWS.PI.Types.ClientConfiguration;
   neptune?: AWS.Neptune.Types.ClientConfiguration;
   mediatailor?: AWS.MediaTailor.Types.ClientConfiguration;
+  eks?: AWS.EKS.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -286,4 +287,5 @@ export interface ConfigurationServiceApiVersions {
   pi?: AWS.PI.Types.apiVersion;
   neptune?: AWS.Neptune.Types.apiVersion;
   mediatailor?: AWS.MediaTailor.Types.apiVersion;
+  eks?: AWS.EKS.Types.apiVersion;
 }

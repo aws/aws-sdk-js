@@ -823,6 +823,7 @@ declare namespace AppStream {
   export interface DisassociateFleetResult {
   }
   export type DisplayName = string;
+  export type Domain = string;
   export interface DomainJoinInfo {
     /**
      * The fully qualified name of the directory (for example, corp.example.com).
@@ -833,6 +834,7 @@ declare namespace AppStream {
      */
     OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
   }
+  export type DomainList = Domain[];
   export type ErrorMessage = string;
   export interface ExpireSessionRequest {
     /**
@@ -1231,7 +1233,7 @@ declare namespace AppStream {
      */
     UserSettings?: UserSettingList;
   }
-  export type StackAttribute = "STORAGE_CONNECTORS"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|string;
+  export type StackAttribute = "STORAGE_CONNECTORS"|"STORAGE_CONNECTOR_HOMEFOLDERS"|"STORAGE_CONNECTOR_GOOGLE_DRIVE"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|string;
   export type StackAttributes = StackAttribute[];
   export interface StackError {
     /**
@@ -1299,9 +1301,13 @@ declare namespace AppStream {
      * The ARN of the storage connector.
      */
     ResourceIdentifier?: ResourceIdentifier;
+    /**
+     * The names of the domains for the G Suite account.
+     */
+    Domains?: DomainList;
   }
   export type StorageConnectorList = StorageConnector[];
-  export type StorageConnectorType = "HOMEFOLDERS"|string;
+  export type StorageConnectorType = "HOMEFOLDERS"|"GOOGLE_DRIVE"|string;
   export type StreamingUrlUserId = string;
   export type String = string;
   export type StringList = String[];

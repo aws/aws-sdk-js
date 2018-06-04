@@ -141,5 +141,6 @@ module.exports = {
   IoT1ClickProjects: require('./iot1clickprojects'),
   PI: require('./pi'),
   Neptune: require('./neptune'),
-  MediaTailor: require('./mediatailor')
+  MediaTailor: require('./mediatailor'),
+  EKS: require('./eks')
 };

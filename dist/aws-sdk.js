@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.250.1
+// AWS SDK for JavaScript v2.251.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -80843,6 +80843,9 @@ module.exports={
   },
   "mediatailor": {
     "name": "MediaTailor"
+  },
+  "eks": {
+    "name": "EKS"
   }
 }
 },{}],113:[function(require,module,exports){
@@ -127977,7 +127980,7 @@ if (typeof process === 'undefined') {
 }
 
 }).call(this,require('_process'))
-},{"./browserCryptoLib":236,"./core":245,"./credentials":246,"./credentials/cognito_identity_credentials":247,"./credentials/credential_provider_chain":248,"./credentials/saml_credentials":249,"./credentials/temporary_credentials":250,"./credentials/web_identity_credentials":251,"./http/xhr":260,"./util":309,"./xml/browser_parser":310,"_process":323,"buffer/":318,"querystring/":330,"url/":332}],243:[function(require,module,exports){
+},{"./browserCryptoLib":236,"./core":245,"./credentials":246,"./credentials/cognito_identity_credentials":247,"./credentials/credential_provider_chain":248,"./credentials/saml_credentials":249,"./credentials/temporary_credentials":250,"./credentials/web_identity_credentials":251,"./http/xhr":260,"./util":309,"./xml/browser_parser":310,"_process":324,"buffer/":318,"querystring/":331,"url/":333}],243:[function(require,module,exports){
 var AWS = require('../core'),
     url = AWS.util.url,
     crypto = AWS.util.crypto.lib,
@@ -128753,7 +128756,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.250.1',
+  VERSION: '2.251.1',
 
   /**
    * @api private
@@ -134803,7 +134806,7 @@ AWS.util.addPromises(AWS.Request);
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,require('_process'))
-},{"./core":245,"./state_machine":308,"_process":323,"jmespath":322}],281:[function(require,module,exports){
+},{"./core":245,"./state_machine":308,"_process":324,"jmespath":323}],281:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -135009,7 +135012,7 @@ AWS.ResourceWaiter = inherit({
   }
 });
 
-},{"./core":245,"jmespath":322}],282:[function(require,module,exports){
+},{"./core":245,"jmespath":323}],282:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 var jmespath = require('jmespath');
@@ -135212,7 +135215,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":245,"jmespath":322}],283:[function(require,module,exports){
+},{"./core":245,"jmespath":323}],283:[function(require,module,exports){
 var AWS = require('../core');
 var byteLength = AWS.util.string.byteLength;
 var Buffer = AWS.util.Buffer;
@@ -140260,7 +140263,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require('_process'),require("timers").setImmediate)
-},{"../apis/metadata.json":112,"./core":245,"_process":323,"fs":317,"timers":331,"uuid":336}],310:[function(require,module,exports){
+},{"../apis/metadata.json":112,"./core":245,"_process":324,"fs":317,"timers":332,"uuid":336}],310:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -142598,7 +142601,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":316,"ieee754":320,"isarray":321}],319:[function(require,module,exports){
+},{"base64-js":316,"ieee754":320,"isarray":322}],319:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -142989,13 +142992,38 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 }
 
 },{}],321:[function(require,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+},{}],322:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],322:[function(require,module,exports){
+},{}],323:[function(require,module,exports){
 (function(exports) {
   "use strict";
 
@@ -144664,7 +144692,7 @@ module.exports = Array.isArray || function (arr) {
   exports.strictDeepEqual = strictDeepEqual;
 })(typeof exports === "undefined" ? this.jmespath = {} : exports);
 
-},{}],323:[function(require,module,exports){
+},{}],324:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -144850,7 +144878,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],324:[function(require,module,exports){
+},{}],325:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 ;(function(root) {
@@ -145384,7 +145412,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],325:[function(require,module,exports){
+},{}],326:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -145470,7 +145498,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],326:[function(require,module,exports){
+},{}],327:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -145557,13 +145585,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],327:[function(require,module,exports){
+},{}],328:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":325,"./encode":326}],328:[function(require,module,exports){
+},{"./decode":326,"./encode":327}],329:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -145645,7 +145673,7 @@ module.exports = function(qs, sep, eq, options) {
   return obj;
 };
 
-},{}],329:[function(require,module,exports){
+},{}],330:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -145711,9 +145739,9 @@ module.exports = function(obj, sep, eq, name) {
          encodeURIComponent(stringifyPrimitive(obj));
 };
 
-},{}],330:[function(require,module,exports){
-arguments[4][327][0].apply(exports,arguments)
-},{"./decode":328,"./encode":329,"dup":327}],331:[function(require,module,exports){
+},{}],331:[function(require,module,exports){
+arguments[4][328][0].apply(exports,arguments)
+},{"./decode":329,"./encode":330,"dup":328}],332:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -145792,7 +145820,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":323,"timers":331}],332:[function(require,module,exports){
+},{"process/browser.js":324,"timers":332}],333:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -146501,32 +146529,7 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":324,"querystring":327}],333:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-},{}],334:[function(require,module,exports){
+},{"punycode":325,"querystring":328}],334:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
@@ -147123,7 +147126,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":334,"_process":323,"inherits":333}],336:[function(require,module,exports){
+},{"./support/isBuffer":334,"_process":324,"inherits":321}],336:[function(require,module,exports){
 var v1 = require('./v1');
 var v4 = require('./v4');
 
@@ -147329,7 +147332,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":337,"./lib/rng":338}],341:[function(require,module,exports){
-// AWS SDK for JavaScript v2.250.1
+// AWS SDK for JavaScript v2.251.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

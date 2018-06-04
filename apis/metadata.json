@@ -575,5 +575,8 @@
   },
   "mediatailor": {
     "name": "MediaTailor"
+  },
+  "eks": {
+    "name": "EKS"
   }
 }
