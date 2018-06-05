@@ -1,5 +1,6 @@
 var util = require('../../lib/util');
 var splitMessage = require('../../lib/event-stream/split-message').splitMessage;
+var allocBuffer = require('../../lib/event-stream/alloc-buffer').allocBuffer;
 var Buffer = util.Buffer;
 
 
@@ -16,7 +17,7 @@ describe('splitMessage', function() {
     it(
         'should throw if the specified length does not match the length of the received message',
         function() {
-            var message = Buffer.alloc ? Buffer.alloc(17) : new Buffer(17);
+            var message = allocBuffer(17);
             message.writeInt32BE(16, 0);
 
             expect(function() {
@@ -28,7 +29,7 @@ describe('splitMessage', function() {
     it(
         'should throw if the prelude checksum does not match the calculated prelude checksum',
         function() {
-            var message = Buffer.alloc ? Buffer.alloc(16) : new Buffer(16);
+            var message = allocBuffer(16);
             message.writeInt32BE(16, 0);
             message.writeInt32BE(0x05c248ec, 8);
 
@@ -41,7 +42,7 @@ describe('splitMessage', function() {
     it(
         'should throw if the message checksum does not match the calculated message checksum',
         function() {
-            var message = Buffer.alloc ? Buffer.alloc(16) : new Buffer(16);
+            var message = allocBuffer(16);
             message.writeInt32BE(16, 0);
             message.writeInt32BE(0x05c248eb, 8);
             message.writeInt32BE(0x7d98c8fe, 12);
@@ -55,8 +56,8 @@ describe('splitMessage', function() {
     it(
         'should return header and body buffers for messages with well-formed metadata',
         function() {
-            var emptyBuffer = Buffer.alloc ? Buffer.alloc(0) : new Buffer(0);
-            var message = Buffer.alloc ? Buffer.alloc(16) : new Buffer(16);
+            var emptyBuffer = allocBuffer(0);
+            var message = allocBuffer(16);
             message.writeInt32BE(16, 0);
             message.writeInt32BE(0x05c248eb, 8);
             message.writeInt32BE(0x7d98c8ff, 12);
