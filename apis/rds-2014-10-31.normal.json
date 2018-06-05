@@ -2524,7 +2524,7 @@
           "shape": "DomainNotFoundFault"
         }
       ],
-      "documentation": "<p>Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property.</p> <p>The target database is created with most of the original configuration, but in a system-selected availability zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.</p> <note> <p>This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <a>RestoreDBClusterToPointInTime</a>.</p> </note>"
+      "documentation": "<p>Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property.</p> <p>The target database is created with most of the original configuration, but in a system-selected Availability Zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.</p> <note> <p>This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <a>RestoreDBClusterToPointInTime</a>.</p> </note>"
     },
     "RevokeDBSecurityGroupIngress": {
       "name": "RevokeDBSecurityGroupIngress",
@@ -2853,7 +2853,7 @@
       "members": {
         "Name": {
           "shape": "String",
-          "documentation": "<p>The name of the availability zone.</p>"
+          "documentation": "<p>The name of the Availability Zone.</p>"
         }
       },
       "documentation": "<p>Contains Availability Zone information.</p> <p> This data type is used as an element in the following data type:</p> <ul> <li> <p> <a>OrderableDBInstanceOption</a> </p> </li> </ul>",
@@ -2871,6 +2871,31 @@
       "member": {
         "shape": "String",
         "locationName": "AvailabilityZone"
+      }
+    },
+    "AvailableProcessorFeature": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the processor feature. Valid names are <code>coreCount</code> and <code>threadsPerCore</code>.</p>"
+        },
+        "DefaultValue": {
+          "shape": "String",
+          "documentation": "<p>The default value for the processor feature of the DB instance class.</p>"
+        },
+        "AllowedValues": {
+          "shape": "String",
+          "documentation": "<p>The allowed values for the processor feature of the DB instance class.</p>"
+        }
+      },
+      "documentation": "<p>Contains the available processor feature information for the DB instance class of a DB instance.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor\">Configuring the Processor of the DB Instance Class</a> in the <i>Amazon RDS User Guide. </i> </p>"
+    },
+    "AvailableProcessorFeatureList": {
+      "type": "list",
+      "member": {
+        "shape": "AvailableProcessorFeature",
+        "locationName": "AvailableProcessorFeature"
       }
     },
     "BacktrackDBClusterMessage": {
@@ -3546,6 +3571,10 @@
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>The list of log types that need to be enabled for exporting to CloudWatch Logs.</p>"
+        },
+        "ProcessorFeatures": {
+          "shape": "ProcessorFeatureList",
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
         }
       },
       "documentation": "<p/>"
@@ -3643,6 +3672,14 @@
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>The list of logs that the new DB instance is to export to CloudWatch Logs.</p>"
+        },
+        "ProcessorFeatures": {
+          "shape": "ProcessorFeatureList",
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
+        },
+        "UseDefaultProcessorFeatures": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that specifies that the DB instance class of the DB instance uses its default processor features.</p>"
         },
         "SourceRegion": {
           "shape": "String",
@@ -4790,6 +4827,10 @@
         "EnabledCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>A list of log types that this DB instance is configured to export to CloudWatch Logs.</p>"
+        },
+        "ProcessorFeatures": {
+          "shape": "ProcessorFeatureList",
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action. </p>",
@@ -5234,6 +5275,10 @@
         "IAMDatabaseAuthenticationEnabled": {
           "shape": "Boolean",
           "documentation": "<p>True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.</p>"
+        },
+        "ProcessorFeatures": {
+          "shape": "ProcessorFeatureList",
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB snapshot. </p> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action. </p>",
@@ -6443,7 +6488,7 @@
         },
         "ProductDescription": {
           "shape": "String",
-          "documentation": "<p>Product description filter value. Specify this parameter to show only the available offerings matching the specified product description.</p>"
+          "documentation": "<p>Product description filter value. Specify this parameter to show only the available offerings that contain the specified product description.</p> <note> <p>The results show offerings that partially match the filter value.</p> </note>"
         },
         "OfferingType": {
           "shape": "String",
@@ -7472,6 +7517,14 @@
         "CloudwatchLogsExportConfiguration": {
           "shape": "CloudwatchLogsExportConfiguration",
           "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.</p>"
+        },
+        "ProcessorFeatures": {
+          "shape": "ProcessorFeatureList",
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
+        },
+        "UseDefaultProcessorFeatures": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that specifies that the DB instance class of the DB instance uses its default processor features.</p>"
         }
       },
       "documentation": "<p/>"
@@ -8174,6 +8227,10 @@
         "MaxIopsPerGib": {
           "shape": "DoubleOptional",
           "documentation": "<p>Maximum provisioned IOPS per GiB for a DB instance.</p>"
+        },
+        "AvailableProcessorFeatures": {
+          "shape": "AvailableProcessorFeatureList",
+          "documentation": "<p>A list of the available processor features for the DB instance class of a DB instance.</p>"
         }
       },
       "documentation": "<p>Contains a list of available options for a DB instance.</p> <p> This data type is used as a response element in the <a>DescribeOrderableDBInstanceOptions</a> action. </p>",
@@ -8382,6 +8439,10 @@
         },
         "PendingCloudwatchLogsExports": {
           "shape": "PendingCloudwatchLogsExports"
+        },
+        "ProcessorFeatures": {
+          "shape": "ProcessorFeatureList",
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
         }
       },
       "documentation": "<p> This data type is used as a response element in the <a>ModifyDBInstance</a> action. </p>"
@@ -8396,6 +8457,27 @@
         "senderFault": true
       },
       "exception": true
+    },
+    "ProcessorFeature": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the processor feature. Valid names are <code>coreCount</code> and <code>threadsPerCore</code>.</p>"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value of a processor feature name.</p>"
+        }
+      },
+      "documentation": "<p>Contains the processor features of a DB instance class.</p> <p>To specify the number of CPU cores, use the <code>coreCount</code> feature name for the <code>Name</code> parameter. To specify the number of threads per core, use the <code>threadsPerCore</code> feature name for the <code>Name</code> parameter.</p> <p>You can set the processor features of the DB instance class for a DB instance when you call one of the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>ModifyDBInstance</a> </p> </li> <li> <p> <a>RestoreDBInstanceFromDBSnapshot</a> </p> </li> <li> <p> <a>RestoreDBInstanceFromS3</a> </p> </li> <li> <p> <a>RestoreDBInstanceToPointInTime</a> </p> </li> </ul> <p>You can view the valid processor values for a particular instance class by calling the <a>DescribeOrderableDBInstanceOptions</a> action and specifying the instance class for the <code>DBInstanceClass</code> parameter.</p> <p>In addition, you can use the following actions for DB instance class processor information:</p> <ul> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DescribeDBSnapshots</a> </p> </li> <li> <p> <a>DescribeValidDBInstanceModifications</a> </p> </li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor\">Configuring the Processor of the DB Instance Class</a> in the <i>Amazon RDS User Guide. </i> </p>"
+    },
+    "ProcessorFeatureList": {
+      "type": "list",
+      "member": {
+        "shape": "ProcessorFeature",
+        "locationName": "ProcessorFeature"
+      }
     },
     "PromoteReadReplicaDBClusterMessage": {
       "type": "structure",
@@ -9150,7 +9232,7 @@
         },
         "Port": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The port number on which the new DB cluster accepts connections.</p> <p>Constraints: Value must be <code>1150-65535</code> </p> <p>Default: The same port as the original DB cluster.</p>"
+          "documentation": "<p>The port number on which the new DB cluster accepts connections.</p> <p>Constraints: A value from <code>1150-65535</code>. </p> <p>Default: The default port for the engine.</p>"
         },
         "DBSubnetGroupName": {
           "shape": "String",
@@ -9291,6 +9373,14 @@
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>The list of logs that the restored DB instance is to export to CloudWatch Logs.</p>"
+        },
+        "ProcessorFeatures": {
+          "shape": "ProcessorFeatureList",
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
+        },
+        "UseDefaultProcessorFeatures": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that specifies that the DB instance class of the DB instance uses its default processor features.</p>"
         }
       },
       "documentation": "<p/>"
@@ -9470,6 +9560,14 @@
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>The list of logs that the restored DB instance is to export to CloudWatch Logs.</p>"
+        },
+        "ProcessorFeatures": {
+          "shape": "ProcessorFeatureList",
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
+        },
+        "UseDefaultProcessorFeatures": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that specifies that the DB instance class of the DB instance uses its default processor features.</p>"
         }
       }
     },
@@ -9586,6 +9684,14 @@
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>The list of logs that the restored DB instance is to export to CloudWatch Logs.</p>"
+        },
+        "ProcessorFeatures": {
+          "shape": "ProcessorFeatureList",
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
+        },
+        "UseDefaultProcessorFeatures": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that specifies that the DB instance class of the DB instance uses its default processor features.</p>"
         }
       },
       "documentation": "<p/>"
@@ -9993,6 +10099,10 @@
         "Storage": {
           "shape": "ValidStorageOptionsList",
           "documentation": "<p>Valid storage options for your DB instance. </p>"
+        },
+        "ValidProcessorFeatures": {
+          "shape": "AvailableProcessorFeatureList",
+          "documentation": "<p>Valid processor features for your DB instance. </p>"
         }
       },
       "documentation": "<p>Information about valid modifications that you can make to your DB instance. Contains the result of a successful call to the <a>DescribeValidDBInstanceModifications</a> action. You can use this information when you call <a>ModifyDBInstance</a>. </p>",

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.251.1-->
+<!--LATEST=2.252.1-->
 <!--ENTRYINSERT-->
+
+## 2.252.1
+* feature: CostExplorer: Cost Explorer API is providing programmatic access to RI saving metrics to enable customers to optimize their reservations.
+* feature: Polly: Amazon Polly adds new French voice - "Lea"
+* feature: RDS: This release adds customizable processor features for RDS instances.
+* feature: Shield: DDoS Response Team access management for AWS Shield
 
 ## 2.251.1
 * feature: AppStream: Amazon AppStream 2.0 adds support for Google Drive for G Suite. With this feature, customers will be able to connect their G Suite accounts with AppStream 2.0 and enable Google Drive access for an AppStream 2.0 stack. Users of the stack can then link their Google Drive using their G Suite login credentials and use their existing files stored in Drive with their AppStream 2.0 applications. File changes will be synced automatically to Google cloud. 

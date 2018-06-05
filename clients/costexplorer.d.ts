@@ -62,6 +62,8 @@ declare class CostExplorer extends Service {
 }
 declare namespace CostExplorer {
   export type AccountScope = "PAYER"|string;
+  export type AmortizedRecurringFee = string;
+  export type AmortizedUpfrontFee = string;
   export type AttributeType = string;
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
@@ -499,9 +501,11 @@ declare namespace CostExplorer {
     Unit?: MetricUnit;
   }
   export type Metrics = {[key: string]: MetricValue};
+  export type NetRISavings = string;
   export type NextPageToken = string;
   export type NonNegativeInteger = number;
   export type OfferingClass = "STANDARD"|"CONVERTIBLE"|string;
+  export type OnDemandCostOfRIHoursUsed = string;
   export type OnDemandHours = string;
   export type PageSize = number;
   export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|string;
@@ -557,6 +561,30 @@ declare namespace CostExplorer {
      * The number of RI hours that you didn't use.
      */
     UnusedHours?: UnusedHours;
+    /**
+     * How much your RIs would cost if charged On-Demand rates.
+     */
+    OnDemandCostOfRIHoursUsed?: OnDemandCostOfRIHoursUsed;
+    /**
+     * How much you saved due to purchasing and utilizing RIs. This is calculated by subtracting the TotalAmortizedFee from the OnDemandCostOfRIHoursUsed.
+     */
+    NetRISavings?: NetRISavings;
+    /**
+     * How much you could save if you use your entire reservation.
+     */
+    TotalPotentialRISavings?: TotalPotentialRISavings;
+    /**
+     * The upfront cost of your RI, amortized over the RI period.
+     */
+    AmortizedUpfrontFee?: AmortizedUpfrontFee;
+    /**
+     * The monthly cost of your RI, amortized over the RI period.
+     */
+    AmortizedRecurringFee?: AmortizedRecurringFee;
+    /**
+     * The total cost of your RI, amortized over the RI period.
+     */
+    TotalAmortizedFee?: TotalAmortizedFee;
   }
   export interface ReservationCoverageGroup {
     /**
@@ -761,6 +789,8 @@ declare namespace CostExplorer {
   }
   export type TermInYears = "ONE_YEAR"|"THREE_YEARS"|string;
   export type TotalActualHours = string;
+  export type TotalAmortizedFee = string;
+  export type TotalPotentialRISavings = string;
   export type TotalRunningHours = string;
   export type UnusedHours = string;
   export interface UtilizationByTime {

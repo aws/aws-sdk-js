@@ -725,11 +725,11 @@ declare class RDS extends Service {
    */
   restoreDBInstanceFromS3(callback?: (err: AWSError, data: RDS.Types.RestoreDBInstanceFromS3Result) => void): Request<RDS.Types.RestoreDBInstanceFromS3Result, AWSError>;
   /**
-   * Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property. The target database is created with most of the original configuration, but in a system-selected availability zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.  This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use RestoreDBClusterToPointInTime. 
+   * Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property. The target database is created with most of the original configuration, but in a system-selected Availability Zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.  This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use RestoreDBClusterToPointInTime. 
    */
   restoreDBInstanceToPointInTime(params: RDS.Types.RestoreDBInstanceToPointInTimeMessage, callback?: (err: AWSError, data: RDS.Types.RestoreDBInstanceToPointInTimeResult) => void): Request<RDS.Types.RestoreDBInstanceToPointInTimeResult, AWSError>;
   /**
-   * Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property. The target database is created with most of the original configuration, but in a system-selected availability zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.  This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use RestoreDBClusterToPointInTime. 
+   * Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property. The target database is created with most of the original configuration, but in a system-selected Availability Zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.  This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use RestoreDBClusterToPointInTime. 
    */
   restoreDBInstanceToPointInTime(callback?: (err: AWSError, data: RDS.Types.RestoreDBInstanceToPointInTimeResult) => void): Request<RDS.Types.RestoreDBInstanceToPointInTimeResult, AWSError>;
   /**
@@ -893,12 +893,27 @@ declare namespace RDS {
   }
   export interface AvailabilityZone {
     /**
-     * The name of the availability zone.
+     * The name of the Availability Zone.
      */
     Name?: String;
   }
   export type AvailabilityZoneList = AvailabilityZone[];
   export type AvailabilityZones = String[];
+  export interface AvailableProcessorFeature {
+    /**
+     * The name of the processor feature. Valid names are coreCount and threadsPerCore.
+     */
+    Name?: String;
+    /**
+     * The default value for the processor feature of the DB instance class.
+     */
+    DefaultValue?: String;
+    /**
+     * The allowed values for the processor feature of the DB instance class.
+     */
+    AllowedValues?: String;
+  }
+  export type AvailableProcessorFeatureList = AvailableProcessorFeature[];
   export interface BacktrackDBClusterMessage {
     /**
      * The DB cluster identifier of the DB cluster to be backtracked. This parameter is stored as a lowercase string. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: my-cluster1 
@@ -1397,6 +1412,10 @@ declare namespace RDS {
      * The list of log types that need to be enabled for exporting to CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+     */
+    ProcessorFeatures?: ProcessorFeatureList;
   }
   export interface CreateDBInstanceReadReplicaMessage {
     /**
@@ -1484,6 +1503,14 @@ declare namespace RDS {
      * The list of logs that the new DB instance is to export to CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+     */
+    ProcessorFeatures?: ProcessorFeatureList;
+    /**
+     * A value that specifies that the DB instance class of the DB instance uses its default processor features.
+     */
+    UseDefaultProcessorFeatures?: BooleanOptional;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -2287,6 +2314,10 @@ declare namespace RDS {
      * A list of log types that this DB instance is configured to export to CloudWatch Logs.
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+     */
+    ProcessorFeatures?: ProcessorFeatureList;
   }
   export type DBInstanceList = DBInstance[];
   export interface DBInstanceMessage {
@@ -2532,6 +2563,10 @@ declare namespace RDS {
      * True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
+    /**
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.
+     */
+    ProcessorFeatures?: ProcessorFeatureList;
   }
   export interface DBSnapshotAttribute {
     /**
@@ -3330,7 +3365,7 @@ declare namespace RDS {
      */
     Duration?: String;
     /**
-     * Product description filter value. Specify this parameter to show only the available offerings matching the specified product description.
+     * Product description filter value. Specify this parameter to show only the available offerings that contain the specified product description.  The results show offerings that partially match the filter value. 
      */
     ProductDescription?: String;
     /**
@@ -3893,6 +3928,14 @@ declare namespace RDS {
      * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
+    /**
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+     */
+    ProcessorFeatures?: ProcessorFeatureList;
+    /**
+     * A value that specifies that the DB instance class of the DB instance uses its default processor features.
+     */
+    UseDefaultProcessorFeatures?: BooleanOptional;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
@@ -4366,6 +4409,10 @@ declare namespace RDS {
      * Maximum provisioned IOPS per GiB for a DB instance.
      */
     MaxIopsPerGib?: DoubleOptional;
+    /**
+     * A list of the available processor features for the DB instance class of a DB instance.
+     */
+    AvailableProcessorFeatures?: AvailableProcessorFeatureList;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {
@@ -4523,7 +4570,22 @@ declare namespace RDS {
      */
     DBSubnetGroupName?: String;
     PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
+    /**
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+     */
+    ProcessorFeatures?: ProcessorFeatureList;
   }
+  export interface ProcessorFeature {
+    /**
+     * The name of the processor feature. Valid names are coreCount and threadsPerCore.
+     */
+    Name?: String;
+    /**
+     * The value of a processor feature name.
+     */
+    Value?: String;
+  }
+  export type ProcessorFeatureList = ProcessorFeature[];
   export interface PromoteReadReplicaDBClusterMessage {
     /**
      * The identifier of the DB cluster Read Replica to promote. This parameter is not case-sensitive.  Constraints:   Must match the identifier of an existing DBCluster Read Replica.   Example: my-cluster-replica1 
@@ -5004,7 +5066,7 @@ declare namespace RDS {
      */
     UseLatestRestorableTime?: Boolean;
     /**
-     * The port number on which the new DB cluster accepts connections. Constraints: Value must be 1150-65535  Default: The same port as the original DB cluster.
+     * The port number on which the new DB cluster accepts connections. Constraints: A value from 1150-65535.  Default: The default port for the engine.
      */
     Port?: IntegerOptional;
     /**
@@ -5130,6 +5192,14 @@ declare namespace RDS {
      * The list of logs that the restored DB instance is to export to CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+     */
+    ProcessorFeatures?: ProcessorFeatureList;
+    /**
+     * A value that specifies that the DB instance class of the DB instance uses its default processor features.
+     */
+    UseDefaultProcessorFeatures?: BooleanOptional;
   }
   export interface RestoreDBInstanceFromDBSnapshotResult {
     DBInstance?: DBInstance;
@@ -5291,6 +5361,14 @@ declare namespace RDS {
      * The list of logs that the restored DB instance is to export to CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+     */
+    ProcessorFeatures?: ProcessorFeatureList;
+    /**
+     * A value that specifies that the DB instance class of the DB instance uses its default processor features.
+     */
+    UseDefaultProcessorFeatures?: BooleanOptional;
   }
   export interface RestoreDBInstanceFromS3Result {
     DBInstance?: DBInstance;
@@ -5393,6 +5471,14 @@ declare namespace RDS {
      * The list of logs that the restored DB instance is to export to CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+     */
+    ProcessorFeatures?: ProcessorFeatureList;
+    /**
+     * A value that specifies that the DB instance class of the DB instance uses its default processor features.
+     */
+    UseDefaultProcessorFeatures?: BooleanOptional;
   }
   export interface RestoreDBInstanceToPointInTimeResult {
     DBInstance?: DBInstance;
@@ -5538,6 +5624,10 @@ declare namespace RDS {
      * Valid storage options for your DB instance. 
      */
     Storage?: ValidStorageOptionsList;
+    /**
+     * Valid processor features for your DB instance. 
+     */
+    ValidProcessorFeatures?: AvailableProcessorFeatureList;
   }
   export interface ValidStorageOptions {
     /**
