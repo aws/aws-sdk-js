@@ -1,7 +1,7 @@
-var parseMessage = require('../../lib/event-stream/parse-message').parseMessage;
+var formatMessage = require('../../lib/event-stream/format-message').formatMessage;
 var vectors = require('./test-vectors.fixture').vectors;
 
-describe('message parsing', function() {
+describe('message formatting', function() {
     var vectorNames = Object.keys(vectors);
     for (var i = 0, iLen = vectorNames.length; i < iLen; i++) {
         var vectorName = vectorNames[i];
@@ -11,10 +11,10 @@ describe('message parsing', function() {
             it('should handle the ' + vectorName + ' test case', function() {
                 if (vector.expectation === 'failure') {
                     expect(function() {
-                        parseMessage(vector.encoded);
+                        formatMessage(vector.decoded);
                     }).to.throw();
                 } else {
-                    expect(parseMessage(vector.encoded)).to.eql(vector.decoded);
+                    expect(formatMessage(vector.decoded)).to.eql(vector.encoded);
                 }
             });
         })(vectorName, vector);
