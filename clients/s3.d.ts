@@ -5,6 +5,7 @@ import {S3Customizations} from '../lib/services/s3';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {UseDualstackConfigOptions} from '../lib/config_use_dualstack';
+import {EventStream} from '../lib/event-stream/event-stream';
 import {ManagedUpload as managed_upload} from '../lib/s3/managed_upload';
 import {PresignedPost as presigned_post} from '../lib/s3/presigned_post';
 import {Readable} from 'stream';
@@ -611,6 +612,14 @@ declare class S3 extends S3Customizations {
    * Restores an archived copy of an object back into Amazon S3
    */
   restoreObject(callback?: (err: AWSError, data: S3.Types.RestoreObjectOutput) => void): Request<S3.Types.RestoreObjectOutput, AWSError>;
+  /**
+   * This operation filters the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response.
+   */
+  selectObjectContent(params: S3.Types.SelectObjectContentRequest, callback?: (err: AWSError, data: S3.Types.SelectObjectContentOutput) => void): Request<S3.Types.SelectObjectContentOutput, AWSError>;
+  /**
+   * This operation filters the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response.
+   */
+  selectObjectContent(callback?: (err: AWSError, data: S3.Types.SelectObjectContentOutput) => void): Request<S3.Types.SelectObjectContentOutput, AWSError>;
   /**
    * Uploads a part in a multipart upload.Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.
    */
@@ -3330,7 +3339,7 @@ declare namespace S3 {
     /**
      * The byte array of partial, one or more result records.
      */
-    Payload?: Body;
+    Payload?: Buffer;
   }
   export interface Redirect {
     /**
@@ -3547,28 +3556,7 @@ declare namespace S3 {
   export type SSEKMSKeyId = string;
   export interface SSES3 {
   }
-  export interface SelectObjectContentEventStream {
-    /**
-     * The Records Event.
-     */
-    Records?: RecordsEvent;
-    /**
-     * The Stats Event.
-     */
-    Stats?: StatsEvent;
-    /**
-     * The Progress Event.
-     */
-    Progress?: ProgressEvent;
-    /**
-     * The Continuation Event.
-     */
-    Cont?: ContinuationEvent;
-    /**
-     * The End Event.
-     */
-    End?: EndEvent;
-  }
+  export type SelectObjectContentEventStream = EventStream<{Records?:RecordsEvent,Stats?:StatsEvent,Progress?:ProgressEvent,Cont?:ContinuationEvent,End?:EndEvent}>;
   export interface SelectObjectContentOutput {
     Payload?: SelectObjectContentEventStream;
   }

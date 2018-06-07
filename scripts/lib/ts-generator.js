@@ -139,7 +139,7 @@ TSGenerator.prototype.generateDocumentClientInterfaces = function generateDocume
             code += self.tabs(tabCount) + 'export type ' + shapeKey + ' = any;\n';
             return;
         }
-        code += self.generateTypingsFromShape(shapeKey, modelShape, tabCount, []);
+        code += self.generateTypingsFromShape(dynamodbModel, shapeKey, modelShape, tabCount, []);
     });
     return code;
 };
@@ -279,7 +279,7 @@ TSGenerator.prototype.addReadableType = function addReadableType(shapeKey) {
 /**
  * Generates a type or interface based on the shape.
  */
-TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromShape(shapeKey, shape, tabCount, customClassNames) {
+TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromShape(model, shapeKey, shape, tabCount, customClassNames) {
     // some shapes shouldn't be generated if they are javascript primitives
     var jsPrimitives = ['string', 'boolean', 'number'];
     if (jsPrimitives.indexOf(shapeKey) >= 0) {
@@ -297,6 +297,15 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
     tabCount = tabCount || 0;
     var tabs = this.tabs;
     var type = shape.type;
+    if (shape.eventstream) {
+        // eventstreams MUST be structures
+        var members = Object.keys(shape.members);
+        var events = members.map(function(member) {
+            // each member is an individual event type, so each must be optional
+            return member + '?:' + shape.members[member].shape;
+        });
+        return code += tabs(tabCount) + 'export type ' + shapeKey + ' = EventStream<{' + events.join(',') + '}>;\n'; 
+    }
     if (type === 'structure') {
         code += tabs(tabCount) + 'export interface ' + shapeKey + ' {\n';
         var members = shape.members;
@@ -310,6 +319,12 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
             }
             var required = self.checkRequired(shape.required || [], memberKey) ? '' : '?';
             var memberType = member.shape;
+            if (member.eventpayload) {
+                // eventpayloads are always either structures, or buffers
+                if (['blob', 'binary'].indexOf(model.shapes[memberType].type) >= 0) {
+                    memberType = 'Buffer';
+                }
+            }
             memberType = self.generateSafeShapeName(memberType, [].concat(customClassNames, ['Date', 'Blob']));
             code += tabs(tabCount + 1) + memberKey + required + ': ' + memberType + ';\n';
         });
@@ -332,7 +347,7 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = Date;\n';
     } else if (type === 'boolean') {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = boolean;\n';
-    } else if (type === 'blob' || type === 'binary') {     
+    } else if (type === 'blob' || type === 'binary') {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = Buffer|Uint8Array|Blob|string'
             + self.addReadableType(shapeKey)
             +';\n';
@@ -482,6 +497,16 @@ TSGenerator.prototype.generateCustomNamespaceTypes = function generateCustomName
     };
 };
 
+TSGenerator.prototype.containsEventStreams = function containsEventStreams(model) {
+    var shapeNames = Object.keys(model.shapes);
+    for (var name of shapeNames) {
+        if (model.shapes[name].eventstream) {
+            return true;
+        }
+    }
+    return false;
+};
+
 /**
  * Generates the typings for a service based on the serviceIdentifier.
  */
@@ -515,6 +540,9 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
             code += 'import {' + config.INTERFACE + '} from \'../lib/' + config.FILE_NAME + '\';\n';
             customConfigTypes.push(config.INTERFACE);
         });
+    }
+    if (this.containsEventStreams(model)) {
+        code += 'import {EventStream} from \'../lib/event-stream/event-stream\';\n';
     }
     // import custom namespaces
     if (customNamespaces) {
@@ -568,7 +596,7 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
         if (modelShape.exception) {
             return;
         }
-        code += self.generateTypingsFromShape(shapeKey, modelShape, 1, customClassNames);
+        code += self.generateTypingsFromShape(model, shapeKey, modelShape, 1, customClassNames);
     });
     //add extra dependencies like 'streaming'
     if (Object.keys(self.streamTypes).length !== 0) {

@@ -1088,6 +1088,24 @@
       "documentation": "Restores an archived copy of an object back into Amazon S3",
       "alias": "PostObjectRestore"
     },
+    "SelectObjectContent": {
+      "name": "SelectObjectContent",
+      "http": {
+        "method": "POST",
+        "requestUri": "/{Bucket}/{Key+}?select&select-type=2"
+      },
+      "input": {
+        "shape": "SelectObjectContentRequest",
+        "locationName": "SelectObjectContentRequest",
+        "xmlNamespace": {
+          "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+        }
+      },
+      "output": {
+        "shape": "SelectObjectContentOutput"
+      },
+      "documentation": "This operation filters the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response."
+    },
     "UploadPart": {
       "name": "UploadPart",
       "http": {
