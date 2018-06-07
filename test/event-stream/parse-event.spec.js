@@ -3,7 +3,7 @@ var parseEvent = require('../../lib/event-stream/parse-event').parseEvent;
 var testEventMessages = require('./test-event-messages.fixture');
 var mockEventStreamShape = require('./test-event-stream-model.fixture').mockEventStreamShape;
 var parseMessage = require('../../lib/event-stream/parse-message').parseMessage;
-var formatMessage = require('../../lib/event-stream/format-message').formatMessage;
+var buildMessage = require('../../lib/event-stream/build-message').buildMessage;
 var toBuffer = require('../../lib/event-stream/to-buffer').toBuffer;
 var Int64 = require('../../lib/event-stream/int64').Int64;
 
@@ -16,10 +16,6 @@ describe('parseEvent', function() {
 
     it('parses an event into JSON', function() {
         var output = parseEvent(mockParser, testEventMessages.statsEventMessage, mockEventStreamShape);
-        var message = formatMessage({
-            headers: {},
-            body: toBuffer('')
-        })
 
         expect(output).to.eql({
             Stats: {
@@ -61,7 +57,7 @@ describe('parseEvent', function() {
     });
 
     it('unmarshalls headers into output', function() {
-        var eventMessage = formatMessage({
+        var eventMessage = buildMessage({
             headers: {
                 ':event-type': {
                     type: 'string',
@@ -116,7 +112,7 @@ describe('parseEvent', function() {
     });
 
     it('unmarshalls error messages', function() {
-        var eventMessage = formatMessage({
+        var eventMessage = buildMessage({
             headers: {
                 ':message-type': {
                     type: 'string',
@@ -139,5 +135,4 @@ describe('parseEvent', function() {
         expect(error.code).to.equal('FooError');
         expect(error.message).to.equal('Event Error');
     });
-
 });

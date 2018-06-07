@@ -17,20 +17,6 @@ describe('removeEventStreamOperations', function() {
             removeEventStreamOperations(mockModel);
             expect(typeof mockModel.operations['EventStreamOnInputPayloadOperation']).to.equal('undefined');
         });
-
-        it('is on the output shape ', function() {
-            var mockModel = deepCopyObject(fooModel);
-            expect(typeof mockModel.operations['EventStreamOnOutputOperation']).to.equal('object');
-            removeEventStreamOperations(mockModel);
-            expect(typeof mockModel.operations['EventStreamOnOutputOperation']).to.equal('undefined');
-        });
-
-        it('is on the output shape payload shape', function() {
-            var mockModel = deepCopyObject(fooModel);
-            expect(typeof mockModel.operations['EventStreamOnOutputPayloadOperation']).to.equal('object');
-            removeEventStreamOperations(mockModel);
-            expect(typeof mockModel.operations['EventStreamOnOutputPayloadOperation']).to.equal('undefined');
-        });
     });
 
     describe('does not remove operations', function() {
@@ -40,13 +26,27 @@ describe('removeEventStreamOperations', function() {
             removeEventStreamOperations(mockModel);
             expect(typeof mockModel.operations['BarOperation']).to.equal('object');
         });
+
+        it('is on the output shape ', function() {
+            var mockModel = deepCopyObject(fooModel);
+            expect(typeof mockModel.operations['EventStreamOnOutputOperation']).to.equal('object');
+            removeEventStreamOperations(mockModel);
+            expect(typeof mockModel.operations['EventStreamOnOutputOperation']).to.equal('object');
+        });
+
+        it('is on the output shape payload shape', function() {
+            var mockModel = deepCopyObject(fooModel);
+            expect(typeof mockModel.operations['EventStreamOnOutputPayloadOperation']).to.equal('object');
+            removeEventStreamOperations(mockModel);
+            expect(typeof mockModel.operations['EventStreamOnOutputPayloadOperation']).to.equal('object');
+        });
     });
 
     it('returns true when an operation is removed', function() {
         var mockModel = deepCopyObject(fooModel);
-        expect(typeof mockModel.operations['EventStreamOnOutputPayloadOperation']).to.equal('object');
+        expect(typeof mockModel.operations['EventStreamOnInputPayloadOperation']).to.equal('object');
         var didRemove = removeEventStreamOperations(mockModel);
-        expect(typeof mockModel.operations['EventStreamOnOutputPayloadOperation']).to.equal('undefined');
+        expect(typeof mockModel.operations['EventStreamOnInputPayloadOperation']).to.equal('undefined');
         expect(didRemove).to.equal(true);
     });
 
@@ -55,9 +55,7 @@ describe('removeEventStreamOperations', function() {
         // delete operations we know will be removed
         var operationsToRemove = [
             'EventStreamOnInputOperation',
-            'EventStreamOnInputPayloadOperation',
-            'EventStreamOnOutputOperation',
-            'EventStreamOnOutputPayloadOperation'
+            'EventStreamOnInputPayloadOperation'
         ];
         for (var i = 0; i < operationsToRemove.length; i++) {
             delete mockModel.operations[operationsToRemove[i]];
