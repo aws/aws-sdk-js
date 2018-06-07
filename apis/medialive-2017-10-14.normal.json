@@ -28,12 +28,12 @@
       },
       "errors": [
         {
-          "shape": "UnprocessableEntityException",
-          "documentation": "The Channel failed validation and could not be created."
-        },
-        {
           "shape": "BadRequestException",
           "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "The Channel failed validation and could not be created."
         },
         {
           "shape": "InternalServerErrorException",
@@ -672,12 +672,12 @@
       },
       "errors": [
         {
-          "shape": "UnprocessableEntityException",
-          "documentation": "The channel configuration failed validation and could not be updated."
-        },
-        {
           "shape": "BadRequestException",
           "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "The channel configuration failed validation and could not be updated."
         },
         {
           "shape": "InternalServerErrorException",
@@ -1842,6 +1842,11 @@
           "shape": "InputSpecification",
           "locationName": "inputSpecification"
         },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "locationName": "logLevel",
+          "documentation": "The log level being written to CloudWatch Logs."
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -1937,6 +1942,11 @@
           "shape": "InputSpecification",
           "locationName": "inputSpecification"
         },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "locationName": "logLevel",
+          "documentation": "The log level being written to CloudWatch Logs."
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -1994,6 +2004,11 @@
           "locationName": "inputSpecification",
           "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
         },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "locationName": "logLevel",
+          "documentation": "The log level to write to CloudWatch Logs."
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -2039,6 +2054,11 @@
           "shape": "InputSpecification",
           "locationName": "inputSpecification",
           "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
+        },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "locationName": "logLevel",
+          "documentation": "The log level to write to CloudWatch Logs."
         },
         "Name": {
           "shape": "__string",
@@ -2259,6 +2279,11 @@
           "shape": "InputSpecification",
           "locationName": "inputSpecification"
         },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "locationName": "logLevel",
+          "documentation": "The log level being written to CloudWatch Logs."
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -2373,6 +2398,11 @@
         "InputSpecification": {
           "shape": "InputSpecification",
           "locationName": "inputSpecification"
+        },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "locationName": "logLevel",
+          "documentation": "The log level being written to CloudWatch Logs."
         },
         "Name": {
           "shape": "__string",
@@ -4789,6 +4819,17 @@
       },
       "documentation": "Placeholder documentation for ListInputsResultModel"
     },
+    "LogLevel": {
+      "type": "string",
+      "enum": [
+        "ERROR",
+        "WARNING",
+        "INFO",
+        "DEBUG",
+        "DISABLED"
+      ],
+      "documentation": "The log level the user wants for their channel."
+    },
     "M2tsAbsentInputAudioBehavior": {
       "type": "string",
       "enum": [
@@ -6035,6 +6076,11 @@
           "shape": "InputSpecification",
           "locationName": "inputSpecification"
         },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "locationName": "logLevel",
+          "documentation": "The log level being written to CloudWatch Logs."
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -6126,6 +6172,11 @@
         "InputSpecification": {
           "shape": "InputSpecification",
           "locationName": "inputSpecification"
+        },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "locationName": "logLevel",
+          "documentation": "The log level being written to CloudWatch Logs."
         },
         "Name": {
           "shape": "__string",
@@ -6337,6 +6388,11 @@
           "locationName": "inputSpecification",
           "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
         },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "locationName": "logLevel",
+          "documentation": "The log level to write to CloudWatch Logs."
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -6377,6 +6433,11 @@
           "shape": "InputSpecification",
           "locationName": "inputSpecification",
           "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
+        },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "locationName": "logLevel",
+          "documentation": "The log level to write to CloudWatch Logs."
         },
         "Name": {
           "shape": "__string",

@@ -626,6 +626,10 @@ one destination per packager.
     InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
     /**
+     * The log level being written to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -679,6 +683,10 @@ one destination per packager.
     InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
     /**
+     * The log level being written to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -703,6 +711,10 @@ one destination per packager.
      * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
      */
     InputSpecification?: InputSpecification;
+    /**
+     * The log level to write to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
     /**
      * Name of channel.
      */
@@ -733,6 +745,10 @@ creating multiple resources.
      * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
      */
     InputSpecification?: InputSpecification;
+    /**
+     * The log level to write to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
     /**
      * Name of channel.
      */
@@ -865,6 +881,10 @@ one destination per packager.
     InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
     /**
+     * The log level being written to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -926,6 +946,10 @@ one destination per packager.
      */
     InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
+    /**
+     * The log level being written to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
     /**
      * The name of the channel. (user-mutable)
      */
@@ -2092,6 +2116,7 @@ pulled from.
     Inputs?: __listOfInput;
     NextToken?: __string;
   }
+  export type LogLevel = "ERROR"|"WARNING"|"INFO"|"DEBUG"|"DISABLED"|string;
   export type M2tsAbsentInputAudioBehavior = "DROP"|"ENCODE_SILENCE"|string;
   export type M2tsArib = "DISABLED"|"ENABLED"|string;
   export type M2tsAribCaptionsPidControl = "AUTO"|"USE_CONFIGURED"|string;
@@ -2742,6 +2767,10 @@ one destination per packager.
     InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
     /**
+     * The log level being written to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -2797,6 +2826,10 @@ one destination per packager.
      */
     InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
+    /**
+     * The log level being written to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
     /**
      * The name of the channel. (user-mutable)
      */
@@ -2888,6 +2921,10 @@ one destination per packager.
      */
     InputSpecification?: InputSpecification;
     /**
+     * The log level to write to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
+    /**
      * The name of the channel.
      */
     Name?: __string;
@@ -2914,6 +2951,10 @@ one destination per packager.
      * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
      */
     InputSpecification?: InputSpecification;
+    /**
+     * The log level to write to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
     /**
      * The name of the channel.
      */
