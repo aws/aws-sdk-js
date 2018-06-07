@@ -1,4 +1,4 @@
-var formatMessage = require('../../lib/event-stream/format-message').formatMessage;
+var buildMessage = require('../../lib/event-stream/build-message').buildMessage;
 var vectors = require('./test-vectors.fixture').vectors;
 
 describe('message formatting', function() {
@@ -11,10 +11,10 @@ describe('message formatting', function() {
             it('should handle the ' + vectorName + ' test case', function() {
                 if (vector.expectation === 'failure') {
                     expect(function() {
-                        formatMessage(vector.decoded);
+                        buildMessage(vector.decoded);
                     }).to.throw();
                 } else {
-                    expect(formatMessage(vector.decoded)).to.eql(vector.encoded);
+                    expect(buildMessage(vector.decoded)).to.eql(vector.encoded);
                 }
             });
         })(vectorName, vector);

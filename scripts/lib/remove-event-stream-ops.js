@@ -19,14 +19,11 @@ function removeEventStreamOperations(model) {
         if (inputShapeName && hasEventStream(model.shapes[inputShapeName], model)) {
             requiresEventStream = true;
         }
-        if (outputShapeName && hasEventStream(model.shapes[outputShapeName], model)) {
-            requiresEventStream = true;
-        }
 
         if (requiresEventStream) {
             modifiedModel = true;
             // remove the operation from the model
-            console.log('Removing ' + operationName + ' because it depends on event streams.');
+            console.log('Removing ' + operationName + ' because it depends on event streams on input.');
             delete model.operations[operationName];
         }
     }
