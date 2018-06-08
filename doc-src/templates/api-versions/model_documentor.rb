@@ -474,19 +474,6 @@ class SharedExampleVisitor
 
 end
 
-class EventStreamOutputExample
-  def initialize(api, options = {})
-    @api = api
-    @required_only = options[:required_only] || false
-    @visited = Hash.new { 0 }
-    @recursive = {}
-  end
-
-  def example(klass, name, input)
-
-  end
-end
-
 class ExampleShapeVisitor
   def initialize(api, options = {})
     @api = api
