@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "Fixes a bug in the request URIs for MediaTailor PlaybackConfiguration operations."
+    }
+]
