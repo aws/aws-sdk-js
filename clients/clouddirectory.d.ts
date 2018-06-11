@@ -236,6 +236,14 @@ declare class CloudDirectory extends Service {
    */
   getFacet(callback?: (err: AWSError, data: CloudDirectory.Types.GetFacetResponse) => void): Request<CloudDirectory.Types.GetFacetResponse, AWSError>;
   /**
+   * Retrieves attributes that are associated with a typed link.
+   */
+  getLinkAttributes(params: CloudDirectory.Types.GetLinkAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetLinkAttributesResponse) => void): Request<CloudDirectory.Types.GetLinkAttributesResponse, AWSError>;
+  /**
+   * Retrieves attributes that are associated with a typed link.
+   */
+  getLinkAttributes(callback?: (err: AWSError, data: CloudDirectory.Types.GetLinkAttributesResponse) => void): Request<CloudDirectory.Types.GetLinkAttributesResponse, AWSError>;
+  /**
    * Retrieves attributes within a facet that are associated with an object.
    */
   getObjectAttributes(params: CloudDirectory.Types.GetObjectAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetObjectAttributesResponse) => void): Request<CloudDirectory.Types.GetObjectAttributesResponse, AWSError>;
@@ -475,6 +483,14 @@ declare class CloudDirectory extends Service {
    * Does the following:   Adds new Attributes, Rules, or ObjectTypes.   Updates existing Attributes, Rules, or ObjectTypes.   Deletes existing Attributes, Rules, or ObjectTypes.  
    */
   updateFacet(callback?: (err: AWSError, data: CloudDirectory.Types.UpdateFacetResponse) => void): Request<CloudDirectory.Types.UpdateFacetResponse, AWSError>;
+  /**
+   * Updates a given typed link’s attributes. Attributes to be updated must not contribute to the typed link’s identity, as defined by its IdentityAttributeOrder.
+   */
+  updateLinkAttributes(params: CloudDirectory.Types.UpdateLinkAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateLinkAttributesResponse) => void): Request<CloudDirectory.Types.UpdateLinkAttributesResponse, AWSError>;
+  /**
+   * Updates a given typed link’s attributes. Attributes to be updated must not contribute to the typed link’s identity, as defined by its IdentityAttributeOrder.
+   */
+  updateLinkAttributes(callback?: (err: AWSError, data: CloudDirectory.Types.UpdateLinkAttributesResponse) => void): Request<CloudDirectory.Types.UpdateLinkAttributesResponse, AWSError>;
   /**
    * Updates a given object's attributes.
    */
@@ -894,6 +910,22 @@ declare namespace CloudDirectory {
   }
   export interface BatchDetachTypedLinkResponse {
   }
+  export interface BatchGetLinkAttributes {
+    /**
+     * Allows a typed link specifier to be accepted as input.
+     */
+    TypedLinkSpecifier: TypedLinkSpecifier;
+    /**
+     * A list of attribute names whose values will be retrieved.
+     */
+    AttributeNames: AttributeNameList;
+  }
+  export interface BatchGetLinkAttributesResponse {
+    /**
+     * The attributes that are associated with the typed link.
+     */
+    Attributes?: AttributeKeyAndValueList;
+  }
   export interface BatchGetObjectAttributes {
     /**
      * Reference that identifies the object whose attributes will be retrieved.
@@ -1255,6 +1287,10 @@ declare namespace CloudDirectory {
      * Returns a paginated list of all the incoming TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed link.
      */
     ListIncomingTypedLinks?: BatchListIncomingTypedLinks;
+    /**
+     * Retrieves attributes that are associated with a typed link.
+     */
+    GetLinkAttributes?: BatchGetLinkAttributes;
   }
   export type BatchReadOperationList = BatchReadOperation[];
   export interface BatchReadOperationResponse {
@@ -1337,6 +1373,10 @@ declare namespace CloudDirectory {
      * Returns a paginated list of all the incoming TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed link.
      */
     ListIncomingTypedLinks?: BatchListIncomingTypedLinksResponse;
+    /**
+     * The list of attributes to retrieve from the typed link.
+     */
+    GetLinkAttributes?: BatchGetLinkAttributesResponse;
   }
   export type BatchReferenceName = string;
   export interface BatchRemoveFacetFromObject {
@@ -1350,6 +1390,18 @@ declare namespace CloudDirectory {
     ObjectReference: ObjectReference;
   }
   export interface BatchRemoveFacetFromObjectResponse {
+  }
+  export interface BatchUpdateLinkAttributes {
+    /**
+     * Allows a typed link specifier to be accepted as input.
+     */
+    TypedLinkSpecifier: TypedLinkSpecifier;
+    /**
+     * The attributes update structure.
+     */
+    AttributeUpdates: LinkAttributeUpdateList;
+  }
+  export interface BatchUpdateLinkAttributesResponse {
   }
   export interface BatchUpdateObjectAttributes {
     /**
@@ -1425,6 +1477,10 @@ declare namespace CloudDirectory {
      * Detaches a typed link from a specified source and target object. For more information, see Typed link.
      */
     DetachTypedLink?: BatchDetachTypedLink;
+    /**
+     * Updates a given object's attributes.
+     */
+    UpdateLinkAttributes?: BatchUpdateLinkAttributes;
   }
   export type BatchWriteOperationList = BatchWriteOperation[];
   export interface BatchWriteOperationResponse {
@@ -1484,6 +1540,10 @@ declare namespace CloudDirectory {
      * Detaches a typed link from a specified source and target object. For more information, see Typed link.
      */
     DetachTypedLink?: BatchDetachTypedLinkResponse;
+    /**
+     * Represents the output of a BatchWrite response operation.
+     */
+    UpdateLinkAttributes?: BatchUpdateLinkAttributesResponse;
   }
   export type BatchWriteOperationResponseList = BatchWriteOperationResponse[];
   export interface BatchWriteRequest {
@@ -1920,6 +1980,30 @@ declare namespace CloudDirectory {
      */
     Facet?: Facet;
   }
+  export interface GetLinkAttributesRequest {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the Directory where the typed link resides. For more information, see arns or Typed link.
+     */
+    DirectoryArn: Arn;
+    /**
+     * Allows a typed link specifier to be accepted as input.
+     */
+    TypedLinkSpecifier: TypedLinkSpecifier;
+    /**
+     * A list of attribute names whose values will be retrieved.
+     */
+    AttributeNames: AttributeNameList;
+    /**
+     * The consistency level at which to retrieve the attributes on a typed link.
+     */
+    ConsistencyLevel?: ConsistencyLevel;
+  }
+  export interface GetLinkAttributesResponse {
+    /**
+     * The attributes that are associated with the typed link.
+     */
+    Attributes?: AttributeKeyAndValueList;
+  }
   export interface GetObjectAttributesRequest {
     /**
      * The Amazon Resource Name (ARN) that is associated with the Directory where the object resides.
@@ -2015,6 +2099,27 @@ declare namespace CloudDirectory {
     ObjectIdentifier?: ObjectIdentifier;
   }
   export type IndexAttachmentList = IndexAttachment[];
+  export interface LinkAttributeAction {
+    /**
+     * A type that can be either UPDATE_OR_CREATE or DELETE.
+     */
+    AttributeActionType?: UpdateActionType;
+    /**
+     * The value that you want to update to.
+     */
+    AttributeUpdateValue?: TypedAttributeValue;
+  }
+  export interface LinkAttributeUpdate {
+    /**
+     * The key of the attribute being updated.
+     */
+    AttributeKey?: AttributeKey;
+    /**
+     * The action to perform as part of the attribute update.
+     */
+    AttributeAction?: LinkAttributeAction;
+  }
+  export type LinkAttributeUpdateList = LinkAttributeUpdate[];
   export type LinkName = string;
   export type LinkNameToObjectIdentifierMap = {[key: string]: ObjectIdentifier};
   export interface ListAppliedSchemaArnsRequest {
@@ -2975,6 +3080,22 @@ declare namespace CloudDirectory {
     ObjectType?: ObjectType;
   }
   export interface UpdateFacetResponse {
+  }
+  export interface UpdateLinkAttributesRequest {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the Directory where the updated typed link resides. For more information, see arns or Typed link.
+     */
+    DirectoryArn: Arn;
+    /**
+     * Allows a typed link specifier to be accepted as input.
+     */
+    TypedLinkSpecifier: TypedLinkSpecifier;
+    /**
+     * The attributes update structure.
+     */
+    AttributeUpdates: LinkAttributeUpdateList;
+  }
+  export interface UpdateLinkAttributesResponse {
   }
   export interface UpdateObjectAttributesRequest {
     /**

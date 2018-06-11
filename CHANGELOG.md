@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.254.1-->
+<!--LATEST=2.255.1-->
 <!--ENTRYINSERT-->
+
+## 2.255.1
+* feature: CloudDirectory: Amazon Cloud Directory now supports optional attributes on Typed Links, giving users the ability to associate and manage data on Typed Links. 
+* feature: StorageGateway:  AWS Storage Gateway now enables you to create cached volumes and tapes with AWS KMS support.
 
 ## 2.254.1
 * feature: MediaTailor: Fixes a bug in the request URIs for MediaTailor PlaybackConfiguration operations.

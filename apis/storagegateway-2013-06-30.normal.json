@@ -1090,7 +1090,8 @@
         "VolumeUsedInBytes":{
           "shape":"VolumeUsedInBytes",
           "documentation":"<p>The size of the data stored on the volume in bytes.</p> <note> <p>This value is not available for volumes created prior to May 13, 2015, until you store data on the volume.</p> </note>"
-        }
+        },
+        "KMSKey":{"shape":"KMSKey"}
       },
       "documentation":"<p>Describes an iSCSI cached volume.</p>"
     },
@@ -1203,7 +1204,15 @@
           "documentation":"<p>The ARN for an existing volume. Specifying this ARN makes the new volume into an exact copy of the specified existing volume's latest recovery point. The <code>VolumeSizeInBytes</code> value for this new volume must be equal to or larger than the size of the existing volume, in bytes.</p>"
         },
         "NetworkInterfaceId":{"shape":"NetworkInterfaceId"},
-        "ClientToken":{"shape":"ClientToken"}
+        "ClientToken":{"shape":"ClientToken"},
+        "KMSEncrypted":{
+          "shape":"Boolean",
+          "documentation":"<p>True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.</p>"
+        },
+        "KMSKey":{
+          "shape":"KMSKey",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.</p>"
+        }
       }
     },
     "CreateCachediSCSIVolumeOutput":{
@@ -1240,7 +1249,7 @@
         },
         "KMSKey":{
           "shape":"KMSKey",
-          "documentation":"<p>The KMS key used for Amazon S3 server side encryption. This value can only be set when KmsEncrypted is true. Optional.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.</p>"
         },
         "Role":{
           "shape":"Role",
@@ -1252,7 +1261,7 @@
         },
         "DefaultStorageClass":{
           "shape":"StorageClass",
-          "documentation":"<p>The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.</p>"
+          "documentation":"<p>The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.</p>"
         },
         "ObjectACL":{
           "shape":"ObjectACL",
@@ -1413,6 +1422,14 @@
         "TapeBarcode":{
           "shape":"TapeBarcode",
           "documentation":"<p>The barcode that you want to assign to the tape.</p> <note> <p>Barcodes cannot be reused. This includes barcodes used for tapes that have been deleted.</p> </note>"
+        },
+        "KMSEncrypted":{
+          "shape":"Boolean",
+          "documentation":"<p>True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.</p>"
+        },
+        "KMSKey":{
+          "shape":"KMSKey",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the KMS Key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.</p>"
         }
       },
       "documentation":"<p>CreateTapeWithBarcodeInput</p>"
@@ -1456,6 +1473,14 @@
         "TapeBarcodePrefix":{
           "shape":"TapeBarcodePrefix",
           "documentation":"<p>A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.</p> <note> <p>The prefix must be 1 to 4 characters in length and must be one of the uppercase letters from A to Z.</p> </note>"
+        },
+        "KMSEncrypted":{
+          "shape":"Boolean",
+          "documentation":"<p>True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.</p>"
+        },
+        "KMSKey":{
+          "shape":"KMSKey",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.</p>"
         }
       },
       "documentation":"<p>CreateTapesInput</p>"
@@ -2362,7 +2387,7 @@
     },
     "KMSKey":{
       "type":"string",
-      "documentation":"<p>The ARN of the KMS key used for Amazon S3 server side encryption. </p>",
+      "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.</p>",
       "max":2048,
       "min":20
     },
@@ -2632,7 +2657,7 @@
         "LocationARN":{"shape":"LocationARN"},
         "DefaultStorageClass":{
           "shape":"StorageClass",
-          "documentation":"<p>The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.</p>"
+          "documentation":"<p>The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.</p>"
         },
         "ObjectACL":{"shape":"ObjectACL"},
         "ClientList":{"shape":"FileShareClientList"},
@@ -3090,7 +3115,8 @@
         "TapeUsedInBytes":{
           "shape":"TapeUsage",
           "documentation":"<p>The size, in bytes, of data stored on the virtual tape.</p> <note> <p>This value is not available for tapes created prior to May 13, 2015.</p> </note>"
-        }
+        },
+        "KMSKey":{"shape":"KMSKey"}
       },
       "documentation":"<p>Describes a virtual tape object.</p>"
     },
@@ -3098,7 +3124,7 @@
       "type":"string",
       "max":500,
       "min":50,
-      "pattern":"^arn:(aws|aws-cn):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{7,16}$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{7,16}$"
     },
     "TapeARNs":{
       "type":"list",
@@ -3116,14 +3142,17 @@
           "shape":"TapeBarcode",
           "documentation":"<p>The barcode that identifies the archived virtual tape.</p>"
         },
-        "TapeCreatedDate":{"shape":"Time"},
+        "TapeCreatedDate":{
+          "shape":"Time",
+          "documentation":"<p>The date the virtual tape was created.</p>"
+        },
         "TapeSizeInBytes":{
           "shape":"TapeSize",
           "documentation":"<p>The size, in bytes, of the archived virtual tape.</p>"
         },
         "CompletionTime":{
           "shape":"Time",
-          "documentation":"<p>The time that the archiving of the virtual tape was completed.</p> <p>The string format of the completion time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.</p>"
+          "documentation":"<p>The time that the archiving of the virtual tape was completed.</p> <p>The default time stamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.</p>"
         },
         "RetrievedTo":{
           "shape":"GatewayARN",
@@ -3136,7 +3165,8 @@
         "TapeUsedInBytes":{
           "shape":"TapeUsage",
           "documentation":"<p>The size, in bytes, of data stored on the virtual tape.</p> <note> <p>This value is not available for tapes created prior to May 13, 2015.</p> </note>"
-        }
+        },
+        "KMSKey":{"shape":"KMSKey"}
       },
       "documentation":"<p>Represents a virtual tape that is archived in the virtual tape shelf (VTS).</p>"
     },
@@ -3202,7 +3232,7 @@
         },
         "TapeRecoveryPointTime":{
           "shape":"Time",
-          "documentation":"<p>The time when the point-in-time view of the virtual tape was replicated for later recovery.</p> <p>The string format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.</p>"
+          "documentation":"<p>The time when the point-in-time view of the virtual tape was replicated for later recovery.</p> <p>The default time stamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.</p>"
         },
         "TapeSizeInBytes":{
           "shape":"TapeSize",
@@ -3378,7 +3408,7 @@
         },
         "KMSKey":{
           "shape":"KMSKey",
-          "documentation":"<p>The KMS key used for Amazon S3 server side encryption. This value can only be set when KmsEncrypted is true. Optional. </p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional. </p>"
         },
         "NFSFileShareDefaults":{
           "shape":"NFSFileShareDefaults",
@@ -3386,7 +3416,7 @@
         },
         "DefaultStorageClass":{
           "shape":"StorageClass",
-          "documentation":"<p>The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.</p>"
+          "documentation":"<p>The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.</p>"
         },
         "ObjectACL":{
           "shape":"ObjectACL",

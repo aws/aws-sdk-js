@@ -636,6 +636,7 @@ declare namespace StorageGateway {
      * The size of the data stored on the volume in bytes.  This value is not available for volumes created prior to May 13, 2015, until you store data on the volume. 
      */
     VolumeUsedInBytes?: VolumeUsedInBytes;
+    KMSKey?: KMSKey;
   }
   export type CachediSCSIVolumes = CachediSCSIVolume[];
   export interface CancelArchivalInput {
@@ -696,6 +697,14 @@ declare namespace StorageGateway {
     SourceVolumeARN?: VolumeARN;
     NetworkInterfaceId: NetworkInterfaceId;
     ClientToken: ClientToken;
+    /**
+     * True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+     */
+    KMSEncrypted?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+     */
+    KMSKey?: KMSKey;
   }
   export interface CreateCachediSCSIVolumeOutput {
     VolumeARN?: VolumeARN;
@@ -719,7 +728,7 @@ declare namespace StorageGateway {
      */
     KMSEncrypted?: Boolean;
     /**
-     * The KMS key used for Amazon S3 server side encryption. This value can only be set when KmsEncrypted is true. Optional.
+     * The Amazon Resource Name (ARN) KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
      */
     KMSKey?: KMSKey;
     /**
@@ -731,7 +740,7 @@ declare namespace StorageGateway {
      */
     LocationARN: LocationARN;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+     * The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
      */
     DefaultStorageClass?: StorageClass;
     /**
@@ -844,6 +853,14 @@ declare namespace StorageGateway {
      * The barcode that you want to assign to the tape.  Barcodes cannot be reused. This includes barcodes used for tapes that have been deleted. 
      */
     TapeBarcode: TapeBarcode;
+    /**
+     * True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+     */
+    KMSEncrypted?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS Key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+     */
+    KMSKey?: KMSKey;
   }
   export interface CreateTapeWithBarcodeOutput {
     /**
@@ -872,6 +889,14 @@ declare namespace StorageGateway {
      * A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.  The prefix must be 1 to 4 characters in length and must be one of the uppercase letters from A to Z. 
      */
     TapeBarcodePrefix: TapeBarcodePrefix;
+    /**
+     * True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+     */
+    KMSEncrypted?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+     */
+    KMSKey?: KMSKey;
   }
   export interface CreateTapesOutput {
     /**
@@ -1503,7 +1528,7 @@ declare namespace StorageGateway {
     Role?: Role;
     LocationARN?: LocationARN;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+     * The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
      */
     DefaultStorageClass?: StorageClass;
     ObjectACL?: ObjectACL;
@@ -1742,6 +1767,7 @@ declare namespace StorageGateway {
      * The size, in bytes, of data stored on the virtual tape.  This value is not available for tapes created prior to May 13, 2015. 
      */
     TapeUsedInBytes?: TapeUsage;
+    KMSKey?: KMSKey;
   }
   export type TapeARN = string;
   export type TapeARNs = TapeARN[];
@@ -1754,13 +1780,16 @@ declare namespace StorageGateway {
      * The barcode that identifies the archived virtual tape.
      */
     TapeBarcode?: TapeBarcode;
+    /**
+     * The date the virtual tape was created.
+     */
     TapeCreatedDate?: Time;
     /**
      * The size, in bytes, of the archived virtual tape.
      */
     TapeSizeInBytes?: TapeSize;
     /**
-     * The time that the archiving of the virtual tape was completed. The string format of the completion time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+     * The time that the archiving of the virtual tape was completed. The default time stamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
      */
     CompletionTime?: Time;
     /**
@@ -1775,6 +1804,7 @@ declare namespace StorageGateway {
      * The size, in bytes, of data stored on the virtual tape.  This value is not available for tapes created prior to May 13, 2015. 
      */
     TapeUsedInBytes?: TapeUsage;
+    KMSKey?: KMSKey;
   }
   export type TapeArchiveStatus = string;
   export type TapeArchives = TapeArchive[];
@@ -1810,7 +1840,7 @@ declare namespace StorageGateway {
      */
     TapeARN?: TapeARN;
     /**
-     * The time when the point-in-time view of the virtual tape was replicated for later recovery. The string format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+     * The time when the point-in-time view of the virtual tape was replicated for later recovery. The default time stamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
      */
     TapeRecoveryPointTime?: Time;
     /**
@@ -1913,7 +1943,7 @@ declare namespace StorageGateway {
      */
     KMSEncrypted?: Boolean;
     /**
-     * The KMS key used for Amazon S3 server side encryption. This value can only be set when KmsEncrypted is true. Optional. 
+     * The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional. 
      */
     KMSKey?: KMSKey;
     /**
@@ -1921,7 +1951,7 @@ declare namespace StorageGateway {
      */
     NFSFileShareDefaults?: NFSFileShareDefaults;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+     * The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
      */
     DefaultStorageClass?: StorageClass;
     /**
