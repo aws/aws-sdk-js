@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "S3",
+  "description": "Adds support for S3 Select."
+}
