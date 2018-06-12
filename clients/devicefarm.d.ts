@@ -751,6 +751,10 @@ declare namespace DeviceFarm {
      * The billing method for the remote access session.
      */
     billingMethod?: BillingMethod;
+    /**
+     * An array of Amazon Resource Names (ARNs) included in the VPC endpoint configuration.
+     */
+    vpceConfigurationArns?: AmazonResourceNames;
   }
   export interface CreateRemoteAccessSessionRequest {
     /**

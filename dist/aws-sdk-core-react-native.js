@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.255.1',
+	  VERSION: '2.256.1',
 
 	  /**
 	   * @api private
@@ -851,9 +851,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  hoistPayloadMember: function hoistPayloadMember(resp) {
 	    var req = resp.request;
-	    var operation = req.operation;
-	    var output = req.service.api.operations[operation].output;
-	    if (output.payload) {
+	    var operationName = req.operation;
+	    var operation = req.service.api.operations[operationName];
+	    var output = operation.output;
+	    if (output.payload && !operation.hasEventOutput) {
 	      var payloadMember = output.members[output.payload];
 	      var responsePayload = resp.data[output.payload];
 	      if (payloadMember.type === 'structure') {
@@ -2258,6 +2259,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'isIdempotent', shape.idempotencyToken === true);
 	  property(this, 'isJsonValue', shape.jsonvalue === true);
 	  property(this, 'isSensitive', shape.sensitive === true || shape.prototype && shape.prototype.sensitive === true);
+	  property(this, 'isEventStream', Boolean(shape.eventstream), false);
+	  property(this, 'isEvent', Boolean(shape.event), false);
+	  property(this, 'isEventPayload', Boolean(shape.eventpayload), false);
+	  property(this, 'isEventHeader', Boolean(shape.eventheader), false);
 
 	  if (options.documentation) {
 	    property(this, 'documentation', shape.documentation);
@@ -2370,6 +2375,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	function StructureShape(shape, options) {
+	  var self = this;
 	  var requiredMap = null, firstInit = !this.isShape;
 
 	  CompositeShape.apply(this, arguments);
@@ -2389,6 +2395,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	    memoizedProperty(this, 'memberNames', function() {
 	      return shape.xmlOrder || Object.keys(shape.members);
 	    });
+
+	    if (shape.event) {
+	      memoizedProperty(this, 'eventPayloadMemberName', function() {
+	        var members = self.members;
+	        var memberNames = self.memberNames;
+	        // iterate over members to find ones that are event payloads
+	        for (var i = 0, iLen = memberNames.length; i < iLen; i++) {
+	          if (members[memberNames[i]].isEventPayload) {
+	            return memberNames[i];
+	          }
+	        }
+	      });
+
+	      memoizedProperty(this, 'eventHeaderMemberNames', function() {
+	        var members = self.members;
+	        var memberNames = self.memberNames;
+	        var eventHeaderMemberNames = [];
+	        // iterate over members to find ones that are event headers
+	        for (var i = 0, iLen = memberNames.length; i < iLen; i++) {
+	          if (members[memberNames[i]].isEventHeader) {
+	            eventHeaderMemberNames.push(memberNames[i]);
+	          }
+	        }
+	        return eventHeaderMemberNames;
+	      });
+	    }
 	  }
 
 	  if (shape.required) {
@@ -2822,11 +2854,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Rest.extractData(resp);
 
 	  var req = resp.request;
+	  var operation = req.service.api.operations[req.operation];
 	  var rules = req.service.api.operations[req.operation].output || {};
+	  var parser;
+	  var hasEventOutput = operation.hasEventOutput;
+
 	  if (rules.payload) {
 	    var payloadMember = rules.members[rules.payload];
 	    var body = resp.httpResponse.body;
-	    if (payloadMember.type === 'structure' || payloadMember.type === 'list') {
+	    if (payloadMember.isEventStream) {
+	      parser = new JsonParser();
+	      resp.data[payload] = util.createEventStream(
+	        AWS.HttpClient.streamsApiVersion === 2 ? resp.httpResponse.stream : body,
+	        parser,
+	        payloadMember
+	      );
+	    } else if (payloadMember.type === 'structure' || payloadMember.type === 'list') {
 	      var parser = new JsonParser();
 	      resp.data[rules.payload] = parser.parse(body, payloadMember);
 	    } else if (payloadMember.type === 'binary' || payloadMember.isStreaming) {
@@ -2928,10 +2971,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var operation = req.service.api.operations[req.operation];
 	  var output = operation.output;
 
+	  var hasEventOutput = operation.hasEventOutput;
+
 	  var payload = output.payload;
 	  if (payload) {
 	    var payloadMember = output.members[payload];
-	    if (payloadMember.type === 'structure') {
+	    if (payloadMember.isEventStream) {
+	      parser = new AWS.XML.Parser();
+	      resp.data[payload] = util.createEventStream(
+	        AWS.HttpClient.streamsApiVersion === 2 ? resp.httpResponse.stream : resp.httpResponse.body,
+	        parser,
+	        payloadMember
+	      );
+	    } else if (payloadMember.type === 'structure') {
 	      parser = new AWS.XML.Parser();
 	      resp.data[payload] = parser.parse(body.toString(), payloadMember);
 	    } else if (payloadMember.type === 'binary' || payloadMember.isStreaming) {
@@ -3322,6 +3374,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return idempotentMembers;
 	  });
 
+	  memoizedProperty(this, 'hasEventOutput', function() {
+	    var output = self.output;
+	    return hasEventStream(output);
+	  });
+	}
+
+	function hasEventStream(topLevelShape) {
+	  var members = topLevelShape.members;
+	  var payload = topLevelShape.payload;
+
+	  if (!topLevelShape.members) {
+	    return false;
+	  }
+
+	  if (payload) {
+	    var payloadMember = members[payload];
+	    return payloadMember.isEventStream;
+	  }
+
+	  // check if any member is an event stream
+	  for (var name in members) {
+	    if (!members.hasOwnProperty(name)) {
+	      if (members[name].isEventStream === true) {
+	        return true;
+	      }
+	    }
+	  }
+	  return false;
 	}
 
 	/**
@@ -5778,6 +5858,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      function callback(httpResp) {
 	        resp.httpResponse.stream = httpResp;
 	        var stream = resp.request.httpRequest.stream;
+	        var service = resp.request.service;
+	        var api = service.api;
+	        var operationName = resp.request.operation;
+	        var operation = api.operations[operationName] || {};
 
 	        httpResp.on('headers', function onHeaders(statusCode, headers, statusMessage) {
 	          resp.request.emit(
@@ -5787,6 +5871,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	          if (!resp.httpResponse.streaming) {
 	            if (AWS.HttpClient.streamsApiVersion === 2) { // streams2 API check
+	              // if we detect event streams, we're going to have to
+	              // return the stream immediately
+	              if (operation.hasEventOutput && service.successfulResponse(resp)) {
+	                // skip reading the IncomingStream
+	                resp.request.emit('httpDone');
+	                done();
+	                return;
+	              }
+
 	              httpResp.on('readable', function onReadable() {
 	                var data = httpResp.read();
 	                if (data !== null) {
@@ -5803,6 +5896,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        httpResp.on('end', function onEnd() {
 	          if (!stream || !stream.didCallback) {
+	            if (AWS.HttpClient.streamsApiVersion === 2 && (operation.hasEventOutput && service.successfulResponse(resp))) {
+	              // don't concatenate response chunks when streaming event stream data when response is successful
+	              return;
+	            }
 	            resp.request.emit('httpDone');
 	            done();
 	          }
