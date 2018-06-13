@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Core",
+  "description": "Updates SDK to attempt to determine the Content-Length of a payload when an operation uses the unsigned-body trait. Content-Length will still not be calculated for non-file streams. This will allow file streams to be passed to MediaStoreData.putObject."
+}
