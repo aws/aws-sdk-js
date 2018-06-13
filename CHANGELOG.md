@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.256.1-->
+<!--LATEST=2.257.1-->
 <!--ENTRYINSERT-->
+
+## 2.257.1
+* feature: SSM: Added support for new parameter, CloudWatchOutputConfig, for SendCommand API. Users can now have RunCommand output sent to CloudWatchLogs.
+* feature: ServiceCatalog: Introduced new length limitations for few of the product fields.
 
 ## 2.256.1
 * feature: DeviceFarm: Adding VPCEndpoint support for Remote access. Allows customers to be able to access their private endpoints/services running in their VPC during remote access.

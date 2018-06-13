@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.256.1
+// AWS SDK for JavaScript v2.257.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -116802,7 +116802,10 @@ module.exports={
           "StandardOutputContent": {},
           "StandardOutputUrl": {},
           "StandardErrorContent": {},
-          "StandardErrorUrl": {}
+          "StandardErrorUrl": {},
+          "CloudWatchOutputConfig": {
+            "shape": "Sbq"
+          }
         }
       }
     },
@@ -116871,10 +116874,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Sbz"
+            "shape": "Sc2"
           },
           "Aggregators": {
-            "shape": "Sc5"
+            "shape": "Sc8"
           },
           "ResultAttributes": {
             "type": "list",
@@ -116919,7 +116922,7 @@ module.exports={
                       "CaptureTime": {},
                       "ContentHash": {},
                       "Content": {
-                        "shape": "Scj"
+                        "shape": "Scm"
                       }
                     }
                   }
@@ -117163,7 +117166,7 @@ module.exports={
             "shape": "Sa5"
           },
           "TaskInvocationParameters": {
-            "shape": "Sdc"
+            "shape": "Sdf"
           },
           "Priority": {
             "type": "integer"
@@ -117197,7 +117200,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Parameter": {
-            "shape": "Sdu"
+            "shape": "Sdx"
           }
         }
       }
@@ -117266,7 +117269,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Parameters": {
-            "shape": "Se2"
+            "shape": "Se5"
           },
           "InvalidParameters": {
             "shape": "S4d"
@@ -117301,7 +117304,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Parameters": {
-            "shape": "Se2"
+            "shape": "Se5"
           },
           "NextToken": {}
         }
@@ -117489,7 +117492,7 @@ module.exports={
           },
           "NextToken": {},
           "Filters": {
-            "shape": "Sep"
+            "shape": "Ses"
           },
           "Details": {
             "type": "boolean"
@@ -117546,7 +117549,10 @@ module.exports={
                 },
                 "ServiceRole": {},
                 "NotificationConfig": {
-                  "shape": "Sde"
+                  "shape": "Sdh"
+                },
+                "CloudWatchOutputConfig": {
+                  "shape": "Sbq"
                 }
               }
             }
@@ -117566,7 +117572,7 @@ module.exports={
           },
           "NextToken": {},
           "Filters": {
-            "shape": "Sep"
+            "shape": "Ses"
           }
         }
       },
@@ -117576,7 +117582,7 @@ module.exports={
           "Commands": {
             "type": "list",
             "member": {
-              "shape": "Sf5"
+              "shape": "Sf8"
             }
           },
           "NextToken": {}
@@ -117588,7 +117594,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Sfb"
+            "shape": "Sff"
           },
           "ResourceIds": {
             "type": "list",
@@ -117620,10 +117626,10 @@ module.exports={
                 "Status": {},
                 "Severity": {},
                 "ExecutionSummary": {
-                  "shape": "Sft"
+                  "shape": "Sfx"
                 },
                 "Details": {
-                  "shape": "Sfw"
+                  "shape": "Sg0"
                 }
               }
             }
@@ -117637,7 +117643,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Sfb"
+            "shape": "Sff"
           },
           "NextToken": {},
           "MaxResults": {
@@ -117655,10 +117661,10 @@ module.exports={
               "members": {
                 "ComplianceType": {},
                 "CompliantSummary": {
-                  "shape": "Sg1"
+                  "shape": "Sg5"
                 },
                 "NonCompliantSummary": {
-                  "shape": "Sg4"
+                  "shape": "Sg8"
                 }
               }
             }
@@ -117781,7 +117787,7 @@ module.exports={
           "InstanceId": {},
           "TypeName": {},
           "Filters": {
-            "shape": "Sbz"
+            "shape": "Sc2"
           },
           "NextToken": {},
           "MaxResults": {
@@ -117797,7 +117803,7 @@ module.exports={
           "SchemaVersion": {},
           "CaptureTime": {},
           "Entries": {
-            "shape": "Scj"
+            "shape": "Scm"
           },
           "NextToken": {}
         }
@@ -117808,7 +117814,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Sfb"
+            "shape": "Sff"
           },
           "NextToken": {},
           "MaxResults": {
@@ -117830,13 +117836,13 @@ module.exports={
                 "Status": {},
                 "OverallSeverity": {},
                 "ExecutionSummary": {
-                  "shape": "Sft"
+                  "shape": "Sfx"
                 },
                 "CompliantSummary": {
-                  "shape": "Sg1"
+                  "shape": "Sg5"
                 },
                 "NonCompliantSummary": {
-                  "shape": "Sg4"
+                  "shape": "Sg8"
                 }
               }
             }
@@ -117944,7 +117950,7 @@ module.exports={
           "ResourceType": {},
           "ComplianceType": {},
           "ExecutionSummary": {
-            "shape": "Sft"
+            "shape": "Sfx"
           },
           "Items": {
             "type": "list",
@@ -117960,7 +117966,7 @@ module.exports={
                 "Severity": {},
                 "Status": {},
                 "Details": {
-                  "shape": "Sfw"
+                  "shape": "Sg0"
                 }
               }
             }
@@ -117997,7 +118003,7 @@ module.exports={
                 "CaptureTime": {},
                 "ContentHash": {},
                 "Content": {
-                  "shape": "Scj"
+                  "shape": "Scm"
                 },
                 "Context": {
                   "type": "map",
@@ -118139,7 +118145,7 @@ module.exports={
             "shape": "Sa5"
           },
           "TaskInvocationParameters": {
-            "shape": "Sdc"
+            "shape": "Sdf"
           },
           "Priority": {
             "type": "integer"
@@ -118238,7 +118244,10 @@ module.exports={
           "MaxErrors": {},
           "ServiceRoleArn": {},
           "NotificationConfig": {
-            "shape": "Sde"
+            "shape": "Sdh"
+          },
+          "CloudWatchOutputConfig": {
+            "shape": "Sbq"
           }
         }
       },
@@ -118246,7 +118255,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Command": {
-            "shape": "Sf5"
+            "shape": "Sf8"
           }
         }
       }
@@ -118519,7 +118528,7 @@ module.exports={
             "shape": "Sa5"
           },
           "TaskInvocationParameters": {
-            "shape": "Sdc"
+            "shape": "Sdf"
           },
           "Priority": {
             "type": "integer"
@@ -118552,7 +118561,7 @@ module.exports={
             "shape": "Sa5"
           },
           "TaskInvocationParameters": {
-            "shape": "Sdc"
+            "shape": "Sdf"
           },
           "Priority": {
             "type": "integer"
@@ -119207,7 +119216,16 @@ module.exports={
         }
       }
     },
-    "Sbz": {
+    "Sbq": {
+      "type": "structure",
+      "members": {
+        "CloudWatchLogGroupName": {},
+        "CloudWatchOutputEnabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Sc2": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -119225,19 +119243,19 @@ module.exports={
         }
       }
     },
-    "Sc5": {
+    "Sc8": {
       "type": "list",
       "member": {
         "type": "structure",
         "members": {
           "Expression": {},
           "Aggregators": {
-            "shape": "Sc5"
+            "shape": "Sc8"
           }
         }
       }
     },
-    "Scj": {
+    "Scm": {
       "type": "list",
       "member": {
         "type": "map",
@@ -119245,7 +119263,7 @@ module.exports={
         "value": {}
       }
     },
-    "Sdc": {
+    "Sdf": {
       "type": "structure",
       "members": {
         "RunCommand": {
@@ -119255,7 +119273,7 @@ module.exports={
             "DocumentHash": {},
             "DocumentHashType": {},
             "NotificationConfig": {
-              "shape": "Sde"
+              "shape": "Sdh"
             },
             "OutputS3BucketName": {},
             "OutputS3KeyPrefix": {},
@@ -119300,7 +119318,7 @@ module.exports={
         }
       }
     },
-    "Sde": {
+    "Sdh": {
       "type": "structure",
       "members": {
         "NotificationArn": {},
@@ -119311,7 +119329,7 @@ module.exports={
         "NotificationType": {}
       }
     },
-    "Sdu": {
+    "Sdx": {
       "type": "structure",
       "members": {
         "Name": {},
@@ -119322,13 +119340,13 @@ module.exports={
         }
       }
     },
-    "Se2": {
+    "Se5": {
       "type": "list",
       "member": {
-        "shape": "Sdu"
+        "shape": "Sdx"
       }
     },
-    "Sep": {
+    "Ses": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -119342,7 +119360,7 @@ module.exports={
         }
       }
     },
-    "Sf5": {
+    "Sf8": {
       "type": "structure",
       "members": {
         "CommandId": {},
@@ -119380,13 +119398,19 @@ module.exports={
         "ErrorCount": {
           "type": "integer"
         },
+        "DeliveryTimedOutCount": {
+          "type": "integer"
+        },
         "ServiceRole": {},
         "NotificationConfig": {
-          "shape": "Sde"
+          "shape": "Sdh"
+        },
+        "CloudWatchOutputConfig": {
+          "shape": "Sbq"
         }
       }
     },
-    "Sfb": {
+    "Sff": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -119400,7 +119424,7 @@ module.exports={
         }
       }
     },
-    "Sft": {
+    "Sfx": {
       "type": "structure",
       "required": [
         "ExecutionTime"
@@ -119413,23 +119437,23 @@ module.exports={
         "ExecutionType": {}
       }
     },
-    "Sfw": {
+    "Sg0": {
       "type": "map",
       "key": {},
       "value": {}
     },
-    "Sg1": {
+    "Sg5": {
       "type": "structure",
       "members": {
         "CompliantCount": {
           "type": "integer"
         },
         "SeveritySummary": {
-          "shape": "Sg3"
+          "shape": "Sg7"
         }
       }
     },
-    "Sg3": {
+    "Sg7": {
       "type": "structure",
       "members": {
         "CriticalCount": {
@@ -119452,14 +119476,14 @@ module.exports={
         }
       }
     },
-    "Sg4": {
+    "Sg8": {
       "type": "structure",
       "members": {
         "NonCompliantCount": {
           "type": "integer"
         },
         "SeveritySummary": {
-          "shape": "Sg3"
+          "shape": "Sg7"
         }
       }
     }
@@ -128990,7 +129014,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.256.1',
+  VERSION: '2.257.1',
 
   /**
    * @api private
@@ -148103,7 +148127,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":344,"./lib/rng":345}],348:[function(require,module,exports){
-// AWS SDK for JavaScript v2.256.1
+// AWS SDK for JavaScript v2.257.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
