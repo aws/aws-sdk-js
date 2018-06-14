@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.257.1-->
+<!--LATEST=2.258.1-->
 <!--ENTRYINSERT-->
+
+## 2.258.1
+* bugfix: Core: Updates SDK to attempt to determine the Content-Length of a payload when an operation uses the unsigned-body trait. Content-Length will still not be calculated for non-file streams. This will allow file streams to be passed to MediaStoreData.putObject.
+* feature: APIGateway: Support for PRIVATE endpoint configuration type
+* feature: DynamoDB: Added two new fields SSEType and KMSMasterKeyArn to SSEDescription block in describe-table output.
+* feature: IoTAnalytics: With this release, AWS IoT Analytics allows you to tag resources. Tags are metadata that you can create and use to manage your IoT Analytics resources. For more information about tagging, see AWS Tagging Strategies. For technical documentation, look for the tagging operations in the AWS IoT Analytics API reference or User Guide.
 
 ## 2.257.1
 * feature: SSM: Added support for new parameter, CloudWatchOutputConfig, for SendCommand API. Users can now have RunCommand output sent to CloudWatchLogs.

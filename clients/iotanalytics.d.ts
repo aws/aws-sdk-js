@@ -188,11 +188,19 @@ declare class IoTAnalytics extends Service {
    */
   listPipelines(callback?: (err: AWSError, data: IoTAnalytics.Types.ListPipelinesResponse) => void): Request<IoTAnalytics.Types.ListPipelinesResponse, AWSError>;
   /**
-   * Sets or updates the AWS IoT Analytics logging options.
+   * Lists the tags (metadata) which you have assigned to the resource.
+   */
+  listTagsForResource(params: IoTAnalytics.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListTagsForResourceResponse) => void): Request<IoTAnalytics.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags (metadata) which you have assigned to the resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: IoTAnalytics.Types.ListTagsForResourceResponse) => void): Request<IoTAnalytics.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Sets or updates the AWS IoT Analytics logging options. Note that if you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to 5 minutes for that change to take effect. 
    */
   putLoggingOptions(params: IoTAnalytics.Types.PutLoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets or updates the AWS IoT Analytics logging options.
+   * Sets or updates the AWS IoT Analytics logging options. Note that if you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to 5 minutes for that change to take effect. 
    */
   putLoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -219,6 +227,22 @@ declare class IoTAnalytics extends Service {
    * Starts the reprocessing of raw message data through the pipeline.
    */
   startPipelineReprocessing(callback?: (err: AWSError, data: IoTAnalytics.Types.StartPipelineReprocessingResponse) => void): Request<IoTAnalytics.Types.StartPipelineReprocessingResponse, AWSError>;
+  /**
+   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   */
+  tagResource(params: IoTAnalytics.Types.TagResourceRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.TagResourceResponse) => void): Request<IoTAnalytics.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: IoTAnalytics.Types.TagResourceResponse) => void): Request<IoTAnalytics.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes the given tags (metadata) from the resource.
+   */
+  untagResource(params: IoTAnalytics.Types.UntagResourceRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.UntagResourceResponse) => void): Request<IoTAnalytics.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the given tags (metadata) from the resource.
+   */
+  untagResource(callback?: (err: AWSError, data: IoTAnalytics.Types.UntagResourceResponse) => void): Request<IoTAnalytics.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates the settings of a channel.
    */
@@ -386,6 +410,10 @@ declare namespace IoTAnalytics {
      * How long, in days, message data is kept for the channel.
      */
     retentionPeriod?: RetentionPeriod;
+    /**
+     * Metadata which can be used to manage the channel.
+     */
+    tags?: TagList;
   }
   export interface CreateChannelResponse {
     /**
@@ -420,6 +448,10 @@ declare namespace IoTAnalytics {
      * A list of triggers. A trigger causes data set content to be populated at a specified time or time interval. The list of triggers can be empty or contain up to five DataSetTrigger objects.
      */
     triggers?: DatasetTriggers;
+    /**
+     * Metadata which can be used to manage the data set.
+     */
+    tags?: TagList;
   }
   export interface CreateDatasetResponse {
     /**
@@ -440,6 +472,10 @@ declare namespace IoTAnalytics {
      * How long, in days, message data is kept for the data store.
      */
     retentionPeriod?: RetentionPeriod;
+    /**
+     * Metadata which can be used to manage the data store.
+     */
+    tags?: TagList;
   }
   export interface CreateDatastoreResponse {
     /**
@@ -464,6 +500,10 @@ declare namespace IoTAnalytics {
      * A list of pipeline activities. The list can be 1-25 PipelineActivity objects. Activities perform transformations on your messages, such as removing, renaming, or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.
      */
     pipelineActivities: PipelineActivities;
+    /**
+     * Metadata which can be used to manage the pipeline.
+     */
+    tags?: TagList;
   }
   export interface CreatePipelineResponse {
     /**
@@ -903,6 +943,18 @@ declare namespace IoTAnalytics {
      */
     nextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource whose tags you want to list.
+     */
+    resourceArn: ResourceArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags (metadata) which you have assigned to the resource.
+     */
+    tags?: TagList;
+  }
   export type LogResult = string;
   export type LoggingEnabled = boolean;
   export type LoggingLevel = "ERROR"|string;
@@ -943,7 +995,7 @@ declare namespace IoTAnalytics {
   export type MaxResults = number;
   export interface Message {
     /**
-     * The ID you wish to assign to the message.
+     * The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
      */
     messageId: MessageId;
     /**
@@ -1085,6 +1137,7 @@ declare namespace IoTAnalytics {
      */
     creationTime?: Timestamp;
   }
+  export type ResourceArn = string;
   export interface RetentionPeriod {
     /**
      * If true, message data is kept indefinitely.
@@ -1190,8 +1243,46 @@ declare namespace IoTAnalytics {
     reprocessingId?: ReprocessingId;
   }
   export type StartTime = Date;
+  export interface Tag {
+    /**
+     * The tag's key.
+     */
+    key: TagKey;
+    /**
+     * The tag's value.
+     */
+    value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the resource whose tags will be modified.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The new or modified tags for the resource.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
   export type UnlimitedRetentionPeriod = boolean;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource whose tags will be removed.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The keys of those tags which will be removed.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateChannelRequest {
     /**
      * The name of the channel to be updated.

@@ -542,7 +542,7 @@ export namespace DocumentClient {
   }
   export interface DescribeContinuousBackupsOutput {
     /**
-     *  ContinuousBackupsDescription can be one of the following : ENABLED, DISABLED. 
+     * Represents the continuous backups and point in time recovery settings on the table.
      */
     ContinuousBackupsDescription?: ContinuousBackupsDescription;
   }
@@ -838,6 +838,7 @@ export namespace DocumentClient {
   export type ItemCollectionSizeEstimateRange = ItemCollectionSizeEstimateBound[];
   export type ItemCount = number;
   export type ItemList = AttributeMap[];
+  export type KMSMasterKeyArn = string;
   export type Key = {[key: string]: AttributeValue};
   export type KeyConditions = {[key: string]: Condition};
   export type KeyExpression = string;
@@ -896,7 +897,7 @@ export namespace DocumentClient {
      */
     TimeRangeUpperBound?: TimeRangeUpperBound;
     /**
-     *  LastEvaluatedBackupARN returned by the previous ListBackups call. 
+     *  LastEvaluatedBackupArn is the ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the ExclusiveStartBackupArn of a new ListBackups operation in order to fetch the next page of results. 
      */
     ExclusiveStartBackupArn?: BackupArn;
   }
@@ -906,7 +907,7 @@ export namespace DocumentClient {
      */
     BackupSummaries?: BackupSummaries;
     /**
-     * Last evaluated BackupARN.
+     *  The ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the ExclusiveStartBackupArn of a new ListBackups operation in order to fetch the next page of results.   If LastEvaluatedBackupArn is empty, then the last page of results has been processed and there are no more results to be retrieved.   If LastEvaluatedBackupArn is not empty, this may or may not indicate there is more data to be returned. All results are guaranteed to have been returned if and only if no value for LastEvaluatedBackupArn is returned. 
      */
     LastEvaluatedBackupArn?: BackupArn;
   }
@@ -1419,6 +1420,14 @@ export namespace DocumentClient {
      * The current state of server-side encryption:    ENABLING - Server-side encryption is being enabled.    ENABLED - Server-side encryption is enabled.    DISABLING - Server-side encryption is being disabled.    DISABLED - Server-side encryption is disabled.  
      */
     Status?: SSEStatus;
+    /**
+     * Server-side encryption type:    AES256 - Server-side encryption which uses the AES256 algorithm.    KMS - Server-side encryption which uses AWS Key Management Service.  
+     */
+    SSEType?: SSEType;
+    /**
+     * The KMS master key ARN used for the KMS encryption.
+     */
+    KMSMasterKeyArn?: KMSMasterKeyArn;
   }
   export type SSEEnabled = boolean;
   export interface SSESpecification {
@@ -1428,6 +1437,7 @@ export namespace DocumentClient {
     Enabled: SSEEnabled;
   }
   export type SSEStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
+  export type SSEType = "AES256"|"KMS"|string;
   export type ScalarAttributeType = "S"|"N"|"B"|string;
   export interface ScanInput {
     /**

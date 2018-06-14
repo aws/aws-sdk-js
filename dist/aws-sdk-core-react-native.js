@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.257.1',
+	  VERSION: '2.258.1',
 
 	  /**
 	   * @api private
@@ -5773,10 +5773,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
 	      var authtype = getOperationAuthtype(req);
-	      if (req.httpRequest.headers['Content-Length'] === undefined
-	          && authtype.indexOf('unsigned-body') === -1) {
-	        var length = AWS.util.string.byteLength(req.httpRequest.body);
-	        req.httpRequest.headers['Content-Length'] = length;
+	      if (req.httpRequest.headers['Content-Length'] === undefined) {
+	        try {
+	          var length = AWS.util.string.byteLength(req.httpRequest.body);
+	          req.httpRequest.headers['Content-Length'] = length;
+	        } catch (err) {
+	          if (authtype.indexOf('unsigned-body') === -1) {
+	            throw err;
+	          } else {
+	            // Body isn't signed and may not need content length (lex)
+	            return;
+	          }
+	        }
 	      }
 	    });
 

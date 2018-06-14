@@ -389,6 +389,24 @@
       ],
       "documentation":"<p>Retrieves a list of pipelines.</p>"
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"GET",
+        "requestUri":"/tags"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Lists the tags (metadata) which you have assigned to the resource.</p>"
+    },
     "PutLoggingOptions":{
       "name":"PutLoggingOptions",
       "http":{
@@ -402,7 +420,7 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"ThrottlingException"}
       ],
-      "documentation":"<p>Sets or updates the AWS IoT Analytics logging options.</p>"
+      "documentation":"<p>Sets or updates the AWS IoT Analytics logging options.</p> <p>Note that if you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to 5 minutes for that change to take effect. </p>"
     },
     "RunPipelineActivity":{
       "name":"RunPipelineActivity",
@@ -454,6 +472,44 @@
         {"shape":"ThrottlingException"}
       ],
       "documentation":"<p>Starts the reprocessing of raw message data through the pipeline.</p>"
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/tags",
+        "responseCode":204
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "output":{"shape":"TagResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.</p>"
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/tags",
+        "responseCode":204
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "output":{"shape":"UntagResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Removes the given tags (metadata) from the resource.</p>"
     },
     "UpdateChannel":{
       "name":"UpdateChannel",
@@ -750,6 +806,10 @@
         "retentionPeriod":{
           "shape":"RetentionPeriod",
           "documentation":"<p>How long, in days, message data is kept for the channel.</p>"
+        },
+        "tags":{
+          "shape":"TagList",
+          "documentation":"<p>Metadata which can be used to manage the channel.</p>"
         }
       }
     },
@@ -800,6 +860,10 @@
         "triggers":{
           "shape":"DatasetTriggers",
           "documentation":"<p>A list of triggers. A trigger causes data set content to be populated at a specified time or time interval. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.</p>"
+        },
+        "tags":{
+          "shape":"TagList",
+          "documentation":"<p>Metadata which can be used to manage the data set.</p>"
         }
       }
     },
@@ -827,6 +891,10 @@
         "retentionPeriod":{
           "shape":"RetentionPeriod",
           "documentation":"<p>How long, in days, message data is kept for the data store.</p>"
+        },
+        "tags":{
+          "shape":"TagList",
+          "documentation":"<p>Metadata which can be used to manage the data store.</p>"
         }
       }
     },
@@ -861,6 +929,10 @@
         "pipelineActivities":{
           "shape":"PipelineActivities",
           "documentation":"<p>A list of pipeline activities.</p> <p>The list can be 1-25 <b>PipelineActivity</b> objects. Activities perform transformations on your messages, such as removing, renaming, or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p>"
+        },
+        "tags":{
+          "shape":"TagList",
+          "documentation":"<p>Metadata which can be used to manage the pipeline.</p>"
         }
       }
     },
@@ -1599,6 +1671,27 @@
         }
       }
     },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["resourceArn"],
+      "members":{
+        "resourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The ARN of the resource whose tags you want to list.</p>",
+          "location":"querystring",
+          "locationName":"resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "tags":{
+          "shape":"TagList",
+          "documentation":"<p>The tags (metadata) which you have assigned to the resource.</p>"
+        }
+      }
+    },
     "LogResult":{"type":"string"},
     "LoggingEnabled":{"type":"boolean"},
     "LoggingLevel":{
@@ -1679,7 +1772,7 @@
       "members":{
         "messageId":{
           "shape":"MessageId",
-          "documentation":"<p>The ID you wish to assign to the message.</p>"
+          "documentation":"<p>The ID you wish to assign to the message. Each \"messageId\" must be unique within each batch sent.</p>"
         },
         "payload":{
           "shape":"MessagePayload",
@@ -1903,6 +1996,11 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
+    "ResourceArn":{
+      "type":"string",
+      "max":2048,
+      "min":20
+    },
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
@@ -2089,6 +2187,70 @@
       }
     },
     "StartTime":{"type":"timestamp"},
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "key",
+        "value"
+      ],
+      "members":{
+        "key":{
+          "shape":"TagKey",
+          "documentation":"<p>The tag's key.</p>"
+        },
+        "value":{
+          "shape":"TagValue",
+          "documentation":"<p>The tag's value.</p>"
+        }
+      },
+      "documentation":"<p>A set of key/value pairs which are used to manage the resource.</p>"
+    },
+    "TagKey":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"},
+      "max":50,
+      "min":1
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"},
+      "max":50,
+      "min":1
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "resourceArn",
+        "tags"
+      ],
+      "members":{
+        "resourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The ARN of the resource whose tags will be modified.</p>",
+          "location":"querystring",
+          "locationName":"resourceArn"
+        },
+        "tags":{
+          "shape":"TagList",
+          "documentation":"<p>The new or modified tags for the resource.</p>"
+        }
+      }
+    },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "ThrottlingException":{
       "type":"structure",
       "members":{
@@ -2100,6 +2262,32 @@
     },
     "Timestamp":{"type":"timestamp"},
     "UnlimitedRetentionPeriod":{"type":"boolean"},
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members":{
+        "resourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The ARN of the resource whose tags will be removed.</p>",
+          "location":"querystring",
+          "locationName":"resourceArn"
+        },
+        "tagKeys":{
+          "shape":"TagKeyList",
+          "documentation":"<p>The keys of those tags which will be removed.</p>",
+          "location":"querystring",
+          "locationName":"tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "UpdateChannelRequest":{
       "type":"structure",
       "required":["channelName"],
@@ -2178,5 +2366,5 @@
     "resourceArn":{"type":"string"},
     "resourceId":{"type":"string"}
   },
-  "documentation":"<p>AWS IoT Analytics provides advanced data analysis for AWS IoT. It allows you to collect large amounts of device data, process messages, store them, and then query the data and run sophisticated analytics to make accurate decisions in your IoT applications and machine learning use cases. AWS IoT Analytics enables advanced data exploration through integration with Jupyter Notebooks and data visualization through integration with Amazon QuickSight.</p> <p>Traditional analytics and business intelligence tools are designed to process structured data. IoT data often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result, the data from these devices can have significant gaps, corrupted messages, and false readings that must be cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data from external sources. </p> <p>AWS IoT Analytics automates each of the steps required to analyze data from IoT devices. AWS IoT Analytics filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You can set up the service to collect only the data you need from your devices, apply mathematical transforms to process the data, and enrich the data with device-specific metadata such as device type and location before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, or perform more complex analytics and machine learning inference. AWS IoT Analytics includes models for common IoT use cases so you can answer questions like which devices are about to fail or which customers are at risk of abandoning their wearable devices.</p>"
+  "documentation":"<p>AWS IoT Analytics allows you to collect large amounts of device data, process messages, and store them. You can then query the data and run sophisticated analytics on it. AWS IoT Analytics enables advanced data exploration through integration with Jupyter Notebooks and data visualization through integration with Amazon QuickSight.</p> <p>Traditional analytics and business intelligence tools are designed to process structured data. IoT data often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result the data from these devices can have significant gaps, corrupted messages, and false readings that must be cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data from external sources. </p> <p>AWS IoT Analytics automates the steps required to analyze data from IoT devices. AWS IoT Analytics filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You can set up the service to collect only the data you need from your devices, apply mathematical transforms to process the data, and enrich the data with device-specific metadata such as device type and location before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, or perform more complex analytics and machine learning inference. AWS IoT Analytics includes pre-built models for common IoT use cases so you can answer questions like which devices are about to fail or which customers are at risk of abandoning their wearable devices.</p>"
 }

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Core",
+        "description": "Updates SDK to attempt to determine the Content-Length of a payload when an operation uses the unsigned-body trait. Content-Length will still not be calculated for non-file streams. This will allow file streams to be passed to MediaStoreData.putObject."
+    },
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "Support for PRIVATE endpoint configuration type"
+    },
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "Added two new fields SSEType and KMSMasterKeyArn to SSEDescription block in describe-table output."
+    },
+    {
+        "type": "feature",
+        "category": "IoTAnalytics",
+        "description": "With this release, AWS IoT Analytics allows you to tag resources. Tags are metadata that you can create and use to manage your IoT Analytics resources. For more information about tagging, see AWS Tagging Strategies. For technical documentation, look for the tagging operations in the AWS IoT Analytics API reference or User Guide."
+    }
+]

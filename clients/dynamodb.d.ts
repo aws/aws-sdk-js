@@ -38,11 +38,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   createBackup(callback?: (err: AWSError, data: DynamoDB.Types.CreateBackupOutput) => void): Request<DynamoDB.Types.CreateBackupOutput, AWSError>;
   /**
-   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions.   Tables can only be added as the replicas of a global table group under the following conditions:     The tables must have the same name.     The tables must contain no items.     The tables must have the same hash key and sort key (if present).     The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES).     The tables must have same provisioned and maximum write capacity units.     If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
+   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions.  If you want to add a new replica table to a global table, each of the following conditions must be true:   The table must have the same primary key as all of the other replicas.   The table must have the same name as all of the other replicas.   The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.   None of the replica tables in the global table can contain any data.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).      Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes.   If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table.  
    */
   createGlobalTable(params: DynamoDB.Types.CreateGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.CreateGlobalTableOutput) => void): Request<DynamoDB.Types.CreateGlobalTableOutput, AWSError>;
   /**
-   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions.   Tables can only be added as the replicas of a global table group under the following conditions:     The tables must have the same name.     The tables must contain no items.     The tables must have the same hash key and sort key (if present).     The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES).     The tables must have same provisioned and maximum write capacity units.     If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
+   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions.  If you want to add a new replica table to a global table, each of the following conditions must be true:   The table must have the same primary key as all of the other replicas.   The table must have the same name as all of the other replicas.   The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.   None of the replica tables in the global table can contain any data.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).      Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes.   If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table.  
    */
   createGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.CreateGlobalTableOutput) => void): Request<DynamoDB.Types.CreateGlobalTableOutput, AWSError>;
   /**
@@ -766,7 +766,7 @@ declare namespace DynamoDB {
   }
   export interface DescribeContinuousBackupsOutput {
     /**
-     *  ContinuousBackupsDescription can be one of the following : ENABLED, DISABLED. 
+     * Represents the continuous backups and point in time recovery settings on the table.
      */
     ContinuousBackupsDescription?: ContinuousBackupsDescription;
   }
@@ -1062,6 +1062,7 @@ declare namespace DynamoDB {
   export type ItemCollectionSizeEstimateRange = ItemCollectionSizeEstimateBound[];
   export type ItemCount = number;
   export type ItemList = AttributeMap[];
+  export type KMSMasterKeyArn = string;
   export type Key = {[key: string]: AttributeValue};
   export type KeyConditions = {[key: string]: Condition};
   export type KeyExpression = string;
@@ -1120,7 +1121,7 @@ declare namespace DynamoDB {
      */
     TimeRangeUpperBound?: TimeRangeUpperBound;
     /**
-     *  LastEvaluatedBackupARN returned by the previous ListBackups call. 
+     *  LastEvaluatedBackupArn is the ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the ExclusiveStartBackupArn of a new ListBackups operation in order to fetch the next page of results. 
      */
     ExclusiveStartBackupArn?: BackupArn;
   }
@@ -1130,7 +1131,7 @@ declare namespace DynamoDB {
      */
     BackupSummaries?: BackupSummaries;
     /**
-     * Last evaluated BackupARN.
+     *  The ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the ExclusiveStartBackupArn of a new ListBackups operation in order to fetch the next page of results.   If LastEvaluatedBackupArn is empty, then the last page of results has been processed and there are no more results to be retrieved.   If LastEvaluatedBackupArn is not empty, this may or may not indicate there is more data to be returned. All results are guaranteed to have been returned if and only if no value for LastEvaluatedBackupArn is returned. 
      */
     LastEvaluatedBackupArn?: BackupArn;
   }
@@ -1643,6 +1644,14 @@ declare namespace DynamoDB {
      * The current state of server-side encryption:    ENABLING - Server-side encryption is being enabled.    ENABLED - Server-side encryption is enabled.    DISABLING - Server-side encryption is being disabled.    DISABLED - Server-side encryption is disabled.  
      */
     Status?: SSEStatus;
+    /**
+     * Server-side encryption type:    AES256 - Server-side encryption which uses the AES256 algorithm.    KMS - Server-side encryption which uses AWS Key Management Service.  
+     */
+    SSEType?: SSEType;
+    /**
+     * The KMS master key ARN used for the KMS encryption.
+     */
+    KMSMasterKeyArn?: KMSMasterKeyArn;
   }
   export type SSEEnabled = boolean;
   export interface SSESpecification {
@@ -1652,6 +1661,7 @@ declare namespace DynamoDB {
     Enabled: SSEEnabled;
   }
   export type SSEStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
+  export type SSEType = "AES256"|"KMS"|string;
   export type ScalarAttributeType = "S"|"N"|"B"|string;
   export interface ScanInput {
     /**
