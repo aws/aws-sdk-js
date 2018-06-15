@@ -267,6 +267,10 @@ declare namespace MediaConvert {
     AudioTypeControl?: AudioTypeControl;
     CodecSettings: AudioCodecSettings;
     /**
+     * Specify the language for this audio output track, using the ISO 639-2 or ISO 639-3 three-letter language code. The language specified will be used when 'Follow Input Language Code' is not selected or when 'Follow Input Language Code' is selected but there is no ISO 639 language code specified by the input.
+     */
+    CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
+    /**
      * Indicates the language of the audio output track. The ISO 639 language specified in the 'Language Code' drop down will be used when 'Follow Input Language Code' is not selected or when 'Follow Input Language Code' is selected but there is no ISO 639 language code specified by the input.
      */
     LanguageCode?: LanguageCode;
@@ -300,6 +304,10 @@ declare namespace MediaConvert {
     TargetLkfs?: __doubleMinNegative59Max0;
   }
   export interface AudioSelector {
+    /**
+     * Selects a specific language code from within an audio source, using the ISO 639-2 or ISO 639-3 three-letter language code
+     */
+    CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
     DefaultSelection?: AudioDefaultSelection;
     /**
      * Specifies audio data from an external file source.
@@ -414,6 +422,10 @@ All burn-in and DVB-Sub font settings must match.
      * Specifies which "Caption Selector":#inputs-caption_selector to use from each input when generating captions. The name should be of the format "Caption Selector ", which denotes that the Nth Caption Selector will be used from each input.
      */
     CaptionSelectorName: __stringMin1;
+    /**
+     * Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code
+     */
+    CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
     DestinationSettings: CaptionDestinationSettings;
     /**
      * Indicates the language of the caption output track.
@@ -425,6 +437,10 @@ All burn-in and DVB-Sub font settings must match.
     LanguageDescription?: __string;
   }
   export interface CaptionDescriptionPreset {
+    /**
+     * Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code
+     */
+    CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
     DestinationSettings: CaptionDestinationSettings;
     /**
      * Indicates the language of the caption output track.
@@ -445,6 +461,10 @@ All burn-in and DVB-Sub font settings must match.
   }
   export type CaptionDestinationType = "BURN_IN"|"DVB_SUB"|"EMBEDDED"|"SCC"|"SRT"|"TELETEXT"|"TTML"|"WEBVTT"|string;
   export interface CaptionSelector {
+    /**
+     * The specific language to extract from source, using the ISO 639-2 or ISO 639-3 three-letter language code. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.
+     */
+    CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
     /**
      * The specific language to extract from source. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.
      */
@@ -475,7 +495,7 @@ All burn-in and DVB-Sub font settings must match.
     ConstantInitializationVector?: __stringMin32Max32Pattern09aFAF32;
     EncryptionMethod?: CmafEncryptionType;
     InitializationVectorInManifest?: CmafInitializationVectorInManifest;
-    StaticKeyProvider: StaticKeyProvider;
+    StaticKeyProvider?: StaticKeyProvider;
     Type: CmafKeyProviderType;
   }
   export type CmafEncryptionType = "SAMPLE_AES"|string;
@@ -1242,6 +1262,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * Caption channel.
      */
     CaptionChannel?: __integerMinNegative2147483648Max2147483647;
+    /**
+     * Specify the language for this caption channel, using the ISO 639-2 or ISO 639-3 three-letter language code
+     */
+    CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
     LanguageCode?: LanguageCode;
     /**
      * Caption language description.
@@ -2360,6 +2384,9 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type TimecodeSource = "EMBEDDED"|"ZEROBASED"|"SPECIFIEDSTART"|string;
   export type TimedMetadata = "PASSTHROUGH"|"NONE"|string;
   export interface TimedMetadataInsertion {
+    /**
+     * Id3Insertions contains the array of Id3Insertion instances.
+     */
     Id3Insertions: __listOfId3Insertion;
   }
   export interface Timing {
@@ -2653,6 +2680,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __stringMin1Max256 = string;
   export type __stringMin32Max32Pattern09aFAF32 = string;
   export type __stringMin3Max3Pattern1809aFAF09aEAE = string;
+  export type __stringMin3Max3PatternAZaZ3 = string;
   export type __stringPattern = string;
   export type __stringPattern010920405090509092 = string;
   export type __stringPattern01D20305D205D = string;

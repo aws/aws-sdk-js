@@ -1165,6 +1165,11 @@
           "shape": "AudioCodecSettings",
           "locationName": "codecSettings"
         },
+        "CustomLanguageCode": {
+          "shape": "__stringMin3Max3PatternAZaZ3",
+          "locationName": "customLanguageCode",
+          "documentation": "Specify the language for this audio output track, using the ISO 639-2 or ISO 639-3 three-letter language code. The language specified will be used when 'Follow Input Language Code' is not selected or when 'Follow Input Language Code' is selected but there is no ISO 639 language code specified by the input."
+        },
         "LanguageCode": {
           "shape": "LanguageCode",
           "locationName": "languageCode",
@@ -1265,6 +1270,11 @@
     "AudioSelector": {
       "type": "structure",
       "members": {
+        "CustomLanguageCode": {
+          "shape": "__stringMin3Max3PatternAZaZ3",
+          "locationName": "customLanguageCode",
+          "documentation": "Selects a specific language code from within an audio source, using the ISO 639-2 or ISO 639-3 three-letter language code"
+        },
         "DefaultSelection": {
           "shape": "AudioDefaultSelection",
           "locationName": "defaultSelection"
@@ -1538,6 +1548,11 @@
           "locationName": "captionSelectorName",
           "documentation": "Specifies which \"Caption Selector\":#inputs-caption_selector to use from each input when generating captions. The name should be of the format \"Caption Selector <N>\", which denotes that the Nth Caption Selector will be used from each input."
         },
+        "CustomLanguageCode": {
+          "shape": "__stringMin3Max3PatternAZaZ3",
+          "locationName": "customLanguageCode",
+          "documentation": "Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code"
+        },
         "DestinationSettings": {
           "shape": "CaptionDestinationSettings",
           "locationName": "destinationSettings"
@@ -1562,6 +1577,11 @@
     "CaptionDescriptionPreset": {
       "type": "structure",
       "members": {
+        "CustomLanguageCode": {
+          "shape": "__stringMin3Max3PatternAZaZ3",
+          "locationName": "customLanguageCode",
+          "documentation": "Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code"
+        },
         "DestinationSettings": {
           "shape": "CaptionDestinationSettings",
           "locationName": "destinationSettings"
@@ -1632,6 +1652,11 @@
     "CaptionSelector": {
       "type": "structure",
       "members": {
+        "CustomLanguageCode": {
+          "shape": "__stringMin3Max3PatternAZaZ3",
+          "locationName": "customLanguageCode",
+          "documentation": "The specific language to extract from source, using the ISO 639-2 or ISO 639-3 three-letter language code. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions."
+        },
         "LanguageCode": {
           "shape": "LanguageCode",
           "locationName": "languageCode",
@@ -1752,8 +1777,7 @@
       },
       "documentation": "Settings for CMAF encryption",
       "required": [
-        "Type",
-        "StaticKeyProvider"
+        "Type"
       ]
     },
     "CmafEncryptionType": {
@@ -1829,7 +1853,7 @@
           "locationName": "writeHlsManifest"
         }
       },
-      "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS.",
+      "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a single video, audio, or caption output.",
       "required": [
         "FragmentLength",
         "SegmentLength"
@@ -3938,6 +3962,11 @@
           "locationName": "captionChannel",
           "documentation": "Caption channel."
         },
+        "CustomLanguageCode": {
+          "shape": "__stringMin3Max3PatternAZaZ3",
+          "locationName": "customLanguageCode",
+          "documentation": "Specify the language for this caption channel, using the ISO 639-2 or ISO 639-3 three-letter language code"
+        },
         "LanguageCode": {
           "shape": "LanguageCode",
           "locationName": "languageCode"
@@ -4779,7 +4808,7 @@
     },
     "LanguageCode": {
       "type": "string",
-      "documentation": "Code to specify the language, following the specification \"ISO 639-2 three-digit code\":http://www.loc.gov/standards/iso639-2/",
+      "documentation": "Specify the language, using the ISO 639-2 three-letter code listed at https://www.loc.gov/standards/iso639-2/php/code_list.php.",
       "enum": [
         "ENG",
         "SPA",
@@ -6793,7 +6822,8 @@
       "members": {
         "Id3Insertions": {
           "shape": "__listOfId3Insertion",
-          "locationName": "id3Insertions"
+          "locationName": "id3Insertions",
+          "documentation": "Id3Insertions contains the array of Id3Insertion instances."
         }
       },
       "documentation": "Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.",
@@ -7775,6 +7805,12 @@
       "min": 3,
       "max": 3,
       "pattern": "^[1-8][0-9a-fA-F][0-9a-eA-E]$"
+    },
+    "__stringMin3Max3PatternAZaZ3": {
+      "type": "string",
+      "min": 3,
+      "max": 3,
+      "pattern": "^[A-Za-z]{3}$"
     },
     "__stringPattern": {
       "type": "string",

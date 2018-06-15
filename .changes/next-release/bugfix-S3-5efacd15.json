@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3",
-  "description": "Fixes edge case where event message lengths were sometimes incorrectly calculated."
-}

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.258.1-->
+<!--LATEST=2.259.1-->
 <!--ENTRYINSERT-->
+
+## 2.259.1
+* bugfix: S3: Fixes edge case where event message lengths were sometimes incorrectly calculated.
+* feature: MediaConvert: This release adds language code support according to the ISO-639-3 standard. Custom 3-character language codes are now supported on input and output for both audio and captions.
 
 ## 2.258.1
 * bugfix: Core: Updates SDK to attempt to determine the Content-Length of a payload when an operation uses the unsigned-body trait. Content-Length will still not be calculated for non-file streams. This will allow file streams to be passed to MediaStoreData.putObject.
