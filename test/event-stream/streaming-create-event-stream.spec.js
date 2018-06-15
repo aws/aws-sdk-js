@@ -90,5 +90,46 @@ if (stream.Transform) {
                 done();
             });
         });
+
+        it('emits error on error events from source', function(done) {
+            var mockHttpResponse = new MockEventMessageSource(
+                [
+                    testEventMessages.recordEventMessage,
+                    testEventMessages.statsEventMessage,
+                    testEventMessages.endEventMessage
+                ],
+                10, true
+            );
+
+            var eventStream = createEventStream(mockHttpResponse, parser, mockEventStreamShape);
+
+            eventStream.on('data', function(event) {});
+            eventStream.on('error', function(err) {
+                expect(err.name).to.equal('Error');
+                expect(err.message).to.equal('Throwing an error!');
+                done();
+            });
+        });
+
+        it('emits error on error events from event chunker', function(done) {
+            var responseMessage = Buffer.concat([
+                testEventMessages.recordEventMessage,
+                testEventMessages.statsEventMessage,
+                testEventMessages.endEventMessage
+            ]);
+            var mockHttpResponse = new MockEventMessageSource(
+                [responseMessage.slice(0, responseMessage.length - 4)],
+                10
+            );
+
+            var eventStream = createEventStream(mockHttpResponse, parser, mockEventStreamShape);
+
+            eventStream.on('data', function(event) {});
+            eventStream.on('error', function(err) {
+                expect(err.name).to.equal('Error');
+                expect(err.message).to.equal('Truncated event message received.');
+                done();
+            });
+        });
     });
 }

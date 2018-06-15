@@ -1,5 +1,6 @@
 var Transform = require('stream').Transform;
 var EventMessageChunkerStream = require('../../lib/event-stream/event-message-chunker-stream').EventMessageChunkerStream;
+var allocBuffer = require('../../lib/event-stream/alloc-buffer').allocBuffer;
 var testEventMessages = require('./test-event-messages.fixture');
 var MockEventMessageSource = require('./mock-event-message-source-stream.fixture').MockEventMessageSource;
 
@@ -116,6 +117,26 @@ if (Transform) {
             });
             eventChunker.on('end', function() {
                 expect(messages.length).to.equal(3);
+                done();
+            });
+        });
+
+        it('sends an error if an event message is truncated', function(done) {
+            /** @type {Buffer[]} */
+            var responseMessage = Buffer.concat([
+                testEventMessages.recordEventMessage,
+                testEventMessages.statsEventMessage,
+                testEventMessages.endEventMessage
+            ]);
+            var mockStream = new MockEventMessageSource(
+                [responseMessage.slice(0, responseMessage.length - 4)],
+                10
+            );
+
+            var eventChunker = new EventMessageChunkerStream();
+            mockStream.pipe(eventChunker);
+            eventChunker.on('error', function(err) {
+                expect(err.message).to.equal('Truncated event message received.');
                 done();
             });
         });
