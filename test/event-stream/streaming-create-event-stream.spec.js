@@ -5,6 +5,7 @@ var testEventMessages = require('./test-event-messages.fixture');
 var mockEventStreamShape = require('./test-event-stream-model.fixture').mockEventStreamShape;
 var toBuffer = require('../../lib/event-stream/to-buffer').toBuffer;
 var MockEventMessageSource = require('./mock-event-message-source-stream.fixture').MockEventMessageSource;
+var buildMessage = require('../../lib/event-stream/build-message').buildMessage;
 
 if (stream.Transform) {
     describe('streaming createEventStream', function() {
@@ -49,6 +50,43 @@ if (stream.Transform) {
                     var event = events[i];
                     expect(event).to.eql(expectedEvents[i]);
                 }
+                done();
+            });
+        });
+
+        it('emits error on error events', function(done) {
+            var errorEventMessage = buildMessage({
+                headers: {
+                    ':message-type': {
+                        type: 'string',
+                        value: 'error'
+                    },
+                    ':error-code': {
+                        type: 'string',
+                        value: 'FooError'
+                    },
+                    ':error-message': {
+                        type: 'string',
+                        value: 'Event Error'
+                    }
+                },
+                body: toBuffer('')
+            });
+
+            var mockHttpResponse = new MockEventMessageSource([
+                testEventMessages.recordEventMessage,
+                errorEventMessage,
+                testEventMessages.statsEventMessage,
+                testEventMessages.endEventMessage
+            ], 10)
+
+            var eventStream = createEventStream(mockHttpResponse, parser, mockEventStreamShape);
+
+            eventStream.on('data', function(event) {});
+            eventStream.on('error', function(err) {
+                expect(err.name).to.equal('FooError');
+                expect(err.code).to.equal('FooError');
+                expect(err.message).to.equal('Event Error');
                 done();
             });
         });

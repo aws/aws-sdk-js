@@ -140,6 +140,7 @@ class MethodDocumentor
         memberNum = memberNum + 1
       end
       lines << "    });"
+      lines << "    eventStream.on('error', function(err) { /** Handle error events **/});"
       lines << "    eventStream.on('end', function() { /** Finished reading all events **/});"
       lines << "  });"
       lines << ""

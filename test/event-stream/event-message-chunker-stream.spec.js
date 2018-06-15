@@ -95,5 +95,29 @@ if (Transform) {
                 done();
             });
         });
+
+        it('splits payloads when total event message length spans 2 chunks', function(done) {
+            /** @type {Buffer[]} */
+            var messages = [];
+            var mockMessages = [
+                testEventMessages.recordEventMessage,
+                testEventMessages.statsEventMessage,
+                testEventMessages.endEventMessage
+            ];
+            var mockStream = new MockEventMessageSource(
+                mockMessages,
+                testEventMessages.recordEventMessage.length + 2
+            );
+
+            var eventChunker = new EventMessageChunkerStream();
+            mockStream.pipe(eventChunker);
+            eventChunker.on('data', function(message) {
+                messages.push(message);
+            });
+            eventChunker.on('end', function() {
+                expect(messages.length).to.equal(3);
+                done();
+            });
+        });
     });
 }
