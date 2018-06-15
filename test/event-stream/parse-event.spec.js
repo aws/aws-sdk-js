@@ -129,10 +129,8 @@ describe('parseEvent', function() {
             },
             body: toBuffer('')
         });
-
-        var error = parseEvent(mockParser, eventMessage, mockEventStreamShape);
-        expect(error.name).to.equal('FooError');
-        expect(error.code).to.equal('FooError');
-        expect(error.message).to.equal('Event Error');
+        expect(function() {
+            parseEvent(mockParser, eventMessage, mockEventStreamShape);
+        }).to.throw('Event Error').with.property('name', 'FooError');
     });
 });

@@ -3,6 +3,7 @@ var createEventStream = require('../../lib/event-stream/buffered-create-event-st
 var testEventMessages = require('./test-event-messages.fixture');
 var mockEventStreamShape = require('./test-event-stream-model.fixture').mockEventStreamShape;
 var toBuffer = require('../../lib/event-stream/to-buffer').toBuffer;
+var buildMessage = require('../../lib/event-stream/build-message').buildMessage;
 var Buffer = AWS.util.Buffer;
 
 describe('buffered createEventStream', function() {
@@ -40,5 +41,36 @@ describe('buffered createEventStream', function() {
             var event = eventStream[i];
             expect(event).to.eql(expectedEvents[i]);
         }
+    });
+
+    it('throws an error on error events', function() {
+        var errorEventMessage = buildMessage({
+            headers: {
+                ':message-type': {
+                    type: 'string',
+                    value: 'error'
+                },
+                ':error-code': {
+                    type: 'string',
+                    value: 'FooError'
+                },
+                ':error-message': {
+                    type: 'string',
+                    value: 'Event Error'
+                }
+            },
+            body: toBuffer('')
+        });
+
+        var payload = Buffer.concat([
+            testEventMessages.recordEventMessage,
+            errorEventMessage,
+            testEventMessages.statsEventMessage,
+            testEventMessages.endEventMessage
+        ]);
+
+        expect(function() {
+            var eventStream = createEventStream(payload, parser, mockEventStreamShape);
+        }).to.throw('Event Error').with.property('name', 'FooError');
     });
 });
