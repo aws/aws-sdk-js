@@ -580,6 +580,36 @@
           return done();
         });
       });
+      it('default tokenCodeFn works if mfa_serial is provided', function() {
+        var creds, tokenCodeFnSpy, mock, assumeRoleSpy, STSPrototype = (new STS()).constructor.prototype;
+        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole');
+        tokenCodeFnSpy = helpers.createSpy('tokenCodeFn').andReturn('123456');
+        mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session\n'
+          + '[profile withmfa]\nrole_arn = arn\nmfa_serial = serial\nsource_profile = default';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        creds = new AWS.SharedIniFileCredentials({ profile: 'withmfa', tokenCodeFn: tokenCodeFnSpy });
+        creds.refresh();
+        return expect(tokenCodeFnSpy.calls.length).to.equal(1);
+      });
+      it('calls tokenCodeFn if mfa_serial is provided', function() {
+        var creds, tokenCodeFn, mock, assumeRoleSpy, tokenCodeFnSpy;
+        var STSPrototype = (new STS()).constructor.prototype;
+        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole');
+        mock = '[default]\nrole_arn = arn\nmfa_serial = serial\naws_access_key_id = key\naws_secret_access_key = secret\n'
+          + '[profile withmfa]\nrole_arn = arn\nmfa_serial = serial\nsource_profile = default';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        tokenCodeFnSpy = helpers.createSpy('tokenCodeFn').andReturn('123456');
+        tokenCodeFn = function(serial, callback) {
+          tokenCodeFnSpy(serial);
+          callback(null, '123456');
+        };
+        creds = new AWS.SharedIniFileCredentials({
+          profile: 'withmfa',
+          tokenCodeFn: tokenCodeFn
+        });
+        expect(tokenCodeFnSpy.calls.length).to.equal(1);
+        return expect(tokenCodeFnSpy.calls[0]["arguments"][0]).to.equal('serial');
+      });
     });
     describe('AWS.EC2MetadataCredentials', function() {
       var creds, mockMetadataService;
