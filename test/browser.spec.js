@@ -1160,6 +1160,56 @@
         });
       });
 
+      describe('selectObjectContent', function() {
+        beforeEach(function(done) {
+          s3.putObject({
+            Key: 'test.csv',
+            Body: 'user_name,age\nfoo,10\nbar,20\nfizz,30\nbuzz,40'
+          }, done);
+        });
+
+        afterEach(function(done) {
+          s3.deleteObject({
+            Key: 'test.csv'
+          }, done);
+        });
+
+        it('supports reading events from list of events', function(done) {
+          var key = 'test.csv';
+
+          s3.selectObjectContent({
+            Key: 'test.csv',
+            Expression: 'SELECT user_name FROM S3Object WHERE cast(age as int) > 20',
+            ExpressionType: 'SQL',
+            InputSerialization: {
+              CompressionType: 'NONE',
+              CSV: {
+                FileHeaderInfo: 'USE',
+                RecordDelimiter: '\n',
+                FieldDelimiter: ','
+              }
+            },
+            OutputSerialization: {
+              CSV: {}
+            }
+          }, function(err, data) {
+            noError(err);
+            var records = []
+            for (var i = 0; i < data.Payload.length; i++) {
+              var event = data.Payload[i];
+              if (event.Records) {
+                records.push(event.Records.Payload);
+              }
+            }
+
+            expect(Buffer.concat(records).toString()).to.equal(
+              'fizz\nbuzz\n'
+            );
+            done();
+          });
+        })
+      });
+
       describe('upload()', function() {
         it('supports blobs using upload()', function(done) {
           var key, size, u;
