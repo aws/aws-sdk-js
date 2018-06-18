@@ -4,7 +4,7 @@
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/aws/aws-sdk-js)
 
-[![Version](https://badge.fury.io/js/aws-sdk.svg)](http://badge.fury.io/js/aws-sdk) [![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-js) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-js/badge.svg?branch=master)](https://coveralls.io/r/aws/aws-sdk-js?branch=master)
+[![Version](https://badge.fury.io/js/aws-sdk.svg)](http://badge.fury.io/js/aws-sdk) [![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-js) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-js/badge.svg?branch=master)](https://coveralls.io/r/aws/aws-sdk-js?branch=master) [![SemVer Compatibility](https://api.dependabot.com/badges/compatibility_score?dependency-name=aws-sdk&package-manager=npm_and_yarn&version-scheme=semver)](https://dependabot.com/compatibility-score.html?dependency-name=aws-sdk&package-manager=npm_and_yarn&version-scheme=semver)
 
 The official AWS SDK for JavaScript, available for browsers and mobile devices,
 or Node.js backends
@@ -134,7 +134,7 @@ var S3 = require('aws-sdk/clients/s3');
 To create React applications with AWS SDK, you can use [AWS Amplify Library](https://aws.github.io/aws-amplify/media/react_guide?utm_source=aws-js-sdk&utm_campaign=react) which provides React components and CLI support to work with AWS services.
 
 ### With Angular
-Due to the SDK's reliance on node.js typings, you may encounter compilation 
+Due to the SDK's reliance on node.js typings, you may encounter compilation
 [issues](https://github.com/aws/aws-sdk-js/issues/1271) when using the
 typings provided by the SDK in an Angular project created using the Angular CLI.
 
