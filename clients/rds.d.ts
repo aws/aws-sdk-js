@@ -1409,6 +1409,10 @@ declare namespace RDS {
      */
     PerformanceInsightsKMSKeyId?: String;
     /**
+     * The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). 
+     */
+    PerformanceInsightsRetentionPeriod?: IntegerOptional;
+    /**
      * The list of log types that need to be enabled for exporting to CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
@@ -1500,6 +1504,10 @@ declare namespace RDS {
      */
     PerformanceInsightsKMSKeyId?: String;
     /**
+     * The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). 
+     */
+    PerformanceInsightsRetentionPeriod?: IntegerOptional;
+    /**
      * The list of logs that the new DB instance is to export to CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
@@ -1528,7 +1536,7 @@ declare namespace RDS {
      */
     DBParameterGroupName: String;
     /**
-     * The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family.
+     * The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family. To list all of the available parameter group families, use the following command:  aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily"   The output contains duplicates. 
      */
     DBParameterGroupFamily: String;
     /**
@@ -2310,6 +2318,10 @@ declare namespace RDS {
      * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
      */
     PerformanceInsightsKMSKeyId?: String;
+    /**
+     * The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). 
+     */
+    PerformanceInsightsRetentionPeriod?: IntegerOptional;
     /**
      * A list of log types that this DB instance is configured to export to CloudWatch Logs.
      */
@@ -3925,6 +3937,10 @@ declare namespace RDS {
      */
     PerformanceInsightsKMSKeyId?: String;
     /**
+     * The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). 
+     */
+    PerformanceInsightsRetentionPeriod?: IntegerOptional;
+    /**
      * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
@@ -5357,6 +5373,10 @@ declare namespace RDS {
      * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. 
      */
     PerformanceInsightsKMSKeyId?: String;
+    /**
+     * The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). 
+     */
+    PerformanceInsightsRetentionPeriod?: IntegerOptional;
     /**
      * The list of logs that the restored DB instance is to export to CloudWatch Logs.
      */

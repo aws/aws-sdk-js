@@ -60,6 +60,14 @@ declare class MediaLive extends Service {
    */
   deleteInputSecurityGroup(callback?: (err: AWSError, data: MediaLive.Types.DeleteInputSecurityGroupResponse) => void): Request<MediaLive.Types.DeleteInputSecurityGroupResponse, AWSError>;
   /**
+   * Delete an expired reservation.
+   */
+  deleteReservation(params: MediaLive.Types.DeleteReservationRequest, callback?: (err: AWSError, data: MediaLive.Types.DeleteReservationResponse) => void): Request<MediaLive.Types.DeleteReservationResponse, AWSError>;
+  /**
+   * Delete an expired reservation.
+   */
+  deleteReservation(callback?: (err: AWSError, data: MediaLive.Types.DeleteReservationResponse) => void): Request<MediaLive.Types.DeleteReservationResponse, AWSError>;
+  /**
    * Gets details about a channel
    */
   describeChannel(params: MediaLive.Types.DescribeChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
@@ -84,6 +92,22 @@ declare class MediaLive extends Service {
    */
   describeInputSecurityGroup(callback?: (err: AWSError, data: MediaLive.Types.DescribeInputSecurityGroupResponse) => void): Request<MediaLive.Types.DescribeInputSecurityGroupResponse, AWSError>;
   /**
+   * Get details for an offering.
+   */
+  describeOffering(params: MediaLive.Types.DescribeOfferingRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeOfferingResponse) => void): Request<MediaLive.Types.DescribeOfferingResponse, AWSError>;
+  /**
+   * Get details for an offering.
+   */
+  describeOffering(callback?: (err: AWSError, data: MediaLive.Types.DescribeOfferingResponse) => void): Request<MediaLive.Types.DescribeOfferingResponse, AWSError>;
+  /**
+   * Get details for a reservation.
+   */
+  describeReservation(params: MediaLive.Types.DescribeReservationRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeReservationResponse) => void): Request<MediaLive.Types.DescribeReservationResponse, AWSError>;
+  /**
+   * Get details for a reservation.
+   */
+  describeReservation(callback?: (err: AWSError, data: MediaLive.Types.DescribeReservationResponse) => void): Request<MediaLive.Types.DescribeReservationResponse, AWSError>;
+  /**
    * Produces list of channels that have been created
    */
   listChannels(params: MediaLive.Types.ListChannelsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListChannelsResponse) => void): Request<MediaLive.Types.ListChannelsResponse, AWSError>;
@@ -107,6 +131,30 @@ declare class MediaLive extends Service {
    * Produces list of inputs that have been created
    */
   listInputs(callback?: (err: AWSError, data: MediaLive.Types.ListInputsResponse) => void): Request<MediaLive.Types.ListInputsResponse, AWSError>;
+  /**
+   * List offerings available for purchase.
+   */
+  listOfferings(params: MediaLive.Types.ListOfferingsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListOfferingsResponse) => void): Request<MediaLive.Types.ListOfferingsResponse, AWSError>;
+  /**
+   * List offerings available for purchase.
+   */
+  listOfferings(callback?: (err: AWSError, data: MediaLive.Types.ListOfferingsResponse) => void): Request<MediaLive.Types.ListOfferingsResponse, AWSError>;
+  /**
+   * List purchased reservations.
+   */
+  listReservations(params: MediaLive.Types.ListReservationsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListReservationsResponse) => void): Request<MediaLive.Types.ListReservationsResponse, AWSError>;
+  /**
+   * List purchased reservations.
+   */
+  listReservations(callback?: (err: AWSError, data: MediaLive.Types.ListReservationsResponse) => void): Request<MediaLive.Types.ListReservationsResponse, AWSError>;
+  /**
+   * Purchase an offering and create a reservation.
+   */
+  purchaseOffering(params: MediaLive.Types.PurchaseOfferingRequest, callback?: (err: AWSError, data: MediaLive.Types.PurchaseOfferingResponse) => void): Request<MediaLive.Types.PurchaseOfferingResponse, AWSError>;
+  /**
+   * Purchase an offering and create a reservation.
+   */
+  purchaseOffering(callback?: (err: AWSError, data: MediaLive.Types.PurchaseOfferingResponse) => void): Request<MediaLive.Types.PurchaseOfferingResponse, AWSError>;
   /**
    * Starts an existing channel
    */
@@ -914,6 +962,82 @@ one destination per packager.
   }
   export interface DeleteInputSecurityGroupResponse {
   }
+  export interface DeleteReservationRequest {
+    /**
+     * Unique reservation ID, e.g. '1234567'
+     */
+    ReservationId: __string;
+  }
+  export interface DeleteReservationResponse {
+    /**
+     * Unique reservation ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:reservation:1234567'
+     */
+    Arn?: __string;
+    /**
+     * Number of reserved resources
+     */
+    Count?: __integer;
+    /**
+     * Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
+     */
+    CurrencyCode?: __string;
+    /**
+     * Lease duration, e.g. '12'
+     */
+    Duration?: __integer;
+    /**
+     * Units for duration, e.g. 'MONTHS'
+     */
+    DurationUnits?: OfferingDurationUnits;
+    /**
+     * Reservation UTC end date and time in ISO-8601 format, e.g. '2019-03-01T00:00:00'
+     */
+    End?: __string;
+    /**
+     * One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
+     */
+    FixedPrice?: __double;
+    /**
+     * User specified reservation name
+     */
+    Name?: __string;
+    /**
+     * Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'
+     */
+    OfferingDescription?: __string;
+    /**
+     * Unique offering ID, e.g. '87654321'
+     */
+    OfferingId?: __string;
+    /**
+     * Offering type, e.g. 'NO_UPFRONT'
+     */
+    OfferingType?: OfferingType;
+    /**
+     * AWS region, e.g. 'us-west-2'
+     */
+    Region?: __string;
+    /**
+     * Unique reservation ID, e.g. '1234567'
+     */
+    ReservationId?: __string;
+    /**
+     * Resource configuration details
+     */
+    ResourceSpecification?: ReservationResourceSpecification;
+    /**
+     * Reservation UTC start date and time in ISO-8601 format, e.g. '2018-03-01T00:00:00'
+     */
+    Start?: __string;
+    /**
+     * Current state of reservation, e.g. 'ACTIVE'
+     */
+    State?: ReservationState;
+    /**
+     * Recurring usage charge for each reserved resource, e.g. '157.0'
+     */
+    UsagePrice?: __double;
+  }
   export interface DescribeChannelRequest {
     /**
      * channel ID
@@ -1029,6 +1153,134 @@ one destination per packager.
      * Whitelist rules and their sync status
      */
     WhitelistRules?: __listOfInputWhitelistRule;
+  }
+  export interface DescribeOfferingRequest {
+    /**
+     * Unique offering ID, e.g. '87654321'
+     */
+    OfferingId: __string;
+  }
+  export interface DescribeOfferingResponse {
+    /**
+     * Unique offering ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:offering:87654321'
+     */
+    Arn?: __string;
+    /**
+     * Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
+     */
+    CurrencyCode?: __string;
+    /**
+     * Lease duration, e.g. '12'
+     */
+    Duration?: __integer;
+    /**
+     * Units for duration, e.g. 'MONTHS'
+     */
+    DurationUnits?: OfferingDurationUnits;
+    /**
+     * One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
+     */
+    FixedPrice?: __double;
+    /**
+     * Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'
+     */
+    OfferingDescription?: __string;
+    /**
+     * Unique offering ID, e.g. '87654321'
+     */
+    OfferingId?: __string;
+    /**
+     * Offering type, e.g. 'NO_UPFRONT'
+     */
+    OfferingType?: OfferingType;
+    /**
+     * AWS region, e.g. 'us-west-2'
+     */
+    Region?: __string;
+    /**
+     * Resource configuration details
+     */
+    ResourceSpecification?: ReservationResourceSpecification;
+    /**
+     * Recurring usage charge for each reserved resource, e.g. '157.0'
+     */
+    UsagePrice?: __double;
+  }
+  export interface DescribeReservationRequest {
+    /**
+     * Unique reservation ID, e.g. '1234567'
+     */
+    ReservationId: __string;
+  }
+  export interface DescribeReservationResponse {
+    /**
+     * Unique reservation ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:reservation:1234567'
+     */
+    Arn?: __string;
+    /**
+     * Number of reserved resources
+     */
+    Count?: __integer;
+    /**
+     * Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
+     */
+    CurrencyCode?: __string;
+    /**
+     * Lease duration, e.g. '12'
+     */
+    Duration?: __integer;
+    /**
+     * Units for duration, e.g. 'MONTHS'
+     */
+    DurationUnits?: OfferingDurationUnits;
+    /**
+     * Reservation UTC end date and time in ISO-8601 format, e.g. '2019-03-01T00:00:00'
+     */
+    End?: __string;
+    /**
+     * One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
+     */
+    FixedPrice?: __double;
+    /**
+     * User specified reservation name
+     */
+    Name?: __string;
+    /**
+     * Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'
+     */
+    OfferingDescription?: __string;
+    /**
+     * Unique offering ID, e.g. '87654321'
+     */
+    OfferingId?: __string;
+    /**
+     * Offering type, e.g. 'NO_UPFRONT'
+     */
+    OfferingType?: OfferingType;
+    /**
+     * AWS region, e.g. 'us-west-2'
+     */
+    Region?: __string;
+    /**
+     * Unique reservation ID, e.g. '1234567'
+     */
+    ReservationId?: __string;
+    /**
+     * Resource configuration details
+     */
+    ResourceSpecification?: ReservationResourceSpecification;
+    /**
+     * Reservation UTC start date and time in ISO-8601 format, e.g. '2018-03-01T00:00:00'
+     */
+    Start?: __string;
+    /**
+     * Current state of reservation, e.g. 'ACTIVE'
+     */
+    State?: ReservationState;
+    /**
+     * Recurring usage charge for each reserved resource, e.g. '157.0'
+     */
+    UsagePrice?: __double;
   }
   export interface DvbNitSettings {
     /**
@@ -2116,6 +2368,121 @@ pulled from.
     Inputs?: __listOfInput;
     NextToken?: __string;
   }
+  export interface ListOfferingsRequest {
+    /**
+     * Filter to offerings that match the configuration of an existing channel, e.g. '2345678' (a channel ID)
+
+     */
+    ChannelConfiguration?: __string;
+    /**
+     * Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'
+     */
+    Codec?: __string;
+    MaxResults?: MaxResults;
+    /**
+     * Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
+
+     */
+    MaximumBitrate?: __string;
+    /**
+     * Filter by framerate, 'MAX_30_FPS' or 'MAX_60_FPS'
+     */
+    MaximumFramerate?: __string;
+    NextToken?: __string;
+    /**
+     * Filter by resolution, 'SD', 'HD', or 'UHD'
+     */
+    Resolution?: __string;
+    /**
+     * Filter by resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'
+     */
+    ResourceType?: __string;
+    /**
+     * Filter by special feature, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'
+
+     */
+    SpecialFeature?: __string;
+    /**
+     * Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
+
+     */
+    VideoQuality?: __string;
+  }
+  export interface ListOfferingsResponse {
+    /**
+     * Token to retrieve the next page of results
+     */
+    NextToken?: __string;
+    /**
+     * List of offerings
+     */
+    Offerings?: __listOfOffering;
+  }
+  export interface ListOfferingsResultModel {
+    /**
+     * Token to retrieve the next page of results
+     */
+    NextToken?: __string;
+    /**
+     * List of offerings
+     */
+    Offerings?: __listOfOffering;
+  }
+  export interface ListReservationsRequest {
+    /**
+     * Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'
+     */
+    Codec?: __string;
+    MaxResults?: MaxResults;
+    /**
+     * Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
+
+     */
+    MaximumBitrate?: __string;
+    /**
+     * Filter by framerate, 'MAX_30_FPS' or 'MAX_60_FPS'
+     */
+    MaximumFramerate?: __string;
+    NextToken?: __string;
+    /**
+     * Filter by resolution, 'SD', 'HD', or 'UHD'
+     */
+    Resolution?: __string;
+    /**
+     * Filter by resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'
+     */
+    ResourceType?: __string;
+    /**
+     * Filter by special feature, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'
+
+     */
+    SpecialFeature?: __string;
+    /**
+     * Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
+
+     */
+    VideoQuality?: __string;
+  }
+  export interface ListReservationsResponse {
+    /**
+     * Token to retrieve the next page of results
+     */
+    NextToken?: __string;
+    /**
+     * List of reservations
+     */
+    Reservations?: __listOfReservation;
+  }
+  export interface ListReservationsResultModel {
+    /**
+     * Token to retrieve the next page of results
+     */
+    NextToken?: __string;
+    /**
+     * List of reservations
+     */
+    Reservations?: __listOfReservation;
+  }
   export type LogLevel = "ERROR"|"WARNING"|"INFO"|"DEBUG"|"DISABLED"|string;
   export type M2tsAbsentInputAudioBehavior = "DROP"|"ENCODE_SILENCE"|string;
   export type M2tsArib = "DISABLED"|"ENABLED"|string;
@@ -2514,6 +2881,54 @@ Options:
      */
     ServerValidation?: NetworkInputServerValidation;
   }
+  export interface Offering {
+    /**
+     * Unique offering ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:offering:87654321'
+     */
+    Arn?: __string;
+    /**
+     * Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
+     */
+    CurrencyCode?: __string;
+    /**
+     * Lease duration, e.g. '12'
+     */
+    Duration?: __integer;
+    /**
+     * Units for duration, e.g. 'MONTHS'
+     */
+    DurationUnits?: OfferingDurationUnits;
+    /**
+     * One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
+     */
+    FixedPrice?: __double;
+    /**
+     * Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'
+     */
+    OfferingDescription?: __string;
+    /**
+     * Unique offering ID, e.g. '87654321'
+     */
+    OfferingId?: __string;
+    /**
+     * Offering type, e.g. 'NO_UPFRONT'
+     */
+    OfferingType?: OfferingType;
+    /**
+     * AWS region, e.g. 'us-west-2'
+     */
+    Region?: __string;
+    /**
+     * Resource configuration details
+     */
+    ResourceSpecification?: ReservationResourceSpecification;
+    /**
+     * Recurring usage charge for each reserved resource, e.g. '157.0'
+     */
+    UsagePrice?: __double;
+  }
+  export type OfferingDurationUnits = "MONTHS"|string;
+  export type OfferingType = "NO_UPFRONT"|string;
   export interface Output {
     /**
      * The names of the AudioDescriptions used as audio sources for this output.
@@ -2594,6 +3009,44 @@ Options:
   }
   export interface PassThroughSettings {
   }
+  export interface PurchaseOffering {
+    /**
+     * Number of resources
+     */
+    Count?: __integerMin1;
+    /**
+     * Name for the new reservation
+     */
+    Name?: __string;
+    /**
+     * Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
+     */
+    RequestId?: __string;
+  }
+  export interface PurchaseOfferingRequest {
+    /**
+     * Number of resources
+     */
+    Count?: __integerMin1;
+    /**
+     * Name for the new reservation
+     */
+    Name?: __string;
+    /**
+     * Offering to purchase, e.g. '87654321'
+     */
+    OfferingId: __string;
+    /**
+     * Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
+     */
+    RequestId?: __string;
+  }
+  export interface PurchaseOfferingResponse {
+    Reservation?: Reservation;
+  }
+  export interface PurchaseOfferingResultModel {
+    Reservation?: Reservation;
+  }
   export interface RemixSettings {
     /**
      * Mapping of input channels to output channels, with appropriate gain adjustments.
@@ -2609,6 +3062,114 @@ Valid values: 1, 2, 4, 6, 8
      */
     ChannelsOut?: __integerMin1Max8;
   }
+  export interface Reservation {
+    /**
+     * Unique reservation ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:reservation:1234567'
+     */
+    Arn?: __string;
+    /**
+     * Number of reserved resources
+     */
+    Count?: __integer;
+    /**
+     * Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
+     */
+    CurrencyCode?: __string;
+    /**
+     * Lease duration, e.g. '12'
+     */
+    Duration?: __integer;
+    /**
+     * Units for duration, e.g. 'MONTHS'
+     */
+    DurationUnits?: OfferingDurationUnits;
+    /**
+     * Reservation UTC end date and time in ISO-8601 format, e.g. '2019-03-01T00:00:00'
+     */
+    End?: __string;
+    /**
+     * One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
+     */
+    FixedPrice?: __double;
+    /**
+     * User specified reservation name
+     */
+    Name?: __string;
+    /**
+     * Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'
+     */
+    OfferingDescription?: __string;
+    /**
+     * Unique offering ID, e.g. '87654321'
+     */
+    OfferingId?: __string;
+    /**
+     * Offering type, e.g. 'NO_UPFRONT'
+     */
+    OfferingType?: OfferingType;
+    /**
+     * AWS region, e.g. 'us-west-2'
+     */
+    Region?: __string;
+    /**
+     * Unique reservation ID, e.g. '1234567'
+     */
+    ReservationId?: __string;
+    /**
+     * Resource configuration details
+     */
+    ResourceSpecification?: ReservationResourceSpecification;
+    /**
+     * Reservation UTC start date and time in ISO-8601 format, e.g. '2018-03-01T00:00:00'
+     */
+    Start?: __string;
+    /**
+     * Current state of reservation, e.g. 'ACTIVE'
+     */
+    State?: ReservationState;
+    /**
+     * Recurring usage charge for each reserved resource, e.g. '157.0'
+     */
+    UsagePrice?: __double;
+  }
+  export type ReservationCodec = "MPEG2"|"AVC"|"HEVC"|"AUDIO"|string;
+  export type ReservationMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
+  export type ReservationMaximumFramerate = "MAX_30_FPS"|"MAX_60_FPS"|string;
+  export type ReservationResolution = "SD"|"HD"|"UHD"|string;
+  export interface ReservationResourceSpecification {
+    /**
+     * Codec, e.g. 'AVC'
+     */
+    Codec?: ReservationCodec;
+    /**
+     * Maximum bitrate, e.g. 'MAX_20_MBPS'
+     */
+    MaximumBitrate?: ReservationMaximumBitrate;
+    /**
+     * Maximum framerate, e.g. 'MAX_30_FPS' (Outputs only)
+     */
+    MaximumFramerate?: ReservationMaximumFramerate;
+    /**
+     * Resolution, e.g. 'HD'
+     */
+    Resolution?: ReservationResolution;
+    /**
+     * Resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'
+     */
+    ResourceType?: ReservationResourceType;
+    /**
+     * Special feature, e.g. 'AUDIO_NORMALIZATION' (Channels only)
+     */
+    SpecialFeature?: ReservationSpecialFeature;
+    /**
+     * Video quality, e.g. 'STANDARD' (Outputs only)
+     */
+    VideoQuality?: ReservationVideoQuality;
+  }
+  export type ReservationResourceType = "INPUT"|"OUTPUT"|"CHANNEL"|string;
+  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|string;
+  export type ReservationState = "ACTIVE"|"EXPIRED"|"CANCELED"|"DELETED"|string;
+  export type ReservationVideoQuality = "STANDARD"|"ENHANCED"|"PREMIUM"|string;
   export interface ResourceConflict {
     Message?: __string;
   }
@@ -3174,10 +3735,12 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfInputSourceRequest = InputSourceRequest[];
   export type __listOfInputWhitelistRule = InputWhitelistRule[];
   export type __listOfInputWhitelistRuleCidr = InputWhitelistRuleCidr[];
+  export type __listOfOffering = Offering[];
   export type __listOfOutput = Output[];
   export type __listOfOutputDestination = OutputDestination[];
   export type __listOfOutputDestinationSettings = OutputDestinationSettings[];
   export type __listOfOutputGroup = OutputGroup[];
+  export type __listOfReservation = Reservation[];
   export type __listOfValidationError = ValidationError[];
   export type __listOfVideoDescription = VideoDescription[];
   export type __listOf__string = __string[];

@@ -2247,6 +2247,9 @@
         },
         {
           "shape": "KMSKeyNotAccessibleFault"
+        },
+        {
+          "shape": "DBClusterParameterGroupNotFoundFault"
         }
       ],
       "documentation": "<p>Creates a new DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.</p> <p>If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.</p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>"
@@ -2312,6 +2315,9 @@
         },
         {
           "shape": "StorageQuotaExceededFault"
+        },
+        {
+          "shape": "DBClusterParameterGroupNotFoundFault"
         }
       ],
       "documentation": "<p>Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. </p> <note> <p>This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the <a>CreateDBInstance</a> action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after the <code>RestoreDBClusterToPointInTime</code> action has completed and the DB cluster is available.</p> </note> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>"
@@ -2383,6 +2389,9 @@
         },
         {
           "shape": "DomainNotFoundFault"
+        },
+        {
+          "shape": "DBParameterGroupNotFoundFault"
         }
       ],
       "documentation": "<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with the most of original configuration with the default security group and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored AZ deployment and not a single-AZ deployment.</p> <p>If your intent is to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS doesn't allow two DB instances with the same name. Once you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p> <note> <p>This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <a>RestoreDBClusterFromSnapshot</a>.</p> </note>"
@@ -2522,6 +2531,9 @@
         },
         {
           "shape": "DomainNotFoundFault"
+        },
+        {
+          "shape": "DBParameterGroupNotFoundFault"
         }
       ],
       "documentation": "<p>Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property.</p> <p>The target database is created with most of the original configuration, but in a system-selected Availability Zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.</p> <note> <p>This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <a>RestoreDBClusterToPointInTime</a>.</p> </note>"
@@ -3568,6 +3580,10 @@
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
         },
+        "PerformanceInsightsRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). </p>"
+        },
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>The list of log types that need to be enabled for exporting to CloudWatch Logs.</p>"
@@ -3669,6 +3685,10 @@
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
         },
+        "PerformanceInsightsRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). </p>"
+        },
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>The list of logs that the new DB instance is to export to CloudWatch Logs.</p>"
@@ -3717,7 +3737,7 @@
         },
         "DBParameterGroupFamily": {
           "shape": "String",
-          "documentation": "<p>The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family.</p>"
+          "documentation": "<p>The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family.</p> <p>To list all of the available parameter group families, use the following command:</p> <p> <code>aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\"</code> </p> <note> <p>The output contains duplicates.</p> </note>"
         },
         "Description": {
           "shape": "String",
@@ -4823,6 +4843,10 @@
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
+        },
+        "PerformanceInsightsRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). </p>"
         },
         "EnabledCloudwatchLogsExports": {
           "shape": "LogTypeList",
@@ -7514,6 +7538,10 @@
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
         },
+        "PerformanceInsightsRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). </p>"
+        },
         "CloudwatchLogsExportConfiguration": {
           "shape": "CloudwatchLogsExportConfiguration",
           "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.</p>"
@@ -9556,6 +9584,10 @@
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. </p>"
+        },
+        "PerformanceInsightsRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). </p>"
         },
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",

@@ -292,6 +292,56 @@
       ],
       "documentation": "Deletes an Input Security Group"
     },
+    "DeleteReservation": {
+      "name": "DeleteReservation",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/prod/reservations/{reservationId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DeleteReservationRequest"
+      },
+      "output": {
+        "shape": "DeleteReservationResponse",
+        "documentation": "Deleted reservation"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal service error"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to delete reservation"
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Reservation you're attempting to delete does not exist"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on delete reservation request"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The reservation could not be deleted because it is currently active."
+        }
+      ],
+      "documentation": "Delete an expired reservation."
+    },
     "DescribeChannel": {
       "name": "DescribeChannel",
       "http": {
@@ -430,6 +480,98 @@
       ],
       "documentation": "Produces a summary of an Input Security Group"
     },
+    "DescribeOffering": {
+      "name": "DescribeOffering",
+      "http": {
+        "method": "GET",
+        "requestUri": "/prod/offerings/{offeringId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeOfferingRequest"
+      },
+      "output": {
+        "shape": "DescribeOfferingResponse",
+        "documentation": "Offering details"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal service error"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to describe offering"
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Offering you're attempting to describe does not exist"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on describe offering request"
+        }
+      ],
+      "documentation": "Get details for an offering."
+    },
+    "DescribeReservation": {
+      "name": "DescribeReservation",
+      "http": {
+        "method": "GET",
+        "requestUri": "/prod/reservations/{reservationId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeReservationRequest"
+      },
+      "output": {
+        "shape": "DescribeReservationResponse",
+        "documentation": "Reservation details"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal service error"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to describe reservation"
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Reservation you're attempting to describe does not exist"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on describe reservation request"
+        }
+      ],
+      "documentation": "Get details for a reservation."
+    },
     "ListChannels": {
       "name": "ListChannels",
       "http": {
@@ -555,6 +697,140 @@
         }
       ],
       "documentation": "Produces list of inputs that have been created"
+    },
+    "ListOfferings": {
+      "name": "ListOfferings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/prod/offerings",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListOfferingsRequest"
+      },
+      "output": {
+        "shape": "ListOfferingsResponse",
+        "documentation": "List of offerings"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal service error"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to list offerings"
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on list offerings request"
+        }
+      ],
+      "documentation": "List offerings available for purchase."
+    },
+    "ListReservations": {
+      "name": "ListReservations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/prod/reservations",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListReservationsRequest"
+      },
+      "output": {
+        "shape": "ListReservationsResponse",
+        "documentation": "List of reservations"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal service error"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to list reservations"
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on list reservations request"
+        }
+      ],
+      "documentation": "List purchased reservations."
+    },
+    "PurchaseOffering": {
+      "name": "PurchaseOffering",
+      "http": {
+        "method": "POST",
+        "requestUri": "/prod/offerings/{offeringId}/purchase",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "PurchaseOfferingRequest"
+      },
+      "output": {
+        "shape": "PurchaseOfferingResponse",
+        "documentation": "Purchased reservation"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal service error"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to purchase the offering"
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Offering you're attempting to purchase does not exist"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on purchase offering request"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "Offering purchase prevented by service resource issue"
+        }
+      ],
+      "documentation": "Purchase an offering and create a reservation."
     },
     "StartChannel": {
       "name": "StartChannel",
@@ -2348,6 +2624,112 @@
       },
       "documentation": "Placeholder documentation for DeleteInputSecurityGroupResponse"
     },
+    "DeleteReservationRequest": {
+      "type": "structure",
+      "members": {
+        "ReservationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "reservationId",
+          "documentation": "Unique reservation ID, e.g. '1234567'"
+        }
+      },
+      "required": [
+        "ReservationId"
+      ],
+      "documentation": "Placeholder documentation for DeleteReservationRequest"
+    },
+    "DeleteReservationResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "locationName": "arn",
+          "documentation": "Unique reservation ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:reservation:1234567'"
+        },
+        "Count": {
+          "shape": "__integer",
+          "locationName": "count",
+          "documentation": "Number of reserved resources"
+        },
+        "CurrencyCode": {
+          "shape": "__string",
+          "locationName": "currencyCode",
+          "documentation": "Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'"
+        },
+        "Duration": {
+          "shape": "__integer",
+          "locationName": "duration",
+          "documentation": "Lease duration, e.g. '12'"
+        },
+        "DurationUnits": {
+          "shape": "OfferingDurationUnits",
+          "locationName": "durationUnits",
+          "documentation": "Units for duration, e.g. 'MONTHS'"
+        },
+        "End": {
+          "shape": "__string",
+          "locationName": "end",
+          "documentation": "Reservation UTC end date and time in ISO-8601 format, e.g. '2019-03-01T00:00:00'"
+        },
+        "FixedPrice": {
+          "shape": "__double",
+          "locationName": "fixedPrice",
+          "documentation": "One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering"
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "User specified reservation name"
+        },
+        "OfferingDescription": {
+          "shape": "__string",
+          "locationName": "offeringDescription",
+          "documentation": "Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'"
+        },
+        "OfferingId": {
+          "shape": "__string",
+          "locationName": "offeringId",
+          "documentation": "Unique offering ID, e.g. '87654321'"
+        },
+        "OfferingType": {
+          "shape": "OfferingType",
+          "locationName": "offeringType",
+          "documentation": "Offering type, e.g. 'NO_UPFRONT'"
+        },
+        "Region": {
+          "shape": "__string",
+          "locationName": "region",
+          "documentation": "AWS region, e.g. 'us-west-2'"
+        },
+        "ReservationId": {
+          "shape": "__string",
+          "locationName": "reservationId",
+          "documentation": "Unique reservation ID, e.g. '1234567'"
+        },
+        "ResourceSpecification": {
+          "shape": "ReservationResourceSpecification",
+          "locationName": "resourceSpecification",
+          "documentation": "Resource configuration details"
+        },
+        "Start": {
+          "shape": "__string",
+          "locationName": "start",
+          "documentation": "Reservation UTC start date and time in ISO-8601 format, e.g. '2018-03-01T00:00:00'"
+        },
+        "State": {
+          "shape": "ReservationState",
+          "locationName": "state",
+          "documentation": "Current state of reservation, e.g. 'ACTIVE'"
+        },
+        "UsagePrice": {
+          "shape": "__double",
+          "locationName": "usagePrice",
+          "documentation": "Recurring usage charge for each reserved resource, e.g. '157.0'"
+        }
+      },
+      "documentation": "Placeholder documentation for DeleteReservationResponse"
+    },
     "DescribeChannelRequest": {
       "type": "structure",
       "members": {
@@ -2535,6 +2917,188 @@
         }
       },
       "documentation": "Placeholder documentation for DescribeInputSecurityGroupResponse"
+    },
+    "DescribeOfferingRequest": {
+      "type": "structure",
+      "members": {
+        "OfferingId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "offeringId",
+          "documentation": "Unique offering ID, e.g. '87654321'"
+        }
+      },
+      "required": [
+        "OfferingId"
+      ],
+      "documentation": "Placeholder documentation for DescribeOfferingRequest"
+    },
+    "DescribeOfferingResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "locationName": "arn",
+          "documentation": "Unique offering ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:offering:87654321'"
+        },
+        "CurrencyCode": {
+          "shape": "__string",
+          "locationName": "currencyCode",
+          "documentation": "Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'"
+        },
+        "Duration": {
+          "shape": "__integer",
+          "locationName": "duration",
+          "documentation": "Lease duration, e.g. '12'"
+        },
+        "DurationUnits": {
+          "shape": "OfferingDurationUnits",
+          "locationName": "durationUnits",
+          "documentation": "Units for duration, e.g. 'MONTHS'"
+        },
+        "FixedPrice": {
+          "shape": "__double",
+          "locationName": "fixedPrice",
+          "documentation": "One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering"
+        },
+        "OfferingDescription": {
+          "shape": "__string",
+          "locationName": "offeringDescription",
+          "documentation": "Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'"
+        },
+        "OfferingId": {
+          "shape": "__string",
+          "locationName": "offeringId",
+          "documentation": "Unique offering ID, e.g. '87654321'"
+        },
+        "OfferingType": {
+          "shape": "OfferingType",
+          "locationName": "offeringType",
+          "documentation": "Offering type, e.g. 'NO_UPFRONT'"
+        },
+        "Region": {
+          "shape": "__string",
+          "locationName": "region",
+          "documentation": "AWS region, e.g. 'us-west-2'"
+        },
+        "ResourceSpecification": {
+          "shape": "ReservationResourceSpecification",
+          "locationName": "resourceSpecification",
+          "documentation": "Resource configuration details"
+        },
+        "UsagePrice": {
+          "shape": "__double",
+          "locationName": "usagePrice",
+          "documentation": "Recurring usage charge for each reserved resource, e.g. '157.0'"
+        }
+      },
+      "documentation": "Placeholder documentation for DescribeOfferingResponse"
+    },
+    "DescribeReservationRequest": {
+      "type": "structure",
+      "members": {
+        "ReservationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "reservationId",
+          "documentation": "Unique reservation ID, e.g. '1234567'"
+        }
+      },
+      "required": [
+        "ReservationId"
+      ],
+      "documentation": "Placeholder documentation for DescribeReservationRequest"
+    },
+    "DescribeReservationResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "locationName": "arn",
+          "documentation": "Unique reservation ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:reservation:1234567'"
+        },
+        "Count": {
+          "shape": "__integer",
+          "locationName": "count",
+          "documentation": "Number of reserved resources"
+        },
+        "CurrencyCode": {
+          "shape": "__string",
+          "locationName": "currencyCode",
+          "documentation": "Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'"
+        },
+        "Duration": {
+          "shape": "__integer",
+          "locationName": "duration",
+          "documentation": "Lease duration, e.g. '12'"
+        },
+        "DurationUnits": {
+          "shape": "OfferingDurationUnits",
+          "locationName": "durationUnits",
+          "documentation": "Units for duration, e.g. 'MONTHS'"
+        },
+        "End": {
+          "shape": "__string",
+          "locationName": "end",
+          "documentation": "Reservation UTC end date and time in ISO-8601 format, e.g. '2019-03-01T00:00:00'"
+        },
+        "FixedPrice": {
+          "shape": "__double",
+          "locationName": "fixedPrice",
+          "documentation": "One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering"
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "User specified reservation name"
+        },
+        "OfferingDescription": {
+          "shape": "__string",
+          "locationName": "offeringDescription",
+          "documentation": "Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'"
+        },
+        "OfferingId": {
+          "shape": "__string",
+          "locationName": "offeringId",
+          "documentation": "Unique offering ID, e.g. '87654321'"
+        },
+        "OfferingType": {
+          "shape": "OfferingType",
+          "locationName": "offeringType",
+          "documentation": "Offering type, e.g. 'NO_UPFRONT'"
+        },
+        "Region": {
+          "shape": "__string",
+          "locationName": "region",
+          "documentation": "AWS region, e.g. 'us-west-2'"
+        },
+        "ReservationId": {
+          "shape": "__string",
+          "locationName": "reservationId",
+          "documentation": "Unique reservation ID, e.g. '1234567'"
+        },
+        "ResourceSpecification": {
+          "shape": "ReservationResourceSpecification",
+          "locationName": "resourceSpecification",
+          "documentation": "Resource configuration details"
+        },
+        "Start": {
+          "shape": "__string",
+          "locationName": "start",
+          "documentation": "Reservation UTC start date and time in ISO-8601 format, e.g. '2018-03-01T00:00:00'"
+        },
+        "State": {
+          "shape": "ReservationState",
+          "locationName": "state",
+          "documentation": "Current state of reservation, e.g. 'ACTIVE'"
+        },
+        "UsagePrice": {
+          "shape": "__double",
+          "locationName": "usagePrice",
+          "documentation": "Recurring usage charge for each reserved resource, e.g. '157.0'"
+        }
+      },
+      "documentation": "Placeholder documentation for DescribeReservationResponse"
     },
     "DvbNitSettings": {
       "type": "structure",
@@ -4819,6 +5383,192 @@
       },
       "documentation": "Placeholder documentation for ListInputsResultModel"
     },
+    "ListOfferingsRequest": {
+      "type": "structure",
+      "members": {
+        "ChannelConfiguration": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "channelConfiguration",
+          "documentation": "Filter to offerings that match the configuration of an existing channel, e.g. '2345678' (a channel ID)\n"
+        },
+        "Codec": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "codec",
+          "documentation": "Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "MaximumBitrate": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "maximumBitrate",
+          "documentation": "Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'\n"
+        },
+        "MaximumFramerate": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "maximumFramerate",
+          "documentation": "Filter by framerate, 'MAX_30_FPS' or 'MAX_60_FPS'"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "Resolution": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "resolution",
+          "documentation": "Filter by resolution, 'SD', 'HD', or 'UHD'"
+        },
+        "ResourceType": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "resourceType",
+          "documentation": "Filter by resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'"
+        },
+        "SpecialFeature": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "specialFeature",
+          "documentation": "Filter by special feature, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'\n"
+        },
+        "VideoQuality": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "videoQuality",
+          "documentation": "Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'\n"
+        }
+      },
+      "documentation": "Placeholder documentation for ListOfferingsRequest"
+    },
+    "ListOfferingsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "Token to retrieve the next page of results"
+        },
+        "Offerings": {
+          "shape": "__listOfOffering",
+          "locationName": "offerings",
+          "documentation": "List of offerings"
+        }
+      },
+      "documentation": "Placeholder documentation for ListOfferingsResponse"
+    },
+    "ListOfferingsResultModel": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "Token to retrieve the next page of results"
+        },
+        "Offerings": {
+          "shape": "__listOfOffering",
+          "locationName": "offerings",
+          "documentation": "List of offerings"
+        }
+      },
+      "documentation": "ListOfferings response"
+    },
+    "ListReservationsRequest": {
+      "type": "structure",
+      "members": {
+        "Codec": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "codec",
+          "documentation": "Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "MaximumBitrate": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "maximumBitrate",
+          "documentation": "Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'\n"
+        },
+        "MaximumFramerate": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "maximumFramerate",
+          "documentation": "Filter by framerate, 'MAX_30_FPS' or 'MAX_60_FPS'"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "Resolution": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "resolution",
+          "documentation": "Filter by resolution, 'SD', 'HD', or 'UHD'"
+        },
+        "ResourceType": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "resourceType",
+          "documentation": "Filter by resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'"
+        },
+        "SpecialFeature": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "specialFeature",
+          "documentation": "Filter by special feature, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'\n"
+        },
+        "VideoQuality": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "videoQuality",
+          "documentation": "Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'\n"
+        }
+      },
+      "documentation": "Placeholder documentation for ListReservationsRequest"
+    },
+    "ListReservationsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "Token to retrieve the next page of results"
+        },
+        "Reservations": {
+          "shape": "__listOfReservation",
+          "locationName": "reservations",
+          "documentation": "List of reservations"
+        }
+      },
+      "documentation": "Placeholder documentation for ListReservationsResponse"
+    },
+    "ListReservationsResultModel": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "Token to retrieve the next page of results"
+        },
+        "Reservations": {
+          "shape": "__listOfReservation",
+          "locationName": "reservations",
+          "documentation": "List of reservations"
+        }
+      },
+      "documentation": "ListReservations response"
+    },
     "LogLevel": {
       "type": "string",
       "enum": [
@@ -5512,6 +6262,81 @@
       },
       "documentation": "Placeholder documentation for NotFoundException"
     },
+    "Offering": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "locationName": "arn",
+          "documentation": "Unique offering ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:offering:87654321'"
+        },
+        "CurrencyCode": {
+          "shape": "__string",
+          "locationName": "currencyCode",
+          "documentation": "Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'"
+        },
+        "Duration": {
+          "shape": "__integer",
+          "locationName": "duration",
+          "documentation": "Lease duration, e.g. '12'"
+        },
+        "DurationUnits": {
+          "shape": "OfferingDurationUnits",
+          "locationName": "durationUnits",
+          "documentation": "Units for duration, e.g. 'MONTHS'"
+        },
+        "FixedPrice": {
+          "shape": "__double",
+          "locationName": "fixedPrice",
+          "documentation": "One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering"
+        },
+        "OfferingDescription": {
+          "shape": "__string",
+          "locationName": "offeringDescription",
+          "documentation": "Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'"
+        },
+        "OfferingId": {
+          "shape": "__string",
+          "locationName": "offeringId",
+          "documentation": "Unique offering ID, e.g. '87654321'"
+        },
+        "OfferingType": {
+          "shape": "OfferingType",
+          "locationName": "offeringType",
+          "documentation": "Offering type, e.g. 'NO_UPFRONT'"
+        },
+        "Region": {
+          "shape": "__string",
+          "locationName": "region",
+          "documentation": "AWS region, e.g. 'us-west-2'"
+        },
+        "ResourceSpecification": {
+          "shape": "ReservationResourceSpecification",
+          "locationName": "resourceSpecification",
+          "documentation": "Resource configuration details"
+        },
+        "UsagePrice": {
+          "shape": "__double",
+          "locationName": "usagePrice",
+          "documentation": "Recurring usage charge for each reserved resource, e.g. '157.0'"
+        }
+      },
+      "documentation": "Reserved resources available for purchase"
+    },
+    "OfferingDurationUnits": {
+      "type": "string",
+      "documentation": "Units for duration, e.g. 'MONTHS'",
+      "enum": [
+        "MONTHS"
+      ]
+    },
+    "OfferingType": {
+      "type": "string",
+      "documentation": "Offering type, e.g. 'NO_UPFRONT'",
+      "enum": [
+        "NO_UPFRONT"
+      ]
+    },
     "Output": {
       "type": "structure",
       "members": {
@@ -5680,6 +6505,79 @@
       },
       "documentation": "Placeholder documentation for PassThroughSettings"
     },
+    "PurchaseOffering": {
+      "type": "structure",
+      "members": {
+        "Count": {
+          "shape": "__integerMin1",
+          "locationName": "count",
+          "documentation": "Number of resources"
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "Name for the new reservation"
+        },
+        "RequestId": {
+          "shape": "__string",
+          "locationName": "requestId",
+          "documentation": "Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.",
+          "idempotencyToken": true
+        }
+      },
+      "documentation": "PurchaseOffering request"
+    },
+    "PurchaseOfferingRequest": {
+      "type": "structure",
+      "members": {
+        "Count": {
+          "shape": "__integerMin1",
+          "locationName": "count",
+          "documentation": "Number of resources"
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "Name for the new reservation"
+        },
+        "OfferingId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "offeringId",
+          "documentation": "Offering to purchase, e.g. '87654321'"
+        },
+        "RequestId": {
+          "shape": "__string",
+          "locationName": "requestId",
+          "documentation": "Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.",
+          "idempotencyToken": true
+        }
+      },
+      "required": [
+        "OfferingId"
+      ],
+      "documentation": "Placeholder documentation for PurchaseOfferingRequest"
+    },
+    "PurchaseOfferingResponse": {
+      "type": "structure",
+      "members": {
+        "Reservation": {
+          "shape": "Reservation",
+          "locationName": "reservation"
+        }
+      },
+      "documentation": "Placeholder documentation for PurchaseOfferingResponse"
+    },
+    "PurchaseOfferingResultModel": {
+      "type": "structure",
+      "members": {
+        "Reservation": {
+          "shape": "Reservation",
+          "locationName": "reservation"
+        }
+      },
+      "documentation": "PurchaseOffering response"
+    },
     "RemixSettings": {
       "type": "structure",
       "members": {
@@ -5703,6 +6601,210 @@
         "ChannelMappings"
       ],
       "documentation": "Placeholder documentation for RemixSettings"
+    },
+    "Reservation": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "locationName": "arn",
+          "documentation": "Unique reservation ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:reservation:1234567'"
+        },
+        "Count": {
+          "shape": "__integer",
+          "locationName": "count",
+          "documentation": "Number of reserved resources"
+        },
+        "CurrencyCode": {
+          "shape": "__string",
+          "locationName": "currencyCode",
+          "documentation": "Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'"
+        },
+        "Duration": {
+          "shape": "__integer",
+          "locationName": "duration",
+          "documentation": "Lease duration, e.g. '12'"
+        },
+        "DurationUnits": {
+          "shape": "OfferingDurationUnits",
+          "locationName": "durationUnits",
+          "documentation": "Units for duration, e.g. 'MONTHS'"
+        },
+        "End": {
+          "shape": "__string",
+          "locationName": "end",
+          "documentation": "Reservation UTC end date and time in ISO-8601 format, e.g. '2019-03-01T00:00:00'"
+        },
+        "FixedPrice": {
+          "shape": "__double",
+          "locationName": "fixedPrice",
+          "documentation": "One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering"
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "User specified reservation name"
+        },
+        "OfferingDescription": {
+          "shape": "__string",
+          "locationName": "offeringDescription",
+          "documentation": "Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ in US West (Oregon)'"
+        },
+        "OfferingId": {
+          "shape": "__string",
+          "locationName": "offeringId",
+          "documentation": "Unique offering ID, e.g. '87654321'"
+        },
+        "OfferingType": {
+          "shape": "OfferingType",
+          "locationName": "offeringType",
+          "documentation": "Offering type, e.g. 'NO_UPFRONT'"
+        },
+        "Region": {
+          "shape": "__string",
+          "locationName": "region",
+          "documentation": "AWS region, e.g. 'us-west-2'"
+        },
+        "ReservationId": {
+          "shape": "__string",
+          "locationName": "reservationId",
+          "documentation": "Unique reservation ID, e.g. '1234567'"
+        },
+        "ResourceSpecification": {
+          "shape": "ReservationResourceSpecification",
+          "locationName": "resourceSpecification",
+          "documentation": "Resource configuration details"
+        },
+        "Start": {
+          "shape": "__string",
+          "locationName": "start",
+          "documentation": "Reservation UTC start date and time in ISO-8601 format, e.g. '2018-03-01T00:00:00'"
+        },
+        "State": {
+          "shape": "ReservationState",
+          "locationName": "state",
+          "documentation": "Current state of reservation, e.g. 'ACTIVE'"
+        },
+        "UsagePrice": {
+          "shape": "__double",
+          "locationName": "usagePrice",
+          "documentation": "Recurring usage charge for each reserved resource, e.g. '157.0'"
+        }
+      },
+      "documentation": "Reserved resources available to use"
+    },
+    "ReservationCodec": {
+      "type": "string",
+      "documentation": "Codec, 'MPEG2', 'AVC', 'HEVC', or 'AUDIO'",
+      "enum": [
+        "MPEG2",
+        "AVC",
+        "HEVC",
+        "AUDIO"
+      ]
+    },
+    "ReservationMaximumBitrate": {
+      "type": "string",
+      "documentation": "Maximum bitrate in megabits per second",
+      "enum": [
+        "MAX_10_MBPS",
+        "MAX_20_MBPS",
+        "MAX_50_MBPS"
+      ]
+    },
+    "ReservationMaximumFramerate": {
+      "type": "string",
+      "documentation": "Maximum framerate in frames per second (Outputs only)",
+      "enum": [
+        "MAX_30_FPS",
+        "MAX_60_FPS"
+      ]
+    },
+    "ReservationResolution": {
+      "type": "string",
+      "documentation": "Resolution based on lines of vertical resolution; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines\n",
+      "enum": [
+        "SD",
+        "HD",
+        "UHD"
+      ]
+    },
+    "ReservationResourceSpecification": {
+      "type": "structure",
+      "members": {
+        "Codec": {
+          "shape": "ReservationCodec",
+          "locationName": "codec",
+          "documentation": "Codec, e.g. 'AVC'"
+        },
+        "MaximumBitrate": {
+          "shape": "ReservationMaximumBitrate",
+          "locationName": "maximumBitrate",
+          "documentation": "Maximum bitrate, e.g. 'MAX_20_MBPS'"
+        },
+        "MaximumFramerate": {
+          "shape": "ReservationMaximumFramerate",
+          "locationName": "maximumFramerate",
+          "documentation": "Maximum framerate, e.g. 'MAX_30_FPS' (Outputs only)"
+        },
+        "Resolution": {
+          "shape": "ReservationResolution",
+          "locationName": "resolution",
+          "documentation": "Resolution, e.g. 'HD'"
+        },
+        "ResourceType": {
+          "shape": "ReservationResourceType",
+          "locationName": "resourceType",
+          "documentation": "Resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'"
+        },
+        "SpecialFeature": {
+          "shape": "ReservationSpecialFeature",
+          "locationName": "specialFeature",
+          "documentation": "Special feature, e.g. 'AUDIO_NORMALIZATION' (Channels only)"
+        },
+        "VideoQuality": {
+          "shape": "ReservationVideoQuality",
+          "locationName": "videoQuality",
+          "documentation": "Video quality, e.g. 'STANDARD' (Outputs only)"
+        }
+      },
+      "documentation": "Resource configuration (codec, resolution, bitrate, ...)"
+    },
+    "ReservationResourceType": {
+      "type": "string",
+      "documentation": "Resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'",
+      "enum": [
+        "INPUT",
+        "OUTPUT",
+        "CHANNEL"
+      ]
+    },
+    "ReservationSpecialFeature": {
+      "type": "string",
+      "documentation": "Special features, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'",
+      "enum": [
+        "ADVANCED_AUDIO",
+        "AUDIO_NORMALIZATION"
+      ]
+    },
+    "ReservationState": {
+      "type": "string",
+      "documentation": "Current reservation state",
+      "enum": [
+        "ACTIVE",
+        "EXPIRED",
+        "CANCELED",
+        "DELETED"
+      ]
+    },
+    "ReservationVideoQuality": {
+      "type": "string",
+      "documentation": "Video quality, e.g. 'STANDARD' (Outputs only)",
+      "enum": [
+        "STANDARD",
+        "ENHANCED",
+        "PREMIUM"
+      ]
     },
     "ResourceConflict": {
       "type": "structure",
@@ -7141,6 +8243,13 @@
       },
       "documentation": "Placeholder documentation for __listOfInputWhitelistRuleCidr"
     },
+    "__listOfOffering": {
+      "type": "list",
+      "member": {
+        "shape": "Offering"
+      },
+      "documentation": "Placeholder documentation for __listOfOffering"
+    },
     "__listOfOutput": {
       "type": "list",
       "member": {
@@ -7168,6 +8277,13 @@
         "shape": "OutputGroup"
       },
       "documentation": "Placeholder documentation for __listOfOutputGroup"
+    },
+    "__listOfReservation": {
+      "type": "list",
+      "member": {
+        "shape": "Reservation"
+      },
+      "documentation": "Placeholder documentation for __listOfReservation"
     },
     "__listOfValidationError": {
       "type": "list",
