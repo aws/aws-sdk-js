@@ -26,7 +26,10 @@
     "name": "Budgets"
   },
   "clouddirectory": {
-    "name": "CloudDirectory"
+    "name": "CloudDirectory",
+    "versions": [
+      "2016-05-10*"
+    ]
   },
   "cloudformation": {
     "name": "CloudFormation",

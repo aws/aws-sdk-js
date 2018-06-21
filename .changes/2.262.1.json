@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudDirectory",
+        "description": "SDK release to support Flexible Schema initiative being carried out by Amazon Cloud Directory. This feature lets customers using new capabilities like: variant typed attributes, dynamic facets and AWS managed Cloud Directory schemas."
+    }
+]

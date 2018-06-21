@@ -340,6 +340,14 @@ declare class CloudDirectory extends Service {
    */
   listIndex(callback?: (err: AWSError, data: CloudDirectory.Types.ListIndexResponse) => void): Request<CloudDirectory.Types.ListIndexResponse, AWSError>;
   /**
+   * Lists the major version families of each managed schema. If a major version ARN is provided as SchemaArn, the minor version revisions in that family are listed instead.
+   */
+  listManagedSchemaArns(params: CloudDirectory.Types.ListManagedSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListManagedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListManagedSchemaArnsResponse, AWSError>;
+  /**
+   * Lists the major version families of each managed schema. If a major version ARN is provided as SchemaArn, the minor version revisions in that family are listed instead.
+   */
+  listManagedSchemaArns(callback?: (err: AWSError, data: CloudDirectory.Types.ListManagedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListManagedSchemaArnsResponse, AWSError>;
+  /**
    * Lists all attributes that are associated with an object. 
    */
   listObjectAttributes(params: CloudDirectory.Types.ListObjectAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectAttributesResponse) => void): Request<CloudDirectory.Types.ListObjectAttributesResponse, AWSError>;
@@ -1610,7 +1618,11 @@ declare namespace CloudDirectory {
     /**
      * Specifies whether a given object created from this facet is of type node, leaf node, policy or index.   Node: Can have multiple children but one parent.     Leaf node: Cannot have children but can have multiple parents.     Policy: Allows you to store a policy document and policy type. For more information, see Policies.     Index: Can be created with the Index API.  
      */
-    ObjectType: ObjectType;
+    ObjectType?: ObjectType;
+    /**
+     * There are two different styles that you can define on any given facet, Static and Dynamic. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.
+     */
+    FacetStyle?: FacetStyle;
   }
   export interface CreateFacetResponse {
   }
@@ -1878,6 +1890,10 @@ declare namespace CloudDirectory {
      * The object type that is associated with the facet. See CreateFacetRequest$ObjectType for more details.
      */
     ObjectType?: ObjectType;
+    /**
+     * There are two different styles that you can define on any given facet, Static and Dynamic. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.
+     */
+    FacetStyle?: FacetStyle;
   }
   export interface FacetAttribute {
     /**
@@ -1926,7 +1942,7 @@ declare namespace CloudDirectory {
      */
     TargetAttributeName: AttributeName;
   }
-  export type FacetAttributeType = "STRING"|"BINARY"|"BOOLEAN"|"NUMBER"|"DATETIME"|string;
+  export type FacetAttributeType = "STRING"|"BINARY"|"BOOLEAN"|"NUMBER"|"DATETIME"|"VARIANT"|string;
   export interface FacetAttributeUpdate {
     /**
      * The attribute to update.
@@ -1940,6 +1956,7 @@ declare namespace CloudDirectory {
   export type FacetAttributeUpdateList = FacetAttributeUpdate[];
   export type FacetName = string;
   export type FacetNameList = FacetName[];
+  export type FacetStyle = "STATIC"|"DYNAMIC"|string;
   export interface GetAppliedSchemaVersionRequest {
     /**
      * The ARN of the applied schema.
@@ -2349,6 +2366,30 @@ declare namespace CloudDirectory {
      * The objects and indexed values attached to the index.
      */
     IndexAttachments?: IndexAttachmentList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListManagedSchemaArnsRequest {
+    /**
+     * The response for ListManagedSchemaArns. When this parameter is used, all minor version ARNs for a major version are listed.
+     */
+    SchemaArn?: Arn;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface ListManagedSchemaArnsResponse {
+    /**
+     * The ARNs for all AWS managed schemas.
+     */
+    SchemaArns?: Arns;
     /**
      * The pagination token.
      */
@@ -3205,7 +3246,7 @@ declare namespace CloudDirectory {
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
-  export type apiVersion = "2016-05-10"|"latest"|string;
+  export type apiVersion = "2016-05-10"|"2016-05-10"|"2017-01-11"|"latest"|string;
   export interface ClientApiVersions {
     /**
      * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
