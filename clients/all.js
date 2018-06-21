@@ -142,5 +142,6 @@ module.exports = {
   PI: require('./pi'),
   Neptune: require('./neptune'),
   MediaTailor: require('./mediatailor'),
-  EKS: require('./eks')
+  EKS: require('./eks'),
+  Macie: require('./macie')
 };

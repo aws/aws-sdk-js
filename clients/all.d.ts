@@ -141,3 +141,4 @@ export import PI = require('./pi');
 export import Neptune = require('./neptune');
 export import MediaTailor = require('./mediatailor');
 export import EKS = require('./eks');
+export import Macie = require('./macie');

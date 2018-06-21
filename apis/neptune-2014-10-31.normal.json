@@ -1578,7 +1578,8 @@
         },
         "PubliclyAccessible":{
           "shape":"BooleanOptional",
-          "documentation":"<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b> true</p> </li> <li> <p> <b>VPC:</b> false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>"
+          "documentation":"<p>This parameter is not supported.</p>",
+          "deprecated":true
         },
         "Tags":{"shape":"TagList"},
         "DBClusterIdentifier":{
@@ -2519,7 +2520,8 @@
         },
         "PubliclyAccessible":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b>true</p> </li> <li> <p> <b>VPC:</b>false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>"
+          "documentation":"<p>This parameter is not supported.</p>",
+          "deprecated":true
         },
         "StatusInfos":{
           "shape":"DBInstanceStatusInfoList",
@@ -4370,7 +4372,8 @@
         },
         "PubliclyAccessible":{
           "shape":"BooleanOptional",
-          "documentation":"<p>Boolean value that indicates if the DB instance has a publicly resolvable DNS name. Set to <code>True</code> to make the DB instance Internet-facing with a publicly resolvable DNS name, which resolves to a public IP address. Set to <code>False</code> to make the DB instance internal with a DNS name that resolves to a private IP address. </p> <p> The DB instance must be part of a public subnet and <code>PubliclyAccessible</code> must be true in order for it to be publicly accessible. </p> <p>Changes to the <code>PubliclyAccessible</code> parameter are applied immediately regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p>Default: false</p>"
+          "documentation":"<p>This parameter is not supported.</p>",
+          "deprecated":true
         },
         "MonitoringRoleArn":{
           "shape":"String",

@@ -578,5 +578,8 @@
   },
   "eks": {
     "name": "EKS"
+  },
+  "macie": {
+    "name": "Macie"
   }
 }
