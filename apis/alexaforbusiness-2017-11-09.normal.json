@@ -33,7 +33,8 @@
       "input":{"shape":"AssociateDeviceWithRoomRequest"},
       "output":{"shape":"AssociateDeviceWithRoomResponse"},
       "errors":[
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"DeviceNotRegisteredException"}
       ],
       "documentation":"<p>Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. </p>"
     },
@@ -237,6 +238,9 @@
       },
       "input":{"shape":"DisassociateDeviceFromRoomRequest"},
       "output":{"shape":"DisassociateDeviceFromRoomResponse"},
+      "errors":[
+        {"shape":"DeviceNotRegisteredException"}
+      ],
       "documentation":"<p>Disassociates a device from its current room. The device continues to be connected to the Wi-Fi network and is still registered to the account. The device settings and skills are removed from the room.</p>"
     },
     "DisassociateSkillGroupFromRoom":{
@@ -504,6 +508,9 @@
       },
       "input":{"shape":"StartDeviceSyncRequest"},
       "output":{"shape":"StartDeviceSyncResponse"},
+      "errors":[
+        {"shape":"DeviceNotRegisteredException"}
+      ],
       "documentation":"<p>Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.</p>"
     },
     "TagResource":{
@@ -568,7 +575,8 @@
       "input":{"shape":"UpdateDeviceRequest"},
       "output":{"shape":"UpdateDeviceResponse"},
       "errors":[
-        {"shape":"NotFoundException"}
+        {"shape":"NotFoundException"},
+        {"shape":"DeviceNotRegisteredException"}
       ],
       "documentation":"<p>Updates the device name by device ARN.</p>"
     },
@@ -1302,6 +1310,13 @@
       "max":100,
       "min":2,
       "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
+    "DeviceNotRegisteredException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
     },
     "DeviceSerialNumber":{
       "type":"string",

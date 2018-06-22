@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.262.1-->
+<!--LATEST=2.263.1-->
 <!--ENTRYINSERT-->
+
+## 2.263.1
+* feature: AlexaForBusiness:  Introduce DeviceNotRegisteredException for AWSMoneypenny
+* feature: AppStream: This API update enables customers to find their VPC private IP address and ENI ID associated with AppStream streaming sessions.
 
 ## 2.262.1
 * feature: CloudDirectory: SDK release to support Flexible Schema initiative being carried out by Amazon Cloud Directory. This feature lets customers using new capabilities like: variant typed attributes, dynamic facets and AWS managed Cloud Directory schemas.
