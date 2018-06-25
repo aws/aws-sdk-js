@@ -9,7 +9,7 @@ function validateEvents(events, expected) {
       equaledIndex ++;
     }
     if (equaledIndex === expected.length) {
-      throw new Error('Cannot validate the event: ' + event);
+      throw new Error('Cannot validate the event: ' + JSON.stringify(event));
     } else {
       expected = expected.slice(0, equaledIndex).concat(expected.slice(equaledIndex + 1))
     }
@@ -48,8 +48,8 @@ function validateApiCallAttemptEvent(event, expected) {
   if (!validateEntry(event, expected, 'AwsException')) return false;
   if (!validateEntry(event, expected, 'AwsExceptionMessage')) return false;
   if (!validateEntry(event, expected, 'SessionToken')) return false;
-  if (event.Timestamp === undefined || !(parseInt(event.Timestamp) > 0)) return false;
-  if (event.AttemptLatency === undefined || !(parseInt(event.AttemptLatency) >= 0)) return false;
+  if (!validateEntry(event, expected, 'Timestamp')) return false;
+  if (!validateEntry(event, expected, 'AttemptLatency')) return false;
   return true;
 }
 
@@ -62,9 +62,16 @@ function validateEvent(event, expected) {
 }
 
 function validateEntry(event, expected, key) {
-  if (event[key] && !expected[key]) return true;
-  if(event[key] !== expected[key] && expected[key] !== 'ANY') return false;
+  if ((event[key] || event[key] === '') && !expected[key]) return true;
+  if(event[key] !== expected[key] && !isANY(expected[key])) {
+    // console.log(key, event[key], expected[key])
+    return false;
+  }
   return true;
+}
+
+function isANY(value) {
+  return value.indexOf && value.indexOf('ANY_') === 0
 }
 
 module.exports.validateEvents = validateEvents;

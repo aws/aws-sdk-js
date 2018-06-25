@@ -4,17 +4,18 @@ const {EventEmitter} = require('events')
 function mockDefinedResponses(resps, request) {
   let index = 0;
   //mock sdk exception that happens before sending
-  request.on('sign', function(request) {
-    if (resps[index].sdkException) {
-      const resp = resps[index];
-      const retryable = typeof resp.retryable === 'undefined' ? true : resp.retryable;
+  request.onAsync('sign', function(request, done) {
+    if (resps[index].sdkException && resps[index].sdkException.message !== 'NetworkingError') {
+      const resp = resps[index].sdkException;
+      const retryable = typeof resp.isRetryable === 'undefined' ? true : resp.isRetryable;
       request.response.error = AWS.util.error(new Error(), {
-        code: resp.sdkException,
-        message: resp.sdkExceptionMessage,
+        // code: resp.code,
+        message: resp.message,
         retryable: retryable
       });
       index ++;
     }
+    done()
   });
   //mock aws exceptions
   var stream = new EventEmitter();
@@ -28,10 +29,10 @@ function mockDefinedResponses(resps, request) {
           mockFailedResponse(resp, request) :
           mockSuccessfulResponse(resp, request);
         mockHttpSuccessfulResponse(response.statusCode, response.headers, response.body, cb);
-      } else if (resp.sdkException && resp.sdkException === 'NetworkingError') {
+      } else if (resp.sdkException && resp.sdkException.message === 'NetworkingError') {
         errCb({
-          code: resp.sdkException,
-          message: resp.sdkExceptionMessage,
+          code: 'NetworkingError',
+          message: resp.sdkException.message,
         });
       }
       return stream;

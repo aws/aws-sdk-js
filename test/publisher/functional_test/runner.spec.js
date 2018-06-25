@@ -1,49 +1,31 @@
-const helpers = require('../../helpers');
+const {AWS, spyOn, MockServiceFromApi} = require('../../helpers');
 const {mockResponses} = require('./utils/mock_http_client');
 const {validateEvents} = require('./utils/validateEvents');
 const {Publisher} = require('../../../lib/publisher')
+const csmConfigProvider = require('../../../lib/publisher/configuration')
 const schemes = require('./cases')
-const {spawn} = require('child_process')
+const {fork} = require('child_process')
 const dgram = require('dgram');
 const path = require('path')
 const client = dgram.createSocket('udp4');
-const AWS = helpers.AWS;
-const spyOn = helpers.spyOn;
+
+const FAKE_SERVCIE = 'CSM Test';
 
 describe('run functional test', () => {
   let fakeAgent;
   let defaultConfiguration;
   before('setup default configurations', () => {
     defaultConfiguration = schemes.defaults.configuration;
+    AWS.config.clientSideMonitoring = true;
   })
 
-  //start up an udp agent echoing back monitoring events
-  beforeEach('set up fake mock udp agent', (done) => {
-    fakeAgent = spawn('node', [path.join(__dirname, 'utils/mock_agent.js')]);
-    fakeAgent.stdout.once('data', (data) => {
-      var str = data.toString('utf8')
-      if (data.indexOf('server listening') === 0) {
-        //udp agent starts to echo back monitoring events
-        done();
-      }
-    });
-    AWS.config.paramValidation = true;
-  });
-
-  //stop udp agent
-  afterEach('kill mock udp agent', (done) => {
-    AWS.config.paramValidation = false;
-    fakeAgent.kill(9)
-    done();
-  });
-
   for (const scenario of schemes.cases) {
-
-    it(scenario.description, function(done) {
+    it(scenario.description, async function() {
       const backupConfiguration = Object.assign({}, defaultConfiguration);
       AWS.util.update(defaultConfiguration, scenario.configuration);
       //mock of resolving configuration from shared config file
       spyOn(AWS.util.ini, 'parse').andReturn(defaultConfiguration.sharedConfigFile || {});
+
       if(defaultConfiguration.accessKey) {
         AWS.config.credentials.accessKeyId = defaultConfiguration.accessKey
       }
@@ -52,23 +34,25 @@ describe('run functional test', () => {
 
       setEnvironmentVariables(defaultConfiguration);
 
+      //start a subprocess to echo back the udp datagrams
+      fakeAgent = await agentStart();
+
       //listen to the monitoring events echo-ed back
       let monitoringEvents = [];
+
       fakeAgent.stdout.on('data', function(data) {
         const str = data.toString('utf8')
         const parsed = str.trim().split('\n').map(JSON.parse);
         monitoringEvents = monitoringEvents.concat(parsed);
-        if (monitoringEvents.length === scenario.expectedMonitoringEvents.length) {
-          expect(validateEvents(monitoringEvents, scenario.expectedMonitoringEvents)).to.eql(true)
-          done();
-        }
       })
+
       //start call according to test cases
       for (const apiCall of scenario.apiCalls) {
-        AWS.Service.prototype.publisher = new Publisher();
-        const client = new AWS[apiCall.serviceId](defaultConstructParams);
+        AWS.Service.prototype.publisher = new Publisher(csmConfigProvider());
+        const Klass = getServiceClass(apiCall.serviceId);
+        const client = new Klass(defaultConstructParams);
         const operation = apiCall.operationName[0].toLowerCase() + apiCall.operationName.substring(1);
-        const request = client[operation](apiCall.params);
+        const request = client.makeRequest(operation, apiCall.params);
         mockResponses(apiCall.attemptResponses, request);
         request.send();
       }
@@ -91,6 +75,11 @@ describe('run functional test', () => {
       }
       if(defaultConfiguration.accessKey) AWS.config.credentials.accessKeyId = defaultConfiguration.accessKey
       spyOn(AWS.util.ini, 'parse').andReturn(defaultConfiguration.sharedConfigFile || {});
+
+      //close agent and then validate the datagram echo-ed back from agent
+      await agentFinished(fakeAgent).then(() => {
+        expect(validateEvents(monitoringEvents, scenario.expectedMonitoringEvents)).to.eql(true);
+      });
     })
   }
 
@@ -112,5 +101,43 @@ function setEnvironmentVariables(configurations) {
         process.env[key] = configurations.environmentVariables[key];
       }
     }
+  }
+}
+
+function agentStart(port) {
+   //start up an udp agent echoing back monitoring events
+   //pass in --inspect={port} to debug the subprocess
+  return new Promise((resolve) => {
+    port = port || '';
+    const fakeAgent = fork(path.join(__dirname, 'utils/mock_agent.js'), ['--inspect=9223', port], {stdio: ['pipe', 'pipe', 'pipe', 'ipc']});
+    fakeAgent.once('message', (m) => {
+      if (m.message.toLowerCase().indexOf('server listening') === 0) {
+        //udp agent starts to echo back monitoring events
+        resolve(fakeAgent);
+      } else {
+        reject(new Error('agent start error'))
+      }
+    })
+  })
+}
+
+function agentFinished(agentProcess) {
+  return new Promise((resolve, reject) => {
+    agentProcess.once('message', (m) => {
+      // fake csm agent notifies the echo-ing is done.
+      if (m.message && m.message.toLowerCase() === 'recording done') {
+        agentProcess.kill(9)
+      }
+      resolve();
+    });
+    agentProcess.send({message: 'Sending Done'});
+  });
+}
+
+function getServiceClass(serviceId) {
+  if (serviceId === FAKE_SERVCIE) {
+    return AWS.Service.defineService('csmtest', {api: new AWS.Model.Api(require('./utils/csmtest/2018-06-19/service-2.json'))})
+  } else {
+    return AWS[serviceId];
   }
 }
