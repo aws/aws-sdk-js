@@ -1235,6 +1235,9 @@
     "AccountId": {
       "type": "string"
     },
+    "AllowQuotedRecordDelimiter": {
+      "type": "boolean"
+    },
     "AllowedHeader": {
       "type": "string"
     },
@@ -1562,6 +1565,10 @@
         "QuoteCharacter": {
           "shape": "QuoteCharacter",
           "documentation": "Value used for escaping where the field delimiter is part of the value."
+        },
+        "AllowQuotedRecordDelimiter": {
+          "shape": "AllowQuotedRecordDelimiter",
+          "documentation": "Specifies that CSV field values may contain quoted record delimiters and such records should be allowed. Default value is FALSE. Setting this value to TRUE may lower performance."
         }
       },
       "documentation": "Describes how a CSV-formatted input object is formatted."

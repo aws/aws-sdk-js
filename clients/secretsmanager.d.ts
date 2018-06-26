@@ -28,6 +28,14 @@ declare class SecretsManager extends Service {
    */
   createSecret(callback?: (err: AWSError, data: SecretsManager.Types.CreateSecretResponse) => void): Request<SecretsManager.Types.CreateSecretResponse, AWSError>;
   /**
+   * Deletes the resource-based policy currently attached to the secret.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To retrieve the current resource-based policy that is attached to a secret, use GetResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   */
+  deleteResourcePolicy(params: SecretsManager.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: SecretsManager.Types.DeleteResourcePolicyResponse) => void): Request<SecretsManager.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes the resource-based policy currently attached to the secret.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To retrieve the current resource-based policy that is attached to a secret, use GetResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.DeleteResourcePolicyResponse) => void): Request<SecretsManager.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
    * Deletes an entire secret and all of its versions. You can optionally include a recovery window during which you can restore the secret. If you don't specify a recovery window value, the operation defaults to 30 days. Secrets Manager attaches a DeletionDate stamp to the secret that specifies the end of the recovery window. At the end of the recovery window, Secrets Manager deletes the secret permanently. At any time before recovery window ends, you can use RestoreSecret to remove the DeletionDate and cancel the deletion of the secret. You cannot access the encrypted secret information in any secret that is scheduled for deletion. If you need to access that information, you must cancel the deletion with RestoreSecret and then retrieve the information.    There is no explicit operation to delete a version of a secret. Instead, remove all staging labels from the VersionStage field of a version. That marks the version as deprecated and allows Secrets Manager to delete it as needed. Versions that do not have any staging labels do not show up in ListSecretVersionIds unless you specify IncludeDeprecated.   The permanent secret deletion at the end of the waiting period is performed as a background task with low priority. There is no guarantee of a specific time after the recovery window for the actual delete operation to occur.     Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteSecret    Related operations    To create a secret, use CreateSecret.   To cancel deletion of a version of a secret before the recovery window has expired, use RestoreSecret.  
    */
   deleteSecret(params: SecretsManager.Types.DeleteSecretRequest, callback?: (err: AWSError, data: SecretsManager.Types.DeleteSecretResponse) => void): Request<SecretsManager.Types.DeleteSecretResponse, AWSError>;
@@ -52,6 +60,14 @@ declare class SecretsManager extends Service {
    */
   getRandomPassword(callback?: (err: AWSError, data: SecretsManager.Types.GetRandomPasswordResponse) => void): Request<SecretsManager.Types.GetRandomPasswordResponse, AWSError>;
   /**
+   * Retrieves the JSON text of the resource-based policy attached to the specified secret. The JSON request string input and response output are shown formatted with whitespace and line breaks for better readability. Submit your input as a single line JSON string.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:GetResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To delete the resource-based policy that is attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   */
+  getResourcePolicy(params: SecretsManager.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: SecretsManager.Types.GetResourcePolicyResponse) => void): Request<SecretsManager.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   * Retrieves the JSON text of the resource-based policy attached to the specified secret. The JSON request string input and response output are shown formatted with whitespace and line breaks for better readability. Submit your input as a single line JSON string.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:GetResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To delete the resource-based policy that is attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.GetResourcePolicyResponse) => void): Request<SecretsManager.Types.GetResourcePolicyResponse, AWSError>;
+  /**
    * Retrieves the contents of the encrypted fields SecretString or SecretBinary from the specified version of a secret, whichever contains content.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:GetSecretValue   kms:Decrypt - required only if you use a customer-managed AWS KMS key to encrypt the secret. You do not need this permission to use the account's default AWS managed CMK for Secrets Manager.    Related operations    To create a new version of the secret with different encrypted information, use PutSecretValue.   To retrieve the non-encrypted details for the secret, use DescribeSecret.  
    */
   getSecretValue(params: SecretsManager.Types.GetSecretValueRequest, callback?: (err: AWSError, data: SecretsManager.Types.GetSecretValueResponse) => void): Request<SecretsManager.Types.GetSecretValueResponse, AWSError>;
@@ -75,6 +91,14 @@ declare class SecretsManager extends Service {
    * Lists all of the secrets that are stored by Secrets Manager in the AWS account. To list the versions currently stored for a specific secret, use ListSecretVersionIds. The encrypted fields SecretString and SecretBinary are not included in the output. To get that information, call the GetSecretValue operation.  Always check the NextToken response parameter when calling any of the List* operations. These operations can occasionally return an empty or shorter than expected list of results even when there are more results available. When this happens, the NextToken response parameter contains a value to pass to the next call to the same API to request the next part of the list.   Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:ListSecrets    Related operations    To list the versions attached to a secret, use ListSecretVersionIds.  
    */
   listSecrets(callback?: (err: AWSError, data: SecretsManager.Types.ListSecretsResponse) => void): Request<SecretsManager.Types.ListSecretsResponse, AWSError>;
+  /**
+   * Attaches the contents of the specified resource-based policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM user-based policies that specify the secret's ARN in the policy statement's Resources element. You can also use a combination of both identity- an resource-based policies. The affected users and roles receive the permissions permitted by all of the relevant policies. For more information, see Using Resource-Based Policies for AWS Secrets Manager. For the complete description of the AWS policy syntax and grammar, see IAM JSON Policy Reference in the IAM User Guide.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutResourcePolicy    Related operations    To retrieve the resource policy attached to a secret, use GetResourcePolicy.   To delete the resource-based policy that is attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   */
+  putResourcePolicy(params: SecretsManager.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: SecretsManager.Types.PutResourcePolicyResponse) => void): Request<SecretsManager.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Attaches the contents of the specified resource-based policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM user-based policies that specify the secret's ARN in the policy statement's Resources element. You can also use a combination of both identity- an resource-based policies. The affected users and roles receive the permissions permitted by all of the relevant policies. For more information, see Using Resource-Based Policies for AWS Secrets Manager. For the complete description of the AWS policy syntax and grammar, see IAM JSON Policy Reference in the IAM User Guide.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutResourcePolicy    Related operations    To retrieve the resource policy attached to a secret, use GetResourcePolicy.   To delete the resource-based policy that is attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.PutResourcePolicyResponse) => void): Request<SecretsManager.Types.PutResourcePolicyResponse, AWSError>;
   /**
    * Stores a new encrypted secret value in the specified secret. To do this, the operation creates a new version and attaches it to the secret. The version can contain a new SecretString value or a new SecretBinary value. You can also specify the staging labels that are initially attached to the new version.  The Secrets Manager console uses only the SecretString field. To add binary data to a secret with the SecretBinary field you must use the AWS CLI or one of the AWS SDKs.    If this operation creates the first version for the secret then Secrets Manager automatically attaches the staging label AWSCURRENT to the new version.   If another version of this secret already exists, then this operation does not automatically move any staging labels other than those that you explicitly specify in the VersionStages parameter.   If this operation moves the staging label AWSCURRENT from another version to this version (because you included it in the StagingLabels parameter) then Secrets Manager also automatically moves the staging label AWSPREVIOUS to the version that AWSCURRENT was removed from.   This operation is idempotent. If a version with a SecretVersionId with the same value as the ClientRequestToken parameter already exists and you specify the same secret data, the operation succeeds but does nothing. However, if the secret data is different, then the operation fails because you cannot modify an existing version; you can only create new ones.      If you call an operation that needs to encrypt or decrypt the SecretString or SecretBinary for a secret in the same account as the calling user and that secret doesn't specify a AWS KMS encryption key, Secrets Manager uses the account's default AWS managed customer master key (CMK) with the alias aws/secretsmanager. If this key doesn't already exist in your account then Secrets Manager creates it for you automatically. All users in the same AWS account automatically have access to use the default CMK. Note that if an Secrets Manager API call results in AWS having to create the account's AWS-managed CMK, it can result in a one-time significant delay in returning the result.   If the secret is in a different AWS account from the credentials calling an API that requires encryption or decryption of the secret value then you must create and use a custom AWS KMS CMK because you can't access the default CMK for the account using credentials from a different AWS account. Store the ARN of the CMK in the secret when you create the secret or when you update it by including it in the KMSKeyId. If you call an API that must encrypt or decrypt SecretString or SecretBinary using credentials from a different account then the AWS KMS key policy must grant cross-account access to that other account's user or role for both the kms:GenerateDataKey and kms:Decrypt operations.     Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutSecretValue   kms:GenerateDataKey - needed only if you use a customer-managed AWS KMS key to encrypt the secret. You do not need this permission to use the account's default AWS managed CMK for Secrets Manager.    Related operations    To retrieve the encrypted value you store in the version of a secret, use GetSecretValue.   To create a secret, use CreateSecret.   To get the details for a secret, use DescribeSecret.   To list the versions attached to a secret, use ListSecretVersionIds.  
    */
@@ -201,6 +225,22 @@ declare namespace SecretsManager {
     VersionId?: SecretVersionIdType;
   }
   export type CreatedDateType = Date;
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * Specifies the secret for which you want to delete the attached resource-based policy. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
+     */
+    SecretId: SecretIdType;
+  }
+  export interface DeleteResourcePolicyResponse {
+    /**
+     * The ARN of the secret for which the resource-based policy was deleted.
+     */
+    ARN?: SecretARNType;
+    /**
+     * The friendly name of the secret for which the resource-based policy was deleted.
+     */
+    Name?: NameType;
+  }
   export interface DeleteSecretRequest {
     /**
      * Specifies the secret that you want to delete. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
@@ -334,6 +374,26 @@ declare namespace SecretsManager {
      */
     RandomPassword?: RandomPasswordType;
   }
+  export interface GetResourcePolicyRequest {
+    /**
+     * Specifies the secret for which you want to retrieve the attached resource-based policy. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
+     */
+    SecretId: SecretIdType;
+  }
+  export interface GetResourcePolicyResponse {
+    /**
+     * The ARN of the secret for which the resource-based policy was retrieved.
+     */
+    ARN?: SecretARNType;
+    /**
+     * The friendly name of the secret for which the resource-based policy was retrieved.
+     */
+    Name?: NameType;
+    /**
+     * A JSON-formatted string that describes the permissions associated with the attached secret. These permissions are combined with any permissions associated with the user or role who attempts to access this secret. The combined permissions specify who can access the secret and what actions they can perform. For more information, see Authentication and Access Control for AWS Secrets Manager in the AWS Secrets Manager User Guide.
+     */
+    ResourcePolicy?: NonEmptyResourcePolicyType;
+  }
   export interface GetSecretValueRequest {
     /**
      * Specifies the secret containing the version that you want to retrieve. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
@@ -442,7 +502,28 @@ declare namespace SecretsManager {
   export type MaxResultsType = number;
   export type NameType = string;
   export type NextTokenType = string;
+  export type NonEmptyResourcePolicyType = string;
   export type PasswordLengthType = number;
+  export interface PutResourcePolicyRequest {
+    /**
+     * Specifies the secret to which you want to attach the resource-based policy. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
+     */
+    SecretId: SecretIdType;
+    /**
+     * A JSON-formatted string constructed according to the grammar and syntax for an AWS resource-based policy. The policy in the string identifies who can access or manage this secret and its versions. For information on how to format a JSON parameter for the various command line tool environments, see Using JSON for Parameters in the AWS CLI User Guide.
+     */
+    ResourcePolicy: NonEmptyResourcePolicyType;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     * The ARN of the secret for which the resource-based policy was retrieved.
+     */
+    ARN?: SecretARNType;
+    /**
+     * The friendly name of the secret for which the resource-based policy was retrieved.
+     */
+    Name?: NameType;
+  }
   export interface PutSecretValueRequest {
     /**
      * Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.

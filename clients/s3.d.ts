@@ -712,6 +712,7 @@ declare namespace S3 {
     Owner: OwnerOverride;
   }
   export type AccountId = string;
+  export type AllowQuotedRecordDelimiter = boolean;
   export type AllowedHeader = string;
   export type AllowedHeaders = AllowedHeader[];
   export type AllowedMethod = string;
@@ -861,6 +862,10 @@ declare namespace S3 {
      * Value used for escaping where the field delimiter is part of the value.
      */
     QuoteCharacter?: QuoteCharacter;
+    /**
+     * Specifies that CSV field values may contain quoted record delimiters and such records should be allowed. Default value is FALSE. Setting this value to TRUE may lower performance.
+     */
+    AllowQuotedRecordDelimiter?: AllowQuotedRecordDelimiter;
   }
   export interface CSVOutput {
     /**
