@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "Unpublish delete-service-linked-role API."
+    },
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "UpdatePipeline may now throw a LimitExceededException when adding or updating Source Actions that use periodic checks for change detection"
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "This release gives customers the option to batch process a set of documents stored within an S3 bucket in addition to the existing synchronous nature of the current Comprehend API."
+    }
+]

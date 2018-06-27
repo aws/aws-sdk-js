@@ -20,11 +20,11 @@ declare class Comprehend extends Service {
    */
   batchDetectDominantLanguage(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectDominantLanguageResponse) => void): Request<Comprehend.Types.BatchDetectDominantLanguageResponse, AWSError>;
   /**
-   * Inspects the text of a batch of documents and returns information about them. For more information about entities, see how-entities 
+   * Inspects the text of a batch of documents for named entities and returns information about them. For more information about named entities, see how-entities 
    */
   batchDetectEntities(params: Comprehend.Types.BatchDetectEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectEntitiesResponse) => void): Request<Comprehend.Types.BatchDetectEntitiesResponse, AWSError>;
   /**
-   * Inspects the text of a batch of documents and returns information about them. For more information about entities, see how-entities 
+   * Inspects the text of a batch of documents for named entities and returns information about them. For more information about named entities, see how-entities 
    */
   batchDetectEntities(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectEntitiesResponse) => void): Request<Comprehend.Types.BatchDetectEntitiesResponse, AWSError>;
   /**
@@ -44,6 +44,38 @@ declare class Comprehend extends Service {
    */
   batchDetectSentiment(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSentimentResponse) => void): Request<Comprehend.Types.BatchDetectSentimentResponse, AWSError>;
   /**
+   * Gets the properties associated with a dominant language detection job. Use this operation to get the status of a detection job.
+   */
+  describeDominantLanguageDetectionJob(params: Comprehend.Types.DescribeDominantLanguageDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.DescribeDominantLanguageDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a dominant language detection job. Use this operation to get the status of a detection job.
+   */
+  describeDominantLanguageDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.DescribeDominantLanguageDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with an entities detection job. Use this operation to get the status of a detection job.
+   */
+  describeEntitiesDetectionJob(params: Comprehend.Types.DescribeEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with an entities detection job. Use this operation to get the status of a detection job.
+   */
+  describeEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
+   */
+  describeKeyPhrasesDetectionJob(params: Comprehend.Types.DescribeKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
+   */
+  describeKeyPhrasesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a sentiment detection job. Use this operation to get the status of a detection job.
+   */
+  describeSentimentDetectionJob(params: Comprehend.Types.DescribeSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeSentimentDetectionJobResponse) => void): Request<Comprehend.Types.DescribeSentimentDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a sentiment detection job. Use this operation to get the status of a detection job.
+   */
+  describeSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeSentimentDetectionJobResponse) => void): Request<Comprehend.Types.DescribeSentimentDetectionJobResponse, AWSError>;
+  /**
    * Gets the properties associated with a topic detection job. Use this operation to get the status of a detection job.
    */
   describeTopicsDetectionJob(params: Comprehend.Types.DescribeTopicsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeTopicsDetectionJobResponse) => void): Request<Comprehend.Types.DescribeTopicsDetectionJobResponse, AWSError>;
@@ -60,11 +92,11 @@ declare class Comprehend extends Service {
    */
   detectDominantLanguage(callback?: (err: AWSError, data: Comprehend.Types.DetectDominantLanguageResponse) => void): Request<Comprehend.Types.DetectDominantLanguageResponse, AWSError>;
   /**
-   * Inspects text for entities, and returns information about them. For more information, about entities, see how-entities. 
+   * Inspects text for named entities, and returns information about them. For more information, about named entities, see how-entities. 
    */
   detectEntities(params: Comprehend.Types.DetectEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectEntitiesResponse) => void): Request<Comprehend.Types.DetectEntitiesResponse, AWSError>;
   /**
-   * Inspects text for entities, and returns information about them. For more information, about entities, see how-entities. 
+   * Inspects text for named entities, and returns information about them. For more information, about named entities, see how-entities. 
    */
   detectEntities(callback?: (err: AWSError, data: Comprehend.Types.DetectEntitiesResponse) => void): Request<Comprehend.Types.DetectEntitiesResponse, AWSError>;
   /**
@@ -84,6 +116,38 @@ declare class Comprehend extends Service {
    */
   detectSentiment(callback?: (err: AWSError, data: Comprehend.Types.DetectSentimentResponse) => void): Request<Comprehend.Types.DetectSentimentResponse, AWSError>;
   /**
+   * Gets a list of the dominant language detection jobs that you have submitted.
+   */
+  listDominantLanguageDetectionJobs(params: Comprehend.Types.ListDominantLanguageDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDominantLanguageDetectionJobsResponse) => void): Request<Comprehend.Types.ListDominantLanguageDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of the dominant language detection jobs that you have submitted.
+   */
+  listDominantLanguageDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListDominantLanguageDetectionJobsResponse) => void): Request<Comprehend.Types.ListDominantLanguageDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of the entity detection jobs that you have submitted.
+   */
+  listEntitiesDetectionJobs(params: Comprehend.Types.ListEntitiesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListEntitiesDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of the entity detection jobs that you have submitted.
+   */
+  listEntitiesDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListEntitiesDetectionJobsResponse, AWSError>;
+  /**
+   * Get a list of key phrase detection jobs that you have submitted.
+   */
+  listKeyPhrasesDetectionJobs(params: Comprehend.Types.ListKeyPhrasesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListKeyPhrasesDetectionJobsResponse) => void): Request<Comprehend.Types.ListKeyPhrasesDetectionJobsResponse, AWSError>;
+  /**
+   * Get a list of key phrase detection jobs that you have submitted.
+   */
+  listKeyPhrasesDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListKeyPhrasesDetectionJobsResponse) => void): Request<Comprehend.Types.ListKeyPhrasesDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of sentiment detection jobs that you have submitted.
+   */
+  listSentimentDetectionJobs(params: Comprehend.Types.ListSentimentDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListSentimentDetectionJobsResponse) => void): Request<Comprehend.Types.ListSentimentDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of sentiment detection jobs that you have submitted.
+   */
+  listSentimentDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListSentimentDetectionJobsResponse) => void): Request<Comprehend.Types.ListSentimentDetectionJobsResponse, AWSError>;
+  /**
    * Gets a list of the topic detection jobs that you have submitted.
    */
   listTopicsDetectionJobs(params: Comprehend.Types.ListTopicsDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
@@ -92,6 +156,38 @@ declare class Comprehend extends Service {
    */
   listTopicsDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
   /**
+   * Starts an asynchronous dominant language detection job for a collection of documents. Use the operation to track the status of a job.
+   */
+  startDominantLanguageDetectionJob(params: Comprehend.Types.StartDominantLanguageDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StartDominantLanguageDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous dominant language detection job for a collection of documents. Use the operation to track the status of a job.
+   */
+  startDominantLanguageDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StartDominantLanguageDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job.
+   */
+  startEntitiesDetectionJob(params: Comprehend.Types.StartEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job.
+   */
+  startEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous key phrase detection job for a collection of documents. Use the operation to track the status of a job.
+   */
+  startKeyPhrasesDetectionJob(params: Comprehend.Types.StartKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StartKeyPhrasesDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous key phrase detection job for a collection of documents. Use the operation to track the status of a job.
+   */
+  startKeyPhrasesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StartKeyPhrasesDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous sentiment detection job for a collection of documents. use the operation to track the status of a job.
+   */
+  startSentimentDetectionJob(params: Comprehend.Types.StartSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartSentimentDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous sentiment detection job for a collection of documents. use the operation to track the status of a job.
+   */
+  startSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartSentimentDetectionJobResponse, AWSError>;
+  /**
    * Starts an asynchronous topic detection job. Use the DescribeTopicDetectionJob operation to track the status of a job.
    */
   startTopicsDetectionJob(params: Comprehend.Types.StartTopicsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartTopicsDetectionJobResponse) => void): Request<Comprehend.Types.StartTopicsDetectionJobResponse, AWSError>;
@@ -99,6 +195,38 @@ declare class Comprehend extends Service {
    * Starts an asynchronous topic detection job. Use the DescribeTopicDetectionJob operation to track the status of a job.
    */
   startTopicsDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartTopicsDetectionJobResponse) => void): Request<Comprehend.Types.StartTopicsDetectionJobResponse, AWSError>;
+  /**
+   * Stops a dominant language detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   */
+  stopDominantLanguageDetectionJob(params: Comprehend.Types.StopDominantLanguageDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StopDominantLanguageDetectionJobResponse, AWSError>;
+  /**
+   * Stops a dominant language detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   */
+  stopDominantLanguageDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StopDominantLanguageDetectionJobResponse, AWSError>;
+  /**
+   * Stops an entities detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   */
+  stopEntitiesDetectionJob(params: Comprehend.Types.StopEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Stops an entities detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   */
+  stopEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   */
+  stopKeyPhrasesDetectionJob(params: Comprehend.Types.StopKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StopKeyPhrasesDetectionJobResponse, AWSError>;
+  /**
+   * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   */
+  stopKeyPhrasesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StopKeyPhrasesDetectionJobResponse, AWSError>;
+  /**
+   * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   */
+  stopSentimentDetectionJob(params: Comprehend.Types.StopSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopSentimentDetectionJobResponse, AWSError>;
+  /**
+   * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   */
+  stopSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopSentimentDetectionJobResponse, AWSError>;
 }
 declare namespace Comprehend {
   export type AnyLengthString = string;
@@ -144,9 +272,9 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. All documents must be in the same language.
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
      */
-    LanguageCode: String;
+    LanguageCode: LanguageCode;
   }
   export interface BatchDetectEntitiesResponse {
     /**
@@ -174,9 +302,9 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. All documents must be in the same language.
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
      */
-    LanguageCode: String;
+    LanguageCode: LanguageCode;
   }
   export interface BatchDetectKeyPhrasesResponse {
     /**
@@ -208,9 +336,9 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. All documents must be in the same language.
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
      */
-    LanguageCode: String;
+    LanguageCode: LanguageCode;
   }
   export interface BatchDetectSentimentResponse {
     /**
@@ -238,6 +366,54 @@ declare namespace Comprehend {
   }
   export type BatchItemErrorList = BatchItemError[];
   export type ClientRequestTokenString = string;
+  export interface DescribeDominantLanguageDetectionJobRequest {
+    /**
+     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeDominantLanguageDetectionJobResponse {
+    /**
+     * An object that contains the properties associated with a dominant language detection job.
+     */
+    DominantLanguageDetectionJobProperties?: DominantLanguageDetectionJobProperties;
+  }
+  export interface DescribeEntitiesDetectionJobRequest {
+    /**
+     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeEntitiesDetectionJobResponse {
+    /**
+     * An object that contains the properties associated with an entities detection job.
+     */
+    EntitiesDetectionJobProperties?: EntitiesDetectionJobProperties;
+  }
+  export interface DescribeKeyPhrasesDetectionJobRequest {
+    /**
+     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeKeyPhrasesDetectionJobResponse {
+    /**
+     * An object that contains the properties associated with a key phrases detection job. 
+     */
+    KeyPhrasesDetectionJobProperties?: KeyPhrasesDetectionJobProperties;
+  }
+  export interface DescribeSentimentDetectionJobRequest {
+    /**
+     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeSentimentDetectionJobResponse {
+    /**
+     * An object that contains the properties associated with a sentiment detection job.
+     */
+    SentimentDetectionJobProperties?: SentimentDetectionJobProperties;
+  }
   export interface DescribeTopicsDetectionJobRequest {
     /**
      * The identifier assigned by the user to the detection job.
@@ -268,7 +444,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The RFC 5646 language code of the input text. If the request does not specify the language code, the service detects the dominant language. If you specify a language code that the service does not support, it returns UnsupportedLanguageException exception. For more information about RFC 5646, see Tags for Identifying Languages on the IETF Tools web site. 
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -284,7 +460,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The RFC 5646 language code for the input text. If you don't specify a language code, Amazon Comprehend detects the dominant language. If you specify the code for a language that Amazon Comprehend does not support, it returns and UnsupportedLanguageException. For more information about RFC 5646, see Tags for Identifying Languages on the IETF Tools web site.
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -300,7 +476,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The RFC 5646 language code for the input text. If you don't specify a language code, Amazon Comprehend detects the dominant language. If you specify the code for a language that Amazon Comprehend does not support, it returns and UnsupportedLanguageException. For more information about RFC 5646, see Tags for Identifying Languages on the IETF Tools web site.
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -316,7 +492,7 @@ declare namespace Comprehend {
   }
   export interface DominantLanguage {
     /**
-     * The RFC 5646 language code for the dominant language. 
+     * The RFC 5646 language code for the dominant language. For more information about RFC 5646, see Tags for Identifying Languages on the IETF Tools web site.
      */
     LanguageCode?: String;
     /**
@@ -324,6 +500,116 @@ declare namespace Comprehend {
      */
     Score?: Float;
   }
+  export interface DominantLanguageDetectionJobFilter {
+    /**
+     * Filters on the name of the job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list of jobs based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface DominantLanguageDetectionJobProperties {
+    /**
+     * The identifier assigned to the dominant language detection job.
+     */
+    JobId?: JobId;
+    /**
+     * The name that you assigned to the dominant language detection job.
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the dominant language detection job. If the status is FAILED, the Message field shows the reason for the failure.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description for the status of a job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the dominant language detection job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the dominant language detection job completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The input data configuration that you supplied when you created the dominant language detection job.
+     */
+    InputDataConfig?: InputDataConfig;
+    /**
+     * The output data configuration that you supplied when you created the dominant language detection job.
+     */
+    OutputDataConfig?: OutputDataConfig;
+  }
+  export type DominantLanguageDetectionJobPropertiesList = DominantLanguageDetectionJobProperties[];
+  export interface EntitiesDetectionJobFilter {
+    /**
+     * Filters on the name of the job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list of jobs based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface EntitiesDetectionJobProperties {
+    /**
+     * The identifier assigned to the entities detection job.
+     */
+    JobId?: JobId;
+    /**
+     * The name that you assigned the entities detection job.
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the entities detection job. If the status is FAILED, the Message field shows the reason for the failure.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description of the status of a job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the entities detection job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the entities detection job completed
+     */
+    EndTime?: Timestamp;
+    /**
+     * The input data configuration that you supplied when you created the entities detection job.
+     */
+    InputDataConfig?: InputDataConfig;
+    /**
+     * The output data configuration that you supplied when you created the entities detection job. 
+     */
+    OutputDataConfig?: OutputDataConfig;
+    /**
+     * The language code of the input documents.
+     */
+    LanguageCode?: LanguageCode;
+  }
+  export type EntitiesDetectionJobPropertiesList = EntitiesDetectionJobProperties[];
   export interface Entity {
     /**
      * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
@@ -363,7 +649,7 @@ declare namespace Comprehend {
   export type Integer = number;
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string;
   export interface KeyPhrase {
     /**
      * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
@@ -382,7 +668,136 @@ declare namespace Comprehend {
      */
     EndOffset?: Integer;
   }
+  export interface KeyPhrasesDetectionJobFilter {
+    /**
+     * Filters on the name of the job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list of jobs based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface KeyPhrasesDetectionJobProperties {
+    /**
+     * The identifier assigned to the key phrases detection job.
+     */
+    JobId?: JobId;
+    /**
+     * The name that you assigned the key phrases detection job.
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the key phrases detection job. If the status is FAILED, the Message field shows the reason for the failure.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description of the status of a job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the key phrases detection job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the key phrases detection job completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The input data configuration that you supplied when you created the key phrases detection job.
+     */
+    InputDataConfig?: InputDataConfig;
+    /**
+     * The output data configuration that you supplied when you created the key phrases detection job.
+     */
+    OutputDataConfig?: OutputDataConfig;
+    /**
+     * The language code of the input documents.
+     */
+    LanguageCode?: LanguageCode;
+  }
+  export type KeyPhrasesDetectionJobPropertiesList = KeyPhrasesDetectionJobProperties[];
   export type LanguageCode = "en"|"es"|string;
+  export interface ListDominantLanguageDetectionJobsRequest {
+    /**
+     * Filters that jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: DominantLanguageDetectionJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListDominantLanguageDetectionJobsResponse {
+    /**
+     * A list containing the properties of each job that is returned.
+     */
+    DominantLanguageDetectionJobPropertiesList?: DominantLanguageDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListEntitiesDetectionJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: EntitiesDetectionJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListEntitiesDetectionJobsResponse {
+    /**
+     * A list containing the properties of each job that is returned.
+     */
+    EntitiesDetectionJobPropertiesList?: EntitiesDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListKeyPhrasesDetectionJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: KeyPhrasesDetectionJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListKeyPhrasesDetectionJobsResponse {
+    /**
+     * A list containing the properties of each job that is returned.
+     */
+    KeyPhrasesDetectionJobPropertiesList?: KeyPhrasesDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export type ListOfDetectDominantLanguageResult = BatchDetectDominantLanguageItemResult[];
   export type ListOfDetectEntitiesResult = BatchDetectEntitiesItemResult[];
   export type ListOfDetectKeyPhrasesResult = BatchDetectKeyPhrasesItemResult[];
@@ -390,6 +805,30 @@ declare namespace Comprehend {
   export type ListOfDominantLanguages = DominantLanguage[];
   export type ListOfEntities = Entity[];
   export type ListOfKeyPhrases = KeyPhrase[];
+  export interface ListSentimentDetectionJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: SentimentDetectionJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListSentimentDetectionJobsResponse {
+    /**
+     * A list containing the properties of each job that is returned.
+     */
+    SentimentDetectionJobPropertiesList?: SentimentDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListTopicsDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. Jobs can be filtered on their name, status, or the date and time that they were submitted. You can set only one filter at a time.
@@ -400,7 +839,7 @@ declare namespace Comprehend {
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return in each page.
+     * The maximum number of results to return in each page. The default is 100.
      */
     MaxResults?: MaxResultsInteger;
   }
@@ -418,11 +857,68 @@ declare namespace Comprehend {
   export type NumberOfTopicsInteger = number;
   export interface OutputDataConfig {
     /**
-     * The Amazon S3 URI where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling.  The service creates an output file called output.tar.gz. It is a compressed archive that contains two files, topic-terms.csv that lists the terms associated with each topic, and doc-topics.csv that lists the documents associated with each topic. For more information, see topic-modeling.
+     * When you use the OutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output file. When the topic detection job is finished, the service creates an output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the ouput of the operation.
      */
     S3Uri: S3Uri;
   }
   export type S3Uri = string;
+  export interface SentimentDetectionJobFilter {
+    /**
+     * Filters on the name of the job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list of jobs based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface SentimentDetectionJobProperties {
+    /**
+     * The identifier assigned to the sentiment detection job.
+     */
+    JobId?: JobId;
+    /**
+     * The name that you assigned to the sentiment detection job
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the sentiment detection job. If the status is FAILED, the Messages field shows the reason for the failure.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description of the status of a job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the sentiment detection job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the sentiment detection job ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The input data configuration that you supplied when you created the sentiment detection job.
+     */
+    InputDataConfig?: InputDataConfig;
+    /**
+     * The output data configuration that you supplied when you created the sentiment detection job.
+     */
+    OutputDataConfig?: OutputDataConfig;
+    /**
+     * The language code of the input documents.
+     */
+    LanguageCode?: LanguageCode;
+  }
+  export type SentimentDetectionJobPropertiesList = SentimentDetectionJobProperties[];
   export interface SentimentScore {
     /**
      * The level of confidence that Amazon Comprehend has in the accuracy of its detection of the POSITIVE sentiment.
@@ -442,13 +938,153 @@ declare namespace Comprehend {
     Mixed?: Float;
   }
   export type SentimentType = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED"|string;
-  export interface StartTopicsDetectionJobRequest {
+  export interface StartDominantLanguageDetectionJobRequest {
     /**
      * Specifies the format and location of the input data for the job.
      */
     InputDataConfig: InputDataConfig;
     /**
      * Specifies where to send the output files.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * An identifier for the job.
+     */
+    JobName?: JobName;
+    /**
+     * A unique identifier for the request. If you do not set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+  }
+  export interface StartDominantLanguageDetectionJobResponse {
+    /**
+     * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StartEntitiesDetectionJobRequest {
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * The identifier of the job.
+     */
+    JobName?: JobName;
+    /**
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+  }
+  export interface StartEntitiesDetectionJobResponse {
+    /**
+     * The identifier generated for the job. To get the status of job, use this identifier with the operation.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StartKeyPhrasesDetectionJobRequest {
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * The identifier of the job.
+     */
+    JobName?: JobName;
+    /**
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+  }
+  export interface StartKeyPhrasesDetectionJobResponse {
+    /**
+     * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StartSentimentDetectionJobRequest {
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files. 
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * The identifier of the job.
+     */
+    JobName?: JobName;
+    /**
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+  }
+  export interface StartSentimentDetectionJobResponse {
+    /**
+     * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StartTopicsDetectionJobRequest {
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files. The output is a compressed archive with two files, topic-terms.csv that lists the terms associated with each topic, and doc-topics.csv that lists the documents associated with each topic
      */
     OutputDataConfig: OutputDataConfig;
     /**
@@ -475,6 +1111,70 @@ declare namespace Comprehend {
     JobId?: JobId;
     /**
      * The status of the job:    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the DescribeTopicDetectionJob operation.  
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StopDominantLanguageDetectionJobRequest {
+    /**
+     * The identifier of the dominant language detection job to stop.
+     */
+    JobId: JobId;
+  }
+  export interface StopDominantLanguageDetectionJobResponse {
+    /**
+     * The identifier of the dominant language detection job to stop.
+     */
+    JobId?: JobId;
+    /**
+     * Either STOPPING if the job is currently running, or STOPPED if the job was previously stopped with the StopDominantLanguageDetectionJob operation.
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StopEntitiesDetectionJobRequest {
+    /**
+     * The identifier of the entities detection job to stop.
+     */
+    JobId: JobId;
+  }
+  export interface StopEntitiesDetectionJobResponse {
+    /**
+     * The identifier of the entities detection job to stop.
+     */
+    JobId?: JobId;
+    /**
+     * Either STOPPING if the job is currently running, or STOPPED if the job was previously stopped with the StopEntitiesDetectionJob operation.
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StopKeyPhrasesDetectionJobRequest {
+    /**
+     * The identifier of the key phrases detection job to stop.
+     */
+    JobId: JobId;
+  }
+  export interface StopKeyPhrasesDetectionJobResponse {
+    /**
+     * The identifier of the key phrases detection job to stop.
+     */
+    JobId?: JobId;
+    /**
+     * Either STOPPING if the job is currently running, or STOPPED if the job was previously stopped with the StopKeyPhrasesDetectionJob operation.
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StopSentimentDetectionJobRequest {
+    /**
+     * The identifier of the sentiment detection job to stop.
+     */
+    JobId: JobId;
+  }
+  export interface StopSentimentDetectionJobResponse {
+    /**
+     * The identifier of the sentiment detection job to stop.
+     */
+    JobId?: JobId;
+    /**
+     * Either STOPPING if the job is currently running, or STOPPED if the job was previously stopped with the StopSentimentDetectionJob operation.
      */
     JobStatus?: JobStatus;
   }

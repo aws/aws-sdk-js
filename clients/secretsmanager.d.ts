@@ -28,11 +28,11 @@ declare class SecretsManager extends Service {
    */
   createSecret(callback?: (err: AWSError, data: SecretsManager.Types.CreateSecretResponse) => void): Request<SecretsManager.Types.CreateSecretResponse, AWSError>;
   /**
-   * Deletes the resource-based policy currently attached to the secret.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To retrieve the current resource-based policy that is attached to a secret, use GetResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   * Deletes the resource-based permission policy that's attached to the secret.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To retrieve the current resource-based policy that's attached to a secret, use GetResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
    */
   deleteResourcePolicy(params: SecretsManager.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: SecretsManager.Types.DeleteResourcePolicyResponse) => void): Request<SecretsManager.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
-   * Deletes the resource-based policy currently attached to the secret.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To retrieve the current resource-based policy that is attached to a secret, use GetResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   * Deletes the resource-based permission policy that's attached to the secret.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To retrieve the current resource-based policy that's attached to a secret, use GetResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.DeleteResourcePolicyResponse) => void): Request<SecretsManager.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class SecretsManager extends Service {
    */
   getRandomPassword(callback?: (err: AWSError, data: SecretsManager.Types.GetRandomPasswordResponse) => void): Request<SecretsManager.Types.GetRandomPasswordResponse, AWSError>;
   /**
-   * Retrieves the JSON text of the resource-based policy attached to the specified secret. The JSON request string input and response output are shown formatted with whitespace and line breaks for better readability. Submit your input as a single line JSON string.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:GetResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To delete the resource-based policy that is attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   * Retrieves the JSON text of the resource-based policy document that's attached to the specified secret. The JSON request string input and response output are shown formatted with white space and line breaks for better readability. Submit your input as a single line JSON string.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:GetResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To delete the resource-based policy that's attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
    */
   getResourcePolicy(params: SecretsManager.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: SecretsManager.Types.GetResourcePolicyResponse) => void): Request<SecretsManager.Types.GetResourcePolicyResponse, AWSError>;
   /**
-   * Retrieves the JSON text of the resource-based policy attached to the specified secret. The JSON request string input and response output are shown formatted with whitespace and line breaks for better readability. Submit your input as a single line JSON string.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:GetResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To delete the resource-based policy that is attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   * Retrieves the JSON text of the resource-based policy document that's attached to the specified secret. The JSON request string input and response output are shown formatted with white space and line breaks for better readability. Submit your input as a single line JSON string.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:GetResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To delete the resource-based policy that's attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
    */
   getResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.GetResourcePolicyResponse) => void): Request<SecretsManager.Types.GetResourcePolicyResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class SecretsManager extends Service {
    */
   listSecrets(callback?: (err: AWSError, data: SecretsManager.Types.ListSecretsResponse) => void): Request<SecretsManager.Types.ListSecretsResponse, AWSError>;
   /**
-   * Attaches the contents of the specified resource-based policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM user-based policies that specify the secret's ARN in the policy statement's Resources element. You can also use a combination of both identity- an resource-based policies. The affected users and roles receive the permissions permitted by all of the relevant policies. For more information, see Using Resource-Based Policies for AWS Secrets Manager. For the complete description of the AWS policy syntax and grammar, see IAM JSON Policy Reference in the IAM User Guide.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutResourcePolicy    Related operations    To retrieve the resource policy attached to a secret, use GetResourcePolicy.   To delete the resource-based policy that is attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   * Attaches the contents of the specified resource-based permission policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM identity-based policies that specify the secret's Amazon Resource Name (ARN) in the policy statement's Resources element. You can also use a combination of both identity-based and resource-based policies. The affected users and roles receive the permissions that are permitted by all of the relevant policies. For more information, see Using Resource-Based Policies for AWS Secrets Manager. For the complete description of the AWS policy syntax and grammar, see IAM JSON Policy Reference in the IAM User Guide.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutResourcePolicy    Related operations    To retrieve the resource policy that's attached to a secret, use GetResourcePolicy.   To delete the resource-based policy that's attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
    */
   putResourcePolicy(params: SecretsManager.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: SecretsManager.Types.PutResourcePolicyResponse) => void): Request<SecretsManager.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Attaches the contents of the specified resource-based policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM user-based policies that specify the secret's ARN in the policy statement's Resources element. You can also use a combination of both identity- an resource-based policies. The affected users and roles receive the permissions permitted by all of the relevant policies. For more information, see Using Resource-Based Policies for AWS Secrets Manager. For the complete description of the AWS policy syntax and grammar, see IAM JSON Policy Reference in the IAM User Guide.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutResourcePolicy    Related operations    To retrieve the resource policy attached to a secret, use GetResourcePolicy.   To delete the resource-based policy that is attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   * Attaches the contents of the specified resource-based permission policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM identity-based policies that specify the secret's Amazon Resource Name (ARN) in the policy statement's Resources element. You can also use a combination of both identity-based and resource-based policies. The affected users and roles receive the permissions that are permitted by all of the relevant policies. For more information, see Using Resource-Based Policies for AWS Secrets Manager. For the complete description of the AWS policy syntax and grammar, see IAM JSON Policy Reference in the IAM User Guide.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutResourcePolicy    Related operations    To retrieve the resource policy that's attached to a secret, use GetResourcePolicy.   To delete the resource-based policy that's attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
    */
   putResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.PutResourcePolicyResponse) => void): Request<SecretsManager.Types.PutResourcePolicyResponse, AWSError>;
   /**
@@ -182,7 +182,7 @@ declare namespace SecretsManager {
   export type ClientRequestTokenType = string;
   export interface CreateSecretRequest {
     /**
-     * Specifies the friendly name of the new secret. The secret name must be ASCII letters, digits, or the following characters : /_+=,.@-
+     * Specifies the friendly name of the new secret. The secret name must be ASCII letters, digits, or the following characters : /_+=.@-
      */
     Name: NameType;
     /**
@@ -227,17 +227,17 @@ declare namespace SecretsManager {
   export type CreatedDateType = Date;
   export interface DeleteResourcePolicyRequest {
     /**
-     * Specifies the secret for which you want to delete the attached resource-based policy. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
+     * Specifies the secret that you want to delete the attached resource-based policy for. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
      */
     SecretId: SecretIdType;
   }
   export interface DeleteResourcePolicyResponse {
     /**
-     * The ARN of the secret for which the resource-based policy was deleted.
+     * The ARN of the secret that the resource-based policy was deleted for.
      */
     ARN?: SecretARNType;
     /**
-     * The friendly name of the secret for which the resource-based policy was deleted.
+     * The friendly name of the secret that the resource-based policy was deleted for.
      */
     Name?: NameType;
   }
@@ -376,21 +376,21 @@ declare namespace SecretsManager {
   }
   export interface GetResourcePolicyRequest {
     /**
-     * Specifies the secret for which you want to retrieve the attached resource-based policy. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
+     * Specifies the secret that you want to retrieve the attached resource-based policy for. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
      */
     SecretId: SecretIdType;
   }
   export interface GetResourcePolicyResponse {
     /**
-     * The ARN of the secret for which the resource-based policy was retrieved.
+     * The ARN of the secret that the resource-based policy was retrieved for.
      */
     ARN?: SecretARNType;
     /**
-     * The friendly name of the secret for which the resource-based policy was retrieved.
+     * The friendly name of the secret that the resource-based policy was retrieved for.
      */
     Name?: NameType;
     /**
-     * A JSON-formatted string that describes the permissions associated with the attached secret. These permissions are combined with any permissions associated with the user or role who attempts to access this secret. The combined permissions specify who can access the secret and what actions they can perform. For more information, see Authentication and Access Control for AWS Secrets Manager in the AWS Secrets Manager User Guide.
+     * A JSON-formatted string that describes the permissions that are associated with the attached secret. These permissions are combined with any permissions that are associated with the user or role that attempts to access this secret. The combined permissions specify who can access the secret and what actions they can perform. For more information, see Authentication and Access Control for AWS Secrets Manager in the AWS Secrets Manager User Guide.
      */
     ResourcePolicy?: NonEmptyResourcePolicyType;
   }
@@ -506,21 +506,21 @@ declare namespace SecretsManager {
   export type PasswordLengthType = number;
   export interface PutResourcePolicyRequest {
     /**
-     * Specifies the secret to which you want to attach the resource-based policy. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
+     * Specifies the secret that you want to attach the resource-based policy to. You can specify either the ARN or the friendly name of the secret.
      */
     SecretId: SecretIdType;
     /**
-     * A JSON-formatted string constructed according to the grammar and syntax for an AWS resource-based policy. The policy in the string identifies who can access or manage this secret and its versions. For information on how to format a JSON parameter for the various command line tool environments, see Using JSON for Parameters in the AWS CLI User Guide.
+     * A JSON-formatted string that's constructed according to the grammar and syntax for an AWS resource-based policy. The policy in the string identifies who can access or manage this secret and its versions. For information on how to format a JSON parameter for the various command line tool environments, see Using JSON for Parameters in the AWS CLI User Guide.
      */
     ResourcePolicy: NonEmptyResourcePolicyType;
   }
   export interface PutResourcePolicyResponse {
     /**
-     * The ARN of the secret for which the resource-based policy was retrieved.
+     * The ARN of the secret that the resource-based policy was retrieved for.
      */
     ARN?: SecretARNType;
     /**
-     * The friendly name of the secret for which the resource-based policy was retrieved.
+     * The friendly name of the secret that the resource-based policy was retrieved for.
      */
     Name?: NameType;
   }
