@@ -1,56 +1,26 @@
 function validateEvents(events, expected) {
-  if(events.length !== expected.length) return false;
+  if(events.length !== expected.length) {
+    throw new Error(`Expected ${expected.length} events but received ${events.length}`);
+  };
+  //since the events may be out of order, for each
+  //event, compare it to all the expected events until
+  //find the correspond one.
   expected = expected.slice(0);//shallow copy of expected events array
   for (const event of events) {
-    if (expected.length === 0) return false;
     let equaledIndex = 0
     while (equaledIndex < expected.length) {
       if (validateEvent(event, expected[equaledIndex])) break;
       equaledIndex ++;
     }
     if (equaledIndex === expected.length) {
-      throw new Error('Cannot validate the event: ' + JSON.stringify(event));
+      throw new Error(`Cannot validate the event: ${JSON.stringify(event)}`);
     } else {
       expected = expected.slice(0, equaledIndex).concat(expected.slice(equaledIndex + 1))
+      //remove found correspond one from expected event array
     }
   }
   if (expected.length === 0) return true
   return false;
-}
-
-function validateApiCallEvent(event, expected) {
-  if (event.Type !== 'ApiCall' || expected.Type !== 'ApiCall') return false;
-  if (!validateEntry(event, expected, 'Service')) return false;
-  if (!validateEntry(event, expected, 'Api')) return false;
-  if (!validateEntry(event, expected, 'ClientId')) return false;
-  if (!validateEntry(event, expected, 'Version')) return false;
-  if (!validateEntry(event, expected, 'AttemptCount')) return false;
-  if (event.Timestamp === undefined || !(parseInt(event.Timestamp) > 0)) return false;
-  if (event.Latency === undefined || !(parseInt(event.Latency) >= 0)) return false;
-  return true;
-}
-
-function validateApiCallAttemptEvent(event, expected) {
-  if (event.Type !== 'ApiCallAttempt' || expected.Type !== 'ApiCallAttempt') return false;
-  if (!validateEntry(event, expected, 'Service')) return false;
-  if (!validateEntry(event, expected, 'Api')) return false;
-  if (!validateEntry(event, expected, 'ClientId')) return false;
-  if (!validateEntry(event, expected, 'Version')) return false;
-  if (!validateEntry(event, expected, 'Fqdn')) return false;
-  if (!validateEntry(event, expected, 'Region')) return false;
-  if (!validateEntry(event, expected, 'AccessKey')) return false;
-  if (!validateEntry(event, expected, 'HttpStatusCode')) return false;
-  if (!validateEntry(event, expected, 'XAmznRequestId')) return false;
-  if (!validateEntry(event, expected, 'XAmzRequestId')) return false;
-  if (!validateEntry(event, expected, 'XAmzId2')) return false;
-  if (!validateEntry(event, expected, 'SdkException')) return false;
-  if (!validateEntry(event, expected, 'SdkExceptionMessage')) return false;
-  if (!validateEntry(event, expected, 'AwsException')) return false;
-  if (!validateEntry(event, expected, 'AwsExceptionMessage')) return false;
-  if (!validateEntry(event, expected, 'SessionToken')) return false;
-  if (!validateEntry(event, expected, 'Timestamp')) return false;
-  if (!validateEntry(event, expected, 'AttemptLatency')) return false;
-  return true;
 }
 
 function validateEvent(event, expected) {
@@ -58,20 +28,64 @@ function validateEvent(event, expected) {
     return validateApiCallAttemptEvent(event, expected);
   if (event.Type === 'ApiCall')
     return validateApiCallEvent(event, expected);
-  return false;
+  throw new Error(`Cannot validate the event: ${JSON.stringify(event)}`);
 }
 
-function validateEntry(event, expected, key) {
-  if ((event[key] || event[key] === '') && !expected[key]) return true;
-  if(event[key] !== expected[key] && !isANY(expected[key])) {
-    // console.log(key, event[key], expected[key])
-    return false;
+function validateApiCallEvent(event, expected) {
+  //shared monitoring event entries
+  if (event.Type !== 'ApiCall' || expected.Type !== 'ApiCall') return false;
+  const keysToValidate = [
+    //shared monitoring event entries
+    'Service', 'Api', 'ClientId', 'Version', 'Timestamp',
+    //api call monitoring events
+    'AttemptCount', 'Latency'
+  ]
+  for (const keyToValidate of keysToValidate) {
+    if (!validateEntry(event, expected, keysToValidate)) return false;
   }
   return true;
 }
 
+function validateApiCallAttemptEvent(event, expected) {
+   //shared monitoring event entries
+  if (event.Type !== 'ApiCallAttempt' || expected.Type !== 'ApiCallAttempt') return false;
+  const keysToValidate = [
+    //shared monitoring event entries
+    'Service', 'Api', 'ClientId', 'Version', 'Timestamp',
+    //api call attempt monitoring event entries
+    'Fqdn', 'UserAgent', 'AttemptLatency', 'SessionToken', 'Region', 'AccessKey', 'HttpStatusCode',
+    'AwsException', 'AwsExceptionMessage', 'SdkException', 'SdkExceptionMessage', 'XAmznRequestId', 
+    'XAmzRequestId', 'XAmzId2'
+  ]
+  for (const keyToValidate of keysToValidate) {
+    if (!validateEntry(event, expected, keysToValidate)) return false;
+  }
+  return true;
+}
+
+function validateEntry(event, expected, key) {
+  //additional entry will not be validated
+  if (typeof expected[key] === 'undefined') return true;
+  //validationg the type of event
+  if(isANY(expected[key])) {
+    return validateANY(event[key], expected[key]);
+  }
+  return event[key] === expected[key]
+}
+
 function isANY(value) {
-  return value.indexOf && value.indexOf('ANY_') === 0
+  return value && value.indexOf && value.indexOf('ANY_') === 0
+}
+
+function validateANY(origin, expect) {
+  if (typeof origin === 'undefined') {
+    return true;
+  } else if (expect === 'ANY_STR' && typeof origin === 'string') {
+    return true;
+  } else if (expect === 'ANY_INT' && Number.isInteger(origin)) {
+    return true;
+  }
+  return false
 }
 
 module.exports.validateEvents = validateEvents;

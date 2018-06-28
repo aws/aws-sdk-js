@@ -86,7 +86,59 @@ module.exports = {
           "Version": 1,
           "AttemptCount": 1,
           "Latency": "ANY_INT"
-
+        }
+      ]
+    },
+    {
+      "description": "config client side monitoring from shared config file",
+      "configuration": {
+        "accessKey": "myaccesskey",
+        "region": "us-west-2",
+        "environmentVariables": {
+          "AWS_CSM_ENABLED": "true"
+        },
+        "sharedConfigFile": {
+          "csm_port": 31001,
+          "csm_clientid": "CLIENT"
+        }
+      },
+      "apiCalls": [
+        {
+          "serviceId": "CSM Test",
+          "operationName": "TestOperation",
+          "params": {},
+          "attemptResponses": [
+            {
+              "httpStatus": 200,
+              "responseHeaders": {}
+            }
+          ]
+        }
+      ],
+      "expectedMonitoringEvents": [
+        {
+          "Type": "ApiCallAttempt",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "CLIENT",
+          "Version": 1,
+          "Timestamp": "ANY_INT",
+          "AttemptLatency": "ANY_INT",
+          "Fqdn": "csmtest.us-west-2.amazonaws.com",
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "AccessKey": "myaccesskey",
+          "HttpStatusCode": 200
+        },
+        {
+          "Type": "ApiCall",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "CLIENT",
+          "Timestamp": "ANY_INT",
+          "Version": 1,
+          "AttemptCount": 1,
+          "Latency": "ANY_INT"
         }
       ]
     },
@@ -287,7 +339,7 @@ module.exports = {
           "Version": 1,
           "Fqdn": "dynamodb.us-east-1.amazonaws.com",
           "Region": "us-east-1",
-          "UserAgent": "my-user-agent",
+          "UserAgent": "ANY_STR",
           "AccessKey": "myaccesskey",
           "AttemptLatency": "ANY_INT",
           "HttpStatusCode": 200,
@@ -342,7 +394,7 @@ module.exports = {
           "Version": 1,
           "Fqdn": "dynamodb.us-west-2.amazonaws.com",
           "Region": "us-west-2",
-          "UserAgent": "my-user-agent",
+          "UserAgent": "ANY_STR",
           "AccessKey": "myaccesskey",
           "SessionToken": "ANY_STR",
           "AttemptLatency": "ANY_INT",
@@ -359,7 +411,7 @@ module.exports = {
           "Version": 1,
           "Fqdn": "dynamodb.us-west-2.amazonaws.com",
           "Region": "us-west-2",
-          "UserAgent": "my-user-agent",
+          "UserAgent": "ANY_STR",
           "AccessKey": "myaccesskey",
           "SessionToken": "ANY_STR",
           "AttemptLatency": "ANY_INT",
@@ -412,7 +464,7 @@ module.exports = {
           "Version": 1,
           "Fqdn": "bucket.s3.us-west-2.amazonaws.com",
           "Region": "us-west-2",
-          "UserAgent": "my-user-agent",
+          "UserAgent": "ANY_STR",
           "AccessKey": "myaccesskey",
           "AttemptLatency": "ANY_INT",
           "SdkException": "NetworkingError",
@@ -425,8 +477,8 @@ module.exports = {
           "Type": "ApiCallAttempt",
           "Version": 1,
           "Fqdn": "bucket.s3.us-west-2.amazonaws.com",
-          "Region": "",
-          "UserAgent": "my-user-agent",
+          "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
           "AccessKey": "myaccesskey",
           "AttemptLatency": "ANY_INT",
           "HttpStatusCode": 200,
