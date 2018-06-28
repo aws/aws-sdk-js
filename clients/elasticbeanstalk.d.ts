@@ -212,11 +212,11 @@ declare class ElasticBeanstalk extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EventDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EventDescriptionsMessage, AWSError>;
   /**
-   * Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
+   * Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
    */
   describeInstancesHealth(params: ElasticBeanstalk.Types.DescribeInstancesHealthRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
   /**
-   * Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
+   * Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
    */
   describeInstancesHealth(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
   /**
@@ -438,7 +438,7 @@ declare namespace ElasticBeanstalk {
   export type ApplicationNamesList = ApplicationName[];
   export interface ApplicationResourceLifecycleConfig {
     /**
-     * The ARN of an IAM service role that Elastic Beanstalk has permission to assume.
+     * The ARN of an IAM service role that Elastic Beanstalk has permission to assume. The ServiceRole property is required the first time that you provide a VersionLifecycleConfig for the application in one of the supporting calls (CreateApplication or UpdateApplicationResourceLifecycle). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don't need to specify it again in subsequent UpdateApplicationResourceLifecycle calls. You can, however, specify it in subsequent calls to change the Service Role to another value.
      */
     ServiceRole?: String;
     /**
@@ -495,7 +495,7 @@ declare namespace ElasticBeanstalk {
      */
     DateUpdated?: UpdateDate;
     /**
-     * The processing status of the application version.
+     * The processing status of the application version. Reflects the state of the application version during its creation. Many of the values are only applicable if you specified True for the Process parameter of the CreateApplicationVersion action. The following list describes the possible values.    Unprocessed – Application version wasn't pre-processed or validated. Elastic Beanstalk will validate configuration files during deployment of the application version to an environment.    Processing – Elastic Beanstalk is currently processing the application version.    Building – Application version is currently undergoing an AWS CodeBuild build.    Processed – Elastic Beanstalk was successfully pre-processed and validated.    Failed – Either the AWS CodeBuild build failed or configuration files didn't pass validation. This application version isn't usable.  
      */
     Status?: ApplicationVersionStatus;
   }
@@ -853,7 +853,7 @@ declare namespace ElasticBeanstalk {
      */
     AutoCreateApplication?: AutoCreateApplication;
     /**
-     * Preprocesses and validates the environment manifest (env.yaml) and configuration files (*.config files in the .ebextensions folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment.  The Process option validates Elastic Beanstalk configuration files. It doesn't validate your application's configuration files, like proxy server or Docker configuration. 
+     * Pre-processes and validates the environment manifest (env.yaml) and configuration files (*.config files in the .ebextensions folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment. You must turn processing on for application versions that you create using AWS CodeBuild or AWS CodeCommit. For application versions built from a source bundle in Amazon S3, processing is optional.  The Process option validates Elastic Beanstalk configuration files. It doesn't validate your application's configuration files, like proxy server or Docker configuration. 
      */
     Process?: ApplicationVersionProccess;
   }
@@ -929,7 +929,7 @@ declare namespace ElasticBeanstalk {
      */
     TemplateName?: ConfigurationTemplateName;
     /**
-     * This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.
+     * This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. For a list of current solution stacks, see Elastic Beanstalk Supported Platforms.
      */
     SolutionStackName?: SolutionStackName;
     /**
@@ -1477,7 +1477,7 @@ declare namespace ElasticBeanstalk {
   export type EnvironmentHealth = "Green"|"Yellow"|"Red"|"Grey"|string;
   export type EnvironmentHealthAttribute = "Status"|"Color"|"Causes"|"ApplicationMetrics"|"InstancesHealth"|"All"|"HealthStatus"|"RefreshedAt"|string;
   export type EnvironmentHealthAttributes = EnvironmentHealthAttribute[];
-  export type EnvironmentHealthStatus = "NoData"|"Unknown"|"Pending"|"Ok"|"Info"|"Warning"|"Degraded"|"Severe"|string;
+  export type EnvironmentHealthStatus = "NoData"|"Unknown"|"Pending"|"Ok"|"Info"|"Warning"|"Degraded"|"Severe"|"Suspended"|string;
   export type EnvironmentId = string;
   export type EnvironmentIdList = EnvironmentId[];
   export interface EnvironmentInfoDescription {
@@ -1566,7 +1566,7 @@ declare namespace ElasticBeanstalk {
      */
     Type?: String;
     /**
-     * The version of this environment tier.
+     * The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.  This member is deprecated. Any specific version that you set may become out of date. We recommend leaving it unspecified. 
      */
     Version?: String;
   }

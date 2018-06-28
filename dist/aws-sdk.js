@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.265.1
+// AWS SDK for JavaScript v2.266.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -75267,8 +75267,7 @@ module.exports={
         "type": "structure",
         "required": [
           "EventSourceArn",
-          "FunctionName",
-          "StartingPosition"
+          "FunctionName"
         ],
         "members": {
           "EventSourceArn": {},
@@ -119969,6 +119968,51 @@ module.exports={
         }
       }
     },
+    "CreateSMBFileShare": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ClientToken",
+          "GatewayARN",
+          "Role",
+          "LocationARN"
+        ],
+        "members": {
+          "ClientToken": {},
+          "GatewayARN": {},
+          "KMSEncrypted": {
+            "type": "boolean"
+          },
+          "KMSKey": {},
+          "Role": {},
+          "LocationARN": {},
+          "DefaultStorageClass": {},
+          "ObjectACL": {},
+          "ReadOnly": {
+            "type": "boolean"
+          },
+          "GuessMIMETypeEnabled": {
+            "type": "boolean"
+          },
+          "RequesterPays": {
+            "type": "boolean"
+          },
+          "ValidUserList": {
+            "shape": "S1k"
+          },
+          "InvalidUserList": {
+            "shape": "S1k"
+          },
+          "Authentication": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FileShareARN": {}
+        }
+      }
+    },
     "CreateSnapshot": {
       "input": {
         "type": "structure",
@@ -120099,7 +120143,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S20"
+            "shape": "S25"
           }
         }
       }
@@ -120316,7 +120360,7 @@ module.exports={
         ],
         "members": {
           "VolumeARNs": {
-            "shape": "S2r"
+            "shape": "S2w"
           }
         }
       },
@@ -120340,7 +120384,7 @@ module.exports={
                 },
                 "SourceSnapshotId": {},
                 "VolumeiSCSIAttributes": {
-                  "shape": "S2z"
+                  "shape": "S34"
                 },
                 "CreatedDate": {
                   "type": "timestamp"
@@ -120453,8 +120497,7 @@ module.exports={
         ],
         "members": {
           "FileShareARNList": {
-            "type": "list",
-            "member": {}
+            "shape": "S3s"
           }
         }
       },
@@ -120501,6 +120544,82 @@ module.exports={
         }
       }
     },
+    "DescribeSMBFileShares": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "FileShareARNList"
+        ],
+        "members": {
+          "FileShareARNList": {
+            "shape": "S3s"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "SMBFileShareInfoList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "FileShareARN": {},
+                "FileShareId": {},
+                "FileShareStatus": {},
+                "GatewayARN": {},
+                "KMSEncrypted": {
+                  "type": "boolean"
+                },
+                "KMSKey": {},
+                "Path": {},
+                "Role": {},
+                "LocationARN": {},
+                "DefaultStorageClass": {},
+                "ObjectACL": {},
+                "ReadOnly": {
+                  "type": "boolean"
+                },
+                "GuessMIMETypeEnabled": {
+                  "type": "boolean"
+                },
+                "RequesterPays": {
+                  "type": "boolean"
+                },
+                "ValidUserList": {
+                  "shape": "S1k"
+                },
+                "InvalidUserList": {
+                  "shape": "S1k"
+                },
+                "Authentication": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeSMBSettings": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "GatewayARN"
+        ],
+        "members": {
+          "GatewayARN": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GatewayARN": {},
+          "DomainName": {},
+          "SMBGuestPasswordSet": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
     "DescribeSnapshotSchedule": {
       "input": {
         "type": "structure",
@@ -120534,7 +120653,7 @@ module.exports={
         ],
         "members": {
           "VolumeARNs": {
-            "shape": "S2r"
+            "shape": "S2w"
           }
         }
       },
@@ -120562,7 +120681,7 @@ module.exports={
                   "type": "boolean"
                 },
                 "VolumeiSCSIAttributes": {
-                  "shape": "S2z"
+                  "shape": "S34"
                 },
                 "CreatedDate": {
                   "type": "timestamp"
@@ -120581,7 +120700,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S20"
+            "shape": "S25"
           },
           "Marker": {},
           "Limit": {
@@ -120668,7 +120787,7 @@ module.exports={
         "members": {
           "GatewayARN": {},
           "TapeARNs": {
-            "shape": "S20"
+            "shape": "S25"
           },
           "Marker": {},
           "Limit": {
@@ -120828,6 +120947,32 @@ module.exports={
         }
       }
     },
+    "JoinDomain": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "GatewayARN",
+          "DomainName",
+          "UserName",
+          "Password"
+        ],
+        "members": {
+          "GatewayARN": {},
+          "DomainName": {},
+          "UserName": {},
+          "Password": {
+            "type": "string",
+            "sensitive": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GatewayARN": {}
+        }
+      }
+    },
     "ListFileShares": {
       "input": {
         "type": "structure",
@@ -120849,6 +120994,7 @@ module.exports={
             "member": {
               "type": "structure",
               "members": {
+                "FileShareType": {},
                 "FileShareARN": {},
                 "FileShareId": {},
                 "FileShareStatus": {},
@@ -120953,7 +121099,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S20"
+            "shape": "S25"
           },
           "Marker": {},
           "Limit": {
@@ -121205,6 +121351,28 @@ module.exports={
         }
       }
     },
+    "SetSMBGuestPassword": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "GatewayARN",
+          "Password"
+        ],
+        "members": {
+          "GatewayARN": {},
+          "Password": {
+            "type": "string",
+            "sensitive": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GatewayARN": {}
+        }
+      }
+    },
     "ShutdownGateway": {
       "input": {
         "type": "structure",
@@ -121390,6 +121558,44 @@ module.exports={
         }
       }
     },
+    "UpdateSMBFileShare": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "FileShareARN"
+        ],
+        "members": {
+          "FileShareARN": {},
+          "KMSEncrypted": {
+            "type": "boolean"
+          },
+          "KMSKey": {},
+          "DefaultStorageClass": {},
+          "ObjectACL": {},
+          "ReadOnly": {
+            "type": "boolean"
+          },
+          "GuessMIMETypeEnabled": {
+            "type": "boolean"
+          },
+          "RequesterPays": {
+            "type": "boolean"
+          },
+          "ValidUserList": {
+            "shape": "S1k"
+          },
+          "InvalidUserList": {
+            "shape": "S1k"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FileShareARN": {}
+        }
+      }
+    },
     "UpdateSnapshotSchedule": {
       "input": {
         "type": "structure",
@@ -121472,15 +121678,19 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "S20": {
+    "S1k": {
       "type": "list",
       "member": {}
     },
-    "S2r": {
+    "S25": {
       "type": "list",
       "member": {}
     },
-    "S2z": {
+    "S2w": {
+      "type": "list",
+      "member": {}
+    },
+    "S34": {
       "type": "structure",
       "members": {
         "TargetARN": {},
@@ -121495,6 +121705,10 @@ module.exports={
           "type": "boolean"
         }
       }
+    },
+    "S3s": {
+      "type": "list",
+      "member": {}
     }
   }
 }
@@ -129196,7 +129410,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.265.1',
+  VERSION: '2.266.1',
 
   /**
    * @api private
@@ -148317,7 +148531,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":344,"./lib/rng":345}],348:[function(require,module,exports){
-// AWS SDK for JavaScript v2.265.1
+// AWS SDK for JavaScript v2.266.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ElasticBeanstalk",
+        "description": "Elastic Beanstalk adds \"Suspended\" health status to the EnvironmentHealthStatus enum type and updates document."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Support for SQS as an event source."
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "AWS Storage Gateway now enables you to use Server Message Block (SMB) protocol  to store and access objects in Amazon Simple Storage Service (S3). "
+    }
+]

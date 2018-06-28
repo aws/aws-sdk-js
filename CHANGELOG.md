@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.265.1-->
+<!--LATEST=2.266.1-->
 <!--ENTRYINSERT-->
+
+## 2.266.1
+* feature: ElasticBeanstalk: Elastic Beanstalk adds "Suspended" health status to the EnvironmentHealthStatus enum type and updates document.
+* feature: Lambda: Support for SQS as an event source.
+* feature: StorageGateway: AWS Storage Gateway now enables you to use Server Message Block (SMB) protocol  to store and access objects in Amazon Simple Storage Service (S3). 
 
 ## 2.265.1
 * feature: CloudFront: Unpublish delete-service-linked-role API.
