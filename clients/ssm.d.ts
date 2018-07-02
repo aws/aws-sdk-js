@@ -204,6 +204,22 @@ declare class SSM extends Service {
    */
   describeAssociation(callback?: (err: AWSError, data: SSM.Types.DescribeAssociationResult) => void): Request<SSM.Types.DescribeAssociationResult, AWSError>;
   /**
+   * Use this API action to view information about a specific execution of a specific association.
+   */
+  describeAssociationExecutionTargets(params: SSM.Types.DescribeAssociationExecutionTargetsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAssociationExecutionTargetsResult) => void): Request<SSM.Types.DescribeAssociationExecutionTargetsResult, AWSError>;
+  /**
+   * Use this API action to view information about a specific execution of a specific association.
+   */
+  describeAssociationExecutionTargets(callback?: (err: AWSError, data: SSM.Types.DescribeAssociationExecutionTargetsResult) => void): Request<SSM.Types.DescribeAssociationExecutionTargetsResult, AWSError>;
+  /**
+   * Use this API action to view all executions for a specific association ID. 
+   */
+  describeAssociationExecutions(params: SSM.Types.DescribeAssociationExecutionsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAssociationExecutionsResult) => void): Request<SSM.Types.DescribeAssociationExecutionsResult, AWSError>;
+  /**
+   * Use this API action to view all executions for a specific association ID. 
+   */
+  describeAssociationExecutions(callback?: (err: AWSError, data: SSM.Types.DescribeAssociationExecutionsResult) => void): Request<SSM.Types.DescribeAssociationExecutionsResult, AWSError>;
+  /**
    * Provides details about all active and terminated Automation executions.
    */
   describeAutomationExecutions(params: SSM.Types.DescribeAutomationExecutionsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAutomationExecutionsResult) => void): Request<SSM.Types.DescribeAutomationExecutionsResult, AWSError>;
@@ -716,6 +732,14 @@ declare class SSM extends Service {
    */
   sendCommand(callback?: (err: AWSError, data: SSM.Types.SendCommandResult) => void): Request<SSM.Types.SendCommandResult, AWSError>;
   /**
+   * Use this API action to execute an association immediately and only one time. This action can be helpful when troubleshooting associations.
+   */
+  startAssociationsOnce(params: SSM.Types.StartAssociationsOnceRequest, callback?: (err: AWSError, data: SSM.Types.StartAssociationsOnceResult) => void): Request<SSM.Types.StartAssociationsOnceResult, AWSError>;
+  /**
+   * Use this API action to execute an association immediately and only one time. This action can be helpful when troubleshooting associations.
+   */
+  startAssociationsOnce(callback?: (err: AWSError, data: SSM.Types.StartAssociationsOnceResult) => void): Request<SSM.Types.StartAssociationsOnceResult, AWSError>;
+  /**
    * Initiates execution of an Automation document.
    */
   startAutomationExecution(params: SSM.Types.StartAutomationExecutionRequest, callback?: (err: AWSError, data: SSM.Types.StartAutomationExecutionResult) => void): Request<SSM.Types.StartAutomationExecutionResult, AWSError>;
@@ -978,6 +1002,111 @@ declare namespace SSM {
     AssociationName?: AssociationName;
   }
   export type AssociationDescriptionList = AssociationDescription[];
+  export interface AssociationExecution {
+    /**
+     * The association ID.
+     */
+    AssociationId?: AssociationId;
+    /**
+     * The association version.
+     */
+    AssociationVersion?: AssociationVersion;
+    /**
+     * The execution ID for the association. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.
+     */
+    ExecutionId?: AssociationExecutionId;
+    /**
+     * The status of the association execution.
+     */
+    Status?: StatusName;
+    /**
+     * Detailed status information about the execution.
+     */
+    DetailedStatus?: StatusName;
+    /**
+     * The time the execution started.
+     */
+    CreatedTime?: DateTime;
+    /**
+     * The date of the last execution.
+     */
+    LastExecutionDate?: DateTime;
+    /**
+     * An aggregate status of the resources in the execution based on the status type.
+     */
+    ResourceCountByStatus?: ResourceCountByStatus;
+  }
+  export interface AssociationExecutionFilter {
+    /**
+     * The key value used in the request.
+     */
+    Key: AssociationExecutionFilterKey;
+    /**
+     * The value specified for the key.
+     */
+    Value: AssociationExecutionFilterValue;
+    /**
+     * The filter type specified in the request.
+     */
+    Type: AssociationFilterOperatorType;
+  }
+  export type AssociationExecutionFilterKey = "ExecutionId"|"Status"|"CreatedTime"|string;
+  export type AssociationExecutionFilterList = AssociationExecutionFilter[];
+  export type AssociationExecutionFilterValue = string;
+  export type AssociationExecutionId = string;
+  export interface AssociationExecutionTarget {
+    /**
+     * The association ID.
+     */
+    AssociationId?: AssociationId;
+    /**
+     * The association version.
+     */
+    AssociationVersion?: AssociationVersion;
+    /**
+     * The execution ID. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.
+     */
+    ExecutionId?: AssociationExecutionId;
+    /**
+     * The resource ID, for example, the instance ID where the association ran.
+     */
+    ResourceId?: AssociationResourceId;
+    /**
+     * The resource type, for example, instance.
+     */
+    ResourceType?: AssociationResourceType;
+    /**
+     * The association execution status.
+     */
+    Status?: StatusName;
+    /**
+     * Detailed information about the execution status.
+     */
+    DetailedStatus?: StatusName;
+    /**
+     * The date of the last execution.
+     */
+    LastExecutionDate?: DateTime;
+    /**
+     * The location where the association details are saved.
+     */
+    OutputSource?: OutputSource;
+  }
+  export interface AssociationExecutionTargetsFilter {
+    /**
+     * The key value used in the request.
+     */
+    Key: AssociationExecutionTargetsFilterKey;
+    /**
+     * The value specified for the key.
+     */
+    Value: AssociationExecutionTargetsFilterValue;
+  }
+  export type AssociationExecutionTargetsFilterKey = "Status"|"ResourceId"|"ResourceType"|string;
+  export type AssociationExecutionTargetsFilterList = AssociationExecutionTargetsFilter[];
+  export type AssociationExecutionTargetsFilterValue = string;
+  export type AssociationExecutionTargetsList = AssociationExecutionTarget[];
+  export type AssociationExecutionsList = AssociationExecution[];
   export interface AssociationFilter {
     /**
      * The name of the filter.
@@ -990,8 +1119,10 @@ declare namespace SSM {
   }
   export type AssociationFilterKey = "InstanceId"|"Name"|"AssociationId"|"AssociationStatusName"|"LastExecutedBefore"|"LastExecutedAfter"|"AssociationName"|string;
   export type AssociationFilterList = AssociationFilter[];
+  export type AssociationFilterOperatorType = "EQUAL"|"LESS_THAN"|"GREATER_THAN"|string;
   export type AssociationFilterValue = string;
   export type AssociationId = string;
+  export type AssociationIdList = AssociationId[];
   export type AssociationList = Association[];
   export type AssociationName = string;
   export interface AssociationOverview {
@@ -1008,6 +1139,8 @@ declare namespace SSM {
      */
     AssociationStatusAggregatedCount?: AssociationStatusAggregatedCount;
   }
+  export type AssociationResourceId = string;
+  export type AssociationResourceType = string;
   export interface AssociationStatus {
     /**
      * The date when the status changed.
@@ -2146,6 +2279,66 @@ declare namespace SSM {
     ActivationList?: ActivationList;
     /**
      * The token for the next set of items to return. Use this token to get the next set of results. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeAssociationExecutionTargetsRequest {
+    /**
+     * The association ID that includes the execution for which you want to view details.
+     */
+    AssociationId: AssociationId;
+    /**
+     * The execution ID for which you want to view details.
+     */
+    ExecutionId: AssociationExecutionId;
+    /**
+     * Filters for the request. You can specify the following filters and values. Status (EQUAL) ResourceId (EQUAL) ResourceType (EQUAL)
+     */
+    Filters?: AssociationExecutionTargetsFilterList;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeAssociationExecutionTargetsResult {
+    /**
+     * Information about the execution.
+     */
+    AssociationExecutionTargets?: AssociationExecutionTargetsList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeAssociationExecutionsRequest {
+    /**
+     * The association ID for which you want to view execution history details.
+     */
+    AssociationId: AssociationId;
+    /**
+     * Filters for the request. You can specify the following filters and values. ExecutionId (EQUAL) Status (EQUAL) CreatedTime (EQUAL, GREATER_THAN, LESS_THAN)
+     */
+    Filters?: AssociationExecutionFilterList;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeAssociationExecutionsResult {
+    /**
+     * A list of the executions for the specified association ID.
+     */
+    AssociationExecutions?: AssociationExecutionsList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -3586,7 +3779,7 @@ declare namespace SSM {
   export type GetParametersByPathMaxResults = number;
   export interface GetParametersByPathRequest {
     /**
-     * The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33 
+     * The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A parameter name hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33 
      */
     Path: PSParameterName;
     /**
@@ -4991,6 +5184,18 @@ declare namespace SSM {
   export type NotificationEventList = NotificationEvent[];
   export type NotificationType = "Command"|"Invocation"|string;
   export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|string;
+  export interface OutputSource {
+    /**
+     * The ID of the output source, for example the URL of an Amazon S3 bucket.
+     */
+    OutputSourceId?: OutputSourceId;
+    /**
+     * The type of source where the association execution details are stored, for example, Amazon S3.
+     */
+    OutputSourceType?: OutputSourceType;
+  }
+  export type OutputSourceId = string;
+  export type OutputSourceType = string;
   export type OwnerInformation = string;
   export type PSParameterName = string;
   export type PSParameterValue = string;
@@ -5339,7 +5544,7 @@ declare namespace SSM {
      */
     Products: PatchSourceProductList;
     /**
-     * The value of the yum repo configuration. For example:  cachedir=/var/cache/yum/$basesearch   $releasever   keepcache=0   debualevel=2 
+     * The value of the yum repo configuration. For example:  cachedir=/var/cache/yum/$basesearch   $releasever   keepcache=0   debuglevel=2 
      */
     Configuration: PatchSourceConfiguration;
   }
@@ -5415,11 +5620,11 @@ declare namespace SSM {
   }
   export interface PutParameterRequest {
     /**
-     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: /Dev/DBServer/MySQL/db-string13  For information about parameter name requirements and restrictions, see Creating Systems Manager Parameters in the AWS Systems Manager User Guide.  The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters.  
+     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: /Dev/DBServer/MySQL/db-string13  Naming Constraints:   Parameter names are case sensitive.   A parameter name must be unique within an AWS Region   A parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).   Parameter names can include only the following symbols and letters: a-zA-Z0-9_.-/    A parameter name can't include spaces.   Parameter hierarchies are limited to a maximum depth of fifteen levels.   For additional information about valid values for parameter names, see Requirements and Constraints for Parameter Names in the AWS Systems Manager User Guide.  The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters.  
      */
     Name: PSParameterName;
     /**
-     * Information about the parameter that you want to add to the system.  Do not enter personally identifiable information in this field. 
+     * Information about the parameter that you want to add to the system. Optional but recommended.  Do not enter personally identifiable information in this field. 
      */
     Description?: ParameterDescription;
     /**
@@ -5427,11 +5632,11 @@ declare namespace SSM {
      */
     Value: PSParameterValue;
     /**
-     * The type of parameter that you want to add to the system.
+     * The type of parameter that you want to add to the system. Items in a StringList must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the String data type.   SecureString is not currently supported for AWS CloudFormation templates or in the China Regions. 
      */
     Type: ParameterType;
     /**
-     * The KMS Key ID that you want to use to encrypt a parameter when you choose the SecureString data type. If you don't specify a key ID, the system uses the default key associated with your AWS account.
+     * The KMS Key ID that you want to use to encrypt a parameter. Either the default AWS Key Management Service (AWS KMS) key automatically assigned to your AWS account or a custom key. Required for parameters that use the SecureString data type. If you don't specify a key ID, the system uses the default key associated with your AWS account.   To use your default AWS KMS key, choose the SecureString data type, and do not specify the Key ID when you create the parameter. The system automatically populates Key ID with your default KMS key.   To use a custom KMS key, choose the SecureString data type with the Key ID parameter.  
      */
     KeyId?: ParameterKeyId;
     /**
@@ -5646,6 +5851,7 @@ declare namespace SSM {
   }
   export type ResourceComplianceSummaryItemList = ResourceComplianceSummaryItem[];
   export type ResourceCount = number;
+  export type ResourceCountByStatus = string;
   export type ResourceDataSyncAWSKMSKeyARN = string;
   export type ResourceDataSyncCreatedTime = Date;
   export interface ResourceDataSyncItem {
@@ -5865,6 +6071,14 @@ declare namespace SSM {
   export type SnapshotId = string;
   export type StandardErrorContent = string;
   export type StandardOutputContent = string;
+  export interface StartAssociationsOnceRequest {
+    /**
+     * The association IDs that you want to execute immediately and only one time.
+     */
+    AssociationIds: AssociationIdList;
+  }
+  export interface StartAssociationsOnceResult {
+  }
   export interface StartAutomationExecutionRequest {
     /**
      * The name of the Automation document to use for this execution.

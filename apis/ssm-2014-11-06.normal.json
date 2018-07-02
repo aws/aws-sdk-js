@@ -392,6 +392,37 @@
       ],
       "documentation":"<p>Describes the association for the specified target or instance. If you created the association by using the <code>Targets</code> parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and a Systems Manager document, then you retrieve the association by specifying the document name and the instance ID. </p>"
     },
+    "DescribeAssociationExecutionTargets":{
+      "name":"DescribeAssociationExecutionTargets",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeAssociationExecutionTargetsRequest"},
+      "output":{"shape":"DescribeAssociationExecutionTargetsResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"AssociationDoesNotExist"},
+        {"shape":"InvalidNextToken"},
+        {"shape":"AssociationExecutionDoesNotExist"}
+      ],
+      "documentation":"<p>Use this API action to view information about a specific execution of a specific association.</p>"
+    },
+    "DescribeAssociationExecutions":{
+      "name":"DescribeAssociationExecutions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeAssociationExecutionsRequest"},
+      "output":{"shape":"DescribeAssociationExecutionsResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"AssociationDoesNotExist"},
+        {"shape":"InvalidNextToken"}
+      ],
+      "documentation":"<p>Use this API action to view all executions for a specific association ID. </p>"
+    },
     "DescribeAutomationExecutions":{
       "name":"DescribeAutomationExecutions",
       "http":{
@@ -1386,6 +1417,20 @@
       ],
       "documentation":"<p>Executes commands on one or more managed instances.</p>"
     },
+    "StartAssociationsOnce":{
+      "name":"StartAssociationsOnce",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartAssociationsOnceRequest"},
+      "output":{"shape":"StartAssociationsOnceResult"},
+      "errors":[
+        {"shape":"InvalidAssociation"},
+        {"shape":"AssociationDoesNotExist"}
+      ],
+      "documentation":"<p>Use this API action to execute an association immediately and only one time. This action can be helpful when troubleshooting associations.</p>"
+    },
     "StartAutomationExecution":{
       "name":"StartAutomationExecution",
       "http":{
@@ -1831,6 +1876,181 @@
       "documentation":"<p>The specified association does not exist.</p>",
       "exception":true
     },
+    "AssociationExecution":{
+      "type":"structure",
+      "members":{
+        "AssociationId":{
+          "shape":"AssociationId",
+          "documentation":"<p>The association ID.</p>"
+        },
+        "AssociationVersion":{
+          "shape":"AssociationVersion",
+          "documentation":"<p>The association version.</p>"
+        },
+        "ExecutionId":{
+          "shape":"AssociationExecutionId",
+          "documentation":"<p>The execution ID for the association. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.</p>"
+        },
+        "Status":{
+          "shape":"StatusName",
+          "documentation":"<p>The status of the association execution.</p>"
+        },
+        "DetailedStatus":{
+          "shape":"StatusName",
+          "documentation":"<p>Detailed status information about the execution.</p>"
+        },
+        "CreatedTime":{
+          "shape":"DateTime",
+          "documentation":"<p>The time the execution started.</p>"
+        },
+        "LastExecutionDate":{
+          "shape":"DateTime",
+          "documentation":"<p>The date of the last execution.</p>"
+        },
+        "ResourceCountByStatus":{
+          "shape":"ResourceCountByStatus",
+          "documentation":"<p>An aggregate status of the resources in the execution based on the status type.</p>"
+        }
+      },
+      "documentation":"<p>Includes information about the specified association.</p>"
+    },
+    "AssociationExecutionDoesNotExist":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The specified execution ID does not exist. Verify the ID number and try again.</p>",
+      "exception":true
+    },
+    "AssociationExecutionFilter":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value",
+        "Type"
+      ],
+      "members":{
+        "Key":{
+          "shape":"AssociationExecutionFilterKey",
+          "documentation":"<p>The key value used in the request.</p>"
+        },
+        "Value":{
+          "shape":"AssociationExecutionFilterValue",
+          "documentation":"<p>The value specified for the key.</p>"
+        },
+        "Type":{
+          "shape":"AssociationFilterOperatorType",
+          "documentation":"<p>The filter type specified in the request.</p>"
+        }
+      },
+      "documentation":"<p>Filters used in the request.</p>"
+    },
+    "AssociationExecutionFilterKey":{
+      "type":"string",
+      "enum":[
+        "ExecutionId",
+        "Status",
+        "CreatedTime"
+      ]
+    },
+    "AssociationExecutionFilterList":{
+      "type":"list",
+      "member":{"shape":"AssociationExecutionFilter"},
+      "min":1
+    },
+    "AssociationExecutionFilterValue":{
+      "type":"string",
+      "min":1
+    },
+    "AssociationExecutionId":{
+      "type":"string",
+      "pattern":"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+    },
+    "AssociationExecutionTarget":{
+      "type":"structure",
+      "members":{
+        "AssociationId":{
+          "shape":"AssociationId",
+          "documentation":"<p>The association ID.</p>"
+        },
+        "AssociationVersion":{
+          "shape":"AssociationVersion",
+          "documentation":"<p>The association version.</p>"
+        },
+        "ExecutionId":{
+          "shape":"AssociationExecutionId",
+          "documentation":"<p>The execution ID. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.</p>"
+        },
+        "ResourceId":{
+          "shape":"AssociationResourceId",
+          "documentation":"<p>The resource ID, for example, the instance ID where the association ran.</p>"
+        },
+        "ResourceType":{
+          "shape":"AssociationResourceType",
+          "documentation":"<p>The resource type, for example, instance.</p>"
+        },
+        "Status":{
+          "shape":"StatusName",
+          "documentation":"<p>The association execution status.</p>"
+        },
+        "DetailedStatus":{
+          "shape":"StatusName",
+          "documentation":"<p>Detailed information about the execution status.</p>"
+        },
+        "LastExecutionDate":{
+          "shape":"DateTime",
+          "documentation":"<p>The date of the last execution.</p>"
+        },
+        "OutputSource":{
+          "shape":"OutputSource",
+          "documentation":"<p>The location where the association details are saved.</p>"
+        }
+      },
+      "documentation":"<p>Includes information about the specified association execution.</p>"
+    },
+    "AssociationExecutionTargetsFilter":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{
+          "shape":"AssociationExecutionTargetsFilterKey",
+          "documentation":"<p>The key value used in the request.</p>"
+        },
+        "Value":{
+          "shape":"AssociationExecutionTargetsFilterValue",
+          "documentation":"<p>The value specified for the key.</p>"
+        }
+      },
+      "documentation":"<p>Filters for the association execution.</p>"
+    },
+    "AssociationExecutionTargetsFilterKey":{
+      "type":"string",
+      "enum":[
+        "Status",
+        "ResourceId",
+        "ResourceType"
+      ]
+    },
+    "AssociationExecutionTargetsFilterList":{
+      "type":"list",
+      "member":{"shape":"AssociationExecutionTargetsFilter"},
+      "min":1
+    },
+    "AssociationExecutionTargetsFilterValue":{
+      "type":"string",
+      "min":1
+    },
+    "AssociationExecutionTargetsList":{
+      "type":"list",
+      "member":{"shape":"AssociationExecutionTarget"}
+    },
+    "AssociationExecutionsList":{
+      "type":"list",
+      "member":{"shape":"AssociationExecution"}
+    },
     "AssociationFilter":{
       "type":"structure",
       "required":[
@@ -1866,6 +2086,14 @@
       "member":{"shape":"AssociationFilter"},
       "min":1
     },
+    "AssociationFilterOperatorType":{
+      "type":"string",
+      "enum":[
+        "EQUAL",
+        "LESS_THAN",
+        "GREATER_THAN"
+      ]
+    },
     "AssociationFilterValue":{
       "type":"string",
       "min":1
@@ -1873,6 +2101,12 @@
     "AssociationId":{
       "type":"string",
       "pattern":"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+    },
+    "AssociationIdList":{
+      "type":"list",
+      "member":{"shape":"AssociationId"},
+      "max":10,
+      "min":1
     },
     "AssociationLimitExceeded":{
       "type":"structure",
@@ -1906,6 +2140,16 @@
         }
       },
       "documentation":"<p>Information about the association.</p>"
+    },
+    "AssociationResourceId":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "AssociationResourceType":{
+      "type":"string",
+      "max":50,
+      "min":1
     },
     "AssociationStatus":{
       "type":"structure",
@@ -3683,6 +3927,85 @@
         "NextToken":{
           "shape":"NextToken",
           "documentation":"<p>The token for the next set of items to return. Use this token to get the next set of results. </p>"
+        }
+      }
+    },
+    "DescribeAssociationExecutionTargetsRequest":{
+      "type":"structure",
+      "required":[
+        "AssociationId",
+        "ExecutionId"
+      ],
+      "members":{
+        "AssociationId":{
+          "shape":"AssociationId",
+          "documentation":"<p>The association ID that includes the execution for which you want to view details.</p>"
+        },
+        "ExecutionId":{
+          "shape":"AssociationExecutionId",
+          "documentation":"<p>The execution ID for which you want to view details.</p>"
+        },
+        "Filters":{
+          "shape":"AssociationExecutionTargetsFilterList",
+          "documentation":"<p>Filters for the request. You can specify the following filters and values.</p> <p>Status (EQUAL)</p> <p>ResourceId (EQUAL)</p> <p>ResourceType (EQUAL)</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box":true
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token to start the list. Use this token to get the next set of results. </p>"
+        }
+      }
+    },
+    "DescribeAssociationExecutionTargetsResult":{
+      "type":"structure",
+      "members":{
+        "AssociationExecutionTargets":{
+          "shape":"AssociationExecutionTargetsList",
+          "documentation":"<p>Information about the execution.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
+        }
+      }
+    },
+    "DescribeAssociationExecutionsRequest":{
+      "type":"structure",
+      "required":["AssociationId"],
+      "members":{
+        "AssociationId":{
+          "shape":"AssociationId",
+          "documentation":"<p>The association ID for which you want to view execution history details.</p>"
+        },
+        "Filters":{
+          "shape":"AssociationExecutionFilterList",
+          "documentation":"<p>Filters for the request. You can specify the following filters and values.</p> <p>ExecutionId (EQUAL)</p> <p>Status (EQUAL)</p> <p>CreatedTime (EQUAL, GREATER_THAN, LESS_THAN)</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box":true
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token to start the list. Use this token to get the next set of results. </p>"
+        }
+      }
+    },
+    "DescribeAssociationExecutionsResult":{
+      "type":"structure",
+      "members":{
+        "AssociationExecutions":{
+          "shape":"AssociationExecutionsList",
+          "documentation":"<p>A list of the executions for the specified association ID.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
         }
       }
     },
@@ -5666,7 +5989,7 @@
       "members":{
         "Path":{
           "shape":"PSParameterName",
-          "documentation":"<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: <code>/Finance/Prod/IAD/WinServ2016/license33</code> </p>"
+          "documentation":"<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A parameter name hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: <code>/Finance/Prod/IAD/WinServ2016/license33</code> </p>"
         },
         "Recursive":{
           "shape":"Boolean",
@@ -5842,10 +6165,10 @@
       "members":{
         "message":{
           "shape":"String",
-          "documentation":"<p>A hierarchy can have a maximum of 15 levels. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html\">Working with Systems Manager Parameters</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+          "documentation":"<p>A hierarchy can have a maximum of 15 levels. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html\">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
         }
       },
-      "documentation":"<p>A hierarchy can have a maximum of 15 levels. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html\">Working with Systems Manager Parameters</a> in the <i>AWS Systems Manager User Guide</i>. </p>",
+      "documentation":"<p>A hierarchy can have a maximum of 15 levels. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html\">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>. </p>",
       "exception":true
     },
     "HierarchyTypeMismatchException":{
@@ -6347,6 +6670,14 @@
         }
       },
       "documentation":"<p>The request does not meet the regular expression requirement.</p>",
+      "exception":true
+    },
+    "InvalidAssociation":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The association is not valid or does not exist. </p>",
       "exception":true
     },
     "InvalidAssociationVersion":{
@@ -8258,6 +8589,26 @@
         "CENTOS"
       ]
     },
+    "OutputSource":{
+      "type":"structure",
+      "members":{
+        "OutputSourceId":{
+          "shape":"OutputSourceId",
+          "documentation":"<p>The ID of the output source, for example the URL of an Amazon S3 bucket.</p>"
+        },
+        "OutputSourceType":{
+          "shape":"OutputSourceType",
+          "documentation":"<p>The type of source where the association execution details are stored, for example, Amazon S3.</p>"
+        }
+      },
+      "documentation":"<p>Information about the source where the association execution details are stored.</p>"
+    },
+    "OutputSourceId":{
+      "type":"string",
+      "max":36,
+      "min":36
+    },
+    "OutputSourceType":{"type":"string"},
     "OwnerInformation":{
       "type":"string",
       "max":128,
@@ -8952,7 +9303,7 @@
         },
         "Configuration":{
           "shape":"PatchSourceConfiguration",
-          "documentation":"<p>The value of the yum repo configuration. For example:</p> <p> <code>cachedir=/var/cache/yum/$basesearch</code> </p> <p> <code>$releasever</code> </p> <p> <code>keepcache=0</code> </p> <p> <code>debualevel=2</code> </p>"
+          "documentation":"<p>The value of the yum repo configuration. For example:</p> <p> <code>cachedir=/var/cache/yum/$basesearch</code> </p> <p> <code>$releasever</code> </p> <p> <code>keepcache=0</code> </p> <p> <code>debuglevel=2</code> </p>"
         }
       },
       "documentation":"<p>Information about the patches to use to update the instances, including target operating systems and source repository. Applies to Linux instances only.</p>"
@@ -9102,11 +9453,11 @@
       "members":{
         "Name":{
           "shape":"PSParameterName",
-          "documentation":"<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>For information about parameter name requirements and restrictions, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager Parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>"
+          "documentation":"<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an AWS Region</p> </li> <li> <p>A parameter name can't be prefixed with \"aws\" or \"ssm\" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-/</code> </p> </li> <li> <p>A parameter name can't include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html\">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>"
         },
         "Description":{
           "shape":"ParameterDescription",
-          "documentation":"<p>Information about the parameter that you want to add to the system.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>"
+          "documentation":"<p>Information about the parameter that you want to add to the system. Optional but recommended.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>"
         },
         "Value":{
           "shape":"PSParameterValue",
@@ -9114,11 +9465,11 @@
         },
         "Type":{
           "shape":"ParameterType",
-          "documentation":"<p>The type of parameter that you want to add to the system.</p>"
+          "documentation":"<p>The type of parameter that you want to add to the system.</p> <p>Items in a <code>StringList</code> must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the <code>String</code> data type.</p> <note> <p> <code>SecureString</code> is not currently supported for AWS CloudFormation templates or in the China Regions.</p> </note>"
         },
         "KeyId":{
           "shape":"ParameterKeyId",
-          "documentation":"<p>The KMS Key ID that you want to use to encrypt a parameter when you choose the SecureString data type. If you don't specify a key ID, the system uses the default key associated with your AWS account.</p>"
+          "documentation":"<p>The KMS Key ID that you want to use to encrypt a parameter. Either the default AWS Key Management Service (AWS KMS) key automatically assigned to your AWS account or a custom key. Required for parameters that use the <code>SecureString</code> data type.</p> <p>If you don't specify a key ID, the system uses the default key associated with your AWS account.</p> <ul> <li> <p>To use your default AWS KMS key, choose the <code>SecureString</code> data type, and do <i>not</i> specify the <code>Key ID</code> when you create the parameter. The system automatically populates <code>Key ID</code> with your default KMS key.</p> </li> <li> <p>To use a custom KMS key, choose the <code>SecureString</code> data type with the <code>Key ID</code> parameter.</p> </li> </ul>"
         },
         "Overwrite":{
           "shape":"Boolean",
@@ -9413,6 +9764,7 @@
       "member":{"shape":"ResourceComplianceSummaryItem"}
     },
     "ResourceCount":{"type":"integer"},
+    "ResourceCountByStatus":{"type":"string"},
     "ResourceDataSyncAWSKMSKeyARN":{
       "type":"string",
       "max":512,
@@ -9810,6 +10162,21 @@
     "StandardOutputContent":{
       "type":"string",
       "max":24000
+    },
+    "StartAssociationsOnceRequest":{
+      "type":"structure",
+      "required":["AssociationIds"],
+      "members":{
+        "AssociationIds":{
+          "shape":"AssociationIdList",
+          "documentation":"<p>The association IDs that you want to execute immediately and only one time.</p>"
+        }
+      }
+    },
+    "StartAssociationsOnceResult":{
+      "type":"structure",
+      "members":{
+      }
     },
     "StartAutomationExecutionRequest":{
       "type":"structure",

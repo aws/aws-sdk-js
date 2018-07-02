@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.266.1-->
+<!--LATEST=2.267.1-->
 <!--ENTRYINSERT-->
+
+## 2.267.1
+* feature: SSM: Execution History and StartAssociationOnce release for State Manager. Users now have the ability to view association execution history with DescribeAssociationExecutions and DescribeAssociationExecutionTargets. Users can also execute an association by calling StartAssociationOnce.
 
 ## 2.266.1
 * feature: ElasticBeanstalk: Elastic Beanstalk adds "Suspended" health status to the EnvironmentHealthStatus enum type and updates document.
