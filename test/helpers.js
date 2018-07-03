@@ -8,6 +8,9 @@
 
   ignoreRequire = require;
 
+  // import SDK for tests that do not access the AWS namespace
+  require('../index');
+
   if (typeof window === 'undefined') {
     AWS = ignoreRequire('../lib/aws');
     topLevelScope = global;
