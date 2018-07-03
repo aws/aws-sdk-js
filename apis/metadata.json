@@ -557,7 +557,8 @@
     "name": "FMS"
   },
   "secretsmanager": {
-    "name": "SecretsManager"
+    "name": "SecretsManager",
+    "cors": true
   },
   "iotanalytics": {
     "name": "IoTAnalytics"
