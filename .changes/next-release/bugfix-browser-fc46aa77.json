@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "browser",
+  "description": "Fixed an issue with the browser XML parser logic where the incorrect value may be returned if a complex shape (map, structure) had an immediate child and a nested descendant with the same tag name."
+}
