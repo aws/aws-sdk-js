@@ -12,6 +12,14 @@ declare class Redshift extends Service {
   constructor(options?: Redshift.Types.ClientConfiguration)
   config: Config & Redshift.Types.ClientConfiguration;
   /**
+   * Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to the configuration (term, payment type, or number of nodes) and no additional costs. 
+   */
+  acceptReservedNodeExchange(params: Redshift.Types.AcceptReservedNodeExchangeInputMessage, callback?: (err: AWSError, data: Redshift.Types.AcceptReservedNodeExchangeOutputMessage) => void): Request<Redshift.Types.AcceptReservedNodeExchangeOutputMessage, AWSError>;
+  /**
+   * Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to the configuration (term, payment type, or number of nodes) and no additional costs. 
+   */
+  acceptReservedNodeExchange(callback?: (err: AWSError, data: Redshift.Types.AcceptReservedNodeExchangeOutputMessage) => void): Request<Redshift.Types.AcceptReservedNodeExchangeOutputMessage, AWSError>;
+  /**
    * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
    */
   authorizeClusterSecurityGroupIngress(params: Redshift.Types.AuthorizeClusterSecurityGroupIngressMessage, callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
@@ -36,11 +44,11 @@ declare class Redshift extends Service {
    */
   copyClusterSnapshot(callback?: (err: AWSError, data: Redshift.Types.CopyClusterSnapshotResult) => void): Request<Redshift.Types.CopyClusterSnapshotResult, AWSError>;
   /**
-   * Creates a new cluster. To create the cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Creates a new cluster. To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   createCluster(params: Redshift.Types.CreateClusterMessage, callback?: (err: AWSError, data: Redshift.Types.CreateClusterResult) => void): Request<Redshift.Types.CreateClusterResult, AWSError>;
   /**
-   * Creates a new cluster. To create the cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Creates a new cluster. To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   createCluster(callback?: (err: AWSError, data: Redshift.Types.CreateClusterResult) => void): Request<Redshift.Types.CreateClusterResult, AWSError>;
   /**
@@ -195,6 +203,14 @@ declare class Redshift extends Service {
    * Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Returns an array of ClusterDbRevision objects.
+   */
+  describeClusterDbRevisions(params: Redshift.Types.DescribeClusterDbRevisionsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterDbRevisionsMessage) => void): Request<Redshift.Types.ClusterDbRevisionsMessage, AWSError>;
+  /**
+   * Returns an array of ClusterDbRevision objects.
+   */
+  describeClusterDbRevisions(callback?: (err: AWSError, data: Redshift.Types.ClusterDbRevisionsMessage) => void): Request<Redshift.Types.ClusterDbRevisionsMessage, AWSError>;
   /**
    * Returns a list of Amazon Redshift parameter groups, including parameter groups you created and the default parameter group. For each parameter group, the response includes the parameter group name, description, and parameter group family name. You can optionally specify a name to retrieve the description of a specific parameter group.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all parameter groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all parameter groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, parameter groups are returned regardless of whether they have tag keys or values associated with them.
    */
@@ -404,6 +420,14 @@ declare class Redshift extends Service {
    */
   getClusterCredentials(callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
   /**
+   * Returns an array of ReservedNodeOfferings which is filtered by payment type, term, and instance type.
+   */
+  getReservedNodeExchangeOfferings(params: Redshift.Types.GetReservedNodeExchangeOfferingsInputMessage, callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
+  /**
+   * Returns an array of ReservedNodeOfferings which is filtered by payment type, term, and instance type.
+   */
+  getReservedNodeExchangeOfferings(callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
+  /**
    * Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.
    */
   modifyCluster(params: Redshift.Types.ModifyClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterResult) => void): Request<Redshift.Types.ModifyClusterResult, AWSError>;
@@ -411,6 +435,14 @@ declare class Redshift extends Service {
    * Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.
    */
   modifyCluster(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterResult) => void): Request<Redshift.Types.ModifyClusterResult, AWSError>;
+  /**
+   * Modifies the database revision of a cluster. The database revision is a unique revision of the database running in a cluster.
+   */
+  modifyClusterDbRevision(params: Redshift.Types.ModifyClusterDbRevisionMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterDbRevisionResult) => void): Request<Redshift.Types.ModifyClusterDbRevisionResult, AWSError>;
+  /**
+   * Modifies the database revision of a cluster. The database revision is a unique revision of the database running in a cluster.
+   */
+  modifyClusterDbRevision(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterDbRevisionResult) => void): Request<Redshift.Types.ModifyClusterDbRevisionResult, AWSError>;
   /**
    * Modifies the list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. A cluster can have up to 10 IAM roles associated at any time.
    */
@@ -549,6 +581,19 @@ declare class Redshift extends Service {
   waitFor(state: "snapshotAvailable", callback?: (err: AWSError, data: Redshift.Types.SnapshotMessage) => void): Request<Redshift.Types.SnapshotMessage, AWSError>;
 }
 declare namespace Redshift {
+  export interface AcceptReservedNodeExchangeInputMessage {
+    /**
+     * A string representing the identifier of the Reserved Node to be exchanged.
+     */
+    ReservedNodeId: String;
+    /**
+     * The unique identifier of the Reserved Node offering to be used for the exchange.
+     */
+    TargetReservedNodeOfferingId: String;
+  }
+  export interface AcceptReservedNodeExchangeOutputMessage {
+    ExchangedReservedNode?: ReservedNode;
+  }
   export interface AccountWithRestoreAccess {
     /**
      * The identifier of an AWS customer account authorized to restore a snapshot.
@@ -741,6 +786,10 @@ declare namespace Redshift {
      * A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.
      */
     IamRoles?: ClusterIamRoleList;
+    /**
+     * Cluster operations that are waiting to be started.
+     */
+    PendingActions?: PendingActionsList;
   }
   export interface ClusterCredentials {
     /**
@@ -755,6 +804,35 @@ declare namespace Redshift {
      * The date and time the password in DbPassword expires.
      */
     Expiration?: TStamp;
+  }
+  export interface ClusterDbRevision {
+    /**
+     * The unique identifier of the cluster.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * A string representing the current cluster version.
+     */
+    CurrentDatabaseRevision?: String;
+    /**
+     * The date on which the database revision was released.
+     */
+    DatabaseRevisionReleaseDate?: TStamp;
+    /**
+     * A list of RevisionTarget objects, where each object describes the database revision that a cluster can be updated to.
+     */
+    RevisionTargets?: RevisionTargetsList;
+  }
+  export type ClusterDbRevisionsList = ClusterDbRevision[];
+  export interface ClusterDbRevisionsMessage {
+    /**
+     * A string representing the starting point for the next set of revisions. If a value is returned in a response, you can retrieve the next set of revisions by providing the value in the marker parameter and retrying the command. If the marker field is empty, all revisions have already been returned.
+     */
+    Marker?: String;
+    /**
+     * A list of revisions.
+     */
+    ClusterDbRevisions?: ClusterDbRevisionsList;
   }
   export interface ClusterIamRole {
     /**
@@ -1404,6 +1482,20 @@ declare namespace Redshift {
      * The tag key that you want to delete.
      */
     TagKeys: TagKeyList;
+  }
+  export interface DescribeClusterDbRevisionsMessage {
+    /**
+     * A unique identifier for a cluster whose ClusterDbRevisions you are requesting. This parameter is case sensitive. All clusters defined for an account are returned by default.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in the marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the marker parameter and retrying the request.  Default: 100 Constraints: minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional parameter that specifies the starting point for returning a set of response records. When the results of a DescribeClusterDbRevisions request exceed the value specified in MaxRecords, Amazon Redshift returns a value in the marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the marker parameter and retrying the request.  Constraints: You can specify either the ClusterIdentifier parameter, or the marker parameter, but not both.
+     */
+    Marker?: String;
   }
   export interface DescribeClusterParameterGroupsMessage {
     /**
@@ -2070,6 +2162,30 @@ declare namespace Redshift {
      */
     DbGroups?: DbGroupList;
   }
+  export interface GetReservedNodeExchangeOfferingsInputMessage {
+    /**
+     * A string representing the node identifier for the Reserved Node to be exchanged.
+     */
+    ReservedNodeId: String;
+    /**
+     * An integer setting the maximum number of ReservedNodeOfferings to retrieve.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * A value that indicates the starting point for the next set of ReservedNodeOfferings.
+     */
+    Marker?: String;
+  }
+  export interface GetReservedNodeExchangeOfferingsOutputMessage {
+    /**
+     * An optional parameter that specifies the starting point for returning a set of response records. When the results of a GetReservedNodeExchangeOfferings request exceed the value specified in MaxRecords, Amazon Redshift returns a value in the marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the marker parameter and retrying the request. 
+     */
+    Marker?: String;
+    /**
+     * Returns an array of ReservedNodeOffering objects.
+     */
+    ReservedNodeOfferings?: ReservedNodeOfferingList;
+  }
   export interface HsmClientCertificate {
     /**
      * The identifier of the HSM client certificate.
@@ -2191,6 +2307,19 @@ declare namespace Redshift {
   }
   export type Long = number;
   export type LongOptional = number;
+  export interface ModifyClusterDbRevisionMessage {
+    /**
+     * The unique identifier of a cluster whose database revision you want to modify.  Example: examplecluster 
+     */
+    ClusterIdentifier: String;
+    /**
+     * The identifier of the database revision. You can retrieve this value from the response to the DescribeClusterDbRevisions request.
+     */
+    RevisionTarget: String;
+  }
+  export interface ModifyClusterDbRevisionResult {
+    Cluster?: Cluster;
+  }
   export interface ModifyClusterIamRolesMessage {
     /**
      * The unique identifier of the cluster for which you want to associate or disassociate IAM roles.
@@ -2428,6 +2557,7 @@ declare namespace Redshift {
   export type ParameterApplyType = "static"|"dynamic"|string;
   export type ParameterGroupList = ClusterParameterGroup[];
   export type ParametersList = Parameter[];
+  export type PendingActionsList = String[];
   export interface PendingModifiedValues {
     /**
      * The pending or in-progress change of the master user password for the cluster.
@@ -2537,7 +2667,7 @@ declare namespace Redshift {
      */
     NodeCount?: Integer;
     /**
-     * The state of the reserved compute node. Possible Values:   pending-payment-This reserved node has recently been purchased, and the sale has been approved, but payment has not yet been confirmed.   active-This reserved node is owned by the caller and is available for use.   payment-failed-Payment failed for the purchase attempt.  
+     * The state of the reserved compute node. Possible Values:   pending-payment-This reserved node has recently been purchased, and the sale has been approved, but payment has not yet been confirmed.   active-This reserved node is owned by the caller and is available for use.   payment-failed-Payment failed for the purchase attempt.   retired-The reserved node is no longer available.    exchanging-The owner is exchanging the reserved node for another reserved node.  
      */
     State?: String;
     /**
@@ -2829,6 +2959,21 @@ declare namespace Redshift {
   export interface RestoreTableFromClusterSnapshotResult {
     TableRestoreStatus?: TableRestoreStatus;
   }
+  export interface RevisionTarget {
+    /**
+     * A unique string that identifies the version to update the cluster to. You can use this value in ModifyClusterDbRevision.
+     */
+    DatabaseRevision?: String;
+    /**
+     * A string that describes the changes and features that will be applied to the cluster when it is updated to the corresponding ClusterDbRevision.
+     */
+    Description?: String;
+    /**
+     * The date on which the database revision was released.
+     */
+    DatabaseRevisionReleaseDate?: TStamp;
+  }
+  export type RevisionTargetsList = RevisionTarget[];
   export interface RevokeClusterSecurityGroupIngressMessage {
     /**
      * The name of the security Group from which to revoke the ingress rule.

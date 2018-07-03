@@ -107,6 +107,14 @@ declare class ACM extends Service {
    * Updates a certificate. Currently, you can use this function to specify whether to opt in to or out of recording your certificate in a certificate transparency log. For more information, see  Opting Out of Certificate Transparency Logging. 
    */
   updateCertificateOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Waits for the certificateValidated state by periodically calling the underlying ACM.describeCertificateoperation every 60 seconds (at most 40 times).
+   */
+  waitFor(state: "certificateValidated", params: ACM.Types.DescribeCertificateRequest, callback?: (err: AWSError, data: ACM.Types.DescribeCertificateResponse) => void): Request<ACM.Types.DescribeCertificateResponse, AWSError>;
+  /**
+   * Waits for the certificateValidated state by periodically calling the underlying ACM.describeCertificateoperation every 60 seconds (at most 40 times).
+   */
+  waitFor(state: "certificateValidated", callback?: (err: AWSError, data: ACM.Types.DescribeCertificateResponse) => void): Request<ACM.Types.DescribeCertificateResponse, AWSError>;
 }
 declare namespace ACM {
   export interface AddTagsToCertificateRequest {

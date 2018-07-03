@@ -11,6 +11,28 @@
     "xmlNamespace":"http://redshift.amazonaws.com/doc/2012-12-01/"
   },
   "operations":{
+    "AcceptReservedNodeExchange":{
+      "name":"AcceptReservedNodeExchange",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AcceptReservedNodeExchangeInputMessage"},
+      "output":{
+        "shape":"AcceptReservedNodeExchangeOutputMessage",
+        "resultWrapper":"AcceptReservedNodeExchangeResult"
+      },
+      "errors":[
+        {"shape":"ReservedNodeNotFoundFault"},
+        {"shape":"InvalidReservedNodeStateFault"},
+        {"shape":"ReservedNodeAlreadyMigratedFault"},
+        {"shape":"ReservedNodeOfferingNotFoundFault"},
+        {"shape":"UnsupportedOperationFault"},
+        {"shape":"DependentServiceUnavailableFault"},
+        {"shape":"ReservedNodeAlreadyExistsFault"}
+      ],
+      "documentation":"<p>Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to the configuration (term, payment type, or number of nodes) and no additional costs. </p>"
+    },
     "AuthorizeClusterSecurityGroupIngress":{
       "name":"AuthorizeClusterSecurityGroupIngress",
       "http":{
@@ -102,7 +124,7 @@
         {"shape":"LimitExceededFault"},
         {"shape":"DependentServiceRequestThrottlingFault"}
       ],
-      "documentation":"<p>Creates a new cluster.</p> <p>To create the cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+      "documentation":"<p>Creates a new cluster.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
     "CreateClusterParameterGroup":{
       "name":"CreateClusterParameterGroup",
@@ -425,6 +447,22 @@
         {"shape":"InvalidTagFault"}
       ],
       "documentation":"<p>Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.</p>"
+    },
+    "DescribeClusterDbRevisions":{
+      "name":"DescribeClusterDbRevisions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeClusterDbRevisionsMessage"},
+      "output":{
+        "shape":"ClusterDbRevisionsMessage",
+        "resultWrapper":"DescribeClusterDbRevisionsResult"
+      },
+      "errors":[
+        {"shape":"ClusterNotFoundFault"}
+      ],
+      "documentation":"<p>Returns an array of <code>ClusterDbRevision</code> objects.</p>"
     },
     "DescribeClusterParameterGroups":{
       "name":"DescribeClusterParameterGroups",
@@ -860,6 +898,27 @@
       ],
       "documentation":"<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html\">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The AWS Identity and Access Management (IAM)user or role that executes GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources\">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> privilege.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>"
     },
+    "GetReservedNodeExchangeOfferings":{
+      "name":"GetReservedNodeExchangeOfferings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetReservedNodeExchangeOfferingsInputMessage"},
+      "output":{
+        "shape":"GetReservedNodeExchangeOfferingsOutputMessage",
+        "resultWrapper":"GetReservedNodeExchangeOfferingsResult"
+      },
+      "errors":[
+        {"shape":"ReservedNodeNotFoundFault"},
+        {"shape":"InvalidReservedNodeStateFault"},
+        {"shape":"ReservedNodeAlreadyMigratedFault"},
+        {"shape":"ReservedNodeOfferingNotFoundFault"},
+        {"shape":"UnsupportedOperationFault"},
+        {"shape":"DependentServiceUnavailableFault"}
+      ],
+      "documentation":"<p>Returns an array of ReservedNodeOfferings which is filtered by payment type, term, and instance type.</p>"
+    },
     "ModifyCluster":{
       "name":"ModifyCluster",
       "http":{
@@ -887,9 +946,28 @@
         {"shape":"ClusterAlreadyExistsFault"},
         {"shape":"LimitExceededFault"},
         {"shape":"DependentServiceRequestThrottlingFault"},
-        {"shape":"InvalidElasticIpFault"}
+        {"shape":"InvalidElasticIpFault"},
+        {"shape":"TableLimitExceededFault"}
       ],
       "documentation":"<p>Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p>"
+    },
+    "ModifyClusterDbRevision":{
+      "name":"ModifyClusterDbRevision",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyClusterDbRevisionMessage"},
+      "output":{
+        "shape":"ModifyClusterDbRevisionResult",
+        "resultWrapper":"ModifyClusterDbRevisionResult"
+      },
+      "errors":[
+        {"shape":"ClusterNotFoundFault"},
+        {"shape":"ClusterOnLatestRevisionFault"},
+        {"shape":"InvalidClusterStateFault"}
+      ],
+      "documentation":"<p>Modifies the database revision of a cluster. The database revision is a unique revision of the database running in a cluster.</p>"
     },
     "ModifyClusterIamRoles":{
       "name":"ModifyClusterIamRoles",
@@ -1156,6 +1234,29 @@
     }
   },
   "shapes":{
+    "AcceptReservedNodeExchangeInputMessage":{
+      "type":"structure",
+      "required":[
+        "ReservedNodeId",
+        "TargetReservedNodeOfferingId"
+      ],
+      "members":{
+        "ReservedNodeId":{
+          "shape":"String",
+          "documentation":"<p>A string representing the identifier of the Reserved Node to be exchanged.</p>"
+        },
+        "TargetReservedNodeOfferingId":{
+          "shape":"String",
+          "documentation":"<p>The unique identifier of the Reserved Node offering to be used for the exchange.</p>"
+        }
+      }
+    },
+    "AcceptReservedNodeExchangeOutputMessage":{
+      "type":"structure",
+      "members":{
+        "ExchangedReservedNode":{"shape":"ReservedNode"}
+      }
+    },
     "AccessToSnapshotDeniedFault":{
       "type":"structure",
       "members":{
@@ -1449,6 +1550,10 @@
         "IamRoles":{
           "shape":"ClusterIamRoleList",
           "documentation":"<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.</p>"
+        },
+        "PendingActions":{
+          "shape":"PendingActionsList",
+          "documentation":"<p>Cluster operations that are waiting to be started.</p>"
         }
       },
       "documentation":"<p>Describes a cluster.</p>",
@@ -1483,6 +1588,48 @@
         }
       },
       "documentation":"<p>Temporary credentials with authorization to log on to an Amazon Redshift database. </p>"
+    },
+    "ClusterDbRevision":{
+      "type":"structure",
+      "members":{
+        "ClusterIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The unique identifier of the cluster.</p>"
+        },
+        "CurrentDatabaseRevision":{
+          "shape":"String",
+          "documentation":"<p>A string representing the current cluster version.</p>"
+        },
+        "DatabaseRevisionReleaseDate":{
+          "shape":"TStamp",
+          "documentation":"<p>The date on which the database revision was released.</p>"
+        },
+        "RevisionTargets":{
+          "shape":"RevisionTargetsList",
+          "documentation":"<p>A list of <code>RevisionTarget</code> objects, where each object describes the database revision that a cluster can be updated to.</p>"
+        }
+      },
+      "documentation":"<p>Describes a <code>ClusterDbRevision</code>.</p>"
+    },
+    "ClusterDbRevisionsList":{
+      "type":"list",
+      "member":{
+        "shape":"ClusterDbRevision",
+        "locationName":"ClusterDbRevision"
+      }
+    },
+    "ClusterDbRevisionsMessage":{
+      "type":"structure",
+      "members":{
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p>A string representing the starting point for the next set of revisions. If a value is returned in a response, you can retrieve the next set of revisions by providing the value in the <code>marker</code> parameter and retrying the command. If the <code>marker</code> field is empty, all revisions have already been returned.</p>"
+        },
+        "ClusterDbRevisions":{
+          "shape":"ClusterDbRevisionsList",
+          "documentation":"<p>A list of revisions.</p>"
+        }
+      }
     },
     "ClusterIamRole":{
       "type":"structure",
@@ -1542,6 +1689,18 @@
       "error":{
         "code":"ClusterNotFound",
         "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ClusterOnLatestRevisionFault":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Cluster is already on the latest database revision.</p>",
+      "error":{
+        "code":"ClusterOnLatestRevision",
+        "httpStatusCode":400,
         "senderFault":true
       },
       "exception":true
@@ -2664,6 +2823,23 @@
       },
       "exception":true
     },
+    "DescribeClusterDbRevisionsMessage":{
+      "type":"structure",
+      "members":{
+        "ClusterIdentifier":{
+          "shape":"String",
+          "documentation":"<p>A unique identifier for a cluster whose <code>ClusterDbRevisions</code> you are requesting. This parameter is case sensitive. All clusters defined for an account are returned by default.</p>"
+        },
+        "MaxRecords":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in the <code>marker</code> field of the response. You can retrieve the next set of response records by providing the returned <code>marker</code> value in the <code>marker</code> parameter and retrying the request. </p> <p>Default: 100</p> <p>Constraints: minimum 20, maximum 100.</p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p>An optional parameter that specifies the starting point for returning a set of response records. When the results of a <code>DescribeClusterDbRevisions</code> request exceed the value specified in <code>MaxRecords</code>, Amazon Redshift returns a value in the <code>marker</code> field of the response. You can retrieve the next set of response records by providing the returned <code>marker</code> value in the <code>marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <code>ClusterIdentifier</code> parameter, or the <code>marker</code> parameter, but not both.</p>"
+        }
+      }
+    },
     "DescribeClusterParameterGroupsMessage":{
       "type":"structure",
       "members":{
@@ -3551,6 +3727,38 @@
       },
       "documentation":"<p>The request parameters to get cluster credentials.</p>"
     },
+    "GetReservedNodeExchangeOfferingsInputMessage":{
+      "type":"structure",
+      "required":["ReservedNodeId"],
+      "members":{
+        "ReservedNodeId":{
+          "shape":"String",
+          "documentation":"<p>A string representing the node identifier for the Reserved Node to be exchanged.</p>"
+        },
+        "MaxRecords":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>An integer setting the maximum number of ReservedNodeOfferings to retrieve.</p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p>A value that indicates the starting point for the next set of ReservedNodeOfferings.</p>"
+        }
+      },
+      "documentation":"<p/>"
+    },
+    "GetReservedNodeExchangeOfferingsOutputMessage":{
+      "type":"structure",
+      "members":{
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p>An optional parameter that specifies the starting point for returning a set of response records. When the results of a <code>GetReservedNodeExchangeOfferings</code> request exceed the value specified in MaxRecords, Amazon Redshift returns a value in the marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the marker parameter and retrying the request. </p>"
+        },
+        "ReservedNodeOfferings":{
+          "shape":"ReservedNodeOfferingList",
+          "documentation":"<p>Returns an array of <a>ReservedNodeOffering</a> objects.</p>"
+        }
+      }
+    },
     "HsmClientCertificate":{
       "type":"structure",
       "members":{
@@ -3931,6 +4139,18 @@
       },
       "exception":true
     },
+    "InvalidReservedNodeStateFault":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Indicates that the Reserved Node being exchanged is not in an active state.</p>",
+      "error":{
+        "code":"InvalidReservedNodeState",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidRestoreFault":{
       "type":"structure",
       "members":{
@@ -4083,6 +4303,29 @@
     },
     "Long":{"type":"long"},
     "LongOptional":{"type":"long"},
+    "ModifyClusterDbRevisionMessage":{
+      "type":"structure",
+      "required":[
+        "ClusterIdentifier",
+        "RevisionTarget"
+      ],
+      "members":{
+        "ClusterIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The unique identifier of a cluster whose database revision you want to modify. </p> <p>Example: <code>examplecluster</code> </p>"
+        },
+        "RevisionTarget":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the database revision. You can retrieve this value from the response to the <a>DescribeClusterDbRevisions</a> request.</p>"
+        }
+      }
+    },
+    "ModifyClusterDbRevisionResult":{
+      "type":"structure",
+      "members":{
+        "Cluster":{"shape":"Cluster"}
+      }
+    },
     "ModifyClusterIamRolesMessage":{
       "type":"structure",
       "required":["ClusterIdentifier"],
@@ -4435,6 +4678,10 @@
         "locationName":"Parameter"
       }
     },
+    "PendingActionsList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "PendingModifiedValues":{
       "type":"structure",
       "members":{
@@ -4578,7 +4825,7 @@
         },
         "State":{
           "shape":"String",
-          "documentation":"<p>The state of the reserved compute node.</p> <p>Possible Values:</p> <ul> <li> <p>pending-payment-This reserved node has recently been purchased, and the sale has been approved, but payment has not yet been confirmed.</p> </li> <li> <p>active-This reserved node is owned by the caller and is available for use.</p> </li> <li> <p>payment-failed-Payment failed for the purchase attempt.</p> </li> </ul>"
+          "documentation":"<p>The state of the reserved compute node.</p> <p>Possible Values:</p> <ul> <li> <p>pending-payment-This reserved node has recently been purchased, and the sale has been approved, but payment has not yet been confirmed.</p> </li> <li> <p>active-This reserved node is owned by the caller and is available for use.</p> </li> <li> <p>payment-failed-Payment failed for the purchase attempt.</p> </li> <li> <p>retired-The reserved node is no longer available. </p> </li> <li> <p>exchanging-The owner is exchanging the reserved node for another reserved node.</p> </li> </ul>"
         },
         "OfferingType":{
           "shape":"String",
@@ -4601,6 +4848,18 @@
       "error":{
         "code":"ReservedNodeAlreadyExists",
         "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ReservedNodeAlreadyMigratedFault":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Indicates that the reserved node has already been exchanged.</p>",
+      "error":{
+        "code":"ReservedNodeAlreadyMigrated",
+        "httpStatusCode":400,
         "senderFault":true
       },
       "exception":true
@@ -5017,6 +5276,31 @@
       "type":"structure",
       "members":{
         "TableRestoreStatus":{"shape":"TableRestoreStatus"}
+      }
+    },
+    "RevisionTarget":{
+      "type":"structure",
+      "members":{
+        "DatabaseRevision":{
+          "shape":"String",
+          "documentation":"<p>A unique string that identifies the version to update the cluster to. You can use this value in <a>ModifyClusterDbRevision</a>.</p>"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A string that describes the changes and features that will be applied to the cluster when it is updated to the corresponding <a>ClusterDbRevision</a>.</p>"
+        },
+        "DatabaseRevisionReleaseDate":{
+          "shape":"TStamp",
+          "documentation":"<p>The date on which the database revision was released.</p>"
+        }
+      },
+      "documentation":"<p>Describes a <code>RevisionTarget</code>.</p>"
+    },
+    "RevisionTargetsList":{
+      "type":"list",
+      "member":{
+        "shape":"RevisionTarget",
+        "locationName":"RevisionTarget"
       }
     },
     "RevokeClusterSecurityGroupIngressMessage":{
@@ -5535,6 +5819,18 @@
       }
     },
     "TStamp":{"type":"timestamp"},
+    "TableLimitExceededFault":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The number of tables in the cluster exceeds the limit for the requested new cluster node type. </p>",
+      "error":{
+        "code":"TableLimitExceeded",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "TableRestoreNotFoundFault":{
       "type":"structure",
       "members":{
@@ -5666,7 +5962,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The request exceeds the limit of 10 tags for the resource.</p>",
+      "documentation":"<p>The number of tables in your source cluster exceeds the limit for the target cluster. Resize to a larger cluster node type.</p>",
       "error":{
         "code":"TagLimitExceededFault",
         "httpStatusCode":400,
