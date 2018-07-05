@@ -52,11 +52,11 @@ declare class Pinpoint extends Service {
    */
   createSegment(callback?: (err: AWSError, data: Pinpoint.Types.CreateSegmentResponse) => void): Request<Pinpoint.Types.CreateSegmentResponse, AWSError>;
   /**
-   * Delete an ADM channel
+   * Delete an ADM channel.
    */
   deleteAdmChannel(params: Pinpoint.Types.DeleteAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteAdmChannelResponse) => void): Request<Pinpoint.Types.DeleteAdmChannelResponse, AWSError>;
   /**
-   * Delete an ADM channel
+   * Delete an ADM channel.
    */
   deleteAdmChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteAdmChannelResponse) => void): Request<Pinpoint.Types.DeleteAdmChannelResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class Pinpoint extends Service {
    */
   deleteApnsChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsChannelResponse, AWSError>;
   /**
-   * Delete an APNS sandbox channel
+   * Delete an APNS sandbox channel.
    */
   deleteApnsSandboxChannel(params: Pinpoint.Types.DeleteApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsSandboxChannelResponse, AWSError>;
   /**
-   * Delete an APNS sandbox channel
+   * Delete an APNS sandbox channel.
    */
   deleteApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsSandboxChannelResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class Pinpoint extends Service {
    */
   deleteCampaign(callback?: (err: AWSError, data: Pinpoint.Types.DeleteCampaignResponse) => void): Request<Pinpoint.Types.DeleteCampaignResponse, AWSError>;
   /**
-   * Delete an email channel
+   * Delete an email channel.
    */
   deleteEmailChannel(params: Pinpoint.Types.DeleteEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
   /**
-   * Delete an email channel
+   * Delete an email channel.
    */
   deleteEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
   /**
@@ -156,19 +156,27 @@ declare class Pinpoint extends Service {
    */
   deleteSegment(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSegmentResponse) => void): Request<Pinpoint.Types.DeleteSegmentResponse, AWSError>;
   /**
-   * Delete an SMS channel
+   * Delete an SMS channel.
    */
   deleteSmsChannel(params: Pinpoint.Types.DeleteSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
   /**
-   * Delete an SMS channel
+   * Delete an SMS channel.
    */
   deleteSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
   /**
-   * Get an ADM channel
+   * Deletes endpoints associated with an user id.
+   */
+  deleteUserEndpoints(params: Pinpoint.Types.DeleteUserEndpointsRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteUserEndpointsResponse) => void): Request<Pinpoint.Types.DeleteUserEndpointsResponse, AWSError>;
+  /**
+   * Deletes endpoints associated with an user id.
+   */
+  deleteUserEndpoints(callback?: (err: AWSError, data: Pinpoint.Types.DeleteUserEndpointsResponse) => void): Request<Pinpoint.Types.DeleteUserEndpointsResponse, AWSError>;
+  /**
+   * Get an ADM channel.
    */
   getAdmChannel(params: Pinpoint.Types.GetAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAdmChannelResponse) => void): Request<Pinpoint.Types.GetAdmChannelResponse, AWSError>;
   /**
-   * Get an ADM channel
+   * Get an ADM channel.
    */
   getAdmChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetAdmChannelResponse) => void): Request<Pinpoint.Types.GetAdmChannelResponse, AWSError>;
   /**
@@ -180,11 +188,11 @@ declare class Pinpoint extends Service {
    */
   getApnsChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsChannelResponse) => void): Request<Pinpoint.Types.GetApnsChannelResponse, AWSError>;
   /**
-   * Get an APNS sandbox channel
+   * Get an APNS sandbox channel.
    */
   getApnsSandboxChannel(params: Pinpoint.Types.GetApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsSandboxChannelResponse, AWSError>;
   /**
-   * Get an APNS sandbox channel
+   * Get an APNS sandbox channel.
    */
   getApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsSandboxChannelResponse, AWSError>;
   /**
@@ -276,11 +284,19 @@ declare class Pinpoint extends Service {
    */
   getCampaigns(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignsResponse) => void): Request<Pinpoint.Types.GetCampaignsResponse, AWSError>;
   /**
-   * Get an email channel
+   * Get all channels.
+   */
+  getChannels(params: Pinpoint.Types.GetChannelsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetChannelsResponse) => void): Request<Pinpoint.Types.GetChannelsResponse, AWSError>;
+  /**
+   * Get all channels.
+   */
+  getChannels(callback?: (err: AWSError, data: Pinpoint.Types.GetChannelsResponse) => void): Request<Pinpoint.Types.GetChannelsResponse, AWSError>;
+  /**
+   * Get an email channel.
    */
   getEmailChannel(params: Pinpoint.Types.GetEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEmailChannelResponse) => void): Request<Pinpoint.Types.GetEmailChannelResponse, AWSError>;
   /**
-   * Get an email channel
+   * Get an email channel.
    */
   getEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetEmailChannelResponse) => void): Request<Pinpoint.Types.GetEmailChannelResponse, AWSError>;
   /**
@@ -388,13 +404,29 @@ declare class Pinpoint extends Service {
    */
   getSegments(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentsResponse) => void): Request<Pinpoint.Types.GetSegmentsResponse, AWSError>;
   /**
-   * Get an SMS channel
+   * Get an SMS channel.
    */
   getSmsChannel(params: Pinpoint.Types.GetSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
   /**
-   * Get an SMS channel
+   * Get an SMS channel.
    */
   getSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
+  /**
+   * Returns information about the endpoints associated with an user id.
+   */
+  getUserEndpoints(params: Pinpoint.Types.GetUserEndpointsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetUserEndpointsResponse) => void): Request<Pinpoint.Types.GetUserEndpointsResponse, AWSError>;
+  /**
+   * Returns information about the endpoints associated with an user id.
+   */
+  getUserEndpoints(callback?: (err: AWSError, data: Pinpoint.Types.GetUserEndpointsResponse) => void): Request<Pinpoint.Types.GetUserEndpointsResponse, AWSError>;
+  /**
+   * Returns information about the specified phone number.
+   */
+  phoneNumberValidate(params: Pinpoint.Types.PhoneNumberValidateRequest, callback?: (err: AWSError, data: Pinpoint.Types.PhoneNumberValidateResponse) => void): Request<Pinpoint.Types.PhoneNumberValidateResponse, AWSError>;
+  /**
+   * Returns information about the specified phone number.
+   */
+  phoneNumberValidate(callback?: (err: AWSError, data: Pinpoint.Types.PhoneNumberValidateResponse) => void): Request<Pinpoint.Types.PhoneNumberValidateResponse, AWSError>;
   /**
    * Use to create or update the event stream for an app.
    */
@@ -404,27 +436,55 @@ declare class Pinpoint extends Service {
    */
   putEventStream(callback?: (err: AWSError, data: Pinpoint.Types.PutEventStreamResponse) => void): Request<Pinpoint.Types.PutEventStreamResponse, AWSError>;
   /**
-   * Send a batch of messages
+   * Used to remove the attributes for an app
+   */
+  removeAttributes(params: Pinpoint.Types.RemoveAttributesRequest, callback?: (err: AWSError, data: Pinpoint.Types.RemoveAttributesResponse) => void): Request<Pinpoint.Types.RemoveAttributesResponse, AWSError>;
+  /**
+   * Used to remove the attributes for an app
+   */
+  removeAttributes(callback?: (err: AWSError, data: Pinpoint.Types.RemoveAttributesResponse) => void): Request<Pinpoint.Types.RemoveAttributesResponse, AWSError>;
+  /**
+   * Use this resource to send a direct message, which is a one time message that you send to a limited audience without creating a campaign. 
+
+You can send the message to up to 100 recipients. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of sending a direct message.
+
+You can send a direct message as a push notification to your mobile app or as an SMS message to SMS-enabled devices.
    */
   sendMessages(params: Pinpoint.Types.SendMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
   /**
-   * Send a batch of messages
+   * Use this resource to send a direct message, which is a one time message that you send to a limited audience without creating a campaign. 
+
+You can send the message to up to 100 recipients. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of sending a direct message.
+
+You can send a direct message as a push notification to your mobile app or as an SMS message to SMS-enabled devices.
    */
   sendMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
   /**
-   * Send a batch of messages to users
+   * Use this resource to message a list of users. Amazon Pinpoint sends the message to all of the endpoints that are associated with each user.
+
+A user represents an individual who is assigned a unique user ID, and this ID is assigned to one or more endpoints. For example, if an individual uses your app on multiple devices, your app could assign that person's user ID to the endpoint for each device.
+
+With the users-messages resource, you specify the message recipients as user IDs. For each user ID, Amazon Pinpoint delivers the message to all of the user's endpoints. Within the body of your request, you can specify a default message, and you can tailor your message for different channels, including those for mobile push and SMS.
+
+With this resource, you send a direct message, which is a one time message that you send to a limited audience without creating a campaign. You can send the message to up to 100 users per request. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of using the users-messages resource.
    */
   sendUsersMessages(params: Pinpoint.Types.SendUsersMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
   /**
-   * Send a batch of messages to users
+   * Use this resource to message a list of users. Amazon Pinpoint sends the message to all of the endpoints that are associated with each user.
+
+A user represents an individual who is assigned a unique user ID, and this ID is assigned to one or more endpoints. For example, if an individual uses your app on multiple devices, your app could assign that person's user ID to the endpoint for each device.
+
+With the users-messages resource, you specify the message recipients as user IDs. For each user ID, Amazon Pinpoint delivers the message to all of the user's endpoints. Within the body of your request, you can specify a default message, and you can tailor your message for different channels, including those for mobile push and SMS.
+
+With this resource, you send a direct message, which is a one time message that you send to a limited audience without creating a campaign. You can send the message to up to 100 users per request. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of using the users-messages resource.
    */
   sendUsersMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
   /**
-   * Update an ADM channel
+   * Update an ADM channel.
    */
   updateAdmChannel(params: Pinpoint.Types.UpdateAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateAdmChannelResponse) => void): Request<Pinpoint.Types.UpdateAdmChannelResponse, AWSError>;
   /**
-   * Update an ADM channel
+   * Update an ADM channel.
    */
   updateAdmChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateAdmChannelResponse) => void): Request<Pinpoint.Types.UpdateAdmChannelResponse, AWSError>;
   /**
@@ -436,11 +496,11 @@ declare class Pinpoint extends Service {
    */
   updateApnsChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsChannelResponse, AWSError>;
   /**
-   * Update an APNS sandbox channel
+   * Update an APNS sandbox channel.
    */
   updateApnsSandboxChannel(params: Pinpoint.Types.UpdateApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
   /**
-   * Update an APNS sandbox channel
+   * Update an APNS sandbox channel.
    */
   updateApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
   /**
@@ -484,19 +544,19 @@ declare class Pinpoint extends Service {
    */
   updateCampaign(callback?: (err: AWSError, data: Pinpoint.Types.UpdateCampaignResponse) => void): Request<Pinpoint.Types.UpdateCampaignResponse, AWSError>;
   /**
-   * Update an email channel
+   * Update an email channel.
    */
   updateEmailChannel(params: Pinpoint.Types.UpdateEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
   /**
-   * Update an email channel
+   * Update an email channel.
    */
   updateEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
   /**
-   * Use to update an endpoint.
+   * Creates or updates an endpoint.
    */
   updateEndpoint(params: Pinpoint.Types.UpdateEndpointRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointResponse) => void): Request<Pinpoint.Types.UpdateEndpointResponse, AWSError>;
   /**
-   * Use to update an endpoint.
+   * Creates or updates an endpoint.
    */
   updateEndpoint(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointResponse) => void): Request<Pinpoint.Types.UpdateEndpointResponse, AWSError>;
   /**
@@ -524,11 +584,11 @@ declare class Pinpoint extends Service {
    */
   updateSegment(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSegmentResponse) => void): Request<Pinpoint.Types.UpdateSegmentResponse, AWSError>;
   /**
-   * Update an SMS channel
+   * Update an SMS channel.
    */
   updateSmsChannel(params: Pinpoint.Types.UpdateSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
   /**
-   * Update an SMS channel
+   * Update an SMS channel.
    */
   updateSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
 }
@@ -561,7 +621,7 @@ declare namespace Pinpoint {
      */
     Enabled?: __boolean;
     /**
-     * Indicates whether the channel is configured with ADM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with ADM. Provide your credentials by setting the ClientId and ClientSecret attributes.
+     * Not used. Retained for backwards compatibility.
      */
     HasCredential?: __boolean;
     /**
@@ -707,7 +767,7 @@ declare namespace Pinpoint {
      */
     Enabled?: __boolean;
     /**
-     * Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes.
+     * Not used. Retained for backwards compatibility.
      */
     HasCredential?: __boolean;
     /**
@@ -871,7 +931,7 @@ For more information about the apns-priority parameter, see Communicating with A
      */
     Enabled?: __boolean;
     /**
-     * Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes.
+     * Not used. Retained for backwards compatibility.
      */
     HasCredential?: __boolean;
     /**
@@ -955,7 +1015,7 @@ For more information about the apns-priority parameter, see Communicating with A
      */
     Enabled?: __boolean;
     /**
-     * If the channel is registered with a credential for authentication.
+     * Not used. Retained for backwards compatibility.
      */
     HasCredential?: __boolean;
     /**
@@ -1039,7 +1099,7 @@ For more information about the apns-priority parameter, see Communicating with A
      */
     Enabled?: __boolean;
     /**
-     * If the channel is registered with a credential for authentication.
+     * Not used. Retained for backwards compatibility.
      */
     HasCredential?: __boolean;
     /**
@@ -1219,6 +1279,20 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
     Values?: ListOf__string;
   }
   export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|string;
+  export interface AttributesResource {
+    /**
+     * The unique ID for the application.
+     */
+    ApplicationId?: __string;
+    /**
+     * The attribute type for the application.
+     */
+    AttributeType?: __string;
+    /**
+     * The attributes for the application.
+     */
+    Attributes?: ListOf__string;
+  }
   export interface BaiduChannelRequest {
     /**
      * Platform credential API key from Baidu.
@@ -1251,7 +1325,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     Enabled?: __boolean;
     /**
-     * Indicates whether the channel is configured with Baidu Cloud Push credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with Baidu Cloud Push. Provide your credentials by setting the ApiKey and SecretKey attributes.
+     * Not used. Retained for backwards compatibility.
      */
     HasCredential?: __boolean;
     /**
@@ -1324,6 +1398,10 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      * Default message substitutions. Can be overridden by individual address substitutions.
      */
     Substitutions?: MapOfListOf__string;
+    /**
+     * This parameter specifies how long (in seconds) the message should be kept in Baidu storage if the device is offline. The and the default value and the maximum time to live supported is 7 days (604800 seconds)
+     */
+    TimeToLive?: __integer;
     /**
      * The message title that displays above the message on the user's device.
      */
@@ -1489,7 +1567,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     CampaignStatus?: CampaignStatus;
   }
-  export type CampaignStatus = "SCHEDULED"|"EXECUTING"|"PENDING_NEXT_RUN"|"COMPLETED"|"PAUSED"|string;
+  export type CampaignStatus = "SCHEDULED"|"EXECUTING"|"PENDING_NEXT_RUN"|"COMPLETED"|"PAUSED"|"DELETED"|string;
   export interface CampaignsResponse {
     /**
      * A list of campaigns.
@@ -1500,7 +1578,51 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     NextToken?: __string;
   }
+  export interface ChannelResponse {
+    /**
+     * Application id
+     */
+    ApplicationId?: __string;
+    /**
+     * When was this segment created
+     */
+    CreationDate?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * Not used. Retained for backwards compatibility.
+     */
+    HasCredential?: __boolean;
+    /**
+     * Channel ID. Not used, only for backwards compatibility.
+     */
+    Id?: __string;
+    /**
+     * Is this channel archived
+     */
+    IsArchived?: __boolean;
+    /**
+     * Who made the last change
+     */
+    LastModifiedBy?: __string;
+    /**
+     * Last date this was updated
+     */
+    LastModifiedDate?: __string;
+    /**
+     * Version of channel
+     */
+    Version?: __integer;
+  }
   export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
+  export interface ChannelsResponse {
+    /**
+     * A map of channels, with the ChannelType as the key and the Channel as the value.
+     */
+    Channels?: MapOfChannelResponse;
+  }
   export interface CreateAppRequest {
     CreateApplicationRequest: CreateApplicationRequest;
   }
@@ -1514,6 +1636,9 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
     Name?: __string;
   }
   export interface CreateCampaignRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     WriteCampaignRequest: WriteCampaignRequest;
   }
@@ -1521,6 +1646,9 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
     CampaignResponse: CampaignResponse;
   }
   export interface CreateExportJobRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     ExportJobRequest: ExportJobRequest;
   }
@@ -1528,6 +1656,9 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
     ExportJobResponse: ExportJobResponse;
   }
   export interface CreateImportJobRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     ImportJobRequest: ImportJobRequest;
   }
@@ -1535,6 +1666,9 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
     ImportJobResponse: ImportJobResponse;
   }
   export interface CreateSegmentRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     WriteSegmentRequest: WriteSegmentRequest;
   }
@@ -1582,94 +1716,155 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
     Url?: __string;
   }
   export interface DeleteAdmChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface DeleteAdmChannelResponse {
     ADMChannelResponse: ADMChannelResponse;
   }
   export interface DeleteApnsChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface DeleteApnsChannelResponse {
     APNSChannelResponse: APNSChannelResponse;
   }
   export interface DeleteApnsSandboxChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface DeleteApnsSandboxChannelResponse {
     APNSSandboxChannelResponse: APNSSandboxChannelResponse;
   }
   export interface DeleteApnsVoipChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface DeleteApnsVoipChannelResponse {
     APNSVoipChannelResponse: APNSVoipChannelResponse;
   }
   export interface DeleteApnsVoipSandboxChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface DeleteApnsVoipSandboxChannelResponse {
     APNSVoipSandboxChannelResponse: APNSVoipSandboxChannelResponse;
   }
   export interface DeleteAppRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface DeleteAppResponse {
     ApplicationResponse: ApplicationResponse;
   }
   export interface DeleteBaiduChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface DeleteBaiduChannelResponse {
     BaiduChannelResponse: BaiduChannelResponse;
   }
   export interface DeleteCampaignRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the campaign.
+     */
     CampaignId: __string;
   }
   export interface DeleteCampaignResponse {
     CampaignResponse: CampaignResponse;
   }
   export interface DeleteEmailChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface DeleteEmailChannelResponse {
     EmailChannelResponse: EmailChannelResponse;
   }
-  export interface DeleteEventStreamRequest {
+  export interface DeleteEndpointRequest {
     /**
-     * ApplicationId
+     * The unique ID of your Amazon Pinpoint application.
      */
     ApplicationId: __string;
-  }
-  export interface DeleteEndpointRequest {
-    ApplicationId: __string;
+    /**
+     * The unique ID of the endpoint.
+     */
     EndpointId: __string;
   }
   export interface DeleteEndpointResponse {
     EndpointResponse: EndpointResponse;
   }
+  export interface DeleteEventStreamRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+  }
   export interface DeleteEventStreamResponse {
     EventStream: EventStream;
   }
   export interface DeleteGcmChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface DeleteGcmChannelResponse {
     GCMChannelResponse: GCMChannelResponse;
   }
   export interface DeleteSegmentRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the segment.
+     */
     SegmentId: __string;
   }
   export interface DeleteSegmentResponse {
     SegmentResponse: SegmentResponse;
   }
   export interface DeleteSmsChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface DeleteSmsChannelResponse {
     SMSChannelResponse: SMSChannelResponse;
+  }
+  export interface DeleteUserEndpointsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique ID of the user.
+     */
+    UserId: __string;
+  }
+  export interface DeleteUserEndpointsResponse {
+    EndpointsResponse: EndpointsResponse;
   }
   export type DeliveryStatus = "SUCCESSFUL"|"THROTTLED"|"TEMPORARY_FAILURE"|"PERMANENT_FAILURE"|"UNKNOWN_FAILURE"|"OPT_OUT"|"DUPLICATE"|string;
   export type DimensionType = "INCLUSIVE"|"EXCLUSIVE"|string;
@@ -1740,7 +1935,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     FromAddress?: __string;
     /**
-     * If the channel is registered with a credential for authentication.
+     * Not used. Retained for backwards compatibility.
      */
     HasCredential?: __boolean;
     /**
@@ -1764,6 +1959,10 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     LastModifiedDate?: __string;
     /**
+     * Messages per second that can be sent
+     */
+    MessagesPerSecond?: __integer;
+    /**
      * Platform type. Will be "EMAIL"
      */
     Platform?: __string;
@@ -1778,7 +1977,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface EndpointBatchItem {
     /**
-     * The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
+     * The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +1206XXX5550100. For the email channel, use an email address.
      */
     Address?: __string;
     /**
@@ -1802,7 +2001,7 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
      */
     EffectiveDate?: __string;
     /**
-     * The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated.
+     * Unused.
      */
     EndpointStatus?: __string;
     /**
@@ -1911,6 +2110,10 @@ NONE - Users has not opted out and receives all messages.
      */
     DeliveryStatus?: DeliveryStatus;
     /**
+     * Unique message identifier associated with the message that was sent.
+     */
+    MessageId?: __string;
+    /**
      * Downstream service status code.
      */
     StatusCode?: __integer;
@@ -1925,7 +2128,7 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface EndpointRequest {
     /**
-     * The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
+     * The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +1206XXX5550100. For the email channel, use an email address.
      */
     Address?: __string;
     /**
@@ -1949,7 +2152,7 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
      */
     EffectiveDate?: __string;
     /**
-     * The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated.
+     * Unused.
      */
     EndpointStatus?: __string;
     /**
@@ -2015,7 +2218,7 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
      */
     EffectiveDate?: __string;
     /**
-     * The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated.
+     * Unused.
      */
     EndpointStatus?: __string;
     /**
@@ -2081,6 +2284,12 @@ The following characters are not recommended in attribute names: # : ? \ /. The 
      */
     UserId?: __string;
   }
+  export interface EndpointsResponse {
+    /**
+     * The list of endpoints.
+     */
+    Item?: ListOfEndpointResponse;
+  }
   export interface EventStream {
     /**
      * The ID of the application from which events should be published.
@@ -2116,15 +2325,20 @@ The following characters are not recommended in attribute names: # : ? \ /. The 
     RoleArn?: __string;
     /**
      * A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
+
 The URL should follow this format: s3://bucket-name/folder-name/
 
 Amazon Pinpoint will export endpoints to this location.
      */
     S3UrlPrefix?: __string;
     /**
-     * The ID of the segment to export endpoints from. If not present all endpoints will be exported.
+     * The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application.
      */
     SegmentId?: __string;
+    /**
+     * The version of the segment to export if specified.
+     */
+    SegmentVersion?: __integer;
   }
   export interface ExportJobResource {
     /**
@@ -2133,15 +2347,20 @@ Amazon Pinpoint will export endpoints to this location.
     RoleArn?: __string;
     /**
      * A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
+
 The URL should follow this format: s3://bucket-name/folder-name/
 
 Amazon Pinpoint will export endpoints to this location.
      */
     S3UrlPrefix?: __string;
     /**
-     * The ID of the segment to export endpoints from. If not present, all endpoints are exported.
+     * The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application.
      */
     SegmentId?: __string;
+    /**
+     * The version of the segment to export if specified.
+     */
+    SegmentVersion?: __integer;
   }
   export interface ExportJobResponse {
     /**
@@ -2240,7 +2459,7 @@ The job status is FAILED if one or more pieces failed.
      */
     Enabled?: __boolean;
     /**
-     * Indicates whether the channel is configured with FCM or GCM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with FCM or GCM. Provide your credentials by setting the ApiKey attribute.
+     * Not used. Retained for backwards compatibility.
      */
     HasCredential?: __boolean;
     /**
@@ -2346,63 +2565,119 @@ For more information, see About FCM Messages in the Firebase documentation.
      */
     Url?: __string;
   }
+  export interface GPSCoordinates {
+    /**
+     * Latitude
+     */
+    Latitude?: __double;
+    /**
+     * Longitude
+     */
+    Longitude?: __double;
+  }
+  export interface GPSPointDimension {
+    /**
+     * Coordinate to measure distance from.
+     */
+    Coordinates?: GPSCoordinates;
+    /**
+     * Range in kilometers from the coordinate.
+     */
+    RangeInKilometers?: __double;
+  }
   export interface GetAdmChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetAdmChannelResponse {
     ADMChannelResponse: ADMChannelResponse;
   }
   export interface GetApnsChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetApnsChannelResponse {
     APNSChannelResponse: APNSChannelResponse;
   }
   export interface GetApnsSandboxChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetApnsSandboxChannelResponse {
     APNSSandboxChannelResponse: APNSSandboxChannelResponse;
   }
   export interface GetApnsVoipChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetApnsVoipChannelResponse {
     APNSVoipChannelResponse: APNSVoipChannelResponse;
   }
   export interface GetApnsVoipSandboxChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetApnsVoipSandboxChannelResponse {
     APNSVoipSandboxChannelResponse: APNSVoipSandboxChannelResponse;
   }
   export interface GetAppRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetAppResponse {
     ApplicationResponse: ApplicationResponse;
   }
   export interface GetApplicationSettingsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetApplicationSettingsResponse {
     ApplicationSettingsResource: ApplicationSettingsResource;
   }
   export interface GetAppsRequest {
+    /**
+     * The number of entries you want on each page in the response.
+     */
     PageSize?: __string;
+    /**
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
     Token?: __string;
   }
   export interface GetAppsResponse {
     ApplicationsResponse: ApplicationsResponse;
   }
   export interface GetBaiduChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetBaiduChannelResponse {
     BaiduChannelResponse: BaiduChannelResponse;
   }
   export interface GetCampaignActivitiesRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the campaign.
+     */
     CampaignId: __string;
     /**
      * The number of entries you want on each page in the response.
@@ -2417,22 +2692,43 @@ For more information, see About FCM Messages in the Firebase documentation.
     ActivitiesResponse: ActivitiesResponse;
   }
   export interface GetCampaignRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the campaign.
+     */
     CampaignId: __string;
   }
   export interface GetCampaignResponse {
     CampaignResponse: CampaignResponse;
   }
   export interface GetCampaignVersionRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the campaign.
+     */
     CampaignId: __string;
+    /**
+     * The version of the campaign.
+     */
     Version: __string;
   }
   export interface GetCampaignVersionResponse {
     CampaignResponse: CampaignResponse;
   }
   export interface GetCampaignVersionsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the campaign.
+     */
     CampaignId: __string;
     /**
      * The number of entries you want on each page in the response.
@@ -2447,6 +2743,9 @@ For more information, see About FCM Messages in the Firebase documentation.
     CampaignsResponse: CampaignsResponse;
   }
   export interface GetCampaignsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     /**
      * The number of entries you want on each page in the response.
@@ -2460,14 +2759,32 @@ For more information, see About FCM Messages in the Firebase documentation.
   export interface GetCampaignsResponse {
     CampaignsResponse: CampaignsResponse;
   }
+  export interface GetChannelsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+  }
+  export interface GetChannelsResponse {
+    ChannelsResponse: ChannelsResponse;
+  }
   export interface GetEmailChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetEmailChannelResponse {
     EmailChannelResponse: EmailChannelResponse;
   }
   export interface GetEndpointRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the endpoint.
+     */
     EndpointId: __string;
   }
   export interface GetEndpointResponse {
@@ -2475,7 +2792,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetEventStreamRequest {
     /**
-     * ApplicationId
+     * The unique ID of your Amazon Pinpoint application.
      */
     ApplicationId: __string;
   }
@@ -2483,13 +2800,22 @@ For more information, see About FCM Messages in the Firebase documentation.
     EventStream: EventStream;
   }
   export interface GetExportJobRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the job.
+     */
     JobId: __string;
   }
   export interface GetExportJobResponse {
     ExportJobResponse: ExportJobResponse;
   }
   export interface GetExportJobsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     /**
      * The number of entries you want on each page in the response.
@@ -2504,19 +2830,31 @@ For more information, see About FCM Messages in the Firebase documentation.
     ExportJobsResponse: ExportJobsResponse;
   }
   export interface GetGcmChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetGcmChannelResponse {
     GCMChannelResponse: GCMChannelResponse;
   }
   export interface GetImportJobRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the job.
+     */
     JobId: __string;
   }
   export interface GetImportJobResponse {
     ImportJobResponse: ImportJobResponse;
   }
   export interface GetImportJobsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     /**
      * The number of entries you want on each page in the response.
@@ -2531,11 +2869,17 @@ For more information, see About FCM Messages in the Firebase documentation.
     ImportJobsResponse: ImportJobsResponse;
   }
   export interface GetSegmentExportJobsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     /**
      * The number of entries you want on each page in the response.
      */
     PageSize?: __string;
+    /**
+     * The unique ID of the segment.
+     */
     SegmentId: __string;
     /**
      * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
@@ -2546,11 +2890,17 @@ For more information, see About FCM Messages in the Firebase documentation.
     ExportJobsResponse: ExportJobsResponse;
   }
   export interface GetSegmentImportJobsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     /**
      * The number of entries you want on each page in the response.
      */
     PageSize?: __string;
+    /**
+     * The unique ID of the segment.
+     */
     SegmentId: __string;
     /**
      * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
@@ -2561,26 +2911,47 @@ For more information, see About FCM Messages in the Firebase documentation.
     ImportJobsResponse: ImportJobsResponse;
   }
   export interface GetSegmentRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the segment.
+     */
     SegmentId: __string;
   }
   export interface GetSegmentResponse {
     SegmentResponse: SegmentResponse;
   }
   export interface GetSegmentVersionRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the segment.
+     */
     SegmentId: __string;
+    /**
+     * The segment version.
+     */
     Version: __string;
   }
   export interface GetSegmentVersionResponse {
     SegmentResponse: SegmentResponse;
   }
   export interface GetSegmentVersionsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     /**
      * The number of entries you want on each page in the response.
      */
     PageSize?: __string;
+    /**
+     * The unique ID of the segment.
+     */
     SegmentId: __string;
     /**
      * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
@@ -2591,6 +2962,9 @@ For more information, see About FCM Messages in the Firebase documentation.
     SegmentsResponse: SegmentsResponse;
   }
   export interface GetSegmentsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     /**
      * The number of entries you want on each page in the response.
@@ -2605,10 +2979,26 @@ For more information, see About FCM Messages in the Firebase documentation.
     SegmentsResponse: SegmentsResponse;
   }
   export interface GetSmsChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface GetSmsChannelResponse {
     SMSChannelResponse: SMSChannelResponse;
+  }
+  export interface GetUserEndpointsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique ID of the user.
+     */
+    UserId: __string;
+  }
+  export interface GetUserEndpointsResponse {
+    EndpointsResponse: EndpointsResponse;
   }
   export interface ImportJobRequest {
     /**
@@ -2753,27 +3143,8 @@ The job status is FAILED if one or more pieces failed to import.
      */
     NextToken?: __string;
   }
+  export type Include = "ALL"|"ANY"|"NONE"|string;
   export type JobStatus = "CREATED"|"INITIALIZING"|"PROCESSING"|"COMPLETING"|"COMPLETED"|"FAILING"|"FAILED"|string;
-  export type ListOfActivityResponse = ActivityResponse[];
-  export type ListOfApplicationResponse = ApplicationResponse[];
-  export type ListOfCampaignResponse = CampaignResponse[];
-  export type ListOfEndpointBatchItem = EndpointBatchItem[];
-  export type ListOfExportJobResponse = ExportJobResponse[];
-  export type ListOfImportJobResponse = ImportJobResponse[];
-  export type ListOfSegmentResponse = SegmentResponse[];
-  export type ListOfTreatmentResource = TreatmentResource[];
-  export type ListOfWriteTreatmentResource = WriteTreatmentResource[];
-  export type ListOf__string = __string[];
-  export type MapOfAddressConfiguration = {[key: string]: AddressConfiguration};
-  export type MapOfAttributeDimension = {[key: string]: AttributeDimension};
-  export type MapOfEndpointMessageResult = {[key: string]: EndpointMessageResult};
-  export type MapOfEndpointSendConfiguration = {[key: string]: EndpointSendConfiguration};
-  export type MapOfListOf__string = {[key: string]: ListOf__string};
-  export type MapOfMapOfEndpointMessageResult = {[key: string]: MapOfEndpointMessageResult};
-  export type MapOfMessageResult = {[key: string]: MessageResult};
-  export type MapOf__double = {[key: string]: __double};
-  export type MapOf__integer = {[key: string]: __integer};
-  export type MapOf__string = {[key: string]: __string};
   export interface Message {
     /**
      * The action that occurs if the user taps a push notification delivered by the campaign:
@@ -2819,6 +3190,10 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      */
     SilentPush?: __boolean;
     /**
+     * This parameter specifies how long (in seconds) the message should be kept if the service is unable to deliver the notification the first time. If the value is 0, it treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to the service. It only applies to APNs and GCM
+     */
+    TimeToLive?: __integer;
+    /**
      * The message title that displays above the message on the user's device.
      */
     Title?: __string;
@@ -2829,7 +3204,7 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
   }
   export interface MessageBody {
     /**
-     * The error message returned from the API.
+     * The error message that's returned from the API.
      */
     Message?: __string;
     /**
@@ -2869,7 +3244,7 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
   }
   export interface MessageRequest {
     /**
-     * A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value.
+     * A map of key-value pairs, where each key is an address and each value is an AddressConfiguration object. An address can be a push notification token, a phone number, or an email address.
      */
     Addresses?: MapOfAddressConfiguration;
     /**
@@ -2877,7 +3252,7 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      */
     Context?: MapOf__string;
     /**
-     * A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value.
+     * A map of key-value pairs, where each key is an endpoint ID and each value is an EndpointSendConfiguration object. Within an EndpointSendConfiguration object, you can tailor the message for an endpoint by specifying message overrides or substitutions.
      */
     Endpoints?: MapOfEndpointSendConfiguration;
     /**
@@ -2909,6 +3284,10 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      */
     DeliveryStatus?: DeliveryStatus;
     /**
+     * Unique message identifier associated with the message that was sent.
+     */
+    MessageId?: __string;
+    /**
      * Downstream service status code.
      */
     StatusCode?: __integer;
@@ -2922,15 +3301,96 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
     UpdatedToken?: __string;
   }
   export type MessageType = "TRANSACTIONAL"|"PROMOTIONAL"|string;
+  export interface MetricDimension {
+    /**
+     * GREATER_THAN | LESS_THAN | GREATER_THAN_OR_EQUAL | LESS_THAN_OR_EQUAL | EQUAL
+     */
+    ComparisonOperator?: __string;
+    /**
+     * Value to be compared.
+     */
+    Value?: __double;
+  }
   export type Mode = "DELIVERY"|"FILTER"|string;
+  export interface NumberValidateRequest {
+    /**
+     * (Optional) The two-character ISO country code for the country where the phone number was originally registered.
+     */
+    IsoCountryCode?: __string;
+    /**
+     * The phone number to get information about.
+     */
+    PhoneNumber?: __string;
+  }
+  export interface NumberValidateResponse {
+    /**
+     * The carrier that the phone number is registered with.
+     */
+    Carrier?: __string;
+    /**
+     * The city where the phone number was originally registered.
+     */
+    City?: __string;
+    /**
+     * The cleansed (standardized) phone number in E.164 format.
+     */
+    CleansedPhoneNumberE164?: __string;
+    /**
+     * The cleansed phone number in national format.
+     */
+    CleansedPhoneNumberNational?: __string;
+    /**
+     * The country where the phone number was originally registered.
+     */
+    Country?: __string;
+    /**
+     * The two-character ISO country code for the country where the phone number was originally registered.
+     */
+    CountryCodeIso2?: __string;
+    /**
+     * The numeric country code for the country where the phone number was originally registered.
+     */
+    CountryCodeNumeric?: __string;
+    /**
+     * The county where the phone number was originally registered.
+     */
+    County?: __string;
+    /**
+     * The two-character ISO country code that was included in the request body.
+     */
+    OriginalCountryCodeIso2?: __string;
+    /**
+     * The phone number that you included in the request body.
+     */
+    OriginalPhoneNumber?: __string;
+    /**
+     * A description of the phone type. Possible values include MOBILE, LANDLINE, VOIP, INVALID, and OTHER.
+     */
+    PhoneType?: __string;
+    /**
+     * The phone type as an integer. Possible values include 0 (MOBILE), 1 (LANDLINE), 2 (VOIP), 3 (INVALID), and 4 (OTHER).
+     */
+    PhoneTypeCode?: __integer;
+    /**
+     * The time zone for the location where the phone number was originally registered.
+     */
+    Timezone?: __string;
+    /**
+     * The zip code for the location where the phone number was originally registered.
+     */
+    ZipCode?: __string;
+  }
+  export interface PhoneNumberValidateRequest {
+    NumberValidateRequest: NumberValidateRequest;
+  }
+  export interface PhoneNumberValidateResponse {
+    NumberValidateResponse: NumberValidateResponse;
+  }
   export interface PutEventStreamRequest {
     /**
-     * ApplicationId
+     * The unique ID of your Amazon Pinpoint application.
      */
     ApplicationId: __string;
-    /**
-     * EventStream to write.
-     */
     WriteEventStream: WriteEventStream;
   }
   export interface PutEventStreamResponse {
@@ -2960,6 +3420,20 @@ INACTIVE - Users who have not used your app within the specified duration are in
     RecencyType?: RecencyType;
   }
   export type RecencyType = "ACTIVE"|"INACTIVE"|string;
+  export interface RemoveAttributesRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+    /**
+     * Type of attribute. Can be endpoint-custom-attributes, endpoint-custom-metrics, endpoint-user-attributes.
+     */
+    AttributeType: __string;
+    UpdateAttributesRequest: UpdateAttributesRequest;
+  }
+  export interface RemoveAttributesResponse {
+    AttributesResource: AttributesResource;
+  }
   export interface SMSChannelRequest {
     /**
      * If the channel is enabled for sending messages.
@@ -2988,7 +3462,7 @@ INACTIVE - Users who have not used your app within the specified duration are in
      */
     Enabled?: __boolean;
     /**
-     * If the channel is registered with a credential for authentication.
+     * Not used. Retained for backwards compatibility.
      */
     HasCredential?: __boolean;
     /**
@@ -3012,6 +3486,10 @@ INACTIVE - Users who have not used your app within the specified duration are in
      */
     Platform?: __string;
     /**
+     * Promotional messages per second that can be sent
+     */
+    PromotionalMessagesPerSecond?: __integer;
+    /**
      * Sender identifier of your messages.
      */
     SenderId?: __string;
@@ -3020,15 +3498,23 @@ INACTIVE - Users who have not used your app within the specified duration are in
      */
     ShortCode?: __string;
     /**
+     * Transactional messages per second that can be sent
+     */
+    TransactionalMessagesPerSecond?: __integer;
+    /**
      * Version of channel
      */
     Version?: __integer;
   }
   export interface SMSMessage {
     /**
-     * The message body of the notification, the email body or the text message.
+     * The body of the SMS message.
      */
     Body?: __string;
+    /**
+     * The SMS program name that you provided to AWS Support when you requested your dedicated number.
+     */
+    Keyword?: __string;
     /**
      * Is this a transaction priority message or lower priority.
      */
@@ -3157,9 +3643,41 @@ UTC-11
      */
     Location?: SegmentLocation;
     /**
+     * Custom segment metrics.
+     */
+    Metrics?: MapOfMetricDimension;
+    /**
      * Custom segment user attributes.
      */
     UserAttributes?: MapOfAttributeDimension;
+  }
+  export interface SegmentGroup {
+    /**
+     * List of dimensions to include or exclude.
+     */
+    Dimensions?: ListOfSegmentDimensions;
+    /**
+     * Segments that define the source of this segment. Currently a maximum of 1 import segment is supported.
+     */
+    SourceSegments?: ListOfSegmentReference;
+    /**
+     * Include or exclude the source.
+     */
+    SourceType?: SourceType;
+    /**
+     * How should the dimensions be applied for the result
+     */
+    Type?: Type;
+  }
+  export interface SegmentGroupList {
+    /**
+     * List of dimension groups to evaluate.
+     */
+    Groups?: ListOfSegmentGroup;
+    /**
+     * How should the groups be applied for the result
+     */
+    Include?: Include;
   }
   export interface SegmentImportResource {
     /**
@@ -3193,6 +3711,20 @@ Valid values: CSV, JSON
      * The country filter according to ISO 3166-1 Alpha-2 codes.
      */
     Country?: SetDimension;
+    /**
+     * The GPS Point dimension.
+     */
+    GPSPoint?: GPSPointDimension;
+  }
+  export interface SegmentReference {
+    /**
+     * Segment Id.
+     */
+    Id?: __string;
+    /**
+     * If specified contains a specific version of the segment included.
+     */
+    Version?: __integer;
   }
   export interface SegmentResponse {
     /**
@@ -3224,6 +3756,10 @@ Valid values: CSV, JSON
      */
     Name?: __string;
     /**
+     * Segment definition groups. We currently only support one. If specified Dimensions must be empty.
+     */
+    SegmentGroups?: SegmentGroupList;
+    /**
      * The segment type:
 DIMENSIONAL - A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.
 IMPORT - A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
@@ -3246,6 +3782,9 @@ IMPORT - A static segment built from an imported set of endpoint definitions. Yo
     NextToken?: __string;
   }
   export interface SendMessagesRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     MessageRequest: MessageRequest;
   }
@@ -3254,33 +3793,36 @@ IMPORT - A static segment built from an imported set of endpoint definitions. Yo
   }
   export interface SendUsersMessageRequest {
     /**
-     * A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+     * A map of custom attribute-value pairs. Amazon Pinpoint adds these attributes to the data.pinpoint object in the body of the push notification payload. Amazon Pinpoint also provides these attributes in the events that it generates for users-messages deliveries.
      */
     Context?: MapOf__string;
     /**
-     * Message configuration.
+     * Message definitions for the default message and any messages that are tailored for specific channels.
      */
     MessageConfiguration?: DirectMessageConfiguration;
     /**
-     * A map of destination endpoints, with the EndpointId as the key Endpoint Message Configuration as the value.
+     * A map that associates user IDs with EndpointSendConfiguration objects. Within an EndpointSendConfiguration object, you can tailor the message for a user by specifying message overrides or substitutions.
      */
     Users?: MapOfEndpointSendConfiguration;
   }
   export interface SendUsersMessageResponse {
     /**
-     * Application id of the message.
+     * The unique ID of the Amazon Pinpoint project used to send the message.
      */
     ApplicationId?: __string;
     /**
-     * Original request Id for which this message was delivered.
+     * The unique ID assigned to the users-messages request.
      */
     RequestId?: __string;
     /**
-     * A map containing of UserId to Map of EndpointId to Endpoint Message Result.
+     * An object that shows the endpoints that were messaged for each user. The object provides a list of user IDs. For each user ID, it provides the endpoint IDs that were messaged. For each endpoint ID, it provides an EndpointMessageResult object.
      */
     Result?: MapOfMapOfEndpointMessageResult;
   }
   export interface SendUsersMessagesRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     SendUsersMessageRequest: SendUsersMessageRequest;
   }
@@ -3299,6 +3841,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     Values?: ListOf__string;
   }
+  export type SourceType = "ALL"|"ANY"|string;
   export interface TreatmentResource {
     /**
      * The unique treatment ID.
@@ -3329,8 +3872,12 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     TreatmentName?: __string;
   }
+  export type Type = "ALL"|"ANY"|"NONE"|string;
   export interface UpdateAdmChannelRequest {
     ADMChannelRequest: ADMChannelRequest;
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface UpdateAdmChannelResponse {
@@ -3338,6 +3885,9 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateApnsChannelRequest {
     APNSChannelRequest: APNSChannelRequest;
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface UpdateApnsChannelResponse {
@@ -3345,6 +3895,9 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateApnsSandboxChannelRequest {
     APNSSandboxChannelRequest: APNSSandboxChannelRequest;
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface UpdateApnsSandboxChannelResponse {
@@ -3352,6 +3905,9 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateApnsVoipChannelRequest {
     APNSVoipChannelRequest: APNSVoipChannelRequest;
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface UpdateApnsVoipChannelResponse {
@@ -3359,19 +3915,34 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateApnsVoipSandboxChannelRequest {
     APNSVoipSandboxChannelRequest: APNSVoipSandboxChannelRequest;
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
   }
   export interface UpdateApnsVoipSandboxChannelResponse {
     APNSVoipSandboxChannelResponse: APNSVoipSandboxChannelResponse;
   }
   export interface UpdateApplicationSettingsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     WriteApplicationSettingsRequest: WriteApplicationSettingsRequest;
   }
   export interface UpdateApplicationSettingsResponse {
     ApplicationSettingsResource: ApplicationSettingsResource;
   }
+  export interface UpdateAttributesRequest {
+    /**
+     * The GLOB wildcard for removing the attributes in the application
+     */
+    Blacklist?: ListOf__string;
+  }
   export interface UpdateBaiduChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     BaiduChannelRequest: BaiduChannelRequest;
   }
@@ -3379,7 +3950,13 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
     BaiduChannelResponse: BaiduChannelResponse;
   }
   export interface UpdateCampaignRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the campaign.
+     */
     CampaignId: __string;
     WriteCampaignRequest: WriteCampaignRequest;
   }
@@ -3387,6 +3964,9 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
     CampaignResponse: CampaignResponse;
   }
   export interface UpdateEmailChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     EmailChannelRequest: EmailChannelRequest;
   }
@@ -3394,7 +3974,13 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
     EmailChannelResponse: EmailChannelResponse;
   }
   export interface UpdateEndpointRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the endpoint.
+     */
     EndpointId: __string;
     EndpointRequest: EndpointRequest;
   }
@@ -3402,6 +3988,9 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
     MessageBody: MessageBody;
   }
   export interface UpdateEndpointsBatchRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     EndpointBatchRequest: EndpointBatchRequest;
   }
@@ -3409,6 +3998,9 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
     MessageBody: MessageBody;
   }
   export interface UpdateGcmChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     GCMChannelRequest: GCMChannelRequest;
   }
@@ -3416,7 +4008,13 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
     GCMChannelResponse: GCMChannelResponse;
   }
   export interface UpdateSegmentRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
+    /**
+     * The unique ID of the segment.
+     */
     SegmentId: __string;
     WriteSegmentRequest: WriteSegmentRequest;
   }
@@ -3424,6 +4022,9 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
     SegmentResponse: SegmentResponse;
   }
   export interface UpdateSmsChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
     ApplicationId: __string;
     SMSChannelRequest: SMSChannelRequest;
   }
@@ -3435,6 +4036,10 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      * Default campaign hook information.
      */
     CampaignHook?: CampaignHook;
+    /**
+     * The CloudWatchMetrics settings for the app.
+     */
+    CloudWatchMetricsEnabled?: __boolean;
     /**
      * The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own.
      */
@@ -3519,6 +4124,10 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      * The name of segment
      */
     Name?: __string;
+    /**
+     * Segment definition groups. We currently only support one. If specified Dimensions must be empty.
+     */
+    SegmentGroups?: SegmentGroupList;
   }
   export interface WriteTreatmentResource {
     /**
@@ -3545,8 +4154,36 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;
+  export type ListOfActivityResponse = ActivityResponse[];
+  export type ListOfApplicationResponse = ApplicationResponse[];
+  export type ListOfCampaignResponse = CampaignResponse[];
+  export type ListOfEndpointBatchItem = EndpointBatchItem[];
+  export type ListOfEndpointResponse = EndpointResponse[];
+  export type ListOfExportJobResponse = ExportJobResponse[];
+  export type ListOfImportJobResponse = ImportJobResponse[];
+  export type ListOfSegmentDimensions = SegmentDimensions[];
+  export type ListOfSegmentGroup = SegmentGroup[];
+  export type ListOfSegmentReference = SegmentReference[];
+  export type ListOfSegmentResponse = SegmentResponse[];
+  export type ListOfTreatmentResource = TreatmentResource[];
+  export type ListOfWriteTreatmentResource = WriteTreatmentResource[];
+  export type ListOf__string = __string[];
+  export type __long = number;
+  export type MapOfAddressConfiguration = {[key: string]: AddressConfiguration};
+  export type MapOfAttributeDimension = {[key: string]: AttributeDimension};
+  export type MapOfChannelResponse = {[key: string]: ChannelResponse};
+  export type MapOfEndpointMessageResult = {[key: string]: EndpointMessageResult};
+  export type MapOfEndpointSendConfiguration = {[key: string]: EndpointSendConfiguration};
+  export type MapOfMessageResult = {[key: string]: MessageResult};
+  export type MapOfMetricDimension = {[key: string]: MetricDimension};
+  export type MapOf__double = {[key: string]: __double};
+  export type MapOf__integer = {[key: string]: __integer};
+  export type MapOfListOf__string = {[key: string]: ListOf__string};
+  export type MapOfMapOfEndpointMessageResult = {[key: string]: MapOfEndpointMessageResult};
+  export type MapOf__string = {[key: string]: __string};
   export type __string = string;
-  export type __timestamp = Date;
+  export type __timestampIso8601 = Date;
+  export type __timestampUnix = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

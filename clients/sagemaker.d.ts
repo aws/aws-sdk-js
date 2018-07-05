@@ -20,11 +20,11 @@ declare class SageMaker extends Service {
    */
   addTags(callback?: (err: AWSError, data: SageMaker.Types.AddTagsOutput) => void): Request<SageMaker.Types.AddTagsOutput, AWSError>;
   /**
-   * Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.    Use this API only for hosting models using Amazon SageMaker hosting services.   The endpoint name must be unique within an AWS Region in your AWS account.  When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.  When Amazon SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. For an example, see Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker. 
+   * Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.    Use this API only for hosting models using Amazon SageMaker hosting services.   The endpoint name must be unique within an AWS Region in your AWS account.  When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.  When Amazon SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. For an example, see Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker.  If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS i an AWS Region in the AWS Identity and Access Management User Guide.
    */
   createEndpoint(params: SageMaker.Types.CreateEndpointInput, callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointOutput) => void): Request<SageMaker.Types.CreateEndpointOutput, AWSError>;
   /**
-   * Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.    Use this API only for hosting models using Amazon SageMaker hosting services.   The endpoint name must be unique within an AWS Region in your AWS account.  When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.  When Amazon SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. For an example, see Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker. 
+   * Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.    Use this API only for hosting models using Amazon SageMaker hosting services.   The endpoint name must be unique within an AWS Region in your AWS account.  When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.  When Amazon SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. For an example, see Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker.  If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS i an AWS Region in the AWS Identity and Access Management User Guide.
    */
   createEndpoint(callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointOutput) => void): Request<SageMaker.Types.CreateEndpointOutput, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class SageMaker extends Service {
    */
   listEndpoints(callback?: (err: AWSError, data: SageMaker.Types.ListEndpointsOutput) => void): Request<SageMaker.Types.ListEndpointsOutput, AWSError>;
   /**
-   * Gets a list of objects that describe the hyperparameter tuning jobs launched in your account.
+   * Gets a list of HyperParameterTuningJobSummary objects that describe the hyperparameter tuning jobs launched in your account.
    */
   listHyperParameterTuningJobs(params: SageMaker.Types.ListHyperParameterTuningJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHyperParameterTuningJobsResponse) => void): Request<SageMaker.Types.ListHyperParameterTuningJobsResponse, AWSError>;
   /**
-   * Gets a list of objects that describe the hyperparameter tuning jobs launched in your account.
+   * Gets a list of HyperParameterTuningJobSummary objects that describe the hyperparameter tuning jobs launched in your account.
    */
   listHyperParameterTuningJobs(callback?: (err: AWSError, data: SageMaker.Types.ListHyperParameterTuningJobsResponse) => void): Request<SageMaker.Types.ListHyperParameterTuningJobsResponse, AWSError>;
   /**
@@ -220,11 +220,11 @@ declare class SageMaker extends Service {
    */
   listModels(callback?: (err: AWSError, data: SageMaker.Types.ListModelsOutput) => void): Request<SageMaker.Types.ListModelsOutput, AWSError>;
   /**
-   * Lists notebook instance lifestyle configurations created with the API.
+   * Lists notebook instance lifestyle configurations created with the CreateNotebookInstanceLifecycleConfig API.
    */
   listNotebookInstanceLifecycleConfigs(params: SageMaker.Types.ListNotebookInstanceLifecycleConfigsInput, callback?: (err: AWSError, data: SageMaker.Types.ListNotebookInstanceLifecycleConfigsOutput) => void): Request<SageMaker.Types.ListNotebookInstanceLifecycleConfigsOutput, AWSError>;
   /**
-   * Lists notebook instance lifestyle configurations created with the API.
+   * Lists notebook instance lifestyle configurations created with the CreateNotebookInstanceLifecycleConfig API.
    */
   listNotebookInstanceLifecycleConfigs(callback?: (err: AWSError, data: SageMaker.Types.ListNotebookInstanceLifecycleConfigsOutput) => void): Request<SageMaker.Types.ListNotebookInstanceLifecycleConfigsOutput, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class SageMaker extends Service {
    */
   listTrainingJobs(callback?: (err: AWSError, data: SageMaker.Types.ListTrainingJobsResponse) => void): Request<SageMaker.Types.ListTrainingJobsResponse, AWSError>;
   /**
-   * Gets a list of objects that describe the training jobs that a hyperparameter tuning job launched.
+   * Gets a list of TrainingJobSummary objects that describe the training jobs that a hyperparameter tuning job launched.
    */
   listTrainingJobsForHyperParameterTuningJob(params: SageMaker.Types.ListTrainingJobsForHyperParameterTuningJobRequest, callback?: (err: AWSError, data: SageMaker.Types.ListTrainingJobsForHyperParameterTuningJobResponse) => void): Request<SageMaker.Types.ListTrainingJobsForHyperParameterTuningJobResponse, AWSError>;
   /**
-   * Gets a list of objects that describe the training jobs that a hyperparameter tuning job launched.
+   * Gets a list of TrainingJobSummary objects that describe the training jobs that a hyperparameter tuning job launched.
    */
   listTrainingJobsForHyperParameterTuningJob(callback?: (err: AWSError, data: SageMaker.Types.ListTrainingJobsForHyperParameterTuningJobResponse) => void): Request<SageMaker.Types.ListTrainingJobsForHyperParameterTuningJobResponse, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class SageMaker extends Service {
    */
   stopTrainingJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Deploys the new EndpointConfig specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous EndpointConfig (there is no availability loss).  When Amazon SageMaker receives the request, it sets the endpoint status to Updating. After updating the endpoint, it sets the status to InService. To check the status of an endpoint, use the DescribeEndpoint API. 
+   *  Deploys the new EndpointConfig specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous EndpointConfig (there is no availability loss).  When Amazon SageMaker receives the request, it sets the endpoint status to Updating. After updating the endpoint, it sets the status to InService. To check the status of an endpoint, use the DescribeEndpoint API.   You cannot update an endpoint with the current EndpointConfig. To update an endpoint, you must create a new EndpointConfig. 
    */
   updateEndpoint(params: SageMaker.Types.UpdateEndpointInput, callback?: (err: AWSError, data: SageMaker.Types.UpdateEndpointOutput) => void): Request<SageMaker.Types.UpdateEndpointOutput, AWSError>;
   /**
-   *  Deploys the new EndpointConfig specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous EndpointConfig (there is no availability loss).  When Amazon SageMaker receives the request, it sets the endpoint status to Updating. After updating the endpoint, it sets the status to InService. To check the status of an endpoint, use the DescribeEndpoint API. 
+   *  Deploys the new EndpointConfig specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous EndpointConfig (there is no availability loss).  When Amazon SageMaker receives the request, it sets the endpoint status to Updating. After updating the endpoint, it sets the status to InService. To check the status of an endpoint, use the DescribeEndpoint API.   You cannot update an endpoint with the current EndpointConfig. To update an endpoint, you must create a new EndpointConfig. 
    */
   updateEndpoint(callback?: (err: AWSError, data: SageMaker.Types.UpdateEndpointOutput) => void): Request<SageMaker.Types.UpdateEndpointOutput, AWSError>;
   /**
@@ -316,11 +316,11 @@ declare class SageMaker extends Service {
    */
   updateNotebookInstance(callback?: (err: AWSError, data: SageMaker.Types.UpdateNotebookInstanceOutput) => void): Request<SageMaker.Types.UpdateNotebookInstanceOutput, AWSError>;
   /**
-   * Updates a notebook instance lifecycle configuration created with the API.
+   * Updates a notebook instance lifecycle configuration created with the CreateNotebookInstanceLifecycleConfig API.
    */
   updateNotebookInstanceLifecycleConfig(params: SageMaker.Types.UpdateNotebookInstanceLifecycleConfigInput, callback?: (err: AWSError, data: SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
-   * Updates a notebook instance lifecycle configuration created with the API.
+   * Updates a notebook instance lifecycle configuration created with the CreateNotebookInstanceLifecycleConfig API.
    */
   updateNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
@@ -441,11 +441,11 @@ declare namespace SageMaker {
      */
     ContainerHostname?: ContainerHostname;
     /**
-     * The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. For more information, see Using Your Own Algorithms with Amazon SageMaker 
+     * The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both registry/repository[:tag] and registry/repository[@digest] image path formats. For more information, see Using Your Own Algorithms with Amazon SageMaker 
      */
     Image: Image;
     /**
-     * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). 
+     * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).  If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS i an AWS Region in the AWS Identity and Access Management User Guide.
      */
     ModelDataUrl?: Url;
     /**
@@ -520,11 +520,11 @@ declare namespace SageMaker {
      */
     HyperParameterTuningJobName: HyperParameterTuningJobName;
     /**
-     * The object that describes the tuning job, including the search strategy, metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job.
+     * The HyperParameterTuningJobConfig object that describes the tuning job, including the search strategy, metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job.
      */
     HyperParameterTuningJobConfig: HyperParameterTuningJobConfig;
     /**
-     * The object that describes the training jobs that this tuning job launches, including static hyperparameters, input data configuration, output data configuration, resource configuration, and stopping condition.
+     * The HyperParameterTrainingJobDefinition object that describes the training jobs that this tuning job launches, including static hyperparameters, input data configuration, output data configuration, resource configuration, and stopping condition.
      */
     TrainingJobDefinition: HyperParameterTrainingJobDefinition;
     /**
@@ -556,7 +556,7 @@ declare namespace SageMaker {
      */
     Tags?: TagList;
     /**
-     * A object that specifies the VPC that you want your model to connect to. Control access to and from your model container by configuring the VPC. For more information, see host-vpc.
+     * A VpcConfig object that specifies the VPC that you want your model to connect to. Control access to and from your model container by configuring the VPC. For more information, see host-vpc.
      */
     VpcConfig?: VpcConfig;
   }
@@ -676,7 +676,7 @@ declare namespace SageMaker {
      */
     ResourceConfig: ResourceConfig;
     /**
-     * A object that specifies the VPC that you want your training job to connect to. Control access to and from your training container by configuring the VPC. For more information, see train-vpc 
+     * A VpcConfig object that specifies the VPC that you want your training job to connect to. Control access to and from your training container by configuring the VPC. For more information, see train-vpc 
      */
     VpcConfig?: VpcConfig;
     /**
@@ -743,6 +743,21 @@ declare namespace SageMaker {
   }
   export interface DeleteTagsOutput {
   }
+  export interface DeployedImage {
+    /**
+     * The image path you specified when you created the model.
+     */
+    SpecifiedImage?: Image;
+    /**
+     * The specific digest path of the image hosted in this ProductionVariant.
+     */
+    ResolvedImage?: Image;
+    /**
+     * The date and time when the image path for the model resolved to the ResolvedImage 
+     */
+    ResolutionTime?: Timestamp;
+  }
+  export type DeployedImages = DeployedImage[];
   export interface DescribeEndpointConfigInput {
     /**
      * The name of the endpoint configuration.
@@ -791,7 +806,7 @@ declare namespace SageMaker {
      */
     EndpointConfigName: EndpointConfigName;
     /**
-     *  An array of ProductionVariant objects, one for each model hosted behind this endpoint. 
+     *  An array of ProductionVariantSummary objects, one for each model hosted behind this endpoint. 
      */
     ProductionVariants?: ProductionVariantSummaryList;
     /**
@@ -827,11 +842,11 @@ declare namespace SageMaker {
      */
     HyperParameterTuningJobArn: HyperParameterTuningJobArn;
     /**
-     * The object that specifies the configuration of the tuning job.
+     * The HyperParameterTuningJobConfig object that specifies the configuration of the tuning job.
      */
     HyperParameterTuningJobConfig: HyperParameterTuningJobConfig;
     /**
-     * The object that specifies the definition of the training jobs that this tuning job launches.
+     * The HyperParameterTrainingJobDefinition object that specifies the definition of the training jobs that this tuning job launches.
      */
     TrainingJobDefinition: HyperParameterTrainingJobDefinition;
     /**
@@ -851,15 +866,15 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: Timestamp;
     /**
-     * The object that specifies the number of training jobs, categorized by status, that this tuning job launched.
+     * The TrainingJobStatusCounters object that specifies the number of training jobs, categorized by status, that this tuning job launched.
      */
     TrainingJobStatusCounters: TrainingJobStatusCounters;
     /**
-     * The object that specifies the number of training jobs, categorized by the status of their final objective metric, that this tuning job launched.
+     * The ObjectiveStatusCounters object that specifies the number of training jobs, categorized by the status of their final objective metric, that this tuning job launched.
      */
     ObjectiveStatusCounters: ObjectiveStatusCounters;
     /**
-     * A object that describes the training job that completed with the best current .
+     * A TrainingJobSummary object that describes the training job that completed with the best current HyperParameterTuningJobObjective.
      */
     BestTrainingJob?: HyperParameterTrainingJobSummary;
     /**
@@ -887,7 +902,7 @@ declare namespace SageMaker {
      */
     ExecutionRoleArn: RoleArn;
     /**
-     * A object that specifies the VPC that this model has access to. For more information, see host-vpc 
+     * A VpcConfig object that specifies the VPC that this model has access to. For more information, see host-vpc 
      */
     VpcConfig?: VpcConfig;
     /**
@@ -1059,7 +1074,7 @@ declare namespace SageMaker {
      */
     ResourceConfig: ResourceConfig;
     /**
-     * A object that specifies the VPC that this training job has access to. For more information, see train-vpc.
+     * A VpcConfig object that specifies the VPC that this training job has access to. For more information, see train-vpc.
      */
     VpcConfig?: VpcConfig;
     /**
@@ -1174,7 +1189,7 @@ declare namespace SageMaker {
      */
     TrainingInputMode: TrainingInputMode;
     /**
-     * An array of objects that specify the metrics that the algorithm emits.
+     * An array of MetricDefinition objects that specify the metrics that the algorithm emits.
      */
     MetricDefinitions?: MetricDefinitionList;
   }
@@ -1184,7 +1199,7 @@ declare namespace SageMaker {
      */
     StaticHyperParameters?: HyperParameters;
     /**
-     * The object that specifies the algorithm to use for the training jobs that the tuning job launches.
+     * The HyperParameterAlgorithmSpecification object that specifies the algorithm to use for the training jobs that the tuning job launches.
      */
     AlgorithmSpecification: HyperParameterAlgorithmSpecification;
     /**
@@ -1192,11 +1207,11 @@ declare namespace SageMaker {
      */
     RoleArn: RoleArn;
     /**
-     * An array of objects that specify the input for the training jobs that the tuning job launches.
+     * An array of Channel objects that specify the input for the training jobs that the tuning job launches.
      */
     InputDataConfig: InputDataConfig;
     /**
-     * The object that specifies the VPC that you want the training jobs that this hyperparameter tuning job launches to connect to. Control access to and from your training container by configuring the VPC. For more information, see train-vpc.
+     * The VpcConfig object that specifies the VPC that you want the training jobs that this hyperparameter tuning job launches to connect to. Control access to and from your training container by configuring the VPC. For more information, see train-vpc.
      */
     VpcConfig?: VpcConfig;
     /**
@@ -1243,11 +1258,11 @@ declare namespace SageMaker {
      */
     TunedHyperParameters: HyperParameters;
     /**
-     * The reason that the 
+     * The reason that the training job failed. 
      */
     FailureReason?: FailureReason;
     /**
-     * The object that specifies the value of the objective metric of the tuning job that launched this training job.
+     * The FinalHyperParameterTuningJobObjectiveMetric object that specifies the value of the objective metric of the tuning job that launched this training job.
      */
     FinalHyperParameterTuningJobObjectiveMetric?: FinalHyperParameterTuningJobObjectiveMetric;
     /**
@@ -1262,15 +1277,15 @@ declare namespace SageMaker {
      */
     Strategy: HyperParameterTuningJobStrategyType;
     /**
-     * The object that specifies the objective metric for this tuning job.
+     * The HyperParameterTuningJobObjective object that specifies the objective metric for this tuning job.
      */
     HyperParameterTuningJobObjective: HyperParameterTuningJobObjective;
     /**
-     * The object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.
+     * The ResourceLimits object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.
      */
     ResourceLimits: ResourceLimits;
     /**
-     * The object that specifies the ranges of hyperparameters that this tuning job searches.
+     * The ParameterRanges object that specifies the ranges of hyperparameters that this tuning job searches.
      */
     ParameterRanges: ParameterRanges;
   }
@@ -1320,15 +1335,15 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: Timestamp;
     /**
-     * The object that specifies the numbers of training jobs, categorized by status, that this tuning job launched.
+     * The TrainingJobStatusCounters object that specifies the numbers of training jobs, categorized by status, that this tuning job launched.
      */
     TrainingJobStatusCounters: TrainingJobStatusCounters;
     /**
-     * The object that specifies the numbers of training jobs, categorized by objective metric status, that this tuning job launched.
+     * The ObjectiveStatusCounters object that specifies the numbers of training jobs, categorized by objective metric status, that this tuning job launched.
      */
     ObjectiveStatusCounters: ObjectiveStatusCounters;
     /**
-     * The object that specifies the maximum number of training jobs and parallel training jobs allowed for this tuning job.
+     * The ResourceLimits object that specifies the maximum number of training jobs and parallel training jobs allowed for this tuning job.
      */
     ResourceLimits?: ResourceLimits;
   }
@@ -1451,7 +1466,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of tuning jobs to return.
+     * The maximum number of tuning jobs to return. The default value is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -1489,7 +1504,7 @@ declare namespace SageMaker {
   }
   export interface ListHyperParameterTuningJobsResponse {
     /**
-     * A list of objects that describe the tuning jobs that the ListHyperParameterTuningJobs request returned.
+     * A list of HyperParameterTuningJobSummary objects that describe the tuning jobs that the ListHyperParameterTuningJobs request returned.
      */
     HyperParameterTuningJobSummaries: HyperParameterTuningJobSummaries;
     /**
@@ -1676,7 +1691,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of training jobs to return.
+     * The maximum number of training jobs to return. The default value is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -1684,7 +1699,7 @@ declare namespace SageMaker {
      */
     StatusEquals?: TrainingJobStatus;
     /**
-     * The field to sort results by. The default is Name.
+     * The field to sort results by. The default is Name. If the value of this field is FinalObjectiveMetricValue, any training jobs that did not return an objective metric are not listed.
      */
     SortBy?: TrainingJobSortByOptions;
     /**
@@ -1694,7 +1709,7 @@ declare namespace SageMaker {
   }
   export interface ListTrainingJobsForHyperParameterTuningJobResponse {
     /**
-     * A list of objects that describe the training jobs that the ListTrainingJobsForHyperParameterTuningJob request returned.
+     * A list of TrainingJobSummary objects that describe the training jobs that the ListTrainingJobsForHyperParameterTuningJob request returned.
      */
     TrainingJobSummaries: HyperParameterTrainingJobSummaries;
     /**
@@ -1764,7 +1779,7 @@ declare namespace SageMaker {
      */
     Name: MetricName;
     /**
-     * A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see hpo-define-metrics.
+     * A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see automatic-model-tuning-define-metrics.
      */
     Regex: MetricRegex;
   }
@@ -1837,7 +1852,7 @@ declare namespace SageMaker {
   export type NotebookInstanceNameContains = string;
   export type NotebookInstanceSortKey = "Name"|"CreationTime"|"Status"|string;
   export type NotebookInstanceSortOrder = "Ascending"|"Descending"|string;
-  export type NotebookInstanceStatus = "Pending"|"InService"|"Stopping"|"Stopped"|"Failed"|"Deleting"|string;
+  export type NotebookInstanceStatus = "Pending"|"InService"|"Stopping"|"Stopped"|"Failed"|"Deleting"|"Updating"|string;
   export interface NotebookInstanceSummary {
     /**
      * The name of the notebook instance that you want a summary for.
@@ -1948,6 +1963,10 @@ declare namespace SageMaker {
      * The name of the variant.
      */
     VariantName: VariantName;
+    /**
+     * An array of DeployedImage objects that specify the Amazon EC2 Container Registry paths of the inference images deployed on instances of this ProductionVariant.
+     */
+    DeployedImages?: DeployedImages;
     /**
      * The weight associated with the variant.
      */

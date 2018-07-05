@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.268.1-->
+<!--LATEST=2.269.1-->
 <!--ENTRYINSERT-->
+
+## 2.269.1
+* bugfix: browser: Fixed an issue with the browser XML parser logic where the incorrect value may be returned if a complex shape (map, structure) had an immediate child and a nested descendant with the same tag name.
+* feature: CORS: The SecretsManager service supports CORS. This change adds the service to the browser version of the SDK by default.
+* feature: Pinpoint: This release of the Amazon Pinpoint SDK adds the ability to create complex segments and validate phone numbers for SMS messages. It also adds the ability to get or delete endpoints based on user IDs, remove attributes from endpoints, and list the defined channels for an app.
+* feature: SageMaker: Amazon SageMaker NotebookInstances supports 'Updating' as a NotebookInstanceStatus.  In addition, DescribeEndpointOutput now includes Docker repository digest of deployed Model images.
 
 ## 2.268.1
 * feature: ACM: Adds a "CertificateValidated" waiter to AWS Certificate Manager clients, which polls on a new certificate's validation state.

@@ -7,6 +7,7 @@
     "protocol":"json",
     "serviceAbbreviation":"SageMaker",
     "serviceFullName":"Amazon SageMaker Service",
+    "serviceId":"SageMaker",
     "signatureVersion":"v4",
     "signingName":"sagemaker",
     "targetPrefix":"SageMaker",
@@ -34,7 +35,7 @@
       "errors":[
         {"shape":"ResourceLimitExceeded"}
       ],
-      "documentation":"<p>Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html\">CreateEndpointConfig</a> API. </p> <note> <p> Use this API only for hosting models using Amazon SageMaker hosting services. </p> </note> <p>The endpoint name must be unique within an AWS Region in your AWS account. </p> <p>When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them. </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Creating</code>. After it creates the endpoint, it sets the status to <code>InService</code>. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html\">DescribeEndpoint</a> API.</p> <p>For an example, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html\">Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker</a>. </p>"
+      "documentation":"<p>Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html\">CreateEndpointConfig</a> API. </p> <note> <p> Use this API only for hosting models using Amazon SageMaker hosting services. </p> </note> <p>The endpoint name must be unique within an AWS Region in your AWS account. </p> <p>When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them. </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Creating</code>. After it creates the endpoint, it sets the status to <code>InService</code>. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html\">DescribeEndpoint</a> API.</p> <p>For an example, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html\">Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker</a>. </p> <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS i an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>"
     },
     "CreateEndpointConfig":{
       "name":"CreateEndpointConfig",
@@ -285,7 +286,7 @@
       },
       "input":{"shape":"ListHyperParameterTuningJobsRequest"},
       "output":{"shape":"ListHyperParameterTuningJobsResponse"},
-      "documentation":"<p>Gets a list of objects that describe the hyperparameter tuning jobs launched in your account.</p>"
+      "documentation":"<p>Gets a list of <a>HyperParameterTuningJobSummary</a> objects that describe the hyperparameter tuning jobs launched in your account.</p>"
     },
     "ListModels":{
       "name":"ListModels",
@@ -305,7 +306,7 @@
       },
       "input":{"shape":"ListNotebookInstanceLifecycleConfigsInput"},
       "output":{"shape":"ListNotebookInstanceLifecycleConfigsOutput"},
-      "documentation":"<p>Lists notebook instance lifestyle configurations created with the API.</p>"
+      "documentation":"<p>Lists notebook instance lifestyle configurations created with the <a>CreateNotebookInstanceLifecycleConfig</a> API.</p>"
     },
     "ListNotebookInstances":{
       "name":"ListNotebookInstances",
@@ -348,7 +349,7 @@
       "errors":[
         {"shape":"ResourceNotFound"}
       ],
-      "documentation":"<p>Gets a list of objects that describe the training jobs that a hyperparameter tuning job launched.</p>"
+      "documentation":"<p>Gets a list of <a>TrainingJobSummary</a> objects that describe the training jobs that a hyperparameter tuning job launched.</p>"
     },
     "StartNotebookInstance":{
       "name":"StartNotebookInstance",
@@ -406,7 +407,7 @@
       "errors":[
         {"shape":"ResourceLimitExceeded"}
       ],
-      "documentation":"<p> Deploys the new <code>EndpointConfig</code> specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous <code>EndpointConfig</code> (there is no availability loss). </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Updating</code>. After updating the endpoint, it sets the status to <code>InService</code>. To check the status of an endpoint, use the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html\">DescribeEndpoint</a> API. </p>"
+      "documentation":"<p> Deploys the new <code>EndpointConfig</code> specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous <code>EndpointConfig</code> (there is no availability loss). </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Updating</code>. After updating the endpoint, it sets the status to <code>InService</code>. To check the status of an endpoint, use the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html\">DescribeEndpoint</a> API. </p> <note> <p>You cannot update an endpoint with the current <code>EndpointConfig</code>. To update an endpoint, you must create a new <code>EndpointConfig</code>.</p> </note>"
     },
     "UpdateEndpointWeightsAndCapacities":{
       "name":"UpdateEndpointWeightsAndCapacities",
@@ -445,7 +446,7 @@
       "errors":[
         {"shape":"ResourceLimitExceeded"}
       ],
-      "documentation":"<p>Updates a notebook instance lifecycle configuration created with the API.</p>"
+      "documentation":"<p>Updates a notebook instance lifecycle configuration created with the <a>CreateNotebookInstanceLifecycleConfig</a> API.</p>"
     }
   },
   "shapes":{
@@ -574,11 +575,11 @@
         },
         "Image":{
           "shape":"Image",
-          "documentation":"<p>The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a> </p>"
+          "documentation":"<p>The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code> image path formats. For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a> </p>"
         },
         "ModelDataUrl":{
           "shape":"Url",
-          "documentation":"<p>The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). </p>"
+          "documentation":"<p>The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). </p> <p>If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS i an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>"
         },
         "Environment":{
           "shape":"EnvironmentMap",
@@ -705,11 +706,11 @@
         },
         "HyperParameterTuningJobConfig":{
           "shape":"HyperParameterTuningJobConfig",
-          "documentation":"<p>The object that describes the tuning job, including the search strategy, metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job.</p>"
+          "documentation":"<p>The <a>HyperParameterTuningJobConfig</a> object that describes the tuning job, including the search strategy, metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job.</p>"
         },
         "TrainingJobDefinition":{
           "shape":"HyperParameterTrainingJobDefinition",
-          "documentation":"<p>The object that describes the training jobs that this tuning job launches, including static hyperparameters, input data configuration, output data configuration, resource configuration, and stopping condition.</p>"
+          "documentation":"<p>The <a>HyperParameterTrainingJobDefinition</a> object that describes the training jobs that this tuning job launches, including static hyperparameters, input data configuration, output data configuration, resource configuration, and stopping condition.</p>"
         },
         "Tags":{
           "shape":"TagList",
@@ -753,7 +754,7 @@
         },
         "VpcConfig":{
           "shape":"VpcConfig",
-          "documentation":"<p>A object that specifies the VPC that you want your model to connect to. Control access to and from your model container by configuring the VPC. For more information, see <a>host-vpc</a>.</p>"
+          "documentation":"<p>A <a>VpcConfig</a> object that specifies the VPC that you want your model to connect to. Control access to and from your model container by configuring the VPC. For more information, see <a>host-vpc</a>.</p>"
         }
       }
     },
@@ -914,7 +915,7 @@
         },
         "VpcConfig":{
           "shape":"VpcConfig",
-          "documentation":"<p>A object that specifies the VPC that you want your training job to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>train-vpc</a> </p>"
+          "documentation":"<p>A <a>VpcConfig</a> object that specifies the VPC that you want your training job to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>train-vpc</a> </p>"
         },
         "StoppingCondition":{
           "shape":"StoppingCondition",
@@ -1020,6 +1021,28 @@
       "members":{
       }
     },
+    "DeployedImage":{
+      "type":"structure",
+      "members":{
+        "SpecifiedImage":{
+          "shape":"Image",
+          "documentation":"<p>The image path you specified when you created the model.</p>"
+        },
+        "ResolvedImage":{
+          "shape":"Image",
+          "documentation":"<p>The specific digest path of the image hosted in this <code>ProductionVariant</code>.</p>"
+        },
+        "ResolutionTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date and time when the image path for the model resolved to the <code>ResolvedImage</code> </p>"
+        }
+      },
+      "documentation":"<p>Gets the Amazon EC2 Container Registry path of the docker image of the model that is hosted in this <a>ProductionVariant</a>.</p> <p>If you used the <code>registry/repository[:tag]</code> form to to specify the image path of the primary container when you created the model hosted in this <code>ProductionVariant</code>, the path resolves to a path of the form <code>registry/repository[@digest]</code>. A digest is a hash value that identifies a specific version of an image. For information about Amazon ECR paths, see <a href=\"http://docs.aws.amazon.com//AmazonECR/latest/userguide/docker-pull-ecr-image.html\">Pulling an Image</a> in the <i>Amazon ECR User Guide</i>.</p>"
+    },
+    "DeployedImages":{
+      "type":"list",
+      "member":{"shape":"DeployedImage"}
+    },
     "DescribeEndpointConfigInput":{
       "type":"structure",
       "required":["EndpointConfigName"],
@@ -1096,7 +1119,7 @@
         },
         "ProductionVariants":{
           "shape":"ProductionVariantSummaryList",
-          "documentation":"<p> An array of ProductionVariant objects, one for each model hosted behind this endpoint. </p>"
+          "documentation":"<p> An array of <a>ProductionVariantSummary</a> objects, one for each model hosted behind this endpoint. </p>"
         },
         "EndpointStatus":{
           "shape":"EndpointStatus",
@@ -1149,11 +1172,11 @@
         },
         "HyperParameterTuningJobConfig":{
           "shape":"HyperParameterTuningJobConfig",
-          "documentation":"<p>The object that specifies the configuration of the tuning job.</p>"
+          "documentation":"<p>The <a>HyperParameterTuningJobConfig</a> object that specifies the configuration of the tuning job.</p>"
         },
         "TrainingJobDefinition":{
           "shape":"HyperParameterTrainingJobDefinition",
-          "documentation":"<p>The object that specifies the definition of the training jobs that this tuning job launches.</p>"
+          "documentation":"<p>The <a>HyperParameterTrainingJobDefinition</a> object that specifies the definition of the training jobs that this tuning job launches.</p>"
         },
         "HyperParameterTuningJobStatus":{
           "shape":"HyperParameterTuningJobStatus",
@@ -1173,15 +1196,15 @@
         },
         "TrainingJobStatusCounters":{
           "shape":"TrainingJobStatusCounters",
-          "documentation":"<p>The object that specifies the number of training jobs, categorized by status, that this tuning job launched.</p>"
+          "documentation":"<p>The <a>TrainingJobStatusCounters</a> object that specifies the number of training jobs, categorized by status, that this tuning job launched.</p>"
         },
         "ObjectiveStatusCounters":{
           "shape":"ObjectiveStatusCounters",
-          "documentation":"<p>The object that specifies the number of training jobs, categorized by the status of their final objective metric, that this tuning job launched.</p>"
+          "documentation":"<p>The <a>ObjectiveStatusCounters</a> object that specifies the number of training jobs, categorized by the status of their final objective metric, that this tuning job launched.</p>"
         },
         "BestTrainingJob":{
           "shape":"HyperParameterTrainingJobSummary",
-          "documentation":"<p>A object that describes the training job that completed with the best current .</p>"
+          "documentation":"<p>A <a>TrainingJobSummary</a> object that describes the training job that completed with the best current <a>HyperParameterTuningJobObjective</a>.</p>"
         },
         "FailureReason":{
           "shape":"FailureReason",
@@ -1223,7 +1246,7 @@
         },
         "VpcConfig":{
           "shape":"VpcConfig",
-          "documentation":"<p>A object that specifies the VPC that this model has access to. For more information, see <a>host-vpc</a> </p>"
+          "documentation":"<p>A <a>VpcConfig</a> object that specifies the VPC that this model has access to. For more information, see <a>host-vpc</a> </p>"
         },
         "CreationTime":{
           "shape":"Timestamp",
@@ -1428,7 +1451,7 @@
         },
         "VpcConfig":{
           "shape":"VpcConfig",
-          "documentation":"<p>A object that specifies the VPC that this training job has access to. For more information, see <a>train-vpc</a>.</p>"
+          "documentation":"<p>A <a>VpcConfig</a> object that specifies the VPC that this training job has access to. For more information, see <a>train-vpc</a>.</p>"
         },
         "StoppingCondition":{
           "shape":"StoppingCondition",
@@ -1660,7 +1683,7 @@
         },
         "MetricDefinitions":{
           "shape":"MetricDefinitionList",
-          "documentation":"<p>An array of objects that specify the metrics that the algorithm emits.</p>"
+          "documentation":"<p>An array of <a>MetricDefinition</a> objects that specify the metrics that the algorithm emits.</p>"
         }
       },
       "documentation":"<p>Specifies which training algorithm to use for training jobs that a hyperparameter tuning job launches and the metrics to monitor.</p>"
@@ -1682,7 +1705,7 @@
         },
         "AlgorithmSpecification":{
           "shape":"HyperParameterAlgorithmSpecification",
-          "documentation":"<p>The object that specifies the algorithm to use for the training jobs that the tuning job launches.</p>"
+          "documentation":"<p>The <a>HyperParameterAlgorithmSpecification</a> object that specifies the algorithm to use for the training jobs that the tuning job launches.</p>"
         },
         "RoleArn":{
           "shape":"RoleArn",
@@ -1690,11 +1713,11 @@
         },
         "InputDataConfig":{
           "shape":"InputDataConfig",
-          "documentation":"<p>An array of objects that specify the input for the training jobs that the tuning job launches.</p>"
+          "documentation":"<p>An array of <a>Channel</a> objects that specify the input for the training jobs that the tuning job launches.</p>"
         },
         "VpcConfig":{
           "shape":"VpcConfig",
-          "documentation":"<p>The object that specifies the VPC that you want the training jobs that this hyperparameter tuning job launches to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>train-vpc</a>.</p>"
+          "documentation":"<p>The <a>VpcConfig</a> object that specifies the VPC that you want the training jobs that this hyperparameter tuning job launches to connect to. Control access to and from your training container by configuring the VPC. For more information, see <a>train-vpc</a>.</p>"
         },
         "OutputDataConfig":{
           "shape":"OutputDataConfig",
@@ -1755,11 +1778,11 @@
         },
         "FailureReason":{
           "shape":"FailureReason",
-          "documentation":"<p>The reason that the </p>"
+          "documentation":"<p>The reason that the training job failed. </p>"
         },
         "FinalHyperParameterTuningJobObjectiveMetric":{
           "shape":"FinalHyperParameterTuningJobObjectiveMetric",
-          "documentation":"<p>The object that specifies the value of the objective metric of the tuning job that launched this training job.</p>"
+          "documentation":"<p>The <a>FinalHyperParameterTuningJobObjectiveMetric</a> object that specifies the value of the objective metric of the tuning job that launched this training job.</p>"
         },
         "ObjectiveStatus":{
           "shape":"ObjectiveStatus",
@@ -1788,15 +1811,15 @@
         },
         "HyperParameterTuningJobObjective":{
           "shape":"HyperParameterTuningJobObjective",
-          "documentation":"<p>The object that specifies the objective metric for this tuning job.</p>"
+          "documentation":"<p>The <a>HyperParameterTuningJobObjective</a> object that specifies the objective metric for this tuning job.</p>"
         },
         "ResourceLimits":{
           "shape":"ResourceLimits",
-          "documentation":"<p>The object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.</p>"
+          "documentation":"<p>The <a>ResourceLimits</a> object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.</p>"
         },
         "ParameterRanges":{
           "shape":"ParameterRanges",
-          "documentation":"<p>The object that specifies the ranges of hyperparameters that this tuning job searches.</p>"
+          "documentation":"<p>The <a>ParameterRanges</a> object that specifies the ranges of hyperparameters that this tuning job searches.</p>"
         }
       },
       "documentation":"<p>Configures a hyperparameter tuning job.</p>"
@@ -1901,15 +1924,15 @@
         },
         "TrainingJobStatusCounters":{
           "shape":"TrainingJobStatusCounters",
-          "documentation":"<p>The object that specifies the numbers of training jobs, categorized by status, that this tuning job launched.</p>"
+          "documentation":"<p>The <a>TrainingJobStatusCounters</a> object that specifies the numbers of training jobs, categorized by status, that this tuning job launched.</p>"
         },
         "ObjectiveStatusCounters":{
           "shape":"ObjectiveStatusCounters",
-          "documentation":"<p>The object that specifies the numbers of training jobs, categorized by objective metric status, that this tuning job launched.</p>"
+          "documentation":"<p>The <a>ObjectiveStatusCounters</a> object that specifies the numbers of training jobs, categorized by objective metric status, that this tuning job launched.</p>"
         },
         "ResourceLimits":{
           "shape":"ResourceLimits",
-          "documentation":"<p>The object that specifies the maximum number of training jobs and parallel training jobs allowed for this tuning job.</p>"
+          "documentation":"<p>The <a>ResourceLimits</a> object that specifies the maximum number of training jobs and parallel training jobs allowed for this tuning job.</p>"
         }
       },
       "documentation":"<p>Provides summary information about a hyperparameter tuning job.</p>"
@@ -2101,7 +2124,7 @@
         },
         "MaxResults":{
           "shape":"MaxResults",
-          "documentation":"<p>The maximum number of tuning jobs to return.</p>",
+          "documentation":"<p>The maximum number of tuning jobs to return. The default value is 10.</p>",
           "box":true
         },
         "SortBy":{
@@ -2144,7 +2167,7 @@
       "members":{
         "HyperParameterTuningJobSummaries":{
           "shape":"HyperParameterTuningJobSummaries",
-          "documentation":"<p>A list of objects that describe the tuning jobs that the <code>ListHyperParameterTuningJobs</code> request returned.</p>"
+          "documentation":"<p>A list of <a>HyperParameterTuningJobSummary</a> objects that describe the tuning jobs that the <code>ListHyperParameterTuningJobs</code> request returned.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -2364,7 +2387,7 @@
         },
         "MaxResults":{
           "shape":"MaxResults",
-          "documentation":"<p>The maximum number of training jobs to return.</p>"
+          "documentation":"<p>The maximum number of training jobs to return. The default value is 10.</p>"
         },
         "StatusEquals":{
           "shape":"TrainingJobStatus",
@@ -2372,7 +2395,7 @@
         },
         "SortBy":{
           "shape":"TrainingJobSortByOptions",
-          "documentation":"<p>The field to sort results by. The default is <code>Name</code>.</p>"
+          "documentation":"<p>The field to sort results by. The default is <code>Name</code>.</p> <p>If the value of this field is <code>FinalObjectiveMetricValue</code>, any training jobs that did not return an objective metric are not listed.</p>"
         },
         "SortOrder":{
           "shape":"SortOrder",
@@ -2386,7 +2409,7 @@
       "members":{
         "TrainingJobSummaries":{
           "shape":"HyperParameterTrainingJobSummaries",
-          "documentation":"<p>A list of objects that describe the training jobs that the <code>ListTrainingJobsForHyperParameterTuningJob</code> request returned.</p>"
+          "documentation":"<p>A list of <a>TrainingJobSummary</a> objects that describe the training jobs that the <code>ListTrainingJobsForHyperParameterTuningJob</code> request returned.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -2484,7 +2507,7 @@
         },
         "Regex":{
           "shape":"MetricRegex",
-          "documentation":"<p>A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see <a>hpo-define-metrics</a>.</p>"
+          "documentation":"<p>A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see <a>automatic-model-tuning-define-metrics</a>.</p>"
         }
       },
       "documentation":"<p>Specifies a metric that the training algorithm writes to <code>stderr</code> or <code>stdout</code>. Amazon SageMakerHyperparamter tuning captures all defined metrics. You specify one metric that a hyperparameter tuning job uses as its objective metric to choose the best training job.</p>"
@@ -2689,7 +2712,8 @@
         "Stopping",
         "Stopped",
         "Failed",
-        "Deleting"
+        "Deleting",
+        "Updating"
       ]
     },
     "NotebookInstanceSummary":{
@@ -2908,6 +2932,10 @@
         "VariantName":{
           "shape":"VariantName",
           "documentation":"<p>The name of the variant.</p>"
+        },
+        "DeployedImages":{
+          "shape":"DeployedImages",
+          "documentation":"<p>An array of <code>DeployedImage</code> objects that specify the Amazon EC2 Container Registry paths of the inference images deployed on instances of this <code>ProductionVariant</code>.</p>"
         },
         "CurrentWeight":{
           "shape":"VariantWeight",

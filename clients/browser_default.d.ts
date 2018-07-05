@@ -63,3 +63,4 @@ export import STS = require('./sts');
 export import WAF = require('./waf');
 export import WorkDocs = require('./workdocs');
 export import LexModelBuildingService = require('./lexmodelbuildingservice');
+export import SecretsManager = require('./secretsmanager');

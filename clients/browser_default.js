@@ -64,5 +64,6 @@ module.exports = {
   STS: require('./sts'),
   WAF: require('./waf'),
   WorkDocs: require('./workdocs'),
-  LexModelBuildingService: require('./lexmodelbuildingservice')
+  LexModelBuildingService: require('./lexmodelbuildingservice'),
+  SecretsManager: require('./secretsmanager')
 };

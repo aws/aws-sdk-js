@@ -4,11 +4,13 @@
     "endpointPrefix" : "pinpoint",
     "signingName" : "mobiletargeting",
     "serviceFullName" : "Amazon Pinpoint",
+    "serviceId" : "Pinpoint",
     "protocol" : "rest-json",
     "jsonVersion" : "1.1",
     "uid" : "pinpoint-2016-12-01",
     "signatureVersion" : "v4"
   },
+  "documentation" : "Amazon Pinpoint",
   "operations" : {
     "CreateApp" : {
       "name" : "CreateApp",
@@ -21,20 +23,27 @@
         "shape" : "CreateAppRequest"
       },
       "output" : {
-        "shape" : "CreateAppResponse"
+        "shape" : "CreateAppResponse",
+        "documentation" : "201 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Creates or updates an app."
     },
@@ -49,20 +58,27 @@
         "shape" : "CreateCampaignRequest"
       },
       "output" : {
-        "shape" : "CreateCampaignResponse"
+        "shape" : "CreateCampaignResponse",
+        "documentation" : "201 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Creates or updates a campaign."
     },
@@ -77,20 +93,27 @@
         "shape" : "CreateExportJobRequest"
       },
       "output" : {
-        "shape" : "CreateExportJobResponse"
+        "shape" : "CreateExportJobResponse",
+        "documentation" : "202 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Creates an export job."
     },
@@ -105,20 +128,27 @@
         "shape" : "CreateImportJobRequest"
       },
       "output" : {
-        "shape" : "CreateImportJobResponse"
+        "shape" : "CreateImportJobResponse",
+        "documentation" : "201 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Creates or updates an import job."
     },
@@ -133,20 +163,27 @@
         "shape" : "CreateSegmentRequest"
       },
       "output" : {
-        "shape" : "CreateSegmentResponse"
+        "shape" : "CreateSegmentResponse",
+        "documentation" : "201 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Used to create or update a segment."
     },
@@ -161,22 +198,29 @@
         "shape" : "DeleteAdmChannelRequest"
       },
       "output" : {
-        "shape" : "DeleteAdmChannelResponse"
+        "shape" : "DeleteAdmChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Delete an ADM channel"
+      "documentation" : "Delete an ADM channel."
     },
     "DeleteApnsChannel" : {
       "name" : "DeleteApnsChannel",
@@ -189,20 +233,27 @@
         "shape" : "DeleteApnsChannelRequest"
       },
       "output" : {
-        "shape" : "DeleteApnsChannelResponse"
+        "shape" : "DeleteApnsChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Deletes the APNs channel for an app."
     },
@@ -217,22 +268,29 @@
         "shape" : "DeleteApnsSandboxChannelRequest"
       },
       "output" : {
-        "shape" : "DeleteApnsSandboxChannelResponse"
+        "shape" : "DeleteApnsSandboxChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Delete an APNS sandbox channel"
+      "documentation" : "Delete an APNS sandbox channel."
     },
     "DeleteApnsVoipChannel" : {
       "name" : "DeleteApnsVoipChannel",
@@ -245,20 +303,27 @@
         "shape" : "DeleteApnsVoipChannelRequest"
       },
       "output" : {
-        "shape" : "DeleteApnsVoipChannelResponse"
+        "shape" : "DeleteApnsVoipChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Delete an APNS VoIP channel"
     },
@@ -273,20 +338,27 @@
         "shape" : "DeleteApnsVoipSandboxChannelRequest"
       },
       "output" : {
-        "shape" : "DeleteApnsVoipSandboxChannelResponse"
+        "shape" : "DeleteApnsVoipSandboxChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Delete an APNS VoIP sandbox channel"
     },
@@ -301,20 +373,27 @@
         "shape" : "DeleteAppRequest"
       },
       "output" : {
-        "shape" : "DeleteAppResponse"
+        "shape" : "DeleteAppResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Deletes an app."
     },
@@ -329,20 +408,27 @@
         "shape" : "DeleteBaiduChannelRequest"
       },
       "output" : {
-        "shape" : "DeleteBaiduChannelResponse"
+        "shape" : "DeleteBaiduChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Delete a BAIDU GCM channel"
     },
@@ -357,20 +443,27 @@
         "shape" : "DeleteCampaignRequest"
       },
       "output" : {
-        "shape" : "DeleteCampaignResponse"
+        "shape" : "DeleteCampaignResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Deletes a campaign."
     },
@@ -385,22 +478,29 @@
         "shape" : "DeleteEmailChannelRequest"
       },
       "output" : {
-        "shape" : "DeleteEmailChannelResponse"
+        "shape" : "DeleteEmailChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Delete an email channel"
+      "documentation" : "Delete an email channel."
     },
     "DeleteEndpoint" : {
       "name" : "DeleteEndpoint",
@@ -448,20 +548,27 @@
         "shape" : "DeleteEventStreamRequest"
       },
       "output" : {
-        "shape" : "DeleteEventStreamResponse"
+        "shape" : "DeleteEventStreamResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Deletes the event stream for an app."
     },
@@ -476,20 +583,27 @@
         "shape" : "DeleteGcmChannelRequest"
       },
       "output" : {
-        "shape" : "DeleteGcmChannelResponse"
+        "shape" : "DeleteGcmChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Deletes the GCM channel for an app."
     },
@@ -504,20 +618,27 @@
         "shape" : "DeleteSegmentRequest"
       },
       "output" : {
-        "shape" : "DeleteSegmentResponse"
+        "shape" : "DeleteSegmentResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Deletes a segment."
     },
@@ -532,22 +653,64 @@
         "shape" : "DeleteSmsChannelRequest"
       },
       "output" : {
-        "shape" : "DeleteSmsChannelResponse"
+        "shape" : "DeleteSmsChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Delete an SMS channel"
+      "documentation" : "Delete an SMS channel."
+    },
+    "DeleteUserEndpoints" : {
+      "name" : "DeleteUserEndpoints",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/v1/apps/{application-id}/users/{user-id}",
+        "responseCode" : 202
+      },
+      "input" : {
+        "shape" : "DeleteUserEndpointsRequest"
+      },
+      "output" : {
+        "shape" : "DeleteUserEndpointsResponse",
+        "documentation" : "202 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
+      }, {
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
+      }, {
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
+      }, {
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
+      }, {
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
+      }, {
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
+      } ],
+      "documentation" : "Deletes endpoints associated with an user id."
     },
     "GetAdmChannel" : {
       "name" : "GetAdmChannel",
@@ -560,22 +723,29 @@
         "shape" : "GetAdmChannelRequest"
       },
       "output" : {
-        "shape" : "GetAdmChannelResponse"
+        "shape" : "GetAdmChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Get an ADM channel"
+      "documentation" : "Get an ADM channel."
     },
     "GetApnsChannel" : {
       "name" : "GetApnsChannel",
@@ -588,20 +758,27 @@
         "shape" : "GetApnsChannelRequest"
       },
       "output" : {
-        "shape" : "GetApnsChannelResponse"
+        "shape" : "GetApnsChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about the APNs channel for an app."
     },
@@ -616,22 +793,29 @@
         "shape" : "GetApnsSandboxChannelRequest"
       },
       "output" : {
-        "shape" : "GetApnsSandboxChannelResponse"
+        "shape" : "GetApnsSandboxChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Get an APNS sandbox channel"
+      "documentation" : "Get an APNS sandbox channel."
     },
     "GetApnsVoipChannel" : {
       "name" : "GetApnsVoipChannel",
@@ -644,20 +828,27 @@
         "shape" : "GetApnsVoipChannelRequest"
       },
       "output" : {
-        "shape" : "GetApnsVoipChannelResponse"
+        "shape" : "GetApnsVoipChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Get an APNS VoIP channel"
     },
@@ -672,20 +863,27 @@
         "shape" : "GetApnsVoipSandboxChannelRequest"
       },
       "output" : {
-        "shape" : "GetApnsVoipSandboxChannelResponse"
+        "shape" : "GetApnsVoipSandboxChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Get an APNS VoIPSandbox channel"
     },
@@ -700,20 +898,27 @@
         "shape" : "GetAppRequest"
       },
       "output" : {
-        "shape" : "GetAppResponse"
+        "shape" : "GetAppResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about an app."
     },
@@ -728,20 +933,27 @@
         "shape" : "GetApplicationSettingsRequest"
       },
       "output" : {
-        "shape" : "GetApplicationSettingsResponse"
+        "shape" : "GetApplicationSettingsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Used to request the settings for an app."
     },
@@ -756,20 +968,27 @@
         "shape" : "GetAppsRequest"
       },
       "output" : {
-        "shape" : "GetAppsResponse"
+        "shape" : "GetAppsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about your apps."
     },
@@ -784,20 +1003,27 @@
         "shape" : "GetBaiduChannelRequest"
       },
       "output" : {
-        "shape" : "GetBaiduChannelResponse"
+        "shape" : "GetBaiduChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Get a BAIDU GCM channel"
     },
@@ -812,20 +1038,27 @@
         "shape" : "GetCampaignRequest"
       },
       "output" : {
-        "shape" : "GetCampaignResponse"
+        "shape" : "GetCampaignResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about a campaign."
     },
@@ -840,20 +1073,27 @@
         "shape" : "GetCampaignActivitiesRequest"
       },
       "output" : {
-        "shape" : "GetCampaignActivitiesResponse"
+        "shape" : "GetCampaignActivitiesResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about the activity performed by a campaign."
     },
@@ -868,20 +1108,27 @@
         "shape" : "GetCampaignVersionRequest"
       },
       "output" : {
-        "shape" : "GetCampaignVersionResponse"
+        "shape" : "GetCampaignVersionResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about a specific version of a campaign."
     },
@@ -896,20 +1143,27 @@
         "shape" : "GetCampaignVersionsRequest"
       },
       "output" : {
-        "shape" : "GetCampaignVersionsResponse"
+        "shape" : "GetCampaignVersionsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about your campaign versions."
     },
@@ -924,22 +1178,64 @@
         "shape" : "GetCampaignsRequest"
       },
       "output" : {
-        "shape" : "GetCampaignsResponse"
+        "shape" : "GetCampaignsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about your campaigns."
+    },
+    "GetChannels" : {
+      "name" : "GetChannels",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}/channels",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetChannelsRequest"
+      },
+      "output" : {
+        "shape" : "GetChannelsResponse",
+        "documentation" : "200 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
+      }, {
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
+      }, {
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
+      }, {
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
+      }, {
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
+      }, {
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
+      } ],
+      "documentation" : "Get all channels."
     },
     "GetEmailChannel" : {
       "name" : "GetEmailChannel",
@@ -952,22 +1248,29 @@
         "shape" : "GetEmailChannelRequest"
       },
       "output" : {
-        "shape" : "GetEmailChannelResponse"
+        "shape" : "GetEmailChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Get an email channel"
+      "documentation" : "Get an email channel."
     },
     "GetEndpoint" : {
       "name" : "GetEndpoint",
@@ -980,20 +1283,27 @@
         "shape" : "GetEndpointRequest"
       },
       "output" : {
-        "shape" : "GetEndpointResponse"
+        "shape" : "GetEndpointResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about an endpoint."
     },
@@ -1008,20 +1318,27 @@
         "shape" : "GetEventStreamRequest"
       },
       "output" : {
-        "shape" : "GetEventStreamResponse"
+        "shape" : "GetEventStreamResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns the event stream for an app."
     },
@@ -1036,20 +1353,27 @@
         "shape" : "GetExportJobRequest"
       },
       "output" : {
-        "shape" : "GetExportJobResponse"
+        "shape" : "GetExportJobResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about an export job."
     },
@@ -1064,20 +1388,27 @@
         "shape" : "GetExportJobsRequest"
       },
       "output" : {
-        "shape" : "GetExportJobsResponse"
+        "shape" : "GetExportJobsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about your export jobs."
     },
@@ -1092,20 +1423,27 @@
         "shape" : "GetGcmChannelRequest"
       },
       "output" : {
-        "shape" : "GetGcmChannelResponse"
+        "shape" : "GetGcmChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about the GCM channel for an app."
     },
@@ -1120,20 +1458,27 @@
         "shape" : "GetImportJobRequest"
       },
       "output" : {
-        "shape" : "GetImportJobResponse"
+        "shape" : "GetImportJobResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about an import job."
     },
@@ -1148,20 +1493,27 @@
         "shape" : "GetImportJobsRequest"
       },
       "output" : {
-        "shape" : "GetImportJobsResponse"
+        "shape" : "GetImportJobsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about your import jobs."
     },
@@ -1176,20 +1528,27 @@
         "shape" : "GetSegmentRequest"
       },
       "output" : {
-        "shape" : "GetSegmentResponse"
+        "shape" : "GetSegmentResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about a segment."
     },
@@ -1204,20 +1563,27 @@
         "shape" : "GetSegmentExportJobsRequest"
       },
       "output" : {
-        "shape" : "GetSegmentExportJobsResponse"
+        "shape" : "GetSegmentExportJobsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns a list of export jobs for a specific segment."
     },
@@ -1232,20 +1598,27 @@
         "shape" : "GetSegmentImportJobsRequest"
       },
       "output" : {
-        "shape" : "GetSegmentImportJobsResponse"
+        "shape" : "GetSegmentImportJobsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns a list of import jobs for a specific segment."
     },
@@ -1260,20 +1633,27 @@
         "shape" : "GetSegmentVersionRequest"
       },
       "output" : {
-        "shape" : "GetSegmentVersionResponse"
+        "shape" : "GetSegmentVersionResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about a segment version."
     },
@@ -1288,20 +1668,27 @@
         "shape" : "GetSegmentVersionsRequest"
       },
       "output" : {
-        "shape" : "GetSegmentVersionsResponse"
+        "shape" : "GetSegmentVersionsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about your segment versions."
     },
@@ -1316,20 +1703,27 @@
         "shape" : "GetSegmentsRequest"
       },
       "output" : {
-        "shape" : "GetSegmentsResponse"
+        "shape" : "GetSegmentsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Used to get information about your segments."
     },
@@ -1344,22 +1738,99 @@
         "shape" : "GetSmsChannelRequest"
       },
       "output" : {
-        "shape" : "GetSmsChannelResponse"
+        "shape" : "GetSmsChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Get an SMS channel"
+      "documentation" : "Get an SMS channel."
+    },
+    "GetUserEndpoints" : {
+      "name" : "GetUserEndpoints",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}/users/{user-id}",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetUserEndpointsRequest"
+      },
+      "output" : {
+        "shape" : "GetUserEndpointsResponse",
+        "documentation" : "200 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
+      }, {
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
+      }, {
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
+      }, {
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
+      }, {
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
+      }, {
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
+      } ],
+      "documentation" : "Returns information about the endpoints associated with an user id."
+    },
+    "PhoneNumberValidate" : {
+      "name" : "PhoneNumberValidate",
+      "http" : {
+        "method" : "POST",
+        "requestUri" : "/v1/phone/number/validate",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PhoneNumberValidateRequest"
+      },
+      "output" : {
+        "shape" : "PhoneNumberValidateResponse",
+        "documentation" : "200 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
+      }, {
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
+      }, {
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
+      }, {
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
+      }, {
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
+      }, {
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
+      } ],
+      "documentation" : "Returns information about the specified phone number."
     },
     "PutEventStream" : {
       "name" : "PutEventStream",
@@ -1372,22 +1843,64 @@
         "shape" : "PutEventStreamRequest"
       },
       "output" : {
-        "shape" : "PutEventStreamResponse"
+        "shape" : "PutEventStreamResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Use to create or update the event stream for an app."
+    },
+    "RemoveAttributes" : {
+      "name" : "RemoveAttributes",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/v1/apps/{application-id}/attributes/{attribute-type}",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "RemoveAttributesRequest"
+      },
+      "output" : {
+        "shape" : "RemoveAttributesResponse",
+        "documentation" : "200 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
+      }, {
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
+      }, {
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
+      }, {
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
+      }, {
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
+      }, {
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
+      } ],
+      "documentation" : "Used to remove the attributes for an app"
     },
     "SendMessages" : {
       "name" : "SendMessages",
@@ -1400,22 +1913,29 @@
         "shape" : "SendMessagesRequest"
       },
       "output" : {
-        "shape" : "SendMessagesResponse"
+        "shape" : "SendMessagesResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Send a batch of messages"
+      "documentation" : "Use this resource to send a direct message, which is a one time message that you send to a limited audience without creating a campaign. \n\nYou can send the message to up to 100 recipients. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of sending a direct message.\n\nYou can send a direct message as a push notification to your mobile app or as an SMS message to SMS-enabled devices."
     },
     "SendUsersMessages" : {
       "name" : "SendUsersMessages",
@@ -1428,22 +1948,29 @@
         "shape" : "SendUsersMessagesRequest"
       },
       "output" : {
-        "shape" : "SendUsersMessagesResponse"
+        "shape" : "SendUsersMessagesResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Send a batch of messages to users"
+      "documentation" : "Use this resource to message a list of users. Amazon Pinpoint sends the message to all of the endpoints that are associated with each user.\n\nA user represents an individual who is assigned a unique user ID, and this ID is assigned to one or more endpoints. For example, if an individual uses your app on multiple devices, your app could assign that person's user ID to the endpoint for each device.\n\nWith the users-messages resource, you specify the message recipients as user IDs. For each user ID, Amazon Pinpoint delivers the message to all of the user's endpoints. Within the body of your request, you can specify a default message, and you can tailor your message for different channels, including those for mobile push and SMS.\n\nWith this resource, you send a direct message, which is a one time message that you send to a limited audience without creating a campaign. You can send the message to up to 100 users per request. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of using the users-messages resource."
     },
     "UpdateAdmChannel" : {
       "name" : "UpdateAdmChannel",
@@ -1456,22 +1983,29 @@
         "shape" : "UpdateAdmChannelRequest"
       },
       "output" : {
-        "shape" : "UpdateAdmChannelResponse"
+        "shape" : "UpdateAdmChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Update an ADM channel"
+      "documentation" : "Update an ADM channel."
     },
     "UpdateApnsChannel" : {
       "name" : "UpdateApnsChannel",
@@ -1484,20 +2018,27 @@
         "shape" : "UpdateApnsChannelRequest"
       },
       "output" : {
-        "shape" : "UpdateApnsChannelResponse"
+        "shape" : "UpdateApnsChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Use to update the APNs channel for an app."
     },
@@ -1512,22 +2053,29 @@
         "shape" : "UpdateApnsSandboxChannelRequest"
       },
       "output" : {
-        "shape" : "UpdateApnsSandboxChannelResponse"
+        "shape" : "UpdateApnsSandboxChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Update an APNS sandbox channel"
+      "documentation" : "Update an APNS sandbox channel."
     },
     "UpdateApnsVoipChannel" : {
       "name" : "UpdateApnsVoipChannel",
@@ -1540,20 +2088,27 @@
         "shape" : "UpdateApnsVoipChannelRequest"
       },
       "output" : {
-        "shape" : "UpdateApnsVoipChannelResponse"
+        "shape" : "UpdateApnsVoipChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Update an APNS VoIP channel"
     },
@@ -1568,20 +2123,27 @@
         "shape" : "UpdateApnsVoipSandboxChannelRequest"
       },
       "output" : {
-        "shape" : "UpdateApnsVoipSandboxChannelResponse"
+        "shape" : "UpdateApnsVoipSandboxChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Update an APNS VoIP sandbox channel"
     },
@@ -1596,20 +2158,27 @@
         "shape" : "UpdateApplicationSettingsRequest"
       },
       "output" : {
-        "shape" : "UpdateApplicationSettingsResponse"
+        "shape" : "UpdateApplicationSettingsResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Used to update the settings for an app."
     },
@@ -1624,20 +2193,27 @@
         "shape" : "UpdateBaiduChannelRequest"
       },
       "output" : {
-        "shape" : "UpdateBaiduChannelResponse"
+        "shape" : "UpdateBaiduChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Update a BAIDU GCM channel"
     },
@@ -1652,20 +2228,27 @@
         "shape" : "UpdateCampaignRequest"
       },
       "output" : {
-        "shape" : "UpdateCampaignResponse"
+        "shape" : "UpdateCampaignResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Use to update a campaign."
     },
@@ -1680,22 +2263,29 @@
         "shape" : "UpdateEmailChannelRequest"
       },
       "output" : {
-        "shape" : "UpdateEmailChannelResponse"
+        "shape" : "UpdateEmailChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Update an email channel"
+      "documentation" : "Update an email channel."
     },
     "UpdateEndpoint" : {
       "name" : "UpdateEndpoint",
@@ -1708,22 +2298,29 @@
         "shape" : "UpdateEndpointRequest"
       },
       "output" : {
-        "shape" : "UpdateEndpointResponse"
+        "shape" : "UpdateEndpointResponse",
+        "documentation" : "202 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Use to update an endpoint."
+      "documentation" : "Creates or updates an endpoint."
     },
     "UpdateEndpointsBatch" : {
       "name" : "UpdateEndpointsBatch",
@@ -1736,20 +2333,27 @@
         "shape" : "UpdateEndpointsBatchRequest"
       },
       "output" : {
-        "shape" : "UpdateEndpointsBatchResponse"
+        "shape" : "UpdateEndpointsBatchResponse",
+        "documentation" : "202 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Use to update a batch of endpoints."
     },
@@ -1764,20 +2368,27 @@
         "shape" : "UpdateGcmChannelRequest"
       },
       "output" : {
-        "shape" : "UpdateGcmChannelResponse"
+        "shape" : "UpdateGcmChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Use to update the GCM channel for an app."
     },
@@ -1792,20 +2403,27 @@
         "shape" : "UpdateSegmentRequest"
       },
       "output" : {
-        "shape" : "UpdateSegmentResponse"
+        "shape" : "UpdateSegmentResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
       "documentation" : "Use to update a segment."
     },
@@ -1820,22 +2438,29 @@
         "shape" : "UpdateSmsChannelRequest"
       },
       "output" : {
-        "shape" : "UpdateSmsChannelResponse"
+        "shape" : "UpdateSmsChannelResponse",
+        "documentation" : "200 response"
       },
       "errors" : [ {
-        "shape" : "BadRequestException"
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
       }, {
-        "shape" : "InternalServerErrorException"
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
       }, {
-        "shape" : "ForbiddenException"
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
       }, {
-        "shape" : "NotFoundException"
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
       }, {
-        "shape" : "MethodNotAllowedException"
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
       }, {
-        "shape" : "TooManyRequestsException"
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
       } ],
-      "documentation" : "Update an SMS channel"
+      "documentation" : "Update an SMS channel."
     }
   },
   "shapes" : {
@@ -1855,7 +2480,8 @@
           "documentation" : "If the channel is enabled for sending messages."
         }
       },
-      "documentation" : "Amazon Device Messaging channel definition."
+      "documentation" : "Amazon Device Messaging channel definition.",
+      "required" : [ ]
     },
     "ADMChannelResponse" : {
       "type" : "structure",
@@ -1874,7 +2500,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "Indicates whether the channel is configured with ADM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with ADM. Provide your credentials by setting the ClientId and ClientSecret attributes."
+          "documentation" : "Not used. Retained for backwards compatibility."
         },
         "Id" : {
           "shape" : "__string",
@@ -1901,7 +2527,8 @@
           "documentation" : "Version of channel"
         }
       },
-      "documentation" : "Amazon Device Messaging channel definition."
+      "documentation" : "Amazon Device Messaging channel definition.",
+      "required" : [ ]
     },
     "ADMMessage" : {
       "type" : "structure",
@@ -2009,7 +2636,8 @@
           "documentation" : "The token key used for APNs Tokens."
         }
       },
-      "documentation" : "Apple Push Notification Service channel definition."
+      "documentation" : "Apple Push Notification Service channel definition.",
+      "required" : [ ]
     },
     "APNSChannelResponse" : {
       "type" : "structure",
@@ -2032,7 +2660,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes."
+          "documentation" : "Not used. Retained for backwards compatibility."
         },
         "HasTokenKey" : {
           "shape" : "__boolean",
@@ -2063,7 +2691,8 @@
           "documentation" : "Version of channel"
         }
       },
-      "documentation" : "Apple Distribution Push Notification Service channel definition."
+      "documentation" : "Apple Distribution Push Notification Service channel definition.",
+      "required" : [ ]
     },
     "APNSMessage" : {
       "type" : "structure",
@@ -2175,7 +2804,8 @@
           "documentation" : "The token key used for APNs Tokens."
         }
       },
-      "documentation" : "Apple Development Push Notification Service channel definition."
+      "documentation" : "Apple Development Push Notification Service channel definition.",
+      "required" : [ ]
     },
     "APNSSandboxChannelResponse" : {
       "type" : "structure",
@@ -2198,7 +2828,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes."
+          "documentation" : "Not used. Retained for backwards compatibility."
         },
         "HasTokenKey" : {
           "shape" : "__boolean",
@@ -2229,7 +2859,8 @@
           "documentation" : "Version of channel"
         }
       },
-      "documentation" : "Apple Development Push Notification Service channel definition."
+      "documentation" : "Apple Development Push Notification Service channel definition.",
+      "required" : [ ]
     },
     "APNSVoipChannelRequest" : {
       "type" : "structure",
@@ -2267,7 +2898,8 @@
           "documentation" : "The token key used for APNs Tokens."
         }
       },
-      "documentation" : "Apple VoIP Push Notification Service channel definition."
+      "documentation" : "Apple VoIP Push Notification Service channel definition.",
+      "required" : [ ]
     },
     "APNSVoipChannelResponse" : {
       "type" : "structure",
@@ -2290,7 +2922,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a credential for authentication."
+          "documentation" : "Not used. Retained for backwards compatibility."
         },
         "HasTokenKey" : {
           "shape" : "__boolean",
@@ -2321,7 +2953,8 @@
           "documentation" : "Version of channel"
         }
       },
-      "documentation" : "Apple VoIP Push Notification Service channel definition."
+      "documentation" : "Apple VoIP Push Notification Service channel definition.",
+      "required" : [ ]
     },
     "APNSVoipSandboxChannelRequest" : {
       "type" : "structure",
@@ -2359,7 +2992,8 @@
           "documentation" : "The token key used for APNs Tokens."
         }
       },
-      "documentation" : "Apple VoIP Developer Push Notification Service channel definition."
+      "documentation" : "Apple VoIP Developer Push Notification Service channel definition.",
+      "required" : [ ]
     },
     "APNSVoipSandboxChannelResponse" : {
       "type" : "structure",
@@ -2382,7 +3016,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a credential for authentication."
+          "documentation" : "Not used. Retained for backwards compatibility."
         },
         "HasTokenKey" : {
           "shape" : "__boolean",
@@ -2413,7 +3047,8 @@
           "documentation" : "Version of channel"
         }
       },
-      "documentation" : "Apple VoIP Developer Push Notification Service channel definition."
+      "documentation" : "Apple VoIP Developer Push Notification Service channel definition.",
+      "required" : [ ]
     },
     "Action" : {
       "type" : "string",
@@ -2427,7 +3062,8 @@
           "documentation" : "List of campaign activities"
         }
       },
-      "documentation" : "Activities for campaign."
+      "documentation" : "Activities for campaign.",
+      "required" : [ ]
     },
     "ActivityResponse" : {
       "type" : "structure",
@@ -2485,7 +3121,8 @@
           "documentation" : "The ID of a variation of the campaign used for A/B testing."
         }
       },
-      "documentation" : "Activity definition"
+      "documentation" : "Activity definition",
+      "required" : [ ]
     },
     "AddressConfiguration" : {
       "type" : "structure",
@@ -2529,7 +3166,8 @@
           "documentation" : "The display name of the application."
         }
       },
-      "documentation" : "Application Response."
+      "documentation" : "Application Response.",
+      "required" : [ ]
     },
     "ApplicationSettingsResource" : {
       "type" : "structure",
@@ -2555,7 +3193,8 @@
           "documentation" : "The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own."
         }
       },
-      "documentation" : "Application settings."
+      "documentation" : "Application settings.",
+      "required" : [ ]
     },
     "ApplicationsResponse" : {
       "type" : "structure",
@@ -2583,18 +3222,38 @@
           "documentation" : "The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type."
         }
       },
-      "documentation" : "Custom attibute dimension"
+      "documentation" : "Custom attibute dimension",
+      "required" : [ ]
     },
     "AttributeType" : {
       "type" : "string",
       "enum" : [ "INCLUSIVE", "EXCLUSIVE" ]
+    },
+    "AttributesResource" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "documentation" : "The unique ID for the application."
+        },
+        "AttributeType" : {
+          "shape" : "__string",
+          "documentation" : "The attribute type for the application."
+        },
+        "Attributes" : {
+          "shape" : "ListOf__string",
+          "documentation" : "The attributes for the application."
+        }
+      },
+      "documentation" : "Attributes.",
+      "required" : [ ]
     },
     "BadRequestException" : {
       "type" : "structure",
       "members" : {
         "Message" : {
           "shape" : "__string",
-          "documentation" : "The error message returned from the API."
+          "documentation" : "The error message that's returned from the API."
         },
         "RequestID" : {
           "shape" : "__string",
@@ -2623,7 +3282,8 @@
           "documentation" : "Platform credential Secret key from Baidu."
         }
       },
-      "documentation" : "Baidu Cloud Push credentials"
+      "documentation" : "Baidu Cloud Push credentials",
+      "required" : [ ]
     },
     "BaiduChannelResponse" : {
       "type" : "structure",
@@ -2646,7 +3306,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "Indicates whether the channel is configured with Baidu Cloud Push credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with Baidu Cloud Push. Provide your credentials by setting the ApiKey and SecretKey attributes."
+          "documentation" : "Not used. Retained for backwards compatibility."
         },
         "Id" : {
           "shape" : "__string",
@@ -2673,7 +3333,8 @@
           "documentation" : "Version of channel"
         }
       },
-      "documentation" : "Baidu Cloud Messaging channel definition"
+      "documentation" : "Baidu Cloud Messaging channel definition",
+      "required" : [ ]
     },
     "BaiduMessage" : {
       "type" : "structure",
@@ -2722,6 +3383,10 @@
           "shape" : "MapOfListOf__string",
           "documentation" : "Default message substitutions. Can be overridden by individual address substitutions."
         },
+        "TimeToLive" : {
+          "shape" : "__integer",
+          "documentation" : "This parameter specifies how long (in seconds) the message should be kept in Baidu storage if the device is offline. The and the default value and the maximum time to live supported is 7 days (604800 seconds)"
+        },
         "Title" : {
           "shape" : "__string",
           "documentation" : "The message title that displays above the message on the user's device."
@@ -2753,7 +3418,8 @@
           "documentation" : "The email title (Or subject)."
         }
       },
-      "documentation" : "The email message configuration."
+      "documentation" : "The email message configuration.",
+      "required" : [ ]
     },
     "CampaignHook" : {
       "type" : "structure",
@@ -2770,7 +3436,8 @@
           "shape" : "__string",
           "documentation" : "Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request"
         }
-      }
+      },
+      "documentation" : "Campaign hook information."
     },
     "CampaignLimits" : {
       "type" : "structure",
@@ -2878,7 +3545,8 @@
           "documentation" : "The campaign version number."
         }
       },
-      "documentation" : "Campaign definition"
+      "documentation" : "Campaign definition",
+      "required" : [ ]
     },
     "CampaignSmsMessage" : {
       "type" : "structure",
@@ -2910,7 +3578,7 @@
     },
     "CampaignStatus" : {
       "type" : "string",
-      "enum" : [ "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED" ]
+      "enum" : [ "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED" ]
     },
     "CampaignsResponse" : {
       "type" : "structure",
@@ -2924,11 +3592,65 @@
           "documentation" : "The string that you use in a subsequent request to get the next page of results in a paginated response."
         }
       },
-      "documentation" : "List of available campaigns."
+      "documentation" : "List of available campaigns.",
+      "required" : [ ]
+    },
+    "ChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "documentation" : "Application id"
+        },
+        "CreationDate" : {
+          "shape" : "__string",
+          "documentation" : "When was this segment created"
+        },
+        "Enabled" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is enabled for sending messages."
+        },
+        "HasCredential" : {
+          "shape" : "__boolean",
+          "documentation" : "Not used. Retained for backwards compatibility."
+        },
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Channel ID. Not used, only for backwards compatibility."
+        },
+        "IsArchived" : {
+          "shape" : "__boolean",
+          "documentation" : "Is this channel archived"
+        },
+        "LastModifiedBy" : {
+          "shape" : "__string",
+          "documentation" : "Who made the last change"
+        },
+        "LastModifiedDate" : {
+          "shape" : "__string",
+          "documentation" : "Last date this was updated"
+        },
+        "Version" : {
+          "shape" : "__integer",
+          "documentation" : "Version of channel"
+        }
+      },
+      "documentation" : "Base definition for channel response."
     },
     "ChannelType" : {
       "type" : "string",
       "enum" : [ "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM" ]
+    },
+    "ChannelsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Channels" : {
+          "shape" : "MapOfChannelResponse",
+          "documentation" : "A map of channels, with the ChannelType as the key and the Channel as the value."
+        }
+      },
+      "documentation" : "Get channels definition",
+      "required" : [ ]
     },
     "CreateAppRequest" : {
       "type" : "structure",
@@ -2958,7 +3680,8 @@
           "documentation" : "The display name of the application. Used in the Amazon Pinpoint console."
         }
       },
-      "documentation" : "Application Request."
+      "documentation" : "Application Request.",
+      "required" : [ ]
     },
     "CreateCampaignRequest" : {
       "type" : "structure",
@@ -2966,7 +3689,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "WriteCampaignRequest" : {
           "shape" : "WriteCampaignRequest"
@@ -2991,7 +3715,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "ExportJobRequest" : {
           "shape" : "ExportJobRequest"
@@ -3016,7 +3741,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "ImportJobRequest" : {
           "shape" : "ImportJobRequest"
@@ -3041,7 +3767,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "WriteSegmentRequest" : {
           "shape" : "WriteSegmentRequest"
@@ -3114,7 +3841,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3135,7 +3863,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3156,7 +3885,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3177,7 +3907,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3198,7 +3929,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3219,7 +3951,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3240,7 +3973,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3261,12 +3995,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "CampaignId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "campaign-id"
+          "locationName" : "campaign-id",
+          "documentation" : "The unique ID of the campaign."
         }
       },
       "required" : [ "CampaignId", "ApplicationId" ]
@@ -3287,7 +4023,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3302,31 +4039,20 @@
       "required" : [ "EmailChannelResponse" ],
       "payload" : "EmailChannelResponse"
     },
-    "DeleteEventStreamRequest" : {
-      "type" : "structure",
-      "members" : {
-        "ApplicationId" : {
-          "shape" : "__string",
-          "location" : "uri",
-          "locationName" : "application-id",
-          "documentation" : "ApplicationId"
-        }
-      },
-      "required" : [ "ApplicationId" ],
-      "documentation" : "DeleteEventStream Request"
-    },
     "DeleteEndpointRequest" : {
       "type" : "structure",
       "members" : {
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "EndpointId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "endpoint-id"
+          "locationName" : "endpoint-id",
+          "documentation" : "The unique ID of the endpoint."
         }
       },
       "required" : [ "ApplicationId", "EndpointId" ]
@@ -3340,6 +4066,18 @@
       },
       "required" : [ "EndpointResponse" ],
       "payload" : "EndpointResponse"
+    },
+    "DeleteEventStreamRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
+        }
+      },
+      "required" : [ "ApplicationId" ]
     },
     "DeleteEventStreamResponse" : {
       "type" : "structure",
@@ -3357,7 +4095,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3378,12 +4117,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "SegmentId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "segment-id"
+          "locationName" : "segment-id",
+          "documentation" : "The unique ID of the segment."
         }
       },
       "required" : [ "SegmentId", "ApplicationId" ]
@@ -3404,7 +4145,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3418,6 +4160,34 @@
       },
       "required" : [ "SMSChannelResponse" ],
       "payload" : "SMSChannelResponse"
+    },
+    "DeleteUserEndpointsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
+        },
+        "UserId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "user-id",
+          "documentation" : "The unique ID of the user."
+        }
+      },
+      "required" : [ "ApplicationId", "UserId" ]
+    },
+    "DeleteUserEndpointsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "EndpointsResponse" : {
+          "shape" : "EndpointsResponse"
+        }
+      },
+      "required" : [ "EndpointsResponse" ],
+      "payload" : "EndpointsResponse"
     },
     "DeliveryStatus" : {
       "type" : "string",
@@ -3459,7 +4229,8 @@
           "documentation" : "The message to SMS channels. Overrides the default message."
         }
       },
-      "documentation" : "The message configuration."
+      "documentation" : "Message definitions for the default message and any messages that are tailored for specific channels.",
+      "required" : [ ]
     },
     "Duration" : {
       "type" : "string",
@@ -3485,7 +4256,8 @@
           "documentation" : "The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service"
         }
       },
-      "documentation" : "Email Channel Request"
+      "documentation" : "Email Channel Request",
+      "required" : [ ]
     },
     "EmailChannelResponse" : {
       "type" : "structure",
@@ -3508,7 +4280,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a credential for authentication."
+          "documentation" : "Not used. Retained for backwards compatibility."
         },
         "Id" : {
           "shape" : "__string",
@@ -3530,6 +4302,10 @@
           "shape" : "__string",
           "documentation" : "Last date this was updated"
         },
+        "MessagesPerSecond" : {
+          "shape" : "__integer",
+          "documentation" : "Messages per second that can be sent"
+        },
         "Platform" : {
           "shape" : "__string",
           "documentation" : "Platform type. Will be \"EMAIL\""
@@ -3543,14 +4319,15 @@
           "documentation" : "Version of channel"
         }
       },
-      "documentation" : "Email Channel Response."
+      "documentation" : "Email Channel Response.",
+      "required" : [ ]
     },
     "EndpointBatchItem" : {
       "type" : "structure",
       "members" : {
         "Address" : {
           "shape" : "__string",
-          "documentation" : "The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId)."
+          "documentation" : "The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +1206XXX5550100. For the email channel, use an email address."
         },
         "Attributes" : {
           "shape" : "MapOfListOf__string",
@@ -3570,7 +4347,7 @@
         },
         "EndpointStatus" : {
           "shape" : "__string",
-          "documentation" : "The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated."
+          "documentation" : "Unused."
         },
         "Id" : {
           "shape" : "__string",
@@ -3607,7 +4384,8 @@
           "documentation" : "List of items to update. Maximum 100 items"
         }
       },
-      "documentation" : "Endpoint batch update request."
+      "documentation" : "Endpoint batch update request.",
+      "required" : [ ]
     },
     "EndpointDemographic" : {
       "type" : "structure",
@@ -3688,6 +4466,10 @@
           "shape" : "DeliveryStatus",
           "documentation" : "Delivery status of message."
         },
+        "MessageId" : {
+          "shape" : "__string",
+          "documentation" : "Unique message identifier associated with the message that was sent."
+        },
         "StatusCode" : {
           "shape" : "__integer",
           "documentation" : "Downstream service status code."
@@ -3701,14 +4483,15 @@
           "documentation" : "If token was updated as part of delivery. (This is GCM Specific)"
         }
       },
-      "documentation" : "The result from sending a message to an endpoint."
+      "documentation" : "The result from sending a message to an endpoint.",
+      "required" : [ ]
     },
     "EndpointRequest" : {
       "type" : "structure",
       "members" : {
         "Address" : {
           "shape" : "__string",
-          "documentation" : "The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId)."
+          "documentation" : "The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +1206XXX5550100. For the email channel, use an email address."
         },
         "Attributes" : {
           "shape" : "MapOfListOf__string",
@@ -3728,7 +4511,7 @@
         },
         "EndpointStatus" : {
           "shape" : "__string",
-          "documentation" : "The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated."
+          "documentation" : "Unused."
         },
         "Location" : {
           "shape" : "EndpointLocation",
@@ -3790,7 +4573,7 @@
         },
         "EndpointStatus" : {
           "shape" : "__string",
-          "documentation" : "The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated."
+          "documentation" : "Unused."
         },
         "Id" : {
           "shape" : "__string",
@@ -3859,6 +4642,17 @@
       },
       "documentation" : "Endpoint user specific custom userAttributes"
     },
+    "EndpointsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Item" : {
+          "shape" : "ListOfEndpointResponse",
+          "documentation" : "The list of endpoints."
+        }
+      },
+      "documentation" : "List of endpoints",
+      "required" : [ ]
+    },
     "EventStream" : {
       "type" : "structure",
       "members" : {
@@ -3887,7 +4681,8 @@
           "documentation" : "The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account."
         }
       },
-      "documentation" : "Model for an event publishing subscription export."
+      "documentation" : "Model for an event publishing subscription export.",
+      "required" : [ ]
     },
     "ExportJobRequest" : {
       "type" : "structure",
@@ -3898,13 +4693,19 @@
         },
         "S3UrlPrefix" : {
           "shape" : "__string",
-          "documentation" : "A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.\nThe URL should follow this format: s3://bucket-name/folder-name/\n\nAmazon Pinpoint will export endpoints to this location."
+          "documentation" : "A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.\n\nThe URL should follow this format: s3://bucket-name/folder-name/\n\nAmazon Pinpoint will export endpoints to this location."
         },
         "SegmentId" : {
           "shape" : "__string",
-          "documentation" : "The ID of the segment to export endpoints from. If not present all endpoints will be exported."
+          "documentation" : "The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application."
+        },
+        "SegmentVersion" : {
+          "shape" : "__integer",
+          "documentation" : "The version of the segment to export if specified."
         }
-      }
+      },
+      "documentation" : "Export job request.",
+      "required" : [ ]
     },
     "ExportJobResource" : {
       "type" : "structure",
@@ -3915,13 +4716,19 @@
         },
         "S3UrlPrefix" : {
           "shape" : "__string",
-          "documentation" : "A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.\nThe URL should follow this format: s3://bucket-name/folder-name/\n\nAmazon Pinpoint will export endpoints to this location."
+          "documentation" : "A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.\n\nThe URL should follow this format: s3://bucket-name/folder-name/\n\nAmazon Pinpoint will export endpoints to this location."
         },
         "SegmentId" : {
           "shape" : "__string",
-          "documentation" : "The ID of the segment to export endpoints from. If not present, all endpoints are exported."
+          "documentation" : "The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application."
+        },
+        "SegmentVersion" : {
+          "shape" : "__integer",
+          "documentation" : "The version of the segment to export if specified."
         }
-      }
+      },
+      "documentation" : "Export job resource.",
+      "required" : [ ]
     },
     "ExportJobResponse" : {
       "type" : "structure",
@@ -3978,7 +4785,9 @@
           "shape" : "__string",
           "documentation" : "The job type. Will be 'EXPORT'."
         }
-      }
+      },
+      "documentation" : "Export job response.",
+      "required" : [ ]
     },
     "ExportJobsResponse" : {
       "type" : "structure",
@@ -3992,14 +4801,15 @@
           "documentation" : "The string that you use in a subsequent request to get the next page of results in a paginated response."
         }
       },
-      "documentation" : "Export job list."
+      "documentation" : "Export job list.",
+      "required" : [ ]
     },
     "ForbiddenException" : {
       "type" : "structure",
       "members" : {
         "Message" : {
           "shape" : "__string",
-          "documentation" : "The error message returned from the API."
+          "documentation" : "The error message that's returned from the API."
         },
         "RequestID" : {
           "shape" : "__string",
@@ -4032,7 +4842,8 @@
           "documentation" : "If the channel is enabled for sending messages."
         }
       },
-      "documentation" : "Google Cloud Messaging credentials"
+      "documentation" : "Google Cloud Messaging credentials",
+      "required" : [ ]
     },
     "GCMChannelResponse" : {
       "type" : "structure",
@@ -4055,7 +4866,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "Indicates whether the channel is configured with FCM or GCM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with FCM or GCM. Provide your credentials by setting the ApiKey attribute."
+          "documentation" : "Not used. Retained for backwards compatibility."
         },
         "Id" : {
           "shape" : "__string",
@@ -4082,7 +4893,8 @@
           "documentation" : "Version of channel"
         }
       },
-      "documentation" : "Google Cloud Messaging channel definition"
+      "documentation" : "Google Cloud Messaging channel definition",
+      "required" : [ ]
     },
     "GCMMessage" : {
       "type" : "structure",
@@ -4158,13 +4970,44 @@
       },
       "documentation" : "GCM Message."
     },
+    "GPSCoordinates" : {
+      "type" : "structure",
+      "members" : {
+        "Latitude" : {
+          "shape" : "__double",
+          "documentation" : "Latitude"
+        },
+        "Longitude" : {
+          "shape" : "__double",
+          "documentation" : "Longitude"
+        }
+      },
+      "documentation" : "GPS coordinates",
+      "required" : [ ]
+    },
+    "GPSPointDimension" : {
+      "type" : "structure",
+      "members" : {
+        "Coordinates" : {
+          "shape" : "GPSCoordinates",
+          "documentation" : "Coordinate to measure distance from."
+        },
+        "RangeInKilometers" : {
+          "shape" : "__double",
+          "documentation" : "Range in kilometers from the coordinate."
+        }
+      },
+      "documentation" : "GPS point location dimension",
+      "required" : [ ]
+    },
     "GetAdmChannelRequest" : {
       "type" : "structure",
       "members" : {
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4185,7 +5028,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4206,7 +5050,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4227,7 +5072,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4248,7 +5094,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4269,7 +5116,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4290,7 +5138,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4311,12 +5160,14 @@
         "PageSize" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "page-size"
+          "locationName" : "page-size",
+          "documentation" : "The number of entries you want on each page in the response."
         },
         "Token" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "token"
+          "locationName" : "token",
+          "documentation" : "The NextToken string returned on a previous page that you use to get the next page of results in a paginated response."
         }
       }
     },
@@ -4336,7 +5187,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4357,12 +5209,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "CampaignId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "campaign-id"
+          "locationName" : "campaign-id",
+          "documentation" : "The unique ID of the campaign."
         },
         "PageSize" : {
           "shape" : "__string",
@@ -4395,12 +5249,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "CampaignId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "campaign-id"
+          "locationName" : "campaign-id",
+          "documentation" : "The unique ID of the campaign."
         }
       },
       "required" : [ "CampaignId", "ApplicationId" ]
@@ -4421,17 +5277,20 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "CampaignId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "campaign-id"
+          "locationName" : "campaign-id",
+          "documentation" : "The unique ID of the campaign."
         },
         "Version" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "version"
+          "locationName" : "version",
+          "documentation" : "The version of the campaign."
         }
       },
       "required" : [ "Version", "ApplicationId", "CampaignId" ]
@@ -4452,12 +5311,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "CampaignId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "campaign-id"
+          "locationName" : "campaign-id",
+          "documentation" : "The unique ID of the campaign."
         },
         "PageSize" : {
           "shape" : "__string",
@@ -4490,7 +5351,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "PageSize" : {
           "shape" : "__string",
@@ -4517,13 +5379,36 @@
       "required" : [ "CampaignsResponse" ],
       "payload" : "CampaignsResponse"
     },
+    "GetChannelsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "GetChannelsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ChannelsResponse" : {
+          "shape" : "ChannelsResponse"
+        }
+      },
+      "required" : [ "ChannelsResponse" ],
+      "payload" : "ChannelsResponse"
+    },
     "GetEmailChannelRequest" : {
       "type" : "structure",
       "members" : {
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4544,12 +5429,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "EndpointId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "endpoint-id"
+          "locationName" : "endpoint-id",
+          "documentation" : "The unique ID of the endpoint."
         }
       },
       "required" : [ "ApplicationId", "EndpointId" ]
@@ -4571,11 +5458,10 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "application-id",
-          "documentation" : "ApplicationId"
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
-      "required" : [ "ApplicationId" ],
-      "documentation" : "GetEventStreamRequest"
+      "required" : [ "ApplicationId" ]
     },
     "GetEventStreamResponse" : {
       "type" : "structure",
@@ -4593,12 +5479,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "JobId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "job-id"
+          "locationName" : "job-id",
+          "documentation" : "The unique ID of the job."
         }
       },
       "required" : [ "ApplicationId", "JobId" ]
@@ -4619,7 +5507,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "PageSize" : {
           "shape" : "__string",
@@ -4652,7 +5541,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4673,12 +5563,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "JobId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "job-id"
+          "locationName" : "job-id",
+          "documentation" : "The unique ID of the job."
         }
       },
       "required" : [ "ApplicationId", "JobId" ]
@@ -4699,7 +5591,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "PageSize" : {
           "shape" : "__string",
@@ -4732,7 +5625,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "PageSize" : {
           "shape" : "__string",
@@ -4743,7 +5637,8 @@
         "SegmentId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "segment-id"
+          "locationName" : "segment-id",
+          "documentation" : "The unique ID of the segment."
         },
         "Token" : {
           "shape" : "__string",
@@ -4770,7 +5665,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "PageSize" : {
           "shape" : "__string",
@@ -4781,7 +5677,8 @@
         "SegmentId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "segment-id"
+          "locationName" : "segment-id",
+          "documentation" : "The unique ID of the segment."
         },
         "Token" : {
           "shape" : "__string",
@@ -4808,12 +5705,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "SegmentId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "segment-id"
+          "locationName" : "segment-id",
+          "documentation" : "The unique ID of the segment."
         }
       },
       "required" : [ "SegmentId", "ApplicationId" ]
@@ -4834,17 +5733,20 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "SegmentId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "segment-id"
+          "locationName" : "segment-id",
+          "documentation" : "The unique ID of the segment."
         },
         "Version" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "version"
+          "locationName" : "version",
+          "documentation" : "The segment version."
         }
       },
       "required" : [ "SegmentId", "Version", "ApplicationId" ]
@@ -4865,7 +5767,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "PageSize" : {
           "shape" : "__string",
@@ -4876,7 +5779,8 @@
         "SegmentId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "segment-id"
+          "locationName" : "segment-id",
+          "documentation" : "The unique ID of the segment."
         },
         "Token" : {
           "shape" : "__string",
@@ -4903,7 +5807,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "PageSize" : {
           "shape" : "__string",
@@ -4936,7 +5841,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -4950,6 +5856,34 @@
       },
       "required" : [ "SMSChannelResponse" ],
       "payload" : "SMSChannelResponse"
+    },
+    "GetUserEndpointsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
+        },
+        "UserId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "user-id",
+          "documentation" : "The unique ID of the user."
+        }
+      },
+      "required" : [ "ApplicationId", "UserId" ]
+    },
+    "GetUserEndpointsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "EndpointsResponse" : {
+          "shape" : "EndpointsResponse"
+        }
+      },
+      "required" : [ "EndpointsResponse" ],
+      "payload" : "EndpointsResponse"
     },
     "ImportJobRequest" : {
       "type" : "structure",
@@ -4986,7 +5920,9 @@
           "shape" : "__string",
           "documentation" : "A custom name for the segment created by the import job. Use if DefineSegment is true."
         }
-      }
+      },
+      "documentation" : "Import job request.",
+      "required" : [ ]
     },
     "ImportJobResource" : {
       "type" : "structure",
@@ -5023,7 +5959,9 @@
           "shape" : "__string",
           "documentation" : "A custom name for the segment created by the import job. Use if DefineSegment is true."
         }
-      }
+      },
+      "documentation" : "Import job resource",
+      "required" : [ ]
     },
     "ImportJobResponse" : {
       "type" : "structure",
@@ -5080,7 +6018,9 @@
           "shape" : "__string",
           "documentation" : "The job type. Will be Import."
         }
-      }
+      },
+      "documentation" : "Import job response.",
+      "required" : [ ]
     },
     "ImportJobsResponse" : {
       "type" : "structure",
@@ -5094,14 +6034,19 @@
           "documentation" : "The string that you use in a subsequent request to get the next page of results in a paginated response."
         }
       },
-      "documentation" : "Import job list."
+      "documentation" : "Import job list.",
+      "required" : [ ]
+    },
+    "Include" : {
+      "type" : "string",
+      "enum" : [ "ALL", "ANY", "NONE" ]
     },
     "InternalServerErrorException" : {
       "type" : "structure",
       "members" : {
         "Message" : {
           "shape" : "__string",
-          "documentation" : "The error message returned from the API."
+          "documentation" : "The error message that's returned from the API."
         },
         "RequestID" : {
           "shape" : "__string",
@@ -5117,156 +6062,6 @@
     "JobStatus" : {
       "type" : "string",
       "enum" : [ "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED" ]
-    },
-    "ListOfActivityResponse" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ActivityResponse"
-      }
-    },
-    "ListOfApplicationResponse" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ApplicationResponse"
-      }
-    },
-    "ListOfCampaignResponse" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "CampaignResponse"
-      }
-    },
-    "ListOfEndpointBatchItem" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "EndpointBatchItem"
-      }
-    },
-    "ListOfExportJobResponse" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ExportJobResponse"
-      }
-    },
-    "ListOfImportJobResponse" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ImportJobResponse"
-      }
-    },
-    "ListOfSegmentResponse" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "SegmentResponse"
-      }
-    },
-    "ListOfTreatmentResource" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "TreatmentResource"
-      }
-    },
-    "ListOfWriteTreatmentResource" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "WriteTreatmentResource"
-      }
-    },
-    "ListOf__string" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "__string"
-      }
-    },
-    "MapOfAddressConfiguration" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "AddressConfiguration"
-      }
-    },
-    "MapOfAttributeDimension" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "AttributeDimension"
-      }
-    },
-    "MapOfEndpointMessageResult" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "EndpointMessageResult"
-      }
-    },
-    "MapOfEndpointSendConfiguration" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "EndpointSendConfiguration"
-      }
-    },
-    "MapOfListOf__string" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "ListOf__string"
-      }
-    },
-    "MapOfMapOfEndpointMessageResult" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "MapOfEndpointMessageResult"
-      }
-    },
-    "MapOfMessageResult" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "MessageResult"
-      }
-    },
-    "MapOf__double" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "__double"
-      }
-    },
-    "MapOf__integer" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "__integer"
-      }
-    },
-    "MapOf__string" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "__string"
-      }
     },
     "Message" : {
       "type" : "structure",
@@ -5307,6 +6102,10 @@
           "shape" : "__boolean",
           "documentation" : "Indicates if the message should display on the users device.\n\nSilent pushes can be used for Remote Configuration and Phone Home use cases. "
         },
+        "TimeToLive" : {
+          "shape" : "__integer",
+          "documentation" : "This parameter specifies how long (in seconds) the message should be kept if the service is unable to deliver the notification the first time. If the value is 0, it treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to the service. It only applies to APNs and GCM"
+        },
         "Title" : {
           "shape" : "__string",
           "documentation" : "The message title that displays above the message on the user's device."
@@ -5315,14 +6114,16 @@
           "shape" : "__string",
           "documentation" : "The URL to open in the user's mobile browser. Used if the value for Action is URL."
         }
-      }
+      },
+      "documentation" : "Message to send",
+      "required" : [ ]
     },
     "MessageBody" : {
       "type" : "structure",
       "members" : {
         "Message" : {
           "shape" : "__string",
-          "documentation" : "The error message returned from the API."
+          "documentation" : "The error message that's returned from the API."
         },
         "RequestID" : {
           "shape" : "__string",
@@ -5370,7 +6171,7 @@
       "members" : {
         "Addresses" : {
           "shape" : "MapOfAddressConfiguration",
-          "documentation" : "A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value."
+          "documentation" : "A map of key-value pairs, where each key is an address and each value is an AddressConfiguration object. An address can be a push notification token, a phone number, or an email address."
         },
         "Context" : {
           "shape" : "MapOf__string",
@@ -5378,14 +6179,15 @@
         },
         "Endpoints" : {
           "shape" : "MapOfEndpointSendConfiguration",
-          "documentation" : "A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value."
+          "documentation" : "A map of key-value pairs, where each key is an endpoint ID and each value is an EndpointSendConfiguration object. Within an EndpointSendConfiguration object, you can tailor the message for an endpoint by specifying message overrides or substitutions."
         },
         "MessageConfiguration" : {
           "shape" : "DirectMessageConfiguration",
           "documentation" : "Message configuration."
         }
       },
-      "documentation" : "Send message request."
+      "documentation" : "Send message request.",
+      "required" : [ ]
     },
     "MessageResponse" : {
       "type" : "structure",
@@ -5407,7 +6209,8 @@
           "documentation" : "A map containing a multi part response for each address, with the address as the key(Email address, phone number or push token) and the result as the value."
         }
       },
-      "documentation" : "Send message response."
+      "documentation" : "Send message response.",
+      "required" : [ ]
     },
     "MessageResult" : {
       "type" : "structure",
@@ -5415,6 +6218,10 @@
         "DeliveryStatus" : {
           "shape" : "DeliveryStatus",
           "documentation" : "Delivery status of message."
+        },
+        "MessageId" : {
+          "shape" : "__string",
+          "documentation" : "Unique message identifier associated with the message that was sent."
         },
         "StatusCode" : {
           "shape" : "__integer",
@@ -5429,7 +6236,8 @@
           "documentation" : "If token was updated as part of delivery. (This is GCM Specific)"
         }
       },
-      "documentation" : "The result from sending a message to an address."
+      "documentation" : "The result from sending a message to an address.",
+      "required" : [ ]
     },
     "MessageType" : {
       "type" : "string",
@@ -5440,7 +6248,7 @@
       "members" : {
         "Message" : {
           "shape" : "__string",
-          "documentation" : "The error message returned from the API."
+          "documentation" : "The error message that's returned from the API."
         },
         "RequestID" : {
           "shape" : "__string",
@@ -5453,6 +6261,20 @@
         "httpStatusCode" : 405
       }
     },
+    "MetricDimension" : {
+      "type" : "structure",
+      "members" : {
+        "ComparisonOperator" : {
+          "shape" : "__string",
+          "documentation" : "GREATER_THAN | LESS_THAN | GREATER_THAN_OR_EQUAL | LESS_THAN_OR_EQUAL | EQUAL"
+        },
+        "Value" : {
+          "shape" : "__double",
+          "documentation" : "Value to be compared."
+        }
+      },
+      "documentation" : "Custom metric dimension"
+    },
     "Mode" : {
       "type" : "string",
       "enum" : [ "DELIVERY", "FILTER" ]
@@ -5462,7 +6284,7 @@
       "members" : {
         "Message" : {
           "shape" : "__string",
-          "documentation" : "The error message returned from the API."
+          "documentation" : "The error message that's returned from the API."
         },
         "RequestID" : {
           "shape" : "__string",
@@ -5475,6 +6297,102 @@
         "httpStatusCode" : 404
       }
     },
+    "NumberValidateRequest" : {
+      "type" : "structure",
+      "members" : {
+        "IsoCountryCode" : {
+          "shape" : "__string",
+          "documentation" : "(Optional) The two-character ISO country code for the country where the phone number was originally registered."
+        },
+        "PhoneNumber" : {
+          "shape" : "__string",
+          "documentation" : "The phone number to get information about."
+        }
+      },
+      "documentation" : "Phone Number Information request."
+    },
+    "NumberValidateResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Carrier" : {
+          "shape" : "__string",
+          "documentation" : "The carrier that the phone number is registered with."
+        },
+        "City" : {
+          "shape" : "__string",
+          "documentation" : "The city where the phone number was originally registered."
+        },
+        "CleansedPhoneNumberE164" : {
+          "shape" : "__string",
+          "documentation" : "The cleansed (standardized) phone number in E.164 format."
+        },
+        "CleansedPhoneNumberNational" : {
+          "shape" : "__string",
+          "documentation" : "The cleansed phone number in national format."
+        },
+        "Country" : {
+          "shape" : "__string",
+          "documentation" : "The country where the phone number was originally registered."
+        },
+        "CountryCodeIso2" : {
+          "shape" : "__string",
+          "documentation" : "The two-character ISO country code for the country where the phone number was originally registered."
+        },
+        "CountryCodeNumeric" : {
+          "shape" : "__string",
+          "documentation" : "The numeric country code for the country where the phone number was originally registered."
+        },
+        "County" : {
+          "shape" : "__string",
+          "documentation" : "The county where the phone number was originally registered."
+        },
+        "OriginalCountryCodeIso2" : {
+          "shape" : "__string",
+          "documentation" : "The two-character ISO country code that was included in the request body."
+        },
+        "OriginalPhoneNumber" : {
+          "shape" : "__string",
+          "documentation" : "The phone number that you included in the request body."
+        },
+        "PhoneType" : {
+          "shape" : "__string",
+          "documentation" : "A description of the phone type. Possible values include MOBILE, LANDLINE, VOIP, INVALID, and OTHER."
+        },
+        "PhoneTypeCode" : {
+          "shape" : "__integer",
+          "documentation" : "The phone type as an integer. Possible values include 0 (MOBILE), 1 (LANDLINE), 2 (VOIP), 3 (INVALID), and 4 (OTHER)."
+        },
+        "Timezone" : {
+          "shape" : "__string",
+          "documentation" : "The time zone for the location where the phone number was originally registered."
+        },
+        "ZipCode" : {
+          "shape" : "__string",
+          "documentation" : "The zip code for the location where the phone number was originally registered."
+        }
+      },
+      "documentation" : "Phone Number Information response."
+    },
+    "PhoneNumberValidateRequest" : {
+      "type" : "structure",
+      "members" : {
+        "NumberValidateRequest" : {
+          "shape" : "NumberValidateRequest"
+        }
+      },
+      "required" : [ "NumberValidateRequest" ],
+      "payload" : "NumberValidateRequest"
+    },
+    "PhoneNumberValidateResponse" : {
+      "type" : "structure",
+      "members" : {
+        "NumberValidateResponse" : {
+          "shape" : "NumberValidateResponse"
+        }
+      },
+      "required" : [ "NumberValidateResponse" ],
+      "payload" : "NumberValidateResponse"
+    },
     "PutEventStreamRequest" : {
       "type" : "structure",
       "members" : {
@@ -5482,11 +6400,10 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "application-id",
-          "documentation" : "ApplicationId"
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "WriteEventStream" : {
-          "shape" : "WriteEventStream",
-          "documentation" : "EventStream to write."
+          "shape" : "WriteEventStream"
         }
       },
       "required" : [ "ApplicationId", "WriteEventStream" ],
@@ -5528,11 +6445,44 @@
           "documentation" : "The recency dimension type:\nACTIVE - Users who have used your app within the specified duration are included in the segment.\nINACTIVE - Users who have not used your app within the specified duration are included in the segment."
         }
       },
-      "documentation" : "Define how a segment based on recency of use."
+      "documentation" : "Define how a segment based on recency of use.",
+      "required" : [ ]
     },
     "RecencyType" : {
       "type" : "string",
       "enum" : [ "ACTIVE", "INACTIVE" ]
+    },
+    "RemoveAttributesRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
+        },
+        "AttributeType" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "attribute-type",
+          "documentation" : "Type of attribute. Can be endpoint-custom-attributes, endpoint-custom-metrics, endpoint-user-attributes."
+        },
+        "UpdateAttributesRequest" : {
+          "shape" : "UpdateAttributesRequest"
+        }
+      },
+      "required" : [ "AttributeType", "ApplicationId", "UpdateAttributesRequest" ],
+      "payload" : "UpdateAttributesRequest"
+    },
+    "RemoveAttributesResponse" : {
+      "type" : "structure",
+      "members" : {
+        "AttributesResource" : {
+          "shape" : "AttributesResource"
+        }
+      },
+      "required" : [ "AttributesResource" ],
+      "payload" : "AttributesResource"
     },
     "SMSChannelRequest" : {
       "type" : "structure",
@@ -5550,7 +6500,8 @@
           "documentation" : "ShortCode registered with phone provider."
         }
       },
-      "documentation" : "SMS Channel Request"
+      "documentation" : "SMS Channel Request",
+      "required" : [ ]
     },
     "SMSChannelResponse" : {
       "type" : "structure",
@@ -5569,7 +6520,7 @@
         },
         "HasCredential" : {
           "shape" : "__boolean",
-          "documentation" : "If the channel is registered with a credential for authentication."
+          "documentation" : "Not used. Retained for backwards compatibility."
         },
         "Id" : {
           "shape" : "__string",
@@ -5591,6 +6542,10 @@
           "shape" : "__string",
           "documentation" : "Platform type. Will be \"SMS\""
         },
+        "PromotionalMessagesPerSecond" : {
+          "shape" : "__integer",
+          "documentation" : "Promotional messages per second that can be sent"
+        },
         "SenderId" : {
           "shape" : "__string",
           "documentation" : "Sender identifier of your messages."
@@ -5599,19 +6554,28 @@
           "shape" : "__string",
           "documentation" : "The short code registered with the phone provider."
         },
+        "TransactionalMessagesPerSecond" : {
+          "shape" : "__integer",
+          "documentation" : "Transactional messages per second that can be sent"
+        },
         "Version" : {
           "shape" : "__integer",
           "documentation" : "Version of channel"
         }
       },
-      "documentation" : "SMS Channel Response."
+      "documentation" : "SMS Channel Response.",
+      "required" : [ ]
     },
     "SMSMessage" : {
       "type" : "structure",
       "members" : {
         "Body" : {
           "shape" : "__string",
-          "documentation" : "The message body of the notification, the email body or the text message."
+          "documentation" : "The body of the SMS message."
+        },
+        "Keyword" : {
+          "shape" : "__string",
+          "documentation" : "The SMS program name that you provided to AWS Support when you requested your dedicated number."
         },
         "MessageType" : {
           "shape" : "MessageType",
@@ -5660,7 +6624,8 @@
           "documentation" : "The starting UTC offset for the schedule if the value for isLocalTime is true\n\nValid values: \nUTC\nUTC+01\nUTC+02\nUTC+03\nUTC+03:30\nUTC+04\nUTC+04:30\nUTC+05\nUTC+05:30\nUTC+05:45\nUTC+06\nUTC+06:30\nUTC+07\nUTC+08\nUTC+09\nUTC+09:30\nUTC+10\nUTC+10:30\nUTC+11\nUTC+12\nUTC+13\nUTC-02\nUTC-03\nUTC-04\nUTC-05\nUTC-06\nUTC-07\nUTC-08\nUTC-09\nUTC-10\nUTC-11"
         }
       },
-      "documentation" : "Shcedule that defines when a campaign is run."
+      "documentation" : "Shcedule that defines when a campaign is run.",
+      "required" : [ ]
     },
     "SegmentBehaviors" : {
       "type" : "structure",
@@ -5721,12 +6686,54 @@
           "shape" : "SegmentLocation",
           "documentation" : "The segment location attributes."
         },
+        "Metrics" : {
+          "shape" : "MapOfMetricDimension",
+          "documentation" : "Custom segment metrics."
+        },
         "UserAttributes" : {
           "shape" : "MapOfAttributeDimension",
           "documentation" : "Custom segment user attributes."
         }
       },
       "documentation" : "Segment dimensions"
+    },
+    "SegmentGroup" : {
+      "type" : "structure",
+      "members" : {
+        "Dimensions" : {
+          "shape" : "ListOfSegmentDimensions",
+          "documentation" : "List of dimensions to include or exclude."
+        },
+        "SourceSegments" : {
+          "shape" : "ListOfSegmentReference",
+          "documentation" : "Segments that define the source of this segment. Currently a maximum of 1 import segment is supported."
+        },
+        "SourceType" : {
+          "shape" : "SourceType",
+          "documentation" : "Include or exclude the source."
+        },
+        "Type" : {
+          "shape" : "Type",
+          "documentation" : "How should the dimensions be applied for the result"
+        }
+      },
+      "documentation" : "Segment group definition.",
+      "required" : [ ]
+    },
+    "SegmentGroupList" : {
+      "type" : "structure",
+      "members" : {
+        "Groups" : {
+          "shape" : "ListOfSegmentGroup",
+          "documentation" : "List of dimension groups to evaluate."
+        },
+        "Include" : {
+          "shape" : "Include",
+          "documentation" : "How should the groups be applied for the result"
+        }
+      },
+      "documentation" : "Segment group definition.",
+      "required" : [ ]
     },
     "SegmentImportResource" : {
       "type" : "structure",
@@ -5756,7 +6763,8 @@
           "documentation" : "The number of endpoints that were successfully imported to create this segment."
         }
       },
-      "documentation" : "Segment import definition."
+      "documentation" : "Segment import definition.",
+      "required" : [ ]
     },
     "SegmentLocation" : {
       "type" : "structure",
@@ -5764,9 +6772,27 @@
         "Country" : {
           "shape" : "SetDimension",
           "documentation" : "The country filter according to ISO 3166-1 Alpha-2 codes."
+        },
+        "GPSPoint" : {
+          "shape" : "GPSPointDimension",
+          "documentation" : "The GPS Point dimension."
         }
       },
       "documentation" : "Segment location dimensions"
+    },
+    "SegmentReference" : {
+      "type" : "structure",
+      "members" : {
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Segment Id."
+        },
+        "Version" : {
+          "shape" : "__integer",
+          "documentation" : "If specified contains a specific version of the segment included."
+        }
+      },
+      "documentation" : "Segment reference."
     },
     "SegmentResponse" : {
       "type" : "structure",
@@ -5799,6 +6825,10 @@
           "shape" : "__string",
           "documentation" : "The name of segment"
         },
+        "SegmentGroups" : {
+          "shape" : "SegmentGroupList",
+          "documentation" : "Segment definition groups. We currently only support one. If specified Dimensions must be empty."
+        },
         "SegmentType" : {
           "shape" : "SegmentType",
           "documentation" : "The segment type:\nDIMENSIONAL - A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.\nIMPORT - A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource."
@@ -5808,7 +6838,8 @@
           "documentation" : "The segment version number."
         }
       },
-      "documentation" : "Segment definition."
+      "documentation" : "Segment definition.",
+      "required" : [ ]
     },
     "SegmentType" : {
       "type" : "string",
@@ -5826,7 +6857,8 @@
           "documentation" : "An identifier used to retrieve the next page of results. The token is null if no additional pages exist."
         }
       },
-      "documentation" : "Segments in your account."
+      "documentation" : "Segments in your account.",
+      "required" : [ ]
     },
     "SendMessagesRequest" : {
       "type" : "structure",
@@ -5834,7 +6866,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "MessageRequest" : {
           "shape" : "MessageRequest"
@@ -5858,36 +6891,38 @@
       "members" : {
         "Context" : {
           "shape" : "MapOf__string",
-          "documentation" : "A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes."
+          "documentation" : "A map of custom attribute-value pairs. Amazon Pinpoint adds these attributes to the data.pinpoint object in the body of the push notification payload. Amazon Pinpoint also provides these attributes in the events that it generates for users-messages deliveries."
         },
         "MessageConfiguration" : {
           "shape" : "DirectMessageConfiguration",
-          "documentation" : "Message configuration."
+          "documentation" : "Message definitions for the default message and any messages that are tailored for specific channels."
         },
         "Users" : {
           "shape" : "MapOfEndpointSendConfiguration",
-          "documentation" : "A map of destination endpoints, with the EndpointId as the key Endpoint Message Configuration as the value."
+          "documentation" : "A map that associates user IDs with EndpointSendConfiguration objects. Within an EndpointSendConfiguration object, you can tailor the message for a user by specifying message overrides or substitutions."
         }
       },
-      "documentation" : "Send message request."
+      "documentation" : "Send message request.",
+      "required" : [ ]
     },
     "SendUsersMessageResponse" : {
       "type" : "structure",
       "members" : {
         "ApplicationId" : {
           "shape" : "__string",
-          "documentation" : "Application id of the message."
+          "documentation" : "The unique ID of the Amazon Pinpoint project used to send the message."
         },
         "RequestId" : {
           "shape" : "__string",
-          "documentation" : "Original request Id for which this message was delivered."
+          "documentation" : "The unique ID assigned to the users-messages request."
         },
         "Result" : {
           "shape" : "MapOfMapOfEndpointMessageResult",
-          "documentation" : "A map containing of UserId to Map of EndpointId to Endpoint Message Result."
+          "documentation" : "An object that shows the endpoints that were messaged for each user. The object provides a list of user IDs. For each user ID, it provides the endpoint IDs that were messaged. For each endpoint ID, it provides an EndpointMessageResult object."
         }
       },
-      "documentation" : "User send message response."
+      "documentation" : "User send message response.",
+      "required" : [ ]
     },
     "SendUsersMessagesRequest" : {
       "type" : "structure",
@@ -5895,7 +6930,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "SendUsersMessageRequest" : {
           "shape" : "SendUsersMessageRequest"
@@ -5926,14 +6962,19 @@
           "documentation" : "The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type."
         }
       },
-      "documentation" : "Dimension specification of a segment."
+      "documentation" : "Dimension specification of a segment.",
+      "required" : [ ]
+    },
+    "SourceType" : {
+      "type" : "string",
+      "enum" : [ "ALL", "ANY" ]
     },
     "TooManyRequestsException" : {
       "type" : "structure",
       "members" : {
         "Message" : {
           "shape" : "__string",
-          "documentation" : "The error message returned from the API."
+          "documentation" : "The error message that's returned from the API."
         },
         "RequestID" : {
           "shape" : "__string",
@@ -5978,7 +7019,12 @@
           "documentation" : "The custom name of a variation of the campaign used for A/B testing."
         }
       },
-      "documentation" : "Treatment resource"
+      "documentation" : "Treatment resource",
+      "required" : [ ]
+    },
+    "Type" : {
+      "type" : "string",
+      "enum" : [ "ALL", "ANY", "NONE" ]
     },
     "UpdateAdmChannelRequest" : {
       "type" : "structure",
@@ -5989,7 +7035,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId", "ADMChannelRequest" ],
@@ -6014,7 +7061,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId", "APNSChannelRequest" ],
@@ -6039,7 +7087,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId", "APNSSandboxChannelRequest" ],
@@ -6064,7 +7113,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId", "APNSVoipChannelRequest" ],
@@ -6089,7 +7139,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         }
       },
       "required" : [ "ApplicationId", "APNSVoipSandboxChannelRequest" ],
@@ -6111,7 +7162,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "WriteApplicationSettingsRequest" : {
           "shape" : "WriteApplicationSettingsRequest"
@@ -6130,13 +7182,24 @@
       "required" : [ "ApplicationSettingsResource" ],
       "payload" : "ApplicationSettingsResource"
     },
+    "UpdateAttributesRequest" : {
+      "type" : "structure",
+      "members" : {
+        "Blacklist" : {
+          "shape" : "ListOf__string",
+          "documentation" : "The GLOB wildcard for removing the attributes in the application"
+        }
+      },
+      "documentation" : "Update attributes request"
+    },
     "UpdateBaiduChannelRequest" : {
       "type" : "structure",
       "members" : {
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "BaiduChannelRequest" : {
           "shape" : "BaiduChannelRequest"
@@ -6161,12 +7224,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "CampaignId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "campaign-id"
+          "locationName" : "campaign-id",
+          "documentation" : "The unique ID of the campaign."
         },
         "WriteCampaignRequest" : {
           "shape" : "WriteCampaignRequest"
@@ -6191,7 +7256,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "EmailChannelRequest" : {
           "shape" : "EmailChannelRequest"
@@ -6216,12 +7282,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "EndpointId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "endpoint-id"
+          "locationName" : "endpoint-id",
+          "documentation" : "The unique ID of the endpoint."
         },
         "EndpointRequest" : {
           "shape" : "EndpointRequest"
@@ -6246,7 +7314,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "EndpointBatchRequest" : {
           "shape" : "EndpointBatchRequest"
@@ -6271,7 +7340,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "GCMChannelRequest" : {
           "shape" : "GCMChannelRequest"
@@ -6296,12 +7366,14 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "SegmentId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "segment-id"
+          "locationName" : "segment-id",
+          "documentation" : "The unique ID of the segment."
         },
         "WriteSegmentRequest" : {
           "shape" : "WriteSegmentRequest"
@@ -6326,7 +7398,8 @@
         "ApplicationId" : {
           "shape" : "__string",
           "location" : "uri",
-          "locationName" : "application-id"
+          "locationName" : "application-id",
+          "documentation" : "The unique ID of your Amazon Pinpoint application."
         },
         "SMSChannelRequest" : {
           "shape" : "SMSChannelRequest"
@@ -6351,6 +7424,10 @@
         "CampaignHook" : {
           "shape" : "CampaignHook",
           "documentation" : "Default campaign hook information."
+        },
+        "CloudWatchMetricsEnabled" : {
+          "shape" : "__boolean",
+          "documentation" : "The CloudWatchMetrics settings for the app."
         },
         "Limits" : {
           "shape" : "CampaignLimits",
@@ -6433,7 +7510,8 @@
           "documentation" : "The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account."
         }
       },
-      "documentation" : "Request to save an EventStream."
+      "documentation" : "Request to save an EventStream.",
+      "required" : [ ]
     },
     "WriteSegmentRequest" : {
       "type" : "structure",
@@ -6445,9 +7523,14 @@
         "Name" : {
           "shape" : "__string",
           "documentation" : "The name of segment"
+        },
+        "SegmentGroups" : {
+          "shape" : "SegmentGroupList",
+          "documentation" : "Segment definition groups. We currently only support one. If specified Dimensions must be empty."
         }
       },
-      "documentation" : "Segment definition."
+      "documentation" : "Segment definition.",
+      "required" : [ ]
     },
     "WriteTreatmentResource" : {
       "type" : "structure",
@@ -6473,7 +7556,8 @@
           "documentation" : "The custom name of a variation of the campaign used for A/B testing."
         }
       },
-      "documentation" : "Used to create a campaign treatment."
+      "documentation" : "Used to create a campaign treatment.",
+      "required" : [ ]
     },
     "__boolean" : {
       "type" : "boolean"
@@ -6484,11 +7568,211 @@
     "__integer" : {
       "type" : "integer"
     },
+    "ListOfActivityResponse" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ActivityResponse"
+      }
+    },
+    "ListOfApplicationResponse" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ApplicationResponse"
+      }
+    },
+    "ListOfCampaignResponse" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "CampaignResponse"
+      }
+    },
+    "ListOfEndpointBatchItem" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "EndpointBatchItem"
+      }
+    },
+    "ListOfEndpointResponse" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "EndpointResponse"
+      }
+    },
+    "ListOfExportJobResponse" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ExportJobResponse"
+      }
+    },
+    "ListOfImportJobResponse" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ImportJobResponse"
+      }
+    },
+    "ListOfSegmentDimensions" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "SegmentDimensions"
+      }
+    },
+    "ListOfSegmentGroup" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "SegmentGroup"
+      }
+    },
+    "ListOfSegmentReference" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "SegmentReference"
+      }
+    },
+    "ListOfSegmentResponse" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "SegmentResponse"
+      }
+    },
+    "ListOfTreatmentResource" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "TreatmentResource"
+      }
+    },
+    "ListOfWriteTreatmentResource" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "WriteTreatmentResource"
+      }
+    },
+    "ListOf__string" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__string"
+      }
+    },
+    "__long" : {
+      "type" : "long"
+    },
+    "MapOfAddressConfiguration" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "AddressConfiguration"
+      }
+    },
+    "MapOfAttributeDimension" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "AttributeDimension"
+      }
+    },
+    "MapOfChannelResponse" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "ChannelResponse"
+      }
+    },
+    "MapOfEndpointMessageResult" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "EndpointMessageResult"
+      }
+    },
+    "MapOfEndpointSendConfiguration" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "EndpointSendConfiguration"
+      }
+    },
+    "MapOfMessageResult" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "MessageResult"
+      }
+    },
+    "MapOfMetricDimension" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "MetricDimension"
+      }
+    },
+    "MapOf__double" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__double"
+      }
+    },
+    "MapOf__integer" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__integer"
+      }
+    },
+    "MapOfListOf__string" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "ListOf__string"
+      }
+    },
+    "MapOfMapOfEndpointMessageResult" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "MapOfEndpointMessageResult"
+      }
+    },
+    "MapOf__string" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__string"
+      }
+    },
     "__string" : {
       "type" : "string"
     },
-    "__timestamp" : {
-      "type" : "timestamp"
+    "__timestampIso8601" : {
+      "type" : "timestamp",
+      "timestampFormat" : "iso8601"
+    },
+    "__timestampUnix" : {
+      "type" : "timestamp",
+      "timestampFormat" : "unixTimestamp"
     }
   }
 }
