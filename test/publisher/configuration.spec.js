@@ -9,18 +9,15 @@ if (AWS.util.isNode()) {
     before(function() {
       processEnv = process.env;
     });
-  
+
     after(function() {
       process.env = processEnv;
-    })
-  
-    beforeEach(function (done) {
-      process.env = {};
-      return done();
     });
-  
-    afterEach(function () {
-      process.env = {};
+
+    beforeEach(function() {
+      process.env = {
+        'HOME': '/home/user'
+      };
     });
   
     describe('get configurations from environmental variable', function () {
@@ -33,7 +30,7 @@ if (AWS.util.isNode()) {
             enabled: true,
             port: undefined,
             clientId: undefined
-          })
+          });
         }
       });
   
@@ -59,8 +56,9 @@ if (AWS.util.isNode()) {
           clientId: undefined,
         });
       });
+
       it('should get clientID', function () {
-        process.env.AWSCSMCLIENT_ID = 'client_id';
+        process.env.AWS_CSM_CLIENT_ID = 'client_id';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
         expect(monitoringConfig()).to.eql({
           enabled: false,
@@ -117,11 +115,9 @@ if (AWS.util.isNode()) {
   
     describe('get configurations according to resolving chain', function () {
       it('should prefer environmental variables over config file', function () {
-        process.env = {
-          AWS_PROFILE: 'role',
-          AWS_CSM_ENABLED: '1',
-          AWS_CSM_PORT: '54321',
-        }
+        process.env.AWS_PROFILE = 'role';
+        process.env.AWS_CSM_ENABLED = '1';
+        process.env.AWS_CSM_PORT = '54321';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(
           '[profile role]\ncsm_enabled=false\ncsm_clientid=clientid'
         );
@@ -133,10 +129,8 @@ if (AWS.util.isNode()) {
       });
   
       it('should not read shared config file if monitoring disabled from environment', function () {
-        process.env = {
-          AWS_PROFILE: 'role',
-          AWS_CSM_ENABLED: 'false',
-        }
+        process.env.AWS_PROFILE = 'role';
+        process.env.AWS_CSM_ENABLED = 'false';
         var ReadFileCalled = 0;
         helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function () {
           called++;

@@ -203,11 +203,11 @@ if (AWS.util.isNode()) {
 		describe('publishDatagram', function () {
 			it('sends a message via udp', function (done) {
 				var publisher;
-				var mockServer = createServer(function () {
-					var publisher = new Publisher({
+				var mockServer = createServer(function (server) {
+					publisher = new Publisher({
 						enabled: true,
 						clientId: 'Foo',
-						port: mockServer.address().port
+						port: server.address().port
 					});
 					publisher.publishDatagram(new Buffer(1024));
 				}, function () {

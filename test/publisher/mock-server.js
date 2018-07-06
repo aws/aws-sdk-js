@@ -13,9 +13,11 @@ function createServer(onListen, onMessage) {
     });
 
     server.on('listening', function() {
-        if (typeof onListen === 'function') {
-            onListen();
-        }
+        process.nextTick(function() {
+            if (typeof onListen === 'function') {
+                onListen(server);
+            }
+        });
     });
 
     server.bind();
