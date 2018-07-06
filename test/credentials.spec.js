@@ -580,28 +580,31 @@
           return done();
         });
       });
-      it('default tokenCodeFn works if mfa_serial is provided', function() {
-        var creds, tokenCodeFnSpy, mock, assumeRoleSpy, STSPrototype = (new STS()).constructor.prototype;
-        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole');
-        tokenCodeFnSpy = helpers.createSpy('tokenCodeFn').andReturn('123456');
+      it('default tokenCodeFn works if mfa_serial is provided', function(done) {
+        var creds, tokenCodeFn, tokenCodeFnSpy, mock;
         mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session\n'
           + '[profile withmfa]\nrole_arn = arn\nmfa_serial = serial\nsource_profile = default';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
-        creds = new AWS.SharedIniFileCredentials({ profile: 'withmfa', tokenCodeFn: tokenCodeFnSpy });
-        creds.refresh();
-        return expect(tokenCodeFnSpy.calls.length).to.equal(1);
+        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+        creds = new AWS.SharedIniFileCredentials({ profile: 'withmfa' });
+        tokenCodeFnSpy = helpers.createSpy('tokenCodeFn');
+        creds.refresh(function(e) {
+          done();
+        });
+        expect(tokenCodeFnSpy.calls.length).to.equal(1);
       });
-      it('calls tokenCodeFn if mfa_serial is provided', function() {
+      it('calls tokenCodeFn if mfa_serial is provided', function(done) {
         var creds, tokenCodeFn, mock, assumeRoleSpy, tokenCodeFnSpy;
         var STSPrototype = (new STS()).constructor.prototype;
-        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole');
         mock = '[default]\nrole_arn = arn\nmfa_serial = serial\naws_access_key_id = key\naws_secret_access_key = secret\n'
           + '[profile withmfa]\nrole_arn = arn\nmfa_serial = serial\nsource_profile = default';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
-        tokenCodeFnSpy = helpers.createSpy('tokenCodeFn').andReturn('123456');
+        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+        tokenCodeFnSpy = helpers.createSpy('tokenCodeFn');
         tokenCodeFn = function(serial, callback) {
           tokenCodeFnSpy(serial);
           callback(null, '123456');
+          done();
         };
         creds = new AWS.SharedIniFileCredentials({
           profile: 'withmfa',
@@ -609,6 +612,24 @@
         });
         expect(tokenCodeFnSpy.calls.length).to.equal(1);
         return expect(tokenCodeFnSpy.calls[0]["arguments"][0]).to.equal('serial');
+      });
+      it('callback receives tokenCodeFns error', function(done) {
+        var creds, tokenCodeFn, mock;
+        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+        mock = '[default]\nrole_arn = arn\nmfa_serial = serial\naws_access_key_id = key\naws_secret_access_key = secret\n'
+          + '[profile withmfa]\nrole_arn = arn\nmfa_serial = serial\nsource_profile = default';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        tokenCodeFn = function(serial, callback) {
+          callback('tokenCodeFn error');
+        };
+        creds = new AWS.SharedIniFileCredentials({
+          profile: 'withmfa',
+          tokenCodeFn: tokenCodeFn
+        });
+        creds.refresh(function(err) {
+          expect(err.message).to.equal('Error fetching MFA token: tokenCodeFn error');
+          done();
+        });
       });
     });
     describe('AWS.EC2MetadataCredentials', function() {
