@@ -581,7 +581,7 @@
         });
       });
       it('default tokenCodeFn works if mfa_serial is provided', function(done) {
-        var creds, tokenCodeFn, tokenCodeFnSpy, mock;
+        var creds, tokenCodeFnSpy, mock;
         mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session\n'
           + '[profile withmfa]\nrole_arn = arn\nmfa_serial = serial\nsource_profile = default';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
@@ -594,8 +594,7 @@
         expect(tokenCodeFnSpy.calls.length).to.equal(1);
       });
       it('calls tokenCodeFn if mfa_serial is provided', function(done) {
-        var creds, tokenCodeFn, mock, assumeRoleSpy, tokenCodeFnSpy;
-        var STSPrototype = (new STS()).constructor.prototype;
+        var creds, tokenCodeFn, mock, tokenCodeFnSpy;
         mock = '[default]\nrole_arn = arn\nmfa_serial = serial\naws_access_key_id = key\naws_secret_access_key = secret\n'
           + '[profile withmfa]\nrole_arn = arn\nmfa_serial = serial\nsource_profile = default';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
