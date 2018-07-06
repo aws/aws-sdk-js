@@ -8,7 +8,7 @@ if (AWS.util.isNode()) {
     var processEnv;
     before(function() {
       processEnv = process.env;
-    })
+    });
 
     after(function() {
       process.env = processEnv;
@@ -30,7 +30,7 @@ if (AWS.util.isNode()) {
             enabled: true,
             port: undefined,
             clientId: undefined
-          })
+          });
         }
       });
   
@@ -56,7 +56,7 @@ if (AWS.util.isNode()) {
           clientId: undefined,
         });
       });
-      
+
       it('should get clientID', function () {
         process.env.AWS_CSM_CLIENT_ID = 'client_id';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn('');

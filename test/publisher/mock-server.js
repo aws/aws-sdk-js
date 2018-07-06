@@ -17,7 +17,7 @@ function createServer(onListen, onMessage) {
             if (typeof onListen === 'function') {
                 onListen(server);
             }
-        })
+        });
     });
 
     server.bind();
