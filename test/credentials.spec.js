@@ -453,7 +453,7 @@
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         creds = new AWS.SharedIniFileCredentials();
         return creds.refresh(function(err) {
-          expect(err.message).to.match(/Credentials not set in source_profile foo using profile default/);
+          expect(err.message).to.match(/Missing credentials in config/);
           done();
         });
       });
