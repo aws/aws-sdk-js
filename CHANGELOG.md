@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.269.1-->
+<!--LATEST=2.270.1-->
 <!--ENTRYINSERT-->
+
+## 2.270.1
+* feature: MediaConvert: This release adds support for the following 1) users can specify tags to be attached to queues, presets, and templates during creation of those resources on MediaConvert. 2) users can now view the count of jobs in submitted state and in progressing state on a per queue basis.
+* feature: ServerlessApplicationRepository: Added required fields and documentation updates for AWS Serverless Application Repository.
 
 ## 2.269.1
 * bugfix: browser: Fixed an issue with the browser XML parser logic where the incorrect value may be returned if a complex shape (map, structure) had an immediate child and a nested descendant with the same tag name.

@@ -148,6 +148,30 @@ declare class MediaConvert extends Service {
    */
   listQueues(callback?: (err: AWSError, data: MediaConvert.Types.ListQueuesResponse) => void): Request<MediaConvert.Types.ListQueuesResponse, AWSError>;
   /**
+   * Retrieve the tags for a MediaConvert resource.
+   */
+  listTagsForResource(params: MediaConvert.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListTagsForResourceResponse) => void): Request<MediaConvert.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieve the tags for a MediaConvert resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: MediaConvert.Types.ListTagsForResourceResponse) => void): Request<MediaConvert.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Tag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   */
+  tagResource(params: MediaConvert.Types.TagResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.TagResourceResponse) => void): Request<MediaConvert.Types.TagResourceResponse, AWSError>;
+  /**
+   * Tag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   */
+  tagResource(callback?: (err: AWSError, data: MediaConvert.Types.TagResourceResponse) => void): Request<MediaConvert.Types.TagResourceResponse, AWSError>;
+  /**
+   * Untag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   */
+  untagResource(params: MediaConvert.Types.UntagResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.UntagResourceResponse) => void): Request<MediaConvert.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Untag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   */
+  untagResource(callback?: (err: AWSError, data: MediaConvert.Types.UntagResourceResponse) => void): Request<MediaConvert.Types.UntagResourceResponse, AWSError>;
+  /**
    * Modify one of your existing job templates.
    */
   updateJobTemplate(params: MediaConvert.Types.UpdateJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.UpdateJobTemplateResponse) => void): Request<MediaConvert.Types.UpdateJobTemplateResponse, AWSError>;
@@ -341,7 +365,7 @@ declare namespace MediaConvert {
   }
   export interface AudioSelectorGroup {
     /**
-     * Name of an Audio Selector within the same input to include in the group.  Audio selector names are standardized, based on their order within the input (e.g., "Audio Selector 1").  The audio selector name parameter can be repeated to add any number of audio selectors to the group.
+     * Name of an Audio Selector within the same input to include in the group.  Audio selector names are standardized, based on their order within the input (e.g., "Audio Selector 1"). The audio selector name parameter can be repeated to add any number of audio selectors to the group.
      */
     AudioSelectorNames: __listOf__stringMin1;
   }
@@ -618,6 +642,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     Queue?: __string;
     Settings: JobTemplateSettings;
+    /**
+     * The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+     */
+    Tags?: __mapOf__string;
   }
   export interface CreateJobTemplateResponse {
     JobTemplate?: JobTemplate;
@@ -636,6 +664,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     Name: __string;
     Settings: PresetSettings;
+    /**
+     * The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+     */
+    Tags?: __mapOf__string;
   }
   export interface CreatePresetResponse {
     Preset?: Preset;
@@ -649,6 +681,10 @@ All burn-in and DVB-Sub font settings must match.
      * The name of the queue you are creating.
      */
     Name: __string;
+    /**
+     * The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+     */
+    Tags?: __mapOf__string;
   }
   export interface CreateQueueResponse {
     Queue?: Queue;
@@ -1656,7 +1692,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Optional. Number of job templates, up to twenty, that will be returned at one time.
      */
-    MaxResults?: __integer;
+    MaxResults?: __integerMin1Max20;
     /**
      * Use this string, provided with the response to a previous request, to request the next batch of job templates.
      */
@@ -1677,7 +1713,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Optional. Number of jobs, up to twenty, that will be returned at one time.
      */
-    MaxResults?: __integer;
+    MaxResults?: __integerMin1Max20;
     /**
      * Use this string, provided with the response to a previous request, to request the next batch of jobs.
      */
@@ -1708,7 +1744,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Optional. Number of presets, up to twenty, that will be returned at one time
      */
-    MaxResults?: __integer;
+    MaxResults?: __integerMin1Max20;
     /**
      * Use this string, provided with the response to a previous request, to request the next batch of presets.
      */
@@ -1730,7 +1766,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Optional. Number of queues, up to twenty, that will be returned at one time.
      */
-    MaxResults?: __integer;
+    MaxResults?: __integerMin1Max20;
     /**
      * Use this string, provided with the response to a previous request, to request the next batch of queues.
      */
@@ -1746,6 +1782,15 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * List of queues
      */
     Queues?: __listOfQueue;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to list tags for. To get the ARN, send a GET request with the resource name.
+     */
+    Arn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    ResourceTags?: ResourceTags;
   }
   export type M2tsAudioBufferModel = "DVB"|"ATSC"|string;
   export type M2tsBufferModel = "MULTIPLEX"|"NONE"|string;
@@ -2267,7 +2312,15 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * A name you create for each queue. Each name must be unique within your account.
      */
     Name: __string;
+    /**
+     * Estimated number of jobs in PROGRESSING status.
+     */
+    ProgressingJobsCount?: __integer;
     Status?: QueueStatus;
+    /**
+     * Estimated number of jobs in SUBMITTED status.
+     */
+    SubmittedJobsCount?: __integer;
     /**
      * A queue can be of two types: system or custom. System or built-in queues can't be modified or deleted by the user.
      */
@@ -2303,6 +2356,16 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8
      */
     ChannelsOut: __integerMin1Max8;
+  }
+  export interface ResourceTags {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    Arn?: __string;
+    /**
+     * The tags for the resource.
+     */
+    Tags?: __mapOf__string;
   }
   export type RespondToAfd = "NONE"|"RESPOND"|"PASSTHROUGH"|string;
   export type ScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT"|string;
@@ -2341,6 +2404,18 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * Relates to DRM implementation. The location of the license server used for protecting content.
      */
     Url: __string;
+  }
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to tag. To get the ARN, send a GET request with the resource name.
+     */
+    Arn: __string;
+    /**
+     * The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+     */
+    Tags: __mapOf__string;
+  }
+  export interface TagResourceResponse {
   }
   export interface TeletextDestinationSettings {
     /**
@@ -2408,6 +2483,18 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export type TtmlStylePassthrough = "ENABLED"|"DISABLED"|string;
   export type Type = "SYSTEM"|"CUSTOM"|string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to remove tags from. To get the ARN, send a GET request with the resource name.
+     */
+    Arn?: __string;
+    /**
+     * The keys of the tags that you want to remove from the resource.
+     */
+    TagKeys?: __listOf__string;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateJobTemplateRequest {
     /**
      * The new category for the job template, if you are changing it.
@@ -2614,6 +2701,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __integerMin1Max1001 = number;
   export type __integerMin1Max16 = number;
   export type __integerMin1Max2 = number;
+  export type __integerMin1Max20 = number;
   export type __integerMin1Max2147483647 = number;
   export type __integerMin1Max31 = number;
   export type __integerMin1Max32 = number;
@@ -2664,6 +2752,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __listOf__integerMin1Max2147483647 = __integerMin1Max2147483647[];
   export type __listOf__integerMin32Max8182 = __integerMin32Max8182[];
   export type __listOf__integerMinNegative60Max6 = __integerMinNegative60Max6[];
+  export type __listOf__string = __string[];
   export type __listOf__stringMin1 = __stringMin1[];
   export type __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12[];
   export type __long = number;
