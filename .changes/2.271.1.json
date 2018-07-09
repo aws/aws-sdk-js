@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "ApplicationAutoScaling",
+        "description": "The release adds support for custom resource auto scaling."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "AWS Cost Explorer provides you with Reserved Instance (RI) purchase recommendations based on your total cross-account Amazon EC2 and Amazon RDS usage. Starting today, linked accounts can also access custom RI purchase recommendations for specific linked accounts directly via AWS Cost Explorer API."
+    },
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "Added support for DmsTransfer endpoint type and support for re-validate option in table reload API."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Add support for .NET Core 2.1 to Lambda."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "You can now specify an Amazon S3 output bucket to store the transcription of your audio file when you call the StartTranscriptionJob operation. "
+    }
+]

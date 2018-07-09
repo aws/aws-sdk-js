@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.270.1-->
+<!--LATEST=2.271.1-->
 <!--ENTRYINSERT-->
+
+## 2.271.1
+* feature: ApplicationAutoScaling: The release adds support for custom resource auto scaling.
+* feature: CostExplorer: AWS Cost Explorer provides you with Reserved Instance (RI) purchase recommendations based on your total cross-account Amazon EC2 and Amazon RDS usage. Starting today, linked accounts can also access custom RI purchase recommendations for specific linked accounts directly via AWS Cost Explorer API.
+* feature: DMS: Added support for DmsTransfer endpoint type and support for re-validate option in table reload API.
+* feature: Lambda: Add support for .NET Core 2.1 to Lambda.
+* feature: TranscribeService: You can now specify an Amazon S3 output bucket to store the transcription of your audio file when you call the StartTranscriptionJob operation. 
 
 ## 2.270.1
 * feature: MediaConvert: This release adds support for the following 1) users can specify tags to be attached to queues, presets, and templates during creation of those resources on MediaConvert. 2) users can now view the count of jobs in submitted state and in progressing state on a per queue basis.

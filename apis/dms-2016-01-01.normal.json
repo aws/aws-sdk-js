@@ -895,9 +895,13 @@
           "shape":"S3Settings",
           "documentation":"<p>Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see the <b>Extra Connection Attributes</b> section at <a href=\"http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html\"> Using Amazon S3 as a Target for AWS Database Migration Service</a>. </p>"
         },
+        "DmsTransferSettings":{
+          "shape":"DmsTransferSettings",
+          "documentation":"<p> The settings in JSON format for the DMS Transfer type source endpoint. </p> <p>Attributes include:</p> <ul> <li> <p>serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>bucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</p> <p>JSON syntax:</p> <p> { \"ServiceAccessRoleArn\": \"string\", \"BucketName\": \"string\", \"CompressionType\": \"none\"|\"gzip\" } </p>"
+        },
         "MongoDbSettings":{
           "shape":"MongoDbSettings",
-          "documentation":"<p>Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the <b>Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service</b> section at <a href=\"http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html\"> Using Amazon S3 as a Target for AWS Database Migration Service</a>. </p>"
+          "documentation":"<p>Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the <b>Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service</b> section at <a href=\"http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html\"> Using MongoDB as a Target for AWS Database Migration Service</a>. </p>"
         }
       },
       "documentation":"<p/>"
@@ -1110,7 +1114,7 @@
         },
         "CdcStartTime":{
           "shape":"TStamp",
-          "documentation":"<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p>"
+          "documentation":"<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>"
         },
         "CdcStartPosition":{
           "shape":"String",
@@ -1814,6 +1818,20 @@
         "verify-full"
       ]
     },
+    "DmsTransferSettings":{
+      "type":"structure",
+      "members":{
+        "ServiceAccessRoleArn":{
+          "shape":"String",
+          "documentation":"<p> The IAM role that has permission to access the Amazon S3 bucket. </p>"
+        },
+        "BucketName":{
+          "shape":"String",
+          "documentation":"<p> The name of the S3 bucket to use. </p>"
+        }
+      },
+      "documentation":"<p> The settings in JSON format for the DMS Transfer type source endpoint. </p>"
+    },
     "DynamoDbSettings":{
       "type":"structure",
       "required":["ServiceAccessRoleArn"],
@@ -1903,6 +1921,10 @@
         "S3Settings":{
           "shape":"S3Settings",
           "documentation":"<p>The settings for the S3 target endpoint. For more information, see the <code>S3Settings</code> structure.</p>"
+        },
+        "DmsTransferSettings":{
+          "shape":"DmsTransferSettings",
+          "documentation":"<p> The settings in JSON format for the DMS Transfer type source endpoint. </p> <p>Attributes include:</p> <ul> <li> <p>serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>bucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</p> <p>JSON syntax:</p> <p> { \"ServiceAccessRoleArn\": \"string\", \"BucketName\": \"string\", \"CompressionType\": \"none\"|\"gzip\" } </p>"
         },
         "MongoDbSettings":{
           "shape":"MongoDbSettings",
@@ -2227,6 +2249,10 @@
           "shape":"S3Settings",
           "documentation":"<p>Settings in JSON format for the target S3 endpoint. For more information about the available settings, see the <b>Extra Connection Attributes</b> section at <a href=\"http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html\"> Using Amazon S3 as a Target for AWS Database Migration Service</a>. </p>"
         },
+        "DmsTransferSettings":{
+          "shape":"DmsTransferSettings",
+          "documentation":"<p> The settings in JSON format for the DMS Transfer type source endpoint. </p> <p>Attributes include:</p> <ul> <li> <p>serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>BucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</p> <p>JSON syntax:</p> <p> { \"ServiceAccessRoleArn\": \"string\", \"BucketName\": \"string\", \"CompressionType\": \"none\"|\"gzip\" } </p>"
+        },
         "MongoDbSettings":{
           "shape":"MongoDbSettings",
           "documentation":"<p>Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the <b>Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service</b> section at <a href=\"http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html\"> Using Amazon S3 as a Target for AWS Database Migration Service</a>. </p>"
@@ -2400,7 +2426,7 @@
         },
         "CdcStartTime":{
           "shape":"TStamp",
-          "documentation":"<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p>"
+          "documentation":"<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>"
         },
         "CdcStartPosition":{
           "shape":"String",
@@ -2607,6 +2633,13 @@
         "refreshing"
       ]
     },
+    "ReloadOptionValue":{
+      "type":"string",
+      "enum":[
+        "data-reload",
+        "validate-only"
+      ]
+    },
     "ReloadTablesMessage":{
       "type":"structure",
       "required":[
@@ -2616,11 +2649,15 @@
       "members":{
         "ReplicationTaskArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the replication instance. </p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the replication task. </p>"
         },
         "TablesToReload":{
           "shape":"TableListToReload",
           "documentation":"<p>The name and schema of the table to be reloaded. </p>"
+        },
+        "ReloadOption":{
+          "shape":"ReloadOptionValue",
+          "documentation":"<p>Options for reload. Specify <code>data-reload</code> to reload the data and re-validate it if validation is enabled. Specify <code>validate-only</code> to re-validate the table. This option applies only when validation is enabled for the task. </p> <p>Valid values: data-reload, validate-only</p> <p>Default value is data-reload.</p>"
         }
       }
     },
@@ -2862,7 +2899,7 @@
       "members":{
         "ReplicationTaskIdentifier":{
           "shape":"String",
-          "documentation":"<p>The replication task identifier.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
+          "documentation":"<p>The user-assigned replication task identifier or name.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
         },
         "SourceEndpointArn":{
           "shape":"String",
@@ -3146,7 +3183,7 @@
         },
         "CdcStartTime":{
           "shape":"TStamp",
-          "documentation":"<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p>"
+          "documentation":"<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>"
         },
         "CdcStartPosition":{
           "shape":"String",
@@ -3340,6 +3377,10 @@
         "ValidationState":{
           "shape":"String",
           "documentation":"<p>The validation state of the table.</p> <p>The parameter can have the following values</p> <ul> <li> <p>Not enabled—Validation is not enabled for the table in the migration task.</p> </li> <li> <p>Pending records—Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records—Some records in the table do not match between the source and target.</p> </li> <li> <p>Suspended records—Some records in the table could not be validated.</p> </li> <li> <p>No primary key—The table could not be validated because it had no primary key.</p> </li> <li> <p>Table error—The table was not validated because it was in an error state and some data was not migrated.</p> </li> <li> <p>Validated—All rows in the table were validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error—The table could not be validated because of an unexpected error.</p> </li> </ul>"
+        },
+        "ValidationStateDetails":{
+          "shape":"String",
+          "documentation":"<p>Additional details about the state of validation.</p>"
         }
       },
       "documentation":"<p/>"

@@ -61,7 +61,7 @@ declare class CostExplorer extends Service {
   getTags(callback?: (err: AWSError, data: CostExplorer.Types.GetTagsResponse) => void): Request<CostExplorer.Types.GetTagsResponse, AWSError>;
 }
 declare namespace CostExplorer {
-  export type AccountScope = "PAYER"|string;
+  export type AccountScope = "PAYER"|"LINKED"|string;
   export type AmortizedRecurringFee = string;
   export type AmortizedUpfrontFee = string;
   export type AttributeType = string;
@@ -222,7 +222,7 @@ declare namespace CostExplorer {
      */
     Filter?: Expression;
     /**
-     * Which metrics are returned in the query. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values are BlendedCost, UnblendedCost, and UsageQuantity.  If you return the UsageQuantity metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate usageQuantity across all of EC2, the results aren't meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful UsageQuantity metrics, filter by UsageType or UsageTypeGroups.    Metrics is required for GetCostAndUsage requests.
+     * Which metrics are returned in the query. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values are AmortizedCost, BlendedCost, UnblendedCost, and UsageQuantity.  If you return the UsageQuantity metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate usageQuantity across all of EC2, the results aren't meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful UsageQuantity metrics, filter by UsageType or UsageTypeGroups.    Metrics is required for GetCostAndUsage requests.
      */
     Metrics?: MetricNames;
     /**
@@ -302,7 +302,7 @@ declare namespace CostExplorer {
      */
     Granularity?: Granularity;
     /**
-     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY    GetReservationCoverage uses the same  Expression  object as the other operations, but only AND is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR'd together.
+     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY    GetReservationCoverage uses the same  Expression  object as the other operations, but only AND is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR'd together. If you don't provide a SERVICE filter, Cost Explorer defaults to EC2.
      */
     Filter?: Expression;
     /**
@@ -334,7 +334,7 @@ declare namespace CostExplorer {
      */
     Service: GenericString;
     /**
-     * The account scope that you want recommendations for. The only valid value is Payer. This means that AWS includes the master account and any member accounts when it calculates its recommendations.
+     * The account scope that you want recommendations for. PAYER means that AWS includes the master account and any member accounts when it calculates its recommendations. LINKED means that AWS includes only member accounts when it calculates its recommendations. Valid values are PAYER and LINKED.
      */
     AccountScope?: AccountScope;
     /**
@@ -528,7 +528,11 @@ declare namespace CostExplorer {
      */
     DatabaseEngine?: GenericString;
     /**
-     * Whether the recommendation is for a reservation in a single availability zone or a reservation with a backup in a second availability zone.
+     * The database edition that the recommended reservation supports.
+     */
+    DatabaseEdition?: GenericString;
+    /**
+     * Whether the recommendation is for a reservation in a single Availability Zone or a reservation with a backup in a second Availability Zone.
      */
     DeploymentOption?: GenericString;
     /**
@@ -566,7 +570,7 @@ declare namespace CostExplorer {
      */
     OnDemandCostOfRIHoursUsed?: OnDemandCostOfRIHoursUsed;
     /**
-     * How much you saved due to purchasing and utilizing RIs. This is calculated by subtracting the TotalAmortizedFee from the OnDemandCostOfRIHoursUsed.
+     * How much you saved due to purchasing and utilizing RIs. AWS calculates this by subtracting TotalAmortizedFee from OnDemandCostOfRIHoursUsed.
      */
     NetRISavings?: NetRISavings;
     /**
@@ -605,7 +609,7 @@ declare namespace CostExplorer {
      */
     AccountScope?: AccountScope;
     /**
-     * How many days of previous usage that AWS takes into consideration when making this recommendation.
+     * How many days of previous usage that AWS considers when making this recommendation.
      */
     LookbackPeriodInDays?: LookbackPeriodInDays;
     /**

@@ -68,11 +68,11 @@ declare class TranscribeService extends Service {
    */
   startTranscriptionJob(callback?: (err: AWSError, data: TranscribeService.Types.StartTranscriptionJobResponse) => void): Request<TranscribeService.Types.StartTranscriptionJobResponse, AWSError>;
   /**
-   * Updates an existing vocabulary with new values.
+   * Updates an existing vocabulary with new values. The UpdateVocabulary operation overwrites all of the existing information with the values that you provide in the request.
    */
   updateVocabulary(params: TranscribeService.Types.UpdateVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyResponse) => void): Request<TranscribeService.Types.UpdateVocabularyResponse, AWSError>;
   /**
-   * Updates an existing vocabulary with new values.
+   * Updates an existing vocabulary with new values. The UpdateVocabulary operation overwrites all of the existing information with the values that you provide in the request.
    */
   updateVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyResponse) => void): Request<TranscribeService.Types.UpdateVocabularyResponse, AWSError>;
 }
@@ -242,6 +242,8 @@ declare namespace TranscribeService {
   export type MediaFormat = "mp3"|"mp4"|"wav"|"flac"|string;
   export type MediaSampleRateHertz = number;
   export type NextToken = string;
+  export type OutputBucketName = string;
+  export type OutputLocationType = "CUSTOMER_BUCKET"|"SERVICE_BUCKET"|string;
   export type Phrase = string;
   export type Phrases = Phrase[];
   export interface Settings {
@@ -260,7 +262,7 @@ declare namespace TranscribeService {
   }
   export interface StartTranscriptionJobRequest {
     /**
-     * The name of the job. The name must be unique within an AWS account.
+     * The name of the job. You can't use the strings "." or ".." in the job name. The name must be unique within an AWS account.
      */
     TranscriptionJobName: TranscriptionJobName;
     /**
@@ -280,6 +282,10 @@ declare namespace TranscribeService {
      */
     Media: Media;
     /**
+     * The location where the transcription is stored. If you set the OutputBucketName, Amazon Transcribe puts the transcription in the specified S3 bucket. When you call the GetTranscriptionJob operation, the operation returns this location in the TranscriptFileUri field. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see Permissions Required for IAM User Roles. If you don't set the OutputBucketName, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the TranscriptFileUri field. Use this URL to download the transcription.
+     */
+    OutputBucketName?: OutputBucketName;
+    /**
      * A Settings object that provides optional settings for a transcription job.
      */
     Settings?: Settings;
@@ -293,13 +299,13 @@ declare namespace TranscribeService {
   export type String = string;
   export interface Transcript {
     /**
-     * The S3 location where the transcription result is stored. Use this URI to access the results of the transcription job. 
+     * The location where the transcription is stored. Use this URI to access the transcription. If you specified an S3 bucket in the OutputBucketName field when you created the job, this is the URI of that bucket. If you chose to store the transcription in Amazon Transcribe, this is a shareable URL that provides secure access to that location.
      */
     TranscriptFileUri?: Uri;
   }
   export interface TranscriptionJob {
     /**
-     * A name to identify the transcription job.
+     * The name of the transcription job.
      */
     TranscriptionJobName?: TranscriptionJobName;
     /**
@@ -319,7 +325,7 @@ declare namespace TranscribeService {
      */
     MediaFormat?: MediaFormat;
     /**
-     * An object that describes the input media for a transcription job.
+     * An object that describes the input media for the transcription job.
      */
     Media?: Media;
     /**
@@ -327,11 +333,11 @@ declare namespace TranscribeService {
      */
     Transcript?: Transcript;
     /**
-     * Timestamp of the date and time that the job was created.
+     * A timestamp that shows when the job was created.
      */
     CreationTime?: DateTime;
     /**
-     * Timestamp of the date and time that the job completed.
+     * A timestamp that shows when the job was completed.
      */
     CompletionTime?: DateTime;
     /**
@@ -339,7 +345,7 @@ declare namespace TranscribeService {
      */
     FailureReason?: FailureReason;
     /**
-     * Optional settings for the transcription job.
+     * Optional settings for the transcription job. Use these settings to turn on speaker recognition, to set the maximum number of speakers that should be identified and to specify a custom vocabulary to use when processing the transcription job.
      */
     Settings?: Settings;
   }
@@ -348,15 +354,15 @@ declare namespace TranscribeService {
   export type TranscriptionJobSummaries = TranscriptionJobSummary[];
   export interface TranscriptionJobSummary {
     /**
-     * The name assigned to the transcription job when it was created.
+     * The name of the transcription job.
      */
     TranscriptionJobName?: TranscriptionJobName;
     /**
-     * Timestamp of the date and time that the job was created.
+     * A timestamp that shows when the job was created.
      */
     CreationTime?: DateTime;
     /**
-     * Timestamp of the date and time that the job completed.
+     * A timestamp that shows when the job was completed.
      */
     CompletionTime?: DateTime;
     /**
@@ -368,9 +374,13 @@ declare namespace TranscribeService {
      */
     TranscriptionJobStatus?: TranscriptionJobStatus;
     /**
-     * If the TranscriptionJobStatus field is FAILED, this field contains a description of the error.
+     * If the TranscriptionJobStatus field is FAILED, a description of the error.
      */
     FailureReason?: FailureReason;
+    /**
+     * Indicates the location of the output of the transcription job. If the value is CUSTOMER_BUCKET then the location is the S3 bucket specified in the outputBucketName field when the transcription job was started with the StartTranscriptionJob operation. If the value is SERVICE_BUCKET then the output is stored by Amazon Transcribe and can be retrieved using the URI in the GetTranscriptionJob response's TranscriptFileUri field.
+     */
+    OutputLocationType?: OutputLocationType;
   }
   export interface UpdateVocabularyRequest {
     /**

@@ -544,7 +544,11 @@ declare namespace DMS {
      */
     S3Settings?: S3Settings;
     /**
-     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
+     *  The settings in JSON format for the DMS Transfer type source endpoint.  Attributes include:   serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.   bucketName - The name of the S3 bucket to use.   compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.   Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string JSON syntax:  { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } 
+     */
+    DmsTransferSettings?: DmsTransferSettings;
+    /**
+     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service section at  Using MongoDB as a Target for AWS Database Migration Service. 
      */
     MongoDbSettings?: MongoDbSettings;
   }
@@ -704,7 +708,7 @@ declare namespace DMS {
      */
     ReplicationTaskSettings?: String;
     /**
-     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error. Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
      */
     CdcStartTime?: TStamp;
     /**
@@ -1207,6 +1211,16 @@ declare namespace DMS {
     Marker?: String;
   }
   export type DmsSslModeValue = "none"|"require"|"verify-ca"|"verify-full"|string;
+  export interface DmsTransferSettings {
+    /**
+     *  The IAM role that has permission to access the Amazon S3 bucket. 
+     */
+    ServiceAccessRoleArn?: String;
+    /**
+     *  The name of the S3 bucket to use. 
+     */
+    BucketName?: String;
+  }
   export interface DynamoDbSettings {
     /**
      *  The Amazon Resource Name (ARN) used by the service access IAM role. 
@@ -1290,6 +1304,10 @@ declare namespace DMS {
      * The settings for the S3 target endpoint. For more information, see the S3Settings structure.
      */
     S3Settings?: S3Settings;
+    /**
+     *  The settings in JSON format for the DMS Transfer type source endpoint.  Attributes include:   serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.   bucketName - The name of the S3 bucket to use.   compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.   Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string JSON syntax:  { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } 
+     */
+    DmsTransferSettings?: DmsTransferSettings;
     /**
      * The settings for the MongoDB source endpoint. For more information, see the MongoDbSettings structure.
      */
@@ -1490,6 +1508,10 @@ declare namespace DMS {
      */
     S3Settings?: S3Settings;
     /**
+     *  The settings in JSON format for the DMS Transfer type source endpoint.  Attributes include:   serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.   BucketName - The name of the S3 bucket to use.   compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.   Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string JSON syntax:  { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } 
+     */
+    DmsTransferSettings?: DmsTransferSettings;
+    /**
      * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
      */
     MongoDbSettings?: MongoDbSettings;
@@ -1622,7 +1644,7 @@ declare namespace DMS {
      */
     ReplicationTaskSettings?: String;
     /**
-     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error. Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
      */
     CdcStartTime?: TStamp;
     /**
@@ -1777,15 +1799,20 @@ declare namespace DMS {
     LastFailureMessage?: String;
   }
   export type RefreshSchemasStatusTypeValue = "successful"|"failed"|"refreshing"|string;
+  export type ReloadOptionValue = "data-reload"|"validate-only"|string;
   export interface ReloadTablesMessage {
     /**
-     * The Amazon Resource Name (ARN) of the replication instance. 
+     * The Amazon Resource Name (ARN) of the replication task. 
      */
     ReplicationTaskArn: String;
     /**
      * The name and schema of the table to be reloaded. 
      */
     TablesToReload: TableListToReload;
+    /**
+     * Options for reload. Specify data-reload to reload the data and re-validate it if validation is enabled. Specify validate-only to re-validate the table. This option applies only when validation is enabled for the task.  Valid values: data-reload, validate-only Default value is data-reload.
+     */
+    ReloadOption?: ReloadOptionValue;
   }
   export interface ReloadTablesResponse {
     /**
@@ -1957,7 +1984,7 @@ declare namespace DMS {
   export type ReplicationSubnetGroups = ReplicationSubnetGroup[];
   export interface ReplicationTask {
     /**
-     * The replication task identifier. Constraints:   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
+     * The user-assigned replication task identifier or name. Constraints:   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
      */
     ReplicationTaskIdentifier?: String;
     /**
@@ -2139,7 +2166,7 @@ declare namespace DMS {
      */
     StartReplicationTaskType: StartReplicationTaskTypeValue;
     /**
-     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error. Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
      */
     CdcStartTime?: TStamp;
     /**
@@ -2269,6 +2296,10 @@ declare namespace DMS {
      * The validation state of the table. The parameter can have the following values   Not enabled—Validation is not enabled for the table in the migration task.   Pending records—Some records in the table are waiting for validation.   Mismatched records—Some records in the table do not match between the source and target.   Suspended records—Some records in the table could not be validated.   No primary key—The table could not be validated because it had no primary key.   Table error—The table was not validated because it was in an error state and some data was not migrated.   Validated—All rows in the table were validated. If the table is updated, the status can change from Validated.   Error—The table could not be validated because of an unexpected error.  
      */
     ValidationState?: String;
+    /**
+     * Additional details about the state of validation.
+     */
+    ValidationStateDetails?: String;
   }
   export type TableStatisticsList = TableStatistics[];
   export interface TableToReload {

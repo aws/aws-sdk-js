@@ -808,7 +808,8 @@
         "dynamodb:index:ReadCapacityUnits",
         "dynamodb:index:WriteCapacityUnits",
         "rds:cluster:ReadReplicaCount",
-        "sagemaker:variant:DesiredInstanceCount"
+        "sagemaker:variant:DesiredInstanceCount",
+        "custom-resource:ResourceType:Property"
       ]
     },
     "ScalableTarget":{
@@ -1080,7 +1081,8 @@
         "appstream",
         "dynamodb",
         "rds",
-        "sagemaker"
+        "sagemaker",
+        "custom-resource"
       ]
     },
     "StepAdjustment":{

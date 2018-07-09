@@ -114,7 +114,10 @@
   "shapes":{
     "AccountScope":{
       "type":"string",
-      "enum":["PAYER"]
+      "enum":[
+        "PAYER",
+        "LINKED"
+      ]
     },
     "AmortizedRecurringFee":{"type":"string"},
     "AmortizedUpfrontFee":{"type":"string"},
@@ -378,7 +381,7 @@
         },
         "Metrics":{
           "shape":"MetricNames",
-          "documentation":"<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href=\"https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/\">Why does the \"blended\" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>BlendedCost</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>.</p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate <code>usageQuantity</code> across all of EC2, the results aren't meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note> <p> <code>Metrics</code> is required for <code>GetCostAndUsage</code> requests.</p>"
+          "documentation":"<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href=\"https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/\">Why does the \"blended\" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>AmortizedCost</code>, <code>BlendedCost</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>.</p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate <code>usageQuantity</code> across all of EC2, the results aren't meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note> <p> <code>Metrics</code> is required for <code>GetCostAndUsage</code> requests.</p>"
         },
         "GroupBy":{
           "shape":"GroupDefinitions",
@@ -480,7 +483,7 @@
         },
         "Filter":{
           "shape":"Expression",
-          "documentation":"<p>Filters utilization data by dimensions. You can filter by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul> <p> <code>GetReservationCoverage</code> uses the same <code> <a href=\"http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> </code> object as the other operations, but only <code>AND</code> is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR'd together.</p>"
+          "documentation":"<p>Filters utilization data by dimensions. You can filter by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul> <p> <code>GetReservationCoverage</code> uses the same <code> <a href=\"http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> </code> object as the other operations, but only <code>AND</code> is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR'd together.</p> <p>If you don't provide a <code>SERVICE</code> filter, Cost Explorer defaults to EC2.</p>"
         },
         "NextPageToken":{
           "shape":"NextPageToken",
@@ -521,7 +524,7 @@
         },
         "AccountScope":{
           "shape":"AccountScope",
-          "documentation":"<p>The account scope that you want recommendations for. The only valid value is <code>Payer</code>. This means that AWS includes the master account and any member accounts when it calculates its recommendations.</p>"
+          "documentation":"<p>The account scope that you want recommendations for. <code>PAYER</code> means that AWS includes the master account and any member accounts when it calculates its recommendations. <code>LINKED</code> means that AWS includes only member accounts when it calculates its recommendations.</p> <p>Valid values are <code>PAYER</code> and <code>LINKED</code>.</p>"
         },
         "LookbackPeriodInDays":{
           "shape":"LookbackPeriodInDays",
@@ -822,9 +825,13 @@
           "shape":"GenericString",
           "documentation":"<p>The database engine that the recommended reservation supports.</p>"
         },
+        "DatabaseEdition":{
+          "shape":"GenericString",
+          "documentation":"<p>The database edition that the recommended reservation supports.</p>"
+        },
         "DeploymentOption":{
           "shape":"GenericString",
-          "documentation":"<p>Whether the recommendation is for a reservation in a single availability zone or a reservation with a backup in a second availability zone.</p>"
+          "documentation":"<p>Whether the recommendation is for a reservation in a single Availability Zone or a reservation with a backup in a second Availability Zone.</p>"
         },
         "LicenseModel":{
           "shape":"GenericString",
@@ -874,7 +881,7 @@
         },
         "NetRISavings":{
           "shape":"NetRISavings",
-          "documentation":"<p>How much you saved due to purchasing and utilizing RIs. This is calculated by subtracting the <code>TotalAmortizedFee</code> from the <code>OnDemandCostOfRIHoursUsed</code>.</p>"
+          "documentation":"<p>How much you saved due to purchasing and utilizing RIs. AWS calculates this by subtracting <code>TotalAmortizedFee</code> from <code>OnDemandCostOfRIHoursUsed</code>.</p>"
         },
         "TotalPotentialRISavings":{
           "shape":"TotalPotentialRISavings",
@@ -893,7 +900,7 @@
           "documentation":"<p>The total cost of your RI, amortized over the RI period.</p>"
         }
       },
-      "documentation":"<p>The aggregated numbers for your RI usage.</p>"
+      "documentation":"<p>The aggregated numbers for your Reserved Instance (RI) usage.</p>"
     },
     "ReservationCoverageGroup":{
       "type":"structure",
@@ -924,7 +931,7 @@
         },
         "LookbackPeriodInDays":{
           "shape":"LookbackPeriodInDays",
-          "documentation":"<p>How many days of previous usage that AWS takes into consideration when making this recommendation.</p>"
+          "documentation":"<p>How many days of previous usage that AWS considers when making this recommendation.</p>"
         },
         "TermInYears":{
           "shape":"TermInYears",
@@ -1061,7 +1068,7 @@
           "documentation":"<p>The currency code used for this recommendation.</p>"
         }
       },
-      "documentation":"<p>A summary about this recommendation, such as the currency code, the amount that AWS estimates you could save, and the total amount of reservation to purchase.</p>"
+      "documentation":"<p>A summary about this recommendation, such as the currency code, the amount that AWS estimates that you could save, and the total amount of reservation to purchase.</p>"
     },
     "ReservationPurchaseRecommendations":{
       "type":"list",
@@ -1087,7 +1094,7 @@
           "documentation":"<p>How much you used this group of RIs.</p>"
         }
       },
-      "documentation":"<p>A group of RIs that share a set of attributes.</p>"
+      "documentation":"<p>A group of Reserved Instances (RIs) that share a set of attributes.</p>"
     },
     "ReservationUtilizationGroups":{
       "type":"list",

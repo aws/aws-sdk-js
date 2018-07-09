@@ -6,6 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"Amazon Transcribe Service",
+    "serviceId":"Transcribe",
     "signatureVersion":"v4",
     "signingName":"transcribe",
     "targetPrefix":"Transcribe",
@@ -38,6 +39,7 @@
       "errors":[
         {"shape":"NotFoundException"},
         {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
         {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Deletes a vocabulary from Amazon Transcribe. </p>"
@@ -132,9 +134,10 @@
         {"shape":"BadRequestException"},
         {"shape":"LimitExceededException"},
         {"shape":"InternalFailureException"},
-        {"shape":"NotFoundException"}
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"}
       ],
-      "documentation":"<p>Updates an existing vocabulary with new values.</p>"
+      "documentation":"<p>Updates an existing vocabulary with new values. The <code>UpdateVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request.</p>"
     }
   },
   "shapes":{
@@ -143,7 +146,7 @@
       "members":{
         "Message":{"shape":"FailureReason"}
       },
-      "documentation":"<p>Your request didn't pass one or more validation tests. For example, a name already exists when createing a resource or a name may not exist when getting a transcription job or custom vocabulary. See the exception <code>Message</code> field for more information.</p>",
+      "documentation":"<p>Your request didn't pass one or more validation tests. For example, a name already exists when creating a resource or a name may not exist when getting a transcription job or custom vocabulary. See the exception <code>Message</code> field for more information.</p>",
       "exception":true
     },
     "Boolean":{"type":"boolean"},
@@ -152,7 +155,7 @@
       "members":{
         "Message":{"shape":"String"}
       },
-      "documentation":"<p>The <code>JobName</code> field is a duplicate of a previously entered job name. Resend your request with a different name.</p>",
+      "documentation":"<p>When you are using the <code>StartTranscriptionJob</code> operation, the <code>JobName</code> field is a duplicate of a previously entered job name. Resend your request with a different name.</p> <p>When you are using the <code>UpdateVocabulary</code> operation, there are two jobs running at the same time. Resend the second request later.</p>",
       "exception":true
     },
     "CreateVocabularyRequest":{
@@ -415,8 +418,19 @@
       "members":{
         "Message":{"shape":"String"}
       },
-      "documentation":"<p>We can't find the requested transcription job or custom vocabulary. Check the name and try your request again.</p>",
+      "documentation":"<p>We can't find the requested resource. Check the name and try your request again.</p>",
       "exception":true
+    },
+    "OutputBucketName":{
+      "type":"string",
+      "pattern":"[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"
+    },
+    "OutputLocationType":{
+      "type":"string",
+      "enum":[
+        "CUSTOMER_BUCKET",
+        "SERVICE_BUCKET"
+      ]
     },
     "Phrase":{
       "type":"string",
@@ -456,7 +470,7 @@
       "members":{
         "TranscriptionJobName":{
           "shape":"TranscriptionJobName",
-          "documentation":"<p>The name of the job. The name must be unique within an AWS account.</p>"
+          "documentation":"<p>The name of the job. You can't use the strings \".\" or \"..\" in the job name. The name must be unique within an AWS account.</p>"
         },
         "LanguageCode":{
           "shape":"LanguageCode",
@@ -473,6 +487,10 @@
         "Media":{
           "shape":"Media",
           "documentation":"<p>An object that describes the input media for a transcription job.</p>"
+        },
+        "OutputBucketName":{
+          "shape":"OutputBucketName",
+          "documentation":"<p>The location where the transcription is stored.</p> <p>If you set the <code>OutputBucketName</code>, Amazon Transcribe puts the transcription in the specified S3 bucket. When you call the <a>GetTranscriptionJob</a> operation, the operation returns this location in the <code>TranscriptFileUri</code> field. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user\">Permissions Required for IAM User Roles</a>.</p> <p>If you don't set the <code>OutputBucketName</code>, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the <code>TranscriptFileUri</code> field. Use this URL to download the transcription.</p>"
         },
         "Settings":{
           "shape":"Settings",
@@ -495,17 +513,17 @@
       "members":{
         "TranscriptFileUri":{
           "shape":"Uri",
-          "documentation":"<p>The S3 location where the transcription result is stored. Use this URI to access the results of the transcription job. </p>"
+          "documentation":"<p>The location where the transcription is stored.</p> <p>Use this URI to access the transcription. If you specified an S3 bucket in the <code>OutputBucketName</code> field when you created the job, this is the URI of that bucket. If you chose to store the transcription in Amazon Transcribe, this is a shareable URL that provides secure access to that location.</p>"
         }
       },
-      "documentation":"<p>Describes the output of a transcription job.</p>"
+      "documentation":"<p>Identifies the location of a transcription.</p>"
     },
     "TranscriptionJob":{
       "type":"structure",
       "members":{
         "TranscriptionJobName":{
           "shape":"TranscriptionJobName",
-          "documentation":"<p>A name to identify the transcription job.</p>"
+          "documentation":"<p>The name of the transcription job.</p>"
         },
         "TranscriptionJobStatus":{
           "shape":"TranscriptionJobStatus",
@@ -525,7 +543,7 @@
         },
         "Media":{
           "shape":"Media",
-          "documentation":"<p>An object that describes the input media for a transcription job.</p>"
+          "documentation":"<p>An object that describes the input media for the transcription job.</p>"
         },
         "Transcript":{
           "shape":"Transcript",
@@ -533,11 +551,11 @@
         },
         "CreationTime":{
           "shape":"DateTime",
-          "documentation":"<p>Timestamp of the date and time that the job was created.</p>"
+          "documentation":"<p>A timestamp that shows when the job was created.</p>"
         },
         "CompletionTime":{
           "shape":"DateTime",
-          "documentation":"<p>Timestamp of the date and time that the job completed.</p>"
+          "documentation":"<p>A timestamp that shows when the job was completed.</p>"
         },
         "FailureReason":{
           "shape":"FailureReason",
@@ -545,7 +563,7 @@
         },
         "Settings":{
           "shape":"Settings",
-          "documentation":"<p>Optional settings for the transcription job.</p>"
+          "documentation":"<p>Optional settings for the transcription job. Use these settings to turn on speaker recognition, to set the maximum number of speakers that should be identified and to specify a custom vocabulary to use when processing the transcription job.</p>"
         }
       },
       "documentation":"<p>Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation.</p>"
@@ -573,15 +591,15 @@
       "members":{
         "TranscriptionJobName":{
           "shape":"TranscriptionJobName",
-          "documentation":"<p>The name assigned to the transcription job when it was created.</p>"
+          "documentation":"<p>The name of the transcription job.</p>"
         },
         "CreationTime":{
           "shape":"DateTime",
-          "documentation":"<p>Timestamp of the date and time that the job was created.</p>"
+          "documentation":"<p>A timestamp that shows when the job was created.</p>"
         },
         "CompletionTime":{
           "shape":"DateTime",
-          "documentation":"<p>Timestamp of the date and time that the job completed.</p>"
+          "documentation":"<p>A timestamp that shows when the job was completed.</p>"
         },
         "LanguageCode":{
           "shape":"LanguageCode",
@@ -593,7 +611,11 @@
         },
         "FailureReason":{
           "shape":"FailureReason",
-          "documentation":"<p>If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, this field contains a description of the error.</p>"
+          "documentation":"<p>If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, a description of the error.</p>"
+        },
+        "OutputLocationType":{
+          "shape":"OutputLocationType",
+          "documentation":"<p>Indicates the location of the output of the transcription job.</p> <p>If the value is <code>CUSTOMER_BUCKET</code> then the location is the S3 bucket specified in the <code>outputBucketName</code> field when the transcription job was started with the <code>StartTranscriptionJob</code> operation.</p> <p>If the value is <code>SERVICE_BUCKET</code> then the output is stored by Amazon Transcribe and can be retrieved using the URI in the <code>GetTranscriptionJob</code> response's <code>TranscriptFileUri</code> field.</p>"
         }
       },
       "documentation":"<p>Provides a summary of information about a transcription job.</p>"
