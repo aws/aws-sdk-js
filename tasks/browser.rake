@@ -24,6 +24,10 @@ def sdk_version
   JSON.parse(File.read('package.json'))['version']
 end
 
+def excluded_files(name)
+  name.start_with?("test/react-native/") || name.start_with?("test/publisher/functional_test")
+end
+
 namespace :browser do
   $BUILDER = "node dist-tools/browser-builder.js"
   $BROWSERIFY = "browserify"
@@ -74,7 +78,7 @@ namespace :browser do
     mkdir_p "test/browser/build"
     cp "dist/aws-sdk-all.js", "test/browser/build/aws-sdk-all.js"
     files = "test/helpers.js ";
-    files += Dir.glob("test/**/*.spec.js").delete_if{|name| name.start_with?("test/react-native/")}.join(" ")
+    files += Dir.glob("test/**/*.spec.js").delete_if{|name| excluded_files(name)}.join(" ")
     sh({"SERVICES" => "all"}, $BROWSERIFY +
        " -i domain #{files} > #{$BROWSERIFY_TEST}")
     rm_f "test/configuration.js"
