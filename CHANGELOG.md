@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.271.1-->
+<!--LATEST=2.272.1-->
 <!--ENTRYINSERT-->
+
+## 2.272.1
+* feature: AppStream: This API update adds pagination to the DescribeImages API to support future features and enhancements.
+* feature: CodeBuild: API changes to CodeBuild service, support report build status for Github sources
+* feature: EC2: Support CpuOptions field in Launch Template data and allow Launch Template name to contain hyphen.
+* feature: Glue: AWS Glue adds the ability to crawl DynamoDB tables.
 
 ## 2.271.1
 * feature: ApplicationAutoScaling: The release adds support for custom resource auto scaling.

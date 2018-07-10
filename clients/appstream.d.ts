@@ -720,17 +720,30 @@ declare namespace AppStream {
      */
     NextToken?: String;
   }
+  export type DescribeImagesMaxResults = number;
   export interface DescribeImagesRequest {
     /**
      * The names of the images to describe.
      */
     Names?: StringList;
+    /**
+     * The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each results page.
+     */
+    MaxResults?: DescribeImagesMaxResults;
   }
   export interface DescribeImagesResult {
     /**
      * Information about the images.
      */
     Images?: ImageList;
+    /**
+     * The pagination token used to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     */
+    NextToken?: String;
   }
   export interface DescribeSessionsRequest {
     /**
@@ -1247,7 +1260,7 @@ declare namespace AppStream {
      */
     UserSettings?: UserSettingList;
   }
-  export type StackAttribute = "STORAGE_CONNECTORS"|"STORAGE_CONNECTOR_HOMEFOLDERS"|"STORAGE_CONNECTOR_GOOGLE_DRIVE"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|string;
+  export type StackAttribute = "STORAGE_CONNECTORS"|"STORAGE_CONNECTOR_HOMEFOLDERS"|"STORAGE_CONNECTOR_GOOGLE_DRIVE"|"STORAGE_CONNECTOR_ONE_DRIVE"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|string;
   export type StackAttributes = StackAttribute[];
   export interface StackError {
     /**
@@ -1321,7 +1334,7 @@ declare namespace AppStream {
     Domains?: DomainList;
   }
   export type StorageConnectorList = StorageConnector[];
-  export type StorageConnectorType = "HOMEFOLDERS"|"GOOGLE_DRIVE"|string;
+  export type StorageConnectorType = "HOMEFOLDERS"|"GOOGLE_DRIVE"|"ONE_DRIVE"|string;
   export type StreamingUrlUserId = string;
   export type String = string;
   export type StringList = String[];

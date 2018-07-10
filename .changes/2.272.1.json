@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "This API update adds pagination to the DescribeImages API to support future features and enhancements."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "API changes to CodeBuild service, support report build status for Github sources"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Support CpuOptions field in Launch Template data and allow Launch Template name to contain hyphen."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "AWS Glue adds the ability to crawl DynamoDB tables."
+    }
+]

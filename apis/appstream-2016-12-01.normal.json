@@ -1133,12 +1133,26 @@
         }
       }
     },
+    "DescribeImagesMaxResults":{
+      "type":"integer",
+      "box":true,
+      "max":25,
+      "min":0
+    },
     "DescribeImagesRequest":{
       "type":"structure",
       "members":{
         "Names":{
           "shape":"StringList",
           "documentation":"<p>The names of the images to describe.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.</p>"
+        },
+        "MaxResults":{
+          "shape":"DescribeImagesMaxResults",
+          "documentation":"<p>The maximum size of each results page.</p>"
         }
       }
     },
@@ -1148,6 +1162,10 @@
         "Images":{
           "shape":"ImageList",
           "documentation":"<p>Information about the images.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The pagination token used to retrieve the next page of results. If this value is empty, only the first page is retrieved.</p>"
         }
       }
     },
@@ -2064,6 +2082,7 @@
         "STORAGE_CONNECTORS",
         "STORAGE_CONNECTOR_HOMEFOLDERS",
         "STORAGE_CONNECTOR_GOOGLE_DRIVE",
+        "STORAGE_CONNECTOR_ONE_DRIVE",
         "REDIRECT_URL",
         "FEEDBACK_URL",
         "THEME_NAME",
@@ -2206,7 +2225,8 @@
       "documentation":"<p>The type of storage connector.</p>",
       "enum":[
         "HOMEFOLDERS",
-        "GOOGLE_DRIVE"
+        "GOOGLE_DRIVE",
+        "ONE_DRIVE"
       ]
     },
     "StreamingUrlUserId":{

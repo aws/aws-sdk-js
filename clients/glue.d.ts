@@ -84,11 +84,11 @@ declare class Glue extends Service {
    */
   createConnection(callback?: (err: AWSError, data: Glue.Types.CreateConnectionResponse) => void): Request<Glue.Types.CreateConnectionResponse, AWSError>;
   /**
-   * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the s3Targets or the jdbcTargets field.
+   * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the s3Targets field, the jdbcTargets field, or the DynamoDBTargets field.
    */
   createCrawler(params: Glue.Types.CreateCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
   /**
-   * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the s3Targets or the jdbcTargets field.
+   * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the s3Targets field, the jdbcTargets field, or the DynamoDBTargets field.
    */
   createCrawler(callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
   /**
@@ -492,11 +492,11 @@ declare class Glue extends Service {
    */
   resetJobBookmark(callback?: (err: AWSError, data: Glue.Types.ResetJobBookmarkResponse) => void): Request<Glue.Types.ResetJobBookmarkResponse, AWSError>;
   /**
-   * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.
+   * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a CrawlerRunningException.
    */
   startCrawler(params: Glue.Types.StartCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.StartCrawlerResponse) => void): Request<Glue.Types.StartCrawlerResponse, AWSError>;
   /**
-   * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.
+   * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a CrawlerRunningException.
    */
   startCrawler(callback?: (err: AWSError, data: Glue.Types.StartCrawlerResponse) => void): Request<Glue.Types.StartCrawlerResponse, AWSError>;
   /**
@@ -1117,7 +1117,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
   }
@@ -1169,6 +1169,10 @@ declare namespace Glue {
      * Specifies JDBC targets.
      */
     JdbcTargets?: JdbcTargetList;
+    /**
+     * Specifies DynamoDB targets.
+     */
+    DynamoDBTargets?: DynamoDBTargetList;
   }
   export interface CreateClassifierRequest {
     /**
@@ -1224,7 +1228,7 @@ declare namespace Glue {
      */
     Schedule?: CronExpression;
     /**
-     * A list of custom classifiers that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
+     * A list of custom classifiers that the user has registered. By default, all built-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
      */
     Classifiers?: ClassifierNameList;
     /**
@@ -1236,7 +1240,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
   }
@@ -1839,6 +1843,13 @@ declare namespace Glue {
     ExtraJarsS3Path?: GenericString;
   }
   export type DevEndpointList = DevEndpoint[];
+  export interface DynamoDBTarget {
+    /**
+     * The name of the DynamoDB table to crawl.
+     */
+    Path?: Path;
+  }
+  export type DynamoDBTargetList = DynamoDBTarget[];
   export type ErrorByName = {[key: string]: ErrorDetail};
   export interface ErrorDetail {
     /**
@@ -2820,6 +2831,10 @@ declare namespace Glue {
      * An Amazon S3 location.
      */
     S3?: CodeGenNodeArgs;
+    /**
+     * A DynamoDB Table location.
+     */
+    DynamoDB?: CodeGenNodeArgs;
   }
   export type LocationMap = {[key: string]: ColumnValuesString};
   export type LocationString = string;
@@ -3521,7 +3536,7 @@ declare namespace Glue {
      */
     Schedule?: CronExpression;
     /**
-     * A list of custom classifiers that the user has registered. By default, all classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
+     * A list of custom classifiers that the user has registered. By default, all built-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
      */
     Classifiers?: ClassifierNameList;
     /**
@@ -3533,7 +3548,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
   }
