@@ -180,6 +180,54 @@ declare namespace CostExplorer {
      */
     OfferingClass?: OfferingClass;
   }
+  export interface ESInstanceDetails {
+    /**
+     * The class of instance that AWS recommends.
+     */
+    InstanceClass?: GenericString;
+    /**
+     * The size of instance that AWS recommends.
+     */
+    InstanceSize?: GenericString;
+    /**
+     * The AWS Region of the recommended reservation.
+     */
+    Region?: GenericString;
+    /**
+     * Whether the recommendation is for a current generation instance.
+     */
+    CurrentGeneration?: GenericBoolean;
+    /**
+     * Whether the recommended reservation is size flexible.
+     */
+    SizeFlexEligible?: GenericBoolean;
+  }
+  export interface ElastiCacheInstanceDetails {
+    /**
+     * The instance family of the recommended reservation.
+     */
+    Family?: GenericString;
+    /**
+     * The type of node that AWS recommends.
+     */
+    NodeType?: GenericString;
+    /**
+     * The AWS Region of the recommended reservation.
+     */
+    Region?: GenericString;
+    /**
+     * The description of the recommended reservation.
+     */
+    ProductDescription?: GenericString;
+    /**
+     * Whether the recommendation is for a current generation instance.
+     */
+    CurrentGeneration?: GenericBoolean;
+    /**
+     * Whether the recommended reservation is size flexible.
+     */
+    SizeFlexEligible?: GenericBoolean;
+  }
   export type Entity = string;
   export type ErrorMessage = string;
   export type Estimated = boolean;
@@ -482,6 +530,18 @@ declare namespace CostExplorer {
      * The RDS instances that AWS recommends that you purchase.
      */
     RDSInstanceDetails?: RDSInstanceDetails;
+    /**
+     * The Amazon Redshift instances that AWS recommends that you purchase.
+     */
+    RedshiftInstanceDetails?: RedshiftInstanceDetails;
+    /**
+     * The ElastiCache instances that AWS recommends that you purchase.
+     */
+    ElastiCacheInstanceDetails?: ElastiCacheInstanceDetails;
+    /**
+     * The Amazon ES instances that AWS recommends that you purchase.
+     */
+    ESInstanceDetails?: ESInstanceDetails;
   }
   export type Key = string;
   export type Keys = Key[];
@@ -508,7 +568,7 @@ declare namespace CostExplorer {
   export type OnDemandCostOfRIHoursUsed = string;
   export type OnDemandHours = string;
   export type PageSize = number;
-  export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|string;
+  export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|"LIGHT_UTILIZATION"|"MEDIUM_UTILIZATION"|"HEAVY_UTILIZATION"|string;
   export type PurchasedHours = string;
   export interface RDSInstanceDetails {
     /**
@@ -541,6 +601,28 @@ declare namespace CostExplorer {
     LicenseModel?: GenericString;
     /**
      * Whether the recommendation is for a current generation instance. 
+     */
+    CurrentGeneration?: GenericBoolean;
+    /**
+     * Whether the recommended reservation is size flexible.
+     */
+    SizeFlexEligible?: GenericBoolean;
+  }
+  export interface RedshiftInstanceDetails {
+    /**
+     * The instance family of the recommended reservation.
+     */
+    Family?: GenericString;
+    /**
+     * The type of node that AWS recommends.
+     */
+    NodeType?: GenericString;
+    /**
+     * The AWS Region of the recommended reservation.
+     */
+    Region?: GenericString;
+    /**
+     * Whether the recommendation is for a current generation instance.
      */
     CurrentGeneration?: GenericBoolean;
     /**

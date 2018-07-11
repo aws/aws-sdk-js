@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.272.1-->
+<!--LATEST=2.273.1-->
 <!--ENTRYINSERT-->
+
+## 2.273.1
+* feature: APIGateway: Support for fine grain throttling for API gateway. 
+* feature: CostExplorer: Starting today, you can access custom Reserved Instance (RI) purchase recommendations for your Amazon Redshift, Amazon ElastiCache, and Amazon Elasticsearch reservations via AWS Cost Explorer API, in addition to accessing RI purchase recommendations for your Amazon EC2 and Amazon RDS reservations.
+* feature: S3: S3 Select support for BZIP2 compressed input files
+* feature: SSM: Support Conditional Branching OnFailure for SSM Automation
 
 ## 2.272.1
 * feature: AppStream: This API update adds pagination to the DescribeImages API to support future features and enhancements.

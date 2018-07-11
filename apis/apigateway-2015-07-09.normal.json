@@ -2114,6 +2114,10 @@
         "stage":{
           "shape":"String",
           "documentation":"<p>API stage name of the associated API stage in a usage plan.</p>"
+        },
+        "throttle":{
+          "shape":"MapOfApiStageThrottleSettings",
+          "documentation":"<p>Map containing method level throttling information for API stage in a usage plan.</p>"
         }
       },
       "documentation":"<p>API stage name of the associated API stage in a usage plan.</p>"
@@ -5117,6 +5121,11 @@
       ]
     },
     "Long":{"type":"long"},
+    "MapOfApiStageThrottleSettings":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"ThrottleSettings"}
+    },
     "MapOfHeaderValues":{
       "type":"map",
       "key":{"shape":"String"},

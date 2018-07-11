@@ -6643,7 +6643,8 @@
         "Message":{"shape":"String"}
       },
       "documentation":"<p>An error occurred on the server side.</p>",
-      "exception":true
+      "exception":true,
+      "fault":true
     },
     "InvalidActivation":{
       "type":"structure",
@@ -10320,6 +10321,25 @@
         "OverriddenParameters":{
           "shape":"AutomationParameterMap",
           "documentation":"<p>A user-specified list of parameters to override when executing a step.</p>"
+        },
+        "IsEnd":{
+          "shape":"Boolean",
+          "documentation":"<p>Enable this option to stop an Automation execution at the end of a specific step. The Automation execution stops if the step execution failed or succeeded.</p>",
+          "box":true
+        },
+        "NextStep":{
+          "shape":"String",
+          "documentation":"<p>Specifies which step in an Automation to process next after successfully completing a step. </p>",
+          "box":true
+        },
+        "IsCritical":{
+          "shape":"Boolean",
+          "documentation":"<p>Enable this option to designate a step as critical for the successful completion of the Automation. If a step with this designation fails, then Automation reports the final status of the Automation as Failed. </p>",
+          "box":true
+        },
+        "ValidNextSteps":{
+          "shape":"ValidNextStepList",
+          "documentation":"<p>ValidNextSteps offer different strategies for managing an Automation workflow when a step finishes. Automation dynamically processes ValidNextSteps when a step is completed. For example, you can specify <code>Abort</code> to stop the Automation when a step fails or <code>Continue</code> to ignore the failure of the current step and allow Automation to continue processing the next step. You can also specify <code>step:<i>step_name</i> </code> to jump to a designated step after a step succeeds. The result of the current step dynamically determines the ValidNextSteps. If a step finishes and no ValidNextStep is designated, then the Automation stops.</p>"
         }
       },
       "documentation":"<p>Detailed information about an the execution state of an Automation step.</p>"
@@ -11126,6 +11146,15 @@
       }
     },
     "Url":{"type":"string"},
+    "ValidNextStep":{
+      "type":"string",
+      "max":65535,
+      "min":1
+    },
+    "ValidNextStepList":{
+      "type":"list",
+      "member":{"shape":"ValidNextStep"}
+    },
     "Version":{
       "type":"string",
       "pattern":"^[0-9]{1,6}(\\.[0-9]{1,6}){2,3}$"

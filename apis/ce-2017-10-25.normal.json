@@ -329,6 +329,62 @@
       },
       "documentation":"<p>The EC2 hardware specifications that you want AWS to provide recommendations for.</p>"
     },
+    "ESInstanceDetails":{
+      "type":"structure",
+      "members":{
+        "InstanceClass":{
+          "shape":"GenericString",
+          "documentation":"<p>The class of instance that AWS recommends.</p>"
+        },
+        "InstanceSize":{
+          "shape":"GenericString",
+          "documentation":"<p>The size of instance that AWS recommends.</p>"
+        },
+        "Region":{
+          "shape":"GenericString",
+          "documentation":"<p>The AWS Region of the recommended reservation.</p>"
+        },
+        "CurrentGeneration":{
+          "shape":"GenericBoolean",
+          "documentation":"<p>Whether the recommendation is for a current generation instance.</p>"
+        },
+        "SizeFlexEligible":{
+          "shape":"GenericBoolean",
+          "documentation":"<p>Whether the recommended reservation is size flexible.</p>"
+        }
+      },
+      "documentation":"<p>Details about the ES instances that AWS recommends that you purchase.</p>"
+    },
+    "ElastiCacheInstanceDetails":{
+      "type":"structure",
+      "members":{
+        "Family":{
+          "shape":"GenericString",
+          "documentation":"<p>The instance family of the recommended reservation.</p>"
+        },
+        "NodeType":{
+          "shape":"GenericString",
+          "documentation":"<p>The type of node that AWS recommends.</p>"
+        },
+        "Region":{
+          "shape":"GenericString",
+          "documentation":"<p>The AWS Region of the recommended reservation.</p>"
+        },
+        "ProductDescription":{
+          "shape":"GenericString",
+          "documentation":"<p>The description of the recommended reservation.</p>"
+        },
+        "CurrentGeneration":{
+          "shape":"GenericBoolean",
+          "documentation":"<p>Whether the recommendation is for a current generation instance.</p>"
+        },
+        "SizeFlexEligible":{
+          "shape":"GenericBoolean",
+          "documentation":"<p>Whether the recommended reservation is size flexible.</p>"
+        }
+      },
+      "documentation":"<p>Details about the ElastiCache instances that AWS recommends that you purchase.</p>"
+    },
     "Entity":{"type":"string"},
     "ErrorMessage":{"type":"string"},
     "Estimated":{"type":"boolean"},
@@ -722,6 +778,18 @@
         "RDSInstanceDetails":{
           "shape":"RDSInstanceDetails",
           "documentation":"<p>The RDS instances that AWS recommends that you purchase.</p>"
+        },
+        "RedshiftInstanceDetails":{
+          "shape":"RedshiftInstanceDetails",
+          "documentation":"<p>The Amazon Redshift instances that AWS recommends that you purchase.</p>"
+        },
+        "ElastiCacheInstanceDetails":{
+          "shape":"ElastiCacheInstanceDetails",
+          "documentation":"<p>The ElastiCache instances that AWS recommends that you purchase.</p>"
+        },
+        "ESInstanceDetails":{
+          "shape":"ESInstanceDetails",
+          "documentation":"<p>The Amazon ES instances that AWS recommends that you purchase.</p>"
         }
       },
       "documentation":"<p>Details about the instances that AWS recommends that you purchase.</p>"
@@ -802,7 +870,10 @@
       "enum":[
         "NO_UPFRONT",
         "PARTIAL_UPFRONT",
-        "ALL_UPFRONT"
+        "ALL_UPFRONT",
+        "LIGHT_UTILIZATION",
+        "MEDIUM_UTILIZATION",
+        "HEAVY_UTILIZATION"
       ]
     },
     "PurchasedHours":{"type":"string"},
@@ -847,6 +918,32 @@
         }
       },
       "documentation":"<p>Details about the RDS instances that AWS recommends that you purchase.</p>"
+    },
+    "RedshiftInstanceDetails":{
+      "type":"structure",
+      "members":{
+        "Family":{
+          "shape":"GenericString",
+          "documentation":"<p>The instance family of the recommended reservation.</p>"
+        },
+        "NodeType":{
+          "shape":"GenericString",
+          "documentation":"<p>The type of node that AWS recommends.</p>"
+        },
+        "Region":{
+          "shape":"GenericString",
+          "documentation":"<p>The AWS Region of the recommended reservation.</p>"
+        },
+        "CurrentGeneration":{
+          "shape":"GenericBoolean",
+          "documentation":"<p>Whether the recommendation is for a current generation instance.</p>"
+        },
+        "SizeFlexEligible":{
+          "shape":"GenericBoolean",
+          "documentation":"<p>Whether the recommended reservation is size flexible.</p>"
+        }
+      },
+      "documentation":"<p>Details about the Amazon Redshift instances that AWS recommends that you purchase.</p>"
     },
     "RequestChangedException":{
       "type":"structure",

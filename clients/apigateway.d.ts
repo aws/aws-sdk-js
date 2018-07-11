@@ -1071,6 +1071,10 @@ declare namespace APIGateway {
      * API stage name of the associated API stage in a usage plan.
      */
     stage?: String;
+    /**
+     * Map containing method level throttling information for API stage in a usage plan.
+     */
+    throttle?: MapOfApiStageThrottleSettings;
   }
   export interface Authorizer {
     /**
@@ -2771,6 +2775,7 @@ declare namespace APIGateway {
   export type ListOfVpcLink = VpcLink[];
   export type LocationStatusType = "DOCUMENTED"|"UNDOCUMENTED"|string;
   export type Long = number;
+  export type MapOfApiStageThrottleSettings = {[key: string]: ThrottleSettings};
   export type MapOfHeaderValues = {[key: string]: String};
   export type MapOfIntegrationResponse = {[key: string]: IntegrationResponse};
   export type MapOfKeyUsages = {[key: string]: ListOfUsage};

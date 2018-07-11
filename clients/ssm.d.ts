@@ -6192,6 +6192,22 @@ declare namespace SSM {
      * A user-specified list of parameters to override when executing a step.
      */
     OverriddenParameters?: AutomationParameterMap;
+    /**
+     * Enable this option to stop an Automation execution at the end of a specific step. The Automation execution stops if the step execution failed or succeeded.
+     */
+    IsEnd?: Boolean;
+    /**
+     * Specifies which step in an Automation to process next after successfully completing a step. 
+     */
+    NextStep?: String;
+    /**
+     * Enable this option to designate a step as critical for the successful completion of the Automation. If a step with this designation fails, then Automation reports the final status of the Automation as Failed. 
+     */
+    IsCritical?: Boolean;
+    /**
+     * ValidNextSteps offer different strategies for managing an Automation workflow when a step finishes. Automation dynamically processes ValidNextSteps when a step is completed. For example, you can specify Abort to stop the Automation when a step fails or Continue to ignore the failure of the current step and allow Automation to continue processing the next step. You can also specify step:step_name  to jump to a designated step after a step succeeds. The result of the current step dynamically determines the ValidNextSteps. If a step finishes and no ValidNextStep is designated, then the Automation stops.
+     */
+    ValidNextSteps?: ValidNextStepList;
   }
   export interface StepExecutionFilter {
     /**
@@ -6717,6 +6733,8 @@ declare namespace SSM {
     Sources?: PatchSourceList;
   }
   export type Url = string;
+  export type ValidNextStep = string;
+  export type ValidNextStepList = ValidNextStep[];
   export type Version = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
