@@ -272,6 +272,14 @@ declare class IAM extends Service {
    */
   deleteRole(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the permissions boundary for the specified IAM role.   Deleting the permissions boundary for a role might increase its permissions by allowing anyone who assumes the role to perform all the actions granted in its permissions policies.  
+   */
+  deleteRolePermissionsBoundary(params: IAM.Types.DeleteRolePermissionsBoundaryRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the permissions boundary for the specified IAM role.   Deleting the permissions boundary for a role might increase its permissions by allowing anyone who assumes the role to perform all the actions granted in its permissions policies.  
+   */
+  deleteRolePermissionsBoundary(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the specified inline policy that is embedded in the specified IAM role. A role can also have managed policies attached to it. To detach a managed policy from a role, use DetachRolePolicy. For more information about policies, refer to Managed Policies and Inline Policies in the IAM User Guide.
    */
   deleteRolePolicy(params: IAM.Types.DeleteRolePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -335,6 +343,14 @@ declare class IAM extends Service {
    * Deletes the specified IAM user. The user must not belong to any groups or have any access keys, signing certificates, or attached policies.
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the permissions boundary for the specified IAM user.  Deleting the permissions boundary for a user might increase its permissions by allowing the user to perform all the actions granted in its permissions policies.  
+   */
+  deleteUserPermissionsBoundary(params: IAM.Types.DeleteUserPermissionsBoundaryRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the permissions boundary for the specified IAM user.  Deleting the permissions boundary for a user might increase its permissions by allowing the user to perform all the actions granted in its permissions policies.  
+   */
+  deleteUserPermissionsBoundary(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified inline policy that is embedded in the specified IAM user. A user can also have managed policies attached to it. To detach a managed policy from a user, use DetachUserPolicy. For more information about policies, refer to Managed Policies and Inline Policies in the IAM User Guide.
    */
@@ -760,6 +776,14 @@ declare class IAM extends Service {
    */
   putGroupPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Adds or updates the policy that is specified as the IAM role's permissions boundary. You can use an AWS managed policy or a customer managed policy to set the boundary for a role. Use the boundary to control the maximum permissions that the role can have. Setting a permissions boundary is an advanced feature that can affect the permissions for the role. You cannot set the boundary for a service-linked role.   Policies used as permissions boundaries do not provide permissions. You must also attach a permissions policy to the role. To learn how the effective permissions for a role are evaluated, see IAM JSON Policy Evaluation Logic in the IAM User Guide.  
+   */
+  putRolePermissionsBoundary(params: IAM.Types.PutRolePermissionsBoundaryRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds or updates the policy that is specified as the IAM role's permissions boundary. You can use an AWS managed policy or a customer managed policy to set the boundary for a role. Use the boundary to control the maximum permissions that the role can have. Setting a permissions boundary is an advanced feature that can affect the permissions for the role. You cannot set the boundary for a service-linked role.   Policies used as permissions boundaries do not provide permissions. You must also attach a permissions policy to the role. To learn how the effective permissions for a role are evaluated, see IAM JSON Policy Evaluation Logic in the IAM User Guide.  
+   */
+  putRolePermissionsBoundary(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Adds or updates an inline policy document that is embedded in the specified IAM role. When you embed an inline policy in a role, the inline policy is used as part of the role's access (permissions) policy. The role's trust policy is created at the same time as the role, using CreateRole. You can update a role's trust policy using UpdateAssumeRolePolicy. For more information about IAM roles, go to Using Roles to Delegate Permissions and Federate Identities. A role can also have a managed policy attached to it. To attach a managed policy to a role, use AttachRolePolicy. To create a new managed policy, use CreatePolicy. For information about policies, see Managed Policies and Inline Policies in the IAM User Guide. For information about limits on the number of inline policies that you can embed with a role, see Limitations on IAM Entities in the IAM User Guide.  Because policy documents can be large, you should use POST rather than GET when calling PutRolePolicy. For general information about using the Query API with IAM, go to Making Query Requests in the IAM User Guide. 
    */
   putRolePolicy(params: IAM.Types.PutRolePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -767,6 +791,14 @@ declare class IAM extends Service {
    * Adds or updates an inline policy document that is embedded in the specified IAM role. When you embed an inline policy in a role, the inline policy is used as part of the role's access (permissions) policy. The role's trust policy is created at the same time as the role, using CreateRole. You can update a role's trust policy using UpdateAssumeRolePolicy. For more information about IAM roles, go to Using Roles to Delegate Permissions and Federate Identities. A role can also have a managed policy attached to it. To attach a managed policy to a role, use AttachRolePolicy. To create a new managed policy, use CreatePolicy. For information about policies, see Managed Policies and Inline Policies in the IAM User Guide. For information about limits on the number of inline policies that you can embed with a role, see Limitations on IAM Entities in the IAM User Guide.  Because policy documents can be large, you should use POST rather than GET when calling PutRolePolicy. For general information about using the Query API with IAM, go to Making Query Requests in the IAM User Guide. 
    */
   putRolePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds or updates the policy that is specified as the IAM user's permissions boundary. You can use an AWS managed policy or a customer managed policy to set the boundary for a user. Use the boundary to control the maximum permissions that the user can have. Setting a permissions boundary is an advanced feature that can affect the permissions for the user.  Policies that are used as permissions boundaries do not provide permissions. You must also attach a permissions policy to the user. To learn how the effective permissions for a user are evaluated, see IAM JSON Policy Evaluation Logic in the IAM User Guide.  
+   */
+  putUserPermissionsBoundary(params: IAM.Types.PutUserPermissionsBoundaryRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds or updates the policy that is specified as the IAM user's permissions boundary. You can use an AWS managed policy or a customer managed policy to set the boundary for a user. Use the boundary to control the maximum permissions that the user can have. Setting a permissions boundary is an advanced feature that can affect the permissions for the user.  Policies that are used as permissions boundaries do not provide permissions. You must also attach a permissions policy to the user. To learn how the effective permissions for a user are evaluated, see IAM JSON Policy Evaluation Logic in the IAM User Guide.  
+   */
+  putUserPermissionsBoundary(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds or updates an inline policy document that is embedded in the specified IAM user. An IAM user can also have a managed policy attached to it. To attach a managed policy to a user, use AttachUserPolicy. To create a new managed policy, use CreatePolicy. For information about policies, see Managed Policies and Inline Policies in the IAM User Guide. For information about limits on the number of inline policies that you can embed in a user, see Limitations on IAM Entities in the IAM User Guide.  Because policy documents can be large, you should use POST rather than GET when calling PutUserPolicy. For general information about using the Query API with IAM, go to Making Query Requests in the IAM User Guide. 
    */
@@ -928,11 +960,11 @@ declare class IAM extends Service {
    */
   updateServerCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the status of a service-specific credential to Active or Inactive. Service-specific credentials that are inactive cannot be used for authentication to the service. This operation can be used to disable a user’s service-specific credential as part of a credential rotation work flow.
+   * Sets the status of a service-specific credential to Active or Inactive. Service-specific credentials that are inactive cannot be used for authentication to the service. This operation can be used to disable a user's service-specific credential as part of a credential rotation work flow.
    */
   updateServiceSpecificCredential(params: IAM.Types.UpdateServiceSpecificCredentialRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the status of a service-specific credential to Active or Inactive. Service-specific credentials that are inactive cannot be used for authentication to the service. This operation can be used to disable a user’s service-specific credential as part of a credential rotation work flow.
+   * Sets the status of a service-specific credential to Active or Inactive. Service-specific credentials that are inactive cannot be used for authentication to the service. This operation can be used to disable a user's service-specific credential as part of a credential rotation work flow.
    */
   updateServiceSpecificCredential(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1109,6 +1141,16 @@ declare namespace IAM {
      * The Amazon Resource Name (ARN) of the IAM policy you want to attach. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     PolicyArn: arnType;
+  }
+  export interface AttachedPermissionsBoundary {
+    /**
+     *  The permissions boundary usage type that indicates what type of IAM resource is used as the permissions boundary for an entity. This data type can only have a value of Policy.
+     */
+    PermissionsBoundaryType?: PermissionsBoundaryAttachmentType;
+    /**
+     *  The ARN of the policy used to set the permissions boundary for the user or role.
+     */
+    PermissionsBoundaryArn?: arnType;
   }
   export interface AttachedPolicy {
     /**
@@ -1304,6 +1346,10 @@ declare namespace IAM {
      * The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. Anyone who assumes the role from the AWS CLI or API can use the DurationSeconds API parameter or the duration-seconds CLI parameter to request a longer session. The MaxSessionDuration setting determines the maximum duration that can be requested using the DurationSeconds parameter. If users don't specify a value for the DurationSeconds parameter, their security credentials are valid for one hour by default. This applies when you use the AssumeRole* API operations or the assume-role* CLI operations but does not apply when you use those operations to create a console URL. For more information, see Using IAM Roles in the IAM User Guide.
      */
     MaxSessionDuration?: roleMaxSessionDurationType;
+    /**
+     * The ARN of the policy that is used to set the permissions boundary for the role.
+     */
+    PermissionsBoundary?: arnType;
   }
   export interface CreateRoleResponse {
     /**
@@ -1372,6 +1418,10 @@ declare namespace IAM {
      * The name of the user to create. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-. User names are not distinguished by case. For example, you cannot create users named both "TESTUSER" and "testuser".
      */
     UserName: userNameType;
+    /**
+     * The ARN of the policy that is used to set the permissions boundary for the user.
+     */
+    PermissionsBoundary?: arnType;
   }
   export interface CreateUserResponse {
     /**
@@ -1471,6 +1521,12 @@ declare namespace IAM {
      */
     VersionId: policyVersionIdType;
   }
+  export interface DeleteRolePermissionsBoundaryRequest {
+    /**
+     * The name (friendly name, not ARN) of the IAM role from which you want to remove the permissions boundary.
+     */
+    RoleName: roleNameType;
+  }
   export interface DeleteRolePolicyRequest {
     /**
      * The name (friendly name, not ARN) identifying the role that the policy is embedded in. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
@@ -1540,6 +1596,12 @@ declare namespace IAM {
      * The ID of the signing certificate to delete. The format of this parameter, as described by its regex pattern, is a string of characters that can be upper- or lower-cased letters or digits.
      */
     CertificateId: certificateIdType;
+  }
+  export interface DeleteUserPermissionsBoundaryRequest {
+    /**
+     * The name (friendly name, not ARN) of the IAM user from which you want to remove the permissions boundary.
+     */
+    UserName: userNameType;
   }
   export interface DeleteUserPolicyRequest {
     /**
@@ -2043,7 +2105,7 @@ declare namespace IAM {
   }
   export interface GetUserResponse {
     /**
-     * A structure containing details about the IAM user.
+     * A structure containing details about the IAM user.  Due to a service issue, password last used data does not include password use from May 3rd 2018 22:50 PDT to May 23rd 2018 14:08 PDT. This affects last sign-in dates shown in the IAM console and password last used dates in the IAM credential report, and returned by this GetUser API. If users signed in during the affected time, the password last used date that is returned is the date the user last signed in before May 3rd 2018. For users that signed in after May 23rd 2018 14:08 PDT, the returned password last used date is accurate. If you use password last used information to identify unused credentials for deletion, such as deleting users who did not sign in to AWS in the last 90 days, we recommend that you adjust your evaluation window to include dates after May 23rd 2018. Alternatively, if your users use access keys to access AWS programmatically you can refer to access key last used information because it is accurate for all dates.  
      */
     User: User;
   }
@@ -2285,6 +2347,10 @@ declare namespace IAM {
      */
     PathPrefix?: pathType;
     /**
+     * The policy usage method to use for filtering the results. To list only permissions policies, set PolicyUsageFilter to PermissionsPolicy. To list only the policies used to set permissions boundaries, set the value to PermissionsBoundary. This parameter is optional. If it is not included, all policies are returned. 
+     */
+    PolicyUsageFilter?: PolicyUsageType;
+    /**
      * Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the Marker element in the response that you received to indicate where the next call should start.
      */
     Marker?: markerType;
@@ -2504,6 +2570,10 @@ declare namespace IAM {
      * The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all policies. This parameter allows (per its regex pattern) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (\u0021) through the DEL character (\u007F), including most punctuation characters, digits, and upper and lowercased letters.
      */
     PathPrefix?: policyPathType;
+    /**
+     * The policy usage method to use for filtering the results. To list only permissions policies, set PolicyUsageFilter to PermissionsPolicy. To list only the policies used to set permissions boundaries, set the value to PermissionsBoundary. This parameter is optional. If it is not included, all policies are returned. 
+     */
+    PolicyUsageFilter?: PolicyUsageType;
     /**
      * Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the Marker element in the response that you received to indicate where the next call should start.
      */
@@ -2854,6 +2924,10 @@ declare namespace IAM {
      */
     AttachmentCount?: attachmentCountType;
     /**
+     * The number of entities (users and roles) for which the policy is used as the permissions boundary.  For more information about permissions boundaries, see Permissions Boundaries for IAM Identities  in the IAM User Guide.
+     */
+    PermissionsBoundaryUsageCount?: attachmentCountType;
+    /**
      * Specifies whether the policy can be attached to an IAM user, group, or role.
      */
     IsAttachable?: booleanType;
@@ -2928,6 +3002,7 @@ declare namespace IAM {
      */
     HardExpiry?: booleanObjectType;
   }
+  export type PermissionsBoundaryAttachmentType = "PermissionsBoundaryPolicy"|string;
   export interface Policy {
     /**
      * The friendly name (not ARN) identifying the policy.
@@ -2950,6 +3025,10 @@ declare namespace IAM {
      * The number of entities (users, groups, and roles) that the policy is attached to.
      */
     AttachmentCount?: attachmentCountType;
+    /**
+     * The number of entities (users and roles) for which the policy is used to set the permissions boundary.  For more information about permissions boundaries, see Permissions Boundaries for IAM Identities  in the IAM User Guide.
+     */
+    PermissionsBoundaryUsageCount?: attachmentCountType;
     /**
      * Specifies whether the policy can be attached to an IAM user, group, or role.
      */
@@ -3002,6 +3081,7 @@ declare namespace IAM {
   }
   export type PolicyRoleListType = PolicyRole[];
   export type PolicySourceType = "user"|"group"|"role"|"aws-managed"|"user-managed"|"resource"|"none"|string;
+  export type PolicyUsageType = "PermissionsPolicy"|"PermissionsBoundary"|string;
   export interface PolicyUser {
     /**
      * The name (friendly name, not ARN) identifying the user.
@@ -3055,6 +3135,16 @@ declare namespace IAM {
      */
     PolicyDocument: policyDocumentType;
   }
+  export interface PutRolePermissionsBoundaryRequest {
+    /**
+     * The name (friendly name, not ARN) of the IAM role for which you want to set the permissions boundary.
+     */
+    RoleName: roleNameType;
+    /**
+     * The ARN of the policy that is used to set the permissions boundary for the role.
+     */
+    PermissionsBoundary: arnType;
+  }
   export interface PutRolePolicyRequest {
     /**
      * The name of the role to associate the policy with. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
@@ -3068,6 +3158,16 @@ declare namespace IAM {
      * The policy document. The regex pattern used to validate this parameter is a string of characters consisting of the following:   Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range   The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)   The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)  
      */
     PolicyDocument: policyDocumentType;
+  }
+  export interface PutUserPermissionsBoundaryRequest {
+    /**
+     * The name (friendly name, not ARN) of the IAM user for which you want to set the permissions boundary.
+     */
+    UserName: userNameType;
+    /**
+     * The ARN of the policy that is used to set the permissions boundary for the user.
+     */
+    PermissionsBoundary: arnType;
   }
   export interface PutUserPolicyRequest {
     /**
@@ -3212,6 +3312,10 @@ declare namespace IAM {
      * The maximum session duration (in seconds) for the specified role. Anyone who uses the AWS CLI or API to assume the role can specify the duration using the optional DurationSeconds API parameter or duration-seconds CLI parameter.
      */
     MaxSessionDuration?: roleMaxSessionDurationType;
+    /**
+     * The ARN of the policy used to set the permissions boundary for the role. For more information about permissions boundaries, see Permissions Boundaries for IAM Identities  in the IAM User Guide.
+     */
+    PermissionsBoundary?: AttachedPermissionsBoundary;
   }
   export interface RoleDetail {
     /**
@@ -3247,6 +3351,10 @@ declare namespace IAM {
      * A list of managed policies attached to the role. These policies are the role's access (permissions) policies.
      */
     AttachedManagedPolicies?: attachedPoliciesListType;
+    /**
+     * The ARN of the policy used to set the permissions boundary for the role. For more information about permissions boundaries, see Permissions Boundaries for IAM Identities  in the IAM User Guide.
+     */
+    PermissionsBoundary?: AttachedPermissionsBoundary;
   }
   export type RoleUsageListType = RoleUsageType[];
   export interface RoleUsageType {
@@ -3468,7 +3576,7 @@ declare namespace IAM {
      */
     ResourcePolicy?: policyDocumentType;
     /**
-     * An AWS account ID that specifies the owner of any simulated resource that does not identify its owner in the resource ARN, such as an S3 bucket or object. If ResourceOwner is specified, it is also used as the account owner of any ResourcePolicy included in the simulation. If the ResourceOwner parameter is not specified, then the owner of the resources and the resource policy defaults to the account of the identity provided in CallerArn. This parameter is required only if you specify a resource-based policy and account that owns the resource is different from the account that owns the simulated calling user CallerArn.
+     * An ARN representing the AWS account ID that specifies the owner of any simulated resource that does not identify its owner in the resource ARN, such as an S3 bucket or object. If ResourceOwner is specified, it is also used as the account owner of any ResourcePolicy included in the simulation. If the ResourceOwner parameter is not specified, then the owner of the resources and the resource policy defaults to the account of the identity provided in CallerArn. This parameter is required only if you specify a resource-based policy and account that owns the resource is different from the account that owns the simulated calling user CallerArn. The ARN for an account uses the following syntax: arn:aws:iam::AWS-account-ID:root. For example, to represent the account with the 112233445566 ID, use the following ARN: arn:aws:iam::112233445566-ID:root. 
      */
     ResourceOwner?: ResourceNameType;
     /**
@@ -3592,7 +3700,7 @@ declare namespace IAM {
      */
     MinimumPasswordLength?: minimumPasswordLengthType;
     /**
-     * Specifies whether IAM user passwords must contain at least one of the following non-alphanumeric characters: ! @ # $ % ^ &amp;amp; * ( ) _ + - = [ ] { } | ' If you do not specify a value for this parameter, then the operation uses the default value of false. The result is that passwords do not require at least one symbol character.
+     * Specifies whether IAM user passwords must contain at least one of the following non-alphanumeric characters: ! @ # $ % ^ &amp; * ( ) _ + - = [ ] { } | ' If you do not specify a value for this parameter, then the operation uses the default value of false. The result is that passwords do not require at least one symbol character.
      */
     RequireSymbols?: booleanType;
     /**
@@ -3796,7 +3904,7 @@ declare namespace IAM {
      */
     UserName: userNameType;
     /**
-     * The SSH public key. The public key must be encoded in ssh-rsa format or PEM format. The regex pattern used to validate this parameter is a string of characters consisting of the following:   Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range   The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)   The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)  
+     * The SSH public key. The public key must be encoded in ssh-rsa format or PEM format. The miminum bit-length of the public key is 2048 bits. For example, you can generate a 2048-bit key, and the resulting PEM file is 1679 bytes long. The regex pattern used to validate this parameter is a string of characters consisting of the following:   Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range   The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)   The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)  
      */
     SSHPublicKeyBody: publicKeyMaterialType;
   }
@@ -3875,6 +3983,10 @@ declare namespace IAM {
      * The date and time, in ISO 8601 date-time format, when the user's password was last used to sign in to an AWS website. For a list of AWS websites that capture a user's last sign-in time, see the Credential Reports topic in the Using IAM guide. If a password is used more than once in a five-minute span, only the first use is returned in this field. If the field is null (no value) then it indicates that they never signed in with a password. This can be because:   The user never had a password.   A password exists but has not been used since IAM started tracking this information on October 20th, 2014.   A null does not mean that the user never had a password. Also, if the user does not currently have a password, but had one in the past, then this field contains the date and time the most recent password was used. This value is returned only in the GetUser and ListUsers operations. 
      */
     PasswordLastUsed?: dateType;
+    /**
+     * The ARN of the policy used to set the permissions boundary for the user. For more information about permissions boundaries, see Permissions Boundaries for IAM Identities  in the IAM User Guide.
+     */
+    PermissionsBoundary?: AttachedPermissionsBoundary;
   }
   export interface UserDetail {
     /**
@@ -3906,6 +4018,10 @@ declare namespace IAM {
      * A list of the managed policies attached to the user.
      */
     AttachedManagedPolicies?: attachedPoliciesListType;
+    /**
+     * The ARN of the policy used to set the permissions boundary for the user. For more information about permissions boundaries, see Permissions Boundaries for IAM Identities  in the IAM User Guide.
+     */
+    PermissionsBoundary?: AttachedPermissionsBoundary;
   }
   export interface VirtualMFADevice {
     /**

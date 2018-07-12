@@ -99,6 +99,14 @@ declare class EFS extends Service {
    * Modifies the set of security groups in effect for a mount target. When you create a mount target, Amazon EFS also creates a new network interface. For more information, see CreateMountTarget. This operation replaces the security groups in effect for the network interface associated with a mount target, with the SecurityGroups provided in the request. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not deleted.  The operation requires permissions for the following actions:    elasticfilesystem:ModifyMountTargetSecurityGroups action on the mount target's file system.     ec2:ModifyNetworkInterfaceAttribute action on the mount target's network interface.   
    */
   modifyMountTargetSecurityGroups(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the throughput mode or the amount of provisioned throughput of an existing file system.
+   */
+  updateFileSystem(params: EFS.Types.UpdateFileSystemRequest, callback?: (err: AWSError, data: EFS.Types.FileSystemDescription) => void): Request<EFS.Types.FileSystemDescription, AWSError>;
+  /**
+   * Updates the throughput mode or the amount of provisioned throughput of an existing file system.
+   */
+  updateFileSystem(callback?: (err: AWSError, data: EFS.Types.FileSystemDescription) => void): Request<EFS.Types.FileSystemDescription, AWSError>;
 }
 declare namespace EFS {
   export type AwsAccountId = string;
@@ -112,13 +120,21 @@ declare namespace EFS {
      */
     PerformanceMode?: PerformanceMode;
     /**
-     * A boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a CreateFileSystemRequest$KmsKeyId for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don't specify a CMK, then the default CMK for Amazon EFS, /aws/elasticfilesystem, is used to protect the encrypted file system. 
+     * A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a CreateFileSystemRequest$KmsKeyId for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don't specify a CMK, then the default CMK for Amazon EFS, /aws/elasticfilesystem, is used to protect the encrypted file system. 
      */
     Encrypted?: Encrypted;
     /**
-     * The id of the AWS KMS CMK that will be used to protect the encrypted file system. This parameter is only required if you want to use a non-default CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This id can be in one of the following formats:   Key ID - A unique identifier of the key. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.   ARN - An Amazon Resource Name for the key. For example, arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias - A previously created display name for a key. For example, alias/projectKey1.   Key alias ARN - An Amazon Resource Name for a key alias. For example, arn:aws:kms:us-west-2:444455556666:alias/projectKey1.   Note that if the KmsKeyId is specified, the CreateFileSystemRequest$Encrypted parameter must be set to true.
+     * The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a non-default CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:   Key ID - A unique identifier of the key, for example, 1234abcd-12ab-34cd-56ef-1234567890ab.   ARN - An Amazon Resource Name (ARN) for the key, for example, arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias - A previously created display name for a key. For example, alias/projectKey1.   Key alias ARN - An ARN for a key alias, for example, arn:aws:kms:us-west-2:444455556666:alias/projectKey1.   If KmsKeyId is specified, the CreateFileSystemRequest$Encrypted parameter must be set to true.
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: bursting and provisioned. You can decrease your file system's throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change.
+     */
+    ThroughputMode?: ThroughputMode;
+    /**
+     * The throughput, measured in MiB/s, that you want to provision for a file system that you're creating. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see Amazon EFS Limits That You Can Increase in the Amazon EFS User Guide. 
+     */
+    ProvisionedThroughputInMibps?: ProvisionedThroughputInMibps;
   }
   export interface CreateMountTargetRequest {
     /**
@@ -308,7 +324,7 @@ declare namespace EFS {
      */
     NumberOfMountTargets: MountTargetCount;
     /**
-     * Latest known metered size (in bytes) of data stored in the file system, in bytes, in its Value field, and the time at which that size was determined in its Timestamp field. The Timestamp value is the integer number of seconds since 1970-01-01T00:00:00Z. Note that the value does not represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, the value will represent actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not the exact size the file system was at any instant in time. 
+     * Latest known metered size (in bytes) of data stored in the file system, in its Value field, and the time at which that size was determined in its Timestamp field. The Timestamp value is the integer number of seconds since 1970-01-01T00:00:00Z. The SizeInBytes value doesn't represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, SizeInBytes represents actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not the exact size that the file system was at any point in time. 
      */
     SizeInBytes: FileSystemSize;
     /**
@@ -316,13 +332,21 @@ declare namespace EFS {
      */
     PerformanceMode: PerformanceMode;
     /**
-     * A boolean value that, if true, indicates that the file system is encrypted.
+     * A Boolean value that, if true, indicates that the file system is encrypted.
      */
     Encrypted?: Encrypted;
     /**
-     * The id of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.
+     * The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * The throughput mode for a file system. There are two throughput modes to choose from for your file system: bursting and provisioned. You can decrease your file system's throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change.
+     */
+    ThroughputMode?: ThroughputMode;
+    /**
+     * The throughput, measured in MiB/s, that you want to provision for a file system. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see Amazon EFS Limits That You Can Increase in the Amazon EFS User Guide. 
+     */
+    ProvisionedThroughputInMibps?: ProvisionedThroughputInMibps;
   }
   export type FileSystemDescriptions = FileSystemDescription[];
   export type FileSystemId = string;
@@ -339,7 +363,7 @@ declare namespace EFS {
   export type FileSystemSizeValue = number;
   export type IpAddress = string;
   export type KmsKeyId = string;
-  export type LifeCycleState = "creating"|"available"|"deleting"|"deleted"|string;
+  export type LifeCycleState = "creating"|"available"|"updating"|"deleting"|"deleted"|string;
   export type Marker = string;
   export type MaxItems = number;
   export interface ModifyMountTargetSecurityGroupsRequest {
@@ -387,6 +411,7 @@ declare namespace EFS {
   export type MountTargetId = string;
   export type NetworkInterfaceId = string;
   export type PerformanceMode = "generalPurpose"|"maxIO"|string;
+  export type ProvisionedThroughputInMibps = number;
   export type SecurityGroup = string;
   export type SecurityGroups = SecurityGroup[];
   export type SubnetId = string;
@@ -404,7 +429,22 @@ declare namespace EFS {
   export type TagKeys = TagKey[];
   export type TagValue = string;
   export type Tags = Tag[];
+  export type ThroughputMode = "bursting"|"provisioned"|string;
   export type Timestamp = Date;
+  export interface UpdateFileSystemRequest {
+    /**
+     * The ID of the file system that you want to update.
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * (Optional) The throughput mode that you want your file system to use. If you're not updating your throughput mode, you don't need to provide this value in your request.
+     */
+    ThroughputMode?: ThroughputMode;
+    /**
+     * (Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. If you're not updating the amount of provisioned throughput for your file system, you don't need to provide this value in your request.
+     */
+    ProvisionedThroughputInMibps?: ProvisionedThroughputInMibps;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

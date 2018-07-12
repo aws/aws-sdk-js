@@ -300,6 +300,10 @@ declare namespace AppSync {
      * Amazon Elasticsearch settings.
      */
     elasticsearchConfig?: ElasticsearchDataSourceConfig;
+    /**
+     * Http endpoint settings.
+     */
+    httpConfig?: HttpDataSourceConfig;
   }
   export interface CreateDataSourceResponse {
     /**
@@ -401,7 +405,7 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an AWS Lambda function.    NONE: There is no data source. This type is used when when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.  
+     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an AWS Lambda function.    NONE: There is no data source. This type is used when when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.    HTTP: The data source is an HTTP endpoint.  
      */
     type?: DataSourceType;
     /**
@@ -420,8 +424,12 @@ declare namespace AppSync {
      * Amazon Elasticsearch settings.
      */
     elasticsearchConfig?: ElasticsearchDataSourceConfig;
+    /**
+     * Http endpoint settings.
+     */
+    httpConfig?: HttpDataSourceConfig;
   }
-  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|string;
+  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|string;
   export type DataSources = DataSource[];
   export type DefaultAction = "ALLOW"|"DENY"|string;
   export interface DeleteApiKeyRequest {
@@ -645,6 +653,12 @@ declare namespace AppSync {
     uris?: MapOfStringToString;
   }
   export type GraphqlApis = GraphqlApi[];
+  export interface HttpDataSourceConfig {
+    /**
+     * The Http url endpoint. You can either specify the domain name or ip and port combination and the url scheme must be http(s). If the port is not specified, AWS AppSync will use the default port 80 for http endpoint and port 443 for https endpoints.
+     */
+    endpoint?: String;
+  }
   export interface LambdaDataSourceConfig {
     /**
      * The ARN for the Lambda function.
@@ -936,6 +950,10 @@ declare namespace AppSync {
      * The new Elasticsearch configuration.
      */
     elasticsearchConfig?: ElasticsearchDataSourceConfig;
+    /**
+     * The new http endpoint configuration
+     */
+    httpConfig?: HttpDataSourceConfig;
   }
   export interface UpdateDataSourceResponse {
     /**

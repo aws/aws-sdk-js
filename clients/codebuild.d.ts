@@ -360,7 +360,7 @@ declare namespace CodeBuild {
     /**
      * The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
      */
-    serviceRole?: NonEmptyString;
+    serviceRole: NonEmptyString;
     /**
      * How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any build that has not been marked as completed. The default is 60 minutes.
      */

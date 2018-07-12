@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.273.1
+// AWS SDK for JavaScript v2.274.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -16922,7 +16922,8 @@ module.exports={
           "name",
           "source",
           "artifacts",
-          "environment"
+          "environment",
+          "serviceRole"
         ],
         "members": {
           "name": {},
@@ -55432,6 +55433,7 @@ module.exports={
     "protocol": "rest-json",
     "serviceAbbreviation": "EFS",
     "serviceFullName": "Amazon Elastic File System",
+    "serviceId": "EFS",
     "signatureVersion": "v4",
     "uid": "elasticfilesystem-2015-02-01"
   },
@@ -55452,11 +55454,15 @@ module.exports={
           "Encrypted": {
             "type": "boolean"
           },
-          "KmsKeyId": {}
+          "KmsKeyId": {},
+          "ThroughputMode": {},
+          "ProvisionedThroughputInMibps": {
+            "type": "double"
+          }
         }
       },
       "output": {
-        "shape": "S6"
+        "shape": "S8"
       }
     },
     "CreateMountTarget": {
@@ -55475,12 +55481,12 @@ module.exports={
           "SubnetId": {},
           "IpAddress": {},
           "SecurityGroups": {
-            "shape": "Si"
+            "shape": "Sk"
           }
         }
       },
       "output": {
-        "shape": "Sk"
+        "shape": "Sm"
       }
     },
     "CreateTags": {
@@ -55500,7 +55506,7 @@ module.exports={
             "locationName": "FileSystemId"
           },
           "Tags": {
-            "shape": "So"
+            "shape": "Sq"
           }
         }
       }
@@ -55601,7 +55607,7 @@ module.exports={
           "FileSystems": {
             "type": "list",
             "member": {
-              "shape": "S6"
+              "shape": "S8"
             }
           },
           "NextMarker": {}
@@ -55633,7 +55639,7 @@ module.exports={
         ],
         "members": {
           "SecurityGroups": {
-            "shape": "Si"
+            "shape": "Sk"
           }
         }
       }
@@ -55673,7 +55679,7 @@ module.exports={
           "MountTargets": {
             "type": "list",
             "member": {
-              "shape": "Sk"
+              "shape": "Sm"
             }
           },
           "NextMarker": {}
@@ -55715,7 +55721,7 @@ module.exports={
         "members": {
           "Marker": {},
           "Tags": {
-            "shape": "So"
+            "shape": "Sq"
           },
           "NextMarker": {}
         }
@@ -55738,14 +55744,40 @@ module.exports={
             "locationName": "MountTargetId"
           },
           "SecurityGroups": {
-            "shape": "Si"
+            "shape": "Sk"
           }
         }
+      }
+    },
+    "UpdateFileSystem": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2015-02-01/file-systems/{FileSystemId}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "FileSystemId"
+        ],
+        "members": {
+          "FileSystemId": {
+            "location": "uri",
+            "locationName": "FileSystemId"
+          },
+          "ThroughputMode": {},
+          "ProvisionedThroughputInMibps": {
+            "type": "double"
+          }
+        }
+      },
+      "output": {
+        "shape": "S8"
       }
     }
   },
   "shapes": {
-    "S6": {
+    "S8": {
       "type": "structure",
       "required": [
         "OwnerId",
@@ -55787,14 +55819,18 @@ module.exports={
         "Encrypted": {
           "type": "boolean"
         },
-        "KmsKeyId": {}
+        "KmsKeyId": {},
+        "ThroughputMode": {},
+        "ProvisionedThroughputInMibps": {
+          "type": "double"
+        }
       }
     },
-    "Si": {
+    "Sk": {
       "type": "list",
       "member": {}
     },
-    "Sk": {
+    "Sm": {
       "type": "structure",
       "required": [
         "MountTargetId",
@@ -55812,7 +55848,7 @@ module.exports={
         "NetworkInterfaceId": {}
       }
     },
-    "So": {
+    "Sq": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -58276,6 +58312,7 @@ module.exports={
     "protocol": "json",
     "serviceAbbreviation": "Amazon EMR",
     "serviceFullName": "Amazon Elastic MapReduce",
+    "serviceId": "EMR",
     "signatureVersion": "v4",
     "targetPrefix": "ElasticMapReduce",
     "timestampFormat": "unixTimestamp",
@@ -81091,6 +81128,9 @@ module.exports={
   },
   "macie": {
     "name": "Macie"
+  },
+  "dlm": {
+    "name": "DLM"
   }
 }
 },{}],114:[function(require,module,exports){
@@ -130359,7 +130399,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.273.1',
+  VERSION: '2.274.1',
 
   /**
    * @api private
@@ -149489,7 +149529,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":348,"./lib/rng":349}],352:[function(require,module,exports){
-// AWS SDK for JavaScript v2.273.1
+// AWS SDK for JavaScript v2.274.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
