@@ -440,7 +440,7 @@ TSGenerator.prototype.generateTypingsFromWaiters = function generateTypingsFromW
     }
 
     code += this.generateDocString(docString, tabCount);
-    code += this.tabs(tabCount) + 'waitFor(state: "' + waiterState + '", params: ' + inputShape + ', callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
+    code += this.tabs(tabCount) + 'waitFor(state: "' + waiterState + '", params: ' + inputShape + ' & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
     code += this.generateDocString(docString, tabCount);
     code += this.tabs(tabCount) + 'waitFor(state: "' + waiterState + '", callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
 
@@ -517,6 +517,8 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     var className = this.metadata[serviceIdentifier].name;
     var customNamespaces = this.generateCustomNamespaceTypes(serviceIdentifier, className);
     var customClassNames = customNamespaces ? customNamespaces.customClassNames : [];
+    var waiters = model.waiters || Object.create(null);
+    var waiterKeys = Object.keys(waiters);
     // generate imports
     code += 'import {Request} from \'../lib/request\';\n';
     code += 'import {Response} from \'../lib/response\';\n';
@@ -527,6 +529,9 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
         code += 'import {' + parentClass + '} from \'../lib/services/' + serviceIdentifier + '\';\n';
     } else {
         code += 'import {' + parentClass + '} from \'../lib/service\';\n';
+    }
+    if (waiterKeys.length) {
+        code += 'import {WaiterConfiguration} from \'../lib/service\';\n';
     }
     code += 'import {ServiceConfigurationOptions} from \'../lib/service\';\n';
     // get any custom config options
@@ -563,8 +568,6 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     });
 
     // generate waitFor methods
-    var waiters = model.waiters || Object.create(null);
-    var waiterKeys = Object.keys(waiters);
     waiterKeys.forEach(function (waitersKey) {
         var waiter = waiters[waitersKey];
         var operation = modelOperations[waiter.operation];

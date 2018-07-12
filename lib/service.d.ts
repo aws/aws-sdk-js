@@ -3,7 +3,7 @@ import {AWSError} from './error';
 import {ConfigurationOptions, ConfigBase} from './config';
 import {Endpoint} from './endpoint';
 
-interface WaiterConfiguration {
+export interface WaiterConfiguration {
     /**
      * The number of seconds to wait between requests
      */
