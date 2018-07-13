@@ -1,11 +1,11 @@
-const {AWS, spyOn, MockServiceFromApi} = require('../../helpers');
+const {AWS, MockServiceFromApi, spyOn} = require('../../helpers');
 const {mockResponses} = require('./utils/mock_http_client');
 const {validateEvents} = require('./utils/validateEvents');
-const {Publisher} = require('../../../lib/publisher')
-const schemes = require('./cases')
-const {fork} = require('child_process')
+const {Publisher} = require('../../../lib/publisher');
+const schemes = require('./cases');
+const {fork} = require('child_process');
 const dgram = require('dgram');
-const path = require('path')
+const path = require('path');
 const client = dgram.createSocket('udp4');
 const csmConfigProvider = AWS.util.clientSideMonitoring.configProvider;
 
@@ -14,27 +14,32 @@ const FAKE_SERVCIE = 'CSM Test';
 describe('run functional test', () => {
   let fakeAgent;
   let defaultConfiguration;
-  before('setup default configurations', () => {
-    defaultConfiguration = schemes.defaults.configuration;
+  let processEnvBackup;
+  before(() => {
     AWS.config.clientSideMonitoring = true;
-  })
+    processEnvBackup = Object.assign({}, process.env);
+  });
+
+  beforeEach(async () => {
+    defaultConfiguration = Object.assign({}, schemes.defaults.configuration);
+  });
+
+  afterEach(async () => {
+    process.env = processEnvBackup;
+  });
 
   for (const scenario of schemes.cases) {
     it(scenario.description, async function() {
-      const backupConfiguration = Object.assign({}, defaultConfiguration);
-      AWS.util.update(defaultConfiguration, scenario.configuration);
+      const scenarioConfiguration = Object.assign(defaultConfiguration, scenario.configuration);
       //mock of resolving configuration from shared config file
       spyOn(AWS.util.ini, 'parse').andReturn({
-        default: defaultConfiguration.sharedConfigFile || {}
+        default: scenarioConfiguration.sharedConfigFile || {}
       });
 
-      if(defaultConfiguration.accessKey) {
-        AWS.config.credentials.accessKeyId = defaultConfiguration.accessKey
-      }
+      const defaultConstructParams = getConstructParam(defaultConfiguration);
 
-      const defaultConstructParams = getConstructParams(defaultConfiguration);
-
-      setEnvironmentVariables(defaultConfiguration);
+      // setEnvironmentVariables(defaultConfiguration);
+      process.env = Object.assign({}, process.env, scenarioConfiguration.environmentVariables);
 
       const resolvedCSMConfig = csmConfigProvider();
       AWS.Service.prototype.publisher = new Publisher(resolvedCSMConfig);
@@ -45,7 +50,7 @@ describe('run functional test', () => {
       // listen to the monitoring events echo-ed back
       let monitoringEvents = [];
       fakeAgent.stdout.on('data', function(data) {
-        const str = data.toString('utf8')
+        const str = data.toString('utf8');
         const parsed = str.trim().split('\n').map(JSON.parse);
         monitoringEvents = monitoringEvents.concat(parsed);
       })
@@ -54,27 +59,25 @@ describe('run functional test', () => {
       for (const apiCall of scenario.apiCalls) {
         const Klass = getServiceClass(apiCall.serviceId);
         const client = new Klass(defaultConstructParams);
+        if (scenarioConfiguration.accessKey) {
+          client.config.credentials.accessKeyId = scenarioConfiguration.accessKey;
+        }
         const operation = apiCall.operationName[0].toLowerCase() + apiCall.operationName.substring(1);
         const request = client.makeRequest(operation, apiCall.params);
         mockResponses(apiCall.attemptResponses, request);
         request.send();
       }
 
-      resetEnvironmentalVariables(defaultConfiguration.environmentVariables, backupConfiguration.environmentVariables)
-
-      if(backupConfiguration.accessKey) AWS.config.credentials.accessKeyId = backupConfiguration.accessKey
-      spyOn(AWS.util.ini, 'parse').andReturn(backupConfiguration.sharedConfigFile || {});
+      spyOn(AWS.util.ini, 'parse').andReturn(defaultConfiguration.sharedConfigFile || {});
       //close agent and then validate the datagram echo-ed back from agent
-      await agentFinished(fakeAgent).then(() => {
-        expect(validateEvents(monitoringEvents, scenario.expectedMonitoringEvents)).to.eql(true);
-      });
-      defaultConfiguration = backupConfiguration;
+      await agentFinished(fakeAgent);
+      expect(validateEvents(monitoringEvents, scenario.expectedMonitoringEvents)).to.eql(true);
     })
   }
 
 })
 
-function getConstructParams(configurations) {
+function getConstructParam(configurations) {
   let constructParams = {};
   if(configurations.userAgent) constructParams.customUserAgent = configurations.userAgent;
   if(configurations.region) constructParams.region = configurations.region;
@@ -83,56 +86,29 @@ function getConstructParams(configurations) {
   return constructParams;
 }
 
-function setEnvironmentVariables(configurations) {
-  if(configurations.environmentVariables) {
-    for (const key of Object.keys(configurations.environmentVariables)) {
-      if (Object.prototype.hasOwnProperty.call(configurations.environmentVariables, key)) {
-        process.env[key] = configurations.environmentVariables[key];
-      }
-    }
-  }
-}
-
-function resetEnvironmentalVariables(currentEnv, restoredEnv) {
-  //reset the configuration back the original setting
-  if(currentEnv) {
-   for (const key of Object.keys(currentEnv)) {
-     if (Object.prototype.hasOwnProperty.call(currentEnv, key)) {
-       delete process.env[key];
-     }
-   }
- }
- if(restoredEnv) {
-   for (const key of Object.keys(restoredEnv)) {
-     if (Object.prototype.hasOwnProperty.call(restoredEnv, key)) {
-       process.env[key] = restoredEnv[key];
-     }
-   }
- }
-}
 
 function agentStart(port) {
    //start up an udp agent echoing back monitoring events
    //pass in --inspect={port} to debug the subprocess
   return new Promise((resolve) => {
     port = port || '';
-    const fakeAgent = fork(path.join(__dirname, 'utils/mock_agent.js'), [`port=${port}`], {stdio: ['pipe', 'pipe', 'pipe', 'ipc'], execArgv: ['--inspect=9223']});
+    const fakeAgent = fork(path.join(__dirname, 'utils/mock_agent.js'), [`port=${port}`], {stdio: ['pipe', 'pipe', 'pipe', 'ipc']});
     fakeAgent.once('message', (m) => {
-      if (m.message.toLowerCase().indexOf('server listening') === 0) {
+      if (m.serverStarted === true) {
         //udp agent starts to echo back monitoring events
         resolve(fakeAgent);
       } else {
-        reject(new Error('agent start error'))
+        reject(new Error('agent start error'));
       }
     })
   })
 }
 
 function agentFinished(agentProcess) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     agentProcess.once('message', (m) => {
       // fake csm agent notifies the echo-ing is done.
-      if (m.message && m.message.toLowerCase() === 'recording done') {
+      if (m.recordingDone === true) {
         agentProcess.kill(9)
       }
       resolve();
@@ -143,7 +119,7 @@ function agentFinished(agentProcess) {
 
 function getServiceClass(serviceId) {
   if (serviceId === FAKE_SERVCIE) {
-    return AWS.Service.defineService('csmtest', {api: new AWS.Model.Api(require('./utils/csmtest/2018-06-19/service-2.json'))})
+    return AWS.Service.defineService('csmtest', {api: new AWS.Model.Api(require('./utils/csmtest/2018-06-19/service-2.json'))});
   } else {
     return AWS[serviceId];
   }

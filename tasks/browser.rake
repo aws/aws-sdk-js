@@ -25,7 +25,7 @@ def sdk_version
 end
 
 def excluded_files(name)
-  name.start_with?("test/react-native/") || name.start_with?("test/publisher/functional_test")
+  name.start_with?("test/react-native/") || name.start_with?("test/publisher")
 end
 
 namespace :browser do

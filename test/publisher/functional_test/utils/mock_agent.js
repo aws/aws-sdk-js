@@ -4,7 +4,6 @@ const defaultPort = 31000;
 const file = require('fs');
 
 server.on('error', (err) => {
-  console.log(`server ERROR:\n${err.stack}`);
   server.close();
 });
 
@@ -15,7 +14,10 @@ server.on('message', (msg) => {
 server.on('listening', () => {
   const address = server.address();
   const msg = `Server Listening ${address.address}:${address.port}`;
-  process.send({message: msg});
+  process.send({
+    serverStarted: true,
+    port: address.port,
+  });
 })
 
 //notify the parent process the calls are done and begin the 
@@ -25,7 +27,7 @@ process.on('message', (m) => {
     //wait for another 30ms to finish receiving and echo-ing datagram
     setTimeout(() => {
       server.close();
-      process.send({message: 'Recording Done'});
+      process.send({recordingDone: true});
     }, 30);
   }
 })

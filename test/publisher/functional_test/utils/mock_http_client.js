@@ -1,5 +1,5 @@
-const {AWS, spyOn, mockHttpSuccessfulResponse} = require('../../../helpers');
-const {EventEmitter} = require('events')
+const {AWS, mockHttpSuccessfulResponse, spyOn} = require('../../../helpers');
+const {EventEmitter} = require('events');
 
 function mockDefinedResponses(resps, request) {
   let index = 0;
