@@ -108,6 +108,14 @@ declare class AppStream extends Service {
    */
   deleteImageBuilder(callback?: (err: AWSError, data: AppStream.Types.DeleteImageBuilderResult) => void): Request<AppStream.Types.DeleteImageBuilderResult, AWSError>;
   /**
+   * Deletes permissions for the specified private image. After you delete permissions for an image, AWS accounts to which you previously granted these permissions can no longer use the image.
+   */
+  deleteImagePermissions(params: AppStream.Types.DeleteImagePermissionsRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteImagePermissionsResult) => void): Request<AppStream.Types.DeleteImagePermissionsResult, AWSError>;
+  /**
+   * Deletes permissions for the specified private image. After you delete permissions for an image, AWS accounts to which you previously granted these permissions can no longer use the image.
+   */
+  deleteImagePermissions(callback?: (err: AWSError, data: AppStream.Types.DeleteImagePermissionsResult) => void): Request<AppStream.Types.DeleteImagePermissionsResult, AWSError>;
+  /**
    * Deletes the specified stack. After the stack is deleted, the application streaming environment provided by the stack is no longer available to users. Also, any reservations made for application streaming sessions for the stack are released.
    */
   deleteStack(params: AppStream.Types.DeleteStackRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteStackResult) => void): Request<AppStream.Types.DeleteStackResult, AWSError>;
@@ -139,6 +147,14 @@ declare class AppStream extends Service {
    * Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.
    */
   describeImageBuilders(callback?: (err: AWSError, data: AppStream.Types.DescribeImageBuildersResult) => void): Request<AppStream.Types.DescribeImageBuildersResult, AWSError>;
+  /**
+   * Retrieves a list that describes the permissions for a private image that you own. 
+   */
+  describeImagePermissions(params: AppStream.Types.DescribeImagePermissionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImagePermissionsResult) => void): Request<AppStream.Types.DescribeImagePermissionsResult, AWSError>;
+  /**
+   * Retrieves a list that describes the permissions for a private image that you own. 
+   */
+  describeImagePermissions(callback?: (err: AWSError, data: AppStream.Types.DescribeImagePermissionsResult) => void): Request<AppStream.Types.DescribeImagePermissionsResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified images, if the image names are provided. Otherwise, all images in the account are described.
    */
@@ -268,6 +284,14 @@ declare class AppStream extends Service {
    */
   updateFleet(callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
+   * Adds or updates permissions for the specified private image. 
+   */
+  updateImagePermissions(params: AppStream.Types.UpdateImagePermissionsRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateImagePermissionsResult) => void): Request<AppStream.Types.UpdateImagePermissionsResult, AWSError>;
+  /**
+   * Adds or updates permissions for the specified private image. 
+   */
+  updateImagePermissions(callback?: (err: AWSError, data: AppStream.Types.UpdateImagePermissionsResult) => void): Request<AppStream.Types.UpdateImagePermissionsResult, AWSError>;
+  /**
    * Updates the specified fields for the specified stack.
    */
   updateStack(params: AppStream.Types.UpdateStackRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateStackResult) => void): Request<AppStream.Types.UpdateStackResult, AWSError>;
@@ -329,6 +353,7 @@ declare namespace AppStream {
   export type Applications = Application[];
   export type AppstreamAgentVersion = string;
   export type Arn = string;
+  export type ArnList = Arn[];
   export interface AssociateFleetRequest {
     /**
      * The name of the fleet. 
@@ -342,6 +367,8 @@ declare namespace AppStream {
   export interface AssociateFleetResult {
   }
   export type AuthenticationType = "API"|"SAML"|"USERPOOL"|string;
+  export type AwsAccountId = string;
+  export type AwsAccountIdList = AwsAccountId[];
   export type Boolean = boolean;
   export type BooleanObject = boolean;
   export interface ComputeCapacity {
@@ -420,7 +447,11 @@ declare namespace AppStream {
     /**
      * The name of the image used to create the fleet.
      */
-    ImageName: String;
+    ImageName?: String;
+    /**
+     * The ARN of the public, private, or shared image to use.
+     */
+    ImageArn?: Arn;
     /**
      * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
@@ -476,7 +507,11 @@ declare namespace AppStream {
     /**
      * The name of the image used to create the builder.
      */
-    ImageName: String;
+    ImageName?: String;
+    /**
+     * The ARN of the public, private, or shared image to use.
+     */
+    ImageArn?: Arn;
     /**
      * The instance type to use when launching the image builder.
      */
@@ -632,6 +667,18 @@ declare namespace AppStream {
      */
     ImageBuilder?: ImageBuilder;
   }
+  export interface DeleteImagePermissionsRequest {
+    /**
+     * The name of the private image.
+     */
+    Name: Name;
+    /**
+     * The 12-digit ID of the AWS account for which to delete image permissions.
+     */
+    SharedAccountId: AwsAccountId;
+  }
+  export interface DeleteImagePermissionsResult {
+  }
   export interface DeleteImageRequest {
     /**
      * The name of the image.
@@ -720,6 +767,38 @@ declare namespace AppStream {
      */
     NextToken?: String;
   }
+  export interface DescribeImagePermissionsRequest {
+    /**
+     * The name of the private image for which to describe permissions. The image must be one that you own. 
+     */
+    Name: Name;
+    /**
+     * The maximum size of each results page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The 12-digit ID of one or more AWS accounts with which the image is shared.
+     */
+    SharedAwsAccountIds?: AwsAccountIdList;
+    /**
+     * The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeImagePermissionsResult {
+    /**
+     * The name of the private image.
+     */
+    Name?: Name;
+    /**
+     * The permissions for a private image that you own. 
+     */
+    SharedImagePermissionsList?: SharedImagePermissionsList;
+    /**
+     * The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     */
+    NextToken?: String;
+  }
   export type DescribeImagesMaxResults = number;
   export interface DescribeImagesRequest {
     /**
@@ -727,11 +806,19 @@ declare namespace AppStream {
      */
     Names?: StringList;
     /**
+     * The ARNs of the public, private, and shared images to describe.
+     */
+    Arns?: ArnList;
+    /**
+     * The type of image (public, private, or shared) to describe. 
+     */
+    Type?: VisibilityType;
+    /**
      * The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.
      */
     NextToken?: String;
     /**
-     * The maximum size of each results page.
+     * The maximum size of each page of results.
      */
     MaxResults?: DescribeImagesMaxResults;
   }
@@ -741,7 +828,7 @@ declare namespace AppStream {
      */
     Images?: ImageList;
     /**
-     * The pagination token used to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     * The pagination token to use to retrieve the next page of results. If there are no more pages, this value is null.
      */
     NextToken?: String;
   }
@@ -878,7 +965,11 @@ declare namespace AppStream {
     /**
      * The name of the image used to create the fleet.
      */
-    ImageName: String;
+    ImageName?: String;
+    /**
+     * The ARN for the public, private, or shared image.
+     */
+    ImageArn?: Arn;
     /**
      * The instance type to use when launching fleet instances.
      */
@@ -998,6 +1089,10 @@ declare namespace AppStream {
      * The version of the AppStream 2.0 agent to use for instances that are launched from this image. 
      */
     AppstreamAgentVersion?: AppstreamAgentVersion;
+    /**
+     * The permissions to provide to the destination AWS account for the specified image.
+     */
+    ImagePermissions?: ImagePermissions;
   }
   export interface ImageBuilder {
     /**
@@ -1075,6 +1170,16 @@ declare namespace AppStream {
   }
   export type ImageBuilderStateChangeReasonCode = "INTERNAL_ERROR"|"IMAGE_UNAVAILABLE"|string;
   export type ImageList = Image[];
+  export interface ImagePermissions {
+    /**
+     * Indicates whether the image can be used for a fleet.
+     */
+    allowFleet?: BooleanObject;
+    /**
+     * Indicates whether the image can be used for an image builder.
+     */
+    allowImageBuilder?: BooleanObject;
+  }
   export type ImageState = "PENDING"|"AVAILABLE"|"FAILED"|"COPYING"|"DELETING"|string;
   export interface ImageStateChangeReason {
     /**
@@ -1141,6 +1246,7 @@ declare namespace AppStream {
     Tags?: Tags;
   }
   export type Long = number;
+  export type MaxResults = number;
   export type Metadata = {[key: string]: String};
   export type Name = string;
   export interface NetworkAccessConfiguration {
@@ -1218,6 +1324,17 @@ declare namespace AppStream {
   }
   export type SessionList = Session[];
   export type SessionState = "ACTIVE"|"PENDING"|"EXPIRED"|string;
+  export interface SharedImagePermissions {
+    /**
+     * The 12-digit ID of the AWS account with which the image is shared.
+     */
+    sharedAccountId: AwsAccountId;
+    /**
+     * Describes the permissions for a shared image.
+     */
+    imagePermissions: ImagePermissions;
+  }
+  export type SharedImagePermissionsList = SharedImagePermissions[];
   export interface Stack {
     /**
      * The ARN of the stack.
@@ -1394,9 +1511,13 @@ declare namespace AppStream {
      */
     ImageName?: String;
     /**
+     * The ARN of the public, private, or shared image to use.
+     */
+    ImageArn?: Arn;
+    /**
      * A unique name for the fleet.
      */
-    Name: String;
+    Name?: String;
     /**
      * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
@@ -1447,6 +1568,22 @@ declare namespace AppStream {
      * Information about the fleet.
      */
     Fleet?: Fleet;
+  }
+  export interface UpdateImagePermissionsRequest {
+    /**
+     * The name of the private image.
+     */
+    Name: Name;
+    /**
+     * The 12-digit ID of the AWS account for which you want add or update image permissions.
+     */
+    SharedAccountId: AwsAccountId;
+    /**
+     * The permissions for the image.
+     */
+    ImagePermissions: ImagePermissions;
+  }
+  export interface UpdateImagePermissionsResult {
   }
   export interface UpdateStackRequest {
     /**
@@ -1504,7 +1641,7 @@ declare namespace AppStream {
     Permission: Permission;
   }
   export type UserSettingList = UserSetting[];
-  export type VisibilityType = "PUBLIC"|"PRIVATE"|string;
+  export type VisibilityType = "PUBLIC"|"PRIVATE"|"SHARED"|string;
   export interface VpcConfig {
     /**
      * The subnets to which a network interface is established from the fleet instance.

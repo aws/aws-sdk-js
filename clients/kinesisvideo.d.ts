@@ -93,7 +93,7 @@ declare class KinesisVideo extends Service {
   updateStream(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateStreamOutput) => void): Request<KinesisVideo.Types.UpdateStreamOutput, AWSError>;
 }
 declare namespace KinesisVideo {
-  export type APIName = "PUT_MEDIA"|"GET_MEDIA"|"LIST_FRAGMENTS"|"GET_MEDIA_FOR_FRAGMENT_LIST"|string;
+  export type APIName = "PUT_MEDIA"|"GET_MEDIA"|"LIST_FRAGMENTS"|"GET_MEDIA_FOR_FRAGMENT_LIST"|"GET_HLS_STREAMING_SESSION_URL"|string;
   export type ComparisonOperator = "BEGINS_WITH"|string;
   export interface CreateStreamInput {
     /**
@@ -113,7 +113,7 @@ declare namespace KinesisVideo {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
+     * The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data. When the DataRetentionInHours value is 0, consumers can still consume the fragments that remain in the service host buffer, which has a retention time limit of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the buffer when either limit is reached.
      */
     DataRetentionInHours?: DataRetentionInHours;
   }

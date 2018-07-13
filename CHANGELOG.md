@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.274.1-->
+<!--LATEST=2.275.1-->
 <!--ENTRYINSERT-->
+
+## 2.275.1
+* feature: AppStream: This API update adds support for sharing AppStream images across AWS accounts within the same region.
+* feature: KinesisVideo: Adds support for HLS video playback of Kinesis Video streams using the KinesisVideo client by including "GET_HLS_STREAMING_SESSION_URL" as an additional APIName parameter in the GetDataEndpoint input.
+* feature: KinesisVideoArchivedMedia: Adds support for HLS video playback of Kinesis Video streams by providing the GetHLSStreamingSessionURL function in the KinesisVideoArchivedMedia client.
 
 ## 2.274.1
 * feature: AppSync: This release adds support for configuring HTTP  endpoints as data sources for your AWS AppSync GraphQL API.

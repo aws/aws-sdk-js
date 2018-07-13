@@ -81,7 +81,8 @@
         {"shape":"InvalidRoleException"},
         {"shape":"ConcurrentModificationException"},
         {"shape":"InvalidParameterCombinationException"},
-        {"shape":"IncompatibleImageException"}
+        {"shape":"IncompatibleImageException"},
+        {"shape":"OperationNotPermittedException"}
       ],
       "documentation":"<p>Creates a fleet. A fleet consists of streaming instances that run a specified image.</p>"
     },
@@ -102,7 +103,8 @@
         {"shape":"InvalidRoleException"},
         {"shape":"ConcurrentModificationException"},
         {"shape":"InvalidParameterCombinationException"},
-        {"shape":"IncompatibleImageException"}
+        {"shape":"IncompatibleImageException"},
+        {"shape":"OperationNotPermittedException"}
       ],
       "documentation":"<p>Creates an image builder. An image builder is a virtual machine that is used to create an image.</p> <p>The initial state of the builder is <code>PENDING</code>. When it is ready, the state is <code>RUNNING</code>.</p>"
     },
@@ -215,6 +217,20 @@
       ],
       "documentation":"<p>Deletes the specified image builder and releases the capacity.</p>"
     },
+    "DeleteImagePermissions":{
+      "name":"DeleteImagePermissions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteImagePermissionsRequest"},
+      "output":{"shape":"DeleteImagePermissionsResult"},
+      "errors":[
+        {"shape":"ResourceNotAvailableException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Deletes permissions for the specified private image. After you delete permissions for an image, AWS accounts to which you previously granted these permissions can no longer use the image.</p>"
+    },
     "DeleteStack":{
       "name":"DeleteStack",
       "http":{
@@ -269,6 +285,19 @@
       ],
       "documentation":"<p>Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.</p>"
     },
+    "DescribeImagePermissions":{
+      "name":"DescribeImagePermissions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeImagePermissionsRequest"},
+      "output":{"shape":"DescribeImagePermissionsResult"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Retrieves a list that describes the permissions for a private image that you own. </p>"
+    },
     "DescribeImages":{
       "name":"DescribeImages",
       "http":{
@@ -278,6 +307,7 @@
       "input":{"shape":"DescribeImagesRequest"},
       "output":{"shape":"DescribeImagesResult"},
       "errors":[
+        {"shape":"InvalidParameterCombinationException"},
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Retrieves a list that describes one or more specified images, if the image names are provided. Otherwise, all images in the account are described.</p>"
@@ -494,6 +524,21 @@
       ],
       "documentation":"<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code> and <code>ComputeCapacity</code> attributes. If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can't update it.</p>"
     },
+    "UpdateImagePermissions":{
+      "name":"UpdateImagePermissions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateImagePermissionsRequest"},
+      "output":{"shape":"UpdateImagePermissionsResult"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceNotAvailableException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Adds or updates permissions for the specified private image. </p>"
+    },
     "UpdateStack":{
       "name":"UpdateStack",
       "http":{
@@ -584,6 +629,10 @@
       "type":"string",
       "pattern":"^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
     },
+    "ArnList":{
+      "type":"list",
+      "member":{"shape":"Arn"}
+    },
     "AssociateFleetRequest":{
       "type":"structure",
       "required":[
@@ -613,6 +662,16 @@
         "SAML",
         "USERPOOL"
       ]
+    },
+    "AwsAccountId":{
+      "type":"string",
+      "pattern":"^\\d+$"
+    },
+    "AwsAccountIdList":{
+      "type":"list",
+      "member":{"shape":"AwsAccountId"},
+      "max":5,
+      "min":1
     },
     "Boolean":{"type":"boolean"},
     "BooleanObject":{"type":"boolean"},
@@ -728,7 +787,6 @@
       "type":"structure",
       "required":[
         "Name",
-        "ImageName",
         "InstanceType",
         "ComputeCapacity"
       ],
@@ -740,6 +798,10 @@
         "ImageName":{
           "shape":"String",
           "documentation":"<p>The name of the image used to create the fleet.</p>"
+        },
+        "ImageArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the public, private, or shared image to use.</p>"
         },
         "InstanceType":{
           "shape":"String",
@@ -796,7 +858,6 @@
       "type":"structure",
       "required":[
         "Name",
-        "ImageName",
         "InstanceType"
       ],
       "members":{
@@ -807,6 +868,10 @@
         "ImageName":{
           "shape":"String",
           "documentation":"<p>The name of the image used to create the builder.</p>"
+        },
+        "ImageArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the public, private, or shared image to use.</p>"
         },
         "InstanceType":{
           "shape":"String",
@@ -1013,6 +1078,28 @@
         }
       }
     },
+    "DeleteImagePermissionsRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "SharedAccountId"
+      ],
+      "members":{
+        "Name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the private image.</p>"
+        },
+        "SharedAccountId":{
+          "shape":"AwsAccountId",
+          "documentation":"<p>The 12-digit ID of the AWS account for which to delete image permissions.</p>"
+        }
+      }
+    },
+    "DeleteImagePermissionsResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteImageRequest":{
       "type":"structure",
       "required":["Name"],
@@ -1133,6 +1220,45 @@
         }
       }
     },
+    "DescribeImagePermissionsRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the private image for which to describe permissions. The image must be one that you own. </p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum size of each results page.</p>"
+        },
+        "SharedAwsAccountIds":{
+          "shape":"AwsAccountIdList",
+          "documentation":"<p>The 12-digit ID of one or more AWS accounts with which the image is shared.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.</p>"
+        }
+      }
+    },
+    "DescribeImagePermissionsResult":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the private image.</p>"
+        },
+        "SharedImagePermissionsList":{
+          "shape":"SharedImagePermissionsList",
+          "documentation":"<p>The permissions for a private image that you own. </p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.</p>"
+        }
+      }
+    },
     "DescribeImagesMaxResults":{
       "type":"integer",
       "box":true,
@@ -1146,13 +1272,21 @@
           "shape":"StringList",
           "documentation":"<p>The names of the images to describe.</p>"
         },
+        "Arns":{
+          "shape":"ArnList",
+          "documentation":"<p>The ARNs of the public, private, and shared images to describe.</p>"
+        },
+        "Type":{
+          "shape":"VisibilityType",
+          "documentation":"<p>The type of image (public, private, or shared) to describe. </p>"
+        },
         "NextToken":{
           "shape":"String",
           "documentation":"<p>The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.</p>"
         },
         "MaxResults":{
           "shape":"DescribeImagesMaxResults",
-          "documentation":"<p>The maximum size of each results page.</p>"
+          "documentation":"<p>The maximum size of each page of results.</p>"
         }
       }
     },
@@ -1165,7 +1299,7 @@
         },
         "NextToken":{
           "shape":"String",
-          "documentation":"<p>The pagination token used to retrieve the next page of results. If this value is empty, only the first page is retrieved.</p>"
+          "documentation":"<p>The pagination token to use to retrieve the next page of results. If there are no more pages, this value is null.</p>"
         }
       }
     },
@@ -1355,7 +1489,6 @@
       "required":[
         "Arn",
         "Name",
-        "ImageName",
         "InstanceType",
         "ComputeCapacityStatus",
         "State"
@@ -1380,6 +1513,10 @@
         "ImageName":{
           "shape":"String",
           "documentation":"<p>The name of the image used to create the fleet.</p>"
+        },
+        "ImageArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN for the public, private, or shared image.</p>"
         },
         "InstanceType":{
           "shape":"String",
@@ -1571,6 +1708,10 @@
         "AppstreamAgentVersion":{
           "shape":"AppstreamAgentVersion",
           "documentation":"<p>The version of the AppStream 2.0 agent to use for instances that are launched from this image. </p>"
+        },
+        "ImagePermissions":{
+          "shape":"ImagePermissions",
+          "documentation":"<p>The permissions to provide to the destination AWS account for the specified image.</p>"
         }
       },
       "documentation":"<p>Describes an image.</p>"
@@ -1684,6 +1825,20 @@
     "ImageList":{
       "type":"list",
       "member":{"shape":"Image"}
+    },
+    "ImagePermissions":{
+      "type":"structure",
+      "members":{
+        "allowFleet":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Indicates whether the image can be used for a fleet.</p>"
+        },
+        "allowImageBuilder":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Indicates whether the image can be used for an image builder.</p>"
+        }
+      },
+      "documentation":"<p>Describes the permissions for an image. </p>"
     },
     "ImageState":{
       "type":"string",
@@ -1832,6 +1987,12 @@
       }
     },
     "Long":{"type":"long"},
+    "MaxResults":{
+      "type":"integer",
+      "box":true,
+      "max":500,
+      "min":0
+    },
     "Metadata":{
       "type":"map",
       "key":{"shape":"String"},
@@ -2028,6 +2189,28 @@
         "PENDING",
         "EXPIRED"
       ]
+    },
+    "SharedImagePermissions":{
+      "type":"structure",
+      "required":[
+        "sharedAccountId",
+        "imagePermissions"
+      ],
+      "members":{
+        "sharedAccountId":{
+          "shape":"AwsAccountId",
+          "documentation":"<p>The 12-digit ID of the AWS account with which the image is shared.</p>"
+        },
+        "imagePermissions":{
+          "shape":"ImagePermissions",
+          "documentation":"<p>Describes the permissions for a shared image.</p>"
+        }
+      },
+      "documentation":"<p>Describes the permissions that are available to the specified AWS account for a shared image.</p>"
+    },
+    "SharedImagePermissionsList":{
+      "type":"list",
+      "member":{"shape":"SharedImagePermissions"}
     },
     "Stack":{
       "type":"structure",
@@ -2347,11 +2530,14 @@
     },
     "UpdateFleetRequest":{
       "type":"structure",
-      "required":["Name"],
       "members":{
         "ImageName":{
           "shape":"String",
           "documentation":"<p>The name of the image used to create the fleet.</p>"
+        },
+        "ImageArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the public, private, or shared image to use.</p>"
         },
         "Name":{
           "shape":"String",
@@ -2411,6 +2597,33 @@
           "shape":"Fleet",
           "documentation":"<p>Information about the fleet.</p>"
         }
+      }
+    },
+    "UpdateImagePermissionsRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "SharedAccountId",
+        "ImagePermissions"
+      ],
+      "members":{
+        "Name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the private image.</p>"
+        },
+        "SharedAccountId":{
+          "shape":"AwsAccountId",
+          "documentation":"<p>The 12-digit ID of the AWS account for which you want add or update image permissions.</p>"
+        },
+        "ImagePermissions":{
+          "shape":"ImagePermissions",
+          "documentation":"<p>The permissions for the image.</p>"
+        }
+      }
+    },
+    "UpdateImagePermissionsResult":{
+      "type":"structure",
+      "members":{
       }
     },
     "UpdateStackRequest":{
@@ -2497,7 +2710,8 @@
       "type":"string",
       "enum":[
         "PUBLIC",
-        "PRIVATE"
+        "PRIVATE",
+        "SHARED"
       ]
     },
     "VpcConfig":{
