@@ -619,7 +619,7 @@
           + '[profile withmfa]\nrole_arn = arn\nmfa_serial = serial\nsource_profile = default';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         tokenCodeFn = function(serial, callback) {
-          callback('tokenCodeFn error');
+          callback(new Error('tokenCodeFn error'));
         };
         creds = new AWS.SharedIniFileCredentials({
           profile: 'withmfa',
