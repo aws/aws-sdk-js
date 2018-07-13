@@ -580,19 +580,6 @@
           return done();
         });
       });
-      it('default tokenCodeFn works if mfa_serial is provided', function(done) {
-        var creds, tokenCodeFnSpy, mock;
-        mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session\n'
-          + '[profile withmfa]\nrole_arn = arn\nmfa_serial = serial\nsource_profile = default';
-        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
-        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
-        creds = new AWS.SharedIniFileCredentials({ profile: 'withmfa' });
-        tokenCodeFnSpy = helpers.createSpy('tokenCodeFn');
-        creds.refresh(function(e) {
-          done();
-        });
-        expect(tokenCodeFnSpy.calls.length).to.equal(1);
-      });
       it('calls tokenCodeFn if mfa_serial is provided', function(done) {
         var creds, tokenCodeFn, mock, tokenCodeFnSpy;
         mock = '[default]\nrole_arn = arn\nmfa_serial = serial\naws_access_key_id = key\naws_secret_access_key = secret\n'
