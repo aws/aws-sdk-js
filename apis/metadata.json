@@ -499,14 +499,16 @@
   },
   "kinesisvideoarchivedmedia": {
     "prefix": "kinesis-video-archived-media",
-    "name": "KinesisVideoArchivedMedia"
+    "name": "KinesisVideoArchivedMedia",
+    "cors": true
   },
   "kinesisvideomedia": {
     "prefix": "kinesis-video-media",
     "name": "KinesisVideoMedia"
   },
   "kinesisvideo": {
-    "name": "KinesisVideo"
+    "name": "KinesisVideo",
+    "cors": true
   },
   "sagemakerruntime": {
     "prefix": "runtime.sagemaker",
