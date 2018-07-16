@@ -7,10 +7,34 @@
   AWS = helpers.AWS;
 
   describe('AWS.SequentialExecutor', function() {
+
     beforeEach(function() {
       return this.emitter = new AWS.SequentialExecutor();
     });
+
+    describe('on', function() {
+      it('can add callback in designated order', function() {
+        var list = [];
+        var addToHead = true;
+        this.emitter.on('event1', function() {
+          list.push(1);
+        });
+        this.emitter.on('event1', function() {
+          return list.push(2);
+        }, addToHead);
+        this.emitter.on('event1', function() {
+          return list.push(3);
+        }, addToHead);
+        this.emitter.on('event1', function() {
+          return list.push(4);
+        });
+        this.emitter.emit('event1');
+        return expect(list).to.eql([3, 2, 1, 4]);
+      });
+    })
+
     describe('addListeners', function() {
+
       it('accepts a hash of events and functions', function() {
         var listeners, triggers;
         triggers = [0, 0, 0];
@@ -36,7 +60,8 @@
         this.emitter.emit('otherEventName');
         return expect(triggers).to.eql([1, 1, 1]);
       });
-      return it('accepts a SequentialExecutor object', function() {
+
+      it('accepts a SequentialExecutor object', function() {
         var listeners, triggers;
         triggers = [0, 0, 0];
         listeners = new AWS.SequentialExecutor();
@@ -57,7 +82,9 @@
         return expect(triggers).to.eql([1, 1, 1]);
       });
     });
+
     describe('addNamedListener', function() {
+
       it('defines a constant with the callback', function() {
         var spy;
         spy = helpers.createSpy();
@@ -66,19 +93,42 @@
         this.emitter.emit('eventName', ['argument']);
         return expect(spy.calls[0]["arguments"]).to.eql(['argument']);
       });
-      return it('is chainable', function() {
+
+      it('is chainable', function() {
         var r;
         r = this.emitter.addNamedListener('CONSTNAME', 'eventName', function() {});
         return expect(r).to.equal(this.emitter);
       });
+
+      it('can attach callbacks to head of callback array', function() {
+        var list = [];
+        var addToHead = true;
+        this.emitter.addNamedListener('FUNCTION_1', 'event', function() {
+          list.push(1);
+        });
+        this.emitter.addNamedListener('FUNCTION_2', 'event', function() {
+          list.push(2);
+        }, addToHead);
+        this.emitter.addNamedListener('FUNCTION_3', 'event', function() {
+          list.push(3);
+        }, addToHead);
+        this.emitter.addNamedListener('FUNCTION_4', 'event', function() {
+          list.push(4);
+        });
+        this.emitter.emit('event');
+        return expect(list).to.eql([3, 2, 1, 4]);
+      })
     });
+
     describe('addNamedListeners', function() {
+
       it('is chainable', function() {
         var r;
         r = this.emitter.addNamedListeners(function() {});
         return expect(r).to.equal(this.emitter);
       });
-      return it('provides an add function in callback to call addNamedListener', function() {
+
+      it('provides an add function in callback to call addNamedListener', function() {
         var spy1, spy2;
         spy1 = helpers.createSpy();
         spy2 = helpers.createSpy();
@@ -94,7 +144,9 @@
         return expect(spy2.calls[0]["arguments"]).to.eql(['arg2']);
       });
     });
-    return describe('emit', function() {
+
+    describe('emit', function() {
+
       it('emits to all listeners', function() {
         var list;
         list = [];
@@ -110,6 +162,7 @@
         this.emitter.emit('event1');
         return expect(list).to.eql([1, 2, 3]);
       });
+
       it('does not stop emitting when error is returned', function(done) {
         var list;
         list = [];
@@ -129,7 +182,8 @@
           return done();
         });
       });
-      return it('does not stop emitting when error is returned (async)', function(done) {
+
+      it('does not stop emitting when error is returned (async)', function(done) {
         var list;
         list = [];
         this.emitter.on('event1', function() {
