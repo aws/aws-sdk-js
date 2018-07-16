@@ -122,7 +122,7 @@
   ],
   "scripts": {
     "test": "npm -s run-script lint && npm -s run-script unit && npm -s run-script buildertest && npm -s run-script browsertest && npm -s run-script react-native-test && ([ -f configuration ] && npm -s run-script integration || true)",
-    "unit": "mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/event-stream",
+    "unit": "mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/publisher test/event-stream",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/event-stream",
     "browsertest": "rake browser:test && karma start",
     "buildertest": "mocha --compilers coffee:coffee-script -s 1000 -t 10000 dist-tools/test",
