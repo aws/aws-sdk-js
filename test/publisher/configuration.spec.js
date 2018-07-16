@@ -104,7 +104,7 @@ if (AWS.util.isNode()) {
       });
   
       it('should get clientID', function () {
-        helpers.spyOn(AWS.util, 'readFileSync').andReturn('[default]\ncsm_clientid=id');
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn('[default]\ncsm_client_id=id');
         expect(monitoringConfig()).to.eql({
           enabled: false,
           port: undefined,
@@ -119,7 +119,7 @@ if (AWS.util.isNode()) {
         process.env.AWS_CSM_ENABLED = '1';
         process.env.AWS_CSM_PORT = '54321';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(
-          '[profile role]\ncsm_enabled=false\ncsm_clientid=clientid'
+          '[profile role]\ncsm_enabled=false\ncsm_client_id=clientid'
         );
         expect(monitoringConfig()).to.eql({
           enabled: true,
