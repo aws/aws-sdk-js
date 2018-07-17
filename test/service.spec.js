@@ -865,6 +865,7 @@
         expect(attemptNum).to.equal(1);
         expect(callNumClient2).to.equal(0);
       });
+
       it('should emit events on Service prototype', function() {
         var callNum = 0;
         var attemptNum = 0;
@@ -882,6 +883,7 @@
         expect(callNum).to.equal(1);
         expect(attemptNum).to.equal(1);
       });
+
       it('should emit events on global Service prototype', function() {
         var callNum = 0;
         var attemptNum = 0;
@@ -900,7 +902,6 @@
         expect(attemptNum).to.equal(1);
       })
     })
-
 
     it('should emit api call events corresponding to event interface', function() {
       helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']); 
@@ -940,6 +941,24 @@
         expect(typeof event.AttemptLatency).to.equal('number');
       });
       client.makeRequest('operationName', function(err, data) {});
+    });
+
+    it('should publish monitoring event when publisher is set', function(done) {
+      helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']);
+      var events = [];
+      AWS.Service.prototype.publisher = {
+        eventHandler: function(event){
+          events.push(event)
+        }
+      }
+      var client = new MockService({clientSideMonitoring: true});
+      client.makeRequest('operationName', function(err, data) {});
+      process.nextTick(function() {
+        expect(events.length).to.equal(2);
+        expect(events[0].Type).to.equal('ApiCallAttempt');
+        expect(events[1].Type).to.equal('ApiCall');
+        done();
+      })
     })
   });
 

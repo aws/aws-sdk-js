@@ -186,7 +186,6 @@
 
             req.runTo('sign', function(err) {
               expect(req.httpRequest.headers['Content-Length']).to.equal(4);
-              console.log(err);
               expect(!err).to.equal(true);
             });
           });

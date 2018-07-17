@@ -93,6 +93,17 @@ if (AWS.util.isNode()) {
           });
         }
       });
+
+      it('should not use configurations from config file when exceptions happen', function() {
+        helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function() {
+          throw new Error();
+        });
+        expect(monitoringConfig()).to.eql({
+          enabled: false,
+          port: undefined,
+          clientId: undefined
+        });
+      })
   
       it('should get port', function () {
         helpers.spyOn(AWS.util, 'readFileSync').andReturn('[default]\ncsm_port=31001');
