@@ -63,4 +63,6 @@ export import STS = require('./sts');
 export import WAF = require('./waf');
 export import WorkDocs = require('./workdocs');
 export import LexModelBuildingService = require('./lexmodelbuildingservice');
+export import KinesisVideoArchivedMedia = require('./kinesisvideoarchivedmedia');
+export import KinesisVideo = require('./kinesisvideo');
 export import SecretsManager = require('./secretsmanager');

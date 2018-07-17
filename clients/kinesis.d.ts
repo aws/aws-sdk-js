@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -198,7 +199,7 @@ declare class Kinesis extends Service {
   /**
    * Waits for the streamExists state by periodically calling the underlying Kinesis.describeStreamoperation every 10 seconds (at most 18 times).
    */
-  waitFor(state: "streamExists", params: Kinesis.Types.DescribeStreamInput, callback?: (err: AWSError, data: Kinesis.Types.DescribeStreamOutput) => void): Request<Kinesis.Types.DescribeStreamOutput, AWSError>;
+  waitFor(state: "streamExists", params: Kinesis.Types.DescribeStreamInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Kinesis.Types.DescribeStreamOutput) => void): Request<Kinesis.Types.DescribeStreamOutput, AWSError>;
   /**
    * Waits for the streamExists state by periodically calling the underlying Kinesis.describeStreamoperation every 10 seconds (at most 18 times).
    */
@@ -206,7 +207,7 @@ declare class Kinesis extends Service {
   /**
    * Waits for the streamNotExists state by periodically calling the underlying Kinesis.describeStreamoperation every 10 seconds (at most 18 times).
    */
-  waitFor(state: "streamNotExists", params: Kinesis.Types.DescribeStreamInput, callback?: (err: AWSError, data: Kinesis.Types.DescribeStreamOutput) => void): Request<Kinesis.Types.DescribeStreamOutput, AWSError>;
+  waitFor(state: "streamNotExists", params: Kinesis.Types.DescribeStreamInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Kinesis.Types.DescribeStreamOutput) => void): Request<Kinesis.Types.DescribeStreamOutput, AWSError>;
   /**
    * Waits for the streamNotExists state by periodically calling the underlying Kinesis.describeStreamoperation every 10 seconds (at most 18 times).
    */

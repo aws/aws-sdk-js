@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {S3Customizations} from '../lib/services/s3';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {UseDualstackConfigOptions} from '../lib/config_use_dualstack';
@@ -639,7 +640,7 @@ declare class S3 extends S3Customizations {
   /**
    * Waits for the bucketExists state by periodically calling the underlying S3.headBucketoperation every 5 seconds (at most 20 times).
    */
-  waitFor(state: "bucketExists", params: S3.Types.HeadBucketRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  waitFor(state: "bucketExists", params: S3.Types.HeadBucketRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Waits for the bucketExists state by periodically calling the underlying S3.headBucketoperation every 5 seconds (at most 20 times).
    */
@@ -647,7 +648,7 @@ declare class S3 extends S3Customizations {
   /**
    * Waits for the bucketNotExists state by periodically calling the underlying S3.headBucketoperation every 5 seconds (at most 20 times).
    */
-  waitFor(state: "bucketNotExists", params: S3.Types.HeadBucketRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  waitFor(state: "bucketNotExists", params: S3.Types.HeadBucketRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Waits for the bucketNotExists state by periodically calling the underlying S3.headBucketoperation every 5 seconds (at most 20 times).
    */
@@ -655,7 +656,7 @@ declare class S3 extends S3Customizations {
   /**
    * Waits for the objectExists state by periodically calling the underlying S3.headObjectoperation every 5 seconds (at most 20 times).
    */
-  waitFor(state: "objectExists", params: S3.Types.HeadObjectRequest, callback?: (err: AWSError, data: S3.Types.HeadObjectOutput) => void): Request<S3.Types.HeadObjectOutput, AWSError>;
+  waitFor(state: "objectExists", params: S3.Types.HeadObjectRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: S3.Types.HeadObjectOutput) => void): Request<S3.Types.HeadObjectOutput, AWSError>;
   /**
    * Waits for the objectExists state by periodically calling the underlying S3.headObjectoperation every 5 seconds (at most 20 times).
    */
@@ -663,7 +664,7 @@ declare class S3 extends S3Customizations {
   /**
    * Waits for the objectNotExists state by periodically calling the underlying S3.headObjectoperation every 5 seconds (at most 20 times).
    */
-  waitFor(state: "objectNotExists", params: S3.Types.HeadObjectRequest, callback?: (err: AWSError, data: S3.Types.HeadObjectOutput) => void): Request<S3.Types.HeadObjectOutput, AWSError>;
+  waitFor(state: "objectNotExists", params: S3.Types.HeadObjectRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: S3.Types.HeadObjectOutput) => void): Request<S3.Types.HeadObjectOutput, AWSError>;
   /**
    * Waits for the objectNotExists state by periodically calling the underlying S3.headObjectoperation every 5 seconds (at most 20 times).
    */

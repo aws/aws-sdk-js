@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -1010,7 +1011,7 @@ declare class IAM extends Service {
   /**
    * Waits for the instanceProfileExists state by periodically calling the underlying IAM.getInstanceProfileoperation every 1 seconds (at most 40 times).
    */
-  waitFor(state: "instanceProfileExists", params: IAM.Types.GetInstanceProfileRequest, callback?: (err: AWSError, data: IAM.Types.GetInstanceProfileResponse) => void): Request<IAM.Types.GetInstanceProfileResponse, AWSError>;
+  waitFor(state: "instanceProfileExists", params: IAM.Types.GetInstanceProfileRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: IAM.Types.GetInstanceProfileResponse) => void): Request<IAM.Types.GetInstanceProfileResponse, AWSError>;
   /**
    * Waits for the instanceProfileExists state by periodically calling the underlying IAM.getInstanceProfileoperation every 1 seconds (at most 40 times).
    */
@@ -1018,7 +1019,7 @@ declare class IAM extends Service {
   /**
    * Waits for the userExists state by periodically calling the underlying IAM.getUseroperation every 1 seconds (at most 20 times).
    */
-  waitFor(state: "userExists", params: IAM.Types.GetUserRequest, callback?: (err: AWSError, data: IAM.Types.GetUserResponse) => void): Request<IAM.Types.GetUserResponse, AWSError>;
+  waitFor(state: "userExists", params: IAM.Types.GetUserRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: IAM.Types.GetUserResponse) => void): Request<IAM.Types.GetUserResponse, AWSError>;
   /**
    * Waits for the userExists state by periodically calling the underlying IAM.getUseroperation every 1 seconds (at most 20 times).
    */

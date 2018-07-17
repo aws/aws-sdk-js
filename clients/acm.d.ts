@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -110,7 +111,7 @@ declare class ACM extends Service {
   /**
    * Waits for the certificateValidated state by periodically calling the underlying ACM.describeCertificateoperation every 60 seconds (at most 40 times).
    */
-  waitFor(state: "certificateValidated", params: ACM.Types.DescribeCertificateRequest, callback?: (err: AWSError, data: ACM.Types.DescribeCertificateResponse) => void): Request<ACM.Types.DescribeCertificateResponse, AWSError>;
+  waitFor(state: "certificateValidated", params: ACM.Types.DescribeCertificateRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ACM.Types.DescribeCertificateResponse) => void): Request<ACM.Types.DescribeCertificateResponse, AWSError>;
   /**
    * Waits for the certificateValidated state by periodically calling the underlying ACM.describeCertificateoperation every 60 seconds (at most 40 times).
    */

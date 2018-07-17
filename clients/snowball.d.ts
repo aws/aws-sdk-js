@@ -20,11 +20,11 @@ declare class Snowball extends Service {
    */
   cancelCluster(callback?: (err: AWSError, data: Snowball.Types.CancelClusterResult) => void): Request<Snowball.Types.CancelClusterResult, AWSError>;
   /**
-   * Cancels the specified job. You can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action will return a job's JobState as part of the response element data returned.
+   * Cancels the specified job. You can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action returns a job's JobState as part of the response element data returned.
    */
   cancelJob(params: Snowball.Types.CancelJobRequest, callback?: (err: AWSError, data: Snowball.Types.CancelJobResult) => void): Request<Snowball.Types.CancelJobResult, AWSError>;
   /**
-   * Cancels the specified job. You can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action will return a job's JobState as part of the response element data returned.
+   * Cancels the specified job. You can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action returns a job's JobState as part of the response element data returned.
    */
   cancelJob(callback?: (err: AWSError, data: Snowball.Types.CancelJobResult) => void): Request<Snowball.Types.CancelJobResult, AWSError>;
   /**
@@ -124,6 +124,14 @@ declare class Snowball extends Service {
    */
   listClusters(callback?: (err: AWSError, data: Snowball.Types.ListClustersResult) => void): Request<Snowball.Types.ListClustersResult, AWSError>;
   /**
+   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on a Snowball Edge device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
+   */
+  listCompatibleImages(params: Snowball.Types.ListCompatibleImagesRequest, callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
+  /**
+   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on a Snowball Edge device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
+   */
+  listCompatibleImages(callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
+  /**
    * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.
    */
   listJobs(params: Snowball.Types.ListJobsRequest, callback?: (err: AWSError, data: Snowball.Types.ListJobsResult) => void): Request<Snowball.Types.ListJobsResult, AWSError>;
@@ -209,6 +217,7 @@ declare namespace Snowball {
   }
   export type AddressId = string;
   export type AddressList = Address[];
+  export type AmiId = string;
   export type Boolean = boolean;
   export interface CancelClusterRequest {
     /**
@@ -272,7 +281,7 @@ declare namespace Snowball {
      */
     JobType?: JobType;
     /**
-     * The type of AWS Snowball appliance to use for this cluster. Currently, the only supported appliance type for cluster jobs is EDGE.
+     * The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE.
      */
     SnowballType?: SnowballType;
     /**
@@ -288,7 +297,7 @@ declare namespace Snowball {
      */
     AddressId?: AddressId;
     /**
-     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge appliance, rather it represents how quickly each appliance moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, appliances shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
+     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
      */
     ShippingOption?: ShippingOption;
     /**
@@ -301,6 +310,17 @@ declare namespace Snowball {
     ForwardingAddressId?: AddressId;
   }
   export type ClusterState = "AwaitingQuorum"|"Pending"|"InUse"|"Complete"|"Cancelled"|string;
+  export interface CompatibleImage {
+    /**
+     * The unique identifier for an individual Snowball Edge AMI.
+     */
+    AmiId?: String;
+    /**
+     * The optional name of a compatible image.
+     */
+    Name?: String;
+  }
+  export type CompatibleImageList = CompatibleImage[];
   export interface CreateAddressRequest {
     /**
      * The address that you want the Snowball shipped to.
@@ -339,11 +359,11 @@ declare namespace Snowball {
      */
     RoleARN: RoleARN;
     /**
-     * The type of AWS Snowball appliance to use for this cluster. Currently, the only supported appliance type for cluster jobs is EDGE.
+     * The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE.
      */
     SnowballType?: SnowballType;
     /**
-     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge appliance, rather it represents how quickly each appliance moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, appliances shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
+     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
      */
     ShippingOption: ShippingOption;
     /**
@@ -403,7 +423,7 @@ declare namespace Snowball {
      */
     ClusterId?: ClusterId;
     /**
-     * The type of AWS Snowball appliance to use for this job. Currently, the only supported appliance type for cluster jobs is EDGE.
+     * The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is EDGE.
      */
     SnowballType?: SnowballType;
     /**
@@ -495,6 +515,17 @@ declare namespace Snowball {
      */
     SubJobMetadata?: JobMetadataList;
   }
+  export interface Ec2AmiResource {
+    /**
+     * The ID of the AMI in Amazon EC2.
+     */
+    AmiId: AmiId;
+    /**
+     * The ID of the AMI on the Snowball Edge device.
+     */
+    SnowballAmiId?: String;
+  }
+  export type Ec2AmiResourceList = Ec2AmiResource[];
   export interface EventTriggerDefinition {
     /**
      * The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS Lambda function's event trigger associated with this job.
@@ -558,7 +589,7 @@ declare namespace Snowball {
      */
     JobType?: JobType;
     /**
-     * The type of appliance used with this job.
+     * The type of device used with this job.
      */
     SnowballType?: SnowballType;
     /**
@@ -599,7 +630,7 @@ declare namespace Snowball {
      */
     JobType?: JobType;
     /**
-     * The type of appliance used with this job.
+     * The type of device used with this job.
      */
     SnowballType?: SnowballType;
     /**
@@ -639,7 +670,7 @@ declare namespace Snowball {
      */
     Notification?: Notification;
     /**
-     * A value that defines the real-time status of a Snowball's data transfer while the appliance is at AWS. This data is only available while a job has a JobState value of InProgress, for both import and export jobs.
+     * A value that defines the real-time status of a Snowball's data transfer while the device is at AWS. This data is only available while a job has a JobState value of InProgress, for both import and export jobs.
      */
     DataTransferProgress?: DataTransfer;
     /**
@@ -665,6 +696,10 @@ declare namespace Snowball {
      * The Python-language Lambda functions for this job.
      */
     LambdaResources?: LambdaResourceList;
+    /**
+     * The Amazon Machine Images (AMIs) associated with this job.
+     */
+    Ec2AmiResources?: Ec2AmiResourceList;
   }
   export type JobState = "New"|"PreparingAppliance"|"PreparingShipment"|"InTransitToCustomer"|"WithCustomer"|"InTransitToAWS"|"WithAWS"|"InProgress"|"Complete"|"Cancelled"|"Listing"|"Pending"|string;
   export type JobStateList = JobState[];
@@ -732,6 +767,26 @@ declare namespace Snowball {
     ClusterListEntries?: ClusterListEntryList;
     /**
      * HTTP requests are stateless. If you use the automatically generated NextToken value in your next ClusterListEntry call, your list of returned clusters will start from this point in the array.
+     */
+    NextToken?: String;
+  }
+  export interface ListCompatibleImagesRequest {
+    /**
+     * The maximum number of results for the list of compatible images. Currently, a Snowball Edge device can store 10 AMIs.
+     */
+    MaxResults?: ListLimit;
+    /**
+     * HTTP requests are stateless. To identify what object comes "next" in the list of compatible images, you can specify a value for NextToken as the starting point for your list of returned images.
+     */
+    NextToken?: String;
+  }
+  export interface ListCompatibleImagesResult {
+    /**
+     * A JSON-formatted object that describes a compatible AMI, including the ID and name for a Snowball Edge AMI.
+     */
+    CompatibleImages?: CompatibleImageList;
+    /**
+     * Because HTTP requests are stateless, this is the starting point for your next list of returned images.
      */
     NextToken?: String;
   }
@@ -864,7 +919,7 @@ declare namespace Snowball {
      */
     Notification?: Notification;
     /**
-     * The updated S3Resource object (for a single Amazon S3 bucket or key range), or the updated JobResource object (for multiple buckets or key ranges). 
+     * The updated JobResource object, or the updated JobResource object. 
      */
     Resources?: JobResource;
     /**

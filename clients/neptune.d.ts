@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -470,7 +471,7 @@ declare class Neptune extends Service {
   /**
    * Waits for the dBInstanceAvailable state by periodically calling the underlying Neptune.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "dBInstanceAvailable", params: Neptune.Types.DescribeDBInstancesMessage, callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
+  waitFor(state: "dBInstanceAvailable", params: Neptune.Types.DescribeDBInstancesMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
   /**
    * Waits for the dBInstanceAvailable state by periodically calling the underlying Neptune.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */
@@ -478,7 +479,7 @@ declare class Neptune extends Service {
   /**
    * Waits for the dBInstanceDeleted state by periodically calling the underlying Neptune.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "dBInstanceDeleted", params: Neptune.Types.DescribeDBInstancesMessage, callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
+  waitFor(state: "dBInstanceDeleted", params: Neptune.Types.DescribeDBInstancesMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
   /**
    * Waits for the dBInstanceDeleted state by periodically calling the underlying Neptune.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */

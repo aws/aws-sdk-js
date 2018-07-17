@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -342,7 +343,7 @@ declare class CloudFormation extends Service {
   /**
    * Waits for the stackExists state by periodically calling the underlying CloudFormation.describeStacksoperation every 5 seconds (at most 20 times).
    */
-  waitFor(state: "stackExists", params: CloudFormation.Types.DescribeStacksInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
+  waitFor(state: "stackExists", params: CloudFormation.Types.DescribeStacksInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
   /**
    * Waits for the stackExists state by periodically calling the underlying CloudFormation.describeStacksoperation every 5 seconds (at most 20 times).
    */
@@ -350,7 +351,7 @@ declare class CloudFormation extends Service {
   /**
    * Waits for the stackCreateComplete state by periodically calling the underlying CloudFormation.describeStacksoperation every 30 seconds (at most 120 times). Wait until stack status is CREATE_COMPLETE.
    */
-  waitFor(state: "stackCreateComplete", params: CloudFormation.Types.DescribeStacksInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
+  waitFor(state: "stackCreateComplete", params: CloudFormation.Types.DescribeStacksInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
   /**
    * Waits for the stackCreateComplete state by periodically calling the underlying CloudFormation.describeStacksoperation every 30 seconds (at most 120 times). Wait until stack status is CREATE_COMPLETE.
    */
@@ -358,7 +359,7 @@ declare class CloudFormation extends Service {
   /**
    * Waits for the stackDeleteComplete state by periodically calling the underlying CloudFormation.describeStacksoperation every 30 seconds (at most 120 times). Wait until stack status is DELETE_COMPLETE.
    */
-  waitFor(state: "stackDeleteComplete", params: CloudFormation.Types.DescribeStacksInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
+  waitFor(state: "stackDeleteComplete", params: CloudFormation.Types.DescribeStacksInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
   /**
    * Waits for the stackDeleteComplete state by periodically calling the underlying CloudFormation.describeStacksoperation every 30 seconds (at most 120 times). Wait until stack status is DELETE_COMPLETE.
    */
@@ -366,7 +367,7 @@ declare class CloudFormation extends Service {
   /**
    * Waits for the stackUpdateComplete state by periodically calling the underlying CloudFormation.describeStacksoperation every 30 seconds (at most 120 times). Wait until stack status is UPDATE_COMPLETE.
    */
-  waitFor(state: "stackUpdateComplete", params: CloudFormation.Types.DescribeStacksInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
+  waitFor(state: "stackUpdateComplete", params: CloudFormation.Types.DescribeStacksInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
   /**
    * Waits for the stackUpdateComplete state by periodically calling the underlying CloudFormation.describeStacksoperation every 30 seconds (at most 120 times). Wait until stack status is UPDATE_COMPLETE.
    */
@@ -374,7 +375,7 @@ declare class CloudFormation extends Service {
   /**
    * Waits for the changeSetCreateComplete state by periodically calling the underlying CloudFormation.describeChangeSetoperation every 30 seconds (at most 120 times). Wait until change set status is CREATE_COMPLETE.
    */
-  waitFor(state: "changeSetCreateComplete", params: CloudFormation.Types.DescribeChangeSetInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetOutput) => void): Request<CloudFormation.Types.DescribeChangeSetOutput, AWSError>;
+  waitFor(state: "changeSetCreateComplete", params: CloudFormation.Types.DescribeChangeSetInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetOutput) => void): Request<CloudFormation.Types.DescribeChangeSetOutput, AWSError>;
   /**
    * Waits for the changeSetCreateComplete state by periodically calling the underlying CloudFormation.describeChangeSetoperation every 30 seconds (at most 120 times). Wait until change set status is CREATE_COMPLETE.
    */

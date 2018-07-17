@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {DynamoDBCustomizations} from '../lib/services/dynamodb';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {DocumentClient as document_client} from '../lib/dynamodb/document_client';
@@ -280,7 +281,7 @@ declare class DynamoDB extends DynamoDBCustomizations {
   /**
    * Waits for the tableExists state by periodically calling the underlying DynamoDB.describeTableoperation every 20 seconds (at most 25 times).
    */
-  waitFor(state: "tableExists", params: DynamoDB.Types.DescribeTableInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableOutput) => void): Request<DynamoDB.Types.DescribeTableOutput, AWSError>;
+  waitFor(state: "tableExists", params: DynamoDB.Types.DescribeTableInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableOutput) => void): Request<DynamoDB.Types.DescribeTableOutput, AWSError>;
   /**
    * Waits for the tableExists state by periodically calling the underlying DynamoDB.describeTableoperation every 20 seconds (at most 25 times).
    */
@@ -288,7 +289,7 @@ declare class DynamoDB extends DynamoDBCustomizations {
   /**
    * Waits for the tableNotExists state by periodically calling the underlying DynamoDB.describeTableoperation every 20 seconds (at most 25 times).
    */
-  waitFor(state: "tableNotExists", params: DynamoDB.Types.DescribeTableInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableOutput) => void): Request<DynamoDB.Types.DescribeTableOutput, AWSError>;
+  waitFor(state: "tableNotExists", params: DynamoDB.Types.DescribeTableInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableOutput) => void): Request<DynamoDB.Types.DescribeTableOutput, AWSError>;
   /**
    * Waits for the tableNotExists state by periodically calling the underlying DynamoDB.describeTableoperation every 20 seconds (at most 25 times).
    */

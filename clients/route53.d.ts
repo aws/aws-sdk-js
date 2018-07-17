@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -462,7 +463,7 @@ declare class Route53 extends Service {
   /**
    * Waits for the resourceRecordSetsChanged state by periodically calling the underlying Route53.getChangeoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "resourceRecordSetsChanged", params: Route53.Types.GetChangeRequest, callback?: (err: AWSError, data: Route53.Types.GetChangeResponse) => void): Request<Route53.Types.GetChangeResponse, AWSError>;
+  waitFor(state: "resourceRecordSetsChanged", params: Route53.Types.GetChangeRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Route53.Types.GetChangeResponse) => void): Request<Route53.Types.GetChangeResponse, AWSError>;
   /**
    * Waits for the resourceRecordSetsChanged state by periodically calling the underlying Route53.getChangeoperation every 30 seconds (at most 60 times).
    */

@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -230,7 +231,7 @@ declare class EMR extends Service {
   /**
    * Waits for the clusterRunning state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "clusterRunning", params: EMR.Types.DescribeClusterInput, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
+  waitFor(state: "clusterRunning", params: EMR.Types.DescribeClusterInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
    * Waits for the clusterRunning state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
@@ -238,7 +239,7 @@ declare class EMR extends Service {
   /**
    * Waits for the stepComplete state by periodically calling the underlying EMR.describeStepoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "stepComplete", params: EMR.Types.DescribeStepInput, callback?: (err: AWSError, data: EMR.Types.DescribeStepOutput) => void): Request<EMR.Types.DescribeStepOutput, AWSError>;
+  waitFor(state: "stepComplete", params: EMR.Types.DescribeStepInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EMR.Types.DescribeStepOutput) => void): Request<EMR.Types.DescribeStepOutput, AWSError>;
   /**
    * Waits for the stepComplete state by periodically calling the underlying EMR.describeStepoperation every 30 seconds (at most 60 times).
    */
@@ -246,7 +247,7 @@ declare class EMR extends Service {
   /**
    * Waits for the clusterTerminated state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "clusterTerminated", params: EMR.Types.DescribeClusterInput, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
+  waitFor(state: "clusterTerminated", params: EMR.Types.DescribeClusterInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
    * Waits for the clusterTerminated state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */

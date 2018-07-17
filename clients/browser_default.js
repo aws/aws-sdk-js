@@ -65,5 +65,7 @@ module.exports = {
   WAF: require('./waf'),
   WorkDocs: require('./workdocs'),
   LexModelBuildingService: require('./lexmodelbuildingservice'),
+  KinesisVideoArchivedMedia: require('./kinesisvideoarchivedmedia'),
+  KinesisVideo: require('./kinesisvideo'),
   SecretsManager: require('./secretsmanager')
 };

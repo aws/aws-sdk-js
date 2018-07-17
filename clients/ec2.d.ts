@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -2206,7 +2207,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the instanceExists state by periodically calling the underlying EC2.describeInstancesoperation every 5 seconds (at most 40 times).
    */
-  waitFor(state: "instanceExists", params: EC2.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
+  waitFor(state: "instanceExists", params: EC2.Types.DescribeInstancesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
    * Waits for the instanceExists state by periodically calling the underlying EC2.describeInstancesoperation every 5 seconds (at most 40 times).
    */
@@ -2214,7 +2215,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the bundleTaskComplete state by periodically calling the underlying EC2.describeBundleTasksoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "bundleTaskComplete", params: EC2.Types.DescribeBundleTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeBundleTasksResult) => void): Request<EC2.Types.DescribeBundleTasksResult, AWSError>;
+  waitFor(state: "bundleTaskComplete", params: EC2.Types.DescribeBundleTasksRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeBundleTasksResult) => void): Request<EC2.Types.DescribeBundleTasksResult, AWSError>;
   /**
    * Waits for the bundleTaskComplete state by periodically calling the underlying EC2.describeBundleTasksoperation every 15 seconds (at most 40 times).
    */
@@ -2222,7 +2223,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the conversionTaskCancelled state by periodically calling the underlying EC2.describeConversionTasksoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "conversionTaskCancelled", params: EC2.Types.DescribeConversionTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeConversionTasksResult) => void): Request<EC2.Types.DescribeConversionTasksResult, AWSError>;
+  waitFor(state: "conversionTaskCancelled", params: EC2.Types.DescribeConversionTasksRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeConversionTasksResult) => void): Request<EC2.Types.DescribeConversionTasksResult, AWSError>;
   /**
    * Waits for the conversionTaskCancelled state by periodically calling the underlying EC2.describeConversionTasksoperation every 15 seconds (at most 40 times).
    */
@@ -2230,7 +2231,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the conversionTaskCompleted state by periodically calling the underlying EC2.describeConversionTasksoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "conversionTaskCompleted", params: EC2.Types.DescribeConversionTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeConversionTasksResult) => void): Request<EC2.Types.DescribeConversionTasksResult, AWSError>;
+  waitFor(state: "conversionTaskCompleted", params: EC2.Types.DescribeConversionTasksRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeConversionTasksResult) => void): Request<EC2.Types.DescribeConversionTasksResult, AWSError>;
   /**
    * Waits for the conversionTaskCompleted state by periodically calling the underlying EC2.describeConversionTasksoperation every 15 seconds (at most 40 times).
    */
@@ -2238,7 +2239,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the conversionTaskDeleted state by periodically calling the underlying EC2.describeConversionTasksoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "conversionTaskDeleted", params: EC2.Types.DescribeConversionTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeConversionTasksResult) => void): Request<EC2.Types.DescribeConversionTasksResult, AWSError>;
+  waitFor(state: "conversionTaskDeleted", params: EC2.Types.DescribeConversionTasksRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeConversionTasksResult) => void): Request<EC2.Types.DescribeConversionTasksResult, AWSError>;
   /**
    * Waits for the conversionTaskDeleted state by periodically calling the underlying EC2.describeConversionTasksoperation every 15 seconds (at most 40 times).
    */
@@ -2246,7 +2247,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the customerGatewayAvailable state by periodically calling the underlying EC2.describeCustomerGatewaysoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "customerGatewayAvailable", params: EC2.Types.DescribeCustomerGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeCustomerGatewaysResult) => void): Request<EC2.Types.DescribeCustomerGatewaysResult, AWSError>;
+  waitFor(state: "customerGatewayAvailable", params: EC2.Types.DescribeCustomerGatewaysRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeCustomerGatewaysResult) => void): Request<EC2.Types.DescribeCustomerGatewaysResult, AWSError>;
   /**
    * Waits for the customerGatewayAvailable state by periodically calling the underlying EC2.describeCustomerGatewaysoperation every 15 seconds (at most 40 times).
    */
@@ -2254,7 +2255,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the exportTaskCancelled state by periodically calling the underlying EC2.describeExportTasksoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "exportTaskCancelled", params: EC2.Types.DescribeExportTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
+  waitFor(state: "exportTaskCancelled", params: EC2.Types.DescribeExportTasksRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
    * Waits for the exportTaskCancelled state by periodically calling the underlying EC2.describeExportTasksoperation every 15 seconds (at most 40 times).
    */
@@ -2262,7 +2263,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the exportTaskCompleted state by periodically calling the underlying EC2.describeExportTasksoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "exportTaskCompleted", params: EC2.Types.DescribeExportTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
+  waitFor(state: "exportTaskCompleted", params: EC2.Types.DescribeExportTasksRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
    * Waits for the exportTaskCompleted state by periodically calling the underlying EC2.describeExportTasksoperation every 15 seconds (at most 40 times).
    */
@@ -2270,7 +2271,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the imageExists state by periodically calling the underlying EC2.describeImagesoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "imageExists", params: EC2.Types.DescribeImagesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeImagesResult) => void): Request<EC2.Types.DescribeImagesResult, AWSError>;
+  waitFor(state: "imageExists", params: EC2.Types.DescribeImagesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeImagesResult) => void): Request<EC2.Types.DescribeImagesResult, AWSError>;
   /**
    * Waits for the imageExists state by periodically calling the underlying EC2.describeImagesoperation every 15 seconds (at most 40 times).
    */
@@ -2278,7 +2279,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the imageAvailable state by periodically calling the underlying EC2.describeImagesoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "imageAvailable", params: EC2.Types.DescribeImagesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeImagesResult) => void): Request<EC2.Types.DescribeImagesResult, AWSError>;
+  waitFor(state: "imageAvailable", params: EC2.Types.DescribeImagesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeImagesResult) => void): Request<EC2.Types.DescribeImagesResult, AWSError>;
   /**
    * Waits for the imageAvailable state by periodically calling the underlying EC2.describeImagesoperation every 15 seconds (at most 40 times).
    */
@@ -2286,7 +2287,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the instanceRunning state by periodically calling the underlying EC2.describeInstancesoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "instanceRunning", params: EC2.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
+  waitFor(state: "instanceRunning", params: EC2.Types.DescribeInstancesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
    * Waits for the instanceRunning state by periodically calling the underlying EC2.describeInstancesoperation every 15 seconds (at most 40 times).
    */
@@ -2294,7 +2295,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the instanceStatusOk state by periodically calling the underlying EC2.describeInstanceStatusoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "instanceStatusOk", params: EC2.Types.DescribeInstanceStatusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
+  waitFor(state: "instanceStatusOk", params: EC2.Types.DescribeInstanceStatusRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
   /**
    * Waits for the instanceStatusOk state by periodically calling the underlying EC2.describeInstanceStatusoperation every 15 seconds (at most 40 times).
    */
@@ -2302,7 +2303,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the instanceStopped state by periodically calling the underlying EC2.describeInstancesoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "instanceStopped", params: EC2.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
+  waitFor(state: "instanceStopped", params: EC2.Types.DescribeInstancesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
    * Waits for the instanceStopped state by periodically calling the underlying EC2.describeInstancesoperation every 15 seconds (at most 40 times).
    */
@@ -2310,7 +2311,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the instanceTerminated state by periodically calling the underlying EC2.describeInstancesoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "instanceTerminated", params: EC2.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
+  waitFor(state: "instanceTerminated", params: EC2.Types.DescribeInstancesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
    * Waits for the instanceTerminated state by periodically calling the underlying EC2.describeInstancesoperation every 15 seconds (at most 40 times).
    */
@@ -2318,7 +2319,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the keyPairExists state by periodically calling the underlying EC2.describeKeyPairsoperation every 5 seconds (at most 6 times).
    */
-  waitFor(state: "keyPairExists", params: EC2.Types.DescribeKeyPairsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeKeyPairsResult) => void): Request<EC2.Types.DescribeKeyPairsResult, AWSError>;
+  waitFor(state: "keyPairExists", params: EC2.Types.DescribeKeyPairsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeKeyPairsResult) => void): Request<EC2.Types.DescribeKeyPairsResult, AWSError>;
   /**
    * Waits for the keyPairExists state by periodically calling the underlying EC2.describeKeyPairsoperation every 5 seconds (at most 6 times).
    */
@@ -2326,7 +2327,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the natGatewayAvailable state by periodically calling the underlying EC2.describeNatGatewaysoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "natGatewayAvailable", params: EC2.Types.DescribeNatGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNatGatewaysResult) => void): Request<EC2.Types.DescribeNatGatewaysResult, AWSError>;
+  waitFor(state: "natGatewayAvailable", params: EC2.Types.DescribeNatGatewaysRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeNatGatewaysResult) => void): Request<EC2.Types.DescribeNatGatewaysResult, AWSError>;
   /**
    * Waits for the natGatewayAvailable state by periodically calling the underlying EC2.describeNatGatewaysoperation every 15 seconds (at most 40 times).
    */
@@ -2334,7 +2335,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the networkInterfaceAvailable state by periodically calling the underlying EC2.describeNetworkInterfacesoperation every 20 seconds (at most 10 times).
    */
-  waitFor(state: "networkInterfaceAvailable", params: EC2.Types.DescribeNetworkInterfacesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInterfacesResult) => void): Request<EC2.Types.DescribeNetworkInterfacesResult, AWSError>;
+  waitFor(state: "networkInterfaceAvailable", params: EC2.Types.DescribeNetworkInterfacesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInterfacesResult) => void): Request<EC2.Types.DescribeNetworkInterfacesResult, AWSError>;
   /**
    * Waits for the networkInterfaceAvailable state by periodically calling the underlying EC2.describeNetworkInterfacesoperation every 20 seconds (at most 10 times).
    */
@@ -2342,7 +2343,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the passwordDataAvailable state by periodically calling the underlying EC2.getPasswordDataoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "passwordDataAvailable", params: EC2.Types.GetPasswordDataRequest, callback?: (err: AWSError, data: EC2.Types.GetPasswordDataResult) => void): Request<EC2.Types.GetPasswordDataResult, AWSError>;
+  waitFor(state: "passwordDataAvailable", params: EC2.Types.GetPasswordDataRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.GetPasswordDataResult) => void): Request<EC2.Types.GetPasswordDataResult, AWSError>;
   /**
    * Waits for the passwordDataAvailable state by periodically calling the underlying EC2.getPasswordDataoperation every 15 seconds (at most 40 times).
    */
@@ -2350,7 +2351,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the snapshotCompleted state by periodically calling the underlying EC2.describeSnapshotsoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "snapshotCompleted", params: EC2.Types.DescribeSnapshotsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
+  waitFor(state: "snapshotCompleted", params: EC2.Types.DescribeSnapshotsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
   /**
    * Waits for the snapshotCompleted state by periodically calling the underlying EC2.describeSnapshotsoperation every 15 seconds (at most 40 times).
    */
@@ -2358,7 +2359,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the spotInstanceRequestFulfilled state by periodically calling the underlying EC2.describeSpotInstanceRequestsoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "spotInstanceRequestFulfilled", params: EC2.Types.DescribeSpotInstanceRequestsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
+  waitFor(state: "spotInstanceRequestFulfilled", params: EC2.Types.DescribeSpotInstanceRequestsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
   /**
    * Waits for the spotInstanceRequestFulfilled state by periodically calling the underlying EC2.describeSpotInstanceRequestsoperation every 15 seconds (at most 40 times).
    */
@@ -2366,7 +2367,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the subnetAvailable state by periodically calling the underlying EC2.describeSubnetsoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "subnetAvailable", params: EC2.Types.DescribeSubnetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSubnetsResult) => void): Request<EC2.Types.DescribeSubnetsResult, AWSError>;
+  waitFor(state: "subnetAvailable", params: EC2.Types.DescribeSubnetsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeSubnetsResult) => void): Request<EC2.Types.DescribeSubnetsResult, AWSError>;
   /**
    * Waits for the subnetAvailable state by periodically calling the underlying EC2.describeSubnetsoperation every 15 seconds (at most 40 times).
    */
@@ -2374,7 +2375,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the systemStatusOk state by periodically calling the underlying EC2.describeInstanceStatusoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "systemStatusOk", params: EC2.Types.DescribeInstanceStatusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
+  waitFor(state: "systemStatusOk", params: EC2.Types.DescribeInstanceStatusRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
   /**
    * Waits for the systemStatusOk state by periodically calling the underlying EC2.describeInstanceStatusoperation every 15 seconds (at most 40 times).
    */
@@ -2382,7 +2383,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the volumeAvailable state by periodically calling the underlying EC2.describeVolumesoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "volumeAvailable", params: EC2.Types.DescribeVolumesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
+  waitFor(state: "volumeAvailable", params: EC2.Types.DescribeVolumesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
   /**
    * Waits for the volumeAvailable state by periodically calling the underlying EC2.describeVolumesoperation every 15 seconds (at most 40 times).
    */
@@ -2390,7 +2391,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the volumeDeleted state by periodically calling the underlying EC2.describeVolumesoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "volumeDeleted", params: EC2.Types.DescribeVolumesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
+  waitFor(state: "volumeDeleted", params: EC2.Types.DescribeVolumesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
   /**
    * Waits for the volumeDeleted state by periodically calling the underlying EC2.describeVolumesoperation every 15 seconds (at most 40 times).
    */
@@ -2398,7 +2399,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the volumeInUse state by periodically calling the underlying EC2.describeVolumesoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "volumeInUse", params: EC2.Types.DescribeVolumesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
+  waitFor(state: "volumeInUse", params: EC2.Types.DescribeVolumesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
   /**
    * Waits for the volumeInUse state by periodically calling the underlying EC2.describeVolumesoperation every 15 seconds (at most 40 times).
    */
@@ -2406,7 +2407,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the vpcAvailable state by periodically calling the underlying EC2.describeVpcsoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "vpcAvailable", params: EC2.Types.DescribeVpcsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcsResult) => void): Request<EC2.Types.DescribeVpcsResult, AWSError>;
+  waitFor(state: "vpcAvailable", params: EC2.Types.DescribeVpcsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeVpcsResult) => void): Request<EC2.Types.DescribeVpcsResult, AWSError>;
   /**
    * Waits for the vpcAvailable state by periodically calling the underlying EC2.describeVpcsoperation every 15 seconds (at most 40 times).
    */
@@ -2414,7 +2415,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the vpcExists state by periodically calling the underlying EC2.describeVpcsoperation every 1 seconds (at most 5 times).
    */
-  waitFor(state: "vpcExists", params: EC2.Types.DescribeVpcsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcsResult) => void): Request<EC2.Types.DescribeVpcsResult, AWSError>;
+  waitFor(state: "vpcExists", params: EC2.Types.DescribeVpcsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeVpcsResult) => void): Request<EC2.Types.DescribeVpcsResult, AWSError>;
   /**
    * Waits for the vpcExists state by periodically calling the underlying EC2.describeVpcsoperation every 1 seconds (at most 5 times).
    */
@@ -2422,7 +2423,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the vpnConnectionAvailable state by periodically calling the underlying EC2.describeVpnConnectionsoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "vpnConnectionAvailable", params: EC2.Types.DescribeVpnConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpnConnectionsResult) => void): Request<EC2.Types.DescribeVpnConnectionsResult, AWSError>;
+  waitFor(state: "vpnConnectionAvailable", params: EC2.Types.DescribeVpnConnectionsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeVpnConnectionsResult) => void): Request<EC2.Types.DescribeVpnConnectionsResult, AWSError>;
   /**
    * Waits for the vpnConnectionAvailable state by periodically calling the underlying EC2.describeVpnConnectionsoperation every 15 seconds (at most 40 times).
    */
@@ -2430,7 +2431,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the vpnConnectionDeleted state by periodically calling the underlying EC2.describeVpnConnectionsoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "vpnConnectionDeleted", params: EC2.Types.DescribeVpnConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpnConnectionsResult) => void): Request<EC2.Types.DescribeVpnConnectionsResult, AWSError>;
+  waitFor(state: "vpnConnectionDeleted", params: EC2.Types.DescribeVpnConnectionsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeVpnConnectionsResult) => void): Request<EC2.Types.DescribeVpnConnectionsResult, AWSError>;
   /**
    * Waits for the vpnConnectionDeleted state by periodically calling the underlying EC2.describeVpnConnectionsoperation every 15 seconds (at most 40 times).
    */
@@ -2438,7 +2439,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the vpcPeeringConnectionExists state by periodically calling the underlying EC2.describeVpcPeeringConnectionsoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "vpcPeeringConnectionExists", params: EC2.Types.DescribeVpcPeeringConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcPeeringConnectionsResult) => void): Request<EC2.Types.DescribeVpcPeeringConnectionsResult, AWSError>;
+  waitFor(state: "vpcPeeringConnectionExists", params: EC2.Types.DescribeVpcPeeringConnectionsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeVpcPeeringConnectionsResult) => void): Request<EC2.Types.DescribeVpcPeeringConnectionsResult, AWSError>;
   /**
    * Waits for the vpcPeeringConnectionExists state by periodically calling the underlying EC2.describeVpcPeeringConnectionsoperation every 15 seconds (at most 40 times).
    */
@@ -2446,7 +2447,7 @@ declare class EC2 extends Service {
   /**
    * Waits for the vpcPeeringConnectionDeleted state by periodically calling the underlying EC2.describeVpcPeeringConnectionsoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "vpcPeeringConnectionDeleted", params: EC2.Types.DescribeVpcPeeringConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcPeeringConnectionsResult) => void): Request<EC2.Types.DescribeVpcPeeringConnectionsResult, AWSError>;
+  waitFor(state: "vpcPeeringConnectionDeleted", params: EC2.Types.DescribeVpcPeeringConnectionsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeVpcPeeringConnectionsResult) => void): Request<EC2.Types.DescribeVpcPeeringConnectionsResult, AWSError>;
   /**
    * Waits for the vpcPeeringConnectionDeleted state by periodically calling the underlying EC2.describeVpcPeeringConnectionsoperation every 15 seconds (at most 40 times).
    */

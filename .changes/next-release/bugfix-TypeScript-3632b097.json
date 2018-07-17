@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "TypeScript",
-  "description": "Updates waitFor methods to accept $waiter configuration in parameter fields."
-}

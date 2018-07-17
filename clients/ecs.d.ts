@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -262,7 +263,7 @@ declare class ECS extends Service {
   /**
    * Waits for the tasksRunning state by periodically calling the underlying ECS.describeTasksoperation every 6 seconds (at most 100 times).
    */
-  waitFor(state: "tasksRunning", params: ECS.Types.DescribeTasksRequest, callback?: (err: AWSError, data: ECS.Types.DescribeTasksResponse) => void): Request<ECS.Types.DescribeTasksResponse, AWSError>;
+  waitFor(state: "tasksRunning", params: ECS.Types.DescribeTasksRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ECS.Types.DescribeTasksResponse) => void): Request<ECS.Types.DescribeTasksResponse, AWSError>;
   /**
    * Waits for the tasksRunning state by periodically calling the underlying ECS.describeTasksoperation every 6 seconds (at most 100 times).
    */
@@ -270,7 +271,7 @@ declare class ECS extends Service {
   /**
    * Waits for the tasksStopped state by periodically calling the underlying ECS.describeTasksoperation every 6 seconds (at most 100 times).
    */
-  waitFor(state: "tasksStopped", params: ECS.Types.DescribeTasksRequest, callback?: (err: AWSError, data: ECS.Types.DescribeTasksResponse) => void): Request<ECS.Types.DescribeTasksResponse, AWSError>;
+  waitFor(state: "tasksStopped", params: ECS.Types.DescribeTasksRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ECS.Types.DescribeTasksResponse) => void): Request<ECS.Types.DescribeTasksResponse, AWSError>;
   /**
    * Waits for the tasksStopped state by periodically calling the underlying ECS.describeTasksoperation every 6 seconds (at most 100 times).
    */
@@ -278,7 +279,7 @@ declare class ECS extends Service {
   /**
    * Waits for the servicesStable state by periodically calling the underlying ECS.describeServicesoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "servicesStable", params: ECS.Types.DescribeServicesRequest, callback?: (err: AWSError, data: ECS.Types.DescribeServicesResponse) => void): Request<ECS.Types.DescribeServicesResponse, AWSError>;
+  waitFor(state: "servicesStable", params: ECS.Types.DescribeServicesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ECS.Types.DescribeServicesResponse) => void): Request<ECS.Types.DescribeServicesResponse, AWSError>;
   /**
    * Waits for the servicesStable state by periodically calling the underlying ECS.describeServicesoperation every 15 seconds (at most 40 times).
    */
@@ -286,7 +287,7 @@ declare class ECS extends Service {
   /**
    * Waits for the servicesInactive state by periodically calling the underlying ECS.describeServicesoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "servicesInactive", params: ECS.Types.DescribeServicesRequest, callback?: (err: AWSError, data: ECS.Types.DescribeServicesResponse) => void): Request<ECS.Types.DescribeServicesResponse, AWSError>;
+  waitFor(state: "servicesInactive", params: ECS.Types.DescribeServicesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ECS.Types.DescribeServicesResponse) => void): Request<ECS.Types.DescribeServicesResponse, AWSError>;
   /**
    * Waits for the servicesInactive state by periodically calling the underlying ECS.describeServicesoperation every 15 seconds (at most 40 times).
    */

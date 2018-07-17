@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -558,7 +559,7 @@ declare class SES extends Service {
   /**
    * Waits for the identityExists state by periodically calling the underlying SES.getIdentityVerificationAttributesoperation every 3 seconds (at most 20 times).
    */
-  waitFor(state: "identityExists", params: SES.Types.GetIdentityVerificationAttributesRequest, callback?: (err: AWSError, data: SES.Types.GetIdentityVerificationAttributesResponse) => void): Request<SES.Types.GetIdentityVerificationAttributesResponse, AWSError>;
+  waitFor(state: "identityExists", params: SES.Types.GetIdentityVerificationAttributesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: SES.Types.GetIdentityVerificationAttributesResponse) => void): Request<SES.Types.GetIdentityVerificationAttributesResponse, AWSError>;
   /**
    * Waits for the identityExists state by periodically calling the underlying SES.getIdentityVerificationAttributesoperation every 3 seconds (at most 20 times).
    */

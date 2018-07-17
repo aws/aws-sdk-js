@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {GlacierCustomizations} from '../lib/services/glacier';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {Readable} from 'stream';
@@ -279,7 +280,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * Waits for the vaultExists state by periodically calling the underlying Glacier.describeVaultoperation every 3 seconds (at most 15 times).
    */
-  waitFor(state: "vaultExists", params: Glacier.Types.DescribeVaultInput, callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
+  waitFor(state: "vaultExists", params: Glacier.Types.DescribeVaultInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
   /**
    * Waits for the vaultExists state by periodically calling the underlying Glacier.describeVaultoperation every 3 seconds (at most 15 times).
    */
@@ -287,7 +288,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * Waits for the vaultNotExists state by periodically calling the underlying Glacier.describeVaultoperation every 3 seconds (at most 15 times).
    */
-  waitFor(state: "vaultNotExists", params: Glacier.Types.DescribeVaultInput, callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
+  waitFor(state: "vaultNotExists", params: Glacier.Types.DescribeVaultInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
   /**
    * Waits for the vaultNotExists state by periodically calling the underlying Glacier.describeVaultoperation every 3 seconds (at most 15 times).
    */

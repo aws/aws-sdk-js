@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -550,7 +551,7 @@ declare class Redshift extends Service {
   /**
    * Waits for the clusterAvailable state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
-  waitFor(state: "clusterAvailable", params: Redshift.Types.DescribeClustersMessage, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
+  waitFor(state: "clusterAvailable", params: Redshift.Types.DescribeClustersMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
   /**
    * Waits for the clusterAvailable state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
@@ -558,7 +559,7 @@ declare class Redshift extends Service {
   /**
    * Waits for the clusterDeleted state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
-  waitFor(state: "clusterDeleted", params: Redshift.Types.DescribeClustersMessage, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
+  waitFor(state: "clusterDeleted", params: Redshift.Types.DescribeClustersMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
   /**
    * Waits for the clusterDeleted state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
@@ -566,7 +567,7 @@ declare class Redshift extends Service {
   /**
    * Waits for the clusterRestored state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
-  waitFor(state: "clusterRestored", params: Redshift.Types.DescribeClustersMessage, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
+  waitFor(state: "clusterRestored", params: Redshift.Types.DescribeClustersMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
   /**
    * Waits for the clusterRestored state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
@@ -574,7 +575,7 @@ declare class Redshift extends Service {
   /**
    * Waits for the snapshotAvailable state by periodically calling the underlying Redshift.describeClusterSnapshotsoperation every 15 seconds (at most 20 times).
    */
-  waitFor(state: "snapshotAvailable", params: Redshift.Types.DescribeClusterSnapshotsMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotMessage) => void): Request<Redshift.Types.SnapshotMessage, AWSError>;
+  waitFor(state: "snapshotAvailable", params: Redshift.Types.DescribeClusterSnapshotsMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Redshift.Types.SnapshotMessage) => void): Request<Redshift.Types.SnapshotMessage, AWSError>;
   /**
    * Waits for the snapshotAvailable state by periodically calling the underlying Redshift.describeClusterSnapshotsoperation every 15 seconds (at most 20 times).
    */

@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Typings",
-  "description": "Fixes incorrect typings for AWS.EventListeners. Renamed CORE field to Core."
-}

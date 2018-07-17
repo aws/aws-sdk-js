@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -334,7 +335,7 @@ declare class CodeDeploy extends Service {
   /**
    * Waits for the deploymentSuccessful state by periodically calling the underlying CodeDeploy.getDeploymentoperation every 15 seconds (at most 120 times).
    */
-  waitFor(state: "deploymentSuccessful", params: CodeDeploy.Types.GetDeploymentInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentOutput) => void): Request<CodeDeploy.Types.GetDeploymentOutput, AWSError>;
+  waitFor(state: "deploymentSuccessful", params: CodeDeploy.Types.GetDeploymentInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentOutput) => void): Request<CodeDeploy.Types.GetDeploymentOutput, AWSError>;
   /**
    * Waits for the deploymentSuccessful state by periodically calling the underlying CodeDeploy.getDeploymentoperation every 15 seconds (at most 120 times).
    */

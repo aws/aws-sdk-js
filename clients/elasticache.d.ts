@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -334,7 +335,7 @@ declare class ElastiCache extends Service {
   /**
    * Waits for the cacheClusterAvailable state by periodically calling the underlying ElastiCache.describeCacheClustersoperation every 15 seconds (at most 40 times). Wait until ElastiCache cluster is available.
    */
-  waitFor(state: "cacheClusterAvailable", params: ElastiCache.Types.DescribeCacheClustersMessage, callback?: (err: AWSError, data: ElastiCache.Types.CacheClusterMessage) => void): Request<ElastiCache.Types.CacheClusterMessage, AWSError>;
+  waitFor(state: "cacheClusterAvailable", params: ElastiCache.Types.DescribeCacheClustersMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ElastiCache.Types.CacheClusterMessage) => void): Request<ElastiCache.Types.CacheClusterMessage, AWSError>;
   /**
    * Waits for the cacheClusterAvailable state by periodically calling the underlying ElastiCache.describeCacheClustersoperation every 15 seconds (at most 40 times). Wait until ElastiCache cluster is available.
    */
@@ -342,7 +343,7 @@ declare class ElastiCache extends Service {
   /**
    * Waits for the cacheClusterDeleted state by periodically calling the underlying ElastiCache.describeCacheClustersoperation every 15 seconds (at most 40 times). Wait until ElastiCache cluster is deleted.
    */
-  waitFor(state: "cacheClusterDeleted", params: ElastiCache.Types.DescribeCacheClustersMessage, callback?: (err: AWSError, data: ElastiCache.Types.CacheClusterMessage) => void): Request<ElastiCache.Types.CacheClusterMessage, AWSError>;
+  waitFor(state: "cacheClusterDeleted", params: ElastiCache.Types.DescribeCacheClustersMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ElastiCache.Types.CacheClusterMessage) => void): Request<ElastiCache.Types.CacheClusterMessage, AWSError>;
   /**
    * Waits for the cacheClusterDeleted state by periodically calling the underlying ElastiCache.describeCacheClustersoperation every 15 seconds (at most 40 times). Wait until ElastiCache cluster is deleted.
    */
@@ -350,7 +351,7 @@ declare class ElastiCache extends Service {
   /**
    * Waits for the replicationGroupAvailable state by periodically calling the underlying ElastiCache.describeReplicationGroupsoperation every 15 seconds (at most 40 times). Wait until ElastiCache replication group is available.
    */
-  waitFor(state: "replicationGroupAvailable", params: ElastiCache.Types.DescribeReplicationGroupsMessage, callback?: (err: AWSError, data: ElastiCache.Types.ReplicationGroupMessage) => void): Request<ElastiCache.Types.ReplicationGroupMessage, AWSError>;
+  waitFor(state: "replicationGroupAvailable", params: ElastiCache.Types.DescribeReplicationGroupsMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ElastiCache.Types.ReplicationGroupMessage) => void): Request<ElastiCache.Types.ReplicationGroupMessage, AWSError>;
   /**
    * Waits for the replicationGroupAvailable state by periodically calling the underlying ElastiCache.describeReplicationGroupsoperation every 15 seconds (at most 40 times). Wait until ElastiCache replication group is available.
    */
@@ -358,7 +359,7 @@ declare class ElastiCache extends Service {
   /**
    * Waits for the replicationGroupDeleted state by periodically calling the underlying ElastiCache.describeReplicationGroupsoperation every 15 seconds (at most 40 times). Wait until ElastiCache replication group is deleted.
    */
-  waitFor(state: "replicationGroupDeleted", params: ElastiCache.Types.DescribeReplicationGroupsMessage, callback?: (err: AWSError, data: ElastiCache.Types.ReplicationGroupMessage) => void): Request<ElastiCache.Types.ReplicationGroupMessage, AWSError>;
+  waitFor(state: "replicationGroupDeleted", params: ElastiCache.Types.DescribeReplicationGroupsMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ElastiCache.Types.ReplicationGroupMessage) => void): Request<ElastiCache.Types.ReplicationGroupMessage, AWSError>;
   /**
    * Waits for the replicationGroupDeleted state by periodically calling the underlying ElastiCache.describeReplicationGroupsoperation every 15 seconds (at most 40 times). Wait until ElastiCache replication group is deleted.
    */

@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -83,6 +84,14 @@ declare class SageMaker extends Service {
    * Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify.  If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a deep learning service other than Amazon SageMaker, provided that you know how to use them for inferences.  In the request body, you provide the following:     AlgorithmSpecification - Identifies the training algorithm to use.     HyperParameters - Specify these algorithm-specific parameters to influence the quality of the final model. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see Algorithms.     InputDataConfig - Describes the training dataset and the Amazon S3 location where it is stored.    OutputDataConfig - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results of model training.      ResourceConfig - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance.     RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training.     StoppingCondition - Sets a duration for training. Use this parameter to cap model training costs.     For more information about Amazon SageMaker, see How It Works. 
    */
   createTrainingJob(callback?: (err: AWSError, data: SageMaker.Types.CreateTrainingJobResponse) => void): Request<SageMaker.Types.CreateTrainingJobResponse, AWSError>;
+  /**
+   * Starts a transform job. After the results are obtained, Amazon SageMaker saves them to an Amazon S3 location that you specify. To perform batch transformations, you create a transform job and use the data that you have readily available. In the request body, you provide the following:    TransformJobName - Identifies the transform job. The name must be unique within an AWS Region in an AWS account.    ModelName - Identifies the model to use.    TransformInput - Describes the dataset to be transformed and the Amazon S3 location where it is stored.    TransformOutput - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.    TransformResources - Identifies the ML compute instances for the transform job.    For more information about how batch transformation works Amazon SageMaker, see How It Works. 
+   */
+  createTransformJob(params: SageMaker.Types.CreateTransformJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateTransformJobResponse) => void): Request<SageMaker.Types.CreateTransformJobResponse, AWSError>;
+  /**
+   * Starts a transform job. After the results are obtained, Amazon SageMaker saves them to an Amazon S3 location that you specify. To perform batch transformations, you create a transform job and use the data that you have readily available. In the request body, you provide the following:    TransformJobName - Identifies the transform job. The name must be unique within an AWS Region in an AWS account.    ModelName - Identifies the model to use.    TransformInput - Describes the dataset to be transformed and the Amazon S3 location where it is stored.    TransformOutput - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.    TransformResources - Identifies the ML compute instances for the transform job.    For more information about how batch transformation works Amazon SageMaker, see How It Works. 
+   */
+  createTransformJob(callback?: (err: AWSError, data: SageMaker.Types.CreateTransformJobResponse) => void): Request<SageMaker.Types.CreateTransformJobResponse, AWSError>;
   /**
    * Deletes an endpoint. Amazon SageMaker frees up all of the resources that were deployed when the endpoint was created. 
    */
@@ -188,6 +197,14 @@ declare class SageMaker extends Service {
    */
   describeTrainingJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeTrainingJobResponse) => void): Request<SageMaker.Types.DescribeTrainingJobResponse, AWSError>;
   /**
+   * Returns information about a transform job.
+   */
+  describeTransformJob(params: SageMaker.Types.DescribeTransformJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeTransformJobResponse) => void): Request<SageMaker.Types.DescribeTransformJobResponse, AWSError>;
+  /**
+   * Returns information about a transform job.
+   */
+  describeTransformJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeTransformJobResponse) => void): Request<SageMaker.Types.DescribeTransformJobResponse, AWSError>;
+  /**
    * Lists endpoint configurations.
    */
   listEndpointConfigs(params: SageMaker.Types.ListEndpointConfigsInput, callback?: (err: AWSError, data: SageMaker.Types.ListEndpointConfigsOutput) => void): Request<SageMaker.Types.ListEndpointConfigsOutput, AWSError>;
@@ -260,6 +277,14 @@ declare class SageMaker extends Service {
    */
   listTrainingJobsForHyperParameterTuningJob(callback?: (err: AWSError, data: SageMaker.Types.ListTrainingJobsForHyperParameterTuningJobResponse) => void): Request<SageMaker.Types.ListTrainingJobsForHyperParameterTuningJobResponse, AWSError>;
   /**
+   * Lists transform jobs.
+   */
+  listTransformJobs(params: SageMaker.Types.ListTransformJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListTransformJobsResponse) => void): Request<SageMaker.Types.ListTransformJobsResponse, AWSError>;
+  /**
+   * Lists transform jobs.
+   */
+  listTransformJobs(callback?: (err: AWSError, data: SageMaker.Types.ListTransformJobsResponse) => void): Request<SageMaker.Types.ListTransformJobsResponse, AWSError>;
+  /**
    * Launches an ML compute instance with the latest version of the libraries and attaches your ML storage volume. After configuring the notebook instance, Amazon SageMaker sets the notebook instance status to InService. A notebook instance's status must be InService before you can connect to your Jupyter notebook. 
    */
   startNotebookInstance(params: SageMaker.Types.StartNotebookInstanceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -268,11 +293,11 @@ declare class SageMaker extends Service {
    */
   startNotebookInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Stops a running hyperparameter tuning job and all running training jobs that the tuning job launched. All model artifacts output from the training jobs are stored in Amazon Simple Storage Service (Amazon S3). All data that the training jobs write toAmazon CloudWatch Logs are still available in CloudWatch. After the tuning job moves to the Stopped state, it releases all reserved resources for the tuning job.
+   * Stops a running hyperparameter tuning job and all running training jobs that the tuning job launched. All model artifacts output from the training jobs are stored in Amazon Simple Storage Service (Amazon S3). All data that the training jobs write to Amazon CloudWatch Logs are still available in CloudWatch. After the tuning job moves to the Stopped state, it releases all reserved resources for the tuning job.
    */
   stopHyperParameterTuningJob(params: SageMaker.Types.StopHyperParameterTuningJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Stops a running hyperparameter tuning job and all running training jobs that the tuning job launched. All model artifacts output from the training jobs are stored in Amazon Simple Storage Service (Amazon S3). All data that the training jobs write toAmazon CloudWatch Logs are still available in CloudWatch. After the tuning job moves to the Stopped state, it releases all reserved resources for the tuning job.
+   * Stops a running hyperparameter tuning job and all running training jobs that the tuning job launched. All model artifacts output from the training jobs are stored in Amazon Simple Storage Service (Amazon S3). All data that the training jobs write to Amazon CloudWatch Logs are still available in CloudWatch. After the tuning job moves to the Stopped state, it releases all reserved resources for the tuning job.
    */
   stopHyperParameterTuningJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -291,6 +316,14 @@ declare class SageMaker extends Service {
    * Stops a training job. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts, so the results of the training is not lost.  Training algorithms provided by Amazon SageMaker save the intermediate results of a model training job. This intermediate data is a valid model artifact. You can use the model artifacts that are saved when Amazon SageMaker stops a training job to create a model.  When it receives a StopTrainingJob request, Amazon SageMaker changes the status of the job to Stopping. After Amazon SageMaker stops the job, it sets the status to Stopped.
    */
   stopTrainingJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a transform job. When Amazon SageMaker receives a StopTransformJob request, the status of the job changes to Stopping. After Amazon SageMaker stops the job, the status is set to Stopped. When you stop a transform job before it is completed, Amazon SageMaker doesn't store the job's output in Amazon S3.
+   */
+  stopTransformJob(params: SageMaker.Types.StopTransformJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a transform job. When Amazon SageMaker receives a StopTransformJob request, the status of the job changes to Stopping. After Amazon SageMaker stops the job, the status is set to Stopped. When you stop a transform job before it is completed, Amazon SageMaker doesn't store the job's output in Amazon S3.
+   */
+  stopTransformJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    *  Deploys the new EndpointConfig specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous EndpointConfig (there is no availability loss).  When Amazon SageMaker receives the request, it sets the endpoint status to Updating. After updating the endpoint, it sets the status to InService. To check the status of an endpoint, use the DescribeEndpoint API.   You cannot update an endpoint with the current EndpointConfig. To update an endpoint, you must create a new EndpointConfig. 
    */
@@ -326,7 +359,7 @@ declare class SageMaker extends Service {
   /**
    * Waits for the notebookInstanceInService state by periodically calling the underlying SageMaker.describeNotebookInstanceoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "notebookInstanceInService", params: SageMaker.Types.DescribeNotebookInstanceInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceOutput, AWSError>;
+  waitFor(state: "notebookInstanceInService", params: SageMaker.Types.DescribeNotebookInstanceInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceOutput, AWSError>;
   /**
    * Waits for the notebookInstanceInService state by periodically calling the underlying SageMaker.describeNotebookInstanceoperation every 30 seconds (at most 60 times).
    */
@@ -334,7 +367,7 @@ declare class SageMaker extends Service {
   /**
    * Waits for the notebookInstanceStopped state by periodically calling the underlying SageMaker.describeNotebookInstanceoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "notebookInstanceStopped", params: SageMaker.Types.DescribeNotebookInstanceInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceOutput, AWSError>;
+  waitFor(state: "notebookInstanceStopped", params: SageMaker.Types.DescribeNotebookInstanceInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceOutput, AWSError>;
   /**
    * Waits for the notebookInstanceStopped state by periodically calling the underlying SageMaker.describeNotebookInstanceoperation every 30 seconds (at most 60 times).
    */
@@ -342,7 +375,7 @@ declare class SageMaker extends Service {
   /**
    * Waits for the notebookInstanceDeleted state by periodically calling the underlying SageMaker.describeNotebookInstanceoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "notebookInstanceDeleted", params: SageMaker.Types.DescribeNotebookInstanceInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceOutput, AWSError>;
+  waitFor(state: "notebookInstanceDeleted", params: SageMaker.Types.DescribeNotebookInstanceInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceOutput, AWSError>;
   /**
    * Waits for the notebookInstanceDeleted state by periodically calling the underlying SageMaker.describeNotebookInstanceoperation every 30 seconds (at most 60 times).
    */
@@ -350,7 +383,7 @@ declare class SageMaker extends Service {
   /**
    * Waits for the trainingJobCompletedOrStopped state by periodically calling the underlying SageMaker.describeTrainingJoboperation every 120 seconds (at most 180 times).
    */
-  waitFor(state: "trainingJobCompletedOrStopped", params: SageMaker.Types.DescribeTrainingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeTrainingJobResponse) => void): Request<SageMaker.Types.DescribeTrainingJobResponse, AWSError>;
+  waitFor(state: "trainingJobCompletedOrStopped", params: SageMaker.Types.DescribeTrainingJobRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: SageMaker.Types.DescribeTrainingJobResponse) => void): Request<SageMaker.Types.DescribeTrainingJobResponse, AWSError>;
   /**
    * Waits for the trainingJobCompletedOrStopped state by periodically calling the underlying SageMaker.describeTrainingJoboperation every 120 seconds (at most 180 times).
    */
@@ -358,7 +391,7 @@ declare class SageMaker extends Service {
   /**
    * Waits for the endpointInService state by periodically calling the underlying SageMaker.describeEndpointoperation every 30 seconds (at most 120 times).
    */
-  waitFor(state: "endpointInService", params: SageMaker.Types.DescribeEndpointInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeEndpointOutput) => void): Request<SageMaker.Types.DescribeEndpointOutput, AWSError>;
+  waitFor(state: "endpointInService", params: SageMaker.Types.DescribeEndpointInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: SageMaker.Types.DescribeEndpointOutput) => void): Request<SageMaker.Types.DescribeEndpointOutput, AWSError>;
   /**
    * Waits for the endpointInService state by periodically calling the underlying SageMaker.describeEndpointoperation every 30 seconds (at most 120 times).
    */
@@ -366,13 +399,14 @@ declare class SageMaker extends Service {
   /**
    * Waits for the endpointDeleted state by periodically calling the underlying SageMaker.describeEndpointoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "endpointDeleted", params: SageMaker.Types.DescribeEndpointInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeEndpointOutput) => void): Request<SageMaker.Types.DescribeEndpointOutput, AWSError>;
+  waitFor(state: "endpointDeleted", params: SageMaker.Types.DescribeEndpointInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: SageMaker.Types.DescribeEndpointOutput) => void): Request<SageMaker.Types.DescribeEndpointOutput, AWSError>;
   /**
    * Waits for the endpointDeleted state by periodically calling the underlying SageMaker.describeEndpointoperation every 30 seconds (at most 60 times).
    */
   waitFor(state: "endpointDeleted", callback?: (err: AWSError, data: SageMaker.Types.DescribeEndpointOutput) => void): Request<SageMaker.Types.DescribeEndpointOutput, AWSError>;
 }
 declare namespace SageMaker {
+  export type Accept = string;
   export interface AddTagsInput {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to tag.
@@ -400,6 +434,8 @@ declare namespace SageMaker {
      */
     TrainingInputMode: TrainingInputMode;
   }
+  export type AssemblyType = "None"|"Line"|string;
+  export type BatchStrategy = "MultiRecord"|"SingleRecord"|string;
   export interface CategoricalParameterRange {
     /**
      * The name of the categorical hyperparameter to tune.
@@ -648,7 +684,7 @@ declare namespace SageMaker {
   }
   export interface CreateTrainingJobRequest {
     /**
-     * The name of the training job. The name must be unique within an AWS Region in an AWS account. It appears in the Amazon SageMaker console. 
+     * The name of the training job. The name must be unique within an AWS Region in an AWS account. 
      */
     TrainingJobName: TrainingJobName;
     /**
@@ -693,6 +729,54 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the training job.
      */
     TrainingJobArn: TrainingJobArn;
+  }
+  export interface CreateTransformJobRequest {
+    /**
+     * The name of the transform job. The name must be unique within an AWS Region in an AWS account. 
+     */
+    TransformJobName: TransformJobName;
+    /**
+     * The name of the model that you want to use for the transform job.
+     */
+    ModelName: ModelName;
+    /**
+     * The maximum number of parallel requests on each instance node that can be launched in a transform job. The default value is 1. To allow Amazon SageMaker to determine the appropriate number for MaxConcurrentTransforms, set the value to 0.
+     */
+    MaxConcurrentTransforms?: MaxConcurrentTransforms;
+    /**
+     * The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata). The value in MaxPayloadInMB must be greater than the size of a single record.You can approximate the size of a record by dividing the size of your dataset by the number of records. The value you enter should be proportional to the number of records you want per batch. It is recommended to enter a slightly higher value to ensure the records will fit within the maximum payload size. The default value is 6 MB. For an unlimited payload size, set the value to 0.
+     */
+    MaxPayloadInMB?: MaxPayloadInMB;
+    /**
+     * Determins the number of records included in a single batch. SingleRecord means only one record is used per batch. MultiRecord means a batch is set to contain as many records that could possibly fit within the MaxPayloadInMB limit.
+     */
+    BatchStrategy?: BatchStrategy;
+    /**
+     * The environment variables to set in the Docker container. We support up to 16 key and values entries in the map.
+     */
+    Environment?: TransformEnvironmentMap;
+    /**
+     * Describes the input source and the way the transform job consumes it.
+     */
+    TransformInput: TransformInput;
+    /**
+     * Describes the results of the transform job.
+     */
+    TransformOutput: TransformOutput;
+    /**
+     * Describes the resources, including ML instance types and ML instance count, to use for the transform job.
+     */
+    TransformResources: TransformResources;
+    /**
+     * An array of key-value pairs. Adding tags is optional. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateTransformJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the transform job.
+     */
+    TransformJobArn: TransformJobArn;
   }
   export type CreationTime = Date;
   export interface DataSource {
@@ -1097,6 +1181,74 @@ declare namespace SageMaker {
      * A timestamp that indicates when the status of the training job was last modified.
      */
     LastModifiedTime?: Timestamp;
+  }
+  export interface DescribeTransformJobRequest {
+    /**
+     * The name of the transform job that you want to view details of.
+     */
+    TransformJobName: TransformJobName;
+  }
+  export interface DescribeTransformJobResponse {
+    /**
+     * The name of the transform job.
+     */
+    TransformJobName: TransformJobName;
+    /**
+     * The Amazon Resource Name (ARN) of the transform job.
+     */
+    TransformJobArn: TransformJobArn;
+    /**
+     * The status of the transform job. If the transform job failed, the reason is returned in the FailureReason field.
+     */
+    TransformJobStatus: TransformJobStatus;
+    /**
+     * If the transform job failed, the reason that it failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The name of the model used in the transform job.
+     */
+    ModelName: ModelName;
+    /**
+     * The maximum number of parallel requests on each instance node that can be launched in a transform job. The default value is 1.
+     */
+    MaxConcurrentTransforms?: MaxConcurrentTransforms;
+    /**
+     * The maximum payload size , in MB used in the transform job.
+     */
+    MaxPayloadInMB?: MaxPayloadInMB;
+    /**
+     * SingleRecord means only one record was used per a batch. &lt;code&gt;MultiRecord&lt;/code&gt; means batches contained as many records that could possibly fit within the MaxPayloadInMB limit.
+     */
+    BatchStrategy?: BatchStrategy;
+    /**
+     * 
+     */
+    Environment?: TransformEnvironmentMap;
+    /**
+     * Describes the dataset to be transformed and the Amazon S3 location where it is stored.
+     */
+    TransformInput: TransformInput;
+    /**
+     * Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.
+     */
+    TransformOutput?: TransformOutput;
+    /**
+     * Describes the resources, including ML instance types and ML instance count, to use for the transform job.
+     */
+    TransformResources: TransformResources;
+    /**
+     * A timestamp that shows when the transform Job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * Indicates when the transform job starts on ML instances. You are billed for the time interval between this time and the value of TransformEndTime.
+     */
+    TransformStartTime?: Timestamp;
+    /**
+     * Indicates when the transform job is Completed, Stopped, or Failed. You are billed for the time interval between this time and the value of TransformStartTime.
+     */
+    TransformEndTime?: Timestamp;
   }
   export interface DesiredWeightAndCapacity {
     /**
@@ -1727,7 +1879,7 @@ declare namespace SageMaker {
      */
     MaxResults?: MaxResults;
     /**
-     * A filter that only training jobs created after the specified time (timestamp).
+     * A filter that returns only training jobs created after the specified time (timestamp).
      */
     CreationTimeAfter?: Timestamp;
     /**
@@ -1769,8 +1921,62 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export interface ListTransformJobsRequest {
+    /**
+     * A filter that returns only transform jobs created after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only transform jobs created before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only transform jobs modified after the specified time.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only transform jobs modified before the specified time.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * A string in the transform job name. This filter returns only transform jobs whose name contains the specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * A filter that retrieves only transform jobs with a specific status.
+     */
+    StatusEquals?: TransformJobStatus;
+    /**
+     * The field to sort results by. The default is CreationTime.
+     */
+    SortBy?: SortBy;
+    /**
+     * The sort order for results. The default is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the result of the previous ListTransformJobs request was truncated, the response includes a NextToken. To retrieve the next set of transform jobs, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of transform jobs to return in the response. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListTransformJobsResponse {
+    /**
+     * An array of TransformJobSummary objects.
+     */
+    TransformJobSummaries: TransformJobSummaries;
+    /**
+     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of transform jobs, use it in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export type MaxConcurrentTransforms = number;
   export type MaxNumberOfTrainingJobs = number;
   export type MaxParallelTrainingJobs = number;
+  export type MaxPayloadInMB = number;
   export type MaxResults = number;
   export type MaxRuntimeInSeconds = number;
   export interface MetricDefinition {
@@ -2039,6 +2245,7 @@ declare namespace SageMaker {
   export type SessionExpirationDurationInSeconds = number;
   export type SortBy = "Name"|"CreationTime"|"Status"|string;
   export type SortOrder = "Ascending"|"Descending"|string;
+  export type SplitType = "None"|"Line"|"RecordIO"|string;
   export interface StartNotebookInstanceInput {
     /**
      * The name of the notebook instance to start.
@@ -2062,6 +2269,12 @@ declare namespace SageMaker {
      * The name of the training job to stop.
      */
     TrainingJobName: TrainingJobName;
+  }
+  export interface StopTransformJobRequest {
+    /**
+     * The name of the transform job to stop.
+     */
+    TransformJobName: TransformJobName;
   }
   export interface StoppingCondition {
     /**
@@ -2143,6 +2356,107 @@ declare namespace SageMaker {
      * The status of the training job.
      */
     TrainingJobStatus: TrainingJobStatus;
+  }
+  export interface TransformDataSource {
+    /**
+     * The S3 location of the data source that is associated with a channel.
+     */
+    S3DataSource: TransformS3DataSource;
+  }
+  export type TransformEnvironmentKey = string;
+  export type TransformEnvironmentMap = {[key: string]: TransformEnvironmentValue};
+  export type TransformEnvironmentValue = string;
+  export interface TransformInput {
+    /**
+     * Describes the location of the channel data, meaning the S3 location of the input data that the model can consume.
+     */
+    DataSource: TransformDataSource;
+    /**
+     * The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.
+     */
+    ContentType?: ContentType;
+    /**
+     * Compressing data helps save on storage space. If your transform data is compressed, specify the compression type.and Amazon SageMaker will automatically decompress the data for the transform job accordingly. The default value is None.
+     */
+    CompressionType?: CompressionType;
+    /**
+     * The method to use to split the transform job's data into smaller batches. The default value is None. If you don't want to split the data, specify (None). If you want to split records on a newline character boundary, specify Line. To split records according to the RecordIO format, specify RecordIO. Amazon SageMaker will send maximum number of records per batch in each request up to the MaxPayloadInMB limit. For more information, see RecordIO data format.  For information about the RecordIO format, see Data Format. 
+     */
+    SplitType?: SplitType;
+  }
+  export type TransformInstanceCount = number;
+  export type TransformInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|string;
+  export type TransformJobArn = string;
+  export type TransformJobName = string;
+  export type TransformJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
+  export type TransformJobSummaries = TransformJobSummary[];
+  export interface TransformJobSummary {
+    /**
+     * The name of the transform job.
+     */
+    TransformJobName: TransformJobName;
+    /**
+     * The Amazon Resource Name (ARN) of the transform job.
+     */
+    TransformJobArn: TransformJobArn;
+    /**
+     * A timestamp that shows when the transform Job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * Indicates when the transform job ends on compute instances. For successful jobs and stopped jobs, this is the exact time recorded after the results are uploaded. For failed jobs, this is when Amazon SageMaker detected that the job failed.
+     */
+    TransformEndTime?: Timestamp;
+    /**
+     * Indicates when the transform job was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The status of the transform job.
+     */
+    TransformJobStatus: TransformJobStatus;
+    /**
+     * If the transform job failed, the reason it failed.
+     */
+    FailureReason?: FailureReason;
+  }
+  export interface TransformOutput {
+    /**
+     * The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job. For example, s3://bucket-name/key-name-prefix. For every S3 object used as input for the transform job, the transformed data is stored in a corresponding subfolder in the location under the output prefix.For example, the input data s3://bucket-name/input-name-prefix/dataset01/data.csv will have the transformed data stored at s3://bucket-name/key-name-prefix/dataset01/, based on the original name, as a series of .part files (.part0001, part0002, etc).
+     */
+    S3OutputPath: S3Uri;
+    /**
+     * The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.
+     */
+    Accept?: Accept;
+    /**
+     * Defines how to assemble the results of the transform job as a single S3 object. You should select a format that is most convienant to you. To concatenate the results in binary format, specify None. To add a newline character at the end of every transformed record, specify Line. To assemble the output in RecordIO format, specify RecordIO. The default value is None. For information about the RecordIO format, see Data Format.
+     */
+    AssembleWith?: AssemblyType;
+    /**
+     * The AWS Key Management Service (AWS KMS) key for Amazon S3 server-side encryption that Amazon SageMaker uses to encrypt the transformed data. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see KMS-Managed Encryption Keys in the Amazon Simple Storage Service Developer Guide.  The KMS key policy must grant permission to the IAM role that you specify in your CreateTramsformJob request. For more information, see Using Key Policies in AWS KMS in the AWS Key Management Service Developer Guide.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export interface TransformResources {
+    /**
+     * The ML compute instance type for the transform job. For using built-in algorithms to transform moderately sized datasets, ml.m4.xlarge or ml.m5.large should suffice. There is no default value for InstanceType.
+     */
+    InstanceType: TransformInstanceType;
+    /**
+     * The number of ML compute instances to use in the transform job. For distributed transform, provide a value greater than 1. The default value is 1.
+     */
+    InstanceCount: TransformInstanceCount;
+  }
+  export interface TransformS3DataSource {
+    /**
+     * If you choose S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for batch transform.  If you choose ManifestFile, S3Uri identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for batch transform. 
+     */
+    S3DataType: S3DataType;
+    /**
+     * Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest. For example:    A key name prefix might look like this: s3://bucketname/exampleprefix.     A manifest might look like this: s3://bucketname/example.manifest   The manifest is an S3 object which is a JSON file with the following format:   [    {"prefix": "s3://customer_bucket/some/prefix/"},    "relative/path/to/custdata-1",    "relative/path/custdata-2",    ...    ]   The preceding JSON matches the following S3Uris:   s3://customer_bucket/some/prefix/relative/path/to/custdata-1   s3://customer_bucket/some/prefix/relative/path/custdata-1   ...   The complete set of S3Uris in this manifest constitutes the input data for the channel for this datasource. The object that each S3Uris points to must be readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.  
+     */
+    S3Uri: S3Uri;
   }
   export interface UpdateEndpointInput {
     /**
