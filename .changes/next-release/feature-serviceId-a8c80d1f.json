@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "serviceId",
+  "description": "add service id to all current clients. It will be used as unique identifier for service clients"
+}

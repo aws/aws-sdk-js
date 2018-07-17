@@ -7,6 +7,7 @@
     "protocol":"json",
     "serviceAbbreviation":"Amazon Snowball",
     "serviceFullName":"Amazon Import/Export Snowball",
+    "serviceId":"Snowball",
     "signatureVersion":"v4",
     "targetPrefix":"AWSIESnowballJobManagementService",
     "uid":"snowball-2016-06-30"
