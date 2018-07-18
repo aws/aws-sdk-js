@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.276.1
+// AWS SDK for JavaScript v2.277.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -5410,6 +5410,7 @@ module.exports={
     "endpointPrefix": "autoscaling",
     "protocol": "query",
     "serviceFullName": "Auto Scaling",
+    "serviceId": "Auto Scaling",
     "signatureVersion": "v4",
     "uid": "autoscaling-2011-01-01",
     "xmlNamespace": "http://autoscaling.amazonaws.com/doc/2011-01-01/"
@@ -8940,6 +8941,7 @@ module.exports={
     "protocol": "rest-xml",
     "serviceAbbreviation": "CloudFront",
     "serviceFullName": "Amazon CloudFront",
+    "serviceId": "CloudFront",
     "signatureVersion": "v4",
     "uid": "cloudfront-2016-11-25"
   },
@@ -10936,6 +10938,7 @@ module.exports={
     "protocol": "rest-xml",
     "serviceAbbreviation": "CloudFront",
     "serviceFullName": "Amazon CloudFront",
+    "serviceId": "CloudFront",
     "signatureVersion": "v4",
     "uid": "cloudfront-2017-03-25"
   },
@@ -16280,6 +16283,7 @@ module.exports={
     "protocol": "json",
     "serviceAbbreviation": "CloudTrail",
     "serviceFullName": "AWS CloudTrail",
+    "serviceId": "CloudTrail",
     "signatureVersion": "v4",
     "targetPrefix": "com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
     "uid": "cloudtrail-2013-11-01"
@@ -20259,6 +20263,7 @@ module.exports={
     "protocol": "json",
     "serviceAbbreviation": "CodePipeline",
     "serviceFullName": "AWS CodePipeline",
+    "serviceId": "CodePipeline",
     "signatureVersion": "v4",
     "targetPrefix": "CodePipeline_20150709",
     "uid": "codepipeline-2015-07-09"
@@ -21565,6 +21570,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Amazon Cognito Identity",
+    "serviceId": "Cognito Identity",
     "signatureVersion": "v4",
     "targetPrefix": "AWSCognitoIdentityService",
     "uid": "cognito-identity-2014-06-30"
@@ -22105,6 +22111,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Amazon Cognito Identity Provider",
+    "serviceId": "Cognito Identity Provider",
     "signatureVersion": "v4",
     "targetPrefix": "AWSCognitoIdentityProviderService",
     "uid": "cognito-idp-2016-04-18"
@@ -25550,6 +25557,7 @@ module.exports={
     "endpointPrefix": "cognito-sync",
     "jsonVersion": "1.1",
     "serviceFullName": "Amazon Cognito Sync",
+    "serviceId": "Cognito Sync",
     "signatureVersion": "v4",
     "protocol": "rest-json",
     "uid": "cognito-sync-2014-06-30"
@@ -27765,6 +27773,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "AWS Cost and Usage Report Service",
+    "serviceId": "Cost and Usage Report Service",
     "signatureVersion": "v4",
     "signingName": "cur",
     "targetPrefix": "AWSOrigamiServiceGatewayService",
@@ -30080,6 +30089,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "AWS Direct Connect",
+    "serviceId": "Direct Connect",
     "signatureVersion": "v4",
     "targetPrefix": "OvertureService",
     "uid": "directconnect-2012-10-25"
@@ -49341,6 +49351,7 @@ module.exports={
     "protocol": "json",
     "serviceAbbreviation": "Amazon ECR",
     "serviceFullName": "Amazon EC2 Container Registry",
+    "serviceId": "ECR",
     "signatureVersion": "v4",
     "targetPrefix": "AmazonEC2ContainerRegistry_V20150921",
     "uid": "ecr-2015-09-21"
@@ -51827,6 +51838,7 @@ module.exports={
     "endpointPrefix": "elasticache",
     "protocol": "query",
     "serviceFullName": "Amazon ElastiCache",
+    "serviceId": "ElastiCache",
     "signatureVersion": "v4",
     "uid": "elasticache-2015-02-02",
     "xmlNamespace": "http://elasticache.amazonaws.com/doc/2015-02-02/"
@@ -55874,6 +55886,7 @@ module.exports={
     "endpointPrefix": "elasticloadbalancing",
     "protocol": "query",
     "serviceFullName": "Elastic Load Balancing",
+    "serviceId": "Elastic Load Balancing",
     "signatureVersion": "v4",
     "uid": "elasticloadbalancing-2012-06-01",
     "xmlNamespace": "http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/"
@@ -60178,6 +60191,7 @@ module.exports={
     "endpointPrefix": "elastictranscoder",
     "protocol": "rest-json",
     "serviceFullName": "Amazon Elastic Transcoder",
+    "serviceId": "Elastic Transcoder",
     "signatureVersion": "v4"
   },
   "operations": {
@@ -64784,6 +64798,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Amazon GameLift",
+    "serviceId": "GameLift",
     "signatureVersion": "v4",
     "targetPrefix": "GameLift",
     "uid": "gamelift-2015-10-01"
@@ -67016,6 +67031,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Amazon Inspector",
+    "serviceId": "Inspector",
     "signatureVersion": "v4",
     "targetPrefix": "InspectorService",
     "uid": "inspector-2016-02-16"
@@ -73130,6 +73146,7 @@ module.exports={
     "endpointPrefix": "data.iot",
     "protocol": "rest-json",
     "serviceFullName": "AWS IoT Data Plane",
+    "serviceId": "IoT Data Plane",
     "signatureVersion": "v4",
     "signingName": "iotdata"
   },
@@ -75299,6 +75316,7 @@ module.exports={
     "apiVersion": "2014-11-11",
     "endpointPrefix": "lambda",
     "serviceFullName": "AWS Lambda",
+    "serviceId": "Lambda",
     "signatureVersion": "v4",
     "protocol": "rest-json"
   },
@@ -78764,6 +78782,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Amazon CloudWatch Logs",
+    "serviceId": "CloudWatch Logs",
     "signatureVersion": "v4",
     "targetPrefix": "Logs_20140328",
     "uid": "logs-2014-03-28"
@@ -79682,6 +79701,7 @@ module.exports={
     "endpointPrefix": "machinelearning",
     "jsonVersion": "1.1",
     "serviceFullName": "Amazon Machine Learning",
+    "serviceId": "Machine Learning",
     "signatureVersion": "v4",
     "targetPrefix": "AmazonML_20141212",
     "protocol": "json"
@@ -80904,6 +80924,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "AWS Marketplace Commerce Analytics",
+    "serviceId": "Marketplace Commerce Analytics",
     "signatureVersion": "v4",
     "signingName": "marketplacecommerceanalytics",
     "targetPrefix": "MarketplaceCommerceAnalytics20150701",
@@ -81586,6 +81607,7 @@ module.exports={
     "apiVersion": "2014-06-05",
     "endpointPrefix": "mobileanalytics",
     "serviceFullName": "Amazon Mobile Analytics",
+    "serviceId": "Mobile Analytics",
     "signatureVersion": "v4",
     "protocol": "rest-json"
   },
@@ -81663,6 +81685,7 @@ module.exports={
     "protocol": "query",
     "serviceAbbreviation": "CloudWatch",
     "serviceFullName": "Amazon CloudWatch",
+    "serviceId": "CloudWatch",
     "signatureVersion": "v4",
     "uid": "monitoring-2010-08-01",
     "xmlNamespace": "http://monitoring.amazonaws.com/doc/2010-08-01/"
@@ -106641,6 +106664,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Amazon Route 53 Domains",
+    "serviceId": "Route 53 Domains",
     "signatureVersion": "v4",
     "targetPrefix": "Route53Domains_v20140515",
     "uid": "route53domains-2014-05-15"
@@ -116046,6 +116070,7 @@ module.exports={
     "protocol": "query",
     "serviceAbbreviation": "Amazon SQS",
     "serviceFullName": "Amazon Simple Queue Service",
+    "serviceId": "SQS",
     "signatureVersion": "v4",
     "uid": "sqs-2012-11-05",
     "xmlNamespace": "http://queue.amazonaws.com/doc/2012-11-05/"
@@ -123331,6 +123356,7 @@ module.exports={
     "jsonVersion": "1.0",
     "protocol": "json",
     "serviceFullName": "Amazon DynamoDB Streams",
+    "serviceId": "DynamoDB Streams",
     "signatureVersion": "v4",
     "signingName": "dynamodb",
     "targetPrefix": "DynamoDBStreams_20120810",
@@ -125994,6 +126020,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "rest-json",
     "serviceFullName": "Amazon WorkDocs",
+    "serviceId": "WorkDocs",
     "signatureVersion": "v4",
     "uid": "workdocs-2016-05-01"
   },
@@ -131031,7 +131058,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.276.1',
+  VERSION: '2.277.1',
 
   /**
    * @api private
@@ -150161,7 +150188,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":354,"./lib/rng":355}],358:[function(require,module,exports){
-// AWS SDK for JavaScript v2.276.1
+// AWS SDK for JavaScript v2.277.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

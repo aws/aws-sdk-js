@@ -381,6 +381,12 @@ declare namespace IoTAnalytics {
   }
   export type ChannelArn = string;
   export type ChannelName = string;
+  export interface ChannelStatistics {
+    /**
+     * The estimated size of the channel.
+     */
+    size?: EstimatedResourceSize;
+  }
   export type ChannelStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
   export type ChannelSummaries = ChannelSummary[];
   export interface ChannelSummary {
@@ -647,6 +653,12 @@ declare namespace IoTAnalytics {
   }
   export type DatastoreArn = string;
   export type DatastoreName = string;
+  export interface DatastoreStatistics {
+    /**
+     * The estimated size of the data store.
+     */
+    size?: EstimatedResourceSize;
+  }
   export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
   export type DatastoreSummaries = DatastoreSummary[];
   export interface DatastoreSummary {
@@ -706,12 +718,20 @@ declare namespace IoTAnalytics {
      * The name of the channel whose information is retrieved.
      */
     channelName: ChannelName;
+    /**
+     * If true, include statistics about the channel in the response.
+     */
+    includeStatistics?: IncludeStatisticsFlag;
   }
   export interface DescribeChannelResponse {
     /**
      * An object that contains information about the channel.
      */
     channel?: Channel;
+    /**
+     * Statistics about the channel. Included if the 'includeStatistics' parameter is set to true in the request.
+     */
+    statistics?: ChannelStatistics;
   }
   export interface DescribeDatasetRequest {
     /**
@@ -730,12 +750,20 @@ declare namespace IoTAnalytics {
      * The name of the data store
      */
     datastoreName: DatastoreName;
+    /**
+     * If true, include statistics about the data store in the response.
+     */
+    includeStatistics?: IncludeStatisticsFlag;
   }
   export interface DescribeDatastoreResponse {
     /**
      * Information about the data store.
      */
     datastore?: Datastore;
+    /**
+     * Statistics about the data store. Included if the 'includeStatistics' parameter is set to true in the request.
+     */
+    statistics?: DatastoreStatistics;
   }
   export interface DescribeLoggingOptionsRequest {
   }
@@ -805,6 +833,16 @@ declare namespace IoTAnalytics {
   export type EntryName = string;
   export type ErrorCode = string;
   export type ErrorMessage = string;
+  export interface EstimatedResourceSize {
+    /**
+     * The estimated size of the resource in bytes.
+     */
+    estimatedSizeInBytes?: SizeInBytes;
+    /**
+     * The time when the estimate of the size of the resource was made.
+     */
+    estimatedOn?: Timestamp;
+  }
   export interface FilterActivity {
     /**
      * The name of the 'filter' activity.
@@ -844,6 +882,7 @@ declare namespace IoTAnalytics {
      */
     status?: DatasetContentStatus;
   }
+  export type IncludeStatisticsFlag = boolean;
   export interface LambdaActivity {
     /**
      * The name of the 'lambda' activity.
@@ -999,7 +1038,7 @@ declare namespace IoTAnalytics {
      */
     messageId: MessageId;
     /**
-     * The payload of the message.
+     * The payload of the message. This may be a JSON string or a Base64-encoded string representing binary data (in which case you must decode it by means of a pipeline activity).
      */
     payload: MessagePayload;
   }
@@ -1215,6 +1254,7 @@ declare namespace IoTAnalytics {
      */
     next?: ActivityName;
   }
+  export type SizeInBytes = number;
   export type SqlQuery = string;
   export interface SqlQueryDatasetAction {
     /**
