@@ -325,6 +325,14 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     MinUpdatePeriodSeconds?: __integer;
     /**
+     * A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
+Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
+be partitioned into more than one period. If the list contains "ADS", new periods will be created where
+the Channel source contains SCTE-35 ad markers.
+
+     */
+    PeriodTriggers?: __listOf__PeriodTriggersElement;
+    /**
      * The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
      */
     Profile?: Profile;
@@ -974,6 +982,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
+  export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;
@@ -982,6 +991,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   export type __listOfHlsManifestCreateOrUpdateParameters = HlsManifestCreateOrUpdateParameters[];
   export type __listOfIngestEndpoint = IngestEndpoint[];
   export type __listOfOriginEndpoint = OriginEndpoint[];
+  export type __listOf__PeriodTriggersElement = __PeriodTriggersElement[];
   export type __listOf__string = __string[];
   export type __long = number;
   export type __string = string;
