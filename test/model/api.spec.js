@@ -21,7 +21,6 @@
             globalEndpoint: 'global',
             signatureVersion: 'v4',
             protocol: 'json',
-            timestampFormat: 'rfc822',
             xmlNamespace: 'URI',
             serviceAbbreviation: 'abbr',
             serviceFullName: 'name',
@@ -33,7 +32,6 @@
         expect(api.globalEndpoint).to.equal('global');
         expect(api.signatureVersion).to.equal('v4');
         expect(api.protocol).to.equal('json');
-        expect(api.timestampFormat).to.equal('rfc822');
         expect(api.xmlNamespaceUri).to.equal('URI');
         expect(api.abbreviation).to.equal('abbr');
         expect(api.fullName).to.equal('name');

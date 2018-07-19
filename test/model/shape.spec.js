@@ -123,28 +123,6 @@
           });
           expect(shape.members.Date.timestampFormat).to.eql('iso8601');
         });
-        it('will use api metadata timestampFormat if not found elsewhere', function() {
-          var api = new AWS.Model.Api({
-            metadata: {
-              timestampFormat: 'unixTimestamp'
-            },
-            shapes: {
-              S1: {
-                type: 'timestamp'
-              }
-            }
-          });
-          var shape = AWS.Model.Shape.create({
-            members: {
-              Date: {
-                shape: 'S1',
-              }
-            }
-          }, {
-            api: api
-          });
-          expect(shape.members.Date.timestampFormat).to.eql('unixTimestamp');
-        });
         it('will default to unixTimestamp when if not specified and protocol is json', function() {
           var api = new AWS.Model.Api({
             metadata: {
