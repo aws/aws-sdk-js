@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.278.1-->
+<!--LATEST=2.279.1-->
 <!--ENTRYINSERT-->
+
+## 2.279.1
+* feature: ConfigService: Setting internal length limits on resourceId for APIs.  
 
 ## 2.278.1
 * feature: MediaPackage: Adds support for DASH OriginEnpoints with multiple media presentation description periods triggered by presence of SCTE-35 ad markers in Channel input streams.
