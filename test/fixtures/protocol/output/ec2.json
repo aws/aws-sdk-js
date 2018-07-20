@@ -514,7 +514,7 @@
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "<OperationNameResponse><StructMember><foo>2014-04-29T18:30:38+00:00</foo><bar>1398796238</bar></StructMember><TimeArg>2014-04-29T18:30:38+00:00</TimeArg><TimeCustom>Tue, 29 Apr 2014 18:30:38 GMT</TimeCustom><TimeFormat>1398796238</TimeFormat><RequestId>requestid</RequestId></OperationNameResponse>"
+          "body": "<OperationNameResponse><StructMember><foo>2014-04-29T18:30:38Z</foo><bar>1398796238</bar></StructMember><TimeArg>2014-04-29T18:30:38Z</TimeArg><TimeCustom>Tue, 29 Apr 2014 18:30:38 GMT</TimeCustom><TimeFormat>1398796238</TimeFormat><RequestId>requestid</RequestId></OperationNameResponse>"
         }
       }
     ]
