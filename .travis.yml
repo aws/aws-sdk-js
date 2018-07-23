@@ -28,6 +28,8 @@ matrix:
     env: TEST_SCRIPT=tstest
   - node_js: "node"
     env: TEST_SCRIPT=region-check
+  - node_js: "node"
+    env: TEST_SCRIPT=translate-api-test
 
 script:
   - npm run $TEST_SCRIPT
