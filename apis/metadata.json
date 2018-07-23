@@ -518,7 +518,8 @@
     "name": "SageMaker"
   },
   "translate": {
-    "name": "Translate"
+    "name": "Translate",
+    "cors": true
   },
   "resourcegroups": {
     "prefix": "resource-groups",

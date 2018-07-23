@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "CORS",
+  "description": "make Translate service available in browser version of SDK by default"
+}
