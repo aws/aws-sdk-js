@@ -97,7 +97,14 @@ function Translator(api, options) {
         for (var i = 0; i < map.refs.length; i++) {
           delete map.refs[i].shape;
           for (var prop in shape) {
-            if (shape.hasOwnProperty(prop)) map.refs[i][prop] = shape[prop];
+            if (shape.hasOwnProperty(prop)) {
+              //Translator prefers timestampFormat trait in members rather than in shape
+              if (map.refs[i].hasOwnProperty(prop) && ['timestampFormat'].indexOf(prop) >= 0) {
+                continue;
+              }
+              map.refs[i][prop] = shape[prop];
+            }
+            
           }
         }
 

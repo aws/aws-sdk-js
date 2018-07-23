@@ -139,6 +139,6 @@
     "build-react-native": "npm -s run-script build-react-native-deps && npm -s run-script build-react-native-core && npm -s run-script build-react-native-dist",
     "react-native-test": "npm -s run-script build-react-native && rake reactnative:test && karma start",
     "region-check": "node ./scripts/region-checker/index.js",
-    "test-remove-event-stream": "mocha scripts/lib/remove-event-stream-ops.spec.js"
+    "translate-api-test": "mocha scripts/lib/translate-api.spec.js"
   }
 }
