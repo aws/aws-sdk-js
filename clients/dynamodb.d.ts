@@ -369,6 +369,109 @@ declare namespace DynamoDB {
      */
     Action?: AttributeAction;
   }
+  export interface AutoScalingPolicyDescription {
+    /**
+     * The name of the scaling policy.
+     */
+    PolicyName?: AutoScalingPolicyName;
+    /**
+     * Represents a target tracking scaling policy configuration.
+     */
+    TargetTrackingScalingPolicyConfiguration?: AutoScalingTargetTrackingScalingPolicyConfigurationDescription;
+  }
+  export type AutoScalingPolicyDescriptionList = AutoScalingPolicyDescription[];
+  export type AutoScalingPolicyName = string;
+  export interface AutoScalingPolicyUpdate {
+    /**
+     * The name of the scaling policy.
+     */
+    PolicyName?: AutoScalingPolicyName;
+    /**
+     * Represents a target tracking scaling policy configuration.
+     */
+    TargetTrackingScalingPolicyConfiguration: AutoScalingTargetTrackingScalingPolicyConfigurationUpdate;
+  }
+  export type AutoScalingRoleArn = string;
+  export interface AutoScalingSettingsDescription {
+    /**
+     * The minimum capacity units that a global table or global secondary index should be scaled down to.
+     */
+    MinimumUnits?: PositiveLongObject;
+    /**
+     * The maximum capacity units that a global table or global secondary index should be scaled up to.
+     */
+    MaximumUnits?: PositiveLongObject;
+    /**
+     * Disabled autoscaling for this global table or global secondary index.
+     */
+    AutoScalingDisabled?: BooleanObject;
+    /**
+     * Role ARN used for configuring autoScaling policy.
+     */
+    AutoScalingRoleArn?: String;
+    /**
+     * Information about the scaling policies.
+     */
+    ScalingPolicies?: AutoScalingPolicyDescriptionList;
+  }
+  export interface AutoScalingSettingsUpdate {
+    /**
+     * The minimum capacity units that a global table or global secondary index should be scaled down to.
+     */
+    MinimumUnits?: PositiveLongObject;
+    /**
+     * The maximum capacity units that a global table or global secondary index should be scaled up to.
+     */
+    MaximumUnits?: PositiveLongObject;
+    /**
+     * Disabled autoscaling for this global table or global secondary index.
+     */
+    AutoScalingDisabled?: BooleanObject;
+    /**
+     * Role ARN used for configuring autoscaling policy.
+     */
+    AutoScalingRoleArn?: AutoScalingRoleArn;
+    /**
+     * The scaling policy to apply for scaling target global table or global secondary index capacity units.
+     */
+    ScalingPolicyUpdate?: AutoScalingPolicyUpdate;
+  }
+  export interface AutoScalingTargetTrackingScalingPolicyConfigurationDescription {
+    /**
+     * Indicates whether scale in by the target tracking policy is disabled. If the value is true, scale in is disabled and the target tracking policy won't remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking policy can remove capacity from the scalable resource. The default value is false.
+     */
+    DisableScaleIn?: BooleanObject;
+    /**
+     * The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. You should scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, application autoscaling scales out your scalable target immediately. 
+     */
+    ScaleInCooldown?: IntegerObject;
+    /**
+     * The amount of time, in seconds, after a scale out activity completes before another scale out activity can start. While the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. You should continuously (but not excessively) scale out.
+     */
+    ScaleOutCooldown?: IntegerObject;
+    /**
+     * The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
+     */
+    TargetValue: Double;
+  }
+  export interface AutoScalingTargetTrackingScalingPolicyConfigurationUpdate {
+    /**
+     * Indicates whether scale in by the target tracking policy is disabled. If the value is true, scale in is disabled and the target tracking policy won't remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking policy can remove capacity from the scalable resource. The default value is false.
+     */
+    DisableScaleIn?: BooleanObject;
+    /**
+     * The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. You should scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, application autoscaling scales out your scalable target immediately. 
+     */
+    ScaleInCooldown?: IntegerObject;
+    /**
+     * The amount of time, in seconds, after a scale out activity completes before another scale out activity can start. While the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. You should continuously (but not excessively) scale out.
+     */
+    ScaleOutCooldown?: IntegerObject;
+    /**
+     * The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
+     */
+    TargetValue: Double;
+  }
   export type Backfilling = boolean;
   export type BackupArn = string;
   export type BackupCreationDateTime = Date;
@@ -843,6 +946,7 @@ declare namespace DynamoDB {
      */
     TimeToLiveDescription?: TimeToLiveDescription;
   }
+  export type Double = number;
   export type ErrorMessage = string;
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {
@@ -1039,6 +1143,10 @@ declare namespace DynamoDB {
      * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. 
      */
     ProvisionedWriteCapacityUnits?: PositiveLongObject;
+    /**
+     * AutoScaling settings for managing a global secondary index's write capacity units.
+     */
+    ProvisionedWriteCapacityAutoScalingSettingsUpdate?: AutoScalingSettingsUpdate;
   }
   export type GlobalTableGlobalSecondaryIndexSettingsUpdateList = GlobalTableGlobalSecondaryIndexSettingsUpdate[];
   export type GlobalTableList = GlobalTable[];
@@ -1046,6 +1154,7 @@ declare namespace DynamoDB {
   export type IndexName = string;
   export type IndexStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
   export type Integer = number;
+  export type IntegerObject = number;
   export type ItemCollectionKeyAttributeMap = {[key: string]: AttributeValue};
   export interface ItemCollectionMetrics {
     /**
@@ -1510,9 +1619,17 @@ declare namespace DynamoDB {
      */
     ProvisionedReadCapacityUnits?: PositiveLongObject;
     /**
+     * Autoscaling settings for a global secondary index replica's read capacity units.
+     */
+    ProvisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
+    /**
      * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException.
      */
     ProvisionedWriteCapacityUnits?: PositiveLongObject;
+    /**
+     * AutoScaling settings for a global secondary index replica's write capacity units.
+     */
+    ProvisionedWriteCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
   }
   export type ReplicaGlobalSecondaryIndexSettingsDescriptionList = ReplicaGlobalSecondaryIndexSettingsDescription[];
   export interface ReplicaGlobalSecondaryIndexSettingsUpdate {
@@ -1524,6 +1641,10 @@ declare namespace DynamoDB {
      * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException.
      */
     ProvisionedReadCapacityUnits?: PositiveLongObject;
+    /**
+     * Autoscaling settings for managing a global secondary index replica's read capacity units.
+     */
+    ProvisionedReadCapacityAutoScalingSettingsUpdate?: AutoScalingSettingsUpdate;
   }
   export type ReplicaGlobalSecondaryIndexSettingsUpdateList = ReplicaGlobalSecondaryIndexSettingsUpdate[];
   export type ReplicaList = Replica[];
@@ -1541,9 +1662,17 @@ declare namespace DynamoDB {
      */
     ReplicaProvisionedReadCapacityUnits?: PositiveLongObject;
     /**
+     * Autoscaling settings for a global table replica's read capacity units.
+     */
+    ReplicaProvisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
+    /**
      * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide.
      */
     ReplicaProvisionedWriteCapacityUnits?: PositiveLongObject;
+    /**
+     * AutoScaling settings for a global table replica's write capacity units.
+     */
+    ReplicaProvisionedWriteCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
     /**
      * Replica global secondary index settings for the global table.
      */
@@ -1559,6 +1688,10 @@ declare namespace DynamoDB {
      * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide. 
      */
     ReplicaProvisionedReadCapacityUnits?: PositiveLongObject;
+    /**
+     * Autoscaling settings for managing a global table replica's read capacity units.
+     */
+    ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate?: AutoScalingSettingsUpdate;
     /**
      * Represents the settings of a global secondary index for a global table that will be modified.
      */
@@ -2012,6 +2145,10 @@ declare namespace DynamoDB {
      * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. 
      */
     GlobalTableProvisionedWriteCapacityUnits?: PositiveLongObject;
+    /**
+     * AutoScaling settings for managing provisioned write capacity for the global table.
+     */
+    GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate?: AutoScalingSettingsUpdate;
     /**
      * Represents the settings of a global secondary index for a global table that will be modified.
      */

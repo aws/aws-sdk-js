@@ -65,4 +65,5 @@ export import WorkDocs = require('./workdocs');
 export import LexModelBuildingService = require('./lexmodelbuildingservice');
 export import KinesisVideoArchivedMedia = require('./kinesisvideoarchivedmedia');
 export import KinesisVideo = require('./kinesisvideo');
+export import Translate = require('./translate');
 export import SecretsManager = require('./secretsmanager');

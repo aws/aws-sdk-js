@@ -67,5 +67,6 @@ module.exports = {
   LexModelBuildingService: require('./lexmodelbuildingservice'),
   KinesisVideoArchivedMedia: require('./kinesisvideoarchivedmedia'),
   KinesisVideo: require('./kinesisvideo'),
+  Translate: require('./translate'),
   SecretsManager: require('./secretsmanager')
 };

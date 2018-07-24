@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.279.1-->
+<!--LATEST=2.280.1-->
 <!--ENTRYINSERT-->
+
+## 2.280.1
+* bugfix: Serialization: fix timestamp serialization issue in querystring; Update the logic of formatting the timestamp;
+* feature: CORS: make Translate service available in browser version of SDK by default
+* feature: DynamoDB: With this SDK update, APIs UpdateGlobalTableSettings and DescribeGlobalTableSettings now allow consistently configuring AutoScaling settings for a DynamoDB global table. Previously, they would only allow consistently setting IOPS. Now new APIs are being released, existing APIs are being extended.
 
 ## 2.279.1
 * feature: ConfigService: Setting internal length limits on resourceId for APIs.  

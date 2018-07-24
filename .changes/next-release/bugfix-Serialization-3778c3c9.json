@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Serialization",
-  "description": "fix timestamp serialization issue in querystring; Update the logic of formatting the timestamp;"
-}
