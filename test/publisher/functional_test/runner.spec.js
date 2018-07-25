@@ -12,7 +12,6 @@ const csmConfigProvider = AWS.util.clientSideMonitoring.configProvider;
 const FAKE_SERVCIE = 'CSM Test';
 
 describe('run functional test', () => {
-  let fakeAgent;
   let defaultConfiguration;
   let processEnvBackup;
   before(() => {
@@ -38,14 +37,13 @@ describe('run functional test', () => {
 
       const defaultConstructParams = getConstructParam(defaultConfiguration);
 
-      // setEnvironmentVariables(defaultConfiguration);
       process.env = Object.assign({}, process.env, scenarioConfiguration.environmentVariables);
 
       const resolvedCSMConfig = csmConfigProvider();
       AWS.Service.prototype.publisher = new Publisher(resolvedCSMConfig);
 
       //start a subprocess to echo back the udp datagrams
-      fakeAgent = await agentStart(resolvedCSMConfig.port || 31000);
+      let fakeAgent = await agentStart(resolvedCSMConfig.port || 31000);
 
       // listen to the monitoring events echo-ed back
       let monitoringEvents = [];
