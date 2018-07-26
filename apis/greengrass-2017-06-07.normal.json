@@ -4,7 +4,6 @@
     "endpointPrefix" : "greengrass",
     "signingName" : "greengrass",
     "serviceFullName" : "AWS Greengrass",
-    "serviceId":"Greengrass",
     "protocol" : "rest-json",
     "jsonVersion" : "1.1",
     "uid" : "greengrass-2017-06-07",
@@ -4271,7 +4270,7 @@
         },
         "SourcePath" : {
           "shape" : "__string",
-          "documentation" : "The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/proc'' or ''/sys''."
+          "documentation" : "The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''."
         }
       },
       "documentation" : "Attributes that define a local volume resource."

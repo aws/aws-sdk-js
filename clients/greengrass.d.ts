@@ -2609,7 +2609,7 @@ declare namespace Greengrass {
      */
     GroupOwnerSetting?: GroupOwnerSetting;
     /**
-     * The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/proc'' or ''/sys''.
+     * The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
      */
     SourcePath?: __string;
   }

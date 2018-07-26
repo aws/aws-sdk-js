@@ -1028,6 +1028,22 @@
       ],
       "documentation":"<p>Retrieves the patch baseline that should be used for the specified patch group.</p>"
     },
+    "LabelParameterVersion":{
+      "name":"LabelParameterVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"LabelParameterVersionRequest"},
+      "output":{"shape":"LabelParameterVersionResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"TooManyUpdates"},
+        {"shape":"ParameterNotFound"},
+        {"shape":"ParameterVersionNotFound"},
+        {"shape":"ParameterVersionLabelLimitExceeded"}
+      ]
+    },
     "ListAssociationVersions":{
       "name":"ListAssociationVersions",
       "http":{
@@ -7395,6 +7411,27 @@
       "type":"list",
       "member":{"shape":"TagKey"}
     },
+    "LabelParameterVersionRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Labels"
+      ],
+      "members":{
+        "Name":{"shape":"PSParameterName"},
+        "ParameterVersion":{
+          "shape":"PSParameterVersion",
+          "box":true
+        },
+        "Labels":{"shape":"ParameterLabelList"}
+      }
+    },
+    "LabelParameterVersionResult":{
+      "type":"structure",
+      "members":{
+        "InvalidLabels":{"shape":"ParameterLabelList"}
+      }
+    },
     "LastResourceDataSyncMessage":{"type":"string"},
     "LastResourceDataSyncStatus":{
       "type":"string",
@@ -8621,6 +8658,11 @@
       "max":2048,
       "min":1
     },
+    "PSParameterSelector":{
+      "type":"string",
+      "max":128,
+      "min":0
+    },
     "PSParameterValue":{
       "type":"string",
       "max":4096,
@@ -8645,6 +8687,22 @@
         "Version":{
           "shape":"PSParameterVersion",
           "documentation":"<p>The parameter version.</p>"
+        },
+        "Selector":{
+          "shape":"PSParameterSelector",
+          "documentation":"<p>Either the version number or the label used to retrieve the parameter value. Specify selectors by using one of the following formats:</p> <p>parameter_name:version</p> <p>parameter_name:label</p>"
+        },
+        "SourceResult":{
+          "shape":"String",
+          "documentation":"<p>Applies to parameters that reference information in other AWS services. SourceResult is the raw result or response from the source.</p>"
+        },
+        "LastModifiedDate":{
+          "shape":"DateTime",
+          "documentation":"<p>Date the parameter was last changed or updated and the parameter version was created.</p>"
+        },
+        "ARN":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the parameter.</p>"
         }
       },
       "documentation":"<p>An Amazon EC2 Systems Manager parameter in Parameter Store.</p>"
@@ -8700,6 +8758,10 @@
         "Version":{
           "shape":"PSParameterVersion",
           "documentation":"<p>The parameter version.</p>"
+        },
+        "Labels":{
+          "shape":"ParameterLabelList",
+          "documentation":"<p>Labels assigned to the parameter version.</p>"
         }
       },
       "documentation":"<p>Information about parameter usage.</p>"
@@ -8713,6 +8775,17 @@
       "max":256,
       "min":1,
       "pattern":"^([a-zA-Z0-9:/_-]+)$"
+    },
+    "ParameterLabel":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "ParameterLabelList":{
+      "type":"list",
+      "member":{"shape":"ParameterLabel"},
+      "max":10,
+      "min":1
     },
     "ParameterLimitExceeded":{
       "type":"structure",
@@ -8825,7 +8898,7 @@
       "type":"string",
       "max":132,
       "min":1,
-      "pattern":"tag:.+|Name|Type|KeyId|Path"
+      "pattern":"tag:.+|Name|Type|KeyId|Path|Label"
     },
     "ParameterStringFilterList":{
       "type":"list",
@@ -8859,6 +8932,13 @@
     "ParameterValueList":{
       "type":"list",
       "member":{"shape":"ParameterValue"}
+    },
+    "ParameterVersionLabelLimitExceeded":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "exception":true
     },
     "ParameterVersionNotFound":{
       "type":"structure",
@@ -10324,22 +10404,22 @@
         },
         "IsEnd":{
           "shape":"Boolean",
-          "documentation":"<p>Enable this option to stop an Automation execution at the end of a specific step. The Automation execution stops if the step execution failed or succeeded.</p>",
+          "documentation":"<p>The flag which can be used to end automation no matter whether the step succeeds or fails.</p>",
           "box":true
         },
         "NextStep":{
           "shape":"String",
-          "documentation":"<p>Specifies which step in an Automation to process next after successfully completing a step. </p>",
+          "documentation":"<p>The next step after the step succeeds.</p>",
           "box":true
         },
         "IsCritical":{
           "shape":"Boolean",
-          "documentation":"<p>Enable this option to designate a step as critical for the successful completion of the Automation. If a step with this designation fails, then Automation reports the final status of the Automation as Failed. </p>",
+          "documentation":"<p>The flag which can be used to help decide whether the failure of current step leads to the Automation failure.</p>",
           "box":true
         },
         "ValidNextSteps":{
           "shape":"ValidNextStepList",
-          "documentation":"<p>ValidNextSteps offer different strategies for managing an Automation workflow when a step finishes. Automation dynamically processes ValidNextSteps when a step is completed. For example, you can specify <code>Abort</code> to stop the Automation when a step fails or <code>Continue</code> to ignore the failure of the current step and allow Automation to continue processing the next step. You can also specify <code>step:<i>step_name</i> </code> to jump to a designated step after a step succeeds. The result of the current step dynamically determines the ValidNextSteps. If a step finishes and no ValidNextStep is designated, then the Automation stops.</p>"
+          "documentation":"<p>Strategies used when step fails, we support Continue and Abort. Abort will fail the automation when the step fails. Continue will ignore the failure of current step and allow automation to execute the next step. With conditional branching, we add step:stepName to support the automation to go to another specific step.</p>"
         }
       },
       "documentation":"<p>Detailed information about an the execution state of an Automation step.</p>"

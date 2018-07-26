@@ -122,7 +122,8 @@
         {"shape":"TagLimitExceededFault"},
         {"shape":"InvalidTagFault"},
         {"shape":"LimitExceededFault"},
-        {"shape":"DependentServiceRequestThrottlingFault"}
+        {"shape":"DependentServiceRequestThrottlingFault"},
+        {"shape":"InvalidClusterTrackFault"}
       ],
       "documentation":"<p>Creates a new cluster.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
@@ -549,6 +550,23 @@
       ],
       "documentation":"<p>Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in you AWS account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subnet groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.</p>"
     },
+    "DescribeClusterTracks":{
+      "name":"DescribeClusterTracks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeClusterTracksMessage"},
+      "output":{
+        "shape":"TrackListMessage",
+        "resultWrapper":"DescribeClusterTracksResult"
+      },
+      "errors":[
+        {"shape":"InvalidClusterTrackFault"},
+        {"shape":"UnauthorizedOperation"}
+      ],
+      "documentation":"<p>Returns a list of all the available maintenance tracks.</p>"
+    },
     "DescribeClusterVersions":{
       "name":"DescribeClusterVersions",
       "http":{
@@ -917,7 +935,7 @@
         {"shape":"UnsupportedOperationFault"},
         {"shape":"DependentServiceUnavailableFault"}
       ],
-      "documentation":"<p>Returns an array of ReservedNodeOfferings which is filtered by payment type, term, and instance type.</p>"
+      "documentation":"<p>Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.</p>"
     },
     "ModifyCluster":{
       "name":"ModifyCluster",
@@ -947,7 +965,8 @@
         {"shape":"LimitExceededFault"},
         {"shape":"DependentServiceRequestThrottlingFault"},
         {"shape":"InvalidElasticIpFault"},
-        {"shape":"TableLimitExceededFault"}
+        {"shape":"TableLimitExceededFault"},
+        {"shape":"InvalidClusterTrackFault"}
       ],
       "documentation":"<p>Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p>"
     },
@@ -1152,7 +1171,8 @@
         {"shape":"ClusterParameterGroupNotFoundFault"},
         {"shape":"ClusterSecurityGroupNotFoundFault"},
         {"shape":"LimitExceededFault"},
-        {"shape":"DependentServiceRequestThrottlingFault"}
+        {"shape":"DependentServiceRequestThrottlingFault"},
+        {"shape":"InvalidClusterTrackFault"}
       ],
       "documentation":"<p>Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the <a>ModifyCluster</a> API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore.</p> <p>If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.</p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
@@ -1243,11 +1263,11 @@
       "members":{
         "ReservedNodeId":{
           "shape":"String",
-          "documentation":"<p>A string representing the identifier of the Reserved Node to be exchanged.</p>"
+          "documentation":"<p>A string representing the node identifier of the DC1 Reserved Node to be exchanged.</p>"
         },
         "TargetReservedNodeOfferingId":{
           "shape":"String",
-          "documentation":"<p>The unique identifier of the Reserved Node offering to be used for the exchange.</p>"
+          "documentation":"<p>The unique identifier of the DC2 Reserved Node offering to be used for the exchange. You can obtain the value for the parameter by calling <a>GetReservedNodeExchangeOfferings</a> </p>"
         }
       }
     },
@@ -1554,6 +1574,10 @@
         "PendingActions":{
           "shape":"PendingActionsList",
           "documentation":"<p>Cluster operations that are waiting to be started.</p>"
+        },
+        "MaintenanceTrackName":{
+          "shape":"String",
+          "documentation":"<p>The name of the maintenance track for the cluster.</p>"
         }
       },
       "documentation":"<p>Describes a cluster.</p>",
@@ -2340,6 +2364,10 @@
         "IamRoles":{
           "shape":"IamRoleArnList",
           "documentation":"<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated with it at any time.</p>"
+        },
+        "MaintenanceTrackName":{
+          "shape":"String",
+          "documentation":"<p>An optional parameter for the name of the maintenance track for the cluster. If you don't provide a maintenance track name, the cluster is assigned to the <code>current</code> track.</p>"
         }
       },
       "documentation":"<p/>"
@@ -2991,6 +3019,23 @@
       },
       "documentation":"<p/>"
     },
+    "DescribeClusterTracksMessage":{
+      "type":"structure",
+      "members":{
+        "MaintenanceTrackName":{
+          "shape":"String",
+          "documentation":"<p>The name of the maintenance track. </p>"
+        },
+        "MaxRecords":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>An integer value for the maximum number of maintenance tracks to return.</p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <code>DescribeClusterTracks</code> request exceed the value specified in <code>MaxRecords</code>, Amazon Redshift returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+        }
+      }
+    },
     "DescribeClusterVersionsMessage":{
       "type":"structure",
       "members":{
@@ -3417,6 +3462,13 @@
       },
       "documentation":"<p>Describes the status of the elastic IP (EIP) address.</p>"
     },
+    "EligibleTracksToUpdateList":{
+      "type":"list",
+      "member":{
+        "shape":"UpdateTarget",
+        "locationName":"UpdateTarget"
+      }
+    },
     "EnableLoggingMessage":{
       "type":"structure",
       "required":[
@@ -3733,7 +3785,7 @@
       "members":{
         "ReservedNodeId":{
           "shape":"String",
-          "documentation":"<p>A string representing the node identifier for the Reserved Node to be exchanged.</p>"
+          "documentation":"<p>A string representing the node identifier for the DC1 Reserved Node to be exchanged.</p>"
         },
         "MaxRecords":{
           "shape":"IntegerOptional",
@@ -4103,6 +4155,18 @@
       },
       "exception":true
     },
+    "InvalidClusterTrackFault":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The provided cluster track name is not valid.</p>",
+      "error":{
+        "code":"InvalidClusterTrack",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidElasticIpFault":{
       "type":"structure",
       "members":{
@@ -4303,6 +4367,24 @@
     },
     "Long":{"type":"long"},
     "LongOptional":{"type":"long"},
+    "MaintenanceTrack":{
+      "type":"structure",
+      "members":{
+        "MaintenanceTrackName":{
+          "shape":"String",
+          "documentation":"<p>The name of the maintenance track. Possible values are <code>current</code> and <code>trailing</code>.</p>"
+        },
+        "DatabaseVersion":{
+          "shape":"String",
+          "documentation":"<p>The version number for the cluster release.</p>"
+        },
+        "UpdateTargets":{
+          "shape":"EligibleTracksToUpdateList",
+          "documentation":"<p>An array of <a>UpdateTarget</a> objects to update with the maintenance track. </p>"
+        }
+      },
+      "documentation":"<p>Defines a maintenance track that determines which Amazon Redshift version to apply during a maintenance window. If the value for <code>MaintenanceTrack</code> is <code>current</code>, the cluster is updated to the most recently certified maintenance release. If the value is <code>trailing</code>, the cluster is updated to the previously certified maintenance release. </p>"
+    },
     "ModifyClusterDbRevisionMessage":{
       "type":"structure",
       "required":[
@@ -4426,6 +4508,10 @@
         "EnhancedVpcRouting":{
           "shape":"BooleanOptional",
           "documentation":"<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html\">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>"
+        },
+        "MaintenanceTrackName":{
+          "shape":"String",
+          "documentation":"<p>The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the <code>PendingModifiedValues</code> for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.</p>"
         }
       },
       "documentation":"<p/>"
@@ -4720,6 +4806,10 @@
         "EnhancedVpcRouting":{
           "shape":"BooleanOptional",
           "documentation":"<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html\">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>"
+        },
+        "MaintenanceTrackName":{
+          "shape":"String",
+          "documentation":"<p>The name of the maintenance track that the cluster will change to during the next maintenance window.</p>"
         }
       },
       "documentation":"<p>Describes cluster attributes that are in a pending state. A change to one or more the attributes was requested and is in progress or will be applied.</p>"
@@ -5187,6 +5277,10 @@
         "IamRoles":{
           "shape":"IamRoleArnList",
           "documentation":"<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>"
+        },
+        "MaintenanceTrackName":{
+          "shape":"String",
+          "documentation":"<p>The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the <code>MaintenanceTrack</code> value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks.</p>"
         }
       },
       "documentation":"<p/>"
@@ -5535,6 +5629,10 @@
         "EnhancedVpcRouting":{
           "shape":"Boolean",
           "documentation":"<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html\">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>"
+        },
+        "MaintenanceTrackName":{
+          "shape":"String",
+          "documentation":"<p>The name of the maintenance track for the snapshot.</p>"
         }
       },
       "documentation":"<p>Describes a snapshot.</p>",
@@ -6023,6 +6121,26 @@
       },
       "documentation":"<p/>"
     },
+    "TrackList":{
+      "type":"list",
+      "member":{
+        "shape":"MaintenanceTrack",
+        "locationName":"MaintenanceTrack"
+      }
+    },
+    "TrackListMessage":{
+      "type":"structure",
+      "members":{
+        "MaintenanceTracks":{
+          "shape":"TrackList",
+          "documentation":"<p>A list of maintenance tracks output by the <code>DescribeClusterTracks</code> operation. </p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p>The starting point to return a set of response tracklist records. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.</p>"
+        }
+      }
+    },
     "UnauthorizedOperation":{
       "type":"structure",
       "members":{
@@ -6070,6 +6188,20 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "UpdateTarget":{
+      "type":"structure",
+      "members":{
+        "MaintenanceTrackName":{
+          "shape":"String",
+          "documentation":"<p>The name of the new maintenance track.</p>"
+        },
+        "DatabaseVersion":{
+          "shape":"String",
+          "documentation":"<p>The cluster version for the new maintenance track.</p>"
+        }
+      },
+      "documentation":"<p>A maintenance track that you can switch the current track to.</p>"
     },
     "VpcSecurityGroupIdList":{
       "type":"list",

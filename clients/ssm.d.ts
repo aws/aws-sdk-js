@@ -548,6 +548,14 @@ declare class SSM extends Service {
    */
   getPatchBaselineForPatchGroup(callback?: (err: AWSError, data: SSM.Types.GetPatchBaselineForPatchGroupResult) => void): Request<SSM.Types.GetPatchBaselineForPatchGroupResult, AWSError>;
   /**
+   * 
+   */
+  labelParameterVersion(params: SSM.Types.LabelParameterVersionRequest, callback?: (err: AWSError, data: SSM.Types.LabelParameterVersionResult) => void): Request<SSM.Types.LabelParameterVersionResult, AWSError>;
+  /**
+   * 
+   */
+  labelParameterVersion(callback?: (err: AWSError, data: SSM.Types.LabelParameterVersionResult) => void): Request<SSM.Types.LabelParameterVersionResult, AWSError>;
+  /**
    * Retrieves all versions of an association for a specific association ID.
    */
   listAssociationVersions(params: SSM.Types.ListAssociationVersionsRequest, callback?: (err: AWSError, data: SSM.Types.ListAssociationVersionsResult) => void): Request<SSM.Types.ListAssociationVersionsResult, AWSError>;
@@ -4407,6 +4415,14 @@ declare namespace SSM {
   export type InvocationTraceOutput = string;
   export type IsSubTypeSchema = boolean;
   export type KeyList = TagKey[];
+  export interface LabelParameterVersionRequest {
+    Name: PSParameterName;
+    ParameterVersion?: PSParameterVersion;
+    Labels: ParameterLabelList;
+  }
+  export interface LabelParameterVersionResult {
+    InvalidLabels?: ParameterLabelList;
+  }
   export type LastResourceDataSyncMessage = string;
   export type LastResourceDataSyncStatus = "Successful"|"Failed"|"InProgress"|string;
   export type LastResourceDataSyncTime = Date;
@@ -5198,6 +5214,7 @@ declare namespace SSM {
   export type OutputSourceType = string;
   export type OwnerInformation = string;
   export type PSParameterName = string;
+  export type PSParameterSelector = string;
   export type PSParameterValue = string;
   export type PSParameterVersion = number;
   export interface Parameter {
@@ -5217,6 +5234,22 @@ declare namespace SSM {
      * The parameter version.
      */
     Version?: PSParameterVersion;
+    /**
+     * Either the version number or the label used to retrieve the parameter value. Specify selectors by using one of the following formats: parameter_name:version parameter_name:label
+     */
+    Selector?: PSParameterSelector;
+    /**
+     * Applies to parameters that reference information in other AWS services. SourceResult is the raw result or response from the source.
+     */
+    SourceResult?: String;
+    /**
+     * Date the parameter was last changed or updated and the parameter version was created.
+     */
+    LastModifiedDate?: DateTime;
+    /**
+     * The Amazon Resource Name (ARN) of the parameter.
+     */
+    ARN?: String;
   }
   export type ParameterDescription = string;
   export interface ParameterHistory {
@@ -5256,9 +5289,15 @@ declare namespace SSM {
      * The parameter version.
      */
     Version?: PSParameterVersion;
+    /**
+     * Labels assigned to the parameter version.
+     */
+    Labels?: ParameterLabelList;
   }
   export type ParameterHistoryList = ParameterHistory[];
   export type ParameterKeyId = string;
+  export type ParameterLabel = string;
+  export type ParameterLabelList = ParameterLabel[];
   export type ParameterList = Parameter[];
   export interface ParameterMetadata {
     /**
@@ -6193,19 +6232,19 @@ declare namespace SSM {
      */
     OverriddenParameters?: AutomationParameterMap;
     /**
-     * Enable this option to stop an Automation execution at the end of a specific step. The Automation execution stops if the step execution failed or succeeded.
+     * The flag which can be used to end automation no matter whether the step succeeds or fails.
      */
     IsEnd?: Boolean;
     /**
-     * Specifies which step in an Automation to process next after successfully completing a step. 
+     * The next step after the step succeeds.
      */
     NextStep?: String;
     /**
-     * Enable this option to designate a step as critical for the successful completion of the Automation. If a step with this designation fails, then Automation reports the final status of the Automation as Failed. 
+     * The flag which can be used to help decide whether the failure of current step leads to the Automation failure.
      */
     IsCritical?: Boolean;
     /**
-     * ValidNextSteps offer different strategies for managing an Automation workflow when a step finishes. Automation dynamically processes ValidNextSteps when a step is completed. For example, you can specify Abort to stop the Automation when a step fails or Continue to ignore the failure of the current step and allow Automation to continue processing the next step. You can also specify step:step_name  to jump to a designated step after a step succeeds. The result of the current step dynamically determines the ValidNextSteps. If a step finishes and no ValidNextStep is designated, then the Automation stops.
+     * Strategies used when step fails, we support Continue and Abort. Abort will fail the automation when the step fails. Continue will ignore the failure of current step and allow automation to execute the next step. With conditional branching, we add step:stepName to support the automation to go to another specific step.
      */
     ValidNextSteps?: ValidNextStepList;
   }
