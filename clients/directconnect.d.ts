@@ -463,6 +463,7 @@ declare namespace DirectConnect {
     connectionId: ConnectionId;
   }
   export type AwsDevice = string;
+  export type AwsDeviceV2 = string;
   export type BGPAuthKey = string;
   export interface BGPPeer {
     asn?: ASN;
@@ -472,6 +473,10 @@ declare namespace DirectConnect {
     customerAddress?: CustomerAddress;
     bgpPeerState?: BGPPeerState;
     bgpStatus?: BGPStatus;
+    /**
+     * The Direct Connection endpoint which the BGP peer terminates on.
+     */
+    awsDeviceV2?: AwsDeviceV2;
   }
   export type BGPPeerList = BGPPeer[];
   export type BGPPeerState = "verifying"|"pending"|"available"|"deleting"|"deleted"|string;
@@ -530,9 +535,13 @@ declare namespace DirectConnect {
     loaIssueTime?: LoaIssueTime;
     lagId?: LagId;
     /**
-     * The Direct Connection endpoint which the physical connection terminates on.
+     * Deprecated in favor of awsDeviceV2. The Direct Connection endpoint which the physical connection terminates on.
      */
     awsDevice?: AwsDevice;
+    /**
+     * The Direct Connection endpoint which the physical connection terminates on.
+     */
+    awsDeviceV2?: AwsDeviceV2;
   }
   export type ConnectionId = string;
   export type ConnectionList = Connection[];
@@ -923,9 +932,13 @@ declare namespace DirectConnect {
     loaIssueTime?: LoaIssueTime;
     lagId?: LagId;
     /**
-     * The Direct Connection endpoint which the physical connection terminates on.
+     * Deprecated in favor of awsDeviceV2. The Direct Connection endpoint which the physical connection terminates on.
      */
     awsDevice?: AwsDevice;
+    /**
+     * The Direct Connection endpoint which the physical connection terminates on.
+     */
+    awsDeviceV2?: AwsDeviceV2;
   }
   export type InterconnectId = string;
   export type InterconnectList = Interconnect[];
@@ -963,9 +976,13 @@ declare namespace DirectConnect {
      */
     minimumLinks?: Count;
     /**
-     * The AWS Direct Connection endpoint that hosts the LAG.
+     * Deprecated in favor of awsDeviceV2. The AWS Direct Connection endpoint that hosts the LAG.
      */
     awsDevice?: AwsDevice;
+    /**
+     * The AWS Direct Connection endpoint that hosts the LAG.
+     */
+    awsDeviceV2?: AwsDeviceV2;
     /**
      * A list of connections bundled by this LAG.
      */
@@ -1001,6 +1018,10 @@ declare namespace DirectConnect {
      * The name of the AWS Direct Connect location. The name includes the colocation partner name and the physical site of the lit building.
      */
     locationName?: LocationName;
+    /**
+     * The AWS region where the AWS Direct connect location is located. Example: us-east-1 Default: None
+     */
+    region?: Region;
   }
   export type LocationCode = string;
   export type LocationList = Location[];
@@ -1183,6 +1204,14 @@ declare namespace DirectConnect {
     directConnectGatewayId?: DirectConnectGatewayId;
     routeFilterPrefixes?: RouteFilterPrefixList;
     bgpPeers?: BGPPeerList;
+    /**
+     * The AWS region where the virtual interface is located. Example: us-east-1 Default: None
+     */
+    region?: Region;
+    /**
+     * The Direct Connection endpoint which the virtual interface terminates on.
+     */
+    awsDeviceV2?: AwsDeviceV2;
   }
   export type VirtualInterfaceId = string;
   export type VirtualInterfaceList = VirtualInterface[];

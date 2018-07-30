@@ -164,19 +164,19 @@ declare class Iot extends Service {
    */
   createStream(callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
-   * Creates a thing record in the registry.
+   * Creates a thing record in the registry.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThing(params: Iot.Types.CreateThingRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
-   * Creates a thing record in the registry.
+   * Creates a thing record in the registry.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThing(callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
-   * Create a thing group.
+   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThingGroup(params: Iot.Types.CreateThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingGroupResponse) => void): Request<Iot.Types.CreateThingGroupResponse, AWSError>;
   /**
-   * Create a thing group.
+   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThingGroup(callback?: (err: AWSError, data: Iot.Types.CreateThingGroupResponse) => void): Request<Iot.Types.CreateThingGroupResponse, AWSError>;
   /**
@@ -516,11 +516,11 @@ declare class Iot extends Service {
    */
   getJobDocument(callback?: (err: AWSError, data: Iot.Types.GetJobDocumentResponse) => void): Request<Iot.Types.GetJobDocumentResponse, AWSError>;
   /**
-   * Gets the logging options.
+   * Gets the logging options. NOTE: use of this command is not recommended. Use GetV2LoggingOptions instead.
    */
   getLoggingOptions(params: Iot.Types.GetLoggingOptionsRequest, callback?: (err: AWSError, data: Iot.Types.GetLoggingOptionsResponse) => void): Request<Iot.Types.GetLoggingOptionsResponse, AWSError>;
   /**
-   * Gets the logging options.
+   * Gets the logging options. NOTE: use of this command is not recommended. Use GetV2LoggingOptions instead.
    */
   getLoggingOptions(callback?: (err: AWSError, data: Iot.Types.GetLoggingOptionsResponse) => void): Request<Iot.Types.GetLoggingOptionsResponse, AWSError>;
   /**
@@ -876,11 +876,11 @@ declare class Iot extends Service {
    */
   setDefaultPolicyVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the logging options.
+   * Sets the logging options. NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead.
    */
   setLoggingOptions(params: Iot.Types.SetLoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the logging options.
+   * Sets the logging options. NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead.
    */
   setLoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1544,9 +1544,6 @@ declare namespace Iot {
     customCodeSigning?: CustomCodeSigning;
   }
   export interface CodeSigningCertificateChain {
-    /**
-     * A stream of the certificate chain files.
-     */
     stream?: Stream;
     /**
      * The name of the certificate.
@@ -1558,9 +1555,6 @@ declare namespace Iot {
     inlineDocument?: InlineDocument;
   }
   export interface CodeSigningSignature {
-    /**
-     * A stream of the code signing signature.
-     */
     stream?: Stream;
     /**
      * A base64 encoded binary representation of the code signing signature.
@@ -1665,10 +1659,6 @@ declare namespace Iot {
      * Allows you to create a staged rollout of the job.
      */
     jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
-    /**
-     * Parameters for the job document.
-     */
-    documentParameters?: JobDocumentParameters;
   }
   export interface CreateJobResponse {
     /**
@@ -2948,15 +2938,10 @@ declare namespace Iot {
      * Details about the job process.
      */
     jobProcessDetails?: JobProcessDetails;
-    /**
-     * The parameters specified for the job document.
-     */
-    documentParameters?: JobDocumentParameters;
   }
   export type JobArn = string;
   export type JobDescription = string;
   export type JobDocument = string;
-  export type JobDocumentParameters = {[key: string]: ParameterValue};
   export type JobDocumentSource = string;
   export interface JobExecution {
     /**
@@ -4080,8 +4065,6 @@ declare namespace Iot {
   export type OutgoingCertificates = OutgoingCertificate[];
   export type PageSize = number;
   export type Parameter = string;
-  export type ParameterKey = string;
-  export type ParameterValue = string;
   export type Parameters = {[key: string]: Value};
   export type PartitionKey = string;
   export type PayloadField = string;
@@ -4364,17 +4347,8 @@ declare namespace Iot {
   export type S3FileUrlList = S3FileUrl[];
   export type S3Key = string;
   export interface S3Location {
-    /**
-     * The S3 bucket that contains the file to stream.
-     */
     bucket: S3Bucket;
-    /**
-     * The name of the file within the S3 bucket to stream.
-     */
     key: S3Key;
-    /**
-     * The file version.
-     */
     version?: S3Version;
   }
   export type S3Version = string;
@@ -4472,7 +4446,7 @@ declare namespace Iot {
   }
   export interface SetV2LoggingOptionsRequest {
     /**
-     * The role ARN that allows IoT to write to Cloudwatch logs.
+     * The ARN of the role that allows IoT to write to Cloudwatch logs.
      */
     roleArn?: AwsArn;
     /**
@@ -4480,7 +4454,7 @@ declare namespace Iot {
      */
     defaultLogLevel?: LogLevel;
     /**
-     * Set to true to disable all logs, otherwise set to false.
+     * If true all logs are disabled. The default is false.
      */
     disableAllLogs?: DisableAllLogs;
   }

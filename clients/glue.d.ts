@@ -1276,9 +1276,13 @@ declare namespace Glue {
      */
     SubnetId?: GenericString;
     /**
-     * The public key to use for authentication.
+     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
      */
     PublicKey?: GenericString;
+    /**
+     * A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
+     */
+    PublicKeys?: PublicKeysList;
     /**
      * The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
      */
@@ -1776,7 +1780,7 @@ declare namespace Glue {
      */
     YarnEndpointAddress?: GenericString;
     /**
-     * The private address used by this DevEndpoint.
+     * A private DNS to access the DevEndpoint within a VPC, if the DevEndpoint is created within one.
      */
     PrivateAddress?: GenericString;
     /**
@@ -1828,9 +1832,13 @@ declare namespace Glue {
      */
     LastModifiedTimestamp?: TimestampValue;
     /**
-     * The public key to be used by this DevEndpoint for authentication.
+     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
      */
     PublicKey?: GenericString;
+    /**
+     * A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
+     */
+    PublicKeys?: PublicKeysList;
   }
   export interface DevEndpointCustomLibraries {
     /**
@@ -3014,6 +3022,7 @@ declare namespace Glue {
   }
   export type PredicateString = string;
   export type PrincipalType = "USER"|"ROLE"|"GROUP"|string;
+  export type PublicKeysList = GenericString[];
   export type PythonScript = string;
   export interface ResetJobBookmarkRequest {
     /**
@@ -3591,6 +3600,14 @@ declare namespace Glue {
      * The public key for the DevEndpoint to use.
      */
     PublicKey?: GenericString;
+    /**
+     * The list of public keys for the DevEndpoint to use.
+     */
+    AddPublicKeys?: PublicKeysList;
+    /**
+     * The list of public keys to be deleted from the DevEndpoint. 
+     */
+    DeletePublicKeys?: PublicKeysList;
     /**
      * Custom Python or Java libraries to be loaded in the DevEndpoint.
      */

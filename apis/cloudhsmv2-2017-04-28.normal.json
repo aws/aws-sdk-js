@@ -14,6 +14,22 @@
     "uid":"cloudhsmv2-2017-04-28"
   },
   "operations":{
+    "CopyBackupToRegion":{
+      "name":"CopyBackupToRegion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CopyBackupToRegionRequest"},
+      "output":{"shape":"CopyBackupToRegionResponse"},
+      "errors":[
+        {"shape":"CloudHsmInternalFailureException"},
+        {"shape":"CloudHsmServiceException"},
+        {"shape":"CloudHsmResourceNotFoundException"},
+        {"shape":"CloudHsmInvalidRequestException"},
+        {"shape":"CloudHsmAccessDeniedException"}
+      ]
+    },
     "CreateCluster":{
       "name":"CreateCluster",
       "http":{
@@ -204,7 +220,11 @@
         "CreateTimestamp":{
           "shape":"Timestamp",
           "documentation":"<p>The date and time when the backup was created.</p>"
-        }
+        },
+        "CopyTimestamp":{"shape":"Timestamp"},
+        "SourceRegion":{"shape":"Region"},
+        "SourceBackup":{"shape":"BackupId"},
+        "SourceCluster":{"shape":"ClusterId"}
       },
       "documentation":"<p>Contains information about a backup of an AWS CloudHSM cluster.</p>"
     },
@@ -228,6 +248,7 @@
       "type":"list",
       "member":{"shape":"Backup"}
     },
+    "Boolean":{"type":"boolean"},
     "Cert":{
       "type":"string",
       "max":5000,
@@ -380,6 +401,23 @@
       "type":"list",
       "member":{"shape":"Cluster"}
     },
+    "CopyBackupToRegionRequest":{
+      "type":"structure",
+      "required":[
+        "DestinationRegion",
+        "BackupId"
+      ],
+      "members":{
+        "DestinationRegion":{"shape":"Region"},
+        "BackupId":{"shape":"BackupId"}
+      }
+    },
+    "CopyBackupToRegionResponse":{
+      "type":"structure",
+      "members":{
+        "DestinationBackup":{"shape":"DestinationBackup"}
+      }
+    },
     "CreateClusterRequest":{
       "type":"structure",
       "required":[
@@ -504,7 +542,8 @@
         "Filters":{
           "shape":"Filters",
           "documentation":"<p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>"
-        }
+        },
+        "SortAscending":{"shape":"Boolean"}
       }
     },
     "DescribeBackupsResponse":{
@@ -550,13 +589,22 @@
         }
       }
     },
+    "DestinationBackup":{
+      "type":"structure",
+      "members":{
+        "CreateTimestamp":{"shape":"Timestamp"},
+        "SourceRegion":{"shape":"Region"},
+        "SourceBackup":{"shape":"BackupId"},
+        "SourceCluster":{"shape":"ClusterId"}
+      }
+    },
     "EniId":{
       "type":"string",
       "pattern":"eni-[0-9a-fA-F]{8,17}"
     },
     "ExternalAz":{
       "type":"string",
-      "pattern":"[a-z]{2}(-(gov|isob|iso))?-(east|west|north|south|central){1,2}-\\d[a-z]"
+      "pattern":"[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\\d[a-z]"
     },
     "ExternalSubnetMapping":{
       "type":"map",
@@ -718,6 +766,10 @@
       "type":"string",
       "max":32,
       "min":7
+    },
+    "Region":{
+      "type":"string",
+      "pattern":"[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\\d"
     },
     "SecurityGroup":{
       "type":"string",

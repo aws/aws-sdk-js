@@ -370,7 +370,7 @@
         {"shape":"ResourceAlreadyExistsException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Creates a thing record in the registry.</p>"
+      "documentation":"<p>Creates a thing record in the registry.</p> <note> <p>This is a control plane operation. See <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html\">Authorization</a> for information about authorizing control plane actions.</p> </note>"
     },
     "CreateThingGroup":{
       "name":"CreateThingGroup",
@@ -386,7 +386,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"InternalFailureException"}
       ],
-      "documentation":"<p>Create a thing group.</p>"
+      "documentation":"<p>Create a thing group.</p> <note> <p>This is a control plane operation. See <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html\">Authorization</a> for information about authorizing control plane actions.</p> </note>"
     },
     "CreateThingType":{
       "name":"CreateThingType",
@@ -1126,7 +1126,7 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Gets the logging options.</p>"
+      "documentation":"<p>Gets the logging options.</p> <p>NOTE: use of this command is not recommended. Use <code>GetV2LoggingOptions</code> instead.</p>"
     },
     "GetOTAUpdate":{
       "name":"GetOTAUpdate",
@@ -1899,7 +1899,7 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Sets the logging options.</p>"
+      "documentation":"<p>Sets the logging options.</p> <p>NOTE: use of this command is not recommended. Use <code>SetV2LoggingOptions</code> instead.</p>"
     },
     "SetV2LoggingLevel":{
       "name":"SetV2LoggingLevel",
@@ -3046,10 +3046,7 @@
     "CodeSigningCertificateChain":{
       "type":"structure",
       "members":{
-        "stream":{
-          "shape":"Stream",
-          "documentation":"<p>A stream of the certificate chain files.</p>"
-        },
+        "stream":{"shape":"Stream"},
         "certificateName":{
           "shape":"CertificateName",
           "documentation":"<p>The name of the certificate.</p>"
@@ -3064,10 +3061,7 @@
     "CodeSigningSignature":{
       "type":"structure",
       "members":{
-        "stream":{
-          "shape":"Stream",
-          "documentation":"<p>A stream of the code signing signature.</p>"
-        },
+        "stream":{"shape":"Stream"},
         "inlineDocument":{
           "shape":"Signature",
           "documentation":"<p>A base64 encoded binary representation of the code signing signature.</p>"
@@ -3222,10 +3216,6 @@
         "jobExecutionsRolloutConfig":{
           "shape":"JobExecutionsRolloutConfig",
           "documentation":"<p>Allows you to create a staged rollout of the job.</p>"
-        },
-        "documentParameters":{
-          "shape":"JobDocumentParameters",
-          "documentation":"<p>Parameters for the job document.</p>"
         }
       }
     },
@@ -5324,10 +5314,6 @@
         "jobProcessDetails":{
           "shape":"JobProcessDetails",
           "documentation":"<p>Details about the job process.</p>"
-        },
-        "documentParameters":{
-          "shape":"JobDocumentParameters",
-          "documentation":"<p>The parameters specified for the job document.</p>"
         }
       },
       "documentation":"<p>The <code>Job</code> object contains details about a job.</p>"
@@ -5341,12 +5327,6 @@
     "JobDocument":{
       "type":"string",
       "max":32768
-    },
-    "JobDocumentParameters":{
-      "type":"map",
-      "key":{"shape":"ParameterKey"},
-      "value":{"shape":"ParameterValue"},
-      "max":10
     },
     "JobDocumentSource":{
       "type":"string",
@@ -7123,18 +7103,6 @@
       "min":1
     },
     "Parameter":{"type":"string"},
-    "ParameterKey":{
-      "type":"string",
-      "max":128,
-      "min":1,
-      "pattern":"[a-zA-Z0-9:_-]+"
-    },
-    "ParameterValue":{
-      "type":"string",
-      "max":1024,
-      "min":1,
-      "pattern":"[^\\p{C}]+"
-    },
     "Parameters":{
       "type":"map",
       "key":{"shape":"Parameter"},
@@ -7699,20 +7667,10 @@
         "key"
       ],
       "members":{
-        "bucket":{
-          "shape":"S3Bucket",
-          "documentation":"<p>The S3 bucket that contains the file to stream.</p>"
-        },
-        "key":{
-          "shape":"S3Key",
-          "documentation":"<p>The name of the file within the S3 bucket to stream.</p>"
-        },
-        "version":{
-          "shape":"S3Version",
-          "documentation":"<p>The file version.</p>"
-        }
-      },
-      "documentation":"<p>The location in S3 the contains the files to stream.</p>"
+        "bucket":{"shape":"S3Bucket"},
+        "key":{"shape":"S3Key"},
+        "version":{"shape":"S3Version"}
+      }
     },
     "S3Version":{"type":"string"},
     "SQL":{"type":"string"},
@@ -7882,7 +7840,7 @@
       "members":{
         "roleArn":{
           "shape":"AwsArn",
-          "documentation":"<p>The role ARN that allows IoT to write to Cloudwatch logs.</p>"
+          "documentation":"<p>The ARN of the role that allows IoT to write to Cloudwatch logs.</p>"
         },
         "defaultLogLevel":{
           "shape":"LogLevel",
@@ -7890,7 +7848,7 @@
         },
         "disableAllLogs":{
           "shape":"DisableAllLogs",
-          "documentation":"<p>Set to true to disable all logs, otherwise set to false.</p>"
+          "documentation":"<p>If true all logs are disabled. The default is false.</p>"
         }
       }
     },
@@ -9036,5 +8994,5 @@
     "resourceArn":{"type":"string"},
     "resourceId":{"type":"string"}
   },
-  "documentation":"<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>For more information about how AWS IoT works, see the <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer Guide</a>.</p>"
+  "documentation":"<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>For more information about how AWS IoT works, see the <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer Guide</a>.</p> <p>For information about how to use the credentials provider for AWS IoT, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to AWS Services</a>.</p>"
 }

@@ -85,19 +85,19 @@ declare class SageMaker extends Service {
    */
   createTrainingJob(callback?: (err: AWSError, data: SageMaker.Types.CreateTrainingJobResponse) => void): Request<SageMaker.Types.CreateTrainingJobResponse, AWSError>;
   /**
-   * Starts a transform job. After the results are obtained, Amazon SageMaker saves them to an Amazon S3 location that you specify. To perform batch transformations, you create a transform job and use the data that you have readily available. In the request body, you provide the following:    TransformJobName - Identifies the transform job. The name must be unique within an AWS Region in an AWS account.    ModelName - Identifies the model to use.    TransformInput - Describes the dataset to be transformed and the Amazon S3 location where it is stored.    TransformOutput - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.    TransformResources - Identifies the ML compute instances for the transform job.    For more information about how batch transformation works Amazon SageMaker, see How It Works. 
+   * Starts a transform job. A transform job uses a trained model to get inferences on a dataset and saves these results to an Amazon S3 location that you specify. To perform batch transformations, you create a transform job and use the data that you have readily available. In the request body, you provide the following:    TransformJobName - Identifies the transform job. The name must be unique within an AWS Region in an AWS account.    ModelName - Identifies the model to use. ModelName must be the name of an existing Amazon SageMaker model within an AWS Region in an AWS account.    TransformInput - Describes the dataset to be transformed and the Amazon S3 location where it is stored.    TransformOutput - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.    TransformResources - Identifies the ML compute instances for the transform job.    For more information about how batch transformation works Amazon SageMaker, see How It Works. 
    */
   createTransformJob(params: SageMaker.Types.CreateTransformJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateTransformJobResponse) => void): Request<SageMaker.Types.CreateTransformJobResponse, AWSError>;
   /**
-   * Starts a transform job. After the results are obtained, Amazon SageMaker saves them to an Amazon S3 location that you specify. To perform batch transformations, you create a transform job and use the data that you have readily available. In the request body, you provide the following:    TransformJobName - Identifies the transform job. The name must be unique within an AWS Region in an AWS account.    ModelName - Identifies the model to use.    TransformInput - Describes the dataset to be transformed and the Amazon S3 location where it is stored.    TransformOutput - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.    TransformResources - Identifies the ML compute instances for the transform job.    For more information about how batch transformation works Amazon SageMaker, see How It Works. 
+   * Starts a transform job. A transform job uses a trained model to get inferences on a dataset and saves these results to an Amazon S3 location that you specify. To perform batch transformations, you create a transform job and use the data that you have readily available. In the request body, you provide the following:    TransformJobName - Identifies the transform job. The name must be unique within an AWS Region in an AWS account.    ModelName - Identifies the model to use. ModelName must be the name of an existing Amazon SageMaker model within an AWS Region in an AWS account.    TransformInput - Describes the dataset to be transformed and the Amazon S3 location where it is stored.    TransformOutput - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.    TransformResources - Identifies the ML compute instances for the transform job.    For more information about how batch transformation works Amazon SageMaker, see How It Works. 
    */
   createTransformJob(callback?: (err: AWSError, data: SageMaker.Types.CreateTransformJobResponse) => void): Request<SageMaker.Types.CreateTransformJobResponse, AWSError>;
   /**
-   * Deletes an endpoint. Amazon SageMaker frees up all of the resources that were deployed when the endpoint was created. 
+   * Deletes an endpoint. Amazon SageMaker frees up all of the resources that were deployed when the endpoint was created.  Amazon SageMaker retires any custom KMS key grants associated with the endpoint, meaning you don't need to use the RevokeGrant API call.
    */
   deleteEndpoint(params: SageMaker.Types.DeleteEndpointInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an endpoint. Amazon SageMaker frees up all of the resources that were deployed when the endpoint was created. 
+   * Deletes an endpoint. Amazon SageMaker frees up all of the resources that were deployed when the endpoint was created.  Amazon SageMaker retires any custom KMS key grants associated with the endpoint, meaning you don't need to use the RevokeGrant API call.
    */
   deleteEndpoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -736,19 +736,19 @@ declare namespace SageMaker {
      */
     TransformJobName: TransformJobName;
     /**
-     * The name of the model that you want to use for the transform job.
+     * The name of the model that you want to use for the transform job. ModelName must be the name of an existing Amazon SageMaker model within an AWS Region in an AWS account.
      */
     ModelName: ModelName;
     /**
-     * The maximum number of parallel requests on each instance node that can be launched in a transform job. The default value is 1. To allow Amazon SageMaker to determine the appropriate number for MaxConcurrentTransforms, set the value to 0.
+     * The maximum number of parallel requests that can be sent to each instance in a transform job. This is good for algorithms that implement multiple workers on larger instances . The default value is 1. To allow Amazon SageMaker to determine the appropriate number for MaxConcurrentTransforms, set the value to 0.
      */
     MaxConcurrentTransforms?: MaxConcurrentTransforms;
     /**
-     * The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata). The value in MaxPayloadInMB must be greater than the size of a single record.You can approximate the size of a record by dividing the size of your dataset by the number of records. The value you enter should be proportional to the number of records you want per batch. It is recommended to enter a slightly higher value to ensure the records will fit within the maximum payload size. The default value is 6 MB. For an unlimited payload size, set the value to 0.
+     * The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata). The value in MaxPayloadInMB must be greater or equal to the size of a single record. You can approximate the size of a record by dividing the size of your dataset by the number of records. Then multiply this value by the number of records you want in a mini-batch. It is recommended to enter a value slightly larger than this to ensure the records fit within the maximum payload size. The default value is 6 MB. For an unlimited payload size, set the value to 0.
      */
     MaxPayloadInMB?: MaxPayloadInMB;
     /**
-     * Determins the number of records included in a single batch. SingleRecord means only one record is used per batch. MultiRecord means a batch is set to contain as many records that could possibly fit within the MaxPayloadInMB limit.
+     * Determines the number of records included in a single mini-batch. SingleRecord means only one record is used per mini-batch. MultiRecord means a mini-batch is set to contain as many records that can fit within the MaxPayloadInMB limit. Batch transform will automatically split your input data into whatever payload size is specified if you set SplitType to Line and BatchStrategy to MultiRecord. There's no need to split the dataset into smaller files or to use larger payload sizes unless the records in your dataset are very large.
      */
     BatchStrategy?: BatchStrategy;
     /**
@@ -1126,7 +1126,7 @@ declare namespace SageMaker {
      */
     TrainingJobStatus: TrainingJobStatus;
     /**
-     *  Provides granular information about the system state. For more information, see TrainingJobStatus. 
+     *  Provides granular information about the system state. For more information, see TrainingJobStatus.     Starting - starting the training job.    LaunchingMLInstances - launching ML instances for the training job.    PreparingTrainingStack - preparing the ML instances for the training job.    Downloading - downloading the input data.    DownloadingTrainingImage - downloading the training algorithm image.    Training - model training is in progress.    Uploading - uploading the trained model.    Stopping - stopping the training job.    Stopped - the training job has stopped.    MaxRuntimeExceeded - the training job exceeded the specified max run time and has been stopped.    Completed - the training job has completed.    Failed - the training job has failed. The failure reason is provided in the StatusMessage.    The valid values for SecondaryStatus are subject to change. They primarily provide information on the progress of the training job. 
      */
     SecondaryStatus: SecondaryStatus;
     /**
@@ -1181,6 +1181,10 @@ declare namespace SageMaker {
      * A timestamp that indicates when the status of the training job was last modified.
      */
     LastModifiedTime?: Timestamp;
+    /**
+     * To give an overview of the training job lifecycle, SecondaryStatusTransitions is a log of time-ordered secondary statuses that a training job has transitioned.
+     */
+    SecondaryStatusTransitions?: SecondaryStatusTransitions;
   }
   export interface DescribeTransformJobRequest {
     /**
@@ -1218,7 +1222,7 @@ declare namespace SageMaker {
      */
     MaxPayloadInMB?: MaxPayloadInMB;
     /**
-     * SingleRecord means only one record was used per a batch. &lt;code&gt;MultiRecord&lt;/code&gt; means batches contained as many records that could possibly fit within the MaxPayloadInMB limit.
+     * SingleRecord means only one record was used per a batch. MultiRecord means batches contained as many records that could possibly fit within the MaxPayloadInMB limit.
      */
     BatchStrategy?: BatchStrategy;
     /**
@@ -2239,7 +2243,26 @@ declare namespace SageMaker {
   }
   export type S3DataType = "ManifestFile"|"S3Prefix"|string;
   export type S3Uri = string;
-  export type SecondaryStatus = "Starting"|"Downloading"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|string;
+  export type SecondaryStatus = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|string;
+  export interface SecondaryStatusTransition {
+    /**
+     * Provides granular information about the system state. For more information, see SecondaryStatus under the DescribeTrainingJob response elements.
+     */
+    Status: SecondaryStatus;
+    /**
+     * A timestamp that shows when the training job has entered this secondary status.
+     */
+    StartTime: Timestamp;
+    /**
+     * A timestamp that shows when the secondary status has ended and the job has transitioned into another secondary status. The EndTime timestamp is also set after the training job has ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * Shows a brief description and other information about the secondary status. For example, the LaunchingMLInstances secondary status could show a status message of "Insufficent capacity error while launching instances".
+     */
+    StatusMessage?: StatusMessage;
+  }
+  export type SecondaryStatusTransitions = SecondaryStatusTransition[];
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type SessionExpirationDurationInSeconds = number;
@@ -2252,6 +2275,7 @@ declare namespace SageMaker {
      */
     NotebookInstanceName: NotebookInstanceName;
   }
+  export type StatusMessage = string;
   export interface StopHyperParameterTuningJobRequest {
     /**
      * The name of the tuning job to stop.
@@ -2380,7 +2404,7 @@ declare namespace SageMaker {
      */
     CompressionType?: CompressionType;
     /**
-     * The method to use to split the transform job's data into smaller batches. The default value is None. If you don't want to split the data, specify (None). If you want to split records on a newline character boundary, specify Line. To split records according to the RecordIO format, specify RecordIO. Amazon SageMaker will send maximum number of records per batch in each request up to the MaxPayloadInMB limit. For more information, see RecordIO data format.  For information about the RecordIO format, see Data Format. 
+     * The method to use to split the transform job's data into smaller batches. The default value is None. If you don't want to split the data, specify None. If you want to split records on a newline character boundary, specify Line. To split records according to the RecordIO format, specify RecordIO. Amazon SageMaker will send maximum number of records per batch in each request up to the MaxPayloadInMB limit. For more information, see RecordIO data format.  For information about the RecordIO format, see Data Format. 
      */
     SplitType?: SplitType;
   }
@@ -2422,7 +2446,7 @@ declare namespace SageMaker {
   }
   export interface TransformOutput {
     /**
-     * The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job. For example, s3://bucket-name/key-name-prefix. For every S3 object used as input for the transform job, the transformed data is stored in a corresponding subfolder in the location under the output prefix.For example, the input data s3://bucket-name/input-name-prefix/dataset01/data.csv will have the transformed data stored at s3://bucket-name/key-name-prefix/dataset01/, based on the original name, as a series of .part files (.part0001, part0002, etc).
+     * The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job. For example, s3://bucket-name/key-name-prefix. For every S3 object used as input for the transform job, the transformed data is stored in a corresponding subfolder in the location under the output prefix. For example, the input data s3://bucket-name/input-name-prefix/dataset01/data.csv will have the transformed data stored at s3://bucket-name/key-name-prefix/dataset01/, based on the original name, as a series of .part files (.part0001, part0002, etc).
      */
     S3OutputPath: S3Uri;
     /**
@@ -2430,7 +2454,7 @@ declare namespace SageMaker {
      */
     Accept?: Accept;
     /**
-     * Defines how to assemble the results of the transform job as a single S3 object. You should select a format that is most convienant to you. To concatenate the results in binary format, specify None. To add a newline character at the end of every transformed record, specify Line. To assemble the output in RecordIO format, specify RecordIO. The default value is None. For information about the RecordIO format, see Data Format.
+     * Defines how to assemble the results of the transform job as a single S3 object. You should select a format that is most convenient to you. To concatenate the results in binary format, specify None. To add a newline character at the end of every transformed record, specify Line. To assemble the output in RecordIO format, specify RecordIO. The default value is None. For information about the RecordIO format, see Data Format.
      */
     AssembleWith?: AssemblyType;
     /**
