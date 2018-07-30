@@ -92,7 +92,7 @@ Before you can begin using these TypeScript definitions with your project, you n
     npm install --save-dev @types/node
     ```
 
- * Your `tsconfig.json` or `jsconfig.json` includes `'es5'` and `'es2015.promise'` under `compilerOptions.lib`.
+ * If you are targeting at es5 or older ECMA standards, your `tsconfig.json` has to include `'es5'` and `'es2015.promise'` under `compilerOptions.lib`.
  See [tsconfig.json](https://github.com/aws/aws-sdk-js/blob/master/ts/tsconfig.json) for an example.
 
 ### In the Browser
