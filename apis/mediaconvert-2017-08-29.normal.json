@@ -4722,7 +4722,7 @@
           "documentation": "An identifier for this resource that is unique within all of AWS."
         },
         "CreatedAt": {
-          "shape": "__timestampIso8601",
+          "shape": "__timestampUnix",
           "locationName": "createdAt",
           "documentation": "The time, in Unix epoch format in seconds, when the job got created."
         },
@@ -4853,7 +4853,7 @@
           "documentation": "An optional category you create to organize your job templates."
         },
         "CreatedAt": {
-          "shape": "__timestampIso8601",
+          "shape": "__timestampUnix",
           "locationName": "createdAt",
           "documentation": "The timestamp in epoch seconds for Job template creation."
         },
@@ -4863,7 +4863,7 @@
           "documentation": "An optional description you create for each job template."
         },
         "LastUpdated": {
-          "shape": "__timestampIso8601",
+          "shape": "__timestampUnix",
           "locationName": "lastUpdated",
           "documentation": "The timestamp in epoch seconds when the Job template was last updated."
         },
@@ -6486,7 +6486,7 @@
           "documentation": "An optional category you create to organize your presets."
         },
         "CreatedAt": {
-          "shape": "__timestampIso8601",
+          "shape": "__timestampUnix",
           "locationName": "createdAt",
           "documentation": "The timestamp in epoch seconds for preset creation."
         },
@@ -6496,7 +6496,7 @@
           "documentation": "An optional description you create for each preset."
         },
         "LastUpdated": {
-          "shape": "__timestampIso8601",
+          "shape": "__timestampUnix",
           "locationName": "lastUpdated",
           "documentation": "The timestamp in epoch seconds when the preset was last updated."
         },
@@ -6679,7 +6679,7 @@
           "documentation": "An identifier for this resource that is unique within all of AWS."
         },
         "CreatedAt": {
-          "shape": "__timestampIso8601",
+          "shape": "__timestampUnix",
           "locationName": "createdAt",
           "documentation": "The timestamp in epoch seconds for queue creation."
         },
@@ -6689,7 +6689,7 @@
           "documentation": "An optional description you create for each queue."
         },
         "LastUpdated": {
-          "shape": "__timestampIso8601",
+          "shape": "__timestampUnix",
           "locationName": "lastUpdated",
           "documentation": "The timestamp in epoch seconds when the queue was last updated."
         },
@@ -7046,17 +7046,17 @@
       "type": "structure",
       "members": {
         "FinishTime": {
-          "shape": "__timestampIso8601",
+          "shape": "__timestampUnix",
           "locationName": "finishTime",
           "documentation": "The time, in Unix epoch format, that the transcoding job finished"
         },
         "StartTime": {
-          "shape": "__timestampIso8601",
+          "shape": "__timestampUnix",
           "locationName": "startTime",
           "documentation": "The time, in Unix epoch format, that transcoding for the job began."
         },
         "SubmitTime": {
-          "shape": "__timestampIso8601",
+          "shape": "__timestampUnix",
           "locationName": "submitTime",
           "documentation": "The time, in Unix epoch format, that you submitted the job."
         }

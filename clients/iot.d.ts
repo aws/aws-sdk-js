@@ -52,6 +52,14 @@ declare class Iot extends Service {
    */
   attachPrincipalPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Associates a Device Defender security profile with a thing group or with this account. Each thing group or account can have up to five security profiles associated with it.
+   */
+  attachSecurityProfile(params: Iot.Types.AttachSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
+  /**
+   * Associates a Device Defender security profile with a thing group or with this account. Each thing group or account can have up to five security profiles associated with it.
+   */
+  attachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
+  /**
    * Attaches the specified principal to the specified thing.
    */
   attachThingPrincipal(params: Iot.Types.AttachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
@@ -59,6 +67,14 @@ declare class Iot extends Service {
    * Attaches the specified principal to the specified thing.
    */
   attachThingPrincipal(callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
+  /**
+   * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
+   */
+  cancelAuditTask(params: Iot.Types.CancelAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.CancelAuditTaskResponse) => void): Request<Iot.Types.CancelAuditTaskResponse, AWSError>;
+  /**
+   * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
+   */
+  cancelAuditTask(callback?: (err: AWSError, data: Iot.Types.CancelAuditTaskResponse) => void): Request<Iot.Types.CancelAuditTaskResponse, AWSError>;
   /**
    * Cancels a pending transfer for the specified certificate.  Note Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use RejectCertificateTransfer instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled. After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.
    */
@@ -156,6 +172,22 @@ declare class Iot extends Service {
    */
   createRoleAlias(callback?: (err: AWSError, data: Iot.Types.CreateRoleAliasResponse) => void): Request<Iot.Types.CreateRoleAliasResponse, AWSError>;
   /**
+   * Creates a scheduled audit that is run at a specified time interval.
+   */
+  createScheduledAudit(params: Iot.Types.CreateScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.CreateScheduledAuditResponse) => void): Request<Iot.Types.CreateScheduledAuditResponse, AWSError>;
+  /**
+   * Creates a scheduled audit that is run at a specified time interval.
+   */
+  createScheduledAudit(callback?: (err: AWSError, data: Iot.Types.CreateScheduledAuditResponse) => void): Request<Iot.Types.CreateScheduledAuditResponse, AWSError>;
+  /**
+   * Creates a Device Defender security profile.
+   */
+  createSecurityProfile(params: Iot.Types.CreateSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.CreateSecurityProfileResponse) => void): Request<Iot.Types.CreateSecurityProfileResponse, AWSError>;
+  /**
+   * Creates a Device Defender security profile.
+   */
+  createSecurityProfile(callback?: (err: AWSError, data: Iot.Types.CreateSecurityProfileResponse) => void): Request<Iot.Types.CreateSecurityProfileResponse, AWSError>;
+  /**
    * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.
    */
   createStream(params: Iot.Types.CreateStreamRequest, callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
@@ -195,6 +227,14 @@ declare class Iot extends Service {
    * Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
    */
   createTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. 
+   */
+  deleteAccountAuditConfiguration(params: Iot.Types.DeleteAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DeleteAccountAuditConfigurationResponse) => void): Request<Iot.Types.DeleteAccountAuditConfigurationResponse, AWSError>;
+  /**
+   * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. 
+   */
+  deleteAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.DeleteAccountAuditConfigurationResponse) => void): Request<Iot.Types.DeleteAccountAuditConfigurationResponse, AWSError>;
   /**
    * Deletes an authorizer.
    */
@@ -276,6 +316,22 @@ declare class Iot extends Service {
    */
   deleteRoleAlias(callback?: (err: AWSError, data: Iot.Types.DeleteRoleAliasResponse) => void): Request<Iot.Types.DeleteRoleAliasResponse, AWSError>;
   /**
+   * Deletes a scheduled audit.
+   */
+  deleteScheduledAudit(params: Iot.Types.DeleteScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.DeleteScheduledAuditResponse) => void): Request<Iot.Types.DeleteScheduledAuditResponse, AWSError>;
+  /**
+   * Deletes a scheduled audit.
+   */
+  deleteScheduledAudit(callback?: (err: AWSError, data: Iot.Types.DeleteScheduledAuditResponse) => void): Request<Iot.Types.DeleteScheduledAuditResponse, AWSError>;
+  /**
+   * Deletes a Device Defender security profile.
+   */
+  deleteSecurityProfile(params: Iot.Types.DeleteSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DeleteSecurityProfileResponse) => void): Request<Iot.Types.DeleteSecurityProfileResponse, AWSError>;
+  /**
+   * Deletes a Device Defender security profile.
+   */
+  deleteSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DeleteSecurityProfileResponse) => void): Request<Iot.Types.DeleteSecurityProfileResponse, AWSError>;
+  /**
    * Deletes a stream.
    */
   deleteStream(params: Iot.Types.DeleteStreamRequest, callback?: (err: AWSError, data: Iot.Types.DeleteStreamResponse) => void): Request<Iot.Types.DeleteStreamResponse, AWSError>;
@@ -331,6 +387,22 @@ declare class Iot extends Service {
    * Deprecates a thing type. You can not associate new things with deprecated thing type.
    */
   deprecateThingType(callback?: (err: AWSError, data: Iot.Types.DeprecateThingTypeResponse) => void): Request<Iot.Types.DeprecateThingTypeResponse, AWSError>;
+  /**
+   * Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   */
+  describeAccountAuditConfiguration(params: Iot.Types.DescribeAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAccountAuditConfigurationResponse) => void): Request<Iot.Types.DescribeAccountAuditConfigurationResponse, AWSError>;
+  /**
+   * Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   */
+  describeAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.DescribeAccountAuditConfigurationResponse) => void): Request<Iot.Types.DescribeAccountAuditConfigurationResponse, AWSError>;
+  /**
+   * Gets information about a Device Defender audit.
+   */
+  describeAuditTask(params: Iot.Types.DescribeAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuditTaskResponse) => void): Request<Iot.Types.DescribeAuditTaskResponse, AWSError>;
+  /**
+   * Gets information about a Device Defender audit.
+   */
+  describeAuditTask(callback?: (err: AWSError, data: Iot.Types.DescribeAuditTaskResponse) => void): Request<Iot.Types.DescribeAuditTaskResponse, AWSError>;
   /**
    * Describes an authorizer.
    */
@@ -412,6 +484,22 @@ declare class Iot extends Service {
    */
   describeRoleAlias(callback?: (err: AWSError, data: Iot.Types.DescribeRoleAliasResponse) => void): Request<Iot.Types.DescribeRoleAliasResponse, AWSError>;
   /**
+   * Gets information about a scheduled audit.
+   */
+  describeScheduledAudit(params: Iot.Types.DescribeScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.DescribeScheduledAuditResponse) => void): Request<Iot.Types.DescribeScheduledAuditResponse, AWSError>;
+  /**
+   * Gets information about a scheduled audit.
+   */
+  describeScheduledAudit(callback?: (err: AWSError, data: Iot.Types.DescribeScheduledAuditResponse) => void): Request<Iot.Types.DescribeScheduledAuditResponse, AWSError>;
+  /**
+   * Gets information about a Device Defender security profile.
+   */
+  describeSecurityProfile(params: Iot.Types.DescribeSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DescribeSecurityProfileResponse) => void): Request<Iot.Types.DescribeSecurityProfileResponse, AWSError>;
+  /**
+   * Gets information about a Device Defender security profile.
+   */
+  describeSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DescribeSecurityProfileResponse) => void): Request<Iot.Types.DescribeSecurityProfileResponse, AWSError>;
+  /**
    * Gets information about a stream.
    */
   describeStream(params: Iot.Types.DescribeStreamRequest, callback?: (err: AWSError, data: Iot.Types.DescribeStreamResponse) => void): Request<Iot.Types.DescribeStreamResponse, AWSError>;
@@ -467,6 +555,14 @@ declare class Iot extends Service {
    * Removes the specified policy from the specified certificate.  Note: This API is deprecated. Please use DetachPolicy instead.
    */
   detachPrincipalPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disassociates a Device Defender security profile from a thing group or from this account.
+   */
+  detachSecurityProfile(params: Iot.Types.DetachSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DetachSecurityProfileResponse) => void): Request<Iot.Types.DetachSecurityProfileResponse, AWSError>;
+  /**
+   * Disassociates a Device Defender security profile from a thing group or from this account.
+   */
+  detachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DetachSecurityProfileResponse) => void): Request<Iot.Types.DetachSecurityProfileResponse, AWSError>;
   /**
    * Detaches the specified principal from the specified thing.
    */
@@ -572,6 +668,14 @@ declare class Iot extends Service {
    */
   getV2LoggingOptions(callback?: (err: AWSError, data: Iot.Types.GetV2LoggingOptionsResponse) => void): Request<Iot.Types.GetV2LoggingOptionsResponse, AWSError>;
   /**
+   * Lists the active violations for a given Device Defender security profile.
+   */
+  listActiveViolations(params: Iot.Types.ListActiveViolationsRequest, callback?: (err: AWSError, data: Iot.Types.ListActiveViolationsResponse) => void): Request<Iot.Types.ListActiveViolationsResponse, AWSError>;
+  /**
+   * Lists the active violations for a given Device Defender security profile.
+   */
+  listActiveViolations(callback?: (err: AWSError, data: Iot.Types.ListActiveViolationsResponse) => void): Request<Iot.Types.ListActiveViolationsResponse, AWSError>;
+  /**
    * Lists the policies attached to the specified thing group.
    */
   listAttachedPolicies(params: Iot.Types.ListAttachedPoliciesRequest, callback?: (err: AWSError, data: Iot.Types.ListAttachedPoliciesResponse) => void): Request<Iot.Types.ListAttachedPoliciesResponse, AWSError>;
@@ -579,6 +683,22 @@ declare class Iot extends Service {
    * Lists the policies attached to the specified thing group.
    */
   listAttachedPolicies(callback?: (err: AWSError, data: Iot.Types.ListAttachedPoliciesResponse) => void): Request<Iot.Types.ListAttachedPoliciesResponse, AWSError>;
+  /**
+   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
+   */
+  listAuditFindings(params: Iot.Types.ListAuditFindingsRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
+  /**
+   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
+   */
+  listAuditFindings(callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
+  /**
+   * Lists the Device Defender audits that have been performed during a given time period.
+   */
+  listAuditTasks(params: Iot.Types.ListAuditTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditTasksResponse) => void): Request<Iot.Types.ListAuditTasksResponse, AWSError>;
+  /**
+   * Lists the Device Defender audits that have been performed during a given time period.
+   */
+  listAuditTasks(callback?: (err: AWSError, data: Iot.Types.ListAuditTasksResponse) => void): Request<Iot.Types.ListAuditTasksResponse, AWSError>;
   /**
    * Lists the authorizers registered in your account.
    */
@@ -708,6 +828,30 @@ declare class Iot extends Service {
    */
   listRoleAliases(callback?: (err: AWSError, data: Iot.Types.ListRoleAliasesResponse) => void): Request<Iot.Types.ListRoleAliasesResponse, AWSError>;
   /**
+   * Lists all of your scheduled audits.
+   */
+  listScheduledAudits(params: Iot.Types.ListScheduledAuditsRequest, callback?: (err: AWSError, data: Iot.Types.ListScheduledAuditsResponse) => void): Request<Iot.Types.ListScheduledAuditsResponse, AWSError>;
+  /**
+   * Lists all of your scheduled audits.
+   */
+  listScheduledAudits(callback?: (err: AWSError, data: Iot.Types.ListScheduledAuditsResponse) => void): Request<Iot.Types.ListScheduledAuditsResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
+   */
+  listSecurityProfiles(params: Iot.Types.ListSecurityProfilesRequest, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesResponse) => void): Request<Iot.Types.ListSecurityProfilesResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
+   */
+  listSecurityProfiles(callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesResponse) => void): Request<Iot.Types.ListSecurityProfilesResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profiles attached to a target (thing group).
+   */
+  listSecurityProfilesForTarget(params: Iot.Types.ListSecurityProfilesForTargetRequest, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesForTargetResponse) => void): Request<Iot.Types.ListSecurityProfilesForTargetResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profiles attached to a target (thing group).
+   */
+  listSecurityProfilesForTarget(callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesForTargetResponse) => void): Request<Iot.Types.ListSecurityProfilesForTargetResponse, AWSError>;
+  /**
    * Lists all of the streams in your AWS account.
    */
   listStreams(params: Iot.Types.ListStreamsRequest, callback?: (err: AWSError, data: Iot.Types.ListStreamsResponse) => void): Request<Iot.Types.ListStreamsResponse, AWSError>;
@@ -723,6 +867,14 @@ declare class Iot extends Service {
    * List targets for the specified policy.
    */
   listTargetsForPolicy(callback?: (err: AWSError, data: Iot.Types.ListTargetsForPolicyResponse) => void): Request<Iot.Types.ListTargetsForPolicyResponse, AWSError>;
+  /**
+   * Lists the targets (thing groups) associated with a given Device Defender security profile.
+   */
+  listTargetsForSecurityProfile(params: Iot.Types.ListTargetsForSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.ListTargetsForSecurityProfileResponse) => void): Request<Iot.Types.ListTargetsForSecurityProfileResponse, AWSError>;
+  /**
+   * Lists the targets (thing groups) associated with a given Device Defender security profile.
+   */
+  listTargetsForSecurityProfile(callback?: (err: AWSError, data: Iot.Types.ListTargetsForSecurityProfileResponse) => void): Request<Iot.Types.ListTargetsForSecurityProfileResponse, AWSError>;
   /**
    * List the thing groups in your account.
    */
@@ -803,6 +955,14 @@ declare class Iot extends Service {
    * Lists logging levels.
    */
   listV2LoggingLevels(callback?: (err: AWSError, data: Iot.Types.ListV2LoggingLevelsResponse) => void): Request<Iot.Types.ListV2LoggingLevelsResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior or thing (device).
+   */
+  listViolationEvents(params: Iot.Types.ListViolationEventsRequest, callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior or thing (device).
+   */
+  listViolationEvents(callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
   /**
    * Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.
    */
@@ -900,6 +1060,14 @@ declare class Iot extends Service {
    */
   setV2LoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Starts an on-demand Device Defender audit.
+   */
+  startOnDemandAuditTask(params: Iot.Types.StartOnDemandAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartOnDemandAuditTaskResponse) => void): Request<Iot.Types.StartOnDemandAuditTaskResponse, AWSError>;
+  /**
+   * Starts an on-demand Device Defender audit.
+   */
+  startOnDemandAuditTask(callback?: (err: AWSError, data: Iot.Types.StartOnDemandAuditTaskResponse) => void): Request<Iot.Types.StartOnDemandAuditTaskResponse, AWSError>;
+  /**
    * Creates a bulk thing provisioning task.
    */
   startThingRegistrationTask(params: Iot.Types.StartThingRegistrationTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartThingRegistrationTaskResponse) => void): Request<Iot.Types.StartThingRegistrationTaskResponse, AWSError>;
@@ -939,6 +1107,14 @@ declare class Iot extends Service {
    * Transfers the specified certificate to the specified AWS account. You can cancel the transfer until it is acknowledged by the recipient. No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target. The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it. The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.
    */
   transferCertificate(callback?: (err: AWSError, data: Iot.Types.TransferCertificateResponse) => void): Request<Iot.Types.TransferCertificateResponse, AWSError>;
+  /**
+   * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   */
+  updateAccountAuditConfiguration(params: Iot.Types.UpdateAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateAccountAuditConfigurationResponse) => void): Request<Iot.Types.UpdateAccountAuditConfigurationResponse, AWSError>;
+  /**
+   * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   */
+  updateAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdateAccountAuditConfigurationResponse) => void): Request<Iot.Types.UpdateAccountAuditConfigurationResponse, AWSError>;
   /**
    * Updates an authorizer.
    */
@@ -988,6 +1164,22 @@ declare class Iot extends Service {
    */
   updateRoleAlias(callback?: (err: AWSError, data: Iot.Types.UpdateRoleAliasResponse) => void): Request<Iot.Types.UpdateRoleAliasResponse, AWSError>;
   /**
+   * Updates a scheduled audit, including what checks are performed and how often the audit takes place.
+   */
+  updateScheduledAudit(params: Iot.Types.UpdateScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.UpdateScheduledAuditResponse) => void): Request<Iot.Types.UpdateScheduledAuditResponse, AWSError>;
+  /**
+   * Updates a scheduled audit, including what checks are performed and how often the audit takes place.
+   */
+  updateScheduledAudit(callback?: (err: AWSError, data: Iot.Types.UpdateScheduledAuditResponse) => void): Request<Iot.Types.UpdateScheduledAuditResponse, AWSError>;
+  /**
+   * Updates a Device Defender security profile.
+   */
+  updateSecurityProfile(params: Iot.Types.UpdateSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.UpdateSecurityProfileResponse) => void): Request<Iot.Types.UpdateSecurityProfileResponse, AWSError>;
+  /**
+   * Updates a Device Defender security profile.
+   */
+  updateSecurityProfile(callback?: (err: AWSError, data: Iot.Types.UpdateSecurityProfileResponse) => void): Request<Iot.Types.UpdateSecurityProfileResponse, AWSError>;
+  /**
    * Updates an existing stream. The stream version will be incremented by one.
    */
   updateStream(params: Iot.Types.UpdateStreamRequest, callback?: (err: AWSError, data: Iot.Types.UpdateStreamResponse) => void): Request<Iot.Types.UpdateStreamResponse, AWSError>;
@@ -1019,6 +1211,14 @@ declare class Iot extends Service {
    * Updates the groups to which the thing belongs.
    */
   updateThingGroupsForThing(callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupsForThingResponse) => void): Request<Iot.Types.UpdateThingGroupsForThingResponse, AWSError>;
+  /**
+   * Validates a Device Defender security profile behaviors specification.
+   */
+  validateSecurityProfileBehaviors(params: Iot.Types.ValidateSecurityProfileBehaviorsRequest, callback?: (err: AWSError, data: Iot.Types.ValidateSecurityProfileBehaviorsResponse) => void): Request<Iot.Types.ValidateSecurityProfileBehaviorsResponse, AWSError>;
+  /**
+   * Validates a Device Defender security profile behaviors specification.
+   */
+  validateSecurityProfileBehaviors(callback?: (err: AWSError, data: Iot.Types.ValidateSecurityProfileBehaviorsResponse) => void): Request<Iot.Types.ValidateSecurityProfileBehaviorsResponse, AWSError>;
 }
 declare namespace Iot {
   export interface AcceptCertificateTransferRequest {
@@ -1088,9 +1288,44 @@ declare namespace Iot {
      * Sends message data to an AWS IoT Analytics channel.
      */
     iotAnalytics?: IotAnalyticsAction;
+    /**
+     * Starts execution of a Step Functions state machine.
+     */
+    stepFunctions?: StepFunctionsAction;
   }
   export type ActionList = Action[];
   export type ActionType = "PUBLISH"|"SUBSCRIBE"|"RECEIVE"|"CONNECT"|string;
+  export interface ActiveViolation {
+    /**
+     * The ID of the active violation.
+     */
+    violationId?: ViolationId;
+    /**
+     * The name of the thing responsible for the active violation.
+     */
+    thingName?: ThingName;
+    /**
+     * The security profile whose behavior is in violation.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The behavior which is being violated.
+     */
+    behavior?: Behavior;
+    /**
+     * The value of the metric (the measurement) which caused the most recent violation.
+     */
+    lastViolationValue?: MetricValue;
+    /**
+     * The time the most recent violation occurred.
+     */
+    lastViolationTime?: Timestamp;
+    /**
+     * The time the violation started.
+     */
+    violationStartTime?: Timestamp;
+  }
+  export type ActiveViolations = ActiveViolation[];
   export interface AddThingToThingGroupRequest {
     /**
      * The name of the group to which you are adding a thing.
@@ -1113,6 +1348,19 @@ declare namespace Iot {
   }
   export type AdditionalParameterMap = {[key: string]: Value};
   export type AlarmName = string;
+  export interface AlertTarget {
+    /**
+     * The ARN of the notification target to which alerts are sent.
+     */
+    alertTargetArn: AlertTargetArn;
+    /**
+     * The ARN of the role that grants permission to send alerts to the notification target.
+     */
+    roleArn: RoleArn;
+  }
+  export type AlertTargetArn = string;
+  export type AlertTargetType = "SNS"|string;
+  export type AlertTargets = {[key: string]: AlertTarget};
   export type AllowAutoRegistration = boolean;
   export interface Allowed {
     /**
@@ -1169,6 +1417,18 @@ declare namespace Iot {
      */
     principal: Principal;
   }
+  export interface AttachSecurityProfileRequest {
+    /**
+     * The security profile that is attached.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * The ARN of the target (thing group) to which the security profile is attached.
+     */
+    securityProfileTargetArn: SecurityProfileTargetArn;
+  }
+  export interface AttachSecurityProfileResponse {
+  }
   export interface AttachThingPrincipalRequest {
     /**
      * The name of the thing.
@@ -1195,6 +1455,117 @@ declare namespace Iot {
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
   export type AttributesMap = {[key: string]: Value};
+  export interface AuditCheckConfiguration {
+    /**
+     * True if this audit check is enabled for this account.
+     */
+    enabled?: Enabled;
+  }
+  export type AuditCheckConfigurations = {[key: string]: AuditCheckConfiguration};
+  export interface AuditCheckDetails {
+    /**
+     * The completion status of this check, one of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION", "CANCELED", "COMPLETED_COMPLIANT", "COMPLETED_NON_COMPLIANT", or "FAILED".
+     */
+    checkRunStatus?: AuditCheckRunStatus;
+    /**
+     * True if the check completed and found all resources compliant.
+     */
+    checkCompliant?: CheckCompliant;
+    /**
+     * The number of resources on which the check was performed.
+     */
+    totalResourcesCount?: TotalResourcesCount;
+    /**
+     * The number of resources that the check found non-compliant.
+     */
+    nonCompliantResourcesCount?: NonCompliantResourcesCount;
+    /**
+     * The code of any error encountered when performing this check during this audit. One of "INSUFFICIENT_PERMISSIONS", or "AUDIT_CHECK_DISABLED".
+     */
+    errorCode?: ErrorCode;
+    /**
+     * The message associated with any error encountered when performing this check during this audit.
+     */
+    message?: ErrorMessage;
+  }
+  export type AuditCheckName = string;
+  export type AuditCheckRunStatus = "IN_PROGRESS"|"WAITING_FOR_DATA_COLLECTION"|"CANCELED"|"COMPLETED_COMPLIANT"|"COMPLETED_NON_COMPLIANT"|"FAILED"|string;
+  export type AuditDetails = {[key: string]: AuditCheckDetails};
+  export interface AuditFinding {
+    /**
+     * The ID of the audit that generated this result (finding)
+     */
+    taskId?: AuditTaskId;
+    /**
+     * The audit check that generated this result.
+     */
+    checkName?: AuditCheckName;
+    /**
+     * The time the audit started.
+     */
+    taskStartTime?: Timestamp;
+    /**
+     * The time the result (finding) was discovered.
+     */
+    findingTime?: Timestamp;
+    /**
+     * The severity of the result (finding).
+     */
+    severity?: AuditFindingSeverity;
+    /**
+     * The resource that was found to be non-compliant with the audit check.
+     */
+    nonCompliantResource?: NonCompliantResource;
+    /**
+     * The list of related resources.
+     */
+    relatedResources?: RelatedResources;
+    /**
+     * The reason the resource was non-compliant.
+     */
+    reasonForNonCompliance?: ReasonForNonCompliance;
+    /**
+     * A code which indicates the reason that the resource was non-compliant.
+     */
+    reasonForNonComplianceCode?: ReasonForNonComplianceCode;
+  }
+  export type AuditFindingSeverity = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|string;
+  export type AuditFindings = AuditFinding[];
+  export type AuditFrequency = "DAILY"|"WEEKLY"|"BIWEEKLY"|"MONTHLY"|string;
+  export interface AuditNotificationTarget {
+    /**
+     * The ARN of the target (SNS topic) to which audit notifications are sent.
+     */
+    targetArn?: TargetArn;
+    /**
+     * The ARN of the role that grants permission to send notifications to the target.
+     */
+    roleArn?: RoleArn;
+    /**
+     * True if notifications to the target are enabled.
+     */
+    enabled?: Enabled;
+  }
+  export type AuditNotificationTargetConfigurations = {[key: string]: AuditNotificationTarget};
+  export type AuditNotificationType = "SNS"|string;
+  export type AuditTaskId = string;
+  export interface AuditTaskMetadata {
+    /**
+     * The ID of this audit.
+     */
+    taskId?: AuditTaskId;
+    /**
+     * The status of this audit: one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".
+     */
+    taskStatus?: AuditTaskStatus;
+    /**
+     * The type of this audit: one of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
+     */
+    taskType?: AuditTaskType;
+  }
+  export type AuditTaskMetadataList = AuditTaskMetadata[];
+  export type AuditTaskStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"CANCELED"|string;
+  export type AuditTaskType = "ON_DEMAND_AUDIT_TASK"|"SCHEDULED_AUDIT_TASK"|string;
   export type AuthDecision = "ALLOWED"|"EXPLICIT_DENY"|"IMPLICIT_DENY"|string;
   export interface AuthInfo {
     /**
@@ -1285,6 +1656,37 @@ declare namespace Iot {
   export type AwsIotJobArn = string;
   export type AwsIotJobId = string;
   export type AwsIotSqlVersion = string;
+  export interface Behavior {
+    /**
+     * The name you have given to the behavior.
+     */
+    name: BehaviorName;
+    /**
+     * What is measured by the behavior.
+     */
+    metric?: BehaviorMetric;
+    /**
+     * The criteria that determine if a device is behaving normally in regard to the metric.
+     */
+    criteria?: BehaviorCriteria;
+  }
+  export interface BehaviorCriteria {
+    /**
+     * The operator that relates the thing measured (metric) to the criteria (value).
+     */
+    comparisonOperator?: ComparisonOperator;
+    /**
+     * The value to be compared with the metric.
+     */
+    value?: MetricValue;
+    /**
+     * Use this to specify the period of time over which the behavior is evaluated, for those criteria which have a time dimension (for example, NUM_MESSAGES_SENT).
+     */
+    durationSeconds?: DurationSeconds;
+  }
+  export type BehaviorMetric = string;
+  export type BehaviorName = string;
+  export type Behaviors = Behavior[];
   export type Boolean = boolean;
   export type BucketName = string;
   export interface CACertificate {
@@ -1346,9 +1748,21 @@ declare namespace Iot {
      * The generation ID of the CA certificate.
      */
     generationId?: GenerationId;
+    /**
+     * When the CA certificate is valid.
+     */
+    validity?: CertificateValidity;
   }
   export type CACertificateStatus = "ACTIVE"|"INACTIVE"|string;
   export type CACertificates = CACertificate[];
+  export interface CancelAuditTaskRequest {
+    /**
+     * The ID of the audit you want to cancel. You can only cancel an audit that is "IN_PROGRESS".
+     */
+    taskId: AuditTaskId;
+  }
+  export interface CancelAuditTaskResponse {
+  }
   export interface CancelCertificateTransferRequest {
     /**
      * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
@@ -1405,6 +1819,7 @@ declare namespace Iot {
      */
     description?: JobDescription;
   }
+  export type CanceledChecksCount = number;
   export type CanceledThings = number;
   export type CannedAccessControlList = "private"|"public-read"|"public-read-write"|"aws-exec-read"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|"log-delivery-write"|string;
   export interface Certificate {
@@ -1475,14 +1890,31 @@ declare namespace Iot {
      * The generation ID of the certificate.
      */
     generationId?: GenerationId;
+    /**
+     * When the certificate is valid.
+     */
+    validity?: CertificateValidity;
   }
   export type CertificateId = string;
   export type CertificateName = string;
   export type CertificatePem = string;
   export type CertificateSigningRequest = string;
   export type CertificateStatus = "ACTIVE"|"INACTIVE"|"REVOKED"|"PENDING_TRANSFER"|"REGISTER_INACTIVE"|"PENDING_ACTIVATION"|string;
+  export interface CertificateValidity {
+    /**
+     * The certificate is not valid before this date.
+     */
+    notBefore?: DateType;
+    /**
+     * The certificate is not valid after this date.
+     */
+    notAfter?: DateType;
+  }
   export type Certificates = Certificate[];
   export type ChannelName = string;
+  export type CheckCompliant = boolean;
+  export type Cidr = string;
+  export type Cidrs = Cidr[];
   export interface ClearDefaultAuthorizerRequest {
   }
   export interface ClearDefaultAuthorizerResponse {
@@ -1514,23 +1946,23 @@ declare namespace Iot {
     /**
      * The CloudWatch metric namespace name.
      */
-    metricNamespace: MetricNamespace;
+    metricNamespace: String;
     /**
      * The CloudWatch metric name.
      */
-    metricName: MetricName;
+    metricName: String;
     /**
      * The CloudWatch metric value.
      */
-    metricValue: MetricValue;
+    metricValue: String;
     /**
      * The metric unit supported by CloudWatch.
      */
-    metricUnit: MetricUnit;
+    metricUnit: String;
     /**
      * An optional Unix timestamp.
      */
-    metricTimestamp?: MetricTimestamp;
+    metricTimestamp?: String;
   }
   export type Code = string;
   export interface CodeSigning {
@@ -1544,6 +1976,9 @@ declare namespace Iot {
     customCodeSigning?: CustomCodeSigning;
   }
   export interface CodeSigningCertificateChain {
+    /**
+     * A stream of the certificate chain files.
+     */
     stream?: Stream;
     /**
      * The name of the certificate.
@@ -1555,6 +1990,9 @@ declare namespace Iot {
     inlineDocument?: InlineDocument;
   }
   export interface CodeSigningSignature {
+    /**
+     * A stream of the code signing signature.
+     */
     stream?: Stream;
     /**
      * A base64 encoded binary representation of the code signing signature.
@@ -1563,6 +2001,8 @@ declare namespace Iot {
   }
   export type CognitoIdentityPoolId = string;
   export type Comment = string;
+  export type ComparisonOperator = "less-than"|"less-than-equals"|"greater-than"|"greater-than-equals"|"in-cidr-set"|"not-in-cidr-set"|"in-port-set"|"not-in-port-set"|string;
+  export type CompliantChecksCount = number;
   export interface Configuration {
     /**
      * True to enable the configuration.
@@ -1834,6 +2274,62 @@ declare namespace Iot {
      */
     roleAliasArn?: RoleAliasArn;
   }
+  export interface CreateScheduledAuditRequest {
+    /**
+     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.
+     */
+    frequency: AuditFrequency;
+    /**
+     * The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     */
+    dayOfMonth?: DayOfMonth;
+    /**
+     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
+     */
+    dayOfWeek?: DayOfWeek;
+    /**
+     * Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.)
+     */
+    targetCheckNames: TargetAuditCheckNames;
+    /**
+     * The name you want to give to the scheduled audit. (Max. 128 chars)
+     */
+    scheduledAuditName: ScheduledAuditName;
+  }
+  export interface CreateScheduledAuditResponse {
+    /**
+     * The ARN of the scheduled audit.
+     */
+    scheduledAuditArn?: ScheduledAuditArn;
+  }
+  export interface CreateSecurityProfileRequest {
+    /**
+     * The name you are giving to the security profile.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * A description of the security profile.
+     */
+    securityProfileDescription?: SecurityProfileDescription;
+    /**
+     * Specifies the behaviors that, when violated by a device (thing), cause an alert.
+     */
+    behaviors: Behaviors;
+    /**
+     * Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.
+     */
+    alertTargets?: AlertTargets;
+  }
+  export interface CreateSecurityProfileResponse {
+    /**
+     * The name you gave to the security profile.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The ARN of the security profile.
+     */
+    securityProfileArn?: SecurityProfileArn;
+  }
   export interface CreateStreamRequest {
     /**
      * The stream ID.
@@ -1983,6 +2479,16 @@ declare namespace Iot {
   }
   export type CustomerVersion = number;
   export type DateType = Date;
+  export type DayOfMonth = string;
+  export type DayOfWeek = "SUN"|"MON"|"TUE"|"WED"|"THU"|"FRI"|"SAT"|string;
+  export interface DeleteAccountAuditConfigurationRequest {
+    /**
+     * If true, all scheduled audits are deleted.
+     */
+    deleteScheduledAudits?: DeleteScheduledAudits;
+  }
+  export interface DeleteAccountAuditConfigurationResponse {
+  }
   export interface DeleteAuthorizerRequest {
     /**
      * The name of the authorizer to delete.
@@ -2073,6 +2579,27 @@ declare namespace Iot {
   }
   export interface DeleteRoleAliasResponse {
   }
+  export interface DeleteScheduledAuditRequest {
+    /**
+     * The name of the scheduled audit you want to delete.
+     */
+    scheduledAuditName: ScheduledAuditName;
+  }
+  export interface DeleteScheduledAuditResponse {
+  }
+  export type DeleteScheduledAudits = boolean;
+  export interface DeleteSecurityProfileRequest {
+    /**
+     * The name of the security profile to be deleted.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different than the actual version, a VersionConflictException is thrown.
+     */
+    expectedVersion?: OptionalVersion;
+  }
+  export interface DeleteSecurityProfileResponse {
+  }
   export interface DeleteStreamRequest {
     /**
      * The stream ID.
@@ -2153,6 +2680,54 @@ declare namespace Iot {
   export interface DeprecateThingTypeResponse {
   }
   export type DeprecationDate = Date;
+  export interface DescribeAccountAuditConfigurationRequest {
+  }
+  export interface DescribeAccountAuditConfigurationResponse {
+    /**
+     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit. On the first call to UpdateAccountAuditConfiguration this parameter is required.
+     */
+    roleArn?: RoleArn;
+    /**
+     * Information about the targets to which audit notifications are sent for this account.
+     */
+    auditNotificationTargetConfigurations?: AuditNotificationTargetConfigurations;
+    /**
+     * Which audit checks are enabled and disabled for this account.
+     */
+    auditCheckConfigurations?: AuditCheckConfigurations;
+  }
+  export interface DescribeAuditTaskRequest {
+    /**
+     * The ID of the audit whose information you want to get.
+     */
+    taskId: AuditTaskId;
+  }
+  export interface DescribeAuditTaskResponse {
+    /**
+     * The status of the audit: one of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".
+     */
+    taskStatus?: AuditTaskStatus;
+    /**
+     * The type of audit: "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
+     */
+    taskType?: AuditTaskType;
+    /**
+     * The time the audit started.
+     */
+    taskStartTime?: Timestamp;
+    /**
+     * Statistical information about the audit.
+     */
+    taskStatistics?: TaskStatistics;
+    /**
+     * The name of the scheduled audit (only if the audit was a scheduled audit).
+     */
+    scheduledAuditName?: ScheduledAuditName;
+    /**
+     * Detailed information about each check performed during this audit.
+     */
+    auditDetails?: AuditDetails;
+  }
   export interface DescribeAuthorizerRequest {
     /**
      * The name of the authorizer to describe.
@@ -2296,6 +2871,78 @@ declare namespace Iot {
      * The role alias description.
      */
     roleAliasDescription?: RoleAliasDescription;
+  }
+  export interface DescribeScheduledAuditRequest {
+    /**
+     * The name of the scheduled audit whose information you want to get.
+     */
+    scheduledAuditName: ScheduledAuditName;
+  }
+  export interface DescribeScheduledAuditResponse {
+    /**
+     * How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.
+     */
+    frequency?: AuditFrequency;
+    /**
+     * The day of the month on which the scheduled audit takes place. Will be "1" through "31" or "LAST". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     */
+    dayOfMonth?: DayOfMonth;
+    /**
+     * The day of the week on which the scheduled audit takes place. One of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT".
+     */
+    dayOfWeek?: DayOfWeek;
+    /**
+     * Which checks are performed during the scheduled audit. (Note that checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.)
+     */
+    targetCheckNames?: TargetAuditCheckNames;
+    /**
+     * The name of the scheduled audit.
+     */
+    scheduledAuditName?: ScheduledAuditName;
+    /**
+     * The ARN of the scheduled audit.
+     */
+    scheduledAuditArn?: ScheduledAuditArn;
+  }
+  export interface DescribeSecurityProfileRequest {
+    /**
+     * The name of the security profile whose information you want to get.
+     */
+    securityProfileName: SecurityProfileName;
+  }
+  export interface DescribeSecurityProfileResponse {
+    /**
+     * The name of the security profile.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The ARN of the security profile.
+     */
+    securityProfileArn?: SecurityProfileArn;
+    /**
+     * A description of the security profile (associated with the security profile when it was created or updated).
+     */
+    securityProfileDescription?: SecurityProfileDescription;
+    /**
+     * Specifies the behaviors that, when violated by a device (thing), cause an alert.
+     */
+    behaviors?: Behaviors;
+    /**
+     * Where the alerts are sent. (Alerts are always sent to the console.)
+     */
+    alertTargets?: AlertTargets;
+    /**
+     * The version of the security profile. A new version is generated whenever the security profile is updated.
+     */
+    version?: Version;
+    /**
+     * The time the security profile was created.
+     */
+    creationDate?: Timestamp;
+    /**
+     * The time the security profile was last modified.
+     */
+    lastModifiedDate?: Timestamp;
   }
   export interface DescribeStreamRequest {
     /**
@@ -2482,6 +3129,18 @@ declare namespace Iot {
      */
     principal: Principal;
   }
+  export interface DetachSecurityProfileRequest {
+    /**
+     * The security profile that is detached.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * The ARN of the thing group from which the security profile is detached.
+     */
+    securityProfileTargetArn: SecurityProfileTargetArn;
+  }
+  export interface DetachSecurityProfileResponse {
+  }
   export interface DetachThingPrincipalRequest {
     /**
      * The name of the thing.
@@ -2504,6 +3163,7 @@ declare namespace Iot {
      */
     ruleName: RuleName;
   }
+  export type DurationSeconds = number;
   export interface DynamoDBAction {
     /**
      * The name of the DynamoDB table.
@@ -2608,6 +3268,7 @@ declare namespace Iot {
   export type Enabled = boolean;
   export type EndpointAddress = string;
   export type EndpointType = string;
+  export type ErrorCode = string;
   export interface ErrorInfo {
     /**
      * The error code.
@@ -2620,7 +3281,8 @@ declare namespace Iot {
   }
   export type ErrorMessage = string;
   export type EventConfigurations = {[key: string]: Configuration};
-  export type EventType = "THING"|"THING_GROUP"|"THING_TYPE"|"THING_GROUP_MEMBERSHIP"|"THING_GROUP_HIERARCHY"|"THING_TYPE_ASSOCIATION"|"JOB"|"JOB_EXECUTION"|string;
+  export type EventType = "THING"|"THING_GROUP"|"THING_TYPE"|"THING_GROUP_MEMBERSHIP"|"THING_GROUP_HIERARCHY"|"THING_TYPE_ASSOCIATION"|"JOB"|"JOB_EXECUTION"|"POLICY"|"CERTIFICATE"|"CA_CERTIFICATE"|string;
+  export type ExecutionNamePrefix = string;
   export type ExecutionNumber = number;
   export type ExpectedVersion = number;
   export type ExpiresInSec = number;
@@ -2630,6 +3292,7 @@ declare namespace Iot {
      */
     policies?: Policies;
   }
+  export type FailedChecksCount = number;
   export type FailedThings = number;
   export type FileId = number;
   export type FileName = string;
@@ -2858,6 +3521,7 @@ declare namespace Iot {
      */
     policies?: Policies;
   }
+  export type InProgressChecksCount = number;
   export type InProgressThings = number;
   export type IndexName = string;
   export type IndexNamesList = IndexName[];
@@ -3150,6 +3814,34 @@ declare namespace Iot {
   }
   export type LaserMaxResults = number;
   export type LastModifiedDate = Date;
+  export interface ListActiveViolationsRequest {
+    /**
+     * The name of the thing whose active violations are listed.
+     */
+    thingName?: ThingName;
+    /**
+     * The name of the Device Defender security profile for which violations are listed.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListActiveViolationsResponse {
+    /**
+     * The list of active violations.
+     */
+    activeViolations?: ActiveViolations;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListAttachedPoliciesRequest {
     /**
      * The group for which the policies will be listed.
@@ -3177,6 +3869,82 @@ declare namespace Iot {
      * The token to retrieve the next set of results, or ``null`` if there are no more results.
      */
     nextMarker?: Marker;
+  }
+  export interface ListAuditFindingsRequest {
+    /**
+     * A filter to limit results to the audit with the specified ID. You must specify either the taskId or the startTime and endTime, but not both.
+     */
+    taskId?: AuditTaskId;
+    /**
+     * A filter to limit results to the findings for the specified audit check.
+     */
+    checkName?: AuditCheckName;
+    /**
+     * Information identifying the non-compliant resource.
+     */
+    resourceIdentifier?: ResourceIdentifier;
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * A filter to limit results to those found after the specified time. You must specify either the startTime and endTime or the taskId, but not both.
+     */
+    startTime?: Timestamp;
+    /**
+     * A filter to limit results to those found before the specified time. You must specify either the startTime and endTime or the taskId, but not both.
+     */
+    endTime?: Timestamp;
+  }
+  export interface ListAuditFindingsResponse {
+    /**
+     * The findings (results) of the audit.
+     */
+    findings?: AuditFindings;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAuditTasksRequest {
+    /**
+     * The beginning of the time period. Note that audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
+     */
+    startTime: Timestamp;
+    /**
+     * The end of the time period.
+     */
+    endTime: Timestamp;
+    /**
+     * A filter to limit the output to the specified type of audit: can be one of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED__AUDIT_TASK".
+     */
+    taskType?: AuditTaskType;
+    /**
+     * A filter to limit the output to audits with the specified completion status: can be one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".
+     */
+    taskStatus?: AuditTaskStatus;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAuditTasksResponse {
+    /**
+     * The audits that were performed during the specified time period.
+     */
+    tasks?: AuditTaskMetadataList;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListAuthorizersRequest {
     /**
@@ -3536,7 +4304,7 @@ declare namespace Iot {
   }
   export interface ListPrincipalThingsRequest {
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3581,6 +4349,74 @@ declare namespace Iot {
      * A marker used to get the next set of results.
      */
     nextMarker?: Marker;
+  }
+  export interface ListScheduledAuditsRequest {
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListScheduledAuditsResponse {
+    /**
+     * The list of scheduled audits.
+     */
+    scheduledAudits?: ScheduledAuditMetadataList;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSecurityProfilesForTargetRequest {
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If true, return child groups as well.
+     */
+    recursive?: Recursive;
+    /**
+     * The ARN of the target (thing group) whose attached security profiles you want to get.
+     */
+    securityProfileTargetArn: SecurityProfileTargetArn;
+  }
+  export interface ListSecurityProfilesForTargetResponse {
+    /**
+     * A list of security profiles and their associated targets.
+     */
+    securityProfileTargetMappings?: SecurityProfileTargetMappings;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSecurityProfilesRequest {
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListSecurityProfilesResponse {
+    /**
+     * A list of security profile identifiers (names and ARNs).
+     */
+    securityProfileIdentifiers?: SecurityProfileIdentifiers;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListStreamsRequest {
     /**
@@ -3630,13 +4466,37 @@ declare namespace Iot {
      */
     nextMarker?: Marker;
   }
+  export interface ListTargetsForSecurityProfileRequest {
+    /**
+     * The security profile.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListTargetsForSecurityProfileResponse {
+    /**
+     * The thing groups to which the security profile is attached.
+     */
+    securityProfileTargets?: SecurityProfileTargets;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListThingGroupsForThingRequest {
     /**
      * The thing name.
      */
     thingName: ThingName;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3656,7 +4516,7 @@ declare namespace Iot {
   }
   export interface ListThingGroupsRequest {
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3726,13 +4586,13 @@ declare namespace Iot {
      */
     reportType?: ReportType;
     /**
-     * The token to retrieve the next set of results.
+     * The token used to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingRegistrationTasksRequest {
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3756,7 +4616,7 @@ declare namespace Iot {
   }
   export interface ListThingTypesRequest {
     /**
-     * The token for the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3788,7 +4648,7 @@ declare namespace Iot {
      */
     recursive?: Recursive;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3808,7 +4668,7 @@ declare namespace Iot {
   }
   export interface ListThingsRequest {
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3890,6 +4750,42 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface ListViolationEventsRequest {
+    /**
+     * The start time for the alerts to be listed.
+     */
+    startTime: Timestamp;
+    /**
+     * The end time for the alerts to be listed.
+     */
+    endTime: Timestamp;
+    /**
+     * A filter to limit results to those alerts caused by the specified thing.
+     */
+    thingName?: ThingName;
+    /**
+     * A filter to limit results to those alerts generated by the specified security profile.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListViolationEventsResponse {
+    /**
+     * The security profile violation alerts issued for this account during the given time frame, potentially filtered by security profile, behavior violated, or thing (device) violating.
+     */
+    violationEvents?: ViolationEvents;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export type LogLevel = "DEBUG"|"INFO"|"ERROR"|"WARN"|"DISABLED"|string;
   export interface LogTarget {
     /**
@@ -3929,14 +4825,39 @@ declare namespace Iot {
   export type MaxResults = number;
   export type Message = string;
   export type MessageFormat = "RAW"|"JSON"|string;
-  export type MetricName = string;
-  export type MetricNamespace = string;
-  export type MetricTimestamp = string;
-  export type MetricUnit = string;
-  export type MetricValue = string;
+  export interface MetricValue {
+    /**
+     * If the comparisonOperator calls for a numeric value, use this to specify that numeric value to be compared with the metric.
+     */
+    count?: UnsignedLong;
+    /**
+     * If the comparisonOperator calls for a set of CIDRs, use this to specify that set to be compared with the metric.
+     */
+    cidrs?: Cidrs;
+    /**
+     * If the comparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.
+     */
+    ports?: Ports;
+  }
   export type MissingContextValue = string;
   export type MissingContextValues = MissingContextValue[];
   export type NextToken = string;
+  export type NonCompliantChecksCount = number;
+  export interface NonCompliantResource {
+    /**
+     * The type of the non-compliant resource.
+     */
+    resourceType?: ResourceType;
+    /**
+     * Information identifying the non-compliant resource.
+     */
+    resourceIdentifier?: ResourceIdentifier;
+    /**
+     * Additional information about the non-compliant resource.
+     */
+    additionalInfo?: StringMap;
+  }
+  export type NonCompliantResourcesCount = number;
   export type OTAUpdateArn = string;
   export type OTAUpdateDescription = string;
   export type OTAUpdateErrorMessage = string;
@@ -4102,7 +5023,19 @@ declare namespace Iot {
     createDate?: DateType;
   }
   export type PolicyVersionId = string;
+  export interface PolicyVersionIdentifier {
+    /**
+     * The name of the policy.
+     */
+    policyName?: PolicyName;
+    /**
+     * The ID of the version of the policy associated with the resource.
+     */
+    policyVersionId?: PolicyVersionId;
+  }
   export type PolicyVersions = PolicyVersion[];
+  export type Port = number;
+  export type Ports = Port[];
   export interface PresignedUrlConfig {
     /**
      * The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.
@@ -4135,6 +5068,8 @@ declare namespace Iot {
   export type QueuedThings = number;
   export type RangeKeyField = string;
   export type RangeKeyValue = string;
+  export type ReasonForNonCompliance = string;
+  export type ReasonForNonComplianceCode = string;
   export type Recursive = boolean;
   export type RecursiveWithoutDefault = boolean;
   export interface RegisterCACertificateRequest {
@@ -4208,6 +5143,9 @@ declare namespace Iot {
     parameters?: Parameters;
   }
   export interface RegisterThingResponse {
+    /**
+     * .
+     */
     certificatePem?: CertificatePem;
     /**
      * ARNs for the generated resources.
@@ -4239,6 +5177,21 @@ declare namespace Iot {
     rejectReason?: Message;
   }
   export type RejectedThings = number;
+  export interface RelatedResource {
+    /**
+     * The type of resource.
+     */
+    resourceType?: ResourceType;
+    /**
+     * Information identifying the resource.
+     */
+    resourceIdentifier?: ResourceIdentifier;
+    /**
+     * Additional information about the resource.
+     */
+    additionalInfo?: StringMap;
+  }
+  export type RelatedResources = RelatedResource[];
   export type RemoveAutoRegistration = boolean;
   export interface RemoveThingFromThingGroupRequest {
     /**
@@ -4286,7 +5239,34 @@ declare namespace Iot {
   export type Resource = string;
   export type ResourceArn = string;
   export type ResourceArns = {[key: string]: ResourceArn};
+  export interface ResourceIdentifier {
+    /**
+     * The ID of the certificate attached to the resource.
+     */
+    deviceCertificateId?: CertificateId;
+    /**
+     * The ID of the CA certificate used to authorize the certificate.
+     */
+    caCertificateId?: CertificateId;
+    /**
+     * The ID of the Cognito Identity Pool.
+     */
+    cognitoIdentityPoolId?: CognitoIdentityPoolId;
+    /**
+     * The client ID.
+     */
+    clientId?: ClientId;
+    /**
+     * The version of the policy associated with the resource.
+     */
+    policyVersionIdentifier?: PolicyVersionIdentifier;
+    /**
+     * The account with which the resource is associated.
+     */
+    account?: AwsAccountId;
+  }
   export type ResourceLogicalId = string;
+  export type ResourceType = "DEVICE_CERTIFICATE"|"CA_CERTIFICATE"|"IOT_POLICY"|"COGNITO_IDENTITY_POOL"|"CLIENT_ID"|"ACCOUNT_SETTINGS"|string;
   export type Resources = Resource[];
   export type RoleAlias = string;
   export type RoleAliasArn = string;
@@ -4347,8 +5327,17 @@ declare namespace Iot {
   export type S3FileUrlList = S3FileUrl[];
   export type S3Key = string;
   export interface S3Location {
+    /**
+     * The S3 bucket that contains the file to stream.
+     */
     bucket: S3Bucket;
+    /**
+     * The name of the file within the S3 bucket to stream.
+     */
     key: S3Key;
+    /**
+     * The file version.
+     */
     version?: S3Version;
   }
   export type S3Version = string;
@@ -4365,6 +5354,31 @@ declare namespace Iot {
   }
   export type SalesforceEndpoint = string;
   export type SalesforceToken = string;
+  export type ScheduledAuditArn = string;
+  export interface ScheduledAuditMetadata {
+    /**
+     * The name of the scheduled audit.
+     */
+    scheduledAuditName?: ScheduledAuditName;
+    /**
+     * The ARN of the scheduled audit.
+     */
+    scheduledAuditArn?: ScheduledAuditArn;
+    /**
+     * How often the scheduled audit takes place.
+     */
+    frequency?: AuditFrequency;
+    /**
+     * The day of the month on which the scheduled audit is run (if the frequency is "MONTHLY"). If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     */
+    dayOfMonth?: DayOfMonth;
+    /**
+     * The day of the week on which the scheduled audit is run (if the frequency is "WEEKLY" or "BIWEEKLY").
+     */
+    dayOfWeek?: DayOfWeek;
+  }
+  export type ScheduledAuditMetadataList = ScheduledAuditMetadata[];
+  export type ScheduledAuditName = string;
   export interface SearchIndexRequest {
     /**
      * The search index name.
@@ -4399,6 +5413,39 @@ declare namespace Iot {
   }
   export type SearchableAttributes = AttributeName[];
   export type Seconds = number;
+  export type SecurityProfileArn = string;
+  export type SecurityProfileDescription = string;
+  export interface SecurityProfileIdentifier {
+    /**
+     * The name you have given to the security profile.
+     */
+    name: SecurityProfileName;
+    /**
+     * The ARN of the security profile.
+     */
+    arn: SecurityProfileArn;
+  }
+  export type SecurityProfileIdentifiers = SecurityProfileIdentifier[];
+  export type SecurityProfileName = string;
+  export interface SecurityProfileTarget {
+    /**
+     * The ARN of the security profile.
+     */
+    arn: SecurityProfileTargetArn;
+  }
+  export type SecurityProfileTargetArn = string;
+  export interface SecurityProfileTargetMapping {
+    /**
+     * Information that identifies the security profile.
+     */
+    securityProfileIdentifier?: SecurityProfileIdentifier;
+    /**
+     * Information about the target (thing group) associated with the security profile.
+     */
+    target?: SecurityProfileTarget;
+  }
+  export type SecurityProfileTargetMappings = SecurityProfileTargetMapping[];
+  export type SecurityProfileTargets = SecurityProfileTarget[];
   export type SetAsActive = boolean;
   export type SetAsActiveFlag = boolean;
   export type SetAsDefault = boolean;
@@ -4490,6 +5537,18 @@ declare namespace Iot {
      */
     useBase64?: UseBase64;
   }
+  export interface StartOnDemandAuditTaskRequest {
+    /**
+     * Which checks are performed during the audit. The checks you specify must be enabled for your account or an exception occurs. Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.
+     */
+    targetCheckNames: TargetAuditCheckNames;
+  }
+  export interface StartOnDemandAuditTaskResponse {
+    /**
+     * The ID of the on-demand audit you started.
+     */
+    taskId?: AuditTaskId;
+  }
   export interface StartThingRegistrationTaskRequest {
     /**
      * The provisioning template.
@@ -4514,9 +5573,24 @@ declare namespace Iot {
      */
     taskId?: TaskId;
   }
+  export type StateMachineName = string;
   export type StateReason = string;
   export type StateValue = string;
   export type Status = "InProgress"|"Completed"|"Failed"|"Cancelled"|"Cancelling"|string;
+  export interface StepFunctionsAction {
+    /**
+     * (Optional) A name will be given to the state machine execution consisting of this prefix followed by a UUID. Step Functions automatically creates a unique name for each state machine execution if one is not provided.
+     */
+    executionNamePrefix?: ExecutionNamePrefix;
+    /**
+     * The name of the Step Functions state machine whose execution will be started.
+     */
+    stateMachineName: StateMachineName;
+    /**
+     * The ARN of the role that grants IoT permission to start execution of a state machine ("Action":"states:StartExecution").
+     */
+    roleArn: AwsArn;
+  }
   export interface StopThingRegistrationTaskRequest {
     /**
      * The bulk thing provisioning task ID.
@@ -4604,14 +5678,47 @@ declare namespace Iot {
   }
   export type StreamVersion = number;
   export type StreamsSummary = StreamSummary[];
+  export type String = string;
+  export type StringMap = {[key: string]: String};
   export type SucceededThings = number;
   export type TableName = string;
   export type Target = string;
   export type TargetArn = string;
+  export type TargetAuditCheckNames = AuditCheckName[];
   export type TargetSelection = "CONTINUOUS"|"SNAPSHOT"|string;
   export type Targets = Target[];
   export type TaskId = string;
   export type TaskIdList = TaskId[];
+  export interface TaskStatistics {
+    /**
+     * The number of checks in this audit.
+     */
+    totalChecks?: TotalChecksCount;
+    /**
+     * The number of checks in progress.
+     */
+    inProgressChecks?: InProgressChecksCount;
+    /**
+     * The number of checks waiting for data collection.
+     */
+    waitingForDataCollectionChecks?: WaitingForDataCollectionChecksCount;
+    /**
+     * The number of checks that found compliant resources.
+     */
+    compliantChecks?: CompliantChecksCount;
+    /**
+     * The number of checks that found non-compliant resources.
+     */
+    nonCompliantChecks?: NonCompliantChecksCount;
+    /**
+     * The number of checks 
+     */
+    failedChecks?: FailedChecksCount;
+    /**
+     * The number of checks that did not run because the audit was canceled.
+     */
+    canceledChecks?: CanceledChecksCount;
+  }
   export type TemplateBody = string;
   export interface TestAuthorizationRequest {
     /**
@@ -4820,6 +5927,7 @@ declare namespace Iot {
      */
     searchableAttributes?: SearchableAttributes;
   }
+  export type Timestamp = Date;
   export type Token = string;
   export type TokenKeyName = string;
   export type TokenSignature = string;
@@ -4908,6 +6016,8 @@ declare namespace Iot {
      */
     errorAction?: Action;
   }
+  export type TotalChecksCount = number;
+  export type TotalResourcesCount = number;
   export interface TransferCertificateRequest {
     /**
      * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
@@ -4951,6 +6061,23 @@ declare namespace Iot {
     rejectDate?: DateType;
   }
   export type UndoDeprecate = boolean;
+  export type UnsignedLong = number;
+  export interface UpdateAccountAuditConfigurationRequest {
+    /**
+     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit.
+     */
+    roleArn?: RoleArn;
+    /**
+     * Information about the targets to which audit notifications are sent.
+     */
+    auditNotificationTargetConfigurations?: AuditNotificationTargetConfigurations;
+    /**
+     * Specifies which audit checks are enabled and disabled for this account. Use DescribeAccountAuditConfiguration to see the list of all checks including those that are currently enabled. Note that some data collection may begin immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted. You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself. On the first call to UpdateAccountAuditConfiguration this parameter is required and must specify at least one enabled check.
+     */
+    auditCheckConfigurations?: AuditCheckConfigurations;
+  }
+  export interface UpdateAccountAuditConfigurationResponse {
+  }
   export interface UpdateAuthorizerRequest {
     /**
      * The authorizer name.
@@ -5055,6 +6182,90 @@ declare namespace Iot {
      */
     roleAliasArn?: RoleAliasArn;
   }
+  export interface UpdateScheduledAuditRequest {
+    /**
+     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.
+     */
+    frequency?: AuditFrequency;
+    /**
+     * The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     */
+    dayOfMonth?: DayOfMonth;
+    /**
+     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
+     */
+    dayOfWeek?: DayOfWeek;
+    /**
+     * Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.)
+     */
+    targetCheckNames?: TargetAuditCheckNames;
+    /**
+     * The name of the scheduled audit. (Max. 128 chars)
+     */
+    scheduledAuditName: ScheduledAuditName;
+  }
+  export interface UpdateScheduledAuditResponse {
+    /**
+     * The ARN of the scheduled audit.
+     */
+    scheduledAuditArn?: ScheduledAuditArn;
+  }
+  export interface UpdateSecurityProfileRequest {
+    /**
+     * The name of the security profile you want to update.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * A description of the security profile.
+     */
+    securityProfileDescription?: SecurityProfileDescription;
+    /**
+     * Specifies the behaviors that, when violated by a device (thing), cause an alert.
+     */
+    behaviors?: Behaviors;
+    /**
+     * Where the alerts are sent. (Alerts are always sent to the console.)
+     */
+    alertTargets?: AlertTargets;
+    /**
+     * The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different than the actual version, a VersionConflictException is thrown.
+     */
+    expectedVersion?: OptionalVersion;
+  }
+  export interface UpdateSecurityProfileResponse {
+    /**
+     * The name of the security profile that was updated.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The ARN of the security profile that was updated.
+     */
+    securityProfileArn?: SecurityProfileArn;
+    /**
+     * The description of the security profile.
+     */
+    securityProfileDescription?: SecurityProfileDescription;
+    /**
+     * Specifies the behaviors that, when violated by a device (thing), cause an alert.
+     */
+    behaviors?: Behaviors;
+    /**
+     * Where the alerts are sent. (Alerts are always sent to the console.)
+     */
+    alertTargets?: AlertTargets;
+    /**
+     * The updated version of the security profile.
+     */
+    version?: Version;
+    /**
+     * The time the security profile was created.
+     */
+    creationDate?: Timestamp;
+    /**
+     * The time the security profile was last modified.
+     */
+    lastModifiedDate?: Timestamp;
+  }
   export interface UpdateStreamRequest {
     /**
      * The stream ID.
@@ -5152,9 +6363,67 @@ declare namespace Iot {
   export interface UpdateThingResponse {
   }
   export type UseBase64 = boolean;
+  export type Valid = boolean;
+  export interface ValidateSecurityProfileBehaviorsRequest {
+    /**
+     * Specifies the behaviors that, when violated by a device (thing), cause an alert.
+     */
+    behaviors: Behaviors;
+  }
+  export interface ValidateSecurityProfileBehaviorsResponse {
+    /**
+     * True if the behaviors were valid.
+     */
+    valid?: Valid;
+    /**
+     * The list of any errors found in the behaviors.
+     */
+    validationErrors?: ValidationErrors;
+  }
+  export interface ValidationError {
+    /**
+     * The description of an error found in the behaviors.
+     */
+    errorMessage?: ErrorMessage;
+  }
+  export type ValidationErrors = ValidationError[];
   export type Value = string;
   export type Version = number;
   export type VersionNumber = number;
+  export interface ViolationEvent {
+    /**
+     * The ID of the violation event.
+     */
+    violationId?: ViolationId;
+    /**
+     * The name of the thing responsible for the violation event.
+     */
+    thingName?: ThingName;
+    /**
+     * The name of the security profile whose behavior was violated.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The behavior which was violated.
+     */
+    behavior?: Behavior;
+    /**
+     * The value of the metric (the measurement).
+     */
+    metricValue?: MetricValue;
+    /**
+     * The type of violation event.
+     */
+    violationEventType?: ViolationEventType;
+    /**
+     * The time the violation event occurred.
+     */
+    violationEventTime?: Timestamp;
+  }
+  export type ViolationEventType = "in-alarm"|"alarm-cleared"|"alarm-invalidated"|string;
+  export type ViolationEvents = ViolationEvent[];
+  export type ViolationId = string;
+  export type WaitingForDataCollectionChecksCount = number;
   export type errorMessage = string;
   export type resourceArn = string;
   export type resourceId = string;

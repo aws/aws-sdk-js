@@ -1560,7 +1560,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * The time, in Unix epoch format in seconds, when the job got created.
      */
-    CreatedAt?: __timestampIso8601;
+    CreatedAt?: __timestampUnix;
     /**
      * Error code for the job
      */
@@ -1634,7 +1634,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * The timestamp in epoch seconds for Job template creation.
      */
-    CreatedAt?: __timestampIso8601;
+    CreatedAt?: __timestampUnix;
     /**
      * An optional description you create for each job template.
      */
@@ -1642,7 +1642,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * The timestamp in epoch seconds when the Job template was last updated.
      */
-    LastUpdated?: __timestampIso8601;
+    LastUpdated?: __timestampUnix;
     /**
      * A name you create for each job template. Each name must be unique within your account.
      */
@@ -2224,7 +2224,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * The timestamp in epoch seconds for preset creation.
      */
-    CreatedAt?: __timestampIso8601;
+    CreatedAt?: __timestampUnix;
     /**
      * An optional description you create for each preset.
      */
@@ -2232,7 +2232,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * The timestamp in epoch seconds when the preset was last updated.
      */
-    LastUpdated?: __timestampIso8601;
+    LastUpdated?: __timestampUnix;
     /**
      * A name you create for each preset. Each name must be unique within your account.
      */
@@ -2299,7 +2299,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * The timestamp in epoch seconds for queue creation.
      */
-    CreatedAt?: __timestampIso8601;
+    CreatedAt?: __timestampUnix;
     /**
      * An optional description you create for each queue.
      */
@@ -2307,7 +2307,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * The timestamp in epoch seconds when the queue was last updated.
      */
-    LastUpdated?: __timestampIso8601;
+    LastUpdated?: __timestampUnix;
     /**
      * A name you create for each queue. Each name must be unique within your account.
      */
@@ -2468,15 +2468,15 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * The time, in Unix epoch format, that the transcoding job finished
      */
-    FinishTime?: __timestampIso8601;
+    FinishTime?: __timestampUnix;
     /**
      * The time, in Unix epoch format, that transcoding for the job began.
      */
-    StartTime?: __timestampIso8601;
+    StartTime?: __timestampUnix;
     /**
      * The time, in Unix epoch format, that you submitted the job.
      */
-    SubmitTime?: __timestampIso8601;
+    SubmitTime?: __timestampUnix;
   }
   export interface TtmlDestinationSettings {
     StylePassthrough?: TtmlStylePassthrough;
