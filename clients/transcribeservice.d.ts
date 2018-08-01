@@ -252,13 +252,17 @@ declare namespace TranscribeService {
      */
     VocabularyName?: VocabularyName;
     /**
-     * Determines whether the transcription job should use speaker recognition to identify different speakers in the input audio. If you set the ShowSpeakerLabels field to true, you must also set the maximum number of speaker labels MaxSpeakerLabels field.
+     * Determines whether the transcription job uses speaker recognition to identify different speakers in the input audio. Speaker recognition labels individual speakers in the audio file. If you set the ShowSpeakerLabels field to true, you must also set the maximum number of speaker labels MaxSpeakerLabels field. You can't set both ShowSpeakerLabels and ChannelIdentification in the same request. If you set both, your request returns a BadRequestException.
      */
     ShowSpeakerLabels?: Boolean;
     /**
      * The maximum number of speakers to identify in the input audio. If there are more speakers in the audio than this number, multiple speakers will be identified as a single speaker. If you specify the MaxSpeakerLabels field, you must set the ShowSpeakerLabels field to true.
      */
     MaxSpeakerLabels?: MaxSpeakers;
+    /**
+     * Instructs Amazon Transcribe to process each audio channel separately and then merge the transcription output of each channel into a single transcription.  Amazon Transcribe also produces a transcription of each item detected on an audio channel, including the start time and end time of the item and alternative transcriptions of the item including the confidence that Amazon Transcribe has in the transcription. You can't set both ShowSpeakerLabels and ChannelIdentification in the same request. If you set both, your request returns a BadRequestException.
+     */
+    ChannelIdentification?: Boolean;
   }
   export interface StartTranscriptionJobRequest {
     /**

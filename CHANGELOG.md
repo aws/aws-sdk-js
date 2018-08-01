@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.284.1-->
+<!--LATEST=2.285.1-->
 <!--ENTRYINSERT-->
+
+## 2.285.1
+* feature: StorageGateway: AWS Storage Gateway now enables you to create stored volumes with AWS KMS support.
+* feature: TranscribeService: With this update Amazon Transcribe now supports channel identification. It transcribes audio from separate channels and combines them into a single transcription. 
 
 ## 2.284.1
 * feature: Connect: This update includes the new User Management APIs and the Federation API used for SAML authentication. The User Management APIs let you create and manage users in your Amazon Connect instance programmatically. The Federation API enables authentication between AWS and your existing identity provider using tokens.
