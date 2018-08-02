@@ -2244,33 +2244,6 @@
       "members": {
         "SubscribeToShardEvent": {
           "shape": "SubscribeToShardEvent"
-        },
-        "ResourceNotFoundException": {
-          "shape": "ResourceNotFoundException"
-        },
-        "ResourceInUseException": {
-          "shape": "ResourceInUseException"
-        },
-        "KMSDisabledException": {
-          "shape": "KMSDisabledException"
-        },
-        "KMSInvalidStateException": {
-          "shape": "KMSInvalidStateException"
-        },
-        "KMSAccessDeniedException": {
-          "shape": "KMSAccessDeniedException"
-        },
-        "KMSNotFoundException": {
-          "shape": "KMSNotFoundException"
-        },
-        "KMSOptInRequired": {
-          "shape": "KMSOptInRequired"
-        },
-        "KMSThrottlingException": {
-          "shape": "KMSThrottlingException"
-        },
-        "InternalFailureException": {
-          "shape": "InternalFailureException"
         }
       },
       "eventstream": true
