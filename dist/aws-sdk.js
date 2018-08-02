@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.285.1
+// AWS SDK for JavaScript v2.286.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -74598,6 +74598,9 @@ module.exports={
     "endpointPrefix": "kinesis",
     "jsonVersion": "1.1",
     "protocol": "json",
+    "protocolSettings": {
+      "h2": "eventstream"
+    },
     "serviceAbbreviation": "Kinesis",
     "serviceFullName": "Amazon Kinesis",
     "serviceId": "Kinesis",
@@ -74660,7 +74663,20 @@ module.exports={
           "StreamName"
         ],
         "members": {
-          "StreamName": {}
+          "StreamName": {},
+          "EnforceConsumerDeletion": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "DeregisterStreamConsumer": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "StreamARN": {},
+          "ConsumerName": {},
+          "ConsumerARN": {}
         }
       }
     },
@@ -74722,7 +74738,7 @@ module.exports={
               "StreamARN": {},
               "StreamStatus": {},
               "Shards": {
-                "shape": "Sl"
+                "shape": "Sp"
               },
               "HasMoreShards": {
                 "type": "boolean"
@@ -74734,10 +74750,47 @@ module.exports={
                 "type": "timestamp"
               },
               "EnhancedMonitoring": {
-                "shape": "St"
+                "shape": "Sw"
               },
               "EncryptionType": {},
               "KeyId": {}
+            }
+          }
+        }
+      }
+    },
+    "DescribeStreamConsumer": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "StreamARN": {},
+          "ConsumerName": {},
+          "ConsumerARN": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ConsumerDescription"
+        ],
+        "members": {
+          "ConsumerDescription": {
+            "type": "structure",
+            "required": [
+              "ConsumerName",
+              "ConsumerARN",
+              "ConsumerStatus",
+              "ConsumerCreationTimestamp",
+              "StreamARN"
+            ],
+            "members": {
+              "ConsumerName": {},
+              "ConsumerARN": {},
+              "ConsumerStatus": {},
+              "ConsumerCreationTimestamp": {
+                "type": "timestamp"
+              },
+              "StreamARN": {}
             }
           }
         }
@@ -74781,11 +74834,14 @@ module.exports={
                 "type": "timestamp"
               },
               "EnhancedMonitoring": {
-                "shape": "St"
+                "shape": "Sw"
               },
               "EncryptionType": {},
               "KeyId": {},
               "OpenShardCount": {
+                "type": "integer"
+              },
+              "ConsumerCount": {
                 "type": "integer"
               }
             }
@@ -74803,12 +74859,12 @@ module.exports={
         "members": {
           "StreamName": {},
           "ShardLevelMetrics": {
-            "shape": "Sv"
+            "shape": "Sy"
           }
         }
       },
       "output": {
-        "shape": "S13"
+        "shape": "S1b"
       }
     },
     "EnableEnhancedMonitoring": {
@@ -74821,12 +74877,12 @@ module.exports={
         "members": {
           "StreamName": {},
           "ShardLevelMetrics": {
-            "shape": "Sv"
+            "shape": "Sy"
           }
         }
       },
       "output": {
-        "shape": "S13"
+        "shape": "S1b"
       }
     },
     "GetRecords": {
@@ -74936,7 +74992,37 @@ module.exports={
         "type": "structure",
         "members": {
           "Shards": {
-            "shape": "Sl"
+            "shape": "Sp"
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListStreamConsumers": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StreamARN"
+        ],
+        "members": {
+          "StreamARN": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          },
+          "StreamCreationTimestamp": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Consumers": {
+            "type": "list",
+            "member": {
+              "shape": "S1y"
+            }
           },
           "NextToken": {}
         }
@@ -75108,6 +75194,30 @@ module.exports={
         }
       }
     },
+    "RegisterStreamConsumer": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StreamARN",
+          "ConsumerName"
+        ],
+        "members": {
+          "StreamARN": {},
+          "ConsumerName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Consumer"
+        ],
+        "members": {
+          "Consumer": {
+            "shape": "S1y"
+          }
+        }
+      }
+    },
     "RemoveTagsFromStream": {
       "input": {
         "type": "structure",
@@ -75200,7 +75310,7 @@ module.exports={
     }
   },
   "shapes": {
-    "Sl": {
+    "Sp": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -75237,30 +75347,47 @@ module.exports={
         }
       }
     },
-    "St": {
+    "Sw": {
       "type": "list",
       "member": {
         "type": "structure",
         "members": {
           "ShardLevelMetrics": {
-            "shape": "Sv"
+            "shape": "Sy"
           }
         }
       }
     },
-    "Sv": {
+    "Sy": {
       "type": "list",
       "member": {}
     },
-    "S13": {
+    "S1b": {
       "type": "structure",
       "members": {
         "StreamName": {},
         "CurrentShardLevelMetrics": {
-          "shape": "Sv"
+          "shape": "Sy"
         },
         "DesiredShardLevelMetrics": {
-          "shape": "Sv"
+          "shape": "Sy"
+        }
+      }
+    },
+    "S1y": {
+      "type": "structure",
+      "required": [
+        "ConsumerName",
+        "ConsumerARN",
+        "ConsumerStatus",
+        "ConsumerCreationTimestamp"
+      ],
+      "members": {
+        "ConsumerName": {},
+        "ConsumerARN": {},
+        "ConsumerStatus": {},
+        "ConsumerCreationTimestamp": {
+          "type": "timestamp"
         }
       }
     }
@@ -75275,6 +75402,11 @@ module.exports={
       "more_results": "StreamDescription.HasMoreShards",
       "output_token": "StreamDescription.Shards[-1].ShardId",
       "result_key": "StreamDescription.Shards"
+    },
+    "ListStreamConsumers": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken"
     },
     "ListStreams": {
       "input_token": "ExclusiveStartStreamName",
@@ -87824,6 +87956,11 @@ module.exports={
             "location": "querystring",
             "locationName": "LanguageCode"
           },
+          "IncludeAdditionalLanguageCodes": {
+            "location": "querystring",
+            "locationName": "IncludeAdditionalLanguageCodes",
+            "type": "boolean"
+          },
           "NextToken": {
             "location": "querystring",
             "locationName": "NextToken"
@@ -87842,7 +87979,11 @@ module.exports={
                 "Id": {},
                 "LanguageCode": {},
                 "LanguageName": {},
-                "Name": {}
+                "Name": {},
+                "AdditionalLanguageCodes": {
+                  "type": "list",
+                  "member": {}
+                }
               }
             }
           },
@@ -87882,7 +88023,7 @@ module.exports={
             }
           },
           "LexiconAttributes": {
-            "shape": "Si"
+            "shape": "Sk"
           }
         }
       }
@@ -87909,7 +88050,7 @@ module.exports={
         "type": "structure",
         "members": {
           "SynthesisTask": {
-            "shape": "Sr"
+            "shape": "St"
           }
         }
       }
@@ -87941,7 +88082,7 @@ module.exports={
                   "shape": "S2"
                 },
                 "Attributes": {
-                  "shape": "Si"
+                  "shape": "Sk"
                 }
               }
             }
@@ -87981,7 +88122,7 @@ module.exports={
           "SynthesisTasks": {
             "type": "list",
             "member": {
-              "shape": "Sr"
+              "shape": "St"
             }
           }
         }
@@ -88028,7 +88169,7 @@ module.exports={
         ],
         "members": {
           "LexiconNames": {
-            "shape": "Sy"
+            "shape": "S10"
           },
           "OutputFormat": {},
           "OutputS3BucketName": {},
@@ -88036,18 +88177,19 @@ module.exports={
           "SampleRate": {},
           "SnsTopicArn": {},
           "SpeechMarkTypes": {
-            "shape": "S11"
+            "shape": "S13"
           },
           "Text": {},
           "TextType": {},
-          "VoiceId": {}
+          "VoiceId": {},
+          "LanguageCode": {}
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "SynthesisTask": {
-            "shape": "Sr"
+            "shape": "St"
           }
         }
       }
@@ -88066,16 +88208,17 @@ module.exports={
         ],
         "members": {
           "LexiconNames": {
-            "shape": "Sy"
+            "shape": "S10"
           },
           "OutputFormat": {},
           "SampleRate": {},
           "SpeechMarkTypes": {
-            "shape": "S11"
+            "shape": "S13"
           },
           "Text": {},
           "TextType": {},
-          "VoiceId": {}
+          "VoiceId": {},
+          "LanguageCode": {}
         }
       },
       "output": {
@@ -88104,7 +88247,7 @@ module.exports={
       "type": "string",
       "sensitive": true
     },
-    "Si": {
+    "Sk": {
       "type": "structure",
       "members": {
         "Alphabet": {},
@@ -88121,7 +88264,7 @@ module.exports={
         }
       }
     },
-    "Sr": {
+    "St": {
       "type": "structure",
       "members": {
         "TaskId": {},
@@ -88136,24 +88279,25 @@ module.exports={
         },
         "SnsTopicArn": {},
         "LexiconNames": {
-          "shape": "Sy"
+          "shape": "S10"
         },
         "OutputFormat": {},
         "SampleRate": {},
         "SpeechMarkTypes": {
-          "shape": "S11"
+          "shape": "S13"
         },
         "TextType": {},
-        "VoiceId": {}
+        "VoiceId": {},
+        "LanguageCode": {}
       }
     },
-    "Sy": {
+    "S10": {
       "type": "list",
       "member": {
         "shape": "S2"
       }
     },
-    "S11": {
+    "S13": {
       "type": "list",
       "member": {}
     }
@@ -121262,7 +121406,6 @@ module.exports={
           "WindowId",
           "Targets",
           "TaskArn",
-          "ServiceRoleArn",
           "TaskType",
           "MaxConcurrency",
           "MaxErrors"
@@ -132543,7 +132686,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.285.1',
+  VERSION: '2.286.1',
 
   /**
    * @api private
@@ -144422,13 +144565,14 @@ var util = {
    * @api private
    */
   addPromises: function addPromises(constructors, PromiseDependency) {
+    var deletePromises = false;
     if (PromiseDependency === undefined && AWS && AWS.config) {
       PromiseDependency = AWS.config.getPromisesDependency();
     }
     if (PromiseDependency === undefined && typeof Promise !== 'undefined') {
       PromiseDependency = Promise;
     }
-    if (typeof PromiseDependency !== 'function') var deletePromises = true;
+    if (typeof PromiseDependency !== 'function') deletePromises = true;
     if (!Array.isArray(constructors)) constructors = [constructors];
 
     for (var ind = 0; ind < constructors.length; ind++) {
@@ -151674,7 +151818,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":357,"./lib/rng":358}],361:[function(require,module,exports){
-// AWS SDK for JavaScript v2.285.1
+// AWS SDK for JavaScript v2.286.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

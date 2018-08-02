@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "react-native",
-  "description": "Fixes issue where promise methods are undefined when using react-native 0.56.0. See [this issue](https://github.com/facebook/metro/issues/208) for more information."
-}

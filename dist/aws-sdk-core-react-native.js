@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.285.1',
+	  VERSION: '2.286.1',
 
 	  /**
 	   * @api private
@@ -937,13 +937,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @api private
 	   */
 	  addPromises: function addPromises(constructors, PromiseDependency) {
+	    var deletePromises = false;
 	    if (PromiseDependency === undefined && AWS && AWS.config) {
 	      PromiseDependency = AWS.config.getPromisesDependency();
 	    }
 	    if (PromiseDependency === undefined && typeof Promise !== 'undefined') {
 	      PromiseDependency = Promise;
 	    }
-	    if (typeof PromiseDependency !== 'function') var deletePromises = true;
+	    if (typeof PromiseDependency !== 'function') deletePromises = true;
 	    if (!Array.isArray(constructors)) constructors = [constructors];
 
 	    for (var ind = 0; ind < constructors.length; ind++) {

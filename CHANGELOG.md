@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.285.1-->
+<!--LATEST=2.286.1-->
 <!--ENTRYINSERT-->
+
+## 2.286.1
+* bugfix: react-native: Fixes issue where promise methods are undefined when using react-native 0.56.0. See [this issue](https://github.com/facebook/metro/issues/208) for more information.
+* feature: Kinesis: Updates API to latest version.
+* feature: Polly: Amazon Polly enables female voice Aditi to speak Hindi language
+* feature: ResourceGroups: AWS Resource Groups service added a new feature to filter group resources by resource-type when using the ListGroupResources operation.
+* feature: SSM: This release updates AWS Systems Manager APIs to let customers create and use service-linked roles to register and edit Maintenance Window tasks.
 
 ## 2.285.1
 * feature: StorageGateway: AWS Storage Gateway now enables you to create stored volumes with AWS KMS support.

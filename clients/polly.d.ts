@@ -108,6 +108,10 @@ declare namespace Polly {
      */
     LanguageCode?: LanguageCode;
     /**
+     * Boolean value indicating whether to return any bilingual voices that use the specified language as an additional language. For instance, if you request all languages that use US English (es-US), and there is an Italian voice that speaks both Italian (it-IT) and US English, that voice will be included if you specify yes but not if you specify no.
+     */
+    IncludeAdditionalLanguageCodes?: IncludeAdditionalLanguageCodes;
+    /**
      * An opaque pagination token returned from the previous DescribeVoices operation. If present, this indicates where to continue the listing.
      */
     NextToken?: NextToken;
@@ -152,7 +156,9 @@ declare namespace Polly {
      */
     SynthesisTask?: SynthesisTask;
   }
-  export type LanguageCode = "cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ko-KR"|"ja-JP"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"|string;
+  export type IncludeAdditionalLanguageCodes = boolean;
+  export type LanguageCode = "cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ja-JP"|"hi-IN"|"ko-KR"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"|string;
+  export type LanguageCodeList = LanguageCode[];
   export type LanguageName = string;
   export type LastModified = Date;
   export type LexemesCount = number;
@@ -243,7 +249,7 @@ declare namespace Polly {
      */
     NextToken?: NextToken;
     /**
-     * SynthesisTask object that provides information from the specified task in the list request, including output format, creation time, task status, and so on.
+     * List of SynthesisTask objects that provides information from the specified task in the list request, including output format, creation time, task status, and so on.
      */
     SynthesisTasks?: SynthesisTasks;
   }
@@ -285,7 +291,7 @@ declare namespace Polly {
      */
     OutputS3BucketName: OutputS3BucketName;
     /**
-     * The Amazon S3 Key prefix for the output speech file.
+     * The Amazon S3 key prefix for the output speech file.
      */
     OutputS3KeyPrefix?: OutputS3KeyPrefix;
     /**
@@ -312,6 +318,10 @@ declare namespace Polly {
      * Voice ID to use for the synthesis. 
      */
     VoiceId: VoiceId;
+    /**
+     * Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     */
+    LanguageCode?: LanguageCode;
   }
   export interface StartSpeechSynthesisTaskOutput {
     /**
@@ -372,6 +382,10 @@ declare namespace Polly {
      * Voice ID to use for the synthesis. 
      */
     VoiceId?: VoiceId;
+    /**
+     * Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     */
+    LanguageCode?: LanguageCode;
   }
   export type SynthesisTasks = SynthesisTask[];
   export interface SynthesizeSpeechInput {
@@ -403,6 +417,10 @@ declare namespace Polly {
      *  Voice ID to use for the synthesis. You can get a list of available voice IDs by calling the DescribeVoices operation. 
      */
     VoiceId: VoiceId;
+    /**
+     * Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     */
+    LanguageCode?: LanguageCode;
   }
   export interface SynthesizeSpeechOutput {
     /**
@@ -444,6 +462,10 @@ declare namespace Polly {
      * Name of the voice (for example, Salli, Kendra, etc.). This provides a human readable voice name that you might display in your application.
      */
     Name?: VoiceName;
+    /**
+     * Additional codes for languages available for the specified voice in addition to its default language.  For example, the default language for Aditi is Indian English (en-IN) because it was first used for that language. Since Aditi is bilingual and fluent in both Indian English and Hindi, this parameter would show the code hi-IN.
+     */
+    AdditionalLanguageCodes?: LanguageCodeList;
   }
   export type VoiceId = "Geraint"|"Gwyneth"|"Mads"|"Naja"|"Hans"|"Marlene"|"Nicole"|"Russell"|"Amy"|"Brian"|"Emma"|"Raveena"|"Ivy"|"Joanna"|"Joey"|"Justin"|"Kendra"|"Kimberly"|"Matthew"|"Salli"|"Conchita"|"Enrique"|"Miguel"|"Penelope"|"Chantal"|"Celine"|"Lea"|"Mathieu"|"Dora"|"Karl"|"Carla"|"Giorgio"|"Mizuki"|"Liv"|"Lotte"|"Ruben"|"Ewa"|"Jacek"|"Jan"|"Maja"|"Ricardo"|"Vitoria"|"Cristiano"|"Ines"|"Carmen"|"Maxim"|"Tatyana"|"Astrid"|"Filiz"|"Vicki"|"Takumi"|"Seoyeon"|"Aditi"|string;
   export type VoiceList = Voice[];

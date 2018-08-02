@@ -111,7 +111,7 @@ declare class ResourceGroups extends Service {
 declare namespace ResourceGroups {
   export interface CreateGroupInput {
     /**
-     * The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with AWS or aws; these are reserved. A resource group name must be unique within your account.
+     * The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 128 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with AWS or aws; these are reserved. A resource group name must be unique within your account.
      */
     Name: GroupName;
     /**
@@ -123,7 +123,7 @@ declare namespace ResourceGroups {
      */
     ResourceQuery: ResourceQuery;
     /**
-     * The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 127 characters, and tag values can have a maximum length of 255 characters.
+     * The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
      */
     Tags?: Tags;
   }
@@ -228,6 +228,10 @@ declare namespace ResourceGroups {
      */
     GroupName: GroupName;
     /**
+     * Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources operation.    resource-type - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.  
+     */
+    Filters?: ResourceFilterList;
+    /**
      * The maximum number of group member ARNs that are returned in a single call by ListGroupResources, in paginated output. By default, this number is 50.
      */
     MaxResults?: MaxResults;
@@ -271,6 +275,20 @@ declare namespace ResourceGroups {
   export type Query = string;
   export type QueryType = "TAG_FILTERS_1_0"|string;
   export type ResourceArn = string;
+  export interface ResourceFilter {
+    /**
+     * The name of the filter. Filter names are case-sensitive.
+     */
+    Name: ResourceFilterName;
+    /**
+     * One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive.
+     */
+    Values: ResourceFilterValues;
+  }
+  export type ResourceFilterList = ResourceFilter[];
+  export type ResourceFilterName = "resource-type"|string;
+  export type ResourceFilterValue = string;
+  export type ResourceFilterValues = ResourceFilterValue[];
   export interface ResourceIdentifier {
     /**
      * The ARN of a resource.
@@ -323,7 +341,7 @@ declare namespace ResourceGroups {
      */
     Arn: GroupArn;
     /**
-     * The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 127 characters, and tag values can have a maximum length of 255 characters.
+     * The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
      */
     Tags: Tags;
   }

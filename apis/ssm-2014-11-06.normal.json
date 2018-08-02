@@ -1042,7 +1042,8 @@
         {"shape":"ParameterNotFound"},
         {"shape":"ParameterVersionNotFound"},
         {"shape":"ParameterVersionLabelLimitExceeded"}
-      ]
+      ],
+      "documentation":"<p>A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions. </p> <p>Parameter labels have the following requirements and restrictions.</p> <ul> <li> <p>A version of a parameter can have a maximum of 10 labels.</p> </li> <li> <p>You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.</p> </li> <li> <p>You can move a label from one version of a parameter to another.</p> </li> <li> <p>You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.</p> </li> <li> <p>You can't delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.</p> </li> <li> <p>A label can have a maximum of 100 characters.</p> </li> <li> <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).</p> </li> <li> <p>Labels can't begin with a number, \"aws,\" or \"ssm\" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.</p> </li> </ul>"
     },
     "ListAssociationVersions":{
       "name":"ListAssociationVersions",
@@ -7418,18 +7419,28 @@
         "Labels"
       ],
       "members":{
-        "Name":{"shape":"PSParameterName"},
+        "Name":{
+          "shape":"PSParameterName",
+          "documentation":"<p>The parameter name on which you want to attach one or more labels.</p>"
+        },
         "ParameterVersion":{
           "shape":"PSParameterVersion",
+          "documentation":"<p>The specific version of the parameter on which you want to attach one or more labels. If no version is specified, the system attaches the label to the latest version.)</p>",
           "box":true
         },
-        "Labels":{"shape":"ParameterLabelList"}
+        "Labels":{
+          "shape":"ParameterLabelList",
+          "documentation":"<p>One or more labels to attach to the specified parameter version.</p>"
+        }
       }
     },
     "LabelParameterVersionResult":{
       "type":"structure",
       "members":{
-        "InvalidLabels":{"shape":"ParameterLabelList"}
+        "InvalidLabels":{
+          "shape":"ParameterLabelList",
+          "documentation":"<p>The label does not meet the requirements. For information about parameter label requirements, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html\">Labeling Parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+        }
       }
     },
     "LastResourceDataSyncMessage":{"type":"string"},
@@ -8938,6 +8949,7 @@
       "members":{
         "message":{"shape":"String"}
       },
+      "documentation":"<p>A parameter version can have a maximum of ten labels.</p>",
       "exception":true
     },
     "ParameterVersionNotFound":{
@@ -9675,7 +9687,6 @@
         "WindowId",
         "Targets",
         "TaskArn",
-        "ServiceRoleArn",
         "TaskType",
         "MaxConcurrency",
         "MaxErrors"
@@ -9695,7 +9706,7 @@
         },
         "ServiceRoleArn":{
           "shape":"ServiceRole",
-          "documentation":"<p>The role that should be assumed when executing the task.</p>"
+          "documentation":"<p>The role to assume when running the Maintenance Window task.</p> <p>If you do not specify a service role ARN, Systems Manager will use your account's service-linked role for Systems Manager by default. If no service-linked role for Systems Manager exists in your account, it will be created when you run <code>RegisterTaskWithMaintenanceWindow</code> without specifying a service role ARN.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions\">Service-Linked Role Permissions for Systems Manager</a> and <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role\">Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks? </a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "TaskType":{
           "shape":"MaintenanceWindowTaskType",
@@ -10994,7 +11005,7 @@
         },
         "ServiceRoleArn":{
           "shape":"ServiceRole",
-          "documentation":"<p>The IAM service role ARN to modify. The system assumes this role during task execution. </p>"
+          "documentation":"<p>The IAM service role ARN to modify. The system assumes this role during task execution.</p> <p>If you do not specify a service role ARN, Systems Manager will use your account's service-linked role for Systems Manager by default. If no service-linked role for Systems Manager exists in your account, it will be created when you run <code>RegisterTaskWithMaintenanceWindow</code> without specifying a service role ARN.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions\">Service-Linked Role Permissions for Systems Manager</a> and <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role\">Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks? </a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "TaskParameters":{
           "shape":"MaintenanceWindowTaskParameters",
