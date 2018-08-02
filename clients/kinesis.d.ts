@@ -992,7 +992,7 @@ declare namespace Kinesis {
      */
     MillisBehindLatest: MillisBehindLatest;
   }
-  export type SubscribeToShardEventStream = EventStream<{SubscribeToShardEvent?:SubscribeToShardEvent,ResourceNotFoundException?:ResourceNotFoundException,ResourceInUseException?:ResourceInUseException,KMSDisabledException?:KMSDisabledException,KMSInvalidStateException?:KMSInvalidStateException,KMSAccessDeniedException?:KMSAccessDeniedException,KMSNotFoundException?:KMSNotFoundException,KMSOptInRequired?:KMSOptInRequired,KMSThrottlingException?:KMSThrottlingException,InternalFailureException?:InternalFailureException}>;
+  export type SubscribeToShardEventStream = EventStream<{SubscribeToShardEvent?:SubscribeToShardEvent}>;
   export interface SubscribeToShardInput {
     /**
      * For this parameter, use the value you obtained when you called RegisterStreamConsumer.
