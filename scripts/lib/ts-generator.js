@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var pruneShapes = require('./prune-shapes').pruneShapes;
 
 var CUSTOM_CONFIG_ENUMS = {
     DUALSTACK: {
@@ -512,6 +513,8 @@ TSGenerator.prototype.containsEventStreams = function containsEventStreams(model
  */
 TSGenerator.prototype.processServiceModel = function processServiceModel(serviceIdentifier) {
     var model = this.loadServiceApi(serviceIdentifier);
+    pruneShapes(model);
+
     var self = this;
     var code = '';
     var className = this.metadata[serviceIdentifier].name;
