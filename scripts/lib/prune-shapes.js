@@ -10,7 +10,6 @@ function pruneShapes(model) {
     for (operationShape of operationShapeNames) {
         // traverse the tree and store visited shapes
         visitRelatedShapeNames(operationShape, shapeMap);
-        //shapeMap[operationShape].visited = true;
     }
 
     // iterate over the shapeMap and remove any shape that wasn't visited
