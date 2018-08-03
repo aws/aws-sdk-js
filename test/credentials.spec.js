@@ -1429,7 +1429,7 @@
       }
       return helpers.spyOn(creds.service, operation).andCallFake(function(cb) {
         expect(creds.service.config.params).to.eql(inParams);
-        return cb(null, {
+        setImmediate(cb, null, {
           Credentials: {
             AccessKeyId: 'KEY',
             SecretAccessKey: 'SECRET',
@@ -1463,6 +1463,13 @@
       });
     });
     describe('masterCredentials', function() {
+      var origCreds;
+      beforeEach(function () {
+        origCreds = AWS.config.credentials;
+      });
+      afterEach(function() {
+        AWS.config.credentials = origCreds;
+      });
       it('seeds masterCredentials from global credentials', function() {
         var origCreds;
         origCreds = AWS.config.credentials;
@@ -1484,8 +1491,7 @@
         return AWS.config.credentials = origCreds;
       });
       return it('seeds masterCredentials from passed in credentials', function() {
-        var masterCreds, origCreds;
-        origCreds = AWS.config.credentials;
+        var masterCreds;
         AWS.config.credentials = new AWS.Credentials('AKID', 'SECRET');
         masterCreds = new AWS.Credentials('TEMPID', 'TEMPSECRET');
         creds = new AWS.TemporaryCredentials(null, masterCreds);
@@ -1493,7 +1499,6 @@
         expect(creds.masterCredentials.secretAccessKey).to.equal('TEMPSECRET');
         expect(AWS.config.credentials.accessKeyId).to.equal('AKID');
         expect(AWS.config.credentials.secretAccessKey).to.equal('SECRET');
-        return AWS.config.credentials = origCreds;
       });
     });
     describe('needsRefresh', function() {
@@ -1508,15 +1513,34 @@
       beforeEach(function() {
         return setupClients();
       });
-      it('loads temporary credentials from STS using getSessionToken', function() {
-        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
-        creds.refresh(function() {});
-        expect(creds.accessKeyId).to.equal('KEY');
-        expect(creds.secretAccessKey).to.equal('SECRET');
-        expect(creds.sessionToken).to.equal('TOKEN');
-        return expect(creds.needsRefresh()).to.equal(false);
+      it('coalesces concurrent calls', function (done) {
+        var callCount = 10;
+        var callbackCount = 0;
+        var serviceSpy = mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
+        expect(creds.refreshCallbacks.length).to.equal(0);
+        for (var i = 0; i < callCount; i++) {
+          creds.refresh(function () {
+            if (++callbackCount === callCount) {
+              expect(serviceSpy.calls.length).to.equal(1);
+              process.nextTick(function () {
+                expect(creds.refreshCallbacks.length).to.equal(0);
+                done();
+              });
+            }
+          });
+        }
       });
-      it('loads temporary credentials from STS using assumeRole if RoleArn is provided', function() {
+      it('loads temporary credentials from STS using getSessionToken', function(done) {
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
+        creds.refresh(function() {
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.needsRefresh()).to.equal(false);
+          done();
+        });
+      });
+      it('loads temporary credentials from STS using assumeRole if RoleArn is provided', function(done) {
         creds = new AWS.TemporaryCredentials({
           RoleArn: 'ARN'
         });
@@ -1525,11 +1549,13 @@
           RoleArn: 'ARN',
           RoleSessionName: 'temporary-credentials'
         });
-        creds.refresh(function() {});
-        expect(creds.accessKeyId).to.equal('KEY');
-        expect(creds.secretAccessKey).to.equal('SECRET');
-        expect(creds.sessionToken).to.equal('TOKEN');
-        return expect(creds.needsRefresh()).to.equal(false);
+        creds.refresh(function() {
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.needsRefresh()).to.equal(false);
+          done();
+        });
       });
       it('does try to load creds second time if service request failed', function() {
         var spy;
@@ -1555,13 +1581,236 @@
         creds = new AWS.TemporaryCredentials({
           RoleArn: 'ARN'
         }, masterCreds);
-        creds.createClients();
         mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000), {
           RoleArn: 'ARN',
           RoleSessionName: 'temporary-credentials'
         });
         creds.refresh(function() {});
         return expect(refreshSpy.calls.length).to.equal(1);
+      });
+    });
+  });
+
+  describe('AWS.ChainableTemporaryCredentials', function() {
+    var creds, mockSTS, setupClients, setupCreds;
+    creds = null;
+    setupCreds = function() {
+      return creds = new AWS.ChainableTemporaryCredentials({
+        DurationSeconds: 1200
+      });
+    };
+    setupClients = function() {
+      setupCreds();
+      return creds.createClients();
+    };
+    mockSTS = function(expireTime, inParams) {
+      var operation;
+      if (!inParams) {
+        inParams = {
+          DurationSeconds: 1200
+        };
+      }
+      if (inParams.RoleArn) {
+        operation = 'assumeRole';
+      } else {
+        operation = 'getSessionToken';
+      }
+      return helpers.spyOn(creds.service, operation).andCallFake(function(cb) {
+        expect(creds.service.config.params).to.eql(inParams);
+        setImmediate(cb, null, {
+          Credentials: {
+            AccessKeyId: 'KEY',
+            SecretAccessKey: 'SECRET',
+            SessionToken: 'TOKEN',
+            Expiration: expireTime
+          }
+        });
+      });
+    };
+    describe('constructor', function() {
+      setupCreds();
+      return it('constructs service clients lazily', function() {
+        return expect(creds.service).not.to.exist;
+      });
+    });
+    describe('createClients', function() {
+      beforeEach(function() {
+        return setupCreds();
+      });
+      it('constructs clients if not present', function() {
+        expect(creds.service).not.to.exist;
+        creds.createClients();
+        return expect(creds.service).to.exist;
+      });
+      return it('does not construct clients if already present', function() {
+        var service;
+        creds.createClients();
+        service = creds.service;
+        creds.createClients();
+        return expect(service).to.eql(creds.service);
+      });
+    });
+    describe('masterCredentials', function() {
+      var origCreds, origProvider;
+      beforeEach(function () {
+        origCreds = AWS.config.credentials;
+        origProvider = AWS.config.credentialProvider;
+      });
+      afterEach(function() {
+        AWS.config.credentials = origCreds;
+        AWS.config.credentialProvider = origProvider;
+      });
+      it('lazily uses uninitialized global credentials', function() {
+        AWS.config.credentials = null;
+        creds = new AWS.ChainableTemporaryCredentials();
+        AWS.config.credentials = new AWS.Credentials('AKID', 'SECRET');
+        creds.createClients();
+        expect(creds.service.config.credentials.accessKeyId).to.equal('AKID');
+        expect(creds.service.config.credentials.secretAccessKey).to.equal('SECRET');
+      });
+      it('lazily uses global credential provider', function(done) {
+        AWS.config.credentials = null;
+        creds = new AWS.ChainableTemporaryCredentials();
+        AWS.config.credentialProvider = new AWS.CredentialProviderChain([
+          new AWS.Credentials('AKID', 'SECRET')
+        ]);
+        creds.createClients();
+        creds.service.config.getCredentials(function (err, credentials) {
+          expect(err).to.be.undefined;
+          expect(credentials.accessKeyId).to.equal('AKID');
+          expect(credentials.secretAccessKey).to.equal('SECRET');
+          done()
+        });
+      });
+      it('captures global credentials when omitted', function (done) {
+        // this ensures past advice still works
+        // https://github.com/aws/aws-sdk-js/issues/1064#issuecomment-234008942
+        var masterCredentials = new AWS.Credentials('AKID', 'SECRET');
+        masterCredentials.expired = true;
+        var masterCredentialsSpy = helpers.spyOn(masterCredentials, 'refresh').andCallThrough();
+        AWS.config.credentials = masterCredentials;
+        creds = new AWS.ChainableTemporaryCredentials();
+        AWS.config.credentials = creds;
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
+        creds.refresh(function () {
+          expect(masterCredentialsSpy.calls.length).to.equal(1);
+          expect(creds.service.config.credentials).to.equal(masterCredentials);
+          done();
+        });
+      });
+      return it('seeds masterCredentials from passed in credentials', function() {
+        var masterCreds;
+        AWS.config.credentials = new AWS.Credentials('AKID', 'SECRET');
+        masterCreds = new AWS.Credentials('TEMPID', 'TEMPSECRET');
+        creds = new AWS.ChainableTemporaryCredentials(null, masterCreds);
+        expect(creds.masterCredentials.accessKeyId).to.equal('TEMPID');
+        expect(creds.masterCredentials.secretAccessKey).to.equal('TEMPSECRET');
+        expect(AWS.config.credentials.accessKeyId).to.equal('AKID');
+        expect(AWS.config.credentials.secretAccessKey).to.equal('SECRET');
+      });
+    });
+    describe('needsRefresh', function() {
+      return it('can be expired based on expire time from STS response', function() {
+        setupClients();
+        mockSTS(new Date(0));
+        creds.refresh(function() {});
+        return expect(creds.needsRefresh()).to.equal(true);
+      });
+    });
+    return describe('refresh', function() {
+      beforeEach(function() {
+        return setupClients();
+      });
+      it('coalesces concurrent calls', function (done) {
+        var callCount = 10;
+        var callbackCount = 0;
+        var serviceSpy = mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
+        expect(creds.refreshCallbacks.length).to.equal(0);
+        for (var i = 0; i < callCount; i++) {
+          creds.refresh(function () {
+            if (++callbackCount === callCount) {
+              expect(serviceSpy.calls.length).to.equal(1);
+              process.nextTick(function () {
+                expect(creds.refreshCallbacks.length).to.equal(0);
+                done();
+              });
+            }
+          });
+        }
+      });
+      it('loads temporary credentials from STS using getSessionToken', function(done) {
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
+        creds.refresh(function() {
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.needsRefresh()).to.equal(false);
+          done();
+        });
+      });
+      it('loads temporary credentials from STS using assumeRole if RoleArn is provided', function(done) {
+        creds = new AWS.ChainableTemporaryCredentials({
+          RoleArn: 'ARN'
+        });
+        creds.createClients();
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000), {
+          RoleArn: 'ARN',
+          RoleSessionName: 'temporary-credentials'
+        });
+        creds.refresh(function() {
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.needsRefresh()).to.equal(false);
+          done();
+        });
+      });
+      it('does try to load creds second time if service request failed', function() {
+        var spy;
+        spy = helpers.spyOn(creds.service, 'getSessionToken').andCallFake(function(cb) {
+          return cb(new Error('INVALID SERVICE'));
+        });
+        creds.refresh(function(err) {
+          return expect(err.message).to.equal('INVALID SERVICE');
+        });
+        return creds.refresh(function() {
+          return creds.refresh(function() {
+            return creds.refresh(function() {
+              return expect(spy.calls.length).to.equal(4);
+            });
+          });
+        });
+      });
+      it('should refresh expired master credentials when refreshing self', function() {
+        var masterCreds, refreshSpy;
+        masterCreds = new AWS.Credentials('akid', 'secret');
+        masterCreds.expired = true;
+        refreshSpy = helpers.spyOn(masterCreds, 'refresh');
+        creds = new AWS.ChainableTemporaryCredentials({
+          RoleArn: 'ARN'
+        }, masterCreds);
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000), {
+          RoleArn: 'ARN',
+          RoleSessionName: 'temporary-credentials'
+        });
+        creds.refresh(function() {});
+        return expect(refreshSpy.calls.length).to.equal(1);
+      });
+      return it('should recursively refresh expired master credentials when refreshing self', function() {
+        var masterCreds, intermediateCreds, masterRefreshSpy, intermediateRefreshSpy;
+        masterCreds = new AWS.Credentials('akid', 'secret');
+        masterCreds.expired = true;
+        masterRefreshSpy = helpers.spyOn(masterCreds, 'refresh');
+        intermediateCreds = new AWS.ChainableTemporaryCredentials({}, masterCreds)
+        intermediateRefreshSpy = helpers.spyOn(intermediateCreds, 'refresh').andCallThrough();
+        creds = new AWS.ChainableTemporaryCredentials({ RoleArn: 'ARN' }, intermediateCreds);
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000), {
+          RoleArn: 'ARN',
+          RoleSessionName: 'temporary-credentials'
+        });
+        creds.refresh(function() {});
+        expect(intermediateRefreshSpy.calls.length).to.equal(1);
+        return expect(masterRefreshSpy.calls.length).to.equal(1);
       });
     });
   });
