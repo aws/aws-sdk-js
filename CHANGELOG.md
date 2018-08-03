@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.286.1-->
+<!--LATEST=2.286.2-->
 <!--ENTRYINSERT-->
+
+## 2.286.2
+* bugfix: type: remove undefined exceptions from SubscribeToShardEventStream
 
 ## 2.286.1
 * bugfix: react-native: Fixes issue where promise methods are undefined when using react-native 0.56.0. See [this issue](https://github.com/facebook/metro/issues/208) for more information.
