@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.286.2
+// AWS SDK for JavaScript v2.287.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -32107,7 +32107,7 @@ module.exports={
         "members": {
           "GlobalTableName": {},
           "ReplicationGroup": {
-            "shape": "S1n"
+            "shape": "S1p"
           }
         }
       },
@@ -32115,7 +32115,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GlobalTableDescription": {
-            "shape": "S1r"
+            "shape": "S1t"
           }
         }
       }
@@ -32131,11 +32131,11 @@ module.exports={
         ],
         "members": {
           "AttributeDefinitions": {
-            "shape": "S1y"
+            "shape": "S1z"
           },
           "TableName": {},
           "KeySchema": {
-            "shape": "S22"
+            "shape": "S23"
           },
           "LocalSecondaryIndexes": {
             "type": "list",
@@ -32149,10 +32149,10 @@ module.exports={
               "members": {
                 "IndexName": {},
                 "KeySchema": {
-                  "shape": "S22"
+                  "shape": "S23"
                 },
                 "Projection": {
-                  "shape": "S27"
+                  "shape": "S28"
                 }
               }
             }
@@ -32170,22 +32170,22 @@ module.exports={
               "members": {
                 "IndexName": {},
                 "KeySchema": {
-                  "shape": "S22"
+                  "shape": "S23"
                 },
                 "Projection": {
-                  "shape": "S27"
+                  "shape": "S28"
                 },
                 "ProvisionedThroughput": {
-                  "shape": "S2d"
+                  "shape": "S2e"
                 }
               }
             }
           },
           "ProvisionedThroughput": {
-            "shape": "S2d"
+            "shape": "S2e"
           },
           "StreamSpecification": {
-            "shape": "S2f"
+            "shape": "S2g"
           },
           "SSESpecification": {
             "type": "structure",
@@ -32204,7 +32204,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TableDescription": {
-            "shape": "S2l"
+            "shape": "S2m"
           }
         }
       }
@@ -32223,7 +32223,7 @@ module.exports={
         "type": "structure",
         "members": {
           "BackupDescription": {
-            "shape": "S37"
+            "shape": "S38"
           }
         }
       }
@@ -32241,7 +32241,7 @@ module.exports={
             "shape": "S6"
           },
           "Expected": {
-            "shape": "S3k"
+            "shape": "S3l"
           },
           "ConditionalOperator": {},
           "ReturnValues": {},
@@ -32252,7 +32252,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3s"
+            "shape": "S3t"
           }
         }
       },
@@ -32285,7 +32285,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TableDescription": {
-            "shape": "S2l"
+            "shape": "S2m"
           }
         }
       }
@@ -32304,7 +32304,7 @@ module.exports={
         "type": "structure",
         "members": {
           "BackupDescription": {
-            "shape": "S37"
+            "shape": "S38"
           }
         }
       }
@@ -32323,7 +32323,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ContinuousBackupsDescription": {
-            "shape": "S41"
+            "shape": "S42"
           }
         }
       }
@@ -32342,7 +32342,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GlobalTableDescription": {
-            "shape": "S1r"
+            "shape": "S1t"
           }
         }
       }
@@ -32362,7 +32362,7 @@ module.exports={
         "members": {
           "GlobalTableName": {},
           "ReplicaSettings": {
-            "shape": "S49"
+            "shape": "S4a"
           }
         }
       }
@@ -32404,7 +32404,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Table": {
-            "shape": "S2l"
+            "shape": "S2m"
           }
         }
       }
@@ -32423,7 +32423,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TimeToLiveDescription": {
-            "shape": "S3g"
+            "shape": "S3h"
           }
         }
       }
@@ -32479,7 +32479,8 @@ module.exports={
           "TimeRangeUpperBound": {
             "type": "timestamp"
           },
-          "ExclusiveStartBackupArn": {}
+          "ExclusiveStartBackupArn": {},
+          "BackupType": {}
         }
       },
       "output": {
@@ -32498,7 +32499,11 @@ module.exports={
                 "BackupCreationDateTime": {
                   "type": "timestamp"
                 },
+                "BackupExpiryDateTime": {
+                  "type": "timestamp"
+                },
                 "BackupStatus": {},
+                "BackupType": {},
                 "BackupSizeBytes": {
                   "type": "long"
                 }
@@ -32530,7 +32535,7 @@ module.exports={
               "members": {
                 "GlobalTableName": {},
                 "ReplicationGroup": {
-                  "shape": "S1n"
+                  "shape": "S1p"
                 }
               }
             }
@@ -32575,7 +32580,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Tags": {
-            "shape": "S5d"
+            "shape": "S5f"
           },
           "NextToken": {}
         }
@@ -32594,7 +32599,7 @@ module.exports={
             "shape": "S14"
           },
           "Expected": {
-            "shape": "S3k"
+            "shape": "S3l"
           },
           "ReturnValues": {},
           "ReturnConsumedCapacity": {},
@@ -32605,7 +32610,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3s"
+            "shape": "S3t"
           }
         }
       },
@@ -32647,11 +32652,11 @@ module.exports={
             "type": "map",
             "key": {},
             "value": {
-              "shape": "S5m"
+              "shape": "S5o"
             }
           },
           "QueryFilter": {
-            "shape": "S5n"
+            "shape": "S5p"
           },
           "ConditionalOperator": {},
           "ScanIndexForward": {
@@ -32668,7 +32673,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3s"
+            "shape": "S3t"
           }
         }
       },
@@ -32709,7 +32714,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TableDescription": {
-            "shape": "S2l"
+            "shape": "S2m"
           }
         }
       }
@@ -32736,7 +32741,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TableDescription": {
-            "shape": "S2l"
+            "shape": "S2m"
           }
         }
       }
@@ -32758,7 +32763,7 @@ module.exports={
           },
           "Select": {},
           "ScanFilter": {
-            "shape": "S5n"
+            "shape": "S5p"
           },
           "ConditionalOperator": {},
           "ExclusiveStartKey": {
@@ -32777,7 +32782,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3s"
+            "shape": "S3t"
           },
           "ConsistentRead": {
             "type": "boolean"
@@ -32815,7 +32820,7 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "Tags": {
-            "shape": "S5d"
+            "shape": "S5f"
           }
         }
       }
@@ -32862,7 +32867,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ContinuousBackupsDescription": {
-            "shape": "S41"
+            "shape": "S42"
           }
         }
       }
@@ -32908,7 +32913,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GlobalTableDescription": {
-            "shape": "S1r"
+            "shape": "S1t"
           }
         }
       }
@@ -32925,7 +32930,7 @@ module.exports={
             "type": "long"
           },
           "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate": {
-            "shape": "S6c"
+            "shape": "S6e"
           },
           "GlobalTableGlobalSecondaryIndexSettingsUpdate": {
             "type": "list",
@@ -32940,7 +32945,7 @@ module.exports={
                   "type": "long"
                 },
                 "ProvisionedWriteCapacityAutoScalingSettingsUpdate": {
-                  "shape": "S6c"
+                  "shape": "S6e"
                 }
               }
             }
@@ -32958,7 +32963,7 @@ module.exports={
                   "type": "long"
                 },
                 "ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate": {
-                  "shape": "S6c"
+                  "shape": "S6e"
                 },
                 "ReplicaGlobalSecondaryIndexSettingsUpdate": {
                   "type": "list",
@@ -32973,7 +32978,7 @@ module.exports={
                         "type": "long"
                       },
                       "ProvisionedReadCapacityAutoScalingSettingsUpdate": {
-                        "shape": "S6c"
+                        "shape": "S6e"
                       }
                     }
                   }
@@ -32988,7 +32993,7 @@ module.exports={
         "members": {
           "GlobalTableName": {},
           "ReplicaSettings": {
-            "shape": "S49"
+            "shape": "S4a"
           }
         }
       }
@@ -33019,7 +33024,7 @@ module.exports={
             }
           },
           "Expected": {
-            "shape": "S3k"
+            "shape": "S3l"
           },
           "ConditionalOperator": {},
           "ReturnValues": {},
@@ -33031,7 +33036,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3s"
+            "shape": "S3t"
           }
         }
       },
@@ -33058,11 +33063,11 @@ module.exports={
         ],
         "members": {
           "AttributeDefinitions": {
-            "shape": "S1y"
+            "shape": "S1z"
           },
           "TableName": {},
           "ProvisionedThroughput": {
-            "shape": "S2d"
+            "shape": "S2e"
           },
           "GlobalSecondaryIndexUpdates": {
             "type": "list",
@@ -33078,7 +33083,7 @@ module.exports={
                   "members": {
                     "IndexName": {},
                     "ProvisionedThroughput": {
-                      "shape": "S2d"
+                      "shape": "S2e"
                     }
                   }
                 },
@@ -33093,13 +33098,13 @@ module.exports={
                   "members": {
                     "IndexName": {},
                     "KeySchema": {
-                      "shape": "S22"
+                      "shape": "S23"
                     },
                     "Projection": {
-                      "shape": "S27"
+                      "shape": "S28"
                     },
                     "ProvisionedThroughput": {
-                      "shape": "S2d"
+                      "shape": "S2e"
                     }
                   }
                 },
@@ -33116,7 +33121,7 @@ module.exports={
             }
           },
           "StreamSpecification": {
-            "shape": "S2f"
+            "shape": "S2g"
           }
         }
       },
@@ -33124,7 +33129,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TableDescription": {
-            "shape": "S2l"
+            "shape": "S2m"
           }
         }
       }
@@ -33139,7 +33144,7 @@ module.exports={
         "members": {
           "TableName": {},
           "TimeToLiveSpecification": {
-            "shape": "S71"
+            "shape": "S73"
           }
         }
       },
@@ -33147,7 +33152,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TimeToLiveSpecification": {
-            "shape": "S71"
+            "shape": "S73"
           }
         }
       }
@@ -33358,6 +33363,7 @@ module.exports={
         "BackupArn",
         "BackupName",
         "BackupStatus",
+        "BackupType",
         "BackupCreationDateTime"
       ],
       "members": {
@@ -33367,12 +33373,16 @@ module.exports={
           "type": "long"
         },
         "BackupStatus": {},
+        "BackupType": {},
         "BackupCreationDateTime": {
+          "type": "timestamp"
+        },
+        "BackupExpiryDateTime": {
           "type": "timestamp"
         }
       }
     },
-    "S1n": {
+    "S1p": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -33381,7 +33391,7 @@ module.exports={
         }
       }
     },
-    "S1r": {
+    "S1t": {
       "type": "structure",
       "members": {
         "ReplicationGroup": {
@@ -33401,7 +33411,7 @@ module.exports={
         "GlobalTableName": {}
       }
     },
-    "S1y": {
+    "S1z": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -33415,7 +33425,7 @@ module.exports={
         }
       }
     },
-    "S22": {
+    "S23": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -33429,7 +33439,7 @@ module.exports={
         }
       }
     },
-    "S27": {
+    "S28": {
       "type": "structure",
       "members": {
         "ProjectionType": {},
@@ -33439,7 +33449,7 @@ module.exports={
         }
       }
     },
-    "S2d": {
+    "S2e": {
       "type": "structure",
       "required": [
         "ReadCapacityUnits",
@@ -33454,7 +33464,7 @@ module.exports={
         }
       }
     },
-    "S2f": {
+    "S2g": {
       "type": "structure",
       "members": {
         "StreamEnabled": {
@@ -33463,22 +33473,22 @@ module.exports={
         "StreamViewType": {}
       }
     },
-    "S2l": {
+    "S2m": {
       "type": "structure",
       "members": {
         "AttributeDefinitions": {
-          "shape": "S1y"
+          "shape": "S1z"
         },
         "TableName": {},
         "KeySchema": {
-          "shape": "S22"
+          "shape": "S23"
         },
         "TableStatus": {},
         "CreationDateTime": {
           "type": "timestamp"
         },
         "ProvisionedThroughput": {
-          "shape": "S2n"
+          "shape": "S2o"
         },
         "TableSizeBytes": {
           "type": "long"
@@ -33495,10 +33505,10 @@ module.exports={
             "members": {
               "IndexName": {},
               "KeySchema": {
-                "shape": "S22"
+                "shape": "S23"
               },
               "Projection": {
-                "shape": "S27"
+                "shape": "S28"
               },
               "IndexSizeBytes": {
                 "type": "long"
@@ -33517,17 +33527,17 @@ module.exports={
             "members": {
               "IndexName": {},
               "KeySchema": {
-                "shape": "S22"
+                "shape": "S23"
               },
               "Projection": {
-                "shape": "S27"
+                "shape": "S28"
               },
               "IndexStatus": {},
               "Backfilling": {
                 "type": "boolean"
               },
               "ProvisionedThroughput": {
-                "shape": "S2n"
+                "shape": "S2o"
               },
               "IndexSizeBytes": {
                 "type": "long"
@@ -33540,7 +33550,7 @@ module.exports={
           }
         },
         "StreamSpecification": {
-          "shape": "S2f"
+          "shape": "S2g"
         },
         "LatestStreamLabel": {},
         "LatestStreamArn": {},
@@ -33562,11 +33572,11 @@ module.exports={
           }
         },
         "SSEDescription": {
-          "shape": "S31"
+          "shape": "S32"
         }
       }
     },
-    "S2n": {
+    "S2o": {
       "type": "structure",
       "members": {
         "LastIncreaseDateTime": {
@@ -33586,7 +33596,7 @@ module.exports={
         }
       }
     },
-    "S31": {
+    "S32": {
       "type": "structure",
       "members": {
         "Status": {},
@@ -33594,7 +33604,7 @@ module.exports={
         "KMSMasterKeyArn": {}
       }
     },
-    "S37": {
+    "S38": {
       "type": "structure",
       "members": {
         "BackupDetails": {
@@ -33617,13 +33627,13 @@ module.exports={
               "type": "long"
             },
             "KeySchema": {
-              "shape": "S22"
+              "shape": "S23"
             },
             "TableCreationDateTime": {
               "type": "timestamp"
             },
             "ProvisionedThroughput": {
-              "shape": "S2d"
+              "shape": "S2e"
             },
             "ItemCount": {
               "type": "long"
@@ -33640,10 +33650,10 @@ module.exports={
                 "members": {
                   "IndexName": {},
                   "KeySchema": {
-                    "shape": "S22"
+                    "shape": "S23"
                   },
                   "Projection": {
-                    "shape": "S27"
+                    "shape": "S28"
                   }
                 }
               }
@@ -33655,38 +33665,38 @@ module.exports={
                 "members": {
                   "IndexName": {},
                   "KeySchema": {
-                    "shape": "S22"
+                    "shape": "S23"
                   },
                   "Projection": {
-                    "shape": "S27"
+                    "shape": "S28"
                   },
                   "ProvisionedThroughput": {
-                    "shape": "S2d"
+                    "shape": "S2e"
                   }
                 }
               }
             },
             "StreamDescription": {
-              "shape": "S2f"
+              "shape": "S2g"
             },
             "TimeToLiveDescription": {
-              "shape": "S3g"
+              "shape": "S3h"
             },
             "SSEDescription": {
-              "shape": "S31"
+              "shape": "S32"
             }
           }
         }
       }
     },
-    "S3g": {
+    "S3h": {
       "type": "structure",
       "members": {
         "TimeToLiveStatus": {},
         "AttributeName": {}
       }
     },
-    "S3k": {
+    "S3l": {
       "type": "map",
       "key": {},
       "value": {
@@ -33700,25 +33710,25 @@ module.exports={
           },
           "ComparisonOperator": {},
           "AttributeValueList": {
-            "shape": "S3o"
+            "shape": "S3p"
           }
         }
       }
     },
-    "S3o": {
+    "S3p": {
       "type": "list",
       "member": {
         "shape": "S8"
       }
     },
-    "S3s": {
+    "S3t": {
       "type": "map",
       "key": {},
       "value": {
         "shape": "S8"
       }
     },
-    "S41": {
+    "S42": {
       "type": "structure",
       "required": [
         "ContinuousBackupsStatus"
@@ -33739,7 +33749,7 @@ module.exports={
         }
       }
     },
-    "S49": {
+    "S4a": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -33753,13 +33763,13 @@ module.exports={
             "type": "long"
           },
           "ReplicaProvisionedReadCapacityAutoScalingSettings": {
-            "shape": "S4c"
+            "shape": "S4d"
           },
           "ReplicaProvisionedWriteCapacityUnits": {
             "type": "long"
           },
           "ReplicaProvisionedWriteCapacityAutoScalingSettings": {
-            "shape": "S4c"
+            "shape": "S4d"
           },
           "ReplicaGlobalSecondaryIndexSettings": {
             "type": "list",
@@ -33775,13 +33785,13 @@ module.exports={
                   "type": "long"
                 },
                 "ProvisionedReadCapacityAutoScalingSettings": {
-                  "shape": "S4c"
+                  "shape": "S4d"
                 },
                 "ProvisionedWriteCapacityUnits": {
                   "type": "long"
                 },
                 "ProvisionedWriteCapacityAutoScalingSettings": {
-                  "shape": "S4c"
+                  "shape": "S4d"
                 }
               }
             }
@@ -33789,7 +33799,7 @@ module.exports={
         }
       }
     },
-    "S4c": {
+    "S4d": {
       "type": "structure",
       "members": {
         "MinimumUnits": {
@@ -33833,7 +33843,7 @@ module.exports={
         }
       }
     },
-    "S5d": {
+    "S5f": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -33847,26 +33857,26 @@ module.exports={
         }
       }
     },
-    "S5m": {
+    "S5o": {
       "type": "structure",
       "required": [
         "ComparisonOperator"
       ],
       "members": {
         "AttributeValueList": {
-          "shape": "S3o"
+          "shape": "S3p"
         },
         "ComparisonOperator": {}
       }
     },
-    "S5n": {
+    "S5p": {
       "type": "map",
       "key": {},
       "value": {
-        "shape": "S5m"
+        "shape": "S5o"
       }
     },
-    "S6c": {
+    "S6e": {
       "type": "structure",
       "members": {
         "MinimumUnits": {
@@ -33910,7 +33920,7 @@ module.exports={
         }
       }
     },
-    "S71": {
+    "S73": {
       "type": "structure",
       "required": [
         "Enabled",
@@ -132686,7 +132696,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.286.2',
+  VERSION: '2.287.0',
 
   /**
    * @api private
@@ -151818,7 +151828,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":357,"./lib/rng":358}],361:[function(require,module,exports){
-// AWS SDK for JavaScript v2.286.2
+// AWS SDK for JavaScript v2.287.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

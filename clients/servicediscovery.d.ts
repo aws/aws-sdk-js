@@ -309,7 +309,6 @@ declare namespace ServiceDiscovery {
     TTL: RecordTTL;
   }
   export type DnsRecordList = DnsRecord[];
-  export type ErrorMessage = string;
   export type FailureThreshold = number;
   export type FilterCondition = "EQ"|"IN"|"BETWEEN"|string;
   export type FilterValue = string;

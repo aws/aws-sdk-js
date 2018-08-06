@@ -408,7 +408,6 @@ declare namespace ElastiCache {
     Name?: String;
   }
   export type AvailabilityZonesList = String[];
-  export type AwsQueryErrorMessage = string;
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
   export interface CacheCluster {

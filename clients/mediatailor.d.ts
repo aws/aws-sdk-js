@@ -69,8 +69,6 @@ declare namespace MediaTailor {
   }
   export interface DeletePlaybackConfigurationResponse {
   }
-  export interface Empty {
-  }
   export interface GetPlaybackConfigurationRequest {
     /**
      * The identifier for the configuration.
@@ -209,11 +207,7 @@ declare namespace MediaTailor {
      */
     VideoContentSourceUrl?: __string;
   }
-  export type __boolean = boolean;
-  export type __double = number;
-  export type __integer = number;
   export type __listOfPlaybackConfigurations = PlaybackConfiguration[];
-  export type __long = number;
   export type __string = string;
   export type __integerMin1Max100 = number;
   /**

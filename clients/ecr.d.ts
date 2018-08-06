@@ -476,7 +476,6 @@ declare namespace ECR {
     nextToken?: NextToken;
   }
   export type EvaluationTimestamp = Date;
-  export type ExceptionMessage = string;
   export type ExpirationTimestamp = Date;
   export type ForceFlag = boolean;
   export type GetAuthorizationTokenRegistryIdList = RegistryId[];

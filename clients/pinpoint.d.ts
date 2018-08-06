@@ -4168,7 +4168,6 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   export type ListOfTreatmentResource = TreatmentResource[];
   export type ListOfWriteTreatmentResource = WriteTreatmentResource[];
   export type ListOf__string = __string[];
-  export type __long = number;
   export type MapOfAddressConfiguration = {[key: string]: AddressConfiguration};
   export type MapOfAttributeDimension = {[key: string]: AttributeDimension};
   export type MapOfChannelResponse = {[key: string]: ChannelResponse};
@@ -4182,8 +4181,6 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   export type MapOfMapOfEndpointMessageResult = {[key: string]: MapOfEndpointMessageResult};
   export type MapOf__string = {[key: string]: __string};
   export type __string = string;
-  export type __timestampIso8601 = Date;
-  export type __timestampUnix = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -146,7 +146,6 @@ declare namespace SMS {
   }
   export interface DisassociateConnectorResponse {
   }
-  export type ErrorMessage = string;
   export type Frequency = number;
   export interface GetConnectorsRequest {
     nextToken?: NextToken;

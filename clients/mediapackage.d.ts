@@ -117,34 +117,6 @@ declare namespace MediaPackage {
      */
     Id?: __string;
   }
-  export interface ChannelCreateParameters {
-    /**
-     * A short text description of the Channel.
-     */
-    Description?: __string;
-    /**
-     * The ID of the Channel. The ID must be unique within the region and it
-cannot be changed after a Channel is created.
-
-     */
-    Id: __string;
-  }
-  export interface ChannelList {
-    /**
-     * A list of Channel records.
-     */
-    Channels?: __listOfChannel;
-    /**
-     * A token that can be used to resume pagination from the end of the collection.
-     */
-    NextToken?: __string;
-  }
-  export interface ChannelUpdateParameters {
-    /**
-     * A short text description of the Channel.
-     */
-    Description?: __string;
-  }
   export interface CmafEncryption {
     /**
      * Time (in seconds) between each encryption key rotation.
@@ -737,88 +709,6 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
-  export interface OriginEndpointCreateParameters {
-    /**
-     * The ID of the Channel that the OriginEndpoint will be associated with.
-This cannot be changed after the OriginEndpoint is created.
-
-     */
-    ChannelId: __string;
-    CmafPackage?: CmafPackageCreateOrUpdateParameters;
-    DashPackage?: DashPackage;
-    /**
-     * A short text description of the OriginEndpoint.
-     */
-    Description?: __string;
-    HlsPackage?: HlsPackage;
-    /**
-     * The ID of the OriginEndpoint.  The ID must be unique within the region
-and it cannot be changed after the OriginEndpoint is created.
-
-     */
-    Id: __string;
-    /**
-     * A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
-     */
-    ManifestName?: __string;
-    MssPackage?: MssPackage;
-    /**
-     * Maximum duration (seconds) of content to retain for startover playback.
-If not specified, startover playback will be disabled for the OriginEndpoint.
-
-     */
-    StartoverWindowSeconds?: __integer;
-    /**
-     * Amount of delay (seconds) to enforce on the playback of live content.
-If not specified, there will be no time delay in effect for the OriginEndpoint.
-
-     */
-    TimeDelaySeconds?: __integer;
-    /**
-     * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
-     */
-    Whitelist?: __listOf__string;
-  }
-  export interface OriginEndpointList {
-    /**
-     * A token that can be used to resume pagination from the end of the collection.
-     */
-    NextToken?: __string;
-    /**
-     * A list of OriginEndpoint records.
-     */
-    OriginEndpoints?: __listOfOriginEndpoint;
-  }
-  export interface OriginEndpointUpdateParameters {
-    CmafPackage?: CmafPackageCreateOrUpdateParameters;
-    DashPackage?: DashPackage;
-    /**
-     * A short text description of the OriginEndpoint.
-     */
-    Description?: __string;
-    HlsPackage?: HlsPackage;
-    /**
-     * A short string that will be appended to the end of the Endpoint URL.
-     */
-    ManifestName?: __string;
-    MssPackage?: MssPackage;
-    /**
-     * Maximum duration (in seconds) of content to retain for startover playback.
-If not specified, startover playback will be disabled for the OriginEndpoint.
-
-     */
-    StartoverWindowSeconds?: __integer;
-    /**
-     * Amount of delay (in seconds) to enforce on the playback of live content.
-If not specified, there will be no time delay in effect for the OriginEndpoint.
-
-     */
-    TimeDelaySeconds?: __integer;
-    /**
-     * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
-     */
-    Whitelist?: __listOf__string;
-  }
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
   export type Profile = "NONE"|"HBBTV_1_5"|string;
   export interface RotateChannelCredentialsRequest {
@@ -984,7 +874,6 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   }
   export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;
-  export type __double = number;
   export type __integer = number;
   export type __listOfChannel = Channel[];
   export type __listOfHlsManifest = HlsManifest[];
@@ -993,7 +882,6 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   export type __listOfOriginEndpoint = OriginEndpoint[];
   export type __listOf__PeriodTriggersElement = __PeriodTriggersElement[];
   export type __listOf__string = __string[];
-  export type __long = number;
   export type __string = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

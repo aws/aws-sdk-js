@@ -305,7 +305,6 @@ declare class Inspector extends Service {
   updateAssessmentTarget(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace Inspector {
-  export type AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_TARGET"|"ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE"|"ACCESS_DENIED_TO_ASSESSMENT_RUN"|"ACCESS_DENIED_TO_FINDING"|"ACCESS_DENIED_TO_RESOURCE_GROUP"|"ACCESS_DENIED_TO_RULES_PACKAGE"|"ACCESS_DENIED_TO_SNS_TOPIC"|"ACCESS_DENIED_TO_IAM_ROLE"|string;
   export interface AddAttributesToFindingsRequest {
     /**
      * The ARNs that specify the findings that you want to assign attributes to.
@@ -323,17 +322,6 @@ declare namespace Inspector {
     failedItems: FailedItems;
   }
   export type AddRemoveAttributesFindingArnList = Arn[];
-  export interface AgentAlreadyRunningAssessment {
-    /**
-     * ID of the agent that is running on an EC2 instance that is already participating in another started assessment run.
-     */
-    agentId: AgentId;
-    /**
-     * The ARN of the assessment run that has already been started.
-     */
-    assessmentRunArn: Arn;
-  }
-  export type AgentAlreadyRunningAssessmentList = AgentAlreadyRunningAssessment[];
   export interface AgentFilter {
     /**
      * The current health state of the agent. Values can be set to HEALTHY or UNHEALTHY.
@@ -515,7 +503,6 @@ declare namespace Inspector {
     stateChangeTimeRange?: TimestampRange;
   }
   export type AssessmentRunFindingCounts = {[key: string]: FindingCount};
-  export type AssessmentRunInProgressArnList = Arn[];
   export type AssessmentRunList = AssessmentRun[];
   export type AssessmentRunName = string;
   export interface AssessmentRunNotification {
@@ -920,7 +907,6 @@ declare namespace Inspector {
      */
     maxSeconds?: AssessmentRunDuration;
   }
-  export type ErrorMessage = string;
   export interface EventSubscription {
     /**
      * The event for which Amazon Simple Notification Service (SNS) notifications are sent.
@@ -1194,13 +1180,10 @@ declare namespace Inspector {
      */
     rulesPackageArn?: Arn;
   }
-  export type InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP"|"ROLE_DOES_NOT_HAVE_CORRECT_POLICY"|string;
-  export type InvalidInputErrorCode = "INVALID_ASSESSMENT_TARGET_ARN"|"INVALID_ASSESSMENT_TEMPLATE_ARN"|"INVALID_ASSESSMENT_RUN_ARN"|"INVALID_FINDING_ARN"|"INVALID_RESOURCE_GROUP_ARN"|"INVALID_RULES_PACKAGE_ARN"|"INVALID_RESOURCE_ARN"|"INVALID_SNS_TOPIC_ARN"|"INVALID_IAM_ROLE_ARN"|"INVALID_ASSESSMENT_TARGET_NAME"|"INVALID_ASSESSMENT_TARGET_NAME_PATTERN"|"INVALID_ASSESSMENT_TEMPLATE_NAME"|"INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN"|"INVALID_ASSESSMENT_TEMPLATE_DURATION"|"INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE"|"INVALID_ASSESSMENT_RUN_DURATION_RANGE"|"INVALID_ASSESSMENT_RUN_START_TIME_RANGE"|"INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE"|"INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE"|"INVALID_ASSESSMENT_RUN_STATE"|"INVALID_TAG"|"INVALID_TAG_KEY"|"INVALID_TAG_VALUE"|"INVALID_RESOURCE_GROUP_TAG_KEY"|"INVALID_RESOURCE_GROUP_TAG_VALUE"|"INVALID_ATTRIBUTE"|"INVALID_USER_ATTRIBUTE"|"INVALID_USER_ATTRIBUTE_KEY"|"INVALID_USER_ATTRIBUTE_VALUE"|"INVALID_PAGINATION_TOKEN"|"INVALID_MAX_RESULTS"|"INVALID_AGENT_ID"|"INVALID_AUTO_SCALING_GROUP"|"INVALID_RULE_NAME"|"INVALID_SEVERITY"|"INVALID_LOCALE"|"INVALID_EVENT"|"ASSESSMENT_TARGET_NAME_ALREADY_TAKEN"|"ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN"|"INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS"|"INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS"|"INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS"|"INVALID_NUMBER_OF_FINDING_ARNS"|"INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS"|"INVALID_NUMBER_OF_RULES_PACKAGE_ARNS"|"INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES"|"INVALID_NUMBER_OF_TAGS"|"INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS"|"INVALID_NUMBER_OF_ATTRIBUTES"|"INVALID_NUMBER_OF_USER_ATTRIBUTES"|"INVALID_NUMBER_OF_AGENT_IDS"|"INVALID_NUMBER_OF_AUTO_SCALING_GROUPS"|"INVALID_NUMBER_OF_RULE_NAMES"|"INVALID_NUMBER_OF_SEVERITIES"|string;
   export type IocConfidence = number;
   export type Ipv4Address = string;
   export type Ipv4AddressList = Ipv4Address[];
   export type KernelVersion = string;
-  export type LimitExceededErrorCode = "ASSESSMENT_TARGET_LIMIT_EXCEEDED"|"ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED"|"ASSESSMENT_RUN_LIMIT_EXCEEDED"|"RESOURCE_GROUP_LIMIT_EXCEEDED"|"EVENT_SUBSCRIPTION_LIMIT_EXCEEDED"|string;
   export interface ListAssessmentRunAgentsRequest {
     /**
      * The ARN that specifies the assessment run whose agents you want to list.
@@ -1426,7 +1409,6 @@ declare namespace Inspector {
   export type Message = string;
   export type MessageType = string;
   export type NamePattern = string;
-  export type NoSuchEntityErrorCode = "ASSESSMENT_TARGET_DOES_NOT_EXIST"|"ASSESSMENT_TEMPLATE_DOES_NOT_EXIST"|"ASSESSMENT_RUN_DOES_NOT_EXIST"|"FINDING_DOES_NOT_EXIST"|"RESOURCE_GROUP_DOES_NOT_EXIST"|"RULES_PACKAGE_DOES_NOT_EXIST"|"SNS_TOPIC_DOES_NOT_EXIST"|"IAM_ROLE_DOES_NOT_EXIST"|string;
   export type NumericSeverity = number;
   export type NumericVersion = number;
   export type OperatingSystem = string;

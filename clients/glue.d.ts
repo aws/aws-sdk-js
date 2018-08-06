@@ -2881,7 +2881,6 @@ declare namespace Glue {
   export type MaxConcurrentRuns = number;
   export type MaxRetries = number;
   export type MessagePrefix = string;
-  export type MessageString = string;
   export type MillisecondsCount = number;
   export type NameString = string;
   export type NameStringList = NameString[];

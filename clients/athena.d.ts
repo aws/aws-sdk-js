@@ -487,7 +487,6 @@ declare namespace Athena {
   export interface StopQueryExecutionOutput {
   }
   export type String = string;
-  export type ThrottleReason = "CONCURRENT_QUERY_LIMIT_EXCEEDED"|string;
   export type Token = string;
   export interface UnprocessedNamedQueryId {
     /**

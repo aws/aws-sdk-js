@@ -518,7 +518,6 @@ declare namespace KMS {
   export type EncryptionContextKey = string;
   export type EncryptionContextType = {[key: string]: EncryptionContextValue};
   export type EncryptionContextValue = string;
-  export type ErrorMessageType = string;
   export type ExpirationModelType = "KEY_MATERIAL_EXPIRES"|"KEY_MATERIAL_DOES_NOT_EXPIRE"|string;
   export interface GenerateDataKeyRequest {
     /**

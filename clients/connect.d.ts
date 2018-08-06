@@ -492,7 +492,6 @@ declare namespace Connect {
     NextToken?: NextToken;
   }
   export type MaxResult1000 = number;
-  export type Message = string;
   export type NextToken = string;
   export type Password = string;
   export type PhoneNumber = string;

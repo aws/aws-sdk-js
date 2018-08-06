@@ -952,9 +952,6 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Url?: __string;
   }
-  export interface ExceptionBody {
-    Message?: __string;
-  }
   export type F4vMoovPlacement = "PROGRESSIVE_DOWNLOAD"|"NORMAL"|string;
   export interface F4vSettings {
     MoovPlacement?: F4vMoovPlacement;
@@ -2658,8 +2655,6 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     SampleRate?: __integerMin8000Max192000;
   }
-  export type __boolean = boolean;
-  export type __double = number;
   export type __doubleMin0 = number;
   export type __doubleMinNegative59Max0 = number;
   export type __doubleMinNegative60Max3 = number;
@@ -2755,7 +2750,6 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __listOf__string = __string[];
   export type __listOf__stringMin1 = __stringMin1[];
   export type __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12[];
-  export type __long = number;
   export type __mapOfAudioSelector = {[key: string]: AudioSelector};
   export type __mapOfAudioSelectorGroup = {[key: string]: AudioSelectorGroup};
   export type __mapOfCaptionSelector = {[key: string]: CaptionSelector};
@@ -2784,7 +2778,6 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM = string;
   export type __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE = string;
   export type __stringPatternWS = string;
-  export type __timestampIso8601 = Date;
   export type __timestampUnix = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

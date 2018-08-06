@@ -227,7 +227,6 @@ declare namespace XRay {
   export type EncryptionKeyId = string;
   export type EncryptionStatus = "UPDATING"|"ACTIVE"|string;
   export type EncryptionType = "NONE"|"KMS"|string;
-  export type ErrorMessage = string;
   export interface ErrorStatistics {
     /**
      * The number of requests that failed with a 419 throttling status code.

@@ -1203,8 +1203,6 @@ declare namespace WorkDocs {
   export type DocumentVersionMetadataList = DocumentVersionMetadata[];
   export type DocumentVersionStatus = "ACTIVE"|string;
   export type EmailAddressType = string;
-  export type EntityIdList = IdType[];
-  export type ErrorMessageType = string;
   export type FieldNamesType = string;
   export type FolderContentType = "ALL"|"DOCUMENT"|"FOLDER"|string;
   export interface FolderMetadata {

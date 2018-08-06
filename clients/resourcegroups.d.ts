@@ -153,7 +153,6 @@ declare namespace ResourceGroups {
      */
     Group?: Group;
   }
-  export type ErrorMessage = string;
   export interface GetGroupInput {
     /**
      * The name of the resource group.

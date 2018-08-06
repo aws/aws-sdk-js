@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.286.2-->
+<!--LATEST=2.287.0-->
 <!--ENTRYINSERT-->
+
+## 2.287.0
+* bugfix: Typings: Updates typings-generator to remove unused model types.
+* feature: DynamoDB:  Amazon DynamoDB Point-in-time recovery (PITR) provides continuous backups of your table data. DynamoDB now supports the ability to self-restore a deleted PITR enabled table. Now, when a table with PITR enabled is deleted, a system backup is automatically created and retained for 35 days (at no additional cost). System backups allow you to restore the deleted PITR enabled table to the state it was just before the point of deletion. For more information, see the Amazon DynamoDB Developer Guide.
+* feature: Health: Updates the ARN structure vended by AWS Health API. All ARNs will now include the service and type code of the associated event, as vended by DescribeEventTypes.
 
 ## 2.286.2
 * bugfix: type: remove undefined exceptions from SubscribeToShardEventStream

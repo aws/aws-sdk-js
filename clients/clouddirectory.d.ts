@@ -1234,7 +1234,6 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
   }
-  export type BatchOperationIndex = number;
   export interface BatchReadException {
     /**
      * A type of exception, such as InvalidArnException.
@@ -1427,7 +1426,6 @@ declare namespace CloudDirectory {
      */
     ObjectIdentifier?: ObjectIdentifier;
   }
-  export type BatchWriteExceptionType = "InternalServiceException"|"ValidationException"|"InvalidArnException"|"LinkNameAlreadyInUseException"|"StillContainsLinksException"|"FacetValidationException"|"ObjectNotDetachedException"|"ResourceNotFoundException"|"AccessDeniedException"|"InvalidAttachmentException"|"NotIndexException"|"NotNodeException"|"IndexedAttributeMissingException"|"ObjectAlreadyDetachedException"|"NotPolicyException"|"DirectoryNotEnabledException"|"LimitExceededException"|"UnsupportedIndexTypeException"|string;
   export interface BatchWriteOperation {
     /**
      * Creates an object.

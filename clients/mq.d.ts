@@ -267,74 +267,6 @@ declare namespace MQ {
      */
     Pending?: ConfigurationId;
   }
-  export interface CreateBrokerInput {
-    /**
-     * Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
-     */
-    AutoMinorVersionUpgrade?: __boolean;
-    /**
-     * Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
-     */
-    BrokerName?: __string;
-    /**
-     * A list of information about the configuration.
-     */
-    Configuration?: ConfigurationId;
-    /**
-     * The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn't require idempotency.
-     */
-    CreatorRequestId?: __string;
-    /**
-     * Required. The deployment mode of the broker.
-     */
-    DeploymentMode?: DeploymentMode;
-    /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
-     */
-    EngineType?: EngineType;
-    /**
-     * Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
-     */
-    EngineVersion?: __string;
-    /**
-     * Required. The broker's instance type.
-     */
-    HostInstanceType?: __string;
-    /**
-     * Enables Amazon CloudWatch logging for brokers.
-     */
-    Logs?: Logs;
-    /**
-     * The parameters that determine the WeeklyStartTime.
-     */
-    MaintenanceWindowStartTime?: WeeklyStartTime;
-    /**
-     * Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
-     */
-    PubliclyAccessible?: __boolean;
-    /**
-     * The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
-     */
-    SecurityGroups?: __listOf__string;
-    /**
-     * The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
-     */
-    SubnetIds?: __listOf__string;
-    /**
-     * Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
-     */
-    Users?: __listOfUser;
-  }
-  export interface CreateBrokerOutput {
-    /**
-     * The Amazon Resource Name (ARN) of the broker.
-     */
-    BrokerArn?: __string;
-    /**
-     * The unique ID that Amazon MQ generates for the broker.
-     */
-    BrokerId?: __string;
-  }
   export interface CreateBrokerRequest {
     /**
      * Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
@@ -403,42 +335,6 @@ declare namespace MQ {
      */
     BrokerId?: __string;
   }
-  export interface CreateConfigurationInput {
-    /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
-     */
-    EngineType?: EngineType;
-    /**
-     * Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
-     */
-    EngineVersion?: __string;
-    /**
-     * Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
-     */
-    Name?: __string;
-  }
-  export interface CreateConfigurationOutput {
-    /**
-     * Required. The Amazon Resource Name (ARN) of the configuration.
-     */
-    Arn?: __string;
-    /**
-     * Required. The date and time of the configuration.
-     */
-    Created?: __timestampIso8601;
-    /**
-     * Required. The unique ID that Amazon MQ generates for the configuration.
-     */
-    Id?: __string;
-    /**
-     * The latest revision of the configuration.
-     */
-    LatestRevision?: ConfigurationRevision;
-    /**
-     * Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
-     */
-    Name?: __string;
-  }
   export interface CreateConfigurationRequest {
     /**
      * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
@@ -475,20 +371,6 @@ declare namespace MQ {
      */
     Name?: __string;
   }
-  export interface CreateUserInput {
-    /**
-     * Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-     */
-    ConsoleAccess?: __boolean;
-    /**
-     * The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
-     */
-    Groups?: __listOf__string;
-    /**
-     * Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.
-     */
-    Password?: __string;
-  }
   export interface CreateUserRequest {
     /**
      * The unique ID that Amazon MQ generates for the broker.
@@ -514,12 +396,6 @@ declare namespace MQ {
   export interface CreateUserResponse {
   }
   export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
-  export interface DeleteBrokerOutput {
-    /**
-     * The unique ID that Amazon MQ generates for the broker.
-     */
-    BrokerId?: __string;
-  }
   export interface DeleteBrokerRequest {
     /**
      * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
@@ -545,80 +421,6 @@ declare namespace MQ {
   export interface DeleteUserResponse {
   }
   export type DeploymentMode = "SINGLE_INSTANCE"|"ACTIVE_STANDBY_MULTI_AZ"|string;
-  export interface DescribeBrokerOutput {
-    /**
-     * Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
-     */
-    AutoMinorVersionUpgrade?: __boolean;
-    /**
-     * The Amazon Resource Name (ARN) of the broker.
-     */
-    BrokerArn?: __string;
-    /**
-     * The unique ID that Amazon MQ generates for the broker.
-     */
-    BrokerId?: __string;
-    /**
-     * A list of information about allocated brokers.
-     */
-    BrokerInstances?: __listOfBrokerInstance;
-    /**
-     * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
-     */
-    BrokerName?: __string;
-    /**
-     * The status of the broker.
-     */
-    BrokerState?: BrokerState;
-    /**
-     * The list of all revisions for the specified configuration.
-     */
-    Configurations?: Configurations;
-    /**
-     * The time when the broker was created.
-     */
-    Created?: __timestampIso8601;
-    /**
-     * Required. The deployment mode of the broker.
-     */
-    DeploymentMode?: DeploymentMode;
-    /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
-     */
-    EngineType?: EngineType;
-    /**
-     * The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
-     */
-    EngineVersion?: __string;
-    /**
-     * The broker's instance type.
-     */
-    HostInstanceType?: __string;
-    /**
-     * The list of information about logs currently enabled and pending to be deployed for the specified broker.
-     */
-    Logs?: LogsSummary;
-    /**
-     * The parameters that determine the WeeklyStartTime.
-     */
-    MaintenanceWindowStartTime?: WeeklyStartTime;
-    /**
-     * Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
-     */
-    PubliclyAccessible?: __boolean;
-    /**
-     * Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
-     */
-    SecurityGroups?: __listOf__string;
-    /**
-     * The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
-     */
-    SubnetIds?: __listOf__string;
-    /**
-     * The list of all ActiveMQ usernames for the specified broker.
-     */
-    Users?: __listOfUserSummary;
-  }
   export interface DescribeBrokerRequest {
     /**
      * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
@@ -739,24 +541,6 @@ declare namespace MQ {
      */
     Name?: __string;
   }
-  export interface DescribeConfigurationRevisionOutput {
-    /**
-     * Required. The unique ID that Amazon MQ generates for the configuration.
-     */
-    ConfigurationId?: __string;
-    /**
-     * Required. The date and time of the configuration.
-     */
-    Created?: __timestampIso8601;
-    /**
-     * Required. The base64-encoded XML configuration.
-     */
-    Data?: __string;
-    /**
-     * The description of the configuration.
-     */
-    Description?: __string;
-  }
   export interface DescribeConfigurationRevisionRequest {
     /**
      * The unique ID that Amazon MQ generates for the configuration.
@@ -784,28 +568,6 @@ declare namespace MQ {
      * The description of the configuration.
      */
     Description?: __string;
-  }
-  export interface DescribeUserOutput {
-    /**
-     * Required. The unique ID that Amazon MQ generates for the broker.
-     */
-    BrokerId?: __string;
-    /**
-     * Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-     */
-    ConsoleAccess?: __boolean;
-    /**
-     * The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
-     */
-    Groups?: __listOf__string;
-    /**
-     * The status of the changes pending for the ActiveMQ user.
-     */
-    Pending?: UserPendingChanges;
-    /**
-     * Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
-     */
-    Username?: __string;
   }
   export interface DescribeUserRequest {
     /**
@@ -840,26 +602,6 @@ declare namespace MQ {
     Username?: __string;
   }
   export type EngineType = "ACTIVEMQ"|string;
-  export interface Error {
-    /**
-     * The attribute which caused the error.
-     */
-    ErrorAttribute?: __string;
-    /**
-     * The explanation of the error.
-     */
-    Message?: __string;
-  }
-  export interface ListBrokersOutput {
-    /**
-     * A list of information about all brokers.
-     */
-    BrokerSummaries?: __listOfBrokerSummary;
-    /**
-     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
-     */
-    NextToken?: __string;
-  }
   export interface ListBrokersRequest {
     /**
      * The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
@@ -879,24 +621,6 @@ declare namespace MQ {
      * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
      */
     NextToken?: __string;
-  }
-  export interface ListConfigurationRevisionsOutput {
-    /**
-     * The unique ID that Amazon MQ generates for the configuration.
-     */
-    ConfigurationId?: __string;
-    /**
-     * The maximum number of configuration revisions that can be returned per page (20 by default). This value must be an integer from 5 to 100.
-     */
-    MaxResults?: __integer;
-    /**
-     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
-     */
-    NextToken?: __string;
-    /**
-     * The list of all revisions for the specified configuration.
-     */
-    Revisions?: __listOfConfigurationRevision;
   }
   export interface ListConfigurationRevisionsRequest {
     /**
@@ -930,20 +654,6 @@ declare namespace MQ {
      */
     Revisions?: __listOfConfigurationRevision;
   }
-  export interface ListConfigurationsOutput {
-    /**
-     * The list of all revisions for the specified configuration.
-     */
-    Configurations?: __listOfConfiguration;
-    /**
-     * The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
-     */
-    MaxResults?: __integer;
-    /**
-     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
-     */
-    NextToken?: __string;
-  }
   export interface ListConfigurationsRequest {
     /**
      * The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
@@ -967,24 +677,6 @@ declare namespace MQ {
      * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
      */
     NextToken?: __string;
-  }
-  export interface ListUsersOutput {
-    /**
-     * Required. The unique ID that Amazon MQ generates for the broker.
-     */
-    BrokerId?: __string;
-    /**
-     * Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
-     */
-    MaxResults?: __integerMin5Max100;
-    /**
-     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
-     */
-    NextToken?: __string;
-    /**
-     * Required. The list of all ActiveMQ usernames for the specified broker.
-     */
-    Users?: __listOfUserSummary;
   }
   export interface ListUsersRequest {
     /**
@@ -1084,30 +776,6 @@ declare namespace MQ {
     Reason?: SanitizationWarningReason;
   }
   export type SanitizationWarningReason = "DISALLOWED_ELEMENT_REMOVED"|"DISALLOWED_ATTRIBUTE_REMOVED"|"INVALID_ATTRIBUTE_VALUE_REMOVED"|string;
-  export interface UpdateBrokerInput {
-    /**
-     * A list of information about the configuration.
-     */
-    Configuration?: ConfigurationId;
-    /**
-     * Enables Amazon CloudWatch logging for brokers.
-     */
-    Logs?: Logs;
-  }
-  export interface UpdateBrokerOutput {
-    /**
-     * Required. The unique ID that Amazon MQ generates for the broker.
-     */
-    BrokerId?: __string;
-    /**
-     * The ID of the updated configuration.
-     */
-    Configuration?: ConfigurationId;
-    /**
-     * The list of information about logs to be enabled for the specified broker.
-     */
-    Logs?: Logs;
-  }
   export interface UpdateBrokerRequest {
     /**
      * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
@@ -1135,42 +803,6 @@ declare namespace MQ {
      * The list of information about logs to be enabled for the specified broker.
      */
     Logs?: Logs;
-  }
-  export interface UpdateConfigurationInput {
-    /**
-     * Required. The base64-encoded XML configuration.
-     */
-    Data?: __string;
-    /**
-     * The description of the configuration.
-     */
-    Description?: __string;
-  }
-  export interface UpdateConfigurationOutput {
-    /**
-     * Required. The Amazon Resource Name (ARN) of the configuration.
-     */
-    Arn?: __string;
-    /**
-     * Required. The date and time of the configuration.
-     */
-    Created?: __timestampIso8601;
-    /**
-     * Required. The unique ID that Amazon MQ generates for the configuration.
-     */
-    Id?: __string;
-    /**
-     * The latest revision of the configuration.
-     */
-    LatestRevision?: ConfigurationRevision;
-    /**
-     * Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
-     */
-    Name?: __string;
-    /**
-     * The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
-     */
-    Warnings?: __listOfSanitizationWarning;
   }
   export interface UpdateConfigurationRequest {
     /**
@@ -1211,20 +843,6 @@ declare namespace MQ {
      * The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
      */
     Warnings?: __listOfSanitizationWarning;
-  }
-  export interface UpdateUserInput {
-    /**
-     * Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-     */
-    ConsoleAccess?: __boolean;
-    /**
-     * The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
-     */
-    Groups?: __listOf__string;
-    /**
-     * The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.
-     */
-    Password?: __string;
   }
   export interface UpdateUserRequest {
     /**
@@ -1307,7 +925,6 @@ declare namespace MQ {
     TimeZone?: __string;
   }
   export type __boolean = boolean;
-  export type __double = number;
   export type __integer = number;
   export type __integerMin5Max100 = number;
   export type __listOfBrokerInstance = BrokerInstance[];
@@ -1319,10 +936,8 @@ declare namespace MQ {
   export type __listOfUser = User[];
   export type __listOfUserSummary = UserSummary[];
   export type __listOf__string = __string[];
-  export type __long = number;
   export type __string = string;
   export type __timestampIso8601 = Date;
-  export type __timestampUnix = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

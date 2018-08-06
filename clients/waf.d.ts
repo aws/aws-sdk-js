@@ -1789,9 +1789,6 @@ declare namespace WAF {
   export type Negated = boolean;
   export type NextMarker = string;
   export type PaginationLimit = number;
-  export type ParameterExceptionField = "CHANGE_ACTION"|"WAF_ACTION"|"WAF_OVERRIDE_ACTION"|"PREDICATE_TYPE"|"IPSET_TYPE"|"BYTE_MATCH_FIELD_TYPE"|"SQL_INJECTION_MATCH_FIELD_TYPE"|"BYTE_MATCH_TEXT_TRANSFORMATION"|"BYTE_MATCH_POSITIONAL_CONSTRAINT"|"SIZE_CONSTRAINT_COMPARISON_OPERATOR"|"GEO_MATCH_LOCATION_TYPE"|"GEO_MATCH_LOCATION_VALUE"|"RATE_KEY"|"RULE_TYPE"|"NEXT_MARKER"|string;
-  export type ParameterExceptionParameter = string;
-  export type ParameterExceptionReason = "INVALID_OPTION"|"ILLEGAL_COMBINATION"|string;
   export type PolicyString = string;
   export type PopulationSize = number;
   export type PositionalConstraint = "EXACTLY"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CONTAINS_WORD"|string;
@@ -2529,7 +2526,6 @@ declare namespace WAF {
     TextTransformation: TextTransformation;
   }
   export type XssMatchTuples = XssMatchTuple[];
-  export type errorMessage = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

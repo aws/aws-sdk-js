@@ -5,7 +5,6 @@ import {Service} from '../lib/service';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
-import {EventStream} from '../lib/event-stream/event-stream';
 interface Blob {}
 declare class Kinesis extends Service {
   /**
@@ -871,11 +870,6 @@ declare namespace Kinesis {
      */
     KeyId: KeyId;
   }
-  export interface StartingPosition {
-    Type: ShardIteratorType;
-    SequenceNumber?: SequenceNumber;
-    Timestamp?: Timestamp;
-  }
   export interface StopStreamEncryptionInput {
     /**
      * The name of the stream on which to stop encrypting records.
@@ -978,38 +972,6 @@ declare namespace Kinesis {
   export type StreamName = string;
   export type StreamNameList = StreamName[];
   export type StreamStatus = "CREATING"|"DELETING"|"ACTIVE"|"UPDATING"|string;
-  export interface SubscribeToShardEvent {
-    /**
-     * 
-     */
-    Records: RecordList;
-    /**
-     * Use this as StartingSequenceNumber in the next call to SubscribeToShard.
-     */
-    ContinuationSequenceNumber: SequenceNumber;
-    /**
-     * The number of milliseconds the read records are from the tip of the stream, indicating how far behind current time the consumer is. A value of zero indicates that record processing is caught up, and there are no new records to process at this moment.
-     */
-    MillisBehindLatest: MillisBehindLatest;
-  }
-  export type SubscribeToShardEventStream = EventStream<{SubscribeToShardEvent?:SubscribeToShardEvent}>;
-  export interface SubscribeToShardInput {
-    /**
-     * For this parameter, use the value you obtained when you called RegisterStreamConsumer.
-     */
-    ConsumerARN: ConsumerARN;
-    /**
-     * The ID of the shard you want to subscribe to. To see a list of all the shards for a given stream, use ListShards.
-     */
-    ShardId: ShardId;
-    StartingPosition: StartingPosition;
-  }
-  export interface SubscribeToShardOutput {
-    /**
-     * The event stream that your consumer can use to read records from the shard.
-     */
-    EventStream: SubscribeToShardEventStream;
-  }
   export interface Tag {
     /**
      * A unique identifier for the tag. Maximum length: 128 characters. Valid characters: Unicode letters, digits, white space, _ . / = + - % @

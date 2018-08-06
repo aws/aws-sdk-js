@@ -49,7 +49,6 @@ declare namespace LexRuntime {
   export type ButtonValueStringWithLength = string;
   export type ContentType = "application/vnd.amazonaws.card.generic"|string;
   export type DialogState = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Fulfilled"|"ReadyForFulfillment"|"Failed"|string;
-  export type ErrorMessage = string;
   export interface GenericAttachment {
     /**
      * The title of the option.

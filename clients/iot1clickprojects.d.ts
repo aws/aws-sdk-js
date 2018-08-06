@@ -140,7 +140,6 @@ declare namespace IoT1ClickProjects {
   export type AttributeDefaultValue = string;
   export type AttributeName = string;
   export type AttributeValue = string;
-  export type Code = string;
   export interface CreatePlacementRequest {
     /**
      * The name of the placement to be created.
@@ -318,7 +317,6 @@ declare namespace IoT1ClickProjects {
     nextToken?: NextToken;
   }
   export type MaxResults = number;
-  export type Message = string;
   export type NextToken = string;
   export type PlacementAttributeMap = {[key: string]: AttributeValue};
   export interface PlacementDescription {

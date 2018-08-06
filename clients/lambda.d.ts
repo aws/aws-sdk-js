@@ -1047,7 +1047,6 @@ declare namespace Lambda {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
-  export type ThrottleReason = "ConcurrentInvocationLimitExceeded"|"FunctionInvocationRateLimitExceeded"|"ReservedFunctionConcurrentInvocationLimitExceeded"|"ReservedFunctionInvocationRateLimitExceeded"|"CallerRateLimitExceeded"|string;
   export type Timeout = number;
   export type Timestamp = string;
   export interface TracingConfig {

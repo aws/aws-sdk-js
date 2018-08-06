@@ -167,12 +167,6 @@ declare namespace IoT1ClickDevicesService {
     Type?: __string;
   }
   export type DeviceAttributes = {[key: string]: __string};
-  export interface DeviceClaimResponse {
-    /**
-     * The device's final claim state.
-     */
-    State?: __string;
-  }
   export interface DeviceDescription {
     /**
      * An array of zero or more elements of DeviceAttribute objects
@@ -207,17 +201,6 @@ declare namespace IoT1ClickDevicesService {
      */
     StdEvent?: __string;
   }
-  export interface DeviceEventsResponse {
-    /**
-     * An array of zero or more elements describing the event(s) associated with the
- device.
-     */
-    Events?: __listOfDeviceEvent;
-    /**
-     * The token to retrieve the next set of results.
-     */
-    NextToken?: __string;
-  }
   export interface DeviceMethod {
     /**
      * The type of the device, such as "button".
@@ -227,8 +210,6 @@ declare namespace IoT1ClickDevicesService {
      * The name of the method applicable to the deviceType.
      */
     MethodName?: __string;
-  }
-  export interface Empty {
   }
   export interface FinalizeDeviceClaimRequest {
     /**
@@ -376,17 +357,14 @@ declare namespace IoT1ClickDevicesService {
   export interface UpdateDeviceStateResponse {
   }
   export type __boolean = boolean;
-  export type __double = number;
   export type __doubleMin0Max100 = number;
   export type __integer = number;
   export type __listOfDeviceDescription = DeviceDescription[];
   export type __listOfDeviceEvent = DeviceEvent[];
   export type __listOfDeviceMethod = DeviceMethod[];
-  export type __long = number;
   export type __string = string;
   export type __stringMin12Max40 = string;
   export type __timestampIso8601 = Date;
-  export type __timestampUnix = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

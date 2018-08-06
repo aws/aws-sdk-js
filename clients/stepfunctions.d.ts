@@ -421,7 +421,6 @@ declare namespace StepFunctions {
     creationDate: Timestamp;
   }
   export type Error = string;
-  export type ErrorMessage = string;
   export type EventId = number;
   export interface ExecutionAbortedEventDetails {
     /**

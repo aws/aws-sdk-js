@@ -696,7 +696,6 @@ declare namespace Discovery {
     knownDependencyCount?: Long;
   }
   export type Long = number;
-  export type Message = string;
   export interface NeighborConnectionDetail {
     /**
      * The ID of the server that opened the network connection.

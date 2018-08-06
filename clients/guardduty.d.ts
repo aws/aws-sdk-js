@@ -747,16 +747,6 @@ declare namespace GuardDuty {
   export type Email = string;
   export type Enable = boolean;
   export type Eq = __string[];
-  export interface ErrorResponse {
-    /**
-     * The error message.
-     */
-    Message?: __string;
-    /**
-     * The error type.
-     */
-    Type?: __string;
-  }
   export type Feedback = "USEFUL"|"NOT_USEFUL"|string;
   export type FilterAction = "NOOP"|"ARCHIVE"|string;
   export type FilterDescription = string;
@@ -1737,12 +1727,10 @@ declare namespace GuardDuty {
   export type __double = number;
   export type __integer = number;
   export type __listOfPortProbeDetail = PortProbeDetail[];
-  export type __long = number;
   export type __mapOfCondition = {[key: string]: Condition};
   export type __mapOfCountBySeverityFindingStatistic = {[key: string]: CountBySeverityFindingStatistic};
   export type __string = string;
   export type __stringMin0Max64 = string;
-  export type __timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

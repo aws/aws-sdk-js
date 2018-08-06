@@ -516,7 +516,6 @@ declare namespace AppSync {
      */
     awsRegion: String;
   }
-  export type ErrorMessage = string;
   export type FieldLogLevel = "NONE"|"ERROR"|"ALL"|string;
   export interface GetDataSourceRequest {
     /**

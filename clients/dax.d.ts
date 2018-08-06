@@ -182,7 +182,6 @@ declare class DAX extends Service {
 }
 declare namespace DAX {
   export type AvailabilityZoneList = String[];
-  export type AwsQueryErrorMessage = string;
   export type ChangeType = "IMMEDIATE"|"REQUIRES_REBOOT"|string;
   export interface Cluster {
     /**

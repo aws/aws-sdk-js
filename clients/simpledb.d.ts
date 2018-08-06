@@ -217,7 +217,6 @@ declare namespace SimpleDB {
     Timestamp?: Integer;
   }
   export type DomainNameList = String[];
-  export type Float = number;
   export interface GetAttributesRequest {
     /**
      * The name of the domain in which to perform the operation.

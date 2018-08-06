@@ -328,7 +328,6 @@ declare namespace SecretsManager {
     VersionIdsToStages?: SecretVersionsToStagesMapType;
   }
   export type DescriptionType = string;
-  export type ErrorMessage = string;
   export type ExcludeCharactersType = string;
   export type ExcludeLowercaseType = boolean;
   export type ExcludeNumbersType = boolean;

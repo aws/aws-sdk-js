@@ -300,7 +300,6 @@ declare namespace TranscribeService {
      */
     TranscriptionJob?: TranscriptionJob;
   }
-  export type String = string;
   export interface Transcript {
     /**
      * The location where the transcription is stored. Use this URI to access the transcription. If you specified an S3 bucket in the OutputBucketName field when you created the job, this is the URI of that bucket. If you chose to store the transcription in Amazon Transcribe, this is a shareable URL that provides secure access to that location.
