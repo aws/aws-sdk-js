@@ -438,6 +438,10 @@
           "shape":"String",
           "documentation":"<p>The MD5 hash of the build artifact.</p> <p>You can use this hash along with a checksum tool to confirm both file integrity and authenticity.</p> <note> <p>This value is available only if the build project's <code>packaging</code> value is set to <code>ZIP</code>.</p> </note>"
         },
+        "overrideArtifactName":{
+          "shape":"WrapperBoolean",
+          "documentation":"<p> If this flag is set, a name specified in the buildspec file overrides the artifact name. The name specified in a buildspec file is calculated at build time and uses the Shell Command Language. For example, you can append a date and time to your artifact name so that it is always unique. </p>"
+        },
         "encryptionDisabled":{
           "shape":"WrapperBoolean",
           "documentation":"<p> Information that tells you if encryption for build artifacts is disabled. </p>"
@@ -1075,6 +1079,10 @@
         "packaging":{
           "shape":"ArtifactPackaging",
           "documentation":"<p>The type of build output artifact to create, as follows:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, then this value will be ignored if specified, because no build output will be produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>NONE</code>: AWS CodeBuild will create in the output bucket a folder containing the build output. This is the default if <code>packaging</code> is not specified.</p> </li> <li> <p> <code>ZIP</code>: AWS CodeBuild will create in the output bucket a ZIP file containing the build output.</p> </li> </ul> </li> </ul>"
+        },
+        "overrideArtifactName":{
+          "shape":"WrapperBoolean",
+          "documentation":"<p> If this flag is set, a name specified in the buildspec file overrides the artifact name. The name specified in a buildspec file is calculated at build time and uses the Shell Command Language. For example, you can append a date and time to your artifact name so that it is always unique. </p>"
         },
         "encryptionDisabled":{
           "shape":"WrapperBoolean",

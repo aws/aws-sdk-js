@@ -1539,11 +1539,11 @@ declare namespace SSM {
      */
     key: CommandFilterKey;
     /**
-     * The filter value. 
+     * The filter value. Valid values for each filter key are as follows:    InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see a list of command executions occurring July 7, 2018, and later.    InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see a list of command executions from before July 7, 2018.    Status: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:    Pending     InProgress     Success     Cancelled     Failed     TimedOut     Cancelling       DocumentName: Specify name of the SSM document for which you want to see command execution results. For example, specify AWS-RunPatchBaseline to see command executions that used this SSM document to perform security patching operations on instances.     ExecutionStage: Specify one of the following values:    Executing: Returns a list of command executions that are currently still running.    Complete: Returns a list of command exeuctions that have already completed.     
      */
     value: CommandFilterValue;
   }
-  export type CommandFilterKey = "InvokedAfter"|"InvokedBefore"|"Status"|string;
+  export type CommandFilterKey = "InvokedAfter"|"InvokedBefore"|"Status"|"ExecutionStage"|"DocumentName"|string;
   export type CommandFilterList = CommandFilter[];
   export type CommandFilterValue = string;
   export type CommandId = string;
@@ -5787,7 +5787,7 @@ declare namespace SSM {
      */
     TaskArn: MaintenanceWindowTaskArn;
     /**
-     * The role to assume when running the Maintenance Window task. If you do not specify a service role ARN, Systems Manager will use your account's service-linked role for Systems Manager by default. If no service-linked role for Systems Manager exists in your account, it will be created when you run RegisterTaskWithMaintenanceWindow without specifying a service role ARN. For more information, see Service-Linked Role Permissions for Systems Manager and Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks?  in the AWS Systems Manager User Guide.
+     * The role that should be assumed when executing the task.
      */
     ServiceRoleArn?: ServiceRole;
     /**
@@ -6577,7 +6577,7 @@ declare namespace SSM {
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
-     * The IAM service role ARN to modify. The system assumes this role during task execution. If you do not specify a service role ARN, Systems Manager will use your account's service-linked role for Systems Manager by default. If no service-linked role for Systems Manager exists in your account, it will be created when you run RegisterTaskWithMaintenanceWindow without specifying a service role ARN. For more information, see Service-Linked Role Permissions for Systems Manager and Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks?  in the AWS Systems Manager User Guide.
+     * The IAM service role ARN to modify. The system assumes this role during task execution. 
      */
     ServiceRoleArn?: ServiceRole;
     /**

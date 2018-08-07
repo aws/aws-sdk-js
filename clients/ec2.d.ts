@@ -37,11 +37,11 @@ declare class EC2 extends Service {
    */
   acceptVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.AcceptVpcPeeringConnectionResult) => void): Request<EC2.Types.AcceptVpcPeeringConnectionResult, AWSError>;
   /**
-   * Allocates an Elastic IP address. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region. If you release an Elastic IP address for use in a VPC, you might be able to recover it. To recover an Elastic IP address that you released, specify it in the Address parameter. Note that you cannot recover an Elastic IP address that you released after it is allocated to another AWS account. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
+   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
    */
   allocateAddress(params: EC2.Types.AllocateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
-   * Allocates an Elastic IP address. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region. If you release an Elastic IP address for use in a VPC, you might be able to recover it. To recover an Elastic IP address that you released, specify it in the Address parameter. Note that you cannot recover an Elastic IP address that you released after it is allocated to another AWS account. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
+   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
    */
   allocateAddress(callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
@@ -69,11 +69,11 @@ declare class EC2 extends Service {
    */
   assignPrivateIpAddresses(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates an Elastic IP address with an instance or a network interface. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
+   * Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
    */
   associateAddress(params: EC2.Types.AssociateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
   /**
-   * Associates an Elastic IP address with an instance or a network interface. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
+   * Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
    */
   associateAddress(callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
   /**
@@ -93,11 +93,11 @@ declare class EC2 extends Service {
    */
   associateIamInstanceProfile(callback?: (err: AWSError, data: EC2.Types.AssociateIamInstanceProfileResult) => void): Request<EC2.Types.AssociateIamInstanceProfileResult, AWSError>;
   /**
-   * Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table from the subnet later. A route table can be associated with multiple subnets. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table from the subnet later. A route table can be associated with multiple subnets. For more information, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   associateRouteTable(params: EC2.Types.AssociateRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.AssociateRouteTableResult) => void): Request<EC2.Types.AssociateRouteTableResult, AWSError>;
   /**
-   * Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table from the subnet later. A route table can be associated with multiple subnets. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table from the subnet later. A route table can be associated with multiple subnets. For more information, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   associateRouteTable(callback?: (err: AWSError, data: EC2.Types.AssociateRouteTableResult) => void): Request<EC2.Types.AssociateRouteTableResult, AWSError>;
   /**
@@ -125,11 +125,11 @@ declare class EC2 extends Service {
    */
   attachClassicLinkVpc(callback?: (err: AWSError, data: EC2.Types.AttachClassicLinkVpcResult) => void): Request<EC2.Types.AttachClassicLinkVpcResult, AWSError>;
   /**
-   * Attaches an Internet gateway to a VPC, enabling connectivity between the Internet and the VPC. For more information about your VPC and Internet gateway, see the Amazon Virtual Private Cloud User Guide.
+   * Attaches an internet gateway to a VPC, enabling connectivity between the internet and the VPC. For more information about your VPC and internet gateway, see the Amazon Virtual Private Cloud User Guide.
    */
   attachInternetGateway(params: EC2.Types.AttachInternetGatewayRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches an Internet gateway to a VPC, enabling connectivity between the Internet and the VPC. For more information about your VPC and Internet gateway, see the Amazon Virtual Private Cloud User Guide.
+   * Attaches an internet gateway to a VPC, enabling connectivity between the internet and the VPC. For more information about your VPC and internet gateway, see the Amazon Virtual Private Cloud User Guide.
    */
   attachInternetGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -285,27 +285,27 @@ declare class EC2 extends Service {
    */
   createDefaultSubnet(callback?: (err: AWSError, data: EC2.Types.CreateDefaultSubnetResult) => void): Request<EC2.Types.CreateDefaultSubnetResult, AWSError>;
   /**
-   * Creates a default VPC with a size /16 IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see Default VPC and Default Subnets in the Amazon Virtual Private Cloud User Guide. You cannot specify the components of the default VPC yourself. You can create a default VPC if you deleted your previous default VPC. You cannot have more than one default VPC per region.  If your account supports EC2-Classic, you cannot use this action to create a default VPC in a region that supports EC2-Classic. If you want a default VPC in a region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the Default VPCs FAQ.
+   * Creates a default VPC with a size /16 IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see Default VPC and Default Subnets in the Amazon Virtual Private Cloud User Guide. You cannot specify the components of the default VPC yourself. iIf you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region.  If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the Default VPCs FAQ.
    */
   createDefaultVpc(params: EC2.Types.CreateDefaultVpcRequest, callback?: (err: AWSError, data: EC2.Types.CreateDefaultVpcResult) => void): Request<EC2.Types.CreateDefaultVpcResult, AWSError>;
   /**
-   * Creates a default VPC with a size /16 IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see Default VPC and Default Subnets in the Amazon Virtual Private Cloud User Guide. You cannot specify the components of the default VPC yourself. You can create a default VPC if you deleted your previous default VPC. You cannot have more than one default VPC per region.  If your account supports EC2-Classic, you cannot use this action to create a default VPC in a region that supports EC2-Classic. If you want a default VPC in a region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the Default VPCs FAQ.
+   * Creates a default VPC with a size /16 IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see Default VPC and Default Subnets in the Amazon Virtual Private Cloud User Guide. You cannot specify the components of the default VPC yourself. iIf you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region.  If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the Default VPCs FAQ.
    */
   createDefaultVpc(callback?: (err: AWSError, data: EC2.Types.CreateDefaultVpcResult) => void): Request<EC2.Types.CreateDefaultVpcResult, AWSError>;
   /**
-   * Creates a set of DHCP options for your VPC. After creating the set, you must associate it with the VPC, causing all existing and new instances that you launch in the VPC to use this set of DHCP options. The following are the individual DHCP options you can specify. For more information about the options, see RFC 2132.    domain-name-servers - The IP addresses of up to four domain name servers, or AmazonProvidedDNS. The default DHCP option set specifies AmazonProvidedDNS. If specifying more than one domain name server, specify the IP addresses in a single parameter, separated by commas. If you want your instance to receive a custom DNS hostname as specified in domain-name, you must set domain-name-servers to a custom DNS server.    domain-name - If you're using AmazonProvidedDNS in us-east-1, specify ec2.internal. If you're using AmazonProvidedDNS in another region, specify region.compute.internal (for example, ap-northeast-1.compute.internal). Otherwise, specify a domain name (for example, MyCompany.com). This value is used to complete unqualified DNS hostnames. Important: Some Linux operating systems accept multiple domain names separated by spaces. However, Windows and other Linux operating systems treat the value as a single domain, which results in unexpected behavior. If your DHCP options set is associated with a VPC that has instances with multiple operating systems, specify only one domain name.    ntp-servers - The IP addresses of up to four Network Time Protocol (NTP) servers.    netbios-name-servers - The IP addresses of up to four NetBIOS name servers.    netbios-node-type - The NetBIOS node type (1, 2, 4, or 8). We recommend that you specify 2 (broadcast and multicast are not currently supported). For more information about these node types, see RFC 2132.   Your VPC automatically starts out with a set of DHCP options that includes only a DNS server that we provide (AmazonProvidedDNS). If you create a set of options, and if your VPC has an Internet gateway, make sure to set the domain-name-servers option either to AmazonProvidedDNS or to a domain name server of your choice. For more information about DHCP options, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a set of DHCP options for your VPC. After creating the set, you must associate it with the VPC, causing all existing and new instances that you launch in the VPC to use this set of DHCP options. The following are the individual DHCP options you can specify. For more information about the options, see RFC 2132.    domain-name-servers - The IP addresses of up to four domain name servers, or AmazonProvidedDNS. The default DHCP option set specifies AmazonProvidedDNS. If specifying more than one domain name server, specify the IP addresses in a single parameter, separated by commas. ITo have your instance to receive a custom DNS hostname as specified in domain-name, you must set domain-name-servers to a custom DNS server.    domain-name - If you're using AmazonProvidedDNS in us-east-1, specify ec2.internal. If you're using AmazonProvidedDNS in another region, specify region.compute.internal (for example, ap-northeast-1.compute.internal). Otherwise, specify a domain name (for example, MyCompany.com). This value is used to complete unqualified DNS hostnames. Important: Some Linux operating systems accept multiple domain names separated by spaces. However, Windows and other Linux operating systems treat the value as a single domain, which results in unexpected behavior. If your DHCP options set is associated with a VPC that has instances with multiple operating systems, specify only one domain name.    ntp-servers - The IP addresses of up to four Network Time Protocol (NTP) servers.    netbios-name-servers - The IP addresses of up to four NetBIOS name servers.    netbios-node-type - The NetBIOS node type (1, 2, 4, or 8). We recommend that you specify 2 (broadcast and multicast are not currently supported). For more information about these node types, see RFC 2132.   Your VPC automatically starts out with a set of DHCP options that includes only a DNS server that we provide (AmazonProvidedDNS). If you create a set of options, and if your VPC has an internet gateway, make sure to set the domain-name-servers option either to AmazonProvidedDNS or to a domain name server of your choice. For more information, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
    */
   createDhcpOptions(params: EC2.Types.CreateDhcpOptionsRequest, callback?: (err: AWSError, data: EC2.Types.CreateDhcpOptionsResult) => void): Request<EC2.Types.CreateDhcpOptionsResult, AWSError>;
   /**
-   * Creates a set of DHCP options for your VPC. After creating the set, you must associate it with the VPC, causing all existing and new instances that you launch in the VPC to use this set of DHCP options. The following are the individual DHCP options you can specify. For more information about the options, see RFC 2132.    domain-name-servers - The IP addresses of up to four domain name servers, or AmazonProvidedDNS. The default DHCP option set specifies AmazonProvidedDNS. If specifying more than one domain name server, specify the IP addresses in a single parameter, separated by commas. If you want your instance to receive a custom DNS hostname as specified in domain-name, you must set domain-name-servers to a custom DNS server.    domain-name - If you're using AmazonProvidedDNS in us-east-1, specify ec2.internal. If you're using AmazonProvidedDNS in another region, specify region.compute.internal (for example, ap-northeast-1.compute.internal). Otherwise, specify a domain name (for example, MyCompany.com). This value is used to complete unqualified DNS hostnames. Important: Some Linux operating systems accept multiple domain names separated by spaces. However, Windows and other Linux operating systems treat the value as a single domain, which results in unexpected behavior. If your DHCP options set is associated with a VPC that has instances with multiple operating systems, specify only one domain name.    ntp-servers - The IP addresses of up to four Network Time Protocol (NTP) servers.    netbios-name-servers - The IP addresses of up to four NetBIOS name servers.    netbios-node-type - The NetBIOS node type (1, 2, 4, or 8). We recommend that you specify 2 (broadcast and multicast are not currently supported). For more information about these node types, see RFC 2132.   Your VPC automatically starts out with a set of DHCP options that includes only a DNS server that we provide (AmazonProvidedDNS). If you create a set of options, and if your VPC has an Internet gateway, make sure to set the domain-name-servers option either to AmazonProvidedDNS or to a domain name server of your choice. For more information about DHCP options, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a set of DHCP options for your VPC. After creating the set, you must associate it with the VPC, causing all existing and new instances that you launch in the VPC to use this set of DHCP options. The following are the individual DHCP options you can specify. For more information about the options, see RFC 2132.    domain-name-servers - The IP addresses of up to four domain name servers, or AmazonProvidedDNS. The default DHCP option set specifies AmazonProvidedDNS. If specifying more than one domain name server, specify the IP addresses in a single parameter, separated by commas. ITo have your instance to receive a custom DNS hostname as specified in domain-name, you must set domain-name-servers to a custom DNS server.    domain-name - If you're using AmazonProvidedDNS in us-east-1, specify ec2.internal. If you're using AmazonProvidedDNS in another region, specify region.compute.internal (for example, ap-northeast-1.compute.internal). Otherwise, specify a domain name (for example, MyCompany.com). This value is used to complete unqualified DNS hostnames. Important: Some Linux operating systems accept multiple domain names separated by spaces. However, Windows and other Linux operating systems treat the value as a single domain, which results in unexpected behavior. If your DHCP options set is associated with a VPC that has instances with multiple operating systems, specify only one domain name.    ntp-servers - The IP addresses of up to four Network Time Protocol (NTP) servers.    netbios-name-servers - The IP addresses of up to four NetBIOS name servers.    netbios-node-type - The NetBIOS node type (1, 2, 4, or 8). We recommend that you specify 2 (broadcast and multicast are not currently supported). For more information about these node types, see RFC 2132.   Your VPC automatically starts out with a set of DHCP options that includes only a DNS server that we provide (AmazonProvidedDNS). If you create a set of options, and if your VPC has an internet gateway, make sure to set the domain-name-servers option either to AmazonProvidedDNS or to a domain name server of your choice. For more information, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
    */
   createDhcpOptions(callback?: (err: AWSError, data: EC2.Types.CreateDhcpOptionsResult) => void): Request<EC2.Types.CreateDhcpOptionsResult, AWSError>;
   /**
-   * [IPv6 only] Creates an egress-only Internet gateway for your VPC. An egress-only Internet gateway is used to enable outbound communication over IPv6 from instances in your VPC to the Internet, and prevents hosts outside of your VPC from initiating an IPv6 connection with your instance.
+   * [IPv6 only] Creates an egress-only internet gateway for your VPC. An egress-only internet gateway is used to enable outbound communication over IPv6 from instances in your VPC to the internet, and prevents hosts outside of your VPC from initiating an IPv6 connection with your instance.
    */
   createEgressOnlyInternetGateway(params: EC2.Types.CreateEgressOnlyInternetGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.CreateEgressOnlyInternetGatewayResult, AWSError>;
   /**
-   * [IPv6 only] Creates an egress-only Internet gateway for your VPC. An egress-only Internet gateway is used to enable outbound communication over IPv6 from instances in your VPC to the Internet, and prevents hosts outside of your VPC from initiating an IPv6 connection with your instance.
+   * [IPv6 only] Creates an egress-only internet gateway for your VPC. An egress-only internet gateway is used to enable outbound communication over IPv6 from instances in your VPC to the internet, and prevents hosts outside of your VPC from initiating an IPv6 connection with your instance.
    */
   createEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.CreateEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.CreateEgressOnlyInternetGatewayResult, AWSError>;
   /**
@@ -317,11 +317,11 @@ declare class EC2 extends Service {
    */
   createFleet(callback?: (err: AWSError, data: EC2.Types.CreateFleetResult) => void): Request<EC2.Types.CreateFleetResult, AWSError>;
   /**
-   * Creates one or more flow logs to capture IP traffic for a specific network interface, subnet, or VPC. Flow logs are delivered to a specified log group in Amazon CloudWatch Logs. If you specify a VPC or subnet in the request, a log stream is created in CloudWatch Logs for each network interface in the subnet or VPC. Log streams can include information about accepted and rejected traffic to a network interface. You can view the data in your log streams using Amazon CloudWatch Logs. In your request, you must also specify an IAM role that has permission to publish logs to CloudWatch Logs. For more information, see VPC Flow Logs in the Amazon Virtual Private Cloud User Guide.
+   * Creates one or more flow logs to capture information about IP traffic for a specific network interface, subnet, or VPC.  Flow log data for a monitored network interface is recorded as flow log records, which are log events consisting of fields that describe the traffic flow. For more information, see Flow Log Records in the Amazon Virtual Private Cloud User Guide. When publishing to CloudWatch Logs, flow log records are published to a log group, and each network interface has a unique log stream in the log group. When publishing to Amazon S3, flow log records for all of the monitored network interfaces are published to a single log file object that is stored in the specified bucket. For more information, see VPC Flow Logs in the Amazon Virtual Private Cloud User Guide.
    */
   createFlowLogs(params: EC2.Types.CreateFlowLogsRequest, callback?: (err: AWSError, data: EC2.Types.CreateFlowLogsResult) => void): Request<EC2.Types.CreateFlowLogsResult, AWSError>;
   /**
-   * Creates one or more flow logs to capture IP traffic for a specific network interface, subnet, or VPC. Flow logs are delivered to a specified log group in Amazon CloudWatch Logs. If you specify a VPC or subnet in the request, a log stream is created in CloudWatch Logs for each network interface in the subnet or VPC. Log streams can include information about accepted and rejected traffic to a network interface. You can view the data in your log streams using Amazon CloudWatch Logs. In your request, you must also specify an IAM role that has permission to publish logs to CloudWatch Logs. For more information, see VPC Flow Logs in the Amazon Virtual Private Cloud User Guide.
+   * Creates one or more flow logs to capture information about IP traffic for a specific network interface, subnet, or VPC.  Flow log data for a monitored network interface is recorded as flow log records, which are log events consisting of fields that describe the traffic flow. For more information, see Flow Log Records in the Amazon Virtual Private Cloud User Guide. When publishing to CloudWatch Logs, flow log records are published to a log group, and each network interface has a unique log stream in the log group. When publishing to Amazon S3, flow log records for all of the monitored network interfaces are published to a single log file object that is stored in the specified bucket. For more information, see VPC Flow Logs in the Amazon Virtual Private Cloud User Guide.
    */
   createFlowLogs(callback?: (err: AWSError, data: EC2.Types.CreateFlowLogsResult) => void): Request<EC2.Types.CreateFlowLogsResult, AWSError>;
   /**
@@ -349,11 +349,11 @@ declare class EC2 extends Service {
    */
   createInstanceExportTask(callback?: (err: AWSError, data: EC2.Types.CreateInstanceExportTaskResult) => void): Request<EC2.Types.CreateInstanceExportTaskResult, AWSError>;
   /**
-   * Creates an Internet gateway for use with a VPC. After creating the Internet gateway, you attach it to a VPC using AttachInternetGateway. For more information about your VPC and Internet gateway, see the Amazon Virtual Private Cloud User Guide.
+   * Creates an internet gateway for use with a VPC. After creating the internet gateway, you attach it to a VPC using AttachInternetGateway. For more information about your VPC and internet gateway, see the Amazon Virtual Private Cloud User Guide.
    */
   createInternetGateway(params: EC2.Types.CreateInternetGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateInternetGatewayResult) => void): Request<EC2.Types.CreateInternetGatewayResult, AWSError>;
   /**
-   * Creates an Internet gateway for use with a VPC. After creating the Internet gateway, you attach it to a VPC using AttachInternetGateway. For more information about your VPC and Internet gateway, see the Amazon Virtual Private Cloud User Guide.
+   * Creates an internet gateway for use with a VPC. After creating the internet gateway, you attach it to a VPC using AttachInternetGateway. For more information about your VPC and internet gateway, see the Amazon Virtual Private Cloud User Guide.
    */
   createInternetGateway(callback?: (err: AWSError, data: EC2.Types.CreateInternetGatewayResult) => void): Request<EC2.Types.CreateInternetGatewayResult, AWSError>;
   /**
@@ -389,11 +389,11 @@ declare class EC2 extends Service {
    */
   createNatGateway(callback?: (err: AWSError, data: EC2.Types.CreateNatGatewayResult) => void): Request<EC2.Types.CreateNatGatewayResult, AWSError>;
   /**
-   * Creates a network ACL in a VPC. Network ACLs provide an optional layer of security (in addition to security groups) for the instances in your VPC. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
+   * Creates a network ACL in a VPC. Network ACLs provide an optional layer of security (in addition to security groups) for the instances in your VPC. For more information, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
    */
   createNetworkAcl(params: EC2.Types.CreateNetworkAclRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkAclResult) => void): Request<EC2.Types.CreateNetworkAclResult, AWSError>;
   /**
-   * Creates a network ACL in a VPC. Network ACLs provide an optional layer of security (in addition to security groups) for the instances in your VPC. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
+   * Creates a network ACL in a VPC. Network ACLs provide an optional layer of security (in addition to security groups) for the instances in your VPC. For more information, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
    */
   createNetworkAcl(callback?: (err: AWSError, data: EC2.Types.CreateNetworkAclResult) => void): Request<EC2.Types.CreateNetworkAclResult, AWSError>;
   /**
@@ -437,19 +437,19 @@ declare class EC2 extends Service {
    */
   createReservedInstancesListing(callback?: (err: AWSError, data: EC2.Types.CreateReservedInstancesListingResult) => void): Request<EC2.Types.CreateReservedInstancesListingResult, AWSError>;
   /**
-   * Creates a route in a route table within a VPC. You must specify one of the following targets: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only Internet gateway. When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address 192.0.2.3, and the route table includes the following two IPv4 routes:    192.0.2.0/24 (goes to some target A)    192.0.2.0/28 (goes to some target B)   Both routes apply to the traffic destined for 192.0.2.3. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Creates a route in a route table within a VPC. You must specify one of the following targets: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only internet gateway. When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address 192.0.2.3, and the route table includes the following two IPv4 routes:    192.0.2.0/24 (goes to some target A)    192.0.2.0/28 (goes to some target B)   Both routes apply to the traffic destined for 192.0.2.3. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   createRoute(params: EC2.Types.CreateRouteRequest, callback?: (err: AWSError, data: EC2.Types.CreateRouteResult) => void): Request<EC2.Types.CreateRouteResult, AWSError>;
   /**
-   * Creates a route in a route table within a VPC. You must specify one of the following targets: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only Internet gateway. When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address 192.0.2.3, and the route table includes the following two IPv4 routes:    192.0.2.0/24 (goes to some target A)    192.0.2.0/28 (goes to some target B)   Both routes apply to the traffic destined for 192.0.2.3. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Creates a route in a route table within a VPC. You must specify one of the following targets: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only internet gateway. When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address 192.0.2.3, and the route table includes the following two IPv4 routes:    192.0.2.0/24 (goes to some target A)    192.0.2.0/28 (goes to some target B)   Both routes apply to the traffic destined for 192.0.2.3. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   createRoute(callback?: (err: AWSError, data: EC2.Types.CreateRouteResult) => void): Request<EC2.Types.CreateRouteResult, AWSError>;
   /**
-   * Creates a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Creates a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet. For more information, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   createRouteTable(params: EC2.Types.CreateRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.CreateRouteTableResult) => void): Request<EC2.Types.CreateRouteTableResult, AWSError>;
   /**
-   * Creates a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Creates a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet. For more information, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   createRouteTable(callback?: (err: AWSError, data: EC2.Types.CreateRouteTableResult) => void): Request<EC2.Types.CreateRouteTableResult, AWSError>;
   /**
@@ -477,11 +477,11 @@ declare class EC2 extends Service {
    */
   createSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and the IPv4 CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The size of the subnet's IPv4 CIDR block can be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The size of the subnet's IPv4 CIDR block can be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   createSubnet(params: EC2.Types.CreateSubnetRequest, callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
-   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and the IPv4 CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The size of the subnet's IPv4 CIDR block can be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The size of the subnet's IPv4 CIDR block can be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   createSubnet(callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
@@ -501,11 +501,11 @@ declare class EC2 extends Service {
    */
   createVolume(callback?: (err: AWSError, data: EC2.Types.Volume) => void): Request<EC2.Types.Volume, AWSError>;
   /**
-   * Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). To help you decide how big to make your VPC, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide. You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon's pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC. By default, each instance you launch in the VPC has the default DHCP options, which includes only a default DNS server that we provide (AmazonProvidedDNS). For more information about DHCP options, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide. You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon's pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC. By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   createVpc(params: EC2.Types.CreateVpcRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
-   * Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). To help you decide how big to make your VPC, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide. You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon's pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC. By default, each instance you launch in the VPC has the default DHCP options, which includes only a default DNS server that we provide (AmazonProvidedDNS). For more information about DHCP options, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide. You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon's pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC. By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   createVpc(callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
@@ -533,11 +533,11 @@ declare class EC2 extends Service {
    */
   createVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks.  Limitations and rules apply to a VPC peering connection. For more information, see the limitations section in the VPC Peering Guide.  The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of failed.
+   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different Region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks.  Limitations and rules apply to a VPC peering connection. For more information, see the limitations section in the VPC Peering Guide.  The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of failed.
    */
   createVpcPeeringConnection(params: EC2.Types.CreateVpcPeeringConnectionRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcPeeringConnectionResult) => void): Request<EC2.Types.CreateVpcPeeringConnectionResult, AWSError>;
   /**
-   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks.  Limitations and rules apply to a VPC peering connection. For more information, see the limitations section in the VPC Peering Guide.  The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of failed.
+   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different Region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks.  Limitations and rules apply to a VPC peering connection. For more information, see the limitations section in the VPC Peering Guide.  The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of failed.
    */
   createVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpcPeeringConnectionResult) => void): Request<EC2.Types.CreateVpcPeeringConnectionResult, AWSError>;
   /**
@@ -581,11 +581,11 @@ declare class EC2 extends Service {
    */
   deleteDhcpOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an egress-only Internet gateway.
+   * Deletes an egress-only internet gateway.
    */
   deleteEgressOnlyInternetGateway(params: EC2.Types.DeleteEgressOnlyInternetGatewayRequest, callback?: (err: AWSError, data: EC2.Types.DeleteEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.DeleteEgressOnlyInternetGatewayResult, AWSError>;
   /**
-   * Deletes an egress-only Internet gateway.
+   * Deletes an egress-only internet gateway.
    */
   deleteEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.DeleteEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.DeleteEgressOnlyInternetGatewayResult, AWSError>;
   /**
@@ -613,11 +613,11 @@ declare class EC2 extends Service {
    */
   deleteFpgaImage(callback?: (err: AWSError, data: EC2.Types.DeleteFpgaImageResult) => void): Request<EC2.Types.DeleteFpgaImageResult, AWSError>;
   /**
-   * Deletes the specified Internet gateway. You must detach the Internet gateway from the VPC before you can delete it.
+   * Deletes the specified internet gateway. You must detach the internet gateway from the VPC before you can delete it.
    */
   deleteInternetGateway(params: EC2.Types.DeleteInternetGatewayRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Internet gateway. You must detach the Internet gateway from the VPC before you can delete it.
+   * Deletes the specified internet gateway. You must detach the internet gateway from the VPC before you can delete it.
    */
   deleteInternetGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -869,11 +869,11 @@ declare class EC2 extends Service {
    */
   describeBundleTasks(callback?: (err: AWSError, data: EC2.Types.DescribeBundleTasksResult) => void): Request<EC2.Types.DescribeBundleTasksResult, AWSError>;
   /**
-   * Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink; you cannot use this request to return information about other instances.
+   * Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink. You cannot use this request to return information about other instances.
    */
   describeClassicLinkInstances(params: EC2.Types.DescribeClassicLinkInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeClassicLinkInstancesResult) => void): Request<EC2.Types.DescribeClassicLinkInstancesResult, AWSError>;
   /**
-   * Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink; you cannot use this request to return information about other instances.
+   * Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink. You cannot use this request to return information about other instances.
    */
   describeClassicLinkInstances(callback?: (err: AWSError, data: EC2.Types.DescribeClassicLinkInstancesResult) => void): Request<EC2.Types.DescribeClassicLinkInstancesResult, AWSError>;
   /**
@@ -893,19 +893,19 @@ declare class EC2 extends Service {
    */
   describeCustomerGateways(callback?: (err: AWSError, data: EC2.Types.DescribeCustomerGatewaysResult) => void): Request<EC2.Types.DescribeCustomerGatewaysResult, AWSError>;
   /**
-   * Describes one or more of your DHCP options sets. For more information about DHCP options sets, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your DHCP options sets. For more information, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
    */
   describeDhcpOptions(params: EC2.Types.DescribeDhcpOptionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeDhcpOptionsResult) => void): Request<EC2.Types.DescribeDhcpOptionsResult, AWSError>;
   /**
-   * Describes one or more of your DHCP options sets. For more information about DHCP options sets, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your DHCP options sets. For more information, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
    */
   describeDhcpOptions(callback?: (err: AWSError, data: EC2.Types.DescribeDhcpOptionsResult) => void): Request<EC2.Types.DescribeDhcpOptionsResult, AWSError>;
   /**
-   * Describes one or more of your egress-only Internet gateways.
+   * Describes one or more of your egress-only internet gateways.
    */
   describeEgressOnlyInternetGateways(params: EC2.Types.DescribeEgressOnlyInternetGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeEgressOnlyInternetGatewaysResult) => void): Request<EC2.Types.DescribeEgressOnlyInternetGatewaysResult, AWSError>;
   /**
-   * Describes one or more of your egress-only Internet gateways.
+   * Describes one or more of your egress-only internet gateways.
    */
   describeEgressOnlyInternetGateways(callback?: (err: AWSError, data: EC2.Types.DescribeEgressOnlyInternetGatewaysResult) => void): Request<EC2.Types.DescribeEgressOnlyInternetGatewaysResult, AWSError>;
   /**
@@ -1085,11 +1085,11 @@ declare class EC2 extends Service {
    */
   describeInstances(callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
-   * Describes one or more of your Internet gateways.
+   * Describes one or more of your internet gateways.
    */
   describeInternetGateways(params: EC2.Types.DescribeInternetGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInternetGatewaysResult) => void): Request<EC2.Types.DescribeInternetGatewaysResult, AWSError>;
   /**
-   * Describes one or more of your Internet gateways.
+   * Describes one or more of your internet gateways.
    */
   describeInternetGateways(callback?: (err: AWSError, data: EC2.Types.DescribeInternetGatewaysResult) => void): Request<EC2.Types.DescribeInternetGatewaysResult, AWSError>;
   /**
@@ -1125,19 +1125,19 @@ declare class EC2 extends Service {
    */
   describeMovingAddresses(callback?: (err: AWSError, data: EC2.Types.DescribeMovingAddressesResult) => void): Request<EC2.Types.DescribeMovingAddressesResult, AWSError>;
   /**
-   * Describes one or more of the your NAT gateways.
+   * Describes one or more of your NAT gateways.
    */
   describeNatGateways(params: EC2.Types.DescribeNatGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNatGatewaysResult) => void): Request<EC2.Types.DescribeNatGatewaysResult, AWSError>;
   /**
-   * Describes one or more of the your NAT gateways.
+   * Describes one or more of your NAT gateways.
    */
   describeNatGateways(callback?: (err: AWSError, data: EC2.Types.DescribeNatGatewaysResult) => void): Request<EC2.Types.DescribeNatGatewaysResult, AWSError>;
   /**
-   * Describes one or more of your network ACLs. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your network ACLs. For more information, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
    */
   describeNetworkAcls(params: EC2.Types.DescribeNetworkAclsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkAclsResult) => void): Request<EC2.Types.DescribeNetworkAclsResult, AWSError>;
   /**
-   * Describes one or more of your network ACLs. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your network ACLs. For more information, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
    */
   describeNetworkAcls(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkAclsResult) => void): Request<EC2.Types.DescribeNetworkAclsResult, AWSError>;
   /**
@@ -1229,11 +1229,11 @@ declare class EC2 extends Service {
    */
   describeReservedInstancesOfferings(callback?: (err: AWSError, data: EC2.Types.DescribeReservedInstancesOfferingsResult) => void): Request<EC2.Types.DescribeReservedInstancesOfferingsResult, AWSError>;
   /**
-   * Describes one or more of your route tables. Each subnet in your VPC must be associated with a route table. If a subnet is not explicitly associated with any route table, it is implicitly associated with the main route table. This command does not return the subnet ID for implicit associations. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your route tables. Each subnet in your VPC must be associated with a route table. If a subnet is not explicitly associated with any route table, it is implicitly associated with the main route table. This command does not return the subnet ID for implicit associations. For more information, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   describeRouteTables(params: EC2.Types.DescribeRouteTablesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeRouteTablesResult) => void): Request<EC2.Types.DescribeRouteTablesResult, AWSError>;
   /**
-   * Describes one or more of your route tables. Each subnet in your VPC must be associated with a route table. If a subnet is not explicitly associated with any route table, it is implicitly associated with the main route table. This command does not return the subnet ID for implicit associations. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your route tables. Each subnet in your VPC must be associated with a route table. If a subnet is not explicitly associated with any route table, it is implicitly associated with the main route table. This command does not return the subnet ID for implicit associations. For more information, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   describeRouteTables(callback?: (err: AWSError, data: EC2.Types.DescribeRouteTablesResult) => void): Request<EC2.Types.DescribeRouteTablesResult, AWSError>;
   /**
@@ -1341,11 +1341,11 @@ declare class EC2 extends Service {
    */
   describeStaleSecurityGroups(callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
-   * Describes one or more of your subnets. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your subnets. For more information, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   describeSubnets(params: EC2.Types.DescribeSubnetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSubnetsResult) => void): Request<EC2.Types.DescribeSubnetsResult, AWSError>;
   /**
-   * Describes one or more of your subnets. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your subnets. For more information, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   describeSubnets(callback?: (err: AWSError, data: EC2.Types.DescribeSubnetsResult) => void): Request<EC2.Types.DescribeSubnetsResult, AWSError>;
   /**
@@ -1501,11 +1501,11 @@ declare class EC2 extends Service {
    */
   detachClassicLinkVpc(callback?: (err: AWSError, data: EC2.Types.DetachClassicLinkVpcResult) => void): Request<EC2.Types.DetachClassicLinkVpcResult, AWSError>;
   /**
-   * Detaches an Internet gateway from a VPC, disabling connectivity between the Internet and the VPC. The VPC must not contain any running instances with Elastic IP addresses or public IPv4 addresses.
+   * Detaches an internet gateway from a VPC, disabling connectivity between the internet and the VPC. The VPC must not contain any running instances with Elastic IP addresses or public IPv4 addresses.
    */
   detachInternetGateway(params: EC2.Types.DetachInternetGatewayRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Detaches an Internet gateway from a VPC, disabling connectivity between the Internet and the VPC. The VPC must not contain any running instances with Elastic IP addresses or public IPv4 addresses.
+   * Detaches an internet gateway from a VPC, disabling connectivity between the internet and the VPC. The VPC must not contain any running instances with Elastic IP addresses or public IPv4 addresses.
    */
   detachInternetGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1549,11 +1549,11 @@ declare class EC2 extends Service {
    */
   disableVpcClassicLink(callback?: (err: AWSError, data: EC2.Types.DisableVpcClassicLinkResult) => void): Request<EC2.Types.DisableVpcClassicLinkResult, AWSError>;
   /**
-   * Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it's linked. For more information about ClassicLink, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
+   * Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it's linked. For more information, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
    */
   disableVpcClassicLinkDnsSupport(params: EC2.Types.DisableVpcClassicLinkDnsSupportRequest, callback?: (err: AWSError, data: EC2.Types.DisableVpcClassicLinkDnsSupportResult) => void): Request<EC2.Types.DisableVpcClassicLinkDnsSupportResult, AWSError>;
   /**
-   * Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it's linked. For more information about ClassicLink, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
+   * Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it's linked. For more information, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
    */
   disableVpcClassicLinkDnsSupport(callback?: (err: AWSError, data: EC2.Types.DisableVpcClassicLinkDnsSupportResult) => void): Request<EC2.Types.DisableVpcClassicLinkDnsSupportResult, AWSError>;
   /**
@@ -1613,27 +1613,27 @@ declare class EC2 extends Service {
    */
   enableVolumeIO(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC's route tables have existing routes for address ranges within the 10.0.0.0/8 IP address range, excluding local routes for VPCs in the 10.0.0.0/16 and 10.1.0.0/16 IP address ranges. For more information, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
+   * Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC route tables have existing routes for address ranges within the 10.0.0.0/8 IP address range, excluding local routes for VPCs in the 10.0.0.0/16 and 10.1.0.0/16 IP address ranges. For more information, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
    */
   enableVpcClassicLink(params: EC2.Types.EnableVpcClassicLinkRequest, callback?: (err: AWSError, data: EC2.Types.EnableVpcClassicLinkResult) => void): Request<EC2.Types.EnableVpcClassicLinkResult, AWSError>;
   /**
-   * Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC's route tables have existing routes for address ranges within the 10.0.0.0/8 IP address range, excluding local routes for VPCs in the 10.0.0.0/16 and 10.1.0.0/16 IP address ranges. For more information, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
+   * Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC route tables have existing routes for address ranges within the 10.0.0.0/8 IP address range, excluding local routes for VPCs in the 10.0.0.0/16 and 10.1.0.0/16 IP address ranges. For more information, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
    */
   enableVpcClassicLink(callback?: (err: AWSError, data: EC2.Types.EnableVpcClassicLinkResult) => void): Request<EC2.Types.EnableVpcClassicLinkResult, AWSError>;
   /**
-   * Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information about ClassicLink, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
+   * Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
    */
   enableVpcClassicLinkDnsSupport(params: EC2.Types.EnableVpcClassicLinkDnsSupportRequest, callback?: (err: AWSError, data: EC2.Types.EnableVpcClassicLinkDnsSupportResult) => void): Request<EC2.Types.EnableVpcClassicLinkDnsSupportResult, AWSError>;
   /**
-   * Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information about ClassicLink, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
+   * Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
    */
   enableVpcClassicLinkDnsSupport(callback?: (err: AWSError, data: EC2.Types.EnableVpcClassicLinkDnsSupportResult) => void): Request<EC2.Types.EnableVpcClassicLinkDnsSupportResult, AWSError>;
   /**
-   * Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes output from the EC2Config service.  GetConsoleOutput returns up to 64 KB of console output shortly after it's generated by the instance. By default, the console output returns buffered information that was posted shortly after an instance transition state (start, stop, reboot, or terminate). This information is available for at least one hour after the most recent post. You can optionally retrieve the latest serial console output at any time during the instance lifecycle. This option is only supported on C5, M5, and i3.metal instances.
+   * Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes the last three system event log errors. By default, the console output returns buffered information that was posted shortly after an instance transition state (start, stop, reboot, or terminate). This information is available for at least one hour after the most recent post. Only the most recent 64 KB of console output is available. You can optionally retrieve the latest serial console output at any time during the instance lifecycle. This option is supported on instance types that use the Nitro hypervisor. For more information, see Instance Console Output in the Amazon Elastic Compute Cloud User Guide.
    */
   getConsoleOutput(params: EC2.Types.GetConsoleOutputRequest, callback?: (err: AWSError, data: EC2.Types.GetConsoleOutputResult) => void): Request<EC2.Types.GetConsoleOutputResult, AWSError>;
   /**
-   * Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes output from the EC2Config service.  GetConsoleOutput returns up to 64 KB of console output shortly after it's generated by the instance. By default, the console output returns buffered information that was posted shortly after an instance transition state (start, stop, reboot, or terminate). This information is available for at least one hour after the most recent post. You can optionally retrieve the latest serial console output at any time during the instance lifecycle. This option is only supported on C5, M5, and i3.metal instances.
+   * Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes the last three system event log errors. By default, the console output returns buffered information that was posted shortly after an instance transition state (start, stop, reboot, or terminate). This information is available for at least one hour after the most recent post. Only the most recent 64 KB of console output is available. You can optionally retrieve the latest serial console output at any time during the instance lifecycle. This option is supported on instance types that use the Nitro hypervisor. For more information, see Instance Console Output in the Amazon Elastic Compute Cloud User Guide.
    */
   getConsoleOutput(callback?: (err: AWSError, data: EC2.Types.GetConsoleOutputResult) => void): Request<EC2.Types.GetConsoleOutputResult, AWSError>;
   /**
@@ -1885,11 +1885,11 @@ declare class EC2 extends Service {
    */
   modifyVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service.
+   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
    */
   modifyVpcEndpointServicePermissions(params: EC2.Types.ModifyVpcEndpointServicePermissionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
   /**
-   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service.
+   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
    */
   modifyVpcEndpointServicePermissions(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
   /**
@@ -1901,11 +1901,11 @@ declare class EC2 extends Service {
    */
   modifyVpcPeeringConnectionOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpcPeeringConnectionOptionsResult) => void): Request<EC2.Types.ModifyVpcPeeringConnectionOptionsResult, AWSError>;
   /**
-   * Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to default only. You cannot change the instance tenancy attribute to dedicated. After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of default, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected. For more information about Dedicated Instances, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to default only. You cannot change the instance tenancy attribute to dedicated. After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of default, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected. For more information, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyVpcTenancy(params: EC2.Types.ModifyVpcTenancyRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcTenancyResult) => void): Request<EC2.Types.ModifyVpcTenancyResult, AWSError>;
   /**
-   * Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to default only. You cannot change the instance tenancy attribute to dedicated. After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of default, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected. For more information about Dedicated Instances, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to default only. You cannot change the instance tenancy attribute to dedicated. After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of default, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected. For more information, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyVpcTenancy(callback?: (err: AWSError, data: EC2.Types.ModifyVpcTenancyResult) => void): Request<EC2.Types.ModifyVpcTenancyResult, AWSError>;
   /**
@@ -2005,27 +2005,27 @@ declare class EC2 extends Service {
    */
   replaceIamInstanceProfileAssociation(callback?: (err: AWSError, data: EC2.Types.ReplaceIamInstanceProfileAssociationResult) => void): Request<EC2.Types.ReplaceIamInstanceProfileAssociationResult, AWSError>;
   /**
-   * Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide. This is an idempotent operation.
+   * Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information, see Network ACLs in the Amazon Virtual Private Cloud User Guide. This is an idempotent operation.
    */
   replaceNetworkAclAssociation(params: EC2.Types.ReplaceNetworkAclAssociationRequest, callback?: (err: AWSError, data: EC2.Types.ReplaceNetworkAclAssociationResult) => void): Request<EC2.Types.ReplaceNetworkAclAssociationResult, AWSError>;
   /**
-   * Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide. This is an idempotent operation.
+   * Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information, see Network ACLs in the Amazon Virtual Private Cloud User Guide. This is an idempotent operation.
    */
   replaceNetworkAclAssociation(callback?: (err: AWSError, data: EC2.Types.ReplaceNetworkAclAssociationResult) => void): Request<EC2.Types.ReplaceNetworkAclAssociationResult, AWSError>;
   /**
-   * Replaces an entry (rule) in a network ACL. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
+   * Replaces an entry (rule) in a network ACL. For more information, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
    */
   replaceNetworkAclEntry(params: EC2.Types.ReplaceNetworkAclEntryRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replaces an entry (rule) in a network ACL. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
+   * Replaces an entry (rule) in a network ACL. For more information, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
    */
   replaceNetworkAclEntry(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replaces an existing route within a route table in a VPC. You must provide only one of the following: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only Internet gateway. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Replaces an existing route within a route table in a VPC. You must provide only one of the following: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only internet gateway. For more information, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   replaceRoute(params: EC2.Types.ReplaceRouteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replaces an existing route within a route table in a VPC. You must provide only one of the following: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only Internet gateway. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Replaces an existing route within a route table in a VPC. You must provide only one of the following: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only internet gateway. For more information, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   replaceRoute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2785,7 +2785,7 @@ declare namespace EC2 {
   }
   export interface AssociateRouteTableResult {
     /**
-     * The route table association ID (needed to disassociate the route table).
+     * The route table association ID. This ID is required for disassociating the route table.
      */
     AssociationId?: String;
   }
@@ -2868,7 +2868,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the Internet gateway.
+     * The ID of the internet gateway.
      */
     InternetGatewayId: String;
     /**
@@ -3689,7 +3689,7 @@ declare namespace EC2 {
   }
   export interface CreateEgressOnlyInternetGatewayRequest {
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
     /**
@@ -3697,17 +3697,17 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the VPC for which to create the egress-only Internet gateway.
+     * The ID of the VPC for which to create the egress-only internet gateway.
      */
     VpcId: String;
   }
   export interface CreateEgressOnlyInternetGatewayResult {
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     ClientToken?: String;
     /**
-     * Information about the egress-only Internet gateway.
+     * Information about the egress-only internet gateway.
      */
     EgressOnlyInternetGateway?: EgressOnlyInternetGateway;
   }
@@ -3773,17 +3773,21 @@ declare namespace EC2 {
   }
   export interface CreateFlowLogsRequest {
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
     /**
-     * The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group.
+     * The ARN for the IAM role that's used to post flow logs to a log group.
      */
-    DeliverLogsPermissionArn: String;
+    DeliverLogsPermissionArn?: String;
     /**
-     * The name of the CloudWatch log group.
+     * The name of the log group.
      */
-    LogGroupName: String;
+    LogGroupName?: String;
     /**
      * One or more subnet, network interface, or VPC IDs. Constraints: Maximum of 1000 resources
      */
@@ -3796,10 +3800,18 @@ declare namespace EC2 {
      * The type of traffic to log.
      */
     TrafficType: TrafficType;
+    /**
+     * Specifies the type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3. To publish flow log data to CloudWatch Logs, specify cloud-watch-logs. To publish flow log data to Amazon S3, specify s3. Default: cloud-watch-logs 
+     */
+    LogDestinationType?: LogDestinationType;
+    /**
+     * Specifies the destination to which the flow log data is to be published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType. If LogDestinationType is not specified or cloud-watch-logs, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. If LogDestinationType is s3, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: bucket_ARN/subfolder_name/. For example, to specify a subfolder named my-logs in a bucket named my-bucket, use the following ARN: arn:aws:s3:::my-bucket/my-logs/.
+     */
+    LogDestination?: String;
   }
   export interface CreateFlowLogsResult {
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     ClientToken?: String;
     /**
@@ -3911,7 +3923,7 @@ declare namespace EC2 {
   }
   export interface CreateInternetGatewayResult {
     /**
-     * Information about the Internet gateway.
+     * Information about the internet gateway.
      */
     InternetGateway?: InternetGateway;
   }
@@ -3995,7 +4007,7 @@ declare namespace EC2 {
      */
     AllocationId: String;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency. Constraint: Maximum 64 ASCII characters.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency. Constraint: Maximum 64 ASCII characters.
      */
     ClientToken?: String;
     /**
@@ -4043,7 +4055,7 @@ declare namespace EC2 {
      */
     PortRange?: PortRange;
     /**
-     * The protocol. A value of -1 or all means all protocols. If you specify all, -1, or a protocol number other than 6 (tcp), 17 (udp), or 1 (icmp), traffic on all ports is allowed, regardless of any ports or ICMP types or codes you specify. If you specify protocol 58 (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol 58 (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
+     * The protocol. A value of -1 or all means all protocols. If you specify all, -1, or a protocol number other than 6 (tcp), 17 (udp), or 1 (icmp), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol 58 (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol 58 (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
      */
     Protocol: String;
     /**
@@ -4195,11 +4207,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * [IPv6 traffic only] The ID of an egress-only Internet gateway.
+     * [IPv6 traffic only] The ID of an egress-only internet gateway.
      */
     EgressOnlyInternetGatewayId?: String;
     /**
-     * The ID of an Internet gateway or virtual private gateway attached to your VPC.
+     * The ID of an internet gateway or virtual private gateway attached to your VPC.
      */
     GatewayId?: String;
     /**
@@ -4708,7 +4720,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the egress-only Internet gateway.
+     * The ID of the egress-only internet gateway.
      */
     EgressOnlyInternetGatewayId: EgressOnlyInternetGatewayId;
   }
@@ -4781,6 +4793,10 @@ declare namespace EC2 {
   }
   export interface DeleteFlowLogsRequest {
     /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
      * One or more flow log IDs.
      */
     FlowLogIds: ValueStringList;
@@ -4813,7 +4829,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the Internet gateway.
+     * The ID of the internet gateway.
      */
     InternetGatewayId: String;
   }
@@ -5293,7 +5309,7 @@ declare namespace EC2 {
   }
   export interface DescribeClassicLinkInstancesRequest {
     /**
-     * One or more filters.    group-id - The ID of a VPC security group that's associated with the instance.    instance-id - The ID of the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC that the instance is linked to.  
+     * One or more filters.    group-id - The ID of a VPC security group that's associated with the instance.    instance-id - The ID of the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC to which the instance is linked.  vpc-id - The ID of the VPC that the instance is linked to.  
      */
     Filters?: FilterList;
     /**
@@ -5305,7 +5321,7 @@ declare namespace EC2 {
      */
     InstanceIds?: InstanceIdStringList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned. You cannot specify this parameter and the instance IDs parameter in the same request. Constraint: If the value is greater than 1000, we return only 1000 items.
+     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000. If MaxResults is given a value larger than 1000, only 1000 results are returned. You cannot specify this parameter and the instance IDs parameter in the same request. Constraint: If the value is greater than 1000, we return only 1000 items.
      */
     MaxResults?: Integer;
     /**
@@ -5386,11 +5402,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more egress-only Internet gateway IDs.
+     * One or more egress-only internet gateway IDs.
      */
     EgressOnlyInternetGatewayIds?: EgressOnlyInternetGatewayIdList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned.
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000. If MaxResults is given a value larger than 1000, only 1000 results are returned.
      */
     MaxResults?: Integer;
     /**
@@ -5400,7 +5416,7 @@ declare namespace EC2 {
   }
   export interface DescribeEgressOnlyInternetGatewaysResult {
     /**
-     * Information about the egress-only Internet gateways.
+     * Information about the egress-only internet gateways.
      */
     EgressOnlyInternetGateways?: EgressOnlyInternetGatewayList;
     /**
@@ -5574,7 +5590,11 @@ declare namespace EC2 {
   }
   export interface DescribeFlowLogsRequest {
     /**
-     * One or more filters.    deliver-log-status - The status of the logs delivery (SUCCESS | FAILED).    flow-log-id - The ID of the flow log.    log-group-name - The name of the log group.    resource-id - The ID of the VPC, subnet, or network interface.    traffic-type - The type of traffic (ACCEPT | REJECT | ALL)  
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters.    deliver-log-status - The status of the logs delivery (SUCCESS | FAILED).    log-destination-type - The type of destination to which the flow log publishes data. Possible destination types include cloud-watch-logs and S3.    flow-log-id - The ID of the flow log.    log-group-name - The name of the log group.    resource-id - The ID of the VPC, subnet, or network interface.    traffic-type - The type of traffic (ACCEPT | REJECT | ALL).  
      */
     Filter?: FilterList;
     /**
@@ -5582,7 +5602,7 @@ declare namespace EC2 {
      */
     FlowLogIds?: ValueStringList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned. You cannot specify this parameter and the flow log IDs parameter in the same request.
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000. If MaxResults is given a value larger than 1000, only 1000 results are returned. You cannot specify this parameter and the flow log IDs parameter in the same request.
      */
     MaxResults?: Integer;
     /**
@@ -6034,13 +6054,13 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more Internet gateway IDs. Default: Describes all your Internet gateways.
+     * One or more internet gateway IDs. Default: Describes all your internet gateways.
      */
     InternetGatewayIds?: ValueStringList;
   }
   export interface DescribeInternetGatewaysResult {
     /**
-     * Information about one or more Internet gateways.
+     * Information about one or more internet gateways.
      */
     InternetGateways?: InternetGatewayList;
   }
@@ -7534,7 +7554,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the Internet gateway.
+     * The ID of the internet gateway.
      */
     InternetGatewayId: String;
     /**
@@ -7862,11 +7882,11 @@ declare namespace EC2 {
   }
   export interface EgressOnlyInternetGateway {
     /**
-     * Information about the attachment of the egress-only Internet gateway.
+     * Information about the attachment of the egress-only internet gateway.
      */
     Attachments?: InternetGatewayAttachmentList;
     /**
-     * The ID of the egress-only Internet gateway.
+     * The ID of the egress-only internet gateway.
      */
     EgressOnlyInternetGatewayId?: EgressOnlyInternetGatewayId;
   }
@@ -8280,7 +8300,7 @@ declare namespace EC2 {
      */
     CreationTime?: DateTime;
     /**
-     * Information about the error that occurred. Rate limited indicates that CloudWatch logs throttling has been applied for one or more network interfaces, or that you've reached the limit on the number of CloudWatch Logs log groups that you can create. Access error indicates that the IAM role associated with the flow log does not have sufficient permissions to publish to CloudWatch Logs. Unknown error indicates an internal error.
+     * Information about the error that occurred. Rate limited indicates that CloudWatch Logs throttling has been applied for one or more network interfaces, or that you've reached the limit on the number of log groups that you can create. Access error indicates that the IAM role associated with the flow log does not have sufficient permissions to publish to CloudWatch Logs. Unknown error indicates an internal error.
      */
     DeliverLogsErrorMessage?: String;
     /**
@@ -8311,6 +8331,14 @@ declare namespace EC2 {
      * The type of traffic captured for the flow log.
      */
     TrafficType?: TrafficType;
+    /**
+     * Specifies the type of destination to which the flow log data is published. Flow log data can be published to CloudWatch Logs or Amazon S3.
+     */
+    LogDestinationType?: LogDestinationType;
+    /**
+     * Specifies the destination to which the flow log data is published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. If the flow log publishes to CloudWatch Logs, this element indicates the Amazon Resource Name (ARN) of the CloudWatch Logs log group to which the data is published. If the flow log publishes to Amazon S3, this element indicates the ARN of the Amazon S3 bucket to which the data is published.
+     */
+    LogDestination?: String;
   }
   export type FlowLogSet = FlowLog[];
   export type FlowLogsResourceType = "VPC"|"Subnet"|"NetworkInterface"|string;
@@ -10041,21 +10069,21 @@ declare namespace EC2 {
   export type InterfacePermissionType = "INSTANCE-ATTACH"|"EIP-ASSOCIATE"|string;
   export interface InternetGateway {
     /**
-     * Any VPCs attached to the Internet gateway.
+     * Any VPCs attached to the internet gateway.
      */
     Attachments?: InternetGatewayAttachmentList;
     /**
-     * The ID of the Internet gateway.
+     * The ID of the internet gateway.
      */
     InternetGatewayId?: String;
     /**
-     * Any tags assigned to the Internet gateway.
+     * Any tags assigned to the internet gateway.
      */
     Tags?: TagList;
   }
   export interface InternetGatewayAttachment {
     /**
-     * The current state of the attachment. For an Internet gateway, the state is available when attached to a VPC; otherwise, this value is not returned.
+     * The current state of the attachment. For an internet gateway, the state is available when attached to a VPC; otherwise, this value is not returned.
      */
     State?: AttachmentStatus;
     /**
@@ -10790,6 +10818,7 @@ declare namespace EC2 {
      */
     UserId?: String;
   }
+  export type LogDestinationType = "cloud-watch-logs"|"s3"|string;
   export type Long = number;
   export type MarketType = "spot"|string;
   export type MaxResults = number;
@@ -11255,7 +11284,7 @@ declare namespace EC2 {
      */
     EnableDnsHostnames?: AttributeBooleanValue;
     /**
-     * Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range "plus two" will succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. You cannot modify the DNS resolution and DNS hostnames attributes in the same request. Use separate requests for each attribute.
+     * Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range "plus two" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. You cannot modify the DNS resolution and DNS hostnames attributes in the same request. Use separate requests for each attribute.
      */
     EnableDnsSupport?: AttributeBooleanValue;
     /**
@@ -11377,11 +11406,11 @@ declare namespace EC2 {
      */
     ServiceId: String;
     /**
-     * One or more Amazon Resource Names (ARNs) of principals for which to allow permission. Specify * to allow all principals.
+     * The Amazon Resource Names (ARN) of one or more principals. Permissions are granted to the principals in this list. To grant permissions to all principals, specify an asterisk (*).
      */
     AddAllowedPrincipals?: ValueStringList;
     /**
-     * One or more Amazon Resource Names (ARNs) of principals for which to remove permission.
+     * The Amazon Resource Names (ARN) of one or more principals. Permissions are revoked for principals in this list.
      */
     RemoveAllowedPrincipals?: ValueStringList;
   }
@@ -11935,7 +11964,7 @@ declare namespace EC2 {
      */
     Affinity?: String;
     /**
-     * The name of the placement group the instance is in (for cluster compute instances).
+     * The name of the placement group the instance is in.
      */
     GroupName?: String;
     /**
@@ -12093,7 +12122,7 @@ declare namespace EC2 {
   export type ProductDescriptionList = String[];
   export interface PropagatingVgw {
     /**
-     * The ID of the virtual private gateway (VGW).
+     * The ID of the virtual private gateway.
      */
     GatewayId?: String;
   }
@@ -12484,7 +12513,7 @@ declare namespace EC2 {
      */
     PortRange?: PortRange;
     /**
-     * The IP protocol. You can specify all or -1 to mean all protocols. If you specify all, -1, or a protocol number other than tcp, udp, or icmp, traffic on all ports is allowed, regardless of any ports or ICMP types or codes you specify. If you specify protocol 58 (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol 58 (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
+     * The IP protocol. You can specify all or -1 to mean all protocols. If you specify all, -1, or a protocol number other than tcp, udp, or icmp, traffic on all ports is allowed, regardless of any ports or ICMP types or codes you that specify. If you specify protocol 58 (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol 58 (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
      */
     Protocol: String;
     /**
@@ -12498,11 +12527,11 @@ declare namespace EC2 {
   }
   export interface ReplaceRouteRequest {
     /**
-     * The IPv4 CIDR address block used for the destination match. The value you provide must match the CIDR of an existing route in the table.
+     * The IPv4 CIDR address block used for the destination match. The value that you provide must match the CIDR of an existing route in the table.
      */
     DestinationCidrBlock?: String;
     /**
-     * The IPv6 CIDR address block used for the destination match. The value you provide must match the CIDR of an existing route in the table.
+     * The IPv6 CIDR address block used for the destination match. The value that you provide must match the CIDR of an existing route in the table.
      */
     DestinationIpv6CidrBlock?: String;
     /**
@@ -12510,11 +12539,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * [IPv6 traffic only] The ID of an egress-only Internet gateway.
+     * [IPv6 traffic only] The ID of an egress-only internet gateway.
      */
     EgressOnlyInternetGatewayId?: String;
     /**
-     * The ID of an Internet gateway or virtual private gateway.
+     * The ID of an internet gateway or virtual private gateway.
      */
     GatewayId?: String;
     /**
@@ -13435,7 +13464,7 @@ declare namespace EC2 {
      */
     DestinationPrefixListId?: String;
     /**
-     * The ID of the egress-only Internet gateway.
+     * The ID of the egress-only internet gateway.
      */
     EgressOnlyInternetGatewayId?: String;
     /**
@@ -14935,7 +14964,7 @@ declare namespace EC2 {
      */
     AvailabilityZone?: String;
     /**
-     * The number of unused private IPv4 addresses in the subnet. Note that the IPv4 addresses for any stopped instances are considered unavailable.
+     * The number of unused private IPv4 addresses in the subnet. The IPv4 addresses for any stopped instances are considered unavailable.
      */
     AvailableIpAddressCount?: Integer;
     /**
