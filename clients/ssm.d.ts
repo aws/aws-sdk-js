@@ -1290,6 +1290,10 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
+     * The specified key-value mapping of document parameters to target resources.
+     */
+    TargetMaps?: TargetMaps;
+    /**
      * A list of resolved targets in the rate control execution.
      */
     ResolvedTargets?: ResolvedTargets;
@@ -1386,6 +1390,10 @@ declare namespace SSM {
      * The targets defined by the user when starting the Automation.
      */
     Targets?: Targets;
+    /**
+     * The specified key-value mapping of document parameters to target resources.
+     */
+    TargetMaps?: TargetMaps;
     /**
      * A list of targets that resolved during the execution.
      */
@@ -1539,11 +1547,11 @@ declare namespace SSM {
      */
     key: CommandFilterKey;
     /**
-     * The filter value. Valid values for each filter key are as follows:    InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see a list of command executions occurring July 7, 2018, and later.    InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see a list of command executions from before July 7, 2018.    Status: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:    Pending     InProgress     Success     Cancelled     Failed     TimedOut     Cancelling       DocumentName: Specify name of the SSM document for which you want to see command execution results. For example, specify AWS-RunPatchBaseline to see command executions that used this SSM document to perform security patching operations on instances.     ExecutionStage: Specify one of the following values:    Executing: Returns a list of command executions that are currently still running.    Complete: Returns a list of command exeuctions that have already completed.     
+     * The filter value. 
      */
     value: CommandFilterValue;
   }
-  export type CommandFilterKey = "InvokedAfter"|"InvokedBefore"|"Status"|"ExecutionStage"|"DocumentName"|string;
+  export type CommandFilterKey = "InvokedAfter"|"InvokedBefore"|"Status"|string;
   export type CommandFilterList = CommandFilter[];
   export type CommandFilterValue = string;
   export type CommandId = string;
@@ -5787,7 +5795,7 @@ declare namespace SSM {
      */
     TaskArn: MaintenanceWindowTaskArn;
     /**
-     * The role that should be assumed when executing the task.
+     * The role to assume when running the Maintenance Window task. If you do not specify a service role ARN, Systems Manager will use your account's service-linked role for Systems Manager by default. If no service-linked role for Systems Manager exists in your account, it will be created when you run RegisterTaskWithMaintenanceWindow without specifying a service role ARN. For more information, see Service-Linked Role Permissions for Systems Manager and Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks?  in the AWS Systems Manager User Guide.
      */
     ServiceRoleArn?: ServiceRole;
     /**
@@ -6160,6 +6168,10 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps cannot be specified together.
+     */
+    TargetMaps?: TargetMaps;
+    /**
      * The maximum number of targets allowed to run this task in parallel. You can specify a number, such as 10, or a percentage, such as 10%. The default value is 10.
      */
     MaxConcurrency?: MaxConcurrency;
@@ -6316,6 +6328,11 @@ declare namespace SSM {
   }
   export type TargetCount = number;
   export type TargetKey = string;
+  export type TargetMap = {[key: string]: TargetMapValueList};
+  export type TargetMapKey = string;
+  export type TargetMapValue = string;
+  export type TargetMapValueList = TargetMapValue[];
+  export type TargetMaps = TargetMap[];
   export type TargetParameterList = ParameterValue[];
   export type TargetType = string;
   export type TargetValue = string;
@@ -6577,7 +6594,7 @@ declare namespace SSM {
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
-     * The IAM service role ARN to modify. The system assumes this role during task execution. 
+     * The IAM service role ARN to modify. The system assumes this role during task execution. If you do not specify a service role ARN, Systems Manager will use your account's service-linked role for Systems Manager by default. If no service-linked role for Systems Manager exists in your account, it will be created when you run RegisterTaskWithMaintenanceWindow without specifying a service role ARN. For more information, see Service-Linked Role Permissions for Systems Manager and Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks?  in the AWS Systems Manager User Guide.
      */
     ServiceRoleArn?: ServiceRole;
     /**
