@@ -38,6 +38,14 @@ declare class Polly extends PollyCustomizations {
    */
   getLexicon(callback?: (err: AWSError, data: Polly.Types.GetLexiconOutput) => void): Request<Polly.Types.GetLexiconOutput, AWSError>;
   /**
+   * Retrieves a specific SpeechSynthesisTask object based on its TaskID. This object contains information about the given speech synthesis task, including the status of the task, and a link to the S3 bucket containing the output of the task.
+   */
+  getSpeechSynthesisTask(params: Polly.Types.GetSpeechSynthesisTaskInput, callback?: (err: AWSError, data: Polly.Types.GetSpeechSynthesisTaskOutput) => void): Request<Polly.Types.GetSpeechSynthesisTaskOutput, AWSError>;
+  /**
+   * Retrieves a specific SpeechSynthesisTask object based on its TaskID. This object contains information about the given speech synthesis task, including the status of the task, and a link to the S3 bucket containing the output of the task.
+   */
+  getSpeechSynthesisTask(callback?: (err: AWSError, data: Polly.Types.GetSpeechSynthesisTaskOutput) => void): Request<Polly.Types.GetSpeechSynthesisTaskOutput, AWSError>;
+  /**
    * Returns a list of pronunciation lexicons stored in an AWS Region. For more information, see Managing Lexicons.
    */
   listLexicons(params: Polly.Types.ListLexiconsInput, callback?: (err: AWSError, data: Polly.Types.ListLexiconsOutput) => void): Request<Polly.Types.ListLexiconsOutput, AWSError>;
@@ -46,6 +54,14 @@ declare class Polly extends PollyCustomizations {
    */
   listLexicons(callback?: (err: AWSError, data: Polly.Types.ListLexiconsOutput) => void): Request<Polly.Types.ListLexiconsOutput, AWSError>;
   /**
+   * Returns a list of SpeechSynthesisTask objects ordered by their creation date. This operation can filter the tasks by their status, for example, allowing users to list only tasks that are completed.
+   */
+  listSpeechSynthesisTasks(params: Polly.Types.ListSpeechSynthesisTasksInput, callback?: (err: AWSError, data: Polly.Types.ListSpeechSynthesisTasksOutput) => void): Request<Polly.Types.ListSpeechSynthesisTasksOutput, AWSError>;
+  /**
+   * Returns a list of SpeechSynthesisTask objects ordered by their creation date. This operation can filter the tasks by their status, for example, allowing users to list only tasks that are completed.
+   */
+  listSpeechSynthesisTasks(callback?: (err: AWSError, data: Polly.Types.ListSpeechSynthesisTasksOutput) => void): Request<Polly.Types.ListSpeechSynthesisTasksOutput, AWSError>;
+  /**
    * Stores a pronunciation lexicon in an AWS Region. If a lexicon with the same name already exists in the region, it is overwritten by the new lexicon. Lexicon operations have eventual consistency, therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation. For more information, see Managing Lexicons.
    */
   putLexicon(params: Polly.Types.PutLexiconInput, callback?: (err: AWSError, data: Polly.Types.PutLexiconOutput) => void): Request<Polly.Types.PutLexiconOutput, AWSError>;
@@ -53,6 +69,14 @@ declare class Polly extends PollyCustomizations {
    * Stores a pronunciation lexicon in an AWS Region. If a lexicon with the same name already exists in the region, it is overwritten by the new lexicon. Lexicon operations have eventual consistency, therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation. For more information, see Managing Lexicons.
    */
   putLexicon(callback?: (err: AWSError, data: Polly.Types.PutLexiconOutput) => void): Request<Polly.Types.PutLexiconOutput, AWSError>;
+  /**
+   * Allows the creation of an asynchronous synthesis task, by starting a new SpeechSynthesisTask. This operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the output of the synthesis task and two optional parameters (OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created, this operation will return a SpeechSynthesisTask object, which will include an identifier of this task as well as the current status.
+   */
+  startSpeechSynthesisTask(params: Polly.Types.StartSpeechSynthesisTaskInput, callback?: (err: AWSError, data: Polly.Types.StartSpeechSynthesisTaskOutput) => void): Request<Polly.Types.StartSpeechSynthesisTaskOutput, AWSError>;
+  /**
+   * Allows the creation of an asynchronous synthesis task, by starting a new SpeechSynthesisTask. This operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the output of the synthesis task and two optional parameters (OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created, this operation will return a SpeechSynthesisTask object, which will include an identifier of this task as well as the current status.
+   */
+  startSpeechSynthesisTask(callback?: (err: AWSError, data: Polly.Types.StartSpeechSynthesisTaskOutput) => void): Request<Polly.Types.StartSpeechSynthesisTaskOutput, AWSError>;
   /**
    * Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes. SSML input must be valid, well-formed SSML. Some alphabets might not be available with all the voices (for example, Cyrillic might not be read at all by English voices) unless phoneme mapping is used. For more information, see How it Works.
    */
@@ -69,6 +93,7 @@ declare namespace Polly {
   export type Alphabet = string;
   export type AudioStream = Buffer|Uint8Array|Blob|string|Readable;
   export type ContentType = string;
+  export type DateTime = Date;
   export interface DeleteLexiconInput {
     /**
      * The name of the lexicon to delete. Must be an existing lexicon in the region.
@@ -82,6 +107,10 @@ declare namespace Polly {
      *  The language identification tag (ISO 639 code for the language name-ISO 3166 country code) for filtering the list of voices returned. If you don't specify this optional parameter, all available voices are returned. 
      */
     LanguageCode?: LanguageCode;
+    /**
+     * Boolean value indicating whether to return any bilingual voices that use the specified language as an additional language. For instance, if you request all languages that use US English (es-US), and there is an Italian voice that speaks both Italian (it-IT) and US English, that voice will be included if you specify yes but not if you specify no.
+     */
+    IncludeAdditionalLanguageCodes?: IncludeAdditionalLanguageCodes;
     /**
      * An opaque pagination token returned from the previous DescribeVoices operation. If present, this indicates where to continue the listing.
      */
@@ -97,7 +126,6 @@ declare namespace Polly {
      */
     NextToken?: NextToken;
   }
-  export type ErrorMessage = string;
   export type Gender = "Female"|"Male"|string;
   export interface GetLexiconInput {
     /**
@@ -115,7 +143,21 @@ declare namespace Polly {
      */
     LexiconAttributes?: LexiconAttributes;
   }
-  export type LanguageCode = "cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ko-KR"|"ja-JP"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"|string;
+  export interface GetSpeechSynthesisTaskInput {
+    /**
+     * The Amazon Polly generated identifier for a speech synthesis task.
+     */
+    TaskId: TaskId;
+  }
+  export interface GetSpeechSynthesisTaskOutput {
+    /**
+     * SynthesisTask object that provides information from the requested task, including output format, creation time, task status, and so on.
+     */
+    SynthesisTask?: SynthesisTask;
+  }
+  export type IncludeAdditionalLanguageCodes = boolean;
+  export type LanguageCode = "cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ja-JP"|"hi-IN"|"ko-KR"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"|string;
+  export type LanguageCodeList = LanguageCode[];
   export type LanguageName = string;
   export type LastModified = Date;
   export type LexemesCount = number;
@@ -186,8 +228,36 @@ declare namespace Polly {
      */
     NextToken?: NextToken;
   }
+  export interface ListSpeechSynthesisTasksInput {
+    /**
+     * Maximum number of speech synthesis tasks returned in a List operation.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The pagination token to use in the next request to continue the listing of speech synthesis tasks. 
+     */
+    NextToken?: NextToken;
+    /**
+     * Status of the speech synthesis tasks returned in a List operation
+     */
+    Status?: TaskStatus;
+  }
+  export interface ListSpeechSynthesisTasksOutput {
+    /**
+     * An opaque pagination token returned from the previous List operation in this request. If present, this indicates where to continue the listing.
+     */
+    NextToken?: NextToken;
+    /**
+     * List of SynthesisTask objects that provides information from the specified task in the list request, including output format, creation time, task status, and so on.
+     */
+    SynthesisTasks?: SynthesisTasks;
+  }
+  export type MaxResults = number;
   export type NextToken = string;
   export type OutputFormat = "json"|"mp3"|"ogg_vorbis"|"pcm"|string;
+  export type OutputS3BucketName = string;
+  export type OutputS3KeyPrefix = string;
+  export type OutputUri = string;
   export interface PutLexiconInput {
     /**
      * Name of the lexicon. The name must follow the regular express format [0-9A-Za-z]{1,20}. That is, the name is a case-sensitive alphanumeric string up to 20 characters long. 
@@ -203,8 +273,120 @@ declare namespace Polly {
   export type RequestCharacters = number;
   export type SampleRate = string;
   export type Size = number;
+  export type SnsTopicArn = string;
   export type SpeechMarkType = "sentence"|"ssml"|"viseme"|"word"|string;
   export type SpeechMarkTypeList = SpeechMarkType[];
+  export interface StartSpeechSynthesisTaskInput {
+    /**
+     * List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. 
+     */
+    LexiconNames?: LexiconNameList;
+    /**
+     * The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. 
+     */
+    OutputFormat: OutputFormat;
+    /**
+     * Amazon S3 bucket name to which the output file will be saved.
+     */
+    OutputS3BucketName: OutputS3BucketName;
+    /**
+     * The Amazon S3 key prefix for the output speech file.
+     */
+    OutputS3KeyPrefix?: OutputS3KeyPrefix;
+    /**
+     * The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050". The default value is "22050". Valid values for pcm are "8000" and "16000" The default value is "16000". 
+     */
+    SampleRate?: SampleRate;
+    /**
+     * ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.
+     */
+    SnsTopicArn?: SnsTopicArn;
+    /**
+     * The type of speech marks returned for the input text.
+     */
+    SpeechMarkTypes?: SpeechMarkTypeList;
+    /**
+     * The input text to synthesize. If you specify ssml as the TextType, follow the SSML format for the input text. 
+     */
+    Text: Text;
+    /**
+     * Specifies whether the input text is plain text or SSML. The default value is plain text. 
+     */
+    TextType?: TextType;
+    /**
+     * Voice ID to use for the synthesis. 
+     */
+    VoiceId: VoiceId;
+    /**
+     * Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     */
+    LanguageCode?: LanguageCode;
+  }
+  export interface StartSpeechSynthesisTaskOutput {
+    /**
+     * SynthesisTask object that provides information and attributes about a newly submitted speech synthesis task.
+     */
+    SynthesisTask?: SynthesisTask;
+  }
+  export interface SynthesisTask {
+    /**
+     * The Amazon Polly generated identifier for a speech synthesis task.
+     */
+    TaskId?: TaskId;
+    /**
+     * Current status of the individual speech synthesis task.
+     */
+    TaskStatus?: TaskStatus;
+    /**
+     * Reason for the current status of a specific speech synthesis task, including errors if the task has failed.
+     */
+    TaskStatusReason?: TaskStatusReason;
+    /**
+     * Pathway for the output speech file.
+     */
+    OutputUri?: OutputUri;
+    /**
+     * Timestamp for the time the synthesis task was started.
+     */
+    CreationTime?: DateTime;
+    /**
+     * Number of billable characters synthesized.
+     */
+    RequestCharacters?: RequestCharacters;
+    /**
+     * ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.
+     */
+    SnsTopicArn?: SnsTopicArn;
+    /**
+     * List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. 
+     */
+    LexiconNames?: LexiconNameList;
+    /**
+     * The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. 
+     */
+    OutputFormat?: OutputFormat;
+    /**
+     * The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050". The default value is "22050". Valid values for pcm are "8000" and "16000" The default value is "16000". 
+     */
+    SampleRate?: SampleRate;
+    /**
+     * The type of speech marks returned for the input text.
+     */
+    SpeechMarkTypes?: SpeechMarkTypeList;
+    /**
+     * Specifies whether the input text is plain text or SSML. The default value is plain text. 
+     */
+    TextType?: TextType;
+    /**
+     * Voice ID to use for the synthesis. 
+     */
+    VoiceId?: VoiceId;
+    /**
+     * Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     */
+    LanguageCode?: LanguageCode;
+  }
+  export type SynthesisTasks = SynthesisTask[];
   export interface SynthesizeSpeechInput {
     /**
      * List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. For information about storing lexicons, see PutLexicon.
@@ -234,6 +416,10 @@ declare namespace Polly {
      *  Voice ID to use for the synthesis. You can get a list of available voice IDs by calling the DescribeVoices operation. 
      */
     VoiceId: VoiceId;
+    /**
+     * Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     */
+    LanguageCode?: LanguageCode;
   }
   export interface SynthesizeSpeechOutput {
     /**
@@ -249,6 +435,9 @@ declare namespace Polly {
      */
     RequestCharacters?: RequestCharacters;
   }
+  export type TaskId = string;
+  export type TaskStatus = "scheduled"|"inProgress"|"completed"|"failed"|string;
+  export type TaskStatusReason = string;
   export type Text = string;
   export type TextType = "ssml"|"text"|string;
   export interface Voice {
@@ -272,6 +461,10 @@ declare namespace Polly {
      * Name of the voice (for example, Salli, Kendra, etc.). This provides a human readable voice name that you might display in your application.
      */
     Name?: VoiceName;
+    /**
+     * Additional codes for languages available for the specified voice in addition to its default language.  For example, the default language for Aditi is Indian English (en-IN) because it was first used for that language. Since Aditi is bilingual and fluent in both Indian English and Hindi, this parameter would show the code hi-IN.
+     */
+    AdditionalLanguageCodes?: LanguageCodeList;
   }
   export type VoiceId = "Geraint"|"Gwyneth"|"Mads"|"Naja"|"Hans"|"Marlene"|"Nicole"|"Russell"|"Amy"|"Brian"|"Emma"|"Raveena"|"Ivy"|"Joanna"|"Joey"|"Justin"|"Kendra"|"Kimberly"|"Matthew"|"Salli"|"Conchita"|"Enrique"|"Miguel"|"Penelope"|"Chantal"|"Celine"|"Lea"|"Mathieu"|"Dora"|"Karl"|"Carla"|"Giorgio"|"Mizuki"|"Liv"|"Lotte"|"Ruben"|"Ewa"|"Jacek"|"Jan"|"Maja"|"Ricardo"|"Vitoria"|"Cristiano"|"Ines"|"Carmen"|"Maxim"|"Tatyana"|"Astrid"|"Filiz"|"Vicki"|"Takumi"|"Seoyeon"|"Aditi"|string;
   export type VoiceList = Voice[];

@@ -349,7 +349,6 @@ declare namespace Organizations {
      */
     Handshake?: Handshake;
   }
-  export type AccessDeniedForDependencyExceptionReason = "ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE"|string;
   export interface Account {
     /**
      * The unique identifier (ID) of the account. The regex pattern for an account ID string requires exactly 12 digits.
@@ -423,7 +422,6 @@ declare namespace Organizations {
   export type ChildId = string;
   export type ChildType = "ACCOUNT"|"ORGANIZATIONAL_UNIT"|string;
   export type Children = Child[];
-  export type ConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"|"HANDSHAKE_RATE_LIMIT_EXCEEDED"|"OU_NUMBER_LIMIT_EXCEEDED"|"OU_DEPTH_LIMIT_EXCEEDED"|"POLICY_NUMBER_LIMIT_EXCEEDED"|"MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"|"MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"|"ACCOUNT_CANNOT_LEAVE_ORGANIZATION"|"ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA"|"ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION"|"MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"|"MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"|"ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED"|"MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE"|"MASTER_ACCOUNT_MISSING_CONTACT_INFO"|"ORGANIZATION_NOT_IN_ALL_FEATURES_MODE"|string;
   export type CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"|"EMAIL_ALREADY_EXISTS"|"INVALID_ADDRESS"|"INVALID_EMAIL"|"CONCURRENT_ACCOUNT_MODIFICATION"|"INTERNAL_FAILURE"|string;
   export interface CreateAccountRequest {
     /**
@@ -699,8 +697,6 @@ declare namespace Organizations {
     DateEnabled?: Timestamp;
   }
   export type EnabledServicePrincipals = EnabledServicePrincipal[];
-  export type ExceptionMessage = string;
-  export type ExceptionType = string;
   export type GenericArn = string;
   export interface Handshake {
     /**
@@ -737,7 +733,6 @@ declare namespace Organizations {
     Resources?: HandshakeResources;
   }
   export type HandshakeArn = string;
-  export type HandshakeConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"|"HANDSHAKE_RATE_LIMIT_EXCEEDED"|"ALREADY_IN_AN_ORGANIZATION"|"ORGANIZATION_ALREADY_HAS_ALL_FEATURES"|"INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES"|"PAYMENT_INSTRUMENT_REQUIRED"|"ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD"|"ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"|string;
   export interface HandshakeFilter {
     /**
      * Specifies the type of handshake action. If you specify ActionType, you cannot also specify ParentHandshakeId.
@@ -783,7 +778,6 @@ declare namespace Organizations {
   export type HandshakeState = "REQUESTED"|"OPEN"|"CANCELED"|"ACCEPTED"|"DECLINED"|"EXPIRED"|string;
   export type Handshakes = Handshake[];
   export type IAMUserAccessToBilling = "ALLOW"|"DENY"|string;
-  export type InvalidInputExceptionReason = "INVALID_PARTY_TYPE_TARGET"|"INVALID_SYNTAX_ORGANIZATION_ARN"|"INVALID_SYNTAX_POLICY_ID"|"INVALID_ENUM"|"INVALID_LIST_MEMBER"|"MAX_LENGTH_EXCEEDED"|"MAX_VALUE_EXCEEDED"|"MIN_LENGTH_EXCEEDED"|"MIN_VALUE_EXCEEDED"|"IMMUTABLE_POLICY"|"INVALID_PATTERN"|"INVALID_PATTERN_TARGET_ID"|"INPUT_REQUIRED"|"INVALID_NEXT_TOKEN"|"MAX_LIMIT_EXCEEDED_FILTER"|"MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"|"INVALID_FULL_NAME_TARGET"|"UNRECOGNIZED_SERVICE_PRINCIPAL"|"INVALID_ROLE_NAME"|string;
   export interface InviteAccountToOrganizationRequest {
     /**
      * The identifier (ID) of the AWS account that you want to invite to join your organization. This is a JSON object that contains the following elements:   { "Type": "ACCOUNT", "Id": "&lt; account id number &gt;" }  If you use the AWS CLI, you can submit this as a single string, similar to the following example:  --target Id=123456789012,Type=ACCOUNT  If you specify "Type": "ACCOUNT", then you must provide the AWS account ID number as the Id. If you specify "Type": "EMAIL", then you must specify the email address that is associated with the account.  --target Id=bill@example.com,Type=EMAIL 

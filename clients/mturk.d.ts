@@ -731,7 +731,6 @@ declare namespace MTurk {
   export type EntityId = string;
   export type EventType = "AssignmentAccepted"|"AssignmentAbandoned"|"AssignmentReturned"|"AssignmentSubmitted"|"AssignmentRejected"|"AssignmentApproved"|"HITCreated"|"HITExpired"|"HITReviewable"|"HITExtended"|"HITDisposed"|"Ping"|string;
   export type EventTypeList = EventType[];
-  export type ExceptionMessage = string;
   export interface GetAccountBalanceRequest {
   }
   export interface GetAccountBalanceResponse {
@@ -1562,7 +1561,6 @@ declare namespace MTurk {
   export type String = string;
   export type StringList = String[];
   export type Timestamp = Date;
-  export type TurkErrorCode = string;
   export interface UpdateExpirationForHITRequest {
     /**
      *  The HIT to update. 

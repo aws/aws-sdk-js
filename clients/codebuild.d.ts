@@ -274,6 +274,10 @@ declare namespace CodeBuild {
      * Describes a network interface.
      */
     networkInterface?: NetworkInterface;
+    /**
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts. This is expressed either as the CMK's Amazon Resource Name (ARN) or, if specified, the CMK's alias (using the format alias/alias-name ).
+     */
+    encryptionKey?: NonEmptyString;
   }
   export interface BuildArtifacts {
     /**
@@ -288,6 +292,14 @@ declare namespace CodeBuild {
      * The MD5 hash of the build artifact. You can use this hash along with a checksum tool to confirm both file integrity and authenticity.  This value is available only if the build project's packaging value is set to ZIP. 
      */
     md5sum?: String;
+    /**
+     *  If this flag is set, a name specified in the buildspec file overrides the artifact name. The name specified in a buildspec file is calculated at build time and uses the Shell Command Language. For example, you can append a date and time to your artifact name so that it is always unique. 
+     */
+    overrideArtifactName?: WrapperBoolean;
+    /**
+     *  Information that tells you if encryption for build artifacts is disabled. 
+     */
+    encryptionDisabled?: WrapperBoolean;
   }
   export type BuildIds = NonEmptyString[];
   export interface BuildNotDeleted {
@@ -690,6 +702,14 @@ declare namespace CodeBuild {
      * The type of build output artifact to create, as follows:   If type is set to CODEPIPELINE, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.   If type is set to NO_ARTIFACTS, then this value will be ignored if specified, because no build output will be produced.   If type is set to S3, valid values include:    NONE: AWS CodeBuild will create in the output bucket a folder containing the build output. This is the default if packaging is not specified.    ZIP: AWS CodeBuild will create in the output bucket a ZIP file containing the build output.    
      */
     packaging?: ArtifactPackaging;
+    /**
+     *  If this flag is set, a name specified in the buildspec file overrides the artifact name. The name specified in a buildspec file is calculated at build time and uses the Shell Command Language. For example, you can append a date and time to your artifact name so that it is always unique. 
+     */
+    overrideArtifactName?: WrapperBoolean;
+    /**
+     *  Set to true if you do not want your output artifacts encrypted. This option is only valid if your artifacts type is Amazon S3. If this is set with another artifacts type, an invalidInputException will be thrown. 
+     */
+    encryptionDisabled?: WrapperBoolean;
   }
   export interface ProjectBadge {
     /**

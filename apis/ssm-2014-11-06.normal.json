@@ -1028,6 +1028,23 @@
       ],
       "documentation":"<p>Retrieves the patch baseline that should be used for the specified patch group.</p>"
     },
+    "LabelParameterVersion":{
+      "name":"LabelParameterVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"LabelParameterVersionRequest"},
+      "output":{"shape":"LabelParameterVersionResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"TooManyUpdates"},
+        {"shape":"ParameterNotFound"},
+        {"shape":"ParameterVersionNotFound"},
+        {"shape":"ParameterVersionLabelLimitExceeded"}
+      ],
+      "documentation":"<p>A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions. </p> <p>Parameter labels have the following requirements and restrictions.</p> <ul> <li> <p>A version of a parameter can have a maximum of 10 labels.</p> </li> <li> <p>You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.</p> </li> <li> <p>You can move a label from one version of a parameter to another.</p> </li> <li> <p>You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.</p> </li> <li> <p>You can't delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.</p> </li> <li> <p>A label can have a maximum of 100 characters.</p> </li> <li> <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).</p> </li> <li> <p>Labels can't begin with a number, \"aws,\" or \"ssm\" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.</p> </li> </ul>"
+    },
     "ListAssociationVersions":{
       "name":"ListAssociationVersions",
       "http":{
@@ -2757,7 +2774,7 @@
         },
         "value":{
           "shape":"CommandFilterValue",
-          "documentation":"<p>The filter value. </p>"
+          "documentation":"<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p> <b>InvokedAfter</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions occurring July 7, 2018, and later.</p> </li> <li> <p> <b>InvokedBefore</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions from before July 7, 2018.</p> </li> <li> <p> <b>Status</b>: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:</p> <ul> <li> <p> <code>Pending</code> </p> </li> <li> <p> <code>InProgress</code> </p> </li> <li> <p> <code>Success</code> </p> </li> <li> <p> <code>Cancelled</code> </p> </li> <li> <p> <code>Failed</code> </p> </li> <li> <p> <code>TimedOut</code> </p> </li> <li> <p> <code>Cancelling</code> </p> </li> </ul> </li> <li> <p> <b>DocumentName</b>: Specify name of the SSM document for which you want to see command execution results. For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p> <b>ExecutionStage</b>: Specify one of the following values:</p> <ul> <li> <p> <code>Executing</code>: Returns a list of command executions that are currently still running.</p> </li> <li> <p> <code>Complete</code>: Returns a list of command exeuctions that have already completed. </p> </li> </ul> </li> </ul>"
         }
       },
       "documentation":"<p>Describes a command filter.</p>"
@@ -2767,17 +2784,20 @@
       "enum":[
         "InvokedAfter",
         "InvokedBefore",
-        "Status"
+        "Status",
+        "ExecutionStage",
+        "DocumentName"
       ]
     },
     "CommandFilterList":{
       "type":"list",
       "member":{"shape":"CommandFilter"},
-      "max":3,
+      "max":5,
       "min":1
     },
     "CommandFilterValue":{
       "type":"string",
+      "max":128,
       "min":1
     },
     "CommandId":{
@@ -7395,6 +7415,37 @@
       "type":"list",
       "member":{"shape":"TagKey"}
     },
+    "LabelParameterVersionRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Labels"
+      ],
+      "members":{
+        "Name":{
+          "shape":"PSParameterName",
+          "documentation":"<p>The parameter name on which you want to attach one or more labels.</p>"
+        },
+        "ParameterVersion":{
+          "shape":"PSParameterVersion",
+          "documentation":"<p>The specific version of the parameter on which you want to attach one or more labels. If no version is specified, the system attaches the label to the latest version.)</p>",
+          "box":true
+        },
+        "Labels":{
+          "shape":"ParameterLabelList",
+          "documentation":"<p>One or more labels to attach to the specified parameter version.</p>"
+        }
+      }
+    },
+    "LabelParameterVersionResult":{
+      "type":"structure",
+      "members":{
+        "InvalidLabels":{
+          "shape":"ParameterLabelList",
+          "documentation":"<p>The label does not meet the requirements. For information about parameter label requirements, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html\">Labeling Parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+        }
+      }
+    },
     "LastResourceDataSyncMessage":{"type":"string"},
     "LastResourceDataSyncStatus":{
       "type":"string",
@@ -8621,6 +8672,11 @@
       "max":2048,
       "min":1
     },
+    "PSParameterSelector":{
+      "type":"string",
+      "max":128,
+      "min":0
+    },
     "PSParameterValue":{
       "type":"string",
       "max":4096,
@@ -8645,6 +8701,22 @@
         "Version":{
           "shape":"PSParameterVersion",
           "documentation":"<p>The parameter version.</p>"
+        },
+        "Selector":{
+          "shape":"PSParameterSelector",
+          "documentation":"<p>Either the version number or the label used to retrieve the parameter value. Specify selectors by using one of the following formats:</p> <p>parameter_name:version</p> <p>parameter_name:label</p>"
+        },
+        "SourceResult":{
+          "shape":"String",
+          "documentation":"<p>Applies to parameters that reference information in other AWS services. SourceResult is the raw result or response from the source.</p>"
+        },
+        "LastModifiedDate":{
+          "shape":"DateTime",
+          "documentation":"<p>Date the parameter was last changed or updated and the parameter version was created.</p>"
+        },
+        "ARN":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the parameter.</p>"
         }
       },
       "documentation":"<p>An Amazon EC2 Systems Manager parameter in Parameter Store.</p>"
@@ -8700,6 +8772,10 @@
         "Version":{
           "shape":"PSParameterVersion",
           "documentation":"<p>The parameter version.</p>"
+        },
+        "Labels":{
+          "shape":"ParameterLabelList",
+          "documentation":"<p>Labels assigned to the parameter version.</p>"
         }
       },
       "documentation":"<p>Information about parameter usage.</p>"
@@ -8713,6 +8789,17 @@
       "max":256,
       "min":1,
       "pattern":"^([a-zA-Z0-9:/_-]+)$"
+    },
+    "ParameterLabel":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "ParameterLabelList":{
+      "type":"list",
+      "member":{"shape":"ParameterLabel"},
+      "max":10,
+      "min":1
     },
     "ParameterLimitExceeded":{
       "type":"structure",
@@ -8825,7 +8912,7 @@
       "type":"string",
       "max":132,
       "min":1,
-      "pattern":"tag:.+|Name|Type|KeyId|Path"
+      "pattern":"tag:.+|Name|Type|KeyId|Path|Label"
     },
     "ParameterStringFilterList":{
       "type":"list",
@@ -8859,6 +8946,14 @@
     "ParameterValueList":{
       "type":"list",
       "member":{"shape":"ParameterValue"}
+    },
+    "ParameterVersionLabelLimitExceeded":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "documentation":"<p>A parameter version can have a maximum of ten labels.</p>",
+      "exception":true
     },
     "ParameterVersionNotFound":{
       "type":"structure",
@@ -9595,7 +9690,6 @@
         "WindowId",
         "Targets",
         "TaskArn",
-        "ServiceRoleArn",
         "TaskType",
         "MaxConcurrency",
         "MaxErrors"
@@ -10324,22 +10418,22 @@
         },
         "IsEnd":{
           "shape":"Boolean",
-          "documentation":"<p>Enable this option to stop an Automation execution at the end of a specific step. The Automation execution stops if the step execution failed or succeeded.</p>",
+          "documentation":"<p>The flag which can be used to end automation no matter whether the step succeeds or fails.</p>",
           "box":true
         },
         "NextStep":{
           "shape":"String",
-          "documentation":"<p>Specifies which step in an Automation to process next after successfully completing a step. </p>",
+          "documentation":"<p>The next step after the step succeeds.</p>",
           "box":true
         },
         "IsCritical":{
           "shape":"Boolean",
-          "documentation":"<p>Enable this option to designate a step as critical for the successful completion of the Automation. If a step with this designation fails, then Automation reports the final status of the Automation as Failed. </p>",
+          "documentation":"<p>The flag which can be used to help decide whether the failure of current step leads to the Automation failure.</p>",
           "box":true
         },
         "ValidNextSteps":{
           "shape":"ValidNextStepList",
-          "documentation":"<p>ValidNextSteps offer different strategies for managing an Automation workflow when a step finishes. Automation dynamically processes ValidNextSteps when a step is completed. For example, you can specify <code>Abort</code> to stop the Automation when a step fails or <code>Continue</code> to ignore the failure of the current step and allow Automation to continue processing the next step. You can also specify <code>step:<i>step_name</i> </code> to jump to a designated step after a step succeeds. The result of the current step dynamically determines the ValidNextSteps. If a step finishes and no ValidNextStep is designated, then the Automation stops.</p>"
+          "documentation":"<p>Strategies used when step fails, we support Continue and Abort. Abort will fail the automation when the step fails. Continue will ignore the failure of current step and allow automation to execute the next step. With conditional branching, we add step:stepName to support the automation to go to another specific step.</p>"
         }
       },
       "documentation":"<p>Detailed information about an the execution state of an Automation step.</p>"

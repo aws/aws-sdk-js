@@ -568,11 +568,11 @@
       time.setMilliseconds(0);
       it('iso8601', function() {
         var params, rules, xml;
-        api.timestampFormat = 'iso8601';
         rules = {
           members: {
             Expires: {
-              type: 'timestamp'
+              type: 'timestamp',
+              timestampFormat: 'iso8601'
             }
           }
         };
@@ -584,11 +584,11 @@
       });
       it('rfc822', function() {
         var params, rules, xml;
-        api.timestampFormat = 'rfc822';
         rules = {
           members: {
             Expires: {
-              type: 'timestamp'
+              type: 'timestamp',
+              timestampFormat: 'rfc822'
             }
           }
         };
@@ -600,11 +600,11 @@
       });
       it('unix timestamp', function() {
         var params, rules, xml;
-        api.timestampFormat = 'unixTimestamp';
         rules = {
           members: {
             Expires: {
-              type: 'timestamp'
+              type: 'timestamp',
+              timestampFormat: 'unixTimestamp'
             }
           }
         };
@@ -616,7 +616,6 @@
       });
       return it('follows the forat given on the shape', function() {
         var params, rules, xml;
-        api.timestampFormat = 'unixTimestamp';
         rules = {
           members: {
             Expires: {

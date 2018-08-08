@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "AWS Storage Gateway now enables you to create stored volumes with AWS KMS support."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "With this update Amazon Transcribe now supports channel identification. It transcribes audio from separate channels and combines them into a single transcription. "
+    }
+]

@@ -180,7 +180,6 @@ declare namespace AutoScalingPlans {
     NextToken?: NextToken;
   }
   export type DisableScaleIn = boolean;
-  export type ErrorMessage = string;
   export type MaxResults = number;
   export interface MetricDimension {
     /**

@@ -1622,7 +1622,6 @@ declare namespace ElasticBeanstalk {
   }
   export type EventMessage = string;
   export type EventSeverity = "TRACE"|"DEBUG"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
-  export type ExceptionMessage = string;
   export type FailureType = "UpdateCancelled"|"CancellationFailed"|"RollbackFailed"|"RollbackSuccessful"|"InternalFailure"|"InvalidEnvironmentState"|"PermissionsError"|string;
   export type FileTypeExtension = string;
   export type ForceTerminate = boolean;

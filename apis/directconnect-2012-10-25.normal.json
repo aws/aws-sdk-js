@@ -817,8 +817,10 @@
     },
     "AwsDevice":{
       "type":"string",
-      "documentation":"<p>An abstract ID for the physical Direct Connect endpoint.</p> <p>Example: EQC50-abcdef123456</p>"
+      "documentation":"<p>An abstract ID for the physical Direct Connect endpoint.</p> <p>Example: EQC50-abcdef123456</p>",
+      "deprecated":true
     },
+    "AwsDeviceV2":{"type":"string"},
     "BGPAuthKey":{
       "type":"string",
       "documentation":"<p>The authentication key for BGP configuration.</p> <p>Example: asdf34example</p>"
@@ -832,7 +834,11 @@
         "amazonAddress":{"shape":"AmazonAddress"},
         "customerAddress":{"shape":"CustomerAddress"},
         "bgpPeerState":{"shape":"BGPPeerState"},
-        "bgpStatus":{"shape":"BGPStatus"}
+        "bgpStatus":{"shape":"BGPStatus"},
+        "awsDeviceV2":{
+          "shape":"AwsDeviceV2",
+          "documentation":"<p>The Direct Connection endpoint which the BGP peer terminates on.</p>"
+        }
       },
       "documentation":"<p>A structure containing information about a BGP peer.</p>"
     },
@@ -854,7 +860,7 @@
     },
     "BGPStatus":{
       "type":"string",
-      "documentation":"<p>The Up/Down state of the BGP peer.</p> <ul> <li> <p> <b>Up</b>: The BGP peer is established.</p> </li> <li> <p> <b>Down</b>: The BGP peer is down.</p> </li> </ul>",
+      "documentation":"<p>The Up/Down state of the BGP peer.</p> <ul> <li> <p> <b>Up</b>: The BGP peer is established.</p> <note> <p>A state of <code>up</code> does not indicate the state of the routing function. Ensure that you are receiving routes over the BGP session.</p> </note> </li> <li> <p> <b>Down</b>: The BGP peer is down.</p> </li> </ul>",
       "enum":[
         "up",
         "down"
@@ -947,6 +953,10 @@
         "lagId":{"shape":"LagId"},
         "awsDevice":{
           "shape":"AwsDevice",
+          "documentation":"<p>Deprecated in favor of awsDeviceV2.</p> <p>The Direct Connection endpoint which the physical connection terminates on.</p>"
+        },
+        "awsDeviceV2":{
+          "shape":"AwsDeviceV2",
           "documentation":"<p>The Direct Connection endpoint which the physical connection terminates on.</p>"
         }
       },
@@ -1680,6 +1690,10 @@
         "lagId":{"shape":"LagId"},
         "awsDevice":{
           "shape":"AwsDevice",
+          "documentation":"<p>Deprecated in favor of awsDeviceV2.</p> <p>The Direct Connection endpoint which the physical connection terminates on.</p>"
+        },
+        "awsDeviceV2":{
+          "shape":"AwsDeviceV2",
           "documentation":"<p>The Direct Connection endpoint which the physical connection terminates on.</p>"
         }
       },
@@ -1749,6 +1763,10 @@
         },
         "awsDevice":{
           "shape":"AwsDevice",
+          "documentation":"<p>Deprecated in favor of awsDeviceV2.</p> <p>The AWS Direct Connection endpoint that hosts the LAG.</p>"
+        },
+        "awsDeviceV2":{
+          "shape":"AwsDeviceV2",
           "documentation":"<p>The AWS Direct Connection endpoint that hosts the LAG.</p>"
         },
         "connections":{
@@ -1822,6 +1840,10 @@
         "locationName":{
           "shape":"LocationName",
           "documentation":"<p>The name of the AWS Direct Connect location. The name includes the colocation partner name and the physical site of the lit building.</p>"
+        },
+        "region":{
+          "shape":"Region",
+          "documentation":"<p>The AWS region where the AWS Direct connect location is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>"
         }
       },
       "documentation":"<p>An AWS Direct Connect location where connections and interconnects can be requested.</p>"
@@ -2171,7 +2193,15 @@
         "virtualGatewayId":{"shape":"VirtualGatewayId"},
         "directConnectGatewayId":{"shape":"DirectConnectGatewayId"},
         "routeFilterPrefixes":{"shape":"RouteFilterPrefixList"},
-        "bgpPeers":{"shape":"BGPPeerList"}
+        "bgpPeers":{"shape":"BGPPeerList"},
+        "region":{
+          "shape":"Region",
+          "documentation":"<p>The AWS region where the virtual interface is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>"
+        },
+        "awsDeviceV2":{
+          "shape":"AwsDeviceV2",
+          "documentation":"<p>The Direct Connection endpoint which the virtual interface terminates on.</p>"
+        }
       },
       "documentation":"<p>A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect location and the customer.</p>"
     },

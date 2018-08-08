@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -246,7 +247,7 @@ declare class ELB extends Service {
   /**
    * Waits for the instanceDeregistered state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "instanceDeregistered", params: ELB.Types.DescribeEndPointStateInput, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
+  waitFor(state: "instanceDeregistered", params: ELB.Types.DescribeEndPointStateInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
   /**
    * Waits for the instanceDeregistered state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
@@ -254,7 +255,7 @@ declare class ELB extends Service {
   /**
    * Waits for the anyInstanceInService state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "anyInstanceInService", params: ELB.Types.DescribeEndPointStateInput, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
+  waitFor(state: "anyInstanceInService", params: ELB.Types.DescribeEndPointStateInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
   /**
    * Waits for the anyInstanceInService state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
@@ -262,7 +263,7 @@ declare class ELB extends Service {
   /**
    * Waits for the instanceInService state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "instanceInService", params: ELB.Types.DescribeEndPointStateInput, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
+  waitFor(state: "instanceInService", params: ELB.Types.DescribeEndPointStateInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
   /**
    * Waits for the instanceInService state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */

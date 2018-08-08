@@ -80,6 +80,23 @@
       ],
       "documentation":"<p>Inspects a batch of documents and returns an inference of the prevailing sentiment, <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>MIXED</code>, or <code>NEGATIVE</code>, in each one.</p>"
     },
+    "BatchDetectSyntax":{
+      "name":"BatchDetectSyntax",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchDetectSyntaxRequest"},
+      "output":{"shape":"BatchDetectSyntaxResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"TextSizeLimitExceededException"},
+        {"shape":"UnsupportedLanguageException"},
+        {"shape":"BatchSizeLimitExceededException"},
+        {"shape":"InternalServerException"}
+      ],
+      "documentation":"<p>Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see <a>how-syntax</a>.</p>"
+    },
     "DescribeDominantLanguageDetectionJob":{
       "name":"DescribeDominantLanguageDetectionJob",
       "http":{
@@ -222,6 +239,22 @@
         {"shape":"InternalServerException"}
       ],
       "documentation":"<p>Inspects text and returns an inference of the prevailing sentiment (<code>POSITIVE</code>, <code>NEUTRAL</code>, <code>MIXED</code>, or <code>NEGATIVE</code>). </p>"
+    },
+    "DetectSyntax":{
+      "name":"DetectSyntax",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetectSyntaxRequest"},
+      "output":{"shape":"DetectSyntaxResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"TextSizeLimitExceededException"},
+        {"shape":"UnsupportedLanguageException"},
+        {"shape":"InternalServerException"}
+      ],
+      "documentation":"<p>Inspects text for syntax and the part of speech of words in the document. For more information, <a>how-syntax</a>.</p>"
     },
     "ListDominantLanguageDetectionJobs":{
       "name":"ListDominantLanguageDetectionJobs",
@@ -391,7 +424,7 @@
         {"shape":"JobNotFoundException"},
         {"shape":"InternalServerException"}
       ],
-      "documentation":"<p>Stops a dominant language detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job will be marked for termination and put into the <code>STOPPING</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation will return a 400 Internal Request Exception. </p> <p>When a job is stopped, any document that has already been processed will be written to the output location.</p>"
+      "documentation":"<p>Stops a dominant language detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>"
     },
     "StopEntitiesDetectionJob":{
       "name":"StopEntitiesDetectionJob",
@@ -406,7 +439,7 @@
         {"shape":"JobNotFoundException"},
         {"shape":"InternalServerException"}
       ],
-      "documentation":"<p>Stops an entities detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job will be marked for termination and put into the <code>STOPPING</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation will return a 400 Internal Request Exception. </p> <p>When a job is stopped, any document that has already been processed will be written to the output location.</p>"
+      "documentation":"<p>Stops an entities detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>"
     },
     "StopKeyPhrasesDetectionJob":{
       "name":"StopKeyPhrasesDetectionJob",
@@ -421,7 +454,7 @@
         {"shape":"JobNotFoundException"},
         {"shape":"InternalServerException"}
       ],
-      "documentation":"<p>Stops a key phrases detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job will be marked for termination and put into the <code>STOPPING</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation will return a 400 Internal Request Exception. </p> <p>When a job is stopped, any document that has already been processed will be written to the output location.</p>"
+      "documentation":"<p>Stops a key phrases detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>"
     },
     "StopSentimentDetectionJob":{
       "name":"StopSentimentDetectionJob",
@@ -436,7 +469,7 @@
         {"shape":"JobNotFoundException"},
         {"shape":"InternalServerException"}
       ],
-      "documentation":"<p>Stops a sentiment detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job will be marked for termination and put into the <code>STOPPING</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation will return a 400 Internal Request Exception. </p> <p>When a job is stopped, any document that has already been processed will be written to the output location.</p>"
+      "documentation":"<p>Stops a sentiment detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is be stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>"
     }
   },
   "shapes":{
@@ -622,6 +655,54 @@
       "members":{
         "ResultList":{
           "shape":"ListOfDetectSentimentResult",
+          "documentation":"<p>A list of objects containing the results of the operation. The results are sorted in ascending order by the <code>Index</code> field and match the order of the documents in the input list. If all of the documents contain an error, the <code>ResultList</code> is empty.</p>"
+        },
+        "ErrorList":{
+          "shape":"BatchItemErrorList",
+          "documentation":"<p>A list containing one object for each document that contained an error. The results are sorted in ascending order by the <code>Index</code> field and match the order of the documents in the input list. If there are no errors in the batch, the <code>ErrorList</code> is empty.</p>"
+        }
+      }
+    },
+    "BatchDetectSyntaxItemResult":{
+      "type":"structure",
+      "members":{
+        "Index":{
+          "shape":"Integer",
+          "documentation":"<p>The zero-based index of the document in the input list.</p>"
+        },
+        "SyntaxTokens":{
+          "shape":"ListOfSyntaxTokens",
+          "documentation":"<p>The syntax tokens for the words in the document, one token for each word.</p>"
+        }
+      },
+      "documentation":"<p>The result of calling the operation. The operation returns one object that is successfully processed by the operation.</p>"
+    },
+    "BatchDetectSyntaxRequest":{
+      "type":"structure",
+      "required":[
+        "TextList",
+        "LanguageCode"
+      ],
+      "members":{
+        "TextList":{
+          "shape":"StringList",
+          "documentation":"<p>A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.</p>"
+        },
+        "LanguageCode":{
+          "shape":"SyntaxLanguageCode",
+          "documentation":"<p>The language of the input documents. You can specify English (\"en\") or Spanish (\"es\"). All documents must be in the same language.</p>"
+        }
+      }
+    },
+    "BatchDetectSyntaxResponse":{
+      "type":"structure",
+      "required":[
+        "ResultList",
+        "ErrorList"
+      ],
+      "members":{
+        "ResultList":{
+          "shape":"ListOfDetectSyntaxResult",
           "documentation":"<p>A list of objects containing the results of the operation. The results are sorted in ascending order by the <code>Index</code> field and match the order of the documents in the input list. If all of the documents contain an error, the <code>ResultList</code> is empty.</p>"
         },
         "ErrorList":{
@@ -862,6 +943,32 @@
         }
       }
     },
+    "DetectSyntaxRequest":{
+      "type":"structure",
+      "required":[
+        "Text",
+        "LanguageCode"
+      ],
+      "members":{
+        "Text":{
+          "shape":"String",
+          "documentation":"<p>A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF encoded characters.</p>"
+        },
+        "LanguageCode":{
+          "shape":"SyntaxLanguageCode",
+          "documentation":"<p>The language code of the input documents. You can specify English (\"en\") or Spanish (\"es\").</p>"
+        }
+      }
+    },
+    "DetectSyntaxResponse":{
+      "type":"structure",
+      "members":{
+        "SyntaxTokens":{
+          "shape":"ListOfSyntaxTokens",
+          "documentation":"<p>A collection of syntax tokens describing the text. For each token, the response provides the text, the token type, where the text begins and ends, and the level of confidence that Amazon Comprehend has that the token is correct. For a list of token types, see <a>how-syntax</a>.</p>"
+        }
+      }
+    },
     "DominantLanguage":{
       "type":"structure",
       "members":{
@@ -932,6 +1039,10 @@
         "OutputDataConfig":{
           "shape":"OutputDataConfig",
           "documentation":"<p>The output data configuration that you supplied when you created the dominant language detection job.</p>"
+        },
+        "DataAccessRoleArn":{
+          "shape":"IamRoleArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.</p>"
         }
       },
       "documentation":"<p>Provides information about a dominant language detection job.</p>"
@@ -1000,6 +1111,10 @@
         "LanguageCode":{
           "shape":"LanguageCode",
           "documentation":"<p>The language code of the input documents.</p>"
+        },
+        "DataAccessRoleArn":{
+          "shape":"IamRoleArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.</p>"
         }
       },
       "documentation":"<p>Provides information about an entities detection job.</p>"
@@ -1213,6 +1328,10 @@
         "LanguageCode":{
           "shape":"LanguageCode",
           "documentation":"<p>The language code of the input documents.</p>"
+        },
+        "DataAccessRoleArn":{
+          "shape":"IamRoleArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.</p>"
         }
       },
       "documentation":"<p>Provides information about a key phrases detection job.</p>"
@@ -1334,6 +1453,10 @@
       "type":"list",
       "member":{"shape":"BatchDetectSentimentItemResult"}
     },
+    "ListOfDetectSyntaxResult":{
+      "type":"list",
+      "member":{"shape":"BatchDetectSyntaxItemResult"}
+    },
     "ListOfDominantLanguages":{
       "type":"list",
       "member":{"shape":"DominantLanguage"}
@@ -1345,6 +1468,10 @@
     "ListOfKeyPhrases":{
       "type":"list",
       "member":{"shape":"KeyPhrase"}
+    },
+    "ListOfSyntaxTokens":{
+      "type":"list",
+      "member":{"shape":"SyntaxToken"}
     },
     "ListSentimentDetectionJobsRequest":{
       "type":"structure",
@@ -1427,6 +1554,42 @@
       },
       "documentation":"<p>Provides configuration parameters for the output of topic detection jobs.</p> <p/>"
     },
+    "PartOfSpeechTag":{
+      "type":"structure",
+      "members":{
+        "Tag":{
+          "shape":"PartOfSpeechTagType",
+          "documentation":"<p>Identifies the part of speech that the token represents.</p>"
+        },
+        "Score":{
+          "shape":"Float",
+          "documentation":"<p>The confidence that Amazon Comprehend has that the part of speech was correctly identified.</p>"
+        }
+      },
+      "documentation":"<p>Identifies the part of speech represented by the token and gives the confidence that Amazon Comprehend has that the part of speech was correctly identified. For more information about the parts of speech that Amazon Comprehend can identify, see <a>how-syntax</a>.</p>"
+    },
+    "PartOfSpeechTagType":{
+      "type":"string",
+      "enum":[
+        "ADJ",
+        "ADP",
+        "ADV",
+        "AUX",
+        "CONJ",
+        "DET",
+        "INTJ",
+        "NOUN",
+        "NUM",
+        "O",
+        "PART",
+        "PRON",
+        "PROPN",
+        "PUNCT",
+        "SCONJ",
+        "SYM",
+        "VERB"
+      ]
+    },
     "S3Uri":{
       "type":"string",
       "max":1024,
@@ -1492,6 +1655,10 @@
         "LanguageCode":{
           "shape":"LanguageCode",
           "documentation":"<p>The language code of the input documents.</p>"
+        },
+        "DataAccessRoleArn":{
+          "shape":"IamRoleArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.</p>"
         }
       },
       "documentation":"<p>Provides information about a sentiment detection job.</p>"
@@ -1549,7 +1716,7 @@
         },
         "DataAccessRoleArn":{
           "shape":"IamRoleArn",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>"
         },
         "JobName":{
           "shape":"JobName",
@@ -1594,7 +1761,7 @@
         },
         "DataAccessRoleArn":{
           "shape":"IamRoleArn",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>"
         },
         "JobName":{
           "shape":"JobName",
@@ -1643,7 +1810,7 @@
         },
         "DataAccessRoleArn":{
           "shape":"IamRoleArn",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>"
         },
         "JobName":{
           "shape":"JobName",
@@ -1692,7 +1859,7 @@
         },
         "DataAccessRoleArn":{
           "shape":"IamRoleArn",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>"
         },
         "JobName":{
           "shape":"JobName",
@@ -1740,7 +1907,7 @@
         },
         "DataAccessRoleArn":{
           "shape":"IamRoleArn",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. </p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>"
         },
         "JobName":{
           "shape":"JobName",
@@ -1789,7 +1956,7 @@
         },
         "JobStatus":{
           "shape":"JobStatus",
-          "documentation":"<p>Either <code>STOPPING</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopDominantLanguageDetectionJob</code> operation.</p>"
+          "documentation":"<p>Either <code>STOP_REQUESTED</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopDominantLanguageDetectionJob</code> operation.</p>"
         }
       }
     },
@@ -1812,7 +1979,7 @@
         },
         "JobStatus":{
           "shape":"JobStatus",
-          "documentation":"<p>Either <code>STOPPING</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopEntitiesDetectionJob</code> operation.</p>"
+          "documentation":"<p>Either <code>STOP_REQUESTED</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopEntitiesDetectionJob</code> operation.</p>"
         }
       }
     },
@@ -1835,7 +2002,7 @@
         },
         "JobStatus":{
           "shape":"JobStatus",
-          "documentation":"<p>Either <code>STOPPING</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopKeyPhrasesDetectionJob</code> operation.</p>"
+          "documentation":"<p>Either <code>STOP_REQUESTED</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopKeyPhrasesDetectionJob</code> operation.</p>"
         }
       }
     },
@@ -1858,7 +2025,7 @@
         },
         "JobStatus":{
           "shape":"JobStatus",
-          "documentation":"<p>Either <code>STOPPING</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopSentimentDetectionJob</code> operation.</p>"
+          "documentation":"<p>Either <code>STOP_REQUESTED</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopSentimentDetectionJob</code> operation.</p>"
         }
       }
     },
@@ -1869,6 +2036,36 @@
     "StringList":{
       "type":"list",
       "member":{"shape":"String"}
+    },
+    "SyntaxLanguageCode":{
+      "type":"string",
+      "enum":["en"]
+    },
+    "SyntaxToken":{
+      "type":"structure",
+      "members":{
+        "TokenId":{
+          "shape":"Integer",
+          "documentation":"<p>A unique identifier for a token.</p>"
+        },
+        "Text":{
+          "shape":"String",
+          "documentation":"<p>The word that was recognized in the source text.</p>"
+        },
+        "BeginOffset":{
+          "shape":"Integer",
+          "documentation":"<p>The zero-based offset from the beginning of the source text to the first character in the word.</p>"
+        },
+        "EndOffset":{
+          "shape":"Integer",
+          "documentation":"<p>The zero-based offset from the beginning of the source text to the last character in the word.</p>"
+        },
+        "PartOfSpeech":{
+          "shape":"PartOfSpeechTag",
+          "documentation":"<p>Provides the part of speech label and the confidence level that Amazon Comprehend has that the part of speech was correctly identified. For more information, see <a>how-syntax</a>.</p>"
+        }
+      },
+      "documentation":"<p>Represents a work in the input text that was recognized and assigned a part of speech. There is one syntax token record for each word in the source text.</p>"
     },
     "TextSizeLimitExceededException":{
       "type":"structure",

@@ -548,6 +548,14 @@ declare class SSM extends Service {
    */
   getPatchBaselineForPatchGroup(callback?: (err: AWSError, data: SSM.Types.GetPatchBaselineForPatchGroupResult) => void): Request<SSM.Types.GetPatchBaselineForPatchGroupResult, AWSError>;
   /**
+   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   You can't delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
+   */
+  labelParameterVersion(params: SSM.Types.LabelParameterVersionRequest, callback?: (err: AWSError, data: SSM.Types.LabelParameterVersionResult) => void): Request<SSM.Types.LabelParameterVersionResult, AWSError>;
+  /**
+   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   You can't delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
+   */
+  labelParameterVersion(callback?: (err: AWSError, data: SSM.Types.LabelParameterVersionResult) => void): Request<SSM.Types.LabelParameterVersionResult, AWSError>;
+  /**
    * Retrieves all versions of an association for a specific association ID.
    */
   listAssociationVersions(params: SSM.Types.ListAssociationVersionsRequest, callback?: (err: AWSError, data: SSM.Types.ListAssociationVersionsResult) => void): Request<SSM.Types.ListAssociationVersionsResult, AWSError>;
@@ -1531,11 +1539,11 @@ declare namespace SSM {
      */
     key: CommandFilterKey;
     /**
-     * The filter value. 
+     * The filter value. Valid values for each filter key are as follows:    InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see a list of command executions occurring July 7, 2018, and later.    InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see a list of command executions from before July 7, 2018.    Status: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:    Pending     InProgress     Success     Cancelled     Failed     TimedOut     Cancelling       DocumentName: Specify name of the SSM document for which you want to see command execution results. For example, specify AWS-RunPatchBaseline to see command executions that used this SSM document to perform security patching operations on instances.     ExecutionStage: Specify one of the following values:    Executing: Returns a list of command executions that are currently still running.    Complete: Returns a list of command exeuctions that have already completed.     
      */
     value: CommandFilterValue;
   }
-  export type CommandFilterKey = "InvokedAfter"|"InvokedBefore"|"Status"|string;
+  export type CommandFilterKey = "InvokedAfter"|"InvokedBefore"|"Status"|"ExecutionStage"|"DocumentName"|string;
   export type CommandFilterList = CommandFilter[];
   export type CommandFilterValue = string;
   export type CommandId = string;
@@ -4407,6 +4415,26 @@ declare namespace SSM {
   export type InvocationTraceOutput = string;
   export type IsSubTypeSchema = boolean;
   export type KeyList = TagKey[];
+  export interface LabelParameterVersionRequest {
+    /**
+     * The parameter name on which you want to attach one or more labels.
+     */
+    Name: PSParameterName;
+    /**
+     * The specific version of the parameter on which you want to attach one or more labels. If no version is specified, the system attaches the label to the latest version.)
+     */
+    ParameterVersion?: PSParameterVersion;
+    /**
+     * One or more labels to attach to the specified parameter version.
+     */
+    Labels: ParameterLabelList;
+  }
+  export interface LabelParameterVersionResult {
+    /**
+     * The label does not meet the requirements. For information about parameter label requirements, see Labeling Parameters in the AWS Systems Manager User Guide.
+     */
+    InvalidLabels?: ParameterLabelList;
+  }
   export type LastResourceDataSyncMessage = string;
   export type LastResourceDataSyncStatus = "Successful"|"Failed"|"InProgress"|string;
   export type LastResourceDataSyncTime = Date;
@@ -5198,6 +5226,7 @@ declare namespace SSM {
   export type OutputSourceType = string;
   export type OwnerInformation = string;
   export type PSParameterName = string;
+  export type PSParameterSelector = string;
   export type PSParameterValue = string;
   export type PSParameterVersion = number;
   export interface Parameter {
@@ -5217,6 +5246,22 @@ declare namespace SSM {
      * The parameter version.
      */
     Version?: PSParameterVersion;
+    /**
+     * Either the version number or the label used to retrieve the parameter value. Specify selectors by using one of the following formats: parameter_name:version parameter_name:label
+     */
+    Selector?: PSParameterSelector;
+    /**
+     * Applies to parameters that reference information in other AWS services. SourceResult is the raw result or response from the source.
+     */
+    SourceResult?: String;
+    /**
+     * Date the parameter was last changed or updated and the parameter version was created.
+     */
+    LastModifiedDate?: DateTime;
+    /**
+     * The Amazon Resource Name (ARN) of the parameter.
+     */
+    ARN?: String;
   }
   export type ParameterDescription = string;
   export interface ParameterHistory {
@@ -5256,9 +5301,15 @@ declare namespace SSM {
      * The parameter version.
      */
     Version?: PSParameterVersion;
+    /**
+     * Labels assigned to the parameter version.
+     */
+    Labels?: ParameterLabelList;
   }
   export type ParameterHistoryList = ParameterHistory[];
   export type ParameterKeyId = string;
+  export type ParameterLabel = string;
+  export type ParameterLabelList = ParameterLabel[];
   export type ParameterList = Parameter[];
   export interface ParameterMetadata {
     /**
@@ -5738,7 +5789,7 @@ declare namespace SSM {
     /**
      * The role that should be assumed when executing the task.
      */
-    ServiceRoleArn: ServiceRole;
+    ServiceRoleArn?: ServiceRole;
     /**
      * The type of task being registered.
      */
@@ -6193,19 +6244,19 @@ declare namespace SSM {
      */
     OverriddenParameters?: AutomationParameterMap;
     /**
-     * Enable this option to stop an Automation execution at the end of a specific step. The Automation execution stops if the step execution failed or succeeded.
+     * The flag which can be used to end automation no matter whether the step succeeds or fails.
      */
     IsEnd?: Boolean;
     /**
-     * Specifies which step in an Automation to process next after successfully completing a step. 
+     * The next step after the step succeeds.
      */
     NextStep?: String;
     /**
-     * Enable this option to designate a step as critical for the successful completion of the Automation. If a step with this designation fails, then Automation reports the final status of the Automation as Failed. 
+     * The flag which can be used to help decide whether the failure of current step leads to the Automation failure.
      */
     IsCritical?: Boolean;
     /**
-     * ValidNextSteps offer different strategies for managing an Automation workflow when a step finishes. Automation dynamically processes ValidNextSteps when a step is completed. For example, you can specify Abort to stop the Automation when a step fails or Continue to ignore the failure of the current step and allow Automation to continue processing the next step. You can also specify step:step_name  to jump to a designated step after a step succeeds. The result of the current step dynamically determines the ValidNextSteps. If a step finishes and no ValidNextStep is designated, then the Automation stops.
+     * Strategies used when step fails, we support Continue and Abort. Abort will fail the automation when the step fails. Continue will ignore the failure of current step and allow automation to execute the next step. With conditional branching, we add step:stepName to support the automation to go to another specific step.
      */
     ValidNextSteps?: ValidNextStepList;
   }

@@ -629,7 +629,6 @@ declare namespace CognitoIdentity {
      */
     RoleMappings?: RoleMappingMap;
   }
-  export type String = string;
   export type TokenDuration = number;
   export interface UnlinkDeveloperIdentityInput {
     /**

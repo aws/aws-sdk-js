@@ -44,6 +44,14 @@ declare class Comprehend extends Service {
    */
   batchDetectSentiment(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSentimentResponse) => void): Request<Comprehend.Types.BatchDetectSentimentResponse, AWSError>;
   /**
+   * Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see how-syntax.
+   */
+  batchDetectSyntax(params: Comprehend.Types.BatchDetectSyntaxRequest, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSyntaxResponse) => void): Request<Comprehend.Types.BatchDetectSyntaxResponse, AWSError>;
+  /**
+   * Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see how-syntax.
+   */
+  batchDetectSyntax(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSyntaxResponse) => void): Request<Comprehend.Types.BatchDetectSyntaxResponse, AWSError>;
+  /**
    * Gets the properties associated with a dominant language detection job. Use this operation to get the status of a detection job.
    */
   describeDominantLanguageDetectionJob(params: Comprehend.Types.DescribeDominantLanguageDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.DescribeDominantLanguageDetectionJobResponse, AWSError>;
@@ -115,6 +123,14 @@ declare class Comprehend extends Service {
    * Inspects text and returns an inference of the prevailing sentiment (POSITIVE, NEUTRAL, MIXED, or NEGATIVE). 
    */
   detectSentiment(callback?: (err: AWSError, data: Comprehend.Types.DetectSentimentResponse) => void): Request<Comprehend.Types.DetectSentimentResponse, AWSError>;
+  /**
+   * Inspects text for syntax and the part of speech of words in the document. For more information, how-syntax.
+   */
+  detectSyntax(params: Comprehend.Types.DetectSyntaxRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectSyntaxResponse) => void): Request<Comprehend.Types.DetectSyntaxResponse, AWSError>;
+  /**
+   * Inspects text for syntax and the part of speech of words in the document. For more information, how-syntax.
+   */
+  detectSyntax(callback?: (err: AWSError, data: Comprehend.Types.DetectSyntaxResponse) => void): Request<Comprehend.Types.DetectSyntaxResponse, AWSError>;
   /**
    * Gets a list of the dominant language detection jobs that you have submitted.
    */
@@ -196,35 +212,35 @@ declare class Comprehend extends Service {
    */
   startTopicsDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartTopicsDetectionJobResponse) => void): Request<Comprehend.Types.StartTopicsDetectionJobResponse, AWSError>;
   /**
-   * Stops a dominant language detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   * Stops a dominant language detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopDominantLanguageDetectionJob(params: Comprehend.Types.StopDominantLanguageDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StopDominantLanguageDetectionJobResponse, AWSError>;
   /**
-   * Stops a dominant language detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   * Stops a dominant language detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopDominantLanguageDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StopDominantLanguageDetectionJobResponse, AWSError>;
   /**
-   * Stops an entities detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   * Stops an entities detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopEntitiesDetectionJob(params: Comprehend.Types.StopEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopEntitiesDetectionJobResponse, AWSError>;
   /**
-   * Stops an entities detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   * Stops an entities detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopEntitiesDetectionJobResponse, AWSError>;
   /**
-   * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopKeyPhrasesDetectionJob(params: Comprehend.Types.StopKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StopKeyPhrasesDetectionJobResponse, AWSError>;
   /**
-   * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopKeyPhrasesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StopKeyPhrasesDetectionJobResponse, AWSError>;
   /**
-   * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopSentimentDetectionJob(params: Comprehend.Types.StopSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopSentimentDetectionJobResponse, AWSError>;
   /**
-   * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job will be marked for termination and put into the STOPPING state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation will return a 400 Internal Request Exception.  When a job is stopped, any document that has already been processed will be written to the output location.
+   * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopSentimentDetectionJobResponse, AWSError>;
 }
@@ -345,6 +361,36 @@ declare namespace Comprehend {
      * A list of objects containing the results of the operation. The results are sorted in ascending order by the Index field and match the order of the documents in the input list. If all of the documents contain an error, the ResultList is empty.
      */
     ResultList: ListOfDetectSentimentResult;
+    /**
+     * A list containing one object for each document that contained an error. The results are sorted in ascending order by the Index field and match the order of the documents in the input list. If there are no errors in the batch, the ErrorList is empty.
+     */
+    ErrorList: BatchItemErrorList;
+  }
+  export interface BatchDetectSyntaxItemResult {
+    /**
+     * The zero-based index of the document in the input list.
+     */
+    Index?: Integer;
+    /**
+     * The syntax tokens for the words in the document, one token for each word.
+     */
+    SyntaxTokens?: ListOfSyntaxTokens;
+  }
+  export interface BatchDetectSyntaxRequest {
+    /**
+     * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     */
+    TextList: StringList;
+    /**
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     */
+    LanguageCode: SyntaxLanguageCode;
+  }
+  export interface BatchDetectSyntaxResponse {
+    /**
+     * A list of objects containing the results of the operation. The results are sorted in ascending order by the Index field and match the order of the documents in the input list. If all of the documents contain an error, the ResultList is empty.
+     */
+    ResultList: ListOfDetectSyntaxResult;
     /**
      * A list containing one object for each document that contained an error. The results are sorted in ascending order by the Index field and match the order of the documents in the input list. If there are no errors in the batch, the ErrorList is empty.
      */
@@ -490,6 +536,22 @@ declare namespace Comprehend {
      */
     SentimentScore?: SentimentScore;
   }
+  export interface DetectSyntaxRequest {
+    /**
+     * A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF encoded characters.
+     */
+    Text: String;
+    /**
+     * The language code of the input documents. You can specify English ("en") or Spanish ("es").
+     */
+    LanguageCode: SyntaxLanguageCode;
+  }
+  export interface DetectSyntaxResponse {
+    /**
+     * A collection of syntax tokens describing the text. For each token, the response provides the text, the token type, where the text begins and ends, and the level of confidence that Amazon Comprehend has that the token is correct. For a list of token types, see how-syntax.
+     */
+    SyntaxTokens?: ListOfSyntaxTokens;
+  }
   export interface DominantLanguage {
     /**
      * The RFC 5646 language code for the dominant language. For more information about RFC 5646, see Tags for Identifying Languages on the IETF Tools web site.
@@ -551,6 +613,10 @@ declare namespace Comprehend {
      * The output data configuration that you supplied when you created the dominant language detection job.
      */
     OutputDataConfig?: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
   }
   export type DominantLanguageDetectionJobPropertiesList = DominantLanguageDetectionJobProperties[];
   export interface EntitiesDetectionJobFilter {
@@ -608,6 +674,10 @@ declare namespace Comprehend {
      * The language code of the input documents.
      */
     LanguageCode?: LanguageCode;
+    /**
+     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
   }
   export type EntitiesDetectionJobPropertiesList = EntitiesDetectionJobProperties[];
   export interface Entity {
@@ -723,6 +793,10 @@ declare namespace Comprehend {
      * The language code of the input documents.
      */
     LanguageCode?: LanguageCode;
+    /**
+     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
   }
   export type KeyPhrasesDetectionJobPropertiesList = KeyPhrasesDetectionJobProperties[];
   export type LanguageCode = "en"|"es"|string;
@@ -802,9 +876,11 @@ declare namespace Comprehend {
   export type ListOfDetectEntitiesResult = BatchDetectEntitiesItemResult[];
   export type ListOfDetectKeyPhrasesResult = BatchDetectKeyPhrasesItemResult[];
   export type ListOfDetectSentimentResult = BatchDetectSentimentItemResult[];
+  export type ListOfDetectSyntaxResult = BatchDetectSyntaxItemResult[];
   export type ListOfDominantLanguages = DominantLanguage[];
   export type ListOfEntities = Entity[];
   export type ListOfKeyPhrases = KeyPhrase[];
+  export type ListOfSyntaxTokens = SyntaxToken[];
   export interface ListSentimentDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -861,6 +937,17 @@ declare namespace Comprehend {
      */
     S3Uri: S3Uri;
   }
+  export interface PartOfSpeechTag {
+    /**
+     * Identifies the part of speech that the token represents.
+     */
+    Tag?: PartOfSpeechTagType;
+    /**
+     * The confidence that Amazon Comprehend has that the part of speech was correctly identified.
+     */
+    Score?: Float;
+  }
+  export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB"|string;
   export type S3Uri = string;
   export interface SentimentDetectionJobFilter {
     /**
@@ -917,6 +1004,10 @@ declare namespace Comprehend {
      * The language code of the input documents.
      */
     LanguageCode?: LanguageCode;
+    /**
+     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
   }
   export type SentimentDetectionJobPropertiesList = SentimentDetectionJobProperties[];
   export interface SentimentScore {
@@ -948,7 +1039,7 @@ declare namespace Comprehend {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -980,7 +1071,7 @@ declare namespace Comprehend {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -1016,7 +1107,7 @@ declare namespace Comprehend {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -1052,7 +1143,7 @@ declare namespace Comprehend {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -1088,7 +1179,7 @@ declare namespace Comprehend {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. 
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -1126,7 +1217,7 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
-     * Either STOPPING if the job is currently running, or STOPPED if the job was previously stopped with the StopDominantLanguageDetectionJob operation.
+     * Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was previously stopped with the StopDominantLanguageDetectionJob operation.
      */
     JobStatus?: JobStatus;
   }
@@ -1142,7 +1233,7 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
-     * Either STOPPING if the job is currently running, or STOPPED if the job was previously stopped with the StopEntitiesDetectionJob operation.
+     * Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was previously stopped with the StopEntitiesDetectionJob operation.
      */
     JobStatus?: JobStatus;
   }
@@ -1158,7 +1249,7 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
-     * Either STOPPING if the job is currently running, or STOPPED if the job was previously stopped with the StopKeyPhrasesDetectionJob operation.
+     * Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was previously stopped with the StopKeyPhrasesDetectionJob operation.
      */
     JobStatus?: JobStatus;
   }
@@ -1174,12 +1265,35 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
-     * Either STOPPING if the job is currently running, or STOPPED if the job was previously stopped with the StopSentimentDetectionJob operation.
+     * Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was previously stopped with the StopSentimentDetectionJob operation.
      */
     JobStatus?: JobStatus;
   }
   export type String = string;
   export type StringList = String[];
+  export type SyntaxLanguageCode = "en"|string;
+  export interface SyntaxToken {
+    /**
+     * A unique identifier for a token.
+     */
+    TokenId?: Integer;
+    /**
+     * The word that was recognized in the source text.
+     */
+    Text?: String;
+    /**
+     * The zero-based offset from the beginning of the source text to the first character in the word.
+     */
+    BeginOffset?: Integer;
+    /**
+     * The zero-based offset from the beginning of the source text to the last character in the word.
+     */
+    EndOffset?: Integer;
+    /**
+     * Provides the part of speech label and the confidence level that Amazon Comprehend has that the part of speech was correctly identified. For more information, see how-syntax.
+     */
+    PartOfSpeech?: PartOfSpeechTag;
+  }
   export type Timestamp = Date;
   export interface TopicsDetectionJobFilter {
     /**

@@ -56,7 +56,6 @@ declare namespace CUR {
     ReportDefinitions?: ReportDefinitionList;
     NextToken?: GenericString;
   }
-  export type ErrorMessage = string;
   export type GenericString = string;
   export type MaxResults = number;
   export interface PutReportDefinitionRequest {

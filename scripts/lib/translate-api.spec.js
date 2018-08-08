@@ -1,5 +1,7 @@
 var expect = require('chai').expect;
 var removeEventStreamOperations = require('./remove-event-stream-ops').removeEventStreamOperations;
+var Translator = require('./translator');
+var Api = require('../../lib/model/api');
 var fooModel = require('./foo-2018-03-30.normal.json');
 
 describe('removeEventStreamOperations', function() {
@@ -64,6 +66,15 @@ describe('removeEventStreamOperations', function() {
         var didRemove = removeEventStreamOperations(mockModel);
         expect(typeof mockModel.operations['BarOperation']).to.equal('object');
         expect(didRemove).to.equal(false);
+    });
+});
+
+describe('timestampFormat', function() {
+    it('prefer timestampFormat trait in member than in shape', function() {
+        var mockModel = deepCopyObject(fooModel);
+        var minified = new Translator(mockModel, {});
+        var minifiedApi = new Api(minified);
+        expect(minifiedApi.operations.bazOperation.input.members.BazString.timestampFormat).to.equal('iso8601');
     });
 });
 

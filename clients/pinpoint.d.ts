@@ -164,11 +164,11 @@ declare class Pinpoint extends Service {
    */
   deleteSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
   /**
-   * Deletes endpoints associated with an user id.
+   * Deletes endpoints that are associated with a User ID.
    */
   deleteUserEndpoints(params: Pinpoint.Types.DeleteUserEndpointsRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteUserEndpointsResponse) => void): Request<Pinpoint.Types.DeleteUserEndpointsResponse, AWSError>;
   /**
-   * Deletes endpoints associated with an user id.
+   * Deletes endpoints that are associated with a User ID.
    */
   deleteUserEndpoints(callback?: (err: AWSError, data: Pinpoint.Types.DeleteUserEndpointsResponse) => void): Request<Pinpoint.Types.DeleteUserEndpointsResponse, AWSError>;
   /**
@@ -412,11 +412,11 @@ declare class Pinpoint extends Service {
    */
   getSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
   /**
-   * Returns information about the endpoints associated with an user id.
+   * Returns information about the endpoints that are associated with a User ID.
    */
   getUserEndpoints(params: Pinpoint.Types.GetUserEndpointsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetUserEndpointsResponse) => void): Request<Pinpoint.Types.GetUserEndpointsResponse, AWSError>;
   /**
-   * Returns information about the endpoints associated with an user id.
+   * Returns information about the endpoints that are associated with a User ID.
    */
   getUserEndpoints(callback?: (err: AWSError, data: Pinpoint.Types.GetUserEndpointsResponse) => void): Request<Pinpoint.Types.GetUserEndpointsResponse, AWSError>;
   /**
@@ -436,6 +436,14 @@ declare class Pinpoint extends Service {
    */
   putEventStream(callback?: (err: AWSError, data: Pinpoint.Types.PutEventStreamResponse) => void): Request<Pinpoint.Types.PutEventStreamResponse, AWSError>;
   /**
+   * Use to record events for endpoints. This method creates events and creates or updates the endpoints that those events are associated with.
+   */
+  putEvents(params: Pinpoint.Types.PutEventsRequest, callback?: (err: AWSError, data: Pinpoint.Types.PutEventsResponse) => void): Request<Pinpoint.Types.PutEventsResponse, AWSError>;
+  /**
+   * Use to record events for endpoints. This method creates events and creates or updates the endpoints that those events are associated with.
+   */
+  putEvents(callback?: (err: AWSError, data: Pinpoint.Types.PutEventsResponse) => void): Request<Pinpoint.Types.PutEventsResponse, AWSError>;
+  /**
    * Used to remove the attributes for an app
    */
   removeAttributes(params: Pinpoint.Types.RemoveAttributesRequest, callback?: (err: AWSError, data: Pinpoint.Types.RemoveAttributesResponse) => void): Request<Pinpoint.Types.RemoveAttributesResponse, AWSError>;
@@ -444,39 +452,19 @@ declare class Pinpoint extends Service {
    */
   removeAttributes(callback?: (err: AWSError, data: Pinpoint.Types.RemoveAttributesResponse) => void): Request<Pinpoint.Types.RemoveAttributesResponse, AWSError>;
   /**
-   * Use this resource to send a direct message, which is a one time message that you send to a limited audience without creating a campaign. 
-
-You can send the message to up to 100 recipients. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of sending a direct message.
-
-You can send a direct message as a push notification to your mobile app or as an SMS message to SMS-enabled devices.
+   * Used to send a direct message.
    */
   sendMessages(params: Pinpoint.Types.SendMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
   /**
-   * Use this resource to send a direct message, which is a one time message that you send to a limited audience without creating a campaign. 
-
-You can send the message to up to 100 recipients. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of sending a direct message.
-
-You can send a direct message as a push notification to your mobile app or as an SMS message to SMS-enabled devices.
+   * Used to send a direct message.
    */
   sendMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
   /**
-   * Use this resource to message a list of users. Amazon Pinpoint sends the message to all of the endpoints that are associated with each user.
-
-A user represents an individual who is assigned a unique user ID, and this ID is assigned to one or more endpoints. For example, if an individual uses your app on multiple devices, your app could assign that person's user ID to the endpoint for each device.
-
-With the users-messages resource, you specify the message recipients as user IDs. For each user ID, Amazon Pinpoint delivers the message to all of the user's endpoints. Within the body of your request, you can specify a default message, and you can tailor your message for different channels, including those for mobile push and SMS.
-
-With this resource, you send a direct message, which is a one time message that you send to a limited audience without creating a campaign. You can send the message to up to 100 users per request. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of using the users-messages resource.
+   * Used to send a message to a list of users.
    */
   sendUsersMessages(params: Pinpoint.Types.SendUsersMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
   /**
-   * Use this resource to message a list of users. Amazon Pinpoint sends the message to all of the endpoints that are associated with each user.
-
-A user represents an individual who is assigned a unique user ID, and this ID is assigned to one or more endpoints. For example, if an individual uses your app on multiple devices, your app could assign that person's user ID to the endpoint for each device.
-
-With the users-messages resource, you specify the message recipients as user IDs. For each user ID, Amazon Pinpoint delivers the message to all of the user's endpoints. Within the body of your request, you can specify a default message, and you can tailor your message for different channels, including those for mobile push and SMS.
-
-With this resource, you send a direct message, which is a one time message that you send to a limited audience without creating a campaign. You can send the message to up to 100 users per request. You cannot use the message to engage a segment. When you send the message, Amazon Pinpoint delivers it immediately, and you cannot schedule the delivery. To engage a user segment, and to schedule the message delivery, create a campaign instead of using the users-messages resource.
+   * Used to send a message to a list of users.
    */
   sendUsersMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
   /**
@@ -576,11 +564,11 @@ With this resource, you send a direct message, which is a one time message that 
    */
   updateGcmChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateGcmChannelResponse) => void): Request<Pinpoint.Types.UpdateGcmChannelResponse, AWSError>;
   /**
-   * Use to update a segment.
+   * Used to update a segment.
    */
   updateSegment(params: Pinpoint.Types.UpdateSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSegmentResponse) => void): Request<Pinpoint.Types.UpdateSegmentResponse, AWSError>;
   /**
-   * Use to update a segment.
+   * Used to update a segment.
    */
   updateSegment(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSegmentResponse) => void): Request<Pinpoint.Types.UpdateSegmentResponse, AWSError>;
   /**
@@ -595,15 +583,15 @@ With this resource, you send a direct message, which is a one time message that 
 declare namespace Pinpoint {
   export interface ADMChannelRequest {
     /**
-     * Client ID as gotten from Amazon
+     * The Client ID that you obtained from the Amazon App Distribution Portal.
      */
     ClientId?: __string;
     /**
-     * Client secret as gotten from Amazon
+     * The Client Secret that you obtained from the Amazon App Distribution Portal.
      */
     ClientSecret?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Indicates whether or not the channel is enabled for sending messages.
      */
     Enabled?: __boolean;
   }
@@ -613,11 +601,11 @@ declare namespace Pinpoint {
      */
     ApplicationId?: __string;
     /**
-     * When was this segment created
+     * The date and time when this channel was created.
      */
     CreationDate?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Indicates whether or not the channel is enabled for sending messages.
      */
     Enabled?: __boolean;
     /**
@@ -625,27 +613,27 @@ declare namespace Pinpoint {
      */
     HasCredential?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * (Deprecated) An identifier for the channel. Retained for backwards compatibility.
      */
     Id?: __string;
     /**
-     * Is this channel archived
+     * Indicates whether or not the channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who last updated this entry
+     * The user who last updated this channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time when this channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * Platform type. Will be "ADM"
+     * The platform type. For this channel, the value is always "ADM."
      */
     Platform?: __string;
     /**
-     * Version of channel
+     * The channel version.
      */
     Version?: __integer;
   }
@@ -655,7 +643,7 @@ declare namespace Pinpoint {
      */
     Action?: Action;
     /**
-     * The message body of the notification, the email body or the text message.
+     * The message body of the notification.
      */
     Body?: __string;
     /**
@@ -751,11 +739,11 @@ declare namespace Pinpoint {
   }
   export interface APNSChannelResponse {
     /**
-     * The ID of the application to which the channel applies.
+     * The ID of the application that the channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * When was this segment created
+     * The date and time when this channel was created.
      */
     CreationDate?: __string;
     /**
@@ -775,27 +763,27 @@ declare namespace Pinpoint {
      */
     HasTokenKey?: __boolean;
     /**
-     * Channel ID. Not used. Present only for backwards compatibility.
+     * (Deprecated) An identifier for the channel. Retained for backwards compatibility.
      */
     Id?: __string;
     /**
-     * Is this channel archived
+     * Indicates whether or not the channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who last updated this entry
+     * The user who last updated this channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time when this channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * The platform type. Will be APNS.
+     * The platform type. For this channel, the value is always "ADM."
      */
     Platform?: __string;
     /**
-     * Version of channel
+     * The channel version.
      */
     Version?: __integer;
   }
@@ -809,7 +797,7 @@ declare namespace Pinpoint {
      */
     Badge?: __integer;
     /**
-     * The message body of the notification, the email body or the text message.
+     * The message body of the notification.
      */
     Body?: __string;
     /**
@@ -1137,6 +1125,10 @@ For more information about the apns-priority parameter, see Communicating with A
      * List of campaign activities
      */
     Item?: ListOfActivityResponse;
+    /**
+     * The string that you use in a subsequent request to get the next page of results in a paginated response.
+     */
+    NextToken?: __string;
   }
   export interface ActivityResponse {
     /**
@@ -1359,7 +1351,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     Action?: Action;
     /**
-     * The message body of the notification, the email body or the text message.
+     * The message body of the notification.
      */
     Body?: __string;
     /**
@@ -1691,7 +1683,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     Action?: Action;
     /**
-     * The message body of the notification, the email body or the text message.
+     * The message body of the notification.
      */
     Body?: __string;
     /**
@@ -1977,7 +1969,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface EndpointBatchItem {
     /**
-     * The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +1206XXX5550100. For the email channel, use an email address.
+     * The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +12065550100. For the email channel, use an email address.
      */
     Address?: __string;
     /**
@@ -2050,23 +2042,23 @@ NONE - Users has not opted out and receives all messages.
      */
     Locale?: __string;
     /**
-     * The endpoint make, such as such as Apple or Samsung.
+     * The manufacturer of the endpoint device, such as Apple or Samsung.
      */
     Make?: __string;
     /**
-     * The endpoint model, such as iPhone.
+     * The model name or number of the endpoint device, such as iPhone.
      */
     Model?: __string;
     /**
-     * The endpoint model version.
+     * The model version of the endpoint device.
      */
     ModelVersion?: __string;
     /**
-     * The endpoint platform, such as ios or android.
+     * The platform of the endpoint device, such as iOS or Android.
      */
     Platform?: __string;
     /**
-     * The endpoint platform version.
+     * The platform version of the endpoint device.
      */
     PlatformVersion?: __string;
     /**
@@ -2074,21 +2066,31 @@ NONE - Users has not opted out and receives all messages.
      */
     Timezone?: __string;
   }
+  export interface EndpointItemResponse {
+    /**
+     * A custom message associated with the registration of an endpoint when issuing a response.
+     */
+    Message?: __string;
+    /**
+     * The status code to respond with for a particular endpoint id after endpoint registration
+     */
+    StatusCode?: __integer;
+  }
   export interface EndpointLocation {
     /**
      * The city where the endpoint is located.
      */
     City?: __string;
     /**
-     * Country according to ISO 3166-1 Alpha-2 codes. For example, US.
+     * The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 Alpha-2 code, such as "US" for the United States.
      */
     Country?: __string;
     /**
-     * The latitude of the endpoint location. Rounded to one decimal (Roughly corresponding to a mile).
+     * The latitude of the endpoint location, rounded to one decimal place.
      */
     Latitude?: __double;
     /**
-     * The longitude of the endpoint location. Rounded to one decimal (Roughly corresponding to a mile).
+     * The longitude of the endpoint location, rounded to one decimal place.
      */
     Longitude?: __double;
     /**
@@ -2096,7 +2098,7 @@ NONE - Users has not opted out and receives all messages.
      */
     PostalCode?: __string;
     /**
-     * The region of the endpoint location. For example, corresponds to a state in US.
+     * The region of the endpoint location. For example, in the United States, this corresponds to a state.
      */
     Region?: __string;
   }
@@ -2106,7 +2108,31 @@ NONE - Users has not opted out and receives all messages.
      */
     Address?: __string;
     /**
-     * Delivery status of message.
+     * The delivery status of the message. Possible values:
+
+SUCCESS - The message was successfully delivered to the endpoint.
+
+TRANSIENT_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later.
+
+FAILURE_PERMANENT - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.
+
+TIMEOUT - The message couldn't be sent within the timeout period.
+
+QUIET_TIME - The local time for the endpoint was within the Quiet Hours for the campaign.
+
+DAILY_CAP - The endpoint has received the maximum number of messages it can receive within a 24-hour period.
+
+HOLDOUT - The endpoint was in a hold out treatment for the campaign.
+
+THROTTLED - Amazon Pinpoint throttled sending to this endpoint.
+
+EXPIRED - The endpoint address is expired.
+
+CAMPAIGN_CAP - The endpoint received the maximum number of messages allowed by the campaign.
+
+SERVICE_FAILURE - A service-level failure prevented Amazon Pinpoint from delivering the message.
+
+UNKNOWN - An unknown error occurred.
      */
     DeliveryStatus?: DeliveryStatus;
     /**
@@ -2128,7 +2154,7 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface EndpointRequest {
     /**
-     * The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +1206XXX5550100. For the email channel, use an email address.
+     * The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +12065550100. For the email channel, use an email address.
      */
     Address?: __string;
     /**
@@ -2144,11 +2170,11 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
      */
     ChannelType?: ChannelType;
     /**
-     * The endpoint demographic attributes.
+     * Demographic attributes for the endpoint.
      */
     Demographic?: EndpointDemographic;
     /**
-     * The last time the endpoint was updated. Provided in ISO 8601 format.
+     * The date and time when the endpoint was updated, shown in ISO 8601 format.
      */
     EffectiveDate?: __string;
     /**
@@ -2182,17 +2208,17 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface EndpointResponse {
     /**
-     * The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
+     * The address of the endpoint as provided by your push provider. For example, the DeviceToken or RegistrationId.
      */
     Address?: __string;
     /**
-     * The ID of the application associated with the endpoint.
+     * The ID of the application that is associated with the endpoint.
      */
     ApplicationId?: __string;
     /**
-     * Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+     * Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the following values: ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create segments.
 
-The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
+The Amazon Pinpoint console can't display attribute names that include the following characters: hash/pound sign (#), colon (:), question mark (?), backslash (\), and forward slash (/). For this reason, you should avoid using these characters in the names of custom attributes.
      */
     Attributes?: MapOfListOf__string;
     /**
@@ -2202,11 +2228,11 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
      */
     ChannelType?: ChannelType;
     /**
-     * A number from 0 - 99 that represents the cohort the endpoint is assigned to. Endpoints are grouped into cohorts randomly, and each cohort contains approximately 1 percent of the endpoints for an app. Amazon Pinpoint assigns cohorts to the holdout or treatment allocations for a campaign.
+     * A number from 0-99 that represents the cohort the endpoint is assigned to. Endpoints are grouped into cohorts randomly, and each cohort contains approximately 1 percent of the endpoints for an app. Amazon Pinpoint assigns cohorts to the holdout or treatment allocations for a campaign.
      */
     CohortId?: __string;
     /**
-     * The last time the endpoint was created. Provided in ISO 8601 format.
+     * The date and time when the endpoint was created, shown in ISO 8601 format.
      */
     CreationDate?: __string;
     /**
@@ -2214,7 +2240,7 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
      */
     Demographic?: EndpointDemographic;
     /**
-     * The last time the endpoint was updated. Provided in ISO 8601 format.
+     * The date and time when the endpoint was last updated, shown in ISO 8601 format.
      */
     EffectiveDate?: __string;
     /**
@@ -2222,7 +2248,7 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
      */
     EndpointStatus?: __string;
     /**
-     * The unique ID that you assigned to the endpoint. The ID should be a globally unique identifier (GUID) to ensure that it is unique compared to all other endpoints for the application.
+     * The unique ID that you assigned to the endpoint. The ID should be a globally unique identifier (GUID) to ensure that it doesn't conflict with other endpoint IDs associated with the application.
      */
     Id?: __string;
     /**
@@ -2274,9 +2300,9 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface EndpointUser {
     /**
-     * Custom attributes that describe an end user by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+     * Custom attributes that describe the user by associating a name with an array of values. For example, an attribute named "interests" might have the following values: ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create segments.
 
-The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
+The Amazon Pinpoint console can't display attribute names that include the following characters: hash/pound sign (#), colon (:), question mark (?), backslash (\), and forward slash (/). For this reason, you should avoid using these characters in the names of custom attributes.
      */
     UserAttributes?: MapOfListOf__string;
     /**
@@ -2290,6 +2316,42 @@ The following characters are not recommended in attribute names: # : ? \ /. The 
      */
     Item?: ListOfEndpointResponse;
   }
+  export interface Event {
+    /**
+     * Custom attributes that are associated with the event you're adding or updating.
+     */
+    Attributes?: MapOf__string;
+    /**
+     * The version of the SDK that's running on the client device.
+     */
+    ClientSdkVersion?: __string;
+    /**
+     * The name of the custom event that you're recording.
+     */
+    EventType?: __string;
+    /**
+     * Event metrics
+     */
+    Metrics?: MapOf__double;
+    /**
+     * The session
+     */
+    Session?: Session;
+    /**
+     * The date and time when the event occurred, in ISO 8601 format.
+     */
+    Timestamp?: __string;
+  }
+  export interface EventItemResponse {
+    /**
+     * A custom message that is associated with the processing of an event.
+     */
+    Message?: __string;
+    /**
+     * The status code to respond with for a particular event id
+     */
+    StatusCode?: __integer;
+  }
   export interface EventStream {
     /**
      * The ID of the application from which events should be published.
@@ -2302,7 +2364,7 @@ The following characters are not recommended in attribute names: # : ? \ /. The 
      */
     DestinationStreamArn?: __string;
     /**
-     * DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
+     * (Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
@@ -2317,6 +2379,28 @@ The following characters are not recommended in attribute names: # : ? \ /. The 
      * The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
      */
     RoleArn?: __string;
+  }
+  export interface EventsBatch {
+    /**
+     * Endpoint information
+     */
+    Endpoint?: PublicEndpoint;
+    /**
+     * Events
+     */
+    Events?: MapOfEvent;
+  }
+  export interface EventsRequest {
+    /**
+     * Batch of events with endpoint id as the key and an object of EventsBatch as value. The EventsBatch object has the PublicEndpoint and a map of event Id's to events
+     */
+    BatchItem?: MapOfEventsBatch;
+  }
+  export interface EventsResponse {
+    /**
+     * A map containing a multi part response for each endpoint, with the endpoint id as the key and item response as the value
+     */
+    Results?: MapOfItemResponse;
   }
   export interface ExportJobRequest {
     /**
@@ -2364,7 +2448,7 @@ Amazon Pinpoint will export endpoints to this location.
   }
   export interface ExportJobResponse {
     /**
-     * The unique ID of the application to which the job applies.
+     * The unique ID of the application associated with the export job.
      */
     ApplicationId?: __string;
     /**
@@ -2493,7 +2577,7 @@ The job status is FAILED if one or more pieces failed.
      */
     Action?: Action;
     /**
-     * The message body of the notification, the email body or the text message.
+     * The message body of the notification.
      */
     Body?: __string;
     /**
@@ -3006,7 +3090,7 @@ For more information, see About FCM Messages in the Firebase documentation.
      */
     DefineSegment?: __boolean;
     /**
-     * DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
+     * (Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
@@ -3023,10 +3107,9 @@ Valid values: CSV, JSON
      */
     RoleArn?: __string;
     /**
-     * A URL that points to the location within an Amazon S3 bucket that contains the endpoints to import. The location can be a folder or a single file.
-The URL should follow this format: s3://bucket-name/folder-name/file-name
+     * The URL of the S3 bucket that contains the segment information to import. The location can be a folder or a single file. The URL should use the following format: s3://bucket-name/folder-name/file-name
 
-Amazon Pinpoint will import endpoints from this location and any subfolders it contains.
+Amazon Pinpoint imports endpoints from this location and any subfolders it contains.
      */
     S3Url?: __string;
     /**
@@ -3044,7 +3127,7 @@ Amazon Pinpoint will import endpoints from this location and any subfolders it c
      */
     DefineSegment?: __boolean;
     /**
-     * DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
+     * (Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
@@ -3061,10 +3144,9 @@ Valid values: CSV, JSON
      */
     RoleArn?: __string;
     /**
-     * A URL that points to the location within an Amazon S3 bucket that contains the endpoints to import. The location can be a folder or a single file.
-The URL should follow this format: s3://bucket-name/folder-name/file-name
+     * The URL of the S3 bucket that contains the segment information to import. The location can be a folder or a single file. The URL should use the following format: s3://bucket-name/folder-name/file-name
 
-Amazon Pinpoint will import endpoints from this location and any subfolders it contains.
+Amazon Pinpoint imports endpoints from this location and any subfolders it contains.
      */
     S3Url?: __string;
     /**
@@ -3144,6 +3226,16 @@ The job status is FAILED if one or more pieces failed to import.
     NextToken?: __string;
   }
   export type Include = "ALL"|"ANY"|"NONE"|string;
+  export interface ItemResponse {
+    /**
+     * Endpoint item response after endpoint registration
+     */
+    EndpointItemResponse?: EndpointItemResponse;
+    /**
+     * Events item response is a multipart response object per event Id, with eventId as the key and EventItemResponse object as the value
+     */
+    EventsItemResponse?: MapOfEventItemResponse;
+  }
   export type JobStatus = "CREATED"|"INITIALIZING"|"PROCESSING"|"COMPLETING"|"COMPLETED"|"FAILING"|"FAILED"|string;
   export interface Message {
     /**
@@ -3259,6 +3351,10 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      * Message configuration.
      */
     MessageConfiguration?: DirectMessageConfiguration;
+    /**
+     * A unique ID that you can use to trace a message. This ID is visible to recipients.
+     */
+    TraceId?: __string;
   }
   export interface MessageResponse {
     /**
@@ -3280,7 +3376,31 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
   }
   export interface MessageResult {
     /**
-     * Delivery status of message.
+     * The delivery status of the message. Possible values:
+
+SUCCESS - The message was successfully delivered to the endpoint.
+
+TRANSIENT_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later.
+
+FAILURE_PERMANENT - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.
+
+TIMEOUT - The message couldn't be sent within the timeout period.
+
+QUIET_TIME - The local time for the endpoint was within the Quiet Hours for the campaign.
+
+DAILY_CAP - The endpoint has received the maximum number of messages it can receive within a 24-hour period.
+
+HOLDOUT - The endpoint was in a hold out treatment for the campaign.
+
+THROTTLED - Amazon Pinpoint throttled sending to this endpoint.
+
+EXPIRED - The endpoint address is expired.
+
+CAMPAIGN_CAP - The endpoint received the maximum number of messages allowed by the campaign.
+
+SERVICE_FAILURE - A service-level failure prevented Amazon Pinpoint from delivering the message.
+
+UNKNOWN - An unknown error occurred.
      */
     DeliveryStatus?: DeliveryStatus;
     /**
@@ -3314,17 +3434,17 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
   export type Mode = "DELIVERY"|"FILTER"|string;
   export interface NumberValidateRequest {
     /**
-     * (Optional) The two-character ISO country code for the country where the phone number was originally registered.
+     * (Optional) The two-character ISO country code for the country or region where the phone number was originally registered.
      */
     IsoCountryCode?: __string;
     /**
-     * The phone number to get information about.
+     * The phone number to get information about. The phone number that you provide should include a country code. If the number doesn't include a valid country code, the operation might result in an error.
      */
     PhoneNumber?: __string;
   }
   export interface NumberValidateResponse {
     /**
-     * The carrier that the phone number is registered with.
+     * The carrier or servive provider that the phone number is currently registered with.
      */
     Carrier?: __string;
     /**
@@ -3332,23 +3452,23 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      */
     City?: __string;
     /**
-     * The cleansed (standardized) phone number in E.164 format.
+     * The cleansed phone number, shown in E.164 format.
      */
     CleansedPhoneNumberE164?: __string;
     /**
-     * The cleansed phone number in national format.
+     * The cleansed phone number, shown in the local phone number format.
      */
     CleansedPhoneNumberNational?: __string;
     /**
-     * The country where the phone number was originally registered.
+     * The country or region where the phone number was originally registered.
      */
     Country?: __string;
     /**
-     * The two-character ISO country code for the country where the phone number was originally registered.
+     * The two-character ISO code for the country or region where the phone number was originally registered.
      */
     CountryCodeIso2?: __string;
     /**
-     * The numeric country code for the country where the phone number was originally registered.
+     * The numeric code for the country or region where the phone number was originally registered.
      */
     CountryCodeNumeric?: __string;
     /**
@@ -3356,7 +3476,7 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      */
     County?: __string;
     /**
-     * The two-character ISO country code that was included in the request body.
+     * The two-character ISO code for the country or region that you included in the request body.
      */
     OriginalCountryCodeIso2?: __string;
     /**
@@ -3364,11 +3484,11 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      */
     OriginalPhoneNumber?: __string;
     /**
-     * A description of the phone type. Possible values include MOBILE, LANDLINE, VOIP, INVALID, and OTHER.
+     * A description of the phone type. Possible values are MOBILE, LANDLINE, VOIP, INVALID, PREPAID, and OTHER.
      */
     PhoneType?: __string;
     /**
-     * The phone type as an integer. Possible values include 0 (MOBILE), 1 (LANDLINE), 2 (VOIP), 3 (INVALID), and 4 (OTHER).
+     * The phone type, represented by an integer. Possible values include 0 (MOBILE), 1 (LANDLINE), 2 (VOIP), 3 (INVALID), 4 (OTHER), and 5 (PREPAID).
      */
     PhoneTypeCode?: __integer;
     /**
@@ -3376,7 +3496,7 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      */
     Timezone?: __string;
     /**
-     * The zip code for the location where the phone number was originally registered.
+     * The postal code for the location where the phone number was originally registered.
      */
     ZipCode?: __string;
   }
@@ -3385,6 +3505,58 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
   }
   export interface PhoneNumberValidateResponse {
     NumberValidateResponse: NumberValidateResponse;
+  }
+  export interface PublicEndpoint {
+    /**
+     * The unique identifier for the recipient. For example, an address could be a device token or an endpoint ID.
+     */
+    Address?: __string;
+    /**
+     * Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+     */
+    Attributes?: MapOfListOf__string;
+    /**
+     * The channel type.
+
+Valid values: APNS, GCM
+     */
+    ChannelType?: ChannelType;
+    /**
+     * The endpoint demographic attributes.
+     */
+    Demographic?: EndpointDemographic;
+    /**
+     * The date and time when the endpoint was last updated.
+     */
+    EffectiveDate?: __string;
+    /**
+     * The status of the endpoint. If the update fails, the value is INACTIVE. If the endpoint is updated successfully, the value is ACTIVE.
+     */
+    EndpointStatus?: __string;
+    /**
+     * The endpoint location attributes.
+     */
+    Location?: EndpointLocation;
+    /**
+     * Custom metrics that your app reports to Amazon Pinpoint.
+     */
+    Metrics?: MapOf__double;
+    /**
+     * Indicates whether a user has opted out of receiving messages with one of the following values:
+
+ALL - User has opted out of all messages.
+
+NONE - Users has not opted out and receives all messages.
+     */
+    OptOut?: __string;
+    /**
+     * A unique identifier that is generated each time the endpoint is updated.
+     */
+    RequestId?: __string;
+    /**
+     * Custom user-specific attributes that your app reports to Amazon Pinpoint.
+     */
+    User?: EndpointUser;
   }
   export interface PutEventStreamRequest {
     /**
@@ -3395,6 +3567,16 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
   }
   export interface PutEventStreamResponse {
     EventStream: EventStream;
+  }
+  export interface PutEventsRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+    EventsRequest: EventsRequest;
+  }
+  export interface PutEventsResponse {
+    EventsResponse: EventsResponse;
   }
   export interface QuietTime {
     /**
@@ -3657,35 +3839,35 @@ UTC-11
      */
     Dimensions?: ListOfSegmentDimensions;
     /**
-     * Segments that define the source of this segment. Currently a maximum of 1 import segment is supported.
+     * The base segment that you build your segment on. The source segment defines the starting "universe" of endpoints. When you add dimensions to the segment, it filters the source segment based on the dimensions that you specify. You can specify more than one dimensional segment. You can only specify one imported segment.
      */
     SourceSegments?: ListOfSegmentReference;
     /**
-     * Include or exclude the source.
+     * Specify how to handle multiple source segments. For example, if you specify three source segments, should the resulting segment be based on any or all of the segments? Acceptable values: ANY or ALL.
      */
     SourceType?: SourceType;
     /**
-     * How should the dimensions be applied for the result
+     * Specify how to handle multiple segment dimensions. For example, if you specify three dimensions, should the resulting segment include endpoints that are matched by all, any, or none of the dimensions? Acceptable values: ALL, ANY, or NONE.
      */
     Type?: Type;
   }
   export interface SegmentGroupList {
     /**
-     * List of dimension groups to evaluate.
+     * A set of segment criteria to evaluate.
      */
     Groups?: ListOfSegmentGroup;
     /**
-     * How should the groups be applied for the result
+     * Specify how to handle multiple segment groups. For example, if the segment includes three segment groups, should the resulting segment include endpoints that are matched by all, any, or none of the segment groups you created. Acceptable values: ALL, ANY, or NONE.
      */
     Include?: Include;
   }
   export interface SegmentImportResource {
     /**
-     * Channel type counts
+     * The number of channel types in the imported segment.
      */
     ChannelCounts?: MapOf__integer;
     /**
-     * DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
+     * (Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
@@ -3698,7 +3880,7 @@ Valid values: CSV, JSON
      */
     RoleArn?: __string;
     /**
-     * A URL that points to the Amazon S3 location from which the endpoints for this segment were imported.
+     * The URL of the S3 bucket that the segment was imported from.
      */
     S3Url?: __string;
     /**
@@ -3718,7 +3900,7 @@ Valid values: CSV, JSON
   }
   export interface SegmentReference {
     /**
-     * Segment Id.
+     * A unique identifier for the segment.
      */
     Id?: __string;
     /**
@@ -3728,11 +3910,11 @@ Valid values: CSV, JSON
   }
   export interface SegmentResponse {
     /**
-     * The ID of the application to which the segment applies.
+     * The ID of the application that the segment applies to.
      */
     ApplicationId?: __string;
     /**
-     * The date the segment was created in ISO 8601 format.
+     * The date and time when the segment was created.
      */
     CreationDate?: __string;
     /**
@@ -3748,15 +3930,15 @@ Valid values: CSV, JSON
      */
     ImportDefinition?: SegmentImportResource;
     /**
-     * The date the segment was last updated in ISO 8601 format.
+     * The date and time when the segment was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * The name of segment
+     * The name of the segment.
      */
     Name?: __string;
     /**
-     * Segment definition groups. We currently only support one. If specified Dimensions must be empty.
+     * A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments.
      */
     SegmentGroups?: SegmentGroupList;
     /**
@@ -3801,6 +3983,10 @@ IMPORT - A static segment built from an imported set of endpoint definitions. Yo
      */
     MessageConfiguration?: DirectMessageConfiguration;
     /**
+     * A unique ID that you can use to trace a message. This ID is visible to recipients.
+     */
+    TraceId?: __string;
+    /**
      * A map that associates user IDs with EndpointSendConfiguration objects. Within an EndpointSendConfiguration object, you can tailor the message for a user by specifying message overrides or substitutions.
      */
     Users?: MapOfEndpointSendConfiguration;
@@ -3829,6 +4015,24 @@ IMPORT - A static segment built from an imported set of endpoint definitions. Yo
   export interface SendUsersMessagesResponse {
     SendUsersMessageResponse: SendUsersMessageResponse;
   }
+  export interface Session {
+    /**
+     * Session duration in millis
+     */
+    Duration?: __integer;
+    /**
+     * A unique identifier for the session.
+     */
+    Id?: __string;
+    /**
+     * The date and time when the session began.
+     */
+    StartTimestamp?: __string;
+    /**
+     * The date and time when the session ended.
+     */
+    StopTimestamp?: __string;
+  }
   export interface SetDimension {
     /**
      * The type of dimension:
@@ -3841,7 +4045,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     Values?: ListOf__string;
   }
-  export type SourceType = "ALL"|"ANY"|string;
+  export type SourceType = "ALL"|"ANY"|"NONE"|string;
   export interface TreatmentResource {
     /**
      * The unique treatment ID.
@@ -4125,7 +4329,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     Name?: __string;
     /**
-     * Segment definition groups. We currently only support one. If specified Dimensions must be empty.
+     * A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments. Your request can only include one segment group. Your request can include either a SegmentGroups object or a Dimensions object, but not both.
      */
     SegmentGroups?: SegmentGroupList;
   }
@@ -4168,12 +4372,15 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   export type ListOfTreatmentResource = TreatmentResource[];
   export type ListOfWriteTreatmentResource = WriteTreatmentResource[];
   export type ListOf__string = __string[];
-  export type __long = number;
   export type MapOfAddressConfiguration = {[key: string]: AddressConfiguration};
   export type MapOfAttributeDimension = {[key: string]: AttributeDimension};
   export type MapOfChannelResponse = {[key: string]: ChannelResponse};
   export type MapOfEndpointMessageResult = {[key: string]: EndpointMessageResult};
   export type MapOfEndpointSendConfiguration = {[key: string]: EndpointSendConfiguration};
+  export type MapOfEvent = {[key: string]: Event};
+  export type MapOfEventItemResponse = {[key: string]: EventItemResponse};
+  export type MapOfEventsBatch = {[key: string]: EventsBatch};
+  export type MapOfItemResponse = {[key: string]: ItemResponse};
   export type MapOfMessageResult = {[key: string]: MessageResult};
   export type MapOfMetricDimension = {[key: string]: MetricDimension};
   export type MapOf__double = {[key: string]: __double};
@@ -4182,8 +4389,6 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   export type MapOfMapOfEndpointMessageResult = {[key: string]: MapOfEndpointMessageResult};
   export type MapOf__string = {[key: string]: __string};
   export type __string = string;
-  export type __timestampIso8601 = Date;
-  export type __timestampUnix = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

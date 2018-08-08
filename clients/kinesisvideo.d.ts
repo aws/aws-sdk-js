@@ -155,7 +155,6 @@ declare namespace KinesisVideo {
     StreamInfo?: StreamInfo;
   }
   export type DeviceName = string;
-  export type ErrorMessage = string;
   export interface GetDataEndpointInput {
     /**
      * The name of the stream that you want to get the endpoint for. You must specify either this parameter or a StreamARN in the request.

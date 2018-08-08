@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Serialization",
+        "description": "fix timestamp serialization issue in querystring; Update the logic of formatting the timestamp;"
+    },
+    {
+        "type": "feature",
+        "category": "CORS",
+        "description": "make Translate service available in browser version of SDK by default"
+    },
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "With this SDK update, APIs UpdateGlobalTableSettings and DescribeGlobalTableSettings now allow consistently configuring AutoScaling settings for a DynamoDB global table. Previously, they would only allow consistently setting IOPS. Now new APIs are being released, existing APIs are being extended."
+    }
+]

@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "CORS",
-  "description": "KinesisVideo and KinesisVideoArchivedMedia support CORS. This change make the services available in browser version of SDK by default"
-}

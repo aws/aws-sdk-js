@@ -483,7 +483,6 @@ declare namespace WorkSpaces {
   }
   export type DnsIpAddresses = IpAddress[];
   export type ErrorType = string;
-  export type ExceptionMessage = string;
   export interface FailedCreateWorkspaceRequest {
     /**
      * Information about the WorkSpace.

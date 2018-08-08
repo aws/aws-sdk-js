@@ -635,6 +635,149 @@
       },
       "documentation":"<p>For the <code>UpdateItem</code> operation, represents the attributes to be modified, the action to perform on each, and the new value for each.</p> <note> <p>You cannot use <code>UpdateItem</code> to update any primary key attributes. Instead, you will need to delete the item, and then use <code>PutItem</code> to create a new item with new attributes.</p> </note> <p>Attribute values cannot be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests with empty values will be rejected with a <code>ValidationException</code> exception.</p>"
     },
+    "AutoScalingPolicyDescription":{
+      "type":"structure",
+      "members":{
+        "PolicyName":{
+          "shape":"AutoScalingPolicyName",
+          "documentation":"<p>The name of the scaling policy.</p>"
+        },
+        "TargetTrackingScalingPolicyConfiguration":{
+          "shape":"AutoScalingTargetTrackingScalingPolicyConfigurationDescription",
+          "documentation":"<p>Represents a target tracking scaling policy configuration.</p>"
+        }
+      },
+      "documentation":"<p>Represents the properties of the scaling policy.</p>"
+    },
+    "AutoScalingPolicyDescriptionList":{
+      "type":"list",
+      "member":{"shape":"AutoScalingPolicyDescription"}
+    },
+    "AutoScalingPolicyName":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"\\p{Print}+"
+    },
+    "AutoScalingPolicyUpdate":{
+      "type":"structure",
+      "required":["TargetTrackingScalingPolicyConfiguration"],
+      "members":{
+        "PolicyName":{
+          "shape":"AutoScalingPolicyName",
+          "documentation":"<p>The name of the scaling policy.</p>"
+        },
+        "TargetTrackingScalingPolicyConfiguration":{
+          "shape":"AutoScalingTargetTrackingScalingPolicyConfigurationUpdate",
+          "documentation":"<p>Represents a target tracking scaling policy configuration.</p>"
+        }
+      },
+      "documentation":"<p>Represents the autoscaling policy to be modified.</p>"
+    },
+    "AutoScalingRoleArn":{
+      "type":"string",
+      "max":1600,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "AutoScalingSettingsDescription":{
+      "type":"structure",
+      "members":{
+        "MinimumUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The minimum capacity units that a global table or global secondary index should be scaled down to.</p>"
+        },
+        "MaximumUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The maximum capacity units that a global table or global secondary index should be scaled up to.</p>"
+        },
+        "AutoScalingDisabled":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Disabled autoscaling for this global table or global secondary index.</p>"
+        },
+        "AutoScalingRoleArn":{
+          "shape":"String",
+          "documentation":"<p>Role ARN used for configuring autoScaling policy.</p>"
+        },
+        "ScalingPolicies":{
+          "shape":"AutoScalingPolicyDescriptionList",
+          "documentation":"<p>Information about the scaling policies.</p>"
+        }
+      },
+      "documentation":"<p>Represents the autoscaling settings for a global table or global secondary index.</p>"
+    },
+    "AutoScalingSettingsUpdate":{
+      "type":"structure",
+      "members":{
+        "MinimumUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The minimum capacity units that a global table or global secondary index should be scaled down to.</p>"
+        },
+        "MaximumUnits":{
+          "shape":"PositiveLongObject",
+          "documentation":"<p>The maximum capacity units that a global table or global secondary index should be scaled up to.</p>"
+        },
+        "AutoScalingDisabled":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Disabled autoscaling for this global table or global secondary index.</p>"
+        },
+        "AutoScalingRoleArn":{
+          "shape":"AutoScalingRoleArn",
+          "documentation":"<p>Role ARN used for configuring autoscaling policy.</p>"
+        },
+        "ScalingPolicyUpdate":{
+          "shape":"AutoScalingPolicyUpdate",
+          "documentation":"<p>The scaling policy to apply for scaling target global table or global secondary index capacity units.</p>"
+        }
+      },
+      "documentation":"<p>Represents the autoscaling settings to be modified for a global table or global secondary index.</p>"
+    },
+    "AutoScalingTargetTrackingScalingPolicyConfigurationDescription":{
+      "type":"structure",
+      "required":["TargetValue"],
+      "members":{
+        "DisableScaleIn":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Indicates whether scale in by the target tracking policy is disabled. If the value is true, scale in is disabled and the target tracking policy won't remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking policy can remove capacity from the scalable resource. The default value is false.</p>"
+        },
+        "ScaleInCooldown":{
+          "shape":"IntegerObject",
+          "documentation":"<p>The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. You should scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, application autoscaling scales out your scalable target immediately. </p>"
+        },
+        "ScaleOutCooldown":{
+          "shape":"IntegerObject",
+          "documentation":"<p>The amount of time, in seconds, after a scale out activity completes before another scale out activity can start. While the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. You should continuously (but not excessively) scale out.</p>"
+        },
+        "TargetValue":{
+          "shape":"Double",
+          "documentation":"<p>The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).</p>"
+        }
+      },
+      "documentation":"<p>Represents the properties of a target tracking scaling policy.</p>"
+    },
+    "AutoScalingTargetTrackingScalingPolicyConfigurationUpdate":{
+      "type":"structure",
+      "required":["TargetValue"],
+      "members":{
+        "DisableScaleIn":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Indicates whether scale in by the target tracking policy is disabled. If the value is true, scale in is disabled and the target tracking policy won't remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking policy can remove capacity from the scalable resource. The default value is false.</p>"
+        },
+        "ScaleInCooldown":{
+          "shape":"IntegerObject",
+          "documentation":"<p>The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. You should scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, application autoscaling scales out your scalable target immediately. </p>"
+        },
+        "ScaleOutCooldown":{
+          "shape":"IntegerObject",
+          "documentation":"<p>The amount of time, in seconds, after a scale out activity completes before another scale out activity can start. While the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. You should continuously (but not excessively) scale out.</p>"
+        },
+        "TargetValue":{
+          "shape":"Double",
+          "documentation":"<p>The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).</p>"
+        }
+      },
+      "documentation":"<p>Represents the settings of a target tracking scaling policy that will be modified.</p>"
+    },
     "Backfilling":{"type":"boolean"},
     "BackupArn":{
       "type":"string",
@@ -666,6 +809,7 @@
         "BackupArn",
         "BackupName",
         "BackupStatus",
+        "BackupType",
         "BackupCreationDateTime"
       ],
       "members":{
@@ -685,9 +829,17 @@
           "shape":"BackupStatus",
           "documentation":"<p>Backup can be in one of the following states: CREATING, ACTIVE, DELETED. </p>"
         },
+        "BackupType":{
+          "shape":"BackupType",
+          "documentation":"<p>BackupType:</p> <ul> <li> <p> <code>USER</code> - On demand backup created by you.</p> </li> <li> <p> <code>SYSTEM</code> - On demand backup automatically created by DynamoDB.</p> </li> </ul>"
+        },
         "BackupCreationDateTime":{
           "shape":"BackupCreationDateTime",
           "documentation":"<p>Time at which the backup was created. This is the request time of the backup. </p>"
+        },
+        "BackupExpiryDateTime":{
+          "shape":"Date",
+          "documentation":"<p>Time at which the automatic on demand backup created by DynamoDB will expire. This <code>SYSTEM</code> on demand backup expires automatically 35 days after its creation.</p>"
         }
       },
       "documentation":"<p>Contains the details of the backup created for the table.</p>"
@@ -757,9 +909,17 @@
           "shape":"BackupCreationDateTime",
           "documentation":"<p>Time at which the backup was created.</p>"
         },
+        "BackupExpiryDateTime":{
+          "shape":"Date",
+          "documentation":"<p>Time at which the automatic on demand backup created by DynamoDB will expire. This <code>SYSTEM</code> on demand backup expires automatically 35 days after its creation.</p>"
+        },
         "BackupStatus":{
           "shape":"BackupStatus",
           "documentation":"<p>Backup can be in one of the following states: CREATING, ACTIVE, DELETED.</p>"
+        },
+        "BackupType":{
+          "shape":"BackupType",
+          "documentation":"<p>BackupType:</p> <ul> <li> <p> <code>USER</code> - On demand backup created by you.</p> </li> <li> <p> <code>SYSTEM</code> - On demand backup automatically created by DynamoDB.</p> </li> </ul>"
         },
         "BackupSizeBytes":{
           "shape":"BackupSizeBytes",
@@ -767,6 +927,21 @@
         }
       },
       "documentation":"<p>Contains details for the backup.</p>"
+    },
+    "BackupType":{
+      "type":"string",
+      "enum":[
+        "USER",
+        "SYSTEM"
+      ]
+    },
+    "BackupTypeFilter":{
+      "type":"string",
+      "enum":[
+        "USER",
+        "SYSTEM",
+        "ALL"
+      ]
     },
     "BackupsInputLimit":{
       "type":"integer",
@@ -1419,6 +1594,7 @@
         }
       }
     },
+    "Double":{"type":"double"},
     "ErrorMessage":{"type":"string"},
     "ExpectedAttributeMap":{
       "type":"map",
@@ -1699,6 +1875,10 @@
         "ProvisionedWriteCapacityUnits":{
           "shape":"PositiveLongObject",
           "documentation":"<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException.</code> </p>"
+        },
+        "ProvisionedWriteCapacityAutoScalingSettingsUpdate":{
+          "shape":"AutoScalingSettingsUpdate",
+          "documentation":"<p>AutoScaling settings for managing a global secondary index's write capacity units.</p>"
         }
       },
       "documentation":"<p>Represents the settings of a global secondary index for a global table that will be modified.</p>"
@@ -1754,6 +1934,7 @@
       ]
     },
     "Integer":{"type":"integer"},
+    "IntegerObject":{"type":"integer"},
     "InternalServerError":{
       "type":"structure",
       "members":{
@@ -1944,6 +2125,10 @@
         "ExclusiveStartBackupArn":{
           "shape":"BackupArn",
           "documentation":"<p> <code>LastEvaluatedBackupArn</code> is the ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the <code>ExclusiveStartBackupArn</code> of a new <code>ListBackups</code> operation in order to fetch the next page of results. </p>"
+        },
+        "BackupType":{
+          "shape":"BackupTypeFilter",
+          "documentation":"<p>The backups from the table specified by BackupType are listed.</p> <p>Where BackupType can be:</p> <ul> <li> <p> <code>USER</code> - On demand backup created by you.</p> </li> <li> <p> <code>SYSTEM</code> - On demand backup automatically created by DynamoDB.</p> </li> <li> <p> <code>ALL</code> - All types of on demand backups (USER and SYSTEM).</p> </li> </ul>"
         }
       }
     },
@@ -2515,9 +2700,17 @@
           "shape":"PositiveLongObject",
           "documentation":"<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>.</p>"
         },
+        "ProvisionedReadCapacityAutoScalingSettings":{
+          "shape":"AutoScalingSettingsDescription",
+          "documentation":"<p>Autoscaling settings for a global secondary index replica's read capacity units.</p>"
+        },
         "ProvisionedWriteCapacityUnits":{
           "shape":"PositiveLongObject",
           "documentation":"<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>.</p>"
+        },
+        "ProvisionedWriteCapacityAutoScalingSettings":{
+          "shape":"AutoScalingSettingsDescription",
+          "documentation":"<p>AutoScaling settings for a global secondary index replica's write capacity units.</p>"
         }
       },
       "documentation":"<p>Represents the properties of a global secondary index.</p>"
@@ -2537,6 +2730,10 @@
         "ProvisionedReadCapacityUnits":{
           "shape":"PositiveLongObject",
           "documentation":"<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>.</p>"
+        },
+        "ProvisionedReadCapacityAutoScalingSettingsUpdate":{
+          "shape":"AutoScalingSettingsUpdate",
+          "documentation":"<p>Autoscaling settings for managing a global secondary index replica's read capacity units.</p>"
         }
       },
       "documentation":"<p>Represents the settings of a global secondary index for a global table that will be modified.</p>"
@@ -2575,9 +2772,17 @@
           "shape":"PositiveLongObject",
           "documentation":"<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>. </p>"
         },
+        "ReplicaProvisionedReadCapacityAutoScalingSettings":{
+          "shape":"AutoScalingSettingsDescription",
+          "documentation":"<p>Autoscaling settings for a global table replica's read capacity units.</p>"
+        },
         "ReplicaProvisionedWriteCapacityUnits":{
           "shape":"PositiveLongObject",
           "documentation":"<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+        },
+        "ReplicaProvisionedWriteCapacityAutoScalingSettings":{
+          "shape":"AutoScalingSettingsDescription",
+          "documentation":"<p>AutoScaling settings for a global table replica's write capacity units.</p>"
         },
         "ReplicaGlobalSecondaryIndexSettings":{
           "shape":"ReplicaGlobalSecondaryIndexSettingsDescriptionList",
@@ -2601,6 +2806,10 @@
         "ReplicaProvisionedReadCapacityUnits":{
           "shape":"PositiveLongObject",
           "documentation":"<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>. </p>"
+        },
+        "ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate":{
+          "shape":"AutoScalingSettingsUpdate",
+          "documentation":"<p>Autoscaling settings for managing a global table replica's read capacity units.</p>"
         },
         "ReplicaGlobalSecondaryIndexSettingsUpdate":{
           "shape":"ReplicaGlobalSecondaryIndexSettingsUpdateList",
@@ -3384,6 +3593,10 @@
         "GlobalTableProvisionedWriteCapacityUnits":{
           "shape":"PositiveLongObject",
           "documentation":"<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException.</code> </p>"
+        },
+        "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate":{
+          "shape":"AutoScalingSettingsUpdate",
+          "documentation":"<p>AutoScaling settings for managing provisioned write capacity for the global table.</p>"
         },
         "GlobalTableGlobalSecondaryIndexSettingsUpdate":{
           "shape":"GlobalTableGlobalSecondaryIndexSettingsUpdateList",

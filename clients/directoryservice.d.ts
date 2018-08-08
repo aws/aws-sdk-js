@@ -1178,7 +1178,6 @@ declare namespace DirectoryService {
     Status?: TopicStatus;
   }
   export type EventTopics = EventTopic[];
-  export type ExceptionMessage = string;
   export interface GetDirectoryLimitsRequest {
   }
   export interface GetDirectoryLimitsResult {
@@ -1401,7 +1400,6 @@ declare namespace DirectoryService {
   export interface RemoveTagsFromResourceResult {
   }
   export type ReplicationScope = "Domain"|string;
-  export type RequestId = string;
   export interface ResetUserPasswordRequest {
     /**
      * Identifier of the AWS Managed Microsoft AD or Simple AD directory in which the user resides.

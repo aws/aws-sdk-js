@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -252,6 +253,14 @@ declare class Redshift extends Service {
    */
   describeClusterSubnetGroups(callback?: (err: AWSError, data: Redshift.Types.ClusterSubnetGroupMessage) => void): Request<Redshift.Types.ClusterSubnetGroupMessage, AWSError>;
   /**
+   * Returns a list of all the available maintenance tracks.
+   */
+  describeClusterTracks(params: Redshift.Types.DescribeClusterTracksMessage, callback?: (err: AWSError, data: Redshift.Types.TrackListMessage) => void): Request<Redshift.Types.TrackListMessage, AWSError>;
+  /**
+   * Returns a list of all the available maintenance tracks.
+   */
+  describeClusterTracks(callback?: (err: AWSError, data: Redshift.Types.TrackListMessage) => void): Request<Redshift.Types.TrackListMessage, AWSError>;
+  /**
    * Returns descriptions of the available Amazon Redshift cluster versions. You can call this operation even before creating any clusters to learn more about the Amazon Redshift versions. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   describeClusterVersions(params: Redshift.Types.DescribeClusterVersionsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterVersionsMessage) => void): Request<Redshift.Types.ClusterVersionsMessage, AWSError>;
@@ -420,11 +429,11 @@ declare class Redshift extends Service {
    */
   getClusterCredentials(callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
   /**
-   * Returns an array of ReservedNodeOfferings which is filtered by payment type, term, and instance type.
+   * Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.
    */
   getReservedNodeExchangeOfferings(params: Redshift.Types.GetReservedNodeExchangeOfferingsInputMessage, callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
   /**
-   * Returns an array of ReservedNodeOfferings which is filtered by payment type, term, and instance type.
+   * Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.
    */
   getReservedNodeExchangeOfferings(callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
   /**
@@ -550,7 +559,7 @@ declare class Redshift extends Service {
   /**
    * Waits for the clusterAvailable state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
-  waitFor(state: "clusterAvailable", params: Redshift.Types.DescribeClustersMessage, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
+  waitFor(state: "clusterAvailable", params: Redshift.Types.DescribeClustersMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
   /**
    * Waits for the clusterAvailable state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
@@ -558,7 +567,7 @@ declare class Redshift extends Service {
   /**
    * Waits for the clusterDeleted state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
-  waitFor(state: "clusterDeleted", params: Redshift.Types.DescribeClustersMessage, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
+  waitFor(state: "clusterDeleted", params: Redshift.Types.DescribeClustersMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
   /**
    * Waits for the clusterDeleted state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
@@ -566,7 +575,7 @@ declare class Redshift extends Service {
   /**
    * Waits for the clusterRestored state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
-  waitFor(state: "clusterRestored", params: Redshift.Types.DescribeClustersMessage, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
+  waitFor(state: "clusterRestored", params: Redshift.Types.DescribeClustersMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
   /**
    * Waits for the clusterRestored state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
@@ -574,7 +583,7 @@ declare class Redshift extends Service {
   /**
    * Waits for the snapshotAvailable state by periodically calling the underlying Redshift.describeClusterSnapshotsoperation every 15 seconds (at most 20 times).
    */
-  waitFor(state: "snapshotAvailable", params: Redshift.Types.DescribeClusterSnapshotsMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotMessage) => void): Request<Redshift.Types.SnapshotMessage, AWSError>;
+  waitFor(state: "snapshotAvailable", params: Redshift.Types.DescribeClusterSnapshotsMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Redshift.Types.SnapshotMessage) => void): Request<Redshift.Types.SnapshotMessage, AWSError>;
   /**
    * Waits for the snapshotAvailable state by periodically calling the underlying Redshift.describeClusterSnapshotsoperation every 15 seconds (at most 20 times).
    */
@@ -583,11 +592,11 @@ declare class Redshift extends Service {
 declare namespace Redshift {
   export interface AcceptReservedNodeExchangeInputMessage {
     /**
-     * A string representing the identifier of the Reserved Node to be exchanged.
+     * A string representing the node identifier of the DC1 Reserved Node to be exchanged.
      */
     ReservedNodeId: String;
     /**
-     * The unique identifier of the Reserved Node offering to be used for the exchange.
+     * The unique identifier of the DC2 Reserved Node offering to be used for the exchange. You can obtain the value for the parameter by calling GetReservedNodeExchangeOfferings 
      */
     TargetReservedNodeOfferingId: String;
   }
@@ -790,6 +799,10 @@ declare namespace Redshift {
      * Cluster operations that are waiting to be started.
      */
     PendingActions?: PendingActionsList;
+    /**
+     * The name of the maintenance track for the cluster.
+     */
+    MaintenanceTrackName?: String;
   }
   export interface ClusterCredentials {
     /**
@@ -1196,6 +1209,10 @@ declare namespace Redshift {
      * A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request. A cluster can have up to 10 IAM roles associated with it at any time.
      */
     IamRoles?: IamRoleArnList;
+    /**
+     * An optional parameter for the name of the maintenance track for the cluster. If you don't provide a maintenance track name, the cluster is assigned to the current track.
+     */
+    MaintenanceTrackName?: String;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
@@ -1627,6 +1644,20 @@ declare namespace Redshift {
      */
     TagValues?: TagValueList;
   }
+  export interface DescribeClusterTracksMessage {
+    /**
+     * The name of the maintenance track. 
+     */
+    MaintenanceTrackName?: String;
+    /**
+     * An integer value for the maximum number of maintenance tracks to return.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterTracks request exceed the value specified in MaxRecords, Amazon Redshift returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+  }
   export interface DescribeClusterVersionsMessage {
     /**
      * The specific cluster version to return. Example: 1.0 
@@ -1956,6 +1987,7 @@ declare namespace Redshift {
      */
     Status?: String;
   }
+  export type EligibleTracksToUpdateList = UpdateTarget[];
   export interface EnableLoggingMessage {
     /**
      * The identifier of the cluster on which logging is to be started. Example: examplecluster 
@@ -2164,7 +2196,7 @@ declare namespace Redshift {
   }
   export interface GetReservedNodeExchangeOfferingsInputMessage {
     /**
-     * A string representing the node identifier for the Reserved Node to be exchanged.
+     * A string representing the node identifier for the DC1 Reserved Node to be exchanged.
      */
     ReservedNodeId: String;
     /**
@@ -2307,6 +2339,20 @@ declare namespace Redshift {
   }
   export type Long = number;
   export type LongOptional = number;
+  export interface MaintenanceTrack {
+    /**
+     * The name of the maintenance track. Possible values are current and trailing.
+     */
+    MaintenanceTrackName?: String;
+    /**
+     * The version number for the cluster release.
+     */
+    DatabaseVersion?: String;
+    /**
+     * An array of UpdateTarget objects to update with the maintenance track. 
+     */
+    UpdateTargets?: EligibleTracksToUpdateList;
+  }
   export interface ModifyClusterDbRevisionMessage {
     /**
      * The unique identifier of a cluster whose database revision you want to modify.  Example: examplecluster 
@@ -2410,6 +2456,10 @@ declare namespace Redshift {
      * An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide. If this option is true, enhanced VPC routing is enabled.  Default: false
      */
     EnhancedVpcRouting?: BooleanOptional;
+    /**
+     * The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.
+     */
+    MaintenanceTrackName?: String;
   }
   export interface ModifyClusterParameterGroupMessage {
     /**
@@ -2595,6 +2645,10 @@ declare namespace Redshift {
      * An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide. If this option is true, enhanced VPC routing is enabled.  Default: false
      */
     EnhancedVpcRouting?: BooleanOptional;
+    /**
+     * The name of the maintenance track that the cluster will change to during the next maintenance window.
+     */
+    MaintenanceTrackName?: String;
   }
   export interface PurchaseReservedNodeOfferingMessage {
     /**
@@ -2892,6 +2946,10 @@ declare namespace Redshift {
      * A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request. A cluster can have up to 10 IAM roles associated at any time.
      */
     IamRoles?: IamRoleArnList;
+    /**
+     * The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks.
+     */
+    MaintenanceTrackName?: String;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;
@@ -3139,6 +3197,10 @@ declare namespace Redshift {
      * An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide. If this option is true, enhanced VPC routing is enabled.  Default: false
      */
     EnhancedVpcRouting?: Boolean;
+    /**
+     * The name of the maintenance track for the snapshot.
+     */
+    MaintenanceTrackName?: String;
   }
   export interface SnapshotCopyGrant {
     /**
@@ -3304,6 +3366,27 @@ declare namespace Redshift {
      * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. 
      */
     Marker?: String;
+  }
+  export type TrackList = MaintenanceTrack[];
+  export interface TrackListMessage {
+    /**
+     * A list of maintenance tracks output by the DescribeClusterTracks operation. 
+     */
+    MaintenanceTracks?: TrackList;
+    /**
+     * The starting point to return a set of response tracklist records. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.
+     */
+    Marker?: String;
+  }
+  export interface UpdateTarget {
+    /**
+     * The name of the new maintenance track.
+     */
+    MaintenanceTrackName?: String;
+    /**
+     * The cluster version for the new maintenance track.
+     */
+    DatabaseVersion?: String;
   }
   export type VpcSecurityGroupIdList = String[];
   export interface VpcSecurityGroupMembership {

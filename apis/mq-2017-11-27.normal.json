@@ -29,11 +29,11 @@
         "shape" : "BadRequestException",
         "documentation" : "HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it."
       }, {
-        "shape" : "InternalServerErrorException",
-        "documentation" : "HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue."
-      }, {
         "shape" : "UnauthorizedException",
         "documentation" : "HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be validated."
+      }, {
+        "shape" : "InternalServerErrorException",
+        "documentation" : "HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue."
       }, {
         "shape" : "ConflictException",
         "documentation" : "HTTP Status Code 409: Conflict. This Broker name already exists. Retry your request with another name."
@@ -70,7 +70,7 @@
         "shape" : "ForbiddenException",
         "documentation" : "HTTP Status Code 403: Access forbidden. Correct your input and then retry your request."
       } ],
-      "documentation" : "Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version). Note: If the configuration name already exists, Amazon MQ doesn't create a configuration."
+      "documentation" : "Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version)."
     },
     "CreateUser" : {
       "name" : "CreateUser",
@@ -518,12 +518,12 @@
         "ErrorAttribute" : {
           "shape" : "__string",
           "locationName" : "errorAttribute",
-          "documentation" : "The error attribute."
+          "documentation" : "The attribute which caused the error."
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The error message."
+          "documentation" : "The explanation of the error."
         }
       },
       "documentation" : "Returns information about an error.",
@@ -541,16 +541,21 @@
           "documentation" : "The URL of the broker's ActiveMQ Web Console."
         },
         "Endpoints" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "endpoints",
           "documentation" : "The broker's wire-level protocol endpoints."
+        },
+        "IpAddress" : {
+          "shape" : "__string",
+          "locationName" : "ipAddress",
+          "documentation" : "The IP address of the ENI attached to the broker."
         }
       },
       "documentation" : "Returns information about all brokers."
     },
     "BrokerState" : {
       "type" : "string",
-      "documentation" : "The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED, DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS",
+      "documentation" : "The status of the broker.",
       "enum" : [ "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS" ]
     },
     "BrokerSummary" : {
@@ -574,24 +579,29 @@
         "BrokerState" : {
           "shape" : "BrokerState",
           "locationName" : "brokerState",
-          "documentation" : "The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED, DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS"
+          "documentation" : "The status of the broker."
+        },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "The time when the broker was created."
         },
         "DeploymentMode" : {
           "shape" : "DeploymentMode",
           "locationName" : "deploymentMode",
-          "documentation" : "Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability."
+          "documentation" : "Required. The deployment mode of the broker."
         },
         "HostInstanceType" : {
           "shape" : "__string",
           "locationName" : "hostInstanceType",
-          "documentation" : "The broker's instance type. Possible values: mq.t2.micro, mq.m4.large"
+          "documentation" : "The broker's instance type."
         }
       },
       "documentation" : "The Amazon Resource Name (ARN) of the broker."
     },
     "ChangeType" : {
       "type" : "string",
-      "documentation" : "The type of change pending for the ActiveMQ user. Possible values: CREATE, UPDATE, DELETE",
+      "documentation" : "The type of change pending for the ActiveMQ user.",
       "enum" : [ "CREATE", "UPDATE", "DELETE" ]
     },
     "Configuration" : {
@@ -601,6 +611,11 @@
           "shape" : "__string",
           "locationName" : "arn",
           "documentation" : "Required. The ARN of the configuration."
+        },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "Required. The date and time of the configuration revision."
         },
         "Description" : {
           "shape" : "__string",
@@ -646,7 +661,7 @@
         "Revision" : {
           "shape" : "__integer",
           "locationName" : "revision",
-          "documentation" : "The Universally Unique Identifier (UUID) of the request."
+          "documentation" : "The revision number of the configuration."
         }
       },
       "documentation" : "A list of information about the configuration."
@@ -654,6 +669,11 @@
     "ConfigurationRevision" : {
       "type" : "structure",
       "members" : {
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "Required. The date and time of the configuration revision."
+        },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
@@ -662,7 +682,7 @@
         "Revision" : {
           "shape" : "__integer",
           "locationName" : "revision",
-          "documentation" : "Required. The revision of the configuration."
+          "documentation" : "Required. The revision number of the configuration."
         }
       },
       "documentation" : "Returns information about the specified configuration revision."
@@ -676,7 +696,7 @@
           "documentation" : "The current configuration of the broker."
         },
         "History" : {
-          "shape" : "ListOfConfigurationId",
+          "shape" : "__listOfConfigurationId",
           "locationName" : "history",
           "documentation" : "The history of configurations applied to the broker."
         },
@@ -694,12 +714,12 @@
         "ErrorAttribute" : {
           "shape" : "__string",
           "locationName" : "errorAttribute",
-          "documentation" : "The error attribute."
+          "documentation" : "The attribute which caused the error."
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The error message."
+          "documentation" : "The explanation of the error."
         }
       },
       "documentation" : "Returns information about an error.",
@@ -735,7 +755,7 @@
         "DeploymentMode" : {
           "shape" : "DeploymentMode",
           "locationName" : "deploymentMode",
-          "documentation" : "Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability."
+          "documentation" : "Required. The deployment mode of the broker."
         },
         "EngineType" : {
           "shape" : "EngineType",
@@ -750,7 +770,12 @@
         "HostInstanceType" : {
           "shape" : "__string",
           "locationName" : "hostInstanceType",
-          "documentation" : "Required. The broker's instance type. Possible values: mq.t2.micro, mq.m4.large"
+          "documentation" : "Required. The broker's instance type."
+        },
+        "Logs" : {
+          "shape" : "Logs",
+          "locationName" : "logs",
+          "documentation" : "Enables Amazon CloudWatch logging for brokers."
         },
         "MaintenanceWindowStartTime" : {
           "shape" : "WeeklyStartTime",
@@ -763,17 +788,17 @@
           "documentation" : "Required. Enables connections from applications outside of the VPC that hosts the broker's subnets."
         },
         "SecurityGroups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "securityGroups",
-          "documentation" : "Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers."
+          "documentation" : "The list of rules (1 minimum, 125 maximum) that authorize connections to brokers."
         },
         "SubnetIds" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "subnetIds",
-          "documentation" : "Required. The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets."
+          "documentation" : "The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets."
         },
         "Users" : {
-          "shape" : "ListOfUser",
+          "shape" : "__listOfUser",
           "locationName" : "users",
           "documentation" : "Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         }
@@ -823,7 +848,7 @@
         "DeploymentMode" : {
           "shape" : "DeploymentMode",
           "locationName" : "deploymentMode",
-          "documentation" : "Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability."
+          "documentation" : "Required. The deployment mode of the broker."
         },
         "EngineType" : {
           "shape" : "EngineType",
@@ -838,7 +863,12 @@
         "HostInstanceType" : {
           "shape" : "__string",
           "locationName" : "hostInstanceType",
-          "documentation" : "Required. The broker's instance type. Possible values: mq.t2.micro, mq.m4.large"
+          "documentation" : "Required. The broker's instance type."
+        },
+        "Logs" : {
+          "shape" : "Logs",
+          "locationName" : "logs",
+          "documentation" : "Enables Amazon CloudWatch logging for brokers."
         },
         "MaintenanceWindowStartTime" : {
           "shape" : "WeeklyStartTime",
@@ -851,17 +881,17 @@
           "documentation" : "Required. Enables connections from applications outside of the VPC that hosts the broker's subnets."
         },
         "SecurityGroups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "securityGroups",
-          "documentation" : "Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers."
+          "documentation" : "The list of rules (1 minimum, 125 maximum) that authorize connections to brokers."
         },
         "SubnetIds" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "subnetIds",
-          "documentation" : "Required. The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets."
+          "documentation" : "The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets."
         },
         "Users" : {
-          "shape" : "ListOfUser",
+          "shape" : "__listOfUser",
           "locationName" : "users",
           "documentation" : "Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         }
@@ -902,7 +932,7 @@
           "documentation" : "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long."
         }
       },
-      "documentation" : "Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version). Note: If the configuration name already exists, Amazon MQ doesn't create a configuration."
+      "documentation" : "Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version)."
     },
     "CreateConfigurationOutput" : {
       "type" : "structure",
@@ -911,6 +941,11 @@
           "shape" : "__string",
           "locationName" : "arn",
           "documentation" : "Required. The Amazon Resource Name (ARN) of the configuration."
+        },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "Required. The date and time of the configuration."
         },
         "Id" : {
           "shape" : "__string",
@@ -949,7 +984,7 @@
           "documentation" : "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long."
         }
       },
-      "documentation" : "Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version). Note: If the configuration name already exists, Amazon MQ doesn't create a configuration."
+      "documentation" : "Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version)."
     },
     "CreateConfigurationResponse" : {
       "type" : "structure",
@@ -958,6 +993,11 @@
           "shape" : "__string",
           "locationName" : "arn",
           "documentation" : "Required. The Amazon Resource Name (ARN) of the configuration."
+        },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "Required. The date and time of the configuration."
         },
         "Id" : {
           "shape" : "__string",
@@ -985,7 +1025,7 @@
           "documentation" : "Enables access to the the ActiveMQ Web Console for the ActiveMQ user."
         },
         "Groups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "groups",
           "documentation" : "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         },
@@ -1012,7 +1052,7 @@
           "documentation" : "Enables access to the the ActiveMQ Web Console for the ActiveMQ user."
         },
         "Groups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "groups",
           "documentation" : "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         },
@@ -1096,7 +1136,7 @@
     },
     "DeploymentMode" : {
       "type" : "string",
-      "documentation" : "The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.",
+      "documentation" : "The deployment mode of the broker.",
       "enum" : [ "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ" ]
     },
     "DescribeBrokerOutput" : {
@@ -1118,7 +1158,7 @@
           "documentation" : "The unique ID that Amazon MQ generates for the broker."
         },
         "BrokerInstances" : {
-          "shape" : "ListOfBrokerInstance",
+          "shape" : "__listOfBrokerInstance",
           "locationName" : "brokerInstances",
           "documentation" : "A list of information about allocated brokers."
         },
@@ -1130,17 +1170,22 @@
         "BrokerState" : {
           "shape" : "BrokerState",
           "locationName" : "brokerState",
-          "documentation" : "The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED, DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS"
+          "documentation" : "The status of the broker."
         },
         "Configurations" : {
           "shape" : "Configurations",
           "locationName" : "configurations",
           "documentation" : "The list of all revisions for the specified configuration."
         },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "The time when the broker was created."
+        },
         "DeploymentMode" : {
           "shape" : "DeploymentMode",
           "locationName" : "deploymentMode",
-          "documentation" : "Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability."
+          "documentation" : "Required. The deployment mode of the broker."
         },
         "EngineType" : {
           "shape" : "EngineType",
@@ -1155,7 +1200,12 @@
         "HostInstanceType" : {
           "shape" : "__string",
           "locationName" : "hostInstanceType",
-          "documentation" : "The broker's instance type. Possible values: mq.t2.micro, mq.m4.large"
+          "documentation" : "The broker's instance type."
+        },
+        "Logs" : {
+          "shape" : "LogsSummary",
+          "locationName" : "logs",
+          "documentation" : "The list of information about logs currently enabled and pending to be deployed for the specified broker."
         },
         "MaintenanceWindowStartTime" : {
           "shape" : "WeeklyStartTime",
@@ -1168,17 +1218,17 @@
           "documentation" : "Required. Enables connections from applications outside of the VPC that hosts the broker's subnets."
         },
         "SecurityGroups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "securityGroups",
           "documentation" : "Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers."
         },
         "SubnetIds" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "subnetIds",
           "documentation" : "The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets."
         },
         "Users" : {
-          "shape" : "ListOfUserSummary",
+          "shape" : "__listOfUserSummary",
           "locationName" : "users",
           "documentation" : "The list of all ActiveMQ usernames for the specified broker."
         }
@@ -1216,7 +1266,7 @@
           "documentation" : "The unique ID that Amazon MQ generates for the broker."
         },
         "BrokerInstances" : {
-          "shape" : "ListOfBrokerInstance",
+          "shape" : "__listOfBrokerInstance",
           "locationName" : "brokerInstances",
           "documentation" : "A list of information about allocated brokers."
         },
@@ -1228,17 +1278,22 @@
         "BrokerState" : {
           "shape" : "BrokerState",
           "locationName" : "brokerState",
-          "documentation" : "The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED, DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS"
+          "documentation" : "The status of the broker."
         },
         "Configurations" : {
           "shape" : "Configurations",
           "locationName" : "configurations",
           "documentation" : "The list of all revisions for the specified configuration."
         },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "The time when the broker was created."
+        },
         "DeploymentMode" : {
           "shape" : "DeploymentMode",
           "locationName" : "deploymentMode",
-          "documentation" : "Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability."
+          "documentation" : "Required. The deployment mode of the broker."
         },
         "EngineType" : {
           "shape" : "EngineType",
@@ -1253,7 +1308,12 @@
         "HostInstanceType" : {
           "shape" : "__string",
           "locationName" : "hostInstanceType",
-          "documentation" : "The broker's instance type. Possible values: mq.t2.micro, mq.m4.large"
+          "documentation" : "The broker's instance type."
+        },
+        "Logs" : {
+          "shape" : "LogsSummary",
+          "locationName" : "logs",
+          "documentation" : "The list of information about logs currently enabled and pending to be deployed for the specified broker."
         },
         "MaintenanceWindowStartTime" : {
           "shape" : "WeeklyStartTime",
@@ -1266,17 +1326,17 @@
           "documentation" : "Required. Enables connections from applications outside of the VPC that hosts the broker's subnets."
         },
         "SecurityGroups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "securityGroups",
           "documentation" : "Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers."
         },
         "SubnetIds" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "subnetIds",
           "documentation" : "The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets."
         },
         "Users" : {
-          "shape" : "ListOfUserSummary",
+          "shape" : "__listOfUserSummary",
           "locationName" : "users",
           "documentation" : "The list of all ActiveMQ usernames for the specified broker."
         }
@@ -1301,6 +1361,11 @@
           "shape" : "__string",
           "locationName" : "arn",
           "documentation" : "Required. The ARN of the configuration."
+        },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "Required. The date and time of the configuration revision."
         },
         "Description" : {
           "shape" : "__string",
@@ -1342,6 +1407,11 @@
           "locationName" : "configurationId",
           "documentation" : "Required. The unique ID that Amazon MQ generates for the configuration."
         },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "Required. The date and time of the configuration."
+        },
         "Data" : {
           "shape" : "__string",
           "locationName" : "data",
@@ -1381,6 +1451,11 @@
           "locationName" : "configurationId",
           "documentation" : "Required. The unique ID that Amazon MQ generates for the configuration."
         },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "Required. The date and time of the configuration."
+        },
         "Data" : {
           "shape" : "__string",
           "locationName" : "data",
@@ -1407,7 +1482,7 @@
           "documentation" : "Enables access to the the ActiveMQ Web Console for the ActiveMQ user."
         },
         "Groups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "groups",
           "documentation" : "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         },
@@ -1456,7 +1531,7 @@
           "documentation" : "Enables access to the the ActiveMQ Web Console for the ActiveMQ user."
         },
         "Groups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "groups",
           "documentation" : "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         },
@@ -1483,12 +1558,12 @@
         "ErrorAttribute" : {
           "shape" : "__string",
           "locationName" : "errorAttribute",
-          "documentation" : "The error attribute."
+          "documentation" : "The attribute which caused the error."
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The error message."
+          "documentation" : "The explanation of the error."
         }
       },
       "documentation" : "Returns information about an error."
@@ -1499,12 +1574,12 @@
         "ErrorAttribute" : {
           "shape" : "__string",
           "locationName" : "errorAttribute",
-          "documentation" : "The error attribute."
+          "documentation" : "The attribute which caused the error."
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The error message."
+          "documentation" : "The explanation of the error."
         }
       },
       "documentation" : "Returns information about an error.",
@@ -1519,12 +1594,12 @@
         "ErrorAttribute" : {
           "shape" : "__string",
           "locationName" : "errorAttribute",
-          "documentation" : "The error attribute."
+          "documentation" : "The attribute which caused the error."
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The error message."
+          "documentation" : "The explanation of the error."
         }
       },
       "documentation" : "Returns information about an error.",
@@ -1537,7 +1612,7 @@
       "type" : "structure",
       "members" : {
         "BrokerSummaries" : {
-          "shape" : "ListOfBrokerSummary",
+          "shape" : "__listOfBrokerSummary",
           "locationName" : "brokerSummaries",
           "documentation" : "A list of information about all brokers."
         },
@@ -1570,7 +1645,7 @@
       "type" : "structure",
       "members" : {
         "BrokerSummaries" : {
-          "shape" : "ListOfBrokerSummary",
+          "shape" : "__listOfBrokerSummary",
           "locationName" : "brokerSummaries",
           "documentation" : "A list of information about all brokers."
         },
@@ -1600,7 +1675,7 @@
           "documentation" : "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
         },
         "Revisions" : {
-          "shape" : "ListOfConfigurationRevision",
+          "shape" : "__listOfConfigurationRevision",
           "locationName" : "revisions",
           "documentation" : "The list of all revisions for the specified configuration."
         }
@@ -1650,7 +1725,7 @@
           "documentation" : "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
         },
         "Revisions" : {
-          "shape" : "ListOfConfigurationRevision",
+          "shape" : "__listOfConfigurationRevision",
           "locationName" : "revisions",
           "documentation" : "The list of all revisions for the specified configuration."
         }
@@ -1660,7 +1735,7 @@
       "type" : "structure",
       "members" : {
         "Configurations" : {
-          "shape" : "ListOfConfiguration",
+          "shape" : "__listOfConfiguration",
           "locationName" : "configurations",
           "documentation" : "The list of all revisions for the specified configuration."
         },
@@ -1698,7 +1773,7 @@
       "type" : "structure",
       "members" : {
         "Configurations" : {
-          "shape" : "ListOfConfiguration",
+          "shape" : "__listOfConfiguration",
           "locationName" : "configurations",
           "documentation" : "The list of all revisions for the specified configuration."
         },
@@ -1714,60 +1789,6 @@
         }
       }
     },
-    "ListOfBrokerInstance" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "BrokerInstance"
-      }
-    },
-    "ListOfBrokerSummary" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "BrokerSummary"
-      }
-    },
-    "ListOfConfiguration" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "Configuration"
-      }
-    },
-    "ListOfConfigurationId" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ConfigurationId"
-      }
-    },
-    "ListOfConfigurationRevision" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ConfigurationRevision"
-      }
-    },
-    "ListOfSanitizationWarning" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "SanitizationWarning"
-      }
-    },
-    "ListOfUser" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "User"
-      }
-    },
-    "ListOfUserSummary" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "UserSummary"
-      }
-    },
-    "ListOf__string" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "__string"
-      }
-    },
     "ListUsersOutput" : {
       "type" : "structure",
       "members" : {
@@ -1777,7 +1798,7 @@
           "documentation" : "Required. The unique ID that Amazon MQ generates for the broker."
         },
         "MaxResults" : {
-          "shape" : "__integer",
+          "shape" : "__integerMin5Max100",
           "locationName" : "maxResults",
           "documentation" : "Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100."
         },
@@ -1787,7 +1808,7 @@
           "documentation" : "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
         },
         "Users" : {
-          "shape" : "ListOfUserSummary",
+          "shape" : "__listOfUserSummary",
           "locationName" : "users",
           "documentation" : "Required. The list of all ActiveMQ usernames for the specified broker."
         }
@@ -1827,7 +1848,7 @@
           "documentation" : "Required. The unique ID that Amazon MQ generates for the broker."
         },
         "MaxResults" : {
-          "shape" : "__integer",
+          "shape" : "__integerMin5Max100",
           "locationName" : "maxResults",
           "documentation" : "Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100."
         },
@@ -1837,11 +1858,58 @@
           "documentation" : "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
         },
         "Users" : {
-          "shape" : "ListOfUserSummary",
+          "shape" : "__listOfUserSummary",
           "locationName" : "users",
           "documentation" : "Required. The list of all ActiveMQ usernames for the specified broker."
         }
       }
+    },
+    "Logs" : {
+      "type" : "structure",
+      "members" : {
+        "Audit" : {
+          "shape" : "__boolean",
+          "locationName" : "audit",
+          "documentation" : "Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged."
+        },
+        "General" : {
+          "shape" : "__boolean",
+          "locationName" : "general",
+          "documentation" : "Enables general logging."
+        }
+      },
+      "documentation" : "The list of information about logs to be enabled for the specified broker."
+    },
+    "LogsSummary" : {
+      "type" : "structure",
+      "members" : {
+        "Audit" : {
+          "shape" : "__boolean",
+          "locationName" : "audit",
+          "documentation" : "Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged."
+        },
+        "AuditLogGroup" : {
+          "shape" : "__string",
+          "locationName" : "auditLogGroup",
+          "documentation" : "Location of CloudWatch Log group where audit logs will be sent."
+        },
+        "General" : {
+          "shape" : "__boolean",
+          "locationName" : "general",
+          "documentation" : "Enables general logging."
+        },
+        "GeneralLogGroup" : {
+          "shape" : "__string",
+          "locationName" : "generalLogGroup",
+          "documentation" : "Location of CloudWatch Log group where general logs will be sent."
+        },
+        "Pending" : {
+          "shape" : "PendingLogs",
+          "locationName" : "pending",
+          "documentation" : "The list of information about logs pending to be deployed for the specified broker."
+        }
+      },
+      "documentation" : "The list of information about logs currently enabled and pending to be deployed for the specified broker."
     },
     "MaxResults" : {
       "type" : "integer",
@@ -1854,12 +1922,12 @@
         "ErrorAttribute" : {
           "shape" : "__string",
           "locationName" : "errorAttribute",
-          "documentation" : "The error attribute."
+          "documentation" : "The attribute which caused the error."
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The error message."
+          "documentation" : "The explanation of the error."
         }
       },
       "documentation" : "Returns information about an error.",
@@ -1867,6 +1935,22 @@
       "error" : {
         "httpStatusCode" : 404
       }
+    },
+    "PendingLogs" : {
+      "type" : "structure",
+      "members" : {
+        "Audit" : {
+          "shape" : "__boolean",
+          "locationName" : "audit",
+          "documentation" : "Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged."
+        },
+        "General" : {
+          "shape" : "__boolean",
+          "locationName" : "general",
+          "documentation" : "Enables general logging."
+        }
+      },
+      "documentation" : "The list of information about logs to be enabled for the specified broker."
     },
     "RebootBrokerRequest" : {
       "type" : "structure",
@@ -1900,14 +1984,14 @@
         "Reason" : {
           "shape" : "SanitizationWarningReason",
           "locationName" : "reason",
-          "documentation" : "Required. The reason for which the XML elements or attributes were sanitized. Possible values: DISALLOWED_ELEMENT_REMOVED, DISALLOWED_ATTRIBUTE_REMOVED, INVALID_ATTRIBUTE_VALUE_REMOVED DISALLOWED_ELEMENT_REMOVED shows that the provided element isn't allowed and has been removed. DISALLOWED_ATTRIBUTE_REMOVED shows that the provided attribute isn't allowed and has been removed. INVALID_ATTRIBUTE_VALUE_REMOVED shows that the provided value for the attribute isn't allowed and has been removed."
+          "documentation" : "Required. The reason for which the XML elements or attributes were sanitized."
         }
       },
       "documentation" : "Returns information about the XML element or attribute that was sanitized in the configuration."
     },
     "SanitizationWarningReason" : {
       "type" : "string",
-      "documentation" : "The reason for which the XML elements or attributes were sanitized. Possible values: DISALLOWED_ELEMENT_REMOVED, DISALLOWED_ATTRIBUTE_REMOVED, INVALID_ATTRIBUTE_VALUE_REMOVED DISALLOWED_ELEMENT_REMOVED shows that the provided element isn't allowed and has been removed. DISALLOWED_ATTRIBUTE_REMOVED shows that the provided attribute isn't allowed and has been removed. INVALID_ATTRIBUTE_VALUE_REMOVED shows that the provided value for the attribute isn't allowed and has been removed.",
+      "documentation" : "The reason for which the XML elements or attributes were sanitized.",
       "enum" : [ "DISALLOWED_ELEMENT_REMOVED", "DISALLOWED_ATTRIBUTE_REMOVED", "INVALID_ATTRIBUTE_VALUE_REMOVED" ]
     },
     "UnauthorizedException" : {
@@ -1916,12 +2000,12 @@
         "ErrorAttribute" : {
           "shape" : "__string",
           "locationName" : "errorAttribute",
-          "documentation" : "The error attribute."
+          "documentation" : "The attribute which caused the error."
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The error message."
+          "documentation" : "The explanation of the error."
         }
       },
       "documentation" : "Returns information about an error.",
@@ -1937,6 +2021,11 @@
           "shape" : "ConfigurationId",
           "locationName" : "configuration",
           "documentation" : "A list of information about the configuration."
+        },
+        "Logs" : {
+          "shape" : "Logs",
+          "locationName" : "logs",
+          "documentation" : "Enables Amazon CloudWatch logging for brokers."
         }
       },
       "documentation" : "Updates the broker using the specified properties."
@@ -1953,6 +2042,11 @@
           "shape" : "ConfigurationId",
           "locationName" : "configuration",
           "documentation" : "The ID of the updated configuration."
+        },
+        "Logs" : {
+          "shape" : "Logs",
+          "locationName" : "logs",
+          "documentation" : "The list of information about logs to be enabled for the specified broker."
         }
       },
       "documentation" : "Returns information about the updated broker."
@@ -1970,6 +2064,11 @@
           "shape" : "ConfigurationId",
           "locationName" : "configuration",
           "documentation" : "A list of information about the configuration."
+        },
+        "Logs" : {
+          "shape" : "Logs",
+          "locationName" : "logs",
+          "documentation" : "Enables Amazon CloudWatch logging for brokers."
         }
       },
       "documentation" : "Updates the broker using the specified properties.",
@@ -1987,6 +2086,11 @@
           "shape" : "ConfigurationId",
           "locationName" : "configuration",
           "documentation" : "The ID of the updated configuration."
+        },
+        "Logs" : {
+          "shape" : "Logs",
+          "locationName" : "logs",
+          "documentation" : "The list of information about logs to be enabled for the specified broker."
         }
       }
     },
@@ -2014,6 +2118,11 @@
           "locationName" : "arn",
           "documentation" : "Required. The Amazon Resource Name (ARN) of the configuration."
         },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "Required. The date and time of the configuration."
+        },
         "Id" : {
           "shape" : "__string",
           "locationName" : "id",
@@ -2030,7 +2139,7 @@
           "documentation" : "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long."
         },
         "Warnings" : {
-          "shape" : "ListOfSanitizationWarning",
+          "shape" : "__listOfSanitizationWarning",
           "locationName" : "warnings",
           "documentation" : "The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized."
         }
@@ -2068,6 +2177,11 @@
           "locationName" : "arn",
           "documentation" : "Required. The Amazon Resource Name (ARN) of the configuration."
         },
+        "Created" : {
+          "shape" : "__timestampIso8601",
+          "locationName" : "created",
+          "documentation" : "Required. The date and time of the configuration."
+        },
         "Id" : {
           "shape" : "__string",
           "locationName" : "id",
@@ -2084,7 +2198,7 @@
           "documentation" : "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long."
         },
         "Warnings" : {
-          "shape" : "ListOfSanitizationWarning",
+          "shape" : "__listOfSanitizationWarning",
           "locationName" : "warnings",
           "documentation" : "The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized."
         }
@@ -2099,7 +2213,7 @@
           "documentation" : "Enables access to the the ActiveMQ Web Console for the ActiveMQ user."
         },
         "Groups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "groups",
           "documentation" : "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         },
@@ -2126,7 +2240,7 @@
           "documentation" : "Enables access to the the ActiveMQ Web Console for the ActiveMQ user."
         },
         "Groups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "groups",
           "documentation" : "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         },
@@ -2158,7 +2272,7 @@
           "documentation" : "Enables access to the the ActiveMQ Web Console for the ActiveMQ user."
         },
         "Groups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "groups",
           "documentation" : "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         },
@@ -2184,14 +2298,14 @@
           "documentation" : "Enables access to the the ActiveMQ Web Console for the ActiveMQ user."
         },
         "Groups" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "groups",
           "documentation" : "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         },
         "PendingChange" : {
           "shape" : "ChangeType",
           "locationName" : "pendingChange",
-          "documentation" : "Required. The type of change pending for the ActiveMQ user. Possible values: CREATE, UPDATE, DELETE"
+          "documentation" : "Required. The type of change pending for the ActiveMQ user."
         }
       },
       "documentation" : "Returns information about the status of the changes pending for the ActiveMQ user."
@@ -2202,7 +2316,7 @@
         "PendingChange" : {
           "shape" : "ChangeType",
           "locationName" : "pendingChange",
-          "documentation" : "The type of change pending for the ActiveMQ user. Possible values: CREATE, UPDATE, DELETE"
+          "documentation" : "The type of change pending for the ActiveMQ user."
         },
         "Username" : {
           "shape" : "__string",
@@ -2218,7 +2332,7 @@
         "DayOfWeek" : {
           "shape" : "DayOfWeek",
           "locationName" : "dayOfWeek",
-          "documentation" : "Required. The day of the week. Possible values: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY"
+          "documentation" : "Required. The day of the week."
         },
         "TimeOfDay" : {
           "shape" : "__string",
@@ -2242,11 +2356,78 @@
     "__integer" : {
       "type" : "integer"
     },
+    "__integerMin5Max100" : {
+      "type" : "integer",
+      "min" : 5,
+      "max" : 100
+    },
+    "__listOfBrokerInstance" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "BrokerInstance"
+      }
+    },
+    "__listOfBrokerSummary" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "BrokerSummary"
+      }
+    },
+    "__listOfConfiguration" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "Configuration"
+      }
+    },
+    "__listOfConfigurationId" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ConfigurationId"
+      }
+    },
+    "__listOfConfigurationRevision" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ConfigurationRevision"
+      }
+    },
+    "__listOfSanitizationWarning" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "SanitizationWarning"
+      }
+    },
+    "__listOfUser" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "User"
+      }
+    },
+    "__listOfUserSummary" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "UserSummary"
+      }
+    },
+    "__listOf__string" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__string"
+      }
+    },
+    "__long" : {
+      "type" : "long"
+    },
     "__string" : {
       "type" : "string"
     },
-    "__timestamp" : {
-      "type" : "timestamp"
+    "__timestampIso8601" : {
+      "type" : "timestamp",
+      "timestampFormat" : "iso8601"
+    },
+    "__timestampUnix" : {
+      "type" : "timestamp",
+      "timestampFormat" : "unixTimestamp"
     }
   },
   "documentation" : "Amazon MQ is a managed message broker service for Apache ActiveMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols."

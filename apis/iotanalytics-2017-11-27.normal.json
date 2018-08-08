@@ -761,6 +761,16 @@
       "min":1,
       "pattern":"^[a-zA-Z0-9_]+$"
     },
+    "ChannelStatistics":{
+      "type":"structure",
+      "members":{
+        "size":{
+          "shape":"EstimatedResourceSize",
+          "documentation":"<p>The estimated size of the channel.</p>"
+        }
+      },
+      "documentation":"<p>Statistics information about the channel.</p>"
+    },
     "ChannelStatus":{
       "type":"string",
       "enum":[
@@ -1162,6 +1172,16 @@
       "min":1,
       "pattern":"^[a-zA-Z0-9_]+$"
     },
+    "DatastoreStatistics":{
+      "type":"structure",
+      "members":{
+        "size":{
+          "shape":"EstimatedResourceSize",
+          "documentation":"<p>The estimated size of the data store.</p>"
+        }
+      },
+      "documentation":"<p>Statistics information about the data store.</p>"
+    },
     "DatastoreStatus":{
       "type":"string",
       "enum":[
@@ -1271,6 +1291,12 @@
           "documentation":"<p>The name of the channel whose information is retrieved.</p>",
           "location":"uri",
           "locationName":"channelName"
+        },
+        "includeStatistics":{
+          "shape":"IncludeStatisticsFlag",
+          "documentation":"<p>If true, include statistics about the channel in the response.</p>",
+          "location":"querystring",
+          "locationName":"includeStatistics"
         }
       }
     },
@@ -1280,6 +1306,10 @@
         "channel":{
           "shape":"Channel",
           "documentation":"<p>An object that contains information about the channel.</p>"
+        },
+        "statistics":{
+          "shape":"ChannelStatistics",
+          "documentation":"<p>Statistics about the channel. Included if the 'includeStatistics' parameter is set to true in the request.</p>"
         }
       }
     },
@@ -1313,6 +1343,12 @@
           "documentation":"<p>The name of the data store</p>",
           "location":"uri",
           "locationName":"datastoreName"
+        },
+        "includeStatistics":{
+          "shape":"IncludeStatisticsFlag",
+          "documentation":"<p>If true, include statistics about the data store in the response.</p>",
+          "location":"querystring",
+          "locationName":"includeStatistics"
         }
       }
     },
@@ -1322,6 +1358,10 @@
         "datastore":{
           "shape":"Datastore",
           "documentation":"<p>Information about the data store.</p>"
+        },
+        "statistics":{
+          "shape":"DatastoreStatistics",
+          "documentation":"<p>Statistics about the data store. Included if the 'includeStatistics' parameter is set to true in the request.</p>"
         }
       }
     },
@@ -1428,6 +1468,20 @@
     "EntryName":{"type":"string"},
     "ErrorCode":{"type":"string"},
     "ErrorMessage":{"type":"string"},
+    "EstimatedResourceSize":{
+      "type":"structure",
+      "members":{
+        "estimatedSizeInBytes":{
+          "shape":"SizeInBytes",
+          "documentation":"<p>The estimated size of the resource in bytes.</p>"
+        },
+        "estimatedOn":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time when the estimate of the size of the resource was made.</p>"
+        }
+      },
+      "documentation":"<p>The estimated size of the resource.</p>"
+    },
     "FilterActivity":{
       "type":"structure",
       "required":[
@@ -1490,6 +1544,7 @@
         }
       }
     },
+    "IncludeStatisticsFlag":{"type":"boolean"},
     "InternalFailureException":{
       "type":"structure",
       "members":{
@@ -1776,7 +1831,7 @@
         },
         "payload":{
           "shape":"MessagePayload",
-          "documentation":"<p>The payload of the message.</p>"
+          "documentation":"<p>The payload of the message. This may be a JSON string or a Base64-encoded string representing binary data (in which case you must decode it by means of a pipeline activity).</p>"
         }
       },
       "documentation":"<p>Information about a message.</p>"
@@ -2145,6 +2200,7 @@
       "exception":true,
       "fault":true
     },
+    "SizeInBytes":{"type":"double"},
     "SqlQuery":{"type":"string"},
     "SqlQueryDatasetAction":{
       "type":"structure",

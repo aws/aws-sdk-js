@@ -56,9 +56,6 @@ declare namespace SageMakerRuntime {
      */
     InvokedProductionVariant?: Header;
   }
-  export type LogStreamArn = string;
-  export type Message = string;
-  export type StatusCode = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

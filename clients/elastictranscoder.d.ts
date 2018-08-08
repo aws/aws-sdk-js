@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -150,7 +151,7 @@ declare class ElasticTranscoder extends Service {
   /**
    * Waits for the jobComplete state by periodically calling the underlying ElasticTranscoder.readJoboperation every 30 seconds (at most 120 times).
    */
-  waitFor(state: "jobComplete", params: ElasticTranscoder.Types.ReadJobRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadJobResponse) => void): Request<ElasticTranscoder.Types.ReadJobResponse, AWSError>;
+  waitFor(state: "jobComplete", params: ElasticTranscoder.Types.ReadJobRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadJobResponse) => void): Request<ElasticTranscoder.Types.ReadJobResponse, AWSError>;
   /**
    * Waits for the jobComplete state by periodically calling the underlying ElasticTranscoder.readJoboperation every 30 seconds (at most 120 times).
    */

@@ -214,7 +214,7 @@
           };
           return expect(build().httpRequest.path).to.equal('/abc/xyz?bar=bar');
         });
-        return it('uri escapes params in both path and querystring', function() {
+        it('uri escapes params in both path and querystring', function() {
           request.params = {
             Path: 'a b',
             Query: 'a/b'
@@ -234,6 +234,33 @@
           };
           return expect(build().httpRequest.path).to.equal('/a%20b?query=a%2Fb');
         });
+        it('serialize params in right format in querystring', function() {
+          var date = new Date(60 * 60 * 1000);
+          request.params = {
+            Foo: date,
+            Bar: [date, date],
+          }
+          defop({
+            input: input,
+            http: {
+              requestUri: '/path'
+            }
+          });
+          input.members.Foo = {
+            type: 'timestamp',
+            timestampFormat: 'unixTimestamp',
+            location: 'querystring',
+            locationName: 'foo'
+          };
+          input.members.Bar = {
+            type: 'list',
+            location: 'querystring',
+            member: {
+              type: 'timestamp',
+            }
+          }
+          expect(build().httpRequest.path).to.equal('/path?Bar=1970-01-01T01%3A00%3A00Z&Bar=1970-01-01T01%3A00%3A00Z&foo=3600')
+        })
       });
       describe('headers', function() {
         beforeEach(function() {
@@ -326,7 +353,6 @@
       describe('timestamp header without format', function() {
         return it('populates the header using the api formatting', function() {
           var date;
-          service.api.timestampFormat = 'rfc822';
           date = new Date();
           date.setMilliseconds(0);
           request.params = {
@@ -346,7 +372,6 @@
       return describe('timestamp header with api formatting and parameter formatting', function() {
         return it('populates the header using the parameter formatting', function() {
           var date;
-          service.api.timestampFormat = 'invalid';
           date = new Date();
           date.setMilliseconds(0);
           request.params = {

@@ -1451,8 +1451,6 @@ declare namespace Greengrass {
      */
     DisassociatedAt?: __string;
   }
-  export interface Empty {
-  }
   export type EncodingType = "binary"|"json"|string;
   export interface ErrorDetail {
     /**
@@ -1528,16 +1526,6 @@ declare namespace Greengrass {
      * A list of Lambda functions in this function definition version.
      */
     Functions?: __listOfFunction;
-  }
-  export interface GeneralError {
-    /**
-     * Details about the error.
-     */
-    ErrorDetails?: ErrorDetails;
-    /**
-     * A message containing information about the error.
-     */
-    Message?: __string;
   }
   export interface GetAssociatedRoleRequest {
     /**
@@ -2145,20 +2133,6 @@ declare namespace Greengrass {
      */
     GroupCertificateAuthorityId?: __string;
   }
-  export interface GroupCertificateConfiguration {
-    /**
-     * The amount of time remaining before the certificate authority expires, in milliseconds.
-     */
-    CertificateAuthorityExpiryInMilliseconds?: __string;
-    /**
-     * The amount of time remaining before the certificate expires, in milliseconds.
-     */
-    CertificateExpiryInMilliseconds?: __string;
-    /**
-     * The ID of the group certificate configuration.
-     */
-    GroupId?: __string;
-  }
   export interface GroupInformation {
     /**
      * The ARN of the group.
@@ -2260,16 +2234,6 @@ declare namespace Greengrass {
     NextToken?: __string;
   }
   export interface ListCoreDefinitionsResponse {
-    /**
-     * Information about a definition.
-     */
-    Definitions?: __listOfDefinitionInformation;
-    /**
-     * The token for the next set of results, or ''null'' if there are no additional results.
-     */
-    NextToken?: __string;
-  }
-  export interface ListDefinitionsResponse {
     /**
      * Information about a definition.
      */
@@ -2579,16 +2543,6 @@ declare namespace Greengrass {
      */
     NextToken?: __string;
   }
-  export interface ListVersionsResponse {
-    /**
-     * The token for the next set of results, or ''null'' if there are no additional results.
-     */
-    NextToken?: __string;
-    /**
-     * Information about a version.
-     */
-    Versions?: __listOfVersionInformation;
-  }
   export interface LocalDeviceResourceData {
     /**
      * Group/owner related settings for local resources.
@@ -2609,7 +2563,7 @@ declare namespace Greengrass {
      */
     GroupOwnerSetting?: GroupOwnerSetting;
     /**
-     * The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/proc'' or ''/sys''.
+     * The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
      */
     SourcePath?: __string;
   }
@@ -2914,7 +2868,6 @@ declare namespace Greengrass {
     Version?: __string;
   }
   export type __boolean = boolean;
-  export type __double = number;
   export type __integer = number;
   export type __listOfConnectivityInfo = ConnectivityInfo[];
   export type __listOfCore = Core[];
@@ -2928,10 +2881,8 @@ declare namespace Greengrass {
   export type __listOfResourceAccessPolicy = ResourceAccessPolicy[];
   export type __listOfSubscription = Subscription[];
   export type __listOfVersionInformation = VersionInformation[];
-  export type __long = number;
   export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
-  export type __timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

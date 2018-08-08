@@ -279,9 +279,6 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
      */
     MetadataControl?: Ac3MetadataControl;
   }
-  export interface AccessDenied {
-    Message?: __string;
-  }
   export type AfdSignaling = "AUTO"|"FIXED"|"NONE"|string;
   export interface ArchiveContainerSettings {
     M2tsSettings?: M2tsSettings;
@@ -691,13 +688,6 @@ one destination per packager.
     RoleArn?: __string;
     State?: ChannelState;
   }
-  export interface ChannelConfigurationValidationError {
-    Message?: __string;
-    /**
-     * A collection of validation error responses from attempting to create a channel with a bouquet of settings.
-     */
-    ValidationErrors?: __listOfValidationError;
-  }
   export interface ChannelEgressEndpoint {
     /**
      * Public IP of where a channel's output comes from
@@ -748,40 +738,6 @@ one destination per packager.
     RoleArn?: __string;
     State?: ChannelState;
   }
-  export interface CreateChannel {
-    Destinations?: __listOfOutputDestination;
-    EncoderSettings?: EncoderSettings;
-    /**
-     * List of input attachments for channel.
-     */
-    InputAttachments?: __listOfInputAttachment;
-    /**
-     * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
-     */
-    InputSpecification?: InputSpecification;
-    /**
-     * The log level to write to CloudWatch Logs.
-     */
-    LogLevel?: LogLevel;
-    /**
-     * Name of channel.
-     */
-    Name?: __string;
-    /**
-     * Unique request ID to be specified. This is needed to prevent retries from
-creating multiple resources.
-
-     */
-    RequestId?: __string;
-    /**
-     * Deprecated field that's only usable by whitelisted customers.
-     */
-    Reserved?: __string;
-    /**
-     * An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
-     */
-    RoleArn?: __string;
-  }
   export interface CreateChannelRequest {
     Destinations?: __listOfOutputDestination;
     EncoderSettings?: EncoderSettings;
@@ -819,37 +775,6 @@ creating multiple resources.
   export interface CreateChannelResponse {
     Channel?: Channel;
   }
-  export interface CreateChannelResultModel {
-    Channel?: Channel;
-  }
-  export interface CreateInput {
-    /**
-     * Destination settings for PUSH type inputs.
-     */
-    Destinations?: __listOfInputDestinationRequest;
-    /**
-     * A list of security groups referenced by IDs to attach to the input.
-     */
-    InputSecurityGroups?: __listOf__string;
-    /**
-     * Name of the input.
-     */
-    Name?: __string;
-    /**
-     * Unique identifier of the request to ensure the request is handled
-exactly once in case of retries.
-
-     */
-    RequestId?: __string;
-    /**
-     * The source URLs for a PULL-type input. Every PULL type input needs
-exactly two source URLs for redundancy.
-Only specify sources for PULL type Inputs. Leave Destinations empty.
-
-     */
-    Sources?: __listOfInputSourceRequest;
-    Type?: InputType;
-  }
   export interface CreateInputRequest {
     /**
      * Destination settings for PUSH type inputs.
@@ -881,9 +806,6 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export interface CreateInputResponse {
     Input?: Input;
   }
-  export interface CreateInputResultModel {
-    Input?: Input;
-  }
   export interface CreateInputSecurityGroupRequest {
     /**
      * List of IPv4 CIDR addresses to whitelist
@@ -891,9 +813,6 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
     WhitelistRules?: __listOfInputWhitelistRuleCidr;
   }
   export interface CreateInputSecurityGroupResponse {
-    SecurityGroup?: InputSecurityGroup;
-  }
-  export interface CreateInputSecurityGroupResultModel {
     SecurityGroup?: InputSecurityGroup;
   }
   export interface DeleteChannelRequest {
@@ -1522,8 +1441,6 @@ one destination per packager.
      * This field is unused and deprecated.
      */
     Source608TrackNumber?: __integerMin1Max5;
-  }
-  export interface Empty {
   }
   export interface EncoderSettings {
     AudioDescriptions: __listOfAudioDescription;
@@ -2206,12 +2123,6 @@ to.
     WhitelistRules?: __listOfInputWhitelistRule;
   }
   export type InputSecurityGroupState = "IDLE"|"IN_USE"|"UPDATING"|"DELETED"|string;
-  export interface InputSecurityGroupWhitelistRequest {
-    /**
-     * List of IPv4 CIDR addresses to whitelist
-     */
-    WhitelistRules?: __listOfInputWhitelistRuleCidr;
-  }
   export interface InputSettings {
     /**
      * Used to select the audio stream to decode for inputs that have multiple available.
@@ -2314,27 +2225,14 @@ pulled from.
      */
     Cidr?: __string;
   }
-  export interface InternalServiceError {
-    Message?: __string;
-  }
-  export interface InvalidRequest {
-    Message?: __string;
-  }
   export interface KeyProviderSettings {
     StaticKeySettings?: StaticKeySettings;
-  }
-  export interface LimitExceeded {
-    Message?: __string;
   }
   export interface ListChannelsRequest {
     MaxResults?: MaxResults;
     NextToken?: __string;
   }
   export interface ListChannelsResponse {
-    Channels?: __listOfChannelSummary;
-    NextToken?: __string;
-  }
-  export interface ListChannelsResultModel {
     Channels?: __listOfChannelSummary;
     NextToken?: __string;
   }
@@ -2349,22 +2247,11 @@ pulled from.
     InputSecurityGroups?: __listOfInputSecurityGroup;
     NextToken?: __string;
   }
-  export interface ListInputSecurityGroupsResultModel {
-    /**
-     * List of input security groups
-     */
-    InputSecurityGroups?: __listOfInputSecurityGroup;
-    NextToken?: __string;
-  }
   export interface ListInputsRequest {
     MaxResults?: MaxResults;
     NextToken?: __string;
   }
   export interface ListInputsResponse {
-    Inputs?: __listOfInput;
-    NextToken?: __string;
-  }
-  export interface ListInputsResultModel {
     Inputs?: __listOfInput;
     NextToken?: __string;
   }
@@ -2418,16 +2305,6 @@ pulled from.
      */
     Offerings?: __listOfOffering;
   }
-  export interface ListOfferingsResultModel {
-    /**
-     * Token to retrieve the next page of results
-     */
-    NextToken?: __string;
-    /**
-     * List of offerings
-     */
-    Offerings?: __listOfOffering;
-  }
   export interface ListReservationsRequest {
     /**
      * Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'
@@ -2464,16 +2341,6 @@ pulled from.
     VideoQuality?: __string;
   }
   export interface ListReservationsResponse {
-    /**
-     * Token to retrieve the next page of results
-     */
-    NextToken?: __string;
-    /**
-     * List of reservations
-     */
-    Reservations?: __listOfReservation;
-  }
-  export interface ListReservationsResultModel {
     /**
      * Token to retrieve the next page of results
      */
@@ -3009,20 +2876,6 @@ Options:
   }
   export interface PassThroughSettings {
   }
-  export interface PurchaseOffering {
-    /**
-     * Number of resources
-     */
-    Count?: __integerMin1;
-    /**
-     * Name for the new reservation
-     */
-    Name?: __string;
-    /**
-     * Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
-     */
-    RequestId?: __string;
-  }
   export interface PurchaseOfferingRequest {
     /**
      * Number of resources
@@ -3042,9 +2895,6 @@ Options:
     RequestId?: __string;
   }
   export interface PurchaseOfferingResponse {
-    Reservation?: Reservation;
-  }
-  export interface PurchaseOfferingResultModel {
     Reservation?: Reservation;
   }
   export interface RemixSettings {
@@ -3170,12 +3020,6 @@ Valid values: 1, 2, 4, 6, 8
   export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|string;
   export type ReservationState = "ACTIVE"|"EXPIRED"|"CANCELED"|"DELETED"|string;
   export type ReservationVideoQuality = "STANDARD"|"ENHANCED"|"PREMIUM"|string;
-  export interface ResourceConflict {
-    Message?: __string;
-  }
-  export interface ResourceNotFound {
-    Message?: __string;
-  }
   export type RtmpCacheFullBehavior = "DISCONNECT_IMMEDIATELY"|"WAIT_FOR_SERVER"|string;
   export type RtmpCaptionData = "ALL"|"FIELD1_608"|"FIELD1_AND_FIELD2_608"|string;
   export interface RtmpCaptionInfoDestinationSettings {
@@ -3467,33 +3311,6 @@ one destination per packager.
     FecOutputSettings?: FecOutputSettings;
   }
   export type UdpTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
-  export interface UpdateChannel {
-    /**
-     * A list of output destinations for this channel.
-     */
-    Destinations?: __listOfOutputDestination;
-    /**
-     * The encoder settings for this channel.
-     */
-    EncoderSettings?: EncoderSettings;
-    InputAttachments?: __listOfInputAttachment;
-    /**
-     * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
-     */
-    InputSpecification?: InputSpecification;
-    /**
-     * The log level to write to CloudWatch Logs.
-     */
-    LogLevel?: LogLevel;
-    /**
-     * The name of the channel.
-     */
-    Name?: __string;
-    /**
-     * An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed.
-     */
-    RoleArn?: __string;
-  }
   export interface UpdateChannelRequest {
     /**
      * channel ID
@@ -3528,30 +3345,6 @@ one destination per packager.
   export interface UpdateChannelResponse {
     Channel?: Channel;
   }
-  export interface UpdateChannelResultModel {
-    Channel?: Channel;
-  }
-  export interface UpdateInput {
-    /**
-     * Destination settings for PUSH type inputs.
-     */
-    Destinations?: __listOfInputDestinationRequest;
-    /**
-     * A list of security groups referenced by IDs to attach to the input.
-     */
-    InputSecurityGroups?: __listOf__string;
-    /**
-     * Name of the input.
-     */
-    Name?: __string;
-    /**
-     * The source URLs for a PULL-type input. Every PULL type input needs
-exactly two source URLs for redundancy.
-Only specify sources for PULL type Inputs. Leave Destinations empty.
-
-     */
-    Sources?: __listOfInputSourceRequest;
-  }
   export interface UpdateInputRequest {
     /**
      * Destination settings for PUSH type inputs.
@@ -3580,9 +3373,6 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export interface UpdateInputResponse {
     Input?: Input;
   }
-  export interface UpdateInputResultModel {
-    Input?: Input;
-  }
   export interface UpdateInputSecurityGroupRequest {
     /**
      * The id of the Input Security Group to update.
@@ -3595,13 +3385,6 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   }
   export interface UpdateInputSecurityGroupResponse {
     SecurityGroup?: InputSecurityGroup;
-  }
-  export interface UpdateInputSecurityGroupResultModel {
-    SecurityGroup?: InputSecurityGroup;
-  }
-  export interface ValidationError {
-    ElementPath?: __string;
-    ErrorMessage?: __string;
   }
   export interface VideoCodecSettings {
     H264Settings?: H264Settings;
@@ -3672,7 +3455,6 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   }
   export interface WebvttDestinationSettings {
   }
-  export type __boolean = boolean;
   export type __double = number;
   export type __doubleMin0 = number;
   export type __doubleMin1 = number;
@@ -3741,10 +3523,8 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfOutputDestinationSettings = OutputDestinationSettings[];
   export type __listOfOutputGroup = OutputGroup[];
   export type __listOfReservation = Reservation[];
-  export type __listOfValidationError = ValidationError[];
   export type __listOfVideoDescription = VideoDescription[];
   export type __listOf__string = __string[];
-  export type __long = number;
   export type __string = string;
   export type __stringMax32 = string;
   export type __stringMin1 = string;

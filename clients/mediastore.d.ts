@@ -196,7 +196,6 @@ declare namespace MediaStore {
     Container?: Container;
   }
   export type Endpoint = string;
-  export type ErrorMessage = string;
   export type ExposeHeaders = Header[];
   export interface GetContainerPolicyInput {
     /**

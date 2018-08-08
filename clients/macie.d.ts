@@ -152,7 +152,6 @@ declare namespace Macie {
     errorMessage?: ExceptionMessage;
   }
   export type FailedS3Resources = FailedS3Resource[];
-  export type FieldName = string;
   export interface ListMemberAccountsRequest {
     /**
      * Use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMemberAccounts action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. 
@@ -207,7 +206,6 @@ declare namespace Macie {
   export type MemberAccounts = MemberAccount[];
   export type NextToken = string;
   export type Prefix = string;
-  export type ResourceType = string;
   export type S3ContinuousClassificationType = "FULL"|string;
   export type S3OneTimeClassificationType = "FULL"|"NONE"|string;
   export interface S3Resource {

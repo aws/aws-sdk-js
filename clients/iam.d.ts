@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -1010,7 +1011,7 @@ declare class IAM extends Service {
   /**
    * Waits for the instanceProfileExists state by periodically calling the underlying IAM.getInstanceProfileoperation every 1 seconds (at most 40 times).
    */
-  waitFor(state: "instanceProfileExists", params: IAM.Types.GetInstanceProfileRequest, callback?: (err: AWSError, data: IAM.Types.GetInstanceProfileResponse) => void): Request<IAM.Types.GetInstanceProfileResponse, AWSError>;
+  waitFor(state: "instanceProfileExists", params: IAM.Types.GetInstanceProfileRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: IAM.Types.GetInstanceProfileResponse) => void): Request<IAM.Types.GetInstanceProfileResponse, AWSError>;
   /**
    * Waits for the instanceProfileExists state by periodically calling the underlying IAM.getInstanceProfileoperation every 1 seconds (at most 40 times).
    */
@@ -1018,7 +1019,7 @@ declare class IAM extends Service {
   /**
    * Waits for the userExists state by periodically calling the underlying IAM.getUseroperation every 1 seconds (at most 20 times).
    */
-  waitFor(state: "userExists", params: IAM.Types.GetUserRequest, callback?: (err: AWSError, data: IAM.Types.GetUserResponse) => void): Request<IAM.Types.GetUserResponse, AWSError>;
+  waitFor(state: "userExists", params: IAM.Types.GetUserRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: IAM.Types.GetUserResponse) => void): Request<IAM.Types.GetUserResponse, AWSError>;
   /**
    * Waits for the userExists state by periodically calling the underlying IAM.getUseroperation every 1 seconds (at most 20 times).
    */
@@ -4063,18 +4064,10 @@ declare namespace IAM {
   export type certificateListType = SigningCertificate[];
   export type clientIDListType = clientIDType[];
   export type clientIDType = string;
-  export type credentialReportExpiredExceptionMessage = string;
-  export type credentialReportNotPresentExceptionMessage = string;
-  export type credentialReportNotReadyExceptionMessage = string;
   export type customSuffixType = string;
   export type dateType = Date;
-  export type deleteConflictMessage = string;
-  export type duplicateCertificateMessage = string;
-  export type duplicateSSHPublicKeyMessage = string;
   export type encodingType = "SSH"|"PEM"|string;
-  export type entityAlreadyExistsMessage = string;
   export type entityListType = EntityType[];
-  export type entityTemporarilyUnmodifiableMessage = string;
   export type existingUserNameType = string;
   export type groupDetailListType = GroupDetail[];
   export type groupListType = Group[];
@@ -4083,22 +4076,11 @@ declare namespace IAM {
   export type idType = string;
   export type instanceProfileListType = InstanceProfile[];
   export type instanceProfileNameType = string;
-  export type invalidAuthenticationCodeMessage = string;
-  export type invalidCertificateMessage = string;
-  export type invalidInputMessage = string;
-  export type invalidPublicKeyMessage = string;
-  export type invalidUserTypeMessage = string;
-  export type keyPairMismatchMessage = string;
-  export type limitExceededMessage = string;
-  export type malformedCertificateMessage = string;
-  export type malformedPolicyDocumentMessage = string;
   export type markerType = string;
   export type maxItemsType = number;
   export type maxPasswordAgeType = number;
   export type mfaDeviceListType = MFADevice[];
   export type minimumPasswordLengthType = number;
-  export type noSuchEntityMessage = string;
-  export type passwordPolicyViolationMessage = string;
   export type passwordReusePreventionType = number;
   export type passwordType = string;
   export type pathPrefixType = string;
@@ -4107,11 +4089,9 @@ declare namespace IAM {
   export type policyDetailListType = PolicyDetail[];
   export type policyDocumentType = string;
   export type policyDocumentVersionListType = PolicyVersion[];
-  export type policyEvaluationErrorMessage = string;
   export type policyListType = Policy[];
   export type policyNameListType = policyNameType[];
   export type policyNameType = string;
-  export type policyNotAttachableMessage = string;
   export type policyPathType = string;
   export type policyScopeType = "All"|"AWS"|"Local"|string;
   export type policyVersionIdType = string;
@@ -4127,9 +4107,7 @@ declare namespace IAM {
   export type serialNumberType = string;
   export type serverCertificateMetadataListType = ServerCertificateMetadata[];
   export type serverCertificateNameType = string;
-  export type serviceFailureExceptionMessage = string;
   export type serviceName = string;
-  export type serviceNotSupportedMessage = string;
   export type servicePassword = string;
   export type serviceSpecificCredentialId = string;
   export type serviceUserName = string;
@@ -4140,8 +4118,6 @@ declare namespace IAM {
   export type summaryValueType = number;
   export type thumbprintListType = thumbprintType[];
   export type thumbprintType = string;
-  export type unmodifiableEntityMessage = string;
-  export type unrecognizedPublicKeyEncodingMessage = string;
   export type userDetailListType = UserDetail[];
   export type userListType = User[];
   export type userNameType = string;

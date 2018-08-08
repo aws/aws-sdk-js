@@ -142,7 +142,6 @@ declare namespace FMS {
   }
   export interface DisassociateAdminAccountRequest {
   }
-  export type ErrorMessage = string;
   export interface EvaluationResult {
     /**
      * Describes an AWS account's compliance with the AWS Firewall Manager policy.

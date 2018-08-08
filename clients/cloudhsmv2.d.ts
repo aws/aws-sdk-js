@@ -12,6 +12,14 @@ declare class CloudHSMV2 extends Service {
   constructor(options?: CloudHSMV2.Types.ClientConfiguration)
   config: Config & CloudHSMV2.Types.ClientConfiguration;
   /**
+   * 
+   */
+  copyBackupToRegion(params: CloudHSMV2.Types.CopyBackupToRegionRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.CopyBackupToRegionResponse) => void): Request<CloudHSMV2.Types.CopyBackupToRegionResponse, AWSError>;
+  /**
+   * 
+   */
+  copyBackupToRegion(callback?: (err: AWSError, data: CloudHSMV2.Types.CopyBackupToRegionResponse) => void): Request<CloudHSMV2.Types.CopyBackupToRegionResponse, AWSError>;
+  /**
    * Creates a new AWS CloudHSM cluster.
    */
   createCluster(params: CloudHSMV2.Types.CreateClusterRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.CreateClusterResponse) => void): Request<CloudHSMV2.Types.CreateClusterResponse, AWSError>;
@@ -110,11 +118,16 @@ declare namespace CloudHSMV2 {
      * The date and time when the backup was created.
      */
     CreateTimestamp?: Timestamp;
+    CopyTimestamp?: Timestamp;
+    SourceRegion?: Region;
+    SourceBackup?: BackupId;
+    SourceCluster?: ClusterId;
   }
   export type BackupId = string;
   export type BackupPolicy = "DEFAULT"|string;
   export type BackupState = "CREATE_IN_PROGRESS"|"READY"|"DELETED"|string;
   export type Backups = Backup[];
+  export type Boolean = boolean;
   export type Cert = string;
   export interface Certificates {
     /**
@@ -195,6 +208,13 @@ declare namespace CloudHSMV2 {
   export type ClusterId = string;
   export type ClusterState = "CREATE_IN_PROGRESS"|"UNINITIALIZED"|"INITIALIZE_IN_PROGRESS"|"INITIALIZED"|"ACTIVE"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DEGRADED"|string;
   export type Clusters = Cluster[];
+  export interface CopyBackupToRegionRequest {
+    DestinationRegion: Region;
+    BackupId: BackupId;
+  }
+  export interface CopyBackupToRegionResponse {
+    DestinationBackup?: DestinationBackup;
+  }
   export interface CreateClusterRequest {
     /**
      * The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:   All subnets must be in the same virtual private cloud (VPC).   You can specify only one subnet per Availability Zone.  
@@ -284,6 +304,7 @@ declare namespace CloudHSMV2 {
      * One or more filters to limit the items returned in the response. Use the backupIds filter to return only the specified backups. Specify backups by their backup identifier (ID). Use the clusterIds filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID). Use the states filter to return only backups that match the specified state.
      */
     Filters?: Filters;
+    SortAscending?: Boolean;
   }
   export interface DescribeBackupsResponse {
     /**
@@ -318,6 +339,12 @@ declare namespace CloudHSMV2 {
      * An opaque string that indicates that the response contains only a subset of clusters. Use this value in a subsequent DescribeClusters request to get more clusters.
      */
     NextToken?: NextToken;
+  }
+  export interface DestinationBackup {
+    CreateTimestamp?: Timestamp;
+    SourceRegion?: Region;
+    SourceBackup?: BackupId;
+    SourceCluster?: ClusterId;
   }
   export type EniId = string;
   export type ExternalAz = string;
@@ -414,6 +441,7 @@ declare namespace CloudHSMV2 {
   export type MaxSize = number;
   export type NextToken = string;
   export type PreCoPassword = string;
+  export type Region = string;
   export type SecurityGroup = string;
   export type StateMessage = string;
   export type String = string;
@@ -460,7 +488,6 @@ declare namespace CloudHSMV2 {
   export interface UntagResourceResponse {
   }
   export type VpcId = string;
-  export type errorMessage = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -40,7 +40,6 @@ declare class KinesisVideoArchivedMedia extends Service {
 declare namespace KinesisVideoArchivedMedia {
   export type ContentType = string;
   export type DiscontinuityMode = "ALWAYS"|"NEVER"|string;
-  export type ErrorMessage = string;
   export type Expires = number;
   export interface Fragment {
     /**
