@@ -810,7 +810,7 @@ declare namespace Lambda {
     /**
      * Indicates whether an error occurred while executing the Lambda function. If an error occurred this field will have one of two values; Handled or Unhandled. Handled errors are errors that are reported by the function while the Unhandled errors are those detected and reported by AWS Lambda. Unhandled errors include out of memory errors and function timeouts. For information about how to report an Handled error, see Programming Model. 
      */
-    FunctionError?: String;
+    FunctionError?: "Handled"|"Unhandled";
     /**
      *  It is the base64-encoded logs for the Lambda function invocation. This is present only if the invocation type is RequestResponse and the logs were requested. 
      */

@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "lambda",
+  "description": "Improve typing of FunctionError in InvocationResponse"
+}
