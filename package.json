@@ -140,6 +140,7 @@
     "react-native-test": "npm -s run-script build-react-native && rake reactnative:test && karma start",
     "region-check": "node ./scripts/region-checker/index.js",
     "translate-api-test": "mocha scripts/lib/translate-api.spec.js",
-    "typings-generator-test": "mocha scripts/lib/prune-shapes.spec.js"
+    "typings-generator-test": "mocha scripts/lib/prune-shapes.spec.js",
+    "helper-test": "mocha scripts/lib/test-helper.spec.js"
   }
 }
