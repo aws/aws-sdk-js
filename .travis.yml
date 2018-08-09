@@ -17,21 +17,7 @@ sudo: false
 matrix:
   include:
   - node_js: "node"
-    env: TEST_SCRIPT=lint
-  - node_js: "node"
-    env: TEST_SCRIPT=buildertest
-  - node_js: "node"
-    env: TEST_SCRIPT=browsertest
-  - node_js: "node"
-    env: TEST_SCRIPT=react-native-test
-  - node_js: "node"
-    env: TEST_SCRIPT=tstest
-  - node_js: "node"
-    env: TEST_SCRIPT=region-check
-  - node_js: "node"
-    env: TEST_SCRIPT=translate-api-test
-  - node_js: "node"
-    env: TEST_SCRIPT=typings-generator-test
+    env: TEST_SCRIPT=test
 
 script:
   - npm run $TEST_SCRIPT
