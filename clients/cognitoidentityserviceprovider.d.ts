@@ -2922,7 +2922,6 @@ declare namespace CognitoIdentityServiceProvider {
      */
     EmailSubject?: EmailVerificationSubjectType;
   }
-  export type MessageType = string;
   export interface NewDeviceMetadataType {
     /**
      * The device key.

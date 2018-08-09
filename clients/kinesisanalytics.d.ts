@@ -544,7 +544,6 @@ declare namespace KinesisAnalytics {
      */
     RawInputRecords?: RawInputRecords;
   }
-  export type ErrorMessage = string;
   export type FileKey = string;
   export type Id = string;
   export type InAppStreamName = string;

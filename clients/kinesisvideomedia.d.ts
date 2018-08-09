@@ -24,7 +24,6 @@ declare class KinesisVideoMedia extends Service {
 declare namespace KinesisVideoMedia {
   export type ContentType = string;
   export type ContinuationToken = string;
-  export type ErrorMessage = string;
   export type FragmentNumberString = string;
   export interface GetMediaInput {
     /**

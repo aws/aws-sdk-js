@@ -321,7 +321,6 @@ declare namespace ApplicationAutoScaling {
     NextToken?: XmlString;
   }
   export type DisableScaleIn = boolean;
-  export type ErrorMessage = string;
   export type MaxResults = number;
   export type MetricAggregationType = "Average"|"Minimum"|"Maximum"|string;
   export interface MetricDimension {

@@ -944,8 +944,6 @@ declare namespace MachineLearning {
   export type EntityName = string;
   export type EntityStatus = "PENDING"|"INPROGRESS"|"FAILED"|"COMPLETED"|"DELETED"|string;
   export type EpochTime = Date;
-  export type ErrorCode = number;
-  export type ErrorMessage = string;
   export interface Evaluation {
     /**
      * The ID that is assigned to the Evaluation at creation.

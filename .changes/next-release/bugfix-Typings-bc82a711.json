@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Typings",
-  "description": "Updates typings-generator to remove unused model types."
-}

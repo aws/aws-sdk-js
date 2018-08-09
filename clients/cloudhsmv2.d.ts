@@ -488,7 +488,6 @@ declare namespace CloudHSMV2 {
   export interface UntagResourceResponse {
   }
   export type VpcId = string;
-  export type errorMessage = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

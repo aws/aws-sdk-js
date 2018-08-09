@@ -180,7 +180,6 @@ declare namespace CloudWatch {
   export type AlarmName = string;
   export type AlarmNamePrefix = string;
   export type AlarmNames = AlarmName[];
-  export type AwsQueryErrorMessage = string;
   export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
   export type DashboardArn = string;
   export type DashboardBody = string;
@@ -203,7 +202,6 @@ declare namespace CloudWatch {
      */
     Size?: Size;
   }
-  export type DashboardErrorMessage = string;
   export type DashboardName = string;
   export type DashboardNamePrefix = string;
   export type DashboardNames = DashboardName[];
@@ -416,12 +414,10 @@ declare namespace CloudWatch {
      */
     AlarmNames: AlarmNames;
   }
-  export type ErrorMessage = string;
   export type EvaluateLowSampleCountPercentile = string;
   export type EvaluationPeriods = number;
   export type ExtendedStatistic = string;
   export type ExtendedStatistics = ExtendedStatistic[];
-  export type FaultDescription = string;
   export interface GetDashboardInput {
     /**
      * The name of the dashboard to be described.

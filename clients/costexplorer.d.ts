@@ -229,7 +229,6 @@ declare namespace CostExplorer {
     SizeFlexEligible?: GenericBoolean;
   }
   export type Entity = string;
-  export type ErrorMessage = string;
   export type Estimated = boolean;
   export interface Expression {
     /**

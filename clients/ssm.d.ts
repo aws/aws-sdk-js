@@ -1290,6 +1290,10 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
+     * The specified key-value mapping of document parameters to target resources.
+     */
+    TargetMaps?: TargetMaps;
+    /**
      * A list of resolved targets in the rate control execution.
      */
     ResolvedTargets?: ResolvedTargets;
@@ -1386,6 +1390,10 @@ declare namespace SSM {
      * The targets defined by the user when starting the Automation.
      */
     Targets?: Targets;
+    /**
+     * The specified key-value mapping of document parameters to target resources.
+     */
+    TargetMaps?: TargetMaps;
     /**
      * A list of targets that resolved during the execution.
      */
@@ -6160,6 +6168,10 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps cannot be specified together.
+     */
+    TargetMaps?: TargetMaps;
+    /**
      * The maximum number of targets allowed to run this task in parallel. You can specify a number, such as 10, or a percentage, such as 10%. The default value is 10.
      */
     MaxConcurrency?: MaxConcurrency;
@@ -6316,6 +6328,11 @@ declare namespace SSM {
   }
   export type TargetCount = number;
   export type TargetKey = string;
+  export type TargetMap = {[key: string]: TargetMapValueList};
+  export type TargetMapKey = string;
+  export type TargetMapValue = string;
+  export type TargetMapValueList = TargetMapValue[];
+  export type TargetMaps = TargetMap[];
   export type TargetParameterList = ParameterValue[];
   export type TargetType = string;
   export type TargetValue = string;

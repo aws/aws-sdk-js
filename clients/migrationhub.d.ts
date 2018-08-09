@@ -306,7 +306,6 @@ declare namespace MigrationHub {
   export type DiscoveredResourceDescription = string;
   export type DiscoveredResourceList = DiscoveredResource[];
   export type DryRun = boolean;
-  export type ErrorMessage = string;
   export interface ImportMigrationTaskRequest {
     /**
      * The name of the ProgressUpdateStream. 

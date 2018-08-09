@@ -292,8 +292,6 @@ declare namespace EFS {
     NextMarker?: Marker;
   }
   export type Encrypted = boolean;
-  export type ErrorCode = string;
-  export type ErrorMessage = string;
   export interface FileSystemDescription {
     /**
      * AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.

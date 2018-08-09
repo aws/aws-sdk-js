@@ -936,7 +936,6 @@ declare namespace AppStream {
     OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
   }
   export type DomainList = Domain[];
-  export type ErrorMessage = string;
   export interface ExpireSessionRequest {
     /**
      * The ID of the streaming session.

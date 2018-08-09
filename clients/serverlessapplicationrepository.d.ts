@@ -97,69 +97,6 @@ declare class ServerlessApplicationRepository extends Service {
   updateApplication(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.UpdateApplicationResponse) => void): Request<ServerlessApplicationRepository.Types.UpdateApplicationResponse, AWSError>;
 }
 declare namespace ServerlessApplicationRepository {
-  export interface Application {
-    /**
-     * The application Amazon Resource Name (ARN).
-     */
-    ApplicationId: __string;
-    /**
-     * The name of the author publishing the app.Minimum length=1. Maximum length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
-     */
-    Author: __string;
-    /**
-     * The date and time this resource was created.
-     */
-    CreationTime?: __string;
-    /**
-     * The description of the application.Minimum length=1. Maximum length=256
-     */
-    Description: __string;
-    /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
-     */
-    HomePageUrl?: __string;
-    /**
-     * Labels to improve discovery of apps in search results.Minimum length=1. Maximum length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
-     */
-    Labels?: __listOf__string;
-    /**
-     * A link to a license file of the app that matches the spdxLicenseID value of your application.Maximum size 5 MB
-     */
-    LicenseUrl?: __string;
-    /**
-     * The name of the application.Minimum length=1. Maximum length=140Pattern: "[a-zA-Z0-9\\-]+";
-     */
-    Name: __string;
-    /**
-     * A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.Maximum size 5 MB
-     */
-    ReadmeUrl?: __string;
-    /**
-     * A valid identifier from https://spdx.org/licenses/.
-     */
-    SpdxLicenseId?: __string;
-    /**
-     * Version information about the application.
-     */
-    Version?: Version;
-  }
-  export interface ApplicationPage {
-    /**
-     * An array of application summaries.
-     */
-    Applications: __listOfApplicationSummary;
-    /**
-     * The token to request the next page of results.
-     */
-    NextToken?: __string;
-  }
-  export interface ApplicationPolicy {
-    /**
-     * An array of policy statements applied to the application.
-     */
-    Statements: __listOfApplicationPolicyStatement;
-  }
   export interface ApplicationPolicyStatement {
     /**
      * See Application Permissions for the list of supported actions.
@@ -208,100 +145,6 @@ declare namespace ServerlessApplicationRepository {
      * A valid identifier from https://spdx.org/licenses/.
      */
     SpdxLicenseId?: __string;
-  }
-  export interface ApplicationVersionPage {
-    /**
-     * The token to request the next page of results.
-     */
-    NextToken?: __string;
-    /**
-     * An array of version summaries for the application.
-     */
-    Versions: __listOfVersionSummary;
-  }
-  export interface ChangeSetDetails {
-    /**
-     * The application Amazon Resource Name (ARN).
-     */
-    ApplicationId: __string;
-    /**
-     * The Amazon Resource Name (ARN) of the change set.Length constraints: Minimum length of 1.Pattern: ARN:[-a-zA-Z0-9:/]*
-     */
-    ChangeSetId: __string;
-    /**
-     * The semantic version of the application:
- https://semver.org/
- 
-     */
-    SemanticVersion: __string;
-    /**
-     * The unique ID of the stack.
-     */
-    StackId: __string;
-  }
-  export interface CreateApplicationInput {
-    /**
-     * The name of the author publishing the app.Minimum length=1. Maximum length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
-     */
-    Author: __string;
-    /**
-     * The description of the application.Minimum length=1. Maximum length=256
-     */
-    Description: __string;
-    /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
-     */
-    HomePageUrl?: __string;
-    /**
-     * Labels to improve discovery of apps in search results.Minimum length=1. Maximum length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
-     */
-    Labels?: __listOf__string;
-    /**
-     * A local text file that contains the license of the app that matches the spdxLicenseID value of your application.
- The file is of the format file://&lt;path>/&lt;filename>.Maximum size 5 MBNote: Only one of licenseBody and licenseUrl can be specified, otherwise an error will result.
-     */
-    LicenseBody?: __string;
-    /**
-     * A link to the S3 object that contains the license of the app that matches the spdxLicenseID value of your application.Maximum size 5 MBNote: Only one of licenseBody and licenseUrl can be specified, otherwise an error will result.
-     */
-    LicenseUrl?: __string;
-    /**
-     * The name of the application that you want to publish.Minimum length=1. Maximum length=140Pattern: "[a-zA-Z0-9\\-]+";
-     */
-    Name: __string;
-    /**
-     * A local text readme file in Markdown language that contains a more detailed description of the application and how it works.
- The file is of the format file://&lt;path>/&lt;filename>.Maximum size 5 MBNote: Only one of readmeBody and readmeUrl can be specified, otherwise an error will result.
-     */
-    ReadmeBody?: __string;
-    /**
-     * A link to the S3 object in Markdown language that contains a more detailed description of the application and how it works.Maximum size 5 MBNote: Only one of readmeBody and readmeUrl can be specified, otherwise an error will result.
-     */
-    ReadmeUrl?: __string;
-    /**
-     * The semantic version of the application:
- https://semver.org/
- 
-     */
-    SemanticVersion?: __string;
-    /**
-     * A link to a public repository for the source code of your application.
-     */
-    SourceCodeUrl?: __string;
-    /**
-     * A valid identifier from https://spdx.org/licenses/.
-     */
-    SpdxLicenseId?: __string;
-    /**
-     * The local raw packaged AWS SAM template file of your application.
- The file is of the format file://&lt;path>/&lt;filename>.Note: Only one of templateBody and templateUrl can be specified, otherwise an error will result.
-     */
-    TemplateBody?: __string;
-    /**
-     * A link to the S3 object cotaining the packaged AWS SAM template of your application.Note: Only one of templateBody and templateUrl can be specified, otherwise an error will result.
-     */
-    TemplateUrl?: __string;
   }
   export interface CreateApplicationRequest {
     /**
@@ -414,20 +257,6 @@ declare namespace ServerlessApplicationRepository {
      */
     Version?: Version;
   }
-  export interface CreateApplicationVersionInput {
-    /**
-     * A link to a public repository for the source code of your application.
-     */
-    SourceCodeUrl?: __string;
-    /**
-     * The raw packaged AWS SAM template of your application.
-     */
-    TemplateBody?: __string;
-    /**
-     * A link to the packaged AWS SAM template of your application.
-     */
-    TemplateUrl?: __string;
-  }
   export interface CreateApplicationVersionRequest {
     /**
      * The Amazon Resource Name (ARN) of the application.
@@ -477,24 +306,6 @@ declare namespace ServerlessApplicationRepository {
      * A link to the packaged AWS SAM template of your application.
      */
     TemplateUrl?: __string;
-  }
-  export interface CreateCloudFormationChangeSetInput {
-    /**
-     * A list of parameter values for the parameters of the application.
-     */
-    ParameterOverrides?: __listOfParameterValue;
-    /**
-     * The semantic version of the application:
- https://semver.org/
- 
-     */
-    SemanticVersion?: __string;
-    /**
-     * The name or the unique ID of the stack for which you are creating a change set. AWS CloudFormation generates
- the change set by comparing this stack's information with the information that you submit, such as a modified
- template or different parameter input values. Constraints: Minimum length of 1.Pattern: ([a-zA-Z][-a-zA-Z0-9]*)|(arn:\b(aws|aws-us-gov|aws-cn)\b:[-a-zA-Z0-9:/._+]*)
-     */
-    StackName: __string;
   }
   export interface CreateCloudFormationChangeSetRequest {
     /**
@@ -756,33 +567,6 @@ declare namespace ServerlessApplicationRepository {
      */
     Statements?: __listOfApplicationPolicyStatement;
   }
-  export interface UpdateApplicationInput {
-    /**
-     * The name of the author publishing the app.Minimum length=1. Maximum length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
-     */
-    Author?: __string;
-    /**
-     * The description of the application.Minimum length=1. Maximum length=256
-     */
-    Description?: __string;
-    /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
-     */
-    HomePageUrl?: __string;
-    /**
-     * Labels to improve discovery of apps in search results.Minimum length=1. Maximum length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
-     */
-    Labels?: __listOf__string;
-    /**
-     * A text readme file in Markdown language that contains a more detailed description of the application and how it works.Maximum size 5 MB
-     */
-    ReadmeBody?: __string;
-    /**
-     * A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.Maximum size 5 MB
-     */
-    ReadmeUrl?: __string;
-  }
   export interface UpdateApplicationRequest {
     /**
      * The Amazon Resource Name (ARN) of the application.
@@ -910,7 +694,6 @@ declare namespace ServerlessApplicationRepository {
     SourceCodeUrl?: __string;
   }
   export type __boolean = boolean;
-  export type __double = number;
   export type __integer = number;
   export type __listOfApplicationPolicyStatement = ApplicationPolicyStatement[];
   export type __listOfApplicationSummary = ApplicationSummary[];
@@ -918,7 +701,6 @@ declare namespace ServerlessApplicationRepository {
   export type __listOfParameterValue = ParameterValue[];
   export type __listOfVersionSummary = VersionSummary[];
   export type __listOf__string = __string[];
-  export type __long = number;
   export type __string = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

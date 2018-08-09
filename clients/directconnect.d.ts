@@ -918,7 +918,6 @@ declare namespace DirectConnect {
      */
     lagId: LagId;
   }
-  export type ErrorMessage = string;
   export interface Interconnect {
     interconnectId?: InterconnectId;
     interconnectName?: InterconnectName;

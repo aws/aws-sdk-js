@@ -603,7 +603,6 @@ declare namespace ES {
     Status: OptionStatus;
   }
   export type EndpointsMap = {[key: string]: ServiceUrl};
-  export type ErrorMessage = string;
   export type GUID = string;
   export type IdentityPoolId = string;
   export type InstanceCount = number;

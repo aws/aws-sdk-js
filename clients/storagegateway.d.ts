@@ -1480,7 +1480,6 @@ declare namespace StorageGateway {
   export type DomainUserName = string;
   export type DomainUserPassword = string;
   export type DoubleObject = number;
-  export type ErrorCode = "ActivationKeyExpired"|"ActivationKeyInvalid"|"ActivationKeyNotFound"|"GatewayInternalError"|"GatewayNotConnected"|"GatewayNotFound"|"GatewayProxyNetworkConnectionBusy"|"AuthenticationFailure"|"BandwidthThrottleScheduleNotFound"|"Blocked"|"CannotExportSnapshot"|"ChapCredentialNotFound"|"DiskAlreadyAllocated"|"DiskDoesNotExist"|"DiskSizeGreaterThanVolumeMaxSize"|"DiskSizeLessThanVolumeSize"|"DiskSizeNotGigAligned"|"DuplicateCertificateInfo"|"DuplicateSchedule"|"EndpointNotFound"|"IAMNotSupported"|"InitiatorInvalid"|"InitiatorNotFound"|"InternalError"|"InvalidGateway"|"InvalidEndpoint"|"InvalidParameters"|"InvalidSchedule"|"LocalStorageLimitExceeded"|"LunAlreadyAllocated "|"LunInvalid"|"MaximumContentLengthExceeded"|"MaximumTapeCartridgeCountExceeded"|"MaximumVolumeCountExceeded"|"NetworkConfigurationChanged"|"NoDisksAvailable"|"NotImplemented"|"NotSupported"|"OperationAborted"|"OutdatedGateway"|"ParametersNotImplemented"|"RegionInvalid"|"RequestTimeout"|"ServiceUnavailable"|"SnapshotDeleted"|"SnapshotIdInvalid"|"SnapshotInProgress"|"SnapshotNotFound"|"SnapshotScheduleNotFound"|"StagingAreaFull"|"StorageFailure"|"TapeCartridgeNotFound"|"TargetAlreadyExists"|"TargetInvalid"|"TargetNotFound"|"UnauthorizedOperation"|"VolumeAlreadyExists"|"VolumeIdInvalid"|"VolumeInUse"|"VolumeNotFound"|"VolumeNotReady"|string;
   export type FileShareARN = string;
   export type FileShareARNList = FileShareARN[];
   export type FileShareClientList = IPV4AddressCIDR[];
@@ -1922,16 +1921,6 @@ declare namespace StorageGateway {
     GatewayARN?: GatewayARN;
   }
   export type StorageClass = string;
-  export interface StorageGatewayError {
-    /**
-     * Additional information about the error.
-     */
-    errorCode?: ErrorCode;
-    /**
-     * Human-readable text that provides detail about the error that occurred.
-     */
-    errorDetails?: errorDetails;
-  }
   export interface StorediSCSIVolume {
     /**
      * The Amazon Resource Name (ARN) of the storage volume.
@@ -2407,7 +2396,6 @@ declare namespace StorageGateway {
     ChapEnabled?: boolean;
   }
   export type double = number;
-  export type errorDetails = {[key: string]: string};
   export type integer = number;
   export type long = number;
   /**

@@ -282,9 +282,17 @@ export namespace DocumentClient {
      */
     BackupStatus: BackupStatus;
     /**
+     * BackupType:    USER - On demand backup created by you.    SYSTEM - On demand backup automatically created by DynamoDB.  
+     */
+    BackupType: BackupType;
+    /**
      * Time at which the backup was created. This is the request time of the backup. 
      */
     BackupCreationDateTime: BackupCreationDateTime;
+    /**
+     * Time at which the automatic on demand backup created by DynamoDB will expire. This SYSTEM on demand backup expires automatically 35 days after its creation.
+     */
+    BackupExpiryDateTime?: _Date;
   }
   export type BackupName = string;
   export type BackupSizeBytes = number;
@@ -316,14 +324,24 @@ export namespace DocumentClient {
      */
     BackupCreationDateTime?: BackupCreationDateTime;
     /**
+     * Time at which the automatic on demand backup created by DynamoDB will expire. This SYSTEM on demand backup expires automatically 35 days after its creation.
+     */
+    BackupExpiryDateTime?: _Date;
+    /**
      * Backup can be in one of the following states: CREATING, ACTIVE, DELETED.
      */
     BackupStatus?: BackupStatus;
+    /**
+     * BackupType:    USER - On demand backup created by you.    SYSTEM - On demand backup automatically created by DynamoDB.  
+     */
+    BackupType?: BackupType;
     /**
      * Size of the backup in bytes.
      */
     BackupSizeBytes?: BackupSizeBytes;
   }
+  export type BackupType = "USER"|"SYSTEM"|string;
+  export type BackupTypeFilter = "USER"|"SYSTEM"|"ALL"|string;
   export type BackupsInputLimit = number;
   export interface BatchGetItemInput {
     /**
@@ -1009,6 +1027,10 @@ export namespace DocumentClient {
      *  LastEvaluatedBackupArn is the ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the ExclusiveStartBackupArn of a new ListBackups operation in order to fetch the next page of results. 
      */
     ExclusiveStartBackupArn?: BackupArn;
+    /**
+     * The backups from the table specified by BackupType are listed. Where BackupType can be:    USER - On demand backup created by you.    SYSTEM - On demand backup automatically created by DynamoDB.    ALL - All types of on demand backups (USER and SYSTEM).  
+     */
+    BackupType?: BackupTypeFilter;
   }
   export interface ListBackupsOutput {
     /**

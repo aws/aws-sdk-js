@@ -2376,6 +2376,10 @@
           "shape":"Targets",
           "documentation":"<p>The specified targets.</p>"
         },
+        "TargetMaps":{
+          "shape":"TargetMaps",
+          "documentation":"<p>The specified key-value mapping of document parameters to target resources.</p>"
+        },
         "ResolvedTargets":{
           "shape":"ResolvedTargets",
           "documentation":"<p>A list of resolved targets in the rate control execution.</p>"
@@ -2521,6 +2525,10 @@
         "Targets":{
           "shape":"Targets",
           "documentation":"<p>The targets defined by the user when starting the Automation.</p>"
+        },
+        "TargetMaps":{
+          "shape":"TargetMaps",
+          "documentation":"<p>The specified key-value mapping of document parameters to target resources.</p>"
         },
         "ResolvedTargets":{
           "shape":"ResolvedTargets",
@@ -10303,6 +10311,10 @@
           "shape":"Targets",
           "documentation":"<p>A key-value mapping to target resources. Required if you specify TargetParameterName.</p>"
         },
+        "TargetMaps":{
+          "shape":"TargetMaps",
+          "documentation":"<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps cannot be specified together.</p>"
+        },
         "MaxConcurrency":{
           "shape":"MaxConcurrency",
           "documentation":"<p>The maximum number of targets allowed to run this task in parallel. You can specify a number, such as 10, or a percentage, such as 10%. The default value is 10.</p>"
@@ -10590,6 +10602,35 @@
       "max":128,
       "min":1,
       "pattern":"^[\\p{L}\\p{Z}\\p{N}_.:/=\\-@]*$"
+    },
+    "TargetMap":{
+      "type":"map",
+      "key":{"shape":"TargetMapKey"},
+      "value":{"shape":"TargetMapValueList"},
+      "max":20,
+      "min":1
+    },
+    "TargetMapKey":{
+      "type":"string",
+      "max":50,
+      "min":1
+    },
+    "TargetMapValue":{
+      "type":"string",
+      "max":50,
+      "min":1
+    },
+    "TargetMapValueList":{
+      "type":"list",
+      "member":{"shape":"TargetMapValue"},
+      "max":25,
+      "min":0
+    },
+    "TargetMaps":{
+      "type":"list",
+      "member":{"shape":"TargetMap"},
+      "max":300,
+      "min":0
     },
     "TargetParameterList":{
       "type":"list",

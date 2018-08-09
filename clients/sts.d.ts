@@ -351,17 +351,9 @@ declare namespace STS {
   export type decodedMessageType = string;
   export type durationSecondsType = number;
   export type encodedMessageType = string;
-  export type expiredIdentityTokenMessage = string;
   export type externalIdType = string;
   export type federatedIdType = string;
-  export type idpCommunicationErrorMessage = string;
-  export type idpRejectedClaimMessage = string;
-  export type invalidAuthorizationMessage = string;
-  export type invalidIdentityTokenMessage = string;
-  export type malformedPolicyDocumentMessage = string;
   export type nonNegativeIntegerType = number;
-  export type packedPolicyTooLargeMessage = string;
-  export type regionDisabledMessage = string;
   export type roleDurationSecondsType = number;
   export type roleSessionNameType = string;
   export type serialNumberType = string;

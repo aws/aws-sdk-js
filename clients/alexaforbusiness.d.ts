@@ -220,11 +220,11 @@ declare class AlexaForBusiness extends Service {
    */
   getSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetSkillGroupResponse) => void): Request<AlexaForBusiness.Types.GetSkillGroupResponse, AWSError>;
   /**
-   * Lists the Device Event history for up to 30 days. If EventType isn't specified in the request, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. 
+   * Lists the device event history, including device connection status, for up to 30 days.
    */
   listDeviceEvents(params: AlexaForBusiness.Types.ListDeviceEventsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListDeviceEventsResponse) => void): Request<AlexaForBusiness.Types.ListDeviceEventsResponse, AWSError>;
   /**
-   * Lists the Device Event history for up to 30 days. If EventType isn't specified in the request, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. 
+   * Lists the device event history, including device connection status, for up to 30 days.
    */
   listDeviceEvents(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListDeviceEventsResponse) => void): Request<AlexaForBusiness.Types.ListDeviceEventsResponse, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class AlexaForBusiness extends Service {
    */
   listSkills(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsResponse) => void): Request<AlexaForBusiness.Types.ListSkillsResponse, AWSError>;
   /**
-   * Lists all tags for a specific resource.
+   * Lists all tags for the specified resource.
    */
   listTags(params: AlexaForBusiness.Types.ListTagsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListTagsResponse) => void): Request<AlexaForBusiness.Types.ListTagsResponse, AWSError>;
   /**
-   * Lists all tags for a specific resource.
+   * Lists all tags for the specified resource.
    */
   listTags(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListTagsResponse) => void): Request<AlexaForBusiness.Types.ListTagsResponse, AWSError>;
   /**
@@ -928,7 +928,6 @@ declare namespace AlexaForBusiness {
   export type Email = string;
   export type EnrollmentId = string;
   export type EnrollmentStatus = "INITIALIZED"|"PENDING"|"REGISTERED"|"DISASSOCIATING"|"DEREGISTERING"|string;
-  export type ErrorMessage = string;
   export type Feature = "BLUETOOTH"|"VOLUME"|"NOTIFICATIONS"|"LISTS"|"SKILLS"|"ALL"|string;
   export type Features = Feature[];
   export interface Filter {
@@ -1043,25 +1042,25 @@ declare namespace AlexaForBusiness {
      */
     DeviceArn: Arn;
     /**
-     * The event type to filter device events.
+     * The event type to filter device events. If EventType isn't specified, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. 
      */
     EventType?: DeviceEventType;
     /**
-     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.
+     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults. When the end of results is reached, the response has a value of null.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. Required. 
+     * The maximum number of results to include in the response. The default value is 50. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. 
      */
     MaxResults?: MaxResults;
   }
   export interface ListDeviceEventsResponse {
     /**
-     * 
+     * The device events requested for the device ARN.
      */
     DeviceEvents?: DeviceEventList;
     /**
-     * 
+     * The token returned to indicate that there is more data available.
      */
     NextToken?: NextToken;
   }
@@ -1091,7 +1090,7 @@ declare namespace AlexaForBusiness {
   }
   export interface ListTagsRequest {
     /**
-     * The ARN of the specific resource for which to list tags. Required.
+     * The ARN of the specified resource for which to list tags.
      */
     Arn: Arn;
     /**
@@ -1105,7 +1104,7 @@ declare namespace AlexaForBusiness {
   }
   export interface ListTagsResponse {
     /**
-     * The list of tags requested for the specific resource.
+     * The tags requested for the specified resource.
      */
     Tags?: TagList;
     /**

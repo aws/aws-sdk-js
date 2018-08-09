@@ -968,8 +968,6 @@ declare namespace Route53 {
     ChangeInfo: ChangeInfo;
   }
   export type EnableSNI = boolean;
-  export type ErrorMessage = string;
-  export type ErrorMessages = ErrorMessage[];
   export type EvaluationPeriods = number;
   export type FailureThreshold = number;
   export type FullyQualifiedDomainName = string;

@@ -1,6 +1,22 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.286.2-->
+<!--LATEST=2.289.0-->
 <!--ENTRYINSERT-->
+
+## 2.289.0
+* feature: SSM: AWS Systems Manager Automation is launching two new features for Automation Execution Rate Control based on tags and customized parameter maps. With the first feature, customer can target their resources by specifying a Tag with Key/Value. With the second feature, Parameter maps rate control, customers can benefit from customization of input parameters.
+* feature: SecretsManager: This release introduces a ForceDeleteWithoutRecovery parameter to the DeleteSecret API enabling customers to force the deletion of a secret without any recovery window
+
+## 2.288.0
+* feature: CloudWatchLogs: Documentation Update
+* feature: CodeBuild: Release semantic versioning feature for CodeBuild
+* feature: EC2: Amazon VPC Flow Logs adds support for delivering flow logs directly to S3
+* feature: Pinpoint: This release includes a new batch API call for Amazon Pinpoint which can be used to update endpoints and submit events. This call will accept events from clients such as mobile devices and AWS SDKs. This call will accept requests which has multiple endpoints and multiple events attached to those endpoints in a single call. This call will update the endpoints attached and will ingest events for those endpoints. The response from this call will be a multipart response per endpoint/per event submitted.
+* feature: SSM: Two new filters ExecutionStage and DocumentName will be added to ListCommands so that customers will have more approaches to query their commands.
+
+## 2.287.0
+* bugfix: Typings: Updates typings-generator to remove unused model types.
+* feature: DynamoDB:  Amazon DynamoDB Point-in-time recovery (PITR) provides continuous backups of your table data. DynamoDB now supports the ability to self-restore a deleted PITR enabled table. Now, when a table with PITR enabled is deleted, a system backup is automatically created and retained for 35 days (at no additional cost). System backups allow you to restore the deleted PITR enabled table to the state it was just before the point of deletion. For more information, see the Amazon DynamoDB Developer Guide.
+* feature: Health: Updates the ARN structure vended by AWS Health API. All ARNs will now include the service and type code of the associated event, as vended by DescribeEventTypes.
 
 ## 2.286.2
 * bugfix: type: remove undefined exceptions from SubscribeToShardEventStream

@@ -100,8 +100,6 @@ declare namespace DLM {
   }
   export interface DeleteLifecyclePolicyResponse {
   }
-  export type ErrorCode = string;
-  export type ErrorMessage = string;
   export type ExecutionRoleArn = string;
   export interface GetLifecyclePoliciesRequest {
     /**
@@ -191,8 +189,6 @@ declare namespace DLM {
     State?: GettablePolicyStateValues;
   }
   export type LifecyclePolicySummaryList = LifecyclePolicySummary[];
-  export type Parameter = string;
-  export type ParameterList = Parameter[];
   export type PolicyDescription = string;
   export interface PolicyDetails {
     /**

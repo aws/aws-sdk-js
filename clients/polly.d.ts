@@ -126,7 +126,6 @@ declare namespace Polly {
      */
     NextToken?: NextToken;
   }
-  export type ErrorMessage = string;
   export type Gender = "Female"|"Male"|string;
   export interface GetLexiconInput {
     /**

@@ -1388,7 +1388,6 @@ declare namespace DMS {
     Enabled?: Boolean;
   }
   export type EventSubscriptionsList = EventSubscription[];
-  export type ExceptionMessage = string;
   export interface Filter {
     /**
      * The name of the filter.

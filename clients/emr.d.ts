@@ -865,8 +865,6 @@ declare namespace EMR {
      */
     AdditionalSlaveSecurityGroups?: StringList;
   }
-  export type ErrorCode = string;
-  export type ErrorMessage = string;
   export interface FailureDetails {
     /**
      * The reason for the step failure. In the case where the service cannot successfully determine the root cause of the failure, it returns "Unknown Error" as a reason.
