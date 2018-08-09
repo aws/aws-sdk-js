@@ -33,6 +33,7 @@
         {"shape":"NodeQuotaForCustomerExceededFault"},
         {"shape":"InvalidVPCNetworkStateFault"},
         {"shape":"TagQuotaPerResourceExceeded"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -50,6 +51,7 @@
         {"shape":"ParameterGroupQuotaExceededFault"},
         {"shape":"ParameterGroupAlreadyExistsFault"},
         {"shape":"InvalidParameterGroupStateFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -67,7 +69,8 @@
         {"shape":"SubnetGroupAlreadyExistsFault"},
         {"shape":"SubnetGroupQuotaExceededFault"},
         {"shape":"SubnetQuotaExceededFault"},
-        {"shape":"InvalidSubnet"}
+        {"shape":"InvalidSubnet"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"}
       ],
       "documentation":"<p>Creates a new subnet group.</p>"
     },
@@ -83,6 +86,7 @@
         {"shape":"ClusterNotFoundFault"},
         {"shape":"NodeNotFoundFault"},
         {"shape":"InvalidClusterStateFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -99,6 +103,7 @@
       "errors":[
         {"shape":"ClusterNotFoundFault"},
         {"shape":"InvalidClusterStateFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -115,6 +120,7 @@
       "errors":[
         {"shape":"InvalidParameterGroupStateFault"},
         {"shape":"ParameterGroupNotFoundFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -130,7 +136,8 @@
       "output":{"shape":"DeleteSubnetGroupResponse"},
       "errors":[
         {"shape":"SubnetGroupInUseFault"},
-        {"shape":"SubnetGroupNotFoundFault"}
+        {"shape":"SubnetGroupNotFoundFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"}
       ],
       "documentation":"<p>Deletes a subnet group.</p> <note> <p>You cannot delete a subnet group if it is associated with any DAX clusters.</p> </note>"
     },
@@ -144,6 +151,7 @@
       "output":{"shape":"DescribeClustersResponse"},
       "errors":[
         {"shape":"ClusterNotFoundFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -158,6 +166,7 @@
       "input":{"shape":"DescribeDefaultParametersRequest"},
       "output":{"shape":"DescribeDefaultParametersResponse"},
       "errors":[
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -172,6 +181,7 @@
       "input":{"shape":"DescribeEventsRequest"},
       "output":{"shape":"DescribeEventsResponse"},
       "errors":[
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -187,6 +197,7 @@
       "output":{"shape":"DescribeParameterGroupsResponse"},
       "errors":[
         {"shape":"ParameterGroupNotFoundFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -202,6 +213,7 @@
       "output":{"shape":"DescribeParametersResponse"},
       "errors":[
         {"shape":"ParameterGroupNotFoundFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -216,7 +228,8 @@
       "input":{"shape":"DescribeSubnetGroupsRequest"},
       "output":{"shape":"DescribeSubnetGroupsResponse"},
       "errors":[
-        {"shape":"SubnetGroupNotFoundFault"}
+        {"shape":"SubnetGroupNotFoundFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"}
       ],
       "documentation":"<p>Returns a list of subnet group descriptions. If a subnet group name is specified, the list will contain only the description of that group.</p>"
     },
@@ -235,6 +248,7 @@
         {"shape":"InvalidVPCNetworkStateFault"},
         {"shape":"NodeQuotaForClusterExceededFault"},
         {"shape":"NodeQuotaForCustomerExceededFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -252,6 +266,7 @@
         {"shape":"ClusterNotFoundFault"},
         {"shape":"InvalidARNFault"},
         {"shape":"InvalidClusterStateFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -269,6 +284,7 @@
         {"shape":"ClusterNotFoundFault"},
         {"shape":"NodeNotFoundFault"},
         {"shape":"InvalidClusterStateFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -287,6 +303,7 @@
         {"shape":"TagQuotaPerResourceExceeded"},
         {"shape":"InvalidARNFault"},
         {"shape":"InvalidClusterStateFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -305,6 +322,7 @@
         {"shape":"InvalidARNFault"},
         {"shape":"TagNotFoundFault"},
         {"shape":"InvalidClusterStateFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -323,6 +341,7 @@
         {"shape":"ClusterNotFoundFault"},
         {"shape":"InvalidParameterGroupStateFault"},
         {"shape":"ParameterGroupNotFoundFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -339,6 +358,7 @@
       "errors":[
         {"shape":"InvalidParameterGroupStateFault"},
         {"shape":"ParameterGroupNotFoundFault"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
@@ -356,7 +376,8 @@
         {"shape":"SubnetGroupNotFoundFault"},
         {"shape":"SubnetQuotaExceededFault"},
         {"shape":"SubnetInUse"},
-        {"shape":"InvalidSubnet"}
+        {"shape":"InvalidSubnet"},
+        {"shape":"ServiceLinkedRoleNotFoundFault"}
       ],
       "documentation":"<p>Modifies an existing subnet group.</p>"
     }
@@ -440,6 +461,10 @@
         "ParameterGroup":{
           "shape":"ParameterGroupStatus",
           "documentation":"<p>The parameter group being used by nodes in the cluster.</p>"
+        },
+        "SSEDescription":{
+          "shape":"SSEDescription",
+          "documentation":"<p>The description of the server-side encryption status on the specified DAX cluster.</p>"
         }
       },
       "documentation":"<p>Contains all of the attributes of a specific DAX cluster.</p>"
@@ -478,8 +503,7 @@
       "required":[
         "ClusterName",
         "NodeType",
-        "ReplicationFactor",
-        "IamRoleArn"
+        "ReplicationFactor"
       ],
       "members":{
         "ClusterName":{
@@ -529,6 +553,10 @@
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>A set of tags to associate with the DAX cluster. </p>"
+        },
+        "SSESpecification":{
+          "shape":"SSESpecification",
+          "documentation":"<p>Represents the settings used to enable server-side encryption on the cluster.</p>"
         }
       }
     },
@@ -981,7 +1009,8 @@
         "message":{"shape":"AwsQueryErrorMessage"}
       },
       "documentation":"<p>Two or more incompatible parameters were specified.</p>",
-      "exception":true
+      "exception":true,
+      "synthetic":true
     },
     "InvalidParameterGroupStateFault":{
       "type":"structure",
@@ -996,7 +1025,8 @@
         "message":{"shape":"AwsQueryErrorMessage"}
       },
       "documentation":"<p>The value for a parameter is invalid.</p>",
-      "exception":true
+      "exception":true,
+      "synthetic":true
     },
     "InvalidSubnet":{
       "type":"structure",
@@ -1304,6 +1334,37 @@
         }
       }
     },
+    "SSEDescription":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"SSEStatus",
+          "documentation":"<p>The current state of server-side encryption:</p> <ul> <li> <p> <code>ENABLING</code> - Server-side encryption is being enabled.</p> </li> <li> <p> <code>ENABLED</code> - Server-side encryption is enabled.</p> </li> <li> <p> <code>DISABLING</code> - Server-side encryption is being disabled.</p> </li> <li> <p> <code>DISABLED</code> - Server-side encryption is disabled.</p> </li> </ul>"
+        }
+      },
+      "documentation":"<p>The description of the server-side encryption status on the specified DAX cluster.</p>"
+    },
+    "SSEEnabled":{"type":"boolean"},
+    "SSESpecification":{
+      "type":"structure",
+      "required":["Enabled"],
+      "members":{
+        "Enabled":{
+          "shape":"SSEEnabled",
+          "documentation":"<p>Indicates whether server-side encryption is enabled (true) or disabled (false) on the cluster.</p>"
+        }
+      },
+      "documentation":"<p>Represents the settings used to enable server-side encryption.</p>"
+    },
+    "SSEStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLING",
+        "ENABLED",
+        "DISABLING",
+        "DISABLED"
+      ]
+    },
     "SecurityGroupIdentifierList":{
       "type":"list",
       "member":{"shape":"String"}
@@ -1325,6 +1386,12 @@
     "SecurityGroupMembershipList":{
       "type":"list",
       "member":{"shape":"SecurityGroupMembership"}
+    },
+    "ServiceLinkedRoleNotFoundFault":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
     },
     "SourceType":{
       "type":"string",

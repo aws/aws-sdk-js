@@ -534,6 +534,14 @@ declare class RDS extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: RDS.Types.TagListMessage) => void): Request<RDS.Types.TagListMessage, AWSError>;
   /**
+   * Set the capacity of an Aurora Serverless DB cluster to a specific value. Aurora Serverless scales seamlessly based on the workload on the DB cluster. In some cases, the capacity might not scale fast enough to meet a sudden change in workload, such as a large number of new transactions. Call ModifyCurrentDBClusterCapacity to set the capacity explicitly. After this call sets the DB cluster capacity, Aurora Serverless can automatically scale the DB cluster based on the cooldown period for scaling up and the cooldown period for scaling down. For more information about Aurora Serverless, see Using Amazon Aurora Serverless in the Amazon RDS User Guide.  If you call ModifyCurrentDBClusterCapacity with the default TimeoutAction, connections to the DB cluster are dropped when the capacity is set. 
+   */
+  modifyCurrentDBClusterCapacity(params: RDS.Types.ModifyCurrentDBClusterCapacityMessage, callback?: (err: AWSError, data: RDS.Types.DBClusterCapacityInfo) => void): Request<RDS.Types.DBClusterCapacityInfo, AWSError>;
+  /**
+   * Set the capacity of an Aurora Serverless DB cluster to a specific value. Aurora Serverless scales seamlessly based on the workload on the DB cluster. In some cases, the capacity might not scale fast enough to meet a sudden change in workload, such as a large number of new transactions. Call ModifyCurrentDBClusterCapacity to set the capacity explicitly. After this call sets the DB cluster capacity, Aurora Serverless can automatically scale the DB cluster based on the cooldown period for scaling up and the cooldown period for scaling down. For more information about Aurora Serverless, see Using Amazon Aurora Serverless in the Amazon RDS User Guide.  If you call ModifyCurrentDBClusterCapacity with the default TimeoutAction, connections to the DB cluster are dropped when the capacity is set. 
+   */
+  modifyCurrentDBClusterCapacity(callback?: (err: AWSError, data: RDS.Types.DBClusterCapacityInfo) => void): Request<RDS.Types.DBClusterCapacityInfo, AWSError>;
+  /**
    * Modify a setting for an Amazon Aurora DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see Aurora on Amazon RDS in the Amazon RDS User Guide. 
    */
   modifyDBCluster(params: RDS.Types.ModifyDBClusterMessage, callback?: (err: AWSError, data: RDS.Types.ModifyDBClusterResult) => void): Request<RDS.Types.ModifyDBClusterResult, AWSError>;
@@ -1201,9 +1209,17 @@ declare namespace RDS {
      */
     BacktrackWindow?: LongOptional;
     /**
-     * The list of log types that need to be enabled for exporting to CloudWatch Logs.
+     * The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs  in the Amazon Relational Database Service User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The DB engine mode of the DB cluster, either provisioned or serverless.
+     */
+    EngineMode?: String;
+    /**
+     * For DB clusters in serverless DB engine mode, the scaling properties of the DB cluster.
+     */
+    ScalingConfiguration?: ScalingConfiguration;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -1341,7 +1357,7 @@ declare namespace RDS {
      */
     CharacterSetName?: String;
     /**
-     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.    Default VPC: true    VPC: false   If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.
+     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether DBSubnetGroupName is specified. If DBSubnetGroupName is not specified, and PubliclyAccessible is not specified, the following applies:   If the default VPC in the target region doesn’t have an Internet gateway attached to it, the DB instance is private.   If the default VPC in the target region has an Internet gateway attached to it, the DB instance is public.   If DBSubnetGroupName is specified, and PubliclyAccessible is not specified, the following applies:   If the subnets are part of a VPC that doesn’t have an Internet gateway attached to it, the DB instance is private.   If the subnets are part of a VPC that has an Internet gateway attached to it, the DB instance is public.  
      */
     PubliclyAccessible?: BooleanOptional;
     Tags?: TagList;
@@ -1414,7 +1430,7 @@ declare namespace RDS {
      */
     PerformanceInsightsRetentionPeriod?: IntegerOptional;
     /**
-     * The list of log types that need to be enabled for exporting to CloudWatch Logs.
+     * The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs  in the Amazon Relational Database Service User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
@@ -1460,7 +1476,7 @@ declare namespace RDS {
      */
     OptionGroupName?: String;
     /**
-     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.    Default VPC:true    VPC:false   If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.
+     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. For more information, see CreateDBInstance.
      */
     PubliclyAccessible?: BooleanOptional;
     Tags?: TagList;
@@ -1509,7 +1525,7 @@ declare namespace RDS {
      */
     PerformanceInsightsRetentionPeriod?: IntegerOptional;
     /**
-     * The list of logs that the new DB instance is to export to CloudWatch Logs.
+     * The list of logs that the new DB instance is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs  in the Amazon Relational Database Service User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
@@ -1801,9 +1817,15 @@ declare namespace RDS {
      */
     BacktrackConsumedChangeRecords?: LongOptional;
     /**
-     * A list of log types that this DB cluster is configured to export to CloudWatch Logs.
+     * A list of log types that this DB cluster is configured to export to CloudWatch Logs. Log types vary by DB engine. For information about the log types for each DB engine, see Amazon RDS Database Log Files in the Amazon RDS User Guide. 
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
+    Capacity?: IntegerOptional;
+    /**
+     * The DB engine mode of the DB cluster, either provisioned or serverless.
+     */
+    EngineMode?: String;
+    ScalingConfigurationInfo?: ScalingConfigurationInfo;
   }
   export interface DBClusterBacktrack {
     /**
@@ -1841,6 +1863,28 @@ declare namespace RDS {
      * Contains a list of backtracks for the user.
      */
     DBClusterBacktracks?: DBClusterBacktrackList;
+  }
+  export interface DBClusterCapacityInfo {
+    /**
+     * A user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster. 
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * A value that specifies the capacity that the DB cluster scales to next.
+     */
+    PendingCapacity?: IntegerOptional;
+    /**
+     * The current capacity of the DB cluster.
+     */
+    CurrentCapacity?: IntegerOptional;
+    /**
+     * The number of seconds before a call to ModifyCurrentDBClusterCapacity times out.
+     */
+    SecondsBeforeTimeout?: IntegerOptional;
+    /**
+     * The timeout action of a call to ModifyCurrentDBClusterCapacity, either ForceApplyCapacityChange or RollbackCapacityChange.
+     */
+    TimeoutAction?: String;
   }
   export type DBClusterList = DBCluster[];
   export interface DBClusterMember {
@@ -1937,6 +1981,7 @@ declare namespace RDS {
      * Describes the state of association between the IAM role and the DB cluster. The Status property returns one of the following values:    ACTIVE - the IAM role ARN is associated with the DB cluster and can be used to access other AWS services on your behalf.    PENDING - the IAM role ARN is being associated with the DB cluster.    INVALID - the IAM role ARN is associated with the DB cluster, but the DB cluster is unable to assume the IAM role in order to access other AWS services on your behalf.  
      */
     Status?: String;
+    FeatureName?: String;
   }
   export type DBClusterRoles = DBClusterRole[];
   export interface DBClusterSnapshot {
@@ -2102,6 +2147,10 @@ declare namespace RDS {
      * Indicates whether the database engine version supports read replicas.
      */
     SupportsReadReplica?: Boolean;
+    /**
+     * A list of the supported DB engine modes.
+     */
+    SupportedEngineModes?: EngineModeList;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -2236,7 +2285,7 @@ declare namespace RDS {
      */
     SecondaryAvailabilityZone?: String;
     /**
-     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.    Default VPC:true    VPC:false   If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.
+     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.
      */
     PubliclyAccessible?: Boolean;
     /**
@@ -2324,7 +2373,7 @@ declare namespace RDS {
      */
     PerformanceInsightsRetentionPeriod?: IntegerOptional;
     /**
-     * A list of log types that this DB instance is configured to export to CloudWatch Logs.
+     * A list of log types that this DB instance is configured to export to CloudWatch Logs. Log types vary by DB engine. For information about the log types for each DB engine, see Amazon RDS Database Log Files in the Amazon RDS User Guide. 
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
     /**
@@ -2353,7 +2402,7 @@ declare namespace RDS {
      */
     Normal?: Boolean;
     /**
-     * Status of the DB instance. For a StatusType of read replica, the values can be replicating, error, stopped, or terminated.
+     * Status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.
      */
     Status?: String;
     /**
@@ -3540,6 +3589,7 @@ declare namespace RDS {
      */
     Parameters?: ParametersList;
   }
+  export type EngineModeList = String[];
   export interface Event {
     /**
      * Provides the identifier for the source of the event.
@@ -3700,6 +3750,24 @@ declare namespace RDS {
   export type LogTypeList = String[];
   export type Long = number;
   export type LongOptional = number;
+  export interface ModifyCurrentDBClusterCapacityMessage {
+    /**
+     * The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive. Constraints:   Must match the identifier of an existing DB cluster.  
+     */
+    DBClusterIdentifier: String;
+    /**
+     * The DB cluster capacity. Constraints:   Value must be 2, 4, 8, 16, 32, 64, 128, or 256.  
+     */
+    Capacity?: IntegerOptional;
+    /**
+     * The amount of time, in seconds, that Aurora Serverless tries to find a scaling point to perform seamless scaling before enforcing the timeout action. The default is 300.   Value must be from 10 through 600.  
+     */
+    SecondsBeforeTimeout?: IntegerOptional;
+    /**
+     * The action to take when the timeout is reached, either ForceApplyCapacityChange or RollbackCapacityChange.  ForceApplyCapacityChange, the default, drops connections to the DB cluster and sets the capacity to the specified value as soon as possible.  RollbackCapacityChange ignores the capacity change if a scaling point is not found in the timeout period.
+     */
+    TimeoutAction?: String;
+  }
   export interface ModifyDBClusterMessage {
     /**
      * The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive. Constraints:   Must match the identifier of an existing DBCluster.  
@@ -3761,6 +3829,10 @@ declare namespace RDS {
      * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true. For a list of valid engine versions, see CreateDBCluster, or call DescribeDBEngineVersions.
      */
     EngineVersion?: String;
+    /**
+     * The scaling properties of the DB cluster. You can only modify scaling properties for DB clusters in serverless DB engine mode.
+     */
+    ScalingConfiguration?: ScalingConfiguration;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -4430,6 +4502,10 @@ declare namespace RDS {
      * A list of the available processor features for the DB instance class of a DB instance.
      */
     AvailableProcessorFeatures?: AvailableProcessorFeatureList;
+    /**
+     * A list of the supported DB engine modes.
+     */
+    SupportedEngineModes?: EngineModeList;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {
@@ -4483,6 +4559,10 @@ declare namespace RDS {
      * Indicates when to apply parameter updates.
      */
     ApplyMethod?: ApplyMethod;
+    /**
+     * The valid DB engine modes.
+     */
+    SupportedEngineModes?: EngineModeList;
   }
   export type ParametersList = Parameter[];
   export interface PendingCloudwatchLogsExports {
@@ -4989,7 +5069,7 @@ declare namespace RDS {
      */
     BacktrackWindow?: LongOptional;
     /**
-     * The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+     * The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs  in the Amazon Relational Database Service User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
   }
@@ -5054,9 +5134,17 @@ declare namespace RDS {
      */
     BacktrackWindow?: LongOptional;
     /**
-     * The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+     * The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs  in the Amazon Relational Database Service User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The DB engine mode of the DB cluster, either provisioned or serverless.
+     */
+    EngineMode?: String;
+    /**
+     * For DB clusters in serverless DB engine mode, the scaling properties of the DB cluster.
+     */
+    ScalingConfiguration?: ScalingConfiguration;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -5112,7 +5200,7 @@ declare namespace RDS {
      */
     BacktrackWindow?: LongOptional;
     /**
-     * The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+     * The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs  in the Amazon Relational Database Service User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
   }
@@ -5149,7 +5237,7 @@ declare namespace RDS {
      */
     MultiAZ?: BooleanOptional;
     /**
-     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.    Default VPC: true    VPC: false   If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.
+     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. For more information, see CreateDBInstance.
      */
     PubliclyAccessible?: BooleanOptional;
     /**
@@ -5206,7 +5294,7 @@ declare namespace RDS {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * The list of logs that the restored DB instance is to export to CloudWatch Logs.
+     * The list of logs that the restored DB instance is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs  in the Amazon Relational Database Service User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
@@ -5311,7 +5399,7 @@ declare namespace RDS {
      */
     OptionGroupName?: String;
     /**
-     * Specifies whether the DB instance is publicly accessible or not. For more information, see CreateDBInstance. 
+     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. For more information, see CreateDBInstance.
      */
     PubliclyAccessible?: BooleanOptional;
     /**
@@ -5379,7 +5467,7 @@ declare namespace RDS {
      */
     PerformanceInsightsRetentionPeriod?: IntegerOptional;
     /**
-     * The list of logs that the restored DB instance is to export to CloudWatch Logs.
+     * The list of logs that the restored DB instance is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs  in the Amazon Relational Database Service User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
@@ -5432,7 +5520,7 @@ declare namespace RDS {
      */
     MultiAZ?: BooleanOptional;
     /**
-     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.    Default VPC:true    VPC:false   If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.
+     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. For more information, see CreateDBInstance.
      */
     PubliclyAccessible?: BooleanOptional;
     /**
@@ -5489,7 +5577,7 @@ declare namespace RDS {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * The list of logs that the restored DB instance is to export to CloudWatch Logs.
+     * The list of logs that the restored DB instance is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs  in the Amazon Relational Database Service User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
@@ -5528,6 +5616,42 @@ declare namespace RDS {
   }
   export interface RevokeDBSecurityGroupIngressResult {
     DBSecurityGroup?: DBSecurityGroup;
+  }
+  export interface ScalingConfiguration {
+    /**
+     * The minimum capacity for an Aurora DB cluster in serverless DB engine mode. Valid capacity values are 2, 4, 8, 16, 32, 64, 128, and 256. The minimum capacity must be less than or equal to the maximum capacity.
+     */
+    MinCapacity?: IntegerOptional;
+    /**
+     * The maximum capacity for an Aurora DB cluster in serverless DB engine mode. Valid capacity values are 2, 4, 8, 16, 32, 64, 128, and 256. The maximum capacity must be greater than or equal to the minimum capacity.
+     */
+    MaxCapacity?: IntegerOptional;
+    /**
+     * A value that specifies whether to allow or disallow automatic pause for an Aurora DB cluster in serverless DB engine mode. A DB cluster can be paused only when it's idle (it has no connections).  If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it.  
+     */
+    AutoPause?: BooleanOptional;
+    /**
+     * The time, in seconds, before an Aurora DB cluster in serverless mode is paused.
+     */
+    SecondsUntilAutoPause?: IntegerOptional;
+  }
+  export interface ScalingConfigurationInfo {
+    /**
+     * The maximum capacity for the Aurora DB cluster in serverless DB engine mode.
+     */
+    MinCapacity?: IntegerOptional;
+    /**
+     * The maximum capacity for an Aurora DB cluster in serverless DB engine mode.
+     */
+    MaxCapacity?: IntegerOptional;
+    /**
+     * A value that indicates whether automatic pause is allowed for the Aurora DB cluster in serverless DB engine mode. 
+     */
+    AutoPause?: BooleanOptional;
+    /**
+     * The remaining amount of time, in seconds, before the Aurora DB cluster in serverless mode is paused. A DB cluster can be paused only when it's idle (it has no connections).
+     */
+    SecondsUntilAutoPause?: IntegerOptional;
   }
   export type SourceIdsList = String[];
   export interface SourceRegion {
