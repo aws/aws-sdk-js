@@ -121,7 +121,7 @@
     "waf"
   ],
   "scripts": {
-    "test": "node ./scripts/composite-test.js && ([ -f configuration ] && npm -s run-script integration || true)",
+    "test": "node ./scripts/composite-test.js",
     "unit": "mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/event-stream",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/event-stream",
     "browsertest": "rake browser:test && karma start",
