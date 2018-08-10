@@ -548,6 +548,10 @@ All burn-in and DVB-Sub font settings must match.
      * Minimum time of initially buffered media that is needed to ensure smooth playout.
      */
     MinBufferTime?: __integerMin0Max2147483647;
+    /**
+     * Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds.
+     */
+    MinFinalSegmentLength?: __doubleMin0Max2147483647;
     SegmentControl?: CmafSegmentControl;
     /**
      * Use this setting to specify the length, in seconds, of each individual CMAF segment. This value applies to the whole package; that is, to every output in the output group. Note that segments end on the first keyframe after this number of seconds, so the actual segment length might be slightly longer. If you set Segment control (CmafSegmentControl) to single file, the service puts the content of each output in a single file that has metadata that marks these segments. If you set it to segmented files, the service creates multiple files for each output, each with the content of one segment.
@@ -1031,6 +1035,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type H264AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX"|string;
   export type H264CodecLevel = "AUTO"|"LEVEL_1"|"LEVEL_1_1"|"LEVEL_1_2"|"LEVEL_1_3"|"LEVEL_2"|"LEVEL_2_1"|"LEVEL_2_2"|"LEVEL_3"|"LEVEL_3_1"|"LEVEL_3_2"|"LEVEL_4"|"LEVEL_4_1"|"LEVEL_4_2"|"LEVEL_5"|"LEVEL_5_1"|"LEVEL_5_2"|string;
   export type H264CodecProfile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN"|string;
+  export type H264DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
   export type H264EntropyEncoding = "CABAC"|"CAVLC"|string;
   export type H264FieldEncoding = "PAFF"|"FORCE_FIELD"|string;
   export type H264FlickerAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
@@ -1041,7 +1046,17 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type H264InterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD"|string;
   export type H264ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H264QualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ"|string;
-  export type H264RateControlMode = "VBR"|"CBR"|string;
+  export interface H264QvbrSettings {
+    /**
+     * Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.
+     */
+    MaxAverageBitrate?: __integerMin1000Max1152000000;
+    /**
+     * Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h264Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9.
+     */
+    QvbrQualityLevel: __integerMin1Max10;
+  }
+  export type H264RateControlMode = "VBR"|"CBR"|"QVBR"|string;
   export type H264RepeatPps = "DISABLED"|"ENABLED"|string;
   export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H264Settings {
@@ -1052,6 +1067,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Bitrate?: __integerMin1000Max1152000000;
     CodecLevel?: H264CodecLevel;
     CodecProfile?: H264CodecProfile;
+    /**
+     * Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+     */
+    DynamicSubGop?: H264DynamicSubGop;
     EntropyEncoding?: H264EntropyEncoding;
     FieldEncoding?: H264FieldEncoding;
     FlickerAdaptiveQuantization?: H264FlickerAdaptiveQuantization;
@@ -1085,7 +1104,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     HrdBufferSize?: __integerMin0Max1152000000;
     InterlaceMode?: H264InterlaceMode;
     /**
-     * Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000.
+     * Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.
      */
     MaxBitrate?: __integerMin1000Max1152000000;
     /**
@@ -1110,6 +1129,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     ParNumerator?: __integerMin1Max2147483647;
     QualityTuningLevel?: H264QualityTuningLevel;
+    /**
+     * Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.
+     */
+    QvbrSettings?: H264QvbrSettings;
     RateControlMode?: H264RateControlMode;
     RepeatPps?: H264RepeatPps;
     SceneChangeDetect?: H264SceneChangeDetect;
@@ -1138,6 +1161,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type H265AlternateTransferFunctionSei = "DISABLED"|"ENABLED"|string;
   export type H265CodecLevel = "AUTO"|"LEVEL_1"|"LEVEL_2"|"LEVEL_2_1"|"LEVEL_3"|"LEVEL_3_1"|"LEVEL_4"|"LEVEL_4_1"|"LEVEL_5"|"LEVEL_5_1"|"LEVEL_5_2"|"LEVEL_6"|"LEVEL_6_1"|"LEVEL_6_2"|string;
   export type H265CodecProfile = "MAIN_MAIN"|"MAIN_HIGH"|"MAIN10_MAIN"|"MAIN10_HIGH"|"MAIN_422_8BIT_MAIN"|"MAIN_422_8BIT_HIGH"|"MAIN_422_10BIT_MAIN"|"MAIN_422_10BIT_HIGH"|string;
+  export type H265DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
   export type H265FlickerAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
   export type H265FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H265FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|string;
@@ -1146,7 +1170,17 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type H265InterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD"|string;
   export type H265ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H265QualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ"|string;
-  export type H265RateControlMode = "VBR"|"CBR"|string;
+  export interface H265QvbrSettings {
+    /**
+     * Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.
+     */
+    MaxAverageBitrate?: __integerMin1000Max1466400000;
+    /**
+     * Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h265Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9.
+     */
+    QvbrQualityLevel: __integerMin1Max10;
+  }
+  export type H265RateControlMode = "VBR"|"CBR"|"QVBR"|string;
   export type H265SampleAdaptiveOffsetFilterMode = "DEFAULT"|"ADAPTIVE"|"OFF"|string;
   export type H265SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H265Settings {
@@ -1158,6 +1192,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Bitrate?: __integerMin1000Max1466400000;
     CodecLevel?: H265CodecLevel;
     CodecProfile?: H265CodecProfile;
+    /**
+     * Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+     */
+    DynamicSubGop?: H265DynamicSubGop;
     FlickerAdaptiveQuantization?: H265FlickerAdaptiveQuantization;
     FramerateControl?: H265FramerateControl;
     FramerateConversionAlgorithm?: H265FramerateConversionAlgorithm;
@@ -1189,7 +1227,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     HrdBufferSize?: __integerMin0Max1466400000;
     InterlaceMode?: H265InterlaceMode;
     /**
-     * Maximum bitrate in bits/second.
+     * Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.
      */
     MaxBitrate?: __integerMin1000Max1466400000;
     /**
@@ -1214,6 +1252,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     ParNumerator?: __integerMin1Max2147483647;
     QualityTuningLevel?: H265QualityTuningLevel;
+    /**
+     * Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.
+     */
+    QvbrSettings?: H265QvbrSettings;
     RateControlMode?: H265RateControlMode;
     SampleAdaptiveOffsetFilterMode?: H265SampleAdaptiveOffsetFilterMode;
     SceneChangeDetect?: H265SceneChangeDetect;
@@ -1348,6 +1390,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Encryption?: HlsEncryptionSettings;
     ManifestCompression?: HlsManifestCompression;
     ManifestDurationFormat?: HlsManifestDurationFormat;
+    /**
+     * Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds.
+     */
+    MinFinalSegmentLength?: __doubleMin0Max2147483647;
     /**
      * When set, Minimum Segment Size is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.
      */
@@ -1994,6 +2040,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type Mpeg2AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|string;
   export type Mpeg2CodecLevel = "AUTO"|"LOW"|"MAIN"|"HIGH1440"|"HIGH"|string;
   export type Mpeg2CodecProfile = "MAIN"|"PROFILE_422"|string;
+  export type Mpeg2DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
   export type Mpeg2FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type Mpeg2FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|string;
   export type Mpeg2GopSizeUnits = "FRAMES"|"SECONDS"|string;
@@ -2011,6 +2058,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Bitrate?: __integerMin1000Max288000000;
     CodecLevel?: Mpeg2CodecLevel;
     CodecProfile?: Mpeg2CodecProfile;
+    /**
+     * Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+     */
+    DynamicSubGop?: Mpeg2DynamicSubGop;
     FramerateControl?: Mpeg2FramerateControl;
     FramerateConversionAlgorithm?: Mpeg2FramerateConversionAlgorithm;
     /**
@@ -2327,21 +2378,21 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type QueueStatus = "ACTIVE"|"PAUSED"|string;
   export interface Rectangle {
     /**
-     * Height of rectangle in pixels.
+     * Height of rectangle in pixels. Specify only even numbers.
      */
-    Height: __integerMinNegative2147483648Max2147483647;
+    Height: __integerMin2Max2147483647;
     /**
-     * Width of rectangle in pixels.
+     * Width of rectangle in pixels. Specify only even numbers.
      */
-    Width: __integerMinNegative2147483648Max2147483647;
+    Width: __integerMin2Max2147483647;
     /**
-     * The distance, in pixels, between the rectangle and the left edge of the video frame.
+     * The distance, in pixels, between the rectangle and the left edge of the video frame. Specify only even numbers.
      */
-    X: __integerMinNegative2147483648Max2147483647;
+    X: __integerMin0Max2147483647;
     /**
-     * The distance, in pixels, between the rectangle and the top edge of the video frame.
+     * The distance, in pixels, between the rectangle and the top edge of the video frame. Specify only even numbers.
      */
-    Y: __integerMinNegative2147483648Max2147483647;
+    Y: __integerMin0Max2147483647;
   }
   export interface RemixSettings {
     ChannelMapping: ChannelMapping;
@@ -2656,6 +2707,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     SampleRate?: __integerMin8000Max192000;
   }
   export type __doubleMin0 = number;
+  export type __doubleMin0Max2147483647 = number;
   export type __doubleMinNegative59Max0 = number;
   export type __doubleMinNegative60Max3 = number;
   export type __doubleMinNegative60MaxNegative1 = number;
@@ -2691,6 +2743,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __integerMin10Max48 = number;
   export type __integerMin16Max24 = number;
   export type __integerMin1Max1 = number;
+  export type __integerMin1Max10 = number;
   export type __integerMin1Max100 = number;
   export type __integerMin1Max10000000 = number;
   export type __integerMin1Max1001 = number;
@@ -2706,6 +2759,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __integerMin24Max60000 = number;
   export type __integerMin25Max10000 = number;
   export type __integerMin25Max2000 = number;
+  export type __integerMin2Max2147483647 = number;
   export type __integerMin32000Max384000 = number;
   export type __integerMin32000Max48000 = number;
   export type __integerMin32Max2160 = number;

@@ -1954,6 +1954,11 @@
           "locationName": "minBufferTime",
           "documentation": "Minimum time of initially buffered media that is needed to ensure smooth playout."
         },
+        "MinFinalSegmentLength": {
+          "shape": "__doubleMin0Max2147483647",
+          "locationName": "minFinalSegmentLength",
+          "documentation": "Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds."
+        },
         "SegmentControl": {
           "shape": "CmafSegmentControl",
           "locationName": "segmentControl"
@@ -3299,6 +3304,14 @@
         "MAIN"
       ]
     },
+    "H264DynamicSubGop": {
+      "type": "string",
+      "documentation": "Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).",
+      "enum": [
+        "ADAPTIVE",
+        "STATIC"
+      ]
+    },
     "H264EntropyEncoding": {
       "type": "string",
       "documentation": "Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.",
@@ -3383,12 +3396,32 @@
         "MULTI_PASS_HQ"
       ]
     },
+    "H264QvbrSettings": {
+      "type": "structure",
+      "members": {
+        "MaxAverageBitrate": {
+          "shape": "__integerMin1000Max1152000000",
+          "locationName": "maxAverageBitrate",
+          "documentation": "Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output."
+        },
+        "QvbrQualityLevel": {
+          "shape": "__integerMin1Max10",
+          "locationName": "qvbrQualityLevel",
+          "documentation": "Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h264Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9."
+        }
+      },
+      "documentation": "Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.",
+      "required": [
+        "QvbrQualityLevel"
+      ]
+    },
     "H264RateControlMode": {
       "type": "string",
-      "documentation": "Use this setting to specify whether this output has a variable bitrate (VBR) or constant bitrate (CBR).",
+      "documentation": "Use this setting to specify whether this output has a variable bitrate (VBR), constant bitrate (CBR) or quality-defined variable bitrate (QVBR).",
       "enum": [
         "VBR",
-        "CBR"
+        "CBR",
+        "QVBR"
       ]
     },
     "H264RepeatPps": {
@@ -3426,6 +3459,11 @@
         "CodecProfile": {
           "shape": "H264CodecProfile",
           "locationName": "codecProfile"
+        },
+        "DynamicSubGop": {
+          "shape": "H264DynamicSubGop",
+          "locationName": "dynamicSubGop",
+          "documentation": "Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames)."
         },
         "EntropyEncoding": {
           "shape": "H264EntropyEncoding",
@@ -3492,7 +3530,7 @@
         "MaxBitrate": {
           "shape": "__integerMin1000Max1152000000",
           "locationName": "maxBitrate",
-          "documentation": "Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000."
+          "documentation": "Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR."
         },
         "MinIInterval": {
           "shape": "__integerMin0Max30",
@@ -3526,6 +3564,11 @@
         "QualityTuningLevel": {
           "shape": "H264QualityTuningLevel",
           "locationName": "qualityTuningLevel"
+        },
+        "QvbrSettings": {
+          "shape": "H264QvbrSettings",
+          "locationName": "qvbrSettings",
+          "documentation": "Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
         },
         "RateControlMode": {
           "shape": "H264RateControlMode",
@@ -3679,6 +3722,14 @@
         "MAIN_422_10BIT_HIGH"
       ]
     },
+    "H265DynamicSubGop": {
+      "type": "string",
+      "documentation": "Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).",
+      "enum": [
+        "ADAPTIVE",
+        "STATIC"
+      ]
+    },
     "H265FlickerAdaptiveQuantization": {
       "type": "string",
       "documentation": "Adjust quantization within each frame to reduce flicker or 'pop' on I-frames.",
@@ -3747,12 +3798,32 @@
         "MULTI_PASS_HQ"
       ]
     },
+    "H265QvbrSettings": {
+      "type": "structure",
+      "members": {
+        "MaxAverageBitrate": {
+          "shape": "__integerMin1000Max1466400000",
+          "locationName": "maxAverageBitrate",
+          "documentation": "Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output."
+        },
+        "QvbrQualityLevel": {
+          "shape": "__integerMin1Max10",
+          "locationName": "qvbrQualityLevel",
+          "documentation": "Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h265Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9."
+        }
+      },
+      "documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.",
+      "required": [
+        "QvbrQualityLevel"
+      ]
+    },
     "H265RateControlMode": {
       "type": "string",
-      "documentation": "Use this setting to specify whether this output has a variable bitrate (VBR) or constant bitrate (CBR).",
+      "documentation": "Use this setting to specify whether this output has a variable bitrate (VBR), constant bitrate (CBR) or quality-defined variable bitrate (QVBR).",
       "enum": [
         "VBR",
-        "CBR"
+        "CBR",
+        "QVBR"
       ]
     },
     "H265SampleAdaptiveOffsetFilterMode": {
@@ -3795,6 +3866,11 @@
         "CodecProfile": {
           "shape": "H265CodecProfile",
           "locationName": "codecProfile"
+        },
+        "DynamicSubGop": {
+          "shape": "H265DynamicSubGop",
+          "locationName": "dynamicSubGop",
+          "documentation": "Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames)."
         },
         "FlickerAdaptiveQuantization": {
           "shape": "H265FlickerAdaptiveQuantization",
@@ -3853,7 +3929,7 @@
         "MaxBitrate": {
           "shape": "__integerMin1000Max1466400000",
           "locationName": "maxBitrate",
-          "documentation": "Maximum bitrate in bits/second."
+          "documentation": "Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR."
         },
         "MinIInterval": {
           "shape": "__integerMin0Max30",
@@ -3887,6 +3963,11 @@
         "QualityTuningLevel": {
           "shape": "H265QualityTuningLevel",
           "locationName": "qualityTuningLevel"
+        },
+        "QvbrSettings": {
+          "shape": "H265QvbrSettings",
+          "locationName": "qvbrSettings",
+          "documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
         },
         "RateControlMode": {
           "shape": "H265RateControlMode",
@@ -4243,6 +4324,11 @@
         "ManifestDurationFormat": {
           "shape": "HlsManifestDurationFormat",
           "locationName": "manifestDurationFormat"
+        },
+        "MinFinalSegmentLength": {
+          "shape": "__doubleMin0Max2147483647",
+          "locationName": "minFinalSegmentLength",
+          "documentation": "Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds."
         },
         "MinSegmentLength": {
           "shape": "__integerMin0Max2147483647",
@@ -5873,6 +5959,14 @@
         "PROFILE_422"
       ]
     },
+    "Mpeg2DynamicSubGop": {
+      "type": "string",
+      "documentation": "Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).",
+      "enum": [
+        "ADAPTIVE",
+        "STATIC"
+      ]
+    },
     "Mpeg2FramerateControl": {
       "type": "string",
       "documentation": "If you are using the console, use the Framerate setting to specify the framerate for this output. If you want to keep the same framerate as the input video, choose Follow source. If you want to do framerate conversion, choose a framerate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your framerate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the framerate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the framerate from the input. Choose SPECIFIED if you want the service to use the framerate you specify in the settings FramerateNumerator and FramerateDenominator.",
@@ -5970,6 +6064,11 @@
         "CodecProfile": {
           "shape": "Mpeg2CodecProfile",
           "locationName": "codecProfile"
+        },
+        "DynamicSubGop": {
+          "shape": "Mpeg2DynamicSubGop",
+          "locationName": "dynamicSubGop",
+          "documentation": "Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames)."
         },
         "FramerateControl": {
           "shape": "Mpeg2FramerateControl",
@@ -6743,24 +6842,24 @@
       "type": "structure",
       "members": {
         "Height": {
-          "shape": "__integerMinNegative2147483648Max2147483647",
+          "shape": "__integerMin2Max2147483647",
           "locationName": "height",
-          "documentation": "Height of rectangle in pixels."
+          "documentation": "Height of rectangle in pixels. Specify only even numbers."
         },
         "Width": {
-          "shape": "__integerMinNegative2147483648Max2147483647",
+          "shape": "__integerMin2Max2147483647",
           "locationName": "width",
-          "documentation": "Width of rectangle in pixels."
+          "documentation": "Width of rectangle in pixels. Specify only even numbers."
         },
         "X": {
-          "shape": "__integerMinNegative2147483648Max2147483647",
+          "shape": "__integerMin0Max2147483647",
           "locationName": "x",
-          "documentation": "The distance, in pixels, between the rectangle and the left edge of the video frame."
+          "documentation": "The distance, in pixels, between the rectangle and the left edge of the video frame. Specify only even numbers."
         },
         "Y": {
-          "shape": "__integerMinNegative2147483648Max2147483647",
+          "shape": "__integerMin0Max2147483647",
           "locationName": "y",
-          "documentation": "The distance, in pixels, between the rectangle and the top edge of the video frame."
+          "documentation": "The distance, in pixels, between the rectangle and the top edge of the video frame. Specify only even numbers."
         }
       },
       "documentation": "Use Rectangle to identify a specific area of the video frame.",
@@ -7478,6 +7577,9 @@
     "__doubleMin0": {
       "type": "double"
     },
+    "__doubleMin0Max2147483647": {
+      "type": "double"
+    },
     "__doubleMinNegative59Max0": {
       "type": "double"
     },
@@ -7645,6 +7747,11 @@
       "min": 1,
       "max": 1
     },
+    "__integerMin1Max10": {
+      "type": "integer",
+      "min": 1,
+      "max": 10
+    },
     "__integerMin1Max100": {
       "type": "integer",
       "min": 1,
@@ -7719,6 +7826,11 @@
       "type": "integer",
       "min": 25,
       "max": 2000
+    },
+    "__integerMin2Max2147483647": {
+      "type": "integer",
+      "min": 2,
+      "max": 2147483647
     },
     "__integerMin32000Max384000": {
       "type": "integer",

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.290.0-->
+<!--LATEST=2.291.0-->
 <!--ENTRYINSERT-->
+
+## 2.291.0
+* feature: MediaConvert: This release adds support for a new rate control mode, Quality-Defined Variable Bitrate (QVBR) encoding, includes updates to optimize transcoding performance, and resolves previously reported bugs.
 
 ## 2.290.0
 * feature: DAX: Add the SSESpecification field to CreateCluster to allow creation of clusters with server-side encryption, and add the SSEDescription field to DescribeClusters to display the status of server-side encryption for a cluster. 
