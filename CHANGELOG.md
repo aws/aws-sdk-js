@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.291.0-->
+<!--LATEST=2.292.0-->
 <!--ENTRYINSERT-->
+
+## 2.292.0
+* feature: SageMaker: SageMaker updated the default endpoint URL to support Private Link via the CLI/SDK.
 
 ## 2.291.0
 * feature: MediaConvert: This release adds support for a new rate control mode, Quality-Defined Variable Bitrate (QVBR) encoding, includes updates to optimize transcoding performance, and resolves previously reported bugs.

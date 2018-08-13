@@ -748,7 +748,7 @@ declare namespace SageMaker {
      */
     MaxPayloadInMB?: MaxPayloadInMB;
     /**
-     * Determines the number of records included in a single mini-batch. SingleRecord means only one record is used per mini-batch. MultiRecord means a mini-batch is set to contain as many records that can fit within the MaxPayloadInMB limit. Batch transform will automatically split your input data into whatever payload size is specified if you set SplitType to Line and BatchStrategy to MultiRecord. There's no need to split the dataset into smaller files or to use larger payload sizes unless the records in your dataset are very large.
+     * Determines the number of records included in a single mini-batch. SingleRecord means only one record is used per mini-batch. MultiRecord means a mini-batch is set to contain as many records that can fit within the MaxPayloadInMB limit.
      */
     BatchStrategy?: BatchStrategy;
     /**
@@ -1126,7 +1126,7 @@ declare namespace SageMaker {
      */
     TrainingJobStatus: TrainingJobStatus;
     /**
-     *  Provides granular information about the system state. For more information, see TrainingJobStatus.     Starting - starting the training job.    LaunchingMLInstances - launching ML instances for the training job.    PreparingTrainingStack - preparing the ML instances for the training job.    Downloading - downloading the input data.    DownloadingTrainingImage - downloading the training algorithm image.    Training - model training is in progress.    Uploading - uploading the trained model.    Stopping - stopping the training job.    Stopped - the training job has stopped.    MaxRuntimeExceeded - the training job exceeded the specified max run time and has been stopped.    Completed - the training job has completed.    Failed - the training job has failed. The failure reason is provided in the StatusMessage.    The valid values for SecondaryStatus are subject to change. They primarily provide information on the progress of the training job. 
+     *  Provides granular information about the system state. For more information, see TrainingJobStatus.     Starting - starting the training job.    LaunchingMLInstances - launching ML instances for the training job.    PreparingTrainingStack - preparing the ML instances for the training job.    Downloading - downloading the input data.    DownloadingTrainingImage - downloading the training algorithm image.    Training - model training is in progress.    Uploading - uploading the trained model.    Stopping - stopping the training job.    Stopped - the training job has stopped.    MaxRuntimeExceeded - the training exceed the specified the max run time, which means the training job is stopping.    Completed - the training job has completed.    Failed - the training job has failed. The failure reason is provided in the StatusMessage.    The valid values for SecondaryStatus are subject to change. They primary provide information on the progress of the training job. 
      */
     SecondaryStatus: SecondaryStatus;
     /**
@@ -1182,7 +1182,7 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: Timestamp;
     /**
-     * To give an overview of the training job lifecycle, SecondaryStatusTransitions is a log of time-ordered secondary statuses that a training job has transitioned.
+     * A log of time-ordered secondary statuses that a training job has transitioned.
      */
     SecondaryStatusTransitions?: SecondaryStatusTransitions;
   }
@@ -2254,7 +2254,7 @@ declare namespace SageMaker {
      */
     StartTime: Timestamp;
     /**
-     * A timestamp that shows when the secondary status has ended and the job has transitioned into another secondary status. The EndTime timestamp is also set after the training job has ended.
+     * A timestamp that shows when the secondary status has ended and the job has transitioned into another secondary status. 
      */
     EndTime?: Timestamp;
     /**
