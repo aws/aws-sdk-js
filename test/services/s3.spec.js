@@ -1722,6 +1722,96 @@ describe('AWS.S3', function() {
           expect(req.httpRequest.path).to.equal('/foo/bar');
         });
       });
+
+      describe('dualstack', function() {
+        it('includes full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useDualstack: true
+          });
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('test.s3.dualstack.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar');
+        });
+
+        it('includes full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useDualstack: true
+          });
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3.dualstack.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar');
+        });
+      });
+
+      describe('dualstack and s3-accelerate', function() {
+        it('includes full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useAccelerateEndpoint: true,
+            useDualstack: true
+          });
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('test.s3-accelerate.dualstack.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar');
+        });
+
+        it('includes full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useAccelerateEndpoint: true,
+            useDualstack: true
+          });
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3-accelerate.dualstack.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar');
+        });
+      });
     });
 
     it('should retry with updated region but not endpoint if non-S3 url endpoint is specified', function() {
