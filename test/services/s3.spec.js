@@ -1512,6 +1512,218 @@ describe('AWS.S3', function() {
       expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
     });
 
+    describe('cross-region putObject', function() {
+      describe('non-path-style', function() {
+        it('prepends bucket to hostname and includes full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('test.s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar');
+        });
+
+        it('prepends bucket to hostname and includes full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar');
+        });
+      });
+
+      describe('non-dns-compatible', function() {
+        it('includes bucket and full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          var req = request('putObject', {
+            Bucket: 'test.foo',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/test.foo/foo/bar');
+        });
+
+        it('includes bucket and full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          var req = request('putObject', {
+            Bucket: 'foo.bar',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo.bar/foo/bar');
+        });
+      });
+
+      describe('path-style', function() {
+        it('includes bucket and full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            s3ForcePathStyle: true
+          });
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/test/foo/bar');
+        });
+
+        it('includes bucket and full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            s3ForcePathStyle: true
+          });
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/foo/bar');
+        });
+      });
+
+      describe('bucket endpoint', function() {
+        it('includes full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            endpoint: 'https://fake-custom-url.com',
+            s3BucketEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('fake-custom-url.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar');
+        });
+
+        it('includes full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            endpoint: 'https://fake-custom-url.com',
+            s3BucketEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('fake-custom-url.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar');
+        });
+      });
+
+      describe('s3Accelerate', function() {
+        it('includes full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useAccelerateEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('test.s3-accelerate.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar');
+        });
+
+        it('includes full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useAccelerateEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3-accelerate.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar');
+        });
+      });
+    });
+
     it('should retry with updated region but not endpoint if non-S3 url endpoint is specified', function() {
       var err = {
         code: 'PermanentRedirect',
