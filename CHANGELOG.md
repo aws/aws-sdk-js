@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.293.0-->
+<!--LATEST=2.294.0-->
 <!--ENTRYINSERT-->
+
+## 2.294.0
+* feature: DeviceFarm: Support for running tests in a custom environment with live logs/video streaming, full test features parity and reduction in overall test execution time.
 
 ## 2.293.0
 * feature: AutoScaling: Add batch operations for creating/updating and deleting scheduled scaling actions.

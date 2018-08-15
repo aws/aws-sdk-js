@@ -444,6 +444,14 @@ declare class DeviceFarm extends Service {
    */
   scheduleRun(callback?: (err: AWSError, data: DeviceFarm.Types.ScheduleRunResult) => void): Request<DeviceFarm.Types.ScheduleRunResult, AWSError>;
   /**
+   * Initiates a stop request for the current job. AWS Device Farm will immediately stop the job on the device where tests have not started executing, and you will not be billed for this device. On the device where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on the device. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
+   */
+  stopJob(params: DeviceFarm.Types.StopJobRequest, callback?: (err: AWSError, data: DeviceFarm.Types.StopJobResult) => void): Request<DeviceFarm.Types.StopJobResult, AWSError>;
+  /**
+   * Initiates a stop request for the current job. AWS Device Farm will immediately stop the job on the device where tests have not started executing, and you will not be billed for this device. On the device where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on the device. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
+   */
+  stopJob(callback?: (err: AWSError, data: DeviceFarm.Types.StopJobResult) => void): Request<DeviceFarm.Types.StopJobResult, AWSError>;
+  /**
    * Ends a specified remote access session.
    */
   stopRemoteAccessSession(params: DeviceFarm.Types.StopRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.StopRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.StopRemoteAccessSessionResult, AWSError>;
@@ -499,6 +507,14 @@ declare class DeviceFarm extends Service {
    * Modifies the specified project name, given the project ARN and a new name.
    */
   updateProject(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateProjectResult) => void): Request<DeviceFarm.Types.UpdateProjectResult, AWSError>;
+  /**
+   * Update an uploaded test specification (test spec).
+   */
+  updateUpload(params: DeviceFarm.Types.UpdateUploadRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateUploadResult) => void): Request<DeviceFarm.Types.UpdateUploadResult, AWSError>;
+  /**
+   * Update an uploaded test specification (test spec).
+   */
+  updateUpload(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateUploadResult) => void): Request<DeviceFarm.Types.UpdateUploadResult, AWSError>;
   /**
    * Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.
    */
@@ -572,7 +588,7 @@ declare namespace DeviceFarm {
     url?: URL;
   }
   export type ArtifactCategory = "SCREENSHOT"|"FILE"|"LOG"|string;
-  export type ArtifactType = "UNKNOWN"|"SCREENSHOT"|"DEVICE_LOG"|"MESSAGE_LOG"|"VIDEO_LOG"|"RESULT_LOG"|"SERVICE_LOG"|"WEBKIT_LOG"|"INSTRUMENTATION_OUTPUT"|"EXERCISER_MONKEY_OUTPUT"|"CALABASH_JSON_OUTPUT"|"CALABASH_PRETTY_OUTPUT"|"CALABASH_STANDARD_OUTPUT"|"CALABASH_JAVA_XML_OUTPUT"|"AUTOMATION_OUTPUT"|"APPIUM_SERVER_OUTPUT"|"APPIUM_JAVA_OUTPUT"|"APPIUM_JAVA_XML_OUTPUT"|"APPIUM_PYTHON_OUTPUT"|"APPIUM_PYTHON_XML_OUTPUT"|"EXPLORER_EVENT_LOG"|"EXPLORER_SUMMARY_LOG"|"APPLICATION_CRASH_REPORT"|"XCTEST_LOG"|"VIDEO"|"CUSTOMER_ARTIFACT"|"CUSTOMER_ARTIFACT_LOG"|string;
+  export type ArtifactType = "UNKNOWN"|"SCREENSHOT"|"DEVICE_LOG"|"MESSAGE_LOG"|"VIDEO_LOG"|"RESULT_LOG"|"SERVICE_LOG"|"WEBKIT_LOG"|"INSTRUMENTATION_OUTPUT"|"EXERCISER_MONKEY_OUTPUT"|"CALABASH_JSON_OUTPUT"|"CALABASH_PRETTY_OUTPUT"|"CALABASH_STANDARD_OUTPUT"|"CALABASH_JAVA_XML_OUTPUT"|"AUTOMATION_OUTPUT"|"APPIUM_SERVER_OUTPUT"|"APPIUM_JAVA_OUTPUT"|"APPIUM_JAVA_XML_OUTPUT"|"APPIUM_PYTHON_OUTPUT"|"APPIUM_PYTHON_XML_OUTPUT"|"EXPLORER_EVENT_LOG"|"EXPLORER_SUMMARY_LOG"|"APPLICATION_CRASH_REPORT"|"XCTEST_LOG"|"VIDEO"|"CUSTOMER_ARTIFACT"|"CUSTOMER_ARTIFACT_LOG"|"TESTSPEC_OUTPUT"|string;
   export type Artifacts = Artifact[];
   export type BillingMethod = "METERED"|"UNMETERED"|string;
   export type Boolean = boolean;
@@ -822,7 +838,7 @@ declare namespace DeviceFarm {
      */
     name: Name;
     /**
-     * The upload's upload type. Must be one of the following values:   ANDROID_APP: An Android upload.   IOS_APP: An iOS upload.   WEB_APP: A web appliction upload.   EXTERNAL_DATA: An external data upload.   APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   CALABASH_TEST_PACKAGE: A Calabash test package upload.   INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.   UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.   UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.   XCTEST_TEST_PACKAGE: An XCode test package upload.   XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.    Note If you call CreateUpload with WEB_APP specified, AWS Device Farm throws an ArgumentException error.
+     * The upload's upload type. Must be one of the following values:   ANDROID_APP: An Android upload.   IOS_APP: An iOS upload.   WEB_APP: A web application upload.   EXTERNAL_DATA: An external data upload.   APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   CALABASH_TEST_PACKAGE: A Calabash test package upload.   INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.   UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.   UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.   XCTEST_TEST_PACKAGE: An XCode test package upload.   XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.    Note If you call CreateUpload with WEB_APP specified, AWS Device Farm throws an ArgumentException error.
      */
     type: UploadType;
     /**
@@ -1121,6 +1137,10 @@ declare namespace DeviceFarm {
      * True if app package cleanup is enabled at the beginning of the test; otherwise, false.
      */
     appPackagesCleanup?: AppPackagesCleanup;
+    /**
+     * Set to true to enable video capture; otherwise, set to false. The default is true.
+     */
+    videoCapture?: VideoCapture;
     /**
      * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
      */
@@ -1459,6 +1479,14 @@ declare namespace DeviceFarm {
      * Represents the total (metered or unmetered) minutes used by the job.
      */
     deviceMinutes?: DeviceMinutes;
+    /**
+     * The endpoint for streaming device video.
+     */
+    videoEndpoint?: String;
+    /**
+     * This value is set to true if video capture is enabled; otherwise, it is set to false.
+     */
+    videoCapture?: VideoCapture;
   }
   export type JobTimeoutMinutes = number;
   export type Jobs = Job[];
@@ -1807,6 +1835,10 @@ declare namespace DeviceFarm {
      * The Amazon Resource Name (ARN) of the project for which you want to list uploads.
      */
     arn: AmazonResourceName;
+    /**
+     * The type of upload. Must be one of the following values:   ANDROID_APP: An Android upload.   IOS_APP: An iOS upload.   WEB_APP: A web appliction upload.   EXTERNAL_DATA: An external data upload.   APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   CALABASH_TEST_PACKAGE: A Calabash test package upload.   INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.   UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.   UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.   XCTEST_TEST_PACKAGE: An XCode test package upload.   XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.   APPIUM_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.   APPIUM_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.   APPIUM_PYTHON_TEST_SPEC: An Appium Python test spec upload.   APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.   APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.   APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload.   INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.   XCTEST_UI_TEST_SPEC: An XCode UI test spec upload.  
+     */
+    type?: UploadType;
     /**
      * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
      */
@@ -2359,6 +2391,10 @@ declare namespace DeviceFarm {
      * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
      */
     skipAppResign?: SkipAppResign;
+    /**
+     * The ARN of the YAML-formatted test specification for the run.
+     */
+    testSpecArn?: AmazonResourceName;
   }
   export type Runs = Run[];
   export interface Sample {
@@ -2461,6 +2497,10 @@ declare namespace DeviceFarm {
      */
     testPackageArn?: AmazonResourceName;
     /**
+     * The ARN of the YAML-formatted test specification.
+     */
+    testSpecArn?: AmazonResourceName;
+    /**
      * The test's filter.
      */
     filter?: Filter;
@@ -2472,6 +2512,18 @@ declare namespace DeviceFarm {
   export type ServiceDnsName = string;
   export type SkipAppResign = boolean;
   export type SshPublicKey = string;
+  export interface StopJobRequest {
+    /**
+     * Represents the Amazon Resource Name (ARN) of the Device Farm job you wish to stop.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface StopJobResult {
+    /**
+     * The job that was stopped.
+     */
+    job?: Job;
+  }
   export interface StopRemoteAccessSessionRequest {
     /**
      * The Amazon Resource Name (ARN) of the remote access session you wish to stop.
@@ -2769,6 +2821,30 @@ declare namespace DeviceFarm {
      */
     project?: Project;
   }
+  export interface UpdateUploadRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the uploaded test spec.
+     */
+    arn: AmazonResourceName;
+    /**
+     * The upload's test spec file name. The name should not contain the '/' character. The test spec file name must end with the .yaml or .yml file extension.
+     */
+    name?: Name;
+    /**
+     * The upload's content type (for example, "application/x-yaml").
+     */
+    contentType?: ContentType;
+    /**
+     * Set to true if the YAML file has changed and needs to be updated; otherwise, set to false.
+     */
+    editContent?: Boolean;
+  }
+  export interface UpdateUploadResult {
+    /**
+     * A test spec uploaded to Device Farm.
+     */
+    upload?: Upload;
+  }
   export interface UpdateVPCEConfigurationRequest {
     /**
      * The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to update.
@@ -2834,9 +2910,14 @@ declare namespace DeviceFarm {
      * A message about the upload's result.
      */
     message?: Message;
+    /**
+     * The upload's category. Allowed values include:   CURATED: An upload managed by AWS Device Farm.   PRIVATE: An upload managed by the AWS Device Farm customer.  
+     */
+    category?: UploadCategory;
   }
+  export type UploadCategory = "CURATED"|"PRIVATE"|string;
   export type UploadStatus = "INITIALIZED"|"PROCESSING"|"SUCCEEDED"|"FAILED"|string;
-  export type UploadType = "ANDROID_APP"|"IOS_APP"|"WEB_APP"|"EXTERNAL_DATA"|"APPIUM_JAVA_JUNIT_TEST_PACKAGE"|"APPIUM_JAVA_TESTNG_TEST_PACKAGE"|"APPIUM_PYTHON_TEST_PACKAGE"|"APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"|"APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"|"APPIUM_WEB_PYTHON_TEST_PACKAGE"|"CALABASH_TEST_PACKAGE"|"INSTRUMENTATION_TEST_PACKAGE"|"UIAUTOMATION_TEST_PACKAGE"|"UIAUTOMATOR_TEST_PACKAGE"|"XCTEST_TEST_PACKAGE"|"XCTEST_UI_TEST_PACKAGE"|string;
+  export type UploadType = "ANDROID_APP"|"IOS_APP"|"WEB_APP"|"EXTERNAL_DATA"|"APPIUM_JAVA_JUNIT_TEST_PACKAGE"|"APPIUM_JAVA_TESTNG_TEST_PACKAGE"|"APPIUM_PYTHON_TEST_PACKAGE"|"APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"|"APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"|"APPIUM_WEB_PYTHON_TEST_PACKAGE"|"CALABASH_TEST_PACKAGE"|"INSTRUMENTATION_TEST_PACKAGE"|"UIAUTOMATION_TEST_PACKAGE"|"UIAUTOMATOR_TEST_PACKAGE"|"XCTEST_TEST_PACKAGE"|"XCTEST_UI_TEST_PACKAGE"|"APPIUM_JAVA_JUNIT_TEST_SPEC"|"APPIUM_JAVA_TESTNG_TEST_SPEC"|"APPIUM_PYTHON_TEST_SPEC"|"APPIUM_WEB_JAVA_JUNIT_TEST_SPEC"|"APPIUM_WEB_JAVA_TESTNG_TEST_SPEC"|"APPIUM_WEB_PYTHON_TEST_SPEC"|"INSTRUMENTATION_TEST_SPEC"|"XCTEST_UI_TEST_SPEC"|string;
   export type Uploads = Upload[];
   export interface VPCEConfiguration {
     /**
@@ -2864,6 +2945,7 @@ declare namespace DeviceFarm {
   export type VPCEConfigurationName = string;
   export type VPCEConfigurations = VPCEConfiguration[];
   export type VPCEServiceName = string;
+  export type VideoCapture = boolean;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
