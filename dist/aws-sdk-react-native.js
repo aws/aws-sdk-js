@@ -11207,6 +11207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		      var Stream = AWS.util.stream.Stream;
 		      if (AWS.util.Buffer.isBuffer(value) || value instanceof Stream) return;
 		    }
+		    if (Blob && value instanceof Blob) return;
 
 		    var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];
 		    if (value) {
