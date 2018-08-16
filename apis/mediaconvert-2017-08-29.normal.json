@@ -1486,20 +1486,6 @@
       },
       "documentation": "Settings for Avail Blanking"
     },
-    "BadRequestException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 400
-      },
-      "documentation": "The service can't process your request because of a problem in the request. Please check your request form and syntax."
-    },
     "BurninDestinationSettings": {
       "type": "structure",
       "members": {
@@ -1660,8 +1646,7 @@
     },
     "CancelJobResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "CaptionDescription": {
       "type": "structure",
@@ -2122,20 +2107,6 @@
         "FALLBACK"
       ]
     },
-    "ConflictException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 409
-      },
-      "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
-    },
     "ContainerSettings": {
       "type": "structure",
       "members": {
@@ -2407,6 +2378,11 @@
           "shape": "__integerMin1Max2147483647",
           "locationName": "segmentLength",
           "documentation": "Length of mpd segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer. When Emit Single File is checked, the segmentation is internal to a single output file and it does not cause the creation of many output files as in other output types."
+        },
+        "WriteSegmentTimelineInRepresentation": {
+          "shape": "DashIsoWriteSegmentTimelineInRepresentation",
+          "locationName": "writeSegmentTimelineInRepresentation",
+          "documentation": "When ENABLED, segment durations are indicated in the manifest using SegmentTimeline and SegmentTimeline will be promoted down into Representation from AdaptationSet."
         }
       },
       "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to DASH_ISO_GROUP_SETTINGS.",
@@ -2429,6 +2405,14 @@
       "enum": [
         "SINGLE_FILE",
         "SEGMENTED_FILES"
+      ]
+    },
+    "DashIsoWriteSegmentTimelineInRepresentation": {
+      "type": "string",
+      "documentation": "When ENABLED, segment durations are indicated in the manifest using SegmentTimeline and SegmentTimeline will be promoted down into Representation from AdaptationSet.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
       ]
     },
     "DeinterlaceAlgorithm": {
@@ -2492,8 +2476,7 @@
     },
     "DeleteJobTemplateResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "DeletePresetRequest": {
       "type": "structure",
@@ -2511,8 +2494,7 @@
     },
     "DeletePresetResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "DeleteQueueRequest": {
       "type": "structure",
@@ -2530,8 +2512,7 @@
     },
     "DeleteQueueResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "DescribeEndpointsRequest": {
       "type": "structure",
@@ -3056,15 +3037,6 @@
       },
       "documentation": "Describes account specific API endpoint"
     },
-    "ExceptionBody": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      }
-    },
     "F4vMoovPlacement": {
       "type": "string",
       "documentation": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end.",
@@ -3124,20 +3096,6 @@
       "required": [
         "SourceFile"
       ]
-    },
-    "ForbiddenException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 403
-      },
-      "documentation": "You don't have permissions for this action with the credentials you sent."
     },
     "FrameCaptureSettings": {
       "type": "structure",
@@ -4785,20 +4743,6 @@
         "Layer"
       ]
     },
-    "InternalServerErrorException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 500
-      },
-      "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
-    },
     "Job": {
       "type": "structure",
       "members": {
@@ -6372,20 +6316,6 @@
       },
       "documentation": "Noise reducer filter settings for spatial filter."
     },
-    "NotFoundException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 404
-      },
-      "documentation": "The resource you requested does not exist."
-    },
     "Order": {
       "type": "string",
       "documentation": "When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.",
@@ -7025,8 +6955,7 @@
     },
     "TagResourceResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "TeletextDestinationSettings": {
       "type": "structure",
@@ -7162,20 +7091,6 @@
       },
       "documentation": "Information about when jobs are submitted, started, and finished is specified in Unix epoch format in seconds."
     },
-    "TooManyRequestsException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 429
-      },
-      "documentation": "Too many requests have been sent in too short of a time. The service limits the rate at which it will accept requests."
-    },
     "TtmlDestinationSettings": {
       "type": "structure",
       "members": {
@@ -7218,8 +7133,7 @@
     },
     "UntagResourceResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "UpdateJobTemplateRequest": {
       "type": "structure",
@@ -7567,12 +7481,6 @@
         }
       },
       "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV."
-    },
-    "__boolean": {
-      "type": "boolean"
-    },
-    "__double": {
-      "type": "double"
     },
     "__doubleMin0": {
       "type": "double"
@@ -8078,9 +7986,6 @@
         "shape": "__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"
       }
     },
-    "__long": {
-      "type": "long"
-    },
     "__mapOfAudioSelector": {
       "type": "map",
       "key": {
@@ -8221,10 +8126,6 @@
     "__stringPatternWS": {
       "type": "string",
       "pattern": "^[\\w\\s]*$"
-    },
-    "__timestampIso8601": {
-      "type": "timestamp",
-      "timestampFormat": "iso8601"
     },
     "__timestampUnix": {
       "type": "timestamp",

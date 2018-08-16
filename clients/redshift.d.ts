@@ -517,6 +517,14 @@ declare class Redshift extends Service {
    */
   resetClusterParameterGroup(callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
   /**
+   * Changes the cluster's type, node type, or number of nodes.
+   */
+  resizeCluster(params: Redshift.Types.ResizeClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
+  /**
+   * Changes the cluster's type, node type, or number of nodes.
+   */
+  resizeCluster(callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
+  /**
    * Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the ModifyCluster API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore. If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
   restoreFromClusterSnapshot(params: Redshift.Types.RestoreFromClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.RestoreFromClusterSnapshotResult) => void): Request<Redshift.Types.RestoreFromClusterSnapshotResult, AWSError>;
@@ -803,6 +811,10 @@ declare namespace Redshift {
      * The name of the maintenance track for the cluster.
      */
     MaintenanceTrackName?: String;
+    /**
+     * Indicates the number of nodes the cluster can be resized to with the elastic resize method. 
+     */
+    ElasticResizeNumberOfNodeOptions?: String;
   }
   export interface ClusterCredentials {
     /**
@@ -2806,6 +2818,31 @@ declare namespace Redshift {
      */
     Parameters?: ParametersList;
   }
+  export interface ResizeClusterMessage {
+    /**
+     * The unique identifier for the cluster to resize.
+     */
+    ClusterIdentifier: String;
+    /**
+     * The new cluster type for the specified cluster.
+     */
+    ClusterType?: String;
+    /**
+     * The new node type for the nodes you are adding.
+     */
+    NodeType?: String;
+    /**
+     * The new number of nodes for the cluster.
+     */
+    NumberOfNodes: Integer;
+    /**
+     * A boolean value indicating whether the resize operation is using the classic resize process.
+     */
+    Classic?: BooleanOptional;
+  }
+  export interface ResizeClusterResult {
+    Cluster?: Cluster;
+  }
   export interface ResizeProgressMessage {
     /**
      * The node type that the cluster will have after the resize operation is complete.
@@ -2855,6 +2892,14 @@ declare namespace Redshift {
      * The estimated time remaining, in seconds, until the resize operation is complete. This value is calculated based on the average resize rate and the estimated amount of data remaining to be processed. Once the resize operation is complete, this value will be 0.
      */
     EstimatedTimeToCompletionInSeconds?: LongOptional;
+    /**
+     * An enum with possible values of ClassicResize and ElasticResize. These values describe the type of resize operation being performed. 
+     */
+    ResizeType?: String;
+    /**
+     * An optional string to provide additional details about the resize action.
+     */
+    Message?: String;
   }
   export type RestorableNodeTypeList = String[];
   export interface RestoreFromClusterSnapshotMessage {

@@ -52,27 +52,35 @@ declare class Discovery extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: Discovery.Types.DeleteTagsResponse) => void): Request<Discovery.Types.DeleteTagsResponse, AWSError>;
   /**
-   * Lists agents or the Connector by ID or lists all agents/Connectors associated with your user account if you did not specify an ID.
+   * Lists agents or connectors as specified by ID or other filters. All agents/connectors associated with your user account can be listed if you call DescribeAgents as is without passing any parameters.
    */
   describeAgents(params: Discovery.Types.DescribeAgentsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
   /**
-   * Lists agents or the Connector by ID or lists all agents/Connectors associated with your user account if you did not specify an ID.
+   * Lists agents or connectors as specified by ID or other filters. All agents/connectors associated with your user account can be listed if you call DescribeAgents as is without passing any parameters.
    */
   describeAgents(callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
   /**
-   * Retrieves attributes for a list of configuration item IDs. All of the supplied IDs must be for the same asset type (server, application, process, or connection). Output fields are specific to the asset type selected. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, and number of network cards. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action.
+   * Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the follwoing:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action. 
    */
   describeConfigurations(params: Discovery.Types.DescribeConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeConfigurationsResponse) => void): Request<Discovery.Types.DescribeConfigurationsResponse, AWSError>;
   /**
-   * Retrieves attributes for a list of configuration item IDs. All of the supplied IDs must be for the same asset type (server, application, process, or connection). Output fields are specific to the asset type selected. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, and number of network cards. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action.
+   * Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the follwoing:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action. 
    */
   describeConfigurations(callback?: (err: AWSError, data: Discovery.Types.DescribeConfigurationsResponse) => void): Request<Discovery.Types.DescribeConfigurationsResponse, AWSError>;
   /**
-   * Deprecated. Use DescribeExportTasks instead. Retrieves the status of a given export process. You can retrieve status from a maximum of 100 processes.
+   * Lists exports as specified by ID. All continuous exports associated with your user account can be listed if you call DescribeContinuousExports as is without passing any parameters.
+   */
+  describeContinuousExports(params: Discovery.Types.DescribeContinuousExportsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeContinuousExportsResponse) => void): Request<Discovery.Types.DescribeContinuousExportsResponse, AWSError>;
+  /**
+   * Lists exports as specified by ID. All continuous exports associated with your user account can be listed if you call DescribeContinuousExports as is without passing any parameters.
+   */
+  describeContinuousExports(callback?: (err: AWSError, data: Discovery.Types.DescribeContinuousExportsResponse) => void): Request<Discovery.Types.DescribeContinuousExportsResponse, AWSError>;
+  /**
+   *  DescribeExportConfigurations is deprecated. Use instead  DescribeExportTasks .
    */
   describeExportConfigurations(params: Discovery.Types.DescribeExportConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeExportConfigurationsResponse) => void): Request<Discovery.Types.DescribeExportConfigurationsResponse, AWSError>;
   /**
-   * Deprecated. Use DescribeExportTasks instead. Retrieves the status of a given export process. You can retrieve status from a maximum of 100 processes.
+   *  DescribeExportConfigurations is deprecated. Use instead  DescribeExportTasks .
    */
   describeExportConfigurations(callback?: (err: AWSError, data: Discovery.Types.DescribeExportConfigurationsResponse) => void): Request<Discovery.Types.DescribeExportConfigurationsResponse, AWSError>;
   /**
@@ -84,11 +92,11 @@ declare class Discovery extends Service {
    */
   describeExportTasks(callback?: (err: AWSError, data: Discovery.Types.DescribeExportTasksResponse) => void): Request<Discovery.Types.DescribeExportTasksResponse, AWSError>;
   /**
-   * Retrieves a list of configuration items that are tagged with a specific tag. Or retrieves a list of all tags assigned to a specific configuration item.
+   * Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user account that have tags can be listed if you call DescribeTags as is without passing any parameters.
    */
   describeTags(params: Discovery.Types.DescribeTagsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeTagsResponse) => void): Request<Discovery.Types.DescribeTagsResponse, AWSError>;
   /**
-   * Retrieves a list of configuration items that are tagged with a specific tag. Or retrieves a list of all tags assigned to a specific configuration item.
+   * Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user account that have tags can be listed if you call DescribeTags as is without passing any parameters.
    */
   describeTags(callback?: (err: AWSError, data: Discovery.Types.DescribeTagsResponse) => void): Request<Discovery.Types.DescribeTagsResponse, AWSError>;
   /**
@@ -104,19 +112,19 @@ declare class Discovery extends Service {
    */
   exportConfigurations(callback?: (err: AWSError, data: Discovery.Types.ExportConfigurationsResponse) => void): Request<Discovery.Types.ExportConfigurationsResponse, AWSError>;
   /**
-   * Retrieves a short summary of discovered assets.
+   * Retrieves a short summary of discovered assets. This API operation takes no request parameters and is called as is at the command prompt as shown in the example.
    */
   getDiscoverySummary(params: Discovery.Types.GetDiscoverySummaryRequest, callback?: (err: AWSError, data: Discovery.Types.GetDiscoverySummaryResponse) => void): Request<Discovery.Types.GetDiscoverySummaryResponse, AWSError>;
   /**
-   * Retrieves a short summary of discovered assets.
+   * Retrieves a short summary of discovered assets. This API operation takes no request parameters and is called as is at the command prompt as shown in the example.
    */
   getDiscoverySummary(callback?: (err: AWSError, data: Discovery.Types.GetDiscoverySummaryResponse) => void): Request<Discovery.Types.GetDiscoverySummaryResponse, AWSError>;
   /**
-   * Retrieves a list of configuration items according to criteria that you specify in a filter. The filter criteria identifies the relationship requirements.
+   * Retrieves a list of configuration items as specified by the value passed to the required paramater configurationType. Optional filtering may be applied to refine search results.
    */
   listConfigurations(params: Discovery.Types.ListConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.ListConfigurationsResponse) => void): Request<Discovery.Types.ListConfigurationsResponse, AWSError>;
   /**
-   * Retrieves a list of configuration items according to criteria that you specify in a filter. The filter criteria identifies the relationship requirements.
+   * Retrieves a list of configuration items as specified by the value passed to the required paramater configurationType. Optional filtering may be applied to refine search results.
    */
   listConfigurations(callback?: (err: AWSError, data: Discovery.Types.ListConfigurationsResponse) => void): Request<Discovery.Types.ListConfigurationsResponse, AWSError>;
   /**
@@ -127,6 +135,14 @@ declare class Discovery extends Service {
    * Retrieves a list of servers that are one network hop away from a specified server.
    */
   listServerNeighbors(callback?: (err: AWSError, data: Discovery.Types.ListServerNeighborsResponse) => void): Request<Discovery.Types.ListServerNeighborsResponse, AWSError>;
+  /**
+   * Start the continuous flow of agent's discovered data into Amazon Athena.
+   */
+  startContinuousExport(params: Discovery.Types.StartContinuousExportRequest, callback?: (err: AWSError, data: Discovery.Types.StartContinuousExportResponse) => void): Request<Discovery.Types.StartContinuousExportResponse, AWSError>;
+  /**
+   * Start the continuous flow of agent's discovered data into Amazon Athena.
+   */
+  startContinuousExport(callback?: (err: AWSError, data: Discovery.Types.StartContinuousExportResponse) => void): Request<Discovery.Types.StartContinuousExportResponse, AWSError>;
   /**
    * Instructs the specified agents or connectors to start collecting data.
    */
@@ -143,6 +159,14 @@ declare class Discovery extends Service {
    *  Begins the export of discovered data to an S3 bucket.  If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports.   If you do not include an agentIds filter, summary data is exported that includes both AWS Agentless Discovery Connector data and summary data from AWS Discovery Agents. Export of summary data is limited to two exports per day. 
    */
   startExportTask(callback?: (err: AWSError, data: Discovery.Types.StartExportTaskResponse) => void): Request<Discovery.Types.StartExportTaskResponse, AWSError>;
+  /**
+   * Stop the continuous flow of agent's discovered data into Amazon Athena.
+   */
+  stopContinuousExport(params: Discovery.Types.StopContinuousExportRequest, callback?: (err: AWSError, data: Discovery.Types.StopContinuousExportResponse) => void): Request<Discovery.Types.StopContinuousExportResponse, AWSError>;
+  /**
+   * Stop the continuous flow of agent's discovered data into Amazon Athena.
+   */
+  stopContinuousExport(callback?: (err: AWSError, data: Discovery.Types.StopContinuousExportResponse) => void): Request<Discovery.Types.StopContinuousExportResponse, AWSError>;
   /**
    * Instructs the specified agents or connectors to stop collecting data.
    */
@@ -280,6 +304,43 @@ declare namespace Discovery {
   export type Configurations = Configuration[];
   export type ConfigurationsDownloadUrl = string;
   export type ConfigurationsExportId = string;
+  export interface ContinuousExportDescription {
+    /**
+     * The unique ID assigned to this export.
+     */
+    exportId?: ConfigurationsExportId;
+    /**
+     * Describes the status of the export. Can be one of the following values:   START_IN_PROGRESS - setting up resources to start continuous export.   START_FAILED - an error occurred setting up continuous export. To recover, call start-continuous-export again.   ACTIVE - data is being exported to the customer bucket.   ERROR - an error occurred during export. To fix the issue, call stop-continuous-export and start-continuous-export.   STOP_IN_PROGRESS - stopping the export.   STOP_FAILED - an error occurred stopping the export. To recover, call stop-continuous-export again.   INACTIVE - the continuous export has been stopped. Data is no longer being exported to the customer bucket.  
+     */
+    status?: ContinuousExportStatus;
+    /**
+     * Contains information about any errors that may have occurred.
+     */
+    statusDetail?: StringMax255;
+    /**
+     * The name of the s3 bucket where the export data parquet files are stored.
+     */
+    s3Bucket?: S3Bucket;
+    /**
+     * The timestamp representing when the continuous export was started.
+     */
+    startTime?: TimeStamp;
+    /**
+     * The timestamp that represents when this continuous export was stopped.
+     */
+    stopTime?: TimeStamp;
+    /**
+     * The type of data collector used to gather this data (currently only offered for AGENT).
+     */
+    dataSource?: DataSource;
+    /**
+     * An object which describes how the data is stored.    databaseName - the name of the Glue database used to store the schema.  
+     */
+    schemaStorageConfig?: SchemaStorageConfig;
+  }
+  export type ContinuousExportDescriptions = ContinuousExportDescription[];
+  export type ContinuousExportIds = ConfigurationsExportId[];
+  export type ContinuousExportStatus = "START_IN_PROGRESS"|"START_FAILED"|"ACTIVE"|"ERROR"|"STOP_IN_PROGRESS"|"STOP_FAILED"|"INACTIVE"|string;
   export interface CreateApplicationRequest {
     /**
      * Name of the application to be created.
@@ -368,6 +429,8 @@ declare namespace Discovery {
      */
     unknownConnectors: Integer;
   }
+  export type DataSource = "AGENT"|string;
+  export type DatabaseName = string;
   export interface DeleteApplicationsRequest {
     /**
      * Configuration ID of an application to be deleted.
@@ -430,27 +493,52 @@ declare namespace Discovery {
      */
     configurations?: DescribeConfigurationsAttributes;
   }
+  export type DescribeContinuousExportsMaxResults = number;
+  export interface DescribeContinuousExportsRequest {
+    /**
+     * The unique IDs assigned to the exports.
+     */
+    exportIds?: ContinuousExportIds;
+    /**
+     * A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
+     */
+    maxResults?: DescribeContinuousExportsMaxResults;
+    /**
+     * The token from the previous call to DescribeExportTasks.
+     */
+    nextToken?: NextToken;
+  }
+  export interface DescribeContinuousExportsResponse {
+    /**
+     * A list of continuous export descriptions.
+     */
+    descriptions?: ContinuousExportDescriptions;
+    /**
+     * The token from the previous call to DescribeExportTasks.
+     */
+    nextToken?: NextToken;
+  }
   export interface DescribeExportConfigurationsRequest {
     /**
-     * A unique identifier that you can use to query the export status.
+     * A list of continuous export ids to search for.
      */
     exportIds?: ExportIds;
     /**
-     * The maximum number of results that you want to display as a part of the query.
+     * A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
      */
     maxResults?: Integer;
     /**
-     * A token to get the next set of results. For example, if you specify 100 IDs for DescribeExportConfigurationsRequest$exportIds but set DescribeExportConfigurationsRequest$maxResults to 10, you get results in a set of 10. Use the token in the query to get the next set of 10.
+     * The token from the previous call to describe-export-tasks.
      */
     nextToken?: NextToken;
   }
   export interface DescribeExportConfigurationsResponse {
     /**
-     * Returns export details. When the status is complete, the response includes a URL for an Amazon S3 bucket where you can view the data in a CSV file.
+     * 
      */
     exportsInfo?: ExportsInfo;
     /**
-     * A token to get the next set of results. For example, if you specify 100 IDs for DescribeExportConfigurationsRequest$exportIds but set DescribeExportConfigurationsRequest$maxResults to 10, you get results in a set of 10. Use the token in the query to get the next set of 10.
+     * The token from the previous call to describe-export-tasks.
      */
     nextToken?: NextToken;
   }
@@ -731,6 +819,32 @@ declare namespace Discovery {
     sortOrder?: orderString;
   }
   export type OrderByList = OrderByElement[];
+  export type S3Bucket = string;
+  export type SchemaStorageConfig = {[key: string]: String};
+  export interface StartContinuousExportRequest {
+  }
+  export interface StartContinuousExportResponse {
+    /**
+     * The unique ID assigned to this export.
+     */
+    exportId?: ConfigurationsExportId;
+    /**
+     * The name of the s3 bucket where the export data parquet files are stored.
+     */
+    s3Bucket?: S3Bucket;
+    /**
+     * The timestamp representing when the continuous export was started.
+     */
+    startTime?: TimeStamp;
+    /**
+     * The type of data collector used to gather this data (currently only offered for AGENT).
+     */
+    dataSource?: DataSource;
+    /**
+     * A dictionary which describes how the data is stored.    databaseName - the name of the Glue database used to store the schema.  
+     */
+    schemaStorageConfig?: SchemaStorageConfig;
+  }
   export interface StartDataCollectionByAgentIdsRequest {
     /**
      * The IDs of the agents or connectors from which to start collecting data. If you send a request to an agent/connector ID that you do not have permission to contact, according to your AWS account, the service does not throw an exception. Instead, it returns the error in the Description field. If you send a request to multiple agents/connectors and you do not have permission to contact some of those agents/connectors, the system does not throw an exception. Instead, the system shows Failed in the Description field.
@@ -767,6 +881,22 @@ declare namespace Discovery {
      */
     exportId?: ConfigurationsExportId;
   }
+  export interface StopContinuousExportRequest {
+    /**
+     * The unique ID assigned to this export.
+     */
+    exportId: ConfigurationsExportId;
+  }
+  export interface StopContinuousExportResponse {
+    /**
+     * Timestamp that represents when this continuous export started collecting data.
+     */
+    startTime?: TimeStamp;
+    /**
+     * Timestamp that represents when this continuous export was stopped.
+     */
+    stopTime?: TimeStamp;
+  }
   export interface StopDataCollectionByAgentIdsRequest {
     /**
      * The IDs of the agents or connectors from which to stop collecting data.
@@ -780,6 +910,7 @@ declare namespace Discovery {
     agentsConfigurationStatus?: AgentConfigurationStatusList;
   }
   export type String = string;
+  export type StringMax255 = string;
   export interface Tag {
     /**
      * The type of tag on which to filter.

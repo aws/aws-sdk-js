@@ -7064,7 +7064,7 @@ declare namespace EC2 {
     /**
      * The attribute of the volume. This parameter is required.
      */
-    Attribute?: VolumeAttributeName;
+    Attribute: VolumeAttributeName;
     /**
      * The ID of the volume.
      */
