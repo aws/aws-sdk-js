@@ -1522,14 +1522,14 @@ describe('AWS.S3', function() {
           };
           var req = request('putObject', {
             Bucket: 'test',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('test.s3.eu-west-1.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
         });
 
         it('prepends bucket to hostname and includes full object key in path when bucket matches object prefix', function() {
@@ -1540,14 +1540,14 @@ describe('AWS.S3', function() {
           };
           var req = request('putObject', {
             Bucket: 'foo',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3.eu-west-1.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
         });
       });
 
@@ -1560,14 +1560,14 @@ describe('AWS.S3', function() {
           };
           var req = request('putObject', {
             Bucket: 'test.foo',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/test.foo/foo/bar');
+          expect(req.httpRequest.path).to.equal('/test.foo/foo/bar%2A_.~-%25/biz');
         });
 
         it('includes bucket and full object key in path when bucket matches object prefix', function() {
@@ -1578,14 +1578,14 @@ describe('AWS.S3', function() {
           };
           var req = request('putObject', {
             Bucket: 'foo.bar',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/foo.bar/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo.bar/foo/bar%2A_.~-%25/biz');
         });
       });
 
@@ -1601,14 +1601,14 @@ describe('AWS.S3', function() {
           });
           var req = request('putObject', {
             Bucket: 'test',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/test/foo/bar');
+          expect(req.httpRequest.path).to.equal('/test/foo/bar%2A_.~-%25/biz');
         });
 
         it('includes bucket and full object key in path when bucket matches object prefix', function() {
@@ -1622,14 +1622,14 @@ describe('AWS.S3', function() {
           });
           var req = request('putObject', {
             Bucket: 'foo',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/foo/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/foo/bar%2A_.~-%25/biz');
         });
       });
 
@@ -1646,14 +1646,14 @@ describe('AWS.S3', function() {
           });
           var req = request('putObject', {
             Bucket: 'test',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('fake-custom-url.com');
-          expect(req.httpRequest.path).to.equal('/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
         });
 
         it('includes full object key in path when bucket matches object prefix', function() {
@@ -1668,14 +1668,14 @@ describe('AWS.S3', function() {
           });
           var req = request('putObject', {
             Bucket: 'foo',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('fake-custom-url.com');
-          expect(req.httpRequest.path).to.equal('/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
         });
       });
 
@@ -1691,14 +1691,14 @@ describe('AWS.S3', function() {
           });
           var req = request('putObject', {
             Bucket: 'test',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('test.s3-accelerate.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
         });
 
         it('includes full object key in path when bucket matches object prefix', function() {
@@ -1712,14 +1712,14 @@ describe('AWS.S3', function() {
           });
           var req = request('putObject', {
             Bucket: 'foo',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3-accelerate.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
         });
       });
 
@@ -1735,14 +1735,14 @@ describe('AWS.S3', function() {
           });
           var req = request('putObject', {
             Bucket: 'test',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('test.s3.dualstack.eu-west-1.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
         });
 
         it('includes full object key in path when bucket matches object prefix', function() {
@@ -1756,14 +1756,14 @@ describe('AWS.S3', function() {
           });
           var req = request('putObject', {
             Bucket: 'foo',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3.dualstack.eu-west-1.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
         });
       });
 
@@ -1780,14 +1780,14 @@ describe('AWS.S3', function() {
           });
           var req = request('putObject', {
             Bucket: 'test',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('test.s3-accelerate.dualstack.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
         });
 
         it('includes full object key in path when bucket matches object prefix', function() {
@@ -1802,14 +1802,14 @@ describe('AWS.S3', function() {
           });
           var req = request('putObject', {
             Bucket: 'foo',
-            Key: 'foo/bar'
+            Key: 'foo/bar*_.~\-%/biz'
           });
           req.build();
           var retryable = s3.retryableError(err, req);
           expect(retryable).to.equal(true);
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3-accelerate.dualstack.amazonaws.com');
-          expect(req.httpRequest.path).to.equal('/foo/bar');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
         });
       });
     });
