@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.295.0-->
+<!--LATEST=2.296.0-->
 <!--ENTRYINSERT-->
+
+## 2.296.0
+* feature: DAX: DAX CreateClusterRequest is updated to include IamRoleArn as a required request parameter. 
+* feature: SageMaker: Added an optional boolean parameter, 'DisassociateLifecycleConfig', to the UpdateNotebookInstance operation. When set to true, the lifecycle configuration associated with the notebook instance will be removed, allowing a new one to be set via a new 'LifecycleConfigName' parameter.
 
 ## 2.295.0
 * feature: Discovery: The Application Discovery Service's Continuous Export APIs allow you to analyze your on-premises server inventory data, including system performance and network dependencies, in Amazon Athena.

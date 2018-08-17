@@ -295,7 +295,7 @@ declare namespace DAX {
     /**
      * A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role's permissions to access DynamoDB on your behalf.
      */
-    IamRoleArn?: String;
+    IamRoleArn: String;
     /**
      * The parameter group to be associated with the DAX cluster.
      */
