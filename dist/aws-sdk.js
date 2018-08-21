@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.297.0
+// AWS SDK for JavaScript v2.298.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -57819,6 +57819,9 @@ module.exports={
                         },
                         "SoftIRQ": {
                           "type": "double"
+                        },
+                        "Privileged": {
+                          "type": "double"
                         }
                       }
                     },
@@ -104265,8 +104268,123 @@ module.exports={
   }
 }
 },{}],142:[function(require,module,exports){
-arguments[4][135][0].apply(exports,arguments)
-},{"dup":135}],143:[function(require,module,exports){
+module.exports={
+  "pagination": {
+    "DescribeDBClusters": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBClusters"
+    },
+    "DescribeDBEngineVersions": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBEngineVersions"
+    },
+    "DescribeDBInstances": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBInstances"
+    },
+    "DescribeDBLogFiles": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DescribeDBLogFiles"
+    },
+    "DescribeDBParameterGroups": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBParameterGroups"
+    },
+    "DescribeDBParameters": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "Parameters"
+    },
+    "DescribeDBSecurityGroups": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBSecurityGroups"
+    },
+    "DescribeDBSnapshots": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBSnapshots"
+    },
+    "DescribeDBSubnetGroups": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBSubnetGroups"
+    },
+    "DescribeEngineDefaultParameters": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "EngineDefaults.Marker",
+      "result_key": "EngineDefaults.Parameters"
+    },
+    "DescribeEventSubscriptions": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "EventSubscriptionsList"
+    },
+    "DescribeEvents": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "Events"
+    },
+    "DescribeOptionGroupOptions": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "OptionGroupOptions"
+    },
+    "DescribeOptionGroups": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "OptionGroupsList"
+    },
+    "DescribeOrderableDBInstanceOptions": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "OrderableDBInstanceOptions"
+    },
+    "DescribeReservedDBInstances": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "ReservedDBInstances"
+    },
+    "DescribeReservedDBInstancesOfferings": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "ReservedDBInstancesOfferings"
+    },
+    "DownloadDBLogFilePortion": {
+      "input_token": "Marker",
+      "limit_key": "NumberOfLines",
+      "more_results": "AdditionalDataPending",
+      "output_token": "Marker",
+      "result_key": "LogFileData"
+    },
+    "ListTagsForResource": {
+      "result_key": "TagList"
+    }
+  }
+}
+},{}],143:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -135909,7 +136027,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.297.0',
+  VERSION: '2.298.0',
 
   /**
    * @api private
@@ -155046,7 +155164,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":360,"./lib/rng":361}],364:[function(require,module,exports){
-// AWS SDK for JavaScript v2.297.0
+// AWS SDK for JavaScript v2.298.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

@@ -60,11 +60,11 @@ declare class ElasticBeanstalk extends Service {
    */
   createApplicationVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
   /**
-   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
+   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
    */
   createConfigurationTemplate(params: ElasticBeanstalk.Types.CreateConfigurationTemplateMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
   /**
-   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
+   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
    */
   createConfigurationTemplate(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
   /**
@@ -606,11 +606,11 @@ declare namespace ElasticBeanstalk {
      */
     User?: NullableDouble;
     /**
-     * Percentage of time that the CPU has spent in the Nice state over the last 10 seconds.
+     * Available on Linux environments only. Percentage of time that the CPU has spent in the Nice state over the last 10 seconds.
      */
     Nice?: NullableDouble;
     /**
-     * Percentage of time that the CPU has spent in the System state over the last 10 seconds.
+     * Available on Linux environments only. Percentage of time that the CPU has spent in the System state over the last 10 seconds.
      */
     System?: NullableDouble;
     /**
@@ -618,17 +618,21 @@ declare namespace ElasticBeanstalk {
      */
     Idle?: NullableDouble;
     /**
-     * Percentage of time that the CPU has spent in the I/O Wait state over the last 10 seconds.
+     * Available on Linux environments only. Percentage of time that the CPU has spent in the I/O Wait state over the last 10 seconds.
      */
     IOWait?: NullableDouble;
     /**
-     * Percentage of time that the CPU has spent in the IRQ state over the last 10 seconds.
+     * Available on Linux environments only. Percentage of time that the CPU has spent in the IRQ state over the last 10 seconds.
      */
     IRQ?: NullableDouble;
     /**
-     * Percentage of time that the CPU has spent in the SoftIRQ state over the last 10 seconds.
+     * Available on Linux environments only. Percentage of time that the CPU has spent in the SoftIRQ state over the last 10 seconds.
      */
     SoftIRQ?: NullableDouble;
+    /**
+     * Available on Windows environments only. Percentage of time that the CPU has spent in the Privileged state over the last 10 seconds.
+     */
+    Privileged?: NullableDouble;
   }
   export type Cause = string;
   export type Causes = Cause[];
@@ -1353,7 +1357,7 @@ declare namespace ElasticBeanstalk {
   }
   export interface DescribeInstancesHealthResult {
     /**
-     * Detailed health information about each instance.
+     * Detailed health information about each instance. The output differs slightly between Linux and Windows environments. There is a difference in the members that are supported under the &lt;CPUUtilization&gt; type.
      */
     InstanceHealthList?: InstanceHealthList;
     /**

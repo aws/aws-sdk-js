@@ -68,7 +68,7 @@ declare namespace DLM {
      */
     State: SettablePolicyStateValues;
     /**
-     * The configuration of the lifecycle policy. Target tags cannot be re-used across lifecycle policies.
+     * The configuration details of the lifecycle policy. Target tags cannot be re-used across lifecycle policies.
      */
     PolicyDetails: PolicyDetails;
   }
@@ -115,11 +115,11 @@ declare namespace DLM {
      */
     ResourceTypes?: ResourceTypeValuesList;
     /**
-     * The target tags. Tags are strings in the format key:value.
+     * The target tag for a policy. Tags are strings in the format key=value.
      */
     TargetTags?: TargetTagsFilterList;
     /**
-     * The tags to add to the resources. Tags are strings in the format key:value. These tags are added in addition to the AWS-added lifecycle tags.
+     * The tags to add to objects created by the policy. Tags are strings in the format key=value. These user-defined tags are added in addition to the AWS-added lifecycle tags.
      */
     TagsToAdd?: TagsToAddFilterList;
   }
@@ -196,11 +196,11 @@ declare namespace DLM {
      */
     ResourceTypes?: ResourceTypeValuesList;
     /**
-     * The target tags.
+     * The single tag that identifies targeted resources for this policy.
      */
     TargetTags?: TargetTagList;
     /**
-     * The schedule.
+     * The schedule of policy-defined actions.
      */
     Schedules?: ScheduleList;
   }
@@ -220,7 +220,7 @@ declare namespace DLM {
      */
     Name?: ScheduleName;
     /**
-     * The tags to add to policy-created resources. These tags are added in addition to the default lifecycle tags.
+     * The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
      */
     TagsToAdd?: TagsToAddList;
     /**
