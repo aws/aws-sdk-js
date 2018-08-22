@@ -186,7 +186,6 @@
 
             req.runTo('sign', function(err) {
               expect(req.httpRequest.headers['Content-Length']).to.equal(4);
-              console.log(err);
               expect(!err).to.equal(true);
             });
           });
@@ -1086,94 +1085,102 @@
         });
       });
       if (AWS.util.isNode()) {
-        return describe('with domains', function() {
-          var createDomain, domains;
-          domains = [];
-          createDomain = function() {
-            var domain;
-            domain = require('domain').create();
+        describe('with domains', function() {
+          var domains = [];
+
+          function createDomain() {
+            var domain = require('domain').create();
             domains.push(domain);
             return domain;
           };
+
           beforeEach(function() {
             return domains = [];
           });
+
           afterEach(function() {
-            return domains.forEach(function(d) {
+            domains.forEach(function(d) {
               d.exit();
-              return d.dispose();
             });
           });
+
           it('sends error raised from complete event to a domain', function() {
-            var d, result;
-            result = false;
-            d = createDomain();
-            d.enter();
+            var result = false;
+            var d = createDomain();
+
             d.on('error', function(e) {
-              return result = e;
+              result = e;
             });
-            return d.run(function() {
-              var request;
+
+            d.run(function() {
               helpers.mockHttpResponse(200, {}, []);
-              request = makeRequest();
+              var request = makeRequest();
+
               request.on('complete', function() {
-                return invalidCode;
+                // trigger a ReferenceError
+                invalidCode;
               });
+
               expect(function() {
-                return request.send();
+                request.send();
               }).not.to["throw"]();
+
               expect(completeHandler.calls.length).not.to.equal(0);
               expect(retryHandler.calls.length).to.equal(0);
               expect(result.code).to.equal('ReferenceError');
-              return d.exit();
             });
           });
+
           it('does not leak service error into domain', function() {
-            var d, result;
-            result = false;
-            d = createDomain();
+            var result = false;
+            var d = createDomain();
+
             d.on('error', function(e) {
-              return result = e;
+              result = e;
             });
-            d.enter();
-            return d.run(function() {
+
+            d.run(function() {
               helpers.mockHttpResponse(500, {}, []);
               makeRequest().send();
               expect(completeHandler.calls.length).not.to.equal(0);
               expect(result).to.equal(false);
-              return d.exit();
             });
           });
-          return it('supports inner domains', function(done) {
-            var err, gotInnerError, gotOuterError, outerDomain;
+
+          it('supports inner domains', function(done) {
             helpers.mockHttpResponse(200, {}, []);
-            err = new ReferenceError();
-            gotOuterError = false;
-            gotInnerError = false;
-            outerDomain = createDomain();
+
+            var err = new ReferenceError();
+            var gotOuterError = false;
+            var gotInnerError = false;
+            var outerDomain = createDomain();
+
             outerDomain.on('error', function() {
-              return gotOuterError = true;
+              gotOuterError = true;
             });
-            outerDomain.enter();
-            return outerDomain.run(function() {
-              var innerDomain, request;
-              request = makeRequest();
-              innerDomain = createDomain();
+
+            outerDomain.run(function() {
+              var request = makeRequest();
+              var innerDomain = createDomain();
+
               innerDomain.enter();
               innerDomain.add(request);
+
               innerDomain.on('error', function(domErr) {
                 gotInnerError = true;
                 expect(gotOuterError).to.equal(false);
                 expect(gotInnerError).to.equal(true);
                 expect(domErr.domainThrown).to.equal(false);
                 expect(domErr.domain).to.equal(innerDomain);
-                return done();
+                done();
               });
-              return request.send(function() {
-                return innerDomain.run(function() {
+
+              request.send(function() {
+                innerDomain.run(function() {
                   throw err;
                 });
               });
+
             });
           });
         });
