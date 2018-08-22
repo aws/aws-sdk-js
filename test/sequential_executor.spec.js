@@ -115,8 +115,12 @@
         this.emitter.addNamedListener('FUNCTION_4', 'event', function() {
           list.push(4);
         });
-        this.emitter.emit('event');
-        return expect(list).to.eql([3, 2, 1, 4]);
+        this.emitter.addNamedAsyncListener('FUNCTION_5', 'event', function(done) {
+          list.push(5);
+          done();
+        }, addToHead);
+        this.emitter.emit('event', []);
+        return expect(list).to.eql([5, 3, 2, 1, 4]);
       })
     });
 
