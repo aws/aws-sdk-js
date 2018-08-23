@@ -12,6 +12,56 @@
     "serviceAbbreviation": "MediaLive"
   },
   "operations": {
+    "BatchUpdateSchedule": {
+      "name": "BatchUpdateSchedule",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/prod/channels/{channelId}/schedule",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchUpdateScheduleRequest"
+      },
+      "output": {
+        "shape": "BatchUpdateScheduleResponse",
+        "documentation": "Successful update of the schedule."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "The update schedule request failed validation."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to update the channel schedule."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad Gateway Error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "The specified channel id does not exist."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on update schedule calls."
+        }
+      ],
+      "documentation": "Update a channel schedule"
+    },
     "CreateChannel": {
       "name": "CreateChannel",
       "http": {
@@ -571,6 +621,52 @@
         }
       ],
       "documentation": "Get details for a reservation."
+    },
+    "DescribeSchedule": {
+      "name": "DescribeSchedule",
+      "http": {
+        "method": "GET",
+        "requestUri": "/prod/channels/{channelId}/schedule",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeScheduleRequest"
+      },
+      "output": {
+        "shape": "DescribeScheduleResponse",
+        "documentation": "An array of channel schedule actions."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to describe the channel schedule."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad Gateway Error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "The channel you're requesting a schedule describe for does not exist."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on describe schedule calls."
+        }
+      ],
+      "documentation": "Get a channel schedule"
     },
     "ListChannels": {
       "name": "ListChannels",
@@ -1274,16 +1370,6 @@
       },
       "documentation": "Placeholder documentation for Ac3Settings"
     },
-    "AccessDenied": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "documentation": "Placeholder documentation for AccessDenied"
-    },
     "AfdSignaling": {
       "type": "string",
       "enum": [
@@ -1348,14 +1434,12 @@
     },
     "AribDestinationSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for AribDestinationSettings"
     },
     "AribSourceSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for AribSourceSettings"
     },
     "AudioChannelMapping": {
@@ -1688,33 +1772,102 @@
       },
       "documentation": "Placeholder documentation for AvailSettings"
     },
-    "BadGatewayException": {
+    "BatchScheduleActionCreateRequest": {
       "type": "structure",
       "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
+        "ScheduleActions": {
+          "shape": "__listOfScheduleAction",
+          "locationName": "scheduleActions",
+          "documentation": "A list of schedule actions to create."
         }
       },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 502
-      },
-      "documentation": "Placeholder documentation for BadGatewayException"
+      "documentation": "A list of schedule actions to create.",
+      "required": [
+        "ScheduleActions"
+      ]
     },
-    "BadRequestException": {
+    "BatchScheduleActionCreateResult": {
       "type": "structure",
       "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
+        "ScheduleActions": {
+          "shape": "__listOfScheduleAction",
+          "locationName": "scheduleActions",
+          "documentation": "Returned list of created schedule actions."
         }
       },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 400
+      "documentation": "Returned list of created schedule actions.",
+      "required": [
+        "ScheduleActions"
+      ]
+    },
+    "BatchScheduleActionDeleteRequest": {
+      "type": "structure",
+      "members": {
+        "ActionNames": {
+          "shape": "__listOf__string",
+          "locationName": "actionNames",
+          "documentation": "A list of schedule actions to delete, identified by unique name."
+        }
       },
-      "documentation": "Placeholder documentation for BadRequestException"
+      "documentation": "A list of schedule actions to delete.",
+      "required": [
+        "ActionNames"
+      ]
+    },
+    "BatchScheduleActionDeleteResult": {
+      "type": "structure",
+      "members": {
+        "ScheduleActions": {
+          "shape": "__listOfScheduleAction",
+          "locationName": "scheduleActions",
+          "documentation": "Returned list of deleted schedule actions."
+        }
+      },
+      "documentation": "Returned list of deleted schedule actions.",
+      "required": [
+        "ScheduleActions"
+      ]
+    },
+    "BatchUpdateScheduleRequest": {
+      "type": "structure",
+      "members": {
+        "ChannelId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "channelId",
+          "documentation": "Id of the channel whose schedule is being updated."
+        },
+        "Creates": {
+          "shape": "BatchScheduleActionCreateRequest",
+          "locationName": "creates",
+          "documentation": "Schedule actions to create in the schedule."
+        },
+        "Deletes": {
+          "shape": "BatchScheduleActionDeleteRequest",
+          "locationName": "deletes",
+          "documentation": "Schedule actions to delete from the schedule."
+        }
+      },
+      "documentation": "List of actions to create and list of actions to delete.",
+      "required": [
+        "ChannelId"
+      ]
+    },
+    "BatchUpdateScheduleResponse": {
+      "type": "structure",
+      "members": {
+        "Creates": {
+          "shape": "BatchScheduleActionCreateResult",
+          "locationName": "creates",
+          "documentation": "Schedule actions created in the schedule."
+        },
+        "Deletes": {
+          "shape": "BatchScheduleActionDeleteResult",
+          "locationName": "deletes",
+          "documentation": "Schedule actions deleted from the schedule."
+        }
+      },
+      "documentation": "Response to a batch update schedule call."
     },
     "BlackoutSlate": {
       "type": "structure",
@@ -2145,21 +2298,6 @@
       },
       "documentation": "Placeholder documentation for Channel"
     },
-    "ChannelConfigurationValidationError": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        },
-        "ValidationErrors": {
-          "shape": "__listOfValidationError",
-          "locationName": "validationErrors",
-          "documentation": "A collection of validation error responses from attempting to create a channel with a bouquet of settings."
-        }
-      },
-      "documentation": "Placeholder documentation for ChannelConfigurationValidationError"
-    },
     "ChannelEgressEndpoint": {
       "type": "structure",
       "members": {
@@ -2245,71 +2383,6 @@
       },
       "documentation": "Placeholder documentation for ChannelSummary"
     },
-    "ConflictException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 409
-      },
-      "documentation": "Placeholder documentation for ConflictException"
-    },
-    "CreateChannel": {
-      "type": "structure",
-      "members": {
-        "Destinations": {
-          "shape": "__listOfOutputDestination",
-          "locationName": "destinations"
-        },
-        "EncoderSettings": {
-          "shape": "EncoderSettings",
-          "locationName": "encoderSettings"
-        },
-        "InputAttachments": {
-          "shape": "__listOfInputAttachment",
-          "locationName": "inputAttachments",
-          "documentation": "List of input attachments for channel."
-        },
-        "InputSpecification": {
-          "shape": "InputSpecification",
-          "locationName": "inputSpecification",
-          "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
-        },
-        "LogLevel": {
-          "shape": "LogLevel",
-          "locationName": "logLevel",
-          "documentation": "The log level to write to CloudWatch Logs."
-        },
-        "Name": {
-          "shape": "__string",
-          "locationName": "name",
-          "documentation": "Name of channel."
-        },
-        "RequestId": {
-          "shape": "__string",
-          "locationName": "requestId",
-          "documentation": "Unique request ID to be specified. This is needed to prevent retries from\ncreating multiple resources.\n",
-          "idempotencyToken": true
-        },
-        "Reserved": {
-          "shape": "__string",
-          "locationName": "reserved",
-          "documentation": "Deprecated field that's only usable by whitelisted customers.",
-          "deprecated": true
-        },
-        "RoleArn": {
-          "shape": "__string",
-          "locationName": "roleArn",
-          "documentation": "An optional Amazon Resource Name (ARN) of the role to assume when running the Channel."
-        }
-      },
-      "documentation": "Placeholder documentation for CreateChannel"
-    },
     "CreateChannelRequest": {
       "type": "structure",
       "members": {
@@ -2371,52 +2444,6 @@
       },
       "documentation": "Placeholder documentation for CreateChannelResponse"
     },
-    "CreateChannelResultModel": {
-      "type": "structure",
-      "members": {
-        "Channel": {
-          "shape": "Channel",
-          "locationName": "channel"
-        }
-      },
-      "documentation": "Placeholder documentation for CreateChannelResultModel"
-    },
-    "CreateInput": {
-      "type": "structure",
-      "members": {
-        "Destinations": {
-          "shape": "__listOfInputDestinationRequest",
-          "locationName": "destinations",
-          "documentation": "Destination settings for PUSH type inputs."
-        },
-        "InputSecurityGroups": {
-          "shape": "__listOf__string",
-          "locationName": "inputSecurityGroups",
-          "documentation": "A list of security groups referenced by IDs to attach to the input."
-        },
-        "Name": {
-          "shape": "__string",
-          "locationName": "name",
-          "documentation": "Name of the input."
-        },
-        "RequestId": {
-          "shape": "__string",
-          "locationName": "requestId",
-          "documentation": "Unique identifier of the request to ensure the request is handled\nexactly once in case of retries.\n",
-          "idempotencyToken": true
-        },
-        "Sources": {
-          "shape": "__listOfInputSourceRequest",
-          "locationName": "sources",
-          "documentation": "The source URLs for a PULL-type input. Every PULL type input needs\nexactly two source URLs for redundancy.\nOnly specify sources for PULL type Inputs. Leave Destinations empty.\n"
-        },
-        "Type": {
-          "shape": "InputType",
-          "locationName": "type"
-        }
-      },
-      "documentation": "Placeholder documentation for CreateInput"
-    },
     "CreateInputRequest": {
       "type": "structure",
       "members": {
@@ -2463,16 +2490,6 @@
       },
       "documentation": "Placeholder documentation for CreateInputResponse"
     },
-    "CreateInputResultModel": {
-      "type": "structure",
-      "members": {
-        "Input": {
-          "shape": "Input",
-          "locationName": "input"
-        }
-      },
-      "documentation": "Placeholder documentation for CreateInputResultModel"
-    },
     "CreateInputSecurityGroupRequest": {
       "type": "structure",
       "members": {
@@ -2493,16 +2510,6 @@
         }
       },
       "documentation": "Placeholder documentation for CreateInputSecurityGroupResponse"
-    },
-    "CreateInputSecurityGroupResultModel": {
-      "type": "structure",
-      "members": {
-        "SecurityGroup": {
-          "shape": "InputSecurityGroup",
-          "locationName": "securityGroup"
-        }
-      },
-      "documentation": "Placeholder documentation for CreateInputSecurityGroupResultModel"
     },
     "DeleteChannelRequest": {
       "type": "structure",
@@ -2599,8 +2606,7 @@
     },
     "DeleteInputResponse": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for DeleteInputResponse"
     },
     "DeleteInputSecurityGroupRequest": {
@@ -2620,8 +2626,7 @@
     },
     "DeleteInputSecurityGroupResponse": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for DeleteInputSecurityGroupResponse"
     },
     "DeleteReservationRequest": {
@@ -3100,6 +3105,47 @@
       },
       "documentation": "Placeholder documentation for DescribeReservationResponse"
     },
+    "DescribeScheduleRequest": {
+      "type": "structure",
+      "members": {
+        "ChannelId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "channelId",
+          "documentation": "Id of the channel whose schedule is being updated."
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "required": [
+        "ChannelId"
+      ],
+      "documentation": "Request for a describe schedule call."
+    },
+    "DescribeScheduleResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "The next token; for use in pagination."
+        },
+        "ScheduleActions": {
+          "shape": "__listOfScheduleAction",
+          "locationName": "scheduleActions",
+          "documentation": "The list of schedule actions."
+        }
+      },
+      "documentation": "Response for a describe schedule call."
+    },
     "DvbNitSettings": {
       "type": "structure",
       "members": {
@@ -3577,14 +3623,12 @@
     },
     "EmbeddedDestinationSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for EmbeddedDestinationSettings"
     },
     "EmbeddedPlusScte20DestinationSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for EmbeddedPlusScte20DestinationSettings"
     },
     "EmbeddedScte20Detection": {
@@ -3620,12 +3664,6 @@
         }
       },
       "documentation": "Placeholder documentation for EmbeddedSourceSettings"
-    },
-    "Empty": {
-      "type": "structure",
-      "members": {
-      },
-      "documentation": "Placeholder documentation for Empty"
     },
     "EncoderSettings": {
       "type": "structure",
@@ -3727,33 +3765,16 @@
       ],
       "documentation": "Placeholder documentation for FixedAfd"
     },
-    "ForbiddenException": {
+    "FixedModeScheduleActionStartSettings": {
       "type": "structure",
       "members": {
-        "Message": {
+        "Time": {
           "shape": "__string",
-          "locationName": "message"
+          "locationName": "time",
+          "documentation": "Fixed timestamp action start. Conforms to ISO-8601."
         }
       },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 403
-      },
-      "documentation": "Placeholder documentation for ForbiddenException"
-    },
-    "GatewayTimeoutException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 504
-      },
-      "documentation": "Placeholder documentation for GatewayTimeoutException"
+      "documentation": "Fixed mode schedule action start settings"
     },
     "GlobalConfiguration": {
       "type": "structure",
@@ -5018,17 +5039,6 @@
       ],
       "documentation": "Placeholder documentation for InputSecurityGroupState"
     },
-    "InputSecurityGroupWhitelistRequest": {
-      "type": "structure",
-      "members": {
-        "WhitelistRules": {
-          "shape": "__listOfInputWhitelistRuleCidr",
-          "locationName": "whitelistRules",
-          "documentation": "List of IPv4 CIDR addresses to whitelist"
-        }
-      },
-      "documentation": "Request of IPv4 CIDR addresses to whitelist in a security group."
-    },
     "InputSettings": {
       "type": "structure",
       "members": {
@@ -5195,40 +5205,6 @@
       },
       "documentation": "An IPv4 CIDR to whitelist."
     },
-    "InternalServerErrorException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 500
-      },
-      "documentation": "Placeholder documentation for InternalServerErrorException"
-    },
-    "InternalServiceError": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "documentation": "Placeholder documentation for InternalServiceError"
-    },
-    "InvalidRequest": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "documentation": "Placeholder documentation for InvalidRequest"
-    },
     "KeyProviderSettings": {
       "type": "structure",
       "members": {
@@ -5238,16 +5214,6 @@
         }
       },
       "documentation": "Placeholder documentation for KeyProviderSettings"
-    },
-    "LimitExceeded": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "documentation": "Placeholder documentation for LimitExceeded"
     },
     "ListChannelsRequest": {
       "type": "structure",
@@ -5278,20 +5244,6 @@
         }
       },
       "documentation": "Placeholder documentation for ListChannelsResponse"
-    },
-    "ListChannelsResultModel": {
-      "type": "structure",
-      "members": {
-        "Channels": {
-          "shape": "__listOfChannelSummary",
-          "locationName": "channels"
-        },
-        "NextToken": {
-          "shape": "__string",
-          "locationName": "nextToken"
-        }
-      },
-      "documentation": "Placeholder documentation for ListChannelsResultModel"
     },
     "ListInputSecurityGroupsRequest": {
       "type": "structure",
@@ -5324,21 +5276,6 @@
       },
       "documentation": "Placeholder documentation for ListInputSecurityGroupsResponse"
     },
-    "ListInputSecurityGroupsResultModel": {
-      "type": "structure",
-      "members": {
-        "InputSecurityGroups": {
-          "shape": "__listOfInputSecurityGroup",
-          "locationName": "inputSecurityGroups",
-          "documentation": "List of input security groups"
-        },
-        "NextToken": {
-          "shape": "__string",
-          "locationName": "nextToken"
-        }
-      },
-      "documentation": "Result of input security group list request"
-    },
     "ListInputsRequest": {
       "type": "structure",
       "members": {
@@ -5368,20 +5305,6 @@
         }
       },
       "documentation": "Placeholder documentation for ListInputsResponse"
-    },
-    "ListInputsResultModel": {
-      "type": "structure",
-      "members": {
-        "Inputs": {
-          "shape": "__listOfInput",
-          "locationName": "inputs"
-        },
-        "NextToken": {
-          "shape": "__string",
-          "locationName": "nextToken"
-        }
-      },
-      "documentation": "Placeholder documentation for ListInputsResultModel"
     },
     "ListOfferingsRequest": {
       "type": "structure",
@@ -5463,22 +5386,6 @@
       },
       "documentation": "Placeholder documentation for ListOfferingsResponse"
     },
-    "ListOfferingsResultModel": {
-      "type": "structure",
-      "members": {
-        "NextToken": {
-          "shape": "__string",
-          "locationName": "nextToken",
-          "documentation": "Token to retrieve the next page of results"
-        },
-        "Offerings": {
-          "shape": "__listOfOffering",
-          "locationName": "offerings",
-          "documentation": "List of offerings"
-        }
-      },
-      "documentation": "ListOfferings response"
-    },
     "ListReservationsRequest": {
       "type": "structure",
       "members": {
@@ -5552,22 +5459,6 @@
         }
       },
       "documentation": "Placeholder documentation for ListReservationsResponse"
-    },
-    "ListReservationsResultModel": {
-      "type": "structure",
-      "members": {
-        "NextToken": {
-          "shape": "__string",
-          "locationName": "nextToken",
-          "documentation": "Token to retrieve the next page of results"
-        },
-        "Reservations": {
-          "shape": "__listOfReservation",
-          "locationName": "reservations",
-          "documentation": "List of reservations"
-        }
-      },
-      "documentation": "ListReservations response"
     },
     "LogLevel": {
       "type": "string",
@@ -6248,20 +6139,6 @@
       },
       "documentation": "Network source to transcode. Must be accessible to the Elemental Live node that is running the live event through a network connection."
     },
-    "NotFoundException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 404
-      },
-      "documentation": "Placeholder documentation for NotFoundException"
-    },
     "Offering": {
       "type": "structure",
       "members": {
@@ -6501,31 +6378,8 @@
     },
     "PassThroughSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for PassThroughSettings"
-    },
-    "PurchaseOffering": {
-      "type": "structure",
-      "members": {
-        "Count": {
-          "shape": "__integerMin1",
-          "locationName": "count",
-          "documentation": "Number of resources"
-        },
-        "Name": {
-          "shape": "__string",
-          "locationName": "name",
-          "documentation": "Name for the new reservation"
-        },
-        "RequestId": {
-          "shape": "__string",
-          "locationName": "requestId",
-          "documentation": "Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.",
-          "idempotencyToken": true
-        }
-      },
-      "documentation": "PurchaseOffering request"
     },
     "PurchaseOfferingRequest": {
       "type": "structure",
@@ -6567,16 +6421,6 @@
         }
       },
       "documentation": "Placeholder documentation for PurchaseOfferingResponse"
-    },
-    "PurchaseOfferingResultModel": {
-      "type": "structure",
-      "members": {
-        "Reservation": {
-          "shape": "Reservation",
-          "locationName": "reservation"
-        }
-      },
-      "documentation": "PurchaseOffering response"
     },
     "RemixSettings": {
       "type": "structure",
@@ -6806,26 +6650,6 @@
         "PREMIUM"
       ]
     },
-    "ResourceConflict": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "documentation": "Placeholder documentation for ResourceConflict"
-    },
-    "ResourceNotFound": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "documentation": "Placeholder documentation for ResourceNotFound"
-    },
     "RtmpCacheFullBehavior": {
       "type": "string",
       "enum": [
@@ -6845,8 +6669,7 @@
     },
     "RtmpCaptionInfoDestinationSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for RtmpCaptionInfoDestinationSettings"
     },
     "RtmpGroupSettings": {
@@ -6917,6 +6740,74 @@
       ],
       "documentation": "Placeholder documentation for RtmpOutputSettings"
     },
+    "ScheduleAction": {
+      "type": "structure",
+      "members": {
+        "ActionName": {
+          "shape": "__string",
+          "locationName": "actionName",
+          "documentation": "The name of the action, must be unique within the schedule."
+        },
+        "ScheduleActionSettings": {
+          "shape": "ScheduleActionSettings",
+          "locationName": "scheduleActionSettings",
+          "documentation": "Settings for this schedule action."
+        },
+        "ScheduleActionStartSettings": {
+          "shape": "ScheduleActionStartSettings",
+          "locationName": "scheduleActionStartSettings",
+          "documentation": "When the action takes effect."
+        }
+      },
+      "documentation": "A single schedule action.",
+      "required": [
+        "ActionName",
+        "ScheduleActionStartSettings",
+        "ScheduleActionSettings"
+      ]
+    },
+    "ScheduleActionSettings": {
+      "type": "structure",
+      "members": {
+        "Scte35ReturnToNetworkSettings": {
+          "shape": "Scte35ReturnToNetworkScheduleActionSettings",
+          "locationName": "scte35ReturnToNetworkSettings",
+          "documentation": "SCTE-35 Return to Network Settings"
+        },
+        "Scte35SpliceInsertSettings": {
+          "shape": "Scte35SpliceInsertScheduleActionSettings",
+          "locationName": "scte35SpliceInsertSettings",
+          "documentation": "SCTE-35 Splice Insert Settings"
+        },
+        "Scte35TimeSignalSettings": {
+          "shape": "Scte35TimeSignalScheduleActionSettings",
+          "locationName": "scte35TimeSignalSettings",
+          "documentation": "SCTE-35 Time Signal Settings"
+        },
+        "StaticImageActivateSettings": {
+          "shape": "StaticImageActivateScheduleActionSettings",
+          "locationName": "staticImageActivateSettings",
+          "documentation": "Static Image Activate"
+        },
+        "StaticImageDeactivateSettings": {
+          "shape": "StaticImageDeactivateScheduleActionSettings",
+          "locationName": "staticImageDeactivateSettings",
+          "documentation": "Static Image Deactivate"
+        }
+      },
+      "documentation": "Settings for a single schedule action."
+    },
+    "ScheduleActionStartSettings": {
+      "type": "structure",
+      "members": {
+        "FixedModeScheduleActionStartSettings": {
+          "shape": "FixedModeScheduleActionStartSettings",
+          "locationName": "fixedModeScheduleActionStartSettings",
+          "documentation": "Fixed timestamp action start. Conforms to ISO-8601."
+        }
+      },
+      "documentation": "When the schedule action starts."
+    },
     "Scte20Convert608To708": {
       "type": "string",
       "enum": [
@@ -6927,8 +6818,7 @@
     },
     "Scte20PlusEmbeddedDestinationSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for Scte20PlusEmbeddedDestinationSettings"
     },
     "Scte20SourceSettings": {
@@ -6949,8 +6839,7 @@
     },
     "Scte27DestinationSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for Scte27DestinationSettings"
     },
     "Scte27SourceSettings": {
@@ -6979,6 +6868,179 @@
         "IGNORE"
       ],
       "documentation": "Placeholder documentation for Scte35AposWebDeliveryAllowedBehavior"
+    },
+    "Scte35ArchiveAllowedFlag": {
+      "type": "string",
+      "documentation": "SCTE-35 segmentation_descriptor archive_allowed_flag.",
+      "enum": [
+        "ARCHIVE_NOT_ALLOWED",
+        "ARCHIVE_ALLOWED"
+      ]
+    },
+    "Scte35DeliveryRestrictions": {
+      "type": "structure",
+      "members": {
+        "ArchiveAllowedFlag": {
+          "shape": "Scte35ArchiveAllowedFlag",
+          "locationName": "archiveAllowedFlag",
+          "documentation": "SCTE-35 segmentation_descriptor archive_allowed_flag."
+        },
+        "DeviceRestrictions": {
+          "shape": "Scte35DeviceRestrictions",
+          "locationName": "deviceRestrictions",
+          "documentation": "SCTE-35 segmentation_descriptor web_delivery_allowed_flag."
+        },
+        "NoRegionalBlackoutFlag": {
+          "shape": "Scte35NoRegionalBlackoutFlag",
+          "locationName": "noRegionalBlackoutFlag",
+          "documentation": "SCTE-35 segmentation_descriptor no_regional_blackout_flag."
+        },
+        "WebDeliveryAllowedFlag": {
+          "shape": "Scte35WebDeliveryAllowedFlag",
+          "locationName": "webDeliveryAllowedFlag",
+          "documentation": "SCTE-35 segmentation_descriptor web_delivery_allowed_flag."
+        }
+      },
+      "documentation": "SCTE-35 Delivery Restrictions.",
+      "required": [
+        "DeviceRestrictions",
+        "ArchiveAllowedFlag",
+        "WebDeliveryAllowedFlag",
+        "NoRegionalBlackoutFlag"
+      ]
+    },
+    "Scte35Descriptor": {
+      "type": "structure",
+      "members": {
+        "Scte35DescriptorSettings": {
+          "shape": "Scte35DescriptorSettings",
+          "locationName": "scte35DescriptorSettings",
+          "documentation": "SCTE-35 Descriptor Settings."
+        }
+      },
+      "documentation": "SCTE-35 Descriptor.",
+      "required": [
+        "Scte35DescriptorSettings"
+      ]
+    },
+    "Scte35DescriptorSettings": {
+      "type": "structure",
+      "members": {
+        "SegmentationDescriptorScte35DescriptorSettings": {
+          "shape": "Scte35SegmentationDescriptor",
+          "locationName": "segmentationDescriptorScte35DescriptorSettings",
+          "documentation": "SCTE-35 Segmentation Descriptor."
+        }
+      },
+      "documentation": "SCTE-35 Descriptor settings.",
+      "required": [
+        "SegmentationDescriptorScte35DescriptorSettings"
+      ]
+    },
+    "Scte35DeviceRestrictions": {
+      "type": "string",
+      "documentation": "SCTE-35 Device Restrictions.",
+      "enum": [
+        "NONE",
+        "RESTRICT_GROUP0",
+        "RESTRICT_GROUP1",
+        "RESTRICT_GROUP2"
+      ]
+    },
+    "Scte35NoRegionalBlackoutFlag": {
+      "type": "string",
+      "documentation": "SCTE-35 segmentation_descriptor no_regional_blackout_flag.",
+      "enum": [
+        "REGIONAL_BLACKOUT",
+        "NO_REGIONAL_BLACKOUT"
+      ]
+    },
+    "Scte35ReturnToNetworkScheduleActionSettings": {
+      "type": "structure",
+      "members": {
+        "SpliceEventId": {
+          "shape": "__integerMin0Max4294967295",
+          "locationName": "spliceEventId",
+          "documentation": "The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35."
+        }
+      },
+      "documentation": "SCTE-35 Return to Network Settings.",
+      "required": [
+        "SpliceEventId"
+      ]
+    },
+    "Scte35SegmentationCancelIndicator": {
+      "type": "string",
+      "documentation": "SCTE-35 segmentation_descriptor segmentation_event_cancel_indicator.",
+      "enum": [
+        "SEGMENTATION_EVENT_NOT_CANCELED",
+        "SEGMENTATION_EVENT_CANCELED"
+      ]
+    },
+    "Scte35SegmentationDescriptor": {
+      "type": "structure",
+      "members": {
+        "DeliveryRestrictions": {
+          "shape": "Scte35DeliveryRestrictions",
+          "locationName": "deliveryRestrictions",
+          "documentation": "SCTE-35 delivery restrictions."
+        },
+        "SegmentNum": {
+          "shape": "__integerMin0Max255",
+          "locationName": "segmentNum",
+          "documentation": "SCTE-35 segmentation_descriptor segment_num."
+        },
+        "SegmentationCancelIndicator": {
+          "shape": "Scte35SegmentationCancelIndicator",
+          "locationName": "segmentationCancelIndicator",
+          "documentation": "SCTE-35 segmentation_descriptor segmentation_event_cancel_indicator."
+        },
+        "SegmentationDuration": {
+          "shape": "__integerMin0Max1099511627775",
+          "locationName": "segmentationDuration",
+          "documentation": "SCTE-35 segmentation_descriptor segmentation_duration specified in 90 KHz clock ticks."
+        },
+        "SegmentationEventId": {
+          "shape": "__integerMin0Max4294967295",
+          "locationName": "segmentationEventId",
+          "documentation": "SCTE-35 segmentation_descriptor segmentation_event_id."
+        },
+        "SegmentationTypeId": {
+          "shape": "__integerMin0Max255",
+          "locationName": "segmentationTypeId",
+          "documentation": "SCTE-35 segmentation_descriptor segmentation_type_id."
+        },
+        "SegmentationUpid": {
+          "shape": "__string",
+          "locationName": "segmentationUpid",
+          "documentation": "SCTE-35 segmentation_descriptor segmentation_upid as a hex string."
+        },
+        "SegmentationUpidType": {
+          "shape": "__integerMin0Max255",
+          "locationName": "segmentationUpidType",
+          "documentation": "SCTE-35 segmentation_descriptor segmentation_upid_type."
+        },
+        "SegmentsExpected": {
+          "shape": "__integerMin0Max255",
+          "locationName": "segmentsExpected",
+          "documentation": "SCTE-35 segmentation_descriptor segments_expected."
+        },
+        "SubSegmentNum": {
+          "shape": "__integerMin0Max255",
+          "locationName": "subSegmentNum",
+          "documentation": "SCTE-35 segmentation_descriptor sub_segment_num."
+        },
+        "SubSegmentsExpected": {
+          "shape": "__integerMin0Max255",
+          "locationName": "subSegmentsExpected",
+          "documentation": "SCTE-35 segmentation_descriptor sub_segments_expected."
+        }
+      },
+      "documentation": "SCTE-35 Segmentation Descriptor.",
+      "required": [
+        "SegmentationEventId",
+        "SegmentationCancelIndicator"
+      ]
     },
     "Scte35SpliceInsert": {
       "type": "structure",
@@ -7009,6 +7071,25 @@
       ],
       "documentation": "Placeholder documentation for Scte35SpliceInsertNoRegionalBlackoutBehavior"
     },
+    "Scte35SpliceInsertScheduleActionSettings": {
+      "type": "structure",
+      "members": {
+        "Duration": {
+          "shape": "__integerMin0Max8589934591",
+          "locationName": "duration",
+          "documentation": "The duration for the SCTE-35 splice_insert specified in 90KHz clock ticks. When duration is not specified the expectation is that a Scte35ReturnToNetwork action will be scheduled."
+        },
+        "SpliceEventId": {
+          "shape": "__integerMin0Max4294967295",
+          "locationName": "spliceEventId",
+          "documentation": "The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35."
+        }
+      },
+      "documentation": "SCTE-35 Splice Insert Settings.",
+      "required": [
+        "SpliceEventId"
+      ]
+    },
     "Scte35SpliceInsertWebDeliveryAllowedBehavior": {
       "type": "string",
       "enum": [
@@ -7037,6 +7118,28 @@
         }
       },
       "documentation": "Placeholder documentation for Scte35TimeSignalApos"
+    },
+    "Scte35TimeSignalScheduleActionSettings": {
+      "type": "structure",
+      "members": {
+        "Scte35Descriptors": {
+          "shape": "__listOfScte35Descriptor",
+          "locationName": "scte35Descriptors",
+          "documentation": "The list of SCTE-35 descriptors accompanying the SCTE-35 time_signal."
+        }
+      },
+      "documentation": "SCTE-35 Time Signal Settings.",
+      "required": [
+        "Scte35Descriptors"
+      ]
+    },
+    "Scte35WebDeliveryAllowedFlag": {
+      "type": "string",
+      "documentation": "SCTE-35 segmentation_descriptor web_delivery_allowed_flag.",
+      "enum": [
+        "WEB_DELIVERY_NOT_ALLOWED",
+        "WEB_DELIVERY_ALLOWED"
+      ]
     },
     "SmoothGroupAudioOnlyTimecodeControl": {
       "type": "string",
@@ -7105,8 +7208,7 @@
     },
     "SmpteTtDestinationSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for SmpteTtDestinationSettings"
     },
     "StandardHlsSettings": {
@@ -7204,6 +7306,81 @@
         }
       },
       "documentation": "Placeholder documentation for StartChannelResponse"
+    },
+    "StaticImageActivateScheduleActionSettings": {
+      "type": "structure",
+      "members": {
+        "Duration": {
+          "shape": "__integerMin0",
+          "locationName": "duration",
+          "documentation": "The duration in milliseconds for the image to remain in the video. If omitted or set to 0, duration is infinite and image will remain until explicitly deactivated."
+        },
+        "FadeIn": {
+          "shape": "__integerMin0",
+          "locationName": "fadeIn",
+          "documentation": "The time in milliseconds for the image to fade in. Defaults to 0."
+        },
+        "FadeOut": {
+          "shape": "__integerMin0",
+          "locationName": "fadeOut",
+          "documentation": "The time in milliseconds for the image to fade out. Defaults to 0."
+        },
+        "Height": {
+          "shape": "__integerMin1",
+          "locationName": "height",
+          "documentation": "The height of the image when inserted into the video.  Defaults to the native height of the image."
+        },
+        "Image": {
+          "shape": "InputLocation",
+          "locationName": "image",
+          "documentation": "The image to overlay on the video.  Must be a 32 bit BMP, PNG, or TGA file.  Must not be larger than the input video."
+        },
+        "ImageX": {
+          "shape": "__integerMin0",
+          "locationName": "imageX",
+          "documentation": "Placement of the left edge of the image on the horizontal axis in pixels. 0 is the left edge of the frame. Defaults to 0."
+        },
+        "ImageY": {
+          "shape": "__integerMin0",
+          "locationName": "imageY",
+          "documentation": "Placement of the top edge of the image on the vertical axis in pixels.  0 is the top edge of the frame. Defaults to 0."
+        },
+        "Layer": {
+          "shape": "__integerMin0Max7",
+          "locationName": "layer",
+          "documentation": "The Z order of the inserted image.  Images with higher layer values will be inserted on top of images with lower layer values. Permitted values are 0-7 inclusive. Defaults to 0."
+        },
+        "Opacity": {
+          "shape": "__integerMin0Max100",
+          "locationName": "opacity",
+          "documentation": "Opacity of image where 0 is transparent and 100 is fully opaque. Defaults to 100."
+        },
+        "Width": {
+          "shape": "__integerMin1",
+          "locationName": "width",
+          "documentation": "The width of the image when inserted into the video.  Defaults to the native width of the image."
+        }
+      },
+      "documentation": "Static image activate.",
+      "required": [
+        "Image"
+      ]
+    },
+    "StaticImageDeactivateScheduleActionSettings": {
+      "type": "structure",
+      "members": {
+        "FadeOut": {
+          "shape": "__integerMin0",
+          "locationName": "fadeOut",
+          "documentation": "The time in milliseconds for the image to fade out. Defaults to 0."
+        },
+        "Layer": {
+          "shape": "__integerMin0Max7",
+          "locationName": "layer",
+          "documentation": "The Z order of the inserted image.  Images with higher layer values will be inserted on top of images with lower layer values. Permitted values are 0-7 inclusive. Defaults to 0."
+        }
+      },
+      "documentation": "Static image deactivate."
     },
     "StaticKeySettings": {
       "type": "structure",
@@ -7304,8 +7481,7 @@
     },
     "TeletextDestinationSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for TeletextDestinationSettings"
     },
     "TeletextSourceSettings": {
@@ -7346,20 +7522,6 @@
         "ZEROBASED"
       ],
       "documentation": "Placeholder documentation for TimecodeConfigSource"
-    },
-    "TooManyRequestsException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 429
-      },
-      "documentation": "Placeholder documentation for TooManyRequestsException"
     },
     "TtmlDestinationSettings": {
       "type": "structure",
@@ -7449,65 +7611,6 @@
       ],
       "documentation": "Placeholder documentation for UdpTimedMetadataId3Frame"
     },
-    "UnprocessableEntityException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "shape": "__string",
-          "locationName": "message"
-        },
-        "ValidationErrors": {
-          "shape": "__listOfValidationError",
-          "locationName": "validationErrors",
-          "documentation": "A collection of validation error responses from attempting to create a channel with a bouquet of settings."
-        }
-      },
-      "exception": true,
-      "error": {
-        "httpStatusCode": 422
-      },
-      "documentation": "Placeholder documentation for UnprocessableEntityException"
-    },
-    "UpdateChannel": {
-      "type": "structure",
-      "members": {
-        "Destinations": {
-          "shape": "__listOfOutputDestination",
-          "locationName": "destinations",
-          "documentation": "A list of output destinations for this channel."
-        },
-        "EncoderSettings": {
-          "shape": "EncoderSettings",
-          "locationName": "encoderSettings",
-          "documentation": "The encoder settings for this channel."
-        },
-        "InputAttachments": {
-          "shape": "__listOfInputAttachment",
-          "locationName": "inputAttachments"
-        },
-        "InputSpecification": {
-          "shape": "InputSpecification",
-          "locationName": "inputSpecification",
-          "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
-        },
-        "LogLevel": {
-          "shape": "LogLevel",
-          "locationName": "logLevel",
-          "documentation": "The log level to write to CloudWatch Logs."
-        },
-        "Name": {
-          "shape": "__string",
-          "locationName": "name",
-          "documentation": "The name of the channel."
-        },
-        "RoleArn": {
-          "shape": "__string",
-          "locationName": "roleArn",
-          "documentation": "An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed."
-        }
-      },
-      "documentation": "Placeholder documentation for UpdateChannel"
-    },
     "UpdateChannelRequest": {
       "type": "structure",
       "members": {
@@ -7567,42 +7670,6 @@
       },
       "documentation": "Placeholder documentation for UpdateChannelResponse"
     },
-    "UpdateChannelResultModel": {
-      "type": "structure",
-      "members": {
-        "Channel": {
-          "shape": "Channel",
-          "locationName": "channel"
-        }
-      },
-      "documentation": "The updated channel's description."
-    },
-    "UpdateInput": {
-      "type": "structure",
-      "members": {
-        "Destinations": {
-          "shape": "__listOfInputDestinationRequest",
-          "locationName": "destinations",
-          "documentation": "Destination settings for PUSH type inputs."
-        },
-        "InputSecurityGroups": {
-          "shape": "__listOf__string",
-          "locationName": "inputSecurityGroups",
-          "documentation": "A list of security groups referenced by IDs to attach to the input."
-        },
-        "Name": {
-          "shape": "__string",
-          "locationName": "name",
-          "documentation": "Name of the input."
-        },
-        "Sources": {
-          "shape": "__listOfInputSourceRequest",
-          "locationName": "sources",
-          "documentation": "The source URLs for a PULL-type input. Every PULL type input needs\nexactly two source URLs for redundancy.\nOnly specify sources for PULL type Inputs. Leave Destinations empty.\n"
-        }
-      },
-      "documentation": "Placeholder documentation for UpdateInput"
-    },
     "UpdateInputRequest": {
       "type": "structure",
       "members": {
@@ -7648,16 +7715,6 @@
       },
       "documentation": "Placeholder documentation for UpdateInputResponse"
     },
-    "UpdateInputResultModel": {
-      "type": "structure",
-      "members": {
-        "Input": {
-          "shape": "Input",
-          "locationName": "input"
-        }
-      },
-      "documentation": "Placeholder documentation for UpdateInputResultModel"
-    },
     "UpdateInputSecurityGroupRequest": {
       "type": "structure",
       "members": {
@@ -7687,30 +7744,6 @@
         }
       },
       "documentation": "Placeholder documentation for UpdateInputSecurityGroupResponse"
-    },
-    "UpdateInputSecurityGroupResultModel": {
-      "type": "structure",
-      "members": {
-        "SecurityGroup": {
-          "shape": "InputSecurityGroup",
-          "locationName": "securityGroup"
-        }
-      },
-      "documentation": "Placeholder documentation for UpdateInputSecurityGroupResultModel"
-    },
-    "ValidationError": {
-      "type": "structure",
-      "members": {
-        "ElementPath": {
-          "shape": "__string",
-          "locationName": "elementPath"
-        },
-        "ErrorMessage": {
-          "shape": "__string",
-          "locationName": "errorMessage"
-        }
-      },
-      "documentation": "Placeholder documentation for ValidationError"
     },
     "VideoCodecSettings": {
       "type": "structure",
@@ -7859,13 +7892,8 @@
     },
     "WebvttDestinationSettings": {
       "type": "structure",
-      "members": {
-      },
+      "members": {},
       "documentation": "Placeholder documentation for WebvttDestinationSettings"
-    },
-    "__boolean": {
-      "type": "boolean",
-      "documentation": "Placeholder documentation for __boolean"
     },
     "__double": {
       "type": "double",
@@ -7922,6 +7950,12 @@
       "max": 1000000,
       "documentation": "Placeholder documentation for __integerMin0Max1000000"
     },
+    "__integerMin0Max1099511627775": {
+      "type": "long",
+      "min": 0,
+      "max": 1099511627775,
+      "documentation": "Unsigned 40-bit integer."
+    },
     "__integerMin0Max128": {
       "type": "integer",
       "min": 0,
@@ -7951,6 +7985,12 @@
       "min": 0,
       "max": 3600,
       "documentation": "Placeholder documentation for __integerMin0Max3600"
+    },
+    "__integerMin0Max4294967295": {
+      "type": "long",
+      "min": 0,
+      "max": 4294967295,
+      "documentation": "Unsigned 32-bit integer."
     },
     "__integerMin0Max500": {
       "type": "integer",
@@ -7987,6 +8027,12 @@
       "min": 0,
       "max": 8191,
       "documentation": "Placeholder documentation for __integerMin0Max8191"
+    },
+    "__integerMin0Max8589934591": {
+      "type": "long",
+      "min": 0,
+      "max": 8589934591,
+      "documentation": "Unsigned 33-bit integer."
     },
     "__integerMin1": {
       "type": "integer",
@@ -8285,12 +8331,19 @@
       },
       "documentation": "Placeholder documentation for __listOfReservation"
     },
-    "__listOfValidationError": {
+    "__listOfScheduleAction": {
       "type": "list",
       "member": {
-        "shape": "ValidationError"
+        "shape": "ScheduleAction"
       },
-      "documentation": "Placeholder documentation for __listOfValidationError"
+      "documentation": "The list of schedule actions."
+    },
+    "__listOfScte35Descriptor": {
+      "type": "list",
+      "member": {
+        "shape": "Scte35Descriptor"
+      },
+      "documentation": "List of Scte35 descriptors"
     },
     "__listOfVideoDescription": {
       "type": "list",
@@ -8305,10 +8358,6 @@
         "shape": "__string"
       },
       "documentation": "Placeholder documentation for __listOf__string"
-    },
-    "__long": {
-      "type": "long",
-      "documentation": "Placeholder documentation for __long"
     },
     "__string": {
       "type": "string",

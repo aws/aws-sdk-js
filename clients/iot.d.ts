@@ -2778,7 +2778,7 @@ declare namespace Iot {
   }
   export interface DescribeEndpointRequest {
     /**
-     * The endpoint type.
+     * The endpoint type (such as iot:Data, iot:CredentialProvider and iot:Jobs). 
      */
     endpointType?: EndpointType;
   }
@@ -3345,6 +3345,10 @@ declare namespace Iot {
      * Thing indexing configuration.
      */
     thingIndexingConfiguration?: ThingIndexingConfiguration;
+    /**
+     * The index configuration.
+     */
+    thingGroupIndexingConfiguration?: ThingGroupIndexingConfiguration;
   }
   export interface GetJobDocumentRequest {
     /**
@@ -5410,6 +5414,10 @@ declare namespace Iot {
      * The things that match the search query.
      */
     things?: ThingDocumentList;
+    /**
+     * The thing groups that match the search query.
+     */
+    thingGroups?: ThingGroupDocumentList;
   }
   export type SearchableAttributes = AttributeName[];
   export type Seconds = number;
@@ -5841,7 +5849,37 @@ declare namespace Iot {
   export type ThingDocumentList = ThingDocument[];
   export type ThingGroupArn = string;
   export type ThingGroupDescription = string;
+  export interface ThingGroupDocument {
+    /**
+     * The thing group name.
+     */
+    thingGroupName?: ThingGroupName;
+    /**
+     * The thing group ID.
+     */
+    thingGroupId?: ThingGroupId;
+    /**
+     * The thing group description.
+     */
+    thingGroupDescription?: ThingGroupDescription;
+    /**
+     * The thing group attributes.
+     */
+    attributes?: Attributes;
+    /**
+     * Parent group names.
+     */
+    parentGroupNames?: ThingGroupNameList;
+  }
+  export type ThingGroupDocumentList = ThingGroupDocument[];
   export type ThingGroupId = string;
+  export interface ThingGroupIndexingConfiguration {
+    /**
+     * Thing group indexing mode.
+     */
+    thingGroupIndexingMode: ThingGroupIndexingMode;
+  }
+  export type ThingGroupIndexingMode = "OFF"|"ON"|string;
   export type ThingGroupList = ThingGroupName[];
   export interface ThingGroupMetadata {
     /**
@@ -5875,7 +5913,7 @@ declare namespace Iot {
     /**
      * Thing indexing mode. Valid values are:    REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.   OFF - Thing indexing is disabled.  
      */
-    thingIndexingMode?: ThingIndexingMode;
+    thingIndexingMode: ThingIndexingMode;
   }
   export type ThingIndexingMode = "OFF"|"REGISTRY"|"REGISTRY_AND_SHADOW"|string;
   export type ThingName = string;
@@ -6155,6 +6193,10 @@ declare namespace Iot {
      * Thing indexing configuration.
      */
     thingIndexingConfiguration?: ThingIndexingConfiguration;
+    /**
+     * Thing group indexing configuration.
+     */
+    thingGroupIndexingConfiguration?: ThingGroupIndexingConfiguration;
   }
   export interface UpdateIndexingConfigurationResponse {
   }

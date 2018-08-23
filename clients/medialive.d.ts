@@ -12,6 +12,14 @@ declare class MediaLive extends Service {
   constructor(options?: MediaLive.Types.ClientConfiguration)
   config: Config & MediaLive.Types.ClientConfiguration;
   /**
+   * Update a channel schedule
+   */
+  batchUpdateSchedule(params: MediaLive.Types.BatchUpdateScheduleRequest, callback?: (err: AWSError, data: MediaLive.Types.BatchUpdateScheduleResponse) => void): Request<MediaLive.Types.BatchUpdateScheduleResponse, AWSError>;
+  /**
+   * Update a channel schedule
+   */
+  batchUpdateSchedule(callback?: (err: AWSError, data: MediaLive.Types.BatchUpdateScheduleResponse) => void): Request<MediaLive.Types.BatchUpdateScheduleResponse, AWSError>;
+  /**
    * Creates a new channel
    */
   createChannel(params: MediaLive.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateChannelResponse) => void): Request<MediaLive.Types.CreateChannelResponse, AWSError>;
@@ -107,6 +115,14 @@ declare class MediaLive extends Service {
    * Get details for a reservation.
    */
   describeReservation(callback?: (err: AWSError, data: MediaLive.Types.DescribeReservationResponse) => void): Request<MediaLive.Types.DescribeReservationResponse, AWSError>;
+  /**
+   * Get a channel schedule
+   */
+  describeSchedule(params: MediaLive.Types.DescribeScheduleRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeScheduleResponse) => void): Request<MediaLive.Types.DescribeScheduleResponse, AWSError>;
+  /**
+   * Get a channel schedule
+   */
+  describeSchedule(callback?: (err: AWSError, data: MediaLive.Types.DescribeScheduleResponse) => void): Request<MediaLive.Types.DescribeScheduleResponse, AWSError>;
   /**
    * Produces list of channels that have been created
    */
@@ -471,6 +487,54 @@ Alternate rendition that the client will not try to play back by default. Repres
   export interface AvailSettings {
     Scte35SpliceInsert?: Scte35SpliceInsert;
     Scte35TimeSignalApos?: Scte35TimeSignalApos;
+  }
+  export interface BatchScheduleActionCreateRequest {
+    /**
+     * A list of schedule actions to create.
+     */
+    ScheduleActions: __listOfScheduleAction;
+  }
+  export interface BatchScheduleActionCreateResult {
+    /**
+     * Returned list of created schedule actions.
+     */
+    ScheduleActions: __listOfScheduleAction;
+  }
+  export interface BatchScheduleActionDeleteRequest {
+    /**
+     * A list of schedule actions to delete, identified by unique name.
+     */
+    ActionNames: __listOf__string;
+  }
+  export interface BatchScheduleActionDeleteResult {
+    /**
+     * Returned list of deleted schedule actions.
+     */
+    ScheduleActions: __listOfScheduleAction;
+  }
+  export interface BatchUpdateScheduleRequest {
+    /**
+     * Id of the channel whose schedule is being updated.
+     */
+    ChannelId: __string;
+    /**
+     * Schedule actions to create in the schedule.
+     */
+    Creates?: BatchScheduleActionCreateRequest;
+    /**
+     * Schedule actions to delete from the schedule.
+     */
+    Deletes?: BatchScheduleActionDeleteRequest;
+  }
+  export interface BatchUpdateScheduleResponse {
+    /**
+     * Schedule actions created in the schedule.
+     */
+    Creates?: BatchScheduleActionCreateResult;
+    /**
+     * Schedule actions deleted from the schedule.
+     */
+    Deletes?: BatchScheduleActionDeleteResult;
   }
   export interface BlackoutSlate {
     /**
@@ -1201,6 +1265,24 @@ one destination per packager.
      */
     UsagePrice?: __double;
   }
+  export interface DescribeScheduleRequest {
+    /**
+     * Id of the channel whose schedule is being updated.
+     */
+    ChannelId: __string;
+    MaxResults?: MaxResults;
+    NextToken?: __string;
+  }
+  export interface DescribeScheduleResponse {
+    /**
+     * The next token; for use in pagination.
+     */
+    NextToken?: __string;
+    /**
+     * The list of schedule actions.
+     */
+    ScheduleActions?: __listOfScheduleAction;
+  }
   export interface DvbNitSettings {
     /**
      * The numeric value placed in the Network Information Table (NIT).
@@ -1487,6 +1569,12 @@ one destination per packager.
     RowLength?: __integerMin1Max20;
   }
   export type FixedAfd = "AFD_0000"|"AFD_0010"|"AFD_0011"|"AFD_0100"|"AFD_1000"|"AFD_1001"|"AFD_1010"|"AFD_1011"|"AFD_1101"|"AFD_1110"|"AFD_1111"|string;
+  export interface FixedModeScheduleActionStartSettings {
+    /**
+     * Fixed timestamp action start. Conforms to ISO-8601.
+     */
+    Time?: __string;
+  }
   export interface GlobalConfiguration {
     /**
      * Value to set the initial audio gain for the Live Event.
@@ -3065,6 +3153,48 @@ Valid values: 1, 2, 4, 6, 8
      */
     NumRetries?: __integerMin0;
   }
+  export interface ScheduleAction {
+    /**
+     * The name of the action, must be unique within the schedule.
+     */
+    ActionName: __string;
+    /**
+     * Settings for this schedule action.
+     */
+    ScheduleActionSettings: ScheduleActionSettings;
+    /**
+     * When the action takes effect.
+     */
+    ScheduleActionStartSettings: ScheduleActionStartSettings;
+  }
+  export interface ScheduleActionSettings {
+    /**
+     * SCTE-35 Return to Network Settings
+     */
+    Scte35ReturnToNetworkSettings?: Scte35ReturnToNetworkScheduleActionSettings;
+    /**
+     * SCTE-35 Splice Insert Settings
+     */
+    Scte35SpliceInsertSettings?: Scte35SpliceInsertScheduleActionSettings;
+    /**
+     * SCTE-35 Time Signal Settings
+     */
+    Scte35TimeSignalSettings?: Scte35TimeSignalScheduleActionSettings;
+    /**
+     * Static Image Activate
+     */
+    StaticImageActivateSettings?: StaticImageActivateScheduleActionSettings;
+    /**
+     * Static Image Deactivate
+     */
+    StaticImageDeactivateSettings?: StaticImageDeactivateScheduleActionSettings;
+  }
+  export interface ScheduleActionStartSettings {
+    /**
+     * Fixed timestamp action start. Conforms to ISO-8601.
+     */
+    FixedModeScheduleActionStartSettings?: FixedModeScheduleActionStartSettings;
+  }
   export type Scte20Convert608To708 = "DISABLED"|"UPCONVERT"|string;
   export interface Scte20PlusEmbeddedDestinationSettings {
   }
@@ -3092,6 +3222,92 @@ Valid values: 1, 2, 4, 6, 8
   }
   export type Scte35AposNoRegionalBlackoutBehavior = "FOLLOW"|"IGNORE"|string;
   export type Scte35AposWebDeliveryAllowedBehavior = "FOLLOW"|"IGNORE"|string;
+  export type Scte35ArchiveAllowedFlag = "ARCHIVE_NOT_ALLOWED"|"ARCHIVE_ALLOWED"|string;
+  export interface Scte35DeliveryRestrictions {
+    /**
+     * SCTE-35 segmentation_descriptor archive_allowed_flag.
+     */
+    ArchiveAllowedFlag: Scte35ArchiveAllowedFlag;
+    /**
+     * SCTE-35 segmentation_descriptor web_delivery_allowed_flag.
+     */
+    DeviceRestrictions: Scte35DeviceRestrictions;
+    /**
+     * SCTE-35 segmentation_descriptor no_regional_blackout_flag.
+     */
+    NoRegionalBlackoutFlag: Scte35NoRegionalBlackoutFlag;
+    /**
+     * SCTE-35 segmentation_descriptor web_delivery_allowed_flag.
+     */
+    WebDeliveryAllowedFlag: Scte35WebDeliveryAllowedFlag;
+  }
+  export interface Scte35Descriptor {
+    /**
+     * SCTE-35 Descriptor Settings.
+     */
+    Scte35DescriptorSettings: Scte35DescriptorSettings;
+  }
+  export interface Scte35DescriptorSettings {
+    /**
+     * SCTE-35 Segmentation Descriptor.
+     */
+    SegmentationDescriptorScte35DescriptorSettings: Scte35SegmentationDescriptor;
+  }
+  export type Scte35DeviceRestrictions = "NONE"|"RESTRICT_GROUP0"|"RESTRICT_GROUP1"|"RESTRICT_GROUP2"|string;
+  export type Scte35NoRegionalBlackoutFlag = "REGIONAL_BLACKOUT"|"NO_REGIONAL_BLACKOUT"|string;
+  export interface Scte35ReturnToNetworkScheduleActionSettings {
+    /**
+     * The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
+     */
+    SpliceEventId: __integerMin0Max4294967295;
+  }
+  export type Scte35SegmentationCancelIndicator = "SEGMENTATION_EVENT_NOT_CANCELED"|"SEGMENTATION_EVENT_CANCELED"|string;
+  export interface Scte35SegmentationDescriptor {
+    /**
+     * SCTE-35 delivery restrictions.
+     */
+    DeliveryRestrictions?: Scte35DeliveryRestrictions;
+    /**
+     * SCTE-35 segmentation_descriptor segment_num.
+     */
+    SegmentNum?: __integerMin0Max255;
+    /**
+     * SCTE-35 segmentation_descriptor segmentation_event_cancel_indicator.
+     */
+    SegmentationCancelIndicator: Scte35SegmentationCancelIndicator;
+    /**
+     * SCTE-35 segmentation_descriptor segmentation_duration specified in 90 KHz clock ticks.
+     */
+    SegmentationDuration?: __integerMin0Max1099511627775;
+    /**
+     * SCTE-35 segmentation_descriptor segmentation_event_id.
+     */
+    SegmentationEventId: __integerMin0Max4294967295;
+    /**
+     * SCTE-35 segmentation_descriptor segmentation_type_id.
+     */
+    SegmentationTypeId?: __integerMin0Max255;
+    /**
+     * SCTE-35 segmentation_descriptor segmentation_upid as a hex string.
+     */
+    SegmentationUpid?: __string;
+    /**
+     * SCTE-35 segmentation_descriptor segmentation_upid_type.
+     */
+    SegmentationUpidType?: __integerMin0Max255;
+    /**
+     * SCTE-35 segmentation_descriptor segments_expected.
+     */
+    SegmentsExpected?: __integerMin0Max255;
+    /**
+     * SCTE-35 segmentation_descriptor sub_segment_num.
+     */
+    SubSegmentNum?: __integerMin0Max255;
+    /**
+     * SCTE-35 segmentation_descriptor sub_segments_expected.
+     */
+    SubSegmentsExpected?: __integerMin0Max255;
+  }
   export interface Scte35SpliceInsert {
     /**
      * When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.
@@ -3107,6 +3323,16 @@ Valid values: 1, 2, 4, 6, 8
     WebDeliveryAllowedFlag?: Scte35SpliceInsertWebDeliveryAllowedBehavior;
   }
   export type Scte35SpliceInsertNoRegionalBlackoutBehavior = "FOLLOW"|"IGNORE"|string;
+  export interface Scte35SpliceInsertScheduleActionSettings {
+    /**
+     * The duration for the SCTE-35 splice_insert specified in 90KHz clock ticks. When duration is not specified the expectation is that a Scte35ReturnToNetwork action will be scheduled.
+     */
+    Duration?: __integerMin0Max8589934591;
+    /**
+     * The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
+     */
+    SpliceEventId: __integerMin0Max4294967295;
+  }
   export type Scte35SpliceInsertWebDeliveryAllowedBehavior = "FOLLOW"|"IGNORE"|string;
   export interface Scte35TimeSignalApos {
     /**
@@ -3122,6 +3348,13 @@ Valid values: 1, 2, 4, 6, 8
      */
     WebDeliveryAllowedFlag?: Scte35AposWebDeliveryAllowedBehavior;
   }
+  export interface Scte35TimeSignalScheduleActionSettings {
+    /**
+     * The list of SCTE-35 descriptors accompanying the SCTE-35 time_signal.
+     */
+    Scte35Descriptors: __listOfScte35Descriptor;
+  }
+  export type Scte35WebDeliveryAllowedFlag = "WEB_DELIVERY_NOT_ALLOWED"|"WEB_DELIVERY_ALLOWED"|string;
   export type SmoothGroupAudioOnlyTimecodeControl = "PASSTHROUGH"|"USE_CONFIGURED_CLOCK"|string;
   export type SmoothGroupCertificateMode = "SELF_SIGNED"|"VERIFY_AUTHENTICITY"|string;
   export type SmoothGroupEventIdMode = "NO_EVENT_ID"|"USE_CONFIGURED"|"USE_TIMESTAMP"|string;
@@ -3188,6 +3421,58 @@ one destination per packager.
      */
     RoleArn?: __string;
     State?: ChannelState;
+  }
+  export interface StaticImageActivateScheduleActionSettings {
+    /**
+     * The duration in milliseconds for the image to remain in the video. If omitted or set to 0, duration is infinite and image will remain until explicitly deactivated.
+     */
+    Duration?: __integerMin0;
+    /**
+     * The time in milliseconds for the image to fade in. Defaults to 0.
+     */
+    FadeIn?: __integerMin0;
+    /**
+     * The time in milliseconds for the image to fade out. Defaults to 0.
+     */
+    FadeOut?: __integerMin0;
+    /**
+     * The height of the image when inserted into the video.  Defaults to the native height of the image.
+     */
+    Height?: __integerMin1;
+    /**
+     * The image to overlay on the video.  Must be a 32 bit BMP, PNG, or TGA file.  Must not be larger than the input video.
+     */
+    Image: InputLocation;
+    /**
+     * Placement of the left edge of the image on the horizontal axis in pixels. 0 is the left edge of the frame. Defaults to 0.
+     */
+    ImageX?: __integerMin0;
+    /**
+     * Placement of the top edge of the image on the vertical axis in pixels.  0 is the top edge of the frame. Defaults to 0.
+     */
+    ImageY?: __integerMin0;
+    /**
+     * The Z order of the inserted image.  Images with higher layer values will be inserted on top of images with lower layer values. Permitted values are 0-7 inclusive. Defaults to 0.
+     */
+    Layer?: __integerMin0Max7;
+    /**
+     * Opacity of image where 0 is transparent and 100 is fully opaque. Defaults to 100.
+     */
+    Opacity?: __integerMin0Max100;
+    /**
+     * The width of the image when inserted into the video.  Defaults to the native width of the image.
+     */
+    Width?: __integerMin1;
+  }
+  export interface StaticImageDeactivateScheduleActionSettings {
+    /**
+     * The time in milliseconds for the image to fade out. Defaults to 0.
+     */
+    FadeOut?: __integerMin0;
+    /**
+     * The Z order of the inserted image.  Images with higher layer values will be inserted on top of images with lower layer values. Permitted values are 0-7 inclusive. Defaults to 0.
+     */
+    Layer?: __integerMin0Max7;
   }
   export interface StaticKeySettings {
     /**
@@ -3466,17 +3751,20 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __integerMin0Max1000 = number;
   export type __integerMin0Max10000 = number;
   export type __integerMin0Max1000000 = number;
+  export type __integerMin0Max1099511627775 = number;
   export type __integerMin0Max128 = number;
   export type __integerMin0Max15 = number;
   export type __integerMin0Max255 = number;
   export type __integerMin0Max30 = number;
   export type __integerMin0Max3600 = number;
+  export type __integerMin0Max4294967295 = number;
   export type __integerMin0Max500 = number;
   export type __integerMin0Max600 = number;
   export type __integerMin0Max65535 = number;
   export type __integerMin0Max65536 = number;
   export type __integerMin0Max7 = number;
   export type __integerMin0Max8191 = number;
+  export type __integerMin0Max8589934591 = number;
   export type __integerMin1 = number;
   export type __integerMin1000 = number;
   export type __integerMin1000Max30000 = number;
@@ -3523,6 +3811,8 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfOutputDestinationSettings = OutputDestinationSettings[];
   export type __listOfOutputGroup = OutputGroup[];
   export type __listOfReservation = Reservation[];
+  export type __listOfScheduleAction = ScheduleAction[];
+  export type __listOfScte35Descriptor = Scte35Descriptor[];
   export type __listOfVideoDescription = VideoDescription[];
   export type __listOf__string = __string[];
   export type __string = string;

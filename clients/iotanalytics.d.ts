@@ -36,21 +36,21 @@ declare class IoTAnalytics extends Service {
    */
   createChannel(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateChannelResponse) => void): Request<IoTAnalytics.Types.CreateChannelResponse, AWSError>;
   /**
-   * Creates a data set. A data set stores data retrieved from a data store by applying an SQL action.  This operation creates the skeleton of a data set. To populate the data set, call "CreateDatasetContent". 
+   * Creates a data set. A data set stores data retrieved from a data store by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application). This operation creates the skeleton of a data set. The data set can be populated manually by calling "CreateDatasetContent" or automatically according to a "trigger" you specify.
    */
   createDataset(params: IoTAnalytics.Types.CreateDatasetRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetResponse) => void): Request<IoTAnalytics.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates a data set. A data set stores data retrieved from a data store by applying an SQL action.  This operation creates the skeleton of a data set. To populate the data set, call "CreateDatasetContent". 
+   * Creates a data set. A data set stores data retrieved from a data store by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application). This operation creates the skeleton of a data set. The data set can be populated manually by calling "CreateDatasetContent" or automatically according to a "trigger" you specify.
    */
   createDataset(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetResponse) => void): Request<IoTAnalytics.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates the content of a data set by applying an SQL action.
+   * Creates the content of a data set by applying a SQL action.
    */
-  createDatasetContent(params: IoTAnalytics.Types.CreateDatasetContentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createDatasetContent(params: IoTAnalytics.Types.CreateDatasetContentRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetContentResponse) => void): Request<IoTAnalytics.Types.CreateDatasetContentResponse, AWSError>;
   /**
-   * Creates the content of a data set by applying an SQL action.
+   * Creates the content of a data set by applying a SQL action.
    */
-  createDatasetContent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createDatasetContent(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetContentResponse) => void): Request<IoTAnalytics.Types.CreateDatasetContentResponse, AWSError>;
   /**
    * Creates a data store, which is a repository for messages.
    */
@@ -407,6 +407,25 @@ declare namespace IoTAnalytics {
      */
     lastUpdateTime?: Timestamp;
   }
+  export type ComputeType = "ACU_1"|"ACU_2"|string;
+  export interface ContainerDatasetAction {
+    /**
+     * The ARN of the Docker container stored in your account. The Docker container contains an application and needed support libraries and is used to generate data set contents.
+     */
+    image: Image;
+    /**
+     * The ARN of the role which gives permission to the system to access needed resources in order to run the "containerAction". This includes, at minimum, permission to retrieve the data set contents which are the input to the containerized application.
+     */
+    executionRoleArn: RoleArn;
+    /**
+     * Configuration of the resource which executes the "containerAction".
+     */
+    resourceConfiguration: ResourceConfiguration;
+    /**
+     * The values of variables used within the context of the execution of the containerized application (basically, parameters passed to the application). Each variable must have a name and a value given by one of "stringValue", "datasetContentVersionValue", or "outputFileUriValue".
+     */
+    variables?: Variables;
+  }
   export interface CreateChannelRequest {
     /**
      * The name of the channel.
@@ -441,19 +460,29 @@ declare namespace IoTAnalytics {
      */
     datasetName: DatasetName;
   }
+  export interface CreateDatasetContentResponse {
+    /**
+     * The version ID of the data set contents which are being created.
+     */
+    versionId?: DatasetContentVersion;
+  }
   export interface CreateDatasetRequest {
     /**
      * The name of the data set.
      */
     datasetName: DatasetName;
     /**
-     * A list of actions that create the data set. Only one action is supported at this time.
+     * A list of actions that create the data set contents.
      */
     actions: DatasetActions;
     /**
-     * A list of triggers. A trigger causes data set content to be populated at a specified time or time interval. The list of triggers can be empty or contain up to five DataSetTrigger objects.
+     * A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five DataSetTrigger objects.
      */
     triggers?: DatasetTriggers;
+    /**
+     * [Optional] How long, in days, message data is kept for the data set. If not given or set to null, the latest version of the dataset content plus the latest succeeded version (if they are different) are retained for at most 90 days.
+     */
+    retentionPeriod?: RetentionPeriod;
     /**
      * Metadata which can be used to manage the data set.
      */
@@ -468,6 +497,10 @@ declare namespace IoTAnalytics {
      * The ARN of the data set.
      */
     datasetArn?: DatasetArn;
+    /**
+     * How long, in days, message data is kept for the data set.
+     */
+    retentionPeriod?: RetentionPeriod;
   }
   export interface CreateDatastoreRequest {
     /**
@@ -531,7 +564,7 @@ declare namespace IoTAnalytics {
      */
     arn?: DatasetArn;
     /**
-     * The "DatasetAction" objects that create the data set.
+     * The "DatasetAction" objects that automatically create the data set contents.
      */
     actions?: DatasetActions;
     /**
@@ -550,32 +583,58 @@ declare namespace IoTAnalytics {
      * The last time the data set was updated.
      */
     lastUpdateTime?: Timestamp;
+    /**
+     * [Optional] How long, in days, message data is kept for the data set.
+     */
+    retentionPeriod?: RetentionPeriod;
   }
   export interface DatasetAction {
     /**
-     * The name of the data set action.
+     * The name of the data set action by which data set contents are automatically created.
      */
     actionName?: DatasetActionName;
     /**
      * An "SqlQueryDatasetAction" object that contains the SQL query to modify the message.
      */
     queryAction?: SqlQueryDatasetAction;
+    /**
+     * Information which allows the system to run a containerized application in order to create the data set contents. The application must be in a Docker container along with any needed support libraries.
+     */
+    containerAction?: ContainerDatasetAction;
   }
   export type DatasetActionName = string;
+  export type DatasetActionSummaries = DatasetActionSummary[];
+  export interface DatasetActionSummary {
+    /**
+     * The name of the action which automatically creates the data set's contents.
+     */
+    actionName?: DatasetActionName;
+    /**
+     * The type of action by which the data set's contents are automatically created.
+     */
+    actionType?: DatasetActionType;
+  }
+  export type DatasetActionType = "QUERY"|"CONTAINER"|string;
   export type DatasetActions = DatasetAction[];
   export type DatasetArn = string;
   export type DatasetContentState = "CREATING"|"SUCCEEDED"|"FAILED"|string;
   export interface DatasetContentStatus {
     /**
-     * The state of the data set. Can be one of "CREATING", "SUCCEEDED" or "FAILED".
+     * The state of the data set contents. Can be one of "READY", "CREATING", "SUCCEEDED" or "FAILED".
      */
     state?: DatasetContentState;
     /**
-     * The reason the data set is in this state.
+     * The reason the data set contents are in this state.
      */
     reason?: Reason;
   }
   export type DatasetContentVersion = string;
+  export interface DatasetContentVersionValue {
+    /**
+     * The name of the data set whose latest contents will be used as input to the notebook or application.
+     */
+    datasetName: DatasetName;
+  }
   export type DatasetEntries = DatasetEntry[];
   export interface DatasetEntry {
     /**
@@ -607,12 +666,24 @@ declare namespace IoTAnalytics {
      * The last time the data set was updated.
      */
     lastUpdateTime?: Timestamp;
+    /**
+     * A list of triggers. A trigger causes data set content to be populated at a specified time interval or when another data set is populated. The list of triggers can be empty or contain up to five DataSetTrigger objects
+     */
+    triggers?: DatasetTriggers;
+    /**
+     * A list of "DataActionSummary" objects.
+     */
+    actions?: DatasetActionSummaries;
   }
   export interface DatasetTrigger {
     /**
      * The "Schedule" when the trigger is initiated.
      */
     schedule?: Schedule;
+    /**
+     * The data set whose content creation will trigger the creation of this data set's contents.
+     */
+    dataset?: TriggeringDataset;
   }
   export type DatasetTriggers = DatasetTrigger[];
   export interface Datastore {
@@ -713,13 +784,23 @@ declare namespace IoTAnalytics {
      */
     pipelineName: PipelineName;
   }
+  export interface DeltaTime {
+    /**
+     * The number of seconds of estimated "in flight" lag time of message data.
+     */
+    offsetSeconds: OffsetSeconds;
+    /**
+     * An expression by which the time of the message data may be determined. This may be the name of a timestamp field, or a SQL expression which is used to derive the time the message data was generated.
+     */
+    timeExpression: TimeExpression;
+  }
   export interface DescribeChannelRequest {
     /**
      * The name of the channel whose information is retrieved.
      */
     channelName: ChannelName;
     /**
-     * If true, include statistics about the channel in the response.
+     * If true, additional statistical information about the channel is included in the response.
      */
     includeStatistics?: IncludeStatisticsFlag;
   }
@@ -751,7 +832,7 @@ declare namespace IoTAnalytics {
      */
     datastoreName: DatastoreName;
     /**
-     * If true, include statistics about the data store in the response.
+     * If true, additional statistical information about the datastore is included in the response.
      */
     includeStatistics?: IncludeStatisticsFlag;
   }
@@ -761,7 +842,7 @@ declare namespace IoTAnalytics {
      */
     datastore?: Datastore;
     /**
-     * Statistics about the data store. Included if the 'includeStatistics' parameter is set to true in the request.
+     * Additional statistical information about the data store. Included if the 'includeStatistics' parameter is set to true in the request.
      */
     statistics?: DatastoreStatistics;
   }
@@ -829,6 +910,7 @@ declare namespace IoTAnalytics {
      */
     next?: ActivityName;
   }
+  export type DoubleValue = number;
   export type EndTime = Date;
   export type EntryName = string;
   export type ErrorCode = string;
@@ -849,7 +931,7 @@ declare namespace IoTAnalytics {
      */
     name: ActivityName;
     /**
-     * An expression that looks like an SQL WHERE clause that must return a Boolean value.
+     * An expression that looks like a SQL WHERE clause that must return a Boolean value.
      */
     filter: FilterExpression;
     /**
@@ -882,6 +964,7 @@ declare namespace IoTAnalytics {
      */
     status?: DatasetContentStatus;
   }
+  export type Image = string;
   export type IncludeStatisticsFlag = boolean;
   export interface LambdaActivity {
     /**
@@ -1047,6 +1130,14 @@ declare namespace IoTAnalytics {
   export type MessagePayloads = MessagePayload[];
   export type Messages = Message[];
   export type NextToken = string;
+  export type OffsetSeconds = number;
+  export type OutputFileName = string;
+  export interface OutputFileUriValue {
+    /**
+     * The URI of the location where data set contents are stored, usually the URI of a file in an S3 bucket.
+     */
+    fileName: OutputFileName;
+  }
   export interface Pipeline {
     /**
      * The name of the pipeline.
@@ -1144,6 +1235,13 @@ declare namespace IoTAnalytics {
      */
     loggingOptions: LoggingOptions;
   }
+  export interface QueryFilter {
+    /**
+     * Used to limit data to that which has arrived since the last execution of the action. When you create data set contents using message data from a specified time frame, some message data may still be "in flight" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the "in flight" time of you message data, so that data not processed from a previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.
+     */
+    deltaTime?: DeltaTime;
+  }
+  export type QueryFilters = QueryFilter[];
   export type Reason = string;
   export interface RemoveAttributesActivity {
     /**
@@ -1177,6 +1275,16 @@ declare namespace IoTAnalytics {
     creationTime?: Timestamp;
   }
   export type ResourceArn = string;
+  export interface ResourceConfiguration {
+    /**
+     * The type of the compute resource used to execute the "containerAction". Possible values are: ACU_1 (vCPU=4, memory=16GiB) or ACU_2 (vCPU=8, memory=32GiB).
+     */
+    computeType: ComputeType;
+    /**
+     * The size (in GB) of the persistent storage available to the resource instance used to execute the "containerAction" (min: 1, max: 50).
+     */
+    volumeSizeInGB: VolumeSizeInGB;
+  }
   export interface RetentionPeriod {
     /**
      * If true, message data is kept indefinitely.
@@ -1258,9 +1366,13 @@ declare namespace IoTAnalytics {
   export type SqlQuery = string;
   export interface SqlQueryDatasetAction {
     /**
-     * An SQL query string.
+     * A SQL query string.
      */
     sqlQuery: SqlQuery;
+    /**
+     * Pre-filters applied to message data.
+     */
+    filters?: QueryFilters;
   }
   export interface StartPipelineReprocessingRequest {
     /**
@@ -1283,6 +1395,7 @@ declare namespace IoTAnalytics {
     reprocessingId?: ReprocessingId;
   }
   export type StartTime = Date;
+  export type StringValue = string;
   export interface Tag {
     /**
      * The tag's key.
@@ -1309,7 +1422,14 @@ declare namespace IoTAnalytics {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TimeExpression = string;
   export type Timestamp = Date;
+  export interface TriggeringDataset {
+    /**
+     * The name of the data set whose content generation will trigger the new data set content generation.
+     */
+    name: DatasetName;
+  }
   export type UnlimitedRetentionPeriod = boolean;
   export interface UntagResourceRequest {
     /**
@@ -1339,13 +1459,17 @@ declare namespace IoTAnalytics {
      */
     datasetName: DatasetName;
     /**
-     * A list of "DatasetAction" objects. Only one action is supported at this time.
+     * A list of "DatasetAction" objects.
      */
     actions: DatasetActions;
     /**
      * A list of "DatasetTrigger" objects. The list can be empty or can contain up to five DataSetTrigger objects.
      */
     triggers?: DatasetTriggers;
+    /**
+     * How long, in days, message data is kept for the data set.
+     */
+    retentionPeriod?: RetentionPeriod;
   }
   export interface UpdateDatastoreRequest {
     /**
@@ -1367,6 +1491,31 @@ declare namespace IoTAnalytics {
      */
     pipelineActivities: PipelineActivities;
   }
+  export interface Variable {
+    /**
+     * The name of the variable.
+     */
+    name: VariableName;
+    /**
+     * The value of the variable as a string.
+     */
+    stringValue?: StringValue;
+    /**
+     * The value of the variable as a double (numeric).
+     */
+    doubleValue?: DoubleValue;
+    /**
+     * The value of the variable as a structure that specifies a data set content version.
+     */
+    datasetContentVersionValue?: DatasetContentVersionValue;
+    /**
+     * The value of the variable as a structure that specifies an output file URI.
+     */
+    outputFileUriValue?: OutputFileUriValue;
+  }
+  export type VariableName = string;
+  export type Variables = Variable[];
+  export type VolumeSizeInGB = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

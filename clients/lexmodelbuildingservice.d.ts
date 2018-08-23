@@ -1961,7 +1961,7 @@ declare namespace LexModelBuildingService {
      */
     responseCard?: ResponseCard;
   }
-  export type Status = "BUILDING"|"READY"|"FAILED"|"NOT_BUILT"|string;
+  export type Status = "BUILDING"|"READY"|"READY_BASIC_TESTING"|"FAILED"|"NOT_BUILT"|string;
   export type StatusType = "Detected"|"Missed"|string;
   export type String = string;
   export type StringList = String[];

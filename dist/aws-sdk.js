@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.299.0
+// AWS SDK for JavaScript v2.300.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -73993,6 +73993,9 @@ module.exports={
         "members": {
           "thingIndexingConfiguration": {
             "shape": "Sbi"
+          },
+          "thingGroupIndexingConfiguration": {
+            "shape": "Sbk"
           }
         }
       }
@@ -74343,7 +74346,7 @@ module.exports={
         "type": "structure",
         "members": {
           "policies": {
-            "shape": "Scm"
+            "shape": "Sco"
           },
           "nextMarker": {}
         }
@@ -74359,7 +74362,7 @@ module.exports={
           "taskId": {},
           "checkName": {},
           "resourceIdentifier": {
-            "shape": "Scp"
+            "shape": "Scr"
           },
           "maxResults": {
             "type": "integer"
@@ -74395,10 +74398,10 @@ module.exports={
                   "members": {
                     "resourceType": {},
                     "resourceIdentifier": {
-                      "shape": "Scp"
+                      "shape": "Scr"
                     },
                     "additionalInfo": {
-                      "shape": "Scx"
+                      "shape": "Scz"
                     }
                   }
                 },
@@ -74409,10 +74412,10 @@ module.exports={
                     "members": {
                       "resourceType": {},
                       "resourceIdentifier": {
-                        "shape": "Scp"
+                        "shape": "Scr"
                       },
                       "additionalInfo": {
-                        "shape": "Scx"
+                        "shape": "Scz"
                       }
                     }
                   }
@@ -74603,7 +74606,7 @@ module.exports={
         "type": "structure",
         "members": {
           "certificates": {
-            "shape": "Sdh"
+            "shape": "Sdj"
           },
           "nextMarker": {}
         }
@@ -74644,7 +74647,7 @@ module.exports={
         "type": "structure",
         "members": {
           "certificates": {
-            "shape": "Sdh"
+            "shape": "Sdj"
           },
           "nextMarker": {}
         }
@@ -74720,7 +74723,7 @@ module.exports={
               "members": {
                 "thingArn": {},
                 "jobExecutionSummary": {
-                  "shape": "Sdu"
+                  "shape": "Sdw"
                 }
               }
             }
@@ -74769,7 +74772,7 @@ module.exports={
               "members": {
                 "jobId": {},
                 "jobExecutionSummary": {
-                  "shape": "Sdu"
+                  "shape": "Sdw"
                 }
               }
             }
@@ -74962,7 +74965,7 @@ module.exports={
         "type": "structure",
         "members": {
           "policies": {
-            "shape": "Scm"
+            "shape": "Sco"
           },
           "nextMarker": {}
         }
@@ -75003,7 +75006,7 @@ module.exports={
         "type": "structure",
         "members": {
           "principals": {
-            "shape": "Sef"
+            "shape": "Seh"
           },
           "nextMarker": {}
         }
@@ -75083,7 +75086,7 @@ module.exports={
         "type": "structure",
         "members": {
           "policies": {
-            "shape": "Scm"
+            "shape": "Sco"
           },
           "nextMarker": {}
         }
@@ -75120,7 +75123,7 @@ module.exports={
         "type": "structure",
         "members": {
           "things": {
-            "shape": "Seq"
+            "shape": "Ses"
           },
           "nextToken": {}
         }
@@ -75225,7 +75228,7 @@ module.exports={
           "securityProfileIdentifiers": {
             "type": "list",
             "member": {
-              "shape": "Sf1"
+              "shape": "Sf3"
             }
           },
           "nextToken": {}
@@ -75272,10 +75275,10 @@ module.exports={
               "type": "structure",
               "members": {
                 "securityProfileIdentifier": {
-                  "shape": "Sf1"
+                  "shape": "Sf3"
                 },
                 "target": {
-                  "shape": "Sf6"
+                  "shape": "Sf8"
                 }
               }
             }
@@ -75397,7 +75400,7 @@ module.exports={
           "securityProfileTargets": {
             "type": "list",
             "member": {
-              "shape": "Sf6"
+              "shape": "Sf8"
             }
           },
           "nextToken": {}
@@ -75503,7 +75506,7 @@ module.exports={
         "type": "structure",
         "members": {
           "principals": {
-            "shape": "Sef"
+            "shape": "Seh"
           }
         }
       }
@@ -75721,7 +75724,7 @@ module.exports={
         "type": "structure",
         "members": {
           "things": {
-            "shape": "Seq"
+            "shape": "Ses"
           },
           "nextToken": {}
         }
@@ -75811,7 +75814,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "logTarget": {
-                  "shape": "Sgh"
+                  "shape": "Sgj"
                 },
                 "logLevel": {}
               }
@@ -76078,13 +76081,29 @@ module.exports={
                 "thingId": {},
                 "thingTypeName": {},
                 "thingGroupNames": {
-                  "type": "list",
-                  "member": {}
+                  "shape": "Shc"
                 },
                 "attributes": {
                   "shape": "S4i"
                 },
                 "shadow": {}
+              }
+            }
+          },
+          "thingGroups": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "thingGroupName": {},
+                "thingGroupId": {},
+                "thingGroupDescription": {},
+                "attributes": {
+                  "shape": "S4i"
+                },
+                "parentGroupNames": {
+                  "shape": "Shc"
+                }
               }
             }
           }
@@ -76171,7 +76190,7 @@ module.exports={
         ],
         "members": {
           "logTarget": {
-            "shape": "Sgh"
+            "shape": "Sgj"
           },
           "logLevel": {}
         }
@@ -76277,7 +76296,7 @@ module.exports={
           "authInfos": {
             "type": "list",
             "member": {
-              "shape": "Shr"
+              "shape": "Shv"
             }
           },
           "clientId": {
@@ -76285,10 +76304,10 @@ module.exports={
             "locationName": "clientId"
           },
           "policyNamesToAdd": {
-            "shape": "Shv"
+            "shape": "Shz"
           },
           "policyNamesToSkip": {
-            "shape": "Shv"
+            "shape": "Shz"
           }
         }
       },
@@ -76301,13 +76320,13 @@ module.exports={
               "type": "structure",
               "members": {
                 "authInfo": {
-                  "shape": "Shr"
+                  "shape": "Shv"
                 },
                 "allowed": {
                   "type": "structure",
                   "members": {
                     "policies": {
-                      "shape": "Scm"
+                      "shape": "Sco"
                     }
                   }
                 },
@@ -76318,7 +76337,7 @@ module.exports={
                       "type": "structure",
                       "members": {
                         "policies": {
-                          "shape": "Scm"
+                          "shape": "Sco"
                         }
                       }
                     },
@@ -76326,7 +76345,7 @@ module.exports={
                       "type": "structure",
                       "members": {
                         "policies": {
-                          "shape": "Scm"
+                          "shape": "Sco"
                         }
                       }
                     }
@@ -76548,6 +76567,9 @@ module.exports={
         "members": {
           "thingIndexingConfiguration": {
             "shape": "Sbi"
+          },
+          "thingGroupIndexingConfiguration": {
+            "shape": "Sbk"
           }
         }
       },
@@ -76777,10 +76799,10 @@ module.exports={
         "members": {
           "thingName": {},
           "thingGroupsToAdd": {
-            "shape": "Sj5"
+            "shape": "Sj9"
           },
           "thingGroupsToRemove": {
-            "shape": "Sj5"
+            "shape": "Sj9"
           }
         }
       },
@@ -77382,11 +77404,23 @@ module.exports={
     },
     "Sbi": {
       "type": "structure",
+      "required": [
+        "thingIndexingMode"
+      ],
       "members": {
         "thingIndexingMode": {}
       }
     },
-    "Scm": {
+    "Sbk": {
+      "type": "structure",
+      "required": [
+        "thingGroupIndexingMode"
+      ],
+      "members": {
+        "thingGroupIndexingMode": {}
+      }
+    },
+    "Sco": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -77396,7 +77430,7 @@ module.exports={
         }
       }
     },
-    "Scp": {
+    "Scr": {
       "type": "structure",
       "members": {
         "deviceCertificateId": {},
@@ -77413,12 +77447,12 @@ module.exports={
         "account": {}
       }
     },
-    "Scx": {
+    "Scz": {
       "type": "map",
       "key": {},
       "value": {}
     },
-    "Sdh": {
+    "Sdj": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -77432,7 +77466,7 @@ module.exports={
         }
       }
     },
-    "Sdu": {
+    "Sdw": {
       "type": "structure",
       "members": {
         "status": {},
@@ -77450,15 +77484,15 @@ module.exports={
         }
       }
     },
-    "Sef": {
+    "Seh": {
       "type": "list",
       "member": {}
     },
-    "Seq": {
+    "Ses": {
       "type": "list",
       "member": {}
     },
-    "Sf1": {
+    "Sf3": {
       "type": "structure",
       "required": [
         "name",
@@ -77469,7 +77503,7 @@ module.exports={
         "arn": {}
       }
     },
-    "Sf6": {
+    "Sf8": {
       "type": "structure",
       "required": [
         "arn"
@@ -77478,7 +77512,7 @@ module.exports={
         "arn": {}
       }
     },
-    "Sgh": {
+    "Sgj": {
       "type": "structure",
       "required": [
         "targetType"
@@ -77488,7 +77522,11 @@ module.exports={
         "targetName": {}
       }
     },
-    "Shr": {
+    "Shc": {
+      "type": "list",
+      "member": {}
+    },
+    "Shv": {
       "type": "structure",
       "members": {
         "actionType": {},
@@ -77498,11 +77536,11 @@ module.exports={
         }
       }
     },
-    "Shv": {
+    "Shz": {
       "type": "list",
       "member": {}
     },
-    "Sj5": {
+    "Sj9": {
       "type": "list",
       "member": {}
     }
@@ -107511,6 +107549,30 @@ module.exports={
         "members": {}
       }
     },
+    "DescribeCollection": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "CollectionId"
+        ],
+        "members": {
+          "CollectionId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FaceCount": {
+            "type": "long"
+          },
+          "FaceModelVersion": {},
+          "CollectionARN": {},
+          "CreationTimestamp": {
+            "type": "timestamp"
+          }
+        }
+      }
+    },
     "DescribeStreamProcessor": {
       "input": {
         "type": "structure",
@@ -107558,7 +107620,7 @@ module.exports={
             "shape": "S2"
           },
           "Attributes": {
-            "shape": "S1j"
+            "shape": "S1m"
           }
         }
       },
@@ -107568,7 +107630,7 @@ module.exports={
           "FaceDetails": {
             "type": "list",
             "member": {
-              "shape": "S1n"
+              "shape": "S1q"
             }
           },
           "OrientationCorrection": {}
@@ -107599,7 +107661,7 @@ module.exports={
           "Labels": {
             "type": "list",
             "member": {
-              "shape": "S25"
+              "shape": "S28"
             }
           },
           "OrientationCorrection": {}
@@ -107627,7 +107689,7 @@ module.exports={
           "ModerationLabels": {
             "type": "list",
             "member": {
-              "shape": "S29"
+              "shape": "S2c"
             }
           }
         }
@@ -107706,7 +107768,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Urls": {
-            "shape": "S2l"
+            "shape": "S2o"
           },
           "Name": {}
         }
@@ -107733,7 +107795,7 @@ module.exports={
           "JobStatus": {},
           "StatusMessage": {},
           "VideoMetadata": {
-            "shape": "S2v"
+            "shape": "S2y"
           },
           "NextToken": {},
           "Celebrities": {
@@ -107748,7 +107810,7 @@ module.exports={
                   "type": "structure",
                   "members": {
                     "Urls": {
-                      "shape": "S2l"
+                      "shape": "S2o"
                     },
                     "Name": {},
                     "Id": {},
@@ -107759,12 +107821,19 @@ module.exports={
                       "shape": "Sb"
                     },
                     "Face": {
-                      "shape": "S1n"
+                      "shape": "S1q"
                     }
                   }
                 }
               }
             }
+          },
+          "BillableDurationSeconds": {
+            "type": "integer"
+          },
+          "ErrorCode": {},
+          "Warnings": {
+            "shape": "S34"
           }
         }
       }
@@ -107790,7 +107859,7 @@ module.exports={
           "JobStatus": {},
           "StatusMessage": {},
           "VideoMetadata": {
-            "shape": "S2v"
+            "shape": "S2y"
           },
           "ModerationLabels": {
             "type": "list",
@@ -107801,12 +107870,19 @@ module.exports={
                   "type": "long"
                 },
                 "ModerationLabel": {
-                  "shape": "S29"
+                  "shape": "S2c"
                 }
               }
             }
           },
-          "NextToken": {}
+          "NextToken": {},
+          "BillableDurationSeconds": {
+            "type": "integer"
+          },
+          "ErrorCode": {},
+          "Warnings": {
+            "shape": "S34"
+          }
         }
       }
     },
@@ -107830,7 +107906,7 @@ module.exports={
           "JobStatus": {},
           "StatusMessage": {},
           "VideoMetadata": {
-            "shape": "S2v"
+            "shape": "S2y"
           },
           "NextToken": {},
           "Faces": {
@@ -107842,10 +107918,17 @@ module.exports={
                   "type": "long"
                 },
                 "Face": {
-                  "shape": "S1n"
+                  "shape": "S1q"
                 }
               }
             }
+          },
+          "BillableDurationSeconds": {
+            "type": "integer"
+          },
+          "ErrorCode": {},
+          "Warnings": {
+            "shape": "S34"
           }
         }
       }
@@ -107872,7 +107955,7 @@ module.exports={
           "StatusMessage": {},
           "NextToken": {},
           "VideoMetadata": {
-            "shape": "S2v"
+            "shape": "S2y"
           },
           "Persons": {
             "type": "list",
@@ -107883,13 +107966,20 @@ module.exports={
                   "type": "long"
                 },
                 "Person": {
-                  "shape": "S3f"
+                  "shape": "S3m"
                 },
                 "FaceMatches": {
-                  "shape": "S3h"
+                  "shape": "S3o"
                 }
               }
             }
+          },
+          "BillableDurationSeconds": {
+            "type": "integer"
+          },
+          "ErrorCode": {},
+          "Warnings": {
+            "shape": "S34"
           }
         }
       }
@@ -107915,7 +108005,7 @@ module.exports={
           "JobStatus": {},
           "StatusMessage": {},
           "VideoMetadata": {
-            "shape": "S2v"
+            "shape": "S2y"
           },
           "NextToken": {},
           "Labels": {
@@ -107927,10 +108017,17 @@ module.exports={
                   "type": "long"
                 },
                 "Label": {
-                  "shape": "S25"
+                  "shape": "S28"
                 }
               }
             }
+          },
+          "BillableDurationSeconds": {
+            "type": "integer"
+          },
+          "ErrorCode": {},
+          "Warnings": {
+            "shape": "S34"
           }
         }
       }
@@ -107956,7 +108053,7 @@ module.exports={
           "JobStatus": {},
           "StatusMessage": {},
           "VideoMetadata": {
-            "shape": "S2v"
+            "shape": "S2y"
           },
           "NextToken": {},
           "Persons": {
@@ -107968,10 +108065,17 @@ module.exports={
                   "type": "long"
                 },
                 "Person": {
-                  "shape": "S3f"
+                  "shape": "S3m"
                 }
               }
             }
+          },
+          "BillableDurationSeconds": {
+            "type": "integer"
+          },
+          "ErrorCode": {},
+          "Warnings": {
+            "shape": "S34"
           }
         }
       }
@@ -107990,7 +108094,7 @@ module.exports={
           },
           "ExternalImageId": {},
           "DetectionAttributes": {
-            "shape": "S1j"
+            "shape": "S1m"
           }
         }
       },
@@ -108003,10 +108107,10 @@ module.exports={
               "type": "structure",
               "members": {
                 "Face": {
-                  "shape": "S3j"
+                  "shape": "S3q"
                 },
                 "FaceDetail": {
-                  "shape": "S1n"
+                  "shape": "S1q"
                 }
               }
             }
@@ -108061,7 +108165,7 @@ module.exports={
           "Faces": {
             "type": "list",
             "member": {
-              "shape": "S3j"
+              "shape": "S3q"
             }
           },
           "NextToken": {},
@@ -108117,7 +108221,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "Urls": {
-                  "shape": "S2l"
+                  "shape": "S2o"
                 },
                 "Name": {},
                 "Id": {},
@@ -108163,7 +108267,7 @@ module.exports={
         "members": {
           "SearchedFaceId": {},
           "FaceMatches": {
-            "shape": "S3h"
+            "shape": "S3o"
           },
           "FaceModelVersion": {}
         }
@@ -108199,7 +108303,7 @@ module.exports={
             "type": "float"
           },
           "FaceMatches": {
-            "shape": "S3h"
+            "shape": "S3o"
           },
           "FaceModelVersion": {}
         }
@@ -108213,11 +108317,14 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4n"
+            "shape": "S4u"
           },
           "ClientRequestToken": {},
           "NotificationChannel": {
-            "shape": "S4p"
+            "shape": "S4w"
+          },
+          "EnablePersonTracking": {
+            "type": "boolean"
           },
           "JobTag": {}
         }
@@ -108238,14 +108345,14 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4n"
+            "shape": "S4u"
           },
           "MinConfidence": {
             "type": "float"
           },
           "ClientRequestToken": {},
           "NotificationChannel": {
-            "shape": "S4p"
+            "shape": "S4w"
           },
           "JobTag": {}
         }
@@ -108266,11 +108373,11 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4n"
+            "shape": "S4u"
           },
           "ClientRequestToken": {},
           "NotificationChannel": {
-            "shape": "S4p"
+            "shape": "S4w"
           },
           "FaceAttributes": {},
           "JobTag": {}
@@ -108293,15 +108400,18 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4n"
+            "shape": "S4u"
           },
           "ClientRequestToken": {},
           "FaceMatchThreshold": {
             "type": "float"
           },
           "CollectionId": {},
+          "EnablePersonTracking": {
+            "type": "boolean"
+          },
           "NotificationChannel": {
-            "shape": "S4p"
+            "shape": "S4w"
           },
           "JobTag": {}
         }
@@ -108322,14 +108432,14 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4n"
+            "shape": "S4u"
           },
           "ClientRequestToken": {},
           "MinConfidence": {
             "type": "float"
           },
           "NotificationChannel": {
-            "shape": "S4p"
+            "shape": "S4w"
           },
           "JobTag": {}
         }
@@ -108350,11 +108460,11 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4n"
+            "shape": "S4u"
           },
           "ClientRequestToken": {},
           "NotificationChannel": {
-            "shape": "S4p"
+            "shape": "S4w"
           },
           "JobTag": {}
         }
@@ -108535,11 +108645,11 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "S1j": {
+    "S1m": {
       "type": "list",
       "member": {}
     },
-    "S1n": {
+    "S1q": {
       "type": "structure",
       "members": {
         "BoundingBox": {
@@ -108668,7 +108778,7 @@ module.exports={
         }
       }
     },
-    "S25": {
+    "S28": {
       "type": "structure",
       "members": {
         "Name": {},
@@ -108677,7 +108787,7 @@ module.exports={
         }
       }
     },
-    "S29": {
+    "S2c": {
       "type": "structure",
       "members": {
         "Confidence": {
@@ -108687,11 +108797,11 @@ module.exports={
         "ParentName": {}
       }
     },
-    "S2l": {
+    "S2o": {
       "type": "list",
       "member": {}
     },
-    "S2v": {
+    "S2y": {
       "type": "structure",
       "members": {
         "Codec": {},
@@ -108707,10 +108817,37 @@ module.exports={
         },
         "FrameWidth": {
           "type": "long"
+        },
+        "Rotation": {
+          "type": "integer"
         }
       }
     },
-    "S3f": {
+    "S34": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "ErrorCode": {},
+          "Message": {},
+          "Sections": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "StartTimestamp": {
+                  "type": "long"
+                },
+                "EndTimestamp": {
+                  "type": "long"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S3m": {
       "type": "structure",
       "members": {
         "Index": {
@@ -108720,11 +108857,11 @@ module.exports={
           "shape": "Sb"
         },
         "Face": {
-          "shape": "S1n"
+          "shape": "S1q"
         }
       }
     },
-    "S3h": {
+    "S3o": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -108733,12 +108870,12 @@ module.exports={
             "type": "float"
           },
           "Face": {
-            "shape": "S3j"
+            "shape": "S3q"
           }
         }
       }
     },
-    "S3j": {
+    "S3q": {
       "type": "structure",
       "members": {
         "FaceId": {},
@@ -108749,10 +108886,13 @@ module.exports={
         "ExternalImageId": {},
         "Confidence": {
           "type": "float"
+        },
+        "AssociationScore": {
+          "type": "float"
         }
       }
     },
-    "S4n": {
+    "S4u": {
       "type": "structure",
       "members": {
         "S3Object": {
@@ -108760,7 +108900,7 @@ module.exports={
         }
       }
     },
-    "S4p": {
+    "S4w": {
       "type": "structure",
       "required": [
         "SNSTopicArn",
@@ -136027,7 +136167,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.299.0',
+  VERSION: '2.300.0',
 
   /**
    * @api private
@@ -155164,7 +155304,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":360,"./lib/rng":361}],364:[function(require,module,exports){
-// AWS SDK for JavaScript v2.299.0
+// AWS SDK for JavaScript v2.300.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
