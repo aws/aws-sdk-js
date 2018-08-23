@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "CognitoIdentityServiceProvider",
+  "description": "Extend custom domain configuration for Cognito User pool"
+}
