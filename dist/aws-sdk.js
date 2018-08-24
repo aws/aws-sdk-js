@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.300.0
+// AWS SDK for JavaScript v2.301.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -26157,12 +26157,17 @@ module.exports={
         ],
         "members": {
           "Domain": {},
-          "UserPoolId": {}
+          "UserPoolId": {},
+          "CustomDomainConfig": {
+            "shape": "S6a"
+          }
         }
       },
       "output": {
         "type": "structure",
-        "members": {}
+        "members": {
+          "CloudFrontDomain": {}
+        }
       }
     },
     "DeleteGroup": {
@@ -26351,7 +26356,7 @@ module.exports={
         ],
         "members": {
           "RiskConfiguration": {
-            "shape": "S6r"
+            "shape": "S6s"
           }
         }
       }
@@ -26441,7 +26446,10 @@ module.exports={
               "S3Bucket": {},
               "CloudFrontDistribution": {},
               "Version": {},
-              "Status": {}
+              "Status": {},
+              "CustomDomainConfig": {
+                "shape": "S6a"
+              }
             }
           }
         }
@@ -26490,7 +26498,7 @@ module.exports={
         "type": "structure",
         "members": {
           "CodeDeliveryDetails": {
-            "shape": "S7p"
+            "shape": "S7q"
           }
         }
       },
@@ -26624,7 +26632,7 @@ module.exports={
         ],
         "members": {
           "UICustomization": {
-            "shape": "S83"
+            "shape": "S84"
           }
         }
       }
@@ -26683,7 +26691,7 @@ module.exports={
         "type": "structure",
         "members": {
           "CodeDeliveryDetails": {
-            "shape": "S7p"
+            "shape": "S7q"
           }
         }
       },
@@ -26703,10 +26711,10 @@ module.exports={
         "type": "structure",
         "members": {
           "SmsMfaConfiguration": {
-            "shape": "S8d"
+            "shape": "S8e"
           },
           "SoftwareTokenMfaConfiguration": {
-            "shape": "S8e"
+            "shape": "S8f"
           },
           "MfaConfiguration": {}
         }
@@ -27014,7 +27022,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Users": {
-            "shape": "S9e"
+            "shape": "S9f"
           },
           "PaginationToken": {}
         }
@@ -27040,7 +27048,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Users": {
-            "shape": "S9e"
+            "shape": "S9f"
           },
           "NextToken": {}
         }
@@ -27075,7 +27083,7 @@ module.exports={
         "type": "structure",
         "members": {
           "CodeDeliveryDetails": {
-            "shape": "S7p"
+            "shape": "S7q"
           }
         }
       },
@@ -27131,13 +27139,13 @@ module.exports={
             "shape": "S1i"
           },
           "CompromisedCredentialsRiskConfiguration": {
-            "shape": "S6s"
+            "shape": "S6t"
           },
           "AccountTakeoverRiskConfiguration": {
-            "shape": "S6x"
+            "shape": "S6y"
           },
           "RiskExceptionConfiguration": {
-            "shape": "S76"
+            "shape": "S77"
           }
         }
       },
@@ -27148,7 +27156,7 @@ module.exports={
         ],
         "members": {
           "RiskConfiguration": {
-            "shape": "S6r"
+            "shape": "S6s"
           }
         }
       }
@@ -27177,7 +27185,7 @@ module.exports={
         ],
         "members": {
           "UICustomization": {
-            "shape": "S83"
+            "shape": "S84"
           }
         }
       }
@@ -27214,10 +27222,10 @@ module.exports={
         "members": {
           "UserPoolId": {},
           "SmsMfaConfiguration": {
-            "shape": "S8d"
+            "shape": "S8e"
           },
           "SoftwareTokenMfaConfiguration": {
-            "shape": "S8e"
+            "shape": "S8f"
           },
           "MfaConfiguration": {}
         }
@@ -27226,10 +27234,10 @@ module.exports={
         "type": "structure",
         "members": {
           "SmsMfaConfiguration": {
-            "shape": "S8d"
+            "shape": "S8e"
           },
           "SoftwareTokenMfaConfiguration": {
-            "shape": "S8e"
+            "shape": "S8f"
           },
           "MfaConfiguration": {}
         }
@@ -27303,7 +27311,7 @@ module.exports={
             "type": "boolean"
           },
           "CodeDeliveryDetails": {
-            "shape": "S7p"
+            "shape": "S7q"
           },
           "UserSub": {}
         }
@@ -27509,7 +27517,7 @@ module.exports={
           "CodeDeliveryDetailsList": {
             "type": "list",
             "member": {
-              "shape": "S7p"
+              "shape": "S7q"
             }
           }
         }
@@ -28217,6 +28225,7 @@ module.exports={
         "SmsConfigurationFailure": {},
         "EmailConfigurationFailure": {},
         "Domain": {},
+        "CustomDomain": {},
         "AdminCreateUserConfig": {
           "shape": "S5e"
         },
@@ -28324,7 +28333,16 @@ module.exports={
         }
       }
     },
-    "S6r": {
+    "S6a": {
+      "type": "structure",
+      "required": [
+        "CertificateArn"
+      ],
+      "members": {
+        "CertificateArn": {}
+      }
+    },
+    "S6s": {
       "type": "structure",
       "members": {
         "UserPoolId": {},
@@ -28332,20 +28350,20 @@ module.exports={
           "shape": "S1i"
         },
         "CompromisedCredentialsRiskConfiguration": {
-          "shape": "S6s"
+          "shape": "S6t"
         },
         "AccountTakeoverRiskConfiguration": {
-          "shape": "S6x"
+          "shape": "S6y"
         },
         "RiskExceptionConfiguration": {
-          "shape": "S76"
+          "shape": "S77"
         },
         "LastModifiedDate": {
           "type": "timestamp"
         }
       }
     },
-    "S6s": {
+    "S6t": {
       "type": "structure",
       "required": [
         "Actions"
@@ -28366,7 +28384,7 @@ module.exports={
         }
       }
     },
-    "S6x": {
+    "S6y": {
       "type": "structure",
       "required": [
         "Actions"
@@ -28382,13 +28400,13 @@ module.exports={
             "ReplyTo": {},
             "SourceArn": {},
             "BlockEmail": {
-              "shape": "S6z"
+              "shape": "S70"
             },
             "NoActionEmail": {
-              "shape": "S6z"
+              "shape": "S70"
             },
             "MfaEmail": {
-              "shape": "S6z"
+              "shape": "S70"
             }
           }
         },
@@ -28396,19 +28414,19 @@ module.exports={
           "type": "structure",
           "members": {
             "LowAction": {
-              "shape": "S73"
+              "shape": "S74"
             },
             "MediumAction": {
-              "shape": "S73"
+              "shape": "S74"
             },
             "HighAction": {
-              "shape": "S73"
+              "shape": "S74"
             }
           }
         }
       }
     },
-    "S6z": {
+    "S70": {
       "type": "structure",
       "required": [
         "Subject"
@@ -28419,7 +28437,7 @@ module.exports={
         "TextBody": {}
       }
     },
-    "S73": {
+    "S74": {
       "type": "structure",
       "required": [
         "Notify",
@@ -28432,7 +28450,7 @@ module.exports={
         "EventAction": {}
       }
     },
-    "S76": {
+    "S77": {
       "type": "structure",
       "members": {
         "BlockedIPRangeList": {
@@ -28445,7 +28463,7 @@ module.exports={
         }
       }
     },
-    "S7p": {
+    "S7q": {
       "type": "structure",
       "members": {
         "Destination": {},
@@ -28453,7 +28471,7 @@ module.exports={
         "AttributeName": {}
       }
     },
-    "S83": {
+    "S84": {
       "type": "structure",
       "members": {
         "UserPoolId": {},
@@ -28471,7 +28489,7 @@ module.exports={
         }
       }
     },
-    "S8d": {
+    "S8e": {
       "type": "structure",
       "members": {
         "SmsAuthenticationMessage": {},
@@ -28480,7 +28498,7 @@ module.exports={
         }
       }
     },
-    "S8e": {
+    "S8f": {
       "type": "structure",
       "members": {
         "Enabled": {
@@ -28488,7 +28506,7 @@ module.exports={
         }
       }
     },
-    "S9e": {
+    "S9f": {
       "type": "list",
       "member": {
         "shape": "Ss"
@@ -66974,7 +66992,30 @@ module.exports={
               "TaskDefinitionArn": {},
               "TaskCount": {
                 "type": "integer"
-              }
+              },
+              "LaunchType": {},
+              "NetworkConfiguration": {
+                "type": "structure",
+                "members": {
+                  "awsvpcConfiguration": {
+                    "type": "structure",
+                    "required": [
+                      "Subnets"
+                    ],
+                    "members": {
+                      "Subnets": {
+                        "shape": "S1f"
+                      },
+                      "SecurityGroups": {
+                        "shape": "S1f"
+                      },
+                      "AssignPublicIp": {}
+                    }
+                  }
+                }
+              },
+              "PlatformVersion": {},
+              "Group": {}
             }
           },
           "BatchParameters": {
@@ -67012,6 +67053,10 @@ module.exports={
           }
         }
       }
+    },
+    "S1f": {
+      "type": "list",
+      "member": {}
     }
   }
 }
@@ -136167,7 +136212,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.300.0',
+  VERSION: '2.301.0',
 
   /**
    * @api private
@@ -155304,7 +155349,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":360,"./lib/rng":361}],364:[function(require,module,exports){
-// AWS SDK for JavaScript v2.300.0
+// AWS SDK for JavaScript v2.301.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
