@@ -38,6 +38,7 @@
     "webpack": "^1.15.0"
   },
   "dependencies": {
+    "@aws/endpoint-cache": "file:../../workspace/aws-sdk-js-staging/aws-sdk-js-staging/packages/endpoint-cache",
     "buffer": "4.9.1",
     "events": "1.1.1",
     "ieee754": "1.1.8",
