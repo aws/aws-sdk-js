@@ -546,6 +546,9 @@
           "shape": "InvalidRequestException"
         },
         {
+          "shape": "LimitExceededException"
+        },
+        {
           "shape": "ResourceNotFoundException"
         },
         {
@@ -751,6 +754,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "ResourceNotFoundException"
@@ -1128,6 +1134,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "VersionConflictException"
         }
       ],
       "documentation": "<p>Delete an OTA update.</p>"
@@ -4891,7 +4900,7 @@
     "AdditionalParameterMap": {
       "type": "map",
       "key": {
-        "shape": "Key"
+        "shape": "AttributeKey"
       },
       "value": {
         "shape": "Value"
@@ -5086,6 +5095,9 @@
       "members": {},
       "documentation": "<p>The output from the AttachThingPrincipal operation.</p>"
     },
+    "AttributeKey": {
+      "type": "string"
+    },
     "AttributeName": {
       "type": "string",
       "max": 128,
@@ -5122,7 +5134,7 @@
     "AttributesMap": {
       "type": "map",
       "key": {
-        "shape": "Key"
+        "shape": "AttributeKey"
       },
       "value": {
         "shape": "Value"
@@ -5510,6 +5522,16 @@
     "AwsIotSqlVersion": {
       "type": "string"
     },
+    "AwsJobExecutionsRolloutConfig": {
+      "type": "structure",
+      "members": {
+        "maximumPerMinute": {
+          "shape": "MaximumPerMinute",
+          "documentation": "<p>The maximum number of OTA update job executions started per minute.</p>"
+        }
+      },
+      "documentation": "<p>Configuration for the rollout of OTA updates.</p>"
+    },
     "Behavior": {
       "type": "structure",
       "required": [
@@ -5876,6 +5898,9 @@
     "CertificateName": {
       "type": "string"
     },
+    "CertificatePathOnDevice": {
+      "type": "string"
+    },
     "CertificatePem": {
       "type": "string",
       "documentation": "<p>The PEM of a certificate.</p>",
@@ -6021,6 +6046,10 @@
           "shape": "SigningJobId",
           "documentation": "<p>The ID of the AWSSignerJob which was created to sign the file.</p>"
         },
+        "startSigningJobParameter": {
+          "shape": "StartSigningJobParameter",
+          "documentation": "<p>Describes the code-signing job.</p>"
+        },
         "customCodeSigning": {
           "shape": "CustomCodeSigning",
           "documentation": "<p>A custom method for code signing a file.</p>"
@@ -6031,10 +6060,6 @@
     "CodeSigningCertificateChain": {
       "type": "structure",
       "members": {
-        "stream": {
-          "shape": "Stream",
-          "documentation": "<p>A stream of the certificate chain files.</p>"
-        },
         "certificateName": {
           "shape": "CertificateName",
           "documentation": "<p>The name of the certificate.</p>"
@@ -6049,10 +6074,6 @@
     "CodeSigningSignature": {
       "type": "structure",
       "members": {
-        "stream": {
-          "shape": "Stream",
-          "documentation": "<p>A stream of the code signing signature.</p>"
-        },
         "inlineDocument": {
           "shape": "Signature",
           "documentation": "<p>A base64 encoded binary representation of the code signing signature.</p>"
@@ -6300,6 +6321,10 @@
         "targetSelection": {
           "shape": "TargetSelection",
           "documentation": "<p>Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.</p>"
+        },
+        "awsJobExecutionsRolloutConfig": {
+          "shape": "AwsJobExecutionsRolloutConfig",
+          "documentation": "<p>Configuration for the rollout of OTA updates.</p>"
         },
         "files": {
           "shape": "OTAUpdateFiles",
@@ -6929,6 +6954,18 @@
           "documentation": "<p>The OTA update ID to delete.</p>",
           "location": "uri",
           "locationName": "otaUpdateId"
+        },
+        "deleteStream": {
+          "shape": "DeleteStream",
+          "documentation": "<p>Specifies if the stream associated with an OTA update should be deleted when the OTA update is deleted.</p>",
+          "location": "querystring",
+          "locationName": "deleteStream"
+        },
+        "forceDeleteAWSJob": {
+          "shape": "ForceDeleteAWSJob",
+          "documentation": "<p>Specifies if the AWS Job associated with the OTA update should be deleted with the OTA update is deleted.</p>",
+          "location": "querystring",
+          "locationName": "forceDeleteAWSJob"
         }
       }
     },
@@ -7045,6 +7082,9 @@
     "DeleteSecurityProfileResponse": {
       "type": "structure",
       "members": {}
+    },
+    "DeleteStream": {
+      "type": "boolean"
     },
     "DeleteStreamRequest": {
       "type": "structure",
@@ -7848,6 +7888,16 @@
     "Description": {
       "type": "string"
     },
+    "Destination": {
+      "type": "structure",
+      "members": {
+        "s3Destination": {
+          "shape": "S3Destination",
+          "documentation": "<p>Describes the location in S3 of the updated firmware.</p>"
+        }
+      },
+      "documentation": "<p>Describes the location of the updated firmware.</p>"
+    },
     "DetachPolicyRequest": {
       "type": "structure",
       "required": [
@@ -8234,6 +8284,20 @@
       "max": 255,
       "min": 0
     },
+    "FileLocation": {
+      "type": "structure",
+      "members": {
+        "stream": {
+          "shape": "Stream",
+          "documentation": "<p>The stream that contains the OTA update.</p>"
+        },
+        "s3Location": {
+          "shape": "S3Location",
+          "documentation": "<p>The location of the updated firmware in S3.</p>"
+        }
+      },
+      "documentation": "<p>The location of the OTA update.</p>"
+    },
     "FileName": {
       "type": "string"
     },
@@ -8267,6 +8331,9 @@
       "type": "boolean"
     },
     "ForceDelete": {
+      "type": "boolean"
+    },
+    "ForceDeleteAWSJob": {
       "type": "boolean"
     },
     "ForceFlag": {
@@ -10676,6 +10743,11 @@
       "max": 250,
       "min": 1
     },
+    "MaximumPerMinute": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
     "Message": {
       "type": "string",
       "max": 128
@@ -10763,9 +10835,9 @@
           "shape": "OTAUpdateFileVersion",
           "documentation": "<p>The file version.</p>"
         },
-        "fileSource": {
-          "shape": "Stream",
-          "documentation": "<p>The source of the file.</p>"
+        "fileLocation": {
+          "shape": "FileLocation",
+          "documentation": "<p>The location of the updated firmware.</p>"
         },
         "codeSigning": {
           "shape": "CodeSigning",
@@ -10786,7 +10858,7 @@
       "member": {
         "shape": "OTAUpdateFile"
       },
-      "max": 10,
+      "max": 50,
       "min": 1
     },
     "OTAUpdateId": {
@@ -10821,6 +10893,10 @@
         "targets": {
           "shape": "Targets",
           "documentation": "<p>The targets of the OTA update.</p>"
+        },
+        "awsJobExecutionsRolloutConfig": {
+          "shape": "AwsJobExecutionsRolloutConfig",
+          "documentation": "<p>Configuration for the rollout of OTA updates.</p>"
         },
         "targetSelection": {
           "shape": "TargetSelection",
@@ -10953,6 +11029,9 @@
       "max": 100,
       "min": 0
     },
+    "Platform": {
+      "type": "string"
+    },
     "Policies": {
       "type": "list",
       "member": {
@@ -11058,6 +11137,9 @@
       "member": {
         "shape": "Port"
       }
+    },
+    "Prefix": {
+      "type": "string"
     },
     "PresignedUrlConfig": {
       "type": "structure",
@@ -11608,6 +11690,20 @@
       "type": "string",
       "min": 1
     },
+    "S3Destination": {
+      "type": "structure",
+      "members": {
+        "bucket": {
+          "shape": "S3Bucket",
+          "documentation": "<p>The S3 bucket that contains the updated firmware.</p>"
+        },
+        "prefix": {
+          "shape": "Prefix",
+          "documentation": "<p>The S3 prefix.</p>"
+        }
+      },
+      "documentation": "<p>Describes the location of updated firmware in S3.</p>"
+    },
     "S3FileUrl": {
       "type": "string",
       "max": 65535
@@ -11624,25 +11720,21 @@
     },
     "S3Location": {
       "type": "structure",
-      "required": [
-        "bucket",
-        "key"
-      ],
       "members": {
         "bucket": {
           "shape": "S3Bucket",
-          "documentation": "<p>The S3 bucket that contains the file to stream.</p>"
+          "documentation": "<p>The S3 bucket.</p>"
         },
         "key": {
           "shape": "S3Key",
-          "documentation": "<p>The name of the file within the S3 bucket to stream.</p>"
+          "documentation": "<p>The S3 key.</p>"
         },
         "version": {
           "shape": "S3Version",
-          "documentation": "<p>The file version.</p>"
+          "documentation": "<p>The S3 bucket version.</p>"
         }
       },
-      "documentation": "<p>The location in S3 the contains the files to stream.</p>"
+      "documentation": "<p>The S3 location.</p>"
     },
     "S3Version": {
       "type": "string"
@@ -11965,6 +12057,27 @@
     "SigningJobId": {
       "type": "string"
     },
+    "SigningProfileName": {
+      "type": "string"
+    },
+    "SigningProfileParameter": {
+      "type": "structure",
+      "members": {
+        "certificateArn": {
+          "shape": "CertificateArn",
+          "documentation": "<p>Certificate ARN.</p>"
+        },
+        "platform": {
+          "shape": "Platform",
+          "documentation": "<p>The hardware platform of your device.</p>"
+        },
+        "certificatePathOnDevice": {
+          "shape": "CertificatePathOnDevice",
+          "documentation": "<p>The location of the code-signing certificate on your device.</p>"
+        }
+      },
+      "documentation": "<p>Describes the code-signing profile.</p>"
+    },
     "SkyfallMaxResults": {
       "type": "integer",
       "max": 250,
@@ -12034,6 +12147,24 @@
           "documentation": "<p>The ID of the on-demand audit you started.</p>"
         }
       }
+    },
+    "StartSigningJobParameter": {
+      "type": "structure",
+      "members": {
+        "signingProfileParameter": {
+          "shape": "SigningProfileParameter",
+          "documentation": "<p>Describes the code-signing profile.</p>"
+        },
+        "signingProfileName": {
+          "shape": "SigningProfileName",
+          "documentation": "<p>The code-signing profile name.</p>"
+        },
+        "destination": {
+          "shape": "Destination",
+          "documentation": "<p>The location to write the code-signed file.</p>"
+        }
+      },
+      "documentation": "<p>Information required to start a signing job.</p>"
     },
     "StartThingRegistrationTaskRequest": {
       "type": "structure",
@@ -12171,7 +12302,7 @@
       "member": {
         "shape": "StreamFile"
       },
-      "max": 10,
+      "max": 50,
       "min": 1
     },
     "StreamId": {

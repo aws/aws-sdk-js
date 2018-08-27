@@ -604,6 +604,37 @@
       ],
       "documentation": "<p>Retrieves a list of channels.</p>"
     },
+    "ListDatasetContents": {
+      "name": "ListDatasetContents",
+      "http": {
+        "method": "GET",
+        "requestUri": "/datasets/{datasetName}/contents"
+      },
+      "input": {
+        "shape": "ListDatasetContentsRequest"
+      },
+      "output": {
+        "shape": "ListDatasetContentsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Lists information about data set contents that have been created.</p>"
+    },
     "ListDatasets": {
       "name": "ListDatasets",
       "http": {
@@ -1600,6 +1631,34 @@
       },
       "documentation": "<p>The state of the data set contents and the reason they are in this state.</p>"
     },
+    "DatasetContentSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "DatasetContentSummary"
+      }
+    },
+    "DatasetContentSummary": {
+      "type": "structure",
+      "members": {
+        "version": {
+          "shape": "DatasetContentVersion",
+          "documentation": "<p>The version of the data set contents.</p>"
+        },
+        "status": {
+          "shape": "DatasetContentStatus",
+          "documentation": "<p>The status of the data set contents.</p>"
+        },
+        "creationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The actual time the creation of the data set contents was started.</p>"
+        },
+        "scheduleTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the creation of the data set contents was scheduled to start.</p>"
+        }
+      },
+      "documentation": "<p>Summary information about data set contents.</p>"
+    },
     "DatasetContentVersion": {
       "type": "string",
       "max": 36,
@@ -2252,6 +2311,45 @@
         "channelSummaries": {
           "shape": "ChannelSummaries",
           "documentation": "<p>A list of \"ChannelSummary\" objects.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more results.</p>"
+        }
+      }
+    },
+    "ListDatasetContentsRequest": {
+      "type": "structure",
+      "required": [
+        "datasetName"
+      ],
+      "members": {
+        "datasetName": {
+          "shape": "DatasetName",
+          "documentation": "<p>The name of the data set whose contents information you want to list.</p>",
+          "location": "uri",
+          "locationName": "datasetName"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return in this request.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListDatasetContentsResponse": {
+      "type": "structure",
+      "members": {
+        "datasetContentSummaries": {
+          "shape": "DatasetContentSummaries",
+          "documentation": "<p>Summary information about data set contents that have been created.</p>"
         },
         "nextToken": {
           "shape": "NextToken",

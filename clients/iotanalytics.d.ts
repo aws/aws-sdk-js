@@ -164,6 +164,14 @@ declare class IoTAnalytics extends Service {
    */
   listChannels(callback?: (err: AWSError, data: IoTAnalytics.Types.ListChannelsResponse) => void): Request<IoTAnalytics.Types.ListChannelsResponse, AWSError>;
   /**
+   * Lists information about data set contents that have been created.
+   */
+  listDatasetContents(params: IoTAnalytics.Types.ListDatasetContentsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetContentsResponse) => void): Request<IoTAnalytics.Types.ListDatasetContentsResponse, AWSError>;
+  /**
+   * Lists information about data set contents that have been created.
+   */
+  listDatasetContents(callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetContentsResponse) => void): Request<IoTAnalytics.Types.ListDatasetContentsResponse, AWSError>;
+  /**
    * Retrieves information about data sets.
    */
   listDatasets(params: IoTAnalytics.Types.ListDatasetsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetsResponse) => void): Request<IoTAnalytics.Types.ListDatasetsResponse, AWSError>;
@@ -628,6 +636,25 @@ declare namespace IoTAnalytics {
      */
     reason?: Reason;
   }
+  export type DatasetContentSummaries = DatasetContentSummary[];
+  export interface DatasetContentSummary {
+    /**
+     * The version of the data set contents.
+     */
+    version?: DatasetContentVersion;
+    /**
+     * The status of the data set contents.
+     */
+    status?: DatasetContentStatus;
+    /**
+     * The actual time the creation of the data set contents was started.
+     */
+    creationTime?: Timestamp;
+    /**
+     * The time the creation of the data set contents was scheduled to start.
+     */
+    scheduleTime?: Timestamp;
+  }
   export type DatasetContentVersion = string;
   export interface DatasetContentVersionValue {
     /**
@@ -1000,6 +1027,30 @@ declare namespace IoTAnalytics {
      * A list of "ChannelSummary" objects.
      */
     channelSummaries?: ChannelSummaries;
+    /**
+     * The token to retrieve the next set of results, or null if there are no more results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListDatasetContentsRequest {
+    /**
+     * The name of the data set whose contents information you want to list.
+     */
+    datasetName: DatasetName;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return in this request.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListDatasetContentsResponse {
+    /**
+     * Summary information about data set contents that have been created.
+     */
+    datasetContentSummaries?: DatasetContentSummaries;
     /**
      * The token to retrieve the next set of results, or null if there are no more results.
      */

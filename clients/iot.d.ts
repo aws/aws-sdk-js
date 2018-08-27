@@ -1441,6 +1441,7 @@ declare namespace Iot {
   }
   export interface AttachThingPrincipalResponse {
   }
+  export type AttributeKey = string;
   export type AttributeName = string;
   export interface AttributePayload {
     /**
@@ -1656,6 +1657,12 @@ declare namespace Iot {
   export type AwsIotJobArn = string;
   export type AwsIotJobId = string;
   export type AwsIotSqlVersion = string;
+  export interface AwsJobExecutionsRolloutConfig {
+    /**
+     * The maximum number of OTA update job executions started per minute.
+     */
+    maximumPerMinute?: MaximumPerMinute;
+  }
   export interface Behavior {
     /**
      * The name you have given to the behavior.
@@ -1897,6 +1904,7 @@ declare namespace Iot {
   }
   export type CertificateId = string;
   export type CertificateName = string;
+  export type CertificatePathOnDevice = string;
   export type CertificatePem = string;
   export type CertificateSigningRequest = string;
   export type CertificateStatus = "ACTIVE"|"INACTIVE"|"REVOKED"|"PENDING_TRANSFER"|"REGISTER_INACTIVE"|"PENDING_ACTIVATION"|string;
@@ -1971,15 +1979,15 @@ declare namespace Iot {
      */
     awsSignerJobId?: SigningJobId;
     /**
+     * Describes the code-signing job.
+     */
+    startSigningJobParameter?: StartSigningJobParameter;
+    /**
      * A custom method for code signing a file.
      */
     customCodeSigning?: CustomCodeSigning;
   }
   export interface CodeSigningCertificateChain {
-    /**
-     * A stream of the certificate chain files.
-     */
-    stream?: Stream;
     /**
      * The name of the certificate.
      */
@@ -1990,10 +1998,6 @@ declare namespace Iot {
     inlineDocument?: InlineDocument;
   }
   export interface CodeSigningSignature {
-    /**
-     * A stream of the code signing signature.
-     */
-    stream?: Stream;
     /**
      * A base64 encoded binary representation of the code signing signature.
      */
@@ -2155,6 +2159,10 @@ declare namespace Iot {
      * Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.
      */
     targetSelection?: TargetSelection;
+    /**
+     * Configuration for the rollout of OTA updates.
+     */
+    awsJobExecutionsRolloutConfig?: AwsJobExecutionsRolloutConfig;
     /**
      * The files to be streamed by the OTA update.
      */
@@ -2548,6 +2556,14 @@ declare namespace Iot {
      * The OTA update ID to delete.
      */
     otaUpdateId: OTAUpdateId;
+    /**
+     * Specifies if the stream associated with an OTA update should be deleted when the OTA update is deleted.
+     */
+    deleteStream?: DeleteStream;
+    /**
+     * Specifies if the AWS Job associated with the OTA update should be deleted with the OTA update is deleted.
+     */
+    forceDeleteAWSJob?: ForceDeleteAWSJob;
   }
   export interface DeleteOTAUpdateResponse {
   }
@@ -2600,6 +2616,7 @@ declare namespace Iot {
   }
   export interface DeleteSecurityProfileResponse {
   }
+  export type DeleteStream = boolean;
   export interface DeleteStreamRequest {
     /**
      * The stream ID.
@@ -3109,6 +3126,12 @@ declare namespace Iot {
     thingTypeMetadata?: ThingTypeMetadata;
   }
   export type Description = string;
+  export interface Destination {
+    /**
+     * Describes the location in S3 of the updated firmware.
+     */
+    s3Destination?: S3Destination;
+  }
   export interface DetachPolicyRequest {
     /**
      * The policy to detach.
@@ -3295,6 +3318,16 @@ declare namespace Iot {
   export type FailedChecksCount = number;
   export type FailedThings = number;
   export type FileId = number;
+  export interface FileLocation {
+    /**
+     * The stream that contains the OTA update.
+     */
+    stream?: Stream;
+    /**
+     * The location of the updated firmware in S3.
+     */
+    s3Location?: S3Location;
+  }
   export type FileName = string;
   export interface FirehoseAction {
     /**
@@ -3313,6 +3346,7 @@ declare namespace Iot {
   export type FirehoseSeparator = string;
   export type Flag = boolean;
   export type ForceDelete = boolean;
+  export type ForceDeleteAWSJob = boolean;
   export type ForceFlag = boolean;
   export type Forced = boolean;
   export type FunctionArn = string;
@@ -4827,6 +4861,7 @@ declare namespace Iot {
   export type Marker = string;
   export type MaxJobExecutionsPerMin = number;
   export type MaxResults = number;
+  export type MaximumPerMinute = number;
   export type Message = string;
   export type MessageFormat = "RAW"|"JSON"|string;
   export interface MetricValue {
@@ -4875,9 +4910,9 @@ declare namespace Iot {
      */
     fileVersion?: OTAUpdateFileVersion;
     /**
-     * The source of the file.
+     * The location of the updated firmware.
      */
-    fileSource?: Stream;
+    fileLocation?: FileLocation;
     /**
      * The code signing method of the file.
      */
@@ -4915,6 +4950,10 @@ declare namespace Iot {
      * The targets of the OTA update.
      */
     targets?: Targets;
+    /**
+     * Configuration for the rollout of OTA updates.
+     */
+    awsJobExecutionsRolloutConfig?: AwsJobExecutionsRolloutConfig;
     /**
      * Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. 
      */
@@ -4994,6 +5033,7 @@ declare namespace Iot {
   export type PartitionKey = string;
   export type PayloadField = string;
   export type Percentage = number;
+  export type Platform = string;
   export type Policies = Policy[];
   export interface Policy {
     /**
@@ -5040,6 +5080,7 @@ declare namespace Iot {
   export type PolicyVersions = PolicyVersion[];
   export type Port = number;
   export type Ports = Port[];
+  export type Prefix = string;
   export interface PresignedUrlConfig {
     /**
      * The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.
@@ -5327,20 +5368,30 @@ declare namespace Iot {
     cannedAcl?: CannedAccessControlList;
   }
   export type S3Bucket = string;
+  export interface S3Destination {
+    /**
+     * The S3 bucket that contains the updated firmware.
+     */
+    bucket?: S3Bucket;
+    /**
+     * The S3 prefix.
+     */
+    prefix?: Prefix;
+  }
   export type S3FileUrl = string;
   export type S3FileUrlList = S3FileUrl[];
   export type S3Key = string;
   export interface S3Location {
     /**
-     * The S3 bucket that contains the file to stream.
+     * The S3 bucket.
      */
-    bucket: S3Bucket;
+    bucket?: S3Bucket;
     /**
-     * The name of the file within the S3 bucket to stream.
+     * The S3 key.
      */
-    key: S3Key;
+    key?: S3Key;
     /**
-     * The file version.
+     * The S3 bucket version.
      */
     version?: S3Version;
   }
@@ -5516,6 +5567,21 @@ declare namespace Iot {
   export type Signature = Buffer|Uint8Array|Blob|string;
   export type SignatureAlgorithm = string;
   export type SigningJobId = string;
+  export type SigningProfileName = string;
+  export interface SigningProfileParameter {
+    /**
+     * Certificate ARN.
+     */
+    certificateArn?: CertificateArn;
+    /**
+     * The hardware platform of your device.
+     */
+    platform?: Platform;
+    /**
+     * The location of the code-signing certificate on your device.
+     */
+    certificatePathOnDevice?: CertificatePathOnDevice;
+  }
   export type SkyfallMaxResults = number;
   export interface SnsAction {
     /**
@@ -5556,6 +5622,20 @@ declare namespace Iot {
      * The ID of the on-demand audit you started.
      */
     taskId?: AuditTaskId;
+  }
+  export interface StartSigningJobParameter {
+    /**
+     * Describes the code-signing profile.
+     */
+    signingProfileParameter?: SigningProfileParameter;
+    /**
+     * The code-signing profile name.
+     */
+    signingProfileName?: SigningProfileName;
+    /**
+     * The location to write the code-signed file.
+     */
+    destination?: Destination;
   }
   export interface StartThingRegistrationTaskRequest {
     /**

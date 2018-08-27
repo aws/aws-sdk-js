@@ -592,5 +592,8 @@
   },
   "dlm": {
     "name": "DLM"
+  },
+  "signer": {
+    "name": "Signer"
   }
 }

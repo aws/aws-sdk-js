@@ -143,3 +143,4 @@ export import MediaTailor = require('./mediatailor');
 export import EKS = require('./eks');
 export import Macie = require('./macie');
 export import DLM = require('./dlm');
+export import Signer = require('./signer');

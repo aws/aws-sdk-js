@@ -144,5 +144,6 @@ module.exports = {
   MediaTailor: require('./mediatailor'),
   EKS: require('./eks'),
   Macie: require('./macie'),
-  DLM: require('./dlm')
+  DLM: require('./dlm'),
+  Signer: require('./signer')
 };
