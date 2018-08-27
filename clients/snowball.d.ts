@@ -701,7 +701,7 @@ declare namespace Snowball {
      */
     Ec2AmiResources?: Ec2AmiResourceList;
   }
-  export type JobState = "New"|"PreparingAppliance"|"PreparingShipment"|"InTransitToCustomer"|"WithCustomer"|"InTransitToAWS"|"WithAWS"|"InProgress"|"Complete"|"Cancelled"|"Listing"|"Pending"|string;
+  export type JobState = "New"|"PreparingAppliance"|"PreparingShipment"|"InTransitToCustomer"|"WithCustomer"|"InTransitToAWS"|"WithAWSSortingFacility"|"WithAWS"|"InProgress"|"Complete"|"Cancelled"|"Listing"|"Pending"|string;
   export type JobStateList = JobState[];
   export type JobType = "IMPORT"|"EXPORT"|"LOCAL_USE"|string;
   export interface KeyRange {

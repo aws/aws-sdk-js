@@ -45,11 +45,11 @@ declare class ECS extends Service {
    */
   deleteCluster(callback?: (err: AWSError, data: ECS.Types.DeleteClusterResponse) => void): Request<ECS.Types.DeleteClusterResponse, AWSError>;
   /**
-   * Deletes a specified service within a cluster. You can delete a service if you have no running tasks in it and the desired task count is zero. If the service is actively maintaining tasks, you cannot delete it, and you must update the service to a desired task count of zero. For more information, see UpdateService.  When you delete a service, if there are still running tasks that require cleanup, the service status moves from ACTIVE to DRAINING, and the service is no longer visible in the console or in ListServices API operations. After the tasks have stopped, then the service status moves from DRAINING to INACTIVE. Services in the DRAINING or INACTIVE status can still be viewed with DescribeServices API operations. However, in the future, INACTIVE services may be cleaned up and purged from Amazon ECS record keeping, and DescribeServices API operations on those services return a ServiceNotFoundException error. 
+   * Deletes a specified service within a cluster. You can delete a service if you have no running tasks in it and the desired task count is zero. If the service is actively maintaining tasks, you cannot delete it, and you must update the service to a desired task count of zero. For more information, see UpdateService.  When you delete a service, if there are still running tasks that require cleanup, the service status moves from ACTIVE to DRAINING, and the service is no longer visible in the console or in ListServices API operations. After the tasks have stopped, then the service status moves from DRAINING to INACTIVE. Services in the DRAINING or INACTIVE status can still be viewed with DescribeServices API operations. However, in the future, INACTIVE services may be cleaned up and purged from Amazon ECS record keeping, and DescribeServices API operations on those services return a ServiceNotFoundException error.   If you attempt to create a new service with the same name as an existing service in either ACTIVE or DRAINING status, you will receive an error. 
    */
   deleteService(params: ECS.Types.DeleteServiceRequest, callback?: (err: AWSError, data: ECS.Types.DeleteServiceResponse) => void): Request<ECS.Types.DeleteServiceResponse, AWSError>;
   /**
-   * Deletes a specified service within a cluster. You can delete a service if you have no running tasks in it and the desired task count is zero. If the service is actively maintaining tasks, you cannot delete it, and you must update the service to a desired task count of zero. For more information, see UpdateService.  When you delete a service, if there are still running tasks that require cleanup, the service status moves from ACTIVE to DRAINING, and the service is no longer visible in the console or in ListServices API operations. After the tasks have stopped, then the service status moves from DRAINING to INACTIVE. Services in the DRAINING or INACTIVE status can still be viewed with DescribeServices API operations. However, in the future, INACTIVE services may be cleaned up and purged from Amazon ECS record keeping, and DescribeServices API operations on those services return a ServiceNotFoundException error. 
+   * Deletes a specified service within a cluster. You can delete a service if you have no running tasks in it and the desired task count is zero. If the service is actively maintaining tasks, you cannot delete it, and you must update the service to a desired task count of zero. For more information, see UpdateService.  When you delete a service, if there are still running tasks that require cleanup, the service status moves from ACTIVE to DRAINING, and the service is no longer visible in the console or in ListServices API operations. After the tasks have stopped, then the service status moves from DRAINING to INACTIVE. Services in the DRAINING or INACTIVE status can still be viewed with DescribeServices API operations. However, in the future, INACTIVE services may be cleaned up and purged from Amazon ECS record keeping, and DescribeServices API operations on those services return a ServiceNotFoundException error.   If you attempt to create a new service with the same name as an existing service in either ACTIVE or DRAINING status, you will receive an error. 
    */
   deleteService(callback?: (err: AWSError, data: ECS.Types.DeleteServiceResponse) => void): Request<ECS.Types.DeleteServiceResponse, AWSError>;
   /**
@@ -356,7 +356,7 @@ declare namespace ECS {
      */
     securityGroups?: StringList;
     /**
-     * Whether the task's elastic network interface receives a public IP address.
+     * Whether the task's elastic network interface receives a public IP address. The default value is DISABLED.
      */
     assignPublicIp?: AssignPublicIp;
   }
@@ -377,7 +377,7 @@ declare namespace ECS {
      */
     status?: String;
     /**
-     * The number of container instances registered into the cluster.
+     * The number of container instances registered into the cluster. This includes container instances in both ACTIVE and DRAINING status.
      */
     registeredContainerInstancesCount?: Integer;
     /**
@@ -1023,6 +1023,28 @@ declare namespace ECS {
     telemetryEndpoint?: String;
   }
   export type DockerLabelsMap = {[key: string]: String};
+  export interface DockerVolumeConfiguration {
+    /**
+     * The scope for the Docker volume which determines it's lifecycle. Docker volumes that are scoped to a task are automatically provisioned when the task starts and destroyed when the task stops. Docker volumes that are scoped as shared persist after the task stops.
+     */
+    scope?: Scope;
+    /**
+     * If this value is true, the Docker volume is created if it does not already exist.  This field is only used if the scope is shared. 
+     */
+    autoprovision?: BoxedBoolean;
+    /**
+     * The Docker volume driver to use. The driver value must match the driver name provided by Docker because it is used for task placement. If the driver was installed using the Docker plugin CLI, use docker plugin ls to retrieve the driver name from your container instance. If the driver was installed using another method, use Docker plugin discovery to retrieve the driver name. For more information, see Docker plugin discovery. This parameter maps to Driver in the Create a volume section of the Docker Remote API and the xxdriver option to  docker volume create .
+     */
+    driver?: String;
+    /**
+     * A map of Docker driver specific options passed through. This parameter maps to DriverOpts in the Create a volume section of the Docker Remote API and the xxopt option to  docker volume create .
+     */
+    driverOpts?: StringMap;
+    /**
+     * Custom metadata to add to your Docker volume. This parameter maps to Labels in the Create a volume section of the Docker Remote API and the xxlabel option to  docker volume create .
+     */
+    labels?: StringMap;
+  }
   export type Double = number;
   export type EnvironmentVariables = KeyValuePair[];
   export interface Failure {
@@ -1072,7 +1094,7 @@ declare namespace ECS {
   export type HostEntryList = HostEntry[];
   export interface HostVolumeProperties {
     /**
-     * The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If the host parameter contains a sourcePath file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the sourcePath value does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported. If you are using the Fargate launch type, the sourcePath parameter is not supported.
+     * When the host parameter is used, specify a sourcePath to declare the path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If the host parameter contains a sourcePath file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the sourcePath value does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported. If you are using the Fargate launch type, the sourcePath parameter is not supported.
      */
     sourcePath?: String;
   }
@@ -1382,7 +1404,7 @@ declare namespace ECS {
   export type Long = number;
   export interface MountPoint {
     /**
-     * The name of the volume to mount.
+     * The name of the volume to mount. Must be a volume name referenced in the name parameter of task definition volume.
      */
     sourceVolume?: String;
     /**
@@ -1666,6 +1688,7 @@ declare namespace ECS {
     failures?: Failures;
   }
   export type SchedulingStrategy = "REPLICA"|"DAEMON"|string;
+  export type Scope = "task"|"shared"|string;
   export interface Service {
     /**
      * The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace, followed by the Region of the service, the AWS account ID of the service owner, the service namespace, and then the service name. For example, arn:aws:ecs:region:012345678910:service/my-service .
@@ -1855,6 +1878,7 @@ declare namespace ECS {
   }
   export type String = string;
   export type StringList = String[];
+  export type StringMap = {[key: string]: String};
   export interface SubmitContainerStateChangeRequest {
     /**
      * The short name or full ARN of the cluster that hosts the container.
@@ -1958,11 +1982,11 @@ declare namespace ECS {
      */
     overrides?: TaskOverride;
     /**
-     * The last known status of the task.
+     * The last known status of the task. For more information, see Task Lifecycle.
      */
     lastStatus?: String;
     /**
-     * The desired status of the task.
+     * The desired status of the task. For more information, see Task Lifecycle.
      */
     desiredStatus?: String;
     /**
@@ -2148,7 +2172,7 @@ declare namespace ECS {
      */
     size: Integer;
     /**
-     * The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime" 
+     * The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol" 
      */
     mountOptions?: StringList;
   }
@@ -2274,9 +2298,13 @@ declare namespace ECS {
      */
     name?: String;
     /**
-     * The contents of the host parameter determine whether your data volume persists on the host container instance and where it is stored. If the host parameter is empty, then the Docker daemon assigns a host path for your data volume, but the data is not guaranteed to persist after the containers associated with it stop running. Windows containers can mount whole directories on the same drive as $env:ProgramData. Windows containers cannot mount directories on a different drive, and mount point cannot be across drives. For example, you can mount C:\my\path:C:\my\path and D:\:D:\, but not D:\my\path:C:\my\path or D:\:C:\my\path.
+     * This parameter is specified when using bind mount host volumes. Bind mount host volumes are supported when using either the EC2 or Fargate launch types. The contents of the host parameter determine whether your bind mount host volume persists on the host container instance and where it is stored. If the host parameter is empty, then the Docker daemon assigns a host path for your data volume, but the data is not guaranteed to persist after the containers associated with it stop running. Windows containers can mount whole directories on the same drive as $env:ProgramData. Windows containers cannot mount directories on a different drive, and mount point cannot be across drives. For example, you can mount C:\my\path:C:\my\path and D:\:D:\, but not D:\my\path:C:\my\path or D:\:C:\my\path.
      */
     host?: HostVolumeProperties;
+    /**
+     * The configuration for the Docker volume. This parameter is specified when using Docker volumes.
+     */
+    dockerVolumeConfiguration?: DockerVolumeConfiguration;
   }
   export interface VolumeFrom {
     /**

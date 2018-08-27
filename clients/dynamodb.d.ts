@@ -507,7 +507,7 @@ declare namespace DynamoDB {
      */
     BackupStatus: BackupStatus;
     /**
-     * BackupType:    USER - On demand backup created by you.    SYSTEM - On demand backup automatically created by DynamoDB.  
+     * BackupType:    USER - On-demand backup created by you.    SYSTEM - On-demand backup automatically created by DynamoDB.  
      */
     BackupType: BackupType;
     /**
@@ -515,7 +515,7 @@ declare namespace DynamoDB {
      */
     BackupCreationDateTime: BackupCreationDateTime;
     /**
-     * Time at which the automatic on demand backup created by DynamoDB will expire. This SYSTEM on demand backup expires automatically 35 days after its creation.
+     * Time at which the automatic on-demand backup created by DynamoDB will expire. This SYSTEM on-demand backup expires automatically 35 days after its creation.
      */
     BackupExpiryDateTime?: _Date;
   }
@@ -549,7 +549,7 @@ declare namespace DynamoDB {
      */
     BackupCreationDateTime?: BackupCreationDateTime;
     /**
-     * Time at which the automatic on demand backup created by DynamoDB will expire. This SYSTEM on demand backup expires automatically 35 days after its creation.
+     * Time at which the automatic on-demand backup created by DynamoDB will expire. This SYSTEM on-demand backup expires automatically 35 days after its creation.
      */
     BackupExpiryDateTime?: _Date;
     /**
@@ -557,7 +557,7 @@ declare namespace DynamoDB {
      */
     BackupStatus?: BackupStatus;
     /**
-     * BackupType:    USER - On demand backup created by you.    SYSTEM - On demand backup automatically created by DynamoDB.  
+     * BackupType:    USER - On-demand backup created by you.    SYSTEM - On-demand backup automatically created by DynamoDB.  
      */
     BackupType?: BackupType;
     /**
@@ -667,7 +667,7 @@ declare namespace DynamoDB {
   export type ConsumedCapacityUnits = number;
   export interface ContinuousBackupsDescription {
     /**
-     *  ContinuousBackupsStatus can be one of the following states : ENABLED, DISABLED
+     *  ContinuousBackupsStatus can be one of the following states: ENABLED, DISABLED
      */
     ContinuousBackupsStatus: ContinuousBackupsStatus;
     /**
@@ -1190,6 +1190,7 @@ declare namespace DynamoDB {
   export type ItemCount = number;
   export type ItemList = AttributeMap[];
   export type KMSMasterKeyArn = string;
+  export type KMSMasterKeyId = string;
   export type Key = {[key: string]: AttributeValue};
   export type KeyConditions = {[key: string]: Condition};
   export type KeyExpression = string;
@@ -1252,7 +1253,7 @@ declare namespace DynamoDB {
      */
     ExclusiveStartBackupArn?: BackupArn;
     /**
-     * The backups from the table specified by BackupType are listed. Where BackupType can be:    USER - On demand backup created by you.    SYSTEM - On demand backup automatically created by DynamoDB.    ALL - All types of on demand backups (USER and SYSTEM).  
+     * The backups from the table specified by BackupType are listed. Where BackupType can be:    USER - On-demand backup created by you.    SYSTEM - On-demand backup automatically created by DynamoDB.    ALL - All types of on-demand backups (USER and SYSTEM).  
      */
     BackupType?: BackupTypeFilter;
   }
@@ -1796,7 +1797,7 @@ declare namespace DynamoDB {
   export type ReturnValue = "NONE"|"ALL_OLD"|"UPDATED_OLD"|"ALL_NEW"|"UPDATED_NEW"|string;
   export interface SSEDescription {
     /**
-     * The current state of server-side encryption:    ENABLING - Server-side encryption is being enabled.    ENABLED - Server-side encryption is enabled.    DISABLING - Server-side encryption is being disabled.    DISABLED - Server-side encryption is disabled.  
+     * The current state of server-side encryption:    ENABLING - Server-side encryption is being enabled.    ENABLED - Server-side encryption is enabled.    DISABLING - Server-side encryption is being disabled.    DISABLED - Server-side encryption is disabled.    UPDATING - Server-side encryption is being updated.  
      */
     Status?: SSEStatus;
     /**
@@ -1813,9 +1814,17 @@ declare namespace DynamoDB {
     /**
      * Indicates whether server-side encryption is enabled (true) or disabled (false) on the table.
      */
-    Enabled: SSEEnabled;
+    Enabled?: SSEEnabled;
+    /**
+     * Server-side encryption type:    AES256 - Server-side encryption which uses the AES256 algorithm.    KMS - Server-side encryption which uses AWS Key Management Service. (default)  
+     */
+    SSEType?: SSEType;
+    /**
+     * The KMS Master Key (CMK) which should be used for the KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS Master Key alias/aws/dynamodb.
+     */
+    KMSMasterKeyId?: KMSMasterKeyId;
   }
-  export type SSEStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
+  export type SSEStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"UPDATING"|string;
   export type SSEType = "AES256"|"KMS"|string;
   export type ScalarAttributeType = "S"|"N"|"B"|string;
   export interface ScanInput {
@@ -2271,6 +2280,10 @@ declare namespace DynamoDB {
      * Represents the DynamoDB Streams configuration for the table.  You will receive a ResourceInUseException if you attempt to enable a stream on a table that already has a stream, or if you attempt to disable a stream on a table which does not have a stream. 
      */
     StreamSpecification?: StreamSpecification;
+    /**
+     * The new server-side encryption settings for the specified table.
+     */
+    SSESpecification?: SSESpecification;
   }
   export interface UpdateTableOutput {
     /**

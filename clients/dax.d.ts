@@ -248,6 +248,10 @@ declare namespace DAX {
      * The parameter group being used by nodes in the cluster.
      */
     ParameterGroup?: ParameterGroupStatus;
+    /**
+     * The description of the server-side encryption status on the specified DAX cluster.
+     */
+    SSEDescription?: SSEDescription;
   }
   export type ClusterList = Cluster[];
   export type ClusterNameList = String[];
@@ -300,6 +304,10 @@ declare namespace DAX {
      * A set of tags to associate with the DAX cluster. 
      */
     Tags?: TagList;
+    /**
+     * Represents the settings used to enable server-side encryption on the cluster.
+     */
+    SSESpecification?: SSESpecification;
   }
   export interface CreateClusterResponse {
     /**
@@ -782,6 +790,20 @@ declare namespace DAX {
      */
     Cluster?: Cluster;
   }
+  export interface SSEDescription {
+    /**
+     * The current state of server-side encryption:    ENABLING - Server-side encryption is being enabled.    ENABLED - Server-side encryption is enabled.    DISABLING - Server-side encryption is being disabled.    DISABLED - Server-side encryption is disabled.  
+     */
+    Status?: SSEStatus;
+  }
+  export type SSEEnabled = boolean;
+  export interface SSESpecification {
+    /**
+     * Indicates whether server-side encryption is enabled (true) or disabled (false) on the cluster.
+     */
+    Enabled: SSEEnabled;
+  }
+  export type SSEStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
   export type SecurityGroupIdentifierList = String[];
   export interface SecurityGroupMembership {
     /**

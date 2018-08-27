@@ -170,6 +170,57 @@
       ],
       "documentation":"<p>Returns information about reserved Elasticsearch instances for this account.</p>"
     },
+    "GetCompatibleElasticsearchVersions":{
+      "name":"GetCompatibleElasticsearchVersions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-01-01/es/compatibleVersions"
+      },
+      "input":{"shape":"GetCompatibleElasticsearchVersionsRequest"},
+      "output":{"shape":"GetCompatibleElasticsearchVersionsResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalException"}
+      ],
+      "documentation":"<p> Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a <code> <a>DomainName</a> </code> to get all upgrade compatible Elasticsearch versions for that specific domain. </p>"
+    },
+    "GetUpgradeHistory":{
+      "name":"GetUpgradeHistory",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-01-01/es/upgradeDomain/{DomainName}/history"
+      },
+      "input":{"shape":"GetUpgradeHistoryRequest"},
+      "output":{"shape":"GetUpgradeHistoryResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalException"}
+      ],
+      "documentation":"<p>Retrieves the complete history of the last 10 upgrades that were performed on the domain.</p>"
+    },
+    "GetUpgradeStatus":{
+      "name":"GetUpgradeStatus",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-01-01/es/upgradeDomain/{DomainName}/status"
+      },
+      "input":{"shape":"GetUpgradeStatusRequest"},
+      "output":{"shape":"GetUpgradeStatusResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalException"}
+      ],
+      "documentation":"<p>Retrieves the latest status of the last upgrade or upgrade eligibility check that was performed on the domain.</p>"
+    },
     "ListDomainNames":{
       "name":"ListDomainNames",
       "http":{
@@ -280,6 +331,24 @@
         {"shape":"ValidationException"}
       ],
       "documentation":"<p>Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. </p>"
+    },
+    "UpgradeElasticsearchDomain":{
+      "name":"UpgradeElasticsearchDomain",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2015-01-01/es/upgradeDomain"
+      },
+      "input":{"shape":"UpgradeElasticsearchDomainRequest"},
+      "output":{"shape":"UpgradeElasticsearchDomainResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalException"}
+      ],
+      "documentation":"<p>Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.</p>"
     }
   },
   "shapes":{
@@ -420,6 +489,21 @@
         }
       },
       "documentation":"<p>Status of the Cognito options for the specified Elasticsearch domain.</p>"
+    },
+    "CompatibleElasticsearchVersionsList":{
+      "type":"list",
+      "member":{"shape":"CompatibleVersionsMap"}
+    },
+    "CompatibleVersionsMap":{
+      "type":"structure",
+      "members":{
+        "SourceVersion":{
+          "shape":"ElasticsearchVersionString",
+          "documentation":"<p>The current version of Elasticsearch on which a domain is.</p>"
+        },
+        "TargetVersions":{"shape":"ElasticsearchVersionList"}
+      },
+      "documentation":"<p> A map from an <code> <a>ElasticsearchVersion</a> </code> to a list of compatible <code> <a>ElasticsearchVersion</a> </code> s to which the domain can be upgraded. </p>"
     },
     "CreateElasticsearchDomainRequest":{
       "type":"structure",
@@ -946,6 +1030,10 @@
           "shape":"Boolean",
           "documentation":"<p>The status of the Elasticsearch domain configuration. <code>True</code> if Amazon Elasticsearch Service is processing configuration changes. <code>False</code> if the configuration is active.</p>"
         },
+        "UpgradeProcessing":{
+          "shape":"Boolean",
+          "documentation":"<p>The status of an Elasticsearch domain version upgrade. <code>True</code> if Amazon Elasticsearch Service is undergoing a version upgrade. <code>False</code> if the configuration is active.</p>"
+        },
         "ElasticsearchVersion":{"shape":"ElasticsearchVersionString"},
         "ElasticsearchClusterConfig":{
           "shape":"ElasticsearchClusterConfig",
@@ -1062,6 +1150,93 @@
       "type":"string",
       "pattern":"\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}"
     },
+    "GetCompatibleElasticsearchVersionsRequest":{
+      "type":"structure",
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "location":"querystring",
+          "locationName":"domainName"
+        }
+      },
+      "documentation":"<p> Container for request parameters to <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. </p>"
+    },
+    "GetCompatibleElasticsearchVersionsResponse":{
+      "type":"structure",
+      "members":{
+        "CompatibleElasticsearchVersions":{
+          "shape":"CompatibleElasticsearchVersionsList",
+          "documentation":"<p> A map of compatible Elasticsearch versions returned as part of the <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. </p>"
+        }
+      },
+      "documentation":"<p> Container for response returned by <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. </p>"
+    },
+    "GetUpgradeHistoryRequest":{
+      "type":"structure",
+      "required":["DomainName"],
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "location":"uri",
+          "locationName":"DomainName"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      },
+      "documentation":"<p> Container for request parameters to <code> <a>GetUpgradeHistory</a> </code> operation. </p>"
+    },
+    "GetUpgradeHistoryResponse":{
+      "type":"structure",
+      "members":{
+        "UpgradeHistories":{
+          "shape":"UpgradeHistoryList",
+          "documentation":"<p> A list of <code> <a>UpgradeHistory</a> </code> objects corresponding to each Upgrade or Upgrade Eligibility Check performed on a domain returned as part of <code> <a>GetUpgradeHistoryResponse</a> </code> object. </p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>Pagination token that needs to be supplied to the next call to get the next page of results</p>"
+        }
+      },
+      "documentation":"<p> Container for response returned by <code> <a>GetUpgradeHistory</a> </code> operation. </p>"
+    },
+    "GetUpgradeStatusRequest":{
+      "type":"structure",
+      "required":["DomainName"],
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "location":"uri",
+          "locationName":"DomainName"
+        }
+      },
+      "documentation":"<p> Container for request parameters to <code> <a>GetUpgradeStatus</a> </code> operation. </p>"
+    },
+    "GetUpgradeStatusResponse":{
+      "type":"structure",
+      "members":{
+        "UpgradeStep":{
+          "shape":"UpgradeStep",
+          "documentation":"<p> Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through: <ul> <li>PreUpgradeCheck</li> <li>Snapshot</li> <li>Upgrade</li> </ul> </p>"
+        },
+        "StepStatus":{
+          "shape":"UpgradeStatus",
+          "documentation":"<p> One of 4 statuses that a step can go through returned as part of the <code> <a>GetUpgradeStatusResponse</a> </code> object. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> </p>"
+        },
+        "UpgradeName":{
+          "shape":"UpgradeName",
+          "documentation":"<p>A string that describes the update briefly</p>"
+        }
+      },
+      "documentation":"<p> Container for response returned by <code> <a>GetUpgradeStatus</a> </code> operation. </p>"
+    },
     "IdentityPoolId":{
       "type":"string",
       "max":55,
@@ -1106,6 +1281,11 @@
       "documentation":"<p>An exception for trying to create or access sub-resource that is either invalid or not supported. Gives http status code of 409.</p>",
       "error":{"httpStatusCode":409},
       "exception":true
+    },
+    "Issue":{"type":"string"},
+    "Issues":{
+      "type":"list",
+      "member":{"shape":"Issue"}
     },
     "KmsKeyId":{
       "type":"string",
@@ -1592,6 +1772,7 @@
       },
       "documentation":"<p>Status of a daily automated snapshot.</p>"
     },
+    "StartTimestamp":{"type":"timestamp"},
     "StorageSubTypeName":{
       "type":"string",
       "documentation":"<p> SubType of the given storage type. List of available sub-storage options: For \"instance\" storageType we wont have any storageSubType, in case of \"ebs\" storageType we will have following valid storageSubTypes <ol> <li>standard</li> <li>gp2</li> <li>io1</li> </ol> Refer <code><a>VolumeType</a></code> for more information regarding above EBS storage options. </p>"
@@ -1735,6 +1916,110 @@
       "documentation":"<p>The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.</p>"
     },
     "UpdateTimestamp":{"type":"timestamp"},
+    "UpgradeElasticsearchDomainRequest":{
+      "type":"structure",
+      "required":[
+        "DomainName",
+        "TargetVersion"
+      ],
+      "members":{
+        "DomainName":{"shape":"DomainName"},
+        "TargetVersion":{
+          "shape":"ElasticsearchVersionString",
+          "documentation":"<p>The version of Elasticsearch that you intend to upgrade the domain to.</p>"
+        },
+        "PerformCheckOnly":{
+          "shape":"Boolean",
+          "documentation":"<p> This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. </p>"
+        }
+      },
+      "documentation":"<p> Container for request parameters to <code> <a>UpgradeElasticsearchDomain</a> </code> operation. </p>"
+    },
+    "UpgradeElasticsearchDomainResponse":{
+      "type":"structure",
+      "members":{
+        "DomainName":{"shape":"DomainName"},
+        "TargetVersion":{
+          "shape":"ElasticsearchVersionString",
+          "documentation":"<p>The version of Elasticsearch that you intend to upgrade the domain to.</p>"
+        },
+        "PerformCheckOnly":{
+          "shape":"Boolean",
+          "documentation":"<p> This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. </p>"
+        }
+      },
+      "documentation":"<p> Container for response returned by <code> <a>UpgradeElasticsearchDomain</a> </code> operation. </p>"
+    },
+    "UpgradeHistory":{
+      "type":"structure",
+      "members":{
+        "UpgradeName":{
+          "shape":"UpgradeName",
+          "documentation":"<p>A string that describes the update briefly</p>"
+        },
+        "StartTimestamp":{
+          "shape":"StartTimestamp",
+          "documentation":"<p>UTC Timestamp at which the Upgrade API call was made in \"yyyy-MM-ddTHH:mm:ssZ\" format.</p>"
+        },
+        "UpgradeStatus":{
+          "shape":"UpgradeStatus",
+          "documentation":"<p> The overall status of the update. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> </p>"
+        },
+        "StepsList":{
+          "shape":"UpgradeStepsList",
+          "documentation":"<p> A list of <code> <a>UpgradeStepItem</a> </code> s representing information about each step performed as pard of a specific Upgrade or Upgrade Eligibility Check. </p>"
+        }
+      },
+      "documentation":"<p>History of the last 10 Upgrades and Upgrade Eligibility Checks.</p>"
+    },
+    "UpgradeHistoryList":{
+      "type":"list",
+      "member":{"shape":"UpgradeHistory"}
+    },
+    "UpgradeName":{"type":"string"},
+    "UpgradeStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "SUCCEEDED",
+        "SUCCEEDED_WITH_ISSUES",
+        "FAILED"
+      ]
+    },
+    "UpgradeStep":{
+      "type":"string",
+      "enum":[
+        "PRE_UPGRADE_CHECK",
+        "SNAPSHOT",
+        "UPGRADE"
+      ]
+    },
+    "UpgradeStepItem":{
+      "type":"structure",
+      "members":{
+        "UpgradeStep":{
+          "shape":"UpgradeStep",
+          "documentation":"<p> Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through: <ul> <li>PreUpgradeCheck</li> <li>Snapshot</li> <li>Upgrade</li> </ul> </p>"
+        },
+        "UpgradeStepStatus":{
+          "shape":"UpgradeStatus",
+          "documentation":"<p> The status of a particular step during an upgrade. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> </p>"
+        },
+        "Issues":{
+          "shape":"Issues",
+          "documentation":"<p>A list of strings containing detailed information about the errors encountered in a particular step.</p>"
+        },
+        "ProgressPercent":{
+          "shape":"Double",
+          "documentation":"<p>The Floating point value representing progress percentage of a particular step.</p>"
+        }
+      },
+      "documentation":"<p>Represents a single step of the Upgrade or Upgrade Eligibility Check workflow.</p>"
+    },
+    "UpgradeStepsList":{
+      "type":"list",
+      "member":{"shape":"UpgradeStepItem"}
+    },
     "UserPoolId":{
       "type":"string",
       "max":55,

@@ -88,6 +88,30 @@ declare class ES extends Service {
    */
   describeReservedElasticsearchInstances(callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstancesResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstancesResponse, AWSError>;
   /**
+   *  Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a  DomainName  to get all upgrade compatible Elasticsearch versions for that specific domain. 
+   */
+  getCompatibleElasticsearchVersions(params: ES.Types.GetCompatibleElasticsearchVersionsRequest, callback?: (err: AWSError, data: ES.Types.GetCompatibleElasticsearchVersionsResponse) => void): Request<ES.Types.GetCompatibleElasticsearchVersionsResponse, AWSError>;
+  /**
+   *  Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a  DomainName  to get all upgrade compatible Elasticsearch versions for that specific domain. 
+   */
+  getCompatibleElasticsearchVersions(callback?: (err: AWSError, data: ES.Types.GetCompatibleElasticsearchVersionsResponse) => void): Request<ES.Types.GetCompatibleElasticsearchVersionsResponse, AWSError>;
+  /**
+   * Retrieves the complete history of the last 10 upgrades that were performed on the domain.
+   */
+  getUpgradeHistory(params: ES.Types.GetUpgradeHistoryRequest, callback?: (err: AWSError, data: ES.Types.GetUpgradeHistoryResponse) => void): Request<ES.Types.GetUpgradeHistoryResponse, AWSError>;
+  /**
+   * Retrieves the complete history of the last 10 upgrades that were performed on the domain.
+   */
+  getUpgradeHistory(callback?: (err: AWSError, data: ES.Types.GetUpgradeHistoryResponse) => void): Request<ES.Types.GetUpgradeHistoryResponse, AWSError>;
+  /**
+   * Retrieves the latest status of the last upgrade or upgrade eligibility check that was performed on the domain.
+   */
+  getUpgradeStatus(params: ES.Types.GetUpgradeStatusRequest, callback?: (err: AWSError, data: ES.Types.GetUpgradeStatusResponse) => void): Request<ES.Types.GetUpgradeStatusResponse, AWSError>;
+  /**
+   * Retrieves the latest status of the last upgrade or upgrade eligibility check that was performed on the domain.
+   */
+  getUpgradeStatus(callback?: (err: AWSError, data: ES.Types.GetUpgradeStatusResponse) => void): Request<ES.Types.GetUpgradeStatusResponse, AWSError>;
+  /**
    * Returns the name of all Elasticsearch domains owned by the current user's account. 
    */
   listDomainNames(callback?: (err: AWSError, data: ES.Types.ListDomainNamesResponse) => void): Request<ES.Types.ListDomainNamesResponse, AWSError>;
@@ -139,6 +163,14 @@ declare class ES extends Service {
    * Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. 
    */
   updateElasticsearchDomainConfig(callback?: (err: AWSError, data: ES.Types.UpdateElasticsearchDomainConfigResponse) => void): Request<ES.Types.UpdateElasticsearchDomainConfigResponse, AWSError>;
+  /**
+   * Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.
+   */
+  upgradeElasticsearchDomain(params: ES.Types.UpgradeElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.UpgradeElasticsearchDomainResponse) => void): Request<ES.Types.UpgradeElasticsearchDomainResponse, AWSError>;
+  /**
+   * Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.
+   */
+  upgradeElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.UpgradeElasticsearchDomainResponse) => void): Request<ES.Types.UpgradeElasticsearchDomainResponse, AWSError>;
 }
 declare namespace ES {
   export type ARN = string;
@@ -213,6 +245,14 @@ declare namespace ES {
      * Specifies the status of the Cognito options for the specified Elasticsearch domain.
      */
     Status: OptionStatus;
+  }
+  export type CompatibleElasticsearchVersionsList = CompatibleVersionsMap[];
+  export interface CompatibleVersionsMap {
+    /**
+     * The current version of Elasticsearch on which a domain is.
+     */
+    SourceVersion?: ElasticsearchVersionString;
+    TargetVersions?: ElasticsearchVersionList;
   }
   export interface CreateElasticsearchDomainRequest {
     /**
@@ -530,6 +570,10 @@ declare namespace ES {
      * The status of the Elasticsearch domain configuration. True if Amazon Elasticsearch Service is processing configuration changes. False if the configuration is active.
      */
     Processing?: Boolean;
+    /**
+     * The status of an Elasticsearch domain version upgrade. True if Amazon Elasticsearch Service is undergoing a version upgrade. False if the configuration is active.
+     */
+    UpgradeProcessing?: Boolean;
     ElasticsearchVersion?: ElasticsearchVersionString;
     /**
      * The type and number of instances in the domain cluster.
@@ -604,6 +648,47 @@ declare namespace ES {
   }
   export type EndpointsMap = {[key: string]: ServiceUrl};
   export type GUID = string;
+  export interface GetCompatibleElasticsearchVersionsRequest {
+    DomainName?: DomainName;
+  }
+  export interface GetCompatibleElasticsearchVersionsResponse {
+    /**
+     *  A map of compatible Elasticsearch versions returned as part of the  GetCompatibleElasticsearchVersions  operation. 
+     */
+    CompatibleElasticsearchVersions?: CompatibleElasticsearchVersionsList;
+  }
+  export interface GetUpgradeHistoryRequest {
+    DomainName: DomainName;
+    MaxResults?: MaxResults;
+    NextToken?: NextToken;
+  }
+  export interface GetUpgradeHistoryResponse {
+    /**
+     *  A list of  UpgradeHistory  objects corresponding to each Upgrade or Upgrade Eligibility Check performed on a domain returned as part of  GetUpgradeHistoryResponse  object. 
+     */
+    UpgradeHistories?: UpgradeHistoryList;
+    /**
+     * Pagination token that needs to be supplied to the next call to get the next page of results
+     */
+    NextToken?: String;
+  }
+  export interface GetUpgradeStatusRequest {
+    DomainName: DomainName;
+  }
+  export interface GetUpgradeStatusResponse {
+    /**
+     *  Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through:  PreUpgradeCheck Snapshot Upgrade  
+     */
+    UpgradeStep?: UpgradeStep;
+    /**
+     *  One of 4 statuses that a step can go through returned as part of the  GetUpgradeStatusResponse  object. The status can take one of the following values:  In Progress Succeeded Succeeded with Issues Failed  
+     */
+    StepStatus?: UpgradeStatus;
+    /**
+     * A string that describes the update briefly
+     */
+    UpgradeName?: UpgradeName;
+  }
   export type IdentityPoolId = string;
   export type InstanceCount = number;
   export interface InstanceCountLimits {
@@ -616,6 +701,8 @@ declare namespace ES {
   export type InstanceRole = string;
   export type Integer = number;
   export type IntegerClass = number;
+  export type Issue = string;
+  export type Issues = Issue[];
   export type KmsKeyId = string;
   export type LimitName = string;
   export type LimitValue = string;
@@ -891,6 +978,7 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export type StartTimestamp = Date;
   export type StorageSubTypeName = string;
   export interface StorageType {
     StorageTypeName?: StorageTypeName;
@@ -974,6 +1062,69 @@ declare namespace ES {
     DomainConfig: ElasticsearchDomainConfig;
   }
   export type UpdateTimestamp = Date;
+  export interface UpgradeElasticsearchDomainRequest {
+    DomainName: DomainName;
+    /**
+     * The version of Elasticsearch that you intend to upgrade the domain to.
+     */
+    TargetVersion: ElasticsearchVersionString;
+    /**
+     *  This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. 
+     */
+    PerformCheckOnly?: Boolean;
+  }
+  export interface UpgradeElasticsearchDomainResponse {
+    DomainName?: DomainName;
+    /**
+     * The version of Elasticsearch that you intend to upgrade the domain to.
+     */
+    TargetVersion?: ElasticsearchVersionString;
+    /**
+     *  This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. 
+     */
+    PerformCheckOnly?: Boolean;
+  }
+  export interface UpgradeHistory {
+    /**
+     * A string that describes the update briefly
+     */
+    UpgradeName?: UpgradeName;
+    /**
+     * UTC Timestamp at which the Upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ" format.
+     */
+    StartTimestamp?: StartTimestamp;
+    /**
+     *  The overall status of the update. The status can take one of the following values:  In Progress Succeeded Succeeded with Issues Failed  
+     */
+    UpgradeStatus?: UpgradeStatus;
+    /**
+     *  A list of  UpgradeStepItem  s representing information about each step performed as pard of a specific Upgrade or Upgrade Eligibility Check. 
+     */
+    StepsList?: UpgradeStepsList;
+  }
+  export type UpgradeHistoryList = UpgradeHistory[];
+  export type UpgradeName = string;
+  export type UpgradeStatus = "IN_PROGRESS"|"SUCCEEDED"|"SUCCEEDED_WITH_ISSUES"|"FAILED"|string;
+  export type UpgradeStep = "PRE_UPGRADE_CHECK"|"SNAPSHOT"|"UPGRADE"|string;
+  export interface UpgradeStepItem {
+    /**
+     *  Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through:  PreUpgradeCheck Snapshot Upgrade  
+     */
+    UpgradeStep?: UpgradeStep;
+    /**
+     *  The status of a particular step during an upgrade. The status can take one of the following values:  In Progress Succeeded Succeeded with Issues Failed  
+     */
+    UpgradeStepStatus?: UpgradeStatus;
+    /**
+     * A list of strings containing detailed information about the errors encountered in a particular step.
+     */
+    Issues?: Issues;
+    /**
+     * The Floating point value representing progress percentage of a particular step.
+     */
+    ProgressPercent?: Double;
+  }
+  export type UpgradeStepsList = UpgradeStepItem[];
   export type UserPoolId = string;
   export interface VPCDerivedInfo {
     /**

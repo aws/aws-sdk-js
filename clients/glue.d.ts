@@ -36,11 +36,11 @@ declare class Glue extends Service {
    */
   batchDeletePartition(callback?: (err: AWSError, data: Glue.Types.BatchDeletePartitionResponse) => void): Request<Glue.Types.BatchDeletePartitionResponse, AWSError>;
   /**
-   * Deletes multiple tables at once.
+   * Deletes multiple tables at once.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   batchDeleteTable(params: Glue.Types.BatchDeleteTableRequest, callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
   /**
-   * Deletes multiple tables at once.
+   * Deletes multiple tables at once.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   batchDeleteTable(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
   /**
@@ -132,6 +132,14 @@ declare class Glue extends Service {
    */
   createScript(callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
   /**
+   * Creates a new security configuration.
+   */
+  createSecurityConfiguration(params: Glue.Types.CreateSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
+  /**
+   * Creates a new security configuration.
+   */
+  createSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
+  /**
    * Creates a new table definition in the Data Catalog.
    */
   createTable(params: Glue.Types.CreateTableRequest, callback?: (err: AWSError, data: Glue.Types.CreateTableResponse) => void): Request<Glue.Types.CreateTableResponse, AWSError>;
@@ -180,11 +188,11 @@ declare class Glue extends Service {
    */
   deleteCrawler(callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
-   * Removes a specified Database from a Data Catalog.
+   * Removes a specified Database from a Data Catalog.  After completing this operation, you will no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
   deleteDatabase(params: Glue.Types.DeleteDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
   /**
-   * Removes a specified Database from a Data Catalog.
+   * Removes a specified Database from a Data Catalog.  After completing this operation, you will no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
   deleteDatabase(callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
   /**
@@ -212,11 +220,19 @@ declare class Glue extends Service {
    */
   deletePartition(callback?: (err: AWSError, data: Glue.Types.DeletePartitionResponse) => void): Request<Glue.Types.DeletePartitionResponse, AWSError>;
   /**
-   * Removes a table definition from the Data Catalog.
+   * Deletes a specified security configuration.
+   */
+  deleteSecurityConfiguration(params: Glue.Types.DeleteSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
+  /**
+   * Deletes a specified security configuration.
+   */
+  deleteSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
+  /**
+   * Removes a table definition from the Data Catalog.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   deleteTable(params: Glue.Types.DeleteTableRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
-   * Removes a table definition from the Data Catalog.
+   * Removes a table definition from the Data Catalog.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   deleteTable(callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
@@ -412,6 +428,22 @@ declare class Glue extends Service {
    */
   getPlan(callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
+   * Retrieves a specified security configuration.
+   */
+  getSecurityConfiguration(params: Glue.Types.GetSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationResponse) => void): Request<Glue.Types.GetSecurityConfigurationResponse, AWSError>;
+  /**
+   * Retrieves a specified security configuration.
+   */
+  getSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationResponse) => void): Request<Glue.Types.GetSecurityConfigurationResponse, AWSError>;
+  /**
+   * Retrieves a list of all security configurations.
+   */
+  getSecurityConfigurations(params: Glue.Types.GetSecurityConfigurationsRequest, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationsResponse) => void): Request<Glue.Types.GetSecurityConfigurationsResponse, AWSError>;
+  /**
+   * Retrieves a list of all security configurations.
+   */
+  getSecurityConfigurations(callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationsResponse) => void): Request<Glue.Types.GetSecurityConfigurationsResponse, AWSError>;
+  /**
    * Retrieves the Table definition in a Data Catalog for a specified table.
    */
   getTable(params: Glue.Types.GetTableRequest, callback?: (err: AWSError, data: Glue.Types.GetTableResponse) => void): Request<Glue.Types.GetTableResponse, AWSError>;
@@ -483,6 +515,14 @@ declare class Glue extends Service {
    * Imports an existing Athena Data Catalog to AWS Glue
    */
   importCatalogToGlue(callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
+  /**
+   * Sets the security configuration for a specified catalog. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter.
+   */
+  putDataCatalogEncryptionSettings(params: Glue.Types.PutDataCatalogEncryptionSettingsRequest, callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Sets the security configuration for a specified catalog. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter.
+   */
+  putDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
   /**
    * Resets a bookmark entry.
    */
@@ -643,17 +683,21 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * Arguments to be passed to the job run. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
-     * The job run timeout in minutes. It overrides the timeout value of the job.
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
      */
     Timeout?: Timeout;
     /**
      * Specifies configuration properties of a job run notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this action.
+     */
+    SecurityConfiguration?: NameString;
   }
   export type ActionList = Action[];
   export type AttemptCount = number;
@@ -852,6 +896,7 @@ declare namespace Glue {
   export type BooleanNullable = boolean;
   export type BooleanValue = boolean;
   export type BoundedPartitionValueList = ValueString[];
+  export type CatalogEncryptionMode = "DISABLED"|"SSE-KMS"|string;
   export type CatalogEntries = CatalogEntry[];
   export interface CatalogEntry {
     /**
@@ -895,6 +940,17 @@ declare namespace Glue {
   }
   export type ClassifierList = Classifier[];
   export type ClassifierNameList = NameString[];
+  export interface CloudWatchEncryption {
+    /**
+     * The encryption mode to use for CloudWatch data.
+     */
+    CloudWatchEncryptionMode?: CloudWatchEncryptionMode;
+    /**
+     * The AWS ARN of the KMS key to be used to encrypt the data.
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
+  export type CloudWatchEncryptionMode = "DISABLED"|"SSE-KMS"|string;
   export type CodeGenArgName = string;
   export type CodeGenArgValue = string;
   export interface CodeGenEdge {
@@ -998,7 +1054,7 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * A list of key-value pairs used as parameters for this connection.
+     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database.    PASSWORD - A password, if one is used, for the user name.    JDBC_DRIVER_JAR_URI - The S3 path of the a jar file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use).    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for the JDBC connection.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client. The default is false.  
      */
     ConnectionProperties?: ConnectionProperties;
     /**
@@ -1036,7 +1092,7 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * A list of key-value pairs used as parameters for this connection.
+     * These key-value pairs define parameters for the connection.
      */
     ConnectionProperties: ConnectionProperties;
     /**
@@ -1047,7 +1103,7 @@ declare namespace Glue {
   export type ConnectionList = Connection[];
   export type ConnectionName = string;
   export type ConnectionProperties = {[key: string]: ValueString};
-  export type ConnectionPropertyKey = "HOST"|"PORT"|"USERNAME"|"PASSWORD"|"JDBC_DRIVER_JAR_URI"|"JDBC_DRIVER_CLASS_NAME"|"JDBC_ENGINE"|"JDBC_ENGINE_VERSION"|"CONFIG_FILES"|"INSTANCE_ID"|"JDBC_CONNECTION_URL"|string;
+  export type ConnectionPropertyKey = "HOST"|"PORT"|"USERNAME"|"PASSWORD"|"JDBC_DRIVER_JAR_URI"|"JDBC_DRIVER_CLASS_NAME"|"JDBC_ENGINE"|"JDBC_ENGINE_VERSION"|"CONFIG_FILES"|"INSTANCE_ID"|"JDBC_CONNECTION_URL"|"JDBC_ENFORCE_SSL"|string;
   export type ConnectionType = "JDBC"|"SFTP"|string;
   export interface ConnectionsList {
     /**
@@ -1117,9 +1173,13 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
      */
     Configuration?: CrawlerConfiguration;
+    /**
+     * The name of the SecurityConfiguration structure to be used by this Crawler.
+     */
+    CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
   }
   export type CrawlerConfiguration = string;
   export type CrawlerList = Crawler[];
@@ -1159,6 +1219,7 @@ declare namespace Glue {
   }
   export type CrawlerMetricsList = CrawlerMetrics[];
   export type CrawlerNameList = NameString[];
+  export type CrawlerSecurityConfiguration = string;
   export type CrawlerState = "READY"|"RUNNING"|"STOPPING"|string;
   export interface CrawlerTargets {
     /**
@@ -1240,9 +1301,13 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
      */
     Configuration?: CrawlerConfiguration;
+    /**
+     * The name of the SecurityConfiguration structure to be used by this Crawler.
+     */
+    CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
   }
   export interface CreateCrawlerResponse {
   }
@@ -1295,6 +1360,10 @@ declare namespace Glue {
      * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.
      */
     ExtraJarsS3Path?: GenericString;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+     */
+    SecurityConfiguration?: NameString;
   }
   export interface CreateDevEndpointResponse {
     /**
@@ -1349,6 +1418,10 @@ declare namespace Glue {
      * The reason for a current failure in this DevEndpoint.
      */
     FailureReason?: GenericString;
+    /**
+     * The name of the SecurityConfiguration structure being used with this DevEndpoint.
+     */
+    SecurityConfiguration?: NameString;
     /**
      * The point in time at which this DevEndpoint was created.
      */
@@ -1414,13 +1487,17 @@ declare namespace Glue {
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job timeout in minutes. The default is 2880 minutes (48 hours).
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
      */
     Timeout?: Timeout;
     /**
      * Specifies configuration properties of a job notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job.
+     */
+    SecurityConfiguration?: NameString;
   }
   export interface CreateJobResponse {
     /**
@@ -1481,6 +1558,26 @@ declare namespace Glue {
      * The Scala code generated from the DAG.
      */
     ScalaCode?: ScalaCode;
+  }
+  export interface CreateSecurityConfigurationRequest {
+    /**
+     * The name for the new security configuration.
+     */
+    Name: NameString;
+    /**
+     * The encryption configuration for the new security configuration.
+     */
+    EncryptionConfiguration: EncryptionConfiguration;
+  }
+  export interface CreateSecurityConfigurationResponse {
+    /**
+     * The name assigned to the new security configuration.
+     */
+    Name?: NameString;
+    /**
+     * The time at which the new security configuration was created.
+     */
+    CreatedTimestamp?: TimestampValue;
   }
   export interface CreateTableRequest {
     /**
@@ -1568,6 +1665,12 @@ declare namespace Glue {
   export type CustomPatterns = string;
   export type DagEdges = CodeGenEdge[];
   export type DagNodes = CodeGenNode[];
+  export interface DataCatalogEncryptionSettings {
+    /**
+     * Specifies encryption-at-rest configuration for the Data Catalog.
+     */
+    EncryptionAtRest?: EncryptionAtRest;
+  }
   export interface Database {
     /**
      * Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.
@@ -1582,7 +1685,7 @@ declare namespace Glue {
      */
     LocationUri?: URI;
     /**
-     * A list of key-value pairs that define parameters and properties of the database.
+     * These key-value pairs define parameters and properties of the database.
      */
     Parameters?: ParametersMap;
     /**
@@ -1604,7 +1707,7 @@ declare namespace Glue {
      */
     LocationUri?: URI;
     /**
-     * A list of key-value pairs that define parameters and properties of the database.
+     * Thes key-value pairs define parameters and properties of the database.
      */
     Parameters?: ParametersMap;
   }
@@ -1691,6 +1794,14 @@ declare namespace Glue {
     PartitionValues: ValueStringList;
   }
   export interface DeletePartitionResponse {
+  }
+  export interface DeleteSecurityConfigurationRequest {
+    /**
+     * The name of the security configuration to delete.
+     */
+    Name: NameString;
+  }
+  export interface DeleteSecurityConfigurationResponse {
   }
   export interface DeleteTableRequest {
     /**
@@ -1839,6 +1950,10 @@ declare namespace Glue {
      * A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
      */
     PublicKeys?: PublicKeysList;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+     */
+    SecurityConfiguration?: NameString;
   }
   export interface DevEndpointCustomLibraries {
     /**
@@ -1858,6 +1973,30 @@ declare namespace Glue {
     Path?: Path;
   }
   export type DynamoDBTargetList = DynamoDBTarget[];
+  export interface EncryptionAtRest {
+    /**
+     * The encryption-at-rest mode for encrypting Data Catalog data.
+     */
+    CatalogEncryptionMode: CatalogEncryptionMode;
+    /**
+     * The ID of the AWS KMS key to use for encryption at rest.
+     */
+    SseAwsKmsKeyId?: NameString;
+  }
+  export interface EncryptionConfiguration {
+    /**
+     * The encryption configuration for S3 data.
+     */
+    S3Encryption?: S3EncryptionList;
+    /**
+     * The encryption configuration for CloudWatch.
+     */
+    CloudWatchEncryption?: CloudWatchEncryption;
+    /**
+     * The encryption configuration for Job Bookmarks.
+     */
+    JobBookmarksEncryption?: JobBookmarksEncryption;
+  }
   export type ErrorByName = {[key: string]: ErrorDetail};
   export interface ErrorDetail {
     /**
@@ -2316,6 +2455,38 @@ declare namespace Glue {
      */
     ScalaCode?: ScalaCode;
   }
+  export interface GetSecurityConfigurationRequest {
+    /**
+     * The name of the security configuration to retrieve.
+     */
+    Name: NameString;
+  }
+  export interface GetSecurityConfigurationResponse {
+    /**
+     * The requested security configuration
+     */
+    SecurityConfiguration?: SecurityConfiguration;
+  }
+  export interface GetSecurityConfigurationsRequest {
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface GetSecurityConfigurationsResponse {
+    /**
+     * A list of security configurations.
+     */
+    SecurityConfigurations?: SecurityConfigurationList;
+    /**
+     * A continuation token, if there are more security configurations to return.
+     */
+    NextToken?: GenericString;
+  }
   export interface GetTableRequest {
     /**
      * The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
@@ -2621,13 +2792,17 @@ declare namespace Glue {
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job timeout in minutes.
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
      */
     Timeout?: Timeout;
     /**
      * Specifies configuration properties of a job notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job.
+     */
+    SecurityConfiguration?: NameString;
   }
   export interface JobBookmarkEntry {
     /**
@@ -2651,6 +2826,17 @@ declare namespace Glue {
      */
     JobBookmark?: JsonValue;
   }
+  export interface JobBookmarksEncryption {
+    /**
+     * The encryption mode to use for Job bookmarks data.
+     */
+    JobBookmarksEncryptionMode?: JobBookmarksEncryptionMode;
+    /**
+     * The AWS ARN of the KMS key to be used to encrypt the data.
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
+  export type JobBookmarksEncryptionMode = "DISABLED"|"CSE-KMS"|string;
   export interface JobCommand {
     /**
      * The name of the job command: this must be glueetl.
@@ -2721,13 +2907,21 @@ declare namespace Glue {
      */
     ExecutionTime?: ExecutionTime;
     /**
-     * The job run timeout in minutes.
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
      */
     Timeout?: Timeout;
     /**
      * Specifies configuration properties of a job run notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job run.
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * The name of the log group for secure logging, that can be server-side encrypted in CloudWatch using KMS. This name can be /aws-glue/jobs/, in which case the default encryption is NONE. If you add a role name and SecurityConfiguration name (in other words, /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security configuration will be used to encrypt the log group.
+     */
+    LogGroupName?: GenericString;
   }
   export type JobRunList = JobRun[];
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
@@ -2769,13 +2963,17 @@ declare namespace Glue {
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job timeout in minutes. The default is 2880 minutes (48 hours).
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
      */
     Timeout?: Timeout;
     /**
      * Specifies configuration properties of a job notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job.
+     */
+    SecurityConfiguration?: NameString;
   }
   export interface JsonClassifier {
     /**
@@ -2802,6 +3000,7 @@ declare namespace Glue {
   export type JsonPath = string;
   export type JsonValue = string;
   export type KeyString = string;
+  export type KmsKeyArn = string;
   export type Language = "PYTHON"|"SCALA"|string;
   export interface LastCrawlInfo {
     /**
@@ -2933,7 +3132,7 @@ declare namespace Glue {
      */
     StorageDescriptor?: StorageDescriptor;
     /**
-     * Partition parameters, in the form of a list of key-value pairs.
+     * These key-value pairs define partition parameters.
      */
     Parameters?: ParametersMap;
     /**
@@ -2966,7 +3165,7 @@ declare namespace Glue {
      */
     StorageDescriptor?: StorageDescriptor;
     /**
-     * Partition parameters, in the form of a list of key-value pairs.
+     * These key-value pairs define partition parameters.
      */
     Parameters?: ParametersMap;
     /**
@@ -2994,7 +3193,7 @@ declare namespace Glue {
      */
     SecurityGroupIdList?: SecurityGroupIdList;
     /**
-     * The connection's availability zone. This field is deprecated and has no effect.
+     * The connection's availability zone. This field is redundant, since the specified subnet implies the availability zone to be used. The field must be populated now, but will be deprecated in the future.
      */
     AvailabilityZone?: NameString;
   }
@@ -3022,6 +3221,18 @@ declare namespace Glue {
   export type PredicateString = string;
   export type PrincipalType = "USER"|"ROLE"|"GROUP"|string;
   export type PublicKeysList = GenericString[];
+  export interface PutDataCatalogEncryptionSettingsRequest {
+    /**
+     * The ID of the Data Catalog for which to set the security configuration. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The security configuration to set.
+     */
+    DataCatalogEncryptionSettings: DataCatalogEncryptionSettings;
+  }
+  export interface PutDataCatalogEncryptionSettingsResponse {
+  }
   export type PythonScript = string;
   export interface ResetJobBookmarkRequest {
     /**
@@ -3051,6 +3262,18 @@ declare namespace Glue {
   export type RoleArn = string;
   export type RoleString = string;
   export type RowTag = string;
+  export interface S3Encryption {
+    /**
+     * The encryption mode to use for S3 data.
+     */
+    S3EncryptionMode?: S3EncryptionMode;
+    /**
+     * The AWS ARN of the KMS key to be used to encrypt the data.
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
+  export type S3EncryptionList = S3Encryption[];
+  export type S3EncryptionMode = "DISABLED"|"SSE-KMS"|"SSE-S3"|string;
   export interface S3Target {
     /**
      * The path to the Amazon S3 target.
@@ -3086,6 +3309,21 @@ declare namespace Glue {
   }
   export type SchemaPathString = string;
   export type ScriptLocationString = string;
+  export interface SecurityConfiguration {
+    /**
+     * The name of the security configuration.
+     */
+    Name?: NameString;
+    /**
+     * The time at which this security configuration was created.
+     */
+    CreatedTimeStamp?: TimestampValue;
+    /**
+     * The encryption configuration associated with this security configuration.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
+  }
+  export type SecurityConfigurationList = SecurityConfiguration[];
   export type SecurityGroupIdList = NameString[];
   export interface Segment {
     /**
@@ -3107,7 +3345,7 @@ declare namespace Glue {
      */
     SerializationLibrary?: NameString;
     /**
-     * A list of initialization parameters for the SerDe, in key-value form.
+     * These key-value pairs define initialization parameters for the SerDe.
      */
     Parameters?: ParametersMap;
   }
@@ -3159,13 +3397,17 @@ declare namespace Glue {
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job run timeout in minutes. It overrides the timeout value of the job.
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
      */
     Timeout?: Timeout;
     /**
      * Specifies configuration properties of a job run notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job run.
+     */
+    SecurityConfiguration?: NameString;
   }
   export interface StartJobRunResponse {
     /**
@@ -3322,7 +3564,7 @@ declare namespace Glue {
      */
     TableType?: TableTypeString;
     /**
-     * Properties associated with this table, as a list of key-value pairs.
+     * These key-value pairs define properties associated with the table.
      */
     Parameters?: ParametersMap;
     /**
@@ -3387,7 +3629,7 @@ declare namespace Glue {
      */
     TableType?: TableTypeString;
     /**
-     * Properties associated with this table, as a list of key-value pairs.
+     * These key-value pairs define properties associated with the table.
      */
     Parameters?: ParametersMap;
   }
@@ -3556,9 +3798,13 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
      */
     Configuration?: CrawlerConfiguration;
+    /**
+     * The name of the SecurityConfiguration structure to be used by this Crawler.
+     */
+    CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
   }
   export interface UpdateCrawlerResponse {
   }
@@ -3604,7 +3850,7 @@ declare namespace Glue {
      */
     AddPublicKeys?: PublicKeysList;
     /**
-     * The list of public keys to be deleted from the DevEndpoint. 
+     * The list of public keys to be deleted from the DevEndpoint.
      */
     DeletePublicKeys?: PublicKeysList;
     /**

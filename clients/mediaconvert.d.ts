@@ -209,13 +209,13 @@ declare namespace MediaConvert {
      */
     Bitrate?: __integerMin6000Max1024000;
     CodecProfile?: AacCodecProfile;
-    CodingMode: AacCodingMode;
+    CodingMode?: AacCodingMode;
     RateControlMode?: AacRateControlMode;
     RawFormat?: AacRawFormat;
     /**
      * Sample rate in Hz. Valid values depend on rate control mode and profile.
      */
-    SampleRate: __integerMin8000Max96000;
+    SampleRate?: __integerMin8000Max96000;
     Specification?: AacSpecification;
     VbrQuality?: AacVbrQuality;
   }
@@ -272,7 +272,7 @@ declare namespace MediaConvert {
     AacSettings?: AacSettings;
     Ac3Settings?: Ac3Settings;
     AiffSettings?: AiffSettings;
-    Codec: AudioCodec;
+    Codec?: AudioCodec;
     Eac3Settings?: Eac3Settings;
     Mp2Settings?: Mp2Settings;
     WavSettings?: WavSettings;
@@ -289,7 +289,7 @@ declare namespace MediaConvert {
      */
     AudioType?: __integerMin0Max255;
     AudioTypeControl?: AudioTypeControl;
-    CodecSettings: AudioCodecSettings;
+    CodecSettings?: AudioCodecSettings;
     /**
      * Specify the language for this audio output track, using the ISO 639-2 or ISO 639-3 three-letter language code. The language specified will be used when 'Follow Input Language Code' is not selected or when 'Follow Input Language Code' is selected but there is no ISO 639 language code specified by the input.
      */
@@ -367,7 +367,7 @@ declare namespace MediaConvert {
     /**
      * Name of an Audio Selector within the same input to include in the group.  Audio selector names are standardized, based on their order within the input (e.g., "Audio Selector 1"). The audio selector name parameter can be repeated to add any number of audio selectors to the group.
      */
-    AudioSelectorNames: __listOf__stringMin1;
+    AudioSelectorNames?: __listOf__stringMin1;
   }
   export type AudioSelectorType = "PID"|"TRACK"|"LANGUAGE_CODE"|string;
   export type AudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
@@ -378,7 +378,7 @@ declare namespace MediaConvert {
     AvailBlankingImage?: __stringMin14PatternS3BmpBMPPngPNG;
   }
   export interface BurninDestinationSettings {
-    Alignment: BurninSubtitleAlignment;
+    Alignment?: BurninSubtitleAlignment;
     BackgroundColor?: BurninSubtitleBackgroundColor;
     /**
      * Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match.
@@ -389,7 +389,7 @@ declare namespace MediaConvert {
      * Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
 All burn-in and DVB-Sub font settings must match.
      */
-    FontOpacity: __integerMin0Max255;
+    FontOpacity?: __integerMin0Max255;
     /**
      * Font resolution in DPI (dots per inch); default is 96 dpi.
 All burn-in and DVB-Sub font settings must match.
@@ -399,11 +399,11 @@ All burn-in and DVB-Sub font settings must match.
      * A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
      */
     FontSize?: __integerMin0Max96;
-    OutlineColor: BurninSubtitleOutlineColor;
+    OutlineColor?: BurninSubtitleOutlineColor;
     /**
      * Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
-    OutlineSize: __integerMin0Max10;
+    OutlineSize?: __integerMin0Max10;
     ShadowColor?: BurninSubtitleShadowColor;
     /**
      * Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match.
@@ -445,12 +445,12 @@ All burn-in and DVB-Sub font settings must match.
     /**
      * Specifies which "Caption Selector":#inputs-caption_selector to use from each input when generating captions. The name should be of the format "Caption Selector ", which denotes that the Nth Caption Selector will be used from each input.
      */
-    CaptionSelectorName: __stringMin1;
+    CaptionSelectorName?: __stringMin1;
     /**
      * Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code
      */
     CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
-    DestinationSettings: CaptionDestinationSettings;
+    DestinationSettings?: CaptionDestinationSettings;
     /**
      * Indicates the language of the caption output track.
      */
@@ -465,7 +465,7 @@ All burn-in and DVB-Sub font settings must match.
      * Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code
      */
     CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
-    DestinationSettings: CaptionDestinationSettings;
+    DestinationSettings?: CaptionDestinationSettings;
     /**
      * Indicates the language of the caption output track.
      */
@@ -477,7 +477,7 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface CaptionDestinationSettings {
     BurninDestinationSettings?: BurninDestinationSettings;
-    DestinationType: CaptionDestinationType;
+    DestinationType?: CaptionDestinationType;
     DvbSubDestinationSettings?: DvbSubDestinationSettings;
     SccDestinationSettings?: SccDestinationSettings;
     TeletextDestinationSettings?: TeletextDestinationSettings;
@@ -493,14 +493,14 @@ All burn-in and DVB-Sub font settings must match.
      * The specific language to extract from source. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.
      */
     LanguageCode?: LanguageCode;
-    SourceSettings: CaptionSourceSettings;
+    SourceSettings?: CaptionSourceSettings;
   }
   export interface CaptionSourceSettings {
     AncillarySourceSettings?: AncillarySourceSettings;
     DvbSubSourceSettings?: DvbSubSourceSettings;
     EmbeddedSourceSettings?: EmbeddedSourceSettings;
     FileSourceSettings?: FileSourceSettings;
-    SourceType: CaptionSourceType;
+    SourceType?: CaptionSourceType;
     TeletextSourceSettings?: TeletextSourceSettings;
   }
   export type CaptionSourceType = "ANCILLARY"|"DVB_SUB"|"EMBEDDED"|"SCC"|"TTML"|"STL"|"SRT"|"TELETEXT"|"NULL_SOURCE"|string;
@@ -508,7 +508,7 @@ All burn-in and DVB-Sub font settings must match.
     /**
      * List of output channels
      */
-    OutputChannels: __listOfOutputChannelMapping;
+    OutputChannels?: __listOfOutputChannelMapping;
   }
   export type CmafClientCache = "DISABLED"|"ENABLED"|string;
   export type CmafCodecSpecification = "RFC_6381"|"RFC_4281"|string;
@@ -520,7 +520,7 @@ All burn-in and DVB-Sub font settings must match.
     EncryptionMethod?: CmafEncryptionType;
     InitializationVectorInManifest?: CmafInitializationVectorInManifest;
     StaticKeyProvider?: StaticKeyProvider;
-    Type: CmafKeyProviderType;
+    Type?: CmafKeyProviderType;
   }
   export type CmafEncryptionType = "SAMPLE_AES"|string;
   export interface CmafGroupSettings {
@@ -541,18 +541,22 @@ All burn-in and DVB-Sub font settings must match.
     /**
      * Length of fragments to generate (in seconds). Fragment length must be compatible with GOP size and Framerate. Note that fragments will end on the next keyframe after this number of seconds, so actual fragment length may be longer. When Emit Single File is checked, the fragmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.
      */
-    FragmentLength: __integerMin1Max2147483647;
+    FragmentLength?: __integerMin1Max2147483647;
     ManifestCompression?: CmafManifestCompression;
     ManifestDurationFormat?: CmafManifestDurationFormat;
     /**
      * Minimum time of initially buffered media that is needed to ensure smooth playout.
      */
     MinBufferTime?: __integerMin0Max2147483647;
+    /**
+     * Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds.
+     */
+    MinFinalSegmentLength?: __doubleMin0Max2147483647;
     SegmentControl?: CmafSegmentControl;
     /**
      * Use this setting to specify the length, in seconds, of each individual CMAF segment. This value applies to the whole package; that is, to every output in the output group. Note that segments end on the first keyframe after this number of seconds, so the actual segment length might be slightly longer. If you set Segment control (CmafSegmentControl) to single file, the service puts the content of each output in a single file that has metadata that marks these segments. If you set it to segmented files, the service creates multiple files for each output, each with the content of one segment.
      */
-    SegmentLength: __integerMin1Max2147483647;
+    SegmentLength?: __integerMin1Max2147483647;
     StreamInfResolution?: CmafStreamInfResolution;
     WriteDashManifest?: CmafWriteDASHManifest;
     WriteHlsManifest?: CmafWriteHLSManifest;
@@ -590,7 +594,7 @@ All burn-in and DVB-Sub font settings must match.
   export type ColorSpaceConversion = "NONE"|"FORCE_601"|"FORCE_709"|"FORCE_HDR10"|"FORCE_HLG_2020"|string;
   export type ColorSpaceUsage = "FORCE"|"FALLBACK"|string;
   export interface ContainerSettings {
-    Container: ContainerType;
+    Container?: ContainerType;
     F4vSettings?: F4vSettings;
     M2tsSettings?: M2tsSettings;
     M3u8Settings?: M3u8Settings;
@@ -690,7 +694,7 @@ All burn-in and DVB-Sub font settings must match.
     Queue?: Queue;
   }
   export interface DashIsoEncryptionSettings {
-    SpekeKeyProvider: SpekeKeyProvider;
+    SpekeKeyProvider?: SpekeKeyProvider;
   }
   export interface DashIsoGroupSettings {
     /**
@@ -708,7 +712,7 @@ All burn-in and DVB-Sub font settings must match.
     /**
      * Length of fragments to generate (in seconds). Fragment length must be compatible with GOP size and Framerate. Note that fragments will end on the next keyframe after this number of seconds, so actual fragment length may be longer. When Emit Single File is checked, the fragmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.
      */
-    FragmentLength: __integerMin1Max2147483647;
+    FragmentLength?: __integerMin1Max2147483647;
     HbbtvCompliance?: DashIsoHbbtvCompliance;
     /**
      * Minimum time of initially buffered media that is needed to ensure smooth playout.
@@ -718,10 +722,15 @@ All burn-in and DVB-Sub font settings must match.
     /**
      * Length of mpd segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer. When Emit Single File is checked, the segmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.
      */
-    SegmentLength: __integerMin1Max2147483647;
+    SegmentLength?: __integerMin1Max2147483647;
+    /**
+     * When ENABLED, segment durations are indicated in the manifest using SegmentTimeline and SegmentTimeline will be promoted down into Representation from AdaptationSet.
+     */
+    WriteSegmentTimelineInRepresentation?: DashIsoWriteSegmentTimelineInRepresentation;
   }
   export type DashIsoHbbtvCompliance = "HBBTV_1_5"|"NONE"|string;
   export type DashIsoSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
+  export type DashIsoWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED"|string;
   export type DeinterlaceAlgorithm = "INTERPOLATE"|"INTERPOLATE_TICKER"|"BLEND"|"BLEND_TICKER"|string;
   export interface Deinterlacer {
     Algorithm?: DeinterlaceAlgorithm;
@@ -779,15 +788,15 @@ All burn-in and DVB-Sub font settings must match.
     /**
      * The numeric value placed in the Network Information Table (NIT).
      */
-    NetworkId: __integerMin0Max65535;
+    NetworkId?: __integerMin0Max65535;
     /**
      * The network name text placed in the network_name_descriptor inside the Network Information Table. Maximum length is 256 characters.
      */
-    NetworkName: __stringMin1Max256;
+    NetworkName?: __stringMin1Max256;
     /**
      * The number of milliseconds between instances of this table in the output transport stream.
      */
-    NitInterval: __integerMin25Max10000;
+    NitInterval?: __integerMin25Max10000;
   }
   export interface DvbSdtSettings {
     OutputSdt?: OutputSdt;
@@ -805,7 +814,7 @@ All burn-in and DVB-Sub font settings must match.
     ServiceProviderName?: __stringMin1Max256;
   }
   export interface DvbSubDestinationSettings {
-    Alignment: DvbSubtitleAlignment;
+    Alignment?: DvbSubtitleAlignment;
     BackgroundColor?: DvbSubtitleBackgroundColor;
     /**
      * Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match.
@@ -816,7 +825,7 @@ All burn-in and DVB-Sub font settings must match.
      * Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
 All burn-in and DVB-Sub font settings must match.
      */
-    FontOpacity: __integerMin0Max255;
+    FontOpacity?: __integerMin0Max255;
     /**
      * Font resolution in DPI (dots per inch); default is 96 dpi.
 All burn-in and DVB-Sub font settings must match.
@@ -826,11 +835,11 @@ All burn-in and DVB-Sub font settings must match.
      * A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
      */
     FontSize?: __integerMin0Max96;
-    OutlineColor: DvbSubtitleOutlineColor;
+    OutlineColor?: DvbSubtitleOutlineColor;
     /**
      * Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
-    OutlineSize: __integerMin0Max10;
+    OutlineSize?: __integerMin0Max10;
     ShadowColor?: DvbSubtitleShadowColor;
     /**
      * Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match.
@@ -870,7 +879,7 @@ All burn-in and DVB-Sub font settings must match.
     /**
      * The number of milliseconds between instances of this table in the output transport stream.
      */
-    TdtInterval: __integerMin1000Max30000;
+    TdtInterval?: __integerMin1000Max30000;
   }
   export type Eac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
   export type Eac3BitstreamMode = "COMPLETE_MAIN"|"COMMENTARY"|"EMERGENCY"|"HEARING_IMPAIRED"|"VISUALLY_IMPAIRED"|string;
@@ -968,7 +977,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and 'smi'.
      */
-    SourceFile: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI;
+    SourceFile?: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI;
     /**
      * Specifies a time delta in seconds to offset the captions from the source file.
      */
@@ -1031,6 +1040,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type H264AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX"|string;
   export type H264CodecLevel = "AUTO"|"LEVEL_1"|"LEVEL_1_1"|"LEVEL_1_2"|"LEVEL_1_3"|"LEVEL_2"|"LEVEL_2_1"|"LEVEL_2_2"|"LEVEL_3"|"LEVEL_3_1"|"LEVEL_3_2"|"LEVEL_4"|"LEVEL_4_1"|"LEVEL_4_2"|"LEVEL_5"|"LEVEL_5_1"|"LEVEL_5_2"|string;
   export type H264CodecProfile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN"|string;
+  export type H264DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
   export type H264EntropyEncoding = "CABAC"|"CAVLC"|string;
   export type H264FieldEncoding = "PAFF"|"FORCE_FIELD"|string;
   export type H264FlickerAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
@@ -1041,7 +1051,17 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type H264InterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD"|string;
   export type H264ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H264QualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ"|string;
-  export type H264RateControlMode = "VBR"|"CBR"|string;
+  export interface H264QvbrSettings {
+    /**
+     * Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.
+     */
+    MaxAverageBitrate?: __integerMin1000Max1152000000;
+    /**
+     * Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h264Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9.
+     */
+    QvbrQualityLevel?: __integerMin1Max10;
+  }
+  export type H264RateControlMode = "VBR"|"CBR"|"QVBR"|string;
   export type H264RepeatPps = "DISABLED"|"ENABLED"|string;
   export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H264Settings {
@@ -1052,6 +1072,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Bitrate?: __integerMin1000Max1152000000;
     CodecLevel?: H264CodecLevel;
     CodecProfile?: H264CodecProfile;
+    /**
+     * Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+     */
+    DynamicSubGop?: H264DynamicSubGop;
     EntropyEncoding?: H264EntropyEncoding;
     FieldEncoding?: H264FieldEncoding;
     FlickerAdaptiveQuantization?: H264FlickerAdaptiveQuantization;
@@ -1085,7 +1109,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     HrdBufferSize?: __integerMin0Max1152000000;
     InterlaceMode?: H264InterlaceMode;
     /**
-     * Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000.
+     * Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.
      */
     MaxBitrate?: __integerMin1000Max1152000000;
     /**
@@ -1110,6 +1134,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     ParNumerator?: __integerMin1Max2147483647;
     QualityTuningLevel?: H264QualityTuningLevel;
+    /**
+     * Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.
+     */
+    QvbrSettings?: H264QvbrSettings;
     RateControlMode?: H264RateControlMode;
     RepeatPps?: H264RepeatPps;
     SceneChangeDetect?: H264SceneChangeDetect;
@@ -1138,6 +1166,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type H265AlternateTransferFunctionSei = "DISABLED"|"ENABLED"|string;
   export type H265CodecLevel = "AUTO"|"LEVEL_1"|"LEVEL_2"|"LEVEL_2_1"|"LEVEL_3"|"LEVEL_3_1"|"LEVEL_4"|"LEVEL_4_1"|"LEVEL_5"|"LEVEL_5_1"|"LEVEL_5_2"|"LEVEL_6"|"LEVEL_6_1"|"LEVEL_6_2"|string;
   export type H265CodecProfile = "MAIN_MAIN"|"MAIN_HIGH"|"MAIN10_MAIN"|"MAIN10_HIGH"|"MAIN_422_8BIT_MAIN"|"MAIN_422_8BIT_HIGH"|"MAIN_422_10BIT_MAIN"|"MAIN_422_10BIT_HIGH"|string;
+  export type H265DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
   export type H265FlickerAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
   export type H265FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H265FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|string;
@@ -1146,7 +1175,17 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type H265InterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD"|string;
   export type H265ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H265QualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ"|string;
-  export type H265RateControlMode = "VBR"|"CBR"|string;
+  export interface H265QvbrSettings {
+    /**
+     * Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.
+     */
+    MaxAverageBitrate?: __integerMin1000Max1466400000;
+    /**
+     * Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h265Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9.
+     */
+    QvbrQualityLevel?: __integerMin1Max10;
+  }
+  export type H265RateControlMode = "VBR"|"CBR"|"QVBR"|string;
   export type H265SampleAdaptiveOffsetFilterMode = "DEFAULT"|"ADAPTIVE"|"OFF"|string;
   export type H265SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H265Settings {
@@ -1158,6 +1197,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Bitrate?: __integerMin1000Max1466400000;
     CodecLevel?: H265CodecLevel;
     CodecProfile?: H265CodecProfile;
+    /**
+     * Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+     */
+    DynamicSubGop?: H265DynamicSubGop;
     FlickerAdaptiveQuantization?: H265FlickerAdaptiveQuantization;
     FramerateControl?: H265FramerateControl;
     FramerateConversionAlgorithm?: H265FramerateConversionAlgorithm;
@@ -1189,7 +1232,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     HrdBufferSize?: __integerMin0Max1466400000;
     InterlaceMode?: H265InterlaceMode;
     /**
-     * Maximum bitrate in bits/second.
+     * Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.
      */
     MaxBitrate?: __integerMin1000Max1466400000;
     /**
@@ -1214,6 +1257,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     ParNumerator?: __integerMin1Max2147483647;
     QualityTuningLevel?: H265QualityTuningLevel;
+    /**
+     * Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.
+     */
+    QvbrSettings?: H265QvbrSettings;
     RateControlMode?: H265RateControlMode;
     SampleAdaptiveOffsetFilterMode?: H265SampleAdaptiveOffsetFilterMode;
     SceneChangeDetect?: H265SceneChangeDetect;
@@ -1258,11 +1305,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Maximum light level among all samples in the coded video sequence, in units of candelas per square meter.
      */
-    MaxContentLightLevel: __integerMin0Max65535;
+    MaxContentLightLevel?: __integerMin0Max65535;
     /**
      * Maximum average light level of any frame in the coded video sequence, in units of candelas per square meter.
      */
-    MaxFrameAverageLightLevel: __integerMin0Max65535;
+    MaxFrameAverageLightLevel?: __integerMin0Max65535;
     /**
      * Nominal maximum mastering display luminance in units of of 0.0001 candelas per square meter.
      */
@@ -1318,7 +1365,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     InitializationVectorInManifest?: HlsInitializationVectorInManifest;
     SpekeKeyProvider?: SpekeKeyProvider;
     StaticKeyProvider?: StaticKeyProvider;
-    Type: HlsKeyProviderType;
+    Type?: HlsKeyProviderType;
   }
   export type HlsEncryptionType = "AES128"|"SAMPLE_AES"|string;
   export interface HlsGroupSettings {
@@ -1349,9 +1396,13 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     ManifestCompression?: HlsManifestCompression;
     ManifestDurationFormat?: HlsManifestDurationFormat;
     /**
+     * Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds.
+     */
+    MinFinalSegmentLength?: __doubleMin0Max2147483647;
+    /**
      * When set, Minimum Segment Size is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.
      */
-    MinSegmentLength: __integerMin0Max2147483647;
+    MinSegmentLength?: __integerMin0Max2147483647;
     OutputSelection?: HlsOutputSelection;
     ProgramDateTime?: HlsProgramDateTime;
     /**
@@ -1362,7 +1413,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.
      */
-    SegmentLength: __integerMin1Max2147483647;
+    SegmentLength?: __integerMin1Max2147483647;
     /**
      * Number of segments to write to a subdirectory before starting a new one. directoryStructure must be SINGLE_DIRECTORY for this setting to have an effect.
      */
@@ -1408,17 +1459,17 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Use ID3 tag (Id3) to provide a tag value in base64-encode format.
      */
-    Id3: __stringPatternAZaZ0902;
+    Id3?: __stringPatternAZaZ0902;
     /**
      * Provide a Timecode (TimeCode) in HH:MM:SS:FF or HH:MM:SS;FF format.
      */
-    Timecode: __stringPattern010920405090509092;
+    Timecode?: __stringPattern010920405090509092;
   }
   export interface ImageInserter {
     /**
      * Image to insert. Must be 32 bit windows BMP, PNG, or TGA file. Must not be  larger than the output frames.
      */
-    InsertableImages: __listOfInsertableImage;
+    InsertableImages?: __listOfInsertableImage;
   }
   export interface Input {
     /**
@@ -1438,7 +1489,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Use Input (fileInput) to define the source file used in the transcode job. There can be multiple inputs in a job. These inputs are concantenated, in the order they are specified in the job, to create the output.
      */
-    FileInput: __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM;
+    FileInput?: __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM;
     FilterEnable?: InputFilterEnable;
     /**
      * Use Filter strength (FilterStrength) to adjust the magnitude the input filter settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
@@ -1523,23 +1574,23 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Use Image location (imageInserterInput) to specify the Amazon S3 location of the image to be inserted into the output. Use a 32 bit BMP, PNG, or TGA file that fits inside the video frame.
      */
-    ImageInserterInput: __stringMin14PatternS3BmpBMPPngPNGTgaTGA;
+    ImageInserterInput?: __stringMin14PatternS3BmpBMPPngPNGTgaTGA;
     /**
      * Use Left (ImageX) to set the distance, in pixels, between the inserted image and the left edge of the frame. Required for BMP, PNG and TGA input.
      */
-    ImageX: __integerMinNegative2147483648Max2147483647;
+    ImageX?: __integerMinNegative2147483648Max2147483647;
     /**
      * Use Top (ImageY) to set the distance, in pixels, between the inserted image and the top edge of the video frame. Required for BMP, PNG and TGA input.
      */
-    ImageY: __integerMinNegative2147483648Max2147483647;
+    ImageY?: __integerMinNegative2147483648Max2147483647;
     /**
      * Use Layer (Layer) to specify how overlapping inserted images appear. Images with higher values of layer appear on top of images with lower values of layer.
      */
-    Layer: __integerMin0Max99;
+    Layer?: __integerMin0Max99;
     /**
      * Use Opacity (Opacity) to specify how much of the underlying video shows through the inserted image. 0 is transparent and 100 is fully opaque. Default is 50.
      */
-    Opacity: __integerMin0Max100;
+    Opacity?: __integerMin0Max100;
     /**
      * Use Start time (StartTime) to specify the video timecode when the image is inserted in the output. This must be in timecode (HH:MM:SS:FF or HH:MM:SS;FF) format.
      */
@@ -1606,12 +1657,12 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Use Inputs (inputs) to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
      */
-    Inputs: __listOfInput;
+    Inputs?: __listOfInput;
     NielsenConfiguration?: NielsenConfiguration;
     /**
      * (OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings
      */
-    OutputGroups: __listOfOutputGroup;
+    OutputGroups?: __listOfOutputGroup;
     /**
      * Contains settings used to acquire and adjust timecode information from inputs.
      */
@@ -1672,7 +1723,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * (OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings
      */
-    OutputGroups: __listOfOutputGroup;
+    OutputGroups?: __listOfOutputGroup;
     /**
      * Contains settings used to acquire and adjust timecode information from inputs.
      */
@@ -1994,6 +2045,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type Mpeg2AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|string;
   export type Mpeg2CodecLevel = "AUTO"|"LOW"|"MAIN"|"HIGH1440"|"HIGH"|string;
   export type Mpeg2CodecProfile = "MAIN"|"PROFILE_422"|string;
+  export type Mpeg2DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
   export type Mpeg2FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type Mpeg2FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|string;
   export type Mpeg2GopSizeUnits = "FRAMES"|"SECONDS"|string;
@@ -2011,6 +2063,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Bitrate?: __integerMin1000Max288000000;
     CodecLevel?: Mpeg2CodecLevel;
     CodecProfile?: Mpeg2CodecProfile;
+    /**
+     * Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+     */
+    DynamicSubGop?: Mpeg2DynamicSubGop;
     FramerateControl?: Mpeg2FramerateControl;
     FramerateConversionAlgorithm?: Mpeg2FramerateConversionAlgorithm;
     /**
@@ -2081,7 +2137,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type Mpeg2TemporalAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
   export type MsSmoothAudioDeduplication = "COMBINE_DUPLICATE_STREAMS"|"NONE"|string;
   export interface MsSmoothEncryptionSettings {
-    SpekeKeyProvider: SpekeKeyProvider;
+    SpekeKeyProvider?: SpekeKeyProvider;
   }
   export interface MsSmoothGroupSettings {
     AudioDeduplication?: MsSmoothAudioDeduplication;
@@ -2093,7 +2149,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and framerate.
      */
-    FragmentLength: __integerMin1Max2147483647;
+    FragmentLength?: __integerMin1Max2147483647;
     ManifestEncoding?: MsSmoothManifestEncoding;
   }
   export type MsSmoothManifestEncoding = "UTF8"|"UTF16"|string;
@@ -2108,7 +2164,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     DistributorId?: __string;
   }
   export interface NoiseReducer {
-    Filter: NoiseReducerFilter;
+    Filter?: NoiseReducerFilter;
     FilterSettings?: NoiseReducerFilterSettings;
     SpatialFilterSettings?: NoiseReducerSpatialFilterSettings;
   }
@@ -2166,7 +2222,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * List of input channels
      */
-    InputChannels: __listOf__integerMinNegative60Max6;
+    InputChannels?: __listOf__integerMinNegative60Max6;
   }
   export interface OutputDetail {
     /**
@@ -2184,11 +2240,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * Name of the output group
      */
     Name?: __string;
-    OutputGroupSettings: OutputGroupSettings;
+    OutputGroupSettings?: OutputGroupSettings;
     /**
      * This object holds groups of encoding settings, one group of settings per output.
      */
-    Outputs: __listOfOutput;
+    Outputs?: __listOfOutput;
   }
   export interface OutputGroupDetail {
     /**
@@ -2202,7 +2258,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     FileGroupSettings?: FileGroupSettings;
     HlsGroupSettings?: HlsGroupSettings;
     MsSmoothGroupSettings?: MsSmoothGroupSettings;
-    Type: OutputGroupType;
+    Type?: OutputGroupType;
   }
   export type OutputGroupType = "HLS_GROUP_SETTINGS"|"DASH_ISO_GROUP_SETTINGS"|"FILE_GROUP_SETTINGS"|"MS_SMOOTH_GROUP_SETTINGS"|"CMAF_GROUP_SETTINGS"|string;
   export type OutputSdt = "SDT_FOLLOW"|"SDT_FOLLOW_IF_PRESENT"|"SDT_MANUAL"|"SDT_NONE"|string;
@@ -2327,32 +2383,32 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type QueueStatus = "ACTIVE"|"PAUSED"|string;
   export interface Rectangle {
     /**
-     * Height of rectangle in pixels.
+     * Height of rectangle in pixels. Specify only even numbers.
      */
-    Height: __integerMinNegative2147483648Max2147483647;
+    Height?: __integerMin2Max2147483647;
     /**
-     * Width of rectangle in pixels.
+     * Width of rectangle in pixels. Specify only even numbers.
      */
-    Width: __integerMinNegative2147483648Max2147483647;
+    Width?: __integerMin2Max2147483647;
     /**
-     * The distance, in pixels, between the rectangle and the left edge of the video frame.
+     * The distance, in pixels, between the rectangle and the left edge of the video frame. Specify only even numbers.
      */
-    X: __integerMinNegative2147483648Max2147483647;
+    X?: __integerMin0Max2147483647;
     /**
-     * The distance, in pixels, between the rectangle and the top edge of the video frame.
+     * The distance, in pixels, between the rectangle and the top edge of the video frame. Specify only even numbers.
      */
-    Y: __integerMinNegative2147483648Max2147483647;
+    Y?: __integerMin0Max2147483647;
   }
   export interface RemixSettings {
-    ChannelMapping: ChannelMapping;
+    ChannelMapping?: ChannelMapping;
     /**
      * Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different.
      */
-    ChannelsIn: __integerMin1Max16;
+    ChannelsIn?: __integerMin1Max16;
     /**
      * Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8
      */
-    ChannelsOut: __integerMin1Max8;
+    ChannelsOut?: __integerMin1Max8;
   }
   export interface ResourceTags {
     /**
@@ -2374,15 +2430,15 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * The SPEKE-compliant server uses Resource ID (ResourceId) to identify content.
      */
-    ResourceId: __string;
+    ResourceId?: __string;
     /**
      * Relates to SPEKE implementation. DRM system identifiers. DASH output groups support a max of two system ids. Other group types support one system id.
      */
-    SystemIds: __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12;
+    SystemIds?: __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12;
     /**
      * Use URL (Url) to specify the SPEKE-compliant server that will provide keys for content.
      */
-    Url: __stringPatternHttps;
+    Url?: __stringPatternHttps;
   }
   export interface StaticKeyProvider {
     /**
@@ -2396,11 +2452,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Relates to DRM implementation. Use a 32-character hexidecimal string to specify Key Value (StaticKeyValue).
      */
-    StaticKeyValue: __stringPatternAZaZ0932;
+    StaticKeyValue?: __stringPatternAZaZ0932;
     /**
      * Relates to DRM implementation. The location of the license server used for protecting content.
      */
-    Url: __string;
+    Url?: __string;
   }
   export interface TagResourceRequest {
     /**
@@ -2459,7 +2515,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Id3Insertions contains the array of Id3Insertion instances.
      */
-    Id3Insertions: __listOfId3Insertion;
+    Id3Insertions?: __listOfId3Insertion;
   }
   export interface Timing {
     /**
@@ -2548,7 +2604,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export type VideoCodec = "FRAME_CAPTURE"|"H_264"|"H_265"|"MPEG2"|"PRORES"|string;
   export interface VideoCodecSettings {
-    Codec: VideoCodec;
+    Codec?: VideoCodec;
     FrameCaptureSettings?: FrameCaptureSettings;
     H264Settings?: H264Settings;
     H265Settings?: H265Settings;
@@ -2558,7 +2614,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export interface VideoDescription {
     AfdSignaling?: AfdSignaling;
     AntiAlias?: AntiAlias;
-    CodecSettings: VideoCodecSettings;
+    CodecSettings?: VideoCodecSettings;
     ColorMetadata?: ColorMetadata;
     /**
      * Applies only if your input aspect ratio is different from your output aspect ratio. Use Input cropping rectangle (Crop) to specify the  video area the service will include in the output. This will crop the input source, causing video pixels to be removed on encode. Do not use this setting if you have enabled Stretch to output (stretchToOutput) in your output settings.
@@ -2656,6 +2712,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     SampleRate?: __integerMin8000Max192000;
   }
   export type __doubleMin0 = number;
+  export type __doubleMin0Max2147483647 = number;
   export type __doubleMinNegative59Max0 = number;
   export type __doubleMinNegative60Max3 = number;
   export type __doubleMinNegative60MaxNegative1 = number;
@@ -2691,6 +2748,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __integerMin10Max48 = number;
   export type __integerMin16Max24 = number;
   export type __integerMin1Max1 = number;
+  export type __integerMin1Max10 = number;
   export type __integerMin1Max100 = number;
   export type __integerMin1Max10000000 = number;
   export type __integerMin1Max1001 = number;
@@ -2706,6 +2764,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __integerMin24Max60000 = number;
   export type __integerMin25Max10000 = number;
   export type __integerMin25Max2000 = number;
+  export type __integerMin2Max2147483647 = number;
   export type __integerMin32000Max384000 = number;
   export type __integerMin32000Max48000 = number;
   export type __integerMin32Max2160 = number;
