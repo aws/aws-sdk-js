@@ -20,6 +20,22 @@ declare class XRay extends Service {
    */
   batchGetTraces(callback?: (err: AWSError, data: XRay.Types.BatchGetTracesResult) => void): Request<XRay.Types.BatchGetTracesResult, AWSError>;
   /**
+   * Creates a rule to control sampling behavior for instrumented applications. Services retrieve rules with GetSamplingRules, and evaluate each rule in ascending order of priority for each request. If a rule matches, the service records a trace, borrowing it from the reservoir size. After 10 seconds, the service reports back to X-Ray with GetSamplingTargets to get updated versions of each in-use rule. The updated rule contains a trace quota that the service can use instead of borrowing from the reservoir.
+   */
+  createSamplingRule(params: XRay.Types.CreateSamplingRuleRequest, callback?: (err: AWSError, data: XRay.Types.CreateSamplingRuleResult) => void): Request<XRay.Types.CreateSamplingRuleResult, AWSError>;
+  /**
+   * Creates a rule to control sampling behavior for instrumented applications. Services retrieve rules with GetSamplingRules, and evaluate each rule in ascending order of priority for each request. If a rule matches, the service records a trace, borrowing it from the reservoir size. After 10 seconds, the service reports back to X-Ray with GetSamplingTargets to get updated versions of each in-use rule. The updated rule contains a trace quota that the service can use instead of borrowing from the reservoir.
+   */
+  createSamplingRule(callback?: (err: AWSError, data: XRay.Types.CreateSamplingRuleResult) => void): Request<XRay.Types.CreateSamplingRuleResult, AWSError>;
+  /**
+   * Deletes a sampling rule.
+   */
+  deleteSamplingRule(params: XRay.Types.DeleteSamplingRuleRequest, callback?: (err: AWSError, data: XRay.Types.DeleteSamplingRuleResult) => void): Request<XRay.Types.DeleteSamplingRuleResult, AWSError>;
+  /**
+   * Deletes a sampling rule.
+   */
+  deleteSamplingRule(callback?: (err: AWSError, data: XRay.Types.DeleteSamplingRuleResult) => void): Request<XRay.Types.DeleteSamplingRuleResult, AWSError>;
+  /**
    * Retrieves the current encryption configuration for X-Ray data.
    */
   getEncryptionConfig(params: XRay.Types.GetEncryptionConfigRequest, callback?: (err: AWSError, data: XRay.Types.GetEncryptionConfigResult) => void): Request<XRay.Types.GetEncryptionConfigResult, AWSError>;
@@ -27,6 +43,30 @@ declare class XRay extends Service {
    * Retrieves the current encryption configuration for X-Ray data.
    */
   getEncryptionConfig(callback?: (err: AWSError, data: XRay.Types.GetEncryptionConfigResult) => void): Request<XRay.Types.GetEncryptionConfigResult, AWSError>;
+  /**
+   * Retrieves all sampling rules.
+   */
+  getSamplingRules(params: XRay.Types.GetSamplingRulesRequest, callback?: (err: AWSError, data: XRay.Types.GetSamplingRulesResult) => void): Request<XRay.Types.GetSamplingRulesResult, AWSError>;
+  /**
+   * Retrieves all sampling rules.
+   */
+  getSamplingRules(callback?: (err: AWSError, data: XRay.Types.GetSamplingRulesResult) => void): Request<XRay.Types.GetSamplingRulesResult, AWSError>;
+  /**
+   * Retrieves information about recent sampling results for all sampling rules.
+   */
+  getSamplingStatisticSummaries(params: XRay.Types.GetSamplingStatisticSummariesRequest, callback?: (err: AWSError, data: XRay.Types.GetSamplingStatisticSummariesResult) => void): Request<XRay.Types.GetSamplingStatisticSummariesResult, AWSError>;
+  /**
+   * Retrieves information about recent sampling results for all sampling rules.
+   */
+  getSamplingStatisticSummaries(callback?: (err: AWSError, data: XRay.Types.GetSamplingStatisticSummariesResult) => void): Request<XRay.Types.GetSamplingStatisticSummariesResult, AWSError>;
+  /**
+   * Requests a sampling quota for rules that the service is using to sample requests. 
+   */
+  getSamplingTargets(params: XRay.Types.GetSamplingTargetsRequest, callback?: (err: AWSError, data: XRay.Types.GetSamplingTargetsResult) => void): Request<XRay.Types.GetSamplingTargetsResult, AWSError>;
+  /**
+   * Requests a sampling quota for rules that the service is using to sample requests. 
+   */
+  getSamplingTargets(callback?: (err: AWSError, data: XRay.Types.GetSamplingTargetsResult) => void): Request<XRay.Types.GetSamplingTargetsResult, AWSError>;
   /**
    * Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the AWS X-Ray SDK. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.
    */
@@ -75,6 +115,14 @@ declare class XRay extends Service {
    * Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see AWS X-Ray Segment Documents in the AWS X-Ray Developer Guide.  Required Segment Document Fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, i.e. 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
    */
   putTraceSegments(callback?: (err: AWSError, data: XRay.Types.PutTraceSegmentsResult) => void): Request<XRay.Types.PutTraceSegmentsResult, AWSError>;
+  /**
+   * Modifies a sampling rule's configuration.
+   */
+  updateSamplingRule(params: XRay.Types.UpdateSamplingRuleRequest, callback?: (err: AWSError, data: XRay.Types.UpdateSamplingRuleResult) => void): Request<XRay.Types.UpdateSamplingRuleResult, AWSError>;
+  /**
+   * Modifies a sampling rule's configuration.
+   */
+  updateSamplingRule(callback?: (err: AWSError, data: XRay.Types.UpdateSamplingRuleResult) => void): Request<XRay.Types.UpdateSamplingRuleResult, AWSError>;
 }
 declare namespace XRay {
   export interface Alias {
@@ -109,6 +157,9 @@ declare namespace XRay {
     StringValue?: String;
   }
   export type Annotations = {[key: string]: ValuesWithServiceIds};
+  export type AttributeKey = string;
+  export type AttributeMap = {[key: string]: AttributeValue};
+  export type AttributeValue = string;
   export interface BackendConnectionErrors {
     /**
      * 
@@ -158,6 +209,36 @@ declare namespace XRay {
      * Pagination token. Not used.
      */
     NextToken?: String;
+  }
+  export type BorrowCount = number;
+  export type ClientID = string;
+  export interface CreateSamplingRuleRequest {
+    /**
+     * The rule definition.
+     */
+    SamplingRule: SamplingRule;
+  }
+  export interface CreateSamplingRuleResult {
+    /**
+     * The saved rule definition and metadata.
+     */
+    SamplingRuleRecord?: SamplingRuleRecord;
+  }
+  export interface DeleteSamplingRuleRequest {
+    /**
+     * The name of the sampling rule. Specify a rule by either name or ARN, but not both.
+     */
+    RuleName?: String;
+    /**
+     * The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
+     */
+    RuleARN?: String;
+  }
+  export interface DeleteSamplingRuleResult {
+    /**
+     * The deleted rule definition and metadata.
+     */
+    SamplingRuleRecord?: SamplingRuleRecord;
   }
   export type Double = number;
   export type EC2InstanceId = string;
@@ -216,7 +297,7 @@ declare namespace XRay {
      */
     KeyId?: String;
     /**
-     * The encryption status. After modifying encryption configuration with PutEncryptionConfig, the status can be UPDATING for up to one hour before X-Ray starts encrypting data with the new key.
+     * The encryption status. While the status is UPDATING, X-Ray may encrypt data with a combination of the new and old settings.
      */
     Status?: EncryptionStatus;
     /**
@@ -252,6 +333,7 @@ declare namespace XRay {
     TotalCount?: NullableLong;
   }
   export type FilterExpression = string;
+  export type FixedRate = number;
   export interface GetEncryptionConfigRequest {
   }
   export interface GetEncryptionConfigResult {
@@ -259,6 +341,58 @@ declare namespace XRay {
      * The encryption configuration document.
      */
     EncryptionConfig?: EncryptionConfig;
+  }
+  export interface GetSamplingRulesRequest {
+    /**
+     * Pagination token. Not used.
+     */
+    NextToken?: String;
+  }
+  export interface GetSamplingRulesResult {
+    /**
+     * Rule definitions and metadata.
+     */
+    SamplingRuleRecords?: SamplingRuleRecordList;
+    /**
+     * Pagination token. Not used.
+     */
+    NextToken?: String;
+  }
+  export interface GetSamplingStatisticSummariesRequest {
+    /**
+     * Pagination token. Not used.
+     */
+    NextToken?: String;
+  }
+  export interface GetSamplingStatisticSummariesResult {
+    /**
+     * Information about the number of requests instrumented for each sampling rule.
+     */
+    SamplingStatisticSummaries?: SamplingStatisticSummaryList;
+    /**
+     * Pagination token. Not used.
+     */
+    NextToken?: String;
+  }
+  export interface GetSamplingTargetsRequest {
+    /**
+     * Information about rules that the service is using to sample requests.
+     */
+    SamplingStatisticsDocuments: SamplingStatisticsDocumentList;
+  }
+  export interface GetSamplingTargetsResult {
+    /**
+     * Updated rules that the service should use to sample requests.
+     */
+    SamplingTargetDocuments?: SamplingTargetDocumentList;
+    /**
+     * The last time a user changed the sampling rule configuration. If the sampling rule configuration changed since the service last retrieved it, the service should call GetSamplingRules to get the latest version.
+     */
+    LastRuleModification?: Timestamp;
+    /**
+     * Information about SamplingStatisticsDocument that X-Ray could not process.
+     */
+    UnprocessedStatistics?: UnprocessedStatisticsList;
   }
   export interface GetServiceGraphRequest {
     /**
@@ -352,6 +486,7 @@ declare namespace XRay {
      */
     NextToken?: String;
   }
+  export type HTTPMethod = string;
   export type Histogram = HistogramEntry[];
   export interface HistogramEntry {
     /**
@@ -363,6 +498,7 @@ declare namespace XRay {
      */
     Count?: Integer;
   }
+  export type Host = string;
   export type Hostname = string;
   export interface Http {
     /**
@@ -391,6 +527,7 @@ declare namespace XRay {
   export type NullableDouble = number;
   export type NullableInteger = number;
   export type NullableLong = number;
+  export type Priority = number;
   export interface PutEncryptionConfigRequest {
     /**
      * An AWS KMS customer master key (CMK) in one of the following formats:    Alias - The name of the key. For example, alias/MyKey.    Key ID - The KMS key ID of the key. For example, ae4aa6d49-a4d8-9df9-a475-4ff6d7898456.    ARN - The full Amazon Resource Name of the key ID or alias. For example, arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456. Use this format to specify a key in a different account.   Omit this key if you set Type to NONE.
@@ -439,7 +576,203 @@ declare namespace XRay {
      */
     UnprocessedTraceSegments?: UnprocessedTraceSegmentList;
   }
+  export type RequestCount = number;
+  export type ReservoirSize = number;
   export type ResourceARN = string;
+  export type RuleName = string;
+  export type SampledCount = number;
+  export interface SamplingRule {
+    /**
+     * The name of the sampling rule. Specify a rule by either name or ARN, but not both.
+     */
+    RuleName?: RuleName;
+    /**
+     * The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
+     */
+    RuleARN?: String;
+    /**
+     * Matches the ARN of the AWS resource on which the service runs.
+     */
+    ResourceARN: ResourceARN;
+    /**
+     * The priority of the sampling rule.
+     */
+    Priority: Priority;
+    /**
+     * The percentage of matching requests to instrument, after the reservoir is exhausted.
+     */
+    FixedRate: FixedRate;
+    /**
+     * A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
+     */
+    ReservoirSize: ReservoirSize;
+    /**
+     * Matches the name that the service uses to identify itself in segments.
+     */
+    ServiceName: ServiceName;
+    /**
+     * Matches the origin that the service uses to identify its type in segments.
+     */
+    ServiceType: ServiceType;
+    /**
+     * Matches the hostname from a request URL.
+     */
+    Host: Host;
+    /**
+     * Matches the HTTP method of a request.
+     */
+    HTTPMethod: HTTPMethod;
+    /**
+     * Matches the path from a request URL.
+     */
+    URLPath: URLPath;
+    /**
+     * The version of the sampling rule format (1).
+     */
+    Version: Version;
+    /**
+     * Matches attributes derived from the request.
+     */
+    Attributes?: AttributeMap;
+  }
+  export interface SamplingRuleRecord {
+    /**
+     * The sampling rule.
+     */
+    SamplingRule?: SamplingRule;
+    /**
+     * When the rule was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * When the rule was last modified.
+     */
+    ModifiedAt?: Timestamp;
+  }
+  export type SamplingRuleRecordList = SamplingRuleRecord[];
+  export interface SamplingRuleUpdate {
+    /**
+     * The name of the sampling rule. Specify a rule by either name or ARN, but not both.
+     */
+    RuleName?: RuleName;
+    /**
+     * The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
+     */
+    RuleARN?: String;
+    /**
+     * Matches the ARN of the AWS resource on which the service runs.
+     */
+    ResourceARN?: ResourceARN;
+    /**
+     * The priority of the sampling rule.
+     */
+    Priority?: NullableInteger;
+    /**
+     * The percentage of matching requests to instrument, after the reservoir is exhausted.
+     */
+    FixedRate?: NullableDouble;
+    /**
+     * A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
+     */
+    ReservoirSize?: NullableInteger;
+    /**
+     * Matches the hostname from a request URL.
+     */
+    Host?: Host;
+    /**
+     * Matches the name that the service uses to identify itself in segments.
+     */
+    ServiceName?: ServiceName;
+    /**
+     * Matches the origin that the service uses to identify its type in segments.
+     */
+    ServiceType?: ServiceType;
+    /**
+     * Matches the HTTP method of a request.
+     */
+    HTTPMethod?: HTTPMethod;
+    /**
+     * Matches the path from a request URL.
+     */
+    URLPath?: URLPath;
+    /**
+     * Matches attributes derived from the request.
+     */
+    Attributes?: AttributeMap;
+  }
+  export interface SamplingStatisticSummary {
+    /**
+     * The name of the sampling rule.
+     */
+    RuleName?: String;
+    /**
+     * The start time of the reporting window.
+     */
+    Timestamp?: Timestamp;
+    /**
+     * The number of requests that matched the rule.
+     */
+    RequestCount?: Integer;
+    /**
+     * The number of requests recorded with borrowed reservoir quota.
+     */
+    BorrowCount?: Integer;
+    /**
+     * The number of requests recorded.
+     */
+    SampledCount?: Integer;
+  }
+  export type SamplingStatisticSummaryList = SamplingStatisticSummary[];
+  export interface SamplingStatisticsDocument {
+    /**
+     * The name of the sampling rule.
+     */
+    RuleName: RuleName;
+    /**
+     * A unique identifier for the service in hexadecimal.
+     */
+    ClientID: ClientID;
+    /**
+     * The current time.
+     */
+    Timestamp: Timestamp;
+    /**
+     * The number of requests that matched the rule.
+     */
+    RequestCount: RequestCount;
+    /**
+     * The number of requests recorded.
+     */
+    SampledCount: SampledCount;
+    /**
+     * The number of requests recorded with borrowed reservoir quota.
+     */
+    BorrowCount?: BorrowCount;
+  }
+  export type SamplingStatisticsDocumentList = SamplingStatisticsDocument[];
+  export interface SamplingTargetDocument {
+    /**
+     * The name of the sampling rule.
+     */
+    RuleName?: String;
+    /**
+     * The percentage of matching requests to instrument, after the reservoir is exhausted.
+     */
+    FixedRate?: Double;
+    /**
+     * The number of requests per second that X-Ray allocated this service.
+     */
+    ReservoirQuota?: NullableInteger;
+    /**
+     * When the reservoir quota expires.
+     */
+    ReservoirQuotaTTL?: Timestamp;
+    /**
+     * The number of seconds for the service to wait before getting sampling targets again.
+     */
+    Interval?: NullableInteger;
+  }
+  export type SamplingTargetDocumentList = SamplingTargetDocument[];
   export interface Segment {
     /**
      * The segment's ID.
@@ -527,6 +860,7 @@ declare namespace XRay {
   }
   export type ServiceIds = ServiceId[];
   export type ServiceList = Service[];
+  export type ServiceName = string;
   export type ServiceNames = String[];
   export interface ServiceStatistics {
     /**
@@ -550,6 +884,7 @@ declare namespace XRay {
      */
     TotalResponseTime?: NullableDouble;
   }
+  export type ServiceType = string;
   export type String = string;
   export interface TelemetryRecord {
     /**
@@ -656,6 +991,22 @@ declare namespace XRay {
     ServiceIds?: ServiceIds;
   }
   export type TraceUsers = TraceUser[];
+  export type URLPath = string;
+  export interface UnprocessedStatistics {
+    /**
+     * The name of the sampling rule.
+     */
+    RuleName?: String;
+    /**
+     * The error code.
+     */
+    ErrorCode?: String;
+    /**
+     * The error message.
+     */
+    Message?: String;
+  }
+  export type UnprocessedStatisticsList = UnprocessedStatistics[];
   export type UnprocessedTraceIdList = TraceId[];
   export interface UnprocessedTraceSegment {
     /**
@@ -672,6 +1023,18 @@ declare namespace XRay {
     Message?: String;
   }
   export type UnprocessedTraceSegmentList = UnprocessedTraceSegment[];
+  export interface UpdateSamplingRuleRequest {
+    /**
+     * The rule and fields to change.
+     */
+    SamplingRuleUpdate: SamplingRuleUpdate;
+  }
+  export interface UpdateSamplingRuleResult {
+    /**
+     * The updated rule definition and metadata.
+     */
+    SamplingRuleRecord?: SamplingRuleRecord;
+  }
   export interface ValueWithServiceIds {
     /**
      * Values of the annotation.
@@ -683,6 +1046,7 @@ declare namespace XRay {
     ServiceIds?: ServiceIds;
   }
   export type ValuesWithServiceIds = ValueWithServiceIds[];
+  export type Version = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

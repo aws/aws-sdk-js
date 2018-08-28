@@ -220,6 +220,14 @@ declare class Glue extends Service {
    */
   deletePartition(callback?: (err: AWSError, data: Glue.Types.DeletePartitionResponse) => void): Request<Glue.Types.DeletePartitionResponse, AWSError>;
   /**
+   * Deletes a specified policy.
+   */
+  deleteResourcePolicy(params: Glue.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a specified policy.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
    * Deletes a specified security configuration.
    */
   deleteSecurityConfiguration(params: Glue.Types.DeleteSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
@@ -428,6 +436,14 @@ declare class Glue extends Service {
    */
   getPlan(callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
+   * Retrieves a specified resource policy.
+   */
+  getResourcePolicy(params: Glue.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.GetResourcePolicyResponse) => void): Request<Glue.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   * Retrieves a specified resource policy.
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: Glue.Types.GetResourcePolicyResponse) => void): Request<Glue.Types.GetResourcePolicyResponse, AWSError>;
+  /**
    * Retrieves a specified security configuration.
    */
   getSecurityConfiguration(params: Glue.Types.GetSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationResponse) => void): Request<Glue.Types.GetSecurityConfigurationResponse, AWSError>;
@@ -523,6 +539,14 @@ declare class Glue extends Service {
    * Sets the security configuration for a specified catalog. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter.
    */
   putDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Sets the Data Catalog resource policy for access control.
+   */
+  putResourcePolicy(params: Glue.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.PutResourcePolicyResponse) => void): Request<Glue.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Sets the Data Catalog resource policy for access control.
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: Glue.Types.PutResourcePolicyResponse) => void): Request<Glue.Types.PutResourcePolicyResponse, AWSError>;
   /**
    * Resets a bookmark entry.
    */
@@ -806,7 +830,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * A list of the IDs of versions to be deleted.
+     * A list of the IDs of versions to be deleted. A VersionId is a string representation of an integer. Each version is incremented by 1.
      */
     VersionIds: BatchDeleteTableVersionList;
   }
@@ -1173,7 +1197,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
     /**
@@ -1301,7 +1325,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
     /**
@@ -1795,6 +1819,14 @@ declare namespace Glue {
   }
   export interface DeletePartitionResponse {
   }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The hash value returned when this policy was set.
+     */
+    PolicyHashCondition?: HashString;
+  }
+  export interface DeleteResourcePolicyResponse {
+  }
   export interface DeleteSecurityConfigurationRequest {
     /**
      * The name of the security configuration to delete.
@@ -1833,7 +1865,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * The ID of the table version to be deleted.
+     * The ID of the table version to be deleted. A VersionID is a string representation of an integer. Each version is incremented by 1.
      */
     VersionId: VersionString;
   }
@@ -2016,6 +2048,7 @@ declare namespace Glue {
     MaxConcurrentRuns?: MaxConcurrentRuns;
   }
   export type ExecutionTime = number;
+  export type ExistCondition = "MUST_EXIST"|"NOT_EXIST"|"NONE"|string;
   export type FieldType = string;
   export type FilterString = string;
   export type FormatString = string;
@@ -2397,7 +2430,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * An expression filtering the partitions to be returned.
+     * An expression filtering the partitions to be returned. The expression uses SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser JSQLParser parses the expression.   Operators: The following are the operators that you can use in the Expression API call:  =  Checks if the values of the two operands are equal or not; if yes, then the condition becomes true. Example: Assume 'variable a' holds 10 and 'variable b' holds 20.  (a = b) is not true.  &lt; &gt;  Checks if the values of two operands are equal or not; if the values are not equal, then the condition becomes true. Example: (a &lt; &gt; b) is true.  &gt;  Checks if the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true. Example: (a &gt; b) is not true.  &lt;  Checks if the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true. Example: (a &lt; b) is true.  &gt;=  Checks if the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &gt;= b) is not true.  &lt;=  Checks if the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &lt;= b) is true.  AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL  Logical operators.    Supported Partition Key Types: The following are the the supported partition keys.    string     date     timestamp     int     bigint     long     tinyint     smallint     decimal    If an invalid type is encountered, a  PredicateConstructionException  is thrown.  The following list shows the valid operators on each type. When you define a crawler, the partitionKey type is created as a STRING, to be compatible with the catalog partitions.   Sample API Call: 
      */
     Expression?: PredicateString;
     /**
@@ -2454,6 +2487,26 @@ declare namespace Glue {
      * Scala code to perform the mapping.
      */
     ScalaCode?: ScalaCode;
+  }
+  export interface GetResourcePolicyRequest {
+  }
+  export interface GetResourcePolicyResponse {
+    /**
+     * Contains the requested policy document, in JSON format.
+     */
+    PolicyInJson?: PolicyJsonString;
+    /**
+     * Contains the hash value associated with this policy.
+     */
+    PolicyHash?: HashString;
+    /**
+     * The date and time at which the policy was created.
+     */
+    CreateTime?: Timestamp;
+    /**
+     * The date and time at which the policy was last updated.
+     */
+    UpdateTime?: Timestamp;
   }
   export interface GetSecurityConfigurationRequest {
     /**
@@ -2521,7 +2574,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * The ID value of the table version to be retrieved.
+     * The ID value of the table version to be retrieved. A VersionID is a string representation of an integer. Each version is incremented by 1. 
      */
     VersionId?: VersionString;
   }
@@ -2715,6 +2768,7 @@ declare namespace Glue {
     CustomPatterns?: CustomPatterns;
   }
   export type GrokPattern = string;
+  export type HashString = string;
   export type IdString = string;
   export interface ImportCatalogToGlueRequest {
     /**
@@ -3197,6 +3251,7 @@ declare namespace Glue {
      */
     AvailabilityZone?: NameString;
   }
+  export type PolicyJsonString = string;
   export interface Predecessor {
     /**
      * The name of the job definition used by the predecessor job run.
@@ -3232,6 +3287,26 @@ declare namespace Glue {
     DataCatalogEncryptionSettings: DataCatalogEncryptionSettings;
   }
   export interface PutDataCatalogEncryptionSettingsResponse {
+  }
+  export interface PutResourcePolicyRequest {
+    /**
+     * Contains the policy document to set, in JSON format.
+     */
+    PolicyInJson: PolicyJsonString;
+    /**
+     * This is the hash value returned when the previous policy was set using PutResourcePolicy. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.
+     */
+    PolicyHashCondition?: HashString;
+    /**
+     * If a value of MUST_EXIST is used here, the call will fail unless a policy has already been set. If a value of NOT_Exist is used, the call will fail if a policy has already been set. If a value of NONE or a null value is used, the call will not depend on the existence of a policy.
+     */
+    PolicyExistsCondition?: ExistCondition;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     * A hash of the policy that has just been set. This must be included in a subsequent call that overwrites or updates this policy.
+     */
+    PolicyHash?: HashString;
   }
   export type PythonScript = string;
   export interface ResetJobBookmarkRequest {
@@ -3643,7 +3718,7 @@ declare namespace Glue {
      */
     Table?: Table;
     /**
-     * The ID value that identifies this table version.
+     * The ID value that identifies this table version. A VersionId is a string representation of an integer. Each version is incremented by 1.
      */
     VersionId?: VersionString;
   }
@@ -3653,7 +3728,7 @@ declare namespace Glue {
      */
     TableName?: NameString;
     /**
-     * The ID value of the version in question.
+     * The ID value of the version in question. A VersionID is a string representation of an integer. Each version is incremented by 1.
      */
     VersionId?: VersionString;
     /**
@@ -3798,7 +3873,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
     /**

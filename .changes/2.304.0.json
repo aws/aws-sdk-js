@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "New Glue APIs for creating, updating, reading and deleting Data Catalog resource-based policies."
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "Support for new APIs that enable management of sampling rules."
+    }
+]

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.303.0-->
+<!--LATEST=2.304.0-->
 <!--ENTRYINSERT-->
+
+## 2.304.0
+* feature: Glue: New Glue APIs for creating, updating, reading and deleting Data Catalog resource-based policies.
+* feature: XRay: Support for new APIs that enable management of sampling rules.
 
 ## 2.303.0
 * feature: IoTAnalytics: Added new listDatasetContent API that shows you the list of dataset contents for the corresponding versions
