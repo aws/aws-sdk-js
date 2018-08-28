@@ -460,7 +460,8 @@
     "name": "Mobile"
   },
   "pricing": {
-    "name": "Pricing"
+    "name": "Pricing",
+    "cors": true
   },
   "costexplorer": {
     "prefix": "ce",
