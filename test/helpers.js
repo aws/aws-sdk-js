@@ -171,9 +171,11 @@
   });
 
   MockServiceFromApi = function(customApi) {
-    if (!customApi.metadata) customApi.metadata = {};
-    customApi.metadata.endpointPrefix = 'mockservice';
-    customApi.metadata.signatureVersion = 'v4';
+    if (!customApi.metadata) {
+      customApi.metadata = {};
+      customApi.metadata.endpointPrefix = 'mockservice';
+      customApi.metadata.signatureVersion = 'v4';
+    }
     return AWS.Service.defineService('mock', {
       serviceIdentifier: 'mock',
       initialize: function(config) {
@@ -183,17 +185,6 @@
           secretAccessKey: 'secret'
         };
         this.config.region = this.config.region || 'mock-region';
-      },
-      setupRequestListeners: function(request) {
-        request.on('extractData', function(resp) {
-          return resp.data = (resp.httpResponse.body || '').toString();
-        });
-        return request.on('extractError', function(resp) {
-          return resp.error = {
-            code: (resp.httpResponse.body || '').toString() || resp.httpResponse.statusCode,
-            message: null
-          };
-        });
       },
       api: new AWS.Model.Api(customApi)
     });
