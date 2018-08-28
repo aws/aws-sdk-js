@@ -841,6 +841,125 @@
         expect(119900 < offset && 120100 > offset).to.equal(true);
       });
     });
+
+    describe('Service monitoring events emitter', function() {
+      it('should emit events on specific service client', function() {
+        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']);   
+        var client = new MockService();
+        var client2 = new MockService();
+        var callNum = 0; var attemptNum = 0;
+        var callNumClient2 = 0;
+        client.on('apiCall', function apiCallListener(event) {
+          callNum ++;
+          expect(event.Type).to.equal('ApiCall');
+        });
+        client.on('apiCallAttempt', function apiAttemptListener(event) {
+          attemptNum ++;
+          expect(event.Type).to.equal('ApiCallAttempt');
+        });
+        client2.on('apiCall', function apiCallListener() {
+          callNumClient2 ++;
+        });
+        client.makeRequest('operationName', function(err, data) {});
+        expect(callNum).to.equal(1);
+        expect(attemptNum).to.equal(1);
+        expect(callNumClient2).to.equal(0);
+      });
+
+      it('should emit events on Service prototype', function() {
+        var callNum = 0;
+        var attemptNum = 0;
+        MockService.prototype.on('apiCall', function apiCallListener(event) {
+          callNum ++;
+          expect(event.Type).to.equal('ApiCall');
+        });
+        MockService.prototype.on('apiCallAttempt', function apiAttemptListener(event) {
+          attemptNum ++;
+          expect(event.Type).to.equal('ApiCallAttempt');
+        });
+        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']); 
+        var client = new MockService();
+        client.makeRequest('operationName', function(err, data) {});
+        expect(callNum).to.equal(1);
+        expect(attemptNum).to.equal(1);
+      });
+
+      it('should emit events on global Service prototype', function() {
+        var callNum = 0;
+        var attemptNum = 0;
+        AWS.Service.prototype.on('apiCall', function apiCallListener(event) {
+          callNum ++;
+          expect(event.Type).to.equal('ApiCall');
+        });
+        AWS.Service.prototype.on('apiCallAttempt', function apiAttemptListener(event) {
+          attemptNum ++;
+          expect(event.Type).to.equal('ApiCallAttempt');
+        });
+        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']); 
+        var client = new MockService();
+        client.makeRequest('operationName', function(err, data) {});
+        expect(callNum).to.equal(1);
+        expect(attemptNum).to.equal(1);
+      })
+    })
+
+    it('should emit api call events corresponding to event interface', function() {
+      helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']); 
+      var client = new MockService();
+      client.on('apiCall', function apiCallListener(event) {
+        expect(event.Type).to.equal('ApiCall');
+        expect(event.Service).to.equal('MockService');
+        expect(event.Api).to.equal('operationName');
+        expect(Math.abs(event.Timestemp - Date.now()) < 100).to.equal(true);
+        expect(event.Version).to.equal(1);
+        expect(event.AttemptCount).to.equal(0);
+        expect(typeof event.Latency).to.equal('number');
+      });
+      client.makeRequest('operationName', function(err, data) {});
+    });
+
+    it('should emit api call attempt events corresponding to event interface', function() {
+      helpers.mockHttpResponse(200, {
+        'x-amz-request-id': 'request-id',
+        'x-amzn-requestid': 'n-request-id'
+      }, ['FOO', 'BAR']); 
+      var client = new MockService();
+      client.on('apiCallAttempt', function apiCallListener(event) {
+        expect(event.Type).to.equal('ApiCallAttempt');
+        expect(event.Service).to.equal('MockService');
+        expect(event.Api).to.equal('operationName');
+        expect(Math.abs(event.Timestemp - Date.now()) < 100).to.equal(true);
+        expect(event.Version).to.equal(1);
+        expect(event.AttemptCount).to.equal(0);
+        expect(event.Fqdn).to.equal('mockservice.mock-region.amazonaws.com');
+        expect(event.XAmznRequestId).to.equal('n-request-id');
+        expect(event.XAmzRequestId).to.equal('request-id');
+        expect(event.HttpStatusCode).to.equal(200);
+        expect(event.AccessKey).to.equal('akid');
+        expect(event.Region).to.equal('mock-region');
+        expect(typeof event.UserAgent).to.equal('string');
+        expect(typeof event.AttemptLatency).to.equal('number');
+      });
+      client.makeRequest('operationName', function(err, data) {});
+    });
+
+    it('should publish monitoring event when publisher is set', function(done) {
+      helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']);
+      var events = [];
+      AWS.Service.prototype.publisher = {
+        eventHandler: function(event){
+          events.push(event)
+        }
+      }
+      var client = new MockService({clientSideMonitoring: true});
+      client.makeRequest('operationName', function(err, data) {});
+      process.nextTick(function() {
+        expect(events.length).to.equal(2);
+        expect(events[0].Type).to.equal('ApiCallAttempt');
+        expect(events[1].Type).to.equal('ApiCall');
+        done();
+      })
+    })
   });
 
 }).call(this);
