@@ -76,13 +76,21 @@ declare class MediaPackage extends Service {
    */
   listOriginEndpoints(callback?: (err: AWSError, data: MediaPackage.Types.ListOriginEndpointsResponse) => void): Request<MediaPackage.Types.ListOriginEndpointsResponse, AWSError>;
   /**
-   * Changes the Channel ingest username and password.
+   * Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
    */
   rotateChannelCredentials(params: MediaPackage.Types.RotateChannelCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateChannelCredentialsResponse) => void): Request<MediaPackage.Types.RotateChannelCredentialsResponse, AWSError>;
   /**
-   * Changes the Channel ingest username and password.
+   * Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
    */
   rotateChannelCredentials(callback?: (err: AWSError, data: MediaPackage.Types.RotateChannelCredentialsResponse) => void): Request<MediaPackage.Types.RotateChannelCredentialsResponse, AWSError>;
+  /**
+   * Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
+   */
+  rotateIngestEndpointCredentials(params: MediaPackage.Types.RotateIngestEndpointCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateIngestEndpointCredentialsResponse) => void): Request<MediaPackage.Types.RotateIngestEndpointCredentialsResponse, AWSError>;
+  /**
+   * Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
+   */
+  rotateIngestEndpointCredentials(callback?: (err: AWSError, data: MediaPackage.Types.RotateIngestEndpointCredentialsResponse) => void): Request<MediaPackage.Types.RotateIngestEndpointCredentialsResponse, AWSError>;
   /**
    * Updates an existing Channel.
    */
@@ -591,6 +599,10 @@ rounded to the nearest multiple of the source fragment duration.
   }
   export interface IngestEndpoint {
     /**
+     * The system generated unique identifier for the IngestEndpoint
+     */
+    Id?: __string;
+    /**
      * The system generated password for ingest authentication.
      */
     Password?: __string;
@@ -718,6 +730,31 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     Id: __string;
   }
   export interface RotateChannelCredentialsResponse {
+    /**
+     * The Amazon Resource Name (ARN) assigned to the Channel.
+     */
+    Arn?: __string;
+    /**
+     * A short text description of the Channel.
+     */
+    Description?: __string;
+    HlsIngest?: HlsIngest;
+    /**
+     * The ID of the Channel.
+     */
+    Id?: __string;
+  }
+  export interface RotateIngestEndpointCredentialsRequest {
+    /**
+     * The ID of the channel the IngestEndpoint is on.
+     */
+    Id: __string;
+    /**
+     * The id of the IngestEndpoint whose credentials should be rotated
+     */
+    IngestEndpointId: __string;
+  }
+  export interface RotateIngestEndpointCredentialsResponse {
     /**
      * The Amazon Resource Name (ARN) assigned to the Channel.
      */

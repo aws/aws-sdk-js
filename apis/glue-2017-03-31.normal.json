@@ -791,37 +791,6 @@
       ],
       "documentation": "<p>Deletes a specified partition.</p>"
     },
-    "DeleteResourcePolicy": {
-      "name": "DeleteResourcePolicy",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "DeleteResourcePolicyRequest"
-      },
-      "output": {
-        "shape": "DeleteResourcePolicyResponse"
-      },
-      "errors": [
-        {
-          "shape": "EntityNotFoundException"
-        },
-        {
-          "shape": "InternalServiceException"
-        },
-        {
-          "shape": "OperationTimeoutException"
-        },
-        {
-          "shape": "InvalidInputException"
-        },
-        {
-          "shape": "ConditionCheckFailureException"
-        }
-      ],
-      "documentation": "<p>Deletes a specified policy.</p>"
-    },
     "DeleteSecurityConfiguration": {
       "name": "DeleteSecurityConfiguration",
       "http": {
@@ -1508,34 +1477,6 @@
       ],
       "documentation": "<p>Gets code to perform a specified mapping.</p>"
     },
-    "GetResourcePolicy": {
-      "name": "GetResourcePolicy",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "GetResourcePolicyRequest"
-      },
-      "output": {
-        "shape": "GetResourcePolicyResponse"
-      },
-      "errors": [
-        {
-          "shape": "EntityNotFoundException"
-        },
-        {
-          "shape": "InternalServiceException"
-        },
-        {
-          "shape": "OperationTimeoutException"
-        },
-        {
-          "shape": "InvalidInputException"
-        }
-      ],
-      "documentation": "<p>Retrieves a specified resource policy.</p>"
-    },
     "GetSecurityConfiguration": {
       "name": "GetSecurityConfiguration",
       "http": {
@@ -1880,37 +1821,6 @@
         }
       ],
       "documentation": "<p>Sets the security configuration for a specified catalog. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter.</p>"
-    },
-    "PutResourcePolicy": {
-      "name": "PutResourcePolicy",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "PutResourcePolicyRequest"
-      },
-      "output": {
-        "shape": "PutResourcePolicyResponse"
-      },
-      "errors": [
-        {
-          "shape": "EntityNotFoundException"
-        },
-        {
-          "shape": "InternalServiceException"
-        },
-        {
-          "shape": "OperationTimeoutException"
-        },
-        {
-          "shape": "InvalidInputException"
-        },
-        {
-          "shape": "ConditionCheckFailureException"
-        }
-      ],
-      "documentation": "<p>Sets the Data Catalog resource policy for access control.</p>"
     },
     "ResetJobBookmark": {
       "name": "ResetJobBookmark",
@@ -2707,7 +2617,7 @@
         },
         "VersionIds": {
           "shape": "BatchDeleteTableVersionList",
-          "documentation": "<p>A list of the IDs of versions to be deleted. A <code>VersionId</code> is a string representation of an integer. Each version is incremented by 1.</p>"
+          "documentation": "<p>A list of the IDs of versions to be deleted.</p>"
         }
       }
     },
@@ -3337,7 +3247,7 @@
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>'{ \"Version\": 1.0, \"CrawlerOutput\": { \"Partitions\": { \"AddOrUpdateBehavior\": \"InheritFromTable\" } } }'</code> </p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
@@ -3526,7 +3436,7 @@
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>'{ \"Version\": 1.0, \"CrawlerOutput\": { \"Partitions\": { \"AddOrUpdateBehavior\": \"InheritFromTable\" } } }'</code> </p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
@@ -4246,19 +4156,6 @@
       "type": "structure",
       "members": {}
     },
-    "DeleteResourcePolicyRequest": {
-      "type": "structure",
-      "members": {
-        "PolicyHashCondition": {
-          "shape": "HashString",
-          "documentation": "<p>The hash value returned when this policy was set.</p>"
-        }
-      }
-    },
-    "DeleteResourcePolicyResponse": {
-      "type": "structure",
-      "members": {}
-    },
     "DeleteSecurityConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -4322,7 +4219,7 @@
         },
         "VersionId": {
           "shape": "VersionString",
-          "documentation": "<p>The ID of the table version to be deleted. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1.</p>"
+          "documentation": "<p>The ID of the table version to be deleted.</p>"
         }
       }
     },
@@ -4587,14 +4484,6 @@
     },
     "ExecutionTime": {
       "type": "integer"
-    },
-    "ExistCondition": {
-      "type": "string",
-      "enum": [
-        "MUST_EXIST",
-        "NOT_EXIST",
-        "NONE"
-      ]
     },
     "FieldType": {
       "type": "string"
@@ -5162,7 +5051,7 @@
         },
         "Expression": {
           "shape": "PredicateString",
-          "documentation": "<p>An expression filtering the partitions to be returned.</p> <p>The expression uses SQL syntax similar to the SQL <code>WHERE</code> filter clause. The SQL statement parser <a href=\"http://jsqlparser.sourceforge.net/home.php\">JSQLParser</a> parses the expression. </p> <p> <i>Operators</i>: The following are the operators that you can use in the <code>Expression</code> API call:</p> <dl> <dt>=</dt> <dd> <p>Checks if the values of the two operands are equal or not; if yes, then the condition becomes true.</p> <p>Example: Assume 'variable a' holds 10 and 'variable b' holds 20. </p> <p>(a = b) is not true.</p> </dd> <dt>&lt; &gt;</dt> <dd> <p>Checks if the values of two operands are equal or not; if the values are not equal, then the condition becomes true.</p> <p>Example: (a &lt; &gt; b) is true.</p> </dd> <dt>&gt;</dt> <dd> <p>Checks if the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt; b) is not true.</p> </dd> <dt>&lt;</dt> <dd> <p>Checks if the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt; b) is true.</p> </dd> <dt>&gt;=</dt> <dd> <p>Checks if the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt;= b) is not true.</p> </dd> <dt>&lt;=</dt> <dd> <p>Checks if the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt;= b) is true.</p> </dd> <dt>AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL</dt> <dd> <p>Logical operators.</p> </dd> </dl> <p> <i>Supported Partition Key Types</i>: The following are the the supported partition keys.</p> <ul> <li> <p> <code>string</code> </p> </li> <li> <p> <code>date</code> </p> </li> <li> <p> <code>timestamp</code> </p> </li> <li> <p> <code>int</code> </p> </li> <li> <p> <code>bigint</code> </p> </li> <li> <p> <code>long</code> </p> </li> <li> <p> <code>tinyint</code> </p> </li> <li> <p> <code>smallint</code> </p> </li> <li> <p> <code>decimal</code> </p> </li> </ul> <p>If an invalid type is encountered, a <code> <a href=\"https://code.amazon.com/packages/DaylightService/blobs/5820762977ffbdd59f23f4cf349e47189632202f/--/src/com/amazonaws/daylight/core/storage/parsers/query/parser/PredicateFactoryProvider.java#L37\">PredicateConstructionException</a> </code> is thrown. </p> <p>The following list shows the valid operators on each type. When you define a crawler, the <code>partitionKey</code> type is created as a <code>STRING</code>, to be compatible with the catalog partitions. </p> <p> <i>Sample API Call</i>: </p>"
+          "documentation": "<p>An expression filtering the partitions to be returned.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -5230,31 +5119,6 @@
         "ScalaCode": {
           "shape": "ScalaCode",
           "documentation": "<p>Scala code to perform the mapping.</p>"
-        }
-      }
-    },
-    "GetResourcePolicyRequest": {
-      "type": "structure",
-      "members": {}
-    },
-    "GetResourcePolicyResponse": {
-      "type": "structure",
-      "members": {
-        "PolicyInJson": {
-          "shape": "PolicyJsonString",
-          "documentation": "<p>Contains the requested policy document, in JSON format.</p>"
-        },
-        "PolicyHash": {
-          "shape": "HashString",
-          "documentation": "<p>Contains the hash value associated with this policy.</p>"
-        },
-        "CreateTime": {
-          "shape": "Timestamp",
-          "documentation": "<p>The date and time at which the policy was created.</p>"
-        },
-        "UpdateTime": {
-          "shape": "Timestamp",
-          "documentation": "<p>The date and time at which the policy was last updated.</p>"
         }
       }
     },
@@ -5356,7 +5220,7 @@
         },
         "VersionId": {
           "shape": "VersionString",
-          "documentation": "<p>The ID value of the table version to be retrieved. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1. </p>"
+          "documentation": "<p>The ID value of the table version to be retrieved.</p>"
         }
       }
     },
@@ -5625,12 +5489,6 @@
       "max": 2048,
       "min": 1,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\t]*"
-    },
-    "HashString": {
-      "type": "string",
-      "max": 255,
-      "min": 1,
-      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
     "IdString": {
       "type": "string",
@@ -6395,11 +6253,6 @@
       },
       "documentation": "<p>Specifies the physical requirements for a connection.</p>"
     },
-    "PolicyJsonString": {
-      "type": "string",
-      "max": 10240,
-      "min": 2
-    },
     "Predecessor": {
       "type": "structure",
       "members": {
@@ -6474,35 +6327,6 @@
     "PutDataCatalogEncryptionSettingsResponse": {
       "type": "structure",
       "members": {}
-    },
-    "PutResourcePolicyRequest": {
-      "type": "structure",
-      "required": [
-        "PolicyInJson"
-      ],
-      "members": {
-        "PolicyInJson": {
-          "shape": "PolicyJsonString",
-          "documentation": "<p>Contains the policy document to set, in JSON format.</p>"
-        },
-        "PolicyHashCondition": {
-          "shape": "HashString",
-          "documentation": "<p>This is the hash value returned when the previous policy was set using PutResourcePolicy. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.</p>"
-        },
-        "PolicyExistsCondition": {
-          "shape": "ExistCondition",
-          "documentation": "<p>If a value of <code>MUST_EXIST</code> is used here, the call will fail unless a policy has already been set. If a value of <code>NOT_Exist</code> is used, the call will fail if a policy has already been set. If a value of <code>NONE</code> or a null value is used, the call will not depend on the existence of a policy.</p>"
-        }
-      }
-    },
-    "PutResourcePolicyResponse": {
-      "type": "structure",
-      "members": {
-        "PolicyHash": {
-          "shape": "HashString",
-          "documentation": "<p>A hash of the policy that has just been set. This must be included in a subsequent call that overwrites or updates this policy.</p>"
-        }
-      }
     },
     "PythonScript": {
       "type": "string"
@@ -7138,7 +6962,7 @@
         },
         "VersionId": {
           "shape": "VersionString",
-          "documentation": "<p>The ID value that identifies this table version. A <code>VersionId</code> is a string representation of an integer. Each version is incremented by 1.</p>"
+          "documentation": "<p>The ID value that identifies this table version.</p>"
         }
       },
       "documentation": "<p>Specifies a version of a table.</p>"
@@ -7152,7 +6976,7 @@
         },
         "VersionId": {
           "shape": "VersionString",
-          "documentation": "<p>The ID value of the version in question. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1.</p>"
+          "documentation": "<p>The ID value of the version in question.</p>"
         },
         "ErrorDetail": {
           "shape": "ErrorDetail",
@@ -7380,7 +7204,7 @@
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>'{ \"Version\": 1.0, \"CrawlerOutput\": { \"Partitions\": { \"AddOrUpdateBehavior\": \"InheritFromTable\" } } }'</code> </p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",

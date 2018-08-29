@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.304.0',
+	  VERSION: '2.305.0',
 
 	  /**
 	   * @api private
@@ -133,11 +133,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  apiLoader: __webpack_require__(32)
 	});
-
 	__webpack_require__(33);
-	__webpack_require__(36);
-
-	__webpack_require__(39);
+	__webpack_require__(34);
+	__webpack_require__(37);
 	__webpack_require__(40);
 	__webpack_require__(41);
 	__webpack_require__(45);
@@ -1576,7 +1574,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 7 */
 /***/ (function(module, exports) {
 
-	module.exports = {"acm":{"name":"ACM","cors":true},"apigateway":{"name":"APIGateway","cors":true},"applicationautoscaling":{"prefix":"application-autoscaling","name":"ApplicationAutoScaling","cors":true},"appstream":{"name":"AppStream"},"autoscaling":{"name":"AutoScaling","cors":true},"batch":{"name":"Batch"},"budgets":{"name":"Budgets"},"clouddirectory":{"name":"CloudDirectory","versions":["2016-05-10*"]},"cloudformation":{"name":"CloudFormation","cors":true},"cloudfront":{"name":"CloudFront","versions":["2013-05-12*","2013-11-11*","2014-05-31*","2014-10-21*","2014-11-06*","2015-04-17*","2015-07-27*","2015-09-17*","2016-01-13*","2016-01-28*","2016-08-01*","2016-08-20*","2016-09-07*","2016-09-29*","2016-11-25*","2017-03-25*","2017-10-30*"],"cors":true},"cloudhsm":{"name":"CloudHSM","cors":true},"cloudsearch":{"name":"CloudSearch"},"cloudsearchdomain":{"name":"CloudSearchDomain"},"cloudtrail":{"name":"CloudTrail","cors":true},"cloudwatch":{"prefix":"monitoring","name":"CloudWatch","cors":true},"cloudwatchevents":{"prefix":"events","name":"CloudWatchEvents","versions":["2014-02-03*"],"cors":true},"cloudwatchlogs":{"prefix":"logs","name":"CloudWatchLogs","cors":true},"codebuild":{"name":"CodeBuild","cors":true},"codecommit":{"name":"CodeCommit","cors":true},"codedeploy":{"name":"CodeDeploy","cors":true},"codepipeline":{"name":"CodePipeline","cors":true},"cognitoidentity":{"prefix":"cognito-identity","name":"CognitoIdentity","cors":true},"cognitoidentityserviceprovider":{"prefix":"cognito-idp","name":"CognitoIdentityServiceProvider","cors":true},"cognitosync":{"prefix":"cognito-sync","name":"CognitoSync","cors":true},"configservice":{"prefix":"config","name":"ConfigService","cors":true},"cur":{"name":"CUR","cors":true},"datapipeline":{"name":"DataPipeline"},"devicefarm":{"name":"DeviceFarm","cors":true},"directconnect":{"name":"DirectConnect","cors":true},"directoryservice":{"prefix":"ds","name":"DirectoryService"},"discovery":{"name":"Discovery"},"dms":{"name":"DMS"},"dynamodb":{"name":"DynamoDB","cors":true},"dynamodbstreams":{"prefix":"streams.dynamodb","name":"DynamoDBStreams","cors":true},"ec2":{"name":"EC2","versions":["2013-06-15*","2013-10-15*","2014-02-01*","2014-05-01*","2014-06-15*","2014-09-01*","2014-10-01*","2015-03-01*","2015-04-15*","2015-10-01*","2016-04-01*","2016-09-15*"],"cors":true},"ecr":{"name":"ECR","cors":true},"ecs":{"name":"ECS","cors":true},"efs":{"prefix":"elasticfilesystem","name":"EFS","cors":true},"elasticache":{"name":"ElastiCache","versions":["2012-11-15*","2014-03-24*","2014-07-15*","2014-09-30*"],"cors":true},"elasticbeanstalk":{"name":"ElasticBeanstalk","cors":true},"elb":{"prefix":"elasticloadbalancing","name":"ELB","cors":true},"elbv2":{"prefix":"elasticloadbalancingv2","name":"ELBv2","cors":true},"emr":{"prefix":"elasticmapreduce","name":"EMR","cors":true},"es":{"name":"ES"},"elastictranscoder":{"name":"ElasticTranscoder","cors":true},"firehose":{"name":"Firehose","cors":true},"gamelift":{"name":"GameLift","cors":true},"glacier":{"name":"Glacier"},"health":{"name":"Health"},"iam":{"name":"IAM"},"importexport":{"name":"ImportExport"},"inspector":{"name":"Inspector","versions":["2015-08-18*"],"cors":true},"iot":{"name":"Iot","cors":true},"iotdata":{"prefix":"iot-data","name":"IotData","cors":true},"kinesis":{"name":"Kinesis","cors":true},"kinesisanalytics":{"name":"KinesisAnalytics"},"kms":{"name":"KMS","cors":true},"lambda":{"name":"Lambda","cors":true},"lexruntime":{"prefix":"runtime.lex","name":"LexRuntime","cors":true},"lightsail":{"name":"Lightsail"},"machinelearning":{"name":"MachineLearning","cors":true},"marketplacecommerceanalytics":{"name":"MarketplaceCommerceAnalytics","cors":true},"marketplacemetering":{"prefix":"meteringmarketplace","name":"MarketplaceMetering"},"mturk":{"prefix":"mturk-requester","name":"MTurk","cors":true},"mobileanalytics":{"name":"MobileAnalytics","cors":true},"opsworks":{"name":"OpsWorks","cors":true},"opsworkscm":{"name":"OpsWorksCM"},"organizations":{"name":"Organizations"},"pinpoint":{"name":"Pinpoint"},"polly":{"name":"Polly","cors":true},"rds":{"name":"RDS","versions":["2014-09-01*"],"cors":true},"redshift":{"name":"Redshift","cors":true},"rekognition":{"name":"Rekognition","cors":true},"resourcegroupstaggingapi":{"name":"ResourceGroupsTaggingAPI"},"route53":{"name":"Route53","cors":true},"route53domains":{"name":"Route53Domains","cors":true},"s3":{"name":"S3","dualstackAvailable":true,"cors":true},"servicecatalog":{"name":"ServiceCatalog","cors":true},"ses":{"prefix":"email","name":"SES","cors":true},"shield":{"name":"Shield"},"simpledb":{"prefix":"sdb","name":"SimpleDB"},"sms":{"name":"SMS"},"snowball":{"name":"Snowball"},"sns":{"name":"SNS","cors":true},"sqs":{"name":"SQS","cors":true},"ssm":{"name":"SSM","cors":true},"storagegateway":{"name":"StorageGateway","cors":true},"stepfunctions":{"prefix":"states","name":"StepFunctions"},"sts":{"name":"STS","cors":true},"support":{"name":"Support"},"swf":{"name":"SWF"},"xray":{"name":"XRay"},"waf":{"name":"WAF","cors":true},"wafregional":{"prefix":"waf-regional","name":"WAFRegional"},"workdocs":{"name":"WorkDocs","cors":true},"workspaces":{"name":"WorkSpaces"},"codestar":{"name":"CodeStar"},"lexmodelbuildingservice":{"prefix":"lex-models","name":"LexModelBuildingService","cors":true},"marketplaceentitlementservice":{"prefix":"entitlement.marketplace","name":"MarketplaceEntitlementService"},"athena":{"name":"Athena"},"greengrass":{"name":"Greengrass"},"dax":{"name":"DAX"},"migrationhub":{"prefix":"AWSMigrationHub","name":"MigrationHub"},"cloudhsmv2":{"name":"CloudHSMV2"},"glue":{"name":"Glue"},"mobile":{"name":"Mobile"},"pricing":{"name":"Pricing"},"costexplorer":{"prefix":"ce","name":"CostExplorer"},"mediaconvert":{"name":"MediaConvert"},"medialive":{"name":"MediaLive"},"mediapackage":{"name":"MediaPackage"},"mediastore":{"name":"MediaStore"},"mediastoredata":{"prefix":"mediastore-data","name":"MediaStoreData"},"appsync":{"name":"AppSync"},"guardduty":{"name":"GuardDuty"},"mq":{"name":"MQ"},"comprehend":{"name":"Comprehend"},"iotjobsdataplane":{"prefix":"iot-jobs-data","name":"IoTJobsDataPlane"},"kinesisvideoarchivedmedia":{"prefix":"kinesis-video-archived-media","name":"KinesisVideoArchivedMedia","cors":true},"kinesisvideomedia":{"prefix":"kinesis-video-media","name":"KinesisVideoMedia"},"kinesisvideo":{"name":"KinesisVideo","cors":true},"sagemakerruntime":{"prefix":"runtime.sagemaker","name":"SageMakerRuntime"},"sagemaker":{"name":"SageMaker"},"translate":{"name":"Translate","cors":true},"resourcegroups":{"prefix":"resource-groups","name":"ResourceGroups"},"alexaforbusiness":{"name":"AlexaForBusiness"},"cloud9":{"name":"Cloud9"},"serverlessapplicationrepository":{"prefix":"serverlessrepo","name":"ServerlessApplicationRepository"},"servicediscovery":{"name":"ServiceDiscovery"},"workmail":{"name":"WorkMail"},"autoscalingplans":{"prefix":"autoscaling-plans","name":"AutoScalingPlans"},"transcribeservice":{"prefix":"transcribe","name":"TranscribeService"},"connect":{"name":"Connect"},"acmpca":{"prefix":"acm-pca","name":"ACMPCA"},"fms":{"name":"FMS"},"secretsmanager":{"name":"SecretsManager","cors":true},"iotanalytics":{"name":"IoTAnalytics"},"iot1clickdevicesservice":{"prefix":"iot1click-devices","name":"IoT1ClickDevicesService"},"iot1clickprojects":{"prefix":"iot1click-projects","name":"IoT1ClickProjects"},"pi":{"name":"PI"},"neptune":{"name":"Neptune"},"mediatailor":{"name":"MediaTailor"},"eks":{"name":"EKS"},"macie":{"name":"Macie"},"dlm":{"name":"DLM"},"signer":{"name":"Signer"}}
+	module.exports = {"acm":{"name":"ACM","cors":true},"apigateway":{"name":"APIGateway","cors":true},"applicationautoscaling":{"prefix":"application-autoscaling","name":"ApplicationAutoScaling","cors":true},"appstream":{"name":"AppStream"},"autoscaling":{"name":"AutoScaling","cors":true},"batch":{"name":"Batch"},"budgets":{"name":"Budgets"},"clouddirectory":{"name":"CloudDirectory","versions":["2016-05-10*"]},"cloudformation":{"name":"CloudFormation","cors":true},"cloudfront":{"name":"CloudFront","versions":["2013-05-12*","2013-11-11*","2014-05-31*","2014-10-21*","2014-11-06*","2015-04-17*","2015-07-27*","2015-09-17*","2016-01-13*","2016-01-28*","2016-08-01*","2016-08-20*","2016-09-07*","2016-09-29*","2016-11-25*","2017-03-25*","2017-10-30*"],"cors":true},"cloudhsm":{"name":"CloudHSM","cors":true},"cloudsearch":{"name":"CloudSearch"},"cloudsearchdomain":{"name":"CloudSearchDomain"},"cloudtrail":{"name":"CloudTrail","cors":true},"cloudwatch":{"prefix":"monitoring","name":"CloudWatch","cors":true},"cloudwatchevents":{"prefix":"events","name":"CloudWatchEvents","versions":["2014-02-03*"],"cors":true},"cloudwatchlogs":{"prefix":"logs","name":"CloudWatchLogs","cors":true},"codebuild":{"name":"CodeBuild","cors":true},"codecommit":{"name":"CodeCommit","cors":true},"codedeploy":{"name":"CodeDeploy","cors":true},"codepipeline":{"name":"CodePipeline","cors":true},"cognitoidentity":{"prefix":"cognito-identity","name":"CognitoIdentity","cors":true},"cognitoidentityserviceprovider":{"prefix":"cognito-idp","name":"CognitoIdentityServiceProvider","cors":true},"cognitosync":{"prefix":"cognito-sync","name":"CognitoSync","cors":true},"configservice":{"prefix":"config","name":"ConfigService","cors":true},"cur":{"name":"CUR","cors":true},"datapipeline":{"name":"DataPipeline"},"devicefarm":{"name":"DeviceFarm","cors":true},"directconnect":{"name":"DirectConnect","cors":true},"directoryservice":{"prefix":"ds","name":"DirectoryService"},"discovery":{"name":"Discovery"},"dms":{"name":"DMS"},"dynamodb":{"name":"DynamoDB","cors":true},"dynamodbstreams":{"prefix":"streams.dynamodb","name":"DynamoDBStreams","cors":true},"ec2":{"name":"EC2","versions":["2013-06-15*","2013-10-15*","2014-02-01*","2014-05-01*","2014-06-15*","2014-09-01*","2014-10-01*","2015-03-01*","2015-04-15*","2015-10-01*","2016-04-01*","2016-09-15*"],"cors":true},"ecr":{"name":"ECR","cors":true},"ecs":{"name":"ECS","cors":true},"efs":{"prefix":"elasticfilesystem","name":"EFS","cors":true},"elasticache":{"name":"ElastiCache","versions":["2012-11-15*","2014-03-24*","2014-07-15*","2014-09-30*"],"cors":true},"elasticbeanstalk":{"name":"ElasticBeanstalk","cors":true},"elb":{"prefix":"elasticloadbalancing","name":"ELB","cors":true},"elbv2":{"prefix":"elasticloadbalancingv2","name":"ELBv2","cors":true},"emr":{"prefix":"elasticmapreduce","name":"EMR","cors":true},"es":{"name":"ES"},"elastictranscoder":{"name":"ElasticTranscoder","cors":true},"firehose":{"name":"Firehose","cors":true},"gamelift":{"name":"GameLift","cors":true},"glacier":{"name":"Glacier"},"health":{"name":"Health"},"iam":{"name":"IAM"},"importexport":{"name":"ImportExport"},"inspector":{"name":"Inspector","versions":["2015-08-18*"],"cors":true},"iot":{"name":"Iot","cors":true},"iotdata":{"prefix":"iot-data","name":"IotData","cors":true},"kinesis":{"name":"Kinesis","cors":true},"kinesisanalytics":{"name":"KinesisAnalytics"},"kms":{"name":"KMS","cors":true},"lambda":{"name":"Lambda","cors":true},"lexruntime":{"prefix":"runtime.lex","name":"LexRuntime","cors":true},"lightsail":{"name":"Lightsail"},"machinelearning":{"name":"MachineLearning","cors":true},"marketplacecommerceanalytics":{"name":"MarketplaceCommerceAnalytics","cors":true},"marketplacemetering":{"prefix":"meteringmarketplace","name":"MarketplaceMetering"},"mturk":{"prefix":"mturk-requester","name":"MTurk","cors":true},"mobileanalytics":{"name":"MobileAnalytics","cors":true},"opsworks":{"name":"OpsWorks","cors":true},"opsworkscm":{"name":"OpsWorksCM"},"organizations":{"name":"Organizations"},"pinpoint":{"name":"Pinpoint"},"polly":{"name":"Polly","cors":true},"rds":{"name":"RDS","versions":["2014-09-01*"],"cors":true},"redshift":{"name":"Redshift","cors":true},"rekognition":{"name":"Rekognition","cors":true},"resourcegroupstaggingapi":{"name":"ResourceGroupsTaggingAPI"},"route53":{"name":"Route53","cors":true},"route53domains":{"name":"Route53Domains","cors":true},"s3":{"name":"S3","dualstackAvailable":true,"cors":true},"servicecatalog":{"name":"ServiceCatalog","cors":true},"ses":{"prefix":"email","name":"SES","cors":true},"shield":{"name":"Shield"},"simpledb":{"prefix":"sdb","name":"SimpleDB"},"sms":{"name":"SMS"},"snowball":{"name":"Snowball"},"sns":{"name":"SNS","cors":true},"sqs":{"name":"SQS","cors":true},"ssm":{"name":"SSM","cors":true},"storagegateway":{"name":"StorageGateway","cors":true},"stepfunctions":{"prefix":"states","name":"StepFunctions"},"sts":{"name":"STS","cors":true},"support":{"name":"Support"},"swf":{"name":"SWF"},"xray":{"name":"XRay"},"waf":{"name":"WAF","cors":true},"wafregional":{"prefix":"waf-regional","name":"WAFRegional"},"workdocs":{"name":"WorkDocs","cors":true},"workspaces":{"name":"WorkSpaces"},"codestar":{"name":"CodeStar"},"lexmodelbuildingservice":{"prefix":"lex-models","name":"LexModelBuildingService","cors":true},"marketplaceentitlementservice":{"prefix":"entitlement.marketplace","name":"MarketplaceEntitlementService"},"athena":{"name":"Athena"},"greengrass":{"name":"Greengrass"},"dax":{"name":"DAX"},"migrationhub":{"prefix":"AWSMigrationHub","name":"MigrationHub"},"cloudhsmv2":{"name":"CloudHSMV2"},"glue":{"name":"Glue"},"mobile":{"name":"Mobile"},"pricing":{"name":"Pricing","cors":true},"costexplorer":{"prefix":"ce","name":"CostExplorer"},"mediaconvert":{"name":"MediaConvert"},"medialive":{"name":"MediaLive"},"mediapackage":{"name":"MediaPackage"},"mediastore":{"name":"MediaStore"},"mediastoredata":{"prefix":"mediastore-data","name":"MediaStoreData"},"appsync":{"name":"AppSync"},"guardduty":{"name":"GuardDuty"},"mq":{"name":"MQ"},"comprehend":{"name":"Comprehend"},"iotjobsdataplane":{"prefix":"iot-jobs-data","name":"IoTJobsDataPlane"},"kinesisvideoarchivedmedia":{"prefix":"kinesis-video-archived-media","name":"KinesisVideoArchivedMedia","cors":true},"kinesisvideomedia":{"prefix":"kinesis-video-media","name":"KinesisVideoMedia"},"kinesisvideo":{"name":"KinesisVideo","cors":true},"sagemakerruntime":{"prefix":"runtime.sagemaker","name":"SageMakerRuntime"},"sagemaker":{"name":"SageMaker"},"translate":{"name":"Translate","cors":true},"resourcegroups":{"prefix":"resource-groups","name":"ResourceGroups"},"alexaforbusiness":{"name":"AlexaForBusiness"},"cloud9":{"name":"Cloud9"},"serverlessapplicationrepository":{"prefix":"serverlessrepo","name":"ServerlessApplicationRepository"},"servicediscovery":{"name":"ServiceDiscovery"},"workmail":{"name":"WorkMail"},"autoscalingplans":{"prefix":"autoscaling-plans","name":"AutoScalingPlans"},"transcribeservice":{"prefix":"transcribe","name":"TranscribeService"},"connect":{"name":"Connect"},"acmpca":{"prefix":"acm-pca","name":"ACMPCA"},"fms":{"name":"FMS"},"secretsmanager":{"name":"SecretsManager","cors":true},"iotanalytics":{"name":"IoTAnalytics"},"iot1clickdevicesservice":{"prefix":"iot1click-devices","name":"IoT1ClickDevicesService"},"iot1clickprojects":{"prefix":"iot1click-projects","name":"IoT1ClickProjects"},"pi":{"name":"PI"},"neptune":{"name":"Neptune"},"mediatailor":{"name":"MediaTailor"},"eks":{"name":"EKS"},"macie":{"name":"Macie"},"dlm":{"name":"DLM"},"signer":{"name":"Signer"}}
 
 /***/ }),
 /* 8 */
@@ -3263,6 +3261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'xmlNamespaceUri', api.metadata.xmlNamespace);
 	  property(this, 'abbreviation', api.metadata.serviceAbbreviation);
 	  property(this, 'fullName', api.metadata.serviceFullName);
+	  property(this, 'serviceId', api.metadata.serviceId);
 
 	  memoizedProperty(this, 'className', function() {
 	    var name = api.metadata.serviceAbbreviation || api.metadata.serviceFullName;
@@ -3501,8 +3500,253 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
+
+	/**
+	 * @api private
+	 * @!method on(eventName, callback)
+	 *   Registers an event listener callback for the event given by `eventName`.
+	 *   Parameters passed to the callback function depend on the individual event
+	 *   being triggered. See the event documentation for those parameters.
+	 *
+	 *   @param eventName [String] the event name to register the listener for
+	 *   @param callback [Function] the listener callback function
+	 *   @param toHead [Boolean] attach the listener callback to the head of callback array if set to true.
+	 *     Default to be false.
+	 *   @return [AWS.SequentialExecutor] the same object for chaining
+	 */
+	AWS.SequentialExecutor = AWS.util.inherit({
+
+	  constructor: function SequentialExecutor() {
+	    this._events = {};
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  listeners: function listeners(eventName) {
+	    return this._events[eventName] ? this._events[eventName].slice(0) : [];
+	  },
+
+	  on: function on(eventName, listener, toHead) {
+	    if (this._events[eventName]) {
+	      toHead ?
+	        this._events[eventName].unshift(listener) :
+	        this._events[eventName].push(listener);
+	    } else {
+	      this._events[eventName] = [listener];
+	    }
+	    return this;
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  onAsync: function onAsync(eventName, listener, toHead) {
+	    listener._isAsync = true;
+	    return this.on(eventName, listener, toHead);
+	  },
+
+	  removeListener: function removeListener(eventName, listener) {
+	    var listeners = this._events[eventName];
+	    if (listeners) {
+	      var length = listeners.length;
+	      var position = -1;
+	      for (var i = 0; i < length; ++i) {
+	        if (listeners[i] === listener) {
+	          position = i;
+	        }
+	      }
+	      if (position > -1) {
+	        listeners.splice(position, 1);
+	      }
+	    }
+	    return this;
+	  },
+
+	  removeAllListeners: function removeAllListeners(eventName) {
+	    if (eventName) {
+	      delete this._events[eventName];
+	    } else {
+	      this._events = {};
+	    }
+	    return this;
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  emit: function emit(eventName, eventArgs, doneCallback) {
+	    if (!doneCallback) doneCallback = function() { };
+	    var listeners = this.listeners(eventName);
+	    var count = listeners.length;
+	    this.callListeners(listeners, eventArgs, doneCallback);
+	    return count > 0;
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  callListeners: function callListeners(listeners, args, doneCallback, prevError) {
+	    var self = this;
+	    var error = prevError || null;
+
+	    function callNextListener(err) {
+	      if (err) {
+	        error = AWS.util.error(error || new Error(), err);
+	        if (self._haltHandlersOnError) {
+	          return doneCallback.call(self, error);
+	        }
+	      }
+	      self.callListeners(listeners, args, doneCallback, error);
+	    }
+
+	    while (listeners.length > 0) {
+	      var listener = listeners.shift();
+	      if (listener._isAsync) { // asynchronous listener
+	        listener.apply(self, args.concat([callNextListener]));
+	        return; // stop here, callNextListener will continue
+	      } else { // synchronous listener
+	        try {
+	          listener.apply(self, args);
+	        } catch (err) {
+	          error = AWS.util.error(error || new Error(), err);
+	        }
+	        if (error && self._haltHandlersOnError) {
+	          doneCallback.call(self, error);
+	          return;
+	        }
+	      }
+	    }
+	    doneCallback.call(self, error);
+	  },
+
+	  /**
+	   * Adds or copies a set of listeners from another list of
+	   * listeners or SequentialExecutor object.
+	   *
+	   * @param listeners [map<String,Array<Function>>, AWS.SequentialExecutor]
+	   *   a list of events and callbacks, or an event emitter object
+	   *   containing listeners to add to this emitter object.
+	   * @return [AWS.SequentialExecutor] the emitter object, for chaining.
+	   * @example Adding listeners from a map of listeners
+	   *   emitter.addListeners({
+	   *     event1: [function() { ... }, function() { ... }],
+	   *     event2: [function() { ... }]
+	   *   });
+	   *   emitter.emit('event1'); // emitter has event1
+	   *   emitter.emit('event2'); // emitter has event2
+	   * @example Adding listeners from another emitter object
+	   *   var emitter1 = new AWS.SequentialExecutor();
+	   *   emitter1.on('event1', function() { ... });
+	   *   emitter1.on('event2', function() { ... });
+	   *   var emitter2 = new AWS.SequentialExecutor();
+	   *   emitter2.addListeners(emitter1);
+	   *   emitter2.emit('event1'); // emitter2 has event1
+	   *   emitter2.emit('event2'); // emitter2 has event2
+	   */
+	  addListeners: function addListeners(listeners) {
+	    var self = this;
+
+	    // extract listeners if parameter is an SequentialExecutor object
+	    if (listeners._events) listeners = listeners._events;
+
+	    AWS.util.each(listeners, function(event, callbacks) {
+	      if (typeof callbacks === 'function') callbacks = [callbacks];
+	      AWS.util.arrayEach(callbacks, function(callback) {
+	        self.on(event, callback);
+	      });
+	    });
+
+	    return self;
+	  },
+
+	  /**
+	   * Registers an event with {on} and saves the callback handle function
+	   * as a property on the emitter object using a given `name`.
+	   *
+	   * @param name [String] the property name to set on this object containing
+	   *   the callback function handle so that the listener can be removed in
+	   *   the future.
+	   * @param (see on)
+	   * @return (see on)
+	   * @example Adding a named listener DATA_CALLBACK
+	   *   var listener = function() { doSomething(); };
+	   *   emitter.addNamedListener('DATA_CALLBACK', 'data', listener);
+	   *
+	   *   // the following prints: true
+	   *   console.log(emitter.DATA_CALLBACK == listener);
+	   */
+	  addNamedListener: function addNamedListener(name, eventName, callback, toHead) {
+	    this[name] = callback;
+	    this.addListener(eventName, callback, toHead);
+	    return this;
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
+	    callback._isAsync = true;
+	    return this.addNamedListener(name, eventName, callback);
+	  },
+
+	  /**
+	   * Helper method to add a set of named listeners using
+	   * {addNamedListener}. The callback contains a parameter
+	   * with a handle to the `addNamedListener` method.
+	   *
+	   * @callback callback function(add)
+	   *   The callback function is called immediately in order to provide
+	   *   the `add` function to the block. This simplifies the addition of
+	   *   a large group of named listeners.
+	   *   @param add [Function] the {addNamedListener} function to call
+	   *     when registering listeners.
+	   * @example Adding a set of named listeners
+	   *   emitter.addNamedListeners(function(add) {
+	   *     add('DATA_CALLBACK', 'data', function() { ... });
+	   *     add('OTHER', 'otherEvent', function() { ... });
+	   *     add('LAST', 'lastEvent', function() { ... });
+	   *   });
+	   *
+	   *   // these properties are now set:
+	   *   emitter.DATA_CALLBACK;
+	   *   emitter.OTHER;
+	   *   emitter.LAST;
+	   */
+	  addNamedListeners: function addNamedListeners(callback) {
+	    var self = this;
+	    callback(
+	      function() {
+	        self.addNamedListener.apply(self, arguments);
+	      },
+	      function() {
+	        self.addNamedAsyncListener.apply(self, arguments);
+	      }
+	    );
+	    return this;
+	  }
+	});
+
+	/**
+	 * {on} is the prefered method.
+	 * @api private
+	 */
+	AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
+
+	/**
+	 * @api private
+	 */
+	module.exports = AWS.SequentialExecutor;
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
 	var Api = __webpack_require__(28);
-	var regionConfig = __webpack_require__(34);
+	var regionConfig = __webpack_require__(35);
+
 	var inherit = AWS.util.inherit;
 	var clientCount = 0;
 
@@ -3546,7 +3790,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  initialize: function initialize(config) {
 	    var svcConfig = AWS.config[this.serviceIdentifier];
-
 	    this.config = new AWS.Config(AWS.config);
 	    if (svcConfig) this.config.update(svcConfig, true);
 	    if (config) this.config.update(config, true);
@@ -3556,6 +3799,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.config.endpoint = this.endpointFromTemplate(this.config.endpoint);
 	    this.setEndpoint(this.config.endpoint);
+	    //enable attaching listeners to service client
+	    AWS.SequentialExecutor.call(this);
+	    AWS.Service.addDefaultMonitoringListeners(this);
+	    if (this.config.clientSideMonitoring && this.publisher) {
+	      var publisher = this.publisher;
+	      this.addNamedListener('PUBLISH_API_CALL', 'apiCall', function PUBLISH_API_CALL(event) {
+	        process.nextTick(function() {publisher.eventHandler(event);});
+	      });
+	      this.addNamedListener('PUBLISH_API_ATTEMPT', 'apiCallAttempt', function PUBLISH_API_ATTEMPT(event) {
+	        process.nextTick(function() {publisher.eventHandler(event);});
+	      });
+	    }
 	  },
 
 	  /**
@@ -3691,7 +3946,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var request = new AWS.Request(this, operation, params);
 	    this.addAllRequestListeners(request);
-
+	    this.attachMonitoringEmitter(request);
 	    if (callback) request.send(callback);
 	    return request;
 	  },
@@ -3772,6 +4027,136 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (Object.prototype.hasOwnProperty.call(this, 'customRequestHandler') && typeof this.customRequestHandler === 'function') {
 	      this.customRequestHandler(request);
 	    }
+	  },
+
+	  /**
+	   * Event recording metrics for a whole API call.
+	   * @returns {object} a subset of api call metrics
+	   * @api private
+	   */
+	  apiCallEvent: function apiCallEvent(request) {
+	    var api = request.service.api.operations[request.operation];
+	    return {
+	      Type: 'ApiCall',
+	      Api: api ? api.name : request.operation,
+	      Version: 1,
+	      Service: request.service.api.serviceId || request.service.api.endpointPrefix,
+	    }
+	  },
+
+	  /**
+	   * Event recording metrics for an API call attempt.
+	   * @returns {object} a subset of api call attempt metrics
+	   * @api private
+	   */
+	  apiAttemptEvent: function apiAttemptEvent(request) {
+	    var api = request.service.api.operations[request.operation];
+	    var monitoringEvent = {
+	      Type: 'ApiCallAttempt',
+	      Api: api ? api.name : request.operation,
+	      Version: 1,
+	      Service: request.service.api.serviceId || request.service.api.endpointPrefix,
+	      Fqdn: request.httpRequest.endpoint.hostname,
+	      UserAgent: request.httpRequest.getUserAgent(),
+	    };
+	    var response = request.response;
+	    if (!response.httpResponse.headers) return monitoringEvent;
+	    if (request.httpRequest.headers['x-amz-security-token']) {
+	      monitoringEvent.SessionToken = request.httpRequest.headers['x-amz-security-token'];
+	    }
+	    if (response.httpResponse.headers['x-amzn-requestid']) {
+	      monitoringEvent.XAmznRequestId = response.httpResponse.headers['x-amzn-requestid'];
+	    }
+	    if (response.httpResponse.headers['x-amz-request-id']) {
+	      monitoringEvent.XAmzRequestId = response.httpResponse.headers['x-amz-request-id'];
+	    }
+	    if (response.httpResponse.headers['x-amz-id-2']) {
+	      monitoringEvent.XAmzId2 = response.httpResponse.headers['x-amz-id-2'];
+	    }
+	    if (response.httpResponse.statusCode) {
+	      monitoringEvent.HttpStatusCode = response.httpResponse.statusCode;
+	    }
+	    if (
+	      !request._unAuthenticated &&
+	      request.service.config.credentials.accessKeyId
+	    ) {
+	      monitoringEvent.AccessKey = request.service.config.credentials.accessKeyId;
+	    }
+	    return monitoringEvent
+	  },
+
+	  /**
+	   * Add metrics of failed request.
+	   * @api private
+	   */
+	  attemptFailEvent: function attemptFailEvent(request) {
+	    var monitoringEvent = this.apiAttemptEvent(request);
+	    var response = request.response;
+	    if (response.httpResponse.statusCode > 299 ) {
+	      monitoringEvent.AwsException = response.error.code;
+	      monitoringEvent.AwsExceptionMessage = response.error.message;
+	    } else {
+	      monitoringEvent.SdkException = response.error.code || response.error.name;
+	      monitoringEvent.SdkExceptionMessage = response.error.message;
+	    }
+	    return monitoringEvent;
+	  },
+
+	  /**
+	   * Attach listeners to request object to fetch metrics of each request
+	   * and emit data object through \'ApiCall\' and \'ApiCallAttempt\' events.
+	   * @api private
+	   */
+	  attachMonitoringEmitter: function attachMonitoringEmitter(request) {
+	    var attemptTimestamp; //timestamp marking the beginning of a request attempt
+	    var attemptStartRealTime; //Start time of request attempt. Used to calculating attemptLatency
+	    var attemptLatency; //latency from request sent out to http response reaching SDK
+	    var callStartRealTime; //Start time of API call. Used to calculating API call latency
+	    var attemptCount = 0; //request.retryCount is not reliable here
+	    var region; //region cache region for each attempt since it can be updated in plase (e.g. s3)
+	    var callTimestamp; //timestamp when the request is created
+	    var self = this;
+	    var addToHead = true;
+
+	    request.on('validate', function () {
+	      callStartRealTime = AWS.util.realClock.now();
+	      callTimestamp = Date.now();
+	    }, addToHead);
+	    request.on('sign', function () {
+	      attemptStartRealTime = AWS.util.realClock.now();
+	      attemptTimestamp = Date.now();
+	      region = request.httpRequest.region;
+	      attemptCount++;
+	    }, addToHead)
+	    request.on('validateResponse', function() {
+	      attemptLatency = Math.round(AWS.util.realClock.now() - attemptStartRealTime);
+	    })
+	    request.addNamedListener('API_CALL_ATTEMPT', 'success', function API_CALL_ATTEMPT() {
+	      var apiAttemptEvent = self.apiAttemptEvent(request);
+	      apiAttemptEvent.Timestamp = attemptTimestamp;
+	      apiAttemptEvent.AttemptLatency = attemptLatency >= 0 ? attemptLatency : 0;
+	      apiAttemptEvent.Region = region;
+	      self.emit('apiCallAttempt', [apiAttemptEvent]);
+	    });
+	    request.addNamedListener('API_CALL_ATTEMPT_RETRY', 'retry', function API_CALL_ATTEMPT_RETRY() {
+	      var apiAttemptEvent = self.attemptFailEvent(request);
+	      apiAttemptEvent.Timestamp = attemptTimestamp;
+	      //attemptLatency may not be available if fail before response
+	      attemptLatency = attemptLatency ||
+	        Math.round(AWS.util.realClock.now() - attemptStartRealTime);
+	      apiAttemptEvent.AttemptLatency = attemptLatency >= 0 ? attemptLatency : 0;
+	      apiAttemptEvent.Region = region;
+	      self.emit('apiCallAttempt', [apiAttemptEvent]);
+	    });
+	    request.addNamedListener('API_CALL', 'complete', function API_CALL() {
+	      var apiCallEvent = self.apiCallEvent(request);
+	      apiCallEvent.AttemptCount = attemptCount;
+	      if (apiCallEvent.AttemptCount <= 0) return;
+	      apiCallEvent.Timestamp = callTimestamp;
+	      var latency = Math.round(AWS.util.realClock.now() - callStartRealTime);
+	      apiCallEvent.Latency = latency >= 0 ? latency : 0;
+	      self.emit('apiCall', [apiCallEvent]);
+	    })
 	  },
 
 	  /**
@@ -4033,7 +4418,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      svc.prototype.api = serviceIdentifier;
 	      AWS.Service.defineMethods(svc);
 	    }
-
+	    AWS.SequentialExecutor.call(this.prototype);
+	    //util.clientSideMonitoring is only available in node
+	    if (!this.prototype.publisher && AWS.util.clientSideMonitoring) {
+	      var Publisher = AWS.util.clientSideMonitoring.Publisher;
+	      var configProvider = AWS.util.clientSideMonitoring.configProvider;
+	      this.prototype.publisher = new Publisher(configProvider());
+	    }
+	    AWS.SequentialExecutor.call(svc.prototype);
+	    AWS.Service.addDefaultMonitoringListeners(svc.prototype);
 	    return svc;
 	  },
 
@@ -4102,23 +4495,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  /**
+	   * @param attachOn attach default monitoring listeners to object
+	   *
+	   * Each monitoring event should be emitted from service client to service constructor prototype and then
+	   * to global service prototype like bubbling up. These default monitoring events listener will transfer
+	   * the monitoring events to the upper layer.
+	   * @api private
+	   */
+	  addDefaultMonitoringListeners: function addDefaultMonitoringListeners(attachOn) {
+	    attachOn.addNamedListener('MONITOR_EVENTS_BUBBLE', 'apiCallAttempt', function EVENTS_BUBBLE(event) {
+	      var baseClass = Object.getPrototypeOf(attachOn);
+	      if (baseClass._events) baseClass.emit('apiCallAttempt', [event]);
+	    });
+	    attachOn.addNamedListener('CALL_EVENTS_BUBBLE', 'apiCall', function CALL_EVENTS_BUBBLE(event) {
+	      var baseClass = Object.getPrototypeOf(attachOn);
+	      if (baseClass._events) baseClass.emit('apiCall', [event]);
+	    });
+	  },
+
+	  /**
 	   * @api private
 	   */
 	  _serviceMap: {}
 	});
+
+	AWS.util.mixin(AWS.Service, AWS.SequentialExecutor);
 
 	/**
 	 * @api private
 	 */
 	module.exports = AWS.Service;
 
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
-	var regionConfig = __webpack_require__(35);
+	var regionConfig = __webpack_require__(36);
 
 	function generateRegionPrefix(region) {
 	  if (!region) return null;
@@ -4192,18 +4607,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 	module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/iam":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":{"endpoint":"https://{service}.amazonaws.com","signatureVersion":"v3https","globalEndpoint":true},"*/waf":"globalSSL","us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"}}}
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	__webpack_require__(37);
 	__webpack_require__(38);
+	__webpack_require__(39);
 	var PromisesDependency;
 
 	/**
@@ -4477,6 +4892,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   to the signature version 'v4'. Defaults to `true`.
 	   * @option options dynamoDbCrc32 [Boolean] whether to validate the CRC32
 	   *   checksum of HTTP response bodies returned by DynamoDB. Default: `true`.
+	   * @option options clientSideMonitoring [Boolean] whether to collect and
+	   * publish this client's performance metrics of all its API requests.
 	   */
 	  constructor: function Config(options) {
 	    if (options === undefined) options = {};
@@ -4693,7 +5110,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    signatureVersion: null,
 	    signatureCache: true,
 	    retryDelayOptions: {},
-	    useAccelerateEndpoint: false
+	    useAccelerateEndpoint: false,
+	    clientSideMonitoring: false
 	  },
 
 	  /**
@@ -4744,7 +5162,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -4964,7 +5382,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -5143,7 +5561,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -5375,251 +5793,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var AWS = __webpack_require__(1);
-
-	/**
-	 * @api private
-	 * @!method on(eventName, callback)
-	 *   Registers an event listener callback for the event given by `eventName`.
-	 *   Parameters passed to the callback function depend on the individual event
-	 *   being triggered. See the event documentation for those parameters.
-	 *
-	 *   @param eventName [String] the event name to register the listener for
-	 *   @param callback [Function] the listener callback function
-	 *   @return [AWS.SequentialExecutor] the same object for chaining
-	 */
-	AWS.SequentialExecutor = AWS.util.inherit({
-
-	  constructor: function SequentialExecutor() {
-	    this._events = {};
-	  },
-
-	  /**
-	   * @api private
-	   */
-	  listeners: function listeners(eventName) {
-	    return this._events[eventName] ? this._events[eventName].slice(0) : [];
-	  },
-
-	  on: function on(eventName, listener) {
-	    if (this._events[eventName]) {
-	      this._events[eventName].push(listener);
-	    } else {
-	      this._events[eventName] = [listener];
-	    }
-	    return this;
-	  },
-
-	  /**
-	   * @api private
-	   */
-	  onAsync: function onAsync(eventName, listener) {
-	    listener._isAsync = true;
-	    return this.on(eventName, listener);
-	  },
-
-	  removeListener: function removeListener(eventName, listener) {
-	    var listeners = this._events[eventName];
-	    if (listeners) {
-	      var length = listeners.length;
-	      var position = -1;
-	      for (var i = 0; i < length; ++i) {
-	        if (listeners[i] === listener) {
-	          position = i;
-	        }
-	      }
-	      if (position > -1) {
-	        listeners.splice(position, 1);
-	      }
-	    }
-	    return this;
-	  },
-
-	  removeAllListeners: function removeAllListeners(eventName) {
-	    if (eventName) {
-	      delete this._events[eventName];
-	    } else {
-	      this._events = {};
-	    }
-	    return this;
-	  },
-
-	  /**
-	   * @api private
-	   */
-	  emit: function emit(eventName, eventArgs, doneCallback) {
-	    if (!doneCallback) doneCallback = function() { };
-	    var listeners = this.listeners(eventName);
-	    var count = listeners.length;
-	    this.callListeners(listeners, eventArgs, doneCallback);
-	    return count > 0;
-	  },
-
-	  /**
-	   * @api private
-	   */
-	  callListeners: function callListeners(listeners, args, doneCallback, prevError) {
-	    var self = this;
-	    var error = prevError || null;
-
-	    function callNextListener(err) {
-	      if (err) {
-	        error = AWS.util.error(error || new Error(), err);
-	        if (self._haltHandlersOnError) {
-	          return doneCallback.call(self, error);
-	        }
-	      }
-	      self.callListeners(listeners, args, doneCallback, error);
-	    }
-
-	    while (listeners.length > 0) {
-	      var listener = listeners.shift();
-	      if (listener._isAsync) { // asynchronous listener
-	        listener.apply(self, args.concat([callNextListener]));
-	        return; // stop here, callNextListener will continue
-	      } else { // synchronous listener
-	        try {
-	          listener.apply(self, args);
-	        } catch (err) {
-	          error = AWS.util.error(error || new Error(), err);
-	        }
-	        if (error && self._haltHandlersOnError) {
-	          doneCallback.call(self, error);
-	          return;
-	        }
-	      }
-	    }
-	    doneCallback.call(self, error);
-	  },
-
-	  /**
-	   * Adds or copies a set of listeners from another list of
-	   * listeners or SequentialExecutor object.
-	   *
-	   * @param listeners [map<String,Array<Function>>, AWS.SequentialExecutor]
-	   *   a list of events and callbacks, or an event emitter object
-	   *   containing listeners to add to this emitter object.
-	   * @return [AWS.SequentialExecutor] the emitter object, for chaining.
-	   * @example Adding listeners from a map of listeners
-	   *   emitter.addListeners({
-	   *     event1: [function() { ... }, function() { ... }],
-	   *     event2: [function() { ... }]
-	   *   });
-	   *   emitter.emit('event1'); // emitter has event1
-	   *   emitter.emit('event2'); // emitter has event2
-	   * @example Adding listeners from another emitter object
-	   *   var emitter1 = new AWS.SequentialExecutor();
-	   *   emitter1.on('event1', function() { ... });
-	   *   emitter1.on('event2', function() { ... });
-	   *   var emitter2 = new AWS.SequentialExecutor();
-	   *   emitter2.addListeners(emitter1);
-	   *   emitter2.emit('event1'); // emitter2 has event1
-	   *   emitter2.emit('event2'); // emitter2 has event2
-	   */
-	  addListeners: function addListeners(listeners) {
-	    var self = this;
-
-	    // extract listeners if parameter is an SequentialExecutor object
-	    if (listeners._events) listeners = listeners._events;
-
-	    AWS.util.each(listeners, function(event, callbacks) {
-	      if (typeof callbacks === 'function') callbacks = [callbacks];
-	      AWS.util.arrayEach(callbacks, function(callback) {
-	        self.on(event, callback);
-	      });
-	    });
-
-	    return self;
-	  },
-
-	  /**
-	   * Registers an event with {on} and saves the callback handle function
-	   * as a property on the emitter object using a given `name`.
-	   *
-	   * @param name [String] the property name to set on this object containing
-	   *   the callback function handle so that the listener can be removed in
-	   *   the future.
-	   * @param (see on)
-	   * @return (see on)
-	   * @example Adding a named listener DATA_CALLBACK
-	   *   var listener = function() { doSomething(); };
-	   *   emitter.addNamedListener('DATA_CALLBACK', 'data', listener);
-	   *
-	   *   // the following prints: true
-	   *   console.log(emitter.DATA_CALLBACK == listener);
-	   */
-	  addNamedListener: function addNamedListener(name, eventName, callback) {
-	    this[name] = callback;
-	    this.addListener(eventName, callback);
-	    return this;
-	  },
-
-	  /**
-	   * @api private
-	   */
-	  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
-	    callback._isAsync = true;
-	    return this.addNamedListener(name, eventName, callback);
-	  },
-
-	  /**
-	   * Helper method to add a set of named listeners using
-	   * {addNamedListener}. The callback contains a parameter
-	   * with a handle to the `addNamedListener` method.
-	   *
-	   * @callback callback function(add)
-	   *   The callback function is called immediately in order to provide
-	   *   the `add` function to the block. This simplifies the addition of
-	   *   a large group of named listeners.
-	   *   @param add [Function] the {addNamedListener} function to call
-	   *     when registering listeners.
-	   * @example Adding a set of named listeners
-	   *   emitter.addNamedListeners(function(add) {
-	   *     add('DATA_CALLBACK', 'data', function() { ... });
-	   *     add('OTHER', 'otherEvent', function() { ... });
-	   *     add('LAST', 'lastEvent', function() { ... });
-	   *   });
-	   *
-	   *   // these properties are now set:
-	   *   emitter.DATA_CALLBACK;
-	   *   emitter.OTHER;
-	   *   emitter.LAST;
-	   */
-	  addNamedListeners: function addNamedListeners(callback) {
-	    var self = this;
-	    callback(
-	      function() {
-	        self.addNamedListener.apply(self, arguments);
-	      },
-	      function() {
-	        self.addNamedAsyncListener.apply(self, arguments);
-	      }
-	    );
-	    return this;
-	  }
-	});
-
-	/**
-	 * {on} is the prefered method.
-	 * @api private
-	 */
-	AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
-
-	/**
-	 * @api private
-	 */
-	module.exports = AWS.SequentialExecutor;
-
-
-/***/ }),
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	var SequentialExecutor = __webpack_require__(40);
+	var SequentialExecutor = __webpack_require__(33);
 	/**
 	 * The namespace used to register global event listeners for request building
 	 * and sending.
@@ -7588,6 +7766,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @api private
 	   */
 	  toUnauthenticated: function toUnauthenticated() {
+	    this._unAuthenticated = true;
 	    this.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
 	    this.removeListener('sign', AWS.EventListeners.Core.SIGN);
 	    return this;

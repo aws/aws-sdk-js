@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "CORS",
-  "description": "add cors support for pricing API. Make Pricing client available by default in browsers SDK."
-}

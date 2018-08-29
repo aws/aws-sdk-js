@@ -12,16 +12,17 @@ declare class SageMakerRuntime extends Service {
   constructor(options?: SageMakerRuntime.Types.ClientConfiguration)
   config: Config & SageMakerRuntime.Types.ClientConfiguration;
   /**
-   * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint.  For an overview of Amazon SageMaker, see How It Works   Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. 
+   * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint.  For an overview of Amazon SageMaker, see How It Works.  Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax.  Cals to InvokeEndpoint are authenticated by using AWS Signature Version 4. For information, see Authenticating Requests (AWS Signature Version 4) in the Amazon S3 API Reference.  Endpoints are scoped to an individual account, and are not public. The URL does not contain the account ID, but Amazon SageMaker determines the account ID from the authentication token that is supplied by the caller. 
    */
   invokeEndpoint(params: SageMakerRuntime.Types.InvokeEndpointInput, callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointOutput, AWSError>;
   /**
-   * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint.  For an overview of Amazon SageMaker, see How It Works   Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. 
+   * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint.  For an overview of Amazon SageMaker, see How It Works.  Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax.  Cals to InvokeEndpoint are authenticated by using AWS Signature Version 4. For information, see Authenticating Requests (AWS Signature Version 4) in the Amazon S3 API Reference.  Endpoints are scoped to an individual account, and are not public. The URL does not contain the account ID, but Amazon SageMaker determines the account ID from the authentication token that is supplied by the caller. 
    */
   invokeEndpoint(callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointOutput, AWSError>;
 }
 declare namespace SageMakerRuntime {
   export type BodyBlob = Buffer|Uint8Array|Blob|string;
+  export type CustomAttributesHeader = string;
   export type EndpointName = string;
   export type Header = string;
   export interface InvokeEndpointInput {
@@ -30,7 +31,7 @@ declare namespace SageMakerRuntime {
      */
     EndpointName: EndpointName;
     /**
-     * Provides input data, in the format specified in the ContentType request header. Amazon SageMaker passes all of the data in the body to the model. 
+     * Provides input data, in the format specified in the ContentType request header. Amazon SageMaker passes all of the data in the body to the model.  For information about the format of the request body, see Common Data Formats—Inference.
      */
     Body: BodyBlob;
     /**
@@ -41,10 +42,14 @@ declare namespace SageMakerRuntime {
      * The desired MIME type of the inference in the response.
      */
     Accept?: Header;
+    /**
+     * 
+     */
+    CustomAttributes?: CustomAttributesHeader;
   }
   export interface InvokeEndpointOutput {
     /**
-     * Includes the inference provided by the model.
+     * Includes the inference provided by the model. For information about the format of the response body, see Common Data Formats—Inference.
      */
     Body: BodyBlob;
     /**
@@ -55,6 +60,10 @@ declare namespace SageMakerRuntime {
      * Identifies the production variant that was invoked.
      */
     InvokedProductionVariant?: Header;
+    /**
+     * 
+     */
+    CustomAttributes?: CustomAttributesHeader;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
