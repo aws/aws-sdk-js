@@ -33,5 +33,25 @@ describe('AWS.S3Control', function() {
       expect(err.hostId).to.eql('hostId');
       expect(err.requestId).to.eql('requestId');
     });
-  })
-})
+  });
+
+  it('should use the V4 signer', function() {
+    var client = new AWS.S3Control();
+    expect(client.getSignerClass()).to.eql(AWS.Signers.V4)
+  });
+
+  it('does not double encode path for S3Control', function() {
+    var client = new AWS.S3Control();
+    var req;
+    req = client.putPublicLockdown({
+      AccountId: '111',
+      PublicLockdownConfiguration: {
+        RejectPublicAcls: false
+      }
+    }).build();
+    req.httpRequest.path = '/fake:path'
+    var SignerClass = client.getSignerClass(req);
+    signer = new SignerClass(req.httpRequest, req.service.api.signingName || req.service.api.endpointPrefix);
+    return expect(signer.canonicalString().split('\n')[1]).to.equal('/fake:path');
+  });
+});
