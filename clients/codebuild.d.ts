@@ -235,9 +235,21 @@ declare namespace CodeBuild {
      */
     source?: ProjectSource;
     /**
+     *  An array of ProjectSource objects. 
+     */
+    secondarySources?: ProjectSources;
+    /**
+     *  An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one of:    For AWS CodeCommit: the commit ID to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID will be used. If not specified, the default branch's HEAD commit ID will be used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID will be used. If not specified, the default branch's HEAD commit ID will be used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object representing the build input ZIP file to use.  
+     */
+    secondarySourceVersions?: ProjectSecondarySourceVersions;
+    /**
      * Information about the output artifacts for the build.
      */
     artifacts?: BuildArtifacts;
+    /**
+     *  An array of ProjectArtifacts objects. 
+     */
+    secondaryArtifacts?: BuildArtifactsList;
     /**
      * Information about the cache for the build.
      */
@@ -300,7 +312,12 @@ declare namespace CodeBuild {
      *  Information that tells you if encryption for build artifacts is disabled. 
      */
     encryptionDisabled?: WrapperBoolean;
+    /**
+     *  An identifier for this artifact definition. 
+     */
+    artifactIdentifier?: String;
   }
+  export type BuildArtifactsList = BuildArtifacts[];
   export type BuildIds = NonEmptyString[];
   export interface BuildNotDeleted {
     /**
@@ -358,9 +375,17 @@ declare namespace CodeBuild {
      */
     source: ProjectSource;
     /**
+     *  An array of ProjectSource objects. 
+     */
+    secondarySources?: ProjectSources;
+    /**
      * Information about the build output artifacts for the build project.
      */
     artifacts: ProjectArtifacts;
+    /**
+     *  An array of ProjectArtifacts objects. 
+     */
+    secondaryArtifacts?: ProjectArtifactsList;
     /**
      * Stores recently used information so that it can be quickly accessed at a later time.
      */
@@ -629,9 +654,17 @@ declare namespace CodeBuild {
      */
     source?: ProjectSource;
     /**
+     *  An array of ProjectSource objects. 
+     */
+    secondarySources?: ProjectSources;
+    /**
      * Information about the build output artifacts for the build project.
      */
     artifacts?: ProjectArtifacts;
+    /**
+     *  An array of ProjectArtifacts objects. 
+     */
+    secondaryArtifacts?: ProjectArtifactsList;
     /**
      * Information about the cache for the build project.
      */
@@ -710,7 +743,12 @@ declare namespace CodeBuild {
      *  Set to true if you do not want your output artifacts encrypted. This option is only valid if your artifacts type is Amazon S3. If this is set with another artifacts type, an invalidInputException will be thrown. 
      */
     encryptionDisabled?: WrapperBoolean;
+    /**
+     *  An identifier for this artifact definition. 
+     */
+    artifactIdentifier?: String;
   }
+  export type ProjectArtifactsList = ProjectArtifacts[];
   export interface ProjectBadge {
     /**
      * Set this to true to generate a publicly-accessible URL for your project's build badge.
@@ -760,6 +798,7 @@ declare namespace CodeBuild {
   }
   export type ProjectName = string;
   export type ProjectNames = NonEmptyString[];
+  export type ProjectSecondarySourceVersions = ProjectSourceVersion[];
   export type ProjectSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
   export interface ProjectSource {
     /**
@@ -790,7 +829,22 @@ declare namespace CodeBuild {
      * Enable this flag to ignore SSL warnings while connecting to the project source code.
      */
     insecureSsl?: WrapperBoolean;
+    /**
+     *  An identifier for this project source. 
+     */
+    sourceIdentifier?: String;
   }
+  export interface ProjectSourceVersion {
+    /**
+     * An identifier for a source in the build project.
+     */
+    sourceIdentifier: String;
+    /**
+     * The source version for the corresponding source identifier. If specified, must be one of:   For AWS CodeCommit: the commit ID to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID will be used. If not specified, the default branch's HEAD commit ID will be used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID will be used. If not specified, the default branch's HEAD commit ID will be used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object representing the build input ZIP file to use.  
+     */
+    sourceVersion: String;
+  }
+  export type ProjectSources = ProjectSource[];
   export type Projects = Project[];
   export type SecurityGroupIds = NonEmptyString[];
   export type SortOrderType = "ASCENDING"|"DESCENDING"|string;
@@ -805,12 +859,20 @@ declare namespace CodeBuild {
     resource?: String;
   }
   export type SourceAuthType = "OAUTH"|string;
-  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|string;
+  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"NO_SOURCE"|string;
   export interface StartBuildInput {
     /**
      * The name of the AWS CodeBuild build project to start running a build.
      */
     projectName: NonEmptyString;
+    /**
+     *  An array of ProjectSource objects. 
+     */
+    secondarySourcesOverride?: ProjectSources;
+    /**
+     *  An array of ProjectSourceVersion objects that specify one or more versions of the project's secondary sources to be used for this build only. 
+     */
+    secondarySourcesVersionOverride?: ProjectSecondarySourceVersions;
     /**
      * A version of the build input to be built, for this build only. If not specified, the latest version will be used. If specified, must be one of:   For AWS CodeCommit: the commit ID to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID will be used. If not specified, the default branch's HEAD commit ID will be used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID will be used. If not specified, the default branch's HEAD commit ID will be used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object representing the build input ZIP file to use.  
      */
@@ -819,6 +881,10 @@ declare namespace CodeBuild {
      * Build output artifact settings that override, for this build only, the latest ones already defined in the build project.
      */
     artifactsOverride?: ProjectArtifacts;
+    /**
+     *  An array of ProjectArtifacts objects. 
+     */
+    secondaryArtifactsOverride?: ProjectArtifactsList;
     /**
      * A set of environment variables that overrides, for this build only, the latest ones already defined in the build project.
      */
@@ -936,9 +1002,17 @@ declare namespace CodeBuild {
      */
     source?: ProjectSource;
     /**
+     *  An array of ProjectSource objects. 
+     */
+    secondarySources?: ProjectSources;
+    /**
      * Information to be changed about the build output artifacts for the build project.
      */
     artifacts?: ProjectArtifacts;
+    /**
+     *  An array of ProjectSource objects. 
+     */
+    secondaryArtifacts?: ProjectArtifactsList;
     /**
      * Stores recently used information so that it can be quickly accessed at a later time.
      */

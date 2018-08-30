@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.305.0-->
+<!--LATEST=2.306.0-->
 <!--ENTRYINSERT-->
+
+## 2.306.0
+* feature: CodeBuild: Support multiple sources and artifacts for CodeBuild projects. 
+* feature: SageMaker: VolumeKmsKeyId now available in Batch Transform Job 
 
 ## 2.305.0
 * feature: CORS: add cors support for pricing API. Make Pricing client available by default in browsers SDK.

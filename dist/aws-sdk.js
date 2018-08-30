@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.305.0
+// AWS SDK for JavaScript v2.306.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -19836,7 +19836,7 @@ module.exports={
         ],
         "members": {
           "names": {
-            "shape": "S17"
+            "shape": "S1b"
           }
         }
       },
@@ -19846,11 +19846,11 @@ module.exports={
           "projects": {
             "type": "list",
             "member": {
-              "shape": "S1a"
+              "shape": "S1e"
             }
           },
           "projectsNotFound": {
-            "shape": "S17"
+            "shape": "S1b"
           }
         }
       }
@@ -19871,14 +19871,20 @@ module.exports={
           "source": {
             "shape": "Sk"
           },
+          "secondarySources": {
+            "shape": "Sq"
+          },
           "artifacts": {
-            "shape": "S1d"
+            "shape": "S1h"
+          },
+          "secondaryArtifacts": {
+            "shape": "S1l"
           },
           "cache": {
-            "shape": "Sr"
+            "shape": "Sv"
           },
           "environment": {
-            "shape": "St"
+            "shape": "Sx"
           },
           "serviceRole": {},
           "timeoutInMinutes": {
@@ -19886,10 +19892,10 @@ module.exports={
           },
           "encryptionKey": {},
           "tags": {
-            "shape": "S1i"
+            "shape": "S1n"
           },
           "vpcConfig": {
-            "shape": "S12"
+            "shape": "S16"
           },
           "badgeEnabled": {
             "type": "boolean"
@@ -19900,7 +19906,7 @@ module.exports={
         "type": "structure",
         "members": {
           "project": {
-            "shape": "S1a"
+            "shape": "S1e"
           }
         }
       }
@@ -19920,7 +19926,7 @@ module.exports={
         "type": "structure",
         "members": {
           "webhook": {
-            "shape": "S1m"
+            "shape": "S1r"
           }
         }
       }
@@ -20067,7 +20073,7 @@ module.exports={
         "members": {
           "nextToken": {},
           "projects": {
-            "shape": "S17"
+            "shape": "S1b"
           }
         }
       }
@@ -20080,12 +20086,21 @@ module.exports={
         ],
         "members": {
           "projectName": {},
+          "secondarySourcesOverride": {
+            "shape": "Sq"
+          },
+          "secondarySourcesVersionOverride": {
+            "shape": "Sr"
+          },
           "sourceVersion": {},
           "artifactsOverride": {
-            "shape": "S1d"
+            "shape": "S1h"
+          },
+          "secondaryArtifactsOverride": {
+            "shape": "S1l"
           },
           "environmentVariablesOverride": {
-            "shape": "Sw"
+            "shape": "S10"
           },
           "sourceTypeOverride": {},
           "sourceLocationOverride": {},
@@ -20107,7 +20122,7 @@ module.exports={
           "computeTypeOverride": {},
           "certificateOverride": {},
           "cacheOverride": {
-            "shape": "Sr"
+            "shape": "Sv"
           },
           "serviceRoleOverride": {},
           "privilegedModeOverride": {
@@ -20159,14 +20174,20 @@ module.exports={
           "source": {
             "shape": "Sk"
           },
+          "secondarySources": {
+            "shape": "Sq"
+          },
           "artifacts": {
-            "shape": "S1d"
+            "shape": "S1h"
+          },
+          "secondaryArtifacts": {
+            "shape": "S1l"
           },
           "cache": {
-            "shape": "Sr"
+            "shape": "Sv"
           },
           "environment": {
-            "shape": "St"
+            "shape": "Sx"
           },
           "serviceRole": {},
           "timeoutInMinutes": {
@@ -20174,10 +20195,10 @@ module.exports={
           },
           "encryptionKey": {},
           "tags": {
-            "shape": "S1i"
+            "shape": "S1n"
           },
           "vpcConfig": {
-            "shape": "S12"
+            "shape": "S16"
           },
           "badgeEnabled": {
             "type": "boolean"
@@ -20188,7 +20209,7 @@ module.exports={
         "type": "structure",
         "members": {
           "project": {
-            "shape": "S1a"
+            "shape": "S1e"
           }
         }
       }
@@ -20211,7 +20232,7 @@ module.exports={
         "type": "structure",
         "members": {
           "webhook": {
-            "shape": "S1m"
+            "shape": "S1r"
           }
         }
       }
@@ -20269,25 +20290,26 @@ module.exports={
         "source": {
           "shape": "Sk"
         },
+        "secondarySources": {
+          "shape": "Sq"
+        },
+        "secondarySourceVersions": {
+          "shape": "Sr"
+        },
         "artifacts": {
-          "type": "structure",
-          "members": {
-            "location": {},
-            "sha256sum": {},
-            "md5sum": {},
-            "overrideArtifactName": {
-              "type": "boolean"
-            },
-            "encryptionDisabled": {
-              "type": "boolean"
-            }
+          "shape": "St"
+        },
+        "secondaryArtifacts": {
+          "type": "list",
+          "member": {
+            "shape": "St"
           }
         },
         "cache": {
-          "shape": "Sr"
+          "shape": "Sv"
         },
         "environment": {
-          "shape": "St"
+          "shape": "Sx"
         },
         "serviceRole": {},
         "logs": {
@@ -20306,7 +20328,7 @@ module.exports={
         },
         "initiator": {},
         "vpcConfig": {
-          "shape": "S12"
+          "shape": "S16"
         },
         "networkInterface": {
           "type": "structure",
@@ -20338,7 +20360,8 @@ module.exports={
         },
         "insecureSsl": {
           "type": "boolean"
-        }
+        },
+        "sourceIdentifier": {}
       }
     },
     "Sn": {
@@ -20351,7 +20374,42 @@ module.exports={
         "resource": {}
       }
     },
+    "Sq": {
+      "type": "list",
+      "member": {
+        "shape": "Sk"
+      }
+    },
     "Sr": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "sourceIdentifier",
+          "sourceVersion"
+        ],
+        "members": {
+          "sourceIdentifier": {},
+          "sourceVersion": {}
+        }
+      }
+    },
+    "St": {
+      "type": "structure",
+      "members": {
+        "location": {},
+        "sha256sum": {},
+        "md5sum": {},
+        "overrideArtifactName": {
+          "type": "boolean"
+        },
+        "encryptionDisabled": {
+          "type": "boolean"
+        },
+        "artifactIdentifier": {}
+      }
+    },
+    "Sv": {
       "type": "structure",
       "required": [
         "type"
@@ -20361,7 +20419,7 @@ module.exports={
         "location": {}
       }
     },
-    "St": {
+    "Sx": {
       "type": "structure",
       "required": [
         "type",
@@ -20373,7 +20431,7 @@ module.exports={
         "image": {},
         "computeType": {},
         "environmentVariables": {
-          "shape": "Sw"
+          "shape": "S10"
         },
         "privilegedMode": {
           "type": "boolean"
@@ -20381,7 +20439,7 @@ module.exports={
         "certificate": {}
       }
     },
-    "Sw": {
+    "S10": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -20396,7 +20454,7 @@ module.exports={
         }
       }
     },
-    "S12": {
+    "S16": {
       "type": "structure",
       "members": {
         "vpcId": {},
@@ -20410,11 +20468,11 @@ module.exports={
         }
       }
     },
-    "S17": {
+    "S1b": {
       "type": "list",
       "member": {}
     },
-    "S1a": {
+    "S1e": {
       "type": "structure",
       "members": {
         "name": {},
@@ -20423,14 +20481,20 @@ module.exports={
         "source": {
           "shape": "Sk"
         },
+        "secondarySources": {
+          "shape": "Sq"
+        },
         "artifacts": {
-          "shape": "S1d"
+          "shape": "S1h"
+        },
+        "secondaryArtifacts": {
+          "shape": "S1l"
         },
         "cache": {
-          "shape": "Sr"
+          "shape": "Sv"
         },
         "environment": {
-          "shape": "St"
+          "shape": "Sx"
         },
         "serviceRole": {},
         "timeoutInMinutes": {
@@ -20438,7 +20502,7 @@ module.exports={
         },
         "encryptionKey": {},
         "tags": {
-          "shape": "S1i"
+          "shape": "S1n"
         },
         "created": {
           "type": "timestamp"
@@ -20447,10 +20511,10 @@ module.exports={
           "type": "timestamp"
         },
         "webhook": {
-          "shape": "S1m"
+          "shape": "S1r"
         },
         "vpcConfig": {
-          "shape": "S12"
+          "shape": "S16"
         },
         "badge": {
           "type": "structure",
@@ -20463,7 +20527,7 @@ module.exports={
         }
       }
     },
-    "S1d": {
+    "S1h": {
       "type": "structure",
       "required": [
         "type"
@@ -20480,10 +20544,17 @@ module.exports={
         },
         "encryptionDisabled": {
           "type": "boolean"
-        }
+        },
+        "artifactIdentifier": {}
       }
     },
-    "S1i": {
+    "S1l": {
+      "type": "list",
+      "member": {
+        "shape": "S1h"
+      }
+    },
+    "S1n": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -20493,7 +20564,7 @@ module.exports={
         }
       }
     },
-    "S1m": {
+    "S1r": {
       "type": "structure",
       "members": {
         "url": {},
@@ -136437,7 +136508,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.305.0',
+  VERSION: '2.306.0',
 
   /**
    * @api private
@@ -155762,7 +155833,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.305.0
+// AWS SDK for JavaScript v2.306.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

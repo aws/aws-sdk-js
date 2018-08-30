@@ -157,7 +157,7 @@
       "output": {
         "shape": "CreatePresignedNotebookInstanceUrlOutput"
       },
-      "documentation": "<p>Returns a URL that you can use to connect to the Jupyter server from a notebook instance. In the Amazon SageMaker console, when you choose <code>Open</code> next to a notebook instance, Amazon SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page. </p>"
+      "documentation": "<p>Returns a URL that you can use to connect to the Jupyter server from a notebook instance. In the Amazon SageMaker console, when you choose <code>Open</code> next to a notebook instance, Amazon SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page.</p> <p>You can restrict access to this API and to the URL that it returns to a list of IP addresses that you specify. To restrict access, attach an IAM policy that denies access to this API unless the call comes from an IP address in the specified list to every AWS Identity and Access Management user, group, or role used to access the notebook instance. Use the <code>NotIpAddress</code> condition operator and the <code>aws:SourceIP</code> condition context key to specify the list of IP addresses that you want to have access to the notebook instance. For more information, see <a>nbi-ip-filter</a>.</p>"
     },
     "CreateTrainingJob": {
       "name": "CreateTrainingJob",
@@ -814,7 +814,7 @@
         },
         "RecordWrapperType": {
           "shape": "RecordWrapper",
-          "documentation": "<p/> <p>Specify RecordIO as the value when input data is in raw format but the training algorithm requires the RecordIO format, in which case, Amazon SageMaker wraps each individual S3 object in a RecordIO record. If the input data is already in RecordIO format, you don't need to set this attribute. For more information, see <a href=\"https://mxnet.incubator.apache.org/how_to/recordio.html?highlight=im2rec\">Create a Dataset Using RecordIO</a>. </p> <p>In FILE mode, leave this field unset or set it to None.</p> <p/>"
+          "documentation": "<p/> <p>Specify RecordIO as the value when input data is in raw format but the training algorithm requires the RecordIO format, in which case, Amazon SageMaker wraps each individual S3 object in a RecordIO record. If the input data is already in RecordIO format, you don't need to set this attribute. For more information, see <a href=\"https://mxnet.incubator.apache.org/architecture/note_data_loading.html#data-format\">Create a Dataset Using RecordIO</a>. </p> <p>In FILE mode, leave this field unset or set it to None.</p> <p/>"
         }
       },
       "documentation": "<p>A channel is a named input source that training algorithms can consume. </p>"
@@ -2059,6 +2059,7 @@
         "OutOfService",
         "Creating",
         "Updating",
+        "SystemUpdating",
         "RollingBack",
         "InService",
         "Deleting",
@@ -4245,6 +4246,10 @@
         "InstanceCount": {
           "shape": "TransformInstanceCount",
           "documentation": "<p>The number of ML compute instances to use in the transform job. For distributed transform, provide a value greater than 1. The default value is <code>1</code>.</p>"
+        },
+        "VolumeKmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the batch transform job.</p>"
         }
       },
       "documentation": "<p>Describes the resources, including ML instance types and ML instance count, to use for transform job.</p>"
