@@ -5,6 +5,7 @@ var apiLoader = AWS.apiLoader;
 
 apiLoader.services['s3control'] = {};
 AWS.S3Control = Service.defineService('s3control', ['2018-08-20']);
+require('../lib/services/s3control');
 Object.defineProperty(apiLoader.services['s3control'], '2018-08-20', {
   get: function get() {
     var model = require('../apis/s3control-2018-08-20.min.json');
