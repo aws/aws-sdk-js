@@ -144,4 +144,3 @@ export import EKS = require('./eks');
 export import Macie = require('./macie');
 export import DLM = require('./dlm');
 export import Signer = require('./signer');
-export import S3Control = require('./s3control');

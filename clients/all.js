@@ -145,6 +145,5 @@ module.exports = {
   EKS: require('./eks'),
   Macie: require('./macie'),
   DLM: require('./dlm'),
-  Signer: require('./signer'),
-  S3Control: require('./s3control')
+  Signer: require('./signer')
 };
