@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.306.0
+// AWS SDK for JavaScript v2.307.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -129600,6 +129600,21 @@ module.exports={
         }
       }
     },
+    "DeleteLoggingConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "DeletePermissionPolicy": {
       "input": {
         "type": "structure",
@@ -129872,6 +129887,25 @@ module.exports={
         }
       }
     },
+    "GetLoggingConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LoggingConfiguration": {
+            "shape": "S3h"
+          }
+        }
+      }
+    },
     "GetPermissionPolicy": {
       "input": {
         "type": "structure",
@@ -130019,7 +130053,7 @@ module.exports={
           "WebAclId": {},
           "RuleId": {},
           "TimeWindow": {
-            "shape": "S3w"
+            "shape": "S43"
           },
           "MaxItems": {
             "type": "long"
@@ -130073,7 +130107,7 @@ module.exports={
             "type": "long"
           },
           "TimeWindow": {
-            "shape": "S3w"
+            "shape": "S43"
           }
         }
       }
@@ -130268,6 +130302,29 @@ module.exports={
         }
       }
     },
+    "ListLoggingConfigurations": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextMarker": {},
+          "Limit": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LoggingConfigurations": {
+            "type": "list",
+            "member": {
+              "shape": "S3h"
+            }
+          },
+          "NextMarker": {}
+        }
+      }
+    },
     "ListRateBasedRules": {
       "input": {
         "type": "structure",
@@ -130283,7 +130340,7 @@ module.exports={
         "members": {
           "NextMarker": {},
           "Rules": {
-            "shape": "S54"
+            "shape": "S5e"
           }
         }
       }
@@ -130396,7 +130453,7 @@ module.exports={
         "members": {
           "NextMarker": {},
           "Rules": {
-            "shape": "S54"
+            "shape": "S5e"
           }
         }
       }
@@ -130558,6 +130615,27 @@ module.exports={
         }
       }
     },
+    "PutLoggingConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "LoggingConfiguration"
+        ],
+        "members": {
+          "LoggingConfiguration": {
+            "shape": "S3h"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LoggingConfiguration": {
+            "shape": "S3h"
+          }
+        }
+      }
+    },
     "PutPermissionPolicy": {
       "input": {
         "type": "structure",
@@ -130696,7 +130774,7 @@ module.exports={
           "RuleId": {},
           "ChangeToken": {},
           "Updates": {
-            "shape": "S6k"
+            "shape": "S6w"
           },
           "RateLimit": {
             "type": "long"
@@ -130792,7 +130870,7 @@ module.exports={
           "RuleId": {},
           "ChangeToken": {},
           "Updates": {
-            "shape": "S6k"
+            "shape": "S6w"
           }
         }
       },
@@ -131356,7 +131434,27 @@ module.exports={
         "TextTransformation": {}
       }
     },
-    "S3w": {
+    "S3h": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "LogDestinationConfigs"
+      ],
+      "members": {
+        "ResourceArn": {},
+        "LogDestinationConfigs": {
+          "type": "list",
+          "member": {}
+        },
+        "RedactedFields": {
+          "type": "list",
+          "member": {
+            "shape": "S9"
+          }
+        }
+      }
+    },
+    "S43": {
       "type": "structure",
       "required": [
         "StartTime",
@@ -131371,7 +131469,7 @@ module.exports={
         }
       }
     },
-    "S54": {
+    "S5e": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -131385,7 +131483,7 @@ module.exports={
         }
       }
     },
-    "S6k": {
+    "S6w": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -136508,7 +136606,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.306.0',
+  VERSION: '2.307.0',
 
   /**
    * @api private
@@ -155833,7 +155931,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.306.0
+// AWS SDK for JavaScript v2.307.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

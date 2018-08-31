@@ -36,11 +36,11 @@ declare class EKS extends Service {
    */
   describeCluster(callback?: (err: AWSError, data: EKS.Types.DescribeClusterResponse) => void): Request<EKS.Types.DescribeClusterResponse, AWSError>;
   /**
-   * Lists the Amazon EKS clusters in your AWS account in the specified region.
+   * Lists the Amazon EKS clusters in your AWS account in the specified Region.
    */
   listClusters(params: EKS.Types.ListClustersRequest, callback?: (err: AWSError, data: EKS.Types.ListClustersResponse) => void): Request<EKS.Types.ListClustersResponse, AWSError>;
   /**
-   * Lists the Amazon EKS clusters in your AWS account in the specified region.
+   * Lists the Amazon EKS clusters in your AWS account in the specified Region.
    */
   listClusters(callback?: (err: AWSError, data: EKS.Types.ListClustersResponse) => void): Request<EKS.Types.ListClustersResponse, AWSError>;
 }
@@ -92,6 +92,10 @@ declare namespace EKS {
      * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
+    /**
+     * The platform version of your Amazon EKS cluster. For more information, see Platform Versions in the  Amazon EKS User Guide .
+     */
+    platformVersion?: String;
   }
   export type ClusterName = string;
   export type ClusterStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
@@ -105,11 +109,11 @@ declare namespace EKS {
      */
     version?: String;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see Amazon EKS Service IAM Role in the  Amazon EKS User Guide  
+     * The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see Amazon EKS Service IAM Role in the  Amazon EKS User Guide .
      */
     roleArn: String;
     /**
-     * The VPC subnets and security groups used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide.
+     * The VPC subnets and security groups used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. You must specify at least two subnets. You may specify up to 5 security groups, but we recommend that you use a dedicated security group for your cluster control plane.
      */
     resourcesVpcConfig: VpcConfigRequest;
     /**
@@ -160,7 +164,7 @@ declare namespace EKS {
   export type ListClustersRequestMaxResults = number;
   export interface ListClustersResponse {
     /**
-     * A list of all of the clusters for your account in the specified region.
+     * A list of all of the clusters for your account in the specified Region.
      */
     clusters?: StringList;
     /**
