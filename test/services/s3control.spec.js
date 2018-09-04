@@ -21,6 +21,24 @@ describe('AWS.S3Control', function() {
     expect(request.httpRequest.endpoint.hostname).to.eql('s3-control.us-east-1.amazonaws.com'); 
   });
 
+  it('append accountId to hostname when supplied and using dualstack', function() {
+    var client = new AWS.S3Control({region: 'us-east-1', useDualstack: true});
+    var request = client.getPublicLockdown({AccountId: '222'});
+    helpers.mockResponse({data: {}});
+    request.send();
+    expect(request.httpRequest.headers.Host).to.eql('222.s3-control.dualstack.us-east-1.amazonaws.com');
+    expect(request.httpRequest.endpoint.hostname).to.eql('222.s3-control.dualstack.us-east-1.amazonaws.com'); 
+  });
+
+  it('append accountId to hostname when supplied and using customized endpoint', function() {
+    var client = new AWS.S3Control({endpoint: 's3-control-fips.us-east-1.amazonaws.com'});
+    var request = client.getPublicLockdown({AccountId: '222'});
+    helpers.mockResponse({data: {}});
+    request.send();
+    expect(request.httpRequest.headers.Host).to.eql('222.s3-control-fips.us-east-1.amazonaws.com');
+    expect(request.httpRequest.endpoint.hostname).to.eql('222.s3-control-fips.us-east-1.amazonaws.com'); 
+  })
+
   it('should add hostId and requestId to exception response', function() {
     var client = new AWS.S3Control({region: 'us-east-1'});
     var request = client.deletePublicLockdown({AccountId: '111'});

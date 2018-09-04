@@ -355,6 +355,10 @@
     "dualstackAvailable": true,
     "cors": true
   },
+  "s3control": {
+    "name": "S3Control",
+    "dualstackAvailable": true
+  },
   "servicecatalog": {
     "name": "ServiceCatalog",
     "cors": true
