@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.307.0
+// AWS SDK for JavaScript v2.308.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -108143,13 +108143,6 @@ module.exports={
                 }
               }
             }
-          },
-          "BillableDurationSeconds": {
-            "type": "integer"
-          },
-          "ErrorCode": {},
-          "Warnings": {
-            "shape": "S34"
           }
         }
       }
@@ -108191,14 +108184,7 @@ module.exports={
               }
             }
           },
-          "NextToken": {},
-          "BillableDurationSeconds": {
-            "type": "integer"
-          },
-          "ErrorCode": {},
-          "Warnings": {
-            "shape": "S34"
-          }
+          "NextToken": {}
         }
       }
     },
@@ -108238,13 +108224,6 @@ module.exports={
                 }
               }
             }
-          },
-          "BillableDurationSeconds": {
-            "type": "integer"
-          },
-          "ErrorCode": {},
-          "Warnings": {
-            "shape": "S34"
           }
         }
       }
@@ -108282,20 +108261,13 @@ module.exports={
                   "type": "long"
                 },
                 "Person": {
-                  "shape": "S3m"
+                  "shape": "S3h"
                 },
                 "FaceMatches": {
-                  "shape": "S3o"
+                  "shape": "S3j"
                 }
               }
             }
-          },
-          "BillableDurationSeconds": {
-            "type": "integer"
-          },
-          "ErrorCode": {},
-          "Warnings": {
-            "shape": "S34"
           }
         }
       }
@@ -108337,13 +108309,6 @@ module.exports={
                 }
               }
             }
-          },
-          "BillableDurationSeconds": {
-            "type": "integer"
-          },
-          "ErrorCode": {},
-          "Warnings": {
-            "shape": "S34"
           }
         }
       }
@@ -108381,17 +108346,10 @@ module.exports={
                   "type": "long"
                 },
                 "Person": {
-                  "shape": "S3m"
+                  "shape": "S3h"
                 }
               }
             }
-          },
-          "BillableDurationSeconds": {
-            "type": "integer"
-          },
-          "ErrorCode": {},
-          "Warnings": {
-            "shape": "S34"
           }
         }
       }
@@ -108423,7 +108381,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "Face": {
-                  "shape": "S3q"
+                  "shape": "S3l"
                 },
                 "FaceDetail": {
                   "shape": "S1q"
@@ -108481,7 +108439,7 @@ module.exports={
           "Faces": {
             "type": "list",
             "member": {
-              "shape": "S3q"
+              "shape": "S3l"
             }
           },
           "NextToken": {},
@@ -108583,7 +108541,7 @@ module.exports={
         "members": {
           "SearchedFaceId": {},
           "FaceMatches": {
-            "shape": "S3o"
+            "shape": "S3j"
           },
           "FaceModelVersion": {}
         }
@@ -108619,7 +108577,7 @@ module.exports={
             "type": "float"
           },
           "FaceMatches": {
-            "shape": "S3o"
+            "shape": "S3j"
           },
           "FaceModelVersion": {}
         }
@@ -108633,14 +108591,11 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4u"
+            "shape": "S4p"
           },
           "ClientRequestToken": {},
           "NotificationChannel": {
-            "shape": "S4w"
-          },
-          "EnablePersonTracking": {
-            "type": "boolean"
+            "shape": "S4r"
           },
           "JobTag": {}
         }
@@ -108661,14 +108616,14 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4u"
+            "shape": "S4p"
           },
           "MinConfidence": {
             "type": "float"
           },
           "ClientRequestToken": {},
           "NotificationChannel": {
-            "shape": "S4w"
+            "shape": "S4r"
           },
           "JobTag": {}
         }
@@ -108689,11 +108644,11 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4u"
+            "shape": "S4p"
           },
           "ClientRequestToken": {},
           "NotificationChannel": {
-            "shape": "S4w"
+            "shape": "S4r"
           },
           "FaceAttributes": {},
           "JobTag": {}
@@ -108716,18 +108671,15 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4u"
+            "shape": "S4p"
           },
           "ClientRequestToken": {},
           "FaceMatchThreshold": {
             "type": "float"
           },
           "CollectionId": {},
-          "EnablePersonTracking": {
-            "type": "boolean"
-          },
           "NotificationChannel": {
-            "shape": "S4w"
+            "shape": "S4r"
           },
           "JobTag": {}
         }
@@ -108748,14 +108700,14 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4u"
+            "shape": "S4p"
           },
           "ClientRequestToken": {},
           "MinConfidence": {
             "type": "float"
           },
           "NotificationChannel": {
-            "shape": "S4w"
+            "shape": "S4r"
           },
           "JobTag": {}
         }
@@ -108776,11 +108728,11 @@ module.exports={
         ],
         "members": {
           "Video": {
-            "shape": "S4u"
+            "shape": "S4p"
           },
           "ClientRequestToken": {},
           "NotificationChannel": {
-            "shape": "S4w"
+            "shape": "S4r"
           },
           "JobTag": {}
         }
@@ -109133,37 +109085,10 @@ module.exports={
         },
         "FrameWidth": {
           "type": "long"
-        },
-        "Rotation": {
-          "type": "integer"
         }
       }
     },
-    "S34": {
-      "type": "list",
-      "member": {
-        "type": "structure",
-        "members": {
-          "ErrorCode": {},
-          "Message": {},
-          "Sections": {
-            "type": "list",
-            "member": {
-              "type": "structure",
-              "members": {
-                "StartTimestamp": {
-                  "type": "long"
-                },
-                "EndTimestamp": {
-                  "type": "long"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "S3m": {
+    "S3h": {
       "type": "structure",
       "members": {
         "Index": {
@@ -109177,7 +109102,7 @@ module.exports={
         }
       }
     },
-    "S3o": {
+    "S3j": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -109186,12 +109111,12 @@ module.exports={
             "type": "float"
           },
           "Face": {
-            "shape": "S3q"
+            "shape": "S3l"
           }
         }
       }
     },
-    "S3q": {
+    "S3l": {
       "type": "structure",
       "members": {
         "FaceId": {},
@@ -109202,13 +109127,10 @@ module.exports={
         "ExternalImageId": {},
         "Confidence": {
           "type": "float"
-        },
-        "AssociationScore": {
-          "type": "float"
         }
       }
     },
-    "S4u": {
+    "S4p": {
       "type": "structure",
       "members": {
         "S3Object": {
@@ -109216,7 +109138,7 @@ module.exports={
         }
       }
     },
-    "S4w": {
+    "S4r": {
       "type": "structure",
       "required": [
         "SNSTopicArn",
@@ -136606,7 +136528,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.307.0',
+  VERSION: '2.308.0',
 
   /**
    * @api private
@@ -155931,7 +155853,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.307.0
+// AWS SDK for JavaScript v2.308.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

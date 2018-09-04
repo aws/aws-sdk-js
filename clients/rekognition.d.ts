@@ -60,11 +60,11 @@ declare class Rekognition extends Service {
    */
   deleteStreamProcessor(callback?: (err: AWSError, data: Rekognition.Types.DeleteStreamProcessorResponse) => void): Request<Rekognition.Types.DeleteStreamProcessorResponse, AWSError>;
   /**
-   * 
+   * Describes the specified collection. You can use DescribeCollection to get information, such as the number of faces indexed into a collection and the version of the model used by the collection for face detection. For more information, see Describing a Collection in the Amazon Rekognition Developer Guide.
    */
   describeCollection(params: Rekognition.Types.DescribeCollectionRequest, callback?: (err: AWSError, data: Rekognition.Types.DescribeCollectionResponse) => void): Request<Rekognition.Types.DescribeCollectionResponse, AWSError>;
   /**
-   * 
+   * Describes the specified collection. You can use DescribeCollection to get information, such as the number of faces indexed into a collection and the version of the model used by the collection for face detection. For more information, see Describing a Collection in the Amazon Rekognition Developer Guide.
    */
   describeCollection(callback?: (err: AWSError, data: Rekognition.Types.DescribeCollectionResponse) => void): Request<Rekognition.Types.DescribeCollectionResponse, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class Rekognition extends Service {
    */
   detectModerationLabels(callback?: (err: AWSError, data: Rekognition.Types.DetectModerationLabelsResponse) => void): Request<Rekognition.Types.DetectModerationLabelsResponse, AWSError>;
   /**
-   * Detects text in the input image and converts it into machine-readable text. Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file.  The DetectText operation returns text in an array of elements, TextDetections. Each TextDetection element provides information about a single word or line of text that was detected in the image.  A word is one or more ISO basic latin script characters that are not separated by spaces. DetectText can detect up to 50 words in an image. A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the DetectText operation returns multiple lines. To determine whether a TextDetection element is a line of text or a word, use the TextDetection object Type field.  To be detected, text must be within +/- 30 degrees orientation of the horizontal axis. For more information, see DetectText in the Amazon Rekognition Developer Guide.
+   * Detects text in the input image and converts it into machine-readable text. Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file.  The DetectText operation returns text in an array of elements, TextDetections. Each TextDetection element provides information about a single word or line of text that was detected in the image.  A word is one or more ISO basic latin script characters that are not separated by spaces. DetectText can detect up to 50 words in an image. A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the DetectText operation returns multiple lines. To determine whether a TextDetection element is a line of text or a word, use the TextDetection object Type field.  To be detected, text must be within +/- 90 degrees orientation of the horizontal axis. For more information, see DetectText in the Amazon Rekognition Developer Guide.
    */
   detectText(params: Rekognition.Types.DetectTextRequest, callback?: (err: AWSError, data: Rekognition.Types.DetectTextResponse) => void): Request<Rekognition.Types.DetectTextResponse, AWSError>;
   /**
-   * Detects text in the input image and converts it into machine-readable text. Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file.  The DetectText operation returns text in an array of elements, TextDetections. Each TextDetection element provides information about a single word or line of text that was detected in the image.  A word is one or more ISO basic latin script characters that are not separated by spaces. DetectText can detect up to 50 words in an image. A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the DetectText operation returns multiple lines. To determine whether a TextDetection element is a line of text or a word, use the TextDetection object Type field.  To be detected, text must be within +/- 30 degrees orientation of the horizontal axis. For more information, see DetectText in the Amazon Rekognition Developer Guide.
+   * Detects text in the input image and converts it into machine-readable text. Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file.  The DetectText operation returns text in an array of elements, TextDetections. Each TextDetection element provides information about a single word or line of text that was detected in the image.  A word is one or more ISO basic latin script characters that are not separated by spaces. DetectText can detect up to 50 words in an image. A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the DetectText operation returns multiple lines. To determine whether a TextDetection element is a line of text or a word, use the TextDetection object Type field.  To be detected, text must be within +/- 90 degrees orientation of the horizontal axis. For more information, see DetectText in the Amazon Rekognition Developer Guide.
    */
   detectText(callback?: (err: AWSError, data: Rekognition.Types.DetectTextResponse) => void): Request<Rekognition.Types.DetectTextResponse, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class Rekognition extends Service {
    */
   getPersonTracking(callback?: (err: AWSError, data: Rekognition.Types.GetPersonTrackingResponse) => void): Request<Rekognition.Types.GetPersonTrackingResponse, AWSError>;
   /**
-   * Detects faces in the input image and adds them to the specified collection.  Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations. If you are using version 1.0 of the face detection model, IndexFaces indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. To determine which version of the model you are using, check the the value of FaceModelVersion in the response from IndexFaces.  For more information, see Model Versioning in the Amazon Rekognition Developer Guide. If you provide the optional ExternalImageID for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image.  In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image. If you request all facial attributes (using the detectionAttributes parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mouth) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata. For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide. The input image is passed either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.  This operation requires permissions to perform the rekognition:IndexFaces action.
+   * Detects faces in the input image and adds them to the specified collection.  Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations. To get the number of faces in a collection, call .  If you are using version 1.0 of the face detection model, IndexFaces indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. To determine which version of the model you are using, call and supply the collection ID. You also get the model version from the value of FaceModelVersion in the response from IndexFaces.  For more information, see Model Versioning in the Amazon Rekognition Developer Guide. If you provide the optional ExternalImageID for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image.  In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image. If you request all facial attributes (using the detectionAttributes parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mouth) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata. For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide. The input image is passed either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.  This operation requires permissions to perform the rekognition:IndexFaces action.
    */
   indexFaces(params: Rekognition.Types.IndexFacesRequest, callback?: (err: AWSError, data: Rekognition.Types.IndexFacesResponse) => void): Request<Rekognition.Types.IndexFacesResponse, AWSError>;
   /**
-   * Detects faces in the input image and adds them to the specified collection.  Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations. If you are using version 1.0 of the face detection model, IndexFaces indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. To determine which version of the model you are using, check the the value of FaceModelVersion in the response from IndexFaces.  For more information, see Model Versioning in the Amazon Rekognition Developer Guide. If you provide the optional ExternalImageID for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image.  In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image. If you request all facial attributes (using the detectionAttributes parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mouth) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata. For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide. The input image is passed either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.  This operation requires permissions to perform the rekognition:IndexFaces action.
+   * Detects faces in the input image and adds them to the specified collection.  Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations. To get the number of faces in a collection, call .  If you are using version 1.0 of the face detection model, IndexFaces indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. To determine which version of the model you are using, call and supply the collection ID. You also get the model version from the value of FaceModelVersion in the response from IndexFaces.  For more information, see Model Versioning in the Amazon Rekognition Developer Guide. If you provide the optional ExternalImageID for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image.  In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image. If you request all facial attributes (using the detectionAttributes parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mouth) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata. For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide. The input image is passed either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.  This operation requires permissions to perform the rekognition:IndexFaces action.
    */
   indexFaces(callback?: (err: AWSError, data: Rekognition.Types.IndexFacesResponse) => void): Request<Rekognition.Types.IndexFacesResponse, AWSError>;
   /**
@@ -570,12 +570,27 @@ declare namespace Rekognition {
   export interface DeleteStreamProcessorResponse {
   }
   export interface DescribeCollectionRequest {
+    /**
+     * The ID of the collection to describe.
+     */
     CollectionId: CollectionId;
   }
   export interface DescribeCollectionResponse {
+    /**
+     * The number of faces that are indexed into the collection. To index faces into a collection, use .
+     */
     FaceCount?: ULong;
+    /**
+     * The version of the face model that's used by the collection for face detection. For more information, see Model Versioning in the Amazon Rekognition Developer Guide.
+     */
     FaceModelVersion?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the collection.
+     */
     CollectionARN?: String;
+    /**
+     * The number of milliseconds since the Unix epoch time until the creation of the collection. The Unix epoch time is 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.
+     */
     CreationTimestamp?: DateTime;
   }
   export interface DescribeStreamProcessorRequest {
@@ -710,7 +725,6 @@ declare namespace Rekognition {
   }
   export type EmotionName = "HAPPY"|"SAD"|"ANGRY"|"CONFUSED"|"DISGUSTED"|"SURPRISED"|"CALM"|"UNKNOWN"|string;
   export type Emotions = Emotion[];
-  export type ErrorCode = string;
   export type ExternalImageId = string;
   export interface EyeOpen {
     /**
@@ -753,7 +767,6 @@ declare namespace Rekognition {
      * Confidence level that the bounding box contains a face (and not a different object such as a tree).
      */
     Confidence?: Percent;
-    AssociationScore?: Percent;
   }
   export type FaceAttributes = "DEFAULT"|"ALL"|string;
   export interface FaceDetail {
@@ -944,9 +957,6 @@ declare namespace Rekognition {
      * Array of celebrities recognized in the video.
      */
     Celebrities?: CelebrityRecognitions;
-    BillableDurationSeconds?: UInteger;
-    ErrorCode?: ErrorCode;
-    Warnings?: Warnings;
   }
   export interface GetContentModerationRequest {
     /**
@@ -987,9 +997,6 @@ declare namespace Rekognition {
      * If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of moderation labels. 
      */
     NextToken?: PaginationToken;
-    BillableDurationSeconds?: UInteger;
-    ErrorCode?: ErrorCode;
-    Warnings?: Warnings;
   }
   export interface GetFaceDetectionRequest {
     /**
@@ -1026,9 +1033,6 @@ declare namespace Rekognition {
      * An array of faces detected in the video. Each element contains a detected face's details and the time, in milliseconds from the start of the video, the face was detected. 
      */
     Faces?: FaceDetections;
-    BillableDurationSeconds?: UInteger;
-    ErrorCode?: ErrorCode;
-    Warnings?: Warnings;
   }
   export interface GetFaceSearchRequest {
     /**
@@ -1069,9 +1073,6 @@ declare namespace Rekognition {
      * An array of persons, , in the video whose face(s) match the face(s) in an Amazon Rekognition collection. It also includes time information for when persons are matched in the video. You specify the input collection in an initial call to StartFaceSearch. Each Persons element includes a time the person was matched, face match details (FaceMatches) for matching faces in the collection, and person information (Person) for the matched person. 
      */
     Persons?: PersonMatches;
-    BillableDurationSeconds?: UInteger;
-    ErrorCode?: ErrorCode;
-    Warnings?: Warnings;
   }
   export interface GetLabelDetectionRequest {
     /**
@@ -1112,9 +1113,6 @@ declare namespace Rekognition {
      * An array of labels detected in the video. Each element contains the detected label and the time, in milliseconds from the start of the video, that the label was detected. 
      */
     Labels?: LabelDetections;
-    BillableDurationSeconds?: UInteger;
-    ErrorCode?: ErrorCode;
-    Warnings?: Warnings;
   }
   export interface GetPersonTrackingRequest {
     /**
@@ -1155,9 +1153,6 @@ declare namespace Rekognition {
      * An array of the persons detected in the video and the times they are tracked throughout the video. An array element will exist for each time the person is tracked. 
      */
     Persons?: PersonDetections;
-    BillableDurationSeconds?: UInteger;
-    ErrorCode?: ErrorCode;
-    Warnings?: Warnings;
   }
   export interface Image {
     /**
@@ -1387,7 +1382,6 @@ declare namespace Rekognition {
      */
     RoleArn: RoleArn;
   }
-  export type NullableBoolean = boolean;
   export type OrientationCorrection = "ROTATE_0"|"ROTATE_90"|"ROTATE_180"|"ROTATE_270"|string;
   export type PageSize = number;
   export type PaginationToken = string;
@@ -1567,11 +1561,6 @@ declare namespace Rekognition {
      */
     FaceModelVersion?: String;
   }
-  export interface Section {
-    StartTimestamp?: Timestamp;
-    EndTimestamp?: Timestamp;
-  }
-  export type Sections = Section[];
   export interface Smile {
     /**
      * Boolean value that indicates whether the face is smiling or not.
@@ -1595,7 +1584,6 @@ declare namespace Rekognition {
      * The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the celebrity recognition analysis to.
      */
     NotificationChannel?: NotificationChannel;
-    EnablePersonTracking?: NullableBoolean;
     /**
      * Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic. 
      */
@@ -1680,7 +1668,6 @@ declare namespace Rekognition {
      * ID of the collection that contains the faces you want to search for.
      */
     CollectionId: CollectionId;
-    EnablePersonTracking?: NullableBoolean;
     /**
      * The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. 
      */
@@ -1873,14 +1860,7 @@ declare namespace Rekognition {
      * Horizontal pixel dimension of the video.
      */
     FrameWidth?: ULong;
-    Rotation?: UInteger;
   }
-  export interface Warning {
-    ErrorCode?: ErrorCode;
-    Message?: StatusMessage;
-    Sections?: Sections;
-  }
-  export type Warnings = Warning[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
