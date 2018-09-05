@@ -149,19 +149,19 @@ declare class AppStream extends Service {
    */
   describeImageBuilders(callback?: (err: AWSError, data: AppStream.Types.DescribeImageBuildersResult) => void): Request<AppStream.Types.DescribeImageBuildersResult, AWSError>;
   /**
-   * Retrieves a list that describes the permissions for a private image that you own. 
+   * Retrieves a list that describes the permissions for shared AWS account IDs on a private image that you own. 
    */
   describeImagePermissions(params: AppStream.Types.DescribeImagePermissionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImagePermissionsResult) => void): Request<AppStream.Types.DescribeImagePermissionsResult, AWSError>;
   /**
-   * Retrieves a list that describes the permissions for a private image that you own. 
+   * Retrieves a list that describes the permissions for shared AWS account IDs on a private image that you own. 
    */
   describeImagePermissions(callback?: (err: AWSError, data: AppStream.Types.DescribeImagePermissionsResult) => void): Request<AppStream.Types.DescribeImagePermissionsResult, AWSError>;
   /**
-   * Retrieves a list that describes one or more specified images, if the image names are provided. Otherwise, all images in the account are described.
+   * Retrieves a list that describes one or more specified images, if the image names or image ARNs are provided. Otherwise, all images in the account are described.
    */
   describeImages(params: AppStream.Types.DescribeImagesRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
-   * Retrieves a list that describes one or more specified images, if the image names are provided. Otherwise, all images in the account are described.
+   * Retrieves a list that describes one or more specified images, if the image names or image ARNs are provided. Otherwise, all images in the account are described.
    */
   describeImages(callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
@@ -350,6 +350,30 @@ declare namespace AppStream {
      * Additional attributes that describe the application.
      */
     Metadata?: Metadata;
+  }
+  export interface ApplicationSettings {
+    /**
+     * Enables or disables persistent application settings for users during their streaming sessions. 
+     */
+    Enabled: Boolean;
+    /**
+     * The path prefix for the S3 bucket where users’ persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack. 
+     */
+    SettingsGroup?: SettingsGroup;
+  }
+  export interface ApplicationSettingsResponse {
+    /**
+     * Specifies whether persistent application settings are enabled for users during their streaming sessions.
+     */
+    Enabled?: Boolean;
+    /**
+     * The path prefix for the S3 bucket where users’ persistent application settings are stored.
+     */
+    SettingsGroup?: SettingsGroup;
+    /**
+     * The S3 bucket where users’ persistent application settings are stored. When persistent application settings are enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region. 
+     */
+    S3BucketName?: String;
   }
   export type Applications = Application[];
   export type AppstreamAgentVersion = string;
@@ -597,6 +621,10 @@ declare namespace AppStream {
      * The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled. 
      */
     UserSettings?: UserSettingList;
+    /**
+     * The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.
+     */
+    ApplicationSettings?: ApplicationSettings;
   }
   export interface CreateStackResult {
     /**
@@ -803,7 +831,7 @@ declare namespace AppStream {
   export type DescribeImagesMaxResults = number;
   export interface DescribeImagesRequest {
     /**
-     * The names of the images to describe.
+     * The names of the public or private images to describe.
      */
     Names?: StringList;
     /**
@@ -1324,6 +1352,7 @@ declare namespace AppStream {
   }
   export type SessionList = Session[];
   export type SessionState = "ACTIVE"|"PENDING"|"EXPIRED"|string;
+  export type SettingsGroup = string;
   export interface SharedImagePermissions {
     /**
      * The 12-digit ID of the AWS account with which the image is shared.
@@ -1376,6 +1405,10 @@ declare namespace AppStream {
      * The actions that are enabled or disabled for users during their streaming sessions. By default these actions are enabled.
      */
     UserSettings?: UserSettingList;
+    /**
+     * The persistent application settings for users of the stack.
+     */
+    ApplicationSettings?: ApplicationSettingsResponse;
   }
   export type StackAttribute = "STORAGE_CONNECTORS"|"STORAGE_CONNECTOR_HOMEFOLDERS"|"STORAGE_CONNECTOR_GOOGLE_DRIVE"|"STORAGE_CONNECTOR_ONE_DRIVE"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|string;
   export type StackAttributes = StackAttribute[];
@@ -1622,6 +1655,10 @@ declare namespace AppStream {
      * The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.
      */
     UserSettings?: UserSettingList;
+    /**
+     * The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.
+     */
+    ApplicationSettings?: ApplicationSettings;
   }
   export interface UpdateStackResult {
     /**

@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.308.0
+// AWS SDK for JavaScript v2.309.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -35123,7 +35123,8 @@ module.exports={
             "shape": "St"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "BatchWriteItem": {
       "input": {
@@ -35159,7 +35160,8 @@ module.exports={
             "shape": "St"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "CreateBackup": {
       "input": {
@@ -35180,7 +35182,8 @@ module.exports={
             "shape": "S1h"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "CreateGlobalTable": {
       "input": {
@@ -35203,7 +35206,8 @@ module.exports={
             "shape": "S1t"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "CreateTable": {
       "input": {
@@ -35284,7 +35288,8 @@ module.exports={
             "shape": "S2o"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "DeleteBackup": {
       "input": {
@@ -35303,7 +35308,8 @@ module.exports={
             "shape": "S39"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "DeleteItem": {
       "input": {
@@ -35346,7 +35352,8 @@ module.exports={
             "shape": "S1a"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "DeleteTable": {
       "input": {
@@ -35365,7 +35372,8 @@ module.exports={
             "shape": "S2o"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "DescribeBackup": {
       "input": {
@@ -35384,7 +35392,8 @@ module.exports={
             "shape": "S39"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "DescribeContinuousBackups": {
       "input": {
@@ -35403,7 +35412,39 @@ module.exports={
             "shape": "S43"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
+    },
+    "DescribeEndpoints": {
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Endpoints"
+        ],
+        "members": {
+          "Endpoints": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Address",
+                "CachePeriodInMinutes"
+              ],
+              "members": {
+                "Address": {},
+                "CachePeriodInMinutes": {
+                  "type": "long"
+                }
+              }
+            }
+          }
+        }
+      },
+      "endpointoperation": true
     },
     "DescribeGlobalTable": {
       "input": {
@@ -35422,7 +35463,8 @@ module.exports={
             "shape": "S1t"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "DescribeGlobalTableSettings": {
       "input": {
@@ -35439,10 +35481,11 @@ module.exports={
         "members": {
           "GlobalTableName": {},
           "ReplicaSettings": {
-            "shape": "S4b"
+            "shape": "S4f"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "DescribeLimits": {
       "input": {
@@ -35465,7 +35508,8 @@ module.exports={
             "type": "long"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "DescribeTable": {
       "input": {
@@ -35484,7 +35528,8 @@ module.exports={
             "shape": "S2o"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "DescribeTimeToLive": {
       "input": {
@@ -35503,7 +35548,8 @@ module.exports={
             "shape": "S3i"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "GetItem": {
       "input": {
@@ -35540,7 +35586,8 @@ module.exports={
             "shape": "Su"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "ListBackups": {
       "input": {
@@ -35589,7 +35636,8 @@ module.exports={
           },
           "LastEvaluatedBackupArn": {}
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "ListGlobalTables": {
       "input": {
@@ -35619,7 +35667,8 @@ module.exports={
           },
           "LastEvaluatedGlobalTableName": {}
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "ListTables": {
       "input": {
@@ -35640,7 +35689,8 @@ module.exports={
           },
           "LastEvaluatedTableName": {}
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "ListTagsOfResource": {
       "input": {
@@ -35657,11 +35707,12 @@ module.exports={
         "type": "structure",
         "members": {
           "Tags": {
-            "shape": "S5g"
+            "shape": "S5k"
           },
           "NextToken": {}
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "PutItem": {
       "input": {
@@ -35704,7 +35755,8 @@ module.exports={
             "shape": "S1a"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "Query": {
       "input": {
@@ -35729,11 +35781,11 @@ module.exports={
             "type": "map",
             "key": {},
             "value": {
-              "shape": "S5p"
+              "shape": "S5t"
             }
           },
           "QueryFilter": {
-            "shape": "S5q"
+            "shape": "S5u"
           },
           "ConditionalOperator": {},
           "ScanIndexForward": {
@@ -35773,7 +35825,8 @@ module.exports={
             "shape": "Su"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "RestoreTableFromBackup": {
       "input": {
@@ -35794,7 +35847,8 @@ module.exports={
             "shape": "S2o"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "RestoreTableToPointInTime": {
       "input": {
@@ -35821,7 +35875,8 @@ module.exports={
             "shape": "S2o"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "Scan": {
       "input": {
@@ -35840,7 +35895,7 @@ module.exports={
           },
           "Select": {},
           "ScanFilter": {
-            "shape": "S5q"
+            "shape": "S5u"
           },
           "ConditionalOperator": {},
           "ExclusiveStartKey": {
@@ -35885,7 +35940,8 @@ module.exports={
             "shape": "Su"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "TagResource": {
       "input": {
@@ -35897,10 +35953,11 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "Tags": {
-            "shape": "S5g"
+            "shape": "S5k"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "UntagResource": {
       "input": {
@@ -35916,7 +35973,8 @@ module.exports={
             "member": {}
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "UpdateContinuousBackups": {
       "input": {
@@ -35947,7 +36005,8 @@ module.exports={
             "shape": "S43"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "UpdateGlobalTable": {
       "input": {
@@ -35993,7 +36052,8 @@ module.exports={
             "shape": "S1t"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "UpdateGlobalTableSettings": {
       "input": {
@@ -36007,7 +36067,7 @@ module.exports={
             "type": "long"
           },
           "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate": {
-            "shape": "S6f"
+            "shape": "S6j"
           },
           "GlobalTableGlobalSecondaryIndexSettingsUpdate": {
             "type": "list",
@@ -36022,7 +36082,7 @@ module.exports={
                   "type": "long"
                 },
                 "ProvisionedWriteCapacityAutoScalingSettingsUpdate": {
-                  "shape": "S6f"
+                  "shape": "S6j"
                 }
               }
             }
@@ -36040,7 +36100,7 @@ module.exports={
                   "type": "long"
                 },
                 "ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate": {
-                  "shape": "S6f"
+                  "shape": "S6j"
                 },
                 "ReplicaGlobalSecondaryIndexSettingsUpdate": {
                   "type": "list",
@@ -36055,7 +36115,7 @@ module.exports={
                         "type": "long"
                       },
                       "ProvisionedReadCapacityAutoScalingSettingsUpdate": {
-                        "shape": "S6f"
+                        "shape": "S6j"
                       }
                     }
                   }
@@ -36070,10 +36130,11 @@ module.exports={
         "members": {
           "GlobalTableName": {},
           "ReplicaSettings": {
-            "shape": "S4b"
+            "shape": "S4f"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "UpdateItem": {
       "input": {
@@ -36130,7 +36191,8 @@ module.exports={
             "shape": "S1a"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "UpdateTable": {
       "input": {
@@ -36212,7 +36274,8 @@ module.exports={
             "shape": "S2o"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     },
     "UpdateTimeToLive": {
       "input": {
@@ -36224,7 +36287,7 @@ module.exports={
         "members": {
           "TableName": {},
           "TimeToLiveSpecification": {
-            "shape": "S74"
+            "shape": "S78"
           }
         }
       },
@@ -36232,10 +36295,11 @@ module.exports={
         "type": "structure",
         "members": {
           "TimeToLiveSpecification": {
-            "shape": "S74"
+            "shape": "S78"
           }
         }
-      }
+      },
+      "endpointdiscovery": {}
     }
   },
   "shapes": {
@@ -36839,7 +36903,7 @@ module.exports={
         }
       }
     },
-    "S4b": {
+    "S4f": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -36853,13 +36917,13 @@ module.exports={
             "type": "long"
           },
           "ReplicaProvisionedReadCapacityAutoScalingSettings": {
-            "shape": "S4e"
+            "shape": "S4i"
           },
           "ReplicaProvisionedWriteCapacityUnits": {
             "type": "long"
           },
           "ReplicaProvisionedWriteCapacityAutoScalingSettings": {
-            "shape": "S4e"
+            "shape": "S4i"
           },
           "ReplicaGlobalSecondaryIndexSettings": {
             "type": "list",
@@ -36875,13 +36939,13 @@ module.exports={
                   "type": "long"
                 },
                 "ProvisionedReadCapacityAutoScalingSettings": {
-                  "shape": "S4e"
+                  "shape": "S4i"
                 },
                 "ProvisionedWriteCapacityUnits": {
                   "type": "long"
                 },
                 "ProvisionedWriteCapacityAutoScalingSettings": {
-                  "shape": "S4e"
+                  "shape": "S4i"
                 }
               }
             }
@@ -36889,7 +36953,7 @@ module.exports={
         }
       }
     },
-    "S4e": {
+    "S4i": {
       "type": "structure",
       "members": {
         "MinimumUnits": {
@@ -36933,7 +36997,7 @@ module.exports={
         }
       }
     },
-    "S5g": {
+    "S5k": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -36947,7 +37011,7 @@ module.exports={
         }
       }
     },
-    "S5p": {
+    "S5t": {
       "type": "structure",
       "required": [
         "ComparisonOperator"
@@ -36959,14 +37023,14 @@ module.exports={
         "ComparisonOperator": {}
       }
     },
-    "S5q": {
+    "S5u": {
       "type": "map",
       "key": {},
       "value": {
-        "shape": "S5p"
+        "shape": "S5t"
       }
     },
-    "S6f": {
+    "S6j": {
       "type": "structure",
       "members": {
         "MinimumUnits": {
@@ -37010,7 +37074,7 @@ module.exports={
         }
       }
     },
-    "S74": {
+    "S78": {
       "type": "structure",
       "required": [
         "Enabled",
@@ -116463,7 +116527,7 @@ module.exports={
                   "ExpressionType": {},
                   "Expression": {},
                   "OutputSerialization": {
-                    "shape": "Sbr"
+                    "shape": "Sbs"
                   }
                 }
               },
@@ -116593,7 +116657,7 @@ module.exports={
             "shape": "Sbd"
           },
           "OutputSerialization": {
-            "shape": "Sbr"
+            "shape": "Sbs"
           }
         }
       },
@@ -117773,10 +117837,14 @@ module.exports={
           "members": {
             "Type": {}
           }
+        },
+        "Parquet": {
+          "type": "structure",
+          "members": {}
         }
       }
     },
-    "Sbr": {
+    "Sbs": {
       "type": "structure",
       "members": {
         "CSV": {
@@ -136528,7 +136596,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.308.0',
+  VERSION: '2.309.0',
 
   /**
    * @api private
@@ -155853,7 +155921,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.308.0
+// AWS SDK for JavaScript v2.309.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

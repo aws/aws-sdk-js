@@ -667,6 +667,11 @@ export namespace DocumentClient {
      */
     ContinuousBackupsDescription?: ContinuousBackupsDescription;
   }
+  export interface DescribeEndpointsRequest {
+  }
+  export interface DescribeEndpointsResponse {
+    Endpoints: Endpoints;
+  }
   export interface DescribeGlobalTableInput {
     /**
      * The name of the global table.
@@ -740,6 +745,11 @@ export namespace DocumentClient {
     TimeToLiveDescription?: TimeToLiveDescription;
   }
   export type Double = number;
+  export interface Endpoint {
+    Address: String;
+    CachePeriodInMinutes: Long;
+  }
+  export type Endpoints = Endpoint[];
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {
     /**

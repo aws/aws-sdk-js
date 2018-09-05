@@ -1397,17 +1397,6 @@
         "Suspended"
       ]
     },
-    "BucketAlreadyExists": {
-      "type": "structure",
-      "members": {},
-      "documentation": "<p>The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.</p>",
-      "exception": true
-    },
-    "BucketAlreadyOwnedByYou": {
-      "type": "structure",
-      "members": {},
-      "exception": true
-    },
     "BucketCannedACL": {
       "type": "string",
       "enum": [
@@ -4285,6 +4274,10 @@
         "JSON": {
           "shape": "JSONInput",
           "documentation": "<p>Specifies JSON as object's input serialization format.</p>"
+        },
+        "Parquet": {
+          "shape": "ParquetInput",
+          "documentation": "<p>Specifies Parquet as object's input serialization format.</p>"
         }
       },
       "documentation": "<p>Describes the serialization format of the object.</p>"
@@ -5510,24 +5503,6 @@
     "NextVersionIdMarker": {
       "type": "string"
     },
-    "NoSuchBucket": {
-      "type": "structure",
-      "members": {},
-      "documentation": "<p>The specified bucket does not exist.</p>",
-      "exception": true
-    },
-    "NoSuchKey": {
-      "type": "structure",
-      "members": {},
-      "documentation": "<p>The specified key does not exist.</p>",
-      "exception": true
-    },
-    "NoSuchUpload": {
-      "type": "structure",
-      "members": {},
-      "documentation": "<p>The specified multipart upload does not exist.</p>",
-      "exception": true
-    },
     "NoncurrentVersionExpiration": {
       "type": "structure",
       "members": {
@@ -5629,12 +5604,6 @@
         }
       }
     },
-    "ObjectAlreadyInActiveTierError": {
-      "type": "structure",
-      "members": {},
-      "documentation": "<p>This operation is not allowed against this storage tier</p>",
-      "exception": true
-    },
     "ObjectCannedACL": {
       "type": "string",
       "enum": [
@@ -5680,12 +5649,6 @@
         "shape": "Object"
       },
       "flattened": true
-    },
-    "ObjectNotInActiveTierError": {
-      "type": "structure",
-      "members": {},
-      "documentation": "<p>The source object of the COPY operation is not in the active tier and is only stored in Amazon Glacier.</p>",
-      "exception": true
     },
     "ObjectStorageClass": {
       "type": "string",
@@ -5788,6 +5751,10 @@
       "enum": [
         "Destination"
       ]
+    },
+    "ParquetInput": {
+      "type": "structure",
+      "members": {}
     },
     "Part": {
       "type": "structure",

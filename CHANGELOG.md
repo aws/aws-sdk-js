@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.308.0-->
+<!--LATEST=2.309.0-->
 <!--ENTRYINSERT-->
+
+## 2.309.0
+* feature: AppStream: Added support for enabling persistent application settings for a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.
+* feature: DynamoDB: New feature for Amazon DynamoDB.
+* feature: ELB: Documentation update for DescribeAccountLimits API to include classic-registered-instances.
+* feature: S3: Parquet input format support added for the SelectObjectContent API
 
 ## 2.308.0
 * feature: Rekognition: This release introduces a new API called DescribeCollection to Amazon Rekognition. You can use DescribeCollection to get information about an existing face collection. Given the ID for a face collection, DescribeCollection returns the following information: the number of faces indexed into the collection, the version of the face detection model used by the collection, the Amazon Resource Name (ARN) of the collection and the creation date/time of the collection.

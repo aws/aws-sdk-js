@@ -95,6 +95,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeContinuousBackups(callback?: (err: AWSError, data: DynamoDB.Types.DescribeContinuousBackupsOutput) => void): Request<DynamoDB.Types.DescribeContinuousBackupsOutput, AWSError>;
   /**
+   * 
+   */
+  describeEndpoints(params: DynamoDB.Types.DescribeEndpointsRequest, callback?: (err: AWSError, data: DynamoDB.Types.DescribeEndpointsResponse) => void): Request<DynamoDB.Types.DescribeEndpointsResponse, AWSError>;
+  /**
+   * 
+   */
+  describeEndpoints(callback?: (err: AWSError, data: DynamoDB.Types.DescribeEndpointsResponse) => void): Request<DynamoDB.Types.DescribeEndpointsResponse, AWSError>;
+  /**
    * Returns information about the specified global table.
    */
   describeGlobalTable(params: DynamoDB.Types.DescribeGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
@@ -892,6 +900,11 @@ declare namespace DynamoDB {
      */
     ContinuousBackupsDescription?: ContinuousBackupsDescription;
   }
+  export interface DescribeEndpointsRequest {
+  }
+  export interface DescribeEndpointsResponse {
+    Endpoints: Endpoints;
+  }
   export interface DescribeGlobalTableInput {
     /**
      * The name of the global table.
@@ -965,6 +978,11 @@ declare namespace DynamoDB {
     TimeToLiveDescription?: TimeToLiveDescription;
   }
   export type Double = number;
+  export interface Endpoint {
+    Address: String;
+    CachePeriodInMinutes: Long;
+  }
+  export type Endpoints = Endpoint[];
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {
     /**

@@ -2139,6 +2139,10 @@ declare namespace S3 {
      * Specifies JSON as object's input serialization format.
      */
     JSON?: JSONInput;
+    /**
+     * Specifies Parquet as object's input serialization format.
+     */
+    Parquet?: ParquetInput;
   }
   export interface InventoryConfiguration {
     /**
@@ -2928,6 +2932,8 @@ declare namespace S3 {
     ID?: ID;
   }
   export type OwnerOverride = "Destination"|string;
+  export interface ParquetInput {
+  }
   export interface Part {
     /**
      * Part number identifying the part. This is a positive integer between 1 and 10,000.
