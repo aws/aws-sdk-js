@@ -1,4 +1,5 @@
 export {Config} from './config';
+export {HTTPOptions} from './config';
 export {Credentials} from './credentials';
 export {CognitoIdentityCredentials} from './credentials/cognito_identity_credentials';
 export {CredentialProviderChain} from './credentials/credential_provider_chain';

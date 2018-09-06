@@ -95,11 +95,17 @@ AWS.config.update({
    fake: 'fake' 
 }, true);
 
+//Test httpOption interface
+var httpOptions:AWS.HTTPOptions = {
+  timeout: 6000
+}
+
 // Test constructing with a CredentialProviderChain
 var options = {
     credentialProvider: new AWS.CredentialProviderChain([
         () => new AWS.EC2MetadataCredentials()
-    ])
+    ]),
+    httpOptions
 };
 var s3 = new AWS.S3(options);
 var ses = new AWS.SES(options);
