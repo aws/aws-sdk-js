@@ -32,7 +32,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -40,7 +40,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -48,7 +48,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job."
@@ -73,7 +73,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -81,7 +81,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -89,7 +89,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Create a new transcoding job. For information about jobs and job settings, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
@@ -114,7 +114,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -122,7 +122,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -130,7 +130,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Create a new job template. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
@@ -155,7 +155,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -163,7 +163,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -171,7 +171,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Create a new preset. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
@@ -196,7 +196,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -204,7 +204,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -212,7 +212,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Create a new transcoding queue. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
@@ -237,7 +237,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -245,7 +245,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -253,7 +253,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Permanently delete a job template you have created."
@@ -278,7 +278,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -286,7 +286,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -294,7 +294,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Permanently delete a preset you have created."
@@ -319,7 +319,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -327,7 +327,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -335,7 +335,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Permanently delete a queue you have created."
@@ -401,7 +401,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -409,7 +409,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -417,7 +417,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Retrieve the JSON for a specific completed transcoding job."
@@ -442,7 +442,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -450,7 +450,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -458,7 +458,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Retrieve the JSON for a specific job template."
@@ -483,7 +483,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -491,7 +491,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -499,7 +499,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Retrieve the JSON for a specific preset."
@@ -524,7 +524,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -532,7 +532,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -540,7 +540,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Retrieve the JSON for a specific queue."
@@ -565,7 +565,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -573,7 +573,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -581,7 +581,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Retrieve a JSON array of up to twenty of your job templates. This will return the templates themselves, not just a list of them. To retrieve the next twenty templates, use the nextToken string returned with the array"
@@ -606,7 +606,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -614,7 +614,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -622,7 +622,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Retrieve a JSON array of up to twenty of your most recently created jobs. This array includes in-process, completed, and errored jobs. This will return the jobs themselves, not just a list of the jobs. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array."
@@ -647,7 +647,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -655,7 +655,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -663,7 +663,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Retrieve a JSON array of up to twenty of your presets. This will return the presets themselves, not just a list of them. To retrieve the next twenty presets, use the nextToken string returned with the array."
@@ -688,7 +688,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -696,7 +696,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -704,7 +704,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Retrieve a JSON array of up to twenty of your queues. This will return the queues themselves, not just a list of them. To retrieve the next twenty queues, use the nextToken string returned with the array."
@@ -729,7 +729,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -737,7 +737,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -745,7 +745,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Retrieve the tags for a MediaConvert resource."
@@ -770,7 +770,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -778,7 +778,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -786,16 +786,16 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
-      "documentation": "Tag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
+      "documentation": "Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html"
     },
     "UntagResource": {
       "name": "UntagResource",
       "http": {
-        "method": "DELETE",
-        "requestUri": "/2017-08-29/tags",
+        "method": "PUT",
+        "requestUri": "/2017-08-29/tags/{arn}",
         "responseCode": 200
       },
       "input": {
@@ -811,7 +811,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -819,7 +819,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -827,10 +827,10 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
-      "documentation": "Untag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
+      "documentation": "Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html"
     },
     "UpdateJobTemplate": {
       "name": "UpdateJobTemplate",
@@ -852,7 +852,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -860,7 +860,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -868,7 +868,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Modify one of your existing job templates."
@@ -893,7 +893,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -901,7 +901,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -909,7 +909,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Modify one of your existing presets."
@@ -934,7 +934,7 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "The service encountered an unexpected condition and cannot fulfill your request."
+          "documentation": "The service encountered an unexpected condition and can't fulfill your request."
         },
         {
           "shape": "ForbiddenException",
@@ -942,7 +942,7 @@
         },
         {
           "shape": "NotFoundException",
-          "documentation": "The resource you requested does not exist."
+          "documentation": "The resource you requested doesn't exist."
         },
         {
           "shape": "TooManyRequestsException",
@@ -950,7 +950,7 @@
         },
         {
           "shape": "ConflictException",
-          "documentation": "The service could not complete your request because there is a conflict with the current state of the resource."
+          "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
       "documentation": "Modify one of your existing queues."
@@ -1472,6 +1472,15 @@
         }
       },
       "documentation": "Settings for Avail Blanking"
+    },
+    "BillingTagsSource": {
+      "type": "string",
+      "documentation": "Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don't have an associated tag will appear in your billing report unsorted. If you don't choose a valid value for this field, your job outputs will appear on the billing report unsorted.",
+      "enum": [
+        "QUEUE",
+        "PRESET",
+        "JOB_TEMPLATE"
+      ]
     },
     "BurninDestinationSettings": {
       "type": "structure",
@@ -2111,6 +2120,10 @@
     "CreateJobRequest": {
       "type": "structure",
       "members": {
+        "BillingTagsSource": {
+          "shape": "BillingTagsSource",
+          "locationName": "billingTagsSource"
+        },
         "ClientRequestToken": {
           "shape": "__string",
           "locationName": "clientRequestToken",
@@ -2459,6 +2472,14 @@
       "type": "structure",
       "members": {}
     },
+    "DescribeEndpointsMode": {
+      "type": "string",
+      "documentation": "Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to return your endpoints if any exist, or to create an endpoint for you and return it if one doesn't already exist. Specify GET_ONLY to return your endpoints if any exist, or an empty list if none exist.",
+      "enum": [
+        "DEFAULT",
+        "GET_ONLY"
+      ]
+    },
     "DescribeEndpointsRequest": {
       "type": "structure",
       "members": {
@@ -2466,6 +2487,10 @@
           "shape": "__integer",
           "locationName": "maxResults",
           "documentation": "Optional. Max number of endpoints, up to twenty, that will be returned at one time."
+        },
+        "Mode": {
+          "shape": "DescribeEndpointsMode",
+          "locationName": "mode"
         },
         "NextToken": {
           "shape": "__string",
@@ -2966,7 +2991,7 @@
           "documentation": "URL of endpoint"
         }
       },
-      "documentation": "Describes account specific API endpoint"
+      "documentation": "Describes an account-specific API endpoint."
     },
     "F4vMoovPlacement": {
       "type": "string",
@@ -4644,6 +4669,10 @@
           "shape": "__string",
           "locationName": "arn",
           "documentation": "An identifier for this resource that is unique within all of AWS."
+        },
+        "BillingTagsSource": {
+          "shape": "BillingTagsSource",
+          "locationName": "billingTagsSource"
         },
         "CreatedAt": {
           "shape": "__timestampUnix",
@@ -6630,7 +6659,7 @@
     },
     "QueueStatus": {
       "type": "string",
-      "documentation": "Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue will not begin. Jobs running when a queue is paused continue to run until they finish or error out.",
+      "documentation": "Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue won't begin. Jobs running when a queue is paused continue to run until they finish or error out.",
       "enum": [
         "ACTIVE",
         "PAUSED"
@@ -6967,14 +6996,18 @@
         "Arn": {
           "shape": "__string",
           "locationName": "arn",
-          "documentation": "The Amazon Resource Name (ARN) of the resource that you want to remove tags from. To get the ARN, send a GET request with the resource name."
+          "documentation": "The Amazon Resource Name (ARN) of the resource that you want to remove tags from. To get the ARN, send a GET request with the resource name.",
+          "location": "uri"
         },
         "TagKeys": {
           "shape": "__listOf__string",
           "locationName": "tagKeys",
           "documentation": "The keys of the tags that you want to remove from the resource."
         }
-      }
+      },
+      "required": [
+        "Arn"
+      ]
     },
     "UntagResourceResponse": {
       "type": "structure",

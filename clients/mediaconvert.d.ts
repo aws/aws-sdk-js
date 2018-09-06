@@ -156,19 +156,19 @@ declare class MediaConvert extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: MediaConvert.Types.ListTagsForResourceResponse) => void): Request<MediaConvert.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Tag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   * Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
   tagResource(params: MediaConvert.Types.TagResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.TagResourceResponse) => void): Request<MediaConvert.Types.TagResourceResponse, AWSError>;
   /**
-   * Tag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   * Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
   tagResource(callback?: (err: AWSError, data: MediaConvert.Types.TagResourceResponse) => void): Request<MediaConvert.Types.TagResourceResponse, AWSError>;
   /**
-   * Untag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   * Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
   untagResource(params: MediaConvert.Types.UntagResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.UntagResourceResponse) => void): Request<MediaConvert.Types.UntagResourceResponse, AWSError>;
   /**
-   * Untag a MediaConvert queue, preset, or job template. For information about these resource types, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   * Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
   untagResource(callback?: (err: AWSError, data: MediaConvert.Types.UntagResourceResponse) => void): Request<MediaConvert.Types.UntagResourceResponse, AWSError>;
   /**
@@ -377,6 +377,7 @@ declare namespace MediaConvert {
      */
     AvailBlankingImage?: __stringMin14PatternS3BmpBMPPngPNG;
   }
+  export type BillingTagsSource = "QUEUE"|"PRESET"|"JOB_TEMPLATE"|string;
   export interface BurninDestinationSettings {
     Alignment?: BurninSubtitleAlignment;
     BackgroundColor?: BurninSubtitleBackgroundColor;
@@ -603,6 +604,7 @@ All burn-in and DVB-Sub font settings must match.
   }
   export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"RAW"|string;
   export interface CreateJobRequest {
+    BillingTagsSource?: BillingTagsSource;
     /**
      * Idempotency token for CreateJob operation.
      */
@@ -763,11 +765,13 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface DeleteQueueResponse {
   }
+  export type DescribeEndpointsMode = "DEFAULT"|"GET_ONLY"|string;
   export interface DescribeEndpointsRequest {
     /**
      * Optional. Max number of endpoints, up to twenty, that will be returned at one time.
      */
     MaxResults?: __integer;
+    Mode?: DescribeEndpointsMode;
     /**
      * Use this string, provided with the response to a previous request, to request the next batch of endpoints.
      */
@@ -1605,6 +1609,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * An identifier for this resource that is unique within all of AWS.
      */
     Arn?: __string;
+    BillingTagsSource?: BillingTagsSource;
     /**
      * The time, in Unix epoch format in seconds, when the job got created.
      */
@@ -2540,7 +2545,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to remove tags from. To get the ARN, send a GET request with the resource name.
      */
-    Arn?: __string;
+    Arn: __string;
     /**
      * The keys of the tags that you want to remove from the resource.
      */

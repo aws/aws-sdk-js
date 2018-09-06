@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.309.0-->
+<!--LATEST=2.310.0-->
 <!--ENTRYINSERT-->
+
+## 2.310.0
+* feature: APIGateway: Add support for Active X-Ray with API Gateway
+* feature: CodeCommit: This release adds additional optional fields to the pull request APIs.
+* feature: MediaConvert: This release adds support for Cost Allocation through tagging and also enables adding, editing, and removal of tags from the MediaConvert console.
 
 ## 2.309.0
 * feature: AppStream: Added support for enabling persistent application settings for a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.

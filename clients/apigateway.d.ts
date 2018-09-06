@@ -1323,6 +1323,10 @@ declare namespace APIGateway {
      * The input configuration for the canary deployment when the deployment is a canary release deployment. 
      */
     canarySettings?: DeploymentCanarySettings;
+    /**
+     * Specifies whether active tracing with X-ray is enabled for the Stage.
+     */
+    tracingEnabled?: NullableBoolean;
   }
   export interface CreateDocumentationPartRequest {
     /**
@@ -1523,6 +1527,10 @@ declare namespace APIGateway {
      * The canary deployment settings of this stage.
      */
     canarySettings?: CanarySettings;
+    /**
+     * Specifies whether active tracing with X-ray is enabled for the Stage.
+     */
+    tracingEnabled?: Boolean;
     /**
      * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters.
      */
@@ -2852,11 +2860,11 @@ declare namespace APIGateway {
      */
     metricsEnabled?: Boolean;
     /**
-     * Specifies the logging level for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/loglevel, and the available levels are OFF, ERROR, and INFO.
+     * Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/loglevel, and the available levels are OFF, ERROR, and INFO.
      */
     loggingLevel?: String;
     /**
-     * Specifies whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
+     * Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
      */
     dataTraceEnabled?: Boolean;
     /**
@@ -3399,6 +3407,10 @@ declare namespace APIGateway {
      * Settings for the canary deployment in this stage.
      */
     canarySettings?: CanarySettings;
+    /**
+     * Specifies whether active tracing with X-ray is enabled for the Stage.
+     */
+    tracingEnabled?: Boolean;
     /**
      * The collection of tags. Each tag element is associated with a given resource.
      */

@@ -220,11 +220,11 @@ declare class CodeCommit extends Service {
    */
   postCommentReply(callback?: (err: AWSError, data: CodeCommit.Types.PostCommentReplyOutput) => void): Request<CodeCommit.Types.PostCommentReplyOutput, AWSError>;
   /**
-   * Adds or updates a file in an AWS CodeCommit repository.
+   * Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.
    */
   putFile(params: CodeCommit.Types.PutFileInput, callback?: (err: AWSError, data: CodeCommit.Types.PutFileOutput) => void): Request<CodeCommit.Types.PutFileOutput, AWSError>;
   /**
-   * Adds or updates a file in an AWS CodeCommit repository.
+   * Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.
    */
   putFile(callback?: (err: AWSError, data: CodeCommit.Types.PutFileOutput) => void): Request<CodeCommit.Types.PutFileOutput, AWSError>;
   /**
@@ -1187,6 +1187,24 @@ declare namespace CodeCommit {
      */
     clientRequestToken?: ClientRequestToken;
   }
+  export interface PullRequestCreatedEventMetadata {
+    /**
+     * The name of the repository where the pull request was created.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * The commit ID on the source branch used when the pull request was created.
+     */
+    sourceCommitId?: CommitId;
+    /**
+     * The commit ID of the tip of the branch specified as the destination branch when the pull request was created.
+     */
+    destinationCommitId?: CommitId;
+    /**
+     * The commit ID of the most recent commit that the source branch and the destination branch have in common.
+     */
+    mergeBase?: CommitId;
+  }
   export interface PullRequestEvent {
     /**
      * The system-generated ID of the pull request.
@@ -1204,6 +1222,10 @@ declare namespace CodeCommit {
      * The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with additional commits or changing the status of a pull request.
      */
     actorArn?: Arn;
+    /**
+     * Information about the source and destination branches for the pull request.
+     */
+    pullRequestCreatedEventMetadata?: PullRequestCreatedEventMetadata;
     /**
      * Information about the change in status for the pull request event.
      */
@@ -1248,6 +1270,10 @@ declare namespace CodeCommit {
      * The full commit ID of the commit in the source branch that was the tip of the branch at the time the pull request was updated.
      */
     afterCommitId?: CommitId;
+    /**
+     * The commit ID of the most recent commit that the source branch and the destination branch have in common.
+     */
+    mergeBase?: CommitId;
   }
   export interface PullRequestStatusChangedEventMetadata {
     /**
@@ -1274,6 +1300,10 @@ declare namespace CodeCommit {
      */
     destinationCommit?: CommitId;
     /**
+     * The commit ID of the most recent commit that the source branch and the destination branch have in common.
+     */
+    mergeBase?: CommitId;
+    /**
      * The full commit ID of the tip of the source branch used to create the pull request. If the pull request branch is updated by a push while the pull request is open, the commit ID will change to reflect the new tip of the branch.
      */
     sourceCommit?: CommitId;
@@ -1289,7 +1319,7 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The name of the branch where you want to add or update the file.
+     * The name of the branch where you want to add or update the file. If this is an empty repository, this branch will be created.
      */
     branchName: BranchName;
     /**
@@ -1305,7 +1335,7 @@ declare namespace CodeCommit {
      */
     fileMode?: FileModeTypeEnum;
     /**
-     * The full commit ID of the head commit in the branch where you want to add or update the file. If the commit ID does not match the ID of the head commit at the time of the operation, an error will occur, and the file will not be added or updated.
+     * The full commit ID of the head commit in the branch where you want to add or update the file. If this is an empty repository, no commit ID is required. If this is not an empty repository, a commit ID is required.  The commit ID must match the ID of the head commit at the time of the operation, or an error will occur, and the file will not be added or updated.
      */
     parentCommitId?: CommitId;
     /**
@@ -1331,7 +1361,7 @@ declare namespace CodeCommit {
      */
     blobId: ObjectId;
     /**
-     * Tree information for the commit that contains this file change.
+     * The full SHA-1 pointer of the tree information for the commit that contains this file change.
      */
     treeId: ObjectId;
   }

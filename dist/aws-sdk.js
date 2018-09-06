@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.309.0
+// AWS SDK for JavaScript v2.310.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -618,6 +618,9 @@ module.exports={
                 "type": "boolean"
               }
             }
+          },
+          "tracingEnabled": {
+            "type": "boolean"
           }
         }
       },
@@ -850,6 +853,9 @@ module.exports={
           "documentationVersion": {},
           "canarySettings": {
             "shape": "S1q"
+          },
+          "tracingEnabled": {
+            "type": "boolean"
           },
           "tags": {
             "shape": "Sk"
@@ -4578,6 +4584,9 @@ module.exports={
         },
         "canarySettings": {
           "shape": "S1q"
+        },
+        "tracingEnabled": {
+          "type": "boolean"
         },
         "tags": {
           "shape": "Sk"
@@ -20792,6 +20801,15 @@ module.exports={
                 },
                 "pullRequestEventType": {},
                 "actorArn": {},
+                "pullRequestCreatedEventMetadata": {
+                  "type": "structure",
+                  "members": {
+                    "repositoryName": {},
+                    "sourceCommitId": {},
+                    "destinationCommitId": {},
+                    "mergeBase": {}
+                  }
+                },
                 "pullRequestStatusChangedEventMetadata": {
                   "type": "structure",
                   "members": {
@@ -20803,7 +20821,8 @@ module.exports={
                   "members": {
                     "repositoryName": {},
                     "beforeCommitId": {},
-                    "afterCommitId": {}
+                    "afterCommitId": {},
+                    "mergeBase": {}
                   }
                 },
                 "pullRequestMergedStateChangedEventMetadata": {
@@ -20914,10 +20933,10 @@ module.exports={
                 "beforeBlobId": {},
                 "afterBlobId": {},
                 "location": {
-                  "shape": "S1y"
+                  "shape": "S1z"
                 },
                 "comments": {
-                  "shape": "S22"
+                  "shape": "S23"
                 }
               }
             }
@@ -20958,10 +20977,10 @@ module.exports={
                 "beforeBlobId": {},
                 "afterBlobId": {},
                 "location": {
-                  "shape": "S1y"
+                  "shape": "S1z"
                 },
                 "comments": {
-                  "shape": "S22"
+                  "shape": "S23"
                 }
               }
             }
@@ -20999,10 +21018,10 @@ module.exports={
               },
               "message": {},
               "author": {
-                "shape": "S2c"
+                "shape": "S2d"
               },
               "committer": {
-                "shape": "S2c"
+                "shape": "S2d"
               },
               "additionalData": {}
             }
@@ -21038,10 +21057,10 @@ module.exports={
               "type": "structure",
               "members": {
                 "beforeBlob": {
-                  "shape": "S2n"
+                  "shape": "S2o"
                 },
                 "afterBlob": {
-                  "shape": "S2n"
+                  "shape": "S2o"
                 },
                 "changeType": {}
               }
@@ -21139,7 +21158,7 @@ module.exports={
         "members": {
           "configurationId": {},
           "triggers": {
-            "shape": "S31"
+            "shape": "S32"
           }
         }
       }
@@ -21159,7 +21178,7 @@ module.exports={
         "type": "structure",
         "members": {
           "branches": {
-            "shape": "S35"
+            "shape": "S36"
           },
           "nextToken": {}
         }
@@ -21256,7 +21275,7 @@ module.exports={
           "beforeCommitId": {},
           "afterCommitId": {},
           "location": {
-            "shape": "S1y"
+            "shape": "S1z"
           },
           "content": {},
           "clientRequestToken": {
@@ -21273,7 +21292,7 @@ module.exports={
           "beforeBlobId": {},
           "afterBlobId": {},
           "location": {
-            "shape": "S1y"
+            "shape": "S1z"
           },
           "comment": {
             "shape": "S16"
@@ -21298,7 +21317,7 @@ module.exports={
           "beforeCommitId": {},
           "afterCommitId": {},
           "location": {
-            "shape": "S1y"
+            "shape": "S1z"
           },
           "content": {},
           "clientRequestToken": {
@@ -21316,7 +21335,7 @@ module.exports={
           "beforeBlobId": {},
           "afterBlobId": {},
           "location": {
-            "shape": "S1y"
+            "shape": "S1z"
           },
           "comment": {
             "shape": "S16"
@@ -21397,7 +21416,7 @@ module.exports={
         "members": {
           "repositoryName": {},
           "triggers": {
-            "shape": "S31"
+            "shape": "S32"
           }
         }
       },
@@ -21418,7 +21437,7 @@ module.exports={
         "members": {
           "repositoryName": {},
           "triggers": {
-            "shape": "S31"
+            "shape": "S32"
           }
         }
       },
@@ -21617,6 +21636,7 @@ module.exports={
               "sourceReference": {},
               "destinationReference": {},
               "destinationCommit": {},
+              "mergeBase": {},
               "sourceCommit": {},
               "mergeMetadata": {
                 "shape": "Sw"
@@ -21662,7 +21682,7 @@ module.exports={
         "clientRequestToken": {}
       }
     },
-    "S1y": {
+    "S1z": {
       "type": "structure",
       "members": {
         "filePath": {},
@@ -21672,13 +21692,13 @@ module.exports={
         "relativeFileVersion": {}
       }
     },
-    "S22": {
+    "S23": {
       "type": "list",
       "member": {
         "shape": "S16"
       }
     },
-    "S2c": {
+    "S2d": {
       "type": "structure",
       "members": {
         "name": {},
@@ -21686,7 +21706,7 @@ module.exports={
         "date": {}
       }
     },
-    "S2n": {
+    "S2o": {
       "type": "structure",
       "members": {
         "blobId": {},
@@ -21694,7 +21714,7 @@ module.exports={
         "mode": {}
       }
     },
-    "S31": {
+    "S32": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -21708,7 +21728,7 @@ module.exports={
           "destinationArn": {},
           "customData": {},
           "branches": {
-            "shape": "S35"
+            "shape": "S36"
           },
           "events": {
             "type": "list",
@@ -21717,7 +21737,7 @@ module.exports={
         }
       }
     },
-    "S35": {
+    "S36": {
       "type": "list",
       "member": {}
     }
@@ -136596,7 +136616,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.309.0',
+  VERSION: '2.310.0',
 
   /**
    * @api private
@@ -155921,7 +155941,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.309.0
+// AWS SDK for JavaScript v2.310.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
