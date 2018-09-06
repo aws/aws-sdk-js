@@ -7,7 +7,7 @@ describe('AWS.S3Control', function() {
     var request = client.getPublicLockdown({AccountId: '111'});
     helpers.mockResponse({data: {}});
     request.send();
-    expect(request.httpRequest.headers['x-amz=account-id']).to.eql(undefined);
+    expect(request.httpRequest.headers['x-amz-account-id']).to.eql(undefined);
     expect(request.httpRequest.headers.Host).to.eql('111.s3-control.us-east-1.amazonaws.com');
     expect(request.httpRequest.endpoint.hostname).to.eql('111.s3-control.us-east-1.amazonaws.com');
   });
@@ -43,15 +43,31 @@ describe('AWS.S3Control', function() {
     var client = new AWS.S3Control({region: 'us-east-1'});
     var request = client.deletePublicLockdown({AccountId: '111'});
     helpers.mockHttpResponse(404, {
-      'x-amz-request-id': 'requestId',
-      'x-amz-id-2': 'hostId',
-    }, '<?xml version="1.0" encoding="UTF-8"?><ErrorResponse><Error><Code>NoSuchAccount</Code><Message>The account was not found</Message><AccountId>111</AccountId></Error><RequestId>requestId</RequestId><HostId>hostId</HostId></ErrorResponse>')
+      'x-amz-request-id': 'requestId123',
+      'x-amz-id-2': 'hostId321',
+    }, '<?xml version="1.0" encoding="UTF-8"?><ErrorResponse><Error><Code>NoSuchAccount</Code><Message>The account was not found</Message><AccountId>111</AccountId></Error><RequestId>requestId123</RequestId><HostId>hostId321</HostId></ErrorResponse>')
     request.send(function(err, data) {
       expect(data).to.eql(null);
-      expect(err.hostId).to.eql('hostId');
-      expect(err.requestId).to.eql('requestId');
+      expect(err.extendedRequestId).to.eql('hostId321');
+      expect(err.requestId).to.eql('requestId123');
+      expect(err.code).to.eql('NoSuchAccount');
+      expect(err.message).to.eql('The account was not found');
     });
   });
+
+  it('should add hostId and requestId from successful response', function() {
+    var client = new AWS.S3Control({region: 'us-east-1'});
+    var request = client.deletePublicLockdown({AccountId: '111'});
+    helpers.mockHttpResponse(200, {
+      'x-amz-request-id': 'requestId123',
+      'x-amz-id-2': 'hostId321',
+    }, '')
+    request.send(function(err, data) {
+      expect(err).to.eql(null);
+      expect(this.extendedRequestId).to.eql('hostId321');
+      expect(this.requestId).to.eql('requestId123');
+    });
+  })
 
   it('should use the V4 signer', function() {
     var client = new AWS.S3Control();
@@ -67,9 +83,9 @@ describe('AWS.S3Control', function() {
         RejectPublicAcls: false
       }
     }).build();
-    req.httpRequest.path = '/fake:path'
+    req.httpRequest.path = '/fake%3Apath'
     var SignerClass = client.getSignerClass(req);
     signer = new SignerClass(req.httpRequest, req.service.api.signingName || req.service.api.endpointPrefix);
-    return expect(signer.canonicalString().split('\n')[1]).to.equal('/fake:path');
+    return expect(signer.canonicalString().split('\n')[1]).to.equal('/fake%3Apath');
   });
 });

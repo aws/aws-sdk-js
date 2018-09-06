@@ -150,7 +150,7 @@
         signer = new AWS.Signers.V4(req.httpRequest, 'cognito-identity');
         return expect(signer.canonicalString().split('\n')[1]).to.equal('/identitypools/id/identities/a%253Ab%253Ac/datasets');
       });
-      return it('does not double encode path for S3', function() {
+      it('does not double encode path for S3', function() {
         var req;
         req = new AWS.S3().getObject({
           Bucket: 'bucket',
