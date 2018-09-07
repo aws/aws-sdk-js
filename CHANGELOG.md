@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.310.0-->
+<!--LATEST=2.311.0-->
 <!--ENTRYINSERT-->
+
+## 2.311.0
+* feature: CloudWatchLogs: * Adding a log prefix parameter for filter log events API and minor updates to the documentation
+* feature: ConfigService: Adding a new field "createdBy" to the ConfigRule data model. The field is populated only if the rule is service linked i.e the rule is created by a service. The field is empty for normal rules created by customer.
 
 ## 2.310.0
 * feature: APIGateway: Add support for Active X-Ray with API Gateway

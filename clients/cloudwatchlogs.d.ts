@@ -694,13 +694,17 @@ declare namespace CloudWatchLogs {
   export type FilterCount = number;
   export interface FilterLogEventsRequest {
     /**
-     * The name of the log group.
+     * The name of the log group to search.
      */
     logGroupName: LogGroupName;
     /**
-     * Optional list of log stream names.
+     * Filters the results to only logs from the log streams in this list. If you specify a value for both logStreamNamePrefix and logStreamNames, but the value for logStreamNamePrefix does not match any log stream names specified in logStreamNames, the action returns an InvalidParameterException error.
      */
     logStreamNames?: InputLogStreamNames;
+    /**
+     * Filters the results to include only events from log streams that have names starting with this prefix. If you specify a value for both logStreamNamePrefix and logStreamNames, but the value for logStreamNamePrefix does not match any log stream names specified in logStreamNames, the action returns an InvalidParameterException error.
+     */
+    logStreamNamePrefix?: LogStreamName;
     /**
      * The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this time are not returned.
      */
@@ -710,7 +714,7 @@ declare namespace CloudWatchLogs {
      */
     endTime?: Timestamp;
     /**
-     * The filter pattern to use. If not provided, all the events are matched.
+     * The filter pattern to use. For more information, see Filter and Pattern Syntax. If not provided, all the events are matched.
      */
     filterPattern?: FilterPattern;
     /**
