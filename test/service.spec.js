@@ -512,8 +512,12 @@
           code: 'RequestLimitExceeded',
           statusCode: 400
         }, true);
-        return retryableError({
+        retryableError({
           code: 'RequestThrottled',
+          statusCode: 400
+        }, true);
+        retryableError({
+          code: 'TooManyRequestsException',
           statusCode: 400
         }, true);
       });
