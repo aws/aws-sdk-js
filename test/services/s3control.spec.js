@@ -18,7 +18,7 @@ describe('AWS.S3Control', function() {
     helpers.mockResponse({data: {}});
     request.send();
     expect(request.httpRequest.headers.Host).to.eql('s3-control.us-east-1.amazonaws.com');
-    expect(request.httpRequest.endpoint.hostname).to.eql('s3-control.us-east-1.amazonaws.com'); 
+    expect(request.httpRequest.endpoint.hostname).to.eql('s3-control.us-east-1.amazonaws.com');
   });
 
   it('append accountId to hostname when supplied and using dualstack', function() {
@@ -88,4 +88,36 @@ describe('AWS.S3Control', function() {
     signer = new SignerClass(req.httpRequest, req.service.api.signingName || req.service.api.endpointPrefix);
     return expect(signer.canonicalString().split('\n')[1]).to.equal('/fake%3Apath');
   });
+
+  it('validate accountId length', function() {
+    var client = new AWS.S3Control({region: 'us-east-1', paramValidateion: true});
+
+    var request = client.getPublicLockdown({AccountId: ''}).build();
+    expect(request.httpRequest.endpoint.hostname).to.eql('s3-control.us-east-1.amazonaws.com')
+
+    var stringTooLong = '1'
+    for (var i = 0; i < 64; i++) stringTooLong += '1';
+    request = client.getPublicLockdown({AccountId: stringTooLong});
+    helpers.mockResponse({data: {}});
+    request.send();
+    var response = request.response;
+    expect(response.error).not.to.be.undefined;
+    expect(response.data).to.eql(null);
+    expect(response.error.code).to.eql('ValidationError');
+    expect(response.error.message).to.eql('Account Id length should bigger than 0 and smaller than 64');
+
+  });
+
+  it('validate accountId pattern', function() {
+    var client = new AWS.S3Control({region: 'us-east-1', paramValidateion: true});
+    var wrongStrings = ['a.b', '.ab', 'ab.', '-ab', 'Ab-', 'asdw*'];
+    for (var i = 0; i < wrongStrings.length; i++) {
+      var request = client.getPublicLockdown({AccountId: wrongStrings[i]});
+      request.send();
+      expect(request.response.error).not.to.be.undefined;
+      expect(request.response.data).to.eql(null);
+      expect(request.response.error.code).to.eql('ValidationError');
+      expect(request.response.error.message).to.eql('AccountId should be hostname compatible');
+    }
+  })
 });
