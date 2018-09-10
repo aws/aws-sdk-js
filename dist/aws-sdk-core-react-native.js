@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.311.0',
+	  VERSION: '2.312.0',
 
 	  /**
 	   * @api private
@@ -4323,6 +4323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      case 'ThrottlingException':
 	      case 'RequestLimitExceeded':
 	      case 'RequestThrottled':
+	      case 'TooManyRequestsException':
 	        return true;
 	      default:
 	        return false;

@@ -2472,6 +2472,14 @@ declare namespace Redshift {
      * The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.
      */
     MaintenanceTrackName?: String;
+    /**
+     * Indicates whether the cluster is encrypted. If the cluster is encrypted and you provide a value for the KmsKeyId parameter, we will encrypt the cluster with the provided KmsKeyId. If you don't provide a KmsKeyId, we will encrypt with the default key. In the China region we will use legacy encryption if you specify that the cluster is encrypted.
+     */
+    Encrypted?: BooleanOptional;
+    /**
+     * The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
+     */
+    KmsKeyId?: String;
   }
   export interface ModifyClusterParameterGroupMessage {
     /**
@@ -2661,6 +2669,10 @@ declare namespace Redshift {
      * The name of the maintenance track that the cluster will change to during the next maintenance window.
      */
     MaintenanceTrackName?: String;
+    /**
+     * The encryption type for a cluster. Possible values are: KMS and None. For the China region the possible values are None, and Legacy. 
+     */
+    EncryptionType?: String;
   }
   export interface PurchaseReservedNodeOfferingMessage {
     /**
@@ -2900,6 +2912,10 @@ declare namespace Redshift {
      * An optional string to provide additional details about the resize action.
      */
     Message?: String;
+    /**
+     * The type of encryption for the cluster after the resize is complete. Possible values are KMS and None. In the China region possible values are: Legacy and None.
+     */
+    TargetEncryptionType?: String;
   }
   export type RestorableNodeTypeList = String[];
   export interface RestoreFromClusterSnapshotMessage {

@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.311.0
+// AWS SDK for JavaScript v2.312.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -106239,7 +106239,8 @@ module.exports={
             "type": "long"
           },
           "ResizeType": {},
-          "Message": {}
+          "Message": {},
+          "TargetEncryptionType": {}
         }
       }
     },
@@ -106525,7 +106526,11 @@ module.exports={
           "EnhancedVpcRouting": {
             "type": "boolean"
           },
-          "MaintenanceTrackName": {}
+          "MaintenanceTrackName": {},
+          "Encrypted": {
+            "type": "boolean"
+          },
+          "KmsKeyId": {}
         }
       },
       "output": {
@@ -107225,7 +107230,8 @@ module.exports={
             "EnhancedVpcRouting": {
               "type": "boolean"
             },
-            "MaintenanceTrackName": {}
+            "MaintenanceTrackName": {},
+            "EncryptionType": {}
           }
         },
         "ClusterVersion": {},
@@ -136618,7 +136624,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.311.0',
+  VERSION: '2.312.0',
 
   /**
    * @api private
@@ -145170,6 +145176,7 @@ AWS.Service = inherit({
       case 'ThrottlingException':
       case 'RequestLimitExceeded':
       case 'RequestThrottled':
+      case 'TooManyRequestsException':
         return true;
       default:
         return false;
@@ -155943,7 +155950,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.311.0
+// AWS SDK for JavaScript v2.312.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
