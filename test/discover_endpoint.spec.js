@@ -140,7 +140,7 @@ describe('getCacheKey', function() {
     }]);
     var MockService = helpers.MockServiceFromApi(api);
     var client = new MockService({endpointDiscoveryEnabled: true, region: 'fake-region-1'});
-    helpers.mockHttpResponse(200, {}, '{}')
+    helpers.mockHttpResponse(200, {}, '{}');
     var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
     request.send();
     expect(spy.calls.length).to.eql(1);
