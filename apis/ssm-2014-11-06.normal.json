@@ -1277,6 +1277,31 @@
       ],
       "documentation": "<p>Lists all patch groups that have been registered with patch baselines.</p>"
     },
+    "DescribeSessions": {
+      "name": "DescribeSessions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeSessionsRequest"
+      },
+      "output": {
+        "shape": "DescribeSessionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "InvalidFilterKey"
+        },
+        {
+          "shape": "InvalidNextToken"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of all active sessions (both connected and disconnected) or terminated sessions from the past 30 days.</p>"
+    },
     "GetAutomationExecution": {
       "name": "GetAutomationExecution",
       "http": {
@@ -1329,6 +1354,25 @@
         }
       ],
       "documentation": "<p>Returns detailed information about command execution for an invocation or plugin. </p>"
+    },
+    "GetConnectionStatus": {
+      "name": "GetConnectionStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetConnectionStatusRequest"
+      },
+      "output": {
+        "shape": "GetConnectionStatusResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Retrieves the Session Manager connection status for an instance to determine whether it is connected and ready to receive Session Manager connections.</p>"
     },
     "GetDefaultPatchBaseline": {
       "name": "GetDefaultPatchBaseline",
@@ -2385,6 +2429,28 @@
       ],
       "documentation": "<p>Removes all tags from the specified resource.</p>"
     },
+    "ResumeSession": {
+      "name": "ResumeSession",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ResumeSessionRequest"
+      },
+      "output": {
+        "shape": "ResumeSessionResponse"
+      },
+      "errors": [
+        {
+          "shape": "DoesNotExistException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Reconnects a session to an instance after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.</p> <note> <p>This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It is not intended for any other use.</p> </note>"
+    },
     "SendAutomationSignal": {
       "name": "SendAutomationSignal",
       "http": {
@@ -2521,6 +2587,31 @@
       ],
       "documentation": "<p>Initiates execution of an Automation document.</p>"
     },
+    "StartSession": {
+      "name": "StartSession",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartSessionRequest"
+      },
+      "output": {
+        "shape": "StartSessionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidDocument"
+        },
+        {
+          "shape": "TargetNotConnected"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Initiates a connection to a target (for example, an instance) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.</p> <note> <p>AWS CLI usage: <code>start-session</code> is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html\"> Install the Session Manager Plugin for the AWS CLI</a> in the <i>AWS Systems Manager User Guide</i>.</p> </note>"
+    },
     "StopAutomationExecution": {
       "name": "StopAutomationExecution",
       "http": {
@@ -2545,6 +2636,28 @@
         }
       ],
       "documentation": "<p>Stop an Automation that is currently executing.</p>"
+    },
+    "TerminateSession": {
+      "name": "TerminateSession",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TerminateSessionRequest"
+      },
+      "output": {
+        "shape": "TerminateSessionResponse"
+      },
+      "errors": [
+        {
+          "shape": "DoesNotExistException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session cannot be resumed.</p>"
     },
     "UpdateAssociation": {
       "name": "UpdateAssociation",
@@ -3915,7 +4028,7 @@
         },
         "value": {
           "shape": "CommandFilterValue",
-          "documentation": "<p>The filter value. </p>"
+          "documentation": "<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p>InvokedAfter: A timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see results occurring July 7, 2018, and later.</p> </li> <li> <p>InvokedBefore: A timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see results before July 7, 2018.</p> </li> <li> <p>Status: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:</p> <ul> <li> <p>Pending</p> </li> <li> <p>InProgress</p> </li> <li> <p>Success</p> </li> <li> <p>Cancelled</p> </li> <li> <p>Failed</p> </li> <li> <p>TimedOut</p> </li> <li> <p>Cancelling </p> </li> </ul> </li> <li> <p>DocumentName: The name of the SSM document for which you want to see command results.</p> <p>For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p>ExecutionStage: An enum whose value can be either <code>Executing</code> or <code>Complete</code>.</p> <ul> <li> <p>Specify <code>Executing</code> to see a list of command executions that are currently still running.</p> </li> <li> <p>Specify <code>Complete</code> to see a list of command exeuctions that have already completed.</p> </li> </ul> </li> </ul>"
         }
       },
       "documentation": "<p>Describes a command filter.</p>"
@@ -4425,6 +4538,13 @@
       "type": "string",
       "max": 255,
       "min": 1
+    },
+    "ConnectionStatus": {
+      "type": "string",
+      "enum": [
+        "Connected",
+        "NotConnected"
+      ]
     },
     "CreateActivationRequest": {
       "type": "structure",
@@ -5518,7 +5638,7 @@
       "members": {
         "InstanceInformationFilterList": {
           "shape": "InstanceInformationFilterList",
-          "documentation": "<p>One or more filters. Use a filter to return a more specific list of instances.</p>"
+          "documentation": "<p>This is a legacy method. We recommend that you don't use this method. Instead, use the <a>InstanceInformationFilter</a> action. The <code>InstanceInformationFilter</code> action enables you to return instance information by using tags that are specified as a key-value mapping. </p> <p>If you do use this method, then you can't use the <code>InstanceInformationFilter</code> action. Using this method and the <code>InstanceInformationFilter</code> action causes an exception error. </p>"
         },
         "Filters": {
           "shape": "InstanceInformationStringFilterList",
@@ -6053,6 +6173,44 @@
         }
       }
     },
+    "DescribeSessionsRequest": {
+      "type": "structure",
+      "required": [
+        "State"
+      ],
+      "members": {
+        "State": {
+          "shape": "SessionState",
+          "documentation": "<p>The session status to retrieve a list of sessions for. For example, \"active\".</p>"
+        },
+        "MaxResults": {
+          "shape": "SessionMaxResults",
+          "documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        },
+        "Filters": {
+          "shape": "SessionFilterList",
+          "documentation": "<p>One or more filters to limit the type of sessions returned by the request.</p>"
+        }
+      }
+    },
+    "DescribeSessionsResponse": {
+      "type": "structure",
+      "members": {
+        "Sessions": {
+          "shape": "SessionList",
+          "documentation": "<p>A list of sessions meeting the request parameters.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
     "DescriptionInDocument": {
       "type": "string"
     },
@@ -6376,7 +6534,8 @@
       "enum": [
         "Command",
         "Policy",
-        "Automation"
+        "Automation",
+        "Session"
       ]
     },
     "DocumentVersion": {
@@ -6623,6 +6782,31 @@
         "CloudWatchOutputConfig": {
           "shape": "CloudWatchOutputConfig",
           "documentation": "<p>CloudWatch Logs information where Systems Manager sent the command output.</p>"
+        }
+      }
+    },
+    "GetConnectionStatusRequest": {
+      "type": "structure",
+      "required": [
+        "Target"
+      ],
+      "members": {
+        "Target": {
+          "shape": "SessionTarget",
+          "documentation": "<p>The ID of the instance.</p>"
+        }
+      }
+    },
+    "GetConnectionStatusResponse": {
+      "type": "structure",
+      "members": {
+        "Target": {
+          "shape": "SessionTarget",
+          "documentation": "<p>The ID of the instance to check connection status. </p>"
+        },
+        "Status": {
+          "shape": "ConnectionStatus",
+          "documentation": "<p>The status of the connection to the instance. For example, 'Connected' or 'Not Connected'.</p>"
         }
       }
     },
@@ -7662,7 +7846,7 @@
           "documentation": "<p>The filter values.</p>"
         }
       },
-      "documentation": "<p>Describes a filter for a specific list of instances. </p>"
+      "documentation": "<p>Describes a filter for a specific list of instances. You can filter instances information by using tags. You specify tags by using a key-value mapping.</p> <p>Use this action instead of the <a>DescribeInstanceInformationRequest$InstanceInformationFilterList</a> method. The <code>InstanceInformationFilterList</code> method is a legacy method and does not support tags. </p>"
     },
     "InstanceInformationFilterKey": {
       "type": "string",
@@ -11043,6 +11227,35 @@
       "max": 1,
       "min": 1
     },
+    "ResumeSessionRequest": {
+      "type": "structure",
+      "required": [
+        "SessionId"
+      ],
+      "members": {
+        "SessionId": {
+          "shape": "SessionId",
+          "documentation": "<p>The ID of the disconnected session to resume.</p>"
+        }
+      }
+    },
+    "ResumeSessionResponse": {
+      "type": "structure",
+      "members": {
+        "SessionId": {
+          "shape": "SessionId",
+          "documentation": "<p>The ID of the session.</p>"
+        },
+        "TokenValue": {
+          "shape": "TokenValue",
+          "documentation": "<p>An encrypted token value containing session and caller information. Used to authenticate the connection to the instance.</p>"
+        },
+        "StreamUrl": {
+          "shape": "StreamUrl",
+          "documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: <code>wss://ssm-messages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p> <p> <b>region</b> represents the Region identifier for an AWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region. For a list of supported <b>region</b> values, see the <b>Region</b> column in the <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region\">AWS Systems Manager table of regions and endpoints</a> in the <i>AWS General Reference</i>.</p> <p> <b>session-id</b> represents the ID of a Session Manager session, such as <code>1a2b3c4dEXAMPLE</code>.</p>"
+        }
+      }
+    },
     "S3BucketName": {
       "type": "string",
       "max": 63,
@@ -11204,6 +11417,187 @@
     "ServiceRole": {
       "type": "string"
     },
+    "Session": {
+      "type": "structure",
+      "members": {
+        "SessionId": {
+          "shape": "SessionId",
+          "documentation": "<p>The ID of the session.</p>"
+        },
+        "Target": {
+          "shape": "SessionTarget",
+          "documentation": "<p>The instance that the Session Manager session connected to.</p>"
+        },
+        "Status": {
+          "shape": "SessionStatus",
+          "documentation": "<p>The status of the session. For example, \"Connected\" or \"Terminated\".</p>"
+        },
+        "StartDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, when the session began.</p>"
+        },
+        "EndDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, when the session was terminated.</p>"
+        },
+        "DocumentName": {
+          "shape": "DocumentName",
+          "documentation": "<p>The name of the Session Manager SSM document used to define the parameters and plugin settings for the session. For example, <code>SSM-SessionManagerRunShell</code>.</p>"
+        },
+        "Owner": {
+          "shape": "SessionOwner",
+          "documentation": "<p>The ID of the AWS user account that started the session.</p>"
+        },
+        "Details": {
+          "shape": "SessionDetails",
+          "documentation": "<p>Reserved for future use.</p>"
+        },
+        "OutputUrl": {
+          "shape": "SessionManagerOutputUrl",
+          "documentation": "<p>Reserved for future use.</p>"
+        }
+      },
+      "documentation": "<p>Information about a Session Manager connection to an instance.</p>"
+    },
+    "SessionDetails": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "SessionFilter": {
+      "type": "structure",
+      "required": [
+        "key",
+        "value"
+      ],
+      "members": {
+        "key": {
+          "shape": "SessionFilterKey",
+          "documentation": "<p>The name of the filter.</p>"
+        },
+        "value": {
+          "shape": "SessionFilterValue",
+          "documentation": "<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p>InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.</p> </li> <li> <p>InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.</p> </li> <li> <p>Target: Specify an instance to which session connections have been made.</p> </li> <li> <p>Owner: Specify an AWS user account to see a list of sessions started by that user.</p> </li> <li> <p>Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:</p> <ul> <li> <p>Connected</p> </li> <li> <p>Connecting</p> </li> <li> <p>Disconnected</p> </li> <li> <p>Terminated</p> </li> <li> <p>Terminating</p> </li> <li> <p>Failed</p> </li> </ul> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Describes a filter for Session Manager information.</p>"
+    },
+    "SessionFilterKey": {
+      "type": "string",
+      "enum": [
+        "InvokedAfter",
+        "InvokedBefore",
+        "Target",
+        "Owner",
+        "Status"
+      ]
+    },
+    "SessionFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "SessionFilter"
+      },
+      "max": 5,
+      "min": 1
+    },
+    "SessionFilterValue": {
+      "type": "string",
+      "max": 200,
+      "min": 1
+    },
+    "SessionId": {
+      "type": "string",
+      "max": 96,
+      "min": 1
+    },
+    "SessionList": {
+      "type": "list",
+      "member": {
+        "shape": "Session"
+      }
+    },
+    "SessionManagerCloudWatchOutputUrl": {
+      "type": "string",
+      "max": 2083,
+      "min": 1
+    },
+    "SessionManagerOutputUrl": {
+      "type": "structure",
+      "members": {
+        "S3OutputUrl": {
+          "shape": "SessionManagerS3OutputUrl",
+          "documentation": "<p>Reserved for future use.</p>"
+        },
+        "CloudWatchOutputUrl": {
+          "shape": "SessionManagerCloudWatchOutputUrl",
+          "documentation": "<p>Reserved for future use.</p>"
+        }
+      },
+      "documentation": "<p>Reserved for future use.</p>"
+    },
+    "SessionManagerParameterName": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
+    "SessionManagerParameterValue": {
+      "type": "string",
+      "max": 65535,
+      "min": 1
+    },
+    "SessionManagerParameterValueList": {
+      "type": "list",
+      "member": {
+        "shape": "SessionManagerParameterValue"
+      }
+    },
+    "SessionManagerParameters": {
+      "type": "map",
+      "key": {
+        "shape": "SessionManagerParameterName"
+      },
+      "value": {
+        "shape": "SessionManagerParameterValueList"
+      }
+    },
+    "SessionManagerS3OutputUrl": {
+      "type": "string",
+      "max": 2083,
+      "min": 1
+    },
+    "SessionMaxResults": {
+      "type": "integer",
+      "max": 200,
+      "min": 1
+    },
+    "SessionOwner": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "SessionState": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "History"
+      ]
+    },
+    "SessionStatus": {
+      "type": "string",
+      "enum": [
+        "Connected",
+        "Connecting",
+        "Disconnected",
+        "Terminated",
+        "Terminating",
+        "Failed"
+      ]
+    },
+    "SessionTarget": {
+      "type": "string",
+      "max": 50,
+      "min": 1
+    },
     "SeveritySummary": {
       "type": "structure",
       "members": {
@@ -11332,6 +11726,43 @@
         "AutomationExecutionId": {
           "shape": "AutomationExecutionId",
           "documentation": "<p>The unique ID of a newly scheduled automation execution.</p>"
+        }
+      }
+    },
+    "StartSessionRequest": {
+      "type": "structure",
+      "required": [
+        "Target"
+      ],
+      "members": {
+        "Target": {
+          "shape": "SessionTarget",
+          "documentation": "<p>The instance to connect to for the session.</p>"
+        },
+        "DocumentName": {
+          "shape": "DocumentARN",
+          "documentation": "<p>The name of the SSM document to define the parameters and plugin settings for the session. For example, <code>SSM-SessionManagerRunShell</code>. If no document name is provided, a shell to the instance is launched by default.</p>"
+        },
+        "Parameters": {
+          "shape": "SessionManagerParameters",
+          "documentation": "<p>Reserved for future use.</p>"
+        }
+      }
+    },
+    "StartSessionResponse": {
+      "type": "structure",
+      "members": {
+        "SessionId": {
+          "shape": "SessionId",
+          "documentation": "<p>The ID of the session.</p>"
+        },
+        "TokenValue": {
+          "shape": "TokenValue",
+          "documentation": "<p>An encrypted token value containing session and caller information. Used to authenticate the connection to the instance.</p>"
+        },
+        "StreamUrl": {
+          "shape": "StreamUrl",
+          "documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: <code>wss://ssm-messages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code> </p> <p> <b>region</b> represents the Region identifier for an AWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region. For a list of supported <b>region</b> values, see the <b>Region</b> column in the <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region\">AWS Systems Manager table of regions and endpoints</a> in the <i>AWS General Reference</i>.</p> <p> <b>session-id</b> represents the ID of a Session Manager session, such as <code>1a2b3c4dEXAMPLE</code>.</p>"
         }
       }
     },
@@ -11526,6 +11957,9 @@
         "Cancel"
       ]
     },
+    "StreamUrl": {
+      "type": "string"
+    },
     "String": {
       "type": "string"
     },
@@ -11665,10 +12099,36 @@
       "max": 5,
       "min": 0
     },
+    "TerminateSessionRequest": {
+      "type": "structure",
+      "required": [
+        "SessionId"
+      ],
+      "members": {
+        "SessionId": {
+          "shape": "SessionId",
+          "documentation": "<p>The ID of the session to terminate.</p>"
+        }
+      }
+    },
+    "TerminateSessionResponse": {
+      "type": "structure",
+      "members": {
+        "SessionId": {
+          "shape": "SessionId",
+          "documentation": "<p>The ID of the session that has been terminated.</p>"
+        }
+      }
+    },
     "TimeoutSeconds": {
       "type": "integer",
       "max": 2592000,
       "min": 30
+    },
+    "TokenValue": {
+      "type": "string",
+      "max": 300,
+      "min": 0
     },
     "TotalCount": {
       "type": "integer"

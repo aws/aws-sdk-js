@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Session Manager is a fully managed AWS Systems Manager capability that provides interactive one-click access to Amazon EC2 Linux and Windows instances."
+    }
+]

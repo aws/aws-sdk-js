@@ -404,6 +404,14 @@ declare class SSM extends Service {
    */
   describePatchGroups(callback?: (err: AWSError, data: SSM.Types.DescribePatchGroupsResult) => void): Request<SSM.Types.DescribePatchGroupsResult, AWSError>;
   /**
+   * Retrieves a list of all active sessions (both connected and disconnected) or terminated sessions from the past 30 days.
+   */
+  describeSessions(params: SSM.Types.DescribeSessionsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeSessionsResponse) => void): Request<SSM.Types.DescribeSessionsResponse, AWSError>;
+  /**
+   * Retrieves a list of all active sessions (both connected and disconnected) or terminated sessions from the past 30 days.
+   */
+  describeSessions(callback?: (err: AWSError, data: SSM.Types.DescribeSessionsResponse) => void): Request<SSM.Types.DescribeSessionsResponse, AWSError>;
+  /**
    * Get detailed information about a particular Automation execution.
    */
   getAutomationExecution(params: SSM.Types.GetAutomationExecutionRequest, callback?: (err: AWSError, data: SSM.Types.GetAutomationExecutionResult) => void): Request<SSM.Types.GetAutomationExecutionResult, AWSError>;
@@ -419,6 +427,14 @@ declare class SSM extends Service {
    * Returns detailed information about command execution for an invocation or plugin. 
    */
   getCommandInvocation(callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
+  /**
+   * Retrieves the Session Manager connection status for an instance to determine whether it is connected and ready to receive Session Manager connections.
+   */
+  getConnectionStatus(params: SSM.Types.GetConnectionStatusRequest, callback?: (err: AWSError, data: SSM.Types.GetConnectionStatusResponse) => void): Request<SSM.Types.GetConnectionStatusResponse, AWSError>;
+  /**
+   * Retrieves the Session Manager connection status for an instance to determine whether it is connected and ready to receive Session Manager connections.
+   */
+  getConnectionStatus(callback?: (err: AWSError, data: SSM.Types.GetConnectionStatusResponse) => void): Request<SSM.Types.GetConnectionStatusResponse, AWSError>;
   /**
    * Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system. If you do not specify an operating system value, the default patch baseline for Windows is returned.
    */
@@ -724,6 +740,14 @@ declare class SSM extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: SSM.Types.RemoveTagsFromResourceResult) => void): Request<SSM.Types.RemoveTagsFromResourceResult, AWSError>;
   /**
+   * Reconnects a session to an instance after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.  This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It is not intended for any other use. 
+   */
+  resumeSession(params: SSM.Types.ResumeSessionRequest, callback?: (err: AWSError, data: SSM.Types.ResumeSessionResponse) => void): Request<SSM.Types.ResumeSessionResponse, AWSError>;
+  /**
+   * Reconnects a session to an instance after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.  This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It is not intended for any other use. 
+   */
+  resumeSession(callback?: (err: AWSError, data: SSM.Types.ResumeSessionResponse) => void): Request<SSM.Types.ResumeSessionResponse, AWSError>;
+  /**
    * Sends a signal to an Automation execution to change the current behavior or status of the execution. 
    */
   sendAutomationSignal(params: SSM.Types.SendAutomationSignalRequest, callback?: (err: AWSError, data: SSM.Types.SendAutomationSignalResult) => void): Request<SSM.Types.SendAutomationSignalResult, AWSError>;
@@ -756,6 +780,14 @@ declare class SSM extends Service {
    */
   startAutomationExecution(callback?: (err: AWSError, data: SSM.Types.StartAutomationExecutionResult) => void): Request<SSM.Types.StartAutomationExecutionResult, AWSError>;
   /**
+   * Initiates a connection to a target (for example, an instance) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  AWS CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see  Install the Session Manager Plugin for the AWS CLI in the AWS Systems Manager User Guide. 
+   */
+  startSession(params: SSM.Types.StartSessionRequest, callback?: (err: AWSError, data: SSM.Types.StartSessionResponse) => void): Request<SSM.Types.StartSessionResponse, AWSError>;
+  /**
+   * Initiates a connection to a target (for example, an instance) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  AWS CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see  Install the Session Manager Plugin for the AWS CLI in the AWS Systems Manager User Guide. 
+   */
+  startSession(callback?: (err: AWSError, data: SSM.Types.StartSessionResponse) => void): Request<SSM.Types.StartSessionResponse, AWSError>;
+  /**
    * Stop an Automation that is currently executing.
    */
   stopAutomationExecution(params: SSM.Types.StopAutomationExecutionRequest, callback?: (err: AWSError, data: SSM.Types.StopAutomationExecutionResult) => void): Request<SSM.Types.StopAutomationExecutionResult, AWSError>;
@@ -763,6 +795,14 @@ declare class SSM extends Service {
    * Stop an Automation that is currently executing.
    */
   stopAutomationExecution(callback?: (err: AWSError, data: SSM.Types.StopAutomationExecutionResult) => void): Request<SSM.Types.StopAutomationExecutionResult, AWSError>;
+  /**
+   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session cannot be resumed.
+   */
+  terminateSession(params: SSM.Types.TerminateSessionRequest, callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
+  /**
+   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session cannot be resumed.
+   */
+  terminateSession(callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
   /**
    * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.
    */
@@ -1547,7 +1587,7 @@ declare namespace SSM {
      */
     key: CommandFilterKey;
     /**
-     * The filter value. 
+     * The filter value. Valid values for each filter key are as follows:   InvokedAfter: A timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see results occurring July 7, 2018, and later.   InvokedBefore: A timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see results before July 7, 2018.   Status: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:   Pending   InProgress   Success   Cancelled   Failed   TimedOut   Cancelling      DocumentName: The name of the SSM document for which you want to see command results. For example, specify AWS-RunPatchBaseline to see command executions that used this SSM document to perform security patching operations on instances.    ExecutionStage: An enum whose value can be either Executing or Complete.   Specify Executing to see a list of command executions that are currently still running.   Specify Complete to see a list of command exeuctions that have already completed.    
      */
     value: CommandFilterValue;
   }
@@ -1814,6 +1854,7 @@ declare namespace SSM {
     SeveritySummary?: SeveritySummary;
   }
   export type ComputerName = string;
+  export type ConnectionStatus = "Connected"|"NotConnected"|string;
   export interface CreateActivationRequest {
     /**
      * A user-defined description of the resource that you want to register with Amazon EC2.   Do not enter personally identifiable information in this field. 
@@ -2568,7 +2609,7 @@ declare namespace SSM {
   }
   export interface DescribeInstanceInformationRequest {
     /**
-     * One or more filters. Use a filter to return a more specific list of instances.
+     * This is a legacy method. We recommend that you don't use this method. Instead, use the InstanceInformationFilter action. The InstanceInformationFilter action enables you to return instance information by using tags that are specified as a key-value mapping.  If you do use this method, then you can't use the InstanceInformationFilter action. Using this method and the InstanceInformationFilter action causes an exception error. 
      */
     InstanceInformationFilterList?: InstanceInformationFilterList;
     /**
@@ -2974,6 +3015,34 @@ declare namespace SSM {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeSessionsRequest {
+    /**
+     * The session status to retrieve a list of sessions for. For example, "active".
+     */
+    State: SessionState;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: SessionMaxResults;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more filters to limit the type of sessions returned by the request.
+     */
+    Filters?: SessionFilterList;
+  }
+  export interface DescribeSessionsResponse {
+    /**
+     * A list of sessions meeting the request parameters.
+     */
+    Sessions?: SessionList;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: NextToken;
+  }
   export type DescriptionInDocument = string;
   export type DocumentARN = string;
   export type DocumentContent = string;
@@ -3159,7 +3228,7 @@ declare namespace SSM {
   export type DocumentSchemaVersion = string;
   export type DocumentSha1 = string;
   export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|string;
-  export type DocumentType = "Command"|"Policy"|"Automation"|string;
+  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|string;
   export type DocumentVersion = string;
   export interface DocumentVersionInfo {
     /**
@@ -3326,6 +3395,22 @@ declare namespace SSM {
      * CloudWatch Logs information where Systems Manager sent the command output.
      */
     CloudWatchOutputConfig?: CloudWatchOutputConfig;
+  }
+  export interface GetConnectionStatusRequest {
+    /**
+     * The ID of the instance.
+     */
+    Target: SessionTarget;
+  }
+  export interface GetConnectionStatusResponse {
+    /**
+     * The ID of the instance to check connection status. 
+     */
+    Target?: SessionTarget;
+    /**
+     * The status of the connection to the instance. For example, 'Connected' or 'Not Connected'.
+     */
+    Status?: ConnectionStatus;
   }
   export interface GetDefaultPatchBaselineRequest {
     /**
@@ -5998,6 +6083,26 @@ declare namespace SSM {
     TypeName: InventoryItemTypeName;
   }
   export type ResultAttributeList = ResultAttribute[];
+  export interface ResumeSessionRequest {
+    /**
+     * The ID of the disconnected session to resume.
+     */
+    SessionId: SessionId;
+  }
+  export interface ResumeSessionResponse {
+    /**
+     * The ID of the session.
+     */
+    SessionId?: SessionId;
+    /**
+     * An encrypted token value containing session and caller information. Used to authenticate the connection to the instance.
+     */
+    TokenValue?: TokenValue;
+    /**
+     * A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).  region represents the Region identifier for an AWS Region supported by AWS Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in the AWS Systems Manager table of regions and endpoints in the AWS General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
+     */
+    StreamUrl?: StreamUrl;
+  }
   export type S3BucketName = string;
   export type S3KeyPrefix = string;
   export interface S3OutputLocation {
@@ -6115,6 +6220,81 @@ declare namespace SSM {
     Command?: Command;
   }
   export type ServiceRole = string;
+  export interface Session {
+    /**
+     * The ID of the session.
+     */
+    SessionId?: SessionId;
+    /**
+     * The instance that the Session Manager session connected to.
+     */
+    Target?: SessionTarget;
+    /**
+     * The status of the session. For example, "Connected" or "Terminated".
+     */
+    Status?: SessionStatus;
+    /**
+     * The date and time, in ISO-8601 Extended format, when the session began.
+     */
+    StartDate?: DateTime;
+    /**
+     * The date and time, in ISO-8601 Extended format, when the session was terminated.
+     */
+    EndDate?: DateTime;
+    /**
+     * The name of the Session Manager SSM document used to define the parameters and plugin settings for the session. For example, SSM-SessionManagerRunShell.
+     */
+    DocumentName?: DocumentName;
+    /**
+     * The ID of the AWS user account that started the session.
+     */
+    Owner?: SessionOwner;
+    /**
+     * Reserved for future use.
+     */
+    Details?: SessionDetails;
+    /**
+     * Reserved for future use.
+     */
+    OutputUrl?: SessionManagerOutputUrl;
+  }
+  export type SessionDetails = string;
+  export interface SessionFilter {
+    /**
+     * The name of the filter.
+     */
+    key: SessionFilterKey;
+    /**
+     * The filter value. Valid values for each filter key are as follows:   InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.   InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.   Target: Specify an instance to which session connections have been made.   Owner: Specify an AWS user account to see a list of sessions started by that user.   Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:   Connected   Connecting   Disconnected   Terminated   Terminating   Failed    
+     */
+    value: SessionFilterValue;
+  }
+  export type SessionFilterKey = "InvokedAfter"|"InvokedBefore"|"Target"|"Owner"|"Status"|string;
+  export type SessionFilterList = SessionFilter[];
+  export type SessionFilterValue = string;
+  export type SessionId = string;
+  export type SessionList = Session[];
+  export type SessionManagerCloudWatchOutputUrl = string;
+  export interface SessionManagerOutputUrl {
+    /**
+     * Reserved for future use.
+     */
+    S3OutputUrl?: SessionManagerS3OutputUrl;
+    /**
+     * Reserved for future use.
+     */
+    CloudWatchOutputUrl?: SessionManagerCloudWatchOutputUrl;
+  }
+  export type SessionManagerParameterName = string;
+  export type SessionManagerParameterValue = string;
+  export type SessionManagerParameterValueList = SessionManagerParameterValue[];
+  export type SessionManagerParameters = {[key: string]: SessionManagerParameterValueList};
+  export type SessionManagerS3OutputUrl = string;
+  export type SessionMaxResults = number;
+  export type SessionOwner = string;
+  export type SessionState = "Active"|"History"|string;
+  export type SessionStatus = "Connected"|"Connecting"|"Disconnected"|"Terminated"|"Terminating"|"Failed"|string;
+  export type SessionTarget = string;
   export interface SeveritySummary {
     /**
      * The total number of resources or compliance items that have a severity level of critical. Critical severity is determined by the organization that published the compliance items.
@@ -6201,6 +6381,34 @@ declare namespace SSM {
      * The unique ID of a newly scheduled automation execution.
      */
     AutomationExecutionId?: AutomationExecutionId;
+  }
+  export interface StartSessionRequest {
+    /**
+     * The instance to connect to for the session.
+     */
+    Target: SessionTarget;
+    /**
+     * The name of the SSM document to define the parameters and plugin settings for the session. For example, SSM-SessionManagerRunShell. If no document name is provided, a shell to the instance is launched by default.
+     */
+    DocumentName?: DocumentARN;
+    /**
+     * Reserved for future use.
+     */
+    Parameters?: SessionManagerParameters;
+  }
+  export interface StartSessionResponse {
+    /**
+     * The ID of the session.
+     */
+    SessionId?: SessionId;
+    /**
+     * An encrypted token value containing session and caller information. Used to authenticate the connection to the instance.
+     */
+    TokenValue?: TokenValue;
+    /**
+     * A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)   region represents the Region identifier for an AWS Region supported by AWS Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in the AWS Systems Manager table of regions and endpoints in the AWS General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
+     */
+    StreamUrl?: StreamUrl;
   }
   export type StatusAdditionalInfo = string;
   export type StatusDetails = string;
@@ -6316,6 +6524,7 @@ declare namespace SSM {
   export interface StopAutomationExecutionResult {
   }
   export type StopType = "Complete"|"Cancel"|string;
+  export type StreamUrl = string;
   export type String = string;
   export type StringDateTime = string;
   export type StringList = String[];
@@ -6354,7 +6563,20 @@ declare namespace SSM {
   export type TargetValue = string;
   export type TargetValues = TargetValue[];
   export type Targets = Target[];
+  export interface TerminateSessionRequest {
+    /**
+     * The ID of the session to terminate.
+     */
+    SessionId: SessionId;
+  }
+  export interface TerminateSessionResponse {
+    /**
+     * The ID of the session that has been terminated.
+     */
+    SessionId?: SessionId;
+  }
   export type TimeoutSeconds = number;
+  export type TokenValue = string;
   export type TotalCount = number;
   export interface UpdateAssociationRequest {
     /**
