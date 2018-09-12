@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.313.0
+// AWS SDK for JavaScript v2.314.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -42404,6 +42404,10 @@ module.exports={
             "member": {
               "locationName": "item"
             }
+          },
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
           }
         }
       },
@@ -42417,6 +42421,9 @@ module.exports={
               "shape": "S85",
               "locationName": "item"
             }
+          },
+          "NextToken": {
+            "locationName": "nextToken"
           }
         }
       }
@@ -48592,10 +48599,6 @@ module.exports={
           "locationName": "ebs",
           "type": "structure",
           "members": {
-            "Encrypted": {
-              "locationName": "encrypted",
-              "type": "boolean"
-            },
             "DeleteOnTermination": {
               "locationName": "deleteOnTermination",
               "type": "boolean"
@@ -48604,7 +48607,6 @@ module.exports={
               "locationName": "iops",
               "type": "integer"
             },
-            "KmsKeyId": {},
             "SnapshotId": {
               "locationName": "snapshotId"
             },
@@ -48614,7 +48616,12 @@ module.exports={
             },
             "VolumeType": {
               "locationName": "volumeType"
-            }
+            },
+            "Encrypted": {
+              "locationName": "encrypted",
+              "type": "boolean"
+            },
+            "KmsKeyId": {}
           }
         },
         "NoDevice": {
@@ -52006,6 +52013,9 @@ module.exports={
       "result_key": "NetworkAcls"
     },
     "DescribeNetworkInterfaces": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "NetworkInterfaces"
     },
     "DescribePlacementGroups": {
@@ -136768,7 +136778,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.313.0',
+  VERSION: '2.314.0',
 
   /**
    * @api private
@@ -141441,6 +141451,8 @@ AWS.ParamValidator = AWS.util.inherit({
     if (AWS.util.isNode()) { // special check for buffer/stream in Node.js
       var Stream = AWS.util.stream.Stream;
       if (AWS.util.Buffer.isBuffer(value) || value instanceof Stream) return;
+    } else {
+      if (typeof Blob !== void 0 && value instanceof Blob) return;
     }
 
     var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];
@@ -156094,7 +156106,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.313.0
+// AWS SDK for JavaScript v2.314.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

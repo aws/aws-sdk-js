@@ -108,6 +108,14 @@ declare class Connect extends Service {
    */
   stopContact(callback?: (err: AWSError, data: Connect.Types.StopContactResponse) => void): Request<Connect.Types.StopContactResponse, AWSError>;
   /**
+   * The UpdateContactAttributes operation lets you programmatically create new or update existing contact attributes associated with a contact. You can use the operation to add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also use the UpdateContactAttributes operation to update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, or flag abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.
+   */
+  updateContactAttributes(params: Connect.Types.UpdateContactAttributesRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
+  /**
+   * The UpdateContactAttributes operation lets you programmatically create new or update existing contact attributes associated with a contact. You can use the operation to add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also use the UpdateContactAttributes operation to update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, or flag abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.
+   */
+  updateContactAttributes(callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
+  /**
    * Assigns the specified hierarchy group to the user.
    */
   updateUserHierarchy(params: Connect.Types.UpdateUserHierarchyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -580,6 +588,22 @@ declare namespace Connect {
     InstanceId: InstanceId;
   }
   export interface StopContactResponse {
+  }
+  export interface UpdateContactAttributesRequest {
+    /**
+     * The unique identifier of the contact for which to update attributes. This is the identifier for the contact associated with the first interaction with the contact center.
+     */
+    InitialContactId: ContactId;
+    /**
+     * The identifier for your Amazon Connect instance. To find the ID of your Amazon Connect instance, open the AWS console and select Amazon Connect. Select the instance alias of the instance. The instance ID is displayed in the Overview section of your instance settings. For example, the instance ID is the set of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The key-value pairs for the attribute to update.
+     */
+    Attributes: Attributes;
+  }
+  export interface UpdateContactAttributesResponse {
   }
   export interface UpdateUserHierarchyRequest {
     /**

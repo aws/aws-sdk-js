@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ReactNative",
-  "description": "Fixes issue where attempting to use a Blob object as input to an operation would cause a parameter validaiton error in release mode."
-}

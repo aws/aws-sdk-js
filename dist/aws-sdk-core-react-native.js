@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.313.0',
+	  VERSION: '2.314.0',
 
 	  /**
 	   * @api private
@@ -11080,6 +11080,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (AWS.util.isNode()) { // special check for buffer/stream in Node.js
 	      var Stream = AWS.util.stream.Stream;
 	      if (AWS.util.Buffer.isBuffer(value) || value instanceof Stream) return;
+	    } else {
+	      if (typeof Blob !== void 0 && value instanceof Blob) return;
 	    }
 
 	    var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];

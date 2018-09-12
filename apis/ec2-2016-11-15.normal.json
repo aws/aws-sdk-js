@@ -423,7 +423,7 @@
       "output": {
         "shape": "CopyImageResult"
       },
-      "documentation": "<p>Initiates the copy of an AMI from the specified source region to the current region. You specify the destination region by using its endpoint when making the request.</p> <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Initiates the copy of an AMI from the specified source region to the current region. You specify the destination region by using its endpoint when making the request.</p> <p>Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CopySnapshot": {
       "name": "CopySnapshot",
@@ -437,7 +437,7 @@
       "output": {
         "shape": "CopySnapshotResult"
       },
-      "documentation": "<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the <code>Encrypted</code> flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the <code>KmsKeyId</code> parameter. </p> <p>To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot.</p> <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the <code>Encrypted</code> flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the <code>KmsKeyId</code> parameter.</p> <p>To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot.</p> <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateCustomerGateway": {
       "name": "CreateCustomerGateway",
@@ -479,7 +479,7 @@
       "output": {
         "shape": "CreateDefaultVpcResult"
       },
-      "documentation": "<p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html\">Default VPC and Default Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot specify the components of the default VPC yourself.</p> <p>iIf you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region. </p> <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see \"I really want a default VPC for my existing EC2 account. Is that possible?\" in the <a href=\"http://aws.amazon.com/vpc/faqs/#Default_VPCs\">Default VPCs FAQ</a>.</p>"
+      "documentation": "<p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html\">Default VPC and Default Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot specify the components of the default VPC yourself.</p> <p>If you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region.</p> <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see \"I really want a default VPC for my existing EC2 account. Is that possible?\" in the <a href=\"http://aws.amazon.com/vpc/faqs/#Default_VPCs\">Default VPCs FAQ</a>.</p>"
     },
     "CreateDhcpOptions": {
       "name": "CreateDhcpOptions",
@@ -1608,7 +1608,7 @@
       "output": {
         "shape": "DescribeHostReservationOfferingsResult"
       },
-      "documentation": "<p>Describes the Dedicated Host reservations that are available to purchase.</p> <p>The results describe all the Dedicated Host reservation offerings, including offerings that may not match the instance family and region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated . For more information about supported instance types, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html\">Dedicated Hosts Overview</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>"
+      "documentation": "<p>Describes the Dedicated Host reservations that are available to purchase.</p> <p>The results describe all the Dedicated Host reservation offerings, including offerings that may not match the instance family and region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated. For more information about supported instance types, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html\">Dedicated Hosts Overview</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>"
     },
     "DescribeHostReservations": {
       "name": "DescribeHostReservations",
@@ -1762,7 +1762,7 @@
       "output": {
         "shape": "DescribeInstanceCreditSpecificationsResult"
       },
-      "documentation": "<p>Describes the credit option for CPU usage of one or more of your T2 instances. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>If you do not specify an instance ID, Amazon EC2 returns only the T2 instances with the <code>unlimited</code> credit option. If you specify one or more instance IDs, Amazon EC2 returns the credit option (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 instance, an error is returned.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html\">T2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes the credit option for CPU usage of one or more of your T2 or T3 instances. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>If you do not specify an instance ID, Amazon EC2 returns T2 and T3 instances with the <code>unlimited</code> credit option, as well as instances that were previously configured as T2 or T3 with the <code>unlimited</code> credit option. For example, if you resize a T2 instance, while it is configured as <code>unlimited</code>, to an M4 instance, Amazon EC2 returns the M4 instance.</p> <p>If you specify one or more instance IDs, Amazon EC2 returns the credit option (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 or T3 instance, an error is returned.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeInstanceStatus": {
       "name": "DescribeInstanceStatus",
@@ -2914,7 +2914,7 @@
       "output": {
         "shape": "ModifyHostsResult"
       },
-      "documentation": "<p>Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of <code>host</code> but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID ito have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled.</p>"
+      "documentation": "<p>Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of <code>host</code> but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID to have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled.</p>"
     },
     "ModifyIdFormat": {
       "name": "ModifyIdFormat",
@@ -2972,7 +2972,7 @@
       "output": {
         "shape": "ModifyInstanceCreditSpecificationResult"
       },
-      "documentation": "<p>Modifies the credit option for CPU usage on a running or stopped T2 instance. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html\">T2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Modifies the credit option for CPU usage on a running or stopped T2 or T3 instance. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "ModifyInstancePlacement": {
       "name": "ModifyInstancePlacement",
@@ -3329,7 +3329,7 @@
       "output": {
         "shape": "ReleaseHostsResult"
       },
-      "documentation": "<p>When you no longer want to use an On-Demand Dedicated Host it can be released. On-Demand billing is stopped and the host goes into <code>released</code> state. The host ID of Dedicated Hosts that have been released can no longer be specified in another request, for example, ModifyHosts. You must stop or terminate all instances on a host before it can be released.</p> <p>When Dedicated Hosts are released, it may take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated Hosts. Wait a few minutes and then try again.</p> <p>Released hosts still appear in a <a>DescribeHosts</a> response.</p>"
+      "documentation": "<p>When you no longer want to use an On-Demand Dedicated Host it can be released. On-Demand billing is stopped and the host goes into <code>released</code> state. The host ID of Dedicated Hosts that have been released can no longer be specified in another request, for example, to modify the host. You must stop or terminate all instances on a host before it can be released.</p> <p>When Dedicated Hosts are released, it may take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated Hosts. Wait a few minutes and then try again.</p> <p>Released hosts still appear in a <a>DescribeHosts</a> response.</p>"
     },
     "ReplaceIamInstanceProfileAssociation": {
       "name": "ReplaceIamInstanceProfileAssociation",
@@ -3746,8 +3746,7 @@
           "documentation": "<p>The ID of the VPC peering connection. You must specify this parameter in the request.</p>",
           "locationName": "vpcPeeringConnectionId"
         }
-      },
-      "documentation": "<p>Contains the parameters for AcceptVpcPeeringConnection.</p>"
+      }
     },
     "AcceptVpcPeeringConnectionResult": {
       "type": "structure",
@@ -3757,8 +3756,7 @@
           "documentation": "<p>Information about the VPC peering connection.</p>",
           "locationName": "vpcPeeringConnection"
         }
-      },
-      "documentation": "<p>Contains the output of AcceptVpcPeeringConnection.</p>"
+      }
     },
     "AccountAttribute": {
       "type": "structure",
@@ -3995,8 +3993,7 @@
           "documentation": "<p>The number of Dedicated Hosts to allocate to your account with these parameters.</p>",
           "locationName": "quantity"
         }
-      },
-      "documentation": "<p>Contains the parameters for AllocateHosts.</p>"
+      }
     },
     "AllocateHostsResult": {
       "type": "structure",
@@ -4006,8 +4003,7 @@
           "documentation": "<p>The ID of the allocated Dedicated Host. This is used to launch an instance onto a specific host.</p>",
           "locationName": "hostIdSet"
         }
-      },
-      "documentation": "<p>Contains the output of AllocateHosts.</p>"
+      }
     },
     "AllocationIdList": {
       "type": "list",
@@ -4199,8 +4195,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for AssociateDhcpOptions.</p>"
+      }
     },
     "AssociateIamInstanceProfileRequest": {
       "type": "structure",
@@ -4251,8 +4246,7 @@
           "documentation": "<p>The ID of the subnet.</p>",
           "locationName": "subnetId"
         }
-      },
-      "documentation": "<p>Contains the parameters for AssociateRouteTable.</p>"
+      }
     },
     "AssociateRouteTableResult": {
       "type": "structure",
@@ -4262,8 +4256,7 @@
           "documentation": "<p>The route table association ID. This ID is required for disassociating the route table.</p>",
           "locationName": "associationId"
         }
-      },
-      "documentation": "<p>Contains the output of AssociateRouteTable.</p>"
+      }
     },
     "AssociateSubnetCidrBlockRequest": {
       "type": "structure",
@@ -4376,8 +4369,7 @@
           "documentation": "<p>The ID of a ClassicLink-enabled VPC.</p>",
           "locationName": "vpcId"
         }
-      },
-      "documentation": "<p>Contains the parameters for AttachClassicLinkVpc.</p>"
+      }
     },
     "AttachClassicLinkVpcResult": {
       "type": "structure",
@@ -4387,8 +4379,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of AttachClassicLinkVpc.</p>"
+      }
     },
     "AttachInternetGatewayRequest": {
       "type": "structure",
@@ -4412,8 +4403,7 @@
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
         }
-      },
-      "documentation": "<p>Contains the parameters for AttachInternetGateway.</p>"
+      }
     },
     "AttachNetworkInterfaceRequest": {
       "type": "structure",
@@ -4601,8 +4591,7 @@
           "documentation": "<p>Not supported. Use a set of IP permissions to specify a destination security group.</p>",
           "locationName": "sourceSecurityGroupOwnerId"
         }
-      },
-      "documentation": "<p>Contains the parameters for AuthorizeSecurityGroupEgress.</p>"
+      }
     },
     "AuthorizeSecurityGroupIngressRequest": {
       "type": "structure",
@@ -4648,8 +4637,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for AuthorizeSecurityGroupIngress.</p>"
+      }
     },
     "AutoPlacement": {
       "type": "string",
@@ -5618,7 +5606,7 @@
         },
         "Encrypted": {
           "shape": "Boolean",
-          "documentation": "<p>Specifies whether the destination snapshots of the copied image should be encrypted. The default CMK for EBS is used unless a non-default AWS Key Management Service (AWS KMS) CMK is specified with <code>KmsKeyId</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "documentation": "<p>Specifies whether the destination snapshots of the copied image should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an encrypted snapshot. The default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using <code>KmsKeyId</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName": "encrypted"
         },
         "KmsKeyId": {
@@ -5675,7 +5663,7 @@
         },
         "Encrypted": {
           "shape": "Boolean",
-          "documentation": "<p>Specifies whether the destination snapshot should be encrypted. You can encrypt a copy of an unencrypted snapshot using this flag, but you cannot use it to create an unencrypted copy from an encrypted snapshot. Your default CMK for EBS is used unless a non-default AWS Key Management Service (AWS KMS) CMK is specified with <code>KmsKeyId</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "documentation": "<p>Specifies whether the destination snapshot should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot use it to create an unencrypted copy of an encrypted snapshot. Your default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using <code>KmsKeyId</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName": "encrypted"
         },
         "KmsKeyId": {
@@ -5818,8 +5806,7 @@
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateDefaultVpc.</p>"
+      }
     },
     "CreateDefaultVpcResult": {
       "type": "structure",
@@ -5829,8 +5816,7 @@
           "documentation": "<p>Information about the VPC.</p>",
           "locationName": "vpc"
         }
-      },
-      "documentation": "<p>Contains the output of CreateDefaultVpc.</p>"
+      }
     },
     "CreateDhcpOptionsRequest": {
       "type": "structure",
@@ -5848,8 +5834,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateDhcpOptions.</p>"
+      }
     },
     "CreateDhcpOptionsResult": {
       "type": "structure",
@@ -5859,8 +5844,7 @@
           "documentation": "<p>A set of DHCP options.</p>",
           "locationName": "dhcpOptions"
         }
-      },
-      "documentation": "<p>Contains the output of CreateDhcpOptions.</p>"
+      }
     },
     "CreateEgressOnlyInternetGatewayRequest": {
       "type": "structure",
@@ -6014,8 +5998,7 @@
           "shape": "String",
           "documentation": "<p>Specifies the destination to which the flow log data is to be published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType.</p> <p>If LogDestinationType is not specified or <code>cloud-watch-logs</code>, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group.</p> <p>If LogDestinationType is <code>s3</code>, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: <code>bucket_ARN/subfolder_name/</code>. For example, to specify a subfolder named <code>my-logs</code> in a bucket named <code>my-bucket</code>, use the following ARN: <code>arn:aws:s3:::my-bucket/my-logs/</code>.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateFlowLogs.</p>"
+      }
     },
     "CreateFlowLogsResult": {
       "type": "structure",
@@ -6035,8 +6018,7 @@
           "documentation": "<p>Information about the flow logs that could not be created successfully.</p>",
           "locationName": "unsuccessful"
         }
-      },
-      "documentation": "<p>Contains the output of CreateFlowLogs.</p>"
+      }
     },
     "CreateFpgaImageRequest": {
       "type": "structure",
@@ -6184,8 +6166,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateInternetGateway.</p>"
+      }
     },
     "CreateInternetGatewayResult": {
       "type": "structure",
@@ -6195,8 +6176,7 @@
           "documentation": "<p>Information about the internet gateway.</p>",
           "locationName": "internetGateway"
         }
-      },
-      "documentation": "<p>Contains the output of CreateInternetGateway.</p>"
+      }
     },
     "CreateKeyPairRequest": {
       "type": "structure",
@@ -6213,8 +6193,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateKeyPair.</p>"
+      }
     },
     "CreateLaunchTemplateRequest": {
       "type": "structure",
@@ -6320,8 +6299,7 @@
           "shape": "String",
           "documentation": "<p>The subnet in which to create the NAT gateway.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateNatGateway.</p>"
+      }
     },
     "CreateNatGatewayResult": {
       "type": "structure",
@@ -6336,8 +6314,7 @@
           "documentation": "<p>Information about the NAT gateway.</p>",
           "locationName": "natGateway"
         }
-      },
-      "documentation": "<p>Contains the output of CreateNatGateway.</p>"
+      }
     },
     "CreateNetworkAclEntryRequest": {
       "type": "structure",
@@ -6399,8 +6376,7 @@
           "documentation": "<p>The rule number for the entry (for example, 100). ACL entries are processed in ascending order by rule number.</p> <p>Constraints: Positive integer from 1 to 32766. The range 32767 to 65535 is reserved for internal use.</p>",
           "locationName": "ruleNumber"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateNetworkAclEntry.</p>"
+      }
     },
     "CreateNetworkAclRequest": {
       "type": "structure",
@@ -6418,8 +6394,7 @@
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateNetworkAcl.</p>"
+      }
     },
     "CreateNetworkAclResult": {
       "type": "structure",
@@ -6429,8 +6404,7 @@
           "documentation": "<p>Information about the network ACL.</p>",
           "locationName": "networkAcl"
         }
-      },
-      "documentation": "<p>Contains the output of CreateNetworkAcl.</p>"
+      }
     },
     "CreateNetworkInterfacePermissionRequest": {
       "type": "structure",
@@ -6662,8 +6636,7 @@
           "documentation": "<p>The ID of a VPC peering connection.</p>",
           "locationName": "vpcPeeringConnectionId"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateRoute.</p>"
+      }
     },
     "CreateRouteResult": {
       "type": "structure",
@@ -6673,8 +6646,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of CreateRoute.</p>"
+      }
     },
     "CreateRouteTableRequest": {
       "type": "structure",
@@ -6692,8 +6664,7 @@
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateRouteTable.</p>"
+      }
     },
     "CreateRouteTableResult": {
       "type": "structure",
@@ -6703,8 +6674,7 @@
           "documentation": "<p>Information about the route table.</p>",
           "locationName": "routeTable"
         }
-      },
-      "documentation": "<p>Contains the output of CreateRouteTable.</p>"
+      }
     },
     "CreateSecurityGroupRequest": {
       "type": "structure",
@@ -6731,8 +6701,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateSecurityGroup.</p>"
+      }
     },
     "CreateSecurityGroupResult": {
       "type": "structure",
@@ -6742,8 +6711,7 @@
           "documentation": "<p>The ID of the security group.</p>",
           "locationName": "groupId"
         }
-      },
-      "documentation": "<p>Contains the output of CreateSecurityGroup.</p>"
+      }
     },
     "CreateSnapshotRequest": {
       "type": "structure",
@@ -6835,8 +6803,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateSubnet.</p>"
+      }
     },
     "CreateSubnetResult": {
       "type": "structure",
@@ -6846,8 +6813,7 @@
           "documentation": "<p>Information about the subnet.</p>",
           "locationName": "subnet"
         }
-      },
-      "documentation": "<p>Contains the output of CreateSubnet.</p>"
+      }
     },
     "CreateTagsRequest": {
       "type": "structure",
@@ -6871,8 +6837,7 @@
           "documentation": "<p>One or more tags. The <code>value</code> parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. </p>",
           "locationName": "Tag"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateTags.</p>"
+      }
     },
     "CreateVolumePermission": {
       "type": "structure",
@@ -7055,7 +7020,7 @@
         },
         "PrivateDnsEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>(Interface endpoint) Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the region (for example, <code>kinesis.us-east-1.amazonaws.com</code>) which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service.</p> <p>To use a private hosted zone, you must set the following VPC attributes to <code>true</code>: <code>enableDnsHostnames</code> and <code>enableDnsSupport</code>. Use <a>ModifyVpcAttribute</a> to set the VPC attributes.</p> <p>Default: <code>true</code> </p>"
+          "documentation": "<p>(Interface endpoint) Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the region (for example, <code>kinesis.us-east-1.amazonaws.com</code>) which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service.</p> <p>To use a private hosted zone, you must set the following VPC attributes to <code>true</code>: <code>enableDnsHostnames</code> and <code>enableDnsSupport</code>. Use <a>ModifyVpcAttribute</a> to set the VPC attributes.</p> <p>Default: <code>false</code> </p>"
         }
       },
       "documentation": "<p>Contains the parameters for CreateVpcEndpoint.</p>"
@@ -7143,8 +7108,7 @@
           "shape": "String",
           "documentation": "<p>The region code for the accepter VPC, if the accepter VPC is located in a region other than the region in which you make the request.</p> <p>Default: The region in which you make the request.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateVpcPeeringConnection.</p>"
+      }
     },
     "CreateVpcPeeringConnectionResult": {
       "type": "structure",
@@ -7154,8 +7118,7 @@
           "documentation": "<p>Information about the VPC peering connection.</p>",
           "locationName": "vpcPeeringConnection"
         }
-      },
-      "documentation": "<p>Contains the output of CreateVpcPeeringConnection.</p>"
+      }
     },
     "CreateVpcRequest": {
       "type": "structure",
@@ -7182,8 +7145,7 @@
           "documentation": "<p>The tenancy options for instances launched into the VPC. For <code>default</code>, instances are launched with shared tenancy by default. You can launch instances with any tenancy into a shared tenancy VPC. For <code>dedicated</code>, instances are launched as dedicated tenancy instances by default. You can only launch instances with a tenancy of <code>dedicated</code> or <code>host</code> into a dedicated tenancy VPC. </p> <p> <b>Important:</b> The <code>host</code> value cannot be used with this parameter. Use the <code>default</code> or <code>dedicated</code> values only.</p> <p>Default: <code>default</code> </p>",
           "locationName": "instanceTenancy"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateVpc.</p>"
+      }
     },
     "CreateVpcResult": {
       "type": "structure",
@@ -7193,8 +7155,7 @@
           "documentation": "<p>Information about the VPC.</p>",
           "locationName": "vpc"
         }
-      },
-      "documentation": "<p>Contains the output of CreateVpc.</p>"
+      }
     },
     "CreateVpnConnectionRequest": {
       "type": "structure",
@@ -7300,11 +7261,11 @@
       "members": {
         "CpuCredits": {
           "shape": "String",
-          "documentation": "<p>The credit option for CPU usage of a T2 instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>",
+          "documentation": "<p>The credit option for CPU usage of a T2 or T3 instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>",
           "locationName": "cpuCredits"
         }
       },
-      "documentation": "<p>Describes the credit option for CPU usage of a T2 instance.</p>"
+      "documentation": "<p>Describes the credit option for CPU usage of a T2 or T3 instance.</p>"
     },
     "CreditSpecificationRequest": {
       "type": "structure",
@@ -7314,10 +7275,10 @@
       "members": {
         "CpuCredits": {
           "shape": "String",
-          "documentation": "<p>The credit option for CPU usage of a T2 instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>"
+          "documentation": "<p>The credit option for CPU usage of a T2 or T3 instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>"
         }
       },
-      "documentation": "<p>The credit option for CPU usage of a T2 instance.</p>"
+      "documentation": "<p>The credit option for CPU usage of a T2 or T3 instance.</p>"
     },
     "CurrencyCodeValues": {
       "type": "string",
@@ -7425,8 +7386,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteDhcpOptions.</p>"
+      }
     },
     "DeleteEgressOnlyInternetGatewayRequest": {
       "type": "structure",
@@ -7582,8 +7542,7 @@
           "documentation": "<p>One or more flow log IDs.</p>",
           "locationName": "FlowLogId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteFlowLogs.</p>"
+      }
     },
     "DeleteFlowLogsResult": {
       "type": "structure",
@@ -7593,8 +7552,7 @@
           "documentation": "<p>Information about the flow logs that could not be deleted successfully.</p>",
           "locationName": "unsuccessful"
         }
-      },
-      "documentation": "<p>Contains the output of DeleteFlowLogs.</p>"
+      }
     },
     "DeleteFpgaImageRequest": {
       "type": "structure",
@@ -7638,8 +7596,7 @@
           "documentation": "<p>The ID of the internet gateway.</p>",
           "locationName": "internetGatewayId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteInternetGateway.</p>"
+      }
     },
     "DeleteKeyPairRequest": {
       "type": "structure",
@@ -7656,8 +7613,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteKeyPair.</p>"
+      }
     },
     "DeleteLaunchTemplateRequest": {
       "type": "structure",
@@ -7797,8 +7753,7 @@
           "shape": "String",
           "documentation": "<p>The ID of the NAT gateway.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteNatGateway.</p>"
+      }
     },
     "DeleteNatGatewayResult": {
       "type": "structure",
@@ -7808,8 +7763,7 @@
           "documentation": "<p>The ID of the NAT gateway.</p>",
           "locationName": "natGatewayId"
         }
-      },
-      "documentation": "<p>Contains the output of DeleteNatGateway.</p>"
+      }
     },
     "DeleteNetworkAclEntryRequest": {
       "type": "structure",
@@ -7839,8 +7793,7 @@
           "documentation": "<p>The rule number of the entry to delete.</p>",
           "locationName": "ruleNumber"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteNetworkAclEntry.</p>"
+      }
     },
     "DeleteNetworkAclRequest": {
       "type": "structure",
@@ -7858,8 +7811,7 @@
           "documentation": "<p>The ID of the network ACL.</p>",
           "locationName": "networkAclId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteNetworkAcl.</p>"
+      }
     },
     "DeleteNetworkInterfacePermissionRequest": {
       "type": "structure",
@@ -7957,8 +7909,7 @@
           "documentation": "<p>The ID of the route table.</p>",
           "locationName": "routeTableId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteRoute.</p>"
+      }
     },
     "DeleteRouteTableRequest": {
       "type": "structure",
@@ -7976,8 +7927,7 @@
           "documentation": "<p>The ID of the route table.</p>",
           "locationName": "routeTableId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteRouteTable.</p>"
+      }
     },
     "DeleteSecurityGroupRequest": {
       "type": "structure",
@@ -7995,8 +7945,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteSecurityGroup.</p>"
+      }
     },
     "DeleteSnapshotRequest": {
       "type": "structure",
@@ -8042,8 +7991,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteSubnet.</p>"
+      }
     },
     "DeleteTagsRequest": {
       "type": "structure",
@@ -8066,8 +8014,7 @@
           "documentation": "<p>One or more tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string.</p> <p>If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the <code>aws:</code> prefix).</p>",
           "locationName": "tag"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteTags.</p>"
+      }
     },
     "DeleteVolumeRequest": {
       "type": "structure",
@@ -8186,8 +8133,7 @@
           "documentation": "<p>The ID of the VPC peering connection.</p>",
           "locationName": "vpcPeeringConnectionId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteVpcPeeringConnection.</p>"
+      }
     },
     "DeleteVpcPeeringConnectionResult": {
       "type": "structure",
@@ -8197,8 +8143,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of DeleteVpcPeeringConnection.</p>"
+      }
     },
     "DeleteVpcRequest": {
       "type": "structure",
@@ -8215,8 +8160,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteVpc.</p>"
+      }
     },
     "DeleteVpnConnectionRequest": {
       "type": "structure",
@@ -8470,8 +8414,7 @@
           "documentation": "<p>The token to retrieve the next page of results.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeClassicLinkInstances.</p>"
+      }
     },
     "DescribeClassicLinkInstancesResult": {
       "type": "structure",
@@ -8486,8 +8429,7 @@
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeClassicLinkInstances.</p>"
+      }
     },
     "DescribeConversionTaskList": {
       "type": "list",
@@ -8573,8 +8515,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeDhcpOptions.</p>"
+      }
     },
     "DescribeDhcpOptionsResult": {
       "type": "structure",
@@ -8584,8 +8525,7 @@
           "documentation": "<p>Information about one or more DHCP options sets.</p>",
           "locationName": "dhcpOptionsSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeDhcpOptions.</p>"
+      }
     },
     "DescribeEgressOnlyInternetGatewaysRequest": {
       "type": "structure",
@@ -8871,8 +8811,7 @@
           "shape": "String",
           "documentation": "<p>The token to retrieve the next page of results.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeFlowLogs.</p>"
+      }
     },
     "DescribeFlowLogsResult": {
       "type": "structure",
@@ -8887,8 +8826,7 @@
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeFlowLogs.</p>"
+      }
     },
     "DescribeFpgaImageAttributeRequest": {
       "type": "structure",
@@ -9025,7 +8963,7 @@
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500.If <code>maxResults</code> is given a larger value than 500, you receive an error.</p>"
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -9071,8 +9009,7 @@
           "documentation": "<p>The token to retrieve the next page of results.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeHosts.</p>"
+      }
     },
     "DescribeHostsResult": {
       "type": "structure",
@@ -9087,8 +9024,7 @@
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeHosts.</p>"
+      }
     },
     "DescribeIamInstanceProfileAssociationsRequest": {
       "type": "structure",
@@ -9512,8 +9448,7 @@
           "documentation": "<p>One or more internet gateway IDs.</p> <p>Default: Describes all your internet gateways.</p>",
           "locationName": "internetGatewayId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeInternetGateways.</p>"
+      }
     },
     "DescribeInternetGatewaysResult": {
       "type": "structure",
@@ -9523,8 +9458,7 @@
           "documentation": "<p>Information about one or more internet gateways.</p>",
           "locationName": "internetGatewaySet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeInternetGateways.</p>"
+      }
     },
     "DescribeKeyPairsRequest": {
       "type": "structure",
@@ -9544,8 +9478,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeKeyPairs.</p>"
+      }
     },
     "DescribeKeyPairsResult": {
       "type": "structure",
@@ -9555,8 +9488,7 @@
           "documentation": "<p>Information about one or more key pairs.</p>",
           "locationName": "keySet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeKeyPairs.</p>"
+      }
     },
     "DescribeLaunchTemplateVersionsRequest": {
       "type": "structure",
@@ -9730,8 +9662,7 @@
           "shape": "String",
           "documentation": "<p>The token to retrieve the next page of results.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeNatGateways.</p>"
+      }
     },
     "DescribeNatGatewaysResult": {
       "type": "structure",
@@ -9746,15 +9677,14 @@
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeNatGateways.</p>"
+      }
     },
     "DescribeNetworkAclsRequest": {
       "type": "structure",
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>association.association-id</code> - The ID of an association ID for the ACL.</p> </li> <li> <p> <code>association.network-acl-id</code> - The ID of the network ACL involved in the association.</p> </li> <li> <p> <code>association.subnet-id</code> - The ID of the subnet involved in the association.</p> </li> <li> <p> <code>default</code> - Indicates whether the ACL is the default network ACL for the VPC.</p> </li> <li> <p> <code>entry.cidr</code> - The IPv4 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.egress</code> - Indicates whether the entry applies to egress traffic.</p> </li> <li> <p> <code>entry.icmp.code</code> - The ICMP code specified in the entry, if any.</p> </li> <li> <p> <code>entry.icmp.type</code> - The ICMP type specified in the entry, if any.</p> </li> <li> <p> <code>entry.ipv6-cidr</code> - The IPv6 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.port-range.from</code> - The start of the port range specified in the entry. </p> </li> <li> <p> <code>entry.port-range.to</code> - The end of the port range specified in the entry. </p> </li> <li> <p> <code>entry.protocol</code> - The protocol specified in the entry (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>entry.rule-action</code> - Allows or denies the matching traffic (<code>allow</code> | <code>deny</code>).</p> </li> <li> <p> <code>entry.rule-number</code> - The number of an entry (in other words, rule) in the ACL's set of entries.</p> </li> <li> <p> <code>network-acl-id</code> - The ID of the network ACL.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network ACL.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>association.association-id</code> - The ID of an association ID for the ACL.</p> </li> <li> <p> <code>association.network-acl-id</code> - The ID of the network ACL involved in the association.</p> </li> <li> <p> <code>association.subnet-id</code> - The ID of the subnet involved in the association.</p> </li> <li> <p> <code>default</code> - Indicates whether the ACL is the default network ACL for the VPC.</p> </li> <li> <p> <code>entry.cidr</code> - The IPv4 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.icmp.code</code> - The ICMP code specified in the entry, if any.</p> </li> <li> <p> <code>entry.icmp.type</code> - The ICMP type specified in the entry, if any.</p> </li> <li> <p> <code>entry.ipv6-cidr</code> - The IPv6 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.port-range.from</code> - The start of the port range specified in the entry. </p> </li> <li> <p> <code>entry.port-range.to</code> - The end of the port range specified in the entry. </p> </li> <li> <p> <code>entry.protocol</code> - The protocol specified in the entry (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>entry.rule-action</code> - Allows or denies the matching traffic (<code>allow</code> | <code>deny</code>).</p> </li> <li> <p> <code>entry.rule-number</code> - The number of an entry (in other words, rule) in the set of ACL entries.</p> </li> <li> <p> <code>network-acl-id</code> - The ID of the network ACL.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network ACL.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "DryRun": {
@@ -9767,8 +9697,7 @@
           "documentation": "<p>One or more network ACL IDs.</p> <p>Default: Describes all your network ACLs.</p>",
           "locationName": "NetworkAclId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeNetworkAcls.</p>"
+      }
     },
     "DescribeNetworkAclsResult": {
       "type": "structure",
@@ -9778,8 +9707,7 @@
           "documentation": "<p>Information about one or more network ACLs.</p>",
           "locationName": "networkAclSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeNetworkAcls.</p>"
+      }
     },
     "DescribeNetworkInterfaceAttributeRequest": {
       "type": "structure",
@@ -9893,6 +9821,14 @@
           "shape": "NetworkInterfaceIdList",
           "documentation": "<p>One or more network interface IDs.</p> <p>Default: Describes all your network interfaces.</p>",
           "locationName": "NetworkInterfaceId"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to retrieve the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p>"
         }
       },
       "documentation": "<p>Contains the parameters for DescribeNetworkInterfaces.</p>"
@@ -9904,6 +9840,11 @@
           "shape": "NetworkInterfaceList",
           "documentation": "<p>Information about one or more network interfaces.</p>",
           "locationName": "networkInterfaceSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
         }
       },
       "documentation": "<p>Contains the output of DescribeNetworkInterfaces.</p>"
@@ -9965,8 +9906,7 @@
           "documentation": "<p>One or more prefix list IDs.</p>",
           "locationName": "PrefixListId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribePrefixLists.</p>"
+      }
     },
     "DescribePrefixListsResult": {
       "type": "structure",
@@ -9981,8 +9921,7 @@
           "documentation": "<p>All available prefix lists.</p>",
           "locationName": "prefixListSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribePrefixLists.</p>"
+      }
     },
     "DescribePrincipalIdFormatRequest": {
       "type": "structure",
@@ -10270,8 +10209,7 @@
           "documentation": "<p>One or more route table IDs.</p> <p>Default: Describes all your route tables.</p>",
           "locationName": "RouteTableId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeRouteTables.</p>"
+      }
     },
     "DescribeRouteTablesResult": {
       "type": "structure",
@@ -10281,8 +10219,7 @@
           "documentation": "<p>Information about one or more route tables.</p>",
           "locationName": "routeTableSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeRouteTables.</p>"
+      }
     },
     "DescribeScheduledInstanceAvailabilityRequest": {
       "type": "structure",
@@ -10399,7 +10336,7 @@
       "members": {
         "DryRun": {
           "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.</p>"
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
         "GroupId": {
           "shape": "GroupIds",
@@ -10448,8 +10385,7 @@
           "shape": "Integer",
           "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeSecurityGroups.</p>"
+      }
     },
     "DescribeSecurityGroupsResult": {
       "type": "structure",
@@ -10464,8 +10400,7 @@
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeSecurityGroups.</p>"
+      }
     },
     "DescribeSnapshotAttributeRequest": {
       "type": "structure",
@@ -10871,7 +10806,7 @@
       "members": {
         "DryRun": {
           "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.</p>"
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -10920,8 +10855,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeSubnets.</p>"
+      }
     },
     "DescribeSubnetsResult": {
       "type": "structure",
@@ -10931,8 +10865,7 @@
           "documentation": "<p>Information about one or more subnets.</p>",
           "locationName": "subnetSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeSubnets.</p>"
+      }
     },
     "DescribeTagsRequest": {
       "type": "structure",
@@ -10944,7 +10877,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The resource ID.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of the tag. For example, specify \"tag:Owner\" for the filter name and \"TeamA\" for the filter value to find resources with the tag \"Owner=TeamA\".</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -10957,8 +10890,7 @@
           "documentation": "<p>The token to retrieve the next page of results.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeTags.</p>"
+      }
     },
     "DescribeTagsResult": {
       "type": "structure",
@@ -10970,11 +10902,10 @@
         },
         "Tags": {
           "shape": "TagDescriptionList",
-          "documentation": "<p>A list of tags.</p>",
+          "documentation": "<p>The tags.</p>",
           "locationName": "tagSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeTags.</p>"
+      }
     },
     "DescribeVolumeAttributeRequest": {
       "type": "structure",
@@ -11174,8 +11105,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeVpcAttribute.</p>"
+      }
     },
     "DescribeVpcAttributeResult": {
       "type": "structure",
@@ -11195,8 +11125,7 @@
           "documentation": "<p>Indicates whether DNS resolution is enabled for the VPC. If this attribute is <code>true</code>, the Amazon DNS server resolves DNS hostnames for your instances to their corresponding IP addresses; otherwise, it does not.</p>",
           "locationName": "enableDnsSupport"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeVpcAttribute.</p>"
+      }
     },
     "DescribeVpcClassicLinkDnsSupportRequest": {
       "type": "structure",
@@ -11215,8 +11144,7 @@
           "shape": "VpcClassicLinkIdList",
           "documentation": "<p>One or more VPC IDs.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeVpcClassicLinkDnsSupport.</p>"
+      }
     },
     "DescribeVpcClassicLinkDnsSupportResult": {
       "type": "structure",
@@ -11231,8 +11159,7 @@
           "documentation": "<p>Information about the ClassicLink DNS support status of the VPCs.</p>",
           "locationName": "vpcs"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeVpcClassicLinkDnsSupport.</p>"
+      }
     },
     "DescribeVpcClassicLinkRequest": {
       "type": "structure",
@@ -11252,8 +11179,7 @@
           "documentation": "<p>One or more VPCs for which you want to describe the ClassicLink status.</p>",
           "locationName": "VpcId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeVpcClassicLink.</p>"
+      }
     },
     "DescribeVpcClassicLinkResult": {
       "type": "structure",
@@ -11263,8 +11189,7 @@
           "documentation": "<p>The ClassicLink status of one or more VPCs.</p>",
           "locationName": "vpcSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeVpcClassicLink.</p>"
+      }
     },
     "DescribeVpcEndpointConnectionNotificationsRequest": {
       "type": "structure",
@@ -11541,8 +11466,7 @@
           "documentation": "<p>One or more VPC peering connection IDs.</p> <p>Default: Describes all your VPC peering connections.</p>",
           "locationName": "VpcPeeringConnectionId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeVpcPeeringConnections.</p>"
+      }
     },
     "DescribeVpcPeeringConnectionsResult": {
       "type": "structure",
@@ -11552,8 +11476,7 @@
           "documentation": "<p>Information about the VPC peering connections.</p>",
           "locationName": "vpcPeeringConnectionSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeVpcPeeringConnections.</p>"
+      }
     },
     "DescribeVpcsRequest": {
       "type": "structure",
@@ -11573,8 +11496,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeVpcs.</p>"
+      }
     },
     "DescribeVpcsResult": {
       "type": "structure",
@@ -11584,8 +11506,7 @@
           "documentation": "<p>Information about one or more VPCs.</p>",
           "locationName": "vpcSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeVpcs.</p>"
+      }
     },
     "DescribeVpnConnectionsRequest": {
       "type": "structure",
@@ -11673,8 +11594,7 @@
           "documentation": "<p>The ID of the VPC to which the instance is linked.</p>",
           "locationName": "vpcId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DetachClassicLinkVpc.</p>"
+      }
     },
     "DetachClassicLinkVpcResult": {
       "type": "structure",
@@ -11684,8 +11604,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of DetachClassicLinkVpc.</p>"
+      }
     },
     "DetachInternetGatewayRequest": {
       "type": "structure",
@@ -11709,8 +11628,7 @@
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DetachInternetGateway.</p>"
+      }
     },
     "DetachNetworkInterfaceRequest": {
       "type": "structure",
@@ -11886,8 +11804,7 @@
           "shape": "String",
           "documentation": "<p>The ID of the VPC.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for DisableVpcClassicLinkDnsSupport.</p>"
+      }
     },
     "DisableVpcClassicLinkDnsSupportResult": {
       "type": "structure",
@@ -11897,8 +11814,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of DisableVpcClassicLinkDnsSupport.</p>"
+      }
     },
     "DisableVpcClassicLinkRequest": {
       "type": "structure",
@@ -11916,8 +11832,7 @@
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DisableVpcClassicLink.</p>"
+      }
     },
     "DisableVpcClassicLinkResult": {
       "type": "structure",
@@ -11927,8 +11842,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of DisableVpcClassicLink.</p>"
+      }
     },
     "DisassociateAddressRequest": {
       "type": "structure",
@@ -11987,8 +11901,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DisassociateRouteTable.</p>"
+      }
     },
     "DisassociateSubnetCidrBlockRequest": {
       "type": "structure",
@@ -12187,11 +12100,6 @@
     "EbsBlockDevice": {
       "type": "structure",
       "members": {
-        "Encrypted": {
-          "shape": "Boolean",
-          "documentation": "<p>Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value. This is because only blank volumes can be encrypted on creation.</p>",
-          "locationName": "encrypted"
-        },
         "DeleteOnTermination": {
           "shape": "Boolean",
           "documentation": "<p>Indicates whether the EBS volume is deleted on instance termination.</p>",
@@ -12201,10 +12109,6 @@
           "shape": "Integer",
           "documentation": "<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code>, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code>, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraint: Range is 100-20000 IOPS for <code>io1</code> volumes and 100-10000 IOPS for <code>gp2</code> volumes.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>",
           "locationName": "iops"
-        },
-        "KmsKeyId": {
-          "shape": "String",
-          "documentation": "<p>Identifier (key ID, key alias, ID ARN, or alias ARN) for a user-managed CMK under which the EBS volume is encrypted.</p> <p>This parameter is only supported on <code>BlockDeviceMapping</code> objects called by <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html\">RunInstances</a>, <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html\">RequestSpotFleet</a>, and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">RequestSpotInstances</a>.</p>"
         },
         "SnapshotId": {
           "shape": "String",
@@ -12220,6 +12124,15 @@
           "shape": "VolumeType",
           "documentation": "<p>The volume type: <code>gp2</code>, <code>io1</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code>.</p> <p>Default: <code>standard</code> </p>",
           "locationName": "volumeType"
+        },
+        "Encrypted": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value. This is because only blank volumes can be encrypted on creation.</p>",
+          "locationName": "encrypted"
+        },
+        "KmsKeyId": {
+          "shape": "String",
+          "documentation": "<p>Identifier (key ID, key alias, ID ARN, or alias ARN) for a user-managed CMK under which the EBS volume is encrypted.</p> <p>This parameter is only supported on <code>BlockDeviceMapping</code> objects called by <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html\">RunInstances</a>, <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html\">RequestSpotFleet</a>, and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">RequestSpotInstances</a>.</p>"
         }
       },
       "documentation": "<p>Describes a block device for an EBS volume.</p>"
@@ -12495,8 +12408,7 @@
           "shape": "String",
           "documentation": "<p>The ID of the VPC.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for EnableVpcClassicLinkDnsSupport.</p>"
+      }
     },
     "EnableVpcClassicLinkDnsSupportResult": {
       "type": "structure",
@@ -12506,8 +12418,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of EnableVpcClassicLinkDnsSupport.</p>"
+      }
     },
     "EnableVpcClassicLinkRequest": {
       "type": "structure",
@@ -12525,8 +12436,7 @@
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
         }
-      },
-      "documentation": "<p>Contains the parameters for EnableVpcClassicLink.</p>"
+      }
     },
     "EnableVpcClassicLinkResult": {
       "type": "structure",
@@ -12536,8 +12446,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of EnableVpcClassicLink.</p>"
+      }
     },
     "EventCode": {
       "type": "string",
@@ -13003,7 +12912,7 @@
         },
         "Version": {
           "shape": "String",
-          "documentation": "<p>The version number. By default, the default version of the launch template is used.</p>",
+          "documentation": "<p>The version number of the launch template. You must specify a version number.</p>",
           "locationName": "version"
         }
       },
@@ -14705,8 +14614,7 @@
           "documentation": "<p>The public key. For API calls, the text must be base64-encoded. For command line tools, base64 encoding is performed for you.</p>",
           "locationName": "publicKeyMaterial"
         }
-      },
-      "documentation": "<p>Contains the parameters for ImportKeyPair.</p>"
+      }
     },
     "ImportKeyPairResult": {
       "type": "structure",
@@ -14721,8 +14629,7 @@
           "documentation": "<p>The key pair name you provided.</p>",
           "locationName": "keyName"
         }
-      },
-      "documentation": "<p>Contains the output of ImportKeyPair.</p>"
+      }
     },
     "ImportSnapshotRequest": {
       "type": "structure",
@@ -15308,7 +15215,7 @@
           "locationName": "cpuCredits"
         }
       },
-      "documentation": "<p>Describes the credit option for CPU usage of a T2 instance. </p>"
+      "documentation": "<p>Describes the credit option for CPU usage of a T2 or T3 instance. </p>"
     },
     "InstanceCreditSpecificationList": {
       "type": "list",
@@ -15336,7 +15243,7 @@
           "documentation": "<p>The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>"
         }
       },
-      "documentation": "<p>Describes the credit option for CPU usage of a T2 instance.</p>"
+      "documentation": "<p>Describes the credit option for CPU usage of a T2 or T3 instance.</p>"
     },
     "InstanceExportDetails": {
       "type": "structure",
@@ -16138,7 +16045,7 @@
         },
         "PrefixListIds": {
           "shape": "PrefixListIdList",
-          "documentation": "<p>(EC2-VPC only; valid for <a>AuthorizeSecurityGroupEgress</a>, <a>RevokeSecurityGroupEgress</a> and <a>DescribeSecurityGroups</a> only) One or more prefix list IDs for an AWS service. In an <a>AuthorizeSecurityGroupEgress</a> request, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.</p>",
+          "documentation": "<p>[EC2-VPC only] One or more prefix list IDs for an AWS service. With <a>AuthorizeSecurityGroupEgress</a>, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.</p>",
           "locationName": "prefixListIds"
         },
         "ToPort": {
@@ -17403,8 +17310,7 @@
           "documentation": "<p>The IDs of the Dedicated Hosts to modify.</p>",
           "locationName": "hostId"
         }
-      },
-      "documentation": "<p>Contains the parameters for ModifyHosts.</p>"
+      }
     },
     "ModifyHostsResult": {
       "type": "structure",
@@ -17419,8 +17325,7 @@
           "documentation": "<p>The IDs of the Dedicated Hosts that could not be modified. Check whether the setting you requested can be used.</p>",
           "locationName": "unsuccessful"
         }
-      },
-      "documentation": "<p>Contains the output of ModifyHosts.</p>"
+      }
     },
     "ModifyIdFormatRequest": {
       "type": "structure",
@@ -17673,8 +17578,7 @@
           "documentation": "<p>The tenancy for the instance.</p>",
           "locationName": "tenancy"
         }
-      },
-      "documentation": "<p>Contains the parameters for ModifyInstancePlacement.</p>"
+      }
     },
     "ModifyInstancePlacementResult": {
       "type": "structure",
@@ -17684,8 +17588,7 @@
           "documentation": "<p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of ModifyInstancePlacement.</p>"
+      }
     },
     "ModifyLaunchTemplateRequest": {
       "type": "structure",
@@ -17892,8 +17795,7 @@
           "documentation": "<p>The ID of the subnet.</p>",
           "locationName": "subnetId"
         }
-      },
-      "documentation": "<p>Contains the parameters for ModifySubnetAttribute.</p>"
+      }
     },
     "ModifyVolumeAttributeRequest": {
       "type": "structure",
@@ -17974,8 +17876,7 @@
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
         }
-      },
-      "documentation": "<p>Contains the parameters for ModifyVpcAttribute.</p>"
+      }
     },
     "ModifyVpcEndpointConnectionNotificationRequest": {
       "type": "structure",
@@ -18166,7 +18067,7 @@
         },
         "DryRun": {
           "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
         "RequesterPeeringConnectionOptions": {
           "shape": "PeeringConnectionOptionsRequest",
@@ -18210,10 +18111,9 @@
         },
         "DryRun": {
           "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for ModifyVpcTenancy.</p>"
+      }
     },
     "ModifyVpcTenancyResult": {
       "type": "structure",
@@ -18223,8 +18123,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of ModifyVpcTenancy.</p>"
+      }
     },
     "MonitorInstancesRequest": {
       "type": "structure",
@@ -19074,12 +18973,12 @@
         },
         "AllowEgressFromLocalClassicLinkToRemoteVpc": {
           "shape": "Boolean",
-          "documentation": "<p>If true, enables outbound communication from an EC2-Classic instance that's linked to a local VPC via ClassicLink to instances in a peer VPC.</p>",
+          "documentation": "<p>If true, enables outbound communication from an EC2-Classic instance that's linked to a local VPC using ClassicLink to instances in a peer VPC.</p>",
           "locationName": "allowEgressFromLocalClassicLinkToRemoteVpc"
         },
         "AllowEgressFromLocalVpcToRemoteClassicLink": {
           "shape": "Boolean",
-          "documentation": "<p>If true, enables outbound communication from instances in a local VPC to an EC2-Classic instance that's linked to a peer VPC via ClassicLink.</p>",
+          "documentation": "<p>If true, enables outbound communication from instances in a local VPC to an EC2-Classic instance that's linked to a peer VPC using ClassicLink.</p>",
           "locationName": "allowEgressFromLocalVpcToRemoteClassicLink"
         }
       },
@@ -19094,11 +18993,11 @@
         },
         "AllowEgressFromLocalClassicLinkToRemoteVpc": {
           "shape": "Boolean",
-          "documentation": "<p>If true, enables outbound communication from an EC2-Classic instance that's linked to a local VPC via ClassicLink to instances in a peer VPC.</p>"
+          "documentation": "<p>If true, enables outbound communication from an EC2-Classic instance that's linked to a local VPC using ClassicLink to instances in a peer VPC.</p>"
         },
         "AllowEgressFromLocalVpcToRemoteClassicLink": {
           "shape": "Boolean",
-          "documentation": "<p>If true, enables outbound communication from instances in a local VPC to an EC2-Classic instance that's linked to a peer VPC via ClassicLink.</p>"
+          "documentation": "<p>If true, enables outbound communication from instances in a local VPC to an EC2-Classic instance that's linked to a peer VPC using ClassicLink.</p>"
         }
       },
       "documentation": "<p>The VPC peering connection options.</p>"
@@ -19252,7 +19151,7 @@
           "locationName": "prefixListId"
         }
       },
-      "documentation": "<p>[EC2-VPC only] The ID of the prefix.</p>"
+      "documentation": "<p>Describes a prefix list ID.</p>"
     },
     "PrefixListIdList": {
       "type": "list",
@@ -19973,8 +19872,7 @@
           "documentation": "<p>The ID of the VPC peering connection.</p>",
           "locationName": "vpcPeeringConnectionId"
         }
-      },
-      "documentation": "<p>Contains the parameters for RejectVpcPeeringConnection.</p>"
+      }
     },
     "RejectVpcPeeringConnectionResult": {
       "type": "structure",
@@ -19984,8 +19882,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of RejectVpcPeeringConnection.</p>"
+      }
     },
     "ReleaseAddressRequest": {
       "type": "structure",
@@ -20017,8 +19914,7 @@
           "documentation": "<p>The IDs of the Dedicated Hosts to release.</p>",
           "locationName": "hostId"
         }
-      },
-      "documentation": "<p>Contains the parameters for ReleaseHosts.</p>"
+      }
     },
     "ReleaseHostsResult": {
       "type": "structure",
@@ -20033,8 +19929,7 @@
           "documentation": "<p>The IDs of the Dedicated Hosts that could not be released, including an error message.</p>",
           "locationName": "unsuccessful"
         }
-      },
-      "documentation": "<p>Contains the output of ReleaseHosts.</p>"
+      }
     },
     "ReplaceIamInstanceProfileAssociationRequest": {
       "type": "structure",
@@ -20085,8 +19980,7 @@
           "documentation": "<p>The ID of the new network ACL to associate with the subnet.</p>",
           "locationName": "networkAclId"
         }
-      },
-      "documentation": "<p>Contains the parameters for ReplaceNetworkAclAssociation.</p>"
+      }
     },
     "ReplaceNetworkAclAssociationResult": {
       "type": "structure",
@@ -20096,8 +19990,7 @@
           "documentation": "<p>The ID of the new association.</p>",
           "locationName": "newAssociationId"
         }
-      },
-      "documentation": "<p>Contains the output of ReplaceNetworkAclAssociation.</p>"
+      }
     },
     "ReplaceNetworkAclEntryRequest": {
       "type": "structure",
@@ -20159,8 +20052,7 @@
           "documentation": "<p>The rule number of the entry to replace.</p>",
           "locationName": "ruleNumber"
         }
-      },
-      "documentation": "<p>Contains the parameters for ReplaceNetworkAclEntry.</p>"
+      }
     },
     "ReplaceRouteRequest": {
       "type": "structure",
@@ -20218,8 +20110,7 @@
           "documentation": "<p>The ID of a VPC peering connection.</p>",
           "locationName": "vpcPeeringConnectionId"
         }
-      },
-      "documentation": "<p>Contains the parameters for ReplaceRoute.</p>"
+      }
     },
     "ReplaceRouteTableAssociationRequest": {
       "type": "structure",
@@ -20243,8 +20134,7 @@
           "documentation": "<p>The ID of the new route table to associate with the subnet.</p>",
           "locationName": "routeTableId"
         }
-      },
-      "documentation": "<p>Contains the parameters for ReplaceRouteTableAssociation.</p>"
+      }
     },
     "ReplaceRouteTableAssociationResult": {
       "type": "structure",
@@ -20254,8 +20144,7 @@
           "documentation": "<p>The ID of the new association.</p>",
           "locationName": "newAssociationId"
         }
-      },
-      "documentation": "<p>Contains the output of ReplaceRouteTableAssociation.</p>"
+      }
     },
     "ReportInstanceReasonCodes": {
       "type": "string",
@@ -20425,7 +20314,7 @@
         },
         "CreditSpecification": {
           "shape": "CreditSpecificationRequest",
-          "documentation": "<p>The credit option for CPU usage of the instance. Valid for T2 instances only.</p>"
+          "documentation": "<p>The credit option for CPU usage of the instance. Valid for T2 or T3 instances only.</p>"
         },
         "CpuOptions": {
           "shape": "LaunchTemplateCpuOptionsRequest",
@@ -21567,8 +21456,7 @@
           "documentation": "<p>Not supported. Use a set of IP permissions to specify a destination security group.</p>",
           "locationName": "sourceSecurityGroupOwnerId"
         }
-      },
-      "documentation": "<p>Contains the parameters for RevokeSecurityGroupEgress.</p>"
+      }
     },
     "RevokeSecurityGroupIngressRequest": {
       "type": "structure",
@@ -21614,8 +21502,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for RevokeSecurityGroupIngress.</p>"
+      }
     },
     "Route": {
       "type": "structure",
@@ -21941,7 +21828,7 @@
         },
         "CreditSpecification": {
           "shape": "CreditSpecificationRequest",
-          "documentation": "<p>The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>. To change this attribute after launch, use <a>ModifyInstanceCreditSpecification</a>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html\">T2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Default: <code>standard</code> </p>"
+          "documentation": "<p>The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>. To change this attribute after launch, use <a>ModifyInstanceCreditSpecification</a>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Default: <code>standard</code> (T2 instances) or <code>unlimited</code> (T3 instances)</p>"
         },
         "CpuOptions": {
           "shape": "CpuOptionsRequest",
@@ -24068,7 +23955,7 @@
           "locationName": "instanceId"
         }
       },
-      "documentation": "<p>Describes the T2 instance whose credit option for CPU usage was successfully modified.</p>"
+      "documentation": "<p>Describes the T2 or T3 instance whose credit option for CPU usage was successfully modified.</p>"
     },
     "SuccessfulInstanceCreditSpecificationSet": {
       "type": "list",
@@ -24092,7 +23979,7 @@
       "members": {
         "Key": {
           "shape": "String",
-          "documentation": "<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code> </p>",
+          "documentation": "<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>",
           "locationName": "key"
         },
         "Value": {
@@ -24480,11 +24367,11 @@
         },
         "Error": {
           "shape": "UnsuccessfulInstanceCreditSpecificationItemError",
-          "documentation": "<p>The applicable error for the T2 instance whose credit option for CPU usage was not modified.</p>",
+          "documentation": "<p>The applicable error for the T2 or T3 instance whose credit option for CPU usage was not modified.</p>",
           "locationName": "error"
         }
       },
-      "documentation": "<p>Describes the T2 instance whose credit option for CPU usage was not modified.</p>"
+      "documentation": "<p>Describes the T2 or T3 instance whose credit option for CPU usage was not modified.</p>"
     },
     "UnsuccessfulInstanceCreditSpecificationItemError": {
       "type": "structure",
@@ -24500,7 +24387,7 @@
           "locationName": "message"
         }
       },
-      "documentation": "<p>Information about the error for the T2 instance whose credit option for CPU usage was not modified.</p>"
+      "documentation": "<p>Information about the error for the T2 or T3 instance whose credit option for CPU usage was not modified.</p>"
     },
     "UnsuccessfulInstanceCreditSpecificationSet": {
       "type": "list",
@@ -24584,8 +24471,7 @@
           "shape": "IpPermissionList",
           "documentation": "<p>The IP permissions for the security group rule.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for UpdateSecurityGroupRuleDescriptionsEgress.</p>"
+      }
     },
     "UpdateSecurityGroupRuleDescriptionsEgressResult": {
       "type": "structure",
@@ -24595,8 +24481,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of UpdateSecurityGroupRuleDescriptionsEgress.</p>"
+      }
     },
     "UpdateSecurityGroupRuleDescriptionsIngressRequest": {
       "type": "structure",
@@ -24620,8 +24505,7 @@
           "shape": "IpPermissionList",
           "documentation": "<p>The IP permissions for the security group rule. </p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for UpdateSecurityGroupRuleDescriptionsIngress.</p>"
+      }
     },
     "UpdateSecurityGroupRuleDescriptionsIngressResult": {
       "type": "structure",
@@ -24631,8 +24515,7 @@
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
           "locationName": "return"
         }
-      },
-      "documentation": "<p>Contains the output of UpdateSecurityGroupRuleDescriptionsIngress.</p>"
+      }
     },
     "UserBucket": {
       "type": "structure",

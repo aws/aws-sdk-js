@@ -12,11 +12,11 @@ declare class FMS extends Service {
   constructor(options?: FMS.Types.ClientConfiguration)
   config: Config & FMS.Types.ClientConfiguration;
   /**
-   * Sets the AWS Firewall Manager administrator account. AWS Firewall Manager must be associated with a master account in AWS Organizations or associated with a member account that has the appropriate permissions. If the account ID that you submit is not an AWS Organizations master account, AWS Firewall Manager will set the appropriate permissions for the given member account. The account that you associate with AWS Firewall Manager is called the AWS Firewall manager administrator account. 
+   * Sets the AWS Firewall Manager administrator account. AWS Firewall Manager must be associated with the master account your AWS organization or associated with a member account that has the appropriate permissions. If the account ID that you submit is not an AWS Organizations master account, AWS Firewall Manager will set the appropriate permissions for the given member account. The account that you associate with AWS Firewall Manager is called the AWS Firewall Manager administrator account. 
    */
   associateAdminAccount(params: FMS.Types.AssociateAdminAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the AWS Firewall Manager administrator account. AWS Firewall Manager must be associated with a master account in AWS Organizations or associated with a member account that has the appropriate permissions. If the account ID that you submit is not an AWS Organizations master account, AWS Firewall Manager will set the appropriate permissions for the given member account. The account that you associate with AWS Firewall Manager is called the AWS Firewall manager administrator account. 
+   * Sets the AWS Firewall Manager administrator account. AWS Firewall Manager must be associated with the master account your AWS organization or associated with a member account that has the appropriate permissions. If the account ID that you submit is not an AWS Organizations master account, AWS Firewall Manager will set the appropriate permissions for the given member account. The account that you associate with AWS Firewall Manager is called the AWS Firewall Manager administrator account. 
    */
   associateAdminAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -84,6 +84,14 @@ declare class FMS extends Service {
    */
   listComplianceStatus(callback?: (err: AWSError, data: FMS.Types.ListComplianceStatusResponse) => void): Request<FMS.Types.ListComplianceStatusResponse, AWSError>;
   /**
+   * Returns a MemberAccounts object that lists the member accounts in the administrator's AWS organization. The ListMemberAccounts must be submitted by the account that is set as the AWS Firewall Manager administrator.
+   */
+  listMemberAccounts(params: FMS.Types.ListMemberAccountsRequest, callback?: (err: AWSError, data: FMS.Types.ListMemberAccountsResponse) => void): Request<FMS.Types.ListMemberAccountsResponse, AWSError>;
+  /**
+   * Returns a MemberAccounts object that lists the member accounts in the administrator's AWS organization. The ListMemberAccounts must be submitted by the account that is set as the AWS Firewall Manager administrator.
+   */
+  listMemberAccounts(callback?: (err: AWSError, data: FMS.Types.ListMemberAccountsResponse) => void): Request<FMS.Types.ListMemberAccountsResponse, AWSError>;
+  /**
    * Returns an array of PolicySummary objects in the response.
    */
   listPolicies(params: FMS.Types.ListPoliciesRequest, callback?: (err: AWSError, data: FMS.Types.ListPoliciesResponse) => void): Request<FMS.Types.ListPoliciesResponse, AWSError>;
@@ -110,6 +118,7 @@ declare class FMS extends Service {
 }
 declare namespace FMS {
   export type AWSAccountId = string;
+  export type AccountRoleStatus = "READY"|"CREATING"|"PENDING_DELETION"|"DELETING"|"DELETED"|string;
   export interface AssociateAdminAccountRequest {
     /**
      * The AWS account ID to associate with AWS Firewall Manager as the AWS Firewall Manager administrator account. This can be an AWS Organizations master account or a member account. For more information about AWS Organizations and master accounts, see Managing the AWS Accounts in Your Organization.
@@ -132,6 +141,10 @@ declare namespace FMS {
     ResourceType?: ResourceType;
   }
   export type ComplianceViolators = ComplianceViolator[];
+  export type CustomerPolicyScopeId = string;
+  export type CustomerPolicyScopeIdList = CustomerPolicyScopeId[];
+  export type CustomerPolicyScopeIdType = "ACCOUNT"|string;
+  export type CustomerPolicyScopeMap = {[key: string]: CustomerPolicyScopeIdList};
   export interface DeleteNotificationChannelRequest {
   }
   export interface DeletePolicyRequest {
@@ -140,6 +153,8 @@ declare namespace FMS {
      */
     PolicyId: PolicyId;
   }
+  export type DependentServiceName = "AWSCONFIG"|"AWSWAF"|string;
+  export type DetailedInfo = string;
   export interface DisassociateAdminAccountRequest {
   }
   export interface EvaluationResult {
@@ -164,6 +179,10 @@ declare namespace FMS {
      * The AWS account that is set as the AWS Firewall Manager administrator.
      */
     AdminAccount?: AWSAccountId;
+    /**
+     * The status of the AWS account that you set as the AWS Firewall Manager administrator.
+     */
+    RoleStatus?: AccountRoleStatus;
   }
   export interface GetComplianceDetailRequest {
     /**
@@ -209,6 +228,7 @@ declare namespace FMS {
      */
     PolicyArn?: ResourceArn;
   }
+  export type IssueInfoMap = {[key: string]: DetailedInfo};
   export interface ListComplianceStatusRequest {
     /**
      * The ID of the AWS Firewall Manager policy that you want the details for.
@@ -233,6 +253,26 @@ declare namespace FMS {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListMemberAccountsRequest {
+    /**
+     * If you specify a value for MaxResults and you have more account IDs than the number that you specify for MaxResults, AWS Firewall Manager returns a NextToken value in the response that allows you to list another group of IDs. For the second and subsequent ListMemberAccountsRequest requests, specify the value of NextToken from the previous response to get information about another batch of member account IDs.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * Specifies the number of member account IDs that you want AWS Firewall Manager to return for this request. If you have more IDs than the number that you specify for MaxResults, the response includes a NextToken value that you can use to get another batch of member account IDs. The maximum value for MaxResults is 100.
+     */
+    MaxResults?: PaginationMaxResults;
+  }
+  export interface ListMemberAccountsResponse {
+    /**
+     * An array of account IDs.
+     */
+    MemberAccounts?: MemberAccounts;
+    /**
+     * If you have more member account IDs than the number that you specified for MaxResults in the request, the response includes a NextToken value. To list more IDs, submit another ListMemberAccounts request, and specify the NextToken value from the response in the NextToken value in the next request.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListPoliciesRequest {
     /**
      * If you specify a value for MaxResults and you have more PolicySummary objects than the number that you specify for MaxResults, AWS Firewall Manager returns a NextToken value in the response that allows you to list another group of PolicySummary objects. For the second and subsequent ListPolicies requests, specify the value of NextToken from the previous response to get information about another batch of PolicySummary objects.
@@ -254,6 +294,7 @@ declare namespace FMS {
     NextToken?: PaginationToken;
   }
   export type ManagedServiceData = string;
+  export type MemberAccounts = AWSAccountId[];
   export type PaginationMaxResults = number;
   export type PaginationToken = string;
   export interface Policy {
@@ -289,6 +330,14 @@ declare namespace FMS {
      * Indicates if the policy should be automatically applied to new resources.
      */
     RemediationEnabled: Boolean;
+    /**
+     * Specifies the AWS account IDs to include in the policy. If IncludeMap is null, all accounts in the AWS Organization are included in the policy. If IncludeMap is not null, only values listed in IncludeMap will be included in the policy. The key to the map is ACCOUNT. For example, a valid IncludeMap would be {“ACCOUNT” : [“accountID1”, “accountID2”]}.
+     */
+    IncludeMap?: CustomerPolicyScopeMap;
+    /**
+     * Specifies the AWS account IDs to exclude from the policy. The IncludeMap values are evaluated first, with all of the appropriate account IDs added to the policy. Then the accounts listed in ExcludeMap are removed, resulting in the final list of accounts to add to the policy. The key to the map is ACCOUNT. For example, a valid ExcludeMap would be {“ACCOUNT” : [“accountID1”, “accountID2”]}.
+     */
+    ExcludeMap?: CustomerPolicyScopeMap;
   }
   export interface PolicyComplianceDetail {
     /**
@@ -315,6 +364,10 @@ declare namespace FMS {
      * A time stamp that indicates when the returned information should be considered out-of-date.
      */
     ExpiredAt?: TimeStamp;
+    /**
+     * Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.
+     */
+    IssueInfoMap?: IssueInfoMap;
   }
   export interface PolicyComplianceStatus {
     /**
@@ -341,6 +394,10 @@ declare namespace FMS {
      * Time stamp of the last update to the EvaluationResult objects.
      */
     LastUpdated?: TimeStamp;
+    /**
+     * Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.
+     */
+    IssueInfoMap?: IssueInfoMap;
   }
   export type PolicyComplianceStatusList = PolicyComplianceStatus[];
   export type PolicyComplianceStatusType = "COMPLIANT"|"NON_COMPLIANT"|string;
