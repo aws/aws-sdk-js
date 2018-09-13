@@ -92,25 +92,34 @@ describe('AWS.S3Control', function() {
   it('validate accountId length', function() {
     var client = new AWS.S3Control({region: 'us-east-1'});
 
-    var request = client.getPublicLockdown({AccountId: ''}).build();
-    expect(request.httpRequest.endpoint.hostname).to.eql('s3-control.us-east-1.amazonaws.com')
-
-    var stringTooLong = '1'
-    for (var i = 0; i < 64; i++) stringTooLong += '1';
-    request = client.getPublicLockdown({AccountId: stringTooLong});
-    helpers.mockResponse({data: {}});
-    request.send();
-    var response = request.response;
-    expect(response.error).not.to.be.undefined;
-    expect(response.data).to.eql(null);
-    expect(response.error.code).to.eql('ValidationError');
-    expect(response.error.message).to.eql('AccountId length should be between 1 to 63 characters, inclusive.');
+    var stringlength = [0, 64, 65];
+    for (var i = 0; i < stringlength.length; i++) {
+      var len = stringlength[i];
+      var stringTooLong = '';
+      for (var j = 0; j < len; j++) stringTooLong += '1';
+      var request = client.getPublicLockdown({AccountId: stringTooLong}).build();
+      var response = request.response;
+      expect(response.error).not.to.be.null;
+      expect(response.data).to.eql(null);
+      expect(response.error.code).to.eql('ValidationError');
+      expect(response.error.message).to.eql('AccountId length should be between 1 to 63 characters, inclusive.');
+    }
+    stringlength = [1, 16, 32, 63];
+    for (var i = 0; i < stringlength.length; i++) {
+      var len = stringlength[i];
+      var stringRightLength = '';
+      for (var j = 0; j < len; j++) stringRightLength += '1';
+      var request = client.getPublicLockdown({AccountId: stringRightLength}).build();
+      var response = request.response;
+      expect(response.error).to.be.null;
+    }
+    
 
   });
 
   it('validate accountId pattern', function() {
     var client = new AWS.S3Control({region: 'us-east-1'});
-    var wrongStrings = ['a.b', '.ab', 'ab.', '-ab', 'Ab-', 'asdw*'];
+    var wrongStrings = ['a.b', '.ab', 'ab.', '-ab', 'Ab-', 'asdw*', '.', '-'];
     for (var i = 0; i < wrongStrings.length; i++) {
       var request = client.getPublicLockdown({AccountId: wrongStrings[i]});
       request.send();
@@ -120,7 +129,7 @@ describe('AWS.S3Control', function() {
       expect(request.response.error.message).to.eql('AccountId should be hostname compatible. AccountId: ' + wrongStrings[i]);
     }
 
-    var correctStrings = ['a', '6', 'B', 'a-b', '6-D', 'C-6'];
+    var correctStrings = ['a', '6', 'B', 'a-b', '6-D', 'C-6', 'a-b-c'];
     for (var i = 0; i < correctStrings.length; i++) {
       var request = client.getPublicLockdown({AccountId: correctStrings[i]});
       request.send();
