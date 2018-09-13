@@ -89,15 +89,29 @@ describe('AWS.S3Control', function() {
     return expect(signer.canonicalString().split('\n')[1]).to.equal('/fake%3Apath');
   });
 
+  it('validate accountId type', function() {
+    var client = new AWS.S3Control();
+    var possibleValues = [123, null, undefined, NaN, {}, ['a'], new AWS.util.Buffer('111')];
+    for (var i = 0; i < possibleValues.length; i++) {
+      var accountId = possibleValues[i];
+      var request = client.getPublicLockdown({AccountId: accountId}).build();
+      var response = request.response;
+      expect(response.error).not.to.be.null;
+      expect(response.data).to.eql(null);
+      expect(response.error.code).to.eql('ValidationError');
+      expect(response.error.message).to.eql('AccountId must be a string.');
+    }
+  })
+
   it('validate accountId length', function() {
     var client = new AWS.S3Control({region: 'us-east-1'});
 
     var stringlength = [0, 64, 65];
     for (var i = 0; i < stringlength.length; i++) {
       var len = stringlength[i];
-      var stringTooLong = '';
-      for (var j = 0; j < len; j++) stringTooLong += '1';
-      var request = client.getPublicLockdown({AccountId: stringTooLong}).build();
+      var wrongLengthString = '';
+      for (var j = 0; j < len; j++) wrongLengthString += '1';
+      var request = client.getPublicLockdown({AccountId: wrongLengthString}).build();
       var response = request.response;
       expect(response.error).not.to.be.null;
       expect(response.data).to.eql(null);
