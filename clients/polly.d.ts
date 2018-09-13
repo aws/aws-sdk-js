@@ -156,7 +156,7 @@ declare namespace Polly {
     SynthesisTask?: SynthesisTask;
   }
   export type IncludeAdditionalLanguageCodes = boolean;
-  export type LanguageCode = "cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ja-JP"|"hi-IN"|"ko-KR"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"|string;
+  export type LanguageCode = "cmn-CN"|"cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ja-JP"|"hi-IN"|"ko-KR"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"|string;
   export type LanguageCodeList = LanguageCode[];
   export type LanguageName = string;
   export type LastModified = Date;
@@ -393,7 +393,7 @@ declare namespace Polly {
      */
     LexiconNames?: LexiconNameList;
     /**
-     *  The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. 
+     *  The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.  When pcm is used, the content returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format. 
      */
     OutputFormat: OutputFormat;
     /**
@@ -466,7 +466,7 @@ declare namespace Polly {
      */
     AdditionalLanguageCodes?: LanguageCodeList;
   }
-  export type VoiceId = "Geraint"|"Gwyneth"|"Mads"|"Naja"|"Hans"|"Marlene"|"Nicole"|"Russell"|"Amy"|"Brian"|"Emma"|"Raveena"|"Ivy"|"Joanna"|"Joey"|"Justin"|"Kendra"|"Kimberly"|"Matthew"|"Salli"|"Conchita"|"Enrique"|"Miguel"|"Penelope"|"Chantal"|"Celine"|"Lea"|"Mathieu"|"Dora"|"Karl"|"Carla"|"Giorgio"|"Mizuki"|"Liv"|"Lotte"|"Ruben"|"Ewa"|"Jacek"|"Jan"|"Maja"|"Ricardo"|"Vitoria"|"Cristiano"|"Ines"|"Carmen"|"Maxim"|"Tatyana"|"Astrid"|"Filiz"|"Vicki"|"Takumi"|"Seoyeon"|"Aditi"|string;
+  export type VoiceId = "Geraint"|"Gwyneth"|"Mads"|"Naja"|"Hans"|"Marlene"|"Nicole"|"Russell"|"Amy"|"Brian"|"Emma"|"Raveena"|"Ivy"|"Joanna"|"Joey"|"Justin"|"Kendra"|"Kimberly"|"Matthew"|"Salli"|"Conchita"|"Enrique"|"Miguel"|"Penelope"|"Chantal"|"Celine"|"Lea"|"Mathieu"|"Dora"|"Karl"|"Carla"|"Giorgio"|"Mizuki"|"Liv"|"Lotte"|"Ruben"|"Ewa"|"Jacek"|"Jan"|"Maja"|"Ricardo"|"Vitoria"|"Cristiano"|"Ines"|"Carmen"|"Maxim"|"Tatyana"|"Astrid"|"Filiz"|"Vicki"|"Takumi"|"Seoyeon"|"Aditi"|"Zhiyu"|string;
   export type VoiceList = Voice[];
   export type VoiceName = string;
   /**

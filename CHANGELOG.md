@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.314.0-->
+<!--LATEST=2.315.0-->
 <!--ENTRYINSERT-->
+
+## 2.315.0
+* feature: Polly: Amazon Polly adds Mandarin Chinese language support with new female voice - "Zhiyu"
 
 ## 2.314.0
 * bugfix: ReactNative: Fixes issue where attempting to use a Blob object as input to an operation would cause a parameter validaiton error in release mode.
