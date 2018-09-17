@@ -52,6 +52,7 @@
         return it('adds linear and tree hash headers to payload requests', function() {
           var headers, req;
           headers = {
+            'x-amz-api-version': '2012-06-01',
             'x-amz-glacier-version': '2012-06-01',
             'X-Amz-Content-Sha256': 'fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9',
             'x-amz-sha256-tree-hash': 'fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9',

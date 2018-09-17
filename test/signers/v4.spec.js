@@ -30,8 +30,8 @@
     date = new Date(1935346573456);
     datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '');
     creds = null;
-    signature = '31fac5ed29db737fbcafac527470ca6d9283283197c5e6e94ea40ddcec14a9c1';
-    authorization = 'AWS4-HMAC-SHA256 Credential=akid/20310430/region/dynamodb/aws4_request, ' + 'SignedHeaders=host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target;x-amz-user-agent, ' + 'Signature=' + signature;
+    signature = '8ba025718f82f8e1f7ef32b4892ced21a7273d952f0a4077fbc26b49a7f46e91';
+    authorization = 'AWS4-HMAC-SHA256 Credential=akid/20310430/region/dynamodb/aws4_request, ' + 'SignedHeaders=host;x-amz-api-version;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target;x-amz-user-agent, ' + 'Signature=' + signature;
     signer = null;
     beforeEach(function() {
       helpers.spyOn(AWS.util, 'userAgent').andReturn('aws-sdk-js/0.1');
@@ -162,7 +162,7 @@
     });
     describe('canonicalHeaders', function() {
       it('should return headers', function() {
-        return expect(signer.canonicalHeaders()).to.eql(['host:localhost', 'x-amz-content-sha256:3128b8d4f3108b3e1677a38eb468d1c6dec926a58eaea235d034b9c71c3864d4', 'x-amz-date:' + datetime, 'x-amz-security-token:session', 'x-amz-target:DynamoDB_20111205.ListTables', 'x-amz-user-agent:aws-sdk-js/0.1'].join('\n'));
+        return expect(signer.canonicalHeaders()).to.eql(['host:localhost', 'x-amz-api-version:2011-12-05', 'x-amz-content-sha256:3128b8d4f3108b3e1677a38eb468d1c6dec926a58eaea235d034b9c71c3864d4', 'x-amz-date:' + datetime, 'x-amz-security-token:session', 'x-amz-target:DynamoDB_20111205.ListTables', 'x-amz-user-agent:aws-sdk-js/0.1'].join('\n'));
       });
 
       it('should ignore Authorization header', function() {
