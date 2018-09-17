@@ -2639,6 +2639,10 @@ declare namespace EC2 {
      * The number of Dedicated Hosts to allocate to your account with these parameters.
      */
     Quantity: Integer;
+    /**
+     * The tags to apply to the Dedicated Host during creation.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface AllocateHostsResult {
     /**
@@ -7050,7 +7054,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    key - The tag key.    resource-id - The ID of the resource.    resource-type - The resource type (customer-gateway | dhcp-options | elastic-ip | fleet | fpga-image | image | instance | internet-gateway | launch-template | natgateway | network-acl | network-interface | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpc-peering-connection | vpn-connection | vpn-gateway).    tag:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".    value - The tag value.  
+     * One or more filters.    key - The tag key.    resource-id - The ID of the resource.    resource-type - The resource type (customer-gateway | dedicated-host | dhcp-options | elastic-ip | fleet | fpga-image | image | instance | internet-gateway | launch-template | natgateway | network-acl | network-interface | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpc-peering-connection | vpn-connection | vpn-gateway).    tag:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".    value - The tag value.  
      */
     Filters?: FilterList;
     /**
@@ -13262,7 +13266,7 @@ declare namespace EC2 {
   }
   export type ResourceIdList = String[];
   export type ResourceList = String[];
-  export type ResourceType = "customer-gateway"|"dhcp-options"|"image"|"instance"|"internet-gateway"|"network-acl"|"network-interface"|"reserved-instances"|"route-table"|"snapshot"|"spot-instances-request"|"subnet"|"security-group"|"volume"|"vpc"|"vpn-connection"|"vpn-gateway"|string;
+  export type ResourceType = "customer-gateway"|"dedicated-host"|"dhcp-options"|"image"|"instance"|"internet-gateway"|"network-acl"|"network-interface"|"reserved-instances"|"route-table"|"snapshot"|"spot-instances-request"|"subnet"|"security-group"|"volume"|"vpc"|"vpn-connection"|"vpn-gateway"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -15085,7 +15089,7 @@ declare namespace EC2 {
   export type TagList = Tag[];
   export interface TagSpecification {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are fleet, instance, snapshot, and volume. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are fleet, dedicated-host, instance, snapshot, and volume. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**

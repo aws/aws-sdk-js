@@ -360,6 +360,20 @@ declare namespace CodeBuild {
   export type Builds = Build[];
   export type BuildsNotDeleted = BuildNotDeleted[];
   export type CacheType = "NO_CACHE"|"S3"|string;
+  export interface CloudWatchLogsConfig {
+    /**
+     * The current status of the Amazon CloudWatch Logs for a build project. Valid values are:    ENABLED: Amazon CloudWatch Logs are enabled for this build project.    DISABLED: Amazon CloudWatch Logs are not enabled for this build project.  
+     */
+    status: LogsConfigStatusType;
+    /**
+     *  The group name of the Amazon CloudWatch Logs. For more information, see Working with Log Groups and Log Streams 
+     */
+    groupName?: String;
+    /**
+     *  The prefix of the stream name of the Amazon CloudWatch Logs. For more information, see Working with Log Groups and Log Streams 
+     */
+    streamName?: String;
+  }
   export type ComputeType = "BUILD_GENERAL1_SMALL"|"BUILD_GENERAL1_MEDIUM"|"BUILD_GENERAL1_LARGE"|string;
   export interface CreateProjectInput {
     /**
@@ -418,6 +432,10 @@ declare namespace CodeBuild {
      * Set this to true to generate a publicly-accessible URL for your project's build badge.
      */
     badgeEnabled?: WrapperBoolean;
+    /**
+     *  Information about logs for the build project. Logs can be Amazon CloudWatch Logs, uploaded to a specified S3 bucket, or both. 
+     */
+    logsConfig?: LogsConfig;
   }
   export interface CreateProjectOutput {
     /**
@@ -599,6 +617,17 @@ declare namespace CodeBuild {
      */
     projects?: ProjectNames;
   }
+  export interface LogsConfig {
+    /**
+     *  Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch Logs are enabled by default. 
+     */
+    cloudWatchLogs?: CloudWatchLogsConfig;
+    /**
+     *  Information about logs built to an S3 bucket for a build project. S3 logs are not enabled by default. 
+     */
+    s3Logs?: S3LogsConfig;
+  }
+  export type LogsConfigStatusType = "ENABLED"|"DISABLED"|string;
   export interface LogsLocation {
     /**
      * The name of the Amazon CloudWatch Logs group for the build logs.
@@ -612,6 +641,18 @@ declare namespace CodeBuild {
      * The URL to an individual build log in Amazon CloudWatch Logs.
      */
     deepLink?: String;
+    /**
+     *  The URL to an individual build log in an S3 bucket. 
+     */
+    s3DeepLink?: String;
+    /**
+     *  Information about Amazon CloudWatch Logs for a build project. 
+     */
+    cloudWatchLogs?: CloudWatchLogsConfig;
+    /**
+     *  Information about S3 logs for a build project. 
+     */
+    s3Logs?: S3LogsConfig;
   }
   export interface NetworkInterface {
     /**
@@ -709,6 +750,10 @@ declare namespace CodeBuild {
      * Information about the build badge for the build project.
      */
     badge?: ProjectBadge;
+    /**
+     *  Information about logs for the build project. A project can create Amazon CloudWatch Logs, logs in an S3 bucket, or both. 
+     */
+    logsConfig?: LogsConfig;
   }
   export interface ProjectArtifacts {
     /**
@@ -802,7 +847,7 @@ declare namespace CodeBuild {
   export type ProjectSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
   export interface ProjectSource {
     /**
-     * The type of repository that contains the source code to be built. Valid values include:    BITBUCKET: The source code is in a Bitbucket repository.    CODECOMMIT: The source code is in an AWS CodeCommit repository.    CODEPIPELINE: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.    GITHUB: The source code is in a GitHub repository.    S3: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.  
+     * The type of repository that contains the source code to be built. Valid values include:    BITBUCKET: The source code is in a Bitbucket repository.    CODECOMMIT: The source code is in an AWS CodeCommit repository.    CODEPIPELINE: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.    GITHUB: The source code is in a GitHub repository.    NO_SOURCE: The project does not have input source code.    S3: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.  
      */
     type: SourceType;
     /**
@@ -846,6 +891,16 @@ declare namespace CodeBuild {
   }
   export type ProjectSources = ProjectSource[];
   export type Projects = Project[];
+  export interface S3LogsConfig {
+    /**
+     * The current status of the S3 build logs. Valid values are:    ENABLED: S3 build logs are enabled for this build project.    DISABLED: S3 build logs are not enabled for this build project.  
+     */
+    status: LogsConfigStatusType;
+    /**
+     *  The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is my-bucket, and your path prefix is build-log, then acceptable formats are my-bucket/build-log or aws:s3:::my-bucket/build-log. 
+     */
+    location?: String;
+  }
   export type SecurityGroupIds = NonEmptyString[];
   export type SortOrderType = "ASCENDING"|"DESCENDING"|string;
   export interface SourceAuth {
@@ -890,7 +945,7 @@ declare namespace CodeBuild {
      */
     environmentVariablesOverride?: EnvironmentVariables;
     /**
-     * A source input type for this build that overrides the source input defined in the build project
+     * A source input type for this build that overrides the source input defined in the build project.
      */
     sourceTypeOverride?: SourceType;
     /**
@@ -953,6 +1008,10 @@ declare namespace CodeBuild {
      * A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuild request. The token is included in the StartBuild request and is valid for 12 hours. If you repeat the StartBuild request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error. 
      */
     idempotencyToken?: String;
+    /**
+     *  Log settings for this build that override the log settings defined in the build project. 
+     */
+    logsConfigOverride?: LogsConfig;
   }
   export interface StartBuildOutput {
     /**
@@ -1045,6 +1104,10 @@ declare namespace CodeBuild {
      * Set this to true to generate a publicly-accessible URL for your project's build badge.
      */
     badgeEnabled?: WrapperBoolean;
+    /**
+     *  Information about logs for the build project. A project can create Amazon CloudWatch Logs, logs in an S3 bucket, or both. 
+     */
+    logsConfig?: LogsConfig;
   }
   export interface UpdateProjectOutput {
     /**

@@ -3992,6 +3992,11 @@
           "shape": "Integer",
           "documentation": "<p>The number of Dedicated Hosts to allocate to your account with these parameters.</p>",
           "locationName": "quantity"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the Dedicated Host during creation.</p>",
+          "locationName": "TagSpecification"
         }
       }
     },
@@ -4003,7 +4008,8 @@
           "documentation": "<p>The ID of the allocated Dedicated Host. This is used to launch an instance onto a specific host.</p>",
           "locationName": "hostIdSet"
         }
-      }
+      },
+      "documentation": "<p>Contains the output of AllocateHosts.</p>"
     },
     "AllocationIdList": {
       "type": "list",
@@ -10877,7 +10883,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of the tag. For example, specify \"tag:Owner\" for the filter name and \"TeamA\" for the filter value to find resources with the tag \"Owner=TeamA\".</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of the tag. For example, specify \"tag:Owner\" for the filter name and \"TeamA\" for the filter value to find resources with the tag \"Owner=TeamA\".</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -21205,6 +21211,7 @@
       "type": "string",
       "enum": [
         "customer-gateway",
+        "dedicated-host",
         "dhcp-options",
         "image",
         "instance",
@@ -24035,7 +24042,7 @@
       "members": {
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of resource to tag. Currently, the resource types that support tagging on creation are <code>fleet</code>, <code>instance</code>, <code>snapshot</code>, and <code>volume</code>. To tag a resource after it has been created, see <a>CreateTags</a>.</p>",
+          "documentation": "<p>The type of resource to tag. Currently, the resource types that support tagging on creation are <code>fleet</code>, <code>dedicated-host</code>, <code>instance</code>, <code>snapshot</code>, and <code>volume</code>. To tag a resource after it has been created, see <a>CreateTags</a>.</p>",
           "locationName": "resourceType"
         },
         "Tags": {

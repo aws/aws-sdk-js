@@ -348,7 +348,7 @@ declare namespace ECS {
   export type Attributes = Attribute[];
   export interface AwsVpcConfiguration {
     /**
-     * The subnets associated with the task or service. There is a limit of 10 subnets able to be specified per AwsVpcConfiguration.  All specified subnets must be from the same VPC. 
+     * The subnets associated with the task or service. There is a limit of 16 subnets able to be specified per AwsVpcConfiguration.  All specified subnets must be from the same VPC. 
      */
     subnets: StringList;
     /**
@@ -543,6 +543,14 @@ declare namespace ECS {
      */
     dockerSecurityOptions?: StringList;
     /**
+     * When this parameter is true, this allows you to deploy containerized applications that require stdin or a tty to be allocated. This parameter maps to OpenStdin in the Create a container section of the Docker Remote API and the --interactive option to docker run.
+     */
+    interactive?: BoxedBoolean;
+    /**
+     * When this parameter is true, a TTY is allocated. This parameter maps to Tty in the Create a container section of the Docker Remote API and the --tty option to docker run.
+     */
+    pseudoTerminal?: BoxedBoolean;
+    /**
      * A key/value map of labels to add to the container. This parameter maps to Labels in the Create a container section of the Docker Remote API and the --label option to docker run. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: sudo docker version | grep "Server API version" 
      */
     dockerLabels?: DockerLabelsMap;
@@ -558,6 +566,10 @@ declare namespace ECS {
      * The health check command and associated configuration parameters for the container. This parameter maps to HealthCheck in the Create a container section of the Docker Remote API and the HEALTHCHECK parameter of docker run.
      */
     healthCheck?: HealthCheck;
+    /**
+     * A list of namespaced kernel parameters to set in the container. This parameter maps to Sysctls in the Create a container section of the Docker Remote API and the --sysctl option to docker run.  It is not recommended that you specify network-related systemControls parameters for multiple containers in a single task that also uses either the awsvpc or host network modes. When you do, the container that is started last will determine which systemControls parameters take effect. 
+     */
+    systemControls?: SystemControls;
   }
   export type ContainerDefinitions = ContainerDefinition[];
   export interface ContainerInstance {
@@ -1801,7 +1813,7 @@ declare namespace ECS {
      */
     registryArn?: String;
     /**
-     * The port value used if your service discovery service specified an SRV record. This field is required if both the awsvpc network mode and SRV records are used.
+     * The port value used if your service discovery service specified an SRV record. This field may be used if both the awsvpc network mode and SRV records are used.
      */
     port?: BoxedInteger;
     /**
@@ -1959,6 +1971,17 @@ declare namespace ECS {
      */
     acknowledgment?: String;
   }
+  export interface SystemControl {
+    /**
+     * The namespaced kernel parameter to set a value for.
+     */
+    namespace?: String;
+    /**
+     * The value for the namespaced kernel parameter specifed in namespace.
+     */
+    value?: String;
+  }
+  export type SystemControls = SystemControl[];
   export type TargetType = "container-instance"|string;
   export interface Task {
     /**
@@ -2302,7 +2325,7 @@ declare namespace ECS {
      */
     host?: HostVolumeProperties;
     /**
-     * The configuration for the Docker volume. This parameter is specified when using Docker volumes.
+     * This parameter is specified when using Docker volumes. Docker volumes are only supported when using the EC2 launch type. Windows containers only support the use of the local driver. To use bind mounts, specify a host instead.
      */
     dockerVolumeConfiguration?: DockerVolumeConfiguration;
   }

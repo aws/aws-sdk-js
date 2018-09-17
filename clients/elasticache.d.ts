@@ -37,11 +37,11 @@ declare class ElastiCache extends Service {
    */
   copySnapshot(callback?: (err: AWSError, data: ElastiCache.Types.CopySnapshotResult) => void): Request<ElastiCache.Types.CopySnapshotResult, AWSError>;
   /**
-   * Creates a cluster. All nodes in the cluster run the same protocol-compliant cache engine software, either Memcached or Redis.  Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups. 
+   * Creates a cluster. All nodes in the cluster run the same protocol-compliant cache engine software, either Memcached or Redis. This operation is not supported for Redis (cluster mode enabled) clusters.
    */
   createCacheCluster(params: ElastiCache.Types.CreateCacheClusterMessage, callback?: (err: AWSError, data: ElastiCache.Types.CreateCacheClusterResult) => void): Request<ElastiCache.Types.CreateCacheClusterResult, AWSError>;
   /**
-   * Creates a cluster. All nodes in the cluster run the same protocol-compliant cache engine software, either Memcached or Redis.  Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups. 
+   * Creates a cluster. All nodes in the cluster run the same protocol-compliant cache engine software, either Memcached or Redis. This operation is not supported for Redis (cluster mode enabled) clusters.
    */
   createCacheCluster(callback?: (err: AWSError, data: ElastiCache.Types.CreateCacheClusterResult) => void): Request<ElastiCache.Types.CreateCacheClusterResult, AWSError>;
   /**
@@ -85,11 +85,19 @@ declare class ElastiCache extends Service {
    */
   createSnapshot(callback?: (err: AWSError, data: ElastiCache.Types.CreateSnapshotResult) => void): Request<ElastiCache.Types.CreateSnapshotResult, AWSError>;
   /**
-   * Deletes a previously provisioned cluster. DeleteCacheCluster deletes all associated cache nodes, node endpoints and the cluster itself. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the cluster; you cannot cancel or revert this operation. This operation cannot be used to delete a cluster that is the last read replica of a replication group or node group (shard) that has Multi-AZ mode enabled or a cluster from a Redis (cluster mode enabled) replication group.  Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups. 
+   * Dynamically decreases the number of replics in a Redis (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation is performed with no cluster down time.
+   */
+  decreaseReplicaCount(params: ElastiCache.Types.DecreaseReplicaCountMessage, callback?: (err: AWSError, data: ElastiCache.Types.DecreaseReplicaCountResult) => void): Request<ElastiCache.Types.DecreaseReplicaCountResult, AWSError>;
+  /**
+   * Dynamically decreases the number of replics in a Redis (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation is performed with no cluster down time.
+   */
+  decreaseReplicaCount(callback?: (err: AWSError, data: ElastiCache.Types.DecreaseReplicaCountResult) => void): Request<ElastiCache.Types.DecreaseReplicaCountResult, AWSError>;
+  /**
+   * Deletes a previously provisioned cluster. DeleteCacheCluster deletes all associated cache nodes, node endpoints and the cluster itself. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the cluster; you cannot cancel or revert this operation. This operation cannot be used to delete a cluster that is the last read replica of a replication group or node group (shard) that has Multi-AZ mode enabled or a cluster from a Redis (cluster mode enabled) replication group. This operation is not valid for Redis (cluster mode enabled) clusters.
    */
   deleteCacheCluster(params: ElastiCache.Types.DeleteCacheClusterMessage, callback?: (err: AWSError, data: ElastiCache.Types.DeleteCacheClusterResult) => void): Request<ElastiCache.Types.DeleteCacheClusterResult, AWSError>;
   /**
-   * Deletes a previously provisioned cluster. DeleteCacheCluster deletes all associated cache nodes, node endpoints and the cluster itself. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the cluster; you cannot cancel or revert this operation. This operation cannot be used to delete a cluster that is the last read replica of a replication group or node group (shard) that has Multi-AZ mode enabled or a cluster from a Redis (cluster mode enabled) replication group.  Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups. 
+   * Deletes a previously provisioned cluster. DeleteCacheCluster deletes all associated cache nodes, node endpoints and the cluster itself. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the cluster; you cannot cancel or revert this operation. This operation cannot be used to delete a cluster that is the last read replica of a replication group or node group (shard) that has Multi-AZ mode enabled or a cluster from a Redis (cluster mode enabled) replication group. This operation is not valid for Redis (cluster mode enabled) clusters.
    */
   deleteCacheCluster(callback?: (err: AWSError, data: ElastiCache.Types.DeleteCacheClusterResult) => void): Request<ElastiCache.Types.DeleteCacheClusterResult, AWSError>;
   /**
@@ -229,6 +237,14 @@ declare class ElastiCache extends Service {
    */
   describeSnapshots(callback?: (err: AWSError, data: ElastiCache.Types.DescribeSnapshotsListMessage) => void): Request<ElastiCache.Types.DescribeSnapshotsListMessage, AWSError>;
   /**
+   * Dynamically increases the number of replics in a Redis (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation is performed with no cluster down time.
+   */
+  increaseReplicaCount(params: ElastiCache.Types.IncreaseReplicaCountMessage, callback?: (err: AWSError, data: ElastiCache.Types.IncreaseReplicaCountResult) => void): Request<ElastiCache.Types.IncreaseReplicaCountResult, AWSError>;
+  /**
+   * Dynamically increases the number of replics in a Redis (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation is performed with no cluster down time.
+   */
+  increaseReplicaCount(callback?: (err: AWSError, data: ElastiCache.Types.IncreaseReplicaCountResult) => void): Request<ElastiCache.Types.IncreaseReplicaCountResult, AWSError>;
+  /**
    * Lists all available node types that you can scale your Redis cluster's or replication group's current node type up to. When you use the ModifyCacheCluster or ModifyReplicationGroup operations to scale up your cluster or replication group, the value of the CacheNodeType parameter must be one of the node types returned by this operation.
    */
   listAllowedNodeTypeModifications(params: ElastiCache.Types.ListAllowedNodeTypeModificationsMessage, callback?: (err: AWSError, data: ElastiCache.Types.AllowedNodeTypeModificationsMessage) => void): Request<ElastiCache.Types.AllowedNodeTypeModificationsMessage, AWSError>;
@@ -237,11 +253,11 @@ declare class ElastiCache extends Service {
    */
   listAllowedNodeTypeModifications(callback?: (err: AWSError, data: ElastiCache.Types.AllowedNodeTypeModificationsMessage) => void): Request<ElastiCache.Types.AllowedNodeTypeModificationsMessage, AWSError>;
   /**
-   * Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs. You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see Using Cost Allocation Tags in Amazon ElastiCache.
+   * Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs. If the cluster is not in the available state, ListTagsForResource returns an error. You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see Monitoring Costs with Tags.
    */
   listTagsForResource(params: ElastiCache.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
-   * Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs. You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see Using Cost Allocation Tags in Amazon ElastiCache.
+   * Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs. If the cluster is not in the available state, ListTagsForResource returns an error. You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see Monitoring Costs with Tags.
    */
   listTagsForResource(callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
@@ -269,19 +285,19 @@ declare class ElastiCache extends Service {
    */
   modifyCacheSubnetGroup(callback?: (err: AWSError, data: ElastiCache.Types.ModifyCacheSubnetGroupResult) => void): Request<ElastiCache.Types.ModifyCacheSubnetGroupResult, AWSError>;
   /**
-   * Modifies the settings for a replication group.  Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups.   This operation is valid for Redis only. 
+   * Modifies the settings for a replication group. For Redis (cluster mode enabled) clusters, this operation cannot be used to change a cluster's node type or engine version. For more information, see:    Scaling for Amazon ElastiCache for Redis—Redis (cluster mode enabled) in the ElastiCache User Guide    ModifyReplicationGroupShardConfiguration in the ElastiCache API Reference    This operation is valid for Redis only. 
    */
   modifyReplicationGroup(params: ElastiCache.Types.ModifyReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.ModifyReplicationGroupResult) => void): Request<ElastiCache.Types.ModifyReplicationGroupResult, AWSError>;
   /**
-   * Modifies the settings for a replication group.  Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups.   This operation is valid for Redis only. 
+   * Modifies the settings for a replication group. For Redis (cluster mode enabled) clusters, this operation cannot be used to change a cluster's node type or engine version. For more information, see:    Scaling for Amazon ElastiCache for Redis—Redis (cluster mode enabled) in the ElastiCache User Guide    ModifyReplicationGroupShardConfiguration in the ElastiCache API Reference    This operation is valid for Redis only. 
    */
   modifyReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.ModifyReplicationGroupResult) => void): Request<ElastiCache.Types.ModifyReplicationGroupResult, AWSError>;
   /**
-   * Performs horizontal scaling on a Redis (cluster mode enabled) cluster with no downtime. Requires Redis engine version 3.2.10 or newer. For information on upgrading your engine to a newer version, see Upgrading Engine Versions in the Amazon ElastiCache User Guide. For more information on ElastiCache for Redis online horizontal scaling, see ElastiCache for Redis Horizontal Scaling 
+   * Modifies a replication group's shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among exisiting shards.
    */
   modifyReplicationGroupShardConfiguration(params: ElastiCache.Types.ModifyReplicationGroupShardConfigurationMessage, callback?: (err: AWSError, data: ElastiCache.Types.ModifyReplicationGroupShardConfigurationResult) => void): Request<ElastiCache.Types.ModifyReplicationGroupShardConfigurationResult, AWSError>;
   /**
-   * Performs horizontal scaling on a Redis (cluster mode enabled) cluster with no downtime. Requires Redis engine version 3.2.10 or newer. For information on upgrading your engine to a newer version, see Upgrading Engine Versions in the Amazon ElastiCache User Guide. For more information on ElastiCache for Redis online horizontal scaling, see ElastiCache for Redis Horizontal Scaling 
+   * Modifies a replication group's shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among exisiting shards.
    */
   modifyReplicationGroupShardConfiguration(callback?: (err: AWSError, data: ElastiCache.Types.ModifyReplicationGroupShardConfigurationResult) => void): Request<ElastiCache.Types.ModifyReplicationGroupShardConfigurationResult, AWSError>;
   /**
@@ -377,6 +393,7 @@ declare namespace ElastiCache {
      */
     Tags: TagList;
   }
+  export type AllowedNodeGroupId = string;
   export interface AllowedNodeTypeModificationsMessage {
     /**
      * A string list, each element of which specifies a cache node type which you can use to scale your cluster or replication group. When scaling up a Redis cluster or replication group using ModifyCacheCluster or ModifyReplicationGroup, use a value from this list for the CacheNodeType parameter.
@@ -424,7 +441,7 @@ declare namespace ElastiCache {
      */
     ClientDownloadLandingPage?: String;
     /**
-     * The name of the compute and memory capacity node type for the cluster. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see Amazon ElastiCache Product Features and Details and either Cache Node Type-Specific Parameters for Memcached or Cache Node Type-Specific Parameters for Redis.
+     * The name of the compute and memory capacity node type for the cluster. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge   R4 node types; cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see:    Amazon ElastiCache Product Features and Details     Cache Node Type-Specific Parameters for Memcached     Cache Node Type-Specific Parameters for Redis   
      */
     CacheNodeType?: String;
     /**
@@ -501,11 +518,11 @@ declare namespace ElastiCache {
      */
     AuthTokenEnabled?: BooleanOptional;
     /**
-     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster. Default: false 
+     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6 or 4.x. Default: false 
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
-     * A flag that enables encryption at-rest when set to true. You cannot modify the value of AtRestEncryptionEnabled after the cluster is created. To enable at-rest encryption on a cluster you must set AtRestEncryptionEnabled to true when you create a cluster. Default: false 
+     * A flag that enables encryption at-rest when set to true. You cannot modify the value of AtRestEncryptionEnabled after the cluster is created. To enable at-rest encryption on a cluster you must set AtRestEncryptionEnabled to true when you create a cluster.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6 or 4.x. Default: false 
      */
     AtRestEncryptionEnabled?: BooleanOptional;
   }
@@ -530,7 +547,7 @@ declare namespace ElastiCache {
      */
     EngineVersion?: String;
     /**
-     * The name of the cache parameter group family associated with this cache engine. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 
+     * The name of the cache parameter group family associated with this cache engine. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 | redis4.0 
      */
     CacheParameterGroupFamily?: String;
     /**
@@ -641,7 +658,7 @@ declare namespace ElastiCache {
      */
     CacheParameterGroupName?: String;
     /**
-     * The name of the cache parameter group family that this cache parameter group is compatible with. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 
+     * The name of the cache parameter group family that this cache parameter group is compatible with. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 | redis4.0 
      */
     CacheParameterGroupFamily?: String;
     /**
@@ -766,6 +783,20 @@ declare namespace ElastiCache {
   export type CacheSubnetGroups = CacheSubnetGroup[];
   export type ChangeType = "immediate"|"requires-reboot"|string;
   export type ClusterIdList = String[];
+  export interface ConfigureShard {
+    /**
+     * The 4-digit id for the node group you are configuring. For Redis (cluster mode disabled) replication groups, the node group id is always 0001. To find a Redis (cluster mode enabled)'s node group's (shard's) id, see Finding a Shard's Id.
+     */
+    NodeGroupId: AllowedNodeGroupId;
+    /**
+     * The number of replicas you want in this node group at the end of this operation. The maximum value for NewReplicaCount is 5. The minimum value depends upon the type of Redis replication group you are working with. The minimum number of replicas in a shard or replication group is:   Redis (cluster mode disabled)   If Multi-AZ with Automatic Failover is enabled: 1   If Multi-AZ with Automatic Failover is not enable: 0     Redis (cluster mode enabled): 0 (though you will not be able to failover to a replica if your primary node fails)  
+     */
+    NewReplicaCount: Integer;
+    /**
+     * A list of PreferredAvailabilityZone strings that specify which availability zones the replication group's nodes are to be in. The nummber of PreferredAvailabilityZone values must equal the value of NewReplicaCount plus 1 to account for the primary node. If this member of ReplicaConfiguration is omitted, ElastiCache for Redis selects the availability zone for each of the replicas.
+     */
+    PreferredAvailabilityZones?: PreferredAvailabilityZoneList;
+  }
   export interface CopySnapshotMessage {
     /**
      * The name of an existing snapshot from which to make a copy.
@@ -789,7 +820,7 @@ declare namespace ElastiCache {
      */
     CacheClusterId: String;
     /**
-     *  Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups.  The ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group. If the specified replication group is Multi-AZ enabled and the Availability Zone is not specified, the cluster is created in Availability Zones that provide the best spread of read replicas across Availability Zones.  This parameter is only valid if the Engine parameter is redis. 
+     * The ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group. If the specified replication group is Multi-AZ enabled and the Availability Zone is not specified, the cluster is created in Availability Zones that provide the best spread of read replicas across Availability Zones.  This parameter is only valid if the Engine parameter is redis. 
      */
     ReplicationGroupId?: String;
     /**
@@ -809,7 +840,7 @@ declare namespace ElastiCache {
      */
     NumCacheNodes?: IntegerOptional;
     /**
-     * The compute and memory capacity of the nodes in the node group (shard). The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see Amazon ElastiCache Product Features and Details and either Cache Node Type-Specific Parameters for Memcached or Cache Node Type-Specific Parameters for Redis.
+     * The compute and memory capacity of the nodes in the node group (shard). The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge   R4 node types; cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see:    Amazon ElastiCache Product Features and Details     Cache Node Type-Specific Parameters for Memcached     Cache Node Type-Specific Parameters for Redis   
      */
     CacheNodeType?: String;
     /**
@@ -865,7 +896,7 @@ declare namespace ElastiCache {
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
-     * The number of days for which ElastiCache retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot taken today is retained for 5 days before being deleted.  This parameter is only valid if the Engine parameter is redis.  Default: 0 (i.e., automatic backups are disabled for this cluster).
+     * The number of days for which ElastiCache retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot taken today is retained for 5 days before being deleted.  This parameter is only valid if the Engine parameter is redis.  Default: 0 (i.e., automatic backups are disabled for this cache cluster).
      */
     SnapshotRetentionLimit?: IntegerOptional;
     /**
@@ -873,7 +904,7 @@ declare namespace ElastiCache {
      */
     SnapshotWindow?: String;
     /**
-     *  Reserved parameter. The password used to access a password protected server. This parameter is valid only if:   The parameter TransitEncryptionEnabled was set to true when the cluster was created.   The line requirepass was added to the database configuration file.   Password constraints:   Must be only printable ASCII characters.   Must be at least 16 characters and no more than 128 characters in length.   Cannot contain any of the following characters: '/', '"', or '@'.    For more information, see AUTH password at http://redis.io/commands/AUTH.
+     *  Reserved parameter. The password used to access a password protected server. Password constraints:   Must be only printable ASCII characters.   Must be at least 16 characters and no more than 128 characters in length.   Cannot contain any of the following characters: '/', '"', or '@'.    For more information, see AUTH password at http://redis.io/commands/AUTH.
      */
     AuthToken?: String;
   }
@@ -886,7 +917,7 @@ declare namespace ElastiCache {
      */
     CacheParameterGroupName: String;
     /**
-     * The name of the cache parameter group family that the cache parameter group can be used with. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 
+     * The name of the cache parameter group family that the cache parameter group can be used with. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 | redis4.0 
      */
     CacheParameterGroupFamily: String;
     /**
@@ -945,7 +976,7 @@ declare namespace ElastiCache {
      */
     AutomaticFailoverEnabled?: BooleanOptional;
     /**
-     * The number of clusters this replication group initially has. This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead. If AutomaticFailoverEnabled is true, the value of this parameter must be at least 2. If AutomaticFailoverEnabled is false you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6. The maximum permitted value for NumCacheClusters is 6 (primary plus 5 replicas).
+     * The number of clusters this replication group initially has. This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead. If AutomaticFailoverEnabled is true, the value of this parameter must be at least 2. If AutomaticFailoverEnabled is false you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6. The maximum permitted value for NumCacheClusters is 6 (1 primary plus 5 replicas).
      */
     NumCacheClusters?: IntegerOptional;
     /**
@@ -961,11 +992,11 @@ declare namespace ElastiCache {
      */
     ReplicasPerNodeGroup?: IntegerOptional;
     /**
-     * A list of node group (shard) configuration options. Each node group (shard) configuration has the following: Slots, PrimaryAvailabilityZone, ReplicaAvailabilityZones, ReplicaCount. If you're creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to individually configure each node group (shard), or you can omit this parameter.
+     * A list of node group (shard) configuration options. Each node group (shard) configuration has the following members: PrimaryAvailabilityZone, ReplicaAvailabilityZones, ReplicaCount, and Slots. If you're creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to individually configure each node group (shard), or you can omit this parameter. However, when seeding a Redis (cluster mode enabled) cluster from a S3 rdb file, you must configure each node group (shard) using this parameter because you must specify the slots for each node group.
      */
     NodeGroupConfiguration?: NodeGroupConfigurationList;
     /**
-     * The compute and memory capacity of the nodes in the node group (shard). The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see Amazon ElastiCache Product Features and Details and either Cache Node Type-Specific Parameters for Memcached or Cache Node Type-Specific Parameters for Redis.
+     * The compute and memory capacity of the nodes in the node group (shard). The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge   R4 node types; cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see:    Amazon ElastiCache Product Features and Details     Cache Node Type-Specific Parameters for Memcached     Cache Node Type-Specific Parameters for Redis   
      */
     CacheNodeType?: String;
     /**
@@ -993,7 +1024,7 @@ declare namespace ElastiCache {
      */
     SecurityGroupIds?: SecurityGroupIdsList;
     /**
-     * A list of cost allocation tags to be added to this resource. A tag is a key-value pair. A tag key does not have to be accompanied by a tag value.
+     * A list of cost allocation tags to be added to this resource. A tag is a key-value pair.
      */
     Tags?: TagList;
     /**
@@ -1029,15 +1060,15 @@ declare namespace ElastiCache {
      */
     SnapshotWindow?: String;
     /**
-     *  Reserved parameter. The password used to access a password protected server. This parameter is valid only if:   The parameter TransitEncryptionEnabled was set to true when the cluster was created.   The line requirepass was added to the database configuration file.   Password constraints:   Must be only printable ASCII characters.   Must be at least 16 characters and no more than 128 characters in length.   Cannot contain any of the following characters: '/', '"', or '@'.    For more information, see AUTH password at http://redis.io/commands/AUTH.
+     *  Reserved parameter. The password used to access a password protected server.  AuthToken can be specified only on replication groups where TransitEncryptionEnabled is true.  For HIPAA compliance, you must specify TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup.  Password constraints:   Must be only printable ASCII characters.   Must be at least 16 characters and no more than 128 characters in length.   Cannot contain any of the following characters: '/', '"', or '@'.    For more information, see AUTH password at http://redis.io/commands/AUTH.
      */
     AuthToken?: String;
     /**
-     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster. This parameter is valid only if the Engine parameter is redis, the EngineVersion parameter is 3.2.4 or later, and the cluster is being created in an Amazon VPC. If you enable in-transit encryption, you must also specify a value for CacheSubnetGroup. Default: false 
+     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster. This parameter is valid only if the Engine parameter is redis, the EngineVersion parameter is 3.2.6 or 4.x, and the cluster is being created in an Amazon VPC. If you enable in-transit encryption, you must also specify a value for CacheSubnetGroup.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6 or 4.x. Default: false   For HIPAA compliance, you must specify TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup. 
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
-     * A flag that enables encryption at rest when set to true. You cannot modify the value of AtRestEncryptionEnabled after the replication group is created. To enable encryption at rest on a replication group you must set AtRestEncryptionEnabled to true when you create the replication group.   This parameter is valid only if the Engine parameter is redis and the cluster is being created in an Amazon VPC.  Default: false 
+     * A flag that enables encryption at rest when set to true. You cannot modify the value of AtRestEncryptionEnabled after the replication group is created. To enable encryption at rest on a replication group you must set AtRestEncryptionEnabled to true when you create the replication group.   Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6 or 4.x. Default: false 
      */
     AtRestEncryptionEnabled?: BooleanOptional;
   }
@@ -1060,6 +1091,31 @@ declare namespace ElastiCache {
   }
   export interface CreateSnapshotResult {
     Snapshot?: Snapshot;
+  }
+  export interface DecreaseReplicaCountMessage {
+    /**
+     * The id of the replication group from which you want to remove replica nodes.
+     */
+    ReplicationGroupId: String;
+    /**
+     * The number of read replica nodes you want at the completion of this operation. For Redis (cluster mode disabled) replication groups, this is the number of replica nodes in the replication group. For Redis (cluster mode enabled) replication groups, this is the number of replica nodes in each of the replication group's node groups. The minimum number of replicas in a shard or replication group is:   Redis (cluster mode disabled)   If Multi-AZ with Automatic Failover is enabled: 1   If Multi-AZ with Automatic Failover is not enabled: 0     Redis (cluster mode enabled): 0 (though you will not be able to failover to a replica if your primary node fails)  
+     */
+    NewReplicaCount?: IntegerOptional;
+    /**
+     * A list of ConfigureShard objects that can be used to configure each shard in a Redis (cluster mode enabled) replication group. The ConfigureShard has three members: NewReplicaCount, NodeGroupId, and PreferredAvailabilityZones.
+     */
+    ReplicaConfiguration?: ReplicaConfigurationList;
+    /**
+     * A list of the node ids to remove from the replication group or node group (shard).
+     */
+    ReplicasToRemove?: RemoveReplicasList;
+    /**
+     * If True, the number of replica nodes is decreased immediately. If False, the number of replica nodes is decreased during the next maintenance window.
+     */
+    ApplyImmediately: Boolean;
+  }
+  export interface DecreaseReplicaCountResult {
+    ReplicationGroup?: ReplicationGroup;
   }
   export interface DeleteCacheClusterMessage {
     /**
@@ -1150,7 +1206,7 @@ declare namespace ElastiCache {
      */
     EngineVersion?: String;
     /**
-     * The name of a specific cache parameter group family to return details for. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2  Constraints:   Must be 1 to 255 alphanumeric characters   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens  
+     * The name of a specific cache parameter group family to return details for. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 | redis4.0  Constraints:   Must be 1 to 255 alphanumeric characters   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens  
      */
     CacheParameterGroupFamily?: String;
     /**
@@ -1228,7 +1284,7 @@ declare namespace ElastiCache {
   }
   export interface DescribeEngineDefaultParametersMessage {
     /**
-     * The name of the cache parameter group family. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 
+     * The name of the cache parameter group family. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 | redis4.0 
      */
     CacheParameterGroupFamily: String;
     /**
@@ -1297,7 +1353,7 @@ declare namespace ElastiCache {
      */
     ReservedCacheNodesOfferingId?: String;
     /**
-     * The cache node type filter value. Use this parameter to show only those reservations matching the specified cache node type. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see Amazon ElastiCache Product Features and Details and either Cache Node Type-Specific Parameters for Memcached or Cache Node Type-Specific Parameters for Redis.
+     * The cache node type filter value. Use this parameter to show only those reservations matching the specified cache node type. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge   R4 node types; cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see:    Amazon ElastiCache Product Features and Details     Cache Node Type-Specific Parameters for Memcached     Cache Node Type-Specific Parameters for Redis   
      */
     CacheNodeType?: String;
     /**
@@ -1327,7 +1383,7 @@ declare namespace ElastiCache {
      */
     ReservedCacheNodesOfferingId?: String;
     /**
-     * The cache node type filter value. Use this parameter to show only the available offerings matching the specified cache node type. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see Amazon ElastiCache Product Features and Details and either Cache Node Type-Specific Parameters for Memcached or Cache Node Type-Specific Parameters for Redis.
+     * The cache node type filter value. Use this parameter to show only the available offerings matching the specified cache node type. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge   R4 node types; cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see:    Amazon ElastiCache Product Features and Details     Cache Node Type-Specific Parameters for Memcached     Cache Node Type-Specific Parameters for Redis   
      */
     CacheNodeType?: String;
     /**
@@ -1419,7 +1475,7 @@ declare namespace ElastiCache {
   }
   export interface EngineDefaults {
     /**
-     * Specifies the name of the cache parameter group family to which the engine default parameters apply. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 
+     * Specifies the name of the cache parameter group family to which the engine default parameters apply. Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 | redis4.0 
      */
     CacheParameterGroupFamily?: String;
     /**
@@ -1463,6 +1519,27 @@ declare namespace ElastiCache {
      * A list of events. Each element in the list contains detailed information about one event.
      */
     Events?: EventList;
+  }
+  export interface IncreaseReplicaCountMessage {
+    /**
+     * The id of the replication group to which you want to add replica nodes.
+     */
+    ReplicationGroupId: String;
+    /**
+     * The number of read replica nodes you want at the completion of this operation. For Redis (cluster mode disabled) replication groups, this is the number of replica nodes in the replication group. For Redis (cluster mode enabled) replication groups, this is the number of replica nodes in each of the replication group's node groups.
+     */
+    NewReplicaCount?: IntegerOptional;
+    /**
+     * A list of ConfigureShard objects that can be used to configure each shard in a Redis (cluster mode enabled) replication group. The ConfigureShard has three members: NewReplicaCount, NodeGroupId, and PreferredAvailabilityZones.
+     */
+    ReplicaConfiguration?: ReplicaConfigurationList;
+    /**
+     * If True, the number of replica nodes is increased immediately. If False, the number of replica nodes is increased during the next maintenance window.
+     */
+    ApplyImmediately: Boolean;
+  }
+  export interface IncreaseReplicaCountResult {
+    ReplicationGroup?: ReplicationGroup;
   }
   export type Integer = number;
   export type IntegerOptional = number;
@@ -1653,7 +1730,7 @@ declare namespace ElastiCache {
      */
     CacheNodeType?: String;
     /**
-     * The name of the Node Group (called shard in the console).
+     * Deprecated. This parameter is not used.
      */
     NodeGroupId?: String;
   }
@@ -1678,9 +1755,13 @@ declare namespace ElastiCache {
      */
     ReshardingConfiguration?: ReshardingConfigurationList;
     /**
-     * If the value of NodeGroupCount is less than the current number of node groups (shards), NodeGroupsToRemove is a required list of node group ids to remove from the cluster.
+     * If the value of NodeGroupCount is less than the current number of node groups (shards), the NodeGroupsToRemove or NodeGroupsToRetain is a required list of node group ids to remove from or retain in the cluster. ElastiCache for Redis will attempt to remove all node groups listed by NodeGroupsToRemove from the cluster.
      */
     NodeGroupsToRemove?: NodeGroupsToRemoveList;
+    /**
+     * If the value of NodeGroupCount is less than the current number of node groups (shards), the NodeGroupsToRemove or NodeGroupsToRetain is a required list of node group ids to remove from or retain in the cluster. ElastiCache for Redis will attempt to remove all node groups except those listed by NodeGroupsToRetain from the cluster.
+     */
+    NodeGroupsToRetain?: NodeGroupsToRetainList;
   }
   export interface ModifyReplicationGroupShardConfigurationResult {
     ReplicationGroup?: ReplicationGroup;
@@ -1709,6 +1790,10 @@ declare namespace ElastiCache {
   }
   export interface NodeGroupConfiguration {
     /**
+     * The 4-digit id for the node group these configuration values apply to.
+     */
+    NodeGroupId?: AllowedNodeGroupId;
+    /**
      * A string that specifies the keyspace for a particular node group. Keyspaces range from 0 to 16,383. The string is in the format startkey-endkey. Example: "0-3999" 
      */
     Slots?: String;
@@ -1736,18 +1821,22 @@ declare namespace ElastiCache {
      * The ID of the node within its cluster. A node ID is a numeric identifier (0001, 0002, etc.).
      */
     CacheNodeId?: String;
+    /**
+     * The information required for client programs to connect to a node for read operations. The read endpoint is only applicable on Redis (cluster mode disabled) clusters.
+     */
     ReadEndpoint?: Endpoint;
     /**
      * The name of the Availability Zone in which the node is located.
      */
     PreferredAvailabilityZone?: String;
     /**
-     * The role that is currently assigned to the node - primary or replica.
+     * The role that is currently assigned to the node - primary or replica. This member is only applicable for Redis (cluster mode disabled) replication groups.
      */
     CurrentRole?: String;
   }
   export type NodeGroupMemberList = NodeGroupMember[];
-  export type NodeGroupsToRemoveList = String[];
+  export type NodeGroupsToRemoveList = AllowedNodeGroupId[];
+  export type NodeGroupsToRetainList = AllowedNodeGroupId[];
   export interface NodeSnapshot {
     /**
      * A unique identifier for the source cluster.
@@ -1847,7 +1936,7 @@ declare namespace ElastiCache {
      */
     NumCacheNodes?: IntegerOptional;
     /**
-     * A list of cache node IDs that are being removed (or will be removed) from the cluster. A node ID is a numeric identifier (0001, 0002, etc.).
+     * A list of cache node IDs that are being removed (or will be removed) from the cluster. A node ID is a 4-digit numeric identifier (0001, 0002, etc.).
      */
     CacheNodeIdsToRemove?: CacheNodeIdsList;
     /**
@@ -1901,6 +1990,7 @@ declare namespace ElastiCache {
     RecurringChargeFrequency?: String;
   }
   export type RecurringChargeList = RecurringCharge[];
+  export type RemoveReplicasList = String[];
   export interface RemoveTagsFromResourceMessage {
     /**
      * The Amazon Resource Name (ARN) of the resource from which you want the tags removed, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster or arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
@@ -1911,6 +2001,7 @@ declare namespace ElastiCache {
      */
     TagKeys: KeyList;
   }
+  export type ReplicaConfigurationList = ConfigureShard[];
   export interface ReplicationGroup {
     /**
      * The identifier for the replication group.
@@ -1929,7 +2020,7 @@ declare namespace ElastiCache {
      */
     PendingModifiedValues?: ReplicationGroupPendingModifiedValues;
     /**
-     * The identifiers of all the nodes that are part of this replication group.
+     * The names of all the cache clusters that are part of this replication group.
      */
     MemberClusters?: ClusterIdList;
     /**
@@ -1969,11 +2060,11 @@ declare namespace ElastiCache {
      */
     AuthTokenEnabled?: BooleanOptional;
     /**
-     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster. Default: false 
+     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6 or 4.x. Default: false 
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
-     * A flag that enables encryption at-rest when set to true. You cannot modify the value of AtRestEncryptionEnabled after the cluster is created. To enable encryption at-rest on a cluster you must set AtRestEncryptionEnabled to true when you create a cluster. Default: false 
+     * A flag that enables encryption at-rest when set to true. You cannot modify the value of AtRestEncryptionEnabled after the cluster is created. To enable encryption at-rest on a cluster you must set AtRestEncryptionEnabled to true when you create a cluster.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6 or 4.x. Default: false 
      */
     AtRestEncryptionEnabled?: BooleanOptional;
   }
@@ -2012,7 +2103,7 @@ declare namespace ElastiCache {
      */
     ReservedCacheNodesOfferingId?: String;
     /**
-     * The cache node type for the reserved cache nodes. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see Amazon ElastiCache Product Features and Details and either Cache Node Type-Specific Parameters for Memcached or Cache Node Type-Specific Parameters for Redis.
+     * The cache node type for the reserved cache nodes. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge   R4 node types; cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see:    Amazon ElastiCache Product Features and Details     Cache Node Type-Specific Parameters for Memcached     Cache Node Type-Specific Parameters for Redis   
      */
     CacheNodeType?: String;
     /**
@@ -2051,6 +2142,10 @@ declare namespace ElastiCache {
      * The recurring price charged to run this reserved cache node.
      */
     RecurringCharges?: RecurringChargeList;
+    /**
+     * The Amazon Resource Name (ARN) of the reserved cache node. Example: arn:aws:elasticache:us-east-1:123456789012:reserved-instance:ri-2017-03-27-08-33-25-582 
+     */
+    ReservationARN?: String;
   }
   export type ReservedCacheNodeList = ReservedCacheNode[];
   export interface ReservedCacheNodeMessage {
@@ -2069,7 +2164,7 @@ declare namespace ElastiCache {
      */
     ReservedCacheNodesOfferingId?: String;
     /**
-     * The cache node type for the reserved cache node. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see Amazon ElastiCache Product Features and Details and either Cache Node Type-Specific Parameters for Memcached or Cache Node Type-Specific Parameters for Redis.
+     * The cache node type for the reserved cache node. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge   R4 node types; cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see:    Amazon ElastiCache Product Features and Details     Cache Node Type-Specific Parameters for Memcached     Cache Node Type-Specific Parameters for Redis   
      */
     CacheNodeType?: String;
     /**
@@ -2123,6 +2218,10 @@ declare namespace ElastiCache {
     ParameterNameValues?: ParameterNameValueList;
   }
   export interface ReshardingConfiguration {
+    /**
+     * The 4-digit id for the node group these configuration values apply to.
+     */
+    NodeGroupId?: AllowedNodeGroupId;
     /**
      * A list of preferred availability zones for the nodes in this cluster.
      */
@@ -2196,7 +2295,7 @@ declare namespace ElastiCache {
      */
     SnapshotSource?: String;
     /**
-     * The name of the compute and memory capacity node type for the source cluster. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see Amazon ElastiCache Product Features and Details and either Cache Node Type-Specific Parameters for Memcached or Cache Node Type-Specific Parameters for Redis.
+     * The name of the compute and memory capacity node type for the source cluster. The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.   General purpose:   Current generation:   T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium   M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge   M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge    Previous generation: (not recommended)  T1 node types: cache.t1.micro   M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge      Compute optimized:   Previous generation: (not recommended)  C1 node types: cache.c1.xlarge      Memory optimized:   Current generation:   R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge   R4 node types; cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge    Previous generation: (not recommended)  M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge       Notes:    All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).   Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances.    Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.   Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.   For a complete listing of node types and specifications, see:    Amazon ElastiCache Product Features and Details     Cache Node Type-Specific Parameters for Memcached     Cache Node Type-Specific Parameters for Redis   
      */
     CacheNodeType?: String;
     /**
@@ -2310,7 +2409,7 @@ declare namespace ElastiCache {
     /**
      * The name of the node group (called shard in the console) in this replication group on which automatic failover is to be tested. You may test automatic failover on up to 5 node groups in any rolling 24-hour period.
      */
-    NodeGroupId: String;
+    NodeGroupId: AllowedNodeGroupId;
   }
   export interface TestFailoverResult {
     ReplicationGroup?: ReplicationGroup;
