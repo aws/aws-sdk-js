@@ -535,5 +535,9 @@ describe('endpoint discovery', function() {
       request.send();
       expect(request.httpRequest.headers['User-Agent']).include('endpoint-discovery');
     });
+
+    it('do not perform endpoint discovery for presigning', function() {
+      
+    });
   });
 });
