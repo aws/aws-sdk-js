@@ -292,6 +292,10 @@ declare namespace ES {
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptions;
     /**
+     * Specifies the NodeToNodeEncryptionOptions.
+     */
+    NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
+    /**
      *  Option to allow references to indices in an HTTP request body. Must be false when configuring access to individual sub-resources. By default, the value is true. See Configuration Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptions;
@@ -529,6 +533,10 @@ declare namespace ES {
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptionsStatus;
     /**
+     * Specifies the NodeToNodeEncryptionOptions for the Elasticsearch domain.
+     */
+    NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptionsStatus;
+    /**
      * Specifies the AdvancedOptions for the domain. See Configuring Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptionsStatus;
@@ -603,6 +611,10 @@ declare namespace ES {
      *  Specifies the status of the EncryptionAtRestOptions.
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptions;
+    /**
+     * Specifies the status of the NodeToNodeEncryptionOptions.
+     */
+    NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
     /**
      * Specifies the status of the AdvancedOptions
      */
@@ -799,6 +811,22 @@ declare namespace ES {
   export type MaximumInstanceCount = number;
   export type MinimumInstanceCount = number;
   export type NextToken = string;
+  export interface NodeToNodeEncryptionOptions {
+    /**
+     * Specify true to enable node-to-node encryption.
+     */
+    Enabled?: Boolean;
+  }
+  export interface NodeToNodeEncryptionOptionsStatus {
+    /**
+     * Specifies the node-to-node encryption options for the specified Elasticsearch domain.
+     */
+    Options: NodeToNodeEncryptionOptions;
+    /**
+     * Specifies the status of the node-to-node encryption options for the specified Elasticsearch domain.
+     */
+    Status: OptionStatus;
+  }
   export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|string;
   export interface OptionStatus {
     /**
