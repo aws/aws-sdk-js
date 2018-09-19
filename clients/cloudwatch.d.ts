@@ -93,6 +93,14 @@ declare class CloudWatch extends Service {
    */
   getMetricStatistics(callback?: (err: AWSError, data: CloudWatch.Types.GetMetricStatisticsOutput) => void): Request<CloudWatch.Types.GetMetricStatisticsOutput, AWSError>;
   /**
+   * You can use the GetMetricWidgetImage API to retrieve a snapshot graph of one or more Amazon CloudWatch metrics as a bitmap image. You can then embed this image into your services and products, such as wiki pages, reports, and documents. You could also retrieve images regularly, such as every minute, and create your own custom live dashboard. The graph you retrieve can include all CloudWatch metric graph features, including metric math and horizontal and vertical annotations. There is a limit of 20 transactions per second for this API. Each GetMetricWidgetImage action has the following limits:   As many as 100 metrics in the graph.   Up to 100 KB uncompressed payload.  
+   */
+  getMetricWidgetImage(params: CloudWatch.Types.GetMetricWidgetImageInput, callback?: (err: AWSError, data: CloudWatch.Types.GetMetricWidgetImageOutput) => void): Request<CloudWatch.Types.GetMetricWidgetImageOutput, AWSError>;
+  /**
+   * You can use the GetMetricWidgetImage API to retrieve a snapshot graph of one or more Amazon CloudWatch metrics as a bitmap image. You can then embed this image into your services and products, such as wiki pages, reports, and documents. You could also retrieve images regularly, such as every minute, and create your own custom live dashboard. The graph you retrieve can include all CloudWatch metric graph features, including metric math and horizontal and vertical annotations. There is a limit of 20 transactions per second for this API. Each GetMetricWidgetImage action has the following limits:   As many as 100 metrics in the graph.   Up to 100 KB uncompressed payload.  
+   */
+  getMetricWidgetImage(callback?: (err: AWSError, data: CloudWatch.Types.GetMetricWidgetImageOutput) => void): Request<CloudWatch.Types.GetMetricWidgetImageOutput, AWSError>;
+  /**
    * Returns a list of the dashboards for your account. If you include DashboardNamePrefix, only those dashboards with names starting with the prefix are listed. Otherwise, all dashboards in your account are listed.   ListDashboards returns up to 1000 results on one page. If there are more than 1000 dashboards, you can call ListDashboards again and include the value you received for NextToken in the first call, to receive the next 1000 results.
    */
   listDashboards(params: CloudWatch.Types.ListDashboardsInput, callback?: (err: AWSError, data: CloudWatch.Types.ListDashboardsOutput) => void): Request<CloudWatch.Types.ListDashboardsOutput, AWSError>;
@@ -524,6 +532,22 @@ declare namespace CloudWatch {
      */
     Datapoints?: Datapoints;
   }
+  export interface GetMetricWidgetImageInput {
+    /**
+     * A JSON string that defines the bitmap graph to be retrieved. The string includes the metrics to include in the graph, statistics, annotations, title, axis limits, and so on. You can include only one MetricWidget parameter in each GetMetricWidgetImage call. For more information about the syntax of MetricWidget see CloudWatch-Metric-Widget-Structure. If any metric on the graph could not load all the requested data points, an orange triangle with an exclamation point appears next to the graph legend.
+     */
+    MetricWidget: MetricWidget;
+    /**
+     * The format of the resulting image. Only PNG images are supported. The default is png. If you specify png, the API returns an HTTP response with the content-type set to text/xml. The image data is in a MetricWidgetImage field. For example:   &lt;GetMetricWidgetImageResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/"&gt;    &lt;GetMetricWidgetImageResult&gt;    &lt;MetricWidgetImage&gt;    iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...    &lt;/MetricWidgetImage&gt;    &lt;/GetMetricWidgetImageResult&gt;    &lt;ResponseMetadata&gt;    &lt;RequestId&gt;6f0d4192-4d42-11e8-82c1-f539a07e0e3b&lt;/RequestId&gt;    &lt;/ResponseMetadata&gt;   &lt;/GetMetricWidgetImageResponse&gt;  The image/png setting is intended only for custom HTTP requests. For most use cases, and all actions using an AWS SDK, you should use png. If you specify image/png, the HTTP response has a content-type set to image/png, and the body of the response is a PNG image. 
+     */
+    OutputFormat?: OutputFormat;
+  }
+  export interface GetMetricWidgetImageOutput {
+    /**
+     * The image of the graph, in the output format specified.
+     */
+    MetricWidgetImage?: MetricWidgetImage;
+  }
   export type HistoryData = string;
   export type HistoryItemType = "ConfigurationUpdate"|"StateUpdate"|"Action"|string;
   export type HistorySummary = string;
@@ -819,9 +843,12 @@ declare namespace CloudWatch {
      */
     Unit?: StandardUnit;
   }
+  export type MetricWidget = string;
+  export type MetricWidgetImage = Buffer|Uint8Array|Blob|string;
   export type Metrics = Metric[];
   export type Namespace = string;
   export type NextToken = string;
+  export type OutputFormat = string;
   export type Period = number;
   export interface PutDashboardInput {
     /**

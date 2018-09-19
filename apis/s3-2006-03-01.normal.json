@@ -10,7 +10,6 @@
     "serviceFullName": "Amazon Simple Storage Service",
     "serviceId": "S3",
     "signatureVersion": "s3",
-    "timestampFormat": "rfc822",
     "uid": "s3-2006-03-01"
   },
   "operations": {
@@ -968,7 +967,7 @@
       "input": {
         "shape": "PutBucketReplicationRequest"
       },
-      "documentation": "<p>Creates a new replication configuration (or replaces an existing one, if present).</p>"
+      "documentation": "<p> Creates a new replication configuration (or replaces an existing one, if present). For more information, see <a href=\" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html\">Cross-Region Replication (CRR)</a> in the Amazon S3 Developer Guide. </p>"
     },
     "PutBucketRequestPayment": {
       "name": "PutBucketRequestPayment",
@@ -2552,6 +2551,7 @@
       "members": {
         "Bucket": {
           "shape": "BucketName",
+          "documentation": "<p>Deletes the replication subresource associated with the specified bucket.</p> <note> <p>There is usually some time lag before replication configuration deletion is fully propagated to all the Amazon S3 systems.</p> </note> <p> For more information, see <a href=\" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html\">Cross-Region Replication (CRR)</a> in the Amazon S3 Developer Guide. </p>",
           "location": "uri",
           "locationName": "Bucket"
         }
@@ -2622,6 +2622,23 @@
           "documentation": "<p>Date and time the object was last modified.</p>"
         }
       }
+    },
+    "DeleteMarkerReplication": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "DeleteMarkerReplicationStatus",
+          "documentation": "<p>The status of the delete marker replication.</p> <note> <p> In the current implementation, Amazon S3 does not replicate the delete markers. Therefore, the status must be <code>Disabled</code>. </p> </note>"
+        }
+      },
+      "documentation": "<p>Specifies whether Amazon S3 should replicate delete makers.</p>"
+    },
+    "DeleteMarkerReplicationStatus": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
     },
     "DeleteMarkerVersionId": {
       "type": "string"
@@ -2815,11 +2832,11 @@
       "members": {
         "Bucket": {
           "shape": "BucketName",
-          "documentation": "<p>Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.</p>"
+          "documentation": "<p> Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule. </p> <p> If you have multiple rules in your replication configuration, all rules must specify the same bucket as the destination. A replication configuration can replicate objects only to one destination bucket. </p>"
         },
         "Account": {
           "shape": "AccountId",
-          "documentation": "<p>Account ID of the destination bucket. Currently this is only being verified if Access Control Translation is enabled</p>"
+          "documentation": "<p> Account ID of the destination bucket. Currently Amazon S3 verifies this value only if Access Control Translation is enabled. </p> <p> In a cross-account scenario, if you tell Amazon S3 to change replica ownership to the AWS account that owns the destination bucket by adding the <code>AccessControlTranslation</code> element, this is the account ID of the destination bucket owner. </p>"
         },
         "StorageClass": {
           "shape": "StorageClass",
@@ -2827,11 +2844,11 @@
         },
         "AccessControlTranslation": {
           "shape": "AccessControlTranslation",
-          "documentation": "<p>Container for information regarding the access control for replicas.</p>"
+          "documentation": "<p> Container for information regarding the access control for replicas. </p> <p> Use only in a cross-account scenario, where source and destination bucket owners are not the same, when you want to change replica ownership to the AWS account that owns the destination bucket. If you don't add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object. </p>"
         },
         "EncryptionConfiguration": {
           "shape": "EncryptionConfiguration",
-          "documentation": "<p>Container for information regarding encryption based configuration for replicas.</p>"
+          "documentation": "<p> Container that provides encryption-related information. You must specify this element if the <code>SourceSelectionCriteria</code> is specified. </p>"
         }
       },
       "documentation": "<p>Container for replication destination information.</p>"
@@ -2881,7 +2898,7 @@
       "members": {
         "ReplicaKmsKeyID": {
           "shape": "ReplicaKmsKeyID",
-          "documentation": "<p>The id of the KMS key used to encrypt the replica object.</p>"
+          "documentation": "<p> The ID of the AWS KMS key for the region where the destination bucket resides. Amazon S3 uses this key to encrypt the replica object. </p>"
         }
       },
       "documentation": "<p>Container for information regarding encryption based configuration for replicas.</p>"
@@ -5816,6 +5833,9 @@
     "Prefix": {
       "type": "string"
     },
+    "Priority": {
+      "type": "integer"
+    },
     "Progress": {
       "type": "structure",
       "members": {
@@ -6883,7 +6903,7 @@
         },
         "Rules": {
           "shape": "ReplicationRules",
-          "documentation": "<p>Container for information about a particular replication rule. Replication configuration must have at least one rule and can contain up to 1,000 rules.</p>",
+          "documentation": "<p>Container for one or more replication rules. Replication configuration must have at least one rule and can contain up to 1,000 rules. </p>",
           "locationName": "Rule"
         }
       },
@@ -6892,7 +6912,6 @@
     "ReplicationRule": {
       "type": "structure",
       "required": [
-        "Prefix",
         "Status",
         "Destination"
       ],
@@ -6901,9 +6920,17 @@
           "shape": "ID",
           "documentation": "<p>Unique identifier for the rule. The value cannot be longer than 255 characters.</p>"
         },
+        "Priority": {
+          "shape": "Priority",
+          "documentation": "<p>The priority associated with the rule. If you specify multiple rules in a replication configuration, then Amazon S3 applies rule priority in the event there are conflicts (two or more rules identify the same object based on filter specified). The rule with higher priority takes precedence. For example,</p> <ul> <li> <p>Same object quality prefix based filter criteria If prefixes you specified in multiple rules overlap. </p> </li> <li> <p>Same object qualify tag based filter criteria specified in multiple rules</p> </li> </ul> <p>For more information, see <a href=\" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html\">Cross-Region Replication (CRR)</a> in the Amazon S3 Developer Guide.</p>"
+        },
         "Prefix": {
           "shape": "Prefix",
-          "documentation": "<p>Object keyname prefix identifying one or more objects to which the rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes are not supported.</p>"
+          "documentation": "<p>Object keyname prefix identifying one or more objects to which the rule applies. Maximum prefix length can be up to 1,024 characters. </p>",
+          "deprecated": true
+        },
+        "Filter": {
+          "shape": "ReplicationRuleFilter"
         },
         "Status": {
           "shape": "ReplicationRuleStatus",
@@ -6911,14 +6938,48 @@
         },
         "SourceSelectionCriteria": {
           "shape": "SourceSelectionCriteria",
-          "documentation": "<p>Container for filters that define which source objects should be replicated.</p>"
+          "documentation": "<p> Container that describes additional filters in identifying source objects that you want to replicate. Currently, Amazon S3 supports only the filter that you can specify for objects created with server-side encryption using an AWS KMS-managed key. You can choose to enable or disable replication of these objects. </p> <p> if you want Amazon S3 to replicate objects created with server-side encryption using AWS KMS-managed keys. </p>"
         },
         "Destination": {
           "shape": "Destination",
           "documentation": "<p>Container for replication destination information.</p>"
+        },
+        "DeleteMarkerReplication": {
+          "shape": "DeleteMarkerReplication"
         }
       },
       "documentation": "<p>Container for information about a particular replication rule.</p>"
+    },
+    "ReplicationRuleAndOperator": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix"
+        },
+        "Tags": {
+          "shape": "TagSet",
+          "flattened": true,
+          "locationName": "Tag"
+        }
+      }
+    },
+    "ReplicationRuleFilter": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "<p>Object keyname prefix that identifies subset of objects to which the rule applies.</p>"
+        },
+        "Tag": {
+          "shape": "Tag",
+          "documentation": "<p>Container for specifying a tag key and value. </p> <p>The rule applies only to objects having the tag in its tagset.</p>"
+        },
+        "And": {
+          "shape": "ReplicationRuleAndOperator",
+          "documentation": "<p>Container for specifying rule filters. These filters determine the subset of objects to which the rule applies. The element is required only if you specify more than one filter. For example: </p> <ul> <li> <p>You specify both a <code>Prefix</code> and a <code>Tag</code> filters. Then you wrap these in an <code>And</code> tag.</p> </li> <li> <p>You specify filter based on multiple tags. Then you wrap the <code>Tag</code> elements in an <code>And</code> tag.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Filter that identifies subset of objects to which the replication rule applies. A <code>Filter</code> must specify exactly one <code>Prefix</code>, <code>Tag</code>, or an <code>And</code> child element.</p>"
     },
     "ReplicationRuleStatus": {
       "type": "string",
@@ -7439,7 +7500,7 @@
       "members": {
         "SseKmsEncryptedObjects": {
           "shape": "SseKmsEncryptedObjects",
-          "documentation": "<p>Container for filter information of selection of KMS Encrypted S3 objects.</p>"
+          "documentation": "<p> Container for filter information of selection of KMS Encrypted S3 objects. The element is required if you include <code>SourceSelectionCriteria</code> in the replication configuration. </p>"
         }
       },
       "documentation": "<p>Container for filters that define which source objects should be replicated.</p>"

@@ -542,11 +542,11 @@ declare class S3 extends S3Customizations {
    */
   putBucketPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a new replication configuration (or replaces an existing one, if present).
+   *  Creates a new replication configuration (or replaces an existing one, if present). For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
    */
   putBucketReplication(params: S3.Types.PutBucketReplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a new replication configuration (or replaces an existing one, if present).
+   *  Creates a new replication configuration (or replaces an existing one, if present). For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
    */
   putBucketReplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1370,6 +1370,9 @@ declare namespace S3 {
     Bucket: BucketName;
   }
   export interface DeleteBucketReplicationRequest {
+    /**
+     * Deletes the replication subresource associated with the specified bucket.  There is usually some time lag before replication configuration deletion is fully propagated to all the Amazon S3 systems.   For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
+     */
     Bucket: BucketName;
   }
   export interface DeleteBucketRequest {
@@ -1401,6 +1404,13 @@ declare namespace S3 {
      */
     LastModified?: LastModified;
   }
+  export interface DeleteMarkerReplication {
+    /**
+     * The status of the delete marker replication.   In the current implementation, Amazon S3 does not replicate the delete markers. Therefore, the status must be Disabled.  
+     */
+    Status?: DeleteMarkerReplicationStatus;
+  }
+  export type DeleteMarkerReplicationStatus = "Enabled"|"Disabled"|string;
   export type DeleteMarkerVersionId = string;
   export type DeleteMarkers = DeleteMarkerEntry[];
   export interface DeleteObjectOutput {
@@ -1466,11 +1476,11 @@ declare namespace S3 {
   export type Description = string;
   export interface Destination {
     /**
-     * Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.
+     *  Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.   If you have multiple rules in your replication configuration, all rules must specify the same bucket as the destination. A replication configuration can replicate objects only to one destination bucket. 
      */
     Bucket: BucketName;
     /**
-     * Account ID of the destination bucket. Currently this is only being verified if Access Control Translation is enabled
+     *  Account ID of the destination bucket. Currently Amazon S3 verifies this value only if Access Control Translation is enabled.   In a cross-account scenario, if you tell Amazon S3 to change replica ownership to the AWS account that owns the destination bucket by adding the AccessControlTranslation element, this is the account ID of the destination bucket owner. 
      */
     Account?: AccountId;
     /**
@@ -1478,11 +1488,11 @@ declare namespace S3 {
      */
     StorageClass?: StorageClass;
     /**
-     * Container for information regarding the access control for replicas.
+     *  Container for information regarding the access control for replicas.   Use only in a cross-account scenario, where source and destination bucket owners are not the same, when you want to change replica ownership to the AWS account that owns the destination bucket. If you don't add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object. 
      */
     AccessControlTranslation?: AccessControlTranslation;
     /**
-     * Container for information regarding encryption based configuration for replicas.
+     *  Container that provides encryption-related information. You must specify this element if the SourceSelectionCriteria is specified. 
      */
     EncryptionConfiguration?: EncryptionConfiguration;
   }
@@ -1507,7 +1517,7 @@ declare namespace S3 {
   }
   export interface EncryptionConfiguration {
     /**
-     * The id of the KMS key used to encrypt the replica object.
+     *  The ID of the AWS KMS key for the region where the destination bucket resides. Amazon S3 uses this key to encrypt the replica object. 
      */
     ReplicaKmsKeyID?: ReplicaKmsKeyID;
   }
@@ -2960,6 +2970,7 @@ declare namespace S3 {
   export type Permission = "FULL_CONTROL"|"WRITE"|"WRITE_ACP"|"READ"|"READ_ACP"|string;
   export type Policy = string;
   export type Prefix = string;
+  export type Priority = number;
   export interface Progress {
     /**
      * Current number of object bytes scanned.
@@ -3394,7 +3405,7 @@ declare namespace S3 {
      */
     Role: Role;
     /**
-     * Container for information about a particular replication rule. Replication configuration must have at least one rule and can contain up to 1,000 rules.
+     * Container for one or more replication rules. Replication configuration must have at least one rule and can contain up to 1,000 rules. 
      */
     Rules: ReplicationRules;
   }
@@ -3404,21 +3415,45 @@ declare namespace S3 {
      */
     ID?: ID;
     /**
-     * Object keyname prefix identifying one or more objects to which the rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes are not supported.
+     * The priority associated with the rule. If you specify multiple rules in a replication configuration, then Amazon S3 applies rule priority in the event there are conflicts (two or more rules identify the same object based on filter specified). The rule with higher priority takes precedence. For example,   Same object quality prefix based filter criteria If prefixes you specified in multiple rules overlap.    Same object qualify tag based filter criteria specified in multiple rules   For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide.
      */
-    Prefix: Prefix;
+    Priority?: Priority;
+    /**
+     * Object keyname prefix identifying one or more objects to which the rule applies. Maximum prefix length can be up to 1,024 characters. 
+     */
+    Prefix?: Prefix;
+    Filter?: ReplicationRuleFilter;
     /**
      * The rule is ignored if status is not Enabled.
      */
     Status: ReplicationRuleStatus;
     /**
-     * Container for filters that define which source objects should be replicated.
+     *  Container that describes additional filters in identifying source objects that you want to replicate. Currently, Amazon S3 supports only the filter that you can specify for objects created with server-side encryption using an AWS KMS-managed key. You can choose to enable or disable replication of these objects.   if you want Amazon S3 to replicate objects created with server-side encryption using AWS KMS-managed keys. 
      */
     SourceSelectionCriteria?: SourceSelectionCriteria;
     /**
      * Container for replication destination information.
      */
     Destination: Destination;
+    DeleteMarkerReplication?: DeleteMarkerReplication;
+  }
+  export interface ReplicationRuleAndOperator {
+    Prefix?: Prefix;
+    Tags?: TagSet;
+  }
+  export interface ReplicationRuleFilter {
+    /**
+     * Object keyname prefix that identifies subset of objects to which the rule applies.
+     */
+    Prefix?: Prefix;
+    /**
+     * Container for specifying a tag key and value.  The rule applies only to objects having the tag in its tagset.
+     */
+    Tag?: Tag;
+    /**
+     * Container for specifying rule filters. These filters determine the subset of objects to which the rule applies. The element is required only if you specify more than one filter. For example:    You specify both a Prefix and a Tag filters. Then you wrap these in an And tag.   You specify filter based on multiple tags. Then you wrap the Tag elements in an And tag.  
+     */
+    And?: ReplicationRuleAndOperator;
   }
   export type ReplicationRuleStatus = "Enabled"|"Disabled"|string;
   export type ReplicationRules = ReplicationRule[];
@@ -3659,7 +3694,7 @@ declare namespace S3 {
   export type Size = number;
   export interface SourceSelectionCriteria {
     /**
-     * Container for filter information of selection of KMS Encrypted S3 objects.
+     *  Container for filter information of selection of KMS Encrypted S3 objects. The element is required if you include SourceSelectionCriteria in the replication configuration. 
      */
     SseKmsEncryptedObjects?: SseKmsEncryptedObjects;
   }

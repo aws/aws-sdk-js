@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.317.0
+// AWS SDK for JavaScript v2.318.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -87028,6 +87028,27 @@ module.exports={
         }
       }
     },
+    "GetMetricWidgetImage": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "MetricWidget"
+        ],
+        "members": {
+          "MetricWidget": {},
+          "OutputFormat": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "GetMetricWidgetImageResult",
+        "type": "structure",
+        "members": {
+          "MetricWidgetImage": {
+            "type": "blob"
+          }
+        }
+      }
+    },
     "ListDashboards": {
       "input": {
         "type": "structure",
@@ -113180,7 +113201,6 @@ module.exports={
     "serviceFullName": "Amazon Simple Storage Service",
     "serviceId": "S3",
     "signatureVersion": "s3",
-    "timestampFormat": "rfc822",
     "uid": "s3-2006-03-01"
   },
   "operations": {
@@ -114613,16 +114633,16 @@ module.exports={
         "type": "structure",
         "members": {
           "RedirectAllRequestsTo": {
-            "shape": "S75"
-          },
-          "IndexDocument": {
-            "shape": "S78"
-          },
-          "ErrorDocument": {
             "shape": "S7a"
           },
+          "IndexDocument": {
+            "shape": "S7d"
+          },
+          "ErrorDocument": {
+            "shape": "S7f"
+          },
           "RoutingRules": {
-            "shape": "S7b"
+            "shape": "S7g"
           }
         }
       }
@@ -115403,14 +115423,14 @@ module.exports={
                   "shape": "S2v"
                 },
                 "Initiator": {
-                  "shape": "S97"
+                  "shape": "S9c"
                 }
               }
             },
             "flattened": true
           },
           "CommonPrefixes": {
-            "shape": "S98"
+            "shape": "S9d"
           },
           "EncodingType": {}
         }
@@ -115522,7 +115542,7 @@ module.exports={
             "type": "integer"
           },
           "CommonPrefixes": {
-            "shape": "S98"
+            "shape": "S9d"
           },
           "EncodingType": {}
         }
@@ -115580,7 +115600,7 @@ module.exports={
           "Marker": {},
           "NextMarker": {},
           "Contents": {
-            "shape": "S9q"
+            "shape": "S9v"
           },
           "Name": {},
           "Prefix": {},
@@ -115589,7 +115609,7 @@ module.exports={
             "type": "integer"
           },
           "CommonPrefixes": {
-            "shape": "S98"
+            "shape": "S9d"
           },
           "EncodingType": {}
         }
@@ -115654,7 +115674,7 @@ module.exports={
             "type": "boolean"
           },
           "Contents": {
-            "shape": "S9q"
+            "shape": "S9v"
           },
           "Name": {},
           "Prefix": {},
@@ -115663,7 +115683,7 @@ module.exports={
             "type": "integer"
           },
           "CommonPrefixes": {
-            "shape": "S98"
+            "shape": "S9d"
           },
           "EncodingType": {},
           "KeyCount": {
@@ -115764,7 +115784,7 @@ module.exports={
             "flattened": true
           },
           "Initiator": {
-            "shape": "S97"
+            "shape": "S9c"
           },
           "Owner": {
             "shape": "S2v"
@@ -115823,7 +115843,7 @@ module.exports={
             "locationName": "x-amz-acl"
           },
           "AccessControlPolicy": {
-            "shape": "Sa8",
+            "shape": "Sad",
             "locationName": "AccessControlPolicy",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -116317,7 +116337,7 @@ module.exports={
             "locationName": "Content-MD5"
           },
           "Tagging": {
-            "shape": "Sau",
+            "shape": "Saz",
             "locationName": "Tagging",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -116396,16 +116416,16 @@ module.exports={
             "type": "structure",
             "members": {
               "ErrorDocument": {
-                "shape": "S7a"
+                "shape": "S7f"
               },
               "IndexDocument": {
-                "shape": "S78"
+                "shape": "S7d"
               },
               "RedirectAllRequestsTo": {
-                "shape": "S75"
+                "shape": "S7a"
               },
               "RoutingRules": {
-                "shape": "S7b"
+                "shape": "S7g"
               }
             }
           }
@@ -116593,7 +116613,7 @@ module.exports={
             "locationName": "x-amz-acl"
           },
           "AccessControlPolicy": {
-            "shape": "Sa8",
+            "shape": "Sad",
             "locationName": "AccessControlPolicy",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -116682,7 +116702,7 @@ module.exports={
             "locationName": "Content-MD5"
           },
           "Tagging": {
-            "shape": "Sau",
+            "shape": "Saz",
             "locationName": "Tagging",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -116756,12 +116776,12 @@ module.exports={
                 ],
                 "members": {
                   "InputSerialization": {
-                    "shape": "Sbd"
+                    "shape": "Sbi"
                   },
                   "ExpressionType": {},
                   "Expression": {},
                   "OutputSerialization": {
-                    "shape": "Sbs"
+                    "shape": "Sbx"
                   }
                 }
               },
@@ -116795,7 +116815,7 @@ module.exports={
                         "shape": "S2y"
                       },
                       "Tagging": {
-                        "shape": "Sau"
+                        "shape": "Saz"
                       },
                       "UserMetadata": {
                         "type": "list",
@@ -116888,10 +116908,10 @@ module.exports={
             }
           },
           "InputSerialization": {
-            "shape": "Sbd"
+            "shape": "Sbi"
           },
           "OutputSerialization": {
-            "shape": "Sbs"
+            "shape": "Sbx"
           }
         }
       },
@@ -117876,13 +117896,37 @@ module.exports={
           "member": {
             "type": "structure",
             "required": [
-              "Prefix",
               "Status",
               "Destination"
             ],
             "members": {
               "ID": {},
-              "Prefix": {},
+              "Priority": {
+                "type": "integer"
+              },
+              "Prefix": {
+                "deprecated": true
+              },
+              "Filter": {
+                "type": "structure",
+                "members": {
+                  "Prefix": {},
+                  "Tag": {
+                    "shape": "S3a"
+                  },
+                  "And": {
+                    "type": "structure",
+                    "members": {
+                      "Prefix": {},
+                      "Tags": {
+                        "shape": "S3d",
+                        "flattened": true,
+                        "locationName": "Tag"
+                      }
+                    }
+                  }
+                }
+              },
               "Status": {},
               "SourceSelectionCriteria": {
                 "type": "structure",
@@ -117923,6 +117967,12 @@ module.exports={
                     }
                   }
                 }
+              },
+              "DeleteMarkerReplication": {
+                "type": "structure",
+                "members": {
+                  "Status": {}
+                }
               }
             }
           },
@@ -117930,7 +117980,7 @@ module.exports={
         }
       }
     },
-    "S75": {
+    "S7a": {
       "type": "structure",
       "required": [
         "HostName"
@@ -117940,7 +117990,7 @@ module.exports={
         "Protocol": {}
       }
     },
-    "S78": {
+    "S7d": {
       "type": "structure",
       "required": [
         "Suffix"
@@ -117949,7 +117999,7 @@ module.exports={
         "Suffix": {}
       }
     },
-    "S7a": {
+    "S7f": {
       "type": "structure",
       "required": [
         "Key"
@@ -117958,7 +118008,7 @@ module.exports={
         "Key": {}
       }
     },
-    "S7b": {
+    "S7g": {
       "type": "list",
       "member": {
         "locationName": "RoutingRule",
@@ -117987,14 +118037,14 @@ module.exports={
         }
       }
     },
-    "S97": {
+    "S9c": {
       "type": "structure",
       "members": {
         "ID": {},
         "DisplayName": {}
       }
     },
-    "S98": {
+    "S9d": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -118004,7 +118054,7 @@ module.exports={
       },
       "flattened": true
     },
-    "S9q": {
+    "S9v": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -118025,7 +118075,7 @@ module.exports={
       },
       "flattened": true
     },
-    "Sa8": {
+    "Sad": {
       "type": "structure",
       "members": {
         "Grants": {
@@ -118037,7 +118087,7 @@ module.exports={
         }
       }
     },
-    "Sau": {
+    "Saz": {
       "type": "structure",
       "required": [
         "TagSet"
@@ -118048,7 +118098,7 @@ module.exports={
         }
       }
     },
-    "Sbd": {
+    "Sbi": {
       "type": "structure",
       "members": {
         "CSV": {
@@ -118078,7 +118128,7 @@ module.exports={
         }
       }
     },
-    "Sbs": {
+    "Sbx": {
       "type": "structure",
       "members": {
         "CSV": {
@@ -136974,7 +137024,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.317.0',
+  VERSION: '2.318.0',
 
   /**
    * @api private
@@ -156302,7 +156352,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.317.0
+// AWS SDK for JavaScript v2.318.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
