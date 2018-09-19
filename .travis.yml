@@ -21,6 +21,13 @@ matrix:
   - node_js: "8"
     env: TEST_SCRIPT=test
 
+addons:
+  rake: 
+  chrome: stable 
+
+before script:
+  - export CHROME_BIN=/usr/bin/chromium-browser
+
 script:
   - npm run $TEST_SCRIPT
   - "if [[ $TEST_SCRIPT == 'coverage' ]]; then node ./node_modules/.bin/codecov || exit 0; fi"
