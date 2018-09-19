@@ -1,6 +1,7 @@
 var helpers = require('./helpers');
 var AWS = helpers.AWS
 var endpoint_discovery_module = require('../lib/discover_endpoint');
+var FooService = require('./foo-service.fixture').FooService;
 var discoverEndpoint = endpoint_discovery_module.discoverEndpoint;
 var optionalDiscoverEndpoint = endpoint_discovery_module.optionalDisverEndpoint;
 var requiredDiscoverEndpoint = endpoint_discovery_module.requiredDiscoverEndpoint;
@@ -10,6 +11,7 @@ var marshallCustomeIdentifiers = endpoint_discovery_module.marshallCustomeIdenti
 
 var api = {
   metadata: {
+    apiVersion: '2018-09-19',
     endpointPrefix: 'mockservice',
     serviceId: 'MockService',
     protocol: 'json'
@@ -534,10 +536,39 @@ describe('endpoint discovery', function() {
       var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'})
       request.send();
       expect(request.httpRequest.headers['User-Agent']).include('endpoint-discovery');
+
+      request = client.makeRequest('optionalEDOperation', {Query: 'query'});
+      request.send();
+      expect(request.httpRequest.headers['User-Agent']).include('endpoint-discovery');
     });
 
-    it('do not perform endpoint discovery for presigning', function() {
-      
+    it('add "x-amz-api-version" header to request from service with endpoint discovery feature', function() {
+      var client = new AWS.Service({
+        endpointDiscoveryEnabled: true,
+        paramValidation: false,
+        apiConfig: new AWS.Model.Api(api),
+      });
+      helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
+      var request = client.makeRequest('describeEndpoints', {Opeation: 'optionalEDOperation'});
+      request.send();
+      expect(request.httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
+
+      request = client.makeRequest('optionalEDOperation', {Query: 'query'});
+      request.send();
+      expect(request.httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
+
+      request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
+      request.send();
+      expect(request.httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
+      //service without endpoint discovery
+      client = new AWS.Service({
+        endpointDiscoveryEnabled: true,
+        paramValidation: false,
+        apiConfig: new AWS.Model.Api(api),
+      });
+      var request = client.makeRequest('putStream', {Body: 'body'});
+      request.send();
+      expect(request.httpRequest.headers['x-amz-api-version']).to.eql(undefined);
     });
   });
 });
