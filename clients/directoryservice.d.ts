@@ -76,6 +76,14 @@ declare class DirectoryService extends Service {
    */
   createDirectory(callback?: (err: AWSError, data: DirectoryService.Types.CreateDirectoryResult) => void): Request<DirectoryService.Types.CreateDirectoryResult, AWSError>;
   /**
+   * Creates a subscription to forward real time Directory Service domain controller security logs to the specified CloudWatch log group in your AWS account.
+   */
+  createLogSubscription(params: DirectoryService.Types.CreateLogSubscriptionRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateLogSubscriptionResult) => void): Request<DirectoryService.Types.CreateLogSubscriptionResult, AWSError>;
+  /**
+   * Creates a subscription to forward real time Directory Service domain controller security logs to the specified CloudWatch log group in your AWS account.
+   */
+  createLogSubscription(callback?: (err: AWSError, data: DirectoryService.Types.CreateLogSubscriptionResult) => void): Request<DirectoryService.Types.CreateLogSubscriptionResult, AWSError>;
+  /**
    * Creates a Microsoft AD in the AWS cloud. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createMicrosoftAD(params: DirectoryService.Types.CreateMicrosoftADRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateMicrosoftADResult) => void): Request<DirectoryService.Types.CreateMicrosoftADResult, AWSError>;
@@ -115,6 +123,14 @@ declare class DirectoryService extends Service {
    * Deletes an AWS Directory Service directory. Before you call DeleteDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the DeleteDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   deleteDirectory(callback?: (err: AWSError, data: DirectoryService.Types.DeleteDirectoryResult) => void): Request<DirectoryService.Types.DeleteDirectoryResult, AWSError>;
+  /**
+   * Deletes the specified log subscription.
+   */
+  deleteLogSubscription(params: DirectoryService.Types.DeleteLogSubscriptionRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeleteLogSubscriptionResult) => void): Request<DirectoryService.Types.DeleteLogSubscriptionResult, AWSError>;
+  /**
+   * Deletes the specified log subscription.
+   */
+  deleteLogSubscription(callback?: (err: AWSError, data: DirectoryService.Types.DeleteLogSubscriptionResult) => void): Request<DirectoryService.Types.DeleteLogSubscriptionResult, AWSError>;
   /**
    * Deletes a directory snapshot.
    */
@@ -243,6 +259,14 @@ declare class DirectoryService extends Service {
    * Lists the address blocks that you have added to a directory.
    */
   listIpRoutes(callback?: (err: AWSError, data: DirectoryService.Types.ListIpRoutesResult) => void): Request<DirectoryService.Types.ListIpRoutesResult, AWSError>;
+  /**
+   * Lists the active log subscriptions for the AWS account.
+   */
+  listLogSubscriptions(params: DirectoryService.Types.ListLogSubscriptionsRequest, callback?: (err: AWSError, data: DirectoryService.Types.ListLogSubscriptionsResult) => void): Request<DirectoryService.Types.ListLogSubscriptionsResult, AWSError>;
+  /**
+   * Lists the active log subscriptions for the AWS account.
+   */
+  listLogSubscriptions(callback?: (err: AWSError, data: DirectoryService.Types.ListLogSubscriptionsResult) => void): Request<DirectoryService.Types.ListLogSubscriptionsResult, AWSError>;
   /**
    * Lists all schema extensions applied to a Microsoft AD Directory.
    */
@@ -563,6 +587,18 @@ declare namespace DirectoryService {
      */
     DirectoryId?: DirectoryId;
   }
+  export interface CreateLogSubscriptionRequest {
+    /**
+     * Identifier (ID) of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The name of the CloudWatch log group where the real-time domain controller logs are forwarded.
+     */
+    LogGroupName: LogGroupName;
+  }
+  export interface CreateLogSubscriptionResult {
+  }
   export interface CreateMicrosoftADRequest {
     /**
      * The fully qualified domain name for the directory, such as corp.example.com. This name will resolve inside your VPC only. It does not need to be publicly resolvable.
@@ -670,6 +706,14 @@ declare namespace DirectoryService {
      * The directory identifier.
      */
     DirectoryId?: DirectoryId;
+  }
+  export interface DeleteLogSubscriptionRequest {
+    /**
+     * Identifier (ID) of the directory whose log subscription you want to delete.
+     */
+    DirectoryId: DirectoryId;
+  }
+  export interface DeleteLogSubscriptionResult {
   }
   export interface DeleteSnapshotRequest {
     /**
@@ -1268,6 +1312,30 @@ declare namespace DirectoryService {
      */
     NextToken?: NextToken;
   }
+  export interface ListLogSubscriptionsRequest {
+    /**
+     * If a DirectoryID is provided, lists only the log subscription associated with that directory. If no DirectoryId is provided, lists all log subscriptions associated with your AWS account. If there are no log subscriptions for the AWS account or the directory, an empty list will be returned.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The token for the next set of items to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items returned.
+     */
+    Limit?: Limit;
+  }
+  export interface ListLogSubscriptionsResult {
+    /**
+     * A list of active LogSubscription objects for calling the AWS account.
+     */
+    LogSubscriptions?: LogSubscriptions;
+    /**
+     * The token for the next set of items to return.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListSchemaExtensionsRequest {
     /**
      * The identifier of the directory from which to retrieve the schema extension information.
@@ -1316,6 +1384,22 @@ declare namespace DirectoryService {
      */
     NextToken?: NextToken;
   }
+  export type LogGroupName = string;
+  export interface LogSubscription {
+    /**
+     * Identifier (ID) of the directory that you want to associate with the log subscription.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The name of the log group.
+     */
+    LogGroupName?: LogGroupName;
+    /**
+     * The date and time that the log subscription was created.
+     */
+    SubscriptionCreatedDateTime?: SubscriptionCreatedDateTime;
+  }
+  export type LogSubscriptions = LogSubscription[];
   export type ManualSnapshotsLimitReached = boolean;
   export type NextToken = string;
   export type OrganizationalUnitDN = string;
@@ -1540,6 +1624,7 @@ declare namespace DirectoryService {
   export type StateLastUpdatedDateTime = Date;
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
+  export type SubscriptionCreatedDateTime = Date;
   export interface Tag {
     /**
      * Required name of the tag. The string value can be Unicode characters and cannot be prefixed with "aws:". The string can contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
