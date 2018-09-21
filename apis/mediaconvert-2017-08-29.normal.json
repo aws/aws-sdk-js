@@ -2071,6 +2071,13 @@
         "FALLBACK"
       ]
     },
+    "Commitment": {
+      "type": "string",
+      "documentation": "The length of time that you commit to when you set up a pricing plan contract for a reserved queue.",
+      "enum": [
+        "ONE_YEAR"
+      ]
+    },
     "ContainerSettings": {
       "type": "structure",
       "members": {
@@ -2264,12 +2271,22 @@
         "Description": {
           "shape": "__string",
           "locationName": "description",
-          "documentation": "Optional. A description of the queue you are creating."
+          "documentation": "Optional. A description of the queue that you are creating."
         },
         "Name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "The name of the queue you are creating."
+          "documentation": "The name of the queue that you are creating."
+        },
+        "PricingPlan": {
+          "shape": "PricingPlan",
+          "locationName": "pricingPlan",
+          "documentation": "Optional; default is on-demand. Specifies whether the pricing plan for the queue is on-demand or reserved. The pricing plan for the queue determines whether you pay on-demand or reserved pricing for the transcoding jobs you run through the queue. For reserved queue pricing, you must set up a contract. You can create a reserved queue contract through the AWS Elemental MediaConvert console."
+        },
+        "ReservationPlanSettings": {
+          "shape": "ReservationPlanSettings",
+          "locationName": "reservationPlanSettings",
+          "documentation": "Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues."
         },
         "Tags": {
           "shape": "__mapOf__string",
@@ -3151,7 +3168,7 @@
         "Name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "The name of the queue.",
+          "documentation": "The name of the queue that you want information about.",
           "location": "uri"
         }
       },
@@ -5269,7 +5286,7 @@
         "Queues": {
           "shape": "__listOfQueue",
           "locationName": "queues",
-          "documentation": "List of queues"
+          "documentation": "List of queues."
         }
       }
     },
@@ -6481,6 +6498,14 @@
       },
       "documentation": "Settings for preset"
     },
+    "PricingPlan": {
+      "type": "string",
+      "documentation": "Specifies whether the pricing plan for the queue is On-demand or Reserved. The pricing plan for the queue determines whether you pay On-demand or Reserved pricing for the transcoding jobs that you run through the queue. For Reserved queue pricing, you must set up a contract. You can create a Reserved queue contract through the AWS Elemental MediaConvert console.",
+      "enum": [
+        "ON_DEMAND",
+        "RESERVED"
+      ]
+    },
     "ProresCodecProfile": {
       "type": "string",
       "documentation": "Use Profile (ProResCodecProfile) to specifiy the type of Apple ProRes codec to use for this output.",
@@ -6607,44 +6632,55 @@
         "CreatedAt": {
           "shape": "__timestampUnix",
           "locationName": "createdAt",
-          "documentation": "The timestamp in epoch seconds for queue creation."
+          "documentation": "The time stamp in epoch seconds for queue creation."
         },
         "Description": {
           "shape": "__string",
           "locationName": "description",
-          "documentation": "An optional description you create for each queue."
+          "documentation": "An optional description that you create for each queue."
         },
         "LastUpdated": {
           "shape": "__timestampUnix",
           "locationName": "lastUpdated",
-          "documentation": "The timestamp in epoch seconds when the queue was last updated."
+          "documentation": "The time stamp in epoch seconds when the queue was last updated."
         },
         "Name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "A name you create for each queue. Each name must be unique within your account."
+          "documentation": "A name that you create for each queue. Each name must be unique within your account."
+        },
+        "PricingPlan": {
+          "shape": "PricingPlan",
+          "locationName": "pricingPlan",
+          "documentation": "Specifies whether the pricing plan for the queue is On-demand or Reserved. The pricing plan for the queue determines whether you pay On-demand or Reserved pricing for the transcoding jobs that you run through the queue. For Reserved queue pricing, you must set up a contract. You can create a Reserved queue contract through the AWS Elemental MediaConvert console."
         },
         "ProgressingJobsCount": {
           "shape": "__integer",
           "locationName": "progressingJobsCount",
-          "documentation": "Estimated number of jobs in PROGRESSING status."
+          "documentation": "The estimated number of jobs with a PROGRESSING status."
+        },
+        "ReservationPlan": {
+          "shape": "ReservationPlan",
+          "locationName": "reservationPlan",
+          "documentation": "Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues."
         },
         "Status": {
           "shape": "QueueStatus",
-          "locationName": "status"
+          "locationName": "status",
+          "documentation": "Queues can be ACTIVE or PAUSED. If you pause a queue, the service won't begin processing jobs in that queue. Jobs that are running when you pause the queue continue to run until they finish or result in an error."
         },
         "SubmittedJobsCount": {
           "shape": "__integer",
           "locationName": "submittedJobsCount",
-          "documentation": "Estimated number of jobs in SUBMITTED status."
+          "documentation": "The estimated number of jobs with a SUBMITTED status."
         },
         "Type": {
           "shape": "Type",
           "locationName": "type",
-          "documentation": "A queue can be of two types: system or custom. System or built-in queues can't be modified or deleted by the user."
+          "documentation": "Specifies whether this queue is system or custom. System queues are built in. You can't modify or delete system queues. You can create and modify custom queues."
         }
       },
-      "documentation": "MediaConvert jobs are submitted to a queue. Unless specified otherwise jobs are submitted to a built-in default queue. User can create additional queues to separate the jobs of different categories or priority.",
+      "documentation": "You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.",
       "required": [
         "Name"
       ]
@@ -6659,7 +6695,7 @@
     },
     "QueueStatus": {
       "type": "string",
-      "documentation": "Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue won't begin. Jobs running when a queue is paused continue to run until they finish or error out.",
+      "documentation": "Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue won't begin. Jobs that are running when you pause a queue continue to run until they finish or result in an error.",
       "enum": [
         "ACTIVE",
         "PAUSED"
@@ -6710,6 +6746,84 @@
         }
       },
       "documentation": "Use Manual audio remixing (RemixSettings) to adjust audio levels for each audio channel in each output of your job. With audio remixing, you can output more or fewer audio channels than your input audio source provides."
+    },
+    "RenewalType": {
+      "type": "string",
+      "documentation": "Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.",
+      "enum": [
+        "AUTO_RENEW",
+        "EXPIRE"
+      ]
+    },
+    "ReservationPlan": {
+      "type": "structure",
+      "members": {
+        "Commitment": {
+          "shape": "Commitment",
+          "locationName": "commitment",
+          "documentation": "The length of time that you commit to when you set up a pricing plan contract for a reserved queue."
+        },
+        "ExpiresAt": {
+          "shape": "__timestampUnix",
+          "locationName": "expiresAt",
+          "documentation": "The time stamp, in epoch seconds, for when the pricing plan for this reserved queue expires."
+        },
+        "PurchasedAt": {
+          "shape": "__timestampUnix",
+          "locationName": "purchasedAt",
+          "documentation": "The time stamp in epoch seconds when the reserved queue's reservation plan was created."
+        },
+        "RenewalType": {
+          "shape": "RenewalType",
+          "locationName": "renewalType",
+          "documentation": "Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period."
+        },
+        "ReservedSlots": {
+          "shape": "__integer",
+          "locationName": "reservedSlots",
+          "documentation": "Specifies the number of reserved transcode slots (RTSs) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console."
+        },
+        "Status": {
+          "shape": "ReservationPlanStatus",
+          "locationName": "status",
+          "documentation": "Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED."
+        }
+      },
+      "documentation": "Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues."
+    },
+    "ReservationPlanSettings": {
+      "type": "structure",
+      "members": {
+        "Commitment": {
+          "shape": "Commitment",
+          "locationName": "commitment",
+          "documentation": "The length of time that you commit to when you set up a pricing plan contract for a reserved queue."
+        },
+        "RenewalType": {
+          "shape": "RenewalType",
+          "locationName": "renewalType",
+          "documentation": "Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period."
+        },
+        "ReservedSlots": {
+          "shape": "__integer",
+          "locationName": "reservedSlots",
+          "documentation": "Specifies the number of reserved transcode slots (RTSs) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console."
+        }
+      },
+      "documentation": "Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.",
+      "required": [
+        "ReservedSlots",
+        "Commitment",
+        "RenewalType"
+      ]
+    },
+    "ReservationPlanStatus": {
+      "type": "string",
+      "documentation": "Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.",
+      "enum": [
+        "ACTIVE",
+        "EXPIRED"
+      ]
     },
     "ResourceTags": {
       "type": "structure",
@@ -7103,12 +7217,18 @@
         "Name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "The name of the queue you are modifying.",
+          "documentation": "The name of the queue that you are modifying.",
           "location": "uri"
+        },
+        "ReservationPlanSettings": {
+          "shape": "ReservationPlanSettings",
+          "locationName": "reservationPlanSettings",
+          "documentation": "Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues."
         },
         "Status": {
           "shape": "QueueStatus",
-          "locationName": "status"
+          "locationName": "status",
+          "documentation": "Pause or activate a queue by changing its status between ACTIVE and PAUSED. If you pause a queue, jobs in that queue won't begin. Jobs that are running when you pause the queue continue to run until they finish or result in an error."
         }
       },
       "required": [

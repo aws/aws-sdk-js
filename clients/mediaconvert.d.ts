@@ -594,6 +594,7 @@ All burn-in and DVB-Sub font settings must match.
   export type ColorSpace = "FOLLOW"|"REC_601"|"REC_709"|"HDR10"|"HLG_2020"|string;
   export type ColorSpaceConversion = "NONE"|"FORCE_601"|"FORCE_709"|"FORCE_HDR10"|"FORCE_HLG_2020"|string;
   export type ColorSpaceUsage = "FORCE"|"FALLBACK"|string;
+  export type Commitment = "ONE_YEAR"|string;
   export interface ContainerSettings {
     Container?: ContainerType;
     F4vSettings?: F4vSettings;
@@ -680,13 +681,21 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface CreateQueueRequest {
     /**
-     * Optional. A description of the queue you are creating.
+     * Optional. A description of the queue that you are creating.
      */
     Description?: __string;
     /**
-     * The name of the queue you are creating.
+     * The name of the queue that you are creating.
      */
     Name: __string;
+    /**
+     * Optional; default is on-demand. Specifies whether the pricing plan for the queue is on-demand or reserved. The pricing plan for the queue determines whether you pay on-demand or reserved pricing for the transcoding jobs you run through the queue. For reserved queue pricing, you must set up a contract. You can create a reserved queue contract through the AWS Elemental MediaConvert console.
+     */
+    PricingPlan?: PricingPlan;
+    /**
+     * Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+     */
+    ReservationPlanSettings?: ReservationPlanSettings;
     /**
      * The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
      */
@@ -1034,7 +1043,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export interface GetQueueRequest {
     /**
-     * The name of the queue.
+     * The name of the queue that you want information about.
      */
     Name: __string;
   }
@@ -1832,7 +1841,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     NextToken?: __string;
     /**
-     * List of queues
+     * List of queues.
      */
     Queues?: __listOfQueue;
   }
@@ -2317,6 +2326,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     VideoDescription?: VideoDescription;
   }
+  export type PricingPlan = "ON_DEMAND"|"RESERVED"|string;
   export type ProresCodecProfile = "APPLE_PRORES_422"|"APPLE_PRORES_422_HQ"|"APPLE_PRORES_422_LT"|"APPLE_PRORES_422_PROXY"|string;
   export type ProresFramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type ProresFramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|string;
@@ -2355,32 +2365,43 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Arn?: __string;
     /**
-     * The timestamp in epoch seconds for queue creation.
+     * The time stamp in epoch seconds for queue creation.
      */
     CreatedAt?: __timestampUnix;
     /**
-     * An optional description you create for each queue.
+     * An optional description that you create for each queue.
      */
     Description?: __string;
     /**
-     * The timestamp in epoch seconds when the queue was last updated.
+     * The time stamp in epoch seconds when the queue was last updated.
      */
     LastUpdated?: __timestampUnix;
     /**
-     * A name you create for each queue. Each name must be unique within your account.
+     * A name that you create for each queue. Each name must be unique within your account.
      */
     Name: __string;
     /**
-     * Estimated number of jobs in PROGRESSING status.
+     * Specifies whether the pricing plan for the queue is On-demand or Reserved. The pricing plan for the queue determines whether you pay On-demand or Reserved pricing for the transcoding jobs that you run through the queue. For Reserved queue pricing, you must set up a contract. You can create a Reserved queue contract through the AWS Elemental MediaConvert console.
+     */
+    PricingPlan?: PricingPlan;
+    /**
+     * The estimated number of jobs with a PROGRESSING status.
      */
     ProgressingJobsCount?: __integer;
+    /**
+     * Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+     */
+    ReservationPlan?: ReservationPlan;
+    /**
+     * Queues can be ACTIVE or PAUSED. If you pause a queue, the service won't begin processing jobs in that queue. Jobs that are running when you pause the queue continue to run until they finish or result in an error.
+     */
     Status?: QueueStatus;
     /**
-     * Estimated number of jobs in SUBMITTED status.
+     * The estimated number of jobs with a SUBMITTED status.
      */
     SubmittedJobsCount?: __integer;
     /**
-     * A queue can be of two types: system or custom. System or built-in queues can't be modified or deleted by the user.
+     * Specifies whether this queue is system or custom. System queues are built in. You can't modify or delete system queues. You can create and modify custom queues.
      */
     Type?: Type;
   }
@@ -2415,6 +2436,48 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     ChannelsOut?: __integerMin1Max8;
   }
+  export type RenewalType = "AUTO_RENEW"|"EXPIRE"|string;
+  export interface ReservationPlan {
+    /**
+     * The length of time that you commit to when you set up a pricing plan contract for a reserved queue.
+     */
+    Commitment?: Commitment;
+    /**
+     * The time stamp, in epoch seconds, for when the pricing plan for this reserved queue expires.
+     */
+    ExpiresAt?: __timestampUnix;
+    /**
+     * The time stamp in epoch seconds when the reserved queue's reservation plan was created.
+     */
+    PurchasedAt?: __timestampUnix;
+    /**
+     * Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.
+     */
+    RenewalType?: RenewalType;
+    /**
+     * Specifies the number of reserved transcode slots (RTSs) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console.
+     */
+    ReservedSlots?: __integer;
+    /**
+     * Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
+     */
+    Status?: ReservationPlanStatus;
+  }
+  export interface ReservationPlanSettings {
+    /**
+     * The length of time that you commit to when you set up a pricing plan contract for a reserved queue.
+     */
+    Commitment: Commitment;
+    /**
+     * Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.
+     */
+    RenewalType: RenewalType;
+    /**
+     * Specifies the number of reserved transcode slots (RTSs) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console.
+     */
+    ReservedSlots: __integer;
+  }
+  export type ReservationPlanStatus = "ACTIVE"|"EXPIRED"|string;
   export interface ResourceTags {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -2599,9 +2662,16 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Description?: __string;
     /**
-     * The name of the queue you are modifying.
+     * The name of the queue that you are modifying.
      */
     Name: __string;
+    /**
+     * Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+     */
+    ReservationPlanSettings?: ReservationPlanSettings;
+    /**
+     * Pause or activate a queue by changing its status between ACTIVE and PAUSED. If you pause a queue, jobs in that queue won't begin. Jobs that are running when you pause the queue continue to run until they finish or result in an error.
+     */
     Status?: QueueStatus;
   }
   export interface UpdateQueueResponse {
