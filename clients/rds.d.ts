@@ -3766,6 +3766,17 @@ declare namespace RDS {
   export type LogTypeList = String[];
   export type Long = number;
   export type LongOptional = number;
+  export interface MinimumEngineVersionPerAllowedValue {
+    /**
+     * The allowed value for an option setting.
+     */
+    AllowedValue?: String;
+    /**
+     * The minimum DB engine version required for the allowed value.
+     */
+    MinimumEngineVersion?: String;
+  }
+  export type MinimumEngineVersionPerAllowedValueList = MinimumEngineVersionPerAllowedValue[];
   export interface ModifyCurrentDBClusterCapacityMessage {
     /**
      * The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive. Constraints:   Must match the identifier of an existing DB cluster.  
@@ -4357,6 +4368,14 @@ declare namespace RDS {
      * Boolean value where true indicates that this option group option can be changed from the default value.
      */
     IsModifiable?: Boolean;
+    /**
+     * Boolean value where true indicates that a value must be specified for this option setting of the option group option.
+     */
+    IsRequired?: Boolean;
+    /**
+     * The minimum DB engine version required for the corresponding allowed value for this option setting.
+     */
+    MinimumEngineVersionPerAllowedValue?: MinimumEngineVersionPerAllowedValueList;
   }
   export type OptionGroupOptionSettingsList = OptionGroupOptionSetting[];
   export type OptionGroupOptionVersionsList = OptionVersion[];

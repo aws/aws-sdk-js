@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.320.0-->
+<!--LATEST=2.321.0-->
 <!--ENTRYINSERT-->
+
+## 2.321.0
+* feature: Connect: This update adds the Amazon Connect Metrics API, which lets you get current metric data and historical metric data within 24 hours for the queues in your Amazon Connect instance.
+* feature: RDS:  Adds DB engine version requirements for option group option settings, and specifies if an option setting requires a value.
 
 ## 2.320.0
 * feature: MediaConvert: To offer lower prices for predictable, non-urgent workloads, we propose the concept of Reserved Transcode pricing. Reserved Transcode pricing Reserved Transcoding pricing would offer the customer access to a fixed parallel processing capacity for a fixed monthly rate. This capacity would be stated in terms of number of Reserved Transcode Slots (RTSs). One RTS would be able to process one job at a time for a fixed monthly fee.

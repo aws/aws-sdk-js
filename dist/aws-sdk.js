@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.320.0
+// AWS SDK for JavaScript v2.321.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -102411,6 +102411,20 @@ module.exports={
                       "AllowedValues": {},
                       "IsModifiable": {
                         "type": "boolean"
+                      },
+                      "IsRequired": {
+                        "type": "boolean"
+                      },
+                      "MinimumEngineVersionPerAllowedValue": {
+                        "type": "list",
+                        "member": {
+                          "locationName": "MinimumEngineVersionPerAllowedValue",
+                          "type": "structure",
+                          "members": {
+                            "AllowedValue": {},
+                            "MinimumEngineVersion": {}
+                          }
+                        }
                       }
                     }
                   }
@@ -102554,7 +102568,7 @@ module.exports={
                   "type": "double"
                 },
                 "AvailableProcessorFeatures": {
-                  "shape": "S6i"
+                  "shape": "S6k"
                 },
                 "SupportedEngineModes": {
                   "shape": "S45"
@@ -102626,7 +102640,7 @@ module.exports={
           "ReservedDBInstances": {
             "type": "list",
             "member": {
-              "shape": "S6q",
+              "shape": "S6s",
               "locationName": "ReservedDBInstance"
             }
           }
@@ -102683,7 +102697,7 @@ module.exports={
                   "type": "boolean"
                 },
                 "RecurringCharges": {
-                  "shape": "S6s"
+                  "shape": "S6u"
                 }
               },
               "wrapper": true
@@ -102751,10 +102765,10 @@ module.exports={
                   "members": {
                     "StorageType": {},
                     "StorageSize": {
-                      "shape": "S77"
+                      "shape": "S79"
                     },
                     "ProvisionedIops": {
-                      "shape": "S77"
+                      "shape": "S79"
                     },
                     "IopsToStorageRatio": {
                       "type": "list",
@@ -102775,7 +102789,7 @@ module.exports={
                 }
               },
               "ValidProcessorFeatures": {
-                "shape": "S6i"
+                "shape": "S6k"
               }
             },
             "wrapper": true
@@ -102920,7 +102934,7 @@ module.exports={
             "type": "long"
           },
           "CloudwatchLogsExportConfiguration": {
-            "shape": "S7k"
+            "shape": "S7m"
           },
           "EngineVersion": {},
           "ScalingConfiguration": {
@@ -102953,7 +102967,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S7n",
+        "shape": "S7p",
         "resultWrapper": "ModifyDBClusterParameterGroupResult"
       }
     },
@@ -103063,7 +103077,7 @@ module.exports={
             "type": "integer"
           },
           "CloudwatchLogsExportConfiguration": {
-            "shape": "S7k"
+            "shape": "S7m"
           },
           "ProcessorFeatures": {
             "shape": "S17"
@@ -103098,7 +103112,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S7t",
+        "shape": "S7v",
         "resultWrapper": "ModifyDBParameterGroupResult"
       }
     },
@@ -103328,7 +103342,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ReservedDBInstance": {
-            "shape": "S6q"
+            "shape": "S6s"
           }
         }
       }
@@ -103424,7 +103438,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S7n",
+        "shape": "S7p",
         "resultWrapper": "ResetDBClusterParameterGroupResult"
       }
     },
@@ -103445,7 +103459,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S7t",
+        "shape": "S7v",
         "resultWrapper": "ResetDBParameterGroupResult"
       }
     },
@@ -104851,7 +104865,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S6i": {
+    "S6k": {
       "type": "list",
       "member": {
         "locationName": "AvailableProcessorFeature",
@@ -104863,7 +104877,7 @@ module.exports={
         }
       }
     },
-    "S6q": {
+    "S6s": {
       "type": "structure",
       "members": {
         "ReservedDBInstanceId": {},
@@ -104892,13 +104906,13 @@ module.exports={
         },
         "State": {},
         "RecurringCharges": {
-          "shape": "S6s"
+          "shape": "S6u"
         },
         "ReservedDBInstanceArn": {}
       },
       "wrapper": true
     },
-    "S6s": {
+    "S6u": {
       "type": "list",
       "member": {
         "locationName": "RecurringCharge",
@@ -104912,7 +104926,7 @@ module.exports={
         "wrapper": true
       }
     },
-    "S77": {
+    "S79": {
       "type": "list",
       "member": {
         "locationName": "Range",
@@ -104930,7 +104944,7 @@ module.exports={
         }
       }
     },
-    "S7k": {
+    "S7m": {
       "type": "structure",
       "members": {
         "EnableLogTypes": {
@@ -104941,13 +104955,13 @@ module.exports={
         }
       }
     },
-    "S7n": {
+    "S7p": {
       "type": "structure",
       "members": {
         "DBClusterParameterGroupName": {}
       }
     },
-    "S7t": {
+    "S7v": {
       "type": "structure",
       "members": {
         "DBParameterGroupName": {}
@@ -137064,7 +137078,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.320.0',
+  VERSION: '2.321.0',
 
   /**
    * @api private
@@ -156392,7 +156406,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.320.0
+// AWS SDK for JavaScript v2.321.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

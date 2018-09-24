@@ -6813,6 +6813,27 @@
     "LongOptional": {
       "type": "long"
     },
+    "MinimumEngineVersionPerAllowedValue": {
+      "type": "structure",
+      "members": {
+        "AllowedValue": {
+          "shape": "String",
+          "documentation": "<p>The allowed value for an option setting.</p>"
+        },
+        "MinimumEngineVersion": {
+          "shape": "String",
+          "documentation": "<p>The minimum DB engine version required for the allowed value.</p>"
+        }
+      },
+      "documentation": "<p>The minimum DB engine version required for each corresponding allowed value for an option setting.</p>"
+    },
+    "MinimumEngineVersionPerAllowedValueList": {
+      "type": "list",
+      "member": {
+        "shape": "MinimumEngineVersionPerAllowedValue",
+        "locationName": "MinimumEngineVersionPerAllowedValue"
+      }
+    },
     "ModifyCurrentDBClusterCapacityMessage": {
       "type": "structure",
       "required": [
@@ -7561,6 +7582,14 @@
         "IsModifiable": {
           "shape": "Boolean",
           "documentation": "<p>Boolean value where true indicates that this option group option can be changed from the default value.</p>"
+        },
+        "IsRequired": {
+          "shape": "Boolean",
+          "documentation": "<p>Boolean value where true indicates that a value must be specified for this option setting of the option group option.</p>"
+        },
+        "MinimumEngineVersionPerAllowedValue": {
+          "shape": "MinimumEngineVersionPerAllowedValueList",
+          "documentation": "<p>The minimum DB engine version required for the corresponding allowed value for this option setting.</p>"
         }
       },
       "documentation": "<p>Option group option settings are used to display settings available for each option with their default values and other information. These values are used with the DescribeOptionGroupOptions action.</p>"
