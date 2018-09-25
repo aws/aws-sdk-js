@@ -13,6 +13,37 @@
     "uid": "ds-2015-04-16"
   },
   "operations": {
+    "AcceptSharedDirectory": {
+      "name": "AcceptSharedDirectory",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AcceptSharedDirectoryRequest"
+      },
+      "output": {
+        "shape": "AcceptSharedDirectoryResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "EntityDoesNotExistException"
+        },
+        {
+          "shape": "DirectoryAlreadySharedException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Accepts a directory sharing request that was sent from the directory owner account.</p>"
+    },
     "AddIpRoutes": {
       "name": "AddIpRoutes",
       "http": {
@@ -132,7 +163,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Creates an AD Connector to connect to an on-premises directory.</p> <p>Before you call <i>ConnectDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>ConnectDirectory</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
+      "documentation": "<p>Creates an AD Connector to connect to an on-premises directory.</p> <p>Before you call <code>ConnectDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>ConnectDirectory</code> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "CreateAlias": {
       "name": "CreateAlias",
@@ -268,7 +299,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Creates a Simple AD directory.</p> <p>Before you call <i>CreateDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateDirectory</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
+      "documentation": "<p>Creates a Simple AD directory.</p> <p>Before you call <code>CreateDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>CreateDirectory</code> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "CreateLogSubscription": {
       "name": "CreateLogSubscription",
@@ -457,7 +488,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Deletes an AWS Directory Service directory.</p> <p>Before you call <i>DeleteDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>DeleteDirectory</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
+      "documentation": "<p>Deletes an AWS Directory Service directory.</p> <p>Before you call <code>DeleteDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>DeleteDirectory</code> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "DeleteLogSubscription": {
       "name": "DeleteLogSubscription",
@@ -637,7 +668,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Obtains information about the directories that belong to this account.</p> <p>You can retrieve information about specific directories by passing the directory identifiers in the <i>DirectoryIds</i> parameter. Otherwise, all directories that belong to the current account are returned.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> request and response parameters. If more results are available, the <i>DescribeDirectoriesResult.NextToken</i> member contains a token that you pass in the next call to <a>DescribeDirectories</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <i>Limit</i> parameter.</p>"
+      "documentation": "<p>Obtains information about the directories that belong to this account.</p> <p>You can retrieve information about specific directories by passing the directory identifiers in the <code>DirectoryIds</code> parameter. Otherwise, all directories that belong to the current account are returned.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> request and response parameters. If more results are available, the <code>DescribeDirectoriesResult.NextToken</code> member contains a token that you pass in the next call to <a>DescribeDirectories</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <code>Limit</code> parameter.</p>"
     },
     "DescribeDomainControllers": {
       "name": "DescribeDomainControllers",
@@ -700,6 +731,40 @@
         }
       ],
       "documentation": "<p>Obtains information about which SNS topics receive status messages from the specified directory.</p> <p>If no input parameters are provided, such as DirectoryId or TopicName, this request describes all of the associations in the account.</p>"
+    },
+    "DescribeSharedDirectories": {
+      "name": "DescribeSharedDirectories",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeSharedDirectoriesRequest"
+      },
+      "output": {
+        "shape": "DescribeSharedDirectoriesResult"
+      },
+      "errors": [
+        {
+          "shape": "EntityDoesNotExistException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Returns the shared directories in your account. </p>"
     },
     "DescribeSnapshots": {
       "name": "DescribeSnapshots",
@@ -789,7 +854,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.</p>"
+      "documentation": "<p>Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.</p>"
     },
     "DisableSso": {
       "name": "DisableSso",
@@ -851,7 +916,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.</p>"
+      "documentation": "<p>Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.</p>"
     },
     "EnableSso": {
       "name": "EnableSso",
@@ -1080,6 +1145,37 @@
       ],
       "documentation": "<p>Associates a directory with an SNS topic. This establishes the directory as a publisher to the specified SNS topic. You can then receive email or text (SMS) messages when the status of your directory changes. You get notified if your directory goes from an Active status to an Impaired or Inoperable status. You also receive a notification when the directory returns to an Active status.</p>"
     },
+    "RejectSharedDirectory": {
+      "name": "RejectSharedDirectory",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RejectSharedDirectoryRequest"
+      },
+      "output": {
+        "shape": "RejectSharedDirectoryResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "EntityDoesNotExistException"
+        },
+        {
+          "shape": "DirectoryAlreadySharedException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Rejects a directory sharing request that was sent from the directory owner account.</p>"
+    },
     "RemoveIpRoutes": {
       "name": "RemoveIpRoutes",
       "http": {
@@ -1204,6 +1300,52 @@
       ],
       "documentation": "<p>Restores a directory using an existing directory snapshot.</p> <p>When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten.</p> <p>This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the <a>DescribeDirectories</a> operation with the directory identifier. When the <b>DirectoryDescription.Stage</b> value changes to <code>Active</code>, the restore operation is complete.</p>"
     },
+    "ShareDirectory": {
+      "name": "ShareDirectory",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ShareDirectoryRequest"
+      },
+      "output": {
+        "shape": "ShareDirectoryResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectoryAlreadySharedException"
+        },
+        {
+          "shape": "EntityDoesNotExistException"
+        },
+        {
+          "shape": "InvalidTargetException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ShareLimitExceededException"
+        },
+        {
+          "shape": "OrganizationsException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Shares a specified directory (<code>DirectoryId</code>) in your AWS account (directory owner) with another AWS account (directory consumer). With this operation you can use your directory from any AWS account and from any Amazon VPC within an AWS Region.</p> <p>When you share your AWS Managed Microsoft AD directory, AWS Directory Service creates a shared directory in the directory consumer account. This shared directory contains the metadata to provide access to the directory within the directory owner account. The shared directory is visible in all VPCs in the directory consumer account.</p> <p>The <code>ShareMethod</code> parameter determines whether the specified directory can be shared between AWS accounts inside the same AWS organization (<code>ORGANIZATIONS</code>). It also determines whether you can share the directory with any other AWS account either inside or outside of the organization (<code>HANDSHAKE</code>).</p> <p>The <code>ShareNotes</code> parameter is only used when <code>HANDSHAKE</code> is called, which sends a directory sharing request to the directory consumer. </p>"
+    },
     "StartSchemaExtension": {
       "name": "StartSchemaExtension",
       "http": {
@@ -1237,6 +1379,37 @@
         }
       ],
       "documentation": "<p>Applies a schema extension to a Microsoft AD directory.</p>"
+    },
+    "UnshareDirectory": {
+      "name": "UnshareDirectory",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UnshareDirectoryRequest"
+      },
+      "output": {
+        "shape": "UnshareDirectoryResult"
+      },
+      "errors": [
+        {
+          "shape": "EntityDoesNotExistException"
+        },
+        {
+          "shape": "InvalidTargetException"
+        },
+        {
+          "shape": "DirectoryNotSharedException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Stops the directory sharing between the directory owner and consumer accounts. </p>"
     },
     "UpdateConditionalForwarder": {
       "name": "UpdateConditionalForwarder",
@@ -1335,7 +1508,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector directory.</p>"
+      "documentation": "<p>Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector or Microsoft AD directory.</p>"
     },
     "VerifyTrust": {
       "name": "VerifyTrust",
@@ -1370,6 +1543,27 @@
     }
   },
   "shapes": {
+    "AcceptSharedDirectoryRequest": {
+      "type": "structure",
+      "required": [
+        "SharedDirectoryId"
+      ],
+      "members": {
+        "SharedDirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account. </p>"
+        }
+      }
+    },
+    "AcceptSharedDirectoryResult": {
+      "type": "structure",
+      "members": {
+        "SharedDirectory": {
+          "shape": "SharedDirectory",
+          "documentation": "<p>The shared directory in the directory consumer account.</p>"
+        }
+      }
+    },
     "AccessUrl": {
       "type": "string",
       "max": 128,
@@ -1565,7 +1759,7 @@
       "members": {
         "Name": {
           "shape": "DirectoryName",
-          "documentation": "<p>The fully-qualified name of the on-premises directory, such as <code>corp.example.com</code>.</p>"
+          "documentation": "<p>The fully qualified name of the on-premises directory, such as <code>corp.example.com</code>.</p>"
         },
         "ShortName": {
           "shape": "DirectoryShortName",
@@ -1728,7 +1922,7 @@
         },
         "Password": {
           "shape": "Password",
-          "documentation": "<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the username <code>Administrator</code> and this password.</p>"
+          "documentation": "<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.</p>"
         },
         "Description": {
           "shape": "Description",
@@ -1899,6 +2093,10 @@
     },
     "CreatedDateTime": {
       "type": "timestamp"
+    },
+    "CustomerId": {
+      "type": "string",
+      "pattern": "^(\\d{12})$"
     },
     "CustomerUserName": {
       "type": "string",
@@ -2080,7 +2278,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The <i>DescribeDirectoriesResult.NextToken</i> value from a previous call to <a>DescribeDirectories</a>. Pass null if this is the first call.</p>"
+          "documentation": "<p>The <code>DescribeDirectoriesResult.NextToken</code> value from a previous call to <a>DescribeDirectories</a>. Pass null if this is the first call.</p>"
         },
         "Limit": {
           "shape": "Limit",
@@ -2094,11 +2292,11 @@
       "members": {
         "DirectoryDescriptions": {
           "shape": "DirectoryDescriptions",
-          "documentation": "<p>The list of <a>DirectoryDescription</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>"
+          "documentation": "<p>The list of <a>DirectoryDescription</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <code>Limit</code> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeDirectories</a> to retrieve the next set of items.</p>"
+          "documentation": "<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDirectories</a> to retrieve the next set of items.</p>"
         }
       },
       "documentation": "<p>Contains the results of the <a>DescribeDirectories</a> operation.</p>"
@@ -2163,6 +2361,43 @@
         }
       },
       "documentation": "<p>The result of a DescribeEventTopic request.</p>"
+    },
+    "DescribeSharedDirectoriesRequest": {
+      "type": "structure",
+      "required": [
+        "OwnerDirectoryId"
+      ],
+      "members": {
+        "OwnerDirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Returns the identifier of the directory in the directory owner account. </p>"
+        },
+        "SharedDirectoryIds": {
+          "shape": "DirectoryIds",
+          "documentation": "<p>A list of identifiers of all shared directories in your account. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>DescribeSharedDirectoriesResult.NextToken</code> value from a previous call to <a>DescribeSharedDirectories</a>. Pass null if this is the first call. </p>"
+        },
+        "Limit": {
+          "shape": "Limit",
+          "documentation": "<p>The number of shared directories to return in the response object.</p>"
+        }
+      }
+    },
+    "DescribeSharedDirectoriesResult": {
+      "type": "structure",
+      "members": {
+        "SharedDirectories": {
+          "shape": "SharedDirectories",
+          "documentation": "<p>A list of all shared directories in your account.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If not null, token that indicates that more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeSharedDirectories</a> to retrieve the next set of items.</p>"
+        }
+      }
     },
     "DescribeSnapshotsRequest": {
       "type": "structure",
@@ -2269,7 +2504,7 @@
         },
         "CustomerUserName": {
           "shape": "UserName",
-          "documentation": "<p>The username of an account in the on-premises directory that is used to connect to the directory. This account must have the following privileges:</p> <ul> <li> <p>Read users and groups</p> </li> <li> <p>Create computer objects</p> </li> <li> <p>Join computers to the domain</p> </li> </ul>"
+          "documentation": "<p>The user name of an account in the on-premises directory that is used to connect to the directory. This account must have the following permissions:</p> <ul> <li> <p>Read users and groups</p> </li> <li> <p>Create computer objects</p> </li> <li> <p>Join computers to the domain</p> </li> </ul>"
         }
       },
       "documentation": "<p>Contains information for the <a>ConnectDirectory</a> operation when an AD Connector directory is being created.</p>"
@@ -2287,7 +2522,7 @@
         },
         "CustomerUserName": {
           "shape": "UserName",
-          "documentation": "<p>The username of the service account in the on-premises directory.</p>"
+          "documentation": "<p>The user name of the service account in the on-premises directory.</p>"
         },
         "SecurityGroupId": {
           "shape": "SecurityGroupId",
@@ -2313,7 +2548,7 @@
         },
         "Name": {
           "shape": "DirectoryName",
-          "documentation": "<p>The fully-qualified name of the directory.</p>"
+          "documentation": "<p>The fully qualified name of the directory.</p>"
         },
         "ShortName": {
           "shape": "DirectoryShortName",
@@ -2346,6 +2581,18 @@
         "Stage": {
           "shape": "DirectoryStage",
           "documentation": "<p>The current stage of the directory.</p>"
+        },
+        "ShareStatus": {
+          "shape": "ShareStatus",
+          "documentation": "<p>Current directory status of the shared AWS Managed Microsoft AD directory.</p>"
+        },
+        "ShareMethod": {
+          "shape": "ShareMethod",
+          "documentation": "<p>The method used when sharing a directory to determine whether the directory should be shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by sending a shared directory request (<code>HANDSHAKE</code>).</p>"
+        },
+        "ShareNotes": {
+          "shape": "Notes",
+          "documentation": "<p>A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.</p>"
         },
         "LaunchTime": {
           "shape": "LaunchTime",
@@ -2381,11 +2628,15 @@
         },
         "SsoEnabled": {
           "shape": "SsoEnabled",
-          "documentation": "<p>Indicates if single-sign on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.</p>"
+          "documentation": "<p>Indicates if single sign-on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.</p>"
         },
         "DesiredNumberOfDomainControllers": {
           "shape": "DesiredNumberOfDomainControllers",
           "documentation": "<p>The desired number of domain controllers in the directory if the directory is Microsoft AD.</p>"
+        },
+        "OwnerDirectoryDescription": {
+          "shape": "OwnerDirectoryDescription",
+          "documentation": "<p>Describes the AWS Managed Microsoft AD directory in the directory owner account.</p>"
         }
       },
       "documentation": "<p>Contains information about an AWS Directory Service directory.</p>"
@@ -2493,7 +2744,8 @@
       "enum": [
         "SimpleAD",
         "ADConnector",
-        "MicrosoftAD"
+        "MicrosoftAD",
+        "SharedMicrosoftAD"
       ]
     },
     "DirectoryVpcSettings": {
@@ -3045,10 +3297,45 @@
     "NextToken": {
       "type": "string"
     },
+    "Notes": {
+      "type": "string",
+      "max": 1024,
+      "sensitive": true
+    },
     "OrganizationalUnitDN": {
       "type": "string",
       "max": 2000,
       "min": 1
+    },
+    "OwnerDirectoryDescription": {
+      "type": "structure",
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Identifier of the AWS Managed Microsoft AD directory in the directory owner account.</p>"
+        },
+        "AccountId": {
+          "shape": "CustomerId",
+          "documentation": "<p>Identifier of the directory owner account.</p>"
+        },
+        "DnsIpAddrs": {
+          "shape": "DnsIpAddrs",
+          "documentation": "<p>IP address of the directory’s domain controllers.</p>"
+        },
+        "VpcSettings": {
+          "shape": "DirectoryVpcSettingsDescription",
+          "documentation": "<p>Information about the VPC settings for the directory.</p>"
+        },
+        "RadiusSettings": {
+          "shape": "RadiusSettings",
+          "documentation": "<p>A <a>RadiusSettings</a> object that contains information about the RADIUS server.</p>"
+        },
+        "RadiusStatus": {
+          "shape": "RadiusStatus",
+          "documentation": "<p>Information about the status of the RADIUS server.</p>"
+        }
+      },
+      "documentation": "<p>Describes the directory owner account details that have been shared to the directory consumer account.</p>"
     },
     "Password": {
       "type": "string",
@@ -3100,7 +3387,7 @@
         },
         "SharedSecret": {
           "shape": "RadiusSharedSecret",
-          "documentation": "<p>Not currently used.</p>"
+          "documentation": "<p>Required for enabling RADIUS on the directory.</p>"
         },
         "AuthenticationProtocol": {
           "shape": "RadiusAuthenticationProtocol",
@@ -3158,6 +3445,27 @@
       "type": "structure",
       "members": {},
       "documentation": "<p>The result of a RegisterEventTopic request.</p>"
+    },
+    "RejectSharedDirectoryRequest": {
+      "type": "structure",
+      "required": [
+        "SharedDirectoryId"
+      ],
+      "members": {
+        "SharedDirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.</p>"
+        }
+      }
+    },
+    "RejectSharedDirectoryResult": {
+      "type": "structure",
+      "members": {
+        "SharedDirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Identifier of the shared directory in the directory consumer account.</p>"
+        }
+      }
     },
     "RemoteDomainName": {
       "type": "string",
@@ -3231,7 +3539,7 @@
         },
         "UserName": {
           "shape": "CustomerUserName",
-          "documentation": "<p>The username of the user whose password will be reset.</p>"
+          "documentation": "<p>The user name of the user whose password will be reset.</p>"
         },
         "NewPassword": {
           "shape": "UserPassword",
@@ -3346,6 +3654,128 @@
       "member": {
         "shape": "Server"
       }
+    },
+    "ShareDirectoryRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId",
+        "ShareTarget",
+        "ShareMethod"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Identifier of the AWS Managed Microsoft AD directory that you want to share with other AWS accounts.</p>"
+        },
+        "ShareNotes": {
+          "shape": "Notes",
+          "documentation": "<p>A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.</p>"
+        },
+        "ShareTarget": {
+          "shape": "ShareTarget",
+          "documentation": "<p>Identifier for the directory consumer account with whom the directory is to be shared.</p>"
+        },
+        "ShareMethod": {
+          "shape": "ShareMethod",
+          "documentation": "<p>The method used when sharing a directory to determine whether the directory should be shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by sending a directory sharing request (<code>HANDSHAKE</code>).</p>"
+        }
+      }
+    },
+    "ShareDirectoryResult": {
+      "type": "structure",
+      "members": {
+        "SharedDirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Identifier of the directory that is stored in the directory consumer account that is shared from the specified directory (<code>DirectoryId</code>).</p>"
+        }
+      }
+    },
+    "ShareMethod": {
+      "type": "string",
+      "enum": [
+        "ORGANIZATIONS",
+        "HANDSHAKE"
+      ]
+    },
+    "ShareStatus": {
+      "type": "string",
+      "enum": [
+        "Shared",
+        "PendingAcceptance",
+        "Rejected",
+        "Rejecting",
+        "RejectFailed",
+        "Sharing",
+        "ShareFailed",
+        "Deleted",
+        "Deleting"
+      ]
+    },
+    "ShareTarget": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "Type"
+      ],
+      "members": {
+        "Id": {
+          "shape": "TargetId",
+          "documentation": "<p>Identifier of the directory consumer account.</p>"
+        },
+        "Type": {
+          "shape": "TargetType",
+          "documentation": "<p>Type of identifier to be used in the <code>Id</code> field.</p>"
+        }
+      },
+      "documentation": "<p>Identifier that contains details about the directory consumer account.</p>"
+    },
+    "SharedDirectories": {
+      "type": "list",
+      "member": {
+        "shape": "SharedDirectory"
+      }
+    },
+    "SharedDirectory": {
+      "type": "structure",
+      "members": {
+        "OwnerAccountId": {
+          "shape": "CustomerId",
+          "documentation": "<p>Identifier of the directory owner account, which contains the directory that has been shared to the consumer account.</p>"
+        },
+        "OwnerDirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Identifier of the directory in the directory owner account. </p>"
+        },
+        "ShareMethod": {
+          "shape": "ShareMethod",
+          "documentation": "<p>The method used when sharing a directory to determine whether the directory should be shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by sending a shared directory request (<code>HANDSHAKE</code>).</p>"
+        },
+        "SharedAccountId": {
+          "shape": "CustomerId",
+          "documentation": "<p>Identifier of the directory consumer account that has access to the shared directory (<code>OwnerDirectoryId</code>) in the directory owner account.</p>"
+        },
+        "SharedDirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.</p>"
+        },
+        "ShareStatus": {
+          "shape": "ShareStatus",
+          "documentation": "<p>Current directory status of the shared AWS Managed Microsoft AD directory.</p>"
+        },
+        "ShareNotes": {
+          "shape": "Notes",
+          "documentation": "<p>A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.</p>"
+        },
+        "CreatedDateTime": {
+          "shape": "CreatedDateTime",
+          "documentation": "<p>The date and time that the shared directory was created.</p>"
+        },
+        "LastUpdatedDateTime": {
+          "shape": "LastUpdatedDateTime",
+          "documentation": "<p>The date and time that the shared directory was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Details about the shared directory in the directory owner account for which the share request in the directory consumer account has been accepted.</p>"
     },
     "Snapshot": {
       "type": "structure",
@@ -3540,6 +3970,17 @@
         "shape": "Tag"
       }
     },
+    "TargetId": {
+      "type": "string",
+      "max": 64,
+      "min": 1
+    },
+    "TargetType": {
+      "type": "string",
+      "enum": [
+        "ACCOUNT"
+      ]
+    },
     "TopicArn": {
       "type": "string"
     },
@@ -3661,6 +4102,50 @@
       "member": {
         "shape": "Trust"
       }
+    },
+    "UnshareDirectoryRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId",
+        "UnshareTarget"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the AWS Managed Microsoft AD directory that you want to stop sharing.</p>"
+        },
+        "UnshareTarget": {
+          "shape": "UnshareTarget",
+          "documentation": "<p>Identifier for the directory consumer account with whom the directory has to be unshared.</p>"
+        }
+      }
+    },
+    "UnshareDirectoryResult": {
+      "type": "structure",
+      "members": {
+        "SharedDirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Identifier of the directory stored in the directory consumer account that is to be unshared from the specified directory (<code>DirectoryId</code>).</p>"
+        }
+      }
+    },
+    "UnshareTarget": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "Type"
+      ],
+      "members": {
+        "Id": {
+          "shape": "TargetId",
+          "documentation": "<p>Identifier of the directory consumer account.</p>"
+        },
+        "Type": {
+          "shape": "TargetType",
+          "documentation": "<p>Type of identifier to be used in the <i>Id</i> field.</p>"
+        }
+      },
+      "documentation": "<p>Identifier that contains details about the directory consumer account with whom the directory is being unshared.</p>"
     },
     "UpdateConditionalForwarderRequest": {
       "type": "structure",

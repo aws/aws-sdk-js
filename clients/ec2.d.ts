@@ -3809,7 +3809,7 @@ declare namespace EC2 {
      */
     LogDestinationType?: LogDestinationType;
     /**
-     * Specifies the destination to which the flow log data is to be published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType. If LogDestinationType is not specified or cloud-watch-logs, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. If LogDestinationType is s3, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: bucket_ARN/subfolder_name/. For example, to specify a subfolder named my-logs in a bucket named my-bucket, use the following ARN: arn:aws:s3:::my-bucket/my-logs/.
+     * Specifies the destination to which the flow log data is to be published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType. If LogDestinationType is not specified or cloud-watch-logs, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. If LogDestinationType is s3, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: bucket_ARN/subfolder_name/. For example, to specify a subfolder named my-logs in a bucket named my-bucket, use the following ARN: arn:aws:s3:::my-bucket/my-logs/. You cannot use AWSLogs as a subfolder name. This is a reserved term.
      */
     LogDestination?: String;
   }
@@ -3865,7 +3865,7 @@ declare namespace EC2 {
   }
   export interface CreateImageRequest {
     /**
-     * Information about one or more block device mappings.
+     * Information about one or more block device mappings. This parameter cannot be used to modify the encryption status of existing volumes or snapshots. To create an AMI with encrypted snapshots, use the CopyImage action.
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
@@ -6605,12 +6605,24 @@ declare namespace EC2 {
      * One or more route table IDs. Default: Describes all your route tables.
      */
     RouteTableIds?: ValueStringList;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 100.
+     */
+    MaxResults?: Integer;
   }
   export interface DescribeRouteTablesResult {
     /**
      * Information about one or more route tables.
      */
     RouteTables?: RouteTableList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeScheduledInstanceAvailabilityRequest {
     /**
@@ -7860,7 +7872,7 @@ declare namespace EC2 {
      */
     VolumeType?: VolumeType;
     /**
-     * Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value. This is because only blank volumes can be encrypted on creation.
+     * Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption.  If you are creating a volume from a snapshot, you cannot specify an encryption value. This is because only blank volumes can be encrypted on creation. If you are creating a snapshot from an existing EBS volume, you cannot specify an encryption value that differs from that of the EBS volume. We recommend that you omit the encryption value from the block device mappings when creating an image from an instance.
      */
     Encrypted?: Boolean;
     /**

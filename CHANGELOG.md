@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.321.0-->
+<!--LATEST=2.322.0-->
 <!--ENTRYINSERT-->
+
+## 2.322.0
+* feature: DirectoryService: API changes related to launch of cross account for Directory Service.
+* feature: EC2: Add pagination support for ec2.describe-route-tables API. 
 
 ## 2.321.0
 * feature: Connect: This update adds the Amazon Connect Metrics API, which lets you get current metric data and historical metric data within 24 hours for the queues in your Amazon Connect instance.
