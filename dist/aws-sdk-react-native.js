@@ -11390,6 +11390,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		    } else {
 		      if (typeof Blob !== void 0 && value instanceof Blob) return;
 		    }
+		    if (Blob && value instanceof Blob) return;
 
 		    var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];
 		    if (value) {
