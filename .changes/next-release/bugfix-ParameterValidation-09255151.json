@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ParameterValidation",
-  "description": "Updates service models to include min, max, enum, and pattern data for use with SDK parameter validation."
-}
