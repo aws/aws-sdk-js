@@ -8,6 +8,8 @@
 
   STS = require('../clients/sts');
 
+  var sharedIniFile = require('../lib/shared-ini');
+
   validateCredentials = function(creds, key, secret, session) {
     expect(creds.accessKeyId).to.equal(key || 'akid');
     expect(creds.secretAccessKey).to.equal(secret || 'secret');
@@ -191,9 +193,8 @@
       });
     });
     describe('AWS.SharedIniFileCredentials', function() {
-      var homedir, os;
-      os = require('os');
-      homedir = os.homedir;
+      var os = require('os');
+      var homedir = os.homedir;
       beforeEach(function() {
         delete os.homedir;
         delete process.env.AWS_PROFILE;
@@ -205,7 +206,8 @@
         delete process.env.USERPROFILE;
       });
       afterEach(function() {
-        return os.homedir = homedir;
+        sharedIniFile.clearCachedFiles();
+        os.homedir = homedir;
       });
       describe('constructor', function() {
         beforeEach(function() {
@@ -272,7 +274,10 @@
       });
       describe('loading', function() {
         beforeEach(function() {
-          return process.env.HOME = '/home/user';
+          process.env.HOME = '/home/user';
+        });
+        afterEach(function() {
+          sharedIniFile.clearCachedFiles();
         });
         it('loads credentials from ~/.aws/credentials using default profile', function() {
           var creds, mock;
@@ -387,9 +392,12 @@
           return validateCredentials(creds);
         });
       });
-      return describe('refresh', function() {
+      describe('refresh', function() {
         beforeEach(function() {
           return process.env.HOME = '/home/user';
+        });
+        afterEach(function() {
+          sharedIniFile.clearCachedFiles();
         });
         it('should refresh from disk', function() {
           var creds, mock;
@@ -417,6 +425,9 @@
         var os;
         os = require('os');
         helpers.spyOn(os, 'homedir').andReturn('/home/user');
+      });
+      afterEach(function() {
+        sharedIniFile.clearCachedFiles();
       });
       it('will fail if assume role is disabled', function() {
         var creds, mock;
