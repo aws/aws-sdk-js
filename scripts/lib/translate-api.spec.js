@@ -4,6 +4,19 @@ var Translator = require('./translator');
 var Api = require('../../lib/model/api');
 var fooModel = require('./foo-2018-03-30.normal.json');
 
+describe('Translator', function() {
+    it('does not remove min, max, enum, or pattern traits form shapes', function() {
+        var mockModel = deepCopyObject(fooModel);
+        var modifiedModel = new Translator(mockModel, {documentation: false});
+
+        // shapes are renamed when they are reused
+        expect(modifiedModel.shapes['S2'].min).to.equal(1);
+        expect(modifiedModel.shapes['S2'].max).to.equal(100);
+        expect(modifiedModel.shapes['S2'].enum).to.eql(["test"]);
+        expect(modifiedModel.shapes['S2'].pattern).to.equal("\\w+");
+    });
+});
+
 describe('removeEventStreamOperations', function() {
     describe('removes operations when eventstream', function() {
         it('is on the input shape shape', function() {
