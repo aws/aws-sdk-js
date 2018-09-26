@@ -1110,6 +1110,31 @@
       ],
       "documentation": "<p>Retrieves metadata for all crawlers defined in the customer account.</p>"
     },
+    "GetDataCatalogEncryptionSettings": {
+      "name": "GetDataCatalogEncryptionSettings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetDataCatalogEncryptionSettingsRequest"
+      },
+      "output": {
+        "shape": "GetDataCatalogEncryptionSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Retrieves the security configuration for a specified catalog.</p>"
+    },
     "GetDatabase": {
       "name": "GetDatabase",
       "http": {
@@ -4723,6 +4748,24 @@
         "NextToken": {
           "shape": "Token",
           "documentation": "<p>A continuation token, if the returned list has not reached the end of those defined in this customer account.</p>"
+        }
+      }
+    },
+    "GetDataCatalogEncryptionSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The ID of the Data Catalog for which to retrieve the security configuration. If none is supplied, the AWS account ID is used by default.</p>"
+        }
+      }
+    },
+    "GetDataCatalogEncryptionSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "DataCatalogEncryptionSettings": {
+          "shape": "DataCatalogEncryptionSettings",
+          "documentation": "<p>The requested security configuration.</p>"
         }
       }
     },

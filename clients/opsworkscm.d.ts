@@ -101,6 +101,14 @@ declare class OpsWorksCM extends Service {
    */
   disassociateNode(callback?: (err: AWSError, data: OpsWorksCM.Types.DisassociateNodeResponse) => void): Request<OpsWorksCM.Types.DisassociateNodeResponse, AWSError>;
   /**
+   *  Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server.   This operation is synchronous.   A ValidationException is raised when parameters of the request are not valid. A ResourceNotFoundException is thrown when the server does not exist. An InvalidStateException is thrown when the server is in any of the following states: CREATING, TERMINATED, FAILED or DELETING. 
+   */
+  exportServerEngineAttribute(params: OpsWorksCM.Types.ExportServerEngineAttributeRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.ExportServerEngineAttributeResponse) => void): Request<OpsWorksCM.Types.ExportServerEngineAttributeResponse, AWSError>;
+  /**
+   *  Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server.   This operation is synchronous.   A ValidationException is raised when parameters of the request are not valid. A ResourceNotFoundException is thrown when the server does not exist. An InvalidStateException is thrown when the server is in any of the following states: CREATING, TERMINATED, FAILED or DELETING. 
+   */
+  exportServerEngineAttribute(callback?: (err: AWSError, data: OpsWorksCM.Types.ExportServerEngineAttributeResponse) => void): Request<OpsWorksCM.Types.ExportServerEngineAttributeResponse, AWSError>;
+  /**
    *  Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING, UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.   This operation is asynchronous.   An InvalidStateException is thrown when the server is not in a valid state. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   restoreServer(params: OpsWorksCM.Types.RestoreServerRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.RestoreServerResponse) => void): Request<OpsWorksCM.Types.RestoreServerResponse, AWSError>;
@@ -528,6 +536,30 @@ declare namespace OpsWorksCM {
   export type EngineAttributeName = string;
   export type EngineAttributeValue = string;
   export type EngineAttributes = EngineAttribute[];
+  export interface ExportServerEngineAttributeRequest {
+    /**
+     * The name of the export attribute. Currently supported export attribute is "Userdata" which exports a userdata script filled out with parameters provided in the InputAttributes list.
+     */
+    ExportAttributeName: String;
+    /**
+     * The name of the Server to which the attribute is being exported from 
+     */
+    ServerName: ServerName;
+    /**
+     * The list of engine attributes. The list type is EngineAttribute. EngineAttribute is a pair of attribute name and value. For ExportAttributeName "Userdata", currently supported input attribute names are: - "RunList": For Chef, an ordered list of roles and/or recipes that are run in the exact order. For Puppet, this parameter is ignored. - "OrganizationName": For Chef, an organization name. AWS OpsWorks for Chef Server always creates the organization "default". For Puppet, this parameter is ignored. - "NodeEnvironment": For Chef, a node environment (eg. development, staging, onebox). For Puppet, this parameter is ignored. - "NodeClientVersion": For Chef, version of Chef Engine (3 numbers separated by dots, eg. "13.8.5"). If empty, it uses the latest one. For Puppet, this parameter is ignored. 
+     */
+    InputAttributes?: EngineAttributes;
+  }
+  export interface ExportServerEngineAttributeResponse {
+    /**
+     * The requested engine attribute pair with attribute name and value. 
+     */
+    EngineAttribute?: EngineAttribute;
+    /**
+     * The requested ServerName. 
+     */
+    ServerName?: ServerName;
+  }
   export type InstanceProfileArn = string;
   export type Integer = number;
   export type KeyPair = string;

@@ -324,6 +324,14 @@ declare class Glue extends Service {
    */
   getCrawlers(callback?: (err: AWSError, data: Glue.Types.GetCrawlersResponse) => void): Request<Glue.Types.GetCrawlersResponse, AWSError>;
   /**
+   * Retrieves the security configuration for a specified catalog.
+   */
+  getDataCatalogEncryptionSettings(params: Glue.Types.GetDataCatalogEncryptionSettingsRequest, callback?: (err: AWSError, data: Glue.Types.GetDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.GetDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Retrieves the security configuration for a specified catalog.
+   */
+  getDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.GetDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.GetDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
    * Retrieves the definition of a specified database.
    */
   getDatabase(params: Glue.Types.GetDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.GetDatabaseResponse) => void): Request<Glue.Types.GetDatabaseResponse, AWSError>;
@@ -2174,6 +2182,18 @@ declare namespace Glue {
      * A continuation token, if the returned list has not reached the end of those defined in this customer account.
      */
     NextToken?: Token;
+  }
+  export interface GetDataCatalogEncryptionSettingsRequest {
+    /**
+     * The ID of the Data Catalog for which to retrieve the security configuration. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+  }
+  export interface GetDataCatalogEncryptionSettingsResponse {
+    /**
+     * The requested security configuration.
+     */
+    DataCatalogEncryptionSettings?: DataCatalogEncryptionSettings;
   }
   export interface GetDatabaseRequest {
     /**

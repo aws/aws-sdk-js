@@ -750,11 +750,11 @@ declare class RDS extends Service {
    */
   revokeDBSecurityGroupIngress(callback?: (err: AWSError, data: RDS.Types.RevokeDBSecurityGroupIngressResult) => void): Request<RDS.Types.RevokeDBSecurityGroupIngressResult, AWSError>;
   /**
-   * Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the stop-db-cluster AWS CLI command, or the StopDBCluster action.
+   * Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the stop-db-cluster AWS CLI command, or the StopDBCluster action. For more information, see  Stopping and Starting an Aurora Cluster in the Amazon Aurora User Guide. 
    */
   startDBCluster(params: RDS.Types.StartDBClusterMessage, callback?: (err: AWSError, data: RDS.Types.StartDBClusterResult) => void): Request<RDS.Types.StartDBClusterResult, AWSError>;
   /**
-   * Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the stop-db-cluster AWS CLI command, or the StopDBCluster action.
+   * Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the stop-db-cluster AWS CLI command, or the StopDBCluster action. For more information, see  Stopping and Starting an Aurora Cluster in the Amazon Aurora User Guide. 
    */
   startDBCluster(callback?: (err: AWSError, data: RDS.Types.StartDBClusterResult) => void): Request<RDS.Types.StartDBClusterResult, AWSError>;
   /**
@@ -766,11 +766,11 @@ declare class RDS extends Service {
    */
   startDBInstance(callback?: (err: AWSError, data: RDS.Types.StartDBInstanceResult) => void): Request<RDS.Types.StartDBInstanceResult, AWSError>;
   /**
-   *  Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster's metadata, including its endpoints and DB parameter groups. Aurora also retains the transaction logs so you can do a point-in-time restore if necessary. 
+   *  Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster's metadata, including its endpoints and DB parameter groups. Aurora also retains the transaction logs so you can do a point-in-time restore if necessary.  For more information, see  Stopping and Starting an Aurora Cluster in the Amazon Aurora User Guide. 
    */
   stopDBCluster(params: RDS.Types.StopDBClusterMessage, callback?: (err: AWSError, data: RDS.Types.StopDBClusterResult) => void): Request<RDS.Types.StopDBClusterResult, AWSError>;
   /**
-   *  Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster's metadata, including its endpoints and DB parameter groups. Aurora also retains the transaction logs so you can do a point-in-time restore if necessary. 
+   *  Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster's metadata, including its endpoints and DB parameter groups. Aurora also retains the transaction logs so you can do a point-in-time restore if necessary.  For more information, see  Stopping and Starting an Aurora Cluster in the Amazon Aurora User Guide. 
    */
   stopDBCluster(callback?: (err: AWSError, data: RDS.Types.StopDBClusterResult) => void): Request<RDS.Types.StopDBClusterResult, AWSError>;
   /**
@@ -1237,6 +1237,10 @@ declare namespace RDS {
      */
     ScalingConfiguration?: ScalingConfiguration;
     /**
+     * Indicates if the DB cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. 
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
      * The ID of the region that contains the source for the read replica.
      */
     SourceRegion?: String;
@@ -1453,6 +1457,10 @@ declare namespace RDS {
      * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
      */
     ProcessorFeatures?: ProcessorFeatureList;
+    /**
+     * Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see  Deleting a DB Instance. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface CreateDBInstanceReadReplicaMessage {
     /**
@@ -1552,6 +1560,10 @@ declare namespace RDS {
      * A value that specifies that the DB instance class of the DB instance uses its default processor features.
      */
     UseDefaultProcessorFeatures?: BooleanOptional;
+    /**
+     * Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see  Deleting a DB Instance. 
+     */
+    DeletionProtection?: BooleanOptional;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -1842,6 +1854,10 @@ declare namespace RDS {
      */
     EngineMode?: String;
     ScalingConfigurationInfo?: ScalingConfigurationInfo;
+    /**
+     * Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when this value is set to true. 
+     */
+    DeletionProtection?: Boolean;
   }
   export interface DBClusterBacktrack {
     /**
@@ -2396,6 +2412,10 @@ declare namespace RDS {
      * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
      */
     ProcessorFeatures?: ProcessorFeatureList;
+    /**
+     * Indicates if the DB instance has deletion protection enabled. The database can't be deleted when this value is set to true. For more information, see  Deleting a DB Instance. 
+     */
+    DeletionProtection?: Boolean;
   }
   export type DBInstanceList = DBInstance[];
   export interface DBInstanceMessage {
@@ -3860,6 +3880,10 @@ declare namespace RDS {
      * The scaling properties of the DB cluster. You can only modify scaling properties for DB clusters in serverless DB engine mode.
      */
     ScalingConfiguration?: ScalingConfiguration;
+    /**
+     * Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when this value is set to true. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -4052,6 +4076,10 @@ declare namespace RDS {
      * A value that specifies that the DB instance class of the DB instance uses its default processor features.
      */
     UseDefaultProcessorFeatures?: BooleanOptional;
+    /**
+     * Indicates if the DB instance has deletion protection enabled. The database can't be deleted when this value is set to true. For more information, see  Deleting a DB Instance. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
@@ -5107,6 +5135,10 @@ declare namespace RDS {
      * The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * Indicates if the DB cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBClusterFromS3Result {
     DBCluster?: DBCluster;
@@ -5180,6 +5212,10 @@ declare namespace RDS {
      * For DB clusters in serverless DB engine mode, the scaling properties of the DB cluster.
      */
     ScalingConfiguration?: ScalingConfiguration;
+    /**
+     * Indicates if the DB cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -5238,6 +5274,10 @@ declare namespace RDS {
      * The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * Indicates if the DB cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
@@ -5340,6 +5380,10 @@ declare namespace RDS {
      * A value that specifies that the DB instance class of the DB instance uses its default processor features.
      */
     UseDefaultProcessorFeatures?: BooleanOptional;
+    /**
+     * Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see  Deleting a DB Instance. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBInstanceFromDBSnapshotResult {
     DBInstance?: DBInstance;
@@ -5513,6 +5557,10 @@ declare namespace RDS {
      * A value that specifies that the DB instance class of the DB instance uses its default processor features.
      */
     UseDefaultProcessorFeatures?: BooleanOptional;
+    /**
+     * Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see  Deleting a DB Instance. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBInstanceFromS3Result {
     DBInstance?: DBInstance;
@@ -5623,6 +5671,10 @@ declare namespace RDS {
      * A value that specifies that the DB instance class of the DB instance uses its default processor features.
      */
     UseDefaultProcessorFeatures?: BooleanOptional;
+    /**
+     * Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see  Deleting a DB Instance. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBInstanceToPointInTimeResult {
     DBInstance?: DBInstance;

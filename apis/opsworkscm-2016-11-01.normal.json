@@ -281,6 +281,31 @@
       ],
       "documentation": "<p> Disassociates a node from an AWS OpsWorks CM server, and removes the node from the server's managed nodes. After a node is disassociated, the node key pair is no longer valid for accessing the configuration manager's API. For more information about how to associate a node, see <a>AssociateNode</a>. </p> <p>A node can can only be disassociated from a server that is in a <code>HEALTHY</code> state. Otherwise, an <code>InvalidStateException</code> is thrown. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
     },
+    "ExportServerEngineAttribute": {
+      "name": "ExportServerEngineAttribute",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ExportServerEngineAttributeRequest"
+      },
+      "output": {
+        "shape": "ExportServerEngineAttributeResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidStateException"
+        }
+      ],
+      "documentation": "<p> Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server. </p> <p> This operation is synchronous. </p> <p> A <code>ValidationException</code> is raised when parameters of the request are not valid. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. An <code>InvalidStateException</code> is thrown when the server is in any of the following states: CREATING, TERMINATED, FAILED or DELETING. </p>"
+    },
     "RestoreServer": {
       "name": "RestoreServer",
       "http": {
@@ -925,6 +950,40 @@
       "type": "list",
       "member": {
         "shape": "EngineAttribute"
+      }
+    },
+    "ExportServerEngineAttributeRequest": {
+      "type": "structure",
+      "required": [
+        "ExportAttributeName",
+        "ServerName"
+      ],
+      "members": {
+        "ExportAttributeName": {
+          "shape": "String",
+          "documentation": "<p>The name of the export attribute. Currently supported export attribute is \"Userdata\" which exports a userdata script filled out with parameters provided in the <code>InputAttributes</code> list.</p>"
+        },
+        "ServerName": {
+          "shape": "ServerName",
+          "documentation": "<p>The name of the Server to which the attribute is being exported from </p>"
+        },
+        "InputAttributes": {
+          "shape": "EngineAttributes",
+          "documentation": "<p>The list of engine attributes. The list type is <code>EngineAttribute</code>. <code>EngineAttribute</code> is a pair of attribute name and value. For <code>ExportAttributeName</code> \"Userdata\", currently supported input attribute names are: - \"RunList\": For Chef, an ordered list of roles and/or recipes that are run in the exact order. For Puppet, this parameter is ignored. - \"OrganizationName\": For Chef, an organization name. AWS OpsWorks for Chef Server always creates the organization \"default\". For Puppet, this parameter is ignored. - \"NodeEnvironment\": For Chef, a node environment (eg. development, staging, onebox). For Puppet, this parameter is ignored. - \"NodeClientVersion\": For Chef, version of Chef Engine (3 numbers separated by dots, eg. \"13.8.5\"). If empty, it uses the latest one. For Puppet, this parameter is ignored. </p>"
+        }
+      }
+    },
+    "ExportServerEngineAttributeResponse": {
+      "type": "structure",
+      "members": {
+        "EngineAttribute": {
+          "shape": "EngineAttribute",
+          "documentation": "<p>The requested engine attribute pair with attribute name and value. </p>"
+        },
+        "ServerName": {
+          "shape": "ServerName",
+          "documentation": "<p>The requested ServerName. </p>"
+        }
       }
     },
     "InstanceProfileArn": {

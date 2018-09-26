@@ -2635,7 +2635,7 @@
           "shape": "InvalidDBInstanceStateFault"
         }
       ],
-      "documentation": "<p>Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the stop-db-cluster AWS CLI command, or the StopDBCluster action.</p>"
+      "documentation": "<p>Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the stop-db-cluster AWS CLI command, or the StopDBCluster action.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html\"> Stopping and Starting an Aurora Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p>"
     },
     "StartDBInstance": {
       "name": "StartDBInstance",
@@ -2711,7 +2711,7 @@
           "shape": "InvalidDBInstanceStateFault"
         }
       ],
-      "documentation": "<p> Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster's metadata, including its endpoints and DB parameter groups. Aurora also retains the transaction logs so you can do a point-in-time restore if necessary. </p>"
+      "documentation": "<p> Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster's metadata, including its endpoints and DB parameter groups. Aurora also retains the transaction logs so you can do a point-in-time restore if necessary. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html\"> Stopping and Starting an Aurora Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p>"
     },
     "StopDBInstance": {
       "name": "StopDBInstance",
@@ -3393,6 +3393,10 @@
           "shape": "ScalingConfiguration",
           "documentation": "<p>For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.</p>"
         },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. </p>"
+        },
         "SourceRegion": {
           "shape": "String",
           "documentation": "<p>The ID of the region that contains the source for the read replica.</p>"
@@ -3654,6 +3658,10 @@
         "ProcessorFeatures": {
           "shape": "ProcessorFeatureList",
           "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
         }
       },
       "documentation": "<p/>"
@@ -3763,6 +3771,10 @@
         "UseDefaultProcessorFeatures": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that specifies that the DB instance class of the DB instance uses its default processor features.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
         },
         "SourceRegion": {
           "shape": "String",
@@ -4164,6 +4176,10 @@
         },
         "ScalingConfigurationInfo": {
           "shape": "ScalingConfigurationInfo"
+        },
+        "DeletionProtection": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when this value is set to true. </p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a>, <a>StopDBCluster</a>, and <a>StartDBCluster</a> actions. </p>",
@@ -4850,6 +4866,10 @@
         "ProcessorFeatures": {
           "shape": "ProcessorFeatureList",
           "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates if the DB instance has deletion protection enabled. The database can't be deleted when this value is set to true. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action. </p>",
@@ -6927,6 +6947,10 @@
         "ScalingConfiguration": {
           "shape": "ScalingConfiguration",
           "documentation": "<p>The scaling properties of the DB cluster. You can only modify scaling properties for DB clusters in <code>serverless</code> DB engine mode.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when this value is set to true. </p>"
         }
       },
       "documentation": "<p/>"
@@ -7152,6 +7176,10 @@
         "UseDefaultProcessorFeatures": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that specifies that the DB instance class of the DB instance uses its default processor features.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB instance has deletion protection enabled. The database can't be deleted when this value is set to true. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
         }
       },
       "documentation": "<p/>"
@@ -8646,6 +8674,10 @@
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. </p>"
         }
       }
     },
@@ -8732,6 +8764,10 @@
         "ScalingConfiguration": {
           "shape": "ScalingConfiguration",
           "documentation": "<p>For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. </p>"
         }
       },
       "documentation": "<p/>"
@@ -8805,6 +8841,10 @@
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. </p>"
         }
       },
       "documentation": "<p/>"
@@ -8922,6 +8962,10 @@
         "UseDefaultProcessorFeatures": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that specifies that the DB instance class of the DB instance uses its default processor features.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
         }
       },
       "documentation": "<p/>"
@@ -9113,6 +9157,10 @@
         "UseDefaultProcessorFeatures": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that specifies that the DB instance class of the DB instance uses its default processor features.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
         }
       }
     },
@@ -9237,6 +9285,10 @@
         "UseDefaultProcessorFeatures": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that specifies that the DB instance class of the DB instance uses its default processor features.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
         }
       },
       "documentation": "<p/>"
