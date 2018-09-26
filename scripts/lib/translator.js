@@ -43,10 +43,6 @@ function Translator(api, options) {
       delete obj.documentation;
       delete obj.documentationUrl;
       delete obj.errors;
-      delete obj.min;
-      delete obj.max;
-      delete obj.pattern;
-      delete obj['enum'];
       delete obj.box;
     }
   }
