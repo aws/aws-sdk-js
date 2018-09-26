@@ -202,7 +202,7 @@
         delete process.env.HOME;
         delete process.env.HOMEPATH;
         delete process.env.HOMEDRIVE;
-        return delete process.env.USERPROFILE;
+        delete process.env.USERPROFILE;
       });
       afterEach(function() {
         return os.homedir = homedir;
@@ -224,7 +224,7 @@
           process.env.HOME = '/home/user';
           helpers.spyOn(os, 'homedir').andReturn(process.env.HOME + '/foo/bar');
 
-           new AWS.SharedIniFileCredentials();
+          new AWS.SharedIniFileCredentials();
           expect(os.homedir.calls.length).to.equal(0);
           expect(AWS.util.readFileSync.calls.length).to.equal(1);
           return expect(AWS.util.readFileSync.calls[0].arguments[0]).to
@@ -416,7 +416,7 @@
       beforeEach(function() {
         var os;
         os = require('os');
-        return helpers.spyOn(os, 'homedir').andReturn('/home/user');
+        helpers.spyOn(os, 'homedir').andReturn('/home/user');
       });
       it('will fail if assume role is disabled', function() {
         var creds, mock;

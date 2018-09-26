@@ -1,7 +1,6 @@
 var hasProp = {}.hasOwnProperty;
 var helpers = require('./helpers');
 var AWS = helpers.AWS;
-var SharedIniFile = require('../lib/shared_ini');
 var configure = function(options) {
   return new AWS.Config(options);
 };
