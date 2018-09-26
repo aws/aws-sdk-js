@@ -53,6 +53,7 @@
   spies = null;
 
   beforeEach(function() {
+    if (AWS.util.isNode()) require('../lib/shared-ini-file').clearCachedFiles();
     return spies = [];
   });
 
