@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Configuration",
+  "description": "cache shared ini files for later use"
+}
