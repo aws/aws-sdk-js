@@ -2,6 +2,7 @@ var helpers = require('../helpers');
 var AWS = helpers.AWS;
 var spyOn = helpers.spyOn;
 var monitoringConfig = require('../../lib/publisher/configuration');
+var sharedIniFile = require('../../lib/shared-ini')
 
 if (AWS.util.isNode()) {
   describe('configuration resolving', function () {
@@ -18,6 +19,10 @@ if (AWS.util.isNode()) {
       process.env = {
         'HOME': '/home/user'
       };
+    });
+
+    afterEach(function() {
+      sharedIniFile.clearCachedFiles();
     });
   
     describe('get configurations from environmental variable', function () {
