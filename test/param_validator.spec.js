@@ -109,6 +109,31 @@
         });
       });
     });
+    describe('uri params', function() {
+      beforeEach(function() {
+        input = {
+          required: ['id'],
+          members: {
+            id: {
+              type: 'string',
+              location: 'uri'
+            }
+          }
+        }
+      });
+
+      it('throws an error if a uri parameter is empty', function() {
+        expectError({
+          id: ''
+        });
+      });
+
+      it('does not throw an error if a uri parameter is populated', function() {
+        expectValid({
+          id: 'foo'
+        });
+      });
+    });
     describe('required params', function() {
       beforeEach(function() {
         return input = {
