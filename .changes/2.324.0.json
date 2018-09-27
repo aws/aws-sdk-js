@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "Adding support for OpenAPI 3.0 import and export."
+    },
+    {
+        "type": "feature",
+        "category": "CodeCommit",
+        "description": "This release adds API support for getting the contents of a file, getting the contents of a folder, and for deleting a file in an AWS CodeCommit repository."
+    },
+    {
+        "type": "feature",
+        "category": "MQ",
+        "description": "Amazon MQ supports ActiveMQ 5.15.6, in addition to 5.15.0. Automatic minor version upgrades can be toggled. Updated the documentation."
+    }
+]

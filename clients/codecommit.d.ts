@@ -60,6 +60,14 @@ declare class CodeCommit extends Service {
    */
   deleteCommentContent(callback?: (err: AWSError, data: CodeCommit.Types.DeleteCommentContentOutput) => void): Request<CodeCommit.Types.DeleteCommentContentOutput, AWSError>;
   /**
+   * Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file will still exist in the commits prior to the commit that contains the deletion.
+   */
+  deleteFile(params: CodeCommit.Types.DeleteFileInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteFileOutput) => void): Request<CodeCommit.Types.DeleteFileOutput, AWSError>;
+  /**
+   * Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file will still exist in the commits prior to the commit that contains the deletion.
+   */
+  deleteFile(callback?: (err: AWSError, data: CodeCommit.Types.DeleteFileOutput) => void): Request<CodeCommit.Types.DeleteFileOutput, AWSError>;
+  /**
    * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.  Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
    */
   deleteRepository(params: CodeCommit.Types.DeleteRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteRepositoryOutput) => void): Request<CodeCommit.Types.DeleteRepositoryOutput, AWSError>;
@@ -131,6 +139,22 @@ declare class CodeCommit extends Service {
    * Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference). Results can be limited to a specified path.
    */
   getDifferences(callback?: (err: AWSError, data: CodeCommit.Types.GetDifferencesOutput) => void): Request<CodeCommit.Types.GetDifferencesOutput, AWSError>;
+  /**
+   * Returns the base-64 encoded contents of a specified file and its metadata.
+   */
+  getFile(params: CodeCommit.Types.GetFileInput, callback?: (err: AWSError, data: CodeCommit.Types.GetFileOutput) => void): Request<CodeCommit.Types.GetFileOutput, AWSError>;
+  /**
+   * Returns the base-64 encoded contents of a specified file and its metadata.
+   */
+  getFile(callback?: (err: AWSError, data: CodeCommit.Types.GetFileOutput) => void): Request<CodeCommit.Types.GetFileOutput, AWSError>;
+  /**
+   * Returns the contents of a specified folder in a repository.
+   */
+  getFolder(params: CodeCommit.Types.GetFolderInput, callback?: (err: AWSError, data: CodeCommit.Types.GetFolderOutput) => void): Request<CodeCommit.Types.GetFolderOutput, AWSError>;
+  /**
+   * Returns the contents of a specified folder in a repository.
+   */
+  getFolder(callback?: (err: AWSError, data: CodeCommit.Types.GetFolderOutput) => void): Request<CodeCommit.Types.GetFolderOutput, AWSError>;
   /**
    * Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
    */
@@ -569,6 +593,58 @@ declare namespace CodeCommit {
      */
     comment?: Comment;
   }
+  export interface DeleteFileInput {
+    /**
+     * The name of the repository that contains the file to delete.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The name of the branch where the commit will be made deleting the file.
+     */
+    branchName: BranchName;
+    /**
+     * The fully-qualified path to the file that will be deleted, including the full name and extension of that file. For example, /examples/file.md is a fully qualified path to a file named file.md in a folder named examples.
+     */
+    filePath: Path;
+    /**
+     * The ID of the commit that is the tip of the branch where you want to create the commit that will delete the file. This must be the HEAD commit for the branch. The commit that deletes the file will be created from this commit ID.
+     */
+    parentCommitId: CommitId;
+    /**
+     * Specifies whether to delete the folder or directory that contains the file you want to delete if that file is the only object in the folder or directory. By default, empty folders will be deleted. This includes empty folders that are part of the directory structure. For example, if the path to a file is dir1/dir2/dir3/dir4, and dir2 and dir3 are empty, deleting the last file in dir4 will also delete the empty folders dir4, dir3, and dir2.
+     */
+    keepEmptyFolders?: KeepEmptyFolders;
+    /**
+     * The commit message you want to include as part of deleting the file. Commit messages are limited to 256 KB. If no message is specified, a default message will be used.
+     */
+    commitMessage?: Message;
+    /**
+     * The name of the author of the commit that deletes the file. If no name is specified, the user's ARN will be used as the author name and committer name.
+     */
+    name?: Name;
+    /**
+     * The email address for the commit that deletes the file. If no email address is specified, the email address will be left blank.
+     */
+    email?: Email;
+  }
+  export interface DeleteFileOutput {
+    /**
+     * The full commit ID of the commit that contains the change that deletes the file.
+     */
+    commitId: ObjectId;
+    /**
+     * The blob ID removed from the tree as part of deleting the file.
+     */
+    blobId: ObjectId;
+    /**
+     * The full SHA-1 pointer of the tree information for the commit that contains the delete file change.
+     */
+    treeId: ObjectId;
+    /**
+     * The fully-qualified path to the file that will be deleted, including the full name and extension of that file.
+     */
+    filePath: Path;
+  }
   export interface DeleteRepositoryInput {
     /**
      * The name of the repository to delete.
@@ -631,8 +707,42 @@ declare namespace CodeCommit {
   export type DifferenceList = Difference[];
   export type Email = string;
   export type EventDate = Date;
+  export interface File {
+    /**
+     * The blob ID that contains the file information.
+     */
+    blobId?: ObjectId;
+    /**
+     * The fully-qualified path to the file in the repository.
+     */
+    absolutePath?: Path;
+    /**
+     * The relative path of the file from the folder where the query originated.
+     */
+    relativePath?: Path;
+    /**
+     * The extrapolated file mode permissions for the file. Valid values include EXECUTABLE and NORMAL.
+     */
+    fileMode?: FileModeTypeEnum;
+  }
   export type FileContent = Buffer|Uint8Array|Blob|string;
+  export type FileList = File[];
   export type FileModeTypeEnum = "EXECUTABLE"|"NORMAL"|"SYMLINK"|string;
+  export interface Folder {
+    /**
+     * The full SHA-1 pointer of the tree information for the commit that contains the folder.
+     */
+    treeId?: ObjectId;
+    /**
+     * The fully-qualified path of the folder in the repository.
+     */
+    absolutePath?: Path;
+    /**
+     * The relative path of the specified folder from the folder where the query originated.
+     */
+    relativePath?: Path;
+  }
+  export type FolderList = Folder[];
   export interface GetBlobInput {
     /**
      * The name of the repository that contains the blob.
@@ -801,6 +911,90 @@ declare namespace CodeCommit {
      */
     NextToken?: NextToken;
   }
+  export interface GetFileInput {
+    /**
+     * The name of the repository that contains the file.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The fully-quaified reference that identifies the commit that contains the file. For example, you could specify a full commit ID, a tag, a branch name, or a reference such as refs/heads/master. If none is provided, then the head commit will be used.
+     */
+    commitSpecifier?: CommitName;
+    /**
+     * The fully-qualified path to the file, including the full name and extension of the file. For example, /examples/file.md is the fully-qualified path to a file named file.md in a folder named examples.
+     */
+    filePath: Path;
+  }
+  export interface GetFileOutput {
+    /**
+     * The full commit ID of the commit that contains the content returned by GetFile.
+     */
+    commitId: ObjectId;
+    /**
+     * The blob ID of the object that represents the file content.
+     */
+    blobId: ObjectId;
+    /**
+     * The fully qualified path to the specified file. This returns the name and extension of the file.
+     */
+    filePath: Path;
+    /**
+     * The extrapolated file mode permissions of the blob. Valid values include strings such as EXECUTABLE and not numeric values.  The file mode permissions returned by this API are not the standard file mode permission values, such as 100644, but rather extrapolated values. See below for a full list of supported return values. 
+     */
+    fileMode: FileModeTypeEnum;
+    /**
+     * The size of the contents of the file, in bytes.
+     */
+    fileSize: ObjectSize;
+    /**
+     * The base-64 encoded binary data object that represents the content of the file.
+     */
+    fileContent: FileContent;
+  }
+  export interface GetFolderInput {
+    /**
+     * The name of the repository.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * A fully-qualified reference used to identify a commit that contains the version of the folder's content to return. A fully-qualified reference can be a commit ID, branch name, tag, or reference such as HEAD. If no specifier is provided, the folder content will be returned as it exists in the HEAD commit.
+     */
+    commitSpecifier?: CommitName;
+    /**
+     * The fully-qualified path to the folder whose contents will be returned, including the folder name. For example, /examples is a fully-qualified path to a folder named examples that was created off of the root directory (/) of a repository. 
+     */
+    folderPath: Path;
+  }
+  export interface GetFolderOutput {
+    /**
+     * The full commit ID used as a reference for which version of the folder content is returned.
+     */
+    commitId: ObjectId;
+    /**
+     * The fully-qualified path of the folder whose contents are returned.
+     */
+    folderPath: Path;
+    /**
+     * The full SHA-1 pointer of the tree information for the commit that contains the folder.
+     */
+    treeId?: ObjectId;
+    /**
+     * The list of folders that exist beneath the specified folder, if any.
+     */
+    subFolders?: FolderList;
+    /**
+     * The list of files that exist in the specified folder, if any.
+     */
+    files?: FileList;
+    /**
+     * The list of symbolic links to other files and folders that exist in the specified folder, if any.
+     */
+    symbolicLinks?: SymbolicLinkList;
+    /**
+     * The list of submodules that exist in the specified folder, if any.
+     */
+    subModules?: SubModuleList;
+  }
   export interface GetMergeConflictsInput {
     /**
      * The name of the repository where the pull request was created.
@@ -876,6 +1070,7 @@ declare namespace CodeCommit {
   export type IsCommentDeleted = boolean;
   export type IsMergeable = boolean;
   export type IsMerged = boolean;
+  export type KeepEmptyFolders = boolean;
   export type LastModifiedDate = Date;
   export type Limit = number;
   export interface ListBranchesInput {
@@ -1005,6 +1200,7 @@ declare namespace CodeCommit {
   export type Name = string;
   export type NextToken = string;
   export type ObjectId = string;
+  export type ObjectSize = number;
   export type OrderEnum = "ascending"|"descending"|string;
   export type ParentList = ObjectId[];
   export type Path = string;
@@ -1300,13 +1496,13 @@ declare namespace CodeCommit {
      */
     destinationCommit?: CommitId;
     /**
-     * The commit ID of the most recent commit that the source branch and the destination branch have in common.
-     */
-    mergeBase?: CommitId;
-    /**
      * The full commit ID of the tip of the source branch used to create the pull request. If the pull request branch is updated by a push while the pull request is open, the commit ID will change to reflect the new tip of the branch.
      */
     sourceCommit?: CommitId;
+    /**
+     * The commit ID of the most recent commit that the source branch and the destination branch have in common.
+     */
+    mergeBase?: CommitId;
     /**
      * Returns metadata about the state of the merge, including whether the merge has been made.
      */
@@ -1484,6 +1680,40 @@ declare namespace CodeCommit {
   export type RepositoryTriggersConfigurationId = string;
   export type RepositoryTriggersList = RepositoryTrigger[];
   export type SortByEnum = "repositoryName"|"lastModifiedDate"|string;
+  export interface SubModule {
+    /**
+     * The commit ID that contains the reference to the submodule.
+     */
+    commitId?: ObjectId;
+    /**
+     * The fully qualified path to the folder that contains the reference to the submodule.
+     */
+    absolutePath?: Path;
+    /**
+     * The relative path of the submodule from the folder where the query originated.
+     */
+    relativePath?: Path;
+  }
+  export type SubModuleList = SubModule[];
+  export interface SymbolicLink {
+    /**
+     * The blob ID that contains the information about the symbolic link.
+     */
+    blobId?: ObjectId;
+    /**
+     * The fully-qualified path to the folder that contains the symbolic link.
+     */
+    absolutePath?: Path;
+    /**
+     * The relative path of the symbolic link from the folder where the query originated.
+     */
+    relativePath?: Path;
+    /**
+     * The file mode permissions of the blob that cotains information about the symbolic link.
+     */
+    fileMode?: FileModeTypeEnum;
+  }
+  export type SymbolicLinkList = SymbolicLink[];
   export interface Target {
     /**
      * The name of the repository that contains the pull request.

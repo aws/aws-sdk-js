@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.323.0
+// AWS SDK for JavaScript v2.324.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -20802,6 +20802,44 @@ module.exports={
         }
       }
     },
+    "DeleteFile": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName",
+          "branchName",
+          "filePath",
+          "parentCommitId"
+        ],
+        "members": {
+          "repositoryName": {},
+          "branchName": {},
+          "filePath": {},
+          "parentCommitId": {},
+          "keepEmptyFolders": {
+            "type": "boolean"
+          },
+          "commitMessage": {},
+          "name": {},
+          "email": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "commitId",
+          "blobId",
+          "treeId",
+          "filePath"
+        ],
+        "members": {
+          "commitId": {},
+          "blobId": {},
+          "treeId": {},
+          "filePath": {}
+        }
+      }
+    },
     "DeleteRepository": {
       "input": {
         "type": "structure",
@@ -20984,10 +21022,10 @@ module.exports={
                 "beforeBlobId": {},
                 "afterBlobId": {},
                 "location": {
-                  "shape": "S1z"
+                  "shape": "S26"
                 },
                 "comments": {
-                  "shape": "S23"
+                  "shape": "S29"
                 }
               }
             }
@@ -21028,10 +21066,10 @@ module.exports={
                 "beforeBlobId": {},
                 "afterBlobId": {},
                 "location": {
-                  "shape": "S1z"
+                  "shape": "S26"
                 },
                 "comments": {
-                  "shape": "S23"
+                  "shape": "S29"
                 }
               }
             }
@@ -21069,10 +21107,10 @@ module.exports={
               },
               "message": {},
               "author": {
-                "shape": "S2d"
+                "shape": "S2i"
               },
               "committer": {
-                "shape": "S2d"
+                "shape": "S2i"
               },
               "additionalData": {}
             }
@@ -21108,16 +21146,125 @@ module.exports={
               "type": "structure",
               "members": {
                 "beforeBlob": {
-                  "shape": "S2o"
+                  "shape": "S2r"
                 },
                 "afterBlob": {
-                  "shape": "S2o"
+                  "shape": "S2r"
                 },
                 "changeType": {}
               }
             }
           },
           "NextToken": {}
+        }
+      }
+    },
+    "GetFile": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName",
+          "filePath"
+        ],
+        "members": {
+          "repositoryName": {},
+          "commitSpecifier": {},
+          "filePath": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "commitId",
+          "blobId",
+          "filePath",
+          "fileMode",
+          "fileSize",
+          "fileContent"
+        ],
+        "members": {
+          "commitId": {},
+          "blobId": {},
+          "filePath": {},
+          "fileMode": {},
+          "fileSize": {
+            "type": "long"
+          },
+          "fileContent": {
+            "type": "blob"
+          }
+        }
+      }
+    },
+    "GetFolder": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName",
+          "folderPath"
+        ],
+        "members": {
+          "repositoryName": {},
+          "commitSpecifier": {},
+          "folderPath": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "commitId",
+          "folderPath"
+        ],
+        "members": {
+          "commitId": {},
+          "folderPath": {},
+          "treeId": {},
+          "subFolders": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "treeId": {},
+                "absolutePath": {},
+                "relativePath": {}
+              }
+            }
+          },
+          "files": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "blobId": {},
+                "absolutePath": {},
+                "relativePath": {},
+                "fileMode": {}
+              }
+            }
+          },
+          "symbolicLinks": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "blobId": {},
+                "absolutePath": {},
+                "relativePath": {},
+                "fileMode": {}
+              }
+            }
+          },
+          "subModules": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "commitId": {},
+                "absolutePath": {},
+                "relativePath": {}
+              }
+            }
+          }
         }
       }
     },
@@ -21209,7 +21356,7 @@ module.exports={
         "members": {
           "configurationId": {},
           "triggers": {
-            "shape": "S32"
+            "shape": "S3k"
           }
         }
       }
@@ -21229,7 +21376,7 @@ module.exports={
         "type": "structure",
         "members": {
           "branches": {
-            "shape": "S36"
+            "shape": "S3o"
           },
           "nextToken": {}
         }
@@ -21326,7 +21473,7 @@ module.exports={
           "beforeCommitId": {},
           "afterCommitId": {},
           "location": {
-            "shape": "S1z"
+            "shape": "S26"
           },
           "content": {},
           "clientRequestToken": {
@@ -21343,7 +21490,7 @@ module.exports={
           "beforeBlobId": {},
           "afterBlobId": {},
           "location": {
-            "shape": "S1z"
+            "shape": "S26"
           },
           "comment": {
             "shape": "S16"
@@ -21368,7 +21515,7 @@ module.exports={
           "beforeCommitId": {},
           "afterCommitId": {},
           "location": {
-            "shape": "S1z"
+            "shape": "S26"
           },
           "content": {},
           "clientRequestToken": {
@@ -21386,7 +21533,7 @@ module.exports={
           "beforeBlobId": {},
           "afterBlobId": {},
           "location": {
-            "shape": "S1z"
+            "shape": "S26"
           },
           "comment": {
             "shape": "S16"
@@ -21467,7 +21614,7 @@ module.exports={
         "members": {
           "repositoryName": {},
           "triggers": {
-            "shape": "S32"
+            "shape": "S3k"
           }
         }
       },
@@ -21488,7 +21635,7 @@ module.exports={
         "members": {
           "repositoryName": {},
           "triggers": {
-            "shape": "S32"
+            "shape": "S3k"
           }
         }
       },
@@ -21687,8 +21834,8 @@ module.exports={
               "sourceReference": {},
               "destinationReference": {},
               "destinationCommit": {},
-              "mergeBase": {},
               "sourceCommit": {},
+              "mergeBase": {},
               "mergeMetadata": {
                 "shape": "Sw"
               }
@@ -21733,7 +21880,7 @@ module.exports={
         "clientRequestToken": {}
       }
     },
-    "S1z": {
+    "S26": {
       "type": "structure",
       "members": {
         "filePath": {},
@@ -21743,13 +21890,13 @@ module.exports={
         "relativeFileVersion": {}
       }
     },
-    "S23": {
+    "S29": {
       "type": "list",
       "member": {
         "shape": "S16"
       }
     },
-    "S2d": {
+    "S2i": {
       "type": "structure",
       "members": {
         "name": {},
@@ -21757,7 +21904,7 @@ module.exports={
         "date": {}
       }
     },
-    "S2o": {
+    "S2r": {
       "type": "structure",
       "members": {
         "blobId": {},
@@ -21765,7 +21912,7 @@ module.exports={
         "mode": {}
       }
     },
-    "S32": {
+    "S3k": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -21779,7 +21926,7 @@ module.exports={
           "destinationArn": {},
           "customData": {},
           "branches": {
-            "shape": "S36"
+            "shape": "S3o"
           },
           "events": {
             "type": "list",
@@ -21788,7 +21935,7 @@ module.exports={
         }
       }
     },
-    "S36": {
+    "S3o": {
       "type": "list",
       "member": {}
     }
@@ -137124,7 +137271,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.323.0',
+  VERSION: '2.324.0',
 
   /**
    * @api private
@@ -156452,7 +156599,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.323.0
+// AWS SDK for JavaScript v2.324.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

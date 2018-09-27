@@ -159,7 +159,7 @@ declare namespace MQ {
      */
     Endpoints?: __listOf__string;
     /**
-     * The IP address of the ENI attached to the broker.
+     * The IP address of the Elastic Network Interface (ENI) attached to the broker.
      */
     IpAddress?: __string;
   }
@@ -293,7 +293,7 @@ declare namespace MQ {
      */
     EngineType?: EngineType;
     /**
-     * Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
+     * Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0.
      */
     EngineVersion?: __string;
     /**
@@ -341,7 +341,7 @@ declare namespace MQ {
      */
     EngineType?: EngineType;
     /**
-     * Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
+     * Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0.
      */
     EngineVersion?: __string;
     /**
@@ -469,7 +469,7 @@ declare namespace MQ {
      */
     EngineType?: EngineType;
     /**
-     * The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
+     * The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0.
      */
     EngineVersion?: __string;
     /**
@@ -484,6 +484,10 @@ declare namespace MQ {
      * The parameters that determine the WeeklyStartTime.
      */
     MaintenanceWindowStartTime?: WeeklyStartTime;
+    /**
+     * The version of the broker engine to upgrade to.
+     */
+    PendingEngineVersion?: __string;
     /**
      * Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
      */
@@ -726,7 +730,7 @@ declare namespace MQ {
      */
     Audit?: __boolean;
     /**
-     * Location of CloudWatch Log group where audit logs will be sent.
+     * The location of the CloudWatch Logs log group where audit logs are sent.
      */
     AuditLogGroup?: __string;
     /**
@@ -734,7 +738,7 @@ declare namespace MQ {
      */
     General?: __boolean;
     /**
-     * Location of CloudWatch Log group where general logs will be sent.
+     * The location of the CloudWatch Logs log group where general logs are sent.
      */
     GeneralLogGroup?: __string;
     /**
@@ -778,6 +782,10 @@ declare namespace MQ {
   export type SanitizationWarningReason = "DISALLOWED_ELEMENT_REMOVED"|"DISALLOWED_ATTRIBUTE_REMOVED"|"INVALID_ATTRIBUTE_VALUE_REMOVED"|string;
   export interface UpdateBrokerRequest {
     /**
+     * Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
+     */
+    AutoMinorVersionUpgrade?: __boolean;
+    /**
      * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
      */
     BrokerId: __string;
@@ -786,11 +794,19 @@ declare namespace MQ {
      */
     Configuration?: ConfigurationId;
     /**
+     * The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0.
+     */
+    EngineVersion?: __string;
+    /**
      * Enables Amazon CloudWatch logging for brokers.
      */
     Logs?: Logs;
   }
   export interface UpdateBrokerResponse {
+    /**
+     * The new value of automatic upgrades to new minor version for brokers.
+     */
+    AutoMinorVersionUpgrade?: __boolean;
     /**
      * Required. The unique ID that Amazon MQ generates for the broker.
      */
@@ -799,6 +815,10 @@ declare namespace MQ {
      * The ID of the updated configuration.
      */
     Configuration?: ConfigurationId;
+    /**
+     * The version of the broker engine to upgrade to.
+     */
+    EngineVersion?: __string;
     /**
      * The list of information about logs to be enabled for the specified broker.
      */
