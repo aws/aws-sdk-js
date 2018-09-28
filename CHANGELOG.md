@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.324.0-->
+<!--LATEST=2.325.0-->
 <!--ENTRYINSERT-->
+
+## 2.325.0
+* bugfix: ParameterValidation: Uri parameters are now validated to ensure they contain at least 1 character. This fixes issues with S3 where passing Key with an empty string can sometimes cause a different operation to be called.
+* feature: CodeStar: This release enables tagging CodeStar Projects at creation. The CreateProject API now includes optional tags parameter.
+* feature: EC2: You can now use EC2 High Memory instances with 6 TiB memory (u-6tb1.metal), 9 TiB memory (u-9tb1.metal), and 12 TiB memory (u-12tb1.metal), which are ideal for running large in-memory databases, including production deployments of SAP HANA. These instances offer 448 logical processors, where each logical processor is a hyperthread on 224 cores. These instance deliver high networking throughput and lower latency with up to 25 Gbps of aggregate network bandwidth using Elastic Network Adapter (ENA)-based Enhanced Networking. These instances are EBS-Optimized by default, and support encrypted and unencrypted EBS volumes. This instance is only available in host-tenancy. You will need an EC2 Dedicated Host for this instance type to launch an instance.
 
 ## 2.324.0
 * feature: APIGateway: Adding support for OpenAPI 3.0 import and export.

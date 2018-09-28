@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.324.0
+// AWS SDK for JavaScript v2.325.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -137271,7 +137271,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.324.0',
+  VERSION: '2.325.0',
 
   /**
    * @api private
@@ -141857,6 +141857,16 @@ AWS.ParamValidator = AWS.util.inherit({
       this.validateEnum(shape, value, context);
       this.validateRange(shape, value.length, context, 'string length');
       this.validatePattern(shape, value, context);
+      this.validateUri(shape, value, context);
+    }
+  },
+
+  validateUri: function validateUri(shape, value, context) {
+    if (shape['location'] === 'uri') {
+      if (value.length === 0) {
+        this.fail('UriParameterError', 'Expected uri parameter to have length >= 1,'
+          + ' but found "' + value +'" for ' + context);
+      }
     }
   },
 
@@ -146560,10 +146570,12 @@ AWS.util.update(AWS.S3.prototype, {
    * @api private
    */
   setupRequestListeners: function setupRequestListeners(request) {
+    var prependListener = true;
     request.addListener('validate', this.validateScheme);
     request.addListener('validate', this.validateBucketEndpoint);
     request.addListener('validate', this.correctBucketRegionFromCache);
-    request.addListener('validate', this.validateBucketName);
+    request.addListener('validate', this.validateBucketName, prependListener);
+
     request.addListener('build', this.addContentType);
     request.addListener('build', this.populateURI);
     request.addListener('build', this.computeContentMd5);
@@ -146617,10 +146629,6 @@ AWS.util.update(AWS.S3.prototype, {
   validateBucketName: function validateBucketName(req) {
     var service = req.service;
     var signatureVersion = service.getSignatureVersion(req);
-    // Only validate buckets when using sigv4
-    if (signatureVersion !== 'v4') {
-      return;
-    }
     var bucket = req.params && req.params.Bucket;
     var key = req.params && req.params.Key;
     var slashIndex = bucket && bucket.indexOf('/');
@@ -146631,7 +146639,7 @@ AWS.util.update(AWS.S3.prototype, {
         var prefix = bucket.substr(slashIndex + 1) || '';
         req.params.Key = prefix + '/' + key;
         req.params.Bucket = bucket.substr(0, slashIndex);
-      } else {
+      } else if (signatureVersion === 'v4') {
         var msg = 'Bucket names cannot contain forward slashes. Bucket: ' + bucket;
         throw AWS.util.error(new Error(),
           { code: 'InvalidBucket', message: msg });
@@ -156599,7 +156607,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.324.0
+// AWS SDK for JavaScript v2.325.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

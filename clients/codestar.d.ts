@@ -203,6 +203,10 @@ declare namespace CodeStar {
      * Reserved for future use.
      */
     clientRequestToken?: ClientRequestToken;
+    /**
+     * The tags created for the project.
+     */
+    tags?: Tags;
   }
   export interface CreateProjectResult {
     /**
@@ -343,6 +347,10 @@ declare namespace CodeStar {
      * The ID for the AWS CodeStar project template used to create the project.
      */
     projectTemplateId?: ProjectTemplateId;
+    /**
+     * The project creation or deletion status.
+     */
+    status?: ProjectStatus;
   }
   export interface DescribeUserProfileRequest {
     /**
@@ -508,6 +516,16 @@ declare namespace CodeStar {
   export type ProjectDescription = string;
   export type ProjectId = string;
   export type ProjectName = string;
+  export interface ProjectStatus {
+    /**
+     * The phase of completion for a project creation or deletion.
+     */
+    state: State;
+    /**
+     * In the case of a project creation or deletion failure, a reason for the failure.
+     */
+    reason?: Reason;
+  }
   export interface ProjectSummary {
     /**
      * The ID of the project.
@@ -520,6 +538,7 @@ declare namespace CodeStar {
   }
   export type ProjectTemplateId = string;
   export type ProjectsList = ProjectSummary[];
+  export type Reason = string;
   export type RemoteAccessAllowed = boolean;
   export interface Resource {
     /**
@@ -532,6 +551,7 @@ declare namespace CodeStar {
   export type Role = string;
   export type SshPublicKey = string;
   export type StackId = string;
+  export type State = string;
   export type TagKey = string;
   export type TagKeys = TagKey[];
   export interface TagProjectRequest {

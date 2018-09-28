@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.324.0',
+	  VERSION: '2.325.0',
 
 	  /**
 	   * @api private
@@ -10993,6 +10993,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.validateEnum(shape, value, context);
 	      this.validateRange(shape, value.length, context, 'string length');
 	      this.validatePattern(shape, value, context);
+	      this.validateUri(shape, value, context);
+	    }
+	  },
+
+	  validateUri: function validateUri(shape, value, context) {
+	    if (shape['location'] === 'uri') {
+	      if (value.length === 0) {
+	        this.fail('UriParameterError', 'Expected uri parameter to have length >= 1,'
+	          + ' but found "' + value +'" for ' + context);
+	      }
 	    }
 	  },
 

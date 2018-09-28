@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ParameterValidation",
-  "description": "Uri parameters are now validated to ensure they contain at least 1 character. This fixes issues with S3 where passing Key with an empty string can sometimes cause a different operation to be called."
-}
