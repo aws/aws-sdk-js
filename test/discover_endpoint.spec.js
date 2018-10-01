@@ -124,7 +124,7 @@ var api = {
 }
 
 describe('endpoint discovery', function() {
-  after(function() {
+  afterEach(function() {
     AWS.config.endpoint = undefined
   });
 
@@ -218,7 +218,7 @@ describe('endpoint discovery', function() {
       expect(request.httpRequest.endpoint.hostname).to.eql('mockservice.fake-region-1.amazonaws.com')
     });
   
-    it('put in endpoint cache is endpoint operation succeeds', async function() {
+    it('put in endpoint cache is endpoint operation succeeds', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
         region: 'fake-region-1',
@@ -296,13 +296,13 @@ describe('endpoint discovery', function() {
       client.makeRequest('optionalEDOperation', {Query: 'query'}).send(function() {
         //set ENDPOINT_OPERATION_MAX_RETRIES = 60 and the first request
         expect(spy.calls.length).to.eql(60 + 1);
-        for(var call of spy.calls) {
+        for (var i = 0, call = spy.calls[i]; i < spy.calls.length; i++, call = spy.calls[i]) {
           var resp = call.arguments[0];
           expect(resp.maxRetries).to.eql(60);
           expect(resp.error.retryDelay).to.eql(60000);
         }
         expect(setTimeoutSpy.calls.length).to.eql(60);
-        for(var call of setTimeoutSpy.calls) {
+        for (var i = 0, call = setTimeoutSpy.calls[i]; i < setTimeoutSpy.calls.length; i++, call = setTimeoutSpy.calls[i]) {
           var timeout = call.arguments[1];
           expect(timeout).to.eql(60000);
         }
@@ -331,6 +331,27 @@ describe('endpoint discovery', function() {
       expect(cacheRemoveSpy.calls.length).to.eql(1);
       expect(cacheRemoveSpy.calls[0].arguments[0]).to.eql(cacheKey);
       expect(AWS.endpointCache.size).to.eql(0);
+    });
+
+
+    it('add "x-amz-api-version" header to discovery endpoint operation in optional endpoint discovery', function() {
+      var client = new AWS.Service({
+        endpointDiscoveryEnabled: true,
+        apiConfig: new AWS.Model.Api(api),
+      });
+      var https = require('https');
+      helpers.spyOn(https, 'request').andCallThrough();
+      var request = client.makeRequest('optionalEDOperation', {Query: 'query'});
+      helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
+      var spy = helpers.createSpy('send inject');
+      AWS.events.on('sign', function(req) {
+        if(req.operation === 'describeEndpoints') {
+          spy(req)
+        }
+      })
+      request.send();
+      expect(spy.calls.length).to.eql(1);
+      expect(spy.calls[0].arguments[0].httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
     });
   });
   
@@ -430,6 +451,25 @@ describe('endpoint discovery', function() {
       expect(cacheRemoveSpy.calls.length).to.eql(1);
       expect(cacheRemoveSpy.calls[0].arguments[0]).to.eql(cacheKey);
       expect(AWS.endpointCache.size).to.eql(0);
+    });
+
+    it('add "x-amz-api-version" header to discovery endpoint operation in required endpoint discovery', function() {
+      var client = new AWS.Service({
+        apiConfig: new AWS.Model.Api(api),
+      });
+      var https = require('https');
+      helpers.spyOn(https, 'request').andCallThrough();
+      var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
+      helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell2.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
+      var spy = helpers.createSpy('send inject');
+      AWS.events.on('sign', function(req) {
+        if(req.operation === 'describeEndpoints') {
+          spy(req)
+        }
+      })
+      request.send();
+      expect(spy.calls.length).to.eql(1);
+      expect(spy.calls[0].arguments[0].httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
     });
   });
   
@@ -535,40 +575,19 @@ describe('endpoint discovery', function() {
       helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
       var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'})
       request.send();
-      expect(request.httpRequest.headers['User-Agent']).include('endpoint-discovery');
+      if(AWS.util.isNode()) {
+        expect(request.httpRequest.headers['User-Agent']).include('endpoint-discovery');
+      } else {
+        expect(request.httpRequest.headers['X-Amz-User-Agent']).include('endpoint-discovery');
+      }
 
       request = client.makeRequest('optionalEDOperation', {Query: 'query'});
       request.send();
-      expect(request.httpRequest.headers['User-Agent']).include('endpoint-discovery');
-    });
-
-    it('add "x-amz-api-version" header to request from service with endpoint discovery feature', function() {
-      var client = new AWS.Service({
-        endpointDiscoveryEnabled: true,
-        paramValidation: false,
-        apiConfig: new AWS.Model.Api(api),
-      });
-      helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
-      var request = client.makeRequest('describeEndpoints', {Opeation: 'optionalEDOperation'});
-      request.send();
-      expect(request.httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
-
-      request = client.makeRequest('optionalEDOperation', {Query: 'query'});
-      request.send();
-      expect(request.httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
-
-      request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
-      request.send();
-      expect(request.httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
-      //service without endpoint discovery
-      client = new AWS.Service({
-        endpointDiscoveryEnabled: true,
-        paramValidation: false,
-        apiConfig: new AWS.Model.Api(api),
-      });
-      var request = client.makeRequest('putStream', {Body: 'body'});
-      request.send();
-      expect(request.httpRequest.headers['x-amz-api-version']).to.eql(undefined);
+      if(AWS.util.isNode()) {
+        expect(request.httpRequest.headers['User-Agent']).include('endpoint-discovery');
+      } else {
+        expect(request.httpRequest.headers['X-Amz-User-Agent']).include('endpoint-discovery');
+      }
     });
   });
 });
