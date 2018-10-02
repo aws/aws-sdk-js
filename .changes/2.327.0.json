@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Waiter for SageMaker Batch Transform Jobs."
+    }
+]

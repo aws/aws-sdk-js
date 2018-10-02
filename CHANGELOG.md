@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.326.0-->
+<!--LATEST=2.327.0-->
 <!--ENTRYINSERT-->
+
+## 2.327.0
+* feature: SageMaker: Waiter for SageMaker Batch Transform Jobs.
 
 ## 2.326.0
 * feature: GuardDuty: Support optional FindingPublishingFrequency parameter in CreateDetector and UpdateDetector operations, and ClientToken on Create* operations
