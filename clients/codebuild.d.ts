@@ -223,6 +223,10 @@ declare namespace CodeBuild {
      */
     sourceVersion?: NonEmptyString;
     /**
+     *  An identifier for the version of this build's source code.     For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.     For AWS CodePipeline, the source revision provided by AWS CodePipeline.     For Amazon Simple Storage Service (Amazon S3), this does not apply.   
+     */
+    resolvedSourceVersion?: NonEmptyString;
+    /**
      * The name of the AWS CodeBuild project.
      */
     projectName?: NonEmptyString;
@@ -897,7 +901,7 @@ declare namespace CodeBuild {
      */
     status: LogsConfigStatusType;
     /**
-     *  The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is my-bucket, and your path prefix is build-log, then acceptable formats are my-bucket/build-log or aws:s3:::my-bucket/build-log. 
+     *  The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is my-bucket, and your path prefix is build-log, then acceptable formats are my-bucket/build-log or arn:aws:s3:::my-bucket/build-log. 
      */
     location?: String;
   }

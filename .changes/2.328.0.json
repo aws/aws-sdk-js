@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "Adding support for multi-value parameters in TestInvokeMethod and TestInvokeAuthorizer."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Add resolved source version field in build output"
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": " Adds RejectedPatchesAction to baseline to enable stricted validation of the rejected Patches List ; Add InstalledRejected and InstallOverrideList to compliance reporting"
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "AWS Storage Gateway now enables you to specify folders and subfolders when you update your file gateway's view of your S3 objects using the Refresh Cache API."
+    }
+]

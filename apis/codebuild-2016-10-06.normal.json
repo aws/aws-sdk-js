@@ -489,6 +489,10 @@
           "shape": "NonEmptyString",
           "documentation": "<p>Any version identifier for the version of the source code to be built.</p>"
         },
+        "resolvedSourceVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> An identifier for the version of this build's source code. </p> <ul> <li> <p> For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID. </p> </li> <li> <p> For AWS CodePipeline, the source revision provided by AWS CodePipeline. </p> </li> <li> <p> For Amazon Simple Storage Service (Amazon S3), this does not apply. </p> </li> </ul>"
+        },
         "projectName": {
           "shape": "NonEmptyString",
           "documentation": "<p>The name of the AWS CodeBuild project.</p>"
@@ -1530,7 +1534,7 @@
         },
         "location": {
           "shape": "String",
-          "documentation": "<p> The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is <code>my-bucket</code>, and your path prefix is <code>build-log</code>, then acceptable formats are <code>my-bucket/build-log</code> or <code>aws:s3:::my-bucket/build-log</code>. </p>"
+          "documentation": "<p> The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is <code>my-bucket</code>, and your path prefix is <code>build-log</code>, then acceptable formats are <code>my-bucket/build-log</code> or <code>arn:aws:s3:::my-bucket/build-log</code>. </p>"
         }
       },
       "documentation": "<p> Information about S3 logs for a build project. </p>"

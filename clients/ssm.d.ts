@@ -2076,6 +2076,10 @@ declare namespace SSM {
      */
     RejectedPatches?: PatchIdList;
     /**
+     * The action for Patch Manager to take on patches included in the RejectedPackages list.    ALLOW_AS_DEPENDENCY: A package in the Rejected patches list is installed only if it is a dependency of another package. It is considered compliant with the patch baseline, and its status is reported as InstalledOther. This is the default action if no option is specified.    BLOCK: Packages in the RejectedPatches list, and packages that include them as dependencies, are not installed under any circumstances. If a package was installed before it was added to the Rejected patches list, it is considered non-compliant with the patch baseline, and its status is reported as InstalledRejected.  
+     */
+    RejectedPatchesAction?: PatchAction;
+    /**
      * A description of the patch baseline.
      */
     Description?: BaselineDescription;
@@ -2979,6 +2983,10 @@ declare namespace SSM {
      */
     InstancesWithInstalledOtherPatches?: Integer;
     /**
+     * The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of InstalledRejected were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero). 
+     */
+    InstancesWithInstalledRejectedPatches?: InstancesCount;
+    /**
      * The number of instances with missing patches from the patch baseline.
      */
     InstancesWithMissingPatches?: Integer;
@@ -3017,7 +3025,7 @@ declare namespace SSM {
   }
   export interface DescribeSessionsRequest {
     /**
-     * The session status to retrieve a list of sessions for. For example, "active".
+     * The session status to retrieve a list of sessions for. For example, "Active".
      */
     State: SessionState;
     /**
@@ -4002,6 +4010,10 @@ declare namespace SSM {
      */
     RejectedPatches?: PatchIdList;
     /**
+     * The action specified to take on patches included in the RejectedPatches list. A patch can be allowed only if it is a dependency of another package, or blocked entirely along with packages that include it as a dependency.
+     */
+    RejectedPatchesAction?: PatchAction;
+    /**
      * Patch groups included in the patch baseline.
      */
     PatchGroups?: PatchGroupList;
@@ -4025,6 +4037,7 @@ declare namespace SSM {
   export type IPAddress = string;
   export type IamRole = string;
   export type IdempotencyToken = string;
+  export type InstallOverrideList = string;
   export interface InstanceAggregatedAssociationOverview {
     /**
      * Detailed status information about the aggregated associations.
@@ -4245,6 +4258,10 @@ declare namespace SSM {
      */
     SnapshotId?: SnapshotId;
     /**
+     * An https URL or an Amazon S3 path-style URL to a list of patches to be installed. This patch installation list, which you maintain in an Amazon S3 bucket in YAML format and specify in the SSM document AWS-RunPatchBaseline, overrides the patches specified by the default patch baseline. For more information about the InstallOverrideList parameter, see About the SSM Document AWS-RunPatchBaseline in the AWS Systems Manager User Guide.
+     */
+    InstallOverrideList?: InstallOverrideList;
+    /**
      * Placeholder information. This field will always be empty in the current release of the service.
      */
     OwnerInformation?: OwnerInformation;
@@ -4256,6 +4273,10 @@ declare namespace SSM {
      * The number of patches not specified in the patch baseline that are installed on the instance.
      */
     InstalledOtherCount?: PatchInstalledOtherCount;
+    /**
+     * The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of InstalledRejected were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstalledRejectedCount will always be 0 (zero). 
+     */
+    InstalledRejectedCount?: PatchInstalledRejectedCount;
     /**
      * The number of patches from the patch baseline that are applicable for the instance but aren't currently installed.
      */
@@ -4303,6 +4324,7 @@ declare namespace SSM {
   export type InstancePatchStateOperatorType = "Equal"|"NotEqual"|"LessThan"|"GreaterThan"|string;
   export type InstancePatchStatesList = InstancePatchState[];
   export type InstanceTagName = string;
+  export type InstancesCount = number;
   export type Integer = number;
   export interface InventoryAggregator {
     /**
@@ -5548,6 +5570,7 @@ declare namespace SSM {
      */
     Language?: PatchLanguage;
   }
+  export type PatchAction = "ALLOW_AS_DEPENDENCY"|"BLOCK"|string;
   export interface PatchBaselineIdentity {
     /**
      * The ID of the patch baseline.
@@ -5600,7 +5623,7 @@ declare namespace SSM {
     InstalledTime: DateTime;
   }
   export type PatchComplianceDataList = PatchComplianceData[];
-  export type PatchComplianceDataState = "INSTALLED"|"INSTALLED_OTHER"|"MISSING"|"NOT_APPLICABLE"|"FAILED"|string;
+  export type PatchComplianceDataState = "INSTALLED"|"INSTALLED_OTHER"|"INSTALLED_REJECTED"|"MISSING"|"NOT_APPLICABLE"|"FAILED"|string;
   export type PatchComplianceLevel = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|"INFORMATIONAL"|"UNSPECIFIED"|string;
   export type PatchComplianceMaxResults = number;
   export type PatchContentUrl = string;
@@ -5644,6 +5667,7 @@ declare namespace SSM {
   export type PatchIdList = PatchId[];
   export type PatchInstalledCount = number;
   export type PatchInstalledOtherCount = number;
+  export type PatchInstalledRejectedCount = number;
   export type PatchKbNumber = string;
   export type PatchLanguage = string;
   export type PatchList = Patch[];
@@ -6972,6 +6996,10 @@ declare namespace SSM {
      */
     RejectedPatches?: PatchIdList;
     /**
+     * The action for Patch Manager to take on patches included in the RejectedPackages list.    ALLOW_AS_DEPENDENCY: A package in the Rejected patches list is installed only if it is a dependency of another package. It is considered compliant with the patch baseline, and its status is reported as InstalledOther. This is the default action if no option is specified.    BLOCK: Packages in the RejectedPatches list, and packages that include them as dependencies, are not installed under any circumstances. If a package was installed before it was added to the Rejected patches list, it is considered non-compliant with the patch baseline, and its status is reported as InstalledRejected.  
+     */
+    RejectedPatchesAction?: PatchAction;
+    /**
      * A description of the patch baseline.
      */
     Description?: BaselineDescription;
@@ -7021,6 +7049,10 @@ declare namespace SSM {
      * A list of explicitly rejected patches for the baseline.
      */
     RejectedPatches?: PatchIdList;
+    /**
+     * The action specified to take on patches included in the RejectedPatches list. A patch can be allowed only if it is a dependency of another package, or blocked entirely along with packages that include it as a dependency.
+     */
+    RejectedPatchesAction?: PatchAction;
     /**
      * The date when the patch baseline was created.
      */

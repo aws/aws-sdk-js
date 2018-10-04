@@ -420,11 +420,11 @@ declare class StorageGateway extends Service {
    */
   notifyWhenUploaded(callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type.
+   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting Notified About File Operations.
    */
   refreshCache(params: StorageGateway.Types.RefreshCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type.
+   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting Notified About File Operations.
    */
   refreshCache(callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
@@ -583,7 +583,7 @@ declare namespace StorageGateway {
      */
     GatewayRegion: RegionId;
     /**
-     * A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is STORED.   Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"
+     * A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is CACHED.   Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"
      */
     GatewayType?: GatewayType;
     /**
@@ -1496,6 +1496,8 @@ declare namespace StorageGateway {
   export type FileShareType = "NFS"|"SMB"|string;
   export type FileShareUser = string;
   export type FileShareUserList = FileShareUser[];
+  export type Folder = string;
+  export type FolderList = Folder[];
   export type GatewayARN = string;
   export type GatewayId = string;
   export interface GatewayInfo {
@@ -1779,9 +1781,15 @@ declare namespace StorageGateway {
   export type RecurrenceInHours = number;
   export interface RefreshCacheInput {
     FileShareARN: FileShareARN;
+    FolderList?: FolderList;
+    /**
+     * A value that specifies whether to recursively refresh folders in the cache. The refresh includes folders that were in the cache the last time the gateway listed the folder's contents. If this value set to "true", each folder that is listed in FolderList is recursively updated. Otherwise, subfolders listed in FolderList are not refreshed. Only objects that are in folders listed directly under FolderList are found and used for the update. The default is "true".
+     */
+    Recursive?: Boolean;
   }
   export interface RefreshCacheOutput {
     FileShareARN?: FileShareARN;
+    NotificationId?: NotificationId;
   }
   export type RegionId = string;
   export interface RemoveTagsFromResourceInput {

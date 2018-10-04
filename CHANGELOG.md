@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.327.0-->
+<!--LATEST=2.328.0-->
 <!--ENTRYINSERT-->
+
+## 2.328.0
+* feature: APIGateway: Adding support for multi-value parameters in TestInvokeMethod and TestInvokeAuthorizer.
+* feature: CodeBuild: Add resolved source version field in build output
+* feature: SSM:  Adds RejectedPatchesAction to baseline to enable stricted validation of the rejected Patches List ; Add InstalledRejected and InstallOverrideList to compliance reporting
+* feature: StorageGateway: AWS Storage Gateway now enables you to specify folders and subfolders when you update your file gateway's view of your S3 objects using the Refresh Cache API.
 
 ## 2.327.0
 * feature: SageMaker: Waiter for SageMaker Batch Transform Jobs.
