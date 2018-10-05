@@ -92,11 +92,11 @@ declare class DirectoryService extends Service {
    */
   createLogSubscription(callback?: (err: AWSError, data: DirectoryService.Types.CreateLogSubscriptionResult) => void): Request<DirectoryService.Types.CreateLogSubscriptionResult, AWSError>;
   /**
-   * Creates a Microsoft AD in the AWS cloud. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
+   * Creates an AWS Managed Microsoft AD directory. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createMicrosoftAD(params: DirectoryService.Types.CreateMicrosoftADRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateMicrosoftADResult) => void): Request<DirectoryService.Types.CreateMicrosoftADResult, AWSError>;
   /**
-   * Creates a Microsoft AD in the AWS cloud. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
+   * Creates an AWS Managed Microsoft AD directory. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createMicrosoftAD(callback?: (err: AWSError, data: DirectoryService.Types.CreateMicrosoftADResult) => void): Request<DirectoryService.Types.CreateMicrosoftADResult, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class DirectoryService extends Service {
    */
   createSnapshot(callback?: (err: AWSError, data: DirectoryService.Types.CreateSnapshotResult) => void): Request<DirectoryService.Types.CreateSnapshotResult, AWSError>;
   /**
-   * AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials. This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.
+   * AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials. This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain. You can create either a forest trust or an external trust.
    */
   createTrust(params: DirectoryService.Types.CreateTrustRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateTrustResult) => void): Request<DirectoryService.Types.CreateTrustResult, AWSError>;
   /**
-   * AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials. This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.
+   * AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials. This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain. You can create either a forest trust or an external trust.
    */
   createTrust(callback?: (err: AWSError, data: DirectoryService.Types.CreateTrustResult) => void): Request<DirectoryService.Types.CreateTrustResult, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class DirectoryService extends Service {
    */
   deleteSnapshot(callback?: (err: AWSError, data: DirectoryService.Types.DeleteSnapshotResult) => void): Request<DirectoryService.Types.DeleteSnapshotResult, AWSError>;
   /**
-   * Deletes an existing trust relationship between your Microsoft AD in the AWS cloud and an external domain.
+   * Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.
    */
   deleteTrust(params: DirectoryService.Types.DeleteTrustRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeleteTrustResult) => void): Request<DirectoryService.Types.DeleteTrustResult, AWSError>;
   /**
-   * Deletes an existing trust relationship between your Microsoft AD in the AWS cloud and an external domain.
+   * Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.
    */
   deleteTrust(callback?: (err: AWSError, data: DirectoryService.Types.DeleteTrustResult) => void): Request<DirectoryService.Types.DeleteTrustResult, AWSError>;
   /**
@@ -396,11 +396,19 @@ declare class DirectoryService extends Service {
    */
   updateRadius(callback?: (err: AWSError, data: DirectoryService.Types.UpdateRadiusResult) => void): Request<DirectoryService.Types.UpdateRadiusResult, AWSError>;
   /**
-   * AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships. This action verifies a trust relationship between your Microsoft AD in the AWS cloud and an external domain.
+   * Updates the trust that has been set up between your AWS Managed Microsoft AD directory and an on-premises Active Directory.
+   */
+  updateTrust(params: DirectoryService.Types.UpdateTrustRequest, callback?: (err: AWSError, data: DirectoryService.Types.UpdateTrustResult) => void): Request<DirectoryService.Types.UpdateTrustResult, AWSError>;
+  /**
+   * Updates the trust that has been set up between your AWS Managed Microsoft AD directory and an on-premises Active Directory.
+   */
+  updateTrust(callback?: (err: AWSError, data: DirectoryService.Types.UpdateTrustResult) => void): Request<DirectoryService.Types.UpdateTrustResult, AWSError>;
+  /**
+   * AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships. This action verifies a trust relationship between your AWS Managed Microsoft AD directory and an external domain.
    */
   verifyTrust(params: DirectoryService.Types.VerifyTrustRequest, callback?: (err: AWSError, data: DirectoryService.Types.VerifyTrustResult) => void): Request<DirectoryService.Types.VerifyTrustResult, AWSError>;
   /**
-   * AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships. This action verifies a trust relationship between your Microsoft AD in the AWS cloud and an external domain.
+   * AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships. This action verifies a trust relationship between your AWS Managed Microsoft AD directory and an external domain.
    */
   verifyTrust(callback?: (err: AWSError, data: DirectoryService.Types.VerifyTrustResult) => void): Request<DirectoryService.Types.VerifyTrustResult, AWSError>;
 }
@@ -673,7 +681,7 @@ declare namespace DirectoryService {
      */
     VpcSettings: DirectoryVpcSettings;
     /**
-     * AWS Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.
+     * AWS Managed Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.
      */
     Edition?: DirectoryEdition;
   }
@@ -702,7 +710,7 @@ declare namespace DirectoryService {
   }
   export interface CreateTrustRequest {
     /**
-     * The Directory ID of the Microsoft AD in the AWS cloud for which to establish the trust relationship.
+     * The Directory ID of the AWS Managed Microsoft AD directory for which to establish the trust relationship.
      */
     DirectoryId: DirectoryId;
     /**
@@ -718,13 +726,17 @@ declare namespace DirectoryService {
      */
     TrustDirection: TrustDirection;
     /**
-     * The trust relationship type.
+     * The trust relationship type. Forest is the default.
      */
     TrustType?: TrustType;
     /**
      * The IP addresses of the remote DNS server associated with RemoteDomainName.
      */
     ConditionalForwarderIpAddrs?: DnsIpAddrs;
+    /**
+     * Optional parameter to enable selective authentication for the trust.
+     */
+    SelectiveAuth?: SelectiveAuth;
   }
   export interface CreateTrustResult {
     /**
@@ -1138,15 +1150,15 @@ declare namespace DirectoryService {
      */
     CloudOnlyDirectoriesLimitReached?: CloudOnlyDirectoriesLimitReached;
     /**
-     * The maximum number of Microsoft AD directories allowed in the region.
+     * The maximum number of AWS Managed Microsoft AD directories allowed in the region.
      */
     CloudOnlyMicrosoftADLimit?: Limit;
     /**
-     * The current number of Microsoft AD directories in the region.
+     * The current number of AWS Managed Microsoft AD directories in the region.
      */
     CloudOnlyMicrosoftADCurrentCount?: Limit;
     /**
-     * Indicates if the Microsoft AD directory limit has been reached.
+     * Indicates if the AWS Managed Microsoft AD directory limit has been reached.
      */
     CloudOnlyMicrosoftADLimitReached?: CloudOnlyDirectoriesLimitReached;
     /**
@@ -1620,6 +1632,7 @@ declare namespace DirectoryService {
   export interface RemoveTagsFromResourceResult {
   }
   export type ReplicationScope = "Domain"|string;
+  export type RequestId = string;
   export interface ResetUserPasswordRequest {
     /**
      * Identifier of the AWS Managed Microsoft AD or Simple AD directory in which the user resides.
@@ -1681,6 +1694,7 @@ declare namespace DirectoryService {
   export type SchemaExtensionStatusReason = string;
   export type SchemaExtensionsInfo = SchemaExtensionInfo[];
   export type SecurityGroupId = string;
+  export type SelectiveAuth = "Enabled"|"Disabled"|string;
   export type Server = string;
   export type Servers = Server[];
   export interface ShareDirectoryRequest {
@@ -1870,7 +1884,7 @@ declare namespace DirectoryService {
      */
     RemoteDomainName?: RemoteDomainName;
     /**
-     * The trust relationship type.
+     * The trust relationship type. Forest is the default.
      */
     TrustType?: TrustType;
     /**
@@ -1897,14 +1911,18 @@ declare namespace DirectoryService {
      * The reason for the TrustState.
      */
     TrustStateReason?: TrustStateReason;
+    /**
+     * Current state of selective authentication for the trust.
+     */
+    SelectiveAuth?: SelectiveAuth;
   }
   export type TrustDirection = "One-Way: Outgoing"|"One-Way: Incoming"|"Two-Way"|string;
   export type TrustId = string;
   export type TrustIds = TrustId[];
   export type TrustPassword = string;
-  export type TrustState = "Creating"|"Created"|"Verifying"|"VerifyFailed"|"Verified"|"Deleting"|"Deleted"|"Failed"|string;
+  export type TrustState = "Creating"|"Created"|"Verifying"|"VerifyFailed"|"Verified"|"Updating"|"UpdateFailed"|"Updated"|"Deleting"|"Deleted"|"Failed"|string;
   export type TrustStateReason = string;
-  export type TrustType = "Forest"|string;
+  export type TrustType = "Forest"|"External"|string;
   export type Trusts = Trust[];
   export interface UnshareDirectoryRequest {
     /**
@@ -1973,6 +1991,23 @@ declare namespace DirectoryService {
   export interface UpdateRadiusResult {
   }
   export type UpdateSecurityGroupForDirectoryControllers = boolean;
+  export interface UpdateTrustRequest {
+    /**
+     * Identifier of the trust relationship.
+     */
+    TrustId: TrustId;
+    /**
+     * Updates selective authentication for the trust.
+     */
+    SelectiveAuth?: SelectiveAuth;
+  }
+  export interface UpdateTrustResult {
+    RequestId?: RequestId;
+    /**
+     * Identifier of the trust relationship.
+     */
+    TrustId?: TrustId;
+  }
   export type UseSameUsername = boolean;
   export type UserName = string;
   export type UserPassword = string;

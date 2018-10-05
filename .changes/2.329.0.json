@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "DirectoryService",
+        "description": "SDK changes to create a new type of trust for active directory"
+    }
+]

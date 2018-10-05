@@ -364,7 +364,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Creates a Microsoft AD in the AWS cloud.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
+      "documentation": "<p>Creates an AWS Managed Microsoft AD directory.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "CreateSnapshot": {
       "name": "CreateSnapshot",
@@ -429,7 +429,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>"
+      "documentation": "<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain. You can create either a forest trust or an external trust.</p>"
     },
     "DeleteConditionalForwarder": {
       "name": "DeleteConditionalForwarder",
@@ -575,7 +575,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Deletes an existing trust relationship between your Microsoft AD in the AWS cloud and an external domain.</p>"
+      "documentation": "<p>Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.</p>"
     },
     "DeregisterEventTopic": {
       "name": "DeregisterEventTopic",
@@ -1510,6 +1510,34 @@
       ],
       "documentation": "<p>Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector or Microsoft AD directory.</p>"
     },
+    "UpdateTrust": {
+      "name": "UpdateTrust",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateTrustRequest"
+      },
+      "output": {
+        "shape": "UpdateTrustResult"
+      },
+      "errors": [
+        {
+          "shape": "EntityDoesNotExistException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Updates the trust that has been set up between your AWS Managed Microsoft AD directory and an on-premises Active Directory.</p>"
+    },
     "VerifyTrust": {
       "name": "VerifyTrust",
       "http": {
@@ -1539,7 +1567,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships.</p> <p>This action verifies a trust relationship between your Microsoft AD in the AWS cloud and an external domain.</p>"
+      "documentation": "<p>AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships.</p> <p>This action verifies a trust relationship between your AWS Managed Microsoft AD directory and an external domain.</p>"
     }
   },
   "shapes": {
@@ -2000,10 +2028,10 @@
         },
         "Edition": {
           "shape": "DirectoryEdition",
-          "documentation": "<p>AWS Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.</p>"
+          "documentation": "<p>AWS Managed Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.</p>"
         }
       },
-      "documentation": "<p>Creates a Microsoft AD in the AWS cloud.</p>"
+      "documentation": "<p>Creates an AWS Managed Microsoft AD directory.</p>"
     },
     "CreateMicrosoftADResult": {
       "type": "structure",
@@ -2056,7 +2084,7 @@
       "members": {
         "DirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>The Directory ID of the Microsoft AD in the AWS cloud for which to establish the trust relationship.</p>"
+          "documentation": "<p>The Directory ID of the AWS Managed Microsoft AD directory for which to establish the trust relationship.</p>"
         },
         "RemoteDomainName": {
           "shape": "RemoteDomainName",
@@ -2072,14 +2100,18 @@
         },
         "TrustType": {
           "shape": "TrustType",
-          "documentation": "<p>The trust relationship type.</p>"
+          "documentation": "<p>The trust relationship type. <code>Forest</code> is the default.</p>"
         },
         "ConditionalForwarderIpAddrs": {
           "shape": "DnsIpAddrs",
           "documentation": "<p>The IP addresses of the remote DNS server associated with RemoteDomainName.</p>"
+        },
+        "SelectiveAuth": {
+          "shape": "SelectiveAuth",
+          "documentation": "<p>Optional parameter to enable selective authentication for the trust.</p>"
         }
       },
-      "documentation": "<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>"
+      "documentation": "<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain.</p>"
     },
     "CreateTrustResult": {
       "type": "structure",
@@ -2207,7 +2239,7 @@
           "documentation": "<p>Delete a conditional forwarder as part of a DeleteTrustRequest.</p>"
         }
       },
-      "documentation": "<p>Deletes the local side of an existing trust relationship between the Microsoft AD in the AWS cloud and the external domain.</p>"
+      "documentation": "<p>Deletes the local side of an existing trust relationship between the AWS Managed Microsoft AD directory and the external domain.</p>"
     },
     "DeleteTrustResult": {
       "type": "structure",
@@ -2455,7 +2487,7 @@
           "documentation": "<p>The maximum number of objects to return.</p>"
         }
       },
-      "documentation": "<p>Describes the trust relationships for a particular Microsoft AD in the AWS cloud. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships.</p>"
+      "documentation": "<p>Describes the trust relationships for a particular AWS Managed Microsoft AD directory. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships.</p>"
     },
     "DescribeTrustsResult": {
       "type": "structure",
@@ -2683,15 +2715,15 @@
         },
         "CloudOnlyMicrosoftADLimit": {
           "shape": "Limit",
-          "documentation": "<p>The maximum number of Microsoft AD directories allowed in the region.</p>"
+          "documentation": "<p>The maximum number of AWS Managed Microsoft AD directories allowed in the region.</p>"
         },
         "CloudOnlyMicrosoftADCurrentCount": {
           "shape": "Limit",
-          "documentation": "<p>The current number of Microsoft AD directories in the region.</p>"
+          "documentation": "<p>The current number of AWS Managed Microsoft AD directories in the region.</p>"
         },
         "CloudOnlyMicrosoftADLimitReached": {
           "shape": "CloudOnlyDirectoriesLimitReached",
-          "documentation": "<p>Indicates if the Microsoft AD directory limit has been reached.</p>"
+          "documentation": "<p>Indicates if the AWS Managed Microsoft AD directory limit has been reached.</p>"
         },
         "ConnectedDirectoriesLimit": {
           "shape": "Limit",
@@ -3525,6 +3557,11 @@
         "Domain"
       ]
     },
+    "RequestId": {
+      "type": "string",
+      "documentation": "<p>The AWS request identifier.</p>",
+      "pattern": "^([A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12})$"
+    },
     "ResetUserPasswordRequest": {
       "type": "structure",
       "required": [
@@ -3643,6 +3680,13 @@
     "SecurityGroupId": {
       "type": "string",
       "pattern": "^(sg-[0-9a-f]{8}|sg-[0-9a-f]{17})$"
+    },
+    "SelectiveAuth": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
     },
     "Server": {
       "type": "string",
@@ -4022,7 +4066,7 @@
         },
         "TrustType": {
           "shape": "TrustType",
-          "documentation": "<p>The trust relationship type.</p>"
+          "documentation": "<p>The trust relationship type. <code>Forest</code> is the default.</p>"
         },
         "TrustDirection": {
           "shape": "TrustDirection",
@@ -4047,9 +4091,13 @@
         "TrustStateReason": {
           "shape": "TrustStateReason",
           "documentation": "<p>The reason for the TrustState.</p>"
+        },
+        "SelectiveAuth": {
+          "shape": "SelectiveAuth",
+          "documentation": "<p>Current state of selective authentication for the trust.</p>"
         }
       },
-      "documentation": "<p>Describes a trust relationship between an Microsoft AD in the AWS cloud and an external domain.</p>"
+      "documentation": "<p>Describes a trust relationship between an AWS Managed Microsoft AD directory and an external domain.</p>"
     },
     "TrustDirection": {
       "type": "string",
@@ -4073,6 +4121,7 @@
       "type": "string",
       "max": 128,
       "min": 1,
+      "pattern": "(.|\\s)*\\S(.|\\s)*",
       "sensitive": true
     },
     "TrustState": {
@@ -4083,6 +4132,9 @@
         "Verifying",
         "VerifyFailed",
         "Verified",
+        "Updating",
+        "UpdateFailed",
+        "Updated",
         "Deleting",
         "Deleted",
         "Failed"
@@ -4094,7 +4146,8 @@
     "TrustType": {
       "type": "string",
       "enum": [
-        "Forest"
+        "Forest",
+        "External"
       ]
     },
     "Trusts": {
@@ -4222,6 +4275,34 @@
     "UpdateSecurityGroupForDirectoryControllers": {
       "type": "boolean"
     },
+    "UpdateTrustRequest": {
+      "type": "structure",
+      "required": [
+        "TrustId"
+      ],
+      "members": {
+        "TrustId": {
+          "shape": "TrustId",
+          "documentation": "<p>Identifier of the trust relationship.</p>"
+        },
+        "SelectiveAuth": {
+          "shape": "SelectiveAuth",
+          "documentation": "<p>Updates selective authentication for the trust.</p>"
+        }
+      }
+    },
+    "UpdateTrustResult": {
+      "type": "structure",
+      "members": {
+        "RequestId": {
+          "shape": "RequestId"
+        },
+        "TrustId": {
+          "shape": "TrustId",
+          "documentation": "<p>Identifier of the trust relationship.</p>"
+        }
+      }
+    },
     "UseSameUsername": {
       "type": "boolean"
     },
@@ -4247,7 +4328,7 @@
           "documentation": "<p>The unique Trust ID of the trust relationship to verify.</p>"
         }
       },
-      "documentation": "<p>Initiates the verification of an existing trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>"
+      "documentation": "<p>Initiates the verification of an existing trust relationship between an AWS Managed Microsoft AD directory and an external domain.</p>"
     },
     "VerifyTrustResult": {
       "type": "structure",

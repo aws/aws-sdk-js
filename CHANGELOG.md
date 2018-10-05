@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.328.0-->
+<!--LATEST=2.329.0-->
 <!--ENTRYINSERT-->
+
+## 2.329.0
+* feature: DirectoryService: SDK changes to create a new type of trust for active directory
 
 ## 2.328.0
 * feature: APIGateway: Adding support for multi-value parameters in TestInvokeMethod and TestInvokeAuthorizer.
