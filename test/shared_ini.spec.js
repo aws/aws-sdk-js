@@ -1,5 +1,5 @@
 var helpers = require('./helpers');
-var SharedIniFile = require('../lib/shared-ini/shared_ini');
+var IniLoader = require('../lib/shared-ini/ini-loader');
 var os = require('os');
 var AWS = helpers.AWS;
 
@@ -13,7 +13,7 @@ function validateCachedFiles(iniFile, expectedCache) {
 }
 
 if (AWS.util.isNode()) {
-  describe('AWS.sharedIniFile', function() {
+  describe('AWS.iniLoader', function() {
     var homedir = os.homedir;
     var env = process.env;
     
@@ -30,16 +30,16 @@ if (AWS.util.isNode()) {
       it('should only read config file lazily when need to', function() {
         helpers.spyOn(os, 'homedir').andReturn('/foo/bar/baz');
         helpers.spyOn(AWS.util, 'readFileSync');
-        var sharedIniFile = new SharedIniFile();
+        var iniLoader = new IniLoader();
         expect(AWS.util.readFileSync.calls.length).to.equal(0);
       });
     });
   
     describe('loadFrom', function() {
-      var sharedIniFile;
+      var iniLoader;
   
       beforeEach(function() {
-        sharedIniFile = new SharedIniFile();
+        iniLoader = new IniLoader();
       })
   
       it('load config file with profile name indexed', function () {
@@ -49,8 +49,8 @@ if (AWS.util.isNode()) {
           }
           return '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\n';
         });
-        sharedIniFile.loadFrom({isConfig: true, filename: '/User/foo/config'});
-        validateCachedFiles(sharedIniFile, {
+        iniLoader.loadFrom({isConfig: true, filename: '/User/foo/config'});
+        validateCachedFiles(iniLoader, {
           '/User/foo/config': {
             'default': {
               'aws_access_key_id': 'akid',
@@ -70,7 +70,7 @@ if (AWS.util.isNode()) {
           if (path === '/foo/.aws/config') return '[default]\naws_access_key_id = akid\naws_secret_access_key = secret';
           else return '[default]\naws_access_key_id = akid2\naws_secret_access_key = secret2'
         });
-        var iniFile = new SharedIniFile();
+        var iniFile = new IniLoader();
         expect(iniFile.loadFrom({isConfig: true})).to.eql({'default': {'aws_access_key_id': 'akid', 'aws_secret_access_key': 'secret'}});
         expect(iniFile.loadFrom({})).to.eql({'default': {'aws_access_key_id': 'akid2', 'aws_secret_access_key': 'secret2'}});
       });
@@ -80,7 +80,7 @@ if (AWS.util.isNode()) {
           if (path === '/foo/bar') return '[profile user]\naws_access_key_id = akid\naws_secret_access_key = secret';
           else if (path === '/foo/qux') return '[profile user2]\naws_access_key_id = akid2\naws_secret_access_key = secret2'
         });
-        var iniFile = new SharedIniFile();
+        var iniFile = new IniLoader();
         expect(iniFile.loadFrom({isConfig: true, filename: '/foo/bar'})).to.eql({'user': {'aws_access_key_id': 'akid', 'aws_secret_access_key': 'secret'}});
         //for credients, the prefix 'profile ' of the profile name won't be removed
         expect(iniFile.loadFrom({filename: '/foo/qux'})).to.eql({'profile user2': {'aws_access_key_id': 'akid2', 'aws_secret_access_key': 'secret2'}});
@@ -88,8 +88,8 @@ if (AWS.util.isNode()) {
   
       it('won\'t load same file twice', function() {
         helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
-        sharedIniFile.loadFrom({filename: 'foo'});
-        sharedIniFile.loadFrom({filename: 'foo'});
+        iniLoader.loadFrom({filename: 'foo'});
+        iniLoader.loadFrom({filename: 'foo'});
         expect(AWS.util.readFileSync.calls.length).to.eql(1);
       });
 
@@ -97,7 +97,7 @@ if (AWS.util.isNode()) {
         helpers.spyOn(os, 'homedir').andCallThrough();
         helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
         process.env = {HOME: '/foo', USERPROFILE: '/bar', HOMEPATH: '/baz', HOMEDRIVE: '/quz'};
-        var iniFile = new SharedIniFile();
+        var iniFile = new IniLoader();
         iniFile.loadFrom({isConfig: true});
         iniFile.loadFrom({});
         expect(AWS.util.readFileSync.calls.length).to.eql(2);
@@ -129,7 +129,7 @@ if (AWS.util.isNode()) {
       it('remove all cached files', function() {
         process.env.HOME = '/foo';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
-        var iniFile = new SharedIniFile();
+        var iniFile = new IniLoader();
         iniFile.loadFrom();
         validateCachedFiles(iniFile, {
           '/foo/.aws/credentials': {},
