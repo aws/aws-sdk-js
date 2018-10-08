@@ -1368,6 +1368,7 @@ declare namespace Iot {
      */
     policies?: Policies;
   }
+  export type ApproximateSecondsBeforeTimedOut = number;
   export type AscendingOrder = boolean;
   export interface AssociateTargetsWithJobRequest {
     /**
@@ -2103,6 +2104,10 @@ declare namespace Iot {
      * Allows you to create a staged rollout of the job.
      */
     jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
+    /**
+     * Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to TIMED_OUT.
+     */
+    timeoutConfig?: TimeoutConfig;
   }
   export interface CreateJobResponse {
     /**
@@ -2795,7 +2800,7 @@ declare namespace Iot {
   }
   export interface DescribeEndpointRequest {
     /**
-     * The endpoint type (such as iot:Data, iot:CredentialProvider and iot:Jobs). 
+     * The endpoint type. Valid endpoint types include:    iot:Data - Returns a VeriSign signed data endpoint.      iot:Data-ATS - Returns an ATS signed data endpoint.      iot:CredentialProvider - Returns an AWS IoT credentials provider API endpoint.      iot:Jobs - Returns an AWS IoT device management Jobs API endpoint.  
      */
     endpointType?: EndpointType;
   }
@@ -3561,6 +3566,7 @@ declare namespace Iot {
   }
   export type InProgressChecksCount = number;
   export type InProgressThings = number;
+  export type InProgressTimeoutInMinutes = number;
   export type IndexName = string;
   export type IndexNamesList = IndexName[];
   export type IndexSchema = string;
@@ -3597,7 +3603,7 @@ declare namespace Iot {
      */
     targetSelection?: TargetSelection;
     /**
-     * The status of the job, one of IN_PROGRESS, CANCELED, or COMPLETED. 
+     * The status of the job, one of IN_PROGRESS, CANCELED, DELETION_IN_PROGRESS or COMPLETED. 
      */
     status?: JobStatus;
     /**
@@ -3640,6 +3646,10 @@ declare namespace Iot {
      * Details about the job process.
      */
     jobProcessDetails?: JobProcessDetails;
+    /**
+     * Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to TIMED_OUT.
+     */
+    timeoutConfig?: TimeoutConfig;
   }
   export type JobArn = string;
   export type JobDescription = string;
@@ -3651,7 +3661,7 @@ declare namespace Iot {
      */
     jobId?: JobId;
     /**
-     * The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCESS, CANCELED, or REJECTED).
+     * The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED, TIMED_OUT, CANCELED, or REJECTED).
      */
     status?: JobExecutionStatus;
     /**
@@ -3686,8 +3696,12 @@ declare namespace Iot {
      * The version of the job execution. Job execution versions are incremented each time they are updated by a device.
      */
     versionNumber?: VersionNumber;
+    /**
+     * The estimated number of seconds that remain before the job execution status will be changed to TIMED_OUT.
+     */
+    approximateSecondsBeforeTimedOut?: ApproximateSecondsBeforeTimedOut;
   }
-  export type JobExecutionStatus = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"REJECTED"|"REMOVED"|"CANCELED"|string;
+  export type JobExecutionStatus = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"TIMED_OUT"|"REJECTED"|"REMOVED"|"CANCELED"|string;
   export interface JobExecutionStatusDetails {
     /**
      * The job execution status.
@@ -3778,6 +3792,10 @@ declare namespace Iot {
      * The number of things that are no longer scheduled to execute the job because they have been deleted or have been removed from the group that was a target of the job.
      */
     numberOfRemovedThings?: RemovedThings;
+    /**
+     * The number of things whose job execution status is TIMED_OUT.
+     */
+    numberOfTimedOutThings?: TimedOutThings;
   }
   export type JobStatus = "IN_PROGRESS"|"CANCELED"|"COMPLETED"|"DELETION_IN_PROGRESS"|string;
   export interface JobSummary {
@@ -6044,6 +6062,13 @@ declare namespace Iot {
      * A list of searchable thing attribute names.
      */
     searchableAttributes?: SearchableAttributes;
+  }
+  export type TimedOutThings = number;
+  export interface TimeoutConfig {
+    /**
+     * Specifies the amount of time, in minutes, this device has to finish execution of this job. A timer is started, or restarted, whenever this job's execution status is specified as IN_PROGRESS with this field populated. If the job execution status is not set to a terminal state before the timer expires, or before another job execution status update is sent with this field populated, the status will be automatically set to TIMED_OUT. Note that setting/resetting this timer has no effect on the job execution timeout timer which may have been specified when the job was created (CreateJobExecution using the field timeoutConfig).
+     */
+    inProgressTimeoutInMinutes?: InProgressTimeoutInMinutes;
   }
   export type Timestamp = Date;
   export type Token = string;

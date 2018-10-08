@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "IoTJobsDataPlane",
+        "description": "We are releasing job execution timeout functionalities to customers. Device can now set and update their job execution timeout. "
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "We are releasing job execution timeout functionalities to customers. Customer now can set job execution timeout on the job level when creating a job. "
+    }
+]

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.329.0-->
+<!--LATEST=2.330.0-->
 <!--ENTRYINSERT-->
+
+## 2.330.0
+* feature: IoTJobsDataPlane: We are releasing job execution timeout functionalities to customers. Device can now set and update their job execution timeout. 
+* feature: Iot: We are releasing job execution timeout functionalities to customers. Customer now can set job execution timeout on the job level when creating a job. 
 
 ## 2.329.0
 * feature: DirectoryService: SDK changes to create a new type of trust for active directory

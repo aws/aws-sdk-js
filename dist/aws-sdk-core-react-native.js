@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.329.0',
+	  VERSION: '2.330.0',
 
 	  /**
 	   * @api private
@@ -4165,7 +4165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @abstract
 	   */
-	  setupRequestListeners: function setupRequestListeners() {
+	  setupRequestListeners: function setupRequestListeners(request) {
 	  },
 
 	  /**
