@@ -1,7 +1,7 @@
 var hasProp = {}.hasOwnProperty;
 var helpers = require('./helpers');
 var AWS = helpers.AWS;
-var sharedIniFile = require('../lib/shared-ini');
+var iniLoader = require('../lib/shared-ini').iniLoader;
 var configure = function(options) {
   return new AWS.Config(options);
 };
@@ -41,7 +41,7 @@ describe('AWS.Config', function() {
 
     afterEach(function() {
       process.env = oldEnv;
-      sharedIniFile.clearCachedFiles();
+      iniLoader.clearCachedFiles();
     });
 
     it('defaults to undefined', function() {

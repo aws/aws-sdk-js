@@ -8,7 +8,7 @@
 
   STS = require('../clients/sts');
 
-  var sharedIniFile = require('../lib/shared-ini');
+  var iniLoader = require('../lib/shared-ini').iniLoader;
 
   validateCredentials = function(creds, key, secret, session) {
     expect(creds.accessKeyId).to.equal(key || 'akid');
@@ -206,7 +206,7 @@
         delete process.env.USERPROFILE;
       });
       afterEach(function() {
-        sharedIniFile.clearCachedFiles();
+        iniLoader.clearCachedFiles();
         os.homedir = homedir;
       });
       describe('constructor', function() {
@@ -277,7 +277,7 @@
           process.env.HOME = '/home/user';
         });
         afterEach(function() {
-          sharedIniFile.clearCachedFiles();
+          iniLoader.clearCachedFiles();
         });
         it('loads credentials from ~/.aws/credentials using default profile', function() {
           var creds, mock;
@@ -397,7 +397,7 @@
           return process.env.HOME = '/home/user';
         });
         afterEach(function() {
-          sharedIniFile.clearCachedFiles();
+          iniLoader.clearCachedFiles();
         });
         it('should refresh from disk', function() {
           var creds, mock;
@@ -427,7 +427,7 @@
         helpers.spyOn(os, 'homedir').andReturn('/home/user');
       });
       afterEach(function() {
-        sharedIniFile.clearCachedFiles();
+        iniLoader.clearCachedFiles();
       });
       it('will fail if assume role is disabled', function() {
         var creds, mock;

@@ -1,7 +1,7 @@
 var helpers = require('./helpers');
-var IniLoader = require('../lib/shared-ini/ini-loader');
 var os = require('os');
 var AWS = helpers.AWS;
+var IniLoader = AWS.IniLoader;
 
 function validateCachedFiles(iniFile, expectedCache) {
   if (!expectedCache) return false;

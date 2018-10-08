@@ -21,3 +21,4 @@ export {Request} from './request';
 export {Response} from './response';
 export {Service} from './service';
 export {AWSError} from './error';
+export {IniLoader} from './shared-ini/ini-loader';
