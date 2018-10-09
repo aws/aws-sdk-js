@@ -28,6 +28,14 @@ declare class SSM extends Service {
    */
   cancelCommand(callback?: (err: AWSError, data: SSM.Types.CancelCommandResult) => void): Request<SSM.Types.CancelCommandResult, AWSError>;
   /**
+   * Stops a Maintenance Window execution that is already in progress and cancels any tasks in the window that have not already starting running. (Tasks already in progress will continue to completion.)
+   */
+  cancelMaintenanceWindowExecution(params: SSM.Types.CancelMaintenanceWindowExecutionRequest, callback?: (err: AWSError, data: SSM.Types.CancelMaintenanceWindowExecutionResult) => void): Request<SSM.Types.CancelMaintenanceWindowExecutionResult, AWSError>;
+  /**
+   * Stops a Maintenance Window execution that is already in progress and cancels any tasks in the window that have not already starting running. (Tasks already in progress will continue to completion.)
+   */
+  cancelMaintenanceWindowExecution(callback?: (err: AWSError, data: SSM.Types.CancelMaintenanceWindowExecutionResult) => void): Request<SSM.Types.CancelMaintenanceWindowExecutionResult, AWSError>;
+  /**
    * Registers your on-premises server or virtual machine with Amazon EC2 so that you can manage these resources using Run Command. An on-premises server or virtual machine that has been registered with EC2 is called a managed instance. For more information about activations, see Setting Up Systems Manager in Hybrid Environments.
    */
   createActivation(params: SSM.Types.CreateActivationRequest, callback?: (err: AWSError, data: SSM.Types.CreateActivationResult) => void): Request<SSM.Types.CreateActivationResult, AWSError>;
@@ -348,6 +356,14 @@ declare class SSM extends Service {
    */
   describeMaintenanceWindowExecutions(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowExecutionsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowExecutionsResult, AWSError>;
   /**
+   * Retrieves information about upcoming executions of a Maintenance Window.
+   */
+  describeMaintenanceWindowSchedule(params: SSM.Types.DescribeMaintenanceWindowScheduleRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowScheduleResult) => void): Request<SSM.Types.DescribeMaintenanceWindowScheduleResult, AWSError>;
+  /**
+   * Retrieves information about upcoming executions of a Maintenance Window.
+   */
+  describeMaintenanceWindowSchedule(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowScheduleResult) => void): Request<SSM.Types.DescribeMaintenanceWindowScheduleResult, AWSError>;
+  /**
    * Lists the targets registered with the Maintenance Window.
    */
   describeMaintenanceWindowTargets(params: SSM.Types.DescribeMaintenanceWindowTargetsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTargetsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTargetsResult, AWSError>;
@@ -371,6 +387,14 @@ declare class SSM extends Service {
    * Retrieves the Maintenance Windows in an AWS account.
    */
   describeMaintenanceWindows(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsResult, AWSError>;
+  /**
+   * Retrieves information about the Maintenance Windows targets or tasks that an instance is associated with.
+   */
+  describeMaintenanceWindowsForTarget(params: SSM.Types.DescribeMaintenanceWindowsForTargetRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsForTargetResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsForTargetResult, AWSError>;
+  /**
+   * Retrieves information about the Maintenance Windows targets or tasks that an instance is associated with.
+   */
+  describeMaintenanceWindowsForTarget(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsForTargetResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsForTargetResult, AWSError>;
   /**
    * Get information about a parameter. Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.
    */
@@ -1474,6 +1498,18 @@ declare namespace SSM {
   }
   export interface CancelCommandResult {
   }
+  export interface CancelMaintenanceWindowExecutionRequest {
+    /**
+     * The ID of the Maintenance Window execution to stop.
+     */
+    WindowExecutionId: MaintenanceWindowExecutionId;
+  }
+  export interface CancelMaintenanceWindowExecutionResult {
+    /**
+     * The ID of the Maintenance Window execution that has been stopped.
+     */
+    WindowExecutionId?: MaintenanceWindowExecutionId;
+  }
   export type ClientToken = string;
   export type CloudWatchLogGroupName = string;
   export interface CloudWatchOutputConfig {
@@ -2016,9 +2052,21 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
+     * The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become active. StartDate allows you to delay activation of the Maintenance Window until the specified future date.
+     */
+    StartDate?: MaintenanceWindowStringDateTime;
+    /**
+     * The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become inactive. EndDate allows you to set a date and time in the future when the Maintenance Window will no longer run.
+     */
+    EndDate?: MaintenanceWindowStringDateTime;
+    /**
      * The schedule of the Maintenance Window in the form of a cron or rate expression.
      */
     Schedule: MaintenanceWindowSchedule;
+    /**
+     * The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     */
+    ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
      * The duration of the Maintenance Window in hours.
      */
@@ -2831,6 +2879,42 @@ declare namespace SSM {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeMaintenanceWindowScheduleRequest {
+    /**
+     * The ID of the Maintenance Window to retrieve information about.
+     */
+    WindowId?: MaintenanceWindowId;
+    /**
+     * The instance ID or key/value pair to retrieve information about.
+     */
+    Targets?: Targets;
+    /**
+     * The type of resource you want to retrieve information about. For example, "INSTANCE".
+     */
+    ResourceType?: MaintenanceWindowResourceType;
+    /**
+     * Filters used to limit the range of results. For example, you can limit Maintenance Window executions to only those scheduled before or after a certain date and time.
+     */
+    Filters?: PatchOrchestratorFilterList;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaintenanceWindowSearchMaxResults;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeMaintenanceWindowScheduleResult {
+    /**
+     * Information about Maintenance Window executions scheduled for the specified time range.
+     */
+    ScheduledWindowExecutions?: ScheduledWindowExecutionList;
+    /**
+     * The token for the next set of items to return. (You use this token in the next call.)
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeMaintenanceWindowTargetsRequest {
     /**
      * The ID of the Maintenance Window whose targets should be retrieved.
@@ -2884,6 +2968,34 @@ declare namespace SSM {
     Tasks?: MaintenanceWindowTaskList;
     /**
      * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeMaintenanceWindowsForTargetRequest {
+    /**
+     * The instance ID or key/value pair to retrieve information about.
+     */
+    Targets: Targets;
+    /**
+     * The type of resource you want to retrieve information about. For example, "INSTANCE".
+     */
+    ResourceType: MaintenanceWindowResourceType;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaintenanceWindowSearchMaxResults;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeMaintenanceWindowsForTargetResult {
+    /**
+     * Information about the Maintenance Window targets and tasks an instance is associated with.
+     */
+    WindowIdentities?: MaintenanceWindowsForTargetList;
+    /**
+     * The token for the next set of items to return. (You use this token in the next call.)
      */
     NextToken?: NextToken;
   }
@@ -3745,9 +3857,25 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
+     * The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active. The Maintenance Window will not run before this specified time.
+     */
+    StartDate?: MaintenanceWindowStringDateTime;
+    /**
+     * The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive. The Maintenance Window will not run after this specified time.
+     */
+    EndDate?: MaintenanceWindowStringDateTime;
+    /**
      * The schedule of the Maintenance Window in the form of a cron or rate expression.
      */
     Schedule?: MaintenanceWindowSchedule;
+    /**
+     * The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     */
+    ScheduleTimezone?: MaintenanceWindowTimezone;
+    /**
+     * The next time the Maintenance Window will actually run, taking into account any specified times for the Maintenance Window to become active or inactive.
+     */
+    NextExecutionTime?: MaintenanceWindowStringDateTime;
     /**
      * The duration of the Maintenance Window in hours.
      */
@@ -5093,6 +5221,36 @@ declare namespace SSM {
      * The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
      */
     Cutoff?: MaintenanceWindowCutoff;
+    /**
+     * The schedule of the Maintenance Window in the form of a cron or rate expression.
+     */
+    Schedule?: MaintenanceWindowSchedule;
+    /**
+     * The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format.
+     */
+    ScheduleTimezone?: MaintenanceWindowTimezone;
+    /**
+     * The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive.
+     */
+    EndDate?: MaintenanceWindowStringDateTime;
+    /**
+     * The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active.
+     */
+    StartDate?: MaintenanceWindowStringDateTime;
+    /**
+     * The next time the Maintenance Window will actually run, taking into account any specified times for the Maintenance Window to become active or inactive.
+     */
+    NextExecutionTime?: MaintenanceWindowStringDateTime;
+  }
+  export interface MaintenanceWindowIdentityForTarget {
+    /**
+     * The ID of the Maintenance Window.
+     */
+    WindowId?: MaintenanceWindowId;
+    /**
+     * The name of the Maintenance Window.
+     */
+    Name?: MaintenanceWindowName;
   }
   export type MaintenanceWindowIdentityList = MaintenanceWindowIdentity[];
   export type MaintenanceWindowLambdaClientContext = string;
@@ -5154,6 +5312,7 @@ declare namespace SSM {
     TimeoutSeconds?: TimeoutSeconds;
   }
   export type MaintenanceWindowSchedule = string;
+  export type MaintenanceWindowSearchMaxResults = number;
   export type MaintenanceWindowStepFunctionsInput = string;
   export type MaintenanceWindowStepFunctionsName = string;
   export interface MaintenanceWindowStepFunctionsParameters {
@@ -5166,6 +5325,7 @@ declare namespace SSM {
      */
     Name?: MaintenanceWindowStepFunctionsName;
   }
+  export type MaintenanceWindowStringDateTime = string;
   export interface MaintenanceWindowTarget {
     /**
      * The Maintenance Window ID where the target is registered.
@@ -5287,6 +5447,8 @@ declare namespace SSM {
   export type MaintenanceWindowTaskPriority = number;
   export type MaintenanceWindowTaskTargetId = string;
   export type MaintenanceWindowTaskType = "RUN_COMMAND"|"AUTOMATION"|"STEP_FUNCTIONS"|"LAMBDA"|string;
+  export type MaintenanceWindowTimezone = string;
+  export type MaintenanceWindowsForTargetList = MaintenanceWindowIdentityForTarget[];
   export type ManagedInstanceId = string;
   export type MaxConcurrency = string;
   export type MaxErrors = string;
@@ -6151,6 +6313,21 @@ declare namespace SSM {
   }
   export type S3Region = string;
   export type ScheduleExpression = string;
+  export interface ScheduledWindowExecution {
+    /**
+     * The ID of the Maintenance Window to be run.
+     */
+    WindowId?: MaintenanceWindowId;
+    /**
+     * The name of the Maintenance Window to be run.
+     */
+    Name?: MaintenanceWindowName;
+    /**
+     * The time, in ISO-8601 Extended format, that the Maintenance Window is scheduled to be run.
+     */
+    ExecutionTime?: MaintenanceWindowStringDateTime;
+  }
+  export type ScheduledWindowExecutionList = ScheduledWindowExecution[];
   export interface SendAutomationSignalRequest {
     /**
      * The unique identifier for an existing Automation execution that you want to send the signal to.
@@ -6169,11 +6346,11 @@ declare namespace SSM {
   }
   export interface SendCommandRequest {
     /**
-     * The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags. For more information about how to use Targets, see Sending Commands to a Fleet in the AWS Systems Manager User Guide.
+     * The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags. For more information about how to use targets, see Sending Commands to a Fleet in the AWS Systems Manager User Guide.
      */
     InstanceIds?: InstanceIdList;
     /**
-     * (Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call. For more information about how to use Targets, see Sending Commands to a Fleet in the AWS Systems Manager User Guide.
+     * (Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call. For more information about how to use targets, see Sending Commands to a Fleet in the AWS Systems Manager User Guide.
      */
     Targets?: Targets;
     /**
@@ -6380,7 +6557,7 @@ declare namespace SSM {
      */
     Mode?: ExecutionMode;
     /**
-     * The name of the parameter used as the target resource for the rate-controlled execution. Required if you specify Targets.
+     * The name of the parameter used as the target resource for the rate-controlled execution. Required if you specify targets.
      */
     TargetParameterName?: AutomationParameterKey;
     /**
@@ -6724,9 +6901,21 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
+     * The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     */
+    StartDate?: MaintenanceWindowStringDateTime;
+    /**
+     * The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become inactive. EndDate allows you to set a date and time in the future when the Maintenance Window will no longer run.
+     */
+    EndDate?: MaintenanceWindowStringDateTime;
+    /**
      * The schedule of the Maintenance Window in the form of a cron or rate expression.
      */
     Schedule?: MaintenanceWindowSchedule;
+    /**
+     * The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     */
+    ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
      * The duration of the Maintenance Window in hours.
      */
@@ -6762,9 +6951,21 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
+     * The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active. The Maintenance Window will not run before this specified time.
+     */
+    StartDate?: MaintenanceWindowStringDateTime;
+    /**
+     * The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive. The Maintenance Window will not run after this specified time.
+     */
+    EndDate?: MaintenanceWindowStringDateTime;
+    /**
      * The schedule of the Maintenance Window in the form of a cron or rate expression.
      */
     Schedule?: MaintenanceWindowSchedule;
+    /**
+     * The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     */
+    ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
      * The duration of the Maintenance Window in hours.
      */

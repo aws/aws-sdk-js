@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.330.0-->
+<!--LATEST=2.331.0-->
 <!--ENTRYINSERT-->
+
+## 2.331.0
+* feature: SSM: Adds StartDate, EndDate, and ScheduleTimezone to CreateMaintenanceWindow and UpdateMaintenanceWindow; Adds NextExecutionTime to GetMaintenanceWindow and DescribeMaintenanceWindows; Adds CancelMaintenanceWindowExecution, DescribeMaintenanceWindowSchedule and DescribeMaintenanceWindowsForTarget APIs.
 
 ## 2.330.0
 * feature: IoTJobsDataPlane: We are releasing job execution timeout functionalities to customers. Device can now set and update their job execution timeout. 

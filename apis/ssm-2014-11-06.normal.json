@@ -72,6 +72,28 @@
       ],
       "documentation": "<p>Attempts to cancel the command specified by the Command ID. There is no guarantee that the command will be terminated and the underlying process stopped.</p>"
     },
+    "CancelMaintenanceWindowExecution": {
+      "name": "CancelMaintenanceWindowExecution",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelMaintenanceWindowExecutionRequest"
+      },
+      "output": {
+        "shape": "CancelMaintenanceWindowExecutionResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "DoesNotExistException"
+        }
+      ],
+      "documentation": "<p>Stops a Maintenance Window execution that is already in progress and cancels any tasks in the window that have not already starting running. (Tasks already in progress will continue to completion.)</p>"
+    },
     "CreateActivation": {
       "name": "CreateActivation",
       "http": {
@@ -1123,6 +1145,28 @@
       ],
       "documentation": "<p>Lists the executions of a Maintenance Window. This includes information about when the Maintenance Window was scheduled to be active, and information about tasks registered and run with the Maintenance Window.</p>"
     },
+    "DescribeMaintenanceWindowSchedule": {
+      "name": "DescribeMaintenanceWindowSchedule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeMaintenanceWindowScheduleRequest"
+      },
+      "output": {
+        "shape": "DescribeMaintenanceWindowScheduleResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "DoesNotExistException"
+        }
+      ],
+      "documentation": "<p>Retrieves information about upcoming executions of a Maintenance Window.</p>"
+    },
     "DescribeMaintenanceWindowTargets": {
       "name": "DescribeMaintenanceWindowTargets",
       "http": {
@@ -1185,6 +1229,25 @@
         }
       ],
       "documentation": "<p>Retrieves the Maintenance Windows in an AWS account.</p>"
+    },
+    "DescribeMaintenanceWindowsForTarget": {
+      "name": "DescribeMaintenanceWindowsForTarget",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeMaintenanceWindowsForTargetRequest"
+      },
+      "output": {
+        "shape": "DescribeMaintenanceWindowsForTargetResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Retrieves information about the Maintenance Windows targets or tasks that an instance is associated with.</p>"
     },
     "DescribeParameters": {
       "name": "DescribeParameters",
@@ -3889,6 +3952,27 @@
       "members": {},
       "documentation": "<p>Whether or not the command was successfully canceled. There is no guarantee that a request can be canceled.</p>"
     },
+    "CancelMaintenanceWindowExecutionRequest": {
+      "type": "structure",
+      "required": [
+        "WindowExecutionId"
+      ],
+      "members": {
+        "WindowExecutionId": {
+          "shape": "MaintenanceWindowExecutionId",
+          "documentation": "<p>The ID of the Maintenance Window execution to stop.</p>"
+        }
+      }
+    },
+    "CancelMaintenanceWindowExecutionResult": {
+      "type": "structure",
+      "members": {
+        "WindowExecutionId": {
+          "shape": "MaintenanceWindowExecutionId",
+          "documentation": "<p>The ID of the Maintenance Window execution that has been stopped.</p>"
+        }
+      }
+    },
     "ClientToken": {
       "type": "string",
       "max": 64,
@@ -4766,9 +4850,21 @@
           "shape": "MaintenanceWindowDescription",
           "documentation": "<p>An optional description for the Maintenance Window. We recommend specifying a description to help you organize your Maintenance Windows. </p>"
         },
+        "StartDate": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become active. StartDate allows you to delay activation of the Maintenance Window until the specified future date.</p>"
+        },
+        "EndDate": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become inactive. EndDate allows you to set a date and time in the future when the Maintenance Window will no longer run.</p>"
+        },
         "Schedule": {
           "shape": "MaintenanceWindowSchedule",
           "documentation": "<p>The schedule of the Maintenance Window in the form of a cron or rate expression.</p>"
+        },
+        "ScheduleTimezone": {
+          "shape": "MaintenanceWindowTimezone",
+          "documentation": "<p>The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone Database</a> on the IANA website.</p>"
         },
         "Duration": {
           "shape": "MaintenanceWindowDurationHours",
@@ -5932,6 +6028,49 @@
         }
       }
     },
+    "DescribeMaintenanceWindowScheduleRequest": {
+      "type": "structure",
+      "members": {
+        "WindowId": {
+          "shape": "MaintenanceWindowId",
+          "documentation": "<p>The ID of the Maintenance Window to retrieve information about.</p>"
+        },
+        "Targets": {
+          "shape": "Targets",
+          "documentation": "<p>The instance ID or key/value pair to retrieve information about.</p>"
+        },
+        "ResourceType": {
+          "shape": "MaintenanceWindowResourceType",
+          "documentation": "<p>The type of resource you want to retrieve information about. For example, \"INSTANCE\".</p>"
+        },
+        "Filters": {
+          "shape": "PatchOrchestratorFilterList",
+          "documentation": "<p>Filters used to limit the range of results. For example, you can limit Maintenance Window executions to only those scheduled before or after a certain date and time.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaintenanceWindowSearchMaxResults",
+          "documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
+    "DescribeMaintenanceWindowScheduleResult": {
+      "type": "structure",
+      "members": {
+        "ScheduledWindowExecutions": {
+          "shape": "ScheduledWindowExecutionList",
+          "documentation": "<p>Information about Maintenance Window executions scheduled for the specified time range.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of items to return. (You use this token in the next call.)</p>"
+        }
+      }
+    },
     "DescribeMaintenanceWindowTargetsRequest": {
       "type": "structure",
       "required": [
@@ -6005,6 +6144,45 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
+    "DescribeMaintenanceWindowsForTargetRequest": {
+      "type": "structure",
+      "required": [
+        "Targets",
+        "ResourceType"
+      ],
+      "members": {
+        "Targets": {
+          "shape": "Targets",
+          "documentation": "<p>The instance ID or key/value pair to retrieve information about.</p>"
+        },
+        "ResourceType": {
+          "shape": "MaintenanceWindowResourceType",
+          "documentation": "<p>The type of resource you want to retrieve information about. For example, \"INSTANCE\".</p>"
+        },
+        "MaxResults": {
+          "shape": "MaintenanceWindowSearchMaxResults",
+          "documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
+    "DescribeMaintenanceWindowsForTargetResult": {
+      "type": "structure",
+      "members": {
+        "WindowIdentities": {
+          "shape": "MaintenanceWindowsForTargetList",
+          "documentation": "<p>Information about the Maintenance Window targets and tasks an instance is associated with.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of items to return. (You use this token in the next call.)</p>"
         }
       }
     },
@@ -7225,9 +7403,25 @@
           "shape": "MaintenanceWindowDescription",
           "documentation": "<p>The description of the Maintenance Window.</p>"
         },
+        "StartDate": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active. The Maintenance Window will not run before this specified time.</p>"
+        },
+        "EndDate": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive. The Maintenance Window will not run after this specified time.</p>"
+        },
         "Schedule": {
           "shape": "MaintenanceWindowSchedule",
           "documentation": "<p>The schedule of the Maintenance Window in the form of a cron or rate expression.</p>"
+        },
+        "ScheduleTimezone": {
+          "shape": "MaintenanceWindowTimezone",
+          "documentation": "<p>The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone Database</a> on the IANA website.</p>"
+        },
+        "NextExecutionTime": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The next time the Maintenance Window will actually run, taking into account any specified times for the Maintenance Window to become active or inactive.</p>"
         },
         "Duration": {
           "shape": "MaintenanceWindowDurationHours",
@@ -9301,7 +9495,7 @@
           "documentation": "<p>The filter values.</p>"
         }
       },
-      "documentation": "<p>Filter used in the request.</p>"
+      "documentation": "<p>Filter used in the request. Supported filter keys are Name and Enabled.</p>"
     },
     "MaintenanceWindowFilterKey": {
       "type": "string",
@@ -9359,9 +9553,43 @@
         "Cutoff": {
           "shape": "MaintenanceWindowCutoff",
           "documentation": "<p>The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.</p>"
+        },
+        "Schedule": {
+          "shape": "MaintenanceWindowSchedule",
+          "documentation": "<p>The schedule of the Maintenance Window in the form of a cron or rate expression.</p>"
+        },
+        "ScheduleTimezone": {
+          "shape": "MaintenanceWindowTimezone",
+          "documentation": "<p>The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format.</p>"
+        },
+        "EndDate": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive.</p>"
+        },
+        "StartDate": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active.</p>"
+        },
+        "NextExecutionTime": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The next time the Maintenance Window will actually run, taking into account any specified times for the Maintenance Window to become active or inactive.</p>"
         }
       },
       "documentation": "<p>Information about the Maintenance Window.</p>"
+    },
+    "MaintenanceWindowIdentityForTarget": {
+      "type": "structure",
+      "members": {
+        "WindowId": {
+          "shape": "MaintenanceWindowId",
+          "documentation": "<p>The ID of the Maintenance Window.</p>"
+        },
+        "Name": {
+          "shape": "MaintenanceWindowName",
+          "documentation": "<p>The name of the Maintenance Window.</p>"
+        }
+      },
+      "documentation": "<p>The Maintenance Window to which the specified target belongs.</p>"
     },
     "MaintenanceWindowIdentityList": {
       "type": "list",
@@ -9467,6 +9695,10 @@
       "max": 256,
       "min": 1
     },
+    "MaintenanceWindowSearchMaxResults": {
+      "type": "integer",
+      "min": 1
+    },
     "MaintenanceWindowStepFunctionsInput": {
       "type": "string",
       "max": 4096,
@@ -9490,6 +9722,9 @@
         }
       },
       "documentation": "<p>The parameters for a STEP_FUNCTION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Step Functions tasks, Systems Manager ignores any values specified for <code>TaskParameters</code> and <code>LoggingInfo</code>.</p> </note>"
+    },
+    "MaintenanceWindowStringDateTime": {
+      "type": "string"
     },
     "MaintenanceWindowTarget": {
       "type": "structure",
@@ -9696,6 +9931,15 @@
         "STEP_FUNCTIONS",
         "LAMBDA"
       ]
+    },
+    "MaintenanceWindowTimezone": {
+      "type": "string"
+    },
+    "MaintenanceWindowsForTargetList": {
+      "type": "list",
+      "member": {
+        "shape": "MaintenanceWindowIdentityForTarget"
+      }
     },
     "ManagedInstanceId": {
       "type": "string",
@@ -11345,6 +11589,30 @@
       "max": 256,
       "min": 1
     },
+    "ScheduledWindowExecution": {
+      "type": "structure",
+      "members": {
+        "WindowId": {
+          "shape": "MaintenanceWindowId",
+          "documentation": "<p>The ID of the Maintenance Window to be run.</p>"
+        },
+        "Name": {
+          "shape": "MaintenanceWindowName",
+          "documentation": "<p>The name of the Maintenance Window to be run.</p>"
+        },
+        "ExecutionTime": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The time, in ISO-8601 Extended format, that the Maintenance Window is scheduled to be run.</p>"
+        }
+      },
+      "documentation": "<p>Information about a scheduled execution for a Maintenance Window.</p>"
+    },
+    "ScheduledWindowExecutionList": {
+      "type": "list",
+      "member": {
+        "shape": "ScheduledWindowExecution"
+      }
+    },
     "SendAutomationSignalRequest": {
       "type": "structure",
       "required": [
@@ -11378,11 +11646,11 @@
       "members": {
         "InstanceIds": {
           "shape": "InstanceIdList",
-          "documentation": "<p>The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags. For more information about how to use Targets, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags. For more information about how to use targets, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "Targets": {
           "shape": "Targets",
-          "documentation": "<p>(Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call. For more information about how to use Targets, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>(Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call. For more information about how to use targets, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "DocumentName": {
           "shape": "DocumentARN",
@@ -11742,7 +12010,7 @@
         },
         "TargetParameterName": {
           "shape": "AutomationParameterKey",
-          "documentation": "<p>The name of the parameter used as the target resource for the rate-controlled execution. Required if you specify Targets.</p>"
+          "documentation": "<p>The name of the parameter used as the target resource for the rate-controlled execution. Required if you specify targets.</p>"
         },
         "Targets": {
           "shape": "Targets",
@@ -12341,9 +12609,21 @@
           "shape": "MaintenanceWindowDescription",
           "documentation": "<p>An optional description for the update request.</p>"
         },
+        "StartDate": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone Database</a> on the IANA website.</p>"
+        },
+        "EndDate": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become inactive. EndDate allows you to set a date and time in the future when the Maintenance Window will no longer run.</p>"
+        },
         "Schedule": {
           "shape": "MaintenanceWindowSchedule",
           "documentation": "<p>The schedule of the Maintenance Window in the form of a cron or rate expression.</p>"
+        },
+        "ScheduleTimezone": {
+          "shape": "MaintenanceWindowTimezone",
+          "documentation": "<p>The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone Database</a> on the IANA website.</p>"
         },
         "Duration": {
           "shape": "MaintenanceWindowDurationHours",
@@ -12387,9 +12667,21 @@
           "shape": "MaintenanceWindowDescription",
           "documentation": "<p>An optional description of the update.</p>"
         },
+        "StartDate": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active. The Maintenance Window will not run before this specified time.</p>"
+        },
+        "EndDate": {
+          "shape": "MaintenanceWindowStringDateTime",
+          "documentation": "<p>The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive. The Maintenance Window will not run after this specified time.</p>"
+        },
         "Schedule": {
           "shape": "MaintenanceWindowSchedule",
           "documentation": "<p>The schedule of the Maintenance Window in the form of a cron or rate expression.</p>"
+        },
+        "ScheduleTimezone": {
+          "shape": "MaintenanceWindowTimezone",
+          "documentation": "<p>The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone Database</a> on the IANA website.</p>"
         },
         "Duration": {
           "shape": "MaintenanceWindowDurationHours",
