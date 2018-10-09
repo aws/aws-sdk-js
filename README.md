@@ -11,12 +11,10 @@ or Node.js backends
 
 For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
 
-<p class="note">
 If you are upgrading from 1.x to 2.0 of the SDK, please see the
-[upgrading](https://github.com/aws/aws-sdk-js/blob/master/UPGRADING.md) notes
+[upgrading notes](https://github.com/aws/aws-sdk-js/blob/master/UPGRADING.md)
 for information on how to migrate existing code to work with the new major
 version.
-</p>
 
 ## Installing
 
