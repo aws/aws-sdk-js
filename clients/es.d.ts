@@ -20,6 +20,14 @@ declare class ES extends Service {
    */
   addTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state.
+   */
+  cancelElasticsearchServiceSoftwareUpdate(params: ES.Types.CancelElasticsearchServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse, AWSError>;
+  /**
+   * Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state.
+   */
+  cancelElasticsearchServiceSoftwareUpdate(callback?: (err: AWSError, data: ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse, AWSError>;
+  /**
    * Creates a new Elasticsearch domain. For more information, see Creating Elasticsearch Domains in the Amazon Elasticsearch Service Developer Guide.
    */
   createElasticsearchDomain(params: ES.Types.CreateElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.CreateElasticsearchDomainResponse) => void): Request<ES.Types.CreateElasticsearchDomainResponse, AWSError>;
@@ -156,6 +164,14 @@ declare class ES extends Service {
    */
   removeTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Schedules a service software update for an Amazon ES domain.
+   */
+  startElasticsearchServiceSoftwareUpdate(params: ES.Types.StartElasticsearchServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: ES.Types.StartElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.StartElasticsearchServiceSoftwareUpdateResponse, AWSError>;
+  /**
+   * Schedules a service software update for an Amazon ES domain.
+   */
+  startElasticsearchServiceSoftwareUpdate(callback?: (err: AWSError, data: ES.Types.StartElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.StartElasticsearchServiceSoftwareUpdateResponse, AWSError>;
+  /**
    * Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. 
    */
   updateElasticsearchDomainConfig(params: ES.Types.UpdateElasticsearchDomainConfigRequest, callback?: (err: AWSError, data: ES.Types.UpdateElasticsearchDomainConfigResponse) => void): Request<ES.Types.UpdateElasticsearchDomainConfigResponse, AWSError>;
@@ -217,6 +233,18 @@ declare namespace ES {
     Status: OptionStatus;
   }
   export type Boolean = boolean;
+  export interface CancelElasticsearchServiceSoftwareUpdateRequest {
+    /**
+     * The name of the domain that you want to stop the latest service software update on.
+     */
+    DomainName: DomainName;
+  }
+  export interface CancelElasticsearchServiceSoftwareUpdateResponse {
+    /**
+     * The current status of the Elasticsearch service software update.
+     */
+    ServiceSoftwareOptions?: ServiceSoftwareOptions;
+  }
   export type CloudWatchLogsLogGroupArn = string;
   export interface CognitoOptions {
     /**
@@ -322,6 +350,8 @@ declare namespace ES {
      */
     DomainStatus?: ElasticsearchDomainStatus;
   }
+  export type DeploymentCloseDateTimeStamp = Date;
+  export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
   export interface DescribeElasticsearchDomainConfigRequest {
     /**
      * The Elasticsearch domain that you want to get information about.
@@ -623,6 +653,10 @@ declare namespace ES {
      * Log publishing options for the given domain.
      */
     LogPublishingOptions?: LogPublishingOptions;
+    /**
+     * The current status of the Elasticsearch domain's service software.
+     */
+    ServiceSoftwareOptions?: ServiceSoftwareOptions;
   }
   export type ElasticsearchDomainStatusList = ElasticsearchDomainStatus[];
   export type ElasticsearchInstanceTypeList = ESPartitionInstanceType[];
@@ -989,6 +1023,36 @@ declare namespace ES {
   export type ReservedElasticsearchInstanceOfferingList = ReservedElasticsearchInstanceOffering[];
   export type ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string;
   export type RoleArn = string;
+  export interface ServiceSoftwareOptions {
+    /**
+     * The current service software version that is present on the domain.
+     */
+    CurrentVersion?: String;
+    /**
+     * The new service software version if one is available.
+     */
+    NewVersion?: String;
+    /**
+     * True if you are able to update you service software version. False if you are not able to update your service software version. 
+     */
+    UpdateAvailable?: Boolean;
+    /**
+     * True if you are able to cancel your service software version update. False if you are not able to cancel your service software version. 
+     */
+    Cancellable?: Boolean;
+    /**
+     * The status of your service software update. This field can take the following values: ELIGIBLE, PENDING_UPDATE, IN_PROGRESS, COMPLETED, and NOT_ELIGIBLE.
+     */
+    UpdateStatus?: DeploymentStatus;
+    /**
+     * The description of the UpdateStatus.
+     */
+    Description?: String;
+    /**
+     * Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.
+     */
+    AutomatedUpdateDate?: DeploymentCloseDateTimeStamp;
+  }
   export type ServiceUrl = string;
   export interface SnapshotOptions {
     /**
@@ -1005,6 +1069,18 @@ declare namespace ES {
      * Specifies the status of a daily automated snapshot.
      */
     Status: OptionStatus;
+  }
+  export interface StartElasticsearchServiceSoftwareUpdateRequest {
+    /**
+     * The name of the domain that you want to update to the latest service software.
+     */
+    DomainName: DomainName;
+  }
+  export interface StartElasticsearchServiceSoftwareUpdateResponse {
+    /**
+     * The current status of the Elasticsearch service software update.
+     */
+    ServiceSoftwareOptions?: ServiceSoftwareOptions;
   }
   export type StartTimestamp = Date;
   export type StorageSubTypeName = string;

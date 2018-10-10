@@ -35,6 +35,34 @@
       ],
       "documentation": "<p>Attaches tags to an existing Elasticsearch domain. Tags are a set of case-sensitive key value pairs. An Elasticsearch domain may have up to 10 tags. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-awsresorcetagging\" target=\"_blank\"> Tagging Amazon Elasticsearch Service Domains for more information.</a></p>"
     },
+    "CancelElasticsearchServiceSoftwareUpdate": {
+      "name": "CancelElasticsearchServiceSoftwareUpdate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/es/serviceSoftwareUpdate/cancel"
+      },
+      "input": {
+        "shape": "CancelElasticsearchServiceSoftwareUpdateRequest"
+      },
+      "output": {
+        "shape": "CancelElasticsearchServiceSoftwareUpdateResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the <code>AutomatedUpdateDate</code> and when the <code>UpdateStatus</code> is in the <code>PENDING_UPDATE</code> state.</p>"
+    },
     "CreateElasticsearchDomain": {
       "name": "CreateElasticsearchDomain",
       "http": {
@@ -542,6 +570,34 @@
       ],
       "documentation": "<p>Removes the specified set of tags from the specified Elasticsearch domain.</p>"
     },
+    "StartElasticsearchServiceSoftwareUpdate": {
+      "name": "StartElasticsearchServiceSoftwareUpdate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/es/serviceSoftwareUpdate/start"
+      },
+      "input": {
+        "shape": "StartElasticsearchServiceSoftwareUpdateRequest"
+      },
+      "output": {
+        "shape": "StartElasticsearchServiceSoftwareUpdateResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Schedules a service software update for an Amazon ES domain.</p>"
+    },
     "UpdateElasticsearchDomainConfig": {
       "name": "UpdateElasticsearchDomainConfig",
       "http": {
@@ -703,6 +759,29 @@
     "Boolean": {
       "type": "boolean"
     },
+    "CancelElasticsearchServiceSoftwareUpdateRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain that you want to stop the latest service software update on.</p>"
+        }
+      },
+      "documentation": "<p>Container for the parameters to the <code><a>CancelElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to cancel a service software update on.</p>"
+    },
+    "CancelElasticsearchServiceSoftwareUpdateResponse": {
+      "type": "structure",
+      "members": {
+        "ServiceSoftwareOptions": {
+          "shape": "ServiceSoftwareOptions",
+          "documentation": "<p>The current status of the Elasticsearch service software update.</p>"
+        }
+      },
+      "documentation": "<p>The result of a <code>CancelElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.</p>"
+    },
     "CloudWatchLogsLogGroupArn": {
       "type": "string",
       "documentation": "<p>ARN of the Cloudwatch log group to which log needs to be published.</p>"
@@ -856,6 +935,19 @@
         }
       },
       "documentation": "<p>The result of a <code>DeleteElasticsearchDomain</code> request. Contains the status of the pending deletion, or no status if the domain and all of its resources have been deleted.</p>"
+    },
+    "DeploymentCloseDateTimeStamp": {
+      "type": "timestamp"
+    },
+    "DeploymentStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING_UPDATE",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "NOT_ELIGIBLE",
+        "ELIGIBLE"
+      ]
     },
     "DescribeElasticsearchDomainConfigRequest": {
       "type": "structure",
@@ -1361,6 +1453,10 @@
         "LogPublishingOptions": {
           "shape": "LogPublishingOptions",
           "documentation": "<p>Log publishing options for the given domain.</p>"
+        },
+        "ServiceSoftwareOptions": {
+          "shape": "ServiceSoftwareOptions",
+          "documentation": "<p>The current status of the Elasticsearch domain's service software.</p>"
         }
       },
       "documentation": "<p>The current status of an Elasticsearch domain.</p>"
@@ -2082,6 +2178,40 @@
       "max": 2048,
       "min": 20
     },
+    "ServiceSoftwareOptions": {
+      "type": "structure",
+      "members": {
+        "CurrentVersion": {
+          "shape": "String",
+          "documentation": "<p>The current service software version that is present on the domain.</p>"
+        },
+        "NewVersion": {
+          "shape": "String",
+          "documentation": "<p>The new service software version if one is available.</p>"
+        },
+        "UpdateAvailable": {
+          "shape": "Boolean",
+          "documentation": "<p><code>True</code> if you are able to update you service software version. <code>False</code> if you are not able to update your service software version. </p>"
+        },
+        "Cancellable": {
+          "shape": "Boolean",
+          "documentation": "<p><code>True</code> if you are able to cancel your service software version update. <code>False</code> if you are not able to cancel your service software version. </p>"
+        },
+        "UpdateStatus": {
+          "shape": "DeploymentStatus",
+          "documentation": "<p>The status of your service software update. This field can take the following values: <code>ELIGIBLE</code>, <code>PENDING_UPDATE</code>, <code>IN_PROGRESS</code>, <code>COMPLETED</code>, and <code>NOT_ELIGIBLE</code>.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description of the <code>UpdateStatus</code>.</p>"
+        },
+        "AutomatedUpdateDate": {
+          "shape": "DeploymentCloseDateTimeStamp",
+          "documentation": "<p>Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.</p>"
+        }
+      },
+      "documentation": "<p>The current options of an Elasticsearch domain service software options.</p>"
+    },
     "ServiceUrl": {
       "type": "string",
       "documentation": "<p>The endpoint to which service requests are submitted. For example, <code>search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.es.amazonaws.com</code> or <code>doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.es.amazonaws.com</code>.</p>"
@@ -2113,6 +2243,29 @@
         }
       },
       "documentation": "<p>Status of a daily automated snapshot.</p>"
+    },
+    "StartElasticsearchServiceSoftwareUpdateRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain that you want to update to the latest service software.</p>"
+        }
+      },
+      "documentation": "<p>Container for the parameters to the <code><a>StartElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to schedule a service software update on.</p>"
+    },
+    "StartElasticsearchServiceSoftwareUpdateResponse": {
+      "type": "structure",
+      "members": {
+        "ServiceSoftwareOptions": {
+          "shape": "ServiceSoftwareOptions",
+          "documentation": "<p>The current status of the Elasticsearch service software update.</p>"
+        }
+      },
+      "documentation": "<p>The result of a <code>StartElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.</p>"
     },
     "StartTimestamp": {
       "type": "timestamp"

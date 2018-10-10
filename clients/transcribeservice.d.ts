@@ -20,6 +20,14 @@ declare class TranscribeService extends Service {
    */
   createVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
   /**
+   * Deletes a previously submitted transcription job as wella s any other generated results such as the transcription, models, and so on.
+   */
+  deleteTranscriptionJob(params: TranscribeService.Types.DeleteTranscriptionJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a previously submitted transcription job as wella s any other generated results such as the transcription, models, and so on.
+   */
+  deleteTranscriptionJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a vocabulary from Amazon Transcribe. 
    */
   deleteVocabulary(params: TranscribeService.Types.DeleteVocabularyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -115,6 +123,12 @@ declare namespace TranscribeService {
     FailureReason?: FailureReason;
   }
   export type DateTime = Date;
+  export interface DeleteTranscriptionJobRequest {
+    /**
+     * The name of the transcription job to be deleted.
+     */
+    TranscriptionJobName: TranscriptionJobName;
+  }
   export interface DeleteVocabularyRequest {
     /**
      * The name of the vocabulary to delete. 

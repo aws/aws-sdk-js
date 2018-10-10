@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "This release adds French, Italian, German and Portuguese language support for all existing synchronous and asynchronous APIs"
+    },
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "Amazon Elasticsearch Service now supports customer-scheduled service software updates. When new service software becomes available, you can request an update to your domain and benefit from new features more quickly. If you take no action, we update the service software automatically after a certain time frame."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "With this update Amazon Transcribe now supports deleting completed transcription jobs. "
+    }
+]

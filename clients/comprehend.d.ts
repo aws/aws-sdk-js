@@ -799,7 +799,7 @@ declare namespace Comprehend {
     DataAccessRoleArn?: IamRoleArn;
   }
   export type KeyPhrasesDetectionJobPropertiesList = KeyPhrasesDetectionJobProperties[];
-  export type LanguageCode = "en"|"es"|string;
+  export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string;
   export interface ListDominantLanguageDetectionJobsRequest {
     /**
      * Filters that jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -1271,7 +1271,7 @@ declare namespace Comprehend {
   }
   export type String = string;
   export type StringList = String[];
-  export type SyntaxLanguageCode = "en"|string;
+  export type SyntaxLanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string;
   export interface SyntaxToken {
     /**
      * A unique identifier for a token.
