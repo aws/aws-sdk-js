@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.332.0-->
+<!--LATEST=2.333.0-->
 <!--ENTRYINSERT-->
+
+## 2.333.0
+* feature: Athena: 1. GetQueryExecution API changes to return statementType of a submitted Athena query.  2. GetQueryResults API changes to return the number of rows added to a table when a CTAS query is executed.
+* feature: DirectConnect: This release adds support for Jumbo Frames over AWS Direct Connect. You can now set MTU value when creating new virtual interfaces. This release also includes a new API to modify MTU value of existing virtual interfaces.
+* feature: EC2: You can now launch the smaller-sized G3 instance called g3s.xlarge. G3s.xlarge provides 4 vCPU, 30.5 GB RAM and a NVIDIA Tesla M60 GPU. It is ideal for remote workstations, engineering and architectural applications, and 3D visualizations and rendering for visual effects.
+* feature: MediaConvert: Added Paginators for all the MediaConvert list operations
+* feature: TranscribeService: With this release, Amazon Transcribe now supports transcriptions from audio sources in British English (en-UK), Australian English (en-AU), and Canadian French (fr-CA).
 
 ## 2.332.0
 * feature: Comprehend: This release adds French, Italian, German and Portuguese language support for all existing synchronous and asynchronous APIs

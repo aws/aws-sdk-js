@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.332.0
+// AWS SDK for JavaScript v2.333.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -33408,6 +33408,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "AWS Direct Connect",
+    "serviceId": "Direct Connect",
     "signatureVersion": "v4",
     "targetPrefix": "OvertureService",
     "uid": "directconnect-2012-10-25"
@@ -33488,6 +33489,9 @@ module.exports={
               "asn": {
                 "type": "integer"
               },
+              "mtu": {
+                "type": "integer"
+              },
               "authKey": {},
               "amazonAddress": {},
               "addressFamily": {},
@@ -33497,7 +33501,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "Sq"
+        "shape": "Ss"
       }
     },
     "AllocatePublicVirtualInterface": {
@@ -33531,14 +33535,14 @@ module.exports={
               "customerAddress": {},
               "addressFamily": {},
               "routeFilterPrefixes": {
-                "shape": "Sy"
+                "shape": "S10"
               }
             }
           }
         }
       },
       "output": {
-        "shape": "Sq"
+        "shape": "Ss"
       }
     },
     "AssociateConnectionWithLag": {
@@ -33586,7 +33590,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "Sq"
+        "shape": "Ss"
       }
     },
     "ConfirmConnection": {
@@ -33665,7 +33669,7 @@ module.exports={
         "type": "structure",
         "members": {
           "virtualInterface": {
-            "shape": "Sq"
+            "shape": "Ss"
           }
         }
       }
@@ -33706,7 +33710,7 @@ module.exports={
         "type": "structure",
         "members": {
           "directConnectGateway": {
-            "shape": "S1n"
+            "shape": "S1p"
           }
         }
       }
@@ -33727,7 +33731,7 @@ module.exports={
         "type": "structure",
         "members": {
           "directConnectGatewayAssociation": {
-            "shape": "S1s"
+            "shape": "S1u"
           }
         }
       }
@@ -33748,7 +33752,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1x"
+        "shape": "S1z"
       }
     },
     "CreateLag": {
@@ -33771,7 +33775,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S22"
+        "shape": "S24"
       }
     },
     "CreatePrivateVirtualInterface": {
@@ -33798,6 +33802,9 @@ module.exports={
               "asn": {
                 "type": "integer"
               },
+              "mtu": {
+                "type": "integer"
+              },
               "authKey": {},
               "amazonAddress": {},
               "customerAddress": {},
@@ -33809,7 +33816,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "Sq"
+        "shape": "Ss"
       }
     },
     "CreatePublicVirtualInterface": {
@@ -33841,14 +33848,14 @@ module.exports={
               "customerAddress": {},
               "addressFamily": {},
               "routeFilterPrefixes": {
-                "shape": "Sy"
+                "shape": "S10"
               }
             }
           }
         }
       },
       "output": {
-        "shape": "Sq"
+        "shape": "Ss"
       }
     },
     "DeleteBGPPeer": {
@@ -33866,7 +33873,7 @@ module.exports={
         "type": "structure",
         "members": {
           "virtualInterface": {
-            "shape": "Sq"
+            "shape": "Ss"
           }
         }
       }
@@ -33899,7 +33906,7 @@ module.exports={
         "type": "structure",
         "members": {
           "directConnectGateway": {
-            "shape": "S1n"
+            "shape": "S1p"
           }
         }
       }
@@ -33920,7 +33927,7 @@ module.exports={
         "type": "structure",
         "members": {
           "directConnectGatewayAssociation": {
-            "shape": "S1s"
+            "shape": "S1u"
           }
         }
       }
@@ -33953,7 +33960,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S22"
+        "shape": "S24"
       }
     },
     "DeleteVirtualInterface": {
@@ -33989,7 +33996,7 @@ module.exports={
         "type": "structure",
         "members": {
           "loa": {
-            "shape": "S2q"
+            "shape": "S2s"
           }
         }
       },
@@ -34003,7 +34010,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S2t"
+        "shape": "S2v"
       }
     },
     "DescribeConnectionsOnInterconnect": {
@@ -34017,7 +34024,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S2t"
+        "shape": "S2v"
       },
       "deprecated": true
     },
@@ -34039,7 +34046,7 @@ module.exports={
           "directConnectGatewayAssociations": {
             "type": "list",
             "member": {
-              "shape": "S1s"
+              "shape": "S1u"
             }
           },
           "nextToken": {}
@@ -34096,7 +34103,7 @@ module.exports={
           "directConnectGateways": {
             "type": "list",
             "member": {
-              "shape": "S1n"
+              "shape": "S1p"
             }
           },
           "nextToken": {}
@@ -34114,7 +34121,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S2t"
+        "shape": "S2v"
       }
     },
     "DescribeInterconnectLoa": {
@@ -34133,7 +34140,7 @@ module.exports={
         "type": "structure",
         "members": {
           "loa": {
-            "shape": "S2q"
+            "shape": "S2s"
           }
         }
       },
@@ -34152,7 +34159,7 @@ module.exports={
           "interconnects": {
             "type": "list",
             "member": {
-              "shape": "S1x"
+              "shape": "S1z"
             }
           }
         }
@@ -34171,7 +34178,7 @@ module.exports={
           "lags": {
             "type": "list",
             "member": {
-              "shape": "S22"
+              "shape": "S24"
             }
           }
         }
@@ -34190,7 +34197,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S2q"
+        "shape": "S2s"
       }
     },
     "DescribeLocations": {
@@ -34234,7 +34241,7 @@ module.exports={
               "members": {
                 "resourceArn": {},
                 "tags": {
-                  "shape": "S3t"
+                  "shape": "S3v"
                 }
               }
             }
@@ -34273,7 +34280,7 @@ module.exports={
           "virtualInterfaces": {
             "type": "list",
             "member": {
-              "shape": "Sq"
+              "shape": "Ss"
             }
           }
         }
@@ -34305,7 +34312,7 @@ module.exports={
         "members": {
           "resourceArn": {},
           "tags": {
-            "shape": "S3t"
+            "shape": "S3v"
           }
         }
       },
@@ -34349,7 +34356,24 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S22"
+        "shape": "S24"
+      }
+    },
+    "UpdateVirtualInterfaceAttributes": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "virtualInterfaceId"
+        ],
+        "members": {
+          "virtualInterfaceId": {},
+          "mtu": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "shape": "Ss"
       }
     }
   },
@@ -34375,6 +34399,9 @@ module.exports={
         "awsDevice": {
           "shape": "Sf"
         },
+        "jumboFrameCapable": {
+          "type": "boolean"
+        },
         "awsDeviceV2": {}
       }
     },
@@ -34382,7 +34409,7 @@ module.exports={
       "type": "string",
       "deprecated": true
     },
-    "Sq": {
+    "Ss": {
       "type": "structure",
       "members": {
         "ownerAccount": {},
@@ -34406,10 +34433,16 @@ module.exports={
         "addressFamily": {},
         "virtualInterfaceState": {},
         "customerRouterConfig": {},
+        "mtu": {
+          "type": "integer"
+        },
+        "jumboFrameCapable": {
+          "type": "boolean"
+        },
         "virtualGatewayId": {},
         "directConnectGatewayId": {},
         "routeFilterPrefixes": {
-          "shape": "Sy"
+          "shape": "S10"
         },
         "bgpPeers": {
           "type": "list",
@@ -34433,7 +34466,7 @@ module.exports={
         "awsDeviceV2": {}
       }
     },
-    "Sy": {
+    "S10": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -34442,7 +34475,7 @@ module.exports={
         }
       }
     },
-    "S1n": {
+    "S1p": {
       "type": "structure",
       "members": {
         "directConnectGatewayId": {},
@@ -34455,7 +34488,7 @@ module.exports={
         "stateChangeError": {}
       }
     },
-    "S1s": {
+    "S1u": {
       "type": "structure",
       "members": {
         "directConnectGatewayId": {},
@@ -34466,7 +34499,7 @@ module.exports={
         "stateChangeError": {}
       }
     },
-    "S1x": {
+    "S1z": {
       "type": "structure",
       "members": {
         "interconnectId": {},
@@ -34482,10 +34515,13 @@ module.exports={
         "awsDevice": {
           "shape": "Sf"
         },
+        "jumboFrameCapable": {
+          "type": "boolean"
+        },
         "awsDeviceV2": {}
       }
     },
-    "S22": {
+    "S24": {
       "type": "structure",
       "members": {
         "connectionsBandwidth": {},
@@ -34506,20 +34542,23 @@ module.exports={
         },
         "awsDeviceV2": {},
         "connections": {
-          "shape": "S24"
+          "shape": "S26"
         },
         "allowsHostedConnections": {
+          "type": "boolean"
+        },
+        "jumboFrameCapable": {
           "type": "boolean"
         }
       }
     },
-    "S24": {
+    "S26": {
       "type": "list",
       "member": {
         "shape": "S7"
       }
     },
-    "S2q": {
+    "S2s": {
       "type": "structure",
       "members": {
         "loaContent": {
@@ -34528,15 +34567,15 @@ module.exports={
         "loaContentType": {}
       }
     },
-    "S2t": {
+    "S2v": {
       "type": "structure",
       "members": {
         "connections": {
-          "shape": "S24"
+          "shape": "S26"
         }
       }
     },
-    "S3t": {
+    "S3v": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -137424,7 +137463,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.332.0',
+  VERSION: '2.333.0',
 
   /**
    * @api private
@@ -156760,7 +156799,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.332.0
+// AWS SDK for JavaScript v2.333.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
