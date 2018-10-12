@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.333.0-->
+<!--LATEST=2.334.0-->
 <!--ENTRYINSERT-->
+
+## 2.334.0
+* feature: CloudTrail: The LookupEvents API now supports two new attribute keys: ReadOnly and AccessKeyId
 
 ## 2.333.0
 * feature: Athena: 1. GetQueryExecution API changes to return statementType of a submitted Athena query.  2. GetQueryResults API changes to return the number of rows added to a table when a CTAS query is executed.
