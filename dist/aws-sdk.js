@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.334.0
+// AWS SDK for JavaScript v2.335.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -103817,6 +103817,7 @@ module.exports={
           "ScalingConfiguration": {
             "shape": "S1o"
           },
+          "DBClusterParameterGroupName": {},
           "DeletionProtection": {
             "type": "boolean"
           }
@@ -103870,6 +103871,7 @@ module.exports={
           "EnableCloudwatchLogsExports": {
             "shape": "S1n"
           },
+          "DBClusterParameterGroupName": {},
           "DeletionProtection": {
             "type": "boolean"
           }
@@ -103940,6 +103942,7 @@ module.exports={
           "UseDefaultProcessorFeatures": {
             "type": "boolean"
           },
+          "DBParameterGroupName": {},
           "DeletionProtection": {
             "type": "boolean"
           }
@@ -104124,6 +104127,7 @@ module.exports={
           "UseDefaultProcessorFeatures": {
             "type": "boolean"
           },
+          "DBParameterGroupName": {},
           "DeletionProtection": {
             "type": "boolean"
           }
@@ -119260,6 +119264,26 @@ module.exports={
         "members": {}
       }
     },
+    "AssociateServiceActionWithProvisioningArtifact": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProductId",
+          "ProvisioningArtifactId",
+          "ServiceActionId"
+        ],
+        "members": {
+          "ProductId": {},
+          "ProvisioningArtifactId": {},
+          "ServiceActionId": {},
+          "AcceptLanguage": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "AssociateTagOptionWithResource": {
       "input": {
         "type": "structure",
@@ -119275,6 +119299,50 @@ module.exports={
       "output": {
         "type": "structure",
         "members": {}
+      }
+    },
+    "BatchAssociateServiceActionWithProvisioningArtifact": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceActionAssociations"
+        ],
+        "members": {
+          "ServiceActionAssociations": {
+            "shape": "Si"
+          },
+          "AcceptLanguage": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FailedServiceActionAssociations": {
+            "shape": "Sl"
+          }
+        }
+      }
+    },
+    "BatchDisassociateServiceActionFromProvisioningArtifact": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceActionAssociations"
+        ],
+        "members": {
+          "ServiceActionAssociations": {
+            "shape": "Si"
+          },
+          "AcceptLanguage": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FailedServiceActionAssociations": {
+            "shape": "Sl"
+          }
+        }
       }
     },
     "CopyProduct": {
@@ -119339,7 +119407,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ConstraintDetail": {
-            "shape": "Sv"
+            "shape": "S17"
           },
           "ConstraintParameters": {},
           "Status": {}
@@ -119360,7 +119428,7 @@ module.exports={
           "Description": {},
           "ProviderName": {},
           "Tags": {
-            "shape": "S12"
+            "shape": "S1e"
           },
           "IdempotencyToken": {
             "idempotencyToken": true
@@ -119371,10 +119439,10 @@ module.exports={
         "type": "structure",
         "members": {
           "PortfolioDetail": {
-            "shape": "S17"
+            "shape": "S1j"
           },
           "Tags": {
-            "shape": "S1a"
+            "shape": "S1m"
           }
         }
       }
@@ -119418,10 +119486,10 @@ module.exports={
           "SupportUrl": {},
           "ProductType": {},
           "Tags": {
-            "shape": "S12"
+            "shape": "S1e"
           },
           "ProvisioningArtifactParameters": {
-            "shape": "S1k"
+            "shape": "S1w"
           },
           "IdempotencyToken": {
             "idempotencyToken": true
@@ -119432,13 +119500,13 @@ module.exports={
         "type": "structure",
         "members": {
           "ProductViewDetail": {
-            "shape": "S1s"
+            "shape": "S24"
           },
           "ProvisioningArtifactDetail": {
-            "shape": "S1x"
+            "shape": "S29"
           },
           "Tags": {
-            "shape": "S1a"
+            "shape": "S1m"
           }
         }
       }
@@ -119459,20 +119527,20 @@ module.exports={
           "PlanName": {},
           "PlanType": {},
           "NotificationArns": {
-            "shape": "S22"
+            "shape": "S2e"
           },
           "PathId": {},
           "ProductId": {},
           "ProvisionedProductName": {},
           "ProvisioningArtifactId": {},
           "ProvisioningParameters": {
-            "shape": "S25"
+            "shape": "S2h"
           },
           "IdempotencyToken": {
             "idempotencyToken": true
           },
           "Tags": {
-            "shape": "S1a"
+            "shape": "S1m"
           }
         }
       },
@@ -119499,7 +119567,7 @@ module.exports={
           "AcceptLanguage": {},
           "ProductId": {},
           "Parameters": {
-            "shape": "S1k"
+            "shape": "S1w"
           },
           "IdempotencyToken": {
             "idempotencyToken": true
@@ -119510,12 +119578,43 @@ module.exports={
         "type": "structure",
         "members": {
           "ProvisioningArtifactDetail": {
-            "shape": "S1x"
+            "shape": "S29"
           },
           "Info": {
-            "shape": "S1n"
+            "shape": "S1z"
           },
           "Status": {}
+        }
+      }
+    },
+    "CreateServiceAction": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "DefinitionType",
+          "Definition",
+          "IdempotencyToken"
+        ],
+        "members": {
+          "Name": {},
+          "DefinitionType": {},
+          "Definition": {
+            "shape": "S2s"
+          },
+          "Description": {},
+          "AcceptLanguage": {},
+          "IdempotencyToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ServiceActionDetail": {
+            "shape": "S2x"
+          }
         }
       }
     },
@@ -119535,7 +119634,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TagOptionDetail": {
-            "shape": "S2h"
+            "shape": "S33"
           }
         }
       }
@@ -119643,6 +119742,22 @@ module.exports={
         "members": {}
       }
     },
+    "DeleteServiceAction": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {},
+          "AcceptLanguage": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "DeleteTagOption": {
       "input": {
         "type": "structure",
@@ -119673,7 +119788,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ConstraintDetail": {
-            "shape": "Sv"
+            "shape": "S17"
           },
           "ConstraintParameters": {},
           "Status": {}
@@ -119715,13 +119830,13 @@ module.exports={
         "type": "structure",
         "members": {
           "PortfolioDetail": {
-            "shape": "S17"
+            "shape": "S1j"
           },
           "Tags": {
-            "shape": "S1a"
+            "shape": "S1m"
           },
           "TagOptions": {
-            "shape": "S36"
+            "shape": "S3u"
           }
         }
       }
@@ -119741,10 +119856,10 @@ module.exports={
         "type": "structure",
         "members": {
           "ProductViewSummary": {
-            "shape": "S1t"
+            "shape": "S25"
           },
           "ProvisioningArtifacts": {
-            "shape": "S39"
+            "shape": "S3x"
           }
         }
       }
@@ -119764,7 +119879,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ProductViewDetail": {
-            "shape": "S1s"
+            "shape": "S24"
           },
           "ProvisioningArtifactSummaries": {
             "type": "list",
@@ -119778,16 +119893,16 @@ module.exports={
                   "type": "timestamp"
                 },
                 "ProvisioningArtifactMetadata": {
-                  "shape": "S1n"
+                  "shape": "S1z"
                 }
               }
             }
           },
           "Tags": {
-            "shape": "S1a"
+            "shape": "S1m"
           },
           "TagOptions": {
-            "shape": "S36"
+            "shape": "S3u"
           }
         }
       }
@@ -119807,10 +119922,10 @@ module.exports={
         "type": "structure",
         "members": {
           "ProductViewSummary": {
-            "shape": "S1t"
+            "shape": "S25"
           },
           "ProvisioningArtifacts": {
-            "shape": "S39"
+            "shape": "S3x"
           }
         }
       }
@@ -119830,7 +119945,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ProvisionedProductDetail": {
-            "shape": "S3k"
+            "shape": "S48"
           },
           "CloudWatchDashboards": {
             "type": "list",
@@ -119881,13 +119996,13 @@ module.exports={
                 "type": "timestamp"
               },
               "NotificationArns": {
-                "shape": "S22"
+                "shape": "S2e"
               },
               "ProvisioningParameters": {
-                "shape": "S25"
+                "shape": "S2h"
               },
               "Tags": {
-                "shape": "S1a"
+                "shape": "S1m"
               },
               "StatusMessage": {}
             }
@@ -119951,10 +120066,10 @@ module.exports={
         "type": "structure",
         "members": {
           "ProvisioningArtifactDetail": {
-            "shape": "S1x"
+            "shape": "S29"
           },
           "Info": {
-            "shape": "S1n"
+            "shape": "S1z"
           },
           "Status": {}
         }
@@ -120002,7 +120117,7 @@ module.exports={
             }
           },
           "ConstraintSummaries": {
-            "shape": "S4w"
+            "shape": "S5k"
           },
           "UsageInstructions": {
             "type": "list",
@@ -120049,7 +120164,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S57"
+            "shape": "S5v"
           },
           "RecordOutputs": {
             "type": "list",
@@ -120063,6 +120178,26 @@ module.exports={
             }
           },
           "NextPageToken": {}
+        }
+      }
+    },
+    "DescribeServiceAction": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {},
+          "AcceptLanguage": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ServiceActionDetail": {
+            "shape": "S2x"
+          }
         }
       }
     },
@@ -120080,7 +120215,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TagOptionDetail": {
-            "shape": "S2h"
+            "shape": "S33"
           }
         }
       }
@@ -120114,6 +120249,26 @@ module.exports={
           "AcceptLanguage": {},
           "ProductId": {},
           "PortfolioId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DisassociateServiceActionFromProvisioningArtifact": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProductId",
+          "ProvisioningArtifactId",
+          "ServiceActionId"
+        ],
+        "members": {
+          "ProductId": {},
+          "ProvisioningArtifactId": {},
+          "ServiceActionId": {},
+          "AcceptLanguage": {}
         }
       },
       "output": {
@@ -120157,7 +120312,33 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S57"
+            "shape": "S5v"
+          }
+        }
+      }
+    },
+    "ExecuteProvisionedProductServiceAction": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProvisionedProductId",
+          "ServiceActionId",
+          "ExecuteToken"
+        ],
+        "members": {
+          "ProvisionedProductId": {},
+          "ServiceActionId": {},
+          "ExecuteToken": {
+            "idempotencyToken": true
+          },
+          "AcceptLanguage": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "RecordDetail": {
+            "shape": "S5v"
           }
         }
       }
@@ -120178,7 +120359,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PortfolioDetails": {
-            "shape": "S5z"
+            "shape": "S6t"
           },
           "NextPageToken": {}
         }
@@ -120206,7 +120387,7 @@ module.exports={
           "ConstraintDetails": {
             "type": "list",
             "member": {
-              "shape": "Sv"
+              "shape": "S17"
             }
           },
           "NextPageToken": {}
@@ -120238,10 +120419,10 @@ module.exports={
               "members": {
                 "Id": {},
                 "ConstraintSummaries": {
-                  "shape": "S4w"
+                  "shape": "S5k"
                 },
                 "Tags": {
-                  "shape": "S1a"
+                  "shape": "S1m"
                 },
                 "Name": {}
               }
@@ -120288,7 +120469,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PortfolioDetails": {
-            "shape": "S5z"
+            "shape": "S6t"
           },
           "NextPageToken": {}
         }
@@ -120313,7 +120494,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PortfolioDetails": {
-            "shape": "S5z"
+            "shape": "S6t"
           },
           "NextPageToken": {}
         }
@@ -120362,7 +120543,7 @@ module.exports={
           },
           "PageToken": {},
           "AccessLevelFilter": {
-            "shape": "S6k"
+            "shape": "S7e"
           }
         }
       },
@@ -120404,7 +120585,43 @@ module.exports={
           "ProvisioningArtifactDetails": {
             "type": "list",
             "member": {
-              "shape": "S1x"
+              "shape": "S29"
+            }
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListProvisioningArtifactsForServiceAction": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceActionId"
+        ],
+        "members": {
+          "ServiceActionId": {},
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageToken": {},
+          "AcceptLanguage": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProvisioningArtifactViews": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "ProductViewSummary": {
+                  "shape": "S25"
+                },
+                "ProvisioningArtifact": {
+                  "shape": "S3y"
+                }
+              }
             }
           },
           "NextPageToken": {}
@@ -120417,7 +120634,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "AccessLevelFilter": {
-            "shape": "S6k"
+            "shape": "S7e"
           },
           "SearchFilter": {
             "type": "structure",
@@ -120438,7 +120655,7 @@ module.exports={
           "RecordDetails": {
             "type": "list",
             "member": {
-              "shape": "S57"
+              "shape": "S5v"
             }
           },
           "NextPageToken": {}
@@ -120482,6 +120699,54 @@ module.exports={
         }
       }
     },
+    "ListServiceActions": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "AcceptLanguage": {},
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ServiceActionSummaries": {
+            "shape": "S89"
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListServiceActionsForProvisioningArtifact": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProductId",
+          "ProvisioningArtifactId"
+        ],
+        "members": {
+          "ProductId": {},
+          "ProvisioningArtifactId": {},
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageToken": {},
+          "AcceptLanguage": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ServiceActionSummaries": {
+            "shape": "S89"
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
     "ListTagOptions": {
       "input": {
         "type": "structure",
@@ -120506,7 +120771,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TagOptionDetails": {
-            "shape": "S36"
+            "shape": "S3u"
           },
           "PageToken": {}
         }
@@ -120538,10 +120803,10 @@ module.exports={
             }
           },
           "Tags": {
-            "shape": "S1a"
+            "shape": "S1m"
           },
           "NotificationArns": {
-            "shape": "S22"
+            "shape": "S2e"
           },
           "ProvisionToken": {
             "idempotencyToken": true
@@ -120552,7 +120817,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S57"
+            "shape": "S5v"
           }
         }
       }
@@ -120579,7 +120844,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "AccessLevelFilter": {
-            "shape": "S6k"
+            "shape": "S7e"
           },
           "PageSize": {
             "type": "integer"
@@ -120593,7 +120858,7 @@ module.exports={
           "ProvisionedProducts": {
             "type": "list",
             "member": {
-              "shape": "S3k"
+              "shape": "S48"
             }
           },
           "NextPageToken": {}
@@ -120606,7 +120871,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "Filters": {
-            "shape": "S7m"
+            "shape": "S8p"
           },
           "PageSize": {
             "type": "integer"
@@ -120622,7 +120887,7 @@ module.exports={
           "ProductViewSummaries": {
             "type": "list",
             "member": {
-              "shape": "S1t"
+              "shape": "S25"
             }
           },
           "ProductViewAggregations": {
@@ -120652,7 +120917,7 @@ module.exports={
           "AcceptLanguage": {},
           "PortfolioId": {},
           "Filters": {
-            "shape": "S7m"
+            "shape": "S8p"
           },
           "SortBy": {},
           "SortOrder": {},
@@ -120669,7 +120934,7 @@ module.exports={
           "ProductViewDetails": {
             "type": "list",
             "member": {
-              "shape": "S1s"
+              "shape": "S24"
             }
           },
           "NextPageToken": {}
@@ -120682,7 +120947,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "AccessLevelFilter": {
-            "shape": "S6k"
+            "shape": "S7e"
           },
           "Filters": {
             "type": "map",
@@ -120720,7 +120985,7 @@ module.exports={
                 "IdempotencyToken": {},
                 "LastRecordId": {},
                 "Tags": {
-                  "shape": "S1a"
+                  "shape": "S1m"
                 },
                 "PhysicalId": {},
                 "ProductId": {},
@@ -120759,7 +121024,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S57"
+            "shape": "S5v"
           }
         }
       }
@@ -120780,7 +121045,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ConstraintDetail": {
-            "shape": "Sv"
+            "shape": "S17"
           },
           "ConstraintParameters": {},
           "Status": {}
@@ -120800,10 +121065,10 @@ module.exports={
           "Description": {},
           "ProviderName": {},
           "AddTags": {
-            "shape": "S12"
+            "shape": "S1e"
           },
           "RemoveTags": {
-            "shape": "S8n"
+            "shape": "S9q"
           }
         }
       },
@@ -120811,10 +121076,10 @@ module.exports={
         "type": "structure",
         "members": {
           "PortfolioDetail": {
-            "shape": "S17"
+            "shape": "S1j"
           },
           "Tags": {
-            "shape": "S1a"
+            "shape": "S1m"
           }
         }
       }
@@ -120836,10 +121101,10 @@ module.exports={
           "SupportEmail": {},
           "SupportUrl": {},
           "AddTags": {
-            "shape": "S12"
+            "shape": "S1e"
           },
           "RemoveTags": {
-            "shape": "S8n"
+            "shape": "S9q"
           }
         }
       },
@@ -120847,10 +121112,10 @@ module.exports={
         "type": "structure",
         "members": {
           "ProductViewDetail": {
-            "shape": "S1s"
+            "shape": "S24"
           },
           "Tags": {
-            "shape": "S1a"
+            "shape": "S1m"
           }
         }
       }
@@ -120869,7 +121134,7 @@ module.exports={
           "ProvisioningArtifactId": {},
           "PathId": {},
           "ProvisioningParameters": {
-            "shape": "S25"
+            "shape": "S2h"
           },
           "UpdateToken": {
             "idempotencyToken": true
@@ -120880,7 +121145,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S57"
+            "shape": "S5v"
           }
         }
       }
@@ -120907,12 +121172,37 @@ module.exports={
         "type": "structure",
         "members": {
           "ProvisioningArtifactDetail": {
-            "shape": "S1x"
+            "shape": "S29"
           },
           "Info": {
-            "shape": "S1n"
+            "shape": "S1z"
           },
           "Status": {}
+        }
+      }
+    },
+    "UpdateServiceAction": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {},
+          "Name": {},
+          "Definition": {
+            "shape": "S2s"
+          },
+          "Description": {},
+          "AcceptLanguage": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ServiceActionDetail": {
+            "shape": "S2x"
+          }
         }
       }
     },
@@ -120934,14 +121224,43 @@ module.exports={
         "type": "structure",
         "members": {
           "TagOptionDetail": {
-            "shape": "S2h"
+            "shape": "S33"
           }
         }
       }
     }
   },
   "shapes": {
-    "Sv": {
+    "Si": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "ServiceActionId",
+          "ProductId",
+          "ProvisioningArtifactId"
+        ],
+        "members": {
+          "ServiceActionId": {},
+          "ProductId": {},
+          "ProvisioningArtifactId": {}
+        }
+      }
+    },
+    "Sl": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "ServiceActionId": {},
+          "ProductId": {},
+          "ProvisioningArtifactId": {},
+          "ErrorCode": {},
+          "ErrorMessage": {}
+        }
+      }
+    },
+    "S17": {
       "type": "structure",
       "members": {
         "ConstraintId": {},
@@ -120950,13 +121269,13 @@ module.exports={
         "Owner": {}
       }
     },
-    "S12": {
+    "S1e": {
       "type": "list",
       "member": {
-        "shape": "S13"
+        "shape": "S1f"
       }
     },
-    "S13": {
+    "S1f": {
       "type": "structure",
       "required": [
         "Key",
@@ -120967,7 +121286,7 @@ module.exports={
         "Value": {}
       }
     },
-    "S17": {
+    "S1j": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -120980,13 +121299,13 @@ module.exports={
         "ProviderName": {}
       }
     },
-    "S1a": {
+    "S1m": {
       "type": "list",
       "member": {
-        "shape": "S13"
+        "shape": "S1f"
       }
     },
-    "S1k": {
+    "S1w": {
       "type": "structure",
       "required": [
         "Info"
@@ -120995,21 +121314,21 @@ module.exports={
         "Name": {},
         "Description": {},
         "Info": {
-          "shape": "S1n"
+          "shape": "S1z"
         },
         "Type": {}
       }
     },
-    "S1n": {
+    "S1z": {
       "type": "map",
       "key": {},
       "value": {}
     },
-    "S1s": {
+    "S24": {
       "type": "structure",
       "members": {
         "ProductViewSummary": {
-          "shape": "S1t"
+          "shape": "S25"
         },
         "Status": {},
         "ProductARN": {},
@@ -121018,7 +121337,7 @@ module.exports={
         }
       }
     },
-    "S1t": {
+    "S25": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -121036,7 +121355,7 @@ module.exports={
         "SupportUrl": {}
       }
     },
-    "S1x": {
+    "S29": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -121051,11 +121370,11 @@ module.exports={
         }
       }
     },
-    "S22": {
+    "S2e": {
       "type": "list",
       "member": {}
     },
-    "S25": {
+    "S2h": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -121068,7 +121387,32 @@ module.exports={
         }
       }
     },
-    "S2h": {
+    "S2s": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S2x": {
+      "type": "structure",
+      "members": {
+        "ServiceActionSummary": {
+          "shape": "S2y"
+        },
+        "Definition": {
+          "shape": "S2s"
+        }
+      }
+    },
+    "S2y": {
+      "type": "structure",
+      "members": {
+        "Id": {},
+        "Name": {},
+        "Description": {},
+        "DefinitionType": {}
+      }
+    },
+    "S33": {
       "type": "structure",
       "members": {
         "Key": {},
@@ -121079,27 +121423,30 @@ module.exports={
         "Id": {}
       }
     },
-    "S36": {
+    "S3u": {
       "type": "list",
       "member": {
-        "shape": "S2h"
+        "shape": "S33"
       }
     },
-    "S39": {
+    "S3x": {
       "type": "list",
       "member": {
-        "type": "structure",
-        "members": {
-          "Id": {},
-          "Name": {},
-          "Description": {},
-          "CreatedTime": {
-            "type": "timestamp"
-          }
+        "shape": "S3y"
+      }
+    },
+    "S3y": {
+      "type": "structure",
+      "members": {
+        "Id": {},
+        "Name": {},
+        "Description": {},
+        "CreatedTime": {
+          "type": "timestamp"
         }
       }
     },
-    "S3k": {
+    "S48": {
       "type": "structure",
       "members": {
         "Name": {},
@@ -121112,10 +121459,12 @@ module.exports={
           "type": "timestamp"
         },
         "IdempotencyToken": {},
-        "LastRecordId": {}
+        "LastRecordId": {},
+        "ProductId": {},
+        "ProvisioningArtifactId": {}
       }
     },
-    "S4w": {
+    "S5k": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -121125,7 +121474,7 @@ module.exports={
         }
       }
     },
-    "S57": {
+    "S5v": {
       "type": "structure",
       "members": {
         "RecordId": {},
@@ -121165,20 +121514,26 @@ module.exports={
         }
       }
     },
-    "S5z": {
+    "S6t": {
       "type": "list",
       "member": {
-        "shape": "S17"
+        "shape": "S1j"
       }
     },
-    "S6k": {
+    "S7e": {
       "type": "structure",
       "members": {
         "Key": {},
         "Value": {}
       }
     },
-    "S7m": {
+    "S89": {
+      "type": "list",
+      "member": {
+        "shape": "S2y"
+      }
+    },
+    "S8p": {
       "type": "map",
       "key": {},
       "value": {
@@ -121186,7 +121541,7 @@ module.exports={
         "member": {}
       }
     },
-    "S8n": {
+    "S9q": {
       "type": "list",
       "member": {}
     }
@@ -121225,9 +121580,24 @@ module.exports={
       "output_token": "NextPageToken",
       "limit_key": "PageSize"
     },
+    "ListProvisioningArtifactsForServiceAction": {
+      "input_token": "PageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "PageSize"
+    },
     "ListResourcesForTagOption": {
       "input_token": "PageToken",
       "output_token": "PageToken",
+      "limit_key": "PageSize"
+    },
+    "ListServiceActions": {
+      "input_token": "PageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "PageSize"
+    },
+    "ListServiceActionsForProvisioningArtifact": {
+      "input_token": "PageToken",
+      "output_token": "NextPageToken",
       "limit_key": "PageSize"
     },
     "ListTagOptions": {
@@ -137465,7 +137835,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.334.0',
+  VERSION: '2.335.0',
 
   /**
    * @api private
@@ -156801,7 +157171,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.334.0
+// AWS SDK for JavaScript v2.335.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

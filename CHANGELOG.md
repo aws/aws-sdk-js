@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.334.0-->
+<!--LATEST=2.335.0-->
 <!--ENTRYINSERT-->
+
+## 2.335.0
+* feature: RDS: This release adds a new parameter to specify the DB instance or cluster parameter group for restore from DB snapshot and restore to point int time operations. For more information, see Amazon RDS Documentation.
+* feature: ServiceCatalog: AWS Service Catalog enables you to reduce administrative maintenance and end-user training while adhering to compliance and security measures. With service actions, you as the administrator can enable end users to perform operational tasks, troubleshoot issues, run approved commands, or request permissions within Service Catalog. Service actions are defined using AWS Systems Manager documents, where you have access to pre-defined actions that implement AWS best practices, such asEC2 stop and reboot, as well as the ability to define custom actions.
 
 ## 2.334.0
 * feature: CloudTrail: The LookupEvents API now supports two new attribute keys: ReadOnly and AccessKeyId

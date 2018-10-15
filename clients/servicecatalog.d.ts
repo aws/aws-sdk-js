@@ -36,6 +36,14 @@ declare class ServiceCatalog extends Service {
    */
   associateProductWithPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateProductWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociateProductWithPortfolioOutput, AWSError>;
   /**
+   * Associates a self-service action with a provisioning artifact.
+   */
+  associateServiceActionWithProvisioningArtifact(params: ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
+  /**
+   * Associates a self-service action with a provisioning artifact.
+   */
+  associateServiceActionWithProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
+  /**
    * Associate the specified TagOption with the specified portfolio or product.
    */
   associateTagOptionWithResource(params: ServiceCatalog.Types.AssociateTagOptionWithResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateTagOptionWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateTagOptionWithResourceOutput, AWSError>;
@@ -43,6 +51,22 @@ declare class ServiceCatalog extends Service {
    * Associate the specified TagOption with the specified portfolio or product.
    */
   associateTagOptionWithResource(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateTagOptionWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateTagOptionWithResourceOutput, AWSError>;
+  /**
+   * Associates multiple self-service actions with provisioning artifacts.
+   */
+  batchAssociateServiceActionWithProvisioningArtifact(params: ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
+  /**
+   * Associates multiple self-service actions with provisioning artifacts.
+   */
+  batchAssociateServiceActionWithProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
+  /**
+   * Disassociates a batch of self-service actions from the specified provisioning artifact.
+   */
+  batchDisassociateServiceActionFromProvisioningArtifact(params: ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
+  /**
+   * Disassociates a batch of self-service actions from the specified provisioning artifact.
+   */
+  batchDisassociateServiceActionFromProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
   /**
    * Copies the specified source product to the specified target product or a new product. You can copy a product to the same account or another account. You can copy a product to the same region or another region. This operation is performed asynchronously. To track the progress of the operation, use DescribeCopyProductStatus.
    */
@@ -100,6 +124,14 @@ declare class ServiceCatalog extends Service {
    */
   createProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
   /**
+   * Creates a self-service action.
+   */
+  createServiceAction(params: ServiceCatalog.Types.CreateServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateServiceActionOutput) => void): Request<ServiceCatalog.Types.CreateServiceActionOutput, AWSError>;
+  /**
+   * Creates a self-service action.
+   */
+  createServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateServiceActionOutput) => void): Request<ServiceCatalog.Types.CreateServiceActionOutput, AWSError>;
+  /**
    * Creates a TagOption.
    */
   createTagOption(params: ServiceCatalog.Types.CreateTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateTagOptionOutput) => void): Request<ServiceCatalog.Types.CreateTagOptionOutput, AWSError>;
@@ -155,6 +187,14 @@ declare class ServiceCatalog extends Service {
    * Deletes the specified provisioning artifact (also known as a version) for the specified product. You cannot delete a provisioning artifact associated with a product that was shared with you. You cannot delete the last provisioning artifact for a product, because a product must have at least one provisioning artifact.
    */
   deleteProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DeleteProvisioningArtifactOutput, AWSError>;
+  /**
+   * Deletes a self-service action.
+   */
+  deleteServiceAction(params: ServiceCatalog.Types.DeleteServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteServiceActionOutput) => void): Request<ServiceCatalog.Types.DeleteServiceActionOutput, AWSError>;
+  /**
+   * Deletes a self-service action.
+   */
+  deleteServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteServiceActionOutput) => void): Request<ServiceCatalog.Types.DeleteServiceActionOutput, AWSError>;
   /**
    * Deletes the specified TagOption. You cannot delete a TagOption if it is associated with a product or portfolio.
    */
@@ -252,6 +292,14 @@ declare class ServiceCatalog extends Service {
    */
   describeRecord(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeRecordOutput) => void): Request<ServiceCatalog.Types.DescribeRecordOutput, AWSError>;
   /**
+   * Describes a self-service action.
+   */
+  describeServiceAction(params: ServiceCatalog.Types.DescribeServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeServiceActionOutput) => void): Request<ServiceCatalog.Types.DescribeServiceActionOutput, AWSError>;
+  /**
+   * Describes a self-service action.
+   */
+  describeServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeServiceActionOutput) => void): Request<ServiceCatalog.Types.DescribeServiceActionOutput, AWSError>;
+  /**
    * Gets information about the specified TagOption.
    */
   describeTagOption(params: ServiceCatalog.Types.DescribeTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeTagOptionOutput) => void): Request<ServiceCatalog.Types.DescribeTagOptionOutput, AWSError>;
@@ -276,6 +324,14 @@ declare class ServiceCatalog extends Service {
    */
   disassociateProductFromPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateProductFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociateProductFromPortfolioOutput, AWSError>;
   /**
+   * Disassociates the specified self-service action association from the specified provisioning artifact.
+   */
+  disassociateServiceActionFromProvisioningArtifact(params: ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
+  /**
+   * Disassociates the specified self-service action association from the specified provisioning artifact.
+   */
+  disassociateServiceActionFromProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
+  /**
    * Disassociates the specified TagOption from the specified resource.
    */
   disassociateTagOptionFromResource(params: ServiceCatalog.Types.DisassociateTagOptionFromResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput, AWSError>;
@@ -291,6 +347,14 @@ declare class ServiceCatalog extends Service {
    * Provisions or modifies a product based on the resource changes for the specified plan.
    */
   executeProvisionedProductPlan(callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput, AWSError>;
+  /**
+   * Executes a self-service action against a provisioned product.
+   */
+  executeProvisionedProductServiceAction(params: ServiceCatalog.Types.ExecuteProvisionedProductServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput, AWSError>;
+  /**
+   * Executes a self-service action against a provisioned product.
+   */
+  executeProvisionedProductServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput, AWSError>;
   /**
    * Lists all portfolios for which sharing was accepted by this account.
    */
@@ -364,6 +428,14 @@ declare class ServiceCatalog extends Service {
    */
   listProvisioningArtifacts(callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsOutput, AWSError>;
   /**
+   * Lists all provisioning artifacts (also known as versions) for the specified self-service action.
+   */
+  listProvisioningArtifactsForServiceAction(params: ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput, AWSError>;
+  /**
+   * Lists all provisioning artifacts (also known as versions) for the specified self-service action.
+   */
+  listProvisioningArtifactsForServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput, AWSError>;
+  /**
    * Lists the specified requests or all performed requests.
    */
   listRecordHistory(params: ServiceCatalog.Types.ListRecordHistoryInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListRecordHistoryOutput) => void): Request<ServiceCatalog.Types.ListRecordHistoryOutput, AWSError>;
@@ -379,6 +451,22 @@ declare class ServiceCatalog extends Service {
    * Lists the resources associated with the specified TagOption.
    */
   listResourcesForTagOption(callback?: (err: AWSError, data: ServiceCatalog.Types.ListResourcesForTagOptionOutput) => void): Request<ServiceCatalog.Types.ListResourcesForTagOptionOutput, AWSError>;
+  /**
+   * Lists all self-service actions.
+   */
+  listServiceActions(params: ServiceCatalog.Types.ListServiceActionsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsOutput, AWSError>;
+  /**
+   * Lists all self-service actions.
+   */
+  listServiceActions(callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsOutput, AWSError>;
+  /**
+   * Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
+   */
+  listServiceActionsForProvisioningArtifact(params: ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput, AWSError>;
+  /**
+   * Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
+   */
+  listServiceActionsForProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput, AWSError>;
   /**
    * Lists the specified TagOptions or all TagOptions.
    */
@@ -484,6 +572,14 @@ declare class ServiceCatalog extends Service {
    */
   updateProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.UpdateProvisioningArtifactOutput, AWSError>;
   /**
+   * Updates a self-service action.
+   */
+  updateServiceAction(params: ServiceCatalog.Types.UpdateServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateServiceActionOutput) => void): Request<ServiceCatalog.Types.UpdateServiceActionOutput, AWSError>;
+  /**
+   * Updates a self-service action.
+   */
+  updateServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateServiceActionOutput) => void): Request<ServiceCatalog.Types.UpdateServiceActionOutput, AWSError>;
+  /**
    * Updates the specified TagOption.
    */
   updateTagOption(params: ServiceCatalog.Types.UpdateTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateTagOptionOutput) => void): Request<ServiceCatalog.Types.UpdateTagOptionOutput, AWSError>;
@@ -564,6 +660,26 @@ declare namespace ServiceCatalog {
   }
   export interface AssociateProductWithPortfolioOutput {
   }
+  export interface AssociateServiceActionWithProvisioningArtifactInput {
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId: Id;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface AssociateServiceActionWithProvisioningArtifactOutput {
+  }
   export interface AssociateTagOptionWithResourceInput {
     /**
      * The resource identifier.
@@ -577,6 +693,38 @@ declare namespace ServiceCatalog {
   export interface AssociateTagOptionWithResourceOutput {
   }
   export type AttributeValue = string;
+  export interface BatchAssociateServiceActionWithProvisioningArtifactInput {
+    /**
+     * One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.
+     */
+    ServiceActionAssociations: ServiceActionAssociations;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface BatchAssociateServiceActionWithProvisioningArtifactOutput {
+    /**
+     * An object that contains a list of errors, along with information to help you identify the self-service action.
+     */
+    FailedServiceActionAssociations?: FailedServiceActionAssociations;
+  }
+  export interface BatchDisassociateServiceActionFromProvisioningArtifactInput {
+    /**
+     * One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.
+     */
+    ServiceActionAssociations: ServiceActionAssociations;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface BatchDisassociateServiceActionFromProvisioningArtifactOutput {
+    /**
+     * An object that contains a list of errors, along with information to help you identify the self-service action.
+     */
+    FailedServiceActionAssociations?: FailedServiceActionAssociations;
+  }
   export type CausingEntity = string;
   export type ChangeAction = "ADD"|"MODIFY"|"REMOVE"|string;
   export interface CloudWatchDashboard {
@@ -919,6 +1067,38 @@ declare namespace ServiceCatalog {
      */
     Status?: Status;
   }
+  export interface CreateServiceActionInput {
+    /**
+     * The self-service action name.
+     */
+    Name: ServiceActionName;
+    /**
+     * The service action definition type. For example, SSM_AUTOMATION.
+     */
+    DefinitionType: ServiceActionDefinitionType;
+    /**
+     * The self-service action definition. Can be one of the following:  Name  The name of the AWS Systems Manager Document. For example, AWS-RestartEC2Instance.  Version  The AWS Systems Manager automation document version. For example, "Version": "1"   AssumeRole  The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, "AssumeRole": "arn:aws:iam::12345678910:role/ActionRole". To reuse the provisioned product launch role, set to "AssumeRole": "LAUNCH_ROLE".  Parameters  The list of parameters in JSON format. For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}].  
+     */
+    Definition: ServiceActionDefinitionMap;
+    /**
+     * The self-service action description.
+     */
+    Description?: ServiceActionDescription;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface CreateServiceActionOutput {
+    /**
+     * An object containing information about the self-service action.
+     */
+    ServiceActionDetail?: ServiceActionDetail;
+  }
   export interface CreateTagOptionInput {
     /**
      * The TagOption key.
@@ -1021,6 +1201,18 @@ declare namespace ServiceCatalog {
     ProvisioningArtifactId: Id;
   }
   export interface DeleteProvisioningArtifactOutput {
+  }
+  export interface DeleteServiceActionInput {
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    Id: Id;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface DeleteServiceActionOutput {
   }
   export interface DeleteTagOptionInput {
     /**
@@ -1322,6 +1514,22 @@ declare namespace ServiceCatalog {
      */
     NextPageToken?: PageToken;
   }
+  export interface DescribeServiceActionInput {
+    /**
+     * The self-service action identifier.
+     */
+    Id: Id;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface DescribeServiceActionOutput {
+    /**
+     * Detailed information about the self-service action.
+     */
+    ServiceActionDetail?: ServiceActionDetail;
+  }
   export interface DescribeTagOptionInput {
     /**
      * The TagOption identifier.
@@ -1367,6 +1575,26 @@ declare namespace ServiceCatalog {
   }
   export interface DisassociateProductFromPortfolioOutput {
   }
+  export interface DisassociateServiceActionFromProvisioningArtifactInput {
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId: Id;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface DisassociateServiceActionFromProvisioningArtifactOutput {
+  }
   export interface DisassociateTagOptionFromResourceInput {
     /**
      * The resource identifier.
@@ -1402,6 +1630,53 @@ declare namespace ServiceCatalog {
      */
     RecordDetail?: RecordDetail;
   }
+  export interface ExecuteProvisionedProductServiceActionInput {
+    /**
+     * The identifier of the provisioned product.
+     */
+    ProvisionedProductId: Id;
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId: Id;
+    /**
+     * An idempotency token that uniquely identifies the execute request.
+     */
+    ExecuteToken: IdempotencyToken;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface ExecuteProvisionedProductServiceActionOutput {
+    /**
+     * An object containing detailed information about the result of provisioning the product.
+     */
+    RecordDetail?: RecordDetail;
+  }
+  export interface FailedServiceActionAssociation {
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId?: Id;
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId?: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId?: Id;
+    /**
+     * The error code. Valid values are listed below.
+     */
+    ErrorCode?: ServiceActionAssociationErrorCode;
+    /**
+     * A text description of the error.
+     */
+    ErrorMessage?: ServiceActionAssociationErrorMessage;
+  }
+  export type FailedServiceActionAssociations = FailedServiceActionAssociation[];
   export type HasDefaultPath = boolean;
   export type Id = string;
   export type IdempotencyToken = string;
@@ -1648,6 +1923,34 @@ declare namespace ServiceCatalog {
      */
     NextPageToken?: PageToken;
   }
+  export interface ListProvisioningArtifactsForServiceActionInput {
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId: Id;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface ListProvisioningArtifactsForServiceActionOutput {
+    /**
+     * An array of objects with information about product views and provisioning artifacts.
+     */
+    ProvisioningArtifactViews?: ProvisioningArtifactViews;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
   export interface ListProvisioningArtifactsInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -1737,6 +2040,62 @@ declare namespace ServiceCatalog {
      * The page token for the next set of results. To retrieve the first set of results, use null.
      */
     PageToken?: PageToken;
+  }
+  export interface ListServiceActionsForProvisioningArtifactInput {
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface ListServiceActionsForProvisioningArtifactOutput {
+    /**
+     * An object containing information about the self-service actions associated with the provisioning artifact.
+     */
+    ServiceActionSummaries?: ServiceActionSummaries;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export interface ListServiceActionsInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+  }
+  export interface ListServiceActionsOutput {
+    /**
+     * An object containing information about the service actions associated with the provisioning artifact.
+     */
+    ServiceActionSummaries?: ServiceActionSummaries;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
   }
   export interface ListTagOptionsFilters {
     /**
@@ -2077,6 +2436,14 @@ declare namespace ServiceCatalog {
      * The record identifier of the last request performed on this provisioned product.
      */
     LastRecordId?: LastRequestId;
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId?: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId?: Id;
   }
   export type ProvisionedProductDetails = ProvisionedProductDetail[];
   export type ProvisionedProductFilters = {[key: string]: ProvisionedProductViewFilterValues};
@@ -2304,6 +2671,17 @@ declare namespace ServiceCatalog {
     ProvisioningArtifactMetadata?: ProvisioningArtifactInfo;
   }
   export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR"|string;
+  export interface ProvisioningArtifactView {
+    /**
+     * Summary information about a product view.
+     */
+    ProductViewSummary?: ProductViewSummary;
+    /**
+     * Information about a provisioning artifact. A provisioning artifact is also known as a product version.
+     */
+    ProvisioningArtifact?: ProvisioningArtifact;
+  }
+  export type ProvisioningArtifactViews = ProvisioningArtifactView[];
   export type ProvisioningArtifacts = ProvisioningArtifact[];
   export interface ProvisioningParameter {
     /**
@@ -2678,6 +3056,58 @@ declare namespace ServiceCatalog {
     NextPageToken?: PageToken;
   }
   export type SearchProvisionedProductsPageSize = number;
+  export interface ServiceActionAssociation {
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId: Id;
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId: Id;
+  }
+  export type ServiceActionAssociationErrorCode = "DUPLICATE_RESOURCE"|"INTERNAL_FAILURE"|"LIMIT_EXCEEDED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|string;
+  export type ServiceActionAssociationErrorMessage = string;
+  export type ServiceActionAssociations = ServiceActionAssociation[];
+  export type ServiceActionDefinitionKey = "Name"|"Version"|"AssumeRole"|"Parameters"|string;
+  export type ServiceActionDefinitionMap = {[key: string]: ServiceActionDefinitionValue};
+  export type ServiceActionDefinitionType = "SSM_AUTOMATION"|string;
+  export type ServiceActionDefinitionValue = string;
+  export type ServiceActionDescription = string;
+  export interface ServiceActionDetail {
+    /**
+     * Summary information about the self-service action.
+     */
+    ServiceActionSummary?: ServiceActionSummary;
+    /**
+     * A map that defines the self-service action.
+     */
+    Definition?: ServiceActionDefinitionMap;
+  }
+  export type ServiceActionName = string;
+  export type ServiceActionSummaries = ServiceActionSummary[];
+  export interface ServiceActionSummary {
+    /**
+     * The self-service action identifier.
+     */
+    Id?: Id;
+    /**
+     * The self-service action name.
+     */
+    Name?: ServiceActionName;
+    /**
+     * The self-service action description.
+     */
+    Description?: ServiceActionDescription;
+    /**
+     * The self-service action definition type. For example, SSM_AUTOMATION.
+     */
+    DefinitionType?: ServiceActionDefinitionType;
+  }
   export type SortField = string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type SourceProvisioningArtifactProperties = SourceProvisioningArtifactPropertiesMap[];
@@ -2985,6 +3415,34 @@ declare namespace ServiceCatalog {
     UsePreviousValue?: UsePreviousValue;
   }
   export type UpdateProvisioningParameters = UpdateProvisioningParameter[];
+  export interface UpdateServiceActionInput {
+    /**
+     * The self-service action identifier.
+     */
+    Id: Id;
+    /**
+     * The self-service action name.
+     */
+    Name?: ServiceActionName;
+    /**
+     * A map that defines the self-service action.
+     */
+    Definition?: ServiceActionDefinitionMap;
+    /**
+     * The self-service action description.
+     */
+    Description?: ServiceActionDescription;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface UpdateServiceActionOutput {
+    /**
+     * Detailed information about the self-service action.
+     */
+    ServiceActionDetail?: ServiceActionDetail;
+  }
   export interface UpdateTagOptionInput {
     /**
      * The TagOption identifier.
