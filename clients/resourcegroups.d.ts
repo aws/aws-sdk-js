@@ -209,6 +209,31 @@ declare namespace ResourceGroups {
   }
   export type GroupArn = string;
   export type GroupDescription = string;
+  export interface GroupFilter {
+    /**
+     * The name of the filter. Filter names are case-sensitive.
+     */
+    Name: GroupFilterName;
+    /**
+     * One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.
+     */
+    Values: GroupFilterValues;
+  }
+  export type GroupFilterList = GroupFilter[];
+  export type GroupFilterName = "resource-type"|string;
+  export type GroupFilterValue = string;
+  export type GroupFilterValues = GroupFilterValue[];
+  export interface GroupIdentifier {
+    /**
+     * The name of a resource group.
+     */
+    GroupName?: GroupName;
+    /**
+     * The ARN of a resource group.
+     */
+    GroupArn?: GroupArn;
+  }
+  export type GroupIdentifierList = GroupIdentifier[];
   export type GroupList = Group[];
   export type GroupName = string;
   export interface GroupQuery {
@@ -251,6 +276,10 @@ declare namespace ResourceGroups {
   }
   export interface ListGroupsInput {
     /**
+     * Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.    group-type - Filter groups by resource type. Specify up to five group types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.  
+     */
+    Filters?: GroupFilterList;
+    /**
      * The maximum number of resource group results that are returned by ListGroups in paginated output. By default, this number is 50.
      */
     MaxResults?: MaxResults;
@@ -260,6 +289,10 @@ declare namespace ResourceGroups {
     NextToken?: NextToken;
   }
   export interface ListGroupsOutput {
+    /**
+     * A list of GroupIdentifier objects. Each identifier is an object that contains both the GroupName and the GroupArn.
+     */
+    GroupIdentifiers?: GroupIdentifierList;
     /**
      * A list of resource groups.
      */

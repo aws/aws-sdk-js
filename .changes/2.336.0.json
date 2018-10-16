@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "New Glue APIs for creating, updating, reading and deleting Data Catalog resource-based policies."
+    },
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "Adds support for Lightsail managed databases."
+    },
+    {
+        "type": "feature",
+        "category": "ResourceGroups",
+        "description": "AWS Resource Groups service added a new feature to filter resource groups by resource-type when using the ListGroups operation."
+    }
+]

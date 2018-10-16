@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.335.0',
+	  VERSION: '2.336.0',
 
 	  /**
 	   * @api private
@@ -3538,9 +3538,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return this;
 	  },
 
-	  /**
-	   * @api private
-	   */
 	  onAsync: function onAsync(eventName, listener, toHead) {
 	    listener._isAsync = true;
 	    return this.on(eventName, listener, toHead);

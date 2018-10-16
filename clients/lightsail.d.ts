@@ -108,11 +108,11 @@ declare class Lightsail extends Service {
    */
   createInstanceSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateInstanceSnapshotResult) => void): Request<Lightsail.Types.CreateInstanceSnapshotResult, AWSError>;
   /**
-   * Creates one or more Amazon Lightsail virtual private servers, or instances.
+   * Creates one or more Amazon Lightsail virtual private servers, or instances. Create instances using active blueprints. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. Use the get blueprints operation to return a list of available blueprints.
    */
   createInstances(params: Lightsail.Types.CreateInstancesRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesResult) => void): Request<Lightsail.Types.CreateInstancesResult, AWSError>;
   /**
-   * Creates one or more Amazon Lightsail virtual private servers, or instances.
+   * Creates one or more Amazon Lightsail virtual private servers, or instances. Create instances using active blueprints. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. Use the get blueprints operation to return a list of available blueprints.
    */
   createInstances(callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesResult) => void): Request<Lightsail.Types.CreateInstancesResult, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class Lightsail extends Service {
    */
   createInstancesFromSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesFromSnapshotResult) => void): Request<Lightsail.Types.CreateInstancesFromSnapshotResult, AWSError>;
   /**
-   * Creates sn SSH key pair.
+   * Creates an SSH key pair.
    */
   createKeyPair(params: Lightsail.Types.CreateKeyPairRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateKeyPairResult) => void): Request<Lightsail.Types.CreateKeyPairResult, AWSError>;
   /**
-   * Creates sn SSH key pair.
+   * Creates an SSH key pair.
    */
   createKeyPair(callback?: (err: AWSError, data: Lightsail.Types.CreateKeyPairResult) => void): Request<Lightsail.Types.CreateKeyPairResult, AWSError>;
   /**
@@ -147,6 +147,30 @@ declare class Lightsail extends Service {
    * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL).
    */
   createLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.CreateLoadBalancerTlsCertificateResult, AWSError>;
+  /**
+   * Creates a new database in Amazon Lightsail.
+   */
+  createRelationalDatabase(params: Lightsail.Types.CreateRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseResult, AWSError>;
+  /**
+   * Creates a new database in Amazon Lightsail.
+   */
+  createRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseResult, AWSError>;
+  /**
+   * Creates a new database from an existing database snapshot in Amazon Lightsail. You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan.
+   */
+  createRelationalDatabaseFromSnapshot(params: Lightsail.Types.CreateRelationalDatabaseFromSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseFromSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseFromSnapshotResult, AWSError>;
+  /**
+   * Creates a new database from an existing database snapshot in Amazon Lightsail. You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan.
+   */
+  createRelationalDatabaseFromSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseFromSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseFromSnapshotResult, AWSError>;
+  /**
+   * Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database.
+   */
+  createRelationalDatabaseSnapshot(params: Lightsail.Types.CreateRelationalDatabaseSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseSnapshotResult, AWSError>;
+  /**
+   * Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database.
+   */
+  createRelationalDatabaseSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseSnapshotResult, AWSError>;
   /**
    * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes. 
    */
@@ -219,6 +243,22 @@ declare class Lightsail extends Service {
    * Deletes an SSL/TLS certificate associated with a Lightsail load balancer.
    */
   deleteLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.DeleteLoadBalancerTlsCertificateResult, AWSError>;
+  /**
+   * Deletes a database in Amazon Lightsail.
+   */
+  deleteRelationalDatabase(params: Lightsail.Types.DeleteRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteRelationalDatabaseResult) => void): Request<Lightsail.Types.DeleteRelationalDatabaseResult, AWSError>;
+  /**
+   * Deletes a database in Amazon Lightsail.
+   */
+  deleteRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.DeleteRelationalDatabaseResult) => void): Request<Lightsail.Types.DeleteRelationalDatabaseResult, AWSError>;
+  /**
+   * Deletes a database snapshot in Amazon Lightsail.
+   */
+  deleteRelationalDatabaseSnapshot(params: Lightsail.Types.DeleteRelationalDatabaseSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.DeleteRelationalDatabaseSnapshotResult, AWSError>;
+  /**
+   * Deletes a database snapshot in Amazon Lightsail.
+   */
+  deleteRelationalDatabaseSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.DeleteRelationalDatabaseSnapshotResult, AWSError>;
   /**
    * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.
    */
@@ -460,13 +500,109 @@ declare class Lightsail extends Service {
    */
   getOperationsForResource(callback?: (err: AWSError, data: Lightsail.Types.GetOperationsForResourceResult) => void): Request<Lightsail.Types.GetOperationsForResourceResult, AWSError>;
   /**
-   * Returns a list of all valid regions for Amazon Lightsail. Use the include availability zones parameter to also return the availability zones in a region.
+   * Returns a list of all valid regions for Amazon Lightsail. Use the include availability zones parameter to also return the Availability Zones in a region.
    */
   getRegions(params: Lightsail.Types.GetRegionsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRegionsResult) => void): Request<Lightsail.Types.GetRegionsResult, AWSError>;
   /**
-   * Returns a list of all valid regions for Amazon Lightsail. Use the include availability zones parameter to also return the availability zones in a region.
+   * Returns a list of all valid regions for Amazon Lightsail. Use the include availability zones parameter to also return the Availability Zones in a region.
    */
   getRegions(callback?: (err: AWSError, data: Lightsail.Types.GetRegionsResult) => void): Request<Lightsail.Types.GetRegionsResult, AWSError>;
+  /**
+   * Returns information about a specific database in Amazon Lightsail.
+   */
+  getRelationalDatabase(params: Lightsail.Types.GetRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseResult) => void): Request<Lightsail.Types.GetRelationalDatabaseResult, AWSError>;
+  /**
+   * Returns information about a specific database in Amazon Lightsail.
+   */
+  getRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseResult) => void): Request<Lightsail.Types.GetRelationalDatabaseResult, AWSError>;
+  /**
+   * Returns a list of available database blueprints in Amazon Lightsail. A blueprint describes the major engine version of a database. You can use a blueprint ID to create a new database that runs a specific database engine.
+   */
+  getRelationalDatabaseBlueprints(params: Lightsail.Types.GetRelationalDatabaseBlueprintsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseBlueprintsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseBlueprintsResult, AWSError>;
+  /**
+   * Returns a list of available database blueprints in Amazon Lightsail. A blueprint describes the major engine version of a database. You can use a blueprint ID to create a new database that runs a specific database engine.
+   */
+  getRelationalDatabaseBlueprints(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseBlueprintsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseBlueprintsResult, AWSError>;
+  /**
+   * Returns the list of bundles that are available in Amazon Lightsail. A bundle describes the performance specifications for a database. You can use a bundle ID to create a new database with explicit performance specifications.
+   */
+  getRelationalDatabaseBundles(params: Lightsail.Types.GetRelationalDatabaseBundlesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseBundlesResult) => void): Request<Lightsail.Types.GetRelationalDatabaseBundlesResult, AWSError>;
+  /**
+   * Returns the list of bundles that are available in Amazon Lightsail. A bundle describes the performance specifications for a database. You can use a bundle ID to create a new database with explicit performance specifications.
+   */
+  getRelationalDatabaseBundles(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseBundlesResult) => void): Request<Lightsail.Types.GetRelationalDatabaseBundlesResult, AWSError>;
+  /**
+   * Returns a list of events for a specific database in Amazon Lightsail.
+   */
+  getRelationalDatabaseEvents(params: Lightsail.Types.GetRelationalDatabaseEventsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseEventsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseEventsResult, AWSError>;
+  /**
+   * Returns a list of events for a specific database in Amazon Lightsail.
+   */
+  getRelationalDatabaseEvents(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseEventsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseEventsResult, AWSError>;
+  /**
+   * Returns a list of log events for a database in Amazon Lightsail.
+   */
+  getRelationalDatabaseLogEvents(params: Lightsail.Types.GetRelationalDatabaseLogEventsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseLogEventsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseLogEventsResult, AWSError>;
+  /**
+   * Returns a list of log events for a database in Amazon Lightsail.
+   */
+  getRelationalDatabaseLogEvents(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseLogEventsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseLogEventsResult, AWSError>;
+  /**
+   * Returns a list of available log streams for a specific database in Amazon Lightsail.
+   */
+  getRelationalDatabaseLogStreams(params: Lightsail.Types.GetRelationalDatabaseLogStreamsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseLogStreamsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseLogStreamsResult, AWSError>;
+  /**
+   * Returns a list of available log streams for a specific database in Amazon Lightsail.
+   */
+  getRelationalDatabaseLogStreams(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseLogStreamsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseLogStreamsResult, AWSError>;
+  /**
+   * Returns the current, previous, or pending versions of the master user password for a Lightsail database.
+   */
+  getRelationalDatabaseMasterUserPassword(params: Lightsail.Types.GetRelationalDatabaseMasterUserPasswordRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseMasterUserPasswordResult) => void): Request<Lightsail.Types.GetRelationalDatabaseMasterUserPasswordResult, AWSError>;
+  /**
+   * Returns the current, previous, or pending versions of the master user password for a Lightsail database.
+   */
+  getRelationalDatabaseMasterUserPassword(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseMasterUserPasswordResult) => void): Request<Lightsail.Types.GetRelationalDatabaseMasterUserPasswordResult, AWSError>;
+  /**
+   * Returns the data points of the specified metric for a database in Amazon Lightsail.
+   */
+  getRelationalDatabaseMetricData(params: Lightsail.Types.GetRelationalDatabaseMetricDataRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseMetricDataResult) => void): Request<Lightsail.Types.GetRelationalDatabaseMetricDataResult, AWSError>;
+  /**
+   * Returns the data points of the specified metric for a database in Amazon Lightsail.
+   */
+  getRelationalDatabaseMetricData(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseMetricDataResult) => void): Request<Lightsail.Types.GetRelationalDatabaseMetricDataResult, AWSError>;
+  /**
+   * Returns all of the runtime parameters offered by the underlying database software, or engine, for a specific database in Amazon Lightsail. In addition to the parameter names and values, this operation returns other information about each parameter. This information includes whether changes require a reboot, whether the parameter is modifiable, the allowed values, and the data types.
+   */
+  getRelationalDatabaseParameters(params: Lightsail.Types.GetRelationalDatabaseParametersRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseParametersResult) => void): Request<Lightsail.Types.GetRelationalDatabaseParametersResult, AWSError>;
+  /**
+   * Returns all of the runtime parameters offered by the underlying database software, or engine, for a specific database in Amazon Lightsail. In addition to the parameter names and values, this operation returns other information about each parameter. This information includes whether changes require a reboot, whether the parameter is modifiable, the allowed values, and the data types.
+   */
+  getRelationalDatabaseParameters(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseParametersResult) => void): Request<Lightsail.Types.GetRelationalDatabaseParametersResult, AWSError>;
+  /**
+   * Returns information about a specific database snapshot in Amazon Lightsail.
+   */
+  getRelationalDatabaseSnapshot(params: Lightsail.Types.GetRelationalDatabaseSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.GetRelationalDatabaseSnapshotResult, AWSError>;
+  /**
+   * Returns information about a specific database snapshot in Amazon Lightsail.
+   */
+  getRelationalDatabaseSnapshot(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.GetRelationalDatabaseSnapshotResult, AWSError>;
+  /**
+   * Returns information about all of your database snapshots in Amazon Lightsail.
+   */
+  getRelationalDatabaseSnapshots(params: Lightsail.Types.GetRelationalDatabaseSnapshotsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseSnapshotsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseSnapshotsResult, AWSError>;
+  /**
+   * Returns information about all of your database snapshots in Amazon Lightsail.
+   */
+  getRelationalDatabaseSnapshots(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseSnapshotsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseSnapshotsResult, AWSError>;
+  /**
+   * Returns information about all of your databases in Amazon Lightsail.
+   */
+  getRelationalDatabases(params: Lightsail.Types.GetRelationalDatabasesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabasesResult) => void): Request<Lightsail.Types.GetRelationalDatabasesResult, AWSError>;
+  /**
+   * Returns information about all of your databases in Amazon Lightsail.
+   */
+  getRelationalDatabases(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabasesResult) => void): Request<Lightsail.Types.GetRelationalDatabasesResult, AWSError>;
   /**
    * Returns information about a specific static IP.
    */
@@ -532,6 +668,14 @@ declare class Lightsail extends Service {
    */
   rebootInstance(callback?: (err: AWSError, data: Lightsail.Types.RebootInstanceResult) => void): Request<Lightsail.Types.RebootInstanceResult, AWSError>;
   /**
+   * Restarts a specific database in Amazon Lightsail.
+   */
+  rebootRelationalDatabase(params: Lightsail.Types.RebootRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.RebootRelationalDatabaseResult) => void): Request<Lightsail.Types.RebootRelationalDatabaseResult, AWSError>;
+  /**
+   * Restarts a specific database in Amazon Lightsail.
+   */
+  rebootRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.RebootRelationalDatabaseResult) => void): Request<Lightsail.Types.RebootRelationalDatabaseResult, AWSError>;
+  /**
    * Deletes a specific static IP from your account.
    */
   releaseStaticIp(params: Lightsail.Types.ReleaseStaticIpRequest, callback?: (err: AWSError, data: Lightsail.Types.ReleaseStaticIpResult) => void): Request<Lightsail.Types.ReleaseStaticIpResult, AWSError>;
@@ -548,6 +692,14 @@ declare class Lightsail extends Service {
    */
   startInstance(callback?: (err: AWSError, data: Lightsail.Types.StartInstanceResult) => void): Request<Lightsail.Types.StartInstanceResult, AWSError>;
   /**
+   * Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the reboot relational database operation.
+   */
+  startRelationalDatabase(params: Lightsail.Types.StartRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.StartRelationalDatabaseResult) => void): Request<Lightsail.Types.StartRelationalDatabaseResult, AWSError>;
+  /**
+   * Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the reboot relational database operation.
+   */
+  startRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.StartRelationalDatabaseResult) => void): Request<Lightsail.Types.StartRelationalDatabaseResult, AWSError>;
+  /**
    * Stops a specific Amazon Lightsail instance that is currently running.
    */
   stopInstance(params: Lightsail.Types.StopInstanceRequest, callback?: (err: AWSError, data: Lightsail.Types.StopInstanceResult) => void): Request<Lightsail.Types.StopInstanceResult, AWSError>;
@@ -555,6 +707,14 @@ declare class Lightsail extends Service {
    * Stops a specific Amazon Lightsail instance that is currently running.
    */
   stopInstance(callback?: (err: AWSError, data: Lightsail.Types.StopInstanceResult) => void): Request<Lightsail.Types.StopInstanceResult, AWSError>;
+  /**
+   * Stops a specific database that is currently running in Amazon Lightsail.
+   */
+  stopRelationalDatabase(params: Lightsail.Types.StopRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.StopRelationalDatabaseResult) => void): Request<Lightsail.Types.StopRelationalDatabaseResult, AWSError>;
+  /**
+   * Stops a specific database that is currently running in Amazon Lightsail.
+   */
+  stopRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.StopRelationalDatabaseResult) => void): Request<Lightsail.Types.StopRelationalDatabaseResult, AWSError>;
   /**
    * Attempts to unpeer the Lightsail VPC from the user's default VPC.
    */
@@ -579,6 +739,22 @@ declare class Lightsail extends Service {
    * Updates the specified attribute for a load balancer. You can only update one attribute at a time.
    */
   updateLoadBalancerAttribute(callback?: (err: AWSError, data: Lightsail.Types.UpdateLoadBalancerAttributeResult) => void): Request<Lightsail.Types.UpdateLoadBalancerAttributeResult, AWSError>;
+  /**
+   * Allows the update of one or more attributes of a database in Amazon Lightsail. Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database's predefined maintenance window.
+   */
+  updateRelationalDatabase(params: Lightsail.Types.UpdateRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseResult, AWSError>;
+  /**
+   * Allows the update of one or more attributes of a database in Amazon Lightsail. Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database's predefined maintenance window.
+   */
+  updateRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseResult, AWSError>;
+  /**
+   * Allows the update of one or more parameters of a database in Amazon Lightsail. Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which paramater updates are applied: dynamic or pending-reboot. Parameters marked with a dynamic apply type are applied immediately. Parameters marked with a pending-reboot apply type are applied only after the database is rebooted using the reboot relational database operation.
+   */
+  updateRelationalDatabaseParameters(params: Lightsail.Types.UpdateRelationalDatabaseParametersRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseParametersResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseParametersResult, AWSError>;
+  /**
+   * Allows the update of one or more parameters of a database in Amazon Lightsail. Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which paramater updates are applied: dynamic or pending-reboot. Parameters marked with a dynamic apply type are applied immediately. Parameters marked with a pending-reboot apply type are applied only after the database is rebooted using the reboot relational database operation.
+   */
+  updateRelationalDatabaseParameters(callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseParametersResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseParametersResult, AWSError>;
 }
 declare namespace Lightsail {
   export type AccessDirection = "inbound"|"outbound"|string;
@@ -697,7 +873,7 @@ declare namespace Lightsail {
      */
     description?: string;
     /**
-     * A Boolean value indicating whether the blueprint is active. When you update your blueprints, you will inactivate old blueprints and keep the most recent versions active.
+     * A Boolean value indicating whether the blueprint is active. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases.
      */
     isActive?: boolean;
     /**
@@ -904,7 +1080,7 @@ declare namespace Lightsail {
      */
     attachedDiskMapping?: AttachedDiskMap;
     /**
-     * The Availability Zone where you want to create your instances. Use the following formatting: us-east-2a (case sensitive). You can get a list of availability zones by using the get regions operation. Be sure to add the include availability zones parameter to your request.
+     * The Availability Zone where you want to create your instances. Use the following formatting: us-east-2a (case sensitive). You can get a list of Availability Zones by using the get regions operation. Be sure to add the include Availability Zones parameter to your request.
      */
     availabilityZone: string;
     /**
@@ -936,7 +1112,7 @@ declare namespace Lightsail {
      */
     instanceNames: StringList;
     /**
-     * The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). You can get a list of availability zones by using the get regions operation. Be sure to add the include availability zones parameter to your request.
+     * The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). You can get a list of Availability Zones by using the get regions operation. Be sure to add the include Availability Zones parameter to your request.
      */
     availabilityZone: string;
     /**
@@ -1043,6 +1219,110 @@ declare namespace Lightsail {
   export interface CreateLoadBalancerTlsCertificateResult {
     /**
      * An object containing information about the API operations.
+     */
+    operations?: OperationList;
+  }
+  export interface CreateRelationalDatabaseFromSnapshotRequest {
+    /**
+     * The name to use for your new database. Constraints:   Must contain from 2 to 255 alphanumeric characters, or hyphens.   The first and last character must be a letter or number.  
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * The Availability Zone in which to create your new database. Use the us-east-2a case-sensitive format. You can get a list of Availability Zones by using the get regions operation. Be sure to add the include relational database Availability Zones parameter to your request.
+     */
+    availabilityZone?: string;
+    /**
+     * Specifies the accessibility options for your new database. A value of true specifies a database that is available to resources outside of your Lightsail account. A value of false specifies a database that is available only to your Lightsail resources in the same region as your database.
+     */
+    publiclyAccessible?: boolean;
+    /**
+     * The name of the database snapshot from which to create your new database.
+     */
+    relationalDatabaseSnapshotName?: ResourceName;
+    /**
+     * The bundle ID for your new database. A bundle describes the performance specifications for your database. You can get a list of database bundle IDs by using the get relational database bundles operation. When creating a new database from a snapshot, you cannot choose a bundle that is smaller than the bundle of the source database.
+     */
+    relationalDatabaseBundleId?: string;
+    /**
+     * The name of the source database.
+     */
+    sourceRelationalDatabaseName?: ResourceName;
+    /**
+     * The date and time to restore your database from. Constraints:   Must be before the latest restorable time for the database.   Cannot be specified if the use latest restorable time parameter is true.   Specified in Universal Coordinated Time (UTC).   Specified in the Unix time format. For example, if you wish to use a restore time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the restore time.  
+     */
+    restoreTime?: IsoDate;
+    /**
+     * Specifies whether your database is restored from the latest backup time. A value of true restores from the latest backup time.  Default: false  Constraints: Cannot be specified if the restore time parameter is provided.
+     */
+    useLatestRestorableTime?: boolean;
+  }
+  export interface CreateRelationalDatabaseFromSnapshotResult {
+    /**
+     * An object describing the result of your create relational database from snapshot request.
+     */
+    operations?: OperationList;
+  }
+  export interface CreateRelationalDatabaseRequest {
+    /**
+     * The name to use for your new database. Constraints:   Must contain from 2 to 255 alphanumeric characters, or hyphens.   The first and last character must be a letter or number.  
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * The Availability Zone in which to create your new database. Use the us-east-2a case-sensitive format. You can get a list of Availability Zones by using the get regions operation. Be sure to add the include relational database Availability Zones parameter to your request.
+     */
+    availabilityZone?: string;
+    /**
+     * The blueprint ID for your new database. A blueprint describes the major engine version of a database. You can get a list of database blueprints IDs by using the get relational database blueprints operation.
+     */
+    relationalDatabaseBlueprintId: string;
+    /**
+     * The bundle ID for your new database. A bundle describes the performance specifications for your database. You can get a list of database bundle IDs by using the get relational database bundles operation.
+     */
+    relationalDatabaseBundleId: string;
+    /**
+     * The name of the master database created when the Lightsail database resource is created. Constraints:   Must contain from 1 to 64 alphanumeric characters.   Cannot be a word reserved by the specified database engine  
+     */
+    masterDatabaseName: string;
+    /**
+     * The master user name for your new database. Constraints:   Master user name is required.   Must contain from 1 to 16 alphanumeric characters.   The first character must be a letter.   Cannot be a reserved word for the database engine you choose. For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and Reserved Words articles for MySQL 5.6 or MySQL 5.7 respectively.  
+     */
+    masterUsername: string;
+    /**
+     * The password for the master user of your new database. The password can include any printable ASCII character except "/", """, or "@". Constraints: Must contain 8 to 41 characters.
+     */
+    masterUserPassword?: SensitiveString;
+    /**
+     * The daily time range during which automated backups are created for your new database if automated backups are enabled. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. For more information about the preferred backup window time blocks for each region, see the Working With Backups guide in the Amazon Relational Database Service (Amazon RDS) documentation. Constraints:   Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30    Specified in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     */
+    preferredBackupWindow?: string;
+    /**
+     * The weekly time range during which system maintenance can occur on your new database. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Constraints:   Must be in the ddd:hh24:mi-ddd:hh24:mi format.   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.   Must be at least 30 minutes.   Specified in Universal Coordinated Time (UTC).   Example: Tue:17:00-Tue:17:30   
+     */
+    preferredMaintenanceWindow?: string;
+    /**
+     * Specifies the accessibility options for your new database. A value of true specifies a database that is available to resources outside of your Lightsail account. A value of false specifies a database that is available only to your Lightsail resources in the same region as your database.
+     */
+    publiclyAccessible?: boolean;
+  }
+  export interface CreateRelationalDatabaseResult {
+    /**
+     * An object describing the result of your create relational database request.
+     */
+    operations?: OperationList;
+  }
+  export interface CreateRelationalDatabaseSnapshotRequest {
+    /**
+     * The name of the database on which to base your new snapshot.
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * The name for your new database snapshot. Constraints:   Must contain from 2 to 255 alphanumeric characters, or hyphens.   The first and last character must be a letter or number.  
+     */
+    relationalDatabaseSnapshotName: ResourceName;
+  }
+  export interface CreateRelationalDatabaseSnapshotResult {
+    /**
+     * An object describing the result of your create relational database snapshot request.
      */
     operations?: OperationList;
   }
@@ -1163,6 +1443,38 @@ declare namespace Lightsail {
   export interface DeleteLoadBalancerTlsCertificateResult {
     /**
      * An object describing the API operations.
+     */
+    operations?: OperationList;
+  }
+  export interface DeleteRelationalDatabaseRequest {
+    /**
+     * The name of the database that you are deleting.
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * Determines whether a final database snapshot is created before your database is deleted. If true is specified, no database snapshot is created. If false is specified, a database snapshot is created before your database is deleted. You must specify the final relational database snapshot name parameter if the skip final snapshot parameter is false. Default: false 
+     */
+    skipFinalSnapshot?: boolean;
+    /**
+     * The name of the database snapshot created if skip final snapshot is false, which is the default value for that parameter.  Specifying this parameter and also specifying the skip final snapshot parameter to true results in an error.  Constraints:   Must contain from 2 to 255 alphanumeric characters, or hyphens.   The first and last character must be a letter or number.  
+     */
+    finalRelationalDatabaseSnapshotName?: ResourceName;
+  }
+  export interface DeleteRelationalDatabaseResult {
+    /**
+     * An object describing the result of your delete relational database request.
+     */
+    operations?: OperationList;
+  }
+  export interface DeleteRelationalDatabaseSnapshotRequest {
+    /**
+     * The name of the database snapshot that you are deleting.
+     */
+    relationalDatabaseSnapshotName: ResourceName;
+  }
+  export interface DeleteRelationalDatabaseSnapshotResult {
+    /**
+     * An object describing the result of your delete relational database snapshot request.
      */
     operations?: OperationList;
   }
@@ -1570,7 +1882,7 @@ declare namespace Lightsail {
      */
     metricName: InstanceMetricName;
     /**
-     * The time period for which you are requesting data.
+     * The granularity, in seconds, of the returned data points.
      */
     period: MetricPeriod;
     /**
@@ -1718,7 +2030,7 @@ declare namespace Lightsail {
      */
     metricName: LoadBalancerMetricName;
     /**
-     * The time period duration for your health data request.
+     * The granularity, in seconds, of the returned data points.
      */
     period: MetricPeriod;
     /**
@@ -1816,7 +2128,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
     /**
-     * (Deprecated) Returns the number of pages of results that remain.  In releases prior to June 12, 2017, this parameter returned null by the API. It is now deprecated, and the API returns the nextPageToken parameter instead. 
+     * (Deprecated) Returns the number of pages of results that remain.  In releases prior to June 12, 2017, this parameter returned null by the API. It is now deprecated, and the API returns the next page token parameter instead. 
      */
     nextPageCount?: string;
     /**
@@ -1845,12 +2157,260 @@ declare namespace Lightsail {
      * A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., us-east-2a.
      */
     includeAvailabilityZones?: boolean;
+    /**
+     * &gt;A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (e.g., us-east-2a).
+     */
+    includeRelationalDatabaseAvailabilityZones?: boolean;
   }
   export interface GetRegionsResult {
     /**
      * An array of key-value pairs containing information about your get regions request.
      */
     regions?: RegionList;
+  }
+  export interface GetRelationalDatabaseBlueprintsRequest {
+    /**
+     * A token used for advancing to a specific page of results for your get relational database blueprints request.
+     */
+    pageToken?: string;
+  }
+  export interface GetRelationalDatabaseBlueprintsResult {
+    /**
+     * An object describing the result of your get relational database blueprints request.
+     */
+    blueprints?: RelationalDatabaseBlueprintList;
+    /**
+     * A token used for advancing to the next page of results of your get relational database blueprints request.
+     */
+    nextPageToken?: string;
+  }
+  export interface GetRelationalDatabaseBundlesRequest {
+    /**
+     * A token used for advancing to a specific page of results for your get relational database bundles request.
+     */
+    pageToken?: string;
+  }
+  export interface GetRelationalDatabaseBundlesResult {
+    /**
+     * An object describing the result of your get relational database bundles request.
+     */
+    bundles?: RelationalDatabaseBundleList;
+    /**
+     * A token used for advancing to the next page of results of your get relational database bundles request.
+     */
+    nextPageToken?: string;
+  }
+  export interface GetRelationalDatabaseEventsRequest {
+    /**
+     * The name of the database from which to get events.
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * The number of minutes in the past from which to retrieve events. For example, to get all events from the past 2 hours, enter 120. Default: 60  The minimum is 1 and the maximum is 14 days (20160 minutes).
+     */
+    durationInMinutes?: integer;
+    /**
+     * A token used for advancing to a specific page of results from for get relational database events request.
+     */
+    pageToken?: string;
+  }
+  export interface GetRelationalDatabaseEventsResult {
+    /**
+     * An object describing the result of your get relational database events request.
+     */
+    relationalDatabaseEvents?: RelationalDatabaseEventList;
+    /**
+     * A token used for advancing to the next page of results from your get relational database events request.
+     */
+    nextPageToken?: string;
+  }
+  export interface GetRelationalDatabaseLogEventsRequest {
+    /**
+     * The name of your database for which to get log events.
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * The name of the log stream. Use the get relational database log streams operation to get a list of available log streams.
+     */
+    logStreamName: string;
+    /**
+     * The start of the time interval from which to get log events. Constraints:   Specified in Universal Coordinated Time (UTC).   Specified in the Unix time format. For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the start time.  
+     */
+    startTime?: IsoDate;
+    /**
+     * The end of the time interval from which to get log events. Constraints:   Specified in Universal Coordinated Time (UTC).   Specified in the Unix time format. For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the end time.  
+     */
+    endTime?: IsoDate;
+    /**
+     * Parameter to specify if the log should start from head or tail. If true is specified, the log event starts from the head of the log. If false is specified, the log event starts from the tail of the log. Default: false 
+     */
+    startFromHead?: boolean;
+    /**
+     * A token used for advancing to a specific page of results for your get relational database log events request.
+     */
+    pageToken?: string;
+  }
+  export interface GetRelationalDatabaseLogEventsResult {
+    /**
+     * An object describing the result of your get relational database log events request.
+     */
+    resourceLogEvents?: LogEventList;
+    /**
+     * A token used for advancing to the previous page of results from your get relational database log events request.
+     */
+    nextBackwardToken?: string;
+    /**
+     * A token used for advancing to the next page of results from your get relational database log events request.
+     */
+    nextForwardToken?: string;
+  }
+  export interface GetRelationalDatabaseLogStreamsRequest {
+    /**
+     * The name of your database for which to get log streams.
+     */
+    relationalDatabaseName: ResourceName;
+  }
+  export interface GetRelationalDatabaseLogStreamsResult {
+    /**
+     * An object describing the result of your get relational database log streams request.
+     */
+    logStreams?: StringList;
+  }
+  export interface GetRelationalDatabaseMasterUserPasswordRequest {
+    /**
+     * The name of your database for which to get the master user password.
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * The password version to return. Specifying CURRENT or PREVIOUS returns the current or previous passwords respectively. Specifying PENDING returns the newest version of the password that will rotate to CURRENT. After the PENDING password rotates to CURRENT, the PENDING password is no longer available. Default: CURRENT 
+     */
+    passwordVersion?: RelationalDatabasePasswordVersion;
+  }
+  export interface GetRelationalDatabaseMasterUserPasswordResult {
+    /**
+     * The master user password for the password version specified.
+     */
+    masterUserPassword?: SensitiveString;
+    /**
+     * The timestamp when the specified version of the master user password was created.
+     */
+    createdAt?: IsoDate;
+  }
+  export interface GetRelationalDatabaseMetricDataRequest {
+    /**
+     * The name of your database from which to get metric data.
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * The name of the metric data to return.
+     */
+    metricName: RelationalDatabaseMetricName;
+    /**
+     * The granularity, in seconds, of the returned data points.
+     */
+    period: MetricPeriod;
+    /**
+     * The start of the time interval from which to get metric data. Constraints:   Specified in Universal Coordinated Time (UTC).   Specified in the Unix time format. For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the start time.  
+     */
+    startTime: IsoDate;
+    /**
+     * The end of the time interval from which to get metric data. Constraints:   Specified in Universal Coordinated Time (UTC).   Specified in the Unix time format. For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the end time.  
+     */
+    endTime: IsoDate;
+    /**
+     * The unit for the metric data request.
+     */
+    unit: MetricUnit;
+    /**
+     * The array of statistics for your metric data request.
+     */
+    statistics: MetricStatisticList;
+  }
+  export interface GetRelationalDatabaseMetricDataResult {
+    /**
+     * The name of the metric.
+     */
+    metricName?: RelationalDatabaseMetricName;
+    /**
+     * An object describing the result of your get relational database metric data request.
+     */
+    metricData?: MetricDatapointList;
+  }
+  export interface GetRelationalDatabaseParametersRequest {
+    /**
+     * The name of your database for which to get parameters.
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * A token used for advancing to a specific page of results for your get relational database parameters request.
+     */
+    pageToken?: string;
+  }
+  export interface GetRelationalDatabaseParametersResult {
+    /**
+     * An object describing the result of your get relational database parameters request.
+     */
+    parameters?: RelationalDatabaseParameterList;
+    /**
+     * A token used for advancing to the next page of results from your get static IPs request.
+     */
+    nextPageToken?: string;
+  }
+  export interface GetRelationalDatabaseRequest {
+    /**
+     * The name of the database that you are looking up.
+     */
+    relationalDatabaseName: ResourceName;
+  }
+  export interface GetRelationalDatabaseResult {
+    /**
+     * An object describing the specified database.
+     */
+    relationalDatabase?: RelationalDatabase;
+  }
+  export interface GetRelationalDatabaseSnapshotRequest {
+    /**
+     * The name of the database snapshot for which to get information.
+     */
+    relationalDatabaseSnapshotName: ResourceName;
+  }
+  export interface GetRelationalDatabaseSnapshotResult {
+    /**
+     * An object describing the specified database snapshot.
+     */
+    relationalDatabaseSnapshot?: RelationalDatabaseSnapshot;
+  }
+  export interface GetRelationalDatabaseSnapshotsRequest {
+    /**
+     * A token used for advancing to a specific page of results for your get relational database snapshots request.
+     */
+    pageToken?: string;
+  }
+  export interface GetRelationalDatabaseSnapshotsResult {
+    /**
+     * An object describing the result of your get relational database snapshots request.
+     */
+    relationalDatabaseSnapshots?: RelationalDatabaseSnapshotList;
+    /**
+     * A token used for advancing to the next page of results from your get relational database snapshots request.
+     */
+    nextPageToken?: string;
+  }
+  export interface GetRelationalDatabasesRequest {
+    /**
+     * A token used for advancing to a specific page of results for your get relational database request.
+     */
+    pageToken?: string;
+  }
+  export interface GetRelationalDatabasesResult {
+    /**
+     * An object describing the result of your get relational databases request.
+     */
+    relationalDatabases?: RelationalDatabaseList;
+    /**
+     * A token used for advancing to the next page of results from your get relational databases request.
+     */
+    nextPageToken?: string;
   }
   export interface GetStaticIpRequest {
     /**
@@ -1914,7 +2474,7 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * The region name and availability zone where the instance is located.
+     * The region name and Availability Zone where the instance is located.
      */
     location?: ResourceLocation;
     /**
@@ -2122,7 +2682,7 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * The region name and availability zone where you created the snapshot.
+     * The region name and Availability Zone where you created the snapshot.
      */
     location?: ResourceLocation;
     /**
@@ -2443,6 +3003,17 @@ declare namespace Lightsail {
     isAttached?: boolean;
   }
   export type LoadBalancerTlsCertificateSummaryList = LoadBalancerTlsCertificateSummary[];
+  export interface LogEvent {
+    /**
+     * The timestamp when the database log event was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * The message of the database log event.
+     */
+    message?: string;
+  }
+  export type LogEventList = LogEvent[];
   export interface MetricDatapoint {
     /**
      * The average.
@@ -2573,6 +3144,35 @@ declare namespace Lightsail {
      */
     operation?: Operation;
   }
+  export interface PendingMaintenanceAction {
+    /**
+     * The type of pending database maintenance action.
+     */
+    action?: NonEmptyString;
+    /**
+     * Additional detail about the pending database maintenance action.
+     */
+    description?: NonEmptyString;
+    /**
+     * The effective date of the pending database maintenance action.
+     */
+    currentApplyDate?: IsoDate;
+  }
+  export type PendingMaintenanceActionList = PendingMaintenanceAction[];
+  export interface PendingModifiedRelationalDatabaseValues {
+    /**
+     * The password for the master user of the database.
+     */
+    masterUserPassword?: string;
+    /**
+     * The database engine version.
+     */
+    engineVersion?: string;
+    /**
+     * A Boolean value indicating whether automated backup retention is enabled.
+     */
+    backupRetentionEnabled?: boolean;
+  }
   export type Port = number;
   export type PortAccessType = "Public"|"Private"|string;
   export interface PortInfo {
@@ -2620,6 +3220,18 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface RebootRelationalDatabaseRequest {
+    /**
+     * The name of your database to reboot.
+     */
+    relationalDatabaseName: ResourceName;
+  }
+  export interface RebootRelationalDatabaseResult {
+    /**
+     * An object describing the result of your reboot relational database request.
+     */
+    operations?: OperationList;
+  }
   export interface Region {
     /**
      * The continent code (e.g., NA, meaning North America).
@@ -2641,9 +3253,318 @@ declare namespace Lightsail {
      * The Availability Zones. Follows the format us-east-2a (case-sensitive).
      */
     availabilityZones?: AvailabilityZoneList;
+    /**
+     * The Availability Zones for databases. Follows the format us-east-2a (case-sensitive).
+     */
+    relationalDatabaseAvailabilityZones?: AvailabilityZoneList;
   }
   export type RegionList = Region[];
-  export type RegionName = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|string;
+  export type RegionName = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"ca-central-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|string;
+  export interface RelationalDatabase {
+    /**
+     * The unique name of the database resource in Lightsail.
+     */
+    name?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the database.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The support code for the database. Include this code in your email to support when you have questions about a database in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+     */
+    supportCode?: string;
+    /**
+     * The timestamp when the database was created. Formatted in Unix time.
+     */
+    createdAt?: IsoDate;
+    /**
+     * The Region name and Availability Zone where the database is located.
+     */
+    location?: ResourceLocation;
+    /**
+     * The Lightsail resource type for the database (for example, RelationalDatabase).
+     */
+    resourceType?: ResourceType;
+    /**
+     * The blueprint ID for the database. A blueprint describes the major engine version of a database.
+     */
+    relationalDatabaseBlueprintId?: NonEmptyString;
+    /**
+     * The bundle ID for the database. A bundle describes the performance specifications for your database.
+     */
+    relationalDatabaseBundleId?: NonEmptyString;
+    /**
+     * The name of the master database created when the Lightsail database resource is created.
+     */
+    masterDatabaseName?: string;
+    /**
+     * Describes the hardware of the database.
+     */
+    hardware?: RelationalDatabaseHardware;
+    /**
+     * Describes the current state of the database.
+     */
+    state?: NonEmptyString;
+    /**
+     * Describes the secondary Availability Zone of a high availability database. The secondary database is used for failover support of a high availability database.
+     */
+    secondaryAvailabilityZone?: string;
+    /**
+     * A Boolean value indicating whether automated backup retention is enabled for the database.
+     */
+    backupRetentionEnabled?: boolean;
+    /**
+     * Describes pending database value modifications.
+     */
+    pendingModifiedValues?: PendingModifiedRelationalDatabaseValues;
+    /**
+     * The database software (for example, MySQL).
+     */
+    engine?: NonEmptyString;
+    /**
+     * The database engine version (for example, 5.7.23).
+     */
+    engineVersion?: NonEmptyString;
+    /**
+     * The latest point in time to which the database can be restored. Formatted in Unix time.
+     */
+    latestRestorableTime?: IsoDate;
+    /**
+     * The master user name of the database.
+     */
+    masterUsername?: NonEmptyString;
+    /**
+     * The status of parameter updates for the database.
+     */
+    parameterApplyStatus?: NonEmptyString;
+    /**
+     * The daily time range during which automated backups are created for the database (for example, 16:00-16:30).
+     */
+    preferredBackupWindow?: NonEmptyString;
+    /**
+     * The weekly time range during which system maintenance can occur on the database. In the format ddd:hh24:mi-ddd:hh24:mi. For example, Tue:17:00-Tue:17:30.
+     */
+    preferredMaintenanceWindow?: NonEmptyString;
+    /**
+     * A Boolean value indicating whether the database is publicly accessible.
+     */
+    publiclyAccessible?: boolean;
+    /**
+     * The master endpoint for the database.
+     */
+    masterEndpoint?: RelationalDatabaseEndpoint;
+    /**
+     * Describes the pending maintenance actions for the database.
+     */
+    pendingMaintenanceActions?: PendingMaintenanceActionList;
+  }
+  export interface RelationalDatabaseBlueprint {
+    /**
+     * The ID for the database blueprint.
+     */
+    blueprintId?: string;
+    /**
+     * The database software of the database blueprint (for example, MySQL).
+     */
+    engine?: RelationalDatabaseEngine;
+    /**
+     * The database engine version for the database blueprint (for example, 5.7.23).
+     */
+    engineVersion?: string;
+    /**
+     * The description of the database engine for the database blueprint.
+     */
+    engineDescription?: string;
+    /**
+     * The description of the database engine version for the database blueprint.
+     */
+    engineVersionDescription?: string;
+    /**
+     * A Boolean value indicating whether the engine version is the default for the database blueprint.
+     */
+    isEngineDefault?: boolean;
+  }
+  export type RelationalDatabaseBlueprintList = RelationalDatabaseBlueprint[];
+  export interface RelationalDatabaseBundle {
+    /**
+     * The ID for the database bundle.
+     */
+    bundleId?: string;
+    /**
+     * The name for the database bundle.
+     */
+    name?: string;
+    /**
+     * The cost of the database bundle in US currency.
+     */
+    price?: float;
+    /**
+     * The amount of RAM in GB (for example, 2.0) for the database bundle.
+     */
+    ramSizeInGb?: float;
+    /**
+     * The size of the disk for the database bundle.
+     */
+    diskSizeInGb?: integer;
+    /**
+     * The data transfer rate per month in GB for the database bundle.
+     */
+    transferPerMonthInGb?: integer;
+    /**
+     * The number of virtual CPUs (vCPUs) for the database bundle.
+     */
+    cpuCount?: integer;
+    /**
+     * A Boolean value indicating whether the database bundle is encrypted.
+     */
+    isEncrypted?: boolean;
+    /**
+     * A Boolean value indicating whether the database bundle is active.
+     */
+    isActive?: boolean;
+  }
+  export type RelationalDatabaseBundleList = RelationalDatabaseBundle[];
+  export interface RelationalDatabaseEndpoint {
+    /**
+     * Specifies the port that the database is listening on.
+     */
+    port?: integer;
+    /**
+     * Specifies the DNS address of the database.
+     */
+    address?: NonEmptyString;
+  }
+  export type RelationalDatabaseEngine = "mysql"|string;
+  export interface RelationalDatabaseEvent {
+    /**
+     * The database that the database event relates to.
+     */
+    resource?: ResourceName;
+    /**
+     * The timestamp when the database event was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * The message of the database event.
+     */
+    message?: string;
+    /**
+     * The category that the database event belongs to.
+     */
+    eventCategories?: StringList;
+  }
+  export type RelationalDatabaseEventList = RelationalDatabaseEvent[];
+  export interface RelationalDatabaseHardware {
+    /**
+     * The number of vCPUs for the database.
+     */
+    cpuCount?: integer;
+    /**
+     * The size of the disk for the database.
+     */
+    diskSizeInGb?: integer;
+    /**
+     * The amount of RAM in GB for the database.
+     */
+    ramSizeInGb?: float;
+  }
+  export type RelationalDatabaseList = RelationalDatabase[];
+  export type RelationalDatabaseMetricName = "CPUUtilization"|"DatabaseConnections"|"DiskQueueDepth"|"FreeStorageSpace"|"NetworkReceiveThroughput"|"NetworkTransmitThroughput"|string;
+  export interface RelationalDatabaseParameter {
+    /**
+     * Specifies the valid range of values for the parameter.
+     */
+    allowedValues?: string;
+    /**
+     * Indicates when parameter updates are applied. Can be immediate or pending-reboot.
+     */
+    applyMethod?: string;
+    /**
+     * Specifies the engine-specific parameter type.
+     */
+    applyType?: string;
+    /**
+     * Specifies the valid data type for the parameter.
+     */
+    dataType?: string;
+    /**
+     * Provides a description of the parameter.
+     */
+    description?: string;
+    /**
+     * A Boolean value indicating whether the parameter can be modified.
+     */
+    isModifiable?: boolean;
+    /**
+     * Specifies the name of the parameter.
+     */
+    parameterName?: string;
+    /**
+     * Specifies the value of the parameter.
+     */
+    parameterValue?: string;
+  }
+  export type RelationalDatabaseParameterList = RelationalDatabaseParameter[];
+  export type RelationalDatabasePasswordVersion = "CURRENT"|"PREVIOUS"|"PENDING"|string;
+  export interface RelationalDatabaseSnapshot {
+    /**
+     * The name of the database snapshot.
+     */
+    name?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the database snapshot.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The support code for the database snapshot. Include this code in your email to support when you have questions about a database snapshot in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+     */
+    supportCode?: string;
+    /**
+     * The timestamp when the database snapshot was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * The Region name and Availability Zone where the database snapshot is located.
+     */
+    location?: ResourceLocation;
+    /**
+     * The Lightsail resource type.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The software of the database snapshot (for example, MySQL)
+     */
+    engine?: NonEmptyString;
+    /**
+     * The database engine version for the database snapshot (for example, 5.7.23).
+     */
+    engineVersion?: NonEmptyString;
+    /**
+     * The size of the disk in GB (for example, 32) for the database snapshot.
+     */
+    sizeInGb?: integer;
+    /**
+     * The state of the database snapshot.
+     */
+    state?: NonEmptyString;
+    /**
+     * The name of the source database from which the database snapshot was created.
+     */
+    fromRelationalDatabaseName?: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the database from which the database snapshot was created.
+     */
+    fromRelationalDatabaseArn?: NonEmptyString;
+    /**
+     * The bundle ID of the database from which the database snapshot was created.
+     */
+    fromRelationalDatabaseBundleId?: string;
+    /**
+     * The blueprint ID of the database from which the database snapshot was created. A blueprint describes the major engine version of a database.
+     */
+    fromRelationalDatabaseBlueprintId?: string;
+  }
+  export type RelationalDatabaseSnapshotList = RelationalDatabaseSnapshot[];
   export interface ReleaseStaticIpRequest {
     /**
      * The name of the static IP to delete.
@@ -2668,7 +3589,8 @@ declare namespace Lightsail {
   }
   export type ResourceName = string;
   export type ResourceNameList = ResourceName[];
-  export type ResourceType = "Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|string;
+  export type ResourceType = "Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|string;
+  export type SensitiveString = string;
   export interface StartInstanceRequest {
     /**
      * The name of the instance (a virtual private server) to start.
@@ -2678,6 +3600,18 @@ declare namespace Lightsail {
   export interface StartInstanceResult {
     /**
      * An array of key-value pairs containing information about the request operation.
+     */
+    operations?: OperationList;
+  }
+  export interface StartRelationalDatabaseRequest {
+    /**
+     * The name of your database to start.
+     */
+    relationalDatabaseName: ResourceName;
+  }
+  export interface StartRelationalDatabaseResult {
+    /**
+     * An object describing the result of your start relational database request.
      */
     operations?: OperationList;
   }
@@ -2736,6 +3670,22 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface StopRelationalDatabaseRequest {
+    /**
+     * The name of your database to stop.
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * The name of your new database snapshot to be created before stopping your database.
+     */
+    relationalDatabaseSnapshotName?: ResourceName;
+  }
+  export interface StopRelationalDatabaseResult {
+    /**
+     * An object describing the result of your stop relational database request.
+     */
+    operations?: OperationList;
+  }
   export type StringList = string[];
   export type StringMax256 = string;
   export interface UnpeerVpcRequest {
@@ -2779,6 +3729,66 @@ declare namespace Lightsail {
   export interface UpdateLoadBalancerAttributeResult {
     /**
      * An object describing the API operations.
+     */
+    operations?: OperationList;
+  }
+  export interface UpdateRelationalDatabaseParametersRequest {
+    /**
+     * The name of your database for which to update parameters.
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * The database parameters to update.
+     */
+    parameters: RelationalDatabaseParameterList;
+  }
+  export interface UpdateRelationalDatabaseParametersResult {
+    /**
+     * An object describing the result of your update relational database parameters request.
+     */
+    operations?: OperationList;
+  }
+  export interface UpdateRelationalDatabaseRequest {
+    /**
+     * The name of your database to update.
+     */
+    relationalDatabaseName: ResourceName;
+    /**
+     * The password for the master user of your database. The password can include any printable ASCII character except "/", """, or "@". Constraints: Must contain 8 to 41 characters.
+     */
+    masterUserPassword?: SensitiveString;
+    /**
+     * When true, the master user password is changed to a new strong password generated by Lightsail. Use the get relational database master user password operation to get the new password.
+     */
+    rotateMasterUserPassword?: boolean;
+    /**
+     * The daily time range during which automated backups are created for your database if automated backups are enabled. Constraints:   Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30    Specified in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     */
+    preferredBackupWindow?: string;
+    /**
+     * The weekly time range during which system maintenance can occur on your database. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Constraints:   Must be in the ddd:hh24:mi-ddd:hh24:mi format.   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.   Must be at least 30 minutes.   Specified in Universal Coordinated Time (UTC).   Example: Tue:17:00-Tue:17:30   
+     */
+    preferredMaintenanceWindow?: string;
+    /**
+     * When true, enables automated backup retention for your database. Updates are applied during the next maintenance window because this can result in an outage.
+     */
+    enableBackupRetention?: boolean;
+    /**
+     * When true, disables automated backup retention for your database. Disabling backup retention deletes all automated database backups. Before disabling this, you may want to create a snapshot of your database using the create relational database snapshot operation. Updates are applied during the next maintenance window because this can result in an outage.
+     */
+    disableBackupRetention?: boolean;
+    /**
+     * Specifies the accessibility options for your database. A value of true specifies a database that is available to resources outside of your Lightsail account. A value of false specifies a database that is available only to your Lightsail resources in the same region as your database.
+     */
+    publiclyAccessible?: boolean;
+    /**
+     * When true, applies changes immediately. When false, applies changes during the preferred maintenance window. Some changes may cause an outage. Default: false 
+     */
+    applyImmediately?: boolean;
+  }
+  export interface UpdateRelationalDatabaseResult {
+    /**
+     * An object describing the result of your update relational database request.
      */
     operations?: OperationList;
   }

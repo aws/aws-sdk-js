@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.335.0-->
+<!--LATEST=2.336.0-->
 <!--ENTRYINSERT-->
+
+## 2.336.0
+* feature: Glue: New Glue APIs for creating, updating, reading and deleting Data Catalog resource-based policies.
+* feature: Lightsail: Adds support for Lightsail managed databases.
+* feature: ResourceGroups: AWS Resource Groups service added a new feature to filter resource groups by resource-type when using the ListGroups operation.
 
 ## 2.335.0
 * feature: RDS: This release adds a new parameter to specify the DB instance or cluster parameter group for restore from DB snapshot and restore to point int time operations. For more information, see Amazon RDS Documentation.
