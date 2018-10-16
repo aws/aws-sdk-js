@@ -44,120 +44,273 @@ export class Request<D, E> {
      *
      * @param {string} event - 'Name of a request event.'
      * @param {function} listener - Callback to run when the event is triggered on the request.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: string, listener: () => void): Request<D, E>;
+    on(event: string, listener: () => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when a request is being validated.
      *
      * @param {string} event - validate: triggered when a request is being validated.
      * @param {function} listener - Callback to run when the request is being validated.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "validate", listener: (request: Request<D, E>) => void): Request<D, E>;
+    on(event: "validate", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when the request payload is being built.
      *
      * @param {string} event - build: triggered when the request payload is being built.
      * @param {function} listener - Callback to run when the request's payload is being built.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "build", listener: (request: Request<D, E>) => void): Request<D, E>;
+    on(event: "build", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when a request is being signed.
      *
      * @param {string} event - sign: triggered when a request is being signed.
      * @param {function} listener - Callback to run when the request is being signed.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "sign", listener: (request: Request<D, E>) => void): Request<D, E>;
+    on(event: "sign", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when a request is ready to be sent.
      *
      * @param {string} event - send: triggered when a request is ready to be sent.
      * @param {function} listener - Callback to run when the request is ready to be sent.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "send", listener: (response: Response<D, E>) => void): Request<D, E>;
+    on(event: "send", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when a request failed and might need to be retried or redirected.
      *
      * @param {string} event - retry: triggered when a request failed and might need to be retried or redirected.
      * @param {function} listener - Callback to run when the request failed and may be retried.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "retry", listener: (response: Response<D, E>) => void): Request<D, E>;
+    on(event: "retry", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered on all non-2xx requests so that listeners can extract error details from the response body.
      *
      * @param {string} event - extractError: triggered on all non-2xx requests so that listeners can extract error details from the response body.
      * @param {function} listener - Callback to run when the request failed.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "extractError", listener: (response: Response<D, E>) => void): Request<D, E>;
+    on(event: "extractError", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered in successful requests to allow listeners to de-serialize the response body into response.data.
      *
      * @param {string} event - extractData: triggered in successful requests to allow listeners to de-serialize the response body into response.data.
      * @param {function} listener - Callback to run when the request succeeded.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "extractData", listener: (response: Response<D, E>) => void): Request<D, E>;
+    on(event: "extractData", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when the request completed successfully.
      *
      * @param {string} event - success: triggered when the request completed successfully.
      * @param {function} listener - Callback to run when the request completed successfully.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "success", listener: (response: Response<D, E>) => void): Request<D, E>;
+    on(event: "success", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when an error occurs at any point during the request.
      *
      * @param {string} event - error: triggered when an error occurs at any point during the request.
      * @param {function} listener - Callback to run when the request errors at any point.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "error", listener: (err: AWSError, response: Response<D, E>) => void): Request<D, E>;
+    on(event: "error", listener: (err: AWSError, response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered whenever a request cycle completes.
      *
      * @param {string} event - complete: triggered whenever a request cycle completes.
      * @param {function} listener - Callback to run when the request cycle completes.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "complete", listener: (response: Response<D, E>) => void): Request<D, E>;
+    on(event: "complete", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when headers are sent by the remote server.
      *
      * @param {string} event - httpHeaders: triggered when headers are sent by the remote server.
      * @param {function} listener - Callback to run when the headers are sent by the remote server.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "httpHeaders", listener: (statusCode: number, headers: {[key: string]: string}, response: Response<D, E>, statusMessage: string) => void): Request<D, E>;
+    on(event: "httpHeaders", listener: (statusCode: number, headers: {[key: string]: string}, response: Response<D, E>, statusMessage: string) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when data is sent by the remote server.
      *
      * @param {string} event - httpData: triggered when data is sent by the remote server.
      * @param {function} listener - Callback to run when data is sent by the remote server.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "httpData", listener: (chunk: Buffer|Uint8Array, response: Response<D, E>) => void): Request<D, E>;
+    on(event: "httpData", listener: (chunk: Buffer|Uint8Array, response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when the HTTP request has uploaded more data.
      *
      * @param {string} event - httpUploadProgress: triggered when the HTTP request has uploaded more data.
      * @param {function} listener - Callback to run when the HTTP request has uploaded more data.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "httpUploadProgress", listener: (progress: Progress, response: Response<D, E>) => void): Request<D, E>;
+    on(event: "httpUploadProgress", listener: (progress: Progress, response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when the HTTP request has downloaded more data.
      *
      * @param {string} event - httpDownloadProgress: triggered when the HTTP request has downloaded more data.
      * @param {function} listener - Callback to run when the HTTP request has downloaded more data.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "httpDownloadProgress", listener: (progress: Progress, response: Response<D, E>) => void): Request<D, E>;
+    on(event: "httpDownloadProgress", listener: (progress: Progress, response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when the HTTP request failed.
      *
      * @param {string} event - httpError: triggered when the HTTP request failed.
      * @param {function} listener - Callback to run when the HTTP request failed.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "httpError", listener: (err: Error, response: Response<D, E>) => void): Request<D, E>;
+    on(event: "httpError", listener: (err: Error, response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when the server is finished sending data.
      *
      * @param {string} event - httpDone: triggered when the server is finished sending data.
      * @param {function} listener - Callback to run when the server is finished sending data.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "httpDone", listener: (response: Response<D, E>) => void): Request<D, E>;
+    on(event: "httpDone", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when a request emits the specified event.
+     *
+     * @param {string} event - 'Name of a request event.'
+     * @param {function} listener - Callback to run when the event is triggered on the request.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: string, listener: () => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when a request is being validated.
+     *
+     * @param {string} event - validate: triggered when a request is being validated.
+     * @param {function} listener - Callback to run when the request is being validated.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "validate", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when the request payload is being built.
+     *
+     * @param {string} event - build: triggered when the request payload is being built.
+     * @param {function} listener - Callback to run when the request's payload is being built.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "build", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when a request is being signed.
+     *
+     * @param {string} event - sign: triggered when a request is being signed.
+     * @param {function} listener - Callback to run when the request is being signed.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "sign", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when a request is ready to be sent.
+     *
+     * @param {string} event - send: triggered when a request is ready to be sent.
+     * @param {function} listener - Callback to run when the request is ready to be sent.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "send", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when a request failed and might need to be retried or redirected.
+     *
+     * @param {string} event - retry: triggered when a request failed and might need to be retried or redirected.
+     * @param {function} listener - Callback to run when the request failed and may be retried.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "retry", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered on all non-2xx requests so that listeners can extract error details from the response body.
+     *
+     * @param {string} event - extractError: triggered on all non-2xx requests so that listeners can extract error details from the response body.
+     * @param {function} listener - Callback to run when the request failed.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "extractError", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered in successful requests to allow listeners to de-serialize the response body into response.data.
+     *
+     * @param {string} event - extractData: triggered in successful requests to allow listeners to de-serialize the response body into response.data.
+     * @param {function} listener - Callback to run when the request succeeded.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "extractData", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when the request completed successfully.
+     *
+     * @param {string} event - success: triggered when the request completed successfully.
+     * @param {function} listener - Callback to run when the request completed successfully.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "success", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when an error occurs at any point during the request.
+     *
+     * @param {string} event - error: triggered when an error occurs at any point during the request.
+     * @param {function} listener - Callback to run when the request errors at any point.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "error", listener: (err: AWSError, response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered whenever a request cycle completes.
+     *
+     * @param {string} event - complete: triggered whenever a request cycle completes.
+     * @param {function} listener - Callback to run when the request cycle completes.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "complete", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when headers are sent by the remote server.
+     *
+     * @param {string} event - httpHeaders: triggered when headers are sent by the remote server.
+     * @param {function} listener - Callback to run when the headers are sent by the remote server.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "httpHeaders", listener: (statusCode: number, headers: {[key: string]: string}, response: Response<D, E>, statusMessage: string) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when data is sent by the remote server.
+     *
+     * @param {string} event - httpData: triggered when data is sent by the remote server.
+     * @param {function} listener - Callback to run when data is sent by the remote server.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "httpData", listener: (chunk: Buffer|Uint8Array, response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when the HTTP request has uploaded more data.
+     *
+     * @param {string} event - httpUploadProgress: triggered when the HTTP request has uploaded more data.
+     * @param {function} listener - Callback to run when the HTTP request has uploaded more data.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "httpUploadProgress", listener: (progress: Progress, response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when the HTTP request has downloaded more data.
+     *
+     * @param {string} event - httpDownloadProgress: triggered when the HTTP request has downloaded more data.
+     * @param {function} listener - Callback to run when the HTTP request has downloaded more data.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "httpDownloadProgress", listener: (progress: Progress, response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when the HTTP request failed.
+     *
+     * @param {string} event - httpError: triggered when the HTTP request failed.
+     * @param {function} listener - Callback to run when the HTTP request failed.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "httpError", listener: (err: Error, response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
+    /**
+     * Adds a listener that is triggered when the server is finished sending data.
+     *
+     * @param {string} event - httpDone: triggered when the server is finished sending data.
+     * @param {function} listener - Callback to run when the server is finished sending data.
+     * @param {boolean} prepend - If set, prepends listener instead of appending.
+     */
+    onAsync(event: "httpDone", listener: (response: Response<D, E>) => void, prepend?: boolean): Request<D, E>;
     /**
      * Returns a 'thenable' promise.
      */
