@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.336.0-->
+<!--LATEST=2.337.0-->
 <!--ENTRYINSERT-->
+
+## 2.337.0
+* bugfix: npmignore: update npmignore to exclude unit tests from npm
+* feature: CloudWatchEvents: AWS Events - AWS Organizations Support in Event-Bus Policies. This release introduces a new parameter in the PutPermission API named Condition. Using the Condition parameter, customers can allow one or more AWS Organizations to access their CloudWatch Events Event-Bus resource.
 
 ## 2.336.0
 * feature: Glue: New Glue APIs for creating, updating, reading and deleting Data Catalog resource-based policies.

@@ -221,7 +221,7 @@
           "shape": "ConcurrentModificationException"
         }
       ],
-      "documentation": "<p>Running <code>PutPermission</code> permits the specified AWS account to put events to your account's default <i>event bus</i>. CloudWatch Events rules in your account are triggered by these events arriving to your default event bus. </p> <p>For another account to send events to your account, that external account must have a CloudWatch Events rule with your account's default event bus as a target.</p> <p>To enable multiple AWS accounts to put events to your default event bus, run <code>PutPermission</code> once for each of these accounts.</p> <p>The permission policy on the default event bus cannot exceed 10 KB in size.</p>"
+      "documentation": "<p>Running <code>PutPermission</code> permits the specified AWS account or AWS organization to put events to your account's default <i>event bus</i>. CloudWatch Events rules in your account are triggered by these events arriving to your default event bus. </p> <p>For another account to send events to your account, that external account must have a CloudWatch Events rule with your account's default event bus as a target.</p> <p>To enable multiple AWS accounts to put events to your default event bus, run <code>PutPermission</code> once for each of these accounts. Or, if all the accounts are members of the same AWS organization, you can run <code>PutPermission</code> once specifying <code>Principal</code> as \"*\" and specifying the AWS organization ID in <code>Condition</code>, to grant permissions to all accounts in that organization.</p> <p>The permission policy on the default event bus cannot exceed 10 KB in size.</p>"
     },
     "PutRule": {
       "name": "PutRule",
@@ -437,6 +437,29 @@
     },
     "Boolean": {
       "type": "boolean"
+    },
+    "Condition": {
+      "type": "structure",
+      "required": [
+        "Type",
+        "Key",
+        "Value"
+      ],
+      "members": {
+        "Type": {
+          "shape": "String",
+          "documentation": "<p>Specifies the type of condition. Currently the only supported value is <code>StringEquals</code>.</p>"
+        },
+        "Key": {
+          "shape": "String",
+          "documentation": "<p>Specifies the key for the condition. Currently the only supported key is <code>aws:PrincipalOrgID</code>.</p>"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>Specifies the value for the key. Currently, this must be the ID of the organization.</p>"
+        }
+      },
+      "documentation": "<p>A JSON string which you can use to limit the event bus permissions you are granting to only accounts that fulfill the condition. Currently, the only supported condition is membership in a certain AWS organization. The string must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields. The <code>Value</code> field specifies the ID of the AWS organization. Following is an example value for <code>Condition</code>:</p> <p> <code>'{\"Type\" : \"StringEquals\", \"Key\": \"aws:PrincipalOrgID\", \"Value\": \"o-1234567890\"}'</code> </p>"
     },
     "DeleteRuleRequest": {
       "type": "structure",
@@ -869,11 +892,15 @@
         },
         "Principal": {
           "shape": "Principal",
-          "documentation": "<p>The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify \"*\" to permit any account to put events to your default event bus.</p> <p>If you specify \"*\", avoid creating rules that may match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an <code>account</code> field with a specific account ID from which to receive events. Rules with an account field do not match any events sent from other accounts.</p>"
+          "documentation": "<p>The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify \"*\" to permit any account to put events to your default event bus.</p> <p>If you specify \"*\" without specifying <code>Condition</code>, avoid creating rules that may match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an <code>account</code> field with a specific account ID from which to receive events. Rules with an account field do not match any events sent from other accounts.</p>"
         },
         "StatementId": {
           "shape": "StatementId",
           "documentation": "<p>An identifier string for the external account that you are granting permissions to. If you later want to revoke the permission for this external account, specify this <code>StatementId</code> when you run <a>RemovePermission</a>.</p>"
+        },
+        "Condition": {
+          "shape": "Condition",
+          "documentation": "<p>This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain AWS organization. For more information about AWS Organizations, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">What Is AWS Organizations</a> in the <i>AWS Organizations User Guide</i>.</p> <p>If you specify <code>Condition</code> with an AWS organization ID, and specify \"*\" as the value for <code>Principal</code>, you grant permission to all the accounts in the named organization.</p> <p>The <code>Condition</code> is a JSON string which must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields.</p>"
         }
       }
     },
