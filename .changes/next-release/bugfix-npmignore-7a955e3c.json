@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "npmignore",
+  "description": "update npmignore to exclude unit tests from npm"
+}

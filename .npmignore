@@ -20,6 +20,7 @@ Gemfile.lock
 features
 karma.conf.js
 Rakefile
+scripts/lib/*spec.js
 test
 testem.json
 tasks
