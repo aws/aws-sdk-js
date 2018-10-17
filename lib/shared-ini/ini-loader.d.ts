@@ -7,6 +7,14 @@ export interface IniFileContent {
   [key: string]: {[key: string]: string}
 }
 
+/**
+ * Ini file loader class the same as that used in the SDK. It loads and 
+ * parses config and credentials files in .ini format and cache the content
+ * to assure files are only read once. 
+ * Note that calling operations on the instance instantiated from this class
+ * won't affect the behavior of SDK since SDK uses an internal singleton of
+ * this class.
+ */
 export class IniLoader{
   
 /** Remove all cached files. Used after config files are updated. */
@@ -19,6 +27,7 @@ export class IniLoader{
  * @returns {object} object of all profile information in the file
  */
   loadFrom(options: LoadFileOptions): IniFileContent;
+}
 
 /**
  * Read specified file and return parsed config object. This method will always
@@ -29,7 +38,4 @@ export class IniLoader{
  * @param isConfig [boolean] true if specified file is an aws config file; false
  * if the file is an aws credentials file
  */
-  parseFile(filename: string, isConfig: boolean): IniFileContent;
-}
-
 export function parseFile(filename: string, isConfig: boolean): IniFileContent;
