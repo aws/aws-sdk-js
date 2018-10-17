@@ -8,8 +8,6 @@
 
   STS = require('../clients/sts');
 
-  var iniLoader = require('../lib/shared-ini').iniLoader;
-
   validateCredentials = function(creds, key, secret, session) {
     expect(creds.accessKeyId).to.equal(key || 'akid');
     expect(creds.secretAccessKey).to.equal(secret || 'secret');
@@ -193,8 +191,9 @@
       });
     });
     describe('AWS.SharedIniFileCredentials', function() {
-      var os = require('os');
-      var homedir = os.homedir;
+      var homedir, os;
+      os = require('os');
+      homedir = os.homedir;
       beforeEach(function() {
         delete os.homedir;
         delete process.env.AWS_PROFILE;
@@ -203,11 +202,10 @@
         delete process.env.HOME;
         delete process.env.HOMEPATH;
         delete process.env.HOMEDRIVE;
-        delete process.env.USERPROFILE;
+        return delete process.env.USERPROFILE;
       });
       afterEach(function() {
-        iniLoader.clearCachedFiles();
-        os.homedir = homedir;
+        return os.homedir = homedir;
       });
       describe('constructor', function() {
         beforeEach(function() {
@@ -226,7 +224,7 @@
           process.env.HOME = '/home/user';
           helpers.spyOn(os, 'homedir').andReturn(process.env.HOME + '/foo/bar');
 
-          new AWS.SharedIniFileCredentials();
+           new AWS.SharedIniFileCredentials();
           expect(os.homedir.calls.length).to.equal(0);
           expect(AWS.util.readFileSync.calls.length).to.equal(1);
           return expect(AWS.util.readFileSync.calls[0].arguments[0]).to
@@ -274,10 +272,7 @@
       });
       describe('loading', function() {
         beforeEach(function() {
-          process.env.HOME = '/home/user';
-        });
-        afterEach(function() {
-          iniLoader.clearCachedFiles();
+          return process.env.HOME = '/home/user';
         });
         it('loads credentials from ~/.aws/credentials using default profile', function() {
           var creds, mock;
@@ -392,12 +387,9 @@
           return validateCredentials(creds);
         });
       });
-      describe('refresh', function() {
+      return describe('refresh', function() {
         beforeEach(function() {
           return process.env.HOME = '/home/user';
-        });
-        afterEach(function() {
-          iniLoader.clearCachedFiles();
         });
         it('should refresh from disk', function() {
           var creds, mock;
@@ -424,10 +416,7 @@
       beforeEach(function() {
         var os;
         os = require('os');
-        helpers.spyOn(os, 'homedir').andReturn('/home/user');
-      });
-      afterEach(function() {
-        iniLoader.clearCachedFiles();
+        return helpers.spyOn(os, 'homedir').andReturn('/home/user');
       });
       it('will fail if assume role is disabled', function() {
         var creds, mock;
