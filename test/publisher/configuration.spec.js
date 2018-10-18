@@ -2,22 +2,22 @@ var helpers = require('../helpers');
 var AWS = helpers.AWS;
 var spyOn = helpers.spyOn;
 var monitoringConfig = require('../../lib/publisher/configuration');
+var iniLoader = require('../../lib/shared-ini').iniLoader;
 
 if (AWS.util.isNode()) {
   describe('configuration resolving', function () {
     var processEnv;
-    before(function() {
-      processEnv = process.env;
-    });
-
-    after(function() {
-      process.env = processEnv;
-    });
 
     beforeEach(function() {
+      processEnv = process.env;
       process.env = {
         'HOME': '/home/user'
       };
+    });
+
+    afterEach(function() {
+      iniLoader.clearCachedFiles();
+      process.env = processEnv;
     });
   
     describe('get configurations from environmental variable', function () {

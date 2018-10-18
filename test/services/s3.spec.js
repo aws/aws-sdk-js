@@ -8,7 +8,12 @@ describe('AWS.S3', function() {
   var request = function(operation, params) {
     return s3.makeRequest(operation, params);
   };
+  var env = process.env;
+  afterEach(function() {
+    process.env = env;
+  });
   beforeEach(function(done) {
+    process.env = {};
     s3 = new AWS.S3({
       region: void 0
     });
