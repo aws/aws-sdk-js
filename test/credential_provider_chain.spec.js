@@ -9,10 +9,11 @@
   if (AWS.util.isNode()) {
     describe('AWS.CredentialProviderChain', function() {
       describe('resolve', function() {
-        var chain, defaultProviders;
-        chain = null;
-        defaultProviders = AWS.CredentialProviderChain.defaultProviders;
+        var chain = null;
+        var defaultProviders = AWS.CredentialProviderChain.defaultProviders;
+        var env;
         beforeEach(function(done) {
+          env = process.env;
           process.env = {};
           chain = new AWS.CredentialProviderChain([
             function() {
@@ -25,7 +26,7 @@
         });
         afterEach(function() {
           AWS.CredentialProviderChain.defaultProviders = defaultProviders;
-          return process.env = {};
+          process.env = env;
         });
         it('returns an error by default', function() {
           return chain.resolve(function(err) {

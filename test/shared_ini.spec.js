@@ -14,9 +14,14 @@ function validateCachedFiles(iniFile, expectedCache) {
 
 if (AWS.util.isNode()) {
   describe('AWS.iniLoader', function() {
-    var homedir = os.homedir;
-    var env = process.env;
-    
+    var homedir;
+    var env;
+
+    before(function() {
+      homedir = os.homedir;
+      env = process.env;
+    })
+
     beforeEach(function() {
       process.env = {};
     });
