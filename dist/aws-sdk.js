@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.337.0
+// AWS SDK for JavaScript v2.338.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -110035,7 +110035,7 @@ module.exports={
         ],
         "members": {
           "HealthCheck": {
-            "shape": "S1y"
+            "shape": "S1z"
           },
           "Location": {
             "location": "header",
@@ -110066,7 +110066,7 @@ module.exports={
           },
           "CallerReference": {},
           "HostedZoneConfig": {
-            "shape": "S2g"
+            "shape": "S2h"
           },
           "DelegationSetId": {}
         }
@@ -110081,13 +110081,13 @@ module.exports={
         ],
         "members": {
           "HostedZone": {
-            "shape": "S2j"
+            "shape": "S2k"
           },
           "ChangeInfo": {
             "shape": "S8"
           },
           "DelegationSet": {
-            "shape": "S2l"
+            "shape": "S2m"
           },
           "VPC": {
             "shape": "S3"
@@ -110127,7 +110127,7 @@ module.exports={
         ],
         "members": {
           "QueryLoggingConfig": {
-            "shape": "S2q"
+            "shape": "S2r"
           },
           "Location": {
             "location": "header",
@@ -110163,7 +110163,7 @@ module.exports={
         ],
         "members": {
           "DelegationSet": {
-            "shape": "S2l"
+            "shape": "S2m"
           },
           "Location": {
             "location": "header",
@@ -110201,7 +110201,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicy": {
-            "shape": "S2z"
+            "shape": "S30"
           },
           "Location": {
             "location": "header",
@@ -110248,7 +110248,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstance": {
-            "shape": "S34"
+            "shape": "S35"
           },
           "Location": {
             "location": "header",
@@ -110289,7 +110289,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicy": {
-            "shape": "S2z"
+            "shape": "S30"
           },
           "Location": {
             "location": "header",
@@ -110670,7 +110670,7 @@ module.exports={
         ],
         "members": {
           "GeoLocationDetails": {
-            "shape": "S46"
+            "shape": "S47"
           }
         }
       }
@@ -110699,7 +110699,7 @@ module.exports={
         ],
         "members": {
           "HealthCheck": {
-            "shape": "S1y"
+            "shape": "S1z"
           }
         }
       }
@@ -110749,7 +110749,7 @@ module.exports={
         ],
         "members": {
           "HealthCheckObservations": {
-            "shape": "S4h"
+            "shape": "S4i"
           }
         }
       }
@@ -110778,7 +110778,7 @@ module.exports={
         ],
         "members": {
           "HealthCheckObservations": {
-            "shape": "S4h"
+            "shape": "S4i"
           }
         }
       }
@@ -110807,13 +110807,13 @@ module.exports={
         ],
         "members": {
           "HostedZone": {
-            "shape": "S2j"
+            "shape": "S2k"
           },
           "DelegationSet": {
-            "shape": "S2l"
+            "shape": "S2m"
           },
           "VPCs": {
-            "shape": "S4p"
+            "shape": "S4q"
           }
         }
       }
@@ -110911,7 +110911,7 @@ module.exports={
         ],
         "members": {
           "QueryLoggingConfig": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       }
@@ -110940,7 +110940,7 @@ module.exports={
         ],
         "members": {
           "DelegationSet": {
-            "shape": "S2l"
+            "shape": "S2m"
           }
         }
       }
@@ -111023,7 +111023,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicy": {
-            "shape": "S2z"
+            "shape": "S30"
           }
         }
       }
@@ -111052,7 +111052,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstance": {
-            "shape": "S34"
+            "shape": "S35"
           }
         }
       }
@@ -111115,7 +111115,7 @@ module.exports={
           "GeoLocationDetailsList": {
             "type": "list",
             "member": {
-              "shape": "S46",
+              "shape": "S47",
               "locationName": "GeoLocationDetails"
             }
           },
@@ -111159,7 +111159,7 @@ module.exports={
           "HealthChecks": {
             "type": "list",
             "member": {
-              "shape": "S1y",
+              "shape": "S1z",
               "locationName": "HealthCheck"
             }
           },
@@ -111204,7 +111204,7 @@ module.exports={
         ],
         "members": {
           "HostedZones": {
-            "shape": "S5n"
+            "shape": "S5o"
           },
           "Marker": {},
           "IsTruncated": {
@@ -111246,7 +111246,7 @@ module.exports={
         ],
         "members": {
           "HostedZones": {
-            "shape": "S5n"
+            "shape": "S5o"
           },
           "DNSName": {},
           "HostedZoneId": {},
@@ -111290,7 +111290,7 @@ module.exports={
           "QueryLoggingConfigs": {
             "type": "list",
             "member": {
-              "shape": "S2q",
+              "shape": "S2r",
               "locationName": "QueryLoggingConfig"
             }
           },
@@ -111386,7 +111386,7 @@ module.exports={
           "DelegationSets": {
             "type": "list",
             "member": {
-              "shape": "S2l",
+              "shape": "S2m",
               "locationName": "DelegationSet"
             }
           },
@@ -111428,7 +111428,7 @@ module.exports={
         ],
         "members": {
           "ResourceTagSet": {
-            "shape": "S63"
+            "shape": "S64"
           }
         }
       }
@@ -111469,7 +111469,7 @@ module.exports={
           "ResourceTagSets": {
             "type": "list",
             "member": {
-              "shape": "S63",
+              "shape": "S64",
               "locationName": "ResourceTagSet"
             }
           }
@@ -111571,7 +111571,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstances": {
-            "shape": "S6e"
+            "shape": "S6f"
           },
           "HostedZoneIdMarker": {},
           "TrafficPolicyInstanceNameMarker": {},
@@ -111621,7 +111621,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstances": {
-            "shape": "S6e"
+            "shape": "S6f"
           },
           "TrafficPolicyInstanceNameMarker": {},
           "TrafficPolicyInstanceTypeMarker": {},
@@ -111680,7 +111680,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstances": {
-            "shape": "S6e"
+            "shape": "S6f"
           },
           "HostedZoneIdMarker": {},
           "TrafficPolicyInstanceNameMarker": {},
@@ -111729,7 +111729,7 @@ module.exports={
           "TrafficPolicies": {
             "type": "list",
             "member": {
-              "shape": "S2z",
+              "shape": "S30",
               "locationName": "TrafficPolicy"
             }
           },
@@ -111776,7 +111776,7 @@ module.exports={
           "HostedZoneId": {},
           "NextToken": {},
           "VPCs": {
-            "shape": "S4p"
+            "shape": "S4q"
           }
         }
       }
@@ -111879,20 +111879,23 @@ module.exports={
           "Inverted": {
             "type": "boolean"
           },
+          "Disabled": {
+            "type": "boolean"
+          },
           "HealthThreshold": {
             "type": "integer"
           },
           "ChildHealthChecks": {
-            "shape": "S1p"
+            "shape": "S1q"
           },
           "EnableSNI": {
             "type": "boolean"
           },
           "Regions": {
-            "shape": "S1r"
+            "shape": "S1s"
           },
           "AlarmIdentifier": {
-            "shape": "S1t"
+            "shape": "S1u"
           },
           "InsufficientDataHealthStatus": {},
           "ResetElements": {
@@ -111910,7 +111913,7 @@ module.exports={
         ],
         "members": {
           "HealthCheck": {
-            "shape": "S1y"
+            "shape": "S1z"
           }
         }
       }
@@ -111943,7 +111946,7 @@ module.exports={
         ],
         "members": {
           "HostedZone": {
-            "shape": "S2j"
+            "shape": "S2k"
           }
         }
       }
@@ -111983,7 +111986,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicy": {
-            "shape": "S2z"
+            "shape": "S30"
           }
         }
       }
@@ -112025,7 +112028,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstance": {
-            "shape": "S34"
+            "shape": "S35"
           }
         }
       }
@@ -112153,37 +112156,40 @@ module.exports={
         "Inverted": {
           "type": "boolean"
         },
+        "Disabled": {
+          "type": "boolean"
+        },
         "HealthThreshold": {
           "type": "integer"
         },
         "ChildHealthChecks": {
-          "shape": "S1p"
+          "shape": "S1q"
         },
         "EnableSNI": {
           "type": "boolean"
         },
         "Regions": {
-          "shape": "S1r"
+          "shape": "S1s"
         },
         "AlarmIdentifier": {
-          "shape": "S1t"
+          "shape": "S1u"
         },
         "InsufficientDataHealthStatus": {}
       }
     },
-    "S1p": {
+    "S1q": {
       "type": "list",
       "member": {
         "locationName": "ChildHealthCheck"
       }
     },
-    "S1r": {
+    "S1s": {
       "type": "list",
       "member": {
         "locationName": "Region"
       }
     },
-    "S1t": {
+    "S1u": {
       "type": "structure",
       "required": [
         "Region",
@@ -112194,7 +112200,7 @@ module.exports={
         "Name": {}
       }
     },
-    "S1y": {
+    "S1z": {
       "type": "structure",
       "required": [
         "Id",
@@ -112206,7 +112212,7 @@ module.exports={
         "Id": {},
         "CallerReference": {},
         "LinkedService": {
-          "shape": "S1z"
+          "shape": "S20"
         },
         "HealthCheckConfig": {
           "shape": "S1d"
@@ -112258,14 +112264,14 @@ module.exports={
         }
       }
     },
-    "S1z": {
+    "S20": {
       "type": "structure",
       "members": {
         "ServicePrincipal": {},
         "Description": {}
       }
     },
-    "S2g": {
+    "S2h": {
       "type": "structure",
       "members": {
         "Comment": {},
@@ -112274,7 +112280,7 @@ module.exports={
         }
       }
     },
-    "S2j": {
+    "S2k": {
       "type": "structure",
       "required": [
         "Id",
@@ -112286,17 +112292,17 @@ module.exports={
         "Name": {},
         "CallerReference": {},
         "Config": {
-          "shape": "S2g"
+          "shape": "S2h"
         },
         "ResourceRecordSetCount": {
           "type": "long"
         },
         "LinkedService": {
-          "shape": "S1z"
+          "shape": "S20"
         }
       }
     },
-    "S2l": {
+    "S2m": {
       "type": "structure",
       "required": [
         "NameServers"
@@ -112312,7 +112318,7 @@ module.exports={
         }
       }
     },
-    "S2q": {
+    "S2r": {
       "type": "structure",
       "required": [
         "Id",
@@ -112325,7 +112331,7 @@ module.exports={
         "CloudWatchLogsLogGroupArn": {}
       }
     },
-    "S2z": {
+    "S30": {
       "type": "structure",
       "required": [
         "Id",
@@ -112345,7 +112351,7 @@ module.exports={
         "Comment": {}
       }
     },
-    "S34": {
+    "S35": {
       "type": "structure",
       "required": [
         "Id",
@@ -112374,7 +112380,7 @@ module.exports={
         "TrafficPolicyType": {}
       }
     },
-    "S46": {
+    "S47": {
       "type": "structure",
       "members": {
         "ContinentCode": {},
@@ -112385,7 +112391,7 @@ module.exports={
         "SubdivisionName": {}
       }
     },
-    "S4h": {
+    "S4i": {
       "type": "list",
       "member": {
         "locationName": "HealthCheckObservation",
@@ -112405,21 +112411,21 @@ module.exports={
         }
       }
     },
-    "S4p": {
+    "S4q": {
       "type": "list",
       "member": {
         "shape": "S3",
         "locationName": "VPC"
       }
     },
-    "S5n": {
+    "S5o": {
       "type": "list",
       "member": {
-        "shape": "S2j",
+        "shape": "S2k",
         "locationName": "HostedZone"
       }
     },
-    "S63": {
+    "S64": {
       "type": "structure",
       "members": {
         "ResourceType": {},
@@ -112429,10 +112435,10 @@ module.exports={
         }
       }
     },
-    "S6e": {
+    "S6f": {
       "type": "list",
       "member": {
-        "shape": "S34",
+        "shape": "S35",
         "locationName": "TrafficPolicyInstance"
       }
     }
@@ -137848,7 +137854,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.337.0',
+  VERSION: '2.338.0',
 
   /**
    * @api private
@@ -157181,7 +157187,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.337.0
+// AWS SDK for JavaScript v2.338.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

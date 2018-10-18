@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.337.0-->
+<!--LATEST=2.338.0-->
 <!--ENTRYINSERT-->
+
+## 2.338.0
+* feature: AppStream: This API update adds support for creating, managing, and deleting users in the AppStream 2.0 user pool.
+* feature: MediaLive: This release allows you to now turn on Quality-Defined Variable Bitrate (QVBR) encoding for your AWS Elemental MediaLive channels. You can now deliver a consistently high-quality video viewing experience while reducing overall distribution bitrates by using Quality-Defined Variable Bitrate (QVBR) encoding with AWS Elemental MediaLive. QVBR is a video compression technique that automatically adjusts output bitrates to the complexity of source content and only use the bits required to maintain a defined level of quality. This means using QVBR encoding, you can save on distribution cost, while maintaining, or increasing video quality for your viewers.
+* feature: Route53: This change allows customers to disable health checks.
 
 ## 2.337.0
 * bugfix: npmignore: update npmignore to exclude unit tests from npm

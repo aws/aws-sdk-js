@@ -21,6 +21,22 @@ declare class AppStream extends Service {
    */
   associateFleet(callback?: (err: AWSError, data: AppStream.Types.AssociateFleetResult) => void): Request<AppStream.Types.AssociateFleetResult, AWSError>;
   /**
+   * Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.
+   */
+  batchAssociateUserStack(params: AppStream.Types.BatchAssociateUserStackRequest, callback?: (err: AWSError, data: AppStream.Types.BatchAssociateUserStackResult) => void): Request<AppStream.Types.BatchAssociateUserStackResult, AWSError>;
+  /**
+   * Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.
+   */
+  batchAssociateUserStack(callback?: (err: AWSError, data: AppStream.Types.BatchAssociateUserStackResult) => void): Request<AppStream.Types.BatchAssociateUserStackResult, AWSError>;
+  /**
+   * Disassociates the specified users from the specified stacks.
+   */
+  batchDisassociateUserStack(params: AppStream.Types.BatchDisassociateUserStackRequest, callback?: (err: AWSError, data: AppStream.Types.BatchDisassociateUserStackResult) => void): Request<AppStream.Types.BatchDisassociateUserStackResult, AWSError>;
+  /**
+   * Disassociates the specified users from the specified stacks.
+   */
+  batchDisassociateUserStack(callback?: (err: AWSError, data: AppStream.Types.BatchDisassociateUserStackResult) => void): Request<AppStream.Types.BatchDisassociateUserStackResult, AWSError>;
+  /**
    * Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.
    */
   copyImage(params: AppStream.Types.CopyImageRequest, callback?: (err: AWSError, data: AppStream.Types.CopyImageResponse) => void): Request<AppStream.Types.CopyImageResponse, AWSError>;
@@ -77,6 +93,14 @@ declare class AppStream extends Service {
    */
   createStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
   /**
+   * Creates a new user in the user pool.
+   */
+  createUser(params: AppStream.Types.CreateUserRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUserResult) => void): Request<AppStream.Types.CreateUserResult, AWSError>;
+  /**
+   * Creates a new user in the user pool.
+   */
+  createUser(callback?: (err: AWSError, data: AppStream.Types.CreateUserResult) => void): Request<AppStream.Types.CreateUserResult, AWSError>;
+  /**
    * Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
   deleteDirectoryConfig(params: AppStream.Types.DeleteDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteDirectoryConfigResult) => void): Request<AppStream.Types.DeleteDirectoryConfigResult, AWSError>;
@@ -124,6 +148,14 @@ declare class AppStream extends Service {
    * Deletes the specified stack. After the stack is deleted, the application streaming environment provided by the stack is no longer available to users. Also, any reservations made for application streaming sessions for the stack are released.
    */
   deleteStack(callback?: (err: AWSError, data: AppStream.Types.DeleteStackResult) => void): Request<AppStream.Types.DeleteStackResult, AWSError>;
+  /**
+   * Deletes a user from the user pool.
+   */
+  deleteUser(params: AppStream.Types.DeleteUserRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
+  /**
+   * Deletes a user from the user pool.
+   */
+  deleteUser(callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the information required to join streaming instances to an Active Directory domain.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
@@ -181,6 +213,30 @@ declare class AppStream extends Service {
    */
   describeStacks(callback?: (err: AWSError, data: AppStream.Types.DescribeStacksResult) => void): Request<AppStream.Types.DescribeStacksResult, AWSError>;
   /**
+   * Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:   The stack name   The user name (email address of the user associated with the stack) and the authentication type for the user  
+   */
+  describeUserStackAssociations(params: AppStream.Types.DescribeUserStackAssociationsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeUserStackAssociationsResult) => void): Request<AppStream.Types.DescribeUserStackAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:   The stack name   The user name (email address of the user associated with the stack) and the authentication type for the user  
+   */
+  describeUserStackAssociations(callback?: (err: AWSError, data: AppStream.Types.DescribeUserStackAssociationsResult) => void): Request<AppStream.Types.DescribeUserStackAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more specified users in the user pool, if user names are provided. Otherwise, all users in the user pool are described.
+   */
+  describeUsers(params: AppStream.Types.DescribeUsersRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeUsersResult) => void): Request<AppStream.Types.DescribeUsersResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more specified users in the user pool, if user names are provided. Otherwise, all users in the user pool are described.
+   */
+  describeUsers(callback?: (err: AWSError, data: AppStream.Types.DescribeUsersResult) => void): Request<AppStream.Types.DescribeUsersResult, AWSError>;
+  /**
+   * Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. 
+   */
+  disableUser(params: AppStream.Types.DisableUserRequest, callback?: (err: AWSError, data: AppStream.Types.DisableUserResult) => void): Request<AppStream.Types.DisableUserResult, AWSError>;
+  /**
+   * Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. 
+   */
+  disableUser(callback?: (err: AWSError, data: AppStream.Types.DisableUserResult) => void): Request<AppStream.Types.DisableUserResult, AWSError>;
+  /**
    * Disassociates the specified fleet from the specified stack.
    */
   disassociateFleet(params: AppStream.Types.DisassociateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateFleetResult) => void): Request<AppStream.Types.DisassociateFleetResult, AWSError>;
@@ -188,6 +244,14 @@ declare class AppStream extends Service {
    * Disassociates the specified fleet from the specified stack.
    */
   disassociateFleet(callback?: (err: AWSError, data: AppStream.Types.DisassociateFleetResult) => void): Request<AppStream.Types.DisassociateFleetResult, AWSError>;
+  /**
+   * Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.
+   */
+  enableUser(params: AppStream.Types.EnableUserRequest, callback?: (err: AWSError, data: AppStream.Types.EnableUserResult) => void): Request<AppStream.Types.EnableUserResult, AWSError>;
+  /**
+   * Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.
+   */
+  enableUser(callback?: (err: AWSError, data: AppStream.Types.EnableUserResult) => void): Request<AppStream.Types.EnableUserResult, AWSError>;
   /**
    * Immediately stops the specified streaming session.
    */
@@ -394,6 +458,30 @@ declare namespace AppStream {
   export type AuthenticationType = "API"|"SAML"|"USERPOOL"|string;
   export type AwsAccountId = string;
   export type AwsAccountIdList = AwsAccountId[];
+  export interface BatchAssociateUserStackRequest {
+    /**
+     * The list of UserStackAssociation objects.
+     */
+    UserStackAssociations: UserStackAssociationList;
+  }
+  export interface BatchAssociateUserStackResult {
+    /**
+     * The list of UserStackAssociationError objects.
+     */
+    errors?: UserStackAssociationErrorList;
+  }
+  export interface BatchDisassociateUserStackRequest {
+    /**
+     * The list of UserStackAssociation objects.
+     */
+    UserStackAssociations: UserStackAssociationList;
+  }
+  export interface BatchDisassociateUserStackResult {
+    /**
+     * The list of UserStackAssociationError objects.
+     */
+    errors?: UserStackAssociationErrorList;
+  }
   export type Boolean = boolean;
   export type BooleanObject = boolean;
   export interface ComputeCapacity {
@@ -668,6 +756,30 @@ declare namespace AppStream {
      */
     Expires?: Timestamp;
   }
+  export interface CreateUserRequest {
+    /**
+     * The email address of the user.
+     */
+    UserName: Username;
+    /**
+     * The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent.   The temporary password in the welcome email is valid for only 7 days. If users don’t set their passwords within 7 days, you must send them a new welcome email. 
+     */
+    MessageAction?: MessageAction;
+    /**
+     * The first name, or given name, of the user.
+     */
+    FirstName?: UserAttributeValue;
+    /**
+     * The last name, or surname, of the user.
+     */
+    LastName?: UserAttributeValue;
+    /**
+     * The authentication type for the user. You must specify USERPOOL. 
+     */
+    AuthenticationType: AuthenticationType;
+  }
+  export interface CreateUserResult {
+  }
   export interface DeleteDirectoryConfigRequest {
     /**
      * The name of the directory configuration.
@@ -727,6 +839,18 @@ declare namespace AppStream {
     Name: String;
   }
   export interface DeleteStackResult {
+  }
+  export interface DeleteUserRequest {
+    /**
+     * The email address of the user.
+     */
+    UserName: Username;
+    /**
+     * The authentication type for the user. You must specify USERPOOL.
+     */
+    AuthenticationType: AuthenticationType;
+  }
+  export interface DeleteUserResult {
   }
   export interface DescribeDirectoryConfigsRequest {
     /**
@@ -802,7 +926,7 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The maximum size of each results page.
+     * The maximum size of each page of results.
      */
     MaxResults?: MaxResults;
     /**
@@ -810,7 +934,7 @@ declare namespace AppStream {
      */
     SharedAwsAccountIds?: AwsAccountIdList;
     /**
-     * The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
      */
     NextToken?: String;
   }
@@ -824,7 +948,7 @@ declare namespace AppStream {
      */
     SharedImagePermissionsList?: SharedImagePermissionsList;
     /**
-     * The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
     NextToken?: String;
   }
@@ -843,7 +967,7 @@ declare namespace AppStream {
      */
     Type?: VisibilityType;
     /**
-     * The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
      */
     NextToken?: String;
     /**
@@ -857,7 +981,7 @@ declare namespace AppStream {
      */
     Images?: ImageList;
     /**
-     * The pagination token to use to retrieve the next page of results. If there are no more pages, this value is null.
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
     NextToken?: String;
   }
@@ -917,6 +1041,62 @@ declare namespace AppStream {
      */
     NextToken?: String;
   }
+  export interface DescribeUserStackAssociationsRequest {
+    /**
+     * The name of the stack that is associated with the user.
+     */
+    StackName?: String;
+    /**
+     * The email address of the user who is associated with the stack.
+     */
+    UserName?: Username;
+    /**
+     * The authentication type for the user who is associated with the stack. You must specify USERPOOL.
+     */
+    AuthenticationType?: AuthenticationType;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeUserStackAssociationsResult {
+    /**
+     * The UserStackAssociation objects.
+     */
+    UserStackAssociations?: UserStackAssociationList;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeUsersRequest {
+    /**
+     * The authentication type for the users in the user pool to describe. You must specify USERPOOL.
+     */
+    AuthenticationType: AuthenticationType;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeUsersResult {
+    /**
+     * Information about users in the user pool.
+     */
+    Users?: UserList;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: String;
+  }
   export type Description = string;
   export interface DirectoryConfig {
     /**
@@ -939,6 +1119,18 @@ declare namespace AppStream {
   export type DirectoryConfigList = DirectoryConfig[];
   export type DirectoryName = string;
   export type DirectoryNameList = DirectoryName[];
+  export interface DisableUserRequest {
+    /**
+     * The email address of the user.
+     */
+    UserName: Username;
+    /**
+     * The authentication type for the user. You must specify USERPOOL.
+     */
+    AuthenticationType: AuthenticationType;
+  }
+  export interface DisableUserResult {
+  }
   export interface DisassociateFleetRequest {
     /**
      * The name of the fleet.
@@ -964,6 +1156,18 @@ declare namespace AppStream {
     OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
   }
   export type DomainList = Domain[];
+  export interface EnableUserRequest {
+    /**
+     * The email address of the user.
+     */
+    UserName: Username;
+    /**
+     * The authentication type for the user. You must specify USERPOOL.
+     */
+    AuthenticationType: AuthenticationType;
+  }
+  export interface EnableUserResult {
+  }
   export interface ExpireSessionRequest {
     /**
      * The ID of the streaming session.
@@ -1275,6 +1479,7 @@ declare namespace AppStream {
   }
   export type Long = number;
   export type MaxResults = number;
+  export type MessageAction = "SUPPRESS"|"RESEND"|string;
   export type Metadata = {[key: string]: String};
   export type Name = string;
   export interface NetworkAccessConfiguration {
@@ -1666,7 +1871,43 @@ declare namespace AppStream {
      */
     Stack?: Stack;
   }
+  export interface User {
+    /**
+     * The ARN of the user.
+     */
+    Arn?: Arn;
+    /**
+     * The email address of the user.
+     */
+    UserName?: Username;
+    /**
+     * Specifies whether the user in the user pool is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The status of the user in the user pool. The status can be one of the following:   UNCONFIRMED – The user is created but not confirmed.   CONFIRMED – The user is confirmed.   ARCHIVED – The user is no longer active.   COMPROMISED – The user is disabled because of a potential security threat.   UNKNOWN – The user status is not known.  
+     */
+    Status?: String;
+    /**
+     * The first name, or given name, of the user.
+     */
+    FirstName?: UserAttributeValue;
+    /**
+     * The last name, or surname, of the user.
+     */
+    LastName?: UserAttributeValue;
+    /**
+     * The date and time the user was created in the user pool.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The authentication type for the user.
+     */
+    AuthenticationType: AuthenticationType;
+  }
+  export type UserAttributeValue = string;
   export type UserId = string;
+  export type UserList = User[];
   export interface UserSetting {
     /**
      * The action that is enabled or disabled.
@@ -1678,6 +1919,42 @@ declare namespace AppStream {
     Permission: Permission;
   }
   export type UserSettingList = UserSetting[];
+  export interface UserStackAssociation {
+    /**
+     * The name of the stack that is associated with the user.
+     */
+    StackName: String;
+    /**
+     * The email address of the user who is associated with the stack.
+     */
+    UserName: Username;
+    /**
+     * The authentication type for the user.
+     */
+    AuthenticationType: AuthenticationType;
+    /**
+     * Specifies whether a welcome email is sent to a user after the user is created in the user pool.
+     */
+    SendEmailNotification?: Boolean;
+  }
+  export interface UserStackAssociationError {
+    /**
+     * Information about the user and associated stack.
+     */
+    UserStackAssociation?: UserStackAssociation;
+    /**
+     * The error code for the error that is returned when a user can’t be associated with or disassociated from a stack.
+     */
+    ErrorCode?: UserStackAssociationErrorCode;
+    /**
+     * The error message for the error that is returned when a user can’t be associated with or disassociated from a stack.
+     */
+    ErrorMessage?: String;
+  }
+  export type UserStackAssociationErrorCode = "STACK_NOT_FOUND"|"USER_NAME_NOT_FOUND"|"INTERNAL_ERROR"|string;
+  export type UserStackAssociationErrorList = UserStackAssociationError[];
+  export type UserStackAssociationList = UserStackAssociation[];
+  export type Username = string;
   export type VisibilityType = "PUBLIC"|"PRIVATE"|"SHARED"|string;
   export interface VpcConfig {
     /**

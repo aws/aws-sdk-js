@@ -47,6 +47,39 @@
       ],
       "documentation": "<p>Associates the specified fleet with the specified stack.</p>"
     },
+    "BatchAssociateUserStack": {
+      "name": "BatchAssociateUserStack",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchAssociateUserStackRequest"
+      },
+      "output": {
+        "shape": "BatchAssociateUserStackResult"
+      },
+      "errors": [
+        {
+          "shape": "OperationNotPermittedException"
+        }
+      ],
+      "documentation": "<p>Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.</p>"
+    },
+    "BatchDisassociateUserStack": {
+      "name": "BatchDisassociateUserStack",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchDisassociateUserStackRequest"
+      },
+      "output": {
+        "shape": "BatchDisassociateUserStackResult"
+      },
+      "documentation": "<p>Disassociates the specified users from the specified stacks.</p>"
+    },
     "CopyImage": {
       "name": "CopyImage",
       "http": {
@@ -285,6 +318,37 @@
       ],
       "documentation": "<p>Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. </p>"
     },
+    "CreateUser": {
+      "name": "CreateUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateUserRequest"
+      },
+      "output": {
+        "shape": "CreateUserResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "InvalidAccountStatusException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "OperationNotPermittedException"
+        }
+      ],
+      "documentation": "<p>Creates a new user in the user pool.</p>"
+    },
     "DeleteDirectoryConfig": {
       "name": "DeleteDirectoryConfig",
       "http": {
@@ -432,6 +496,25 @@
       ],
       "documentation": "<p>Deletes the specified stack. After the stack is deleted, the application streaming environment provided by the stack is no longer available to users. Also, any reservations made for application streaming sessions for the stack are released.</p>"
     },
+    "DeleteUser": {
+      "name": "DeleteUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteUserRequest"
+      },
+      "output": {
+        "shape": "DeleteUserResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Deletes a user from the user pool.</p>"
+    },
     "DescribeDirectoryConfigs": {
       "name": "DescribeDirectoryConfigs",
       "http": {
@@ -568,6 +651,66 @@
       ],
       "documentation": "<p>Retrieves a list that describes one or more specified stacks, if the stack names are provided. Otherwise, all stacks in the account are described.</p>"
     },
+    "DescribeUserStackAssociations": {
+      "name": "DescribeUserStackAssociations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeUserStackAssociationsRequest"
+      },
+      "output": {
+        "shape": "DescribeUserStackAssociationsResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterCombinationException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:</p> <ul> <li> <p>The stack name</p> </li> <li> <p>The user name (email address of the user associated with the stack) and the authentication type for the user</p> </li> </ul>"
+    },
+    "DescribeUsers": {
+      "name": "DescribeUsers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeUsersRequest"
+      },
+      "output": {
+        "shape": "DescribeUsersResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list that describes one or more specified users in the user pool, if user names are provided. Otherwise, all users in the user pool are described.</p>"
+    },
+    "DisableUser": {
+      "name": "DisableUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisableUserRequest"
+      },
+      "output": {
+        "shape": "DisableUserResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. </p>"
+    },
     "DisassociateFleet": {
       "name": "DisassociateFleet",
       "http": {
@@ -592,6 +735,28 @@
         }
       ],
       "documentation": "<p>Disassociates the specified fleet from the specified stack.</p>"
+    },
+    "EnableUser": {
+      "name": "EnableUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "EnableUserRequest"
+      },
+      "output": {
+        "shape": "EnableUserResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidAccountStatusException"
+        }
+      ],
+      "documentation": "<p>Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.</p>"
     },
     "ExpireSession": {
       "name": "ExpireSession",
@@ -1097,6 +1262,48 @@
       "max": 5,
       "min": 1
     },
+    "BatchAssociateUserStackRequest": {
+      "type": "structure",
+      "required": [
+        "UserStackAssociations"
+      ],
+      "members": {
+        "UserStackAssociations": {
+          "shape": "UserStackAssociationList",
+          "documentation": "<p>The list of UserStackAssociation objects.</p>"
+        }
+      }
+    },
+    "BatchAssociateUserStackResult": {
+      "type": "structure",
+      "members": {
+        "errors": {
+          "shape": "UserStackAssociationErrorList",
+          "documentation": "<p>The list of UserStackAssociationError objects.</p>"
+        }
+      }
+    },
+    "BatchDisassociateUserStackRequest": {
+      "type": "structure",
+      "required": [
+        "UserStackAssociations"
+      ],
+      "members": {
+        "UserStackAssociations": {
+          "shape": "UserStackAssociationList",
+          "documentation": "<p>The list of UserStackAssociation objects.</p>"
+        }
+      }
+    },
+    "BatchDisassociateUserStackResult": {
+      "type": "structure",
+      "members": {
+        "errors": {
+          "shape": "UserStackAssociationErrorList",
+          "documentation": "<p>The list of UserStackAssociationError objects.</p>"
+        }
+      }
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -1461,6 +1668,39 @@
         }
       }
     },
+    "CreateUserRequest": {
+      "type": "structure",
+      "required": [
+        "UserName",
+        "AuthenticationType"
+      ],
+      "members": {
+        "UserName": {
+          "shape": "Username",
+          "documentation": "<p>The email address of the user.</p>"
+        },
+        "MessageAction": {
+          "shape": "MessageAction",
+          "documentation": "<p>The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent. </p> <note> <p>The temporary password in the welcome email is valid for only 7 days. If users don’t set their passwords within 7 days, you must send them a new welcome email.</p> </note>"
+        },
+        "FirstName": {
+          "shape": "UserAttributeValue",
+          "documentation": "<p>The first name, or given name, of the user.</p>"
+        },
+        "LastName": {
+          "shape": "UserAttributeValue",
+          "documentation": "<p>The last name, or surname, of the user.</p>"
+        },
+        "AuthenticationType": {
+          "shape": "AuthenticationType",
+          "documentation": "<p>The authentication type for the user. You must specify USERPOOL. </p>"
+        }
+      }
+    },
+    "CreateUserResult": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteDirectoryConfigRequest": {
       "type": "structure",
       "required": [
@@ -1572,6 +1812,27 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteUserRequest": {
+      "type": "structure",
+      "required": [
+        "UserName",
+        "AuthenticationType"
+      ],
+      "members": {
+        "UserName": {
+          "shape": "Username",
+          "documentation": "<p>The email address of the user.</p>"
+        },
+        "AuthenticationType": {
+          "shape": "AuthenticationType",
+          "documentation": "<p>The authentication type for the user. You must specify USERPOOL.</p>"
+        }
+      }
+    },
+    "DeleteUserResult": {
+      "type": "structure",
+      "members": {}
+    },
     "DescribeDirectoryConfigsRequest": {
       "type": "structure",
       "members": {
@@ -1670,7 +1931,7 @@
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum size of each results page.</p>"
+          "documentation": "<p>The maximum size of each page of results.</p>"
         },
         "SharedAwsAccountIds": {
           "shape": "AwsAccountIdList",
@@ -1678,7 +1939,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.</p>"
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
         }
       }
     },
@@ -1695,7 +1956,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.</p>"
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
         }
       }
     },
@@ -1722,7 +1983,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.</p>"
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
         },
         "MaxResults": {
           "shape": "DescribeImagesMaxResults",
@@ -1739,7 +2000,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The pagination token to use to retrieve the next page of results. If there are no more pages, this value is null.</p>"
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
         }
       }
     },
@@ -1815,6 +2076,77 @@
         }
       }
     },
+    "DescribeUserStackAssociationsRequest": {
+      "type": "structure",
+      "members": {
+        "StackName": {
+          "shape": "String",
+          "documentation": "<p>The name of the stack that is associated with the user.</p>"
+        },
+        "UserName": {
+          "shape": "Username",
+          "documentation": "<p>The email address of the user who is associated with the stack.</p>"
+        },
+        "AuthenticationType": {
+          "shape": "AuthenticationType",
+          "documentation": "<p>The authentication type for the user who is associated with the stack. You must specify USERPOOL.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum size of each page of results.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+        }
+      }
+    },
+    "DescribeUserStackAssociationsResult": {
+      "type": "structure",
+      "members": {
+        "UserStackAssociations": {
+          "shape": "UserStackAssociationList",
+          "documentation": "<p>The UserStackAssociation objects.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "DescribeUsersRequest": {
+      "type": "structure",
+      "required": [
+        "AuthenticationType"
+      ],
+      "members": {
+        "AuthenticationType": {
+          "shape": "AuthenticationType",
+          "documentation": "<p>The authentication type for the users in the user pool to describe. You must specify USERPOOL.</p>"
+        },
+        "MaxResults": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum size of each page of results.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+        }
+      }
+    },
+    "DescribeUsersResult": {
+      "type": "structure",
+      "members": {
+        "Users": {
+          "shape": "UserList",
+          "documentation": "<p>Information about users in the user pool.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
     "Description": {
       "type": "string",
       "max": 256
@@ -1858,6 +2190,27 @@
       "member": {
         "shape": "DirectoryName"
       }
+    },
+    "DisableUserRequest": {
+      "type": "structure",
+      "required": [
+        "UserName",
+        "AuthenticationType"
+      ],
+      "members": {
+        "UserName": {
+          "shape": "Username",
+          "documentation": "<p>The email address of the user.</p>"
+        },
+        "AuthenticationType": {
+          "shape": "AuthenticationType",
+          "documentation": "<p>The authentication type for the user. You must specify USERPOOL.</p>"
+        }
+      }
+    },
+    "DisableUserResult": {
+      "type": "structure",
+      "members": {}
     },
     "DisassociateFleetRequest": {
       "type": "structure",
@@ -1909,6 +2262,27 @@
         "shape": "Domain"
       },
       "max": 10
+    },
+    "EnableUserRequest": {
+      "type": "structure",
+      "required": [
+        "UserName",
+        "AuthenticationType"
+      ],
+      "members": {
+        "UserName": {
+          "shape": "Username",
+          "documentation": "<p>The email address of the user.</p>"
+        },
+        "AuthenticationType": {
+          "shape": "AuthenticationType",
+          "documentation": "<p>The authentication type for the user. You must specify USERPOOL.</p>"
+        }
+      }
+    },
+    "EnableUserResult": {
+      "type": "structure",
+      "members": {}
     },
     "ExpireSessionRequest": {
       "type": "structure",
@@ -2422,6 +2796,13 @@
       "box": true,
       "max": 500,
       "min": 0
+    },
+    "MessageAction": {
+      "type": "string",
+      "enum": [
+        "SUPPRESS",
+        "RESEND"
+      ]
     },
     "Metadata": {
       "type": "map",
@@ -3127,10 +3508,63 @@
         }
       }
     },
+    "User": {
+      "type": "structure",
+      "required": [
+        "AuthenticationType"
+      ],
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the user.</p>"
+        },
+        "UserName": {
+          "shape": "Username",
+          "documentation": "<p>The email address of the user.</p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the user in the user pool is enabled.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The status of the user in the user pool. The status can be one of the following:</p> <ul> <li> <p>UNCONFIRMED – The user is created but not confirmed.</p> </li> <li> <p>CONFIRMED – The user is confirmed.</p> </li> <li> <p>ARCHIVED – The user is no longer active.</p> </li> <li> <p>COMPROMISED – The user is disabled because of a potential security threat.</p> </li> <li> <p>UNKNOWN – The user status is not known.</p> </li> </ul>"
+        },
+        "FirstName": {
+          "shape": "UserAttributeValue",
+          "documentation": "<p>The first name, or given name, of the user.</p>"
+        },
+        "LastName": {
+          "shape": "UserAttributeValue",
+          "documentation": "<p>The last name, or surname, of the user.</p>"
+        },
+        "CreatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time the user was created in the user pool.</p>"
+        },
+        "AuthenticationType": {
+          "shape": "AuthenticationType",
+          "documentation": "<p>The authentication type for the user.</p>"
+        }
+      },
+      "documentation": "<p>Describes a user in the user pool.</p>"
+    },
+    "UserAttributeValue": {
+      "type": "string",
+      "max": 2048,
+      "pattern": "^[A-Za-z0-9_\\-\\s]+$",
+      "sensitive": true
+    },
     "UserId": {
       "type": "string",
       "max": 32,
       "min": 2
+    },
+    "UserList": {
+      "type": "list",
+      "member": {
+        "shape": "User"
+      }
     },
     "UserSetting": {
       "type": "structure",
@@ -3156,6 +3590,78 @@
         "shape": "UserSetting"
       },
       "min": 1
+    },
+    "UserStackAssociation": {
+      "type": "structure",
+      "required": [
+        "StackName",
+        "UserName",
+        "AuthenticationType"
+      ],
+      "members": {
+        "StackName": {
+          "shape": "String",
+          "documentation": "<p>The name of the stack that is associated with the user.</p>"
+        },
+        "UserName": {
+          "shape": "Username",
+          "documentation": "<p>The email address of the user who is associated with the stack.</p>"
+        },
+        "AuthenticationType": {
+          "shape": "AuthenticationType",
+          "documentation": "<p>The authentication type for the user.</p>"
+        },
+        "SendEmailNotification": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether a welcome email is sent to a user after the user is created in the user pool.</p>"
+        }
+      },
+      "documentation": "<p>Describes a user in the user pool and the associated stack.</p>"
+    },
+    "UserStackAssociationError": {
+      "type": "structure",
+      "members": {
+        "UserStackAssociation": {
+          "shape": "UserStackAssociation",
+          "documentation": "<p>Information about the user and associated stack.</p>"
+        },
+        "ErrorCode": {
+          "shape": "UserStackAssociationErrorCode",
+          "documentation": "<p>The error code for the error that is returned when a user can’t be associated with or disassociated from a stack.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>The error message for the error that is returned when a user can’t be associated with or disassociated from a stack.</p>"
+        }
+      },
+      "documentation": "<p>Describes the error that is returned when a user can’t be associated with or disassociated from a stack. </p>"
+    },
+    "UserStackAssociationErrorCode": {
+      "type": "string",
+      "enum": [
+        "STACK_NOT_FOUND",
+        "USER_NAME_NOT_FOUND",
+        "INTERNAL_ERROR"
+      ]
+    },
+    "UserStackAssociationErrorList": {
+      "type": "list",
+      "member": {
+        "shape": "UserStackAssociationError"
+      }
+    },
+    "UserStackAssociationList": {
+      "type": "list",
+      "member": {
+        "shape": "UserStackAssociation"
+      }
+    },
+    "Username": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+",
+      "sensitive": true
     },
     "VisibilityType": {
       "type": "string",

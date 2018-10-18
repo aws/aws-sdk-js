@@ -455,7 +455,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * The name of this AudioSelector. AudioDescriptions will use this name to uniquely identify this Selector.  Selector names should be unique per input.
      */
-    Name: __string;
+    Name: __stringMin1;
     /**
      * The audio selector settings.
      */
@@ -496,19 +496,19 @@ Alternate rendition that the client will not try to play back by default. Repres
   }
   export interface BatchScheduleActionCreateResult {
     /**
-     * Returned list of created schedule actions.
+     * List of actions that have been created in the schedule.
      */
     ScheduleActions: __listOfScheduleAction;
   }
   export interface BatchScheduleActionDeleteRequest {
     /**
-     * A list of schedule actions to delete, identified by unique name.
+     * A list of schedule actions to delete.
      */
     ActionNames: __listOf__string;
   }
   export interface BatchScheduleActionDeleteResult {
     /**
-     * Returned list of deleted schedule actions.
+     * List of actions that have been deleted from the schedule.
      */
     ScheduleActions: __listOfScheduleAction;
   }
@@ -694,7 +694,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Name identifier for a caption selector.  This name is used to associate this caption selector with one or more caption descriptions.  Names must be unique within an event.
      */
-    Name: __string;
+    Name: __stringMin1;
     /**
      * Caption selector settings.
      */
@@ -1279,7 +1279,7 @@ one destination per packager.
      */
     NextToken?: __string;
     /**
-     * The list of schedule actions.
+     * The list of actions in the schedule.
      */
     ScheduleActions?: __listOfScheduleAction;
   }
@@ -1571,9 +1571,9 @@ one destination per packager.
   export type FixedAfd = "AFD_0000"|"AFD_0010"|"AFD_0011"|"AFD_0100"|"AFD_1000"|"AFD_1001"|"AFD_1010"|"AFD_1011"|"AFD_1101"|"AFD_1110"|"AFD_1111"|string;
   export interface FixedModeScheduleActionStartSettings {
     /**
-     * Fixed timestamp action start. Conforms to ISO-8601.
+     * Start time for the action to start in the channel. (Not the time for the action to be added to the schedule: actions are always added to the schedule immediately.) UTC format: yyyy-mm-ddThh:mm:ss.nnnZ. All the letters are digits (for example, mm might be 01) except for the two constants "T" for time and "Z" for "UTC format".
      */
-    Time?: __string;
+    Time: __string;
   }
   export interface GlobalConfiguration {
     /**
@@ -1581,7 +1581,7 @@ one destination per packager.
      */
     InitialAudioGain?: __integerMinNegative60Max60;
     /**
-     * Indicates the action to take when an input completes (e.g. end-of-file.) Options include immediately switching to the next sequential input (via "switchInput"), switching to the next input and looping back to the first input when last input ends (via "switchAndLoopInputs") or not switching inputs and instead transcoding black / color / slate images per the "Input Loss Behavior" configuration until an activateInput REST command is received (via "none").
+     * Indicates the action to take when the input completes (e.g. end-of-file). Options include looping on the input (via "switchAndLoopInputs") or transcoding black / color / slate images per the "Input Loss Behavior" configuration (via "none").
      */
     InputEndAction?: GlobalConfigurationInputEndAction;
     /**
@@ -1611,7 +1611,7 @@ one destination per packager.
   export type H264LookAheadRateControl = "HIGH"|"LOW"|"MEDIUM"|string;
   export type H264ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H264Profile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN"|string;
-  export type H264RateControlMode = "CBR"|"VBR"|string;
+  export type H264RateControlMode = "CBR"|"QVBR"|"VBR"|string;
   export type H264ScanType = "INTERLACED"|"PROGRESSIVE"|string;
   export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H264Settings {
@@ -1692,7 +1692,9 @@ one destination per packager.
      */
     LookAheadRateControl?: H264LookAheadRateControl;
     /**
-     * Maximum bitrate in bits/second (for VBR mode only).
+     * Maximum bitrate in bits/second (for VBR and QVBR modes only).
+
+Required when rateControlMode is "qvbr".
      */
     MaxBitrate?: __integerMin1000;
     /**
@@ -1720,7 +1722,19 @@ one destination per packager.
      */
     Profile?: H264Profile;
     /**
-     * Rate control mode.
+     * Target quality value. Applicable only to QVBR mode. 1 is the lowest quality and 10 is the
+highest and approaches lossless. Typical levels for content distribution are between 6 and 8.
+     */
+    QvbrQualityLevel?: __integerMin1Max10;
+    /**
+     * Rate control mode. 
+
+- CBR: Constant Bit Rate
+- VBR: Variable Bit Rate
+- QVBR: Encoder dynamically controls the bitrate to meet the desired quality (specified
+through the qvbrQualityLevel field). The bitrate will not exceed the bitrate specified in
+the maxBitrate field and will not fall below the bitrate required to meet the desired
+quality level.
      */
     RateControlMode?: H264RateControlMode;
     /**
@@ -1728,7 +1742,10 @@ one destination per packager.
      */
     ScanType?: H264ScanType;
     /**
-     * Scene change detection.  Inserts I-frames on scene changes when enabled.
+     * Scene change detection.
+
+- On: inserts I-frames when scene change is detected.
+- Off: does not force an I-frame when scene change is detected.
      */
     SceneChangeDetect?: H264SceneChangeDetect;
     /**
@@ -2797,7 +2814,7 @@ Options:
      */
     SegmentationMode?: SmoothGroupSegmentationMode;
     /**
-     * Outputs that are "output locked" can use this delay. Assign a delay to the output that is "secondary".  Do not assign a delay to the "primary" output. The delay means that the primary output will always reach the downstream system before the secondary, which helps ensure that the downstream system always uses the primary output. (If there were no delay, the downstream system might flip-flop between whichever output happens to arrive first.) If the primary fails, the downstream system will switch to the secondary output. When the primary is restarted, the downstream system will switch back to the primary (because once again it is always arriving first)
+     * Number of milliseconds to delay the output from the second pipeline.
      */
     SendDelayMs?: __integerMin0Max10000;
     /**
@@ -2968,7 +2985,7 @@ Options:
     /**
      * Number of resources
      */
-    Count?: __integerMin1;
+    Count: __integerMin1;
     /**
      * Name for the new reservation
      */
@@ -2981,6 +2998,10 @@ Options:
      * Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
      */
     RequestId?: __string;
+    /**
+     * Requested reservation start time (UTC) in ISO-8601 format. The specified time must be between the first day of the current month and one year from now. If no value is given, the default is now.
+     */
+    Start?: __string;
   }
   export interface PurchaseOfferingResponse {
     Reservation?: Reservation;
@@ -3155,7 +3176,7 @@ Valid values: 1, 2, 4, 6, 8
   }
   export interface ScheduleAction {
     /**
-     * The name of the action, must be unique within the schedule.
+     * The name of the action, must be unique within the schedule. This name provides the main reference to an action once it is added to the schedule. A name is unique if it is no longer in the schedule. The schedule is automatically cleaned up to remove actions with a start time of more than 1 hour ago (approximately) so at that point a name can be reused.
      */
     ActionName: __string;
     /**
@@ -3163,35 +3184,35 @@ Valid values: 1, 2, 4, 6, 8
      */
     ScheduleActionSettings: ScheduleActionSettings;
     /**
-     * When the action takes effect.
+     * The time for the action to start in the channel.
      */
     ScheduleActionStartSettings: ScheduleActionStartSettings;
   }
   export interface ScheduleActionSettings {
     /**
-     * SCTE-35 Return to Network Settings
+     * Settings for SCTE-35 return_to_network message
      */
     Scte35ReturnToNetworkSettings?: Scte35ReturnToNetworkScheduleActionSettings;
     /**
-     * SCTE-35 Splice Insert Settings
+     * Settings for SCTE-35 splice_insert message
      */
     Scte35SpliceInsertSettings?: Scte35SpliceInsertScheduleActionSettings;
     /**
-     * SCTE-35 Time Signal Settings
+     * Settings for SCTE-35 time_signal message
      */
     Scte35TimeSignalSettings?: Scte35TimeSignalScheduleActionSettings;
     /**
-     * Static Image Activate
+     * Settings to activate a static image overlay
      */
     StaticImageActivateSettings?: StaticImageActivateScheduleActionSettings;
     /**
-     * Static Image Deactivate
+     * Settings to deactivate a static image overlay
      */
     StaticImageDeactivateSettings?: StaticImageDeactivateScheduleActionSettings;
   }
   export interface ScheduleActionStartSettings {
     /**
-     * Fixed timestamp action start. Conforms to ISO-8601.
+     * Holds the start time for the action.
      */
     FixedModeScheduleActionStartSettings?: FixedModeScheduleActionStartSettings;
   }
@@ -3225,19 +3246,19 @@ Valid values: 1, 2, 4, 6, 8
   export type Scte35ArchiveAllowedFlag = "ARCHIVE_NOT_ALLOWED"|"ARCHIVE_ALLOWED"|string;
   export interface Scte35DeliveryRestrictions {
     /**
-     * SCTE-35 segmentation_descriptor archive_allowed_flag.
+     * Corresponds to SCTE-35 archive_allowed_flag.
      */
     ArchiveAllowedFlag: Scte35ArchiveAllowedFlag;
     /**
-     * SCTE-35 segmentation_descriptor web_delivery_allowed_flag.
+     * Corresponds to SCTE-35 device_restrictions parameter.
      */
     DeviceRestrictions: Scte35DeviceRestrictions;
     /**
-     * SCTE-35 segmentation_descriptor no_regional_blackout_flag.
+     * Corresponds to SCTE-35 no_regional_blackout_flag parameter.
      */
     NoRegionalBlackoutFlag: Scte35NoRegionalBlackoutFlag;
     /**
-     * SCTE-35 segmentation_descriptor web_delivery_allowed_flag.
+     * Corresponds to SCTE-35 web_delivery_allowed_flag parameter.
      */
     WebDeliveryAllowedFlag: Scte35WebDeliveryAllowedFlag;
   }
@@ -3264,47 +3285,47 @@ Valid values: 1, 2, 4, 6, 8
   export type Scte35SegmentationCancelIndicator = "SEGMENTATION_EVENT_NOT_CANCELED"|"SEGMENTATION_EVENT_CANCELED"|string;
   export interface Scte35SegmentationDescriptor {
     /**
-     * SCTE-35 delivery restrictions.
+     * Holds the four SCTE-35 delivery restriction parameters.
      */
     DeliveryRestrictions?: Scte35DeliveryRestrictions;
     /**
-     * SCTE-35 segmentation_descriptor segment_num.
+     * Corresponds to SCTE-35 segment_num. A value that is valid for the specified segmentation_type_id.
      */
     SegmentNum?: __integerMin0Max255;
     /**
-     * SCTE-35 segmentation_descriptor segmentation_event_cancel_indicator.
+     * Corresponds to SCTE-35 segmentation_event_cancel_indicator.
      */
     SegmentationCancelIndicator: Scte35SegmentationCancelIndicator;
     /**
-     * SCTE-35 segmentation_descriptor segmentation_duration specified in 90 KHz clock ticks.
+     * Corresponds to SCTE-35 segmentation_duration. Optional. The duration for the time_signal, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. Enter time in 90 KHz clock ticks. If you do not enter a duration, the time_signal will continue until you insert a cancellation message.
      */
     SegmentationDuration?: __integerMin0Max1099511627775;
     /**
-     * SCTE-35 segmentation_descriptor segmentation_event_id.
+     * Corresponds to SCTE-35 segmentation_event_id. 
      */
     SegmentationEventId: __integerMin0Max4294967295;
     /**
-     * SCTE-35 segmentation_descriptor segmentation_type_id.
+     * Corresponds to SCTE-35 segmentation_type_id. One of the segmentation_type_id values listed in the SCTE-35 specification. On the console, enter the ID in decimal (for example, "52"). In the CLI, API, or an SDK, enter the ID in hex (for example, "0x34") or decimal (for example, "52").
      */
     SegmentationTypeId?: __integerMin0Max255;
     /**
-     * SCTE-35 segmentation_descriptor segmentation_upid as a hex string.
+     * Corresponds to SCTE-35 segmentation_upid. Enter a string containing the hexadecimal representation of the characters that make up the SCTE-35 segmentation_upid value. Must contain an even number of hex characters. Do not include spaces between each hex pair. For example, the ASCII "ADS Information" becomes hex "41445320496e666f726d6174696f6e.
      */
     SegmentationUpid?: __string;
     /**
-     * SCTE-35 segmentation_descriptor segmentation_upid_type.
+     * Corresponds to SCTE-35 segmentation_upid_type. On the console, enter one of the types listed in the SCTE-35 specification, converted to a decimal. For example, "0x0C" hex from the specification is "12" in decimal. In the CLI, API, or an SDK, enter one of the types listed in the SCTE-35 specification, in either hex (for example, "0x0C" ) or in decimal (for example, "12").
      */
     SegmentationUpidType?: __integerMin0Max255;
     /**
-     * SCTE-35 segmentation_descriptor segments_expected.
+     * Corresponds to SCTE-35 segments_expected. A value that is valid for the specified segmentation_type_id.
      */
     SegmentsExpected?: __integerMin0Max255;
     /**
-     * SCTE-35 segmentation_descriptor sub_segment_num.
+     * Corresponds to SCTE-35 sub_segment_num. A value that is valid for the specified segmentation_type_id.
      */
     SubSegmentNum?: __integerMin0Max255;
     /**
-     * SCTE-35 segmentation_descriptor sub_segments_expected.
+     * Corresponds to SCTE-35 sub_segments_expected. A value that is valid for the specified segmentation_type_id.
      */
     SubSegmentsExpected?: __integerMin0Max255;
   }
@@ -3325,7 +3346,7 @@ Valid values: 1, 2, 4, 6, 8
   export type Scte35SpliceInsertNoRegionalBlackoutBehavior = "FOLLOW"|"IGNORE"|string;
   export interface Scte35SpliceInsertScheduleActionSettings {
     /**
-     * The duration for the SCTE-35 splice_insert specified in 90KHz clock ticks. When duration is not specified the expectation is that a Scte35ReturnToNetwork action will be scheduled.
+     * Optional, the duration for the splice_insert, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. If you enter a duration, there is an expectation that the downstream system can read the duration and cue in at that time. If you do not enter a duration, the splice_insert will continue indefinitely and there is an expectation that you will enter a return_to_network to end the splice_insert at the appropriate time.
      */
     Duration?: __integerMin0Max8589934591;
     /**
@@ -3424,53 +3445,53 @@ one destination per packager.
   }
   export interface StaticImageActivateScheduleActionSettings {
     /**
-     * The duration in milliseconds for the image to remain in the video. If omitted or set to 0, duration is infinite and image will remain until explicitly deactivated.
+     * The duration in milliseconds for the image to remain on the video. If omitted or set to 0 the duration is unlimited and the image will remain until it is explicitly deactivated.
      */
     Duration?: __integerMin0;
     /**
-     * The time in milliseconds for the image to fade in. Defaults to 0.
+     * The time in milliseconds for the image to fade in. The fade-in starts at the start time of the overlay. Default is 0 (no fade-in).
      */
     FadeIn?: __integerMin0;
     /**
-     * The time in milliseconds for the image to fade out. Defaults to 0.
+     * Applies only if a duration is specified. The time in milliseconds for the image to fade out. The fade-out starts when the duration time is hit, so it effectively extends the duration. Default is 0 (no fade-out).
      */
     FadeOut?: __integerMin0;
     /**
-     * The height of the image when inserted into the video.  Defaults to the native height of the image.
+     * The height of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified height. Leave blank to use the native height of the overlay.
      */
     Height?: __integerMin1;
     /**
-     * The image to overlay on the video.  Must be a 32 bit BMP, PNG, or TGA file.  Must not be larger than the input video.
+     * The location and filename of the image file to overlay on the video. The file must be a 32-bit BMP, PNG, or TGA file, and must not be larger (in pixels) than the input video.
      */
     Image: InputLocation;
     /**
-     * Placement of the left edge of the image on the horizontal axis in pixels. 0 is the left edge of the frame. Defaults to 0.
+     * Placement of the left edge of the overlay relative to the left edge of the video frame, in pixels. 0 (the default) is the left edge of the frame. If the placement causes the overlay to extend beyond the right edge of the underlying video, then the overlay is cropped on the right.
      */
     ImageX?: __integerMin0;
     /**
-     * Placement of the top edge of the image on the vertical axis in pixels.  0 is the top edge of the frame. Defaults to 0.
+     * Placement of the top edge of the overlay relative to the top edge of the video frame, in pixels. 0 (the default) is the top edge of the frame. If the placement causes the overlay to extend beyond the bottom edge of the underlying video, then the overlay is cropped on the bottom.
      */
     ImageY?: __integerMin0;
     /**
-     * The Z order of the inserted image.  Images with higher layer values will be inserted on top of images with lower layer values. Permitted values are 0-7 inclusive. Defaults to 0.
+     * The number of the layer, 0 to 7. There are 8 layers that can be overlaid on the video, each layer with a different image. The layers are in Z order, which means that overlays with higher values of layer are inserted on top of overlays with lower values of layer. Default is 0.
      */
     Layer?: __integerMin0Max7;
     /**
-     * Opacity of image where 0 is transparent and 100 is fully opaque. Defaults to 100.
+     * Opacity of image where 0 is transparent and 100 is fully opaque. Default is 100.
      */
     Opacity?: __integerMin0Max100;
     /**
-     * The width of the image when inserted into the video.  Defaults to the native width of the image.
+     * The width of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified width. Leave blank to use the native width of the overlay.
      */
     Width?: __integerMin1;
   }
   export interface StaticImageDeactivateScheduleActionSettings {
     /**
-     * The time in milliseconds for the image to fade out. Defaults to 0.
+     * The time in milliseconds for the image to fade out. Default is 0 (no fade-out).
      */
     FadeOut?: __integerMin0;
     /**
-     * The Z order of the inserted image.  Images with higher layer values will be inserted on top of images with lower layer values. Permitted values are 0-7 inclusive. Defaults to 0.
+     * The image overlay layer to deactivate, 0 to 7. Default is 0.
      */
     Layer?: __integerMin0Max7;
   }
@@ -3768,6 +3789,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __integerMin1 = number;
   export type __integerMin1000 = number;
   export type __integerMin1000Max30000 = number;
+  export type __integerMin1Max10 = number;
   export type __integerMin1Max1000000 = number;
   export type __integerMin1Max16 = number;
   export type __integerMin1Max20 = number;
