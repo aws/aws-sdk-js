@@ -116,13 +116,11 @@
   if (AWS.util.isNode()) {
     describe('AWS.EnvironmentCredentials', function() {
       var env;
-      before(function() {
-        env = process.env;
-      });
-      after(function() {
+      afterEach(function() {
         process.env = env;
       })
       beforeEach(function(done) {
+        env = process.env;
         process.env = {};
         return done();
       });
@@ -200,21 +198,13 @@
       var os = require('os');
       var homedir = os.homedir;
       var env;
-      before(function() {
-        env = process.env;
-      });
-      after(function() {
+      afterEach(function() {
         process.env = env;
       })
       beforeEach(function() {
+        env = process.env;
+        process.env = {};
         delete os.homedir;
-        delete process.env.AWS_PROFILE;
-        delete process.env.AWS_SDK_LOAD_CONFIG;
-        delete process.env.AWS_SHARED_CREDENTIALS_FILE;
-        delete process.env.HOME;
-        delete process.env.HOMEPATH;
-        delete process.env.HOMEDRIVE;
-        delete process.env.USERPROFILE;
       });
       afterEach(function() {
         iniLoader.clearCachedFiles();
@@ -432,13 +422,17 @@
       });
     });
     describe('loadRoleProfile', function() {
+      var env;
       beforeEach(function() {
+        env = process.env;
+        process.env = {}
         var os;
         os = require('os');
         helpers.spyOn(os, 'homedir').andReturn('/home/user');
       });
       afterEach(function() {
         iniLoader.clearCachedFiles();
+        process.env = env;
       });
       it('will fail if assume role is disabled', function() {
         var creds, mock;
@@ -760,10 +754,10 @@
         }
       };
       var env;
-      before(function() {
+      beforeEach(function() {
         env = process.env;
       });
-      after(function() {
+      afterEach(function() {
         process.env = env;
       });
       beforeEach(function() {
@@ -1116,10 +1110,10 @@
         }
       };
       var env;
-      before(function() {
+      beforeEach(function() {
         env = process.env;
       });
-      after(function() {
+      afterEach(function() {
         process.env = env;
       });
       beforeEach(function() {

@@ -17,16 +17,13 @@ if (AWS.util.isNode()) {
     var homedir;
     var env;
 
-    before(function() {
+    beforeEach(function() {
       homedir = os.homedir;
       env = process.env;
-    })
-
-    beforeEach(function() {
       process.env = {};
     });
   
-    after(function() {
+    afterEach(function() {
       os.homedir = homedir;
       process.env = env;
     });

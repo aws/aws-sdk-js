@@ -123,7 +123,7 @@
             }
             return provider;
           };
-          before(function() {
+          beforeEach(function() {
             return AWS.config.setPromisesDependency();
           });
           beforeEach(function() {
