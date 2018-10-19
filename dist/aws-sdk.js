@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.338.0
+// AWS SDK for JavaScript v2.339.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -123098,14 +123098,16 @@ module.exports={
           "OutputLocation": {
             "shape": "S13"
           },
-          "AssociationName": {}
+          "AssociationName": {},
+          "MaxErrors": {},
+          "MaxConcurrency": {}
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "AssociationDescription": {
-            "shape": "S1a"
+            "shape": "S1c"
           }
         }
       }
@@ -123120,7 +123122,7 @@ module.exports={
           "Entries": {
             "type": "list",
             "member": {
-              "shape": "S1o"
+              "shape": "S1q"
             }
           }
         }
@@ -123131,7 +123133,7 @@ module.exports={
           "Successful": {
             "type": "list",
             "member": {
-              "shape": "S1a"
+              "shape": "S1c"
             }
           },
           "Failed": {
@@ -123140,7 +123142,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "Entry": {
-                  "shape": "S1o"
+                  "shape": "S1q"
                 },
                 "Message": {},
                 "Fault": {}
@@ -123169,7 +123171,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DocumentDescription": {
-            "shape": "S21"
+            "shape": "S23"
           }
         }
       }
@@ -123187,7 +123189,7 @@ module.exports={
         "members": {
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           },
           "StartDate": {},
           "EndDate": {},
@@ -123224,25 +123226,25 @@ module.exports={
           "OperatingSystem": {},
           "Name": {},
           "GlobalFilters": {
-            "shape": "S2x"
+            "shape": "S2z"
           },
           "ApprovalRules": {
-            "shape": "S33"
+            "shape": "S35"
           },
           "ApprovedPatches": {
-            "shape": "S39"
+            "shape": "S3b"
           },
           "ApprovedPatchesComplianceLevel": {},
           "ApprovedPatchesEnableNonSecurity": {
             "type": "boolean"
           },
           "RejectedPatches": {
-            "shape": "S39"
+            "shape": "S3b"
           },
           "RejectedPatchesAction": {},
           "Description": {},
           "Sources": {
-            "shape": "S3d"
+            "shape": "S3f"
           },
           "ClientToken": {
             "idempotencyToken": true
@@ -123266,7 +123268,7 @@ module.exports={
         "members": {
           "SyncName": {},
           "S3Destination": {
-            "shape": "S3n"
+            "shape": "S3p"
           }
         }
       },
@@ -123342,7 +123344,7 @@ module.exports={
           "DeletionId": {},
           "TypeName": {},
           "DeletionSummary": {
-            "shape": "S46"
+            "shape": "S48"
           }
         }
       }
@@ -123387,7 +123389,7 @@ module.exports={
         ],
         "members": {
           "Names": {
-            "shape": "S4j"
+            "shape": "S4l"
           }
         }
       },
@@ -123395,10 +123397,10 @@ module.exports={
         "type": "structure",
         "members": {
           "DeletedParameters": {
-            "shape": "S4j"
+            "shape": "S4l"
           },
           "InvalidParameters": {
-            "shape": "S4j"
+            "shape": "S4l"
           }
         }
       }
@@ -123584,7 +123586,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AssociationDescription": {
-            "shape": "S1a"
+            "shape": "S1c"
           }
         }
       }
@@ -123756,7 +123758,7 @@ module.exports={
                 "ExecutedBy": {},
                 "LogFile": {},
                 "Outputs": {
-                  "shape": "S6f"
+                  "shape": "S6h"
                 },
                 "Mode": {},
                 "ParentAutomationExecutionId": {},
@@ -123768,10 +123770,10 @@ module.exports={
                   "shape": "Sx"
                 },
                 "TargetMaps": {
-                  "shape": "S6k"
+                  "shape": "S6m"
                 },
                 "ResolvedTargets": {
-                  "shape": "S6p"
+                  "shape": "S6r"
                 },
                 "MaxConcurrency": {},
                 "MaxErrors": {},
@@ -123868,7 +123870,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Document": {
-            "shape": "S21"
+            "shape": "S23"
           }
         }
       }
@@ -124270,7 +124272,7 @@ module.exports={
                 "LastStatus": {},
                 "LastStatusMessage": {},
                 "DeletionSummary": {
-                  "shape": "S46"
+                  "shape": "S48"
                 },
                 "LastStatusUpdateTime": {
                   "type": "timestamp"
@@ -124494,7 +124496,7 @@ module.exports={
                 },
                 "Name": {},
                 "Description": {
-                  "shape": "S2k"
+                  "shape": "S2m"
                 }
               }
             }
@@ -124549,7 +124551,7 @@ module.exports={
                 "MaxErrors": {},
                 "Name": {},
                 "Description": {
-                  "shape": "S2k"
+                  "shape": "S2m"
                 }
               }
             }
@@ -124582,7 +124584,7 @@ module.exports={
                 "WindowId": {},
                 "Name": {},
                 "Description": {
-                  "shape": "S2k"
+                  "shape": "S2m"
                 },
                 "Enabled": {
                   "type": "boolean"
@@ -124887,10 +124889,10 @@ module.exports={
                 "type": "boolean"
               },
               "Parameters": {
-                "shape": "S6f"
+                "shape": "S6h"
               },
               "Outputs": {
-                "shape": "S6f"
+                "shape": "S6h"
               },
               "FailureMessage": {},
               "Mode": {},
@@ -124903,10 +124905,10 @@ module.exports={
                 "shape": "Sx"
               },
               "TargetMaps": {
-                "shape": "S6k"
+                "shape": "S6m"
               },
               "ResolvedTargets": {
-                "shape": "S6p"
+                "shape": "S6r"
               },
               "MaxConcurrency": {},
               "MaxErrors": {},
@@ -125168,7 +125170,7 @@ module.exports={
           "WindowId": {},
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           },
           "StartDate": {},
           "EndDate": {},
@@ -125347,7 +125349,7 @@ module.exports={
           },
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           }
         }
       }
@@ -125430,7 +125432,7 @@ module.exports={
         ],
         "members": {
           "Names": {
-            "shape": "S4j"
+            "shape": "S4l"
           },
           "WithDecryption": {
             "type": "boolean"
@@ -125444,7 +125446,7 @@ module.exports={
             "shape": "Sg8"
           },
           "InvalidParameters": {
-            "shape": "S4j"
+            "shape": "S4l"
           }
         }
       }
@@ -125499,20 +125501,20 @@ module.exports={
           "Name": {},
           "OperatingSystem": {},
           "GlobalFilters": {
-            "shape": "S2x"
+            "shape": "S2z"
           },
           "ApprovalRules": {
-            "shape": "S33"
+            "shape": "S35"
           },
           "ApprovedPatches": {
-            "shape": "S39"
+            "shape": "S3b"
           },
           "ApprovedPatchesComplianceLevel": {},
           "ApprovedPatchesEnableNonSecurity": {
             "type": "boolean"
           },
           "RejectedPatches": {
-            "shape": "S39"
+            "shape": "S3b"
           },
           "RejectedPatchesAction": {},
           "PatchGroups": {
@@ -125527,7 +125529,7 @@ module.exports={
           },
           "Description": {},
           "Sources": {
-            "shape": "S3d"
+            "shape": "S3f"
           }
         }
       }
@@ -125617,7 +125619,9 @@ module.exports={
                 "OutputLocation": {
                   "shape": "S13"
                 },
-                "AssociationName": {}
+                "AssociationName": {},
+                "MaxErrors": {},
+                "MaxConcurrency": {}
               }
             }
           },
@@ -125669,7 +125673,7 @@ module.exports={
                   "type": "timestamp"
                 },
                 "Overview": {
-                  "shape": "S1h"
+                  "shape": "S1j"
                 },
                 "ScheduleExpression": {},
                 "AssociationName": {}
@@ -125958,7 +125962,7 @@ module.exports={
                 "Name": {},
                 "Owner": {},
                 "PlatformTypes": {
-                  "shape": "S2f"
+                  "shape": "S2h"
                 },
                 "DocumentVersion": {},
                 "DocumentType": {},
@@ -126070,7 +126074,7 @@ module.exports={
               "members": {
                 "SyncName": {},
                 "S3Destination": {
-                  "shape": "S3n"
+                  "shape": "S3p"
                 },
                 "LastSyncTime": {
                   "type": "timestamp"
@@ -126306,7 +126310,7 @@ module.exports={
           },
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           },
           "ClientToken": {
             "idempotencyToken": true
@@ -126355,7 +126359,7 @@ module.exports={
           },
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           },
           "ClientToken": {
             "idempotencyToken": true
@@ -126421,7 +126425,7 @@ module.exports={
           "AutomationExecutionId": {},
           "SignalType": {},
           "Payload": {
-            "shape": "S6f"
+            "shape": "S6h"
           }
         }
       },
@@ -126505,7 +126509,7 @@ module.exports={
           "DocumentName": {},
           "DocumentVersion": {},
           "Parameters": {
-            "shape": "S6f"
+            "shape": "S6h"
           },
           "ClientToken": {},
           "Mode": {},
@@ -126514,7 +126518,7 @@ module.exports={
             "shape": "Sx"
           },
           "TargetMaps": {
-            "shape": "S6k"
+            "shape": "S6m"
           },
           "MaxConcurrency": {},
           "MaxErrors": {}
@@ -126609,14 +126613,16 @@ module.exports={
             "shape": "Sx"
           },
           "AssociationName": {},
-          "AssociationVersion": {}
+          "AssociationVersion": {},
+          "MaxErrors": {},
+          "MaxConcurrency": {}
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "AssociationDescription": {
-            "shape": "S1a"
+            "shape": "S1c"
           }
         }
       }
@@ -126633,7 +126639,7 @@ module.exports={
           "Name": {},
           "InstanceId": {},
           "AssociationStatus": {
-            "shape": "S1d"
+            "shape": "S1f"
           }
         }
       },
@@ -126641,7 +126647,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AssociationDescription": {
-            "shape": "S1a"
+            "shape": "S1c"
           }
         }
       }
@@ -126665,7 +126671,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DocumentDescription": {
-            "shape": "S21"
+            "shape": "S23"
           }
         }
       }
@@ -126705,7 +126711,7 @@ module.exports={
           "WindowId": {},
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           },
           "StartDate": {},
           "EndDate": {},
@@ -126734,7 +126740,7 @@ module.exports={
           "WindowId": {},
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           },
           "StartDate": {},
           "EndDate": {},
@@ -126773,7 +126779,7 @@ module.exports={
           },
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           },
           "Replace": {
             "type": "boolean"
@@ -126793,7 +126799,7 @@ module.exports={
           },
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           }
         }
       }
@@ -126829,7 +126835,7 @@ module.exports={
           },
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           },
           "Replace": {
             "type": "boolean"
@@ -126862,7 +126868,7 @@ module.exports={
           },
           "Name": {},
           "Description": {
-            "shape": "S2k"
+            "shape": "S2m"
           }
         }
       }
@@ -126894,25 +126900,25 @@ module.exports={
           "BaselineId": {},
           "Name": {},
           "GlobalFilters": {
-            "shape": "S2x"
+            "shape": "S2z"
           },
           "ApprovalRules": {
-            "shape": "S33"
+            "shape": "S35"
           },
           "ApprovedPatches": {
-            "shape": "S39"
+            "shape": "S3b"
           },
           "ApprovedPatchesComplianceLevel": {},
           "ApprovedPatchesEnableNonSecurity": {
             "type": "boolean"
           },
           "RejectedPatches": {
-            "shape": "S39"
+            "shape": "S3b"
           },
           "RejectedPatchesAction": {},
           "Description": {},
           "Sources": {
-            "shape": "S3d"
+            "shape": "S3f"
           },
           "Replace": {
             "type": "boolean"
@@ -126926,20 +126932,20 @@ module.exports={
           "Name": {},
           "OperatingSystem": {},
           "GlobalFilters": {
-            "shape": "S2x"
+            "shape": "S2z"
           },
           "ApprovalRules": {
-            "shape": "S33"
+            "shape": "S35"
           },
           "ApprovedPatches": {
-            "shape": "S39"
+            "shape": "S3b"
           },
           "ApprovedPatchesComplianceLevel": {},
           "ApprovedPatchesEnableNonSecurity": {
             "type": "boolean"
           },
           "RejectedPatches": {
-            "shape": "S39"
+            "shape": "S3b"
           },
           "RejectedPatchesAction": {},
           "CreatedDate": {
@@ -126950,7 +126956,7 @@ module.exports={
           },
           "Description": {},
           "Sources": {
-            "shape": "S3d"
+            "shape": "S3f"
           }
         }
       }
@@ -127009,7 +127015,7 @@ module.exports={
         }
       }
     },
-    "S1a": {
+    "S1c": {
       "type": "structure",
       "members": {
         "Name": {},
@@ -127022,10 +127028,10 @@ module.exports={
           "type": "timestamp"
         },
         "Status": {
-          "shape": "S1d"
+          "shape": "S1f"
         },
         "Overview": {
-          "shape": "S1h"
+          "shape": "S1j"
         },
         "DocumentVersion": {},
         "Parameters": {
@@ -127045,10 +127051,12 @@ module.exports={
         "LastSuccessfulExecutionDate": {
           "type": "timestamp"
         },
-        "AssociationName": {}
+        "AssociationName": {},
+        "MaxErrors": {},
+        "MaxConcurrency": {}
       }
     },
-    "S1d": {
+    "S1f": {
       "type": "structure",
       "required": [
         "Date",
@@ -127064,7 +127072,7 @@ module.exports={
         "AdditionalInfo": {}
       }
     },
-    "S1h": {
+    "S1j": {
       "type": "structure",
       "members": {
         "Status": {},
@@ -127078,7 +127086,7 @@ module.exports={
         }
       }
     },
-    "S1o": {
+    "S1q": {
       "type": "structure",
       "required": [
         "Name"
@@ -127097,10 +127105,12 @@ module.exports={
         "OutputLocation": {
           "shape": "S13"
         },
-        "AssociationName": {}
+        "AssociationName": {},
+        "MaxErrors": {},
+        "MaxConcurrency": {}
       }
     },
-    "S21": {
+    "S23": {
       "type": "structure",
       "members": {
         "Sha1": {},
@@ -127127,7 +127137,7 @@ module.exports={
           }
         },
         "PlatformTypes": {
-          "shape": "S2f"
+          "shape": "S2h"
         },
         "DocumentType": {},
         "SchemaVersion": {},
@@ -127140,15 +127150,15 @@ module.exports={
         }
       }
     },
-    "S2f": {
+    "S2h": {
       "type": "list",
       "member": {}
     },
-    "S2k": {
+    "S2m": {
       "type": "string",
       "sensitive": true
     },
-    "S2x": {
+    "S2z": {
       "type": "structure",
       "required": [
         "PatchFilters"
@@ -127173,7 +127183,7 @@ module.exports={
         }
       }
     },
-    "S33": {
+    "S35": {
       "type": "structure",
       "required": [
         "PatchRules"
@@ -127189,7 +127199,7 @@ module.exports={
             ],
             "members": {
               "PatchFilterGroup": {
-                "shape": "S2x"
+                "shape": "S2z"
               },
               "ComplianceLevel": {},
               "ApproveAfterDays": {
@@ -127203,11 +127213,11 @@ module.exports={
         }
       }
     },
-    "S39": {
+    "S3b": {
       "type": "list",
       "member": {}
     },
-    "S3d": {
+    "S3f": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -127229,7 +127239,7 @@ module.exports={
         }
       }
     },
-    "S3n": {
+    "S3p": {
       "type": "structure",
       "required": [
         "BucketName",
@@ -127244,7 +127254,7 @@ module.exports={
         "AWSKMSKeyARN": {}
       }
     },
-    "S46": {
+    "S48": {
       "type": "structure",
       "members": {
         "TotalCount": {
@@ -127270,11 +127280,11 @@ module.exports={
         }
       }
     },
-    "S4j": {
+    "S4l": {
       "type": "list",
       "member": {}
     },
-    "S6f": {
+    "S6h": {
       "type": "map",
       "key": {},
       "value": {
@@ -127282,7 +127292,7 @@ module.exports={
         "member": {}
       }
     },
-    "S6k": {
+    "S6m": {
       "type": "list",
       "member": {
         "type": "map",
@@ -127293,7 +127303,7 @@ module.exports={
         }
       }
     },
-    "S6p": {
+    "S6r": {
       "type": "structure",
       "members": {
         "ParameterValues": {
@@ -127333,7 +127343,7 @@ module.exports={
             "value": {}
           },
           "Outputs": {
-            "shape": "S6f"
+            "shape": "S6h"
           },
           "Response": {},
           "FailureMessage": {},
@@ -127343,13 +127353,13 @@ module.exports={
               "FailureStage": {},
               "FailureType": {},
               "Details": {
-                "shape": "S6f"
+                "shape": "S6h"
               }
             }
           },
           "StepExecutionId": {},
           "OverriddenParameters": {
-            "shape": "S6f"
+            "shape": "S6h"
           },
           "IsEnd": {
             "type": "boolean"
@@ -127624,7 +127634,7 @@ module.exports={
           "members": {
             "DocumentVersion": {},
             "Parameters": {
-              "shape": "S6f"
+              "shape": "S6h"
             }
           }
         },
@@ -137854,7 +137864,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.338.0',
+  VERSION: '2.339.0',
 
   /**
    * @api private
@@ -157187,7 +157197,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.338.0
+// AWS SDK for JavaScript v2.339.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

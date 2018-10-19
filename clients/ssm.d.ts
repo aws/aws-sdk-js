@@ -1072,6 +1072,14 @@ declare namespace SSM {
      * The association name.
      */
     AssociationName?: AssociationName;
+    /**
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     */
+    MaxConcurrency?: MaxConcurrency;
   }
   export type AssociationDescriptionList = AssociationDescription[];
   export interface AssociationExecution {
@@ -1275,6 +1283,14 @@ declare namespace SSM {
      * The name specified for the association version when the association version was created.
      */
     AssociationName?: AssociationName;
+    /**
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     */
+    MaxConcurrency?: MaxConcurrency;
   }
   export type AssociationVersionList = AssociationVersionInfo[];
   export type AttributeName = string;
@@ -1963,6 +1979,14 @@ declare namespace SSM {
      * Specify a descriptive name for the association.
      */
     AssociationName?: AssociationName;
+    /**
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     */
+    MaxConcurrency?: MaxConcurrency;
   }
   export interface CreateAssociationBatchResult {
     /**
@@ -2007,6 +2031,14 @@ declare namespace SSM {
      * Specify a descriptive name for the association.
      */
     AssociationName?: AssociationName;
+    /**
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     */
+    MaxConcurrency?: MaxConcurrency;
   }
   export interface CreateAssociationResult {
     /**
@@ -2665,7 +2697,7 @@ declare namespace SSM {
      */
     InstanceInformationFilterList?: InstanceInformationFilterList;
     /**
-     * One or more filters. Use a filter to return a more specific list of instances.
+     * One or more filters. Use a filter to return a more specific list of instances. You can filter on Amazon EC2 tag. Specify tags by using a key-value mapping.
      */
     Filters?: InstanceInformationStringFilterList;
     /**
@@ -2759,7 +2791,7 @@ declare namespace SSM {
   }
   export interface DescribeInstancePatchesResult {
     /**
-     * Each entry in the array is a structure containing: Title (string) KBId (string) Classification (string) Severity (string) State (string: "INSTALLED", "INSTALLED OTHER", "MISSING", "NOT APPLICABLE", "FAILED") InstalledTime (DateTime) InstalledBy (string)
+     * Each entry in the array is a structure containing: Title (string) KBId (string) Classification (string) Severity (string) State (string, such as "INSTALLED" or "FAILED") InstalledTime (DateTime) InstalledBy (string)
      */
     Patches?: PatchComplianceDataList;
     /**
@@ -3095,7 +3127,7 @@ declare namespace SSM {
      */
     InstancesWithInstalledOtherPatches?: Integer;
     /**
-     * The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of InstalledRejected were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero). 
+     * The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of INSTALLED_REJECTED were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero). 
      */
     InstancesWithInstalledRejectedPatches?: InstancesCount;
     /**
@@ -5776,7 +5808,7 @@ declare namespace SSM {
      */
     Severity: PatchSeverity;
     /**
-     * The state of the patch on the instance (INSTALLED, INSTALLED_OTHER, MISSING, NOT_APPLICABLE or FAILED).
+     * The state of the patch on the instance, such as INSTALLED or FAILED. For descriptions of each patch state, see About Patch Compliance in the AWS Systems Manager User Guide.
      */
     State: PatchComplianceDataState;
     /**
@@ -6128,7 +6160,7 @@ declare namespace SSM {
   }
   export interface RegisterTaskWithMaintenanceWindowResult {
     /**
-     * The id of the task in the Maintenance Window.
+     * The ID of the task in the Maintenance Window.
      */
     WindowTaskId?: MaintenanceWindowTaskId;
   }
@@ -6816,6 +6848,14 @@ declare namespace SSM {
      * This parameter is provided for concurrency control purposes. You must specify the latest association version in the service. If you want to ensure that this request succeeds, either specify $LATEST, or omit this parameter.
      */
     AssociationVersion?: AssociationVersion;
+    /**
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     */
+    MaxConcurrency?: MaxConcurrency;
   }
   export interface UpdateAssociationResult {
     /**

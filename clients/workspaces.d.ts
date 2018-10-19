@@ -228,7 +228,7 @@ declare namespace WorkSpaces {
   export type BundleIdList = BundleId[];
   export type BundleList = WorkspaceBundle[];
   export type BundleOwner = string;
-  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|string;
+  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|string;
   export interface ComputeType {
     /**
      * The compute type.

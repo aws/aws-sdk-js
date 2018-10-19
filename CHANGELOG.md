@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.338.0-->
+<!--LATEST=2.339.0-->
 <!--ENTRYINSERT-->
+
+## 2.339.0
+* feature: Configuration: cache shared ini files for later use
+* feature: SSM: Rate Control feature release for State Manager. Users now have the ability to apply rate control parameters similar to run command to their association in state manager console or CLI.
+* feature: WorkSpaces: Added support for PowerPro and GraphicsPro WorkSpaces bundles.
 
 ## 2.338.0
 * feature: AppStream: This API update adds support for creating, managing, and deleting users in the AppStream 2.0 user pool.
