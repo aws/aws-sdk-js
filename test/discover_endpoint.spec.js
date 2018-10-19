@@ -590,4 +590,8 @@ describe('endpoint discovery', function() {
       }
     });
   });
+
+  describe('configurations', function() {
+    
+  });
 });
