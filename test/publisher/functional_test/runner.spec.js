@@ -4,9 +4,8 @@ const {validateEvents} = require('./utils/validateEvents');
 const {Publisher} = require('../../../lib/publisher');
 const schemes = require('./cases');
 const {fork} = require('child_process');
-const dgram = require('dgram');
 const path = require('path');
-const client = dgram.createSocket('udp4');
+const {iniLoader} = require('../../../lib/shared-ini');
 const csmConfigProvider = AWS.util.clientSideMonitoring.configProvider;
 
 const FAKE_SERVCIE = 'CSM Test';
@@ -21,7 +20,7 @@ describe('run functional test', () => {
 
   beforeEach(async () => {
     defaultConfiguration = Object.assign({}, schemes.defaults.configuration);
-
+    iniLoader.clearCachedFiles();
   });
 
   afterEach(async () => {
@@ -32,7 +31,7 @@ describe('run functional test', () => {
     it(scenario.description, async function() {
       const scenarioConfiguration = Object.assign(defaultConfiguration, scenario.configuration);
       //mock of resolving configuration from shared config file
-      spyOn(AWS.util.ini, 'parse').andReturn({
+      spyOn(iniLoader, 'loadFrom').andReturn({
         default: scenarioConfiguration.sharedConfigFile || {}
       });
 
@@ -70,7 +69,7 @@ describe('run functional test', () => {
         request.send();
       }
 
-      spyOn(AWS.util.ini, 'parse').andReturn(defaultConfiguration.sharedConfigFile || {});
+      spyOn(iniLoader, 'loadFrom').andReturn(defaultConfiguration.sharedConfigFile || {});
       //close agent and then validate the datagram echo-ed back from agent
       await agentFinished(fakeAgent);
       // console.log('____', monitoringEvents);
