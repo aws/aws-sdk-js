@@ -16,6 +16,7 @@ async function run() {
     { execute: 'executeLongProcess', command: ['npm', 'run', 'typings-generator-test'] },
     { execute: 'executeLongProcess', command: ['npm', 'run', 'browsertest'] },
     { execute: 'executeLongProcess', command: ['npm', 'run', 'react-native-test'] },
+    { execute: 'executeLongProcess', command: ['npm', 'run', 'csm-functional-test'] }
   ];
   for (const { execute, command, execOptions, retryCount } of scripts) {
     try {
