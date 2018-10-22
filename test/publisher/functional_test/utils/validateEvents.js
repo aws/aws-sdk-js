@@ -38,7 +38,7 @@ function validateApiCallEvent(event, expected) {
     //shared monitoring event entries
     'Service', 'Api', 'ClientId', 'Version', 'Timestamp', 'Region',
     //api call monitoring events
-    'AttemptCount', 'Latency'
+    'AttemptCount', 'Latency', 'MaxRetriesExceeded'
   ]
   for (const keyToValidate of keysToValidate) {
     if (!validateEntry(event, expected, keyToValidate)) return false;

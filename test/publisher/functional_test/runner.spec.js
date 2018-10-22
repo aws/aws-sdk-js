@@ -63,6 +63,9 @@ describe('run functional test', () => {
         if (scenarioConfiguration.sessionToken) {
           client.config.credentials.sessionToken = scenarioConfiguration.sessionToken;
         }
+        if(scenarioConfiguration.maxRetries) {
+          client.config.maxRetries = scenarioConfiguration.maxRetries;
+        }
         const operation = apiCall.operationName[0].toLowerCase() + apiCall.operationName.substring(1);
         const request = client.makeRequest(operation, apiCall.params);
         mockResponses(apiCall.attemptResponses, request);

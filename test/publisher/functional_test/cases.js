@@ -10,7 +10,9 @@ module.exports = {
       "sharedConfigFile": {}
     },
     "optionalEventFields": {
-      "ApiCall": {},
+      "ApiCall": {
+        "APICallTimeout": "ANY_INT"
+      },
       "ApiCallAttempt": {
         "DestinationIp": "ANY_STR",
         "AcquireConnectionLatency": "ANY_INT",
@@ -86,7 +88,8 @@ module.exports = {
           "Version": 1,
           "AttemptCount": 1,
           "Latency": "ANY_INT",
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -133,7 +136,8 @@ module.exports = {
           "Version": 1,
           "AttemptCount": 1,
           "Latency": "ANY_INT",
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -198,7 +202,8 @@ module.exports = {
           "Version": 1,
           "AttemptCount": 2,
           "Latency": "ANY_INT",
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -244,7 +249,8 @@ module.exports = {
           "Version": 1,
           "AttemptCount": 1,
           "Latency": "ANY_INT",
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -308,7 +314,8 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 2,
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -359,7 +366,8 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -462,7 +470,8 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -541,7 +550,8 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -594,7 +604,8 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -648,7 +659,8 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -701,7 +713,8 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -747,7 +760,8 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -793,7 +807,8 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
         }
       ]
     },
@@ -839,7 +854,79 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2"
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 0,
+        }
+      ]
+    },
+    {
+      "description": "Test a single client API call with exceeded retries",
+      "configuration": {
+        "maxRetries": 1
+      },
+      "apiCalls": [
+        {
+          "serviceId": "CSM Test",
+          "operationName": "TestOperation",
+          "params": {},
+          "attemptResponses": [
+            {
+              "sdkException": {
+                "isRetryable": true,
+                "message": "Retryable exception was thrown"
+              }
+            },
+            {
+              "sdkException": {
+                "isRetryable": true,
+                "message": "Retryable exception was thrown"
+              }
+            }
+          ]
+        }
+      ],
+      "expectedMonitoringEvents": [
+        {
+          "Version": 1,
+          "Type": "ApiCallAttempt",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "AttemptLatency": "ANY_INT",
+          "Fqdn": "csmtest.us-west-2.amazonaws.com",
+          "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
+          "AccessKey": "myaccesskey",
+          "SdkException": "ANY_STR",
+          "SdkExceptionMessage": "Retryable exception was thrown"
+        },
+        {
+          "Version": 1,
+          "Type": "ApiCallAttempt",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "AttemptLatency": "ANY_INT",
+          "Fqdn": "csmtest.us-west-2.amazonaws.com",
+          "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
+          "AccessKey": "myaccesskey",
+          "SdkException": "ANY_STR",
+          "SdkExceptionMessage": "Retryable exception was thrown"
+        },
+        {
+          "Version": 1,
+          "Type": "ApiCall",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "Latency": "ANY_INT",
+          "AttemptCount": 2,
+          "Region": "us-west-2",
+          "MaxRetriesExceeded": 1,
         }
       ]
     }
