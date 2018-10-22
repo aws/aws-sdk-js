@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.339.0',
+	  VERSION: '2.340.0',
 
 	  /**
 	   * @api private
@@ -4038,6 +4038,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      Api: api ? api.name : request.operation,
 	      Version: 1,
 	      Service: request.service.api.serviceId || request.service.api.endpointPrefix,
+	      Region: request.httpRequest.region,
+	      MaxRetriesExceeded: 0
 	    }
 	  },
 
@@ -4152,6 +4154,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      apiCallEvent.Timestamp = callTimestamp;
 	      var latency = Math.round(AWS.util.realClock.now() - callStartRealTime);
 	      apiCallEvent.Latency = latency >= 0 ? latency : 0;
+	      var response = request.response;
+	      if (
+	        typeof response.retryCount === 'number' &&
+	        typeof response.maxRetries === 'number' &&
+	        (response.retryCount >= response.maxRetries)
+	      ) {
+	        apiCallEvent.MaxRetriesExceeded = 1
+	      }
 	      self.emit('apiCall', [apiCallEvent]);
 	    })
 	  },

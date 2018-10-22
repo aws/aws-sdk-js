@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.339.0
+// AWS SDK for JavaScript v2.340.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -71418,6 +71418,51 @@ module.exports={
                     "ipv4Addresses": {
                       "type": "list",
                       "member": {}
+                    },
+                    "tags": {
+                      "type": "list",
+                      "member": {
+                        "shape": "S2i"
+                      }
+                    },
+                    "networkInterfaces": {
+                      "type": "list",
+                      "member": {
+                        "type": "structure",
+                        "members": {
+                          "networkInterfaceId": {},
+                          "subnetId": {},
+                          "vpcId": {},
+                          "privateDnsName": {},
+                          "privateIpAddress": {},
+                          "privateIpAddresses": {
+                            "type": "list",
+                            "member": {
+                              "type": "structure",
+                              "members": {
+                                "privateDnsName": {},
+                                "privateIpAddress": {}
+                              }
+                            }
+                          },
+                          "publicDnsName": {},
+                          "publicIp": {},
+                          "ipv6Addresses": {
+                            "type": "list",
+                            "member": {}
+                          },
+                          "securityGroups": {
+                            "type": "list",
+                            "member": {
+                              "type": "structure",
+                              "members": {
+                                "groupName": {},
+                                "groupId": {}
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -71639,7 +71684,7 @@ module.exports={
         ],
         "members": {
           "telemetryMetadata": {
-            "shape": "S3a"
+            "shape": "S3j"
           }
         }
       }
@@ -71700,7 +71745,7 @@ module.exports={
                 "agentHealthDetails": {},
                 "autoScalingGroup": {},
                 "telemetryMetadata": {
-                  "shape": "S3a"
+                  "shape": "S3j"
                 }
               }
             }
@@ -71714,7 +71759,7 @@ module.exports={
         "type": "structure",
         "members": {
           "assessmentTemplateArns": {
-            "shape": "S3o"
+            "shape": "S3x"
           },
           "filter": {
             "type": "structure",
@@ -71725,19 +71770,19 @@ module.exports={
                 "member": {}
               },
               "durationRange": {
-                "shape": "S3s"
+                "shape": "S41"
               },
               "rulesPackageArns": {
-                "shape": "S3t"
+                "shape": "S42"
               },
               "startTimeRange": {
-                "shape": "S3u"
+                "shape": "S43"
               },
               "completionTimeRange": {
-                "shape": "S3u"
+                "shape": "S43"
               },
               "stateChangeTimeRange": {
-                "shape": "S3u"
+                "shape": "S43"
               }
             }
           },
@@ -71754,7 +71799,7 @@ module.exports={
         ],
         "members": {
           "assessmentRunArns": {
-            "shape": "S3w"
+            "shape": "S45"
           },
           "nextToken": {}
         }
@@ -71783,7 +71828,7 @@ module.exports={
         ],
         "members": {
           "assessmentTargetArns": {
-            "shape": "S3w"
+            "shape": "S45"
           },
           "nextToken": {}
         }
@@ -71794,17 +71839,17 @@ module.exports={
         "type": "structure",
         "members": {
           "assessmentTargetArns": {
-            "shape": "S3o"
+            "shape": "S3x"
           },
           "filter": {
             "type": "structure",
             "members": {
               "namePattern": {},
               "durationRange": {
-                "shape": "S3s"
+                "shape": "S41"
               },
               "rulesPackageArns": {
-                "shape": "S3t"
+                "shape": "S42"
               }
             }
           },
@@ -71821,7 +71866,7 @@ module.exports={
         ],
         "members": {
           "assessmentTemplateArns": {
-            "shape": "S3w"
+            "shape": "S45"
           },
           "nextToken": {}
         }
@@ -71900,7 +71945,7 @@ module.exports={
         ],
         "members": {
           "exclusionArns": {
-            "shape": "S3w"
+            "shape": "S45"
           },
           "nextToken": {}
         }
@@ -71911,7 +71956,7 @@ module.exports={
         "type": "structure",
         "members": {
           "assessmentRunArns": {
-            "shape": "S3o"
+            "shape": "S3x"
           },
           "filter": {
             "type": "structure",
@@ -71933,7 +71978,7 @@ module.exports={
                 "member": {}
               },
               "rulesPackageArns": {
-                "shape": "S3t"
+                "shape": "S42"
               },
               "attributes": {
                 "shape": "S21"
@@ -71942,7 +71987,7 @@ module.exports={
                 "shape": "S21"
               },
               "creationTimeRange": {
-                "shape": "S3u"
+                "shape": "S43"
               }
             }
           },
@@ -71959,7 +72004,7 @@ module.exports={
         ],
         "members": {
           "findingArns": {
-            "shape": "S3w"
+            "shape": "S45"
           },
           "nextToken": {}
         }
@@ -71982,7 +72027,7 @@ module.exports={
         ],
         "members": {
           "rulesPackageArns": {
-            "shape": "S3w"
+            "shape": "S45"
           },
           "nextToken": {}
         }
@@ -72005,7 +72050,7 @@ module.exports={
         ],
         "members": {
           "tags": {
-            "shape": "S4o"
+            "shape": "S4x"
           }
         }
       }
@@ -72102,7 +72147,7 @@ module.exports={
         "members": {
           "resourceArn": {},
           "tags": {
-            "shape": "S4o"
+            "shape": "S4x"
           }
         }
       }
@@ -72260,7 +72305,17 @@ module.exports={
         "shape": "S5"
       }
     },
-    "S3a": {
+    "S2i": {
+      "type": "structure",
+      "required": [
+        "key"
+      ],
+      "members": {
+        "key": {},
+        "value": {}
+      }
+    },
+    "S3j": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -72279,11 +72334,11 @@ module.exports={
         }
       }
     },
-    "S3o": {
+    "S3x": {
       "type": "list",
       "member": {}
     },
-    "S3s": {
+    "S41": {
       "type": "structure",
       "members": {
         "minSeconds": {
@@ -72294,11 +72349,11 @@ module.exports={
         }
       }
     },
-    "S3t": {
+    "S42": {
       "type": "list",
       "member": {}
     },
-    "S3u": {
+    "S43": {
       "type": "structure",
       "members": {
         "beginDate": {
@@ -72309,21 +72364,14 @@ module.exports={
         }
       }
     },
-    "S3w": {
+    "S45": {
       "type": "list",
       "member": {}
     },
-    "S4o": {
+    "S4x": {
       "type": "list",
       "member": {
-        "type": "structure",
-        "required": [
-          "key"
-        ],
-        "members": {
-          "key": {},
-          "value": {}
-        }
+        "shape": "S2i"
       }
     }
   }
@@ -137245,7 +137293,8 @@ AWS.CloudFront.Signer = inherit({
      *
      * @param options [Object]          The options to create a signed URL.
      * @option options url [String]     The URL to which the signature will grant
-     *                                  access. Required.
+     *                                  access. Any query params included with
+     *                                  the URL should be encoded. Required.
      * @option options expires [Number] A Unix UTC timestamp indicating when the
      *                                  signature should expire. Required unless you
      *                                  pass in a full policy.
@@ -137864,7 +137913,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.339.0',
+  VERSION: '2.340.0',
 
   /**
    * @api private
@@ -146143,6 +146192,8 @@ AWS.Service = inherit({
       Api: api ? api.name : request.operation,
       Version: 1,
       Service: request.service.api.serviceId || request.service.api.endpointPrefix,
+      Region: request.httpRequest.region,
+      MaxRetriesExceeded: 0
     }
   },
 
@@ -146257,6 +146308,14 @@ AWS.Service = inherit({
       apiCallEvent.Timestamp = callTimestamp;
       var latency = Math.round(AWS.util.realClock.now() - callStartRealTime);
       apiCallEvent.Latency = latency >= 0 ? latency : 0;
+      var response = request.response;
+      if (
+        typeof response.retryCount === 'number' &&
+        typeof response.maxRetries === 'number' &&
+        (response.retryCount >= response.maxRetries)
+      ) {
+        apiCallEvent.MaxRetriesExceeded = 1
+      }
       self.emit('apiCall', [apiCallEvent]);
     })
   },
@@ -157197,7 +157256,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.339.0
+// AWS SDK for JavaScript v2.340.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

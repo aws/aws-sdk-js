@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Inspector",
+        "description": "Finding will be decorated with ec2 related metadata"
+    },
+    {
+        "type": "feature",
+        "category": "Shield",
+        "description": "AWS Shield Advanced API introduced a new service-specific AccessDeniedException which will be thrown when accessing individual attack information without sufficient permission."
+    }
+]

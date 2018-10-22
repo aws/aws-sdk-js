@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.339.0-->
+<!--LATEST=2.340.0-->
 <!--ENTRYINSERT-->
+
+## 2.340.0
+* feature: Inspector: Finding will be decorated with ec2 related metadata
+* feature: Shield: AWS Shield Advanced API introduced a new service-specific AccessDeniedException which will be thrown when accessing individual attack information without sufficient permission.
 
 ## 2.339.0
 * feature: Configuration: cache shared ini files for later use

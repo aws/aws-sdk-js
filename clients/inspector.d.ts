@@ -656,6 +656,14 @@ declare namespace Inspector {
      * The list of IP v4 addresses of the EC2 instance where the finding is generated.
      */
     ipv4Addresses?: Ipv4AddressList;
+    /**
+     * The tags related to the EC2 instance where the finding is generated.
+     */
+    tags?: Tags;
+    /**
+     * An array of the network interfaces interacting with the EC2 instance where the finding is generated.
+     */
+    networkInterfaces?: NetworkInterfaces;
   }
   export type AssetType = "ec2-instance"|string;
   export interface Attribute {
@@ -1183,6 +1191,7 @@ declare namespace Inspector {
   export type IocConfidence = number;
   export type Ipv4Address = string;
   export type Ipv4AddressList = Ipv4Address[];
+  export type Ipv6Addresses = Text[];
   export type KernelVersion = string;
   export interface ListAssessmentRunAgentsRequest {
     /**
@@ -1409,6 +1418,49 @@ declare namespace Inspector {
   export type Message = string;
   export type MessageType = string;
   export type NamePattern = string;
+  export interface NetworkInterface {
+    /**
+     * The ID of the network interface.
+     */
+    networkInterfaceId?: Text;
+    /**
+     * The ID of a subnet associated with the network interface.
+     */
+    subnetId?: Text;
+    /**
+     * The ID of a VPC associated with the network interface.
+     */
+    vpcId?: Text;
+    /**
+     * The name of a private DNS associated with the network interface.
+     */
+    privateDnsName?: Text;
+    /**
+     * The private IP address associated with the network interface.
+     */
+    privateIpAddress?: Text;
+    /**
+     * A list of the private IP addresses associated with the network interface. Includes the privateDnsName and privateIpAddress.
+     */
+    privateIpAddresses?: PrivateIpAddresses;
+    /**
+     * The name of a public DNS associated with the network interface.
+     */
+    publicDnsName?: Text;
+    /**
+     * The public IP address from which the network interface is reachable.
+     */
+    publicIp?: Text;
+    /**
+     * The IP addresses associated with the network interface.
+     */
+    ipv6Addresses?: Ipv6Addresses;
+    /**
+     * A list of the security groups associated with the network interface. Includes the groupId and groupName.
+     */
+    securityGroups?: SecurityGroups;
+  }
+  export type NetworkInterfaces = NetworkInterface[];
   export type NumericSeverity = number;
   export type NumericVersion = number;
   export type OperatingSystem = string;
@@ -1439,6 +1491,17 @@ declare namespace Inspector {
     nextToken?: PaginationToken;
   }
   export type PreviewStatus = "WORK_IN_PROGRESS"|"COMPLETED"|string;
+  export interface PrivateIp {
+    /**
+     * The DNS name of the private IP address.
+     */
+    privateDnsName?: Text;
+    /**
+     * The full IP address of the network inteface.
+     */
+    privateIpAddress?: Text;
+  }
+  export type PrivateIpAddresses = PrivateIp[];
   export type ProviderName = string;
   export interface RegisterCrossAccountAccessRoleRequest {
     /**
@@ -1530,6 +1593,17 @@ declare namespace Inspector {
   export type ScopeList = Scope[];
   export type ScopeType = "INSTANCE_ID"|"RULES_PACKAGE_ARN"|string;
   export type ScopeValue = string;
+  export interface SecurityGroup {
+    /**
+     * The name of the security group.
+     */
+    groupName?: Text;
+    /**
+     * The ID of the security group.
+     */
+    groupId?: Text;
+  }
+  export type SecurityGroups = SecurityGroup[];
   export type ServiceName = string;
   export interface SetTagsForResourceRequest {
     /**
@@ -1612,6 +1686,7 @@ declare namespace Inspector {
   export type TagKey = string;
   export type TagList = Tag[];
   export type TagValue = string;
+  export type Tags = Tag[];
   export interface TelemetryMetadata {
     /**
      * A specific type of behavioral data that is collected by the agent.
