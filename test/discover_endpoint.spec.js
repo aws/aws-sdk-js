@@ -1,7 +1,7 @@
 var helpers = require('./helpers');
 var AWS = helpers.AWS
 var endpoint_discovery_module = require('../lib/discover_endpoint');
-var FooService = require('./foo-service.fixture').FooService;
+var iniLoader = require('../lib/shared-ini').iniLoader;
 var discoverEndpoint = endpoint_discovery_module.discoverEndpoint;
 var optionalDiscoverEndpoint = endpoint_discovery_module.optionalDisverEndpoint;
 var requiredDiscoverEndpoint = endpoint_discovery_module.requiredDiscoverEndpoint;
@@ -125,7 +125,8 @@ var api = {
 
 describe('endpoint discovery', function() {
   afterEach(function() {
-    AWS.config.endpoint = undefined
+    AWS.config.endpoint = undefined;
+    iniLoader.clearCachedFiles();
   });
 
   describe('getCacheKey', function() {
@@ -182,7 +183,7 @@ describe('endpoint discovery', function() {
   
   describe('optionalDiscoverEndpoint', function() {
     beforeEach(function(){
-      AWS.endpointCache.empty()
+      AWS.endpointCache.empty();
     })
     
     it('gets first corresponding endpoint from endpoint cache', function() {
@@ -466,7 +467,7 @@ describe('endpoint discovery', function() {
         if(req.operation === 'describeEndpoints') {
           spy(req)
         }
-      })
+      });
       request.send();
       expect(spy.calls.length).to.eql(1);
       expect(spy.calls[0].arguments[0].httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
@@ -569,11 +570,10 @@ describe('endpoint discovery', function() {
     it('append "endpoint-discovery" to user-agent on all requests', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
-        paramValidation: false,
         apiConfig: new AWS.Model.Api(api),
       });
       helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
-      var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'})
+      var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
       request.send();
       if(AWS.util.isNode()) {
         expect(request.httpRequest.headers['User-Agent']).include('endpoint-discovery');
@@ -592,6 +592,97 @@ describe('endpoint discovery', function() {
   });
 
   describe('configurations', function() {
-    
+    var env;
+    beforeEach(function() {
+      env = process.env;
+      process.env = {};
+      AWS.endpointCache.empty();
+    });
+    afterEach(function() {
+      process.env = env;
+    });
+
+    it('SDK should automatically attempt to discover an endpoint when required', function() {
+      var client = new AWS.Service({
+        endpointDiscoveryEnabled: false,
+        apiConfig: new AWS.Model.Api(api),
+      });
+      if (AWS.util.isNode()) {
+        helpers.spyOn(iniLoader, 'loadFrom').andReturn('');
+      }
+      helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
+      var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
+      var spy = helpers.createSpy('send inject');
+      AWS.events.on('sign', function(req) {
+        if(req.operation === 'describeEndpoints') {
+          spy(req)
+        }
+      })
+      request.send();
+      expect(spy.calls.length).to.eql(1);
+    });
+
+    if (AWS.util.isNode()) {
+      it('turn on endpoint discovery from environmental variable', function() {
+        var client = new AWS.Service({
+          endpointDiscoveryEnabled: false,
+          apiConfig: new AWS.Model.Api(api),
+        });
+        process.env.AWS_ENABLE_ENDPOINT_DISCOVERY = '1';
+        helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
+        var request = client.makeRequest('optionalEDOperation', {Query: 'query'});
+        var spy = helpers.createSpy('send inject');
+        AWS.events.on('sign', function(req) {
+          if(req.operation === 'describeEndpoints') {
+            spy(req);
+          }
+        })
+        request.send();
+        expect(spy.calls.length).to.eql(1);
+
+        process.env.AWS_ENABLE_ENDPOINT_DISCOVERY = undefined;
+        request = client.makeRequest('optionalEDOperation', {Query: 'query'});
+        var error;
+        try {
+          request.send();
+        } catch(e) {
+          error = e;
+        }
+        expect(error).not.to.eql(undefined);
+        expect(error.code).to.eql('ConfigurationException');
+        expect(error.message).to.eql('environmental variable AWS_ENABLE_ENDPOINT_DISCOVERY cannot be set to nothing');
+      });
+  
+      it('turn on endpoint discovery from config file', function() {
+        var client = new AWS.Service({
+          endpointDiscoveryEnabled: false,
+          apiConfig: new AWS.Model.Api(api),
+        });
+        helpers.spyOn(iniLoader, 'loadFrom').andReturn({'dummyRole': {endpoint_discovery_enabled: true}});
+        process.env.AWS_PROFILE = 'dummyRole';
+        helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
+        var request = client.makeRequest('optionalEDOperation', {Query: 'query'});
+        var spy = helpers.createSpy('send inject');
+        AWS.events.on('sign', function(req) {
+          if(req.operation === 'describeEndpoints') {
+            spy(req)
+          }
+        })
+        request.send();
+        expect(spy.calls.length).to.eql(1);
+
+        helpers.spyOn(iniLoader, 'loadFrom').andReturn({'dummyRole': {endpoint_discovery_enabled: undefined}});
+        var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
+        var error;
+        try {
+          request.send();
+        } catch(e) {
+          error = e;
+        }
+        expect(error).not.to.eql(undefined);
+        expect(error.code).to.eql('ConfigurationException');
+        expect(error.message).to.eql('config file entry \'endpoint_discovery_enabled\' cannot be set to nothing');
+      });
+    }
   });
 });
