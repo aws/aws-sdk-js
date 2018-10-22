@@ -9,7 +9,6 @@ function mockDefinedResponses(resps, request) {
       const resp = resps[index].sdkException;
       const retryable = typeof resp.isRetryable === 'undefined' ? true : resp.isRetryable;
       request.response.error = AWS.util.error(new Error(), {
-        // code: resp.code,
         message: resp.message,
         retryable: retryable
       });
@@ -59,7 +58,6 @@ function mockSuccessfulResponse(resp, request) {
 
 function mockFailedResponse(resp, request) {
   const protocol = request.service.api.protocol;
-  // const operationName = request.service.api.operations[request.operation].name;
   const body = faildResponseBody(protocol, resp);
   const headers = Object.assign({}, resp.responseHeaders || {});
   if (protocol === 'json' || protocol === 'rest-json') {

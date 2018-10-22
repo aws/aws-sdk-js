@@ -47,7 +47,6 @@ function validateApiCallEvent(event, expected) {
 }
 
 function validateApiCallAttemptEvent(event, expected) {
-  // console.log('XXXX', event, '___', expected);
    //shared monitoring event entries
   if (event.Type !== 'ApiCallAttempt' || expected.Type !== 'ApiCallAttempt') return false;
   const keysToValidate = [
@@ -71,7 +70,6 @@ function validateEntry(event, expected, key) {
   if(isANY(expected[key])) {
     return validateANY(event[key], expected[key]);
   }
-  // if (key === 'HttpStatusCode') {console.log('XXXX', event[key] === expected[key])}
   return event[key] === expected[key]
 }
 

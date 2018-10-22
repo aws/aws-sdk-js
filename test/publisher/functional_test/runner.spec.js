@@ -72,8 +72,6 @@ describe('run functional test', () => {
       spyOn(iniLoader, 'loadFrom').andReturn(defaultConfiguration.sharedConfigFile || {});
       //close agent and then validate the datagram echo-ed back from agent
       await agentFinished(fakeAgent);
-      // console.log('____', monitoringEvents);
-      // console.log('||||', scenario.expectedMonitoringEvents);
       expect(validateEvents(monitoringEvents, scenario.expectedMonitoringEvents)).to.eql(true);
     })
   }
@@ -95,7 +93,7 @@ function agentStart(port) {
    //pass in --inspect={port} to debug the subprocess
   return new Promise((resolve) => {
     port = port || '';
-    const fakeAgent = fork(path.join(__dirname, 'utils/mock_agent.js'), [`port=${port}`], {stdio: ['pipe', 'pipe', 'pipe', 'ipc']});
+    const fakeAgent = fork(path.join(__dirname, 'utils', 'mock_agent.js'), [`port=${port}`], {stdio: ['pipe', 'pipe', 'pipe', 'ipc']});
     fakeAgent.once('message', (m) => {
       if (m.serverStarted === true) {
         //udp agent starts to echo back monitoring events
