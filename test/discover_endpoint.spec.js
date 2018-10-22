@@ -2,9 +2,6 @@ var helpers = require('./helpers');
 var AWS = helpers.AWS
 var endpoint_discovery_module = require('../lib/discover_endpoint');
 var iniLoader = require('../lib/shared-ini').iniLoader;
-var discoverEndpoint = endpoint_discovery_module.discoverEndpoint;
-var optionalDiscoverEndpoint = endpoint_discovery_module.optionalDisverEndpoint;
-var requiredDiscoverEndpoint = endpoint_discovery_module.requiredDiscoverEndpoint;
 var getCacheKey = endpoint_discovery_module.getCacheKey;
 var marshallCustomeIdentifiers = endpoint_discovery_module.marshallCustomeIdentifiers;
 
@@ -172,11 +169,13 @@ describe('endpoint discovery', function() {
     it('can marshall params according to endpointdiscoveryid trait', function() {
       var MockService = helpers.MockServiceFromApi(api);
       var client = new MockService();
-      var ids = {};
-      marshallCustomeIdentifiers(ids, {Query: 'query', Record: 'record'}, client.api.operations.requiredEDOperation.input);
+      var ids = marshallCustomeIdentifiers({
+        params: {Query: 'query', Record: 'record'}
+      }, client.api.operations.requiredEDOperation.input);
       expect(ids).to.eql({Query: 'query'});
-      ids = {};
-      marshallCustomeIdentifiers(ids, {Query: {Record: 'record'}}, client.api.operations.complexEDOperation.input);
+      ids = marshallCustomeIdentifiers({
+        params: {Query: {Record: 'record'}}
+      }, client.api.operations.complexEDOperation.input);
       expect(ids).to.eql({RecordItem: 'record'});
     });
   });
