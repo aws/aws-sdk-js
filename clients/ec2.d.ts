@@ -37,11 +37,19 @@ declare class EC2 extends Service {
    */
   acceptVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.AcceptVpcPeeringConnectionResult) => void): Request<EC2.Types.AcceptVpcPeeringConnectionResult, AWSError>;
   /**
-   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
+   * Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS. It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays. To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
+   */
+  advertiseByoipCidr(params: EC2.Types.AdvertiseByoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.AdvertiseByoipCidrResult) => void): Request<EC2.Types.AdvertiseByoipCidrResult, AWSError>;
+  /**
+   * Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS. It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays. To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
+   */
+  advertiseByoipCidr(callback?: (err: AWSError, data: EC2.Types.AdvertiseByoipCidrResult) => void): Request<EC2.Types.AdvertiseByoipCidrResult, AWSError>;
+  /**
+   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
    */
   allocateAddress(params: EC2.Types.AllocateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
-   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
+   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
    */
   allocateAddress(callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
@@ -61,11 +69,11 @@ declare class EC2 extends Service {
    */
   assignIpv6Addresses(callback?: (err: AWSError, data: EC2.Types.AssignIpv6AddressesResult) => void): Request<EC2.Types.AssignIpv6AddressesResult, AWSError>;
   /**
-   * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. AssignPrivateIpAddresses is available only in EC2-VPC.
+   * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved. Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check network/interfaces/macs/mac/local-ipv4s in the instance metadata to confirm that the remapping is complete.
    */
   assignPrivateIpAddresses(params: EC2.Types.AssignPrivateIpAddressesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. AssignPrivateIpAddresses is available only in EC2-VPC.
+   * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved. Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check network/interfaces/macs/mac/local-ipv4s in the instance metadata to confirm that the remapping is complete.
    */
   assignPrivateIpAddresses(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -821,6 +829,14 @@ declare class EC2 extends Service {
    */
   deleteVpnGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Releases the specified address range that you provisioned for use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. Before you can release an address range, you must stop advertising it using WithdrawByoipCidr and you must not have any IP addresses allocated from its address range.
+   */
+  deprovisionByoipCidr(params: EC2.Types.DeprovisionByoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.DeprovisionByoipCidrResult) => void): Request<EC2.Types.DeprovisionByoipCidrResult, AWSError>;
+  /**
+   * Releases the specified address range that you provisioned for use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. Before you can release an address range, you must stop advertising it using WithdrawByoipCidr and you must not have any IP addresses allocated from its address range.
+   */
+  deprovisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionByoipCidrResult) => void): Request<EC2.Types.DeprovisionByoipCidrResult, AWSError>;
+  /**
    * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances; however, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
    */
   deregisterImage(params: EC2.Types.DeregisterImageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -868,6 +884,14 @@ declare class EC2 extends Service {
    * Describes one or more of your bundling tasks.  Completed bundle tasks are listed for only a limited time. If your bundle task is no longer in the list, you can still register an AMI from it. Just use RegisterImage with the Amazon S3 bucket name and image manifest name you provided to the bundle task. 
    */
   describeBundleTasks(callback?: (err: AWSError, data: EC2.Types.DescribeBundleTasksResult) => void): Request<EC2.Types.DescribeBundleTasksResult, AWSError>;
+  /**
+   * Describes the IP address ranges that were specified in calls to ProvisionByoipCidr. To describe the address pools that were created when you provisioned the address ranges, use DescribePublicIpv4Pools.
+   */
+  describeByoipCidrs(params: EC2.Types.DescribeByoipCidrsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeByoipCidrsResult) => void): Request<EC2.Types.DescribeByoipCidrsResult, AWSError>;
+  /**
+   * Describes the IP address ranges that were specified in calls to ProvisionByoipCidr. To describe the address pools that were created when you provisioned the address ranges, use DescribePublicIpv4Pools.
+   */
+  describeByoipCidrs(callback?: (err: AWSError, data: EC2.Types.DescribeByoipCidrsResult) => void): Request<EC2.Types.DescribeByoipCidrsResult, AWSError>;
   /**
    * Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink. You cannot use this request to return information about other instances.
    */
@@ -1189,6 +1213,14 @@ declare class EC2 extends Service {
    */
   describePrincipalIdFormat(callback?: (err: AWSError, data: EC2.Types.DescribePrincipalIdFormatResult) => void): Request<EC2.Types.DescribePrincipalIdFormatResult, AWSError>;
   /**
+   * Describes the specified IPv4 address pools.
+   */
+  describePublicIpv4Pools(params: EC2.Types.DescribePublicIpv4PoolsRequest, callback?: (err: AWSError, data: EC2.Types.DescribePublicIpv4PoolsResult) => void): Request<EC2.Types.DescribePublicIpv4PoolsResult, AWSError>;
+  /**
+   * Describes the specified IPv4 address pools.
+   */
+  describePublicIpv4Pools(callback?: (err: AWSError, data: EC2.Types.DescribePublicIpv4PoolsResult) => void): Request<EC2.Types.DescribePublicIpv4PoolsResult, AWSError>;
+  /**
    * Describes one or more regions that are currently available to you. For a list of the regions supported by Amazon EC2, see Regions and Endpoints.
    */
   describeRegions(params: EC2.Types.DescribeRegionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeRegionsResult) => void): Request<EC2.Types.DescribeRegionsResult, AWSError>;
@@ -1301,11 +1333,11 @@ declare class EC2 extends Service {
    */
   describeSpotFleetInstances(callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetInstancesResponse) => void): Request<EC2.Types.DescribeSpotFleetInstancesResponse, AWSError>;
   /**
-   * Describes the events for the specified Spot Fleet request during the specified time. Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event.
+   * Describes the events for the specified Spot Fleet request during the specified time. Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours.
    */
   describeSpotFleetRequestHistory(params: EC2.Types.DescribeSpotFleetRequestHistoryRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetRequestHistoryResponse) => void): Request<EC2.Types.DescribeSpotFleetRequestHistoryResponse, AWSError>;
   /**
-   * Describes the events for the specified Spot Fleet request during the specified time. Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event.
+   * Describes the events for the specified Spot Fleet request during the specified time. Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours.
    */
   describeSpotFleetRequestHistory(callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetRequestHistoryResponse) => void): Request<EC2.Types.DescribeSpotFleetRequestHistoryResponse, AWSError>;
   /**
@@ -1925,6 +1957,14 @@ declare class EC2 extends Service {
    */
   moveAddressToVpc(callback?: (err: AWSError, data: EC2.Types.MoveAddressToVpcResult) => void): Request<EC2.Types.MoveAddressToVpcResult, AWSError>;
   /**
+   * Provisions an address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
+   */
+  provisionByoipCidr(params: EC2.Types.ProvisionByoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionByoipCidrResult) => void): Request<EC2.Types.ProvisionByoipCidrResult, AWSError>;
+  /**
+   * Provisions an address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
+   */
+  provisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionByoipCidrResult) => void): Request<EC2.Types.ProvisionByoipCidrResult, AWSError>;
+  /**
    * Purchase a reservation with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation. This action results in the specified reservation being purchased and charged to your account.
    */
   purchaseHostReservation(params: EC2.Types.PurchaseHostReservationRequest, callback?: (err: AWSError, data: EC2.Types.PurchaseHostReservationResult) => void): Request<EC2.Types.PurchaseHostReservationResult, AWSError>;
@@ -2204,6 +2244,14 @@ declare class EC2 extends Service {
    * Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.
    */
   updateSecurityGroupRuleDescriptionsIngress(callback?: (err: AWSError, data: EC2.Types.UpdateSecurityGroupRuleDescriptionsIngressResult) => void): Request<EC2.Types.UpdateSecurityGroupRuleDescriptionsIngressResult, AWSError>;
+  /**
+   * Stops advertising an IPv4 address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.
+   */
+  withdrawByoipCidr(params: EC2.Types.WithdrawByoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.WithdrawByoipCidrResult) => void): Request<EC2.Types.WithdrawByoipCidrResult, AWSError>;
+  /**
+   * Stops advertising an IPv4 address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.
+   */
+  withdrawByoipCidr(callback?: (err: AWSError, data: EC2.Types.WithdrawByoipCidrResult) => void): Request<EC2.Types.WithdrawByoipCidrResult, AWSError>;
   /**
    * Waits for the instanceExists state by periodically calling the underlying EC2.describeInstancesoperation every 5 seconds (at most 40 times).
    */
@@ -2587,8 +2635,28 @@ declare namespace EC2 {
      * Any tags assigned to the Elastic IP address.
      */
     Tags?: TagList;
+    /**
+     * The ID of an address pool.
+     */
+    PublicIpv4Pool?: String;
   }
   export type AddressList = Address[];
+  export interface AdvertiseByoipCidrRequest {
+    /**
+     * The IPv4 address range, in CIDR notation.
+     */
+    Cidr: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AdvertiseByoipCidrResult {
+    /**
+     * Information about the address range.
+     */
+    ByoipCidr?: ByoipCidr;
+  }
   export type Affinity = "default"|"host"|string;
   export interface AllocateAddressRequest {
     /**
@@ -2596,9 +2664,13 @@ declare namespace EC2 {
      */
     Domain?: DomainType;
     /**
-     * [EC2-VPC] The Elastic IP address to recover.
+     * [EC2-VPC] The Elastic IP address to recover or an IPv4 address from an address pool.
      */
     Address?: String;
+    /**
+     * The ID of an address pool that you own. Use this parameter to let Amazon EC2 select an address from the address pool. To specify a specific address from the address pool, use the Address parameter instead.
+     */
+    PublicIpv4Pool?: String;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -2613,6 +2685,10 @@ declare namespace EC2 {
      * [EC2-VPC] The ID that AWS assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.
      */
     AllocationId?: String;
+    /**
+     * The ID of an address pool.
+     */
+    PublicIpv4Pool?: String;
     /**
      * Indicates whether this Elastic IP address is for use with instances in EC2-Classic (standard) or instances in a VPC (vpc).
      */
@@ -3168,6 +3244,26 @@ declare namespace EC2 {
   }
   export type BundleTaskList = BundleTask[];
   export type BundleTaskState = "pending"|"waiting-for-shutdown"|"bundling"|"storing"|"cancelling"|"complete"|"failed"|string;
+  export interface ByoipCidr {
+    /**
+     * The public IPv4 address range, in CIDR notation.
+     */
+    Cidr?: String;
+    /**
+     * The description of the address range.
+     */
+    Description?: String;
+    /**
+     * Upon success, contains the ID of the address pool. Otherwise, contains an error message.
+     */
+    StatusMessage?: String;
+    /**
+     * The state of the address pool.
+     */
+    State?: ByoipCidrState;
+  }
+  export type ByoipCidrSet = ByoipCidr[];
+  export type ByoipCidrState = "advertised"|"deprovisioned"|"failed-deprovision"|"failed-provision"|"pending-deprovision"|"pending-provision"|"provisioned"|string;
   export type CancelBatchErrorCode = "fleetRequestIdDoesNotExist"|"fleetRequestIdMalformed"|"fleetRequestNotInCancellableState"|"unexpectedError"|string;
   export interface CancelBundleTaskRequest {
     /**
@@ -3333,6 +3429,16 @@ declare namespace EC2 {
     State?: CancelSpotInstanceRequestState;
   }
   export type CancelledSpotInstanceRequestList = CancelledSpotInstanceRequest[];
+  export interface CidrAuthorizationContext {
+    /**
+     * The plain-text authorization message for the prefix and account.
+     */
+    Message: String;
+    /**
+     * The signed authorization message for the prefix and account.
+     */
+    Signature: String;
+  }
   export interface CidrBlock {
     /**
      * The IPv4 CIDR block.
@@ -4043,7 +4149,7 @@ declare namespace EC2 {
      */
     Egress: Boolean;
     /**
-     * ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6 CIDR block.
+     * ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.
      */
     IcmpTypeCode?: IcmpTypeCode;
     /**
@@ -4055,11 +4161,11 @@ declare namespace EC2 {
      */
     NetworkAclId: String;
     /**
-     * TCP or UDP protocols: The range of ports the rule applies to.
+     * TCP or UDP protocols: The range of ports the rule applies to. Required if specifying protocol 6 (TCP) or 17 (UDP).
      */
     PortRange?: PortRange;
     /**
-     * The protocol. A value of -1 or all means all protocols. If you specify all, -1, or a protocol number other than 6 (tcp), 17 (udp), or 1 (icmp), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol 58 (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol 58 (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
+     * The protocol number. A value of "-1" means all protocols. If you specify "-1" or a protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
      */
     Protocol: String;
     /**
@@ -4357,7 +4463,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
+     * The IDs of one or more resources, separated by spaces.
      */
     Resources: ResourceIdList;
     /**
@@ -5083,7 +5189,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of one or more resources.
+     * The IDs of one or more resources, separated by spaces.
      */
     Resources: ResourceIdList;
     /**
@@ -5205,6 +5311,22 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export interface DeprovisionByoipCidrRequest {
+    /**
+     * The public IPv4 address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.
+     */
+    Cidr: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeprovisionByoipCidrResult {
+    /**
+     * Information about the address range.
+     */
+    ByoipCidr?: ByoipCidr;
+  }
   export interface DeregisterImageRequest {
     /**
      * The ID of the AMI.
@@ -5310,6 +5432,30 @@ declare namespace EC2 {
      * Information about one or more bundle tasks.
      */
     BundleTasks?: BundleTaskList;
+  }
+  export interface DescribeByoipCidrsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeByoipCidrsResult {
+    /**
+     * Information about your address ranges.
+     */
+    ByoipCidrs?: ByoipCidrSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeClassicLinkInstancesRequest {
     /**
@@ -6186,7 +6332,7 @@ declare namespace EC2 {
      */
     MaxResults?: Integer;
     /**
-     * The token to use to retrieve the next page of results.
+     * The token for the next page of results.
      */
     NextToken?: String;
     /**
@@ -6423,6 +6569,30 @@ declare namespace EC2 {
      * Information about the ID format settings for the ARN.
      */
     Principals?: PrincipalIdFormatList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribePublicIpv4PoolsRequest {
+    /**
+     * The IDs of the address pools.
+     */
+    PoolIds?: ValueStringList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: PoolMaxResults;
+  }
+  export interface DescribePublicIpv4PoolsResult {
+    /**
+     * Information about the address pools.
+     */
+    PublicIpv4Pools?: PublicIpv4PoolSet;
     /**
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
@@ -11681,7 +11851,7 @@ declare namespace EC2 {
      */
     PortRange?: PortRange;
     /**
-     * The protocol. A value of -1 means all protocols.
+     * The protocol number. A value of "-1" means all protocols.
      */
     Protocol?: String;
     /**
@@ -12027,6 +12197,7 @@ declare namespace EC2 {
   export type PlacementGroupStringList = String[];
   export type PlacementStrategy = "cluster"|"spread"|string;
   export type PlatformValues = "Windows"|string;
+  export type PoolMaxResults = number;
   export interface PortRange {
     /**
      * The first port in the range.
@@ -12155,6 +12326,30 @@ declare namespace EC2 {
     GatewayId?: String;
   }
   export type PropagatingVgwList = PropagatingVgw[];
+  export interface ProvisionByoipCidrRequest {
+    /**
+     * The public IPv4 address range, in CIDR notation. The most specific prefix that you can specify is /24. The address range cannot overlap with another address range that you've brought to this or another region.
+     */
+    Cidr: String;
+    /**
+     * A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP.
+     */
+    CidrAuthorizationContext?: CidrAuthorizationContext;
+    /**
+     * A description for the address range and the address pool.
+     */
+    Description?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ProvisionByoipCidrResult {
+    /**
+     * Information about the address pool.
+     */
+    ByoipCidr?: ByoipCidr;
+  }
   export interface ProvisionedBandwidth {
     /**
      * Reserved. If you need to sustain traffic greater than the documented limits, contact us through the Support Center.
@@ -12178,6 +12373,48 @@ declare namespace EC2 {
     Status?: String;
   }
   export type PublicIpStringList = String[];
+  export interface PublicIpv4Pool {
+    /**
+     * The ID of the IPv4 address pool.
+     */
+    PoolId?: String;
+    /**
+     * A description of the address pool.
+     */
+    Description?: String;
+    /**
+     * The address ranges.
+     */
+    PoolAddressRanges?: PublicIpv4PoolRangeSet;
+    /**
+     * The total number of addresses.
+     */
+    TotalAddressCount?: Integer;
+    /**
+     * The total number of available addresses.
+     */
+    TotalAvailableAddressCount?: Integer;
+  }
+  export interface PublicIpv4PoolRange {
+    /**
+     * The first IP address in the range.
+     */
+    FirstAddress?: String;
+    /**
+     * The last IP address in the range.
+     */
+    LastAddress?: String;
+    /**
+     * The number of addresses in the range.
+     */
+    AddressCount?: Integer;
+    /**
+     * The number of available addresses in the range.
+     */
+    AvailableAddressCount?: Integer;
+  }
+  export type PublicIpv4PoolRangeSet = PublicIpv4PoolRange[];
+  export type PublicIpv4PoolSet = PublicIpv4Pool[];
   export interface Purchase {
     /**
      * The currency in which the UpfrontPrice and HourlyPrice amounts are specified. At this time, the only supported currency is USD.
@@ -12525,7 +12762,7 @@ declare namespace EC2 {
      */
     Egress: Boolean;
     /**
-     * ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an IPv6 CIDR block.
+     * ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.
      */
     IcmpTypeCode?: IcmpTypeCode;
     /**
@@ -12537,11 +12774,11 @@ declare namespace EC2 {
      */
     NetworkAclId: String;
     /**
-     * TCP or UDP protocols: The range of ports the rule applies to. Required if specifying TCP (6) or UDP (17) for the protocol.
+     * TCP or UDP protocols: The range of ports the rule applies to. Required if specifying protocol 6 (TCP) or 17 (UDP).
      */
     PortRange?: PortRange;
     /**
-     * The IP protocol. You can specify all or -1 to mean all protocols. If you specify all, -1, or a protocol number other than tcp, udp, or icmp, traffic on all ports is allowed, regardless of any ports or ICMP types or codes you that specify. If you specify protocol 58 (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol 58 (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
+     * The protocol number. A value of "-1" means all protocols. If you specify "-1" or a protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
      */
     Protocol: String;
     /**
@@ -14591,7 +14828,7 @@ declare namespace EC2 {
      */
     ExcessCapacityTerminationPolicy?: ExcessCapacityTerminationPolicy;
     /**
-     * The number of units fulfilled by this request compared to the set target capacity.
+     * The number of units fulfilled by this request compared to the set target capacity. You cannot set this value.
      */
     FulfilledCapacity?: Double;
     /**
@@ -15085,7 +15322,7 @@ declare namespace EC2 {
      */
     Key?: String;
     /**
-     * The ID of the resource. For example, ami-1a2b3c4d.
+     * The ID of the resource.
      */
     ResourceId?: String;
     /**
@@ -16059,6 +16296,22 @@ declare namespace EC2 {
      * The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway. Constraints: Allowed characters are alphanumeric characters and ._. Must be between 8 and 64 characters in length and cannot start with zero (0).
      */
     PreSharedKey?: String;
+  }
+  export interface WithdrawByoipCidrRequest {
+    /**
+     * The public IPv4 address range, in CIDR notation.
+     */
+    Cidr: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface WithdrawByoipCidrResult {
+    /**
+     * Information about the address pool.
+     */
+    ByoipCidr?: ByoipCidr;
   }
   export type ZoneNameStringList = String[];
   export type scope = "Availability Zone"|"Region"|string;

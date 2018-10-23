@@ -54,6 +54,20 @@
       },
       "documentation": "<p>Accept a VPC peering connection request. To accept a request, the VPC peering connection must be in the <code>pending-acceptance</code> state, and you must be the owner of the peer VPC. Use <a>DescribeVpcPeeringConnections</a> to view your outstanding VPC peering connection requests.</p> <p>For an inter-region VPC peering connection request, you must accept the VPC peering connection in the region of the accepter VPC.</p>"
     },
+    "AdvertiseByoipCidr": {
+      "name": "AdvertiseByoipCidr",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AdvertiseByoipCidrRequest"
+      },
+      "output": {
+        "shape": "AdvertiseByoipCidrResult"
+      },
+      "documentation": "<p>Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>"
+    },
     "AllocateAddress": {
       "name": "AllocateAddress",
       "http": {
@@ -66,7 +80,7 @@
       "output": {
         "shape": "AllocateAddressResult"
       },
-      "documentation": "<p>Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account.</p> <p>[EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation.</p> <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account.</p> <p>You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation.</p> <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "AllocateHosts": {
       "name": "AllocateHosts",
@@ -105,7 +119,7 @@
       "input": {
         "shape": "AssignPrivateIpAddressesRequest"
       },
-      "documentation": "<p>Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about Elastic IP addresses, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>AssignPrivateIpAddresses is available only in EC2-VPC.</p>"
+      "documentation": "<p>Assigns one or more secondary private IP addresses to the specified network interface.</p> <p>You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about Elastic IP addresses, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved.</p> <p>Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check <code>network/interfaces/macs/mac/local-ipv4s</code> in the instance metadata to confirm that the remapping is complete.</p>"
     },
     "AssociateAddress": {
       "name": "AssociateAddress",
@@ -1333,6 +1347,20 @@
       },
       "documentation": "<p>Deletes the specified virtual private gateway. We recommend that before you delete a virtual private gateway, you detach it from the VPC and delete the VPN connection. Note that you don't need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.</p>"
     },
+    "DeprovisionByoipCidr": {
+      "name": "DeprovisionByoipCidr",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeprovisionByoipCidrRequest"
+      },
+      "output": {
+        "shape": "DeprovisionByoipCidrResult"
+      },
+      "documentation": "<p>Releases the specified address range that you provisioned for use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.</p> <p>Before you can release an address range, you must stop advertising it using <a>WithdrawByoipCidr</a> and you must not have any IP addresses allocated from its address range.</p>"
+    },
     "DeregisterImage": {
       "name": "DeregisterImage",
       "http": {
@@ -1413,6 +1441,20 @@
         "shape": "DescribeBundleTasksResult"
       },
       "documentation": "<p>Describes one or more of your bundling tasks.</p> <note> <p>Completed bundle tasks are listed for only a limited time. If your bundle task is no longer in the list, you can still register an AMI from it. Just use <code>RegisterImage</code> with the Amazon S3 bucket name and image manifest name you provided to the bundle task.</p> </note>"
+    },
+    "DescribeByoipCidrs": {
+      "name": "DescribeByoipCidrs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeByoipCidrsRequest"
+      },
+      "output": {
+        "shape": "DescribeByoipCidrsResult"
+      },
+      "documentation": "<p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a>.</p>"
     },
     "DescribeClassicLinkInstances": {
       "name": "DescribeClassicLinkInstances",
@@ -1974,6 +2016,20 @@
       },
       "documentation": "<p>Describes the ID format settings for the root user and all IAM roles and IAM users that have explicitly specified a longer ID (17-character ID) preference. </p> <p>By default, all IAM roles and IAM users default to the same ID settings as the root user, unless they explicitly override the settings. This request is useful for identifying those IAM users and IAM roles that have overridden the default ID settings.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p>"
     },
+    "DescribePublicIpv4Pools": {
+      "name": "DescribePublicIpv4Pools",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribePublicIpv4PoolsRequest"
+      },
+      "output": {
+        "shape": "DescribePublicIpv4PoolsResult"
+      },
+      "documentation": "<p>Describes the specified IPv4 address pools.</p>"
+    },
     "DescribeRegions": {
       "name": "DescribeRegions",
       "http": {
@@ -2182,7 +2238,7 @@
       "output": {
         "shape": "DescribeSpotFleetRequestHistoryResponse"
       },
-      "documentation": "<p>Describes the events for the specified Spot Fleet request during the specified time.</p> <p>Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event.</p>"
+      "documentation": "<p>Describes the events for the specified Spot Fleet request during the specified time.</p> <p>Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours.</p>"
     },
     "DescribeSpotFleetRequests": {
       "name": "DescribeSpotFleetRequests",
@@ -3211,6 +3267,20 @@
       },
       "documentation": "<p>Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC platform. The Elastic IP address must be allocated to your account for more than 24 hours, and it must not be associated with an instance. After the Elastic IP address is moved, it is no longer available for use in the EC2-Classic platform, unless you move it back using the <a>RestoreAddressToClassic</a> request. You cannot move an Elastic IP address that was originally allocated for use in the EC2-VPC platform to the EC2-Classic platform. </p>"
     },
+    "ProvisionByoipCidr": {
+      "name": "ProvisionByoipCidr",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ProvisionByoipCidrRequest"
+      },
+      "output": {
+        "shape": "ProvisionByoipCidrResult"
+      },
+      "documentation": "<p>Provisions an address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>"
+    },
     "PurchaseHostReservation": {
       "name": "PurchaseHostReservation",
       "http": {
@@ -3664,6 +3734,20 @@
         "shape": "UpdateSecurityGroupRuleDescriptionsIngressResult"
       },
       "documentation": "<p>Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously.</p> <p>You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.</p>"
+    },
+    "WithdrawByoipCidr": {
+      "name": "WithdrawByoipCidr",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "WithdrawByoipCidrRequest"
+      },
+      "output": {
+        "shape": "WithdrawByoipCidrResult"
+      },
+      "documentation": "<p>Stops advertising an IPv4 address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.</p>"
     }
   },
   "shapes": {
@@ -3902,6 +3986,11 @@
           "shape": "TagList",
           "documentation": "<p>Any tags assigned to the Elastic IP address.</p>",
           "locationName": "tagSet"
+        },
+        "PublicIpv4Pool": {
+          "shape": "String",
+          "documentation": "<p>The ID of an address pool.</p>",
+          "locationName": "publicIpv4Pool"
         }
       },
       "documentation": "<p>Describes an Elastic IP address.</p>"
@@ -3911,6 +4000,32 @@
       "member": {
         "shape": "Address",
         "locationName": "item"
+      }
+    },
+    "AdvertiseByoipCidrRequest": {
+      "type": "structure",
+      "required": [
+        "Cidr"
+      ],
+      "members": {
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "AdvertiseByoipCidrResult": {
+      "type": "structure",
+      "members": {
+        "ByoipCidr": {
+          "shape": "ByoipCidr",
+          "documentation": "<p>Information about the address range.</p>",
+          "locationName": "byoipCidr"
+        }
       }
     },
     "Affinity": {
@@ -3929,15 +4044,18 @@
         },
         "Address": {
           "shape": "String",
-          "documentation": "<p>[EC2-VPC] The Elastic IP address to recover.</p>"
+          "documentation": "<p>[EC2-VPC] The Elastic IP address to recover or an IPv4 address from an address pool.</p>"
+        },
+        "PublicIpv4Pool": {
+          "shape": "String",
+          "documentation": "<p>The ID of an address pool that you own. Use this parameter to let Amazon EC2 select an address from the address pool. To specify a specific address from the address pool, use the <code>Address</code> parameter instead.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for AllocateAddress.</p>"
+      }
     },
     "AllocateAddressResult": {
       "type": "structure",
@@ -3952,13 +4070,17 @@
           "documentation": "<p>[EC2-VPC] The ID that AWS assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.</p>",
           "locationName": "allocationId"
         },
+        "PublicIpv4Pool": {
+          "shape": "String",
+          "documentation": "<p>The ID of an address pool.</p>",
+          "locationName": "publicIpv4Pool"
+        },
         "Domain": {
           "shape": "DomainType",
           "documentation": "<p>Indicates whether this Elastic IP address is for use with instances in EC2-Classic (<code>standard</code>) or instances in a VPC (<code>vpc</code>).</p>",
           "locationName": "domain"
         }
-      },
-      "documentation": "<p>Contains the output of AllocateAddress.</p>"
+      }
     },
     "AllocateHostsRequest": {
       "type": "structure",
@@ -4167,8 +4289,7 @@
           "documentation": "<p>[EC2-VPC] The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.</p>",
           "locationName": "privateIpAddress"
         }
-      },
-      "documentation": "<p>Contains the parameters for AssociateAddress.</p>"
+      }
     },
     "AssociateAddressResult": {
       "type": "structure",
@@ -4178,8 +4299,7 @@
           "documentation": "<p>[EC2-VPC] The ID that represents the association of the Elastic IP address with an instance.</p>",
           "locationName": "associationId"
         }
-      },
-      "documentation": "<p>Contains the output of AssociateAddress.</p>"
+      }
     },
     "AssociateDhcpOptionsRequest": {
       "type": "structure",
@@ -4931,6 +5051,51 @@
         "failed"
       ]
     },
+    "ByoipCidr": {
+      "type": "structure",
+      "members": {
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>The public IPv4 address range, in CIDR notation.</p>",
+          "locationName": "cidr"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description of the address range.</p>",
+          "locationName": "description"
+        },
+        "StatusMessage": {
+          "shape": "String",
+          "documentation": "<p>Upon success, contains the ID of the address pool. Otherwise, contains an error message.</p>",
+          "locationName": "statusMessage"
+        },
+        "State": {
+          "shape": "ByoipCidrState",
+          "documentation": "<p>The state of the address pool.</p>",
+          "locationName": "state"
+        }
+      },
+      "documentation": "<p>Information about an address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p>"
+    },
+    "ByoipCidrSet": {
+      "type": "list",
+      "member": {
+        "shape": "ByoipCidr",
+        "locationName": "item"
+      }
+    },
+    "ByoipCidrState": {
+      "type": "string",
+      "enum": [
+        "advertised",
+        "deprovisioned",
+        "failed-deprovision",
+        "failed-provision",
+        "pending-deprovision",
+        "pending-provision",
+        "provisioned"
+      ]
+    },
     "CancelBatchErrorCode": {
       "type": "string",
       "enum": [
@@ -5254,6 +5419,24 @@
         "shape": "CancelledSpotInstanceRequest",
         "locationName": "item"
       }
+    },
+    "CidrAuthorizationContext": {
+      "type": "structure",
+      "required": [
+        "Message",
+        "Signature"
+      ],
+      "members": {
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The plain-text authorization message for the prefix and account.</p>"
+        },
+        "Signature": {
+          "shape": "String",
+          "documentation": "<p>The signed authorization message for the prefix and account.</p>"
+        }
+      },
+      "documentation": "<p>Provides authorization for Amazon to bring a specific IP address range to a specific AWS account using bring your own IP addresses (BYOIP).</p>"
     },
     "CidrBlock": {
       "type": "structure",
@@ -6349,7 +6532,7 @@
         },
         "IcmpTypeCode": {
           "shape": "IcmpTypeCode",
-          "documentation": "<p>ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6 CIDR block.</p>",
+          "documentation": "<p>ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.</p>",
           "locationName": "Icmp"
         },
         "Ipv6CidrBlock": {
@@ -6364,12 +6547,12 @@
         },
         "PortRange": {
           "shape": "PortRange",
-          "documentation": "<p>TCP or UDP protocols: The range of ports the rule applies to.</p>",
+          "documentation": "<p>TCP or UDP protocols: The range of ports the rule applies to. Required if specifying protocol 6 (TCP) or 17 (UDP).</p>",
           "locationName": "portRange"
         },
         "Protocol": {
           "shape": "String",
-          "documentation": "<p>The protocol. A value of <code>-1</code> or <code>all</code> means all protocols. If you specify <code>all</code>, <code>-1</code>, or a protocol number other than <code>6</code> (tcp), <code>17</code> (udp), or <code>1</code> (icmp), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol <code>58</code> (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol <code>58</code> (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.</p>",
+          "documentation": "<p>The protocol number. A value of \"-1\" means all protocols. If you specify \"-1\" or a protocol number other than \"6\" (TCP), \"17\" (UDP), or \"1\" (ICMP), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol \"58\" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol \"58\" (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.</p>",
           "locationName": "protocol"
         },
         "RuleAction": {
@@ -6835,7 +7018,7 @@
         },
         "Resources": {
           "shape": "ResourceIdList",
-          "documentation": "<p>The IDs of one or more resources to tag. For example, ami-1a2b3c4d.</p>",
+          "documentation": "<p>The IDs of one or more resources, separated by spaces.</p>",
           "locationName": "ResourceId"
         },
         "Tags": {
@@ -8012,7 +8195,7 @@
         },
         "Resources": {
           "shape": "ResourceIdList",
-          "documentation": "<p>The IDs of one or more resources.</p>",
+          "documentation": "<p>The IDs of one or more resources, separated by spaces.</p>",
           "locationName": "resourceId"
         },
         "Tags": {
@@ -8222,6 +8405,32 @@
       },
       "documentation": "<p>Contains the parameters for DeleteVpnGateway.</p>"
     },
+    "DeprovisionByoipCidrRequest": {
+      "type": "structure",
+      "required": [
+        "Cidr"
+      ],
+      "members": {
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>The public IPv4 address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DeprovisionByoipCidrResult": {
+      "type": "structure",
+      "members": {
+        "ByoipCidr": {
+          "shape": "ByoipCidr",
+          "documentation": "<p>Information about the address range.</p>",
+          "locationName": "byoipCidr"
+        }
+      }
+    },
     "DeregisterImageRequest": {
       "type": "structure",
       "required": [
@@ -8290,8 +8499,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeAddresses.</p>"
+      }
     },
     "DescribeAddressesResult": {
       "type": "structure",
@@ -8301,8 +8509,7 @@
           "documentation": "<p>Information about one or more Elastic IP addresses.</p>",
           "locationName": "addressesSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeAddresses.</p>"
+      }
     },
     "DescribeAggregateIdFormatRequest": {
       "type": "structure",
@@ -8391,6 +8598,41 @@
         }
       },
       "documentation": "<p>Contains the output of DescribeBundleTasks.</p>"
+    },
+    "DescribeByoipCidrsRequest": {
+      "type": "structure",
+      "required": [
+        "MaxResults"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeByoipCidrsResult": {
+      "type": "structure",
+      "members": {
+        "ByoipCidrs": {
+          "shape": "ByoipCidrSet",
+          "documentation": "<p>Information about your address ranges.</p>",
+          "locationName": "byoipCidrSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
     },
     "DescribeClassicLinkInstancesRequest": {
       "type": "structure",
@@ -9621,7 +9863,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "documentation": "<p>The token for the next page of results.</p>",
           "locationName": "nextToken"
         },
         "PublicIps": {
@@ -9629,8 +9871,7 @@
           "documentation": "<p>One or more Elastic IP addresses.</p>",
           "locationName": "publicIp"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeMovingAddresses.</p>"
+      }
     },
     "DescribeMovingAddressesResult": {
       "type": "structure",
@@ -9645,8 +9886,7 @@
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeMovingAddresses.</p>"
+      }
     },
     "DescribeNatGatewaysRequest": {
       "type": "structure",
@@ -9962,6 +10202,39 @@
         "NextToken": {
           "shape": "String",
           "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribePublicIpv4PoolsRequest": {
+      "type": "structure",
+      "members": {
+        "PoolIds": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The IDs of the address pools.</p>",
+          "locationName": "PoolId"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "PoolMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        }
+      }
+    },
+    "DescribePublicIpv4PoolsResult": {
+      "type": "structure",
+      "members": {
+        "PublicIpv4Pools": {
+          "shape": "PublicIpv4PoolSet",
+          "documentation": "<p>Information about the address pools.</p>",
+          "locationName": "publicIpv4PoolSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
       }
@@ -11880,8 +12153,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DisassociateAddress.</p>"
+      }
     },
     "DisassociateIamInstanceProfileRequest": {
       "type": "structure",
@@ -18216,8 +18488,7 @@
           "documentation": "<p>The Elastic IP address.</p>",
           "locationName": "publicIp"
         }
-      },
-      "documentation": "<p>Contains the parameters for MoveAddressToVpc.</p>"
+      }
     },
     "MoveAddressToVpcResult": {
       "type": "structure",
@@ -18232,8 +18503,7 @@
           "documentation": "<p>The status of the move of the IP address.</p>",
           "locationName": "status"
         }
-      },
-      "documentation": "<p>Contains the output of MoveAddressToVpc.</p>"
+      }
     },
     "MoveStatus": {
       "type": "string",
@@ -18470,7 +18740,7 @@
         },
         "Protocol": {
           "shape": "String",
-          "documentation": "<p>The protocol. A value of <code>-1</code> means all protocols.</p>",
+          "documentation": "<p>The protocol number. A value of \"-1\" means all protocols.</p>",
           "locationName": "protocol"
         },
         "RuleAction": {
@@ -19125,6 +19395,11 @@
         "Windows"
       ]
     },
+    "PoolMaxResults": {
+      "type": "integer",
+      "max": 10,
+      "min": 1
+    },
     "PortRange": {
       "type": "structure",
       "members": {
@@ -19415,6 +19690,40 @@
         "locationName": "item"
       }
     },
+    "ProvisionByoipCidrRequest": {
+      "type": "structure",
+      "required": [
+        "Cidr"
+      ],
+      "members": {
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>The public IPv4 address range, in CIDR notation. The most specific prefix that you can specify is /24. The address range cannot overlap with another address range that you've brought to this or another region.</p>"
+        },
+        "CidrAuthorizationContext": {
+          "shape": "CidrAuthorizationContext",
+          "documentation": "<p>A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A description for the address range and the address pool.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ProvisionByoipCidrResult": {
+      "type": "structure",
+      "members": {
+        "ByoipCidr": {
+          "shape": "ByoipCidr",
+          "documentation": "<p>Information about the address pool.</p>",
+          "locationName": "byoipCidr"
+        }
+      }
+    },
     "ProvisionedBandwidth": {
       "type": "structure",
       "members": {
@@ -19451,6 +19760,77 @@
       "member": {
         "shape": "String",
         "locationName": "PublicIp"
+      }
+    },
+    "PublicIpv4Pool": {
+      "type": "structure",
+      "members": {
+        "PoolId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the IPv4 address pool.</p>",
+          "locationName": "poolId"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A description of the address pool.</p>",
+          "locationName": "description"
+        },
+        "PoolAddressRanges": {
+          "shape": "PublicIpv4PoolRangeSet",
+          "documentation": "<p>The address ranges.</p>",
+          "locationName": "poolAddressRangeSet"
+        },
+        "TotalAddressCount": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of addresses.</p>",
+          "locationName": "totalAddressCount"
+        },
+        "TotalAvailableAddressCount": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of available addresses.</p>",
+          "locationName": "totalAvailableAddressCount"
+        }
+      },
+      "documentation": "<p>Describes an address pool.</p>"
+    },
+    "PublicIpv4PoolRange": {
+      "type": "structure",
+      "members": {
+        "FirstAddress": {
+          "shape": "String",
+          "documentation": "<p>The first IP address in the range.</p>",
+          "locationName": "firstAddress"
+        },
+        "LastAddress": {
+          "shape": "String",
+          "documentation": "<p>The last IP address in the range.</p>",
+          "locationName": "lastAddress"
+        },
+        "AddressCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of addresses in the range.</p>",
+          "locationName": "addressCount"
+        },
+        "AvailableAddressCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of available addresses in the range.</p>",
+          "locationName": "availableAddressCount"
+        }
+      },
+      "documentation": "<p>Describes an address range of an IPv4 address pool.</p>"
+    },
+    "PublicIpv4PoolRangeSet": {
+      "type": "list",
+      "member": {
+        "shape": "PublicIpv4PoolRange",
+        "locationName": "item"
+      }
+    },
+    "PublicIpv4PoolSet": {
+      "type": "list",
+      "member": {
+        "shape": "PublicIpv4Pool",
+        "locationName": "item"
       }
     },
     "Purchase": {
@@ -19925,8 +20305,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for ReleaseAddress.</p>"
+      }
     },
     "ReleaseHostsRequest": {
       "type": "structure",
@@ -20044,7 +20423,7 @@
         },
         "IcmpTypeCode": {
           "shape": "IcmpTypeCode",
-          "documentation": "<p>ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an IPv6 CIDR block.</p>",
+          "documentation": "<p>ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.</p>",
           "locationName": "Icmp"
         },
         "Ipv6CidrBlock": {
@@ -20059,12 +20438,12 @@
         },
         "PortRange": {
           "shape": "PortRange",
-          "documentation": "<p>TCP or UDP protocols: The range of ports the rule applies to. Required if specifying TCP (6) or UDP (17) for the protocol.</p>",
+          "documentation": "<p>TCP or UDP protocols: The range of ports the rule applies to. Required if specifying protocol 6 (TCP) or 17 (UDP).</p>",
           "locationName": "portRange"
         },
         "Protocol": {
           "shape": "String",
-          "documentation": "<p>The IP protocol. You can specify <code>all</code> or <code>-1</code> to mean all protocols. If you specify <code>all</code>, <code>-1</code>, or a protocol number other than <code>tcp</code>, <code>udp</code>, or <code>icmp</code>, traffic on all ports is allowed, regardless of any ports or ICMP types or codes you that specify. If you specify protocol <code>58</code> (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol <code>58</code> (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.</p>",
+          "documentation": "<p>The protocol number. A value of \"-1\" means all protocols. If you specify \"-1\" or a protocol number other than \"6\" (TCP), \"17\" (UDP), or \"1\" (ICMP), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol \"58\" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol \"58\" (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.</p>",
           "locationName": "protocol"
         },
         "RuleAction": {
@@ -21412,8 +21791,7 @@
           "documentation": "<p>The Elastic IP address.</p>",
           "locationName": "publicIp"
         }
-      },
-      "documentation": "<p>Contains the parameters for RestoreAddressToClassic.</p>"
+      }
     },
     "RestoreAddressToClassicResult": {
       "type": "structure",
@@ -21428,8 +21806,7 @@
           "documentation": "<p>The move status for the IP address.</p>",
           "locationName": "status"
         }
-      },
-      "documentation": "<p>Contains the output of RestoreAddressToClassic.</p>"
+      }
     },
     "RevokeSecurityGroupEgressRequest": {
       "type": "structure",
@@ -23185,7 +23562,7 @@
         },
         "FulfilledCapacity": {
           "shape": "Double",
-          "documentation": "<p>The number of units fulfilled by this request compared to the set target capacity.</p>",
+          "documentation": "<p>The number of units fulfilled by this request compared to the set target capacity. You cannot set this value.</p>",
           "locationName": "fulfilledCapacity"
         },
         "OnDemandFulfilledCapacity": {
@@ -24026,7 +24403,7 @@
         },
         "ResourceId": {
           "shape": "String",
-          "documentation": "<p>The ID of the resource. For example, <code>ami-1a2b3c4d</code>.</p>",
+          "documentation": "<p>The ID of the resource.</p>",
           "locationName": "resourceId"
         },
         "ResourceType": {
@@ -25832,6 +26209,32 @@
         }
       },
       "documentation": "<p>The tunnel options for a VPN connection.</p>"
+    },
+    "WithdrawByoipCidrRequest": {
+      "type": "structure",
+      "required": [
+        "Cidr"
+      ],
+      "members": {
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>The public IPv4 address range, in CIDR notation.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "WithdrawByoipCidrResult": {
+      "type": "structure",
+      "members": {
+        "ByoipCidr": {
+          "shape": "ByoipCidr",
+          "documentation": "<p>Information about the address pool.</p>",
+          "locationName": "byoipCidr"
+        }
+      }
     },
     "ZoneNameStringList": {
       "type": "list",
