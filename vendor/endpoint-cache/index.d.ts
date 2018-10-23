@@ -1,4 +1,8 @@
-import { DiscoveredEndpoints } from '@aws/types';
+/**
+ * Output shape for endpoint discovery operations
+ */
+export type DiscoveredEndpoints = Array<{Address?: string, CachePeriodInMinutes?: number}>
+
 export interface EndpointIdentifier {
     [key: string]: string | undefined;
     serviceId?: string;
