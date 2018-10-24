@@ -85,7 +85,7 @@
           "shape": "ConcurrentModificationException"
         }
       ],
-      "documentation": "<p>Reserved for future use. To create a project, use the AWS CodeStar console.</p>"
+      "documentation": "<p>Creates a project, including project resources. This action creates a project based on a submitted project request. A set of source code files and a toolchain template file can be included with the project request. If these are not provided, an empty project is created.</p>"
     },
     "CreateUserProfile": {
       "name": "CreateUserProfile",
@@ -532,11 +532,77 @@
         }
       }
     },
+    "BucketKey": {
+      "type": "string"
+    },
+    "BucketName": {
+      "type": "string",
+      "max": 63,
+      "min": 3
+    },
     "ClientRequestToken": {
       "type": "string",
       "max": 256,
       "min": 1,
       "pattern": "^[\\w:/-]+$"
+    },
+    "Code": {
+      "type": "structure",
+      "required": [
+        "source",
+        "destination"
+      ],
+      "members": {
+        "source": {
+          "shape": "CodeSource",
+          "documentation": "<p>The location where the source code files provided with the project request are stored. AWS CodeStar retrieves the files during project creation.</p>"
+        },
+        "destination": {
+          "shape": "CodeDestination",
+          "documentation": "<p>The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or GitHub. After AWS CodeStar provisions the new repository, the source code files provided with the project request are placed in the repository.</p>"
+        }
+      },
+      "documentation": "<p>Location and destination information about the source code files provided with the project request. The source code is uploaded to the new project source repository after project creation.</p>"
+    },
+    "CodeCommitCodeDestination": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "name": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the AWS CodeCommit repository to be created in AWS CodeStar.</p>"
+        }
+      },
+      "documentation": "<p>Information about the AWS CodeCommit repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.</p>"
+    },
+    "CodeDestination": {
+      "type": "structure",
+      "members": {
+        "codeCommit": {
+          "shape": "CodeCommitCodeDestination",
+          "documentation": "<p>Information about the AWS CodeCommit repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.</p>"
+        },
+        "gitHub": {
+          "shape": "GitHubCodeDestination",
+          "documentation": "<p>Information about the GitHub repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.</p>"
+        }
+      },
+      "documentation": "<p>The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or GitHub. After AWS CodeStar provisions the new repository, the source code files provided with the project request are placed in the repository.</p>"
+    },
+    "CodeSource": {
+      "type": "structure",
+      "required": [
+        "s3"
+      ],
+      "members": {
+        "s3": {
+          "shape": "S3Location",
+          "documentation": "<p>Information about the Amazon S3 location where the source code files provided with the project request are stored. </p>"
+        }
+      },
+      "documentation": "<p>The location where the source code files provided with the project request are stored. AWS CodeStar retrieves the files during project creation.</p>"
     },
     "CreateProjectRequest": {
       "type": "structure",
@@ -547,19 +613,27 @@
       "members": {
         "name": {
           "shape": "ProjectName",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The display name for the project to be created in AWS CodeStar.</p>"
         },
         "id": {
           "shape": "ProjectId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The ID of the project to be created in AWS CodeStar.</p>"
         },
         "description": {
           "shape": "ProjectDescription",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The description of the project, if any.</p>"
         },
         "clientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>A user- or system-generated token that identifies the entity that requested project creation. This token can be used to repeat the request.</p>"
+        },
+        "sourceCode": {
+          "shape": "SourceCode",
+          "documentation": "<p>A list of the Code objects submitted with the project request. If this parameter is specified, the request must also include the toolchain parameter.</p>"
+        },
+        "toolchain": {
+          "shape": "Toolchain",
+          "documentation": "<p>The name of the toolchain template file submitted with the project request. If this parameter is specified, the request must also include the sourceCode parameter.</p>"
         },
         "tags": {
           "shape": "Tags",
@@ -576,15 +650,15 @@
       "members": {
         "id": {
           "shape": "ProjectId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The ID of the project.</p>"
         },
         "arn": {
           "shape": "ProjectArn",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the created project.</p>"
         },
         "clientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>A user- or system-generated token that identifies the entity that requested project creation.</p>"
         },
         "projectTemplateId": {
           "shape": "ProjectTemplateId",
@@ -840,6 +914,53 @@
       "pattern": "^[\\w-.+]+@[\\w-.+]+$",
       "sensitive": true
     },
+    "GitHubCodeDestination": {
+      "type": "structure",
+      "required": [
+        "name",
+        "type",
+        "owner",
+        "privateRepository",
+        "issuesEnabled",
+        "token"
+      ],
+      "members": {
+        "name": {
+          "shape": "RepositoryName",
+          "documentation": "<p>Name of the GitHub repository to be created in AWS CodeStar.</p>"
+        },
+        "description": {
+          "shape": "RepositoryDescription",
+          "documentation": "<p>Description for the GitHub repository to be created in AWS CodeStar. This description displays in GitHub after the repository is created.</p>"
+        },
+        "type": {
+          "shape": "RepositoryType",
+          "documentation": "<p>The type of GitHub repository to be created in AWS CodeStar. Valid values are User or Organization.</p>"
+        },
+        "owner": {
+          "shape": "RepositoryOwner",
+          "documentation": "<p>The GitHub username for the owner of the GitHub repository to be created in AWS CodeStar. If this repository should be owned by a GitHub organization, provide its name.</p>"
+        },
+        "privateRepository": {
+          "shape": "RepositoryIsPrivate",
+          "documentation": "<p>Whether the GitHub repository is to be a private repository.</p>"
+        },
+        "issuesEnabled": {
+          "shape": "RepositoryEnableIssues",
+          "documentation": "<p>Whether to enable issues for the GitHub repository.</p>"
+        },
+        "token": {
+          "shape": "GitHubPersonalToken",
+          "documentation": "<p>The GitHub user's personal access token for the GitHub repository.</p>"
+        }
+      },
+      "documentation": "<p>Information about the GitHub repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.</p>"
+    },
+    "GitHubPersonalToken": {
+      "type": "string",
+      "min": 1,
+      "sensitive": true
+    },
     "LastModifiedTimestamp": {
       "type": "timestamp"
     },
@@ -1092,6 +1213,34 @@
     "RemoteAccessAllowed": {
       "type": "boolean"
     },
+    "RepositoryDescription": {
+      "type": "string",
+      "max": 1000,
+      "min": 1,
+      "pattern": "^\\S(.*\\S)?$"
+    },
+    "RepositoryEnableIssues": {
+      "type": "boolean"
+    },
+    "RepositoryIsPrivate": {
+      "type": "boolean"
+    },
+    "RepositoryName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^\\S[\\w.-]*$"
+    },
+    "RepositoryOwner": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^\\S(.*\\S)?$"
+    },
+    "RepositoryType": {
+      "type": "string",
+      "pattern": "^(user|organization|User|Organization)$"
+    },
     "Resource": {
       "type": "structure",
       "required": [
@@ -1119,6 +1268,31 @@
     "Role": {
       "type": "string",
       "pattern": "^(Owner|Viewer|Contributor)$"
+    },
+    "RoleArn": {
+      "type": "string",
+      "max": 1224,
+      "min": 1
+    },
+    "S3Location": {
+      "type": "structure",
+      "members": {
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The Amazon S3 bucket name where the source code files provided with the project request are stored.</p>"
+        },
+        "bucketKey": {
+          "shape": "BucketKey",
+          "documentation": "<p>The Amazon S3 object key where the source code files provided with the project request are stored.</p>"
+        }
+      },
+      "documentation": "<p>The Amazon S3 location where the source code files provided with the project request are stored.</p>"
+    },
+    "SourceCode": {
+      "type": "list",
+      "member": {
+        "shape": "Code"
+      }
     },
     "SshPublicKey": {
       "type": "string",
@@ -1213,6 +1387,63 @@
       "member": {
         "shape": "TeamMember"
       }
+    },
+    "TemplateParameterKey": {
+      "type": "string",
+      "max": 30,
+      "min": 1,
+      "pattern": "^\\S(.*\\S)?$"
+    },
+    "TemplateParameterMap": {
+      "type": "map",
+      "key": {
+        "shape": "TemplateParameterKey"
+      },
+      "value": {
+        "shape": "TemplateParameterValue"
+      },
+      "max": 25
+    },
+    "TemplateParameterValue": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^\\S(.*\\S)?$",
+      "sensitive": true
+    },
+    "Toolchain": {
+      "type": "structure",
+      "required": [
+        "source"
+      ],
+      "members": {
+        "source": {
+          "shape": "ToolchainSource",
+          "documentation": "<p>The Amazon S3 location where the toolchain template file provided with the project request is stored. AWS CodeStar retrieves the file during project creation.</p>"
+        },
+        "roleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The service role ARN for AWS CodeStar to use for the toolchain template during stack provisioning.</p>"
+        },
+        "stackParameters": {
+          "shape": "TemplateParameterMap",
+          "documentation": "<p>The list of parameter overrides to be passed into the toolchain template during stack provisioning, if any.</p>"
+        }
+      },
+      "documentation": "<p>The toolchain template file provided with the project request. AWS CodeStar uses the template to provision the toolchain stack in AWS CloudFormation.</p>"
+    },
+    "ToolchainSource": {
+      "type": "structure",
+      "required": [
+        "s3"
+      ],
+      "members": {
+        "s3": {
+          "shape": "S3Location",
+          "documentation": "<p>The Amazon S3 bucket where the toolchain template file provided with the project request is stored.</p>"
+        }
+      },
+      "documentation": "<p>The Amazon S3 location where the toolchain template file provided with the project request is stored. AWS CodeStar retrieves the file during project creation.</p>"
     },
     "UntagProjectRequest": {
       "type": "structure",

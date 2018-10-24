@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.341.0-->
+<!--LATEST=2.342.0-->
 <!--ENTRYINSERT-->
+
+## 2.342.0
+* feature: AlexaForBusiness: We extended the functionality of the Alexa for Business SDK, including additional support for third-party Alexa built-in devices, managing private and public skills, and conferencing setup.
+* feature: CodeStar: This release lets you create projects from source code and a toolchain definition that you provide.
 
 ## 2.341.0
 * feature: EC2: Provides customers the ability to Bring Your Own IP (BYOIP) prefix.  You can bring part or all of your public IPv4 address range from your on-premises network to your AWS account. You continue to own the address range, but AWS advertises it on the internet.

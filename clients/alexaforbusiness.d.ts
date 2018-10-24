@@ -12,6 +12,14 @@ declare class AlexaForBusiness extends Service {
   constructor(options?: AlexaForBusiness.Types.ClientConfiguration)
   config: Config & AlexaForBusiness.Types.ClientConfiguration;
   /**
+   * Associates a skill with the organization under the customer's AWS account. If a skill is private, the user implicitly accepts access to this skill during enablement.
+   */
+  approveSkill(params: AlexaForBusiness.Types.ApproveSkillRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ApproveSkillResponse) => void): Request<AlexaForBusiness.Types.ApproveSkillResponse, AWSError>;
+  /**
+   * Associates a skill with the organization under the customer's AWS account. If a skill is private, the user implicitly accepts access to this skill during enablement.
+   */
+  approveSkill(callback?: (err: AWSError, data: AlexaForBusiness.Types.ApproveSkillResponse) => void): Request<AlexaForBusiness.Types.ApproveSkillResponse, AWSError>;
+  /**
    * Associates a contact with a given address book.
    */
   associateContactWithAddressBook(params: AlexaForBusiness.Types.AssociateContactWithAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateContactWithAddressBookResponse) => void): Request<AlexaForBusiness.Types.AssociateContactWithAddressBookResponse, AWSError>;
@@ -36,6 +44,14 @@ declare class AlexaForBusiness extends Service {
    */
   associateSkillGroupWithRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse, AWSError>;
   /**
+   * Associates a skill with a skill group.
+   */
+  associateSkillWithSkillGroup(params: AlexaForBusiness.Types.AssociateSkillWithSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse, AWSError>;
+  /**
+   * Associates a skill with a skill group.
+   */
+  associateSkillWithSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse, AWSError>;
+  /**
    * Creates an address book with the specified details.
    */
   createAddressBook(params: AlexaForBusiness.Types.CreateAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateAddressBookResponse) => void): Request<AlexaForBusiness.Types.CreateAddressBookResponse, AWSError>;
@@ -43,6 +59,14 @@ declare class AlexaForBusiness extends Service {
    * Creates an address book with the specified details.
    */
   createAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateAddressBookResponse) => void): Request<AlexaForBusiness.Types.CreateAddressBookResponse, AWSError>;
+  /**
+   * Adds a new conference provider under the user's AWS account.
+   */
+  createConferenceProvider(params: AlexaForBusiness.Types.CreateConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.CreateConferenceProviderResponse, AWSError>;
+  /**
+   * Adds a new conference provider under the user's AWS account.
+   */
+  createConferenceProvider(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.CreateConferenceProviderResponse, AWSError>;
   /**
    * Creates a contact with the specified details.
    */
@@ -92,6 +116,14 @@ declare class AlexaForBusiness extends Service {
    */
   deleteAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteAddressBookResponse) => void): Request<AlexaForBusiness.Types.DeleteAddressBookResponse, AWSError>;
   /**
+   * Deletes a conference provider.
+   */
+  deleteConferenceProvider(params: AlexaForBusiness.Types.DeleteConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.DeleteConferenceProviderResponse, AWSError>;
+  /**
+   * Deletes a conference provider.
+   */
+  deleteConferenceProvider(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.DeleteConferenceProviderResponse, AWSError>;
+  /**
    * Deletes a contact by the contact ARN.
    */
   deleteContact(params: AlexaForBusiness.Types.DeleteContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteContactResponse) => void): Request<AlexaForBusiness.Types.DeleteContactResponse, AWSError>;
@@ -99,6 +131,14 @@ declare class AlexaForBusiness extends Service {
    * Deletes a contact by the contact ARN.
    */
   deleteContact(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteContactResponse) => void): Request<AlexaForBusiness.Types.DeleteContactResponse, AWSError>;
+  /**
+   * Removes a device from Alexa For Business.
+   */
+  deleteDevice(params: AlexaForBusiness.Types.DeleteDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceResponse, AWSError>;
+  /**
+   * Removes a device from Alexa For Business.
+   */
+  deleteDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceResponse, AWSError>;
   /**
    * Deletes a room profile by the profile ARN.
    */
@@ -123,6 +163,14 @@ declare class AlexaForBusiness extends Service {
    * Deletes room skill parameter details by room, skill, and parameter key ID.
    */
   deleteRoomSkillParameter(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.DeleteRoomSkillParameterResponse, AWSError>;
+  /**
+   * Unlinks a third-party account from a skill.
+   */
+  deleteSkillAuthorization(params: AlexaForBusiness.Types.DeleteSkillAuthorizationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.DeleteSkillAuthorizationResponse, AWSError>;
+  /**
+   * Unlinks a third-party account from a skill.
+   */
+  deleteSkillAuthorization(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.DeleteSkillAuthorizationResponse, AWSError>;
   /**
    * Deletes a skill group by skill group ARN.
    */
@@ -156,6 +204,14 @@ declare class AlexaForBusiness extends Service {
    */
   disassociateDeviceFromRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateDeviceFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateDeviceFromRoomResponse, AWSError>;
   /**
+   * Disassociates a skill from a skill group.
+   */
+  disassociateSkillFromSkillGroup(params: AlexaForBusiness.Types.DisassociateSkillFromSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse, AWSError>;
+  /**
+   * Disassociates a skill from a skill group.
+   */
+  disassociateSkillFromSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse, AWSError>;
+  /**
    * Disassociates a skill group from a specified room. This disables all skills in the skill group on all devices in the room.
    */
   disassociateSkillGroupFromRoom(params: AlexaForBusiness.Types.DisassociateSkillGroupFromRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse, AWSError>;
@@ -164,6 +220,14 @@ declare class AlexaForBusiness extends Service {
    */
   disassociateSkillGroupFromRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse, AWSError>;
   /**
+   * Forgets smart home appliances associated to a room.
+   */
+  forgetSmartHomeAppliances(params: AlexaForBusiness.Types.ForgetSmartHomeAppliancesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ForgetSmartHomeAppliancesResponse) => void): Request<AlexaForBusiness.Types.ForgetSmartHomeAppliancesResponse, AWSError>;
+  /**
+   * Forgets smart home appliances associated to a room.
+   */
+  forgetSmartHomeAppliances(callback?: (err: AWSError, data: AlexaForBusiness.Types.ForgetSmartHomeAppliancesResponse) => void): Request<AlexaForBusiness.Types.ForgetSmartHomeAppliancesResponse, AWSError>;
+  /**
    * Gets address the book details by the address book ARN.
    */
   getAddressBook(params: AlexaForBusiness.Types.GetAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetAddressBookResponse) => void): Request<AlexaForBusiness.Types.GetAddressBookResponse, AWSError>;
@@ -171,6 +235,22 @@ declare class AlexaForBusiness extends Service {
    * Gets address the book details by the address book ARN.
    */
   getAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetAddressBookResponse) => void): Request<AlexaForBusiness.Types.GetAddressBookResponse, AWSError>;
+  /**
+   * Retrieves the existing conference preferences.
+   */
+  getConferencePreference(params: AlexaForBusiness.Types.GetConferencePreferenceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.GetConferencePreferenceResponse, AWSError>;
+  /**
+   * Retrieves the existing conference preferences.
+   */
+  getConferencePreference(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.GetConferencePreferenceResponse, AWSError>;
+  /**
+   * Gets details about a specific conference provider.
+   */
+  getConferenceProvider(params: AlexaForBusiness.Types.GetConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.GetConferenceProviderResponse, AWSError>;
+  /**
+   * Gets details about a specific conference provider.
+   */
+  getConferenceProvider(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.GetConferenceProviderResponse, AWSError>;
   /**
    * Gets the contact details by the contact ARN.
    */
@@ -220,6 +300,14 @@ declare class AlexaForBusiness extends Service {
    */
   getSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetSkillGroupResponse) => void): Request<AlexaForBusiness.Types.GetSkillGroupResponse, AWSError>;
   /**
+   * Lists conference providers under a specific AWS account.
+   */
+  listConferenceProviders(params: AlexaForBusiness.Types.ListConferenceProvidersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListConferenceProvidersResponse) => void): Request<AlexaForBusiness.Types.ListConferenceProvidersResponse, AWSError>;
+  /**
+   * Lists conference providers under a specific AWS account.
+   */
+  listConferenceProviders(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListConferenceProvidersResponse) => void): Request<AlexaForBusiness.Types.ListConferenceProvidersResponse, AWSError>;
+  /**
    * Lists the device event history, including device connection status, for up to 30 days.
    */
   listDeviceEvents(params: AlexaForBusiness.Types.ListDeviceEventsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListDeviceEventsResponse) => void): Request<AlexaForBusiness.Types.ListDeviceEventsResponse, AWSError>;
@@ -236,6 +324,30 @@ declare class AlexaForBusiness extends Service {
    */
   listSkills(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsResponse) => void): Request<AlexaForBusiness.Types.ListSkillsResponse, AWSError>;
   /**
+   * Lists all categories in the Alexa skill store.
+   */
+  listSkillsStoreCategories(params: AlexaForBusiness.Types.ListSkillsStoreCategoriesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsStoreCategoriesResponse) => void): Request<AlexaForBusiness.Types.ListSkillsStoreCategoriesResponse, AWSError>;
+  /**
+   * Lists all categories in the Alexa skill store.
+   */
+  listSkillsStoreCategories(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsStoreCategoriesResponse) => void): Request<AlexaForBusiness.Types.ListSkillsStoreCategoriesResponse, AWSError>;
+  /**
+   * Lists all skills in the Alexa skill store by category.
+   */
+  listSkillsStoreSkillsByCategory(params: AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryResponse) => void): Request<AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryResponse, AWSError>;
+  /**
+   * Lists all skills in the Alexa skill store by category.
+   */
+  listSkillsStoreSkillsByCategory(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryResponse) => void): Request<AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryResponse, AWSError>;
+  /**
+   * Lists all of the smart home appliances associated with a room.
+   */
+  listSmartHomeAppliances(params: AlexaForBusiness.Types.ListSmartHomeAppliancesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSmartHomeAppliancesResponse) => void): Request<AlexaForBusiness.Types.ListSmartHomeAppliancesResponse, AWSError>;
+  /**
+   * Lists all of the smart home appliances associated with a room.
+   */
+  listSmartHomeAppliances(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSmartHomeAppliancesResponse) => void): Request<AlexaForBusiness.Types.ListSmartHomeAppliancesResponse, AWSError>;
+  /**
    * Lists all tags for the specified resource.
    */
   listTags(params: AlexaForBusiness.Types.ListTagsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListTagsResponse) => void): Request<AlexaForBusiness.Types.ListTagsResponse, AWSError>;
@@ -244,6 +356,14 @@ declare class AlexaForBusiness extends Service {
    */
   listTags(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListTagsResponse) => void): Request<AlexaForBusiness.Types.ListTagsResponse, AWSError>;
   /**
+   * Sets the conference preferences on a specific conference provider at the account level.
+   */
+  putConferencePreference(params: AlexaForBusiness.Types.PutConferencePreferenceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.PutConferencePreferenceResponse, AWSError>;
+  /**
+   * Sets the conference preferences on a specific conference provider at the account level.
+   */
+  putConferencePreference(callback?: (err: AWSError, data: AlexaForBusiness.Types.PutConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.PutConferencePreferenceResponse, AWSError>;
+  /**
    * Updates room skill parameter details by room, skill, and parameter key ID. Not all skills have a room skill parameter.
    */
   putRoomSkillParameter(params: AlexaForBusiness.Types.PutRoomSkillParameterRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.PutRoomSkillParameterResponse, AWSError>;
@@ -251,6 +371,30 @@ declare class AlexaForBusiness extends Service {
    * Updates room skill parameter details by room, skill, and parameter key ID. Not all skills have a room skill parameter.
    */
   putRoomSkillParameter(callback?: (err: AWSError, data: AlexaForBusiness.Types.PutRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.PutRoomSkillParameterResponse, AWSError>;
+  /**
+   * Links a user's account to a third-party skill provider. If this API is called by an assumed IAM role, the skill being linked must be a private skill, and the skill must be owned by the AWS account that assumed the IAM role.
+   */
+  putSkillAuthorization(params: AlexaForBusiness.Types.PutSkillAuthorizationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.PutSkillAuthorizationResponse, AWSError>;
+  /**
+   * Links a user's account to a third-party skill provider. If this API is called by an assumed IAM role, the skill being linked must be a private skill, and the skill must be owned by the AWS account that assumed the IAM role.
+   */
+  putSkillAuthorization(callback?: (err: AWSError, data: AlexaForBusiness.Types.PutSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.PutSkillAuthorizationResponse, AWSError>;
+  /**
+   * Registers an Alexa-enabled device built by an Original Equipment Manufacturer (OEM) using Alexa Voice Service (AVS).
+   */
+  registerAVSDevice(params: AlexaForBusiness.Types.RegisterAVSDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.RegisterAVSDeviceResponse) => void): Request<AlexaForBusiness.Types.RegisterAVSDeviceResponse, AWSError>;
+  /**
+   * Registers an Alexa-enabled device built by an Original Equipment Manufacturer (OEM) using Alexa Voice Service (AVS).
+   */
+  registerAVSDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.RegisterAVSDeviceResponse) => void): Request<AlexaForBusiness.Types.RegisterAVSDeviceResponse, AWSError>;
+  /**
+   * Disassociates a skill from the organization under a user's AWS account. If the skill is a private skill, it moves to an AcceptStatus of PENDING. Any private or public skill that is rejected can be added later by calling the ApproveSkill API. 
+   */
+  rejectSkill(params: AlexaForBusiness.Types.RejectSkillRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.RejectSkillResponse) => void): Request<AlexaForBusiness.Types.RejectSkillResponse, AWSError>;
+  /**
+   * Disassociates a skill from the organization under a user's AWS account. If the skill is a private skill, it moves to an AcceptStatus of PENDING. Any private or public skill that is rejected can be added later by calling the ApproveSkill API. 
+   */
+  rejectSkill(callback?: (err: AWSError, data: AlexaForBusiness.Types.RejectSkillResponse) => void): Request<AlexaForBusiness.Types.RejectSkillResponse, AWSError>;
   /**
    * Determines the details for the room from which a skill request was invoked. This operation is used by skill developers.
    */
@@ -340,6 +484,14 @@ declare class AlexaForBusiness extends Service {
    */
   startDeviceSync(callback?: (err: AWSError, data: AlexaForBusiness.Types.StartDeviceSyncResponse) => void): Request<AlexaForBusiness.Types.StartDeviceSyncResponse, AWSError>;
   /**
+   * Initiates the discovery of any smart home appliances associated with the room.
+   */
+  startSmartHomeApplianceDiscovery(params: AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryResponse) => void): Request<AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryResponse, AWSError>;
+  /**
+   * Initiates the discovery of any smart home appliances associated with the room.
+   */
+  startSmartHomeApplianceDiscovery(callback?: (err: AWSError, data: AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryResponse) => void): Request<AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryResponse, AWSError>;
+  /**
    * Adds metadata tags to a specified resource.
    */
   tagResource(params: AlexaForBusiness.Types.TagResourceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.TagResourceResponse) => void): Request<AlexaForBusiness.Types.TagResourceResponse, AWSError>;
@@ -363,6 +515,14 @@ declare class AlexaForBusiness extends Service {
    * Updates address book details by the address book ARN.
    */
   updateAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateAddressBookResponse) => void): Request<AlexaForBusiness.Types.UpdateAddressBookResponse, AWSError>;
+  /**
+   * Updates an existing conference provider's settings.
+   */
+  updateConferenceProvider(params: AlexaForBusiness.Types.UpdateConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.UpdateConferenceProviderResponse, AWSError>;
+  /**
+   * Updates an existing conference provider's settings.
+   */
+  updateConferenceProvider(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.UpdateConferenceProviderResponse, AWSError>;
   /**
    * Updates the contact details by the contact ARN.
    */
@@ -437,6 +597,18 @@ declare namespace AlexaForBusiness {
   export type AddressBookDataList = AddressBookData[];
   export type AddressBookDescription = string;
   export type AddressBookName = string;
+  export type AmazonId = string;
+  export type ApplianceDescription = string;
+  export type ApplianceFriendlyName = string;
+  export type ApplianceManufacturerName = string;
+  export interface ApproveSkillRequest {
+    /**
+     * The unique identifier of the skill.
+     */
+    SkillId: SkillId;
+  }
+  export interface ApproveSkillResponse {
+  }
   export type Arn = string;
   export interface AssociateContactWithAddressBookRequest {
     /**
@@ -474,8 +646,73 @@ declare namespace AlexaForBusiness {
   }
   export interface AssociateSkillGroupWithRoomResponse {
   }
+  export interface AssociateSkillWithSkillGroupRequest {
+    /**
+     * The ARN of the skill group to associate the skill to.
+     */
+    SkillGroupArn?: Arn;
+    /**
+     * The unique identifier of the skill.
+     */
+    SkillId: SkillId;
+  }
+  export interface AssociateSkillWithSkillGroupResponse {
+  }
+  export type AuthorizationResult = {[key: string]: Value};
   export type Boolean = boolean;
+  export type BulletPoint = string;
+  export type BulletPoints = BulletPoint[];
+  export interface Category {
+    /**
+     * The ID of the skill store category.
+     */
+    CategoryId?: CategoryId;
+    /**
+     * The name of the skill store category.
+     */
+    CategoryName?: CategoryName;
+  }
+  export type CategoryId = number;
+  export type CategoryList = Category[];
+  export type CategoryName = string;
+  export type ClientId = string;
   export type ClientRequestToken = string;
+  export type CommsProtocol = "SIP"|"SIPS"|"H323"|string;
+  export interface ConferencePreference {
+    /**
+     * The ARN of the default conference provider.
+     */
+    DefaultConferenceProviderArn?: Arn;
+  }
+  export interface ConferenceProvider {
+    /**
+     * The ARN of the newly created conference provider.
+     */
+    Arn?: Arn;
+    /**
+     * The name of the conference provider.
+     */
+    Name?: ConferenceProviderName;
+    /**
+     * The type of conference providers.
+     */
+    Type?: ConferenceProviderType;
+    /**
+     * The IP endpoint and protocol for calling.
+     */
+    IPDialIn?: IPDialIn;
+    /**
+     * The information for PSTN conferencing.
+     */
+    PSTNDialIn?: PSTNDialIn;
+    /**
+     * The meeting settings for the conference provider.
+     */
+    MeetingSetting?: MeetingSetting;
+  }
+  export type ConferenceProviderName = string;
+  export type ConferenceProviderType = "CHIME"|"BLUEJEANS"|"FUZE"|"GOOGLE_HANGOUTS"|"POLYCOM"|"RINGCENTRAL"|"SKYPE_FOR_BUSINESS"|"WEBEX"|"ZOOM"|"CUSTOM"|string;
+  export type ConferenceProvidersList = ConferenceProvider[];
   export type ConnectionStatus = "ONLINE"|"OFFLINE"|string;
   export interface Contact {
     /**
@@ -523,6 +760,7 @@ declare namespace AlexaForBusiness {
   }
   export type ContactDataList = ContactData[];
   export type ContactName = string;
+  export type CountryCode = string;
   export interface CreateAddressBookRequest {
     /**
      * The name of the address book.
@@ -542,6 +780,38 @@ declare namespace AlexaForBusiness {
      * The ARN of the newly created address book.
      */
     AddressBookArn?: Arn;
+  }
+  export interface CreateConferenceProviderRequest {
+    /**
+     * The name of the conference provider.
+     */
+    ConferenceProviderName: ConferenceProviderName;
+    /**
+     * A string that represents a type within a list of predefined types.
+     */
+    ConferenceProviderType: ConferenceProviderType;
+    /**
+     * The IP endpoint and protocol for calling.
+     */
+    IPDialIn?: IPDialIn;
+    /**
+     * The information for PSTN conferencing.
+     */
+    PSTNDialIn?: PSTNDialIn;
+    /**
+     * The meeting settings for the conference provider.
+     */
+    MeetingSetting: MeetingSetting;
+    /**
+     * The request token of the client.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateConferenceProviderResponse {
+    /**
+     * The ARN of the newly created conference provider.
+     */
+    ConferenceProviderArn?: Arn;
   }
   export interface CreateContactRequest {
     /**
@@ -711,6 +981,14 @@ declare namespace AlexaForBusiness {
   }
   export interface DeleteAddressBookResponse {
   }
+  export interface DeleteConferenceProviderRequest {
+    /**
+     * The ARN of the conference provider.
+     */
+    ConferenceProviderArn: Arn;
+  }
+  export interface DeleteConferenceProviderResponse {
+  }
   export interface DeleteContactRequest {
     /**
      * The ARN of the contact to delete.
@@ -718,6 +996,14 @@ declare namespace AlexaForBusiness {
     ContactArn: Arn;
   }
   export interface DeleteContactResponse {
+  }
+  export interface DeleteDeviceRequest {
+    /**
+     * The ARN of the device for which to request details.
+     */
+    DeviceArn: Arn;
+  }
+  export interface DeleteDeviceResponse {
   }
   export interface DeleteProfileRequest {
     /**
@@ -751,6 +1037,18 @@ declare namespace AlexaForBusiness {
   }
   export interface DeleteRoomSkillParameterResponse {
   }
+  export interface DeleteSkillAuthorizationRequest {
+    /**
+     * The unique identifier of a skill.
+     */
+    SkillId: SkillId;
+    /**
+     * The room that the skill is authorized for.
+     */
+    RoomArn?: Arn;
+  }
+  export interface DeleteSkillAuthorizationResponse {
+  }
   export interface DeleteSkillGroupRequest {
     /**
      * The ARN of the skill group to delete. Required.
@@ -771,6 +1069,25 @@ declare namespace AlexaForBusiness {
   }
   export interface DeleteUserResponse {
   }
+  export interface DeveloperInfo {
+    /**
+     * The name of the developer.
+     */
+    DeveloperName?: DeveloperName;
+    /**
+     * The URL of the privacy policy.
+     */
+    PrivacyPolicy?: PrivacyPolicy;
+    /**
+     * The email of the developer.
+     */
+    Email?: Email;
+    /**
+     * The website of the developer.
+     */
+    Url?: Url;
+  }
+  export type DeveloperName = string;
   export interface Device {
     /**
      * The ARN of a device.
@@ -871,6 +1188,7 @@ declare namespace AlexaForBusiness {
   export type DeviceEventValue = string;
   export type DeviceName = string;
   export type DeviceSerialNumber = string;
+  export type DeviceSerialNumberForAVS = string;
   export type DeviceStatus = "READY"|"PENDING"|"WAS_OFFLINE"|"DEREGISTERED"|string;
   export interface DeviceStatusDetail {
     /**
@@ -911,6 +1229,18 @@ declare namespace AlexaForBusiness {
   }
   export interface DisassociateDeviceFromRoomResponse {
   }
+  export interface DisassociateSkillFromSkillGroupRequest {
+    /**
+     * The unique identifier of a skill.
+     */
+    SkillGroupArn?: Arn;
+    /**
+     * The ARN of a skill group to associate to a skill.
+     */
+    SkillId: SkillId;
+  }
+  export interface DisassociateSkillFromSkillGroupResponse {
+  }
   export interface DisassociateSkillGroupFromRoomRequest {
     /**
      * The ARN of the skill group to disassociate from a room. Required.
@@ -926,6 +1256,10 @@ declare namespace AlexaForBusiness {
   export type DistanceUnit = "METRIC"|"IMPERIAL"|string;
   export type E164PhoneNumber = string;
   export type Email = string;
+  export type EnablementType = "ENABLED"|"PENDING"|string;
+  export type EnablementTypeFilter = "ENABLED"|"PENDING"|string;
+  export type EndUserLicenseAgreement = string;
+  export type Endpoint = string;
   export type EnrollmentId = string;
   export type EnrollmentStatus = "INITIALIZED"|"PENDING"|"REGISTERED"|"DISASSOCIATING"|"DEREGISTERING"|string;
   export type Feature = "BLUETOOTH"|"VOLUME"|"NOTIFICATIONS"|"LISTS"|"SKILLS"|"ALL"|string;
@@ -944,6 +1278,16 @@ declare namespace AlexaForBusiness {
   export type FilterList = Filter[];
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
+  export interface ForgetSmartHomeAppliancesRequest {
+    /**
+     * The room that the appliances are associated with.
+     */
+    RoomArn: Arn;
+  }
+  export interface ForgetSmartHomeAppliancesResponse {
+  }
+  export type GenericKeyword = string;
+  export type GenericKeywords = GenericKeyword[];
   export interface GetAddressBookRequest {
     /**
      * The ARN of the address book for which to request details.
@@ -955,6 +1299,26 @@ declare namespace AlexaForBusiness {
      * The details of the requested address book.
      */
     AddressBook?: AddressBook;
+  }
+  export interface GetConferencePreferenceRequest {
+  }
+  export interface GetConferencePreferenceResponse {
+    /**
+     * The conference preference.
+     */
+    Preference?: ConferencePreference;
+  }
+  export interface GetConferenceProviderRequest {
+    /**
+     * The ARN of the newly created conference provider.
+     */
+    ConferenceProviderArn: Arn;
+  }
+  export interface GetConferenceProviderResponse {
+    /**
+     * The conference provider.
+     */
+    ConferenceProvider?: ConferenceProvider;
   }
   export interface GetContactRequest {
     /**
@@ -1036,6 +1400,39 @@ declare namespace AlexaForBusiness {
      */
     SkillGroup?: SkillGroup;
   }
+  export interface IPDialIn {
+    /**
+     * The IP address.
+     */
+    Endpoint: Endpoint;
+    /**
+     * The protocol, including SIP, SIPS, and H323.
+     */
+    CommsProtocol: CommsProtocol;
+  }
+  export type IconUrl = string;
+  export type InvocationPhrase = string;
+  export type Key = string;
+  export interface ListConferenceProvidersRequest {
+    /**
+     * The tokens used for pagination.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of conference providers to be return per paginated calls.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListConferenceProvidersResponse {
+    /**
+     * The conference providers.
+     */
+    ConferenceProviders?: ConferenceProvidersList;
+    /**
+     * The tokens used for pagination.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListDeviceEventsRequest {
     /**
      * The ARN of a device.
@@ -1070,6 +1467,14 @@ declare namespace AlexaForBusiness {
      */
     SkillGroupArn?: Arn;
     /**
+     * Whether the skill is enabled under the user's account, or if it requires linking to be used.
+     */
+    EnablementType?: EnablementTypeFilter;
+    /**
+     * Whether the skill is publicly available or is a private skill.
+     */
+    SkillType?: SkillTypeFilter;
+    /**
      * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults. Required.
      */
     NextToken?: NextToken;
@@ -1085,6 +1490,74 @@ declare namespace AlexaForBusiness {
     SkillSummaries?: SkillSummaryList;
     /**
      * The token returned to indicate that there is more data available.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListSkillsStoreCategoriesRequest {
+    /**
+     * The tokens used for pagination.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of categories returned per paginated calls.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListSkillsStoreCategoriesResponse {
+    /**
+     * The list of categories.
+     */
+    CategoryList?: CategoryList;
+    /**
+     * The tokens used for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListSkillsStoreSkillsByCategoryRequest {
+    /**
+     * The category ID for which the skills are being retrieved from the skill store.
+     */
+    CategoryId: CategoryId;
+    /**
+     * The tokens used for pagination.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of skills returned per paginated calls.
+     */
+    MaxResults?: SkillListMaxResults;
+  }
+  export interface ListSkillsStoreSkillsByCategoryResponse {
+    /**
+     * The skill store skills.
+     */
+    SkillsStoreSkills?: SkillsStoreSkillList;
+    /**
+     * The tokens used for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListSmartHomeAppliancesRequest {
+    /**
+     * The room that the appliances are associated with.
+     */
+    RoomArn: Arn;
+    /**
+     * The maximum number of appliances to be return per paginated calls.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The tokens used for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListSmartHomeAppliancesResponse {
+    /**
+     * The smart home appliances.
+     */
+    SmartHomeAppliances?: SmartHomeApplianceList;
+    /**
+     * The tokens used for pagination.
      */
     NextToken?: NextToken;
   }
@@ -1115,7 +1588,38 @@ declare namespace AlexaForBusiness {
   export type MacAddress = string;
   export type MaxResults = number;
   export type MaxVolumeLimit = number;
+  export interface MeetingSetting {
+    /**
+     * The values that indicate whether the pin is always required.
+     */
+    RequirePin: RequirePin;
+  }
+  export type NewInThisVersionBulletPoints = BulletPoint[];
   export type NextToken = string;
+  export type OneClickIdDelay = string;
+  export type OneClickPinDelay = string;
+  export interface PSTNDialIn {
+    /**
+     * The zip code.
+     */
+    CountryCode: CountryCode;
+    /**
+     * The phone number to call to join the conference.
+     */
+    PhoneNumber: PhoneNumber;
+    /**
+     * The delay duration before Alexa enters the conference ID with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.
+     */
+    OneClickIdDelay: OneClickIdDelay;
+    /**
+     * The delay duration before Alexa enters the conference pin with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.
+     */
+    OneClickPinDelay: OneClickPinDelay;
+  }
+  export type PhoneNumber = string;
+  export type PrivacyPolicy = string;
+  export type ProductDescription = string;
+  export type ProductId = string;
   export interface Profile {
     /**
      * The ARN of a room profile.
@@ -1125,6 +1629,10 @@ declare namespace AlexaForBusiness {
      * The name of a room profile.
      */
     ProfileName?: ProfileName;
+    /**
+     * Retrieves if the profile is default or not.
+     */
+    IsDefault?: Boolean;
     /**
      * The address of a room profile.
      */
@@ -1157,6 +1665,10 @@ declare namespace AlexaForBusiness {
      * The PSTN setting of a room profile.
      */
     PSTNEnabled?: Boolean;
+    /**
+     * The ARN of the address book.
+     */
+    AddressBookArn?: Arn;
   }
   export interface ProfileData {
     /**
@@ -1167,6 +1679,10 @@ declare namespace AlexaForBusiness {
      * The name of a room profile.
      */
     ProfileName?: ProfileName;
+    /**
+     * Retrieves if the profile data is default or not.
+     */
+    IsDefault?: Boolean;
     /**
      * The address of a room profile.
      */
@@ -1191,6 +1707,14 @@ declare namespace AlexaForBusiness {
   export type ProfileDataList = ProfileData[];
   export type ProfileName = string;
   export type ProviderCalendarId = string;
+  export interface PutConferencePreferenceRequest {
+    /**
+     * The conference preference of a specific conference provider.
+     */
+    ConferencePreference: ConferencePreference;
+  }
+  export interface PutConferencePreferenceResponse {
+  }
   export interface PutRoomSkillParameterRequest {
     /**
      * The ARN of the room associated with the room skill parameter. Required.
@@ -1207,6 +1731,60 @@ declare namespace AlexaForBusiness {
   }
   export interface PutRoomSkillParameterResponse {
   }
+  export interface PutSkillAuthorizationRequest {
+    /**
+     * The authorization result specific to OAUTH code grant output. "Code” must be populated in the AuthorizationResult map to establish the authorization.
+     */
+    AuthorizationResult: AuthorizationResult;
+    /**
+     * The unique identifier of a skill.
+     */
+    SkillId: SkillId;
+    /**
+     * The room that the skill is authorized for.
+     */
+    RoomArn?: Arn;
+  }
+  export interface PutSkillAuthorizationResponse {
+  }
+  export interface RegisterAVSDeviceRequest {
+    /**
+     * The client ID of the OEM used for code-based linking authorization on an AVS device.
+     */
+    ClientId: ClientId;
+    /**
+     * The code that is obtained after your AVS device has made a POST request to LWA as a part of the Device Authorization Request component of the OAuth code-based linking specification.
+     */
+    UserCode: UserCode;
+    /**
+     * The product ID used to identify your AVS device during authorization.
+     */
+    ProductId: ProductId;
+    /**
+     * The key generated by the OEM that uniquely identifies a specified instance of your AVS device.
+     */
+    DeviceSerialNumber: DeviceSerialNumberForAVS;
+    /**
+     * The device type ID for your AVS device generated by Amazon when the OEM creates a new product on Amazon's Developer Console.
+     */
+    AmazonId: AmazonId;
+  }
+  export interface RegisterAVSDeviceResponse {
+    /**
+     * The ARN of the device.
+     */
+    DeviceArn?: Arn;
+  }
+  export interface RejectSkillRequest {
+    /**
+     * The unique identifier of the skill.
+     */
+    SkillId: SkillId;
+  }
+  export interface RejectSkillResponse {
+  }
+  export type ReleaseDate = string;
+  export type RequirePin = "YES"|"NO"|"OPTIONAL"|string;
   export interface ResolveRoomRequest {
     /**
      * The ARN of the user. Required.
@@ -1231,6 +1809,9 @@ declare namespace AlexaForBusiness {
      */
     RoomSkillParameters?: RoomSkillParameters;
   }
+  export type ReviewKey = string;
+  export type ReviewValue = string;
+  export type Reviews = {[key: string]: ReviewValue};
   export interface RevokeInvitationRequest {
     /**
      * The ARN of the user for whom to revoke an enrollment invitation. Required.
@@ -1307,6 +1888,7 @@ declare namespace AlexaForBusiness {
   export type RoomSkillParameterKey = string;
   export type RoomSkillParameterValue = string;
   export type RoomSkillParameters = RoomSkillParameter[];
+  export type SampleUtterances = Utterance[];
   export interface SearchAddressBooksRequest {
     /**
      * The filters to use to list a specified set of address books. The supported filter key is AddressBookName.
@@ -1539,6 +2121,49 @@ declare namespace AlexaForBusiness {
   }
   export interface SendInvitationResponse {
   }
+  export type ShortDescription = string;
+  export interface SkillDetails {
+    /**
+     * The description of the product.
+     */
+    ProductDescription?: ProductDescription;
+    /**
+     * The phrase used to trigger the skill.
+     */
+    InvocationPhrase?: InvocationPhrase;
+    /**
+     * The date when the skill was released.
+     */
+    ReleaseDate?: ReleaseDate;
+    /**
+     * The URL of the end user license agreement.
+     */
+    EndUserLicenseAgreement?: EndUserLicenseAgreement;
+    /**
+     * The generic keywords associated with the skill that can be used to find a skill.
+     */
+    GenericKeywords?: GenericKeywords;
+    /**
+     * The details about what the skill supports organized as bullet points.
+     */
+    BulletPoints?: BulletPoints;
+    /**
+     * The updates added in bullet points.
+     */
+    NewInThisVersionBulletPoints?: NewInThisVersionBulletPoints;
+    /**
+     * The types of skills.
+     */
+    SkillTypes?: SkillTypes;
+    /**
+     * The list of reviews for the skill, including Key and Value pair.
+     */
+    Reviews?: Reviews;
+    /**
+     * The details about the developer that published the skill.
+     */
+    DeveloperInfo?: DeveloperInfo;
+  }
   export interface SkillGroup {
     /**
      * The ARN of a skill group.
@@ -1573,6 +2198,7 @@ declare namespace AlexaForBusiness {
   export type SkillId = string;
   export type SkillListMaxResults = number;
   export type SkillName = string;
+  export type SkillStoreType = string;
   export interface SkillSummary {
     /**
      * The ARN of the skill summary.
@@ -1586,8 +2212,65 @@ declare namespace AlexaForBusiness {
      * Linking support for a skill.
      */
     SupportsLinking?: boolean;
+    /**
+     * Whether the skill is enabled under the user's account, or if it requires linking to be used.
+     */
+    EnablementType?: EnablementType;
+    /**
+     * Whether the skill is publicly available or is a private skill.
+     */
+    SkillType?: SkillType;
   }
   export type SkillSummaryList = SkillSummary[];
+  export type SkillType = "PUBLIC"|"PRIVATE"|string;
+  export type SkillTypeFilter = "PUBLIC"|"PRIVATE"|"ALL"|string;
+  export type SkillTypes = SkillStoreType[];
+  export interface SkillsStoreSkill {
+    /**
+     * The ARN of the skill.
+     */
+    SkillId?: SkillId;
+    /**
+     * The name of the skill.
+     */
+    SkillName?: SkillName;
+    /**
+     * Short description about the skill.
+     */
+    ShortDescription?: ShortDescription;
+    /**
+     * The URL where the skill icon resides.
+     */
+    IconUrl?: IconUrl;
+    /**
+     * Sample utterances that interact with the skill.
+     */
+    SampleUtterances?: SampleUtterances;
+    /**
+     * Information about the skill.
+     */
+    SkillDetails?: SkillDetails;
+    /**
+     * Linking support for a skill.
+     */
+    SupportsLinking?: boolean;
+  }
+  export type SkillsStoreSkillList = SkillsStoreSkill[];
+  export interface SmartHomeAppliance {
+    /**
+     * The friendly name of the smart home appliance.
+     */
+    FriendlyName?: ApplianceFriendlyName;
+    /**
+     * The description of the smart home appliance.
+     */
+    Description?: ApplianceDescription;
+    /**
+     * The name of the manufacturer of the smart home appliance.
+     */
+    ManufacturerName?: ApplianceManufacturerName;
+  }
+  export type SmartHomeApplianceList = SmartHomeAppliance[];
   export type SoftwareVersion = string;
   export interface Sort {
     /**
@@ -1618,15 +2301,23 @@ declare namespace AlexaForBusiness {
   }
   export interface StartDeviceSyncResponse {
   }
+  export interface StartSmartHomeApplianceDiscoveryRequest {
+    /**
+     * The room where smart home appliance discovery was initiated.
+     */
+    RoomArn: Arn;
+  }
+  export interface StartSmartHomeApplianceDiscoveryResponse {
+  }
   export interface Tag {
     /**
      * The key of a tag. Tag keys are case-sensitive. 
      */
-    Key?: TagKey;
+    Key: TagKey;
     /**
      * The value of a tag. Tag values are case-sensitive and can be null.
      */
-    Value?: TagValue;
+    Value: TagValue;
   }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -1676,6 +2367,30 @@ declare namespace AlexaForBusiness {
   }
   export interface UpdateAddressBookResponse {
   }
+  export interface UpdateConferenceProviderRequest {
+    /**
+     * The ARN of the conference provider.
+     */
+    ConferenceProviderArn: Arn;
+    /**
+     * The type of the conference provider.
+     */
+    ConferenceProviderType: ConferenceProviderType;
+    /**
+     * The IP endpoint and protocol for calling.
+     */
+    IPDialIn?: IPDialIn;
+    /**
+     * The information for PSTN conferencing.
+     */
+    PSTNDialIn?: PSTNDialIn;
+    /**
+     * The meeting settings for the conference provider.
+     */
+    MeetingSetting: MeetingSetting;
+  }
+  export interface UpdateConferenceProviderResponse {
+  }
   export interface UpdateContactRequest {
     /**
      * The ARN of the contact to update.
@@ -1721,6 +2436,10 @@ declare namespace AlexaForBusiness {
      * The updated name for the room profile.
      */
     ProfileName?: ProfileName;
+    /**
+     * Sets the profile as default if selected. If this is missing, no update is done to the default status.
+     */
+    IsDefault?: Boolean;
     /**
      * The updated timezone for the room profile.
      */
@@ -1796,6 +2515,8 @@ declare namespace AlexaForBusiness {
   }
   export interface UpdateSkillGroupResponse {
   }
+  export type Url = string;
+  export type UserCode = string;
   export interface UserData {
     /**
      * The ARN of a user.
@@ -1824,6 +2545,8 @@ declare namespace AlexaForBusiness {
   }
   export type UserDataList = UserData[];
   export type UserId = string;
+  export type Utterance = string;
+  export type Value = string;
   export type WakeWord = "ALEXA"|"AMAZON"|"ECHO"|"COMPUTER"|string;
   export type user_FirstName = string;
   export type user_LastName = string;
