@@ -1,7 +1,7 @@
 var helpers = require('./helpers');
 var AWS = helpers.AWS
 var endpoint_discovery_module = require('../lib/discover_endpoint');
-var iniLoader = require('../lib/shared-ini').iniLoader;
+var iniLoader = AWS.util.iniLoader;
 var getCacheKey = endpoint_discovery_module.getCacheKey;
 var marshallCustomIdentifiers = endpoint_discovery_module.marshallCustomIdentifiers;
 
@@ -123,7 +123,7 @@ var api = {
 describe('endpoint discovery', function() {
   afterEach(function() {
     AWS.config.endpoint = undefined;
-    iniLoader.clearCachedFiles();
+    if (iniLoader) iniLoader.clearCachedFiles(); //iniLoader not available in browsers
   });
 
   describe('getCacheKey', function() {

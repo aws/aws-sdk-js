@@ -2,7 +2,7 @@ var helpers = require('../helpers');
 var AWS = helpers.AWS;
 var spyOn = helpers.spyOn;
 var monitoringConfig = require('../../lib/publisher/configuration');
-var iniLoader = require('../../lib/shared-ini').iniLoader;
+var iniLoader = AWS.util.iniLoader;
 
 if (AWS.util.isNode()) {
   describe('configuration resolving', function () {
@@ -72,6 +72,7 @@ if (AWS.util.isNode()) {
       it('should correctly parse truthy value to true', function () {
         var enabled = ['1', 'true', 'whatever', 'X', '99'];
         for (var i = 0; i < enabled.length; i++) {
+          iniLoader.clearCachedFiles();
           process.env.AWS_PROFILE = 'dummyRole';
           helpers.spyOn(AWS.util, 'readFileSync').andReturn('[profile dummyRole]\ncsm_enabled=' + enabled[i]);
           expect(monitoringConfig()).to.eql({

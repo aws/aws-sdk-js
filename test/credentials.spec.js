@@ -8,7 +8,7 @@
 
   STS = require('../clients/sts');
 
-  var iniLoader = require('../lib/shared-ini').iniLoader;
+  var iniLoader = AWS.util.iniLoader;
 
   validateCredentials = function(creds, key, secret, session) {
     expect(creds.accessKeyId).to.equal(key || 'akid');
