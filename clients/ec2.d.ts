@@ -197,6 +197,14 @@ declare class EC2 extends Service {
    */
   cancelBundleTask(callback?: (err: AWSError, data: EC2.Types.CancelBundleTaskResult) => void): Request<EC2.Types.CancelBundleTaskResult, AWSError>;
   /**
+   * Cancels the specified Capacity Reservation, releases the reserved capacity, and changes the Capacity Reservation's state to cancelled. Instances running in the reserved capacity continue running until you stop them. Stopped instances that target the Capacity Reservation can no longer launch. Modify these instances to either target a different Capacity Reservation, launch On-Demand Instance capacity, or run in any open Capacity Reservation that has matching attributes and sufficient capacity.
+   */
+  cancelCapacityReservation(params: EC2.Types.CancelCapacityReservationRequest, callback?: (err: AWSError, data: EC2.Types.CancelCapacityReservationResult) => void): Request<EC2.Types.CancelCapacityReservationResult, AWSError>;
+  /**
+   * Cancels the specified Capacity Reservation, releases the reserved capacity, and changes the Capacity Reservation's state to cancelled. Instances running in the reserved capacity continue running until you stop them. Stopped instances that target the Capacity Reservation can no longer launch. Modify these instances to either target a different Capacity Reservation, launch On-Demand Instance capacity, or run in any open Capacity Reservation that has matching attributes and sufficient capacity.
+   */
+  cancelCapacityReservation(callback?: (err: AWSError, data: EC2.Types.CancelCapacityReservationResult) => void): Request<EC2.Types.CancelCapacityReservationResult, AWSError>;
+  /**
    * Cancels an active conversion task. The task can be the import of an instance or volume. The action removes all artifacts of the conversion, including a partially uploaded volume or instance. If the conversion is complete or is in the process of transferring the final disk image, the command fails and returns an exception. For more information, see Importing a Virtual Machine Using the Amazon EC2 CLI.
    */
   cancelConversionTask(params: EC2.Types.CancelConversionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -276,6 +284,14 @@ declare class EC2 extends Service {
    * Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to. Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the Encrypted flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the KmsKeyId parameter. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot. Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose. For more information, see Copying an Amazon EBS Snapshot in the Amazon Elastic Compute Cloud User Guide.
    */
   copySnapshot(callback?: (err: AWSError, data: EC2.Types.CopySnapshotResult) => void): Request<EC2.Types.CopySnapshotResult, AWSError>;
+  /**
+   * Creates a new Capacity Reservation with the specified attributes. Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This gives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. By creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. For more information, see Capacity Reservations in the Amazon Elastic Compute Cloud User Guide. Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to fulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try again at a later time, try in a different Availability Zone, or request a smaller capacity reservation. If your application is flexible across instance types and sizes, try to create a Capacity Reservation with different instance attributes. Your request could also fail if the requested quantity exceeds your On-Demand Instance limit for the selected instance type. If your request fails due to limit constraints, increase your On-Demand Instance limit for the required instance type and try again. For more information about increasing your instance limits, see Amazon EC2 Service Limits in the Amazon Elastic Compute Cloud User Guide.
+   */
+  createCapacityReservation(params: EC2.Types.CreateCapacityReservationRequest, callback?: (err: AWSError, data: EC2.Types.CreateCapacityReservationResult) => void): Request<EC2.Types.CreateCapacityReservationResult, AWSError>;
+  /**
+   * Creates a new Capacity Reservation with the specified attributes. Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This gives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. By creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. For more information, see Capacity Reservations in the Amazon Elastic Compute Cloud User Guide. Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to fulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try again at a later time, try in a different Availability Zone, or request a smaller capacity reservation. If your application is flexible across instance types and sizes, try to create a Capacity Reservation with different instance attributes. Your request could also fail if the requested quantity exceeds your On-Demand Instance limit for the selected instance type. If your request fails due to limit constraints, increase your On-Demand Instance limit for the required instance type and try again. For more information about increasing your instance limits, see Amazon EC2 Service Limits in the Amazon Elastic Compute Cloud User Guide.
+   */
+  createCapacityReservation(callback?: (err: AWSError, data: EC2.Types.CreateCapacityReservationResult) => void): Request<EC2.Types.CreateCapacityReservationResult, AWSError>;
   /**
    * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the us-east-1 region, and 9059, which is reserved in the eu-west-1 region.  For more information about VPN customer gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.  You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. 
    */
@@ -892,6 +908,14 @@ declare class EC2 extends Service {
    * Describes the IP address ranges that were specified in calls to ProvisionByoipCidr. To describe the address pools that were created when you provisioned the address ranges, use DescribePublicIpv4Pools.
    */
   describeByoipCidrs(callback?: (err: AWSError, data: EC2.Types.DescribeByoipCidrsResult) => void): Request<EC2.Types.DescribeByoipCidrsResult, AWSError>;
+  /**
+   * Describes one or more of your Capacity Reservations. The results describe only the Capacity Reservations in the AWS Region that you're currently using.
+   */
+  describeCapacityReservations(params: EC2.Types.DescribeCapacityReservationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeCapacityReservationsResult) => void): Request<EC2.Types.DescribeCapacityReservationsResult, AWSError>;
+  /**
+   * Describes one or more of your Capacity Reservations. The results describe only the Capacity Reservations in the AWS Region that you're currently using.
+   */
+  describeCapacityReservations(callback?: (err: AWSError, data: EC2.Types.DescribeCapacityReservationsResult) => void): Request<EC2.Types.DescribeCapacityReservationsResult, AWSError>;
   /**
    * Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink. You cannot use this request to return information about other instances.
    */
@@ -1749,6 +1773,14 @@ declare class EC2 extends Service {
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
   /**
+   * Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation's instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.
+   */
+  modifyCapacityReservation(params: EC2.Types.ModifyCapacityReservationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyCapacityReservationResult) => void): Request<EC2.Types.ModifyCapacityReservationResult, AWSError>;
+  /**
+   * Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation's instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.
+   */
+  modifyCapacityReservation(callback?: (err: AWSError, data: EC2.Types.ModifyCapacityReservationResult) => void): Request<EC2.Types.ModifyCapacityReservationResult, AWSError>;
+  /**
    * Modifies the specified EC2 Fleet. While the EC2 Fleet is being modified, it is in the modifying state.
    */
   modifyFleet(params: EC2.Types.ModifyFleetRequest, callback?: (err: AWSError, data: EC2.Types.ModifyFleetResult) => void): Request<EC2.Types.ModifyFleetResult, AWSError>;
@@ -1804,6 +1836,14 @@ declare class EC2 extends Service {
    * Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.  Note: Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance must be stopped. For more information, see Modifying Attributes of a Stopped Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyInstanceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Modifies the Capacity Reservation settings for a stopped instance. Use this action to configure an instance to target a specific Capacity Reservation, run in any open Capacity Reservation with matching attributes, or run On-Demand Instance capacity.
+   */
+  modifyInstanceCapacityReservationAttributes(params: EC2.Types.ModifyInstanceCapacityReservationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceCapacityReservationAttributesResult) => void): Request<EC2.Types.ModifyInstanceCapacityReservationAttributesResult, AWSError>;
+  /**
+   * Modifies the Capacity Reservation settings for a stopped instance. Use this action to configure an instance to target a specific Capacity Reservation, run in any open Capacity Reservation with matching attributes, or run On-Demand Instance capacity.
+   */
+  modifyInstanceCapacityReservationAttributes(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceCapacityReservationAttributesResult) => void): Request<EC2.Types.ModifyInstanceCapacityReservationAttributesResult, AWSError>;
   /**
    * Modifies the credit option for CPU usage on a running or stopped T2 or T3 instance. The credit options are standard and unlimited. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -3281,6 +3321,22 @@ declare namespace EC2 {
      */
     BundleTask?: BundleTask;
   }
+  export interface CancelCapacityReservationRequest {
+    /**
+     * The ID of the Capacity Reservation to be cancelled.
+     */
+    CapacityReservationId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CancelCapacityReservationResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
+  }
   export interface CancelConversionRequest {
     /**
      * The ID of the conversion task.
@@ -3429,6 +3485,106 @@ declare namespace EC2 {
     State?: CancelSpotInstanceRequestState;
   }
   export type CancelledSpotInstanceRequestList = CancelledSpotInstanceRequest[];
+  export interface CapacityReservation {
+    /**
+     * The ID of the Capacity Reservation.
+     */
+    CapacityReservationId?: String;
+    /**
+     * The type of instance for which the Capacity Reservation reserves capacity.
+     */
+    InstanceType?: String;
+    /**
+     * The type of operating system for which the Capacity Reservation reserves capacity.
+     */
+    InstancePlatform?: CapacityReservationInstancePlatform;
+    /**
+     * The Availability Zone in which the capacity is reserved.
+     */
+    AvailabilityZone?: String;
+    /**
+     * Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:    default - The Capacity Reservation is created on hardware that is shared with other AWS accounts.    dedicated - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single AWS account.  
+     */
+    Tenancy?: CapacityReservationTenancy;
+    /**
+     * The number of instances for which the Capacity Reservation reserves capacity.
+     */
+    TotalInstanceCount?: Integer;
+    /**
+     * The remaining capacity. Indicates the number of instances that can be launched in the Capacity Reservation.
+     */
+    AvailableInstanceCount?: Integer;
+    /**
+     * Indicates whether the Capacity Reservation supports EBS-optimized instances. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS- optimized instance.
+     */
+    EbsOptimized?: Boolean;
+    /**
+     * Indicates whether the Capacity Reservation supports instances with temporary, block-level storage.
+     */
+    EphemeralStorage?: Boolean;
+    /**
+     * The current state of the Capacity Reservation. A Capacity Reservation can be in one of the following states:    active - The Capacity Reservation is active and the capacity is available for your use.    cancelled - The Capacity Reservation expired automatically at the date and time specified in your request. The reserved capacity is no longer available for your use.    expired - The Capacity Reservation was manually cancelled. The reserved capacity is no longer available for your use.    pending - The Capacity Reservation request was successful but the capacity provisioning is still pending.    failed - The Capacity Reservation request has failed. A request might fail due to invalid request parameters, capacity constraints, or instance limit constraints. Failed requests are retained for 60 minutes.  
+     */
+    State?: CapacityReservationState;
+    /**
+     * The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation's state changes to expired when it reaches its end date and time.
+     */
+    EndDate?: DateTime;
+    /**
+     * Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:    unlimited - The Capacity Reservation remains active until you explicitly cancel it.    limited - The Capacity Reservation expires automatically at a specified date and time.  
+     */
+    EndDateType?: EndDateType;
+    /**
+     * Indicates the type of instance launches that the Capacity Reservation accepts. The options include:    open - The Capacity Reservation accepts all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes launch into the Capacity Reservation automatically without specifying any additional parameters.    targeted - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity.   
+     */
+    InstanceMatchCriteria?: InstanceMatchCriteria;
+    /**
+     * The date and time at which the Capacity Reservation was created.
+     */
+    CreateDate?: DateTime;
+    /**
+     * Any tags assigned to the Capacity Reservation.
+     */
+    Tags?: TagList;
+  }
+  export type CapacityReservationIdSet = String[];
+  export type CapacityReservationInstancePlatform = "Linux/UNIX"|"Red Hat Enterprise Linux"|"SUSE Linux"|"Windows"|"Windows with SQL Server"|"Windows with SQL Server Enterprise"|"Windows with SQL Server Standard"|"Windows with SQL Server Web"|string;
+  export type CapacityReservationPreference = "open"|"none"|string;
+  export type CapacityReservationSet = CapacityReservation[];
+  export interface CapacityReservationSpecification {
+    /**
+     * Indicates the instance's Capacity Reservation preferences. Possible preferences include:    open - The instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).    none - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.  
+     */
+    CapacityReservationPreference?: CapacityReservationPreference;
+    /**
+     * Information about the target Capacity Reservation.
+     */
+    CapacityReservationTarget?: CapacityReservationTarget;
+  }
+  export interface CapacityReservationSpecificationResponse {
+    /**
+     * Describes the instance's Capacity Reservation preferences. Possible preferences include:    open - The instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).    none - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.  
+     */
+    CapacityReservationPreference?: CapacityReservationPreference;
+    /**
+     * Information about the targeted Capacity Reservation.
+     */
+    CapacityReservationTarget?: CapacityReservationTargetResponse;
+  }
+  export type CapacityReservationState = "active"|"expired"|"cancelled"|"pending"|"failed"|string;
+  export interface CapacityReservationTarget {
+    /**
+     * The ID of the Capacity Reservation.
+     */
+    CapacityReservationId?: String;
+  }
+  export interface CapacityReservationTargetResponse {
+    /**
+     * The ID of the Capacity Reservation.
+     */
+    CapacityReservationId?: String;
+  }
+  export type CapacityReservationTenancy = "default"|"dedicated"|string;
   export interface CidrAuthorizationContext {
     /**
      * The plain-text authorization message for the prefix and account.
@@ -3728,6 +3884,66 @@ declare namespace EC2 {
      * The number of threads per CPU core. To disable Intel Hyper-Threading Technology for the instance, specify a value of 1. Otherwise, specify the default value of 2.
      */
     ThreadsPerCore?: Integer;
+  }
+  export interface CreateCapacityReservationRequest {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency. Constraint: Maximum 64 ASCII characters.
+     */
+    ClientToken?: String;
+    /**
+     * The instance type for which to reserve capacity. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide.
+     */
+    InstanceType: String;
+    /**
+     * The type of operating system for which to reserve capacity.
+     */
+    InstancePlatform: CapacityReservationInstancePlatform;
+    /**
+     * The Availability Zone in which to create the Capacity Reservation.
+     */
+    AvailabilityZone: String;
+    /**
+     * Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:    default - The Capacity Reservation is created on hardware that is shared with other AWS accounts.    dedicated - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single AWS account.  
+     */
+    Tenancy?: CapacityReservationTenancy;
+    /**
+     * The number of instances for which to reserve capacity.
+     */
+    InstanceCount: Integer;
+    /**
+     * Indicates whether the Capacity Reservation supports EBS-optimized instances. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS- optimized instance.
+     */
+    EbsOptimized?: Boolean;
+    /**
+     * Indicates whether the Capacity Reservation supports instances with temporary, block-level storage.
+     */
+    EphemeralStorage?: Boolean;
+    /**
+     * The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation's state changes to expired when it reaches its end date and time. You must provide an EndDate value if EndDateType is limited. Omit EndDate if EndDateType is unlimited. If the EndDateType is limited, the Capacity Reservation is cancelled within an hour from the specified time. For example, if you specify 5/31/2019, 13:30:55, the Capacity Reservation is guaranteed to end between 13:30:55 and 14:30:55 on 5/31/2019.
+     */
+    EndDate?: DateTime;
+    /**
+     * Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:    unlimited - The Capacity Reservation remains active until you explicitly cancel it. Do not provide an EndDate if the EndDateType is unlimited.    limited - The Capacity Reservation expires automatically at a specified date and time. You must provide an EndDate value if the EndDateType value is limited.  
+     */
+    EndDateType?: EndDateType;
+    /**
+     * Indicates the type of instance launches that the Capacity Reservation accepts. The options include:    open - The Capacity Reservation automatically matches all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes run in the Capacity Reservation automatically without specifying any additional parameters.    targeted - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity.    Default: open 
+     */
+    InstanceMatchCriteria?: InstanceMatchCriteria;
+    /**
+     * The tags to apply to the Capacity Reservation during launch.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateCapacityReservationResult {
+    /**
+     * Information about the Capacity Reservation.
+     */
+    CapacityReservation?: CapacityReservation;
   }
   export interface CreateCustomerGatewayRequest {
     /**
@@ -5456,6 +5672,38 @@ declare namespace EC2 {
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: String;
+  }
+  export interface DescribeCapacityReservationsRequest {
+    /**
+     * The ID of the Capacity Reservation.
+     */
+    CapacityReservationIds?: CapacityReservationIdSet;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.
+     */
+    MaxResults?: Integer;
+    /**
+     * One or more filters.
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeCapacityReservationsResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+    /**
+     * Information about the Capacity Reservations.
+     */
+    CapacityReservations?: CapacityReservationSet;
   }
   export interface DescribeClassicLinkInstancesRequest {
     /**
@@ -8209,6 +8457,7 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export type EndDateType = "unlimited"|"limited"|string;
   export type EventCode = "instance-reboot"|"system-reboot"|"system-maintenance"|"instance-retirement"|"instance-stop"|string;
   export interface EventInformation {
     /**
@@ -9803,6 +10052,14 @@ declare namespace EC2 {
      * The CPU options for the instance.
      */
     CpuOptions?: CpuOptions;
+    /**
+     * The ID of the Capacity Reservation.
+     */
+    CapacityReservationId?: String;
+    /**
+     * Information about the Capacity Reservation targeting option.
+     */
+    CapacityReservationSpecification?: CapacityReservationSpecificationResponse;
   }
   export interface InstanceAttribute {
     /**
@@ -9984,6 +10241,7 @@ declare namespace EC2 {
      */
     SpotOptions?: SpotMarketOptions;
   }
+  export type InstanceMatchCriteria = "open"|"targeted"|string;
   export interface InstanceMonitoring {
     /**
      * The ID of the instance.
@@ -10529,6 +10787,26 @@ declare namespace EC2 {
     NoDevice?: String;
   }
   export type LaunchTemplateBlockDeviceMappingRequestList = LaunchTemplateBlockDeviceMappingRequest[];
+  export interface LaunchTemplateCapacityReservationSpecificationRequest {
+    /**
+     * Indicates the instance's Capacity Reservation preferences. Possible preferences include:    open - The instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).    none - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.  
+     */
+    CapacityReservationPreference?: CapacityReservationPreference;
+    /**
+     * Information about the target Capacity Reservation.
+     */
+    CapacityReservationTarget?: CapacityReservationTarget;
+  }
+  export interface LaunchTemplateCapacityReservationSpecificationResponse {
+    /**
+     * Indicates the instance's Capacity Reservation preferences. Possible preferences include:    open - The instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).    none - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.  
+     */
+    CapacityReservationPreference?: CapacityReservationPreference;
+    /**
+     * Information about the target Capacity Reservation.
+     */
+    CapacityReservationTarget?: CapacityReservationTargetResponse;
+  }
   export interface LaunchTemplateConfig {
     /**
      * The launch template.
@@ -11020,6 +11298,34 @@ declare namespace EC2 {
   export type Long = number;
   export type MarketType = "spot"|string;
   export type MaxResults = number;
+  export interface ModifyCapacityReservationRequest {
+    /**
+     * The ID of the Capacity Reservation.
+     */
+    CapacityReservationId: String;
+    /**
+     * The number of instances for which to reserve capacity.
+     */
+    InstanceCount?: Integer;
+    /**
+     * The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation's state changes to expired when it reaches its end date and time. The Capacity Reservation is cancelled within an hour from the specified time. For example, if you specify 5/31/2019, 13:30:55, the Capacity Reservation is guaranteed to end between 13:30:55 and 14:30:55 on 5/31/2019. You must provide an EndDate value if EndDateType is limited. Omit EndDate if EndDateType is unlimited.
+     */
+    EndDate?: DateTime;
+    /**
+     * Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:    unlimited - The Capacity Reservation remains active until you explicitly cancel it. Do not provide an EndDate value if EndDateType is unlimited.    limited - The Capacity Reservation expires automatically at a specified date and time. You must provide an EndDate value if EndDateType is limited.  
+     */
+    EndDateType?: EndDateType;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyCapacityReservationResult {
+    /**
+     * Information about the Capacity Reservation.
+     */
+    Return?: Boolean;
+  }
   export interface ModifyFleetRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -11243,6 +11549,26 @@ declare namespace EC2 {
      * A new value for the attribute. Use only with the kernel, ramdisk, userData, disableApiTermination, or instanceInitiatedShutdownBehavior attribute.
      */
     Value?: String;
+  }
+  export interface ModifyInstanceCapacityReservationAttributesRequest {
+    /**
+     * The ID of the instance to be modified.
+     */
+    InstanceId: String;
+    /**
+     * Information about the Capacity Reservation targeting option.
+     */
+    CapacityReservationSpecification: CapacityReservationSpecification;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyInstanceCapacityReservationAttributesResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
   }
   export interface ModifyInstanceCreditSpecificationRequest {
     /**
@@ -12971,6 +13297,10 @@ declare namespace EC2 {
      * The CPU options for the instance. For more information, see Optimizing CPU Options in the Amazon Elastic Compute Cloud User Guide.
      */
     CpuOptions?: LaunchTemplateCpuOptionsRequest;
+    /**
+     * Information about the Capacity Reservation targeting option.
+     */
+    CapacityReservationSpecification?: LaunchTemplateCapacityReservationSpecificationRequest;
   }
   export interface RequestSpotFleetRequest {
     /**
@@ -13613,6 +13943,10 @@ declare namespace EC2 {
      * The CPU options for the instance. For more information, see Optimizing CPU Options in the Amazon Elastic Compute Cloud User Guide.
      */
     CpuOptions?: LaunchTemplateCpuOptions;
+    /**
+     * Information about the Capacity Reservation targeting option.
+     */
+    CapacityReservationSpecification?: LaunchTemplateCapacityReservationSpecificationResponse;
   }
   export type RestorableByStringList = String[];
   export interface RestoreAddressToClassicRequest {
@@ -13946,6 +14280,10 @@ declare namespace EC2 {
      * The CPU options for the instance. For more information, see Optimizing CPU Options in the Amazon Elastic Compute Cloud User Guide.
      */
     CpuOptions?: CpuOptionsRequest;
+    /**
+     * Information about the Capacity Reservation targeting option.
+     */
+    CapacityReservationSpecification?: CapacityReservationSpecification;
   }
   export interface RunScheduledInstancesRequest {
     /**

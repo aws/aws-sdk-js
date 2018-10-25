@@ -319,6 +319,20 @@
       },
       "documentation": "<p>Cancels a bundling operation for an instance store-backed Windows instance.</p>"
     },
+    "CancelCapacityReservation": {
+      "name": "CancelCapacityReservation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelCapacityReservationRequest"
+      },
+      "output": {
+        "shape": "CancelCapacityReservationResult"
+      },
+      "documentation": "<p>Cancels the specified Capacity Reservation, releases the reserved capacity, and changes the Capacity Reservation's state to <code>cancelled</code>.</p> <p>Instances running in the reserved capacity continue running until you stop them. Stopped instances that target the Capacity Reservation can no longer launch. Modify these instances to either target a different Capacity Reservation, launch On-Demand Instance capacity, or run in any open Capacity Reservation that has matching attributes and sufficient capacity.</p>"
+    },
     "CancelConversionTask": {
       "name": "CancelConversionTask",
       "http": {
@@ -452,6 +466,20 @@
         "shape": "CopySnapshotResult"
       },
       "documentation": "<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the <code>Encrypted</code> flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the <code>KmsKeyId</code> parameter.</p> <p>To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot.</p> <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "CreateCapacityReservation": {
+      "name": "CreateCapacityReservation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateCapacityReservationRequest"
+      },
+      "output": {
+        "shape": "CreateCapacityReservationResult"
+      },
+      "documentation": "<p>Creates a new Capacity Reservation with the specified attributes.</p> <p>Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This gives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. By creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html\">Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to fulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try again at a later time, try in a different Availability Zone, or request a smaller capacity reservation. If your application is flexible across instance types and sizes, try to create a Capacity Reservation with different instance attributes.</p> <p>Your request could also fail if the requested quantity exceeds your On-Demand Instance limit for the selected instance type. If your request fails due to limit constraints, increase your On-Demand Instance limit for the required instance type and try again. For more information about increasing your instance limits, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 Service Limits</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateCustomerGateway": {
       "name": "CreateCustomerGateway",
@@ -1455,6 +1483,20 @@
         "shape": "DescribeByoipCidrsResult"
       },
       "documentation": "<p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a>.</p>"
+    },
+    "DescribeCapacityReservations": {
+      "name": "DescribeCapacityReservations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeCapacityReservationsRequest"
+      },
+      "output": {
+        "shape": "DescribeCapacityReservationsResult"
+      },
+      "documentation": "<p>Describes one or more of your Capacity Reservations. The results describe only the Capacity Reservations in the AWS Region that you're currently using.</p>"
     },
     "DescribeClassicLinkInstances": {
       "name": "DescribeClassicLinkInstances",
@@ -2930,6 +2972,20 @@
       },
       "documentation": "<p>Creates an import volume task using metadata from the specified disk image.For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/importing-your-volumes-into-amazon-ebs.html\">Importing Disks to Amazon EBS</a>.</p> <p>For information about the import manifest referenced by this API action, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
     },
+    "ModifyCapacityReservation": {
+      "name": "ModifyCapacityReservation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyCapacityReservationRequest"
+      },
+      "output": {
+        "shape": "ModifyCapacityReservationResult"
+      },
+      "documentation": "<p>Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation's instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.</p>"
+    },
     "ModifyFleet": {
       "name": "ModifyFleet",
       "http": {
@@ -3015,6 +3071,20 @@
         "shape": "ModifyInstanceAttributeRequest"
       },
       "documentation": "<p>Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.</p> <p> <b>Note: </b>Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the <a>ModifyNetworkInterfaceAttribute</a> action.</p> <p>To modify some attributes, the instance must be stopped. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html\">Modifying Attributes of a Stopped Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "ModifyInstanceCapacityReservationAttributes": {
+      "name": "ModifyInstanceCapacityReservationAttributes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyInstanceCapacityReservationAttributesRequest"
+      },
+      "output": {
+        "shape": "ModifyInstanceCapacityReservationAttributesResult"
+      },
+      "documentation": "<p>Modifies the Capacity Reservation settings for a stopped instance. Use this action to configure an instance to target a specific Capacity Reservation, run in any <code>open</code> Capacity Reservation with matching attributes, or run On-Demand Instance capacity.</p>"
     },
     "ModifyInstanceCreditSpecification": {
       "name": "ModifyInstanceCreditSpecification",
@@ -5134,6 +5204,32 @@
       },
       "documentation": "<p>Contains the output of CancelBundleTask.</p>"
     },
+    "CancelCapacityReservationRequest": {
+      "type": "structure",
+      "required": [
+        "CapacityReservationId"
+      ],
+      "members": {
+        "CapacityReservationId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Capacity Reservation to be cancelled.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "CancelCapacityReservationResult": {
+      "type": "structure",
+      "members": {
+        "Return": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName": "return"
+        }
+      }
+    },
     "CancelConversionRequest": {
       "type": "structure",
       "required": [
@@ -5419,6 +5515,189 @@
         "shape": "CancelledSpotInstanceRequest",
         "locationName": "item"
       }
+    },
+    "CapacityReservation": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Capacity Reservation.</p>",
+          "locationName": "capacityReservationId"
+        },
+        "InstanceType": {
+          "shape": "String",
+          "documentation": "<p>The type of instance for which the Capacity Reservation reserves capacity.</p>",
+          "locationName": "instanceType"
+        },
+        "InstancePlatform": {
+          "shape": "CapacityReservationInstancePlatform",
+          "documentation": "<p>The type of operating system for which the Capacity Reservation reserves capacity.</p>",
+          "locationName": "instancePlatform"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone in which the capacity is reserved.</p>",
+          "locationName": "availabilityZone"
+        },
+        "Tenancy": {
+          "shape": "CapacityReservationTenancy",
+          "documentation": "<p>Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:</p> <ul> <li> <p> <code>default</code> - The Capacity Reservation is created on hardware that is shared with other AWS accounts.</p> </li> <li> <p> <code>dedicated</code> - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single AWS account.</p> </li> </ul>",
+          "locationName": "tenancy"
+        },
+        "TotalInstanceCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of instances for which the Capacity Reservation reserves capacity.</p>",
+          "locationName": "totalInstanceCount"
+        },
+        "AvailableInstanceCount": {
+          "shape": "Integer",
+          "documentation": "<p>The remaining capacity. Indicates the number of instances that can be launched in the Capacity Reservation.</p>",
+          "locationName": "availableInstanceCount"
+        },
+        "EbsOptimized": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the Capacity Reservation supports EBS-optimized instances. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS- optimized instance.</p>",
+          "locationName": "ebsOptimized"
+        },
+        "EphemeralStorage": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the Capacity Reservation supports instances with temporary, block-level storage.</p>",
+          "locationName": "ephemeralStorage"
+        },
+        "State": {
+          "shape": "CapacityReservationState",
+          "documentation": "<p>The current state of the Capacity Reservation. A Capacity Reservation can be in one of the following states:</p> <ul> <li> <p> <code>active</code> - The Capacity Reservation is active and the capacity is available for your use.</p> </li> <li> <p> <code>cancelled</code> - The Capacity Reservation expired automatically at the date and time specified in your request. The reserved capacity is no longer available for your use.</p> </li> <li> <p> <code>expired</code> - The Capacity Reservation was manually cancelled. The reserved capacity is no longer available for your use.</p> </li> <li> <p> <code>pending</code> - The Capacity Reservation request was successful but the capacity provisioning is still pending.</p> </li> <li> <p> <code>failed</code> - The Capacity Reservation request has failed. A request might fail due to invalid request parameters, capacity constraints, or instance limit constraints. Failed requests are retained for 60 minutes.</p> </li> </ul>",
+          "locationName": "state"
+        },
+        "EndDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation's state changes to <code>expired</code> when it reaches its end date and time.</p>",
+          "locationName": "endDate"
+        },
+        "EndDateType": {
+          "shape": "EndDateType",
+          "documentation": "<p>Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:</p> <ul> <li> <p> <code>unlimited</code> - The Capacity Reservation remains active until you explicitly cancel it.</p> </li> <li> <p> <code>limited</code> - The Capacity Reservation expires automatically at a specified date and time.</p> </li> </ul>",
+          "locationName": "endDateType"
+        },
+        "InstanceMatchCriteria": {
+          "shape": "InstanceMatchCriteria",
+          "documentation": "<p>Indicates the type of instance launches that the Capacity Reservation accepts. The options include:</p> <ul> <li> <p> <code>open</code> - The Capacity Reservation accepts all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes launch into the Capacity Reservation automatically without specifying any additional parameters.</p> </li> <li> <p> <code>targeted</code> - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity. </p> </li> </ul>",
+          "locationName": "instanceMatchCriteria"
+        },
+        "CreateDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation was created.</p>",
+          "locationName": "createDate"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags assigned to the Capacity Reservation.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Describes a Capacity Reservation.</p>"
+    },
+    "CapacityReservationIdSet": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "item"
+      }
+    },
+    "CapacityReservationInstancePlatform": {
+      "type": "string",
+      "enum": [
+        "Linux/UNIX",
+        "Red Hat Enterprise Linux",
+        "SUSE Linux",
+        "Windows",
+        "Windows with SQL Server",
+        "Windows with SQL Server Enterprise",
+        "Windows with SQL Server Standard",
+        "Windows with SQL Server Web"
+      ]
+    },
+    "CapacityReservationPreference": {
+      "type": "string",
+      "enum": [
+        "open",
+        "none"
+      ]
+    },
+    "CapacityReservationSet": {
+      "type": "list",
+      "member": {
+        "shape": "CapacityReservation",
+        "locationName": "item"
+      }
+    },
+    "CapacityReservationSpecification": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationPreference": {
+          "shape": "CapacityReservationPreference",
+          "documentation": "<p>Indicates the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.</p> </li> </ul>"
+        },
+        "CapacityReservationTarget": {
+          "shape": "CapacityReservationTarget",
+          "documentation": "<p>Information about the target Capacity Reservation.</p>"
+        }
+      },
+      "documentation": "<p>Describes an instance's Capacity Reservation targeting option. You can specify only one option at a time. Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run as an On-Demand Instance or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation.</p>"
+    },
+    "CapacityReservationSpecificationResponse": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationPreference": {
+          "shape": "CapacityReservationPreference",
+          "documentation": "<p>Describes the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>",
+          "locationName": "capacityReservationPreference"
+        },
+        "CapacityReservationTarget": {
+          "shape": "CapacityReservationTargetResponse",
+          "documentation": "<p>Information about the targeted Capacity Reservation.</p>",
+          "locationName": "capacityReservationTarget"
+        }
+      },
+      "documentation": "<p>Describes the instance's Capacity Reservation targeting preferences. The action returns the <code>capacityReservationPreference</code> response element if the instance is configured to run in On-Demand capacity, or if it is configured in run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). The action returns the <code>capacityReservationTarget</code> response element if the instance explicily targets a specific Capacity Reservation.</p>"
+    },
+    "CapacityReservationState": {
+      "type": "string",
+      "enum": [
+        "active",
+        "expired",
+        "cancelled",
+        "pending",
+        "failed"
+      ]
+    },
+    "CapacityReservationTarget": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Capacity Reservation.</p>"
+        }
+      },
+      "documentation": "<p>Describes a target Capacity Reservation.</p>"
+    },
+    "CapacityReservationTargetResponse": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Capacity Reservation.</p>",
+          "locationName": "capacityReservationId"
+        }
+      },
+      "documentation": "<p>Describes a target Capacity Reservation.</p>"
+    },
+    "CapacityReservationTenancy": {
+      "type": "string",
+      "enum": [
+        "default",
+        "dedicated"
+      ]
     },
     "CidrAuthorizationContext": {
       "type": "structure",
@@ -5921,6 +6200,79 @@
         }
       },
       "documentation": "<p>The CPU options for the instance. Both the core count and threads per core must be specified in the request.</p>"
+    },
+    "CreateCapacityReservationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceType",
+        "InstancePlatform",
+        "AvailabilityZone",
+        "InstanceCount"
+      ],
+      "members": {
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p> <p>Constraint: Maximum 64 ASCII characters.</p>"
+        },
+        "InstanceType": {
+          "shape": "String",
+          "documentation": "<p>The instance type for which to reserve capacity. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+        },
+        "InstancePlatform": {
+          "shape": "CapacityReservationInstancePlatform",
+          "documentation": "<p>The type of operating system for which to reserve capacity.</p>"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone in which to create the Capacity Reservation.</p>"
+        },
+        "Tenancy": {
+          "shape": "CapacityReservationTenancy",
+          "documentation": "<p>Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:</p> <ul> <li> <p> <code>default</code> - The Capacity Reservation is created on hardware that is shared with other AWS accounts.</p> </li> <li> <p> <code>dedicated</code> - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single AWS account.</p> </li> </ul>"
+        },
+        "InstanceCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of instances for which to reserve capacity.</p>"
+        },
+        "EbsOptimized": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the Capacity Reservation supports EBS-optimized instances. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS- optimized instance.</p>"
+        },
+        "EphemeralStorage": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the Capacity Reservation supports instances with temporary, block-level storage.</p>"
+        },
+        "EndDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation's state changes to <code>expired</code> when it reaches its end date and time.</p> <p>You must provide an <code>EndDate</code> value if <code>EndDateType</code> is <code>limited</code>. Omit <code>EndDate</code> if <code>EndDateType</code> is <code>unlimited</code>.</p> <p>If the <code>EndDateType</code> is <code>limited</code>, the Capacity Reservation is cancelled within an hour from the specified time. For example, if you specify 5/31/2019, 13:30:55, the Capacity Reservation is guaranteed to end between 13:30:55 and 14:30:55 on 5/31/2019.</p>"
+        },
+        "EndDateType": {
+          "shape": "EndDateType",
+          "documentation": "<p>Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:</p> <ul> <li> <p> <code>unlimited</code> - The Capacity Reservation remains active until you explicitly cancel it. Do not provide an <code>EndDate</code> if the <code>EndDateType</code> is <code>unlimited</code>.</p> </li> <li> <p> <code>limited</code> - The Capacity Reservation expires automatically at a specified date and time. You must provide an <code>EndDate</code> value if the <code>EndDateType</code> value is <code>limited</code>.</p> </li> </ul>"
+        },
+        "InstanceMatchCriteria": {
+          "shape": "InstanceMatchCriteria",
+          "documentation": "<p>Indicates the type of instance launches that the Capacity Reservation accepts. The options include:</p> <ul> <li> <p> <code>open</code> - The Capacity Reservation automatically matches all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes run in the Capacity Reservation automatically without specifying any additional parameters.</p> </li> <li> <p> <code>targeted</code> - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity. </p> </li> </ul> <p>Default: <code>open</code> </p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the Capacity Reservation during launch.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "CreateCapacityReservationResult": {
+      "type": "structure",
+      "members": {
+        "CapacityReservation": {
+          "shape": "CapacityReservation",
+          "documentation": "<p>Information about the Capacity Reservation.</p>",
+          "locationName": "capacityReservation"
+        }
+      }
     },
     "CreateCustomerGatewayRequest": {
       "type": "structure",
@@ -8631,6 +8983,48 @@
           "shape": "String",
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeCapacityReservationsRequest": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationIds": {
+          "shape": "CapacityReservationIdSet",
+          "documentation": "<p>The ID of the Capacity Reservation.</p>",
+          "locationName": "CapacityReservationId"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to retrieve the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters.</p>",
+          "locationName": "Filter"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeCapacityReservationsResult": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        },
+        "CapacityReservations": {
+          "shape": "CapacityReservationSet",
+          "documentation": "<p>Information about the Capacity Reservations.</p>",
+          "locationName": "capacityReservationSet"
         }
       }
     },
@@ -12740,6 +13134,13 @@
         }
       }
     },
+    "EndDateType": {
+      "type": "string",
+      "enum": [
+        "unlimited",
+        "limited"
+      ]
+    },
     "EventCode": {
       "type": "string",
       "enum": [
@@ -15289,6 +15690,16 @@
           "shape": "CpuOptions",
           "documentation": "<p>The CPU options for the instance.</p>",
           "locationName": "cpuOptions"
+        },
+        "CapacityReservationId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Capacity Reservation.</p>",
+          "locationName": "capacityReservationId"
+        },
+        "CapacityReservationSpecification": {
+          "shape": "CapacityReservationSpecificationResponse",
+          "documentation": "<p>Information about the Capacity Reservation targeting option.</p>",
+          "locationName": "capacityReservationSpecification"
         }
       },
       "documentation": "<p>Describes an instance.</p>"
@@ -15644,6 +16055,13 @@
         }
       },
       "documentation": "<p>Describes the market (purchasing) option for the instances.</p>"
+    },
+    "InstanceMatchCriteria": {
+      "type": "string",
+      "enum": [
+        "open",
+        "targeted"
+      ]
     },
     "InstanceMonitoring": {
       "type": "structure",
@@ -16724,6 +17142,36 @@
         "locationName": "BlockDeviceMapping"
       }
     },
+    "LaunchTemplateCapacityReservationSpecificationRequest": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationPreference": {
+          "shape": "CapacityReservationPreference",
+          "documentation": "<p>Indicates the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>"
+        },
+        "CapacityReservationTarget": {
+          "shape": "CapacityReservationTarget",
+          "documentation": "<p>Information about the target Capacity Reservation.</p>"
+        }
+      },
+      "documentation": "<p>Describes an instance's Capacity Reservation targeting option. You can specify only one option at a time. Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run in On-Demand capacity or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation.</p>"
+    },
+    "LaunchTemplateCapacityReservationSpecificationResponse": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationPreference": {
+          "shape": "CapacityReservationPreference",
+          "documentation": "<p>Indicates the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>",
+          "locationName": "capacityReservationPreference"
+        },
+        "CapacityReservationTarget": {
+          "shape": "CapacityReservationTargetResponse",
+          "documentation": "<p>Information about the target Capacity Reservation.</p>",
+          "locationName": "capacityReservationTarget"
+        }
+      },
+      "documentation": "<p>Information about the Capacity Reservation targeting option.</p>"
+    },
     "LaunchTemplateConfig": {
       "type": "structure",
       "members": {
@@ -17494,6 +17942,44 @@
       "max": 255,
       "min": 5
     },
+    "ModifyCapacityReservationRequest": {
+      "type": "structure",
+      "required": [
+        "CapacityReservationId"
+      ],
+      "members": {
+        "CapacityReservationId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Capacity Reservation.</p>"
+        },
+        "InstanceCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of instances for which to reserve capacity.</p>"
+        },
+        "EndDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation's state changes to <code>expired</code> when it reaches its end date and time.</p> <p>The Capacity Reservation is cancelled within an hour from the specified time. For example, if you specify 5/31/2019, 13:30:55, the Capacity Reservation is guaranteed to end between 13:30:55 and 14:30:55 on 5/31/2019.</p> <p>You must provide an <code>EndDate</code> value if <code>EndDateType</code> is <code>limited</code>. Omit <code>EndDate</code> if <code>EndDateType</code> is <code>unlimited</code>.</p>"
+        },
+        "EndDateType": {
+          "shape": "EndDateType",
+          "documentation": "<p>Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:</p> <ul> <li> <p> <code>unlimited</code> - The Capacity Reservation remains active until you explicitly cancel it. Do not provide an <code>EndDate</code> value if <code>EndDateType</code> is <code>unlimited</code>.</p> </li> <li> <p> <code>limited</code> - The Capacity Reservation expires automatically at a specified date and time. You must provide an <code>EndDate</code> value if <code>EndDateType</code> is <code>limited</code>.</p> </li> </ul>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ModifyCapacityReservationResult": {
+      "type": "structure",
+      "members": {
+        "Return": {
+          "shape": "Boolean",
+          "documentation": "<p>Information about the Capacity Reservation.</p>",
+          "locationName": "return"
+        }
+      }
+    },
     "ModifyFleetRequest": {
       "type": "structure",
       "required": [
@@ -17808,6 +18294,37 @@
         }
       },
       "documentation": "<p>Contains the parameters for ModifyInstanceAttribute.</p>"
+    },
+    "ModifyInstanceCapacityReservationAttributesRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "CapacityReservationSpecification"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the instance to be modified.</p>"
+        },
+        "CapacityReservationSpecification": {
+          "shape": "CapacityReservationSpecification",
+          "documentation": "<p>Information about the Capacity Reservation targeting option.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ModifyInstanceCapacityReservationAttributesResult": {
+      "type": "structure",
+      "members": {
+        "Return": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName": "return"
+        }
+      }
     },
     "ModifyInstanceCreditSpecificationRequest": {
       "type": "structure",
@@ -20723,6 +21240,10 @@
         "CpuOptions": {
           "shape": "LaunchTemplateCpuOptionsRequest",
           "documentation": "<p>The CPU options for the instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html\">Optimizing CPU Options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+        },
+        "CapacityReservationSpecification": {
+          "shape": "LaunchTemplateCapacityReservationSpecificationRequest",
+          "documentation": "<p>Information about the Capacity Reservation targeting option.</p>"
         }
       },
       "documentation": "<p>The information to include in the launch template.</p>"
@@ -21765,6 +22286,11 @@
           "shape": "LaunchTemplateCpuOptions",
           "documentation": "<p>The CPU options for the instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html\">Optimizing CPU Options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName": "cpuOptions"
+        },
+        "CapacityReservationSpecification": {
+          "shape": "LaunchTemplateCapacityReservationSpecificationResponse",
+          "documentation": "<p>Information about the Capacity Reservation targeting option.</p>",
+          "locationName": "capacityReservationSpecification"
         }
       },
       "documentation": "<p>The information for a launch template. </p>"
@@ -22236,6 +22762,10 @@
         "CpuOptions": {
           "shape": "CpuOptionsRequest",
           "documentation": "<p>The CPU options for the instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html\">Optimizing CPU Options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+        },
+        "CapacityReservationSpecification": {
+          "shape": "CapacityReservationSpecification",
+          "documentation": "<p>Information about the Capacity Reservation targeting option.</p>"
         }
       },
       "documentation": "<p>Contains the parameters for RunInstances.</p>"
