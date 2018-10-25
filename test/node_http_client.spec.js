@@ -155,7 +155,8 @@
             global.clearTimeout = oldClearTimeout;
             return httpModule.request = oldRequest;
           });
-          return it('clears timeouts once the connection has been established', function() {
+
+          it('clears timeouts once the connection has been established', function() {
             var mockSocket, req;
             req = new AWS.HttpRequest('http://10.255.255.255');
             http.handleRequest(req, {
@@ -169,8 +170,26 @@
             expect(setTimeoutSpy.calls.length).to.equal(1);
             mockSocket.emit('connect');
             expect(clearTimeoutSpy.calls.length).to.equal(1);
-            return expect(clearTimeoutSpy.calls[0]["arguments"][0]).to.equal(timeoutId);
+            expect(clearTimeoutSpy.calls[0]["arguments"][0]).to.equal(timeoutId);
           });
+
+          it('clears timeouts if an error is encountered', function() {
+            var mockSocket = new EventEmitter();
+            var req = new AWS.HttpRequest('http://10.255.255.255');
+
+            http.handleRequest(req, {
+              connectTimeout: 120000
+            }, null, function() {
+              return {};
+            });
+
+            mockSocket.connecting = true;
+            mockClientRequest.emit('socket', mockSocket);
+            expect(setTimeoutSpy.calls.length).to.equal(1);
+            mockClientRequest.emit('error', new Error('Something happened!'));
+            expect(clearTimeoutSpy.calls.length).to.equal(1);
+            expect(clearTimeoutSpy.calls[0]["arguments"][0]).to.equal(timeoutId);
+          })
         });
       });
     });

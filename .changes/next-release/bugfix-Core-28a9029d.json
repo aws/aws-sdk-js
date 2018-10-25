@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Core",
+  "description": "Fixes issue where connectTimeout timers would not be cleared if a request errored out. Only affects node.js."
+}
