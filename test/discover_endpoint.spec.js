@@ -3,7 +3,7 @@ var AWS = helpers.AWS
 var endpoint_discovery_module = require('../lib/discover_endpoint');
 var iniLoader = require('../lib/shared-ini').iniLoader;
 var getCacheKey = endpoint_discovery_module.getCacheKey;
-var marshallCustomeIdentifiers = endpoint_discovery_module.marshallCustomeIdentifiers;
+var marshallCustomIdentifiers = endpoint_discovery_module.marshallCustomIdentifiers;
 
 
 var api = {
@@ -165,15 +165,15 @@ describe('endpoint discovery', function() {
     });
   });
   
-  describe('marshallCustomeIdentifiers', function() {
+  describe('marshallCustomIdentifiers', function() {
     it('can marshall params according to endpointdiscoveryid trait', function() {
       var MockService = helpers.MockServiceFromApi(api);
       var client = new MockService();
-      var ids = marshallCustomeIdentifiers({
+      var ids = marshallCustomIdentifiers({
         params: {Query: 'query', Record: 'record'}
       }, client.api.operations.requiredEDOperation.input);
       expect(ids).to.eql({Query: 'query'});
-      ids = marshallCustomeIdentifiers({
+      ids = marshallCustomIdentifiers({
         params: {Query: {Record: 'record'}}
       }, client.api.operations.complexEDOperation.input);
       expect(ids).to.eql({RecordItem: 'record'});
@@ -310,7 +310,7 @@ describe('endpoint discovery', function() {
       });
     });
 
-    it('evict invalide endpoint records from cache if InvalideEndpointException encountered', function() {
+    it('evict invalid endpoint records from cache if InvalidEndpointException encountered', function() {
       var client = new AWS.Service({
         region: 'fake-region-1',
         endpointDiscoveryEnabled: true,
@@ -382,7 +382,6 @@ describe('endpoint discovery', function() {
         apiConfig: new AWS.Model.Api(api)
       });
       helpers.mockHttpResponse(400, {}, '');
-      var endpointRequestCount = 0;
       var makeRequestSpy = helpers.spyOn(client, 'makeRequest').andCallThrough();
       for (var apiRequestCount = 0; apiRequestCount < 10; apiRequestCount++) {
         var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
@@ -433,7 +432,7 @@ describe('endpoint discovery', function() {
       });
     });
 
-    it('evict invalide endpoint records from cache if InvalideEndpointException encountered', function() {
+    it('evict invalid endpoint records from cache if InvalidEndpointException encountered', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
         apiConfig: new AWS.Model.Api(api)
@@ -538,11 +537,11 @@ describe('endpoint discovery', function() {
       }
       expect(error).not.to.eql(null);
       expect(error.code).to.eql('ConfigurationException');
-      expect(error.message).to.eql('If custome endpoint is supplied, endpointDiscoverEnabled should be turned off.');
+      expect(error.message).to.eql('Custom endpoint is supplied; endpointDiscoveryEnabled must not be true.');
   
       client = new AWS.Service({
         apiConfig: new AWS.Model.Api(api),
-        endpoint: 'custom-endpoint.amazonaws.com/fack-region',
+        endpoint: 'custom-endpoint.amazonaws.com/fake-region',
       });
       var getFromCacheSpy = helpers.spyOn(AWS.endpointCache, 'get').andCallThrough();
       client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'}).send();
@@ -550,7 +549,7 @@ describe('endpoint discovery', function() {
     });
   
     it('if endpoint specified in global config, custom endpoint should be preferred', function() {
-      AWS.config.update({endpoint: 'custom-endpoint.amazonaws.com/fack-region'})
+      AWS.config.update({endpoint: 'custom-endpoint.amazonaws.com/fake-region'})
       client = new AWS.Service({
         apiConfig: new AWS.Model.Api(api),
       });
@@ -561,7 +560,7 @@ describe('endpoint discovery', function() {
     });
   
     it('if endpoint specified in global config, custom endpoint should be preferred', function() {
-      AWS.config.update({mock: {endpoint: 'custom-endpoint.amazonaws.com/fack-region'}})
+      AWS.config.update({mock: {endpoint: 'custom-endpoint.amazonaws.com/fake-region'}})
       var MockService = helpers.MockServiceFromApi(api);
       var client = new MockService({});
       var getFromCacheSpy = helpers.spyOn(AWS.endpointCache, 'get').andCallThrough();
