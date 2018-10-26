@@ -372,11 +372,11 @@ declare class AlexaForBusiness extends Service {
    */
   putRoomSkillParameter(callback?: (err: AWSError, data: AlexaForBusiness.Types.PutRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.PutRoomSkillParameterResponse, AWSError>;
   /**
-   * Links a user's account to a third-party skill provider. If this API is called by an assumed IAM role, the skill being linked must be a private skill, and the skill must be owned by the AWS account that assumed the IAM role.
+   * Links a user's account to a third-party skill provider. If this API operation is called by an assumed IAM role, the skill being linked must be a private skill. Also, the skill must be owned by the AWS account that assumed the IAM role.
    */
   putSkillAuthorization(params: AlexaForBusiness.Types.PutSkillAuthorizationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.PutSkillAuthorizationResponse, AWSError>;
   /**
-   * Links a user's account to a third-party skill provider. If this API is called by an assumed IAM role, the skill being linked must be a private skill, and the skill must be owned by the AWS account that assumed the IAM role.
+   * Links a user's account to a third-party skill provider. If this API operation is called by an assumed IAM role, the skill being linked must be a private skill. Also, the skill must be owned by the AWS account that assumed the IAM role.
    */
   putSkillAuthorization(callback?: (err: AWSError, data: AlexaForBusiness.Types.PutSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.PutSkillAuthorizationResponse, AWSError>;
   /**
@@ -648,7 +648,7 @@ declare namespace AlexaForBusiness {
   }
   export interface AssociateSkillWithSkillGroupRequest {
     /**
-     * The ARN of the skill group to associate the skill to.
+     * The ARN of the skill group to associate the skill to. Required.
      */
     SkillGroupArn?: Arn;
     /**
@@ -787,7 +787,7 @@ declare namespace AlexaForBusiness {
      */
     ConferenceProviderName: ConferenceProviderName;
     /**
-     * A string that represents a type within a list of predefined types.
+     * Represents a type within a list of predefined types.
      */
     ConferenceProviderType: ConferenceProviderType;
     /**
@@ -809,7 +809,7 @@ declare namespace AlexaForBusiness {
   }
   export interface CreateConferenceProviderResponse {
     /**
-     * The ARN of the newly created conference provider.
+     * The ARN of the newly-created conference provider.
      */
     ConferenceProviderArn?: Arn;
   }
@@ -1231,7 +1231,7 @@ declare namespace AlexaForBusiness {
   }
   export interface DisassociateSkillFromSkillGroupRequest {
     /**
-     * The unique identifier of a skill.
+     * The unique identifier of a skill. Required.
      */
     SkillGroupArn?: Arn;
     /**
@@ -1419,7 +1419,7 @@ declare namespace AlexaForBusiness {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of conference providers to be return per paginated calls.
+     * The maximum number of conference providers to be returned, per paginated calls.
      */
     MaxResults?: MaxResults;
   }
@@ -1499,7 +1499,7 @@ declare namespace AlexaForBusiness {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of categories returned per paginated calls.
+     * The maximum number of categories returned, per paginated calls.
      */
     MaxResults?: MaxResults;
   }
@@ -1543,7 +1543,7 @@ declare namespace AlexaForBusiness {
      */
     RoomArn: Arn;
     /**
-     * The maximum number of appliances to be return per paginated calls.
+     * The maximum number of appliances to be returned, per paginated calls.
      */
     MaxResults?: MaxResults;
     /**

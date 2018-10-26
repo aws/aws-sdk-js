@@ -1007,6 +1007,7 @@ declare namespace SSM {
      */
     AssociationName?: AssociationName;
   }
+  export type AssociationComplianceSeverity = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|"UNSPECIFIED"|string;
   export interface AssociationDescription {
     /**
      * The name of the Systems Manager document.
@@ -1080,6 +1081,10 @@ declare namespace SSM {
      * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
+    /**
+     * The severity level that is assigned to the association.
+     */
+    ComplianceSeverity?: AssociationComplianceSeverity;
   }
   export type AssociationDescriptionList = AssociationDescription[];
   export interface AssociationExecution {
@@ -1291,6 +1296,10 @@ declare namespace SSM {
      * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
+    /**
+     * The severity level that is assigned to the association.
+     */
+    ComplianceSeverity?: AssociationComplianceSeverity;
   }
   export type AssociationVersionList = AssociationVersionInfo[];
   export type AttributeName = string;
@@ -1987,6 +1996,10 @@ declare namespace SSM {
      * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
+    /**
+     * The severity level to assign to the association.
+     */
+    ComplianceSeverity?: AssociationComplianceSeverity;
   }
   export interface CreateAssociationBatchResult {
     /**
@@ -2039,6 +2052,10 @@ declare namespace SSM {
      * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
+    /**
+     * The severity level to assign to the association.
+     */
+    ComplianceSeverity?: AssociationComplianceSeverity;
   }
   export interface CreateAssociationResult {
     /**
@@ -6856,6 +6873,10 @@ declare namespace SSM {
      * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to execute an association while Systems Manager is executing MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
+    /**
+     * The severity level to assign to the association.
+     */
+    ComplianceSeverity?: AssociationComplianceSeverity;
   }
   export interface UpdateAssociationResult {
     /**
