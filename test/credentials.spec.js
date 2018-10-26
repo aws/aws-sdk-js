@@ -598,6 +598,29 @@
           return done();
         });
       });
+      it('will use httpOptions for assume role when provided', function(done) {
+        var creds, mock;
+        var httpClient, spy;
+        mock = '[default]\nrole_arn = arn\nsource_profile = foo_base\n[foo_base]\naws_access_key_id = baseKey\naws_secret_access_key = baseSecret\n';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+        creds = new AWS.SharedIniFileCredentials({
+          httpOptions: {
+            connectTimeout: 2000,
+            proxy: 'https://foo.bar',
+            timeout: 2000,
+          }
+        });
+        httpClient = AWS.HttpClient.getInstance();
+        spy = helpers.spyOn(httpClient, 'handleRequest').andCallThrough();
+        return creds.refresh(function(err) {
+          expect(spy.calls.length).to.equal(1);
+          expect(spy.calls[0].arguments[1].connectTimeout).to.equal(2000);
+          expect(spy.calls[0].arguments[1].proxy).to.equal('https://foo.bar');
+          expect(spy.calls[0].arguments[1].timeout).to.equal(2000);
+          return done();
+        });
+      });
 
       describe('mfa serial callback', function() {
 
