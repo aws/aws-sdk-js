@@ -237,7 +237,7 @@ describe('endpoint discovery', function() {
         region: 'fake-region-1',
         serviceId: 'MockService'
       });
-      expect(spy.calls[0].arguments[1]).to.eql([]);
+      expect(spy.calls[0].arguments[1]).to.eql([{Address: undefined, CachePeriodInMinutes: 60}]);
       expect(spy.calls[1].arguments[0]).to.eql({
         accessKeyId: 'akid',
         operation: 'OptionalEDOperation',
@@ -273,41 +273,26 @@ describe('endpoint discovery', function() {
       expect(spy.calls.length).to.eql(3)
     });
   
-    it('keep retry every 60 seconds when failed', function(done) {
+    it('should put in an undefined cache record valid for 1 minute when failed', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
         maxRetries: 0,
         apiConfig: new AWS.Model.Api(api)
       });
-      var spy = helpers.createSpy('retry inject');
-      var topLevelScope = null;
-      if (typeof window === 'undefined') {
-        topLevelScope = global;
-      } else {
-        topLevelScope = window;
-      }
-      var setTimeoutSpy = helpers.spyOn(topLevelScope, 'setTimeout').andCallThrough();
       helpers.mockHttpResponse(400, {}, '');
-      AWS.events.on('afterRetry', function(resp) {
-        if(resp.request.operation === 'describeEndpoints') {
-          spy(resp)
-        }
+      var spy = helpers.spyOn(AWS.endpointCache, 'put').andCallThrough();
+      client.makeRequest('optionalEDOperation', {Query: 'query'}).send();
+      expect(spy.calls.length).to.eql(2);
+      expect(spy.calls[1].arguments[0]).to.eql({
+        accessKeyId: 'akid',
+        operation: 'OptionalEDOperation',
+        region: 'mock-region',
+        serviceId: 'MockService'
       });
-      client.makeRequest('optionalEDOperation', {Query: 'query'}).send(function() {
-        //set ENDPOINT_OPERATION_MAX_RETRIES = 60 and the first request
-        expect(spy.calls.length).to.eql(60 + 1);
-        for (var i = 0, call = spy.calls[i]; i < spy.calls.length; i++, call = spy.calls[i]) {
-          var resp = call.arguments[0];
-          expect(resp.maxRetries).to.eql(60);
-          expect(resp.error.retryDelay).to.eql(60000);
-        }
-        expect(setTimeoutSpy.calls.length).to.eql(60);
-        for (var i = 0, call = setTimeoutSpy.calls[i]; i < setTimeoutSpy.calls.length; i++, call = setTimeoutSpy.calls[i]) {
-          var timeout = call.arguments[1];
-          expect(timeout).to.eql(60000);
-        }
-        done()
-      });
+      expect(spy.calls[1].arguments[1]).to.eql([{
+        Address: undefined,
+        CachePeriodInMinutes: 1
+      }])
     });
 
     it('evict invalid endpoint records from cache if InvalidEndpointException encountered', function() {
@@ -491,7 +476,7 @@ describe('endpoint discovery', function() {
       var putCacheCount = 0;
       var putInCacheSpy = helpers.spyOn(AWS.endpointCache, 'put').andCallFake(function() {
         //when discover endpoint optionally, \'put\' method is called twice each time
-        if (arguments[1].length > 0) putCacheCount++;
+        if (arguments[1].length > 0 && arguments[1][0].Address !== undefined) putCacheCount++;
         //call through origin put method
         putInCacheSpy.origMethod.apply(putInCacheSpy.object, arguments);
       })
