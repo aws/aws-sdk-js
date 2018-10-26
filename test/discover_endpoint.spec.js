@@ -1,4 +1,6 @@
 var helpers = require('./helpers');
+var http = require('http');
+var url = require('url')
 var AWS = helpers.AWS
 var endpoint_discovery_module = require('../lib/discover_endpoint');
 var iniLoader = AWS.util.iniLoader;
@@ -16,10 +18,7 @@ var api = {
   operations: {
     DescribeEndpoints: {
       name: 'DescribeEndpoints',
-      http: {
-        method: 'POST',
-        requestUri: '/'
-      },
+      http: {},
       endpointoperation: true,
       input: {
         type: 'structure',
@@ -155,13 +154,13 @@ describe('endpoint discovery', function() {
       var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
       request.send();
       expect(spy.calls.length).to.eql(1);
-      expect(spy.calls[0].arguments[0]).to.eql({
+      expect(spy.calls[0].arguments[0]).to.eql(AWS.EndpointCache.getKeyString({
         region: 'fake-region-1',
         operation: 'RequiredEDOperation',
         serviceId: 'MockService',
         accessKeyId: 'akid',
         Query: 'query'
-      });
+      }));
     });
   });
   
@@ -237,7 +236,7 @@ describe('endpoint discovery', function() {
         region: 'fake-region-1',
         serviceId: 'MockService'
       });
-      expect(spy.calls[0].arguments[1]).to.eql([{Address: undefined, CachePeriodInMinutes: 60}]);
+      expect(spy.calls[0].arguments[1]).to.eql([{Address: '', CachePeriodInMinutes: 60}]);
       expect(spy.calls[1].arguments[0]).to.eql({
         accessKeyId: 'akid',
         operation: 'OptionalEDOperation',
@@ -290,7 +289,7 @@ describe('endpoint discovery', function() {
         serviceId: 'MockService'
       });
       expect(spy.calls[1].arguments[1]).to.eql([{
-        Address: undefined,
+        Address: '',
         CachePeriodInMinutes: 1
       }])
     });
@@ -389,20 +388,20 @@ describe('endpoint discovery', function() {
         endpointDiscoveryEnabled: true,
         apiConfig: new AWS.Model.Api(api)
       });
-      var spy = helpers.spyOn(AWS.endpointCache, 'put').andCallThrough();
       var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
       expect(request.httpRequest.endpoint.hostname).to.eql('mockservice.mock-region.amazonaws.com');
       helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell2.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
-      request.send();
-      expect(spy.calls.length).to.eql(1);
-      expect(spy.calls[0].arguments[0]).to.eql({
-        accessKeyId: 'akid',
-        operation: 'RequiredEDOperation',
-        region: 'mock-region',
-        serviceId: 'MockService',
-        Query: 'query'//endpoint discovery id
+      var putCacheCount = 0;
+      var putInCacheSpy = helpers.spyOn(AWS.endpointCache, 'put').andCallFake(function() {
+        //when discover endpoint optionally, \'put\' method is called twice each time
+        if (arguments[1].length > 0 && arguments[1][0].Address !== '') putCacheCount++;
+        //call through origin put method
+        putInCacheSpy.origMethod.apply(putInCacheSpy.object, arguments);
       });
-      expect(spy.calls[0].arguments[1]).to.eql([{Address: 'https://cell2.fakeservice.amazonaws.com/fakeregion', CachePeriodInMinutes: 1}]);
+      request.send();
+      expect(putInCacheSpy.calls.length).to.eql(2);
+      expect(putCacheCount).to.eql(1);
+      expect(putInCacheSpy.calls[1].arguments[1]).to.eql([{Address: 'https://cell2.fakeservice.amazonaws.com/fakeregion', CachePeriodInMinutes: 1}]);
       var makeRequestSpy = helpers.spyOn(client, 'makeRequest').andCallThrough();
       var replicatedRequest = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
       replicatedRequest.send(function() {
@@ -459,6 +458,144 @@ describe('endpoint discovery', function() {
       expect(spy.calls.length).to.eql(1);
       expect(spy.calls[0].arguments[0].httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
     });
+
+    if (AWS.util.isNode()) {
+      describe('not make more endpoint operation requests if there is an in-flight request', function() {
+        var port;
+        var client;
+        var app;
+
+        function extractOperation(request) {
+          if (request.headers['x-amz-target']) {
+            var target = request.headers['x-amz-target'];
+            var targetArr = target.split('.');
+            return targetArr[targetArr.length - 1];
+          }
+        }
+
+        var server = http.createServer(function(req, res) {
+          app(req, res);
+        });
+
+        beforeEach(function() {
+          port = 1024 + parseInt(Math.random() * 1024);
+          server.listen(port);
+
+          AWS.events.on('build', function(req) {
+            req.httpRequest.updateEndpoint('http://127.0.0.1:' + port);
+          });
+    
+          client = new AWS.Service({
+            endpointDiscoveryEnabled: true,
+            apiConfig: new AWS.Model.Api(api),
+          });
+        });
+
+        afterEach(function() {
+          AWS.events.removeAllListeners();
+          try {server.close()} catch(e) {}//fix service node running error in node 0.10
+        });
+
+        it('endpoint operation succeed', function(done) {
+          var concurrency = 10;
+          var requestsCounter = 0;
+          var endpointOperationCount = 0;
+          var apiOperationCount = 0;
+          app = function(req, res) {
+            var timer;
+            var operation = extractOperation(req);
+            if (operation) {
+              res.writeHead(200, {
+                'Content-Type': 'text/plain'
+              });
+              if (operation === 'DescribeEndpoints') {
+                endpointOperationCount++;
+                timer = setTimeout(function() {
+                  res.write('{"Endpoints": [{"Address": "http://127.0.0.1:' + port + '/discovered", "CachePeriodInMinutes": 10}]}');
+                  res.end();
+                }, 50);
+              } else {
+                apiOperationCount++;
+                expect(url.parse(req.url).path).to.eql('/discovered');
+                res.end('{"Operation": "' + operation + '"}');
+              }
+            } else {
+              res.writeHead(404, {});
+              res.end();
+            }
+            if (timer) {
+              clearTimeout(timer);
+              timer = null;
+            }
+          }
+          for (var i = 0; i < concurrency; i++) {
+            var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
+            request.send(function(err, data) {
+              requestsCounter ++;
+              if (requestsCounter === concurrency) {
+                AWS.events.removeAllListeners();
+                server.close();
+                expect(endpointOperationCount).to.eql(1);
+                expect(apiOperationCount).to.eql(concurrency);
+                done();
+              }
+            });
+          }
+        });
+
+        it('endpoint operation fail', function(done) {
+          var concurrency = 10;
+          var requestsCounter = 0;
+          var endpointOperationCount = 0;
+          var apiOperationCount = 0;
+          app = function(req, res) {
+            var timer;
+            var operation = extractOperation(req);
+            if (operation) {
+              if (operation === 'DescribeEndpoints') {
+                endpointOperationCount++;
+                timer = setTimeout(function() {
+                  res.statusCode = 400;
+                  res.write('{"__type": "endpoint is currently unavailable"}');
+                  res.end();
+                }, 50);
+              } else {
+                apiOperationCount++;
+                res.statusCode = 200;
+                res.end('{"Operation": "' + operation + '"}');
+              }
+            } else {
+              res.writeHead(404, {});
+              res.end();
+            }
+            if (timer) {
+              clearTimeout(timer);
+              timer = null;
+            }
+          }
+          var failedRequestCounter = 0;
+          for (var i = 0; i < concurrency; i++) {
+            var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
+            request.send(function(err, data) {
+              requestsCounter ++;
+              if (err) failedRequestCounter ++;
+              expect(err.code).to.eql('EndpointDiscoveryException');
+              expect(err.message).to.eql('Request cannot be fulfilled without specifying an endpoint');
+              if (requestsCounter === concurrency) {
+                AWS.events.removeAllListeners();
+                server.close();
+                expect(endpointOperationCount).to.eql(1);
+                expect(apiOperationCount).to.eql(0);
+                expect(requestsCounter).to.eql(concurrency);
+                expect(failedRequestCounter).to.eql(concurrency);
+                done();
+              }
+            });
+          }
+        });
+
+      });
+    }
   });
   
   describe('discoverEndpoints', function() {
@@ -476,10 +613,10 @@ describe('endpoint discovery', function() {
       var putCacheCount = 0;
       var putInCacheSpy = helpers.spyOn(AWS.endpointCache, 'put').andCallFake(function() {
         //when discover endpoint optionally, \'put\' method is called twice each time
-        if (arguments[1].length > 0 && arguments[1][0].Address !== undefined) putCacheCount++;
+        if (arguments[1].length > 0 && arguments[1][0].Address !== '') putCacheCount++;
         //call through origin put method
         putInCacheSpy.origMethod.apply(putInCacheSpy.object, arguments);
-      })
+      });
       helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
       client1.makeRequest('optionalEDOperation', {}).send();
       expect(putCacheCount).to.eql(1);

@@ -20,12 +20,12 @@ var EndpointCache = /** @class */ (function () {
         configurable: true
     });
     EndpointCache.prototype.put = function (key, value) {
-        var keyString = this.populateKey(key);
+      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
         var endpointRecord = this.populateValue(value);
         this.cache.put(keyString, endpointRecord);
     };
     EndpointCache.prototype.get = function (key) {
-        var keyString = this.populateKey(key);
+      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
         var now = Date.now();
         var records = this.cache.get(keyString);
         if (records) {
@@ -39,7 +39,7 @@ var EndpointCache = /** @class */ (function () {
         }
         return records;
     };
-    EndpointCache.prototype.populateKey = function (key) {
+    EndpointCache.getKeyString = function (key) {
         var identifiers = [];
         var identifierNames = Object.keys(key).sort();
         for (var i = 0; i < identifierNames.length; i++) {
@@ -61,7 +61,7 @@ var EndpointCache = /** @class */ (function () {
         this.cache.empty();
     };
     EndpointCache.prototype.remove = function (key) {
-        var keyString = this.populateKey(key);
+      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
         this.cache.remove(keyString);
     };
     return EndpointCache;
