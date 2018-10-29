@@ -593,7 +593,6 @@ describe('endpoint discovery', function() {
             });
           }
         });
-
       });
     }
   });
