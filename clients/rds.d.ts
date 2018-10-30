@@ -2416,6 +2416,10 @@ declare namespace RDS {
      * Indicates if the DB instance has deletion protection enabled. The database can't be deleted when this value is set to true. For more information, see  Deleting a DB Instance. 
      */
     DeletionProtection?: Boolean;
+    /**
+     * Specifies the listener connection endpoint for SQL Server Always On.
+     */
+    ListenerEndpoint?: Endpoint;
   }
   export type DBInstanceList = DBInstance[];
   export interface DBInstanceMessage {

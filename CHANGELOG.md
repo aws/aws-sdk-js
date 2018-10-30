@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.344.0-->
+<!--LATEST=2.345.0-->
 <!--ENTRYINSERT-->
+
+## 2.345.0
+* feature: Chime: This is the initial release for the Amazon Chime AWS SDK. In this release, Amazon Chime adds support for administrative actions on users and accounts. API Documentation is also updated on https://docs.aws.amazon.com/chime/index.html
+* feature: Credentials: httpsOptions for STS in SharedIniFileCredentials
+* feature: DMS: Add waiters for TestConnectionSucceeds, EndpointDeleted, ReplicationInstanceAvailable, ReplicationInstanceDeleted, ReplicationTaskReady, ReplicationTaskStopped, ReplicationTaskRunning and ReplicationTaskDeleted.
+* feature: RDS: This release adds the listener connection endpoint for SQL Server Always On to the list of fields returned when performing a describe-db-instances operation.
 
 ## 2.344.0
 * bugfix: Core: Fixes issue where connectTimeout timers would not be cleared if a request errored out. Only affects node.js.

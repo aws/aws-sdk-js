@@ -145,5 +145,6 @@ module.exports = {
   EKS: require('./eks'),
   Macie: require('./macie'),
   DLM: require('./dlm'),
-  Signer: require('./signer')
+  Signer: require('./signer'),
+  Chime: require('./chime')
 };

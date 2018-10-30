@@ -4870,6 +4870,10 @@
         "DeletionProtection": {
           "shape": "Boolean",
           "documentation": "<p>Indicates if the DB instance has deletion protection enabled. The database can't be deleted when this value is set to true. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
+        },
+        "ListenerEndpoint": {
+          "shape": "Endpoint",
+          "documentation": "<p>Specifies the listener connection endpoint for SQL Server Always On.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action. </p>",

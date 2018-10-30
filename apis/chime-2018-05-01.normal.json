@@ -1,0 +1,1374 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-05-01",
+    "endpointPrefix": "chime",
+    "protocol": "rest-json",
+    "serviceFullName": "Amazon Chime",
+    "serviceId": "Chime",
+    "signatureVersion": "v4",
+    "uid": "chime-2018-05-01"
+  },
+  "operations": {
+    "BatchSuspendUser": {
+      "name": "BatchSuspendUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/console/accounts/{accountId}/users?operation=suspend",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchSuspendUserRequest"
+      },
+      "output": {
+        "shape": "BatchSuspendUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href=\"http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html\">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are dissociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and are no longer able to sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action. </p> <p>To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>"
+    },
+    "BatchUnsuspendUser": {
+      "name": "BatchUnsuspendUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/console/accounts/{accountId}/users?operation=unsuspend",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchUnsuspendUserRequest"
+      },
+      "output": {
+        "shape": "BatchUnsuspendUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime <code>EnterpriseLWA</code> account. Only users on <code>EnterpriseLWA</code> accounts can be unsuspended using this action. For more information about different account types, see <a href=\"http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html\">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Previously suspended users who are unsuspended using this action are returned to <code>Registered</code> status. Users who are not previously suspended are ignored.</p>"
+    },
+    "BatchUpdateUser": {
+      "name": "BatchUpdateUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/console/accounts/{accountId}/users",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchUpdateUserRequest"
+      },
+      "output": {
+        "shape": "BatchUpdateUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action.</p>"
+    },
+    "CreateAccount": {
+      "name": "CreateAccount",
+      "http": {
+        "method": "POST",
+        "requestUri": "/console/accounts",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateAccountRequest"
+      },
+      "output": {
+        "shape": "CreateAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon Chime account under the administrator's AWS account. Only <code>Team</code> account types are currently supported for this action. For more information about different account types, see <a href=\"http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html\">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+    },
+    "DeleteAccount": {
+      "name": "DeleteAccount",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/console/accounts/{accountId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteAccountRequest"
+      },
+      "output": {
+        "shape": "DeleteAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnprocessableEntityException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting a <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action to do so.</p> <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended.</p> <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore a deleted account from your <code>Disabled</code> accounts list, you must contact AWS Support.</p> <p>After 90 days, deleted accounts are permanently removed from your <code>Disabled</code> accounts list.</p>"
+    },
+    "GetAccount": {
+      "name": "GetAccount",
+      "http": {
+        "method": "GET",
+        "requestUri": "/console/accounts/{accountId}"
+      },
+      "input": {
+        "shape": "GetAccountRequest"
+      },
+      "output": {
+        "shape": "GetAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves details for the specified Amazon Chime account, such as account type and supported licenses.</p>"
+    },
+    "GetAccountSettings": {
+      "name": "GetAccountSettings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/console/accounts/{accountId}/settings"
+      },
+      "input": {
+        "shape": "GetAccountSettingsRequest"
+      },
+      "output": {
+        "shape": "GetAccountSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dial out settings. For more information about these settings, see <a href=\"http://docs.aws.amazon.com/chime/latest/ag/policies.html\">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+    },
+    "GetUser": {
+      "name": "GetUser",
+      "http": {
+        "method": "GET",
+        "requestUri": "/console/accounts/{accountId}/users/{userId}"
+      },
+      "input": {
+        "shape": "GetUserRequest"
+      },
+      "output": {
+        "shape": "GetUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN.</p>"
+    },
+    "InviteUsers": {
+      "name": "InviteUsers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/console/accounts/{accountId}/users?operation=add",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "InviteUsersRequest"
+      },
+      "output": {
+        "shape": "InviteUsersResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Sends email invites to as many as 50 users, inviting them to the specified Amazon Chime <code>Team</code> account. Only <code>Team</code> account types are currently supported for this action. </p>"
+    },
+    "ListAccounts": {
+      "name": "ListAccounts",
+      "http": {
+        "method": "GET",
+        "requestUri": "/console/accounts"
+      },
+      "input": {
+        "shape": "ListAccountsRequest"
+      },
+      "output": {
+        "shape": "ListAccountsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists the Amazon Chime accounts under the administrator's AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user's email address, which returns one account result.</p>"
+    },
+    "ListUsers": {
+      "name": "ListUsers",
+      "http": {
+        "method": "GET",
+        "requestUri": "/console/accounts/{accountId}/users"
+      },
+      "input": {
+        "shape": "ListUsersRequest"
+      },
+      "output": {
+        "shape": "ListUsersResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists the users that belong to the specified Amazon Chime account.</p>"
+    },
+    "LogoutUser": {
+      "name": "LogoutUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/console/accounts/{accountId}/users/{userId}?operation=logout",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "LogoutUserRequest"
+      },
+      "output": {
+        "shape": "LogoutUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Logs out the specified user from all of the devices they are currently logged into.</p>"
+    },
+    "ResetPersonalPIN": {
+      "name": "ResetPersonalPIN",
+      "http": {
+        "method": "POST",
+        "requestUri": "/console/accounts/{accountId}/users/{userId}?operation=reset-personal-pin",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ResetPersonalPINRequest"
+      },
+      "output": {
+        "shape": "ResetPersonalPINResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Resets the personal meeting PIN for the specified user on an Amazon Chime account. Returns the <a>User</a> object with the updated personal meeting PIN.</p>"
+    },
+    "UpdateAccount": {
+      "name": "UpdateAccount",
+      "http": {
+        "method": "POST",
+        "requestUri": "/console/accounts/{accountId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateAccountRequest"
+      },
+      "output": {
+        "shape": "UpdateAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.</p>"
+    },
+    "UpdateAccountSettings": {
+      "name": "UpdateAccountSettings",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/console/accounts/{accountId}/settings",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UpdateAccountSettingsRequest"
+      },
+      "output": {
+        "shape": "UpdateAccountSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates the settings for the specified Amazon Chime account. You can update settings for remote control of shared screens, or for the dial-out option. For more information about these settings, see <a href=\"http://docs.aws.amazon.com/chime/latest/ag/policies.html\">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+    },
+    "UpdateUser": {
+      "name": "UpdateUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/console/accounts/{accountId}/users/{userId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateUserRequest"
+      },
+      "output": {
+        "shape": "UpdateUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates user details for a specified user ID. Currently, only <code>LicenseType</code> updates are supported for this action.</p>"
+    }
+  },
+  "shapes": {
+    "Account": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "String",
+          "documentation": "<p>The AWS account ID.</p>"
+        },
+        "AccountId": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Chime account ID.</p>"
+        },
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Chime account name.</p>"
+        },
+        "AccountType": {
+          "shape": "AccountType",
+          "documentation": "<p>The Amazon Chime account type. For more information about different account types, see <a href=\"http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html\">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The Amazon Chime account creation timestamp, in ISO 8601 format.</p>"
+        },
+        "DefaultLicense": {
+          "shape": "License",
+          "documentation": "<p>The default license for the Amazon Chime account.</p>"
+        },
+        "SupportedLicenses": {
+          "shape": "LicenseList",
+          "documentation": "<p>Supported licenses for the Amazon Chime account.</p>"
+        }
+      },
+      "documentation": "<p>The Amazon Chime account details. An AWS account can have multiple Amazon Chime accounts.</p>"
+    },
+    "AccountList": {
+      "type": "list",
+      "member": {
+        "shape": "Account"
+      }
+    },
+    "AccountName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": ".*\\S.*"
+    },
+    "AccountSettings": {
+      "type": "structure",
+      "members": {
+        "DisableRemoteControl": {
+          "shape": "Boolean",
+          "documentation": "<p>Setting that stops or starts remote control of shared screens during meetings.</p>"
+        },
+        "EnableDialOut": {
+          "shape": "Boolean",
+          "documentation": "<p>Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href=\"http://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html\">Join a Meeting without the Amazon Chime App</a>.</p>"
+        }
+      },
+      "documentation": "<p>Settings related to the Amazon Chime account. This includes settings that start or stop remote control of shared screens, or start or stop the dial-out option in the Amazon Chime web application. For more information about these settings, see <a href=\"http://docs.aws.amazon.com/chime/latest/ag/policies.html\">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+    },
+    "AccountType": {
+      "type": "string",
+      "enum": [
+        "Team",
+        "EnterpriseDirectory",
+        "EnterpriseLWA",
+        "EnterpriseOIDC"
+      ]
+    },
+    "BatchSuspendUserRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "UserIdList"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "UserIdList": {
+          "shape": "UserIdList",
+          "documentation": "<p>The request containing the user IDs to suspend.</p>"
+        }
+      }
+    },
+    "BatchSuspendUserResponse": {
+      "type": "structure",
+      "members": {
+        "UserErrors": {
+          "shape": "UserErrorList",
+          "documentation": "<p>If the <a>BatchSuspendUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.</p>"
+        }
+      }
+    },
+    "BatchUnsuspendUserRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "UserIdList"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "UserIdList": {
+          "shape": "UserIdList",
+          "documentation": "<p>The request containing the user IDs to unsuspend.</p>"
+        }
+      }
+    },
+    "BatchUnsuspendUserResponse": {
+      "type": "structure",
+      "members": {
+        "UserErrors": {
+          "shape": "UserErrorList",
+          "documentation": "<p>If the <a>BatchUnsuspendUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.</p>"
+        }
+      }
+    },
+    "BatchUpdateUserRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "UpdateUserRequestItems"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "UpdateUserRequestItems": {
+          "shape": "UpdateUserRequestItemList",
+          "documentation": "<p>The request containing the user IDs and details to update.</p>"
+        }
+      }
+    },
+    "BatchUpdateUserResponse": {
+      "type": "structure",
+      "members": {
+        "UserErrors": {
+          "shape": "UserErrorList",
+          "documentation": "<p>If the <a>BatchUpdateUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.</p>"
+        }
+      }
+    },
+    "Boolean": {
+      "type": "boolean"
+    },
+    "CreateAccountRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "AccountName",
+          "documentation": "<p>The name of the Amazon Chime account.</p>"
+        }
+      }
+    },
+    "CreateAccountResponse": {
+      "type": "structure",
+      "members": {
+        "Account": {
+          "shape": "Account",
+          "documentation": "<p>The Amazon Chime account details.</p>"
+        }
+      }
+    },
+    "DeleteAccountRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        }
+      }
+    },
+    "DeleteAccountResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "EmailAddress": {
+      "type": "string",
+      "pattern": ".+@.+\\..+",
+      "sensitive": true
+    },
+    "EmailStatus": {
+      "type": "string",
+      "enum": [
+        "NotSent",
+        "Sent",
+        "Failed"
+      ]
+    },
+    "ErrorCode": {
+      "type": "string",
+      "enum": [
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "BadRequest",
+        "Conflict",
+        "ServiceFailure",
+        "ServiceUnavailable",
+        "Unprocessable",
+        "Throttled",
+        "PreconditionFailed"
+      ]
+    },
+    "GetAccountRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        }
+      }
+    },
+    "GetAccountResponse": {
+      "type": "structure",
+      "members": {
+        "Account": {
+          "shape": "Account",
+          "documentation": "<p>The Amazon Chime account details.</p>"
+        }
+      }
+    },
+    "GetAccountSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        }
+      }
+    },
+    "GetAccountSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "AccountSettings": {
+          "shape": "AccountSettings",
+          "documentation": "<p>The Amazon Chime account settings.</p>"
+        }
+      }
+    },
+    "GetUserRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "UserId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "UserId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The user ID.</p>",
+          "location": "uri",
+          "locationName": "userId"
+        }
+      }
+    },
+    "GetUserResponse": {
+      "type": "structure",
+      "members": {
+        "User": {
+          "shape": "User",
+          "documentation": "<p>The user details.</p>"
+        }
+      }
+    },
+    "Invite": {
+      "type": "structure",
+      "members": {
+        "InviteId": {
+          "shape": "String",
+          "documentation": "<p>The invite ID.</p>"
+        },
+        "Status": {
+          "shape": "InviteStatus",
+          "documentation": "<p>The status of the invite.</p>"
+        },
+        "EmailAddress": {
+          "shape": "EmailAddress",
+          "documentation": "<p>The email address to which the invite is sent.</p>"
+        },
+        "EmailStatus": {
+          "shape": "EmailStatus",
+          "documentation": "<p>The status of the invite email.</p>"
+        }
+      },
+      "documentation": "<p>Invitation object returned after emailing users to invite them to join the Amazon Chime <code>Team</code> account.</p>"
+    },
+    "InviteList": {
+      "type": "list",
+      "member": {
+        "shape": "Invite"
+      }
+    },
+    "InviteStatus": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Accepted",
+        "Failed"
+      ]
+    },
+    "InviteUsersRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "UserEmailList"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "UserEmailList": {
+          "shape": "UserEmailList",
+          "documentation": "<p>The user email addresses to which to send the invite.</p>"
+        }
+      }
+    },
+    "InviteUsersResponse": {
+      "type": "structure",
+      "members": {
+        "Invites": {
+          "shape": "InviteList",
+          "documentation": "<p>The invite details.</p>"
+        }
+      }
+    },
+    "Iso8601Timestamp": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "License": {
+      "type": "string",
+      "enum": [
+        "Basic",
+        "Plus",
+        "Pro",
+        "ProTrial"
+      ]
+    },
+    "LicenseList": {
+      "type": "list",
+      "member": {
+        "shape": "License"
+      }
+    },
+    "ListAccountsRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "AccountName",
+          "documentation": "<p>Amazon Chime account name prefix with which to filter results.</p>",
+          "location": "querystring",
+          "locationName": "name"
+        },
+        "UserEmail": {
+          "shape": "EmailAddress",
+          "documentation": "<p>User email address with which to filter results.</p>",
+          "location": "querystring",
+          "locationName": "user-email"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "ProfileServiceMaxResults",
+          "documentation": "<p>The maximum number of results to return in a single call. Defaults to 100.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        }
+      }
+    },
+    "ListAccountsResponse": {
+      "type": "structure",
+      "members": {
+        "Accounts": {
+          "shape": "AccountList",
+          "documentation": "<p>List of Amazon Chime accounts and account details.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "ListUsersRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "MaxResults": {
+          "shape": "ProfileServiceMaxResults",
+          "documentation": "<p>The maximum number of results to return in a single call. Defaults to 100.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListUsersResponse": {
+      "type": "structure",
+      "members": {
+        "Users": {
+          "shape": "UserList",
+          "documentation": "<p>List of users and user details.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "LogoutUserRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "UserId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "UserId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The user ID.</p>",
+          "location": "uri",
+          "locationName": "userId"
+        }
+      }
+    },
+    "LogoutUserResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "NonEmptyString": {
+      "type": "string",
+      "pattern": ".*\\S.*"
+    },
+    "ProfileServiceMaxResults": {
+      "type": "integer",
+      "max": 200,
+      "min": 1
+    },
+    "RegistrationStatus": {
+      "type": "string",
+      "enum": [
+        "Unregistered",
+        "Registered",
+        "Suspended"
+      ]
+    },
+    "ResetPersonalPINRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "UserId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "UserId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The user ID.</p>",
+          "location": "uri",
+          "locationName": "userId"
+        }
+      }
+    },
+    "ResetPersonalPINResponse": {
+      "type": "structure",
+      "members": {
+        "User": {
+          "shape": "User",
+          "documentation": "<p>The user details and new personal meeting PIN.</p>"
+        }
+      }
+    },
+    "SensitiveString": {
+      "type": "string",
+      "sensitive": true
+    },
+    "String": {
+      "type": "string"
+    },
+    "UpdateAccountRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "Name": {
+          "shape": "AccountName",
+          "documentation": "<p>The new name for the specified Amazon Chime account.</p>"
+        }
+      }
+    },
+    "UpdateAccountResponse": {
+      "type": "structure",
+      "members": {
+        "Account": {
+          "shape": "Account",
+          "documentation": "<p>The updated Amazon Chime account details.</p>"
+        }
+      }
+    },
+    "UpdateAccountSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "AccountSettings"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "AccountSettings": {
+          "shape": "AccountSettings",
+          "documentation": "<p>The Amazon Chime account settings to update.</p>"
+        }
+      }
+    },
+    "UpdateAccountSettingsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateUserRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "UserId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "UserId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The user ID.</p>",
+          "location": "uri",
+          "locationName": "userId"
+        },
+        "LicenseType": {
+          "shape": "License",
+          "documentation": "<p>The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.</p>"
+        }
+      }
+    },
+    "UpdateUserRequestItem": {
+      "type": "structure",
+      "required": [
+        "UserId"
+      ],
+      "members": {
+        "UserId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The user ID.</p>"
+        },
+        "LicenseType": {
+          "shape": "License",
+          "documentation": "<p>The user license type.</p>"
+        }
+      },
+      "documentation": "<p>The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.</p>"
+    },
+    "UpdateUserRequestItemList": {
+      "type": "list",
+      "member": {
+        "shape": "UpdateUserRequestItem"
+      },
+      "max": 20
+    },
+    "UpdateUserResponse": {
+      "type": "structure",
+      "members": {
+        "User": {
+          "shape": "User",
+          "documentation": "<p>The updated user details.</p>"
+        }
+      }
+    },
+    "User": {
+      "type": "structure",
+      "required": [
+        "UserId"
+      ],
+      "members": {
+        "UserId": {
+          "shape": "String",
+          "documentation": "<p>The user ID.</p>"
+        },
+        "AccountId": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Chime account ID.</p>"
+        },
+        "PrimaryEmail": {
+          "shape": "EmailAddress",
+          "documentation": "<p>The primary email address of the user.</p>"
+        },
+        "DisplayName": {
+          "shape": "SensitiveString",
+          "documentation": "<p>The display name of the user.</p>"
+        },
+        "LicenseType": {
+          "shape": "License",
+          "documentation": "<p>The license type for the user.</p>"
+        },
+        "UserRegistrationStatus": {
+          "shape": "RegistrationStatus",
+          "documentation": "<p>The user registration status.</p>"
+        },
+        "UserInvitationStatus": {
+          "shape": "InviteStatus",
+          "documentation": "<p>The user invite status.</p>"
+        },
+        "RegisteredOn": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>Date and time when the user is registered, in ISO 8601 format.</p>"
+        },
+        "InvitedOn": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>Date and time when the user is invited to the Amazon Chime account, in ISO 8601 format.</p>"
+        },
+        "PersonalPIN": {
+          "shape": "String",
+          "documentation": "<p>The user's personal meeting PIN.</p>"
+        }
+      },
+      "documentation": "<p>The user on the Amazon Chime account.</p>"
+    },
+    "UserEmailList": {
+      "type": "list",
+      "member": {
+        "shape": "EmailAddress"
+      },
+      "max": 50
+    },
+    "UserError": {
+      "type": "structure",
+      "members": {
+        "UserId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The user ID for which the action failed.</p>"
+        },
+        "ErrorCode": {
+          "shape": "ErrorCode",
+          "documentation": "<p>The error code.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>The error message.</p>"
+        }
+      },
+      "documentation": "<p>The list of errors returned when errors are encountered during the <a>BatchSuspendUser</a>, <a>BatchUnsuspendUser</a>, or <a>BatchUpdateUser</a> actions. This includes user IDs, error codes, and error messages.</p>"
+    },
+    "UserErrorList": {
+      "type": "list",
+      "member": {
+        "shape": "UserError"
+      }
+    },
+    "UserIdList": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyString"
+      },
+      "max": 50
+    },
+    "UserList": {
+      "type": "list",
+      "member": {
+        "shape": "User"
+      }
+    }
+  },
+  "documentation": "<p>Amazon Chime is a communications service that transforms online meetings with a secure, easy-to-use application that you can trust. Amazon Chime works seamlessly across your devices so that you can stay connected. You can use Amazon Chime for online meetings, video conferencing, calls, and chat. You can also share content, both inside and outside your organization. Amazon Chime frees you to work productively from anywhere. </p> <p>The Amazon Chime API is designed for administrators to use to perform key tasks, such as creating and managing Amazon Chime accounts and users. This guide provides detailed information about the Amazon Chime API.</p> <p>Use host name <code>service.chime.aws.amazon.com</code> when working with the Amazon Chime API.</p>"
+}

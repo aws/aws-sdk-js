@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -363,6 +364,70 @@ declare class DMS extends Service {
    * Tests the connection between the replication instance and the endpoint.
    */
   testConnection(callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
+  /**
+   * Waits for the testConnectionSucceeds state by periodically calling the underlying DMS.testConnectionoperation every 5 seconds (at most 60 times). Wait until testing connection succeeds.
+   */
+  waitFor(state: "testConnectionSucceeds", params: DMS.Types.TestConnectionMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
+  /**
+   * Waits for the testConnectionSucceeds state by periodically calling the underlying DMS.testConnectionoperation every 5 seconds (at most 60 times). Wait until testing connection succeeds.
+   */
+  waitFor(state: "testConnectionSucceeds", callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
+  /**
+   * Waits for the endpointDeleted state by periodically calling the underlying DMS.describeEndpointsoperation every 5 seconds (at most 60 times). Wait until testing endpoint is deleted.
+   */
+  waitFor(state: "endpointDeleted", params: DMS.Types.DescribeEndpointsMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.DescribeEndpointsResponse) => void): Request<DMS.Types.DescribeEndpointsResponse, AWSError>;
+  /**
+   * Waits for the endpointDeleted state by periodically calling the underlying DMS.describeEndpointsoperation every 5 seconds (at most 60 times). Wait until testing endpoint is deleted.
+   */
+  waitFor(state: "endpointDeleted", callback?: (err: AWSError, data: DMS.Types.DescribeEndpointsResponse) => void): Request<DMS.Types.DescribeEndpointsResponse, AWSError>;
+  /**
+   * Waits for the replicationInstanceAvailable state by periodically calling the underlying DMS.describeReplicationInstancesoperation every 60 seconds (at most 60 times). Wait until DMS replication instance is available.
+   */
+  waitFor(state: "replicationInstanceAvailable", params: DMS.Types.DescribeReplicationInstancesMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstancesResponse) => void): Request<DMS.Types.DescribeReplicationInstancesResponse, AWSError>;
+  /**
+   * Waits for the replicationInstanceAvailable state by periodically calling the underlying DMS.describeReplicationInstancesoperation every 60 seconds (at most 60 times). Wait until DMS replication instance is available.
+   */
+  waitFor(state: "replicationInstanceAvailable", callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstancesResponse) => void): Request<DMS.Types.DescribeReplicationInstancesResponse, AWSError>;
+  /**
+   * Waits for the replicationInstanceDeleted state by periodically calling the underlying DMS.describeReplicationInstancesoperation every 15 seconds (at most 60 times). Wait until DMS replication instance is deleted.
+   */
+  waitFor(state: "replicationInstanceDeleted", params: DMS.Types.DescribeReplicationInstancesMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstancesResponse) => void): Request<DMS.Types.DescribeReplicationInstancesResponse, AWSError>;
+  /**
+   * Waits for the replicationInstanceDeleted state by periodically calling the underlying DMS.describeReplicationInstancesoperation every 15 seconds (at most 60 times). Wait until DMS replication instance is deleted.
+   */
+  waitFor(state: "replicationInstanceDeleted", callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstancesResponse) => void): Request<DMS.Types.DescribeReplicationInstancesResponse, AWSError>;
+  /**
+   * Waits for the replicationTaskReady state by periodically calling the underlying DMS.describeReplicationTasksoperation every 15 seconds (at most 60 times). Wait until DMS replication task is ready.
+   */
+  waitFor(state: "replicationTaskReady", params: DMS.Types.DescribeReplicationTasksMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
+  /**
+   * Waits for the replicationTaskReady state by periodically calling the underlying DMS.describeReplicationTasksoperation every 15 seconds (at most 60 times). Wait until DMS replication task is ready.
+   */
+  waitFor(state: "replicationTaskReady", callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
+  /**
+   * Waits for the replicationTaskStopped state by periodically calling the underlying DMS.describeReplicationTasksoperation every 15 seconds (at most 60 times). Wait until DMS replication task is stopped.
+   */
+  waitFor(state: "replicationTaskStopped", params: DMS.Types.DescribeReplicationTasksMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
+  /**
+   * Waits for the replicationTaskStopped state by periodically calling the underlying DMS.describeReplicationTasksoperation every 15 seconds (at most 60 times). Wait until DMS replication task is stopped.
+   */
+  waitFor(state: "replicationTaskStopped", callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
+  /**
+   * Waits for the replicationTaskRunning state by periodically calling the underlying DMS.describeReplicationTasksoperation every 15 seconds (at most 60 times). Wait until DMS replication task is running.
+   */
+  waitFor(state: "replicationTaskRunning", params: DMS.Types.DescribeReplicationTasksMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
+  /**
+   * Waits for the replicationTaskRunning state by periodically calling the underlying DMS.describeReplicationTasksoperation every 15 seconds (at most 60 times). Wait until DMS replication task is running.
+   */
+  waitFor(state: "replicationTaskRunning", callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
+  /**
+   * Waits for the replicationTaskDeleted state by periodically calling the underlying DMS.describeReplicationTasksoperation every 15 seconds (at most 60 times). Wait until DMS replication task is deleted.
+   */
+  waitFor(state: "replicationTaskDeleted", params: DMS.Types.DescribeReplicationTasksMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
+  /**
+   * Waits for the replicationTaskDeleted state by periodically calling the underlying DMS.describeReplicationTasksoperation every 15 seconds (at most 60 times). Wait until DMS replication task is deleted.
+   */
+  waitFor(state: "replicationTaskDeleted", callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
 }
 declare namespace DMS {
   export interface AccountQuota {

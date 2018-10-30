@@ -146,6 +146,7 @@ export abstract class ConfigurationServicePlaceholders {
   macie?: AWS.Macie.Types.ClientConfiguration;
   dlm?: AWS.DLM.Types.ClientConfiguration;
   signer?: AWS.Signer.Types.ClientConfiguration;
+  chime?: AWS.Chime.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -294,4 +295,5 @@ export interface ConfigurationServiceApiVersions {
   macie?: AWS.Macie.Types.apiVersion;
   dlm?: AWS.DLM.Types.apiVersion;
   signer?: AWS.Signer.Types.apiVersion;
+  chime?: AWS.Chime.Types.apiVersion;
 }

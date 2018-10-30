@@ -596,5 +596,8 @@
   },
   "signer": {
     "name": "Signer"
+  },
+  "chime": {
+    "name": "Chime"
   }
 }
