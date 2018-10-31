@@ -277,8 +277,9 @@ export abstract class ConfigurationOptions {
      */
     dynamoDbCrc32?: boolean;
     /**
-     * whether to request endpoint for operations that allow 
-     * for fetching specific endpoint for given input(endpoint discovery).
+     * Whether to enable endpoint discovery for operations that allow optionally using an endpoint returned by 
+     * the service.
+     * Defaults to 'false'
      */
     endpointDiscoveryEnabled?: Boolean;
 }

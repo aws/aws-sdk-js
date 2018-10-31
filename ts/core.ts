@@ -37,6 +37,4 @@ if (core.CognitoIdentityCredentials) {
     
 } else if (core.IniLoader) {
   
-} else if (core.EndpointCache) {
-  
 }

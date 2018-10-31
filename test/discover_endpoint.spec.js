@@ -135,7 +135,6 @@ describe('endpoint discovery', function() {
       var cacheKey = getCacheKey(request);
       expect(cacheKey).to.eql({
         region: 'fake-region-1',
-        operation: 'OptionalEDOperation',
         serviceId: 'MockService',
         accessKeyId: 'akid'
       })
@@ -232,14 +231,12 @@ describe('endpoint discovery', function() {
       expect(spy.calls.length).to.eql(2);
       expect(spy.calls[0].arguments[0]).to.eql({
         accessKeyId: 'akid',
-        operation: 'OptionalEDOperation',
         region: 'fake-region-1',
         serviceId: 'MockService'
       });
-      expect(spy.calls[0].arguments[1]).to.eql([{Address: '', CachePeriodInMinutes: 60}]);
+      expect(spy.calls[0].arguments[1]).to.eql([{Address: '', CachePeriodInMinutes: 1}]);
       expect(spy.calls[1].arguments[0]).to.eql({
         accessKeyId: 'akid',
-        operation: 'OptionalEDOperation',
         region: 'fake-region-1',
         serviceId: 'MockService'
       });
@@ -284,7 +281,6 @@ describe('endpoint discovery', function() {
       expect(spy.calls.length).to.eql(2);
       expect(spy.calls[1].arguments[0]).to.eql({
         accessKeyId: 'akid',
-        operation: 'OptionalEDOperation',
         region: 'mock-region',
         serviceId: 'MockService'
       });
@@ -303,7 +299,6 @@ describe('endpoint discovery', function() {
       helpers.mockHttpResponse(400, {}, '{"__type":"InvalidEndpointException", "Message":"Error Message" }');
       var cacheKey = {
         accessKeyId: 'akid',
-        operation: 'OptionalEDOperation',
         region: 'fake-region-1',
         serviceId: 'MockService'
       }
@@ -429,7 +424,7 @@ describe('endpoint discovery', function() {
         serviceId: 'MockService',
         Query: 'query'
       }
-      AWS.endpointCache.put(cacheKey, [{Address: 'https://cell1.fakeservice.amazonaws.com/fakeregion'}]);
+      AWS.endpointCache.put(cacheKey, [{Address: 'https://cell1.fakeservice.amazonaws.com/fakeregion', CachePeriodInMinutes: 1}]);
       var cacheRemoveSpy = helpers.spyOn(AWS.endpointCache, 'remove').andCallThrough();
       var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
       request.send();

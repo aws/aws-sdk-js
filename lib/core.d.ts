@@ -22,4 +22,3 @@ export {Response} from './response';
 export {Service} from './service';
 export {AWSError} from './error';
 export {IniLoader} from './shared-ini/ini-loader';
-export {EndpointCache} from '../vendor/endpoint-cache';
