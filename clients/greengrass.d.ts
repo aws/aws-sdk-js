@@ -44,11 +44,11 @@ declare class Greengrass extends Service {
    */
   createCoreDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a deployment.
+   * Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
    */
   createDeployment(params: Greengrass.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateDeploymentResponse) => void): Request<Greengrass.Types.CreateDeploymentResponse, AWSError>;
   /**
-   * Creates a deployment.
+   * Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
    */
   createDeployment(callback?: (err: AWSError, data: Greengrass.Types.CreateDeploymentResponse) => void): Request<Greengrass.Types.CreateDeploymentResponse, AWSError>;
   /**
@@ -244,6 +244,14 @@ declare class Greengrass extends Service {
    */
   getAssociatedRole(callback?: (err: AWSError, data: Greengrass.Types.GetAssociatedRoleResponse) => void): Request<Greengrass.Types.GetAssociatedRoleResponse, AWSError>;
   /**
+   * Returns the status of a bulk deployment.
+   */
+  getBulkDeploymentStatus(params: Greengrass.Types.GetBulkDeploymentStatusRequest, callback?: (err: AWSError, data: Greengrass.Types.GetBulkDeploymentStatusResponse) => void): Request<Greengrass.Types.GetBulkDeploymentStatusResponse, AWSError>;
+  /**
+   * Returns the status of a bulk deployment.
+   */
+  getBulkDeploymentStatus(callback?: (err: AWSError, data: Greengrass.Types.GetBulkDeploymentStatusResponse) => void): Request<Greengrass.Types.GetBulkDeploymentStatusResponse, AWSError>;
+  /**
    * Retrieves the connectivity information for a core.
    */
   getConnectivityInfo(params: Greengrass.Types.GetConnectivityInfoRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectivityInfoResponse) => void): Request<Greengrass.Types.GetConnectivityInfoResponse, AWSError>;
@@ -396,6 +404,22 @@ declare class Greengrass extends Service {
    */
   getSubscriptionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.GetSubscriptionDefinitionVersionResponse, AWSError>;
   /**
+   * Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
+   */
+  listBulkDeploymentDetailedReports(params: Greengrass.Types.ListBulkDeploymentDetailedReportsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentDetailedReportsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentDetailedReportsResponse, AWSError>;
+  /**
+   * Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
+   */
+  listBulkDeploymentDetailedReports(callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentDetailedReportsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentDetailedReportsResponse, AWSError>;
+  /**
+   * Returns a list of bulk deployments.
+   */
+  listBulkDeployments(params: Greengrass.Types.ListBulkDeploymentsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentsResponse, AWSError>;
+  /**
+   * Returns a list of bulk deployments.
+   */
+  listBulkDeployments(callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentsResponse, AWSError>;
+  /**
    * Lists the versions of a core definition.
    */
   listCoreDefinitionVersions(params: Greengrass.Types.ListCoreDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListCoreDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListCoreDefinitionVersionsResponse, AWSError>;
@@ -532,6 +556,22 @@ declare class Greengrass extends Service {
    */
   resetDeployments(callback?: (err: AWSError, data: Greengrass.Types.ResetDeploymentsResponse) => void): Request<Greengrass.Types.ResetDeploymentsResponse, AWSError>;
   /**
+   * Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
+   */
+  startBulkDeployment(params: Greengrass.Types.StartBulkDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.StartBulkDeploymentResponse) => void): Request<Greengrass.Types.StartBulkDeploymentResponse, AWSError>;
+  /**
+   * Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
+   */
+  startBulkDeployment(callback?: (err: AWSError, data: Greengrass.Types.StartBulkDeploymentResponse) => void): Request<Greengrass.Types.StartBulkDeploymentResponse, AWSError>;
+  /**
+   * Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
+   */
+  stopBulkDeployment(params: Greengrass.Types.StopBulkDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.StopBulkDeploymentResponse) => void): Request<Greengrass.Types.StopBulkDeploymentResponse, AWSError>;
+  /**
+   * Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
+   */
+  stopBulkDeployment(callback?: (err: AWSError, data: Greengrass.Types.StopBulkDeploymentResponse) => void): Request<Greengrass.Types.StopBulkDeploymentResponse, AWSError>;
+  /**
    * Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
    */
   updateConnectivityInfo(params: Greengrass.Types.UpdateConnectivityInfoRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectivityInfoResponse) => void): Request<Greengrass.Types.UpdateConnectivityInfoResponse, AWSError>;
@@ -633,6 +673,71 @@ declare namespace Greengrass {
      */
     AssociatedAt?: __string;
   }
+  export interface BulkDeployment {
+    /**
+     * The ARN of the bulk deployment.
+     */
+    BulkDeploymentArn?: __string;
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId?: __string;
+    /**
+     * The time, in ISO format, when the deployment was created.
+     */
+    CreatedAt?: __string;
+  }
+  export interface BulkDeploymentMetrics {
+    /**
+     * The total number of records that returned a non-retryable error. For example, this can occur if a group record from the input file uses an invalid format or specifies a nonexistent group version, or if the execution role doesn't grant permission to deploy a group or group version.
+     */
+    InvalidInputRecords?: __integer;
+    /**
+     * The total number of group records from the input file that have been processed so far, or attempted.
+     */
+    RecordsProcessed?: __integer;
+    /**
+     * The total number of deployment attempts that returned a retryable error. For example, a retry is triggered if the attempt to deploy a group returns a throttling error. ''StartBulkDeployment'' retries a group deployment up to five times.
+     */
+    RetryAttempts?: __integer;
+  }
+  export interface BulkDeploymentResult {
+    /**
+     * The time, in ISO format, when the deployment was created.
+     */
+    CreatedAt?: __string;
+    /**
+     * The ARN of the group deployment.
+     */
+    DeploymentArn?: __string;
+    /**
+     * The ID of the group deployment.
+     */
+    DeploymentId?: __string;
+    /**
+     * The current status of the group deployment: ''Pending'', ''InProgress'', ''Success'', or ''Failure''.
+     */
+    DeploymentStatus?: __string;
+    /**
+     * The type of the deployment.
+     */
+    DeploymentType?: DeploymentType;
+    /**
+     * Details about the error.
+     */
+    ErrorDetails?: ErrorDetails;
+    /**
+     * The error message for a failed deployment
+     */
+    ErrorMessage?: __string;
+    /**
+     * The ARN of the Greengrass group.
+     */
+    GroupArn?: __string;
+  }
+  export type BulkDeploymentResults = BulkDeploymentResult[];
+  export type BulkDeploymentStatus = "Initializing"|"Running"|"Completed"|"Stopping"|"Stopped"|"Failed"|string;
+  export type BulkDeployments = BulkDeployment[];
   export interface ConnectivityInfo {
     /**
      * The endpoint for the Greengrass core. Can be an IP address or DNS.
@@ -657,7 +762,7 @@ declare namespace Greengrass {
      */
     CertificateArn?: __string;
     /**
-     * The ID of the core.
+     * A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''.
      */
     Id?: __string;
     /**
@@ -1413,7 +1518,7 @@ declare namespace Greengrass {
      */
     CertificateArn?: __string;
     /**
-     * The ID of the device.
+     * A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''.
      */
     Id?: __string;
     /**
@@ -1473,7 +1578,7 @@ declare namespace Greengrass {
      */
     FunctionConfiguration?: FunctionConfiguration;
     /**
-     * The ID of the Lambda function.
+     * A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''.
      */
     Id?: __string;
   }
@@ -1542,6 +1647,34 @@ declare namespace Greengrass {
      * The ARN of the role that is associated with the group.
      */
     RoleArn?: __string;
+  }
+  export interface GetBulkDeploymentStatusRequest {
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId: __string;
+  }
+  export interface GetBulkDeploymentStatusResponse {
+    /**
+     * Relevant metrics on input records processed during bulk deployment.
+     */
+    BulkDeploymentMetrics?: BulkDeploymentMetrics;
+    /**
+     * The status of the bulk deployment.
+     */
+    BulkDeploymentStatus?: BulkDeploymentStatus;
+    /**
+     * The time, in ISO format, when the deployment was created.
+     */
+    CreatedAt?: __string;
+    /**
+     * Error details
+     */
+    ErrorDetails?: ErrorDetails;
+    /**
+     * Error message
+     */
+    ErrorMessage?: __string;
   }
   export interface GetConnectivityInfoRequest {
     /**
@@ -1623,6 +1756,10 @@ declare namespace Greengrass {
      */
     Id?: __string;
     /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
      * The version of the core definition version.
      */
     Version?: __string;
@@ -1639,7 +1776,7 @@ declare namespace Greengrass {
   }
   export interface GetDeploymentStatusResponse {
     /**
-     * The status of the deployment.
+     * The status of the deployment: ''Pending'', ''InProgress'', ''Success'', or ''Failure''.
      */
     DeploymentStatus?: __string;
     /**
@@ -1704,6 +1841,10 @@ declare namespace Greengrass {
      * The ID of the device definition version.
      */
     DeviceDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface GetDeviceDefinitionVersionResponse {
     /**
@@ -1722,6 +1863,10 @@ declare namespace Greengrass {
      * The ID of the device definition version.
      */
     Id?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
     /**
      * The version of the device definition version.
      */
@@ -1772,6 +1917,10 @@ declare namespace Greengrass {
      * The ID of the function definition version.
      */
     FunctionDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface GetFunctionDefinitionVersionResponse {
     /**
@@ -1790,6 +1939,10 @@ declare namespace Greengrass {
      * The ID of the function definition version.
      */
     Id?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
     /**
      * The version of the function definition version.
      */
@@ -1952,6 +2105,10 @@ declare namespace Greengrass {
      * The ID of the logger definition version.
      */
     LoggerDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface GetLoggerDefinitionVersionResponse {
     /**
@@ -2093,6 +2250,10 @@ declare namespace Greengrass {
   }
   export interface GetSubscriptionDefinitionVersionRequest {
     /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
      * The ID of the subscription definition.
      */
     SubscriptionDefinitionId: __string;
@@ -2118,6 +2279,10 @@ declare namespace Greengrass {
      * The ID of the subscription definition version.
      */
     Id?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
     /**
      * The version of the subscription definition version.
      */
@@ -2198,6 +2363,50 @@ declare namespace Greengrass {
      * The ARN of the subscription definition version for this group.
      */
     SubscriptionDefinitionVersionArn?: __string;
+  }
+  export interface ListBulkDeploymentDetailedReportsRequest {
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId: __string;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListBulkDeploymentDetailedReportsResponse {
+    /**
+     * A list of the individual group deployments in the bulk deployment operation.
+     */
+    Deployments?: BulkDeploymentResults;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListBulkDeploymentsRequest {
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListBulkDeploymentsResponse {
+    /**
+     * A list of bulk deployments.
+     */
+    BulkDeployments?: BulkDeployments;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface ListCoreDefinitionVersionsRequest {
     /**
@@ -2563,7 +2772,7 @@ declare namespace Greengrass {
      */
     GroupOwnerSetting?: GroupOwnerSetting;
     /**
-     * The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
+     * The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/proc'' or ''/sys''.
      */
     SourcePath?: __string;
   }
@@ -2573,7 +2782,7 @@ declare namespace Greengrass {
      */
     Component?: LoggerComponent;
     /**
-     * The id of the logger.
+     * A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''.
      */
     Id?: __string;
     /**
@@ -2693,9 +2902,41 @@ declare namespace Greengrass {
     SageMakerJobArn?: __string;
   }
   export type SoftwareToUpdate = "core"|"ota_agent"|string;
+  export interface StartBulkDeploymentRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''greengrass:CreateDeployment'' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.
+     */
+    ExecutionRoleArn?: __string;
+    /**
+     * The URI of the input file contained in the S3 bucket. The execution role must have ''getObject'' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100MB. Currently, Greengrass; supports only ''NewDeployment'' deployment types.
+     */
+    InputFileUri?: __string;
+  }
+  export interface StartBulkDeploymentResponse {
+    /**
+     * The ARN of the bulk deployment.
+     */
+    BulkDeploymentArn?: __string;
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId?: __string;
+  }
+  export interface StopBulkDeploymentRequest {
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId: __string;
+  }
+  export interface StopBulkDeploymentResponse {
+  }
   export interface Subscription {
     /**
-     * The id of the subscription.
+     * A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''.
      */
     Id?: __string;
     /**

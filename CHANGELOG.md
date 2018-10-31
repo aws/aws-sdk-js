@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.345.0-->
+<!--LATEST=2.346.0-->
 <!--ENTRYINSERT-->
+
+## 2.346.0
+* feature: ConfigService: With this release, AWS Config updated the ResourceType values. The updated list includes AWS Systems Manager AssociationCompliance and PatchCompliance, AWS Shield regional Protection, AWS Config ResourceCompliance, and AWS CodePipeline Pipeline.
+* feature: Greengrass: Greengrass APIs now support bulk deployment operations, and APIs that list definition versions now support pagination.
+* feature: MediaStoreData: The object size limit is increased from 10MB to 25MB and the content type is more permissive.
 
 ## 2.345.0
 * feature: Chime: This is the initial release for the Amazon Chime AWS SDK. In this release, Amazon Chime adds support for administrative actions on users and accounts. API Documentation is also updated on https://docs.aws.amazon.com/chime/index.html

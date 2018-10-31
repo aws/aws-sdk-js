@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "With this release, AWS Config updated the ResourceType values. The updated list includes AWS Systems Manager AssociationCompliance and PatchCompliance, AWS Shield regional Protection, AWS Config ResourceCompliance, and AWS CodePipeline Pipeline."
+    },
+    {
+        "type": "feature",
+        "category": "Greengrass",
+        "description": "Greengrass APIs now support bulk deployment operations, and APIs that list definition versions now support pagination."
+    },
+    {
+        "type": "feature",
+        "category": "MediaStoreData",
+        "description": "The object size limit is increased from 10MB to 25MB and the content type is more permissive."
+    }
+]
