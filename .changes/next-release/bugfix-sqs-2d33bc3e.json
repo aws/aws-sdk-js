@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "sqs",
+  "description": "fixed a missing word in the documentation"
+}
