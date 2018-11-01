@@ -113,12 +113,54 @@
     });
   });
 
+  describe('refreshable credentials', function() {
+    AWS.util.arrayEach(
+      [
+        'CognitoIdentityCredentials',
+        'ChainableTemporaryCredentials',
+        'TemporaryCredentials',
+        'EC2MetadataCredentials',
+        'ECSCredentials',
+        'RemoteCredentials',
+        'SAMLCredentials',
+        'SharedIniFileCredentials',
+        'WebIdentityCredentials'
+      ],
+      function(credClass) {
+        if (credClass in AWS) {
+          it(credClass + ' coalesces concurrent calls',
+            function (done) {
+              var callCount = 10;
+              var callbackCount = 0;
+              var creds = new AWS[credClass]({});
+              var loadSpy = helpers.spyOn(creds, 'load').andCallFake(
+                function(callback) {
+                  setImmediate(function () { callback(null); });
+                }
+              );
+              expect(creds.refreshCallbacks.length).to.equal(0);
+              for (var i = 0; i < callCount; i++) {
+                creds.refresh(function () {
+                  expect(creds.refreshCallbacks.length).to.equal(0);
+                  if (++callbackCount === callCount) {
+                    expect(loadSpy.calls.length).to.equal(1);
+                    done();
+                  }
+                });
+              }
+            }
+          );
+        }
+      }
+    );
+  });
+
   if (AWS.util.isNode()) {
     describe('AWS.EnvironmentCredentials', function() {
       var env;
       afterEach(function() {
         process.env = env;
-      })
+      });
       beforeEach(function(done) {
         env = process.env;
         process.env = {};
@@ -200,7 +242,7 @@
       var env;
       afterEach(function() {
         process.env = env;
-      })
+      });
       beforeEach(function() {
         env = process.env;
         process.env = {};
@@ -233,10 +275,14 @@
           return expect(AWS.util.readFileSync.calls[0].arguments[0]).to
             .match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/);
         });
-        it('throws an error if HOME/HOMEPATH/USERPROFILE are not set', function() {
-          return expect(function() {
-            return new AWS.SharedIniFileCredentials().refresh();
-          }).to["throw"]('Cannot load credentials, HOME path not set');
+        it('passes an error to callback if HOME/HOMEPATH/USERPROFILE are not set', function(done) {
+          new AWS.SharedIniFileCredentials({
+            callback: function (err) {
+              expect(err).to.be.instanceof(Error);
+              expect(err.message).to.equal('Cannot load credentials, HOME path not set');
+              done();
+            }
+          });
         });
         it('uses HOMEDRIVE\\HOMEPATH if HOME and USERPROFILE are not set', function() {
           var creds;
@@ -394,30 +440,31 @@
         });
       });
       describe('refresh', function() {
+        var origEnv = process.env;
         beforeEach(function() {
-          return process.env.HOME = '/home/user';
+          process.env = {};
         });
         afterEach(function() {
+          process.env = origEnv;
           iniLoader.clearCachedFiles();
         });
         it('should refresh from disk', function() {
           var creds, mock;
+          process.env.HOME = '/home/user';
           mock = '[default]\naws_access_key_id = RELOADED\naws_secret_access_key = RELOADED\naws_session_token = RELOADED';
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
           creds = new AWS.SharedIniFileCredentials();
           creds.get();
           return validateCredentials(creds, 'RELOADED', 'RELOADED', 'RELOADED');
         });
-        return it('fails if credentials are not in the file', function() {
-          var mock;
-          mock = '';
+        return it('fails if credentials are not in the file', function(done) {
+          var mock = '';
+          process.env.HOME = '/home/user';
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
           new AWS.SharedIniFileCredentials().refresh(function(err) {
-            return expect(err.message).to.match(/^Profile default not found/);
+            expect(err.message).to.match(/^Profile default not found/);
+            done();
           });
-          return expect(function() {
-            return new AWS.SharedIniFileCredentials().refresh();
-          }).to["throw"](/^Profile default not found/);
         });
       });
     });
@@ -425,7 +472,7 @@
       var env;
       beforeEach(function() {
         env = process.env;
-        process.env = {}
+        process.env = {};
         var os;
         os = require('os');
         helpers.spyOn(os, 'homedir').andReturn('/home/user');
@@ -434,33 +481,36 @@
         iniLoader.clearCachedFiles();
         process.env = env;
       });
-      it('will fail if assume role is disabled', function() {
+      it('will fail if assume role is disabled', function(done) {
         var creds, mock;
         mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         creds = new AWS.SharedIniFileCredentials({
           disableAssumeRole: true
         });
-        return creds.refresh(function(err) {
-          return expect(err.message).to.match(/^Role assumption profiles are disabled. Failed to load profile default/);
+        creds.refresh(function(err) {
+          expect(err.message).to.match(/^Role assumption profiles are disabled. Failed to load profile default/);
+          done();
         });
       });
-      it('will fail if no source profile is specified', function() {
+      it('will fail if no source profile is specified', function(done) {
         var creds, mock;
         mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         creds = new AWS.SharedIniFileCredentials();
-        return creds.refresh(function(err) {
-          return expect(err.message).to.equal('source_profile is not set using profile default');
+        creds.refresh(function(err) {
+          expect(err.message).to.equal('source_profile is not set using profile default');
+          done();
         });
       });
-      it('will fail if source profile config is not defined', function() {
+      it('will fail if source profile config is not defined', function(done) {
         var creds, mock;
         mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn\nsource_profile = fake';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         creds = new AWS.SharedIniFileCredentials();
-        return creds.refresh(function(err) {
-          return expect(err.message).to.match(/source_profile fake using profile default does not exist/);
+        creds.refresh(function(err) {
+          expect(err.message).to.match(/source_profile fake using profile default does not exist/);
+          done();
         });
       });
       it('will fail if source profile config lacks credentials', function(done) {
@@ -480,34 +530,49 @@
         helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
         creds = new AWS.SharedIniFileCredentials();
         expect(creds.roleArn).to.equal('arn');
-        return creds.refresh(function(err) {
+        creds.refresh(function(err) {
           expect(creds.accessKeyId).to.equal('KEY');
           expect(creds.secretAccessKey).to.equal('SECRET');
           expect(creds.sessionToken).to.equal('TOKEN');
           expect(creds.expireTime).to.eql(new Date(0));
-          return done();
+          done();
         });
       });
       it('will assume a role from chained source_profile profiles', function(done) {
         var creds, mock;
         mock = '[default]\nrole_arn = arn\nsource_profile = foo_first\n[foo_first]\nrole_arn = arn_foo_first\nsource_profile = foo_base\n[foo_base]\naws_access_key_id = baseKey\naws_secret_access_key = baseSecret\n';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
-        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
         var STSPrototype = (new STS()).constructor.prototype;
-        creds = new AWS.SharedIniFileCredentials();
-        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallThrough();
-        expect(creds.roleArn).to.equal('arn');
-        return creds.refresh(function(err) {
-          expect(assumeRoleSpy.calls.length).to.equal(2);
-          firstAssumeRoleArg = assumeRoleSpy.calls[0]["arguments"][0];
-          expect(firstAssumeRoleArg.RoleArn).to.equal('arn_foo_first')
-          secondAssumeRoleArg = assumeRoleSpy.calls[1]["arguments"][0];
-          expect(secondAssumeRoleArg.RoleArn).to.equal('arn')
-          expect(creds.accessKeyId).to.equal('KEY');
-          expect(creds.secretAccessKey).to.equal('SECRET');
-          expect(creds.sessionToken).to.equal('TOKEN');
-          expect(creds.expireTime).to.eql(new Date(0));
-          return done();
+        var expiration = new Date(Date.now() + 1000);
+        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(
+          function(roleParams, callback) {
+            AWS.util.defer(function () {
+              callback(null, {
+                Credentials: {
+                  AccessKeyId: 'KEY',
+                  SecretAccessKey: 'SECRET',
+                  SessionToken: 'TOKEN',
+                  Expiration: expiration
+                }
+              });
+            });
+          }
+        );
+        creds = new AWS.SharedIniFileCredentials({
+          callback: function (err) {
+            expect(err).to.be.null;
+            expect(assumeRoleSpy.calls.length).to.equal(2);
+            expect(creds.roleArn).to.equal('arn');
+            firstAssumeRoleArg = assumeRoleSpy.calls[0]["arguments"][0];
+            expect(firstAssumeRoleArg.RoleArn).to.equal('arn_foo_first');
+            secondAssumeRoleArg = assumeRoleSpy.calls[1]["arguments"][0];
+            expect(secondAssumeRoleArg.RoleArn).to.equal('arn');
+            expect(creds.accessKeyId).to.equal('KEY');
+            expect(creds.secretAccessKey).to.equal('SECRET');
+            expect(creds.sessionToken).to.equal('TOKEN');
+            expect(creds.expireTime).to.eql(expiration);
+            return done();
+          }
         });
       });
       it('will assume a role from the credentials file whose source profile is defined in the config file', function(done) {
@@ -576,7 +641,7 @@
         return creds.refresh(function(err) {
           expect(assumeRoleSpy.calls.length).to.equal(1);
           firstAssumeRoleArg = assumeRoleSpy.calls[0]["arguments"][0];
-          expect(firstAssumeRoleArg.RoleArn).to.equal('arn')
+          expect(firstAssumeRoleArg.RoleArn).to.equal('arn');
           return done();
         });
       });
@@ -584,18 +649,34 @@
         var creds, mock;
         mock = '[default]\nrole_arn = arn\naws_access_key_id=base_key\naws_secret_access_key=base_secret\nsource_profile = foo_first\n[foo_first]\nrole_arn = arn_foo_first\nsource_profile = foo_base\n[foo_base]\naws_access_key_id = baseKey\naws_secret_access_key = baseSecret\n';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
-        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+
         var STSPrototype = (new STS()).constructor.prototype;
-        creds = new AWS.SharedIniFileCredentials();
-        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallThrough();
-        expect(creds.roleArn).to.equal('arn');
-        return creds.refresh(function(err) {
-          expect(assumeRoleSpy.calls.length).to.equal(2);
-          firstAssumeRoleArg = assumeRoleSpy.calls[0]["arguments"][0];
-          expect(firstAssumeRoleArg.RoleArn).to.equal('arn_foo_first')
-          secondAssumeRoleArg = assumeRoleSpy.calls[1]["arguments"][0];
-          expect(secondAssumeRoleArg.RoleArn).to.equal('arn')
-          return done();
+        var expiration = new Date(Date.now() + 1000);
+        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(
+          function(roleParams, callback) {
+            setImmediate(function () {
+              callback(null, {
+                Credentials: {
+                  AccessKeyId: 'KEY',
+                  SecretAccessKey: 'SECRET',
+                  SessionToken: 'TOKEN',
+                  Expiration: expiration
+                }
+              });
+            });
+          }
+        );
+        creds = new AWS.SharedIniFileCredentials({
+          callback: function (err) {
+            expect(err).to.be.null;
+            expect(creds.roleArn).to.equal('arn');
+            expect(assumeRoleSpy.calls.length).to.equal(2);
+            firstAssumeRoleArg = assumeRoleSpy.calls[0]["arguments"][0];
+            expect(firstAssumeRoleArg.RoleArn).to.equal('arn_foo_first');
+            secondAssumeRoleArg = assumeRoleSpy.calls[1]["arguments"][0];
+            expect(secondAssumeRoleArg.RoleArn).to.equal('arn');
+            done();
+          }
         });
       });
       it('will use httpOptions for assume role when provided', function(done) {
@@ -682,7 +763,7 @@
             done();
           });
         });
-      })
+      });
     });
     describe('AWS.EC2MetadataCredentials', function() {
       var creds, mockMetadataService;
@@ -760,7 +841,7 @@
       });
     });
     describe('AWS.RemoteCredentials', function() {
-      var creds, mockEndpoint, responseData, responseDataNew;
+      var origEnv, creds, mockEndpoint, responseData, responseDataNew;
       creds = null;
       responseData = {
         AccessKeyId: 'KEY',
@@ -776,21 +857,15 @@
           expiration: (new Date(0)).toISOString()
         }
       };
-      var env;
       beforeEach(function() {
-        env = process.env;
-      });
-      afterEach(function() {
-        process.env = env;
-      });
-      beforeEach(function() {
+        origEnv = process.env;
         creds = new AWS.RemoteCredentials({
           host: 'host'
         });
-        return process.env = {};
+        process.env = {};
       });
       afterEach(function() {
-        return process.env = {};
+        process.env = origEnv;
       });
       mockEndpoint = function(expireTime) {
         return helpers.spyOn(creds, 'request').andCallFake(function(path, cb) {
@@ -874,19 +949,16 @@
         );
       });
 
-      describe('getRemoteFullUri', function() {
-        it('returns undefined when process is not available', function() {
-          var process, process_copy;
-          process_copy = process;
-          process = void 0;
-          expect(creds.getECSFullUri()).to.equal(void 0);
-          process = process_copy;
+      describe('getECSFullUri', function() {
+        it('throws when process.env is not available', function() {
+          process.env = void 0;
+          expect(creds.getECSFullUri).to.throw('No process info available');
         });
 
         it(
-          'returns undefined when neither the relative URI environment variable nor the full URI environment variable is set',
+          'throws when neither the relative URI environment variable nor the full URI environment variable is set',
           function() {
-            expect(creds.getECSFullUri()).to.equal(void 0);
+            expect(creds.getECSFullUri).to.throw(/Variable \w+ or \w+ must be set to use AWS.RemoteCredentials/);
           }
         );
 
@@ -1034,15 +1106,15 @@
           expect(creds.needsRefresh()).to.equal(false);
         });
 
-        it('passes an error to the callback when environment variable not set', function() {
+        it('passes an error to the callback when environment variable not set', function(done) {
           var callbackErr, spy;
           callbackErr = null;
           spy = mockEndpoint(new Date(AWS.util.date.getDate().getTime() + 100000));
           creds.refresh(function(err) {
-            return callbackErr = err;
+            expect(spy.calls.length).to.equal(0);
+            expect(err).to.be.instanceof(Error);
+            done();
           });
-          expect(spy.calls.length).to.equal(0);
-          expect(callbackErr).to.not.be["null"];
         });
 
         it('retries up to specified maxRetries for timeout errors', function(done) {
@@ -1080,325 +1152,11 @@
             done();
           });
         });
-
-        it('makes only one request when multiple calls are made before first one finishes', function(done) {
-          var callRefresh, concurrency, countdown, j, providers, ref, results, spy, x;
-          concurrency = countdown = 10;
-          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-          spy = helpers.spyOn(AWS.RemoteCredentials.prototype, 'request').andCallFake(function(path, cb) {
-            var respond;
-            respond = function() {
-              return cb(null, JSON.stringify(responseData));
-            };
-            return process.nextTick(respond);
-          });
-          providers = [];
-          callRefresh = function(ind) {
-            providers[ind] = new AWS.RemoteCredentials({
-              host: 'host'
-            });
-            return providers[ind].refresh(function(err) {
-              expect(err).to.equal(null);
-              expect(providers[ind].accessKeyId).to.equal('KEY');
-              countdown--;
-              if (countdown === 0) {
-                expect(spy.calls.length).to.equal(1);
-                return done();
-              }
-            });
-          };
-          results = [];
-          for (x = j = 1, ref = concurrency; 1 <= ref ? j <= ref : j >= ref; x = 1 <= ref ? ++j : --j) {
-            results.push(callRefresh(x - 1));
-          }
-          return results;
-        });
       });
     });
     describe('AWS.ECSCredentials', function() {
-      var creds, mockEndpoint, responseData, responseDataNew;
-      creds = null;
-      responseData = {
-        AccessKeyId: 'KEY',
-        SecretAccessKey: 'SECRET',
-        Token: 'TOKEN',
-        Expiration: (new Date(0)).toISOString()
-      };
-      responseDataNew = {
-        credentials: {
-          accessKeyId: 'KEY',
-          secretAccessKey: 'SECRET',
-          sessionToken: 'TOKEN',
-          expiration: (new Date(0)).toISOString()
-        }
-      };
-      var env;
-      beforeEach(function() {
-        env = process.env;
-      });
-      afterEach(function() {
-        process.env = env;
-      });
-      beforeEach(function() {
-        creds = new AWS.ECSCredentials({
-          host: 'host'
-        });
-        return process.env = {};
-      });
-      afterEach(function() {
-        return process.env = {};
-      });
-      mockEndpoint = function(expireTime) {
-        return helpers.spyOn(creds, 'request').andCallFake(function(path, cb) {
-          var expiration;
-          expiration = expireTime.toISOString();
-          return cb(null, JSON.stringify(AWS.util.merge(responseData, {
-            Expiration: expiration
-          })));
-        });
-      };
-
-      describe('constructor', function() {
-        it('allows passing of options', function() {
-          return expect(creds.host).to.equal('host');
-        });
-        it('does not modify options object', function() {
-          var opts;
-          opts = {};
-          creds = new AWS.ECSCredentials(opts);
-          return expect(opts).to.eql({});
-        });
-        return it('allows setting timeout', function() {
-          var opts;
-          opts = {
-            httpOptions: {
-              timeout: 5000
-            }
-          };
-          creds = new AWS.ECSCredentials(opts);
-          return expect(creds.httpOptions.timeout).to.equal(5000);
-        });
-      });
-
-      describe('isConfiguredForRemoteCredentials', function () {
-        it('returns false when process is not available', function() {
-          var process_copy = process;
-          process = void 0;
-          expect(creds.isConfiguredForEcsCredentials()).to.equal(false);
-          process = process_copy;
-        });
-
-        it(
-          'returns false when relative URI environment variable not set',
-          function() {
-            expect(creds.isConfiguredForEcsCredentials()).to.equal(false);
-          }
-        );
-
-        it(
-          'returns true when the relative URI environment variable is set',
-          function() {
-            process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-            expect(creds.isConfiguredForEcsCredentials()).to.equal(true);
-          }
-        );
-
-        it(
-          'returns true when the full URI environment variable is set',
-          function() {
-            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
-            expect(creds.isConfiguredForEcsCredentials()).to.equal(true);
-          }
-        );
-
-      });
-
-      describe('getRemoteFullUri', function() {
-        it('returns undefined when process is not available', function() {
-          var process, process_copy;
-          process_copy = process;
-          process = void 0;
-          expect(creds.getECSFullUri()).to.equal(void 0);
-          process = process_copy;
-        });
-
-        it(
-          'returns undefined when neither the relative URI environment variable nor the full URI environment variable is set',
-          function() {
-            expect(creds.getECSFullUri()).to.equal(void 0);
-          }
-        );
-
-        it(
-          'returns a full URI when the relative URI environment variable is set',
-          function() {
-            process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-            expect(creds.getECSFullUri()).to.equal('http://169.254.170.2/path');
-          }
-        );
-
-        it(
-          'returns a full URI when the full URI environment variable is set',
-          function() {
-            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
-            expect(creds.getECSFullUri())
-                .to.equal('http://localhost/get-credentials');
-          }
-        );
-
-        it(
-          'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
-          function () {
-            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'wss://localhost/get-credentials';
-            expect(creds.getECSFullUri.bind(creds))
-                .to.throw(/Unsupported protocol/);
-          }
-        );
-
-        it(
-          'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
-          function () {
-            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://s3-us-west-2.amazonaws.com/bucket/credentials';
-            expect(creds.getECSFullUri.bind(creds))
-              .to.throw(/Unsupported hostname/);
-          }
-        );
-
-        it(
-          'returns a full URI when the full URI environment variable is set to a non-localhost https URI',
-          function () {
-            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'https://s3-us-west-2.amazonaws.com/bucket/credentials';
-            expect(creds.getECSFullUri())
-              .to.equal('https://s3-us-west-2.amazonaws.com/bucket/credentials');
-          }
-        );
-      });
-
-      describe('needsRefresh', function() {
-        return it('can be expired based on expire time from URI endpoint', function() {
-          var spy;
-          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-          spy = mockEndpoint(new Date(0));
-          creds.refresh(function() {});
-          expect(spy.calls.length).to.equal(1);
-          expect(creds.needsRefresh()).to.equal(true);
-        });
-      });
-
-      describe('refresh', function() {
-        it('loads credentials from specified relative URI', function() {
-          var callbackErr = null;
-          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-          var spy = mockEndpoint(new Date(AWS.util.date.getDate().getTime() + 100000));
-          creds.refresh(function(err) {
-            callbackErr = err;
-          });
-          expect(spy.calls.length).to.equal(1);
-          expect(spy.calls[0].arguments[0])
-            .to.equal('http://169.254.170.2/path');
-          expect(callbackErr).to.be["null"];
-          expect(creds.accessKeyId).to.equal('KEY');
-          expect(creds.secretAccessKey).to.equal('SECRET');
-          expect(creds.sessionToken).to.equal('TOKEN');
-          expect(creds.needsRefresh()).to.equal(false);
-        });
-
-        it('loads credentials from specified full URI', function() {
-          var callbackErr = null;
-          process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
-          var spy = mockEndpoint(new Date(AWS.util.date.getDate().getTime() + 100000));
-          creds.refresh(function(err) {
-            callbackErr = err;
-          });
-          expect(spy.calls.length).to.equal(1);
-          expect(spy.calls[0].arguments[0])
-            .to.equal('http://localhost/get-credentials');
-          expect(callbackErr).to.be["null"];
-          expect(creds.accessKeyId).to.equal('KEY');
-          expect(creds.secretAccessKey).to.equal('SECRET');
-          expect(creds.sessionToken).to.equal('TOKEN');
-          expect(creds.needsRefresh()).to.equal(false);
-        });
-
-        it('passes an error to the callback when environment variable not set', function() {
-          var callbackErr, spy;
-          callbackErr = null;
-          spy = mockEndpoint(new Date(AWS.util.date.getDate().getTime() + 100000));
-          creds.refresh(function(err) {
-            return callbackErr = err;
-          });
-          expect(spy.calls.length).to.equal(0);
-          expect(callbackErr).to.not.be["null"];
-        });
-
-        it('retries up to specified maxRetries for timeout errors', function(done) {
-          var httpClient, options, spy;
-          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-          options = {
-            maxRetries: 3
-          };
-          creds = new AWS.ECSCredentials(options);
-          httpClient = AWS.HttpClient.getInstance();
-          spy = helpers.spyOn(httpClient, 'handleRequest').andCallFake(function(httpReq, httpOp, cb, errCb) {
-            return errCb({
-              code: 'TimeoutError'
-            });
-          });
-          creds.refresh(function(err) {
-            expect(err).to.not.be["null"];
-            expect(err.code).to.equal('TimeoutError');
-            expect(spy.calls.length).to.equal(4);
-            done();
-          });
-        });
-
-        it('passes the environmental auth token to the request', function(done) {
-          process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
-          process.env['AWS_CONTAINER_AUTHORIZATION_TOKEN'] = 'Basic abcd';
-          creds = new AWS.ECSCredentials();
-          var httpClient = AWS.HttpClient.getInstance();
-          helpers.spyOn(httpClient, 'handleRequest').andCallFake(function(httpReq, httpOp, cb, errCb) {
-            expect(httpReq.headers.Authorization).to.equal('Basic abcd');
-            helpers.mockHttpSuccessfulResponse(200, {}, JSON.stringify(responseData), cb);
-          });
-          creds.refresh(function(err) {
-            expect(err).to.be["null"];
-            done();
-          });
-        });
-
-        it('makes only one request when multiple calls are made before first one finishes', function(done) {
-          var callRefresh, concurrency, countdown, j, providers, ref, results, spy, x;
-          concurrency = countdown = 10;
-          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-          spy = helpers.spyOn(AWS.ECSCredentials.prototype, 'request').andCallFake(function(path, cb) {
-            var respond;
-            respond = function() {
-              return cb(null, JSON.stringify(responseData));
-            };
-            return process.nextTick(respond);
-          });
-          providers = [];
-          callRefresh = function(ind) {
-            providers[ind] = new AWS.ECSCredentials({
-              host: 'host'
-            });
-            return providers[ind].refresh(function(err) {
-              expect(err).to.equal(null);
-              expect(providers[ind].accessKeyId).to.equal('KEY');
-              countdown--;
-              if (countdown === 0) {
-                expect(spy.calls.length).to.equal(1);
-                return done();
-              }
-            });
-          };
-          results = [];
-          for (x = j = 1, ref = concurrency; 1 <= ref ? j <= ref : j >= ref; x = 1 <= ref ? ++j : --j) {
-            results.push(callRefresh(x - 1));
-          }
-          return results;
-        });
+      it('is alias of AWS.RemoteCredentials', function () {
+        expect(AWS.ECSCredentials).to.equal(AWS.RemoteCredentials);
       });
     });
   }
@@ -1512,23 +1270,6 @@
     return describe('refresh', function() {
       beforeEach(function() {
         return setupClients();
-      });
-      it('coalesces concurrent calls', function (done) {
-        var callCount = 10;
-        var callbackCount = 0;
-        var serviceSpy = mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
-        expect(creds.refreshCallbacks.length).to.equal(0);
-        for (var i = 0; i < callCount; i++) {
-          creds.refresh(function () {
-            if (++callbackCount === callCount) {
-              expect(serviceSpy.calls.length).to.equal(1);
-              process.nextTick(function () {
-                expect(creds.refreshCallbacks.length).to.equal(0);
-                done();
-              });
-            }
-          });
-        }
       });
       it('loads temporary credentials from STS using getSessionToken', function(done) {
         mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
@@ -1679,7 +1420,7 @@
           expect(err).to.be.undefined;
           expect(credentials.accessKeyId).to.equal('AKID');
           expect(credentials.secretAccessKey).to.equal('SECRET');
-          done()
+          done();
         });
       });
       it('captures global credentials when omitted', function (done) {
@@ -1721,23 +1462,6 @@
       beforeEach(function() {
         return setupClients();
       });
-      it('coalesces concurrent calls', function (done) {
-        var callCount = 10;
-        var callbackCount = 0;
-        var serviceSpy = mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
-        expect(creds.refreshCallbacks.length).to.equal(0);
-        for (var i = 0; i < callCount; i++) {
-          creds.refresh(function () {
-            if (++callbackCount === callCount) {
-              expect(serviceSpy.calls.length).to.equal(1);
-              process.nextTick(function () {
-                expect(creds.refreshCallbacks.length).to.equal(0);
-                done();
-              });
-            }
-          });
-        }
-      });
       it('loads temporary credentials from STS using getSessionToken', function(done) {
         mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
         creds.refresh(function() {
@@ -1765,18 +1489,19 @@
           done();
         });
       });
-      it('does try to load creds second time if service request failed', function() {
+      it('does try to load creds second time if service request failed', function(done) {
         var spy;
         spy = helpers.spyOn(creds.service, 'getSessionToken').andCallFake(function(cb) {
           return cb(new Error('INVALID SERVICE'));
         });
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
-        });
-        return creds.refresh(function() {
-          return creds.refresh(function() {
-            return creds.refresh(function() {
-              return expect(spy.calls.length).to.equal(4);
+          expect(err.message).to.equal('INVALID SERVICE');
+          creds.refresh(function () {
+            creds.refresh(function () {
+              creds.refresh(function() {
+                expect(spy.calls.length).to.equal(4);
+                done();
+              });
             });
           });
         });
@@ -1801,7 +1526,7 @@
         masterCreds = new AWS.Credentials('akid', 'secret');
         masterCreds.expired = true;
         masterRefreshSpy = helpers.spyOn(masterCreds, 'refresh');
-        intermediateCreds = new AWS.ChainableTemporaryCredentials({}, masterCreds)
+        intermediateCreds = new AWS.ChainableTemporaryCredentials({}, masterCreds);
         intermediateRefreshSpy = helpers.spyOn(intermediateCreds, 'refresh').andCallThrough();
         creds = new AWS.ChainableTemporaryCredentials({ RoleArn: 'ARN' }, intermediateCreds);
         mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000), {
@@ -1889,27 +1614,30 @@
       beforeEach(function() {
         return setupClients();
       });
-      it('loads federated credentials from STS', function() {
+      it('loads federated credentials from STS', function(done) {
         mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
-        creds.refresh(function() {});
-        expect(creds.accessKeyId).to.equal('KEY');
-        expect(creds.secretAccessKey).to.equal('SECRET');
-        expect(creds.sessionToken).to.equal('TOKEN');
-        expect(creds.needsRefresh()).to.equal(false);
-        return expect(creds.data.OtherProperty).to.equal(true);
+        creds.refresh(function() {
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.needsRefresh()).to.equal(false);
+          expect(creds.data.OtherProperty).to.equal(true);
+          done();
+        });
       });
-      return it('does try to load creds second time if service request failed', function() {
+      return it('does try to load creds second time if service request failed', function(done) {
         var spy;
         spy = helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake(function(cb) {
           return cb(new Error('INVALID SERVICE'));
         });
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
-        });
-        return creds.refresh(function() {
-          return creds.refresh(function() {
-            return creds.refresh(function() {
-              return expect(spy.calls.length).to.equal(4);
+          expect(err.message).to.equal('INVALID SERVICE');
+          creds.refresh(function() {
+            creds.refresh(function() {
+              creds.refresh(function() {
+                expect(spy.calls.length).to.equal(4);
+                done();
+              });
             });
           });
         });
@@ -1973,26 +1701,29 @@
       beforeEach(function() {
         return setupClients();
       });
-      it('loads federated credentials from STS', function() {
+      it('loads federated credentials from STS', function(done) {
         mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
-        creds.refresh(function() {});
-        expect(creds.accessKeyId).to.equal('KEY');
-        expect(creds.secretAccessKey).to.equal('SECRET');
-        expect(creds.sessionToken).to.equal('TOKEN');
-        return expect(creds.needsRefresh()).to.equal(false);
+        creds.refresh(function() {
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.needsRefresh()).to.equal(false);
+          done();
+        });
       });
-      return it('does try to load creds second time if service request failed', function() {
+      return it('does try to load creds second time if service request failed', function(done) {
         var spy;
         spy = helpers.spyOn(creds.service, 'assumeRoleWithSAML').andCallFake(function(cb) {
           return cb(new Error('INVALID SERVICE'));
         });
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
-        });
-        return creds.refresh(function() {
-          return creds.refresh(function() {
-            return creds.refresh(function() {
-              return expect(spy.calls.length).to.equal(4);
+          expect(err.message).to.equal('INVALID SERVICE');
+          creds.refresh(function() {
+            creds.refresh(function() {
+              creds.refresh(function() {
+                expect(spy.calls.length).to.equal(4);
+                done();
+              });
             });
           });
         });
@@ -2179,7 +1910,7 @@
       beforeEach(function() {
         return setupClients();
       });
-      it('runs getId, getCredentialsForIdentity when no role is passed in', function() {
+      it('runs getId, getCredentialsForIdentity when no role is passed in', function(done) {
         delete creds.cognito.config.params.RoleArn;
         helpers.mockResponses([
           {
@@ -2200,16 +1931,18 @@
           }
         ]);
         helpers.spyOn(creds.cognito, 'getCredentialsForIdentity').andCallThrough();
-        creds.refresh(function() {});
-        expect(creds.cognito.getCredentialsForIdentity.calls.length).to.eql(1);
-        expect(creds.identityId).to.equal('IDENTITY-ID2');
-        expect(creds.accessKeyId).to.equal('KEY');
-        expect(creds.secretAccessKey).to.equal('SECRET');
-        expect(creds.sessionToken).to.equal('TOKEN');
-        expect(creds.needsRefresh()).to.equal(false);
-        return expect(creds.cacheId.calls.length).to.equal(1);
+        creds.refresh(function() {
+          expect(creds.cognito.getCredentialsForIdentity.calls.length).to.eql(1);
+          expect(creds.identityId).to.equal('IDENTITY-ID2');
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.needsRefresh()).to.equal(false);
+          expect(creds.cacheId.calls.length).to.equal(1);
+          done();
+        });
       });
-      it('runs getId, getOpenIdToken, assumeRoleWithWebIdentity when a role is passed in', function() {
+      it('runs getId, getOpenIdToken, assumeRoleWithWebIdentity when a role is passed in', function(done) {
         helpers.mockResponses([
           {
             data: {
@@ -2236,13 +1969,15 @@
           };
           return cb(null);
         });
-        creds.refresh(function() {});
-        expect(creds.identityId).to.equal('IDENTITY-ID2');
-        expect(creds.accessKeyId).to.equal('KEY');
-        expect(creds.secretAccessKey).to.equal('SECRET');
-        expect(creds.sessionToken).to.equal('TOKEN');
-        expect(creds.needsRefresh()).to.equal(false);
-        return expect(creds.cacheId.calls.length).to.equal(1);
+        creds.refresh(function() {
+          expect(creds.identityId).to.equal('IDENTITY-ID2');
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.needsRefresh()).to.equal(false);
+          expect(creds.cacheId.calls.length).to.equal(1);
+          done();
+        });
       });
       it('does not call getId if IdentityId is passed in', function() {
         setupClients({
@@ -2277,7 +2012,7 @@
         expect(creds.needsRefresh()).to.equal(false);
         return expect(creds.cacheId.calls.length).to.equal(1);
       });
-      it('fails if getId fails', function() {
+      it('fails if getId fails', function(done) {
         helpers.mockResponses([
           {
             data: null,
@@ -2288,12 +2023,13 @@
           return cb(new Error('INVALID SERVICE'));
         });
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
+          expect(err.message).to.equal('INVALID SERVICE');
+          expect(creds.cacheId.calls.length).to.equal(0);
+          expect(creds.getStorage('id')).not.to.exist;
+          done();
         });
-        expect(creds.cacheId.calls.length).to.equal(0);
-        return expect(creds.getStorage('id')).not.to.exist;
       });
-      it('fails if getOpenIdToken fails', function() {
+      it('fails if getOpenIdToken fails', function(done) {
         helpers.mockResponses([
           {
             data: {
@@ -2307,12 +2043,13 @@
         ]);
         helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(function() {});
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
+          expect(err.message).to.equal('INVALID SERVICE');
+          expect(creds.cacheId.calls.length).to.equal(0);
+          expect(creds.getStorage('id')).not.to.exist;
+          done();
         });
-        expect(creds.cacheId.calls.length).to.equal(0);
-        return expect(creds.getStorage('id')).not.to.exist;
       });
-      it('fails if getCredentialsForIdentity fails', function() {
+      it('fails if getCredentialsForIdentity fails', function(done) {
         delete creds.cognito.config.params.RoleArn;
         helpers.mockResponses([
           {
@@ -2326,12 +2063,13 @@
           }
         ]);
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
+          expect(err.message).to.equal('INVALID SERVICE');
+          expect(creds.cacheId.calls.length).to.equal(0);
+          expect(creds.getStorage('id')).not.to.exist;
+          done();
         });
-        expect(creds.cacheId.calls.length).to.equal(0);
-        return expect(creds.getStorage('id')).not.to.exist;
       });
-      it('clears cache if getId fails for unauthorized user', function() {
+      it('clears cache if getId fails for unauthorized user', function(done) {
         creds.setStorage('id', 'MYID');
         helpers.mockResponses([
           {
@@ -2349,12 +2087,13 @@
         ]);
         helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(function() {});
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
+          expect(err.message).to.equal('INVALID SERVICE');
+          expect(creds.cacheId.calls.length).to.equal(0);
+          expect(creds.getStorage('id')).not.to.exist;
+          done();
         });
-        expect(creds.cacheId.calls.length).to.equal(0);
-        return expect(creds.getStorage('id')).not.to.exist;
       });
-      it('does not clear cache if getId fails for authorized user', function() {
+      it('does not clear cache if getId fails for authorized user', function(done) {
         creds.setStorage('id', 'MYID');
         helpers.mockResponses([
           {
@@ -2369,12 +2108,13 @@
         ]);
         helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(function() {});
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
+          expect(err.message).to.equal('INVALID SERVICE');
+          expect(creds.cacheId.calls.length).to.equal(0);
+          expect(creds.getStorage('id')).to.exist;
+          done();
         });
-        expect(creds.cacheId.calls.length).to.equal(0);
-        return expect(creds.getStorage('id')).to.exist;
       });
-      it('clears cache if getOpenIdToken fails for unauthorized user', function() {
+      it('clears cache if getOpenIdToken fails for unauthorized user', function(done) {
         creds.setStorage('id', 'MYID');
         helpers.mockResponses([
           {
@@ -2392,12 +2132,13 @@
         ]);
         helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(function() {});
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
+          expect(err.message).to.equal('INVALID SERVICE');
+          expect(creds.cacheId.calls.length).to.equal(0);
+          expect(creds.getStorage('id')).not.to.exist;
+          done();
         });
-        expect(creds.cacheId.calls.length).to.equal(0);
-        return expect(creds.getStorage('id')).not.to.exist;
       });
-      it('does not clear cache if getOpenIdToken fails for authorized user', function() {
+      it('does not clear cache if getOpenIdToken fails for authorized user', function(done) {
         creds.setStorage('id', 'MYID');
         helpers.mockResponses([
           {
@@ -2412,12 +2153,13 @@
         ]);
         helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(function() {});
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
+          expect(err.message).to.equal('INVALID SERVICE');
+          expect(creds.cacheId.calls.length).to.equal(0);
+          expect(creds.getStorage('id')).to.equal('MYID');
+          done();
         });
-        expect(creds.cacheId.calls.length).to.equal(0);
-        return expect(creds.getStorage('id')).to.equal('MYID');
       });
-      it('clears cache if getCredentialsForIdentity fails for unauthorized user', function() {
+      it('clears cache if getCredentialsForIdentity fails for unauthorized user', function(done) {
         delete creds.cognito.config.params.RoleArn;
         creds.setStorage('id', 'MYID');
         helpers.mockResponses([
@@ -2435,12 +2177,12 @@
           }
         ]);
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
+          expect(err.message).to.equal('INVALID SERVICE');expect(creds.cacheId.calls.length).to.equal(0);
+          expect(creds.getStorage('id')).not.to.exist;
+          done();
         });
-        expect(creds.cacheId.calls.length).to.equal(0);
-        return expect(creds.getStorage('id')).not.to.exist;
       });
-      it('does not clear cache if getCredentialsForIdentity fails for authorized user', function() {
+      it('does not clear cache if getCredentialsForIdentity fails for authorized user', function(done) {
         delete creds.cognito.config.params.RoleArn;
         creds.setStorage('id', 'MYID');
         helpers.mockResponses([
@@ -2455,12 +2197,13 @@
           }
         ]);
         creds.refresh(function(err) {
-          return expect(err.message).to.equal('INVALID SERVICE');
+          expect(err.message).to.equal('INVALID SERVICE');
+          expect(creds.cacheId.calls.length).to.equal(0);
+          expect(creds.getStorage('id')).to.equal('MYID');
+          done();
         });
-        expect(creds.cacheId.calls.length).to.equal(0);
-        return expect(creds.getStorage('id')).to.equal('MYID');
       });
-      it('does try to load creds second time if service request failed', function() {
+      it('does try to load creds second time if service request failed', function(done) {
         var reqs;
         reqs = helpers.mockResponses([
           {
@@ -2489,18 +2232,19 @@
           }
         ]);
         creds.refresh(function(err) {
-          return expect(err.code).to.equal('InvalidService');
-        });
-        return creds.refresh(function() {
-          expect(creds.accessKeyId).to.equal('akid');
-          return expect(creds.secretAccessKey).to.equal('secret');
+          expect(err.code).to.equal('InvalidService');
+          creds.refresh(function() {
+            expect(creds.accessKeyId).to.equal('akid');
+            expect(creds.secretAccessKey).to.equal('secret');
+            done();
+          });
         });
       });
       return describe('browser caching', function() {
         beforeEach(function() {
           return helpers.spyOn(AWS.util, 'isBrowser').andReturn(true);
         });
-        it('caches IdentityId into localStorage on successful handshake', function() {
+        it('caches IdentityId into localStorage on successful handshake', function(done) {
           setupClients({
             Logins: {
               provider1: 'TOKEN1',
@@ -2531,11 +2275,13 @@
             };
             return cb(null);
           });
-          creds.refresh(function() {});
-          expect(creds.getStorage('id')).to.equal('IDENTITY-ID2');
-          return expect(creds.getStorage('providers')).to.equal('provider1,provider2');
+          creds.refresh(function() {
+            expect(creds.getStorage('id')).to.equal('IDENTITY-ID2');
+            expect(creds.getStorage('providers')).to.equal('provider1,provider2');
+            done();
+          });
         });
-        it('returns cached id in getId call', function() {
+        it('returns cached id in getId call', function(done) {
           setupClients({
             Logins: {
               provider1: 'TOKEN1',
@@ -2566,13 +2312,15 @@
             };
             return cb(null);
           });
-          creds.refresh(function() {});
-          return creds.getId(function(err, id) {
-            expect(id).to.equal('IDENTITY-ID2');
-            return expect(creds.getStorage('id')).to.equal('IDENTITY-ID2');
+          creds.refresh(function() {
+            creds.getId(function(err, id) {
+              expect(id).to.equal('IDENTITY-ID2');
+              expect(creds.getStorage('id')).to.equal('IDENTITY-ID2');
+              done();
+            });
           });
         });
-        it('returns cached id in getId call with LoginId', function() {
+        it('returns cached id in getId call with LoginId', function(done) {
           setupClients({
             LoginId: 'LOGINIDA'
           });
@@ -2600,17 +2348,20 @@
             };
             return cb(null);
           });
-          creds.refresh(function() {});
-          creds.getId(function(err, id) {
-            expect(id).to.equal('IDENTITY-ID2');
-            return expect(creds.getStorage('id')).to.equal('IDENTITY-ID2');
+          creds.refresh(function() {
+            creds.getId(function(err, id) {
+              expect(id).to.equal('IDENTITY-ID2');
+              return expect(creds.getStorage('id')).to.equal('IDENTITY-ID2');
+            });
+
+            setupCreds({
+              LoginId: 'LOGINIDB'
+            });
+            expect(creds.getStorage('id')).not.to.equal('IDENTITY-ID2');
+            creds.params.LoginId = 'LOGINIDA';
+            creds.clearCachedId();
+            done();
           });
-          setupCreds({
-            LoginId: 'LOGINIDB'
-          });
-          expect(creds.getStorage('id')).not.to.equal('IDENTITY-ID2');
-          creds.params.LoginId = 'LOGINIDA';
-          return creds.clearCachedId();
         });
         return it('allows access to cached identityId even after a failed attempt to refresh credentials', function() {
           creds.setStorage('id', 'MYID');
