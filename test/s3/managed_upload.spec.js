@@ -596,6 +596,7 @@
           });
         });
       });
+
       it('does not resume multipart buffer upload if leavePartsOnError is not set', function(done) {
         var reqs;
         reqs = helpers.mockResponses([
@@ -623,18 +624,19 @@
             Body: bigbody
           }
         });
-        return send({}, function() {
+        send({}, function() {
           expect(helpers.operationsForRequests(reqs)).to.eql(['s3.createMultipartUpload', 's3.uploadPart', 's3.uploadPart', 's3.abortMultipartUpload']);
           expect(err).to.exist;
           expect(err.code).to.equal('UploadPartFailed');
           expect(data).not.to.exist;
-          return send({}, function() {
+          send({}, function() {
             expect(err).to.exist;
             expect(data).not.to.exist;
-            return done();
+            done();
           });
         });
       });
+
       it('returns data with ETag, Location, Bucket, and Key with single part upload', function(done) {
         var reqs;
         reqs = helpers.mockResponses([
@@ -644,7 +646,7 @@
             }
           }
         ]);
-        return send({
+        send({
           Body: smallbody,
           ContentEncoding: 'encoding'
         }, function() {
@@ -653,9 +655,58 @@
           expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key');
           expect(data.Key).to.equal('key');
           expect(data.Bucket).to.equal('bucket');
-          return done();
+          done();
         });
       });
+
+      it('should not count done parts twice if same part is returned twice', function(done) {
+        var reqs = helpers.mockResponses([
+          {
+            data: {
+              UploadId: 'uploadId'
+            }
+          }, {
+            data: {
+              ETag: 'ETAG1'
+            }
+          }, {
+            data: {
+              ETag: 'ETAG2'
+            }
+          }, {
+            data: {
+              ETag: 'FINAL_ETAG',
+              Location: 'FINAL_LOCATION'
+            }
+          }
+        ]);
+        upload = new AWS.S3.ManagedUpload({
+          service: s3,
+          params: {Body: body(20)}
+        });
+        var uploadPartSpy = helpers.spyOn(upload.service, 'uploadPart').andCallFake(function() {
+          //fake the first part already done
+          if (upload.completeInfo[1] && upload.completeInfo[1].ETag === null) {
+            upload.completeInfo[1] = {
+              ETag: 'ETAG1',
+              PartNumber: 1
+            };
+            upload.doneParts++;
+          }
+          return uploadPartSpy.origMethod.apply(uploadPartSpy.object, arguments);
+        })
+        send({}, function(err, data) {
+          expect(err).not.to.exist;
+          expect(helpers.operationsForRequests(reqs)).to.eql([
+            's3.createMultipartUpload',
+            's3.uploadPart',
+            's3.uploadPart',
+            's3.completeMultipartUpload'
+          ]);
+          done();
+        })
+      });
+
       describe('Location', function() {
         it('returns paths with simple string keys for single part uploads', function(done) {
           var reqs;
