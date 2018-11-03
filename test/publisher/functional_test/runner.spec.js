@@ -50,7 +50,7 @@ describe('run functional test', () => {
         const str = data.toString('utf8');
         const parsed = str.trim().split('\n').map(JSON.parse);
         monitoringEvents = monitoringEvents.concat(parsed);
-      })
+      });
 
       //start call according to test cases
       for (const apiCall of scenario.apiCalls) {
@@ -62,7 +62,7 @@ describe('run functional test', () => {
         if (scenarioConfiguration.sessionToken) {
           client.config.credentials.sessionToken = scenarioConfiguration.sessionToken;
         }
-        if(scenarioConfiguration.maxRetries) {
+        if (scenarioConfiguration.maxRetries) {
           client.config.maxRetries = scenarioConfiguration.maxRetries;
         }
         const operation = apiCall.operationName[0].toLowerCase() + apiCall.operationName.substring(1);
@@ -75,17 +75,17 @@ describe('run functional test', () => {
       //close agent and then validate the datagram echo-ed back from agent
       await agentFinished(fakeAgent);
       expect(validateEvents(monitoringEvents, scenario.expectedMonitoringEvents)).to.eql(true);
-    })
+    });
   }
 
-})
+});
 
 function getConstructParam(configurations) {
   let constructParams = {};
-  if(configurations.userAgent) constructParams.customUserAgent = configurations.userAgent;
-  if(configurations.region) constructParams.region = configurations.region;
-  if(configurations.paramValidation === false) constructParams.paramValidation = configurations.paramValidation;
-  if(configurations.clientSideMonitoring) constructParams.clientSideMonitoring = configurations.clientSideMonitoring;
+  if (configurations.userAgent) constructParams.customUserAgent = configurations.userAgent;
+  if (configurations.region) constructParams.region = configurations.region;
+  if (configurations.paramValidation === false) constructParams.paramValidation = configurations.paramValidation;
+  if (configurations.clientSideMonitoring) constructParams.clientSideMonitoring = configurations.clientSideMonitoring;
   return constructParams;
 }
 
@@ -103,8 +103,8 @@ function agentStart(port) {
       } else {
         reject(new Error('agent start error'));
       }
-    })
-  })
+    });
+  });
 }
 
 function agentFinished(agentProcess) {
@@ -112,7 +112,7 @@ function agentFinished(agentProcess) {
     agentProcess.once('message', (m) => {
       // fake csm agent notifies the echo-ing is done.
       if (m.recordingDone === true) {
-        agentProcess.kill(9)
+        agentProcess.kill(9);
       }
       resolve();
     });

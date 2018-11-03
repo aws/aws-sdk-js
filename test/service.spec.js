@@ -51,11 +51,11 @@
         AWS.config.update({
           correctClockSkew: true,
           systemClockOffset: 120000
-        })
+        });
         s3 = new AWS.S3;
         expect(s3.config.systemClockOffset).to.equal(120000);
         return expect(s3.config.correctClockSkew).to.equal(true);
-      })
+      });
 
       it('merges service-specific configuration from global config', function() {
         var s3;
@@ -122,64 +122,64 @@
       it('tries to construct service with latest API version', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
-        errmsg = "Could not find API configuration custom-2001-01-01";
+        errmsg = 'Could not find API configuration custom-2001-01-01';
         return expect(function() {
           return new CustomService();
-        }).to["throw"](errmsg);
+        }).to['throw'](errmsg);
       });
 
       it('tries to construct service with exact API version match', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
-        errmsg = "Could not find API configuration custom-1999-05-05";
+        errmsg = 'Could not find API configuration custom-1999-05-05';
         return expect(function() {
           return new CustomService({
             apiVersion: '1999-05-05'
           });
-        }).to["throw"](errmsg);
+        }).to['throw'](errmsg);
       });
 
       it('skips any API versions with a * and uses next (future) service', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['1998-01-01', '1999-05-05*', '2001-01-01']);
-        errmsg = "Could not find API configuration custom-2001-01-01";
+        errmsg = 'Could not find API configuration custom-2001-01-01';
         return expect(function() {
           return new CustomService({
             apiVersion: '2000-01-01'
           });
-        }).to["throw"](errmsg);
+        }).to['throw'](errmsg);
       });
 
       it('skips multiple API versions with a * and uses next (future) service', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['1998-01-01', '1999-05-05*', '1999-07-07*', '2001-01-01']);
-        errmsg = "Could not find API configuration custom-2001-01-01";
+        errmsg = 'Could not find API configuration custom-2001-01-01';
         return expect(function() {
           return new CustomService({
             apiVersion: '1999-05-05'
           });
-        }).to["throw"](errmsg);
+        }).to['throw'](errmsg);
       });
 
       it('tries to construct service with fuzzy API version match', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
-        errmsg = "Could not find API configuration custom-1999-05-05";
+        errmsg = 'Could not find API configuration custom-1999-05-05';
         return expect(function() {
           return new CustomService({
             apiVersion: '2000-01-01'
           });
-        }).to["throw"](errmsg);
+        }).to['throw'](errmsg);
       });
 
       it('uses global apiVersion value when constructing versioned services', function() {
         var CustomService, errmsg;
         AWS.config.apiVersion = '2002-03-04';
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
-        errmsg = "Could not find API configuration custom-2001-01-01";
+        errmsg = 'Could not find API configuration custom-2001-01-01';
         expect(function() {
           return new CustomService;
-        }).to["throw"](errmsg);
+        }).to['throw'](errmsg);
         return AWS.config.apiVersion = null;
       });
 
@@ -189,10 +189,10 @@
           custom: '2002-03-04'
         };
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
-        errmsg = "Could not find API configuration custom-2001-01-01";
+        errmsg = 'Could not find API configuration custom-2001-01-01';
         expect(function() {
           return new CustomService;
-        }).to["throw"](errmsg);
+        }).to['throw'](errmsg);
         return AWS.config.apiVersions = {};
       });
 
@@ -203,10 +203,10 @@
         };
         AWS.config.apiVersion = '2002-03-04';
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
-        errmsg = "Could not find API configuration custom-1999-05-05";
+        errmsg = 'Could not find API configuration custom-1999-05-05';
         expect(function() {
           return new CustomService;
-        }).to["throw"](errmsg);
+        }).to['throw'](errmsg);
         AWS.config.apiVersion = null;
         return AWS.config.apiVersions = {};
       });
@@ -214,23 +214,23 @@
       it('tries to construct service with fuzzy API version match', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
-        errmsg = "Could not find API configuration custom-1999-05-05";
+        errmsg = 'Could not find API configuration custom-1999-05-05';
         return expect(function() {
           return new CustomService({
             apiVersion: '2000-01-01'
           });
-        }).to["throw"](errmsg);
+        }).to['throw'](errmsg);
       });
 
       it('fails if apiVersion matches nothing', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
-        errmsg = "Could not find custom API to satisfy version constraint `1998-01-01'";
+        errmsg = 'Could not find custom API to satisfy version constraint `1998-01-01\'';
         return expect(function() {
           return new CustomService({
             apiVersion: '1998-01-01'
           });
-        }).to["throw"](errmsg);
+        }).to['throw'](errmsg);
       });
 
       it('allows construction of services from one-off apiConfig properties', function() {
@@ -280,7 +280,7 @@
                     return new ctor({
                       apiVersion: v
                     });
-                  }).not.to["throw"]();
+                  }).not.to['throw']();
                 });
               })(ctor, serviceIdentifier, version));
             }
@@ -290,7 +290,7 @@
         return results;
       });
     });
-    
+
     describe('setEndpoint', function() {
       var FooService;
       FooService = null;
@@ -798,7 +798,7 @@
         return expect(didError).to.equal(true);
       });
     });
-    describe('Service clock sync functions', function() { 
+    describe('Service clock sync functions', function() {
       beforeEach(function(done) {
         AWS.config.update({
           systemClockOffset: 0
@@ -812,21 +812,21 @@
         expect(mockService.isClockSkewed(now)).to.equal(true);
         helpers.spyOn(mockService, 'getSkewCorrectedDate').andReturn(new Date(now + 29900));
         expect(mockService.isClockSkewed(now)).to.equal(false);
-      }); 
+      });
       it('should apply the clock offset to service config', function() {
         var mockService = new MockService();
         expect(mockService.config.systemClockOffset).to.equal(0);
         mockService.applyClockOffset(new Date().getTime() + 30000);
-        var offset = mockService.config.systemClockOffset
+        var offset = mockService.config.systemClockOffset;
         expect(offset > 29900 && offset < 30100).to.equal(true);
       });
       it('should get skew-corrected date for each service', function() {
         var mockService = new MockService();
         mockService.config.update({
           systemClockOffset: 30000
-        })
+        });
         var now = new Date().getTime();
-        var serviceTime = mockService.getSkewCorrectedDate().getTime()
+        var serviceTime = mockService.getSkewCorrectedDate().getTime();
         expect(now + 29900 < serviceTime && serviceTime < now + 30100).to.equal(true);
       });
       it('should update each client\'s systemClockOffset respectively', function() {
@@ -843,16 +843,16 @@
           date: serverDate.toString()
         }, '');
         mockService2.makeRequest().send();
-        var offset = mockService1.config.systemClockOffset
+        var offset = mockService1.config.systemClockOffset;
         expect(59900 < offset && 60100 > offset).to.equal(true);
-        offset = mockService2.config.systemClockOffset
+        offset = mockService2.config.systemClockOffset;
         expect(119900 < offset && 120100 > offset).to.equal(true);
       });
     });
 
     describe('Service monitoring events emitter', function() {
       it('should emit events on specific service client', function() {
-        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']);   
+        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']);
         var client = new MockService();
         var client2 = new MockService();
         var callNum = 0; var attemptNum = 0;
@@ -885,7 +885,7 @@
           attemptNum ++;
           expect(event.Type).to.equal('ApiCallAttempt');
         });
-        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']); 
+        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']);
         var client = new MockService();
         client.makeRequest('operationName', function(err, data) {});
         expect(callNum).to.equal(1);
@@ -903,16 +903,16 @@
           attemptNum ++;
           expect(event.Type).to.equal('ApiCallAttempt');
         });
-        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']); 
+        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']);
         var client = new MockService();
         client.makeRequest('operationName', function(err, data) {});
         expect(callNum).to.equal(1);
         expect(attemptNum).to.equal(1);
-      })
-    })
+      });
+    });
 
     it('should emit api call events when request succeeds', function(done) {
-      helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']); 
+      helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']);
       var client = new MockService({});
       client.on('apiCall', function apiCallListener(event) {
         expect(event.Type).to.equal('ApiCall');
@@ -930,7 +930,7 @@
     });
 
     it('should emit api call events when request fails for aws exception', function(done) {
-      helpers.mockHttpResponse(500, {}, ['ServiceUnavailableException']); 
+      helpers.mockHttpResponse(500, {}, ['ServiceUnavailableException']);
       var client = new MockService({maxRetries: 0});
       client.on('apiCall', function apiCallListener(event) {
         expect(event.Type).to.equal('ApiCall');
@@ -952,7 +952,7 @@
       helpers.mockHttpResponse(200, {
         'x-amz-request-id': 'request-id',
         'x-amzn-requestid': 'n-request-id'
-      }, ['FOO', 'BAR']); 
+      }, ['FOO', 'BAR']);
       var client = new MockService();
       client.on('apiCallAttempt', function apiCallListener(event) {
         expect(event.Type).to.equal('ApiCallAttempt');
@@ -977,10 +977,10 @@
       helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']);
       var events = [];
       AWS.Service.prototype.publisher = {
-        eventHandler: function(event){
-          events.push(event)
+        eventHandler: function(event) {
+          events.push(event);
         }
-      }
+      };
       var client = new MockService({clientSideMonitoring: true});
       client.makeRequest('operationName', function(err, data) {});
       process.nextTick(function() {

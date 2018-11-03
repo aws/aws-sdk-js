@@ -22,7 +22,7 @@ describe('Browser hash implementations', function() {
                         var hash = new ctor();
                         hash.update(input);
                         expect(hash.digest('hex')).to.equal(expected);
-                    }
+                    };
                 })(
                     new Buffer(hashVectors[i].input, 'base64'),
                     hashVectors[i][hashType],
@@ -44,7 +44,7 @@ describe('Browser hash implementations', function() {
                             digest = digest.slice(0, truncate);
                         }
                         expect(digest.toString('hex')).to.equal(expected);
-                    }
+                    };
                 })(
                     new Buffer(hmacVectors[i].key, 'hex'),
                     new Buffer(hmacVectors[i].data, 'hex'),

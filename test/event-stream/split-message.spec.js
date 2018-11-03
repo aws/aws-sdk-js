@@ -67,5 +67,5 @@ describe('splitMessage', function() {
                 body: emptyBuffer
             });
         }
-    )
+    );
 });

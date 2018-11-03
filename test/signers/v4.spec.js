@@ -161,12 +161,12 @@
         signer = new AWS.Signers.V4(req.httpRequest, 's3');
         return expect(signer.canonicalString().split('\n')[1]).to.equal('/a%3Ab%3Ac');
       });
-    
+
       it('does not double encode path for signature version s3v4', function() {
         var api = {
           metadata: {
-            protocol: "rest-xml",
-            signatureVersion: "s3v4",
+            protocol: 'rest-xml',
+            signatureVersion: 's3v4',
           },
           operations: {
             AnOperation: {
@@ -192,7 +192,7 @@
           signatureVersion: req.service.api.signatureVersion
         });
         expect(signer.canonicalString().split('\n')[1]).to.equal('/fakepath/test%3Atest');
-      })
+      });
     });
 
     describe('canonicalHeaders', function() {

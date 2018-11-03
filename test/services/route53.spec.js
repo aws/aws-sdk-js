@@ -50,7 +50,7 @@
     describe('changeResourceRecordSets', function() {
       return it('correctly builds the XML document', function() {
         var params, xml;
-        xml = "<ChangeResourceRecordSetsRequest xmlns=\"https://route53.amazonaws.com/doc/" + api + "/\">\n  <ChangeBatch>\n    <Comment>comment</Comment>\n    <Changes>\n      <Change>\n        <Action>CREATE</Action>\n        <ResourceRecordSet>\n          <Name>name</Name>\n          <Type>type</Type>\n          <ResourceRecords>\n            <ResourceRecord>\n              <Value>foo.com</Value>\n            </ResourceRecord>\n          </ResourceRecords>\n        </ResourceRecordSet>\n      </Change>\n    </Changes>\n  </ChangeBatch>\n</ChangeResourceRecordSetsRequest>";
+        xml = '<ChangeResourceRecordSetsRequest xmlns="https://route53.amazonaws.com/doc/' + api + '/">\n  <ChangeBatch>\n    <Comment>comment</Comment>\n    <Changes>\n      <Change>\n        <Action>CREATE</Action>\n        <ResourceRecordSet>\n          <Name>name</Name>\n          <Type>type</Type>\n          <ResourceRecords>\n            <ResourceRecord>\n              <Value>foo.com</Value>\n            </ResourceRecord>\n          </ResourceRecords>\n        </ResourceRecordSet>\n      </Change>\n    </Changes>\n  </ChangeBatch>\n</ChangeResourceRecordSetsRequest>';
         helpers.mockHttpResponse(200, {}, '');
         params = {
           HostedZoneId: 'zone-id',
@@ -84,7 +84,7 @@
           code: 'PriorRequestNotComplete',
           statusCode: 400
         };
-        return expect(service.retryableError(err)).to.be["true"];
+        return expect(service.retryableError(err)).to.be['true'];
       });
       return it('retryableError returns false for other 400 errors', function() {
         var err;
@@ -92,7 +92,7 @@
           code: 'SomeErrorCode',
           statusCode: 400
         };
-        return expect(service.retryableError(err)).to.be["false"];
+        return expect(service.retryableError(err)).to.be['false'];
       });
     });
   });

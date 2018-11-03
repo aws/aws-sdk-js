@@ -114,7 +114,7 @@
         expect(api.operations.someOperation.endpointDiscoveryRequired).to.equal('NULL');
         expect(api.operations.optionalEndpointOperation.endpointDiscoveryRequired).to.equal('OPTIONAL');
         expect(api.operations.requiredEndpointOperation.endpointDiscoveryRequired).to.equal('REQUIRED');
-      })
+      });
     });
 
     describe('documentation', function() {

@@ -5,7 +5,7 @@ var IniLoader = AWS.IniLoader;
 
 function validateCachedFiles(iniFile, expectedCache) {
   if (!expectedCache) return false;
-  helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function() {throw new Error('shouldn\'t load new profiles')})
+  helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function() {throw new Error('shouldn\'t load new profiles');});
   for (var i = 0, filePaths = Object.keys(expectedCache); i < filePaths.length; i++) {
     var path = filePaths[i];
     expect(iniFile.loadFrom({filename: path})).to.eql(expectedCache[path]);
@@ -22,12 +22,12 @@ if (AWS.util.isNode()) {
       env = process.env;
       process.env = {};
     });
-  
+
     afterEach(function() {
       os.homedir = homedir;
       process.env = env;
     });
-  
+
     describe ('constructor', function() {
       it('should only read config file lazily when need to', function() {
         helpers.spyOn(os, 'homedir').andReturn('/foo/bar/baz');
@@ -36,14 +36,14 @@ if (AWS.util.isNode()) {
         expect(AWS.util.readFileSync.calls.length).to.equal(0);
       });
     });
-  
+
     describe('loadFrom', function() {
       var iniLoader;
-  
+
       beforeEach(function() {
         iniLoader = new IniLoader();
-      })
-  
+      });
+
       it('load config file with profile name indexed', function () {
         helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
           if (path === '/User/foo/config') {
@@ -65,29 +65,29 @@ if (AWS.util.isNode()) {
           }
         });
       });
-  
+
       it('load default profiles filename is not supplied', function() {
         process.env.HOME = '/foo';
         helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
           if (path === '/foo/.aws/config') return '[default]\naws_access_key_id = akid\naws_secret_access_key = secret';
-          else return '[default]\naws_access_key_id = akid2\naws_secret_access_key = secret2'
+          else return '[default]\naws_access_key_id = akid2\naws_secret_access_key = secret2';
         });
         var iniFile = new IniLoader();
         expect(iniFile.loadFrom({isConfig: true})).to.eql({'default': {'aws_access_key_id': 'akid', 'aws_secret_access_key': 'secret'}});
         expect(iniFile.loadFrom({})).to.eql({'default': {'aws_access_key_id': 'akid2', 'aws_secret_access_key': 'secret2'}});
       });
-  
+
       it('load credentials file if isConfig parameter is not set', function() {
         helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
           if (path === '/foo/bar') return '[profile user]\naws_access_key_id = akid\naws_secret_access_key = secret';
-          else if (path === '/foo/qux') return '[profile user2]\naws_access_key_id = akid2\naws_secret_access_key = secret2'
+          else if (path === '/foo/qux') return '[profile user2]\naws_access_key_id = akid2\naws_secret_access_key = secret2';
         });
         var iniFile = new IniLoader();
         expect(iniFile.loadFrom({isConfig: true, filename: '/foo/bar'})).to.eql({'user': {'aws_access_key_id': 'akid', 'aws_secret_access_key': 'secret'}});
         //for credients, the prefix 'profile ' of the profile name won't be removed
         expect(iniFile.loadFrom({filename: '/foo/qux'})).to.eql({'profile user2': {'aws_access_key_id': 'akid2', 'aws_secret_access_key': 'secret2'}});
       });
-  
+
       it('won\'t load same file twice', function() {
         helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
         iniLoader.loadFrom({filename: 'foo'});
@@ -126,7 +126,7 @@ if (AWS.util.isNode()) {
         expect(os.homedir.calls.length).to.eql(0);
       });
     });
-  
+
     describe('clearCachedFiles', function() {
       it('remove all cached files', function() {
         process.env.HOME = '/foo';
@@ -143,7 +143,7 @@ if (AWS.util.isNode()) {
         iniFile.clearCachedFiles();
         iniFile.loadFrom();
         expect(AWS.util.readFileSync.calls.length).to.eql(1);
-      })
+      });
     });
 
     describe('resolvedProfiles', function() {
@@ -152,7 +152,7 @@ if (AWS.util.isNode()) {
         process.env.HOME = '/foo';
         helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
           if (path === '/foo/.aws/config') return '[default]\naws_access_key_id = akid\naws_secret_access_key = secret';
-          else return '[default]\naws_access_key_id = akid2\naws_secret_access_key = secret2'
+          else return '[default]\naws_access_key_id = akid2\naws_secret_access_key = secret2';
         });
         iniFile = new IniLoader();
         iniFile.loadFrom({isConfig: true});

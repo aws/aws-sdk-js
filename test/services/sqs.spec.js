@@ -51,7 +51,7 @@
       };
       md5 = 'acbd18db4cc2f85cedef654fccc4a4d8';
       payload = function(md5) {
-        return "<SendMessageResponse><SendMessageResult>\n  <MD5OfMessageBody>" + md5 + "</MD5OfMessageBody>\n  <MessageId>MSGID</MessageId>\n</SendMessageResult></SendMessageResponse>";
+        return '<SendMessageResponse><SendMessageResult>\n  <MD5OfMessageBody>' + md5 + '</MD5OfMessageBody>\n  <MessageId>MSGID</MessageId>\n</SendMessageResult></SendMessageResponse>';
       };
       it('correctly validates MD5 of message input', function(done) {
         return checksumValidate('sendMessage', input, payload(md5), true, function(err, data) {
@@ -92,7 +92,7 @@
       md5foo = 'acbd18db4cc2f85cedef654fccc4a4d8';
       md5bar = '37b51d194a7513e45b56f6524f2d51f2';
       payload = function(md5a, md5b, md5c) {
-        return "<SendMessageBatchResponse><SendMessageBatchResult>\n  <SendMessageBatchResultEntry>\n    <Id>a</Id>\n    <MessageId>MSGID1</MessageId>\n    <MD5OfMessageBody>" + md5a + "</MD5OfMessageBody>\n  </SendMessageBatchResultEntry>\n  <SendMessageBatchResultEntry>\n    <Id>b</Id>\n    <MessageId>MSGID2</MessageId>\n    <MD5OfMessageBody>" + md5b + "</MD5OfMessageBody>\n  </SendMessageBatchResultEntry>\n  <SendMessageBatchResultEntry>\n    <Id>c</Id>\n    <MessageId>MSGID3</MessageId>\n    <MD5OfMessageBody>" + md5c + "</MD5OfMessageBody>\n  </SendMessageBatchResultEntry>\n</SendMessageBatchResult></SendMessageBatchResponse>";
+        return '<SendMessageBatchResponse><SendMessageBatchResult>\n  <SendMessageBatchResultEntry>\n    <Id>a</Id>\n    <MessageId>MSGID1</MessageId>\n    <MD5OfMessageBody>' + md5a + '</MD5OfMessageBody>\n  </SendMessageBatchResultEntry>\n  <SendMessageBatchResultEntry>\n    <Id>b</Id>\n    <MessageId>MSGID2</MessageId>\n    <MD5OfMessageBody>' + md5b + '</MD5OfMessageBody>\n  </SendMessageBatchResultEntry>\n  <SendMessageBatchResultEntry>\n    <Id>c</Id>\n    <MessageId>MSGID3</MessageId>\n    <MD5OfMessageBody>' + md5c + '</MD5OfMessageBody>\n  </SendMessageBatchResultEntry>\n</SendMessageBatchResult></SendMessageBatchResponse>';
       };
       it('correctly validates MD5 of operation', function(done) {
         var output;
@@ -126,7 +126,7 @@
       var md5, payload;
       md5 = 'acbd18db4cc2f85cedef654fccc4a4d8';
       payload = function(body, md5, id) {
-        return "<ReceiveMessageResponse><ReceiveMessageResult><Message>\n  <Body>" + body + "</Body>\n  <MD5OfBody>" + md5 + "</MD5OfBody>\n  <MessageId>" + id + "</MessageId>\n</Message></ReceiveMessageResult></ReceiveMessageResponse>";
+        return '<ReceiveMessageResponse><ReceiveMessageResult><Message>\n  <Body>' + body + '</Body>\n  <MD5OfBody>' + md5 + '</MD5OfBody>\n  <MessageId>' + id + '</MessageId>\n</Message></ReceiveMessageResult></ReceiveMessageResponse>';
       };
       it('correctly validates MD5 of operation', function(done) {
         var output;

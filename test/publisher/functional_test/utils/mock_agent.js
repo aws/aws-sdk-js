@@ -18,9 +18,9 @@ server.on('listening', () => {
     serverStarted: true,
     port: address.port,
   });
-})
+});
 
-//notify the parent process the calls are done and begin the 
+//notify the parent process the calls are done and begin the
 //monitoring events validation
 process.on('message', (m) => {
   if (m.message === 'Sending Done') {
@@ -30,7 +30,7 @@ process.on('message', (m) => {
       process.send({recordingDone: true});
     }, 30);
   }
-})
+});
 
 const args = parseArgs();
 
@@ -45,6 +45,6 @@ function parseArgs() {
       }
       accumulator[kvPair[0]] = kvPair[1];
     }
-    return accumulator
+    return accumulator;
   }, {port: defaultPort});
 }

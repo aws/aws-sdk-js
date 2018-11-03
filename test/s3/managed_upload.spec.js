@@ -105,12 +105,12 @@
         });
         return expect(function() {
           return upload.send();
-        }).to["throw"]('ERROR');
+        }).to['throw']('ERROR');
       });
       it('fails if Body is not passed', function() {
         return expect(function() {
           return send();
-        }).to["throw"]('params.Body is required');
+        }).to['throw']('params.Body is required');
       });
       it('fails if Body is unknown type', function() {
         send({
@@ -135,7 +135,7 @@
       it('uses a default service object if none provided', function() {
         return expect(function() {
           return new AWS.S3.ManagedUpload();
-        }).to["throw"]('params.Body is required');
+        }).to['throw']('params.Body is required');
       });
       it('uploads a single part if size is less than min multipart size', function(done) {
         var reqs;
@@ -382,7 +382,7 @@
           return new AWS.S3.ManagedUpload({
             partSize: 5
           });
-        }).to["throw"]('partSize must be greater than 10');
+        }).to['throw']('partSize must be greater than 10');
       });
       it('aborts if uploadPart fails', function(done) {
         var reqs;
@@ -694,7 +694,7 @@
             upload.doneParts++;
           }
           return uploadPartSpy.origMethod.apply(uploadPartSpy.object, arguments);
-        })
+        });
         send({}, function(err, data) {
           expect(err).not.to.exist;
           expect(helpers.operationsForRequests(reqs)).to.eql([
@@ -704,7 +704,7 @@
             's3.completeMultipartUpload'
           ]);
           done();
-        })
+        });
       });
 
       describe('Location', function() {
@@ -1048,7 +1048,7 @@
               service: s3,
               params: params
             });
-            return upload.promise().then(thenFunction)["catch"](catchFunction).then(function() {
+            return upload.promise().then(thenFunction)['catch'](catchFunction).then(function() {
               expect(err).not.to.exist;
               expect(data.ETag).to.equal('ETAG');
               expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key');
@@ -1094,7 +1094,7 @@
               service: s3,
               params: params
             });
-            return upload.promise().then(thenFunction)["catch"](catchFunction).then(function() {
+            return upload.promise().then(thenFunction)['catch'](catchFunction).then(function() {
               expect(helpers.operationsForRequests(reqs)).to.eql(['s3.createMultipartUpload', 's3.uploadPart', 's3.uploadPart', 's3.uploadPart', 's3.uploadPart', 's3.completeMultipartUpload']);
               expect(err).not.to.exist;
               expect(data.ETag).to.equal('FINAL_ETAG');
@@ -1145,7 +1145,7 @@
               service: s3,
               params: params
             });
-            return upload.promise().then(thenFunction)["catch"](catchFunction).then(function() {
+            return upload.promise().then(thenFunction)['catch'](catchFunction).then(function() {
               expect(data).not.to.exist;
               return expect(err.message).to.equal('ERROR');
             });

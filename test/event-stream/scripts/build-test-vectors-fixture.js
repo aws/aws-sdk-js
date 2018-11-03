@@ -1,4 +1,3 @@
-/*eslint-disable */
 const { Buffer } = require('buffer');
 const {
     readdirSync,
@@ -52,7 +51,7 @@ for (const dirName of ['positive', 'negative']) {
                         value: ${headerValue(declaration.type, declaration.value)},
                     },`
                 )
-                .join('\n')
+                .join('\n');
 
             vectors +=
 `            decoded: {
@@ -61,10 +60,10 @@ ${headers}
                 },
                 body: ${writeBuffer(Buffer.from(decoded.payload, 'base64'))},
             },
-`
+`;
         }
 
-        vectors += "       },\n"
+        vectors += '       },\n';
     }
 }
 
@@ -97,7 +96,7 @@ function headerValue(type, vectorRepresentation) {
             return `new Date(${vectorRepresentation})`;
         case 9:
             const hex = Buffer.from(vectorRepresentation, 'base64').toString('hex');
-            return `'${hex.substr(0, 8)}-${hex.substr(8, 4)}-${hex.substr(12, 4)}-${hex.substr(16, 4)}-${hex.substr(20)}'`
+            return `'${hex.substr(0, 8)}-${hex.substr(8, 4)}-${hex.substr(12, 4)}-${hex.substr(16, 4)}-${hex.substr(20)}'`;
         default:
             return vectorRepresentation;
     }

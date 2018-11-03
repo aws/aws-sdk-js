@@ -1,7 +1,7 @@
 var helpers = require('./helpers');
 var http = require('http');
-var url = require('url')
-var AWS = helpers.AWS
+var url = require('url');
+var AWS = helpers.AWS;
 var endpoint_discovery_module = require('../lib/discover_endpoint');
 var iniLoader = AWS.util.iniLoader;
 var getCacheKey = endpoint_discovery_module.getCacheKey;
@@ -117,7 +117,7 @@ var api = {
       }
     }
   }
-}
+};
 
 describe('endpoint discovery', function() {
   afterEach(function() {
@@ -137,9 +137,9 @@ describe('endpoint discovery', function() {
         region: 'fake-region-1',
         serviceId: 'MockService',
         accessKeyId: 'akid'
-      })
+      });
     });
-  
+
     it('generate correct keys with endpointdiscoveryid traits', function() {
       var spy = helpers.spyOn(AWS.endpointCache, 'get').andReturn([{
         Address: 'https://fakeService.amaoznaws.com'
@@ -162,7 +162,7 @@ describe('endpoint discovery', function() {
       }));
     });
   });
-  
+
   describe('marshallCustomIdentifiers', function() {
     it('can marshall params according to endpointdiscoveryid trait', function() {
       var MockService = helpers.MockServiceFromApi(api);
@@ -177,12 +177,12 @@ describe('endpoint discovery', function() {
       expect(ids).to.eql({RecordItem: 'record'});
     });
   });
-  
+
   describe('optionalDiscoverEndpoint', function() {
-    beforeEach(function(){
+    beforeEach(function() {
       AWS.endpointCache.empty();
-    })
-    
+    });
+
     it('gets first corresponding endpoint from endpoint cache', function() {
       var spy = helpers.spyOn(AWS.endpointCache, 'get').andReturn([{
         Address: 'https://fakeService.amazonaws.com:22/path'
@@ -194,7 +194,7 @@ describe('endpoint discovery', function() {
         region: 'fake-region-1',
         apiConfig: new AWS.Model.Api(api)
       });
-      helpers.mockHttpResponse(200, {}, '{}')
+      helpers.mockHttpResponse(200, {}, '{}');
       var request = client.makeRequest('optionalEDOperation', {Query: 'query'});
       request.send();
       expect(spy.calls.length).to.eql(1);
@@ -203,9 +203,9 @@ describe('endpoint discovery', function() {
         port: 22,
         protocol: 'https:',
         path: '/path'
-      })
+      });
     });
-  
+
     it('use regional endpoint of new endpoint cannot be discovered', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
@@ -213,9 +213,9 @@ describe('endpoint discovery', function() {
         apiConfig: new AWS.Model.Api(api)
       });
       var request = client.makeRequest('optionalEDOperation', {Query: 'query'});
-      expect(request.httpRequest.endpoint.hostname).to.eql('mockservice.fake-region-1.amazonaws.com')
+      expect(request.httpRequest.endpoint.hostname).to.eql('mockservice.fake-region-1.amazonaws.com');
     });
-  
+
     it('put in endpoint cache is endpoint operation succeeds', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
@@ -254,7 +254,7 @@ describe('endpoint discovery', function() {
         expect(makeRequestSpy.calls[0].arguments[0]).to.eql('optionalEDOperation');
       });
     });
-  
+
     it('make one endpoint operation for same cache keys before endpoint operation response returning', function() {
       var spy = helpers.spyOn(AWS.HttpClient, 'getInstance').andCallThrough();
       var client = new AWS.Service({
@@ -266,9 +266,9 @@ describe('endpoint discovery', function() {
       client.makeRequest('optionalEDOperation', {Query: 'query'}).send();
       client.makeRequest('optionalEDOperation', {Query: 'query'}).send();
       //should not make 4 calls which request endpoint once for every api call
-      expect(spy.calls.length).to.eql(3)
+      expect(spy.calls.length).to.eql(3);
     });
-  
+
     it('should put in an undefined cache record valid for 1 minute when failed', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
@@ -287,7 +287,7 @@ describe('endpoint discovery', function() {
       expect(spy.calls[1].arguments[1]).to.eql([{
         Address: '',
         CachePeriodInMinutes: 1
-      }])
+      }]);
     });
 
     it('evict invalid endpoint records from cache if InvalidEndpointException encountered', function() {
@@ -301,7 +301,7 @@ describe('endpoint discovery', function() {
         accessKeyId: 'akid',
         region: 'fake-region-1',
         serviceId: 'MockService'
-      }
+      };
       AWS.endpointCache.put(cacheKey, [{Address: 'https://cell1.fakeservice.amazonaws.com/fakeregion'}]);
       var cacheRemoveSpy = helpers.spyOn(AWS.endpointCache, 'remove').andCallThrough();
       var request = client.makeRequest('optionalEDOperation', {Query: 'query'});
@@ -324,21 +324,21 @@ describe('endpoint discovery', function() {
       helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
       var spy = helpers.createSpy('send inject');
       AWS.events.on('sign', function(req) {
-        if(req.operation === 'describeEndpoints') {
-          spy(req)
+        if (req.operation === 'describeEndpoints') {
+          spy(req);
         }
-      })
+      });
       request.send();
       expect(spy.calls.length).to.eql(1);
       expect(spy.calls[0].arguments[0].httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
     });
   });
-  
+
   describe('requiredDiscoveryEndpoint', function() {
-    beforeEach(function(){
-      AWS.endpointCache.empty()
+    beforeEach(function() {
+      AWS.endpointCache.empty();
     });
-  
+
     it('fail when endpoint discovery fails', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
@@ -352,9 +352,9 @@ describe('endpoint discovery', function() {
         expect(data).to.eql(null);
         expect(err.code).to.eql('EndpointDiscoveryException');
         expect(err.message).to.eql('Request cannot be fulfilled without specifying an endpoint');
-      })
+      });
     });
-  
+
     it('endpoint operation will be called at the same rate of api requests', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
@@ -377,7 +377,7 @@ describe('endpoint discovery', function() {
       expect(apiRequestCount).to.eql(10);
       expect(endpointOperationRequestCount).to.eql(10);
     });
-  
+
     it('put in endpoint cache and use returned endpoint when endpoint discovery succeeds', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
@@ -423,7 +423,7 @@ describe('endpoint discovery', function() {
         region: 'mock-region',
         serviceId: 'MockService',
         Query: 'query'
-      }
+      };
       AWS.endpointCache.put(cacheKey, [{Address: 'https://cell1.fakeservice.amazonaws.com/fakeregion', CachePeriodInMinutes: 1}]);
       var cacheRemoveSpy = helpers.spyOn(AWS.endpointCache, 'remove').andCallThrough();
       var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
@@ -445,8 +445,8 @@ describe('endpoint discovery', function() {
       helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell2.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
       var spy = helpers.createSpy('send inject');
       AWS.events.on('sign', function(req) {
-        if(req.operation === 'describeEndpoints') {
-          spy(req)
+        if (req.operation === 'describeEndpoints') {
+          spy(req);
         }
       });
       request.send();
@@ -479,7 +479,7 @@ describe('endpoint discovery', function() {
           AWS.events.on('build', function(req) {
             req.httpRequest.updateEndpoint('http://127.0.0.1:' + port);
           });
-    
+
           client = new AWS.Service({
             endpointDiscoveryEnabled: true,
             apiConfig: new AWS.Model.Api(api),
@@ -488,7 +488,7 @@ describe('endpoint discovery', function() {
 
         afterEach(function() {
           AWS.events.removeAllListeners();
-          try {server.close()} catch(e) {}//fix service node running error in node 0.10
+          try {server.close();} catch (e) {}//fix service node running error in node 0.10
         });
 
         it('endpoint operation succeed', function(done) {
@@ -522,7 +522,7 @@ describe('endpoint discovery', function() {
               clearTimeout(timer);
               timer = null;
             }
-          }
+          };
           for (var i = 0; i < concurrency; i++) {
             var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
             request.send(function(err, data) {
@@ -567,7 +567,7 @@ describe('endpoint discovery', function() {
               clearTimeout(timer);
               timer = null;
             }
-          }
+          };
           var failedRequestCounter = 0;
           for (var i = 0; i < concurrency; i++) {
             var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
@@ -591,12 +591,12 @@ describe('endpoint discovery', function() {
       });
     }
   });
-  
+
   describe('discoverEndpoints', function() {
-    beforeEach(function(){
+    beforeEach(function() {
       AWS.endpointCache.empty();
     });
-  
+
     it('accesses a single global endpoint cache for different services', function() {
       var clientOptions = {
         endpointDiscoveryEnabled: true,
@@ -623,7 +623,7 @@ describe('endpoint discovery', function() {
       client2.makeRequest('requiredEDOperation', {}).send();
       expect(putCacheCount).to.eql(2);
     });
-  
+
     it('default not run endpoint operation for optional endpoint discovery', function() {
       var client = new AWS.Service({
         apiConfig: new AWS.Model.Api(api)
@@ -638,7 +638,7 @@ describe('endpoint discovery', function() {
       client.makeRequest('optionalEDOperation', {Query: 'query'}).send();
       expect(putInCacheSpy.calls.length).to.eql(1);
     });
-  
+
     it('if endpoint specified for client, custom endpoint should be preferred', function() {
       var client = new AWS.Service({
         apiConfig: new AWS.Model.Api(api),
@@ -648,13 +648,13 @@ describe('endpoint discovery', function() {
       var error;
       try {
         client.makeRequest('optionalEDOperation', {Query: 'query'}).build();
-      } catch(e) {
+      } catch (e) {
         error = e;
       }
       expect(error).not.to.eql(null);
       expect(error.code).to.eql('ConfigurationException');
       expect(error.message).to.eql('Custom endpoint is supplied; endpointDiscoveryEnabled must not be true.');
-  
+
       client = new AWS.Service({
         apiConfig: new AWS.Model.Api(api),
         endpoint: 'custom-endpoint.amazonaws.com/fake-region',
@@ -663,9 +663,9 @@ describe('endpoint discovery', function() {
       client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'}).send();
       expect(getFromCacheSpy.calls.length).to.eql(0);
     });
-  
+
     it('if endpoint specified in global config, custom endpoint should be preferred', function() {
-      AWS.config.update({endpoint: 'custom-endpoint.amazonaws.com/fake-region'})
+      AWS.config.update({endpoint: 'custom-endpoint.amazonaws.com/fake-region'});
       client = new AWS.Service({
         apiConfig: new AWS.Model.Api(api),
       });
@@ -674,9 +674,9 @@ describe('endpoint discovery', function() {
       expect(getFromCacheSpy.calls.length).to.eql(0);
       delete AWS.config.endpoint;
     });
-  
+
     it('if endpoint specified in global config, custom endpoint should be preferred', function() {
-      AWS.config.update({mock: {endpoint: 'custom-endpoint.amazonaws.com/fake-region'}})
+      AWS.config.update({mock: {endpoint: 'custom-endpoint.amazonaws.com/fake-region'}});
       var MockService = helpers.MockServiceFromApi(api);
       var client = new MockService({});
       var getFromCacheSpy = helpers.spyOn(AWS.endpointCache, 'get').andCallThrough();
@@ -684,7 +684,7 @@ describe('endpoint discovery', function() {
       expect(getFromCacheSpy.calls.length).to.eql(0);
       delete AWS.config.mock;
     });
-  
+
     it('append "endpoint-discovery" to user-agent on all requests', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
@@ -693,7 +693,7 @@ describe('endpoint discovery', function() {
       helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
       var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
       request.send();
-      if(AWS.util.isNode()) {
+      if (AWS.util.isNode()) {
         expect(request.httpRequest.headers['User-Agent']).include('endpoint-discovery');
       } else {
         expect(request.httpRequest.headers['X-Amz-User-Agent']).include('endpoint-discovery');
@@ -701,7 +701,7 @@ describe('endpoint discovery', function() {
 
       request = client.makeRequest('optionalEDOperation', {Query: 'query'});
       request.send();
-      if(AWS.util.isNode()) {
+      if (AWS.util.isNode()) {
         expect(request.httpRequest.headers['User-Agent']).include('endpoint-discovery');
       } else {
         expect(request.httpRequest.headers['X-Amz-User-Agent']).include('endpoint-discovery');
@@ -727,15 +727,15 @@ describe('endpoint discovery', function() {
       });
       var spy = helpers.createSpy('send inject');
       AWS.events.on('sign', function(req) {
-        if(req.operation === 'describeEndpoints') {
+        if (req.operation === 'describeEndpoints') {
           spy(req);
         }
-      })
+      });
       helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
       client.makeRequest('optionalEDOperation', {Query: 'query'}).send();
       client.makeRequest('requiredEDOperation',  {Query: 'query', Record: 'record'}).send();
       expect(spy.calls.length).to.eql(0);
-    })
+    });
 
     it('turn on endpoint discovery in client config', function() {
 
@@ -745,7 +745,7 @@ describe('endpoint discovery', function() {
       });
       var spy = helpers.createSpy('send inject');
       AWS.events.on('sign', function(req) {
-        if(req.operation === 'describeEndpoints') {
+        if (req.operation === 'describeEndpoints') {
           spy(req);
         }
       });
@@ -763,7 +763,7 @@ describe('endpoint discovery', function() {
       });
       var spy = helpers.createSpy('send inject');
       AWS.events.on('sign', function(req) {
-        if(req.operation === 'describeEndpoints') {
+        if (req.operation === 'describeEndpoints') {
           spy(req);
         }
       });
@@ -782,7 +782,7 @@ describe('endpoint discovery', function() {
         });
         var spy = helpers.createSpy('send inject');
         AWS.events.on('sign', function(req) {
-          if(req.operation === 'describeEndpoints') {
+          if (req.operation === 'describeEndpoints') {
             spy(req);
           }
         });
@@ -798,7 +798,7 @@ describe('endpoint discovery', function() {
         var error;
         try {
           request.send();
-        } catch(e) {
+        } catch (e) {
           error = e;
         }
         expect(error).not.to.eql(undefined);
@@ -813,7 +813,7 @@ describe('endpoint discovery', function() {
         });
         var spy = helpers.createSpy('send inject');
         AWS.events.on('sign', function(req) {
-          if(req.operation === 'describeEndpoints') {
+          if (req.operation === 'describeEndpoints') {
             spy(req);
           }
         });
@@ -829,14 +829,14 @@ describe('endpoint discovery', function() {
         var error;
         try {
           request.send();
-        } catch(e) {
+        } catch (e) {
           error = e;
         }
         expect(error).not.to.eql(undefined);
         expect(error.code).to.eql('ConfigurationException');
         expect(error.message).to.eql('environmental variable AWS_ENDPOINT_DISCOVERY_ENABLED cannot be set to nothing');
       });
-  
+
       it('turn on endpoint discovery from config file', function() {
         var client = new AWS.Service({
           endpointDiscoveryEnabled: false,
@@ -846,8 +846,8 @@ describe('endpoint discovery', function() {
         process.env.AWS_PROFILE = 'dummyRole';
         var spy = helpers.createSpy('send inject');
         AWS.events.on('sign', function(req) {
-          if(req.operation === 'describeEndpoints') {
-            spy(req)
+          if (req.operation === 'describeEndpoints') {
+            spy(req);
           }
         });
         helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
@@ -861,7 +861,7 @@ describe('endpoint discovery', function() {
         var error;
         try {
           request.send();
-        } catch(e) {
+        } catch (e) {
           error = e;
         }
         expect(error).not.to.eql(undefined);

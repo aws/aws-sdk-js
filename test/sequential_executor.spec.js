@@ -31,7 +31,7 @@
         this.emitter.emit('event1');
         return expect(list).to.eql([3, 2, 1, 4]);
       });
-    })
+    });
 
     describe('addListeners', function() {
 
@@ -91,7 +91,7 @@
         this.emitter.addNamedListener('CONSTNAME', 'eventName', spy);
         expect(this.emitter.CONSTNAME).to.equal(spy);
         this.emitter.emit('eventName', ['argument']);
-        return expect(spy.calls[0]["arguments"]).to.eql(['argument']);
+        return expect(spy.calls[0]['arguments']).to.eql(['argument']);
       });
 
       it('is chainable', function() {
@@ -121,7 +121,7 @@
         }, addToHead);
         this.emitter.emit('event', []);
         return expect(list).to.eql([5, 3, 2, 1, 4]);
-      })
+      });
     });
 
     describe('addNamedListeners', function() {
@@ -144,8 +144,8 @@
         expect(this.emitter.CONST2).to.equal(spy2);
         this.emitter.emit('event1', ['arg1']);
         this.emitter.emit('event2', ['arg2']);
-        expect(spy1.calls[0]["arguments"]).to.eql(['arg1']);
-        return expect(spy2.calls[0]["arguments"]).to.eql(['arg2']);
+        expect(spy1.calls[0]['arguments']).to.eql(['arg1']);
+        return expect(spy2.calls[0]['arguments']).to.eql(['arg2']);
       });
     });
 

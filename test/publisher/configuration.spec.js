@@ -20,7 +20,7 @@ if (AWS.util.isNode()) {
       iniLoader.clearCachedFiles();
       process.env = processEnv;
     });
-  
+
     describe('get configurations from environmental variable', function () {
       it('should correctly parse truthy value to true', function () {
         var enabled = ['1', 'true', 'whatever', 'X', '99'];
@@ -34,7 +34,7 @@ if (AWS.util.isNode()) {
           });
         }
       });
-  
+
       it('should correctly parse falsy value to false', function () {
         var disabled = ['0', 'false', ''];
         for (var i = 0; i < disabled.length; i++) {
@@ -47,7 +47,7 @@ if (AWS.util.isNode()) {
           });
         }
       });
-  
+
       it('should get port', function () {
         process.env.AWS_CSM_PORT = '31001';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
@@ -66,9 +66,9 @@ if (AWS.util.isNode()) {
           port: undefined,
           clientId: 'client_id',
         });
-      })
-    })
-  
+      });
+    });
+
     describe('get configuration from config file', function () {
       it('should correctly parse truthy value to true', function () {
         var enabled = ['1', 'true', 'whatever', 'X', '99'];
@@ -83,7 +83,7 @@ if (AWS.util.isNode()) {
           });
         }
       });
-  
+
       it('should correctly parse falsy value to false', function () {
         var disabled = ['0', 'false', ''];
         for (var i = 0; i < disabled.length; i++) {
@@ -105,8 +105,8 @@ if (AWS.util.isNode()) {
           port: undefined,
           clientId: undefined
         });
-      })
-  
+      });
+
       it('should get port', function () {
         helpers.spyOn(AWS.util, 'readFileSync').andReturn('[default]\ncsm_port=31001');
         expect(monitoringConfig()).to.eql({
@@ -115,7 +115,7 @@ if (AWS.util.isNode()) {
           clientId: undefined,
         });
       });
-  
+
       it('should get clientID', function () {
         helpers.spyOn(AWS.util, 'readFileSync').andReturn('[default]\ncsm_client_id=id');
         expect(monitoringConfig()).to.eql({
@@ -123,9 +123,9 @@ if (AWS.util.isNode()) {
           port: undefined,
           clientId: 'id',
         });
-      })
+      });
     });
-  
+
     describe('get configurations according to resolving chain', function () {
       it('should prefer environmental variables over config file', function () {
         process.env.AWS_PROFILE = 'role';
@@ -140,7 +140,7 @@ if (AWS.util.isNode()) {
           clientId: 'clientid',
         });
       });
-  
+
       it('should not read shared config file if monitoring disabled from environment', function () {
         process.env.AWS_PROFILE = 'role';
         process.env.AWS_CSM_ENABLED = 'false';
@@ -150,24 +150,24 @@ if (AWS.util.isNode()) {
           return '';
         });
         expect(monitoringConfig().enabled).to.equal(false);
-        expect(ReadFileCalled).to.equal(0)
-      })
+        expect(ReadFileCalled).to.equal(0);
+      });
     });
 
     it('should enable client-side monitoring globally if corresponding environment is set', function(done) {
-      process.env.AWS_CSM_ENABLED = "true";
+      process.env.AWS_CSM_ENABLED = 'true';
       AWS.Service.prototype.publisher = undefined;
       AWS.Service.defineService('acm', ['2015-12-08']);
       expect(AWS.Service.prototype.publisher).not.equal(undefined);
-      var publisherInvoked = false
+      var publisherInvoked = false;
       AWS.Service.prototype.publisher = {
-        eventHandler: function(event){
+        eventHandler: function(event) {
           if (!publisherInvoked) {
             publisherInvoked = true;
-            done() //make sure publisher is invoked
+            done(); //make sure publisher is invoked
           }
         }
-      }
+      };
       var client = new MockService({});
       client.makeRequest('operationName', function(err, data) {});
     });
@@ -177,17 +177,17 @@ if (AWS.util.isNode()) {
       AWS.Service.prototype.publisher = undefined;
       AWS.Service.defineService('acm', ['2015-12-08']);
       expect(AWS.Service.prototype.publisher).not.equal(undefined);
-      var publisherInvoked = false
+      var publisherInvoked = false;
       AWS.Service.prototype.publisher = {
-        eventHandler: function(event){
+        eventHandler: function(event) {
           if (!publisherInvoked) {
             publisherInvoked = true;
-            done() //make sure publisher is invoked
+            done(); //make sure publisher is invoked
           }
         }
-      }
+      };
       var client = new MockService({});
       client.makeRequest('operationName', function(err, data) {});
     });
-  })  
+  });
 }

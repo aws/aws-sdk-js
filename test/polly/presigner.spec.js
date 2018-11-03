@@ -207,7 +207,7 @@ describe('AWS.Polly.Presigner', function() {
       expect(expires).to.equal(900);
     });
 
-    it('supports being called with a callback with expires', function(done){
+    it('supports being called with a callback with expires', function(done) {
       var expectedUrl = 'https://polly.us-west-2.amazonaws.com/v1/speech?OutputFormat=mp3&Text=Hello%20world&TextType=text&VoiceId=fake&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fus-west-2%2Fpolly%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Signature=ad22388e7298c19a491bc77b0c1fd8f169de31f031497a0266a15e1379520ff8&X-Amz-SignedHeaders=host';
       presigner.getSynthesizeSpeechUrl({
         TextType: 'text',

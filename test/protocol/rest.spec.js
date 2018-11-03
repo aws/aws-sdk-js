@@ -239,7 +239,7 @@
           request.params = {
             Foo: date,
             Bar: [date, date],
-          }
+          };
           defop({
             input: input,
             http: {
@@ -258,9 +258,9 @@
             member: {
               type: 'timestamp',
             }
-          }
-          expect(build().httpRequest.path).to.equal('/path?Bar=1970-01-01T01%3A00%3A00Z&Bar=1970-01-01T01%3A00%3A00Z&foo=3600')
-        })
+          };
+          expect(build().httpRequest.path).to.equal('/path?Bar=1970-01-01T01%3A00%3A00Z&Bar=1970-01-01T01%3A00%3A00Z&foo=3600');
+        });
       });
       describe('headers', function() {
         beforeEach(function() {

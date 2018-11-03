@@ -105,7 +105,7 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
     }
     code += 'Object.defineProperty(apiLoader.services[\'' + serviceName +'\'], \'' + version + '\', {\n';
     code += tab + 'get: function get() {\n';
-    code += tab + tab + 'var model = require(\'../apis/' + versionInfo.api + '.json\');\n'
+    code += tab + tab + 'var model = require(\'../apis/' + versionInfo.api + '.json\');\n';
     if (versionInfo.hasOwnProperty('paginators')) {
         code += tab + tab + 'model.paginators = require(\'../apis/' + versionInfo.paginators + '.json\').pagination;\n';
     }
@@ -125,7 +125,7 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
       code: code,
       path: path.join(clientFolderPath, serviceName + '.js'),
       service: serviceName,
-  }
+  };
 };
 
 ClientCreator.prototype.tabs = function tabs(count) {
@@ -134,7 +134,7 @@ ClientCreator.prototype.tabs = function tabs(count) {
       tab += '  ';
   }
   return tab;
-}
+};
 
 ClientCreator.prototype.generateDefinePropertySource = function generateDefinePropertySource(objName, serviceName, className) {
   var tabs = this.tabs;

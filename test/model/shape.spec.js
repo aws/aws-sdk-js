@@ -234,7 +234,7 @@
           expect(shape.members.Date.timestampFormat).to.eql('iso8601');
         });
       });
-      
+
       describe('toType()', function() {
         it('converts unix timestamps', function() {
           var api, date, shape;

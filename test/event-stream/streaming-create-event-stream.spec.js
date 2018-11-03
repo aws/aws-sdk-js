@@ -18,7 +18,7 @@ if (stream.Transform) {
                 testEventMessages.recordEventMessage,
                 testEventMessages.statsEventMessage,
                 testEventMessages.endEventMessage
-            ], 10)
+            ], 10);
 
             var expectedEvents = [
                 {
@@ -78,7 +78,7 @@ if (stream.Transform) {
                 errorEventMessage,
                 testEventMessages.statsEventMessage,
                 testEventMessages.endEventMessage
-            ], 10)
+            ], 10);
 
             var eventStream = createEventStream(mockHttpResponse, parser, mockEventStreamShape);
 
