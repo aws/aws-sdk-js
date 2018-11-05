@@ -279,7 +279,12 @@ export abstract class ConfigurationOptions {
     /**
      * Whether to enable endpoint discovery for operations that allow optionally using an endpoint returned by 
      * the service.
-     * Defaults to 'false'
      */
-    endpointDiscoveryEnabled?: Boolean;
+    endpointDiscoveryEnabled?: boolean;
+    /**
+     * The size of the global cache storing endpoints from endpoint
+     * discovery operations. Once endpoint cache is created, updating this setting
+     * cannot change existing cache size.
+     */
+    endpointCacheSize?: number;
 }
