@@ -1333,62 +1333,60 @@
   });
 
   describe('AWS.ChainableTemporaryCredentials', function() {
-    var creds, mockSTS, setupClients, setupCreds;
-    creds = null;
-    setupCreds = function() {
-      return creds = new AWS.ChainableTemporaryCredentials({
-        DurationSeconds: 1200
-      });
-    };
-    setupClients = function() {
-      setupCreds();
-      return creds.createClients();
-    };
-    mockSTS = function(expireTime, inParams) {
-      var operation;
-      if (!inParams) {
-        inParams = {
+    var mockSTS;
+    function setupCredsAndSTSMock(options) {
+      options = options || {}
+      if (!options.params) {
+        options.params = {
           DurationSeconds: 1200
-        };
+        }
       }
-      if (inParams.RoleArn) {
-        operation = 'assumeRole';
-      } else {
-        operation = 'getSessionToken';
-      }
-      return helpers.spyOn(creds.service, operation).andCallFake(function(cb) {
-        expect(creds.service.config.params).to.eql(inParams);
-        setImmediate(cb, null, {
-          Credentials: {
-            AccessKeyId: 'KEY',
-            SecretAccessKey: 'SECRET',
-            SessionToken: 'TOKEN',
-            Expiration: expireTime
+      var creds = new AWS.ChainableTemporaryCredentials(options);
+      mockSTS = function(expireTime, tokenCode) {
+        var operation;
+        if (options.params.RoleArn) {
+          operation = 'assumeRole';
+        } else {
+          operation = 'getSessionToken';
+        }
+        return helpers.spyOn(creds.service, operation).andCallFake(function(params, cb) {
+          if (options.params.SerialNumber) {
+            expect(params.TokenCode).to.equal(tokenCode);
           }
+          expect(creds.service.config.params).to.include(options.params);
+          creds.service.config.getCredentials(function (err, credentials) {
+            if (err) {
+              cb(err);
+            } else {
+              setImmediate(cb, null, {
+                Credentials: {
+                  AccessKeyId: 'KEY',
+                  SecretAccessKey: 'SECRET',
+                  SessionToken: 'TOKEN',
+                  Expiration: expireTime
+                }
+              });
+            }
+          });
         });
-      });
-    };
+      };
+      return creds;
+    }
     describe('constructor', function() {
-      setupCreds();
-      return it('constructs service clients lazily', function() {
-        return expect(creds.service).not.to.exist;
+      var creds = new AWS.ChainableTemporaryCredentials();
+      it('constructs service client', function() {
+        expect(creds.service).to.exist;
       });
-    });
-    describe('createClients', function() {
-      beforeEach(function() {
-        return setupCreds();
+      it('should throw if params.SerialNumber given without tokenCodeFn', function() {
+        expect(function () {
+          new AWS.ChainableTemporaryCredentials({params: {SerialNumber: '123'}})
+        }).to.throw('tokenCodeFn must be a function when params.SerialNumber is given')
       });
-      it('constructs clients if not present', function() {
-        expect(creds.service).not.to.exist;
-        creds.createClients();
-        return expect(creds.service).to.exist;
-      });
-      return it('does not construct clients if already present', function() {
-        var service;
-        creds.createClients();
-        service = creds.service;
-        creds.createClients();
-        return expect(service).to.eql(creds.service);
+      it('should ignore tokenCodeFn if params.SerialNumber not given', function() {
+        var creds = new AWS.ChainableTemporaryCredentials({
+          tokenCodeFn: function () {}
+        });
+        expect(creds).to.have.property('tokenCodeFn', null);
       });
     });
     describe('masterCredentials', function() {
@@ -1401,68 +1399,55 @@
         AWS.config.credentials = origCreds;
         AWS.config.credentialProvider = origProvider;
       });
-      it('lazily uses uninitialized global credentials', function() {
-        AWS.config.credentials = null;
-        creds = new AWS.ChainableTemporaryCredentials();
-        AWS.config.credentials = new AWS.Credentials('AKID', 'SECRET');
-        creds.createClients();
-        expect(creds.service.config.credentials.accessKeyId).to.equal('AKID');
-        expect(creds.service.config.credentials.secretAccessKey).to.equal('SECRET');
-      });
-      it('lazily uses global credential provider', function(done) {
-        AWS.config.credentials = null;
-        creds = new AWS.ChainableTemporaryCredentials();
-        AWS.config.credentialProvider = new AWS.CredentialProviderChain([
-          new AWS.Credentials('AKID', 'SECRET')
-        ]);
-        creds.createClients();
-        creds.service.config.getCredentials(function (err, credentials) {
-          expect(err).to.be.undefined;
-          expect(credentials.accessKeyId).to.equal('AKID');
-          expect(credentials.secretAccessKey).to.equal('SECRET');
-          done();
-        });
-      });
-      it('captures global credentials when omitted', function (done) {
-        // this ensures past advice still works
-        // https://github.com/aws/aws-sdk-js/issues/1064#issuecomment-234008942
+      it('uses initialized global credentials', function(done) {
         var masterCredentials = new AWS.Credentials('AKID', 'SECRET');
-        masterCredentials.expired = true;
-        var masterCredentialsSpy = helpers.spyOn(masterCredentials, 'refresh').andCallThrough();
         AWS.config.credentials = masterCredentials;
-        creds = new AWS.ChainableTemporaryCredentials();
-        AWS.config.credentials = creds;
-        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
-        creds.refresh(function () {
-          expect(masterCredentialsSpy.calls.length).to.equal(1);
-          expect(creds.service.config.credentials).to.equal(masterCredentials);
+        AWS.config.credentials = new AWS.ChainableTemporaryCredentials();
+        AWS.config.credentials.service.config.getCredentials(function (err, credentials) {
+          expect(err).to.not.exist;
+          expect(credentials).to.equal(masterCredentials);
+          done();
+        })
+      });
+      it('uses global credential provider when AWS.config.credentials is null', function(done) {
+        var masterCredentials = new AWS.Credentials('AKID', 'SECRET');
+        AWS.config.credentials = null;
+        AWS.config.credentialProvider = new AWS.CredentialProviderChain([
+          masterCredentials
+        ]);
+        AWS.config.credentials = new AWS.ChainableTemporaryCredentials();
+        AWS.config.credentials.service.config.getCredentials(function (err, credentials) {
+          expect(err).to.not.exist;
+          expect(credentials).to.equal(masterCredentials)
           done();
         });
       });
-      return it('seeds masterCredentials from passed in credentials', function() {
-        var masterCreds;
-        AWS.config.credentials = new AWS.Credentials('AKID', 'SECRET');
-        masterCreds = new AWS.Credentials('TEMPID', 'TEMPSECRET');
-        creds = new AWS.ChainableTemporaryCredentials(null, masterCreds);
-        expect(creds.masterCredentials.accessKeyId).to.equal('TEMPID');
-        expect(creds.masterCredentials.secretAccessKey).to.equal('TEMPSECRET');
-        expect(AWS.config.credentials.accessKeyId).to.equal('AKID');
-        expect(AWS.config.credentials.secretAccessKey).to.equal('SECRET');
+      it('seeds masterCredentials from passed in credentials', function(done) {
+        var masterCreds = new AWS.Credentials('TEMPID', 'TEMPSECRET');
+        var globalCreds = new AWS.Credentials('AKID', 'SECRET');
+        AWS.config.credentials = globalCreds;
+        var creds = new AWS.ChainableTemporaryCredentials({masterCredentials: masterCreds});
+        creds.service.config.getCredentials(function (err, credentials) {
+          expect(err).to.not.exist;
+          expect(credentials).to.equal(masterCreds);
+          expect(AWS.config.credentials).to.equal(globalCreds);
+          done();
+        });
       });
     });
     describe('needsRefresh', function() {
-      return it('can be expired based on expire time from STS response', function() {
-        setupClients();
+      return it('can be expired based on expire time from STS response', function(done) {
+        var creds = setupCredsAndSTSMock();
         mockSTS(new Date(0));
-        creds.refresh(function() {});
-        return expect(creds.needsRefresh()).to.equal(true);
+        creds.refresh(function() {
+          expect(creds.needsRefresh()).to.equal(true);
+          done();
+        });
       });
     });
     return describe('refresh', function() {
-      beforeEach(function() {
-        return setupClients();
-      });
       it('loads temporary credentials from STS using getSessionToken', function(done) {
+        var creds = setupCredsAndSTSMock();
         mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
         creds.refresh(function() {
           expect(creds.accessKeyId).to.equal('KEY');
@@ -1473,14 +1458,12 @@
         });
       });
       it('loads temporary credentials from STS using assumeRole if RoleArn is provided', function(done) {
-        creds = new AWS.ChainableTemporaryCredentials({
-          RoleArn: 'ARN'
+        var creds = setupCredsAndSTSMock({
+          params: {
+            RoleArn: 'ARN'
+          }
         });
-        creds.createClients();
-        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000), {
-          RoleArn: 'ARN',
-          RoleSessionName: 'temporary-credentials'
-        });
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
         creds.refresh(function() {
           expect(creds.accessKeyId).to.equal('KEY');
           expect(creds.secretAccessKey).to.equal('SECRET');
@@ -1490,8 +1473,9 @@
         });
       });
       it('does try to load creds second time if service request failed', function(done) {
+        var creds = setupCredsAndSTSMock();
         var spy;
-        spy = helpers.spyOn(creds.service, 'getSessionToken').andCallFake(function(cb) {
+        spy = helpers.spyOn(creds.service, 'getSessionToken').andCallFake(function(params, cb) {
           return cb(new Error('INVALID SERVICE'));
         });
         creds.refresh(function(err) {
@@ -1506,36 +1490,85 @@
           });
         });
       });
-      it('should refresh expired master credentials when refreshing self', function() {
+      it('should refresh expired master credentials when refreshing self', function(done) {
         var masterCreds, refreshSpy;
         masterCreds = new AWS.Credentials('akid', 'secret');
         masterCreds.expired = true;
-        refreshSpy = helpers.spyOn(masterCreds, 'refresh');
-        creds = new AWS.ChainableTemporaryCredentials({
-          RoleArn: 'ARN'
-        }, masterCreds);
-        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000), {
-          RoleArn: 'ARN',
-          RoleSessionName: 'temporary-credentials'
+        refreshSpy = helpers.spyOn(masterCreds, 'refresh').andCallThrough();
+        var creds = setupCredsAndSTSMock({
+          params: {
+            RoleArn: 'ARN',
+            RoleSessionName: 'chainable-temporary-creds'
+          },
+          masterCredentials: masterCreds
         });
-        creds.refresh(function() {});
-        return expect(refreshSpy.calls.length).to.equal(1);
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
+        creds.refresh(function() {
+          expect(refreshSpy.calls.length).to.equal(1);
+          done();
+        });
       });
-      return it('should recursively refresh expired master credentials when refreshing self', function() {
+      it('should recursively refresh expired master credentials when refreshing self', function(done) {
         var masterCreds, intermediateCreds, masterRefreshSpy, intermediateRefreshSpy;
         masterCreds = new AWS.Credentials('akid', 'secret');
         masterCreds.expired = true;
-        masterRefreshSpy = helpers.spyOn(masterCreds, 'refresh');
-        intermediateCreds = new AWS.ChainableTemporaryCredentials({}, masterCreds);
+        masterRefreshSpy = helpers.spyOn(masterCreds, 'refresh').andCallThrough();
+        intermediateCreds = new AWS.ChainableTemporaryCredentials({masterCredentials: masterCreds});
         intermediateRefreshSpy = helpers.spyOn(intermediateCreds, 'refresh').andCallThrough();
-        creds = new AWS.ChainableTemporaryCredentials({ RoleArn: 'ARN' }, intermediateCreds);
-        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000), {
-          RoleArn: 'ARN',
-          RoleSessionName: 'temporary-credentials'
+        var creds = setupCredsAndSTSMock({
+          params: {
+            RoleArn: 'ARN'
+          },
+          masterCredentials: intermediateCreds
         });
-        creds.refresh(function() {});
-        expect(intermediateRefreshSpy.calls.length).to.equal(1);
-        return expect(masterRefreshSpy.calls.length).to.equal(1);
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
+        creds.refresh(function() {
+          expect(intermediateRefreshSpy.calls.length).to.equal(1);
+          expect(masterRefreshSpy.calls.length).to.equal(1);
+          done();
+        });
+      });
+      it('should call tokenCodeFn when params.SerialNumber given', function(done) {
+        var serialNumber = '123';
+        var token = '456789';
+        var tokenCodeFn = helpers.createSpy('tokenCodeFn').andCallFake(
+          function (serialNumber, callback) {
+            expect(serialNumber).to.equal(serialNumber);
+            callback(null, token);
+          }
+        );
+        var creds = setupCredsAndSTSMock({
+          params: {
+            SerialNumber: serialNumber
+          },
+          tokenCodeFn: tokenCodeFn
+        });
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000), token);
+        creds.refresh(function (err) {
+          expect(tokenCodeFn.calls.length).to.equal(1);
+          expect(err).to.not.exist;
+          done();
+        });
+      });
+      it('should wrap tokenCodeFn error', function(done) {
+        var tokenCodeFn = helpers.createSpy('tokenCodeFn').andCallFake(
+          function (serialNumber, callback) {
+            callback(new Error('boom'));
+          }
+        );
+        var creds = setupCredsAndSTSMock({
+          params: {
+            SerialNumber: '123'
+          },
+          tokenCodeFn: tokenCodeFn
+        });
+        mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
+        creds.refresh(function (err) {
+          expect(tokenCodeFn.calls.length).to.equal(1);
+          expect(err).to.be.instanceof(Error);
+          expect(err.message).to.equal('Error fetching MFA token: boom')
+          done();
+        });
       });
     });
   });
