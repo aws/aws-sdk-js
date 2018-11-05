@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Paginator",
+  "description": "When invoking describeInstancesHealth on ElasticBeanstalk the Response object is now correctly paginated."
+}

@@ -32840,7 +32840,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 203 */
 /***/ (function(module, exports) {
 
-	module.exports = {"pagination":{"DescribeApplicationVersions":{"result_key":"ApplicationVersions"},"DescribeApplications":{"result_key":"Applications"},"DescribeConfigurationOptions":{"result_key":"Options"},"DescribeEnvironments":{"result_key":"Environments"},"DescribeEvents":{"input_token":"NextToken","limit_key":"MaxRecords","output_token":"NextToken","result_key":"Events"},"ListAvailableSolutionStacks":{"result_key":"SolutionStacks"}}}
+	module.exports = {"pagination":{"DescribeApplicationVersions":{"result_key":"ApplicationVersions"},"DescribeApplications":{"result_key":"Applications"},"DescribeConfigurationOptions":{"result_key":"Options"},"DescribeEnvironments":{"result_key":"Environments"},"DescribeEvents":{"input_token":"NextToken","limit_key":"MaxRecords","output_token":"NextToken","result_key":"Events"},"ListAvailableSolutionStacks":{"result_key":"SolutionStacks"},"DescribeInstancesHealth":{"result_key":"InstanceHealthList","input_token":"NextToken","output_token":"NextToken"}}}
 
 /***/ }),
 /* 204 */
@@ -36820,7 +36820,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	      }
 	      if (err) return self.cleanup(err);
-
+	      //prevent sending part being returned twice (https://github.com/aws/aws-sdk-js/issues/2304)
+	      if (self.completeInfo[partNumber] && self.completeInfo[partNumber].ETag !== null) return null;
 	      partInfo.ETag = data.ETag;
 	      self.doneParts++;
 	      if (self.isDoneChunking && self.doneParts === self.numParts) {
