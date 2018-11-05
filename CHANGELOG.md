@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.348.0-->
+<!--LATEST=2.349.0-->
 <!--ENTRYINSERT-->
+
+## 2.349.0
+* bugfix: ManagedUpload: add fix for #2304: handle situation of same part being sent twice
+* feature: EKS: Adds waiters for ClusterActive and ClusterDeleted
+* feature: ServerlessApplicationRepository: New AWS Serverless Application Repository APIs that support creating and reading a broader set of AWS CloudFormation templates, as well as enhancements to our existing APIs.
 
 ## 2.348.0
 * feature: CloudDirectory: ListObjectParents API now supports a bool parameter IncludeAllLinksToEachParent, which if set to true, will return a ParentLinks list instead of a Parents map; BatchRead API now supports ListObjectParents operation.

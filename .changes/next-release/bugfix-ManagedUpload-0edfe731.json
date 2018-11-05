@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ManagedUpload",
-  "description": "add fix for #2304: handle situation of same part being sent twice"
-}

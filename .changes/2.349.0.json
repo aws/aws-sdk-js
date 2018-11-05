@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "ManagedUpload",
+        "description": "add fix for #2304: handle situation of same part being sent twice"
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adds waiters for ClusterActive and ClusterDeleted"
+    },
+    {
+        "type": "feature",
+        "category": "ServerlessApplicationRepository",
+        "description": "New AWS Serverless Application Repository APIs that support creating and reading a broader set of AWS CloudFormation templates, as well as enhancements to our existing APIs."
+    }
+]
