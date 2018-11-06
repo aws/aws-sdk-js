@@ -516,11 +516,11 @@ declare class WAFRegional extends Service {
    */
   listXssMatchSets(callback?: (err: AWSError, data: WAFRegional.Types.ListXssMatchSetsResponse) => void): Request<WAFRegional.Types.ListXssMatchSetsResponse, AWSError>;
   /**
-   * Associates a LoggingConfiguration with a specified web ACL. You can access information about all traffic that AWS WAF inspects using the following steps:   Create an Amazon Kinesis Data Firehose delivery stream. For more information, see Creating an Amazon Kinesis Data Firehose Delivery Stream.    Associate that delivery stream to your web ACL using a PutLoggingConfiguration request.   When you successfully enable logging using a PutLoggingConfiguration request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose delivery stream. For more information, see Logging Web ACL Traffic Information in the AWS WAF Developer Guide.
+   * Associates a LoggingConfiguration with a specified web ACL. You can access information about all traffic that AWS WAF inspects using the following steps:   Create an Amazon Kinesis Data Firehose .    Associate that firehose to your web ACL using a PutLoggingConfiguration request.   When you successfully enable logging using a PutLoggingConfiguration request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see Logging Web ACL Traffic Information in the AWS WAF Developer Guide.
    */
   putLoggingConfiguration(params: WAFRegional.Types.PutLoggingConfigurationRequest, callback?: (err: AWSError, data: WAFRegional.Types.PutLoggingConfigurationResponse) => void): Request<WAFRegional.Types.PutLoggingConfigurationResponse, AWSError>;
   /**
-   * Associates a LoggingConfiguration with a specified web ACL. You can access information about all traffic that AWS WAF inspects using the following steps:   Create an Amazon Kinesis Data Firehose delivery stream. For more information, see Creating an Amazon Kinesis Data Firehose Delivery Stream.    Associate that delivery stream to your web ACL using a PutLoggingConfiguration request.   When you successfully enable logging using a PutLoggingConfiguration request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose delivery stream. For more information, see Logging Web ACL Traffic Information in the AWS WAF Developer Guide.
+   * Associates a LoggingConfiguration with a specified web ACL. You can access information about all traffic that AWS WAF inspects using the following steps:   Create an Amazon Kinesis Data Firehose .    Associate that firehose to your web ACL using a PutLoggingConfiguration request.   When you successfully enable logging using a PutLoggingConfiguration request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see Logging Web ACL Traffic Information in the AWS WAF Developer Guide.
    */
   putLoggingConfiguration(callback?: (err: AWSError, data: WAFRegional.Types.PutLoggingConfigurationResponse) => void): Request<WAFRegional.Types.PutLoggingConfigurationResponse, AWSError>;
   /**
@@ -1782,6 +1782,10 @@ declare namespace WAFRegional {
      * The unique identifier (ID) of the web ACL for which to list the associated resources.
      */
     WebACLId: ResourceId;
+    /**
+     * The type of resource to list, either and application load balancer or Amazon API Gateway.
+     */
+    ResourceType?: ResourceType;
   }
   export interface ListResourcesForWebACLResponse {
     /**
@@ -1936,11 +1940,11 @@ declare namespace WAFRegional {
      */
     ResourceArn: ResourceArn;
     /**
-     * An array of Amazon Kinesis Data Firehose delivery stream ARNs.
+     * An array of Amazon Kinesis Data Firehose ARNs.
      */
     LogDestinationConfigs: LogDestinationConfigs;
     /**
-     * The parts of the request that you want redacted from the logs. For example, if you redact the cookie field, the cookie field in the delivery stream will be xxx. 
+     * The parts of the request that you want redacted from the logs. For example, if you redact the cookie field, the cookie field in the firehose will be xxx. 
      */
     RedactedFields?: RedactedFields;
   }
@@ -1974,7 +1978,7 @@ declare namespace WAFRegional {
   export type Predicates = Predicate[];
   export interface PutLoggingConfigurationRequest {
     /**
-     * The Amazon Kinesis Data Firehose delivery streams that contains the inspected traffic information, the redacted fields details, and the Amazon Resource Name (ARN) of the web ACL to monitor.
+     * The Amazon Kinesis Data Firehose that contains the inspected traffic information, the redacted fields details, and the Amazon Resource Name (ARN) of the web ACL to monitor.
      */
     LoggingConfiguration: LoggingConfiguration;
   }
@@ -2118,6 +2122,7 @@ declare namespace WAFRegional {
   export type ResourceArns = ResourceArn[];
   export type ResourceId = string;
   export type ResourceName = string;
+  export type ResourceType = "APPLICATION_LOAD_BALANCER"|"API_GATEWAY"|string;
   export interface Rule {
     /**
      * A unique identifier for a Rule. You use RuleId to get more information about a Rule (see GetRule), update a Rule (see UpdateRule), insert a Rule into a WebACL or delete a one from a WebACL (see UpdateWebACL), or delete a Rule from AWS WAF (see DeleteRule).  RuleId is returned by CreateRule and by ListRules.
@@ -2634,6 +2639,10 @@ declare namespace WAFRegional {
      * An array that contains the action for each Rule in a WebACL, the priority of the Rule, and the ID of the Rule.
      */
     Rules: ActivatedRules;
+    /**
+     * Tha Amazon Resource Name (ARN) of the web ACL.
+     */
+    WebACLArn?: ResourceArn;
   }
   export type WebACLSummaries = WebACLSummary[];
   export interface WebACLSummary {

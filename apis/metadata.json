@@ -599,5 +599,9 @@
   },
   "chime": {
     "name": "Chime"
+  },
+  "pinpointemail": {
+    "prefix": "pinpoint-email",
+    "name": "PinpointEmail"
   }
 }

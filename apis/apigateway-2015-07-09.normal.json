@@ -7647,6 +7647,10 @@
           "shape": "Boolean",
           "documentation": "<p>Specifies whether active tracing with X-ray is enabled for the <a>Stage</a>.</p>"
         },
+        "webAclArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the WebAcl associated with the <a>Stage</a>.</p>"
+        },
         "tags": {
           "shape": "MapOfStringToString",
           "documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>"

@@ -146,5 +146,6 @@ module.exports = {
   Macie: require('./macie'),
   DLM: require('./dlm'),
   Signer: require('./signer'),
-  Chime: require('./chime')
+  Chime: require('./chime'),
+  PinpointEmail: require('./pinpointemail')
 };

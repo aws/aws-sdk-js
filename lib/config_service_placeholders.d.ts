@@ -147,6 +147,7 @@ export abstract class ConfigurationServicePlaceholders {
   dlm?: AWS.DLM.Types.ClientConfiguration;
   signer?: AWS.Signer.Types.ClientConfiguration;
   chime?: AWS.Chime.Types.ClientConfiguration;
+  pinpointemail?: AWS.PinpointEmail.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -296,4 +297,5 @@ export interface ConfigurationServiceApiVersions {
   dlm?: AWS.DLM.Types.apiVersion;
   signer?: AWS.Signer.Types.apiVersion;
   chime?: AWS.Chime.Types.apiVersion;
+  pinpointemail?: AWS.PinpointEmail.Types.apiVersion;
 }

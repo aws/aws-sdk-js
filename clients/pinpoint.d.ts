@@ -1261,7 +1261,9 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
   export interface AttributeDimension {
     /**
      * The type of dimension:
+
 INCLUSIVE - Endpoints that match the criteria are included in the segment.
+
 EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     AttributeType?: AttributeType;
@@ -1437,7 +1439,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface CampaignLimits {
     /**
-     * The maximum number of messages that the campaign can send daily.
+     * The maximum number of messages that each campaign can send to a single endpoint in a 24-hour period.
      */
     Daily?: __integer;
     /**
@@ -1449,7 +1451,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     MessagesPerSecond?: __integer;
     /**
-     * The maximum total number of messages that the campaign can send.
+     * The maximum number of messages that an individual campaign can send to a single endpoint over the course of the campaign.
      */
     Total?: __integer;
   }
@@ -1691,7 +1693,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     Data?: MapOf__string;
     /**
-     * Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+     * Indicates if the message should display on the recipient's device. You can use silent pushes for remote configuration or to deliver messages to in-app notification centers.
      */
     SilentPush?: __boolean;
     /**
@@ -1882,6 +1884,10 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     DefaultPushNotificationMessage?: DefaultPushNotificationMessage;
     /**
+     * The message to Email channels. Overrides the default message.
+     */
+    EmailMessage?: EmailMessage;
+    /**
      * The message to GCM channels. Overrides the default push notification message.
      */
     GCMMessage?: GCMMessage;
@@ -1892,6 +1898,10 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export type Duration = "HR_24"|"DAY_7"|"DAY_14"|"DAY_30"|string;
   export interface EmailChannelRequest {
+    /**
+     * The configuration set that you want to use when you send email using the Pinpoint Email API.
+     */
+    ConfigurationSet?: __string;
     /**
      * If the channel is enabled for sending messages.
      */
@@ -1914,6 +1924,10 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      * The unique ID of the application to which the email channel belongs.
      */
     ApplicationId?: __string;
+    /**
+     * The configuration set that you want to use when you send email using the Pinpoint Email API.
+     */
+    ConfigurationSet?: __string;
     /**
      * The date that the settings were last updated in ISO 8601 format.
      */
@@ -1966,6 +1980,36 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      * Version of channel
      */
     Version?: __integer;
+  }
+  export interface EmailMessage {
+    /**
+     * The body of the email message.
+     */
+    Body?: __string;
+    /**
+     * The email address that bounces and complaints will be forwarded to when feedback forwarding is enabled.
+     */
+    FeedbackForwardingAddress?: __string;
+    /**
+     * The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel.
+     */
+    FromAddress?: __string;
+    /**
+     * An email represented as a raw MIME message.
+     */
+    RawEmail?: RawEmail;
+    /**
+     * The reply-to email address(es) for the email. If the recipient replies to the email, each reply-to address will receive the reply.
+     */
+    ReplyToAddresses?: ListOf__string;
+    /**
+     * An email composed of a subject, a text part and a html part.
+     */
+    SimpleEmail?: SimpleEmail;
+    /**
+     * Default message substitutions. Can be overridden by individual address substitutions.
+     */
+    Substitutions?: MapOfListOf__string;
   }
   export interface EndpointBatchItem {
     /**
@@ -2072,7 +2116,7 @@ NONE - Users has not opted out and receives all messages.
      */
     Message?: __string;
     /**
-     * The status code to respond with for a particular endpoint id after endpoint registration
+     * The status code associated with the merging of an endpoint when issuing a response.
      */
     StatusCode?: __integer;
   }
@@ -2082,7 +2126,7 @@ NONE - Users has not opted out and receives all messages.
      */
     City?: __string;
     /**
-     * The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 Alpha-2 code, such as "US" for the United States.
+     * The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 alpha-2 code, such as "US" for the United States.
      */
     Country?: __string;
     /**
@@ -2330,11 +2374,11 @@ The Amazon Pinpoint console can't display attribute names that include the follo
      */
     EventType?: __string;
     /**
-     * Event metrics
+     * Custom metrics related to the event.
      */
     Metrics?: MapOf__double;
     /**
-     * The session
+     * Information about the session in which the event occurred.
      */
     Session?: Session;
     /**
@@ -2348,7 +2392,9 @@ The Amazon Pinpoint console can't display attribute names that include the follo
      */
     Message?: __string;
     /**
-     * The status code to respond with for a particular event id
+     * The status returned in the response as a result of processing the event.
+
+Possible values: 400 (for invalid events) and 202 (for events that were accepted).
      */
     StatusCode?: __integer;
   }
@@ -2382,23 +2428,25 @@ The Amazon Pinpoint console can't display attribute names that include the follo
   }
   export interface EventsBatch {
     /**
-     * Endpoint information
+     * The PublicEndpoint attached to the EndpointId from the request.
      */
     Endpoint?: PublicEndpoint;
     /**
-     * Events
+     * An object that contains a set of events associated with the endpoint.
      */
     Events?: MapOfEvent;
   }
   export interface EventsRequest {
     /**
-     * Batch of events with endpoint id as the key and an object of EventsBatch as value. The EventsBatch object has the PublicEndpoint and a map of event Id's to events
+     * A batch of events to process. Each BatchItem consists of an endpoint ID as the key, and an EventsBatch object as the value.
      */
     BatchItem?: MapOfEventsBatch;
   }
   export interface EventsResponse {
     /**
-     * A map containing a multi part response for each endpoint, with the endpoint id as the key and item response as the value
+     * A map that contains a multipart response for each endpoint. Each item in this object uses the endpoint ID as the key, and the item response as the value.
+
+If no item response exists, the value can also be one of the following: 202 (if the request was processed successfully) or 400 (if the payload was invalid, or required fields were missing).
      */
     Results?: MapOfItemResponse;
   }
@@ -3228,11 +3276,11 @@ The job status is FAILED if one or more pieces failed to import.
   export type Include = "ALL"|"ANY"|"NONE"|string;
   export interface ItemResponse {
     /**
-     * Endpoint item response after endpoint registration
+     * The response received after the endpoint was accepted.
      */
     EndpointItemResponse?: EndpointItemResponse;
     /**
-     * Events item response is a multipart response object per event Id, with eventId as the key and EventItemResponse object as the value
+     * A multipart response object that contains a key and value for each event ID in the request. In each object, the event ID is the key, and an EventItemResponse object is the value.
      */
     EventsItemResponse?: MapOfEventItemResponse;
   }
@@ -3423,7 +3471,7 @@ UNKNOWN - An unknown error occurred.
   export type MessageType = "TRANSACTIONAL"|"PROMOTIONAL"|string;
   export interface MetricDimension {
     /**
-     * GREATER_THAN | LESS_THAN | GREATER_THAN_OR_EQUAL | LESS_THAN_OR_EQUAL | EQUAL
+     * The operator that you're using to compare metric values. Possible values: GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, or EQUAL
      */
     ComparisonOperator?: __string;
     /**
@@ -3476,7 +3524,7 @@ UNKNOWN - An unknown error occurred.
      */
     County?: __string;
     /**
-     * The two-character ISO code for the country or region that you included in the request body.
+     * The two-character code (in ISO 3166-1 alpha-2 format) for the country or region in the request body.
      */
     OriginalCountryCodeIso2?: __string;
     /**
@@ -3508,7 +3556,7 @@ UNKNOWN - An unknown error occurred.
   }
   export interface PublicEndpoint {
     /**
-     * The unique identifier for the recipient. For example, an address could be a device token or an endpoint ID.
+     * The unique identifier for the recipient. For example, an address could be a device token, email address, or mobile phone number.
      */
     Address?: __string;
     /**
@@ -3526,7 +3574,7 @@ Valid values: APNS, GCM
      */
     Demographic?: EndpointDemographic;
     /**
-     * The date and time when the endpoint was last updated.
+     * The date and time when the endpoint was last updated, in  ISO 8601 format.
      */
     EffectiveDate?: __string;
     /**
@@ -3580,23 +3628,33 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface QuietTime {
     /**
-     * The default end time for quiet time in ISO 8601 format.
+     * The time at which quiet time should end. The value that you specify has to be in HH:mm format, where HH is the hour in 24-hour format (with a leading zero, if applicable), and mm is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.
      */
     End?: __string;
     /**
-     * The default start time for quiet time in ISO 8601 format.
+     * The time at which quiet time should begin. The value that you specify has to be in HH:mm format, where HH is the hour in 24-hour format (with a leading zero, if applicable), and mm is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.
      */
     Start?: __string;
   }
+  export interface RawEmail {
+    /**
+     * The raw data of the email.
+     */
+    Data?: __blob;
+  }
+  export type __blob = Buffer|Uint8Array|Blob|string;
   export interface RecencyDimension {
     /**
      * The length of time during which users have been active or inactive with your app.
+
 Valid values: HR_24, DAY_7, DAY_14, DAY_30
      */
     Duration?: Duration;
     /**
      * The recency dimension type:
+
 ACTIVE - Users who have used your app within the specified duration are included in the segment.
+
 INACTIVE - Users who have not used your app within the specified duration are included in the segment.
      */
     RecencyType?: RecencyType;
@@ -3840,6 +3898,8 @@ UTC-11
     Dimensions?: ListOfSegmentDimensions;
     /**
      * The base segment that you build your segment on. The source segment defines the starting "universe" of endpoints. When you add dimensions to the segment, it filters the source segment based on the dimensions that you specify. You can specify more than one dimensional segment. You can only specify one imported segment.
+
+NOTE: If you specify an imported segment for this attribute, the segment size estimate that appears in the Amazon Pinpoint console shows the size of the imported segment, without any filters applied to it.
      */
     SourceSegments?: ListOfSegmentReference;
     /**
@@ -3890,7 +3950,7 @@ Valid values: CSV, JSON
   }
   export interface SegmentLocation {
     /**
-     * The country filter according to ISO 3166-1 Alpha-2 codes.
+     * The country or region, in ISO 3166-1 alpha-2 format.
      */
     Country?: SetDimension;
     /**
@@ -4017,7 +4077,7 @@ IMPORT - A static segment built from an imported set of endpoint definitions. Yo
   }
   export interface Session {
     /**
-     * Session duration in millis
+     * The duration of the session, in milliseconds.
      */
     Duration?: __integer;
     /**
@@ -4036,7 +4096,9 @@ IMPORT - A static segment built from an imported set of endpoint definitions. Yo
   export interface SetDimension {
     /**
      * The type of dimension:
+
 INCLUSIVE - Endpoints that match the criteria are included in the segment.
+
 EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     DimensionType?: DimensionType;
@@ -4044,6 +4106,30 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      * The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.
      */
     Values?: ListOf__string;
+  }
+  export interface SimpleEmail {
+    /**
+     * The content of the message, in HTML format. Use this for email clients that can process HTML. You can include clickable links, formatted text, and much more in an HTML message.
+     */
+    HtmlPart?: SimpleEmailPart;
+    /**
+     * The subject of the message: A short summary of the content, which will appear in the recipient's inbox.
+     */
+    Subject?: SimpleEmailPart;
+    /**
+     * The content of the message, in text format. Use this for text-based email clients, or clients on high-latency networks (such as mobile devices).
+     */
+    TextPart?: SimpleEmailPart;
+  }
+  export interface SimpleEmailPart {
+    /**
+     * The character set of the content.
+     */
+    Charset?: __string;
+    /**
+     * The textual data of the content.
+     */
+    Data?: __string;
   }
   export type SourceType = "ALL"|"ANY"|"NONE"|string;
   export interface TreatmentResource {
@@ -4245,7 +4331,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     CloudWatchMetricsEnabled?: __boolean;
     /**
-     * The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own.
+     * The limits that apply to each campaign in the project by default. Campaigns can also have their own limits, which override the settings at the project level.
      */
     Limits?: CampaignLimits;
     /**

@@ -1580,6 +1580,9 @@
         },
         {
           "shape": "WAFNonexistentItemException"
+        },
+        {
+          "shape": "WAFInvalidParameterException"
         }
       ],
       "documentation": "<p>Returns an array of resources associated with the specified web ACL.</p>"
@@ -1756,9 +1759,12 @@
         },
         {
           "shape": "WAFStaleDataException"
+        },
+        {
+          "shape": "WAFServiceLinkedRoleErrorException"
         }
       ],
-      "documentation": "<p>Associates a <a>LoggingConfiguration</a> with a specified web ACL.</p> <p>You can access information about all traffic that AWS WAF inspects using the following steps:</p> <ol> <li> <p>Create an Amazon Kinesis Data Firehose delivery stream. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html\">Creating an Amazon Kinesis Data Firehose Delivery Stream</a>. </p> </li> <li> <p>Associate that delivery stream to your web ACL using a <code>PutLoggingConfiguration</code> request.</p> </li> </ol> <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code> request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose delivery stream. For more information, see <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging Web ACL Traffic Information</a> in the <i>AWS WAF Developer Guide</i>.</p>"
+      "documentation": "<p>Associates a <a>LoggingConfiguration</a> with a specified web ACL.</p> <p>You can access information about all traffic that AWS WAF inspects using the following steps:</p> <ol> <li> <p>Create an Amazon Kinesis Data Firehose . </p> </li> <li> <p>Associate that firehose to your web ACL using a <code>PutLoggingConfiguration</code> request.</p> </li> </ol> <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code> request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging Web ACL Traffic Information</a> in the <i>AWS WAF Developer Guide</i>.</p>"
     },
     "PutPermissionPolicy": {
       "name": "PutPermissionPolicy",
@@ -4446,6 +4452,10 @@
         "WebACLId": {
           "shape": "ResourceId",
           "documentation": "<p>The unique identifier (ID) of the web ACL for which to list the associated resources.</p>"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The type of resource to list, either and application load balancer or Amazon API Gateway.</p>"
         }
       }
     },
@@ -4665,14 +4675,14 @@
         },
         "LogDestinationConfigs": {
           "shape": "LogDestinationConfigs",
-          "documentation": "<p>An array of Amazon Kinesis Data Firehose delivery stream ARNs.</p>"
+          "documentation": "<p>An array of Amazon Kinesis Data Firehose ARNs.</p>"
         },
         "RedactedFields": {
           "shape": "RedactedFields",
-          "documentation": "<p>The parts of the request that you want redacted from the logs. For example, if you redact the cookie field, the cookie field in the delivery stream will be <code>xxx</code>. </p>"
+          "documentation": "<p>The parts of the request that you want redacted from the logs. For example, if you redact the cookie field, the cookie field in the firehose will be <code>xxx</code>. </p>"
         }
       },
-      "documentation": "<p>The Amazon Kinesis Data Firehose delivery streams, <code>RedactedFields</code> information, and the web ACL Amazon Resource Name (ARN).</p>"
+      "documentation": "<p>The Amazon Kinesis Data Firehose, <code>RedactedFields</code> information, and the web ACL Amazon Resource Name (ARN).</p>"
     },
     "LoggingConfigurations": {
       "type": "list",
@@ -4785,7 +4795,7 @@
       "members": {
         "LoggingConfiguration": {
           "shape": "LoggingConfiguration",
-          "documentation": "<p>The Amazon Kinesis Data Firehose delivery streams that contains the inspected traffic information, the redacted fields details, and the Amazon Resource Name (ARN) of the web ACL to monitor.</p>"
+          "documentation": "<p>The Amazon Kinesis Data Firehose that contains the inspected traffic information, the redacted fields details, and the Amazon Resource Name (ARN) of the web ACL to monitor.</p>"
         }
       }
     },
@@ -5070,6 +5080,13 @@
       "type": "string",
       "max": 128,
       "min": 1
+    },
+    "ResourceType": {
+      "type": "string",
+      "enum": [
+        "APPLICATION_LOAD_BALANCER",
+        "API_GATEWAY"
+      ]
     },
     "Rule": {
       "type": "structure",
@@ -5987,6 +6004,10 @@
         "Rules": {
           "shape": "ActivatedRules",
           "documentation": "<p>An array that contains the action for each <code>Rule</code> in a <code>WebACL</code>, the priority of the <code>Rule</code>, and the ID of the <code>Rule</code>.</p>"
+        },
+        "WebACLArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>Tha Amazon Resource Name (ARN) of the web ACL.</p>"
         }
       },
       "documentation": "<p>Contains the <code>Rules</code> that identify the requests that you want to allow, block, or count. In a <code>WebACL</code>, you also specify a default action (<code>ALLOW</code> or <code>BLOCK</code>), and the action for each <code>Rule</code> that you add to a <code>WebACL</code>, for example, block requests from specified IP addresses or block requests from specified referrers. You also associate the <code>WebACL</code> with a CloudFront distribution to identify the requests that you want AWS WAF to filter. If you add more than one <code>Rule</code> to a <code>WebACL</code>, a request needs to match only one of the specifications to be allowed, blocked, or counted. For more information, see <a>UpdateWebACL</a>.</p>"

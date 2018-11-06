@@ -3411,6 +3411,10 @@ declare namespace APIGateway {
      */
     tracingEnabled?: Boolean;
     /**
+     * The ARN of the WebAcl associated with the Stage.
+     */
+    webAclArn?: String;
+    /**
      * The collection of tags. Each tag element is associated with a given resource.
      */
     tags?: MapOfStringToString;
