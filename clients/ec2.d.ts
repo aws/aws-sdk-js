@@ -9529,9 +9529,17 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
+     * Specifies whether the destination AMI of the imported image should be encrypted. The default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using KmsKeyId. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
+     */
+    Encrypted?: Boolean;
+    /**
      * The target hypervisor platform. Valid values: xen 
      */
     Hypervisor?: String;
+    /**
+     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias, in the form alias/ExampleAlias     ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the region that the AMI is being copied to. 
+     */
+    KmsKeyId?: String;
     /**
      * The license type to be used for the Amazon Machine Image (AMI) after importing.  Note: You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see Prerequisites in the VM Import/Export User Guide. Valid values: AWS | BYOL 
      */
@@ -9555,6 +9563,10 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
+     * Indicates whether the AMI is encypted.
+     */
+    Encrypted?: Boolean;
+    /**
      * The target hypervisor of the import task.
      */
     Hypervisor?: String;
@@ -9566,6 +9578,10 @@ declare namespace EC2 {
      * The task ID of the import image task.
      */
     ImportTaskId?: String;
+    /**
+     * The identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted AMI.
+     */
+    KmsKeyId?: String;
     /**
      * The license type of the virtual machine.
      */
@@ -9601,6 +9617,10 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
+     * Indicates whether the image is encrypted.
+     */
+    Encrypted?: Boolean;
+    /**
      * The target hypervisor for the import task. Valid values: xen 
      */
     Hypervisor?: String;
@@ -9612,6 +9632,10 @@ declare namespace EC2 {
      * The ID of the import image task.
      */
     ImportTaskId?: String;
+    /**
+     * The identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted image.
+     */
+    KmsKeyId?: String;
     /**
      * The license type of the virtual machine.
      */
@@ -9806,6 +9830,14 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * Specifies whether the destination snapshot of the imported image should be encrypted. The default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using KmsKeyId. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
+     */
+    Encrypted?: Boolean;
+    /**
+     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted snapshot. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias, in the form alias/ExampleAlias     ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the region that the snapshot is being copied to. 
+     */
+    KmsKeyId?: String;
     /**
      * The name of the role to use when not using the default role, 'vmimport'.
      */
@@ -14995,9 +15027,17 @@ declare namespace EC2 {
      */
     DiskImageSize?: Double;
     /**
+     * Indicates whether the snapshot is encrypted.
+     */
+    Encrypted?: Boolean;
+    /**
      * The format of the disk image from which the snapshot is created.
      */
     Format?: String;
+    /**
+     * The identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted snapshot.
+     */
+    KmsKeyId?: String;
     /**
      * The percentage of completion for the import snapshot task.
      */
