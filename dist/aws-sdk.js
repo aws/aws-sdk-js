@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.351.0
+// AWS SDK for JavaScript v2.352.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -135468,7 +135468,7 @@ Object.defineProperty(apiLoader.services['apigateway'], '2015-07-09', {
 
 module.exports = AWS.APIGateway;
 
-},{"../apis/apigateway-2015-07-09.min.json":4,"../apis/apigateway-2015-07-09.paginators.json":5,"../lib/core":264,"../lib/node_loader":261,"../lib/services/apigateway":313}],185:[function(require,module,exports){
+},{"../apis/apigateway-2015-07-09.min.json":4,"../apis/apigateway-2015-07-09.paginators.json":5,"../lib/core":264,"../lib/node_loader":261,"../lib/services/apigateway":314}],185:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -135655,7 +135655,7 @@ Object.defineProperty(apiLoader.services['cloudfront'], '2018-06-18', {
 
 module.exports = AWS.CloudFront;
 
-},{"../apis/cloudfront-2016-11-25.min.json":13,"../apis/cloudfront-2016-11-25.paginators.json":14,"../apis/cloudfront-2016-11-25.waiters2.json":15,"../apis/cloudfront-2017-03-25.min.json":16,"../apis/cloudfront-2017-03-25.paginators.json":17,"../apis/cloudfront-2017-03-25.waiters2.json":18,"../apis/cloudfront-2017-10-30.min.json":19,"../apis/cloudfront-2017-10-30.paginators.json":20,"../apis/cloudfront-2017-10-30.waiters2.json":21,"../apis/cloudfront-2018-06-18.min.json":22,"../apis/cloudfront-2018-06-18.paginators.json":23,"../apis/cloudfront-2018-06-18.waiters2.json":24,"../lib/core":264,"../lib/node_loader":261,"../lib/services/cloudfront":314}],190:[function(require,module,exports){
+},{"../apis/cloudfront-2016-11-25.min.json":13,"../apis/cloudfront-2016-11-25.paginators.json":14,"../apis/cloudfront-2016-11-25.waiters2.json":15,"../apis/cloudfront-2017-03-25.min.json":16,"../apis/cloudfront-2017-03-25.paginators.json":17,"../apis/cloudfront-2017-03-25.waiters2.json":18,"../apis/cloudfront-2017-10-30.min.json":19,"../apis/cloudfront-2017-10-30.paginators.json":20,"../apis/cloudfront-2017-10-30.waiters2.json":21,"../apis/cloudfront-2018-06-18.min.json":22,"../apis/cloudfront-2018-06-18.paginators.json":23,"../apis/cloudfront-2018-06-18.waiters2.json":24,"../lib/core":264,"../lib/node_loader":261,"../lib/services/cloudfront":315}],190:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -135858,7 +135858,7 @@ Object.defineProperty(apiLoader.services['cognitoidentity'], '2014-06-30', {
 
 module.exports = AWS.CognitoIdentity;
 
-},{"../apis/cognito-identity-2014-06-30.min.json":38,"../apis/cognito-identity-2014-06-30.paginators.json":39,"../lib/core":264,"../lib/node_loader":261,"../lib/services/cognitoidentity":315}],200:[function(require,module,exports){
+},{"../apis/cognito-identity-2014-06-30.min.json":38,"../apis/cognito-identity-2014-06-30.paginators.json":39,"../lib/core":264,"../lib/node_loader":261,"../lib/services/cognitoidentity":316}],200:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136009,7 +136009,7 @@ Object.defineProperty(apiLoader.services['dynamodb'], '2012-08-10', {
 
 module.exports = AWS.DynamoDB;
 
-},{"../apis/dynamodb-2011-12-05.min.json":51,"../apis/dynamodb-2011-12-05.paginators.json":52,"../apis/dynamodb-2011-12-05.waiters2.json":53,"../apis/dynamodb-2012-08-10.min.json":54,"../apis/dynamodb-2012-08-10.paginators.json":55,"../apis/dynamodb-2012-08-10.waiters2.json":56,"../lib/core":264,"../lib/node_loader":261,"../lib/services/dynamodb":316}],207:[function(require,module,exports){
+},{"../apis/dynamodb-2011-12-05.min.json":51,"../apis/dynamodb-2011-12-05.paginators.json":52,"../apis/dynamodb-2011-12-05.waiters2.json":53,"../apis/dynamodb-2012-08-10.min.json":54,"../apis/dynamodb-2012-08-10.paginators.json":55,"../apis/dynamodb-2012-08-10.waiters2.json":56,"../lib/core":264,"../lib/node_loader":261,"../lib/services/dynamodb":317}],207:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136051,7 +136051,7 @@ Object.defineProperty(apiLoader.services['ec2'], '2016-11-15', {
 
 module.exports = AWS.EC2;
 
-},{"../apis/ec2-2016-11-15.min.json":57,"../apis/ec2-2016-11-15.paginators.json":58,"../apis/ec2-2016-11-15.waiters2.json":59,"../lib/core":264,"../lib/node_loader":261,"../lib/services/ec2":317}],209:[function(require,module,exports){
+},{"../apis/ec2-2016-11-15.min.json":57,"../apis/ec2-2016-11-15.paginators.json":58,"../apis/ec2-2016-11-15.waiters2.json":59,"../lib/core":264,"../lib/node_loader":261,"../lib/services/ec2":318}],209:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136337,7 +136337,7 @@ Object.defineProperty(apiLoader.services['iotdata'], '2015-05-28', {
 
 module.exports = AWS.IotData;
 
-},{"../apis/iot-data-2015-05-28.min.json":97,"../lib/core":264,"../lib/node_loader":261,"../lib/services/iotdata":318}],223:[function(require,module,exports){
+},{"../apis/iot-data-2015-05-28.min.json":97,"../lib/core":264,"../lib/node_loader":261,"../lib/services/iotdata":319}],223:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136448,7 +136448,7 @@ Object.defineProperty(apiLoader.services['lambda'], '2015-03-31', {
 
 module.exports = AWS.Lambda;
 
-},{"../apis/lambda-2014-11-11.min.json":107,"../apis/lambda-2014-11-11.paginators.json":108,"../apis/lambda-2015-03-31.min.json":109,"../apis/lambda-2015-03-31.paginators.json":110,"../lib/core":264,"../lib/node_loader":261,"../lib/services/lambda":319}],228:[function(require,module,exports){
+},{"../apis/lambda-2014-11-11.min.json":107,"../apis/lambda-2014-11-11.paginators.json":108,"../apis/lambda-2015-03-31.min.json":109,"../apis/lambda-2015-03-31.paginators.json":110,"../lib/core":264,"../lib/node_loader":261,"../lib/services/lambda":320}],228:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136510,7 +136510,7 @@ Object.defineProperty(apiLoader.services['machinelearning'], '2014-12-12', {
 
 module.exports = AWS.MachineLearning;
 
-},{"../apis/machinelearning-2014-12-12.min.json":115,"../apis/machinelearning-2014-12-12.paginators.json":116,"../apis/machinelearning-2014-12-12.waiters2.json":117,"../lib/core":264,"../lib/node_loader":261,"../lib/services/machinelearning":320}],231:[function(require,module,exports){
+},{"../apis/machinelearning-2014-12-12.min.json":115,"../apis/machinelearning-2014-12-12.paginators.json":116,"../apis/machinelearning-2014-12-12.waiters2.json":117,"../lib/core":264,"../lib/node_loader":261,"../lib/services/machinelearning":321}],231:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136611,7 +136611,7 @@ Object.defineProperty(apiLoader.services['polly'], '2016-06-10', {
 
 module.exports = AWS.Polly;
 
-},{"../apis/polly-2016-06-10.min.json":130,"../apis/polly-2016-06-10.paginators.json":131,"../lib/core":264,"../lib/node_loader":261,"../lib/services/polly":321}],236:[function(require,module,exports){
+},{"../apis/polly-2016-06-10.min.json":130,"../apis/polly-2016-06-10.paginators.json":131,"../lib/core":264,"../lib/node_loader":261,"../lib/services/polly":322}],236:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136690,7 +136690,7 @@ Object.defineProperty(apiLoader.services['rds'], '2014-10-31', {
 
 module.exports = AWS.RDS;
 
-},{"../apis/rds-2013-01-10.min.json":134,"../apis/rds-2013-01-10.paginators.json":135,"../apis/rds-2013-02-12.min.json":136,"../apis/rds-2013-02-12.paginators.json":137,"../apis/rds-2013-09-09.min.json":138,"../apis/rds-2013-09-09.paginators.json":139,"../apis/rds-2013-09-09.waiters2.json":140,"../apis/rds-2014-09-01.min.json":141,"../apis/rds-2014-09-01.paginators.json":142,"../apis/rds-2014-10-31.min.json":143,"../apis/rds-2014-10-31.paginators.json":144,"../apis/rds-2014-10-31.waiters2.json":145,"../lib/core":264,"../lib/node_loader":261,"../lib/services/rds":322}],238:[function(require,module,exports){
+},{"../apis/rds-2013-01-10.min.json":134,"../apis/rds-2013-01-10.paginators.json":135,"../apis/rds-2013-02-12.min.json":136,"../apis/rds-2013-02-12.paginators.json":137,"../apis/rds-2013-09-09.min.json":138,"../apis/rds-2013-09-09.paginators.json":139,"../apis/rds-2013-09-09.waiters2.json":140,"../apis/rds-2014-09-01.min.json":141,"../apis/rds-2014-09-01.paginators.json":142,"../apis/rds-2014-10-31.min.json":143,"../apis/rds-2014-10-31.paginators.json":144,"../apis/rds-2014-10-31.waiters2.json":145,"../lib/core":264,"../lib/node_loader":261,"../lib/services/rds":323}],238:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136753,7 +136753,7 @@ Object.defineProperty(apiLoader.services['route53'], '2013-04-01', {
 
 module.exports = AWS.Route53;
 
-},{"../apis/route53-2013-04-01.min.json":151,"../apis/route53-2013-04-01.paginators.json":152,"../apis/route53-2013-04-01.waiters2.json":153,"../lib/core":264,"../lib/node_loader":261,"../lib/services/route53":323}],241:[function(require,module,exports){
+},{"../apis/route53-2013-04-01.min.json":151,"../apis/route53-2013-04-01.paginators.json":152,"../apis/route53-2013-04-01.waiters2.json":153,"../lib/core":264,"../lib/node_loader":261,"../lib/services/route53":324}],241:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136795,7 +136795,7 @@ Object.defineProperty(apiLoader.services['s3'], '2006-03-01', {
 
 module.exports = AWS.S3;
 
-},{"../apis/s3-2006-03-01.min.json":158,"../apis/s3-2006-03-01.paginators.json":159,"../apis/s3-2006-03-01.waiters2.json":160,"../lib/core":264,"../lib/node_loader":261,"../lib/services/s3":324}],243:[function(require,module,exports){
+},{"../apis/s3-2006-03-01.min.json":158,"../apis/s3-2006-03-01.paginators.json":159,"../apis/s3-2006-03-01.waiters2.json":160,"../lib/core":264,"../lib/node_loader":261,"../lib/services/s3":325}],243:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136897,7 +136897,7 @@ Object.defineProperty(apiLoader.services['sqs'], '2012-11-05', {
 
 module.exports = AWS.SQS;
 
-},{"../apis/sqs-2012-11-05.min.json":167,"../apis/sqs-2012-11-05.paginators.json":168,"../lib/core":264,"../lib/node_loader":261,"../lib/services/sqs":325}],248:[function(require,module,exports){
+},{"../apis/sqs-2012-11-05.min.json":167,"../apis/sqs-2012-11-05.paginators.json":168,"../lib/core":264,"../lib/node_loader":261,"../lib/services/sqs":326}],248:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -136958,7 +136958,7 @@ Object.defineProperty(apiLoader.services['sts'], '2011-06-15', {
 
 module.exports = AWS.STS;
 
-},{"../apis/sts-2011-06-15.min.json":175,"../apis/sts-2011-06-15.paginators.json":176,"../lib/core":264,"../lib/node_loader":261,"../lib/services/sts":326}],251:[function(require,module,exports){
+},{"../apis/sts-2011-06-15.min.json":175,"../apis/sts-2011-06-15.paginators.json":176,"../lib/core":264,"../lib/node_loader":261,"../lib/services/sts":327}],251:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -137145,7 +137145,7 @@ module.exports = exports = {
     convertToBuffer: convertToBuffer,
 }
 
-},{"buffer/":345}],257:[function(require,module,exports){
+},{"buffer/":346}],257:[function(require,module,exports){
 var hashUtils = require('./browserHashUtils');
 
 /**
@@ -137396,7 +137396,7 @@ function ii(a, b, c, d, x, s, t) {
     return cmn(c ^ (b | (~d)), a, b, x, s, t);
 }
 
-},{"./browserHashUtils":256,"buffer/":345}],259:[function(require,module,exports){
+},{"./browserHashUtils":256,"buffer/":346}],259:[function(require,module,exports){
 var Buffer = require('buffer/').Buffer;
 var hashUtils = require('./browserHashUtils');
 
@@ -137564,7 +137564,7 @@ Sha1.prototype.processBlock = function processBlock() {
     }
 }
 
-},{"./browserHashUtils":256,"buffer/":345}],260:[function(require,module,exports){
+},{"./browserHashUtils":256,"buffer/":346}],260:[function(require,module,exports){
 var Buffer = require('buffer/').Buffer;
 var hashUtils = require('./browserHashUtils');
 
@@ -137805,7 +137805,7 @@ Sha256.prototype.hashBuffer = function () {
     state[7] += state7;
 };
 
-},{"./browserHashUtils":256,"buffer/":345}],261:[function(require,module,exports){
+},{"./browserHashUtils":256,"buffer/":346}],261:[function(require,module,exports){
 (function (process){
 var util = require('./util');
 
@@ -137817,6 +137817,8 @@ util.querystring = require('querystring/');
 util.realClock = require('./realclock/browserClock');
 util.environment = 'js';
 util.createEventStream = require('./event-stream/buffered-create-event-stream').createEventStream;
+util.isBrowser = function() { return true; };
+util.isNode = function() { return false; };
 
 var AWS = require('./core');
 
@@ -137845,7 +137847,7 @@ if (typeof process === 'undefined') {
 }
 
 }).call(this,require('_process'))
-},{"./browserCryptoLib":255,"./core":264,"./credentials":265,"./credentials/cognito_identity_credentials":266,"./credentials/credential_provider_chain":267,"./credentials/saml_credentials":268,"./credentials/temporary_credentials":269,"./credentials/web_identity_credentials":270,"./event-stream/buffered-create-event-stream":277,"./http/xhr":286,"./realclock/browserClock":304,"./util":336,"./xml/browser_parser":337,"_process":351,"buffer/":345,"querystring/":358,"url/":360}],262:[function(require,module,exports){
+},{"./browserCryptoLib":255,"./core":264,"./credentials":265,"./credentials/cognito_identity_credentials":266,"./credentials/credential_provider_chain":267,"./credentials/saml_credentials":268,"./credentials/temporary_credentials":269,"./credentials/web_identity_credentials":270,"./event-stream/buffered-create-event-stream":278,"./http/xhr":287,"./realclock/browserClock":305,"./util":337,"./xml/browser_parser":338,"_process":352,"buffer/":346,"querystring/":359,"url/":361}],262:[function(require,module,exports){
 var AWS = require('../core'),
     url = AWS.util.url,
     crypto = AWS.util.crypto.lib,
@@ -138210,6 +138212,17 @@ var PromisesDependency;
  *   @return [Boolean] whether the signature to sign requests with (overriding
  *     the API configuration) is cached. Only applies to the signature version 'v4'.
  *     Defaults to `true`.
+ *
+ * @!attribute endpointDiscoveryEnabled
+ *   @return [Boolean] whether to enable endpoint discovery for operations that
+ *     allow optionally using an endpoint returned by the service.
+ *     Defaults to 'false'
+ *
+ * @!attribute endpointCacheSize
+ *   @return [Number] the size of the global cache storing endpoints from endpoint
+ *     discovery operations. Once endpoint cache is created, updating this setting
+ *     cannot change existing cache size.
+ *     Defaults to 1000
  */
 AWS.Config = AWS.util.inherit({
   /**
@@ -138336,6 +138349,14 @@ AWS.Config = AWS.util.inherit({
    *   checksum of HTTP response bodies returned by DynamoDB. Default: `true`.
    * @option options clientSideMonitoring [Boolean] whether to collect and
    * publish this client's performance metrics of all its API requests.
+   * @option options endpointDiscoveryEnabled [Boolean] whether to enable endpoint
+   *   discovery for operations that allow optionally using an endpoint returned by
+   *   the service.
+   *   Defaults to 'false'
+   * @option options endpointCacheSize [Number] the size of the global cache storing
+   *   endpoints from endpoint discovery operations. Once endpoint cache is created,
+   *   updating this setting cannot change existing cache size.
+   *   Defaults to 1000
    */
   constructor: function Config(options) {
     if (options === undefined) options = {};
@@ -138553,7 +138574,9 @@ AWS.Config = AWS.util.inherit({
     signatureCache: true,
     retryDelayOptions: {},
     useAccelerateEndpoint: false,
-    clientSideMonitoring: false
+    clientSideMonitoring: false,
+    endpointDiscoveryEnabled: false,
+    endpointCacheSize: 1000
   },
 
   /**
@@ -138625,7 +138648,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.351.0',
+  VERSION: '2.352.0',
 
   /**
    * @api private
@@ -138673,7 +138696,12 @@ AWS.util.update(AWS, {
   /**
    * @api private
    */
-  apiLoader: require('./api_loader')
+  apiLoader: require('./api_loader'),
+
+  /**
+   * @api private
+   */
+  EndpointCache: require('../vendor/endpoint-cache').EndpointCache
 });
 require('./sequential_executor');
 require('./service');
@@ -138703,7 +138731,12 @@ require('./param_validator');
  */
 AWS.events = new AWS.SequentialExecutor();
 
-},{"./api_loader":254,"./config":263,"./event_listeners":284,"./http":285,"./json/builder":287,"./json/parser":288,"./model/api":289,"./model/operation":291,"./model/paginator":292,"./model/resource_waiter":293,"./model/shape":294,"./param_validator":295,"./protocol/json":297,"./protocol/query":298,"./protocol/rest":299,"./protocol/rest_json":300,"./protocol/rest_xml":301,"./request":307,"./resource_waiter":308,"./response":309,"./sequential_executor":311,"./service":312,"./signers/request_signer":328,"./util":336,"./xml/builder":338}],265:[function(require,module,exports){
+//create endpoint cache lazily
+AWS.util.memoizedProperty(AWS, 'endpointCache', function() {
+  return new AWS.EndpointCache(AWS.config.endpointCacheSize);
+}, true);
+
+},{"../vendor/endpoint-cache":369,"./api_loader":254,"./config":263,"./event_listeners":285,"./http":286,"./json/builder":288,"./json/parser":289,"./model/api":290,"./model/operation":292,"./model/paginator":293,"./model/resource_waiter":294,"./model/shape":295,"./param_validator":296,"./protocol/json":298,"./protocol/query":299,"./protocol/rest":300,"./protocol/rest_json":301,"./protocol/rest_xml":302,"./request":308,"./resource_waiter":309,"./response":310,"./sequential_executor":312,"./service":313,"./signers/request_signer":329,"./util":337,"./xml/builder":339}],265:[function(require,module,exports){
 var AWS = require('./core');
 
 /**
@@ -139799,6 +139832,362 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 });
 
 },{"../../clients/sts":250,"../core":264}],271:[function(require,module,exports){
+(function (process){
+var AWS = require('./core');
+var util = require('./util');
+var endpointDiscoveryEnabledEnv = 'AWS_ENABLE_ENDPOINT_DISCOVERY';
+
+/**
+ * Generate key (except resources and operation part) to index the endpoints in the cache
+ * If input shape has endpointdiscoveryid trait then use
+ *   accessKey + operation + resources + region + service as cache key
+ * If input shape doesn't have endpointdiscoveryid trait then use
+ *   accessKey + region + service as cache key
+ * @return [map<String,String>] object with keys to index endpoints.
+ * @api private
+ */
+function getCacheKey(request) {
+  var service = request.service;
+  var api = service.api || {};
+  var operations = api.operations;
+  var identifiers = {};
+  if (service.config.region) {
+    identifiers.region = service.config.region;
+  }
+  if (api.serviceId) {
+    identifiers.serviceId = api.serviceId
+  }
+  if (service.config.credentials.accessKeyId) {
+    identifiers.accessKeyId = service.config.credentials.accessKeyId
+  }
+  return identifiers;
+}
+
+/**
+ * Recursive helper for marshallCustomIdentifiers().
+ * Looks for required string input members that have 'endpointdiscoveryid' trait.
+ * @api private
+ */
+function marshallCustomIdentifiersHelper(result, params, shape) {
+  if (!shape || params === undefined || params === null) return;
+  if (shape.type === 'structure' && shape.required && shape.required.length > 0) {
+    util.arrayEach(shape.required, function(name) {
+      var memberShape = shape.members[name];
+      if (memberShape.endpointDiscoveryId === true) {
+        var locationName = memberShape.isLocationName ? memberShape.name : name;
+        result[locationName] = String(params[name]);
+      } else {
+        marshallCustomIdentifiersHelper(result, params[name], memberShape);
+      }
+    });
+  }
+}
+
+/**
+ * Get custom identifiers for cache key.
+ * Identifies custom identifiers by checking each shape's `endpointDiscoveryId` trait.
+ * @param [object] request object
+ * @param [object] input shape of the given operation's api
+ * @api private
+ */
+function marshallCustomIdentifiers(request, shape) {
+  var identifiers = {};
+  marshallCustomIdentifiersHelper(identifiers, request.params, shape);
+  return identifiers;
+}
+
+/**
+ * Call endpoint discovery operation when it's optional.
+ * When endpoint is available in cache then use the cached endpoints. If endpoints
+ * are unavailable then use regional endpoints and call endpoint discovery operation
+ * asynchronously. This is turned off by default.
+ * @param [object] request object
+ * @api private
+ */
+function optionalDiscoverEndpoint(request) {
+  var service = request.service;
+  var api = service.api;
+  var operationModel = api.operations ? api.operations[request.operation] : undefined;
+  var inputShape = operationModel ? operationModel.input : undefined;
+
+  var identifiers = marshallCustomIdentifiers(request, inputShape);
+  var cacheKey = getCacheKey(request);
+  if (Object.keys(identifiers).length > 0) {
+    cacheKey = util.update(cacheKey, identifiers);
+    if (operationModel) cacheKey.operation = operationModel.name;
+  }
+  var endpoints = AWS.endpointCache.get(cacheKey);
+  if (endpoints && endpoints.length === 1 && endpoints[0].Address === '') {
+    //endpoint operation is being made but response not yet received
+    //or endpoint operation just failed in 1 minute
+    return;
+  } else if (endpoints && endpoints.length > 0) {
+    //found endpoint record from cache
+    request.httpRequest.updateEndpoint(endpoints[0].Address);
+  } else {
+    //endpoint record not in cache or outdated. make discovery operation
+    var endpointRequest = service.makeRequest(api.endpointOperation, {
+      Operation: operationModel.name,
+      Identifiers: identifiers,
+    });
+    addApiVersionHeader(endpointRequest);
+    endpointRequest.removeListener('validate', AWS.EventListeners.Core.VALIDATE_PARAMETERS);
+    endpointRequest.removeListener('retry', AWS.EventListeners.Core.RETRY_CHECK);
+    //put in a placeholder for endpoints already requested, prevent
+    //too much in-flight calls
+    AWS.endpointCache.put(cacheKey, [{
+      Address: '',
+      CachePeriodInMinutes: 1
+    }]);
+    endpointRequest.send(function(err, data) {
+      if (data && data.Endpoints) {
+        AWS.endpointCache.put(cacheKey, data.Endpoints);
+      } else if (err) {
+        AWS.endpointCache.put(cacheKey, [{
+          Address: '',
+          CachePeriodInMinutes: 1 //not to make more endpoint operation in next 1 minute
+        }]);
+      }
+    });
+  }
+}
+
+var requestQueue = {};
+
+/**
+ * Call endpoint discovery operation when it's required.
+ * When endpoint is available in cache then use cached ones. If endpoints are
+ * unavailable then SDK should call endpoint operation then use returned new
+ * endpoint for the api call. SDK will automatically attempt to do endpoint
+ * discovery. This is turned off by default
+ * @param [object] request object
+ * @api private
+ */
+function requiredDiscoverEndpoint(request, done) {
+  var service = request.service;
+  var api = service.api;
+  var operationModel = api.operations ? api.operations[request.operation] : undefined;
+  var inputShape = operationModel ? operationModel.input : undefined;
+
+  var identifiers = marshallCustomIdentifiers(request, inputShape);
+  var cacheKey = getCacheKey(request);
+  if (Object.keys(identifiers).length > 0) {
+    cacheKey = util.update(cacheKey, identifiers);
+    if (operationModel) cacheKey.operation = operationModel.name;
+  }
+  var cacheKeyStr = AWS.EndpointCache.getKeyString(cacheKey);
+  var endpoints = AWS.endpointCache.get(cacheKeyStr); //endpoint cache also accepts string keys
+  if (endpoints && endpoints.length === 1 && endpoints[0].Address === '') {
+    //endpoint operation is being made but response not yet received
+    //push request object to a pending queue
+    if (!requestQueue[cacheKeyStr]) requestQueue[cacheKeyStr] = [];
+    requestQueue[cacheKeyStr].push({request: request, callback: done});
+    return;
+  } else if (endpoints && endpoints.length > 0) {
+    request.httpRequest.updateEndpoint(endpoints[0].Address);
+    done();
+  } else {
+    var endpointRequest = service.makeRequest(api.endpointOperation, {
+      Operation: operationModel.name,
+      Identifiers: identifiers,
+    });
+    endpointRequest.removeListener('validate', AWS.EventListeners.Core.VALIDATE_PARAMETERS);
+    addApiVersionHeader(endpointRequest);
+
+    //put in a placeholder for endpoints already requested, prevent
+    //too much in-flight calls
+    AWS.endpointCache.put(cacheKeyStr, [{
+      Address: '',
+      CachePeriodInMinutes: 60 //long-live cache
+    }]);
+    endpointRequest.send(function(err, data) {
+      if (err) {
+        var errorParams = {
+          code: 'EndpointDiscoveryException',
+          message: 'Request cannot be fulfilled without specifying an endpoint',
+          retryable: false
+        };
+        request.response.error = util.error(err, errorParams);
+        AWS.endpointCache.remove(cacheKey);
+
+        //fail all the pending requests in batch
+        if (requestQueue[cacheKeyStr]) {
+          var pendingRequests = requestQueue[cacheKeyStr];
+          util.arrayEach(pendingRequests, function(requestContext) {
+            requestContext.request.response.error = util.error(err, errorParams);
+            requestContext.callback();
+          });
+          delete requestQueue[cacheKeyStr];
+        }
+      } else if (data) {
+        AWS.endpointCache.put(cacheKeyStr, data.Endpoints);
+        request.httpRequest.updateEndpoint(data.Endpoints[0].Address);
+
+        //update the endpoint for all the pending requests in batch
+        if (requestQueue[cacheKeyStr]) {
+          var pendingRequests = requestQueue[cacheKeyStr];
+          util.arrayEach(pendingRequests, function(requestContext) {
+            requestContext.request.httpRequest.updateEndpoint(data.Endpoints[0].Address);
+            requestContext.callback();
+          });
+          delete requestQueue[cacheKeyStr];
+        }
+      }
+      done();
+    });
+  }
+}
+
+/**
+ * add api version header to endpoint operation
+ * @api private
+ */
+function addApiVersionHeader(endpointRequest) {
+  var api = endpointRequest.service.api;
+  var apiVersion = api.apiVersion;
+  if (apiVersion && !endpointRequest.httpRequest.headers['x-amz-api-version']) {
+    endpointRequest.httpRequest.headers['x-amz-api-version'] = apiVersion;
+  }
+}
+
+/**
+ * If api call gets invalid endpoint exception, SDK should attempt to remove the invalid
+ * endpoint from cache.
+ * @api private
+ */
+function invalidateCachedEndpoints(response) {
+  var error = response.error;
+  var httpResponse = response.httpResponse;
+  if (error &&
+    (error.code === 'InvalidEndpointException' || httpResponse.statusCode === 421)
+  ) {
+    var request = response.request;
+    var operations = request.service.api.operations || {};
+    var inputShape = operations[request.operation] ? operations[request.operation].input : undefined;
+    var identifiers = marshallCustomIdentifiers(request, inputShape);
+    var cacheKey = getCacheKey(request);
+    if (Object.keys(identifiers).length > 0) {
+      cacheKey = util.update(cacheKey, identifiers);
+      if (operations[request.operation]) cacheKey.operation = operations[request.operation].name;
+    }
+    AWS.endpointCache.remove(cacheKey);
+  }
+}
+
+/**
+ * If endpoint is explicitly configured, SDK should not do endpoint discovery in anytime.
+ * @param [object] client Service client object.
+ * @api private
+ */
+function hasCustomEndpoint(client) {
+  //if set endpoint is set for specific client, enable endpoint discovery will raise an error.
+  if (client._originalConfig && client._originalConfig.endpoint && client._originalConfig.endpointDiscoveryEnabled === true) {
+    throw util.error(new Error(), {
+      code: 'ConfigurationException',
+      message: 'Custom endpoint is supplied; endpointDiscoveryEnabled must not be true.'
+    });
+  };
+  var svcConfig = AWS.config[client.serviceIdentifier] || {};
+  return Boolean(AWS.config.endpoint || svcConfig.endpoint || (client._originalConfig && client._originalConfig.endpoint));
+}
+
+/**
+ * @api private
+ */
+function isFalsy(value) {
+  return ['false', '0'].indexOf(value) >= 0;
+}
+
+/**
+ * If endpoint discovery should perform for this request when endpoint discovery is optional.
+ * SDK performs config resolution in order like below:
+ * 1. If turned on client configuration(default to off) then turn on endpoint discovery.
+ * 2. If turned on in env AWS_ENABLE_ENDPOINT_DISCOVERY then turn on endpoint discovery.
+ * 3. If turned on in shared ini config file with key 'endpoint_discovery_enabled', then
+ *   turn on endpoint discovery.
+ * @param [object] request request object.
+ * @api private
+ */
+function isEndpointDiscoveryApplicable(request) {
+  var service = request.service || {};
+  if (service.config.endpointDiscoveryEnabled === true) return true;
+  if (Object.prototype.hasOwnProperty.call(process.env, endpointDiscoveryEnabledEnv)) {
+    if (process.env[endpointDiscoveryEnabledEnv] === '' || process.env[endpointDiscoveryEnabledEnv] === undefined) {
+      throw util.error(new Error(), {
+        code: 'ConfigurationException',
+        message: 'environmental variable AWS_ENABLE_ENDPOINT_DISCOVERY cannot be set to nothing'
+      });
+    }
+    if (!isFalsy(process.env[endpointDiscoveryEnabledEnv])) return true;
+  }
+  //shared ini file is only available in Node
+  if (util.isBrowser()) return false;
+
+  var configFile = {};
+  try {
+    configFile = AWS.util.iniLoader ? AWS.util.iniLoader.loadFrom({
+      isConfig: true,
+      filename: process.env[AWS.util.sharedConfigFileEnv]
+    }) : {};
+  } catch (e) {}
+  var sharedFileConfig = configFile[
+    process.env.AWS_PROFILE || AWS.util.defaultProfile
+  ] || {};
+  if (Object.prototype.hasOwnProperty.call(sharedFileConfig, 'endpoint_discovery_enabled')) {
+    if (sharedFileConfig.endpoint_discovery_enabled === undefined) {
+      throw util.error(new Error(), {
+        code: 'ConfigurationException',
+        message: 'config file entry \'endpoint_discovery_enabled\' cannot be set to nothing'
+      });
+    }
+    if (!isFalsy(sharedFileConfig.endpoint_discovery_enabled)) return true;
+  }
+  return false;
+}
+
+/**
+ * attach endpoint discovery logic to request object
+ * @param [object] request
+ * @api private
+ */
+function discoverEndpoint(request, done) {
+  var service = request.service || {};
+  if (hasCustomEndpoint(service) || request.isPresigned()) return done();
+
+  if (!isEndpointDiscoveryApplicable(request)) return done();
+
+  request.httpRequest.appendToUserAgent('endpoint-discovery');
+
+  var operations = service.api.operations || {};
+  var operationModel = operations[request.operation];
+  var isEndpointDiscoveryRequired = operationModel ? operationModel.endpointDiscoveryRequired : 'NULL';
+  switch (isEndpointDiscoveryRequired) {
+    case 'OPTIONAL':
+      optionalDiscoverEndpoint(request);
+      request.addNamedListener('INVALIDATE_CACHED_ENDPOINTS', 'extractError', invalidateCachedEndpoints);
+      done();
+      break;
+    case 'REQUIRED':
+      request.addNamedListener('INVALIDATE_CACHED_ENDPOINTS', 'extractError', invalidateCachedEndpoints);
+      requiredDiscoverEndpoint(request, done);
+      break;
+    case 'NULL':
+    default:
+      done();
+      break;
+  }
+}
+
+module.exports = {
+  discoverEndpoint: discoverEndpoint,
+  requiredDiscoverEndpoint: requiredDiscoverEndpoint,
+  optionalDiscoverEndpoint: optionalDiscoverEndpoint,
+  marshallCustomIdentifiers: marshallCustomIdentifiers,
+  getCacheKey: getCacheKey,
+  invalidateCachedEndpoint: invalidateCachedEndpoints,
+}
+}).call(this,require('_process'))
+},{"./core":264,"./util":337,"_process":352}],272:[function(require,module,exports){
 var AWS = require('../core');
 var util = AWS.util;
 var typeOf = require('./types').typeOf;
@@ -140094,7 +140483,7 @@ function filterEmptySetValues(set) {
  */
 module.exports = AWS.DynamoDB.Converter;
 
-},{"../core":264,"./numberValue":273,"./set":274,"./types":276}],272:[function(require,module,exports){
+},{"../core":264,"./numberValue":274,"./set":275,"./types":277}],273:[function(require,module,exports){
 var AWS = require('../core');
 var Translator = require('./translator');
 var DynamoDBSet = require('./set');
@@ -140622,7 +141011,7 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
  */
 module.exports = AWS.DynamoDB.DocumentClient;
 
-},{"../core":264,"./set":274,"./translator":275}],273:[function(require,module,exports){
+},{"../core":264,"./set":275,"./translator":276}],274:[function(require,module,exports){
 var util = require('../core').util;
 
 /**
@@ -140666,7 +141055,7 @@ var DynamoDBNumberValue = util.inherit({
  * @api private
  */
 module.exports = DynamoDBNumberValue;
-},{"../core":264}],274:[function(require,module,exports){
+},{"../core":264}],275:[function(require,module,exports){
 var util = require('../core').util;
 var typeOf = require('./types').typeOf;
 
@@ -140731,7 +141120,7 @@ var DynamoDBSet = util.inherit({
  */
 module.exports = DynamoDBSet;
 
-},{"../core":264,"./types":276}],275:[function(require,module,exports){
+},{"../core":264,"./types":277}],276:[function(require,module,exports){
 var util = require('../core').util;
 var convert = require('./converter');
 
@@ -140820,7 +141209,7 @@ Translator.prototype.translateScalar = function(value, shape) {
  */
 module.exports = Translator;
 
-},{"../core":264,"./converter":271}],276:[function(require,module,exports){
+},{"../core":264,"./converter":272}],277:[function(require,module,exports){
 var util = require('../core').util;
 
 function typeOf(data) {
@@ -140871,7 +141260,7 @@ module.exports = {
   isBinary: isBinary
 };
 
-},{"../core":264}],277:[function(require,module,exports){
+},{"../core":264}],278:[function(require,module,exports){
 var eventMessageChunker = require('../event-stream/event-message-chunker').eventMessageChunker;
 var parseEvent = require('./parse-event').parseEvent;
 
@@ -140893,7 +141282,7 @@ function createEventStream(body, parser, model) {
 module.exports = {
     createEventStream: createEventStream
 };
-},{"../event-stream/event-message-chunker":278,"./parse-event":280}],278:[function(require,module,exports){
+},{"../event-stream/event-message-chunker":279,"./parse-event":281}],279:[function(require,module,exports){
 /**
  * Takes in a buffer of event messages and splits them into individual messages.
  * @param {Buffer} buffer
@@ -140924,7 +141313,7 @@ function eventMessageChunker(buffer) {
 module.exports = {
     eventMessageChunker: eventMessageChunker
 };
-},{}],279:[function(require,module,exports){
+},{}],280:[function(require,module,exports){
 var util = require('../core').util;
 var toBuffer = require('./to-buffer').toBuffer;
 
@@ -141018,7 +141407,7 @@ function negate(bytes) {
 module.exports = {
     Int64: Int64
 };
-},{"../core":264,"./to-buffer":283}],280:[function(require,module,exports){
+},{"../core":264,"./to-buffer":284}],281:[function(require,module,exports){
 var parseMessage = require('./parse-message').parseMessage;
 
 /**
@@ -141092,7 +141481,7 @@ function parseError(message) {
 module.exports = {
     parseEvent: parseEvent
 };
-},{"./parse-message":281}],281:[function(require,module,exports){
+},{"./parse-message":282}],282:[function(require,module,exports){
 var Int64 = require('./int64').Int64;
 
 var splitMessage = require('./split-message').splitMessage;
@@ -141221,7 +141610,7 @@ function parseMessage(message) {
 module.exports = {
     parseMessage: parseMessage
 };
-},{"./int64":279,"./split-message":282}],282:[function(require,module,exports){
+},{"./int64":280,"./split-message":283}],283:[function(require,module,exports){
 var util = require('../core').util;
 var toBuffer = require('./to-buffer').toBuffer;
 
@@ -141292,7 +141681,7 @@ function splitMessage(message) {
 module.exports = {
     splitMessage: splitMessage
 };
-},{"../core":264,"./to-buffer":283}],283:[function(require,module,exports){
+},{"../core":264,"./to-buffer":284}],284:[function(require,module,exports){
 var Buffer = require('../core').util.Buffer;
 /**
  * Converts data into Buffer.
@@ -141311,9 +141700,10 @@ function toBuffer(data, encoding) {
 module.exports = {
     toBuffer: toBuffer
 };
-},{"../core":264}],284:[function(require,module,exports){
+},{"../core":264}],285:[function(require,module,exports){
 var AWS = require('./core');
 var SequentialExecutor = require('./sequential_executor');
+var DISCOVER_ENDPOINT = require('./discover_endpoint').discoverEndpoint;
 /**
  * The namespace used to register global event listeners for request building
  * and sending.
@@ -141503,6 +141893,9 @@ AWS.EventListeners = {
         this.response.error = null;
       }
     });
+
+    var addToHead = true;
+    addAsync('DISCOVER_ENDPOINT', 'sign', DISCOVER_ENDPOINT, addToHead);
 
     addAsync('SIGN', 'sign', function SIGN(req, done) {
       var service = req.service;
@@ -141915,7 +142308,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":264,"./protocol/json":297,"./protocol/query":298,"./protocol/rest":299,"./protocol/rest_json":300,"./protocol/rest_xml":301,"./sequential_executor":311,"util":362}],285:[function(require,module,exports){
+},{"./core":264,"./discover_endpoint":271,"./protocol/json":298,"./protocol/query":299,"./protocol/rest":300,"./protocol/rest_json":301,"./protocol/rest_xml":302,"./sequential_executor":312,"util":363}],286:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -142069,8 +142462,17 @@ AWS.HttpRequest = inherit({
       return AWS.util.queryParamsToString(query);
     }
     return '';
-  }
+  },
 
+  /**
+   * @api private
+   * update httpRequest endpoint with endpoint string
+   */
+  updateEndpoint: function updateEndpoint(endpointStr) {
+    var newEndpoint = new AWS.Endpoint(endpointStr);
+    this.endpoint = newEndpoint;
+    this.path = newEndpoint.path || '/'
+  }
 });
 
 /**
@@ -142143,7 +142545,7 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":264}],286:[function(require,module,exports){
+},{"./core":264}],287:[function(require,module,exports){
 var AWS = require('../core');
 var EventEmitter = require('events').EventEmitter;
 require('../http');
@@ -142281,7 +142683,7 @@ AWS.HttpClient.prototype = AWS.XHRClient.prototype;
  */
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":264,"../http":285,"events":346}],287:[function(require,module,exports){
+},{"../core":264,"../http":286,"events":347}],288:[function(require,module,exports){
 var util = require('../util');
 
 function JsonBuilder() { }
@@ -142342,7 +142744,7 @@ function translateScalar(value, shape) {
  */
 module.exports = JsonBuilder;
 
-},{"../util":336}],288:[function(require,module,exports){
+},{"../util":337}],289:[function(require,module,exports){
 var util = require('../util');
 
 function JsonParser() { }
@@ -142411,7 +142813,7 @@ function translateScalar(value, shape) {
  */
 module.exports = JsonParser;
 
-},{"../util":336}],289:[function(require,module,exports){
+},{"../util":337}],290:[function(require,module,exports){
 var Collection = require('./collection');
 var Operation = require('./operation');
 var Shape = require('./shape');
@@ -142423,6 +142825,7 @@ var property = util.property;
 var memoizedProperty = util.memoizedProperty;
 
 function Api(api, options) {
+  var self = this;
   api = api || {};
   options = options || {};
   options.api = this;
@@ -142453,9 +142856,15 @@ function Api(api, options) {
     return name;
   });
 
+  function addEndpointOperation(name, operation) {
+    if (operation.endpointoperation === true) {
+      property(self, 'endpointOperation', util.string.lowerFirst(name));
+    }
+  }
+
   property(this, 'operations', new Collection(api.operations, options, function(name, operation) {
     return new Operation(name, operation, options);
-  }, util.string.lowerFirst));
+  }, util.string.lowerFirst, addEndpointOperation));
 
   property(this, 'shapes', new Collection(api.shapes, options, function(name, shape) {
     return Shape.create(shape, options);
@@ -142480,22 +142889,23 @@ function Api(api, options) {
  */
 module.exports = Api;
 
-},{"../util":336,"./collection":290,"./operation":291,"./paginator":292,"./resource_waiter":293,"./shape":294}],290:[function(require,module,exports){
+},{"../util":337,"./collection":291,"./operation":292,"./paginator":293,"./resource_waiter":294,"./shape":295}],291:[function(require,module,exports){
 var memoizedProperty = require('../util').memoizedProperty;
 
-function memoize(name, value, fn, nameTr) {
+function memoize(name, value, factory, nameTr) {
   memoizedProperty(this, nameTr(name), function() {
-    return fn(name, value);
+    return factory(name, value);
   });
 }
 
-function Collection(iterable, options, fn, nameTr) {
+function Collection(iterable, options, factory, nameTr, callback) {
   nameTr = nameTr || String;
   var self = this;
 
   for (var id in iterable) {
     if (Object.prototype.hasOwnProperty.call(iterable, id)) {
-      memoize.call(self, id, iterable[id], fn, nameTr);
+      memoize.call(self, id, iterable[id], factory, nameTr);
+      if (callback) callback(id, iterable[id]);
     }
   }
 }
@@ -142505,7 +142915,7 @@ function Collection(iterable, options, fn, nameTr) {
  */
 module.exports = Collection;
 
-},{"../util":336}],291:[function(require,module,exports){
+},{"../util":337}],292:[function(require,module,exports){
 var Shape = require('./shape');
 
 var util = require('../util');
@@ -142523,6 +142933,13 @@ function Operation(name, operation, options) {
   property(this, 'httpMethod', operation.http.method || 'POST');
   property(this, 'httpPath', operation.http.requestUri || '/');
   property(this, 'authtype', operation.authtype || '');
+  property(
+    this,
+    'endpointDiscoveryRequired',
+    operation.endpointdiscovery ?
+      (operation.endpointdiscovery.required ? 'REQUIRED' : 'OPTIONAL') :
+    'NULL'
+  );
 
   memoizedProperty(this, 'input', function() {
     if (!operation.input) {
@@ -142612,7 +143029,7 @@ function hasEventStream(topLevelShape) {
  */
 module.exports = Operation;
 
-},{"../util":336,"./shape":294}],292:[function(require,module,exports){
+},{"../util":337,"./shape":295}],293:[function(require,module,exports){
 var property = require('../util').property;
 
 function Paginator(name, paginator) {
@@ -142628,7 +143045,7 @@ function Paginator(name, paginator) {
  */
 module.exports = Paginator;
 
-},{"../util":336}],293:[function(require,module,exports){
+},{"../util":337}],294:[function(require,module,exports){
 var util = require('../util');
 var property = util.property;
 
@@ -142663,7 +143080,7 @@ function ResourceWaiter(name, waiter, options) {
  */
 module.exports = ResourceWaiter;
 
-},{"../util":336}],294:[function(require,module,exports){
+},{"../util":337}],295:[function(require,module,exports){
 var Collection = require('./collection');
 
 var util = require('../util');
@@ -142706,6 +143123,7 @@ function Shape(shape, options, memberName) {
   property(this, 'isEventPayload', Boolean(shape.eventpayload), false);
   property(this, 'isEventHeader', Boolean(shape.eventheader), false);
   property(this, 'isTimestampFormatSet', Boolean(shape.timestampFormat) || shape.prototype && shape.prototype.isTimestampFormatSet === true, false);
+  property(this, 'endpointDiscoveryId', Boolean(shape.endpointdiscoveryid), false);
 
   if (options.documentation) {
     property(this, 'documentation', shape.documentation);
@@ -143053,7 +143471,7 @@ Shape.shapes = {
  */
 module.exports = Shape;
 
-},{"../util":336,"./collection":290}],295:[function(require,module,exports){
+},{"../util":337,"./collection":291}],296:[function(require,module,exports){
 var AWS = require('./core');
 
 /**
@@ -143325,7 +143743,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":264}],296:[function(require,module,exports){
+},{"./core":264}],297:[function(require,module,exports){
 var AWS = require('../core');
 var rest = AWS.Protocol.Rest;
 
@@ -143442,7 +143860,7 @@ AWS.Polly.Presigner = AWS.util.inherit({
     }
 });
 
-},{"../core":264}],297:[function(require,module,exports){
+},{"../core":264}],298:[function(require,module,exports){
 var util = require('../util');
 var JsonBuilder = require('../json/builder');
 var JsonParser = require('../json/parser');
@@ -143514,7 +143932,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":287,"../json/parser":288,"../util":336}],298:[function(require,module,exports){
+},{"../json/builder":288,"../json/parser":289,"../util":337}],299:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var QueryParamSerializer = require('../query/query_param_serializer');
@@ -143623,7 +144041,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":264,"../model/shape":294,"../query/query_param_serializer":302,"../util":336}],299:[function(require,module,exports){
+},{"../core":264,"../model/shape":295,"../query/query_param_serializer":303,"../util":337}],300:[function(require,module,exports){
 var util = require('../util');
 
 function populateMethod(req) {
@@ -143771,7 +144189,7 @@ module.exports = {
   generateURI: generateURI
 };
 
-},{"../util":336}],300:[function(require,module,exports){
+},{"../util":337}],301:[function(require,module,exports){
 var util = require('../util');
 var Rest = require('./rest');
 var Json = require('./json');
@@ -143869,7 +144287,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":287,"../json/parser":288,"../util":336,"./json":297,"./rest":299}],301:[function(require,module,exports){
+},{"../json/builder":288,"../json/parser":289,"../util":337,"./json":298,"./rest":300}],302:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var Rest = require('./rest');
@@ -143979,7 +144397,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":264,"../util":336,"./rest":299}],302:[function(require,module,exports){
+},{"../core":264,"../util":337,"./rest":300}],303:[function(require,module,exports){
 var util = require('../util');
 
 function QueryParamSerializer() {
@@ -144065,7 +144483,7 @@ function serializeMember(name, value, rules, fn) {
  */
 module.exports = QueryParamSerializer;
 
-},{"../util":336}],303:[function(require,module,exports){
+},{"../util":337}],304:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -144283,7 +144701,7 @@ AWS.RDS.Signer = AWS.util.inherit({
         return true;
     }
 });
-},{"../core":264}],304:[function(require,module,exports){
+},{"../core":264}],305:[function(require,module,exports){
 module.exports = {
   //provide realtime clock for performance measurement
   now: function now() {
@@ -144294,7 +144712,7 @@ module.exports = {
   }
 }
 
-},{}],305:[function(require,module,exports){
+},{}],306:[function(require,module,exports){
 var util = require('./util');
 var regionConfig = require('./region_config_data.json');
 
@@ -144368,7 +144786,7 @@ function configureEndpoint(service) {
  */
 module.exports = configureEndpoint;
 
-},{"./region_config_data.json":306,"./util":336}],306:[function(require,module,exports){
+},{"./region_config_data.json":307,"./util":337}],307:[function(require,module,exports){
 module.exports={
   "rules": {
     "*/*": {
@@ -144433,7 +144851,7 @@ module.exports={
   }
 }
 
-},{}],307:[function(require,module,exports){
+},{}],308:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var AcceptorStateMachine = require('./state_machine');
@@ -145243,7 +145661,7 @@ AWS.util.addPromises(AWS.Request);
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,require('_process'))
-},{"./core":264,"./state_machine":335,"_process":351,"jmespath":350}],308:[function(require,module,exports){
+},{"./core":264,"./state_machine":336,"_process":352,"jmespath":351}],309:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -145449,7 +145867,7 @@ AWS.ResourceWaiter = inherit({
   }
 });
 
-},{"./core":264,"jmespath":350}],309:[function(require,module,exports){
+},{"./core":264,"jmespath":351}],310:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 var jmespath = require('jmespath');
@@ -145652,7 +146070,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":264,"jmespath":350}],310:[function(require,module,exports){
+},{"./core":264,"jmespath":351}],311:[function(require,module,exports){
 var AWS = require('../core');
 var byteLength = AWS.util.string.byteLength;
 var Buffer = AWS.util.Buffer;
@@ -146368,7 +146786,7 @@ AWS.util.addPromises(AWS.S3.ManagedUpload);
  */
 module.exports = AWS.S3.ManagedUpload;
 
-},{"../core":264}],311:[function(require,module,exports){
+},{"../core":264}],312:[function(require,module,exports){
 var AWS = require('./core');
 
 /**
@@ -146552,9 +146970,9 @@ AWS.SequentialExecutor = AWS.util.inherit({
   /**
    * @api private
    */
-  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
+  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback, toHead) {
     callback._isAsync = true;
-    return this.addNamedListener(name, eventName, callback);
+    return this.addNamedListener(name, eventName, callback, toHead);
   },
 
   /**
@@ -146604,8 +147022,7 @@ AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.
  * @api private
  */
 module.exports = AWS.SequentialExecutor;
-
-},{"./core":264}],312:[function(require,module,exports){
+},{"./core":264}],313:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var Api = require('./model/api');
@@ -147402,7 +147819,7 @@ AWS.util.mixin(AWS.Service, AWS.SequentialExecutor);
 module.exports = AWS.Service;
 
 }).call(this,require('_process'))
-},{"./core":264,"./model/api":289,"./region_config":305,"_process":351}],313:[function(require,module,exports){
+},{"./core":264,"./model/api":290,"./region_config":306,"_process":352}],314:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.APIGateway.prototype, {
@@ -147433,7 +147850,7 @@ AWS.util.update(AWS.APIGateway.prototype, {
 });
 
 
-},{"../core":264}],314:[function(require,module,exports){
+},{"../core":264}],315:[function(require,module,exports){
 var AWS = require('../core');
 
 // pull in CloudFront signer
@@ -147447,7 +147864,7 @@ AWS.util.update(AWS.CloudFront.prototype, {
 
 });
 
-},{"../cloudfront/signer":262,"../core":264}],315:[function(require,module,exports){
+},{"../cloudfront/signer":262,"../core":264}],316:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.CognitoIdentity.prototype, {
@@ -147464,7 +147881,7 @@ AWS.util.update(AWS.CognitoIdentity.prototype, {
   }
 });
 
-},{"../core":264}],316:[function(require,module,exports){
+},{"../core":264}],317:[function(require,module,exports){
 var AWS = require('../core');
 require('../dynamodb/document_client');
 
@@ -147524,7 +147941,7 @@ AWS.util.update(AWS.DynamoDB.prototype, {
   }
 });
 
-},{"../core":264,"../dynamodb/document_client":272}],317:[function(require,module,exports){
+},{"../core":264,"../dynamodb/document_client":273}],318:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.EC2.prototype, {
@@ -147588,7 +148005,7 @@ AWS.util.update(AWS.EC2.prototype, {
   }
 });
 
-},{"../core":264}],318:[function(require,module,exports){
+},{"../core":264}],319:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -147690,7 +148107,7 @@ AWS.util.update(AWS.IotData.prototype, {
 
 });
 
-},{"../core":264}],319:[function(require,module,exports){
+},{"../core":264}],320:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.Lambda.prototype, {
@@ -147705,7 +148122,7 @@ AWS.util.update(AWS.Lambda.prototype, {
 });
 
 
-},{"../core":264}],320:[function(require,module,exports){
+},{"../core":264}],321:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.MachineLearning.prototype, {
@@ -147731,9 +148148,9 @@ AWS.util.update(AWS.MachineLearning.prototype, {
 
 });
 
-},{"../core":264}],321:[function(require,module,exports){
+},{"../core":264}],322:[function(require,module,exports){
 require('../polly/presigner');
-},{"../polly/presigner":296}],322:[function(require,module,exports){
+},{"../polly/presigner":297}],323:[function(require,module,exports){
 var AWS = require('../core');
 require('../rds/signer');
  /**
@@ -147795,7 +148212,7 @@ require('../rds/signer');
      });
    }
  });
-},{"../core":264,"../rds/signer":303}],323:[function(require,module,exports){
+},{"../core":264,"../rds/signer":304}],324:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.Route53.prototype, {
@@ -147829,7 +148246,7 @@ AWS.util.update(AWS.Route53.prototype, {
   }
 });
 
-},{"../core":264}],324:[function(require,module,exports){
+},{"../core":264}],325:[function(require,module,exports){
 var AWS = require('../core');
 var v4Credentials = require('../signers/v4_credentials');
 
@@ -148904,7 +149321,7 @@ AWS.util.update(AWS.S3.prototype, {
   }
 });
 
-},{"../core":264,"../s3/managed_upload":310,"../signers/v4_credentials":334}],325:[function(require,module,exports){
+},{"../core":264,"../s3/managed_upload":311,"../signers/v4_credentials":335}],326:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.SQS.prototype, {
@@ -149037,7 +149454,7 @@ AWS.util.update(AWS.SQS.prototype, {
   }
 });
 
-},{"../core":264}],326:[function(require,module,exports){
+},{"../core":264}],327:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.STS.prototype, {
@@ -149086,7 +149503,7 @@ AWS.util.update(AWS.STS.prototype, {
   }
 });
 
-},{"../core":264}],327:[function(require,module,exports){
+},{"../core":264}],328:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -149207,7 +149624,7 @@ AWS.Signers.Presign = inherit({
  */
 module.exports = AWS.Signers.Presign;
 
-},{"../core":264}],328:[function(require,module,exports){
+},{"../core":264}],329:[function(require,module,exports){
 var AWS = require('../core');
 
 var inherit = AWS.util.inherit;
@@ -149247,7 +149664,7 @@ require('./v4');
 require('./s3');
 require('./presign');
 
-},{"../core":264,"./presign":327,"./s3":329,"./v2":330,"./v3":331,"./v3https":332,"./v4":333}],329:[function(require,module,exports){
+},{"../core":264,"./presign":328,"./s3":330,"./v2":331,"./v3":332,"./v3https":333,"./v4":334}],330:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -149424,7 +149841,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.S3;
 
-},{"../core":264}],330:[function(require,module,exports){
+},{"../core":264}],331:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -149474,7 +149891,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.V2;
 
-},{"../core":264}],331:[function(require,module,exports){
+},{"../core":264}],332:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -149553,7 +149970,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.V3;
 
-},{"../core":264}],332:[function(require,module,exports){
+},{"../core":264}],333:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -149580,7 +149997,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
  */
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":264,"./v3":331}],333:[function(require,module,exports){
+},{"../core":264,"./v3":332}],334:[function(require,module,exports){
 var AWS = require('../core');
 var v4Credentials = require('./v4_credentials');
 var inherit = AWS.util.inherit;
@@ -149796,7 +150213,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.V4;
 
-},{"../core":264,"./v4_credentials":334}],334:[function(require,module,exports){
+},{"../core":264,"./v4_credentials":335}],335:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -149898,7 +150315,7 @@ module.exports = {
   }
 };
 
-},{"../core":264}],335:[function(require,module,exports){
+},{"../core":264}],336:[function(require,module,exports){
 function AcceptorStateMachine(states, state) {
   this.currentState = state || null;
   this.states = states || {};
@@ -149945,7 +150362,7 @@ AcceptorStateMachine.prototype.addState = function addState(name, acceptState, f
  */
 module.exports = AcceptorStateMachine;
 
-},{}],336:[function(require,module,exports){
+},{}],337:[function(require,module,exports){
 (function (process,setImmediate){
 /* eslint guard-for-in:0 */
 var AWS;
@@ -149985,8 +150402,6 @@ var util = {
     return agent;
   },
 
-  isBrowser: function isBrowser() { return process && process.browser; },
-  isNode: function isNode() { return !util.isBrowser(); },
   uriEscape: function uriEscape(string) {
     var output = encodeURIComponent(string);
     output = output.replace(/[^A-Za-z0-9_.~\-%]+/g, escape);
@@ -150891,7 +151306,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require('_process'),require("timers").setImmediate)
-},{"../apis/metadata.json":120,"./core":264,"_process":351,"fs":344,"timers":359,"uuid":363}],337:[function(require,module,exports){
+},{"../apis/metadata.json":120,"./core":264,"_process":352,"fs":345,"timers":360,"uuid":364}],338:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -151091,7 +151506,7 @@ function parseUnknown(xml) {
  */
 module.exports = DomXmlParser;
 
-},{"../model/shape":294,"../util":336}],338:[function(require,module,exports){
+},{"../model/shape":295,"../util":337}],339:[function(require,module,exports){
 var util = require('../util');
 var XmlNode = require('./xml-node').XmlNode;
 var XmlText = require('./xml-text').XmlText;
@@ -151195,7 +151610,7 @@ function applyNamespaces(xml, shape, isRoot) {
  */
 module.exports = XmlBuilder;
 
-},{"../util":336,"./xml-node":341,"./xml-text":342}],339:[function(require,module,exports){
+},{"../util":337,"./xml-node":342,"./xml-text":343}],340:[function(require,module,exports){
 /**
  * Escapes characters that can not be in an XML attribute.
  */
@@ -151209,7 +151624,7 @@ function escapeAttribute(value) {
 module.exports = {
     escapeAttribute: escapeAttribute
 };
-},{}],340:[function(require,module,exports){
+},{}],341:[function(require,module,exports){
 /**
  * Escapes characters that can not be in an XML element.
  */
@@ -151223,7 +151638,7 @@ function escapeElement(value) {
 module.exports = {
     escapeElement: escapeElement
 };
-},{}],341:[function(require,module,exports){
+},{}],342:[function(require,module,exports){
 var escapeAttribute = require('./escape-attribute').escapeAttribute;
 
 /**
@@ -151269,7 +151684,7 @@ XmlNode.prototype.toString = function () {
 module.exports = {
     XmlNode: XmlNode
 };
-},{"./escape-attribute":339}],342:[function(require,module,exports){
+},{"./escape-attribute":340}],343:[function(require,module,exports){
 var escapeElement = require('./escape-element').escapeElement;
 
 /**
@@ -151290,7 +151705,7 @@ XmlText.prototype.toString = function () {
 module.exports = {
     XmlText: XmlText
 };
-},{"./escape-element":340}],343:[function(require,module,exports){
+},{"./escape-element":341}],344:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -151443,9 +151858,9 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],344:[function(require,module,exports){
-
 },{}],345:[function(require,module,exports){
+
+},{}],346:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -153238,7 +153653,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":343,"ieee754":347,"isarray":349}],346:[function(require,module,exports){
+},{"base64-js":344,"ieee754":348,"isarray":350}],347:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -153542,7 +153957,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],347:[function(require,module,exports){
+},{}],348:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -153628,7 +154043,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],348:[function(require,module,exports){
+},{}],349:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -153653,14 +154068,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],349:[function(require,module,exports){
+},{}],350:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],350:[function(require,module,exports){
+},{}],351:[function(require,module,exports){
 (function(exports) {
   "use strict";
 
@@ -155329,7 +155744,7 @@ module.exports = Array.isArray || function (arr) {
   exports.strictDeepEqual = strictDeepEqual;
 })(typeof exports === "undefined" ? this.jmespath = {} : exports);
 
-},{}],351:[function(require,module,exports){
+},{}],352:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -155515,7 +155930,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],352:[function(require,module,exports){
+},{}],353:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 ;(function(root) {
@@ -156049,7 +156464,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],353:[function(require,module,exports){
+},{}],354:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -156135,7 +156550,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],354:[function(require,module,exports){
+},{}],355:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -156222,13 +156637,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],355:[function(require,module,exports){
+},{}],356:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":353,"./encode":354}],356:[function(require,module,exports){
+},{"./decode":354,"./encode":355}],357:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -156310,7 +156725,7 @@ module.exports = function(qs, sep, eq, options) {
   return obj;
 };
 
-},{}],357:[function(require,module,exports){
+},{}],358:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -156376,9 +156791,9 @@ module.exports = function(obj, sep, eq, name) {
          encodeURIComponent(stringifyPrimitive(obj));
 };
 
-},{}],358:[function(require,module,exports){
-arguments[4][355][0].apply(exports,arguments)
-},{"./decode":356,"./encode":357,"dup":355}],359:[function(require,module,exports){
+},{}],359:[function(require,module,exports){
+arguments[4][356][0].apply(exports,arguments)
+},{"./decode":357,"./encode":358,"dup":356}],360:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -156457,7 +156872,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":351,"timers":359}],360:[function(require,module,exports){
+},{"process/browser.js":352,"timers":360}],361:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -157166,14 +157581,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":352,"querystring":355}],361:[function(require,module,exports){
+},{"punycode":353,"querystring":356}],362:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],362:[function(require,module,exports){
+},{}],363:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -157763,7 +158178,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":361,"_process":351,"inherits":348}],363:[function(require,module,exports){
+},{"./support/isBuffer":362,"_process":352,"inherits":349}],364:[function(require,module,exports){
 var v1 = require('./v1');
 var v4 = require('./v4');
 
@@ -157773,7 +158188,7 @@ uuid.v4 = v4;
 
 module.exports = uuid;
 
-},{"./v1":366,"./v4":367}],364:[function(require,module,exports){
+},{"./v1":367,"./v4":368}],365:[function(require,module,exports){
 /**
  * Convert array of 16 byte values to UUID string format of the form:
  * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
@@ -157798,7 +158213,7 @@ function bytesToUuid(buf, offset) {
 
 module.exports = bytesToUuid;
 
-},{}],365:[function(require,module,exports){
+},{}],366:[function(require,module,exports){
 (function (global){
 // Unique ID creation requires a high quality random # generator.  In the
 // browser this is a little complicated due to unknown quality of Math.random()
@@ -157835,7 +158250,7 @@ if (!rng) {
 module.exports = rng;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],366:[function(require,module,exports){
+},{}],367:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -157937,7 +158352,7 @@ function v1(options, buf, offset) {
 
 module.exports = v1;
 
-},{"./lib/bytesToUuid":364,"./lib/rng":365}],367:[function(require,module,exports){
+},{"./lib/bytesToUuid":365,"./lib/rng":366}],368:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -157968,8 +158383,186 @@ function v4(options, buf, offset) {
 
 module.exports = v4;
 
-},{"./lib/bytesToUuid":364,"./lib/rng":365}],368:[function(require,module,exports){
-// AWS SDK for JavaScript v2.351.0
+},{"./lib/bytesToUuid":365,"./lib/rng":366}],369:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var LRU_1 = require("./utils/LRU");
+var CACHE_SIZE = 1000;
+/**
+ * Inspired node-lru-cache[https://github.com/isaacs/node-lru-cache]
+ */
+var EndpointCache = /** @class */ (function () {
+    function EndpointCache(maxSize) {
+        if (maxSize === void 0) { maxSize = CACHE_SIZE; }
+        this.maxSize = maxSize;
+        this.cache = new LRU_1.LRUCache(maxSize);
+    }
+    ;
+    Object.defineProperty(EndpointCache.prototype, "size", {
+        get: function () {
+            return this.cache.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    EndpointCache.prototype.put = function (key, value) {
+      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
+        var endpointRecord = this.populateValue(value);
+        this.cache.put(keyString, endpointRecord);
+    };
+    EndpointCache.prototype.get = function (key) {
+      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
+        var now = Date.now();
+        var records = this.cache.get(keyString);
+        if (records) {
+            for (var i = 0; i < records.length; i++) {
+                var record = records[i];
+                if (record.Expire < now) {
+                    this.cache.remove(keyString);
+                    return undefined;
+                }
+            }
+        }
+        return records;
+    };
+    EndpointCache.getKeyString = function (key) {
+        var identifiers = [];
+        var identifierNames = Object.keys(key).sort();
+        for (var i = 0; i < identifierNames.length; i++) {
+            var identifierName = identifierNames[i];
+            if (key[identifierName] === undefined)
+                continue;
+            identifiers.push(key[identifierName]);
+        }
+        return identifiers.join(' ');
+    };
+    EndpointCache.prototype.populateValue = function (endpoints) {
+        var now = Date.now();
+        return endpoints.map(function (endpoint) { return ({
+            Address: endpoint.Address || '',
+            Expire: now + (endpoint.CachePeriodInMinutes || 1) * 60 * 1000
+        }); });
+    };
+    EndpointCache.prototype.empty = function () {
+        this.cache.empty();
+    };
+    EndpointCache.prototype.remove = function (key) {
+      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
+        this.cache.remove(keyString);
+    };
+    return EndpointCache;
+}());
+exports.EndpointCache = EndpointCache;
+},{"./utils/LRU":370}],370:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var LinkedListNode = /** @class */ (function () {
+    function LinkedListNode(key, value) {
+        this.key = key;
+        this.value = value;
+    }
+    return LinkedListNode;
+}());
+var LRUCache = /** @class */ (function () {
+    function LRUCache(size) {
+        this.nodeMap = {};
+        this.size = 0;
+        if (typeof size !== 'number' || size < 1) {
+            throw new Error('Cache size can only be positive number');
+        }
+        this.sizeLimit = size;
+    }
+    Object.defineProperty(LRUCache.prototype, "length", {
+        get: function () {
+            return this.size;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    LRUCache.prototype.prependToList = function (node) {
+        if (!this.headerNode) {
+            this.tailNode = node;
+        }
+        else {
+            this.headerNode.prev = node;
+            node.next = this.headerNode;
+        }
+        this.headerNode = node;
+        this.size++;
+    };
+    LRUCache.prototype.removeFromTail = function () {
+        if (!this.tailNode) {
+            return undefined;
+        }
+        var node = this.tailNode;
+        var prevNode = node.prev;
+        if (prevNode) {
+            prevNode.next = undefined;
+        }
+        node.prev = undefined;
+        this.tailNode = prevNode;
+        this.size--;
+        return node;
+    };
+    LRUCache.prototype.detachFromList = function (node) {
+        if (this.headerNode === node) {
+            this.headerNode = node.next;
+        }
+        if (this.tailNode === node) {
+            this.tailNode = node.prev;
+        }
+        if (node.prev) {
+            node.prev.next = node.next;
+        }
+        if (node.next) {
+            node.next.prev = node.prev;
+        }
+        node.next = undefined;
+        node.prev = undefined;
+        this.size--;
+    };
+    LRUCache.prototype.get = function (key) {
+        if (this.nodeMap[key]) {
+            var node = this.nodeMap[key];
+            this.detachFromList(node);
+            this.prependToList(node);
+            return node.value;
+        }
+    };
+    LRUCache.prototype.remove = function (key) {
+        if (this.nodeMap[key]) {
+            var node = this.nodeMap[key];
+            this.detachFromList(node);
+            delete this.nodeMap[key];
+        }
+    };
+    LRUCache.prototype.put = function (key, value) {
+        if (this.nodeMap[key]) {
+            this.remove(key);
+        }
+        else if (this.size === this.sizeLimit) {
+            var tailNode = this.removeFromTail();
+            var key_1 = tailNode.key;
+            delete this.nodeMap[key_1];
+        }
+        var newNode = new LinkedListNode(key, value);
+        this.nodeMap[key] = newNode;
+        this.prependToList(newNode);
+    };
+    LRUCache.prototype.empty = function () {
+        var keys = Object.keys(this.nodeMap);
+        for (var i = 0; i < keys.length; i++) {
+            var key = keys[i];
+            var node = this.nodeMap[key];
+            this.detachFromList(node);
+            delete this.nodeMap[key];
+        }
+    };
+    return LRUCache;
+}());
+exports.LRUCache = LRUCache;
+},{}],371:[function(require,module,exports){
+// AWS SDK for JavaScript v2.352.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
@@ -157991,5 +158584,5 @@ if (typeof self !== 'undefined') self.AWS = AWS;
  * browser builder will strip out this line if services are supplied on the command line.
  */
 require('../clients/browser_default');
-},{"../clients/browser_default":187,"./browser_loader":261,"./core":264}]},{},[368]);
+},{"../clients/browser_default":187,"./browser_loader":261,"./core":264}]},{},[371]);
 

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.351.0-->
+<!--LATEST=2.352.0-->
 <!--ENTRYINSERT-->
+
+## 2.352.0
+* feature: DLM: Amazon Data Lifecycle Manager adds support for copying EBS volume tags to EBS snapshots. AWS resource tags allow customers to add metadata and apply access policies to your Amazon Elastic Block Store (Amazon EBS) resources. Starting today, customers can use Amazon Data Lifecycle Manager (DLM) to copy tags on EBS volumes to EBS snapshots. This allows customers to easily set snapshot metadata, such as access policies, to match the parent volume. Customers can enable this functionality on new or existing lifecycle policies. They can also choose to disable it at a future date.  
+* feature: Endpoint Discovery: Some services provide endpoint discovery operations (e.g. 'DescribeEndpoints()'). This SDK feature, if turned on, will automatically request endpoints from services if needed and cache the endpoints returned.
+* feature: MediaLive: You can now switch a live channel between preconfigured inputs. This means assigned inputs for a running channel can be changed according to a defined schedule. You can also use MP4 files as inputs.
 
 ## 2.351.0
 * feature: CostExplorer: Enable Payer Accounts to View Linked Account Recommendations. Payer Accounts can specify "LINKED" as scope in the request now. In the response, there is a new filed called AccountId in ReservationPurchaseRecommendationDetail for indicating which account is this recommendation detail belongs to.

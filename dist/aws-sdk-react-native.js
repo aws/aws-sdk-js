@@ -71,6 +71,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(4);
+
+	AWS.util.isBrowser = function() { return true; };
+	AWS.util.isNode = function() { return false; };
+
 	// react-native specific modules
 	AWS.util.crypto.lib = __webpack_require__(5);
 	AWS.util.Buffer = __webpack_require__(8).Buffer;
@@ -390,7 +394,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * @constant
 		   */
-		  VERSION: '2.351.0',
+		  VERSION: '2.352.0',
 
 		  /**
 		   * @api private
@@ -438,18 +442,23 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * @api private
 		   */
-		  apiLoader: __webpack_require__(32)
+		  apiLoader: __webpack_require__(32),
+
+		  /**
+		   * @api private
+		   */
+		  EndpointCache: __webpack_require__(33).EndpointCache
 		});
-		__webpack_require__(33);
-		__webpack_require__(34);
-		__webpack_require__(37);
-		__webpack_require__(40);
-		__webpack_require__(41);
-		__webpack_require__(45);
+		__webpack_require__(35);
+		__webpack_require__(36);
+		__webpack_require__(39);
+		__webpack_require__(42);
+		__webpack_require__(43);
 		__webpack_require__(48);
-		__webpack_require__(49);
-		__webpack_require__(50);
-		__webpack_require__(58);
+		__webpack_require__(51);
+		__webpack_require__(52);
+		__webpack_require__(53);
+		__webpack_require__(61);
 
 		/**
 		 * @readonly
@@ -467,6 +476,11 @@ return /******/ (function(modules) { // webpackBootstrap
 		 *   new AWS.S3().listBuckets(); // prints 'Request took 0.285 seconds'
 		 */
 		AWS.events = new AWS.SequentialExecutor();
+
+		//create endpoint cache lazily
+		AWS.util.memoizedProperty(AWS, 'endpointCache', function() {
+		  return new AWS.EndpointCache(AWS.config.endpointCacheSize);
+		}, true);
 
 
 	/***/ }),
@@ -511,8 +525,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		    return agent;
 		  },
 
-		  isBrowser: function isBrowser() { return process && process.browser; },
-		  isNode: function isNode() { return !util.isBrowser(); },
 		  uriEscape: function uriEscape(string) {
 		    var output = encodeURIComponent(string);
 		    output = output.replace(/[^A-Za-z0-9_.~\-%]+/g, escape);
@@ -2570,6 +2582,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		  property(this, 'isEventPayload', Boolean(shape.eventpayload), false);
 		  property(this, 'isEventHeader', Boolean(shape.eventheader), false);
 		  property(this, 'isTimestampFormatSet', Boolean(shape.timestampFormat) || shape.prototype && shape.prototype.isTimestampFormatSet === true, false);
+		  property(this, 'endpointDiscoveryId', Boolean(shape.endpointdiscoveryid), false);
 
 		  if (options.documentation) {
 		    property(this, 'documentation', shape.documentation);
@@ -2924,19 +2937,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		var memoizedProperty = __webpack_require__(2).memoizedProperty;
 
-		function memoize(name, value, fn, nameTr) {
+		function memoize(name, value, factory, nameTr) {
 		  memoizedProperty(this, nameTr(name), function() {
-		    return fn(name, value);
+		    return factory(name, value);
 		  });
 		}
 
-		function Collection(iterable, options, fn, nameTr) {
+		function Collection(iterable, options, factory, nameTr, callback) {
 		  nameTr = nameTr || String;
 		  var self = this;
 
 		  for (var id in iterable) {
 		    if (Object.prototype.hasOwnProperty.call(iterable, id)) {
-		      memoize.call(self, id, iterable[id], fn, nameTr);
+		      memoize.call(self, id, iterable[id], factory, nameTr);
+		      if (callback) callback(id, iterable[id]);
 		    }
 		  }
 		}
@@ -3549,6 +3563,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		var memoizedProperty = util.memoizedProperty;
 
 		function Api(api, options) {
+		  var self = this;
 		  api = api || {};
 		  options = options || {};
 		  options.api = this;
@@ -3579,9 +3594,15 @@ return /******/ (function(modules) { // webpackBootstrap
 		    return name;
 		  });
 
+		  function addEndpointOperation(name, operation) {
+		    if (operation.endpointoperation === true) {
+		      property(self, 'endpointOperation', util.string.lowerFirst(name));
+		    }
+		  }
+
 		  property(this, 'operations', new Collection(api.operations, options, function(name, operation) {
 		    return new Operation(name, operation, options);
-		  }, util.string.lowerFirst));
+		  }, util.string.lowerFirst, addEndpointOperation));
 
 		  property(this, 'shapes', new Collection(api.shapes, options, function(name, shape) {
 		    return Shape.create(shape, options);
@@ -3628,6 +3649,13 @@ return /******/ (function(modules) { // webpackBootstrap
 		  property(this, 'httpMethod', operation.http.method || 'POST');
 		  property(this, 'httpPath', operation.http.requestUri || '/');
 		  property(this, 'authtype', operation.authtype || '');
+		  property(
+		    this,
+		    'endpointDiscoveryRequired',
+		    operation.endpointdiscovery ?
+		      (operation.endpointdiscovery.required ? 'REQUIRED' : 'OPTIONAL') :
+		    'NULL'
+		  );
 
 		  memoizedProperty(this, 'input', function() {
 		    if (!operation.input) {
@@ -3804,6 +3832,192 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/***/ }),
 	/* 33 */
+	/***/ (function(module, exports, __webpack_require__) {
+
+		"use strict";
+		Object.defineProperty(exports, "__esModule", { value: true });
+		var LRU_1 = __webpack_require__(34);
+		var CACHE_SIZE = 1000;
+		/**
+		 * Inspired node-lru-cache[https://github.com/isaacs/node-lru-cache]
+		 */
+		var EndpointCache = /** @class */ (function () {
+		    function EndpointCache(maxSize) {
+		        if (maxSize === void 0) { maxSize = CACHE_SIZE; }
+		        this.maxSize = maxSize;
+		        this.cache = new LRU_1.LRUCache(maxSize);
+		    }
+		    ;
+		    Object.defineProperty(EndpointCache.prototype, "size", {
+		        get: function () {
+		            return this.cache.length;
+		        },
+		        enumerable: true,
+		        configurable: true
+		    });
+		    EndpointCache.prototype.put = function (key, value) {
+		      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
+		        var endpointRecord = this.populateValue(value);
+		        this.cache.put(keyString, endpointRecord);
+		    };
+		    EndpointCache.prototype.get = function (key) {
+		      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
+		        var now = Date.now();
+		        var records = this.cache.get(keyString);
+		        if (records) {
+		            for (var i = 0; i < records.length; i++) {
+		                var record = records[i];
+		                if (record.Expire < now) {
+		                    this.cache.remove(keyString);
+		                    return undefined;
+		                }
+		            }
+		        }
+		        return records;
+		    };
+		    EndpointCache.getKeyString = function (key) {
+		        var identifiers = [];
+		        var identifierNames = Object.keys(key).sort();
+		        for (var i = 0; i < identifierNames.length; i++) {
+		            var identifierName = identifierNames[i];
+		            if (key[identifierName] === undefined)
+		                continue;
+		            identifiers.push(key[identifierName]);
+		        }
+		        return identifiers.join(' ');
+		    };
+		    EndpointCache.prototype.populateValue = function (endpoints) {
+		        var now = Date.now();
+		        return endpoints.map(function (endpoint) { return ({
+		            Address: endpoint.Address || '',
+		            Expire: now + (endpoint.CachePeriodInMinutes || 1) * 60 * 1000
+		        }); });
+		    };
+		    EndpointCache.prototype.empty = function () {
+		        this.cache.empty();
+		    };
+		    EndpointCache.prototype.remove = function (key) {
+		      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
+		        this.cache.remove(keyString);
+		    };
+		    return EndpointCache;
+		}());
+		exports.EndpointCache = EndpointCache;
+
+	/***/ }),
+	/* 34 */
+	/***/ (function(module, exports) {
+
+		"use strict";
+		Object.defineProperty(exports, "__esModule", { value: true });
+		var LinkedListNode = /** @class */ (function () {
+		    function LinkedListNode(key, value) {
+		        this.key = key;
+		        this.value = value;
+		    }
+		    return LinkedListNode;
+		}());
+		var LRUCache = /** @class */ (function () {
+		    function LRUCache(size) {
+		        this.nodeMap = {};
+		        this.size = 0;
+		        if (typeof size !== 'number' || size < 1) {
+		            throw new Error('Cache size can only be positive number');
+		        }
+		        this.sizeLimit = size;
+		    }
+		    Object.defineProperty(LRUCache.prototype, "length", {
+		        get: function () {
+		            return this.size;
+		        },
+		        enumerable: true,
+		        configurable: true
+		    });
+		    LRUCache.prototype.prependToList = function (node) {
+		        if (!this.headerNode) {
+		            this.tailNode = node;
+		        }
+		        else {
+		            this.headerNode.prev = node;
+		            node.next = this.headerNode;
+		        }
+		        this.headerNode = node;
+		        this.size++;
+		    };
+		    LRUCache.prototype.removeFromTail = function () {
+		        if (!this.tailNode) {
+		            return undefined;
+		        }
+		        var node = this.tailNode;
+		        var prevNode = node.prev;
+		        if (prevNode) {
+		            prevNode.next = undefined;
+		        }
+		        node.prev = undefined;
+		        this.tailNode = prevNode;
+		        this.size--;
+		        return node;
+		    };
+		    LRUCache.prototype.detachFromList = function (node) {
+		        if (this.headerNode === node) {
+		            this.headerNode = node.next;
+		        }
+		        if (this.tailNode === node) {
+		            this.tailNode = node.prev;
+		        }
+		        if (node.prev) {
+		            node.prev.next = node.next;
+		        }
+		        if (node.next) {
+		            node.next.prev = node.prev;
+		        }
+		        node.next = undefined;
+		        node.prev = undefined;
+		        this.size--;
+		    };
+		    LRUCache.prototype.get = function (key) {
+		        if (this.nodeMap[key]) {
+		            var node = this.nodeMap[key];
+		            this.detachFromList(node);
+		            this.prependToList(node);
+		            return node.value;
+		        }
+		    };
+		    LRUCache.prototype.remove = function (key) {
+		        if (this.nodeMap[key]) {
+		            var node = this.nodeMap[key];
+		            this.detachFromList(node);
+		            delete this.nodeMap[key];
+		        }
+		    };
+		    LRUCache.prototype.put = function (key, value) {
+		        if (this.nodeMap[key]) {
+		            this.remove(key);
+		        }
+		        else if (this.size === this.sizeLimit) {
+		            var tailNode = this.removeFromTail();
+		            var key_1 = tailNode.key;
+		            delete this.nodeMap[key_1];
+		        }
+		        var newNode = new LinkedListNode(key, value);
+		        this.nodeMap[key] = newNode;
+		        this.prependToList(newNode);
+		    };
+		    LRUCache.prototype.empty = function () {
+		        var keys = Object.keys(this.nodeMap);
+		        for (var i = 0; i < keys.length; i++) {
+		            var key = keys[i];
+		            var node = this.nodeMap[key];
+		            this.detachFromList(node);
+		            delete this.nodeMap[key];
+		        }
+		    };
+		    return LRUCache;
+		}());
+		exports.LRUCache = LRUCache;
+
+	/***/ }),
+	/* 35 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -3989,9 +4203,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * @api private
 		   */
-		  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
+		  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback, toHead) {
 		    callback._isAsync = true;
-		    return this.addNamedListener(name, eventName, callback);
+		    return this.addNamedListener(name, eventName, callback, toHead);
 		  },
 
 		  /**
@@ -4042,14 +4256,13 @@ return /******/ (function(modules) { // webpackBootstrap
 		 */
 		module.exports = AWS.SequentialExecutor;
 
-
 	/***/ }),
-	/* 34 */
+	/* 36 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
 		var Api = __webpack_require__(28);
-		var regionConfig = __webpack_require__(35);
+		var regionConfig = __webpack_require__(37);
 
 		var inherit = AWS.util.inherit;
 		var clientCount = 0;
@@ -4844,11 +5057,11 @@ return /******/ (function(modules) { // webpackBootstrap
 		/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 	/***/ }),
-	/* 35 */
+	/* 37 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
-		var regionConfig = __webpack_require__(36);
+		var regionConfig = __webpack_require__(38);
 
 		function generateRegionPrefix(region) {
 		  if (!region) return null;
@@ -4922,18 +5135,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 36 */
+	/* 38 */
 	/***/ (function(module, exports) {
 
 		module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/iam":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":{"endpoint":"https://{service}.amazonaws.com","signatureVersion":"v3https","globalEndpoint":true},"*/waf":"globalSSL","us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"}}}
 
 	/***/ }),
-	/* 37 */
+	/* 39 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
-		__webpack_require__(38);
-		__webpack_require__(39);
+		__webpack_require__(40);
+		__webpack_require__(41);
 		var PromisesDependency;
 
 		/**
@@ -5083,6 +5296,17 @@ return /******/ (function(modules) { // webpackBootstrap
 		 *   @return [Boolean] whether the signature to sign requests with (overriding
 		 *     the API configuration) is cached. Only applies to the signature version 'v4'.
 		 *     Defaults to `true`.
+		 *
+		 * @!attribute endpointDiscoveryEnabled
+		 *   @return [Boolean] whether to enable endpoint discovery for operations that
+		 *     allow optionally using an endpoint returned by the service.
+		 *     Defaults to 'false'
+		 *
+		 * @!attribute endpointCacheSize
+		 *   @return [Number] the size of the global cache storing endpoints from endpoint
+		 *     discovery operations. Once endpoint cache is created, updating this setting
+		 *     cannot change existing cache size.
+		 *     Defaults to 1000
 		 */
 		AWS.Config = AWS.util.inherit({
 		  /**
@@ -5209,6 +5433,14 @@ return /******/ (function(modules) { // webpackBootstrap
 		   *   checksum of HTTP response bodies returned by DynamoDB. Default: `true`.
 		   * @option options clientSideMonitoring [Boolean] whether to collect and
 		   * publish this client's performance metrics of all its API requests.
+		   * @option options endpointDiscoveryEnabled [Boolean] whether to enable endpoint
+		   *   discovery for operations that allow optionally using an endpoint returned by
+		   *   the service.
+		   *   Defaults to 'false'
+		   * @option options endpointCacheSize [Number] the size of the global cache storing
+		   *   endpoints from endpoint discovery operations. Once endpoint cache is created,
+		   *   updating this setting cannot change existing cache size.
+		   *   Defaults to 1000
 		   */
 		  constructor: function Config(options) {
 		    if (options === undefined) options = {};
@@ -5426,7 +5658,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		    signatureCache: true,
 		    retryDelayOptions: {},
 		    useAccelerateEndpoint: false,
-		    clientSideMonitoring: false
+		    clientSideMonitoring: false,
+		    endpointDiscoveryEnabled: false,
+		    endpointCacheSize: 1000
 		  },
 
 		  /**
@@ -5477,7 +5711,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 38 */
+	/* 40 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -5697,7 +5931,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 39 */
+	/* 41 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -5876,7 +6110,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 40 */
+	/* 42 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -6032,8 +6266,17 @@ return /******/ (function(modules) { // webpackBootstrap
 		      return AWS.util.queryParamsToString(query);
 		    }
 		    return '';
-		  }
+		  },
 
+		  /**
+		   * @api private
+		   * update httpRequest endpoint with endpoint string
+		   */
+		  updateEndpoint: function updateEndpoint(endpointStr) {
+		    var newEndpoint = new AWS.Endpoint(endpointStr);
+		    this.endpoint = newEndpoint;
+		    this.path = newEndpoint.path || '/'
+		  }
 		});
 
 		/**
@@ -6108,11 +6351,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 41 */
+	/* 43 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
-		var SequentialExecutor = __webpack_require__(33);
+		var SequentialExecutor = __webpack_require__(35);
+		var DISCOVER_ENDPOINT = __webpack_require__(44).discoverEndpoint;
 		/**
 		 * The namespace used to register global event listeners for request building
 		 * and sending.
@@ -6302,6 +6546,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		        this.response.error = null;
 		      }
 		    });
+
+		    var addToHead = true;
+		    addAsync('DISCOVER_ENDPOINT', 'sign', DISCOVER_ENDPOINT, addToHead);
 
 		    addAsync('SIGN', 'sign', function SIGN(req, done) {
 		      var service = req.service;
@@ -6657,7 +6904,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		          var inputShape = req.service.api.operations[req.operation].input;
 		          censoredParams = filterSensitiveLog(inputShape, req.params);
 		        }
-		        var params = __webpack_require__(42).inspect(censoredParams, true, null);
+		        var params = __webpack_require__(45).inspect(censoredParams, true, null);
 		        var message = '';
 		        if (ansi) message += '\x1B[33m';
 		        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
@@ -6716,7 +6963,366 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 42 */
+	/* 44 */
+	/***/ (function(module, exports, __webpack_require__) {
+
+		/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
+		var util = __webpack_require__(2);
+		var endpointDiscoveryEnabledEnv = 'AWS_ENABLE_ENDPOINT_DISCOVERY';
+
+		/**
+		 * Generate key (except resources and operation part) to index the endpoints in the cache
+		 * If input shape has endpointdiscoveryid trait then use
+		 *   accessKey + operation + resources + region + service as cache key
+		 * If input shape doesn't have endpointdiscoveryid trait then use
+		 *   accessKey + region + service as cache key
+		 * @return [map<String,String>] object with keys to index endpoints.
+		 * @api private
+		 */
+		function getCacheKey(request) {
+		  var service = request.service;
+		  var api = service.api || {};
+		  var operations = api.operations;
+		  var identifiers = {};
+		  if (service.config.region) {
+		    identifiers.region = service.config.region;
+		  }
+		  if (api.serviceId) {
+		    identifiers.serviceId = api.serviceId
+		  }
+		  if (service.config.credentials.accessKeyId) {
+		    identifiers.accessKeyId = service.config.credentials.accessKeyId
+		  }
+		  return identifiers;
+		}
+
+		/**
+		 * Recursive helper for marshallCustomIdentifiers().
+		 * Looks for required string input members that have 'endpointdiscoveryid' trait.
+		 * @api private
+		 */
+		function marshallCustomIdentifiersHelper(result, params, shape) {
+		  if (!shape || params === undefined || params === null) return;
+		  if (shape.type === 'structure' && shape.required && shape.required.length > 0) {
+		    util.arrayEach(shape.required, function(name) {
+		      var memberShape = shape.members[name];
+		      if (memberShape.endpointDiscoveryId === true) {
+		        var locationName = memberShape.isLocationName ? memberShape.name : name;
+		        result[locationName] = String(params[name]);
+		      } else {
+		        marshallCustomIdentifiersHelper(result, params[name], memberShape);
+		      }
+		    });
+		  }
+		}
+
+		/**
+		 * Get custom identifiers for cache key.
+		 * Identifies custom identifiers by checking each shape's `endpointDiscoveryId` trait.
+		 * @param [object] request object
+		 * @param [object] input shape of the given operation's api
+		 * @api private
+		 */
+		function marshallCustomIdentifiers(request, shape) {
+		  var identifiers = {};
+		  marshallCustomIdentifiersHelper(identifiers, request.params, shape);
+		  return identifiers;
+		}
+
+		/**
+		 * Call endpoint discovery operation when it's optional.
+		 * When endpoint is available in cache then use the cached endpoints. If endpoints
+		 * are unavailable then use regional endpoints and call endpoint discovery operation
+		 * asynchronously. This is turned off by default.
+		 * @param [object] request object
+		 * @api private
+		 */
+		function optionalDiscoverEndpoint(request) {
+		  var service = request.service;
+		  var api = service.api;
+		  var operationModel = api.operations ? api.operations[request.operation] : undefined;
+		  var inputShape = operationModel ? operationModel.input : undefined;
+
+		  var identifiers = marshallCustomIdentifiers(request, inputShape);
+		  var cacheKey = getCacheKey(request);
+		  if (Object.keys(identifiers).length > 0) {
+		    cacheKey = util.update(cacheKey, identifiers);
+		    if (operationModel) cacheKey.operation = operationModel.name;
+		  }
+		  var endpoints = AWS.endpointCache.get(cacheKey);
+		  if (endpoints && endpoints.length === 1 && endpoints[0].Address === '') {
+		    //endpoint operation is being made but response not yet received
+		    //or endpoint operation just failed in 1 minute
+		    return;
+		  } else if (endpoints && endpoints.length > 0) {
+		    //found endpoint record from cache
+		    request.httpRequest.updateEndpoint(endpoints[0].Address);
+		  } else {
+		    //endpoint record not in cache or outdated. make discovery operation
+		    var endpointRequest = service.makeRequest(api.endpointOperation, {
+		      Operation: operationModel.name,
+		      Identifiers: identifiers,
+		    });
+		    addApiVersionHeader(endpointRequest);
+		    endpointRequest.removeListener('validate', AWS.EventListeners.Core.VALIDATE_PARAMETERS);
+		    endpointRequest.removeListener('retry', AWS.EventListeners.Core.RETRY_CHECK);
+		    //put in a placeholder for endpoints already requested, prevent
+		    //too much in-flight calls
+		    AWS.endpointCache.put(cacheKey, [{
+		      Address: '',
+		      CachePeriodInMinutes: 1
+		    }]);
+		    endpointRequest.send(function(err, data) {
+		      if (data && data.Endpoints) {
+		        AWS.endpointCache.put(cacheKey, data.Endpoints);
+		      } else if (err) {
+		        AWS.endpointCache.put(cacheKey, [{
+		          Address: '',
+		          CachePeriodInMinutes: 1 //not to make more endpoint operation in next 1 minute
+		        }]);
+		      }
+		    });
+		  }
+		}
+
+		var requestQueue = {};
+
+		/**
+		 * Call endpoint discovery operation when it's required.
+		 * When endpoint is available in cache then use cached ones. If endpoints are
+		 * unavailable then SDK should call endpoint operation then use returned new
+		 * endpoint for the api call. SDK will automatically attempt to do endpoint
+		 * discovery. This is turned off by default
+		 * @param [object] request object
+		 * @api private
+		 */
+		function requiredDiscoverEndpoint(request, done) {
+		  var service = request.service;
+		  var api = service.api;
+		  var operationModel = api.operations ? api.operations[request.operation] : undefined;
+		  var inputShape = operationModel ? operationModel.input : undefined;
+
+		  var identifiers = marshallCustomIdentifiers(request, inputShape);
+		  var cacheKey = getCacheKey(request);
+		  if (Object.keys(identifiers).length > 0) {
+		    cacheKey = util.update(cacheKey, identifiers);
+		    if (operationModel) cacheKey.operation = operationModel.name;
+		  }
+		  var cacheKeyStr = AWS.EndpointCache.getKeyString(cacheKey);
+		  var endpoints = AWS.endpointCache.get(cacheKeyStr); //endpoint cache also accepts string keys
+		  if (endpoints && endpoints.length === 1 && endpoints[0].Address === '') {
+		    //endpoint operation is being made but response not yet received
+		    //push request object to a pending queue
+		    if (!requestQueue[cacheKeyStr]) requestQueue[cacheKeyStr] = [];
+		    requestQueue[cacheKeyStr].push({request: request, callback: done});
+		    return;
+		  } else if (endpoints && endpoints.length > 0) {
+		    request.httpRequest.updateEndpoint(endpoints[0].Address);
+		    done();
+		  } else {
+		    var endpointRequest = service.makeRequest(api.endpointOperation, {
+		      Operation: operationModel.name,
+		      Identifiers: identifiers,
+		    });
+		    endpointRequest.removeListener('validate', AWS.EventListeners.Core.VALIDATE_PARAMETERS);
+		    addApiVersionHeader(endpointRequest);
+
+		    //put in a placeholder for endpoints already requested, prevent
+		    //too much in-flight calls
+		    AWS.endpointCache.put(cacheKeyStr, [{
+		      Address: '',
+		      CachePeriodInMinutes: 60 //long-live cache
+		    }]);
+		    endpointRequest.send(function(err, data) {
+		      if (err) {
+		        var errorParams = {
+		          code: 'EndpointDiscoveryException',
+		          message: 'Request cannot be fulfilled without specifying an endpoint',
+		          retryable: false
+		        };
+		        request.response.error = util.error(err, errorParams);
+		        AWS.endpointCache.remove(cacheKey);
+
+		        //fail all the pending requests in batch
+		        if (requestQueue[cacheKeyStr]) {
+		          var pendingRequests = requestQueue[cacheKeyStr];
+		          util.arrayEach(pendingRequests, function(requestContext) {
+		            requestContext.request.response.error = util.error(err, errorParams);
+		            requestContext.callback();
+		          });
+		          delete requestQueue[cacheKeyStr];
+		        }
+		      } else if (data) {
+		        AWS.endpointCache.put(cacheKeyStr, data.Endpoints);
+		        request.httpRequest.updateEndpoint(data.Endpoints[0].Address);
+
+		        //update the endpoint for all the pending requests in batch
+		        if (requestQueue[cacheKeyStr]) {
+		          var pendingRequests = requestQueue[cacheKeyStr];
+		          util.arrayEach(pendingRequests, function(requestContext) {
+		            requestContext.request.httpRequest.updateEndpoint(data.Endpoints[0].Address);
+		            requestContext.callback();
+		          });
+		          delete requestQueue[cacheKeyStr];
+		        }
+		      }
+		      done();
+		    });
+		  }
+		}
+
+		/**
+		 * add api version header to endpoint operation
+		 * @api private
+		 */
+		function addApiVersionHeader(endpointRequest) {
+		  var api = endpointRequest.service.api;
+		  var apiVersion = api.apiVersion;
+		  if (apiVersion && !endpointRequest.httpRequest.headers['x-amz-api-version']) {
+		    endpointRequest.httpRequest.headers['x-amz-api-version'] = apiVersion;
+		  }
+		}
+
+		/**
+		 * If api call gets invalid endpoint exception, SDK should attempt to remove the invalid
+		 * endpoint from cache.
+		 * @api private
+		 */
+		function invalidateCachedEndpoints(response) {
+		  var error = response.error;
+		  var httpResponse = response.httpResponse;
+		  if (error &&
+		    (error.code === 'InvalidEndpointException' || httpResponse.statusCode === 421)
+		  ) {
+		    var request = response.request;
+		    var operations = request.service.api.operations || {};
+		    var inputShape = operations[request.operation] ? operations[request.operation].input : undefined;
+		    var identifiers = marshallCustomIdentifiers(request, inputShape);
+		    var cacheKey = getCacheKey(request);
+		    if (Object.keys(identifiers).length > 0) {
+		      cacheKey = util.update(cacheKey, identifiers);
+		      if (operations[request.operation]) cacheKey.operation = operations[request.operation].name;
+		    }
+		    AWS.endpointCache.remove(cacheKey);
+		  }
+		}
+
+		/**
+		 * If endpoint is explicitly configured, SDK should not do endpoint discovery in anytime.
+		 * @param [object] client Service client object.
+		 * @api private
+		 */
+		function hasCustomEndpoint(client) {
+		  //if set endpoint is set for specific client, enable endpoint discovery will raise an error.
+		  if (client._originalConfig && client._originalConfig.endpoint && client._originalConfig.endpointDiscoveryEnabled === true) {
+		    throw util.error(new Error(), {
+		      code: 'ConfigurationException',
+		      message: 'Custom endpoint is supplied; endpointDiscoveryEnabled must not be true.'
+		    });
+		  };
+		  var svcConfig = AWS.config[client.serviceIdentifier] || {};
+		  return Boolean(AWS.config.endpoint || svcConfig.endpoint || (client._originalConfig && client._originalConfig.endpoint));
+		}
+
+		/**
+		 * @api private
+		 */
+		function isFalsy(value) {
+		  return ['false', '0'].indexOf(value) >= 0;
+		}
+
+		/**
+		 * If endpoint discovery should perform for this request when endpoint discovery is optional.
+		 * SDK performs config resolution in order like below:
+		 * 1. If turned on client configuration(default to off) then turn on endpoint discovery.
+		 * 2. If turned on in env AWS_ENABLE_ENDPOINT_DISCOVERY then turn on endpoint discovery.
+		 * 3. If turned on in shared ini config file with key 'endpoint_discovery_enabled', then
+		 *   turn on endpoint discovery.
+		 * @param [object] request request object.
+		 * @api private
+		 */
+		function isEndpointDiscoveryApplicable(request) {
+		  var service = request.service || {};
+		  if (service.config.endpointDiscoveryEnabled === true) return true;
+		  if (Object.prototype.hasOwnProperty.call(process.env, endpointDiscoveryEnabledEnv)) {
+		    if (process.env[endpointDiscoveryEnabledEnv] === '' || process.env[endpointDiscoveryEnabledEnv] === undefined) {
+		      throw util.error(new Error(), {
+		        code: 'ConfigurationException',
+		        message: 'environmental variable AWS_ENABLE_ENDPOINT_DISCOVERY cannot be set to nothing'
+		      });
+		    }
+		    if (!isFalsy(process.env[endpointDiscoveryEnabledEnv])) return true;
+		  }
+		  //shared ini file is only available in Node
+		  if (util.isBrowser()) return false;
+
+		  var configFile = {};
+		  try {
+		    configFile = AWS.util.iniLoader ? AWS.util.iniLoader.loadFrom({
+		      isConfig: true,
+		      filename: process.env[AWS.util.sharedConfigFileEnv]
+		    }) : {};
+		  } catch (e) {}
+		  var sharedFileConfig = configFile[
+		    process.env.AWS_PROFILE || AWS.util.defaultProfile
+		  ] || {};
+		  if (Object.prototype.hasOwnProperty.call(sharedFileConfig, 'endpoint_discovery_enabled')) {
+		    if (sharedFileConfig.endpoint_discovery_enabled === undefined) {
+		      throw util.error(new Error(), {
+		        code: 'ConfigurationException',
+		        message: 'config file entry \'endpoint_discovery_enabled\' cannot be set to nothing'
+		      });
+		    }
+		    if (!isFalsy(sharedFileConfig.endpoint_discovery_enabled)) return true;
+		  }
+		  return false;
+		}
+
+		/**
+		 * attach endpoint discovery logic to request object
+		 * @param [object] request
+		 * @api private
+		 */
+		function discoverEndpoint(request, done) {
+		  var service = request.service || {};
+		  if (hasCustomEndpoint(service) || request.isPresigned()) return done();
+
+		  if (!isEndpointDiscoveryApplicable(request)) return done();
+
+		  request.httpRequest.appendToUserAgent('endpoint-discovery');
+
+		  var operations = service.api.operations || {};
+		  var operationModel = operations[request.operation];
+		  var isEndpointDiscoveryRequired = operationModel ? operationModel.endpointDiscoveryRequired : 'NULL';
+		  switch (isEndpointDiscoveryRequired) {
+		    case 'OPTIONAL':
+		      optionalDiscoverEndpoint(request);
+		      request.addNamedListener('INVALIDATE_CACHED_ENDPOINTS', 'extractError', invalidateCachedEndpoints);
+		      done();
+		      break;
+		    case 'REQUIRED':
+		      request.addNamedListener('INVALIDATE_CACHED_ENDPOINTS', 'extractError', invalidateCachedEndpoints);
+		      requiredDiscoverEndpoint(request, done);
+		      break;
+		    case 'NULL':
+		    default:
+		      done();
+		      break;
+		  }
+		}
+
+		module.exports = {
+		  discoverEndpoint: discoverEndpoint,
+		  requiredDiscoverEndpoint: requiredDiscoverEndpoint,
+		  optionalDiscoverEndpoint: optionalDiscoverEndpoint,
+		  marshallCustomIdentifiers: marshallCustomIdentifiers,
+		  getCacheKey: getCacheKey,
+		  invalidateCachedEndpoint: invalidateCachedEndpoints,
+		}
+		/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+	/***/ }),
+	/* 45 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -7244,7 +7850,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		}
 		exports.isPrimitive = isPrimitive;
 
-		exports.isBuffer = __webpack_require__(43);
+		exports.isBuffer = __webpack_require__(46);
 
 		function objectToString(o) {
 		  return Object.prototype.toString.call(o);
@@ -7288,7 +7894,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		 *     prototype.
 		 * @param {function} superCtor Constructor function to inherit prototype from.
 		 */
-		exports.inherits = __webpack_require__(44);
+		exports.inherits = __webpack_require__(47);
 
 		exports._extend = function(origin, add) {
 		  // Don't do anything if add isn't an object
@@ -7309,7 +7915,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
 
 	/***/ }),
-	/* 43 */
+	/* 46 */
 	/***/ (function(module, exports) {
 
 		module.exports = function isBuffer(arg) {
@@ -7320,7 +7926,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		}
 
 	/***/ }),
-	/* 44 */
+	/* 47 */
 	/***/ (function(module, exports) {
 
 		if (typeof Object.create === 'function') {
@@ -7349,14 +7955,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 45 */
+	/* 48 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
-		var AcceptorStateMachine = __webpack_require__(46);
+		var AcceptorStateMachine = __webpack_require__(49);
 		var inherit = AWS.util.inherit;
 		var domain = AWS.util.domain;
-		var jmespath = __webpack_require__(47);
+		var jmespath = __webpack_require__(50);
 
 		/**
 		 * @api private
@@ -8162,7 +8768,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 	/***/ }),
-	/* 46 */
+	/* 49 */
 	/***/ (function(module, exports) {
 
 		function AcceptorStateMachine(states, state) {
@@ -8213,7 +8819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 47 */
+	/* 50 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		(function(exports) {
@@ -9886,12 +10492,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 48 */
+	/* 51 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
 		var inherit = AWS.util.inherit;
-		var jmespath = __webpack_require__(47);
+		var jmespath = __webpack_require__(50);
 
 		/**
 		 * This class encapsulates the response information
@@ -10093,7 +10699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 49 */
+	/* 52 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		/**
@@ -10113,7 +10719,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		var AWS = __webpack_require__(1);
 		var inherit = AWS.util.inherit;
-		var jmespath = __webpack_require__(47);
+		var jmespath = __webpack_require__(50);
 
 		/**
 		 * @api private
@@ -10303,7 +10909,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 50 */
+	/* 53 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -10338,16 +10944,16 @@ return /******/ (function(modules) { // webpackBootstrap
 		  throw new Error('Unknown signing version ' + version);
 		};
 
-		__webpack_require__(51);
-		__webpack_require__(52);
-		__webpack_require__(53);
 		__webpack_require__(54);
+		__webpack_require__(55);
 		__webpack_require__(56);
 		__webpack_require__(57);
+		__webpack_require__(59);
+		__webpack_require__(60);
 
 
 	/***/ }),
-	/* 51 */
+	/* 54 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -10401,7 +11007,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 52 */
+	/* 55 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -10484,13 +11090,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 53 */
+	/* 56 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
 		var inherit = AWS.util.inherit;
 
-		__webpack_require__(52);
+		__webpack_require__(55);
 
 		/**
 		 * @api private
@@ -10515,11 +11121,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 54 */
+	/* 57 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
-		var v4Credentials = __webpack_require__(55);
+		var v4Credentials = __webpack_require__(58);
 		var inherit = AWS.util.inherit;
 
 		/**
@@ -10735,7 +11341,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 55 */
+	/* 58 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -10841,7 +11447,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 56 */
+	/* 59 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -11022,7 +11628,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 57 */
+	/* 60 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -11147,7 +11753,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 58 */
+	/* 61 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -29339,8 +29945,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return AWS.util.queryParamsToString(query);
 	    }
 	    return '';
-	  }
+	  },
 
+	  /**
+	   * @api private
+	   * update httpRequest endpoint with endpoint string
+	   */
+	  updateEndpoint: function updateEndpoint(endpointStr) {
+	    var newEndpoint = new AWS.Endpoint(endpointStr);
+	    this.endpoint = newEndpoint;
+	    this.path = newEndpoint.path || '/'
+	  }
 	});
 
 	/**
@@ -38297,7 +38912,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 444 */
 /***/ (function(module, exports) {
 
-	module.exports = {"metadata":{"apiVersion":"2017-10-14","endpointPrefix":"medialive","signingName":"medialive","serviceFullName":"AWS Elemental MediaLive","serviceId":"MediaLive","protocol":"rest-json","jsonVersion":"1.1","uid":"medialive-2017-10-14","signatureVersion":"v4","serviceAbbreviation":"MediaLive"},"operations":{"BatchUpdateSchedule":{"http":{"method":"PUT","requestUri":"/prod/channels/{channelId}/schedule","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"},"Creates":{"locationName":"creates","type":"structure","members":{"ScheduleActions":{"shape":"S4","locationName":"scheduleActions"}},"required":["ScheduleActions"]},"Deletes":{"locationName":"deletes","type":"structure","members":{"ActionNames":{"shape":"Sy","locationName":"actionNames"}},"required":["ActionNames"]}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Creates":{"locationName":"creates","type":"structure","members":{"ScheduleActions":{"shape":"S4","locationName":"scheduleActions"}},"required":["ScheduleActions"]},"Deletes":{"locationName":"deletes","type":"structure","members":{"ScheduleActions":{"shape":"S4","locationName":"scheduleActions"}},"required":["ScheduleActions"]}}}},"CreateChannel":{"http":{"requestUri":"/prod/channels","responseCode":201},"input":{"type":"structure","members":{"Destinations":{"shape":"S13","locationName":"destinations"},"EncoderSettings":{"shape":"S17","locationName":"encoderSettings"},"InputAttachments":{"shape":"S8k","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9k","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"RequestId":{"locationName":"requestId","idempotencyToken":true},"Reserved":{"locationName":"reserved","deprecated":true},"RoleArn":{"locationName":"roleArn"}}},"output":{"type":"structure","members":{"Channel":{"shape":"S9q","locationName":"channel"}}}},"CreateInput":{"http":{"requestUri":"/prod/inputs","responseCode":201},"input":{"type":"structure","members":{"Destinations":{"shape":"S9v","locationName":"destinations"},"InputSecurityGroups":{"shape":"Sy","locationName":"inputSecurityGroups"},"Name":{"locationName":"name"},"RequestId":{"locationName":"requestId","idempotencyToken":true},"Sources":{"shape":"S9x","locationName":"sources"},"Type":{"locationName":"type"}}},"output":{"type":"structure","members":{"Input":{"shape":"Sa1","locationName":"input"}}}},"CreateInputSecurityGroup":{"http":{"requestUri":"/prod/inputSecurityGroups","responseCode":200},"input":{"type":"structure","members":{"WhitelistRules":{"shape":"Sa8","locationName":"whitelistRules"}}},"output":{"type":"structure","members":{"SecurityGroup":{"shape":"Sab","locationName":"securityGroup"}}}},"DeleteChannel":{"http":{"method":"DELETE","requestUri":"/prod/channels/{channelId}","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S13","locationName":"destinations"},"EgressEndpoints":{"shape":"S9r","locationName":"egressEndpoints"},"EncoderSettings":{"shape":"S17","locationName":"encoderSettings"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8k","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9k","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}}},"DeleteInput":{"http":{"method":"DELETE","requestUri":"/prod/inputs/{inputId}","responseCode":200},"input":{"type":"structure","members":{"InputId":{"location":"uri","locationName":"inputId"}},"required":["InputId"]},"output":{"type":"structure","members":{}}},"DeleteInputSecurityGroup":{"http":{"method":"DELETE","requestUri":"/prod/inputSecurityGroups/{inputSecurityGroupId}","responseCode":200},"input":{"type":"structure","members":{"InputSecurityGroupId":{"location":"uri","locationName":"inputSecurityGroupId"}},"required":["InputSecurityGroupId"]},"output":{"type":"structure","members":{}}},"DeleteReservation":{"http":{"method":"DELETE","requestUri":"/prod/reservations/{reservationId}","responseCode":200},"input":{"type":"structure","members":{"ReservationId":{"location":"uri","locationName":"reservationId"}},"required":["ReservationId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Count":{"locationName":"count","type":"integer"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"DurationUnits":{"locationName":"durationUnits"},"End":{"locationName":"end"},"FixedPrice":{"locationName":"fixedPrice","type":"double"},"Name":{"locationName":"name"},"OfferingDescription":{"locationName":"offeringDescription"},"OfferingId":{"locationName":"offeringId"},"OfferingType":{"locationName":"offeringType"},"Region":{"locationName":"region"},"ReservationId":{"locationName":"reservationId"},"ResourceSpecification":{"shape":"Sap","locationName":"resourceSpecification"},"Start":{"locationName":"start"},"State":{"locationName":"state"},"UsagePrice":{"locationName":"usagePrice","type":"double"}}}},"DescribeChannel":{"http":{"method":"GET","requestUri":"/prod/channels/{channelId}","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S13","locationName":"destinations"},"EgressEndpoints":{"shape":"S9r","locationName":"egressEndpoints"},"EncoderSettings":{"shape":"S17","locationName":"encoderSettings"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8k","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9k","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}}},"DescribeInput":{"http":{"method":"GET","requestUri":"/prod/inputs/{inputId}","responseCode":200},"input":{"type":"structure","members":{"InputId":{"location":"uri","locationName":"inputId"}},"required":["InputId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"AttachedChannels":{"shape":"Sy","locationName":"attachedChannels"},"Destinations":{"shape":"Sa2","locationName":"destinations"},"Id":{"locationName":"id"},"Name":{"locationName":"name"},"SecurityGroups":{"shape":"Sy","locationName":"securityGroups"},"Sources":{"shape":"Sa4","locationName":"sources"},"State":{"locationName":"state"},"Type":{"locationName":"type"}}}},"DescribeInputSecurityGroup":{"http":{"method":"GET","requestUri":"/prod/inputSecurityGroups/{inputSecurityGroupId}","responseCode":200},"input":{"type":"structure","members":{"InputSecurityGroupId":{"location":"uri","locationName":"inputSecurityGroupId"}},"required":["InputSecurityGroupId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Id":{"locationName":"id"},"Inputs":{"shape":"Sy","locationName":"inputs"},"State":{"locationName":"state"},"WhitelistRules":{"shape":"Sad","locationName":"whitelistRules"}}}},"DescribeOffering":{"http":{"method":"GET","requestUri":"/prod/offerings/{offeringId}","responseCode":200},"input":{"type":"structure","members":{"OfferingId":{"location":"uri","locationName":"offeringId"}},"required":["OfferingId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"DurationUnits":{"locationName":"durationUnits"},"FixedPrice":{"locationName":"fixedPrice","type":"double"},"OfferingDescription":{"locationName":"offeringDescription"},"OfferingId":{"locationName":"offeringId"},"OfferingType":{"locationName":"offeringType"},"Region":{"locationName":"region"},"ResourceSpecification":{"shape":"Sap","locationName":"resourceSpecification"},"UsagePrice":{"locationName":"usagePrice","type":"double"}}}},"DescribeReservation":{"http":{"method":"GET","requestUri":"/prod/reservations/{reservationId}","responseCode":200},"input":{"type":"structure","members":{"ReservationId":{"location":"uri","locationName":"reservationId"}},"required":["ReservationId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Count":{"locationName":"count","type":"integer"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"DurationUnits":{"locationName":"durationUnits"},"End":{"locationName":"end"},"FixedPrice":{"locationName":"fixedPrice","type":"double"},"Name":{"locationName":"name"},"OfferingDescription":{"locationName":"offeringDescription"},"OfferingId":{"locationName":"offeringId"},"OfferingType":{"locationName":"offeringType"},"Region":{"locationName":"region"},"ReservationId":{"locationName":"reservationId"},"ResourceSpecification":{"shape":"Sap","locationName":"resourceSpecification"},"Start":{"locationName":"start"},"State":{"locationName":"state"},"UsagePrice":{"locationName":"usagePrice","type":"double"}}}},"DescribeSchedule":{"http":{"method":"GET","requestUri":"/prod/channels/{channelId}/schedule","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"},"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"NextToken":{"location":"querystring","locationName":"nextToken"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"ScheduleActions":{"shape":"S4","locationName":"scheduleActions"}}}},"ListChannels":{"http":{"method":"GET","requestUri":"/prod/channels","responseCode":200},"input":{"type":"structure","members":{"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"NextToken":{"location":"querystring","locationName":"nextToken"}}},"output":{"type":"structure","members":{"Channels":{"locationName":"channels","type":"list","member":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S13","locationName":"destinations"},"EgressEndpoints":{"shape":"S9r","locationName":"egressEndpoints"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8k","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9k","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}}},"NextToken":{"locationName":"nextToken"}}}},"ListInputSecurityGroups":{"http":{"method":"GET","requestUri":"/prod/inputSecurityGroups","responseCode":200},"input":{"type":"structure","members":{"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"NextToken":{"location":"querystring","locationName":"nextToken"}}},"output":{"type":"structure","members":{"InputSecurityGroups":{"locationName":"inputSecurityGroups","type":"list","member":{"shape":"Sab"}},"NextToken":{"locationName":"nextToken"}}}},"ListInputs":{"http":{"method":"GET","requestUri":"/prod/inputs","responseCode":200},"input":{"type":"structure","members":{"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"NextToken":{"location":"querystring","locationName":"nextToken"}}},"output":{"type":"structure","members":{"Inputs":{"locationName":"inputs","type":"list","member":{"shape":"Sa1"}},"NextToken":{"locationName":"nextToken"}}}},"ListOfferings":{"http":{"method":"GET","requestUri":"/prod/offerings","responseCode":200},"input":{"type":"structure","members":{"ChannelConfiguration":{"location":"querystring","locationName":"channelConfiguration"},"Codec":{"location":"querystring","locationName":"codec"},"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"MaximumBitrate":{"location":"querystring","locationName":"maximumBitrate"},"MaximumFramerate":{"location":"querystring","locationName":"maximumFramerate"},"NextToken":{"location":"querystring","locationName":"nextToken"},"Resolution":{"location":"querystring","locationName":"resolution"},"ResourceType":{"location":"querystring","locationName":"resourceType"},"SpecialFeature":{"location":"querystring","locationName":"specialFeature"},"VideoQuality":{"location":"querystring","locationName":"videoQuality"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"Offerings":{"locationName":"offerings","type":"list","member":{"type":"structure","members":{"Arn":{"locationName":"arn"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"DurationUnits":{"locationName":"durationUnits"},"FixedPrice":{"locationName":"fixedPrice","type":"double"},"OfferingDescription":{"locationName":"offeringDescription"},"OfferingId":{"locationName":"offeringId"},"OfferingType":{"locationName":"offeringType"},"Region":{"locationName":"region"},"ResourceSpecification":{"shape":"Sap","locationName":"resourceSpecification"},"UsagePrice":{"locationName":"usagePrice","type":"double"}}}}}}},"ListReservations":{"http":{"method":"GET","requestUri":"/prod/reservations","responseCode":200},"input":{"type":"structure","members":{"Codec":{"location":"querystring","locationName":"codec"},"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"MaximumBitrate":{"location":"querystring","locationName":"maximumBitrate"},"MaximumFramerate":{"location":"querystring","locationName":"maximumFramerate"},"NextToken":{"location":"querystring","locationName":"nextToken"},"Resolution":{"location":"querystring","locationName":"resolution"},"ResourceType":{"location":"querystring","locationName":"resourceType"},"SpecialFeature":{"location":"querystring","locationName":"specialFeature"},"VideoQuality":{"location":"querystring","locationName":"videoQuality"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"Reservations":{"locationName":"reservations","type":"list","member":{"shape":"Sbs"}}}}},"PurchaseOffering":{"http":{"requestUri":"/prod/offerings/{offeringId}/purchase","responseCode":201},"input":{"type":"structure","members":{"Count":{"locationName":"count","type":"integer"},"Name":{"locationName":"name"},"OfferingId":{"location":"uri","locationName":"offeringId"},"RequestId":{"locationName":"requestId","idempotencyToken":true},"Start":{"locationName":"start"}},"required":["OfferingId","Count"]},"output":{"type":"structure","members":{"Reservation":{"shape":"Sbs","locationName":"reservation"}}}},"StartChannel":{"http":{"requestUri":"/prod/channels/{channelId}/start","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S13","locationName":"destinations"},"EgressEndpoints":{"shape":"S9r","locationName":"egressEndpoints"},"EncoderSettings":{"shape":"S17","locationName":"encoderSettings"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8k","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9k","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}}},"StopChannel":{"http":{"requestUri":"/prod/channels/{channelId}/stop","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S13","locationName":"destinations"},"EgressEndpoints":{"shape":"S9r","locationName":"egressEndpoints"},"EncoderSettings":{"shape":"S17","locationName":"encoderSettings"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8k","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9k","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}}},"UpdateChannel":{"http":{"method":"PUT","requestUri":"/prod/channels/{channelId}","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"},"Destinations":{"shape":"S13","locationName":"destinations"},"EncoderSettings":{"shape":"S17","locationName":"encoderSettings"},"InputAttachments":{"shape":"S8k","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9k","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"RoleArn":{"locationName":"roleArn"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Channel":{"shape":"S9q","locationName":"channel"}}}},"UpdateInput":{"http":{"method":"PUT","requestUri":"/prod/inputs/{inputId}","responseCode":200},"input":{"type":"structure","members":{"Destinations":{"shape":"S9v","locationName":"destinations"},"InputId":{"location":"uri","locationName":"inputId"},"InputSecurityGroups":{"shape":"Sy","locationName":"inputSecurityGroups"},"Name":{"locationName":"name"},"Sources":{"shape":"S9x","locationName":"sources"}},"required":["InputId"]},"output":{"type":"structure","members":{"Input":{"shape":"Sa1","locationName":"input"}}}},"UpdateInputSecurityGroup":{"http":{"method":"PUT","requestUri":"/prod/inputSecurityGroups/{inputSecurityGroupId}","responseCode":200},"input":{"type":"structure","members":{"InputSecurityGroupId":{"location":"uri","locationName":"inputSecurityGroupId"},"WhitelistRules":{"shape":"Sa8","locationName":"whitelistRules"}},"required":["InputSecurityGroupId"]},"output":{"type":"structure","members":{"SecurityGroup":{"shape":"Sab","locationName":"securityGroup"}}}}},"shapes":{"S4":{"type":"list","member":{"type":"structure","members":{"ActionName":{"locationName":"actionName"},"ScheduleActionSettings":{"locationName":"scheduleActionSettings","type":"structure","members":{"Scte35ReturnToNetworkSettings":{"locationName":"scte35ReturnToNetworkSettings","type":"structure","members":{"SpliceEventId":{"locationName":"spliceEventId","type":"long"}},"required":["SpliceEventId"]},"Scte35SpliceInsertSettings":{"locationName":"scte35SpliceInsertSettings","type":"structure","members":{"Duration":{"locationName":"duration","type":"long"},"SpliceEventId":{"locationName":"spliceEventId","type":"long"}},"required":["SpliceEventId"]},"Scte35TimeSignalSettings":{"locationName":"scte35TimeSignalSettings","type":"structure","members":{"Scte35Descriptors":{"locationName":"scte35Descriptors","type":"list","member":{"type":"structure","members":{"Scte35DescriptorSettings":{"locationName":"scte35DescriptorSettings","type":"structure","members":{"SegmentationDescriptorScte35DescriptorSettings":{"locationName":"segmentationDescriptorScte35DescriptorSettings","type":"structure","members":{"DeliveryRestrictions":{"locationName":"deliveryRestrictions","type":"structure","members":{"ArchiveAllowedFlag":{"locationName":"archiveAllowedFlag"},"DeviceRestrictions":{"locationName":"deviceRestrictions"},"NoRegionalBlackoutFlag":{"locationName":"noRegionalBlackoutFlag"},"WebDeliveryAllowedFlag":{"locationName":"webDeliveryAllowedFlag"}},"required":["DeviceRestrictions","ArchiveAllowedFlag","WebDeliveryAllowedFlag","NoRegionalBlackoutFlag"]},"SegmentNum":{"locationName":"segmentNum","type":"integer"},"SegmentationCancelIndicator":{"locationName":"segmentationCancelIndicator"},"SegmentationDuration":{"locationName":"segmentationDuration","type":"long"},"SegmentationEventId":{"locationName":"segmentationEventId","type":"long"},"SegmentationTypeId":{"locationName":"segmentationTypeId","type":"integer"},"SegmentationUpid":{"locationName":"segmentationUpid"},"SegmentationUpidType":{"locationName":"segmentationUpidType","type":"integer"},"SegmentsExpected":{"locationName":"segmentsExpected","type":"integer"},"SubSegmentNum":{"locationName":"subSegmentNum","type":"integer"},"SubSegmentsExpected":{"locationName":"subSegmentsExpected","type":"integer"}},"required":["SegmentationEventId","SegmentationCancelIndicator"]}},"required":["SegmentationDescriptorScte35DescriptorSettings"]}},"required":["Scte35DescriptorSettings"]}}},"required":["Scte35Descriptors"]},"StaticImageActivateSettings":{"locationName":"staticImageActivateSettings","type":"structure","members":{"Duration":{"locationName":"duration","type":"integer"},"FadeIn":{"locationName":"fadeIn","type":"integer"},"FadeOut":{"locationName":"fadeOut","type":"integer"},"Height":{"locationName":"height","type":"integer"},"Image":{"shape":"Sr","locationName":"image"},"ImageX":{"locationName":"imageX","type":"integer"},"ImageY":{"locationName":"imageY","type":"integer"},"Layer":{"locationName":"layer","type":"integer"},"Opacity":{"locationName":"opacity","type":"integer"},"Width":{"locationName":"width","type":"integer"}},"required":["Image"]},"StaticImageDeactivateSettings":{"locationName":"staticImageDeactivateSettings","type":"structure","members":{"FadeOut":{"locationName":"fadeOut","type":"integer"},"Layer":{"locationName":"layer","type":"integer"}}}}},"ScheduleActionStartSettings":{"locationName":"scheduleActionStartSettings","type":"structure","members":{"FixedModeScheduleActionStartSettings":{"locationName":"fixedModeScheduleActionStartSettings","type":"structure","members":{"Time":{"locationName":"time"}},"required":["Time"]}}}},"required":["ActionName","ScheduleActionStartSettings","ScheduleActionSettings"]}},"Sr":{"type":"structure","members":{"PasswordParam":{"locationName":"passwordParam"},"Uri":{"locationName":"uri"},"Username":{"locationName":"username"}},"required":["Uri"]},"Sy":{"type":"list","member":{}},"S13":{"type":"list","member":{"type":"structure","members":{"Id":{"locationName":"id"},"Settings":{"locationName":"settings","type":"list","member":{"type":"structure","members":{"PasswordParam":{"locationName":"passwordParam"},"StreamName":{"locationName":"streamName"},"Url":{"locationName":"url"},"Username":{"locationName":"username"}}}}}}},"S17":{"type":"structure","members":{"AudioDescriptions":{"locationName":"audioDescriptions","type":"list","member":{"type":"structure","members":{"AudioNormalizationSettings":{"locationName":"audioNormalizationSettings","type":"structure","members":{"Algorithm":{"locationName":"algorithm"},"AlgorithmControl":{"locationName":"algorithmControl"},"TargetLkfs":{"locationName":"targetLkfs","type":"double"}}},"AudioSelectorName":{"locationName":"audioSelectorName"},"AudioType":{"locationName":"audioType"},"AudioTypeControl":{"locationName":"audioTypeControl"},"CodecSettings":{"locationName":"codecSettings","type":"structure","members":{"AacSettings":{"locationName":"aacSettings","type":"structure","members":{"Bitrate":{"locationName":"bitrate","type":"double"},"CodingMode":{"locationName":"codingMode"},"InputType":{"locationName":"inputType"},"Profile":{"locationName":"profile"},"RateControlMode":{"locationName":"rateControlMode"},"RawFormat":{"locationName":"rawFormat"},"SampleRate":{"locationName":"sampleRate","type":"double"},"Spec":{"locationName":"spec"},"VbrQuality":{"locationName":"vbrQuality"}}},"Ac3Settings":{"locationName":"ac3Settings","type":"structure","members":{"Bitrate":{"locationName":"bitrate","type":"double"},"BitstreamMode":{"locationName":"bitstreamMode"},"CodingMode":{"locationName":"codingMode"},"Dialnorm":{"locationName":"dialnorm","type":"integer"},"DrcProfile":{"locationName":"drcProfile"},"LfeFilter":{"locationName":"lfeFilter"},"MetadataControl":{"locationName":"metadataControl"}}},"Eac3Settings":{"locationName":"eac3Settings","type":"structure","members":{"AttenuationControl":{"locationName":"attenuationControl"},"Bitrate":{"locationName":"bitrate","type":"double"},"BitstreamMode":{"locationName":"bitstreamMode"},"CodingMode":{"locationName":"codingMode"},"DcFilter":{"locationName":"dcFilter"},"Dialnorm":{"locationName":"dialnorm","type":"integer"},"DrcLine":{"locationName":"drcLine"},"DrcRf":{"locationName":"drcRf"},"LfeControl":{"locationName":"lfeControl"},"LfeFilter":{"locationName":"lfeFilter"},"LoRoCenterMixLevel":{"locationName":"loRoCenterMixLevel","type":"double"},"LoRoSurroundMixLevel":{"locationName":"loRoSurroundMixLevel","type":"double"},"LtRtCenterMixLevel":{"locationName":"ltRtCenterMixLevel","type":"double"},"LtRtSurroundMixLevel":{"locationName":"ltRtSurroundMixLevel","type":"double"},"MetadataControl":{"locationName":"metadataControl"},"PassthroughControl":{"locationName":"passthroughControl"},"PhaseControl":{"locationName":"phaseControl"},"StereoDownmix":{"locationName":"stereoDownmix"},"SurroundExMode":{"locationName":"surroundExMode"},"SurroundMode":{"locationName":"surroundMode"}}},"Mp2Settings":{"locationName":"mp2Settings","type":"structure","members":{"Bitrate":{"locationName":"bitrate","type":"double"},"CodingMode":{"locationName":"codingMode"},"SampleRate":{"locationName":"sampleRate","type":"double"}}},"PassThroughSettings":{"locationName":"passThroughSettings","type":"structure","members":{}}}},"LanguageCode":{"locationName":"languageCode"},"LanguageCodeControl":{"locationName":"languageCodeControl"},"Name":{"locationName":"name"},"RemixSettings":{"locationName":"remixSettings","type":"structure","members":{"ChannelMappings":{"locationName":"channelMappings","type":"list","member":{"type":"structure","members":{"InputChannelLevels":{"locationName":"inputChannelLevels","type":"list","member":{"type":"structure","members":{"Gain":{"locationName":"gain","type":"integer"},"InputChannel":{"locationName":"inputChannel","type":"integer"}},"required":["InputChannel","Gain"]}},"OutputChannel":{"locationName":"outputChannel","type":"integer"}},"required":["OutputChannel","InputChannelLevels"]}},"ChannelsIn":{"locationName":"channelsIn","type":"integer"},"ChannelsOut":{"locationName":"channelsOut","type":"integer"}},"required":["ChannelMappings"]},"StreamName":{"locationName":"streamName"}},"required":["AudioSelectorName","Name"]}},"AvailBlanking":{"locationName":"availBlanking","type":"structure","members":{"AvailBlankingImage":{"shape":"Sr","locationName":"availBlankingImage"},"State":{"locationName":"state"}}},"AvailConfiguration":{"locationName":"availConfiguration","type":"structure","members":{"AvailSettings":{"locationName":"availSettings","type":"structure","members":{"Scte35SpliceInsert":{"locationName":"scte35SpliceInsert","type":"structure","members":{"AdAvailOffset":{"locationName":"adAvailOffset","type":"integer"},"NoRegionalBlackoutFlag":{"locationName":"noRegionalBlackoutFlag"},"WebDeliveryAllowedFlag":{"locationName":"webDeliveryAllowedFlag"}}},"Scte35TimeSignalApos":{"locationName":"scte35TimeSignalApos","type":"structure","members":{"AdAvailOffset":{"locationName":"adAvailOffset","type":"integer"},"NoRegionalBlackoutFlag":{"locationName":"noRegionalBlackoutFlag"},"WebDeliveryAllowedFlag":{"locationName":"webDeliveryAllowedFlag"}}}}}}},"BlackoutSlate":{"locationName":"blackoutSlate","type":"structure","members":{"BlackoutSlateImage":{"shape":"Sr","locationName":"blackoutSlateImage"},"NetworkEndBlackout":{"locationName":"networkEndBlackout"},"NetworkEndBlackoutImage":{"shape":"Sr","locationName":"networkEndBlackoutImage"},"NetworkId":{"locationName":"networkId"},"State":{"locationName":"state"}}},"CaptionDescriptions":{"locationName":"captionDescriptions","type":"list","member":{"type":"structure","members":{"CaptionSelectorName":{"locationName":"captionSelectorName"},"DestinationSettings":{"locationName":"destinationSettings","type":"structure","members":{"AribDestinationSettings":{"locationName":"aribDestinationSettings","type":"structure","members":{}},"BurnInDestinationSettings":{"locationName":"burnInDestinationSettings","type":"structure","members":{"Alignment":{"locationName":"alignment"},"BackgroundColor":{"locationName":"backgroundColor"},"BackgroundOpacity":{"locationName":"backgroundOpacity","type":"integer"},"Font":{"shape":"Sr","locationName":"font"},"FontColor":{"locationName":"fontColor"},"FontOpacity":{"locationName":"fontOpacity","type":"integer"},"FontResolution":{"locationName":"fontResolution","type":"integer"},"FontSize":{"locationName":"fontSize"},"OutlineColor":{"locationName":"outlineColor"},"OutlineSize":{"locationName":"outlineSize","type":"integer"},"ShadowColor":{"locationName":"shadowColor"},"ShadowOpacity":{"locationName":"shadowOpacity","type":"integer"},"ShadowXOffset":{"locationName":"shadowXOffset","type":"integer"},"ShadowYOffset":{"locationName":"shadowYOffset","type":"integer"},"TeletextGridControl":{"locationName":"teletextGridControl"},"XPosition":{"locationName":"xPosition","type":"integer"},"YPosition":{"locationName":"yPosition","type":"integer"}}},"DvbSubDestinationSettings":{"locationName":"dvbSubDestinationSettings","type":"structure","members":{"Alignment":{"locationName":"alignment"},"BackgroundColor":{"locationName":"backgroundColor"},"BackgroundOpacity":{"locationName":"backgroundOpacity","type":"integer"},"Font":{"shape":"Sr","locationName":"font"},"FontColor":{"locationName":"fontColor"},"FontOpacity":{"locationName":"fontOpacity","type":"integer"},"FontResolution":{"locationName":"fontResolution","type":"integer"},"FontSize":{"locationName":"fontSize"},"OutlineColor":{"locationName":"outlineColor"},"OutlineSize":{"locationName":"outlineSize","type":"integer"},"ShadowColor":{"locationName":"shadowColor"},"ShadowOpacity":{"locationName":"shadowOpacity","type":"integer"},"ShadowXOffset":{"locationName":"shadowXOffset","type":"integer"},"ShadowYOffset":{"locationName":"shadowYOffset","type":"integer"},"TeletextGridControl":{"locationName":"teletextGridControl"},"XPosition":{"locationName":"xPosition","type":"integer"},"YPosition":{"locationName":"yPosition","type":"integer"}}},"EmbeddedDestinationSettings":{"locationName":"embeddedDestinationSettings","type":"structure","members":{}},"EmbeddedPlusScte20DestinationSettings":{"locationName":"embeddedPlusScte20DestinationSettings","type":"structure","members":{}},"RtmpCaptionInfoDestinationSettings":{"locationName":"rtmpCaptionInfoDestinationSettings","type":"structure","members":{}},"Scte20PlusEmbeddedDestinationSettings":{"locationName":"scte20PlusEmbeddedDestinationSettings","type":"structure","members":{}},"Scte27DestinationSettings":{"locationName":"scte27DestinationSettings","type":"structure","members":{}},"SmpteTtDestinationSettings":{"locationName":"smpteTtDestinationSettings","type":"structure","members":{}},"TeletextDestinationSettings":{"locationName":"teletextDestinationSettings","type":"structure","members":{}},"TtmlDestinationSettings":{"locationName":"ttmlDestinationSettings","type":"structure","members":{"StyleControl":{"locationName":"styleControl"}}},"WebvttDestinationSettings":{"locationName":"webvttDestinationSettings","type":"structure","members":{}}}},"LanguageCode":{"locationName":"languageCode"},"LanguageDescription":{"locationName":"languageDescription"},"Name":{"locationName":"name"}},"required":["CaptionSelectorName","Name"]}},"GlobalConfiguration":{"locationName":"globalConfiguration","type":"structure","members":{"InitialAudioGain":{"locationName":"initialAudioGain","type":"integer"},"InputEndAction":{"locationName":"inputEndAction"},"InputLossBehavior":{"locationName":"inputLossBehavior","type":"structure","members":{"BlackFrameMsec":{"locationName":"blackFrameMsec","type":"integer"},"InputLossImageColor":{"locationName":"inputLossImageColor"},"InputLossImageSlate":{"shape":"Sr","locationName":"inputLossImageSlate"},"InputLossImageType":{"locationName":"inputLossImageType"},"RepeatFrameMsec":{"locationName":"repeatFrameMsec","type":"integer"}}},"OutputTimingSource":{"locationName":"outputTimingSource"},"SupportLowFramerateInputs":{"locationName":"supportLowFramerateInputs"}}},"OutputGroups":{"locationName":"outputGroups","type":"list","member":{"type":"structure","members":{"Name":{"locationName":"name"},"OutputGroupSettings":{"locationName":"outputGroupSettings","type":"structure","members":{"ArchiveGroupSettings":{"locationName":"archiveGroupSettings","type":"structure","members":{"Destination":{"shape":"S4e","locationName":"destination"},"RolloverInterval":{"locationName":"rolloverInterval","type":"integer"}},"required":["Destination"]},"HlsGroupSettings":{"locationName":"hlsGroupSettings","type":"structure","members":{"AdMarkers":{"locationName":"adMarkers","type":"list","member":{}},"BaseUrlContent":{"locationName":"baseUrlContent"},"BaseUrlManifest":{"locationName":"baseUrlManifest"},"CaptionLanguageMappings":{"locationName":"captionLanguageMappings","type":"list","member":{"type":"structure","members":{"CaptionChannel":{"locationName":"captionChannel","type":"integer"},"LanguageCode":{"locationName":"languageCode"},"LanguageDescription":{"locationName":"languageDescription"}},"required":["LanguageCode","LanguageDescription","CaptionChannel"]}},"CaptionLanguageSetting":{"locationName":"captionLanguageSetting"},"ClientCache":{"locationName":"clientCache"},"CodecSpecification":{"locationName":"codecSpecification"},"ConstantIv":{"locationName":"constantIv"},"Destination":{"shape":"S4e","locationName":"destination"},"DirectoryStructure":{"locationName":"directoryStructure"},"EncryptionType":{"locationName":"encryptionType"},"HlsCdnSettings":{"locationName":"hlsCdnSettings","type":"structure","members":{"HlsAkamaiSettings":{"locationName":"hlsAkamaiSettings","type":"structure","members":{"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"FilecacheDuration":{"locationName":"filecacheDuration","type":"integer"},"HttpTransferMode":{"locationName":"httpTransferMode"},"NumRetries":{"locationName":"numRetries","type":"integer"},"RestartDelay":{"locationName":"restartDelay","type":"integer"},"Salt":{"locationName":"salt"},"Token":{"locationName":"token"}}},"HlsBasicPutSettings":{"locationName":"hlsBasicPutSettings","type":"structure","members":{"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"FilecacheDuration":{"locationName":"filecacheDuration","type":"integer"},"NumRetries":{"locationName":"numRetries","type":"integer"},"RestartDelay":{"locationName":"restartDelay","type":"integer"}}},"HlsMediaStoreSettings":{"locationName":"hlsMediaStoreSettings","type":"structure","members":{"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"FilecacheDuration":{"locationName":"filecacheDuration","type":"integer"},"MediaStoreStorageClass":{"locationName":"mediaStoreStorageClass"},"NumRetries":{"locationName":"numRetries","type":"integer"},"RestartDelay":{"locationName":"restartDelay","type":"integer"}}},"HlsWebdavSettings":{"locationName":"hlsWebdavSettings","type":"structure","members":{"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"FilecacheDuration":{"locationName":"filecacheDuration","type":"integer"},"HttpTransferMode":{"locationName":"httpTransferMode"},"NumRetries":{"locationName":"numRetries","type":"integer"},"RestartDelay":{"locationName":"restartDelay","type":"integer"}}}}},"IndexNSegments":{"locationName":"indexNSegments","type":"integer"},"InputLossAction":{"locationName":"inputLossAction"},"IvInManifest":{"locationName":"ivInManifest"},"IvSource":{"locationName":"ivSource"},"KeepSegments":{"locationName":"keepSegments","type":"integer"},"KeyFormat":{"locationName":"keyFormat"},"KeyFormatVersions":{"locationName":"keyFormatVersions"},"KeyProviderSettings":{"locationName":"keyProviderSettings","type":"structure","members":{"StaticKeySettings":{"locationName":"staticKeySettings","type":"structure","members":{"KeyProviderServer":{"shape":"Sr","locationName":"keyProviderServer"},"StaticKeyValue":{"locationName":"staticKeyValue"}},"required":["StaticKeyValue"]}}},"ManifestCompression":{"locationName":"manifestCompression"},"ManifestDurationFormat":{"locationName":"manifestDurationFormat"},"MinSegmentLength":{"locationName":"minSegmentLength","type":"integer"},"Mode":{"locationName":"mode"},"OutputSelection":{"locationName":"outputSelection"},"ProgramDateTime":{"locationName":"programDateTime"},"ProgramDateTimePeriod":{"locationName":"programDateTimePeriod","type":"integer"},"SegmentLength":{"locationName":"segmentLength","type":"integer"},"SegmentationMode":{"locationName":"segmentationMode"},"SegmentsPerSubdirectory":{"locationName":"segmentsPerSubdirectory","type":"integer"},"StreamInfResolution":{"locationName":"streamInfResolution"},"TimedMetadataId3Frame":{"locationName":"timedMetadataId3Frame"},"TimedMetadataId3Period":{"locationName":"timedMetadataId3Period","type":"integer"},"TimestampDeltaMilliseconds":{"locationName":"timestampDeltaMilliseconds","type":"integer"},"TsFileMode":{"locationName":"tsFileMode"}},"required":["Destination"]},"MsSmoothGroupSettings":{"locationName":"msSmoothGroupSettings","type":"structure","members":{"AcquisitionPointId":{"locationName":"acquisitionPointId"},"AudioOnlyTimecodeControl":{"locationName":"audioOnlyTimecodeControl"},"CertificateMode":{"locationName":"certificateMode"},"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"Destination":{"shape":"S4e","locationName":"destination"},"EventId":{"locationName":"eventId"},"EventIdMode":{"locationName":"eventIdMode"},"EventStopBehavior":{"locationName":"eventStopBehavior"},"FilecacheDuration":{"locationName":"filecacheDuration","type":"integer"},"FragmentLength":{"locationName":"fragmentLength","type":"integer"},"InputLossAction":{"locationName":"inputLossAction"},"NumRetries":{"locationName":"numRetries","type":"integer"},"RestartDelay":{"locationName":"restartDelay","type":"integer"},"SegmentationMode":{"locationName":"segmentationMode"},"SendDelayMs":{"locationName":"sendDelayMs","type":"integer"},"SparseTrackType":{"locationName":"sparseTrackType"},"StreamManifestBehavior":{"locationName":"streamManifestBehavior"},"TimestampOffset":{"locationName":"timestampOffset"},"TimestampOffsetMode":{"locationName":"timestampOffsetMode"}},"required":["Destination"]},"RtmpGroupSettings":{"locationName":"rtmpGroupSettings","type":"structure","members":{"AuthenticationScheme":{"locationName":"authenticationScheme"},"CacheFullBehavior":{"locationName":"cacheFullBehavior"},"CacheLength":{"locationName":"cacheLength","type":"integer"},"CaptionData":{"locationName":"captionData"},"RestartDelay":{"locationName":"restartDelay","type":"integer"}}},"UdpGroupSettings":{"locationName":"udpGroupSettings","type":"structure","members":{"InputLossAction":{"locationName":"inputLossAction"},"TimedMetadataId3Frame":{"locationName":"timedMetadataId3Frame"},"TimedMetadataId3Period":{"locationName":"timedMetadataId3Period","type":"integer"}}}}},"Outputs":{"locationName":"outputs","type":"list","member":{"type":"structure","members":{"AudioDescriptionNames":{"shape":"Sy","locationName":"audioDescriptionNames"},"CaptionDescriptionNames":{"shape":"Sy","locationName":"captionDescriptionNames"},"OutputName":{"locationName":"outputName"},"OutputSettings":{"locationName":"outputSettings","type":"structure","members":{"ArchiveOutputSettings":{"locationName":"archiveOutputSettings","type":"structure","members":{"ContainerSettings":{"locationName":"containerSettings","type":"structure","members":{"M2tsSettings":{"shape":"S66","locationName":"m2tsSettings"}}},"Extension":{"locationName":"extension"},"NameModifier":{"locationName":"nameModifier"}},"required":["ContainerSettings"]},"HlsOutputSettings":{"locationName":"hlsOutputSettings","type":"structure","members":{"HlsSettings":{"locationName":"hlsSettings","type":"structure","members":{"AudioOnlyHlsSettings":{"locationName":"audioOnlyHlsSettings","type":"structure","members":{"AudioGroupId":{"locationName":"audioGroupId"},"AudioOnlyImage":{"shape":"Sr","locationName":"audioOnlyImage"},"AudioTrackType":{"locationName":"audioTrackType"}}},"StandardHlsSettings":{"locationName":"standardHlsSettings","type":"structure","members":{"AudioRenditionSets":{"locationName":"audioRenditionSets"},"M3u8Settings":{"locationName":"m3u8Settings","type":"structure","members":{"AudioFramesPerPes":{"locationName":"audioFramesPerPes","type":"integer"},"AudioPids":{"locationName":"audioPids"},"EcmPid":{"locationName":"ecmPid"},"PatInterval":{"locationName":"patInterval","type":"integer"},"PcrControl":{"locationName":"pcrControl"},"PcrPeriod":{"locationName":"pcrPeriod","type":"integer"},"PcrPid":{"locationName":"pcrPid"},"PmtInterval":{"locationName":"pmtInterval","type":"integer"},"PmtPid":{"locationName":"pmtPid"},"ProgramNum":{"locationName":"programNum","type":"integer"},"Scte35Behavior":{"locationName":"scte35Behavior"},"Scte35Pid":{"locationName":"scte35Pid"},"TimedMetadataBehavior":{"locationName":"timedMetadataBehavior"},"TimedMetadataPid":{"locationName":"timedMetadataPid"},"TransportStreamId":{"locationName":"transportStreamId","type":"integer"},"VideoPid":{"locationName":"videoPid"}}}},"required":["M3u8Settings"]}}},"NameModifier":{"locationName":"nameModifier"},"SegmentModifier":{"locationName":"segmentModifier"}},"required":["HlsSettings"]},"MsSmoothOutputSettings":{"locationName":"msSmoothOutputSettings","type":"structure","members":{"NameModifier":{"locationName":"nameModifier"}}},"RtmpOutputSettings":{"locationName":"rtmpOutputSettings","type":"structure","members":{"CertificateMode":{"locationName":"certificateMode"},"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"Destination":{"shape":"S4e","locationName":"destination"},"NumRetries":{"locationName":"numRetries","type":"integer"}},"required":["Destination"]},"UdpOutputSettings":{"locationName":"udpOutputSettings","type":"structure","members":{"BufferMsec":{"locationName":"bufferMsec","type":"integer"},"ContainerSettings":{"locationName":"containerSettings","type":"structure","members":{"M2tsSettings":{"shape":"S66","locationName":"m2tsSettings"}}},"Destination":{"shape":"S4e","locationName":"destination"},"FecOutputSettings":{"locationName":"fecOutputSettings","type":"structure","members":{"ColumnDepth":{"locationName":"columnDepth","type":"integer"},"IncludeFec":{"locationName":"includeFec"},"RowLength":{"locationName":"rowLength","type":"integer"}}}},"required":["Destination","ContainerSettings"]}}},"VideoDescriptionName":{"locationName":"videoDescriptionName"}},"required":["OutputSettings"]}}},"required":["Outputs","OutputGroupSettings"]}},"TimecodeConfig":{"locationName":"timecodeConfig","type":"structure","members":{"Source":{"locationName":"source"},"SyncThreshold":{"locationName":"syncThreshold","type":"integer"}},"required":["Source"]},"VideoDescriptions":{"locationName":"videoDescriptions","type":"list","member":{"type":"structure","members":{"CodecSettings":{"locationName":"codecSettings","type":"structure","members":{"H264Settings":{"locationName":"h264Settings","type":"structure","members":{"AdaptiveQuantization":{"locationName":"adaptiveQuantization"},"AfdSignaling":{"locationName":"afdSignaling"},"Bitrate":{"locationName":"bitrate","type":"integer"},"BufFillPct":{"locationName":"bufFillPct","type":"integer"},"BufSize":{"locationName":"bufSize","type":"integer"},"ColorMetadata":{"locationName":"colorMetadata"},"EntropyEncoding":{"locationName":"entropyEncoding"},"FixedAfd":{"locationName":"fixedAfd"},"FlickerAq":{"locationName":"flickerAq"},"FramerateControl":{"locationName":"framerateControl"},"FramerateDenominator":{"locationName":"framerateDenominator","type":"integer"},"FramerateNumerator":{"locationName":"framerateNumerator","type":"integer"},"GopBReference":{"locationName":"gopBReference"},"GopClosedCadence":{"locationName":"gopClosedCadence","type":"integer"},"GopNumBFrames":{"locationName":"gopNumBFrames","type":"integer"},"GopSize":{"locationName":"gopSize","type":"double"},"GopSizeUnits":{"locationName":"gopSizeUnits"},"Level":{"locationName":"level"},"LookAheadRateControl":{"locationName":"lookAheadRateControl"},"MaxBitrate":{"locationName":"maxBitrate","type":"integer"},"MinIInterval":{"locationName":"minIInterval","type":"integer"},"NumRefFrames":{"locationName":"numRefFrames","type":"integer"},"ParControl":{"locationName":"parControl"},"ParDenominator":{"locationName":"parDenominator","type":"integer"},"ParNumerator":{"locationName":"parNumerator","type":"integer"},"Profile":{"locationName":"profile"},"QvbrQualityLevel":{"locationName":"qvbrQualityLevel","type":"integer"},"RateControlMode":{"locationName":"rateControlMode"},"ScanType":{"locationName":"scanType"},"SceneChangeDetect":{"locationName":"sceneChangeDetect"},"Slices":{"locationName":"slices","type":"integer"},"Softness":{"locationName":"softness","type":"integer"},"SpatialAq":{"locationName":"spatialAq"},"Syntax":{"locationName":"syntax"},"TemporalAq":{"locationName":"temporalAq"},"TimecodeInsertion":{"locationName":"timecodeInsertion"}}}}},"Height":{"locationName":"height","type":"integer"},"Name":{"locationName":"name"},"RespondToAfd":{"locationName":"respondToAfd"},"ScalingBehavior":{"locationName":"scalingBehavior"},"Sharpness":{"locationName":"sharpness","type":"integer"},"Width":{"locationName":"width","type":"integer"}},"required":["Name"]}}},"required":["VideoDescriptions","AudioDescriptions","OutputGroups","TimecodeConfig"]},"S4e":{"type":"structure","members":{"DestinationRefId":{"locationName":"destinationRefId"}}},"S66":{"type":"structure","members":{"AbsentInputAudioBehavior":{"locationName":"absentInputAudioBehavior"},"Arib":{"locationName":"arib"},"AribCaptionsPid":{"locationName":"aribCaptionsPid"},"AribCaptionsPidControl":{"locationName":"aribCaptionsPidControl"},"AudioBufferModel":{"locationName":"audioBufferModel"},"AudioFramesPerPes":{"locationName":"audioFramesPerPes","type":"integer"},"AudioPids":{"locationName":"audioPids"},"AudioStreamType":{"locationName":"audioStreamType"},"Bitrate":{"locationName":"bitrate","type":"integer"},"BufferModel":{"locationName":"bufferModel"},"CcDescriptor":{"locationName":"ccDescriptor"},"DvbNitSettings":{"locationName":"dvbNitSettings","type":"structure","members":{"NetworkId":{"locationName":"networkId","type":"integer"},"NetworkName":{"locationName":"networkName"},"RepInterval":{"locationName":"repInterval","type":"integer"}},"required":["NetworkName","NetworkId"]},"DvbSdtSettings":{"locationName":"dvbSdtSettings","type":"structure","members":{"OutputSdt":{"locationName":"outputSdt"},"RepInterval":{"locationName":"repInterval","type":"integer"},"ServiceName":{"locationName":"serviceName"},"ServiceProviderName":{"locationName":"serviceProviderName"}}},"DvbSubPids":{"locationName":"dvbSubPids"},"DvbTdtSettings":{"locationName":"dvbTdtSettings","type":"structure","members":{"RepInterval":{"locationName":"repInterval","type":"integer"}}},"DvbTeletextPid":{"locationName":"dvbTeletextPid"},"Ebif":{"locationName":"ebif"},"EbpAudioInterval":{"locationName":"ebpAudioInterval"},"EbpLookaheadMs":{"locationName":"ebpLookaheadMs","type":"integer"},"EbpPlacement":{"locationName":"ebpPlacement"},"EcmPid":{"locationName":"ecmPid"},"EsRateInPes":{"locationName":"esRateInPes"},"EtvPlatformPid":{"locationName":"etvPlatformPid"},"EtvSignalPid":{"locationName":"etvSignalPid"},"FragmentTime":{"locationName":"fragmentTime","type":"double"},"Klv":{"locationName":"klv"},"KlvDataPids":{"locationName":"klvDataPids"},"NullPacketBitrate":{"locationName":"nullPacketBitrate","type":"double"},"PatInterval":{"locationName":"patInterval","type":"integer"},"PcrControl":{"locationName":"pcrControl"},"PcrPeriod":{"locationName":"pcrPeriod","type":"integer"},"PcrPid":{"locationName":"pcrPid"},"PmtInterval":{"locationName":"pmtInterval","type":"integer"},"PmtPid":{"locationName":"pmtPid"},"ProgramNum":{"locationName":"programNum","type":"integer"},"RateMode":{"locationName":"rateMode"},"Scte27Pids":{"locationName":"scte27Pids"},"Scte35Control":{"locationName":"scte35Control"},"Scte35Pid":{"locationName":"scte35Pid"},"SegmentationMarkers":{"locationName":"segmentationMarkers"},"SegmentationStyle":{"locationName":"segmentationStyle"},"SegmentationTime":{"locationName":"segmentationTime","type":"double"},"TimedMetadataBehavior":{"locationName":"timedMetadataBehavior"},"TimedMetadataPid":{"locationName":"timedMetadataPid"},"TransportStreamId":{"locationName":"transportStreamId","type":"integer"},"VideoPid":{"locationName":"videoPid"}}},"S8k":{"type":"list","member":{"type":"structure","members":{"InputId":{"locationName":"inputId"},"InputSettings":{"locationName":"inputSettings","type":"structure","members":{"AudioSelectors":{"locationName":"audioSelectors","type":"list","member":{"type":"structure","members":{"Name":{"locationName":"name"},"SelectorSettings":{"locationName":"selectorSettings","type":"structure","members":{"AudioLanguageSelection":{"locationName":"audioLanguageSelection","type":"structure","members":{"LanguageCode":{"locationName":"languageCode"},"LanguageSelectionPolicy":{"locationName":"languageSelectionPolicy"}},"required":["LanguageCode"]},"AudioPidSelection":{"locationName":"audioPidSelection","type":"structure","members":{"Pid":{"locationName":"pid","type":"integer"}},"required":["Pid"]}}}},"required":["Name"]}},"CaptionSelectors":{"locationName":"captionSelectors","type":"list","member":{"type":"structure","members":{"LanguageCode":{"locationName":"languageCode"},"Name":{"locationName":"name"},"SelectorSettings":{"locationName":"selectorSettings","type":"structure","members":{"AribSourceSettings":{"locationName":"aribSourceSettings","type":"structure","members":{}},"DvbSubSourceSettings":{"locationName":"dvbSubSourceSettings","type":"structure","members":{"Pid":{"locationName":"pid","type":"integer"}}},"EmbeddedSourceSettings":{"locationName":"embeddedSourceSettings","type":"structure","members":{"Convert608To708":{"locationName":"convert608To708"},"Scte20Detection":{"locationName":"scte20Detection"},"Source608ChannelNumber":{"locationName":"source608ChannelNumber","type":"integer"},"Source608TrackNumber":{"locationName":"source608TrackNumber","type":"integer"}}},"Scte20SourceSettings":{"locationName":"scte20SourceSettings","type":"structure","members":{"Convert608To708":{"locationName":"convert608To708"},"Source608ChannelNumber":{"locationName":"source608ChannelNumber","type":"integer"}}},"Scte27SourceSettings":{"locationName":"scte27SourceSettings","type":"structure","members":{"Pid":{"locationName":"pid","type":"integer"}}},"TeletextSourceSettings":{"locationName":"teletextSourceSettings","type":"structure","members":{"PageNumber":{"locationName":"pageNumber"}}}}}},"required":["Name"]}},"DeblockFilter":{"locationName":"deblockFilter"},"DenoiseFilter":{"locationName":"denoiseFilter"},"FilterStrength":{"locationName":"filterStrength","type":"integer"},"InputFilter":{"locationName":"inputFilter"},"NetworkInputSettings":{"locationName":"networkInputSettings","type":"structure","members":{"HlsInputSettings":{"locationName":"hlsInputSettings","type":"structure","members":{"Bandwidth":{"locationName":"bandwidth","type":"integer"},"BufferSegments":{"locationName":"bufferSegments","type":"integer"},"Retries":{"locationName":"retries","type":"integer"},"RetryInterval":{"locationName":"retryInterval","type":"integer"}}},"ServerValidation":{"locationName":"serverValidation"}}},"SourceEndBehavior":{"locationName":"sourceEndBehavior"},"VideoSelector":{"locationName":"videoSelector","type":"structure","members":{"ColorSpace":{"locationName":"colorSpace"},"ColorSpaceUsage":{"locationName":"colorSpaceUsage"},"SelectorSettings":{"locationName":"selectorSettings","type":"structure","members":{"VideoSelectorPid":{"locationName":"videoSelectorPid","type":"structure","members":{"Pid":{"locationName":"pid","type":"integer"}}},"VideoSelectorProgramId":{"locationName":"videoSelectorProgramId","type":"structure","members":{"ProgramId":{"locationName":"programId","type":"integer"}}}}}}}}}}}},"S9k":{"type":"structure","members":{"Codec":{"locationName":"codec"},"MaximumBitrate":{"locationName":"maximumBitrate"},"Resolution":{"locationName":"resolution"}}},"S9q":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S13","locationName":"destinations"},"EgressEndpoints":{"shape":"S9r","locationName":"egressEndpoints"},"EncoderSettings":{"shape":"S17","locationName":"encoderSettings"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8k","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9k","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}},"S9r":{"type":"list","member":{"type":"structure","members":{"SourceIp":{"locationName":"sourceIp"}}}},"S9v":{"type":"list","member":{"type":"structure","members":{"StreamName":{"locationName":"streamName"}}}},"S9x":{"type":"list","member":{"type":"structure","members":{"PasswordParam":{"locationName":"passwordParam"},"Url":{"locationName":"url"},"Username":{"locationName":"username"}}}},"Sa1":{"type":"structure","members":{"Arn":{"locationName":"arn"},"AttachedChannels":{"shape":"Sy","locationName":"attachedChannels"},"Destinations":{"shape":"Sa2","locationName":"destinations"},"Id":{"locationName":"id"},"Name":{"locationName":"name"},"SecurityGroups":{"shape":"Sy","locationName":"securityGroups"},"Sources":{"shape":"Sa4","locationName":"sources"},"State":{"locationName":"state"},"Type":{"locationName":"type"}}},"Sa2":{"type":"list","member":{"type":"structure","members":{"Ip":{"locationName":"ip"},"Port":{"locationName":"port"},"Url":{"locationName":"url"}}}},"Sa4":{"type":"list","member":{"type":"structure","members":{"PasswordParam":{"locationName":"passwordParam"},"Url":{"locationName":"url"},"Username":{"locationName":"username"}}}},"Sa8":{"type":"list","member":{"type":"structure","members":{"Cidr":{"locationName":"cidr"}}}},"Sab":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Id":{"locationName":"id"},"Inputs":{"shape":"Sy","locationName":"inputs"},"State":{"locationName":"state"},"WhitelistRules":{"shape":"Sad","locationName":"whitelistRules"}}},"Sad":{"type":"list","member":{"type":"structure","members":{"Cidr":{"locationName":"cidr"}}}},"Sap":{"type":"structure","members":{"Codec":{"locationName":"codec"},"MaximumBitrate":{"locationName":"maximumBitrate"},"MaximumFramerate":{"locationName":"maximumFramerate"},"Resolution":{"locationName":"resolution"},"ResourceType":{"locationName":"resourceType"},"SpecialFeature":{"locationName":"specialFeature"},"VideoQuality":{"locationName":"videoQuality"}}},"Sbs":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Count":{"locationName":"count","type":"integer"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"DurationUnits":{"locationName":"durationUnits"},"End":{"locationName":"end"},"FixedPrice":{"locationName":"fixedPrice","type":"double"},"Name":{"locationName":"name"},"OfferingDescription":{"locationName":"offeringDescription"},"OfferingId":{"locationName":"offeringId"},"OfferingType":{"locationName":"offeringType"},"Region":{"locationName":"region"},"ReservationId":{"locationName":"reservationId"},"ResourceSpecification":{"shape":"Sap","locationName":"resourceSpecification"},"Start":{"locationName":"start"},"State":{"locationName":"state"},"UsagePrice":{"locationName":"usagePrice","type":"double"}}}}}
+	module.exports = {"metadata":{"apiVersion":"2017-10-14","endpointPrefix":"medialive","signingName":"medialive","serviceFullName":"AWS Elemental MediaLive","serviceId":"MediaLive","protocol":"rest-json","jsonVersion":"1.1","uid":"medialive-2017-10-14","signatureVersion":"v4","serviceAbbreviation":"MediaLive"},"operations":{"BatchUpdateSchedule":{"http":{"method":"PUT","requestUri":"/prod/channels/{channelId}/schedule","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"},"Creates":{"locationName":"creates","type":"structure","members":{"ScheduleActions":{"shape":"S4","locationName":"scheduleActions"}},"required":["ScheduleActions"]},"Deletes":{"locationName":"deletes","type":"structure","members":{"ActionNames":{"shape":"S11","locationName":"actionNames"}},"required":["ActionNames"]}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Creates":{"locationName":"creates","type":"structure","members":{"ScheduleActions":{"shape":"S4","locationName":"scheduleActions"}},"required":["ScheduleActions"]},"Deletes":{"locationName":"deletes","type":"structure","members":{"ScheduleActions":{"shape":"S4","locationName":"scheduleActions"}},"required":["ScheduleActions"]}}}},"CreateChannel":{"http":{"requestUri":"/prod/channels","responseCode":201},"input":{"type":"structure","members":{"Destinations":{"shape":"S16","locationName":"destinations"},"EncoderSettings":{"shape":"S1a","locationName":"encoderSettings"},"InputAttachments":{"shape":"S8n","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9n","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"RequestId":{"locationName":"requestId","idempotencyToken":true},"Reserved":{"locationName":"reserved","deprecated":true},"RoleArn":{"locationName":"roleArn"}}},"output":{"type":"structure","members":{"Channel":{"shape":"S9t","locationName":"channel"}}}},"CreateInput":{"http":{"requestUri":"/prod/inputs","responseCode":201},"input":{"type":"structure","members":{"Destinations":{"shape":"S9y","locationName":"destinations"},"InputSecurityGroups":{"shape":"S11","locationName":"inputSecurityGroups"},"Name":{"locationName":"name"},"RequestId":{"locationName":"requestId","idempotencyToken":true},"Sources":{"shape":"Sa0","locationName":"sources"},"Type":{"locationName":"type"}}},"output":{"type":"structure","members":{"Input":{"shape":"Sa4","locationName":"input"}}}},"CreateInputSecurityGroup":{"http":{"requestUri":"/prod/inputSecurityGroups","responseCode":200},"input":{"type":"structure","members":{"WhitelistRules":{"shape":"Sab","locationName":"whitelistRules"}}},"output":{"type":"structure","members":{"SecurityGroup":{"shape":"Sae","locationName":"securityGroup"}}}},"DeleteChannel":{"http":{"method":"DELETE","requestUri":"/prod/channels/{channelId}","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S16","locationName":"destinations"},"EgressEndpoints":{"shape":"S9u","locationName":"egressEndpoints"},"EncoderSettings":{"shape":"S1a","locationName":"encoderSettings"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8n","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9n","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}}},"DeleteInput":{"http":{"method":"DELETE","requestUri":"/prod/inputs/{inputId}","responseCode":200},"input":{"type":"structure","members":{"InputId":{"location":"uri","locationName":"inputId"}},"required":["InputId"]},"output":{"type":"structure","members":{}}},"DeleteInputSecurityGroup":{"http":{"method":"DELETE","requestUri":"/prod/inputSecurityGroups/{inputSecurityGroupId}","responseCode":200},"input":{"type":"structure","members":{"InputSecurityGroupId":{"location":"uri","locationName":"inputSecurityGroupId"}},"required":["InputSecurityGroupId"]},"output":{"type":"structure","members":{}}},"DeleteReservation":{"http":{"method":"DELETE","requestUri":"/prod/reservations/{reservationId}","responseCode":200},"input":{"type":"structure","members":{"ReservationId":{"location":"uri","locationName":"reservationId"}},"required":["ReservationId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Count":{"locationName":"count","type":"integer"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"DurationUnits":{"locationName":"durationUnits"},"End":{"locationName":"end"},"FixedPrice":{"locationName":"fixedPrice","type":"double"},"Name":{"locationName":"name"},"OfferingDescription":{"locationName":"offeringDescription"},"OfferingId":{"locationName":"offeringId"},"OfferingType":{"locationName":"offeringType"},"Region":{"locationName":"region"},"ReservationId":{"locationName":"reservationId"},"ResourceSpecification":{"shape":"Sas","locationName":"resourceSpecification"},"Start":{"locationName":"start"},"State":{"locationName":"state"},"UsagePrice":{"locationName":"usagePrice","type":"double"}}}},"DescribeChannel":{"http":{"method":"GET","requestUri":"/prod/channels/{channelId}","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S16","locationName":"destinations"},"EgressEndpoints":{"shape":"S9u","locationName":"egressEndpoints"},"EncoderSettings":{"shape":"S1a","locationName":"encoderSettings"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8n","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9n","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}}},"DescribeInput":{"http":{"method":"GET","requestUri":"/prod/inputs/{inputId}","responseCode":200},"input":{"type":"structure","members":{"InputId":{"location":"uri","locationName":"inputId"}},"required":["InputId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"AttachedChannels":{"shape":"S11","locationName":"attachedChannels"},"Destinations":{"shape":"Sa5","locationName":"destinations"},"Id":{"locationName":"id"},"Name":{"locationName":"name"},"SecurityGroups":{"shape":"S11","locationName":"securityGroups"},"Sources":{"shape":"Sa7","locationName":"sources"},"State":{"locationName":"state"},"Type":{"locationName":"type"}}}},"DescribeInputSecurityGroup":{"http":{"method":"GET","requestUri":"/prod/inputSecurityGroups/{inputSecurityGroupId}","responseCode":200},"input":{"type":"structure","members":{"InputSecurityGroupId":{"location":"uri","locationName":"inputSecurityGroupId"}},"required":["InputSecurityGroupId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Id":{"locationName":"id"},"Inputs":{"shape":"S11","locationName":"inputs"},"State":{"locationName":"state"},"WhitelistRules":{"shape":"Sag","locationName":"whitelistRules"}}}},"DescribeOffering":{"http":{"method":"GET","requestUri":"/prod/offerings/{offeringId}","responseCode":200},"input":{"type":"structure","members":{"OfferingId":{"location":"uri","locationName":"offeringId"}},"required":["OfferingId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"DurationUnits":{"locationName":"durationUnits"},"FixedPrice":{"locationName":"fixedPrice","type":"double"},"OfferingDescription":{"locationName":"offeringDescription"},"OfferingId":{"locationName":"offeringId"},"OfferingType":{"locationName":"offeringType"},"Region":{"locationName":"region"},"ResourceSpecification":{"shape":"Sas","locationName":"resourceSpecification"},"UsagePrice":{"locationName":"usagePrice","type":"double"}}}},"DescribeReservation":{"http":{"method":"GET","requestUri":"/prod/reservations/{reservationId}","responseCode":200},"input":{"type":"structure","members":{"ReservationId":{"location":"uri","locationName":"reservationId"}},"required":["ReservationId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Count":{"locationName":"count","type":"integer"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"DurationUnits":{"locationName":"durationUnits"},"End":{"locationName":"end"},"FixedPrice":{"locationName":"fixedPrice","type":"double"},"Name":{"locationName":"name"},"OfferingDescription":{"locationName":"offeringDescription"},"OfferingId":{"locationName":"offeringId"},"OfferingType":{"locationName":"offeringType"},"Region":{"locationName":"region"},"ReservationId":{"locationName":"reservationId"},"ResourceSpecification":{"shape":"Sas","locationName":"resourceSpecification"},"Start":{"locationName":"start"},"State":{"locationName":"state"},"UsagePrice":{"locationName":"usagePrice","type":"double"}}}},"DescribeSchedule":{"http":{"method":"GET","requestUri":"/prod/channels/{channelId}/schedule","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"},"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"NextToken":{"location":"querystring","locationName":"nextToken"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"ScheduleActions":{"shape":"S4","locationName":"scheduleActions"}}}},"ListChannels":{"http":{"method":"GET","requestUri":"/prod/channels","responseCode":200},"input":{"type":"structure","members":{"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"NextToken":{"location":"querystring","locationName":"nextToken"}}},"output":{"type":"structure","members":{"Channels":{"locationName":"channels","type":"list","member":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S16","locationName":"destinations"},"EgressEndpoints":{"shape":"S9u","locationName":"egressEndpoints"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8n","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9n","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}}},"NextToken":{"locationName":"nextToken"}}}},"ListInputSecurityGroups":{"http":{"method":"GET","requestUri":"/prod/inputSecurityGroups","responseCode":200},"input":{"type":"structure","members":{"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"NextToken":{"location":"querystring","locationName":"nextToken"}}},"output":{"type":"structure","members":{"InputSecurityGroups":{"locationName":"inputSecurityGroups","type":"list","member":{"shape":"Sae"}},"NextToken":{"locationName":"nextToken"}}}},"ListInputs":{"http":{"method":"GET","requestUri":"/prod/inputs","responseCode":200},"input":{"type":"structure","members":{"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"NextToken":{"location":"querystring","locationName":"nextToken"}}},"output":{"type":"structure","members":{"Inputs":{"locationName":"inputs","type":"list","member":{"shape":"Sa4"}},"NextToken":{"locationName":"nextToken"}}}},"ListOfferings":{"http":{"method":"GET","requestUri":"/prod/offerings","responseCode":200},"input":{"type":"structure","members":{"ChannelConfiguration":{"location":"querystring","locationName":"channelConfiguration"},"Codec":{"location":"querystring","locationName":"codec"},"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"MaximumBitrate":{"location":"querystring","locationName":"maximumBitrate"},"MaximumFramerate":{"location":"querystring","locationName":"maximumFramerate"},"NextToken":{"location":"querystring","locationName":"nextToken"},"Resolution":{"location":"querystring","locationName":"resolution"},"ResourceType":{"location":"querystring","locationName":"resourceType"},"SpecialFeature":{"location":"querystring","locationName":"specialFeature"},"VideoQuality":{"location":"querystring","locationName":"videoQuality"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"Offerings":{"locationName":"offerings","type":"list","member":{"type":"structure","members":{"Arn":{"locationName":"arn"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"DurationUnits":{"locationName":"durationUnits"},"FixedPrice":{"locationName":"fixedPrice","type":"double"},"OfferingDescription":{"locationName":"offeringDescription"},"OfferingId":{"locationName":"offeringId"},"OfferingType":{"locationName":"offeringType"},"Region":{"locationName":"region"},"ResourceSpecification":{"shape":"Sas","locationName":"resourceSpecification"},"UsagePrice":{"locationName":"usagePrice","type":"double"}}}}}}},"ListReservations":{"http":{"method":"GET","requestUri":"/prod/reservations","responseCode":200},"input":{"type":"structure","members":{"Codec":{"location":"querystring","locationName":"codec"},"MaxResults":{"location":"querystring","locationName":"maxResults","type":"integer"},"MaximumBitrate":{"location":"querystring","locationName":"maximumBitrate"},"MaximumFramerate":{"location":"querystring","locationName":"maximumFramerate"},"NextToken":{"location":"querystring","locationName":"nextToken"},"Resolution":{"location":"querystring","locationName":"resolution"},"ResourceType":{"location":"querystring","locationName":"resourceType"},"SpecialFeature":{"location":"querystring","locationName":"specialFeature"},"VideoQuality":{"location":"querystring","locationName":"videoQuality"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"Reservations":{"locationName":"reservations","type":"list","member":{"shape":"Sbv"}}}}},"PurchaseOffering":{"http":{"requestUri":"/prod/offerings/{offeringId}/purchase","responseCode":201},"input":{"type":"structure","members":{"Count":{"locationName":"count","type":"integer"},"Name":{"locationName":"name"},"OfferingId":{"location":"uri","locationName":"offeringId"},"RequestId":{"locationName":"requestId","idempotencyToken":true},"Start":{"locationName":"start"}},"required":["OfferingId","Count"]},"output":{"type":"structure","members":{"Reservation":{"shape":"Sbv","locationName":"reservation"}}}},"StartChannel":{"http":{"requestUri":"/prod/channels/{channelId}/start","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S16","locationName":"destinations"},"EgressEndpoints":{"shape":"S9u","locationName":"egressEndpoints"},"EncoderSettings":{"shape":"S1a","locationName":"encoderSettings"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8n","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9n","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}}},"StopChannel":{"http":{"requestUri":"/prod/channels/{channelId}/stop","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S16","locationName":"destinations"},"EgressEndpoints":{"shape":"S9u","locationName":"egressEndpoints"},"EncoderSettings":{"shape":"S1a","locationName":"encoderSettings"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8n","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9n","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}}},"UpdateChannel":{"http":{"method":"PUT","requestUri":"/prod/channels/{channelId}","responseCode":200},"input":{"type":"structure","members":{"ChannelId":{"location":"uri","locationName":"channelId"},"Destinations":{"shape":"S16","locationName":"destinations"},"EncoderSettings":{"shape":"S1a","locationName":"encoderSettings"},"InputAttachments":{"shape":"S8n","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9n","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"RoleArn":{"locationName":"roleArn"}},"required":["ChannelId"]},"output":{"type":"structure","members":{"Channel":{"shape":"S9t","locationName":"channel"}}}},"UpdateInput":{"http":{"method":"PUT","requestUri":"/prod/inputs/{inputId}","responseCode":200},"input":{"type":"structure","members":{"Destinations":{"shape":"S9y","locationName":"destinations"},"InputId":{"location":"uri","locationName":"inputId"},"InputSecurityGroups":{"shape":"S11","locationName":"inputSecurityGroups"},"Name":{"locationName":"name"},"Sources":{"shape":"Sa0","locationName":"sources"}},"required":["InputId"]},"output":{"type":"structure","members":{"Input":{"shape":"Sa4","locationName":"input"}}}},"UpdateInputSecurityGroup":{"http":{"method":"PUT","requestUri":"/prod/inputSecurityGroups/{inputSecurityGroupId}","responseCode":200},"input":{"type":"structure","members":{"InputSecurityGroupId":{"location":"uri","locationName":"inputSecurityGroupId"},"WhitelistRules":{"shape":"Sab","locationName":"whitelistRules"}},"required":["InputSecurityGroupId"]},"output":{"type":"structure","members":{"SecurityGroup":{"shape":"Sae","locationName":"securityGroup"}}}}},"shapes":{"S4":{"type":"list","member":{"type":"structure","members":{"ActionName":{"locationName":"actionName"},"ScheduleActionSettings":{"locationName":"scheduleActionSettings","type":"structure","members":{"InputSwitchSettings":{"locationName":"inputSwitchSettings","type":"structure","members":{"InputAttachmentNameReference":{"locationName":"inputAttachmentNameReference"}},"required":["InputAttachmentNameReference"]},"Scte35ReturnToNetworkSettings":{"locationName":"scte35ReturnToNetworkSettings","type":"structure","members":{"SpliceEventId":{"locationName":"spliceEventId","type":"long"}},"required":["SpliceEventId"]},"Scte35SpliceInsertSettings":{"locationName":"scte35SpliceInsertSettings","type":"structure","members":{"Duration":{"locationName":"duration","type":"long"},"SpliceEventId":{"locationName":"spliceEventId","type":"long"}},"required":["SpliceEventId"]},"Scte35TimeSignalSettings":{"locationName":"scte35TimeSignalSettings","type":"structure","members":{"Scte35Descriptors":{"locationName":"scte35Descriptors","type":"list","member":{"type":"structure","members":{"Scte35DescriptorSettings":{"locationName":"scte35DescriptorSettings","type":"structure","members":{"SegmentationDescriptorScte35DescriptorSettings":{"locationName":"segmentationDescriptorScte35DescriptorSettings","type":"structure","members":{"DeliveryRestrictions":{"locationName":"deliveryRestrictions","type":"structure","members":{"ArchiveAllowedFlag":{"locationName":"archiveAllowedFlag"},"DeviceRestrictions":{"locationName":"deviceRestrictions"},"NoRegionalBlackoutFlag":{"locationName":"noRegionalBlackoutFlag"},"WebDeliveryAllowedFlag":{"locationName":"webDeliveryAllowedFlag"}},"required":["DeviceRestrictions","ArchiveAllowedFlag","WebDeliveryAllowedFlag","NoRegionalBlackoutFlag"]},"SegmentNum":{"locationName":"segmentNum","type":"integer"},"SegmentationCancelIndicator":{"locationName":"segmentationCancelIndicator"},"SegmentationDuration":{"locationName":"segmentationDuration","type":"long"},"SegmentationEventId":{"locationName":"segmentationEventId","type":"long"},"SegmentationTypeId":{"locationName":"segmentationTypeId","type":"integer"},"SegmentationUpid":{"locationName":"segmentationUpid"},"SegmentationUpidType":{"locationName":"segmentationUpidType","type":"integer"},"SegmentsExpected":{"locationName":"segmentsExpected","type":"integer"},"SubSegmentNum":{"locationName":"subSegmentNum","type":"integer"},"SubSegmentsExpected":{"locationName":"subSegmentsExpected","type":"integer"}},"required":["SegmentationEventId","SegmentationCancelIndicator"]}},"required":["SegmentationDescriptorScte35DescriptorSettings"]}},"required":["Scte35DescriptorSettings"]}}},"required":["Scte35Descriptors"]},"StaticImageActivateSettings":{"locationName":"staticImageActivateSettings","type":"structure","members":{"Duration":{"locationName":"duration","type":"integer"},"FadeIn":{"locationName":"fadeIn","type":"integer"},"FadeOut":{"locationName":"fadeOut","type":"integer"},"Height":{"locationName":"height","type":"integer"},"Image":{"shape":"Ss","locationName":"image"},"ImageX":{"locationName":"imageX","type":"integer"},"ImageY":{"locationName":"imageY","type":"integer"},"Layer":{"locationName":"layer","type":"integer"},"Opacity":{"locationName":"opacity","type":"integer"},"Width":{"locationName":"width","type":"integer"}},"required":["Image"]},"StaticImageDeactivateSettings":{"locationName":"staticImageDeactivateSettings","type":"structure","members":{"FadeOut":{"locationName":"fadeOut","type":"integer"},"Layer":{"locationName":"layer","type":"integer"}}}}},"ScheduleActionStartSettings":{"locationName":"scheduleActionStartSettings","type":"structure","members":{"FixedModeScheduleActionStartSettings":{"locationName":"fixedModeScheduleActionStartSettings","type":"structure","members":{"Time":{"locationName":"time"}},"required":["Time"]},"FollowModeScheduleActionStartSettings":{"locationName":"followModeScheduleActionStartSettings","type":"structure","members":{"FollowPoint":{"locationName":"followPoint"},"ReferenceActionName":{"locationName":"referenceActionName"}},"required":["ReferenceActionName","FollowPoint"]}}}},"required":["ActionName","ScheduleActionStartSettings","ScheduleActionSettings"]}},"Ss":{"type":"structure","members":{"PasswordParam":{"locationName":"passwordParam"},"Uri":{"locationName":"uri"},"Username":{"locationName":"username"}},"required":["Uri"]},"S11":{"type":"list","member":{}},"S16":{"type":"list","member":{"type":"structure","members":{"Id":{"locationName":"id"},"Settings":{"locationName":"settings","type":"list","member":{"type":"structure","members":{"PasswordParam":{"locationName":"passwordParam"},"StreamName":{"locationName":"streamName"},"Url":{"locationName":"url"},"Username":{"locationName":"username"}}}}}}},"S1a":{"type":"structure","members":{"AudioDescriptions":{"locationName":"audioDescriptions","type":"list","member":{"type":"structure","members":{"AudioNormalizationSettings":{"locationName":"audioNormalizationSettings","type":"structure","members":{"Algorithm":{"locationName":"algorithm"},"AlgorithmControl":{"locationName":"algorithmControl"},"TargetLkfs":{"locationName":"targetLkfs","type":"double"}}},"AudioSelectorName":{"locationName":"audioSelectorName"},"AudioType":{"locationName":"audioType"},"AudioTypeControl":{"locationName":"audioTypeControl"},"CodecSettings":{"locationName":"codecSettings","type":"structure","members":{"AacSettings":{"locationName":"aacSettings","type":"structure","members":{"Bitrate":{"locationName":"bitrate","type":"double"},"CodingMode":{"locationName":"codingMode"},"InputType":{"locationName":"inputType"},"Profile":{"locationName":"profile"},"RateControlMode":{"locationName":"rateControlMode"},"RawFormat":{"locationName":"rawFormat"},"SampleRate":{"locationName":"sampleRate","type":"double"},"Spec":{"locationName":"spec"},"VbrQuality":{"locationName":"vbrQuality"}}},"Ac3Settings":{"locationName":"ac3Settings","type":"structure","members":{"Bitrate":{"locationName":"bitrate","type":"double"},"BitstreamMode":{"locationName":"bitstreamMode"},"CodingMode":{"locationName":"codingMode"},"Dialnorm":{"locationName":"dialnorm","type":"integer"},"DrcProfile":{"locationName":"drcProfile"},"LfeFilter":{"locationName":"lfeFilter"},"MetadataControl":{"locationName":"metadataControl"}}},"Eac3Settings":{"locationName":"eac3Settings","type":"structure","members":{"AttenuationControl":{"locationName":"attenuationControl"},"Bitrate":{"locationName":"bitrate","type":"double"},"BitstreamMode":{"locationName":"bitstreamMode"},"CodingMode":{"locationName":"codingMode"},"DcFilter":{"locationName":"dcFilter"},"Dialnorm":{"locationName":"dialnorm","type":"integer"},"DrcLine":{"locationName":"drcLine"},"DrcRf":{"locationName":"drcRf"},"LfeControl":{"locationName":"lfeControl"},"LfeFilter":{"locationName":"lfeFilter"},"LoRoCenterMixLevel":{"locationName":"loRoCenterMixLevel","type":"double"},"LoRoSurroundMixLevel":{"locationName":"loRoSurroundMixLevel","type":"double"},"LtRtCenterMixLevel":{"locationName":"ltRtCenterMixLevel","type":"double"},"LtRtSurroundMixLevel":{"locationName":"ltRtSurroundMixLevel","type":"double"},"MetadataControl":{"locationName":"metadataControl"},"PassthroughControl":{"locationName":"passthroughControl"},"PhaseControl":{"locationName":"phaseControl"},"StereoDownmix":{"locationName":"stereoDownmix"},"SurroundExMode":{"locationName":"surroundExMode"},"SurroundMode":{"locationName":"surroundMode"}}},"Mp2Settings":{"locationName":"mp2Settings","type":"structure","members":{"Bitrate":{"locationName":"bitrate","type":"double"},"CodingMode":{"locationName":"codingMode"},"SampleRate":{"locationName":"sampleRate","type":"double"}}},"PassThroughSettings":{"locationName":"passThroughSettings","type":"structure","members":{}}}},"LanguageCode":{"locationName":"languageCode"},"LanguageCodeControl":{"locationName":"languageCodeControl"},"Name":{"locationName":"name"},"RemixSettings":{"locationName":"remixSettings","type":"structure","members":{"ChannelMappings":{"locationName":"channelMappings","type":"list","member":{"type":"structure","members":{"InputChannelLevels":{"locationName":"inputChannelLevels","type":"list","member":{"type":"structure","members":{"Gain":{"locationName":"gain","type":"integer"},"InputChannel":{"locationName":"inputChannel","type":"integer"}},"required":["InputChannel","Gain"]}},"OutputChannel":{"locationName":"outputChannel","type":"integer"}},"required":["OutputChannel","InputChannelLevels"]}},"ChannelsIn":{"locationName":"channelsIn","type":"integer"},"ChannelsOut":{"locationName":"channelsOut","type":"integer"}},"required":["ChannelMappings"]},"StreamName":{"locationName":"streamName"}},"required":["AudioSelectorName","Name"]}},"AvailBlanking":{"locationName":"availBlanking","type":"structure","members":{"AvailBlankingImage":{"shape":"Ss","locationName":"availBlankingImage"},"State":{"locationName":"state"}}},"AvailConfiguration":{"locationName":"availConfiguration","type":"structure","members":{"AvailSettings":{"locationName":"availSettings","type":"structure","members":{"Scte35SpliceInsert":{"locationName":"scte35SpliceInsert","type":"structure","members":{"AdAvailOffset":{"locationName":"adAvailOffset","type":"integer"},"NoRegionalBlackoutFlag":{"locationName":"noRegionalBlackoutFlag"},"WebDeliveryAllowedFlag":{"locationName":"webDeliveryAllowedFlag"}}},"Scte35TimeSignalApos":{"locationName":"scte35TimeSignalApos","type":"structure","members":{"AdAvailOffset":{"locationName":"adAvailOffset","type":"integer"},"NoRegionalBlackoutFlag":{"locationName":"noRegionalBlackoutFlag"},"WebDeliveryAllowedFlag":{"locationName":"webDeliveryAllowedFlag"}}}}}}},"BlackoutSlate":{"locationName":"blackoutSlate","type":"structure","members":{"BlackoutSlateImage":{"shape":"Ss","locationName":"blackoutSlateImage"},"NetworkEndBlackout":{"locationName":"networkEndBlackout"},"NetworkEndBlackoutImage":{"shape":"Ss","locationName":"networkEndBlackoutImage"},"NetworkId":{"locationName":"networkId"},"State":{"locationName":"state"}}},"CaptionDescriptions":{"locationName":"captionDescriptions","type":"list","member":{"type":"structure","members":{"CaptionSelectorName":{"locationName":"captionSelectorName"},"DestinationSettings":{"locationName":"destinationSettings","type":"structure","members":{"AribDestinationSettings":{"locationName":"aribDestinationSettings","type":"structure","members":{}},"BurnInDestinationSettings":{"locationName":"burnInDestinationSettings","type":"structure","members":{"Alignment":{"locationName":"alignment"},"BackgroundColor":{"locationName":"backgroundColor"},"BackgroundOpacity":{"locationName":"backgroundOpacity","type":"integer"},"Font":{"shape":"Ss","locationName":"font"},"FontColor":{"locationName":"fontColor"},"FontOpacity":{"locationName":"fontOpacity","type":"integer"},"FontResolution":{"locationName":"fontResolution","type":"integer"},"FontSize":{"locationName":"fontSize"},"OutlineColor":{"locationName":"outlineColor"},"OutlineSize":{"locationName":"outlineSize","type":"integer"},"ShadowColor":{"locationName":"shadowColor"},"ShadowOpacity":{"locationName":"shadowOpacity","type":"integer"},"ShadowXOffset":{"locationName":"shadowXOffset","type":"integer"},"ShadowYOffset":{"locationName":"shadowYOffset","type":"integer"},"TeletextGridControl":{"locationName":"teletextGridControl"},"XPosition":{"locationName":"xPosition","type":"integer"},"YPosition":{"locationName":"yPosition","type":"integer"}}},"DvbSubDestinationSettings":{"locationName":"dvbSubDestinationSettings","type":"structure","members":{"Alignment":{"locationName":"alignment"},"BackgroundColor":{"locationName":"backgroundColor"},"BackgroundOpacity":{"locationName":"backgroundOpacity","type":"integer"},"Font":{"shape":"Ss","locationName":"font"},"FontColor":{"locationName":"fontColor"},"FontOpacity":{"locationName":"fontOpacity","type":"integer"},"FontResolution":{"locationName":"fontResolution","type":"integer"},"FontSize":{"locationName":"fontSize"},"OutlineColor":{"locationName":"outlineColor"},"OutlineSize":{"locationName":"outlineSize","type":"integer"},"ShadowColor":{"locationName":"shadowColor"},"ShadowOpacity":{"locationName":"shadowOpacity","type":"integer"},"ShadowXOffset":{"locationName":"shadowXOffset","type":"integer"},"ShadowYOffset":{"locationName":"shadowYOffset","type":"integer"},"TeletextGridControl":{"locationName":"teletextGridControl"},"XPosition":{"locationName":"xPosition","type":"integer"},"YPosition":{"locationName":"yPosition","type":"integer"}}},"EmbeddedDestinationSettings":{"locationName":"embeddedDestinationSettings","type":"structure","members":{}},"EmbeddedPlusScte20DestinationSettings":{"locationName":"embeddedPlusScte20DestinationSettings","type":"structure","members":{}},"RtmpCaptionInfoDestinationSettings":{"locationName":"rtmpCaptionInfoDestinationSettings","type":"structure","members":{}},"Scte20PlusEmbeddedDestinationSettings":{"locationName":"scte20PlusEmbeddedDestinationSettings","type":"structure","members":{}},"Scte27DestinationSettings":{"locationName":"scte27DestinationSettings","type":"structure","members":{}},"SmpteTtDestinationSettings":{"locationName":"smpteTtDestinationSettings","type":"structure","members":{}},"TeletextDestinationSettings":{"locationName":"teletextDestinationSettings","type":"structure","members":{}},"TtmlDestinationSettings":{"locationName":"ttmlDestinationSettings","type":"structure","members":{"StyleControl":{"locationName":"styleControl"}}},"WebvttDestinationSettings":{"locationName":"webvttDestinationSettings","type":"structure","members":{}}}},"LanguageCode":{"locationName":"languageCode"},"LanguageDescription":{"locationName":"languageDescription"},"Name":{"locationName":"name"}},"required":["CaptionSelectorName","Name"]}},"GlobalConfiguration":{"locationName":"globalConfiguration","type":"structure","members":{"InitialAudioGain":{"locationName":"initialAudioGain","type":"integer"},"InputEndAction":{"locationName":"inputEndAction"},"InputLossBehavior":{"locationName":"inputLossBehavior","type":"structure","members":{"BlackFrameMsec":{"locationName":"blackFrameMsec","type":"integer"},"InputLossImageColor":{"locationName":"inputLossImageColor"},"InputLossImageSlate":{"shape":"Ss","locationName":"inputLossImageSlate"},"InputLossImageType":{"locationName":"inputLossImageType"},"RepeatFrameMsec":{"locationName":"repeatFrameMsec","type":"integer"}}},"OutputTimingSource":{"locationName":"outputTimingSource"},"SupportLowFramerateInputs":{"locationName":"supportLowFramerateInputs"}}},"OutputGroups":{"locationName":"outputGroups","type":"list","member":{"type":"structure","members":{"Name":{"locationName":"name"},"OutputGroupSettings":{"locationName":"outputGroupSettings","type":"structure","members":{"ArchiveGroupSettings":{"locationName":"archiveGroupSettings","type":"structure","members":{"Destination":{"shape":"S4h","locationName":"destination"},"RolloverInterval":{"locationName":"rolloverInterval","type":"integer"}},"required":["Destination"]},"HlsGroupSettings":{"locationName":"hlsGroupSettings","type":"structure","members":{"AdMarkers":{"locationName":"adMarkers","type":"list","member":{}},"BaseUrlContent":{"locationName":"baseUrlContent"},"BaseUrlManifest":{"locationName":"baseUrlManifest"},"CaptionLanguageMappings":{"locationName":"captionLanguageMappings","type":"list","member":{"type":"structure","members":{"CaptionChannel":{"locationName":"captionChannel","type":"integer"},"LanguageCode":{"locationName":"languageCode"},"LanguageDescription":{"locationName":"languageDescription"}},"required":["LanguageCode","LanguageDescription","CaptionChannel"]}},"CaptionLanguageSetting":{"locationName":"captionLanguageSetting"},"ClientCache":{"locationName":"clientCache"},"CodecSpecification":{"locationName":"codecSpecification"},"ConstantIv":{"locationName":"constantIv"},"Destination":{"shape":"S4h","locationName":"destination"},"DirectoryStructure":{"locationName":"directoryStructure"},"EncryptionType":{"locationName":"encryptionType"},"HlsCdnSettings":{"locationName":"hlsCdnSettings","type":"structure","members":{"HlsAkamaiSettings":{"locationName":"hlsAkamaiSettings","type":"structure","members":{"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"FilecacheDuration":{"locationName":"filecacheDuration","type":"integer"},"HttpTransferMode":{"locationName":"httpTransferMode"},"NumRetries":{"locationName":"numRetries","type":"integer"},"RestartDelay":{"locationName":"restartDelay","type":"integer"},"Salt":{"locationName":"salt"},"Token":{"locationName":"token"}}},"HlsBasicPutSettings":{"locationName":"hlsBasicPutSettings","type":"structure","members":{"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"FilecacheDuration":{"locationName":"filecacheDuration","type":"integer"},"NumRetries":{"locationName":"numRetries","type":"integer"},"RestartDelay":{"locationName":"restartDelay","type":"integer"}}},"HlsMediaStoreSettings":{"locationName":"hlsMediaStoreSettings","type":"structure","members":{"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"FilecacheDuration":{"locationName":"filecacheDuration","type":"integer"},"MediaStoreStorageClass":{"locationName":"mediaStoreStorageClass"},"NumRetries":{"locationName":"numRetries","type":"integer"},"RestartDelay":{"locationName":"restartDelay","type":"integer"}}},"HlsWebdavSettings":{"locationName":"hlsWebdavSettings","type":"structure","members":{"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"FilecacheDuration":{"locationName":"filecacheDuration","type":"integer"},"HttpTransferMode":{"locationName":"httpTransferMode"},"NumRetries":{"locationName":"numRetries","type":"integer"},"RestartDelay":{"locationName":"restartDelay","type":"integer"}}}}},"IndexNSegments":{"locationName":"indexNSegments","type":"integer"},"InputLossAction":{"locationName":"inputLossAction"},"IvInManifest":{"locationName":"ivInManifest"},"IvSource":{"locationName":"ivSource"},"KeepSegments":{"locationName":"keepSegments","type":"integer"},"KeyFormat":{"locationName":"keyFormat"},"KeyFormatVersions":{"locationName":"keyFormatVersions"},"KeyProviderSettings":{"locationName":"keyProviderSettings","type":"structure","members":{"StaticKeySettings":{"locationName":"staticKeySettings","type":"structure","members":{"KeyProviderServer":{"shape":"Ss","locationName":"keyProviderServer"},"StaticKeyValue":{"locationName":"staticKeyValue"}},"required":["StaticKeyValue"]}}},"ManifestCompression":{"locationName":"manifestCompression"},"ManifestDurationFormat":{"locationName":"manifestDurationFormat"},"MinSegmentLength":{"locationName":"minSegmentLength","type":"integer"},"Mode":{"locationName":"mode"},"OutputSelection":{"locationName":"outputSelection"},"ProgramDateTime":{"locationName":"programDateTime"},"ProgramDateTimePeriod":{"locationName":"programDateTimePeriod","type":"integer"},"SegmentLength":{"locationName":"segmentLength","type":"integer"},"SegmentationMode":{"locationName":"segmentationMode"},"SegmentsPerSubdirectory":{"locationName":"segmentsPerSubdirectory","type":"integer"},"StreamInfResolution":{"locationName":"streamInfResolution"},"TimedMetadataId3Frame":{"locationName":"timedMetadataId3Frame"},"TimedMetadataId3Period":{"locationName":"timedMetadataId3Period","type":"integer"},"TimestampDeltaMilliseconds":{"locationName":"timestampDeltaMilliseconds","type":"integer"},"TsFileMode":{"locationName":"tsFileMode"}},"required":["Destination"]},"MsSmoothGroupSettings":{"locationName":"msSmoothGroupSettings","type":"structure","members":{"AcquisitionPointId":{"locationName":"acquisitionPointId"},"AudioOnlyTimecodeControl":{"locationName":"audioOnlyTimecodeControl"},"CertificateMode":{"locationName":"certificateMode"},"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"Destination":{"shape":"S4h","locationName":"destination"},"EventId":{"locationName":"eventId"},"EventIdMode":{"locationName":"eventIdMode"},"EventStopBehavior":{"locationName":"eventStopBehavior"},"FilecacheDuration":{"locationName":"filecacheDuration","type":"integer"},"FragmentLength":{"locationName":"fragmentLength","type":"integer"},"InputLossAction":{"locationName":"inputLossAction"},"NumRetries":{"locationName":"numRetries","type":"integer"},"RestartDelay":{"locationName":"restartDelay","type":"integer"},"SegmentationMode":{"locationName":"segmentationMode"},"SendDelayMs":{"locationName":"sendDelayMs","type":"integer"},"SparseTrackType":{"locationName":"sparseTrackType"},"StreamManifestBehavior":{"locationName":"streamManifestBehavior"},"TimestampOffset":{"locationName":"timestampOffset"},"TimestampOffsetMode":{"locationName":"timestampOffsetMode"}},"required":["Destination"]},"RtmpGroupSettings":{"locationName":"rtmpGroupSettings","type":"structure","members":{"AuthenticationScheme":{"locationName":"authenticationScheme"},"CacheFullBehavior":{"locationName":"cacheFullBehavior"},"CacheLength":{"locationName":"cacheLength","type":"integer"},"CaptionData":{"locationName":"captionData"},"RestartDelay":{"locationName":"restartDelay","type":"integer"}}},"UdpGroupSettings":{"locationName":"udpGroupSettings","type":"structure","members":{"InputLossAction":{"locationName":"inputLossAction"},"TimedMetadataId3Frame":{"locationName":"timedMetadataId3Frame"},"TimedMetadataId3Period":{"locationName":"timedMetadataId3Period","type":"integer"}}}}},"Outputs":{"locationName":"outputs","type":"list","member":{"type":"structure","members":{"AudioDescriptionNames":{"shape":"S11","locationName":"audioDescriptionNames"},"CaptionDescriptionNames":{"shape":"S11","locationName":"captionDescriptionNames"},"OutputName":{"locationName":"outputName"},"OutputSettings":{"locationName":"outputSettings","type":"structure","members":{"ArchiveOutputSettings":{"locationName":"archiveOutputSettings","type":"structure","members":{"ContainerSettings":{"locationName":"containerSettings","type":"structure","members":{"M2tsSettings":{"shape":"S69","locationName":"m2tsSettings"}}},"Extension":{"locationName":"extension"},"NameModifier":{"locationName":"nameModifier"}},"required":["ContainerSettings"]},"HlsOutputSettings":{"locationName":"hlsOutputSettings","type":"structure","members":{"HlsSettings":{"locationName":"hlsSettings","type":"structure","members":{"AudioOnlyHlsSettings":{"locationName":"audioOnlyHlsSettings","type":"structure","members":{"AudioGroupId":{"locationName":"audioGroupId"},"AudioOnlyImage":{"shape":"Ss","locationName":"audioOnlyImage"},"AudioTrackType":{"locationName":"audioTrackType"}}},"StandardHlsSettings":{"locationName":"standardHlsSettings","type":"structure","members":{"AudioRenditionSets":{"locationName":"audioRenditionSets"},"M3u8Settings":{"locationName":"m3u8Settings","type":"structure","members":{"AudioFramesPerPes":{"locationName":"audioFramesPerPes","type":"integer"},"AudioPids":{"locationName":"audioPids"},"EcmPid":{"locationName":"ecmPid"},"PatInterval":{"locationName":"patInterval","type":"integer"},"PcrControl":{"locationName":"pcrControl"},"PcrPeriod":{"locationName":"pcrPeriod","type":"integer"},"PcrPid":{"locationName":"pcrPid"},"PmtInterval":{"locationName":"pmtInterval","type":"integer"},"PmtPid":{"locationName":"pmtPid"},"ProgramNum":{"locationName":"programNum","type":"integer"},"Scte35Behavior":{"locationName":"scte35Behavior"},"Scte35Pid":{"locationName":"scte35Pid"},"TimedMetadataBehavior":{"locationName":"timedMetadataBehavior"},"TimedMetadataPid":{"locationName":"timedMetadataPid"},"TransportStreamId":{"locationName":"transportStreamId","type":"integer"},"VideoPid":{"locationName":"videoPid"}}}},"required":["M3u8Settings"]}}},"NameModifier":{"locationName":"nameModifier"},"SegmentModifier":{"locationName":"segmentModifier"}},"required":["HlsSettings"]},"MsSmoothOutputSettings":{"locationName":"msSmoothOutputSettings","type":"structure","members":{"NameModifier":{"locationName":"nameModifier"}}},"RtmpOutputSettings":{"locationName":"rtmpOutputSettings","type":"structure","members":{"CertificateMode":{"locationName":"certificateMode"},"ConnectionRetryInterval":{"locationName":"connectionRetryInterval","type":"integer"},"Destination":{"shape":"S4h","locationName":"destination"},"NumRetries":{"locationName":"numRetries","type":"integer"}},"required":["Destination"]},"UdpOutputSettings":{"locationName":"udpOutputSettings","type":"structure","members":{"BufferMsec":{"locationName":"bufferMsec","type":"integer"},"ContainerSettings":{"locationName":"containerSettings","type":"structure","members":{"M2tsSettings":{"shape":"S69","locationName":"m2tsSettings"}}},"Destination":{"shape":"S4h","locationName":"destination"},"FecOutputSettings":{"locationName":"fecOutputSettings","type":"structure","members":{"ColumnDepth":{"locationName":"columnDepth","type":"integer"},"IncludeFec":{"locationName":"includeFec"},"RowLength":{"locationName":"rowLength","type":"integer"}}}},"required":["Destination","ContainerSettings"]}}},"VideoDescriptionName":{"locationName":"videoDescriptionName"}},"required":["OutputSettings"]}}},"required":["Outputs","OutputGroupSettings"]}},"TimecodeConfig":{"locationName":"timecodeConfig","type":"structure","members":{"Source":{"locationName":"source"},"SyncThreshold":{"locationName":"syncThreshold","type":"integer"}},"required":["Source"]},"VideoDescriptions":{"locationName":"videoDescriptions","type":"list","member":{"type":"structure","members":{"CodecSettings":{"locationName":"codecSettings","type":"structure","members":{"H264Settings":{"locationName":"h264Settings","type":"structure","members":{"AdaptiveQuantization":{"locationName":"adaptiveQuantization"},"AfdSignaling":{"locationName":"afdSignaling"},"Bitrate":{"locationName":"bitrate","type":"integer"},"BufFillPct":{"locationName":"bufFillPct","type":"integer"},"BufSize":{"locationName":"bufSize","type":"integer"},"ColorMetadata":{"locationName":"colorMetadata"},"EntropyEncoding":{"locationName":"entropyEncoding"},"FixedAfd":{"locationName":"fixedAfd"},"FlickerAq":{"locationName":"flickerAq"},"FramerateControl":{"locationName":"framerateControl"},"FramerateDenominator":{"locationName":"framerateDenominator","type":"integer"},"FramerateNumerator":{"locationName":"framerateNumerator","type":"integer"},"GopBReference":{"locationName":"gopBReference"},"GopClosedCadence":{"locationName":"gopClosedCadence","type":"integer"},"GopNumBFrames":{"locationName":"gopNumBFrames","type":"integer"},"GopSize":{"locationName":"gopSize","type":"double"},"GopSizeUnits":{"locationName":"gopSizeUnits"},"Level":{"locationName":"level"},"LookAheadRateControl":{"locationName":"lookAheadRateControl"},"MaxBitrate":{"locationName":"maxBitrate","type":"integer"},"MinIInterval":{"locationName":"minIInterval","type":"integer"},"NumRefFrames":{"locationName":"numRefFrames","type":"integer"},"ParControl":{"locationName":"parControl"},"ParDenominator":{"locationName":"parDenominator","type":"integer"},"ParNumerator":{"locationName":"parNumerator","type":"integer"},"Profile":{"locationName":"profile"},"QvbrQualityLevel":{"locationName":"qvbrQualityLevel","type":"integer"},"RateControlMode":{"locationName":"rateControlMode"},"ScanType":{"locationName":"scanType"},"SceneChangeDetect":{"locationName":"sceneChangeDetect"},"Slices":{"locationName":"slices","type":"integer"},"Softness":{"locationName":"softness","type":"integer"},"SpatialAq":{"locationName":"spatialAq"},"Syntax":{"locationName":"syntax"},"TemporalAq":{"locationName":"temporalAq"},"TimecodeInsertion":{"locationName":"timecodeInsertion"}}}}},"Height":{"locationName":"height","type":"integer"},"Name":{"locationName":"name"},"RespondToAfd":{"locationName":"respondToAfd"},"ScalingBehavior":{"locationName":"scalingBehavior"},"Sharpness":{"locationName":"sharpness","type":"integer"},"Width":{"locationName":"width","type":"integer"}},"required":["Name"]}}},"required":["VideoDescriptions","AudioDescriptions","OutputGroups","TimecodeConfig"]},"S4h":{"type":"structure","members":{"DestinationRefId":{"locationName":"destinationRefId"}}},"S69":{"type":"structure","members":{"AbsentInputAudioBehavior":{"locationName":"absentInputAudioBehavior"},"Arib":{"locationName":"arib"},"AribCaptionsPid":{"locationName":"aribCaptionsPid"},"AribCaptionsPidControl":{"locationName":"aribCaptionsPidControl"},"AudioBufferModel":{"locationName":"audioBufferModel"},"AudioFramesPerPes":{"locationName":"audioFramesPerPes","type":"integer"},"AudioPids":{"locationName":"audioPids"},"AudioStreamType":{"locationName":"audioStreamType"},"Bitrate":{"locationName":"bitrate","type":"integer"},"BufferModel":{"locationName":"bufferModel"},"CcDescriptor":{"locationName":"ccDescriptor"},"DvbNitSettings":{"locationName":"dvbNitSettings","type":"structure","members":{"NetworkId":{"locationName":"networkId","type":"integer"},"NetworkName":{"locationName":"networkName"},"RepInterval":{"locationName":"repInterval","type":"integer"}},"required":["NetworkName","NetworkId"]},"DvbSdtSettings":{"locationName":"dvbSdtSettings","type":"structure","members":{"OutputSdt":{"locationName":"outputSdt"},"RepInterval":{"locationName":"repInterval","type":"integer"},"ServiceName":{"locationName":"serviceName"},"ServiceProviderName":{"locationName":"serviceProviderName"}}},"DvbSubPids":{"locationName":"dvbSubPids"},"DvbTdtSettings":{"locationName":"dvbTdtSettings","type":"structure","members":{"RepInterval":{"locationName":"repInterval","type":"integer"}}},"DvbTeletextPid":{"locationName":"dvbTeletextPid"},"Ebif":{"locationName":"ebif"},"EbpAudioInterval":{"locationName":"ebpAudioInterval"},"EbpLookaheadMs":{"locationName":"ebpLookaheadMs","type":"integer"},"EbpPlacement":{"locationName":"ebpPlacement"},"EcmPid":{"locationName":"ecmPid"},"EsRateInPes":{"locationName":"esRateInPes"},"EtvPlatformPid":{"locationName":"etvPlatformPid"},"EtvSignalPid":{"locationName":"etvSignalPid"},"FragmentTime":{"locationName":"fragmentTime","type":"double"},"Klv":{"locationName":"klv"},"KlvDataPids":{"locationName":"klvDataPids"},"NullPacketBitrate":{"locationName":"nullPacketBitrate","type":"double"},"PatInterval":{"locationName":"patInterval","type":"integer"},"PcrControl":{"locationName":"pcrControl"},"PcrPeriod":{"locationName":"pcrPeriod","type":"integer"},"PcrPid":{"locationName":"pcrPid"},"PmtInterval":{"locationName":"pmtInterval","type":"integer"},"PmtPid":{"locationName":"pmtPid"},"ProgramNum":{"locationName":"programNum","type":"integer"},"RateMode":{"locationName":"rateMode"},"Scte27Pids":{"locationName":"scte27Pids"},"Scte35Control":{"locationName":"scte35Control"},"Scte35Pid":{"locationName":"scte35Pid"},"SegmentationMarkers":{"locationName":"segmentationMarkers"},"SegmentationStyle":{"locationName":"segmentationStyle"},"SegmentationTime":{"locationName":"segmentationTime","type":"double"},"TimedMetadataBehavior":{"locationName":"timedMetadataBehavior"},"TimedMetadataPid":{"locationName":"timedMetadataPid"},"TransportStreamId":{"locationName":"transportStreamId","type":"integer"},"VideoPid":{"locationName":"videoPid"}}},"S8n":{"type":"list","member":{"type":"structure","members":{"InputAttachmentName":{"locationName":"inputAttachmentName"},"InputId":{"locationName":"inputId"},"InputSettings":{"locationName":"inputSettings","type":"structure","members":{"AudioSelectors":{"locationName":"audioSelectors","type":"list","member":{"type":"structure","members":{"Name":{"locationName":"name"},"SelectorSettings":{"locationName":"selectorSettings","type":"structure","members":{"AudioLanguageSelection":{"locationName":"audioLanguageSelection","type":"structure","members":{"LanguageCode":{"locationName":"languageCode"},"LanguageSelectionPolicy":{"locationName":"languageSelectionPolicy"}},"required":["LanguageCode"]},"AudioPidSelection":{"locationName":"audioPidSelection","type":"structure","members":{"Pid":{"locationName":"pid","type":"integer"}},"required":["Pid"]}}}},"required":["Name"]}},"CaptionSelectors":{"locationName":"captionSelectors","type":"list","member":{"type":"structure","members":{"LanguageCode":{"locationName":"languageCode"},"Name":{"locationName":"name"},"SelectorSettings":{"locationName":"selectorSettings","type":"structure","members":{"AribSourceSettings":{"locationName":"aribSourceSettings","type":"structure","members":{}},"DvbSubSourceSettings":{"locationName":"dvbSubSourceSettings","type":"structure","members":{"Pid":{"locationName":"pid","type":"integer"}}},"EmbeddedSourceSettings":{"locationName":"embeddedSourceSettings","type":"structure","members":{"Convert608To708":{"locationName":"convert608To708"},"Scte20Detection":{"locationName":"scte20Detection"},"Source608ChannelNumber":{"locationName":"source608ChannelNumber","type":"integer"},"Source608TrackNumber":{"locationName":"source608TrackNumber","type":"integer"}}},"Scte20SourceSettings":{"locationName":"scte20SourceSettings","type":"structure","members":{"Convert608To708":{"locationName":"convert608To708"},"Source608ChannelNumber":{"locationName":"source608ChannelNumber","type":"integer"}}},"Scte27SourceSettings":{"locationName":"scte27SourceSettings","type":"structure","members":{"Pid":{"locationName":"pid","type":"integer"}}},"TeletextSourceSettings":{"locationName":"teletextSourceSettings","type":"structure","members":{"PageNumber":{"locationName":"pageNumber"}}}}}},"required":["Name"]}},"DeblockFilter":{"locationName":"deblockFilter"},"DenoiseFilter":{"locationName":"denoiseFilter"},"FilterStrength":{"locationName":"filterStrength","type":"integer"},"InputFilter":{"locationName":"inputFilter"},"NetworkInputSettings":{"locationName":"networkInputSettings","type":"structure","members":{"HlsInputSettings":{"locationName":"hlsInputSettings","type":"structure","members":{"Bandwidth":{"locationName":"bandwidth","type":"integer"},"BufferSegments":{"locationName":"bufferSegments","type":"integer"},"Retries":{"locationName":"retries","type":"integer"},"RetryInterval":{"locationName":"retryInterval","type":"integer"}}},"ServerValidation":{"locationName":"serverValidation"}}},"SourceEndBehavior":{"locationName":"sourceEndBehavior"},"VideoSelector":{"locationName":"videoSelector","type":"structure","members":{"ColorSpace":{"locationName":"colorSpace"},"ColorSpaceUsage":{"locationName":"colorSpaceUsage"},"SelectorSettings":{"locationName":"selectorSettings","type":"structure","members":{"VideoSelectorPid":{"locationName":"videoSelectorPid","type":"structure","members":{"Pid":{"locationName":"pid","type":"integer"}}},"VideoSelectorProgramId":{"locationName":"videoSelectorProgramId","type":"structure","members":{"ProgramId":{"locationName":"programId","type":"integer"}}}}}}}}}}}},"S9n":{"type":"structure","members":{"Codec":{"locationName":"codec"},"MaximumBitrate":{"locationName":"maximumBitrate"},"Resolution":{"locationName":"resolution"}}},"S9t":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Destinations":{"shape":"S16","locationName":"destinations"},"EgressEndpoints":{"shape":"S9u","locationName":"egressEndpoints"},"EncoderSettings":{"shape":"S1a","locationName":"encoderSettings"},"Id":{"locationName":"id"},"InputAttachments":{"shape":"S8n","locationName":"inputAttachments"},"InputSpecification":{"shape":"S9n","locationName":"inputSpecification"},"LogLevel":{"locationName":"logLevel"},"Name":{"locationName":"name"},"PipelinesRunningCount":{"locationName":"pipelinesRunningCount","type":"integer"},"RoleArn":{"locationName":"roleArn"},"State":{"locationName":"state"}}},"S9u":{"type":"list","member":{"type":"structure","members":{"SourceIp":{"locationName":"sourceIp"}}}},"S9y":{"type":"list","member":{"type":"structure","members":{"StreamName":{"locationName":"streamName"}}}},"Sa0":{"type":"list","member":{"type":"structure","members":{"PasswordParam":{"locationName":"passwordParam"},"Url":{"locationName":"url"},"Username":{"locationName":"username"}}}},"Sa4":{"type":"structure","members":{"Arn":{"locationName":"arn"},"AttachedChannels":{"shape":"S11","locationName":"attachedChannels"},"Destinations":{"shape":"Sa5","locationName":"destinations"},"Id":{"locationName":"id"},"Name":{"locationName":"name"},"SecurityGroups":{"shape":"S11","locationName":"securityGroups"},"Sources":{"shape":"Sa7","locationName":"sources"},"State":{"locationName":"state"},"Type":{"locationName":"type"}}},"Sa5":{"type":"list","member":{"type":"structure","members":{"Ip":{"locationName":"ip"},"Port":{"locationName":"port"},"Url":{"locationName":"url"}}}},"Sa7":{"type":"list","member":{"type":"structure","members":{"PasswordParam":{"locationName":"passwordParam"},"Url":{"locationName":"url"},"Username":{"locationName":"username"}}}},"Sab":{"type":"list","member":{"type":"structure","members":{"Cidr":{"locationName":"cidr"}}}},"Sae":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Id":{"locationName":"id"},"Inputs":{"shape":"S11","locationName":"inputs"},"State":{"locationName":"state"},"WhitelistRules":{"shape":"Sag","locationName":"whitelistRules"}}},"Sag":{"type":"list","member":{"type":"structure","members":{"Cidr":{"locationName":"cidr"}}}},"Sas":{"type":"structure","members":{"Codec":{"locationName":"codec"},"MaximumBitrate":{"locationName":"maximumBitrate"},"MaximumFramerate":{"locationName":"maximumFramerate"},"Resolution":{"locationName":"resolution"},"ResourceType":{"locationName":"resourceType"},"SpecialFeature":{"locationName":"specialFeature"},"VideoQuality":{"locationName":"videoQuality"}}},"Sbv":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Count":{"locationName":"count","type":"integer"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"DurationUnits":{"locationName":"durationUnits"},"End":{"locationName":"end"},"FixedPrice":{"locationName":"fixedPrice","type":"double"},"Name":{"locationName":"name"},"OfferingDescription":{"locationName":"offeringDescription"},"OfferingId":{"locationName":"offeringId"},"OfferingType":{"locationName":"offeringType"},"Region":{"locationName":"region"},"ReservationId":{"locationName":"reservationId"},"ResourceSpecification":{"shape":"Sas","locationName":"resourceSpecification"},"Start":{"locationName":"start"},"State":{"locationName":"state"},"UsagePrice":{"locationName":"usagePrice","type":"double"}}}}}
 
 /***/ }),
 /* 445 */
@@ -39571,7 +40186,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 551 */
 /***/ (function(module, exports) {
 
-	module.exports = {"version":"2.0","metadata":{"apiVersion":"2018-01-12","endpointPrefix":"dlm","jsonVersion":"1.1","protocol":"rest-json","serviceAbbreviation":"Amazon DLM","serviceFullName":"Amazon Data Lifecycle Manager","serviceId":"DLM","signatureVersion":"v4","signingName":"dlm","uid":"dlm-2018-01-12"},"operations":{"CreateLifecyclePolicy":{"http":{"requestUri":"/policies"},"input":{"type":"structure","required":["ExecutionRoleArn","Description","State","PolicyDetails"],"members":{"ExecutionRoleArn":{},"Description":{},"State":{},"PolicyDetails":{"shape":"S5"}}},"output":{"type":"structure","members":{"PolicyId":{}}}},"DeleteLifecyclePolicy":{"http":{"method":"DELETE","requestUri":"/policies/{policyId}/"},"input":{"type":"structure","required":["PolicyId"],"members":{"PolicyId":{"location":"uri","locationName":"policyId"}}},"output":{"type":"structure","members":{}}},"GetLifecyclePolicies":{"http":{"method":"GET","requestUri":"/policies"},"input":{"type":"structure","members":{"PolicyIds":{"location":"querystring","locationName":"policyIds","type":"list","member":{}},"State":{"location":"querystring","locationName":"state"},"ResourceTypes":{"shape":"S6","location":"querystring","locationName":"resourceTypes"},"TargetTags":{"location":"querystring","locationName":"targetTags","type":"list","member":{}},"TagsToAdd":{"location":"querystring","locationName":"tagsToAdd","type":"list","member":{}}}},"output":{"type":"structure","members":{"Policies":{"type":"list","member":{"type":"structure","members":{"PolicyId":{},"Description":{},"State":{}}}}}}},"GetLifecyclePolicy":{"http":{"method":"GET","requestUri":"/policies/{policyId}/"},"input":{"type":"structure","required":["PolicyId"],"members":{"PolicyId":{"location":"uri","locationName":"policyId"}}},"output":{"type":"structure","members":{"Policy":{"type":"structure","members":{"PolicyId":{},"Description":{},"State":{},"ExecutionRoleArn":{},"DateCreated":{"type":"timestamp"},"DateModified":{"type":"timestamp"},"PolicyDetails":{"shape":"S5"}}}}}},"UpdateLifecyclePolicy":{"http":{"method":"PATCH","requestUri":"/policies/{policyId}"},"input":{"type":"structure","required":["PolicyId"],"members":{"PolicyId":{"location":"uri","locationName":"policyId"},"ExecutionRoleArn":{},"State":{},"Description":{},"PolicyDetails":{"shape":"S5"}}},"output":{"type":"structure","members":{}}}},"shapes":{"S5":{"type":"structure","members":{"ResourceTypes":{"shape":"S6"},"TargetTags":{"type":"list","member":{"shape":"S9"}},"Schedules":{"type":"list","member":{"type":"structure","members":{"Name":{},"TagsToAdd":{"type":"list","member":{"shape":"S9"}},"CreateRule":{"type":"structure","required":["Interval","IntervalUnit"],"members":{"Interval":{"type":"integer"},"IntervalUnit":{},"Times":{"type":"list","member":{}}}},"RetainRule":{"type":"structure","required":["Count"],"members":{"Count":{"type":"integer"}}}}}}}},"S6":{"type":"list","member":{}},"S9":{"type":"structure","required":["Key","Value"],"members":{"Key":{},"Value":{}}}}}
+	module.exports = {"version":"2.0","metadata":{"apiVersion":"2018-01-12","endpointPrefix":"dlm","jsonVersion":"1.1","protocol":"rest-json","serviceAbbreviation":"Amazon DLM","serviceFullName":"Amazon Data Lifecycle Manager","serviceId":"DLM","signatureVersion":"v4","signingName":"dlm","uid":"dlm-2018-01-12"},"operations":{"CreateLifecyclePolicy":{"http":{"requestUri":"/policies"},"input":{"type":"structure","required":["ExecutionRoleArn","Description","State","PolicyDetails"],"members":{"ExecutionRoleArn":{},"Description":{},"State":{},"PolicyDetails":{"shape":"S5"}}},"output":{"type":"structure","members":{"PolicyId":{}}}},"DeleteLifecyclePolicy":{"http":{"method":"DELETE","requestUri":"/policies/{policyId}/"},"input":{"type":"structure","required":["PolicyId"],"members":{"PolicyId":{"location":"uri","locationName":"policyId"}}},"output":{"type":"structure","members":{}}},"GetLifecyclePolicies":{"http":{"method":"GET","requestUri":"/policies"},"input":{"type":"structure","members":{"PolicyIds":{"location":"querystring","locationName":"policyIds","type":"list","member":{}},"State":{"location":"querystring","locationName":"state"},"ResourceTypes":{"shape":"S6","location":"querystring","locationName":"resourceTypes"},"TargetTags":{"location":"querystring","locationName":"targetTags","type":"list","member":{}},"TagsToAdd":{"location":"querystring","locationName":"tagsToAdd","type":"list","member":{}}}},"output":{"type":"structure","members":{"Policies":{"type":"list","member":{"type":"structure","members":{"PolicyId":{},"Description":{},"State":{}}}}}}},"GetLifecyclePolicy":{"http":{"method":"GET","requestUri":"/policies/{policyId}/"},"input":{"type":"structure","required":["PolicyId"],"members":{"PolicyId":{"location":"uri","locationName":"policyId"}}},"output":{"type":"structure","members":{"Policy":{"type":"structure","members":{"PolicyId":{},"Description":{},"State":{},"ExecutionRoleArn":{},"DateCreated":{"type":"timestamp"},"DateModified":{"type":"timestamp"},"PolicyDetails":{"shape":"S5"}}}}}},"UpdateLifecyclePolicy":{"http":{"method":"PATCH","requestUri":"/policies/{policyId}"},"input":{"type":"structure","required":["PolicyId"],"members":{"PolicyId":{"location":"uri","locationName":"policyId"},"ExecutionRoleArn":{},"State":{},"Description":{},"PolicyDetails":{"shape":"S5"}}},"output":{"type":"structure","members":{}}}},"shapes":{"S5":{"type":"structure","members":{"ResourceTypes":{"shape":"S6"},"TargetTags":{"type":"list","member":{"shape":"S9"}},"Schedules":{"type":"list","member":{"type":"structure","members":{"Name":{},"CopyTags":{"type":"boolean"},"TagsToAdd":{"type":"list","member":{"shape":"S9"}},"CreateRule":{"type":"structure","required":["Interval","IntervalUnit"],"members":{"Interval":{"type":"integer"},"IntervalUnit":{},"Times":{"type":"list","member":{}}}},"RetainRule":{"type":"structure","required":["Count"],"members":{"Count":{"type":"integer"}}}}}}}},"S6":{"type":"list","member":{}},"S9":{"type":"structure","required":["Key","Value"],"members":{"Key":{},"Value":{}}}}}
 
 /***/ }),
 /* 552 */

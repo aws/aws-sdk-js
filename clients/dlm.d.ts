@@ -53,6 +53,7 @@ declare class DLM extends Service {
   updateLifecyclePolicy(callback?: (err: AWSError, data: DLM.Types.UpdateLifecyclePolicyResponse) => void): Request<DLM.Types.UpdateLifecyclePolicyResponse, AWSError>;
 }
 declare namespace DLM {
+  export type CopyTags = boolean;
   export type Count = number;
   export interface CreateLifecyclePolicyRequest {
     /**
@@ -219,6 +220,7 @@ declare namespace DLM {
      * The name of the schedule.
      */
     Name?: ScheduleName;
+    CopyTags?: CopyTags;
     /**
      * The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
      */

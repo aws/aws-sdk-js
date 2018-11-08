@@ -3779,6 +3779,34 @@
         "Time"
       ]
     },
+    "FollowModeScheduleActionStartSettings": {
+      "type": "structure",
+      "members": {
+        "FollowPoint": {
+          "shape": "FollowPoint",
+          "locationName": "followPoint",
+          "documentation": "Identifies whether this action starts relative to the start or relative to the end of the reference action."
+        },
+        "ReferenceActionName": {
+          "shape": "__string",
+          "locationName": "referenceActionName",
+          "documentation": "The action name of another action that this one refers to."
+        }
+      },
+      "documentation": "Settings to specify if an action follows another.",
+      "required": [
+        "ReferenceActionName",
+        "FollowPoint"
+      ]
+    },
+    "FollowPoint": {
+      "type": "string",
+      "documentation": "Follow reference point.",
+      "enum": [
+        "END",
+        "START"
+      ]
+    },
     "GlobalConfiguration": {
       "type": "structure",
       "members": {
@@ -3790,7 +3818,7 @@
         "InputEndAction": {
           "shape": "GlobalConfigurationInputEndAction",
           "locationName": "inputEndAction",
-          "documentation": "Indicates the action to take when the input completes (e.g. end-of-file). Options include looping on the input (via \"switchAndLoopInputs\") or transcoding black / color / slate images per the \"Input Loss Behavior\" configuration (via \"none\")."
+          "documentation": "Indicates the action to take when the current input completes (e.g. end-of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input.  When \"none\" is configured the encoder will transcode either black, a solid color, or a user specified slate images per the \"Input Loss Behavior\" configuration until the next input switch occurs (which is controlled through the Channel Schedule API)."
         },
         "InputLossBehavior": {
           "shape": "InputLossBehavior",
@@ -4802,6 +4830,11 @@
     "InputAttachment": {
       "type": "structure",
       "members": {
+        "InputAttachmentName": {
+          "shape": "__string",
+          "locationName": "inputAttachmentName",
+          "documentation": "User-specified name for the attachment. This is required if the user wants to use this input in an input switch action."
+        },
         "InputId": {
           "shape": "__string",
           "locationName": "inputId",
@@ -5181,6 +5214,20 @@
       ],
       "documentation": "Placeholder documentation for InputState"
     },
+    "InputSwitchScheduleActionSettings": {
+      "type": "structure",
+      "members": {
+        "InputAttachmentNameReference": {
+          "shape": "__string",
+          "locationName": "inputAttachmentNameReference",
+          "documentation": "The name of the input attachment that should be switched to by this action."
+        }
+      },
+      "documentation": "Settings for the action to switch an input.",
+      "required": [
+        "InputAttachmentNameReference"
+      ]
+    },
     "InputType": {
       "type": "string",
       "enum": [
@@ -5188,7 +5235,8 @@
         "RTP_PUSH",
         "RTMP_PUSH",
         "RTMP_PULL",
-        "URL_PULL"
+        "URL_PULL",
+        "MP4_FILE"
       ],
       "documentation": "Placeholder documentation for InputType"
     },
@@ -6784,6 +6832,11 @@
     "ScheduleActionSettings": {
       "type": "structure",
       "members": {
+        "InputSwitchSettings": {
+          "shape": "InputSwitchScheduleActionSettings",
+          "locationName": "inputSwitchSettings",
+          "documentation": "Settings to switch an input"
+        },
         "Scte35ReturnToNetworkSettings": {
           "shape": "Scte35ReturnToNetworkScheduleActionSettings",
           "locationName": "scte35ReturnToNetworkSettings",
@@ -6819,6 +6872,11 @@
           "shape": "FixedModeScheduleActionStartSettings",
           "locationName": "fixedModeScheduleActionStartSettings",
           "documentation": "Holds the start time for the action."
+        },
+        "FollowModeScheduleActionStartSettings": {
+          "shape": "FollowModeScheduleActionStartSettings",
+          "locationName": "followModeScheduleActionStartSettings",
+          "documentation": "Specifies an action to follow for scheduling this action."
         }
       },
       "documentation": "Settings to specify the start time for an action."

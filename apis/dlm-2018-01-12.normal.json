@@ -146,6 +146,9 @@
     }
   },
   "shapes": {
+    "CopyTags": {
+      "type": "boolean"
+    },
     "Count": {
       "type": "integer",
       "max": 1000,
@@ -438,6 +441,9 @@
         "Name": {
           "shape": "ScheduleName",
           "documentation": "<p>The name of the schedule.</p>"
+        },
+        "CopyTags": {
+          "shape": "CopyTags"
         },
         "TagsToAdd": {
           "shape": "TagsToAddList",

@@ -1575,13 +1575,24 @@ one destination per packager.
      */
     Time: __string;
   }
+  export interface FollowModeScheduleActionStartSettings {
+    /**
+     * Identifies whether this action starts relative to the start or relative to the end of the reference action.
+     */
+    FollowPoint: FollowPoint;
+    /**
+     * The action name of another action that this one refers to.
+     */
+    ReferenceActionName: __string;
+  }
+  export type FollowPoint = "END"|"START"|string;
   export interface GlobalConfiguration {
     /**
      * Value to set the initial audio gain for the Live Event.
      */
     InitialAudioGain?: __integerMinNegative60Max60;
     /**
-     * Indicates the action to take when the input completes (e.g. end-of-file). Options include looping on the input (via "switchAndLoopInputs") or transcoding black / color / slate images per the "Input Loss Behavior" configuration (via "none").
+     * Indicates the action to take when the current input completes (e.g. end-of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input.  When "none" is configured the encoder will transcode either black, a solid color, or a user specified slate images per the "Input Loss Behavior" configuration until the next input switch occurs (which is controlled through the Channel Schedule API).
      */
     InputEndAction?: GlobalConfigurationInputEndAction;
     /**
@@ -2115,6 +2126,10 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
   }
   export interface InputAttachment {
     /**
+     * User-specified name for the attachment. This is required if the user wants to use this input in an input switch action.
+     */
+    InputAttachmentName?: __string;
+    /**
      * The ID of the input
      */
     InputId?: __string;
@@ -2317,7 +2332,13 @@ pulled from.
     Resolution?: InputResolution;
   }
   export type InputState = "CREATING"|"DETACHED"|"ATTACHED"|"DELETING"|"DELETED"|string;
-  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|string;
+  export interface InputSwitchScheduleActionSettings {
+    /**
+     * The name of the input attachment that should be switched to by this action.
+     */
+    InputAttachmentNameReference: __string;
+  }
+  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|string;
   export interface InputWhitelistRule {
     /**
      * The IPv4 CIDR that's whitelisted.
@@ -3190,6 +3211,10 @@ Valid values: 1, 2, 4, 6, 8
   }
   export interface ScheduleActionSettings {
     /**
+     * Settings to switch an input
+     */
+    InputSwitchSettings?: InputSwitchScheduleActionSettings;
+    /**
      * Settings for SCTE-35 return_to_network message
      */
     Scte35ReturnToNetworkSettings?: Scte35ReturnToNetworkScheduleActionSettings;
@@ -3215,6 +3240,10 @@ Valid values: 1, 2, 4, 6, 8
      * Holds the start time for the action.
      */
     FixedModeScheduleActionStartSettings?: FixedModeScheduleActionStartSettings;
+    /**
+     * Specifies an action to follow for scheduling this action.
+     */
+    FollowModeScheduleActionStartSettings?: FollowModeScheduleActionStartSettings;
   }
   export type Scte20Convert608To708 = "DISABLED"|"UPCONVERT"|string;
   export interface Scte20PlusEmbeddedDestinationSettings {
