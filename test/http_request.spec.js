@@ -65,6 +65,22 @@
         return expect(request.search()).to.equal('mno=hjk');
       });
     });
+    describe('updateEndpoint', function() {
+      it('update request endpoint and path', function() {
+        request.updateEndpoint('https://another.com:5678/path/service?foo=3&foo.options=5');
+        expect(request.search()).to.equal('foo=3&foo.options=5');
+        expect(request.pathname()).to.equal('/path/service');
+        expect(request.path).to.equal('/path/service?foo=3&foo.options=5');
+        expect(request.endpoint.port).to.equal(5678);
+        expect(request.endpoint).to.include({
+          port: 5678,
+          hostname: 'another.com',
+          host: 'another.com:5678',
+          protocol: 'https:',
+          href: 'https://another.com:5678/path/service?foo=3&foo.options=5'
+        })
+      })
+    })
     describe('getUserAgentHeaderName', function() {
       it('provides the correct header for browser environments', function() {
         helpers.spyOn(AWS.util, 'isBrowser').andReturn(true);
