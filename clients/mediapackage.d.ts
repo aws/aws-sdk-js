@@ -771,6 +771,13 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   }
   export interface SpekeKeyProvider {
     /**
+     * An Amazon Resource Name (ARN) of a Certificate Manager certificate
+that MediaPackage will use for enforcing secure end-to-end data
+transfer with the key provider service.
+
+     */
+    CertificateArn?: __string;
+    /**
      * The resource ID to include in key requests.
      */
     ResourceId: __string;

@@ -1450,6 +1450,11 @@
     "SpekeKeyProvider": {
       "documentation": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
       "members": {
+        "CertificateArn": {
+          "documentation": "An Amazon Resource Name (ARN) of a Certificate Manager certificate\nthat MediaPackage will use for enforcing secure end-to-end data\ntransfer with the key provider service.\n",
+          "locationName": "certificateArn",
+          "shape": "__string"
+        },
         "ResourceId": {
           "documentation": "The resource ID to include in key requests.",
           "locationName": "resourceId",
