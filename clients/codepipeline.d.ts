@@ -269,6 +269,7 @@ declare class CodePipeline extends Service {
   updatePipeline(callback?: (err: AWSError, data: CodePipeline.Types.UpdatePipelineOutput) => void): Request<CodePipeline.Types.UpdatePipelineOutput, AWSError>;
 }
 declare namespace CodePipeline {
+  export type AWSRegionName = string;
   export interface AWSSessionCredentials {
     /**
      * The access key for the session.
@@ -399,6 +400,10 @@ declare namespace CodePipeline {
      * The ARN of the IAM service role that will perform the declared action. This is assumed through the roleArn for the pipeline.
      */
     roleArn?: RoleArn;
+    /**
+     * The action declaration's AWS Region, such as us-east-1.
+     */
+    region?: AWSRegionName;
   }
   export interface ActionExecution {
     /**
@@ -632,6 +637,7 @@ declare namespace CodePipeline {
     encryptionKey?: EncryptionKey;
   }
   export type ArtifactStoreLocation = string;
+  export type ArtifactStoreMap = {[key: string]: ArtifactStore};
   export type ArtifactStoreType = "S3"|string;
   export interface BlockerDeclaration {
     /**
@@ -647,6 +653,7 @@ declare namespace CodePipeline {
   export type BlockerType = "Schedule"|string;
   export type Boolean = boolean;
   export type ClientId = string;
+  export type ClientRequestToken = string;
   export type ClientToken = string;
   export type Code = string;
   export type ContinuationToken = string;
@@ -1161,7 +1168,11 @@ declare namespace CodePipeline {
     /**
      * Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline. 
      */
-    artifactStore: ArtifactStore;
+    artifactStore?: ArtifactStore;
+    /**
+     * A mapping of artifactStore objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline. You can only use either artifactStore or artifactStores, not both. If you create a cross-region action in your pipeline, you must use artifactStores.
+     */
+    artifactStores?: ArtifactStoreMap;
     /**
      * The stage in which to perform the action.
      */
@@ -1212,6 +1223,9 @@ declare namespace CodePipeline {
      * The date and time of the last change to the pipeline execution, in timestamp format.
      */
     lastUpdateTime?: Timestamp;
+    /**
+     * A list of the source artifact revisions that initiated a pipeline execution.
+     */
     sourceRevisions?: SourceRevisionList;
   }
   export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
@@ -1471,9 +1485,21 @@ declare namespace CodePipeline {
   export type SecretAccessKey = string;
   export type SessionToken = string;
   export interface SourceRevision {
+    /**
+     * The name of the action that processed the revision to the source artifact.
+     */
     actionName: ActionName;
+    /**
+     * The system-generated unique ID that identifies the revision number of the artifact.
+     */
     revisionId?: Revision;
+    /**
+     * Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a codepipeline-artifact-revision-summary key specified in the object metadata.
+     */
     revisionSummary?: RevisionSummary;
+    /**
+     * The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.
+     */
     revisionUrl?: Url;
   }
   export type SourceRevisionList = SourceRevision[];
@@ -1537,6 +1563,10 @@ declare namespace CodePipeline {
      * The name of the pipeline to start.
      */
     name: PipelineName;
+    /**
+     * The system-generated unique ID used to identify a unique execution request.
+     */
+    clientRequestToken?: ClientRequestToken;
   }
   export interface StartPipelineExecutionOutput {
     /**
@@ -1641,7 +1671,13 @@ declare namespace CodePipeline {
   export type Version = string;
   export type WebhookArn = string;
   export interface WebhookAuthConfiguration {
+    /**
+     * The property used to configure acceptance of webhooks within a specific IP range. For IP, only the AllowedIPRange property must be set, and this property must be set to a valid CIDR range.
+     */
     AllowedIPRange?: WebhookAuthConfigurationAllowedIPRange;
+    /**
+     * The property used to configure GitHub authentication. For GITHUB_HMAC, only the SecretToken property must be set.
+     */
     SecretToken?: WebhookAuthConfigurationSecretToken;
   }
   export type WebhookAuthConfigurationAllowedIPRange = string;

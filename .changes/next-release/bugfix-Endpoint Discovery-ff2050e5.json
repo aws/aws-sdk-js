@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Endpoint Discovery",
-  "description": "Not to inspect environmental variables in browsers"
-}

@@ -110,6 +110,14 @@ declare class RDS extends Service {
    */
   createDBCluster(callback?: (err: AWSError, data: RDS.Types.CreateDBClusterResult) => void): Request<RDS.Types.CreateDBClusterResult, AWSError>;
   /**
+   * Creates a new custom endpoint and associates it with an Amazon Aurora DB cluster.
+   */
+  createDBClusterEndpoint(params: RDS.Types.CreateDBClusterEndpointMessage, callback?: (err: AWSError, data: RDS.Types.DBClusterEndpoint) => void): Request<RDS.Types.DBClusterEndpoint, AWSError>;
+  /**
+   * Creates a new custom endpoint and associates it with an Amazon Aurora DB cluster.
+   */
+  createDBClusterEndpoint(callback?: (err: AWSError, data: RDS.Types.DBClusterEndpoint) => void): Request<RDS.Types.DBClusterEndpoint, AWSError>;
+  /**
    * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.  A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter group, you need to associate it with your DB cluster using ModifyDBCluster. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon RDS console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified.  For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
    */
   createDBClusterParameterGroup(params: RDS.Types.CreateDBClusterParameterGroupMessage, callback?: (err: AWSError, data: RDS.Types.CreateDBClusterParameterGroupResult) => void): Request<RDS.Types.CreateDBClusterParameterGroupResult, AWSError>;
@@ -197,6 +205,14 @@ declare class RDS extends Service {
    * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.  For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
    */
   deleteDBCluster(callback?: (err: AWSError, data: RDS.Types.DeleteDBClusterResult) => void): Request<RDS.Types.DeleteDBClusterResult, AWSError>;
+  /**
+   * Deletes a custom endpoint and removes it from an Amazon Aurora DB cluster.
+   */
+  deleteDBClusterEndpoint(params: RDS.Types.DeleteDBClusterEndpointMessage, callback?: (err: AWSError, data: RDS.Types.DBClusterEndpoint) => void): Request<RDS.Types.DBClusterEndpoint, AWSError>;
+  /**
+   * Deletes a custom endpoint and removes it from an Amazon Aurora DB cluster.
+   */
+  deleteDBClusterEndpoint(callback?: (err: AWSError, data: RDS.Types.DBClusterEndpoint) => void): Request<RDS.Types.DBClusterEndpoint, AWSError>;
   /**
    * Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can't be associated with any DB clusters. For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
    */
@@ -293,6 +309,14 @@ declare class RDS extends Service {
    * Returns information about backtracks for a DB cluster. For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
    */
   describeDBClusterBacktracks(callback?: (err: AWSError, data: RDS.Types.DBClusterBacktrackMessage) => void): Request<RDS.Types.DBClusterBacktrackMessage, AWSError>;
+  /**
+   * Returns information about endpoints for an Amazon Aurora DB cluster.
+   */
+  describeDBClusterEndpoints(params: RDS.Types.DescribeDBClusterEndpointsMessage, callback?: (err: AWSError, data: RDS.Types.DBClusterEndpointMessage) => void): Request<RDS.Types.DBClusterEndpointMessage, AWSError>;
+  /**
+   * Returns information about endpoints for an Amazon Aurora DB cluster.
+   */
+  describeDBClusterEndpoints(callback?: (err: AWSError, data: RDS.Types.DBClusterEndpointMessage) => void): Request<RDS.Types.DBClusterEndpointMessage, AWSError>;
   /**
    *  Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list will contain only the description of the specified DB cluster parameter group.  For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
    */
@@ -549,6 +573,14 @@ declare class RDS extends Service {
    * Modify a setting for an Amazon Aurora DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
    */
   modifyDBCluster(callback?: (err: AWSError, data: RDS.Types.ModifyDBClusterResult) => void): Request<RDS.Types.ModifyDBClusterResult, AWSError>;
+  /**
+   * Modifies the properties of an endpoint in an Amazon Aurora DB cluster.
+   */
+  modifyDBClusterEndpoint(params: RDS.Types.ModifyDBClusterEndpointMessage, callback?: (err: AWSError, data: RDS.Types.DBClusterEndpoint) => void): Request<RDS.Types.DBClusterEndpoint, AWSError>;
+  /**
+   * Modifies the properties of an endpoint in an Amazon Aurora DB cluster.
+   */
+  modifyDBClusterEndpoint(callback?: (err: AWSError, data: RDS.Types.DBClusterEndpoint) => void): Request<RDS.Types.DBClusterEndpoint, AWSError>;
   /**
    *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.  For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon RDS console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
@@ -1134,6 +1166,28 @@ declare namespace RDS {
   export interface CopyOptionGroupResult {
     OptionGroup?: OptionGroup;
   }
+  export interface CreateDBClusterEndpointMessage {
+    /**
+     * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier: String;
+    /**
+     * The identifier to use for the new endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier: String;
+    /**
+     * The type of the endpoint. One of: READER, ANY. 
+     */
+    EndpointType: String;
+    /**
+     * List of DB instance identifiers that are part of the custom endpoint group.
+     */
+    StaticMembers?: StringList;
+    /**
+     * List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+     */
+    ExcludedMembers?: StringList;
+  }
   export interface CreateDBClusterMessage {
     /**
      * A list of EC2 Availability Zones that instances in the DB cluster can be created in. For information on AWS Regions and Availability Zones, see Choosing the Regions and Availability Zones in the Amazon Aurora User Guide. 
@@ -1293,7 +1347,7 @@ declare namespace RDS {
      */
     DBInstanceIdentifier: String;
     /**
-     * The amount of storage (in gibibytes) to allocate for the DB instance. Type: Integer  Amazon Aurora  Not applicable. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.  MySQL  Constraints to the amount of storage for each storage type are the following:    General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.   Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.   Magnetic storage (standard): Must be an integer from 5 to 3072.    MariaDB  Constraints to the amount of storage for each storage type are the following:    General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.   Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.   Magnetic storage (standard): Must be an integer from 5 to 3072.    PostgreSQL  Constraints to the amount of storage for each storage type are the following:    General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.   Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.   Magnetic storage (standard): Must be an integer from 5 to 3072.    Oracle  Constraints to the amount of storage for each storage type are the following:    General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.   Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.   Magnetic storage (standard): Must be an integer from 10 to 3072.    SQL Server  Constraints to the amount of storage for each storage type are the following:    General Purpose (SSD) storage (gp2):   Enterprise and Standard editions: Must be an integer from 200 to 16384.   Web and Express editions: Must be an integer from 20 to 16384.     Provisioned IOPS storage (io1):   Enterprise and Standard editions: Must be an integer from 200 to 16384.   Web and Express editions: Must be an integer from 100 to 16384.     Magnetic storage (standard):   Enterprise and Standard editions: Must be an integer from 200 to 1024.   Web and Express editions: Must be an integer from 20 to 1024.    
+     * The amount of storage (in gibibytes) to allocate for the DB instance. Type: Integer  Amazon Aurora  Not applicable. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.  MySQL  Constraints to the amount of storage for each storage type are the following:    General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.   Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.   Magnetic storage (standard): Must be an integer from 5 to 3072.    MariaDB  Constraints to the amount of storage for each storage type are the following:    General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.   Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.   Magnetic storage (standard): Must be an integer from 5 to 3072.    PostgreSQL  Constraints to the amount of storage for each storage type are the following:    General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.   Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.   Magnetic storage (standard): Must be an integer from 5 to 3072.    Oracle  Constraints to the amount of storage for each storage type are the following:    General Purpose (SSD) storage (gp2): Must be an integer from 20 to 32768.   Provisioned IOPS storage (io1): Must be an integer from 100 to 32768.   Magnetic storage (standard): Must be an integer from 10 to 3072.    SQL Server  Constraints to the amount of storage for each storage type are the following:    General Purpose (SSD) storage (gp2):   Enterprise and Standard editions: Must be an integer from 200 to 16384.   Web and Express editions: Must be an integer from 20 to 16384.     Provisioned IOPS storage (io1):   Enterprise and Standard editions: Must be an integer from 200 to 16384.   Web and Express editions: Must be an integer from 100 to 16384.     Magnetic storage (standard):   Enterprise and Standard editions: Must be an integer from 200 to 1024.   Web and Express editions: Must be an integer from 20 to 1024.    
      */
     AllocatedStorage?: IntegerOptional;
     /**
@@ -1468,7 +1522,7 @@ declare namespace RDS {
      */
     DBInstanceIdentifier: String;
     /**
-     * The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas. Constraints:   Must be the identifier of an existing MySQL, MariaDB, or PostgreSQL DB instance.   Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6.   Can specify a DB instance that is a PostgreSQL DB instance only if the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region replication).   The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.   If the source DB instance is in the same AWS Region as the Read Replica, specify a valid DB instance identifier.   If the source DB instance is in a different AWS Region than the Read Replica, specify a valid DB instance ARN. For more information, go to  Constructing an ARN for Amazon RDS in the Amazon RDS User Guide.  
+     * The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas. Constraints:   Must be the identifier of an existing MySQL, MariaDB, or PostgreSQL DB instance.   Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6 or later.   Can specify a DB instance that is a PostgreSQL DB instance only if the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region replication).   The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.   If the source DB instance is in the same AWS Region as the Read Replica, specify a valid DB instance identifier.   If the source DB instance is in a different AWS Region than the Read Replica, specify a valid DB instance ARN. For more information, go to  Constructing an ARN for Amazon RDS in the Amazon RDS User Guide.  
      */
     SourceDBInstanceIdentifier: String;
     /**
@@ -1533,7 +1587,7 @@ declare namespace RDS {
      */
     PreSignedUrl?: String;
     /**
-     * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. You can enable IAM database authentication for the following database engines   For MySQL 5.6, minor version 5.6.34 or higher   For MySQL 5.7, minor version 5.7.16 or higher   Aurora 5.6 or higher.   Default: false 
+     * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. You can enable IAM database authentication for the following database engines   For MySQL 5.6, minor version 5.6.34 or higher   For MySQL 5.7, minor version 5.7.16 or higher   Aurora MySQL 5.6 or higher   Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
@@ -1745,6 +1799,10 @@ declare namespace RDS {
      */
     ReaderEndpoint?: String;
     /**
+     * Identifies all custom endpoints associated with the cluster.
+     */
+    CustomEndpoints?: StringList;
+    /**
      * Specifies whether the DB cluster has instances in multiple Availability Zones.
      */
     MultiAZ?: Boolean;
@@ -1917,6 +1975,59 @@ declare namespace RDS {
      * The timeout action of a call to ModifyCurrentDBClusterCapacity, either ForceApplyCapacityChange or RollbackCapacityChange.
      */
     TimeoutAction?: String;
+  }
+  export interface DBClusterEndpoint {
+    /**
+     * The identifier associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier?: String;
+    /**
+     * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.
+     */
+    DBClusterEndpointResourceIdentifier?: String;
+    /**
+     * The DNS address of the endpoint.
+     */
+    Endpoint?: String;
+    /**
+     * The current status of the endpoint. One of: creating, available, deleting, modifying.
+     */
+    Status?: String;
+    /**
+     * The type of the endpoint. One of: READER, WRITER, CUSTOM.
+     */
+    EndpointType?: String;
+    /**
+     * The type associated with a custom endpoint. One of: READER, ANY.
+     */
+    CustomEndpointType?: String;
+    /**
+     * List of DB instance identifiers that are part of the custom endpoint group.
+     */
+    StaticMembers?: StringList;
+    /**
+     * List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+     */
+    ExcludedMembers?: StringList;
+    /**
+     * The Amazon Resource Name (ARN) for the endpoint.
+     */
+    DBClusterEndpointArn?: String;
+  }
+  export type DBClusterEndpointList = DBClusterEndpoint[];
+  export interface DBClusterEndpointMessage {
+    /**
+     *  An optional pagination token provided by a previous DescribeDBClusterEndpoints request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * Contains the details of the endpoints associated with the cluster and matching any filter conditions.
+     */
+    DBClusterEndpoints?: DBClusterEndpointList;
   }
   export type DBClusterList = DBCluster[];
   export interface DBClusterMember {
@@ -2739,6 +2850,12 @@ declare namespace RDS {
     DBSubnetGroups?: DBSubnetGroups;
   }
   export type DBSubnetGroups = DBSubnetGroup[];
+  export interface DeleteDBClusterEndpointMessage {
+    /**
+     * The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier: String;
+  }
   export interface DeleteDBClusterMessage {
     /**
      * The DB cluster identifier for the DB cluster to be deleted. This parameter isn't case-sensitive. Constraints:   Must match an existing DBClusterIdentifier.  
@@ -2869,6 +2986,28 @@ declare namespace RDS {
     MaxRecords?: IntegerOptional;
     /**
      *  An optional pagination token provided by a previous DescribeDBClusterBacktracks request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeDBClusterEndpointsMessage {
+    /**
+     * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * The identifier of the endpoint to describe. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier?: String;
+    /**
+     * A set of name-value pairs that define which endpoints to include in the output. The filters are specified as name-value pairs, in the format Name=endpoint_type,Values=endpoint_type1,endpoint_type2,.... Name can be one of: db-cluster-endpoint-type, db-cluster-endpoint-custom-type, db-cluster-endpoint-id, db-cluster-endpoint-status. Values for the  db-cluster-endpoint-type filter can be one or more of: reader, writer, custom. Values for the db-cluster-endpoint-custom-type filter can be one or more of: reader, any. Values for the db-cluster-endpoint-status filter can be one or more of: available, creating, deleting, modifying. 
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     *  An optional pagination token provided by a previous DescribeDBClusterEndpoints request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
      */
     Marker?: String;
   }
@@ -3819,6 +3958,24 @@ declare namespace RDS {
      */
     TimeoutAction?: String;
   }
+  export interface ModifyDBClusterEndpointMessage {
+    /**
+     * The identifier of the endpoint to modify. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier: String;
+    /**
+     * The type of the endpoint. One of: READER, ANY. 
+     */
+    EndpointType?: String;
+    /**
+     * List of DB instance identifiers that are part of the custom endpoint group.
+     */
+    StaticMembers?: StringList;
+    /**
+     * List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+     */
+    ExcludedMembers?: StringList;
+  }
   export interface ModifyDBClusterMessage {
     /**
      * The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive. Constraints:   Must match the identifier of an existing DBCluster.  
@@ -3961,7 +4118,7 @@ declare namespace RDS {
      */
     DBParameterGroupName?: String;
     /**
-     * The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups. Changing this parameter can result in an outage if you change from 0 to a non-zero value or from a non-zero value to 0. These changes are applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request. If you change the parameter from one non-zero value to another non-zero value, the change is asynchronously applied as soon as possible.  Amazon Aurora  Not applicable. The retention period for automated backups is managed by the DB cluster. For more information, see ModifyDBCluster. Default: Uses existing setting Constraints:   Must be a value from 0 to 35   Can be specified for a MySQL Read Replica only if the source is running MySQL 5.6   Can be specified for a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5   Can't be set to 0 if the DB instance is a source to Read Replicas  
+     * The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups. Changing this parameter can result in an outage if you change from 0 to a non-zero value or from a non-zero value to 0. These changes are applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request. If you change the parameter from one non-zero value to another non-zero value, the change is asynchronously applied as soon as possible.  Amazon Aurora  Not applicable. The retention period for automated backups is managed by the DB cluster. For more information, see ModifyDBCluster. Default: Uses existing setting Constraints:   Must be a value from 0 to 35   Can be specified for a MySQL Read Replica only if the source is running MySQL 5.6 or later   Can be specified for a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5   Can't be set to 0 if the DB instance is a source to Read Replicas  
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
@@ -5828,6 +5985,7 @@ declare namespace RDS {
     DBInstance?: DBInstance;
   }
   export type String = string;
+  export type StringList = String[];
   export interface Subnet {
     /**
      * Specifies the identifier of the subnet.

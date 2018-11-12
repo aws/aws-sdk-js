@@ -367,6 +367,41 @@
       ],
       "documentation": "<p>Creates a new Amazon Aurora DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL DB instance. For cross-region replication where the DB cluster identified by <code>ReplicationSourceIdentifier</code> is encrypted, you must also specify the <code>PreSignedUrl</code> parameter.</p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>"
     },
+    "CreateDBClusterEndpoint": {
+      "name": "CreateDBClusterEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateDBClusterEndpointMessage"
+      },
+      "output": {
+        "shape": "DBClusterEndpoint",
+        "resultWrapper": "CreateDBClusterEndpointResult"
+      },
+      "errors": [
+        {
+          "shape": "DBClusterEndpointQuotaExceededFault"
+        },
+        {
+          "shape": "DBClusterEndpointAlreadyExistsFault"
+        },
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "DBInstanceNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        }
+      ],
+      "documentation": "<p>Creates a new custom endpoint and associates it with an Amazon Aurora DB cluster.</p>"
+    },
     "CreateDBClusterParameterGroup": {
       "name": "CreateDBClusterParameterGroup",
       "http": {
@@ -770,6 +805,32 @@
       ],
       "documentation": "<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p> <p/> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>"
     },
+    "DeleteDBClusterEndpoint": {
+      "name": "DeleteDBClusterEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteDBClusterEndpointMessage"
+      },
+      "output": {
+        "shape": "DBClusterEndpoint",
+        "resultWrapper": "DeleteDBClusterEndpointResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidDBClusterEndpointStateFault"
+        },
+        {
+          "shape": "DBClusterEndpointNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        }
+      ],
+      "documentation": "<p>Deletes a custom endpoint and removes it from an Amazon Aurora DB cluster.</p>"
+    },
     "DeleteDBClusterParameterGroup": {
       "name": "DeleteDBClusterParameterGroup",
       "http": {
@@ -1026,6 +1087,26 @@
         }
       ],
       "documentation": "<p>Returns information about backtracks for a DB cluster.</p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>"
+    },
+    "DescribeDBClusterEndpoints": {
+      "name": "DescribeDBClusterEndpoints",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDBClusterEndpointsMessage"
+      },
+      "output": {
+        "shape": "DBClusterEndpointMessage",
+        "resultWrapper": "DescribeDBClusterEndpointsResult"
+      },
+      "errors": [
+        {
+          "shape": "DBClusterNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Returns information about endpoints for an Amazon Aurora DB cluster.</p>"
     },
     "DescribeDBClusterParameterGroups": {
       "name": "DescribeDBClusterParameterGroups",
@@ -1680,6 +1761,38 @@
         }
       ],
       "documentation": "<p>Modify a setting for an Amazon Aurora DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>"
+    },
+    "ModifyDBClusterEndpoint": {
+      "name": "ModifyDBClusterEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyDBClusterEndpointMessage"
+      },
+      "output": {
+        "shape": "DBClusterEndpoint",
+        "resultWrapper": "ModifyDBClusterEndpointResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "InvalidDBClusterEndpointStateFault"
+        },
+        {
+          "shape": "DBClusterEndpointNotFoundFault"
+        },
+        {
+          "shape": "DBInstanceNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        }
+      ],
+      "documentation": "<p>Modifies the properties of an endpoint in an Amazon Aurora DB cluster.</p>"
     },
     "ModifyDBClusterParameterGroup": {
       "name": "ModifyDBClusterParameterGroup",
@@ -3283,6 +3396,36 @@
         }
       }
     },
+    "CreateDBClusterEndpointMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterIdentifier",
+        "DBClusterEndpointIdentifier",
+        "EndpointType"
+      ],
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier to use for the new endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "EndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>. </p>"
+        },
+        "StaticMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that are part of the custom endpoint group.</p>"
+        },
+        "ExcludedMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.</p>"
+        }
+      }
+    },
     "CreateDBClusterMessage": {
       "type": "structure",
       "required": [
@@ -3494,7 +3637,7 @@
         },
         "AllocatedStorage": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The amount of storage (in gibibytes) to allocate for the DB instance.</p> <p>Type: Integer</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.</p> <p> <b>MySQL</b> </p> <p>Constraints to the amount of storage for each storage type are the following: </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.</p> </li> <li> <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p> </li> </ul> <p> <b>MariaDB</b> </p> <p>Constraints to the amount of storage for each storage type are the following: </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.</p> </li> <li> <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <p>Constraints to the amount of storage for each storage type are the following: </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.</p> </li> <li> <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p> </li> </ul> <p> <b>Oracle</b> </p> <p>Constraints to the amount of storage for each storage type are the following: </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.</p> </li> <li> <p>Magnetic storage (standard): Must be an integer from 10 to 3072.</p> </li> </ul> <p> <b>SQL Server</b> </p> <p>Constraints to the amount of storage for each storage type are the following: </p> <ul> <li> <p>General Purpose (SSD) storage (gp2):</p> <ul> <li> <p>Enterprise and Standard editions: Must be an integer from 200 to 16384.</p> </li> <li> <p>Web and Express editions: Must be an integer from 20 to 16384.</p> </li> </ul> </li> <li> <p>Provisioned IOPS storage (io1):</p> <ul> <li> <p>Enterprise and Standard editions: Must be an integer from 200 to 16384.</p> </li> <li> <p>Web and Express editions: Must be an integer from 100 to 16384.</p> </li> </ul> </li> <li> <p>Magnetic storage (standard):</p> <ul> <li> <p>Enterprise and Standard editions: Must be an integer from 200 to 1024.</p> </li> <li> <p>Web and Express editions: Must be an integer from 20 to 1024.</p> </li> </ul> </li> </ul>"
+          "documentation": "<p>The amount of storage (in gibibytes) to allocate for the DB instance.</p> <p>Type: Integer</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.</p> <p> <b>MySQL</b> </p> <p>Constraints to the amount of storage for each storage type are the following: </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.</p> </li> <li> <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p> </li> </ul> <p> <b>MariaDB</b> </p> <p>Constraints to the amount of storage for each storage type are the following: </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.</p> </li> <li> <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <p>Constraints to the amount of storage for each storage type are the following: </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from 20 to 16384.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 16384.</p> </li> <li> <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p> </li> </ul> <p> <b>Oracle</b> </p> <p>Constraints to the amount of storage for each storage type are the following: </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from 20 to 32768.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 32768.</p> </li> <li> <p>Magnetic storage (standard): Must be an integer from 10 to 3072.</p> </li> </ul> <p> <b>SQL Server</b> </p> <p>Constraints to the amount of storage for each storage type are the following: </p> <ul> <li> <p>General Purpose (SSD) storage (gp2):</p> <ul> <li> <p>Enterprise and Standard editions: Must be an integer from 200 to 16384.</p> </li> <li> <p>Web and Express editions: Must be an integer from 20 to 16384.</p> </li> </ul> </li> <li> <p>Provisioned IOPS storage (io1):</p> <ul> <li> <p>Enterprise and Standard editions: Must be an integer from 200 to 16384.</p> </li> <li> <p>Web and Express editions: Must be an integer from 100 to 16384.</p> </li> </ul> </li> <li> <p>Magnetic storage (standard):</p> <ul> <li> <p>Enterprise and Standard editions: Must be an integer from 200 to 1024.</p> </li> <li> <p>Web and Express editions: Must be an integer from 20 to 1024.</p> </li> </ul> </li> </ul>"
         },
         "DBInstanceClass": {
           "shape": "String",
@@ -3679,7 +3822,7 @@
         },
         "SourceDBInstanceIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier of an existing MySQL, MariaDB, or PostgreSQL DB instance.</p> </li> <li> <p>Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6.</p> </li> <li> <p>Can specify a DB instance that is a PostgreSQL DB instance only if the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region replication).</p> </li> <li> <p>The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.</p> </li> <li> <p>If the source DB instance is in the same AWS Region as the Read Replica, specify a valid DB instance identifier.</p> </li> <li> <p>If the source DB instance is in a different AWS Region than the Read Replica, specify a valid DB instance ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an ARN for Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p> </li> </ul>"
+          "documentation": "<p>The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier of an existing MySQL, MariaDB, or PostgreSQL DB instance.</p> </li> <li> <p>Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6 or later.</p> </li> <li> <p>Can specify a DB instance that is a PostgreSQL DB instance only if the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region replication).</p> </li> <li> <p>The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.</p> </li> <li> <p>If the source DB instance is in the same AWS Region as the Read Replica, specify a valid DB instance identifier.</p> </li> <li> <p>If the source DB instance is in a different AWS Region than the Read Replica, specify a valid DB instance ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an ARN for Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p> </li> </ul>"
         },
         "DBInstanceClass": {
           "shape": "String",
@@ -3746,7 +3889,7 @@
         },
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
-          "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>You can enable IAM database authentication for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora 5.6 or higher.</p> </li> </ul> <p>Default: <code>false</code> </p>"
+          "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>You can enable IAM database authentication for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora MySQL 5.6 or higher</p> </li> </ul> <p>Default: <code>false</code> </p>"
         },
         "EnablePerformanceInsights": {
           "shape": "BooleanOptional",
@@ -4063,6 +4206,10 @@
           "shape": "String",
           "documentation": "<p>The reader endpoint for the DB cluster. The reader endpoint for a DB cluster load-balances connections across the Aurora Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Aurora distributes the connection requests among the Aurora Replicas in the DB cluster. This functionality can help balance your read workload across multiple Aurora Replicas in your DB cluster. </p> <p>If a failover occurs, and the Aurora Replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Aurora Replicas in the cluster, you can then reconnect to the reader endpoint.</p>"
         },
+        "CustomEndpoints": {
+          "shape": "StringList",
+          "documentation": "<p>Identifies all custom endpoints associated with the cluster.</p>"
+        },
         "MultiAZ": {
           "shape": "Boolean",
           "documentation": "<p>Specifies whether the DB cluster has instances in multiple Availability Zones.</p>"
@@ -4258,6 +4405,72 @@
         "TimeoutAction": {
           "shape": "String",
           "documentation": "<p>The timeout action of a call to <code>ModifyCurrentDBClusterCapacity</code>, either <code>ForceApplyCapacityChange</code> or <code>RollbackCapacityChange</code>.</p>"
+        }
+      }
+    },
+    "DBClusterEndpoint": {
+      "type": "structure",
+      "members": {
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterEndpointResourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.</p>"
+        },
+        "Endpoint": {
+          "shape": "String",
+          "documentation": "<p>The DNS address of the endpoint.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>modifying</code>.</p>"
+        },
+        "EndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>CUSTOM</code>.</p>"
+        },
+        "CustomEndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type associated with a custom endpoint. One of: <code>READER</code>, <code>ANY</code>.</p>"
+        },
+        "StaticMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that are part of the custom endpoint group.</p>"
+        },
+        "ExcludedMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.</p>"
+        },
+        "DBClusterEndpointArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the endpoint.</p>"
+        }
+      },
+      "documentation": "<p>This data type represents the information you need to connect to an Amazon Aurora DB cluster. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <a>CreateDBClusterEndpoint</a> </p> </li> <li> <p> <a>DescribeDBClusterEndpoints</a> </p> </li> <li> <p> <a>ModifyDBClusterEndpoint</a> </p> </li> <li> <p> <a>DeleteDBClusterEndpoint</a> </p> </li> </ul> <p>For the data structure that represents Amazon RDS DB instance endpoints, see <a>Endpoint</a>.</p>"
+    },
+    "DBClusterEndpointList": {
+      "type": "list",
+      "member": {
+        "shape": "DBClusterEndpoint",
+        "locationName": "DBClusterEndpointList"
+      }
+    },
+    "DBClusterEndpointMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous <a>DescribeDBClusterEndpoints</a> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "DBClusterEndpoints": {
+          "shape": "DBClusterEndpointList",
+          "documentation": "<p>Contains the details of the endpoints associated with the cluster and matching any filter conditions.</p>"
         }
       }
     },
@@ -5327,6 +5540,18 @@
         "locationName": "DBSubnetGroup"
       }
     },
+    "DeleteDBClusterEndpointMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterEndpointIdentifier"
+      ],
+      "members": {
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.</p>"
+        }
+      }
+    },
     "DeleteDBClusterMessage": {
       "type": "structure",
       "required": [
@@ -5568,6 +5793,31 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DescribeDBClusterEndpointsMessage": {
+      "type": "structure",
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the endpoint to describe. This parameter is stored as a lowercase string.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>A set of name-value pairs that define which endpoints to include in the output. The filters are specified as name-value pairs, in the format <code>Name=<i>endpoint_type</i>,Values=<i>endpoint_type1</i>,<i>endpoint_type2</i>,...</code>. <code>Name</code> can be one of: <code>db-cluster-endpoint-type</code>, <code>db-cluster-endpoint-custom-type</code>, <code>db-cluster-endpoint-id</code>, <code>db-cluster-endpoint-status</code>. <code>Values</code> for the <code> db-cluster-endpoint-type</code> filter can be one or more of: <code>reader</code>, <code>writer</code>, <code>custom</code>. <code>Values</code> for the <code>db-cluster-endpoint-custom-type</code> filter can be one or more of: <code>reader</code>, <code>any</code>. <code>Values</code> for the <code>db-cluster-endpoint-status</code> filter can be one or more of: <code>available</code>, <code>creating</code>, <code>deleting</code>, <code>modifying</code>. </p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous <a>DescribeDBClusterEndpoints</a> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        }
+      }
     },
     "DescribeDBClusterParameterGroupsMessage": {
       "type": "structure",
@@ -6536,7 +6786,7 @@
           "documentation": "<p>Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.</p>"
         }
       },
-      "documentation": "<p>This data type is used as a response element in the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DeleteDBInstance</a> </p> </li> </ul>"
+      "documentation": "<p>This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DeleteDBInstance</a> </p> </li> </ul> <p>For the data structure that represents Amazon Aurora DB cluster endpoints, see <a>DBClusterEndpoint</a>.</p>"
     },
     "EngineDefaults": {
       "type": "structure",
@@ -6759,7 +7009,7 @@
           "documentation": "<p>One or more filter values. Filter values are case-sensitive.</p>"
         }
       },
-      "documentation": "<p>A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as IDs. The filters supported by a describe operation are documented with the describe operation.</p> <note> <p>Currently, wildcards are not supported in filters.</p> </note> <p>The following actions can be filtered:</p> <ul> <li> <p> <a>DescribeDBClusterBacktracks</a> </p> </li> <li> <p> <a>DescribeDBClusters</a> </p> </li> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DescribePendingMaintenanceActions</a> </p> </li> </ul>"
+      "documentation": "<p>A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as IDs. The filters supported by a describe operation are documented with the describe operation.</p> <note> <p>Currently, wildcards are not supported in filters.</p> </note> <p>The following actions can be filtered:</p> <ul> <li> <p> <a>DescribeDBClusterBacktracks</a> </p> </li> <li> <p> <a>DescribeDBClusterEndpoints</a> </p> </li> <li> <p> <a>DescribeDBClusters</a> </p> </li> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DescribePendingMaintenanceActions</a> </p> </li> </ul>"
     },
     "FilterList": {
       "type": "list",
@@ -6879,6 +7129,30 @@
         "TimeoutAction": {
           "shape": "String",
           "documentation": "<p>The action to take when the timeout is reached, either <code>ForceApplyCapacityChange</code> or <code>RollbackCapacityChange</code>.</p> <p> <code>ForceApplyCapacityChange</code>, the default, sets the capacity to the specified value as soon as possible.</p> <p> <code>RollbackCapacityChange</code> ignores the capacity change if a scaling point is not found in the timeout period.</p>"
+        }
+      }
+    },
+    "ModifyDBClusterEndpointMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterEndpointIdentifier"
+      ],
+      "members": {
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the endpoint to modify. This parameter is stored as a lowercase string.</p>"
+        },
+        "EndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>. </p>"
+        },
+        "StaticMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that are part of the custom endpoint group.</p>"
+        },
+        "ExcludedMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.</p>"
         }
       }
     },
@@ -7063,7 +7337,7 @@
         },
         "BackupRetentionPeriod": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Changing this parameter can result in an outage if you change from 0 to a non-zero value or from a non-zero value to 0. These changes are applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code> for this request. If you change the parameter from one non-zero value to another non-zero value, the change is asynchronously applied as soon as possible.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The retention period for automated backups is managed by the DB cluster. For more information, see <a>ModifyDBCluster</a>.</p> <p>Default: Uses existing setting</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 35</p> </li> <li> <p>Can be specified for a MySQL Read Replica only if the source is running MySQL 5.6</p> </li> <li> <p>Can be specified for a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5</p> </li> <li> <p>Can't be set to 0 if the DB instance is a source to Read Replicas</p> </li> </ul>"
+          "documentation": "<p>The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Changing this parameter can result in an outage if you change from 0 to a non-zero value or from a non-zero value to 0. These changes are applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code> for this request. If you change the parameter from one non-zero value to another non-zero value, the change is asynchronously applied as soon as possible.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The retention period for automated backups is managed by the DB cluster. For more information, see <a>ModifyDBCluster</a>.</p> <p>Default: Uses existing setting</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 35</p> </li> <li> <p>Can be specified for a MySQL Read Replica only if the source is running MySQL 5.6 or later</p> </li> <li> <p>Can be specified for a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5</p> </li> <li> <p>Can't be set to 0 if the DB instance is a source to Read Replicas</p> </li> </ul>"
         },
         "PreferredBackupWindow": {
           "shape": "String",
@@ -9545,6 +9819,12 @@
     },
     "String": {
       "type": "string"
+    },
+    "StringList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
     },
     "Subnet": {
       "type": "structure",

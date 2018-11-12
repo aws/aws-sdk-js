@@ -109,6 +109,14 @@ declare class CloudFormation extends Service {
    */
   describeChangeSet(callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetOutput) => void): Request<CloudFormation.Types.DescribeChangeSetOutput, AWSError>;
   /**
+   * Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information on stack and resource drift, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to initiate a stack drift detection operation. DetectStackDrift returns a StackDriftDetectionId you can use to monitor the progress of the operation using DescribeStackDriftDetectionStatus. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources.
+   */
+  describeStackDriftDetectionStatus(params: CloudFormation.Types.DescribeStackDriftDetectionStatusInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackDriftDetectionStatusOutput) => void): Request<CloudFormation.Types.DescribeStackDriftDetectionStatusOutput, AWSError>;
+  /**
+   * Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information on stack and resource drift, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to initiate a stack drift detection operation. DetectStackDrift returns a StackDriftDetectionId you can use to monitor the progress of the operation using DescribeStackDriftDetectionStatus. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources.
+   */
+  describeStackDriftDetectionStatus(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackDriftDetectionStatusOutput) => void): Request<CloudFormation.Types.DescribeStackDriftDetectionStatusOutput, AWSError>;
+  /**
    * Returns all stack related events for a specified stack in reverse chronological order. For more information about a stack's event history, go to Stacks in the AWS CloudFormation User Guide.  You can list events for stacks that have failed to create or have been deleted by specifying the unique stack identifier (stack ID). 
    */
   describeStackEvents(params: CloudFormation.Types.DescribeStackEventsInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackEventsOutput) => void): Request<CloudFormation.Types.DescribeStackEventsOutput, AWSError>;
@@ -132,6 +140,14 @@ declare class CloudFormation extends Service {
    * Returns a description of the specified resource in the specified stack. For deleted stacks, DescribeStackResource returns resource information for up to 90 days after the stack has been deleted.
    */
   describeStackResource(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackResourceOutput) => void): Request<CloudFormation.Types.DescribeStackResourceOutput, AWSError>;
+  /**
+   * Returns drift information for the resources that have been checked for drift in the specified stack. This includes actual and expected configuration values for resources where AWS CloudFormation detects configuration drift. For a given stack, there will be one StackResourceDrift for each stack resource that has been checked for drift. Resources that have not yet been checked for drift are not included. Resources that do not currently support drift detection are not checked, and so not included. For a list of resources that support drift detection, see Resources that Support Drift Detection. Use DetectStackResourceDrift to detect drift on individual resources, or DetectStackDrift to detect drift on all supported resources for a given stack.
+   */
+  describeStackResourceDrifts(params: CloudFormation.Types.DescribeStackResourceDriftsInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackResourceDriftsOutput) => void): Request<CloudFormation.Types.DescribeStackResourceDriftsOutput, AWSError>;
+  /**
+   * Returns drift information for the resources that have been checked for drift in the specified stack. This includes actual and expected configuration values for resources where AWS CloudFormation detects configuration drift. For a given stack, there will be one StackResourceDrift for each stack resource that has been checked for drift. Resources that have not yet been checked for drift are not included. Resources that do not currently support drift detection are not checked, and so not included. For a list of resources that support drift detection, see Resources that Support Drift Detection. Use DetectStackResourceDrift to detect drift on individual resources, or DetectStackDrift to detect drift on all supported resources for a given stack.
+   */
+  describeStackResourceDrifts(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackResourceDriftsOutput) => void): Request<CloudFormation.Types.DescribeStackResourceDriftsOutput, AWSError>;
   /**
    * Returns AWS resource descriptions for running and deleted stacks. If StackName is specified, all the associated resources that are part of the stack are returned. If PhysicalResourceId is specified, the associated resources of the stack that the resource belongs to are returned.  Only the first 100 resources will be returned. If your stack has more resources than this, you should use ListStackResources instead.  For deleted stacks, DescribeStackResources returns resource information for up to 90 days after the stack has been deleted. You must specify either StackName or PhysicalResourceId, but not both. In addition, you can specify LogicalResourceId to filter the returned result. For more information about resources, the LogicalResourceId and PhysicalResourceId, go to the AWS CloudFormation User Guide.  A ValidationError is returned if you specify both StackName and PhysicalResourceId in the same request. 
    */
@@ -164,6 +180,22 @@ declare class CloudFormation extends Service {
    * Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.  If the stack does not exist, an AmazonCloudFormationException is returned. 
    */
   describeStacks(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
+  /**
+   * Detects whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For each resource in the stack that supports drift detection, AWS CloudFormation compares the actual configuration of the resource with its expected template configuration. Only resource properties explicitly defined in the stack template are checked for drift. A stack is considered to have drifted if one or more of its resources differ from their expected template configurations. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to detect drift on all supported resources for a given stack, or DetectStackResourceDrift to detect drift on individual resources. For a list of stack resources that currently support drift detection, see Resources that Support Drift Detection.  DetectStackDrift can take up to several minutes, depending on the number of resources contained within the stack. Use DescribeStackDriftDetectionStatus to monitor the progress of a detect stack drift operation. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources. When detecting drift on a stack, AWS CloudFormation does not detect drift on any nested stacks belonging to that stack. Perform DetectStackDrift directly on the nested stack itself.
+   */
+  detectStackDrift(params: CloudFormation.Types.DetectStackDriftInput, callback?: (err: AWSError, data: CloudFormation.Types.DetectStackDriftOutput) => void): Request<CloudFormation.Types.DetectStackDriftOutput, AWSError>;
+  /**
+   * Detects whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For each resource in the stack that supports drift detection, AWS CloudFormation compares the actual configuration of the resource with its expected template configuration. Only resource properties explicitly defined in the stack template are checked for drift. A stack is considered to have drifted if one or more of its resources differ from their expected template configurations. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to detect drift on all supported resources for a given stack, or DetectStackResourceDrift to detect drift on individual resources. For a list of stack resources that currently support drift detection, see Resources that Support Drift Detection.  DetectStackDrift can take up to several minutes, depending on the number of resources contained within the stack. Use DescribeStackDriftDetectionStatus to monitor the progress of a detect stack drift operation. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources. When detecting drift on a stack, AWS CloudFormation does not detect drift on any nested stacks belonging to that stack. Perform DetectStackDrift directly on the nested stack itself.
+   */
+  detectStackDrift(callback?: (err: AWSError, data: CloudFormation.Types.DetectStackDriftOutput) => void): Request<CloudFormation.Types.DetectStackDriftOutput, AWSError>;
+  /**
+   * Returns information about whether a resource's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. This information includes actual and expected property values for resources in which AWS CloudFormation detects drift. Only resource properties explicitly defined in the stack template are checked for drift. For more information about stack and resource drift, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackResourceDrift to detect drift on individual resources, or DetectStackDrift to detect drift on all resources in a given stack that support drift detection. Resources that do not currently support drift detection cannot be checked. For a list of resources that support drift detection, see Resources that Support Drift Detection.
+   */
+  detectStackResourceDrift(params: CloudFormation.Types.DetectStackResourceDriftInput, callback?: (err: AWSError, data: CloudFormation.Types.DetectStackResourceDriftOutput) => void): Request<CloudFormation.Types.DetectStackResourceDriftOutput, AWSError>;
+  /**
+   * Returns information about whether a resource's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. This information includes actual and expected property values for resources in which AWS CloudFormation detects drift. Only resource properties explicitly defined in the stack template are checked for drift. For more information about stack and resource drift, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackResourceDrift to detect drift on individual resources, or DetectStackDrift to detect drift on all resources in a given stack that support drift detection. Resources that do not currently support drift detection cannot be checked. For a list of resources that support drift detection, see Resources that Support Drift Detection.
+   */
+  detectStackResourceDrift(callback?: (err: AWSError, data: CloudFormation.Types.DetectStackResourceDriftOutput) => void): Request<CloudFormation.Types.DetectStackResourceDriftOutput, AWSError>;
   /**
    * Returns the estimated monthly cost of a template. The return value is an AWS Simple Monthly Calculator URL with a query string that describes the resources required to run the template.
    */
@@ -410,6 +442,8 @@ declare namespace CloudFormation {
   export type AllowedValue = string;
   export type AllowedValues = AllowedValue[];
   export type Arn = string;
+  export type BoxedInteger = number;
+  export type BoxedMaxResults = number;
   export interface CancelUpdateStackInput {
     /**
      * The name or the unique stack ID that is associated with the stack.
@@ -901,6 +935,42 @@ declare namespace CloudFormation {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeStackDriftDetectionStatusInput {
+    /**
+     * The ID of the drift detection results of this operation.  AWS CloudFormation generates new results, with a new drift detection ID, each time this operation is run. However, the number of drift results AWS CloudFormation retains for any given stack, and for how long, may vary. 
+     */
+    StackDriftDetectionId: StackDriftDetectionId;
+  }
+  export interface DescribeStackDriftDetectionStatusOutput {
+    /**
+     * The ID of the stack.
+     */
+    StackId: StackId;
+    /**
+     * The ID of the drift detection results of this operation.  AWS CloudFormation generates new results, with a new drift detection ID, each time this operation is run. However, the number of reports AWS CloudFormation retains for any given stack, and for how long, may vary.
+     */
+    StackDriftDetectionId: StackDriftDetectionId;
+    /**
+     * Status of the stack's actual configuration compared to its expected configuration.     DRIFTED: The stack differs from its expected template configuration. A stack is considered to have drifted if one or more of its resources have drifted.    NOT_CHECKED: AWS CloudFormation has not checked if the stack differs from its expected template configuration.    IN_SYNC: The stack's actual configuration matches its expected template configuration.    UNKNOWN: This value is reserved for future use.  
+     */
+    StackDriftStatus?: StackDriftStatus;
+    /**
+     * The status of the stack drift detection operation.    DETECTION_COMPLETE: The stack drift detection operation has successfully completed for all resources in the stack that support drift detection. (Resources that do not currently support stack detection remain unchecked.) If you specified logical resource IDs for AWS CloudFormation to use as a filter for the stack drift detection operation, only the resources with those logical IDs are checked for drift.    DETECTION_FAILED: The stack drift detection operation has failed for at least one resource in the stack. Results will be available for resources on which AWS CloudFormation successfully completed drift detection.    DETECTION_IN_PROGRESS: The stack drift detection operation is currently in progress.  
+     */
+    DetectionStatus: StackDriftDetectionStatus;
+    /**
+     * The reason the stack drift detection operation has its current status.
+     */
+    DetectionStatusReason?: StackDriftDetectionStatusReason;
+    /**
+     * Total number of stack resources that have drifted. This is NULL until the drift detection operation reaches a status of DETECTION_COMPLETE. This value will be 0 for stacks whose drift status is IN_SYNC.
+     */
+    DriftedStackResourceCount?: BoxedInteger;
+    /**
+     * Time at which the stack drift detection operation was initiated.
+     */
+    Timestamp: Timestamp;
+  }
   export interface DescribeStackEventsInput {
     /**
      * The name or the unique stack ID that is associated with the stack, which are not always interchangeable:   Running stacks: You can specify either the stack's name or its unique stack ID.   Deleted stacks: You must specify the unique stack ID.   Default: There is no default value.
@@ -940,6 +1010,34 @@ declare namespace CloudFormation {
      * The stack instance that matches the specified request parameters.
      */
     StackInstance?: StackInstance;
+  }
+  export interface DescribeStackResourceDriftsInput {
+    /**
+     * The name of the stack for which you want drift information.
+     */
+    StackName: StackNameOrId;
+    /**
+     * The resource drift status values to use as filters for the resource drift results returned.    DELETED: The resource differs from its expected template configuration in that the resource has been deleted.    MODIFIED: One or more resource properties differ from their expected template values.    IN_SYNC: The resources's actual configuration matches its expected template configuration.    NOT_CHECKED: AWS CloudFormation does not currently return this value.  
+     */
+    StackResourceDriftStatusFilters?: StackResourceDriftStatusFilters;
+    /**
+     * A string that identifies the next page of stack resource drift results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: BoxedMaxResults;
+  }
+  export interface DescribeStackResourceDriftsOutput {
+    /**
+     * Drift information for the resources that have been checked for drift in the specified stack. This includes actual and expected configuration values for resources where AWS CloudFormation detects drift. For a given stack, there will be one StackResourceDrift for each stack resource that has been checked for drift. Resources that have not yet been checked for drift are not included. Resources that do not currently support drift detection are not checked, and so not included. For a list of resources that support drift detection, see Resources that Support Drift Detection.
+     */
+    StackResourceDrifts: StackResourceDrifts;
+    /**
+     * If the request doesn't return all of the remaining results, NextToken is set to a token. To retrieve the next set of results, call DescribeStackResourceDrifts again and assign that token to the request object's NextToken parameter. If the request returns all results, NextToken is set to null.
+     */
+    NextToken?: NextToken;
   }
   export interface DescribeStackResourceInput {
     /**
@@ -1026,6 +1124,39 @@ declare namespace CloudFormation {
     NextToken?: NextToken;
   }
   export type Description = string;
+  export interface DetectStackDriftInput {
+    /**
+     * The name of the stack for which you want to detect drift. 
+     */
+    StackName: StackNameOrId;
+    /**
+     * The logical names of any resources you want to use as filters.
+     */
+    LogicalResourceIds?: LogicalResourceIds;
+  }
+  export interface DetectStackDriftOutput {
+    /**
+     * The ID of the drift detection results of this operation.  AWS CloudFormation generates new results, with a new drift detection ID, each time this operation is run. However, the number of drift results AWS CloudFormation retains for any given stack, and for how long, may vary. 
+     */
+    StackDriftDetectionId: StackDriftDetectionId;
+  }
+  export interface DetectStackResourceDriftInput {
+    /**
+     * The name of the stack to which the resource belongs.
+     */
+    StackName: StackNameOrId;
+    /**
+     * The logical name of the resource for which to return drift information.
+     */
+    LogicalResourceId: LogicalResourceId;
+  }
+  export interface DetectStackResourceDriftOutput {
+    /**
+     * Information about whether the resource's actual configuration has drifted from its expected template configuration, including actual and expected property values and any differences detected.
+     */
+    StackResourceDrift: StackResourceDrift;
+  }
+  export type DifferenceType = "ADD"|"REMOVE"|"NOT_EQUAL"|string;
   export type DisableRollback = boolean;
   export type EnableTerminationProtection = boolean;
   export interface EstimateTemplateCostInput {
@@ -1176,6 +1307,7 @@ declare namespace CloudFormation {
     DeclaredTransforms?: TransformsList;
   }
   export type Imports = StackName[];
+  export type Key = string;
   export type LastUpdatedTime = Date;
   export type LimitName = string;
   export type LimitValue = number;
@@ -1384,6 +1516,7 @@ declare namespace CloudFormation {
     NextToken?: NextToken;
   }
   export type LogicalResourceId = string;
+  export type LogicalResourceIds = LogicalResourceId[];
   export type MaxConcurrentCount = number;
   export type MaxConcurrentPercentage = number;
   export type MaxResults = number;
@@ -1471,7 +1604,40 @@ declare namespace CloudFormation {
   export type ParameterValue = string;
   export type Parameters = Parameter[];
   export type PhysicalResourceId = string;
+  export type PhysicalResourceIdContext = PhysicalResourceIdContextKeyValuePair[];
+  export interface PhysicalResourceIdContextKeyValuePair {
+    /**
+     * The resource context key.
+     */
+    Key: Key;
+    /**
+     * The resource context value.
+     */
+    Value: Value;
+  }
+  export type Properties = string;
+  export interface PropertyDifference {
+    /**
+     * The fully-qualified path to the resource property.
+     */
+    PropertyPath: PropertyPath;
+    /**
+     * The expected property value of the resource property, as defined in the stack template and any values specified as template parameters.
+     */
+    ExpectedValue: PropertyValue;
+    /**
+     * The actual property value of the resource property.
+     */
+    ActualValue: PropertyValue;
+    /**
+     * The type of property difference.    ADD: A value has been added to a resource property that is an array or list data type.    REMOVE: The property has been removed from the current resource configuration.    NOT_EQUAL: The current property value differs from its expected value (as defined in the stack template and any values specified as template parameters).  
+     */
+    DifferenceType: DifferenceType;
+  }
+  export type PropertyDifferences = PropertyDifference[];
   export type PropertyName = string;
+  export type PropertyPath = string;
+  export type PropertyValue = string;
   export type Reason = string;
   export type Region = string;
   export type RegionList = Region[];
@@ -1693,7 +1859,35 @@ declare namespace CloudFormation {
      * For nested stacks--stacks created as resources for another stack--the stack ID of the the top-level stack to which the nested stack ultimately belongs. For more information, see Working with Nested Stacks in the AWS CloudFormation User Guide.
      */
     RootId?: StackId;
+    /**
+     * Information on whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
+     */
+    DriftInformation?: StackDriftInformation;
   }
+  export type StackDriftDetectionId = string;
+  export type StackDriftDetectionStatus = "DETECTION_IN_PROGRESS"|"DETECTION_FAILED"|"DETECTION_COMPLETE"|string;
+  export type StackDriftDetectionStatusReason = string;
+  export interface StackDriftInformation {
+    /**
+     * Status of the stack's actual configuration compared to its expected template configuration.     DRIFTED: The stack differs from its expected template configuration. A stack is considered to have drifted if one or more of its resources have drifted.    NOT_CHECKED: AWS CloudFormation has not checked if the stack differs from its expected template configuration.    IN_SYNC: The stack's actual configuration matches its expected template configuration.    UNKNOWN: This value is reserved for future use.  
+     */
+    StackDriftStatus: StackDriftStatus;
+    /**
+     * Most recent time when a drift detection operation was initiated on the stack, or any of its individual resources that support drift detection.
+     */
+    LastCheckTimestamp?: Timestamp;
+  }
+  export interface StackDriftInformationSummary {
+    /**
+     * Status of the stack's actual configuration compared to its expected template configuration.     DRIFTED: The stack differs from its expected template configuration. A stack is considered to have drifted if one or more of its resources have drifted.    NOT_CHECKED: AWS CloudFormation has not checked if the stack differs from its expected template configuration.    IN_SYNC: The stack's actual configuration matches its expected template configuration.    UNKNOWN: This value is reserved for future use.  
+     */
+    StackDriftStatus: StackDriftStatus;
+    /**
+     * Most recent time when a drift detection operation was initiated on the stack, or any of its individual resources that support drift detection.
+     */
+    LastCheckTimestamp?: Timestamp;
+  }
+  export type StackDriftStatus = "DRIFTED"|"IN_SYNC"|"UNKNOWN"|"NOT_CHECKED"|string;
   export interface StackEvent {
     /**
      * The unique ID name of the instance of the stack.
@@ -1843,6 +2037,10 @@ declare namespace CloudFormation {
      * User defined description associated with the resource.
      */
     Description?: Description;
+    /**
+     * Information about whether the resource's actual configuration differs, or has drifted, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
+     */
+    DriftInformation?: StackResourceDriftInformation;
   }
   export interface StackResourceDetail {
     /**
@@ -1885,7 +2083,76 @@ declare namespace CloudFormation {
      * The content of the Metadata attribute declared for the resource. For more information, see Metadata Attribute in the AWS CloudFormation User Guide.
      */
     Metadata?: Metadata;
+    /**
+     * Information about whether the resource's actual configuration differs, or has drifted, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
+     */
+    DriftInformation?: StackResourceDriftInformation;
   }
+  export interface StackResourceDrift {
+    /**
+     * The ID of the stack.
+     */
+    StackId: StackId;
+    /**
+     * The logical name of the resource specified in the template.
+     */
+    LogicalResourceId: LogicalResourceId;
+    /**
+     * The name or unique identifier that corresponds to a physical instance ID of a resource supported by AWS CloudFormation. 
+     */
+    PhysicalResourceId?: PhysicalResourceId;
+    /**
+     * Context information that enables AWS CloudFormation to uniquely identify a resource. AWS CloudFormation uses context key-value pairs in cases where a resource's logical and physical IDs are not enough to uniquely identify that resource. Each context key-value pair specifies a unique resource that contains the targeted resource.
+     */
+    PhysicalResourceIdContext?: PhysicalResourceIdContext;
+    /**
+     * The type of the resource.
+     */
+    ResourceType: ResourceType;
+    /**
+     * A JSON structure containing the expected property values of the stack resource, as defined in the stack template and any values specified as template parameters.  For resources whose StackResourceDriftStatus is DELETED, this structure will not be present. 
+     */
+    ExpectedProperties?: Properties;
+    /**
+     * A JSON structure containing the actual property values of the stack resource. For resources whose StackResourceDriftStatus is DELETED, this structure will not be present. 
+     */
+    ActualProperties?: Properties;
+    /**
+     * A collection of the resource properties whose actual values differ from their expected values. These will be present only for resources whose StackResourceDriftStatus is MODIFIED. 
+     */
+    PropertyDifferences?: PropertyDifferences;
+    /**
+     * Status of the resource's actual configuration compared to its expected configuration    DELETED: The resource differs from its expected template configuration because the resource has been deleted.    MODIFIED: One or more resource properties differ from their expected values (as defined in the stack template and any values specified as template parameters).    IN_SYNC: The resources's actual configuration matches its expected template configuration.    NOT_CHECKED: AWS CloudFormation does not currently return this value.  
+     */
+    StackResourceDriftStatus: StackResourceDriftStatus;
+    /**
+     * Time at which AWS CloudFormation performed drift detection on the stack resource.
+     */
+    Timestamp: Timestamp;
+  }
+  export interface StackResourceDriftInformation {
+    /**
+     * Status of the resource's actual configuration compared to its expected configuration    DELETED: The resource differs from its expected configuration in that it has been deleted.    MODIFIED: The resource differs from its expected configuration.    NOT_CHECKED: AWS CloudFormation has not checked if the resource differs from its expected configuration. Any resources that do not currently support drift detection have a status of NOT_CHECKED. For more information, see Resources that Support Drift Detection.     IN_SYNC: The resources's actual configuration matches its expected configuration.  
+     */
+    StackResourceDriftStatus: StackResourceDriftStatus;
+    /**
+     * When AWS CloudFormation last checked if the resource had drifted from its expected configuration.
+     */
+    LastCheckTimestamp?: Timestamp;
+  }
+  export interface StackResourceDriftInformationSummary {
+    /**
+     * Status of the resource's actual configuration compared to its expected configuration    DELETED: The resource differs from its expected configuration in that it has been deleted.    MODIFIED: The resource differs from its expected configuration.    NOT_CHECKED: AWS CloudFormation has not checked if the resource differs from its expected configuration. Any resources that do not currently support drift detection have a status of NOT_CHECKED. For more information, see Resources that Support Drift Detection. If you performed an ContinueUpdateRollback operation on a stack, any resources included in ResourcesToSkip will also have a status of NOT_CHECKED. For more information on skipping resources during rollback operations, see Continue Rolling Back an Update in the AWS CloudFormation User Guide.    IN_SYNC: The resources's actual configuration matches its expected configuration.  
+     */
+    StackResourceDriftStatus: StackResourceDriftStatus;
+    /**
+     * When AWS CloudFormation last checked if the resource had drifted from its expected configuration.
+     */
+    LastCheckTimestamp?: Timestamp;
+  }
+  export type StackResourceDriftStatus = "IN_SYNC"|"MODIFIED"|"DELETED"|"NOT_CHECKED"|string;
+  export type StackResourceDriftStatusFilters = StackResourceDriftStatus[];
+  export type StackResourceDrifts = StackResourceDrift[];
   export type StackResourceSummaries = StackResourceSummary[];
   export interface StackResourceSummary {
     /**
@@ -1912,6 +2179,10 @@ declare namespace CloudFormation {
      * Success/failure message associated with the resource.
      */
     ResourceStatusReason?: ResourceStatusReason;
+    /**
+     * Information about whether the resource's actual configuration differs, or has drifted, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
+     */
+    DriftInformation?: StackResourceDriftInformationSummary;
   }
   export type StackResources = StackResource[];
   export interface StackSet {
@@ -2142,6 +2413,10 @@ declare namespace CloudFormation {
      * For nested stacks--stacks created as resources for another stack--the stack ID of the the top-level stack to which the nested stack ultimately belongs. For more information, see Working with Nested Stacks in the AWS CloudFormation User Guide.
      */
     RootId?: StackId;
+    /**
+     * Summarizes information on whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
+     */
+    DriftInformation?: StackDriftInformationSummary;
   }
   export type Stacks = Stack[];
   export type StageList = TemplateStage[];
@@ -2417,6 +2692,7 @@ declare namespace CloudFormation {
      */
     DeclaredTransforms?: TransformsList;
   }
+  export type Value = string;
   export type Version = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.353.0',
+	  VERSION: '2.354.0',
 
 	  /**
 	   * @api private
@@ -6933,6 +6933,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	function isEndpointDiscoveryApplicable(request) {
 	  var service = request.service || {};
 	  if (service.config.endpointDiscoveryEnabled === true) return true;
+
+	  //shared ini file is only available in Node
+	  //not to check env in browser
+	  if (util.isBrowser()) return false;
+
 	  if (Object.prototype.hasOwnProperty.call(process.env, endpointDiscoveryEnabledEnv)) {
 	    if (process.env[endpointDiscoveryEnabledEnv] === '' || process.env[endpointDiscoveryEnabledEnv] === undefined) {
 	      throw util.error(new Error(), {
@@ -6942,8 +6947,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    if (!isFalsy(process.env[endpointDiscoveryEnabledEnv])) return true;
 	  }
-	  //shared ini file is only available in Node
-	  if (util.isBrowser()) return false;
 
 	  var configFile = {};
 	  try {
