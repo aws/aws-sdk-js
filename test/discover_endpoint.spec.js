@@ -714,6 +714,7 @@ describe('endpoint discovery', function() {
     beforeEach(function() {
       env = process.env;
       process.env = {};
+      if (AWS.util.isBrowser()) process.env = null;
       AWS.endpointCache.empty();
     });
     afterEach(function() {
