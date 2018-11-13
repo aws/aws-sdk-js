@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.354.0
+// AWS SDK for JavaScript v2.355.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -106639,6 +106639,21 @@ module.exports={
         }
       }
     },
+    "CancelResize": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ClusterIdentifier"
+        ],
+        "members": {
+          "ClusterIdentifier": {}
+        }
+      },
+      "output": {
+        "shape": "St",
+        "resultWrapper": "CancelResizeResult"
+      }
+    },
     "CopyClusterSnapshot": {
       "input": {
         "type": "structure",
@@ -106679,10 +106694,10 @@ module.exports={
           "MasterUsername": {},
           "MasterUserPassword": {},
           "ClusterSecurityGroups": {
-            "shape": "Sv"
+            "shape": "S13"
           },
           "VpcSecurityGroupIds": {
-            "shape": "Sw"
+            "shape": "S14"
           },
           "ClusterSubnetGroupName": {},
           "AvailabilityZone": {},
@@ -106719,7 +106734,7 @@ module.exports={
           },
           "AdditionalInfo": {},
           "IamRoles": {
-            "shape": "Sz"
+            "shape": "S16"
           },
           "MaintenanceTrackName": {}
         }
@@ -106729,7 +106744,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -106756,7 +106771,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ClusterParameterGroup": {
-            "shape": "S1n"
+            "shape": "S1y"
           }
         }
       }
@@ -106823,7 +106838,7 @@ module.exports={
           "ClusterSubnetGroupName": {},
           "Description": {},
           "SubnetIds": {
-            "shape": "S1t"
+            "shape": "S24"
           },
           "Tags": {
             "shape": "Sg"
@@ -106835,7 +106850,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ClusterSubnetGroup": {
-            "shape": "S1v"
+            "shape": "S26"
           }
         }
       }
@@ -106852,10 +106867,10 @@ module.exports={
           "SnsTopicArn": {},
           "SourceType": {},
           "SourceIds": {
-            "shape": "S22"
+            "shape": "S2d"
           },
           "EventCategories": {
-            "shape": "S23"
+            "shape": "S2e"
           },
           "Severity": {},
           "Enabled": {
@@ -106871,7 +106886,7 @@ module.exports={
         "type": "structure",
         "members": {
           "EventSubscription": {
-            "shape": "S25"
+            "shape": "S2g"
           }
         }
       }
@@ -106894,7 +106909,7 @@ module.exports={
         "type": "structure",
         "members": {
           "HsmClientCertificate": {
-            "shape": "S28"
+            "shape": "S2j"
           }
         }
       }
@@ -106927,7 +106942,7 @@ module.exports={
         "type": "structure",
         "members": {
           "HsmConfiguration": {
-            "shape": "S2b"
+            "shape": "S2m"
           }
         }
       }
@@ -106951,7 +106966,7 @@ module.exports={
         "type": "structure",
         "members": {
           "SnapshotCopyGrant": {
-            "shape": "S2e"
+            "shape": "S2p"
           }
         }
       }
@@ -106990,7 +107005,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -107103,7 +107118,46 @@ module.exports={
         "members": {
           "ResourceName": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
+          }
+        }
+      }
+    },
+    "DescribeAccountAttributes": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "AttributeNames": {
+            "type": "list",
+            "member": {
+              "locationName": "AttributeName"
+            }
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "DescribeAccountAttributesResult",
+        "type": "structure",
+        "members": {
+          "AccountAttributes": {
+            "type": "list",
+            "member": {
+              "locationName": "AccountAttribute",
+              "type": "structure",
+              "members": {
+                "AttributeName": {},
+                "AttributeValues": {
+                  "type": "list",
+                  "member": {
+                    "locationName": "AttributeValueTarget",
+                    "type": "structure",
+                    "members": {
+                      "AttributeValue": {}
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -107165,10 +107219,10 @@ module.exports={
           },
           "Marker": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
           },
           "TagValues": {
-            "shape": "S30"
+            "shape": "S3i"
           }
         }
       },
@@ -107180,7 +107234,7 @@ module.exports={
           "ParameterGroups": {
             "type": "list",
             "member": {
-              "shape": "S1n",
+              "shape": "S1y",
               "locationName": "ClusterParameterGroup"
             }
           }
@@ -107207,7 +107261,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Parameters": {
-            "shape": "S35"
+            "shape": "S3n"
           },
           "Marker": {}
         }
@@ -107223,10 +107277,10 @@ module.exports={
           },
           "Marker": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
           },
           "TagValues": {
-            "shape": "S30"
+            "shape": "S3i"
           }
         }
       },
@@ -107264,10 +107318,10 @@ module.exports={
           "Marker": {},
           "OwnerAccount": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
           },
           "TagValues": {
-            "shape": "S30"
+            "shape": "S3i"
           },
           "ClusterExists": {
             "type": "boolean"
@@ -107299,10 +107353,10 @@ module.exports={
           },
           "Marker": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
           },
           "TagValues": {
-            "shape": "S30"
+            "shape": "S3i"
           }
         }
       },
@@ -107314,7 +107368,7 @@ module.exports={
           "ClusterSubnetGroups": {
             "type": "list",
             "member": {
-              "shape": "S1v",
+              "shape": "S26",
               "locationName": "ClusterSubnetGroup"
             }
           }
@@ -107351,7 +107405,17 @@ module.exports={
                     "type": "structure",
                     "members": {
                       "MaintenanceTrackName": {},
-                      "DatabaseVersion": {}
+                      "DatabaseVersion": {},
+                      "SupportedOperations": {
+                        "type": "list",
+                        "member": {
+                          "locationName": "SupportedOperation",
+                          "type": "structure",
+                          "members": {
+                            "OperationName": {}
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -107404,10 +107468,10 @@ module.exports={
           },
           "Marker": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
           },
           "TagValues": {
-            "shape": "S30"
+            "shape": "S3i"
           }
         }
       },
@@ -107419,7 +107483,7 @@ module.exports={
           "Clusters": {
             "type": "list",
             "member": {
-              "shape": "S11",
+              "shape": "S18",
               "locationName": "Cluster"
             }
           }
@@ -107450,7 +107514,7 @@ module.exports={
               "ParameterGroupFamily": {},
               "Marker": {},
               "Parameters": {
-                "shape": "S35"
+                "shape": "S3n"
               }
             },
             "wrapper": true
@@ -107484,7 +107548,7 @@ module.exports={
                     "members": {
                       "EventId": {},
                       "EventCategories": {
-                        "shape": "S23"
+                        "shape": "S2e"
                       },
                       "EventDescription": {},
                       "Severity": {}
@@ -107509,10 +107573,10 @@ module.exports={
           },
           "Marker": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
           },
           "TagValues": {
-            "shape": "S30"
+            "shape": "S3i"
           }
         }
       },
@@ -107524,7 +107588,7 @@ module.exports={
           "EventSubscriptionsList": {
             "type": "list",
             "member": {
-              "shape": "S25",
+              "shape": "S2g",
               "locationName": "EventSubscription"
             }
           }
@@ -107567,7 +107631,7 @@ module.exports={
                 "SourceType": {},
                 "Message": {},
                 "EventCategories": {
-                  "shape": "S23"
+                  "shape": "S2e"
                 },
                 "Severity": {},
                 "Date": {
@@ -107590,10 +107654,10 @@ module.exports={
           },
           "Marker": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
           },
           "TagValues": {
-            "shape": "S30"
+            "shape": "S3i"
           }
         }
       },
@@ -107605,7 +107669,7 @@ module.exports={
           "HsmClientCertificates": {
             "type": "list",
             "member": {
-              "shape": "S28",
+              "shape": "S2j",
               "locationName": "HsmClientCertificate"
             }
           }
@@ -107622,10 +107686,10 @@ module.exports={
           },
           "Marker": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
           },
           "TagValues": {
-            "shape": "S30"
+            "shape": "S3i"
           }
         }
       },
@@ -107637,7 +107701,7 @@ module.exports={
           "HsmConfigurations": {
             "type": "list",
             "member": {
-              "shape": "S2b",
+              "shape": "S2m",
               "locationName": "HsmConfiguration"
             }
           }
@@ -107655,7 +107719,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S4i",
+        "shape": "S52",
         "resultWrapper": "DescribeLoggingStatusResult"
       }
     },
@@ -107687,7 +107751,7 @@ module.exports={
                 "AvailabilityZones": {
                   "type": "list",
                   "member": {
-                    "shape": "S1y",
+                    "shape": "S29",
                     "locationName": "AvailabilityZone"
                   }
                 }
@@ -107716,7 +107780,7 @@ module.exports={
         "members": {
           "Marker": {},
           "ReservedNodeOfferings": {
-            "shape": "S4q"
+            "shape": "S5a"
           }
         }
       }
@@ -107758,46 +107822,8 @@ module.exports={
         }
       },
       "output": {
-        "resultWrapper": "DescribeResizeResult",
-        "type": "structure",
-        "members": {
-          "TargetNodeType": {},
-          "TargetNumberOfNodes": {
-            "type": "integer"
-          },
-          "TargetClusterType": {},
-          "Status": {},
-          "ImportTablesCompleted": {
-            "type": "list",
-            "member": {}
-          },
-          "ImportTablesInProgress": {
-            "type": "list",
-            "member": {}
-          },
-          "ImportTablesNotStarted": {
-            "type": "list",
-            "member": {}
-          },
-          "AvgResizeRateInMegaBytesPerSecond": {
-            "type": "double"
-          },
-          "TotalResizeDataInMegaBytes": {
-            "type": "long"
-          },
-          "ProgressInMegaBytes": {
-            "type": "long"
-          },
-          "ElapsedTimeInSeconds": {
-            "type": "long"
-          },
-          "EstimatedTimeToCompletionInSeconds": {
-            "type": "long"
-          },
-          "ResizeType": {},
-          "Message": {},
-          "TargetEncryptionType": {}
-        }
+        "shape": "St",
+        "resultWrapper": "DescribeResizeResult"
       }
     },
     "DescribeSnapshotCopyGrants": {
@@ -107810,10 +107836,10 @@ module.exports={
           },
           "Marker": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
           },
           "TagValues": {
-            "shape": "S30"
+            "shape": "S3i"
           }
         }
       },
@@ -107825,7 +107851,7 @@ module.exports={
           "SnapshotCopyGrants": {
             "type": "list",
             "member": {
-              "shape": "S2e",
+              "shape": "S2p",
               "locationName": "SnapshotCopyGrant"
             }
           }
@@ -107851,7 +107877,7 @@ module.exports={
           "TableRestoreStatusDetails": {
             "type": "list",
             "member": {
-              "shape": "S58",
+              "shape": "S5m",
               "locationName": "TableRestoreStatus"
             }
           },
@@ -107870,10 +107896,10 @@ module.exports={
           },
           "Marker": {},
           "TagKeys": {
-            "shape": "S2s"
+            "shape": "S33"
           },
           "TagValues": {
-            "shape": "S30"
+            "shape": "S3i"
           }
         }
       },
@@ -107910,7 +107936,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S4i",
+        "shape": "S52",
         "resultWrapper": "DisableLoggingResult"
       }
     },
@@ -107929,7 +107955,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -107948,7 +107974,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S4i",
+        "shape": "S52",
         "resultWrapper": "EnableLoggingResult"
       }
     },
@@ -107973,7 +107999,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -108038,7 +108064,7 @@ module.exports={
         "members": {
           "Marker": {},
           "ReservedNodeOfferings": {
-            "shape": "S4q"
+            "shape": "S5a"
           }
         }
       }
@@ -108057,10 +108083,10 @@ module.exports={
             "type": "integer"
           },
           "ClusterSecurityGroups": {
-            "shape": "Sv"
+            "shape": "S13"
           },
           "VpcSecurityGroupIds": {
-            "shape": "Sw"
+            "shape": "S14"
           },
           "MasterUserPassword": {},
           "ClusterParameterGroupName": {},
@@ -108094,7 +108120,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -108116,7 +108142,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -108130,10 +108156,10 @@ module.exports={
         "members": {
           "ClusterIdentifier": {},
           "AddIamRoles": {
-            "shape": "Sz"
+            "shape": "S16"
           },
           "RemoveIamRoles": {
-            "shape": "Sz"
+            "shape": "S16"
           }
         }
       },
@@ -108142,7 +108168,40 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
+          }
+        }
+      }
+    },
+    "ModifyClusterMaintenance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ClusterIdentifier"
+        ],
+        "members": {
+          "ClusterIdentifier": {},
+          "DeferMaintenance": {
+            "type": "boolean"
+          },
+          "DeferMaintenanceIdentifier": {},
+          "DeferMaintenanceStartTime": {
+            "type": "timestamp"
+          },
+          "DeferMaintenanceEndTime": {
+            "type": "timestamp"
+          },
+          "DeferMaintenanceDuration": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "ModifyClusterMaintenanceResult",
+        "type": "structure",
+        "members": {
+          "Cluster": {
+            "shape": "S18"
           }
         }
       }
@@ -108157,12 +108216,12 @@ module.exports={
         "members": {
           "ParameterGroupName": {},
           "Parameters": {
-            "shape": "S35"
+            "shape": "S3n"
           }
         }
       },
       "output": {
-        "shape": "S5x",
+        "shape": "S6d",
         "resultWrapper": "ModifyClusterParameterGroupResult"
       }
     },
@@ -108177,7 +108236,7 @@ module.exports={
           "ClusterSubnetGroupName": {},
           "Description": {},
           "SubnetIds": {
-            "shape": "S1t"
+            "shape": "S24"
           }
         }
       },
@@ -108186,7 +108245,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ClusterSubnetGroup": {
-            "shape": "S1v"
+            "shape": "S26"
           }
         }
       }
@@ -108202,10 +108261,10 @@ module.exports={
           "SnsTopicArn": {},
           "SourceType": {},
           "SourceIds": {
-            "shape": "S22"
+            "shape": "S2d"
           },
           "EventCategories": {
-            "shape": "S23"
+            "shape": "S2e"
           },
           "Severity": {},
           "Enabled": {
@@ -108218,7 +108277,7 @@ module.exports={
         "type": "structure",
         "members": {
           "EventSubscription": {
-            "shape": "S25"
+            "shape": "S2g"
           }
         }
       }
@@ -108242,7 +108301,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -108285,7 +108344,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -108302,12 +108361,12 @@ module.exports={
             "type": "boolean"
           },
           "Parameters": {
-            "shape": "S35"
+            "shape": "S3n"
           }
         }
       },
       "output": {
-        "shape": "S5x",
+        "shape": "S6d",
         "resultWrapper": "ResetClusterParameterGroupResult"
       }
     },
@@ -108335,7 +108394,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -108368,10 +108427,10 @@ module.exports={
           "ElasticIp": {},
           "ClusterParameterGroupName": {},
           "ClusterSecurityGroups": {
-            "shape": "Sv"
+            "shape": "S13"
           },
           "VpcSecurityGroupIds": {
-            "shape": "Sw"
+            "shape": "S14"
           },
           "PreferredMaintenanceWindow": {},
           "AutomatedSnapshotRetentionPeriod": {
@@ -108384,7 +108443,7 @@ module.exports={
           },
           "AdditionalInfo": {},
           "IamRoles": {
-            "shape": "Sz"
+            "shape": "S16"
           },
           "MaintenanceTrackName": {}
         }
@@ -108394,7 +108453,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -108425,7 +108484,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TableRestoreStatus": {
-            "shape": "S58"
+            "shape": "S5m"
           }
         }
       }
@@ -108491,7 +108550,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Cluster": {
-            "shape": "S11"
+            "shape": "S18"
           }
         }
       }
@@ -108676,25 +108735,66 @@ module.exports={
       },
       "wrapper": true
     },
-    "Sv": {
+    "St": {
+      "type": "structure",
+      "members": {
+        "TargetNodeType": {},
+        "TargetNumberOfNodes": {
+          "type": "integer"
+        },
+        "TargetClusterType": {},
+        "Status": {},
+        "ImportTablesCompleted": {
+          "type": "list",
+          "member": {}
+        },
+        "ImportTablesInProgress": {
+          "type": "list",
+          "member": {}
+        },
+        "ImportTablesNotStarted": {
+          "type": "list",
+          "member": {}
+        },
+        "AvgResizeRateInMegaBytesPerSecond": {
+          "type": "double"
+        },
+        "TotalResizeDataInMegaBytes": {
+          "type": "long"
+        },
+        "ProgressInMegaBytes": {
+          "type": "long"
+        },
+        "ElapsedTimeInSeconds": {
+          "type": "long"
+        },
+        "EstimatedTimeToCompletionInSeconds": {
+          "type": "long"
+        },
+        "ResizeType": {},
+        "Message": {},
+        "TargetEncryptionType": {}
+      }
+    },
+    "S13": {
       "type": "list",
       "member": {
         "locationName": "ClusterSecurityGroupName"
       }
     },
-    "Sw": {
+    "S14": {
       "type": "list",
       "member": {
         "locationName": "VpcSecurityGroupId"
       }
     },
-    "Sz": {
+    "S16": {
       "type": "list",
       "member": {
         "locationName": "IamRoleArn"
       }
     },
-    "S11": {
+    "S18": {
       "type": "structure",
       "members": {
         "ClusterIdentifier": {},
@@ -108824,6 +108924,27 @@ module.exports={
             }
           }
         },
+        "DataTransferProgress": {
+          "type": "structure",
+          "members": {
+            "Status": {},
+            "CurrentRateInMegaBytesPerSecond": {
+              "type": "double"
+            },
+            "TotalDataInMegaBytes": {
+              "type": "long"
+            },
+            "DataTransferredInMegaBytes": {
+              "type": "long"
+            },
+            "EstimatedTimeToCompletionInSeconds": {
+              "type": "long"
+            },
+            "ElapsedTimeInSeconds": {
+              "type": "long"
+            }
+          }
+        },
         "HsmStatus": {
           "type": "structure",
           "members": {
@@ -108885,11 +109006,36 @@ module.exports={
           "member": {}
         },
         "MaintenanceTrackName": {},
-        "ElasticResizeNumberOfNodeOptions": {}
+        "ElasticResizeNumberOfNodeOptions": {},
+        "DeferredMaintenanceWindows": {
+          "type": "list",
+          "member": {
+            "locationName": "DeferredMaintenanceWindow",
+            "type": "structure",
+            "members": {
+              "DeferMaintenanceIdentifier": {},
+              "DeferMaintenanceStartTime": {
+                "type": "timestamp"
+              },
+              "DeferMaintenanceEndTime": {
+                "type": "timestamp"
+              }
+            }
+          }
+        },
+        "ResizeInfo": {
+          "type": "structure",
+          "members": {
+            "ResizeType": {},
+            "AllowCancelResize": {
+              "type": "boolean"
+            }
+          }
+        }
       },
       "wrapper": true
     },
-    "S1n": {
+    "S1y": {
       "type": "structure",
       "members": {
         "ParameterGroupName": {},
@@ -108901,13 +109047,13 @@ module.exports={
       },
       "wrapper": true
     },
-    "S1t": {
+    "S24": {
       "type": "list",
       "member": {
         "locationName": "SubnetIdentifier"
       }
     },
-    "S1v": {
+    "S26": {
       "type": "structure",
       "members": {
         "ClusterSubnetGroupName": {},
@@ -108922,7 +109068,7 @@ module.exports={
             "members": {
               "SubnetIdentifier": {},
               "SubnetAvailabilityZone": {
-                "shape": "S1y"
+                "shape": "S29"
               },
               "SubnetStatus": {}
             }
@@ -108934,7 +109080,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S1y": {
+    "S29": {
       "type": "structure",
       "members": {
         "Name": {},
@@ -108952,19 +109098,19 @@ module.exports={
       },
       "wrapper": true
     },
-    "S22": {
+    "S2d": {
       "type": "list",
       "member": {
         "locationName": "SourceId"
       }
     },
-    "S23": {
+    "S2e": {
       "type": "list",
       "member": {
         "locationName": "EventCategory"
       }
     },
-    "S25": {
+    "S2g": {
       "type": "structure",
       "members": {
         "CustomerAwsId": {},
@@ -108976,10 +109122,10 @@ module.exports={
         },
         "SourceType": {},
         "SourceIdsList": {
-          "shape": "S22"
+          "shape": "S2d"
         },
         "EventCategoriesList": {
-          "shape": "S23"
+          "shape": "S2e"
         },
         "Severity": {},
         "Enabled": {
@@ -108991,7 +109137,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S28": {
+    "S2j": {
       "type": "structure",
       "members": {
         "HsmClientCertificateIdentifier": {},
@@ -109002,7 +109148,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S2b": {
+    "S2m": {
       "type": "structure",
       "members": {
         "HsmConfigurationIdentifier": {},
@@ -109015,7 +109161,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S2e": {
+    "S2p": {
       "type": "structure",
       "members": {
         "SnapshotCopyGrantName": {},
@@ -109026,19 +109172,19 @@ module.exports={
       },
       "wrapper": true
     },
-    "S2s": {
+    "S33": {
       "type": "list",
       "member": {
         "locationName": "TagKey"
       }
     },
-    "S30": {
+    "S3i": {
       "type": "list",
       "member": {
         "locationName": "TagValue"
       }
     },
-    "S35": {
+    "S3n": {
       "type": "list",
       "member": {
         "locationName": "Parameter",
@@ -109058,7 +109204,7 @@ module.exports={
         }
       }
     },
-    "S4i": {
+    "S52": {
       "type": "structure",
       "members": {
         "LoggingEnabled": {
@@ -109075,7 +109221,7 @@ module.exports={
         "LastFailureMessage": {}
       }
     },
-    "S4q": {
+    "S5a": {
       "type": "list",
       "member": {
         "locationName": "ReservedNodeOffering",
@@ -109102,7 +109248,7 @@ module.exports={
         "wrapper": true
       }
     },
-    "S58": {
+    "S5m": {
       "type": "structure",
       "members": {
         "TableRestoreRequestId": {},
@@ -109128,7 +109274,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S5x": {
+    "S6d": {
       "type": "structure",
       "members": {
         "ParameterGroupName": {},
@@ -139059,7 +139205,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.354.0',
+  VERSION: '2.355.0',
 
   /**
    * @api private
@@ -158976,7 +159122,7 @@ var LRUCache = /** @class */ (function () {
 }());
 exports.LRUCache = LRUCache;
 },{}],371:[function(require,module,exports){
-// AWS SDK for JavaScript v2.354.0
+// AWS SDK for JavaScript v2.355.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

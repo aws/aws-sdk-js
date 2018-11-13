@@ -68,11 +68,11 @@ declare class Chime extends Service {
    */
   getAccountSettings(callback?: (err: AWSError, data: Chime.Types.GetAccountSettingsResponse) => void): Request<Chime.Types.GetAccountSettingsResponse, AWSError>;
   /**
-   * Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN.
+   * Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN. To retrieve user details with an email address instead of a user ID, use the ListUsers action, and then filter by email address.
    */
   getUser(params: Chime.Types.GetUserRequest, callback?: (err: AWSError, data: Chime.Types.GetUserResponse) => void): Request<Chime.Types.GetUserResponse, AWSError>;
   /**
-   * Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN.
+   * Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN. To retrieve user details with an email address instead of a user ID, use the ListUsers action, and then filter by email address.
    */
   getUser(callback?: (err: AWSError, data: Chime.Types.GetUserResponse) => void): Request<Chime.Types.GetUserResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class Chime extends Service {
    */
   listAccounts(callback?: (err: AWSError, data: Chime.Types.ListAccountsResponse) => void): Request<Chime.Types.ListAccountsResponse, AWSError>;
   /**
-   * Lists the users that belong to the specified Amazon Chime account.
+   * Lists the users that belong to the specified Amazon Chime account. You can specify an email address to list only the user that the email address belongs to.
    */
   listUsers(params: Chime.Types.ListUsersRequest, callback?: (err: AWSError, data: Chime.Types.ListUsersResponse) => void): Request<Chime.Types.ListUsersResponse, AWSError>;
   /**
-   * Lists the users that belong to the specified Amazon Chime account.
+   * Lists the users that belong to the specified Amazon Chime account. You can specify an email address to list only the user that the email address belongs to.
    */
   listUsers(callback?: (err: AWSError, data: Chime.Types.ListUsersResponse) => void): Request<Chime.Types.ListUsersResponse, AWSError>;
   /**
@@ -368,6 +368,10 @@ declare namespace Chime {
      * The Amazon Chime account ID.
      */
     AccountId: NonEmptyString;
+    /**
+     * Optional. The user email address used to filter results. Maximum 1.
+     */
+    UserEmail?: EmailAddress;
     /**
      * The maximum number of results to return in a single call. Defaults to 100.
      */

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.354.0-->
+<!--LATEST=2.355.0-->
 <!--ENTRYINSERT-->
+
+## 2.355.0
+* feature: Chime: This release adds support in ListUsers API to filter the list by an email address.
+* feature: Redshift: Amazon Redshift provides the option to defer non-mandatory maintenance updates to a later date.
 
 ## 2.354.0
 * bugfix: Endpoint Discovery: Not to inspect environmental variables in browsers

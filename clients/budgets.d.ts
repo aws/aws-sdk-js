@@ -136,7 +136,7 @@ declare namespace Budgets {
      */
     BudgetLimit?: Spend;
     /**
-     * The cost filters, such as service or region, that are applied to a budget.
+     * The cost filters, such as service or region, that are applied to a budget. AWS Budgets supports the following services as a filter for RI budgets:   Amazon Elastic Compute Cloud - Compute   Amazon Redshift   Amazon Relational Database Service   Amazon ElastiCache   Amazon Elasticsearch Service  
      */
     CostFilters?: CostFilters;
     /**
@@ -373,7 +373,7 @@ declare namespace Budgets {
   }
   export interface DescribeBudgetPerformanceHistoryResponse {
     /**
-     * The history of how often the budget has gone into an ALARM state. For DAILY budgets, the history saves the state of the budget for the last 60 days. For MONTHLY budgets, the history saves the state of the budget for the last 12 months. For QUARTERLY budgets, the history saves the state of the budget for the last four quarters.
+     * The history of how often the budget has gone into an ALARM state. For DAILY budgets, the history saves the state of the budget for the last 60 days. For MONTHLY budgets, the history saves the state of the budget for the current month plus the last 12 months. For QUARTERLY budgets, the history saves the state of the budget for the last four quarters.
      */
     BudgetPerformanceHistory?: BudgetPerformanceHistory;
     NextToken?: GenericString;

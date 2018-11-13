@@ -113,6 +113,35 @@
       ],
       "documentation": "<p>Authorizes the specified AWS customer account to restore the specified snapshot.</p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
+    "CancelResize": {
+      "name": "CancelResize",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelResizeMessage"
+      },
+      "output": {
+        "shape": "ResizeProgressMessage",
+        "resultWrapper": "CancelResizeResult"
+      },
+      "errors": [
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "ResizeNotFoundFault"
+        },
+        {
+          "shape": "InvalidClusterStateFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        }
+      ],
+      "documentation": "<p>Cancels a resize operation.</p>"
+    },
     "CopyClusterSnapshot": {
       "name": "CopyClusterSnapshot",
       "http": {
@@ -725,6 +754,21 @@
       ],
       "documentation": "<p>Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.</p>"
     },
+    "DescribeAccountAttributes": {
+      "name": "DescribeAccountAttributes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeAccountAttributesMessage"
+      },
+      "output": {
+        "shape": "AccountAttributeList",
+        "resultWrapper": "DescribeAccountAttributesResult"
+      },
+      "documentation": "<p>Returns a list of attributes attached to an account</p>"
+    },
     "DescribeClusterDbRevisions": {
       "name": "DescribeClusterDbRevisions",
       "http": {
@@ -741,6 +785,9 @@
       "errors": [
         {
           "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidClusterStateFault"
         }
       ],
       "documentation": "<p>Returns an array of <code>ClusterDbRevision</code> objects.</p>"
@@ -1517,6 +1564,26 @@
       ],
       "documentation": "<p>Modifies the list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>"
     },
+    "ModifyClusterMaintenance": {
+      "name": "ModifyClusterMaintenance",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyClusterMaintenanceMessage"
+      },
+      "output": {
+        "shape": "ModifyClusterMaintenanceResult",
+        "resultWrapper": "ModifyClusterMaintenanceResult"
+      },
+      "errors": [
+        {
+          "shape": "ClusterNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Modifies the maintenance settings of a cluster. For example, you can defer a maintenance window. You can also update or cancel a deferment. </p>"
+    },
     "ModifyClusterParameterGroup": {
       "name": "ModifyClusterParameterGroup",
       "http": {
@@ -1993,6 +2060,29 @@
         }
       }
     },
+    "AccountAttribute": {
+      "type": "structure",
+      "members": {
+        "AttributeName": {
+          "shape": "String",
+          "documentation": "<p>The name of the attribute.</p>"
+        },
+        "AttributeValues": {
+          "shape": "AttributeValueList",
+          "documentation": "<p>A list of attribute values.</p>"
+        }
+      },
+      "documentation": "<p>A name value pair that describes an aspect of an account. </p>"
+    },
+    "AccountAttributeList": {
+      "type": "structure",
+      "members": {
+        "AccountAttributes": {
+          "shape": "AttributeList",
+          "documentation": "<p>A list of attributes assigned to an account.</p>"
+        }
+      }
+    },
     "AccountWithRestoreAccess": {
       "type": "structure",
       "members": {
@@ -2013,6 +2103,37 @@
         "shape": "AccountWithRestoreAccess",
         "locationName": "AccountWithRestoreAccess"
       }
+    },
+    "AttributeList": {
+      "type": "list",
+      "member": {
+        "shape": "AccountAttribute",
+        "locationName": "AccountAttribute"
+      }
+    },
+    "AttributeNameList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "AttributeName"
+      }
+    },
+    "AttributeValueList": {
+      "type": "list",
+      "member": {
+        "shape": "AttributeValueTarget",
+        "locationName": "AttributeValueTarget"
+      }
+    },
+    "AttributeValueTarget": {
+      "type": "structure",
+      "members": {
+        "AttributeValue": {
+          "shape": "String",
+          "documentation": "<p>The value of the attribute.</p>"
+        }
+      },
+      "documentation": "<p>Describes an attribute value.</p>"
     },
     "AuthorizeClusterSecurityGroupIngressMessage": {
       "type": "structure",
@@ -2104,6 +2225,18 @@
     "BooleanOptional": {
       "type": "boolean"
     },
+    "CancelResizeMessage": {
+      "type": "structure",
+      "required": [
+        "ClusterIdentifier"
+      ],
+      "members": {
+        "ClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The unique identifier for the cluster whose resize operation you wish to cancel.</p>"
+        }
+      }
+    },
     "Cluster": {
       "type": "structure",
       "members": {
@@ -2117,7 +2250,7 @@
         },
         "ClusterStatus": {
           "shape": "String",
-          "documentation": "<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>"
+          "documentation": "<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>cancelling-resize</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>"
         },
         "ModifyStatus": {
           "shape": "String",
@@ -2199,6 +2332,9 @@
           "shape": "RestoreStatus",
           "documentation": "<p>A value that describes the status of a cluster restore action. This parameter returns null if the cluster was not created by restoring a snapshot.</p>"
         },
+        "DataTransferProgress": {
+          "shape": "DataTransferProgress"
+        },
         "HsmStatus": {
           "shape": "HsmStatus",
           "documentation": "<p>A value that reports whether the Amazon Redshift cluster has finished applying any hardware security module (HSM) settings changes specified in a modify cluster command.</p> <p>Values: active, applying</p>"
@@ -2250,6 +2386,14 @@
         "ElasticResizeNumberOfNodeOptions": {
           "shape": "String",
           "documentation": "<p>Indicates the number of nodes the cluster can be resized to with the elastic resize method. </p>"
+        },
+        "DeferredMaintenanceWindows": {
+          "shape": "DeferredMaintenanceWindowsList",
+          "documentation": "<p>Describes a group of <code>DeferredMaintenanceWindow</code> objects.</p>"
+        },
+        "ResizeInfo": {
+          "shape": "ResizeInfo",
+          "documentation": "<p>Returns the following:</p> <ul> <li> <p>AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.</p> </li> <li> <p>ResizeType: Returns ClassicResize</p> </li> </ul>"
         }
       },
       "documentation": "<p>Describes a cluster.</p>",
@@ -2997,7 +3141,7 @@
         },
         "EventCategories": {
           "shape": "EventCategoriesList",
-          "documentation": "<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: Configuration, Management, Monitoring, Security</p>"
+          "documentation": "<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security</p>"
         },
         "Severity": {
           "shape": "String",
@@ -3144,6 +3288,36 @@
       },
       "documentation": "<p>Contains the output from the <code>CreateTags</code> action. </p>"
     },
+    "DataTransferProgress": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>Describes the status of the cluster. While the transfer is in progress the status is <code>transferringdata</code>.</p>"
+        },
+        "CurrentRateInMegaBytesPerSecond": {
+          "shape": "DoubleOptional",
+          "documentation": "<p>Describes the data transfer rate in MB's per second.</p>"
+        },
+        "TotalDataInMegaBytes": {
+          "shape": "Long",
+          "documentation": "<p>Describes the total amount of data to be transfered in megabytes.</p>"
+        },
+        "DataTransferredInMegaBytes": {
+          "shape": "Long",
+          "documentation": "<p>Describes the total amount of data that has been transfered in MB's.</p>"
+        },
+        "EstimatedTimeToCompletionInSeconds": {
+          "shape": "LongOptional",
+          "documentation": "<p>Describes the estimated number of seconds remaining to complete the transfer.</p>"
+        },
+        "ElapsedTimeInSeconds": {
+          "shape": "LongOptional",
+          "documentation": "<p>Describes the number of seconds that have elapsed during the data transfer.</p>"
+        }
+      },
+      "documentation": "<p>Describes the status of a cluster while it is in the process of resizing with an incremental resize.</p>"
+    },
     "DbGroupList": {
       "type": "list",
       "member": {
@@ -3169,6 +3343,31 @@
       },
       "documentation": "<p>Describes the default cluster parameters for a parameter group family.</p>",
       "wrapper": true
+    },
+    "DeferredMaintenanceWindow": {
+      "type": "structure",
+      "members": {
+        "DeferMaintenanceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the maintenance window.</p>"
+        },
+        "DeferMaintenanceStartTime": {
+          "shape": "TStamp",
+          "documentation": "<p> A timestamp for the beginning of the time period when we defer maintenance.</p>"
+        },
+        "DeferMaintenanceEndTime": {
+          "shape": "TStamp",
+          "documentation": "<p> A timestamp for the end of the time period when we defer maintenance.</p>"
+        }
+      },
+      "documentation": "<p>Describes a deferred maintenance window</p>"
+    },
+    "DeferredMaintenanceWindowsList": {
+      "type": "list",
+      "member": {
+        "shape": "DeferredMaintenanceWindow",
+        "locationName": "DeferredMaintenanceWindow"
+      }
     },
     "DeleteClusterMessage": {
       "type": "structure",
@@ -3332,6 +3531,15 @@
         }
       },
       "documentation": "<p>Contains the output from the <code>DeleteTags</code> action. </p>"
+    },
+    "DescribeAccountAttributesMessage": {
+      "type": "structure",
+      "members": {
+        "AttributeNames": {
+          "shape": "AttributeNameList",
+          "documentation": "<p>A list of attribute names.</p>"
+        }
+      }
     },
     "DescribeClusterDbRevisionsMessage": {
       "type": "structure",
@@ -4575,6 +4783,46 @@
         }
       }
     },
+    "ModifyClusterMaintenanceMessage": {
+      "type": "structure",
+      "required": [
+        "ClusterIdentifier"
+      ],
+      "members": {
+        "ClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the cluster.</p>"
+        },
+        "DeferMaintenance": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A boolean indicating whether to enable the deferred maintenance window. </p>"
+        },
+        "DeferMaintenanceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the deferred maintenance window.</p>"
+        },
+        "DeferMaintenanceStartTime": {
+          "shape": "TStamp",
+          "documentation": "<p>A timestamp indicating the start time for the deferred maintenance window.</p>"
+        },
+        "DeferMaintenanceEndTime": {
+          "shape": "TStamp",
+          "documentation": "<p>A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.</p>"
+        },
+        "DeferMaintenanceDuration": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 14 days or less.</p>"
+        }
+      }
+    },
+    "ModifyClusterMaintenanceResult": {
+      "type": "structure",
+      "members": {
+        "Cluster": {
+          "shape": "Cluster"
+        }
+      }
+    },
     "ModifyClusterMessage": {
       "type": "structure",
       "required": [
@@ -4748,7 +4996,7 @@
         },
         "EventCategories": {
           "shape": "EventCategoriesList",
-          "documentation": "<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: Configuration, Management, Monitoring, Security</p>"
+          "documentation": "<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security</p>"
         },
         "Severity": {
           "shape": "String",
@@ -5233,6 +5481,20 @@
         }
       }
     },
+    "ResizeInfo": {
+      "type": "structure",
+      "members": {
+        "ResizeType": {
+          "shape": "String",
+          "documentation": "<p>Returns the value <code>ClassicResize</code>.</p>"
+        },
+        "AllowCancelResize": {
+          "shape": "Boolean",
+          "documentation": "<p>A boolean value indicating if the resize operation can be cancelled.</p>"
+        }
+      },
+      "documentation": "<p>Describes a resize operation.</p>"
+    },
     "ResizeProgressMessage": {
       "type": "structure",
       "members": {
@@ -5250,7 +5512,7 @@
         },
         "Status": {
           "shape": "String",
-          "documentation": "<p>The status of the resize operation.</p> <p>Valid Values: <code>NONE</code> | <code>IN_PROGRESS</code> | <code>FAILED</code> | <code>SUCCEEDED</code> </p>"
+          "documentation": "<p>The status of the resize operation.</p> <p>Valid Values: <code>NONE</code> | <code>IN_PROGRESS</code> | <code>FAILED</code> | <code>SUCCEEDED</code> | <code>CANCELLING</code> </p>"
         },
         "ImportTablesCompleted": {
           "shape": "ImportTablesCompleted",
@@ -5850,6 +6112,23 @@
         "locationName": "Subnet"
       }
     },
+    "SupportedOperation": {
+      "type": "structure",
+      "members": {
+        "OperationName": {
+          "shape": "String",
+          "documentation": "<p>A list of the supported operations.</p>"
+        }
+      },
+      "documentation": "<p>Describes the operations that are allowed on a maintenance track.</p>"
+    },
+    "SupportedOperationList": {
+      "type": "list",
+      "member": {
+        "shape": "SupportedOperation",
+        "locationName": "SupportedOperation"
+      }
+    },
     "SupportedPlatform": {
       "type": "structure",
       "members": {
@@ -6068,6 +6347,10 @@
         "DatabaseVersion": {
           "shape": "String",
           "documentation": "<p>The cluster version for the new maintenance track.</p>"
+        },
+        "SupportedOperations": {
+          "shape": "SupportedOperationList",
+          "documentation": "<p>A list of operations supported by the maintenance track.</p>"
         }
       },
       "documentation": "<p>A maintenance track that you can switch the current track to.</p>"

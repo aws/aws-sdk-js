@@ -37,6 +37,14 @@ declare class Redshift extends Service {
    */
   authorizeSnapshotAccess(callback?: (err: AWSError, data: Redshift.Types.AuthorizeSnapshotAccessResult) => void): Request<Redshift.Types.AuthorizeSnapshotAccessResult, AWSError>;
   /**
+   * Cancels a resize operation.
+   */
+  cancelResize(params: Redshift.Types.CancelResizeMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeProgressMessage) => void): Request<Redshift.Types.ResizeProgressMessage, AWSError>;
+  /**
+   * Cancels a resize operation.
+   */
+  cancelResize(callback?: (err: AWSError, data: Redshift.Types.ResizeProgressMessage) => void): Request<Redshift.Types.ResizeProgressMessage, AWSError>;
+  /**
    * Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state. When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
   copyClusterSnapshot(params: Redshift.Types.CopyClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.CopyClusterSnapshotResult) => void): Request<Redshift.Types.CopyClusterSnapshotResult, AWSError>;
@@ -204,6 +212,14 @@ declare class Redshift extends Service {
    * Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Returns a list of attributes attached to an account
+   */
+  describeAccountAttributes(params: Redshift.Types.DescribeAccountAttributesMessage, callback?: (err: AWSError, data: Redshift.Types.AccountAttributeList) => void): Request<Redshift.Types.AccountAttributeList, AWSError>;
+  /**
+   * Returns a list of attributes attached to an account
+   */
+  describeAccountAttributes(callback?: (err: AWSError, data: Redshift.Types.AccountAttributeList) => void): Request<Redshift.Types.AccountAttributeList, AWSError>;
   /**
    * Returns an array of ClusterDbRevision objects.
    */
@@ -461,6 +477,14 @@ declare class Redshift extends Service {
    */
   modifyClusterIamRoles(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterIamRolesResult) => void): Request<Redshift.Types.ModifyClusterIamRolesResult, AWSError>;
   /**
+   * Modifies the maintenance settings of a cluster. For example, you can defer a maintenance window. You can also update or cancel a deferment. 
+   */
+  modifyClusterMaintenance(params: Redshift.Types.ModifyClusterMaintenanceMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterMaintenanceResult) => void): Request<Redshift.Types.ModifyClusterMaintenanceResult, AWSError>;
+  /**
+   * Modifies the maintenance settings of a cluster. For example, you can defer a maintenance window. You can also update or cancel a deferment. 
+   */
+  modifyClusterMaintenance(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterMaintenanceResult) => void): Request<Redshift.Types.ModifyClusterMaintenanceResult, AWSError>;
+  /**
    * Modifies the parameters of a parameter group.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
   modifyClusterParameterGroup(params: Redshift.Types.ModifyClusterParameterGroupMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
@@ -611,6 +635,22 @@ declare namespace Redshift {
   export interface AcceptReservedNodeExchangeOutputMessage {
     ExchangedReservedNode?: ReservedNode;
   }
+  export interface AccountAttribute {
+    /**
+     * The name of the attribute.
+     */
+    AttributeName?: String;
+    /**
+     * A list of attribute values.
+     */
+    AttributeValues?: AttributeValueList;
+  }
+  export interface AccountAttributeList {
+    /**
+     * A list of attributes assigned to an account.
+     */
+    AccountAttributes?: AttributeList;
+  }
   export interface AccountWithRestoreAccess {
     /**
      * The identifier of an AWS customer account authorized to restore a snapshot.
@@ -622,6 +662,15 @@ declare namespace Redshift {
     AccountAlias?: String;
   }
   export type AccountsWithRestoreAccessList = AccountWithRestoreAccess[];
+  export type AttributeList = AccountAttribute[];
+  export type AttributeNameList = String[];
+  export type AttributeValueList = AttributeValueTarget[];
+  export interface AttributeValueTarget {
+    /**
+     * The value of the attribute.
+     */
+    AttributeValue?: String;
+  }
   export interface AuthorizeClusterSecurityGroupIngressMessage {
     /**
      * The name of the security group to which the ingress rule is added.
@@ -670,6 +719,12 @@ declare namespace Redshift {
   export type AvailabilityZoneList = AvailabilityZone[];
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
+  export interface CancelResizeMessage {
+    /**
+     * The unique identifier for the cluster whose resize operation you wish to cancel.
+     */
+    ClusterIdentifier: String;
+  }
   export interface Cluster {
     /**
      * The unique identifier of the cluster.
@@ -680,7 +735,7 @@ declare namespace Redshift {
      */
     NodeType?: String;
     /**
-     *  The current state of the cluster. Possible values are the following:    available     creating     deleting     final-snapshot     hardware-failure     incompatible-hsm     incompatible-network     incompatible-parameters     incompatible-restore     modifying     rebooting     renaming     resizing     rotating-keys     storage-full     updating-hsm   
+     *  The current state of the cluster. Possible values are the following:    available     cancelling-resize     creating     deleting     final-snapshot     hardware-failure     incompatible-hsm     incompatible-network     incompatible-parameters     incompatible-restore     modifying     rebooting     renaming     resizing     rotating-keys     storage-full     updating-hsm   
      */
     ClusterStatus?: String;
     /**
@@ -763,6 +818,7 @@ declare namespace Redshift {
      * A value that describes the status of a cluster restore action. This parameter returns null if the cluster was not created by restoring a snapshot.
      */
     RestoreStatus?: RestoreStatus;
+    DataTransferProgress?: DataTransferProgress;
     /**
      * A value that reports whether the Amazon Redshift cluster has finished applying any hardware security module (HSM) settings changes specified in a modify cluster command. Values: active, applying
      */
@@ -815,6 +871,14 @@ declare namespace Redshift {
      * Indicates the number of nodes the cluster can be resized to with the elastic resize method. 
      */
     ElasticResizeNumberOfNodeOptions?: String;
+    /**
+     * Describes a group of DeferredMaintenanceWindow objects.
+     */
+    DeferredMaintenanceWindows?: DeferredMaintenanceWindowsList;
+    /**
+     * Returns the following:   AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.   ResizeType: Returns ClassicResize  
+     */
+    ResizeInfo?: ResizeInfo;
   }
   export interface ClusterCredentials {
     /**
@@ -1323,7 +1387,7 @@ declare namespace Redshift {
      */
     SourceIds?: SourceIdsList;
     /**
-     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: Configuration, Management, Monitoring, Security
+     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: configuration, management, monitoring, security
      */
     EventCategories?: EventCategoriesList;
     /**
@@ -1415,6 +1479,32 @@ declare namespace Redshift {
      */
     Tags: TagList;
   }
+  export interface DataTransferProgress {
+    /**
+     * Describes the status of the cluster. While the transfer is in progress the status is transferringdata.
+     */
+    Status?: String;
+    /**
+     * Describes the data transfer rate in MB's per second.
+     */
+    CurrentRateInMegaBytesPerSecond?: DoubleOptional;
+    /**
+     * Describes the total amount of data to be transfered in megabytes.
+     */
+    TotalDataInMegaBytes?: Long;
+    /**
+     * Describes the total amount of data that has been transfered in MB's.
+     */
+    DataTransferredInMegaBytes?: Long;
+    /**
+     * Describes the estimated number of seconds remaining to complete the transfer.
+     */
+    EstimatedTimeToCompletionInSeconds?: LongOptional;
+    /**
+     * Describes the number of seconds that have elapsed during the data transfer.
+     */
+    ElapsedTimeInSeconds?: LongOptional;
+  }
   export type DbGroupList = String[];
   export interface DefaultClusterParameters {
     /**
@@ -1430,6 +1520,21 @@ declare namespace Redshift {
      */
     Parameters?: ParametersList;
   }
+  export interface DeferredMaintenanceWindow {
+    /**
+     * A unique identifier for the maintenance window.
+     */
+    DeferMaintenanceIdentifier?: String;
+    /**
+     *  A timestamp for the beginning of the time period when we defer maintenance.
+     */
+    DeferMaintenanceStartTime?: TStamp;
+    /**
+     *  A timestamp for the end of the time period when we defer maintenance.
+     */
+    DeferMaintenanceEndTime?: TStamp;
+  }
+  export type DeferredMaintenanceWindowsList = DeferredMaintenanceWindow[];
   export interface DeleteClusterMessage {
     /**
      * The identifier of the cluster to be deleted. Constraints:   Must contain lowercase characters.   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
@@ -1511,6 +1616,12 @@ declare namespace Redshift {
      * The tag key that you want to delete.
      */
     TagKeys: TagKeyList;
+  }
+  export interface DescribeAccountAttributesMessage {
+    /**
+     * A list of attribute names.
+     */
+    AttributeNames?: AttributeNameList;
   }
   export interface DescribeClusterDbRevisionsMessage {
     /**
@@ -2395,6 +2506,35 @@ declare namespace Redshift {
   export interface ModifyClusterIamRolesResult {
     Cluster?: Cluster;
   }
+  export interface ModifyClusterMaintenanceMessage {
+    /**
+     * A unique identifier for the cluster.
+     */
+    ClusterIdentifier: String;
+    /**
+     * A boolean indicating whether to enable the deferred maintenance window. 
+     */
+    DeferMaintenance?: BooleanOptional;
+    /**
+     * A unique identifier for the deferred maintenance window.
+     */
+    DeferMaintenanceIdentifier?: String;
+    /**
+     * A timestamp indicating the start time for the deferred maintenance window.
+     */
+    DeferMaintenanceStartTime?: TStamp;
+    /**
+     * A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.
+     */
+    DeferMaintenanceEndTime?: TStamp;
+    /**
+     * An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 14 days or less.
+     */
+    DeferMaintenanceDuration?: IntegerOptional;
+  }
+  export interface ModifyClusterMaintenanceResult {
+    Cluster?: Cluster;
+  }
   export interface ModifyClusterMessage {
     /**
      * The unique identifier of the cluster to be modified. Example: examplecluster 
@@ -2529,7 +2669,7 @@ declare namespace Redshift {
      */
     SourceIds?: SourceIdsList;
     /**
-     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: Configuration, Management, Monitoring, Security
+     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: configuration, management, monitoring, security
      */
     EventCategories?: EventCategoriesList;
     /**
@@ -2855,6 +2995,16 @@ declare namespace Redshift {
   export interface ResizeClusterResult {
     Cluster?: Cluster;
   }
+  export interface ResizeInfo {
+    /**
+     * Returns the value ClassicResize.
+     */
+    ResizeType?: String;
+    /**
+     * A boolean value indicating if the resize operation can be cancelled.
+     */
+    AllowCancelResize?: Boolean;
+  }
   export interface ResizeProgressMessage {
     /**
      * The node type that the cluster will have after the resize operation is complete.
@@ -2869,7 +3019,7 @@ declare namespace Redshift {
      */
     TargetClusterType?: String;
     /**
-     * The status of the resize operation. Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED 
+     * The status of the resize operation. Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED | CANCELLING 
      */
     Status?: String;
     /**
@@ -3315,6 +3465,13 @@ declare namespace Redshift {
   }
   export type SubnetIdentifierList = String[];
   export type SubnetList = Subnet[];
+  export interface SupportedOperation {
+    /**
+     * A list of the supported operations.
+     */
+    OperationName?: String;
+  }
+  export type SupportedOperationList = SupportedOperation[];
   export interface SupportedPlatform {
     Name?: String;
   }
@@ -3448,6 +3605,10 @@ declare namespace Redshift {
      * The cluster version for the new maintenance track.
      */
     DatabaseVersion?: String;
+    /**
+     * A list of operations supported by the maintenance track.
+     */
+    SupportedOperations?: SupportedOperationList;
   }
   export type VpcSecurityGroupIdList = String[];
   export interface VpcSecurityGroupMembership {
