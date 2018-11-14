@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.355.0-->
+<!--LATEST=2.356.0-->
 <!--ENTRYINSERT-->
+
+## 2.356.0
+* feature: AutoScaling: EC2 Auto Scaling now allows users to provision and automatically scale instances across purchase options (Spot, On-Demand, and RIs) and instance types in a single Auto Scaling group (ASG).
+* feature: EC2: Amazon EC2 Fleet now supports a new request type "Instant" that you can use to provision capacity synchronously across instance types & purchase models and CreateFleet will return the instances launched in the API response.
+* feature: MediaTailor: AWS Elemental MediaTailor SDK now returns a manifest endpoint prefix for clients to initiate a DASH playback session.
+* feature: ResourceGroups: The AWS Resource Groups service added support for AWS CloudFormation stack-based groups.
+* feature: SNS: Added an optional request parameter, named Attributes, to the Amazon SNS CreateTopic API action. For more information, see the Amazon SNS API Reference (https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html).
+* feature: SageMaker: SageMaker now makes the final set of metrics published from training jobs available in the DescribeTrainingJob results.  Automatic Model Tuning now supports warm start of hyperparameter tuning jobs.  Notebook instances now support a larger number of instance types to include instances from the ml.t3, ml.m5, ml.c4, ml.c5 families.
+* feature: ServiceCatalog: Adds support for Cloudformation StackSets in Service Catalog
 
 ## 2.355.0
 * feature: Chime: This release adds support in ListUsers API to filter the list by an email address.

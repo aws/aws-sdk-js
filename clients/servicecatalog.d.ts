@@ -866,11 +866,11 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:  LAUNCH  Specify the RoleArn property as follows: \"RoleArn\" : \"arn:aws:iam::123456789012:role/LaunchRole\"  NOTIFICATION  Specify the NotificationArns property as follows: \"NotificationArns\" : [\"arn:aws:sns:us-east-1:123456789012:Topic\"]  TEMPLATE  Specify the Rules property. For more information, see Template Constraint Rules.  
+     * The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:  LAUNCH  Specify the RoleArn property as follows:  {"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}  You cannot have both a LAUNCH and a STACKSET constraint. You also cannot have more than one LAUNCH constraint on a product and portfolio.  NOTIFICATION  Specify the NotificationArns property as follows:  {"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}   STACKSET  Specify the Parameters property as follows:  {"Version": "String", "Properties": {"AccountList": [ "String" ], "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole": "String"}}  You cannot have both a LAUNCH and a STACKSET constraint. You also cannot have more than one STACKSET constraint on a product and portfolio. Products with a STACKSET constraint will launch an AWS CloudFormation stack set.  TEMPLATE  Specify the Rules property. For more information, see Template Constraint Rules.  
      */
     Parameters: ConstraintParameters;
     /**
-     * The type of constraint.    LAUNCH     NOTIFICATION     TEMPLATE   
+     * The type of constraint.    LAUNCH     NOTIFICATION     STACKSET     TEMPLATE   
      */
     Type: ConstraintType;
     /**
@@ -1570,6 +1570,10 @@ declare namespace ServiceCatalog {
      * Information about the TagOptions associated with the resource.
      */
     TagOptions?: TagOptionSummaries;
+    /**
+     * An object that contains information about preferences, such as regions and accounts, for the provisioning artifact.
+     */
+    ProvisioningArtifactPreferences?: ProvisioningArtifactPreferences;
   }
   export interface DescribeRecordInput {
     /**
@@ -2472,6 +2476,10 @@ declare namespace ServiceCatalog {
      */
     ProvisioningParameters?: ProvisioningParameters;
     /**
+     * An object that contains information about the provisioning preferences for a stack set.
+     */
+    ProvisioningPreferences?: ProvisioningPreferences;
+    /**
      * One or more tags.
      */
     Tags?: Tags;
@@ -2500,7 +2508,7 @@ declare namespace ServiceCatalog {
      */
     Arn?: ProvisionedProductNameOrArn;
     /**
-     * The type of provisioned product. The supported value is CFN_STACK.
+     * The type of provisioned product. The supported values are CFN_STACK and CFN_STACKSET.
      */
     Type?: ProvisionedProductType;
     /**
@@ -2563,7 +2571,7 @@ declare namespace ServiceCatalog {
      */
     Arn?: ProvisionedProductNameOrArn;
     /**
-     * The type of provisioned product. The supported value is CFN_STACK.
+     * The type of provisioned product. The supported values are CFN_STACK and CFN_STACKSET.
      */
     Type?: ProvisionedProductType;
     /**
@@ -2781,6 +2789,16 @@ declare namespace ServiceCatalog {
     ParameterConstraints?: ParameterConstraints;
   }
   export type ProvisioningArtifactParameters = ProvisioningArtifactParameter[];
+  export interface ProvisioningArtifactPreferences {
+    /**
+     * One or more AWS accounts where stack instances are deployed from the stack set. These accounts can be scoped in ProvisioningPreferences$StackSetAccounts and UpdateProvisioningPreferences$StackSetAccounts. Applicable only to a CFN_STACKSET provisioned product type.
+     */
+    StackSetAccounts?: StackSetAccounts;
+    /**
+     * One or more AWS Regions where stack instances are deployed from the stack set. These regions can be scoped in ProvisioningPreferences$StackSetRegions and UpdateProvisioningPreferences$StackSetRegions. Applicable only to a CFN_STACKSET provisioned product type.
+     */
+    StackSetRegions?: StackSetRegions;
+  }
   export interface ProvisioningArtifactProperties {
     /**
      * The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.
@@ -2848,6 +2866,32 @@ declare namespace ServiceCatalog {
     Value?: ParameterValue;
   }
   export type ProvisioningParameters = ProvisioningParameter[];
+  export interface ProvisioningPreferences {
+    /**
+     * One or more AWS accounts that will have access to the provisioned product. Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts specified should be within the list of accounts in the STACKSET constraint. To get the list of accounts in the STACKSET constraint, use the DescribeProvisioningParameters operation. If no values are specified, the default value is all accounts from the STACKSET constraint.
+     */
+    StackSetAccounts?: StackSetAccounts;
+    /**
+     * One or more AWS Regions where the provisioned product will be available. Applicable only to a CFN_STACKSET provisioned product type. The specified regions should be within the list of regions from the STACKSET constraint. To get the list of regions in the STACKSET constraint, use the DescribeProvisioningParameters operation. If no values are specified, the default value is all regions from the STACKSET constraint.
+     */
+    StackSetRegions?: StackSetRegions;
+    /**
+     * The number of accounts, per region, for which this operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetFailureToleranceCount or StackSetFailureTolerancePercentage, but not both. The default value is 0 if no value is specified.
+     */
+    StackSetFailureToleranceCount?: StackSetFailureToleranceCount;
+    /**
+     * The percentage of accounts, per region, for which this stack operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions. When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetFailureToleranceCount or StackSetFailureTolerancePercentage, but not both.
+     */
+    StackSetFailureTolerancePercentage?: StackSetFailureTolerancePercentage;
+    /**
+     * The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of StackSetFailureToleranceCount. StackSetMaxConcurrentCount is at most one more than the StackSetFailureToleranceCount. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetMaxConcurrentCount or StackSetMaxConcurrentPercentage, but not both.
+     */
+    StackSetMaxConcurrencyCount?: StackSetMaxConcurrencyCount;
+    /**
+     * The maximum percentage of accounts in which to perform this operation at one time. When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as 1 instead. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetMaxConcurrentCount or StackSetMaxConcurrentPercentage, but not both.
+     */
+    StackSetMaxConcurrencyPercentage?: StackSetMaxConcurrencyPercentage;
+  }
   export interface RecordDetail {
     /**
      * The identifier of the record.
@@ -2870,7 +2914,7 @@ declare namespace ServiceCatalog {
      */
     UpdatedTime?: UpdatedTime;
     /**
-     * The type of provisioned product. The supported value is CFN_STACK.
+     * The type of provisioned product. The supported values are CFN_STACK and CFN_STACKSET.
      */
     ProvisionedProductType?: ProvisionedProductType;
     /**
@@ -2944,6 +2988,7 @@ declare namespace ServiceCatalog {
   export type RecordTagValue = string;
   export type RecordTags = RecordTag[];
   export type RecordType = string;
+  export type Region = string;
   export interface RejectPortfolioShareInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -3296,6 +3341,13 @@ declare namespace ServiceCatalog {
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type SourceProvisioningArtifactProperties = SourceProvisioningArtifactPropertiesMap[];
   export type SourceProvisioningArtifactPropertiesMap = {[key: string]: ProvisioningArtifactPropertyValue};
+  export type StackSetAccounts = AccountId[];
+  export type StackSetFailureToleranceCount = number;
+  export type StackSetFailureTolerancePercentage = number;
+  export type StackSetMaxConcurrencyCount = number;
+  export type StackSetMaxConcurrencyPercentage = number;
+  export type StackSetOperationType = "CREATE"|"UPDATE"|"DELETE"|string;
+  export type StackSetRegions = Region[];
   export type Status = "AVAILABLE"|"CREATING"|"FAILED"|string;
   export type StatusDetail = string;
   export type StatusMessage = string;
@@ -3535,6 +3587,10 @@ declare namespace ServiceCatalog {
      */
     ProvisioningParameters?: UpdateProvisioningParameters;
     /**
+     * An object that contains information about the provisioning preferences for a stack set.
+     */
+    ProvisioningPreferences?: UpdateProvisioningPreferences;
+    /**
      * The idempotency token that uniquely identifies the provisioning update request.
      */
     UpdateToken: IdempotencyToken;
@@ -3600,6 +3656,36 @@ declare namespace ServiceCatalog {
     UsePreviousValue?: UsePreviousValue;
   }
   export type UpdateProvisioningParameters = UpdateProvisioningParameter[];
+  export interface UpdateProvisioningPreferences {
+    /**
+     * One or more AWS accounts that will have access to the provisioned product. Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts specified should be within the list of accounts in the STACKSET constraint. To get the list of accounts in the STACKSET constraint, use the DescribeProvisioningParameters operation. If no values are specified, the default value is all accounts from the STACKSET constraint.
+     */
+    StackSetAccounts?: StackSetAccounts;
+    /**
+     * One or more AWS Regions where the provisioned product will be available. Applicable only to a CFN_STACKSET provisioned product type. The specified regions should be within the list of regions from the STACKSET constraint. To get the list of regions in the STACKSET constraint, use the DescribeProvisioningParameters operation. If no values are specified, the default value is all regions from the STACKSET constraint.
+     */
+    StackSetRegions?: StackSetRegions;
+    /**
+     * The number of accounts, per region, for which this operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetFailureToleranceCount or StackSetFailureTolerancePercentage, but not both. The default value is 0 if no value is specified.
+     */
+    StackSetFailureToleranceCount?: StackSetFailureToleranceCount;
+    /**
+     * The percentage of accounts, per region, for which this stack operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions. When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetFailureToleranceCount or StackSetFailureTolerancePercentage, but not both.
+     */
+    StackSetFailureTolerancePercentage?: StackSetFailureTolerancePercentage;
+    /**
+     * The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of StackSetFailureToleranceCount. StackSetMaxConcurrentCount is at most one more than the StackSetFailureToleranceCount. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetMaxConcurrentCount or StackSetMaxConcurrentPercentage, but not both.
+     */
+    StackSetMaxConcurrencyCount?: StackSetMaxConcurrencyCount;
+    /**
+     * The maximum percentage of accounts in which to perform this operation at one time. When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as 1 instead. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetMaxConcurrentCount or StackSetMaxConcurrentPercentage, but not both.
+     */
+    StackSetMaxConcurrencyPercentage?: StackSetMaxConcurrencyPercentage;
+    /**
+     * Determines what action AWS Service Catalog performs to a stack set or a stack instance represented by the provisioned product. The default value is UPDATE if nothing is specified. Applicable only to a CFN_STACKSET provisioned product type.  CREATE  Creates a new stack instance in the stack set represented by the provisioned product. In this case, only new stack instances are created based on accounts and regions; if new ProductId or ProvisioningArtifactID are passed, they will be ignored.  UPDATE  Updates the stack set represented by the provisioned product and also its stack instances.  DELETE  Deletes a stack instance in the stack set represented by the provisioned product.  
+     */
+    StackSetOperationType?: StackSetOperationType;
+  }
   export interface UpdateServiceActionInput {
     /**
      * The self-service action identifier.

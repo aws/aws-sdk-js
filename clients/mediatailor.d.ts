@@ -61,6 +61,12 @@ declare namespace MediaTailor {
      */
     ManifestEndpointPrefix?: __string;
   }
+  export interface DashConfiguration {
+    /**
+     * The URL that is used to initiate a playback session for devices that support DASH. 
+     */
+    ManifestEndpointPrefix?: __string;
+  }
   export interface DeletePlaybackConfigurationRequest {
     /**
      * The identifier for the configuration.
@@ -85,6 +91,10 @@ declare namespace MediaTailor {
      */
     CdnConfiguration?: CdnConfiguration;
     /**
+     * The configuration object for DASH content. 
+     */
+    DashConfiguration?: DashConfiguration;
+    /**
      * The configuration for HLS content. 
      */
     HlsConfiguration?: HlsConfiguration;
@@ -104,6 +114,10 @@ declare namespace MediaTailor {
      * URL for a high-quality video asset to transcode and use to fill in time that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because AWS Elemental MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. 
      */
     SlateAdUrl?: __string;
+    /**
+     * Associate this playbackConfiguration with a custom transcode profile, overriding MediaTailor's dynamic transcoding defaults. Do not include this field if you have not setup custom profiles with the MediaTailor service team. 
+     */
+    TranscodeProfileName?: __string;
     /**
      * The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.
      */
@@ -169,6 +183,10 @@ declare namespace MediaTailor {
      */
     SlateAdUrl?: __string;
     /**
+     * Associate this playbackConfiguration with a custom transcode profile, overriding MediaTailor's dynamic transcoding defaults. Do not include this field if you have not setup custom profiles with the MediaTailor service team. 
+     */
+    TranscodeProfileName?: __string;
+    /**
      * The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.
      */
     VideoContentSourceUrl?: __string;
@@ -182,6 +200,10 @@ declare namespace MediaTailor {
      * The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. 
      */
     CdnConfiguration?: CdnConfiguration;
+    /**
+     * The configuration object for DASH content. 
+     */
+    DashConfiguration?: DashConfiguration;
     /**
      * The configuration for HLS content. 
      */
@@ -202,6 +224,10 @@ declare namespace MediaTailor {
      * URL for a high-quality video asset to transcode and use to fill in time that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because AWS Elemental MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. 
      */
     SlateAdUrl?: __string;
+    /**
+     * Associate this playbackConfiguration with a custom transcode profile, overriding MediaTailor's dynamic transcoding defaults. Do not include this field if you have not setup custom profiles with the MediaTailor service team. 
+     */
+    TranscodeProfileName?: __string;
     /**
      * The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.
      */

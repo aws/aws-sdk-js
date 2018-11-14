@@ -989,11 +989,11 @@ declare class EC2 extends Service {
    */
   describeFleetInstances(callback?: (err: AWSError, data: EC2.Types.DescribeFleetInstancesResult) => void): Request<EC2.Types.DescribeFleetInstancesResult, AWSError>;
   /**
-   * Describes one or more of your EC2 Fleet.
+   * Describes one or more of your EC2 Fleets.
    */
   describeFleets(params: EC2.Types.DescribeFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
-   * Describes one or more of your EC2 Fleet.
+   * Describes one or more of your EC2 Fleets.
    */
   describeFleets(callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
@@ -4037,6 +4037,48 @@ declare namespace EC2 {
      */
     EgressOnlyInternetGateway?: EgressOnlyInternetGateway;
   }
+  export interface CreateFleetError {
+    /**
+     * The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+     */
+    LaunchTemplateAndOverrides?: LaunchTemplateAndOverridesResponse;
+    /**
+     * Indicates if the instance that could not be launched was a Spot Instance or On-Demand Instance.
+     */
+    Lifecycle?: InstanceLifecycle;
+    /**
+     * The error code that indicates why the instance could not be launched. For more information about error codes, see Error Codes.
+     */
+    ErrorCode?: String;
+    /**
+     * The error message that describes why the instance could not be launched. For more information about error messages, see ee Error Codes.
+     */
+    ErrorMessage?: String;
+  }
+  export type CreateFleetErrorsSet = CreateFleetError[];
+  export interface CreateFleetInstance {
+    /**
+     * The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+     */
+    LaunchTemplateAndOverrides?: LaunchTemplateAndOverridesResponse;
+    /**
+     * Indicates if the instance that was launched is a Spot Instance or On-Demand Instance.
+     */
+    Lifecycle?: InstanceLifecycle;
+    /**
+     * The IDs of the instances.
+     */
+    InstanceIds?: InstanceIdsSet;
+    /**
+     * The instance type.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The value is Windows for Windows instances; otherwise blank.
+     */
+    Platform?: PlatformValues;
+  }
+  export type CreateFleetInstancesSet = CreateFleetInstance[];
   export interface CreateFleetRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -4071,7 +4113,7 @@ declare namespace EC2 {
      */
     TerminateInstancesWithExpiration?: Boolean;
     /**
-     * The type of request. Indicates whether the EC2 Fleet only requests the target capacity, or also attempts to maintain it. If you request a certain target capacity, EC2 Fleet only places the required requests. It does not attempt to replenish instances if capacity is diminished, and does not submit requests in alternative capacity pools if capacity is unavailable. To maintain a certain target capacity, EC2 Fleet places the required requests to meet this target capacity. It also automatically replenishes any interrupted Spot Instances. Default: maintain.
+     * The type of request. instant indicates whether the EC2 Fleet submits a one-time request for your desired capacity. request indicates whether the EC2 Fleet submits ongoing requests until your desired capacity is fulfilled, but does not attempt to submit requests in alternative capacity pools if capacity is unavailable or maintain the capacity. maintain indicates whether the EC2 Fleet submits ongoing requests until your desired capacity is fulfilled, and continues to maintain your desired capacity by replenishing interrupted Spot Instances. Default: maintain.
      */
     Type?: FleetType;
     /**
@@ -4096,6 +4138,14 @@ declare namespace EC2 {
      * The ID of the EC2 Fleet.
      */
     FleetId?: FleetIdentifier;
+    /**
+     * Information about the instances that could not be launched by the fleet. Valid only when Type is set to instant.
+     */
+    Errors?: CreateFleetErrorsSet;
+    /**
+     * Information about the instances that were launched by the fleet. Valid only when Type is set to instant.
+     */
+    Instances?: CreateFleetInstancesSet;
   }
   export interface CreateFlowLogsRequest {
     /**
@@ -5870,6 +5920,24 @@ declare namespace EC2 {
      */
     ExportTasks?: ExportTaskList;
   }
+  export interface DescribeFleetError {
+    /**
+     * The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+     */
+    LaunchTemplateAndOverrides?: LaunchTemplateAndOverridesResponse;
+    /**
+     * Indicates if the instance that could not be launched was a Spot Instance or On-Demand Instance.
+     */
+    Lifecycle?: InstanceLifecycle;
+    /**
+     * The error code that indicates why the instance could not be launched. For more information about error codes, see Error Codes.
+     */
+    ErrorCode?: String;
+    /**
+     * The error message that describes why the instance could not be launched. For more information about error messages, see ee Error Codes.
+     */
+    ErrorMessage?: String;
+  }
   export interface DescribeFleetHistoryRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -5954,6 +6022,30 @@ declare namespace EC2 {
      */
     FleetId?: FleetIdentifier;
   }
+  export type DescribeFleetsErrorSet = DescribeFleetError[];
+  export interface DescribeFleetsInstances {
+    /**
+     * The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+     */
+    LaunchTemplateAndOverrides?: LaunchTemplateAndOverridesResponse;
+    /**
+     * Indicates if the instance that was launched is a Spot Instance or On-Demand Instance.
+     */
+    Lifecycle?: InstanceLifecycle;
+    /**
+     * The IDs of the instances.
+     */
+    InstanceIds?: InstanceIdsSet;
+    /**
+     * The instance type.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The value is Windows for Windows instances; otherwise blank.
+     */
+    Platform?: PlatformValues;
+  }
+  export type DescribeFleetsInstancesSet = DescribeFleetsInstances[];
   export interface DescribeFleetsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -5972,7 +6064,7 @@ declare namespace EC2 {
      */
     FleetIds?: FleetIdSet;
     /**
-     * One or more filters.    activity-status - The progress of the EC2 Fleet ( error | pending-fulfillment | pending-termination | fulfilled).    excess-capacity-termination-policy - Indicates whether to terminate running instances if the target capacity is decreased below the current EC2 Fleet size (true | false).    fleet-state - The state of the EC2 Fleet (submitted | active | deleted | failed | deleted-running | deleted-terminating | modifying).    replace-unhealthy-instances - Indicates whether EC2 Fleet should replace unhealthy instances (true | false).    type - The type of request (request | maintain).  
+     * One or more filters.    activity-status - The progress of the EC2 Fleet ( error | pending-fulfillment | pending-termination | fulfilled).    excess-capacity-termination-policy - Indicates whether to terminate running instances if the target capacity is decreased below the current EC2 Fleet size (true | false).    fleet-state - The state of the EC2 Fleet (submitted | active | deleted | failed | deleted-running | deleted-terminating | modifying).    replace-unhealthy-instances - Indicates whether EC2 Fleet should replace unhealthy instances (true | false).    type - The type of request (instant | request | maintain).  
      */
     Filters?: FilterList;
   }
@@ -6552,7 +6644,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000.
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 1 and 200.
      */
     MaxResults?: Integer;
   }
@@ -8627,6 +8719,14 @@ declare namespace EC2 {
      * The tags for an EC2 Fleet resource.
      */
     Tags?: TagList;
+    /**
+     * Information about the instances that could not be launched by the fleet. Valid only when Type is set to instant.
+     */
+    Errors?: DescribeFleetsErrorSet;
+    /**
+     * Information about the instances that were launched by the fleet. Valid only when Type is set to instant.
+     */
+    Instances?: DescribeFleetsInstancesSet;
   }
   export type FleetEventType = "instance-change"|"fleet-change"|"service-error"|string;
   export type FleetExcessCapacityTerminationPolicy = "no-termination"|"termination"|string;
@@ -8679,6 +8779,10 @@ declare namespace EC2 {
      * The priority for the launch template override. If AllocationStrategy is set to prioritized, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at 0. The lower the number, the higher the priority. If no number is set, the override has the lowest priority.
      */
     Priority?: Double;
+    /**
+     * The location where the instance launched, if applicable.
+     */
+    Placement?: PlacementResponse;
   }
   export type FleetLaunchTemplateOverridesList = FleetLaunchTemplateOverrides[];
   export type FleetLaunchTemplateOverridesListRequest = FleetLaunchTemplateOverridesRequest[];
@@ -8707,6 +8811,10 @@ declare namespace EC2 {
      * The priority for the launch template override. If AllocationStrategy is set to prioritized, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at 0. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority.
      */
     Priority?: Double;
+    /**
+     * The location where the instance launched, if applicable.
+     */
+    Placement?: Placement;
   }
   export interface FleetLaunchTemplateSpecification {
     /**
@@ -8739,7 +8847,7 @@ declare namespace EC2 {
   export type FleetOnDemandAllocationStrategy = "lowest-price"|"prioritized"|string;
   export type FleetSet = FleetData[];
   export type FleetStateCode = "submitted"|"active"|"deleted"|"failed"|"deleted-running"|"deleted-terminating"|"modifying"|string;
-  export type FleetType = "request"|"maintain"|string;
+  export type FleetType = "request"|"maintain"|"instant"|string;
   export type Float = number;
   export interface FlowLog {
     /**
@@ -10244,8 +10352,10 @@ declare namespace EC2 {
     TargetEnvironment?: ExportEnvironment;
   }
   export type InstanceHealthStatus = "healthy"|"unhealthy"|string;
+  export type InstanceId = string;
   export type InstanceIdSet = String[];
   export type InstanceIdStringList = String[];
+  export type InstanceIdsSet = InstanceId[];
   export type InstanceInterruptionBehavior = "hibernate"|"stop"|"terminate"|string;
   export interface InstanceIpv6Address {
     /**
@@ -10261,6 +10371,7 @@ declare namespace EC2 {
      */
     Ipv6Address?: String;
   }
+  export type InstanceLifecycle = "spot"|"on-demand"|string;
   export type InstanceLifecycleType = "spot"|"scheduled"|string;
   export type InstanceList = Instance[];
   export interface InstanceMarketOptionsRequest {
@@ -10780,6 +10891,16 @@ declare namespace EC2 {
      * The tags for the launch template.
      */
     Tags?: TagList;
+  }
+  export interface LaunchTemplateAndOverridesResponse {
+    /**
+     * The launch template.
+     */
+    LaunchTemplateSpecification?: FleetLaunchTemplateSpecification;
+    /**
+     * Any parameters that you specify override the same parameters in the launch template.
+     */
+    Overrides?: FleetLaunchTemplateOverrides;
   }
   export interface LaunchTemplateBlockDeviceMapping {
     /**
@@ -12453,12 +12574,28 @@ declare namespace EC2 {
      * The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify lowest-price, EC2 Fleet uses price to determine the order, launching the lowest price first. If you specify prioritized, EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. If you do not specify a value, EC2 Fleet defaults to lowest-price.
      */
     AllocationStrategy?: FleetOnDemandAllocationStrategy;
+    /**
+     * Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet.
+     */
+    SingleInstanceType?: Boolean;
+    /**
+     * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     */
+    MinTargetCapacity?: Integer;
   }
   export interface OnDemandOptionsRequest {
     /**
      * The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify lowest-price, EC2 Fleet uses price to determine the order, launching the lowest price first. If you specify prioritized, EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. If you do not specify a value, EC2 Fleet defaults to lowest-price.
      */
     AllocationStrategy?: FleetOnDemandAllocationStrategy;
+    /**
+     * Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet.
+     */
+    SingleInstanceType?: Boolean;
+    /**
+     * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     */
+    MinTargetCapacity?: Integer;
   }
   export type OperationType = "add"|"remove"|string;
   export type OwnerStringList = String[];
@@ -12553,6 +12690,12 @@ declare namespace EC2 {
   export type PlacementGroupList = PlacementGroup[];
   export type PlacementGroupState = "pending"|"available"|"deleting"|"deleted"|string;
   export type PlacementGroupStringList = String[];
+  export interface PlacementResponse {
+    /**
+     * The name of the placement group the instance is in.
+     */
+    GroupName?: String;
+  }
   export type PlacementStrategy = "cluster"|"spread"|string;
   export type PlatformValues = "Windows"|string;
   export type PoolMaxResults = number;
@@ -15424,6 +15567,14 @@ declare namespace EC2 {
      * The number of Spot pools across which to allocate your target Spot capacity. Valid only when AllocationStrategy is set to lowestPrice. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify.
      */
     InstancePoolsToUseCount?: Integer;
+    /**
+     * Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.
+     */
+    SingleInstanceType?: Boolean;
+    /**
+     * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     */
+    MinTargetCapacity?: Integer;
   }
   export interface SpotOptionsRequest {
     /**
@@ -15438,6 +15589,14 @@ declare namespace EC2 {
      * The number of Spot pools across which to allocate your target Spot capacity. Valid only when Spot AllocationStrategy is set to lowest-price. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify.
      */
     InstancePoolsToUseCount?: Integer;
+    /**
+     * Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.
+     */
+    SingleInstanceType?: Boolean;
+    /**
+     * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     */
+    MinTargetCapacity?: Integer;
   }
   export interface SpotPlacement {
     /**

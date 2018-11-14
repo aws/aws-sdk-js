@@ -37,11 +37,11 @@ declare class SageMaker extends Service {
    */
   createEndpointConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointConfigOutput) => void): Request<SageMaker.Types.CreateEndpointConfigOutput, AWSError>;
   /**
-   * Starts a hyperparameter tuning job.
+   * Starts a hyperparameter tuning job. A hyperparameter tuning job finds the best version of a model by running many training jobs on your dataset using the algorithm you choose and values for hyperparameters within ranges that you specify. It then chooses the hyperparameter values that result in a model that performs the best, as measured by an objective metric that you choose.
    */
   createHyperParameterTuningJob(params: SageMaker.Types.CreateHyperParameterTuningJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateHyperParameterTuningJobResponse) => void): Request<SageMaker.Types.CreateHyperParameterTuningJobResponse, AWSError>;
   /**
-   * Starts a hyperparameter tuning job.
+   * Starts a hyperparameter tuning job. A hyperparameter tuning job finds the best version of a model by running many training jobs on your dataset using the algorithm you choose and values for hyperparameters within ranges that you specify. It then chooses the hyperparameter values that result in a model that performs the best, as measured by an objective metric that you choose.
    */
   createHyperParameterTuningJob(callback?: (err: AWSError, data: SageMaker.Types.CreateHyperParameterTuningJobResponse) => void): Request<SageMaker.Types.CreateHyperParameterTuningJobResponse, AWSError>;
   /**
@@ -436,11 +436,15 @@ declare namespace SageMaker {
     /**
      * The registry path of the Docker image that contains the training algorithm. For information about docker registry paths for built-in algorithms, see Algorithms Provided by Amazon SageMaker: Common Parameters.
      */
-    TrainingImage: AlgorithmImage;
+    TrainingImage?: AlgorithmImage;
     /**
      * The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see Algorithms. If an algorithm supports the File input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the Pipe input mode, Amazon SageMaker streams data directly from S3 to the container.   In File mode, make sure you provision ML storage volume with sufficient capacity to accommodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any.   For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won't be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. 
      */
     TrainingInputMode: TrainingInputMode;
+    /**
+     * A list of metric definition objects. Each object specifies the metric name and regular expressions used to parse algorithm logs. Amazon SageMaker publishes each metric to Amazon CloudWatch.
+     */
+    MetricDefinitions?: MetricDefinitionList;
   }
   export type AssemblyType = "None"|"Line"|string;
   export type BatchStrategy = "MultiRecord"|"SingleRecord"|string;
@@ -476,6 +480,9 @@ declare namespace SageMaker {
      *  Specify RecordIO as the value when input data is in raw format but the training algorithm requires the RecordIO format, in which case, Amazon SageMaker wraps each individual S3 object in a RecordIO record. If the input data is already in RecordIO format, you don't need to set this attribute. For more information, see Create a Dataset Using RecordIO.  In FILE mode, leave this field unset or set it to None. 
      */
     RecordWrapperType?: RecordWrapper;
+    /**
+     * (Optional) The input mode to use for the data channel in a training job. If you don't set a value for InputMode, Amazon SageMaker uses the value set for TrainingInputMode. Use this parameter to override the TrainingInputMode setting in a AlgorithmSpecification request when you have a channel that needs a different input mode from the training job's general setting. To download the data from Amazon Simple Storage Service (Amazon S3) to the provisioned ML storage volume, and mount the directory to a Docker volume, use File input mode. To stream data directly from Amazon S3 to the container, choose Pipe input mode. To use a model for incremental training, choose File input model.
+     */
     InputMode?: TrainingInputMode;
   }
   export type ChannelName = string;
@@ -490,7 +497,7 @@ declare namespace SageMaker {
      */
     Image: Image;
     /**
-     * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).  If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS i an AWS Region in the AWS Identity and Access Management User Guide.
+     * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).  If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.
      */
     ModelDataUrl?: Url;
     /**
@@ -561,11 +568,11 @@ declare namespace SageMaker {
   }
   export interface CreateHyperParameterTuningJobRequest {
     /**
-     * The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. Names are not case sensitive, and must be between 1-32 characters.
+     * The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. The name must have { } to { } characters. Valid characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name is not case sensitive.
      */
     HyperParameterTuningJobName: HyperParameterTuningJobName;
     /**
-     * The HyperParameterTuningJobConfig object that describes the tuning job, including the search strategy, metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job.
+     * The HyperParameterTuningJobConfig object that describes the tuning job, including the search strategy, the objective metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job. For more information, see automatic-model-tuning 
      */
     HyperParameterTuningJobConfig: HyperParameterTuningJobConfig;
     /**
@@ -573,13 +580,17 @@ declare namespace SageMaker {
      */
     TrainingJobDefinition: HyperParameterTrainingJobDefinition;
     /**
+     * Specifies configuration for starting the hyperparameter tuning job using one or more previous tuning jobs as a starting point. The results of previous tuning jobs are used to inform which combinations of hyperparameters to search over in the new tuning job. All training jobs launched by the new hyperparameter tuning job are evaluated by using the objective metric. If you specify IDENTICAL_DATA_AND_ALGORITHM as the WarmStartType for the warm start configuration, the training job that performs the best in the new tuning job is compared to the best training jobs from the parent tuning jobs. From these, the training job that performs the best as measured by the objective metric is returned as the overall best training job.  All training jobs launched by parent hyperparameter tuning jobs and the new hyperparameter tuning jobs count against the limit of training jobs for the tuning job. 
+     */
+    WarmStartConfig?: HyperParameterTuningJobWarmStartConfig;
+    /**
      * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see AWS Tagging Strategies. Tags that you specify for the tuning job are also added to all training jobs that the tuning job launches.
      */
     Tags?: TagList;
   }
   export interface CreateHyperParameterTuningJobResponse {
     /**
-     * The Amazon Resource Name (ARN) of the tuning job.
+     * The Amazon Resource Name (ARN) of the tuning job. Amazon SageMaker assigns an ARN to a hyperparameter tuning job when you create it.
      */
     HyperParameterTuningJobArn: HyperParameterTuningJobArn;
   }
@@ -633,7 +644,7 @@ declare namespace SageMaker {
      */
     RoleArn: RoleArn;
     /**
-     *  If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance. 
+     *  If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance. The KMS key you provide must be enabled. For information, see Enabling and Disabling Keys in the AWS Key Management Service Developer Guide.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -649,7 +660,7 @@ declare namespace SageMaker {
      */
     DirectInternetAccess?: DirectInternetAccess;
     /**
-     * The size, in GB, of the ML storage volume to attach to the notebook instance.
+     * The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.
      */
     VolumeSizeInGB?: NotebookInstanceVolumeSizeInGB;
   }
@@ -975,6 +986,14 @@ declare namespace SageMaker {
      */
     BestTrainingJob?: HyperParameterTrainingJobSummary;
     /**
+     * If the hyperparameter tuning job is an incremental tuning job with a WarmStartType of IDENTICAL_DATA_AND_ALGORITHM, this is the TrainingJobSummary for the training job with the best objective metric value of all training jobs launched by this tuning job and all parent jobs specified for the incremental tuning job.
+     */
+    OverallBestTrainingJob?: HyperParameterTrainingJobSummary;
+    /**
+     * The configuration for starting the hyperparameter parameter tuning job using one or more previous tuning jobs as a starting point. The results of previous tuning jobs are used to inform which combinations of hyperparameters to search over in the new tuning job.
+     */
+    WarmStartConfig?: HyperParameterTuningJobWarmStartConfig;
+    /**
      * If the tuning job failed, the reason it failed.
      */
     FailureReason?: FailureReason;
@@ -1202,6 +1221,10 @@ declare namespace SageMaker {
      * A history of all of the secondary statuses that the training job has transitioned through.
      */
     SecondaryStatusTransitions?: SecondaryStatusTransitions;
+    /**
+     * A collection of MetricData objects that specify the names, values, and dates and times that the training algorithm emitted to Amazon CloudWatch.
+     */
+    FinalMetricDataList?: FinalMetricDataList;
   }
   export interface DescribeTransformJobRequest {
     /**
@@ -1353,11 +1376,13 @@ declare namespace SageMaker {
      */
     Value: MetricValue;
   }
+  export type FinalMetricDataList = MetricData[];
+  export type Float = number;
   export interface HyperParameterAlgorithmSpecification {
     /**
      *  The registry path of the Docker image that contains the training algorithm. For information about Docker registry paths for built-in algorithms, see Algorithms Provided by Amazon SageMaker: Common Parameters.
      */
-    TrainingImage: AlgorithmImage;
+    TrainingImage?: AlgorithmImage;
     /**
      * The input mode that the algorithm supports: File or Pipe. In File input mode, Amazon SageMaker downloads the training data from Amazon S3 to the storage volume that is attached to the training instance and mounts the directory to the Docker volume for the training container. In Pipe input mode, Amazon SageMaker streams data directly from Amazon S3 to the container.  If you specify File mode, make sure that you provision the storage volume that is attached to the training instance with enough capacity to accommodate the training data downloaded from Amazon S3, the model artifacts, and intermediate information.  For more information about input modes, see Algorithms. 
      */
@@ -1383,7 +1408,7 @@ declare namespace SageMaker {
     /**
      * An array of Channel objects that specify the input for the training jobs that the tuning job launches.
      */
-    InputDataConfig: InputDataConfig;
+    InputDataConfig?: InputDataConfig;
     /**
      * The VpcConfig object that specifies the VPC that you want the training jobs that this hyperparameter tuning job launches to connect to. Control access to and from your training container by configuring the VPC. For more information, see Protect Training Jobs by Using an Amazon Virtual Private Cloud.
      */
@@ -1411,6 +1436,7 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the training job.
      */
     TrainingJobArn: TrainingJobArn;
+    TuningJobName?: HyperParameterTuningJobName;
     /**
      * The date and time that the training job was created.
      */
@@ -1521,10 +1547,21 @@ declare namespace SageMaker {
      */
     ResourceLimits?: ResourceLimits;
   }
+  export interface HyperParameterTuningJobWarmStartConfig {
+    /**
+     * An array of hyperparameter tuning jobs that are used as the starting point for the new hyperparameter tuning job. For more information about warm starting a hyperparameter tuning job, see Using a Previous Hyperparameter Tuning Job as a Starting Point.
+     */
+    ParentHyperParameterTuningJobs: ParentHyperParameterTuningJobs;
+    /**
+     * Specifies one of the following:  IDENTICAL_DATA_AND_ALGORITHM  The new hyperparameter tuning job uses the same input data and training image as the parent tuning jobs. You can change the hyperparameter ranges to search and the maximum number of training jobs that the hyperparameter tuning job launches. You cannot use a new version of the training algorithm, unless the changes in the new version do not affect the algorithm itself. For example, changes that improve logging or adding support for a different data format are allowed. The objective metric for the new tuning job must be the same as for all parent jobs.  TRANSFER_LEARNING  The new hyperparameter tuning job can include input data, hyperparameter ranges, maximum number of concurrent training jobs, and maximum number of training jobs that are different than those of its parent hyperparameter tuning jobs. The training image can also be a different versionfrom the version used in the parent hyperparameter tuning job. You can also change hyperparameters from tunable to static, and from static to tunable, but the total number of static plus tunable hyperparameters must remain the same as it is in all parent jobs. The objective metric for the new tuning job must be the same as for all parent jobs.  
+     */
+    WarmStartType: HyperParameterTuningJobWarmStartType;
+  }
+  export type HyperParameterTuningJobWarmStartType = "IdenticalDataAndAlgorithm"|"TransferLearning"|string;
   export type HyperParameters = {[key: string]: ParameterValue};
   export type Image = string;
   export type InputDataConfig = Channel[];
-  export type InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|string;
+  export type InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|string;
   export interface IntegerParameterRange {
     /**
      * The name of the hyperparameter to search.
@@ -2001,6 +2038,20 @@ declare namespace SageMaker {
   export type MaxPayloadInMB = number;
   export type MaxResults = number;
   export type MaxRuntimeInSeconds = number;
+  export interface MetricData {
+    /**
+     * The name of the metric.
+     */
+    MetricName?: MetricName;
+    /**
+     * The value of the metric.
+     */
+    Value?: Float;
+    /**
+     * The date and time that the algorithm emitted the metric.
+     */
+    Timestamp?: Timestamp;
+  }
   export interface MetricDefinition {
     /**
      * The name of the metric.
@@ -2163,6 +2214,13 @@ declare namespace SageMaker {
   }
   export type ParameterValue = string;
   export type ParameterValues = ParameterValue[];
+  export interface ParentHyperParameterTuningJob {
+    /**
+     * The name of the hyperparameter tuning job to be used as a starting point for a new hyperparameter tuning job.
+     */
+    HyperParameterTuningJobName?: HyperParameterTuningJobName;
+  }
+  export type ParentHyperParameterTuningJobs = ParentHyperParameterTuningJob[];
   export interface ProductionVariant {
     /**
      * The name of the production variant.
@@ -2252,7 +2310,7 @@ declare namespace SageMaker {
      */
     S3DataType: S3DataType;
     /**
-     * Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest. For example:     A key name prefix might look like this: s3://bucketname/exampleprefix.     A manifest might look like this: s3://bucketname/example.manifest   The manifest is an S3 object which is a JSON file with the following format:   [    {"prefix": "s3://customer_bucket/some/prefix/"},    "relative/path/to/custdata-1",    "relative/path/custdata-2",    ...    ]   The preceding JSON matches the following s3Uris:   s3://customer_bucket/some/prefix/relative/path/to/custdata-1   s3://customer_bucket/some/prefix/relative/path/custdata-1   ...   The complete set of s3uris in this manifest constitutes the input data for the channel for this datasource. The object that each s3uris points to must readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.   
+     * Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest. For example:     A key name prefix might look like this: s3://bucketname/exampleprefix.     A manifest might look like this: s3://bucketname/example.manifest   The manifest is an S3 object which is a JSON file with the following format:   [    {"prefix": "s3://customer_bucket/some/prefix/"},    "relative/path/to/custdata-1",    "relative/path/custdata-2",    ...    ]   The preceding JSON matches the following s3Uris:   s3://customer_bucket/some/prefix/relative/path/to/custdata-1   s3://customer_bucket/some/prefix/relative/path/custdata-2   ...   The complete set of s3uris in this manifest constitutes the input data for the channel for this datasource. The object that each s3uris points to must readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.   
      */
     S3Uri: S3Uri;
     /**
@@ -2353,7 +2411,7 @@ declare namespace SageMaker {
   export type TrainingJobStatusCounter = number;
   export interface TrainingJobStatusCounters {
     /**
-     * The number of completed training jobs launched by a hyperparameter tuning job.
+     * The number of completed training jobs launched by the hyperparameter tuning job.
      */
     Completed?: TrainingJobStatusCounter;
     /**
@@ -2559,7 +2617,7 @@ declare namespace SageMaker {
      */
     DisassociateLifecycleConfig?: DisassociateNotebookInstanceLifecycleConfig;
     /**
-     * The size, in GB, of the ML storage volume to attach to the notebook instance.
+     * The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.
      */
     VolumeSizeInGB?: NotebookInstanceVolumeSizeInGB;
   }

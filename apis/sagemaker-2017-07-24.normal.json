@@ -86,7 +86,7 @@
           "shape": "ResourceLimitExceeded"
         }
       ],
-      "documentation": "<p>Starts a hyperparameter tuning job.</p>"
+      "documentation": "<p>Starts a hyperparameter tuning job. A hyperparameter tuning job finds the best version of a model by running many training jobs on your dataset using the algorithm you choose and values for hyperparameters within ranges that you specify. It then chooses the hyperparameter values that result in a model that performs the best, as measured by an objective metric that you choose.</p>"
     },
     "CreateModel": {
       "name": "CreateModel",
@@ -157,7 +157,7 @@
       "output": {
         "shape": "CreatePresignedNotebookInstanceUrlOutput"
       },
-      "documentation": "<p>Returns a URL that you can use to connect to the Jupyter server from a notebook instance. In the Amazon SageMaker console, when you choose <code>Open</code> next to a notebook instance, Amazon SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page.</p> <p>You can restrict access to this API and to the URL that it returns to a list of IP addresses that you specify. To restrict access, attach an IAM policy that denies access to this API unless the call comes from an IP address in the specified list to every AWS Identity and Access Management user, group, or role used to access the notebook instance. Use the <code>NotIpAddress</code> condition operator and the <code>aws:SourceIP</code> condition context key to specify the list of IP addresses that you want to have access to the notebook instance. For more information, see <a href=\"http://docs.aws.amazon.com/https:/docs.aws.amazon.com/sagemaker/latest/dg/howitworks-access-ws.html#nbi-ip-filter\">Limit Access to a Notebook Instance by IP Address</a>.</p>"
+      "documentation": "<p>Returns a URL that you can use to connect to the Jupyter server from a notebook instance. In the Amazon SageMaker console, when you choose <code>Open</code> next to a notebook instance, Amazon SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page.</p> <p>You can restrict access to this API and to the URL that it returns to a list of IP addresses that you specify. To restrict access, attach an IAM policy that denies access to this API unless the call comes from an IP address in the specified list to every AWS Identity and Access Management user, group, or role used to access the notebook instance. Use the <code>NotIpAddress</code> condition operator and the <code>aws:SourceIP</code> condition context key to specify the list of IP addresses that you want to have access to the notebook instance. For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/howitworks-access-ws.html#nbi-ip-filter\">Limit Access to a Notebook Instance by IP Address</a>.</p>"
     },
     "CreateTrainingJob": {
       "name": "CreateTrainingJob",
@@ -734,7 +734,6 @@
     "AlgorithmSpecification": {
       "type": "structure",
       "required": [
-        "TrainingImage",
         "TrainingInputMode"
       ],
       "members": {
@@ -745,6 +744,10 @@
         "TrainingInputMode": {
           "shape": "TrainingInputMode",
           "documentation": "<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accommodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won't be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>"
+        },
+        "MetricDefinitions": {
+          "shape": "MetricDefinitionList",
+          "documentation": "<p>A list of metric definition objects. Each object specifies the metric name and regular expressions used to parse algorithm logs. Amazon SageMaker publishes each metric to Amazon CloudWatch.</p>"
         }
       },
       "documentation": "<p>Specifies the training algorithm to use in a <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html\">CreateTrainingJob</a> request.</p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about using your own algorithms, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a>. </p>"
@@ -817,7 +820,8 @@
           "documentation": "<p/> <p>Specify RecordIO as the value when input data is in raw format but the training algorithm requires the RecordIO format, in which case, Amazon SageMaker wraps each individual S3 object in a RecordIO record. If the input data is already in RecordIO format, you don't need to set this attribute. For more information, see <a href=\"https://mxnet.incubator.apache.org/architecture/note_data_loading.html#data-format\">Create a Dataset Using RecordIO</a>. </p> <p>In FILE mode, leave this field unset or set it to None.</p> <p/>"
         },
         "InputMode": {
-          "shape": "TrainingInputMode"
+          "shape": "TrainingInputMode",
+          "documentation": "<p>(Optional) The input mode to use for the data channel in a training job. If you don't set a value for <code>InputMode</code>, Amazon SageMaker uses the value set for <code>TrainingInputMode</code>. Use this parameter to override the <code>TrainingInputMode</code> setting in a <a>AlgorithmSpecification</a> request when you have a channel that needs a different input mode from the training job's general setting. To download the data from Amazon Simple Storage Service (Amazon S3) to the provisioned ML storage volume, and mount the directory to a Docker volume, use <code>File</code> input mode. To stream data directly from Amazon S3 to the container, choose <code>Pipe</code> input mode.</p> <p>To use a model for incremental training, choose <code>File</code> input model.</p>"
         }
       },
       "documentation": "<p>A channel is a named input source that training algorithms can consume. </p>"
@@ -851,7 +855,7 @@
         },
         "ModelDataUrl": {
           "shape": "Url",
-          "documentation": "<p>The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). </p> <p>If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS i an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>"
+          "documentation": "<p>The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). </p> <p>If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>"
         },
         "Environment": {
           "shape": "EnvironmentMap",
@@ -980,15 +984,19 @@
       "members": {
         "HyperParameterTuningJobName": {
           "shape": "HyperParameterTuningJobName",
-          "documentation": "<p>The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. Names are not case sensitive, and must be between 1-32 characters.</p>"
+          "documentation": "<p>The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. The name must have { } to { } characters. Valid characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name is not case sensitive.</p>"
         },
         "HyperParameterTuningJobConfig": {
           "shape": "HyperParameterTuningJobConfig",
-          "documentation": "<p>The <a>HyperParameterTuningJobConfig</a> object that describes the tuning job, including the search strategy, metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job.</p>"
+          "documentation": "<p>The <a>HyperParameterTuningJobConfig</a> object that describes the tuning job, including the search strategy, the objective metric used to evaluate training jobs, ranges of parameters to search, and resource limits for the tuning job. For more information, see <a>automatic-model-tuning</a> </p>"
         },
         "TrainingJobDefinition": {
           "shape": "HyperParameterTrainingJobDefinition",
           "documentation": "<p>The <a>HyperParameterTrainingJobDefinition</a> object that describes the training jobs that this tuning job launches, including static hyperparameters, input data configuration, output data configuration, resource configuration, and stopping condition.</p>"
+        },
+        "WarmStartConfig": {
+          "shape": "HyperParameterTuningJobWarmStartConfig",
+          "documentation": "<p>Specifies configuration for starting the hyperparameter tuning job using one or more previous tuning jobs as a starting point. The results of previous tuning jobs are used to inform which combinations of hyperparameters to search over in the new tuning job.</p> <p>All training jobs launched by the new hyperparameter tuning job are evaluated by using the objective metric. If you specify <code>IDENTICAL_DATA_AND_ALGORITHM</code> as the <code>WarmStartType</code> for the warm start configuration, the training job that performs the best in the new tuning job is compared to the best training jobs from the parent tuning jobs. From these, the training job that performs the best as measured by the objective metric is returned as the overall best training job.</p> <note> <p>All training jobs launched by parent hyperparameter tuning jobs and the new hyperparameter tuning jobs count against the limit of training jobs for the tuning job.</p> </note>"
         },
         "Tags": {
           "shape": "TagList",
@@ -1004,7 +1012,7 @@
       "members": {
         "HyperParameterTuningJobArn": {
           "shape": "HyperParameterTuningJobArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the tuning job.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the tuning job. Amazon SageMaker assigns an ARN to a hyperparameter tuning job when you create it.</p>"
         }
       }
     },
@@ -1080,7 +1088,7 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p> If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance. </p>"
+          "documentation": "<p> If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance. The KMS key you provide must be enabled. For information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html\">Enabling and Disabling Keys</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -1096,7 +1104,7 @@
         },
         "VolumeSizeInGB": {
           "shape": "NotebookInstanceVolumeSizeInGB",
-          "documentation": "<p>The size, in GB, of the ML storage volume to attach to the notebook instance.</p>"
+          "documentation": "<p>The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.</p>"
         }
       }
     },
@@ -1582,6 +1590,14 @@
           "shape": "HyperParameterTrainingJobSummary",
           "documentation": "<p>A <a>TrainingJobSummary</a> object that describes the training job that completed with the best current <a>HyperParameterTuningJobObjective</a>.</p>"
         },
+        "OverallBestTrainingJob": {
+          "shape": "HyperParameterTrainingJobSummary",
+          "documentation": "<p>If the hyperparameter tuning job is an incremental tuning job with a <code>WarmStartType</code> of <code>IDENTICAL_DATA_AND_ALGORITHM</code>, this is the <a>TrainingJobSummary</a> for the training job with the best objective metric value of all training jobs launched by this tuning job and all parent jobs specified for the incremental tuning job.</p>"
+        },
+        "WarmStartConfig": {
+          "shape": "HyperParameterTuningJobWarmStartConfig",
+          "documentation": "<p>The configuration for starting the hyperparameter parameter tuning job using one or more previous tuning jobs as a starting point. The results of previous tuning jobs are used to inform which combinations of hyperparameters to search over in the new tuning job.</p>"
+        },
         "FailureReason": {
           "shape": "FailureReason",
           "documentation": "<p>If the tuning job failed, the reason it failed.</p>"
@@ -1863,6 +1879,10 @@
         "SecondaryStatusTransitions": {
           "shape": "SecondaryStatusTransitions",
           "documentation": "<p>A history of all of the secondary statuses that the training job has transitioned through.</p>"
+        },
+        "FinalMetricDataList": {
+          "shape": "FinalMetricDataList",
+          "documentation": "<p>A collection of <code>MetricData</code> objects that specify the names, values, and dates and times that the training algorithm emitted to Amazon CloudWatch.</p>"
         }
       }
     },
@@ -2007,6 +2027,7 @@
     },
     "EndpointConfigNameContains": {
       "type": "string",
+      "max": 63,
       "pattern": "[a-zA-Z0-9-]+"
     },
     "EndpointConfigSortKey": {
@@ -2052,6 +2073,7 @@
     },
     "EndpointNameContains": {
       "type": "string",
+      "max": 63,
       "pattern": "[a-zA-Z0-9-]+"
     },
     "EndpointSortKey": {
@@ -2159,10 +2181,20 @@
       },
       "documentation": "<p>Shows the final value for the objective metric for a training job that was launched by a hyperparameter tuning job. You define the objective metric in the <code>HyperParameterTuningJobObjective</code> parameter of <a>HyperParameterTuningJobConfig</a>.</p>"
     },
+    "FinalMetricDataList": {
+      "type": "list",
+      "member": {
+        "shape": "MetricData"
+      },
+      "max": 20,
+      "min": 0
+    },
+    "Float": {
+      "type": "float"
+    },
     "HyperParameterAlgorithmSpecification": {
       "type": "structure",
       "required": [
-        "TrainingImage",
         "TrainingInputMode"
       ],
       "members": {
@@ -2186,7 +2218,6 @@
       "required": [
         "AlgorithmSpecification",
         "RoleArn",
-        "InputDataConfig",
         "OutputDataConfig",
         "ResourceConfig",
         "StoppingCondition"
@@ -2250,6 +2281,9 @@
         "TrainingJobArn": {
           "shape": "TrainingJobArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the training job.</p>"
+        },
+        "TuningJobName": {
+          "shape": "HyperParameterTuningJobName"
         },
         "CreationTime": {
           "shape": "Timestamp",
@@ -2436,6 +2470,31 @@
       },
       "documentation": "<p>Provides summary information about a hyperparameter tuning job.</p>"
     },
+    "HyperParameterTuningJobWarmStartConfig": {
+      "type": "structure",
+      "required": [
+        "ParentHyperParameterTuningJobs",
+        "WarmStartType"
+      ],
+      "members": {
+        "ParentHyperParameterTuningJobs": {
+          "shape": "ParentHyperParameterTuningJobs",
+          "documentation": "<p>An array of hyperparameter tuning jobs that are used as the starting point for the new hyperparameter tuning job. For more information about warm starting a hyperparameter tuning job, see <a href=\"http://docs.aws.amazon.com/automatic-model-tuning-incremental\">Using a Previous Hyperparameter Tuning Job as a Starting Point</a>.</p>"
+        },
+        "WarmStartType": {
+          "shape": "HyperParameterTuningJobWarmStartType",
+          "documentation": "<p>Specifies one of the following:</p> <dl> <dt>IDENTICAL_DATA_AND_ALGORITHM</dt> <dd> <p>The new hyperparameter tuning job uses the same input data and training image as the parent tuning jobs. You can change the hyperparameter ranges to search and the maximum number of training jobs that the hyperparameter tuning job launches. You cannot use a new version of the training algorithm, unless the changes in the new version do not affect the algorithm itself. For example, changes that improve logging or adding support for a different data format are allowed. The objective metric for the new tuning job must be the same as for all parent jobs.</p> </dd> <dt>TRANSFER_LEARNING</dt> <dd> <p>The new hyperparameter tuning job can include input data, hyperparameter ranges, maximum number of concurrent training jobs, and maximum number of training jobs that are different than those of its parent hyperparameter tuning jobs. The training image can also be a different versionfrom the version used in the parent hyperparameter tuning job. You can also change hyperparameters from tunable to static, and from static to tunable, but the total number of static plus tunable hyperparameters must remain the same as it is in all parent jobs. The objective metric for the new tuning job must be the same as for all parent jobs.</p> </dd> </dl>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for a hyperparameter tuning job that uses one or more previous hyperparameter tuning jobs as a starting point. The results of previous tuning jobs are used to inform which combinations of hyperparameters to search over in the new tuning job.</p> <p>All training jobs launched by the new hyperparameter tuning job are evaluated by using the objective metric, and the training job that performs the best is compared to the best training jobs from the parent tuning jobs. From these, the training job that performs the best as measured by the objective metric is returned as the overall best training job.</p> <note> <p>All training jobs launched by parent hyperparameter tuning jobs and the new hyperparameter tuning jobs count against the limit of training jobs for the tuning job.</p> </note>"
+    },
+    "HyperParameterTuningJobWarmStartType": {
+      "type": "string",
+      "enum": [
+        "IdenticalDataAndAlgorithm",
+        "TransferLearning"
+      ]
+    },
     "HyperParameters": {
       "type": "map",
       "key": {
@@ -2467,11 +2526,34 @@
         "ml.t2.large",
         "ml.t2.xlarge",
         "ml.t2.2xlarge",
+        "ml.t3.medium",
+        "ml.t3.large",
+        "ml.t3.xlarge",
+        "ml.t3.2xlarge",
         "ml.m4.xlarge",
         "ml.m4.2xlarge",
         "ml.m4.4xlarge",
         "ml.m4.10xlarge",
         "ml.m4.16xlarge",
+        "ml.m5.xlarge",
+        "ml.m5.2xlarge",
+        "ml.m5.4xlarge",
+        "ml.m5.12xlarge",
+        "ml.m5.24xlarge",
+        "ml.c4.xlarge",
+        "ml.c4.2xlarge",
+        "ml.c4.4xlarge",
+        "ml.c4.8xlarge",
+        "ml.c5.xlarge",
+        "ml.c5.2xlarge",
+        "ml.c5.4xlarge",
+        "ml.c5.9xlarge",
+        "ml.c5.18xlarge",
+        "ml.c5d.xlarge",
+        "ml.c5d.2xlarge",
+        "ml.c5d.4xlarge",
+        "ml.c5d.9xlarge",
+        "ml.c5d.18xlarge",
         "ml.p2.xlarge",
         "ml.p2.8xlarge",
         "ml.p2.16xlarge",
@@ -3089,6 +3171,24 @@
       "type": "integer",
       "min": 1
     },
+    "MetricData": {
+      "type": "structure",
+      "members": {
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>The name of the metric.</p>"
+        },
+        "Value": {
+          "shape": "Float",
+          "documentation": "<p>The value of the metric.</p>"
+        },
+        "Timestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the algorithm emitted the metric.</p>"
+        }
+      },
+      "documentation": "<p>The name, value, and date and time of a metric that was emitted to Amazon CloudWatch.</p>"
+    },
     "MetricDefinition": {
       "type": "structure",
       "required": [
@@ -3153,6 +3253,7 @@
     },
     "ModelNameContains": {
       "type": "string",
+      "max": 63,
       "pattern": "[a-zA-Z0-9-]+"
     },
     "ModelSortKey": {
@@ -3230,6 +3331,7 @@
     },
     "NotebookInstanceLifecycleConfigNameContains": {
       "type": "string",
+      "max": 63,
       "pattern": "[a-zA-Z0-9-]+"
     },
     "NotebookInstanceLifecycleConfigSortKey": {
@@ -3296,6 +3398,7 @@
     },
     "NotebookInstanceNameContains": {
       "type": "string",
+      "max": 63,
       "pattern": "[a-zA-Z0-9-]+"
     },
     "NotebookInstanceSortKey": {
@@ -3459,7 +3562,7 @@
           "documentation": "<p>The array of <a>CategoricalParameterRange</a> objects that specify ranges of categorical hyperparameters that a hyperparameter tuning job searches.</p>"
         }
       },
-      "documentation": "<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a hyperparameter tuning job searches.</p>"
+      "documentation": "<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs with hyperparameter values within these ranges to find the combination of values that result in the training job with the best performance as measured by the objective metric of the hyperparameter tuning job.</p> <note> <p>You can specify a maximum of 20 hyperparameters that a hyperparameter tuning job can search over. Every possible value of a categorical parameter range counts against this limit.</p> </note>"
     },
     "ParameterValue": {
       "type": "string",
@@ -3471,6 +3574,24 @@
         "shape": "ParameterValue"
       },
       "max": 20,
+      "min": 1
+    },
+    "ParentHyperParameterTuningJob": {
+      "type": "structure",
+      "members": {
+        "HyperParameterTuningJobName": {
+          "shape": "HyperParameterTuningJobName",
+          "documentation": "<p>The name of the hyperparameter tuning job to be used as a starting point for a new hyperparameter tuning job.</p>"
+        }
+      },
+      "documentation": "<p>A previously completed or stopped hyperparameter tuning job to be used as a starting point for a new hyperparameter tuning job.</p>"
+    },
+    "ParentHyperParameterTuningJobs": {
+      "type": "list",
+      "member": {
+        "shape": "ParentHyperParameterTuningJob"
+      },
+      "max": 5,
       "min": 1
     },
     "ProductionVariant": {
@@ -3671,7 +3792,7 @@
         },
         "S3Uri": {
           "shape": "S3Uri",
-          "documentation": "<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest. For example: </p> <ul> <li> <p> A key name prefix might look like this: <code>s3://bucketname/exampleprefix</code>. </p> </li> <li> <p> A manifest might look like this: <code>s3://bucketname/example.manifest</code> </p> <p> The manifest is an S3 object which is a JSON file with the following format: </p> <p> <code>[</code> </p> <p> <code> {\"prefix\": \"s3://customer_bucket/some/prefix/\"},</code> </p> <p> <code> \"relative/path/to/custdata-1\",</code> </p> <p> <code> \"relative/path/custdata-2\",</code> </p> <p> <code> ...</code> </p> <p> <code> ]</code> </p> <p> The preceding JSON matches the following <code>s3Uris</code>: </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-1</code> </p> <p> <code>...</code> </p> <p> The complete set of <code>s3uris</code> in this manifest constitutes the input data for the channel for this datasource. The object that each <code>s3uris</code> points to must readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf. </p> </li> </ul>"
+          "documentation": "<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest. For example: </p> <ul> <li> <p> A key name prefix might look like this: <code>s3://bucketname/exampleprefix</code>. </p> </li> <li> <p> A manifest might look like this: <code>s3://bucketname/example.manifest</code> </p> <p> The manifest is an S3 object which is a JSON file with the following format: </p> <p> <code>[</code> </p> <p> <code> {\"prefix\": \"s3://customer_bucket/some/prefix/\"},</code> </p> <p> <code> \"relative/path/to/custdata-1\",</code> </p> <p> <code> \"relative/path/custdata-2\",</code> </p> <p> <code> ...</code> </p> <p> <code> ]</code> </p> <p> The preceding JSON matches the following <code>s3Uris</code>: </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-2</code> </p> <p> <code>...</code> </p> <p> The complete set of <code>s3uris</code> in this manifest constitutes the input data for the channel for this datasource. The object that each <code>s3uris</code> points to must readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf. </p> </li> </ul>"
         },
         "S3DataDistributionType": {
           "shape": "S3DataDistribution",
@@ -3999,7 +4120,7 @@
       "members": {
         "Completed": {
           "shape": "TrainingJobStatusCounter",
-          "documentation": "<p>The number of completed training jobs launched by a hyperparameter tuning job.</p>"
+          "documentation": "<p>The number of completed training jobs launched by the hyperparameter tuning job.</p>"
         },
         "InProgress": {
           "shape": "TrainingJobStatusCounter",
@@ -4372,7 +4493,7 @@
         },
         "VolumeSizeInGB": {
           "shape": "NotebookInstanceVolumeSizeInGB",
-          "documentation": "<p>The size, in GB, of the ML storage volume to attach to the notebook instance.</p>"
+          "documentation": "<p>The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.</p>"
         }
       }
     },

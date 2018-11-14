@@ -1636,7 +1636,7 @@
       "output": {
         "shape": "DescribeFleetsResult"
       },
-      "documentation": "<p>Describes one or more of your EC2 Fleet.</p>"
+      "documentation": "<p>Describes one or more of your EC2 Fleets.</p>"
     },
     "DescribeFlowLogs": {
       "name": "DescribeFlowLogs",
@@ -6422,6 +6422,77 @@
         }
       }
     },
+    "CreateFleetError": {
+      "type": "structure",
+      "members": {
+        "LaunchTemplateAndOverrides": {
+          "shape": "LaunchTemplateAndOverridesResponse",
+          "documentation": "<p>The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.</p>",
+          "locationName": "launchTemplateAndOverrides"
+        },
+        "Lifecycle": {
+          "shape": "InstanceLifecycle",
+          "documentation": "<p>Indicates if the instance that could not be launched was a Spot Instance or On-Demand Instance.</p>",
+          "locationName": "lifecycle"
+        },
+        "ErrorCode": {
+          "shape": "String",
+          "documentation": "<p>The error code that indicates why the instance could not be launched. For more information about error codes, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html\">Error Codes</a>.</p>",
+          "locationName": "errorCode"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>The error message that describes why the instance could not be launched. For more information about error messages, see ee <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html\">Error Codes</a>.</p>",
+          "locationName": "errorMessage"
+        }
+      },
+      "documentation": "<p>Describes the instances that could not be launched by the fleet.</p>"
+    },
+    "CreateFleetErrorsSet": {
+      "type": "list",
+      "member": {
+        "shape": "CreateFleetError",
+        "locationName": "item"
+      }
+    },
+    "CreateFleetInstance": {
+      "type": "structure",
+      "members": {
+        "LaunchTemplateAndOverrides": {
+          "shape": "LaunchTemplateAndOverridesResponse",
+          "documentation": "<p>The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.</p>",
+          "locationName": "launchTemplateAndOverrides"
+        },
+        "Lifecycle": {
+          "shape": "InstanceLifecycle",
+          "documentation": "<p>Indicates if the instance that was launched is a Spot Instance or On-Demand Instance.</p>",
+          "locationName": "lifecycle"
+        },
+        "InstanceIds": {
+          "shape": "InstanceIdsSet",
+          "documentation": "<p>The IDs of the instances.</p>",
+          "locationName": "instanceIds"
+        },
+        "InstanceType": {
+          "shape": "InstanceType",
+          "documentation": "<p>The instance type.</p>",
+          "locationName": "instanceType"
+        },
+        "Platform": {
+          "shape": "PlatformValues",
+          "documentation": "<p>The value is <code>Windows</code> for Windows instances; otherwise blank.</p>",
+          "locationName": "platform"
+        }
+      },
+      "documentation": "<p>Describes the instances that were launched by the fleet.</p>"
+    },
+    "CreateFleetInstancesSet": {
+      "type": "list",
+      "member": {
+        "shape": "CreateFleetInstance",
+        "locationName": "item"
+      }
+    },
     "CreateFleetRequest": {
       "type": "structure",
       "required": [
@@ -6463,7 +6534,7 @@
         },
         "Type": {
           "shape": "FleetType",
-          "documentation": "<p>The type of request. Indicates whether the EC2 Fleet only <code>requests</code> the target capacity, or also attempts to <code>maintain</code> it. If you request a certain target capacity, EC2 Fleet only places the required requests. It does not attempt to replenish instances if capacity is diminished, and does not submit requests in alternative capacity pools if capacity is unavailable. To maintain a certain target capacity, EC2 Fleet places the required requests to meet this target capacity. It also automatically replenishes any interrupted Spot Instances. Default: <code>maintain</code>.</p>"
+          "documentation": "<p>The type of request. <code>instant</code> indicates whether the EC2 Fleet submits a one-time request for your desired capacity. <code>request</code> indicates whether the EC2 Fleet submits ongoing requests until your desired capacity is fulfilled, but does not attempt to submit requests in alternative capacity pools if capacity is unavailable or maintain the capacity. <code>maintain</code> indicates whether the EC2 Fleet submits ongoing requests until your desired capacity is fulfilled, and continues to maintain your desired capacity by replenishing interrupted Spot Instances. Default: <code>maintain</code>.</p>"
         },
         "ValidFrom": {
           "shape": "DateTime",
@@ -6491,6 +6562,16 @@
           "shape": "FleetIdentifier",
           "documentation": "<p>The ID of the EC2 Fleet.</p>",
           "locationName": "fleetId"
+        },
+        "Errors": {
+          "shape": "CreateFleetErrorsSet",
+          "documentation": "<p>Information about the instances that could not be launched by the fleet. Valid only when <b>Type</b> is set to <code>instant</code>.</p>",
+          "locationName": "errorSet"
+        },
+        "Instances": {
+          "shape": "CreateFleetInstancesSet",
+          "documentation": "<p>Information about the instances that were launched by the fleet. Valid only when <b>Type</b> is set to <code>instant</code>.</p>",
+          "locationName": "fleetInstanceSet"
         }
       }
     },
@@ -9275,6 +9356,32 @@
       },
       "documentation": "<p>Contains the output for DescribeExportTasks.</p>"
     },
+    "DescribeFleetError": {
+      "type": "structure",
+      "members": {
+        "LaunchTemplateAndOverrides": {
+          "shape": "LaunchTemplateAndOverridesResponse",
+          "documentation": "<p>The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.</p>",
+          "locationName": "launchTemplateAndOverrides"
+        },
+        "Lifecycle": {
+          "shape": "InstanceLifecycle",
+          "documentation": "<p>Indicates if the instance that could not be launched was a Spot Instance or On-Demand Instance.</p>",
+          "locationName": "lifecycle"
+        },
+        "ErrorCode": {
+          "shape": "String",
+          "documentation": "<p>The error code that indicates why the instance could not be launched. For more information about error codes, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html\">Error Codes</a>.</p>",
+          "locationName": "errorCode"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>The error message that describes why the instance could not be launched. For more information about error messages, see ee <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html\">Error Codes</a>.</p>",
+          "locationName": "errorMessage"
+        }
+      },
+      "documentation": "<p>Describes the instances that could not be launched by the fleet.</p>"
+    },
     "DescribeFleetHistoryRequest": {
       "type": "structure",
       "required": [
@@ -9387,6 +9494,51 @@
         }
       }
     },
+    "DescribeFleetsErrorSet": {
+      "type": "list",
+      "member": {
+        "shape": "DescribeFleetError",
+        "locationName": "item"
+      }
+    },
+    "DescribeFleetsInstances": {
+      "type": "structure",
+      "members": {
+        "LaunchTemplateAndOverrides": {
+          "shape": "LaunchTemplateAndOverridesResponse",
+          "documentation": "<p>The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.</p>",
+          "locationName": "launchTemplateAndOverrides"
+        },
+        "Lifecycle": {
+          "shape": "InstanceLifecycle",
+          "documentation": "<p>Indicates if the instance that was launched is a Spot Instance or On-Demand Instance.</p>",
+          "locationName": "lifecycle"
+        },
+        "InstanceIds": {
+          "shape": "InstanceIdsSet",
+          "documentation": "<p>The IDs of the instances.</p>",
+          "locationName": "instanceIds"
+        },
+        "InstanceType": {
+          "shape": "InstanceType",
+          "documentation": "<p>The instance type.</p>",
+          "locationName": "instanceType"
+        },
+        "Platform": {
+          "shape": "PlatformValues",
+          "documentation": "<p>The value is <code>Windows</code> for Windows instances; otherwise blank.</p>",
+          "locationName": "platform"
+        }
+      },
+      "documentation": "<p>Describes the instances that were launched by the fleet.</p>"
+    },
+    "DescribeFleetsInstancesSet": {
+      "type": "list",
+      "member": {
+        "shape": "DescribeFleetsInstances",
+        "locationName": "item"
+      }
+    },
     "DescribeFleetsRequest": {
       "type": "structure",
       "members": {
@@ -9409,7 +9561,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>activity-status</code> - The progress of the EC2 Fleet ( <code>error</code> | <code>pending-fulfillment</code> | <code>pending-termination</code> | <code>fulfilled</code>).</p> </li> <li> <p> <code>excess-capacity-termination-policy</code> - Indicates whether to terminate running instances if the target capacity is decreased below the current EC2 Fleet size (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>fleet-state</code> - The state of the EC2 Fleet (<code>submitted</code> | <code>active</code> | <code>deleted</code> | <code>failed</code> | <code>deleted-running</code> | <code>deleted-terminating</code> | <code>modifying</code>).</p> </li> <li> <p> <code>replace-unhealthy-instances</code> - Indicates whether EC2 Fleet should replace unhealthy instances (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>type</code> - The type of request (<code>request</code> | <code>maintain</code>).</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>activity-status</code> - The progress of the EC2 Fleet ( <code>error</code> | <code>pending-fulfillment</code> | <code>pending-termination</code> | <code>fulfilled</code>).</p> </li> <li> <p> <code>excess-capacity-termination-policy</code> - Indicates whether to terminate running instances if the target capacity is decreased below the current EC2 Fleet size (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>fleet-state</code> - The state of the EC2 Fleet (<code>submitted</code> | <code>active</code> | <code>deleted</code> | <code>failed</code> | <code>deleted-running</code> | <code>deleted-terminating</code> | <code>modifying</code>).</p> </li> <li> <p> <code>replace-unhealthy-instances</code> - Indicates whether EC2 Fleet should replace unhealthy instances (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>type</code> - The type of request (<code>instant</code> | <code>request</code> | <code>maintain</code>).</p> </li> </ul>",
           "locationName": "Filter"
         }
       }
@@ -10218,7 +10370,7 @@
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000.</p>"
+          "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 1 and 200.</p>"
         }
       }
     },
@@ -13436,6 +13588,16 @@
           "shape": "TagList",
           "documentation": "<p>The tags for an EC2 Fleet resource.</p>",
           "locationName": "tagSet"
+        },
+        "Errors": {
+          "shape": "DescribeFleetsErrorSet",
+          "documentation": "<p>Information about the instances that could not be launched by the fleet. Valid only when <b>Type</b> is set to <code>instant</code>.</p>",
+          "locationName": "errorSet"
+        },
+        "Instances": {
+          "shape": "DescribeFleetsInstancesSet",
+          "documentation": "<p>Information about the instances that were launched by the fleet. Valid only when <b>Type</b> is set to <code>instant</code>.</p>",
+          "locationName": "fleetInstanceSet"
         }
       },
       "documentation": "<p>Describes an EC2 Fleet.</p>"
@@ -13541,6 +13703,11 @@
           "shape": "Double",
           "documentation": "<p>The priority for the launch template override. If <b>AllocationStrategy</b> is set to <code>prioritized</code>, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at <code>0</code>. The lower the number, the higher the priority. If no number is set, the override has the lowest priority.</p>",
           "locationName": "priority"
+        },
+        "Placement": {
+          "shape": "PlacementResponse",
+          "documentation": "<p>The location where the instance launched, if applicable.</p>",
+          "locationName": "placement"
         }
       },
       "documentation": "<p>Describes overrides for a launch template.</p>"
@@ -13586,6 +13753,10 @@
         "Priority": {
           "shape": "Double",
           "documentation": "<p>The priority for the launch template override. If <b>AllocationStrategy</b> is set to <code>prioritized</code>, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at <code>0</code>. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority.</p>"
+        },
+        "Placement": {
+          "shape": "Placement",
+          "documentation": "<p>The location where the instance launched, if applicable.</p>"
         }
       },
       "documentation": "<p>Describes overrides for a launch template.</p>"
@@ -13659,7 +13830,8 @@
       "type": "string",
       "enum": [
         "request",
-        "maintain"
+        "maintain",
+        "instant"
       ]
     },
     "Float": {
@@ -16000,6 +16172,9 @@
         "unhealthy"
       ]
     },
+    "InstanceId": {
+      "type": "string"
+    },
     "InstanceIdSet": {
       "type": "list",
       "member": {
@@ -16012,6 +16187,13 @@
       "member": {
         "shape": "String",
         "locationName": "InstanceId"
+      }
+    },
+    "InstanceIdsSet": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceId",
+        "locationName": "item"
       }
     },
     "InstanceInterruptionBehavior": {
@@ -16056,6 +16238,13 @@
         }
       },
       "documentation": "<p>Describes an IPv6 address.</p>"
+    },
+    "InstanceLifecycle": {
+      "type": "string",
+      "enum": [
+        "spot",
+        "on-demand"
+      ]
     },
     "InstanceLifecycleType": {
       "type": "string",
@@ -17120,6 +17309,22 @@
         }
       },
       "documentation": "<p>Describes a launch template.</p>"
+    },
+    "LaunchTemplateAndOverridesResponse": {
+      "type": "structure",
+      "members": {
+        "LaunchTemplateSpecification": {
+          "shape": "FleetLaunchTemplateSpecification",
+          "documentation": "<p>The launch template.</p>",
+          "locationName": "launchTemplateSpecification"
+        },
+        "Overrides": {
+          "shape": "FleetLaunchTemplateOverrides",
+          "documentation": "<p>Any parameters that you specify override the same parameters in the launch template.</p>",
+          "locationName": "overrides"
+        }
+      },
+      "documentation": "<p>Describes a launch template and overrides.</p>"
     },
     "LaunchTemplateBlockDeviceMapping": {
       "type": "structure",
@@ -19758,6 +19963,16 @@
           "shape": "FleetOnDemandAllocationStrategy",
           "documentation": "<p>The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify <code>lowest-price</code>, EC2 Fleet uses price to determine the order, launching the lowest price first. If you specify <code>prioritized</code>, EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. If you do not specify a value, EC2 Fleet defaults to <code>lowest-price</code>.</p>",
           "locationName": "allocationStrategy"
+        },
+        "SingleInstanceType": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet.</p>",
+          "locationName": "singleInstanceType"
+        },
+        "MinTargetCapacity": {
+          "shape": "Integer",
+          "documentation": "<p>The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.</p>",
+          "locationName": "minTargetCapacity"
         }
       },
       "documentation": "<p>The allocation strategy of On-Demand Instances in an EC2 Fleet.</p>"
@@ -19768,6 +19983,14 @@
         "AllocationStrategy": {
           "shape": "FleetOnDemandAllocationStrategy",
           "documentation": "<p>The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify <code>lowest-price</code>, EC2 Fleet uses price to determine the order, launching the lowest price first. If you specify <code>prioritized</code>, EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. If you do not specify a value, EC2 Fleet defaults to <code>lowest-price</code>.</p>"
+        },
+        "SingleInstanceType": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet.</p>"
+        },
+        "MinTargetCapacity": {
+          "shape": "Integer",
+          "documentation": "<p>The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.</p>"
         }
       },
       "documentation": "<p>The allocation strategy of On-Demand Instances in an EC2 Fleet.</p>"
@@ -19939,6 +20162,17 @@
       "member": {
         "shape": "String"
       }
+    },
+    "PlacementResponse": {
+      "type": "structure",
+      "members": {
+        "GroupName": {
+          "shape": "String",
+          "documentation": "<p>The name of the placement group the instance is in.</p>",
+          "locationName": "groupName"
+        }
+      },
+      "documentation": "<p>Describes the placement of an instance.</p>"
     },
     "PlacementStrategy": {
       "type": "string",
@@ -24470,6 +24704,16 @@
           "shape": "Integer",
           "documentation": "<p>The number of Spot pools across which to allocate your target Spot capacity. Valid only when <b>AllocationStrategy</b> is set to <code>lowestPrice</code>. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify.</p>",
           "locationName": "instancePoolsToUseCount"
+        },
+        "SingleInstanceType": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.</p>",
+          "locationName": "singleInstanceType"
+        },
+        "MinTargetCapacity": {
+          "shape": "Integer",
+          "documentation": "<p>The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.</p>",
+          "locationName": "minTargetCapacity"
         }
       },
       "documentation": "<p>Describes the configuration of Spot Instances in an EC2 Fleet.</p>"
@@ -24488,6 +24732,14 @@
         "InstancePoolsToUseCount": {
           "shape": "Integer",
           "documentation": "<p>The number of Spot pools across which to allocate your target Spot capacity. Valid only when Spot <b>AllocationStrategy</b> is set to <code>lowest-price</code>. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify.</p>"
+        },
+        "SingleInstanceType": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.</p>"
+        },
+        "MinTargetCapacity": {
+          "shape": "Integer",
+          "documentation": "<p>The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.</p>"
         }
       },
       "documentation": "<p>Describes the configuration of Spot Instances in an EC2 Fleet request.</p>"
