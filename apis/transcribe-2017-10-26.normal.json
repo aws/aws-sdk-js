@@ -61,7 +61,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Deletes a previously submitted transcription job as well as any other generated results such as the transcription, models, and so on.</p>"
+      "documentation": "<p>Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.</p>"
     },
     "DeleteVocabulary": {
       "name": "DeleteVocabulary",
@@ -404,7 +404,10 @@
         "es-US",
         "en-AU",
         "fr-CA",
-        "en-UK"
+        "en-GB",
+        "de-DE",
+        "pt-BR",
+        "fr-FR"
       ]
     },
     "ListTranscriptionJobsRequest": {
@@ -576,7 +579,7 @@
       "members": {
         "TranscriptionJobName": {
           "shape": "TranscriptionJobName",
-          "documentation": "<p>The name of the job. You can't use the strings \".\" or \"..\" in the job name. The name must be unique within an AWS account.</p>"
+          "documentation": "<p>The name of the job. Note that you can't use the strings \".\" or \"..\" by themselves as the job name. The name must also be unique within an AWS account.</p>"
         },
         "LanguageCode": {
           "shape": "LanguageCode",

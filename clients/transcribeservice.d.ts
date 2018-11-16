@@ -20,11 +20,11 @@ declare class TranscribeService extends Service {
    */
   createVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
   /**
-   * Deletes a previously submitted transcription job as well as any other generated results such as the transcription, models, and so on.
+   * Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.
    */
   deleteTranscriptionJob(params: TranscribeService.Types.DeleteTranscriptionJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a previously submitted transcription job as well as any other generated results such as the transcription, models, and so on.
+   * Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.
    */
   deleteTranscriptionJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -180,7 +180,7 @@ declare namespace TranscribeService {
      */
     DownloadUri?: Uri;
   }
-  export type LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-UK"|string;
+  export type LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-GB"|"de-DE"|"pt-BR"|"fr-FR"|string;
   export interface ListTranscriptionJobsRequest {
     /**
      * When specified, returns only transcription jobs with the specified status.
@@ -280,7 +280,7 @@ declare namespace TranscribeService {
   }
   export interface StartTranscriptionJobRequest {
     /**
-     * The name of the job. You can't use the strings "." or ".." in the job name. The name must be unique within an AWS account.
+     * The name of the job. Note that you can't use the strings "." or ".." by themselves as the job name. The name must also be unique within an AWS account.
      */
     TranscriptionJobName: TranscriptionJobName;
     /**

@@ -77,6 +77,7 @@ module.exports = {
   Route53: require('./route53'),
   Route53Domains: require('./route53domains'),
   S3: require('./s3'),
+  S3Control: require('./s3control'),
   ServiceCatalog: require('./servicecatalog'),
   SES: require('./ses'),
   Shield: require('./shield'),
@@ -147,5 +148,8 @@ module.exports = {
   DLM: require('./dlm'),
   Signer: require('./signer'),
   Chime: require('./chime'),
-  PinpointEmail: require('./pinpointemail')
+  PinpointEmail: require('./pinpointemail'),
+  RAM: require('./ram'),
+  Route53Resolver: require('./route53resolver'),
+  PinpointSMSVoice: require('./pinpointsmsvoice')
 };

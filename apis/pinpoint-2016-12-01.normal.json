@@ -852,6 +852,48 @@
       ],
       "documentation": "Deletes endpoints that are associated with a User ID."
     },
+    "DeleteVoiceChannel": {
+      "name": "DeleteVoiceChannel",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/apps/{application-id}/channels/voice",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DeleteVoiceChannelRequest"
+      },
+      "output": {
+        "shape": "DeleteVoiceChannelResponse",
+        "documentation": "200 response"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "400 response"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "500 response"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "403 response"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "404 response"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "405 response"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "429 response"
+        }
+      ],
+      "documentation": "Delete an Voice channel"
+    },
     "GetAdmChannel": {
       "name": "GetAdmChannel",
       "http": {
@@ -2154,6 +2196,48 @@
       ],
       "documentation": "Returns information about the endpoints that are associated with a User ID."
     },
+    "GetVoiceChannel": {
+      "name": "GetVoiceChannel",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/apps/{application-id}/channels/voice",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetVoiceChannelRequest"
+      },
+      "output": {
+        "shape": "GetVoiceChannelResponse",
+        "documentation": "200 response"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "400 response"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "500 response"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "403 response"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "404 response"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "405 response"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "429 response"
+        }
+      ],
+      "documentation": "Get a Voice Channel"
+    },
     "PhoneNumberValidate": {
       "name": "PhoneNumberValidate",
       "http": {
@@ -2993,6 +3077,48 @@
         }
       ],
       "documentation": "Update an SMS channel."
+    },
+    "UpdateVoiceChannel": {
+      "name": "UpdateVoiceChannel",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/apps/{application-id}/channels/voice",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateVoiceChannelRequest"
+      },
+      "output": {
+        "shape": "UpdateVoiceChannelResponse",
+        "documentation": "200 response"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "400 response"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "500 response"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "403 response"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "404 response"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "405 response"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "429 response"
+        }
+      ],
+      "documentation": "Update an Voice channel"
     }
   },
   "shapes": {
@@ -3255,7 +3381,7 @@
         },
         "MediaUrl": {
           "shape": "__string",
-          "documentation": "The URL that points to a video used in the push notification."
+          "documentation": "A URL that refers to the location of an image or video that you want to display in the push notification."
         },
         "PreferredAuthenticationMethod": {
           "shape": "__string",
@@ -3730,7 +3856,7 @@
         },
         "QuietTime": {
           "shape": "QuietTime",
-          "documentation": "The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own."
+          "documentation": "The default quiet time for the app. Campaigns in the app don't send messages to endpoints during the quiet time.\n\nNote: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your app. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.\n\nWhen you set up an app to use quiet time, campaigns in that app don't send messages during the time range you specified, as long as all of the following are true:\n- The endpoint includes a valid Demographic.Timezone attribute.\n- The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the app (or campaign, if applicable).\n- The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the app (or campaign, if applicable).\n\nIndividual campaigns within the app can have their own quiet time settings, which override the quiet time settings at the app level."
         }
       },
       "documentation": "Application settings.",
@@ -3944,6 +4070,21 @@
         }
       },
       "documentation": "The email message configuration.",
+      "required": []
+    },
+    "CampaignEventFilter": {
+      "type": "structure",
+      "members": {
+        "Dimensions": {
+          "shape": "EventDimensions",
+          "documentation": "An object that defines the dimensions for the event filter."
+        },
+        "FilterType": {
+          "shape": "FilterType",
+          "documentation": "The type of event that causes the campaign to be sent. Possible values:\n\nSYSTEM - Send the campaign when a system event occurs. See the System resource for more information.\n\nENDPOINT - Send the campaign when an endpoint event occurs. See the Event resource for more information."
+        }
+      },
+      "documentation": "An object that defines the events that cause the campaign to be sent.",
       "required": []
     },
     "CampaignHook": {
@@ -4179,6 +4320,7 @@
         "APNS_VOIP_SANDBOX",
         "ADM",
         "SMS",
+        "VOICE",
         "EMAIL",
         "BAIDU",
         "CUSTOM"
@@ -4820,6 +4962,32 @@
       ],
       "payload": "EndpointsResponse"
     },
+    "DeleteVoiceChannelRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "The unique ID of your Amazon Pinpoint application."
+        }
+      },
+      "required": [
+        "ApplicationId"
+      ]
+    },
+    "DeleteVoiceChannelResponse": {
+      "type": "structure",
+      "members": {
+        "VoiceChannelResponse": {
+          "shape": "VoiceChannelResponse"
+        }
+      },
+      "required": [
+        "VoiceChannelResponse"
+      ],
+      "payload": "VoiceChannelResponse"
+    },
     "DeliveryStatus": {
       "type": "string",
       "enum": [
@@ -4873,6 +5041,10 @@
         "SMSMessage": {
           "shape": "SMSMessage",
           "documentation": "The message to SMS channels. Overrides the default message."
+        },
+        "VoiceMessage": {
+          "shape": "VoiceMessage",
+          "documentation": "The message to Voice channels. Overrides the default message."
         }
       },
       "documentation": "Message definitions for the default message and any messages that are tailored for specific channels.",
@@ -5171,7 +5343,7 @@
         },
         "DeliveryStatus": {
           "shape": "DeliveryStatus",
-          "documentation": "The delivery status of the message. Possible values:\n\nSUCCESS - The message was successfully delivered to the endpoint.\n\nTRANSIENT_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later.\n\nFAILURE_PERMANENT - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.\n\nTIMEOUT - The message couldn't be sent within the timeout period.\n\nQUIET_TIME - The local time for the endpoint was within the Quiet Hours for the campaign.\n\nDAILY_CAP - The endpoint has received the maximum number of messages it can receive within a 24-hour period.\n\nHOLDOUT - The endpoint was in a hold out treatment for the campaign.\n\nTHROTTLED - Amazon Pinpoint throttled sending to this endpoint.\n\nEXPIRED - The endpoint address is expired.\n\nCAMPAIGN_CAP - The endpoint received the maximum number of messages allowed by the campaign.\n\nSERVICE_FAILURE - A service-level failure prevented Amazon Pinpoint from delivering the message.\n\nUNKNOWN - An unknown error occurred."
+          "documentation": "The delivery status of the message. Possible values:\n\nSUCCESS - The message was successfully delivered to the endpoint.\n\nTRANSIENT_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later.\n\nFAILURE_PERMANENT - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.\n\nTIMEOUT - The message couldn't be sent within the timeout period.\n\nQUIET_TIME - The local time for the endpoint was within the QuietTime for the campaign or app.\n\nDAILY_CAP - The endpoint has received the maximum number of messages it can receive within a 24-hour period.\n\nHOLDOUT - The endpoint was in a hold out treatment for the campaign.\n\nTHROTTLED - Amazon Pinpoint throttled sending to this endpoint.\n\nEXPIRED - The endpoint address is expired.\n\nCAMPAIGN_CAP - The endpoint received the maximum number of messages allowed by the campaign.\n\nSERVICE_FAILURE - A service-level failure prevented Amazon Pinpoint from delivering the message.\n\nUNKNOWN - An unknown error occurred."
         },
         "MessageId": {
           "shape": "__string",
@@ -5391,6 +5563,24 @@
       "documentation": "Model for creating or updating events.",
       "required": []
     },
+    "EventDimensions": {
+      "type": "structure",
+      "members": {
+        "Attributes": {
+          "shape": "MapOfAttributeDimension",
+          "documentation": "Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create an event filter."
+        },
+        "EventType": {
+          "shape": "SetDimension",
+          "documentation": "The name of the event that causes the campaign to be sent. This can be a standard event type that Amazon Pinpoint generates, such as _session.start, or a custom event that's specific to your app."
+        },
+        "Metrics": {
+          "shape": "MapOfMetricDimension",
+          "documentation": "Custom metrics that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create an event filter."
+        }
+      },
+      "documentation": "Event dimensions."
+    },
     "EventItemResponse": {
       "type": "structure",
       "members": {
@@ -5592,6 +5782,13 @@
       "documentation": "Export job list.",
       "required": []
     },
+    "FilterType": {
+      "type": "string",
+      "enum": [
+        "SYSTEM",
+        "ENDPOINT"
+      ]
+    },
     "Format": {
       "type": "string",
       "enum": [
@@ -5606,7 +5803,8 @@
         "HOURLY",
         "DAILY",
         "WEEKLY",
-        "MONTHLY"
+        "MONTHLY",
+        "EVENT"
       ]
     },
     "GCMChannelRequest": {
@@ -6801,6 +6999,32 @@
       ],
       "payload": "EndpointsResponse"
     },
+    "GetVoiceChannelRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "The unique ID of your Amazon Pinpoint application."
+        }
+      },
+      "required": [
+        "ApplicationId"
+      ]
+    },
+    "GetVoiceChannelResponse": {
+      "type": "structure",
+      "members": {
+        "VoiceChannelResponse": {
+          "shape": "VoiceChannelResponse"
+        }
+      },
+      "required": [
+        "VoiceChannelResponse"
+      ],
+      "payload": "VoiceChannelResponse"
+    },
     "ImportJobRequest": {
       "type": "structure",
       "members": {
@@ -7016,7 +7240,7 @@
         },
         "MediaUrl": {
           "shape": "__string",
-          "documentation": "The URL that points to the media resource, for example a .mp4 or .gif file."
+          "documentation": "A URL that refers to the location of an image or video that you want to display in the push notification."
         },
         "RawContent": {
           "shape": "__string",
@@ -7145,7 +7369,7 @@
       "members": {
         "DeliveryStatus": {
           "shape": "DeliveryStatus",
-          "documentation": "The delivery status of the message. Possible values:\n\nSUCCESS - The message was successfully delivered to the endpoint.\n\nTRANSIENT_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later.\n\nFAILURE_PERMANENT - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.\n\nTIMEOUT - The message couldn't be sent within the timeout period.\n\nQUIET_TIME - The local time for the endpoint was within the Quiet Hours for the campaign.\n\nDAILY_CAP - The endpoint has received the maximum number of messages it can receive within a 24-hour period.\n\nHOLDOUT - The endpoint was in a hold out treatment for the campaign.\n\nTHROTTLED - Amazon Pinpoint throttled sending to this endpoint.\n\nEXPIRED - The endpoint address is expired.\n\nCAMPAIGN_CAP - The endpoint received the maximum number of messages allowed by the campaign.\n\nSERVICE_FAILURE - A service-level failure prevented Amazon Pinpoint from delivering the message.\n\nUNKNOWN - An unknown error occurred."
+          "documentation": "The delivery status of the message. Possible values:\n\nSUCCESS - The message was successfully delivered to the endpoint.\n\nTRANSIENT_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later.\n\nFAILURE_PERMANENT - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.\n\nTIMEOUT - The message couldn't be sent within the timeout period.\n\nQUIET_TIME - The local time for the endpoint was within the QuietTime for the campaign or app.\n\nDAILY_CAP - The endpoint has received the maximum number of messages it can receive within a 24-hour period.\n\nHOLDOUT - The endpoint was in a hold out treatment for the campaign.\n\nTHROTTLED - Amazon Pinpoint throttled sending to this endpoint.\n\nEXPIRED - The endpoint address is expired.\n\nCAMPAIGN_CAP - The endpoint received the maximum number of messages allowed by the campaign.\n\nSERVICE_FAILURE - A service-level failure prevented Amazon Pinpoint from delivering the message.\n\nUNKNOWN - An unknown error occurred."
         },
         "MessageId": {
           "shape": "__string",
@@ -7183,7 +7407,7 @@
         },
         "Value": {
           "shape": "__double",
-          "documentation": "Value to be compared."
+          "documentation": "The value to be compared."
         }
       },
       "documentation": "Custom metric dimension",
@@ -7427,7 +7651,7 @@
       "members": {
         "Data": {
           "shape": "__blob",
-          "documentation": "The raw data of the email."
+          "documentation": "The raw email message itself. Then entire message must be base64-encoded."
         }
       },
       "documentation": "An email represented as a raw MIME message."
@@ -7614,9 +7838,13 @@
           "shape": "__string",
           "documentation": "The scheduled time that the campaign ends in ISO 8601 format."
         },
+        "EventFilter": {
+          "shape": "CampaignEventFilter",
+          "documentation": "Defines the type of events that can trigger the campaign. Used when the Frequency is set to EVENT."
+        },
         "Frequency": {
           "shape": "Frequency",
-          "documentation": "How often the campaign delivers messages.\n\nValid values: ONCE, HOURLY, DAILY, WEEKLY, MONTHLY"
+          "documentation": "How often the campaign delivers messages.\n\nValid values:\n\nONCE\n\nHOURLY\n\nDAILY\n\nWEEKLY\n\nMONTHLY\n\nEVENT"
         },
         "IsLocalTime": {
           "shape": "__boolean",
@@ -7624,7 +7852,7 @@
         },
         "QuietTime": {
           "shape": "QuietTime",
-          "documentation": "The time during which the campaign sends no messages."
+          "documentation": "The default quiet time for the campaign. The campaign doesn't send messages to endpoints during the quiet time.\n\nNote: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your campaign. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.\n\nWhen you set up a campaign to use quiet time, the campaign doesn't send messages during the time range you specified, as long as all of the following are true:\n- The endpoint includes a valid Demographic.Timezone attribute.\n- The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the campaign.\n- The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the campaign."
         },
         "StartTime": {
           "shape": "__string",
@@ -8565,6 +8793,120 @@
       ],
       "payload": "SMSChannelResponse"
     },
+    "UpdateVoiceChannelRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "The unique ID of your Amazon Pinpoint application."
+        },
+        "VoiceChannelRequest": {
+          "shape": "VoiceChannelRequest"
+        }
+      },
+      "required": [
+        "ApplicationId",
+        "VoiceChannelRequest"
+      ],
+      "payload": "VoiceChannelRequest"
+    },
+    "UpdateVoiceChannelResponse": {
+      "type": "structure",
+      "members": {
+        "VoiceChannelResponse": {
+          "shape": "VoiceChannelResponse"
+        }
+      },
+      "required": [
+        "VoiceChannelResponse"
+      ],
+      "payload": "VoiceChannelResponse"
+    },
+    "VoiceChannelRequest": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "__boolean",
+          "documentation": "If the channel is enabled for sending messages."
+        }
+      },
+      "documentation": "Voice Channel Request",
+      "required": []
+    },
+    "VoiceChannelResponse": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "documentation": "Application id"
+        },
+        "CreationDate": {
+          "shape": "__string",
+          "documentation": "The date that the settings were last updated in ISO 8601 format."
+        },
+        "Enabled": {
+          "shape": "__boolean",
+          "documentation": "If the channel is enabled for sending messages."
+        },
+        "HasCredential": {
+          "shape": "__boolean"
+        },
+        "Id": {
+          "shape": "__string",
+          "documentation": "Channel ID. Not used, only for backwards compatibility."
+        },
+        "IsArchived": {
+          "shape": "__boolean",
+          "documentation": "Is this channel archived"
+        },
+        "LastModifiedBy": {
+          "shape": "__string",
+          "documentation": "Who made the last change"
+        },
+        "LastModifiedDate": {
+          "shape": "__string",
+          "documentation": "Last date this was updated"
+        },
+        "Platform": {
+          "shape": "__string",
+          "documentation": "Platform type. Will be \"Voice\""
+        },
+        "Version": {
+          "shape": "__integer",
+          "documentation": "Version of channel"
+        }
+      },
+      "documentation": "Voice Channel Response.",
+      "required": []
+    },
+    "VoiceMessage": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "__string",
+          "documentation": "The message body of the notification, the email body or the text message."
+        },
+        "LanguageCode": {
+          "shape": "__string",
+          "documentation": "Language of sent message"
+        },
+        "OriginationNumber": {
+          "shape": "__string",
+          "documentation": "Is the number from the pool or messaging service to send from."
+        },
+        "Substitutions": {
+          "shape": "MapOfListOf__string",
+          "documentation": "Default message substitutions. Can be overridden by individual address substitutions."
+        },
+        "VoiceId": {
+          "shape": "__string",
+          "documentation": "Voice ID of sent message."
+        }
+      },
+      "documentation": "Voice Message."
+    },
     "WriteApplicationSettingsRequest": {
       "type": "structure",
       "members": {
@@ -8582,7 +8924,7 @@
         },
         "QuietTime": {
           "shape": "QuietTime",
-          "documentation": "The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own."
+          "documentation": "The default quiet time for the app. Campaigns in the app don't send messages to endpoints during the quiet time.\n\nNote: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your app. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.\n\nWhen you set up an app to use quiet time, campaigns in that app don't send messages during the time range you specified, as long as all of the following are true:\n- The endpoint includes a valid Demographic.Timezone attribute.\n- The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the app (or campaign, if applicable).\n- The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the app (or campaign, if applicable).\n\nIndividual campaigns within the app can have their own quiet time settings, which override the quiet time settings at the app level."
         }
       },
       "documentation": "Creating application setting request"

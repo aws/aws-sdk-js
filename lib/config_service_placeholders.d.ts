@@ -77,6 +77,7 @@ export abstract class ConfigurationServicePlaceholders {
   route53?: AWS.Route53.Types.ClientConfiguration;
   route53domains?: AWS.Route53Domains.Types.ClientConfiguration;
   s3?: AWS.S3.Types.ClientConfiguration;
+  s3control?: AWS.S3Control.Types.ClientConfiguration;
   servicecatalog?: AWS.ServiceCatalog.Types.ClientConfiguration;
   ses?: AWS.SES.Types.ClientConfiguration;
   shield?: AWS.Shield.Types.ClientConfiguration;
@@ -148,6 +149,9 @@ export abstract class ConfigurationServicePlaceholders {
   signer?: AWS.Signer.Types.ClientConfiguration;
   chime?: AWS.Chime.Types.ClientConfiguration;
   pinpointemail?: AWS.PinpointEmail.Types.ClientConfiguration;
+  ram?: AWS.RAM.Types.ClientConfiguration;
+  route53resolver?: AWS.Route53Resolver.Types.ClientConfiguration;
+  pinpointsmsvoice?: AWS.PinpointSMSVoice.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -227,6 +231,7 @@ export interface ConfigurationServiceApiVersions {
   route53?: AWS.Route53.Types.apiVersion;
   route53domains?: AWS.Route53Domains.Types.apiVersion;
   s3?: AWS.S3.Types.apiVersion;
+  s3control?: AWS.S3Control.Types.apiVersion;
   servicecatalog?: AWS.ServiceCatalog.Types.apiVersion;
   ses?: AWS.SES.Types.apiVersion;
   shield?: AWS.Shield.Types.apiVersion;
@@ -298,4 +303,7 @@ export interface ConfigurationServiceApiVersions {
   signer?: AWS.Signer.Types.apiVersion;
   chime?: AWS.Chime.Types.apiVersion;
   pinpointemail?: AWS.PinpointEmail.Types.apiVersion;
+  ram?: AWS.RAM.Types.apiVersion;
+  route53resolver?: AWS.Route53Resolver.Types.apiVersion;
+  pinpointsmsvoice?: AWS.PinpointSMSVoice.Types.apiVersion;
 }

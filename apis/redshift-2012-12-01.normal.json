@@ -113,6 +113,49 @@
       ],
       "documentation": "<p>Authorizes the specified AWS customer account to restore the specified snapshot.</p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
+    "BatchDeleteClusterSnapshots": {
+      "name": "BatchDeleteClusterSnapshots",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchDeleteClusterSnapshotsRequest"
+      },
+      "output": {
+        "shape": "BatchDeleteClusterSnapshotsResult",
+        "resultWrapper": "BatchDeleteClusterSnapshotsResult"
+      },
+      "errors": [
+        {
+          "shape": "BatchDeleteRequestSizeExceededFault"
+        }
+      ],
+      "documentation": "<p>Deletes a set of cluster snapshots.</p>"
+    },
+    "BatchModifyClusterSnapshots": {
+      "name": "BatchModifyClusterSnapshots",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchModifyClusterSnapshotsMessage"
+      },
+      "output": {
+        "shape": "BatchModifyClusterSnapshotsOutputMessage",
+        "resultWrapper": "BatchModifyClusterSnapshotsResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRetentionPeriodFault"
+        },
+        {
+          "shape": "BatchModifyClusterSnapshotsLimitExceededFault"
+        }
+      ],
+      "documentation": "<p>Modifies the settings for a list of snapshots.</p>"
+    },
     "CancelResize": {
       "name": "CancelResize",
       "http": {
@@ -167,6 +210,9 @@
         },
         {
           "shape": "ClusterSnapshotQuotaExceededFault"
+        },
+        {
+          "shape": "InvalidRetentionPeriodFault"
         }
       ],
       "documentation": "<p>Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state.</p> <p>When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them.</p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
@@ -244,6 +290,12 @@
         },
         {
           "shape": "InvalidClusterTrackFault"
+        },
+        {
+          "shape": "SnapshotScheduleNotFoundFault"
+        },
+        {
+          "shape": "InvalidRetentionPeriodFault"
         }
       ],
       "documentation": "<p>Creates a new cluster.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
@@ -337,6 +389,9 @@
         },
         {
           "shape": "InvalidTagFault"
+        },
+        {
+          "shape": "InvalidRetentionPeriodFault"
         }
       ],
       "documentation": "<p>Creates a manual snapshot of the specified cluster. The cluster must be in the <code>available</code> state. </p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
@@ -525,6 +580,38 @@
       ],
       "documentation": "<p>Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
     },
+    "CreateSnapshotSchedule": {
+      "name": "CreateSnapshotSchedule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateSnapshotScheduleMessage"
+      },
+      "output": {
+        "shape": "SnapshotSchedule",
+        "resultWrapper": "CreateSnapshotScheduleResult"
+      },
+      "errors": [
+        {
+          "shape": "SnapshotScheduleAlreadyExistsFault"
+        },
+        {
+          "shape": "InvalidScheduleFault"
+        },
+        {
+          "shape": "SnapshotScheduleQuotaExceededFault"
+        },
+        {
+          "shape": "TagLimitExceededFault"
+        },
+        {
+          "shape": "ScheduleDefinitionTypeUnsupportedFault"
+        }
+      ],
+      "documentation": "<p>Creates a new snapshot schedule.</p>"
+    },
     "CreateTags": {
       "name": "CreateTags",
       "http": {
@@ -572,6 +659,9 @@
         },
         {
           "shape": "ClusterSnapshotQuotaExceededFault"
+        },
+        {
+          "shape": "InvalidRetentionPeriodFault"
         }
       ],
       "documentation": "<p>Deletes a previously provisioned cluster. A successful response from the web service indicates that the request was received correctly. Use <a>DescribeClusters</a> to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you want to shut down the cluster and retain it for future use, set <i>SkipFinalClusterSnapshot</i> to <code>false</code> and specify a name for <i>FinalClusterSnapshotIdentifier</i>. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be \"final-snapshot\" while the snapshot is being taken, then it's \"deleting\" once Amazon Redshift begins deleting the cluster. </p> <p> For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
@@ -734,6 +824,25 @@
         }
       ],
       "documentation": "<p>Deletes the specified snapshot copy grant.</p>"
+    },
+    "DeleteSnapshotSchedule": {
+      "name": "DeleteSnapshotSchedule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteSnapshotScheduleMessage"
+      },
+      "errors": [
+        {
+          "shape": "InvalidClusterSnapshotScheduleStateFault"
+        },
+        {
+          "shape": "SnapshotScheduleNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Deletes a snapshot schedule.</p>"
     },
     "DeleteTags": {
       "name": "DeleteTags",
@@ -1212,6 +1321,33 @@
       ],
       "documentation": "<p>Returns a list of snapshot copy grants owned by the AWS account in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
     },
+    "DescribeSnapshotSchedules": {
+      "name": "DescribeSnapshotSchedules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeSnapshotSchedulesMessage"
+      },
+      "output": {
+        "shape": "DescribeSnapshotSchedulesOutputMessage",
+        "resultWrapper": "DescribeSnapshotSchedulesResult"
+      },
+      "documentation": "<p>Returns a list of snapshot schedules. </p>"
+    },
+    "DescribeStorage": {
+      "name": "DescribeStorage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "output": {
+        "shape": "CustomerStorageMessage",
+        "resultWrapper": "DescribeStorageResult"
+      },
+      "documentation": "<p>Returns the total amount of snapshot usage and provisioned storage for a user in megabytes.</p>"
+    },
     "DescribeTableRestoreStatus": {
       "name": "DescribeTableRestoreStatus",
       "http": {
@@ -1382,6 +1518,9 @@
         },
         {
           "shape": "DependentServiceRequestThrottlingFault"
+        },
+        {
+          "shape": "InvalidRetentionPeriodFault"
         }
       ],
       "documentation": "<p>Enables the automatic copy of snapshots from one region to another region for a specified cluster.</p>"
@@ -1511,6 +1650,9 @@
         },
         {
           "shape": "InvalidClusterTrackFault"
+        },
+        {
+          "shape": "InvalidRetentionPeriodFault"
         }
       ],
       "documentation": "<p>Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p>"
@@ -1606,6 +1748,54 @@
         }
       ],
       "documentation": "<p>Modifies the parameters of a parameter group.</p> <p> For more information about parameters and parameter groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+    },
+    "ModifyClusterSnapshot": {
+      "name": "ModifyClusterSnapshot",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyClusterSnapshotMessage"
+      },
+      "output": {
+        "shape": "ModifyClusterSnapshotResult",
+        "resultWrapper": "ModifyClusterSnapshotResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidClusterSnapshotStateFault"
+        },
+        {
+          "shape": "ClusterSnapshotNotFoundFault"
+        },
+        {
+          "shape": "InvalidRetentionPeriodFault"
+        }
+      ],
+      "documentation": "<p>Modifies the settings for a snapshot.</p>"
+    },
+    "ModifyClusterSnapshotSchedule": {
+      "name": "ModifyClusterSnapshotSchedule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyClusterSnapshotScheduleMessage"
+      },
+      "errors": [
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "SnapshotScheduleNotFoundFault"
+        },
+        {
+          "shape": "InvalidClusterSnapshotScheduleStateFault"
+        }
+      ],
+      "documentation": "<p>Modifies a snapshot schedule for a cluster.</p>"
     },
     "ModifyClusterSubnetGroup": {
       "name": "ModifyClusterSubnetGroup",
@@ -1711,9 +1901,38 @@
         },
         {
           "shape": "InvalidClusterStateFault"
+        },
+        {
+          "shape": "InvalidRetentionPeriodFault"
         }
       ],
-      "documentation": "<p>Modifies the number of days to retain automated snapshots in the destination region after they are copied from the source region.</p>"
+      "documentation": "<p>Modifies the number of days to retain snapshots in the destination region after they are copied from the source region. By default, this only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots will be updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option only newly copied manual snapshots will have the new retention period </p>"
+    },
+    "ModifySnapshotSchedule": {
+      "name": "ModifySnapshotSchedule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifySnapshotScheduleMessage"
+      },
+      "output": {
+        "shape": "SnapshotSchedule",
+        "resultWrapper": "ModifySnapshotScheduleResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidScheduleFault"
+        },
+        {
+          "shape": "SnapshotScheduleNotFoundFault"
+        },
+        {
+          "shape": "SnapshotScheduleUpdateInProgressFault"
+        }
+      ],
+      "documentation": "<p>Modifies a snapshot schedule. Any schedule associate with a cluster will be modified asynchronously.</p>"
     },
     "PurchaseReservedNodeOffering": {
       "name": "PurchaseReservedNodeOffering",
@@ -1832,7 +2051,7 @@
           "shape": "LimitExceededFault"
         }
       ],
-      "documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize your cluster is avaialble for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> </ul> </li> <li> <p>The type of nodes you add must match the node type for the cluster.</p> </li> </ul>"
+      "documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>"
     },
     "RestoreFromClusterSnapshot": {
       "name": "RestoreFromClusterSnapshot",
@@ -1913,6 +2132,9 @@
         },
         {
           "shape": "InvalidClusterTrackFault"
+        },
+        {
+          "shape": "SnapshotScheduleNotFoundFault"
         }
       ],
       "documentation": "<p>Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the <a>ModifyCluster</a> API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore.</p> <p>If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.</p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
@@ -2219,6 +2441,78 @@
         "locationName": "AvailabilityZone"
       }
     },
+    "BatchDeleteClusterSnapshotsRequest": {
+      "type": "structure",
+      "required": [
+        "Identifiers"
+      ],
+      "members": {
+        "Identifiers": {
+          "shape": "DeleteClusterSnapshotMessageList",
+          "documentation": "<p>A list of indentifiers for the snapshots you want to delete.</p>"
+        }
+      }
+    },
+    "BatchDeleteClusterSnapshotsResult": {
+      "type": "structure",
+      "members": {
+        "Resources": {
+          "shape": "SnapshotIdentifierList",
+          "documentation": "<p>A list of the snapshot identifiers that were deleted. </p>"
+        },
+        "Errors": {
+          "shape": "BatchSnapshotOperationErrorList",
+          "documentation": "<p>A list of any errors returned.</p>"
+        }
+      }
+    },
+    "BatchModifyClusterSnapshotsMessage": {
+      "type": "structure",
+      "required": [
+        "SnapshotIdentifierList"
+      ],
+      "members": {
+        "SnapshotIdentifierList": {
+          "shape": "SnapshotIdentifierList",
+          "documentation": "<p>A list of snapshot identifiers you want to modify.</p>"
+        },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of days that a manual snapshot is retained. If you specify the value -1, the manual snapshot is retained indefinitely.</p> <p>The number must be either -1 or an integer between 1 and 3,653.</p> <p>If you decrease the manual snapshot retention period from its current value, existing manual snapshots that fall outside of the new retention period will return an error. If you want to suppress the errors and delete the snapshots, use the force option. </p>"
+        },
+        "Force": {
+          "shape": "Boolean",
+          "documentation": "<p>A boolean value indicating whether to override an exception if the retention period has passed. </p>"
+        }
+      }
+    },
+    "BatchModifyClusterSnapshotsOutputMessage": {
+      "type": "structure",
+      "members": {
+        "Resources": {
+          "shape": "SnapshotIdentifierList",
+          "documentation": "<p>A list of the snapshots that were modified.</p>"
+        },
+        "Errors": {
+          "shape": "BatchSnapshotOperationErrors",
+          "documentation": "<p>A list of any errors returned.</p>"
+        }
+      }
+    },
+    "BatchSnapshotOperationErrorList": {
+      "type": "list",
+      "member": {
+        "shape": "SnapshotErrorMessage",
+        "locationName": "SnapshotErrorMessage"
+      }
+    },
+    "BatchSnapshotOperationErrors": {
+      "type": "list",
+      "member": {
+        "shape": "SnapshotErrorMessage",
+        "locationName": "SnapshotErrorMessage"
+      }
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -2233,7 +2527,7 @@
       "members": {
         "ClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>The unique identifier for the cluster whose resize operation you wish to cancel.</p>"
+          "documentation": "<p>The unique identifier for the cluster that you want to cancel a resize operation for.</p>"
         }
       }
     },
@@ -2275,6 +2569,10 @@
         "AutomatedSnapshotRetentionPeriod": {
           "shape": "Integer",
           "documentation": "<p>The number of days that automatic cluster snapshots are retained.</p>"
+        },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting does not change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653</p>"
         },
         "ClusterSecurityGroups": {
           "shape": "ClusterSecurityGroupMembershipList",
@@ -2385,11 +2683,19 @@
         },
         "ElasticResizeNumberOfNodeOptions": {
           "shape": "String",
-          "documentation": "<p>Indicates the number of nodes the cluster can be resized to with the elastic resize method. </p>"
+          "documentation": "<p>The number of nodes that you can resize the cluster to with the elastic resize method. </p>"
         },
         "DeferredMaintenanceWindows": {
           "shape": "DeferredMaintenanceWindowsList",
           "documentation": "<p>Describes a group of <code>DeferredMaintenanceWindow</code> objects.</p>"
+        },
+        "SnapshotScheduleIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the cluster snapshot schedule.</p>"
+        },
+        "SnapshotScheduleState": {
+          "shape": "ScheduleState",
+          "documentation": "<p>The current state of the cluster snapshot schedule.</p>"
         },
         "ResizeInfo": {
           "shape": "ResizeInfo",
@@ -2712,6 +3018,10 @@
           "shape": "Long",
           "documentation": "<p>The number of days that automated snapshots are retained in the destination region after they are copied from a source region.</p>"
         },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days that automated snapshots are retained in the destination region after they are copied from a source region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
+        },
         "SnapshotCopyGrantName": {
           "shape": "String",
           "documentation": "<p>The name of the snapshot copy grant.</p>"
@@ -2842,6 +3152,10 @@
         "TargetSnapshotIdentifier": {
           "shape": "String",
           "documentation": "<p>The identifier given to the new manual snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for the AWS account that is making the request.</p> </li> </ul>"
+        },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>"
         }
       },
       "documentation": "<p/>"
@@ -2915,6 +3229,10 @@
           "shape": "IntegerOptional",
           "documentation": "<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: <code>1</code> </p> <p>Constraints: Must be a value from 0 to 35.</p>"
         },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting does not change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653</p>"
+        },
         "Port": {
           "shape": "IntegerOptional",
           "documentation": "<p>The port number on which the cluster accepts incoming connections.</p> <p>The cluster is accessible only via the JDBC and ODBC connection strings. Part of the connection string requires the port on which the cluster will listen for incoming connections.</p> <p>Default: <code>5439</code> </p> <p>Valid Values: <code>1150-65535</code> </p>"
@@ -2974,6 +3292,10 @@
         "MaintenanceTrackName": {
           "shape": "String",
           "documentation": "<p>An optional parameter for the name of the maintenance track for the cluster. If you don't provide a maintenance track name, the cluster is assigned to the <code>current</code> track.</p>"
+        },
+        "SnapshotScheduleIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the snapshot schedule.</p>"
         }
       },
       "documentation": "<p/>"
@@ -3065,6 +3387,10 @@
         "ClusterIdentifier": {
           "shape": "String",
           "documentation": "<p>The cluster identifier for which you want a snapshot.</p>"
+        },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -3270,6 +3596,32 @@
         }
       }
     },
+    "CreateSnapshotScheduleMessage": {
+      "type": "structure",
+      "members": {
+        "ScheduleDefinitions": {
+          "shape": "ScheduleDefinitionList",
+          "documentation": "<p>The definition of the snapshot schedule. The definition is made up of schedule expressions. For example, \"cron(30 12 *)\" or \"rate(12 hours)\". </p>"
+        },
+        "ScheduleIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for a snapshot schedule. Only alphanumeric characters are allowed for the identifier.</p>"
+        },
+        "ScheduleDescription": {
+          "shape": "String",
+          "documentation": "<p>The description of the snapshot schedule.</p>"
+        },
+        "Tags": {
+          "shape": "TagList"
+        },
+        "DryRun": {
+          "shape": "BooleanOptional"
+        },
+        "NextInvocations": {
+          "shape": "IntegerOptional"
+        }
+      }
+    },
     "CreateTagsMessage": {
       "type": "structure",
       "required": [
@@ -3287,6 +3639,19 @@
         }
       },
       "documentation": "<p>Contains the output from the <code>CreateTags</code> action. </p>"
+    },
+    "CustomerStorageMessage": {
+      "type": "structure",
+      "members": {
+        "TotalBackupSizeInMegaBytes": {
+          "shape": "Double",
+          "documentation": "<p>The total amount of storage currently used for snapshots.</p>"
+        },
+        "TotalProvisionedStorageInMegaBytes": {
+          "shape": "Double",
+          "documentation": "<p>The total amount of storage currently provisioned.</p>"
+        }
+      }
     },
     "DataTransferProgress": {
       "type": "structure",
@@ -3386,6 +3751,10 @@
         "FinalClusterSnapshotIdentifier": {
           "shape": "String",
           "documentation": "<p>The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, <i>SkipFinalClusterSnapshot</i> must be <code>false</code>. </p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
+        },
+        "FinalClusterSnapshotRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely.</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>"
         }
       },
       "documentation": "<p/>"
@@ -3432,7 +3801,7 @@
       "members": {
         "SnapshotIdentifier": {
           "shape": "String",
-          "documentation": "<p>The unique identifier of the manual snapshot to be deleted.</p> <p>Constraints: Must be the name of an existing snapshot that is in the <code>available</code> state.</p>"
+          "documentation": "<p>The unique identifier of the manual snapshot to be deleted.</p> <p>Constraints: Must be the name of an existing snapshot that is in the <code>available</code>, <code>failed</code>, or <code>cancelled</code> state.</p>"
         },
         "SnapshotClusterIdentifier": {
           "shape": "String",
@@ -3440,6 +3809,13 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DeleteClusterSnapshotMessageList": {
+      "type": "list",
+      "member": {
+        "shape": "DeleteClusterSnapshotMessage",
+        "locationName": "DeleteClusterSnapshotMessage"
+      }
     },
     "DeleteClusterSnapshotResult": {
       "type": "structure",
@@ -3513,6 +3889,18 @@
         }
       },
       "documentation": "<p>The result of the <code>DeleteSnapshotCopyGrant</code> action.</p>"
+    },
+    "DeleteSnapshotScheduleMessage": {
+      "type": "structure",
+      "required": [
+        "ScheduleIdentifier"
+      ],
+      "members": {
+        "ScheduleIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier of the snapshot schedule to delete.</p>"
+        }
+      }
     },
     "DeleteTagsMessage": {
       "type": "structure",
@@ -3681,6 +4069,9 @@
         "ClusterExists": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether to return snapshots only for an existing cluster. Table-level restore can be performed only using a snapshot of an existing cluster, that is, a cluster that has not been deleted. If <code>ClusterExists</code> is set to <code>true</code>, <code>ClusterIdentifier</code> is required.</p>"
+        },
+        "SortingEntities": {
+          "shape": "SnapshotSortingEntityList"
         }
       },
       "documentation": "<p/>"
@@ -4037,6 +4428,48 @@
       },
       "documentation": "<p>The result of the <code>DescribeSnapshotCopyGrants</code> action.</p>"
     },
+    "DescribeSnapshotSchedulesMessage": {
+      "type": "structure",
+      "members": {
+        "ClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The unique identifier for the cluster whose snapshot schedules you want to view.</p>"
+        },
+        "ScheduleIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for a snapshot schedule.</p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The key value for a snapshot schedule tag.</p>"
+        },
+        "TagValues": {
+          "shape": "TagValueList",
+          "documentation": "<p>The value corresponding to the key of the snapshot schedule tag.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>marker</code> parameter and retrying the command. If the <code>marker</code> field is empty, all response records have been retrieved for the request.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number or response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned <code>marker</code> value.</p>"
+        }
+      }
+    },
+    "DescribeSnapshotSchedulesOutputMessage": {
+      "type": "structure",
+      "members": {
+        "SnapshotSchedules": {
+          "shape": "SnapshotScheduleList",
+          "documentation": "<p>A list of SnapshotSchedules.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>marker</code> parameter and retrying the command. If the <code>marker</code> field is empty, all response records have been retrieved for the request.</p>"
+        }
+      }
+    },
     "DescribeTableRestoreStatusMessage": {
       "type": "structure",
       "members": {
@@ -4223,6 +4656,10 @@
         "SnapshotCopyGrantName": {
           "shape": "String",
           "documentation": "<p>The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.</p>"
+        },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of days to retain newly copied snapshots in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
         }
       },
       "documentation": "<p/>"
@@ -4865,6 +5302,10 @@
           "shape": "IntegerOptional",
           "documentation": "<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted.</p> <p>Default: Uses existing setting.</p> <p>Constraints: Must be a value from 0 to 35.</p>"
         },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The default for number of days that a newly created manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. This value will not retroactively change the retention periods of existing manual snapshots</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>"
+        },
         "PreferredMaintenanceWindow": {
           "shape": "String",
           "documentation": "<p>The weekly time range (in UTC) during which system maintenance can occur, if necessary. If system maintenance is necessary during the window, it may result in an outage.</p> <p>This maintenance window change is made immediately. If the new maintenance window indicates the current time, there must be at least 120 minutes between the current time and end of the window in order to ensure that pending changes are applied.</p> <p>Default: Uses existing setting.</p> <p>Format: ddd:hh24:mi-ddd:hh24:mi, for example <code>wed:07:30-wed:08:00</code>.</p> <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p> <p>Constraints: Must be at least 30 minutes.</p>"
@@ -4939,6 +5380,54 @@
       "members": {
         "Cluster": {
           "shape": "Cluster"
+        }
+      }
+    },
+    "ModifyClusterSnapshotMessage": {
+      "type": "structure",
+      "required": [
+        "SnapshotIdentifier"
+      ],
+      "members": {
+        "SnapshotIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the snapshot whose setting you want to modify.</p>"
+        },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely.</p> <p>If the manual snapshot falls outside of the new retention period, you can specify the force option to immediately delete the snapshot.</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
+        },
+        "Force": {
+          "shape": "Boolean",
+          "documentation": "<p>A Boolean option to override an exception if the retention period has already passed.</p>"
+        }
+      }
+    },
+    "ModifyClusterSnapshotResult": {
+      "type": "structure",
+      "members": {
+        "Snapshot": {
+          "shape": "Snapshot"
+        }
+      }
+    },
+    "ModifyClusterSnapshotScheduleMessage": {
+      "type": "structure",
+      "required": [
+        "ClusterIdentifier"
+      ],
+      "members": {
+        "ClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the cluster whose snapshot schedule you want to modify. </p>"
+        },
+        "ScheduleIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique alphanumeric identifier for the schedule you want to associate with the cluster.</p>"
+        },
+        "DisassociateSchedule": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A boolean to indicate whether to remove the assoiciation between the cluster and the schedule.</p>"
         }
       }
     },
@@ -5026,11 +5515,15 @@
       "members": {
         "ClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>The unique identifier of the cluster for which you want to change the retention period for automated snapshots that are copied to a destination region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>"
+          "documentation": "<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>"
         },
         "RetentionPeriod": {
           "shape": "Integer",
-          "documentation": "<p>The number of days to retain automated snapshots in the destination region after they are copied from the source region.</p> <p>If you decrease the retention period for automated snapshots that are copied to a destination region, Amazon Redshift will delete any existing automated snapshots that were copied to the destination region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35.</p>"
+          "documentation": "<p>The number of days to retain automated snapshots in the destination region after they are copied from the source region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination region, Amazon Redshift will delete any existing automated snapshots that were copied to the destination region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>"
+        },
+        "Manual": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.</p>"
         }
       },
       "documentation": "<p/>"
@@ -5040,6 +5533,23 @@
       "members": {
         "Cluster": {
           "shape": "Cluster"
+        }
+      }
+    },
+    "ModifySnapshotScheduleMessage": {
+      "type": "structure",
+      "required": [
+        "ScheduleIdentifier",
+        "ScheduleDefinitions"
+      ],
+      "members": {
+        "ScheduleIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique alphanumeric identifier of the schedule to modify.</p>"
+        },
+        "ScheduleDefinitions": {
+          "shape": "ScheduleDefinitionList",
+          "documentation": "<p>An updated list of schedule definitions. A schedule definition is made up of schedule expressions. For example, \"cron(30 12 *)\" or \"rate(12 hours)\".</p>"
         }
       }
     },
@@ -5469,7 +5979,7 @@
         },
         "Classic": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to <code>false</code> the resize type is elastic. </p>"
+          "documentation": "<p>A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to <code>false</code>, the resize type is elastic. </p>"
         }
       }
     },
@@ -5548,7 +6058,7 @@
         },
         "ResizeType": {
           "shape": "String",
-          "documentation": "<p>An enum with possible values of ClassicResize and ElasticResize. These values describe the type of resize operation being performed. </p>"
+          "documentation": "<p>An enum with possible values of <code>ClassicResize</code> and <code>ElasticResize</code>. These values describe the type of resize operation being performed. </p>"
         },
         "Message": {
           "shape": "String",
@@ -5643,6 +6153,9 @@
           "shape": "IntegerOptional",
           "documentation": "<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: The value selected for the cluster from which the snapshot was taken.</p> <p>Constraints: Must be a value from 0 to 35.</p>"
         },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "IntegerOptional"
+        },
         "KmsKeyId": {
           "shape": "String",
           "documentation": "<p>The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.</p>"
@@ -5666,6 +6179,10 @@
         "MaintenanceTrackName": {
           "shape": "String",
           "documentation": "<p>The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the <code>MaintenanceTrack</code> value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks.</p>"
+        },
+        "SnapshotScheduleIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the snapshot schedule.</p>"
         }
       },
       "documentation": "<p/>"
@@ -5870,6 +6387,28 @@
         }
       }
     },
+    "ScheduleDefinitionList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "ScheduleDefinition"
+      }
+    },
+    "ScheduleState": {
+      "type": "string",
+      "enum": [
+        "MODIFYING",
+        "ACTIVE",
+        "FAILED"
+      ]
+    },
+    "ScheduledSnapshotTimeList": {
+      "type": "list",
+      "member": {
+        "shape": "TStamp",
+        "locationName": "SnapshotTime"
+      }
+    },
     "SensitiveString": {
       "type": "string",
       "sensitive": true
@@ -5996,10 +6535,30 @@
         "MaintenanceTrackName": {
           "shape": "String",
           "documentation": "<p>The name of the maintenance track for the snapshot.</p>"
+        },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
+        },
+        "ManualSnapshotRemainingDays": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of days until a manual snapshot will pass its retention period.</p>"
+        },
+        "SnapshotRetentionStartTime": {
+          "shape": "TStamp",
+          "documentation": "<p>A timestamp representing the start of the retention period for the snapshot.</p>"
         }
       },
       "documentation": "<p>Describes a snapshot.</p>",
       "wrapper": true
+    },
+    "SnapshotAttributeToSortBy": {
+      "type": "string",
+      "enum": [
+        "SOURCE_TYPE",
+        "TOTAL_SIZE",
+        "CREATE_TIME"
+      ]
     },
     "SnapshotCopyGrant": {
       "type": "structure",
@@ -6041,6 +6600,35 @@
       },
       "documentation": "<p/>"
     },
+    "SnapshotErrorMessage": {
+      "type": "structure",
+      "members": {
+        "SnapshotIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the snapshot returning the error.</p>"
+        },
+        "SnapshotClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the cluster.</p>"
+        },
+        "FailureCode": {
+          "shape": "String",
+          "documentation": "<p>The failure code for the error.</p>"
+        },
+        "FailureReason": {
+          "shape": "String",
+          "documentation": "<p>The text message describing the error.</p>"
+        }
+      },
+      "documentation": "<p>Describes the errors returned by a snapshot.</p>"
+    },
+    "SnapshotIdentifierList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "String"
+      }
+    },
     "SnapshotList": {
       "type": "list",
       "member": {
@@ -6061,6 +6649,69 @@
         }
       },
       "documentation": "<p>Contains the output from the <a>DescribeClusterSnapshots</a> action. </p>"
+    },
+    "SnapshotSchedule": {
+      "type": "structure",
+      "members": {
+        "ScheduleDefinitions": {
+          "shape": "ScheduleDefinitionList",
+          "documentation": "<p>A list of ScheduleDefinitions</p>"
+        },
+        "ScheduleIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the schedule.</p>"
+        },
+        "ScheduleDescription": {
+          "shape": "String",
+          "documentation": "<p>The description of the schedule.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An optional set of tags describing the schedule.</p>"
+        },
+        "NextInvocations": {
+          "shape": "ScheduledSnapshotTimeList"
+        }
+      },
+      "documentation": "<p>Describes a snapshot schedule. You can set a regular interval for creating snapshots of a cluster. You can also schedule snapshots for specific dates. </p>"
+    },
+    "SnapshotScheduleList": {
+      "type": "list",
+      "member": {
+        "shape": "SnapshotSchedule",
+        "locationName": "SnapshotSchedule"
+      }
+    },
+    "SnapshotSortingEntity": {
+      "type": "structure",
+      "required": [
+        "Attribute"
+      ],
+      "members": {
+        "Attribute": {
+          "shape": "SnapshotAttributeToSortBy",
+          "documentation": "<p>The category for sorting the snapshots.</p>"
+        },
+        "SortOrder": {
+          "shape": "SortByOrder",
+          "documentation": "<p>The order for listing the attributes.</p>"
+        }
+      },
+      "documentation": "<p>Describes a sorting entity</p>"
+    },
+    "SnapshotSortingEntityList": {
+      "type": "list",
+      "member": {
+        "shape": "SnapshotSortingEntity",
+        "locationName": "SnapshotSortingEntity"
+      }
+    },
+    "SortByOrder": {
+      "type": "string",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
     },
     "SourceIdsList": {
       "type": "list",

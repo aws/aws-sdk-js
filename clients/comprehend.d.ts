@@ -52,6 +52,38 @@ declare class Comprehend extends Service {
    */
   batchDetectSyntax(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSyntaxResponse) => void): Request<Comprehend.Types.BatchDetectSyntaxResponse, AWSError>;
   /**
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that are labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of unlabeled documents into those categories. 
+   */
+  createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
+  /**
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that are labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of unlabeled documents into those categories. 
+   */
+  createDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
+  /**
+   * Deletes a previously created document classifier Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. 
+   */
+  deleteDocumentClassifier(params: Comprehend.Types.DeleteDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteDocumentClassifierResponse) => void): Request<Comprehend.Types.DeleteDocumentClassifierResponse, AWSError>;
+  /**
+   * Deletes a previously created document classifier Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. 
+   */
+  deleteDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.DeleteDocumentClassifierResponse) => void): Request<Comprehend.Types.DeleteDocumentClassifierResponse, AWSError>;
+  /**
+   * Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
+   */
+  describeDocumentClassificationJob(params: Comprehend.Types.DescribeDocumentClassificationJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassificationJobResponse) => void): Request<Comprehend.Types.DescribeDocumentClassificationJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
+   */
+  describeDocumentClassificationJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassificationJobResponse) => void): Request<Comprehend.Types.DescribeDocumentClassificationJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a document classifier.
+   */
+  describeDocumentClassifier(params: Comprehend.Types.DescribeDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassifierResponse) => void): Request<Comprehend.Types.DescribeDocumentClassifierResponse, AWSError>;
+  /**
+   * Gets the properties associated with a document classifier.
+   */
+  describeDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassifierResponse) => void): Request<Comprehend.Types.DescribeDocumentClassifierResponse, AWSError>;
+  /**
    * Gets the properties associated with a dominant language detection job. Use this operation to get the status of a detection job.
    */
   describeDominantLanguageDetectionJob(params: Comprehend.Types.DescribeDominantLanguageDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.DescribeDominantLanguageDetectionJobResponse, AWSError>;
@@ -132,6 +164,22 @@ declare class Comprehend extends Service {
    */
   detectSyntax(callback?: (err: AWSError, data: Comprehend.Types.DetectSyntaxResponse) => void): Request<Comprehend.Types.DetectSyntaxResponse, AWSError>;
   /**
+   * Gets a list of the documentation classification jobs that you have submitted.
+   */
+  listDocumentClassificationJobs(params: Comprehend.Types.ListDocumentClassificationJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassificationJobsResponse) => void): Request<Comprehend.Types.ListDocumentClassificationJobsResponse, AWSError>;
+  /**
+   * Gets a list of the documentation classification jobs that you have submitted.
+   */
+  listDocumentClassificationJobs(callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassificationJobsResponse) => void): Request<Comprehend.Types.ListDocumentClassificationJobsResponse, AWSError>;
+  /**
+   * Gets a list of the document classifiers that you have created.
+   */
+  listDocumentClassifiers(params: Comprehend.Types.ListDocumentClassifiersRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifiersResponse) => void): Request<Comprehend.Types.ListDocumentClassifiersResponse, AWSError>;
+  /**
+   * Gets a list of the document classifiers that you have created.
+   */
+  listDocumentClassifiers(callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifiersResponse) => void): Request<Comprehend.Types.ListDocumentClassifiersResponse, AWSError>;
+  /**
    * Gets a list of the dominant language detection jobs that you have submitted.
    */
   listDominantLanguageDetectionJobs(params: Comprehend.Types.ListDominantLanguageDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDominantLanguageDetectionJobsResponse) => void): Request<Comprehend.Types.ListDominantLanguageDetectionJobsResponse, AWSError>;
@@ -171,6 +219,14 @@ declare class Comprehend extends Service {
    * Gets a list of the topic detection jobs that you have submitted.
    */
   listTopicsDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
+  /**
+   * Starts an asynchronous document classification job. Use the operation to track the progress of the job.
+   */
+  startDocumentClassificationJob(params: Comprehend.Types.StartDocumentClassificationJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartDocumentClassificationJobResponse) => void): Request<Comprehend.Types.StartDocumentClassificationJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous document classification job. Use the operation to track the progress of the job.
+   */
+  startDocumentClassificationJob(callback?: (err: AWSError, data: Comprehend.Types.StartDocumentClassificationJobResponse) => void): Request<Comprehend.Types.StartDocumentClassificationJobResponse, AWSError>;
   /**
    * Starts an asynchronous dominant language detection job for a collection of documents. Use the operation to track the status of a job.
    */
@@ -411,7 +467,104 @@ declare namespace Comprehend {
     ErrorMessage?: String;
   }
   export type BatchItemErrorList = BatchItemError[];
+  export interface ClassifierEvaluationMetrics {
+    /**
+     * The fraction of the labels that were correct recognized. It is computed by dividing the number of labels in the test documents that were correctly recognized by the total number of labels in the test documents.
+     */
+    Accuracy?: Double;
+    /**
+     * A measure of the usefulness of the classifier results in the test data. High precision means that the classifier returned substantially more relevant results than irrelevant ones.
+     */
+    Precision?: Double;
+    /**
+     * A measure of how complete the classifier results are for the test data. High recall means that the classifier returned most of the relevant results. 
+     */
+    Recall?: Double;
+    /**
+     * A measure of how accurate the classifier results are for the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
+     */
+    F1Score?: Double;
+  }
+  export interface ClassifierMetadata {
+    /**
+     * The number of labels in the input data. 
+     */
+    NumberOfLabels?: Integer;
+    /**
+     * The number of documents in the input data that were used to train the classifier. Typically this is 80 to 90 percent of the input documents.
+     */
+    NumberOfTrainedDocuments?: Integer;
+    /**
+     * The number of documents in the input data that were used to test the classifier. Typically this is 10 to 20 percent of the input documents.
+     */
+    NumberOfTestDocuments?: Integer;
+    /**
+     *  Describes the result metrics for the test data associated with an documentation classifier.
+     */
+    EvaluationMetrics?: ClassifierEvaluationMetrics;
+  }
   export type ClientRequestTokenString = string;
+  export type ComprehendArnName = string;
+  export interface CreateDocumentClassifierRequest {
+    /**
+     * The name of the document classifier.
+     */
+    DocumentClassifierName: ComprehendArnName;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: DocumentClassifierInputDataConfig;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * The language of the input documents. You can create a document classifier in any of the languages supported by Amazon Comprehend. However, all documents must be in the same language.
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface CreateDocumentClassifierResponse {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier.
+     */
+    DocumentClassifierArn?: DocumentClassifierArn;
+  }
+  export interface DeleteDocumentClassifierRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier. 
+     */
+    DocumentClassifierArn: DocumentClassifierArn;
+  }
+  export interface DeleteDocumentClassifierResponse {
+  }
+  export interface DescribeDocumentClassificationJobRequest {
+    /**
+     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeDocumentClassificationJobResponse {
+    /**
+     * An object that describes the properties associated with the document classification job.
+     */
+    DocumentClassificationJobProperties?: DocumentClassificationJobProperties;
+  }
+  export interface DescribeDocumentClassifierRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier. The operation returns this identifier in its response.
+     */
+    DocumentClassifierArn: DocumentClassifierArn;
+  }
+  export interface DescribeDocumentClassifierResponse {
+    /**
+     * An object that contains the properties associated with a document classifier.
+     */
+    DocumentClassifierProperties?: DocumentClassifierProperties;
+  }
   export interface DescribeDominantLanguageDetectionJobRequest {
     /**
      * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
@@ -552,6 +705,135 @@ declare namespace Comprehend {
      */
     SyntaxTokens?: ListOfSyntaxTokens;
   }
+  export interface DocumentClassificationJobFilter {
+    /**
+     * Filters on the name of the job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface DocumentClassificationJobProperties {
+    /**
+     * The identifier assigned to the document classification job.
+     */
+    JobId?: JobId;
+    /**
+     * The name that you assigned to the document classification job.
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the document classification job. If the status is FAILED, the Message field shows the reason for the failure.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description of the status of the job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the document classification job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the document classification job completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier. 
+     */
+    DocumentClassifierArn?: DocumentClassifierArn;
+    /**
+     * The input data configuration that you supplied when you created the document classification job.
+     */
+    InputDataConfig?: InputDataConfig;
+    /**
+     * The output data configuration that you supplied when you created the document classification job.
+     */
+    OutputDataConfig?: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+  }
+  export type DocumentClassificationJobPropertiesList = DocumentClassificationJobProperties[];
+  export type DocumentClassifierArn = string;
+  export interface DocumentClassifierFilter {
+    /**
+     * Filters the list of classifiers based on status. 
+     */
+    Status?: ModelStatus;
+    /**
+     * Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted before the specified time. Classifiers are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted after the specified time. Classifiers are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface DocumentClassifierInputDataConfig {
+    /**
+     * The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.
+     */
+    S3Uri: S3Uri;
+  }
+  export interface DocumentClassifierProperties {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier.
+     */
+    DocumentClassifierArn?: DocumentClassifierArn;
+    /**
+     * The language code for the language of the documents that the classifier was trained on.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The status of the document classifier. The the status is TRAINED the classifier is ready to use. If the status is FAILED you can see additional information about why the classifier wasn't trained in the Message field.
+     */
+    Status?: ModelStatus;
+    /**
+     * Additional information about the status of the classifier.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the document classifier was submitted for training.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that training the document classifier completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * Indicates the time when the training starts on documentation classifiers. You are billed for the time interval between this time and the value of TrainingEndTime. 
+     */
+    TrainingStartTime?: Timestamp;
+    /**
+     * The time that training of the document classifier was completed. Indicates the time when the training completes on documentation classifiers. You are billed for the time interval between this time and the value of TrainingStartTime.
+     */
+    TrainingEndTime?: Timestamp;
+    /**
+     * The input data configuration that you supplied when you created the document classifier for training.
+     */
+    InputDataConfig?: DocumentClassifierInputDataConfig;
+    /**
+     * Information about the document classifier, including the number of documents used for training the classifier, the number of documents used for test the classifier, and an accuracy rating.
+     */
+    ClassifierMetadata?: ClassifierMetadata;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+  }
+  export type DocumentClassifierPropertiesList = DocumentClassifierProperties[];
   export interface DominantLanguage {
     /**
      * The RFC 5646 language code for the dominant language. For more information about RFC 5646, see Tags for Identifying Languages on the IETF Tools web site.
@@ -619,6 +901,7 @@ declare namespace Comprehend {
     DataAccessRoleArn?: IamRoleArn;
   }
   export type DominantLanguageDetectionJobPropertiesList = DominantLanguageDetectionJobProperties[];
+  export type Double = number;
   export interface EntitiesDetectionJobFilter {
     /**
      * Filters on the name of the job.
@@ -800,6 +1083,54 @@ declare namespace Comprehend {
   }
   export type KeyPhrasesDetectionJobPropertiesList = KeyPhrasesDetectionJobProperties[];
   export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string;
+  export interface ListDocumentClassificationJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their names, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: DocumentClassificationJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListDocumentClassificationJobsResponse {
+    /**
+     * A list containing the properties of each job returned.
+     */
+    DocumentClassificationJobPropertiesList?: DocumentClassificationJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListDocumentClassifiersRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: DocumentClassifierFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListDocumentClassifiersResponse {
+    /**
+     * A list containing the properties of each job returned.
+     */
+    DocumentClassifierPropertiesList?: DocumentClassifierPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListDominantLanguageDetectionJobsRequest {
     /**
      * Filters that jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -930,6 +1261,7 @@ declare namespace Comprehend {
     NextToken?: String;
   }
   export type MaxResultsInteger = number;
+  export type ModelStatus = "SUBMITTED"|"TRAINING"|"DELETING"|"IN_ERROR"|"TRAINED"|string;
   export type NumberOfTopicsInteger = number;
   export interface OutputDataConfig {
     /**
@@ -947,7 +1279,7 @@ declare namespace Comprehend {
      */
     Score?: Float;
   }
-  export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB"|string;
+  export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"CCONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB"|string;
   export type S3Uri = string;
   export interface SentimentDetectionJobFilter {
     /**
@@ -1029,6 +1361,42 @@ declare namespace Comprehend {
     Mixed?: Float;
   }
   export type SentimentType = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED"|string;
+  export interface StartDocumentClassificationJobRequest {
+    /**
+     * The identifier of the job.
+     */
+    JobName?: JobName;
+    /**
+     * The Amazon Resource Name (ARN) of the document classifier to use to process the job.
+     */
+    DocumentClassifierArn: DocumentClassifierArn;
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * A unique identifier for the request. If you do not set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+  }
+  export interface StartDocumentClassificationJobResponse {
+    /**
+     * The identifier generated for the job. To get the status of the job, use this identifier with the operation.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the job:   SUBMITTED - The job has been received and queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. For details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
+     */
+    JobStatus?: JobStatus;
+  }
   export interface StartDominantLanguageDetectionJobRequest {
     /**
      * Specifies the format and location of the input data for the job.
@@ -1079,7 +1447,7 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. All documents must be in the same language. You can specify any of the languages supported by Amazon Comprehend: English ("en"), Spanish ("es"), French ("fr"), German ("de"), Italian ("it"), or Portuguese ("pt"). If custom entities recognition is used, this parameter is ignored and the language used for training the model is used instead.
      */
     LanguageCode: LanguageCode;
     /**
@@ -1093,7 +1461,7 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
-     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
+     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
      */
     JobStatus?: JobStatus;
   }

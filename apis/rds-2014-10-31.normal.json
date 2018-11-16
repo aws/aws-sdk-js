@@ -901,9 +901,35 @@
         },
         {
           "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "DBInstanceAutomatedBackupQuotaExceededFault"
         }
       ],
       "documentation": "<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon RDS DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. </p> <p>Note that when a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>If the specified DB instance is part of an Amazon Aurora DB cluster, you can't delete the DB instance if both of the following conditions are true:</p> <ul> <li> <p>The DB cluster is a Read Replica of another Amazon Aurora DB cluster.</p> </li> <li> <p>The DB instance is the only instance in the DB cluster.</p> </li> </ul> <p>To delete a DB instance in this case, first call the <a>PromoteReadReplicaDBCluster</a> API action to promote the DB cluster so it's no longer a Read Replica. After the promotion completes, then call the <code>DeleteDBInstance</code> API action to delete the final instance in the DB cluster.</p>"
+    },
+    "DeleteDBInstanceAutomatedBackup": {
+      "name": "DeleteDBInstanceAutomatedBackup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteDBInstanceAutomatedBackupMessage"
+      },
+      "output": {
+        "shape": "DeleteDBInstanceAutomatedBackupResult",
+        "resultWrapper": "DeleteDBInstanceAutomatedBackupResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidDBInstanceAutomatedBackupStateFault"
+        },
+        {
+          "shape": "DBInstanceAutomatedBackupNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Deletes automated backups based on the source instance's <code>DbiResourceId</code> value or the restorable instance's resource ID.</p>"
     },
     "DeleteDBParameterGroup": {
       "name": "DeleteDBParameterGroup",
@@ -922,7 +948,7 @@
           "shape": "DBParameterGroupNotFoundFault"
         }
       ],
-      "documentation": "<p>Deletes a specified DBParameterGroup. The DBParameterGroup to be deleted can't be associated with any DB instances.</p>"
+      "documentation": "<p>Deletes a specified DB parameter group. The DB parameter group to be deleted can't be associated with any DB instances.</p>"
     },
     "DeleteDBSecurityGroup": {
       "name": "DeleteDBSecurityGroup",
@@ -964,7 +990,7 @@
           "shape": "DBSnapshotNotFoundFault"
         }
       ],
-      "documentation": "<p>Deletes a DBSnapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The DBSnapshot must be in the <code>available</code> state to be deleted.</p> </note>"
+      "documentation": "<p>Deletes a DB snapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The DB snapshot must be in the <code>available</code> state to be deleted.</p> </note>"
     },
     "DeleteDBSubnetGroup": {
       "name": "DeleteDBSubnetGroup",
@@ -1222,6 +1248,26 @@
         "resultWrapper": "DescribeDBEngineVersionsResult"
       },
       "documentation": "<p>Returns a list of the available DB engines.</p>"
+    },
+    "DescribeDBInstanceAutomatedBackups": {
+      "name": "DescribeDBInstanceAutomatedBackups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDBInstanceAutomatedBackupsMessage"
+      },
+      "output": {
+        "shape": "DBInstanceAutomatedBackupMessage",
+        "resultWrapper": "DescribeDBInstanceAutomatedBackupsResult"
+      },
+      "errors": [
+        {
+          "shape": "DBInstanceAutomatedBackupNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Displays backups for both current and deleted instances. For example, use this operation to find details about automated backups for previously deleted instances. Current instances with retention periods greater than zero (0) are returned for both the <code>DescribeDBInstanceAutomatedBackups</code> and <code>DescribeDBInstances</code> operations.</p> <p>All parameters are optional.</p>"
     },
     "DescribeDBInstances": {
       "name": "DescribeDBInstances",
@@ -2690,10 +2736,13 @@
           "shape": "DomainNotFoundFault"
         },
         {
+          "shape": "BackupPolicyNotFoundFault"
+        },
+        {
           "shape": "DBParameterGroupNotFoundFault"
         },
         {
-          "shape": "BackupPolicyNotFoundFault"
+          "shape": "DBInstanceAutomatedBackupNotFoundFault"
         }
       ],
       "documentation": "<p>Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property.</p> <p>The target database is created with most of the original configuration, but in a system-selected Availability Zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.</p> <note> <p>This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <a>RestoreDBClusterToPointInTime</a>.</p> </note>"
@@ -2798,7 +2847,7 @@
           "shape": "KMSKeyNotAccessibleFault"
         }
       ],
-      "documentation": "<p> Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html\"> Starting an Amazon RDS DB Instance That Was Previously Stopped</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use <a>StartDBCluster</a> instead. </p> </note>"
+      "documentation": "<p> Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html\"> Starting an Amazon RDS DB instance That Was Previously Stopped</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use <a>StartDBCluster</a> instead. </p> </note>"
     },
     "StopDBCluster": {
       "name": "StopDBCluster",
@@ -5092,6 +5141,126 @@
       "documentation": "<p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action. </p>",
       "wrapper": true
     },
+    "DBInstanceAutomatedBackup": {
+      "type": "structure",
+      "members": {
+        "DBInstanceArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the automated backup.</p>"
+        },
+        "DbiResourceId": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the source DB instance, which can't be changed and which is unique to an AWS Region.</p>"
+        },
+        "Region": {
+          "shape": "String",
+          "documentation": "<p>The AWS Region associated with the automated backup.</p>"
+        },
+        "DBInstanceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The customer id of the instance that is/was associated with the automated backup. </p>"
+        },
+        "RestoreWindow": {
+          "shape": "RestoreWindow",
+          "documentation": "<p>Earliest and latest time an instance can be restored to.</p>"
+        },
+        "AllocatedStorage": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the allocated storage size in gibibytes (GiB).</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>Provides a list of status information for an automated backup:</p> <ul> <li> <p> <code>active</code> - automated backups for current instances</p> </li> <li> <p> <code>retained</code> - automated backups for deleted instances</p> </li> <li> <p> <code>creating</code> - automated backups that are waiting for the first automated snapshot to be available.</p> </li> </ul>"
+        },
+        "Port": {
+          "shape": "Integer",
+          "documentation": "<p>The port number that the automated backup used for connections.</p> <p>Default: Inherits from the source DB instance</p> <p>Valid Values: <code>1150-65535</code> </p>"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone that the automated backup was created in. For information on AWS Regions and Availability Zones, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html\">Regions and Availability Zones</a>.</p>"
+        },
+        "VpcId": {
+          "shape": "String",
+          "documentation": "<p>Provides the VPC ID associated with the DB instance</p>"
+        },
+        "InstanceCreateTime": {
+          "shape": "TStamp",
+          "documentation": "<p>Provides the date and time that the DB instance was created. </p>"
+        },
+        "MasterUsername": {
+          "shape": "String",
+          "documentation": "<p>The license model of an automated backup.</p>"
+        },
+        "Engine": {
+          "shape": "String",
+          "documentation": "<p>The name of the database engine for this automated backup.</p>"
+        },
+        "EngineVersion": {
+          "shape": "String",
+          "documentation": "<p>The version of the database engine for the automated backup.</p>"
+        },
+        "LicenseModel": {
+          "shape": "String",
+          "documentation": "<p>License model information for the automated backup.</p>"
+        },
+        "Iops": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The IOPS (I/O operations per second) value for the automated backup. </p>"
+        },
+        "OptionGroupName": {
+          "shape": "String",
+          "documentation": "<p>The option group the automated backup is associated with. If omitted, the default option group for the engine specified is used.</p>"
+        },
+        "TdeCredentialArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN from the key store with which the automated backup is associated for TDE encryption.</p>"
+        },
+        "Encrypted": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the automated backup is encrypted.</p>"
+        },
+        "StorageType": {
+          "shape": "String",
+          "documentation": "<p>Specifies the storage type associated with the automated backup.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "String",
+          "documentation": "<p>The AWS KMS key ID for an automated backup. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. </p>"
+        },
+        "Timezone": {
+          "shape": "String",
+          "documentation": "<p>The time zone of the automated backup. In most cases, the <code>Timezone</code> element is empty. <code>Timezone</code> content appears only for Microsoft SQL Server DB instances that were created with a time zone specified.</p>"
+        },
+        "IAMDatabaseAuthenticationEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.</p>"
+        }
+      },
+      "documentation": "<p>An automated backup of a DB instance. It it consists of system backups, transaction logs, and the database instance properties that existed at the time you deleted the source instance. </p>",
+      "wrapper": true
+    },
+    "DBInstanceAutomatedBackupList": {
+      "type": "list",
+      "member": {
+        "shape": "DBInstanceAutomatedBackup",
+        "locationName": "DBInstanceAutomatedBackup"
+      }
+    },
+    "DBInstanceAutomatedBackupMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> . </p>"
+        },
+        "DBInstanceAutomatedBackups": {
+          "shape": "DBInstanceAutomatedBackupList",
+          "documentation": "<p> A list of <a>DBInstanceAutomatedBackup</a> instances. </p>"
+        }
+      },
+      "documentation": "<p> Contains the result of a successful invocation of the <a>DescribeDBInstanceAutomatedBackups</a> action. </p>"
+    },
     "DBInstanceList": {
       "type": "list",
       "member": {
@@ -5425,6 +5594,10 @@
         "ProcessorFeatures": {
           "shape": "ProcessorFeatureList",
           "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.</p>"
+        },
+        "DbiResourceId": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the source DB instance, which can't be changed and which is unique to an AWS Region.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB snapshot. </p> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action. </p>",
@@ -5615,6 +5788,27 @@
         }
       }
     },
+    "DeleteDBInstanceAutomatedBackupMessage": {
+      "type": "structure",
+      "required": [
+        "DbiResourceId"
+      ],
+      "members": {
+        "DbiResourceId": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the source DB instance, which can't be changed and which is unique to an AWS Region.</p>"
+        }
+      },
+      "documentation": "<p>Parameter input for the <code>DeleteDBInstanceAutomatedBackup</code> operation. </p>"
+    },
+    "DeleteDBInstanceAutomatedBackupResult": {
+      "type": "structure",
+      "members": {
+        "DBInstanceAutomatedBackup": {
+          "shape": "DBInstanceAutomatedBackup"
+        }
+      }
+    },
     "DeleteDBInstanceMessage": {
       "type": "structure",
       "required": [
@@ -5627,11 +5821,15 @@
         },
         "SkipFinalSnapshot": {
           "shape": "Boolean",
-          "documentation": "<p> Determines whether a final DB snapshot is created before the DB instance is deleted. If <code>true</code> is specified, no DBSnapshot is created. If <code>false</code> is specified, a DB snapshot is created before the DB instance is deleted. </p> <p>Note that when a DB instance is in a failure state and has a status of 'failed', 'incompatible-restore', or 'incompatible-network', it can only be deleted when the SkipFinalSnapshot parameter is set to \"true\".</p> <p>Specify <code>true</code> when deleting a Read Replica.</p> <note> <p>The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot is <code>false</code>.</p> </note> <p>Default: <code>false</code> </p>"
+          "documentation": "<p> A value that indicates whether a final DB snapshot is created before the DB instance is deleted. If <code>true</code> is specified, no DB snapshot is created. If <code>false</code> is specified, a DB snapshot is created before the DB instance is deleted. </p> <p>When a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>Specify <code>true</code> when deleting a Read Replica.</p> <note> <p>The <code>FinalDBSnapshotIdentifier</code> parameter must be specified if <code>SkipFinalSnapshot</code> is <code>false</code>.</p> </note> <p>Default: <code>false</code> </p>"
         },
         "FinalDBSnapshotIdentifier": {
           "shape": "String",
-          "documentation": "<p> The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to <code>false</code>. </p> <note> <p>Specifying this parameter and also setting the SkipFinalShapshot parameter to true results in an error.</p> </note> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters or numbers.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens</p> </li> <li> <p>Can't be specified when deleting a Read Replica.</p> </li> </ul>"
+          "documentation": "<p> The <code>DBSnapshotIdentifier</code> of the new DB snapshot created when <code>SkipFinalSnapshot</code> is set to <code>false</code>. </p> <note> <p>Specifying this parameter and also setting the <code>SkipFinalShapshot</code> parameter to <code>true</code> results in an error.</p> </note> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters or numbers.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Can't be specified when deleting a Read Replica.</p> </li> </ul>"
+        },
+        "DeleteAutomatedBackups": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. This parameter defaults to <code>true</code>.</p>"
         }
       },
       "documentation": "<p/>"
@@ -5678,7 +5876,7 @@
       "members": {
         "DBSnapshotIdentifier": {
           "shape": "String",
-          "documentation": "<p>The DBSnapshot identifier.</p> <p>Constraints: Must be the name of an existing DB snapshot in the <code>available</code> state.</p>"
+          "documentation": "<p>The DB snapshot identifier.</p> <p>Constraints: Must be the name of an existing DB snapshot in the <code>available</code> state.</p>"
         }
       },
       "documentation": "<p/>"
@@ -5992,6 +6190,32 @@
         }
       }
     },
+    "DescribeDBInstanceAutomatedBackupsMessage": {
+      "type": "structure",
+      "members": {
+        "DbiResourceId": {
+          "shape": "String",
+          "documentation": "<p>The resource ID of the DB instance that is the source of the automated backup. This parameter isn't case-sensitive. </p>"
+        },
+        "DBInstanceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>(Optional) The user-supplied instance identifier. If this parameter is specified, it must match the identifier of an existing DB instance. It returns information from the specific DB instance' automated backup. This parameter isn't case-sensitive. </p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>A filter that specifies which resources to return based on status.</p> <p>Supported filters are the following:</p> <ul> <li> <p> <code>status</code> </p> <ul> <li> <p> <code>active</code> - automated backups for current instances</p> </li> <li> <p> <code>retained</code> - automated backups for deleted instances</p> </li> <li> <p> <code>creating</code> - automated backups that are waiting for the first automated snapshot to be available</p> </li> </ul> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and Amazon Resource Names (ARNs) for DB instances. The results list includes only information about the DB instance automated backupss identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB instance resource identifiers and DB Amazon Resource Names (ARNs) for DB instances. The results list includes only information about the DB instance resources identified by these ARNs.</p> </li> </ul> <p>Returns all resources by default. The status for each resource is specified in the response.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to <code>MaxRecords</code>.</p>"
+        }
+      },
+      "documentation": "<p>Parameter input for DescribeDBInstanceAutomatedBackups. </p>"
+    },
     "DescribeDBInstancesMessage": {
       "type": "structure",
       "members": {
@@ -6217,6 +6441,10 @@
         "IncludePublic": {
           "shape": "Boolean",
           "documentation": "<p>True to include manual DB snapshots that are public and can be copied or restored by any AWS account, and otherwise false. The default is false.</p> <p>You can share a manual DB snapshot as public by using the <a>ModifyDBSnapshotAttribute</a> API.</p>"
+        },
+        "DbiResourceId": {
+          "shape": "String",
+          "documentation": "<p>A specific DB resource ID to describe.</p>"
         }
       },
       "documentation": "<p/>"
@@ -9465,7 +9693,6 @@
     "RestoreDBInstanceToPointInTimeMessage": {
       "type": "structure",
       "required": [
-        "SourceDBInstanceIdentifier",
         "TargetDBInstanceIdentifier"
       ],
       "members": {
@@ -9583,6 +9810,10 @@
         "DeletionProtection": {
           "shape": "BooleanOptional",
           "documentation": "<p>Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
+        },
+        "SourceDbiResourceId": {
+          "shape": "String",
+          "documentation": "<p>The resource ID of the source DB instance from which to restore.</p>"
         }
       },
       "documentation": "<p/>"
@@ -9594,6 +9825,20 @@
           "shape": "DBInstance"
         }
       }
+    },
+    "RestoreWindow": {
+      "type": "structure",
+      "members": {
+        "EarliestTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The earliest time you can restore an instance to.</p>"
+        },
+        "LatestTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The latest time you can restore an instance to.</p>"
+        }
+      },
+      "documentation": "<p>Earliest and latest time an instance can be restored to:</p>"
     },
     "RevokeDBSecurityGroupIngressMessage": {
       "type": "structure",

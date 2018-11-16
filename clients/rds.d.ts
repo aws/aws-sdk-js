@@ -238,11 +238,19 @@ declare class RDS extends Service {
    */
   deleteDBInstance(callback?: (err: AWSError, data: RDS.Types.DeleteDBInstanceResult) => void): Request<RDS.Types.DeleteDBInstanceResult, AWSError>;
   /**
-   * Deletes a specified DBParameterGroup. The DBParameterGroup to be deleted can't be associated with any DB instances.
+   * Deletes automated backups based on the source instance's DbiResourceId value or the restorable instance's resource ID.
+   */
+  deleteDBInstanceAutomatedBackup(params: RDS.Types.DeleteDBInstanceAutomatedBackupMessage, callback?: (err: AWSError, data: RDS.Types.DeleteDBInstanceAutomatedBackupResult) => void): Request<RDS.Types.DeleteDBInstanceAutomatedBackupResult, AWSError>;
+  /**
+   * Deletes automated backups based on the source instance's DbiResourceId value or the restorable instance's resource ID.
+   */
+  deleteDBInstanceAutomatedBackup(callback?: (err: AWSError, data: RDS.Types.DeleteDBInstanceAutomatedBackupResult) => void): Request<RDS.Types.DeleteDBInstanceAutomatedBackupResult, AWSError>;
+  /**
+   * Deletes a specified DB parameter group. The DB parameter group to be deleted can't be associated with any DB instances.
    */
   deleteDBParameterGroup(params: RDS.Types.DeleteDBParameterGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a specified DBParameterGroup. The DBParameterGroup to be deleted can't be associated with any DB instances.
+   * Deletes a specified DB parameter group. The DB parameter group to be deleted can't be associated with any DB instances.
    */
   deleteDBParameterGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -254,11 +262,11 @@ declare class RDS extends Service {
    */
   deleteDBSecurityGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a DBSnapshot. If the snapshot is being copied, the copy operation is terminated.  The DBSnapshot must be in the available state to be deleted. 
+   * Deletes a DB snapshot. If the snapshot is being copied, the copy operation is terminated.  The DB snapshot must be in the available state to be deleted. 
    */
   deleteDBSnapshot(params: RDS.Types.DeleteDBSnapshotMessage, callback?: (err: AWSError, data: RDS.Types.DeleteDBSnapshotResult) => void): Request<RDS.Types.DeleteDBSnapshotResult, AWSError>;
   /**
-   * Deletes a DBSnapshot. If the snapshot is being copied, the copy operation is terminated.  The DBSnapshot must be in the available state to be deleted. 
+   * Deletes a DB snapshot. If the snapshot is being copied, the copy operation is terminated.  The DB snapshot must be in the available state to be deleted. 
    */
   deleteDBSnapshot(callback?: (err: AWSError, data: RDS.Types.DeleteDBSnapshotResult) => void): Request<RDS.Types.DeleteDBSnapshotResult, AWSError>;
   /**
@@ -365,6 +373,14 @@ declare class RDS extends Service {
    * Returns a list of the available DB engines.
    */
   describeDBEngineVersions(callback?: (err: AWSError, data: RDS.Types.DBEngineVersionMessage) => void): Request<RDS.Types.DBEngineVersionMessage, AWSError>;
+  /**
+   * Displays backups for both current and deleted instances. For example, use this operation to find details about automated backups for previously deleted instances. Current instances with retention periods greater than zero (0) are returned for both the DescribeDBInstanceAutomatedBackups and DescribeDBInstances operations. All parameters are optional.
+   */
+  describeDBInstanceAutomatedBackups(params: RDS.Types.DescribeDBInstanceAutomatedBackupsMessage, callback?: (err: AWSError, data: RDS.Types.DBInstanceAutomatedBackupMessage) => void): Request<RDS.Types.DBInstanceAutomatedBackupMessage, AWSError>;
+  /**
+   * Displays backups for both current and deleted instances. For example, use this operation to find details about automated backups for previously deleted instances. Current instances with retention periods greater than zero (0) are returned for both the DescribeDBInstanceAutomatedBackups and DescribeDBInstances operations. All parameters are optional.
+   */
+  describeDBInstanceAutomatedBackups(callback?: (err: AWSError, data: RDS.Types.DBInstanceAutomatedBackupMessage) => void): Request<RDS.Types.DBInstanceAutomatedBackupMessage, AWSError>;
   /**
    * Returns information about provisioned RDS instances. This API supports pagination.
    */
@@ -790,11 +806,11 @@ declare class RDS extends Service {
    */
   startDBCluster(callback?: (err: AWSError, data: RDS.Types.StartDBClusterResult) => void): Request<RDS.Types.StartDBClusterResult, AWSError>;
   /**
-   *  Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action.  For more information, see  Starting an Amazon RDS DB Instance That Was Previously Stopped in the Amazon RDS User Guide.    This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster instead.  
+   *  Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action.  For more information, see  Starting an Amazon RDS DB instance That Was Previously Stopped in the Amazon RDS User Guide.    This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster instead.  
    */
   startDBInstance(params: RDS.Types.StartDBInstanceMessage, callback?: (err: AWSError, data: RDS.Types.StartDBInstanceResult) => void): Request<RDS.Types.StartDBInstanceResult, AWSError>;
   /**
-   *  Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action.  For more information, see  Starting an Amazon RDS DB Instance That Was Previously Stopped in the Amazon RDS User Guide.    This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster instead.  
+   *  Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action.  For more information, see  Starting an Amazon RDS DB instance That Was Previously Stopped in the Amazon RDS User Guide.    This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster instead.  
    */
   startDBInstance(callback?: (err: AWSError, data: RDS.Types.StartDBInstanceResult) => void): Request<RDS.Types.StartDBInstanceResult, AWSError>;
   /**
@@ -2532,6 +2548,111 @@ declare namespace RDS {
      */
     ListenerEndpoint?: Endpoint;
   }
+  export interface DBInstanceAutomatedBackup {
+    /**
+     * The Amazon Resource Name (ARN) for the automated backup.
+     */
+    DBInstanceArn?: String;
+    /**
+     * The identifier for the source DB instance, which can't be changed and which is unique to an AWS Region.
+     */
+    DbiResourceId?: String;
+    /**
+     * The AWS Region associated with the automated backup.
+     */
+    Region?: String;
+    /**
+     * The customer id of the instance that is/was associated with the automated backup. 
+     */
+    DBInstanceIdentifier?: String;
+    /**
+     * Earliest and latest time an instance can be restored to.
+     */
+    RestoreWindow?: RestoreWindow;
+    /**
+     * Specifies the allocated storage size in gibibytes (GiB).
+     */
+    AllocatedStorage?: Integer;
+    /**
+     * Provides a list of status information for an automated backup:    active - automated backups for current instances    retained - automated backups for deleted instances    creating - automated backups that are waiting for the first automated snapshot to be available.  
+     */
+    Status?: String;
+    /**
+     * The port number that the automated backup used for connections. Default: Inherits from the source DB instance Valid Values: 1150-65535 
+     */
+    Port?: Integer;
+    /**
+     * The Availability Zone that the automated backup was created in. For information on AWS Regions and Availability Zones, see Regions and Availability Zones.
+     */
+    AvailabilityZone?: String;
+    /**
+     * Provides the VPC ID associated with the DB instance
+     */
+    VpcId?: String;
+    /**
+     * Provides the date and time that the DB instance was created. 
+     */
+    InstanceCreateTime?: TStamp;
+    /**
+     * The license model of an automated backup.
+     */
+    MasterUsername?: String;
+    /**
+     * The name of the database engine for this automated backup.
+     */
+    Engine?: String;
+    /**
+     * The version of the database engine for the automated backup.
+     */
+    EngineVersion?: String;
+    /**
+     * License model information for the automated backup.
+     */
+    LicenseModel?: String;
+    /**
+     * The IOPS (I/O operations per second) value for the automated backup. 
+     */
+    Iops?: IntegerOptional;
+    /**
+     * The option group the automated backup is associated with. If omitted, the default option group for the engine specified is used.
+     */
+    OptionGroupName?: String;
+    /**
+     * The ARN from the key store with which the automated backup is associated for TDE encryption.
+     */
+    TdeCredentialArn?: String;
+    /**
+     * Specifies whether the automated backup is encrypted.
+     */
+    Encrypted?: Boolean;
+    /**
+     * Specifies the storage type associated with the automated backup.
+     */
+    StorageType?: String;
+    /**
+     * The AWS KMS key ID for an automated backup. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. 
+     */
+    KmsKeyId?: String;
+    /**
+     * The time zone of the automated backup. In most cases, the Timezone element is empty. Timezone content appears only for Microsoft SQL Server DB instances that were created with a time zone specified.
+     */
+    Timezone?: String;
+    /**
+     * True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.
+     */
+    IAMDatabaseAuthenticationEnabled?: Boolean;
+  }
+  export type DBInstanceAutomatedBackupList = DBInstanceAutomatedBackup[];
+  export interface DBInstanceAutomatedBackupMessage {
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords . 
+     */
+    Marker?: String;
+    /**
+     *  A list of DBInstanceAutomatedBackup instances. 
+     */
+    DBInstanceAutomatedBackups?: DBInstanceAutomatedBackupList;
+  }
   export type DBInstanceList = DBInstance[];
   export interface DBInstanceMessage {
     /**
@@ -2780,6 +2901,10 @@ declare namespace RDS {
      * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.
      */
     ProcessorFeatures?: ProcessorFeatureList;
+    /**
+     * The identifier for the source DB instance, which can't be changed and which is unique to an AWS Region.
+     */
+    DbiResourceId?: String;
   }
   export interface DBSnapshotAttribute {
     /**
@@ -2888,19 +3013,32 @@ declare namespace RDS {
   export interface DeleteDBClusterSnapshotResult {
     DBClusterSnapshot?: DBClusterSnapshot;
   }
+  export interface DeleteDBInstanceAutomatedBackupMessage {
+    /**
+     * The identifier for the source DB instance, which can't be changed and which is unique to an AWS Region.
+     */
+    DbiResourceId: String;
+  }
+  export interface DeleteDBInstanceAutomatedBackupResult {
+    DBInstanceAutomatedBackup?: DBInstanceAutomatedBackup;
+  }
   export interface DeleteDBInstanceMessage {
     /**
      * The DB instance identifier for the DB instance to be deleted. This parameter isn't case-sensitive. Constraints:   Must match the name of an existing DB instance.  
      */
     DBInstanceIdentifier: String;
     /**
-     *  Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted.  Note that when a DB instance is in a failure state and has a status of 'failed', 'incompatible-restore', or 'incompatible-network', it can only be deleted when the SkipFinalSnapshot parameter is set to "true". Specify true when deleting a Read Replica.  The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot is false.  Default: false 
+     *  A value that indicates whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted.  When a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. Specify true when deleting a Read Replica.  The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot is false.  Default: false 
      */
     SkipFinalSnapshot?: Boolean;
     /**
-     *  The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to false.   Specifying this parameter and also setting the SkipFinalShapshot parameter to true results in an error.  Constraints:   Must be 1 to 255 letters or numbers.   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens   Can't be specified when deleting a Read Replica.  
+     *  The DBSnapshotIdentifier of the new DB snapshot created when SkipFinalSnapshot is set to false.   Specifying this parameter and also setting the SkipFinalShapshot parameter to true results in an error.  Constraints:   Must be 1 to 255 letters or numbers.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.   Can't be specified when deleting a Read Replica.  
      */
     FinalDBSnapshotIdentifier?: String;
+    /**
+     * A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. This parameter defaults to true.
+     */
+    DeleteAutomatedBackups?: BooleanOptional;
   }
   export interface DeleteDBInstanceResult {
     DBInstance?: DBInstance;
@@ -2919,7 +3057,7 @@ declare namespace RDS {
   }
   export interface DeleteDBSnapshotMessage {
     /**
-     * The DBSnapshot identifier. Constraints: Must be the name of an existing DB snapshot in the available state.
+     * The DB snapshot identifier. Constraints: Must be the name of an existing DB snapshot in the available state.
      */
     DBSnapshotIdentifier: String;
   }
@@ -3150,6 +3288,28 @@ declare namespace RDS {
      */
     ListSupportedTimezones?: BooleanOptional;
   }
+  export interface DescribeDBInstanceAutomatedBackupsMessage {
+    /**
+     * The resource ID of the DB instance that is the source of the automated backup. This parameter isn't case-sensitive. 
+     */
+    DbiResourceId?: String;
+    /**
+     * (Optional) The user-supplied instance identifier. If this parameter is specified, it must match the identifier of an existing DB instance. It returns information from the specific DB instance' automated backup. This parameter isn't case-sensitive. 
+     */
+    DBInstanceIdentifier?: String;
+    /**
+     * A filter that specifies which resources to return based on status. Supported filters are the following:    status     active - automated backups for current instances    retained - automated backups for deleted instances    creating - automated backups that are waiting for the first automated snapshot to be available      db-instance-id - Accepts DB instance identifiers and Amazon Resource Names (ARNs) for DB instances. The results list includes only information about the DB instance automated backupss identified by these ARNs.    dbi-resource-id - Accepts DB instance resource identifiers and DB Amazon Resource Names (ARNs) for DB instances. The results list includes only information about the DB instance resources identified by these ARNs.   Returns all resources by default. The status for each resource is specified in the response.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to MaxRecords.
+     */
+    Marker?: String;
+  }
   export interface DescribeDBInstancesMessage {
     /**
      * The user-supplied instance identifier. If this parameter is specified, information from only the specific DB instance is returned. This parameter isn't case-sensitive. Constraints:   If supplied, must match the identifier of an existing DBInstance.  
@@ -3323,6 +3483,10 @@ declare namespace RDS {
      * True to include manual DB snapshots that are public and can be copied or restored by any AWS account, and otherwise false. The default is false. You can share a manual DB snapshot as public by using the ModifyDBSnapshotAttribute API.
      */
     IncludePublic?: Boolean;
+    /**
+     * A specific DB resource ID to describe.
+     */
+    DbiResourceId?: String;
   }
   export interface DescribeDBSubnetGroupsMessage {
     /**
@@ -5742,7 +5906,7 @@ declare namespace RDS {
     /**
      * The identifier of the source DB instance from which to restore. Constraints:   Must match the identifier of an existing DB instance.  
      */
-    SourceDBInstanceIdentifier: String;
+    SourceDBInstanceIdentifier?: String;
     /**
      * The name of the new DB instance to be created. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens  
      */
@@ -5852,9 +6016,23 @@ declare namespace RDS {
      * Indicates if the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. For more information, see  Deleting a DB Instance. 
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * The resource ID of the source DB instance from which to restore.
+     */
+    SourceDbiResourceId?: String;
   }
   export interface RestoreDBInstanceToPointInTimeResult {
     DBInstance?: DBInstance;
+  }
+  export interface RestoreWindow {
+    /**
+     * The earliest time you can restore an instance to.
+     */
+    EarliestTime?: TStamp;
+    /**
+     * The latest time you can restore an instance to.
+     */
+    LatestTime?: TStamp;
   }
   export interface RevokeDBSecurityGroupIngressMessage {
     /**

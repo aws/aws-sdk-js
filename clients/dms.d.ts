@@ -29,11 +29,11 @@ declare class DMS extends Service {
    */
   createEndpoint(callback?: (err: AWSError, data: DMS.Types.CreateEndpointResponse) => void): Request<DMS.Types.CreateEndpointResponse, AWSError>;
   /**
-   *  Creates an AWS DMS event notification subscription.  You can specify the type of source (SourceType) you want to be notified of, provide a list of AWS DMS source IDs (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. If you specify both the SourceType and SourceIds, such as SourceType = replication-instance and SourceIdentifier = my-replinstance, you will be notified of all the replication instance events for the specified source. If you specify a SourceType but don't specify a SourceIdentifier, you receive notice of the events for that source type for all your AWS DMS sources. If you don't specify either SourceType nor SourceIdentifier, you will be notified of events generated from all AWS DMS sources belonging to your customer account. For more information about AWS DMS events, see  Working with Events and Notifications  in the AWS Database MIgration Service User Guide.
+   *  Creates an AWS DMS event notification subscription.  You can specify the type of source (SourceType) you want to be notified of, provide a list of AWS DMS source IDs (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. If you specify both the SourceType and SourceIds, such as SourceType = replication-instance and SourceIdentifier = my-replinstance, you will be notified of all the replication instance events for the specified source. If you specify a SourceType but don't specify a SourceIdentifier, you receive notice of the events for that source type for all your AWS DMS sources. If you don't specify either SourceType nor SourceIdentifier, you will be notified of events generated from all AWS DMS sources belonging to your customer account. For more information about AWS DMS events, see Working with Events and Notifications in the AWS Database Migration Service User Guide. 
    */
   createEventSubscription(params: DMS.Types.CreateEventSubscriptionMessage, callback?: (err: AWSError, data: DMS.Types.CreateEventSubscriptionResponse) => void): Request<DMS.Types.CreateEventSubscriptionResponse, AWSError>;
   /**
-   *  Creates an AWS DMS event notification subscription.  You can specify the type of source (SourceType) you want to be notified of, provide a list of AWS DMS source IDs (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. If you specify both the SourceType and SourceIds, such as SourceType = replication-instance and SourceIdentifier = my-replinstance, you will be notified of all the replication instance events for the specified source. If you specify a SourceType but don't specify a SourceIdentifier, you receive notice of the events for that source type for all your AWS DMS sources. If you don't specify either SourceType nor SourceIdentifier, you will be notified of events generated from all AWS DMS sources belonging to your customer account. For more information about AWS DMS events, see  Working with Events and Notifications  in the AWS Database MIgration Service User Guide.
+   *  Creates an AWS DMS event notification subscription.  You can specify the type of source (SourceType) you want to be notified of, provide a list of AWS DMS source IDs (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. If you specify both the SourceType and SourceIds, such as SourceType = replication-instance and SourceIdentifier = my-replinstance, you will be notified of all the replication instance events for the specified source. If you specify a SourceType but don't specify a SourceIdentifier, you receive notice of the events for that source type for all your AWS DMS sources. If you don't specify either SourceType nor SourceIdentifier, you will be notified of events generated from all AWS DMS sources belonging to your customer account. For more information about AWS DMS events, see Working with Events and Notifications in the AWS Database Migration Service User Guide. 
    */
   createEventSubscription(callback?: (err: AWSError, data: DMS.Types.CreateEventSubscriptionResponse) => void): Request<DMS.Types.CreateEventSubscriptionResponse, AWSError>;
   /**
@@ -149,11 +149,11 @@ declare class DMS extends Service {
    */
   describeEndpoints(callback?: (err: AWSError, data: DMS.Types.DescribeEndpointsResponse) => void): Request<DMS.Types.DescribeEndpointsResponse, AWSError>;
   /**
-   * Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in  Working with Events and Notifications  in the AWS Database Migration Service User Guide. 
+   * Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in Working with Events and Notifications in the AWS Database Migration Service User Guide. 
    */
   describeEventCategories(params: DMS.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEventCategoriesResponse) => void): Request<DMS.Types.DescribeEventCategoriesResponse, AWSError>;
   /**
-   * Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in  Working with Events and Notifications  in the AWS Database Migration Service User Guide. 
+   * Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in Working with Events and Notifications in the AWS Database Migration Service User Guide. 
    */
   describeEventCategories(callback?: (err: AWSError, data: DMS.Types.DescribeEventCategoriesResponse) => void): Request<DMS.Types.DescribeEventCategoriesResponse, AWSError>;
   /**
@@ -165,11 +165,11 @@ declare class DMS extends Service {
    */
   describeEventSubscriptions(callback?: (err: AWSError, data: DMS.Types.DescribeEventSubscriptionsResponse) => void): Request<DMS.Types.DescribeEventSubscriptionsResponse, AWSError>;
   /**
-   *  Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see  Working with Events and Notifications . 
+   *  Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see Working with Events and Notifications in the AWS Database Migration User Guide. 
    */
   describeEvents(params: DMS.Types.DescribeEventsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEventsResponse) => void): Request<DMS.Types.DescribeEventsResponse, AWSError>;
   /**
-   *  Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see  Working with Events and Notifications . 
+   *  Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see Working with Events and Notifications in the AWS Database Migration User Guide. 
    */
   describeEvents(callback?: (err: AWSError, data: DMS.Types.DescribeEventsResponse) => void): Request<DMS.Types.DescribeEventsResponse, AWSError>;
   /**
@@ -293,11 +293,11 @@ declare class DMS extends Service {
    */
   modifyReplicationSubnetGroup(callback?: (err: AWSError, data: DMS.Types.ModifyReplicationSubnetGroupResponse) => void): Request<DMS.Types.ModifyReplicationSubnetGroupResponse, AWSError>;
   /**
-   * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it.  For more information about AWS DMS tasks, see the AWS DMS user guide at  Working with Migration Tasks  
+   * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it.  For more information about AWS DMS tasks, see Working with Migration Tasks in the AWS Database Migration Service User Guide.
    */
   modifyReplicationTask(params: DMS.Types.ModifyReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationTaskResponse) => void): Request<DMS.Types.ModifyReplicationTaskResponse, AWSError>;
   /**
-   * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it.  For more information about AWS DMS tasks, see the AWS DMS user guide at  Working with Migration Tasks  
+   * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it.  For more information about AWS DMS tasks, see Working with Migration Tasks in the AWS Database Migration Service User Guide.
    */
   modifyReplicationTask(callback?: (err: AWSError, data: DMS.Types.ModifyReplicationTaskResponse) => void): Request<DMS.Types.ModifyReplicationTaskResponse, AWSError>;
   /**
@@ -333,11 +333,11 @@ declare class DMS extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: DMS.Types.RemoveTagsFromResourceResponse) => void): Request<DMS.Types.RemoveTagsFromResourceResponse, AWSError>;
   /**
-   * Starts the replication task. For more information about AWS DMS tasks, see the AWS DMS user guide at  Working with Migration Tasks  
+   * Starts the replication task. For more information about AWS DMS tasks, see Working with Migration Tasks  in the AWS Database Migration Service User Guide. 
    */
   startReplicationTask(params: DMS.Types.StartReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskResponse) => void): Request<DMS.Types.StartReplicationTaskResponse, AWSError>;
   /**
-   * Starts the replication task. For more information about AWS DMS tasks, see the AWS DMS user guide at  Working with Migration Tasks  
+   * Starts the replication task. For more information about AWS DMS tasks, see Working with Migration Tasks  in the AWS Database Migration Service User Guide. 
    */
   startReplicationTask(callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskResponse) => void): Request<DMS.Types.StartReplicationTaskResponse, AWSError>;
   /**
@@ -365,13 +365,13 @@ declare class DMS extends Service {
    */
   testConnection(callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
   /**
-   * Waits for the testConnectionSucceeds state by periodically calling the underlying DMS.describeConnectionsoperation every 5 seconds (at most 60 times). Wait until testing connection succeeds.
+   * Waits for the testConnectionSucceeds state by periodically calling the underlying DMS.testConnectionoperation every 5 seconds (at most 60 times). Wait until testing connection succeeds.
    */
-  waitFor(state: "testConnectionSucceeds", params: DMS.Types.DescribeConnectionsMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.DescribeConnectionsResponse) => void): Request<DMS.Types.DescribeConnectionsResponse, AWSError>;
+  waitFor(state: "testConnectionSucceeds", params: DMS.Types.TestConnectionMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
   /**
-   * Waits for the testConnectionSucceeds state by periodically calling the underlying DMS.describeConnectionsoperation every 5 seconds (at most 60 times). Wait until testing connection succeeds.
+   * Waits for the testConnectionSucceeds state by periodically calling the underlying DMS.testConnectionoperation every 5 seconds (at most 60 times). Wait until testing connection succeeds.
    */
-  waitFor(state: "testConnectionSucceeds", callback?: (err: AWSError, data: DMS.Types.DescribeConnectionsResponse) => void): Request<DMS.Types.DescribeConnectionsResponse, AWSError>;
+  waitFor(state: "testConnectionSucceeds", callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
   /**
    * Waits for the endpointDeleted state by periodically calling the underlying DMS.describeEndpointsoperation every 5 seconds (at most 60 times). Wait until testing endpoint is deleted.
    */
@@ -549,15 +549,15 @@ declare namespace DMS {
      */
     EndpointType: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
+     * The type of engine for the endpoint. Valid values, depending on the EndPointType value, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName: String;
     /**
-     * The user name to be used to login to the endpoint database.
+     * The user name to be used to log in to the endpoint database.
      */
     Username?: String;
     /**
-     * The password to be used to login to the endpoint database.
+     * The password to be used to log in to the endpoint database.
      */
     Password?: SecretString;
     /**
@@ -577,7 +577,7 @@ declare namespace DMS {
      */
     ExtraConnectionAttributes?: String;
     /**
-     * The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+     * The AWS KMS key identifier to use to encrypt the connection parameters. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
      */
     KmsKeyId?: String;
     /**
@@ -589,11 +589,11 @@ declare namespace DMS {
      */
     CertificateArn?: String;
     /**
-     * The SSL mode to use for the SSL connection. SSL mode can be one of four values: none, require, verify-ca, verify-full.  The default value is none.
+     * The Secure Sockets Layer (SSL) mode to use for the SSL connection. The SSL mode can be one of four values: none, require, verify-ca, verify-full. The default value is none.
      */
     SslMode?: DmsSslModeValue;
     /**
-     *  The Amazon Resource Name (ARN) for the service access role you want to use to create the endpoint. 
+     *  The Amazon Resource Name (ARN) for the service access role that you want to use to create the endpoint. 
      */
     ServiceAccessRoleArn?: String;
     /**
@@ -601,21 +601,29 @@ declare namespace DMS {
      */
     ExternalTableDefinition?: String;
     /**
-     * Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the Using Object Mapping to Migrate Data to DynamoDB section at  Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service. 
+     * Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see Using Object Mapping to Migrate Data to DynamoDB in the AWS Database Migration Service User Guide. 
      */
     DynamoDbSettings?: DynamoDbSettings;
     /**
-     * Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see the Extra Connection Attributes section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
+     * Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS in the AWS Database Migration Service User Guide. 
      */
     S3Settings?: S3Settings;
     /**
-     *  The settings in JSON format for the DMS Transfer type source endpoint.  Attributes include:   serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.   bucketName - The name of the S3 bucket to use.   compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.   Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string JSON syntax:  { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } 
+     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible attributes include the following:    serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.    bucketName - The name of the S3 bucket to use.    compressionType - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to NONE (the default). To keep the files uncompressed, don't use this value.    Shorthand syntax for these attributes is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string  JSON syntax for these attributes is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" }  
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
-     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service section at  Using MongoDB as a Target for AWS Database Migration Service. 
+     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in  Using MongoDB as a Target for AWS Database Migration Service in the AWS Database Migration Service User Guide. 
      */
     MongoDbSettings?: MongoDbSettings;
+    /**
+     * Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see Using Object Mapping to Migrate Data to a Kinesis Data Stream in the AWS Database Migration User Guide. 
+     */
+    KinesisSettings?: KinesisSettings;
+    /**
+     * Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS in the AWS Database Migration User Guide. 
+     */
+    ElasticsearchSettings?: ElasticsearchSettings;
   }
   export interface CreateEndpointResponse {
     /**
@@ -637,7 +645,7 @@ declare namespace DMS {
      */
     SourceType?: String;
     /**
-     *  A list of event categories for a source type that you want to subscribe to. You can see a list of the categories for a given source type by calling the DescribeEventCategories action or in the topic  Working with Events and Notifications in the AWS Database Migration Service User Guide. 
+     *  A list of event categories for a source type that you want to subscribe to. You can see a list of the categories for a given source type by calling the DescribeEventCategories action or in the topic Working with Events and Notifications in the AWS Database Migration Service User Guide. 
      */
     EventCategories?: EventCategoriesList;
     /**
@@ -705,13 +713,17 @@ declare namespace DMS {
      */
     Tags?: TagList;
     /**
-     * The KMS key identifier that will be used to encrypt the content on the replication instance. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+     * The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
      */
     KmsKeyId?: String;
     /**
      *  Specifies the accessibility options for the replication instance. A value of true represents an instance with a public IP address. A value of false represents an instance with a private IP address. The default value is true. 
      */
     PubliclyAccessible?: BooleanOptional;
+    /**
+     * A list of DNS name servers supported for the replication instance.
+     */
+    DnsNameServers?: String;
   }
   export interface CreateReplicationInstanceResponse {
     /**
@@ -769,7 +781,7 @@ declare namespace DMS {
      */
     TableMappings: String;
     /**
-     * Settings for the task, such as target metadata settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks.
+     * Settings for the task, such as target metadata settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks in the AWS Database Migration User Guide. 
      */
     ReplicationTaskSettings?: String;
     /**
@@ -1292,6 +1304,24 @@ declare namespace DMS {
      */
     ServiceAccessRoleArn: String;
   }
+  export interface ElasticsearchSettings {
+    /**
+     * The Amazon Resource Name (ARN) used by service to access the IAM role.
+     */
+    ServiceAccessRoleArn: String;
+    /**
+     * The endpoint for the ElasticSearch cluster.
+     */
+    EndpointUri: String;
+    /**
+     * The maximum percentage of records that can fail to be written before a full load operation stops. 
+     */
+    FullLoadErrorPercentage?: IntegerOptional;
+    /**
+     * The maximum number of seconds that DMS retries failed API requests to the Elasticsearch cluster.
+     */
+    ErrorRetryDuration?: IntegerOptional;
+  }
   export interface Endpoint {
     /**
      * The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
@@ -1334,7 +1364,7 @@ declare namespace DMS {
      */
     Status?: String;
     /**
-     * The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+     * The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
      */
     KmsKeyId?: String;
     /**
@@ -1370,13 +1400,21 @@ declare namespace DMS {
      */
     S3Settings?: S3Settings;
     /**
-     *  The settings in JSON format for the DMS Transfer type source endpoint.  Attributes include:   serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.   bucketName - The name of the S3 bucket to use.   compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.   Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string JSON syntax:  { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } 
+     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible attributes include the following:    serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.    bucketName - The name of the S3 bucket to use.    compressionType - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to NONE (the default). To keep the files uncompressed, don't use this value.    Shorthand syntax for these attributes is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string  JSON syntax for these attributes is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" }  
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
      * The settings for the MongoDB source endpoint. For more information, see the MongoDbSettings structure.
      */
     MongoDbSettings?: MongoDbSettings;
+    /**
+     * The settings for the Amazon Kinesis source endpoint. For more information, see the KinesisSettings structure.
+     */
+    KinesisSettings?: KinesisSettings;
+    /**
+     * The settings for the Elasticsearch source endpoint. For more information, see the ElasticsearchSettings structure.
+     */
+    ElasticsearchSettings?: ElasticsearchSettings;
   }
   export type EndpointList = Endpoint[];
   export interface Event {
@@ -1492,6 +1530,20 @@ declare namespace DMS {
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];
+  export interface KinesisSettings {
+    /**
+     * The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.
+     */
+    StreamArn?: String;
+    /**
+     * The output format for the records created on the endpoint. The message format is JSON.
+     */
+    MessageFormat?: MessageFormatValue;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to the Amazon Kinesis data stream.
+     */
+    ServiceAccessRoleArn?: String;
+  }
   export interface ListTagsForResourceMessage {
     /**
      * The Amazon Resource Name (ARN) string that uniquely identifies the AWS DMS resource.
@@ -1505,6 +1557,7 @@ declare namespace DMS {
     TagList?: TagList;
   }
   export type Long = number;
+  export type MessageFormatValue = "json"|string;
   export type MigrationTypeValue = "full-load"|"cdc"|"full-load-and-cdc"|string;
   export interface ModifyEndpointMessage {
     /**
@@ -1564,21 +1617,29 @@ declare namespace DMS {
      */
     ExternalTableDefinition?: String;
     /**
-     * Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the Using Object Mapping to Migrate Data to DynamoDB section at  Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service. 
+     * Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see Using Object Mapping to Migrate Data to DynamoDB in the AWS Database Migration Service User Guide. 
      */
     DynamoDbSettings?: DynamoDbSettings;
     /**
-     * Settings in JSON format for the target S3 endpoint. For more information about the available settings, see the Extra Connection Attributes section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
+     * Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS in the AWS Database Migration Service User Guide. 
      */
     S3Settings?: S3Settings;
     /**
-     *  The settings in JSON format for the DMS Transfer type source endpoint.  Attributes include:   serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.   BucketName - The name of the S3 bucket to use.   compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.   Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string JSON syntax:  { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } 
+     * The settings in JSON format for the DMS transfer type of source endpoint.  Attributes include the following:   serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.   BucketName - The name of the S3 bucket to use.   compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.   Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string JSON syntax:  { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } 
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
-     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
+     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in  Using MongoDB as a Target for AWS Database Migration Service in the AWS Database Migration Service User Guide. 
      */
     MongoDbSettings?: MongoDbSettings;
+    /**
+     * Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see Using Object Mapping to Migrate Data to a Kinesis Data Stream in the AWS Database Migration User Guide. 
+     */
+    KinesisSettings?: KinesisSettings;
+    /**
+     * Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS in the AWS Database Migration User Guide. 
+     */
+    ElasticsearchSettings?: ElasticsearchSettings;
   }
   export interface ModifyEndpointResponse {
     /**
@@ -1772,7 +1833,7 @@ declare namespace DMS {
      */
     AuthSource?: String;
     /**
-     *  The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. 
+     * The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
      */
     KmsKeyId?: String;
   }
@@ -1951,7 +2012,7 @@ declare namespace DMS {
      */
     AutoMinorVersionUpgrade?: Boolean;
     /**
-     * The KMS key identifier that is used to encrypt the content on the replication instance. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+     * The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
      */
     KmsKeyId?: String;
     /**
@@ -1986,6 +2047,10 @@ declare namespace DMS {
      *  The expiration date of the free replication instance that is part of the Free DMS program. 
      */
     FreeUntil?: TStamp;
+    /**
+     * The DNS name servers for the replication instance.
+     */
+    DnsNameServers?: String;
   }
   export type ReplicationInstanceList = ReplicationInstance[];
   export type ReplicationInstancePrivateIpAddressList = String[];

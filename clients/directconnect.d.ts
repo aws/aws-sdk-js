@@ -92,11 +92,11 @@ declare class DirectConnect extends Service {
    */
   confirmPublicVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.ConfirmPublicVirtualInterfaceResponse) => void): Request<DirectConnect.Types.ConfirmPublicVirtualInterfaceResponse, AWSError>;
   /**
-   * Creates a BGP peer on the specified virtual interface. The BGP peer cannot be in the same address family (IPv4/IPv6) of an existing BGP peer on the virtual interface. You must create a BGP peer for the corresponding address family in order to access AWS resources that also use that address family. When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses. For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.
+   * Creates a BGP peer on the specified virtual interface. You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to access AWS resources that also use that address family. If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot be in the same address family as an existing BGP peer on the virtual interface. When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses. For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.
    */
   createBGPPeer(params: DirectConnect.Types.CreateBGPPeerRequest, callback?: (err: AWSError, data: DirectConnect.Types.CreateBGPPeerResponse) => void): Request<DirectConnect.Types.CreateBGPPeerResponse, AWSError>;
   /**
-   * Creates a BGP peer on the specified virtual interface. The BGP peer cannot be in the same address family (IPv4/IPv6) of an existing BGP peer on the virtual interface. You must create a BGP peer for the corresponding address family in order to access AWS resources that also use that address family. When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses. For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.
+   * Creates a BGP peer on the specified virtual interface. You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to access AWS resources that also use that address family. If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot be in the same address family as an existing BGP peer on the virtual interface. When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses. For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.
    */
   createBGPPeer(callback?: (err: AWSError, data: DirectConnect.Types.CreateBGPPeerResponse) => void): Request<DirectConnect.Types.CreateBGPPeerResponse, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class DirectConnect extends Service {
    */
   createPublicVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
-   * Deletes the BGP peer on the specified virtual interface with the specified customer address and ASN. You cannot delete the last BGP peer from a virtual interface.
+   * Deletes the specified BGP peer on the specified virtual interface with the specified customer address and ASN. You cannot delete the last BGP peer from a virtual interface.
    */
   deleteBGPPeer(params: DirectConnect.Types.DeleteBGPPeerRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteBGPPeerResponse) => void): Request<DirectConnect.Types.DeleteBGPPeerResponse, AWSError>;
   /**
-   * Deletes the BGP peer on the specified virtual interface with the specified customer address and ASN. You cannot delete the last BGP peer from a virtual interface.
+   * Deletes the specified BGP peer on the specified virtual interface with the specified customer address and ASN. You cannot delete the last BGP peer from a virtual interface.
    */
   deleteBGPPeer(callback?: (err: AWSError, data: DirectConnect.Types.DeleteBGPPeerResponse) => void): Request<DirectConnect.Types.DeleteBGPPeerResponse, AWSError>;
   /**
@@ -475,6 +475,10 @@ declare namespace DirectConnect {
   export type BGPAuthKey = string;
   export interface BGPPeer {
     /**
+     * The ID of the BGP peer.
+     */
+    bgpPeerId?: BGPPeerId;
+    /**
      * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
      */
     asn?: ASN;
@@ -507,6 +511,7 @@ declare namespace DirectConnect {
      */
     awsDeviceV2?: AwsDeviceV2;
   }
+  export type BGPPeerId = string;
   export type BGPPeerList = BGPPeer[];
   export type BGPPeerState = "verifying"|"pending"|"available"|"deleting"|"deleted"|string;
   export type BGPStatus = "up"|"down"|string;
@@ -614,6 +619,10 @@ declare namespace DirectConnect {
      * The Direct Connect endpoint on which the physical connection terminates.
      */
     awsDeviceV2?: AwsDeviceV2;
+    /**
+     * Indicates whether the connection supports a secondary BGP peer in the same address family (IPv4/IPv6).
+     */
+    hasLogicalRedundancy?: HasLogicalRedundancy;
   }
   export type ConnectionId = string;
   export type ConnectionList = Connection[];
@@ -766,6 +775,10 @@ declare namespace DirectConnect {
      * The IP address assigned to the customer interface.
      */
     customerAddress?: CustomerAddress;
+    /**
+     * The ID of the BGP peer.
+     */
+    bgpPeerId?: BGPPeerId;
   }
   export interface DeleteBGPPeerResponse {
     /**
@@ -1119,6 +1132,7 @@ declare namespace DirectConnect {
      */
     lagId: LagId;
   }
+  export type HasLogicalRedundancy = "unknown"|"yes"|"no"|string;
   export interface Interconnect {
     /**
      * The ID of the interconnect.
@@ -1164,6 +1178,10 @@ declare namespace DirectConnect {
      * The Direct Connect endpoint on which the physical connection terminates.
      */
     awsDeviceV2?: AwsDeviceV2;
+    /**
+     * Indicates whether the interconnect supports a secondary BGP in the same address family (IPv4/IPv6).
+     */
+    hasLogicalRedundancy?: HasLogicalRedundancy;
   }
   export type InterconnectId = string;
   export type InterconnectList = Interconnect[];
@@ -1233,6 +1251,10 @@ declare namespace DirectConnect {
      * Indicates whether jumbo frames (9001 MTU) are supported.
      */
     jumboFrameCapable?: JumboFrameCapable;
+    /**
+     * Indicates whether the LAG supports a secondary BGP peer in the same address family (IPv4/IPv6).
+     */
+    hasLogicalRedundancy?: HasLogicalRedundancy;
   }
   export type LagId = string;
   export type LagList = Lag[];

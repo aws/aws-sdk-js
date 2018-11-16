@@ -607,5 +607,15 @@
   "pinpointemail": {
     "prefix": "pinpoint-email",
     "name": "PinpointEmail"
+  },
+  "ram": {
+    "name": "RAM"
+  },
+  "route53resolver": {
+    "name": "Route53Resolver"
+  },
+  "pinpointsmsvoice": {
+    "prefix": "sms-voice",
+    "name": "PinpointSMSVoice"
   }
 }

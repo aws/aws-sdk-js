@@ -74,11 +74,11 @@ declare class S3 extends S3Customizations {
    */
   deleteBucketAnalyticsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the cors configuration information set for the bucket.
+   * Deletes the CORS configuration information set for the bucket.
    */
   deleteBucketCors(params: S3.Types.DeleteBucketCorsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the cors configuration information set for the bucket.
+   * Deletes the CORS configuration information set for the bucket.
    */
   deleteBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -122,11 +122,11 @@ declare class S3 extends S3Customizations {
    */
   deleteBucketPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the replication configuration from the bucket.
+   *  Deletes the replication configuration from the bucket. For information about replication configuration, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
    */
   deleteBucketReplication(params: S3.Types.DeleteBucketReplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the replication configuration from the bucket.
+   *  Deletes the replication configuration from the bucket. For information about replication configuration, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
    */
   deleteBucketReplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -170,6 +170,14 @@ declare class S3 extends S3Customizations {
    */
   deleteObjects(callback?: (err: AWSError, data: S3.Types.DeleteObjectsOutput) => void): Request<S3.Types.DeleteObjectsOutput, AWSError>;
   /**
+   * Removes the Public Access Block configuration for an Amazon S3 bucket.
+   */
+  deletePublicAccessBlock(params: S3.Types.DeletePublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the Public Access Block configuration for an Amazon S3 bucket.
+   */
+  deletePublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Returns the accelerate configuration of a bucket.
    */
   getBucketAccelerateConfiguration(params: S3.Types.GetBucketAccelerateConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketAccelerateConfigurationOutput) => void): Request<S3.Types.GetBucketAccelerateConfigurationOutput, AWSError>;
@@ -194,11 +202,11 @@ declare class S3 extends S3Customizations {
    */
   getBucketAnalyticsConfiguration(callback?: (err: AWSError, data: S3.Types.GetBucketAnalyticsConfigurationOutput) => void): Request<S3.Types.GetBucketAnalyticsConfigurationOutput, AWSError>;
   /**
-   * Returns the cors configuration for the bucket.
+   * Returns the CORS configuration for the bucket.
    */
   getBucketCors(params: S3.Types.GetBucketCorsRequest, callback?: (err: AWSError, data: S3.Types.GetBucketCorsOutput) => void): Request<S3.Types.GetBucketCorsOutput, AWSError>;
   /**
-   * Returns the cors configuration for the bucket.
+   * Returns the CORS configuration for the bucket.
    */
   getBucketCors(callback?: (err: AWSError, data: S3.Types.GetBucketCorsOutput) => void): Request<S3.Types.GetBucketCorsOutput, AWSError>;
   /**
@@ -282,11 +290,19 @@ declare class S3 extends S3Customizations {
    */
   getBucketPolicy(callback?: (err: AWSError, data: S3.Types.GetBucketPolicyOutput) => void): Request<S3.Types.GetBucketPolicyOutput, AWSError>;
   /**
-   * Returns the replication configuration of a bucket.
+   * Retrieves the policy status for an Amazon S3 bucket, indicating whether the bucket is public.
+   */
+  getBucketPolicyStatus(params: S3.Types.GetBucketPolicyStatusRequest, callback?: (err: AWSError, data: S3.Types.GetBucketPolicyStatusOutput) => void): Request<S3.Types.GetBucketPolicyStatusOutput, AWSError>;
+  /**
+   * Retrieves the policy status for an Amazon S3 bucket, indicating whether the bucket is public.
+   */
+  getBucketPolicyStatus(callback?: (err: AWSError, data: S3.Types.GetBucketPolicyStatusOutput) => void): Request<S3.Types.GetBucketPolicyStatusOutput, AWSError>;
+  /**
+   * Returns the replication configuration of a bucket.   It can take a while to propagate the put or delete a replication configuration to all Amazon S3 systems. Therefore, a get request soon after put or delete can return a wrong result.  
    */
   getBucketReplication(params: S3.Types.GetBucketReplicationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketReplicationOutput) => void): Request<S3.Types.GetBucketReplicationOutput, AWSError>;
   /**
-   * Returns the replication configuration of a bucket.
+   * Returns the replication configuration of a bucket.   It can take a while to propagate the put or delete a replication configuration to all Amazon S3 systems. Therefore, a get request soon after put or delete can return a wrong result.  
    */
   getBucketReplication(callback?: (err: AWSError, data: S3.Types.GetBucketReplicationOutput) => void): Request<S3.Types.GetBucketReplicationOutput, AWSError>;
   /**
@@ -353,6 +369,14 @@ declare class S3 extends S3Customizations {
    * Return torrent files from a bucket.
    */
   getObjectTorrent(callback?: (err: AWSError, data: S3.Types.GetObjectTorrentOutput) => void): Request<S3.Types.GetObjectTorrentOutput, AWSError>;
+  /**
+   * Retrieves the Public Access Block configuration for an Amazon S3 bucket.
+   */
+  getPublicAccessBlock(params: S3.Types.GetPublicAccessBlockRequest, callback?: (err: AWSError, data: S3.Types.GetPublicAccessBlockOutput) => void): Request<S3.Types.GetPublicAccessBlockOutput, AWSError>;
+  /**
+   * Retrieves the Public Access Block configuration for an Amazon S3 bucket.
+   */
+  getPublicAccessBlock(callback?: (err: AWSError, data: S3.Types.GetPublicAccessBlockOutput) => void): Request<S3.Types.GetPublicAccessBlockOutput, AWSError>;
   /**
    * This operation is useful to determine if a bucket exists and you have permission to access it.
    */
@@ -462,11 +486,11 @@ declare class S3 extends S3Customizations {
    */
   putBucketAnalyticsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the cors configuration for a bucket.
+   * Sets the CORS configuration for a bucket.
    */
   putBucketCors(params: S3.Types.PutBucketCorsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the cors configuration for a bucket.
+   * Sets the CORS configuration for a bucket.
    */
   putBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -542,11 +566,11 @@ declare class S3 extends S3Customizations {
    */
   putBucketPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Creates a new replication configuration (or replaces an existing one, if present). For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
+   *  Creates a replication configuration or replaces an existing one. For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
    */
   putBucketReplication(params: S3.Types.PutBucketReplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Creates a new replication configuration (or replaces an existing one, if present). For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
+   *  Creates a replication configuration or replaces an existing one. For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
    */
   putBucketReplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -605,6 +629,14 @@ declare class S3 extends S3Customizations {
    * Sets the supplied tag-set to an object that already exists in a bucket
    */
   putObjectTagging(callback?: (err: AWSError, data: S3.Types.PutObjectTaggingOutput) => void): Request<S3.Types.PutObjectTaggingOutput, AWSError>;
+  /**
+   * Creates or modifies the Public Access Block configuration for an Amazon S3 bucket.
+   */
+  putPublicAccessBlock(params: S3.Types.PutPublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates or modifies the Public Access Block configuration for an Amazon S3 bucket.
+   */
+  putPublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Restores an archived copy of an object back into Amazon S3
    */
@@ -844,19 +876,19 @@ declare namespace S3 {
      */
     FileHeaderInfo?: FileHeaderInfo;
     /**
-     * Single character used to indicate a row should be ignored when present at the start of a row.
+     * The single character used to indicate a row should be ignored when present at the start of a row.
      */
     Comments?: Comments;
     /**
-     * Single character used for escaping the quote character inside an already escaped value.
+     * The single character used for escaping the quote character inside an already escaped value.
      */
     QuoteEscapeCharacter?: QuoteEscapeCharacter;
     /**
-     * Value used to separate individual records.
+     * The value used to separate individual records.
      */
     RecordDelimiter?: RecordDelimiter;
     /**
-     * Value used to separate individual fields in a record.
+     * The value used to separate individual fields in a record.
      */
     FieldDelimiter?: FieldDelimiter;
     /**
@@ -874,19 +906,19 @@ declare namespace S3 {
      */
     QuoteFields?: QuoteFields;
     /**
-     * Single character used for escaping the quote character inside an already escaped value.
+     * Th single character used for escaping the quote character inside an already escaped value.
      */
     QuoteEscapeCharacter?: QuoteEscapeCharacter;
     /**
-     * Value used to separate individual records.
+     * The value used to separate individual records.
      */
     RecordDelimiter?: RecordDelimiter;
     /**
-     * Value used to separate individual fields in a record.
+     * The value used to separate individual fields in a record.
      */
     FieldDelimiter?: FieldDelimiter;
     /**
-     * Value used for escaping where the field delimiter is part of the value.
+     * The value used for escaping where the field delimiter is part of the value.
      */
     QuoteCharacter?: QuoteCharacter;
   }
@@ -1371,7 +1403,7 @@ declare namespace S3 {
   }
   export interface DeleteBucketReplicationRequest {
     /**
-     * Deletes the replication subresource associated with the specified bucket.  There is usually some time lag before replication configuration deletion is fully propagated to all the Amazon S3 systems.   For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
+     *  The bucket name.   It can take a while to propagate the deletion of a replication configuration to all Amazon S3 systems. 
      */
     Bucket: BucketName;
   }
@@ -1406,7 +1438,7 @@ declare namespace S3 {
   }
   export interface DeleteMarkerReplication {
     /**
-     * The status of the delete marker replication.   In the current implementation, Amazon S3 does not replicate the delete markers. Therefore, the status must be Disabled.  
+     * The status of the delete marker replication.   In the current implementation, Amazon S3 doesn't replicate the delete markers. The status must be Disabled.  
      */
     Status?: DeleteMarkerReplicationStatus;
   }
@@ -1465,6 +1497,12 @@ declare namespace S3 {
     MFA?: MFA;
     RequestPayer?: RequestPayer;
   }
+  export interface DeletePublicAccessBlockRequest {
+    /**
+     *  The Amazon S3 bucket whose Public Access Block configuration you want to delete. 
+     */
+    Bucket: BucketName;
+  }
   export interface DeletedObject {
     Key?: ObjectKey;
     VersionId?: ObjectVersionId;
@@ -1476,23 +1514,23 @@ declare namespace S3 {
   export type Description = string;
   export interface Destination {
     /**
-     *  Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.   If you have multiple rules in your replication configuration, all rules must specify the same bucket as the destination. A replication configuration can replicate objects only to one destination bucket. 
+     *  The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.   If there are multiple rules in your replication configuration, all rules must specify the same bucket as the destination. A replication configuration can replicate objects to only one destination bucket. 
      */
     Bucket: BucketName;
     /**
-     *  Account ID of the destination bucket. Currently Amazon S3 verifies this value only if Access Control Translation is enabled.   In a cross-account scenario, if you tell Amazon S3 to change replica ownership to the AWS account that owns the destination bucket by adding the AccessControlTranslation element, this is the account ID of the destination bucket owner. 
+     * The account ID of the destination bucket. Currently, Amazon S3 verifies this value only if Access Control Translation is enabled.  In a cross-account scenario, if you change replica ownership to the AWS account that owns the destination bucket by adding the AccessControlTranslation element, this is the account ID of the owner of the destination bucket. 
      */
     Account?: AccountId;
     /**
-     * The class of storage used to store the object.
+     *  The class of storage used to store the object. By default Amazon S3 uses storage class of the source object when creating a replica. 
      */
     StorageClass?: StorageClass;
     /**
-     *  Container for information regarding the access control for replicas.   Use only in a cross-account scenario, where source and destination bucket owners are not the same, when you want to change replica ownership to the AWS account that owns the destination bucket. If you don't add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object. 
+     * A container for information about access control for replicas.  Use this element only in a cross-account scenario where source and destination bucket owners are not the same to change replica ownership to the AWS account that owns the destination bucket. If you don't add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object. 
      */
     AccessControlTranslation?: AccessControlTranslation;
     /**
-     *  Container that provides encryption-related information. You must specify this element if the SourceSelectionCriteria is specified. 
+     * A container that provides information about encryption. If SourceSelectionCriteria is specified, you must specify this element. 
      */
     EncryptionConfiguration?: EncryptionConfiguration;
   }
@@ -1517,7 +1555,7 @@ declare namespace S3 {
   }
   export interface EncryptionConfiguration {
     /**
-     *  The ID of the AWS KMS key for the region where the destination bucket resides. Amazon S3 uses this key to encrypt the replica object. 
+     * The ID of the AWS KMS key for the AWS Region where the destination bucket resides. Amazon S3 uses this key to encrypt the replica object. 
      */
     ReplicaKmsKeyID?: ReplicaKmsKeyID;
   }
@@ -1551,7 +1589,7 @@ declare namespace S3 {
   export type FileHeaderInfo = "USE"|"IGNORE"|"NONE"|string;
   export interface FilterRule {
     /**
-     * Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to Configuring Event Notifications in the Amazon Simple Storage Service Developer Guide.
+     * The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum prefix length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see Configuring Event Notifications in the Amazon Simple Storage Service Developer Guide.
      */
     Name?: FilterRuleName;
     Value?: FilterRuleValue;
@@ -1681,6 +1719,18 @@ declare namespace S3 {
     Policy?: Policy;
   }
   export interface GetBucketPolicyRequest {
+    Bucket: BucketName;
+  }
+  export interface GetBucketPolicyStatusOutput {
+    /**
+     * The public-policy status for this bucket.
+     */
+    PolicyStatus?: PolicyStatus;
+  }
+  export interface GetBucketPolicyStatusRequest {
+    /**
+     * The name of the Amazon S3 bucket whose public-policy status you want to retrieve.
+     */
     Bucket: BucketName;
   }
   export interface GetBucketReplicationOutput {
@@ -1931,6 +1981,18 @@ declare namespace S3 {
     Bucket: BucketName;
     Key: ObjectKey;
     RequestPayer?: RequestPayer;
+  }
+  export interface GetPublicAccessBlockOutput {
+    /**
+     * The Public Access Block configuration currently in effect for this Amazon S3 bucket.
+     */
+    PublicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
+  }
+  export interface GetPublicAccessBlockRequest {
+    /**
+     *  The name of the Amazon S3 bucket whose Public Access Block configuration you want to retrieve. 
+     */
+    Bucket: BucketName;
   }
   export interface GlacierJobParameters {
     /**
@@ -2193,11 +2255,11 @@ declare namespace S3 {
   }
   export interface InventoryEncryption {
     /**
-     * Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+     * Specifies the use of SSE-S3 to encrypt delivered Inventory reports.
      */
     SSES3?: SSES3;
     /**
-     * Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+     * Specifies the use of SSE-KMS to encrypt delivered Inventory reports.
      */
     SSEKMS?: SSEKMS;
   }
@@ -2243,6 +2305,7 @@ declare namespace S3 {
   }
   export type IsEnabled = boolean;
   export type IsLatest = boolean;
+  export type IsPublic = boolean;
   export type IsTruncated = boolean;
   export interface JSONInput {
     /**
@@ -2265,7 +2328,7 @@ declare namespace S3 {
   export interface LambdaFunctionConfiguration {
     Id?: NotificationId;
     /**
-     * Lambda cloud function ARN that Amazon S3 can invoke when it detects events of the specified type.
+     * The Amazon Resource Name (ARN) of the Lambda cloud function that Amazon S3 can invoke when it detects events of the specified type.
      */
     LambdaFunctionArn: LambdaFunctionArn;
     Events: EventList;
@@ -2958,7 +3021,7 @@ declare namespace S3 {
      */
     ETag?: ETag;
     /**
-     * Size of the uploaded part data.
+     * Size in bytes of the uploaded part data.
      */
     Size?: Size;
   }
@@ -2969,19 +3032,25 @@ declare namespace S3 {
   export type Payer = "Requester"|"BucketOwner"|string;
   export type Permission = "FULL_CONTROL"|"WRITE"|"WRITE_ACP"|"READ"|"READ_ACP"|string;
   export type Policy = string;
+  export interface PolicyStatus {
+    /**
+     * The public-policy status for this bucket. TRUE indicates that this bucket is public. FALSE indicates that the bucket is not public.
+     */
+    IsPublic?: IsPublic;
+  }
   export type Prefix = string;
   export type Priority = number;
   export interface Progress {
     /**
-     * Current number of object bytes scanned.
+     * The current number of object bytes scanned.
      */
     BytesScanned?: BytesScanned;
     /**
-     * Current number of uncompressed object bytes processed.
+     * The current number of uncompressed object bytes processed.
      */
     BytesProcessed?: BytesProcessed;
     /**
-     * Current number of bytes of records payload data returned.
+     * The current number of bytes of records payload data returned.
      */
     BytesReturned?: BytesReturned;
   }
@@ -2992,6 +3061,24 @@ declare namespace S3 {
     Details?: Progress;
   }
   export type Protocol = "http"|"https"|string;
+  export interface PublicAccessBlockConfiguration {
+    /**
+     *  Specifies whether Amazon S3 should block public ACLs for this bucket. Setting this element to TRUE causes the following behavior:   PUT Bucket acl and PUT Object acl calls will fail if the specified ACL allows public access.   PUT Object calls will fail if the request includes an object ACL.   Note that enabling this setting doesn't affect existing policies or ACLs.
+     */
+    BlockPublicAcls?: Setting;
+    /**
+     * Specifies whether Amazon S3 should ignore public ACLs for this bucket. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on this bucket and any objects that it contains.  Note that enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.
+     */
+    IgnorePublicAcls?: Setting;
+    /**
+     * Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.  Note that enabling this setting doesn't affect existing bucket policies.
+     */
+    BlockPublicPolicy?: Setting;
+    /**
+     * Specifies whether Amazon S3 should restrict public bucket policies for this bucket. If this element is set to TRUE, then only the bucket owner and AWS Services can access this bucket if it has a public policy. Note that enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.
+     */
+    RestrictPublicBuckets?: Setting;
+  }
   export interface PutBucketAccelerateConfigurationRequest {
     /**
      * Name of the bucket for which the accelerate configuration is set.
@@ -3321,7 +3408,7 @@ declare namespace S3 {
     SSEKMSKeyId?: SSEKMSKeyId;
     RequestPayer?: RequestPayer;
     /**
-     * The tag-set for the object. The tag-set must be encoded as URL Query parameters
+     * The tag-set for the object. The tag-set must be encoded as URL Query parameters. (For example, "Key1=Value1")
      */
     Tagging?: TaggingHeader;
   }
@@ -3335,11 +3422,25 @@ declare namespace S3 {
     ContentMD5?: ContentMD5;
     Tagging: Tagging;
   }
+  export interface PutPublicAccessBlockRequest {
+    /**
+     * The name of the Amazon S3 bucket whose Public Access Block configuration you want to set.
+     */
+    Bucket: BucketName;
+    /**
+     *  The MD5 hash of the PutPublicBlock request body. 
+     */
+    ContentMD5?: ContentMD5;
+    /**
+     * The Public Access Block configuration that you want to apply to this Amazon S3 bucket.
+     */
+    PublicAccessBlockConfiguration: PublicAccessBlockConfiguration;
+  }
   export type QueueArn = string;
   export interface QueueConfiguration {
     Id?: NotificationId;
     /**
-     * Amazon SQS queue ARN to which Amazon S3 will publish a message when it detects events of specified type.
+     * The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 will publish a message when it detects events of the specified type.
      */
     QueueArn: QueueArn;
     Events: EventList;
@@ -3401,38 +3502,38 @@ declare namespace S3 {
   export type ReplicaKmsKeyID = string;
   export interface ReplicationConfiguration {
     /**
-     * Amazon Resource Name (ARN) of an IAM role for Amazon S3 to assume when replicating the objects.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 can assume when replicating the objects.
      */
     Role: Role;
     /**
-     * Container for one or more replication rules. Replication configuration must have at least one rule and can contain up to 1,000 rules. 
+     * A container for one or more replication rules. A replication configuration must have at least one rule and can contain a maximum of 1,000 rules. 
      */
     Rules: ReplicationRules;
   }
   export interface ReplicationRule {
     /**
-     * Unique identifier for the rule. The value cannot be longer than 255 characters.
+     * A unique identifier for the rule. The maximum value is 255 characters.
      */
     ID?: ID;
     /**
-     * The priority associated with the rule. If you specify multiple rules in a replication configuration, then Amazon S3 applies rule priority in the event there are conflicts (two or more rules identify the same object based on filter specified). The rule with higher priority takes precedence. For example,   Same object quality prefix based filter criteria If prefixes you specified in multiple rules overlap.    Same object qualify tag based filter criteria specified in multiple rules   For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide.
+     * The priority associated with the rule. If you specify multiple rules in a replication configuration, Amazon S3 prioritizes the rules to prevent conflicts when filtering. If two or more rules identify the same object based on a specified filter, the rule with higher priority takes precedence. For example:   Same object quality prefix based filter criteria If prefixes you specified in multiple rules overlap    Same object qualify tag based filter criteria specified in multiple rules   For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide.
      */
     Priority?: Priority;
     /**
-     * Object keyname prefix identifying one or more objects to which the rule applies. Maximum prefix length can be up to 1,024 characters. 
+     * An object keyname prefix that identifies the object or objects to which the rule applies. The maximum prefix length is 1,024 characters. 
      */
     Prefix?: Prefix;
     Filter?: ReplicationRuleFilter;
     /**
-     * The rule is ignored if status is not Enabled.
+     * If status isn't enabled, the rule is ignored.
      */
     Status: ReplicationRuleStatus;
     /**
-     *  Container that describes additional filters in identifying source objects that you want to replicate. Currently, Amazon S3 supports only the filter that you can specify for objects created with server-side encryption using an AWS KMS-managed key. You can choose to enable or disable replication of these objects.   if you want Amazon S3 to replicate objects created with server-side encryption using AWS KMS-managed keys. 
+     * A container that describes additional filters for identifying the source objects that you want to replicate. You can choose to enable or disable the replication of these objects. Currently, Amazon S3 supports only the filter that you can specify for objects created with server-side encryption using an AWS KMS-Managed Key (SSE-KMS).   If you want Amazon S3 to replicate objects created with server-side encryption using AWS KMS-Managed Keys. 
      */
     SourceSelectionCriteria?: SourceSelectionCriteria;
     /**
-     * Container for replication destination information.
+     * A container for information about the replication destination.
      */
     Destination: Destination;
     DeleteMarkerReplication?: DeleteMarkerReplication;
@@ -3443,15 +3544,15 @@ declare namespace S3 {
   }
   export interface ReplicationRuleFilter {
     /**
-     * Object keyname prefix that identifies subset of objects to which the rule applies.
+     * An object keyname prefix that identifies the subset of objects to which the rule applies.
      */
     Prefix?: Prefix;
     /**
-     * Container for specifying a tag key and value.  The rule applies only to objects having the tag in its tagset.
+     * A container for specifying a tag key and value.  The rule applies only to objects that have the tag in their tag set.
      */
     Tag?: Tag;
     /**
-     * Container for specifying rule filters. These filters determine the subset of objects to which the rule applies. The element is required only if you specify more than one filter. For example:    You specify both a Prefix and a Tag filters. Then you wrap these in an And tag.   You specify filter based on multiple tags. Then you wrap the Tag elements in an And tag.  
+     * A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. For example:    If you specify both a Prefix and a Tag filter, wrap these filters in an And tag.   If you specify a filter based on multiple tags, wrap the Tag elements in an And tag.  
      */
     And?: ReplicationRuleAndOperator;
   }
@@ -3532,7 +3633,7 @@ declare namespace S3 {
      */
     Condition?: Condition;
     /**
-     * Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return.
+     * Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.
      */
     Redirect: Redirect;
   }
@@ -3609,23 +3710,23 @@ declare namespace S3 {
   }
   export interface SelectObjectContentRequest {
     /**
-     * The S3 Bucket.
+     * The S3 bucket.
      */
     Bucket: BucketName;
     /**
-     * The Object Key.
+     * The object key.
      */
     Key: ObjectKey;
     /**
-     * The SSE Algorithm used to encrypt the object. For more information, go to  Server-Side Encryption (Using Customer-Provided Encryption Keys. 
+     * The SSE Algorithm used to encrypt the object. For more information, see  Server-Side Encryption (Using Customer-Provided Encryption Keys. 
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
     /**
-     * The SSE Customer Key. For more information, go to  Server-Side Encryption (Using Customer-Provided Encryption Keys. 
+     * The SSE Customer Key. For more information, see  Server-Side Encryption (Using Customer-Provided Encryption Keys. 
      */
     SSECustomerKey?: SSECustomerKey;
     /**
-     * The SSE Customer Key MD5. For more information, go to  Server-Side Encryption (Using Customer-Provided Encryption Keys. 
+     * The SSE Customer Key MD5. For more information, see  Server-Side Encryption (Using Customer-Provided Encryption Keys. 
      */
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
     /**
@@ -3633,7 +3734,7 @@ declare namespace S3 {
      */
     Expression: Expression;
     /**
-     * The type of the provided expression (e.g., SQL).
+     * The type of the provided expression (for example., SQL).
      */
     ExpressionType: ExpressionType;
     /**
@@ -3691,16 +3792,17 @@ declare namespace S3 {
     ApplyServerSideEncryptionByDefault?: ServerSideEncryptionByDefault;
   }
   export type ServerSideEncryptionRules = ServerSideEncryptionRule[];
+  export type Setting = boolean;
   export type Size = number;
   export interface SourceSelectionCriteria {
     /**
-     *  Container for filter information of selection of KMS Encrypted S3 objects. The element is required if you include SourceSelectionCriteria in the replication configuration. 
+     *  A container for filter information for the selection of S3 objects encrypted with AWS KMS. If you include SourceSelectionCriteria in the replication configuration, this element is required. 
      */
     SseKmsEncryptedObjects?: SseKmsEncryptedObjects;
   }
   export interface SseKmsEncryptedObjects {
     /**
-     * The replication for KMS encrypted S3 objects is disabled if status is not Enabled.
+     *  If the status is not Enabled, replication for S3 objects encrypted with AWS KMS is disabled.
      */
     Status: SseKmsEncryptedObjectsStatus;
   }
@@ -3708,15 +3810,15 @@ declare namespace S3 {
   export type StartAfter = string;
   export interface Stats {
     /**
-     * Total number of object bytes scanned.
+     * The total number of object bytes scanned.
      */
     BytesScanned?: BytesScanned;
     /**
-     * Total number of uncompressed object bytes processed.
+     * The total number of uncompressed object bytes processed.
      */
     BytesProcessed?: BytesProcessed;
     /**
-     * Total number of bytes of records payload data returned.
+     * The total number of bytes of records payload data returned.
      */
     BytesReturned?: BytesReturned;
   }
@@ -3778,7 +3880,7 @@ declare namespace S3 {
   export interface TopicConfiguration {
     Id?: NotificationId;
     /**
-     * Amazon SNS topic ARN to which Amazon S3 will publish a message when it detects events of specified type.
+     * The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 will publish a message when it detects events of the specified type.
      */
     TopicArn: TopicArn;
     Events: EventList;

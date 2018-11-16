@@ -172,6 +172,14 @@ declare class Pinpoint extends Service {
    */
   deleteUserEndpoints(callback?: (err: AWSError, data: Pinpoint.Types.DeleteUserEndpointsResponse) => void): Request<Pinpoint.Types.DeleteUserEndpointsResponse, AWSError>;
   /**
+   * Delete an Voice channel
+   */
+  deleteVoiceChannel(params: Pinpoint.Types.DeleteVoiceChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceChannelResponse) => void): Request<Pinpoint.Types.DeleteVoiceChannelResponse, AWSError>;
+  /**
+   * Delete an Voice channel
+   */
+  deleteVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceChannelResponse) => void): Request<Pinpoint.Types.DeleteVoiceChannelResponse, AWSError>;
+  /**
    * Get an ADM channel.
    */
   getAdmChannel(params: Pinpoint.Types.GetAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAdmChannelResponse) => void): Request<Pinpoint.Types.GetAdmChannelResponse, AWSError>;
@@ -420,6 +428,14 @@ declare class Pinpoint extends Service {
    */
   getUserEndpoints(callback?: (err: AWSError, data: Pinpoint.Types.GetUserEndpointsResponse) => void): Request<Pinpoint.Types.GetUserEndpointsResponse, AWSError>;
   /**
+   * Get a Voice Channel
+   */
+  getVoiceChannel(params: Pinpoint.Types.GetVoiceChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceChannelResponse) => void): Request<Pinpoint.Types.GetVoiceChannelResponse, AWSError>;
+  /**
+   * Get a Voice Channel
+   */
+  getVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceChannelResponse) => void): Request<Pinpoint.Types.GetVoiceChannelResponse, AWSError>;
+  /**
    * Returns information about the specified phone number.
    */
   phoneNumberValidate(params: Pinpoint.Types.PhoneNumberValidateRequest, callback?: (err: AWSError, data: Pinpoint.Types.PhoneNumberValidateResponse) => void): Request<Pinpoint.Types.PhoneNumberValidateResponse, AWSError>;
@@ -579,6 +595,14 @@ declare class Pinpoint extends Service {
    * Update an SMS channel.
    */
   updateSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
+  /**
+   * Update an Voice channel
+   */
+  updateVoiceChannel(params: Pinpoint.Types.UpdateVoiceChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceChannelResponse) => void): Request<Pinpoint.Types.UpdateVoiceChannelResponse, AWSError>;
+  /**
+   * Update an Voice channel
+   */
+  updateVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceChannelResponse) => void): Request<Pinpoint.Types.UpdateVoiceChannelResponse, AWSError>;
 }
 declare namespace Pinpoint {
   export interface ADMChannelRequest {
@@ -813,7 +837,7 @@ declare namespace Pinpoint {
      */
     Data?: MapOf__string;
     /**
-     * The URL that points to a video used in the push notification.
+     * A URL that refers to the location of an image or video that you want to display in the push notification.
      */
     MediaUrl?: __string;
     /**
@@ -1244,7 +1268,16 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
      */
     Limits?: CampaignLimits;
     /**
-     * The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own.
+     * The default quiet time for the app. Campaigns in the app don't send messages to endpoints during the quiet time.
+
+Note: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your app. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.
+
+When you set up an app to use quiet time, campaigns in that app don't send messages during the time range you specified, as long as all of the following are true:
+- The endpoint includes a valid Demographic.Timezone attribute.
+- The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the app (or campaign, if applicable).
+- The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the app (or campaign, if applicable).
+
+Individual campaigns within the app can have their own quiet time settings, which override the quiet time settings at the app level.
      */
     QuietTime?: QuietTime;
   }
@@ -1422,6 +1455,20 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      * The email title (Or subject).
      */
     Title?: __string;
+  }
+  export interface CampaignEventFilter {
+    /**
+     * An object that defines the dimensions for the event filter.
+     */
+    Dimensions?: EventDimensions;
+    /**
+     * The type of event that causes the campaign to be sent. Possible values:
+
+SYSTEM - Send the campaign when a system event occurs. See the System resource for more information.
+
+ENDPOINT - Send the campaign when an endpoint event occurs. See the Event resource for more information.
+     */
+    FilterType?: FilterType;
   }
   export interface CampaignHook {
     /**
@@ -1610,7 +1657,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     Version?: __integer;
   }
-  export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
+  export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
   export interface ChannelsResponse {
     /**
      * A map of channels, with the ChannelType as the key and the Channel as the value.
@@ -1860,6 +1907,15 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   export interface DeleteUserEndpointsResponse {
     EndpointsResponse: EndpointsResponse;
   }
+  export interface DeleteVoiceChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+  }
+  export interface DeleteVoiceChannelResponse {
+    VoiceChannelResponse: VoiceChannelResponse;
+  }
   export type DeliveryStatus = "SUCCESSFUL"|"THROTTLED"|"TEMPORARY_FAILURE"|"PERMANENT_FAILURE"|"UNKNOWN_FAILURE"|"OPT_OUT"|"DUPLICATE"|string;
   export type DimensionType = "INCLUSIVE"|"EXCLUSIVE"|string;
   export interface DirectMessageConfiguration {
@@ -1895,6 +1951,10 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      * The message to SMS channels. Overrides the default message.
      */
     SMSMessage?: SMSMessage;
+    /**
+     * The message to Voice channels. Overrides the default message.
+     */
+    VoiceMessage?: VoiceMessage;
   }
   export type Duration = "HR_24"|"DAY_7"|"DAY_14"|"DAY_30"|string;
   export interface EmailChannelRequest {
@@ -2162,7 +2222,7 @@ FAILURE_PERMANENT - An error occurred when delivering the message to the endpoin
 
 TIMEOUT - The message couldn't be sent within the timeout period.
 
-QUIET_TIME - The local time for the endpoint was within the Quiet Hours for the campaign.
+QUIET_TIME - The local time for the endpoint was within the QuietTime for the campaign or app.
 
 DAILY_CAP - The endpoint has received the maximum number of messages it can receive within a 24-hour period.
 
@@ -2386,6 +2446,20 @@ The Amazon Pinpoint console can't display attribute names that include the follo
      */
     Timestamp?: __string;
   }
+  export interface EventDimensions {
+    /**
+     * Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create an event filter.
+     */
+    Attributes?: MapOfAttributeDimension;
+    /**
+     * The name of the event that causes the campaign to be sent. This can be a standard event type that Amazon Pinpoint generates, such as _session.start, or a custom event that's specific to your app.
+     */
+    EventType?: SetDimension;
+    /**
+     * Custom metrics that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create an event filter.
+     */
+    Metrics?: MapOfMetricDimension;
+  }
   export interface EventItemResponse {
     /**
      * A custom message that is associated with the processing of an event.
@@ -2561,8 +2635,9 @@ The job status is FAILED if one or more pieces failed.
      */
     NextToken?: __string;
   }
+  export type FilterType = "SYSTEM"|"ENDPOINT"|string;
   export type Format = "CSV"|"JSON"|string;
-  export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|string;
+  export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"EVENT"|string;
   export interface GCMChannelRequest {
     /**
      * Platform credential API key from Google.
@@ -3132,6 +3207,15 @@ For more information, see About FCM Messages in the Firebase documentation.
   export interface GetUserEndpointsResponse {
     EndpointsResponse: EndpointsResponse;
   }
+  export interface GetVoiceChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+  }
+  export interface GetVoiceChannelResponse {
+    VoiceChannelResponse: VoiceChannelResponse;
+  }
   export interface ImportJobRequest {
     /**
      * Sets whether the endpoints create a segment when they are imported.
@@ -3316,7 +3400,7 @@ URL - The default mobile browser on the user's device launches and opens a web p
      */
     JsonBody?: __string;
     /**
-     * The URL that points to the media resource, for example a .mp4 or .gif file.
+     * A URL that refers to the location of an image or video that you want to display in the push notification.
      */
     MediaUrl?: __string;
     /**
@@ -3434,7 +3518,7 @@ FAILURE_PERMANENT - An error occurred when delivering the message to the endpoin
 
 TIMEOUT - The message couldn't be sent within the timeout period.
 
-QUIET_TIME - The local time for the endpoint was within the Quiet Hours for the campaign.
+QUIET_TIME - The local time for the endpoint was within the QuietTime for the campaign or app.
 
 DAILY_CAP - The endpoint has received the maximum number of messages it can receive within a 24-hour period.
 
@@ -3475,7 +3559,7 @@ UNKNOWN - An unknown error occurred.
      */
     ComparisonOperator?: __string;
     /**
-     * Value to be compared.
+     * The value to be compared.
      */
     Value?: __double;
   }
@@ -3638,7 +3722,7 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface RawEmail {
     /**
-     * The raw data of the email.
+     * The raw email message itself. Then entire message must be base64-encoded.
      */
     Data?: __blob;
   }
@@ -3778,9 +3862,25 @@ INACTIVE - Users who have not used your app within the specified duration are in
      */
     EndTime?: __string;
     /**
+     * Defines the type of events that can trigger the campaign. Used when the Frequency is set to EVENT.
+     */
+    EventFilter?: CampaignEventFilter;
+    /**
      * How often the campaign delivers messages.
 
-Valid values: ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+Valid values:
+
+ONCE
+
+HOURLY
+
+DAILY
+
+WEEKLY
+
+MONTHLY
+
+EVENT
      */
     Frequency?: Frequency;
     /**
@@ -3788,7 +3888,14 @@ Valid values: ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
      */
     IsLocalTime?: __boolean;
     /**
-     * The time during which the campaign sends no messages.
+     * The default quiet time for the campaign. The campaign doesn't send messages to endpoints during the quiet time.
+
+Note: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your campaign. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.
+
+When you set up a campaign to use quiet time, the campaign doesn't send messages during the time range you specified, as long as all of the following are true:
+- The endpoint includes a valid Demographic.Timezone attribute.
+- The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the campaign.
+- The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the campaign.
      */
     QuietTime?: QuietTime;
     /**
@@ -4321,6 +4428,83 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   export interface UpdateSmsChannelResponse {
     SMSChannelResponse: SMSChannelResponse;
   }
+  export interface UpdateVoiceChannelRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+    VoiceChannelRequest: VoiceChannelRequest;
+  }
+  export interface UpdateVoiceChannelResponse {
+    VoiceChannelResponse: VoiceChannelResponse;
+  }
+  export interface VoiceChannelRequest {
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+  }
+  export interface VoiceChannelResponse {
+    /**
+     * Application id
+     */
+    ApplicationId?: __string;
+    /**
+     * The date that the settings were last updated in ISO 8601 format.
+     */
+    CreationDate?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    HasCredential?: __boolean;
+    /**
+     * Channel ID. Not used, only for backwards compatibility.
+     */
+    Id?: __string;
+    /**
+     * Is this channel archived
+     */
+    IsArchived?: __boolean;
+    /**
+     * Who made the last change
+     */
+    LastModifiedBy?: __string;
+    /**
+     * Last date this was updated
+     */
+    LastModifiedDate?: __string;
+    /**
+     * Platform type. Will be "Voice"
+     */
+    Platform?: __string;
+    /**
+     * Version of channel
+     */
+    Version?: __integer;
+  }
+  export interface VoiceMessage {
+    /**
+     * The message body of the notification, the email body or the text message.
+     */
+    Body?: __string;
+    /**
+     * Language of sent message
+     */
+    LanguageCode?: __string;
+    /**
+     * Is the number from the pool or messaging service to send from.
+     */
+    OriginationNumber?: __string;
+    /**
+     * Default message substitutions. Can be overridden by individual address substitutions.
+     */
+    Substitutions?: MapOfListOf__string;
+    /**
+     * Voice ID of sent message.
+     */
+    VoiceId?: __string;
+  }
   export interface WriteApplicationSettingsRequest {
     /**
      * Default campaign hook information.
@@ -4335,7 +4519,16 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     Limits?: CampaignLimits;
     /**
-     * The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own.
+     * The default quiet time for the app. Campaigns in the app don't send messages to endpoints during the quiet time.
+
+Note: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your app. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.
+
+When you set up an app to use quiet time, campaigns in that app don't send messages during the time range you specified, as long as all of the following are true:
+- The endpoint includes a valid Demographic.Timezone attribute.
+- The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the app (or campaign, if applicable).
+- The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the app (or campaign, if applicable).
+
+Individual campaigns within the app can have their own quiet time settings, which override the quiet time settings at the app level.
      */
     QuietTime?: QuietTime;
   }
