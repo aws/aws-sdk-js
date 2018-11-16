@@ -68,6 +68,30 @@ declare class WorkSpaces extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
+   * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image. 
+   */
+  deleteWorkspaceImage(params: WorkSpaces.Types.DeleteWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
+  /**
+   * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image. 
+   */
+  deleteWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
+  /**
+   * Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.
+   */
+  describeAccount(params: WorkSpaces.Types.DescribeAccountRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountResult) => void): Request<WorkSpaces.Types.DescribeAccountResult, AWSError>;
+  /**
+   * Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.
+   */
+  describeAccount(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountResult) => void): Request<WorkSpaces.Types.DescribeAccountResult, AWSError>;
+  /**
+   * Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.
+   */
+  describeAccountModifications(params: WorkSpaces.Types.DescribeAccountModificationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.
+   */
+  describeAccountModifications(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
+  /**
    * Describes one or more of your IP access control groups.
    */
   describeIpGroups(params: WorkSpaces.Types.DescribeIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeIpGroupsResult) => void): Request<WorkSpaces.Types.DescribeIpGroupsResult, AWSError>;
@@ -84,11 +108,11 @@ declare class WorkSpaces extends Service {
    */
   describeTags(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
   /**
-   * Describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
+   * Retrieves a list that describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
    */
   describeWorkspaceBundles(params: WorkSpaces.Types.DescribeWorkspaceBundlesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceBundlesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceBundlesResult, AWSError>;
   /**
-   * Describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
+   * Retrieves a list that describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
    */
   describeWorkspaceBundles(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceBundlesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceBundlesResult, AWSError>;
   /**
@@ -100,11 +124,19 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspaceDirectories(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceDirectoriesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceDirectoriesResult, AWSError>;
   /**
-   * Describes the specified WorkSpaces. You can filter the results using bundle ID, directory ID, or owner, but you can specify only one filter at a time.
+   * Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. 
+   */
+  describeWorkspaceImages(params: WorkSpaces.Types.DescribeWorkspaceImagesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceImagesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceImagesResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. 
+   */
+  describeWorkspaceImages(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceImagesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceImagesResult, AWSError>;
+  /**
+   * Describes the specified WorkSpaces. You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.
    */
   describeWorkspaces(params: WorkSpaces.Types.DescribeWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesResult, AWSError>;
   /**
-   * Describes the specified WorkSpaces. You can filter the results using bundle ID, directory ID, or owner, but you can specify only one filter at a time.
+   * Describes the specified WorkSpaces. You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.
    */
   describeWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesResult, AWSError>;
   /**
@@ -123,6 +155,30 @@ declare class WorkSpaces extends Service {
    * Disassociates the specified IP access control group from the specified directory.
    */
   disassociateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
+  /**
+   * Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
+   */
+  importWorkspaceImage(params: WorkSpaces.Types.ImportWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
+  /**
+   * Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
+   */
+  importWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
+  /**
+   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL).  The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
+   */
+  listAvailableManagementCidrRanges(params: WorkSpaces.Types.ListAvailableManagementCidrRangesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ListAvailableManagementCidrRangesResult) => void): Request<WorkSpaces.Types.ListAvailableManagementCidrRangesResult, AWSError>;
+  /**
+   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL).  The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
+   */
+  listAvailableManagementCidrRanges(callback?: (err: AWSError, data: WorkSpaces.Types.ListAvailableManagementCidrRangesResult) => void): Request<WorkSpaces.Types.ListAvailableManagementCidrRangesResult, AWSError>;
+  /**
+   * Modifies the configuration of bring your own license (BYOL) for the specified account.
+   */
+  modifyAccount(params: WorkSpaces.Types.ModifyAccountRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyAccountResult) => void): Request<WorkSpaces.Types.ModifyAccountResult, AWSError>;
+  /**
+   * Modifies the configuration of bring your own license (BYOL) for the specified account.
+   */
+  modifyAccount(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyAccountResult) => void): Request<WorkSpaces.Types.ModifyAccountResult, AWSError>;
   /**
    * Modifies the specified WorkSpace properties.
    */
@@ -198,14 +254,41 @@ declare class WorkSpaces extends Service {
 }
 declare namespace WorkSpaces {
   export type ARN = string;
+  export interface AccountModification {
+    /**
+     * The state of the modification to the configuration of BYOL.
+     */
+    ModificationState?: DedicatedTenancyModificationStateEnum;
+    /**
+     * The status of BYOL (whether BYOL is being enabled or disabled).
+     */
+    DedicatedTenancySupport?: DedicatedTenancySupportResultEnum;
+    /**
+     * The IP address range, specified as an IPv4 CIDR block, for the management network interface used for the account.
+     */
+    DedicatedTenancyManagementCidrRange?: DedicatedTenancyManagementCidrRange;
+    /**
+     * The timestamp when the modification of the BYOL configuration was started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The error code that is returned if the configuration of BYOL cannot be modified.
+     */
+    ErrorCode?: WorkspaceErrorCode;
+    /**
+     * The text of the error message that is returned if the configuration of BYOL cannot be modified.
+     */
+    ErrorMessage?: Description;
+  }
+  export type AccountModificationList = AccountModification[];
   export type Alias = string;
   export interface AssociateIpGroupsRequest {
     /**
-     * The ID of the directory.
+     * The identifier of the directory.
      */
     DirectoryId: DirectoryId;
     /**
-     * The IDs of one or more IP access control groups.
+     * The identifiers of one or more IP access control groups.
      */
     GroupIds: IpGroupIdList;
   }
@@ -213,7 +296,7 @@ declare namespace WorkSpaces {
   }
   export interface AuthorizeIpRulesRequest {
     /**
-     * The ID of the group.
+     * The identifier of the group.
      */
     GroupId: IpGroupId;
     /**
@@ -253,13 +336,13 @@ declare namespace WorkSpaces {
   }
   export interface CreateIpGroupResult {
     /**
-     * The ID of the group.
+     * The identifier of the group.
      */
     GroupId?: IpGroupId;
   }
   export interface CreateTagsRequest {
     /**
-     * The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
+     * The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
      */
     ResourceId: NonEmptyString;
     /**
@@ -285,10 +368,15 @@ declare namespace WorkSpaces {
      */
     PendingRequests?: WorkspaceList;
   }
+  export type DedicatedTenancyCidrRangeList = DedicatedTenancyManagementCidrRange[];
+  export type DedicatedTenancyManagementCidrRange = string;
+  export type DedicatedTenancyModificationStateEnum = "PENDING"|"COMPLETED"|"FAILED"|string;
+  export type DedicatedTenancySupportEnum = "ENABLED"|string;
+  export type DedicatedTenancySupportResultEnum = "ENABLED"|"DISABLED"|string;
   export type DefaultOu = string;
   export interface DefaultWorkspaceCreationProperties {
     /**
-     * Indicates whether the directory is enabled for Amazon WorkDocs.
+     * Specifies whether the directory is enabled for Amazon WorkDocs.
      */
     EnableWorkDocs?: BooleanObject;
     /**
@@ -304,13 +392,13 @@ declare namespace WorkSpaces {
      */
     CustomSecurityGroupId?: SecurityGroupId;
     /**
-     * Indicates whether the WorkSpace user is an administrator on the WorkSpace.
+     * Specifies whether the WorkSpace user is an administrator on the WorkSpace.
      */
     UserEnabledAsLocalAdministrator?: BooleanObject;
   }
   export interface DeleteIpGroupRequest {
     /**
-     * The ID of the IP access control group.
+     * The identifier of the IP access control group.
      */
     GroupId: IpGroupId;
   }
@@ -318,7 +406,7 @@ declare namespace WorkSpaces {
   }
   export interface DeleteTagsRequest {
     /**
-     * The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
+     * The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
      */
     ResourceId: NonEmptyString;
     /**
@@ -328,13 +416,49 @@ declare namespace WorkSpaces {
   }
   export interface DeleteTagsResult {
   }
+  export interface DeleteWorkspaceImageRequest {
+    /**
+     * The identifier of the image.
+     */
+    ImageId: WorkspaceImageId;
+  }
+  export interface DeleteWorkspaceImageResult {
+  }
+  export interface DescribeAccountModificationsRequest {
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeAccountModificationsResult {
+    /**
+     * The list of modifications to the configuration of BYOL.
+     */
+    AccountModifications?: AccountModificationList;
+    /**
+     * The token to use to retrieve the next set of results, or null if no more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeAccountRequest {
+  }
+  export interface DescribeAccountResult {
+    /**
+     * The status of BYOL (whether BYOL is enabled or disabled).
+     */
+    DedicatedTenancySupport?: DedicatedTenancySupportResultEnum;
+    /**
+     * The IP address range, specified as an IPv4 CIDR block, used for the management network interface. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
+     */
+    DedicatedTenancyManagementCidrRange?: DedicatedTenancyManagementCidrRange;
+  }
   export interface DescribeIpGroupsRequest {
     /**
-     * The IDs of one or more IP access control groups.
+     * The identifiers of one or more IP access control groups.
      */
     GroupIds?: IpGroupIdList;
     /**
-     * The token for the next set of results. (You received this token from a previous call.)
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
     NextToken?: PaginationToken;
     /**
@@ -348,13 +472,13 @@ declare namespace WorkSpaces {
      */
     Result?: WorkspacesIpGroupsList;
     /**
-     * The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.
+     * The token to use to retrieve the next set of results, or null if no more results are available.
      */
     NextToken?: PaginationToken;
   }
   export interface DescribeTagsRequest {
     /**
-     * The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
+     * The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
      */
     ResourceId: NonEmptyString;
   }
@@ -366,11 +490,11 @@ declare namespace WorkSpaces {
   }
   export interface DescribeWorkspaceBundlesRequest {
     /**
-     * The IDs of the bundles. This parameter cannot be combined with any other filter.
+     * The identifiers of the bundles. You cannot combine this parameter with any other filter.
      */
     BundleIds?: BundleIdList;
     /**
-     * The owner of the bundles. This parameter cannot be combined with any other filter. Specify AMAZON to describe the bundles provided by AWS or null to describe the bundles that belong to your account.
+     * The owner of the bundles. You cannot combine this parameter with any other filter. Specify AMAZON to describe the bundles provided by AWS or null to describe the bundles that belong to your account.
      */
     Owner?: BundleOwner;
     /**
@@ -394,7 +518,7 @@ declare namespace WorkSpaces {
      */
     DirectoryIds?: DirectoryIdList;
     /**
-     * The token for the next set of results. (You received this token from a previous call.)
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
     NextToken?: PaginationToken;
   }
@@ -404,7 +528,31 @@ declare namespace WorkSpaces {
      */
     Directories?: DirectoryList;
     /**
-     * The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.
+     * The token to use to retrieve the next set of results, or null if no more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeWorkspaceImagesRequest {
+    /**
+     * The identifier of the image.
+     */
+    ImageIds?: WorkspaceImageIdList;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of items to return.
+     */
+    MaxResults?: Limit;
+  }
+  export interface DescribeWorkspaceImagesResult {
+    /**
+     * Information about the images.
+     */
+    Images?: WorkspaceImageList;
+    /**
+     * The token to use to retrieve the next set of results, or null if no more results are available.
      */
     NextToken?: PaginationToken;
   }
@@ -414,7 +562,7 @@ declare namespace WorkSpaces {
      */
     WorkspaceIds?: WorkspaceIdList;
     /**
-     * The token for the next set of results. (You received this token from a previous call.)
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
     NextToken?: PaginationToken;
   }
@@ -424,17 +572,17 @@ declare namespace WorkSpaces {
      */
     WorkspacesConnectionStatus?: WorkspaceConnectionStatusList;
     /**
-     * The token to use to retrieve the next set of results, or null if there are no more results available.
+     * The token to use to retrieve the next set of results, or null if no more results are available.
      */
     NextToken?: PaginationToken;
   }
   export interface DescribeWorkspacesRequest {
     /**
-     * The IDs of the WorkSpaces. This parameter cannot be combined with any other filter. Because the CreateWorkspaces operation is asynchronous, the identifier it returns is not immediately available. If you immediately call DescribeWorkspaces with this identifier, no information is returned.
+     * The identifiers of the WorkSpaces. You cannot combine this parameter with any other filter. Because the CreateWorkspaces operation is asynchronous, the identifier it returns is not immediately available. If you immediately call DescribeWorkspaces with this identifier, no information is returned.
      */
     WorkspaceIds?: WorkspaceIdList;
     /**
-     * The ID of the directory. In addition, you can optionally specify a specific directory user (see UserName). This parameter cannot be combined with any other filter.
+     * The identifier of the directory. In addition, you can optionally specify a specific directory user (see UserName). You cannot combine this parameter with any other filter.
      */
     DirectoryId?: DirectoryId;
     /**
@@ -442,7 +590,7 @@ declare namespace WorkSpaces {
      */
     UserName?: UserName;
     /**
-     * The ID of the bundle. All WorkSpaces that are created from this bundle are retrieved. This parameter cannot be combined with any other filter.
+     * The identifier of the bundle. All WorkSpaces that are created from this bundle are retrieved. You cannot combine this parameter with any other filter.
      */
     BundleId?: BundleId;
     /**
@@ -450,7 +598,7 @@ declare namespace WorkSpaces {
      */
     Limit?: Limit;
     /**
-     * The token for the next set of results. (You received this token from a previous call.)
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
     NextToken?: PaginationToken;
   }
@@ -460,7 +608,7 @@ declare namespace WorkSpaces {
      */
     Workspaces?: WorkspaceList;
     /**
-     * The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.
+     * The token to use to retrieve the next set of results, or null if no more results are available.
      */
     NextToken?: PaginationToken;
   }
@@ -471,17 +619,18 @@ declare namespace WorkSpaces {
   export type DirectoryName = string;
   export interface DisassociateIpGroupsRequest {
     /**
-     * The ID of the directory.
+     * The identifier of the directory.
      */
     DirectoryId: DirectoryId;
     /**
-     * The IDs of one or more IP access control groups.
+     * The identifiers of one or more IP access control groups.
      */
     GroupIds: IpGroupIdList;
   }
   export interface DisassociateIpGroupsResult {
   }
   export type DnsIpAddresses = IpAddress[];
+  export type Ec2ImageId = string;
   export type ErrorType = string;
   export interface FailedCreateWorkspaceRequest {
     /**
@@ -489,11 +638,11 @@ declare namespace WorkSpaces {
      */
     WorkspaceRequest?: WorkspaceRequest;
     /**
-     * The error code.
+     * The error code that is returned if the WorkSpace cannot be created.
      */
     ErrorCode?: ErrorType;
     /**
-     * The textual error message.
+     * The text of the error message that is returned if the WorkSpace cannot be created.
      */
     ErrorMessage?: Description;
   }
@@ -509,13 +658,37 @@ declare namespace WorkSpaces {
      */
     WorkspaceId?: WorkspaceId;
     /**
-     * The error code.
+     * The error code that is returned if the WorkSpace cannot be rebooted.
      */
     ErrorCode?: ErrorType;
     /**
-     * The textual error message.
+     * The text of the error message that is returned if the WorkSpace cannot be rebooted.
      */
     ErrorMessage?: Description;
+  }
+  export interface ImportWorkspaceImageRequest {
+    /**
+     * The identifier of the EC2 image.
+     */
+    Ec2ImageId: Ec2ImageId;
+    /**
+     * The ingestion process to be used when importing the image.
+     */
+    IngestionProcess: WorkspaceImageIngestionProcess;
+    /**
+     * The name of the WorkSpace image.
+     */
+    ImageName: WorkspaceImageName;
+    /**
+     * The description of the WorkSpace image.
+     */
+    ImageDescription: WorkspaceImageDescription;
+  }
+  export interface ImportWorkspaceImageResult {
+    /**
+     * The identifier of the WorkSpace image.
+     */
+    ImageId?: WorkspaceImageId;
   }
   export type IpAddress = string;
   export type IpGroupDesc = string;
@@ -537,6 +710,32 @@ declare namespace WorkSpaces {
   }
   export type IpRuleList = IpRuleItem[];
   export type Limit = number;
+  export interface ListAvailableManagementCidrRangesRequest {
+    /**
+     * The IP address range to search. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block).
+     */
+    ManagementCidrRangeConstraint: ManagementCidrRangeConstraint;
+    /**
+     * The maximum number of items to return.
+     */
+    MaxResults?: ManagementCidrRangeMaxResults;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListAvailableManagementCidrRangesResult {
+    /**
+     * The list of available IP address ranges, specified as IPv4 CIDR blocks.
+     */
+    ManagementCidrRanges?: DedicatedTenancyCidrRangeList;
+    /**
+     * The token to use to retrieve the next set of results, or null if no more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
+  export type ManagementCidrRangeConstraint = string;
+  export type ManagementCidrRangeMaxResults = number;
   export type ModificationResourceEnum = "ROOT_VOLUME"|"USER_VOLUME"|"COMPUTE_TYPE"|string;
   export interface ModificationState {
     /**
@@ -550,9 +749,21 @@ declare namespace WorkSpaces {
   }
   export type ModificationStateEnum = "UPDATE_INITIATED"|"UPDATE_IN_PROGRESS"|string;
   export type ModificationStateList = ModificationState[];
+  export interface ModifyAccountRequest {
+    /**
+     * The status of BYOL.
+     */
+    DedicatedTenancySupport?: DedicatedTenancySupportEnum;
+    /**
+     * The IP address range, specified as an IPv4 CIDR block, for the management network interface. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block). The CIDR block size must be /16 (for example, 203.0.113.25/16). It must also be specified as available by the ListAvailableManagementCidrRanges operation.
+     */
+    DedicatedTenancyManagementCidrRange?: DedicatedTenancyManagementCidrRange;
+  }
+  export interface ModifyAccountResult {
+  }
   export interface ModifyWorkspacePropertiesRequest {
     /**
-     * The ID of the WorkSpace.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
     /**
@@ -564,7 +775,7 @@ declare namespace WorkSpaces {
   }
   export interface ModifyWorkspaceStateRequest {
     /**
-     * The ID of the WorkSpace.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
     /**
@@ -575,10 +786,17 @@ declare namespace WorkSpaces {
   export interface ModifyWorkspaceStateResult {
   }
   export type NonEmptyString = string;
+  export interface OperatingSystem {
+    /**
+     * The operating system.
+     */
+    Type?: OperatingSystemType;
+  }
+  export type OperatingSystemType = "WINDOWS"|"LINUX"|string;
   export type PaginationToken = string;
   export interface RebootRequest {
     /**
-     * The ID of the WorkSpace.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
   }
@@ -597,7 +815,7 @@ declare namespace WorkSpaces {
   }
   export interface RebuildRequest {
     /**
-     * The ID of the WorkSpace.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
   }
@@ -610,14 +828,14 @@ declare namespace WorkSpaces {
   }
   export interface RebuildWorkspacesResult {
     /**
-     * Information about the WorkSpace if it could not be rebuilt.
+     * Information about the WorkSpace that could not be rebuilt.
      */
     FailedRequests?: FailedRebuildWorkspaceRequests;
   }
   export type RegistrationCode = string;
   export interface RevokeIpRulesRequest {
     /**
-     * The ID of the group.
+     * The identifier of the group.
      */
     GroupId: IpGroupId;
     /**
@@ -639,7 +857,7 @@ declare namespace WorkSpaces {
   export type SecurityGroupId = string;
   export interface StartRequest {
     /**
-     * The ID of the WorkSpace.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId?: WorkspaceId;
   }
@@ -658,7 +876,7 @@ declare namespace WorkSpaces {
   }
   export interface StopRequest {
     /**
-     * The ID of the WorkSpace.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId?: WorkspaceId;
   }
@@ -694,7 +912,7 @@ declare namespace WorkSpaces {
   export type TargetWorkspaceState = "AVAILABLE"|"ADMIN_MAINTENANCE"|string;
   export interface TerminateRequest {
     /**
-     * The ID of the WorkSpace.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
   }
@@ -714,7 +932,7 @@ declare namespace WorkSpaces {
   export type Timestamp = Date;
   export interface UpdateRulesOfIpGroupRequest {
     /**
-     * The ID of the group.
+     * The identifier of the group.
      */
     GroupId: IpGroupId;
     /**
@@ -763,11 +981,11 @@ declare namespace WorkSpaces {
      */
     SubnetId?: SubnetId;
     /**
-     * If the WorkSpace could not be created, contains a textual error message that describes the failure.
+     * The text of the error message that is returned if the WorkSpace cannot be created.
      */
     ErrorMessage?: Description;
     /**
-     * If the WorkSpace could not be created, contains the error code.
+     * The error code that is returned if the WorkSpace cannot be created.
      */
     ErrorCode?: WorkspaceErrorCode;
     /**
@@ -827,7 +1045,7 @@ declare namespace WorkSpaces {
   }
   export interface WorkspaceConnectionStatus {
     /**
-     * The ID of the WorkSpace.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId?: WorkspaceId;
     /**
@@ -835,7 +1053,7 @@ declare namespace WorkSpaces {
      */
     ConnectionState?: ConnectionState;
     /**
-     * The timestamp of the connection state check.
+     * The timestamp of the connection status check.
      */
     ConnectionStateCheckTimestamp?: Timestamp;
     /**
@@ -903,6 +1121,49 @@ declare namespace WorkSpaces {
   export type WorkspaceErrorCode = string;
   export type WorkspaceId = string;
   export type WorkspaceIdList = WorkspaceId[];
+  export interface WorkspaceImage {
+    /**
+     * The identifier of the image.
+     */
+    ImageId?: WorkspaceImageId;
+    /**
+     * The name of the image.
+     */
+    Name?: WorkspaceImageName;
+    /**
+     * The description of the image.
+     */
+    Description?: WorkspaceImageDescription;
+    /**
+     * The operating system that the image is running. 
+     */
+    OperatingSystem?: OperatingSystem;
+    /**
+     * The status of the image.
+     */
+    State?: WorkspaceImageState;
+    /**
+     * Specifies whether the image is running on dedicated hardware. When bring your own license (BYOL) is enabled, this value is set to DEDICATED. 
+     */
+    RequiredTenancy?: WorkspaceImageRequiredTenancy;
+    /**
+     * The error code that is returned for the image.
+     */
+    ErrorCode?: WorkspaceImageErrorCode;
+    /**
+     * The text of the error message that is returned for the image.
+     */
+    ErrorMessage?: Description;
+  }
+  export type WorkspaceImageDescription = string;
+  export type WorkspaceImageErrorCode = string;
+  export type WorkspaceImageId = string;
+  export type WorkspaceImageIdList = WorkspaceImageId[];
+  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|string;
+  export type WorkspaceImageList = WorkspaceImage[];
+  export type WorkspaceImageName = string;
+  export type WorkspaceImageRequiredTenancy = "DEFAULT"|"DEDICATED"|string;
+  export type WorkspaceImageState = "AVAILABLE"|"PENDING"|"ERROR"|string;
   export type WorkspaceList = Workspace[];
   export interface WorkspaceProperties {
     /**
@@ -964,7 +1225,7 @@ declare namespace WorkSpaces {
   export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
   export interface WorkspacesIpGroup {
     /**
-     * The ID of the group.
+     * The identifier of the group.
      */
     groupId?: IpGroupId;
     /**

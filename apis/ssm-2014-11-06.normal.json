@@ -160,7 +160,7 @@
           "shape": "InvalidSchedule"
         }
       ],
-      "documentation": "<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system throws the AssociationAlreadyExists exception.</p>"
+      "documentation": "<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.</p>"
     },
     "CreateAssociationBatch": {
       "name": "CreateAssociationBatch",
@@ -209,7 +209,7 @@
           "shape": "InvalidSchedule"
         }
       ],
-      "documentation": "<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system throws the AssociationAlreadyExists exception.</p>"
+      "documentation": "<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.</p>"
     },
     "CreateDocument": {
       "name": "CreateDocument",
@@ -2988,6 +2988,9 @@
     }
   },
   "shapes": {
+    "Account": {
+      "type": "string"
+    },
     "AccountId": {
       "type": "string",
       "pattern": "(?i)all|[0-9]{12}"
@@ -2998,6 +3001,14 @@
         "shape": "AccountId"
       },
       "max": 20
+    },
+    "Accounts": {
+      "type": "list",
+      "member": {
+        "shape": "Account"
+      },
+      "max": 50,
+      "min": 1
     },
     "Activation": {
       "type": "structure",
@@ -3743,6 +3754,15 @@
         "Target": {
           "shape": "String",
           "documentation": "<p>The target of the execution.</p>"
+        },
+        "TargetLocations": {
+          "shape": "TargetLocations",
+          "documentation": "<p>The combination of AWS Regions and/or AWS accounts where you want to execute the Automation.</p>",
+          "box": true
+        },
+        "ProgressCounters": {
+          "shape": "ProgressCounters",
+          "documentation": "<p>An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.</p>"
         }
       },
       "documentation": "<p>Detailed information about the current state of an individual Automation execution.</p>"
@@ -3774,7 +3794,8 @@
         "ParentExecutionId",
         "CurrentAction",
         "StartTimeBefore",
-        "StartTimeAfter"
+        "StartTimeAfter",
+        "AutomationType"
       ]
     },
     "AutomationExecutionFilterList": {
@@ -3889,6 +3910,10 @@
         "Target": {
           "shape": "String",
           "documentation": "<p>The list of execution outputs as defined in the Automation document.</p>"
+        },
+        "AutomationType": {
+          "shape": "AutomationType",
+          "documentation": "<p>Use this filter with <a>DescribeAutomationExecution</a>. Specify either Local of CrossAccount. CrossAccount is an Automation that executes in multiple AWS Regions and accounts. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Concurrently Executing Automations in Multiple AWS Regions and Accounts</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
         }
       },
       "documentation": "<p>Details about a specific Automation execution.</p>"
@@ -3940,6 +3965,13 @@
       },
       "max": 10,
       "min": 0
+    },
+    "AutomationType": {
+      "type": "string",
+      "enum": [
+        "CrossAccount",
+        "Local"
+      ]
     },
     "BaselineDescription": {
       "type": "string",
@@ -4146,7 +4178,7 @@
         },
         "value": {
           "shape": "CommandFilterValue",
-          "documentation": "<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p>InvokedAfter: A timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see results occurring July 7, 2018, and later.</p> </li> <li> <p>InvokedBefore: A timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see results before July 7, 2018.</p> </li> <li> <p>Status: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:</p> <ul> <li> <p>Pending</p> </li> <li> <p>InProgress</p> </li> <li> <p>Success</p> </li> <li> <p>Cancelled</p> </li> <li> <p>Failed</p> </li> <li> <p>TimedOut</p> </li> <li> <p>Cancelling </p> </li> </ul> </li> <li> <p>DocumentName: The name of the SSM document for which you want to see command results.</p> <p>For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p>ExecutionStage: An enum whose value can be either <code>Executing</code> or <code>Complete</code>.</p> <ul> <li> <p>Specify <code>Executing</code> to see a list of command executions that are currently still running.</p> </li> <li> <p>Specify <code>Complete</code> to see a list of command exeuctions that have already completed.</p> </li> </ul> </li> </ul>"
+          "documentation": "<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p> <b>InvokedAfter</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions occurring July 7, 2018, and later.</p> </li> <li> <p> <b>InvokedBefore</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions from before July 7, 2018.</p> </li> <li> <p> <b>Status</b>: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:</p> <ul> <li> <p> <code>Pending</code> </p> </li> <li> <p> <code>InProgress</code> </p> </li> <li> <p> <code>Success</code> </p> </li> <li> <p> <code>Cancelled</code> </p> </li> <li> <p> <code>Failed</code> </p> </li> <li> <p> <code>TimedOut</code> </p> </li> <li> <p> <code>Cancelling</code> </p> </li> </ul> </li> <li> <p> <b>DocumentName</b>: Specify name of the SSM document for which you want to see command execution results. For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p> <b>ExecutionStage</b>: Specify one of the following values:</p> <ul> <li> <p> <code>Executing</code>: Returns a list of command executions that are currently still running.</p> </li> <li> <p> <code>Complete</code>: Returns a list of command executions that have already completed. </p> </li> </ul> </li> </ul>"
         }
       },
       "documentation": "<p>Describes a command filter.</p>"
@@ -4776,7 +4808,7 @@
           "documentation": "<p>The severity level to assign to the association.</p>"
         }
       },
-      "documentation": "<p>Describes the association of a Systems Manager document and an instance.</p>"
+      "documentation": "<p>Describes the association of a Systems Manager SSM document and an instance.</p>"
     },
     "CreateAssociationBatchResult": {
       "type": "structure",
@@ -6249,7 +6281,7 @@
       "members": {
         "Filters": {
           "shape": "MaintenanceWindowFilterList",
-          "documentation": "<p>Optional filters used to narrow down the scope of the returned Maintenance Windows. Supported filter keys are Name and Enabled.</p>"
+          "documentation": "<p>Optional filters used to narrow down the scope of the returned Maintenance Windows. Supported filter keys are <b>Name</b> and <b>Enabled</b>.</p>"
         },
         "MaxResults": {
           "shape": "MaintenanceWindowMaxResults",
@@ -6861,6 +6893,11 @@
         "Auto",
         "Interactive"
       ]
+    },
+    "ExecutionRoleName": {
+      "type": "string",
+      "max": 64,
+      "min": 1
     },
     "ExpirationDate": {
       "type": "timestamp"
@@ -9742,7 +9779,7 @@
         },
         "TimeoutSeconds": {
           "shape": "TimeoutSeconds",
-          "documentation": "<p>If this time is reached and the command has not already started executing, it doesn not execute.</p>",
+          "documentation": "<p>If this time is reached and the command has not already started executing, it doesn't run.</p>",
           "box": true
         }
       },
@@ -11021,6 +11058,32 @@
     "Product": {
       "type": "string"
     },
+    "ProgressCounters": {
+      "type": "structure",
+      "members": {
+        "TotalSteps": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of steps executed in all specified AWS Regions and accounts for the current Automation execution.</p>"
+        },
+        "SuccessSteps": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of steps that successfully completed in all specified AWS Regions and accounts for the current Automation execution.</p>"
+        },
+        "FailedSteps": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of steps that failed to execute in all specified AWS Regions and accounts for the current Automation execution.</p>"
+        },
+        "CancelledSteps": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of steps that the system cancelled in all specified AWS Regions and accounts for the current Automation execution.</p>"
+        },
+        "TimedOutSteps": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of steps that timed out in all specified AWS Regions and accounts for the current Automation execution.</p>"
+        }
+      },
+      "documentation": "<p>An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.</p>"
+    },
     "PutComplianceItemsRequest": {
       "type": "structure",
       "required": [
@@ -11137,6 +11200,17 @@
           "documentation": "<p>The new version number of a parameter. If you edit a parameter value, Parameter Store automatically creates a new version and assigns this new version a unique ID. You can reference a parameter version ID in API actions or in Systems Manager documents (SSM documents). By default, if you don't specify a specific version, the system returns the latest parameter value when a parameter is called.</p>"
         }
       }
+    },
+    "Region": {
+      "type": "string"
+    },
+    "Regions": {
+      "type": "list",
+      "member": {
+        "shape": "Region"
+      },
+      "max": 50,
+      "min": 1
     },
     "RegisterDefaultPatchBaselineRequest": {
       "type": "structure",
@@ -12085,6 +12159,11 @@
         "MaxErrors": {
           "shape": "MaxErrors",
           "documentation": "<p>The number of errors that are allowed before the system stops running the automation on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops running the automation when the fourth error is received. If you specify 0, then the system stops running the automation on additional targets after the first error result is returned. If you run an automation on 50 resources and set max-errors to 10%, then the system stops running the automation on additional targets when the sixth error is received.</p> <p>Executions that are already running an automation when max-errors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set max-concurrency to 1 so the executions proceed one at a time.</p>"
+        },
+        "TargetLocations": {
+          "shape": "TargetLocations",
+          "documentation": "<p>A location is a combination of AWS Regions and/or AWS accounts where you want to execute the Automation. Use this action to start an Automation in multiple Regions and multiple accounts. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Concurrently Executing Automations in Multiple AWS Regions and Accounts</a> in the <i>AWS Systems Manager User Guide</i>. </p>",
+          "box": true
         }
       }
     },
@@ -12238,6 +12317,16 @@
         "ValidNextSteps": {
           "shape": "ValidNextStepList",
           "documentation": "<p>Strategies used when step fails, we support Continue and Abort. Abort will fail the automation when the step fails. Continue will ignore the failure of current step and allow automation to execute the next step. With conditional branching, we add step:stepName to support the automation to go to another specific step.</p>"
+        },
+        "Targets": {
+          "shape": "Targets",
+          "documentation": "<p>The targets for the step execution.</p>",
+          "box": true
+        },
+        "TargetLocation": {
+          "shape": "TargetLocation",
+          "documentation": "<p>The combination of AWS Regions and accounts targeted by the current Automation execution.</p>",
+          "box": true
         }
       },
       "documentation": "<p>Detailed information about an the execution state of an Automation step.</p>"
@@ -12399,6 +12488,43 @@
       "max": 128,
       "min": 1,
       "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=\\-@]*$"
+    },
+    "TargetLocation": {
+      "type": "structure",
+      "members": {
+        "Accounts": {
+          "shape": "Accounts",
+          "documentation": "<p>The AWS accounts targeted by the current Automation execution.</p>"
+        },
+        "Regions": {
+          "shape": "Regions",
+          "documentation": "<p>The AWS Regions targeted by the current Automation execution.</p>"
+        },
+        "TargetLocationMaxConcurrency": {
+          "shape": "MaxConcurrency",
+          "documentation": "<p>The maxium number of AWS accounts and AWS regions allowed to run the Automation concurrently </p>",
+          "box": true
+        },
+        "TargetLocationMaxErrors": {
+          "shape": "MaxErrors",
+          "documentation": "<p>The maxium number of errors allowed before the system stops queueing additional Automation executions for the currently executing Automation. </p>",
+          "box": true
+        },
+        "ExecutionRoleName": {
+          "shape": "ExecutionRoleName",
+          "documentation": "<p>The Automation execution role used by the currently executing Automation.</p>",
+          "box": true
+        }
+      },
+      "documentation": "<p>The combination of AWS Regions and accounts targeted by the current Automation execution.</p>"
+    },
+    "TargetLocations": {
+      "type": "list",
+      "member": {
+        "shape": "TargetLocation"
+      },
+      "max": 100,
+      "min": 1
     },
     "TargetMap": {
       "type": "map",

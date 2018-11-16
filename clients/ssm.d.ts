@@ -44,19 +44,19 @@ declare class SSM extends Service {
    */
   createActivation(callback?: (err: AWSError, data: SSM.Types.CreateActivationResult) => void): Request<SSM.Types.CreateActivationResult, AWSError>;
   /**
-   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system throws the AssociationAlreadyExists exception.
+   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
    */
   createAssociation(params: SSM.Types.CreateAssociationRequest, callback?: (err: AWSError, data: SSM.Types.CreateAssociationResult) => void): Request<SSM.Types.CreateAssociationResult, AWSError>;
   /**
-   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system throws the AssociationAlreadyExists exception.
+   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
    */
   createAssociation(callback?: (err: AWSError, data: SSM.Types.CreateAssociationResult) => void): Request<SSM.Types.CreateAssociationResult, AWSError>;
   /**
-   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system throws the AssociationAlreadyExists exception.
+   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
    */
   createAssociationBatch(params: SSM.Types.CreateAssociationBatchRequest, callback?: (err: AWSError, data: SSM.Types.CreateAssociationBatchResult) => void): Request<SSM.Types.CreateAssociationBatchResult, AWSError>;
   /**
-   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system throws the AssociationAlreadyExists exception.
+   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
    */
   createAssociationBatch(callback?: (err: AWSError, data: SSM.Types.CreateAssociationBatchResult) => void): Request<SSM.Types.CreateAssociationBatchResult, AWSError>;
   /**
@@ -901,8 +901,10 @@ declare class SSM extends Service {
   updatePatchBaseline(callback?: (err: AWSError, data: SSM.Types.UpdatePatchBaselineResult) => void): Request<SSM.Types.UpdatePatchBaselineResult, AWSError>;
 }
 declare namespace SSM {
+  export type Account = string;
   export type AccountId = string;
   export type AccountIdList = AccountId[];
+  export type Accounts = Account[];
   export interface Activation {
     /**
      * The ID created by Systems Manager when you submitted the activation.
@@ -1398,6 +1400,14 @@ declare namespace SSM {
      * The target of the execution.
      */
     Target?: String;
+    /**
+     * The combination of AWS Regions and/or AWS accounts where you want to execute the Automation.
+     */
+    TargetLocations?: TargetLocations;
+    /**
+     * An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.
+     */
+    ProgressCounters?: ProgressCounters;
   }
   export interface AutomationExecutionFilter {
     /**
@@ -1409,7 +1419,7 @@ declare namespace SSM {
      */
     Values: AutomationExecutionFilterValueList;
   }
-  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|string;
+  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|string;
   export type AutomationExecutionFilterList = AutomationExecutionFilter[];
   export type AutomationExecutionFilterValue = string;
   export type AutomationExecutionFilterValueList = AutomationExecutionFilterValue[];
@@ -1499,6 +1509,10 @@ declare namespace SSM {
      * The list of execution outputs as defined in the Automation document.
      */
     Target?: String;
+    /**
+     * Use this filter with DescribeAutomationExecution. Specify either Local of CrossAccount. CrossAccount is an Automation that executes in multiple AWS Regions and accounts. For more information, see Concurrently Executing Automations in Multiple AWS Regions and Accounts in the AWS Systems Manager User Guide. 
+     */
+    AutomationType?: AutomationType;
   }
   export type AutomationExecutionMetadataList = AutomationExecutionMetadata[];
   export type AutomationExecutionStatus = "Pending"|"InProgress"|"Waiting"|"Success"|"TimedOut"|"Cancelling"|"Cancelled"|"Failed"|string;
@@ -1506,6 +1520,7 @@ declare namespace SSM {
   export type AutomationParameterMap = {[key: string]: AutomationParameterValueList};
   export type AutomationParameterValue = string;
   export type AutomationParameterValueList = AutomationParameterValue[];
+  export type AutomationType = "CrossAccount"|"Local"|string;
   export type BaselineDescription = string;
   export type BaselineId = string;
   export type BaselineName = string;
@@ -1648,7 +1663,7 @@ declare namespace SSM {
      */
     key: CommandFilterKey;
     /**
-     * The filter value. Valid values for each filter key are as follows:   InvokedAfter: A timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see results occurring July 7, 2018, and later.   InvokedBefore: A timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see results before July 7, 2018.   Status: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:   Pending   InProgress   Success   Cancelled   Failed   TimedOut   Cancelling      DocumentName: The name of the SSM document for which you want to see command results. For example, specify AWS-RunPatchBaseline to see command executions that used this SSM document to perform security patching operations on instances.    ExecutionStage: An enum whose value can be either Executing or Complete.   Specify Executing to see a list of command executions that are currently still running.   Specify Complete to see a list of command exeuctions that have already completed.    
+     * The filter value. Valid values for each filter key are as follows:    InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see a list of command executions occurring July 7, 2018, and later.    InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see a list of command executions from before July 7, 2018.    Status: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:    Pending     InProgress     Success     Cancelled     Failed     TimedOut     Cancelling       DocumentName: Specify name of the SSM document for which you want to see command execution results. For example, specify AWS-RunPatchBaseline to see command executions that used this SSM document to perform security patching operations on instances.     ExecutionStage: Specify one of the following values:    Executing: Returns a list of command executions that are currently still running.    Complete: Returns a list of command executions that have already completed.     
      */
     value: CommandFilterValue;
   }
@@ -3438,6 +3453,7 @@ declare namespace SSM {
   export type EffectivePatchList = EffectivePatch[];
   export type ErrorCount = number;
   export type ExecutionMode = "Auto"|"Interactive"|string;
+  export type ExecutionRoleName = string;
   export type ExpirationDate = Date;
   export interface FailedCreateAssociation {
     /**
@@ -5356,7 +5372,7 @@ declare namespace SSM {
      */
     ServiceRoleArn?: ServiceRole;
     /**
-     * If this time is reached and the command has not already started executing, it doesn not execute.
+     * If this time is reached and the command has not already started executing, it doesn't run.
      */
     TimeoutSeconds?: TimeoutSeconds;
   }
@@ -5968,6 +5984,28 @@ declare namespace SSM {
   export type PlatformType = "Windows"|"Linux"|string;
   export type PlatformTypeList = PlatformType[];
   export type Product = string;
+  export interface ProgressCounters {
+    /**
+     * The total number of steps executed in all specified AWS Regions and accounts for the current Automation execution.
+     */
+    TotalSteps?: Integer;
+    /**
+     * The total number of steps that successfully completed in all specified AWS Regions and accounts for the current Automation execution.
+     */
+    SuccessSteps?: Integer;
+    /**
+     * The total number of steps that failed to execute in all specified AWS Regions and accounts for the current Automation execution.
+     */
+    FailedSteps?: Integer;
+    /**
+     * The total number of steps that the system cancelled in all specified AWS Regions and accounts for the current Automation execution.
+     */
+    CancelledSteps?: Integer;
+    /**
+     * The total number of steps that timed out in all specified AWS Regions and accounts for the current Automation execution.
+     */
+    TimedOutSteps?: Integer;
+  }
   export interface PutComplianceItemsRequest {
     /**
      * Specify an ID for this resource. For a managed instance, this is the instance ID.
@@ -6049,6 +6087,8 @@ declare namespace SSM {
      */
     Version?: PSParameterVersion;
   }
+  export type Region = string;
+  export type Regions = Region[];
   export interface RegisterDefaultPatchBaselineRequest {
     /**
      * The ID of the patch baseline that should be the default patch baseline.
@@ -6625,6 +6665,10 @@ declare namespace SSM {
      * The number of errors that are allowed before the system stops running the automation on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops running the automation when the fourth error is received. If you specify 0, then the system stops running the automation on additional targets after the first error result is returned. If you run an automation on 50 resources and set max-errors to 10%, then the system stops running the automation on additional targets when the sixth error is received. Executions that are already running an automation when max-errors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set max-concurrency to 1 so the executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
+    /**
+     * A location is a combination of AWS Regions and/or AWS accounts where you want to execute the Automation. Use this action to start an Automation in multiple Regions and multiple accounts. For more information, see Concurrently Executing Automations in Multiple AWS Regions and Accounts in the AWS Systems Manager User Guide. 
+     */
+    TargetLocations?: TargetLocations;
   }
   export interface StartAutomationExecutionResult {
     /**
@@ -6745,6 +6789,14 @@ declare namespace SSM {
      * Strategies used when step fails, we support Continue and Abort. Abort will fail the automation when the step fails. Continue will ignore the failure of current step and allow automation to execute the next step. With conditional branching, we add step:stepName to support the automation to go to another specific step.
      */
     ValidNextSteps?: ValidNextStepList;
+    /**
+     * The targets for the step execution.
+     */
+    Targets?: Targets;
+    /**
+     * The combination of AWS Regions and accounts targeted by the current Automation execution.
+     */
+    TargetLocation?: TargetLocation;
   }
   export interface StepExecutionFilter {
     /**
@@ -6803,6 +6855,29 @@ declare namespace SSM {
   }
   export type TargetCount = number;
   export type TargetKey = string;
+  export interface TargetLocation {
+    /**
+     * The AWS accounts targeted by the current Automation execution.
+     */
+    Accounts?: Accounts;
+    /**
+     * The AWS Regions targeted by the current Automation execution.
+     */
+    Regions?: Regions;
+    /**
+     * The maxium number of AWS accounts and AWS regions allowed to run the Automation concurrently 
+     */
+    TargetLocationMaxConcurrency?: MaxConcurrency;
+    /**
+     * The maxium number of errors allowed before the system stops queueing additional Automation executions for the currently executing Automation. 
+     */
+    TargetLocationMaxErrors?: MaxErrors;
+    /**
+     * The Automation execution role used by the currently executing Automation.
+     */
+    ExecutionRoleName?: ExecutionRoleName;
+  }
+  export type TargetLocations = TargetLocation[];
   export type TargetMap = {[key: string]: TargetMapValueList};
   export type TargetMapKey = string;
   export type TargetMapValue = string;

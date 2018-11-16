@@ -52,13 +52,21 @@ declare class Comprehend extends Service {
    */
   batchDetectSyntax(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSyntaxResponse) => void): Request<Comprehend.Types.BatchDetectSyntaxResponse, AWSError>;
   /**
-   * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that are labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of unlabeled documents into those categories. 
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. 
    */
   createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
   /**
-   * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that are labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of unlabeled documents into those categories. 
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. 
    */
   createDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
+  /**
+   * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the API. 
+   */
+  createEntityRecognizer(params: Comprehend.Types.CreateEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateEntityRecognizerResponse) => void): Request<Comprehend.Types.CreateEntityRecognizerResponse, AWSError>;
+  /**
+   * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the API. 
+   */
+  createEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.CreateEntityRecognizerResponse) => void): Request<Comprehend.Types.CreateEntityRecognizerResponse, AWSError>;
   /**
    * Deletes a previously created document classifier Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. 
    */
@@ -67,6 +75,14 @@ declare class Comprehend extends Service {
    * Deletes a previously created document classifier Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. 
    */
   deleteDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.DeleteDocumentClassifierResponse) => void): Request<Comprehend.Types.DeleteDocumentClassifierResponse, AWSError>;
+  /**
+   * Deletes an entity recognizer. Only those recognizers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the recognizer into a DELETING state, and it is then removed by a background job. Once removed, the recognizer disappears from your account and is no longer available for use. 
+   */
+  deleteEntityRecognizer(params: Comprehend.Types.DeleteEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteEntityRecognizerResponse) => void): Request<Comprehend.Types.DeleteEntityRecognizerResponse, AWSError>;
+  /**
+   * Deletes an entity recognizer. Only those recognizers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the recognizer into a DELETING state, and it is then removed by a background job. Once removed, the recognizer disappears from your account and is no longer available for use. 
+   */
+  deleteEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.DeleteEntityRecognizerResponse) => void): Request<Comprehend.Types.DeleteEntityRecognizerResponse, AWSError>;
   /**
    * Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
    */
@@ -99,6 +115,14 @@ declare class Comprehend extends Service {
    * Gets the properties associated with an entities detection job. Use this operation to get the status of a detection job.
    */
   describeEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Provides details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on.
+   */
+  describeEntityRecognizer(params: Comprehend.Types.DescribeEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEntityRecognizerResponse) => void): Request<Comprehend.Types.DescribeEntityRecognizerResponse, AWSError>;
+  /**
+   * Provides details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on.
+   */
+  describeEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.DescribeEntityRecognizerResponse) => void): Request<Comprehend.Types.DescribeEntityRecognizerResponse, AWSError>;
   /**
    * Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
    */
@@ -196,6 +220,14 @@ declare class Comprehend extends Service {
    */
   listEntitiesDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListEntitiesDetectionJobsResponse, AWSError>;
   /**
+   * Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training. Allows you to filter the list of recognizers based on criteria such as status and submission time. This call returns up to 500 entity recognizers in the list, with a default number of 100 recognizers in the list. The results of this list are not in any particular order. Please get the list and sort locally if needed.
+   */
+  listEntityRecognizers(params: Comprehend.Types.ListEntityRecognizersRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizersResponse) => void): Request<Comprehend.Types.ListEntityRecognizersResponse, AWSError>;
+  /**
+   * Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training. Allows you to filter the list of recognizers based on criteria such as status and submission time. This call returns up to 500 entity recognizers in the list, with a default number of 100 recognizers in the list. The results of this list are not in any particular order. Please get the list and sort locally if needed.
+   */
+  listEntityRecognizers(callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizersResponse) => void): Request<Comprehend.Types.ListEntityRecognizersResponse, AWSError>;
+  /**
    * Get a list of key phrase detection jobs that you have submitted.
    */
   listKeyPhrasesDetectionJobs(params: Comprehend.Types.ListKeyPhrasesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListKeyPhrasesDetectionJobsResponse) => void): Request<Comprehend.Types.ListKeyPhrasesDetectionJobsResponse, AWSError>;
@@ -236,11 +268,11 @@ declare class Comprehend extends Service {
    */
   startDominantLanguageDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StartDominantLanguageDetectionJobResponse, AWSError>;
   /**
-   * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job.
+   * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job. This API can be used for either standard entity detection or custom entity recognition. In order to be used for custom entity recognition, the optional EntityRecognizerArn must be used in order to provide access to the recognizer being used to detect the custom entity.
    */
   startEntitiesDetectionJob(params: Comprehend.Types.StartEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartEntitiesDetectionJobResponse, AWSError>;
   /**
-   * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job.
+   * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job. This API can be used for either standard entity detection or custom entity recognition. In order to be used for custom entity recognition, the optional EntityRecognizerArn must be used in order to provide access to the recognizer being used to detect the custom entity.
    */
   startEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartEntitiesDetectionJobResponse, AWSError>;
   /**
@@ -523,7 +555,7 @@ declare namespace Comprehend {
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
-     * The language of the input documents. You can create a document classifier in any of the languages supported by Amazon Comprehend. However, all documents must be in the same language.
+     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -533,6 +565,34 @@ declare namespace Comprehend {
      */
     DocumentClassifierArn?: DocumentClassifierArn;
   }
+  export interface CreateEntityRecognizerRequest {
+    /**
+     * The name given to the newly created recognizer. Recognizer names can be a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The name must be unique in the account/region.
+     */
+    RecognizerName: ComprehendArnName;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * Specifies the format and location of the input data. The S3 bucket containing the input data must be located in the same region as the entity recognizer being created. 
+     */
+    InputDataConfig: EntityRecognizerInputDataConfig;
+    /**
+     *  A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     *  The language of the input documents. All documents must be in the same language. Only English ("en") is currently supported. 
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface CreateEntityRecognizerResponse {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer.
+     */
+    EntityRecognizerArn?: EntityRecognizerArn;
+  }
   export interface DeleteDocumentClassifierRequest {
     /**
      * The Amazon Resource Name (ARN) that identifies the document classifier. 
@@ -540,6 +600,14 @@ declare namespace Comprehend {
     DocumentClassifierArn: DocumentClassifierArn;
   }
   export interface DeleteDocumentClassifierResponse {
+  }
+  export interface DeleteEntityRecognizerRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer.
+     */
+    EntityRecognizerArn: EntityRecognizerArn;
+  }
+  export interface DeleteEntityRecognizerResponse {
   }
   export interface DescribeDocumentClassificationJobRequest {
     /**
@@ -588,6 +656,18 @@ declare namespace Comprehend {
      * An object that contains the properties associated with an entities detection job.
      */
     EntitiesDetectionJobProperties?: EntitiesDetectionJobProperties;
+  }
+  export interface DescribeEntityRecognizerRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer.
+     */
+    EntityRecognizerArn: EntityRecognizerArn;
+  }
+  export interface DescribeEntityRecognizerResponse {
+    /**
+     * Describes information associated with an entity recognizer.
+     */
+    EntityRecognizerProperties?: EntityRecognizerProperties;
   }
   export interface DescribeKeyPhrasesDetectionJobRequest {
     /**
@@ -946,6 +1026,10 @@ declare namespace Comprehend {
      */
     EndTime?: Timestamp;
     /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer.
+     */
+    EntityRecognizerArn?: EntityRecognizerArn;
+    /**
      * The input data configuration that you supplied when you created the entities detection job.
      */
     InputDataConfig?: InputDataConfig;
@@ -985,7 +1069,152 @@ declare namespace Comprehend {
      */
     EndOffset?: Integer;
   }
+  export interface EntityRecognizerAnnotations {
+    /**
+     *  Specifies the Amazon S3 location where the annotations for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
+     */
+    S3Uri: S3Uri;
+  }
+  export type EntityRecognizerArn = string;
+  export interface EntityRecognizerDocuments {
+    /**
+     *  Specifies the Amazon S3 location where the training documents for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
+     */
+    S3Uri: S3Uri;
+  }
+  export interface EntityRecognizerEntityList {
+    /**
+     * Specifies the Amazon S3 location where the entity list is located. The URI must be in the same region as the API endpoint that you are calling.
+     */
+    S3Uri: S3Uri;
+  }
+  export interface EntityRecognizerEvaluationMetrics {
+    /**
+     * A measure of the usefulness of the recognizer results in the test data. High precision means that the recognizer returned substantially more relevant results than irrelevant ones. 
+     */
+    Precision?: Double;
+    /**
+     * A measure of how complete the recognizer results are for the test data. High recall means that the recognizer returned most of the relevant results.
+     */
+    Recall?: Double;
+    /**
+     * A measure of how accurate the recognizer results are for the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
+     */
+    F1Score?: Double;
+  }
+  export interface EntityRecognizerFilter {
+    /**
+     * The status of an entity recognizer.
+     */
+    Status?: ModelStatus;
+    /**
+     * Filters the list of entities based on the time that the list was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of entities based on the time that the list was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface EntityRecognizerInputDataConfig {
+    /**
+     * The entity types in the input data for an entity recognizer.
+     */
+    EntityTypes: EntityTypesList;
+    /**
+     * S3 location of the documents folder for an entity recognizer
+     */
+    Documents: EntityRecognizerDocuments;
+    /**
+     * S3 location of the annotations file for an entity recognizer.
+     */
+    Annotations?: EntityRecognizerAnnotations;
+    /**
+     * S3 location of the entity list for an entity recognizer.
+     */
+    EntityList?: EntityRecognizerEntityList;
+  }
+  export interface EntityRecognizerMetadata {
+    /**
+     *  The number of documents in the input data that were used to train the entity recognizer. Typically this is 80 to 90 percent of the input documents.
+     */
+    NumberOfTrainedDocuments?: Integer;
+    /**
+     *  The number of documents in the input data that were used to test the entity recognizer. Typically this is 10 to 20 percent of the input documents.
+     */
+    NumberOfTestDocuments?: Integer;
+    /**
+     *  Detailed information about the accuracy of an entity recognizer.
+     */
+    EvaluationMetrics?: EntityRecognizerEvaluationMetrics;
+    /**
+     * Entity types from the metadata of an entity recognizer.
+     */
+    EntityTypes?: EntityRecognizerMetadataEntityTypesList;
+  }
+  export type EntityRecognizerMetadataEntityTypesList = EntityRecognizerMetadataEntityTypesListItem[];
+  export interface EntityRecognizerMetadataEntityTypesListItem {
+    /**
+     * Type of entity from the list of entity types in the metadata of an entity recognizer. 
+     */
+    Type?: AnyLengthString;
+  }
+  export interface EntityRecognizerProperties {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer.
+     */
+    EntityRecognizerArn?: EntityRecognizerArn;
+    /**
+     *  The language of the input documents. All documents must be in the same language. Only English ("en") is currently supported.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * Provides the status of the entity recognizer.
+     */
+    Status?: ModelStatus;
+    /**
+     *  A description of the status of the recognizer.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the recognizer was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the recognizer creation completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The time that training of the entity recognizer started.
+     */
+    TrainingStartTime?: Timestamp;
+    /**
+     * The time that training of the entity recognizer was completed.
+     */
+    TrainingEndTime?: Timestamp;
+    /**
+     * The input data properties of an entity recognizer.
+     */
+    InputDataConfig?: EntityRecognizerInputDataConfig;
+    /**
+     *  Provides information about an entity recognizer.
+     */
+    RecognizerMetadata?: EntityRecognizerMetadata;
+    /**
+     *  The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+  }
+  export type EntityRecognizerPropertiesList = EntityRecognizerProperties[];
   export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string;
+  export type EntityTypeName = string;
+  export type EntityTypesList = EntityTypesListItem[];
+  export interface EntityTypesListItem {
+    /**
+     * Entity type of an item on an entity type list.
+     */
+    Type: EntityTypeName;
+  }
   export type Float = number;
   export type IamRoleArn = string;
   export interface InputDataConfig {
@@ -1174,6 +1403,30 @@ declare namespace Comprehend {
      * A list containing the properties of each job that is returned.
      */
     EntitiesDetectionJobPropertiesList?: EntitiesDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListEntityRecognizersRequest {
+    /**
+     * Filters the list of entities returned. You can filter on Status, SubmitTimeBefore, or SubmitTimeAfter. You can only set one filter at a time.
+     */
+    Filter?: EntityRecognizerFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     *  The maximum number of results to return on each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListEntityRecognizersResponse {
+    /**
+     * The list of properties of an entity recognizer.
+     */
+    EntityRecognizerPropertiesList?: EntityRecognizerPropertiesList;
     /**
      * Identifies the next page of results to return.
      */
@@ -1446,6 +1699,10 @@ declare namespace Comprehend {
      * The identifier of the job.
      */
     JobName?: JobName;
+    /**
+     * The Amazon Resource Name (ARN) that identifies the specific entity recognizer to be used by the StartEntitiesDetectionJob. This ARN is optional and is only used for a custom entity recognition job.
+     */
+    EntityRecognizerArn?: EntityRecognizerArn;
     /**
      * The language of the input documents. All documents must be in the same language. You can specify any of the languages supported by Amazon Comprehend: English ("en"), Spanish ("es"), French ("fr"), German ("de"), Italian ("it"), or Portuguese ("pt"). If custom entities recognition is used, this parameter is ignored and the language used for training the model is used instead.
      */

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.357.0-->
+<!--LATEST=2.358.0-->
 <!--ENTRYINSERT-->
+
+## 2.358.0
+* feature: Comprehend: Amazon Comprehend Custom Entities automatically trains entity recognition models using your entities and noun-based phrases. 
+* feature: CostExplorer: This release introduces a new operation called GetCostForecast operation, which allows you to programmatically access AWS Cost Explorer's forecasting engine and is now generally available.
+* feature: ECS: This release of Amazon Elastic Container Service (Amazon ECS) introduces support for additional Docker flags as Task Definition parameters. Customers can now configure their ECS Tasks to use pidMode (pid) and ipcMode (ipc) Docker flags.
+* feature: SSM: AWS Systems Manager Automation now allows you to execute and manage Automation workflows across multiple accounts and regions. 
+* feature: WorkSpaces: Added new Bring Your Own License (BYOL) automation APIs. With the new APIs, you can list available management CIDR ranges for dedicated tenancy, enable your account for BYOL, describe BYOL status of your account, and import BYOL images. Added new APIs to also describe and delete WorkSpaces images. 
 
 ## 2.357.0
 * feature: CodeBuild: Adding queue phase and configurable queue timeout to CodeBuild.

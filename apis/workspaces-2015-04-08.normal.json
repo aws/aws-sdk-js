@@ -205,6 +205,69 @@
       ],
       "documentation": "<p>Deletes the specified tags from the specified WorkSpace.</p>"
     },
+    "DeleteWorkspaceImage": {
+      "name": "DeleteWorkspaceImage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteWorkspaceImageRequest"
+      },
+      "output": {
+        "shape": "DeleteWorkspaceImageResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceAssociatedException"
+        },
+        {
+          "shape": "InvalidResourceStateException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image. </p>"
+    },
+    "DescribeAccount": {
+      "name": "DescribeAccount",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeAccountRequest"
+      },
+      "output": {
+        "shape": "DescribeAccountResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.</p>"
+    },
+    "DescribeAccountModifications": {
+      "name": "DescribeAccountModifications",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeAccountModificationsRequest"
+      },
+      "output": {
+        "shape": "DescribeAccountModificationsResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.</p>"
+    },
     "DescribeIpGroups": {
       "name": "DescribeIpGroups",
       "http": {
@@ -263,7 +326,7 @@
           "shape": "InvalidParameterValuesException"
         }
       ],
-      "documentation": "<p>Describes the available WorkSpace bundles.</p> <p>You can filter the results using either bundle ID or owner, but not both.</p>"
+      "documentation": "<p>Retrieves a list that describes the available WorkSpace bundles.</p> <p>You can filter the results using either bundle ID or owner, but not both.</p>"
     },
     "DescribeWorkspaceDirectories": {
       "name": "DescribeWorkspaceDirectories",
@@ -283,6 +346,25 @@
         }
       ],
       "documentation": "<p>Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.</p>"
+    },
+    "DescribeWorkspaceImages": {
+      "name": "DescribeWorkspaceImages",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeWorkspaceImagesRequest"
+      },
+      "output": {
+        "shape": "DescribeWorkspaceImagesResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. </p>"
     },
     "DescribeWorkspaces": {
       "name": "DescribeWorkspaces",
@@ -304,7 +386,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Describes the specified WorkSpaces.</p> <p>You can filter the results using bundle ID, directory ID, or owner, but you can specify only one filter at a time.</p>"
+      "documentation": "<p>Describes the specified WorkSpaces.</p> <p>You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.</p>"
     },
     "DescribeWorkspacesConnectionStatus": {
       "name": "DescribeWorkspacesConnectionStatus",
@@ -352,6 +434,90 @@
         }
       ],
       "documentation": "<p>Disassociates the specified IP access control group from the specified directory.</p>"
+    },
+    "ImportWorkspaceImage": {
+      "name": "ImportWorkspaceImage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ImportWorkspaceImageRequest"
+      },
+      "output": {
+        "shape": "ImportWorkspaceImageResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "OperationNotSupportedException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. </p>"
+    },
+    "ListAvailableManagementCidrRanges": {
+      "name": "ListAvailableManagementCidrRanges",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListAvailableManagementCidrRangesRequest"
+      },
+      "output": {
+        "shape": "ListAvailableManagementCidrRangesResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL). </p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>"
+    },
+    "ModifyAccount": {
+      "name": "ModifyAccount",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyAccountRequest"
+      },
+      "output": {
+        "shape": "ModifyAccountResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidResourceStateException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Modifies the configuration of bring your own license (BYOL) for the specified account.</p>"
     },
     "ModifyWorkspaceProperties": {
       "name": "ModifyWorkspaceProperties",
@@ -550,6 +716,42 @@
       "type": "string",
       "pattern": "^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$"
     },
+    "AccountModification": {
+      "type": "structure",
+      "members": {
+        "ModificationState": {
+          "shape": "DedicatedTenancyModificationStateEnum",
+          "documentation": "<p>The state of the modification to the configuration of BYOL.</p>"
+        },
+        "DedicatedTenancySupport": {
+          "shape": "DedicatedTenancySupportResultEnum",
+          "documentation": "<p>The status of BYOL (whether BYOL is being enabled or disabled).</p>"
+        },
+        "DedicatedTenancyManagementCidrRange": {
+          "shape": "DedicatedTenancyManagementCidrRange",
+          "documentation": "<p>The IP address range, specified as an IPv4 CIDR block, for the management network interface used for the account.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when the modification of the BYOL configuration was started.</p>"
+        },
+        "ErrorCode": {
+          "shape": "WorkspaceErrorCode",
+          "documentation": "<p>The error code that is returned if the configuration of BYOL cannot be modified.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "Description",
+          "documentation": "<p>The text of the error message that is returned if the configuration of BYOL cannot be modified.</p>"
+        }
+      },
+      "documentation": "<p>Describes a modification to the configuration of bring your own license (BYOL) for the specified account. </p>"
+    },
+    "AccountModificationList": {
+      "type": "list",
+      "member": {
+        "shape": "AccountModification"
+      }
+    },
     "Alias": {
       "type": "string"
     },
@@ -562,11 +764,11 @@
       "members": {
         "DirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>The ID of the directory.</p>"
+          "documentation": "<p>The identifier of the directory.</p>"
         },
         "GroupIds": {
           "shape": "IpGroupIdList",
-          "documentation": "<p>The IDs of one or more IP access control groups.</p>"
+          "documentation": "<p>The identifiers of one or more IP access control groups.</p>"
         }
       }
     },
@@ -583,7 +785,7 @@
       "members": {
         "GroupId": {
           "shape": "IpGroupId",
-          "documentation": "<p>The ID of the group.</p>"
+          "documentation": "<p>The identifier of the group.</p>"
         },
         "UserRules": {
           "shape": "IpRuleList",
@@ -639,7 +841,7 @@
           "documentation": "<p>The compute type.</p>"
         }
       },
-      "documentation": "<p>Information about the compute type.</p>"
+      "documentation": "<p>Describes the compute type.</p>"
     },
     "ComputerName": {
       "type": "string"
@@ -677,7 +879,7 @@
       "members": {
         "GroupId": {
           "shape": "IpGroupId",
-          "documentation": "<p>The ID of the group.</p>"
+          "documentation": "<p>The identifier of the group.</p>"
         }
       }
     },
@@ -690,7 +892,7 @@
       "members": {
         "ResourceId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>"
+          "documentation": "<p>The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -727,6 +929,37 @@
         }
       }
     },
+    "DedicatedTenancyCidrRangeList": {
+      "type": "list",
+      "member": {
+        "shape": "DedicatedTenancyManagementCidrRange"
+      }
+    },
+    "DedicatedTenancyManagementCidrRange": {
+      "type": "string",
+      "pattern": "(^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.0\\.0)(\\/(16$))$"
+    },
+    "DedicatedTenancyModificationStateEnum": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
+    "DedicatedTenancySupportEnum": {
+      "type": "string",
+      "enum": [
+        "ENABLED"
+      ]
+    },
+    "DedicatedTenancySupportResultEnum": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "DefaultOu": {
       "type": "string"
     },
@@ -735,7 +968,7 @@
       "members": {
         "EnableWorkDocs": {
           "shape": "BooleanObject",
-          "documentation": "<p>Indicates whether the directory is enabled for Amazon WorkDocs.</p>"
+          "documentation": "<p>Specifies whether the directory is enabled for Amazon WorkDocs.</p>"
         },
         "EnableInternetAccess": {
           "shape": "BooleanObject",
@@ -751,10 +984,10 @@
         },
         "UserEnabledAsLocalAdministrator": {
           "shape": "BooleanObject",
-          "documentation": "<p>Indicates whether the WorkSpace user is an administrator on the WorkSpace.</p>"
+          "documentation": "<p>Specifies whether the WorkSpace user is an administrator on the WorkSpace.</p>"
         }
       },
-      "documentation": "<p>Information about defaults used to create a WorkSpace.</p>"
+      "documentation": "<p>Describes the default values used to create a WorkSpace.</p>"
     },
     "DeleteIpGroupRequest": {
       "type": "structure",
@@ -764,7 +997,7 @@
       "members": {
         "GroupId": {
           "shape": "IpGroupId",
-          "documentation": "<p>The ID of the IP access control group.</p>"
+          "documentation": "<p>The identifier of the IP access control group.</p>"
         }
       }
     },
@@ -781,7 +1014,7 @@
       "members": {
         "ResourceId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>"
+          "documentation": "<p>The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -793,16 +1026,71 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteWorkspaceImageRequest": {
+      "type": "structure",
+      "required": [
+        "ImageId"
+      ],
+      "members": {
+        "ImageId": {
+          "shape": "WorkspaceImageId",
+          "documentation": "<p>The identifier of the image.</p>"
+        }
+      }
+    },
+    "DeleteWorkspaceImageResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "DescribeAccountModificationsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
+        }
+      }
+    },
+    "DescribeAccountModificationsResult": {
+      "type": "structure",
+      "members": {
+        "AccountModifications": {
+          "shape": "AccountModificationList",
+          "documentation": "<p>The list of modifications to the configuration of BYOL.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+        }
+      }
+    },
+    "DescribeAccountRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "DescribeAccountResult": {
+      "type": "structure",
+      "members": {
+        "DedicatedTenancySupport": {
+          "shape": "DedicatedTenancySupportResultEnum",
+          "documentation": "<p>The status of BYOL (whether BYOL is enabled or disabled).</p>"
+        },
+        "DedicatedTenancyManagementCidrRange": {
+          "shape": "DedicatedTenancyManagementCidrRange",
+          "documentation": "<p>The IP address range, specified as an IPv4 CIDR block, used for the management network interface.</p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>"
+        }
+      }
+    },
     "DescribeIpGroupsRequest": {
       "type": "structure",
       "members": {
         "GroupIds": {
           "shape": "IpGroupIdList",
-          "documentation": "<p>The IDs of one or more IP access control groups.</p>"
+          "documentation": "<p>The identifiers of one or more IP access control groups.</p>"
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token for the next set of results. (You received this token from a previous call.)</p>"
+          "documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
         },
         "MaxResults": {
           "shape": "Limit",
@@ -819,7 +1107,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.</p>"
+          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
         }
       }
     },
@@ -831,7 +1119,7 @@
       "members": {
         "ResourceId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ID of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>"
+          "documentation": "<p>The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>"
         }
       }
     },
@@ -849,11 +1137,11 @@
       "members": {
         "BundleIds": {
           "shape": "BundleIdList",
-          "documentation": "<p>The IDs of the bundles. This parameter cannot be combined with any other filter.</p>"
+          "documentation": "<p>The identifiers of the bundles. You cannot combine this parameter with any other filter.</p>"
         },
         "Owner": {
           "shape": "BundleOwner",
-          "documentation": "<p>The owner of the bundles. This parameter cannot be combined with any other filter.</p> <p>Specify <code>AMAZON</code> to describe the bundles provided by AWS or null to describe the bundles that belong to your account.</p>"
+          "documentation": "<p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>Specify <code>AMAZON</code> to describe the bundles provided by AWS or null to describe the bundles that belong to your account.</p>"
         },
         "NextToken": {
           "shape": "PaginationToken",
@@ -883,7 +1171,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token for the next set of results. (You received this token from a previous call.)</p>"
+          "documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
         }
       }
     },
@@ -896,7 +1184,37 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.</p>"
+          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+        }
+      }
+    },
+    "DescribeWorkspaceImagesRequest": {
+      "type": "structure",
+      "members": {
+        "ImageIds": {
+          "shape": "WorkspaceImageIdList",
+          "documentation": "<p>The identifier of the image.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "Limit",
+          "documentation": "<p>The maximum number of items to return.</p>"
+        }
+      }
+    },
+    "DescribeWorkspaceImagesResult": {
+      "type": "structure",
+      "members": {
+        "Images": {
+          "shape": "WorkspaceImageList",
+          "documentation": "<p>Information about the images.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
         }
       }
     },
@@ -909,7 +1227,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token for the next set of results. (You received this token from a previous call.)</p>"
+          "documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
         }
       }
     },
@@ -922,7 +1240,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if there are no more results available.</p>"
+          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
         }
       }
     },
@@ -931,11 +1249,11 @@
       "members": {
         "WorkspaceIds": {
           "shape": "WorkspaceIdList",
-          "documentation": "<p>The IDs of the WorkSpaces. This parameter cannot be combined with any other filter.</p> <p>Because the <a>CreateWorkspaces</a> operation is asynchronous, the identifier it returns is not immediately available. If you immediately call <a>DescribeWorkspaces</a> with this identifier, no information is returned.</p>"
+          "documentation": "<p>The identifiers of the WorkSpaces. You cannot combine this parameter with any other filter.</p> <p>Because the <a>CreateWorkspaces</a> operation is asynchronous, the identifier it returns is not immediately available. If you immediately call <a>DescribeWorkspaces</a> with this identifier, no information is returned.</p>"
         },
         "DirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>The ID of the directory. In addition, you can optionally specify a specific directory user (see <code>UserName</code>). This parameter cannot be combined with any other filter.</p>"
+          "documentation": "<p>The identifier of the directory. In addition, you can optionally specify a specific directory user (see <code>UserName</code>). You cannot combine this parameter with any other filter.</p>"
         },
         "UserName": {
           "shape": "UserName",
@@ -943,7 +1261,7 @@
         },
         "BundleId": {
           "shape": "BundleId",
-          "documentation": "<p>The ID of the bundle. All WorkSpaces that are created from this bundle are retrieved. This parameter cannot be combined with any other filter.</p>"
+          "documentation": "<p>The identifier of the bundle. All WorkSpaces that are created from this bundle are retrieved. You cannot combine this parameter with any other filter.</p>"
         },
         "Limit": {
           "shape": "Limit",
@@ -951,7 +1269,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token for the next set of results. (You received this token from a previous call.)</p>"
+          "documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
         }
       }
     },
@@ -964,7 +1282,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.</p>"
+          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
         }
       }
     },
@@ -1001,11 +1319,11 @@
       "members": {
         "DirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>The ID of the directory.</p>"
+          "documentation": "<p>The identifier of the directory.</p>"
         },
         "GroupIds": {
           "shape": "IpGroupIdList",
-          "documentation": "<p>The IDs of one or more IP access control groups.</p>"
+          "documentation": "<p>The identifiers of one or more IP access control groups.</p>"
         }
       }
     },
@@ -1019,6 +1337,10 @@
         "shape": "IpAddress"
       }
     },
+    "Ec2ImageId": {
+      "type": "string",
+      "pattern": "^ami\\-([a-f0-9]{8}|[a-f0-9]{17})$"
+    },
     "ErrorType": {
       "type": "string"
     },
@@ -1031,14 +1353,14 @@
         },
         "ErrorCode": {
           "shape": "ErrorType",
-          "documentation": "<p>The error code.</p>"
+          "documentation": "<p>The error code that is returned if the WorkSpace cannot be created.</p>"
         },
         "ErrorMessage": {
           "shape": "Description",
-          "documentation": "<p>The textual error message.</p>"
+          "documentation": "<p>The text of the error message that is returned if the WorkSpace cannot be created.</p>"
         }
       },
-      "documentation": "<p>Information about a WorkSpace that could not be created.</p>"
+      "documentation": "<p>Describes a WorkSpace that cannot be created.</p>"
     },
     "FailedCreateWorkspaceRequests": {
       "type": "list",
@@ -1085,14 +1407,50 @@
         },
         "ErrorCode": {
           "shape": "ErrorType",
-          "documentation": "<p>The error code.</p>"
+          "documentation": "<p>The error code that is returned if the WorkSpace cannot be rebooted.</p>"
         },
         "ErrorMessage": {
           "shape": "Description",
-          "documentation": "<p>The textual error message.</p>"
+          "documentation": "<p>The text of the error message that is returned if the WorkSpace cannot be rebooted.</p>"
         }
       },
-      "documentation": "<p>Information about a WorkSpace that could not be rebooted (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).</p>"
+      "documentation": "<p>Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).</p>"
+    },
+    "ImportWorkspaceImageRequest": {
+      "type": "structure",
+      "required": [
+        "Ec2ImageId",
+        "IngestionProcess",
+        "ImageName",
+        "ImageDescription"
+      ],
+      "members": {
+        "Ec2ImageId": {
+          "shape": "Ec2ImageId",
+          "documentation": "<p>The identifier of the EC2 image.</p>"
+        },
+        "IngestionProcess": {
+          "shape": "WorkspaceImageIngestionProcess",
+          "documentation": "<p>The ingestion process to be used when importing the image.</p>"
+        },
+        "ImageName": {
+          "shape": "WorkspaceImageName",
+          "documentation": "<p>The name of the WorkSpace image.</p>"
+        },
+        "ImageDescription": {
+          "shape": "WorkspaceImageDescription",
+          "documentation": "<p>The description of the WorkSpace image.</p>"
+        }
+      }
+    },
+    "ImportWorkspaceImageResult": {
+      "type": "structure",
+      "members": {
+        "ImageId": {
+          "shape": "WorkspaceImageId",
+          "documentation": "<p>The identifier of the WorkSpace image.</p>"
+        }
+      }
     },
     "IpAddress": {
       "type": "string"
@@ -1137,7 +1495,7 @@
           "documentation": "<p>The description.</p>"
         }
       },
-      "documentation": "<p>Information about a rule for an IP access control group.</p>"
+      "documentation": "<p>Describes a rule for an IP access control group.</p>"
     },
     "IpRuleList": {
       "type": "list",
@@ -1148,6 +1506,48 @@
     "Limit": {
       "type": "integer",
       "max": 25,
+      "min": 1
+    },
+    "ListAvailableManagementCidrRangesRequest": {
+      "type": "structure",
+      "required": [
+        "ManagementCidrRangeConstraint"
+      ],
+      "members": {
+        "ManagementCidrRangeConstraint": {
+          "shape": "ManagementCidrRangeConstraint",
+          "documentation": "<p>The IP address range to search. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block).</p>"
+        },
+        "MaxResults": {
+          "shape": "ManagementCidrRangeMaxResults",
+          "documentation": "<p>The maximum number of items to return.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
+        }
+      }
+    },
+    "ListAvailableManagementCidrRangesResult": {
+      "type": "structure",
+      "members": {
+        "ManagementCidrRanges": {
+          "shape": "DedicatedTenancyCidrRangeList",
+          "documentation": "<p>The list of available IP address ranges, specified as IPv4 CIDR blocks.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+        }
+      }
+    },
+    "ManagementCidrRangeConstraint": {
+      "type": "string",
+      "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/(3[0-2]|[1-2][0-9]|[0-9]))$"
+    },
+    "ManagementCidrRangeMaxResults": {
+      "type": "integer",
+      "max": 5,
       "min": 1
     },
     "ModificationResourceEnum": {
@@ -1170,7 +1570,7 @@
           "documentation": "<p>The modification state.</p>"
         }
       },
-      "documentation": "<p>Information about a WorkSpace modification.</p>"
+      "documentation": "<p>Describes a WorkSpace modification.</p>"
     },
     "ModificationStateEnum": {
       "type": "string",
@@ -1185,6 +1585,23 @@
         "shape": "ModificationState"
       }
     },
+    "ModifyAccountRequest": {
+      "type": "structure",
+      "members": {
+        "DedicatedTenancySupport": {
+          "shape": "DedicatedTenancySupportEnum",
+          "documentation": "<p>The status of BYOL.</p>"
+        },
+        "DedicatedTenancyManagementCidrRange": {
+          "shape": "DedicatedTenancyManagementCidrRange",
+          "documentation": "<p>The IP address range, specified as an IPv4 CIDR block, for the management network interface. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block). The CIDR block size must be /16 (for example, 203.0.113.25/16). It must also be specified as available by the <code>ListAvailableManagementCidrRanges</code> operation.</p>"
+        }
+      }
+    },
+    "ModifyAccountResult": {
+      "type": "structure",
+      "members": {}
+    },
     "ModifyWorkspacePropertiesRequest": {
       "type": "structure",
       "required": [
@@ -1194,7 +1611,7 @@
       "members": {
         "WorkspaceId": {
           "shape": "WorkspaceId",
-          "documentation": "<p>The ID of the WorkSpace.</p>"
+          "documentation": "<p>The identifier of the WorkSpace.</p>"
         },
         "WorkspaceProperties": {
           "shape": "WorkspaceProperties",
@@ -1215,7 +1632,7 @@
       "members": {
         "WorkspaceId": {
           "shape": "WorkspaceId",
-          "documentation": "<p>The ID of the WorkSpace.</p>"
+          "documentation": "<p>The identifier of the WorkSpace.</p>"
         },
         "WorkspaceState": {
           "shape": "TargetWorkspaceState",
@@ -1231,6 +1648,23 @@
       "type": "string",
       "min": 1
     },
+    "OperatingSystem": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "OperatingSystemType",
+          "documentation": "<p>The operating system.</p>"
+        }
+      },
+      "documentation": "<p>The operating system that the image is running.</p>"
+    },
+    "OperatingSystemType": {
+      "type": "string",
+      "enum": [
+        "WINDOWS",
+        "LINUX"
+      ]
+    },
     "PaginationToken": {
       "type": "string",
       "max": 63,
@@ -1244,10 +1678,10 @@
       "members": {
         "WorkspaceId": {
           "shape": "WorkspaceId",
-          "documentation": "<p>The ID of the WorkSpace.</p>"
+          "documentation": "<p>The identifier of the WorkSpace.</p>"
         }
       },
-      "documentation": "<p>Information used to reboot a WorkSpace.</p>"
+      "documentation": "<p>Describes the information used to reboot a WorkSpace.</p>"
     },
     "RebootWorkspaceRequests": {
       "type": "list",
@@ -1286,10 +1720,10 @@
       "members": {
         "WorkspaceId": {
           "shape": "WorkspaceId",
-          "documentation": "<p>The ID of the WorkSpace.</p>"
+          "documentation": "<p>The identifier of the WorkSpace.</p>"
         }
       },
-      "documentation": "<p>Information used to rebuild a WorkSpace.</p>"
+      "documentation": "<p>Describes the information used to rebuild a WorkSpace.</p>"
     },
     "RebuildWorkspaceRequests": {
       "type": "list",
@@ -1316,7 +1750,7 @@
       "members": {
         "FailedRequests": {
           "shape": "FailedRebuildWorkspaceRequests",
-          "documentation": "<p>Information about the WorkSpace if it could not be rebuilt.</p>"
+          "documentation": "<p>Information about the WorkSpace that could not be rebuilt.</p>"
         }
       }
     },
@@ -1334,7 +1768,7 @@
       "members": {
         "GroupId": {
           "shape": "IpGroupId",
-          "documentation": "<p>The ID of the group.</p>"
+          "documentation": "<p>The identifier of the group.</p>"
         },
         "UserRules": {
           "shape": "IpRevokedRuleList",
@@ -1354,7 +1788,7 @@
           "documentation": "<p>The size of the root volume.</p>"
         }
       },
-      "documentation": "<p>Information about the root volume for a WorkSpace bundle.</p>"
+      "documentation": "<p>Describes the root volume for a WorkSpace bundle.</p>"
     },
     "RootVolumeSizeGib": {
       "type": "integer"
@@ -1378,7 +1812,7 @@
       "members": {
         "WorkspaceId": {
           "shape": "WorkspaceId",
-          "documentation": "<p>The ID of the WorkSpace.</p>"
+          "documentation": "<p>The identifier of the WorkSpace.</p>"
         }
       },
       "documentation": "<p>Information used to start a WorkSpace.</p>"
@@ -1417,10 +1851,10 @@
       "members": {
         "WorkspaceId": {
           "shape": "WorkspaceId",
-          "documentation": "<p>The ID of the WorkSpace.</p>"
+          "documentation": "<p>The identifier of the WorkSpace.</p>"
         }
       },
-      "documentation": "<p>Information used to stop a WorkSpace.</p>"
+      "documentation": "<p>Describes the information used to stop a WorkSpace.</p>"
     },
     "StopWorkspaceRequests": {
       "type": "list",
@@ -1476,7 +1910,7 @@
           "documentation": "<p>The value of the tag.</p>"
         }
       },
-      "documentation": "<p>Information about a tag.</p>"
+      "documentation": "<p>Describes a tag.</p>"
     },
     "TagKey": {
       "type": "string",
@@ -1514,10 +1948,10 @@
       "members": {
         "WorkspaceId": {
           "shape": "WorkspaceId",
-          "documentation": "<p>The ID of the WorkSpace.</p>"
+          "documentation": "<p>The identifier of the WorkSpace.</p>"
         }
       },
-      "documentation": "<p>Information used to terminate a WorkSpace.</p>"
+      "documentation": "<p>Describes the information used to terminate a WorkSpace.</p>"
     },
     "TerminateWorkspaceRequests": {
       "type": "list",
@@ -1560,7 +1994,7 @@
       "members": {
         "GroupId": {
           "shape": "IpGroupId",
-          "documentation": "<p>The ID of the group.</p>"
+          "documentation": "<p>The identifier of the group.</p>"
         },
         "UserRules": {
           "shape": "IpRuleList",
@@ -1585,7 +2019,7 @@
           "documentation": "<p>The size of the user storage.</p>"
         }
       },
-      "documentation": "<p>Information about the user storage for a WorkSpace bundle.</p>"
+      "documentation": "<p>Describes the user storage for a WorkSpace bundle.</p>"
     },
     "UserVolumeSizeGib": {
       "type": "integer"
@@ -1626,11 +2060,11 @@
         },
         "ErrorMessage": {
           "shape": "Description",
-          "documentation": "<p>If the WorkSpace could not be created, contains a textual error message that describes the failure.</p>"
+          "documentation": "<p>The text of the error message that is returned if the WorkSpace cannot be created.</p>"
         },
         "ErrorCode": {
           "shape": "WorkspaceErrorCode",
-          "documentation": "<p>If the WorkSpace could not be created, contains the error code.</p>"
+          "documentation": "<p>The error code that is returned if the WorkSpace cannot be created.</p>"
         },
         "ComputerName": {
           "shape": "ComputerName",
@@ -1657,7 +2091,7 @@
           "documentation": "<p>The modification states of the WorkSpace.</p>"
         }
       },
-      "documentation": "<p>Information about a WorkSpace.</p>"
+      "documentation": "<p>Describes a WorkSpace.</p>"
     },
     "WorkspaceBundle": {
       "type": "structure",
@@ -1691,14 +2125,14 @@
           "documentation": "<p>The compute type. For more information, see <a href=\"http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles\">Amazon WorkSpaces Bundles</a>.</p>"
         }
       },
-      "documentation": "<p>Information about a WorkSpace bundle.</p>"
+      "documentation": "<p>Describes a WorkSpace bundle.</p>"
     },
     "WorkspaceConnectionStatus": {
       "type": "structure",
       "members": {
         "WorkspaceId": {
           "shape": "WorkspaceId",
-          "documentation": "<p>The ID of the WorkSpace.</p>"
+          "documentation": "<p>The identifier of the WorkSpace.</p>"
         },
         "ConnectionState": {
           "shape": "ConnectionState",
@@ -1706,7 +2140,7 @@
         },
         "ConnectionStateCheckTimestamp": {
           "shape": "Timestamp",
-          "documentation": "<p>The timestamp of the connection state check.</p>"
+          "documentation": "<p>The timestamp of the connection status check.</p>"
         },
         "LastKnownUserConnectionTimestamp": {
           "shape": "Timestamp",
@@ -1777,7 +2211,7 @@
           "documentation": "<p>The identifiers of the IP access control groups associated with the directory.</p>"
         }
       },
-      "documentation": "<p>Information about an AWS Directory Service directory for use with Amazon WorkSpaces.</p>"
+      "documentation": "<p>Describes an AWS Directory Service directory that is used with Amazon WorkSpaces.</p>"
     },
     "WorkspaceDirectoryState": {
       "type": "string",
@@ -1811,6 +2245,100 @@
       "max": 25,
       "min": 1
     },
+    "WorkspaceImage": {
+      "type": "structure",
+      "members": {
+        "ImageId": {
+          "shape": "WorkspaceImageId",
+          "documentation": "<p>The identifier of the image.</p>"
+        },
+        "Name": {
+          "shape": "WorkspaceImageName",
+          "documentation": "<p>The name of the image.</p>"
+        },
+        "Description": {
+          "shape": "WorkspaceImageDescription",
+          "documentation": "<p>The description of the image.</p>"
+        },
+        "OperatingSystem": {
+          "shape": "OperatingSystem",
+          "documentation": "<p>The operating system that the image is running. </p>"
+        },
+        "State": {
+          "shape": "WorkspaceImageState",
+          "documentation": "<p>The status of the image.</p>"
+        },
+        "RequiredTenancy": {
+          "shape": "WorkspaceImageRequiredTenancy",
+          "documentation": "<p>Specifies whether the image is running on dedicated hardware. When bring your own license (BYOL) is enabled, this value is set to DEDICATED. </p>"
+        },
+        "ErrorCode": {
+          "shape": "WorkspaceImageErrorCode",
+          "documentation": "<p>The error code that is returned for the image.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "Description",
+          "documentation": "<p>The text of the error message that is returned for the image.</p>"
+        }
+      },
+      "documentation": "<p>Describes a WorkSpace image.</p>"
+    },
+    "WorkspaceImageDescription": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9_./() -]+$"
+    },
+    "WorkspaceImageErrorCode": {
+      "type": "string"
+    },
+    "WorkspaceImageId": {
+      "type": "string",
+      "pattern": "wsi-[0-9a-z]{9,63}$"
+    },
+    "WorkspaceImageIdList": {
+      "type": "list",
+      "member": {
+        "shape": "WorkspaceImageId"
+      },
+      "max": 25,
+      "min": 1
+    },
+    "WorkspaceImageIngestionProcess": {
+      "type": "string",
+      "enum": [
+        "BYOL_REGULAR",
+        "BYOL_GRAPHICS",
+        "BYOL_GRAPHICSPRO"
+      ]
+    },
+    "WorkspaceImageList": {
+      "type": "list",
+      "member": {
+        "shape": "WorkspaceImage"
+      }
+    },
+    "WorkspaceImageName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9_./()\\\\-]+$"
+    },
+    "WorkspaceImageRequiredTenancy": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "DEDICATED"
+      ]
+    },
+    "WorkspaceImageState": {
+      "type": "string",
+      "enum": [
+        "AVAILABLE",
+        "PENDING",
+        "ERROR"
+      ]
+    },
     "WorkspaceList": {
       "type": "list",
       "member": {
@@ -1841,7 +2369,7 @@
           "documentation": "<p>The compute type. For more information, see <a href=\"http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles\">Amazon WorkSpaces Bundles</a>.</p>"
         }
       },
-      "documentation": "<p>Information about a WorkSpace.</p>"
+      "documentation": "<p>Describes a WorkSpace.</p>"
     },
     "WorkspaceRequest": {
       "type": "structure",
@@ -1884,7 +2412,7 @@
           "documentation": "<p>The tags for the WorkSpace.</p>"
         }
       },
-      "documentation": "<p>Information used to create a WorkSpace.</p>"
+      "documentation": "<p>Describes the information used to create a WorkSpace.</p>"
     },
     "WorkspaceRequestList": {
       "type": "list",
@@ -1920,7 +2448,7 @@
       "members": {
         "groupId": {
           "shape": "IpGroupId",
-          "documentation": "<p>The ID of the group.</p>"
+          "documentation": "<p>The identifier of the group.</p>"
         },
         "groupName": {
           "shape": "IpGroupName",
@@ -1935,7 +2463,7 @@
           "documentation": "<p>The rules.</p>"
         }
       },
-      "documentation": "<p>Information about an IP access control group.</p>"
+      "documentation": "<p>Describes an IP access control group.</p>"
     },
     "WorkspacesIpGroupsList": {
       "type": "list",
@@ -1944,5 +2472,5 @@
       }
     }
   },
-  "documentation": "<fullname>Amazon WorkSpaces Service</fullname> <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows desktops for your users.</p>"
+  "documentation": "<fullname>Amazon WorkSpaces Service</fullname> <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows and Amazon Linux desktops for your users.</p>"
 }

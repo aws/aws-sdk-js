@@ -20,6 +20,14 @@ declare class CostExplorer extends Service {
    */
   getCostAndUsage(callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageResponse) => void): Request<CostExplorer.Types.GetCostAndUsageResponse, AWSError>;
   /**
+   * Retrieves a forecast for how much Amazon Web Services predicts that you will spend over the forecast time period that you select, based on your past costs. 
+   */
+  getCostForecast(params: CostExplorer.Types.GetCostForecastRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostForecastResponse) => void): Request<CostExplorer.Types.GetCostForecastResponse, AWSError>;
+  /**
+   * Retrieves a forecast for how much Amazon Web Services predicts that you will spend over the forecast time period that you select, based on your past costs. 
+   */
+  getCostForecast(callback?: (err: AWSError, data: CostExplorer.Types.GetCostForecastResponse) => void): Request<CostExplorer.Types.GetCostForecastResponse, AWSError>;
+  /**
    * Retrieves all available filter values for a specified filter over a period of time. You can search the dimension values for an arbitrary string. 
    */
   getDimensionValues(params: CostExplorer.Types.GetDimensionValuesRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetDimensionValuesResponse) => void): Request<CostExplorer.Types.GetDimensionValuesResponse, AWSError>;
@@ -253,6 +261,25 @@ declare namespace CostExplorer {
     Tags?: TagValues;
   }
   export type Expressions = Expression[];
+  export interface ForecastResult {
+    /**
+     * The period of time that the forecast covers.
+     */
+    TimePeriod?: DateInterval;
+    /**
+     * The mean value of the forecast.
+     */
+    MeanValue?: GenericString;
+    /**
+     * The lower limit for the prediction interval. 
+     */
+    PredictionIntervalLowerBound?: GenericString;
+    /**
+     * The upper limit for the prediction interval. 
+     */
+    PredictionIntervalUpperBound?: GenericString;
+  }
+  export type ForecastResultsByTime = ForecastResult[];
   export type GenericBoolean = boolean;
   export type GenericString = string;
   export interface GetCostAndUsageRequest {
@@ -294,6 +321,38 @@ declare namespace CostExplorer {
      * The time period that is covered by the results in the response.
      */
     ResultsByTime?: ResultsByTime;
+  }
+  export interface GetCostForecastRequest {
+    /**
+     * The period of time that you want the forecast to cover.
+     */
+    TimePeriod: DateInterval;
+    /**
+     * Which metric Cost Explorer uses to create your forecast. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values for a GetCostForecast call are the following:   AmortizedCost   BlendedCost   NetAmortizedCost   NetUnblendedCost   UnblendedCost  
+     */
+    Metric: Metric;
+    /**
+     * How granular you want the forecast to be. You can get 3 months of DAILY forecasts or 12 months of MONTHLY forecasts.
+     */
+    Granularity: Granularity;
+    /**
+     * The filters that you want to use to filter your forecast. Cost Explorer API supports all of the Cost Explorer filters.
+     */
+    Filter?: Expression;
+    /**
+     * Cost Explorer always returns the mean forecast as a single point. You can request a prediction interval around the mean by specifying a confidence level. The higher the confidence level, the more confident Cost Explorer is about the actual value falling in the prediction interval. Higher confidence levels result in wider prediction intervals.
+     */
+    PredictionIntervalLevel?: PredictionIntervalLevel;
+  }
+  export interface GetCostForecastResponse {
+    /**
+     * How much you are forecasted to spend over the forecast period, in USD.
+     */
+    Total?: MetricValue;
+    /**
+     * The forecasts for your query, in order. For DAILY forecasts, this is a list of days. For MONTHLY forecasts, this is a list of months.
+     */
+    ForecastResultsByTime?: ForecastResultsByTime;
   }
   export interface GetDimensionValuesRequest {
     /**
@@ -545,6 +604,7 @@ declare namespace CostExplorer {
   export type Key = string;
   export type Keys = Key[];
   export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string;
+  export type Metric = "BLENDED_COST"|"UNBLENDED_COST"|"AMORTIZED_COST"|"NET_UNBLENDED_COST"|"NET_AMORTIZED_COST"|"USAGE_QUANTITY"|"NORMALIZED_USAGE_AMOUNT"|string;
   export type MetricAmount = string;
   export type MetricName = string;
   export type MetricNames = MetricName[];
@@ -568,6 +628,7 @@ declare namespace CostExplorer {
   export type OnDemandHours = string;
   export type PageSize = number;
   export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|"LIGHT_UTILIZATION"|"MEDIUM_UTILIZATION"|"HEAVY_UTILIZATION"|string;
+  export type PredictionIntervalLevel = number;
   export type PurchasedHours = string;
   export interface RDSInstanceDetails {
     /**

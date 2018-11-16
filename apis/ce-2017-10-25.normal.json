@@ -45,6 +45,28 @@
       ],
       "documentation": "<p>Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as <code>BlendedCosts</code> or <code>UsageQuantity</code>, that you want the request to return. You can also filter and group your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a specific time range. For a complete list of valid dimensions, see the <code> <a href=\"http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html\">GetDimensionValues</a> </code> operation. Master accounts in an organization in AWS Organizations have access to all member accounts.</p>"
     },
+    "GetCostForecast": {
+      "name": "GetCostForecast",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetCostForecastRequest"
+      },
+      "output": {
+        "shape": "GetCostForecastResponse"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "DataUnavailableException"
+        }
+      ],
+      "documentation": "<p>Retrieves a forecast for how much Amazon Web Services predicts that you will spend over the forecast time period that you select, based on your past costs. </p>"
+    },
     "GetDimensionValues": {
       "name": "GetDimensionValues",
       "http": {
@@ -499,6 +521,34 @@
         "shape": "Expression"
       }
     },
+    "ForecastResult": {
+      "type": "structure",
+      "members": {
+        "TimePeriod": {
+          "shape": "DateInterval",
+          "documentation": "<p>The period of time that the forecast covers.</p>"
+        },
+        "MeanValue": {
+          "shape": "GenericString",
+          "documentation": "<p>The mean value of the forecast.</p>"
+        },
+        "PredictionIntervalLowerBound": {
+          "shape": "GenericString",
+          "documentation": "<p>The lower limit for the prediction interval. </p>"
+        },
+        "PredictionIntervalUpperBound": {
+          "shape": "GenericString",
+          "documentation": "<p>The upper limit for the prediction interval. </p>"
+        }
+      },
+      "documentation": "<p>The forecast created for your query.</p>"
+    },
+    "ForecastResultsByTime": {
+      "type": "list",
+      "member": {
+        "shape": "ForecastResult"
+      }
+    },
     "GenericBoolean": {
       "type": "boolean"
     },
@@ -548,6 +598,49 @@
         "ResultsByTime": {
           "shape": "ResultsByTime",
           "documentation": "<p>The time period that is covered by the results in the response.</p>"
+        }
+      }
+    },
+    "GetCostForecastRequest": {
+      "type": "structure",
+      "required": [
+        "TimePeriod",
+        "Metric",
+        "Granularity"
+      ],
+      "members": {
+        "TimePeriod": {
+          "shape": "DateInterval",
+          "documentation": "<p>The period of time that you want the forecast to cover.</p>"
+        },
+        "Metric": {
+          "shape": "Metric",
+          "documentation": "<p>Which metric Cost Explorer uses to create your forecast. For more information about blended and unblended rates, see <a href=\"https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/\">Why does the \"blended\" annotation appear on some line items in my bill?</a>. </p> <p>Valid values for a <code>GetCostForecast</code> call are the following:</p> <ul> <li> <p>AmortizedCost</p> </li> <li> <p>BlendedCost</p> </li> <li> <p>NetAmortizedCost</p> </li> <li> <p>NetUnblendedCost</p> </li> <li> <p>UnblendedCost</p> </li> </ul>"
+        },
+        "Granularity": {
+          "shape": "Granularity",
+          "documentation": "<p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code> forecasts or 12 months of <code>MONTHLY</code> forecasts.</p>"
+        },
+        "Filter": {
+          "shape": "Expression",
+          "documentation": "<p>The filters that you want to use to filter your forecast. Cost Explorer API supports all of the Cost Explorer filters.</p>"
+        },
+        "PredictionIntervalLevel": {
+          "shape": "PredictionIntervalLevel",
+          "documentation": "<p>Cost Explorer always returns the mean forecast as a single point. You can request a prediction interval around the mean by specifying a confidence level. The higher the confidence level, the more confident Cost Explorer is about the actual value falling in the prediction interval. Higher confidence levels result in wider prediction intervals.</p>"
+        }
+      }
+    },
+    "GetCostForecastResponse": {
+      "type": "structure",
+      "members": {
+        "Total": {
+          "shape": "MetricValue",
+          "documentation": "<p>How much you are forecasted to spend over the forecast period, in <code>USD</code>.</p>"
+        },
+        "ForecastResultsByTime": {
+          "shape": "ForecastResultsByTime",
+          "documentation": "<p>The forecasts for your query, in order. For <code>DAILY</code> forecasts, this is a list of days. For <code>MONTHLY</code> forecasts, this is a list of months.</p>"
         }
       }
     },
@@ -915,6 +1008,18 @@
         "SIXTY_DAYS"
       ]
     },
+    "Metric": {
+      "type": "string",
+      "enum": [
+        "BLENDED_COST",
+        "UNBLENDED_COST",
+        "AMORTIZED_COST",
+        "NET_UNBLENDED_COST",
+        "NET_AMORTIZED_COST",
+        "USAGE_QUANTITY",
+        "NORMALIZED_USAGE_AMOUNT"
+      ]
+    },
     "MetricAmount": {
       "type": "string"
     },
@@ -989,6 +1094,11 @@
         "MEDIUM_UTILIZATION",
         "HEAVY_UTILIZATION"
       ]
+    },
+    "PredictionIntervalLevel": {
+      "type": "integer",
+      "max": 99,
+      "min": 51
     },
     "PurchasedHours": {
       "type": "string"
