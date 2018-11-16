@@ -4,7 +4,7 @@ var AWS = helpers.AWS;
 describe('AWS.S3Control', function() {
   it('append accountId to hostname when supplied', function() {
     var client = new AWS.S3Control({region: 'us-east-1'});
-    var request = client.getPublicLockdown({AccountId: '111'});
+    var request = client.getPublicAccessBlock({AccountId: '111'});
     helpers.mockResponse({data: {}});
     request.send();
     expect(request.httpRequest.headers['x-amz-account-id']).to.eql(undefined);
@@ -14,7 +14,7 @@ describe('AWS.S3Control', function() {
 
   it('shouldn\'t append accountId if not supplied', function() {
     var client = new AWS.S3Control({region: 'us-east-1'});
-    var request = client.putPublicLockdown({});
+    var request = client.putPublicAccessBlock({});
     helpers.mockResponse({data: {}});
     request.send();
     expect(request.httpRequest.headers.Host).to.eql('s3-control.us-east-1.amazonaws.com');
@@ -23,7 +23,7 @@ describe('AWS.S3Control', function() {
 
   it('append accountId to hostname when supplied and using dualstack', function() {
     var client = new AWS.S3Control({region: 'us-east-1', useDualstack: true});
-    var request = client.getPublicLockdown({AccountId: '222'});
+    var request = client.getPublicAccessBlock({AccountId: '222'});
     helpers.mockResponse({data: {}});
     request.send();
     expect(request.httpRequest.headers.Host).to.eql('222.s3-control.dualstack.us-east-1.amazonaws.com');
@@ -32,7 +32,7 @@ describe('AWS.S3Control', function() {
 
   it('append accountId to hostname when supplied and using customized endpoint', function() {
     var client = new AWS.S3Control({endpoint: 's3-control-fips.us-east-1.amazonaws.com'});
-    var request = client.getPublicLockdown({AccountId: '222'});
+    var request = client.getPublicAccessBlock({AccountId: '222'});
     helpers.mockResponse({data: {}});
     request.send();
     expect(request.httpRequest.headers.Host).to.eql('222.s3-control-fips.us-east-1.amazonaws.com');
@@ -41,7 +41,7 @@ describe('AWS.S3Control', function() {
 
   it('should add hostId and requestId to exception response', function() {
     var client = new AWS.S3Control({region: 'us-east-1'});
-    var request = client.deletePublicLockdown({AccountId: '111'});
+    var request = client.deletePublicAccessBlock({AccountId: '111'});
     helpers.mockHttpResponse(404, {
       'x-amz-request-id': 'requestId123',
       'x-amz-id-2': 'hostId321',
@@ -57,7 +57,7 @@ describe('AWS.S3Control', function() {
 
   it('should add hostId and requestId from successful response', function() {
     var client = new AWS.S3Control({region: 'us-east-1'});
-    var request = client.deletePublicLockdown({AccountId: '111'});
+    var request = client.deletePublicAccessBlock({AccountId: '111'});
     helpers.mockHttpResponse(200, {
       'x-amz-request-id': 'requestId123',
       'x-amz-id-2': 'hostId321',
@@ -77,7 +77,7 @@ describe('AWS.S3Control', function() {
   it('does not double encode path for S3Control', function() {
     var client = new AWS.S3Control();
     var req;
-    req = client.putPublicLockdown({
+    req = client.putPublicAccessBlock({
       AccountId: '111',
       PublicLockdownConfiguration: {
         RejectPublicAcls: false
@@ -94,7 +94,7 @@ describe('AWS.S3Control', function() {
     var possibleValues = [123, null, undefined, NaN, {}, ['a'], new AWS.util.Buffer('111')];
     for (var i = 0; i < possibleValues.length; i++) {
       var accountId = possibleValues[i];
-      var request = client.getPublicLockdown({AccountId: accountId}).build();
+      var request = client.getPublicAccessBlock({AccountId: accountId}).build();
       var response = request.response;
       expect(response.error).not.to.be.null;
       expect(response.data).to.eql(null);
@@ -111,7 +111,7 @@ describe('AWS.S3Control', function() {
       var len = stringlength[i];
       var wrongLengthString = '';
       for (var j = 0; j < len; j++) wrongLengthString += '1';
-      var request = client.getPublicLockdown({AccountId: wrongLengthString}).build();
+      var request = client.getPublicAccessBlock({AccountId: wrongLengthString}).build();
       var response = request.response;
       expect(response.error).not.to.be.null;
       expect(response.data).to.eql(null);
@@ -123,7 +123,7 @@ describe('AWS.S3Control', function() {
       var len = stringlength[i];
       var stringRightLength = '';
       for (var j = 0; j < len; j++) stringRightLength += '1';
-      var request = client.getPublicLockdown({AccountId: stringRightLength}).build();
+      var request = client.getPublicAccessBlock({AccountId: stringRightLength}).build();
       var response = request.response;
       expect(response.error).to.be.null;
     }
@@ -135,7 +135,7 @@ describe('AWS.S3Control', function() {
     var client = new AWS.S3Control({region: 'us-east-1'});
     var wrongStrings = ['a.b', '.ab', 'ab.', '-ab', 'Ab-', 'asdw*', '.', '-'];
     for (var i = 0; i < wrongStrings.length; i++) {
-      var request = client.getPublicLockdown({AccountId: wrongStrings[i]});
+      var request = client.getPublicAccessBlock({AccountId: wrongStrings[i]});
       request.send();
       expect(request.response.error).not.to.be.undefined;
       expect(request.response.data).to.eql(null);
@@ -145,7 +145,7 @@ describe('AWS.S3Control', function() {
 
     var correctStrings = ['a', '6', 'B', 'a-b', '6-D', 'C-6', 'a-b-c'];
     for (var i = 0; i < correctStrings.length; i++) {
-      var request = client.getPublicLockdown({AccountId: correctStrings[i]});
+      var request = client.getPublicAccessBlock({AccountId: correctStrings[i]});
       request.send();
       expect(request.response.error).to.be.null;
     }
