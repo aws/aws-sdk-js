@@ -520,6 +520,10 @@
           code: 'TooManyRequestsException',
           statusCode: 400
         }, true);
+        retryableError({
+          code: 'TransactionInProgressException',
+          statusCode: 400
+        }, true);
       });
       it('should retry on expired credentials error', function() {
         return retryableError({
