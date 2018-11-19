@@ -14,7 +14,7 @@ AWS.config = new AWS.Config({
         params: {
             Bucket: 'bucket'
         },
-        useDualStack: true
+        useDualstack: true
     },
     apiVersion: 'latest',
 });
