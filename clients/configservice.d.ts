@@ -12,6 +12,14 @@ declare class ConfigService extends Service {
   constructor(options?: ConfigService.Types.ClientConfiguration)
   config: Config & ConfigService.Types.ClientConfiguration;
   /**
+   * Returns the current configuration items for resources that are present in your AWS Config aggregator. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceIdentifiers list.     The API does not return results for deleted resources.    The API does not return tags and relationships.   
+   */
+  batchGetAggregateResourceConfig(params: ConfigService.Types.BatchGetAggregateResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.BatchGetAggregateResourceConfigResponse) => void): Request<ConfigService.Types.BatchGetAggregateResourceConfigResponse, AWSError>;
+  /**
+   * Returns the current configuration items for resources that are present in your AWS Config aggregator. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceIdentifiers list.     The API does not return results for deleted resources.    The API does not return tags and relationships.   
+   */
+  batchGetAggregateResourceConfig(callback?: (err: AWSError, data: ConfigService.Types.BatchGetAggregateResourceConfigResponse) => void): Request<ConfigService.Types.BatchGetAggregateResourceConfigResponse, AWSError>;
+  /**
    * Returns the current configuration for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list.     The API does not return results for deleted resources.    The API does not return any tags for the requested resources. This information is filtered out of the supplementaryConfiguration section of the API response.   
    */
   batchGetResourceConfig(params: ConfigService.Types.BatchGetResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.BatchGetResourceConfigResponse) => void): Request<ConfigService.Types.BatchGetResourceConfigResponse, AWSError>;
@@ -220,6 +228,22 @@ declare class ConfigService extends Service {
    */
   getAggregateConfigRuleComplianceSummary(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateConfigRuleComplianceSummaryResponse) => void): Request<ConfigService.Types.GetAggregateConfigRuleComplianceSummaryResponse, AWSError>;
   /**
+   * Returns the resource counts across accounts and regions that are present in your AWS Config aggregator. You can request the resource counts by providing filters and GroupByKey. For example, if the input contains accountID 12345678910 and region us-east-1 in filters, the API returns the count of resources in account ID 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a GroupByKey, the API returns resource counts for all source accounts that are present in your aggregator.
+   */
+  getAggregateDiscoveredResourceCounts(params: ConfigService.Types.GetAggregateDiscoveredResourceCountsRequest, callback?: (err: AWSError, data: ConfigService.Types.GetAggregateDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetAggregateDiscoveredResourceCountsResponse, AWSError>;
+  /**
+   * Returns the resource counts across accounts and regions that are present in your AWS Config aggregator. You can request the resource counts by providing filters and GroupByKey. For example, if the input contains accountID 12345678910 and region us-east-1 in filters, the API returns the count of resources in account ID 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a GroupByKey, the API returns resource counts for all source accounts that are present in your aggregator.
+   */
+  getAggregateDiscoveredResourceCounts(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetAggregateDiscoveredResourceCountsResponse, AWSError>;
+  /**
+   * Returns configuration item that is aggregated for your specific resource in a specific source account and region.
+   */
+  getAggregateResourceConfig(params: ConfigService.Types.GetAggregateResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.GetAggregateResourceConfigResponse) => void): Request<ConfigService.Types.GetAggregateResourceConfigResponse, AWSError>;
+  /**
+   * Returns configuration item that is aggregated for your specific resource in a specific source account and region.
+   */
+  getAggregateResourceConfig(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateResourceConfigResponse) => void): Request<ConfigService.Types.GetAggregateResourceConfigResponse, AWSError>;
+  /**
    * Returns the evaluation results for the specified AWS Config rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.
    */
   getComplianceDetailsByConfigRule(params: ConfigService.Types.GetComplianceDetailsByConfigRuleRequest, callback?: (err: AWSError, data: ConfigService.Types.GetComplianceDetailsByConfigRuleResponse) => void): Request<ConfigService.Types.GetComplianceDetailsByConfigRuleResponse, AWSError>;
@@ -263,6 +287,14 @@ declare class ConfigService extends Service {
    * Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your ConfigurationItems between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config returns the ConfigurationItems for the specified retention period.  The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
    */
   getResourceConfigHistory(callback?: (err: AWSError, data: ConfigService.Types.GetResourceConfigHistoryResponse) => void): Request<ConfigService.Types.GetResourceConfigHistoryResponse, AWSError>;
+  /**
+   * Accepts a resource type and returns a list of resource identifiers that are aggregated for a specific resource type across accounts and regions. A resource identifier includes the resource type, ID, (if available) the custom resource name, source account, and source region. You can narrow the results to include only resources that have specific resource IDs, or a resource name, or source account ID, or source region. For example, if the input consists of accountID 12345678910 and the region is us-east-1 for resource type AWS::EC2::Instance then the API returns all the EC2 instance identifiers of accountID 12345678910 and region us-east-1.
+   */
+  listAggregateDiscoveredResources(params: ConfigService.Types.ListAggregateDiscoveredResourcesRequest, callback?: (err: AWSError, data: ConfigService.Types.ListAggregateDiscoveredResourcesResponse) => void): Request<ConfigService.Types.ListAggregateDiscoveredResourcesResponse, AWSError>;
+  /**
+   * Accepts a resource type and returns a list of resource identifiers that are aggregated for a specific resource type across accounts and regions. A resource identifier includes the resource type, ID, (if available) the custom resource name, source account, and source region. You can narrow the results to include only resources that have specific resource IDs, or a resource name, or source account ID, or source region. For example, if the input consists of accountID 12345678910 and the region is us-east-1 for resource type AWS::EC2::Instance then the API returns all the EC2 instance identifiers of accountID 12345678910 and region us-east-1.
+   */
+  listAggregateDiscoveredResources(callback?: (err: AWSError, data: ConfigService.Types.ListAggregateDiscoveredResourcesResponse) => void): Request<ConfigService.Types.ListAggregateDiscoveredResourcesResponse, AWSError>;
   /**
    * Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that AWS Config has discovered, including those that AWS Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.  You can specify either resource IDs or a resource name, but not both, in the same request.  The response is paginated. By default, AWS Config lists 100 resource identifiers on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.
    */
@@ -432,6 +464,28 @@ declare namespace ConfigService {
     AwsRegion?: AwsRegion;
   }
   export type AggregateEvaluationResultList = AggregateEvaluationResult[];
+  export interface AggregateResourceIdentifier {
+    /**
+     * The 12-digit account ID of the source account.
+     */
+    SourceAccountId: AccountId;
+    /**
+     * The source region where data is aggregated.
+     */
+    SourceRegion: AwsRegion;
+    /**
+     * The ID of the AWS resource.
+     */
+    ResourceId: ResourceId;
+    /**
+     * The type of the AWS resource.
+     */
+    ResourceType: ResourceType;
+    /**
+     * The name of the AWS resource.
+     */
+    ResourceName?: ResourceName;
+  }
   export interface AggregatedSourceStatus {
     /**
      * The source account ID or an organization.
@@ -495,7 +549,7 @@ declare namespace ConfigService {
      */
     version?: Version;
     /**
-     * The 12 digit AWS account ID associated with the resource.
+     * The 12-digit AWS account ID associated with the resource.
      */
     accountId?: AccountId;
     /**
@@ -549,6 +603,26 @@ declare namespace ConfigService {
   }
   export type BaseConfigurationItems = BaseConfigurationItem[];
   export type BaseResourceId = string;
+  export interface BatchGetAggregateResourceConfigRequest {
+    /**
+     * The name of the configuration aggregator.
+     */
+    ConfigurationAggregatorName: ConfigurationAggregatorName;
+    /**
+     * A list of aggregate ResourceIdentifiers objects. 
+     */
+    ResourceIdentifiers: ResourceIdentifiersList;
+  }
+  export interface BatchGetAggregateResourceConfigResponse {
+    /**
+     * A list that contains the current configuration of one or more resources.
+     */
+    BaseConfigurationItems?: BaseConfigurationItems;
+    /**
+     * A list of resource identifiers that were not processed with current scope. The list is empty if all the resources are processed.
+     */
+    UnprocessedResourceIdentifiers?: UnprocessedResourceIdentifierList;
+  }
   export interface BatchGetResourceConfigRequest {
     /**
      * A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID.
@@ -1379,6 +1453,7 @@ declare namespace ConfigService {
      */
     NextToken?: NextToken;
   }
+  export type DiscoveredResourceIdentifierList = AggregateResourceIdentifier[];
   export type EarlierTime = Date;
   export type EmptiableStringWithCharLimit256 = string;
   export interface Evaluation {
@@ -1532,6 +1607,62 @@ declare namespace ConfigService {
      */
     NextToken?: NextToken;
   }
+  export interface GetAggregateDiscoveredResourceCountsRequest {
+    /**
+     * The name of the configuration aggregator.
+     */
+    ConfigurationAggregatorName: ConfigurationAggregatorName;
+    /**
+     * Filters the results based on the ResourceCountFilters object.
+     */
+    Filters?: ResourceCountFilters;
+    /**
+     * The key to group the resource counts.
+     */
+    GroupByKey?: ResourceCountGroupKey;
+    /**
+     * The maximum number of GroupedResourceCount objects returned on each page. The default is 1000. You cannot specify a number greater than 1000. If you specify 0, AWS Config uses the default.
+     */
+    Limit?: GroupByAPILimit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetAggregateDiscoveredResourceCountsResponse {
+    /**
+     * The total number of resources that are present in an aggregator with the filters that you provide.
+     */
+    TotalDiscoveredResources: Long;
+    /**
+     * The key passed into the request object. If GroupByKey is not provided, the result will be empty.
+     */
+    GroupByKey?: StringWithCharLimit256;
+    /**
+     * Returns a list of GroupedResourceCount objects.
+     */
+    GroupedResourceCounts?: GroupedResourceCountList;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetAggregateResourceConfigRequest {
+    /**
+     * The name of the configuration aggregator.
+     */
+    ConfigurationAggregatorName: ConfigurationAggregatorName;
+    /**
+     * An object that identifies aggregate resource.
+     */
+    ResourceIdentifier: AggregateResourceIdentifier;
+  }
+  export interface GetAggregateResourceConfigResponse {
+    /**
+     * Returns a ConfigurationItem object.
+     */
+    ConfigurationItem?: ConfigurationItem;
+  }
   export interface GetComplianceDetailsByConfigRuleRequest {
     /**
      * The name of the AWS Config rule for which you want compliance information.
@@ -1675,10 +1806,53 @@ declare namespace ConfigService {
     nextToken?: NextToken;
   }
   export type GroupByAPILimit = number;
+  export interface GroupedResourceCount {
+    /**
+     * The name of the group that can be region, account ID, or resource type. For example, region1, region2 if the region was chosen as GroupByKey.
+     */
+    GroupName: StringWithCharLimit256;
+    /**
+     * The number of resources in the group.
+     */
+    ResourceCount: Long;
+  }
+  export type GroupedResourceCountList = GroupedResourceCount[];
   export type IncludeGlobalResourceTypes = boolean;
   export type Integer = number;
   export type LaterTime = Date;
   export type Limit = number;
+  export interface ListAggregateDiscoveredResourcesRequest {
+    /**
+     * The name of the configuration aggregator. 
+     */
+    ConfigurationAggregatorName: ConfigurationAggregatorName;
+    /**
+     * The type of resources that you want AWS Config to list in the response.
+     */
+    ResourceType: ResourceType;
+    /**
+     * Filters the results based on the ResourceFilters object.
+     */
+    Filters?: ResourceFilters;
+    /**
+     * The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
+     */
+    Limit?: Limit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAggregateDiscoveredResourcesResponse {
+    /**
+     * Returns a list of ResourceIdentifiers objects.
+     */
+    ResourceIdentifiers?: DiscoveredResourceIdentifierList;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListDiscoveredResourcesRequest {
     /**
      * The type of resources that you want AWS Config to list in the response.
@@ -1882,9 +2056,42 @@ declare namespace ConfigService {
      */
     count?: Long;
   }
+  export interface ResourceCountFilters {
+    /**
+     * The type of the AWS resource.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * The 12-digit ID of the account.
+     */
+    AccountId?: AccountId;
+    /**
+     * The region where the account is located.
+     */
+    Region?: AwsRegion;
+  }
+  export type ResourceCountGroupKey = "RESOURCE_TYPE"|"ACCOUNT_ID"|"AWS_REGION"|string;
   export type ResourceCounts = ResourceCount[];
   export type ResourceCreationTime = Date;
   export type ResourceDeletionTime = Date;
+  export interface ResourceFilters {
+    /**
+     * The 12-digit source account ID.
+     */
+    AccountId?: AccountId;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: ResourceId;
+    /**
+     * The name of the resource.
+     */
+    ResourceName?: ResourceName;
+    /**
+     * The source region.
+     */
+    Region?: AwsRegion;
+  }
   export type ResourceId = string;
   export type ResourceIdList = ResourceId[];
   export interface ResourceIdentifier {
@@ -1906,6 +2113,7 @@ declare namespace ConfigService {
     resourceDeletionTime?: ResourceDeletionTime;
   }
   export type ResourceIdentifierList = ResourceIdentifier[];
+  export type ResourceIdentifiersList = AggregateResourceIdentifier[];
   export interface ResourceKey {
     /**
      * The resource type.
@@ -2012,6 +2220,7 @@ declare namespace ConfigService {
   export type SupplementaryConfigurationName = string;
   export type SupplementaryConfigurationValue = string;
   export type Tags = {[key: string]: Value};
+  export type UnprocessedResourceIdentifierList = AggregateResourceIdentifier[];
   export type Value = string;
   export type Version = string;
   /**

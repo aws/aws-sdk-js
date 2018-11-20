@@ -20,6 +20,14 @@ declare class Iot extends Service {
    */
   acceptCertificateTransfer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Adds a thing to a billing group.
+   */
+  addThingToBillingGroup(params: Iot.Types.AddThingToBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.AddThingToBillingGroupResponse) => void): Request<Iot.Types.AddThingToBillingGroupResponse, AWSError>;
+  /**
+   * Adds a thing to a billing group.
+   */
+  addThingToBillingGroup(callback?: (err: AWSError, data: Iot.Types.AddThingToBillingGroupResponse) => void): Request<Iot.Types.AddThingToBillingGroupResponse, AWSError>;
+  /**
    * Adds a thing to a thing group.
    */
   addThingToThingGroup(params: Iot.Types.AddThingToThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.AddThingToThingGroupResponse) => void): Request<Iot.Types.AddThingToThingGroupResponse, AWSError>;
@@ -116,6 +124,14 @@ declare class Iot extends Service {
    */
   createAuthorizer(callback?: (err: AWSError, data: Iot.Types.CreateAuthorizerResponse) => void): Request<Iot.Types.CreateAuthorizerResponse, AWSError>;
   /**
+   * Creates a billing group.
+   */
+  createBillingGroup(params: Iot.Types.CreateBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
+  /**
+   * Creates a billing group.
+   */
+  createBillingGroup(callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
+  /**
    * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(params: Iot.Types.CreateCertificateFromCsrRequest, callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
@@ -123,6 +139,14 @@ declare class Iot extends Service {
    * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
+  /**
+   * Creates a dynamic thing group.
+   */
+  createDynamicThingGroup(params: Iot.Types.CreateDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateDynamicThingGroupResponse) => void): Request<Iot.Types.CreateDynamicThingGroupResponse, AWSError>;
+  /**
+   * Creates a dynamic thing group.
+   */
+  createDynamicThingGroup(callback?: (err: AWSError, data: Iot.Types.CreateDynamicThingGroupResponse) => void): Request<Iot.Types.CreateDynamicThingGroupResponse, AWSError>;
   /**
    * Creates a job.
    */
@@ -244,6 +268,14 @@ declare class Iot extends Service {
    */
   deleteAuthorizer(callback?: (err: AWSError, data: Iot.Types.DeleteAuthorizerResponse) => void): Request<Iot.Types.DeleteAuthorizerResponse, AWSError>;
   /**
+   * Deletes the billing group.
+   */
+  deleteBillingGroup(params: Iot.Types.DeleteBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteBillingGroupResponse) => void): Request<Iot.Types.DeleteBillingGroupResponse, AWSError>;
+  /**
+   * Deletes the billing group.
+   */
+  deleteBillingGroup(callback?: (err: AWSError, data: Iot.Types.DeleteBillingGroupResponse) => void): Request<Iot.Types.DeleteBillingGroupResponse, AWSError>;
+  /**
    * Deletes a registered CA certificate.
    */
   deleteCACertificate(params: Iot.Types.DeleteCACertificateRequest, callback?: (err: AWSError, data: Iot.Types.DeleteCACertificateResponse) => void): Request<Iot.Types.DeleteCACertificateResponse, AWSError>;
@@ -259,6 +291,14 @@ declare class Iot extends Service {
    * Deletes the specified certificate. A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a dynamic thing group.
+   */
+  deleteDynamicThingGroup(params: Iot.Types.DeleteDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDynamicThingGroupResponse) => void): Request<Iot.Types.DeleteDynamicThingGroupResponse, AWSError>;
+  /**
+   * Deletes a dynamic thing group.
+   */
+  deleteDynamicThingGroup(callback?: (err: AWSError, data: Iot.Types.DeleteDynamicThingGroupResponse) => void): Request<Iot.Types.DeleteDynamicThingGroupResponse, AWSError>;
   /**
    * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur.
    */
@@ -340,11 +380,11 @@ declare class Iot extends Service {
    */
   deleteStream(callback?: (err: AWSError, data: Iot.Types.DeleteStreamResponse) => void): Request<Iot.Types.DeleteStreamResponse, AWSError>;
   /**
-   * Deletes the specified thing.
+   * Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.
    */
   deleteThing(params: Iot.Types.DeleteThingRequest, callback?: (err: AWSError, data: Iot.Types.DeleteThingResponse) => void): Request<Iot.Types.DeleteThingResponse, AWSError>;
   /**
-   * Deletes the specified thing.
+   * Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.
    */
   deleteThing(callback?: (err: AWSError, data: Iot.Types.DeleteThingResponse) => void): Request<Iot.Types.DeleteThingResponse, AWSError>;
   /**
@@ -356,11 +396,11 @@ declare class Iot extends Service {
    */
   deleteThingGroup(callback?: (err: AWSError, data: Iot.Types.DeleteThingGroupResponse) => void): Request<Iot.Types.DeleteThingGroupResponse, AWSError>;
   /**
-   * Deletes the specified thing type . You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
+   * Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
    */
   deleteThingType(params: Iot.Types.DeleteThingTypeRequest, callback?: (err: AWSError, data: Iot.Types.DeleteThingTypeResponse) => void): Request<Iot.Types.DeleteThingTypeResponse, AWSError>;
   /**
-   * Deletes the specified thing type . You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
+   * Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
    */
   deleteThingType(callback?: (err: AWSError, data: Iot.Types.DeleteThingTypeResponse) => void): Request<Iot.Types.DeleteThingTypeResponse, AWSError>;
   /**
@@ -411,6 +451,14 @@ declare class Iot extends Service {
    * Describes an authorizer.
    */
   describeAuthorizer(callback?: (err: AWSError, data: Iot.Types.DescribeAuthorizerResponse) => void): Request<Iot.Types.DescribeAuthorizerResponse, AWSError>;
+  /**
+   * Returns information about a billing group.
+   */
+  describeBillingGroup(params: Iot.Types.DescribeBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DescribeBillingGroupResponse) => void): Request<Iot.Types.DescribeBillingGroupResponse, AWSError>;
+  /**
+   * Returns information about a billing group.
+   */
+  describeBillingGroup(callback?: (err: AWSError, data: Iot.Types.DescribeBillingGroupResponse) => void): Request<Iot.Types.DescribeBillingGroupResponse, AWSError>;
   /**
    * Describes a registered CA certificate.
    */
@@ -564,11 +612,11 @@ declare class Iot extends Service {
    */
   detachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DetachSecurityProfileResponse) => void): Request<Iot.Types.DetachSecurityProfileResponse, AWSError>;
   /**
-   * Detaches the specified principal from the specified thing.
+   * Detaches the specified principal from the specified thing.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
   detachThingPrincipal(params: Iot.Types.DetachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.DetachThingPrincipalResponse) => void): Request<Iot.Types.DetachThingPrincipalResponse, AWSError>;
   /**
-   * Detaches the specified principal from the specified thing.
+   * Detaches the specified principal from the specified thing.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
   detachThingPrincipal(callback?: (err: AWSError, data: Iot.Types.DetachThingPrincipalResponse) => void): Request<Iot.Types.DetachThingPrincipalResponse, AWSError>;
   /**
@@ -707,6 +755,14 @@ declare class Iot extends Service {
    * Lists the authorizers registered in your account.
    */
   listAuthorizers(callback?: (err: AWSError, data: Iot.Types.ListAuthorizersResponse) => void): Request<Iot.Types.ListAuthorizersResponse, AWSError>;
+  /**
+   * Lists the billing groups you have created.
+   */
+  listBillingGroups(params: Iot.Types.ListBillingGroupsRequest, callback?: (err: AWSError, data: Iot.Types.ListBillingGroupsResponse) => void): Request<Iot.Types.ListBillingGroupsResponse, AWSError>;
+  /**
+   * Lists the billing groups you have created.
+   */
+  listBillingGroups(callback?: (err: AWSError, data: Iot.Types.ListBillingGroupsResponse) => void): Request<Iot.Types.ListBillingGroupsResponse, AWSError>;
   /**
    * Lists the CA certificates registered for your AWS account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.
    */
@@ -860,6 +916,14 @@ declare class Iot extends Service {
    */
   listStreams(callback?: (err: AWSError, data: Iot.Types.ListStreamsResponse) => void): Request<Iot.Types.ListStreamsResponse, AWSError>;
   /**
+   * Lists the tags (metadata) you have assigned to the resource.
+   */
+  listTagsForResource(params: Iot.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Iot.Types.ListTagsForResourceResponse) => void): Request<Iot.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags (metadata) you have assigned to the resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Iot.Types.ListTagsForResourceResponse) => void): Request<Iot.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * List targets for the specified policy.
    */
   listTargetsForPolicy(params: Iot.Types.ListTargetsForPolicyRequest, callback?: (err: AWSError, data: Iot.Types.ListTargetsForPolicyResponse) => void): Request<Iot.Types.ListTargetsForPolicyResponse, AWSError>;
@@ -932,6 +996,14 @@ declare class Iot extends Service {
    */
   listThings(callback?: (err: AWSError, data: Iot.Types.ListThingsResponse) => void): Request<Iot.Types.ListThingsResponse, AWSError>;
   /**
+   * Lists the things you have added to the given billing group.
+   */
+  listThingsInBillingGroup(params: Iot.Types.ListThingsInBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsInBillingGroupResponse) => void): Request<Iot.Types.ListThingsInBillingGroupResponse, AWSError>;
+  /**
+   * Lists the things you have added to the given billing group.
+   */
+  listThingsInBillingGroup(callback?: (err: AWSError, data: Iot.Types.ListThingsInBillingGroupResponse) => void): Request<Iot.Types.ListThingsInBillingGroupResponse, AWSError>;
+  /**
    * Lists the things in the specified group.
    */
   listThingsInThingGroup(params: Iot.Types.ListThingsInThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsInThingGroupResponse) => void): Request<Iot.Types.ListThingsInThingGroupResponse, AWSError>;
@@ -995,6 +1067,14 @@ declare class Iot extends Service {
    * Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates. This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.
    */
   rejectCertificateTransfer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the given thing from the billing group.
+   */
+  removeThingFromBillingGroup(params: Iot.Types.RemoveThingFromBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
+  /**
+   * Removes the given thing from the billing group.
+   */
+  removeThingFromBillingGroup(callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
   /**
    * Remove the specified thing from the specified group.
    */
@@ -1084,6 +1164,14 @@ declare class Iot extends Service {
    */
   stopThingRegistrationTask(callback?: (err: AWSError, data: Iot.Types.StopThingRegistrationTaskResponse) => void): Request<Iot.Types.StopThingRegistrationTaskResponse, AWSError>;
   /**
+   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   */
+  tagResource(params: Iot.Types.TagResourceRequest, callback?: (err: AWSError, data: Iot.Types.TagResourceResponse) => void): Request<Iot.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Iot.Types.TagResourceResponse) => void): Request<Iot.Types.TagResourceResponse, AWSError>;
+  /**
    * Tests if a specified principal is authorized to perform an AWS IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the AWS IoT device gateway.
    */
   testAuthorization(params: Iot.Types.TestAuthorizationRequest, callback?: (err: AWSError, data: Iot.Types.TestAuthorizationResponse) => void): Request<Iot.Types.TestAuthorizationResponse, AWSError>;
@@ -1108,6 +1196,14 @@ declare class Iot extends Service {
    */
   transferCertificate(callback?: (err: AWSError, data: Iot.Types.TransferCertificateResponse) => void): Request<Iot.Types.TransferCertificateResponse, AWSError>;
   /**
+   * Removes the given tags (metadata) from the resource.
+   */
+  untagResource(params: Iot.Types.UntagResourceRequest, callback?: (err: AWSError, data: Iot.Types.UntagResourceResponse) => void): Request<Iot.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the given tags (metadata) from the resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Iot.Types.UntagResourceResponse) => void): Request<Iot.Types.UntagResourceResponse, AWSError>;
+  /**
    * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
    */
   updateAccountAuditConfiguration(params: Iot.Types.UpdateAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateAccountAuditConfigurationResponse) => void): Request<Iot.Types.UpdateAccountAuditConfigurationResponse, AWSError>;
@@ -1123,6 +1219,14 @@ declare class Iot extends Service {
    * Updates an authorizer.
    */
   updateAuthorizer(callback?: (err: AWSError, data: Iot.Types.UpdateAuthorizerResponse) => void): Request<Iot.Types.UpdateAuthorizerResponse, AWSError>;
+  /**
+   * Updates information about the billing group.
+   */
+  updateBillingGroup(params: Iot.Types.UpdateBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateBillingGroupResponse) => void): Request<Iot.Types.UpdateBillingGroupResponse, AWSError>;
+  /**
+   * Updates information about the billing group.
+   */
+  updateBillingGroup(callback?: (err: AWSError, data: Iot.Types.UpdateBillingGroupResponse) => void): Request<Iot.Types.UpdateBillingGroupResponse, AWSError>;
   /**
    * Updates a registered CA certificate.
    */
@@ -1140,6 +1244,14 @@ declare class Iot extends Service {
    */
   updateCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates a dynamic thing group.
+   */
+  updateDynamicThingGroup(params: Iot.Types.UpdateDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDynamicThingGroupResponse) => void): Request<Iot.Types.UpdateDynamicThingGroupResponse, AWSError>;
+  /**
+   * Updates a dynamic thing group.
+   */
+  updateDynamicThingGroup(callback?: (err: AWSError, data: Iot.Types.UpdateDynamicThingGroupResponse) => void): Request<Iot.Types.UpdateDynamicThingGroupResponse, AWSError>;
+  /**
    * Updates the event configurations.
    */
   updateEventConfigurations(params: Iot.Types.UpdateEventConfigurationsRequest, callback?: (err: AWSError, data: Iot.Types.UpdateEventConfigurationsResponse) => void): Request<Iot.Types.UpdateEventConfigurationsResponse, AWSError>;
@@ -1155,6 +1267,14 @@ declare class Iot extends Service {
    * Updates the search configuration.
    */
   updateIndexingConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdateIndexingConfigurationResponse) => void): Request<Iot.Types.UpdateIndexingConfigurationResponse, AWSError>;
+  /**
+   * Updates supported fields of the specified job.
+   */
+  updateJob(params: Iot.Types.UpdateJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates supported fields of the specified job.
+   */
+  updateJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a role alias.
    */
@@ -1221,6 +1341,33 @@ declare class Iot extends Service {
   validateSecurityProfileBehaviors(callback?: (err: AWSError, data: Iot.Types.ValidateSecurityProfileBehaviorsResponse) => void): Request<Iot.Types.ValidateSecurityProfileBehaviorsResponse, AWSError>;
 }
 declare namespace Iot {
+  export type AbortAction = "CANCEL"|string;
+  export interface AbortConfig {
+    /**
+     * The list of abort criteria to define rules to abort the job.
+     */
+    criteriaList: AbortCriteriaList;
+  }
+  export interface AbortCriteria {
+    /**
+     * The type of job execution failure to define a rule to initiate a job abort.
+     */
+    failureType: JobExecutionFailureType;
+    /**
+     * The type of abort action to initiate a job abort.
+     */
+    action: AbortAction;
+    /**
+     * The threshold as a percentage of the total number of executed things that will initiate a job abort. AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).
+     */
+    thresholdPercentage: AbortThresholdPercentage;
+    /**
+     * Minimum number of executed things before evaluating an abort rule.
+     */
+    minNumberOfExecutedThings: MinimumNumberOfExecutedThings;
+  }
+  export type AbortCriteriaList = AbortCriteria[];
+  export type AbortThresholdPercentage = number;
   export interface AcceptCertificateTransferRequest {
     /**
      * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
@@ -1326,6 +1473,26 @@ declare namespace Iot {
     violationStartTime?: Timestamp;
   }
   export type ActiveViolations = ActiveViolation[];
+  export interface AddThingToBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName?: BillingGroupName;
+    /**
+     * The ARN of the billing group.
+     */
+    billingGroupArn?: BillingGroupArn;
+    /**
+     * The name of the thing to be added to the billing group.
+     */
+    thingName?: ThingName;
+    /**
+     * The ARN of the thing to be added to the billing group.
+     */
+    thingArn?: ThingArn;
+  }
+  export interface AddThingToBillingGroupResponse {
+  }
   export interface AddThingToThingGroupRequest {
     /**
      * The name of the group to which you are adding a thing.
@@ -1343,6 +1510,10 @@ declare namespace Iot {
      * The ARN of the thing to add to a group.
      */
     thingArn?: ThingArn;
+    /**
+     * Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.
+     */
+    overrideDynamicGroups?: OverrideDynamicGroups;
   }
   export interface AddThingToThingGroupResponse {
   }
@@ -1695,6 +1866,23 @@ declare namespace Iot {
   export type BehaviorMetric = string;
   export type BehaviorName = string;
   export type Behaviors = Behavior[];
+  export type BillingGroupArn = string;
+  export type BillingGroupDescription = string;
+  export type BillingGroupId = string;
+  export interface BillingGroupMetadata {
+    /**
+     * The date the billing group was created.
+     */
+    creationDate?: CreationDate;
+  }
+  export type BillingGroupName = string;
+  export type BillingGroupNameAndArnList = GroupNameAndArn[];
+  export interface BillingGroupProperties {
+    /**
+     * The description of the billing group.
+     */
+    billingGroupDescription?: BillingGroupDescription;
+  }
   export type Boolean = boolean;
   export type BucketName = string;
   export interface CACertificate {
@@ -1804,6 +1992,10 @@ declare namespace Iot {
      * The unique identifier you assigned to this job when it was created.
      */
     jobId: JobId;
+    /**
+     * (Optional)A reason code string that explains why the job was canceled.
+     */
+    reasonCode?: ReasonCode;
     /**
      * An optional comment string describing why the job was canceled.
      */
@@ -2014,6 +2206,7 @@ declare namespace Iot {
      */
     Enabled?: Enabled;
   }
+  export type ConnectivityTimestamp = number;
   export type Count = number;
   export interface CreateAuthorizerRequest {
     /**
@@ -2047,6 +2240,34 @@ declare namespace Iot {
      */
     authorizerArn?: AuthorizerArn;
   }
+  export interface CreateBillingGroupRequest {
+    /**
+     * The name you wish to give to the billing group.
+     */
+    billingGroupName: BillingGroupName;
+    /**
+     * The properties of the billing group.
+     */
+    billingGroupProperties?: BillingGroupProperties;
+    /**
+     * Metadata which can be used to manage the billing group.
+     */
+    tags?: TagList;
+  }
+  export interface CreateBillingGroupResponse {
+    /**
+     * The name you gave to the billing group.
+     */
+    billingGroupName?: BillingGroupName;
+    /**
+     * The ARN of the billing group.
+     */
+    billingGroupArn?: BillingGroupArn;
+    /**
+     * The ID of the billing group.
+     */
+    billingGroupId?: BillingGroupId;
+  }
   export interface CreateCertificateFromCsrRequest {
     /**
      * The certificate signing request (CSR).
@@ -2071,6 +2292,58 @@ declare namespace Iot {
      */
     certificatePem?: CertificatePem;
   }
+  export interface CreateDynamicThingGroupRequest {
+    /**
+     * The dynamic thing group name to create.
+     */
+    thingGroupName: ThingGroupName;
+    /**
+     * The dynamic thing group properties.
+     */
+    thingGroupProperties?: ThingGroupProperties;
+    /**
+     * The dynamic thing group index name.  Currently one index is supported: "AWS_Things". 
+     */
+    indexName?: IndexName;
+    /**
+     * The dynamic thing group search query string. See Query Syntax for information about query string syntax.
+     */
+    queryString: QueryString;
+    /**
+     * The dynamic thing group query version.  Currently one query version is supported: "2017-09-30". If not specified, the query version defaults to this value. 
+     */
+    queryVersion?: QueryVersion;
+    /**
+     * Metadata which can be used to manage the dynamic thing group.
+     */
+    tags?: TagList;
+  }
+  export interface CreateDynamicThingGroupResponse {
+    /**
+     * The dynamic thing group name.
+     */
+    thingGroupName?: ThingGroupName;
+    /**
+     * The dynamic thing group ARN.
+     */
+    thingGroupArn?: ThingGroupArn;
+    /**
+     * The dynamic thing group ID.
+     */
+    thingGroupId?: ThingGroupId;
+    /**
+     * The dynamic thing group index name.
+     */
+    indexName?: IndexName;
+    /**
+     * The dynamic thing group search query string.
+     */
+    queryString?: QueryString;
+    /**
+     * The dynamic thing group query version.
+     */
+    queryVersion?: QueryVersion;
+  }
   export interface CreateJobRequest {
     /**
      * A job identifier which must be unique for your AWS account. We recommend using a UUID. Alpha-numeric characters, "-" and "_" are valid for use here.
@@ -2085,7 +2358,7 @@ declare namespace Iot {
      */
     documentSource?: JobDocumentSource;
     /**
-     * The job document.
+     * The job document.  If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document. The placeholder link is of the following form:  ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}  where bucket is your bucket name and key is the object in the bucket to which you are linking. 
      */
     document?: JobDocument;
     /**
@@ -2105,9 +2378,17 @@ declare namespace Iot {
      */
     jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
     /**
+     * Allows you to create criteria to abort a job.
+     */
+    abortConfig?: AbortConfig;
+    /**
      * Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to TIMED_OUT.
      */
     timeoutConfig?: TimeoutConfig;
+    /**
+     * Metadata which can be used to manage the job.
+     */
+    tags?: TagList;
   }
   export interface CreateJobResponse {
     /**
@@ -2332,6 +2613,10 @@ declare namespace Iot {
      * Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.
      */
     alertTargets?: AlertTargets;
+    /**
+     * Metadata which can be used to manage the security profile.
+     */
+    tags?: TagList;
   }
   export interface CreateSecurityProfileResponse {
     /**
@@ -2392,6 +2677,10 @@ declare namespace Iot {
      * The thing group properties.
      */
     thingGroupProperties?: ThingGroupProperties;
+    /**
+     * Metadata which can be used to manage the thing group.
+     */
+    tags?: TagList;
   }
   export interface CreateThingGroupResponse {
     /**
@@ -2420,6 +2709,10 @@ declare namespace Iot {
      * The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:  {\"attributes\":{\"string1\":\"string2\"}} 
      */
     attributePayload?: AttributePayload;
+    /**
+     * The name of the billing group the thing will be added to.
+     */
+    billingGroupName?: BillingGroupName;
   }
   export interface CreateThingResponse {
     /**
@@ -2444,6 +2737,10 @@ declare namespace Iot {
      * The ThingTypeProperties for the thing type to create. It contains information about the new thing type including a description, and a list of searchable thing attribute names.
      */
     thingTypeProperties?: ThingTypeProperties;
+    /**
+     * Metadata which can be used to manage the thing type.
+     */
+    tags?: TagList;
   }
   export interface CreateThingTypeResponse {
     /**
@@ -2510,6 +2807,18 @@ declare namespace Iot {
   }
   export interface DeleteAuthorizerResponse {
   }
+  export interface DeleteBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName: BillingGroupName;
+    /**
+     * The expected version of the billing group. If the version of the billing group does not match the expected version specified in the request, the DeleteBillingGroup request is rejected with a VersionConflictException.
+     */
+    expectedVersion?: OptionalVersion;
+  }
+  export interface DeleteBillingGroupResponse {
+  }
   export interface DeleteCACertificateRequest {
     /**
      * The ID of the certificate to delete. (The last part of the certificate ARN contains the certificate ID.)
@@ -2527,6 +2836,18 @@ declare namespace Iot {
      * Forces a certificate request to be deleted.
      */
     forceDelete?: ForceDelete;
+  }
+  export interface DeleteDynamicThingGroupRequest {
+    /**
+     * The name of the dynamic thing group to delete.
+     */
+    thingGroupName: ThingGroupName;
+    /**
+     * The expected version of the dynamic thing group to delete.
+     */
+    expectedVersion?: OptionalVersion;
+  }
+  export interface DeleteDynamicThingGroupResponse {
   }
   export interface DeleteJobExecutionRequest {
     /**
@@ -2762,6 +3083,38 @@ declare namespace Iot {
      */
     authorizerDescription?: AuthorizerDescription;
   }
+  export interface DescribeBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName: BillingGroupName;
+  }
+  export interface DescribeBillingGroupResponse {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName?: BillingGroupName;
+    /**
+     * The ID of the billing group.
+     */
+    billingGroupId?: BillingGroupId;
+    /**
+     * The ARN of the billing group.
+     */
+    billingGroupArn?: BillingGroupArn;
+    /**
+     * The version of the billing group.
+     */
+    version?: Version;
+    /**
+     * The properties of the billing group.
+     */
+    billingGroupProperties?: BillingGroupProperties;
+    /**
+     * Additional information about the billing group.
+     */
+    billingGroupMetadata?: BillingGroupMetadata;
+  }
   export interface DescribeCACertificateRequest {
     /**
      * The CA certificate identifier.
@@ -2842,7 +3195,7 @@ declare namespace Iot {
      */
     indexStatus?: IndexStatus;
     /**
-     * Contains a value that specifies the type of indexing performed. Valid values are:   REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.  
+     * Contains a value that specifies the type of indexing performed. Valid values are:   REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry data and shadow data.   REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index will contain registry data and thing connectivity status data.   REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index will contain registry data, shadow data, and thing connectivity status data.  
      */
     schema?: IndexSchema;
   }
@@ -3009,6 +3362,22 @@ declare namespace Iot {
      * Thing group metadata.
      */
     thingGroupMetadata?: ThingGroupMetadata;
+    /**
+     * The dynamic thing group index name.
+     */
+    indexName?: IndexName;
+    /**
+     * The dynamic thing group search query string.
+     */
+    queryString?: QueryString;
+    /**
+     * The dynamic thing group query version.
+     */
+    queryVersion?: QueryVersion;
+    /**
+     * The dynamic thing group status.
+     */
+    status?: DynamicGroupStatus;
   }
   export interface DescribeThingRegistrationTaskRequest {
     /**
@@ -3101,6 +3470,10 @@ declare namespace Iot {
      * The current version of the thing record in the registry.  To avoid unintentional changes to the information in the registry, you can pass the version information in the expectedVersion parameter of the UpdateThing and DeleteThing calls. 
      */
     version?: Version;
+    /**
+     * The name of the billing group the thing belongs to.
+     */
+    billingGroupName?: BillingGroupName;
   }
   export interface DescribeThingTypeRequest {
     /**
@@ -3192,6 +3565,7 @@ declare namespace Iot {
     ruleName: RuleName;
   }
   export type DurationSeconds = number;
+  export type DynamicGroupStatus = "ACTIVE"|"BUILDING"|"REBUILDING"|string;
   export interface DynamoDBAction {
     /**
      * The name of the DynamoDB table.
@@ -3319,6 +3693,20 @@ declare namespace Iot {
      * The policies that denied the authorization.
      */
     policies?: Policies;
+  }
+  export interface ExponentialRolloutRate {
+    /**
+     * The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.
+     */
+    baseRatePerMinute: RolloutRatePerMinute;
+    /**
+     * The exponential factor to increase the rate of rollout for a job.
+     */
+    incrementFactor: IncrementFactor;
+    /**
+     * The criteria to initiate the increase in rate of rollout for a job. AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+     */
+    rateIncreaseCriteria: RateIncreaseCriteria;
   }
   export type FailedChecksCount = number;
   export type FailedThings = number;
@@ -3567,6 +3955,7 @@ declare namespace Iot {
   export type InProgressChecksCount = number;
   export type InProgressThings = number;
   export type InProgressTimeoutInMinutes = number;
+  export type IncrementFactor = number;
   export type IndexName = string;
   export type IndexNamesList = IndexName[];
   export type IndexSchema = string;
@@ -3611,6 +4000,10 @@ declare namespace Iot {
      */
     forceCanceled?: Forced;
     /**
+     * If the job was updated, provides the reason code for the update.
+     */
+    reasonCode?: ReasonCode;
+    /**
      * If the job was updated, describes the reason for the update.
      */
     comment?: Comment;
@@ -3630,6 +4023,10 @@ declare namespace Iot {
      * Allows you to create a staged rollout of a job.
      */
     jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
+    /**
+     * Configuration for criteria to abort the job.
+     */
+    abortConfig?: AbortConfig;
     /**
      * The time, in milliseconds since the epoch, when the job was created.
      */
@@ -3697,10 +4094,11 @@ declare namespace Iot {
      */
     versionNumber?: VersionNumber;
     /**
-     * The estimated number of seconds that remain before the job execution status will be changed to TIMED_OUT.
+     * The estimated number of seconds that remain before the job execution status will be changed to TIMED_OUT. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The actual job execution timeout can occur up to 60 seconds later than the estimated duration. This value will not be included if the job execution has reached a terminal status.
      */
     approximateSecondsBeforeTimedOut?: ApproximateSecondsBeforeTimedOut;
   }
+  export type JobExecutionFailureType = "FAILED"|"REJECTED"|"TIMED_OUT"|"ALL"|string;
   export type JobExecutionStatus = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"TIMED_OUT"|"REJECTED"|"REMOVED"|"CANCELED"|string;
   export interface JobExecutionStatusDetails {
     /**
@@ -3757,6 +4155,10 @@ declare namespace Iot {
      * The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.
      */
     maximumPerMinute?: MaxJobExecutionsPerMin;
+    /**
+     * The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout.
+     */
+    exponentialRate?: ExponentialRolloutRate;
   }
   export type JobId = string;
   export interface JobProcessDetails {
@@ -4029,6 +4431,30 @@ declare namespace Iot {
      * A marker used to get the next set of results.
      */
     nextMarker?: Marker;
+  }
+  export interface ListBillingGroupsRequest {
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return per request.
+     */
+    maxResults?: RegistryMaxResults;
+    /**
+     * Limit the results to billing groups whose names have the given prefix.
+     */
+    namePrefixFilter?: BillingGroupName;
+  }
+  export interface ListBillingGroupsResponse {
+    /**
+     * The list of billing groups.
+     */
+    billingGroups?: BillingGroupNameAndArnList;
+    /**
+     * The token used to get the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListCACertificatesRequest {
     /**
@@ -4498,6 +4924,26 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The list of tags assigned to the resource.
+     */
+    tags?: TagList;
+    /**
+     * The token used to get the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListTargetsForPolicyRequest {
     /**
      * The policy name.
@@ -4691,6 +5137,30 @@ declare namespace Iot {
     thingTypes?: ThingTypeList;
     /**
      * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListThingsInBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName: BillingGroupName;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return per request.
+     */
+    maxResults?: RegistryMaxResults;
+  }
+  export interface ListThingsInBillingGroupResponse {
+    /**
+     * A list of things in the billing group.
+     */
+    things?: ThingNameList;
+    /**
+     * The token used to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -4896,6 +5366,7 @@ declare namespace Iot {
      */
     ports?: Ports;
   }
+  export type MinimumNumberOfExecutedThings = number;
   export type MissingContextValue = string;
   export type MissingContextValues = MissingContextValue[];
   export type NextToken = string;
@@ -4915,6 +5386,7 @@ declare namespace Iot {
     additionalInfo?: StringMap;
   }
   export type NonCompliantResourcesCount = number;
+  export type NumberOfThings = number;
   export type OTAUpdateArn = string;
   export type OTAUpdateDescription = string;
   export type OTAUpdateErrorMessage = string;
@@ -5045,6 +5517,7 @@ declare namespace Iot {
     creationDate?: DateType;
   }
   export type OutgoingCertificates = OutgoingCertificate[];
+  export type OverrideDynamicGroups = boolean;
   export type PageSize = number;
   export type Parameter = string;
   export type Parameters = {[key: string]: Value};
@@ -5131,6 +5604,17 @@ declare namespace Iot {
   export type QueuedThings = number;
   export type RangeKeyField = string;
   export type RangeKeyValue = string;
+  export interface RateIncreaseCriteria {
+    /**
+     * The threshold for number of notified things that will initiate the increase in rate of rollout.
+     */
+    numberOfNotifiedThings?: NumberOfThings;
+    /**
+     * The threshold for number of succeeded things that will initiate the increase in rate of rollout.
+     */
+    numberOfSucceededThings?: NumberOfThings;
+  }
+  export type ReasonCode = string;
   export type ReasonForNonCompliance = string;
   export type ReasonForNonComplianceCode = string;
   export type Recursive = boolean;
@@ -5256,6 +5740,26 @@ declare namespace Iot {
   }
   export type RelatedResources = RelatedResource[];
   export type RemoveAutoRegistration = boolean;
+  export interface RemoveThingFromBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName?: BillingGroupName;
+    /**
+     * The ARN of the billing group.
+     */
+    billingGroupArn?: BillingGroupArn;
+    /**
+     * The name of the thing to be removed from the billing group.
+     */
+    thingName?: ThingName;
+    /**
+     * The ARN of the thing to be removed from the billing group.
+     */
+    thingArn?: ThingArn;
+  }
+  export interface RemoveThingFromBillingGroupResponse {
+  }
   export interface RemoveThingFromThingGroupRequest {
     /**
      * The group name.
@@ -5365,6 +5869,7 @@ declare namespace Iot {
   }
   export type RoleAliases = RoleAlias[];
   export type RoleArn = string;
+  export type RolloutRatePerMinute = number;
   export type RuleArn = string;
   export type RuleName = string;
   export interface S3Action {
@@ -5788,6 +6293,32 @@ declare namespace Iot {
   export type StringMap = {[key: string]: String};
   export type SucceededThings = number;
   export type TableName = string;
+  export interface Tag {
+    /**
+     * The tag's key.
+     */
+    Key?: TagKey;
+    /**
+     * The tag's value.
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The new or modified tags for the resource.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Target = string;
   export type TargetArn = string;
   export type TargetAuditCheckNames = AuditCheckName[];
@@ -5918,6 +6449,17 @@ declare namespace Iot {
     version?: Version;
   }
   export type ThingAttributeList = ThingAttribute[];
+  export interface ThingConnectivity {
+    /**
+     * True if the thing is connected to the AWS IoT service, false if it is not connected.
+     */
+    connected?: Boolean;
+    /**
+     * The epoch time (in milliseconds) when the thing last connected or disconnected. Note that if the thing has been disconnected for more than a few weeks, the time value can be missing.
+     */
+    timestamp?: ConnectivityTimestamp;
+  }
+  export type ThingConnectivityIndexingMode = "OFF"|"STATUS"|string;
   export interface ThingDocument {
     /**
      * The thing name.
@@ -5943,6 +6485,10 @@ declare namespace Iot {
      * The shadow.
      */
     shadow?: JsonDocument;
+    /**
+     * Indicates whether or not the thing is connected to the AWS IoT service.
+     */
+    connectivity?: ThingConnectivity;
   }
   export type ThingDocumentList = ThingDocument[];
   export type ThingGroupArn = string;
@@ -6009,9 +6555,13 @@ declare namespace Iot {
   export type ThingId = string;
   export interface ThingIndexingConfiguration {
     /**
-     * Thing indexing mode. Valid values are:    REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.   OFF - Thing indexing is disabled.  
+     * Thing indexing mode. Valid values are:   REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.   OFF - Thing indexing is disabled.  
      */
     thingIndexingMode: ThingIndexingMode;
+    /**
+     * Thing connectivity indexing mode. Valid values are:    STATUS – Your thing index will contain connectivity status. In order to enable thing connectivity indexing, thingIndexMode must not be set to OFF.   OFF - Thing connectivity status indexing is disabled.  
+     */
+    thingConnectivityIndexingMode?: ThingConnectivityIndexingMode;
   }
   export type ThingIndexingMode = "OFF"|"REGISTRY"|"REGISTRY_AND_SHADOW"|string;
   export type ThingName = string;
@@ -6066,7 +6616,7 @@ declare namespace Iot {
   export type TimedOutThings = number;
   export interface TimeoutConfig {
     /**
-     * Specifies the amount of time, in minutes, this device has to finish execution of this job. A timer is started, or restarted, whenever this job's execution status is specified as IN_PROGRESS with this field populated. If the job execution status is not set to a terminal state before the timer expires, or before another job execution status update is sent with this field populated, the status will be automatically set to TIMED_OUT. Note that setting/resetting this timer has no effect on the job execution timeout timer which may have been specified when the job was created (CreateJobExecution using the field timeoutConfig).
+     * Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can't be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal TIMED_OUT status.
      */
     inProgressTimeoutInMinutes?: InProgressTimeoutInMinutes;
   }
@@ -6205,6 +6755,18 @@ declare namespace Iot {
   }
   export type UndoDeprecate = boolean;
   export type UnsignedLong = number;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * A list of the keys of the tags to be removed from the resource.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateAccountAuditConfigurationRequest {
     /**
      * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit.
@@ -6253,6 +6815,26 @@ declare namespace Iot {
      */
     authorizerArn?: AuthorizerArn;
   }
+  export interface UpdateBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName: BillingGroupName;
+    /**
+     * The properties of the billing group.
+     */
+    billingGroupProperties: BillingGroupProperties;
+    /**
+     * The expected version of the billing group. If the version of the billing group does not match the expected version specified in the request, the UpdateBillingGroup request is rejected with a VersionConflictException.
+     */
+    expectedVersion?: OptionalVersion;
+  }
+  export interface UpdateBillingGroupResponse {
+    /**
+     * The latest version of the billing group.
+     */
+    version?: Version;
+  }
   export interface UpdateCACertificateRequest {
     /**
      * The CA certificate identifier.
@@ -6285,6 +6867,38 @@ declare namespace Iot {
      */
     newStatus: CertificateStatus;
   }
+  export interface UpdateDynamicThingGroupRequest {
+    /**
+     * The name of the dynamic thing group to update.
+     */
+    thingGroupName: ThingGroupName;
+    /**
+     * The dynamic thing group properties to update.
+     */
+    thingGroupProperties: ThingGroupProperties;
+    /**
+     * The expected version of the dynamic thing group to update.
+     */
+    expectedVersion?: OptionalVersion;
+    /**
+     * The dynamic thing group index to update.  Currently one index is supported: 'AWS_Things'. 
+     */
+    indexName?: IndexName;
+    /**
+     * The dynamic thing group search query string to update.
+     */
+    queryString?: QueryString;
+    /**
+     * The dynamic thing group query version to update.  Currently one query version is supported: "2017-09-30". If not specified, the query version defaults to this value. 
+     */
+    queryVersion?: QueryVersion;
+  }
+  export interface UpdateDynamicThingGroupResponse {
+    /**
+     * The dynamic thing group version.
+     */
+    version?: Version;
+  }
   export interface UpdateEventConfigurationsRequest {
     /**
      * The new event configuration values.
@@ -6304,6 +6918,32 @@ declare namespace Iot {
     thingGroupIndexingConfiguration?: ThingGroupIndexingConfiguration;
   }
   export interface UpdateIndexingConfigurationResponse {
+  }
+  export interface UpdateJobRequest {
+    /**
+     * The ID of the job to be updated.
+     */
+    jobId: JobId;
+    /**
+     * A short text description of the job.
+     */
+    description?: JobDescription;
+    /**
+     * Configuration information for pre-signed S3 URLs.
+     */
+    presignedUrlConfig?: PresignedUrlConfig;
+    /**
+     * Allows you to create a staged rollout of the job.
+     */
+    jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
+    /**
+     * Allows you to create criteria to abort a job.
+     */
+    abortConfig?: AbortConfig;
+    /**
+     * Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to TIMED_OUT. 
+     */
+    timeoutConfig?: TimeoutConfig;
   }
   export interface UpdateRoleAliasRequest {
     /**
@@ -6482,6 +7122,10 @@ declare namespace Iot {
      * The groups from which the thing will be removed.
      */
     thingGroupsToRemove?: ThingGroupList;
+    /**
+     * Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.
+     */
+    overrideDynamicGroups?: OverrideDynamicGroups;
   }
   export interface UpdateThingGroupsForThingResponse {
   }

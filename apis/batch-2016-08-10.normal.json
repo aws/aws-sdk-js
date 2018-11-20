@@ -54,7 +54,7 @@
           "shape": "ServerException"
         }
       ],
-      "documentation": "<p>Creates an AWS Batch compute environment. You can create <code>MANAGED</code> or <code>UNMANAGED</code> compute environments.</p> <p>In a managed compute environment, AWS Batch manages the capacity and instance types of the compute resources within the environment, based on the compute resource specification that you define or <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html\">launch template</a> that you specify when you create the compute environment. You can choose to use Amazon EC2 On-Demand Instances or Spot Instances in your managed compute environment. You can optionally set a maximum price so that Spot Instances only launch when the Spot Instance price is below a specified percentage of the On-Demand price.</p> <p>In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html\">Container Instance AMIs</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. After you have created your unmanaged compute environment, you can use the <a>DescribeComputeEnvironments</a> operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html\">Launching an Amazon ECS Container Instance</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>AWS Batch does not upgrade the AMIs in a compute environment after it is created (for example, when a newer version of the Amazon ECS-optimized AMI is available). You are responsible for the management of the guest operating system (including updates and security patches) and any additional application software or utilities that you install on the compute resources. To use a new AMI for your AWS Batch jobs:</p> <ol> <li> <p>Create a new compute environment with the new AMI.</p> </li> <li> <p>Add the compute environment to an existing job queue.</p> </li> <li> <p>Remove the old compute environment from your job queue.</p> </li> <li> <p>Delete the old compute environment.</p> </li> </ol> </note>"
+      "documentation": "<p>Creates an AWS Batch compute environment. You can create <code>MANAGED</code> or <code>UNMANAGED</code> compute environments.</p> <p>In a managed compute environment, AWS Batch manages the capacity and instance types of the compute resources within the environment. This is based on the compute resource specification that you define or the <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html\">launch template</a> that you specify when you create the compute environment. You can choose to use Amazon EC2 On-Demand Instances or Spot Instances in your managed compute environment. You can optionally set a maximum price so that Spot Instances only launch when the Spot Instance price is below a specified percentage of the On-Demand price.</p> <note> <p>Multi-node parallel jobs are not supported on Spot Instances.</p> </note> <p>In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html\">Container Instance AMIs</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. After you have created your unmanaged compute environment, you can use the <a>DescribeComputeEnvironments</a> operation to find the Amazon ECS cluster that is associated with it. Then, manually launch your container instances into that Amazon ECS cluster. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html\">Launching an Amazon ECS Container Instance</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>AWS Batch does not upgrade the AMIs in a compute environment after it is created (for example, when a newer version of the Amazon ECS-optimized AMI is available). You are responsible for the management of the guest operating system (including updates and security patches) and any additional application software or utilities that you install on the compute resources. To use a new AMI for your AWS Batch jobs:</p> <ol> <li> <p>Create a new compute environment with the new AMI.</p> </li> <li> <p>Add the compute environment to an existing job queue.</p> </li> <li> <p>Remove the old compute environment from your job queue.</p> </li> <li> <p>Delete the old compute environment.</p> </li> </ol> </note>"
     },
     "CreateJobQueue": {
       "name": "CreateJobQueue",
@@ -252,7 +252,7 @@
           "shape": "ServerException"
         }
       ],
-      "documentation": "<p>Returns a list of AWS Batch jobs. You must specify either a job queue to return a list of jobs in that job queue, or an array job ID to return a list of that job's children. You cannot specify both a job queue and an array job ID.</p> <p>You can filter the results by job status with the <code>jobStatus</code> parameter. If you do not specify a status, only <code>RUNNING</code> jobs are returned.</p>"
+      "documentation": "<p>Returns a list of AWS Batch jobs.</p> <p>You must specify only one of the following:</p> <ul> <li> <p>a job queue ID to return a list of jobs in that job queue</p> </li> <li> <p>a multi-node parallel job ID to return a list of that job's nodes</p> </li> <li> <p>an array job ID to return a list of that job's children</p> </li> </ul> <p>You can filter the results by job status with the <code>jobStatus</code> parameter. If you do not specify a status, only <code>RUNNING</code> jobs are returned.</p>"
     },
     "RegisterJobDefinition": {
       "name": "RegisterJobDefinition",
@@ -446,6 +446,10 @@
         "logStreamName": {
           "shape": "String",
           "documentation": "<p>The name of the CloudWatch Logs log stream associated with the container. The log group for AWS Batch jobs is <code>/aws/batch/job</code>. Each container attempt receives a log stream name when they reach the <code>RUNNING</code> status.</p>"
+        },
+        "networkInterfaces": {
+          "shape": "NetworkInterfaceList",
+          "documentation": "<p>The network interfaces associated with the job attempt.</p>"
         }
       },
       "documentation": "<p>An object representing the details of a container that is part of a job attempt.</p>"
@@ -459,11 +463,11 @@
         },
         "startedAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix time stamp (in seconds and milliseconds) for when the attempt was started (when the attempt transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).</p>"
+          "documentation": "<p>The Unix timestamp (in seconds and milliseconds) for when the attempt was started (when the attempt transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).</p>"
         },
         "stoppedAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix time stamp (in seconds and milliseconds) for when the attempt was stopped (when the attempt transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).</p>"
+          "documentation": "<p>The Unix timestamp (in seconds and milliseconds) for when the attempt was stopped (when the attempt transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).</p>"
         },
         "statusReason": {
           "shape": "String",
@@ -560,7 +564,7 @@
         },
         "state": {
           "shape": "CEState",
-          "documentation": "<p>The state of the compute environment. The valid values are <code>ENABLED</code> or <code>DISABLED</code>. </p> <p>If the state is <code>ENABLED</code>, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on job queue demand.</p> <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed compute environments in the <code>DISABLED</code> state do not scale out; however, they scale in to <code>minvCpus</code> value once instances become idle.</p>"
+          "documentation": "<p>The state of the compute environment. The valid values are <code>ENABLED</code> or <code>DISABLED</code>. </p> <p>If the state is <code>ENABLED</code>, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand.</p> <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed compute environments in the <code>DISABLED</code> state do not scale out. However, they scale in to <code>minvCpus</code> value after instances become idle.</p>"
         },
         "status": {
           "shape": "CEStatus",
@@ -666,6 +670,10 @@
           "shape": "TagsMap",
           "documentation": "<p>Key-value pair tags to be applied to resources that are launched in the compute environment. </p>"
         },
+        "placementGroup": {
+          "shape": "String",
+          "documentation": "<p>The Amazon EC2 placement group to associate with your compute resources. If you intend to submit multi-node parallel jobs to your compute environment, you should consider creating a cluster placement group and associate it with your compute resources. This keeps your multi-node parallel job on a logical grouping of instances within a single Availability Zone with high network flow potential. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement Groups</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+        },
         "bidPercentage": {
           "shape": "Integer",
           "documentation": "<p>The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.</p>"
@@ -769,6 +777,14 @@
         "logStreamName": {
           "shape": "String",
           "documentation": "<p>The name of the CloudWatch Logs log stream associated with the container. The log group for AWS Batch jobs is <code>/aws/batch/job</code>. Each container attempt receives a log stream name when they reach the <code>RUNNING</code> status.</p>"
+        },
+        "instanceType": {
+          "shape": "String",
+          "documentation": "<p>The instance type of the underlying host infrastructure of a multi-node parallel job.</p>"
+        },
+        "networkInterfaces": {
+          "shape": "NetworkInterfaceList",
+          "documentation": "<p>The network interfaces associated with the job.</p>"
         }
       },
       "documentation": "<p>An object representing the details of a container that is part of a job.</p>"
@@ -788,6 +804,10 @@
           "shape": "StringList",
           "documentation": "<p>The command to send to the container that overrides the default command from the Docker image or the job definition.</p>"
         },
+        "instanceType": {
+          "shape": "String",
+          "documentation": "<p>The instance type to use for a multi-node parallel job. This parameter is not valid for single-node container jobs.</p>"
+        },
         "environment": {
           "shape": "EnvironmentVariables",
           "documentation": "<p>The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the job definition.</p> <note> <p>Environment variables must not start with <code>AWS_BATCH</code>; this naming convention is reserved for variables that are set by the AWS Batch service.</p> </note>"
@@ -797,11 +817,6 @@
     },
     "ContainerProperties": {
       "type": "structure",
-      "required": [
-        "image",
-        "vcpus",
-        "memory"
-      ],
       "members": {
         "image": {
           "shape": "String",
@@ -850,6 +865,10 @@
         "user": {
           "shape": "String",
           "documentation": "<p>The user name to use inside the container. This parameter maps to <code>User</code> in the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/\">Docker Remote API</a> and the <code>--user</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>"
+        },
+        "instanceType": {
+          "shape": "String",
+          "documentation": "<p>The instance type to use for a multi-node parallel job. Currently all node groups in a multi-node parallel job must use the same instance type. This parameter is not valid for single-node container jobs.</p>"
         }
       },
       "documentation": "<p>Container properties are used in job definitions to describe the container that is launched as part of a job.</p>"
@@ -929,7 +948,7 @@
         },
         "priority": {
           "shape": "Integer",
-          "documentation": "<p>The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.</p>"
+          "documentation": "<p>The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.</p>"
         },
         "computeEnvironmentOrder": {
           "shape": "ComputeEnvironmentOrders",
@@ -1202,6 +1221,10 @@
         "timeout": {
           "shape": "JobTimeout",
           "documentation": "<p>The timeout configuration for jobs that are submitted with this job definition. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished.</p>"
+        },
+        "nodeProperties": {
+          "shape": "NodeProperties",
+          "documentation": "<p>An object with various properties specific to multi-node parallel jobs.</p>"
         }
       },
       "documentation": "<p>An object representing an AWS Batch job definition.</p>"
@@ -1215,7 +1238,8 @@
     "JobDefinitionType": {
       "type": "string",
       "enum": [
-        "container"
+        "container",
+        "multinode"
       ]
     },
     "JobDependency": {
@@ -1275,7 +1299,7 @@
         },
         "createdAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix time stamp (in seconds and milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called). For array child jobs, this is when the child job was spawned by its parent and entered the <code>PENDING</code> state.</p>"
+          "documentation": "<p>The Unix timestamp (in seconds and milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called). For array child jobs, this is when the child job was spawned by its parent and entered the <code>PENDING</code> state.</p>"
         },
         "retryStrategy": {
           "shape": "RetryStrategy",
@@ -1283,11 +1307,11 @@
         },
         "startedAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix time stamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).</p>"
+          "documentation": "<p>The Unix timestamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).</p>"
         },
         "stoppedAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix time stamp (in seconds and milliseconds) for when the job was stopped (when the job transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).</p>"
+          "documentation": "<p>The Unix timestamp (in seconds and milliseconds) for when the job was stopped (when the job transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).</p>"
         },
         "dependsOn": {
           "shape": "JobDependencyList",
@@ -1304,6 +1328,14 @@
         "container": {
           "shape": "ContainerDetail",
           "documentation": "<p>An object representing the details of the container that is associated with the job.</p>"
+        },
+        "nodeDetails": {
+          "shape": "NodeDetails",
+          "documentation": "<p>An object representing the details of a node that is associated with a multi-node parallel job.</p>"
+        },
+        "nodeProperties": {
+          "shape": "NodeProperties",
+          "documentation": "<p>An object representing the node properties of a multi-node parallel job.</p>"
         },
         "arrayProperties": {
           "shape": "ArrayPropertiesDetail",
@@ -1398,7 +1430,7 @@
         },
         "createdAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix time stamp for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called). For array child jobs, this is when the child job was spawned by its parent and entered the <code>PENDING</code> state.</p>"
+          "documentation": "<p>The Unix timestamp for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called). For array child jobs, this is when the child job was spawned by its parent and entered the <code>PENDING</code> state.</p>"
         },
         "status": {
           "shape": "JobStatus",
@@ -1410,11 +1442,11 @@
         },
         "startedAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix time stamp for when the job was started (when the job transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).</p>"
+          "documentation": "<p>The Unix timestamp for when the job was started (when the job transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).</p>"
         },
         "stoppedAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix time stamp for when the job was stopped (when the job transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).</p>"
+          "documentation": "<p>The Unix timestamp for when the job was stopped (when the job transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).</p>"
         },
         "container": {
           "shape": "ContainerSummary",
@@ -1423,6 +1455,10 @@
         "arrayProperties": {
           "shape": "ArrayPropertiesSummary",
           "documentation": "<p>The array properties of the job, if it is an array job.</p>"
+        },
+        "nodeProperties": {
+          "shape": "NodePropertiesSummary",
+          "documentation": "<p>The node properties for a single node in a job summary list.</p>"
         }
       },
       "documentation": "<p>An object representing summary details of a job.</p>"
@@ -1480,11 +1516,15 @@
       "members": {
         "jobQueue": {
           "shape": "String",
-          "documentation": "<p>The name or full Amazon Resource Name (ARN) of the job queue with which to list jobs. You must specify either a job queue or an array job ID.</p>"
+          "documentation": "<p>The name or full Amazon Resource Name (ARN) of the job queue with which to list jobs.</p>"
         },
         "arrayJobId": {
           "shape": "String",
-          "documentation": "<p>The job ID for an array job. Specifying an array job ID with this parameter lists all child jobs from within the specified array. You must specify either a job queue or an array job ID.</p>"
+          "documentation": "<p>The job ID for an array job. Specifying an array job ID with this parameter lists all child jobs from within the specified array.</p>"
+        },
+        "multiNodeJobId": {
+          "shape": "String",
+          "documentation": "<p>The job ID for a multi-node parallel job. Specifying a multi-node parallel job ID with this parameter lists all nodes that are associated with the specified job.</p>"
         },
         "jobStatus": {
           "shape": "JobStatus",
@@ -1543,6 +1583,141 @@
         "shape": "MountPoint"
       }
     },
+    "NetworkInterface": {
+      "type": "structure",
+      "members": {
+        "attachmentId": {
+          "shape": "String",
+          "documentation": "<p>The attachment ID for the network interface.</p>"
+        },
+        "ipv6Address": {
+          "shape": "String",
+          "documentation": "<p>The private IPv6 address for the network interface.</p>"
+        },
+        "privateIpv4Address": {
+          "shape": "String",
+          "documentation": "<p>The private IPv4 address for the network interface.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the elastic network interface for a multi-node parallel job node.</p>"
+    },
+    "NetworkInterfaceList": {
+      "type": "list",
+      "member": {
+        "shape": "NetworkInterface"
+      }
+    },
+    "NodeDetails": {
+      "type": "structure",
+      "members": {
+        "nodeIndex": {
+          "shape": "Integer",
+          "documentation": "<p>The node index for the node. Node index numbering begins at zero. This index is also available on the node with the <code>AWS_BATCH_JOB_NODE_INDEX</code> environment variable.</p>"
+        },
+        "isMainNode": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the current node is the main node for a multi-node parallel job.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the details of a multi-node parallel job node.</p>"
+    },
+    "NodeOverrides": {
+      "type": "structure",
+      "members": {
+        "nodePropertyOverrides": {
+          "shape": "NodePropertyOverrides",
+          "documentation": "<p>The node property overrides for the job.</p>"
+        }
+      },
+      "documentation": "<p>Object representing any node overrides to a job definition that is used in a <a>SubmitJob</a> API operation.</p>"
+    },
+    "NodeProperties": {
+      "type": "structure",
+      "required": [
+        "numNodes",
+        "mainNode",
+        "nodeRangeProperties"
+      ],
+      "members": {
+        "numNodes": {
+          "shape": "Integer",
+          "documentation": "<p>The number of nodes associated with a multi-node parallel job.</p>"
+        },
+        "mainNode": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the node index for the main node of a multi-node parallel job.</p>"
+        },
+        "nodeRangeProperties": {
+          "shape": "NodeRangeProperties",
+          "documentation": "<p>A list of node ranges and their properties associated with a multi-node parallel job.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the node properties of a multi-node parallel job.</p>"
+    },
+    "NodePropertiesSummary": {
+      "type": "structure",
+      "members": {
+        "isMainNode": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the current node is the main node for a multi-node parallel job.</p>"
+        },
+        "numNodes": {
+          "shape": "Integer",
+          "documentation": "<p>The number of nodes associated with a multi-node parallel job.</p>"
+        },
+        "nodeIndex": {
+          "shape": "Integer",
+          "documentation": "<p>The node index for the node. Node index numbering begins at zero. This index is also available on the node with the <code>AWS_BATCH_JOB_NODE_INDEX</code> environment variable.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the properties of a node that is associated with a multi-node parallel job.</p>"
+    },
+    "NodePropertyOverride": {
+      "type": "structure",
+      "required": [
+        "targetNodes"
+      ],
+      "members": {
+        "targetNodes": {
+          "shape": "String",
+          "documentation": "<p>The range of nodes, using node index values, with which to override. A range of <code>0:3</code> indicates nodes with index values of <code>0</code> through <code>3</code>. If the starting range value is omitted (<code>:n</code>), then <code>0</code> is used to start the range. If the ending range value is omitted (<code>n:</code>), then the highest possible node index is used to end the range.</p>"
+        },
+        "containerOverrides": {
+          "shape": "ContainerOverrides",
+          "documentation": "<p>The overrides that should be sent to a node range.</p>"
+        }
+      },
+      "documentation": "<p>Object representing any node overrides to a job definition that is used in a <a>SubmitJob</a> API operation.</p>"
+    },
+    "NodePropertyOverrides": {
+      "type": "list",
+      "member": {
+        "shape": "NodePropertyOverride"
+      }
+    },
+    "NodeRangeProperties": {
+      "type": "list",
+      "member": {
+        "shape": "NodeRangeProperty"
+      }
+    },
+    "NodeRangeProperty": {
+      "type": "structure",
+      "required": [
+        "targetNodes"
+      ],
+      "members": {
+        "targetNodes": {
+          "shape": "String",
+          "documentation": "<p>The range of nodes, using node index values. A range of <code>0:3</code> indicates nodes with index values of <code>0</code> through <code>3</code>. If the starting range value is omitted (<code>:n</code>), then <code>0</code> is used to start the range. If the ending range value is omitted (<code>n:</code>), then the highest possible node index is used to end the range. Your accumulative node ranges must account for all nodes (0:n). You may nest node ranges, for example 0:10 and 4:5, in which case the 4:5 range properties override the 0:10 properties. </p>"
+        },
+        "container": {
+          "shape": "ContainerProperties",
+          "documentation": "<p>The container details for the node range.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the properties of the node range for a multi-node parallel job.</p>"
+    },
     "ParametersMap": {
       "type": "map",
       "key": {
@@ -1573,7 +1748,11 @@
         },
         "containerProperties": {
           "shape": "ContainerProperties",
-          "documentation": "<p>An object with various properties specific for container-based jobs. This parameter is required if the <code>type</code> parameter is <code>container</code>.</p>"
+          "documentation": "<p>An object with various properties specific to single-node container-based jobs. If the job definition's <code>type</code> parameter is <code>container</code>, then you must specify either <code>containerProperties</code> or <code>nodeProperties</code>.</p>"
+        },
+        "nodeProperties": {
+          "shape": "NodeProperties",
+          "documentation": "<p>An object with various properties specific to multi-node parallel jobs. If you specify node properties for a job, it becomes a multi-node parallel job. For more information, see <a href=\"http://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html\">Multi-node Parallel Jobs</a> in the <i>AWS Batch User Guide</i>. If the job definition's <code>type</code> parameter is <code>container</code>, then you must specify either <code>containerProperties</code> or <code>nodeProperties</code>.</p>"
         },
         "retryStrategy": {
           "shape": "RetryStrategy",
@@ -1612,7 +1791,7 @@
       "members": {
         "attempts": {
           "shape": "Integer",
-          "documentation": "<p>The number of times to move a job to the <code>RUNNABLE</code> status. You may specify between 1 and 10 attempts. If the value of <code>attempts</code> is greater than one, the job is retried if it fails until it has moved to <code>RUNNABLE</code> that many times.</p>"
+          "documentation": "<p>The number of times to move a job to the <code>RUNNABLE</code> status. You may specify between 1 and 10 attempts. If the value of <code>attempts</code> is greater than one, the job is retried on failure the same number of attempts as the value.</p>"
         }
       },
       "documentation": "<p>The retry strategy associated with a job.</p>"
@@ -1648,7 +1827,7 @@
         },
         "dependsOn": {
           "shape": "JobDependencyList",
-          "documentation": "<p>A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a <code>SEQUENTIAL</code> type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an <code>N_TO_N</code> type dependency with a job ID for array jobs so that each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin.</p>"
+          "documentation": "<p>A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a <code>SEQUENTIAL</code> type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an <code>N_TO_N</code> type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin.</p>"
         },
         "jobDefinition": {
           "shape": "String",
@@ -1661,6 +1840,10 @@
         "containerOverrides": {
           "shape": "ContainerOverrides",
           "documentation": "<p>A list of container overrides in JSON format that specify the name of a container in the specified job definition and the overrides it should receive. You can override the default command for a container (that is specified in the job definition or the Docker image) with a <code>command</code> override. You can also override existing environment variables (that are specified in the job definition or Docker image) on a container or add new environment variables to it with an <code>environment</code> override.</p>"
+        },
+        "nodeOverrides": {
+          "shape": "NodeOverrides",
+          "documentation": "<p>A list of node overrides in JSON format that specify the node range to target and the container overrides for that node range.</p>"
         },
         "retryStrategy": {
           "shape": "RetryStrategy",
@@ -1777,7 +1960,7 @@
       "members": {
         "computeEnvironmentName": {
           "shape": "String",
-          "documentation": "<p>The name of compute environment.</p>"
+          "documentation": "<p>The name of the compute environment.</p>"
         },
         "computeEnvironmentArn": {
           "shape": "String",
@@ -1801,7 +1984,7 @@
         },
         "priority": {
           "shape": "Integer",
-          "documentation": "<p>The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.</p>"
+          "documentation": "<p>The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.</p>"
         },
         "computeEnvironmentOrder": {
           "shape": "ComputeEnvironmentOrders",

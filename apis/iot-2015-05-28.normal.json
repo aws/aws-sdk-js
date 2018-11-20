@@ -45,6 +45,34 @@
       ],
       "documentation": "<p>Accepts a pending certificate transfer. The default state of the certificate is INACTIVE.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p>"
     },
+    "AddThingToBillingGroup": {
+      "name": "AddThingToBillingGroup",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/billing-groups/addThingToBillingGroup"
+      },
+      "input": {
+        "shape": "AddThingToBillingGroupRequest"
+      },
+      "output": {
+        "shape": "AddThingToBillingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Adds a thing to a billing group.</p>"
+    },
     "AddThingToThingGroup": {
       "name": "AddThingToThingGroup",
       "http": {
@@ -433,6 +461,34 @@
       ],
       "documentation": "<p>Creates an authorizer.</p>"
     },
+    "CreateBillingGroup": {
+      "name": "CreateBillingGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/billing-groups/{billingGroupName}"
+      },
+      "input": {
+        "shape": "CreateBillingGroupRequest"
+      },
+      "output": {
+        "shape": "CreateBillingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a billing group.</p>"
+    },
     "CreateCertificateFromCsr": {
       "name": "CreateCertificateFromCsr",
       "http": {
@@ -463,6 +519,43 @@
         }
       ],
       "documentation": "<p>Creates an X.509 certificate using the specified certificate signing request.</p> <p> <b>Note:</b> The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. </p> <p> <b>Note:</b> Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> <p>You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs.</p> <p>Assuming a set of CSRs are located inside of the directory my-csr-directory:</p> <p>On Linux and OS X, the command is:</p> <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR.</p> <p>The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process:</p> <p>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p>On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:</p> <p>&gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}</p> <p>On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:</p> <p>&gt; forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path\"</p>"
+    },
+    "CreateDynamicThingGroup": {
+      "name": "CreateDynamicThingGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/dynamic-thing-groups/{thingGroupName}"
+      },
+      "input": {
+        "shape": "CreateDynamicThingGroupRequest"
+      },
+      "output": {
+        "shape": "CreateDynamicThingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidQueryException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Creates a dynamic thing group.</p>"
     },
     "CreateJob": {
       "name": "CreateJob",
@@ -902,6 +995,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ConflictingResourceUpdateException"
         }
       ],
       "documentation": "<p>Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.</p>"
@@ -970,6 +1066,34 @@
         }
       ],
       "documentation": "<p>Deletes an authorizer.</p>"
+    },
+    "DeleteBillingGroup": {
+      "name": "DeleteBillingGroup",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/billing-groups/{billingGroupName}"
+      },
+      "input": {
+        "shape": "DeleteBillingGroupRequest"
+      },
+      "output": {
+        "shape": "DeleteBillingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "VersionConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes the billing group.</p>"
     },
     "DeleteCACertificate": {
       "name": "DeleteCACertificate",
@@ -1044,6 +1168,34 @@
         }
       ],
       "documentation": "<p>Deletes the specified certificate.</p> <p>A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the <a>DetachPrincipalPolicy</a> API to detach all policies. Next, use the <a>UpdateCertificate</a> API to set the certificate to the INACTIVE status.</p>"
+    },
+    "DeleteDynamicThingGroup": {
+      "name": "DeleteDynamicThingGroup",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/dynamic-thing-groups/{thingGroupName}"
+      },
+      "input": {
+        "shape": "DeleteDynamicThingGroupRequest"
+      },
+      "output": {
+        "shape": "DeleteDynamicThingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "VersionConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes a dynamic thing group.</p>"
     },
     "DeleteJob": {
       "name": "DeleteJob",
@@ -1405,7 +1557,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Deletes the specified thing.</p>"
+      "documentation": "<p>Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.</p>"
     },
     "DeleteThingGroup": {
       "name": "DeleteThingGroup",
@@ -1467,7 +1619,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Deletes the specified thing type . You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling <a>DeprecateThingType</a>, then remove any associated things by calling <a>UpdateThing</a> to change the thing type on any associated thing, and finally use <a>DeleteThingType</a> to delete the thing type.</p>"
+      "documentation": "<p>Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling <a>DeprecateThingType</a>, then remove any associated things by calling <a>UpdateThing</a> to change the thing type on any associated thing, and finally use <a>DeleteThingType</a> to delete the thing type.</p>"
     },
     "DeleteTopicRule": {
       "name": "DeleteTopicRule",
@@ -1490,6 +1642,9 @@
         },
         {
           "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ConflictingResourceUpdateException"
         }
       ],
       "documentation": "<p>Deletes the rule.</p>"
@@ -1633,6 +1788,34 @@
         }
       ],
       "documentation": "<p>Describes an authorizer.</p>"
+    },
+    "DescribeBillingGroup": {
+      "name": "DescribeBillingGroup",
+      "http": {
+        "method": "GET",
+        "requestUri": "/billing-groups/{billingGroupName}"
+      },
+      "input": {
+        "shape": "DescribeBillingGroupRequest"
+      },
+      "output": {
+        "shape": "DescribeBillingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns information about a billing group.</p>"
     },
     "DescribeCACertificate": {
       "name": "DescribeCACertificate",
@@ -2250,7 +2433,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Detaches the specified principal from the specified thing.</p>"
+      "documentation": "<p>Detaches the specified principal from the specified thing.</p> <note> <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p> </note>"
     },
     "DisableTopicRule": {
       "name": "DisableTopicRule",
@@ -2273,6 +2456,9 @@
         },
         {
           "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ConflictingResourceUpdateException"
         }
       ],
       "documentation": "<p>Disables the rule.</p>"
@@ -2298,6 +2484,9 @@
         },
         {
           "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ConflictingResourceUpdateException"
         }
       ],
       "documentation": "<p>Enables the rule.</p>"
@@ -2754,6 +2943,34 @@
         }
       ],
       "documentation": "<p>Lists the authorizers registered in your account.</p>"
+    },
+    "ListBillingGroups": {
+      "name": "ListBillingGroups",
+      "http": {
+        "method": "GET",
+        "requestUri": "/billing-groups"
+      },
+      "input": {
+        "shape": "ListBillingGroupsRequest"
+      },
+      "output": {
+        "shape": "ListBillingGroupsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Lists the billing groups you have created.</p>"
     },
     "ListCACertificates": {
       "name": "ListCACertificates",
@@ -3334,6 +3551,34 @@
       ],
       "documentation": "<p>Lists all of the streams in your AWS account.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Lists the tags (metadata) you have assigned to the resource.</p>"
+    },
     "ListTargetsForPolicy": {
       "name": "ListTargetsForPolicy",
       "http": {
@@ -3601,6 +3846,34 @@
       ],
       "documentation": "<p>Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example, calling <code>ListThings</code> with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. </p>"
     },
+    "ListThingsInBillingGroup": {
+      "name": "ListThingsInBillingGroup",
+      "http": {
+        "method": "GET",
+        "requestUri": "/billing-groups/{billingGroupName}/things"
+      },
+      "input": {
+        "shape": "ListThingsInBillingGroupRequest"
+      },
+      "output": {
+        "shape": "ListThingsInBillingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Lists the things you have added to the given billing group.</p>"
+    },
     "ListThingsInThingGroup": {
       "name": "ListThingsInThingGroup",
       "http": {
@@ -3861,6 +4134,34 @@
       ],
       "documentation": "<p>Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from <b>PENDING_TRANSFER</b> to <b>INACTIVE</b>.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p> <p>This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.</p>"
     },
+    "RemoveThingFromBillingGroup": {
+      "name": "RemoveThingFromBillingGroup",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/billing-groups/removeThingFromBillingGroup"
+      },
+      "input": {
+        "shape": "RemoveThingFromBillingGroupRequest"
+      },
+      "output": {
+        "shape": "RemoveThingFromBillingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Removes the given thing from the billing group.</p>"
+    },
     "RemoveThingFromThingGroup": {
       "name": "RemoveThingFromThingGroup",
       "http": {
@@ -3913,6 +4214,9 @@
         },
         {
           "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ConflictingResourceUpdateException"
         }
       ],
       "documentation": "<p>Replaces the rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.</p>"
@@ -4181,6 +4485,37 @@
       ],
       "documentation": "<p>Cancels a bulk thing provisioning task.</p>"
     },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.</p>"
+    },
     "TestAuthorization": {
       "name": "TestAuthorization",
       "http": {
@@ -4295,6 +4630,34 @@
       ],
       "documentation": "<p>Transfers the specified certificate to the specified AWS account.</p> <p>You can cancel the transfer until it is acknowledged by the recipient.</p> <p>No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target.</p> <p>The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it.</p> <p>The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.</p>"
     },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/untag"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Removes the given tags (metadata) from the resource.</p>"
+    },
     "UpdateAccountAuditConfiguration": {
       "name": "UpdateAccountAuditConfiguration",
       "http": {
@@ -4356,6 +4719,37 @@
         }
       ],
       "documentation": "<p>Updates an authorizer.</p>"
+    },
+    "UpdateBillingGroup": {
+      "name": "UpdateBillingGroup",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/billing-groups/{billingGroupName}"
+      },
+      "input": {
+        "shape": "UpdateBillingGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateBillingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "VersionConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Updates information about the billing group.</p>"
     },
     "UpdateCACertificate": {
       "name": "UpdateCACertificate",
@@ -4422,6 +4816,40 @@
       ],
       "documentation": "<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect.</p> <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.</p>"
     },
+    "UpdateDynamicThingGroup": {
+      "name": "UpdateDynamicThingGroup",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/dynamic-thing-groups/{thingGroupName}"
+      },
+      "input": {
+        "shape": "UpdateDynamicThingGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateDynamicThingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "VersionConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidQueryException"
+        }
+      ],
+      "documentation": "<p>Updates a dynamic thing group.</p>"
+    },
     "UpdateEventConfigurations": {
       "name": "UpdateEventConfigurations",
       "http": {
@@ -4477,6 +4905,31 @@
         }
       ],
       "documentation": "<p>Updates the search configuration.</p>"
+    },
+    "UpdateJob": {
+      "name": "UpdateJob",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/jobs/{jobId}"
+      },
+      "input": {
+        "shape": "UpdateJobRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Updates supported fields of the specified job.</p>"
     },
     "UpdateRoleAlias": {
       "name": "UpdateRoleAlias",
@@ -4728,6 +5181,64 @@
     }
   },
   "shapes": {
+    "AbortAction": {
+      "type": "string",
+      "enum": [
+        "CANCEL"
+      ]
+    },
+    "AbortConfig": {
+      "type": "structure",
+      "required": [
+        "criteriaList"
+      ],
+      "members": {
+        "criteriaList": {
+          "shape": "AbortCriteriaList",
+          "documentation": "<p>The list of abort criteria to define rules to abort the job.</p>"
+        }
+      },
+      "documentation": "<p>Details of abort criteria to abort the job.</p>"
+    },
+    "AbortCriteria": {
+      "type": "structure",
+      "required": [
+        "failureType",
+        "action",
+        "thresholdPercentage",
+        "minNumberOfExecutedThings"
+      ],
+      "members": {
+        "failureType": {
+          "shape": "JobExecutionFailureType",
+          "documentation": "<p>The type of job execution failure to define a rule to initiate a job abort.</p>"
+        },
+        "action": {
+          "shape": "AbortAction",
+          "documentation": "<p>The type of abort action to initiate a job abort.</p>"
+        },
+        "thresholdPercentage": {
+          "shape": "AbortThresholdPercentage",
+          "documentation": "<p>The threshold as a percentage of the total number of executed things that will initiate a job abort.</p> <p>AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>"
+        },
+        "minNumberOfExecutedThings": {
+          "shape": "MinimumNumberOfExecutedThings",
+          "documentation": "<p>Minimum number of executed things before evaluating an abort rule.</p>"
+        }
+      },
+      "documentation": "<p>Details of abort criteria to define rules to abort the job.</p>"
+    },
+    "AbortCriteriaList": {
+      "type": "list",
+      "member": {
+        "shape": "AbortCriteria"
+      },
+      "min": 1
+    },
+    "AbortThresholdPercentage": {
+      "type": "double",
+      "max": 100
+    },
     "AcceptCertificateTransferRequest": {
       "type": "structure",
       "required": [
@@ -4872,6 +5383,31 @@
         "shape": "ActiveViolation"
       }
     },
+    "AddThingToBillingGroupRequest": {
+      "type": "structure",
+      "members": {
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name of the billing group.</p>"
+        },
+        "billingGroupArn": {
+          "shape": "BillingGroupArn",
+          "documentation": "<p>The ARN of the billing group.</p>"
+        },
+        "thingName": {
+          "shape": "ThingName",
+          "documentation": "<p>The name of the thing to be added to the billing group.</p>"
+        },
+        "thingArn": {
+          "shape": "ThingArn",
+          "documentation": "<p>The ARN of the thing to be added to the billing group.</p>"
+        }
+      }
+    },
+    "AddThingToBillingGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "AddThingToThingGroupRequest": {
       "type": "structure",
       "members": {
@@ -4890,6 +5426,10 @@
         "thingArn": {
           "shape": "ThingArn",
           "documentation": "<p>The ARN of the thing to add to a group.</p>"
+        },
+        "overrideDynamicGroups": {
+          "shape": "OverrideDynamicGroups",
+          "documentation": "<p>Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.</p>"
         }
       }
     },
@@ -5020,7 +5560,7 @@
         },
         "target": {
           "shape": "PolicyTarget",
-          "documentation": "<p>The identity to which the policy is attached.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html\">identity</a> to which the policy is attached.</p>"
         }
       }
     },
@@ -5590,6 +6130,52 @@
       },
       "max": 100
     },
+    "BillingGroupArn": {
+      "type": "string"
+    },
+    "BillingGroupDescription": {
+      "type": "string",
+      "max": 2028,
+      "pattern": "[\\p{Graph}\\x20]*"
+    },
+    "BillingGroupId": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9\\-]+"
+    },
+    "BillingGroupMetadata": {
+      "type": "structure",
+      "members": {
+        "creationDate": {
+          "shape": "CreationDate",
+          "documentation": "<p>The date the billing group was created.</p>"
+        }
+      },
+      "documentation": "<p>Additional information about the billing group.</p>"
+    },
+    "BillingGroupName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9:_-]+"
+    },
+    "BillingGroupNameAndArnList": {
+      "type": "list",
+      "member": {
+        "shape": "GroupNameAndArn"
+      }
+    },
+    "BillingGroupProperties": {
+      "type": "structure",
+      "members": {
+        "billingGroupDescription": {
+          "shape": "BillingGroupDescription",
+          "documentation": "<p>The description of the billing group.</p>"
+        }
+      },
+      "documentation": "<p>The properties of a billing group.</p>"
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -5760,6 +6346,10 @@
           "documentation": "<p>The unique identifier you assigned to this job when it was created.</p>",
           "location": "uri",
           "locationName": "jobId"
+        },
+        "reasonCode": {
+          "shape": "ReasonCode",
+          "documentation": "<p>(Optional)A reason code string that explains why the job was canceled.</p>"
         },
         "comment": {
           "shape": "Comment",
@@ -6118,6 +6708,9 @@
       },
       "documentation": "<p>Configuration.</p>"
     },
+    "ConnectivityTimestamp": {
+      "type": "long"
+    },
     "Count": {
       "type": "integer"
     },
@@ -6167,6 +6760,45 @@
         }
       }
     },
+    "CreateBillingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "billingGroupName"
+      ],
+      "members": {
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name you wish to give to the billing group.</p>",
+          "location": "uri",
+          "locationName": "billingGroupName"
+        },
+        "billingGroupProperties": {
+          "shape": "BillingGroupProperties",
+          "documentation": "<p>The properties of the billing group.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the billing group.</p>"
+        }
+      }
+    },
+    "CreateBillingGroupResponse": {
+      "type": "structure",
+      "members": {
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name you gave to the billing group.</p>"
+        },
+        "billingGroupArn": {
+          "shape": "BillingGroupArn",
+          "documentation": "<p>The ARN of the billing group.</p>"
+        },
+        "billingGroupId": {
+          "shape": "BillingGroupId",
+          "documentation": "<p>The ID of the billing group.</p>"
+        }
+      }
+    },
     "CreateCertificateFromCsrRequest": {
       "type": "structure",
       "required": [
@@ -6204,6 +6836,70 @@
       },
       "documentation": "<p>The output from the CreateCertificateFromCsr operation.</p>"
     },
+    "CreateDynamicThingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "thingGroupName",
+        "queryString"
+      ],
+      "members": {
+        "thingGroupName": {
+          "shape": "ThingGroupName",
+          "documentation": "<p>The dynamic thing group name to create.</p>",
+          "location": "uri",
+          "locationName": "thingGroupName"
+        },
+        "thingGroupProperties": {
+          "shape": "ThingGroupProperties",
+          "documentation": "<p>The dynamic thing group properties.</p>"
+        },
+        "indexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The dynamic thing group index name.</p> <note> <p>Currently one index is supported: \"AWS_Things\".</p> </note>"
+        },
+        "queryString": {
+          "shape": "QueryString",
+          "documentation": "<p>The dynamic thing group search query string.</p> <p>See <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html\">Query Syntax</a> for information about query string syntax.</p>"
+        },
+        "queryVersion": {
+          "shape": "QueryVersion",
+          "documentation": "<p>The dynamic thing group query version.</p> <note> <p>Currently one query version is supported: \"2017-09-30\". If not specified, the query version defaults to this value.</p> </note>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the dynamic thing group.</p>"
+        }
+      }
+    },
+    "CreateDynamicThingGroupResponse": {
+      "type": "structure",
+      "members": {
+        "thingGroupName": {
+          "shape": "ThingGroupName",
+          "documentation": "<p>The dynamic thing group name.</p>"
+        },
+        "thingGroupArn": {
+          "shape": "ThingGroupArn",
+          "documentation": "<p>The dynamic thing group ARN.</p>"
+        },
+        "thingGroupId": {
+          "shape": "ThingGroupId",
+          "documentation": "<p>The dynamic thing group ID.</p>"
+        },
+        "indexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The dynamic thing group index name.</p>"
+        },
+        "queryString": {
+          "shape": "QueryString",
+          "documentation": "<p>The dynamic thing group search query string.</p>"
+        },
+        "queryVersion": {
+          "shape": "QueryVersion",
+          "documentation": "<p>The dynamic thing group query version.</p>"
+        }
+      }
+    },
     "CreateJobRequest": {
       "type": "structure",
       "required": [
@@ -6227,7 +6923,7 @@
         },
         "document": {
           "shape": "JobDocument",
-          "documentation": "<p>The job document.</p>"
+          "documentation": "<p>The job document.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>"
         },
         "description": {
           "shape": "JobDescription",
@@ -6245,9 +6941,17 @@
           "shape": "JobExecutionsRolloutConfig",
           "documentation": "<p>Allows you to create a staged rollout of the job.</p>"
         },
+        "abortConfig": {
+          "shape": "AbortConfig",
+          "documentation": "<p>Allows you to create criteria to abort a job.</p>"
+        },
         "timeoutConfig": {
           "shape": "TimeoutConfig",
           "documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to <code>TIMED_OUT</code>.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the job.</p>"
         }
       }
     },
@@ -6563,6 +7267,10 @@
         "alertTargets": {
           "shape": "AlertTargets",
           "documentation": "<p>Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the security profile.</p>"
         }
       }
     },
@@ -6647,6 +7355,10 @@
         "thingGroupProperties": {
           "shape": "ThingGroupProperties",
           "documentation": "<p>The thing group properties.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the thing group.</p>"
         }
       }
     },
@@ -6686,6 +7398,10 @@
         "attributePayload": {
           "shape": "AttributePayload",
           "documentation": "<p>The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:</p> <p> <code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</code> </p>"
+        },
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name of the billing group the thing will be added to.</p>"
         }
       },
       "documentation": "<p>The input for the CreateThing operation.</p>"
@@ -6723,6 +7439,10 @@
         "thingTypeProperties": {
           "shape": "ThingTypeProperties",
           "documentation": "<p>The ThingTypeProperties for the thing type to create. It contains information about the new thing type including a description, and a list of searchable thing attribute names.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the thing type.</p>"
         }
       },
       "documentation": "<p>The input for the CreateThingType operation.</p>"
@@ -6855,6 +7575,30 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteBillingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "billingGroupName"
+      ],
+      "members": {
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name of the billing group.</p>",
+          "location": "uri",
+          "locationName": "billingGroupName"
+        },
+        "expectedVersion": {
+          "shape": "OptionalVersion",
+          "documentation": "<p>The expected version of the billing group. If the version of the billing group does not match the expected version specified in the request, the <code>DeleteBillingGroup</code> request is rejected with a <code>VersionConflictException</code>.</p>",
+          "location": "querystring",
+          "locationName": "expectedVersion"
+        }
+      }
+    },
+    "DeleteBillingGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteCACertificateRequest": {
       "type": "structure",
       "required": [
@@ -6895,6 +7639,30 @@
         }
       },
       "documentation": "<p>The input for the DeleteCertificate operation.</p>"
+    },
+    "DeleteDynamicThingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "thingGroupName"
+      ],
+      "members": {
+        "thingGroupName": {
+          "shape": "ThingGroupName",
+          "documentation": "<p>The name of the dynamic thing group to delete.</p>",
+          "location": "uri",
+          "locationName": "thingGroupName"
+        },
+        "expectedVersion": {
+          "shape": "OptionalVersion",
+          "documentation": "<p>The expected version of the dynamic thing group to delete.</p>",
+          "location": "querystring",
+          "locationName": "expectedVersion"
+        }
+      }
+    },
+    "DeleteDynamicThingGroupResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteJobExecutionRequest": {
       "type": "structure",
@@ -7348,6 +8116,49 @@
         }
       }
     },
+    "DescribeBillingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "billingGroupName"
+      ],
+      "members": {
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name of the billing group.</p>",
+          "location": "uri",
+          "locationName": "billingGroupName"
+        }
+      }
+    },
+    "DescribeBillingGroupResponse": {
+      "type": "structure",
+      "members": {
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name of the billing group.</p>"
+        },
+        "billingGroupId": {
+          "shape": "BillingGroupId",
+          "documentation": "<p>The ID of the billing group.</p>"
+        },
+        "billingGroupArn": {
+          "shape": "BillingGroupArn",
+          "documentation": "<p>The ARN of the billing group.</p>"
+        },
+        "version": {
+          "shape": "Version",
+          "documentation": "<p>The version of the billing group.</p>"
+        },
+        "billingGroupProperties": {
+          "shape": "BillingGroupProperties",
+          "documentation": "<p>The properties of the billing group.</p>"
+        },
+        "billingGroupMetadata": {
+          "shape": "BillingGroupMetadata",
+          "documentation": "<p>Additional information about the billing group.</p>"
+        }
+      }
+    },
     "DescribeCACertificateRequest": {
       "type": "structure",
       "required": [
@@ -7485,7 +8296,7 @@
         },
         "schema": {
           "shape": "IndexSchema",
-          "documentation": "<p>Contains a value that specifies the type of indexing performed. Valid values are:</p> <ol> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.</p> </li> </ol>"
+          "documentation": "<p>Contains a value that specifies the type of indexing performed. Valid values are:</p> <ul> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry data and shadow data.</p> </li> <li> <p>REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index will contain registry data and thing connectivity status data.</p> </li> <li> <p>REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index will contain registry data, shadow data, and thing connectivity status data.</p> </li> </ul>"
         }
       }
     },
@@ -7732,6 +8543,22 @@
         "thingGroupMetadata": {
           "shape": "ThingGroupMetadata",
           "documentation": "<p>Thing group metadata.</p>"
+        },
+        "indexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The dynamic thing group index name.</p>"
+        },
+        "queryString": {
+          "shape": "QueryString",
+          "documentation": "<p>The dynamic thing group search query string.</p>"
+        },
+        "queryVersion": {
+          "shape": "QueryVersion",
+          "documentation": "<p>The dynamic thing group query version.</p>"
+        },
+        "status": {
+          "shape": "DynamicGroupStatus",
+          "documentation": "<p>The dynamic thing group status.</p>"
         }
       }
     },
@@ -7847,6 +8674,10 @@
         "version": {
           "shape": "Version",
           "documentation": "<p>The current version of the thing record in the registry.</p> <note> <p>To avoid unintentional changes to the information in the registry, you can pass the version information in the <code>expectedVersion</code> parameter of the <code>UpdateThing</code> and <code>DeleteThing</code> calls.</p> </note>"
+        },
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name of the billing group the thing belongs to.</p>"
         }
       },
       "documentation": "<p>The output from the DescribeThing operation.</p>"
@@ -8039,6 +8870,14 @@
     },
     "DurationSeconds": {
       "type": "integer"
+    },
+    "DynamicGroupStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "BUILDING",
+        "REBUILDING"
+      ]
     },
     "DynamoDBAction": {
       "type": "structure",
@@ -8279,6 +9118,29 @@
         }
       },
       "documentation": "<p>Information that explicitly denies authorization.</p>"
+    },
+    "ExponentialRolloutRate": {
+      "type": "structure",
+      "required": [
+        "baseRatePerMinute",
+        "incrementFactor",
+        "rateIncreaseCriteria"
+      ],
+      "members": {
+        "baseRatePerMinute": {
+          "shape": "RolloutRatePerMinute",
+          "documentation": "<p>The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.</p>"
+        },
+        "incrementFactor": {
+          "shape": "IncrementFactor",
+          "documentation": "<p>The exponential factor to increase the rate of rollout for a job.</p>"
+        },
+        "rateIncreaseCriteria": {
+          "shape": "RateIncreaseCriteria",
+          "documentation": "<p>The criteria to initiate the increase in rate of rollout for a job.</p> <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>"
+        }
+      },
+      "documentation": "<p>Allows you to create an exponential rate of rollout for a job.</p>"
     },
     "FailedChecksCount": {
       "type": "integer"
@@ -8686,6 +9548,11 @@
     "InProgressTimeoutInMinutes": {
       "type": "long"
     },
+    "IncrementFactor": {
+      "type": "double",
+      "max": 5,
+      "min": 1
+    },
     "IndexName": {
       "type": "string",
       "max": 128,
@@ -8762,6 +9629,10 @@
           "shape": "Forced",
           "documentation": "<p>Will be <code>true</code> if the job was canceled with the optional <code>force</code> parameter set to <code>true</code>.</p>"
         },
+        "reasonCode": {
+          "shape": "ReasonCode",
+          "documentation": "<p>If the job was updated, provides the reason code for the update.</p>"
+        },
         "comment": {
           "shape": "Comment",
           "documentation": "<p>If the job was updated, describes the reason for the update.</p>"
@@ -8781,6 +9652,10 @@
         "jobExecutionsRolloutConfig": {
           "shape": "JobExecutionsRolloutConfig",
           "documentation": "<p>Allows you to create a staged rollout of a job.</p>"
+        },
+        "abortConfig": {
+          "shape": "AbortConfig",
+          "documentation": "<p>Configuration for criteria to abort the job.</p>"
         },
         "createdAt": {
           "shape": "DateType",
@@ -8867,10 +9742,19 @@
         },
         "approximateSecondsBeforeTimedOut": {
           "shape": "ApproximateSecondsBeforeTimedOut",
-          "documentation": "<p>The estimated number of seconds that remain before the job execution status will be changed to <code>TIMED_OUT</code>.</p>"
+          "documentation": "<p>The estimated number of seconds that remain before the job execution status will be changed to <code>TIMED_OUT</code>. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The actual job execution timeout can occur up to 60 seconds later than the estimated duration. This value will not be included if the job execution has reached a terminal status.</p>"
         }
       },
       "documentation": "<p>The job execution object represents the execution of a job on a particular device.</p>"
+    },
+    "JobExecutionFailureType": {
+      "type": "string",
+      "enum": [
+        "FAILED",
+        "REJECTED",
+        "TIMED_OUT",
+        "ALL"
+      ]
     },
     "JobExecutionStatus": {
       "type": "string",
@@ -8967,6 +9851,10 @@
         "maximumPerMinute": {
           "shape": "MaxJobExecutionsPerMin",
           "documentation": "<p>The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.</p>"
+        },
+        "exponentialRate": {
+          "shape": "ExponentialRolloutRate",
+          "documentation": "<p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout.</p>"
         }
       },
       "documentation": "<p>Allows you to create a staged rollout of a job.</p>"
@@ -9382,6 +10270,42 @@
         "nextMarker": {
           "shape": "Marker",
           "documentation": "<p>A marker used to get the next set of results.</p>"
+        }
+      }
+    },
+    "ListBillingGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "RegistryMaxResults",
+          "documentation": "<p>The maximum number of results to return per request.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "namePrefixFilter": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>Limit the results to billing groups whose names have the given prefix.</p>",
+          "location": "querystring",
+          "locationName": "namePrefixFilter"
+        }
+      }
+    },
+    "ListBillingGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "billingGroups": {
+          "shape": "BillingGroupNameAndArnList",
+          "documentation": "<p>The list of billing groups.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
         }
       }
     },
@@ -10131,6 +11055,39 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The ARN of the resource.</p>",
+          "location": "querystring",
+          "locationName": "resourceArn"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The list of tags assigned to the resource.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
     "ListTargetsForPolicyRequest": {
       "type": "structure",
       "required": [
@@ -10445,6 +11402,45 @@
       },
       "documentation": "<p>The output for the ListThingTypes operation.</p>"
     },
+    "ListThingsInBillingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "billingGroupName"
+      ],
+      "members": {
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name of the billing group.</p>",
+          "location": "uri",
+          "locationName": "billingGroupName"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "RegistryMaxResults",
+          "documentation": "<p>The maximum number of results to return per request.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListThingsInBillingGroupResponse": {
+      "type": "structure",
+      "members": {
+        "things": {
+          "shape": "ThingNameList",
+          "documentation": "<p>A list of things in the billing group.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
     "ListThingsInThingGroupRequest": {
       "type": "structure",
       "required": [
@@ -10758,7 +11754,6 @@
     },
     "MaxJobExecutionsPerMin": {
       "type": "integer",
-      "max": 1000,
       "min": 1
     },
     "MaxResults": {
@@ -10800,6 +11795,10 @@
       },
       "documentation": "<p>The value to be compared with the <code>metric</code>.</p>"
     },
+    "MinimumNumberOfExecutedThings": {
+      "type": "integer",
+      "min": 1
+    },
     "MissingContextValue": {
       "type": "string"
     },
@@ -10835,6 +11834,10 @@
     },
     "NonCompliantResourcesCount": {
       "type": "long"
+    },
+    "NumberOfThings": {
+      "type": "integer",
+      "min": 1
     },
     "OTAUpdateArn": {
       "type": "string"
@@ -11023,6 +12026,9 @@
       "member": {
         "shape": "OutgoingCertificate"
       }
+    },
+    "OverrideDynamicGroups": {
+      "type": "boolean"
     },
     "PageSize": {
       "type": "integer",
@@ -11260,6 +12266,25 @@
     "RangeKeyValue": {
       "type": "string"
     },
+    "RateIncreaseCriteria": {
+      "type": "structure",
+      "members": {
+        "numberOfNotifiedThings": {
+          "shape": "NumberOfThings",
+          "documentation": "<p>The threshold for number of notified things that will initiate the increase in rate of rollout.</p>"
+        },
+        "numberOfSucceededThings": {
+          "shape": "NumberOfThings",
+          "documentation": "<p>The threshold for number of succeeded things that will initiate the increase in rate of rollout.</p>"
+        }
+      },
+      "documentation": "<p>Allows you to define a criteria to initiate the increase in rate of rollout for a job.</p>"
+    },
+    "ReasonCode": {
+      "type": "string",
+      "max": 128,
+      "pattern": "[\\p{Upper}\\p{Digit}_]+"
+    },
     "ReasonForNonCompliance": {
       "type": "string"
     },
@@ -11477,6 +12502,31 @@
     "RemoveAutoRegistration": {
       "type": "boolean"
     },
+    "RemoveThingFromBillingGroupRequest": {
+      "type": "structure",
+      "members": {
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name of the billing group.</p>"
+        },
+        "billingGroupArn": {
+          "shape": "BillingGroupArn",
+          "documentation": "<p>The ARN of the billing group.</p>"
+        },
+        "thingName": {
+          "shape": "ThingName",
+          "documentation": "<p>The name of the thing to be removed from the billing group.</p>"
+        },
+        "thingArn": {
+          "shape": "ThingArn",
+          "documentation": "<p>The ARN of the thing to be removed from the billing group.</p>"
+        }
+      }
+    },
+    "RemoveThingFromBillingGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "RemoveThingFromThingGroupRequest": {
       "type": "structure",
       "members": {
@@ -11672,6 +12722,11 @@
       "type": "string",
       "max": 2048,
       "min": 20
+    },
+    "RolloutRatePerMinute": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
     },
     "RuleArn": {
       "type": "string"
@@ -12426,6 +13481,59 @@
     "TableName": {
       "type": "string"
     },
+    "Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>The tag's key.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>The tag's value.</p>"
+        }
+      },
+      "documentation": "<p>A set of key/value pairs that are used to manage the resource.</p>"
+    },
+    "TagKey": {
+      "type": "string"
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      }
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      }
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The ARN of the resource.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The new or modified tags for the resource.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string"
+    },
     "Target": {
       "type": "string"
     },
@@ -12626,6 +13734,27 @@
         "shape": "ThingAttribute"
       }
     },
+    "ThingConnectivity": {
+      "type": "structure",
+      "members": {
+        "connected": {
+          "shape": "Boolean",
+          "documentation": "<p>True if the thing is connected to the AWS IoT service, false if it is not connected.</p>"
+        },
+        "timestamp": {
+          "shape": "ConnectivityTimestamp",
+          "documentation": "<p>The epoch time (in milliseconds) when the thing last connected or disconnected. Note that if the thing has been disconnected for more than a few weeks, the time value can be missing.</p>"
+        }
+      },
+      "documentation": "<p>The connectivity status of the thing.</p>"
+    },
+    "ThingConnectivityIndexingMode": {
+      "type": "string",
+      "enum": [
+        "OFF",
+        "STATUS"
+      ]
+    },
     "ThingDocument": {
       "type": "structure",
       "members": {
@@ -12652,6 +13781,10 @@
         "shadow": {
           "shape": "JsonDocument",
           "documentation": "<p>The shadow.</p>"
+        },
+        "connectivity": {
+          "shape": "ThingConnectivity",
+          "documentation": "<p>Indicates whether or not the thing is connected to the AWS IoT service.</p>"
         }
       },
       "documentation": "<p>The thing search index document.</p>"
@@ -12795,10 +13928,14 @@
       "members": {
         "thingIndexingMode": {
           "shape": "ThingIndexingMode",
-          "documentation": "<p>Thing indexing mode. Valid values are: </p> <ul> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.</p> </li> <li> <p>OFF - Thing indexing is disabled.</p> </li> </ul>"
+          "documentation": "<p>Thing indexing mode. Valid values are:</p> <ul> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.</p> </li> <li> <p>OFF - Thing indexing is disabled.</p> </li> </ul>"
+        },
+        "thingConnectivityIndexingMode": {
+          "shape": "ThingConnectivityIndexingMode",
+          "documentation": "<p>Thing connectivity indexing mode. Valid values are: </p> <ul> <li> <p>STATUS – Your thing index will contain connectivity status. In order to enable thing connectivity indexing, thingIndexMode must not be set to OFF.</p> </li> <li> <p>OFF - Thing connectivity status indexing is disabled.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>Thing indexing configuration.</p>"
+      "documentation": "<p>The thing indexing configuration. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html\">Managing Thing Indexing</a>.</p>"
     },
     "ThingIndexingMode": {
       "type": "string",
@@ -12905,7 +14042,7 @@
       "members": {
         "inProgressTimeoutInMinutes": {
           "shape": "InProgressTimeoutInMinutes",
-          "documentation": "<p>Specifies the amount of time, in minutes, this device has to finish execution of this job. A timer is started, or restarted, whenever this job's execution status is specified as <code>IN_PROGRESS</code> with this field populated. If the job execution status is not set to a terminal state before the timer expires, or before another job execution status update is sent with this field populated, the status will be automatically set to <code>TIMED_OUT</code>. Note that setting/resetting this timer has no effect on the job execution timeout timer which may have been specified when the job was created (<code>CreateJobExecution</code> using the field <code>timeoutConfig</code>).</p>"
+          "documentation": "<p>Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can't be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal <code>TIMED_OUT</code> status.</p>"
         }
       },
       "documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.</p>"
@@ -13115,6 +14252,27 @@
       "type": "long",
       "min": 0
     },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The ARN of the resource.</p>"
+        },
+        "tagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>A list of the keys of the tags to be removed from the resource.</p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdateAccountAuditConfigurationRequest": {
       "type": "structure",
       "members": {
@@ -13179,6 +14337,38 @@
         }
       }
     },
+    "UpdateBillingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "billingGroupName",
+        "billingGroupProperties"
+      ],
+      "members": {
+        "billingGroupName": {
+          "shape": "BillingGroupName",
+          "documentation": "<p>The name of the billing group.</p>",
+          "location": "uri",
+          "locationName": "billingGroupName"
+        },
+        "billingGroupProperties": {
+          "shape": "BillingGroupProperties",
+          "documentation": "<p>The properties of the billing group.</p>"
+        },
+        "expectedVersion": {
+          "shape": "OptionalVersion",
+          "documentation": "<p>The expected version of the billing group. If the version of the billing group does not match the expected version specified in the request, the <code>UpdateBillingGroup</code> request is rejected with a <code>VersionConflictException</code>.</p>"
+        }
+      }
+    },
+    "UpdateBillingGroupResponse": {
+      "type": "structure",
+      "members": {
+        "version": {
+          "shape": "Version",
+          "documentation": "<p>The latest version of the billing group.</p>"
+        }
+      }
+    },
     "UpdateCACertificateRequest": {
       "type": "structure",
       "required": [
@@ -13236,6 +14426,50 @@
       },
       "documentation": "<p>The input for the UpdateCertificate operation.</p>"
     },
+    "UpdateDynamicThingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "thingGroupName",
+        "thingGroupProperties"
+      ],
+      "members": {
+        "thingGroupName": {
+          "shape": "ThingGroupName",
+          "documentation": "<p>The name of the dynamic thing group to update.</p>",
+          "location": "uri",
+          "locationName": "thingGroupName"
+        },
+        "thingGroupProperties": {
+          "shape": "ThingGroupProperties",
+          "documentation": "<p>The dynamic thing group properties to update.</p>"
+        },
+        "expectedVersion": {
+          "shape": "OptionalVersion",
+          "documentation": "<p>The expected version of the dynamic thing group to update.</p>"
+        },
+        "indexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The dynamic thing group index to update.</p> <note> <p>Currently one index is supported: 'AWS_Things'.</p> </note>"
+        },
+        "queryString": {
+          "shape": "QueryString",
+          "documentation": "<p>The dynamic thing group search query string to update.</p>"
+        },
+        "queryVersion": {
+          "shape": "QueryVersion",
+          "documentation": "<p>The dynamic thing group query version to update.</p> <note> <p>Currently one query version is supported: \"2017-09-30\". If not specified, the query version defaults to this value.</p> </note>"
+        }
+      }
+    },
+    "UpdateDynamicThingGroupResponse": {
+      "type": "structure",
+      "members": {
+        "version": {
+          "shape": "Version",
+          "documentation": "<p>The dynamic thing group version.</p>"
+        }
+      }
+    },
     "UpdateEventConfigurationsRequest": {
       "type": "structure",
       "members": {
@@ -13265,6 +14499,40 @@
     "UpdateIndexingConfigurationResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateJobRequest": {
+      "type": "structure",
+      "required": [
+        "jobId"
+      ],
+      "members": {
+        "jobId": {
+          "shape": "JobId",
+          "documentation": "<p>The ID of the job to be updated.</p>",
+          "location": "uri",
+          "locationName": "jobId"
+        },
+        "description": {
+          "shape": "JobDescription",
+          "documentation": "<p>A short text description of the job.</p>"
+        },
+        "presignedUrlConfig": {
+          "shape": "PresignedUrlConfig",
+          "documentation": "<p>Configuration information for pre-signed S3 URLs.</p>"
+        },
+        "jobExecutionsRolloutConfig": {
+          "shape": "JobExecutionsRolloutConfig",
+          "documentation": "<p>Allows you to create a staged rollout of the job.</p>"
+        },
+        "abortConfig": {
+          "shape": "AbortConfig",
+          "documentation": "<p>Allows you to create criteria to abort a job.</p>"
+        },
+        "timeoutConfig": {
+          "shape": "TimeoutConfig",
+          "documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to <code>TIMED_OUT</code>. </p>"
+        }
+      }
     },
     "UpdateRoleAliasRequest": {
       "type": "structure",
@@ -13502,6 +14770,10 @@
         "thingGroupsToRemove": {
           "shape": "ThingGroupList",
           "documentation": "<p>The groups from which the thing will be removed.</p>"
+        },
+        "overrideDynamicGroups": {
+          "shape": "OverrideDynamicGroups",
+          "documentation": "<p>Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.</p>"
         }
       }
     },

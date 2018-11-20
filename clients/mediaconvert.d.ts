@@ -12,6 +12,14 @@ declare class MediaConvert extends Service {
   constructor(options?: MediaConvert.Types.ClientConfiguration)
   config: Config & MediaConvert.Types.ClientConfiguration;
   /**
+   * Associates an AWS Certificate Manager (ACM) Amazon Resource Name (ARN) with AWS Elemental MediaConvert.
+   */
+  associateCertificate(params: MediaConvert.Types.AssociateCertificateRequest, callback?: (err: AWSError, data: MediaConvert.Types.AssociateCertificateResponse) => void): Request<MediaConvert.Types.AssociateCertificateResponse, AWSError>;
+  /**
+   * Associates an AWS Certificate Manager (ACM) Amazon Resource Name (ARN) with AWS Elemental MediaConvert.
+   */
+  associateCertificate(callback?: (err: AWSError, data: MediaConvert.Types.AssociateCertificateResponse) => void): Request<MediaConvert.Types.AssociateCertificateResponse, AWSError>;
+  /**
    * Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job.
    */
   cancelJob(params: MediaConvert.Types.CancelJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.CancelJobResponse) => void): Request<MediaConvert.Types.CancelJobResponse, AWSError>;
@@ -83,6 +91,14 @@ declare class MediaConvert extends Service {
    * Send an request with an empty body to the regional API endpoint to get your account API endpoint.
    */
   describeEndpoints(callback?: (err: AWSError, data: MediaConvert.Types.DescribeEndpointsResponse) => void): Request<MediaConvert.Types.DescribeEndpointsResponse, AWSError>;
+  /**
+   * Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM) certificate and an AWS Elemental MediaConvert resource.
+   */
+  disassociateCertificate(params: MediaConvert.Types.DisassociateCertificateRequest, callback?: (err: AWSError, data: MediaConvert.Types.DisassociateCertificateResponse) => void): Request<MediaConvert.Types.DisassociateCertificateResponse, AWSError>;
+  /**
+   * Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM) certificate and an AWS Elemental MediaConvert resource.
+   */
+  disassociateCertificate(callback?: (err: AWSError, data: MediaConvert.Types.DisassociateCertificateResponse) => void): Request<MediaConvert.Types.DisassociateCertificateResponse, AWSError>;
   /**
    * Retrieve the JSON for a specific completed transcoding job.
    */
@@ -267,6 +283,14 @@ declare namespace MediaConvert {
     SourceAncillaryChannelNumber?: __integerMin1Max4;
   }
   export type AntiAlias = "DISABLED"|"ENABLED"|string;
+  export interface AssociateCertificateRequest {
+    /**
+     * The ARN of the ACM certificate that you want to associate with your MediaConvert resource.
+     */
+    Arn: __string;
+  }
+  export interface AssociateCertificateResponse {
+  }
   export type AudioCodec = "AAC"|"MP2"|"WAV"|"AIFF"|"AC3"|"EAC3"|"PASSTHROUGH"|string;
   export interface AudioCodecSettings {
     AacSettings?: AacSettings;
@@ -484,7 +508,7 @@ All burn-in and DVB-Sub font settings must match.
     TeletextDestinationSettings?: TeletextDestinationSettings;
     TtmlDestinationSettings?: TtmlDestinationSettings;
   }
-  export type CaptionDestinationType = "BURN_IN"|"DVB_SUB"|"EMBEDDED"|"SCC"|"SRT"|"TELETEXT"|"TTML"|"WEBVTT"|string;
+  export type CaptionDestinationType = "BURN_IN"|"DVB_SUB"|"EMBEDDED"|"EMBEDDED_PLUS_SCTE20"|"SCTE20_PLUS_EMBEDDED"|"SCC"|"SRT"|"SMI"|"TELETEXT"|"TTML"|"WEBVTT"|string;
   export interface CaptionSelector {
     /**
      * The specific language to extract from source, using the ISO 639-2 or ISO 639-3 three-letter language code. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.
@@ -504,7 +528,7 @@ All burn-in and DVB-Sub font settings must match.
     SourceType?: CaptionSourceType;
     TeletextSourceSettings?: TeletextSourceSettings;
   }
-  export type CaptionSourceType = "ANCILLARY"|"DVB_SUB"|"EMBEDDED"|"SCC"|"TTML"|"STL"|"SRT"|"TELETEXT"|"NULL_SOURCE"|string;
+  export type CaptionSourceType = "ANCILLARY"|"DVB_SUB"|"EMBEDDED"|"SCTE20"|"SCC"|"TTML"|"STL"|"SRT"|"SMI"|"TELETEXT"|"NULL_SOURCE"|string;
   export interface ChannelMapping {
     /**
      * List of output channels
@@ -735,13 +759,14 @@ All burn-in and DVB-Sub font settings must match.
      */
     SegmentLength?: __integerMin1Max2147483647;
     /**
-     * When ENABLED, segment durations are indicated in the manifest using SegmentTimeline and SegmentTimeline will be promoted down into Representation from AdaptationSet.
+     * When you enable Precise segment duration in manifests (writeSegmentTimelineInRepresentation), your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn't enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element.
      */
     WriteSegmentTimelineInRepresentation?: DashIsoWriteSegmentTimelineInRepresentation;
   }
   export type DashIsoHbbtvCompliance = "HBBTV_1_5"|"NONE"|string;
   export type DashIsoSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
   export type DashIsoWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED"|string;
+  export type DecryptionMode = "AES_CTR"|"AES_CBC"|"AES_GCM"|string;
   export type DeinterlaceAlgorithm = "INTERPOLATE"|"INTERPOLATE_TICKER"|"BLEND"|"BLEND_TICKER"|string;
   export interface Deinterlacer {
     Algorithm?: DeinterlaceAlgorithm;
@@ -795,6 +820,14 @@ All burn-in and DVB-Sub font settings must match.
      * Use this string to request the next batch of endpoints.
      */
     NextToken?: __string;
+  }
+  export interface DisassociateCertificateRequest {
+    /**
+     * The ARN of the ACM certificate that you want to disassociate from your MediaConvert resource.
+     */
+    Arn: __string;
+  }
+  export interface DisassociateCertificateResponse {
   }
   export type DropFrameTimecode = "DISABLED"|"ENABLED"|string;
   export interface DvbNitSettings {
@@ -1480,7 +1513,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export interface ImageInserter {
     /**
-     * Image to insert. Must be 32 bit windows BMP, PNG, or TGA file. Must not be  larger than the output frames.
+     * Specify the images that you want to overlay on your video. The images must be PNG or TGA files.
      */
     InsertableImages?: __listOfInsertableImage;
   }
@@ -1498,6 +1531,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     CaptionSelectors?: __mapOfCaptionSelector;
     DeblockFilter?: InputDeblockFilter;
+    /**
+     * If the input file is encrypted, decryption settings to decrypt the media file
+     */
+    DecryptionSettings?: InputDecryptionSettings;
     DenoiseFilter?: InputDenoiseFilter;
     /**
      * Use Input (fileInput) to define the source file used in the transcode job. There can be multiple inputs in a job. These inputs are concantenated, in the order they are specified in the job, to create the output.
@@ -1508,6 +1545,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * Use Filter strength (FilterStrength) to adjust the magnitude the input filter settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
      */
     FilterStrength?: __integerMinNegative5Max5;
+    /**
+     * Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
+     */
+    ImageInserter?: ImageInserter;
     /**
      * (InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.
      */
@@ -1531,6 +1572,21 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     StartTimecode?: __stringPattern010920405090509092;
   }
   export type InputDeblockFilter = "ENABLED"|"DISABLED"|string;
+  export interface InputDecryptionSettings {
+    DecryptionMode?: DecryptionMode;
+    /**
+     * Decryption key either 128 or 192 or 256 bits encrypted with KMS
+     */
+    EncryptedDecryptionKey?: __stringMin24Max512PatternAZaZ0902;
+    /**
+     * Initialization Vector 96 bits (CTR/GCM mode only) or 128 bits.
+     */
+    InitializationVector?: __stringMin16Max24PatternAZaZ0922AZaZ0916;
+    /**
+     * The AWS region in which decryption key was encrypted with KMS
+     */
+    KmsKeyRegion?: __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912;
+  }
   export type InputDenoiseFilter = "ENABLED"|"DISABLED"|string;
   export type InputFilterEnable = "AUTO"|"DISABLE"|"FORCE"|string;
   export type InputPsiControl = "IGNORE_PSI"|"USE_PSI"|string;
@@ -1555,6 +1611,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     FilterStrength?: __integerMinNegative5Max5;
     /**
+     * Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
+     */
+    ImageInserter?: ImageInserter;
+    /**
      * (InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.
      */
     InputClippings?: __listOfInputClipping;
@@ -1569,35 +1629,35 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type InputTimecodeSource = "EMBEDDED"|"ZEROBASED"|"SPECIFIEDSTART"|string;
   export interface InsertableImage {
     /**
-     * Use Duration (Duration) to set the time, in milliseconds, for the image to remain on the output video.
+     * Set the time, in milliseconds, for the image to remain on the output video.
      */
-    Duration?: __integerMinNegative2147483648Max2147483647;
+    Duration?: __integerMin0Max2147483647;
     /**
-     * Use Fade in (FadeIut) to set the length, in milliseconds, of the inserted image fade in. If you don't specify a value for Fade in, the image will appear abruptly at the Start time.
+     * Set the length of time, in milliseconds, between the Start time that you specify for the image insertion and the time that the image appears at full opacity. Full opacity is the level that you specify for the opacity setting. If you don't specify a value for Fade-in, the image will appear abruptly at the overlay start time.
      */
-    FadeIn?: __integerMinNegative2147483648Max2147483647;
+    FadeIn?: __integerMin0Max2147483647;
     /**
-     * Use Fade out (FadeOut) to set the length, in milliseconds, of the inserted image fade out. If you don't specify a value for Fade out, the image will disappear abruptly at the end of the inserted image duration.
+     * Specify the length of time, in milliseconds, between the end of the time that you have specified for the image overlay Duration and when the overlaid image has faded to total transparency. If you don't specify a value for Fade-out, the image will disappear abruptly at the end of the inserted image duration.
      */
-    FadeOut?: __integerMinNegative2147483648Max2147483647;
+    FadeOut?: __integerMin0Max2147483647;
     /**
-     * Specify the Height (Height) of the inserted image. Use a value that is less than or equal to the video resolution height. Leave this setting blank to use the native height of the image.
+     * Specify the height of the inserted image in pixels. If you specify a value that's larger than the video resolution height, the service will crop your overlaid image to fit. To use the native height of the image, keep this setting blank.
      */
-    Height?: __integerMinNegative2147483648Max2147483647;
+    Height?: __integerMin0Max2147483647;
     /**
-     * Use Image location (imageInserterInput) to specify the Amazon S3 location of the image to be inserted into the output. Use a 32 bit BMP, PNG, or TGA file that fits inside the video frame.
+     * Use Image location (imageInserterInput) to specify the Amazon S3 location of the image to be inserted into the output. Use a PNG or TGA file that fits inside the video frame.
      */
     ImageInserterInput?: __stringMin14PatternS3BmpBMPPngPNGTgaTGA;
     /**
-     * Use Left (ImageX) to set the distance, in pixels, between the inserted image and the left edge of the frame. Required for BMP, PNG and TGA input.
+     * Use Left (ImageX) to set the distance, in pixels, between the inserted image and the left edge of the video frame. Required for any image overlay that you specify.
      */
-    ImageX?: __integerMinNegative2147483648Max2147483647;
+    ImageX?: __integerMin0Max2147483647;
     /**
-     * Use Top (ImageY) to set the distance, in pixels, between the inserted image and the top edge of the video frame. Required for BMP, PNG and TGA input.
+     * Use Top (ImageY) to set the distance, in pixels, between the overlaid image and the top edge of the video frame. Required for any image overlay that you specify.
      */
-    ImageY?: __integerMinNegative2147483648Max2147483647;
+    ImageY?: __integerMin0Max2147483647;
     /**
-     * Use Layer (Layer) to specify how overlapping inserted images appear. Images with higher values of layer appear on top of images with lower values of layer.
+     * Specify how overlapping inserted images appear. Images with higher values for Layer appear on top of images with lower values for Layer.
      */
     Layer?: __integerMin0Max99;
     /**
@@ -1609,9 +1669,9 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     StartTime?: __stringPattern01D20305D205D;
     /**
-     * Specify the Width (Width) of the inserted image. Use a value that is less than or equal to the video resolution width. Leave this setting blank to use the native width of the image.
+     * Specify the width of the inserted image in pixels. If you specify a value that's larger than the video resolution width, the service will crop your overlaid image to fit. To use the native width of the image, keep this setting blank.
      */
-    Width?: __integerMinNegative2147483648Max2147483647;
+    Width?: __integerMin0Max2147483647;
   }
   export interface Job {
     /**
@@ -1672,6 +1732,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * Use Inputs (inputs) to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
      */
     Inputs?: __listOfInput;
+    /**
+     * Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
+     */
+    MotionImageInserter?: MotionImageInserter;
     NielsenConfiguration?: NielsenConfiguration;
     /**
      * (OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings
@@ -1733,6 +1797,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template.
      */
     Inputs?: __listOfInputTemplate;
+    /**
+     * Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
+     */
+    MotionImageInserter?: MotionImageInserter;
     NielsenConfiguration?: NielsenConfiguration;
     /**
      * (OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings
@@ -2018,6 +2086,54 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     VideoPid?: __integerMin32Max8182;
   }
+  export interface MotionImageInserter {
+    /**
+     * If your motion graphic asset is a .mov file, keep this setting unspecified. If your motion graphic asset is a series of .png files, specify the framerate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. Make sure that the number of images in your series matches the framerate and your intended overlay duration. For example, if you want a 30-second overlay at 30 fps, you should have 900 .png images. This overlay framerate doesn't need to match the framerate of the underlying video.
+     */
+    Framerate?: MotionImageInsertionFramerate;
+    /**
+     * Specify the .mov file or series of .png files that you want to overlay on your video. For .png files, provide the file name of the first file in the series. Make sure that the names of the .png files end with sequential numbers that specify the order that they are played in. For example, overlay_000.png, overlay_001.png, overlay_002.png, and so on. The sequence must start at zero, and each image file name must have the same number of digits. Pad your initial file names with enough zeros to complete the sequence. For example, if the first image is overlay_0.png, there can be only 10 images in the sequence, with the last image being overlay_9.png. But if the first image is overlay_00.png, there can be 100 images in the sequence.
+     */
+    Input?: __stringMin14Max1285PatternS3Mov09Png;
+    /**
+     * Choose the type of motion graphic asset that you are providing for your overlay. You can choose either a .mov file or a series of .png files.
+     */
+    InsertionMode?: MotionImageInsertionMode;
+    /**
+     * Use Offset to specify the placement of your motion graphic overlay on the video frame. Specify in pixels, from the upper-left corner of the frame. If you don't specify an offset, the service scales your overlay to the full size of the frame. Otherwise, the service inserts the overlay at its native resolution and scales the size up or down with any video scaling.
+     */
+    Offset?: MotionImageInsertionOffset;
+    /**
+     * Specify whether your motion graphic overlay repeats on a loop or plays only once.
+     */
+    Playback?: MotionImagePlayback;
+    /**
+     * Specify when the motion overlay begins. Use timecode format (HH:MM:SS:FF or HH:MM:SS;FF). Make sure that the timecode you provide here takes into account how you have set up your timecode configuration under both job settings and input settings. The simplest way to do that is to set both to start at 0. If you need to set up your job to follow timecodes embedded in your source that don't start at zero, make sure that you specify a start time that is after the first embedded timecode. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/setting-up-timecode.html Find job-wide and input timecode configuration settings in your JSON job settings specification at settings>timecodeConfig>source and settings>inputs>timecodeSource.
+     */
+    StartTime?: __stringMin11Max11Pattern01D20305D205D;
+  }
+  export interface MotionImageInsertionFramerate {
+    /**
+     * The bottom of the fraction that expresses your overlay framerate. For example, if your framerate is 24 fps, set this value to 1.
+     */
+    FramerateDenominator?: __integerMin1Max17895697;
+    /**
+     * The top of the fraction that expresses your overlay framerate. For example, if your framerate is 24 fps, set this value to 24.
+     */
+    FramerateNumerator?: __integerMin1Max2147483640;
+  }
+  export type MotionImageInsertionMode = "MOV"|"PNG"|string;
+  export interface MotionImageInsertionOffset {
+    /**
+     * Set the distance, in pixels, between the overlay and the left edge of the video frame.
+     */
+    ImageX?: __integerMin0Max2147483647;
+    /**
+     * Set the distance, in pixels, between the overlay and the top edge of the video frame.
+     */
+    ImageY?: __integerMin0Max2147483647;
+  }
+  export type MotionImagePlayback = "ONCE"|"REPEAT"|string;
   export type MovClapAtom = "INCLUDE"|"EXCLUDE"|string;
   export type MovCslgAtom = "INCLUDE"|"EXCLUDE"|string;
   export type MovMpeg2FourCCControl = "XDCAM"|"MPEG"|string;
@@ -2455,7 +2571,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     RenewalType?: RenewalType;
     /**
-     * Specifies the number of reserved transcode slots (RTSs) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console.
+     * Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console.
      */
     ReservedSlots?: __integer;
     /**
@@ -2473,7 +2589,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     RenewalType: RenewalType;
     /**
-     * Specifies the number of reserved transcode slots (RTSs) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console.
+     * Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console.
      */
     ReservedSlots: __integer;
   }
@@ -2495,6 +2611,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Framerate?: SccDestinationFramerate;
   }
   export interface SpekeKeyProvider {
+    /**
+     * Optional AWS Certificate Manager ARN for a certificate to send to the keyprovider. The certificate holds a key used by the keyprovider to encrypt the keys in its response.
+     */
+    CertificateArn?: __stringPatternArnAwsAcm;
     /**
      * The SPEKE-compliant server uses Resource ID (ResourceId) to identify content.
      */
@@ -2679,6 +2799,9 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export type VideoCodec = "FRAME_CAPTURE"|"H_264"|"H_265"|"MPEG2"|"PRORES"|string;
   export interface VideoCodecSettings {
+    /**
+     * Specifies the video codec. This must be equal to one of the enum values defined by the object  VideoCodec.
+     */
     Codec?: VideoCodec;
     FrameCaptureSettings?: FrameCaptureSettings;
     H264Settings?: H264Settings;
@@ -2828,8 +2951,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __integerMin1Max10000000 = number;
   export type __integerMin1Max1001 = number;
   export type __integerMin1Max16 = number;
+  export type __integerMin1Max17895697 = number;
   export type __integerMin1Max2 = number;
   export type __integerMin1Max20 = number;
+  export type __integerMin1Max2147483640 = number;
   export type __integerMin1Max2147483647 = number;
   export type __integerMin1Max31 = number;
   export type __integerMin1Max32 = number;
@@ -2891,13 +3016,18 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __string = string;
   export type __stringMin0 = string;
   export type __stringMin1 = string;
+  export type __stringMin11Max11Pattern01D20305D205D = string;
+  export type __stringMin14Max1285PatternS3Mov09Png = string;
   export type __stringMin14PatternS3BmpBMPPngPNG = string;
   export type __stringMin14PatternS3BmpBMPPngPNGTgaTGA = string;
   export type __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI = string;
+  export type __stringMin16Max24PatternAZaZ0922AZaZ0916 = string;
   export type __stringMin1Max256 = string;
+  export type __stringMin24Max512PatternAZaZ0902 = string;
   export type __stringMin32Max32Pattern09aFAF32 = string;
   export type __stringMin3Max3Pattern1809aFAF09aEAE = string;
   export type __stringMin3Max3PatternAZaZ3 = string;
+  export type __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912 = string;
   export type __stringPattern = string;
   export type __stringPattern010920405090509092 = string;
   export type __stringPattern01D20305D205D = string;
@@ -2905,6 +3035,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = string;
   export type __stringPatternAZaZ0902 = string;
   export type __stringPatternAZaZ0932 = string;
+  export type __stringPatternArnAwsAcm = string;
   export type __stringPatternDD = string;
   export type __stringPatternHttps = string;
   export type __stringPatternIdentityAZaZ26AZaZ09163 = string;

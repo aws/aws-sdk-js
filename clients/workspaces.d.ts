@@ -92,6 +92,14 @@ declare class WorkSpaces extends Service {
    */
   describeAccountModifications(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
   /**
+   * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
+   */
+  describeClientProperties(params: WorkSpaces.Types.DescribeClientPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
+   */
+  describeClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
+  /**
    * Describes one or more of your IP access control groups.
    */
   describeIpGroups(params: WorkSpaces.Types.DescribeIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeIpGroupsResult) => void): Request<WorkSpaces.Types.DescribeIpGroupsResult, AWSError>;
@@ -179,6 +187,14 @@ declare class WorkSpaces extends Service {
    * Modifies the configuration of bring your own license (BYOL) for the specified account.
    */
   modifyAccount(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyAccountResult) => void): Request<WorkSpaces.Types.ModifyAccountResult, AWSError>;
+  /**
+   * Modifies the properties of the specified Amazon WorkSpaces client.
+   */
+  modifyClientProperties(params: WorkSpaces.Types.ModifyClientPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
+  /**
+   * Modifies the properties of the specified Amazon WorkSpaces client.
+   */
+  modifyClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
   /**
    * Modifies the specified WorkSpace properties.
    */
@@ -311,6 +327,23 @@ declare namespace WorkSpaces {
   export type BundleIdList = BundleId[];
   export type BundleList = WorkspaceBundle[];
   export type BundleOwner = string;
+  export interface ClientProperties {
+    /**
+     * Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. 
+     */
+    ReconnectEnabled?: ReconnectEnum;
+  }
+  export type ClientPropertiesList = ClientPropertiesResult[];
+  export interface ClientPropertiesResult {
+    /**
+     * The resource identifier, in the form of a directory ID.
+     */
+    ResourceId?: NonEmptyString;
+    /**
+     * Information about the Amazon WorkSpaces client.
+     */
+    ClientProperties?: ClientProperties;
+  }
   export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|string;
   export interface ComputeType {
     /**
@@ -451,6 +484,18 @@ declare namespace WorkSpaces {
      * The IP address range, specified as an IPv4 CIDR block, used for the management network interface. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
      */
     DedicatedTenancyManagementCidrRange?: DedicatedTenancyManagementCidrRange;
+  }
+  export interface DescribeClientPropertiesRequest {
+    /**
+     * The resource identifiers, in the form of directory IDs.
+     */
+    ResourceIds: ResourceIdList;
+  }
+  export interface DescribeClientPropertiesResult {
+    /**
+     * Information about the specified Amazon WorkSpaces clients.
+     */
+    ClientPropertiesList?: ClientPropertiesList;
   }
   export interface DescribeIpGroupsRequest {
     /**
@@ -761,6 +806,18 @@ declare namespace WorkSpaces {
   }
   export interface ModifyAccountResult {
   }
+  export interface ModifyClientPropertiesRequest {
+    /**
+     * The resource identifiers, in the form of directory IDs.
+     */
+    ResourceId: NonEmptyString;
+    /**
+     * Information about the Amazon WorkSpaces client.
+     */
+    ClientProperties?: ClientProperties;
+  }
+  export interface ModifyClientPropertiesResult {
+  }
   export interface ModifyWorkspacePropertiesRequest {
     /**
      * The identifier of the WorkSpace.
@@ -832,7 +889,9 @@ declare namespace WorkSpaces {
      */
     FailedRequests?: FailedRebuildWorkspaceRequests;
   }
+  export type ReconnectEnum = "ENABLED"|"DISABLED"|string;
   export type RegistrationCode = string;
+  export type ResourceIdList = NonEmptyString[];
   export interface RevokeIpRulesRequest {
     /**
      * The identifier of the group.

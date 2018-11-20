@@ -3037,7 +3037,7 @@
       "input": {
         "shape": "ModifyIdFormatRequest"
       },
-      "documentation": "<p>Modifies the ID format for the specified resource on a per-region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created.</p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
+      "documentation": "<p>Modifies the ID format for the specified resource on a per-region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created.</p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
     },
     "ModifyIdentityIdFormat": {
       "name": "ModifyIdentityIdFormat",
@@ -3293,7 +3293,7 @@
       "output": {
         "shape": "ModifyVpcPeeringConnectionOptionsResult"
       },
-      "documentation": "<p>Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:</p> <ul> <li> <p>Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.</p> </li> <li> <p>Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.</p> </li> <li> <p>Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.</p> </li> </ul> <p>If the peered VPCs are in different accounts, each owner must initiate a separate request to modify the peering connection options, depending on whether their VPC was the requester or accepter for the VPC peering connection. If the peered VPCs are in the same account, you can modify the requester and accepter options in the same request. To confirm which VPC is the accepter and requester for a VPC peering connection, use the <a>DescribeVpcPeeringConnections</a> command.</p>"
+      "documentation": "<p>Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:</p> <ul> <li> <p>Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.</p> </li> <li> <p>Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.</p> </li> <li> <p>Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.</p> </li> </ul> <p>If the peered VPCs are in the same AWS account, you can enable DNS resolution for queries from the local VPC. This ensures that queries from the local VPC resolve to private IP addresses in the peer VPC. This option is not available if the peered VPCs are in different AWS accounts or different regions. For peered VPCs in different AWS accounts, each AWS account owner must initiate a separate request to modify the peering connection options. For inter-region peering connections, you must use the region for the requester VPC to modify the requester VPC peering options and the region for the accepter VPC to modify the accepter VPC peering options. To verify which VPCs are the accepter and the requester for a VPC peering connection, use the <a>DescribeVpcPeeringConnections</a> command.</p>"
     },
     "ModifyVpcTenancy": {
       "name": "ModifyVpcTenancy",
@@ -4864,6 +4864,11 @@
           "shape": "String",
           "documentation": "<p>The name of the Availability Zone.</p>",
           "locationName": "zoneName"
+        },
+        "ZoneId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Availability Zone.</p>",
+          "locationName": "zoneId"
         }
       },
       "documentation": "<p>Describes an Availability Zone.</p>"
@@ -6534,7 +6539,7 @@
         },
         "Type": {
           "shape": "FleetType",
-          "documentation": "<p>The type of request. <code>instant</code> indicates whether the EC2 Fleet submits a one-time request for your desired capacity. <code>request</code> indicates whether the EC2 Fleet submits ongoing requests until your desired capacity is fulfilled, but does not attempt to submit requests in alternative capacity pools if capacity is unavailable or maintain the capacity. <code>maintain</code> indicates whether the EC2 Fleet submits ongoing requests until your desired capacity is fulfilled, and continues to maintain your desired capacity by replenishing interrupted Spot Instances. Default: <code>maintain</code>.</p>"
+          "documentation": "<p>The type of the request. By default, the EC2 Fleet places an asynchronous request for your desired capacity, and maintains it by replenishing interrupted Spot Instances (<code>maintain</code>). A value of <code>instant</code> places a synchronous one-time request, and returns errors for any instances that could not be launched. A value of <code>request</code> places an asynchronous one-time request without maintaining capacity or submitting requests in alternative capacity pools if capacity is unavailable. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type\">EC2 Fleet Request Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         },
         "ValidFrom": {
           "shape": "DateTime",
@@ -8895,8 +8900,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeAccountAttributes.</p>"
+      }
     },
     "DescribeAccountAttributesResult": {
       "type": "structure",
@@ -8906,8 +8910,7 @@
           "documentation": "<p>Information about one or more account attributes.</p>",
           "locationName": "accountAttributeSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeAccountAttributes.</p>"
+      }
     },
     "DescribeAddressesRequest": {
       "type": "structure",
@@ -8973,7 +8976,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>message</code> - Information about the Availability Zone.</p> </li> <li> <p> <code>region-name</code> - The name of the region for the Availability Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>).</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>message</code> - Information about the Availability Zone.</p> </li> <li> <p> <code>region-name</code> - The name of the region for the Availability Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-id</code> - The ID of the Availability Zone (for example, <code>use1-az1</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "ZoneNames": {
@@ -8981,13 +8984,17 @@
           "documentation": "<p>The names of one or more Availability Zones.</p>",
           "locationName": "ZoneName"
         },
+        "ZoneIds": {
+          "shape": "ZoneIdStringList",
+          "documentation": "<p>The IDs of one or more Availability Zones.</p>",
+          "locationName": "ZoneId"
+        },
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeAvailabilityZones.</p>"
+      }
     },
     "DescribeAvailabilityZonesResult": {
       "type": "structure",
@@ -8997,8 +9004,7 @@
           "documentation": "<p>Information about one or more Availability Zones.</p>",
           "locationName": "availabilityZoneInfo"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeAvailabiltyZones.</p>"
+      }
     },
     "DescribeBundleTasksRequest": {
       "type": "structure",
@@ -9865,8 +9871,7 @@
           "shape": "String",
           "documentation": "<p>The type of resource: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code> </p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeIdFormat.</p>"
+      }
     },
     "DescribeIdFormatResult": {
       "type": "structure",
@@ -9876,8 +9881,7 @@
           "documentation": "<p>Information about the ID format for the resource.</p>",
           "locationName": "statusSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeIdFormat.</p>"
+      }
     },
     "DescribeIdentityIdFormatRequest": {
       "type": "structure",
@@ -9895,8 +9899,7 @@
           "documentation": "<p>The type of resource: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code> </p>",
           "locationName": "resource"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeIdentityIdFormat.</p>"
+      }
     },
     "DescribeIdentityIdFormatResult": {
       "type": "structure",
@@ -9906,8 +9909,7 @@
           "documentation": "<p>Information about the ID format for the resources.</p>",
           "locationName": "statusSet"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeIdentityIdFormat.</p>"
+      }
     },
     "DescribeImageAttributeRequest": {
       "type": "structure",
@@ -10803,8 +10805,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeRegions.</p>"
+      }
     },
     "DescribeRegionsResult": {
       "type": "structure",
@@ -10814,8 +10815,7 @@
           "documentation": "<p>Information about one or more regions.</p>",
           "locationName": "regionInfo"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeRegions.</p>"
+      }
     },
     "DescribeReservedInstancesListingsRequest": {
       "type": "structure",
@@ -18371,8 +18371,7 @@
           "shape": "Boolean",
           "documentation": "<p>Indicate whether the resource should use longer IDs (17-character IDs).</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters of ModifyIdFormat.</p>"
+      }
     },
     "ModifyIdentityIdFormatRequest": {
       "type": "structure",
@@ -18397,8 +18396,7 @@
           "documentation": "<p>Indicates whether the resource should use longer IDs (17-character IDs)</p>",
           "locationName": "useLongIds"
         }
-      },
-      "documentation": "<p>Contains the parameters of ModifyIdentityIdFormat.</p>"
+      }
     },
     "ModifyImageAttributeRequest": {
       "type": "structure",
@@ -22407,19 +22405,25 @@
         "customer-gateway",
         "dedicated-host",
         "dhcp-options",
+        "elastic-ip",
+        "fleet",
+        "fpga-image",
         "image",
         "instance",
         "internet-gateway",
+        "launch-template",
+        "natgateway",
         "network-acl",
         "network-interface",
         "reserved-instances",
         "route-table",
+        "security-group",
         "snapshot",
         "spot-instances-request",
         "subnet",
-        "security-group",
         "volume",
         "vpc",
+        "vpc-peering-connection",
         "vpn-connection",
         "vpn-gateway"
       ]
@@ -27060,6 +27064,13 @@
           "documentation": "<p>Information about the address pool.</p>",
           "locationName": "byoipCidr"
         }
+      }
+    },
+    "ZoneIdStringList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "ZoneId"
       }
     },
     "ZoneNameStringList": {

@@ -68,11 +68,11 @@ declare class WorkDocs extends Service {
    */
   createLabels(callback?: (err: AWSError, data: WorkDocs.Types.CreateLabelsResponse) => void): Request<WorkDocs.Types.CreateLabelsResponse, AWSError>;
   /**
-   * Configure WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Confirm the Subscription in the Amazon Simple Notification Service Developer Guide.
+   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Subscribe to Notifications in the Amazon WorkDocs Developer Guide.
    */
   createNotificationSubscription(params: WorkDocs.Types.CreateNotificationSubscriptionRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateNotificationSubscriptionResponse) => void): Request<WorkDocs.Types.CreateNotificationSubscriptionResponse, AWSError>;
   /**
-   * Configure WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Confirm the Subscription in the Amazon Simple Notification Service Developer Guide.
+   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Subscribe to Notifications in the Amazon WorkDocs Developer Guide.
    */
   createNotificationSubscription(callback?: (err: AWSError, data: WorkDocs.Types.CreateNotificationSubscriptionResponse) => void): Request<WorkDocs.Types.CreateNotificationSubscriptionResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class WorkDocs extends Service {
    */
   describeFolderContents(callback?: (err: AWSError, data: WorkDocs.Types.DescribeFolderContentsResponse) => void): Request<WorkDocs.Types.DescribeFolderContentsResponse, AWSError>;
   /**
-   * Describes the groups specified by query.
+   * Describes the groups specified by the query. Groups are defined by the underlying Active Directory.
    */
   describeGroups(params: WorkDocs.Types.DescribeGroupsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeGroupsResponse) => void): Request<WorkDocs.Types.DescribeGroupsResponse, AWSError>;
   /**
-   * Describes the groups specified by query.
+   * Describes the groups specified by the query. Groups are defined by the underlying Active Directory.
    */
   describeGroups(callback?: (err: AWSError, data: WorkDocs.Types.DescribeGroupsResponse) => void): Request<WorkDocs.Types.DescribeGroupsResponse, AWSError>;
   /**
@@ -212,11 +212,11 @@ declare class WorkDocs extends Service {
    */
   describeResourcePermissions(callback?: (err: AWSError, data: WorkDocs.Types.DescribeResourcePermissionsResponse) => void): Request<WorkDocs.Types.DescribeResourcePermissionsResponse, AWSError>;
   /**
-   * Describes the current user's special folders; the RootFolder and the RecycleBin. RootFolder is the root of user's files and folders and RecycleBin is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.
+   * Describes the current user's special folders; the RootFolder and the RecycleBin. RootFolder is the root of user's files and folders and RecycleBin is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients. This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see Authentication and Access Control for User Applications in the Amazon WorkDocs Developer Guide.
    */
   describeRootFolders(params: WorkDocs.Types.DescribeRootFoldersRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeRootFoldersResponse) => void): Request<WorkDocs.Types.DescribeRootFoldersResponse, AWSError>;
   /**
-   * Describes the current user's special folders; the RootFolder and the RecycleBin. RootFolder is the root of user's files and folders and RecycleBin is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.
+   * Describes the current user's special folders; the RootFolder and the RecycleBin. RootFolder is the root of user's files and folders and RecycleBin is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients. This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see Authentication and Access Control for User Applications in the Amazon WorkDocs Developer Guide.
    */
   describeRootFolders(callback?: (err: AWSError, data: WorkDocs.Types.DescribeRootFoldersResponse) => void): Request<WorkDocs.Types.DescribeRootFoldersResponse, AWSError>;
   /**
@@ -275,6 +275,14 @@ declare class WorkDocs extends Service {
    * Retrieves the path information (the hierarchy from the root folder) for the specified folder. By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested folder and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the parent folder names.
    */
   getFolderPath(callback?: (err: AWSError, data: WorkDocs.Types.GetFolderPathResponse) => void): Request<WorkDocs.Types.GetFolderPathResponse, AWSError>;
+  /**
+   * Retrieves a collection of resources, including folders and documents. The only CollectionType supported is SHARED_WITH_ME.
+   */
+  getResources(params: WorkDocs.Types.GetResourcesRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetResourcesResponse) => void): Request<WorkDocs.Types.GetResourcesResponse, AWSError>;
+  /**
+   * Retrieves a collection of resources, including folders and documents. The only CollectionType supported is SHARED_WITH_ME.
+   */
+  getResources(callback?: (err: AWSError, data: WorkDocs.Types.GetResourcesResponse) => void): Request<WorkDocs.Types.GetResourcesResponse, AWSError>;
   /**
    * Creates a new document object and version object. The client specifies the parent folder ID and name of the document to upload. The ID is optionally specified when creating a new version of an existing document. This is the first step to upload a document. Next, upload the document to the URL returned from the call, and then call UpdateDocumentVersion. To cancel the document upload, call AbortDocumentVersionUpload.
    */
@@ -373,6 +381,10 @@ declare namespace WorkDocs {
      */
     TimeStamp?: TimestampType;
     /**
+     * Indicates whether an activity is indirect or direct. An indirect activity results from a direct activity performed on a parent resource. For example, sharing a parent folder (the direct activity) shares all of the subfolders and documents within the parent folder (the indirect activity).
+     */
+    IsIndirectActivity?: BooleanType;
+    /**
      * The ID of the organization.
      */
     OrganizationId?: IdType;
@@ -397,7 +409,8 @@ declare namespace WorkDocs {
      */
     CommentMetadata?: CommentMetadata;
   }
-  export type ActivityType = "DOCUMENT_CHECKED_IN"|"DOCUMENT_CHECKED_OUT"|"DOCUMENT_RENAMED"|"DOCUMENT_VERSION_UPLOADED"|"DOCUMENT_VERSION_DELETED"|"DOCUMENT_RECYCLED"|"DOCUMENT_RESTORED"|"DOCUMENT_REVERTED"|"DOCUMENT_SHARED"|"DOCUMENT_UNSHARED"|"DOCUMENT_SHARE_PERMISSION_CHANGED"|"DOCUMENT_SHAREABLE_LINK_CREATED"|"DOCUMENT_SHAREABLE_LINK_REMOVED"|"DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"|"DOCUMENT_MOVED"|"DOCUMENT_COMMENT_ADDED"|"DOCUMENT_COMMENT_DELETED"|"DOCUMENT_ANNOTATION_ADDED"|"DOCUMENT_ANNOTATION_DELETED"|"FOLDER_CREATED"|"FOLDER_DELETED"|"FOLDER_RENAMED"|"FOLDER_RECYCLED"|"FOLDER_RESTORED"|"FOLDER_SHARED"|"FOLDER_UNSHARED"|"FOLDER_SHARE_PERMISSION_CHANGED"|"FOLDER_SHAREABLE_LINK_CREATED"|"FOLDER_SHAREABLE_LINK_REMOVED"|"FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"|"FOLDER_MOVED"|string;
+  export type ActivityNamesFilterType = string;
+  export type ActivityType = "DOCUMENT_CHECKED_IN"|"DOCUMENT_CHECKED_OUT"|"DOCUMENT_RENAMED"|"DOCUMENT_VERSION_UPLOADED"|"DOCUMENT_VERSION_DELETED"|"DOCUMENT_VERSION_VIEWED"|"DOCUMENT_VERSION_DOWNLOADED"|"DOCUMENT_RECYCLED"|"DOCUMENT_RESTORED"|"DOCUMENT_REVERTED"|"DOCUMENT_SHARED"|"DOCUMENT_UNSHARED"|"DOCUMENT_SHARE_PERMISSION_CHANGED"|"DOCUMENT_SHAREABLE_LINK_CREATED"|"DOCUMENT_SHAREABLE_LINK_REMOVED"|"DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"|"DOCUMENT_MOVED"|"DOCUMENT_COMMENT_ADDED"|"DOCUMENT_COMMENT_DELETED"|"DOCUMENT_ANNOTATION_ADDED"|"DOCUMENT_ANNOTATION_DELETED"|"FOLDER_CREATED"|"FOLDER_DELETED"|"FOLDER_RENAMED"|"FOLDER_RECYCLED"|"FOLDER_RESTORED"|"FOLDER_SHARED"|"FOLDER_UNSHARED"|"FOLDER_SHARE_PERMISSION_CHANGED"|"FOLDER_SHAREABLE_LINK_CREATED"|"FOLDER_SHAREABLE_LINK_REMOVED"|"FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"|"FOLDER_MOVED"|string;
   export interface AddResourcePermissionsRequest {
     /**
      * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
@@ -798,9 +811,21 @@ declare namespace WorkDocs {
      */
     OrganizationId?: IdType;
     /**
+     * Specifies which activity types to include in the response. If this field is left empty, all activity types are returned.
+     */
+    ActivityTypes?: ActivityNamesFilterType;
+    /**
+     * The document or folder ID for which to describe activity types.
+     */
+    ResourceId?: IdType;
+    /**
      * The ID of the user who performed the action. The response includes activities pertaining to this user. This is an optional parameter and is only applicable for administrative API (SigV4) requests.
      */
     UserId?: IdType;
+    /**
+     * Includes indirect activities. An indirect activity results from a direct activity performed on a parent resource. For example, sharing a parent folder (the direct activity) shares all of the subfolders and documents within the parent folder (the indirect activity).
+     */
+    IncludeIndirectActivities?: BooleanType;
     /**
      * The maximum number of items to return.
      */
@@ -1400,6 +1425,42 @@ declare namespace WorkDocs {
      */
     CustomMetadata?: CustomMetadataMap;
   }
+  export interface GetResourcesRequest {
+    /**
+     * The Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API operation using AWS credentials.
+     */
+    AuthenticationToken?: AuthenticationHeaderType;
+    /**
+     * The user ID for the resource collection. This is a required field for accessing the API operation using IAM credentials.
+     */
+    UserId?: IdType;
+    /**
+     * The collection type.
+     */
+    CollectionType?: ResourceCollectionType;
+    /**
+     * The maximum number of resources to return.
+     */
+    Limit?: LimitType;
+    /**
+     * The marker for the next set of results. This marker was received from a previous call.
+     */
+    Marker?: PageMarkerType;
+  }
+  export interface GetResourcesResponse {
+    /**
+     * The folders in the specified folder.
+     */
+    Folders?: FolderMetadataList;
+    /**
+     * The documents in the specified collection.
+     */
+    Documents?: DocumentMetadataList;
+    /**
+     * The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+     */
+    Marker?: PageMarkerType;
+  }
   export interface GroupMetadata {
     /**
      * The ID of the user group.
@@ -1545,6 +1606,7 @@ declare namespace WorkDocs {
      */
     PrincipalType?: PrincipalType;
   }
+  export type ResourceCollectionType = "SHARED_WITH_ME"|string;
   export type ResourceIdType = string;
   export interface ResourceMetadata {
     /**
@@ -1620,6 +1682,10 @@ declare namespace WorkDocs {
      * The ID of the principal.
      */
     PrincipalId?: IdType;
+    /**
+     * The ID of the invited user.
+     */
+    InviteePrincipalId?: IdType;
     /**
      * The role.
      */

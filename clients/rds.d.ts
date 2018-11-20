@@ -1579,6 +1579,10 @@ declare namespace RDS {
      */
     DBSubnetGroupName?: String;
     /**
+     *  A list of EC2 VPC security groups to associate with the Read Replica.   Default: The default EC2 VPC security group for the DB subnet group's VPC. 
+     */
+    VpcSecurityGroupIds?: VpcSecurityGroupIdList;
+    /**
      * Specifies the storage type to be associated with the Read Replica.  Valid values: standard | gp2 | io1   If you specify io1, you must also include a value for the Iops parameter.   Default: io1 if the Iops parameter is specified, otherwise standard 
      */
     StorageType?: String;
@@ -5686,6 +5690,10 @@ declare namespace RDS {
      */
     TdeCredentialPassword?: String;
     /**
+     *  A list of EC2 VPC security groups to associate with this DB instance.   Default: The default EC2 VPC security group for the DB subnet group's VPC. 
+     */
+    VpcSecurityGroupIds?: VpcSecurityGroupIdList;
+    /**
      * Specify the Active Directory Domain to restore the instance in.
      */
     Domain?: String;
@@ -5984,6 +5992,10 @@ declare namespace RDS {
      * The password for the given ARN from the key store in order to access the device.
      */
     TdeCredentialPassword?: String;
+    /**
+     *  A list of EC2 VPC security groups to associate with this DB instance.   Default: The default EC2 VPC security group for the DB subnet group's VPC. 
+     */
+    VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
      * Specify the Active Directory Domain to restore the instance in.
      */

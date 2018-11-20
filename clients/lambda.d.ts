@@ -29,11 +29,11 @@ declare class Lambda extends Service {
    */
   createAlias(callback?: (err: AWSError, data: Lambda.Types.AliasConfiguration) => void): Request<Lambda.Types.AliasConfiguration, AWSError>;
   /**
-   * Identifies a poll-based event source for a Lambda function. It can be either an Amazon Kinesis or DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the event source. This association between a poll-based source and a Lambda function is called the event source mapping. You provide mapping information (for example, which stream or SQS queue to read from and which Lambda function to invoke) in the request body. Amazon Kinesis or DynamoDB stream event sources can be associated with multiple AWS Lambda functions and a given Lambda function can be associated with multiple AWS event sources. For Amazon SQS, you can configure multiple queues as event sources for a single Lambda function, but an SQS queue can be mapped only to a single Lambda function. You can configure an SQS queue in an account separate from your Lambda function's account. Also the queue needs to reside in the same AWS region as your function.  If you are using versioning, you can specify a specific function version or an alias via the function name parameter. For more information about versioning, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:CreateEventSourceMapping action.
+   * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon DynamoDB   
    */
   createEventSourceMapping(params: Lambda.Types.CreateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Identifies a poll-based event source for a Lambda function. It can be either an Amazon Kinesis or DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the event source. This association between a poll-based source and a Lambda function is called the event source mapping. You provide mapping information (for example, which stream or SQS queue to read from and which Lambda function to invoke) in the request body. Amazon Kinesis or DynamoDB stream event sources can be associated with multiple AWS Lambda functions and a given Lambda function can be associated with multiple AWS event sources. For Amazon SQS, you can configure multiple queues as event sources for a single Lambda function, but an SQS queue can be mapped only to a single Lambda function. You can configure an SQS queue in an account separate from your Lambda function's account. Also the queue needs to reside in the same AWS region as your function.  If you are using versioning, you can specify a specific function version or an alias via the function name parameter. For more information about versioning, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:CreateEventSourceMapping action.
+   * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon DynamoDB   
    */
   createEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -53,11 +53,11 @@ declare class Lambda extends Service {
    */
   deleteAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes an event source mapping. This means AWS Lambda will no longer invoke the function for events in the associated source. This operation requires permission for the lambda:DeleteEventSourceMapping action.
+   * Deletes an event source mapping.
    */
   deleteEventSourceMapping(params: Lambda.Types.DeleteEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Removes an event source mapping. This means AWS Lambda will no longer invoke the function for events in the associated source. This operation requires permission for the lambda:DeleteEventSourceMapping action.
+   * Deletes an event source mapping.
    */
   deleteEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -93,11 +93,11 @@ declare class Lambda extends Service {
    */
   getAlias(callback?: (err: AWSError, data: Lambda.Types.AliasConfiguration) => void): Request<Lambda.Types.AliasConfiguration, AWSError>;
   /**
-   * Returns configuration information for the specified event source mapping (see CreateEventSourceMapping). This operation requires permission for the lambda:GetEventSourceMapping action.
+   * Returns details about an event source mapping.
    */
   getEventSourceMapping(params: Lambda.Types.GetEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Returns configuration information for the specified event source mapping (see CreateEventSourceMapping). This operation requires permission for the lambda:GetEventSourceMapping action.
+   * Returns details about an event source mapping.
    */
   getEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -149,11 +149,11 @@ declare class Lambda extends Service {
    */
   listAliases(callback?: (err: AWSError, data: Lambda.Types.ListAliasesResponse) => void): Request<Lambda.Types.ListAliasesResponse, AWSError>;
   /**
-   * Returns a list of event source mappings you created using the CreateEventSourceMapping (see CreateEventSourceMapping).  For each mapping, the API returns configuration information. You can optionally specify filters to retrieve specific event source mappings. This operation requires permission for the lambda:ListEventSourceMappings action.
+   * Lists event source mappings. Specify an EventSourceArn to only show event source mappings for a single event source.
    */
   listEventSourceMappings(params: Lambda.Types.ListEventSourceMappingsRequest, callback?: (err: AWSError, data: Lambda.Types.ListEventSourceMappingsResponse) => void): Request<Lambda.Types.ListEventSourceMappingsResponse, AWSError>;
   /**
-   * Returns a list of event source mappings you created using the CreateEventSourceMapping (see CreateEventSourceMapping).  For each mapping, the API returns configuration information. You can optionally specify filters to retrieve specific event source mappings. This operation requires permission for the lambda:ListEventSourceMappings action.
+   * Lists event source mappings. Specify an EventSourceArn to only show event source mappings for a single event source.
    */
   listEventSourceMappings(callback?: (err: AWSError, data: Lambda.Types.ListEventSourceMappingsResponse) => void): Request<Lambda.Types.ListEventSourceMappingsResponse, AWSError>;
   /**
@@ -229,11 +229,11 @@ declare class Lambda extends Service {
    */
   updateAlias(callback?: (err: AWSError, data: Lambda.Types.AliasConfiguration) => void): Request<Lambda.Types.AliasConfiguration, AWSError>;
   /**
-   * You can update an event source mapping. This is useful if you want to change the parameters of the existing mapping without losing your position in the stream. You can change which function will receive the stream records, but to change the stream itself, you must create a new mapping. If you disable the event source mapping, AWS Lambda stops polling. If you enable again, it will resume polling from the time it had stopped polling, so you don't lose processing of any records. However, if you delete event source mapping and create it again, it will reset. This operation requires permission for the lambda:UpdateEventSourceMapping action.
+   * Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.
    */
   updateEventSourceMapping(params: Lambda.Types.UpdateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * You can update an event source mapping. This is useful if you want to change the parameters of the existing mapping without losing your position in the stream. You can change which function will receive the stream records, but to change the stream itself, you must create a new mapping. If you disable the event source mapping, AWS Lambda stops polling. If you enable again, it will resume polling from the time it had stopped polling, so you don't lose processing of any records. However, if you delete event source mapping and create it again, it will reset. This operation requires permission for the lambda:UpdateEventSourceMapping action.
+   * Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.
    */
   updateEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -402,27 +402,27 @@ declare namespace Lambda {
   }
   export interface CreateEventSourceMappingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the event source.
+     * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis - The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams - The ARN of the stream.    Amazon Simple Queue Service - The ARN of the queue.  
      */
     EventSourceArn: Arn;
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Version or Alias ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Version or Alias ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
-     * Set to false to disable the event source upon creation. 
+     * Disables the event source mapping to pause polling and invocation.
      */
     Enabled?: Enabled;
     /**
-     * The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function. Your function receives an event with all the retrieved records. The default for Amazon Kinesis and Amazon DynamoDB is 100 records. Both the default and maximum for Amazon SQS are 10 messages.
+     * The maximum number of items to retrieve in a single batch.    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. Max 10.  
      */
     BatchSize?: BatchSize;
     /**
-     * The position in the DynamoDB or Kinesis stream where AWS Lambda should start reading. For more information, see GetShardIterator in the Amazon Kinesis API Reference Guide or GetShardIterator in the Amazon DynamoDB API Reference Guide. The AT_TIMESTAMP value is supported only for Kinesis streams. 
+     * The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. AT_TIMESTAMP is only supported for Amazon Kinesis streams.
      */
     StartingPosition?: EventSourcePosition;
     /**
-     * The timestamp of the data record from which to start reading. Used with shard iterator type AT_TIMESTAMP. If a record with this exact timestamp does not exist, the iterator returned is for the next (later) record. If the timestamp is older than the current trim horizon, the iterator returned is for the oldest untrimmed data record (TRIM_HORIZON). Valid only for Kinesis streams. 
+     * With StartingPosition set to AT_TIMESTAMP, the Unix time in seconds from which to start reading.
      */
     StartingPositionTimestamp?: _Date;
   }
@@ -507,7 +507,7 @@ declare namespace Lambda {
   }
   export interface DeleteEventSourceMappingRequest {
     /**
-     * The event source mapping ID.
+     * The identifier of the event source mapping.
      */
     UUID: String;
   }
@@ -560,35 +560,35 @@ declare namespace Lambda {
   export type EnvironmentVariables = {[key: string]: EnvironmentVariableValue};
   export interface EventSourceMappingConfiguration {
     /**
-     * The AWS Lambda assigned opaque identifier for the mapping.
+     * The identifier of the event source mapping.
      */
     UUID?: String;
     /**
-     * The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function. Your function receives an event with all the retrieved records.
+     * The maximum number of items to retrieve in a single batch.
      */
     BatchSize?: BatchSize;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB stream that is the source of events.
+     * The Amazon Resource Name (ARN) of the event source.
      */
     EventSourceArn?: Arn;
     /**
-     * The Lambda function to invoke when AWS Lambda detects an event on the poll-based source.
+     * The ARN of the Lambda function.
      */
     FunctionArn?: FunctionArn;
     /**
-     * The UTC time string indicating the last time the event mapping was updated.
+     * The date that the event source mapping was last updated, in Unix time seconds.
      */
     LastModified?: _Date;
     /**
-     * The result of the last AWS Lambda invocation of your Lambda function. This value will be null if an SQS queue is the event source.
+     * The result of the last AWS Lambda invocation of your Lambda function.
      */
     LastProcessingResult?: String;
     /**
-     * The state of the event source mapping. It can be Creating, Enabled, Disabled, Enabling, Disabling, Updating, or Deleting.
+     * The state of the event source mapping. It can be one of the following: Creating, Enabling, Enabled, Disabling, Disabled, Updating, or Deleting.
      */
     State?: String;
     /**
-     * The reason the event source mapping is in its current state. It is either user-requested or an AWS Lambda-initiated state transition.
+     * The cause of the last state change, either User initiated or Lambda initiated.
      */
     StateTransitionReason?: String;
   }
@@ -729,7 +729,7 @@ declare namespace Lambda {
   }
   export interface GetEventSourceMappingRequest {
     /**
-     * The AWS Lambda assigned ID of the event source mapping.
+     * The identifier of the event source mapping.
      */
     UUID: String;
   }
@@ -890,29 +890,29 @@ declare namespace Lambda {
   }
   export interface ListEventSourceMappingsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB stream. (This parameter is optional.)
+     * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis - The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams - The ARN of the stream.    Amazon Simple Queue Service - The ARN of the queue.  
      */
     EventSourceArn?: Arn;
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Version or Alias ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Version or Alias ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.
      */
     FunctionName?: FunctionName;
     /**
-     * Optional string. An opaque pagination token returned from a previous ListEventSourceMappings operation. If present, specifies to continue the list from where the returning call left off. 
+     * A pagination token returned by a previous call.
      */
     Marker?: String;
     /**
-     * Optional integer. Specifies the maximum number of event sources to return in response. This value must be greater than 0.
+     * The maximum number of event source mappings to return.
      */
     MaxItems?: MaxListItems;
   }
   export interface ListEventSourceMappingsResponse {
     /**
-     * A string, present if there are more event source mappings.
+     * A pagination token that's returned when the response doesn't contain all event source mappings.
      */
     NextMarker?: String;
     /**
-     * An array of EventSourceMappingConfiguration objects.
+     * A list of event source mappings.
      */
     EventSourceMappings?: EventSourceMappingsList;
   }
@@ -1039,7 +1039,7 @@ declare namespace Lambda {
   export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"java8"|"python2.7"|"python3.6"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"nodejs4.3-edge"|"go1.x"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"java8"|"python2.7"|"python3.6"|"python3.7"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"nodejs4.3-edge"|"go1.x"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;
@@ -1119,19 +1119,19 @@ declare namespace Lambda {
   }
   export interface UpdateEventSourceMappingRequest {
     /**
-     * The event source mapping identifier.
+     * The identifier of the event source mapping.
      */
     UUID: String;
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Version or Alias ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Version or Alias ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.
      */
     FunctionName?: FunctionName;
     /**
-     * Specifies whether AWS Lambda should actively poll the stream or not. If disabled, AWS Lambda will not poll the stream.
+     * Disables the event source mapping to pause polling and invocation.
      */
     Enabled?: Enabled;
     /**
-     * The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function. Your function receives an event with all the retrieved records.
+     * The maximum number of items to retrieve in a single batch.    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. Max 10.  
      */
     BatchSize?: BatchSize;
   }

@@ -110,7 +110,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Identifies a poll-based event source for a Lambda function. It can be either an Amazon Kinesis or DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the event source.</p> <p>This association between a poll-based source and a Lambda function is called the event source mapping.</p> <p>You provide mapping information (for example, which stream or SQS queue to read from and which Lambda function to invoke) in the request body.</p> <p>Amazon Kinesis or DynamoDB stream event sources can be associated with multiple AWS Lambda functions and a given Lambda function can be associated with multiple AWS event sources. For Amazon SQS, you can configure multiple queues as event sources for a single Lambda function, but an SQS queue can be mapped only to a single Lambda function.</p> <p>You can configure an SQS queue in an account separate from your Lambda function's account. Also the queue needs to reside in the same AWS region as your function. </p> <p>If you are using versioning, you can specify a specific function version or an alias via the function name parameter. For more information about versioning, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:CreateEventSourceMapping</code> action.</p>"
+      "documentation": "<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html\">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html\">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html\">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> </ul>"
     },
     "CreateFunction": {
       "name": "CreateFunction",
@@ -200,7 +200,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Removes an event source mapping. This means AWS Lambda will no longer invoke the function for events in the associated source.</p> <p>This operation requires permission for the <code>lambda:DeleteEventSourceMapping</code> action.</p>"
+      "documentation": "<p>Deletes an event source mapping.</p>"
     },
     "DeleteFunction": {
       "name": "DeleteFunction",
@@ -336,7 +336,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Returns configuration information for the specified event source mapping (see <a>CreateEventSourceMapping</a>).</p> <p>This operation requires permission for the <code>lambda:GetEventSourceMapping</code> action.</p>"
+      "documentation": "<p>Returns details about an event source mapping.</p>"
     },
     "GetFunction": {
       "name": "GetFunction",
@@ -587,7 +587,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Returns a list of event source mappings you created using the <code>CreateEventSourceMapping</code> (see <a>CreateEventSourceMapping</a>). </p> <p>For each mapping, the API returns configuration information. You can optionally specify filters to retrieve specific event source mappings.</p> <p>This operation requires permission for the <code>lambda:ListEventSourceMappings</code> action.</p>"
+      "documentation": "<p>Lists event source mappings. Specify an <code>EventSourceArn</code> to only show event source mappings for a single event source.</p>"
     },
     "ListFunctions": {
       "name": "ListFunctions",
@@ -882,7 +882,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>You can update an event source mapping. This is useful if you want to change the parameters of the existing mapping without losing your position in the stream. You can change which function will receive the stream records, but to change the stream itself, you must create a new mapping.</p> <p>If you disable the event source mapping, AWS Lambda stops polling. If you enable again, it will resume polling from the time it had stopped polling, so you don't lose processing of any records. However, if you delete event source mapping and create it again, it will reset.</p> <p>This operation requires permission for the <code>lambda:UpdateEventSourceMapping</code> action.</p>"
+      "documentation": "<p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.</p>"
     },
     "UpdateFunctionCode": {
       "name": "UpdateFunctionCode",
@@ -1197,27 +1197,27 @@
       "members": {
         "EventSourceArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> </ul>"
         },
         "FunctionName": {
           "shape": "FunctionName",
-          "documentation": "<p>The name of the lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>"
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.</p>"
         },
         "Enabled": {
           "shape": "Enabled",
-          "documentation": "<p>Set to false to disable the event source upon creation. </p>"
+          "documentation": "<p>Disables the event source mapping to pause polling and invocation.</p>"
         },
         "BatchSize": {
           "shape": "BatchSize",
-          "documentation": "<p>The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function. Your function receives an event with all the retrieved records. The default for Amazon Kinesis and Amazon DynamoDB is 100 records. Both the default and maximum for Amazon SQS are 10 messages.</p>"
+          "documentation": "<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>"
         },
         "StartingPosition": {
           "shape": "EventSourcePosition",
-          "documentation": "<p>The position in the DynamoDB or Kinesis stream where AWS Lambda should start reading. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType\">GetShardIterator</a> in the <i>Amazon Kinesis API Reference Guide</i> or <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html\">GetShardIterator</a> in the <i>Amazon DynamoDB API Reference Guide</i>. The <code>AT_TIMESTAMP</code> value is supported only for <a href=\"http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html\">Kinesis streams</a>. </p>"
+          "documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.</p>"
         },
         "StartingPositionTimestamp": {
           "shape": "Date",
-          "documentation": "<p>The timestamp of the data record from which to start reading. Used with <a href=\"http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType\">shard iterator type</a> AT_TIMESTAMP. If a record with this exact timestamp does not exist, the iterator returned is for the next (later) record. If the timestamp is older than the current trim horizon, the iterator returned is for the oldest untrimmed data record (TRIM_HORIZON). Valid only for <a href=\"http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html\">Kinesis streams</a>. </p>"
+          "documentation": "<p>With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the Unix time in seconds from which to start reading.</p>"
         }
       }
     },
@@ -1335,7 +1335,7 @@
       "members": {
         "UUID": {
           "shape": "String",
-          "documentation": "<p>The event source mapping ID.</p>",
+          "documentation": "<p>The identifier of the event source mapping.</p>",
           "location": "uri",
           "locationName": "UUID"
         }
@@ -1445,38 +1445,38 @@
       "members": {
         "UUID": {
           "shape": "String",
-          "documentation": "<p>The AWS Lambda assigned opaque identifier for the mapping.</p>"
+          "documentation": "<p>The identifier of the event source mapping.</p>"
         },
         "BatchSize": {
           "shape": "BatchSize",
-          "documentation": "<p>The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function. Your function receives an event with all the retrieved records.</p>"
+          "documentation": "<p>The maximum number of items to retrieve in a single batch.</p>"
         },
         "EventSourceArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB stream that is the source of events.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p>"
         },
         "FunctionArn": {
           "shape": "FunctionArn",
-          "documentation": "<p>The Lambda function to invoke when AWS Lambda detects an event on the poll-based source.</p>"
+          "documentation": "<p>The ARN of the Lambda function.</p>"
         },
         "LastModified": {
           "shape": "Date",
-          "documentation": "<p>The UTC time string indicating the last time the event mapping was updated.</p>"
+          "documentation": "<p>The date that the event source mapping was last updated, in Unix time seconds.</p>"
         },
         "LastProcessingResult": {
           "shape": "String",
-          "documentation": "<p>The result of the last AWS Lambda invocation of your Lambda function. This value will be null if an SQS queue is the event source.</p>"
+          "documentation": "<p>The result of the last AWS Lambda invocation of your Lambda function.</p>"
         },
         "State": {
           "shape": "String",
-          "documentation": "<p>The state of the event source mapping. It can be <code>Creating</code>, <code>Enabled</code>, <code>Disabled</code>, <code>Enabling</code>, <code>Disabling</code>, <code>Updating</code>, or <code>Deleting</code>.</p>"
+          "documentation": "<p>The state of the event source mapping. It can be one of the following: <code>Creating</code>, <code>Enabling</code>, <code>Enabled</code>, <code>Disabling</code>, <code>Disabled</code>, <code>Updating</code>, or <code>Deleting</code>.</p>"
         },
         "StateTransitionReason": {
           "shape": "String",
-          "documentation": "<p>The reason the event source mapping is in its current state. It is either user-requested or an AWS Lambda-initiated state transition.</p>"
+          "documentation": "<p>The cause of the last state change, either <code>User initiated</code> or <code>Lambda initiated</code>.</p>"
         }
       },
-      "documentation": "<p>Describes mapping between an Amazon Kinesis or DynamoDB stream and a Lambda function.</p>"
+      "documentation": "<p>A mapping between an AWS resource and an AWS Lambda function. See <a>CreateEventSourceMapping</a> for details.</p>"
     },
     "EventSourceMappingsList": {
       "type": "list",
@@ -1684,7 +1684,7 @@
       "members": {
         "UUID": {
           "shape": "String",
-          "documentation": "<p>The AWS Lambda assigned ID of the event source mapping.</p>",
+          "documentation": "<p>The identifier of the event source mapping.</p>",
           "location": "uri",
           "locationName": "UUID"
         }
@@ -1968,25 +1968,25 @@
       "members": {
         "EventSourceArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB stream. (This parameter is optional.)</p>",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> </ul>",
           "location": "querystring",
           "locationName": "EventSourceArn"
         },
         "FunctionName": {
           "shape": "FunctionName",
-          "documentation": "<p>The name of the lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.</p>",
           "location": "querystring",
           "locationName": "FunctionName"
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>Optional string. An opaque pagination token returned from a previous <code>ListEventSourceMappings</code> operation. If present, specifies to continue the list from where the returning call left off. </p>",
+          "documentation": "<p>A pagination token returned by a previous call.</p>",
           "location": "querystring",
           "locationName": "Marker"
         },
         "MaxItems": {
           "shape": "MaxListItems",
-          "documentation": "<p>Optional integer. Specifies the maximum number of event sources to return in response. This value must be greater than 0.</p>",
+          "documentation": "<p>The maximum number of event source mappings to return.</p>",
           "location": "querystring",
           "locationName": "MaxItems"
         }
@@ -1997,14 +1997,13 @@
       "members": {
         "NextMarker": {
           "shape": "String",
-          "documentation": "<p>A string, present if there are more event source mappings.</p>"
+          "documentation": "<p>A pagination token that's returned when the response doesn't contain all event source mappings.</p>"
         },
         "EventSourceMappings": {
           "shape": "EventSourceMappingsList",
-          "documentation": "<p>An array of <code>EventSourceMappingConfiguration</code> objects.</p>"
+          "documentation": "<p>A list of event source mappings.</p>"
         }
-      },
-      "documentation": "<p>Contains a list of event sources (see <a>EventSourceMappingConfiguration</a>)</p>"
+      }
     },
     "ListFunctionsRequest": {
       "type": "structure",
@@ -2261,6 +2260,7 @@
         "java8",
         "python2.7",
         "python3.6",
+        "python3.7",
         "dotnetcore1.0",
         "dotnetcore2.0",
         "dotnetcore2.1",
@@ -2465,21 +2465,21 @@
       "members": {
         "UUID": {
           "shape": "String",
-          "documentation": "<p>The event source mapping identifier.</p>",
+          "documentation": "<p>The identifier of the event source mapping.</p>",
           "location": "uri",
           "locationName": "UUID"
         },
         "FunctionName": {
           "shape": "FunctionName",
-          "documentation": "<p>The name of the lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>"
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.</p>"
         },
         "Enabled": {
           "shape": "Enabled",
-          "documentation": "<p>Specifies whether AWS Lambda should actively poll the stream or not. If disabled, AWS Lambda will not poll the stream.</p>"
+          "documentation": "<p>Disables the event source mapping to pause polling and invocation.</p>"
         },
         "BatchSize": {
           "shape": "BatchSize",
-          "documentation": "<p>The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function. Your function receives an event with all the retrieved records.</p>"
+          "documentation": "<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>"
         }
       }
     },

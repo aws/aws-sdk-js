@@ -268,6 +268,31 @@
       ],
       "documentation": "<p>Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.</p>"
     },
+    "DescribeClientProperties": {
+      "name": "DescribeClientProperties",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeClientPropertiesRequest"
+      },
+      "output": {
+        "shape": "DescribeClientPropertiesResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list that describes one or more specified Amazon WorkSpaces clients.</p>"
+    },
     "DescribeIpGroups": {
       "name": "DescribeIpGroups",
       "http": {
@@ -518,6 +543,31 @@
         }
       ],
       "documentation": "<p>Modifies the configuration of bring your own license (BYOL) for the specified account.</p>"
+    },
+    "ModifyClientProperties": {
+      "name": "ModifyClientProperties",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyClientPropertiesRequest"
+      },
+      "output": {
+        "shape": "ModifyClientPropertiesResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Modifies the properties of the specified Amazon WorkSpaces client.</p>"
     },
     "ModifyWorkspaceProperties": {
       "name": "ModifyWorkspaceProperties",
@@ -821,6 +871,36 @@
     "BundleOwner": {
       "type": "string"
     },
+    "ClientProperties": {
+      "type": "structure",
+      "members": {
+        "ReconnectEnabled": {
+          "shape": "ReconnectEnum",
+          "documentation": "<p>Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. </p>"
+        }
+      },
+      "documentation": "<p>Describes an Amazon WorkSpaces client.</p>"
+    },
+    "ClientPropertiesList": {
+      "type": "list",
+      "member": {
+        "shape": "ClientPropertiesResult"
+      }
+    },
+    "ClientPropertiesResult": {
+      "type": "structure",
+      "members": {
+        "ResourceId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The resource identifier, in the form of a directory ID.</p>"
+        },
+        "ClientProperties": {
+          "shape": "ClientProperties",
+          "documentation": "<p>Information about the Amazon WorkSpaces client.</p>"
+        }
+      },
+      "documentation": "<p>Information about the Amazon WorkSpaces client.</p>"
+    },
     "Compute": {
       "type": "string",
       "enum": [
@@ -1078,6 +1158,27 @@
         "DedicatedTenancyManagementCidrRange": {
           "shape": "DedicatedTenancyManagementCidrRange",
           "documentation": "<p>The IP address range, specified as an IPv4 CIDR block, used for the management network interface.</p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>"
+        }
+      }
+    },
+    "DescribeClientPropertiesRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIds"
+      ],
+      "members": {
+        "ResourceIds": {
+          "shape": "ResourceIdList",
+          "documentation": "<p>The resource identifiers, in the form of directory IDs.</p>"
+        }
+      }
+    },
+    "DescribeClientPropertiesResult": {
+      "type": "structure",
+      "members": {
+        "ClientPropertiesList": {
+          "shape": "ClientPropertiesList",
+          "documentation": "<p>Information about the specified Amazon WorkSpaces clients.</p>"
         }
       }
     },
@@ -1602,6 +1703,26 @@
       "type": "structure",
       "members": {}
     },
+    "ModifyClientPropertiesRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceId"
+      ],
+      "members": {
+        "ResourceId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The resource identifiers, in the form of directory IDs.</p>"
+        },
+        "ClientProperties": {
+          "shape": "ClientProperties",
+          "documentation": "<p>Information about the Amazon WorkSpaces client.</p>"
+        }
+      }
+    },
+    "ModifyClientPropertiesResult": {
+      "type": "structure",
+      "members": {}
+    },
     "ModifyWorkspacePropertiesRequest": {
       "type": "structure",
       "required": [
@@ -1754,9 +1875,24 @@
         }
       }
     },
+    "ReconnectEnum": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "RegistrationCode": {
       "type": "string",
       "max": 20,
+      "min": 1
+    },
+    "ResourceIdList": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyString"
+      },
+      "max": 25,
       "min": 1
     },
     "RevokeIpRulesRequest": {
