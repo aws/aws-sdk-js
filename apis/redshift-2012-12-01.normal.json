@@ -76,7 +76,7 @@
           "shape": "AuthorizationQuotaExceededFault"
         }
       ],
-      "documentation": "<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+      "documentation": "<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
     "AuthorizeSnapshotAccess": {
       "name": "AuthorizeSnapshotAccess",
@@ -1224,7 +1224,7 @@
         "shape": "OrderableClusterOptionsMessage",
         "resultWrapper": "DescribeOrderableClusterOptionsResult"
       },
-      "documentation": "<p>Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+      "documentation": "<p>Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
     "DescribeReservedNodeOfferings": {
       "name": "DescribeReservedNodeOfferings",
@@ -1906,7 +1906,7 @@
           "shape": "InvalidRetentionPeriodFault"
         }
       ],
-      "documentation": "<p>Modifies the number of days to retain snapshots in the destination region after they are copied from the source region. By default, this only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots will be updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option only newly copied manual snapshots will have the new retention period </p>"
+      "documentation": "<p>Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. </p>"
     },
     "ModifySnapshotSchedule": {
       "name": "ModifySnapshotSchedule",
@@ -1932,7 +1932,7 @@
           "shape": "SnapshotScheduleUpdateInProgressFault"
         }
       ],
-      "documentation": "<p>Modifies a snapshot schedule. Any schedule associate with a cluster will be modified asynchronously.</p>"
+      "documentation": "<p>Modifies a snapshot schedule. Any schedule associated with a cluster is modified asynchronously.</p>"
     },
     "PurchaseReservedNodeOffering": {
       "name": "PurchaseReservedNodeOffering",
@@ -2449,7 +2449,7 @@
       "members": {
         "Identifiers": {
           "shape": "DeleteClusterSnapshotMessageList",
-          "documentation": "<p>A list of indentifiers for the snapshots you want to delete.</p>"
+          "documentation": "<p>A list of identifiers for the snapshots that you want to delete.</p>"
         }
       }
     },
@@ -2544,7 +2544,7 @@
         },
         "ClusterStatus": {
           "shape": "String",
-          "documentation": "<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>cancelling-resize</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>"
+          "documentation": "<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>available, prep-for-resize</code> </p> </li> <li> <p> <code>available, resize-cleanup</code> </p> </li> <li> <p> <code>cancelling-resize</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>"
         },
         "ModifyStatus": {
           "shape": "String",
@@ -2572,7 +2572,7 @@
         },
         "ManualSnapshotRetentionPeriod": {
           "shape": "Integer",
-          "documentation": "<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting does not change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653</p>"
+          "documentation": "<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
         },
         "ClusterSecurityGroups": {
           "shape": "ClusterSecurityGroupMembershipList",
@@ -2612,7 +2612,7 @@
         },
         "AllowVersionUpgrade": {
           "shape": "Boolean",
-          "documentation": "<p>A Boolean value that, if <code>true</code>, indicates that major version upgrades will be applied automatically to the cluster during the maintenance window. </p>"
+          "documentation": "<p>A boolean value that, if <code>true</code>, indicates that major version upgrades will be applied automatically to the cluster during the maintenance window. </p>"
         },
         "NumberOfNodes": {
           "shape": "Integer",
@@ -2620,11 +2620,11 @@
         },
         "PubliclyAccessible": {
           "shape": "Boolean",
-          "documentation": "<p>A Boolean value that, if <code>true</code>, indicates that the cluster can be accessed from a public network.</p>"
+          "documentation": "<p>A boolean value that, if <code>true</code>, indicates that the cluster can be accessed from a public network.</p>"
         },
         "Encrypted": {
           "shape": "Boolean",
-          "documentation": "<p>A Boolean value that, if <code>true</code>, indicates that data in the cluster is encrypted at rest.</p>"
+          "documentation": "<p>A boolean value that, if <code>true</code>, indicates that data in the cluster is encrypted at rest.</p>"
         },
         "RestoreStatus": {
           "shape": "RestoreStatus",
@@ -3231,7 +3231,7 @@
         },
         "ManualSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting does not change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653</p>"
+          "documentation": "<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
         },
         "Port": {
           "shape": "IntegerOptional",
@@ -3475,7 +3475,7 @@
         },
         "Enabled": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A Boolean value; set to <code>true</code> to activate the subscription, set to <code>false</code> to create the subscription but not active it. </p>"
+          "documentation": "<p>A boolean value; set to <code>true</code> to activate the subscription, and set to <code>false</code> to create the subscription but not activate it. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -3601,7 +3601,7 @@
       "members": {
         "ScheduleDefinitions": {
           "shape": "ScheduleDefinitionList",
-          "documentation": "<p>The definition of the snapshot schedule. The definition is made up of schedule expressions. For example, \"cron(30 12 *)\" or \"rate(12 hours)\". </p>"
+          "documentation": "<p>The definition of the snapshot schedule. The definition is made up of schedule expressions, for example \"cron(30 12 *)\" or \"rate(12 hours)\". </p>"
         },
         "ScheduleIdentifier": {
           "shape": "String",
@@ -4647,7 +4647,7 @@
         },
         "DestinationRegion": {
           "shape": "String",
-          "documentation": "<p>The destination region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid region. For more information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>"
+          "documentation": "<p>The destination AWS Region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid AWS Region. For more information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>"
         },
         "RetentionPeriod": {
           "shape": "IntegerOptional",
@@ -4659,7 +4659,7 @@
         },
         "ManualSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of days to retain newly copied snapshots in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
+          "documentation": "<p>The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
         }
       },
       "documentation": "<p/>"
@@ -4837,7 +4837,7 @@
         },
         "Enabled": {
           "shape": "Boolean",
-          "documentation": "<p>A Boolean value indicating whether the subscription is enabled. <code>true</code> indicates the subscription is enabled.</p>"
+          "documentation": "<p>A boolean value indicating whether the subscription is enabled; <code>true</code> indicates that the subscription is enabled.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -5304,7 +5304,7 @@
         },
         "ManualSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The default for number of days that a newly created manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. This value will not retroactively change the retention periods of existing manual snapshots</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>"
+          "documentation": "<p>The default for number of days that a newly created manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. This value doesn't retroactively change the retention periods of existing manual snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>"
         },
         "PreferredMaintenanceWindow": {
           "shape": "String",
@@ -5423,7 +5423,7 @@
         },
         "ScheduleIdentifier": {
           "shape": "String",
-          "documentation": "<p>A unique alphanumeric identifier for the schedule you want to associate with the cluster.</p>"
+          "documentation": "<p>A unique alphanumeric identifier for the schedule that you want to associate with the cluster.</p>"
         },
         "DisassociateSchedule": {
           "shape": "BooleanOptional",
@@ -5515,11 +5515,11 @@
       "members": {
         "ClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>"
+          "documentation": "<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination AWS Region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>"
         },
         "RetentionPeriod": {
           "shape": "Integer",
-          "documentation": "<p>The number of days to retain automated snapshots in the destination region after they are copied from the source region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination region, Amazon Redshift will delete any existing automated snapshots that were copied to the destination region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>"
+          "documentation": "<p>The number of days to retain automated snapshots in the destination AWS Region after they are copied from the source AWS Region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination AWS Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination AWS Region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>"
         },
         "Manual": {
           "shape": "Boolean",
@@ -5549,7 +5549,7 @@
         },
         "ScheduleDefinitions": {
           "shape": "ScheduleDefinitionList",
-          "documentation": "<p>An updated list of schedule definitions. A schedule definition is made up of schedule expressions. For example, \"cron(30 12 *)\" or \"rate(12 hours)\".</p>"
+          "documentation": "<p>An updated list of schedule definitions. A schedule definition is made up of schedule expressions, for example, \"cron(30 12 *)\" or \"rate(12 hours)\".</p>"
         }
       }
     },
@@ -6426,11 +6426,11 @@
         },
         "SnapshotCreateTime": {
           "shape": "TStamp",
-          "documentation": "<p>The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time.</p>"
+          "documentation": "<p>The time (in UTC format) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time.</p>"
         },
         "Status": {
           "shape": "String",
-          "documentation": "<p>The snapshot status. The value of the status depends on the API operation used. </p> <ul> <li> <p> <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </p> </li> <li> <p> <a>DescribeClusterSnapshots</a> returns status as \"creating\", \"available\", \"final snapshot\", or \"failed\".</p> </li> <li> <p> <a>DeleteClusterSnapshot</a> returns status as \"deleted\".</p> </li> </ul>"
+          "documentation": "<p>The snapshot status. The value of the status depends on the API operation used: </p> <ul> <li> <p> <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </p> </li> <li> <p> <a>DescribeClusterSnapshots</a> returns status as \"creating\", \"available\", \"final snapshot\", or \"failed\".</p> </li> <li> <p> <a>DeleteClusterSnapshot</a> returns status as \"deleted\".</p> </li> </ul>"
         },
         "Port": {
           "shape": "Integer",
@@ -6454,7 +6454,7 @@
         },
         "SnapshotType": {
           "shape": "String",
-          "documentation": "<p>The snapshot type. Snapshots created using <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> will be of type \"manual\". </p>"
+          "documentation": "<p>The snapshot type. Snapshots created using <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> are of type \"manual\". </p>"
         },
         "NodeType": {
           "shape": "String",
@@ -6938,7 +6938,7 @@
         },
         "ResourceName": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) with which the tag is associated. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) with which the tag is associated, for example: <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>.</p>"
         },
         "ResourceType": {
           "shape": "String",

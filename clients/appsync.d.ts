@@ -28,6 +28,14 @@ declare class AppSync extends Service {
    */
   createDataSource(callback?: (err: AWSError, data: AppSync.Types.CreateDataSourceResponse) => void): Request<AppSync.Types.CreateDataSourceResponse, AWSError>;
   /**
+   * Creates a Function object. A function is a reusable entity. Multiple functions can be used to compose the resolver logic.
+   */
+  createFunction(params: AppSync.Types.CreateFunctionRequest, callback?: (err: AWSError, data: AppSync.Types.CreateFunctionResponse) => void): Request<AppSync.Types.CreateFunctionResponse, AWSError>;
+  /**
+   * Creates a Function object. A function is a reusable entity. Multiple functions can be used to compose the resolver logic.
+   */
+  createFunction(callback?: (err: AWSError, data: AppSync.Types.CreateFunctionResponse) => void): Request<AppSync.Types.CreateFunctionResponse, AWSError>;
+  /**
    * Creates a GraphqlApi object.
    */
   createGraphqlApi(params: AppSync.Types.CreateGraphqlApiRequest, callback?: (err: AWSError, data: AppSync.Types.CreateGraphqlApiResponse) => void): Request<AppSync.Types.CreateGraphqlApiResponse, AWSError>;
@@ -68,6 +76,14 @@ declare class AppSync extends Service {
    */
   deleteDataSource(callback?: (err: AWSError, data: AppSync.Types.DeleteDataSourceResponse) => void): Request<AppSync.Types.DeleteDataSourceResponse, AWSError>;
   /**
+   * Deletes a Function.
+   */
+  deleteFunction(params: AppSync.Types.DeleteFunctionRequest, callback?: (err: AWSError, data: AppSync.Types.DeleteFunctionResponse) => void): Request<AppSync.Types.DeleteFunctionResponse, AWSError>;
+  /**
+   * Deletes a Function.
+   */
+  deleteFunction(callback?: (err: AWSError, data: AppSync.Types.DeleteFunctionResponse) => void): Request<AppSync.Types.DeleteFunctionResponse, AWSError>;
+  /**
    * Deletes a GraphqlApi object.
    */
   deleteGraphqlApi(params: AppSync.Types.DeleteGraphqlApiRequest, callback?: (err: AWSError, data: AppSync.Types.DeleteGraphqlApiResponse) => void): Request<AppSync.Types.DeleteGraphqlApiResponse, AWSError>;
@@ -99,6 +115,14 @@ declare class AppSync extends Service {
    * Retrieves a DataSource object.
    */
   getDataSource(callback?: (err: AWSError, data: AppSync.Types.GetDataSourceResponse) => void): Request<AppSync.Types.GetDataSourceResponse, AWSError>;
+  /**
+   * Get a Function.
+   */
+  getFunction(params: AppSync.Types.GetFunctionRequest, callback?: (err: AWSError, data: AppSync.Types.GetFunctionResponse) => void): Request<AppSync.Types.GetFunctionResponse, AWSError>;
+  /**
+   * Get a Function.
+   */
+  getFunction(callback?: (err: AWSError, data: AppSync.Types.GetFunctionResponse) => void): Request<AppSync.Types.GetFunctionResponse, AWSError>;
   /**
    * Retrieves a GraphqlApi object.
    */
@@ -156,6 +180,14 @@ declare class AppSync extends Service {
    */
   listDataSources(callback?: (err: AWSError, data: AppSync.Types.ListDataSourcesResponse) => void): Request<AppSync.Types.ListDataSourcesResponse, AWSError>;
   /**
+   * List multiple functions.
+   */
+  listFunctions(params: AppSync.Types.ListFunctionsRequest, callback?: (err: AWSError, data: AppSync.Types.ListFunctionsResponse) => void): Request<AppSync.Types.ListFunctionsResponse, AWSError>;
+  /**
+   * List multiple functions.
+   */
+  listFunctions(callback?: (err: AWSError, data: AppSync.Types.ListFunctionsResponse) => void): Request<AppSync.Types.ListFunctionsResponse, AWSError>;
+  /**
    * Lists your GraphQL APIs.
    */
   listGraphqlApis(params: AppSync.Types.ListGraphqlApisRequest, callback?: (err: AWSError, data: AppSync.Types.ListGraphqlApisResponse) => void): Request<AppSync.Types.ListGraphqlApisResponse, AWSError>;
@@ -171,6 +203,14 @@ declare class AppSync extends Service {
    * Lists the resolvers for a given API and type.
    */
   listResolvers(callback?: (err: AWSError, data: AppSync.Types.ListResolversResponse) => void): Request<AppSync.Types.ListResolversResponse, AWSError>;
+  /**
+   * List the resolvers that are associated with a specific function.
+   */
+  listResolversByFunction(params: AppSync.Types.ListResolversByFunctionRequest, callback?: (err: AWSError, data: AppSync.Types.ListResolversByFunctionResponse) => void): Request<AppSync.Types.ListResolversByFunctionResponse, AWSError>;
+  /**
+   * List the resolvers that are associated with a specific function.
+   */
+  listResolversByFunction(callback?: (err: AWSError, data: AppSync.Types.ListResolversByFunctionResponse) => void): Request<AppSync.Types.ListResolversByFunctionResponse, AWSError>;
   /**
    * Lists the types for a given API.
    */
@@ -203,6 +243,14 @@ declare class AppSync extends Service {
    * Updates a DataSource object.
    */
   updateDataSource(callback?: (err: AWSError, data: AppSync.Types.UpdateDataSourceResponse) => void): Request<AppSync.Types.UpdateDataSourceResponse, AWSError>;
+  /**
+   * Updates a Function object.
+   */
+  updateFunction(params: AppSync.Types.UpdateFunctionRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateFunctionResponse) => void): Request<AppSync.Types.UpdateFunctionResponse, AWSError>;
+  /**
+   * Updates a Function object.
+   */
+  updateFunction(callback?: (err: AWSError, data: AppSync.Types.UpdateFunctionResponse) => void): Request<AppSync.Types.UpdateFunctionResponse, AWSError>;
   /**
    * Updates a GraphqlApi object.
    */
@@ -245,6 +293,27 @@ declare namespace AppSync {
   }
   export type ApiKeys = ApiKey[];
   export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|string;
+  export interface AuthorizationConfig {
+    /**
+     * The authorization type required by the HTTP endpoint.    AWS_IAM: The authorization type is Sigv4.  
+     */
+    authorizationType: AuthorizationType;
+    /**
+     * The AWS IAM settings.
+     */
+    awsIamConfig?: AwsIamConfig;
+  }
+  export type AuthorizationType = "AWS_IAM"|string;
+  export interface AwsIamConfig {
+    /**
+     * The signing region for AWS IAM authorization.
+     */
+    signingRegion?: String;
+    /**
+     * The signing service name for AWS IAM authorization.
+     */
+    signingServiceName?: String;
+  }
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
   export interface CreateApiKeyRequest {
@@ -285,11 +354,11 @@ declare namespace AppSync {
      */
     type: DataSourceType;
     /**
-     * The IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+     * The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
      */
     serviceRoleArn?: String;
     /**
-     * DynamoDB settings.
+     * Amazon DynamoDB settings.
      */
     dynamodbConfig?: DynamodbDataSourceConfig;
     /**
@@ -297,13 +366,17 @@ declare namespace AppSync {
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
-     * Amazon Elasticsearch settings.
+     * Amazon Elasticsearch Service settings.
      */
     elasticsearchConfig?: ElasticsearchDataSourceConfig;
     /**
-     * Http endpoint settings.
+     * HTTP endpoint settings.
      */
     httpConfig?: HttpDataSourceConfig;
+    /**
+     * Relational database settings.
+     */
+    relationalDatabaseConfig?: RelationalDatabaseDataSourceConfig;
   }
   export interface CreateDataSourceResponse {
     /**
@@ -311,25 +384,61 @@ declare namespace AppSync {
      */
     dataSource?: DataSource;
   }
+  export interface CreateFunctionRequest {
+    /**
+     * The GraphQL API ID.
+     */
+    apiId: String;
+    /**
+     * The Function name. The function name does not have to be unique.
+     */
+    name: ResourceName;
+    /**
+     * The Function description.
+     */
+    description?: String;
+    /**
+     * The Function DataSource name.
+     */
+    dataSourceName: ResourceName;
+    /**
+     * The Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+     */
+    requestMappingTemplate: MappingTemplate;
+    /**
+     * The Function response mapping template. 
+     */
+    responseMappingTemplate?: MappingTemplate;
+    /**
+     * The version of the request mapping template. Currently the supported value is 2018-05-29. 
+     */
+    functionVersion: String;
+  }
+  export interface CreateFunctionResponse {
+    /**
+     * The Function object.
+     */
+    functionConfiguration?: FunctionConfiguration;
+  }
   export interface CreateGraphqlApiRequest {
     /**
      * A user-supplied name for the GraphqlApi.
      */
     name: String;
     /**
-     * The Amazon CloudWatch logs configuration.
+     * The Amazon CloudWatch Logs configuration.
      */
     logConfig?: LogConfig;
     /**
-     * The authentication type: API key, IAM, or Amazon Cognito User Pools.
+     * The authentication type: API key, AWS IAM, or Amazon Cognito user pools.
      */
     authenticationType: AuthenticationType;
     /**
-     * The Amazon Cognito User Pool configuration.
+     * The Amazon Cognito user pool configuration.
      */
     userPoolConfig?: UserPoolConfig;
     /**
-     * The Open Id Connect configuration configuration.
+     * The OpenID Connect configuration.
      */
     openIDConnectConfig?: OpenIDConnectConfig;
   }
@@ -355,7 +464,7 @@ declare namespace AppSync {
     /**
      * The name of the data source for which the resolver is being created.
      */
-    dataSourceName: ResourceName;
+    dataSourceName?: ResourceName;
     /**
      * The mapping template to be used for requests. A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).
      */
@@ -364,6 +473,14 @@ declare namespace AppSync {
      * The mapping template to be used for responses from the data source.
      */
     responseMappingTemplate?: MappingTemplate;
+    /**
+     * The resolver type.    UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.    PIPELINE: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of Function in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.  
+     */
+    kind?: ResolverKind;
+    /**
+     * The PipelineConfig.
+     */
+    pipelineConfig?: PipelineConfig;
   }
   export interface CreateResolverResponse {
     /**
@@ -405,31 +522,35 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an AWS Lambda function.    NONE: There is no data source. This type is used when when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.    HTTP: The data source is an HTTP endpoint.  
+     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an AWS Lambda function.    NONE: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.    HTTP: The data source is an HTTP endpoint.    RELATIONAL_DATABASE: The data source is a relational database.  
      */
     type?: DataSourceType;
     /**
-     * The IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+     * The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
      */
     serviceRoleArn?: String;
     /**
-     * DynamoDB settings.
+     * Amazon DynamoDB settings.
      */
     dynamodbConfig?: DynamodbDataSourceConfig;
     /**
-     * Lambda settings.
+     * AWS Lambda settings.
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
-     * Amazon Elasticsearch settings.
+     * Amazon Elasticsearch Service settings.
      */
     elasticsearchConfig?: ElasticsearchDataSourceConfig;
     /**
-     * Http endpoint settings.
+     * HTTP endpoint settings.
      */
     httpConfig?: HttpDataSourceConfig;
+    /**
+     * Relational database settings.
+     */
+    relationalDatabaseConfig?: RelationalDatabaseDataSourceConfig;
   }
-  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|string;
+  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|string;
   export type DataSources = DataSource[];
   export type DefaultAction = "ALLOW"|"DENY"|string;
   export interface DeleteApiKeyRequest {
@@ -455,6 +576,18 @@ declare namespace AppSync {
     name: ResourceName;
   }
   export interface DeleteDataSourceResponse {
+  }
+  export interface DeleteFunctionRequest {
+    /**
+     * The GraphQL API ID.
+     */
+    apiId: String;
+    /**
+     * The Function ID.
+     */
+    functionId: ResourceName;
+  }
+  export interface DeleteFunctionResponse {
   }
   export interface DeleteGraphqlApiRequest {
     /**
@@ -498,7 +631,7 @@ declare namespace AppSync {
      */
     tableName: String;
     /**
-     * The AWS region.
+     * The AWS Region.
      */
     awsRegion: String;
     /**
@@ -512,11 +645,47 @@ declare namespace AppSync {
      */
     endpoint: String;
     /**
-     * The AWS region.
+     * The AWS Region.
      */
     awsRegion: String;
   }
   export type FieldLogLevel = "NONE"|"ERROR"|"ALL"|string;
+  export interface FunctionConfiguration {
+    /**
+     * A unique ID representing the Function object.
+     */
+    functionId?: String;
+    /**
+     * The ARN of the Function object.
+     */
+    functionArn?: String;
+    /**
+     * The name of the Function object.
+     */
+    name?: ResourceName;
+    /**
+     * The Function description.
+     */
+    description?: String;
+    /**
+     * The name of the DataSource.
+     */
+    dataSourceName?: ResourceName;
+    /**
+     * The Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+     */
+    requestMappingTemplate?: MappingTemplate;
+    /**
+     * The Function response mapping template.
+     */
+    responseMappingTemplate?: MappingTemplate;
+    /**
+     * The version of the request mapping template. Currently only the 2018-05-29 version of the template is supported.
+     */
+    functionVersion?: String;
+  }
+  export type Functions = FunctionConfiguration[];
+  export type FunctionsIds = String[];
   export interface GetDataSourceRequest {
     /**
      * The API ID.
@@ -532,6 +701,22 @@ declare namespace AppSync {
      * The DataSource object.
      */
     dataSource?: DataSource;
+  }
+  export interface GetFunctionRequest {
+    /**
+     * The GraphQL API ID.
+     */
+    apiId: String;
+    /**
+     * The Function ID.
+     */
+    functionId: ResourceName;
+  }
+  export interface GetFunctionResponse {
+    /**
+     * The Function object.
+     */
+    functionConfiguration?: FunctionConfiguration;
   }
   export interface GetGraphqlApiRequest {
     /**
@@ -635,11 +820,11 @@ declare namespace AppSync {
      */
     logConfig?: LogConfig;
     /**
-     * The Amazon Cognito User Pool configuration.
+     * The Amazon Cognito user pool configuration.
      */
     userPoolConfig?: UserPoolConfig;
     /**
-     * The Open Id Connect configuration.
+     * The OpenID Connect configuration.
      */
     openIDConnectConfig?: OpenIDConnectConfig;
     /**
@@ -654,9 +839,13 @@ declare namespace AppSync {
   export type GraphqlApis = GraphqlApi[];
   export interface HttpDataSourceConfig {
     /**
-     * The Http url endpoint. You can either specify the domain name or ip and port combination and the url scheme must be http(s). If the port is not specified, AWS AppSync will use the default port 80 for http endpoint and port 443 for https endpoints.
+     * The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.
      */
     endpoint?: String;
+    /**
+     * The authorization config in case the HTTP endpoint requires authorization.
+     */
+    authorizationConfig?: AuthorizationConfig;
   }
   export interface LambdaDataSourceConfig {
     /**
@@ -712,6 +901,30 @@ declare namespace AppSync {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListFunctionsRequest {
+    /**
+     * The GraphQL API ID.
+     */
+    apiId: String;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum number of results you want the request to return.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListFunctionsResponse {
+    /**
+     * A list of Function objects.
+     */
+    functions?: Functions;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListGraphqlApisRequest {
     /**
      * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. 
@@ -729,6 +942,34 @@ declare namespace AppSync {
     graphqlApis?: GraphqlApis;
     /**
      * An identifier to be passed in the next request to this operation to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListResolversByFunctionRequest {
+    /**
+     * The API ID.
+     */
+    apiId: String;
+    /**
+     * The Function ID.
+     */
+    functionId: String;
+    /**
+     * An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum number of results you want the request to return.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListResolversByFunctionResponse {
+    /**
+     * The list of resolvers.
+     */
+    resolvers?: Resolvers;
+    /**
+     * An identifier that can be used to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
   }
@@ -790,7 +1031,7 @@ declare namespace AppSync {
   }
   export interface LogConfig {
     /**
-     * The field logging level. Values can be NONE, ERROR, ALL.     NONE: No field-level logs are captured.    ERROR: Logs the following information only for the fields that are in error:   The error section in the server response.   Field-level errors.   The generated request/response functions that got resolved for error fields.      ALL: The following information is logged for all fields in the query:   Field-level tracing information.   The generated request/response functions that got resolved for each field.    
+     * The field logging level. Values can be NONE, ERROR, or ALL.     NONE: No field-level logs are captured.    ERROR: Logs the following information only for the fields that are in error:   The error section in the server response.   Field-level errors.   The generated request/response functions that got resolved for error fields.      ALL: The following information is logged for all fields in the query:   Field-level tracing information.   The generated request/response functions that got resolved for each field.    
      */
     fieldLogLevel: FieldLogLevel;
     /**
@@ -804,11 +1045,11 @@ declare namespace AppSync {
   export type MaxResults = number;
   export interface OpenIDConnectConfig {
     /**
-     * The issuer for the open id connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
+     * The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of iss in the ID token.
      */
     issuer: String;
     /**
-     * The client identifier of the Relying party at the OpenID Provider. This identifier is typically obtained when the Relying party is registered with the OpenID Provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time
+     * The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
      */
     clientId?: String;
     /**
@@ -822,6 +1063,45 @@ declare namespace AppSync {
   }
   export type OutputType = "SDL"|"JSON"|string;
   export type PaginationToken = string;
+  export interface PipelineConfig {
+    /**
+     * A list of Function objects.
+     */
+    functions?: FunctionsIds;
+  }
+  export interface RdsHttpEndpointConfig {
+    /**
+     * AWS Region for RDS HTTP endpoint.
+     */
+    awsRegion?: String;
+    /**
+     * Amazon RDS cluster identifier.
+     */
+    dbClusterIdentifier?: String;
+    /**
+     * Logical database name.
+     */
+    databaseName?: String;
+    /**
+     * Logical schema name.
+     */
+    schema?: String;
+    /**
+     * AWS secret store ARN for database credentials.
+     */
+    awsSecretStoreArn?: String;
+  }
+  export interface RelationalDatabaseDataSourceConfig {
+    /**
+     * Source type for the relational database.    RDS_HTTP_ENDPOINT: The relational database source type is an Amazon RDS HTTP endpoint.  
+     */
+    relationalDatabaseSourceType?: RelationalDatabaseSourceType;
+    /**
+     * Amazon RDS HTTP endpoint settings.
+     */
+    rdsHttpEndpointConfig?: RdsHttpEndpointConfig;
+  }
+  export type RelationalDatabaseSourceType = "RDS_HTTP_ENDPOINT"|string;
   export interface Resolver {
     /**
      * The resolver type name.
@@ -847,7 +1127,16 @@ declare namespace AppSync {
      * The response mapping template.
      */
     responseMappingTemplate?: MappingTemplate;
+    /**
+     * The resolver type.    UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.    PIPELINE: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of Function in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.  
+     */
+    kind?: ResolverKind;
+    /**
+     * The PipelineConfig.
+     */
+    pipelineConfig?: PipelineConfig;
   }
+  export type ResolverKind = "UNIT"|"PIPELINE"|string;
   export type Resolvers = Resolver[];
   export type ResourceName = string;
   export type SchemaStatus = "PROCESSING"|"ACTIVE"|"DELETING"|string;
@@ -863,7 +1152,7 @@ declare namespace AppSync {
   }
   export interface StartSchemaCreationResponse {
     /**
-     * The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the schema is in the ACTIVE state, you can add data.
+     * The current state of the schema (PROCESSING, ACTIVE, or DELETING). When the schema is in the ACTIVE state, you can add data.
      */
     status?: SchemaStatus;
   }
@@ -894,7 +1183,7 @@ declare namespace AppSync {
   export type TypeList = Type[];
   export interface UpdateApiKeyRequest {
     /**
-     * The ID for the GraphQL API
+     * The ID for the GraphQL API.
      */
     apiId: String;
     /**
@@ -938,27 +1227,71 @@ declare namespace AppSync {
      */
     serviceRoleArn?: String;
     /**
-     * The new DynamoDB configuration.
+     * The new Amazon DynamoDB configuration.
      */
     dynamodbConfig?: DynamodbDataSourceConfig;
     /**
-     * The new Lambda configuration.
+     * The new AWS Lambda configuration.
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
-     * The new Elasticsearch configuration.
+     * The new Elasticsearch Service configuration.
      */
     elasticsearchConfig?: ElasticsearchDataSourceConfig;
     /**
-     * The new http endpoint configuration
+     * The new HTTP endpoint configuration.
      */
     httpConfig?: HttpDataSourceConfig;
+    /**
+     * The new relational database configuration.
+     */
+    relationalDatabaseConfig?: RelationalDatabaseDataSourceConfig;
   }
   export interface UpdateDataSourceResponse {
     /**
      * The updated DataSource object.
      */
     dataSource?: DataSource;
+  }
+  export interface UpdateFunctionRequest {
+    /**
+     * The GraphQL API ID.
+     */
+    apiId: String;
+    /**
+     * The Function name.
+     */
+    name: ResourceName;
+    /**
+     * The Function description.
+     */
+    description?: String;
+    /**
+     * The function ID.
+     */
+    functionId: ResourceName;
+    /**
+     * The Function DataSource name.
+     */
+    dataSourceName: ResourceName;
+    /**
+     * The Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+     */
+    requestMappingTemplate: MappingTemplate;
+    /**
+     * The Function request mapping template. 
+     */
+    responseMappingTemplate?: MappingTemplate;
+    /**
+     * The version of the request mapping template. Currently the supported value is 2018-05-29. 
+     */
+    functionVersion: String;
+  }
+  export interface UpdateFunctionResponse {
+    /**
+     * The Function object.
+     */
+    functionConfiguration?: FunctionConfiguration;
   }
   export interface UpdateGraphqlApiRequest {
     /**
@@ -970,7 +1303,7 @@ declare namespace AppSync {
      */
     name: String;
     /**
-     * The Amazon CloudWatch logs configuration for the GraphqlApi object.
+     * The Amazon CloudWatch Logs configuration for the GraphqlApi object.
      */
     logConfig?: LogConfig;
     /**
@@ -978,11 +1311,11 @@ declare namespace AppSync {
      */
     authenticationType?: AuthenticationType;
     /**
-     * The new Amazon Cognito User Pool configuration for the GraphqlApi object.
+     * The new Amazon Cognito user pool configuration for the GraphqlApi object.
      */
     userPoolConfig?: UserPoolConfig;
     /**
-     * The Open Id Connect configuration configuration for the GraphqlApi object.
+     * The OpenID Connect configuration for the GraphqlApi object.
      */
     openIDConnectConfig?: OpenIDConnectConfig;
   }
@@ -1008,7 +1341,7 @@ declare namespace AppSync {
     /**
      * The new data source name.
      */
-    dataSourceName: ResourceName;
+    dataSourceName?: ResourceName;
     /**
      * The new request mapping template.
      */
@@ -1017,6 +1350,14 @@ declare namespace AppSync {
      * The new response mapping template.
      */
     responseMappingTemplate?: MappingTemplate;
+    /**
+     * The resolver type.    UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.    PIPELINE: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of Function in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.  
+     */
+    kind?: ResolverKind;
+    /**
+     * The PipelineConfig.
+     */
+    pipelineConfig?: PipelineConfig;
   }
   export interface UpdateResolverResponse {
     /**
@@ -1054,15 +1395,15 @@ declare namespace AppSync {
      */
     userPoolId: String;
     /**
-     * The AWS region in which the user pool was created.
+     * The AWS Region in which the user pool was created.
      */
     awsRegion: String;
     /**
-     * The action that you want your GraphQL API to take when a request that uses Amazon Cognito User Pool authentication doesn't match the Amazon Cognito User Pool configuration.
+     * The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.
      */
     defaultAction: DefaultAction;
     /**
-     * A regular expression for validating the incoming Amazon Cognito User Pool app client ID.
+     * A regular expression for validating the incoming Amazon Cognito user pool app client ID.
      */
     appIdClientRegex?: String;
   }

@@ -20,6 +20,14 @@ declare class XRay extends Service {
    */
   batchGetTraces(callback?: (err: AWSError, data: XRay.Types.BatchGetTracesResult) => void): Request<XRay.Types.BatchGetTracesResult, AWSError>;
   /**
+   * Creates a group resource with a name and a filter expression. 
+   */
+  createGroup(params: XRay.Types.CreateGroupRequest, callback?: (err: AWSError, data: XRay.Types.CreateGroupResult) => void): Request<XRay.Types.CreateGroupResult, AWSError>;
+  /**
+   * Creates a group resource with a name and a filter expression. 
+   */
+  createGroup(callback?: (err: AWSError, data: XRay.Types.CreateGroupResult) => void): Request<XRay.Types.CreateGroupResult, AWSError>;
+  /**
    * Creates a rule to control sampling behavior for instrumented applications. Services retrieve rules with GetSamplingRules, and evaluate each rule in ascending order of priority for each request. If a rule matches, the service records a trace, borrowing it from the reservoir size. After 10 seconds, the service reports back to X-Ray with GetSamplingTargets to get updated versions of each in-use rule. The updated rule contains a trace quota that the service can use instead of borrowing from the reservoir.
    */
   createSamplingRule(params: XRay.Types.CreateSamplingRuleRequest, callback?: (err: AWSError, data: XRay.Types.CreateSamplingRuleResult) => void): Request<XRay.Types.CreateSamplingRuleResult, AWSError>;
@@ -27,6 +35,14 @@ declare class XRay extends Service {
    * Creates a rule to control sampling behavior for instrumented applications. Services retrieve rules with GetSamplingRules, and evaluate each rule in ascending order of priority for each request. If a rule matches, the service records a trace, borrowing it from the reservoir size. After 10 seconds, the service reports back to X-Ray with GetSamplingTargets to get updated versions of each in-use rule. The updated rule contains a trace quota that the service can use instead of borrowing from the reservoir.
    */
   createSamplingRule(callback?: (err: AWSError, data: XRay.Types.CreateSamplingRuleResult) => void): Request<XRay.Types.CreateSamplingRuleResult, AWSError>;
+  /**
+   * Deletes a group resource.
+   */
+  deleteGroup(params: XRay.Types.DeleteGroupRequest, callback?: (err: AWSError, data: XRay.Types.DeleteGroupResult) => void): Request<XRay.Types.DeleteGroupResult, AWSError>;
+  /**
+   * Deletes a group resource.
+   */
+  deleteGroup(callback?: (err: AWSError, data: XRay.Types.DeleteGroupResult) => void): Request<XRay.Types.DeleteGroupResult, AWSError>;
   /**
    * Deletes a sampling rule.
    */
@@ -43,6 +59,22 @@ declare class XRay extends Service {
    * Retrieves the current encryption configuration for X-Ray data.
    */
   getEncryptionConfig(callback?: (err: AWSError, data: XRay.Types.GetEncryptionConfigResult) => void): Request<XRay.Types.GetEncryptionConfigResult, AWSError>;
+  /**
+   * Retrieves group resource details.
+   */
+  getGroup(params: XRay.Types.GetGroupRequest, callback?: (err: AWSError, data: XRay.Types.GetGroupResult) => void): Request<XRay.Types.GetGroupResult, AWSError>;
+  /**
+   * Retrieves group resource details.
+   */
+  getGroup(callback?: (err: AWSError, data: XRay.Types.GetGroupResult) => void): Request<XRay.Types.GetGroupResult, AWSError>;
+  /**
+   * Retrieves all active group details.
+   */
+  getGroups(params: XRay.Types.GetGroupsRequest, callback?: (err: AWSError, data: XRay.Types.GetGroupsResult) => void): Request<XRay.Types.GetGroupsResult, AWSError>;
+  /**
+   * Retrieves all active group details.
+   */
+  getGroups(callback?: (err: AWSError, data: XRay.Types.GetGroupsResult) => void): Request<XRay.Types.GetGroupsResult, AWSError>;
   /**
    * Retrieves all sampling rules.
    */
@@ -115,6 +147,14 @@ declare class XRay extends Service {
    * Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see AWS X-Ray Segment Documents in the AWS X-Ray Developer Guide.  Required Segment Document Fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, i.e. 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
    */
   putTraceSegments(callback?: (err: AWSError, data: XRay.Types.PutTraceSegmentsResult) => void): Request<XRay.Types.PutTraceSegmentsResult, AWSError>;
+  /**
+   * Updates a group resource.
+   */
+  updateGroup(params: XRay.Types.UpdateGroupRequest, callback?: (err: AWSError, data: XRay.Types.UpdateGroupResult) => void): Request<XRay.Types.UpdateGroupResult, AWSError>;
+  /**
+   * Updates a group resource.
+   */
+  updateGroup(callback?: (err: AWSError, data: XRay.Types.UpdateGroupResult) => void): Request<XRay.Types.UpdateGroupResult, AWSError>;
   /**
    * Modifies a sampling rule's configuration.
    */
@@ -210,8 +250,25 @@ declare namespace XRay {
      */
     NextToken?: String;
   }
+  export type Boolean = boolean;
   export type BorrowCount = number;
   export type ClientID = string;
+  export interface CreateGroupRequest {
+    /**
+     * The case-sensitive name of the new group. Default is a reserved name and names must be unique.
+     */
+    GroupName: GroupName;
+    /**
+     * The filter expression defining criteria by which to group traces.
+     */
+    FilterExpression?: FilterExpression;
+  }
+  export interface CreateGroupResult {
+    /**
+     * The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, and the filter expression that was assigned to the group.
+     */
+    Group?: Group;
+  }
   export interface CreateSamplingRuleRequest {
     /**
      * The rule definition.
@@ -223,6 +280,18 @@ declare namespace XRay {
      * The saved rule definition and metadata.
      */
     SamplingRuleRecord?: SamplingRuleRecord;
+  }
+  export interface DeleteGroupRequest {
+    /**
+     * The case-sensitive name of the group.
+     */
+    GroupName?: GroupName;
+    /**
+     * The ARN of the group that was generated on creation.
+     */
+    GroupARN?: GroupARN;
+  }
+  export interface DeleteGroupResult {
   }
   export interface DeleteSamplingRuleRequest {
     /**
@@ -342,6 +411,39 @@ declare namespace XRay {
      */
     EncryptionConfig?: EncryptionConfig;
   }
+  export interface GetGroupRequest {
+    /**
+     * The case-sensitive name of the group.
+     */
+    GroupName?: GroupName;
+    /**
+     * The ARN of the group that was generated on creation.
+     */
+    GroupARN?: GroupARN;
+  }
+  export interface GetGroupResult {
+    /**
+     * The group that was requested. Contains the name of the group, the ARN of the group, and the filter expression that assigned to the group.
+     */
+    Group?: Group;
+  }
+  export type GetGroupsNextToken = string;
+  export interface GetGroupsRequest {
+    /**
+     * Pagination token. Not used.
+     */
+    NextToken?: GetGroupsNextToken;
+  }
+  export interface GetGroupsResult {
+    /**
+     * The collection of all active groups.
+     */
+    Groups?: GroupSummaryList;
+    /**
+     * Pagination token. Not used.
+     */
+    NextToken?: String;
+  }
   export interface GetSamplingRulesRequest {
     /**
      * Pagination token. Not used.
@@ -404,6 +506,14 @@ declare namespace XRay {
      */
     EndTime: Timestamp;
     /**
+     * The name of a group to generate a graph based on.
+     */
+    GroupName?: GroupName;
+    /**
+     * The ARN of a group to generate a graph based on.
+     */
+    GroupARN?: GroupARN;
+    /**
      * Pagination token. Not used.
      */
     NextToken?: String;
@@ -421,6 +531,10 @@ declare namespace XRay {
      * The services that have processed a traced request during the specified time frame.
      */
     Services?: ServiceList;
+    /**
+     * A flag indicating whether or not the group's filter expression has been consistent, or if the returned service graph may show traces from an older version of the group's filter expression.
+     */
+    ContainsOldGroupVersions?: Boolean;
     /**
      * Pagination token. Not used.
      */
@@ -486,6 +600,37 @@ declare namespace XRay {
      */
     NextToken?: String;
   }
+  export interface Group {
+    /**
+     * The unique case-sensitive name of the group.
+     */
+    GroupName?: String;
+    /**
+     * The ARN of the group generated based on the GroupName.
+     */
+    GroupARN?: String;
+    /**
+     * The filter expression defining the parameters to include traces.
+     */
+    FilterExpression?: String;
+  }
+  export type GroupARN = string;
+  export type GroupName = string;
+  export interface GroupSummary {
+    /**
+     * The unique case-sensitive name of the group.
+     */
+    GroupName?: String;
+    /**
+     * The ARN of the group generated based on the GroupName.
+     */
+    GroupARN?: String;
+    /**
+     * The filter expression defining the parameters to include traces.
+     */
+    FilterExpression?: String;
+  }
+  export type GroupSummaryList = GroupSummary[];
   export type HTTPMethod = string;
   export type Histogram = HistogramEntry[];
   export interface HistogramEntry {
@@ -1023,6 +1168,26 @@ declare namespace XRay {
     Message?: String;
   }
   export type UnprocessedTraceSegmentList = UnprocessedTraceSegment[];
+  export interface UpdateGroupRequest {
+    /**
+     * The case-sensitive name of the group.
+     */
+    GroupName?: GroupName;
+    /**
+     * The ARN that was generated upon create.
+     */
+    GroupARN?: GroupARN;
+    /**
+     * The updated filter expression defining criteria by which to group traces.
+     */
+    FilterExpression?: FilterExpression;
+  }
+  export interface UpdateGroupResult {
+    /**
+     * The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, and the updated filter expression assigned to the group.
+     */
+    Group?: Group;
+  }
   export interface UpdateSamplingRuleRequest {
     /**
      * The rule and fields to change.

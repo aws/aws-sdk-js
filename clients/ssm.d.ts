@@ -1304,6 +1304,51 @@ declare namespace SSM {
     ComplianceSeverity?: AssociationComplianceSeverity;
   }
   export type AssociationVersionList = AssociationVersionInfo[];
+  export interface AttachmentContent {
+    /**
+     * The name of an attachment.
+     */
+    Name?: AttachmentName;
+    /**
+     * The size of an attachment in bytes.
+     */
+    Size?: ContentLength;
+    /**
+     * The cryptographic hash value of the document content.
+     */
+    Hash?: AttachmentHash;
+    /**
+     * The hash algorithm used to calculate the hash value.
+     */
+    HashType?: AttachmentHashType;
+    /**
+     * The URL location of the attachment content.
+     */
+    Url?: AttachmentUrl;
+  }
+  export type AttachmentContentList = AttachmentContent[];
+  export type AttachmentHash = string;
+  export type AttachmentHashType = "Sha256"|string;
+  export interface AttachmentInformation {
+    Name?: AttachmentName;
+  }
+  export type AttachmentInformationList = AttachmentInformation[];
+  export type AttachmentName = string;
+  export type AttachmentUrl = string;
+  export interface AttachmentsSource {
+    /**
+     * The key of a key and value pair that identifies the location of an attachment to a document.
+     */
+    Key?: AttachmentsSourceKey;
+    /**
+     * The URL of the location of a document attachment, such as the URL of an Amazon S3 bucket.
+     */
+    Values?: AttachmentsSourceValues;
+  }
+  export type AttachmentsSourceKey = "SourceUrl"|string;
+  export type AttachmentsSourceList = AttachmentsSource[];
+  export type AttachmentsSourceValue = string;
+  export type AttachmentsSourceValues = AttachmentsSourceValue[];
   export type AttributeName = string;
   export type AttributeValue = string;
   export type AutomationActionName = string;
@@ -1931,6 +1976,7 @@ declare namespace SSM {
   }
   export type ComputerName = string;
   export type ConnectionStatus = "Connected"|"NotConnected"|string;
+  export type ContentLength = number;
   export interface CreateActivationRequest {
     /**
      * A user-defined description of the resource that you want to register with Amazon EC2.   Do not enter personally identifiable information in this field. 
@@ -2084,11 +2130,19 @@ declare namespace SSM {
      */
     Content: DocumentContent;
     /**
+     * A list of key and value pairs that describe attachments to a version of a document.
+     */
+    Attachments?: AttachmentsSourceList;
+    /**
      * A name for the Systems Manager document.  Do not use the following to begin the names of documents you create. They are reserved by AWS for use as document prefixes:    aws     amazon     amzn    
      */
     Name: DocumentName;
     /**
-     * The type of document to create. Valid document types include: Policy, Automation, and Command.
+     * An optional field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     */
+    VersionName?: DocumentVersionName;
+    /**
+     * The type of document to create. Valid document types include: Command, Policy, Automation, Session, and Package.
      */
     DocumentType?: DocumentType;
     /**
@@ -2644,6 +2698,10 @@ declare namespace SSM {
      * The document version for which you want information. Can be a specific version or the default version.
      */
     DocumentVersion?: DocumentVersion;
+    /**
+     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     */
+    VersionName?: DocumentVersionName;
   }
   export interface DescribeDocumentResult {
     /**
@@ -3239,6 +3297,10 @@ declare namespace SSM {
      * The default version of the document.
      */
     DefaultVersion?: DocumentVersion;
+    /**
+     * The default version of the artifact associated with the document.
+     */
+    DefaultVersionName?: DocumentVersionName;
   }
   export interface DocumentDescription {
     /**
@@ -3250,13 +3312,17 @@ declare namespace SSM {
      */
     Hash?: DocumentHash;
     /**
-     * Sha256 or Sha1.  Sha1 hashes have been deprecated. 
+     * The hash type of the document. Valid values include Sha256 or Sha1.  Sha1 hashes have been deprecated. 
      */
     HashType?: DocumentHashType;
     /**
      * The name of the Systems Manager document.
      */
     Name?: DocumentARN;
+    /**
+     * The version of the artifact associated with the document.
+     */
+    VersionName?: DocumentVersionName;
     /**
      * The AWS user account that created the document.
      */
@@ -3269,6 +3335,10 @@ declare namespace SSM {
      * The status of the Systems Manager document.
      */
     Status?: DocumentStatus;
+    /**
+     * A message returned by AWS Systems Manager that explains the Status value. For example, a Failed status might be explained by the StatusInformation message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."
+     */
+    StatusInformation?: DocumentStatusInformation;
     /**
      * The document version.
      */
@@ -3286,7 +3356,7 @@ declare namespace SSM {
      */
     PlatformTypes?: PlatformTypeList;
     /**
-     * The type of document. 
+     * The type of document.
      */
     DocumentType?: DocumentType;
     /**
@@ -3313,6 +3383,10 @@ declare namespace SSM {
      * The tags, or metadata, that have been applied to the document.
      */
     Tags?: TagList;
+    /**
+     * Details about the document attachments, including names, locations, sizes, etc.
+     */
+    AttachmentsInformation?: AttachmentInformationList;
   }
   export interface DocumentFilter {
     /**
@@ -3339,6 +3413,10 @@ declare namespace SSM {
      * The AWS user account that created the document.
      */
     Owner?: DocumentOwner;
+    /**
+     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     */
+    VersionName?: DocumentVersionName;
     /**
      * The operating system platform. 
      */
@@ -3411,8 +3489,9 @@ declare namespace SSM {
   export type DocumentPermissionType = "Share"|string;
   export type DocumentSchemaVersion = string;
   export type DocumentSha1 = string;
-  export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|string;
-  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|string;
+  export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|"Failed"|string;
+  export type DocumentStatusInformation = string;
+  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|string;
   export type DocumentVersion = string;
   export interface DocumentVersionInfo {
     /**
@@ -3423,6 +3502,10 @@ declare namespace SSM {
      * The document version.
      */
     DocumentVersion?: DocumentVersion;
+    /**
+     * The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     */
+    VersionName?: DocumentVersionName;
     /**
      * The date the document was created.
      */
@@ -3435,8 +3518,17 @@ declare namespace SSM {
      * The document format, either JSON or YAML.
      */
     DocumentFormat?: DocumentFormat;
+    /**
+     * The status of the Systems Manager document, such as Creating, Active, Failed, and Deleting.
+     */
+    Status?: DocumentStatus;
+    /**
+     * A message returned by AWS Systems Manager that explains the Status value. For example, a Failed status might be explained by the StatusInformation message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."
+     */
+    StatusInformation?: DocumentStatusInformation;
   }
   export type DocumentVersionList = DocumentVersionInfo[];
+  export type DocumentVersionName = string;
   export type DocumentVersionNumber = string;
   export type DryRun = boolean;
   export type EffectiveInstanceAssociationMaxResults = number;
@@ -3647,6 +3739,10 @@ declare namespace SSM {
      */
     Name: DocumentARN;
     /**
+     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     */
+    VersionName?: DocumentVersionName;
+    /**
      * The document version for which you want information.
      */
     DocumentVersion?: DocumentVersion;
@@ -3661,9 +3757,21 @@ declare namespace SSM {
      */
     Name?: DocumentARN;
     /**
+     * The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     */
+    VersionName?: DocumentVersionName;
+    /**
      * The document version.
      */
     DocumentVersion?: DocumentVersion;
+    /**
+     * The status of the Systems Manager document, such as Creating, Active, Updating, Failed, and Deleting.
+     */
+    Status?: DocumentStatus;
+    /**
+     * A message returned by AWS Systems Manager that explains the Status value. For example, a Failed status might be explained by the StatusInformation message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."
+     */
+    StatusInformation?: DocumentStatusInformation;
     /**
      * The contents of the Systems Manager document.
      */
@@ -3676,6 +3784,10 @@ declare namespace SSM {
      * The document format, either JSON or YAML.
      */
     DocumentFormat?: DocumentFormat;
+    /**
+     * A description of the document attachments, including names, locations, sizes, etc.
+     */
+    AttachmentsContent?: AttachmentContentList;
   }
   export interface GetInventoryRequest {
     /**
@@ -6997,13 +7109,21 @@ declare namespace SSM {
   }
   export interface UpdateDocumentRequest {
     /**
-     * The content in a document that you want to update.
+     * A valid JSON or YAML string.
      */
     Content: DocumentContent;
+    /**
+     * A list of key and value pairs that describe attachments to a version of a document.
+     */
+    Attachments?: AttachmentsSourceList;
     /**
      * The name of the document that you want to update.
      */
     Name: DocumentName;
+    /**
+     * An optional field specifying the version of the artifact you are updating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     */
+    VersionName?: DocumentVersionName;
     /**
      * The version of the document that you want to update.
      */

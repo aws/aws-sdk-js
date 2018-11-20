@@ -151,5 +151,7 @@ module.exports = {
   PinpointEmail: require('./pinpointemail'),
   RAM: require('./ram'),
   Route53Resolver: require('./route53resolver'),
-  PinpointSMSVoice: require('./pinpointsmsvoice')
+  PinpointSMSVoice: require('./pinpointsmsvoice'),
+  QuickSight: require('./quicksight'),
+  RDSDataService: require('./rdsdataservice')
 };

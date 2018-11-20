@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.359.0
+// AWS SDK for JavaScript v2.360.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -18982,6 +18982,2937 @@ arguments[4][15][0].apply(exports,arguments)
 module.exports={
   "version": "2.0",
   "metadata": {
+    "apiVersion": "2018-11-05",
+    "endpointPrefix": "cloudfront",
+    "globalEndpoint": "cloudfront.amazonaws.com",
+    "protocol": "rest-xml",
+    "serviceAbbreviation": "CloudFront",
+    "serviceFullName": "Amazon CloudFront",
+    "serviceId": "CloudFront",
+    "signatureVersion": "v4",
+    "uid": "cloudfront-2018-11-05"
+  },
+  "operations": {
+    "CreateCloudFrontOriginAccessIdentity": {
+      "http": {
+        "requestUri": "/2018-11-05/origin-access-identity/cloudfront",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CloudFrontOriginAccessIdentityConfig"
+        ],
+        "members": {
+          "CloudFrontOriginAccessIdentityConfig": {
+            "shape": "S2",
+            "locationName": "CloudFrontOriginAccessIdentityConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          }
+        },
+        "payload": "CloudFrontOriginAccessIdentityConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CloudFrontOriginAccessIdentity": {
+            "shape": "S5"
+          },
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "CloudFrontOriginAccessIdentity"
+      }
+    },
+    "CreateDistribution": {
+      "http": {
+        "requestUri": "/2018-11-05/distribution",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "DistributionConfig"
+        ],
+        "members": {
+          "DistributionConfig": {
+            "shape": "S7",
+            "locationName": "DistributionConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          }
+        },
+        "payload": "DistributionConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Distribution": {
+            "shape": "S22"
+          },
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "Distribution"
+      }
+    },
+    "CreateDistributionWithTags": {
+      "http": {
+        "requestUri": "/2018-11-05/distribution?WithTags",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "DistributionConfigWithTags"
+        ],
+        "members": {
+          "DistributionConfigWithTags": {
+            "locationName": "DistributionConfigWithTags",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            },
+            "type": "structure",
+            "required": [
+              "DistributionConfig",
+              "Tags"
+            ],
+            "members": {
+              "DistributionConfig": {
+                "shape": "S7"
+              },
+              "Tags": {
+                "shape": "S2b"
+              }
+            }
+          }
+        },
+        "payload": "DistributionConfigWithTags"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Distribution": {
+            "shape": "S22"
+          },
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "Distribution"
+      }
+    },
+    "CreateFieldLevelEncryptionConfig": {
+      "http": {
+        "requestUri": "/2018-11-05/field-level-encryption",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "FieldLevelEncryptionConfig"
+        ],
+        "members": {
+          "FieldLevelEncryptionConfig": {
+            "shape": "S2i",
+            "locationName": "FieldLevelEncryptionConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          }
+        },
+        "payload": "FieldLevelEncryptionConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FieldLevelEncryption": {
+            "shape": "S2t"
+          },
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "FieldLevelEncryption"
+      }
+    },
+    "CreateFieldLevelEncryptionProfile": {
+      "http": {
+        "requestUri": "/2018-11-05/field-level-encryption-profile",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "FieldLevelEncryptionProfileConfig"
+        ],
+        "members": {
+          "FieldLevelEncryptionProfileConfig": {
+            "shape": "S2v",
+            "locationName": "FieldLevelEncryptionProfileConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          }
+        },
+        "payload": "FieldLevelEncryptionProfileConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FieldLevelEncryptionProfile": {
+            "shape": "S32"
+          },
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "FieldLevelEncryptionProfile"
+      }
+    },
+    "CreateInvalidation": {
+      "http": {
+        "requestUri": "/2018-11-05/distribution/{DistributionId}/invalidation",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "DistributionId",
+          "InvalidationBatch"
+        ],
+        "members": {
+          "DistributionId": {
+            "location": "uri",
+            "locationName": "DistributionId"
+          },
+          "InvalidationBatch": {
+            "shape": "S34",
+            "locationName": "InvalidationBatch",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          }
+        },
+        "payload": "InvalidationBatch"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          },
+          "Invalidation": {
+            "shape": "S38"
+          }
+        },
+        "payload": "Invalidation"
+      }
+    },
+    "CreatePublicKey": {
+      "http": {
+        "requestUri": "/2018-11-05/public-key",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "PublicKeyConfig"
+        ],
+        "members": {
+          "PublicKeyConfig": {
+            "shape": "S3a",
+            "locationName": "PublicKeyConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          }
+        },
+        "payload": "PublicKeyConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PublicKey": {
+            "shape": "S3c"
+          },
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "PublicKey"
+      }
+    },
+    "CreateStreamingDistribution": {
+      "http": {
+        "requestUri": "/2018-11-05/streaming-distribution",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "StreamingDistributionConfig"
+        ],
+        "members": {
+          "StreamingDistributionConfig": {
+            "shape": "S3e",
+            "locationName": "StreamingDistributionConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          }
+        },
+        "payload": "StreamingDistributionConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "StreamingDistribution": {
+            "shape": "S3i"
+          },
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "StreamingDistribution"
+      }
+    },
+    "CreateStreamingDistributionWithTags": {
+      "http": {
+        "requestUri": "/2018-11-05/streaming-distribution?WithTags",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "StreamingDistributionConfigWithTags"
+        ],
+        "members": {
+          "StreamingDistributionConfigWithTags": {
+            "locationName": "StreamingDistributionConfigWithTags",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            },
+            "type": "structure",
+            "required": [
+              "StreamingDistributionConfig",
+              "Tags"
+            ],
+            "members": {
+              "StreamingDistributionConfig": {
+                "shape": "S3e"
+              },
+              "Tags": {
+                "shape": "S2b"
+              }
+            }
+          }
+        },
+        "payload": "StreamingDistributionConfigWithTags"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "StreamingDistribution": {
+            "shape": "S3i"
+          },
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "StreamingDistribution"
+      }
+    },
+    "DeleteCloudFrontOriginAccessIdentity": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2018-11-05/origin-access-identity/cloudfront/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        }
+      }
+    },
+    "DeleteDistribution": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2018-11-05/distribution/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        }
+      }
+    },
+    "DeleteFieldLevelEncryptionConfig": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2018-11-05/field-level-encryption/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        }
+      }
+    },
+    "DeleteFieldLevelEncryptionProfile": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2018-11-05/field-level-encryption-profile/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        }
+      }
+    },
+    "DeletePublicKey": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2018-11-05/public-key/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        }
+      }
+    },
+    "DeleteStreamingDistribution": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2018-11-05/streaming-distribution/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        }
+      }
+    },
+    "GetCloudFrontOriginAccessIdentity": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/origin-access-identity/cloudfront/{Id}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CloudFrontOriginAccessIdentity": {
+            "shape": "S5"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "CloudFrontOriginAccessIdentity"
+      }
+    },
+    "GetCloudFrontOriginAccessIdentityConfig": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/origin-access-identity/cloudfront/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CloudFrontOriginAccessIdentityConfig": {
+            "shape": "S2"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "CloudFrontOriginAccessIdentityConfig"
+      }
+    },
+    "GetDistribution": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/distribution/{Id}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Distribution": {
+            "shape": "S22"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "Distribution"
+      }
+    },
+    "GetDistributionConfig": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/distribution/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "DistributionConfig": {
+            "shape": "S7"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "DistributionConfig"
+      }
+    },
+    "GetFieldLevelEncryption": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/field-level-encryption/{Id}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FieldLevelEncryption": {
+            "shape": "S2t"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "FieldLevelEncryption"
+      }
+    },
+    "GetFieldLevelEncryptionConfig": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/field-level-encryption/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FieldLevelEncryptionConfig": {
+            "shape": "S2i"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "FieldLevelEncryptionConfig"
+      }
+    },
+    "GetFieldLevelEncryptionProfile": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/field-level-encryption-profile/{Id}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FieldLevelEncryptionProfile": {
+            "shape": "S32"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "FieldLevelEncryptionProfile"
+      }
+    },
+    "GetFieldLevelEncryptionProfileConfig": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/field-level-encryption-profile/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FieldLevelEncryptionProfileConfig": {
+            "shape": "S2v"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "FieldLevelEncryptionProfileConfig"
+      }
+    },
+    "GetInvalidation": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/distribution/{DistributionId}/invalidation/{Id}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "DistributionId",
+          "Id"
+        ],
+        "members": {
+          "DistributionId": {
+            "location": "uri",
+            "locationName": "DistributionId"
+          },
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Invalidation": {
+            "shape": "S38"
+          }
+        },
+        "payload": "Invalidation"
+      }
+    },
+    "GetPublicKey": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/public-key/{Id}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PublicKey": {
+            "shape": "S3c"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "PublicKey"
+      }
+    },
+    "GetPublicKeyConfig": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/public-key/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PublicKeyConfig": {
+            "shape": "S3a"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "PublicKeyConfig"
+      }
+    },
+    "GetStreamingDistribution": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/streaming-distribution/{Id}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "StreamingDistribution": {
+            "shape": "S3i"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "StreamingDistribution"
+      }
+    },
+    "GetStreamingDistributionConfig": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/streaming-distribution/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "StreamingDistributionConfig": {
+            "shape": "S3e"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "StreamingDistributionConfig"
+      }
+    },
+    "ListCloudFrontOriginAccessIdentities": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/origin-access-identity/cloudfront"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "location": "querystring",
+            "locationName": "Marker"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CloudFrontOriginAccessIdentityList": {
+            "type": "structure",
+            "required": [
+              "Marker",
+              "MaxItems",
+              "IsTruncated",
+              "Quantity"
+            ],
+            "members": {
+              "Marker": {},
+              "NextMarker": {},
+              "MaxItems": {
+                "type": "integer"
+              },
+              "IsTruncated": {
+                "type": "boolean"
+              },
+              "Quantity": {
+                "type": "integer"
+              },
+              "Items": {
+                "type": "list",
+                "member": {
+                  "locationName": "CloudFrontOriginAccessIdentitySummary",
+                  "type": "structure",
+                  "required": [
+                    "Id",
+                    "S3CanonicalUserId",
+                    "Comment"
+                  ],
+                  "members": {
+                    "Id": {},
+                    "S3CanonicalUserId": {},
+                    "Comment": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "payload": "CloudFrontOriginAccessIdentityList"
+      }
+    },
+    "ListDistributions": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/distribution"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "location": "querystring",
+            "locationName": "Marker"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "DistributionList": {
+            "shape": "S4p"
+          }
+        },
+        "payload": "DistributionList"
+      }
+    },
+    "ListDistributionsByWebACLId": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/distributionsByWebACLId/{WebACLId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "WebACLId"
+        ],
+        "members": {
+          "Marker": {
+            "location": "querystring",
+            "locationName": "Marker"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "MaxItems"
+          },
+          "WebACLId": {
+            "location": "uri",
+            "locationName": "WebACLId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "DistributionList": {
+            "shape": "S4p"
+          }
+        },
+        "payload": "DistributionList"
+      }
+    },
+    "ListFieldLevelEncryptionConfigs": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/field-level-encryption"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "location": "querystring",
+            "locationName": "Marker"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FieldLevelEncryptionList": {
+            "type": "structure",
+            "required": [
+              "MaxItems",
+              "Quantity"
+            ],
+            "members": {
+              "NextMarker": {},
+              "MaxItems": {
+                "type": "integer"
+              },
+              "Quantity": {
+                "type": "integer"
+              },
+              "Items": {
+                "type": "list",
+                "member": {
+                  "locationName": "FieldLevelEncryptionSummary",
+                  "type": "structure",
+                  "required": [
+                    "Id",
+                    "LastModifiedTime"
+                  ],
+                  "members": {
+                    "Id": {},
+                    "LastModifiedTime": {
+                      "type": "timestamp"
+                    },
+                    "Comment": {},
+                    "QueryArgProfileConfig": {
+                      "shape": "S2j"
+                    },
+                    "ContentTypeProfileConfig": {
+                      "shape": "S2n"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "payload": "FieldLevelEncryptionList"
+      }
+    },
+    "ListFieldLevelEncryptionProfiles": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/field-level-encryption-profile"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "location": "querystring",
+            "locationName": "Marker"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FieldLevelEncryptionProfileList": {
+            "type": "structure",
+            "required": [
+              "MaxItems",
+              "Quantity"
+            ],
+            "members": {
+              "NextMarker": {},
+              "MaxItems": {
+                "type": "integer"
+              },
+              "Quantity": {
+                "type": "integer"
+              },
+              "Items": {
+                "type": "list",
+                "member": {
+                  "locationName": "FieldLevelEncryptionProfileSummary",
+                  "type": "structure",
+                  "required": [
+                    "Id",
+                    "LastModifiedTime",
+                    "Name",
+                    "EncryptionEntities"
+                  ],
+                  "members": {
+                    "Id": {},
+                    "LastModifiedTime": {
+                      "type": "timestamp"
+                    },
+                    "Name": {},
+                    "EncryptionEntities": {
+                      "shape": "S2w"
+                    },
+                    "Comment": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "payload": "FieldLevelEncryptionProfileList"
+      }
+    },
+    "ListInvalidations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/distribution/{DistributionId}/invalidation"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "DistributionId"
+        ],
+        "members": {
+          "DistributionId": {
+            "location": "uri",
+            "locationName": "DistributionId"
+          },
+          "Marker": {
+            "location": "querystring",
+            "locationName": "Marker"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "InvalidationList": {
+            "type": "structure",
+            "required": [
+              "Marker",
+              "MaxItems",
+              "IsTruncated",
+              "Quantity"
+            ],
+            "members": {
+              "Marker": {},
+              "NextMarker": {},
+              "MaxItems": {
+                "type": "integer"
+              },
+              "IsTruncated": {
+                "type": "boolean"
+              },
+              "Quantity": {
+                "type": "integer"
+              },
+              "Items": {
+                "type": "list",
+                "member": {
+                  "locationName": "InvalidationSummary",
+                  "type": "structure",
+                  "required": [
+                    "Id",
+                    "CreateTime",
+                    "Status"
+                  ],
+                  "members": {
+                    "Id": {},
+                    "CreateTime": {
+                      "type": "timestamp"
+                    },
+                    "Status": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "payload": "InvalidationList"
+      }
+    },
+    "ListPublicKeys": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/public-key"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "location": "querystring",
+            "locationName": "Marker"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PublicKeyList": {
+            "type": "structure",
+            "required": [
+              "MaxItems",
+              "Quantity"
+            ],
+            "members": {
+              "NextMarker": {},
+              "MaxItems": {
+                "type": "integer"
+              },
+              "Quantity": {
+                "type": "integer"
+              },
+              "Items": {
+                "type": "list",
+                "member": {
+                  "locationName": "PublicKeySummary",
+                  "type": "structure",
+                  "required": [
+                    "Id",
+                    "Name",
+                    "CreatedTime",
+                    "EncodedKey"
+                  ],
+                  "members": {
+                    "Id": {},
+                    "Name": {},
+                    "CreatedTime": {
+                      "type": "timestamp"
+                    },
+                    "EncodedKey": {},
+                    "Comment": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "payload": "PublicKeyList"
+      }
+    },
+    "ListStreamingDistributions": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/streaming-distribution"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "location": "querystring",
+            "locationName": "Marker"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "StreamingDistributionList": {
+            "type": "structure",
+            "required": [
+              "Marker",
+              "MaxItems",
+              "IsTruncated",
+              "Quantity"
+            ],
+            "members": {
+              "Marker": {},
+              "NextMarker": {},
+              "MaxItems": {
+                "type": "integer"
+              },
+              "IsTruncated": {
+                "type": "boolean"
+              },
+              "Quantity": {
+                "type": "integer"
+              },
+              "Items": {
+                "type": "list",
+                "member": {
+                  "locationName": "StreamingDistributionSummary",
+                  "type": "structure",
+                  "required": [
+                    "Id",
+                    "ARN",
+                    "Status",
+                    "LastModifiedTime",
+                    "DomainName",
+                    "S3Origin",
+                    "Aliases",
+                    "TrustedSigners",
+                    "Comment",
+                    "PriceClass",
+                    "Enabled"
+                  ],
+                  "members": {
+                    "Id": {},
+                    "ARN": {},
+                    "Status": {},
+                    "LastModifiedTime": {
+                      "type": "timestamp"
+                    },
+                    "DomainName": {},
+                    "S3Origin": {
+                      "shape": "S3f"
+                    },
+                    "Aliases": {
+                      "shape": "S8"
+                    },
+                    "TrustedSigners": {
+                      "shape": "S17"
+                    },
+                    "Comment": {},
+                    "PriceClass": {},
+                    "Enabled": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "payload": "StreamingDistributionList"
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2018-11-05/tagging"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Resource"
+        ],
+        "members": {
+          "Resource": {
+            "location": "querystring",
+            "locationName": "Resource"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Tags"
+        ],
+        "members": {
+          "Tags": {
+            "shape": "S2b"
+          }
+        },
+        "payload": "Tags"
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/2018-11-05/tagging?Operation=Tag",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Resource",
+          "Tags"
+        ],
+        "members": {
+          "Resource": {
+            "location": "querystring",
+            "locationName": "Resource"
+          },
+          "Tags": {
+            "shape": "S2b",
+            "locationName": "Tags",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          }
+        },
+        "payload": "Tags"
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "requestUri": "/2018-11-05/tagging?Operation=Untag",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Resource",
+          "TagKeys"
+        ],
+        "members": {
+          "Resource": {
+            "location": "querystring",
+            "locationName": "Resource"
+          },
+          "TagKeys": {
+            "locationName": "TagKeys",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            },
+            "type": "structure",
+            "members": {
+              "Items": {
+                "type": "list",
+                "member": {
+                  "locationName": "Key"
+                }
+              }
+            }
+          }
+        },
+        "payload": "TagKeys"
+      }
+    },
+    "UpdateCloudFrontOriginAccessIdentity": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2018-11-05/origin-access-identity/cloudfront/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CloudFrontOriginAccessIdentityConfig",
+          "Id"
+        ],
+        "members": {
+          "CloudFrontOriginAccessIdentityConfig": {
+            "shape": "S2",
+            "locationName": "CloudFrontOriginAccessIdentityConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          },
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        },
+        "payload": "CloudFrontOriginAccessIdentityConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CloudFrontOriginAccessIdentity": {
+            "shape": "S5"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "CloudFrontOriginAccessIdentity"
+      }
+    },
+    "UpdateDistribution": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2018-11-05/distribution/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "DistributionConfig",
+          "Id"
+        ],
+        "members": {
+          "DistributionConfig": {
+            "shape": "S7",
+            "locationName": "DistributionConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          },
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        },
+        "payload": "DistributionConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Distribution": {
+            "shape": "S22"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "Distribution"
+      }
+    },
+    "UpdateFieldLevelEncryptionConfig": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2018-11-05/field-level-encryption/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "FieldLevelEncryptionConfig",
+          "Id"
+        ],
+        "members": {
+          "FieldLevelEncryptionConfig": {
+            "shape": "S2i",
+            "locationName": "FieldLevelEncryptionConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          },
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        },
+        "payload": "FieldLevelEncryptionConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FieldLevelEncryption": {
+            "shape": "S2t"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "FieldLevelEncryption"
+      }
+    },
+    "UpdateFieldLevelEncryptionProfile": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2018-11-05/field-level-encryption-profile/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "FieldLevelEncryptionProfileConfig",
+          "Id"
+        ],
+        "members": {
+          "FieldLevelEncryptionProfileConfig": {
+            "shape": "S2v",
+            "locationName": "FieldLevelEncryptionProfileConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          },
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        },
+        "payload": "FieldLevelEncryptionProfileConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FieldLevelEncryptionProfile": {
+            "shape": "S32"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "FieldLevelEncryptionProfile"
+      }
+    },
+    "UpdatePublicKey": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2018-11-05/public-key/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "PublicKeyConfig",
+          "Id"
+        ],
+        "members": {
+          "PublicKeyConfig": {
+            "shape": "S3a",
+            "locationName": "PublicKeyConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          },
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        },
+        "payload": "PublicKeyConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PublicKey": {
+            "shape": "S3c"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "PublicKey"
+      }
+    },
+    "UpdateStreamingDistribution": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2018-11-05/streaming-distribution/{Id}/config"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "StreamingDistributionConfig",
+          "Id"
+        ],
+        "members": {
+          "StreamingDistributionConfig": {
+            "shape": "S3e",
+            "locationName": "StreamingDistributionConfig",
+            "xmlNamespace": {
+              "uri": "http://cloudfront.amazonaws.com/doc/2018-11-05/"
+            }
+          },
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "IfMatch": {
+            "location": "header",
+            "locationName": "If-Match"
+          }
+        },
+        "payload": "StreamingDistributionConfig"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "StreamingDistribution": {
+            "shape": "S3i"
+          },
+          "ETag": {
+            "location": "header",
+            "locationName": "ETag"
+          }
+        },
+        "payload": "StreamingDistribution"
+      }
+    }
+  },
+  "shapes": {
+    "S2": {
+      "type": "structure",
+      "required": [
+        "CallerReference",
+        "Comment"
+      ],
+      "members": {
+        "CallerReference": {},
+        "Comment": {}
+      }
+    },
+    "S5": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "S3CanonicalUserId"
+      ],
+      "members": {
+        "Id": {},
+        "S3CanonicalUserId": {},
+        "CloudFrontOriginAccessIdentityConfig": {
+          "shape": "S2"
+        }
+      }
+    },
+    "S7": {
+      "type": "structure",
+      "required": [
+        "CallerReference",
+        "Origins",
+        "DefaultCacheBehavior",
+        "Comment",
+        "Enabled"
+      ],
+      "members": {
+        "CallerReference": {},
+        "Aliases": {
+          "shape": "S8"
+        },
+        "DefaultRootObject": {},
+        "Origins": {
+          "shape": "Sb"
+        },
+        "OriginGroups": {
+          "shape": "Sn"
+        },
+        "DefaultCacheBehavior": {
+          "shape": "Sw"
+        },
+        "CacheBehaviors": {
+          "shape": "S1k"
+        },
+        "CustomErrorResponses": {
+          "shape": "S1n"
+        },
+        "Comment": {},
+        "Logging": {
+          "type": "structure",
+          "required": [
+            "Enabled",
+            "IncludeCookies",
+            "Bucket",
+            "Prefix"
+          ],
+          "members": {
+            "Enabled": {
+              "type": "boolean"
+            },
+            "IncludeCookies": {
+              "type": "boolean"
+            },
+            "Bucket": {},
+            "Prefix": {}
+          }
+        },
+        "PriceClass": {},
+        "Enabled": {
+          "type": "boolean"
+        },
+        "ViewerCertificate": {
+          "shape": "S1s"
+        },
+        "Restrictions": {
+          "shape": "S1w"
+        },
+        "WebACLId": {},
+        "HttpVersion": {},
+        "IsIPV6Enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S8": {
+      "type": "structure",
+      "required": [
+        "Quantity"
+      ],
+      "members": {
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "CNAME"
+          }
+        }
+      }
+    },
+    "Sb": {
+      "type": "structure",
+      "required": [
+        "Quantity",
+        "Items"
+      ],
+      "members": {
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "Origin",
+            "type": "structure",
+            "required": [
+              "Id",
+              "DomainName"
+            ],
+            "members": {
+              "Id": {},
+              "DomainName": {},
+              "OriginPath": {},
+              "CustomHeaders": {
+                "type": "structure",
+                "required": [
+                  "Quantity"
+                ],
+                "members": {
+                  "Quantity": {
+                    "type": "integer"
+                  },
+                  "Items": {
+                    "type": "list",
+                    "member": {
+                      "locationName": "OriginCustomHeader",
+                      "type": "structure",
+                      "required": [
+                        "HeaderName",
+                        "HeaderValue"
+                      ],
+                      "members": {
+                        "HeaderName": {},
+                        "HeaderValue": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "S3OriginConfig": {
+                "type": "structure",
+                "required": [
+                  "OriginAccessIdentity"
+                ],
+                "members": {
+                  "OriginAccessIdentity": {}
+                }
+              },
+              "CustomOriginConfig": {
+                "type": "structure",
+                "required": [
+                  "HTTPPort",
+                  "HTTPSPort",
+                  "OriginProtocolPolicy"
+                ],
+                "members": {
+                  "HTTPPort": {
+                    "type": "integer"
+                  },
+                  "HTTPSPort": {
+                    "type": "integer"
+                  },
+                  "OriginProtocolPolicy": {},
+                  "OriginSslProtocols": {
+                    "type": "structure",
+                    "required": [
+                      "Quantity",
+                      "Items"
+                    ],
+                    "members": {
+                      "Quantity": {
+                        "type": "integer"
+                      },
+                      "Items": {
+                        "type": "list",
+                        "member": {
+                          "locationName": "SslProtocol"
+                        }
+                      }
+                    }
+                  },
+                  "OriginReadTimeout": {
+                    "type": "integer"
+                  },
+                  "OriginKeepaliveTimeout": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Sn": {
+      "type": "structure",
+      "required": [
+        "Quantity"
+      ],
+      "members": {
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "OriginGroup",
+            "type": "structure",
+            "required": [
+              "Id",
+              "FailoverCriteria",
+              "Members"
+            ],
+            "members": {
+              "Id": {},
+              "FailoverCriteria": {
+                "type": "structure",
+                "required": [
+                  "StatusCodes"
+                ],
+                "members": {
+                  "StatusCodes": {
+                    "type": "structure",
+                    "required": [
+                      "Quantity",
+                      "Items"
+                    ],
+                    "members": {
+                      "Quantity": {
+                        "type": "integer"
+                      },
+                      "Items": {
+                        "type": "list",
+                        "member": {
+                          "locationName": "StatusCode",
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Members": {
+                "type": "structure",
+                "required": [
+                  "Quantity",
+                  "Items"
+                ],
+                "members": {
+                  "Quantity": {
+                    "type": "integer"
+                  },
+                  "Items": {
+                    "type": "list",
+                    "member": {
+                      "locationName": "OriginGroupMember",
+                      "type": "structure",
+                      "required": [
+                        "OriginId"
+                      ],
+                      "members": {
+                        "OriginId": {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Sw": {
+      "type": "structure",
+      "required": [
+        "TargetOriginId",
+        "ForwardedValues",
+        "TrustedSigners",
+        "ViewerProtocolPolicy",
+        "MinTTL"
+      ],
+      "members": {
+        "TargetOriginId": {},
+        "ForwardedValues": {
+          "shape": "Sx"
+        },
+        "TrustedSigners": {
+          "shape": "S17"
+        },
+        "ViewerProtocolPolicy": {},
+        "MinTTL": {
+          "type": "long"
+        },
+        "AllowedMethods": {
+          "shape": "S1b"
+        },
+        "SmoothStreaming": {
+          "type": "boolean"
+        },
+        "DefaultTTL": {
+          "type": "long"
+        },
+        "MaxTTL": {
+          "type": "long"
+        },
+        "Compress": {
+          "type": "boolean"
+        },
+        "LambdaFunctionAssociations": {
+          "shape": "S1f"
+        },
+        "FieldLevelEncryptionId": {}
+      }
+    },
+    "Sx": {
+      "type": "structure",
+      "required": [
+        "QueryString",
+        "Cookies"
+      ],
+      "members": {
+        "QueryString": {
+          "type": "boolean"
+        },
+        "Cookies": {
+          "type": "structure",
+          "required": [
+            "Forward"
+          ],
+          "members": {
+            "Forward": {},
+            "WhitelistedNames": {
+              "type": "structure",
+              "required": [
+                "Quantity"
+              ],
+              "members": {
+                "Quantity": {
+                  "type": "integer"
+                },
+                "Items": {
+                  "type": "list",
+                  "member": {
+                    "locationName": "Name"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Headers": {
+          "type": "structure",
+          "required": [
+            "Quantity"
+          ],
+          "members": {
+            "Quantity": {
+              "type": "integer"
+            },
+            "Items": {
+              "type": "list",
+              "member": {
+                "locationName": "Name"
+              }
+            }
+          }
+        },
+        "QueryStringCacheKeys": {
+          "type": "structure",
+          "required": [
+            "Quantity"
+          ],
+          "members": {
+            "Quantity": {
+              "type": "integer"
+            },
+            "Items": {
+              "type": "list",
+              "member": {
+                "locationName": "Name"
+              }
+            }
+          }
+        }
+      }
+    },
+    "S17": {
+      "type": "structure",
+      "required": [
+        "Enabled",
+        "Quantity"
+      ],
+      "members": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "AwsAccountNumber"
+          }
+        }
+      }
+    },
+    "S1b": {
+      "type": "structure",
+      "required": [
+        "Quantity",
+        "Items"
+      ],
+      "members": {
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "shape": "S1c"
+        },
+        "CachedMethods": {
+          "type": "structure",
+          "required": [
+            "Quantity",
+            "Items"
+          ],
+          "members": {
+            "Quantity": {
+              "type": "integer"
+            },
+            "Items": {
+              "shape": "S1c"
+            }
+          }
+        }
+      }
+    },
+    "S1c": {
+      "type": "list",
+      "member": {
+        "locationName": "Method"
+      }
+    },
+    "S1f": {
+      "type": "structure",
+      "required": [
+        "Quantity"
+      ],
+      "members": {
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "LambdaFunctionAssociation",
+            "type": "structure",
+            "required": [
+              "LambdaFunctionARN",
+              "EventType"
+            ],
+            "members": {
+              "LambdaFunctionARN": {},
+              "EventType": {},
+              "IncludeBody": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "S1k": {
+      "type": "structure",
+      "required": [
+        "Quantity"
+      ],
+      "members": {
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "CacheBehavior",
+            "type": "structure",
+            "required": [
+              "PathPattern",
+              "TargetOriginId",
+              "ForwardedValues",
+              "TrustedSigners",
+              "ViewerProtocolPolicy",
+              "MinTTL"
+            ],
+            "members": {
+              "PathPattern": {},
+              "TargetOriginId": {},
+              "ForwardedValues": {
+                "shape": "Sx"
+              },
+              "TrustedSigners": {
+                "shape": "S17"
+              },
+              "ViewerProtocolPolicy": {},
+              "MinTTL": {
+                "type": "long"
+              },
+              "AllowedMethods": {
+                "shape": "S1b"
+              },
+              "SmoothStreaming": {
+                "type": "boolean"
+              },
+              "DefaultTTL": {
+                "type": "long"
+              },
+              "MaxTTL": {
+                "type": "long"
+              },
+              "Compress": {
+                "type": "boolean"
+              },
+              "LambdaFunctionAssociations": {
+                "shape": "S1f"
+              },
+              "FieldLevelEncryptionId": {}
+            }
+          }
+        }
+      }
+    },
+    "S1n": {
+      "type": "structure",
+      "required": [
+        "Quantity"
+      ],
+      "members": {
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "CustomErrorResponse",
+            "type": "structure",
+            "required": [
+              "ErrorCode"
+            ],
+            "members": {
+              "ErrorCode": {
+                "type": "integer"
+              },
+              "ResponsePagePath": {},
+              "ResponseCode": {},
+              "ErrorCachingMinTTL": {
+                "type": "long"
+              }
+            }
+          }
+        }
+      }
+    },
+    "S1s": {
+      "type": "structure",
+      "members": {
+        "CloudFrontDefaultCertificate": {
+          "type": "boolean"
+        },
+        "IAMCertificateId": {},
+        "ACMCertificateArn": {},
+        "SSLSupportMethod": {},
+        "MinimumProtocolVersion": {},
+        "Certificate": {
+          "deprecated": true
+        },
+        "CertificateSource": {
+          "deprecated": true
+        }
+      }
+    },
+    "S1w": {
+      "type": "structure",
+      "required": [
+        "GeoRestriction"
+      ],
+      "members": {
+        "GeoRestriction": {
+          "type": "structure",
+          "required": [
+            "RestrictionType",
+            "Quantity"
+          ],
+          "members": {
+            "RestrictionType": {},
+            "Quantity": {
+              "type": "integer"
+            },
+            "Items": {
+              "type": "list",
+              "member": {
+                "locationName": "Location"
+              }
+            }
+          }
+        }
+      }
+    },
+    "S22": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "ARN",
+        "Status",
+        "LastModifiedTime",
+        "InProgressInvalidationBatches",
+        "DomainName",
+        "ActiveTrustedSigners",
+        "DistributionConfig"
+      ],
+      "members": {
+        "Id": {},
+        "ARN": {},
+        "Status": {},
+        "LastModifiedTime": {
+          "type": "timestamp"
+        },
+        "InProgressInvalidationBatches": {
+          "type": "integer"
+        },
+        "DomainName": {},
+        "ActiveTrustedSigners": {
+          "shape": "S24"
+        },
+        "DistributionConfig": {
+          "shape": "S7"
+        }
+      }
+    },
+    "S24": {
+      "type": "structure",
+      "required": [
+        "Enabled",
+        "Quantity"
+      ],
+      "members": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "Signer",
+            "type": "structure",
+            "members": {
+              "AwsAccountNumber": {},
+              "KeyPairIds": {
+                "type": "structure",
+                "required": [
+                  "Quantity"
+                ],
+                "members": {
+                  "Quantity": {
+                    "type": "integer"
+                  },
+                  "Items": {
+                    "type": "list",
+                    "member": {
+                      "locationName": "KeyPairId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S2b": {
+      "type": "structure",
+      "members": {
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "Tag",
+            "type": "structure",
+            "required": [
+              "Key"
+            ],
+            "members": {
+              "Key": {},
+              "Value": {}
+            }
+          }
+        }
+      }
+    },
+    "S2i": {
+      "type": "structure",
+      "required": [
+        "CallerReference"
+      ],
+      "members": {
+        "CallerReference": {},
+        "Comment": {},
+        "QueryArgProfileConfig": {
+          "shape": "S2j"
+        },
+        "ContentTypeProfileConfig": {
+          "shape": "S2n"
+        }
+      }
+    },
+    "S2j": {
+      "type": "structure",
+      "required": [
+        "ForwardWhenQueryArgProfileIsUnknown"
+      ],
+      "members": {
+        "ForwardWhenQueryArgProfileIsUnknown": {
+          "type": "boolean"
+        },
+        "QueryArgProfiles": {
+          "type": "structure",
+          "required": [
+            "Quantity"
+          ],
+          "members": {
+            "Quantity": {
+              "type": "integer"
+            },
+            "Items": {
+              "type": "list",
+              "member": {
+                "locationName": "QueryArgProfile",
+                "type": "structure",
+                "required": [
+                  "QueryArg",
+                  "ProfileId"
+                ],
+                "members": {
+                  "QueryArg": {},
+                  "ProfileId": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S2n": {
+      "type": "structure",
+      "required": [
+        "ForwardWhenContentTypeIsUnknown"
+      ],
+      "members": {
+        "ForwardWhenContentTypeIsUnknown": {
+          "type": "boolean"
+        },
+        "ContentTypeProfiles": {
+          "type": "structure",
+          "required": [
+            "Quantity"
+          ],
+          "members": {
+            "Quantity": {
+              "type": "integer"
+            },
+            "Items": {
+              "type": "list",
+              "member": {
+                "locationName": "ContentTypeProfile",
+                "type": "structure",
+                "required": [
+                  "Format",
+                  "ContentType"
+                ],
+                "members": {
+                  "Format": {},
+                  "ProfileId": {},
+                  "ContentType": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S2t": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "LastModifiedTime",
+        "FieldLevelEncryptionConfig"
+      ],
+      "members": {
+        "Id": {},
+        "LastModifiedTime": {
+          "type": "timestamp"
+        },
+        "FieldLevelEncryptionConfig": {
+          "shape": "S2i"
+        }
+      }
+    },
+    "S2v": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "CallerReference",
+        "EncryptionEntities"
+      ],
+      "members": {
+        "Name": {},
+        "CallerReference": {},
+        "Comment": {},
+        "EncryptionEntities": {
+          "shape": "S2w"
+        }
+      }
+    },
+    "S2w": {
+      "type": "structure",
+      "required": [
+        "Quantity"
+      ],
+      "members": {
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "EncryptionEntity",
+            "type": "structure",
+            "required": [
+              "PublicKeyId",
+              "ProviderId",
+              "FieldPatterns"
+            ],
+            "members": {
+              "PublicKeyId": {},
+              "ProviderId": {},
+              "FieldPatterns": {
+                "type": "structure",
+                "required": [
+                  "Quantity"
+                ],
+                "members": {
+                  "Quantity": {
+                    "type": "integer"
+                  },
+                  "Items": {
+                    "type": "list",
+                    "member": {
+                      "locationName": "FieldPattern"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S32": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "LastModifiedTime",
+        "FieldLevelEncryptionProfileConfig"
+      ],
+      "members": {
+        "Id": {},
+        "LastModifiedTime": {
+          "type": "timestamp"
+        },
+        "FieldLevelEncryptionProfileConfig": {
+          "shape": "S2v"
+        }
+      }
+    },
+    "S34": {
+      "type": "structure",
+      "required": [
+        "Paths",
+        "CallerReference"
+      ],
+      "members": {
+        "Paths": {
+          "type": "structure",
+          "required": [
+            "Quantity"
+          ],
+          "members": {
+            "Quantity": {
+              "type": "integer"
+            },
+            "Items": {
+              "type": "list",
+              "member": {
+                "locationName": "Path"
+              }
+            }
+          }
+        },
+        "CallerReference": {}
+      }
+    },
+    "S38": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "Status",
+        "CreateTime",
+        "InvalidationBatch"
+      ],
+      "members": {
+        "Id": {},
+        "Status": {},
+        "CreateTime": {
+          "type": "timestamp"
+        },
+        "InvalidationBatch": {
+          "shape": "S34"
+        }
+      }
+    },
+    "S3a": {
+      "type": "structure",
+      "required": [
+        "CallerReference",
+        "Name",
+        "EncodedKey"
+      ],
+      "members": {
+        "CallerReference": {},
+        "Name": {},
+        "EncodedKey": {},
+        "Comment": {}
+      }
+    },
+    "S3c": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "CreatedTime",
+        "PublicKeyConfig"
+      ],
+      "members": {
+        "Id": {},
+        "CreatedTime": {
+          "type": "timestamp"
+        },
+        "PublicKeyConfig": {
+          "shape": "S3a"
+        }
+      }
+    },
+    "S3e": {
+      "type": "structure",
+      "required": [
+        "CallerReference",
+        "S3Origin",
+        "Comment",
+        "TrustedSigners",
+        "Enabled"
+      ],
+      "members": {
+        "CallerReference": {},
+        "S3Origin": {
+          "shape": "S3f"
+        },
+        "Aliases": {
+          "shape": "S8"
+        },
+        "Comment": {},
+        "Logging": {
+          "type": "structure",
+          "required": [
+            "Enabled",
+            "Bucket",
+            "Prefix"
+          ],
+          "members": {
+            "Enabled": {
+              "type": "boolean"
+            },
+            "Bucket": {},
+            "Prefix": {}
+          }
+        },
+        "TrustedSigners": {
+          "shape": "S17"
+        },
+        "PriceClass": {},
+        "Enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S3f": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "OriginAccessIdentity"
+      ],
+      "members": {
+        "DomainName": {},
+        "OriginAccessIdentity": {}
+      }
+    },
+    "S3i": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "ARN",
+        "Status",
+        "DomainName",
+        "ActiveTrustedSigners",
+        "StreamingDistributionConfig"
+      ],
+      "members": {
+        "Id": {},
+        "ARN": {},
+        "Status": {},
+        "LastModifiedTime": {
+          "type": "timestamp"
+        },
+        "DomainName": {},
+        "ActiveTrustedSigners": {
+          "shape": "S24"
+        },
+        "StreamingDistributionConfig": {
+          "shape": "S3e"
+        }
+      }
+    },
+    "S4p": {
+      "type": "structure",
+      "required": [
+        "Marker",
+        "MaxItems",
+        "IsTruncated",
+        "Quantity"
+      ],
+      "members": {
+        "Marker": {},
+        "NextMarker": {},
+        "MaxItems": {
+          "type": "integer"
+        },
+        "IsTruncated": {
+          "type": "boolean"
+        },
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
+            "locationName": "DistributionSummary",
+            "type": "structure",
+            "required": [
+              "Id",
+              "ARN",
+              "Status",
+              "LastModifiedTime",
+              "DomainName",
+              "Aliases",
+              "Origins",
+              "DefaultCacheBehavior",
+              "CacheBehaviors",
+              "CustomErrorResponses",
+              "Comment",
+              "PriceClass",
+              "Enabled",
+              "ViewerCertificate",
+              "Restrictions",
+              "WebACLId",
+              "HttpVersion",
+              "IsIPV6Enabled"
+            ],
+            "members": {
+              "Id": {},
+              "ARN": {},
+              "Status": {},
+              "LastModifiedTime": {
+                "type": "timestamp"
+              },
+              "DomainName": {},
+              "Aliases": {
+                "shape": "S8"
+              },
+              "Origins": {
+                "shape": "Sb"
+              },
+              "OriginGroups": {
+                "shape": "Sn"
+              },
+              "DefaultCacheBehavior": {
+                "shape": "Sw"
+              },
+              "CacheBehaviors": {
+                "shape": "S1k"
+              },
+              "CustomErrorResponses": {
+                "shape": "S1n"
+              },
+              "Comment": {},
+              "PriceClass": {},
+              "Enabled": {
+                "type": "boolean"
+              },
+              "ViewerCertificate": {
+                "shape": "S1s"
+              },
+              "Restrictions": {
+                "shape": "S1w"
+              },
+              "WebACLId": {},
+              "HttpVersion": {},
+              "IsIPV6Enabled": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+},{}],26:[function(require,module,exports){
+arguments[4][17][0].apply(exports,arguments)
+},{"dup":17}],27:[function(require,module,exports){
+arguments[4][15][0].apply(exports,arguments)
+},{"dup":15}],28:[function(require,module,exports){
+module.exports={
+  "version": "2.0",
+  "metadata": {
     "apiVersion": "2014-05-30",
     "endpointPrefix": "cloudhsm",
     "jsonVersion": "1.1",
@@ -19500,13 +22431,13 @@ module.exports={
     }
   }
 }
-},{}],26:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 module.exports={
   "pagination": {
   }
 }
 
-},{}],27:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -20055,7 +22986,7 @@ module.exports={
     }
   }
 }
-},{}],28:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeTrails": {
@@ -20069,7 +23000,7 @@ module.exports={
     }
   }
 }
-},{}],29:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -20959,9 +23890,9 @@ module.exports={
     }
   }
 }
-},{}],30:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],31:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],34:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -22262,7 +25193,7 @@ module.exports={
     }
   }
 }
-},{}],32:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribePullRequestEvents": {
@@ -22302,7 +25233,7 @@ module.exports={
     }
   }
 }
-},{}],33:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -23745,7 +26676,7 @@ module.exports={
     }
   }
 }
-},{}],34:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListApplicationRevisions": {
@@ -23780,7 +26711,7 @@ module.exports={
     }
   }
 }
-},{}],35:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -23812,7 +26743,7 @@ module.exports={
   }
 }
 
-},{}],36:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -25131,9 +28062,9 @@ module.exports={
     }
   }
 }
-},{}],37:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],38:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],41:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -25672,9 +28603,9 @@ module.exports={
     }
   }
 }
-},{}],39:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],40:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],43:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -29137,9 +32068,9 @@ module.exports={
     }
   }
 }
-},{}],41:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],42:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],45:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -29888,7 +32819,7 @@ module.exports={
   },
   "examples": {}
 }
-},{}],43:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -31512,7 +34443,7 @@ module.exports={
     }
   }
 }
-},{}],44:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 module.exports={
   "pagination": {
     "GetResourceConfigHistory": {
@@ -31523,7 +34454,7 @@ module.exports={
     }
   }
 }
-},{}],45:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -31627,7 +34558,7 @@ module.exports={
     }
   }
 }
-},{}],46:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeReportDefinitions": {
@@ -31638,7 +34569,7 @@ module.exports={
   }
 }
 
-},{}],47:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -31841,7 +34772,7 @@ module.exports={
         "type": "structure",
         "members": {
           "upload": {
-            "shape": "S1n"
+            "shape": "S1m"
           }
         }
       }
@@ -31865,7 +34796,7 @@ module.exports={
         "type": "structure",
         "members": {
           "vpceConfiguration": {
-            "shape": "S1y"
+            "shape": "S1x"
           }
         }
       }
@@ -32003,10 +34934,10 @@ module.exports={
             "members": {
               "awsAccountNumber": {},
               "unmeteredDevices": {
-                "shape": "S2j"
+                "shape": "S2i"
               },
               "unmeteredRemoteAccessDevices": {
-                "shape": "S2j"
+                "shape": "S2i"
               },
               "maxJobTimeoutMinutes": {
                 "type": "integer"
@@ -32108,10 +35039,10 @@ module.exports={
           "appArn": {},
           "testType": {},
           "test": {
-            "shape": "S2u"
+            "shape": "S2t"
           },
           "configuration": {
-            "shape": "S2x"
+            "shape": "S2w"
           }
         }
       },
@@ -32119,10 +35050,10 @@ module.exports={
         "type": "structure",
         "members": {
           "compatibleDevices": {
-            "shape": "S35"
+            "shape": "S34"
           },
           "incompatibleDevices": {
-            "shape": "S35"
+            "shape": "S34"
           }
         }
       }
@@ -32160,7 +35091,7 @@ module.exports={
         "type": "structure",
         "members": {
           "job": {
-            "shape": "S3d"
+            "shape": "S3c"
           }
         }
       }
@@ -32195,10 +35126,10 @@ module.exports={
         "type": "structure",
         "members": {
           "current": {
-            "shape": "S3l"
+            "shape": "S3k"
           },
           "nextPeriod": {
-            "shape": "S3l"
+            "shape": "S3k"
           },
           "nextToken": {}
         }
@@ -32256,7 +35187,7 @@ module.exports={
         "type": "structure",
         "members": {
           "run": {
-            "shape": "S42"
+            "shape": "S41"
           }
         }
       }
@@ -32275,7 +35206,7 @@ module.exports={
         "type": "structure",
         "members": {
           "suite": {
-            "shape": "S4c"
+            "shape": "S45"
           }
         }
       }
@@ -32294,7 +35225,7 @@ module.exports={
         "type": "structure",
         "members": {
           "test": {
-            "shape": "S4f"
+            "shape": "S48"
           }
         }
       }
@@ -32313,7 +35244,7 @@ module.exports={
         "type": "structure",
         "members": {
           "upload": {
-            "shape": "S1n"
+            "shape": "S1m"
           }
         }
       }
@@ -32332,7 +35263,7 @@ module.exports={
         "type": "structure",
         "members": {
           "vpceConfiguration": {
-            "shape": "S1y"
+            "shape": "S1x"
           }
         }
       }
@@ -32353,7 +35284,7 @@ module.exports={
         "type": "structure",
         "members": {
           "appUpload": {
-            "shape": "S1n"
+            "shape": "S1m"
           }
         }
       }
@@ -32441,10 +35372,7 @@ module.exports={
         "type": "structure",
         "members": {
           "arn": {},
-          "nextToken": {},
-          "filters": {
-            "shape": "S45"
-          }
+          "nextToken": {}
         }
       },
       "output": {
@@ -32500,7 +35428,7 @@ module.exports={
           "jobs": {
             "type": "list",
             "member": {
-              "shape": "S3d"
+              "shape": "S3c"
             }
           },
           "nextToken": {}
@@ -32569,7 +35497,7 @@ module.exports={
           "offeringTransactions": {
             "type": "list",
             "member": {
-              "shape": "S5h"
+              "shape": "S5a"
             }
           },
           "nextToken": {}
@@ -32589,7 +35517,7 @@ module.exports={
           "offerings": {
             "type": "list",
             "member": {
-              "shape": "S3p"
+              "shape": "S3o"
             }
           },
           "nextToken": {}
@@ -32658,7 +35586,7 @@ module.exports={
           "runs": {
             "type": "list",
             "member": {
-              "shape": "S42"
+              "shape": "S41"
             }
           },
           "nextToken": {}
@@ -32711,7 +35639,7 @@ module.exports={
           "suites": {
             "type": "list",
             "member": {
-              "shape": "S4c"
+              "shape": "S45"
             }
           },
           "nextToken": {}
@@ -32735,7 +35663,7 @@ module.exports={
           "tests": {
             "type": "list",
             "member": {
-              "shape": "S4f"
+              "shape": "S48"
             }
           },
           "nextToken": {}
@@ -32771,16 +35699,16 @@ module.exports={
                       "type": "structure",
                       "members": {
                         "run": {
-                          "shape": "S6d"
+                          "shape": "S66"
                         },
                         "job": {
-                          "shape": "S6d"
+                          "shape": "S66"
                         },
                         "suite": {
-                          "shape": "S6d"
+                          "shape": "S66"
                         },
                         "test": {
-                          "shape": "S6d"
+                          "shape": "S66"
                         },
                         "device": {
                           "shape": "S14"
@@ -32816,7 +35744,7 @@ module.exports={
           "uploads": {
             "type": "list",
             "member": {
-              "shape": "S1n"
+              "shape": "S1m"
             }
           },
           "nextToken": {}
@@ -32839,7 +35767,7 @@ module.exports={
           "vpceConfigurations": {
             "type": "list",
             "member": {
-              "shape": "S1y"
+              "shape": "S1x"
             }
           },
           "nextToken": {}
@@ -32861,7 +35789,7 @@ module.exports={
         "type": "structure",
         "members": {
           "offeringTransaction": {
-            "shape": "S5h"
+            "shape": "S5a"
           }
         }
       }
@@ -32880,7 +35808,7 @@ module.exports={
         "type": "structure",
         "members": {
           "offeringTransaction": {
-            "shape": "S5h"
+            "shape": "S5a"
           }
         }
       }
@@ -32890,33 +35818,19 @@ module.exports={
         "type": "structure",
         "required": [
           "projectArn",
+          "devicePoolArn",
           "test"
         ],
         "members": {
           "projectArn": {},
           "appArn": {},
           "devicePoolArn": {},
-          "deviceSelectionConfiguration": {
-            "type": "structure",
-            "required": [
-              "filters",
-              "maxDevices"
-            ],
-            "members": {
-              "filters": {
-                "shape": "S45"
-              },
-              "maxDevices": {
-                "type": "integer"
-              }
-            }
-          },
           "name": {},
           "test": {
-            "shape": "S2u"
+            "shape": "S2t"
           },
           "configuration": {
-            "shape": "S2x"
+            "shape": "S2w"
           },
           "executionConfiguration": {
             "type": "structure",
@@ -32944,7 +35858,7 @@ module.exports={
         "type": "structure",
         "members": {
           "run": {
-            "shape": "S42"
+            "shape": "S41"
           }
         }
       }
@@ -32963,7 +35877,7 @@ module.exports={
         "type": "structure",
         "members": {
           "job": {
-            "shape": "S3d"
+            "shape": "S3c"
           }
         }
       }
@@ -33001,7 +35915,7 @@ module.exports={
         "type": "structure",
         "members": {
           "run": {
-            "shape": "S42"
+            "shape": "S41"
           }
         }
       }
@@ -33171,7 +36085,7 @@ module.exports={
         "type": "structure",
         "members": {
           "upload": {
-            "shape": "S1n"
+            "shape": "S1m"
           }
         }
       }
@@ -33194,7 +36108,7 @@ module.exports={
         "type": "structure",
         "members": {
           "vpceConfiguration": {
-            "shape": "S1y"
+            "shape": "S1x"
           }
         }
       }
@@ -33327,7 +36241,7 @@ module.exports={
         "clientId": {},
         "billingMethod": {},
         "deviceMinutes": {
-          "shape": "S1h"
+          "shape": "S1g"
         },
         "endpoint": {},
         "deviceUdid": {},
@@ -33388,8 +36302,7 @@ module.exports={
         "fleetName": {},
         "instances": {
           "shape": "S1b"
-        },
-        "availability": {}
+        }
       }
     },
     "S1b": {
@@ -33417,7 +36330,7 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "S1h": {
+    "S1g": {
       "type": "structure",
       "members": {
         "total": {
@@ -33431,7 +36344,7 @@ module.exports={
         }
       }
     },
-    "S1n": {
+    "S1m": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -33448,7 +36361,7 @@ module.exports={
         "category": {}
       }
     },
-    "S1y": {
+    "S1x": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -33458,14 +36371,14 @@ module.exports={
         "vpceConfigurationDescription": {}
       }
     },
-    "S2j": {
+    "S2i": {
       "type": "map",
       "key": {},
       "value": {
         "type": "integer"
       }
     },
-    "S2u": {
+    "S2t": {
       "type": "structure",
       "required": [
         "type"
@@ -33482,23 +36395,23 @@ module.exports={
         }
       }
     },
-    "S2x": {
+    "S2w": {
       "type": "structure",
       "members": {
         "extraDataPackageArn": {},
         "networkProfileArn": {},
         "locale": {},
         "location": {
-          "shape": "S2y"
+          "shape": "S2x"
         },
         "vpceConfigurationArns": {
           "shape": "Sy"
         },
         "customerArtifactPaths": {
-          "shape": "S2z"
+          "shape": "S2y"
         },
         "radios": {
-          "shape": "S33"
+          "shape": "S32"
         },
         "auxiliaryApps": {
           "shape": "Sy"
@@ -33506,7 +36419,7 @@ module.exports={
         "billingMethod": {}
       }
     },
-    "S2y": {
+    "S2x": {
       "type": "structure",
       "required": [
         "latitude",
@@ -33521,7 +36434,7 @@ module.exports={
         }
       }
     },
-    "S2z": {
+    "S2y": {
       "type": "structure",
       "members": {
         "iosPaths": {
@@ -33538,7 +36451,7 @@ module.exports={
         }
       }
     },
-    "S33": {
+    "S32": {
       "type": "structure",
       "members": {
         "wifi": {
@@ -33555,7 +36468,7 @@ module.exports={
         }
       }
     },
-    "S35": {
+    "S34": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -33579,7 +36492,7 @@ module.exports={
         }
       }
     },
-    "S3d": {
+    "S3c": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -33597,7 +36510,7 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S3e"
+          "shape": "S3d"
         },
         "message": {},
         "device": {
@@ -33605,7 +36518,7 @@ module.exports={
         },
         "instanceArn": {},
         "deviceMinutes": {
-          "shape": "S1h"
+          "shape": "S1g"
         },
         "videoEndpoint": {},
         "videoCapture": {
@@ -33613,7 +36526,7 @@ module.exports={
         }
       }
     },
-    "S3e": {
+    "S3d": {
       "type": "structure",
       "members": {
         "total": {
@@ -33639,19 +36552,19 @@ module.exports={
         }
       }
     },
-    "S3l": {
+    "S3k": {
       "type": "map",
       "key": {},
       "value": {
-        "shape": "S3n"
+        "shape": "S3m"
       }
     },
-    "S3n": {
+    "S3m": {
       "type": "structure",
       "members": {
         "type": {},
         "offering": {
-          "shape": "S3p"
+          "shape": "S3o"
         },
         "quantity": {
           "type": "integer"
@@ -33661,7 +36574,7 @@ module.exports={
         }
       }
     },
-    "S3p": {
+    "S3o": {
       "type": "structure",
       "members": {
         "id": {},
@@ -33674,7 +36587,7 @@ module.exports={
             "type": "structure",
             "members": {
               "cost": {
-                "shape": "S3t"
+                "shape": "S3s"
               },
               "frequency": {}
             }
@@ -33682,7 +36595,7 @@ module.exports={
         }
       }
     },
-    "S3t": {
+    "S3s": {
       "type": "structure",
       "members": {
         "amount": {
@@ -33691,7 +36604,7 @@ module.exports={
         "currencyCode": {}
       }
     },
-    "S42": {
+    "S41": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -33710,7 +36623,7 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S3e"
+          "shape": "S3d"
         },
         "message": {},
         "totalJobs": {
@@ -33721,7 +36634,7 @@ module.exports={
         },
         "billingMethod": {},
         "deviceMinutes": {
-          "shape": "S1h"
+          "shape": "S1g"
         },
         "networkProfile": {
           "shape": "Sn"
@@ -33741,50 +36654,22 @@ module.exports={
         "devicePoolArn": {},
         "locale": {},
         "radios": {
-          "shape": "S33"
+          "shape": "S32"
         },
         "location": {
-          "shape": "S2y"
+          "shape": "S2x"
         },
         "customerArtifactPaths": {
-          "shape": "S2z"
+          "shape": "S2y"
         },
         "webUrl": {},
         "skipAppResign": {
           "type": "boolean"
         },
-        "testSpecArn": {},
-        "deviceSelectionResult": {
-          "type": "structure",
-          "members": {
-            "filters": {
-              "shape": "S45"
-            },
-            "matchedDevicesCount": {
-              "type": "integer"
-            },
-            "maxDevices": {
-              "type": "integer"
-            }
-          }
-        }
+        "testSpecArn": {}
       }
     },
     "S45": {
-      "type": "list",
-      "member": {
-        "type": "structure",
-        "members": {
-          "attribute": {},
-          "operator": {},
-          "values": {
-            "type": "list",
-            "member": {}
-          }
-        }
-      }
-    },
-    "S4c": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -33802,15 +36687,15 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S3e"
+          "shape": "S3d"
         },
         "message": {},
         "deviceMinutes": {
-          "shape": "S1h"
+          "shape": "S1g"
         }
       }
     },
-    "S4f": {
+    "S48": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -33828,19 +36713,19 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S3e"
+          "shape": "S3d"
         },
         "message": {},
         "deviceMinutes": {
-          "shape": "S1h"
+          "shape": "S1g"
         }
       }
     },
-    "S5h": {
+    "S5a": {
       "type": "structure",
       "members": {
         "offeringStatus": {
-          "shape": "S3n"
+          "shape": "S3m"
         },
         "transactionId": {},
         "offeringPromotionId": {},
@@ -33848,11 +36733,11 @@ module.exports={
           "type": "timestamp"
         },
         "cost": {
-          "shape": "S3t"
+          "shape": "S3s"
         }
       }
     },
-    "S6d": {
+    "S66": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -33861,7 +36746,7 @@ module.exports={
     }
   }
 }
-},{}],48:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 module.exports={
   "pagination": {
     "GetOfferingStatus": {
@@ -33939,7 +36824,7 @@ module.exports={
     }
   }
 }
-},{}],49:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -35135,7 +38020,7 @@ module.exports={
     }
   }
 }
-},{}],50:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeConnections": {
@@ -35158,7 +38043,7 @@ module.exports={
     }
   }
 }
-},{}],51:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -35824,7 +38709,7 @@ module.exports={
     }
   }
 }
-},{}],52:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 module.exports={
   "pagination": {
     "BatchGetItem": {
@@ -35851,7 +38736,7 @@ module.exports={
     }
   }
 }
-},{}],53:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -35888,7 +38773,7 @@ module.exports={
   }
 }
 
-},{}],54:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -37900,11 +40785,11 @@ module.exports={
     }
   }
 }
-},{}],55:[function(require,module,exports){
-arguments[4][52][0].apply(exports,arguments)
-},{"dup":52}],56:[function(require,module,exports){
-arguments[4][53][0].apply(exports,arguments)
-},{"dup":53}],57:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
+arguments[4][55][0].apply(exports,arguments)
+},{"dup":55}],59:[function(require,module,exports){
+arguments[4][56][0].apply(exports,arguments)
+},{"dup":56}],60:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -53464,7 +56349,7 @@ module.exports={
     }
   }
 }
-},{}],58:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeAccountAttributes": {
@@ -53618,7 +56503,7 @@ module.exports={
     }
   }
 }
-},{}],59:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -54242,7 +57127,7 @@ module.exports={
   }
 }
 
-},{}],60:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -54956,7 +57841,7 @@ module.exports={
     }
   }
 }
-},{}],61:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeImages": {
@@ -54979,7 +57864,7 @@ module.exports={
     }
   }
 }
-},{}],62:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -56876,7 +59761,7 @@ module.exports={
     }
   }
 }
-},{}],63:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListClusters": {
@@ -56917,7 +59802,7 @@ module.exports={
     }
   }
 }
-},{}],64:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -57012,7 +59897,7 @@ module.exports={
   }
 }
 
-},{}],65:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -58792,7 +61677,7 @@ module.exports={
     }
   }
 }
-},{}],66:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeCacheClusters": {
@@ -58869,7 +61754,7 @@ module.exports={
     }
   }
 }
-},{}],67:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 module.exports={
     "version":2,
     "waiters":{
@@ -59014,7 +61899,7 @@ module.exports={
     }
 }
 
-},{}],68:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -60690,7 +63575,7 @@ module.exports={
     }
   }
 }
-},{}],69:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeApplicationVersions": {
@@ -60716,7 +63601,7 @@ module.exports={
     }
   }
 }
-},{}],70:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -61156,9 +64041,9 @@ module.exports={
     }
   }
 }
-},{}],71:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],72:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],75:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -62162,7 +65047,7 @@ module.exports={
     }
   }
 }
-},{}],73:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeInstanceHealth": {
@@ -62181,7 +65066,7 @@ module.exports={
     }
   }
 }
-},{}],74:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 module.exports={
     "version":2,
     "waiters":{
@@ -62237,7 +65122,7 @@ module.exports={
     }
 }
 
-},{}],75:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -63498,7 +66383,7 @@ module.exports={
     }
   }
 }
-},{}],76:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeListeners": {
@@ -63518,7 +66403,7 @@ module.exports={
     }
   }
 }
-},{}],77:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -63620,7 +66505,7 @@ module.exports={
   }
 }
 
-},{}],78:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -65361,7 +68246,7 @@ module.exports={
     }
   }
 }
-},{}],79:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeJobFlows": {
@@ -65399,7 +68284,7 @@ module.exports={
     }
   }
 }
-},{}],80:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -65487,7 +68372,7 @@ module.exports={
   }
 }
 
-},{}],81:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -66548,7 +69433,7 @@ module.exports={
     }
   }
 }
-},{}],82:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListJobsByPipeline": {
@@ -66573,7 +69458,7 @@ module.exports={
     }
   }
 }
-},{}],83:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -66605,7 +69490,7 @@ module.exports={
   }
 }
 
-},{}],84:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -68554,7 +71439,7 @@ module.exports={
     }
   }
 }
-},{}],85:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListCustomVerificationEmailTemplates": {
@@ -68573,7 +71458,7 @@ module.exports={
     }
   }
 }
-},{}],86:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -68593,7 +71478,7 @@ module.exports={
   }
 }
 
-},{}],87:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -69099,9 +71984,9 @@ module.exports={
     }
   }
 }
-},{}],88:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],89:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],92:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -70179,9 +73064,9 @@ module.exports={
     }
   }
 }
-},{}],90:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],91:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],94:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -72412,9 +75297,9 @@ module.exports={
     }
   }
 }
-},{}],92:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],93:[function(require,module,exports){
+},{}],95:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],96:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -73916,7 +76801,7 @@ module.exports={
     }
   }
 }
-},{}],94:[function(require,module,exports){
+},{}],97:[function(require,module,exports){
 module.exports={
   "pagination": {
     "GetExclusionsPreview": {
@@ -73972,7 +76857,7 @@ module.exports={
   }
 }
 
-},{}],95:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -80363,9 +83248,9 @@ module.exports={
     }
   }
 }
-},{}],96:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],97:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],100:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -80496,7 +83381,7 @@ module.exports={
   },
   "shapes": {}
 }
-},{}],98:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -81299,7 +84184,7 @@ module.exports={
     }
   }
 }
-},{}],99:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeStream": {
@@ -81323,7 +84208,7 @@ module.exports={
     }
   }
 }
-},{}],100:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -81355,7 +84240,7 @@ module.exports={
   }
 }
 
-},{}],101:[function(require,module,exports){
+},{}],104:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -81518,9 +84403,9 @@ module.exports={
   },
   "shapes": {}
 }
-},{}],102:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],103:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],106:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -81796,9 +84681,9 @@ module.exports={
     }
   }
 }
-},{}],104:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],105:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],108:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -82638,7 +85523,7 @@ module.exports={
     }
   }
 }
-},{}],106:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListAliases": {
@@ -82671,7 +85556,7 @@ module.exports={
     }
   }
 }
-},{}],107:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 module.exports={
   "metadata": {
     "apiVersion": "2014-11-11",
@@ -83096,7 +85981,7 @@ module.exports={
     }
   }
 }
-},{}],108:[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListEventSources": {
@@ -83114,7 +85999,7 @@ module.exports={
   }
 }
 
-},{}],109:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -84312,7 +87197,7 @@ module.exports={
     }
   }
 }
-},{}],110:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListEventSourceMappings": {
@@ -84329,7 +87214,7 @@ module.exports={
     }
   }
 }
-},{}],111:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -86078,7 +88963,7 @@ module.exports={
     }
   }
 }
-},{}],112:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 module.exports={
   "pagination": {
     "GetBotAliases": {
@@ -86134,7 +89019,7 @@ module.exports={
   }
 }
 
-},{}],113:[function(require,module,exports){
+},{}],116:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -87004,7 +89889,7 @@ module.exports={
     }
   }
 }
-},{}],114:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDestinations": {
@@ -87054,7 +89939,7 @@ module.exports={
     }
   }
 }
-},{}],115:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -88164,7 +91049,7 @@ module.exports={
   },
   "examples": {}
 }
-},{}],116:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeBatchPredictions": {
@@ -88194,7 +91079,7 @@ module.exports={
   }
 }
 
-},{}],117:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -88277,7 +91162,7 @@ module.exports={
   }
 }
 
-},{}],118:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -88364,9 +91249,9 @@ module.exports={
     }
   }
 }
-},{}],119:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],120:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],123:[function(require,module,exports){
 module.exports={
   "acm": {
     "name": "ACM",
@@ -88423,7 +91308,8 @@ module.exports={
       "2016-09-29*",
       "2016-11-25*",
       "2017-03-25*",
-      "2017-10-30*"
+      "2017-10-30*",
+      "2018-06-18*"
     ],
     "cors": true
   },
@@ -88986,9 +91872,16 @@ module.exports={
   "pinpointsmsvoice": {
     "prefix": "sms-voice",
     "name": "PinpointSMSVoice"
+  },
+  "quicksight": {
+    "name": "QuickSight"
+  },
+  "rdsdataservice": {
+    "prefix": "rds-data",
+    "name": "RDSDataService"
   }
 }
-},{}],121:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -89064,7 +91957,7 @@ module.exports={
   },
   "shapes": {}
 }
-},{}],122:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -89266,39 +92159,7 @@ module.exports={
         ],
         "members": {
           "MetricDataQueries": {
-            "type": "list",
-            "member": {
-              "type": "structure",
-              "required": [
-                "Id"
-              ],
-              "members": {
-                "Id": {},
-                "MetricStat": {
-                  "type": "structure",
-                  "required": [
-                    "Metric",
-                    "Period",
-                    "Stat"
-                  ],
-                  "members": {
-                    "Metric": {
-                      "shape": "S1p"
-                    },
-                    "Period": {
-                      "type": "integer"
-                    },
-                    "Stat": {},
-                    "Unit": {}
-                  }
-                },
-                "Expression": {},
-                "Label": {},
-                "ReturnData": {
-                  "type": "boolean"
-                }
-              }
-            }
+            "shape": "S1c"
           },
           "StartTime": {
             "type": "timestamp"
@@ -89524,7 +92385,7 @@ module.exports={
           "Metrics": {
             "type": "list",
             "member": {
-              "shape": "S1p"
+              "shape": "S1g"
             }
           },
           "NextToken": {}
@@ -89569,9 +92430,6 @@ module.exports={
         "type": "structure",
         "required": [
           "AlarmName",
-          "MetricName",
-          "Namespace",
-          "Period",
           "EvaluationPeriods",
           "Threshold",
           "ComparisonOperator"
@@ -89613,7 +92471,10 @@ module.exports={
           },
           "ComparisonOperator": {},
           "TreatMissingData": {},
-          "EvaluateLowSampleCountPercentile": {}
+          "EvaluateLowSampleCountPercentile": {},
+          "Metrics": {
+            "shape": "S1c"
+          }
         }
       }
     },
@@ -89762,7 +92623,10 @@ module.exports={
           },
           "ComparisonOperator": {},
           "TreatMissingData": {},
-          "EvaluateLowSampleCountPercentile": {}
+          "EvaluateLowSampleCountPercentile": {},
+          "Metrics": {
+            "shape": "S1c"
+          }
         },
         "xmlOrder": [
           "AlarmName",
@@ -89789,7 +92653,8 @@ module.exports={
           "ExtendedStatistic",
           "TreatMissingData",
           "EvaluateLowSampleCountPercentile",
-          "DatapointsToAlarm"
+          "DatapointsToAlarm",
+          "Metrics"
         ]
       }
     },
@@ -89815,7 +92680,42 @@ module.exports={
         ]
       }
     },
-    "S1p": {
+    "S1c": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {},
+          "MetricStat": {
+            "type": "structure",
+            "required": [
+              "Metric",
+              "Period",
+              "Stat"
+            ],
+            "members": {
+              "Metric": {
+                "shape": "S1g"
+              },
+              "Period": {
+                "type": "integer"
+              },
+              "Stat": {},
+              "Unit": {}
+            }
+          },
+          "Expression": {},
+          "Label": {},
+          "ReturnData": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "S1g": {
       "type": "structure",
       "members": {
         "Namespace": {},
@@ -89832,7 +92732,7 @@ module.exports={
     }
   }
 }
-},{}],123:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeAlarmHistory": {
@@ -89857,7 +92757,7 @@ module.exports={
     }
   }
 }
-},{}],124:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -89877,7 +92777,7 @@ module.exports={
   }
 }
 
-},{}],125:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -91175,7 +94075,7 @@ module.exports={
     }
   }
 }
-},{}],126:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListAssignmentsForHIT": {
@@ -91231,7 +94131,7 @@ module.exports={
   }
 }
 
-},{}],127:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -93524,7 +96424,7 @@ module.exports={
     }
   }
 }
-},{}],128:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeApps": {
@@ -93580,7 +96480,7 @@ module.exports={
     }
   }
 }
-},{}],129:[function(require,module,exports){
+},{}],132:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -93871,7 +96771,7 @@ module.exports={
   }
 }
 
-},{}],130:[function(require,module,exports){
+},{}],133:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -94268,7 +97168,7 @@ module.exports={
     }
   }
 }
-},{}],131:[function(require,module,exports){
+},{}],134:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListSpeechSynthesisTasks": {
@@ -94279,7 +97179,7 @@ module.exports={
   }
 }
 
-},{}],132:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -94406,7 +97306,7 @@ module.exports={
   },
   "shapes": {}
 }
-},{}],133:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeServices": {
@@ -94427,7 +97327,7 @@ module.exports={
   }
 }
 
-},{}],134:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -96325,7 +99225,7 @@ module.exports={
     }
   }
 }
-},{}],135:[function(require,module,exports){
+},{}],138:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDBEngineVersions": {
@@ -96423,7 +99323,7 @@ module.exports={
     }
   }
 }
-},{}],136:[function(require,module,exports){
+},{}],139:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -98453,7 +101353,7 @@ module.exports={
     }
   }
 }
-},{}],137:[function(require,module,exports){
+},{}],140:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDBEngineVersions": {
@@ -98564,7 +101464,7 @@ module.exports={
     }
   }
 }
-},{}],138:[function(require,module,exports){
+},{}],141:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -100730,9 +103630,9 @@ module.exports={
     }
   }
 }
-},{}],139:[function(require,module,exports){
-arguments[4][137][0].apply(exports,arguments)
-},{"dup":137}],140:[function(require,module,exports){
+},{}],142:[function(require,module,exports){
+arguments[4][140][0].apply(exports,arguments)
+},{"dup":140}],143:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -100831,7 +103731,7 @@ module.exports={
   }
 }
 
-},{}],141:[function(require,module,exports){
+},{}],144:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -103070,9 +105970,9 @@ module.exports={
     }
   }
 }
-},{}],142:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],143:[function(require,module,exports){
+},{}],145:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],146:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -107665,7 +110565,7 @@ module.exports={
     }
   }
 }
-},{}],144:[function(require,module,exports){
+},{}],147:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDBClusters": {
@@ -107788,7 +110688,7 @@ module.exports={
     }
   }
 }
-},{}],145:[function(require,module,exports){
+},{}],148:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -107965,7 +110865,7 @@ module.exports={
   }
 }
 
-},{}],146:[function(require,module,exports){
+},{}],149:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -111003,7 +113903,7 @@ module.exports={
     }
   }
 }
-},{}],147:[function(require,module,exports){
+},{}],150:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeClusterParameterGroups": {
@@ -111098,7 +113998,7 @@ module.exports={
     }
   }
 }
-},{}],148:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -111197,7 +114097,7 @@ module.exports={
   }
 }
 
-},{}],149:[function(require,module,exports){
+},{}],152:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -112708,7 +115608,7 @@ module.exports={
     }
   }
 }
-},{}],150:[function(require,module,exports){
+},{}],153:[function(require,module,exports){
 module.exports={
   "pagination": {
     "GetCelebrityRecognition": {
@@ -112760,7 +115660,7 @@ module.exports={
     }
   }
 }
-},{}],151:[function(require,module,exports){
+},{}],154:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -115349,7 +118249,7 @@ module.exports={
     }
   }
 }
-},{}],152:[function(require,module,exports){
+},{}],155:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListHealthChecks": {
@@ -115383,7 +118283,7 @@ module.exports={
     }
   }
 }
-},{}],153:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -115403,7 +118303,7 @@ module.exports={
   }
 }
 
-},{}],154:[function(require,module,exports){
+},{}],157:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -116186,7 +119086,7 @@ module.exports={
     }
   }
 }
-},{}],155:[function(require,module,exports){
+},{}],158:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListDomains": {
@@ -116203,7 +119103,7 @@ module.exports={
     }
   }
 }
-},{}],156:[function(require,module,exports){
+},{}],159:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -116430,9 +119330,9 @@ module.exports={
     }
   }
 }
-},{}],157:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],158:[function(require,module,exports){
+},{}],160:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],161:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -121525,7 +124425,7 @@ module.exports={
     }
   }
 }
-},{}],159:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListBuckets": {
@@ -121592,7 +124492,7 @@ module.exports={
     }
   }
 }
-},{}],160:[function(require,module,exports){
+},{}],163:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -121667,7 +124567,7 @@ module.exports={
   }
 }
 
-},{}],161:[function(require,module,exports){
+},{}],164:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -122232,7 +125132,7 @@ module.exports={
     }
   }
 }
-},{}],162:[function(require,module,exports){
+},{}],165:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListSecretVersionIds": {
@@ -122248,7 +125148,7 @@ module.exports={
   }
 }
 
-},{}],163:[function(require,module,exports){
+},{}],166:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -124789,7 +127689,7 @@ module.exports={
     }
   }
 }
-},{}],164:[function(require,module,exports){
+},{}],167:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListAcceptedPortfolioShares": {
@@ -124870,7 +127770,7 @@ module.exports={
   }
 }
 
-},{}],165:[function(require,module,exports){
+},{}],168:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -125510,7 +128410,7 @@ module.exports={
     }
   }
 }
-},{}],166:[function(require,module,exports){
+},{}],169:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListEndpointsByPlatformApplication": {
@@ -125540,7 +128440,7 @@ module.exports={
     }
   }
 }
-},{}],167:[function(require,module,exports){
+},{}],170:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -126206,7 +129106,7 @@ module.exports={
     }
   }
 }
-},{}],168:[function(require,module,exports){
+},{}],171:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListQueues": {
@@ -126214,7 +129114,7 @@ module.exports={
     }
   }
 }
-},{}],169:[function(require,module,exports){
+},{}],172:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -126396,7 +129296,11 @@ module.exports={
         ],
         "members": {
           "Content": {},
+          "Attachments": {
+            "shape": "S20"
+          },
           "Name": {},
+          "VersionName": {},
           "DocumentType": {},
           "DocumentFormat": {},
           "TargetType": {}
@@ -126406,7 +129310,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DocumentDescription": {
-            "shape": "S24"
+            "shape": "S2a"
           }
         }
       }
@@ -126424,7 +129328,7 @@ module.exports={
         "members": {
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           },
           "StartDate": {},
           "EndDate": {},
@@ -126461,25 +129365,25 @@ module.exports={
           "OperatingSystem": {},
           "Name": {},
           "GlobalFilters": {
-            "shape": "S30"
+            "shape": "S3a"
           },
           "ApprovalRules": {
-            "shape": "S36"
+            "shape": "S3g"
           },
           "ApprovedPatches": {
-            "shape": "S3c"
+            "shape": "S3m"
           },
           "ApprovedPatchesComplianceLevel": {},
           "ApprovedPatchesEnableNonSecurity": {
             "type": "boolean"
           },
           "RejectedPatches": {
-            "shape": "S3c"
+            "shape": "S3m"
           },
           "RejectedPatchesAction": {},
           "Description": {},
           "Sources": {
-            "shape": "S3g"
+            "shape": "S3q"
           },
           "ClientToken": {
             "idempotencyToken": true
@@ -126503,7 +129407,7 @@ module.exports={
         "members": {
           "SyncName": {},
           "S3Destination": {
-            "shape": "S3q"
+            "shape": "S40"
           }
         }
       },
@@ -126579,7 +129483,7 @@ module.exports={
           "DeletionId": {},
           "TypeName": {},
           "DeletionSummary": {
-            "shape": "S49"
+            "shape": "S4j"
           }
         }
       }
@@ -126624,7 +129528,7 @@ module.exports={
         ],
         "members": {
           "Names": {
-            "shape": "S4m"
+            "shape": "S4w"
           }
         }
       },
@@ -126632,10 +129536,10 @@ module.exports={
         "type": "structure",
         "members": {
           "DeletedParameters": {
-            "shape": "S4m"
+            "shape": "S4w"
           },
           "InvalidParameters": {
-            "shape": "S4m"
+            "shape": "S4w"
           }
         }
       }
@@ -126993,7 +129897,7 @@ module.exports={
                 "ExecutedBy": {},
                 "LogFile": {},
                 "Outputs": {
-                  "shape": "S6i"
+                  "shape": "S6s"
                 },
                 "Mode": {},
                 "ParentAutomationExecutionId": {},
@@ -127005,10 +129909,10 @@ module.exports={
                   "shape": "Sx"
                 },
                 "TargetMaps": {
-                  "shape": "S6n"
+                  "shape": "S6x"
                 },
                 "ResolvedTargets": {
-                  "shape": "S6s"
+                  "shape": "S72"
                 },
                 "MaxConcurrency": {},
                 "MaxErrors": {},
@@ -127059,7 +129963,7 @@ module.exports={
         "type": "structure",
         "members": {
           "StepExecutions": {
-            "shape": "S72"
+            "shape": "S7c"
           },
           "NextToken": {}
         }
@@ -127070,7 +129974,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "S7i"
+            "shape": "S7s"
           },
           "MaxResults": {
             "type": "integer"
@@ -127084,7 +129988,7 @@ module.exports={
           "Patches": {
             "type": "list",
             "member": {
-              "shape": "S7q"
+              "shape": "S80"
             }
           },
           "NextToken": {}
@@ -127099,14 +130003,15 @@ module.exports={
         ],
         "members": {
           "Name": {},
-          "DocumentVersion": {}
+          "DocumentVersion": {},
+          "VersionName": {}
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "Document": {
-            "shape": "S24"
+            "shape": "S2a"
           }
         }
       }
@@ -127127,7 +130032,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AccountIds": {
-            "shape": "S87"
+            "shape": "S8h"
           }
         }
       }
@@ -127188,7 +130093,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "Patch": {
-                  "shape": "S7q"
+                  "shape": "S80"
                 },
                 "PatchStatus": {
                   "type": "structure",
@@ -127275,7 +130180,7 @@ module.exports={
               "members": {
                 "key": {},
                 "valueSet": {
-                  "shape": "S8x"
+                  "shape": "S97"
                 }
               }
             }
@@ -127291,7 +130196,7 @@ module.exports={
               "members": {
                 "Key": {},
                 "Values": {
-                  "shape": "S8x"
+                  "shape": "S97"
                 }
               }
             }
@@ -127380,7 +130285,7 @@ module.exports={
           "InstancePatchStates": {
             "type": "list",
             "member": {
-              "shape": "S9h"
+              "shape": "S9r"
             }
           },
           "NextToken": {}
@@ -127426,7 +130331,7 @@ module.exports={
           "InstancePatchStates": {
             "type": "list",
             "member": {
-              "shape": "S9h"
+              "shape": "S9r"
             }
           },
           "NextToken": {}
@@ -127442,7 +130347,7 @@ module.exports={
         "members": {
           "InstanceId": {},
           "Filters": {
-            "shape": "S7i"
+            "shape": "S7s"
           },
           "NextToken": {},
           "MaxResults": {
@@ -127508,7 +130413,7 @@ module.exports={
                 "LastStatus": {},
                 "LastStatusMessage": {},
                 "DeletionSummary": {
-                  "shape": "S49"
+                  "shape": "S4j"
                 },
                 "LastStatusUpdateTime": {
                   "type": "timestamp"
@@ -127531,7 +130436,7 @@ module.exports={
           "WindowExecutionId": {},
           "TaskId": {},
           "Filters": {
-            "shape": "Sah"
+            "shape": "Sar"
           },
           "MaxResults": {
             "type": "integer"
@@ -127553,7 +130458,7 @@ module.exports={
                 "ExecutionId": {},
                 "TaskType": {},
                 "Parameters": {
-                  "shape": "Sat"
+                  "shape": "Sb3"
                 },
                 "Status": {},
                 "StatusDetails": {},
@@ -127564,7 +130469,7 @@ module.exports={
                   "type": "timestamp"
                 },
                 "OwnerInformation": {
-                  "shape": "S9k"
+                  "shape": "S9u"
                 },
                 "WindowTargetId": {}
               }
@@ -127583,7 +130488,7 @@ module.exports={
         "members": {
           "WindowExecutionId": {},
           "Filters": {
-            "shape": "Sah"
+            "shape": "Sar"
           },
           "MaxResults": {
             "type": "integer"
@@ -127627,7 +130532,7 @@ module.exports={
         "members": {
           "WindowId": {},
           "Filters": {
-            "shape": "Sah"
+            "shape": "Sar"
           },
           "MaxResults": {
             "type": "integer"
@@ -127670,7 +130575,7 @@ module.exports={
           },
           "ResourceType": {},
           "Filters": {
-            "shape": "S7i"
+            "shape": "S7s"
           },
           "MaxResults": {
             "type": "integer"
@@ -127705,7 +130610,7 @@ module.exports={
         "members": {
           "WindowId": {},
           "Filters": {
-            "shape": "Sah"
+            "shape": "Sar"
           },
           "MaxResults": {
             "type": "integer"
@@ -127728,11 +130633,11 @@ module.exports={
                   "shape": "Sx"
                 },
                 "OwnerInformation": {
-                  "shape": "S9k"
+                  "shape": "S9u"
                 },
                 "Name": {},
                 "Description": {
-                  "shape": "S2n"
+                  "shape": "S2x"
                 }
               }
             }
@@ -127750,7 +130655,7 @@ module.exports={
         "members": {
           "WindowId": {},
           "Filters": {
-            "shape": "Sah"
+            "shape": "Sar"
           },
           "MaxResults": {
             "type": "integer"
@@ -127774,20 +130679,20 @@ module.exports={
                   "shape": "Sx"
                 },
                 "TaskParameters": {
-                  "shape": "Sbk"
+                  "shape": "Sbu"
                 },
                 "Priority": {
                   "type": "integer"
                 },
                 "LoggingInfo": {
-                  "shape": "Sbq"
+                  "shape": "Sc0"
                 },
                 "ServiceRoleArn": {},
                 "MaxConcurrency": {},
                 "MaxErrors": {},
                 "Name": {},
                 "Description": {
-                  "shape": "S2n"
+                  "shape": "S2x"
                 }
               }
             }
@@ -127801,7 +130706,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Sah"
+            "shape": "Sar"
           },
           "MaxResults": {
             "type": "integer"
@@ -127820,7 +130725,7 @@ module.exports={
                 "WindowId": {},
                 "Name": {},
                 "Description": {
-                  "shape": "S2n"
+                  "shape": "S2x"
                 },
                 "Enabled": {
                   "type": "boolean"
@@ -127900,7 +130805,7 @@ module.exports={
             }
           },
           "ParameterFilters": {
-            "shape": "Sc7"
+            "shape": "Sch"
           },
           "MaxResults": {
             "type": "integer"
@@ -127940,7 +130845,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "S7i"
+            "shape": "S7s"
           },
           "MaxResults": {
             "type": "integer"
@@ -127954,7 +130859,7 @@ module.exports={
           "BaselineIdentities": {
             "type": "list",
             "member": {
-              "shape": "Sco"
+              "shape": "Scy"
             }
           },
           "NextToken": {}
@@ -128006,7 +130911,7 @@ module.exports={
             "type": "integer"
           },
           "Filters": {
-            "shape": "S7i"
+            "shape": "S7s"
           },
           "NextToken": {}
         }
@@ -128021,7 +130926,7 @@ module.exports={
               "members": {
                 "PatchGroup": {},
                 "BaselineIdentity": {
-                  "shape": "Sco"
+                  "shape": "Scy"
                 }
               }
             }
@@ -128119,16 +131024,16 @@ module.exports={
               },
               "AutomationExecutionStatus": {},
               "StepExecutions": {
-                "shape": "S72"
+                "shape": "S7c"
               },
               "StepExecutionsTruncated": {
                 "type": "boolean"
               },
               "Parameters": {
-                "shape": "S6i"
+                "shape": "S6s"
               },
               "Outputs": {
-                "shape": "S6i"
+                "shape": "S6s"
               },
               "FailureMessage": {},
               "Mode": {},
@@ -128141,16 +131046,16 @@ module.exports={
                 "shape": "Sx"
               },
               "TargetMaps": {
-                "shape": "S6n"
+                "shape": "S6x"
               },
               "ResolvedTargets": {
-                "shape": "S6s"
+                "shape": "S72"
               },
               "MaxConcurrency": {},
               "MaxErrors": {},
               "Target": {},
               "TargetLocations": {
-                "shape": "Sdi"
+                "shape": "Sds"
               },
               "ProgressCounters": {
                 "type": "structure",
@@ -128212,7 +131117,7 @@ module.exports={
           "StandardErrorContent": {},
           "StandardErrorUrl": {},
           "CloudWatchOutputConfig": {
-            "shape": "Sdu"
+            "shape": "Se4"
           }
         }
       }
@@ -128280,6 +131185,7 @@ module.exports={
         ],
         "members": {
           "Name": {},
+          "VersionName": {},
           "DocumentVersion": {},
           "DocumentFormat": {}
         }
@@ -128288,10 +131194,28 @@ module.exports={
         "type": "structure",
         "members": {
           "Name": {},
+          "VersionName": {},
           "DocumentVersion": {},
+          "Status": {},
+          "StatusInformation": {},
           "Content": {},
           "DocumentType": {},
-          "DocumentFormat": {}
+          "DocumentFormat": {},
+          "AttachmentsContent": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Name": {},
+                "Size": {
+                  "type": "long"
+                },
+                "Hash": {},
+                "HashType": {},
+                "Url": {}
+              }
+            }
+          }
         }
       }
     },
@@ -128300,10 +131224,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Se9"
+            "shape": "Sep"
           },
           "Aggregators": {
-            "shape": "Sef"
+            "shape": "Sev"
           },
           "ResultAttributes": {
             "type": "list",
@@ -128348,7 +131272,7 @@ module.exports={
                       "CaptureTime": {},
                       "ContentHash": {},
                       "Content": {
-                        "shape": "Sew"
+                        "shape": "Sfc"
                       }
                     }
                   }
@@ -128429,7 +131353,7 @@ module.exports={
           "WindowId": {},
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           },
           "StartDate": {},
           "EndDate": {},
@@ -128509,7 +131433,7 @@ module.exports={
           "TaskParameters": {
             "type": "list",
             "member": {
-              "shape": "Sbk"
+              "shape": "Sbu"
             },
             "sensitive": true
           },
@@ -128552,7 +131476,7 @@ module.exports={
           "ExecutionId": {},
           "TaskType": {},
           "Parameters": {
-            "shape": "Sat"
+            "shape": "Sb3"
           },
           "Status": {},
           "StatusDetails": {},
@@ -128563,7 +131487,7 @@ module.exports={
             "type": "timestamp"
           },
           "OwnerInformation": {
-            "shape": "S9k"
+            "shape": "S9u"
           },
           "WindowTargetId": {}
         }
@@ -128593,10 +131517,10 @@ module.exports={
           "ServiceRoleArn": {},
           "TaskType": {},
           "TaskParameters": {
-            "shape": "Sbk"
+            "shape": "Sbu"
           },
           "TaskInvocationParameters": {
-            "shape": "Sfp"
+            "shape": "Sg5"
           },
           "Priority": {
             "type": "integer"
@@ -128604,11 +131528,11 @@ module.exports={
           "MaxConcurrency": {},
           "MaxErrors": {},
           "LoggingInfo": {
-            "shape": "Sbq"
+            "shape": "Sc0"
           },
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           }
         }
       }
@@ -128630,7 +131554,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Parameter": {
-            "shape": "Sg7"
+            "shape": "Sgn"
           }
         }
       }
@@ -128674,7 +131598,7 @@ module.exports={
                   "type": "long"
                 },
                 "Labels": {
-                  "shape": "Sge"
+                  "shape": "Sgu"
                 }
               }
             }
@@ -128691,7 +131615,7 @@ module.exports={
         ],
         "members": {
           "Names": {
-            "shape": "S4m"
+            "shape": "S4w"
           },
           "WithDecryption": {
             "type": "boolean"
@@ -128702,10 +131626,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Parameters": {
-            "shape": "Sgi"
+            "shape": "Sgy"
           },
           "InvalidParameters": {
-            "shape": "S4m"
+            "shape": "S4w"
           }
         }
       }
@@ -128722,7 +131646,7 @@ module.exports={
             "type": "boolean"
           },
           "ParameterFilters": {
-            "shape": "Sc7"
+            "shape": "Sch"
           },
           "WithDecryption": {
             "type": "boolean"
@@ -128737,7 +131661,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Parameters": {
-            "shape": "Sgi"
+            "shape": "Sgy"
           },
           "NextToken": {}
         }
@@ -128760,20 +131684,20 @@ module.exports={
           "Name": {},
           "OperatingSystem": {},
           "GlobalFilters": {
-            "shape": "S30"
+            "shape": "S3a"
           },
           "ApprovalRules": {
-            "shape": "S36"
+            "shape": "S3g"
           },
           "ApprovedPatches": {
-            "shape": "S3c"
+            "shape": "S3m"
           },
           "ApprovedPatchesComplianceLevel": {},
           "ApprovedPatchesEnableNonSecurity": {
             "type": "boolean"
           },
           "RejectedPatches": {
-            "shape": "S3c"
+            "shape": "S3m"
           },
           "RejectedPatchesAction": {},
           "PatchGroups": {
@@ -128788,7 +131712,7 @@ module.exports={
           },
           "Description": {},
           "Sources": {
-            "shape": "S3g"
+            "shape": "S3q"
           }
         }
       }
@@ -128826,7 +131750,7 @@ module.exports={
             "type": "long"
           },
           "Labels": {
-            "shape": "Sge"
+            "shape": "Sgu"
           }
         }
       },
@@ -128834,7 +131758,7 @@ module.exports={
         "type": "structure",
         "members": {
           "InvalidLabels": {
-            "shape": "Sge"
+            "shape": "Sgu"
           }
         }
       }
@@ -128955,7 +131879,7 @@ module.exports={
           },
           "NextToken": {},
           "Filters": {
-            "shape": "Sh7"
+            "shape": "Shn"
           },
           "Details": {
             "type": "boolean"
@@ -129012,10 +131936,10 @@ module.exports={
                 },
                 "ServiceRole": {},
                 "NotificationConfig": {
-                  "shape": "Sfr"
+                  "shape": "Sg7"
                 },
                 "CloudWatchOutputConfig": {
-                  "shape": "Sdu"
+                  "shape": "Se4"
                 }
               }
             }
@@ -129035,7 +131959,7 @@ module.exports={
           },
           "NextToken": {},
           "Filters": {
-            "shape": "Sh7"
+            "shape": "Shn"
           }
         }
       },
@@ -129045,7 +131969,7 @@ module.exports={
           "Commands": {
             "type": "list",
             "member": {
-              "shape": "Shn"
+              "shape": "Si3"
             }
           },
           "NextToken": {}
@@ -129057,7 +131981,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Shu"
+            "shape": "Sia"
           },
           "ResourceIds": {
             "type": "list",
@@ -129089,10 +132013,10 @@ module.exports={
                 "Status": {},
                 "Severity": {},
                 "ExecutionSummary": {
-                  "shape": "Sic"
+                  "shape": "Sis"
                 },
                 "Details": {
-                  "shape": "Sif"
+                  "shape": "Siv"
                 }
               }
             }
@@ -129106,7 +132030,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Shu"
+            "shape": "Sia"
           },
           "NextToken": {},
           "MaxResults": {
@@ -129124,10 +132048,10 @@ module.exports={
               "members": {
                 "ComplianceType": {},
                 "CompliantSummary": {
-                  "shape": "Sik"
+                  "shape": "Sj0"
                 },
                 "NonCompliantSummary": {
-                  "shape": "Sin"
+                  "shape": "Sj3"
                 }
               }
             }
@@ -129160,13 +132084,16 @@ module.exports={
               "members": {
                 "Name": {},
                 "DocumentVersion": {},
+                "VersionName": {},
                 "CreatedDate": {
                   "type": "timestamp"
                 },
                 "IsDefaultVersion": {
                   "type": "boolean"
                 },
-                "DocumentFormat": {}
+                "DocumentFormat": {},
+                "Status": {},
+                "StatusInformation": {}
               }
             }
           },
@@ -129221,8 +132148,9 @@ module.exports={
               "members": {
                 "Name": {},
                 "Owner": {},
+                "VersionName": {},
                 "PlatformTypes": {
-                  "shape": "S2i"
+                  "shape": "S2p"
                 },
                 "DocumentVersion": {},
                 "DocumentType": {},
@@ -129250,7 +132178,7 @@ module.exports={
           "InstanceId": {},
           "TypeName": {},
           "Filters": {
-            "shape": "Se9"
+            "shape": "Sep"
           },
           "NextToken": {},
           "MaxResults": {
@@ -129266,7 +132194,7 @@ module.exports={
           "SchemaVersion": {},
           "CaptureTime": {},
           "Entries": {
-            "shape": "Sew"
+            "shape": "Sfc"
           },
           "NextToken": {}
         }
@@ -129277,7 +132205,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Shu"
+            "shape": "Sia"
           },
           "NextToken": {},
           "MaxResults": {
@@ -129299,13 +132227,13 @@ module.exports={
                 "Status": {},
                 "OverallSeverity": {},
                 "ExecutionSummary": {
-                  "shape": "Sic"
+                  "shape": "Sis"
                 },
                 "CompliantSummary": {
-                  "shape": "Sik"
+                  "shape": "Sj0"
                 },
                 "NonCompliantSummary": {
-                  "shape": "Sin"
+                  "shape": "Sj3"
                 }
               }
             }
@@ -129334,7 +132262,7 @@ module.exports={
               "members": {
                 "SyncName": {},
                 "S3Destination": {
-                  "shape": "S3q"
+                  "shape": "S40"
                 },
                 "LastSyncTime": {
                   "type": "timestamp"
@@ -129386,10 +132314,10 @@ module.exports={
           "Name": {},
           "PermissionType": {},
           "AccountIdsToAdd": {
-            "shape": "S87"
+            "shape": "S8h"
           },
           "AccountIdsToRemove": {
-            "shape": "S87"
+            "shape": "S8h"
           }
         }
       },
@@ -129413,7 +132341,7 @@ module.exports={
           "ResourceType": {},
           "ComplianceType": {},
           "ExecutionSummary": {
-            "shape": "Sic"
+            "shape": "Sis"
           },
           "Items": {
             "type": "list",
@@ -129429,7 +132357,7 @@ module.exports={
                 "Severity": {},
                 "Status": {},
                 "Details": {
-                  "shape": "Sif"
+                  "shape": "Siv"
                 }
               }
             }
@@ -129466,7 +132394,7 @@ module.exports={
                 "CaptureTime": {},
                 "ContentHash": {},
                 "Content": {
-                  "shape": "Sew"
+                  "shape": "Sfc"
                 },
                 "Context": {
                   "type": "map",
@@ -129566,11 +132494,11 @@ module.exports={
             "shape": "Sx"
           },
           "OwnerInformation": {
-            "shape": "S9k"
+            "shape": "S9u"
           },
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           },
           "ClientToken": {
             "idempotencyToken": true
@@ -129604,10 +132532,10 @@ module.exports={
           "ServiceRoleArn": {},
           "TaskType": {},
           "TaskParameters": {
-            "shape": "Sbk"
+            "shape": "Sbu"
           },
           "TaskInvocationParameters": {
-            "shape": "Sfp"
+            "shape": "Sg5"
           },
           "Priority": {
             "type": "integer"
@@ -129615,11 +132543,11 @@ module.exports={
           "MaxConcurrency": {},
           "MaxErrors": {},
           "LoggingInfo": {
-            "shape": "Sbq"
+            "shape": "Sc0"
           },
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           },
           "ClientToken": {
             "idempotencyToken": true
@@ -129685,7 +132613,7 @@ module.exports={
           "AutomationExecutionId": {},
           "SignalType": {},
           "Payload": {
-            "shape": "S6i"
+            "shape": "S6s"
           }
         }
       },
@@ -129725,10 +132653,10 @@ module.exports={
           "MaxErrors": {},
           "ServiceRoleArn": {},
           "NotificationConfig": {
-            "shape": "Sfr"
+            "shape": "Sg7"
           },
           "CloudWatchOutputConfig": {
-            "shape": "Sdu"
+            "shape": "Se4"
           }
         }
       },
@@ -129736,7 +132664,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Command": {
-            "shape": "Shn"
+            "shape": "Si3"
           }
         }
       }
@@ -129769,7 +132697,7 @@ module.exports={
           "DocumentName": {},
           "DocumentVersion": {},
           "Parameters": {
-            "shape": "S6i"
+            "shape": "S6s"
           },
           "ClientToken": {},
           "Mode": {},
@@ -129778,12 +132706,12 @@ module.exports={
             "shape": "Sx"
           },
           "TargetMaps": {
-            "shape": "S6n"
+            "shape": "S6x"
           },
           "MaxConcurrency": {},
           "MaxErrors": {},
           "TargetLocations": {
-            "shape": "Sdi"
+            "shape": "Sds"
           }
         }
       },
@@ -129925,7 +132853,11 @@ module.exports={
         ],
         "members": {
           "Content": {},
+          "Attachments": {
+            "shape": "S20"
+          },
           "Name": {},
+          "VersionName": {},
           "DocumentVersion": {},
           "DocumentFormat": {},
           "TargetType": {}
@@ -129935,7 +132867,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DocumentDescription": {
-            "shape": "S24"
+            "shape": "S2a"
           }
         }
       }
@@ -129959,7 +132891,8 @@ module.exports={
             "type": "structure",
             "members": {
               "Name": {},
-              "DefaultVersion": {}
+              "DefaultVersion": {},
+              "DefaultVersionName": {}
             }
           }
         }
@@ -129975,7 +132908,7 @@ module.exports={
           "WindowId": {},
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           },
           "StartDate": {},
           "EndDate": {},
@@ -130004,7 +132937,7 @@ module.exports={
           "WindowId": {},
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           },
           "StartDate": {},
           "EndDate": {},
@@ -130039,11 +132972,11 @@ module.exports={
             "shape": "Sx"
           },
           "OwnerInformation": {
-            "shape": "S9k"
+            "shape": "S9u"
           },
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           },
           "Replace": {
             "type": "boolean"
@@ -130059,11 +132992,11 @@ module.exports={
             "shape": "Sx"
           },
           "OwnerInformation": {
-            "shape": "S9k"
+            "shape": "S9u"
           },
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           }
         }
       }
@@ -130084,10 +133017,10 @@ module.exports={
           "TaskArn": {},
           "ServiceRoleArn": {},
           "TaskParameters": {
-            "shape": "Sbk"
+            "shape": "Sbu"
           },
           "TaskInvocationParameters": {
-            "shape": "Sfp"
+            "shape": "Sg5"
           },
           "Priority": {
             "type": "integer"
@@ -130095,11 +133028,11 @@ module.exports={
           "MaxConcurrency": {},
           "MaxErrors": {},
           "LoggingInfo": {
-            "shape": "Sbq"
+            "shape": "Sc0"
           },
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           },
           "Replace": {
             "type": "boolean"
@@ -130117,10 +133050,10 @@ module.exports={
           "TaskArn": {},
           "ServiceRoleArn": {},
           "TaskParameters": {
-            "shape": "Sbk"
+            "shape": "Sbu"
           },
           "TaskInvocationParameters": {
-            "shape": "Sfp"
+            "shape": "Sg5"
           },
           "Priority": {
             "type": "integer"
@@ -130128,11 +133061,11 @@ module.exports={
           "MaxConcurrency": {},
           "MaxErrors": {},
           "LoggingInfo": {
-            "shape": "Sbq"
+            "shape": "Sc0"
           },
           "Name": {},
           "Description": {
-            "shape": "S2n"
+            "shape": "S2x"
           }
         }
       }
@@ -130164,25 +133097,25 @@ module.exports={
           "BaselineId": {},
           "Name": {},
           "GlobalFilters": {
-            "shape": "S30"
+            "shape": "S3a"
           },
           "ApprovalRules": {
-            "shape": "S36"
+            "shape": "S3g"
           },
           "ApprovedPatches": {
-            "shape": "S3c"
+            "shape": "S3m"
           },
           "ApprovedPatchesComplianceLevel": {},
           "ApprovedPatchesEnableNonSecurity": {
             "type": "boolean"
           },
           "RejectedPatches": {
-            "shape": "S3c"
+            "shape": "S3m"
           },
           "RejectedPatchesAction": {},
           "Description": {},
           "Sources": {
-            "shape": "S3g"
+            "shape": "S3q"
           },
           "Replace": {
             "type": "boolean"
@@ -130196,20 +133129,20 @@ module.exports={
           "Name": {},
           "OperatingSystem": {},
           "GlobalFilters": {
-            "shape": "S30"
+            "shape": "S3a"
           },
           "ApprovalRules": {
-            "shape": "S36"
+            "shape": "S3g"
           },
           "ApprovedPatches": {
-            "shape": "S3c"
+            "shape": "S3m"
           },
           "ApprovedPatchesComplianceLevel": {},
           "ApprovedPatchesEnableNonSecurity": {
             "type": "boolean"
           },
           "RejectedPatches": {
-            "shape": "S3c"
+            "shape": "S3m"
           },
           "RejectedPatchesAction": {},
           "CreatedDate": {
@@ -130220,7 +133153,7 @@ module.exports={
           },
           "Description": {},
           "Sources": {
-            "shape": "S3g"
+            "shape": "S3q"
           }
         }
       }
@@ -130376,18 +133309,33 @@ module.exports={
         "ComplianceSeverity": {}
       }
     },
-    "S24": {
+    "S20": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "Key": {},
+          "Values": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      }
+    },
+    "S2a": {
       "type": "structure",
       "members": {
         "Sha1": {},
         "Hash": {},
         "HashType": {},
         "Name": {},
+        "VersionName": {},
         "Owner": {},
         "CreatedDate": {
           "type": "timestamp"
         },
         "Status": {},
+        "StatusInformation": {},
         "DocumentVersion": {},
         "Description": {},
         "Parameters": {
@@ -130403,7 +133351,7 @@ module.exports={
           }
         },
         "PlatformTypes": {
-          "shape": "S2i"
+          "shape": "S2p"
         },
         "DocumentType": {},
         "SchemaVersion": {},
@@ -130413,18 +133361,27 @@ module.exports={
         "TargetType": {},
         "Tags": {
           "shape": "S4"
+        },
+        "AttachmentsInformation": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Name": {}
+            }
+          }
         }
       }
     },
-    "S2i": {
+    "S2p": {
       "type": "list",
       "member": {}
     },
-    "S2n": {
+    "S2x": {
       "type": "string",
       "sensitive": true
     },
-    "S30": {
+    "S3a": {
       "type": "structure",
       "required": [
         "PatchFilters"
@@ -130449,7 +133406,7 @@ module.exports={
         }
       }
     },
-    "S36": {
+    "S3g": {
       "type": "structure",
       "required": [
         "PatchRules"
@@ -130465,7 +133422,7 @@ module.exports={
             ],
             "members": {
               "PatchFilterGroup": {
-                "shape": "S30"
+                "shape": "S3a"
               },
               "ComplianceLevel": {},
               "ApproveAfterDays": {
@@ -130479,11 +133436,11 @@ module.exports={
         }
       }
     },
-    "S3c": {
+    "S3m": {
       "type": "list",
       "member": {}
     },
-    "S3g": {
+    "S3q": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -130505,7 +133462,7 @@ module.exports={
         }
       }
     },
-    "S3q": {
+    "S40": {
       "type": "structure",
       "required": [
         "BucketName",
@@ -130520,7 +133477,7 @@ module.exports={
         "AWSKMSKeyARN": {}
       }
     },
-    "S49": {
+    "S4j": {
       "type": "structure",
       "members": {
         "TotalCount": {
@@ -130546,11 +133503,11 @@ module.exports={
         }
       }
     },
-    "S4m": {
+    "S4w": {
       "type": "list",
       "member": {}
     },
-    "S6i": {
+    "S6s": {
       "type": "map",
       "key": {},
       "value": {
@@ -130558,7 +133515,7 @@ module.exports={
         "member": {}
       }
     },
-    "S6n": {
+    "S6x": {
       "type": "list",
       "member": {
         "type": "map",
@@ -130569,7 +133526,7 @@ module.exports={
         }
       }
     },
-    "S6s": {
+    "S72": {
       "type": "structure",
       "members": {
         "ParameterValues": {
@@ -130581,7 +133538,7 @@ module.exports={
         }
       }
     },
-    "S72": {
+    "S7c": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -130609,7 +133566,7 @@ module.exports={
             "value": {}
           },
           "Outputs": {
-            "shape": "S6i"
+            "shape": "S6s"
           },
           "Response": {},
           "FailureMessage": {},
@@ -130619,13 +133576,13 @@ module.exports={
               "FailureStage": {},
               "FailureType": {},
               "Details": {
-                "shape": "S6i"
+                "shape": "S6s"
               }
             }
           },
           "StepExecutionId": {},
           "OverriddenParameters": {
-            "shape": "S6i"
+            "shape": "S6s"
           },
           "IsEnd": {
             "type": "boolean"
@@ -130642,12 +133599,12 @@ module.exports={
             "shape": "Sx"
           },
           "TargetLocation": {
-            "shape": "S7b"
+            "shape": "S7l"
           }
         }
       }
     },
-    "S7b": {
+    "S7l": {
       "type": "structure",
       "members": {
         "Accounts": {
@@ -130663,7 +133620,7 @@ module.exports={
         "ExecutionRoleName": {}
       }
     },
-    "S7i": {
+    "S7s": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -130676,7 +133633,7 @@ module.exports={
         }
       }
     },
-    "S7q": {
+    "S80": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -130696,15 +133653,15 @@ module.exports={
         "Language": {}
       }
     },
-    "S87": {
+    "S8h": {
       "type": "list",
       "member": {}
     },
-    "S8x": {
+    "S97": {
       "type": "list",
       "member": {}
     },
-    "S9h": {
+    "S9r": {
       "type": "structure",
       "required": [
         "InstanceId",
@@ -130721,7 +133678,7 @@ module.exports={
         "SnapshotId": {},
         "InstallOverrideList": {},
         "OwnerInformation": {
-          "shape": "S9k"
+          "shape": "S9u"
         },
         "InstalledCount": {
           "type": "integer"
@@ -130750,11 +133707,11 @@ module.exports={
         "Operation": {}
       }
     },
-    "S9k": {
+    "S9u": {
       "type": "string",
       "sensitive": true
     },
-    "Sah": {
+    "Sar": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -130767,11 +133724,11 @@ module.exports={
         }
       }
     },
-    "Sat": {
+    "Sb3": {
       "type": "string",
       "sensitive": true
     },
-    "Sbk": {
+    "Sbu": {
       "type": "map",
       "key": {},
       "value": {
@@ -130790,7 +133747,7 @@ module.exports={
       },
       "sensitive": true
     },
-    "Sbq": {
+    "Sc0": {
       "type": "structure",
       "required": [
         "S3BucketName",
@@ -130802,7 +133759,7 @@ module.exports={
         "S3Region": {}
       }
     },
-    "Sc7": {
+    "Sch": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -130819,7 +133776,7 @@ module.exports={
         }
       }
     },
-    "Sco": {
+    "Scy": {
       "type": "structure",
       "members": {
         "BaselineId": {},
@@ -130831,13 +133788,13 @@ module.exports={
         }
       }
     },
-    "Sdi": {
+    "Sds": {
       "type": "list",
       "member": {
-        "shape": "S7b"
+        "shape": "S7l"
       }
     },
-    "Sdu": {
+    "Se4": {
       "type": "structure",
       "members": {
         "CloudWatchLogGroupName": {},
@@ -130846,7 +133803,7 @@ module.exports={
         }
       }
     },
-    "Se9": {
+    "Sep": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -130864,14 +133821,14 @@ module.exports={
         }
       }
     },
-    "Sef": {
+    "Sev": {
       "type": "list",
       "member": {
         "type": "structure",
         "members": {
           "Expression": {},
           "Aggregators": {
-            "shape": "Sef"
+            "shape": "Sev"
           },
           "Groups": {
             "type": "list",
@@ -130884,7 +133841,7 @@ module.exports={
               "members": {
                 "Name": {},
                 "Filters": {
-                  "shape": "Se9"
+                  "shape": "Sep"
                 }
               }
             }
@@ -130892,7 +133849,7 @@ module.exports={
         }
       }
     },
-    "Sew": {
+    "Sfc": {
       "type": "list",
       "member": {
         "type": "map",
@@ -130900,7 +133857,7 @@ module.exports={
         "value": {}
       }
     },
-    "Sfp": {
+    "Sg5": {
       "type": "structure",
       "members": {
         "RunCommand": {
@@ -130910,7 +133867,7 @@ module.exports={
             "DocumentHash": {},
             "DocumentHashType": {},
             "NotificationConfig": {
-              "shape": "Sfr"
+              "shape": "Sg7"
             },
             "OutputS3BucketName": {},
             "OutputS3KeyPrefix": {},
@@ -130928,7 +133885,7 @@ module.exports={
           "members": {
             "DocumentVersion": {},
             "Parameters": {
-              "shape": "S6i"
+              "shape": "S6s"
             }
           }
         },
@@ -130955,7 +133912,7 @@ module.exports={
         }
       }
     },
-    "Sfr": {
+    "Sg7": {
       "type": "structure",
       "members": {
         "NotificationArn": {},
@@ -130966,7 +133923,7 @@ module.exports={
         "NotificationType": {}
       }
     },
-    "Sg7": {
+    "Sgn": {
       "type": "structure",
       "members": {
         "Name": {},
@@ -130983,17 +133940,17 @@ module.exports={
         "ARN": {}
       }
     },
-    "Sge": {
+    "Sgu": {
       "type": "list",
       "member": {}
     },
-    "Sgi": {
+    "Sgy": {
       "type": "list",
       "member": {
-        "shape": "Sg7"
+        "shape": "Sgn"
       }
     },
-    "Sh7": {
+    "Shn": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -131007,7 +133964,7 @@ module.exports={
         }
       }
     },
-    "Shn": {
+    "Si3": {
       "type": "structure",
       "members": {
         "CommandId": {},
@@ -131050,14 +134007,14 @@ module.exports={
         },
         "ServiceRole": {},
         "NotificationConfig": {
-          "shape": "Sfr"
+          "shape": "Sg7"
         },
         "CloudWatchOutputConfig": {
-          "shape": "Sdu"
+          "shape": "Se4"
         }
       }
     },
-    "Shu": {
+    "Sia": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -131071,7 +134028,7 @@ module.exports={
         }
       }
     },
-    "Sic": {
+    "Sis": {
       "type": "structure",
       "required": [
         "ExecutionTime"
@@ -131084,23 +134041,23 @@ module.exports={
         "ExecutionType": {}
       }
     },
-    "Sif": {
+    "Siv": {
       "type": "map",
       "key": {},
       "value": {}
     },
-    "Sik": {
+    "Sj0": {
       "type": "structure",
       "members": {
         "CompliantCount": {
           "type": "integer"
         },
         "SeveritySummary": {
-          "shape": "Sim"
+          "shape": "Sj2"
         }
       }
     },
-    "Sim": {
+    "Sj2": {
       "type": "structure",
       "members": {
         "CriticalCount": {
@@ -131123,20 +134080,20 @@ module.exports={
         }
       }
     },
-    "Sin": {
+    "Sj3": {
       "type": "structure",
       "members": {
         "NonCompliantCount": {
           "type": "integer"
         },
         "SeveritySummary": {
-          "shape": "Sim"
+          "shape": "Sj2"
         }
       }
     }
   }
 }
-},{}],170:[function(require,module,exports){
+},{}],173:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeActivations": {
@@ -131192,7 +134149,7 @@ module.exports={
     }
   }
 }
-},{}],171:[function(require,module,exports){
+},{}],174:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -133191,7 +136148,7 @@ module.exports={
     }
   }
 }
-},{}],172:[function(require,module,exports){
+},{}],175:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeCachediSCSIVolumes": {
@@ -133244,7 +136201,7 @@ module.exports={
     }
   }
 }
-},{}],173:[function(require,module,exports){
+},{}],176:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -133492,9 +136449,9 @@ module.exports={
     }
   }
 }
-},{}],174:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],175:[function(require,module,exports){
+},{}],177:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],178:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -133746,9 +136703,9 @@ module.exports={
     }
   }
 }
-},{}],176:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],177:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],180:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -133795,9 +136752,9 @@ module.exports={
   },
   "shapes": {}
 }
-},{}],178:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],179:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],182:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -136053,9 +139010,9 @@ module.exports={
     }
   }
 }
-},{}],180:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],181:[function(require,module,exports){
+},{}],183:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],184:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -138000,7 +140957,7 @@ module.exports={
     }
   }
 }
-},{}],182:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDocumentVersions": {
@@ -138026,7 +140983,7 @@ module.exports={
     }
   }
 }
-},{}],183:[function(require,module,exports){
+},{}],186:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138047,7 +141004,7 @@ Object.defineProperty(apiLoader.services['acm'], '2015-12-08', {
 
 module.exports = AWS.ACM;
 
-},{"../apis/acm-2015-12-08.min.json":1,"../apis/acm-2015-12-08.paginators.json":2,"../apis/acm-2015-12-08.waiters2.json":3,"../lib/core":264,"../lib/node_loader":261}],184:[function(require,module,exports){
+},{"../apis/acm-2015-12-08.min.json":1,"../apis/acm-2015-12-08.paginators.json":2,"../apis/acm-2015-12-08.waiters2.json":3,"../lib/core":267,"../lib/node_loader":264}],187:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138068,7 +141025,7 @@ Object.defineProperty(apiLoader.services['apigateway'], '2015-07-09', {
 
 module.exports = AWS.APIGateway;
 
-},{"../apis/apigateway-2015-07-09.min.json":4,"../apis/apigateway-2015-07-09.paginators.json":5,"../lib/core":264,"../lib/node_loader":261,"../lib/services/apigateway":314}],185:[function(require,module,exports){
+},{"../apis/apigateway-2015-07-09.min.json":4,"../apis/apigateway-2015-07-09.paginators.json":5,"../lib/core":267,"../lib/node_loader":264,"../lib/services/apigateway":317}],188:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138088,7 +141045,7 @@ Object.defineProperty(apiLoader.services['applicationautoscaling'], '2016-02-06'
 
 module.exports = AWS.ApplicationAutoScaling;
 
-},{"../apis/application-autoscaling-2016-02-06.min.json":6,"../apis/application-autoscaling-2016-02-06.paginators.json":7,"../lib/core":264,"../lib/node_loader":261}],186:[function(require,module,exports){
+},{"../apis/application-autoscaling-2016-02-06.min.json":6,"../apis/application-autoscaling-2016-02-06.paginators.json":7,"../lib/core":267,"../lib/node_loader":264}],189:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138108,7 +141065,7 @@ Object.defineProperty(apiLoader.services['autoscaling'], '2011-01-01', {
 
 module.exports = AWS.AutoScaling;
 
-},{"../apis/autoscaling-2011-01-01.min.json":8,"../apis/autoscaling-2011-01-01.paginators.json":9,"../lib/core":264,"../lib/node_loader":261}],187:[function(require,module,exports){
+},{"../apis/autoscaling-2011-01-01.min.json":8,"../apis/autoscaling-2011-01-01.paginators.json":9,"../lib/core":267,"../lib/node_loader":264}],190:[function(require,module,exports){
 require('../lib/node_loader');
 module.exports = {
   ACM: require('./acm'),
@@ -138182,7 +141139,7 @@ module.exports = {
   Translate: require('./translate'),
   SecretsManager: require('./secretsmanager')
 };
-},{"../lib/node_loader":261,"./acm":183,"./apigateway":184,"./applicationautoscaling":185,"./autoscaling":186,"./cloudformation":188,"./cloudfront":189,"./cloudhsm":190,"./cloudtrail":191,"./cloudwatch":192,"./cloudwatchevents":193,"./cloudwatchlogs":194,"./codebuild":195,"./codecommit":196,"./codedeploy":197,"./codepipeline":198,"./cognitoidentity":199,"./cognitoidentityserviceprovider":200,"./cognitosync":201,"./configservice":202,"./cur":203,"./devicefarm":204,"./directconnect":205,"./dynamodb":206,"./dynamodbstreams":207,"./ec2":208,"./ecr":209,"./ecs":210,"./efs":211,"./elasticache":212,"./elasticbeanstalk":213,"./elastictranscoder":214,"./elb":215,"./elbv2":216,"./emr":217,"./firehose":218,"./gamelift":219,"./inspector":220,"./iot":221,"./iotdata":222,"./kinesis":223,"./kinesisvideo":224,"./kinesisvideoarchivedmedia":225,"./kms":226,"./lambda":227,"./lexmodelbuildingservice":228,"./lexruntime":229,"./machinelearning":230,"./marketplacecommerceanalytics":231,"./mobileanalytics":232,"./mturk":233,"./opsworks":234,"./polly":235,"./pricing":236,"./rds":237,"./redshift":238,"./rekognition":239,"./route53":240,"./route53domains":241,"./s3":242,"./secretsmanager":243,"./servicecatalog":244,"./ses":245,"./sns":246,"./sqs":247,"./ssm":248,"./storagegateway":249,"./sts":250,"./translate":251,"./waf":252,"./workdocs":253}],188:[function(require,module,exports){
+},{"../lib/node_loader":264,"./acm":186,"./apigateway":187,"./applicationautoscaling":188,"./autoscaling":189,"./cloudformation":191,"./cloudfront":192,"./cloudhsm":193,"./cloudtrail":194,"./cloudwatch":195,"./cloudwatchevents":196,"./cloudwatchlogs":197,"./codebuild":198,"./codecommit":199,"./codedeploy":200,"./codepipeline":201,"./cognitoidentity":202,"./cognitoidentityserviceprovider":203,"./cognitosync":204,"./configservice":205,"./cur":206,"./devicefarm":207,"./directconnect":208,"./dynamodb":209,"./dynamodbstreams":210,"./ec2":211,"./ecr":212,"./ecs":213,"./efs":214,"./elasticache":215,"./elasticbeanstalk":216,"./elastictranscoder":217,"./elb":218,"./elbv2":219,"./emr":220,"./firehose":221,"./gamelift":222,"./inspector":223,"./iot":224,"./iotdata":225,"./kinesis":226,"./kinesisvideo":227,"./kinesisvideoarchivedmedia":228,"./kms":229,"./lambda":230,"./lexmodelbuildingservice":231,"./lexruntime":232,"./machinelearning":233,"./marketplacecommerceanalytics":234,"./mobileanalytics":235,"./mturk":236,"./opsworks":237,"./polly":238,"./pricing":239,"./rds":240,"./redshift":241,"./rekognition":242,"./route53":243,"./route53domains":244,"./s3":245,"./secretsmanager":246,"./servicecatalog":247,"./ses":248,"./sns":249,"./sqs":250,"./ssm":251,"./storagegateway":252,"./sts":253,"./translate":254,"./waf":255,"./workdocs":256}],191:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138203,14 +141160,14 @@ Object.defineProperty(apiLoader.services['cloudformation'], '2010-05-15', {
 
 module.exports = AWS.CloudFormation;
 
-},{"../apis/cloudformation-2010-05-15.min.json":10,"../apis/cloudformation-2010-05-15.paginators.json":11,"../apis/cloudformation-2010-05-15.waiters2.json":12,"../lib/core":264,"../lib/node_loader":261}],189:[function(require,module,exports){
+},{"../apis/cloudformation-2010-05-15.min.json":10,"../apis/cloudformation-2010-05-15.paginators.json":11,"../apis/cloudformation-2010-05-15.waiters2.json":12,"../lib/core":267,"../lib/node_loader":264}],192:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
 var apiLoader = AWS.apiLoader;
 
 apiLoader.services['cloudfront'] = {};
-AWS.CloudFront = Service.defineService('cloudfront', ['2013-05-12*', '2013-11-11*', '2014-05-31*', '2014-10-21*', '2014-11-06*', '2015-04-17*', '2015-07-27*', '2015-09-17*', '2016-01-13*', '2016-01-28*', '2016-08-01*', '2016-08-20*', '2016-09-07*', '2016-09-29*', '2016-11-25', '2016-11-25*', '2017-03-25', '2017-03-25*', '2017-10-30', '2017-10-30*', '2018-06-18']);
+AWS.CloudFront = Service.defineService('cloudfront', ['2013-05-12*', '2013-11-11*', '2014-05-31*', '2014-10-21*', '2014-11-06*', '2015-04-17*', '2015-07-27*', '2015-09-17*', '2016-01-13*', '2016-01-28*', '2016-08-01*', '2016-08-20*', '2016-09-07*', '2016-09-29*', '2016-11-25', '2016-11-25*', '2017-03-25', '2017-03-25*', '2017-10-30', '2017-10-30*', '2018-06-18', '2018-06-18*', '2018-11-05']);
 require('../lib/services/cloudfront');
 Object.defineProperty(apiLoader.services['cloudfront'], '2016-11-25', {
   get: function get() {
@@ -138252,10 +141209,20 @@ Object.defineProperty(apiLoader.services['cloudfront'], '2018-06-18', {
   enumerable: true,
   configurable: true
 });
+Object.defineProperty(apiLoader.services['cloudfront'], '2018-11-05', {
+  get: function get() {
+    var model = require('../apis/cloudfront-2018-11-05.min.json');
+    model.paginators = require('../apis/cloudfront-2018-11-05.paginators.json').pagination;
+    model.waiters = require('../apis/cloudfront-2018-11-05.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudFront;
 
-},{"../apis/cloudfront-2016-11-25.min.json":13,"../apis/cloudfront-2016-11-25.paginators.json":14,"../apis/cloudfront-2016-11-25.waiters2.json":15,"../apis/cloudfront-2017-03-25.min.json":16,"../apis/cloudfront-2017-03-25.paginators.json":17,"../apis/cloudfront-2017-03-25.waiters2.json":18,"../apis/cloudfront-2017-10-30.min.json":19,"../apis/cloudfront-2017-10-30.paginators.json":20,"../apis/cloudfront-2017-10-30.waiters2.json":21,"../apis/cloudfront-2018-06-18.min.json":22,"../apis/cloudfront-2018-06-18.paginators.json":23,"../apis/cloudfront-2018-06-18.waiters2.json":24,"../lib/core":264,"../lib/node_loader":261,"../lib/services/cloudfront":315}],190:[function(require,module,exports){
+},{"../apis/cloudfront-2016-11-25.min.json":13,"../apis/cloudfront-2016-11-25.paginators.json":14,"../apis/cloudfront-2016-11-25.waiters2.json":15,"../apis/cloudfront-2017-03-25.min.json":16,"../apis/cloudfront-2017-03-25.paginators.json":17,"../apis/cloudfront-2017-03-25.waiters2.json":18,"../apis/cloudfront-2017-10-30.min.json":19,"../apis/cloudfront-2017-10-30.paginators.json":20,"../apis/cloudfront-2017-10-30.waiters2.json":21,"../apis/cloudfront-2018-06-18.min.json":22,"../apis/cloudfront-2018-06-18.paginators.json":23,"../apis/cloudfront-2018-06-18.waiters2.json":24,"../apis/cloudfront-2018-11-05.min.json":25,"../apis/cloudfront-2018-11-05.paginators.json":26,"../apis/cloudfront-2018-11-05.waiters2.json":27,"../lib/core":267,"../lib/node_loader":264,"../lib/services/cloudfront":318}],193:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138275,7 +141242,7 @@ Object.defineProperty(apiLoader.services['cloudhsm'], '2014-05-30', {
 
 module.exports = AWS.CloudHSM;
 
-},{"../apis/cloudhsm-2014-05-30.min.json":25,"../apis/cloudhsm-2014-05-30.paginators.json":26,"../lib/core":264,"../lib/node_loader":261}],191:[function(require,module,exports){
+},{"../apis/cloudhsm-2014-05-30.min.json":28,"../apis/cloudhsm-2014-05-30.paginators.json":29,"../lib/core":267,"../lib/node_loader":264}],194:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138295,7 +141262,7 @@ Object.defineProperty(apiLoader.services['cloudtrail'], '2013-11-01', {
 
 module.exports = AWS.CloudTrail;
 
-},{"../apis/cloudtrail-2013-11-01.min.json":27,"../apis/cloudtrail-2013-11-01.paginators.json":28,"../lib/core":264,"../lib/node_loader":261}],192:[function(require,module,exports){
+},{"../apis/cloudtrail-2013-11-01.min.json":30,"../apis/cloudtrail-2013-11-01.paginators.json":31,"../lib/core":267,"../lib/node_loader":264}],195:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138316,7 +141283,7 @@ Object.defineProperty(apiLoader.services['cloudwatch'], '2010-08-01', {
 
 module.exports = AWS.CloudWatch;
 
-},{"../apis/monitoring-2010-08-01.min.json":122,"../apis/monitoring-2010-08-01.paginators.json":123,"../apis/monitoring-2010-08-01.waiters2.json":124,"../lib/core":264,"../lib/node_loader":261}],193:[function(require,module,exports){
+},{"../apis/monitoring-2010-08-01.min.json":125,"../apis/monitoring-2010-08-01.paginators.json":126,"../apis/monitoring-2010-08-01.waiters2.json":127,"../lib/core":267,"../lib/node_loader":264}],196:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138336,7 +141303,7 @@ Object.defineProperty(apiLoader.services['cloudwatchevents'], '2015-10-07', {
 
 module.exports = AWS.CloudWatchEvents;
 
-},{"../apis/events-2015-10-07.min.json":87,"../apis/events-2015-10-07.paginators.json":88,"../lib/core":264,"../lib/node_loader":261}],194:[function(require,module,exports){
+},{"../apis/events-2015-10-07.min.json":90,"../apis/events-2015-10-07.paginators.json":91,"../lib/core":267,"../lib/node_loader":264}],197:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138356,7 +141323,7 @@ Object.defineProperty(apiLoader.services['cloudwatchlogs'], '2014-03-28', {
 
 module.exports = AWS.CloudWatchLogs;
 
-},{"../apis/logs-2014-03-28.min.json":113,"../apis/logs-2014-03-28.paginators.json":114,"../lib/core":264,"../lib/node_loader":261}],195:[function(require,module,exports){
+},{"../apis/logs-2014-03-28.min.json":116,"../apis/logs-2014-03-28.paginators.json":117,"../lib/core":267,"../lib/node_loader":264}],198:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138376,7 +141343,7 @@ Object.defineProperty(apiLoader.services['codebuild'], '2016-10-06', {
 
 module.exports = AWS.CodeBuild;
 
-},{"../apis/codebuild-2016-10-06.min.json":29,"../apis/codebuild-2016-10-06.paginators.json":30,"../lib/core":264,"../lib/node_loader":261}],196:[function(require,module,exports){
+},{"../apis/codebuild-2016-10-06.min.json":32,"../apis/codebuild-2016-10-06.paginators.json":33,"../lib/core":267,"../lib/node_loader":264}],199:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138396,7 +141363,7 @@ Object.defineProperty(apiLoader.services['codecommit'], '2015-04-13', {
 
 module.exports = AWS.CodeCommit;
 
-},{"../apis/codecommit-2015-04-13.min.json":31,"../apis/codecommit-2015-04-13.paginators.json":32,"../lib/core":264,"../lib/node_loader":261}],197:[function(require,module,exports){
+},{"../apis/codecommit-2015-04-13.min.json":34,"../apis/codecommit-2015-04-13.paginators.json":35,"../lib/core":267,"../lib/node_loader":264}],200:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138417,7 +141384,7 @@ Object.defineProperty(apiLoader.services['codedeploy'], '2014-10-06', {
 
 module.exports = AWS.CodeDeploy;
 
-},{"../apis/codedeploy-2014-10-06.min.json":33,"../apis/codedeploy-2014-10-06.paginators.json":34,"../apis/codedeploy-2014-10-06.waiters2.json":35,"../lib/core":264,"../lib/node_loader":261}],198:[function(require,module,exports){
+},{"../apis/codedeploy-2014-10-06.min.json":36,"../apis/codedeploy-2014-10-06.paginators.json":37,"../apis/codedeploy-2014-10-06.waiters2.json":38,"../lib/core":267,"../lib/node_loader":264}],201:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138437,7 +141404,7 @@ Object.defineProperty(apiLoader.services['codepipeline'], '2015-07-09', {
 
 module.exports = AWS.CodePipeline;
 
-},{"../apis/codepipeline-2015-07-09.min.json":36,"../apis/codepipeline-2015-07-09.paginators.json":37,"../lib/core":264,"../lib/node_loader":261}],199:[function(require,module,exports){
+},{"../apis/codepipeline-2015-07-09.min.json":39,"../apis/codepipeline-2015-07-09.paginators.json":40,"../lib/core":267,"../lib/node_loader":264}],202:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138458,7 +141425,7 @@ Object.defineProperty(apiLoader.services['cognitoidentity'], '2014-06-30', {
 
 module.exports = AWS.CognitoIdentity;
 
-},{"../apis/cognito-identity-2014-06-30.min.json":38,"../apis/cognito-identity-2014-06-30.paginators.json":39,"../lib/core":264,"../lib/node_loader":261,"../lib/services/cognitoidentity":316}],200:[function(require,module,exports){
+},{"../apis/cognito-identity-2014-06-30.min.json":41,"../apis/cognito-identity-2014-06-30.paginators.json":42,"../lib/core":267,"../lib/node_loader":264,"../lib/services/cognitoidentity":319}],203:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138478,7 +141445,7 @@ Object.defineProperty(apiLoader.services['cognitoidentityserviceprovider'], '201
 
 module.exports = AWS.CognitoIdentityServiceProvider;
 
-},{"../apis/cognito-idp-2016-04-18.min.json":40,"../apis/cognito-idp-2016-04-18.paginators.json":41,"../lib/core":264,"../lib/node_loader":261}],201:[function(require,module,exports){
+},{"../apis/cognito-idp-2016-04-18.min.json":43,"../apis/cognito-idp-2016-04-18.paginators.json":44,"../lib/core":267,"../lib/node_loader":264}],204:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138497,7 +141464,7 @@ Object.defineProperty(apiLoader.services['cognitosync'], '2014-06-30', {
 
 module.exports = AWS.CognitoSync;
 
-},{"../apis/cognito-sync-2014-06-30.min.json":42,"../lib/core":264,"../lib/node_loader":261}],202:[function(require,module,exports){
+},{"../apis/cognito-sync-2014-06-30.min.json":45,"../lib/core":267,"../lib/node_loader":264}],205:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138517,7 +141484,7 @@ Object.defineProperty(apiLoader.services['configservice'], '2014-11-12', {
 
 module.exports = AWS.ConfigService;
 
-},{"../apis/config-2014-11-12.min.json":43,"../apis/config-2014-11-12.paginators.json":44,"../lib/core":264,"../lib/node_loader":261}],203:[function(require,module,exports){
+},{"../apis/config-2014-11-12.min.json":46,"../apis/config-2014-11-12.paginators.json":47,"../lib/core":267,"../lib/node_loader":264}],206:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138537,7 +141504,7 @@ Object.defineProperty(apiLoader.services['cur'], '2017-01-06', {
 
 module.exports = AWS.CUR;
 
-},{"../apis/cur-2017-01-06.min.json":45,"../apis/cur-2017-01-06.paginators.json":46,"../lib/core":264,"../lib/node_loader":261}],204:[function(require,module,exports){
+},{"../apis/cur-2017-01-06.min.json":48,"../apis/cur-2017-01-06.paginators.json":49,"../lib/core":267,"../lib/node_loader":264}],207:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138557,7 +141524,7 @@ Object.defineProperty(apiLoader.services['devicefarm'], '2015-06-23', {
 
 module.exports = AWS.DeviceFarm;
 
-},{"../apis/devicefarm-2015-06-23.min.json":47,"../apis/devicefarm-2015-06-23.paginators.json":48,"../lib/core":264,"../lib/node_loader":261}],205:[function(require,module,exports){
+},{"../apis/devicefarm-2015-06-23.min.json":50,"../apis/devicefarm-2015-06-23.paginators.json":51,"../lib/core":267,"../lib/node_loader":264}],208:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138577,7 +141544,7 @@ Object.defineProperty(apiLoader.services['directconnect'], '2012-10-25', {
 
 module.exports = AWS.DirectConnect;
 
-},{"../apis/directconnect-2012-10-25.min.json":49,"../apis/directconnect-2012-10-25.paginators.json":50,"../lib/core":264,"../lib/node_loader":261}],206:[function(require,module,exports){
+},{"../apis/directconnect-2012-10-25.min.json":52,"../apis/directconnect-2012-10-25.paginators.json":53,"../lib/core":267,"../lib/node_loader":264}],209:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138609,7 +141576,7 @@ Object.defineProperty(apiLoader.services['dynamodb'], '2012-08-10', {
 
 module.exports = AWS.DynamoDB;
 
-},{"../apis/dynamodb-2011-12-05.min.json":51,"../apis/dynamodb-2011-12-05.paginators.json":52,"../apis/dynamodb-2011-12-05.waiters2.json":53,"../apis/dynamodb-2012-08-10.min.json":54,"../apis/dynamodb-2012-08-10.paginators.json":55,"../apis/dynamodb-2012-08-10.waiters2.json":56,"../lib/core":264,"../lib/node_loader":261,"../lib/services/dynamodb":317}],207:[function(require,module,exports){
+},{"../apis/dynamodb-2011-12-05.min.json":54,"../apis/dynamodb-2011-12-05.paginators.json":55,"../apis/dynamodb-2011-12-05.waiters2.json":56,"../apis/dynamodb-2012-08-10.min.json":57,"../apis/dynamodb-2012-08-10.paginators.json":58,"../apis/dynamodb-2012-08-10.waiters2.json":59,"../lib/core":267,"../lib/node_loader":264,"../lib/services/dynamodb":320}],210:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138629,7 +141596,7 @@ Object.defineProperty(apiLoader.services['dynamodbstreams'], '2012-08-10', {
 
 module.exports = AWS.DynamoDBStreams;
 
-},{"../apis/streams.dynamodb-2012-08-10.min.json":173,"../apis/streams.dynamodb-2012-08-10.paginators.json":174,"../lib/core":264,"../lib/node_loader":261}],208:[function(require,module,exports){
+},{"../apis/streams.dynamodb-2012-08-10.min.json":176,"../apis/streams.dynamodb-2012-08-10.paginators.json":177,"../lib/core":267,"../lib/node_loader":264}],211:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138651,7 +141618,7 @@ Object.defineProperty(apiLoader.services['ec2'], '2016-11-15', {
 
 module.exports = AWS.EC2;
 
-},{"../apis/ec2-2016-11-15.min.json":57,"../apis/ec2-2016-11-15.paginators.json":58,"../apis/ec2-2016-11-15.waiters2.json":59,"../lib/core":264,"../lib/node_loader":261,"../lib/services/ec2":318}],209:[function(require,module,exports){
+},{"../apis/ec2-2016-11-15.min.json":60,"../apis/ec2-2016-11-15.paginators.json":61,"../apis/ec2-2016-11-15.waiters2.json":62,"../lib/core":267,"../lib/node_loader":264,"../lib/services/ec2":321}],212:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138671,7 +141638,7 @@ Object.defineProperty(apiLoader.services['ecr'], '2015-09-21', {
 
 module.exports = AWS.ECR;
 
-},{"../apis/ecr-2015-09-21.min.json":60,"../apis/ecr-2015-09-21.paginators.json":61,"../lib/core":264,"../lib/node_loader":261}],210:[function(require,module,exports){
+},{"../apis/ecr-2015-09-21.min.json":63,"../apis/ecr-2015-09-21.paginators.json":64,"../lib/core":267,"../lib/node_loader":264}],213:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138692,7 +141659,7 @@ Object.defineProperty(apiLoader.services['ecs'], '2014-11-13', {
 
 module.exports = AWS.ECS;
 
-},{"../apis/ecs-2014-11-13.min.json":62,"../apis/ecs-2014-11-13.paginators.json":63,"../apis/ecs-2014-11-13.waiters2.json":64,"../lib/core":264,"../lib/node_loader":261}],211:[function(require,module,exports){
+},{"../apis/ecs-2014-11-13.min.json":65,"../apis/ecs-2014-11-13.paginators.json":66,"../apis/ecs-2014-11-13.waiters2.json":67,"../lib/core":267,"../lib/node_loader":264}],214:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138712,7 +141679,7 @@ Object.defineProperty(apiLoader.services['efs'], '2015-02-01', {
 
 module.exports = AWS.EFS;
 
-},{"../apis/elasticfilesystem-2015-02-01.min.json":70,"../apis/elasticfilesystem-2015-02-01.paginators.json":71,"../lib/core":264,"../lib/node_loader":261}],212:[function(require,module,exports){
+},{"../apis/elasticfilesystem-2015-02-01.min.json":73,"../apis/elasticfilesystem-2015-02-01.paginators.json":74,"../lib/core":267,"../lib/node_loader":264}],215:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138733,7 +141700,7 @@ Object.defineProperty(apiLoader.services['elasticache'], '2015-02-02', {
 
 module.exports = AWS.ElastiCache;
 
-},{"../apis/elasticache-2015-02-02.min.json":65,"../apis/elasticache-2015-02-02.paginators.json":66,"../apis/elasticache-2015-02-02.waiters2.json":67,"../lib/core":264,"../lib/node_loader":261}],213:[function(require,module,exports){
+},{"../apis/elasticache-2015-02-02.min.json":68,"../apis/elasticache-2015-02-02.paginators.json":69,"../apis/elasticache-2015-02-02.waiters2.json":70,"../lib/core":267,"../lib/node_loader":264}],216:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138753,7 +141720,7 @@ Object.defineProperty(apiLoader.services['elasticbeanstalk'], '2010-12-01', {
 
 module.exports = AWS.ElasticBeanstalk;
 
-},{"../apis/elasticbeanstalk-2010-12-01.min.json":68,"../apis/elasticbeanstalk-2010-12-01.paginators.json":69,"../lib/core":264,"../lib/node_loader":261}],214:[function(require,module,exports){
+},{"../apis/elasticbeanstalk-2010-12-01.min.json":71,"../apis/elasticbeanstalk-2010-12-01.paginators.json":72,"../lib/core":267,"../lib/node_loader":264}],217:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138774,7 +141741,7 @@ Object.defineProperty(apiLoader.services['elastictranscoder'], '2012-09-25', {
 
 module.exports = AWS.ElasticTranscoder;
 
-},{"../apis/elastictranscoder-2012-09-25.min.json":81,"../apis/elastictranscoder-2012-09-25.paginators.json":82,"../apis/elastictranscoder-2012-09-25.waiters2.json":83,"../lib/core":264,"../lib/node_loader":261}],215:[function(require,module,exports){
+},{"../apis/elastictranscoder-2012-09-25.min.json":84,"../apis/elastictranscoder-2012-09-25.paginators.json":85,"../apis/elastictranscoder-2012-09-25.waiters2.json":86,"../lib/core":267,"../lib/node_loader":264}],218:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138795,7 +141762,7 @@ Object.defineProperty(apiLoader.services['elb'], '2012-06-01', {
 
 module.exports = AWS.ELB;
 
-},{"../apis/elasticloadbalancing-2012-06-01.min.json":72,"../apis/elasticloadbalancing-2012-06-01.paginators.json":73,"../apis/elasticloadbalancing-2012-06-01.waiters2.json":74,"../lib/core":264,"../lib/node_loader":261}],216:[function(require,module,exports){
+},{"../apis/elasticloadbalancing-2012-06-01.min.json":75,"../apis/elasticloadbalancing-2012-06-01.paginators.json":76,"../apis/elasticloadbalancing-2012-06-01.waiters2.json":77,"../lib/core":267,"../lib/node_loader":264}],219:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138816,7 +141783,7 @@ Object.defineProperty(apiLoader.services['elbv2'], '2015-12-01', {
 
 module.exports = AWS.ELBv2;
 
-},{"../apis/elasticloadbalancingv2-2015-12-01.min.json":75,"../apis/elasticloadbalancingv2-2015-12-01.paginators.json":76,"../apis/elasticloadbalancingv2-2015-12-01.waiters2.json":77,"../lib/core":264,"../lib/node_loader":261}],217:[function(require,module,exports){
+},{"../apis/elasticloadbalancingv2-2015-12-01.min.json":78,"../apis/elasticloadbalancingv2-2015-12-01.paginators.json":79,"../apis/elasticloadbalancingv2-2015-12-01.waiters2.json":80,"../lib/core":267,"../lib/node_loader":264}],220:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138837,7 +141804,7 @@ Object.defineProperty(apiLoader.services['emr'], '2009-03-31', {
 
 module.exports = AWS.EMR;
 
-},{"../apis/elasticmapreduce-2009-03-31.min.json":78,"../apis/elasticmapreduce-2009-03-31.paginators.json":79,"../apis/elasticmapreduce-2009-03-31.waiters2.json":80,"../lib/core":264,"../lib/node_loader":261}],218:[function(require,module,exports){
+},{"../apis/elasticmapreduce-2009-03-31.min.json":81,"../apis/elasticmapreduce-2009-03-31.paginators.json":82,"../apis/elasticmapreduce-2009-03-31.waiters2.json":83,"../lib/core":267,"../lib/node_loader":264}],221:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138857,7 +141824,7 @@ Object.defineProperty(apiLoader.services['firehose'], '2015-08-04', {
 
 module.exports = AWS.Firehose;
 
-},{"../apis/firehose-2015-08-04.min.json":89,"../apis/firehose-2015-08-04.paginators.json":90,"../lib/core":264,"../lib/node_loader":261}],219:[function(require,module,exports){
+},{"../apis/firehose-2015-08-04.min.json":92,"../apis/firehose-2015-08-04.paginators.json":93,"../lib/core":267,"../lib/node_loader":264}],222:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138877,7 +141844,7 @@ Object.defineProperty(apiLoader.services['gamelift'], '2015-10-01', {
 
 module.exports = AWS.GameLift;
 
-},{"../apis/gamelift-2015-10-01.min.json":91,"../apis/gamelift-2015-10-01.paginators.json":92,"../lib/core":264,"../lib/node_loader":261}],220:[function(require,module,exports){
+},{"../apis/gamelift-2015-10-01.min.json":94,"../apis/gamelift-2015-10-01.paginators.json":95,"../lib/core":267,"../lib/node_loader":264}],223:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138897,7 +141864,7 @@ Object.defineProperty(apiLoader.services['inspector'], '2016-02-16', {
 
 module.exports = AWS.Inspector;
 
-},{"../apis/inspector-2016-02-16.min.json":93,"../apis/inspector-2016-02-16.paginators.json":94,"../lib/core":264,"../lib/node_loader":261}],221:[function(require,module,exports){
+},{"../apis/inspector-2016-02-16.min.json":96,"../apis/inspector-2016-02-16.paginators.json":97,"../lib/core":267,"../lib/node_loader":264}],224:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138917,7 +141884,7 @@ Object.defineProperty(apiLoader.services['iot'], '2015-05-28', {
 
 module.exports = AWS.Iot;
 
-},{"../apis/iot-2015-05-28.min.json":95,"../apis/iot-2015-05-28.paginators.json":96,"../lib/core":264,"../lib/node_loader":261}],222:[function(require,module,exports){
+},{"../apis/iot-2015-05-28.min.json":98,"../apis/iot-2015-05-28.paginators.json":99,"../lib/core":267,"../lib/node_loader":264}],225:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138937,7 +141904,7 @@ Object.defineProperty(apiLoader.services['iotdata'], '2015-05-28', {
 
 module.exports = AWS.IotData;
 
-},{"../apis/iot-data-2015-05-28.min.json":97,"../lib/core":264,"../lib/node_loader":261,"../lib/services/iotdata":319}],223:[function(require,module,exports){
+},{"../apis/iot-data-2015-05-28.min.json":100,"../lib/core":267,"../lib/node_loader":264,"../lib/services/iotdata":322}],226:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138958,7 +141925,7 @@ Object.defineProperty(apiLoader.services['kinesis'], '2013-12-02', {
 
 module.exports = AWS.Kinesis;
 
-},{"../apis/kinesis-2013-12-02.min.json":98,"../apis/kinesis-2013-12-02.paginators.json":99,"../apis/kinesis-2013-12-02.waiters2.json":100,"../lib/core":264,"../lib/node_loader":261}],224:[function(require,module,exports){
+},{"../apis/kinesis-2013-12-02.min.json":101,"../apis/kinesis-2013-12-02.paginators.json":102,"../apis/kinesis-2013-12-02.waiters2.json":103,"../lib/core":267,"../lib/node_loader":264}],227:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138978,7 +141945,7 @@ Object.defineProperty(apiLoader.services['kinesisvideo'], '2017-09-30', {
 
 module.exports = AWS.KinesisVideo;
 
-},{"../apis/kinesisvideo-2017-09-30.min.json":103,"../apis/kinesisvideo-2017-09-30.paginators.json":104,"../lib/core":264,"../lib/node_loader":261}],225:[function(require,module,exports){
+},{"../apis/kinesisvideo-2017-09-30.min.json":106,"../apis/kinesisvideo-2017-09-30.paginators.json":107,"../lib/core":267,"../lib/node_loader":264}],228:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -138998,7 +141965,7 @@ Object.defineProperty(apiLoader.services['kinesisvideoarchivedmedia'], '2017-09-
 
 module.exports = AWS.KinesisVideoArchivedMedia;
 
-},{"../apis/kinesis-video-archived-media-2017-09-30.min.json":101,"../apis/kinesis-video-archived-media-2017-09-30.paginators.json":102,"../lib/core":264,"../lib/node_loader":261}],226:[function(require,module,exports){
+},{"../apis/kinesis-video-archived-media-2017-09-30.min.json":104,"../apis/kinesis-video-archived-media-2017-09-30.paginators.json":105,"../lib/core":267,"../lib/node_loader":264}],229:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139018,7 +141985,7 @@ Object.defineProperty(apiLoader.services['kms'], '2014-11-01', {
 
 module.exports = AWS.KMS;
 
-},{"../apis/kms-2014-11-01.min.json":105,"../apis/kms-2014-11-01.paginators.json":106,"../lib/core":264,"../lib/node_loader":261}],227:[function(require,module,exports){
+},{"../apis/kms-2014-11-01.min.json":108,"../apis/kms-2014-11-01.paginators.json":109,"../lib/core":267,"../lib/node_loader":264}],230:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139048,7 +142015,7 @@ Object.defineProperty(apiLoader.services['lambda'], '2015-03-31', {
 
 module.exports = AWS.Lambda;
 
-},{"../apis/lambda-2014-11-11.min.json":107,"../apis/lambda-2014-11-11.paginators.json":108,"../apis/lambda-2015-03-31.min.json":109,"../apis/lambda-2015-03-31.paginators.json":110,"../lib/core":264,"../lib/node_loader":261,"../lib/services/lambda":320}],228:[function(require,module,exports){
+},{"../apis/lambda-2014-11-11.min.json":110,"../apis/lambda-2014-11-11.paginators.json":111,"../apis/lambda-2015-03-31.min.json":112,"../apis/lambda-2015-03-31.paginators.json":113,"../lib/core":267,"../lib/node_loader":264,"../lib/services/lambda":323}],231:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139068,7 +142035,7 @@ Object.defineProperty(apiLoader.services['lexmodelbuildingservice'], '2017-04-19
 
 module.exports = AWS.LexModelBuildingService;
 
-},{"../apis/lex-models-2017-04-19.min.json":111,"../apis/lex-models-2017-04-19.paginators.json":112,"../lib/core":264,"../lib/node_loader":261}],229:[function(require,module,exports){
+},{"../apis/lex-models-2017-04-19.min.json":114,"../apis/lex-models-2017-04-19.paginators.json":115,"../lib/core":267,"../lib/node_loader":264}],232:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139088,7 +142055,7 @@ Object.defineProperty(apiLoader.services['lexruntime'], '2016-11-28', {
 
 module.exports = AWS.LexRuntime;
 
-},{"../apis/runtime.lex-2016-11-28.min.json":156,"../apis/runtime.lex-2016-11-28.paginators.json":157,"../lib/core":264,"../lib/node_loader":261}],230:[function(require,module,exports){
+},{"../apis/runtime.lex-2016-11-28.min.json":159,"../apis/runtime.lex-2016-11-28.paginators.json":160,"../lib/core":267,"../lib/node_loader":264}],233:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139110,7 +142077,7 @@ Object.defineProperty(apiLoader.services['machinelearning'], '2014-12-12', {
 
 module.exports = AWS.MachineLearning;
 
-},{"../apis/machinelearning-2014-12-12.min.json":115,"../apis/machinelearning-2014-12-12.paginators.json":116,"../apis/machinelearning-2014-12-12.waiters2.json":117,"../lib/core":264,"../lib/node_loader":261,"../lib/services/machinelearning":321}],231:[function(require,module,exports){
+},{"../apis/machinelearning-2014-12-12.min.json":118,"../apis/machinelearning-2014-12-12.paginators.json":119,"../apis/machinelearning-2014-12-12.waiters2.json":120,"../lib/core":267,"../lib/node_loader":264,"../lib/services/machinelearning":324}],234:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139130,7 +142097,7 @@ Object.defineProperty(apiLoader.services['marketplacecommerceanalytics'], '2015-
 
 module.exports = AWS.MarketplaceCommerceAnalytics;
 
-},{"../apis/marketplacecommerceanalytics-2015-07-01.min.json":118,"../apis/marketplacecommerceanalytics-2015-07-01.paginators.json":119,"../lib/core":264,"../lib/node_loader":261}],232:[function(require,module,exports){
+},{"../apis/marketplacecommerceanalytics-2015-07-01.min.json":121,"../apis/marketplacecommerceanalytics-2015-07-01.paginators.json":122,"../lib/core":267,"../lib/node_loader":264}],235:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139149,7 +142116,7 @@ Object.defineProperty(apiLoader.services['mobileanalytics'], '2014-06-05', {
 
 module.exports = AWS.MobileAnalytics;
 
-},{"../apis/mobileanalytics-2014-06-05.min.json":121,"../lib/core":264,"../lib/node_loader":261}],233:[function(require,module,exports){
+},{"../apis/mobileanalytics-2014-06-05.min.json":124,"../lib/core":267,"../lib/node_loader":264}],236:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139169,7 +142136,7 @@ Object.defineProperty(apiLoader.services['mturk'], '2017-01-17', {
 
 module.exports = AWS.MTurk;
 
-},{"../apis/mturk-requester-2017-01-17.min.json":125,"../apis/mturk-requester-2017-01-17.paginators.json":126,"../lib/core":264,"../lib/node_loader":261}],234:[function(require,module,exports){
+},{"../apis/mturk-requester-2017-01-17.min.json":128,"../apis/mturk-requester-2017-01-17.paginators.json":129,"../lib/core":267,"../lib/node_loader":264}],237:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139190,7 +142157,7 @@ Object.defineProperty(apiLoader.services['opsworks'], '2013-02-18', {
 
 module.exports = AWS.OpsWorks;
 
-},{"../apis/opsworks-2013-02-18.min.json":127,"../apis/opsworks-2013-02-18.paginators.json":128,"../apis/opsworks-2013-02-18.waiters2.json":129,"../lib/core":264,"../lib/node_loader":261}],235:[function(require,module,exports){
+},{"../apis/opsworks-2013-02-18.min.json":130,"../apis/opsworks-2013-02-18.paginators.json":131,"../apis/opsworks-2013-02-18.waiters2.json":132,"../lib/core":267,"../lib/node_loader":264}],238:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139211,7 +142178,7 @@ Object.defineProperty(apiLoader.services['polly'], '2016-06-10', {
 
 module.exports = AWS.Polly;
 
-},{"../apis/polly-2016-06-10.min.json":130,"../apis/polly-2016-06-10.paginators.json":131,"../lib/core":264,"../lib/node_loader":261,"../lib/services/polly":322}],236:[function(require,module,exports){
+},{"../apis/polly-2016-06-10.min.json":133,"../apis/polly-2016-06-10.paginators.json":134,"../lib/core":267,"../lib/node_loader":264,"../lib/services/polly":325}],239:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139231,7 +142198,7 @@ Object.defineProperty(apiLoader.services['pricing'], '2017-10-15', {
 
 module.exports = AWS.Pricing;
 
-},{"../apis/pricing-2017-10-15.min.json":132,"../apis/pricing-2017-10-15.paginators.json":133,"../lib/core":264,"../lib/node_loader":261}],237:[function(require,module,exports){
+},{"../apis/pricing-2017-10-15.min.json":135,"../apis/pricing-2017-10-15.paginators.json":136,"../lib/core":267,"../lib/node_loader":264}],240:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139290,7 +142257,7 @@ Object.defineProperty(apiLoader.services['rds'], '2014-10-31', {
 
 module.exports = AWS.RDS;
 
-},{"../apis/rds-2013-01-10.min.json":134,"../apis/rds-2013-01-10.paginators.json":135,"../apis/rds-2013-02-12.min.json":136,"../apis/rds-2013-02-12.paginators.json":137,"../apis/rds-2013-09-09.min.json":138,"../apis/rds-2013-09-09.paginators.json":139,"../apis/rds-2013-09-09.waiters2.json":140,"../apis/rds-2014-09-01.min.json":141,"../apis/rds-2014-09-01.paginators.json":142,"../apis/rds-2014-10-31.min.json":143,"../apis/rds-2014-10-31.paginators.json":144,"../apis/rds-2014-10-31.waiters2.json":145,"../lib/core":264,"../lib/node_loader":261,"../lib/services/rds":323}],238:[function(require,module,exports){
+},{"../apis/rds-2013-01-10.min.json":137,"../apis/rds-2013-01-10.paginators.json":138,"../apis/rds-2013-02-12.min.json":139,"../apis/rds-2013-02-12.paginators.json":140,"../apis/rds-2013-09-09.min.json":141,"../apis/rds-2013-09-09.paginators.json":142,"../apis/rds-2013-09-09.waiters2.json":143,"../apis/rds-2014-09-01.min.json":144,"../apis/rds-2014-09-01.paginators.json":145,"../apis/rds-2014-10-31.min.json":146,"../apis/rds-2014-10-31.paginators.json":147,"../apis/rds-2014-10-31.waiters2.json":148,"../lib/core":267,"../lib/node_loader":264,"../lib/services/rds":326}],241:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139311,7 +142278,7 @@ Object.defineProperty(apiLoader.services['redshift'], '2012-12-01', {
 
 module.exports = AWS.Redshift;
 
-},{"../apis/redshift-2012-12-01.min.json":146,"../apis/redshift-2012-12-01.paginators.json":147,"../apis/redshift-2012-12-01.waiters2.json":148,"../lib/core":264,"../lib/node_loader":261}],239:[function(require,module,exports){
+},{"../apis/redshift-2012-12-01.min.json":149,"../apis/redshift-2012-12-01.paginators.json":150,"../apis/redshift-2012-12-01.waiters2.json":151,"../lib/core":267,"../lib/node_loader":264}],242:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139331,7 +142298,7 @@ Object.defineProperty(apiLoader.services['rekognition'], '2016-06-27', {
 
 module.exports = AWS.Rekognition;
 
-},{"../apis/rekognition-2016-06-27.min.json":149,"../apis/rekognition-2016-06-27.paginators.json":150,"../lib/core":264,"../lib/node_loader":261}],240:[function(require,module,exports){
+},{"../apis/rekognition-2016-06-27.min.json":152,"../apis/rekognition-2016-06-27.paginators.json":153,"../lib/core":267,"../lib/node_loader":264}],243:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139353,7 +142320,7 @@ Object.defineProperty(apiLoader.services['route53'], '2013-04-01', {
 
 module.exports = AWS.Route53;
 
-},{"../apis/route53-2013-04-01.min.json":151,"../apis/route53-2013-04-01.paginators.json":152,"../apis/route53-2013-04-01.waiters2.json":153,"../lib/core":264,"../lib/node_loader":261,"../lib/services/route53":324}],241:[function(require,module,exports){
+},{"../apis/route53-2013-04-01.min.json":154,"../apis/route53-2013-04-01.paginators.json":155,"../apis/route53-2013-04-01.waiters2.json":156,"../lib/core":267,"../lib/node_loader":264,"../lib/services/route53":327}],244:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139373,7 +142340,7 @@ Object.defineProperty(apiLoader.services['route53domains'], '2014-05-15', {
 
 module.exports = AWS.Route53Domains;
 
-},{"../apis/route53domains-2014-05-15.min.json":154,"../apis/route53domains-2014-05-15.paginators.json":155,"../lib/core":264,"../lib/node_loader":261}],242:[function(require,module,exports){
+},{"../apis/route53domains-2014-05-15.min.json":157,"../apis/route53domains-2014-05-15.paginators.json":158,"../lib/core":267,"../lib/node_loader":264}],245:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139395,7 +142362,7 @@ Object.defineProperty(apiLoader.services['s3'], '2006-03-01', {
 
 module.exports = AWS.S3;
 
-},{"../apis/s3-2006-03-01.min.json":158,"../apis/s3-2006-03-01.paginators.json":159,"../apis/s3-2006-03-01.waiters2.json":160,"../lib/core":264,"../lib/node_loader":261,"../lib/services/s3":325}],243:[function(require,module,exports){
+},{"../apis/s3-2006-03-01.min.json":161,"../apis/s3-2006-03-01.paginators.json":162,"../apis/s3-2006-03-01.waiters2.json":163,"../lib/core":267,"../lib/node_loader":264,"../lib/services/s3":328}],246:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139415,7 +142382,7 @@ Object.defineProperty(apiLoader.services['secretsmanager'], '2017-10-17', {
 
 module.exports = AWS.SecretsManager;
 
-},{"../apis/secretsmanager-2017-10-17.min.json":161,"../apis/secretsmanager-2017-10-17.paginators.json":162,"../lib/core":264,"../lib/node_loader":261}],244:[function(require,module,exports){
+},{"../apis/secretsmanager-2017-10-17.min.json":164,"../apis/secretsmanager-2017-10-17.paginators.json":165,"../lib/core":267,"../lib/node_loader":264}],247:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139435,7 +142402,7 @@ Object.defineProperty(apiLoader.services['servicecatalog'], '2015-12-10', {
 
 module.exports = AWS.ServiceCatalog;
 
-},{"../apis/servicecatalog-2015-12-10.min.json":163,"../apis/servicecatalog-2015-12-10.paginators.json":164,"../lib/core":264,"../lib/node_loader":261}],245:[function(require,module,exports){
+},{"../apis/servicecatalog-2015-12-10.min.json":166,"../apis/servicecatalog-2015-12-10.paginators.json":167,"../lib/core":267,"../lib/node_loader":264}],248:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139456,7 +142423,7 @@ Object.defineProperty(apiLoader.services['ses'], '2010-12-01', {
 
 module.exports = AWS.SES;
 
-},{"../apis/email-2010-12-01.min.json":84,"../apis/email-2010-12-01.paginators.json":85,"../apis/email-2010-12-01.waiters2.json":86,"../lib/core":264,"../lib/node_loader":261}],246:[function(require,module,exports){
+},{"../apis/email-2010-12-01.min.json":87,"../apis/email-2010-12-01.paginators.json":88,"../apis/email-2010-12-01.waiters2.json":89,"../lib/core":267,"../lib/node_loader":264}],249:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139476,7 +142443,7 @@ Object.defineProperty(apiLoader.services['sns'], '2010-03-31', {
 
 module.exports = AWS.SNS;
 
-},{"../apis/sns-2010-03-31.min.json":165,"../apis/sns-2010-03-31.paginators.json":166,"../lib/core":264,"../lib/node_loader":261}],247:[function(require,module,exports){
+},{"../apis/sns-2010-03-31.min.json":168,"../apis/sns-2010-03-31.paginators.json":169,"../lib/core":267,"../lib/node_loader":264}],250:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139497,7 +142464,7 @@ Object.defineProperty(apiLoader.services['sqs'], '2012-11-05', {
 
 module.exports = AWS.SQS;
 
-},{"../apis/sqs-2012-11-05.min.json":167,"../apis/sqs-2012-11-05.paginators.json":168,"../lib/core":264,"../lib/node_loader":261,"../lib/services/sqs":326}],248:[function(require,module,exports){
+},{"../apis/sqs-2012-11-05.min.json":170,"../apis/sqs-2012-11-05.paginators.json":171,"../lib/core":267,"../lib/node_loader":264,"../lib/services/sqs":329}],251:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139517,7 +142484,7 @@ Object.defineProperty(apiLoader.services['ssm'], '2014-11-06', {
 
 module.exports = AWS.SSM;
 
-},{"../apis/ssm-2014-11-06.min.json":169,"../apis/ssm-2014-11-06.paginators.json":170,"../lib/core":264,"../lib/node_loader":261}],249:[function(require,module,exports){
+},{"../apis/ssm-2014-11-06.min.json":172,"../apis/ssm-2014-11-06.paginators.json":173,"../lib/core":267,"../lib/node_loader":264}],252:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139537,7 +142504,7 @@ Object.defineProperty(apiLoader.services['storagegateway'], '2013-06-30', {
 
 module.exports = AWS.StorageGateway;
 
-},{"../apis/storagegateway-2013-06-30.min.json":171,"../apis/storagegateway-2013-06-30.paginators.json":172,"../lib/core":264,"../lib/node_loader":261}],250:[function(require,module,exports){
+},{"../apis/storagegateway-2013-06-30.min.json":174,"../apis/storagegateway-2013-06-30.paginators.json":175,"../lib/core":267,"../lib/node_loader":264}],253:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139558,7 +142525,7 @@ Object.defineProperty(apiLoader.services['sts'], '2011-06-15', {
 
 module.exports = AWS.STS;
 
-},{"../apis/sts-2011-06-15.min.json":175,"../apis/sts-2011-06-15.paginators.json":176,"../lib/core":264,"../lib/node_loader":261,"../lib/services/sts":327}],251:[function(require,module,exports){
+},{"../apis/sts-2011-06-15.min.json":178,"../apis/sts-2011-06-15.paginators.json":179,"../lib/core":267,"../lib/node_loader":264,"../lib/services/sts":330}],254:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139578,7 +142545,7 @@ Object.defineProperty(apiLoader.services['translate'], '2017-07-01', {
 
 module.exports = AWS.Translate;
 
-},{"../apis/translate-2017-07-01.min.json":177,"../apis/translate-2017-07-01.paginators.json":178,"../lib/core":264,"../lib/node_loader":261}],252:[function(require,module,exports){
+},{"../apis/translate-2017-07-01.min.json":180,"../apis/translate-2017-07-01.paginators.json":181,"../lib/core":267,"../lib/node_loader":264}],255:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139598,7 +142565,7 @@ Object.defineProperty(apiLoader.services['waf'], '2015-08-24', {
 
 module.exports = AWS.WAF;
 
-},{"../apis/waf-2015-08-24.min.json":179,"../apis/waf-2015-08-24.paginators.json":180,"../lib/core":264,"../lib/node_loader":261}],253:[function(require,module,exports){
+},{"../apis/waf-2015-08-24.min.json":182,"../apis/waf-2015-08-24.paginators.json":183,"../lib/core":267,"../lib/node_loader":264}],256:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -139618,7 +142585,7 @@ Object.defineProperty(apiLoader.services['workdocs'], '2016-05-01', {
 
 module.exports = AWS.WorkDocs;
 
-},{"../apis/workdocs-2016-05-01.min.json":181,"../apis/workdocs-2016-05-01.paginators.json":182,"../lib/core":264,"../lib/node_loader":261}],254:[function(require,module,exports){
+},{"../apis/workdocs-2016-05-01.min.json":184,"../apis/workdocs-2016-05-01.paginators.json":185,"../lib/core":267,"../lib/node_loader":264}],257:[function(require,module,exports){
 function apiLoader(svc, version) {
   if (!apiLoader.services.hasOwnProperty(svc)) {
     throw new Error('InvalidService: Failed to load api for ' + svc);
@@ -139639,7 +142606,7 @@ apiLoader.services = {};
  */
 module.exports = apiLoader;
 
-},{}],255:[function(require,module,exports){
+},{}],258:[function(require,module,exports){
 var Hmac = require('./browserHmac');
 var Md5 = require('./browserMd5');
 var Sha1 = require('./browserSha1');
@@ -139678,7 +142645,7 @@ module.exports = exports = {
     }
   }
 
-},{"./browserHmac":257,"./browserMd5":258,"./browserSha1":259,"./browserSha256":260}],256:[function(require,module,exports){
+},{"./browserHmac":260,"./browserMd5":261,"./browserSha1":262,"./browserSha256":263}],259:[function(require,module,exports){
 var Buffer = require('buffer/').Buffer;
 
 /**
@@ -139745,7 +142712,7 @@ module.exports = exports = {
     convertToBuffer: convertToBuffer,
 }
 
-},{"buffer/":346}],257:[function(require,module,exports){
+},{"buffer/":349}],260:[function(require,module,exports){
 var hashUtils = require('./browserHashUtils');
 
 /**
@@ -139812,7 +142779,7 @@ function bufferFromSecret(hashCtor, secret) {
     return buffer;
 }
 
-},{"./browserHashUtils":256}],258:[function(require,module,exports){
+},{"./browserHashUtils":259}],261:[function(require,module,exports){
 var hashUtils = require('./browserHashUtils');
 var Buffer = require('buffer/').Buffer;
 
@@ -139996,7 +142963,7 @@ function ii(a, b, c, d, x, s, t) {
     return cmn(c ^ (b | (~d)), a, b, x, s, t);
 }
 
-},{"./browserHashUtils":256,"buffer/":346}],259:[function(require,module,exports){
+},{"./browserHashUtils":259,"buffer/":349}],262:[function(require,module,exports){
 var Buffer = require('buffer/').Buffer;
 var hashUtils = require('./browserHashUtils');
 
@@ -140164,7 +143131,7 @@ Sha1.prototype.processBlock = function processBlock() {
     }
 }
 
-},{"./browserHashUtils":256,"buffer/":346}],260:[function(require,module,exports){
+},{"./browserHashUtils":259,"buffer/":349}],263:[function(require,module,exports){
 var Buffer = require('buffer/').Buffer;
 var hashUtils = require('./browserHashUtils');
 
@@ -140405,7 +143372,7 @@ Sha256.prototype.hashBuffer = function () {
     state[7] += state7;
 };
 
-},{"./browserHashUtils":256,"buffer/":346}],261:[function(require,module,exports){
+},{"./browserHashUtils":259,"buffer/":349}],264:[function(require,module,exports){
 (function (process){
 var util = require('./util');
 
@@ -140447,7 +143414,7 @@ if (typeof process === 'undefined') {
 }
 
 }).call(this,require('_process'))
-},{"./browserCryptoLib":255,"./core":264,"./credentials":265,"./credentials/cognito_identity_credentials":266,"./credentials/credential_provider_chain":267,"./credentials/saml_credentials":268,"./credentials/temporary_credentials":269,"./credentials/web_identity_credentials":270,"./event-stream/buffered-create-event-stream":278,"./http/xhr":287,"./realclock/browserClock":305,"./util":337,"./xml/browser_parser":338,"_process":352,"buffer/":346,"querystring/":359,"url/":361}],262:[function(require,module,exports){
+},{"./browserCryptoLib":258,"./core":267,"./credentials":268,"./credentials/cognito_identity_credentials":269,"./credentials/credential_provider_chain":270,"./credentials/saml_credentials":271,"./credentials/temporary_credentials":272,"./credentials/web_identity_credentials":273,"./event-stream/buffered-create-event-stream":281,"./http/xhr":290,"./realclock/browserClock":308,"./util":340,"./xml/browser_parser":341,"_process":355,"buffer/":349,"querystring/":362,"url/":364}],265:[function(require,module,exports){
 var AWS = require('../core'),
     url = AWS.util.url,
     crypto = AWS.util.crypto.lib,
@@ -140659,7 +143626,7 @@ AWS.CloudFront.Signer = inherit({
  */
 module.exports = AWS.CloudFront.Signer;
 
-},{"../core":264}],263:[function(require,module,exports){
+},{"../core":267}],266:[function(require,module,exports){
 var AWS = require('./core');
 require('./credentials');
 require('./credentials/credential_provider_chain');
@@ -141225,7 +144192,7 @@ AWS.Config = AWS.util.inherit({
  */
 AWS.config = new AWS.Config();
 
-},{"./core":264,"./credentials":265,"./credentials/credential_provider_chain":267}],264:[function(require,module,exports){
+},{"./core":267,"./credentials":268,"./credentials/credential_provider_chain":270}],267:[function(require,module,exports){
 /**
  * The main AWS namespace
  */
@@ -141248,7 +144215,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.359.0',
+  VERSION: '2.360.0',
 
   /**
    * @api private
@@ -141336,7 +144303,7 @@ AWS.util.memoizedProperty(AWS, 'endpointCache', function() {
   return new AWS.EndpointCache(AWS.config.endpointCacheSize);
 }, true);
 
-},{"../vendor/endpoint-cache":369,"./api_loader":254,"./config":263,"./event_listeners":285,"./http":286,"./json/builder":288,"./json/parser":289,"./model/api":290,"./model/operation":292,"./model/paginator":293,"./model/resource_waiter":294,"./model/shape":295,"./param_validator":296,"./protocol/json":298,"./protocol/query":299,"./protocol/rest":300,"./protocol/rest_json":301,"./protocol/rest_xml":302,"./request":308,"./resource_waiter":309,"./response":310,"./sequential_executor":312,"./service":313,"./signers/request_signer":329,"./util":337,"./xml/builder":339}],265:[function(require,module,exports){
+},{"../vendor/endpoint-cache":372,"./api_loader":257,"./config":266,"./event_listeners":288,"./http":289,"./json/builder":291,"./json/parser":292,"./model/api":293,"./model/operation":295,"./model/paginator":296,"./model/resource_waiter":297,"./model/shape":298,"./param_validator":299,"./protocol/json":301,"./protocol/query":302,"./protocol/rest":303,"./protocol/rest_json":304,"./protocol/rest_xml":305,"./request":311,"./resource_waiter":312,"./response":313,"./sequential_executor":315,"./service":316,"./signers/request_signer":332,"./util":340,"./xml/builder":342}],268:[function(require,module,exports){
 var AWS = require('./core');
 
 /**
@@ -141552,7 +144519,7 @@ AWS.Credentials.deletePromisesFromClass = function deletePromisesFromClass() {
 
 AWS.util.addPromises(AWS.Credentials);
 
-},{"./core":264}],266:[function(require,module,exports){
+},{"./core":267}],269:[function(require,module,exports){
 var AWS = require('../core');
 var CognitoIdentity = require('../../clients/cognitoidentity');
 var STS = require('../../clients/sts');
@@ -141931,7 +144898,7 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   })()
 });
 
-},{"../../clients/cognitoidentity":199,"../../clients/sts":250,"../core":264}],267:[function(require,module,exports){
+},{"../../clients/cognitoidentity":202,"../../clients/sts":253,"../core":267}],270:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -142106,7 +145073,7 @@ AWS.CredentialProviderChain.deletePromisesFromClass = function deletePromisesFro
 
 AWS.util.addPromises(AWS.CredentialProviderChain);
 
-},{"../core":264}],268:[function(require,module,exports){
+},{"../core":267}],271:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -142197,7 +145164,7 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":250,"../core":264}],269:[function(require,module,exports){
+},{"../../clients/sts":253,"../core":267}],272:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -142319,7 +145286,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":250,"../core":264}],270:[function(require,module,exports){
+},{"../../clients/sts":253,"../core":267}],273:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -142431,7 +145398,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":250,"../core":264}],271:[function(require,module,exports){
+},{"../../clients/sts":253,"../core":267}],274:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var util = require('./util');
@@ -142790,7 +145757,7 @@ module.exports = {
   invalidateCachedEndpoint: invalidateCachedEndpoints,
 }
 }).call(this,require('_process'))
-},{"./core":264,"./util":337,"_process":352}],272:[function(require,module,exports){
+},{"./core":267,"./util":340,"_process":355}],275:[function(require,module,exports){
 var AWS = require('../core');
 var util = AWS.util;
 var typeOf = require('./types').typeOf;
@@ -143086,7 +146053,7 @@ function filterEmptySetValues(set) {
  */
 module.exports = AWS.DynamoDB.Converter;
 
-},{"../core":264,"./numberValue":274,"./set":275,"./types":277}],273:[function(require,module,exports){
+},{"../core":267,"./numberValue":277,"./set":278,"./types":280}],276:[function(require,module,exports){
 var AWS = require('../core');
 var Translator = require('./translator');
 var DynamoDBSet = require('./set');
@@ -143614,7 +146581,7 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
  */
 module.exports = AWS.DynamoDB.DocumentClient;
 
-},{"../core":264,"./set":275,"./translator":276}],274:[function(require,module,exports){
+},{"../core":267,"./set":278,"./translator":279}],277:[function(require,module,exports){
 var util = require('../core').util;
 
 /**
@@ -143658,7 +146625,7 @@ var DynamoDBNumberValue = util.inherit({
  * @api private
  */
 module.exports = DynamoDBNumberValue;
-},{"../core":264}],275:[function(require,module,exports){
+},{"../core":267}],278:[function(require,module,exports){
 var util = require('../core').util;
 var typeOf = require('./types').typeOf;
 
@@ -143723,7 +146690,7 @@ var DynamoDBSet = util.inherit({
  */
 module.exports = DynamoDBSet;
 
-},{"../core":264,"./types":277}],276:[function(require,module,exports){
+},{"../core":267,"./types":280}],279:[function(require,module,exports){
 var util = require('../core').util;
 var convert = require('./converter');
 
@@ -143812,7 +146779,7 @@ Translator.prototype.translateScalar = function(value, shape) {
  */
 module.exports = Translator;
 
-},{"../core":264,"./converter":272}],277:[function(require,module,exports){
+},{"../core":267,"./converter":275}],280:[function(require,module,exports){
 var util = require('../core').util;
 
 function typeOf(data) {
@@ -143863,7 +146830,7 @@ module.exports = {
   isBinary: isBinary
 };
 
-},{"../core":264}],278:[function(require,module,exports){
+},{"../core":267}],281:[function(require,module,exports){
 var eventMessageChunker = require('../event-stream/event-message-chunker').eventMessageChunker;
 var parseEvent = require('./parse-event').parseEvent;
 
@@ -143885,7 +146852,7 @@ function createEventStream(body, parser, model) {
 module.exports = {
     createEventStream: createEventStream
 };
-},{"../event-stream/event-message-chunker":279,"./parse-event":281}],279:[function(require,module,exports){
+},{"../event-stream/event-message-chunker":282,"./parse-event":284}],282:[function(require,module,exports){
 /**
  * Takes in a buffer of event messages and splits them into individual messages.
  * @param {Buffer} buffer
@@ -143916,7 +146883,7 @@ function eventMessageChunker(buffer) {
 module.exports = {
     eventMessageChunker: eventMessageChunker
 };
-},{}],280:[function(require,module,exports){
+},{}],283:[function(require,module,exports){
 var util = require('../core').util;
 var toBuffer = require('./to-buffer').toBuffer;
 
@@ -144010,7 +146977,7 @@ function negate(bytes) {
 module.exports = {
     Int64: Int64
 };
-},{"../core":264,"./to-buffer":284}],281:[function(require,module,exports){
+},{"../core":267,"./to-buffer":287}],284:[function(require,module,exports){
 var parseMessage = require('./parse-message').parseMessage;
 
 /**
@@ -144084,7 +147051,7 @@ function parseError(message) {
 module.exports = {
     parseEvent: parseEvent
 };
-},{"./parse-message":282}],282:[function(require,module,exports){
+},{"./parse-message":285}],285:[function(require,module,exports){
 var Int64 = require('./int64').Int64;
 
 var splitMessage = require('./split-message').splitMessage;
@@ -144213,7 +147180,7 @@ function parseMessage(message) {
 module.exports = {
     parseMessage: parseMessage
 };
-},{"./int64":280,"./split-message":283}],283:[function(require,module,exports){
+},{"./int64":283,"./split-message":286}],286:[function(require,module,exports){
 var util = require('../core').util;
 var toBuffer = require('./to-buffer').toBuffer;
 
@@ -144284,7 +147251,7 @@ function splitMessage(message) {
 module.exports = {
     splitMessage: splitMessage
 };
-},{"../core":264,"./to-buffer":284}],284:[function(require,module,exports){
+},{"../core":267,"./to-buffer":287}],287:[function(require,module,exports){
 var Buffer = require('../core').util.Buffer;
 /**
  * Converts data into Buffer.
@@ -144303,7 +147270,7 @@ function toBuffer(data, encoding) {
 module.exports = {
     toBuffer: toBuffer
 };
-},{"../core":264}],285:[function(require,module,exports){
+},{"../core":267}],288:[function(require,module,exports){
 var AWS = require('./core');
 var SequentialExecutor = require('./sequential_executor');
 var DISCOVER_ENDPOINT = require('./discover_endpoint').discoverEndpoint;
@@ -144912,7 +147879,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":264,"./discover_endpoint":271,"./protocol/json":298,"./protocol/query":299,"./protocol/rest":300,"./protocol/rest_json":301,"./protocol/rest_xml":302,"./sequential_executor":312,"util":363}],286:[function(require,module,exports){
+},{"./core":267,"./discover_endpoint":274,"./protocol/json":301,"./protocol/query":302,"./protocol/rest":303,"./protocol/rest_json":304,"./protocol/rest_xml":305,"./sequential_executor":315,"util":366}],289:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -145149,7 +148116,7 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":264}],287:[function(require,module,exports){
+},{"./core":267}],290:[function(require,module,exports){
 var AWS = require('../core');
 var EventEmitter = require('events').EventEmitter;
 require('../http');
@@ -145287,7 +148254,7 @@ AWS.HttpClient.prototype = AWS.XHRClient.prototype;
  */
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":264,"../http":286,"events":347}],288:[function(require,module,exports){
+},{"../core":267,"../http":289,"events":350}],291:[function(require,module,exports){
 var util = require('../util');
 
 function JsonBuilder() { }
@@ -145348,7 +148315,7 @@ function translateScalar(value, shape) {
  */
 module.exports = JsonBuilder;
 
-},{"../util":337}],289:[function(require,module,exports){
+},{"../util":340}],292:[function(require,module,exports){
 var util = require('../util');
 
 function JsonParser() { }
@@ -145417,7 +148384,7 @@ function translateScalar(value, shape) {
  */
 module.exports = JsonParser;
 
-},{"../util":337}],290:[function(require,module,exports){
+},{"../util":340}],293:[function(require,module,exports){
 var Collection = require('./collection');
 var Operation = require('./operation');
 var Shape = require('./shape');
@@ -145493,7 +148460,7 @@ function Api(api, options) {
  */
 module.exports = Api;
 
-},{"../util":337,"./collection":291,"./operation":292,"./paginator":293,"./resource_waiter":294,"./shape":295}],291:[function(require,module,exports){
+},{"../util":340,"./collection":294,"./operation":295,"./paginator":296,"./resource_waiter":297,"./shape":298}],294:[function(require,module,exports){
 var memoizedProperty = require('../util').memoizedProperty;
 
 function memoize(name, value, factory, nameTr) {
@@ -145519,7 +148486,7 @@ function Collection(iterable, options, factory, nameTr, callback) {
  */
 module.exports = Collection;
 
-},{"../util":337}],292:[function(require,module,exports){
+},{"../util":340}],295:[function(require,module,exports){
 var Shape = require('./shape');
 
 var util = require('../util');
@@ -145633,7 +148600,7 @@ function hasEventStream(topLevelShape) {
  */
 module.exports = Operation;
 
-},{"../util":337,"./shape":295}],293:[function(require,module,exports){
+},{"../util":340,"./shape":298}],296:[function(require,module,exports){
 var property = require('../util').property;
 
 function Paginator(name, paginator) {
@@ -145649,7 +148616,7 @@ function Paginator(name, paginator) {
  */
 module.exports = Paginator;
 
-},{"../util":337}],294:[function(require,module,exports){
+},{"../util":340}],297:[function(require,module,exports){
 var util = require('../util');
 var property = util.property;
 
@@ -145684,7 +148651,7 @@ function ResourceWaiter(name, waiter, options) {
  */
 module.exports = ResourceWaiter;
 
-},{"../util":337}],295:[function(require,module,exports){
+},{"../util":340}],298:[function(require,module,exports){
 var Collection = require('./collection');
 
 var util = require('../util');
@@ -146075,7 +149042,7 @@ Shape.shapes = {
  */
 module.exports = Shape;
 
-},{"../util":337,"./collection":291}],296:[function(require,module,exports){
+},{"../util":340,"./collection":294}],299:[function(require,module,exports){
 var AWS = require('./core');
 
 /**
@@ -146347,7 +149314,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":264}],297:[function(require,module,exports){
+},{"./core":267}],300:[function(require,module,exports){
 var AWS = require('../core');
 var rest = AWS.Protocol.Rest;
 
@@ -146464,7 +149431,7 @@ AWS.Polly.Presigner = AWS.util.inherit({
     }
 });
 
-},{"../core":264}],298:[function(require,module,exports){
+},{"../core":267}],301:[function(require,module,exports){
 var util = require('../util');
 var JsonBuilder = require('../json/builder');
 var JsonParser = require('../json/parser');
@@ -146536,7 +149503,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":288,"../json/parser":289,"../util":337}],299:[function(require,module,exports){
+},{"../json/builder":291,"../json/parser":292,"../util":340}],302:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var QueryParamSerializer = require('../query/query_param_serializer');
@@ -146645,7 +149612,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":264,"../model/shape":295,"../query/query_param_serializer":303,"../util":337}],300:[function(require,module,exports){
+},{"../core":267,"../model/shape":298,"../query/query_param_serializer":306,"../util":340}],303:[function(require,module,exports){
 var util = require('../util');
 
 function populateMethod(req) {
@@ -146793,7 +149760,7 @@ module.exports = {
   generateURI: generateURI
 };
 
-},{"../util":337}],301:[function(require,module,exports){
+},{"../util":340}],304:[function(require,module,exports){
 var util = require('../util');
 var Rest = require('./rest');
 var Json = require('./json');
@@ -146891,7 +149858,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":288,"../json/parser":289,"../util":337,"./json":298,"./rest":300}],302:[function(require,module,exports){
+},{"../json/builder":291,"../json/parser":292,"../util":340,"./json":301,"./rest":303}],305:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var Rest = require('./rest');
@@ -147001,7 +149968,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":264,"../util":337,"./rest":300}],303:[function(require,module,exports){
+},{"../core":267,"../util":340,"./rest":303}],306:[function(require,module,exports){
 var util = require('../util');
 
 function QueryParamSerializer() {
@@ -147087,7 +150054,7 @@ function serializeMember(name, value, rules, fn) {
  */
 module.exports = QueryParamSerializer;
 
-},{"../util":337}],304:[function(require,module,exports){
+},{"../util":340}],307:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -147305,7 +150272,7 @@ AWS.RDS.Signer = AWS.util.inherit({
         return true;
     }
 });
-},{"../core":264}],305:[function(require,module,exports){
+},{"../core":267}],308:[function(require,module,exports){
 module.exports = {
   //provide realtime clock for performance measurement
   now: function now() {
@@ -147316,7 +150283,7 @@ module.exports = {
   }
 }
 
-},{}],306:[function(require,module,exports){
+},{}],309:[function(require,module,exports){
 var util = require('./util');
 var regionConfig = require('./region_config_data.json');
 
@@ -147390,7 +150357,7 @@ function configureEndpoint(service) {
  */
 module.exports = configureEndpoint;
 
-},{"./region_config_data.json":307,"./util":337}],307:[function(require,module,exports){
+},{"./region_config_data.json":310,"./util":340}],310:[function(require,module,exports){
 module.exports={
   "rules": {
     "*/*": {
@@ -147455,7 +150422,7 @@ module.exports={
   }
 }
 
-},{}],308:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var AcceptorStateMachine = require('./state_machine');
@@ -148265,7 +151232,7 @@ AWS.util.addPromises(AWS.Request);
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,require('_process'))
-},{"./core":264,"./state_machine":336,"_process":352,"jmespath":351}],309:[function(require,module,exports){
+},{"./core":267,"./state_machine":339,"_process":355,"jmespath":354}],312:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -148471,7 +151438,7 @@ AWS.ResourceWaiter = inherit({
   }
 });
 
-},{"./core":264,"jmespath":351}],310:[function(require,module,exports){
+},{"./core":267,"jmespath":354}],313:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 var jmespath = require('jmespath');
@@ -148674,7 +151641,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":264,"jmespath":351}],311:[function(require,module,exports){
+},{"./core":267,"jmespath":354}],314:[function(require,module,exports){
 var AWS = require('../core');
 var byteLength = AWS.util.string.byteLength;
 var Buffer = AWS.util.Buffer;
@@ -149390,7 +152357,7 @@ AWS.util.addPromises(AWS.S3.ManagedUpload);
  */
 module.exports = AWS.S3.ManagedUpload;
 
-},{"../core":264}],312:[function(require,module,exports){
+},{"../core":267}],315:[function(require,module,exports){
 var AWS = require('./core');
 
 /**
@@ -149626,7 +152593,7 @@ AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.
  * @api private
  */
 module.exports = AWS.SequentialExecutor;
-},{"./core":264}],313:[function(require,module,exports){
+},{"./core":267}],316:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var Api = require('./model/api');
@@ -150423,7 +153390,7 @@ AWS.util.mixin(AWS.Service, AWS.SequentialExecutor);
 module.exports = AWS.Service;
 
 }).call(this,require('_process'))
-},{"./core":264,"./model/api":290,"./region_config":306,"_process":352}],314:[function(require,module,exports){
+},{"./core":267,"./model/api":293,"./region_config":309,"_process":355}],317:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.APIGateway.prototype, {
@@ -150454,7 +153421,7 @@ AWS.util.update(AWS.APIGateway.prototype, {
 });
 
 
-},{"../core":264}],315:[function(require,module,exports){
+},{"../core":267}],318:[function(require,module,exports){
 var AWS = require('../core');
 
 // pull in CloudFront signer
@@ -150468,7 +153435,7 @@ AWS.util.update(AWS.CloudFront.prototype, {
 
 });
 
-},{"../cloudfront/signer":262,"../core":264}],316:[function(require,module,exports){
+},{"../cloudfront/signer":265,"../core":267}],319:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.CognitoIdentity.prototype, {
@@ -150485,7 +153452,7 @@ AWS.util.update(AWS.CognitoIdentity.prototype, {
   }
 });
 
-},{"../core":264}],317:[function(require,module,exports){
+},{"../core":267}],320:[function(require,module,exports){
 var AWS = require('../core');
 require('../dynamodb/document_client');
 
@@ -150545,7 +153512,7 @@ AWS.util.update(AWS.DynamoDB.prototype, {
   }
 });
 
-},{"../core":264,"../dynamodb/document_client":273}],318:[function(require,module,exports){
+},{"../core":267,"../dynamodb/document_client":276}],321:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.EC2.prototype, {
@@ -150609,7 +153576,7 @@ AWS.util.update(AWS.EC2.prototype, {
   }
 });
 
-},{"../core":264}],319:[function(require,module,exports){
+},{"../core":267}],322:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -150711,7 +153678,7 @@ AWS.util.update(AWS.IotData.prototype, {
 
 });
 
-},{"../core":264}],320:[function(require,module,exports){
+},{"../core":267}],323:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.Lambda.prototype, {
@@ -150726,7 +153693,7 @@ AWS.util.update(AWS.Lambda.prototype, {
 });
 
 
-},{"../core":264}],321:[function(require,module,exports){
+},{"../core":267}],324:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.MachineLearning.prototype, {
@@ -150752,9 +153719,9 @@ AWS.util.update(AWS.MachineLearning.prototype, {
 
 });
 
-},{"../core":264}],322:[function(require,module,exports){
+},{"../core":267}],325:[function(require,module,exports){
 require('../polly/presigner');
-},{"../polly/presigner":297}],323:[function(require,module,exports){
+},{"../polly/presigner":300}],326:[function(require,module,exports){
 var AWS = require('../core');
 require('../rds/signer');
  /**
@@ -150816,7 +153783,7 @@ require('../rds/signer');
      });
    }
  });
-},{"../core":264,"../rds/signer":304}],324:[function(require,module,exports){
+},{"../core":267,"../rds/signer":307}],327:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.Route53.prototype, {
@@ -150850,7 +153817,7 @@ AWS.util.update(AWS.Route53.prototype, {
   }
 });
 
-},{"../core":264}],325:[function(require,module,exports){
+},{"../core":267}],328:[function(require,module,exports){
 var AWS = require('../core');
 var v4Credentials = require('../signers/v4_credentials');
 
@@ -151925,7 +154892,7 @@ AWS.util.update(AWS.S3.prototype, {
   }
 });
 
-},{"../core":264,"../s3/managed_upload":311,"../signers/v4_credentials":335}],326:[function(require,module,exports){
+},{"../core":267,"../s3/managed_upload":314,"../signers/v4_credentials":338}],329:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.SQS.prototype, {
@@ -152058,7 +155025,7 @@ AWS.util.update(AWS.SQS.prototype, {
   }
 });
 
-},{"../core":264}],327:[function(require,module,exports){
+},{"../core":267}],330:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.STS.prototype, {
@@ -152107,7 +155074,7 @@ AWS.util.update(AWS.STS.prototype, {
   }
 });
 
-},{"../core":264}],328:[function(require,module,exports){
+},{"../core":267}],331:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -152228,7 +155195,7 @@ AWS.Signers.Presign = inherit({
  */
 module.exports = AWS.Signers.Presign;
 
-},{"../core":264}],329:[function(require,module,exports){
+},{"../core":267}],332:[function(require,module,exports){
 var AWS = require('../core');
 
 var inherit = AWS.util.inherit;
@@ -152269,7 +155236,7 @@ require('./v4');
 require('./s3');
 require('./presign');
 
-},{"../core":264,"./presign":328,"./s3":330,"./v2":331,"./v3":332,"./v3https":333,"./v4":334}],330:[function(require,module,exports){
+},{"../core":267,"./presign":331,"./s3":333,"./v2":334,"./v3":335,"./v3https":336,"./v4":337}],333:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -152446,7 +155413,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.S3;
 
-},{"../core":264}],331:[function(require,module,exports){
+},{"../core":267}],334:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -152496,7 +155463,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.V2;
 
-},{"../core":264}],332:[function(require,module,exports){
+},{"../core":267}],335:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -152575,7 +155542,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.V3;
 
-},{"../core":264}],333:[function(require,module,exports){
+},{"../core":267}],336:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -152602,7 +155569,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
  */
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":264,"./v3":332}],334:[function(require,module,exports){
+},{"../core":267,"./v3":335}],337:[function(require,module,exports){
 var AWS = require('../core');
 var v4Credentials = require('./v4_credentials');
 var inherit = AWS.util.inherit;
@@ -152819,7 +155786,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.V4;
 
-},{"../core":264,"./v4_credentials":335}],335:[function(require,module,exports){
+},{"../core":267,"./v4_credentials":338}],338:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -152921,7 +155888,7 @@ module.exports = {
   }
 };
 
-},{"../core":264}],336:[function(require,module,exports){
+},{"../core":267}],339:[function(require,module,exports){
 function AcceptorStateMachine(states, state) {
   this.currentState = state || null;
   this.states = states || {};
@@ -152968,7 +155935,7 @@ AcceptorStateMachine.prototype.addState = function addState(name, acceptState, f
  */
 module.exports = AcceptorStateMachine;
 
-},{}],337:[function(require,module,exports){
+},{}],340:[function(require,module,exports){
 (function (process,setImmediate){
 /* eslint guard-for-in:0 */
 var AWS;
@@ -153912,7 +156879,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require('_process'),require("timers").setImmediate)
-},{"../apis/metadata.json":120,"./core":264,"_process":352,"fs":345,"timers":360,"uuid":364}],338:[function(require,module,exports){
+},{"../apis/metadata.json":123,"./core":267,"_process":355,"fs":348,"timers":363,"uuid":367}],341:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -154112,7 +157079,7 @@ function parseUnknown(xml) {
  */
 module.exports = DomXmlParser;
 
-},{"../model/shape":295,"../util":337}],339:[function(require,module,exports){
+},{"../model/shape":298,"../util":340}],342:[function(require,module,exports){
 var util = require('../util');
 var XmlNode = require('./xml-node').XmlNode;
 var XmlText = require('./xml-text').XmlText;
@@ -154216,7 +157183,7 @@ function applyNamespaces(xml, shape, isRoot) {
  */
 module.exports = XmlBuilder;
 
-},{"../util":337,"./xml-node":342,"./xml-text":343}],340:[function(require,module,exports){
+},{"../util":340,"./xml-node":345,"./xml-text":346}],343:[function(require,module,exports){
 /**
  * Escapes characters that can not be in an XML attribute.
  */
@@ -154230,7 +157197,7 @@ function escapeAttribute(value) {
 module.exports = {
     escapeAttribute: escapeAttribute
 };
-},{}],341:[function(require,module,exports){
+},{}],344:[function(require,module,exports){
 /**
  * Escapes characters that can not be in an XML element.
  */
@@ -154244,7 +157211,7 @@ function escapeElement(value) {
 module.exports = {
     escapeElement: escapeElement
 };
-},{}],342:[function(require,module,exports){
+},{}],345:[function(require,module,exports){
 var escapeAttribute = require('./escape-attribute').escapeAttribute;
 
 /**
@@ -154290,7 +157257,7 @@ XmlNode.prototype.toString = function () {
 module.exports = {
     XmlNode: XmlNode
 };
-},{"./escape-attribute":340}],343:[function(require,module,exports){
+},{"./escape-attribute":343}],346:[function(require,module,exports){
 var escapeElement = require('./escape-element').escapeElement;
 
 /**
@@ -154311,7 +157278,7 @@ XmlText.prototype.toString = function () {
 module.exports = {
     XmlText: XmlText
 };
-},{"./escape-element":341}],344:[function(require,module,exports){
+},{"./escape-element":344}],347:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -154464,9 +157431,9 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],345:[function(require,module,exports){
+},{}],348:[function(require,module,exports){
 
-},{}],346:[function(require,module,exports){
+},{}],349:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -156259,7 +159226,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":344,"ieee754":348,"isarray":350}],347:[function(require,module,exports){
+},{"base64-js":347,"ieee754":351,"isarray":353}],350:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -156563,7 +159530,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],348:[function(require,module,exports){
+},{}],351:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -156649,7 +159616,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],349:[function(require,module,exports){
+},{}],352:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -156674,14 +159641,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],350:[function(require,module,exports){
+},{}],353:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],351:[function(require,module,exports){
+},{}],354:[function(require,module,exports){
 (function(exports) {
   "use strict";
 
@@ -158350,7 +161317,7 @@ module.exports = Array.isArray || function (arr) {
   exports.strictDeepEqual = strictDeepEqual;
 })(typeof exports === "undefined" ? this.jmespath = {} : exports);
 
-},{}],352:[function(require,module,exports){
+},{}],355:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -158536,7 +161503,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],353:[function(require,module,exports){
+},{}],356:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 ;(function(root) {
@@ -159070,7 +162037,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],354:[function(require,module,exports){
+},{}],357:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -159156,7 +162123,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],355:[function(require,module,exports){
+},{}],358:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -159243,13 +162210,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],356:[function(require,module,exports){
+},{}],359:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":354,"./encode":355}],357:[function(require,module,exports){
+},{"./decode":357,"./encode":358}],360:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -159331,7 +162298,7 @@ module.exports = function(qs, sep, eq, options) {
   return obj;
 };
 
-},{}],358:[function(require,module,exports){
+},{}],361:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -159397,9 +162364,9 @@ module.exports = function(obj, sep, eq, name) {
          encodeURIComponent(stringifyPrimitive(obj));
 };
 
-},{}],359:[function(require,module,exports){
-arguments[4][356][0].apply(exports,arguments)
-},{"./decode":357,"./encode":358,"dup":356}],360:[function(require,module,exports){
+},{}],362:[function(require,module,exports){
+arguments[4][359][0].apply(exports,arguments)
+},{"./decode":360,"./encode":361,"dup":359}],363:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -159478,7 +162445,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":352,"timers":360}],361:[function(require,module,exports){
+},{"process/browser.js":355,"timers":363}],364:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -160187,14 +163154,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":353,"querystring":356}],362:[function(require,module,exports){
+},{"punycode":356,"querystring":359}],365:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],363:[function(require,module,exports){
+},{}],366:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -160784,7 +163751,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":362,"_process":352,"inherits":349}],364:[function(require,module,exports){
+},{"./support/isBuffer":365,"_process":355,"inherits":352}],367:[function(require,module,exports){
 var v1 = require('./v1');
 var v4 = require('./v4');
 
@@ -160794,7 +163761,7 @@ uuid.v4 = v4;
 
 module.exports = uuid;
 
-},{"./v1":367,"./v4":368}],365:[function(require,module,exports){
+},{"./v1":370,"./v4":371}],368:[function(require,module,exports){
 /**
  * Convert array of 16 byte values to UUID string format of the form:
  * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
@@ -160819,7 +163786,7 @@ function bytesToUuid(buf, offset) {
 
 module.exports = bytesToUuid;
 
-},{}],366:[function(require,module,exports){
+},{}],369:[function(require,module,exports){
 (function (global){
 // Unique ID creation requires a high quality random # generator.  In the
 // browser this is a little complicated due to unknown quality of Math.random()
@@ -160856,7 +163823,7 @@ if (!rng) {
 module.exports = rng;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],367:[function(require,module,exports){
+},{}],370:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -160958,7 +163925,7 @@ function v1(options, buf, offset) {
 
 module.exports = v1;
 
-},{"./lib/bytesToUuid":365,"./lib/rng":366}],368:[function(require,module,exports){
+},{"./lib/bytesToUuid":368,"./lib/rng":369}],371:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -160989,7 +163956,7 @@ function v4(options, buf, offset) {
 
 module.exports = v4;
 
-},{"./lib/bytesToUuid":365,"./lib/rng":366}],369:[function(require,module,exports){
+},{"./lib/bytesToUuid":368,"./lib/rng":369}],372:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var LRU_1 = require("./utils/LRU");
@@ -161059,7 +164026,7 @@ var EndpointCache = /** @class */ (function () {
     return EndpointCache;
 }());
 exports.EndpointCache = EndpointCache;
-},{"./utils/LRU":370}],370:[function(require,module,exports){
+},{"./utils/LRU":373}],373:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var LinkedListNode = /** @class */ (function () {
@@ -161167,8 +164134,8 @@ var LRUCache = /** @class */ (function () {
     return LRUCache;
 }());
 exports.LRUCache = LRUCache;
-},{}],371:[function(require,module,exports){
-// AWS SDK for JavaScript v2.359.0
+},{}],374:[function(require,module,exports){
+// AWS SDK for JavaScript v2.360.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
@@ -161190,5 +164157,5 @@ if (typeof self !== 'undefined') self.AWS = AWS;
  * browser builder will strip out this line if services are supplied on the command line.
  */
 require('../clients/browser_default');
-},{"../clients/browser_default":187,"./browser_loader":261,"./core":264}]},{},[371]);
+},{"../clients/browser_default":190,"./browser_loader":264,"./core":267}]},{},[374]);
 

@@ -4502,6 +4502,11 @@
           "locationName": "programDateTimePeriod",
           "documentation": "Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds."
         },
+        "RedundantManifest": {
+          "shape": "HlsRedundantManifest",
+          "locationName": "redundantManifest",
+          "documentation": "When set to \"enabled\", includes the media playlists from both pipelines in the master manifest (.m3u8) file."
+        },
         "SegmentLength": {
           "shape": "__integerMin1",
           "locationName": "segmentLength",
@@ -4691,6 +4696,14 @@
         "INCLUDE"
       ],
       "documentation": "Placeholder documentation for HlsProgramDateTime"
+    },
+    "HlsRedundantManifest": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "documentation": "HLS Redundant Manifest"
     },
     "HlsSegmentationMode": {
       "type": "string",
@@ -4973,6 +4986,14 @@
         "PAUSE_OUTPUT"
       ],
       "documentation": "Placeholder documentation for InputLossActionForMsSmoothOut"
+    },
+    "InputLossActionForRtmpOut": {
+      "type": "string",
+      "enum": [
+        "EMIT_OUTPUT",
+        "PAUSE_OUTPUT"
+      ],
+      "documentation": "Input Loss Action"
     },
     "InputLossActionForUdpOut": {
       "type": "string",
@@ -6757,6 +6778,11 @@
           "shape": "RtmpCaptionData",
           "locationName": "captionData",
           "documentation": "Controls the types of data that passes to onCaptionInfo outputs.  If set to 'all' then 608 and 708 carried DTVCC data will be passed.  If set to 'field1AndField2608' then DTVCC data will be stripped out, but 608 data from both fields will be passed. If set to 'field1608' then only the data carried in 608 from field 1 video will be passed."
+        },
+        "InputLossAction": {
+          "shape": "InputLossActionForRtmpOut",
+          "locationName": "inputLossAction",
+          "documentation": "Controls the behavior of this RTMP group if input becomes unavailable.\n\n- emitOutput: Emit a slate until input returns.\n- pauseOutput: Stop transmitting data until input returns. This does not close the underlying RTMP connection."
         },
         "RestartDelay": {
           "shape": "__integerMin0",

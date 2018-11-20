@@ -150,3 +150,5 @@ export import PinpointEmail = require('./pinpointemail');
 export import RAM = require('./ram');
 export import Route53Resolver = require('./route53resolver');
 export import PinpointSMSVoice = require('./pinpointsmsvoice');
+export import QuickSight = require('./quicksight');
+export import RDSDataService = require('./rdsdataservice');

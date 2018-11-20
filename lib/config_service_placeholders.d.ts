@@ -152,6 +152,8 @@ export abstract class ConfigurationServicePlaceholders {
   ram?: AWS.RAM.Types.ClientConfiguration;
   route53resolver?: AWS.Route53Resolver.Types.ClientConfiguration;
   pinpointsmsvoice?: AWS.PinpointSMSVoice.Types.ClientConfiguration;
+  quicksight?: AWS.QuickSight.Types.ClientConfiguration;
+  rdsdataservice?: AWS.RDSDataService.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -306,4 +308,6 @@ export interface ConfigurationServiceApiVersions {
   ram?: AWS.RAM.Types.apiVersion;
   route53resolver?: AWS.Route53Resolver.Types.apiVersion;
   pinpointsmsvoice?: AWS.PinpointSMSVoice.Types.apiVersion;
+  quicksight?: AWS.QuickSight.Types.apiVersion;
+  rdsdataservice?: AWS.RDSDataService.Types.apiVersion;
 }

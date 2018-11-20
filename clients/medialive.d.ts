@@ -1967,6 +1967,10 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
      */
     ProgramDateTimePeriod?: __integerMin0Max3600;
     /**
+     * When set to "enabled", includes the media playlists from both pipelines in the master manifest (.m3u8) file.
+     */
+    RedundantManifest?: HlsRedundantManifest;
+    /**
      * Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.
      */
     SegmentLength?: __integerMin1;
@@ -2061,6 +2065,7 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     SegmentModifier?: __string;
   }
   export type HlsProgramDateTime = "EXCLUDE"|"INCLUDE"|string;
+  export type HlsRedundantManifest = "DISABLED"|"ENABLED"|string;
   export type HlsSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string;
   export interface HlsSettings {
     AudioOnlyHlsSettings?: AudioOnlyHlsSettings;
@@ -2194,6 +2199,7 @@ to.
   }
   export type InputLossActionForHlsOut = "EMIT_OUTPUT"|"PAUSE_OUTPUT"|string;
   export type InputLossActionForMsSmoothOut = "EMIT_OUTPUT"|"PAUSE_OUTPUT"|string;
+  export type InputLossActionForRtmpOut = "EMIT_OUTPUT"|"PAUSE_OUTPUT"|string;
   export type InputLossActionForUdpOut = "DROP_PROGRAM"|"DROP_TS"|"EMIT_PROGRAM"|string;
   export interface InputLossBehavior {
     /**
@@ -3171,6 +3177,13 @@ Valid values: 1, 2, 4, 6, 8
      * Controls the types of data that passes to onCaptionInfo outputs.  If set to 'all' then 608 and 708 carried DTVCC data will be passed.  If set to 'field1AndField2608' then DTVCC data will be stripped out, but 608 data from both fields will be passed. If set to 'field1608' then only the data carried in 608 from field 1 video will be passed.
      */
     CaptionData?: RtmpCaptionData;
+    /**
+     * Controls the behavior of this RTMP group if input becomes unavailable.
+
+- emitOutput: Emit a slate until input returns.
+- pauseOutput: Stop transmitting data until input returns. This does not close the underlying RTMP connection.
+     */
+    InputLossAction?: InputLossActionForRtmpOut;
     /**
      * If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
      */

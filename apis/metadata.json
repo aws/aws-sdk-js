@@ -54,7 +54,8 @@
       "2016-09-29*",
       "2016-11-25*",
       "2017-03-25*",
-      "2017-10-30*"
+      "2017-10-30*",
+      "2018-06-18*"
     ],
     "cors": true
   },
@@ -617,5 +618,12 @@
   "pinpointsmsvoice": {
     "prefix": "sms-voice",
     "name": "PinpointSMSVoice"
+  },
+  "quicksight": {
+    "name": "QuickSight"
+  },
+  "rdsdataservice": {
+    "prefix": "rds-data",
+    "name": "RDSDataService"
   }
 }

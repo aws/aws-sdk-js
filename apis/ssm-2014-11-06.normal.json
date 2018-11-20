@@ -2834,6 +2834,9 @@
           "shape": "DuplicateDocumentContent"
         },
         {
+          "shape": "DuplicateDocumentVersionName"
+        },
+        {
           "shape": "InvalidDocumentContent"
         },
         {
@@ -2844,6 +2847,9 @@
         },
         {
           "shape": "InvalidDocument"
+        },
+        {
+          "shape": "InvalidDocumentOperation"
         }
       ],
       "documentation": "<p>The document you want to update.</p>"
@@ -3644,6 +3650,111 @@
       "member": {
         "shape": "AssociationVersionInfo"
       },
+      "min": 1
+    },
+    "AttachmentContent": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "AttachmentName",
+          "documentation": "<p>The name of an attachment.</p>"
+        },
+        "Size": {
+          "shape": "ContentLength",
+          "documentation": "<p>The size of an attachment in bytes.</p>"
+        },
+        "Hash": {
+          "shape": "AttachmentHash",
+          "documentation": "<p>The cryptographic hash value of the document content.</p>"
+        },
+        "HashType": {
+          "shape": "AttachmentHashType",
+          "documentation": "<p>The hash algorithm used to calculate the hash value.</p>"
+        },
+        "Url": {
+          "shape": "AttachmentUrl",
+          "documentation": "<p>The URL location of the attachment content.</p>"
+        }
+      },
+      "documentation": "<p>A structure that includes attributes that describe a document attachment.</p>"
+    },
+    "AttachmentContentList": {
+      "type": "list",
+      "member": {
+        "shape": "AttachmentContent"
+      }
+    },
+    "AttachmentHash": {
+      "type": "string",
+      "max": 256
+    },
+    "AttachmentHashType": {
+      "type": "string",
+      "enum": [
+        "Sha256"
+      ]
+    },
+    "AttachmentInformation": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "AttachmentName"
+        }
+      },
+      "documentation": "<p>An attribute of an attachment, such as the attachment name or size.</p>"
+    },
+    "AttachmentInformationList": {
+      "type": "list",
+      "member": {
+        "shape": "AttachmentInformation"
+      }
+    },
+    "AttachmentName": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$"
+    },
+    "AttachmentUrl": {
+      "type": "string"
+    },
+    "AttachmentsSource": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "AttachmentsSourceKey",
+          "documentation": "<p>The key of a key and value pair that identifies the location of an attachment to a document.</p>"
+        },
+        "Values": {
+          "shape": "AttachmentsSourceValues",
+          "documentation": "<p>The URL of the location of a document attachment, such as the URL of an Amazon S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>A key and value pair that identifies the location of an attachment to a document.</p>"
+    },
+    "AttachmentsSourceKey": {
+      "type": "string",
+      "enum": [
+        "SourceUrl"
+      ]
+    },
+    "AttachmentsSourceList": {
+      "type": "list",
+      "member": {
+        "shape": "AttachmentsSource"
+      },
+      "max": 1,
+      "min": 0
+    },
+    "AttachmentsSourceValue": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "AttachmentsSourceValues": {
+      "type": "list",
+      "member": {
+        "shape": "AttachmentsSourceValue"
+      },
+      "max": 1,
       "min": 1
     },
     "AttributeName": {
@@ -4696,6 +4807,9 @@
         "NotConnected"
       ]
     },
+    "ContentLength": {
+      "type": "long"
+    },
     "CreateActivationRequest": {
       "type": "structure",
       "required": [
@@ -4895,13 +5009,21 @@
           "shape": "DocumentContent",
           "documentation": "<p>A valid JSON or YAML string.</p>"
         },
+        "Attachments": {
+          "shape": "AttachmentsSourceList",
+          "documentation": "<p>A list of key and value pairs that describe attachments to a version of a document.</p>"
+        },
         "Name": {
           "shape": "DocumentName",
           "documentation": "<p>A name for the Systems Manager document.</p> <important> <p>Do not use the following to begin the names of documents you create. They are reserved by AWS for use as document prefixes:</p> <ul> <li> <p> <code>aws</code> </p> </li> <li> <p> <code>amazon</code> </p> </li> <li> <p> <code>amzn</code> </p> </li> </ul> </important>"
         },
+        "VersionName": {
+          "shape": "DocumentVersionName",
+          "documentation": "<p>An optional field specifying the version of the artifact you are creating with the document. For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and cannot be changed.</p>"
+        },
         "DocumentType": {
           "shape": "DocumentType",
-          "documentation": "<p>The type of document to create. Valid document types include: Policy, Automation, and Command.</p>"
+          "documentation": "<p>The type of document to create. Valid document types include: <code>Command</code>, <code>Policy</code>, <code>Automation</code>, <code>Session</code>, and <code>Package</code>.</p>"
         },
         "DocumentFormat": {
           "shape": "DocumentFormat",
@@ -5709,6 +5831,10 @@
         "DocumentVersion": {
           "shape": "DocumentVersion",
           "documentation": "<p>The document version for which you want information. Can be a specific version or the default version.</p>"
+        },
+        "VersionName": {
+          "shape": "DocumentVersionName",
+          "documentation": "<p>An optional field specifying the version of the artifact associated with the document. For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and cannot be changed.</p>"
         }
       }
     },
@@ -6509,6 +6635,10 @@
         "DefaultVersion": {
           "shape": "DocumentVersion",
           "documentation": "<p>The default version of the document.</p>"
+        },
+        "DefaultVersionName": {
+          "shape": "DocumentVersionName",
+          "documentation": "<p>The default version of the artifact associated with the document.</p>"
         }
       },
       "documentation": "<p>A default version of a document.</p>"
@@ -6526,11 +6656,15 @@
         },
         "HashType": {
           "shape": "DocumentHashType",
-          "documentation": "<p>Sha256 or Sha1.</p> <note> <p>Sha1 hashes have been deprecated.</p> </note>"
+          "documentation": "<p>The hash type of the document. Valid values include <code>Sha256</code> or <code>Sha1</code>.</p> <note> <p>Sha1 hashes have been deprecated.</p> </note>"
         },
         "Name": {
           "shape": "DocumentARN",
           "documentation": "<p>The name of the Systems Manager document.</p>"
+        },
+        "VersionName": {
+          "shape": "DocumentVersionName",
+          "documentation": "<p>The version of the artifact associated with the document.</p>"
         },
         "Owner": {
           "shape": "DocumentOwner",
@@ -6543,6 +6677,10 @@
         "Status": {
           "shape": "DocumentStatus",
           "documentation": "<p>The status of the Systems Manager document.</p>"
+        },
+        "StatusInformation": {
+          "shape": "DocumentStatusInformation",
+          "documentation": "<p>A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a <code>Failed</code> status might be explained by the <code>StatusInformation</code> message, \"The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct.\"</p>"
         },
         "DocumentVersion": {
           "shape": "DocumentVersion",
@@ -6562,7 +6700,7 @@
         },
         "DocumentType": {
           "shape": "DocumentType",
-          "documentation": "<p>The type of document. </p>"
+          "documentation": "<p>The type of document.</p>"
         },
         "SchemaVersion": {
           "shape": "DocumentSchemaVersion",
@@ -6587,6 +6725,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>The tags, or metadata, that have been applied to the document.</p>"
+        },
+        "AttachmentsInformation": {
+          "shape": "AttachmentInformationList",
+          "documentation": "<p>Details about the document attachments, including names, locations, sizes, etc.</p>"
         }
       },
       "documentation": "<p>Describes a Systems Manager document. </p>"
@@ -6657,6 +6799,10 @@
         "Owner": {
           "shape": "DocumentOwner",
           "documentation": "<p>The AWS user account that created the document.</p>"
+        },
+        "VersionName": {
+          "shape": "DocumentVersionName",
+          "documentation": "<p>An optional field specifying the version of the artifact associated with the document. For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and cannot be changed.</p>"
         },
         "PlatformTypes": {
           "shape": "PlatformTypeList",
@@ -6799,12 +6945,17 @@
     },
     "DocumentStatus": {
       "type": "string",
+      "documentation": "<p>The status of a document.</p>",
       "enum": [
         "Creating",
         "Active",
         "Updating",
-        "Deleting"
+        "Deleting",
+        "Failed"
       ]
+    },
+    "DocumentStatusInformation": {
+      "type": "string"
     },
     "DocumentType": {
       "type": "string",
@@ -6812,7 +6963,8 @@
         "Command",
         "Policy",
         "Automation",
-        "Session"
+        "Session",
+        "Package"
       ]
     },
     "DocumentVersion": {
@@ -6830,6 +6982,10 @@
           "shape": "DocumentVersion",
           "documentation": "<p>The document version.</p>"
         },
+        "VersionName": {
+          "shape": "DocumentVersionName",
+          "documentation": "<p>The version of the artifact associated with the document. For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and cannot be changed.</p>"
+        },
         "CreatedDate": {
           "shape": "DateTime",
           "documentation": "<p>The date the document was created.</p>"
@@ -6841,6 +6997,14 @@
         "DocumentFormat": {
           "shape": "DocumentFormat",
           "documentation": "<p>The document format, either JSON or YAML.</p>"
+        },
+        "Status": {
+          "shape": "DocumentStatus",
+          "documentation": "<p>The status of the Systems Manager document, such as <code>Creating</code>, <code>Active</code>, <code>Failed</code>, and <code>Deleting</code>.</p>"
+        },
+        "StatusInformation": {
+          "shape": "DocumentStatusInformation",
+          "documentation": "<p>A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a <code>Failed</code> status might be explained by the <code>StatusInformation</code> message, \"The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct.\"</p>"
         }
       },
       "documentation": "<p>Version information about the document.</p>"
@@ -6851,6 +7015,10 @@
         "shape": "DocumentVersionInfo"
       },
       "min": 1
+    },
+    "DocumentVersionName": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-.]{1,128}$"
     },
     "DocumentVersionNumber": {
       "type": "string",
@@ -7162,6 +7330,10 @@
           "shape": "DocumentARN",
           "documentation": "<p>The name of the Systems Manager document.</p>"
         },
+        "VersionName": {
+          "shape": "DocumentVersionName",
+          "documentation": "<p>An optional field specifying the version of the artifact associated with the document. For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and cannot be changed.</p>"
+        },
         "DocumentVersion": {
           "shape": "DocumentVersion",
           "documentation": "<p>The document version for which you want information.</p>"
@@ -7179,9 +7351,21 @@
           "shape": "DocumentARN",
           "documentation": "<p>The name of the Systems Manager document.</p>"
         },
+        "VersionName": {
+          "shape": "DocumentVersionName",
+          "documentation": "<p>The version of the artifact associated with the document. For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and cannot be changed.</p>"
+        },
         "DocumentVersion": {
           "shape": "DocumentVersion",
           "documentation": "<p>The document version.</p>"
+        },
+        "Status": {
+          "shape": "DocumentStatus",
+          "documentation": "<p>The status of the Systems Manager document, such as <code>Creating</code>, <code>Active</code>, <code>Updating</code>, <code>Failed</code>, and <code>Deleting</code>.</p>"
+        },
+        "StatusInformation": {
+          "shape": "DocumentStatusInformation",
+          "documentation": "<p>A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a <code>Failed</code> status might be explained by the <code>StatusInformation</code> message, \"The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct.\"</p>"
         },
         "Content": {
           "shape": "DocumentContent",
@@ -7194,6 +7378,10 @@
         "DocumentFormat": {
           "shape": "DocumentFormat",
           "documentation": "<p>The document format, either JSON or YAML.</p>"
+        },
+        "AttachmentsContent": {
+          "shape": "AttachmentContentList",
+          "documentation": "<p>A description of the document attachments, including names, locations, sizes, etc.</p>"
         }
       }
     },
@@ -12758,11 +12946,19 @@
       "members": {
         "Content": {
           "shape": "DocumentContent",
-          "documentation": "<p>The content in a document that you want to update.</p>"
+          "documentation": "<p>A valid JSON or YAML string.</p>"
+        },
+        "Attachments": {
+          "shape": "AttachmentsSourceList",
+          "documentation": "<p>A list of key and value pairs that describe attachments to a version of a document.</p>"
         },
         "Name": {
           "shape": "DocumentName",
           "documentation": "<p>The name of the document that you want to update.</p>"
+        },
+        "VersionName": {
+          "shape": "DocumentVersionName",
+          "documentation": "<p>An optional field specifying the version of the artifact you are updating with the document. For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and cannot be changed.</p>"
         },
         "DocumentVersion": {
           "shape": "DocumentVersion",

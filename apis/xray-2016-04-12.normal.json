@@ -32,6 +32,28 @@
       ],
       "documentation": "<p>Retrieves a list of traces specified by ID. Each trace is a collection of segment documents that originates from a single request. Use <code>GetTraceSummaries</code> to get a list of trace IDs.</p>"
     },
+    "CreateGroup": {
+      "name": "CreateGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/CreateGroup"
+      },
+      "input": {
+        "shape": "CreateGroupRequest"
+      },
+      "output": {
+        "shape": "CreateGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottledException"
+        }
+      ],
+      "documentation": "<p>Creates a group resource with a name and a filter expression. </p>"
+    },
     "CreateSamplingRule": {
       "name": "CreateSamplingRule",
       "http": {
@@ -56,6 +78,28 @@
         }
       ],
       "documentation": "<p>Creates a rule to control sampling behavior for instrumented applications. Services retrieve rules with <a>GetSamplingRules</a>, and evaluate each rule in ascending order of <i>priority</i> for each request. If a rule matches, the service records a trace, borrowing it from the reservoir size. After 10 seconds, the service reports back to X-Ray with <a>GetSamplingTargets</a> to get updated versions of each in-use rule. The updated rule contains a trace quota that the service can use instead of borrowing from the reservoir.</p>"
+    },
+    "DeleteGroup": {
+      "name": "DeleteGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/DeleteGroup"
+      },
+      "input": {
+        "shape": "DeleteGroupRequest"
+      },
+      "output": {
+        "shape": "DeleteGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottledException"
+        }
+      ],
+      "documentation": "<p>Deletes a group resource.</p>"
     },
     "DeleteSamplingRule": {
       "name": "DeleteSamplingRule",
@@ -100,6 +144,50 @@
         }
       ],
       "documentation": "<p>Retrieves the current encryption configuration for X-Ray data.</p>"
+    },
+    "GetGroup": {
+      "name": "GetGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/GetGroup"
+      },
+      "input": {
+        "shape": "GetGroupRequest"
+      },
+      "output": {
+        "shape": "GetGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottledException"
+        }
+      ],
+      "documentation": "<p>Retrieves group resource details.</p>"
+    },
+    "GetGroups": {
+      "name": "GetGroups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/Groups"
+      },
+      "input": {
+        "shape": "GetGroupsRequest"
+      },
+      "output": {
+        "shape": "GetGroupsResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottledException"
+        }
+      ],
+      "documentation": "<p>Retrieves all active group details.</p>"
     },
     "GetSamplingRules": {
       "name": "GetSamplingRules",
@@ -299,6 +387,28 @@
       ],
       "documentation": "<p>Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments.</p> <p>Segments must include the following fields. For the full segment document schema, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html\">AWS X-Ray Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p> <p class=\"title\"> <b>Required Segment Document Fields</b> </p> <ul> <li> <p> <code>name</code> - The name of the service that handled the request.</p> </li> <li> <p> <code>id</code> - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.</p> </li> <li> <p> <code>trace_id</code> - A unique identifier that connects all segments and subsegments originating from a single client request.</p> </li> <li> <p> <code>start_time</code> - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, <code>1480615200.010</code> or <code>1.480615200010E9</code>.</p> </li> <li> <p> <code>end_time</code> - Time the segment or subsegment was closed. For example, <code>1480615200.090</code> or <code>1.480615200090E9</code>. Specify either an <code>end_time</code> or <code>in_progress</code>.</p> </li> <li> <p> <code>in_progress</code> - Set to <code>true</code> instead of specifying an <code>end_time</code> to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.</p> </li> </ul> <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:</p> <p class=\"title\"> <b>Trace ID Format</b> </p> <ul> <li> <p>The version number, i.e. <code>1</code>.</p> </li> <li> <p>The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is <code>1480615200</code> seconds, or <code>58406520</code> in hexadecimal.</p> </li> <li> <p>A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.</p> </li> </ul>"
     },
+    "UpdateGroup": {
+      "name": "UpdateGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/UpdateGroup"
+      },
+      "input": {
+        "shape": "UpdateGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottledException"
+        }
+      ],
+      "documentation": "<p>Updates a group resource.</p>"
+    },
     "UpdateSamplingRule": {
       "name": "UpdateSamplingRule",
       "http": {
@@ -466,6 +576,9 @@
         }
       }
     },
+    "Boolean": {
+      "type": "boolean"
+    },
     "BorrowCount": {
       "type": "integer",
       "min": 0
@@ -474,6 +587,31 @@
       "type": "string",
       "max": 24,
       "min": 24
+    },
+    "CreateGroupRequest": {
+      "type": "structure",
+      "required": [
+        "GroupName"
+      ],
+      "members": {
+        "GroupName": {
+          "shape": "GroupName",
+          "documentation": "<p>The case-sensitive name of the new group. Default is a reserved name and names must be unique.</p>"
+        },
+        "FilterExpression": {
+          "shape": "FilterExpression",
+          "documentation": "<p>The filter expression defining criteria by which to group traces.</p>"
+        }
+      }
+    },
+    "CreateGroupResult": {
+      "type": "structure",
+      "members": {
+        "Group": {
+          "shape": "Group",
+          "documentation": "<p>The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, and the filter expression that was assigned to the group.</p>"
+        }
+      }
     },
     "CreateSamplingRuleRequest": {
       "type": "structure",
@@ -495,6 +633,23 @@
           "documentation": "<p>The saved rule definition and metadata.</p>"
         }
       }
+    },
+    "DeleteGroupRequest": {
+      "type": "structure",
+      "members": {
+        "GroupName": {
+          "shape": "GroupName",
+          "documentation": "<p>The case-sensitive name of the group.</p>"
+        },
+        "GroupARN": {
+          "shape": "GroupARN",
+          "documentation": "<p>The ARN of the group that was generated on creation.</p>"
+        }
+      }
+    },
+    "DeleteGroupResult": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteSamplingRuleRequest": {
       "type": "structure",
@@ -679,6 +834,55 @@
         }
       }
     },
+    "GetGroupRequest": {
+      "type": "structure",
+      "members": {
+        "GroupName": {
+          "shape": "GroupName",
+          "documentation": "<p>The case-sensitive name of the group.</p>"
+        },
+        "GroupARN": {
+          "shape": "GroupARN",
+          "documentation": "<p>The ARN of the group that was generated on creation.</p>"
+        }
+      }
+    },
+    "GetGroupResult": {
+      "type": "structure",
+      "members": {
+        "Group": {
+          "shape": "Group",
+          "documentation": "<p>The group that was requested. Contains the name of the group, the ARN of the group, and the filter expression that assigned to the group.</p>"
+        }
+      }
+    },
+    "GetGroupsNextToken": {
+      "type": "string",
+      "max": 100,
+      "min": 1
+    },
+    "GetGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "GetGroupsNextToken",
+          "documentation": "<p>Pagination token. Not used.</p>"
+        }
+      }
+    },
+    "GetGroupsResult": {
+      "type": "structure",
+      "members": {
+        "Groups": {
+          "shape": "GroupSummaryList",
+          "documentation": "<p>The collection of all active groups.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Pagination token. Not used.</p>"
+        }
+      }
+    },
     "GetSamplingRulesRequest": {
       "type": "structure",
       "members": {
@@ -767,6 +971,14 @@
           "shape": "Timestamp",
           "documentation": "<p>The end of the time frame for which to generate a graph.</p>"
         },
+        "GroupName": {
+          "shape": "GroupName",
+          "documentation": "<p>The name of a group to generate a graph based on.</p>"
+        },
+        "GroupARN": {
+          "shape": "GroupARN",
+          "documentation": "<p>The ARN of a group to generate a graph based on.</p>"
+        },
         "NextToken": {
           "shape": "String",
           "documentation": "<p>Pagination token. Not used.</p>"
@@ -787,6 +999,10 @@
         "Services": {
           "shape": "ServiceList",
           "documentation": "<p>The services that have processed a traced request during the specified time frame.</p>"
+        },
+        "ContainsOldGroupVersions": {
+          "shape": "Boolean",
+          "documentation": "<p>A flag indicating whether or not the group's filter expression has been consistent, or if the returned service graph may show traces from an older version of the group's filter expression.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -871,6 +1087,58 @@
           "shape": "String",
           "documentation": "<p>If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most most recent results, closest to the end of the time frame.</p>"
         }
+      }
+    },
+    "Group": {
+      "type": "structure",
+      "members": {
+        "GroupName": {
+          "shape": "String",
+          "documentation": "<p>The unique case-sensitive name of the group.</p>"
+        },
+        "GroupARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the group generated based on the GroupName.</p>"
+        },
+        "FilterExpression": {
+          "shape": "String",
+          "documentation": "<p>The filter expression defining the parameters to include traces.</p>"
+        }
+      },
+      "documentation": "<p>Details and metadata for a group.</p>"
+    },
+    "GroupARN": {
+      "type": "string",
+      "max": 400,
+      "min": 1
+    },
+    "GroupName": {
+      "type": "string",
+      "max": 32,
+      "min": 1
+    },
+    "GroupSummary": {
+      "type": "structure",
+      "members": {
+        "GroupName": {
+          "shape": "String",
+          "documentation": "<p>The unique case-sensitive name of the group.</p>"
+        },
+        "GroupARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the group generated based on the GroupName.</p>"
+        },
+        "FilterExpression": {
+          "shape": "String",
+          "documentation": "<p>The filter expression defining the parameters to include traces.</p>"
+        }
+      },
+      "documentation": "<p>Details for a group without metadata.</p>"
+    },
+    "GroupSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "GroupSummary"
       }
     },
     "HTTPMethod": {
@@ -1682,6 +1950,32 @@
       "type": "list",
       "member": {
         "shape": "UnprocessedTraceSegment"
+      }
+    },
+    "UpdateGroupRequest": {
+      "type": "structure",
+      "members": {
+        "GroupName": {
+          "shape": "GroupName",
+          "documentation": "<p>The case-sensitive name of the group.</p>"
+        },
+        "GroupARN": {
+          "shape": "GroupARN",
+          "documentation": "<p>The ARN that was generated upon create.</p>"
+        },
+        "FilterExpression": {
+          "shape": "FilterExpression",
+          "documentation": "<p>The updated filter expression defining criteria by which to group traces.</p>"
+        }
+      }
+    },
+    "UpdateGroupResult": {
+      "type": "structure",
+      "members": {
+        "Group": {
+          "shape": "Group",
+          "documentation": "<p>The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, and the updated filter expression assigned to the group.</p>"
+        }
       }
     },
     "UpdateSamplingRuleRequest": {

@@ -528,7 +528,7 @@ declare namespace CloudFront {
   }
   export interface CloudFrontOriginAccessIdentityConfig {
     /**
-     * A unique number that ensures the request can't be replayed. If the CallerReference is new (no matter the content of the CloudFrontOriginAccessIdentityConfig object), a new origin access identity is created. If the CallerReference is a value already sent in a previous identity request, and the content of the CloudFrontOriginAccessIdentityConfig is identical to the original request (ignoring white space), the response includes the same information returned to the original request.  If the CallerReference is a value you already sent in a previous request to create an identity, but the content of the CloudFrontOriginAccessIdentityConfig is different from the original request, CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists error. 
+     * A unique value (for example, a date-time stamp) that ensures that the request can't be replayed. If the value of CallerReference is new (regardless of the content of the CloudFrontOriginAccessIdentityConfig object), a new origin access identity is created. If the CallerReference is a value already sent in a previous identity request, and the content of the CloudFrontOriginAccessIdentityConfig is identical to the original request (ignoring white space), the response includes the same information returned to the original request.  If the CallerReference is a value you already sent in a previous request to create an identity, but the content of the CloudFrontOriginAccessIdentityConfig is different from the original request, CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists error. 
      */
     CallerReference: string;
     /**
@@ -808,6 +808,9 @@ declare namespace CloudFront {
      * The fully qualified URI of the new streaming distribution resource just created. For example: https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8.
      */
     Location?: string;
+    /**
+     * The current version of the distribution created.
+     */
     ETag?: string;
   }
   export interface CustomErrorResponse {
@@ -1015,7 +1018,7 @@ declare namespace CloudFront {
   }
   export interface DistributionConfig {
     /**
-     * A unique value (for example, a date-time stamp) that ensures that the request can't be replayed. If the value of CallerReference is new (regardless of the content of the DistributionConfig object), CloudFront creates a new distribution. If CallerReference is a value you already sent in a previous request to create a distribution, and if the content of the DistributionConfig is identical to the original request (ignoring white space), CloudFront returns the same the response that it returned to the original request. If CallerReference is a value you already sent in a previous request to create a distribution but the content of the DistributionConfig is different from the original request, CloudFront returns a DistributionAlreadyExists error.
+     * A unique value (for example, a date-time stamp) that ensures that the request can't be replayed. If the value of CallerReference is new (regardless of the content of the DistributionConfig object), CloudFront creates a new distribution. If CallerReference is a value that you already sent in a previous request to create a distribution, CloudFront returns a DistributionAlreadyExists error.
      */
     CallerReference: string;
     /**
@@ -1030,6 +1033,10 @@ declare namespace CloudFront {
      * A complex type that contains information about origins for this distribution. 
      */
     Origins: Origins;
+    /**
+     *  A complex type that contains information about origin groups for this distribution.
+     */
+    OriginGroups?: OriginGroups;
     /**
      * A complex type that describes the default cache behavior if you don't specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements. You must create exactly one default cache behavior.
      */
@@ -1058,7 +1065,13 @@ declare namespace CloudFront {
      * From this field, you can enable or disable the selected distribution.
      */
     Enabled: boolean;
+    /**
+     * 
+     */
     ViewerCertificate?: ViewerCertificate;
+    /**
+     * 
+     */
     Restrictions?: Restrictions;
     /**
      * A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution. AWS WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about AWS WAF, see the AWS WAF Developer Guide. 
@@ -1139,6 +1152,10 @@ declare namespace CloudFront {
      */
     Origins: Origins;
     /**
+     *  A complex type that contains information about origin groups for this distribution.
+     */
+    OriginGroups?: OriginGroups;
+    /**
      * A complex type that describes the default cache behavior if you don't specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements. You must create exactly one default cache behavior.
      */
     DefaultCacheBehavior: DefaultCacheBehavior;
@@ -1154,12 +1171,21 @@ declare namespace CloudFront {
      * The comment originally specified when this distribution was created.
      */
     Comment: string;
+    /**
+     * A complex type that contains information about price class for this streaming distribution. 
+     */
     PriceClass: PriceClass;
     /**
      * Whether the distribution is enabled to accept user requests for content.
      */
     Enabled: boolean;
+    /**
+     * 
+     */
     ViewerCertificate: ViewerCertificate;
+    /**
+     * 
+     */
     Restrictions: Restrictions;
     /**
      * The Web ACL Id (if any) associated with the distribution.
@@ -1271,7 +1297,7 @@ declare namespace CloudFront {
      */
     Name: string;
     /**
-     * A unique number that ensures the request can't be replayed.
+     * A unique number that ensures that the request can't be replayed.
      */
     CallerReference: string;
     /**
@@ -1671,6 +1697,9 @@ declare namespace CloudFront {
      * The unique ID for an invalidation request.
      */
     Id: string;
+    /**
+     * The time that an invalidation request was created.
+     */
     CreateTime: timestamp;
     /**
      * The status of an invalidation request.
@@ -1697,7 +1726,7 @@ declare namespace CloudFront {
      */
     LambdaFunctionARN: LambdaFunctionARN;
     /**
-     * Specifies the event type that triggers a Lambda function invocation. You can specify the following values:    viewer-request: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.     origin-request: The function executes only when CloudFront forwards a request to your origin. When the requested object is in the edge cache, the function doesn't execute.    origin-response: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.    viewer-response: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.  
+     * Specifies the event type that triggers a Lambda function invocation. You can specify the following values:    viewer-request: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.     origin-request: The function executes only when CloudFront forwards a request to your origin. When the requested object is in the edge cache, the function doesn't execute.    origin-response: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.    viewer-response: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.  
      */
     EventType: EventType;
     /**
@@ -1888,11 +1917,11 @@ declare namespace CloudFront {
   export type MinimumProtocolVersion = "SSLv3"|"TLSv1"|"TLSv1_2016"|"TLSv1.1_2016"|"TLSv1.2_2018"|string;
   export interface Origin {
     /**
-     * A unique identifier for the origin. The value of Id must be unique within the distribution. When you specify the value of TargetOriginId for the default cache behavior or for another cache behavior, you indicate the origin to which you want the cache behavior to route requests by specifying the value of the Id element for that origin. When a request matches the path pattern for that cache behavior, CloudFront routes the request to the specified origin. For more information, see Cache Behavior Settings in the Amazon CloudFront Developer Guide.
+     * A unique identifier for the origin or origin group. The value of Id must be unique within the distribution. When you specify the value of TargetOriginId for the default cache behavior or for another cache behavior, you indicate the origin to which you want the cache behavior to route requests by specifying the value of the Id element for that origin. When a request matches the path pattern for that cache behavior, CloudFront routes the request to the specified origin. For more information, see Cache Behavior Settings in the Amazon CloudFront Developer Guide.
      */
     Id: string;
     /**
-     *  Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin, for example, myawsbucket.s3.amazonaws.com. If you set up your bucket to be configured as a website endpoint, enter the Amazon S3 static website hosting endpoint for the bucket. Constraints for Amazon S3 origins:    If you configured Amazon S3 Transfer Acceleration for your bucket, don't specify the s3-accelerate endpoint for DomainName.   The bucket name must be between 3 and 63 characters long (inclusive).   The bucket name must contain only lowercase characters, numbers, periods, underscores, and dashes.   The bucket name must not contain adjacent periods.    Custom Origins: The DNS domain name for the HTTP server from which you want CloudFront to get objects for this origin, for example, www.example.com.  Constraints for custom origins:    DomainName must be a valid DNS name that contains only a-z, A-Z, 0-9, dot (.), hyphen (-), or underscore (_) characters.   The name cannot exceed 128 characters.  
+     *  Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin, for example, myawsbucket.s3.amazonaws.com. If you set up your bucket to be configured as a website endpoint, enter the Amazon S3 static website hosting endpoint for the bucket. For more information about specifying this value for different types of origins, see Origin Domain Name in the Amazon CloudFront Developer Guide. Constraints for Amazon S3 origins:    If you configured Amazon S3 Transfer Acceleration for your bucket, don't specify the s3-accelerate endpoint for DomainName.   The bucket name must be between 3 and 63 characters long (inclusive).   The bucket name must contain only lowercase characters, numbers, periods, underscores, and dashes.   The bucket name must not contain adjacent periods.    Custom Origins: The DNS domain name for the HTTP server from which you want CloudFront to get objects for this origin, for example, www.example.com.  Constraints for custom origins:    DomainName must be a valid DNS name that contains only a-z, A-Z, 0-9, dot (.), hyphen (-), or underscore (_) characters.   The name cannot exceed 128 characters.  
      */
     DomainName: string;
     /**
@@ -1923,6 +1952,54 @@ declare namespace CloudFront {
     HeaderValue: string;
   }
   export type OriginCustomHeadersList = OriginCustomHeader[];
+  export interface OriginGroup {
+    /**
+     * The origin group's ID.
+     */
+    Id: string;
+    /**
+     * A complex type that contains information about the failover criteria for an origin group.
+     */
+    FailoverCriteria: OriginGroupFailoverCriteria;
+    /**
+     * A complex type that contains information about the origins in an origin group.
+     */
+    Members: OriginGroupMembers;
+  }
+  export interface OriginGroupFailoverCriteria {
+    /**
+     * The status codes that, when returned from the primary origin, will trigger CloudFront to failover to the second origin.
+     */
+    StatusCodes: StatusCodes;
+  }
+  export type OriginGroupList = OriginGroup[];
+  export interface OriginGroupMember {
+    /**
+     * The ID for an origin in an origin group.
+     */
+    OriginId: string;
+  }
+  export type OriginGroupMemberList = OriginGroupMember[];
+  export interface OriginGroupMembers {
+    /**
+     * The number of origins in an origin group.
+     */
+    Quantity: integer;
+    /**
+     * Items (origins) in an origin group.
+     */
+    Items: OriginGroupMemberList;
+  }
+  export interface OriginGroups {
+    /**
+     * The number of origin groups.
+     */
+    Quantity: integer;
+    /**
+     * The items (origin groups) in a distribution.
+     */
+    Items?: OriginGroupList;
+  }
   export type OriginList = Origin[];
   export type OriginProtocolPolicy = "http-only"|"match-viewer"|"https-only"|string;
   export interface OriginSslProtocols {
@@ -1937,13 +2014,13 @@ declare namespace CloudFront {
   }
   export interface Origins {
     /**
-     * The number of origins for this distribution.
+     * The number of origins or origin groups for this distribution.
      */
     Quantity: integer;
     /**
-     * A complex type that contains origins for this distribution.
+     * A complex type that contains origins or origin groups for this distribution.
      */
-    Items?: OriginList;
+    Items: OriginList;
   }
   export type PathList = string[];
   export interface Paths {
@@ -1973,7 +2050,7 @@ declare namespace CloudFront {
   }
   export interface PublicKeyConfig {
     /**
-     * A unique number that ensures the request can't be replayed.
+     * A unique number that ensures that the request can't be replayed.
      */
     CallerReference: string;
     /**
@@ -2106,11 +2183,25 @@ declare namespace CloudFront {
   export type SignerList = _Signer[];
   export type SslProtocol = "SSLv3"|"TLSv1"|"TLSv1.1"|"TLSv1.2"|string;
   export type SslProtocolsList = SslProtocol[];
+  export type StatusCodeList = integer[];
+  export interface StatusCodes {
+    /**
+     * The number of status codes.
+     */
+    Quantity: integer;
+    /**
+     * The items (status codes) for an origin group.
+     */
+    Items: StatusCodeList;
+  }
   export interface StreamingDistribution {
     /**
      * The identifier for the RTMP distribution. For example: EGTXBD79EXAMPLE.
      */
     Id: string;
+    /**
+     * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
+     */
     ARN: string;
     /**
      * The current status of the RTMP distribution. When the status is Deployed, the distribution's information is propagated to all CloudFront edge locations.
@@ -2135,7 +2226,7 @@ declare namespace CloudFront {
   }
   export interface StreamingDistributionConfig {
     /**
-     * A unique number that ensures that the request can't be replayed. If the CallerReference is new (no matter the content of the StreamingDistributionConfig object), a new streaming distribution is created. If the CallerReference is a value that you already sent in a previous request to create a streaming distribution, and the content of the StreamingDistributionConfig is identical to the original request (ignoring white space), the response includes the same information returned to the original request. If the CallerReference is a value that you already sent in a previous request to create a streaming distribution but the content of the StreamingDistributionConfig is different from the original request, CloudFront returns a DistributionAlreadyExists error. 
+     * A unique value (for example, a date-time stamp) that ensures that the request can't be replayed. If the value of CallerReference is new (regardless of the content of the StreamingDistributionConfig object), CloudFront creates a new distribution. If CallerReference is a value that you already sent in a previous request to create a distribution, CloudFront returns a DistributionAlreadyExists error.
      */
     CallerReference: string;
     /**
@@ -2240,6 +2331,9 @@ declare namespace CloudFront {
      * The comment originally specified when this distribution was created.
      */
     Comment: string;
+    /**
+     * 
+     */
     PriceClass: PriceClass;
     /**
      * Whether the distribution is enabled to accept end user requests for content.
@@ -2502,7 +2596,7 @@ declare namespace CloudFront {
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
-  export type apiVersion = "2013-05-12"|"2013-11-11"|"2014-05-31"|"2014-10-21"|"2014-11-06"|"2015-04-17"|"2015-07-27"|"2015-09-17"|"2016-01-13"|"2016-01-28"|"2016-08-01"|"2016-08-20"|"2016-09-07"|"2016-09-29"|"2016-11-25"|"2016-11-25"|"2017-03-25"|"2017-03-25"|"2017-10-30"|"2017-10-30"|"2018-06-18"|"latest"|string;
+  export type apiVersion = "2013-05-12"|"2013-11-11"|"2014-05-31"|"2014-10-21"|"2014-11-06"|"2015-04-17"|"2015-07-27"|"2015-09-17"|"2016-01-13"|"2016-01-28"|"2016-08-01"|"2016-08-20"|"2016-09-07"|"2016-09-29"|"2016-11-25"|"2016-11-25"|"2017-03-25"|"2017-03-25"|"2017-10-30"|"2017-10-30"|"2018-06-18"|"2018-06-18"|"2018-11-05"|"latest"|string;
   export interface ClientApiVersions {
     /**
      * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
