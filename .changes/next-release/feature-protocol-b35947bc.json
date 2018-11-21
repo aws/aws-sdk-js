@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "protocol",
+  "description": "Add support for 'endpoint' trait in API operation model"
+}
