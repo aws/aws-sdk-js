@@ -287,4 +287,8 @@ export abstract class ConfigurationOptions {
      * cannot change existing cache size.
      */
     endpointCacheSize?: number;
+    /**
+     *  whether to marshal request parameters to the prefix of hostname.
+     */
+    hostPrefixEnabled?: boolean;
 }

@@ -61,7 +61,7 @@
               return api.operations[_case.op] = _case.given;
             });
             svc = new AWS.Service({
-              endpoint: 'http://localhost',
+              endpoint: group.clientEndpoint || 'http://localhost',
               apiConfig: api
             });
             return group.cases.forEach(function(_case, i) {
@@ -95,6 +95,9 @@
       if (req.httpRequest.body === '{}') {
         req.httpRequest.body = '';
       }
+      if (data.body === undefined) {
+        data.body = '';
+      }
       expect(req.httpRequest.body.replace(/\s+/g, '')).to.equal(data.body.replace(/\s+/g, ''));
     } else {
       expect(req.httpRequest.body).to.equal(data.body);
@@ -108,12 +111,15 @@
       }
       return results;
     }
+    if (data.host) {
+      expect(req.httpRequest.endpoint.hostname).to.equal(data.host)
+    }
   };
 
   outputCase = function(svc, _case, i, done) {
     var expectedData, k, req, resp, resultData, results, v;
     resp = _case.response;
-    helpers.mockHttpResponse(resp.status_code, resp.headers, resp.body);
+    helpers.mockHttpResponse(resp.status_code, resp.headers || {}, resp.body);
     req = svc[_case.op](_case.params);
     req.send();
     expectedData = formatData(_case.result, svc.api.operations[_case.op].output);
@@ -183,7 +189,7 @@
     tests('query');
     tests('json');
     tests('rest-json');
-    return tests('rest-xml');
+    tests('rest-xml');
   });
 
 }).call(this);
