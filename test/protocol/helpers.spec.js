@@ -19,7 +19,7 @@ describe('populateHostPrefix', function() {
           responseCode: 200
         },
         endpoint: {
-          hostPrefix: "{Bucket}-{AccountId}."
+          hostPrefix: "{Bucket}-{AccountId}-{Bucket}."
         },
         input: {"shape": "GetObjectInput"},
         output: {"shape": "GetObjectOutput"}
@@ -128,7 +128,7 @@ describe('populateHostPrefix', function() {
       Bucket: 'bucket',
       Key: 'key'
     }));
-    expect(req.httpRequest.endpoint.hostname).to.equal('bucket-account.mockservice.mock-region.amazonaws.com');
+    expect(req.httpRequest.endpoint.hostname).to.equal('bucket-account-bucket.mockservice.mock-region.amazonaws.com');
   });
 
   it('should validate input parameters for prepending host', function() {
@@ -166,7 +166,7 @@ describe('populateHostPrefix', function() {
     }
     expect(error).not.to.equal(undefined);
     expect(error.code).to.equal('ValidationError');
-    expect(error.message).to.equal('bucket-{abc} is not hostname compatible.');
+    expect(error.message).to.equal('bucket-{abc}-bucket is not hostname compatible.');
 
     var stringTooLong = '';
     for (var i = 0; i < 64; i++) stringTooLong += 'X';
