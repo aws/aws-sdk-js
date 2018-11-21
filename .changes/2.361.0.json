@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "This release updates the DetectFaces and IndexFaces operation. When the Attributes input parameter is set to ALL, the face location landmarks includes 5 new landmarks: upperJawlineLeft, midJawlineLeft, chinBottom, midJawlineRight, upperJawlineRight."
+    }
+]
