@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -211,6 +212,18 @@ declare class MediaConvert extends Service {
    * Modify one of your existing queues.
    */
   updateQueue(callback?: (err: AWSError, data: MediaConvert.Types.UpdateQueueResponse) => void): Request<MediaConvert.Types.UpdateQueueResponse, AWSError>;
+  /**
+   * Modify one of your existing queues.
+   */
+  updateQueue(callback?: (err: AWSError, data: MediaConvert.Types.UpdateQueueResponse) => void): Request<MediaConvert.Types.UpdateQueueResponse, AWSError>;
+  /**
+   * Waits for the jobComplete state by periodically calling the underlying MediaConvert.getJob operation every 30 seconds (at most 120 times).
+   */
+  waitFor(state: "jobComplete", params: MediaConvert.Types.GetJobRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaConvert.Types.GetJobRequest) => void): Request<MediaConvert.Types.GetJobRequest, AWSError>;
+  /**
+   * Waits for the jobComplete state by periodically calling the underlying MediaConvert.getJob operation every 30 seconds (at most 120 times).
+   */
+  waitFor(state: "jobComplete", callback?: (err: AWSError, data: MediaConvert.Types.GetJobRequest) => void): Request<MediaConvert.Types.GetJobRequest, AWSError>;
 }
 declare namespace MediaConvert {
   export type AacAudioDescriptionBroadcasterMix = "BROADCASTER_MIXED_AD"|"NORMAL"|string;

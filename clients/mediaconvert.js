@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['mediaconvert'], '2017-08-29', {
   get: function get() {
     var model = require('../apis/mediaconvert-2017-08-29.min.json');
     model.paginators = require('../apis/mediaconvert-2017-08-29.paginators.json').pagination;
+    model.waiters = require('../apis/mediaconvert-2017-08-29.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

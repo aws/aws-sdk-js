@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "waiters": {
+    "jobComplete": {
+      "delay": 30,
+      "operation": "GetJob",
+      "maxAttempts": 120,
+      "acceptors": [
+        {
+          "expected": "COMPLETE",
+          "matcher": "path",
+          "state": "success",
+          "argument": "Job.Status"
+        },
+        {
+          "expected": "CANCELED",
+          "matcher": "path",
+          "state": "failure",
+          "argument": "Job.Status"
+        },
+        {
+          "expected": "ERROR",
+          "matcher": "path",
+          "state": "failure",
+          "argument": "Job.Status"
+        }
+      ]
+    }
+  }
+}
