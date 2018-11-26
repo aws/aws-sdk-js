@@ -625,5 +625,17 @@
   "rdsdataservice": {
     "prefix": "rds-data",
     "name": "RDSDataService"
+  },
+  "amplify": {
+    "name": "Amplify"
+  },
+  "datasync": {
+    "name": "DataSync"
+  },
+  "robomaker": {
+    "name": "RoboMaker"
+  },
+  "transfer": {
+    "name": "Transfer"
   }
 }

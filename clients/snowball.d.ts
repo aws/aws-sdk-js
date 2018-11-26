@@ -124,11 +124,11 @@ declare class Snowball extends Service {
    */
   listClusters(callback?: (err: AWSError, data: Snowball.Types.ListClustersResult) => void): Request<Snowball.Types.ListClustersResult, AWSError>;
   /**
-   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on a Snowball Edge device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
+   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on EDGE, EDGE_C, and EDGE_CG devices. For more information on compatible AMIs, see Using Amazon EC2 Compute Instances in the AWS Snowball Developer Guide.
    */
   listCompatibleImages(params: Snowball.Types.ListCompatibleImagesRequest, callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
   /**
-   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on a Snowball Edge device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
+   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on EDGE, EDGE_C, and EDGE_CG devices. For more information on compatible AMIs, see Using Amazon EC2 Compute Instances in the AWS Snowball Developer Guide.
    */
   listCompatibleImages(callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
   /**
@@ -281,7 +281,7 @@ declare namespace Snowball {
      */
     JobType?: JobType;
     /**
-     * The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE.
+     * The type of AWS Snowball device to use for this cluster. The only supported device types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
      */
     SnowballType?: SnowballType;
     /**
@@ -297,7 +297,7 @@ declare namespace Snowball {
      */
     AddressId?: AddressId;
     /**
-     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
+     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, devices are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
      */
     ShippingOption?: ShippingOption;
     /**
@@ -359,11 +359,11 @@ declare namespace Snowball {
      */
     RoleARN: RoleARN;
     /**
-     * The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE.
+     * The type of AWS Snowball device to use for this cluster. The only supported device types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
      */
     SnowballType?: SnowballType;
     /**
-     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
+     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, devices are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
      */
     ShippingOption: ShippingOption;
     /**
@@ -423,7 +423,7 @@ declare namespace Snowball {
      */
     ClusterId?: ClusterId;
     /**
-     * The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is EDGE.
+     * The type of AWS Snowball device to use for this job. The only supported device types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
      */
     SnowballType?: SnowballType;
     /**
@@ -521,7 +521,7 @@ declare namespace Snowball {
      */
     AmiId: AmiId;
     /**
-     * The ID of the AMI on the Snowball Edge device.
+     * The ID of the AMI on the supported device.
      */
     SnowballAmiId?: String;
   }
@@ -772,7 +772,7 @@ declare namespace Snowball {
   }
   export interface ListCompatibleImagesRequest {
     /**
-     * The maximum number of results for the list of compatible images. Currently, a Snowball Edge device can store 10 AMIs.
+     * The maximum number of results for the list of compatible images. Currently, each supported device can store 10 AMIs.
      */
     MaxResults?: ListLimit;
     /**
@@ -782,7 +782,7 @@ declare namespace Snowball {
   }
   export interface ListCompatibleImagesResult {
     /**
-     * A JSON-formatted object that describes a compatible AMI, including the ID and name for a Snowball Edge AMI.
+     * A JSON-formatted object that describes a compatible AMI.
      */
     CompatibleImages?: CompatibleImageList;
     /**
@@ -864,8 +864,8 @@ declare namespace Snowball {
     OutboundShipment?: Shipment;
   }
   export type ShippingOption = "SECOND_DAY"|"NEXT_DAY"|"EXPRESS"|"STANDARD"|string;
-  export type SnowballCapacity = "T50"|"T80"|"T100"|"NoPreference"|string;
-  export type SnowballType = "STANDARD"|"EDGE"|string;
+  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"NoPreference"|string;
+  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|string;
   export type SnsTopicARN = string;
   export type String = string;
   export type Timestamp = Date;

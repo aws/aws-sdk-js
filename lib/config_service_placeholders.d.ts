@@ -154,6 +154,10 @@ export abstract class ConfigurationServicePlaceholders {
   pinpointsmsvoice?: AWS.PinpointSMSVoice.Types.ClientConfiguration;
   quicksight?: AWS.QuickSight.Types.ClientConfiguration;
   rdsdataservice?: AWS.RDSDataService.Types.ClientConfiguration;
+  amplify?: AWS.Amplify.Types.ClientConfiguration;
+  datasync?: AWS.DataSync.Types.ClientConfiguration;
+  robomaker?: AWS.RoboMaker.Types.ClientConfiguration;
+  transfer?: AWS.Transfer.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -310,4 +314,8 @@ export interface ConfigurationServiceApiVersions {
   pinpointsmsvoice?: AWS.PinpointSMSVoice.Types.apiVersion;
   quicksight?: AWS.QuickSight.Types.apiVersion;
   rdsdataservice?: AWS.RDSDataService.Types.apiVersion;
+  amplify?: AWS.Amplify.Types.apiVersion;
+  datasync?: AWS.DataSync.Types.apiVersion;
+  robomaker?: AWS.RoboMaker.Types.apiVersion;
+  transfer?: AWS.Transfer.Types.apiVersion;
 }

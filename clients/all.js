@@ -153,5 +153,9 @@ module.exports = {
   Route53Resolver: require('./route53resolver'),
   PinpointSMSVoice: require('./pinpointsmsvoice'),
   QuickSight: require('./quicksight'),
-  RDSDataService: require('./rdsdataservice')
+  RDSDataService: require('./rdsdataservice'),
+  Amplify: require('./amplify'),
+  DataSync: require('./datasync'),
+  RoboMaker: require('./robomaker'),
+  Transfer: require('./transfer')
 };

@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.361.0',
+	  VERSION: '2.362.0',
 
 	  /**
 	   * @api private
@@ -95,17 +95,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  Protocol: {
 	    Json: __webpack_require__(13),
-	    Query: __webpack_require__(16),
-	    Rest: __webpack_require__(20),
-	    RestJson: __webpack_require__(21),
-	    RestXml: __webpack_require__(22)
+	    Query: __webpack_require__(17),
+	    Rest: __webpack_require__(21),
+	    RestJson: __webpack_require__(22),
+	    RestXml: __webpack_require__(23)
 	  },
 
 	  /**
 	   * @api private
 	   */
 	  XML: {
-	    Builder: __webpack_require__(23),
+	    Builder: __webpack_require__(24),
 	    Parser: null // conditionally set based on environment
 	  },
 
@@ -121,33 +121,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @api private
 	   */
 	  Model: {
-	    Api: __webpack_require__(28),
-	    Operation: __webpack_require__(29),
-	    Shape: __webpack_require__(18),
-	    Paginator: __webpack_require__(30),
-	    ResourceWaiter: __webpack_require__(31)
+	    Api: __webpack_require__(29),
+	    Operation: __webpack_require__(30),
+	    Shape: __webpack_require__(19),
+	    Paginator: __webpack_require__(31),
+	    ResourceWaiter: __webpack_require__(32)
 	  },
 
 	  /**
 	   * @api private
 	   */
-	  apiLoader: __webpack_require__(32),
+	  apiLoader: __webpack_require__(33),
 
 	  /**
 	   * @api private
 	   */
-	  EndpointCache: __webpack_require__(33).EndpointCache
+	  EndpointCache: __webpack_require__(34).EndpointCache
 	});
-	__webpack_require__(35);
 	__webpack_require__(36);
-	__webpack_require__(39);
-	__webpack_require__(42);
+	__webpack_require__(37);
+	__webpack_require__(40);
 	__webpack_require__(43);
-	__webpack_require__(48);
-	__webpack_require__(51);
+	__webpack_require__(44);
+	__webpack_require__(49);
 	__webpack_require__(52);
 	__webpack_require__(53);
-	__webpack_require__(61);
+	__webpack_require__(54);
+	__webpack_require__(62);
 
 	/**
 	 * @readonly
@@ -1582,7 +1582,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 7 */
 /***/ (function(module, exports) {
 
-	module.exports = {"acm":{"name":"ACM","cors":true},"apigateway":{"name":"APIGateway","cors":true},"applicationautoscaling":{"prefix":"application-autoscaling","name":"ApplicationAutoScaling","cors":true},"appstream":{"name":"AppStream"},"autoscaling":{"name":"AutoScaling","cors":true},"batch":{"name":"Batch"},"budgets":{"name":"Budgets"},"clouddirectory":{"name":"CloudDirectory","versions":["2016-05-10*"]},"cloudformation":{"name":"CloudFormation","cors":true},"cloudfront":{"name":"CloudFront","versions":["2013-05-12*","2013-11-11*","2014-05-31*","2014-10-21*","2014-11-06*","2015-04-17*","2015-07-27*","2015-09-17*","2016-01-13*","2016-01-28*","2016-08-01*","2016-08-20*","2016-09-07*","2016-09-29*","2016-11-25*","2017-03-25*","2017-10-30*","2018-06-18*"],"cors":true},"cloudhsm":{"name":"CloudHSM","cors":true},"cloudsearch":{"name":"CloudSearch"},"cloudsearchdomain":{"name":"CloudSearchDomain"},"cloudtrail":{"name":"CloudTrail","cors":true},"cloudwatch":{"prefix":"monitoring","name":"CloudWatch","cors":true},"cloudwatchevents":{"prefix":"events","name":"CloudWatchEvents","versions":["2014-02-03*"],"cors":true},"cloudwatchlogs":{"prefix":"logs","name":"CloudWatchLogs","cors":true},"codebuild":{"name":"CodeBuild","cors":true},"codecommit":{"name":"CodeCommit","cors":true},"codedeploy":{"name":"CodeDeploy","cors":true},"codepipeline":{"name":"CodePipeline","cors":true},"cognitoidentity":{"prefix":"cognito-identity","name":"CognitoIdentity","cors":true},"cognitoidentityserviceprovider":{"prefix":"cognito-idp","name":"CognitoIdentityServiceProvider","cors":true},"cognitosync":{"prefix":"cognito-sync","name":"CognitoSync","cors":true},"configservice":{"prefix":"config","name":"ConfigService","cors":true},"cur":{"name":"CUR","cors":true},"datapipeline":{"name":"DataPipeline"},"devicefarm":{"name":"DeviceFarm","cors":true},"directconnect":{"name":"DirectConnect","cors":true},"directoryservice":{"prefix":"ds","name":"DirectoryService"},"discovery":{"name":"Discovery"},"dms":{"name":"DMS"},"dynamodb":{"name":"DynamoDB","cors":true},"dynamodbstreams":{"prefix":"streams.dynamodb","name":"DynamoDBStreams","cors":true},"ec2":{"name":"EC2","versions":["2013-06-15*","2013-10-15*","2014-02-01*","2014-05-01*","2014-06-15*","2014-09-01*","2014-10-01*","2015-03-01*","2015-04-15*","2015-10-01*","2016-04-01*","2016-09-15*"],"cors":true},"ecr":{"name":"ECR","cors":true},"ecs":{"name":"ECS","cors":true},"efs":{"prefix":"elasticfilesystem","name":"EFS","cors":true},"elasticache":{"name":"ElastiCache","versions":["2012-11-15*","2014-03-24*","2014-07-15*","2014-09-30*"],"cors":true},"elasticbeanstalk":{"name":"ElasticBeanstalk","cors":true},"elb":{"prefix":"elasticloadbalancing","name":"ELB","cors":true},"elbv2":{"prefix":"elasticloadbalancingv2","name":"ELBv2","cors":true},"emr":{"prefix":"elasticmapreduce","name":"EMR","cors":true},"es":{"name":"ES"},"elastictranscoder":{"name":"ElasticTranscoder","cors":true},"firehose":{"name":"Firehose","cors":true},"gamelift":{"name":"GameLift","cors":true},"glacier":{"name":"Glacier"},"health":{"name":"Health"},"iam":{"name":"IAM"},"importexport":{"name":"ImportExport"},"inspector":{"name":"Inspector","versions":["2015-08-18*"],"cors":true},"iot":{"name":"Iot","cors":true},"iotdata":{"prefix":"iot-data","name":"IotData","cors":true},"kinesis":{"name":"Kinesis","cors":true},"kinesisanalytics":{"name":"KinesisAnalytics"},"kms":{"name":"KMS","cors":true},"lambda":{"name":"Lambda","cors":true},"lexruntime":{"prefix":"runtime.lex","name":"LexRuntime","cors":true},"lightsail":{"name":"Lightsail"},"machinelearning":{"name":"MachineLearning","cors":true},"marketplacecommerceanalytics":{"name":"MarketplaceCommerceAnalytics","cors":true},"marketplacemetering":{"prefix":"meteringmarketplace","name":"MarketplaceMetering"},"mturk":{"prefix":"mturk-requester","name":"MTurk","cors":true},"mobileanalytics":{"name":"MobileAnalytics","cors":true},"opsworks":{"name":"OpsWorks","cors":true},"opsworkscm":{"name":"OpsWorksCM"},"organizations":{"name":"Organizations"},"pinpoint":{"name":"Pinpoint"},"polly":{"name":"Polly","cors":true},"rds":{"name":"RDS","versions":["2014-09-01*"],"cors":true},"redshift":{"name":"Redshift","cors":true},"rekognition":{"name":"Rekognition","cors":true},"resourcegroupstaggingapi":{"name":"ResourceGroupsTaggingAPI"},"route53":{"name":"Route53","cors":true},"route53domains":{"name":"Route53Domains","cors":true},"s3":{"name":"S3","dualstackAvailable":true,"cors":true},"s3control":{"name":"S3Control","dualstackAvailable":true},"servicecatalog":{"name":"ServiceCatalog","cors":true},"ses":{"prefix":"email","name":"SES","cors":true},"shield":{"name":"Shield"},"simpledb":{"prefix":"sdb","name":"SimpleDB"},"sms":{"name":"SMS"},"snowball":{"name":"Snowball"},"sns":{"name":"SNS","cors":true},"sqs":{"name":"SQS","cors":true},"ssm":{"name":"SSM","cors":true},"storagegateway":{"name":"StorageGateway","cors":true},"stepfunctions":{"prefix":"states","name":"StepFunctions"},"sts":{"name":"STS","cors":true},"support":{"name":"Support"},"swf":{"name":"SWF"},"xray":{"name":"XRay"},"waf":{"name":"WAF","cors":true},"wafregional":{"prefix":"waf-regional","name":"WAFRegional"},"workdocs":{"name":"WorkDocs","cors":true},"workspaces":{"name":"WorkSpaces"},"codestar":{"name":"CodeStar"},"lexmodelbuildingservice":{"prefix":"lex-models","name":"LexModelBuildingService","cors":true},"marketplaceentitlementservice":{"prefix":"entitlement.marketplace","name":"MarketplaceEntitlementService"},"athena":{"name":"Athena"},"greengrass":{"name":"Greengrass"},"dax":{"name":"DAX"},"migrationhub":{"prefix":"AWSMigrationHub","name":"MigrationHub"},"cloudhsmv2":{"name":"CloudHSMV2"},"glue":{"name":"Glue"},"mobile":{"name":"Mobile"},"pricing":{"name":"Pricing","cors":true},"costexplorer":{"prefix":"ce","name":"CostExplorer"},"mediaconvert":{"name":"MediaConvert"},"medialive":{"name":"MediaLive"},"mediapackage":{"name":"MediaPackage"},"mediastore":{"name":"MediaStore"},"mediastoredata":{"prefix":"mediastore-data","name":"MediaStoreData"},"appsync":{"name":"AppSync"},"guardduty":{"name":"GuardDuty"},"mq":{"name":"MQ"},"comprehend":{"name":"Comprehend"},"iotjobsdataplane":{"prefix":"iot-jobs-data","name":"IoTJobsDataPlane"},"kinesisvideoarchivedmedia":{"prefix":"kinesis-video-archived-media","name":"KinesisVideoArchivedMedia","cors":true},"kinesisvideomedia":{"prefix":"kinesis-video-media","name":"KinesisVideoMedia"},"kinesisvideo":{"name":"KinesisVideo","cors":true},"sagemakerruntime":{"prefix":"runtime.sagemaker","name":"SageMakerRuntime"},"sagemaker":{"name":"SageMaker"},"translate":{"name":"Translate","cors":true},"resourcegroups":{"prefix":"resource-groups","name":"ResourceGroups"},"alexaforbusiness":{"name":"AlexaForBusiness"},"cloud9":{"name":"Cloud9"},"serverlessapplicationrepository":{"prefix":"serverlessrepo","name":"ServerlessApplicationRepository"},"servicediscovery":{"name":"ServiceDiscovery"},"workmail":{"name":"WorkMail"},"autoscalingplans":{"prefix":"autoscaling-plans","name":"AutoScalingPlans"},"transcribeservice":{"prefix":"transcribe","name":"TranscribeService"},"connect":{"name":"Connect"},"acmpca":{"prefix":"acm-pca","name":"ACMPCA"},"fms":{"name":"FMS"},"secretsmanager":{"name":"SecretsManager","cors":true},"iotanalytics":{"name":"IoTAnalytics"},"iot1clickdevicesservice":{"prefix":"iot1click-devices","name":"IoT1ClickDevicesService"},"iot1clickprojects":{"prefix":"iot1click-projects","name":"IoT1ClickProjects"},"pi":{"name":"PI"},"neptune":{"name":"Neptune"},"mediatailor":{"name":"MediaTailor"},"eks":{"name":"EKS"},"macie":{"name":"Macie"},"dlm":{"name":"DLM"},"signer":{"name":"Signer"},"chime":{"name":"Chime"},"pinpointemail":{"prefix":"pinpoint-email","name":"PinpointEmail"},"ram":{"name":"RAM"},"route53resolver":{"name":"Route53Resolver"},"pinpointsmsvoice":{"prefix":"sms-voice","name":"PinpointSMSVoice"},"quicksight":{"name":"QuickSight"},"rdsdataservice":{"prefix":"rds-data","name":"RDSDataService"}}
+	module.exports = {"acm":{"name":"ACM","cors":true},"apigateway":{"name":"APIGateway","cors":true},"applicationautoscaling":{"prefix":"application-autoscaling","name":"ApplicationAutoScaling","cors":true},"appstream":{"name":"AppStream"},"autoscaling":{"name":"AutoScaling","cors":true},"batch":{"name":"Batch"},"budgets":{"name":"Budgets"},"clouddirectory":{"name":"CloudDirectory","versions":["2016-05-10*"]},"cloudformation":{"name":"CloudFormation","cors":true},"cloudfront":{"name":"CloudFront","versions":["2013-05-12*","2013-11-11*","2014-05-31*","2014-10-21*","2014-11-06*","2015-04-17*","2015-07-27*","2015-09-17*","2016-01-13*","2016-01-28*","2016-08-01*","2016-08-20*","2016-09-07*","2016-09-29*","2016-11-25*","2017-03-25*","2017-10-30*","2018-06-18*"],"cors":true},"cloudhsm":{"name":"CloudHSM","cors":true},"cloudsearch":{"name":"CloudSearch"},"cloudsearchdomain":{"name":"CloudSearchDomain"},"cloudtrail":{"name":"CloudTrail","cors":true},"cloudwatch":{"prefix":"monitoring","name":"CloudWatch","cors":true},"cloudwatchevents":{"prefix":"events","name":"CloudWatchEvents","versions":["2014-02-03*"],"cors":true},"cloudwatchlogs":{"prefix":"logs","name":"CloudWatchLogs","cors":true},"codebuild":{"name":"CodeBuild","cors":true},"codecommit":{"name":"CodeCommit","cors":true},"codedeploy":{"name":"CodeDeploy","cors":true},"codepipeline":{"name":"CodePipeline","cors":true},"cognitoidentity":{"prefix":"cognito-identity","name":"CognitoIdentity","cors":true},"cognitoidentityserviceprovider":{"prefix":"cognito-idp","name":"CognitoIdentityServiceProvider","cors":true},"cognitosync":{"prefix":"cognito-sync","name":"CognitoSync","cors":true},"configservice":{"prefix":"config","name":"ConfigService","cors":true},"cur":{"name":"CUR","cors":true},"datapipeline":{"name":"DataPipeline"},"devicefarm":{"name":"DeviceFarm","cors":true},"directconnect":{"name":"DirectConnect","cors":true},"directoryservice":{"prefix":"ds","name":"DirectoryService"},"discovery":{"name":"Discovery"},"dms":{"name":"DMS"},"dynamodb":{"name":"DynamoDB","cors":true},"dynamodbstreams":{"prefix":"streams.dynamodb","name":"DynamoDBStreams","cors":true},"ec2":{"name":"EC2","versions":["2013-06-15*","2013-10-15*","2014-02-01*","2014-05-01*","2014-06-15*","2014-09-01*","2014-10-01*","2015-03-01*","2015-04-15*","2015-10-01*","2016-04-01*","2016-09-15*"],"cors":true},"ecr":{"name":"ECR","cors":true},"ecs":{"name":"ECS","cors":true},"efs":{"prefix":"elasticfilesystem","name":"EFS","cors":true},"elasticache":{"name":"ElastiCache","versions":["2012-11-15*","2014-03-24*","2014-07-15*","2014-09-30*"],"cors":true},"elasticbeanstalk":{"name":"ElasticBeanstalk","cors":true},"elb":{"prefix":"elasticloadbalancing","name":"ELB","cors":true},"elbv2":{"prefix":"elasticloadbalancingv2","name":"ELBv2","cors":true},"emr":{"prefix":"elasticmapreduce","name":"EMR","cors":true},"es":{"name":"ES"},"elastictranscoder":{"name":"ElasticTranscoder","cors":true},"firehose":{"name":"Firehose","cors":true},"gamelift":{"name":"GameLift","cors":true},"glacier":{"name":"Glacier"},"health":{"name":"Health"},"iam":{"name":"IAM"},"importexport":{"name":"ImportExport"},"inspector":{"name":"Inspector","versions":["2015-08-18*"],"cors":true},"iot":{"name":"Iot","cors":true},"iotdata":{"prefix":"iot-data","name":"IotData","cors":true},"kinesis":{"name":"Kinesis","cors":true},"kinesisanalytics":{"name":"KinesisAnalytics"},"kms":{"name":"KMS","cors":true},"lambda":{"name":"Lambda","cors":true},"lexruntime":{"prefix":"runtime.lex","name":"LexRuntime","cors":true},"lightsail":{"name":"Lightsail"},"machinelearning":{"name":"MachineLearning","cors":true},"marketplacecommerceanalytics":{"name":"MarketplaceCommerceAnalytics","cors":true},"marketplacemetering":{"prefix":"meteringmarketplace","name":"MarketplaceMetering"},"mturk":{"prefix":"mturk-requester","name":"MTurk","cors":true},"mobileanalytics":{"name":"MobileAnalytics","cors":true},"opsworks":{"name":"OpsWorks","cors":true},"opsworkscm":{"name":"OpsWorksCM"},"organizations":{"name":"Organizations"},"pinpoint":{"name":"Pinpoint"},"polly":{"name":"Polly","cors":true},"rds":{"name":"RDS","versions":["2014-09-01*"],"cors":true},"redshift":{"name":"Redshift","cors":true},"rekognition":{"name":"Rekognition","cors":true},"resourcegroupstaggingapi":{"name":"ResourceGroupsTaggingAPI"},"route53":{"name":"Route53","cors":true},"route53domains":{"name":"Route53Domains","cors":true},"s3":{"name":"S3","dualstackAvailable":true,"cors":true},"s3control":{"name":"S3Control","dualstackAvailable":true},"servicecatalog":{"name":"ServiceCatalog","cors":true},"ses":{"prefix":"email","name":"SES","cors":true},"shield":{"name":"Shield"},"simpledb":{"prefix":"sdb","name":"SimpleDB"},"sms":{"name":"SMS"},"snowball":{"name":"Snowball"},"sns":{"name":"SNS","cors":true},"sqs":{"name":"SQS","cors":true},"ssm":{"name":"SSM","cors":true},"storagegateway":{"name":"StorageGateway","cors":true},"stepfunctions":{"prefix":"states","name":"StepFunctions"},"sts":{"name":"STS","cors":true},"support":{"name":"Support"},"swf":{"name":"SWF"},"xray":{"name":"XRay"},"waf":{"name":"WAF","cors":true},"wafregional":{"prefix":"waf-regional","name":"WAFRegional"},"workdocs":{"name":"WorkDocs","cors":true},"workspaces":{"name":"WorkSpaces"},"codestar":{"name":"CodeStar"},"lexmodelbuildingservice":{"prefix":"lex-models","name":"LexModelBuildingService","cors":true},"marketplaceentitlementservice":{"prefix":"entitlement.marketplace","name":"MarketplaceEntitlementService"},"athena":{"name":"Athena"},"greengrass":{"name":"Greengrass"},"dax":{"name":"DAX"},"migrationhub":{"prefix":"AWSMigrationHub","name":"MigrationHub"},"cloudhsmv2":{"name":"CloudHSMV2"},"glue":{"name":"Glue"},"mobile":{"name":"Mobile"},"pricing":{"name":"Pricing","cors":true},"costexplorer":{"prefix":"ce","name":"CostExplorer"},"mediaconvert":{"name":"MediaConvert"},"medialive":{"name":"MediaLive"},"mediapackage":{"name":"MediaPackage"},"mediastore":{"name":"MediaStore"},"mediastoredata":{"prefix":"mediastore-data","name":"MediaStoreData"},"appsync":{"name":"AppSync"},"guardduty":{"name":"GuardDuty"},"mq":{"name":"MQ"},"comprehend":{"name":"Comprehend"},"iotjobsdataplane":{"prefix":"iot-jobs-data","name":"IoTJobsDataPlane"},"kinesisvideoarchivedmedia":{"prefix":"kinesis-video-archived-media","name":"KinesisVideoArchivedMedia","cors":true},"kinesisvideomedia":{"prefix":"kinesis-video-media","name":"KinesisVideoMedia"},"kinesisvideo":{"name":"KinesisVideo","cors":true},"sagemakerruntime":{"prefix":"runtime.sagemaker","name":"SageMakerRuntime"},"sagemaker":{"name":"SageMaker"},"translate":{"name":"Translate","cors":true},"resourcegroups":{"prefix":"resource-groups","name":"ResourceGroups"},"alexaforbusiness":{"name":"AlexaForBusiness"},"cloud9":{"name":"Cloud9"},"serverlessapplicationrepository":{"prefix":"serverlessrepo","name":"ServerlessApplicationRepository"},"servicediscovery":{"name":"ServiceDiscovery"},"workmail":{"name":"WorkMail"},"autoscalingplans":{"prefix":"autoscaling-plans","name":"AutoScalingPlans"},"transcribeservice":{"prefix":"transcribe","name":"TranscribeService"},"connect":{"name":"Connect"},"acmpca":{"prefix":"acm-pca","name":"ACMPCA"},"fms":{"name":"FMS"},"secretsmanager":{"name":"SecretsManager","cors":true},"iotanalytics":{"name":"IoTAnalytics"},"iot1clickdevicesservice":{"prefix":"iot1click-devices","name":"IoT1ClickDevicesService"},"iot1clickprojects":{"prefix":"iot1click-projects","name":"IoT1ClickProjects"},"pi":{"name":"PI"},"neptune":{"name":"Neptune"},"mediatailor":{"name":"MediaTailor"},"eks":{"name":"EKS"},"macie":{"name":"Macie"},"dlm":{"name":"DLM"},"signer":{"name":"Signer"},"chime":{"name":"Chime"},"pinpointemail":{"prefix":"pinpoint-email","name":"PinpointEmail"},"ram":{"name":"RAM"},"route53resolver":{"name":"Route53Resolver"},"pinpointsmsvoice":{"prefix":"sms-voice","name":"PinpointSMSVoice"},"quicksight":{"name":"QuickSight"},"rdsdataservice":{"prefix":"rds-data","name":"RDSDataService"},"amplify":{"name":"Amplify"},"datasync":{"name":"DataSync"},"robomaker":{"name":"RoboMaker"},"transfer":{"name":"Transfer"}}
 
 /***/ }),
 /* 8 */
@@ -1815,6 +1815,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var util = __webpack_require__(2);
 	var JsonBuilder = __webpack_require__(14);
 	var JsonParser = __webpack_require__(15);
+	var populateHostPrefix = __webpack_require__(16).populateHostPrefix;
 
 	function buildRequest(req) {
 	  var httpRequest = req.httpRequest;
@@ -1828,6 +1829,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  httpRequest.body = builder.build(req.params || {}, input);
 	  httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
 	  httpRequest.headers['X-Amz-Target'] = target;
+
+	  populateHostPrefix(req);
 	}
 
 	function extractError(resp) {
@@ -2026,10 +2029,105 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	var util =  __webpack_require__(2);
+	var AWS = __webpack_require__(1);
+
+	/**
+	 * Prepend prefix defined by API model to endpoint that's already
+	 * constructed. This feature does not apply to operations using
+	 * endpoint discovery and can be disabled.
+	 * @api private
+	 */
+	function populateHostPrefix(request)  {
+	  var enabled = request.service.config.hostPrefixEnabled;
+	  if (!enabled) return request;
+	  var operationModel = request.service.api.operations[request.operation];
+	  //don't marshal host prefix when operation has endpoint discovery traits
+	  if (hasEndpointDiscover(request)) return request;
+	  if (operationModel.endpoint && operationModel.endpoint.hostPrefix) {
+	    var hostPrefixNotation = operationModel.endpoint.hostPrefix;
+	    var hostPrefix = expandHostPrefix(hostPrefixNotation, request.params, operationModel.input);
+	    prependEndpointPrefix(request.httpRequest.endpoint, hostPrefix);
+	    validateHostname(request.httpRequest.endpoint.hostname);
+	  }
+	  return request
+	}
+
+	/**
+	 * @api private
+	 */
+	function hasEndpointDiscover(request) {
+	  var api = request.service.api;
+	  var operationModel = api.operations[request.operation];
+	  var isEndpointOperation = api.endpointOperation && (api.endpointOperation === util.string.lowerFirst(operationModel.name));
+	  return (operationModel.endpointDiscoveryRequired !== 'NULL' || isEndpointOperation === true);
+	}
+
+	/**
+	 * @api private
+	 */
+	function expandHostPrefix(hostPrefixNotation, params, shape) {
+	  util.each(shape.members, function(name, member) {
+	    if (member.hostLabel === true) {
+	      if (typeof params[name] !== 'string' || params[name] === '') {
+	        throw util.error(new Error(), {
+	          message: 'Parameter ' + name + ' should be a non-empty string.',
+	          code: 'InvalidParameter'
+	        });
+	      }
+	      var regex = new RegExp('\\{' + name + '\\}', 'g');
+	      hostPrefixNotation = hostPrefixNotation.replace(regex, params[name]);
+	    }
+	  });
+	  return hostPrefixNotation;
+	}
+
+	/**
+	 * @api private
+	 */
+	function prependEndpointPrefix(endpoint, prefix) {
+	  if (endpoint.host) {
+	    endpoint.host = prefix + endpoint.host;
+	  }
+	  if (endpoint.hostname) {
+	    endpoint.hostname = prefix + endpoint.hostname;
+	  }
+	}
+
+	/**
+	 * @api private
+	 */
+	function validateHostname(hostname) {
+	  var labels = hostname.split('.')
+	  //Reference: https://tools.ietf.org/html/rfc1123#section-2
+	  var hostPattern = /^[a-zA-Z0-9]{1}$|^[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9]$/;
+	  util.arrayEach(labels, function(label) {
+	    if (!label.length || label.length < 1 || label.length > 63) {
+	      throw util.error(new Error(), {
+	        code: 'ValidationError',
+	        message: 'Hostname label length should be between 1 to 63 characters, inclusive.'
+	      })
+	    }
+	    if (!hostPattern.test(label)) {
+	      throw AWS.util.error(new Error(),
+	        {code: 'ValidationError', message: label + ' is not hostname compatible.'});
+	    }
+	  });
+	}
+
+	module.exports = {
+	  populateHostPrefix: populateHostPrefix
+	}
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	var AWS = __webpack_require__(1);
 	var util = __webpack_require__(2);
-	var QueryParamSerializer = __webpack_require__(17);
-	var Shape = __webpack_require__(18);
+	var QueryParamSerializer = __webpack_require__(18);
+	var Shape = __webpack_require__(19);
+	var populateHostPrefix = __webpack_require__(16).populateHostPrefix;
 
 	function buildRequest(req) {
 	  var operation = req.service.api.operations[req.operation];
@@ -2048,6 +2146,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    httpRequest.params[name] = value;
 	  });
 	  httpRequest.body = util.queryParamsToString(httpRequest.params);
+
+	  populateHostPrefix(req);
 	}
 
 	function extractError(resp) {
@@ -2136,7 +2236,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
@@ -2226,10 +2326,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Collection = __webpack_require__(19);
+	var Collection = __webpack_require__(20);
 
 	var util = __webpack_require__(2);
 
@@ -2272,6 +2372,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'isEventHeader', Boolean(shape.eventheader), false);
 	  property(this, 'isTimestampFormatSet', Boolean(shape.timestampFormat) || shape.prototype && shape.prototype.isTimestampFormatSet === true, false);
 	  property(this, 'endpointDiscoveryId', Boolean(shape.endpointdiscoveryid), false);
+	  property(this, 'hostLabel', Boolean(shape.hostLabel), false);
 
 	  if (options.documentation) {
 	    property(this, 'documentation', shape.documentation);
@@ -2621,7 +2722,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var memoizedProperty = __webpack_require__(2).memoizedProperty;
@@ -2651,10 +2752,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
+	var populateHostPrefix = __webpack_require__(16).populateHostPrefix;
 
 	function populateMethod(req) {
 	  req.httpRequest.method = req.service.api.operations[req.operation].httpMethod;
@@ -2746,6 +2848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  populateMethod(req);
 	  populateURI(req);
 	  populateHeaders(req);
+	  populateHostPrefix(req);
 	}
 
 	function extractError() {
@@ -2803,11 +2906,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
-	var Rest = __webpack_require__(20);
+	var Rest = __webpack_require__(21);
 	var Json = __webpack_require__(13);
 	var JsonBuilder = __webpack_require__(14);
 	var JsonParser = __webpack_require__(15);
@@ -2905,12 +3008,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var util = __webpack_require__(2);
-	var Rest = __webpack_require__(20);
+	var Rest = __webpack_require__(21);
 
 	function populateBody(req) {
 	  var input = req.service.api.operations[req.operation].input;
@@ -3019,12 +3122,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
-	var XmlNode = __webpack_require__(24).XmlNode;
-	var XmlText = __webpack_require__(26).XmlText;
+	var XmlNode = __webpack_require__(25).XmlNode;
+	var XmlText = __webpack_require__(27).XmlText;
 
 	function XmlBuilder() { }
 
@@ -3127,10 +3230,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var escapeAttribute = __webpack_require__(25).escapeAttribute;
+	var escapeAttribute = __webpack_require__(26).escapeAttribute;
 
 	/**
 	 * Represents an XML node.
@@ -3177,7 +3280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3195,10 +3298,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var escapeElement = __webpack_require__(27).escapeElement;
+	var escapeElement = __webpack_require__(28).escapeElement;
 
 	/**
 	 * Represents an XML text value.
@@ -3220,7 +3323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3238,14 +3341,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Collection = __webpack_require__(19);
-	var Operation = __webpack_require__(29);
-	var Shape = __webpack_require__(18);
-	var Paginator = __webpack_require__(30);
-	var ResourceWaiter = __webpack_require__(31);
+	var Collection = __webpack_require__(20);
+	var Operation = __webpack_require__(30);
+	var Shape = __webpack_require__(19);
+	var Paginator = __webpack_require__(31);
+	var ResourceWaiter = __webpack_require__(32);
 
 	var util = __webpack_require__(2);
 	var property = util.property;
@@ -3318,10 +3421,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Shape = __webpack_require__(18);
+	var Shape = __webpack_require__(19);
 
 	var util = __webpack_require__(2);
 	var property = util.property;
@@ -3335,6 +3438,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'api', options.api, false);
 
 	  operation.http = operation.http || {};
+	  property(this, 'endpoint', operation.endpoint);
 	  property(this, 'httpMethod', operation.http.method || 'POST');
 	  property(this, 'httpPath', operation.http.requestUri || '/');
 	  property(this, 'authtype', operation.authtype || '');
@@ -3436,7 +3540,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var property = __webpack_require__(2).property;
@@ -3456,7 +3560,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
@@ -3495,7 +3599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 	function apiLoader(svc, version) {
@@ -3520,12 +3624,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
-	var LRU_1 = __webpack_require__(34);
+	var LRU_1 = __webpack_require__(35);
 	var CACHE_SIZE = 1000;
 	/**
 	 * Inspired node-lru-cache[https://github.com/isaacs/node-lru-cache]
@@ -3594,7 +3698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.EndpointCache = EndpointCache;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3706,7 +3810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.LRUCache = LRUCache;
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -3946,12 +4050,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = AWS.SequentialExecutor;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
-	var Api = __webpack_require__(28);
-	var regionConfig = __webpack_require__(37);
+	var Api = __webpack_require__(29);
+	var regionConfig = __webpack_require__(38);
 
 	var inherit = AWS.util.inherit;
 	var clientCount = 0;
@@ -4746,11 +4850,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
-	var regionConfig = __webpack_require__(38);
+	var regionConfig = __webpack_require__(39);
 
 	function generateRegionPrefix(region) {
 	  if (!region) return null;
@@ -4824,18 +4928,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports) {
 
 	module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/iam":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":{"endpoint":"https://{service}.amazonaws.com","signatureVersion":"v3https","globalEndpoint":true},"*/waf":"globalSSL","us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"}}}
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	__webpack_require__(40);
 	__webpack_require__(41);
+	__webpack_require__(42);
 	var PromisesDependency;
 
 	/**
@@ -4996,6 +5100,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     discovery operations. Once endpoint cache is created, updating this setting
 	 *     cannot change existing cache size.
 	 *     Defaults to 1000
+	 *
+	 * @!attribute hostPrefixEnabled
+	 *   @return [Boolean] whether to marshal request parameters to the prefix of
+	 *     hostname. Defaults to `true`.
 	 */
 	AWS.Config = AWS.util.inherit({
 	  /**
@@ -5130,6 +5238,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   endpoints from endpoint discovery operations. Once endpoint cache is created,
 	   *   updating this setting cannot change existing cache size.
 	   *   Defaults to 1000
+	   * @option options hostPrefixEnabled [Boolean] whether to marshal request
+	   *   parameters to the prefix of hostname.
+	   *   Defaults to `true`.
 	   */
 	  constructor: function Config(options) {
 	    if (options === undefined) options = {};
@@ -5349,7 +5460,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    useAccelerateEndpoint: false,
 	    clientSideMonitoring: false,
 	    endpointDiscoveryEnabled: false,
-	    endpointCacheSize: 1000
+	    endpointCacheSize: 1000,
+	    hostPrefixEnabled: true
 	  },
 
 	  /**
@@ -5400,7 +5512,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -5620,7 +5732,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -5799,7 +5911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -6040,12 +6152,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	var SequentialExecutor = __webpack_require__(35);
-	var DISCOVER_ENDPOINT = __webpack_require__(44).discoverEndpoint;
+	var SequentialExecutor = __webpack_require__(36);
+	var DISCOVER_ENDPOINT = __webpack_require__(45).discoverEndpoint;
 	/**
 	 * The namespace used to register global event listeners for request building
 	 * and sending.
@@ -6594,7 +6706,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var inputShape = req.service.api.operations[req.operation].input;
 	          censoredParams = filterSensitiveLog(inputShape, req.params);
 	        }
-	        var params = __webpack_require__(45).inspect(censoredParams, true, null);
+	        var params = __webpack_require__(46).inspect(censoredParams, true, null);
 	        var message = '';
 	        if (ansi) message += '\x1B[33m';
 	        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
@@ -6623,28 +6735,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }),
 
 	  Rest: new SequentialExecutor().addNamedListeners(function(add) {
-	    var svc = __webpack_require__(20);
-	    add('BUILD', 'build', svc.buildRequest);
-	    add('EXTRACT_DATA', 'extractData', svc.extractData);
-	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-	  }),
-
-	  RestJson: new SequentialExecutor().addNamedListeners(function(add) {
 	    var svc = __webpack_require__(21);
 	    add('BUILD', 'build', svc.buildRequest);
 	    add('EXTRACT_DATA', 'extractData', svc.extractData);
 	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
 	  }),
 
-	  RestXml: new SequentialExecutor().addNamedListeners(function(add) {
+	  RestJson: new SequentialExecutor().addNamedListeners(function(add) {
 	    var svc = __webpack_require__(22);
 	    add('BUILD', 'build', svc.buildRequest);
 	    add('EXTRACT_DATA', 'extractData', svc.extractData);
 	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
 	  }),
 
+	  RestXml: new SequentialExecutor().addNamedListeners(function(add) {
+	    var svc = __webpack_require__(23);
+	    add('BUILD', 'build', svc.buildRequest);
+	    add('EXTRACT_DATA', 'extractData', svc.extractData);
+	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+	  }),
+
 	  Query: new SequentialExecutor().addNamedListeners(function(add) {
-	    var svc = __webpack_require__(16);
+	    var svc = __webpack_require__(17);
 	    add('BUILD', 'build', svc.buildRequest);
 	    add('EXTRACT_DATA', 'extractData', svc.extractData);
 	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
@@ -6653,7 +6765,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
@@ -7015,7 +7127,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -7543,7 +7655,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(46);
+	exports.isBuffer = __webpack_require__(47);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -7587,7 +7699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(47);
+	exports.inherits = __webpack_require__(48);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -7608,7 +7720,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -7619,7 +7731,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -7648,14 +7760,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
-	var AcceptorStateMachine = __webpack_require__(49);
+	var AcceptorStateMachine = __webpack_require__(50);
 	var inherit = AWS.util.inherit;
 	var domain = AWS.util.domain;
-	var jmespath = __webpack_require__(50);
+	var jmespath = __webpack_require__(51);
 
 	/**
 	 * @api private
@@ -8461,7 +8573,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports) {
 
 	function AcceptorStateMachine(states, state) {
@@ -8512,7 +8624,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	(function(exports) {
@@ -10185,12 +10297,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
-	var jmespath = __webpack_require__(50);
+	var jmespath = __webpack_require__(51);
 
 	/**
 	 * This class encapsulates the response information
@@ -10392,7 +10504,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -10412,7 +10524,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
-	var jmespath = __webpack_require__(50);
+	var jmespath = __webpack_require__(51);
 
 	/**
 	 * @api private
@@ -10602,7 +10714,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -10638,16 +10750,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  throw new Error('Unknown signing version ' + version);
 	};
 
-	__webpack_require__(54);
 	__webpack_require__(55);
 	__webpack_require__(56);
 	__webpack_require__(57);
-	__webpack_require__(59);
+	__webpack_require__(58);
 	__webpack_require__(60);
+	__webpack_require__(61);
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -10701,7 +10813,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -10784,13 +10896,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
 
-	__webpack_require__(55);
+	__webpack_require__(56);
 
 	/**
 	 * @api private
@@ -10815,11 +10927,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	var v4Credentials = __webpack_require__(58);
+	var v4Credentials = __webpack_require__(59);
 	var inherit = AWS.util.inherit;
 
 	/**
@@ -11036,7 +11148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -11142,7 +11254,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -11323,7 +11435,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -11448,7 +11560,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);

@@ -152,3 +152,7 @@ export import Route53Resolver = require('./route53resolver');
 export import PinpointSMSVoice = require('./pinpointsmsvoice');
 export import QuickSight = require('./quicksight');
 export import RDSDataService = require('./rdsdataservice');
+export import Amplify = require('./amplify');
+export import DataSync = require('./datasync');
+export import RoboMaker = require('./robomaker');
+export import Transfer = require('./transfer');

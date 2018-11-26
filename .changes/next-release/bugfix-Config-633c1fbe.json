@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Config",
-  "description": "fix useDualstack typing"
-}

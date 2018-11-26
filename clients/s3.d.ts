@@ -170,11 +170,11 @@ declare class S3 extends S3Customizations {
    */
   deleteObjects(callback?: (err: AWSError, data: S3.Types.DeleteObjectsOutput) => void): Request<S3.Types.DeleteObjectsOutput, AWSError>;
   /**
-   * Removes the Public Access Block configuration for an Amazon S3 bucket.
+   * Removes the PublicAccessBlock configuration from an Amazon S3 bucket.
    */
   deletePublicAccessBlock(params: S3.Types.DeletePublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the Public Access Block configuration for an Amazon S3 bucket.
+   * Removes the PublicAccessBlock configuration from an Amazon S3 bucket.
    */
   deletePublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -370,11 +370,11 @@ declare class S3 extends S3Customizations {
    */
   getObjectTorrent(callback?: (err: AWSError, data: S3.Types.GetObjectTorrentOutput) => void): Request<S3.Types.GetObjectTorrentOutput, AWSError>;
   /**
-   * Retrieves the Public Access Block configuration for an Amazon S3 bucket.
+   * Retrieves the PublicAccessBlock configuration for an Amazon S3 bucket.
    */
   getPublicAccessBlock(params: S3.Types.GetPublicAccessBlockRequest, callback?: (err: AWSError, data: S3.Types.GetPublicAccessBlockOutput) => void): Request<S3.Types.GetPublicAccessBlockOutput, AWSError>;
   /**
-   * Retrieves the Public Access Block configuration for an Amazon S3 bucket.
+   * Retrieves the PublicAccessBlock configuration for an Amazon S3 bucket.
    */
   getPublicAccessBlock(callback?: (err: AWSError, data: S3.Types.GetPublicAccessBlockOutput) => void): Request<S3.Types.GetPublicAccessBlockOutput, AWSError>;
   /**
@@ -630,11 +630,11 @@ declare class S3 extends S3Customizations {
    */
   putObjectTagging(callback?: (err: AWSError, data: S3.Types.PutObjectTaggingOutput) => void): Request<S3.Types.PutObjectTaggingOutput, AWSError>;
   /**
-   * Creates or modifies the Public Access Block configuration for an Amazon S3 bucket.
+   * Creates or modifies the PublicAccessBlock configuration for an Amazon S3 bucket.
    */
   putPublicAccessBlock(params: S3.Types.PutPublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or modifies the Public Access Block configuration for an Amazon S3 bucket.
+   * Creates or modifies the PublicAccessBlock configuration for an Amazon S3 bucket.
    */
   putPublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1499,7 +1499,7 @@ declare namespace S3 {
   }
   export interface DeletePublicAccessBlockRequest {
     /**
-     *  The Amazon S3 bucket whose Public Access Block configuration you want to delete. 
+     * The Amazon S3 bucket whose PublicAccessBlock configuration you want to delete. 
      */
     Bucket: BucketName;
   }
@@ -1723,13 +1723,13 @@ declare namespace S3 {
   }
   export interface GetBucketPolicyStatusOutput {
     /**
-     * The public-policy status for this bucket.
+     * The policy status for the specified bucket.
      */
     PolicyStatus?: PolicyStatus;
   }
   export interface GetBucketPolicyStatusRequest {
     /**
-     * The name of the Amazon S3 bucket whose public-policy status you want to retrieve.
+     * The name of the Amazon S3 bucket whose policy status you want to retrieve.
      */
     Bucket: BucketName;
   }
@@ -1984,13 +1984,13 @@ declare namespace S3 {
   }
   export interface GetPublicAccessBlockOutput {
     /**
-     * The Public Access Block configuration currently in effect for this Amazon S3 bucket.
+     * The PublicAccessBlock configuration currently in effect for this Amazon S3 bucket.
      */
     PublicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
   }
   export interface GetPublicAccessBlockRequest {
     /**
-     *  The name of the Amazon S3 bucket whose Public Access Block configuration you want to retrieve. 
+     * The name of the Amazon S3 bucket whose PublicAccessBlock configuration you want to retrieve. 
      */
     Bucket: BucketName;
   }
@@ -2952,7 +2952,7 @@ declare namespace S3 {
   export type ObjectIdentifierList = ObjectIdentifier[];
   export type ObjectKey = string;
   export type ObjectList = Object[];
-  export type ObjectStorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|string;
+  export type ObjectStorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|string;
   export interface ObjectVersion {
     ETag?: ETag;
     /**
@@ -3034,7 +3034,7 @@ declare namespace S3 {
   export type Policy = string;
   export interface PolicyStatus {
     /**
-     * The public-policy status for this bucket. TRUE indicates that this bucket is public. FALSE indicates that the bucket is not public.
+     * The policy status for this bucket. TRUE indicates that this bucket is public. FALSE indicates that the bucket is not public.
      */
     IsPublic?: IsPublic;
   }
@@ -3063,19 +3063,19 @@ declare namespace S3 {
   export type Protocol = "http"|"https"|string;
   export interface PublicAccessBlockConfiguration {
     /**
-     *  Specifies whether Amazon S3 should block public ACLs for this bucket. Setting this element to TRUE causes the following behavior:   PUT Bucket acl and PUT Object acl calls will fail if the specified ACL allows public access.   PUT Object calls will fail if the request includes an object ACL.   Note that enabling this setting doesn't affect existing policies or ACLs.
+     * Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior:   PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.   PUT Object calls fail if the request includes a public ACL.   Enabling this setting doesn't affect existing policies or ACLs.
      */
     BlockPublicAcls?: Setting;
     /**
-     * Specifies whether Amazon S3 should ignore public ACLs for this bucket. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on this bucket and any objects that it contains.  Note that enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.
+     * Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.
      */
     IgnorePublicAcls?: Setting;
     /**
-     * Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.  Note that enabling this setting doesn't affect existing bucket policies.
+     * Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.  Enabling this setting doesn't affect existing bucket policies.
      */
     BlockPublicPolicy?: Setting;
     /**
-     * Specifies whether Amazon S3 should restrict public bucket policies for this bucket. If this element is set to TRUE, then only the bucket owner and AWS Services can access this bucket if it has a public policy. Note that enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.
+     * Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy. Enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.
      */
     RestrictPublicBuckets?: Setting;
   }
@@ -3424,15 +3424,15 @@ declare namespace S3 {
   }
   export interface PutPublicAccessBlockRequest {
     /**
-     * The name of the Amazon S3 bucket whose Public Access Block configuration you want to set.
+     * The name of the Amazon S3 bucket whose PublicAccessBlock configuration you want to set.
      */
     Bucket: BucketName;
     /**
-     *  The MD5 hash of the PutPublicBlock request body. 
+     * The MD5 hash of the PutPublicAccessBlock request body. 
      */
     ContentMD5?: ContentMD5;
     /**
-     * The Public Access Block configuration that you want to apply to this Amazon S3 bucket.
+     * The PublicAccessBlock configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when &amp;S3; considers a bucket or object public, see For more information about when Amazon S3 considers a bucket or object public, see The Meaning of "Public" in the Amazon Simple Storage Service Developer Guide.
      */
     PublicAccessBlockConfiguration: PublicAccessBlockConfiguration;
   }
@@ -3828,7 +3828,7 @@ declare namespace S3 {
      */
     Details?: Stats;
   }
-  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|string;
+  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|string;
   export interface StorageClassAnalysis {
     /**
      * A container used to describe how data related to the storage class analysis should be exported.
@@ -3914,7 +3914,7 @@ declare namespace S3 {
     StorageClass?: TransitionStorageClass;
   }
   export type TransitionList = Transition[];
-  export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|string;
+  export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|string;
   export type Type = "CanonicalUser"|"AmazonCustomerByEmail"|"Group"|string;
   export type URI = string;
   export type UploadIdMarker = string;
