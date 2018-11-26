@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "MediaConvert",
+  "description": "Added support for \"waitFor\" functionality in MediaConvert client"
+}
