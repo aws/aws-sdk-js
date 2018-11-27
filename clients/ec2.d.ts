@@ -21,6 +21,14 @@ declare class EC2 extends Service {
    */
   acceptReservedInstancesExchangeQuote(callback?: (err: AWSError, data: EC2.Types.AcceptReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.AcceptReservedInstancesExchangeQuoteResult, AWSError>;
   /**
+   * Accepts a request to attach a VPC to a transit gateway. The VPC attachment must be in the pendingAcceptance state. Use DescribeTransitGatewayVpcAttachments to view your pending VPC attachment requests. Use RejectTransitGatewayVpcAttachment to reject a VPC attachment request.
+   */
+  acceptTransitGatewayVpcAttachment(params: EC2.Types.AcceptTransitGatewayVpcAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.AcceptTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.AcceptTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
+   * Accepts a request to attach a VPC to a transit gateway. The VPC attachment must be in the pendingAcceptance state. Use DescribeTransitGatewayVpcAttachments to view your pending VPC attachment requests. Use RejectTransitGatewayVpcAttachment to reject a VPC attachment request.
+   */
+  acceptTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.AcceptTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.AcceptTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
    * Accepts one or more interface VPC endpoint connection requests to your VPC endpoint service.
    */
   acceptVpcEndpointConnections(params: EC2.Types.AcceptVpcEndpointConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.AcceptVpcEndpointConnectionsResult) => void): Request<EC2.Types.AcceptVpcEndpointConnectionsResult, AWSError>;
@@ -116,6 +124,14 @@ declare class EC2 extends Service {
    * Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have a prefix length of /64.
    */
   associateSubnetCidrBlock(callback?: (err: AWSError, data: EC2.Types.AssociateSubnetCidrBlockResult) => void): Request<EC2.Types.AssociateSubnetCidrBlockResult, AWSError>;
+  /**
+   * Associates the specified attachment with the specified transit gateway route table. You can associate only one route table with an attachment.
+   */
+  associateTransitGatewayRouteTable(params: EC2.Types.AssociateTransitGatewayRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.AssociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.AssociateTransitGatewayRouteTableResult, AWSError>;
+  /**
+   * Associates the specified attachment with the specified transit gateway route table. You can associate only one route table with an attachment.
+   */
+  associateTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.AssociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.AssociateTransitGatewayRouteTableResult, AWSError>;
   /**
    * Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR block. The IPv6 CIDR block size is fixed at /56. For more information about associating CIDR blocks with your VPC and applicable restrictions, see VPC and Subnet Sizing in the Amazon Virtual Private Cloud User Guide.
    */
@@ -517,6 +533,38 @@ declare class EC2 extends Service {
    */
   createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates a transit gateway. You can use a transit gateway to interconnect your virtual private clouds (VPC) and on-premises networks. After the transit gateway enters the available state, you can attach your VPCs and VPN connections to the transit gateway. To attach your VPCs, use CreateTransitGatewayVpcAttachment. To attach a VPN connection, use CreateCustomerGateway to create a customer gateway and specify the ID of the customer gateway and the ID of the transit gateway in a call to CreateVpnConnection. When you create a transit gateway, we create a default transit gateway route table and use it as the default association route table and the default propagation route table. You can use CreateTransitGatewayRouteTable to create additional transit gateway route tables. If you disable automatic route propagation, we do not create a default transit gateway route table. You can use EnableTransitGatewayRouteTablePropagation to propagate routes from a resource attachment to a transit gateway route table. If you disable automatic associations, you can use AssociateTransitGatewayRouteTable to associate a resource attachment with a transit gateway route table.
+   */
+  createTransitGateway(params: EC2.Types.CreateTransitGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayResult) => void): Request<EC2.Types.CreateTransitGatewayResult, AWSError>;
+  /**
+   * Creates a transit gateway. You can use a transit gateway to interconnect your virtual private clouds (VPC) and on-premises networks. After the transit gateway enters the available state, you can attach your VPCs and VPN connections to the transit gateway. To attach your VPCs, use CreateTransitGatewayVpcAttachment. To attach a VPN connection, use CreateCustomerGateway to create a customer gateway and specify the ID of the customer gateway and the ID of the transit gateway in a call to CreateVpnConnection. When you create a transit gateway, we create a default transit gateway route table and use it as the default association route table and the default propagation route table. You can use CreateTransitGatewayRouteTable to create additional transit gateway route tables. If you disable automatic route propagation, we do not create a default transit gateway route table. You can use EnableTransitGatewayRouteTablePropagation to propagate routes from a resource attachment to a transit gateway route table. If you disable automatic associations, you can use AssociateTransitGatewayRouteTable to associate a resource attachment with a transit gateway route table.
+   */
+  createTransitGateway(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayResult) => void): Request<EC2.Types.CreateTransitGatewayResult, AWSError>;
+  /**
+   * Creates a static route for the specified transit gateway route table.
+   */
+  createTransitGatewayRoute(params: EC2.Types.CreateTransitGatewayRouteRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayRouteResult) => void): Request<EC2.Types.CreateTransitGatewayRouteResult, AWSError>;
+  /**
+   * Creates a static route for the specified transit gateway route table.
+   */
+  createTransitGatewayRoute(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayRouteResult) => void): Request<EC2.Types.CreateTransitGatewayRouteResult, AWSError>;
+  /**
+   * Creates a route table for the specified transit gateway.
+   */
+  createTransitGatewayRouteTable(params: EC2.Types.CreateTransitGatewayRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayRouteTableResult) => void): Request<EC2.Types.CreateTransitGatewayRouteTableResult, AWSError>;
+  /**
+   * Creates a route table for the specified transit gateway.
+   */
+  createTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayRouteTableResult) => void): Request<EC2.Types.CreateTransitGatewayRouteTableResult, AWSError>;
+  /**
+   * Attaches the specified VPC to the specified transit gateway. If you attach a VPC with a CIDR range that overlaps the CIDR range of a VPC that is already attached, the new VPC CIDR range is not propagated to the default propagation route table. To send VPC traffic to an attached transit gateway, add a route to the VPC route table using CreateRoute.
+   */
+  createTransitGatewayVpcAttachment(params: EC2.Types.CreateTransitGatewayVpcAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
+   * Attaches the specified VPC to the specified transit gateway. If you attach a VPC with a CIDR range that overlaps the CIDR range of a VPC that is already attached, the new VPC CIDR range is not propagated to the default propagation route table. To send VPC traffic to an attached transit gateway, add a route to the VPC route table using CreateRoute.
+   */
+  createTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
    * Creates an EBS volume that can be attached to an instance in the same Availability Zone. The volume is created in the regional endpoint that you send the HTTP request to. For more information see Regions and Endpoints. You can create a new empty volume or restore a volume from an EBS snapshot. Any AWS Marketplace product codes from the snapshot are propagated to the volume. You can create encrypted volumes with the Encrypted parameter. Encrypted volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. You can tag your volumes during creation. For more information, see Tagging Your Amazon EC2 Resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Creating an Amazon EBS Volume in the Amazon Elastic Compute Cloud User Guide.
    */
   createVolume(params: EC2.Types.CreateVolumeRequest, callback?: (err: AWSError, data: EC2.Types.Volume) => void): Request<EC2.Types.Volume, AWSError>;
@@ -773,6 +821,38 @@ declare class EC2 extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified transit gateway.
+   */
+  deleteTransitGateway(params: EC2.Types.DeleteTransitGatewayRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayResult) => void): Request<EC2.Types.DeleteTransitGatewayResult, AWSError>;
+  /**
+   * Deletes the specified transit gateway.
+   */
+  deleteTransitGateway(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayResult) => void): Request<EC2.Types.DeleteTransitGatewayResult, AWSError>;
+  /**
+   * Deletes the specified route from the specified transit gateway route table.
+   */
+  deleteTransitGatewayRoute(params: EC2.Types.DeleteTransitGatewayRouteRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteResult, AWSError>;
+  /**
+   * Deletes the specified route from the specified transit gateway route table.
+   */
+  deleteTransitGatewayRoute(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteResult, AWSError>;
+  /**
+   * Deletes the specified transit gateway route table. You must disassociate the route table from any transit gateway route tables before you can delete it.
+   */
+  deleteTransitGatewayRouteTable(params: EC2.Types.DeleteTransitGatewayRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteTableResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteTableResult, AWSError>;
+  /**
+   * Deletes the specified transit gateway route table. You must disassociate the route table from any transit gateway route tables before you can delete it.
+   */
+  deleteTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteTableResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteTableResult, AWSError>;
+  /**
+   * Deletes the specified VPC attachment.
+   */
+  deleteTransitGatewayVpcAttachment(params: EC2.Types.DeleteTransitGatewayVpcAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.DeleteTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
+   * Deletes the specified VPC attachment.
+   */
+  deleteTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.DeleteTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
    * Deletes the specified EBS volume. The volume must be in the available state (not attached to an instance). The volume can remain in the deleting state for several minutes. For more information, see Deleting an Amazon EBS Volume in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteVolume(params: EC2.Types.DeleteVolumeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -957,11 +1037,11 @@ declare class EC2 extends Service {
    */
   describeEgressOnlyInternetGateways(callback?: (err: AWSError, data: EC2.Types.DescribeEgressOnlyInternetGatewaysResult) => void): Request<EC2.Types.DescribeEgressOnlyInternetGatewaysResult, AWSError>;
   /**
-   * Describes the Elastic GPUs associated with your instances. For more information about Elastic GPUs, see Amazon EC2 Elastic GPUs.
+   * Describes the Elastic Graphics accelerator associated with your instances. For more information about Elastic Graphics, see Amazon Elastic Graphics.
    */
   describeElasticGpus(params: EC2.Types.DescribeElasticGpusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeElasticGpusResult) => void): Request<EC2.Types.DescribeElasticGpusResult, AWSError>;
   /**
-   * Describes the Elastic GPUs associated with your instances. For more information about Elastic GPUs, see Amazon EC2 Elastic GPUs.
+   * Describes the Elastic Graphics accelerator associated with your instances. For more information about Elastic Graphics, see Amazon Elastic Graphics.
    */
   describeElasticGpus(callback?: (err: AWSError, data: EC2.Types.DescribeElasticGpusResult) => void): Request<EC2.Types.DescribeElasticGpusResult, AWSError>;
   /**
@@ -1413,6 +1493,38 @@ declare class EC2 extends Service {
    */
   describeTags(callback?: (err: AWSError, data: EC2.Types.DescribeTagsResult) => void): Request<EC2.Types.DescribeTagsResult, AWSError>;
   /**
+   * Describes one or more attachments between resources and transit gateways. By default, all attachments are described. Alternatively, you can filter the results by attachment ID, attachment state, resource ID, or resource owner.
+   */
+  describeTransitGatewayAttachments(params: EC2.Types.DescribeTransitGatewayAttachmentsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayAttachmentsResult) => void): Request<EC2.Types.DescribeTransitGatewayAttachmentsResult, AWSError>;
+  /**
+   * Describes one or more attachments between resources and transit gateways. By default, all attachments are described. Alternatively, you can filter the results by attachment ID, attachment state, resource ID, or resource owner.
+   */
+  describeTransitGatewayAttachments(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayAttachmentsResult) => void): Request<EC2.Types.DescribeTransitGatewayAttachmentsResult, AWSError>;
+  /**
+   * Describes one or more transit gateway route tables. By default, all transit gateway route tables are described. Alternatively, you can filter the results.
+   */
+  describeTransitGatewayRouteTables(params: EC2.Types.DescribeTransitGatewayRouteTablesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayRouteTablesResult) => void): Request<EC2.Types.DescribeTransitGatewayRouteTablesResult, AWSError>;
+  /**
+   * Describes one or more transit gateway route tables. By default, all transit gateway route tables are described. Alternatively, you can filter the results.
+   */
+  describeTransitGatewayRouteTables(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayRouteTablesResult) => void): Request<EC2.Types.DescribeTransitGatewayRouteTablesResult, AWSError>;
+  /**
+   * Describes one or more VPC attachments. By default, all VPC attachments are described. Alternatively, you can filter the results.
+   */
+  describeTransitGatewayVpcAttachments(params: EC2.Types.DescribeTransitGatewayVpcAttachmentsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayVpcAttachmentsResult) => void): Request<EC2.Types.DescribeTransitGatewayVpcAttachmentsResult, AWSError>;
+  /**
+   * Describes one or more VPC attachments. By default, all VPC attachments are described. Alternatively, you can filter the results.
+   */
+  describeTransitGatewayVpcAttachments(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayVpcAttachmentsResult) => void): Request<EC2.Types.DescribeTransitGatewayVpcAttachmentsResult, AWSError>;
+  /**
+   * Describes one or more transit gateways. By default, all transit gateways are described. Alternatively, you can filter the results.
+   */
+  describeTransitGateways(params: EC2.Types.DescribeTransitGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewaysResult) => void): Request<EC2.Types.DescribeTransitGatewaysResult, AWSError>;
+  /**
+   * Describes one or more transit gateways. By default, all transit gateways are described. Alternatively, you can filter the results.
+   */
+  describeTransitGateways(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewaysResult) => void): Request<EC2.Types.DescribeTransitGatewaysResult, AWSError>;
+  /**
    * Describes the specified attribute of the specified volume. You can specify only one attribute at a time. For more information about EBS volumes, see Amazon EBS Volumes in the Amazon Elastic Compute Cloud User Guide.
    */
   describeVolumeAttribute(params: EC2.Types.DescribeVolumeAttributeRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVolumeAttributeResult) => void): Request<EC2.Types.DescribeVolumeAttributeResult, AWSError>;
@@ -1589,6 +1701,14 @@ declare class EC2 extends Service {
    */
   detachVpnGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Disables the specified resource attachment from propagating routes to the specified propagation route table.
+   */
+  disableTransitGatewayRouteTablePropagation(params: EC2.Types.DisableTransitGatewayRouteTablePropagationRequest, callback?: (err: AWSError, data: EC2.Types.DisableTransitGatewayRouteTablePropagationResult) => void): Request<EC2.Types.DisableTransitGatewayRouteTablePropagationResult, AWSError>;
+  /**
+   * Disables the specified resource attachment from propagating routes to the specified propagation route table.
+   */
+  disableTransitGatewayRouteTablePropagation(callback?: (err: AWSError, data: EC2.Types.DisableTransitGatewayRouteTablePropagationResult) => void): Request<EC2.Types.DisableTransitGatewayRouteTablePropagationResult, AWSError>;
+  /**
    * Disables a virtual private gateway (VGW) from propagating routes to a specified route table of a VPC.
    */
   disableVgwRoutePropagation(params: EC2.Types.DisableVgwRoutePropagationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1645,6 +1765,14 @@ declare class EC2 extends Service {
    */
   disassociateSubnetCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateSubnetCidrBlockResult) => void): Request<EC2.Types.DisassociateSubnetCidrBlockResult, AWSError>;
   /**
+   * Disassociates a resource attachment from a transit gateway route table.
+   */
+  disassociateTransitGatewayRouteTable(params: EC2.Types.DisassociateTransitGatewayRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.DisassociateTransitGatewayRouteTableResult, AWSError>;
+  /**
+   * Disassociates a resource attachment from a transit gateway route table.
+   */
+  disassociateTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.DisassociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.DisassociateTransitGatewayRouteTableResult, AWSError>;
+  /**
    * Disassociates a CIDR block from a VPC. To disassociate the CIDR block, you must specify its association ID. You can get the association ID by using DescribeVpcs. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it.  You cannot disassociate the CIDR block with which you originally created the VPC (the primary CIDR block).
    */
   disassociateVpcCidrBlock(params: EC2.Types.DisassociateVpcCidrBlockRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
@@ -1652,6 +1780,14 @@ declare class EC2 extends Service {
    * Disassociates a CIDR block from a VPC. To disassociate the CIDR block, you must specify its association ID. You can get the association ID by using DescribeVpcs. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it.  You cannot disassociate the CIDR block with which you originally created the VPC (the primary CIDR block).
    */
   disassociateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
+  /**
+   * Enables the specified attachment to propagate routes to the specified propagation route table.
+   */
+  enableTransitGatewayRouteTablePropagation(params: EC2.Types.EnableTransitGatewayRouteTablePropagationRequest, callback?: (err: AWSError, data: EC2.Types.EnableTransitGatewayRouteTablePropagationResult) => void): Request<EC2.Types.EnableTransitGatewayRouteTablePropagationResult, AWSError>;
+  /**
+   * Enables the specified attachment to propagate routes to the specified propagation route table.
+   */
+  enableTransitGatewayRouteTablePropagation(callback?: (err: AWSError, data: EC2.Types.EnableTransitGatewayRouteTablePropagationResult) => void): Request<EC2.Types.EnableTransitGatewayRouteTablePropagationResult, AWSError>;
   /**
    * Enables a virtual private gateway (VGW) to propagate routes to the specified route table of a VPC.
    */
@@ -1684,6 +1820,14 @@ declare class EC2 extends Service {
    * Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
    */
   enableVpcClassicLinkDnsSupport(callback?: (err: AWSError, data: EC2.Types.EnableVpcClassicLinkDnsSupportResult) => void): Request<EC2.Types.EnableVpcClassicLinkDnsSupportResult, AWSError>;
+  /**
+   * Exports routes from the specified transit gateway route table to the specified S3 bucket. By default, all routes are exported. Alternatively, you can filter by CIDR range.
+   */
+  exportTransitGatewayRoutes(params: EC2.Types.ExportTransitGatewayRoutesRequest, callback?: (err: AWSError, data: EC2.Types.ExportTransitGatewayRoutesResult) => void): Request<EC2.Types.ExportTransitGatewayRoutesResult, AWSError>;
+  /**
+   * Exports routes from the specified transit gateway route table to the specified S3 bucket. By default, all routes are exported. Alternatively, you can filter by CIDR range.
+   */
+  exportTransitGatewayRoutes(callback?: (err: AWSError, data: EC2.Types.ExportTransitGatewayRoutesResult) => void): Request<EC2.Types.ExportTransitGatewayRoutesResult, AWSError>;
   /**
    * Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes the last three system event log errors. By default, the console output returns buffered information that was posted shortly after an instance transition state (start, stop, reboot, or terminate). This information is available for at least one hour after the most recent post. Only the most recent 64 KB of console output is available. You can optionally retrieve the latest serial console output at any time during the instance lifecycle. This option is supported on instance types that use the Nitro hypervisor. For more information, see Instance Console Output in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -1732,6 +1876,30 @@ declare class EC2 extends Service {
    * Returns a quote and exchange information for exchanging one or more specified Convertible Reserved Instances for a new Convertible Reserved Instance. If the exchange cannot be performed, the reason is returned in the response. Use AcceptReservedInstancesExchangeQuote to perform the exchange.
    */
   getReservedInstancesExchangeQuote(callback?: (err: AWSError, data: EC2.Types.GetReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.GetReservedInstancesExchangeQuoteResult, AWSError>;
+  /**
+   * Lists the route tables to which the specified resource attachment propagates routes.
+   */
+  getTransitGatewayAttachmentPropagations(params: EC2.Types.GetTransitGatewayAttachmentPropagationsRequest, callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayAttachmentPropagationsResult) => void): Request<EC2.Types.GetTransitGatewayAttachmentPropagationsResult, AWSError>;
+  /**
+   * Lists the route tables to which the specified resource attachment propagates routes.
+   */
+  getTransitGatewayAttachmentPropagations(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayAttachmentPropagationsResult) => void): Request<EC2.Types.GetTransitGatewayAttachmentPropagationsResult, AWSError>;
+  /**
+   * Gets information about the associations for the specified transit gateway route table.
+   */
+  getTransitGatewayRouteTableAssociations(params: EC2.Types.GetTransitGatewayRouteTableAssociationsRequest, callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayRouteTableAssociationsResult) => void): Request<EC2.Types.GetTransitGatewayRouteTableAssociationsResult, AWSError>;
+  /**
+   * Gets information about the associations for the specified transit gateway route table.
+   */
+  getTransitGatewayRouteTableAssociations(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayRouteTableAssociationsResult) => void): Request<EC2.Types.GetTransitGatewayRouteTableAssociationsResult, AWSError>;
+  /**
+   * Gets information about the route table propagations for the specified transit gateway route table.
+   */
+  getTransitGatewayRouteTablePropagations(params: EC2.Types.GetTransitGatewayRouteTablePropagationsRequest, callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayRouteTablePropagationsResult) => void): Request<EC2.Types.GetTransitGatewayRouteTablePropagationsResult, AWSError>;
+  /**
+   * Gets information about the route table propagations for the specified transit gateway route table.
+   */
+  getTransitGatewayRouteTablePropagations(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayRouteTablePropagationsResult) => void): Request<EC2.Types.GetTransitGatewayRouteTablePropagationsResult, AWSError>;
   /**
    * Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI). For more information, see Importing a VM as an Image Using VM Import/Export in the VM Import/Export User Guide.
    */
@@ -1909,6 +2077,14 @@ declare class EC2 extends Service {
    */
   modifySubnetAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Modifies the specified VPC attachment.
+   */
+  modifyTransitGatewayVpcAttachment(params: EC2.Types.ModifyTransitGatewayVpcAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.ModifyTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
+   * Modifies the specified VPC attachment.
+   */
+  modifyTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.ModifyTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
    * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you may be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying an EBS volume running Linux, see Modifying the Size, IOPS, or Type of an EBS Volume on Linux. For more information about modifying an EBS volume running Windows, see Modifying the Size, IOPS, or Type of an EBS Volume on Windows.   When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For information about extending a Linux file system, see Extending a Linux File System. For information about extending a Windows file system, see Extending a Windows File System.   You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using the DescribeVolumesModifications API. For information about tracking status changes using either method, see Monitoring Volume Modifications.  With previous-generation instance types, resizing an EBS volume may require detaching and reattaching the volume or stopping and restarting the instance. For more information, see Modifying the Size, IOPS, or Type of an EBS Volume on Linux and Modifying the Size, IOPS, or Type of an EBS Volume on Windows. If you reach the maximum volume modification rate per volume limit, you will need to wait at least six hours before applying further modifications to the affected EBS volume.
    */
   modifyVolume(params: EC2.Types.ModifyVolumeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVolumeResult) => void): Request<EC2.Types.ModifyVolumeResult, AWSError>;
@@ -2045,6 +2221,14 @@ declare class EC2 extends Service {
    */
   registerImage(callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
+   * Rejects a request to attach a VPC to a transit gateway. The VPC attachment must be in the pendingAcceptance state. Use DescribeTransitGatewayVpcAttachments to view your pending VPC attachment requests. Use AcceptTransitGatewayVpcAttachment to accept a VPC attachment request.
+   */
+  rejectTransitGatewayVpcAttachment(params: EC2.Types.RejectTransitGatewayVpcAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.RejectTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.RejectTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
+   * Rejects a request to attach a VPC to a transit gateway. The VPC attachment must be in the pendingAcceptance state. Use DescribeTransitGatewayVpcAttachments to view your pending VPC attachment requests. Use AcceptTransitGatewayVpcAttachment to accept a VPC attachment request.
+   */
+  rejectTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.RejectTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.RejectTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
    * Rejects one or more VPC endpoint connection requests to your VPC endpoint service.
    */
   rejectVpcEndpointConnections(params: EC2.Types.RejectVpcEndpointConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.RejectVpcEndpointConnectionsResult) => void): Request<EC2.Types.RejectVpcEndpointConnectionsResult, AWSError>;
@@ -2116,6 +2300,14 @@ declare class EC2 extends Service {
    * Changes the route table associated with a given subnet in a VPC. After the operation completes, the subnet uses the routes in the new route table it's associated with. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide. You can also use ReplaceRouteTableAssociation to change which table is the main route table in the VPC. You just specify the main route table's association ID and the route table to be the new main route table.
    */
   replaceRouteTableAssociation(callback?: (err: AWSError, data: EC2.Types.ReplaceRouteTableAssociationResult) => void): Request<EC2.Types.ReplaceRouteTableAssociationResult, AWSError>;
+  /**
+   * Replaces the specified route in the specified transit gateway route table.
+   */
+  replaceTransitGatewayRoute(params: EC2.Types.ReplaceTransitGatewayRouteRequest, callback?: (err: AWSError, data: EC2.Types.ReplaceTransitGatewayRouteResult) => void): Request<EC2.Types.ReplaceTransitGatewayRouteResult, AWSError>;
+  /**
+   * Replaces the specified route in the specified transit gateway route table.
+   */
+  replaceTransitGatewayRoute(callback?: (err: AWSError, data: EC2.Types.ReplaceTransitGatewayRouteResult) => void): Request<EC2.Types.ReplaceTransitGatewayRouteResult, AWSError>;
   /**
    * Submits feedback about the status of an instance. The instance must be in the running state. If your experience with the instance differs from the instance status returned by DescribeInstanceStatus, use ReportInstanceStatus to report your experience with the instance. Amazon EC2 collects this information to improve the accuracy of status checks. Use of this action does not change the value returned by DescribeInstanceStatus.
    */
@@ -2220,6 +2412,14 @@ declare class EC2 extends Service {
    * Launches the specified Scheduled Instances. Before you can launch a Scheduled Instance, you must purchase it and obtain an identifier using PurchaseScheduledInstances. You must launch a Scheduled Instance during its scheduled time period. You can't stop or reboot a Scheduled Instance, but you can terminate it as needed. If you terminate a Scheduled Instance before the current scheduled time period ends, you can launch it again after a few minutes. For more information, see Scheduled Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   runScheduledInstances(callback?: (err: AWSError, data: EC2.Types.RunScheduledInstancesResult) => void): Request<EC2.Types.RunScheduledInstancesResult, AWSError>;
+  /**
+   * Searches for routes in the specified transit gateway route table.
+   */
+  searchTransitGatewayRoutes(params: EC2.Types.SearchTransitGatewayRoutesRequest, callback?: (err: AWSError, data: EC2.Types.SearchTransitGatewayRoutesResult) => void): Request<EC2.Types.SearchTransitGatewayRoutesResult, AWSError>;
+  /**
+   * Searches for routes in the specified transit gateway route table.
+   */
+  searchTransitGatewayRoutes(callback?: (err: AWSError, data: EC2.Types.SearchTransitGatewayRoutesResult) => void): Request<EC2.Types.SearchTransitGatewayRoutesResult, AWSError>;
   /**
    * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your Windows instance, Amazon EC2 charges you for a full instance hour. If you stop and restart your Windows instance, a new instance hour begins and Amazon EC2 charges you for another full instance hour even if you are still within the same 60-minute period when it was stopped. Every time you start your Linux instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. For more information, see Stopping Instances in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -2562,6 +2762,22 @@ declare namespace EC2 {
      */
     ExchangeId?: String;
   }
+  export interface AcceptTransitGatewayVpcAttachmentRequest {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AcceptTransitGatewayVpcAttachmentResult {
+    /**
+     * The VPC attachment.
+     */
+    TransitGatewayVpcAttachment?: TransitGatewayVpcAttachment;
+  }
   export interface AcceptVpcEndpointConnectionsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -2780,7 +2996,7 @@ declare namespace EC2 {
     Principal?: String;
   }
   export type AllowedPrincipalSet = AllowedPrincipal[];
-  export type ArchitectureValues = "i386"|"x86_64"|string;
+  export type ArchitectureValues = "i386"|"x86_64"|"arm64"|string;
   export interface AssignIpv6AddressesRequest {
     /**
      * The number of IPv6 addresses to assign to the network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.
@@ -2928,6 +3144,26 @@ declare namespace EC2 {
      * The ID of the subnet.
      */
     SubnetId?: String;
+  }
+  export interface AssociateTransitGatewayRouteTableRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AssociateTransitGatewayRouteTableResult {
+    /**
+     * The ID of the association.
+     */
+    Association?: TransitGatewayAssociation;
   }
   export interface AssociateVpcCidrBlockRequest {
     /**
@@ -3151,6 +3387,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export type AutoAcceptSharedAttachmentsValue = "enable"|"disable"|string;
   export type AutoPlacement = "on"|"off"|string;
   export interface AvailabilityZone {
     /**
@@ -4603,6 +4840,10 @@ declare namespace EC2 {
      */
     NatGatewayId?: String;
     /**
+     * The ID of a transit gateway.
+     */
+    TransitGatewayId?: String;
+    /**
      * The ID of a network interface.
      */
     NetworkInterfaceId?: String;
@@ -4741,6 +4982,120 @@ declare namespace EC2 {
      */
     Tags: TagList;
   }
+  export interface CreateTransitGatewayRequest {
+    /**
+     * A description of the transit gateway.
+     */
+    Description?: String;
+    /**
+     * The transit gateway options.
+     */
+    Options?: TransitGatewayRequestOptions;
+    /**
+     * The tags to apply to the transit gateway.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateTransitGatewayResult {
+    /**
+     * Information about the transit gateway.
+     */
+    TransitGateway?: TransitGateway;
+  }
+  export interface CreateTransitGatewayRouteRequest {
+    /**
+     * The CIDR range used for destination matches. Routing decisions are based on the most specific match.
+     */
+    DestinationCidrBlock: String;
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId?: String;
+    /**
+     * Indicates whether traffic matching this route is to be dropped.
+     */
+    Blackhole?: Boolean;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateTransitGatewayRouteResult {
+    /**
+     * Information about the route.
+     */
+    Route?: TransitGatewayRoute;
+  }
+  export interface CreateTransitGatewayRouteTableRequest {
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId: String;
+    /**
+     * The tags to apply to the transit gateway route table.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateTransitGatewayRouteTableResult {
+    /**
+     * Information about the transit gateway route table.
+     */
+    TransitGatewayRouteTable?: TransitGatewayRouteTable;
+  }
+  export interface CreateTransitGatewayVpcAttachmentRequest {
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId: String;
+    /**
+     * The ID of the VPC.
+     */
+    VpcId: String;
+    /**
+     * The IDs of one or more subnets. You can specify only one subnet per Availability Zone. You must specify at least one subnet, but we recommend that you specify two subnets for better availability. The transit gateway uses one IP address from each specified subnet.
+     */
+    SubnetIds: ValueStringList;
+    /**
+     * The VPC attachment options.
+     */
+    Options?: CreateTransitGatewayVpcAttachmentRequestOptions;
+    /**
+     * The tags to apply to the VPC attachment.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateTransitGatewayVpcAttachmentRequestOptions {
+    /**
+     * Enable or disable DNS support. The default is enable.
+     */
+    DnsSupport?: DnsSupportValue;
+    /**
+     * Enable or disable IPv6 support. The default is enable.
+     */
+    Ipv6Support?: Ipv6SupportValue;
+  }
+  export interface CreateTransitGatewayVpcAttachmentResult {
+    /**
+     * Information about the VPC attachment.
+     */
+    TransitGatewayVpcAttachment?: TransitGatewayVpcAttachment;
+  }
   export interface CreateVolumePermission {
     /**
      * The specific group that is to be added or removed from a volume's list of create volume permissions.
@@ -4772,7 +5127,7 @@ declare namespace EC2 {
      */
     Encrypted?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000 IOPS for volumes in most regions. For exceptions, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+     * The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
      */
     Iops?: Integer;
     /**
@@ -4780,7 +5135,7 @@ declare namespace EC2 {
      */
     KmsKeyId?: String;
     /**
-     * The size of the volume, in GiBs. Constraints: 1-16384 for gp2, 4-16384 for io1, 500-16384 for st1, 500-16384 for sc1, and 1-1024 for standard. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.
+     * The size of the volume, in GiBs. Constraints: 1-16,384 for gp2, 4-16,384 for io1, 500-16,384 for st1, 500-16,384 for sc1, and 1-1,024 for standard. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.
      */
     Size?: Integer;
     /**
@@ -4978,9 +5333,13 @@ declare namespace EC2 {
      */
     Type: String;
     /**
-     * The ID of the virtual private gateway.
+     * The ID of the virtual private gateway. If you specify a virtual private gateway, you cannot specify a transit gateway.
      */
-    VpnGatewayId: String;
+    VpnGatewayId?: String;
+    /**
+     * The ID of the transit gateway. If you specify a transit gateway, you cannot specify a virtual private gateway.
+     */
+    TransitGatewayId?: String;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -5073,6 +5432,8 @@ declare namespace EC2 {
   export type CustomerGatewayList = CustomerGateway[];
   export type DatafeedSubscriptionState = "Active"|"Inactive"|string;
   export type DateTime = Date;
+  export type DefaultRouteTableAssociationValue = "enable"|"disable"|string;
+  export type DefaultRouteTablePropagationValue = "enable"|"disable"|string;
   export type DefaultTargetCapacityType = "spot"|"on-demand"|string;
   export interface DeleteCustomerGatewayRequest {
     /**
@@ -5466,6 +5827,74 @@ declare namespace EC2 {
      * One or more tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string. If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the aws: prefix).
      */
     Tags?: TagList;
+  }
+  export interface DeleteTransitGatewayRequest {
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTransitGatewayResult {
+    /**
+     * Information about the deleted transit gateway.
+     */
+    TransitGateway?: TransitGateway;
+  }
+  export interface DeleteTransitGatewayRouteRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * The CIDR range for the route. This must match the CIDR for the route exactly.
+     */
+    DestinationCidrBlock: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTransitGatewayRouteResult {
+    /**
+     * Information about the route.
+     */
+    Route?: TransitGatewayRoute;
+  }
+  export interface DeleteTransitGatewayRouteTableRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTransitGatewayRouteTableResult {
+    /**
+     * Information about the deleted transit gateway route table.
+     */
+    TransitGatewayRouteTable?: TransitGatewayRouteTable;
+  }
+  export interface DeleteTransitGatewayVpcAttachmentRequest {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTransitGatewayVpcAttachmentResult {
+    /**
+     * Information about the deleted VPC attachment.
+     */
+    TransitGatewayVpcAttachment?: TransitGatewayVpcAttachment;
   }
   export interface DeleteVolumeRequest {
     /**
@@ -5882,7 +6311,7 @@ declare namespace EC2 {
   }
   export interface DescribeElasticGpusRequest {
     /**
-     * One or more Elastic GPU IDs.
+     * One or more Elastic Graphics accelerator IDs.
      */
     ElasticGpuIds?: ElasticGpuIdSet;
     /**
@@ -5890,7 +6319,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    availability-zone - The Availability Zone in which the Elastic GPU resides.    elastic-gpu-health - The status of the Elastic GPU (OK | IMPAIRED).    elastic-gpu-state - The state of the Elastic GPU (ATTACHED).    elastic-gpu-type - The type of Elastic GPU; for example, eg1.medium.    instance-id - The ID of the instance to which the Elastic GPU is associated.  
+     * One or more filters.    availability-zone - The Availability Zone in which the Elastic Graphics accelerator resides.    elastic-gpu-health - The status of the Elastic Graphics accelerator (OK | IMPAIRED).    elastic-gpu-state - The state of the Elastic Graphics accelerator (ATTACHED).    elastic-gpu-type - The type of Elastic Graphics accelerator; for example, eg1.medium.    instance-id - The ID of the instance to which the Elastic Graphics accelerator is associated.  
      */
     Filters?: FilterList;
     /**
@@ -5904,7 +6333,7 @@ declare namespace EC2 {
   }
   export interface DescribeElasticGpusResult {
     /**
-     * Information about the Elastic GPUs.
+     * Information about the Elastic Graphics accelerators.
      */
     ElasticGpuSet?: ElasticGpuSet;
     /**
@@ -7112,7 +7541,7 @@ declare namespace EC2 {
   }
   export interface DescribeRouteTablesRequest {
     /**
-     * One or more filters.    association.route-table-association-id - The ID of an association ID for the route table.    association.route-table-id - The ID of the route table involved in the association.    association.subnet-id - The ID of the subnet involved in the association.    association.main - Indicates whether the route table is the main route table for the VPC (true | false). Route tables that do not have an association ID are not returned in the response.    route-table-id - The ID of the route table.    route.destination-cidr-block - The IPv4 CIDR range specified in a route in the table.    route.destination-ipv6-cidr-block - The IPv6 CIDR range specified in a route in the route table.    route.destination-prefix-list-id - The ID (prefix) of the AWS service specified in a route in the table.    route.egress-only-internet-gateway-id - The ID of an egress-only Internet gateway specified in a route in the route table.    route.gateway-id - The ID of a gateway specified in a route in the table.    route.instance-id - The ID of an instance specified in a route in the table.    route.nat-gateway-id - The ID of a NAT gateway.    route.origin - Describes how the route was created. CreateRouteTable indicates that the route was automatically created when the route table was created; CreateRoute indicates that the route was manually added to the route table; EnableVgwRoutePropagation indicates that the route was propagated by route propagation.    route.state - The state of a route in the route table (active | blackhole). The blackhole state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, the specified NAT instance has been terminated, and so on).    route.vpc-peering-connection-id - The ID of a VPC peering connection specified in a route in the table.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the route table.  
+     * One or more filters.    association.route-table-association-id - The ID of an association ID for the route table.    association.route-table-id - The ID of the route table involved in the association.    association.subnet-id - The ID of the subnet involved in the association.    association.main - Indicates whether the route table is the main route table for the VPC (true | false). Route tables that do not have an association ID are not returned in the response.    route-table-id - The ID of the route table.    route.destination-cidr-block - The IPv4 CIDR range specified in a route in the table.    route.destination-ipv6-cidr-block - The IPv6 CIDR range specified in a route in the route table.    route.destination-prefix-list-id - The ID (prefix) of the AWS service specified in a route in the table.    route.egress-only-internet-gateway-id - The ID of an egress-only Internet gateway specified in a route in the route table.    route.gateway-id - The ID of a gateway specified in a route in the table.    route.instance-id - The ID of an instance specified in a route in the table.    route.nat-gateway-id - The ID of a NAT gateway.    route.transit-gateway-id - The ID of a transit gateway.    route.origin - Describes how the route was created. CreateRouteTable indicates that the route was automatically created when the route table was created; CreateRoute indicates that the route was manually added to the route table; EnableVgwRoutePropagation indicates that the route was propagated by route propagation.    route.state - The state of a route in the route table (active | blackhole). The blackhole state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, the specified NAT instance has been terminated, and so on).    route.vpc-peering-connection-id - The ID of a VPC peering connection specified in a route in the table.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    transit-gateway-id - The ID of a transit gateway.    vpc-id - The ID of the VPC for the route table.  
      */
     Filters?: FilterList;
     /**
@@ -7605,6 +8034,134 @@ declare namespace EC2 {
      * The tags.
      */
     Tags?: TagDescriptionList;
+  }
+  export interface DescribeTransitGatewayAttachmentsRequest {
+    /**
+     * The IDs of the attachments.
+     */
+    TransitGatewayAttachmentIds?: TransitGatewayAttachmentIdStringList;
+    /**
+     * One or more filters. The possible values are:    association-id - The ID of the association.    association-route-table-id - The ID of the route table for the transit gateway.    associate-state - The state of the association (associating | associated | disassociating).    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn).    state - The state of the attachment (pendingAcceptance | pending | available | modifying | deleting | deleted | failed | rejected).    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    transit-gateway-owner - The ID of the AWS account that owns the transit gateway.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeTransitGatewayAttachmentsResult {
+    /**
+     * Information about the attachments.
+     */
+    TransitGatewayAttachments?: TransitGatewayAttachmentList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeTransitGatewayRouteTablesRequest {
+    /**
+     * The IDs of the transit gateway route tables.
+     */
+    TransitGatewayRouteTableIds?: TransitGatewayRouteTableIdStringList;
+    /**
+     * One or more filters. The possible values are:    default-association-route-table - Indicates whether this is the default association route table for the transit gateway (true | false).    default-propagation-route-table - Indicates whether this is the default propagation route table for the transit gateway (true | false).    transit-gateway-id - The ID of the transit gateway.    transit-gateway-route-table-id - The ID of the transit gateway route table.    transit-gateway-route-table-state - The state (pending | available | deleting | deleted).  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeTransitGatewayRouteTablesResult {
+    /**
+     * Information about the transit gateway route tables.
+     */
+    TransitGatewayRouteTables?: TransitGatewayRouteTableList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeTransitGatewayVpcAttachmentsRequest {
+    /**
+     * The IDs of the attachments.
+     */
+    TransitGatewayAttachmentIds?: TransitGatewayAttachmentIdStringList;
+    /**
+     * One or more filters. The possible values are:    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-attachment-state - The state of the attachment (pendingAcceptance | pending | available | modifying | deleting | deleted | failed | rejected).    transit-gateway-id - The ID of the transit gateway.    vpc-id - The ID of the VPC.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeTransitGatewayVpcAttachmentsResult {
+    /**
+     * Information about the VPC attachments.
+     */
+    TransitGatewayVpcAttachments?: TransitGatewayVpcAttachmentList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeTransitGatewaysRequest {
+    /**
+     * The IDs of the transit gateways.
+     */
+    TransitGatewayIds?: TransitGatewayIdStringList;
+    /**
+     * One or more filters. The possible values are:    amazon-side-asn - The private ASN for the Amazon side of a BGP session.    association-default-route-table-id - The ID of the default association route table.    default-route-table-association - Indicates whether resource attachments are automatically associated with the default association route table (enable | disable).    default-route-table-propagation - Indicates whether resource attachments automatically propagate routes to the default propagation route table (enable | disable).    owner-account-id - The ID of the AWS account that owns the transit gateway.    propagation-default-route-table-id - The ID of the default propagation route table.    transit-gateway-id - The ID of the transit gateway.    transit-gateway-state - The state of the transit gateway (pending | available | deleting | deleted).  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeTransitGatewaysResult {
+    /**
+     * Information about the transit gateways.
+     */
+    TransitGateways?: TransitGatewayList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeVolumeAttributeRequest {
     /**
@@ -8187,6 +8744,26 @@ declare namespace EC2 {
   }
   export type DhcpOptionsIdStringList = String[];
   export type DhcpOptionsList = DhcpOptions[];
+  export interface DisableTransitGatewayRouteTablePropagationRequest {
+    /**
+     * The ID of the propagation route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableTransitGatewayRouteTablePropagationResult {
+    /**
+     * Information about route propagation.
+     */
+    Propagation?: TransitGatewayPropagation;
+  }
   export interface DisableVgwRoutePropagationRequest {
     /**
      * The ID of the virtual private gateway.
@@ -8277,6 +8854,26 @@ declare namespace EC2 {
      */
     SubnetId?: String;
   }
+  export interface DisassociateTransitGatewayRouteTableRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisassociateTransitGatewayRouteTableResult {
+    /**
+     * Information about the association.
+     */
+    Association?: TransitGatewayAssociation;
+  }
   export interface DisassociateVpcCidrBlockRequest {
     /**
      * The association ID for the CIDR block.
@@ -8366,6 +8963,7 @@ declare namespace EC2 {
     HostedZoneId?: String;
   }
   export type DnsEntrySet = DnsEntry[];
+  export type DnsSupportValue = "enable"|"disable"|string;
   export type DomainType = "vpc"|"standard"|string;
   export type Double = number;
   export interface EbsBlockDevice {
@@ -8374,7 +8972,7 @@ declare namespace EC2 {
      */
     DeleteOnTermination?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For io1, this represents the number of IOPS that are provisioned for the volume. For gp2, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraint: Range is 100-20000 IOPS for io1 volumes and 100-10000 IOPS for gp2 volumes. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) that the volume supports. For io1, this represents the number of IOPS that are provisioned for the volume. For gp2, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-10,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most regions. Maximum io1IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
      */
     Iops?: Integer;
     /**
@@ -8441,7 +9039,7 @@ declare namespace EC2 {
   export type EgressOnlyInternetGatewayList = EgressOnlyInternetGateway[];
   export interface ElasticGpuAssociation {
     /**
-     * The ID of the Elastic GPU.
+     * The ID of the Elastic Graphics accelerator.
      */
     ElasticGpuId?: String;
     /**
@@ -8449,11 +9047,11 @@ declare namespace EC2 {
      */
     ElasticGpuAssociationId?: String;
     /**
-     * The state of the association between the instance and the Elastic GPU.
+     * The state of the association between the instance and the Elastic Graphics accelerator.
      */
     ElasticGpuAssociationState?: String;
     /**
-     * The time the Elastic GPU was associated with the instance.
+     * The time the Elastic Graphics accelerator was associated with the instance.
      */
     ElasticGpuAssociationTime?: String;
   }
@@ -8468,7 +9066,7 @@ declare namespace EC2 {
   export type ElasticGpuSet = ElasticGpus[];
   export interface ElasticGpuSpecification {
     /**
-     * The type of Elastic GPU.
+     * The type of Elastic Graphics accelerator.
      */
     Type: String;
   }
@@ -8485,29 +9083,49 @@ declare namespace EC2 {
   export type ElasticGpuStatus = "OK"|"IMPAIRED"|string;
   export interface ElasticGpus {
     /**
-     * The ID of the Elastic GPU.
+     * The ID of the Elastic Graphics accelerator.
      */
     ElasticGpuId?: String;
     /**
-     * The Availability Zone in the which the Elastic GPU resides.
+     * The Availability Zone in the which the Elastic Graphics accelerator resides.
      */
     AvailabilityZone?: String;
     /**
-     * The type of Elastic GPU.
+     * The type of Elastic Graphics accelerator.
      */
     ElasticGpuType?: String;
     /**
-     * The status of the Elastic GPU.
+     * The status of the Elastic Graphics accelerator.
      */
     ElasticGpuHealth?: ElasticGpuHealth;
     /**
-     * The state of the Elastic GPU.
+     * The state of the Elastic Graphics accelerator.
      */
     ElasticGpuState?: ElasticGpuState;
     /**
-     * The ID of the instance to which the Elastic GPU is attached.
+     * The ID of the instance to which the Elastic Graphics accelerator is attached.
      */
     InstanceId?: String;
+  }
+  export interface EnableTransitGatewayRouteTablePropagationRequest {
+    /**
+     * The ID of the propagation route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableTransitGatewayRouteTablePropagationResult {
+    /**
+     * Information about route propagation.
+     */
+    Propagation?: TransitGatewayPropagation;
   }
   export interface EnableVgwRoutePropagationRequest {
     /**
@@ -8641,6 +9259,30 @@ declare namespace EC2 {
      * The image is written to a single object in the S3 bucket at the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
      */
     S3Prefix?: String;
+  }
+  export interface ExportTransitGatewayRoutesRequest {
+    /**
+     * The ID of the route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * One or more filters. The possible values are:    transit-gateway-route-destination-cidr-block - The CIDR range.    transit-gateway-route-state - The state of the route (active | blackhole).    transit-gateway-route-transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-route-type - The route type (static | propagated).    transit-gateway-route-vpn-connection-id - The ID of the VPN connection.  
+     */
+    Filters?: FilterList;
+    /**
+     * The name of the S3 bucket.
+     */
+    S3Bucket: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ExportTransitGatewayRoutesResult {
+    /**
+     * The URL of the exported file in Amazon S3. For example, s3://bucket_name/VPCTransitGateway/TransitGatewayRouteTables/file_name.
+     */
+    S3Location?: String;
   }
   export interface Filter {
     /**
@@ -9171,6 +9813,102 @@ declare namespace EC2 {
      * Describes the reason why the exchange cannot be completed.
      */
     ValidationFailureReason?: String;
+  }
+  export interface GetTransitGatewayAttachmentPropagationsRequest {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId: String;
+    /**
+     * One or more filters. The possible values are:    transit-gateway-route-table-id - The ID of the transit gateway route table.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetTransitGatewayAttachmentPropagationsResult {
+    /**
+     * Information about the propagation route tables.
+     */
+    TransitGatewayAttachmentPropagations?: TransitGatewayAttachmentPropagationList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface GetTransitGatewayRouteTableAssociationsRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * One or more filters. The possible values are:    association-id - The ID of the association.    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn).    transit-gateway-attachment-id - The ID of the attachment.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetTransitGatewayRouteTableAssociationsResult {
+    /**
+     * Information about the associations.
+     */
+    Associations?: TransitGatewayRouteTableAssociationList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface GetTransitGatewayRouteTablePropagationsRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn).    transit-gateway-attachment-id - The ID of the attachment.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetTransitGatewayRouteTablePropagationsResult {
+    /**
+     * Information about the route table propagations.
+     */
+    TransitGatewayRouteTablePropagations?: TransitGatewayRouteTablePropagationList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export type GroupIdStringList = String[];
   export interface GroupIdentifier {
@@ -10670,7 +11408,7 @@ declare namespace EC2 {
      */
     Status?: SummaryStatus;
   }
-  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.12xlarge"|"r5a.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.18xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.12xlarge"|"m5.24xlarge"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.12xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.12xlarge"|"m5d.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|string;
+  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.12xlarge"|"r5a.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.18xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.18xlarge"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.12xlarge"|"m5.24xlarge"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.12xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.12xlarge"|"m5d.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|string;
   export type InstanceTypeList = InstanceType[];
   export type Integer = number;
   export type InterfacePermissionType = "INSTANCE-ATTACH"|"EIP-ASSOCIATE"|string;
@@ -10763,6 +11501,7 @@ declare namespace EC2 {
     Description?: String;
   }
   export type Ipv6RangeList = Ipv6Range[];
+  export type Ipv6SupportValue = "enable"|"disable"|string;
   export type KeyNameStringList = String[];
   export interface KeyPair {
     /**
@@ -11920,6 +12659,44 @@ declare namespace EC2 {
      * The ID of the subnet.
      */
     SubnetId: String;
+  }
+  export interface ModifyTransitGatewayVpcAttachmentRequest {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId: String;
+    /**
+     * The IDs of one or more subnets to add. You can specify at most one subnet per Availability Zone.
+     */
+    AddSubnetIds?: ValueStringList;
+    /**
+     * The IDs of one or more subnets to remove.
+     */
+    RemoveSubnetIds?: ValueStringList;
+    /**
+     * The new VPC attachment options.
+     */
+    Options?: ModifyTransitGatewayVpcAttachmentRequestOptions;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyTransitGatewayVpcAttachmentRequestOptions {
+    /**
+     * Enable or disable DNS support. The default is enable.
+     */
+    DnsSupport?: DnsSupportValue;
+    /**
+     * Enable or disable IPv6 support. The default is enable.
+     */
+    Ipv6Support?: Ipv6SupportValue;
+  }
+  export interface ModifyTransitGatewayVpcAttachmentResult {
+    /**
+     * Information about the modified attachment.
+     */
+    TransitGatewayVpcAttachment?: TransitGatewayVpcAttachment;
   }
   export interface ModifyVolumeAttributeRequest {
     /**
@@ -13155,6 +13932,22 @@ declare namespace EC2 {
      */
     ImageId?: String;
   }
+  export interface RejectTransitGatewayVpcAttachmentRequest {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface RejectTransitGatewayVpcAttachmentResult {
+    /**
+     * Information about the attachment.
+     */
+    TransitGatewayVpcAttachment?: TransitGatewayVpcAttachment;
+  }
   export interface RejectVpcEndpointConnectionsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -13329,6 +14122,10 @@ declare namespace EC2 {
      */
     NatGatewayId?: String;
     /**
+     * The ID of a transit gateway.
+     */
+    TransitGatewayId?: String;
+    /**
      * The ID of a network interface.
      */
     NetworkInterfaceId?: String;
@@ -13360,6 +14157,34 @@ declare namespace EC2 {
      * The ID of the new association.
      */
     NewAssociationId?: String;
+  }
+  export interface ReplaceTransitGatewayRouteRequest {
+    /**
+     * The CIDR range used for the destination match. Routing decisions are based on the most specific match.
+     */
+    DestinationCidrBlock: String;
+    /**
+     * The ID of the route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId?: String;
+    /**
+     * Indicates whether traffic matching this route is to be dropped.
+     */
+    Blackhole?: Boolean;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ReplaceTransitGatewayRouteResult {
+    /**
+     * Information about the modified route.
+     */
+    Route?: TransitGatewayRoute;
   }
   export type ReportInstanceReasonCodes = "instance-stuck-in-state"|"unresponsive"|"not-accepting-credentials"|"password-not-available"|"performance-network"|"performance-instance-store"|"performance-ebs-volume"|"performance-other"|"other"|string;
   export interface ReportInstanceStatusRequest {
@@ -14028,7 +14853,7 @@ declare namespace EC2 {
   }
   export type ResourceIdList = String[];
   export type ResourceList = String[];
-  export type ResourceType = "customer-gateway"|"dedicated-host"|"dhcp-options"|"elastic-ip"|"fleet"|"fpga-image"|"image"|"instance"|"internet-gateway"|"launch-template"|"natgateway"|"network-acl"|"network-interface"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-instances-request"|"subnet"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|string;
+  export type ResourceType = "customer-gateway"|"dedicated-host"|"dhcp-options"|"elastic-ip"|"fleet"|"fpga-image"|"image"|"instance"|"internet-gateway"|"launch-template"|"natgateway"|"network-acl"|"network-interface"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-instances-request"|"subnet"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -14266,6 +15091,10 @@ declare namespace EC2 {
      */
     NatGatewayId?: String;
     /**
+     * The ID of a transit gateway.
+     */
+    TransitGatewayId?: String;
+    /**
      * The ID of the network interface.
      */
     NetworkInterfaceId?: String;
@@ -14278,7 +15107,7 @@ declare namespace EC2 {
      */
     State?: RouteState;
     /**
-     * The ID of the VPC peering connection.
+     * The ID of a VPC peering connection.
      */
     VpcPeeringConnectionId?: String;
   }
@@ -14879,6 +15708,34 @@ declare namespace EC2 {
     PrivateIpAddress?: String;
   }
   export type ScheduledInstancesSecurityGroupIdSet = String[];
+  export interface SearchTransitGatewayRoutesRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: String;
+    /**
+     * One or more filters. The possible values are:    transit-gateway-route-destination-cidr-block - The CIDR range.    transit-gateway-route-state - The state of the route (active | blackhole).    transit-gateway-route-transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-route-type - The route type (static | propagated).    transit-gateway-route-vpn-connection-id - The ID of the VPN connection.  
+     */
+    Filters: FilterList;
+    /**
+     * The maximum number of routes to return.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface SearchTransitGatewayRoutesResult {
+    /**
+     * Information about the routes.
+     */
+    Routes?: TransitGatewayRouteList;
+    /**
+     * Indicates whether there are additional routes available.
+     */
+    AdditionalRoutesAvailable?: Boolean;
+  }
   export interface SecurityGroup {
     /**
      * A description of the security group.
@@ -15992,6 +16849,373 @@ declare namespace EC2 {
     TerminatingInstances?: InstanceStateChangeList;
   }
   export type TrafficType = "ACCEPT"|"REJECT"|"ALL"|string;
+  export interface TransitGateway {
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the transit gateway.
+     */
+    TransitGatewayArn?: String;
+    /**
+     * The state of the transit gateway.
+     */
+    State?: TransitGatewayState;
+    /**
+     * The ID of the AWS account ID that owns the transit gateway.
+     */
+    OwnerId?: String;
+    /**
+     * The description of the transit gateway.
+     */
+    Description?: String;
+    /**
+     * The creation time.
+     */
+    CreationTime?: DateTime;
+    /**
+     * The transit gateway options.
+     */
+    Options?: TransitGatewayOptions;
+    /**
+     * The tags for the transit gateway.
+     */
+    Tags?: TagList;
+  }
+  export interface TransitGatewayAssociation {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId?: String;
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId?: String;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: TransitGatewayAttachmentResourceType;
+    /**
+     * The state of the association.
+     */
+    State?: TransitGatewayAssociationState;
+  }
+  export type TransitGatewayAssociationState = "associating"|"associated"|"disassociating"|"disassociated"|string;
+  export interface TransitGatewayAttachment {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId?: String;
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId?: String;
+    /**
+     * The ID of the AWS account that owns the transit gateway.
+     */
+    TransitGatewayOwnerId?: String;
+    /**
+     * The ID of the AWS account that owns the resource.
+     */
+    ResourceOwnerId?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: TransitGatewayAttachmentResourceType;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The attachment state.
+     */
+    State?: TransitGatewayAttachmentState;
+    /**
+     * The association.
+     */
+    Association?: TransitGatewayAttachmentAssociation;
+    /**
+     * The creation time.
+     */
+    CreationTime?: DateTime;
+    /**
+     * The tags for the attachment.
+     */
+    Tags?: TagList;
+  }
+  export interface TransitGatewayAttachmentAssociation {
+    /**
+     * The ID of the route table for the transit gateway.
+     */
+    TransitGatewayRouteTableId?: String;
+    /**
+     * The state of the association.
+     */
+    State?: TransitGatewayAssociationState;
+  }
+  export type TransitGatewayAttachmentIdStringList = String[];
+  export type TransitGatewayAttachmentList = TransitGatewayAttachment[];
+  export interface TransitGatewayAttachmentPropagation {
+    /**
+     * The ID of the propagation route table.
+     */
+    TransitGatewayRouteTableId?: String;
+    /**
+     * The state of the propagation route table.
+     */
+    State?: TransitGatewayPropagationState;
+  }
+  export type TransitGatewayAttachmentPropagationList = TransitGatewayAttachmentPropagation[];
+  export type TransitGatewayAttachmentResourceType = "vpc"|"vpn"|string;
+  export type TransitGatewayAttachmentState = "pendingAcceptance"|"rollingBack"|"pending"|"available"|"modifying"|"deleting"|"deleted"|"failed"|"rejected"|"rejecting"|"failing"|string;
+  export type TransitGatewayIdStringList = String[];
+  export type TransitGatewayList = TransitGateway[];
+  export type TransitGatewayMaxResults = number;
+  export interface TransitGatewayOptions {
+    /**
+     * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.
+     */
+    AmazonSideAsn?: Long;
+    /**
+     * Indicates whether attachment requests are automatically accepted.
+     */
+    AutoAcceptSharedAttachments?: AutoAcceptSharedAttachmentsValue;
+    /**
+     * Indicates whether resource attachments are automatically associated with the default association route table.
+     */
+    DefaultRouteTableAssociation?: DefaultRouteTableAssociationValue;
+    /**
+     * The ID of the default association route table.
+     */
+    AssociationDefaultRouteTableId?: String;
+    /**
+     * Indicates whether resource attachments automatically propagate routes to the default propagation route table.
+     */
+    DefaultRouteTablePropagation?: DefaultRouteTablePropagationValue;
+    /**
+     * The ID of the default propagation route table.
+     */
+    PropagationDefaultRouteTableId?: String;
+    /**
+     * Indicates whether Equal Cost Multipath Protocol support is enabled.
+     */
+    VpnEcmpSupport?: VpnEcmpSupportValue;
+    /**
+     * Indicates whether DNS support is enabled.
+     */
+    DnsSupport?: DnsSupportValue;
+  }
+  export interface TransitGatewayPropagation {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId?: String;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: TransitGatewayAttachmentResourceType;
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId?: String;
+    /**
+     * The state.
+     */
+    State?: TransitGatewayPropagationState;
+  }
+  export type TransitGatewayPropagationState = "enabling"|"enabled"|"disabling"|"disabled"|string;
+  export interface TransitGatewayRequestOptions {
+    /**
+     * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.
+     */
+    AmazonSideAsn?: Long;
+    /**
+     * Enable or disable automatic acceptance of attachment requests. The default is disable.
+     */
+    AutoAcceptSharedAttachments?: AutoAcceptSharedAttachmentsValue;
+    /**
+     * Enable or disable automatic association with the default association route table. The default is enable.
+     */
+    DefaultRouteTableAssociation?: DefaultRouteTableAssociationValue;
+    /**
+     * Enable or disable automatic propagation of routes to the default propagation route table. The default is enable.
+     */
+    DefaultRouteTablePropagation?: DefaultRouteTablePropagationValue;
+    /**
+     * Enable or disable Equal Cost Multipath Protocol support.
+     */
+    VpnEcmpSupport?: VpnEcmpSupportValue;
+    /**
+     * Enable or disable DNS support.
+     */
+    DnsSupport?: DnsSupportValue;
+  }
+  export interface TransitGatewayRoute {
+    /**
+     * The CIDR block used for destination matches.
+     */
+    DestinationCidrBlock?: String;
+    /**
+     * The attachments.
+     */
+    TransitGatewayAttachments?: TransitGatewayRouteAttachmentList;
+    /**
+     * The route type.
+     */
+    Type?: TransitGatewayRouteType;
+    /**
+     * The state of the route.
+     */
+    State?: TransitGatewayRouteState;
+  }
+  export interface TransitGatewayRouteAttachment {
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: TransitGatewayAttachmentResourceType;
+  }
+  export type TransitGatewayRouteAttachmentList = TransitGatewayRouteAttachment[];
+  export type TransitGatewayRouteList = TransitGatewayRoute[];
+  export type TransitGatewayRouteState = "pending"|"active"|"blackhole"|"deleting"|"deleted"|string;
+  export interface TransitGatewayRouteTable {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId?: String;
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId?: String;
+    /**
+     * The state of the transit gateway route table.
+     */
+    State?: TransitGatewayRouteTableState;
+    /**
+     * Indicates whether this is the default association route table for the transit gateway.
+     */
+    DefaultAssociationRouteTable?: Boolean;
+    /**
+     * Indicates whether this is the default propagation route table for the transit gateway.
+     */
+    DefaultPropagationRouteTable?: Boolean;
+    /**
+     * The creation time.
+     */
+    CreationTime?: DateTime;
+    /**
+     * Any tags assigned to the route table.
+     */
+    Tags?: TagList;
+  }
+  export interface TransitGatewayRouteTableAssociation {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId?: String;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: TransitGatewayAttachmentResourceType;
+    /**
+     * The state of the association.
+     */
+    State?: TransitGatewayAssociationState;
+  }
+  export type TransitGatewayRouteTableAssociationList = TransitGatewayRouteTableAssociation[];
+  export type TransitGatewayRouteTableIdStringList = String[];
+  export type TransitGatewayRouteTableList = TransitGatewayRouteTable[];
+  export interface TransitGatewayRouteTablePropagation {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId?: String;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The type of resource.
+     */
+    ResourceType?: TransitGatewayAttachmentResourceType;
+    /**
+     * The state of the resource.
+     */
+    State?: TransitGatewayPropagationState;
+  }
+  export type TransitGatewayRouteTablePropagationList = TransitGatewayRouteTablePropagation[];
+  export type TransitGatewayRouteTableState = "pending"|"available"|"deleting"|"deleted"|string;
+  export type TransitGatewayRouteType = "static"|"propagated"|string;
+  export type TransitGatewayState = "pending"|"available"|"modifying"|"deleting"|"deleted"|string;
+  export interface TransitGatewayVpcAttachment {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId?: String;
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId?: String;
+    /**
+     * The ID of the VPC.
+     */
+    VpcId?: String;
+    /**
+     * The ID of the AWS account that owns the VPC.
+     */
+    VpcOwnerId?: String;
+    /**
+     * The state of the VPC attachment.
+     */
+    State?: TransitGatewayAttachmentState;
+    /**
+     * The IDs of the subnets.
+     */
+    SubnetIds?: ValueStringList;
+    /**
+     * The creation time.
+     */
+    CreationTime?: DateTime;
+    /**
+     * The VPC attachment options.
+     */
+    Options?: TransitGatewayVpcAttachmentOptions;
+    /**
+     * The tags for the VPC attachment.
+     */
+    Tags?: TagList;
+  }
+  export type TransitGatewayVpcAttachmentList = TransitGatewayVpcAttachment[];
+  export interface TransitGatewayVpcAttachmentOptions {
+    /**
+     * Indicates whether DNS support is enabled.
+     */
+    DnsSupport?: DnsSupportValue;
+    /**
+     * Indicates whether IPv6 support is enabled.
+     */
+    Ipv6Support?: Ipv6SupportValue;
+  }
   export type TunnelOptionsList = VpnTunnelOptionsSpecification[];
   export interface UnassignIpv6AddressesRequest {
     /**
@@ -16256,7 +17480,7 @@ declare namespace EC2 {
      */
     VolumeId?: String;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraint: Range is 100-32000 IOPS for io1 volumes and 100-10000 IOPS for gp2 volumes. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-10,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most regions. Maximum io1IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
      */
     Iops?: Integer;
     /**
@@ -16749,6 +17973,10 @@ declare namespace EC2 {
      */
     VpnGatewayId?: String;
     /**
+     * The ID of the transit gateway associated with the VPN connection.
+     */
+    TransitGatewayId?: String;
+    /**
      * The VPN connection options.
      */
     Options?: VpnConnectionOptions;
@@ -16783,6 +18011,7 @@ declare namespace EC2 {
      */
     TunnelOptions?: TunnelOptionsList;
   }
+  export type VpnEcmpSupportValue = "enable"|"disable"|string;
   export interface VpnGateway {
     /**
      * The Availability Zone where the virtual private gateway was created, if applicable. This field may be empty or not returned.

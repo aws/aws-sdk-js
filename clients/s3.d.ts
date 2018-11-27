@@ -354,6 +354,30 @@ declare class S3 extends S3Customizations {
    */
   getObjectAcl(callback?: (err: AWSError, data: S3.Types.GetObjectAclOutput) => void): Request<S3.Types.GetObjectAclOutput, AWSError>;
   /**
+   * Gets an object's current Legal Hold status.
+   */
+  getObjectLegalHold(params: S3.Types.GetObjectLegalHoldRequest, callback?: (err: AWSError, data: S3.Types.GetObjectLegalHoldOutput) => void): Request<S3.Types.GetObjectLegalHoldOutput, AWSError>;
+  /**
+   * Gets an object's current Legal Hold status.
+   */
+  getObjectLegalHold(callback?: (err: AWSError, data: S3.Types.GetObjectLegalHoldOutput) => void): Request<S3.Types.GetObjectLegalHoldOutput, AWSError>;
+  /**
+   * Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
+   */
+  getObjectLockConfiguration(params: S3.Types.GetObjectLockConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetObjectLockConfigurationOutput) => void): Request<S3.Types.GetObjectLockConfigurationOutput, AWSError>;
+  /**
+   * Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
+   */
+  getObjectLockConfiguration(callback?: (err: AWSError, data: S3.Types.GetObjectLockConfigurationOutput) => void): Request<S3.Types.GetObjectLockConfigurationOutput, AWSError>;
+  /**
+   * Retrieves an object's retention settings.
+   */
+  getObjectRetention(params: S3.Types.GetObjectRetentionRequest, callback?: (err: AWSError, data: S3.Types.GetObjectRetentionOutput) => void): Request<S3.Types.GetObjectRetentionOutput, AWSError>;
+  /**
+   * Retrieves an object's retention settings.
+   */
+  getObjectRetention(callback?: (err: AWSError, data: S3.Types.GetObjectRetentionOutput) => void): Request<S3.Types.GetObjectRetentionOutput, AWSError>;
+  /**
    * Returns the tag-set of an object.
    */
   getObjectTagging(params: S3.Types.GetObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.GetObjectTaggingOutput) => void): Request<S3.Types.GetObjectTaggingOutput, AWSError>;
@@ -622,6 +646,30 @@ declare class S3 extends S3Customizations {
    */
   putObjectAcl(callback?: (err: AWSError, data: S3.Types.PutObjectAclOutput) => void): Request<S3.Types.PutObjectAclOutput, AWSError>;
   /**
+   * Applies a Legal Hold configuration to the specified object.
+   */
+  putObjectLegalHold(params: S3.Types.PutObjectLegalHoldRequest, callback?: (err: AWSError, data: S3.Types.PutObjectLegalHoldOutput) => void): Request<S3.Types.PutObjectLegalHoldOutput, AWSError>;
+  /**
+   * Applies a Legal Hold configuration to the specified object.
+   */
+  putObjectLegalHold(callback?: (err: AWSError, data: S3.Types.PutObjectLegalHoldOutput) => void): Request<S3.Types.PutObjectLegalHoldOutput, AWSError>;
+  /**
+   * Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
+   */
+  putObjectLockConfiguration(params: S3.Types.PutObjectLockConfigurationRequest, callback?: (err: AWSError, data: S3.Types.PutObjectLockConfigurationOutput) => void): Request<S3.Types.PutObjectLockConfigurationOutput, AWSError>;
+  /**
+   * Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
+   */
+  putObjectLockConfiguration(callback?: (err: AWSError, data: S3.Types.PutObjectLockConfigurationOutput) => void): Request<S3.Types.PutObjectLockConfigurationOutput, AWSError>;
+  /**
+   * Places an Object Retention configuration on an object.
+   */
+  putObjectRetention(params: S3.Types.PutObjectRetentionRequest, callback?: (err: AWSError, data: S3.Types.PutObjectRetentionOutput) => void): Request<S3.Types.PutObjectRetentionOutput, AWSError>;
+  /**
+   * Places an Object Retention configuration on an object.
+   */
+  putObjectRetention(callback?: (err: AWSError, data: S3.Types.PutObjectRetentionOutput) => void): Request<S3.Types.PutObjectRetentionOutput, AWSError>;
+  /**
    * Sets the supplied tag-set to an object that already exists in a bucket
    */
   putObjectTagging(params: S3.Types.PutObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.PutObjectTaggingOutput) => void): Request<S3.Types.PutObjectTaggingOutput, AWSError>;
@@ -841,6 +889,7 @@ declare namespace S3 {
   export type BucketName = string;
   export type BucketVersioningStatus = "Enabled"|"Suspended"|string;
   export type Buckets = Bucket[];
+  export type BypassGovernanceRetention = boolean;
   export type BytesProcessed = number;
   export type BytesReturned = number;
   export type BytesScanned = number;
@@ -1159,6 +1208,18 @@ declare namespace S3 {
      * The tag-set for the object destination object this value must be used in conjunction with the TaggingDirective. The tag-set must be encoded as URL Query parameters
      */
     Tagging?: TaggingHeader;
+    /**
+     * The Object Lock mode that you want to apply to the copied object.
+     */
+    ObjectLockMode?: ObjectLockMode;
+    /**
+     * The date and time when you want the copied object's Object Lock to expire.
+     */
+    ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
+    /**
+     * Specifies whether you want to apply a Legal Hold to the copied object.
+     */
+    ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
   }
   export interface CopyObjectResult {
     ETag?: ETag;
@@ -1220,6 +1281,10 @@ declare namespace S3 {
      * Allows grantee to write the ACL for the applicable bucket.
      */
     GrantWriteACP?: GrantWriteACP;
+    /**
+     * Specifies whether you want S3 Object Lock to be enabled for the new bucket.
+     */
+    ObjectLockEnabledForBucket?: ObjectLockEnabledForBucket;
   }
   export interface CreateMultipartUploadOutput {
     /**
@@ -1344,11 +1409,37 @@ declare namespace S3 {
      * The tag-set for the object. The tag-set must be encoded as URL Query parameters
      */
     Tagging?: TaggingHeader;
+    /**
+     * Specifies the Object Lock mode that you want to apply to the uploaded object.
+     */
+    ObjectLockMode?: ObjectLockMode;
+    /**
+     * Specifies the date and time when you want the Object Lock to expire.
+     */
+    ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
+    /**
+     * Specifies whether you want to apply a Legal Hold to the uploaded object.
+     */
+    ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
   }
   export type CreationDate = Date;
   export type _Date = Date;
   export type Days = number;
   export type DaysAfterInitiation = number;
+  export interface DefaultRetention {
+    /**
+     * The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.
+     */
+    Mode?: ObjectLockRetentionMode;
+    /**
+     * The number of days that you want to specify for the default retention period.
+     */
+    Days?: Days;
+    /**
+     * The number of years that you want to specify for the default retention period.
+     */
+    Years?: Years;
+  }
   export interface Delete {
     Objects: ObjectIdentifierList;
     /**
@@ -1468,6 +1559,10 @@ declare namespace S3 {
      */
     VersionId?: ObjectVersionId;
     RequestPayer?: RequestPayer;
+    /**
+     * 
+     */
+    BypassGovernanceRetention?: BypassGovernanceRetention;
   }
   export interface DeleteObjectTaggingOutput {
     /**
@@ -1496,6 +1591,10 @@ declare namespace S3 {
      */
     MFA?: MFA;
     RequestPayer?: RequestPayer;
+    /**
+     * Specifies whether you want to delete this object even if it has a Governance-type Object Lock in place. You must have sufficient permissions to perform this operation.
+     */
+    BypassGovernanceRetention?: BypassGovernanceRetention;
   }
   export interface DeletePublicAccessBlockRequest {
     /**
@@ -1574,7 +1673,7 @@ declare namespace S3 {
     Key: ObjectKey;
   }
   export type Errors = Error[];
-  export type Event = "s3:ReducedRedundancyLostObject"|"s3:ObjectCreated:*"|"s3:ObjectCreated:Put"|"s3:ObjectCreated:Post"|"s3:ObjectCreated:Copy"|"s3:ObjectCreated:CompleteMultipartUpload"|"s3:ObjectRemoved:*"|"s3:ObjectRemoved:Delete"|"s3:ObjectRemoved:DeleteMarkerCreated"|string;
+  export type Event = "s3:ReducedRedundancyLostObject"|"s3:ObjectCreated:*"|"s3:ObjectCreated:Put"|"s3:ObjectCreated:Post"|"s3:ObjectCreated:Copy"|"s3:ObjectCreated:CompleteMultipartUpload"|"s3:ObjectRemoved:*"|"s3:ObjectRemoved:Delete"|"s3:ObjectRemoved:DeleteMarkerCreated"|"s3:ObjectRestore:Post"|"s3:ObjectRestore:Completed"|string;
   export type EventList = Event[];
   export type Expiration = string;
   export type ExpirationStatus = "Enabled"|"Disabled"|string;
@@ -1793,6 +1892,39 @@ declare namespace S3 {
     VersionId?: ObjectVersionId;
     RequestPayer?: RequestPayer;
   }
+  export interface GetObjectLegalHoldOutput {
+    /**
+     * The current Legal Hold status for the specified object.
+     */
+    LegalHold?: ObjectLockLegalHold;
+  }
+  export interface GetObjectLegalHoldRequest {
+    /**
+     * The bucket containing the object whose Legal Hold status you want to retrieve.
+     */
+    Bucket: BucketName;
+    /**
+     * The key name for the object whose Legal Hold status you want to retrieve.
+     */
+    Key: ObjectKey;
+    /**
+     * The version ID of the object whose Legal Hold status you want to retrieve.
+     */
+    VersionId?: ObjectVersionId;
+    RequestPayer?: RequestPayer;
+  }
+  export interface GetObjectLockConfigurationOutput {
+    /**
+     * The specified bucket's Object Lock configuration.
+     */
+    ObjectLockConfiguration?: ObjectLockConfiguration;
+  }
+  export interface GetObjectLockConfigurationRequest {
+    /**
+     * The bucket whose Object Lock configuration you want to retrieve.
+     */
+    Bucket: BucketName;
+  }
   export interface GetObjectOutput {
     /**
      * Object data.
@@ -1894,6 +2026,18 @@ declare namespace S3 {
      * The number of tags, if any, on the object.
      */
     TagCount?: TagCount;
+    /**
+     * The Object Lock mode currently in place for this object.
+     */
+    ObjectLockMode?: ObjectLockMode;
+    /**
+     * The date and time when this object's Object Lock will expire.
+     */
+    ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
+    /**
+     * 
+     */
+    ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
   }
   export interface GetObjectRequest {
     Bucket: BucketName;
@@ -1963,6 +2107,27 @@ declare namespace S3 {
      * Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' GET request for the part specified. Useful for downloading just a part of an object.
      */
     PartNumber?: PartNumber;
+  }
+  export interface GetObjectRetentionOutput {
+    /**
+     * The container element for an object's retention settings.
+     */
+    Retention?: ObjectLockRetention;
+  }
+  export interface GetObjectRetentionRequest {
+    /**
+     * The bucket containing the object whose retention settings you want to retrieve.
+     */
+    Bucket: BucketName;
+    /**
+     * The key name for the object whose retention settings you want to retrieve.
+     */
+    Key: ObjectKey;
+    /**
+     * The version ID for the object whose retention settings you want to retrieve.
+     */
+    VersionId?: ObjectVersionId;
+    RequestPayer?: RequestPayer;
   }
   export interface GetObjectTaggingOutput {
     VersionId?: ObjectVersionId;
@@ -2127,6 +2292,18 @@ declare namespace S3 {
      * The count of parts this object has.
      */
     PartsCount?: PartsCount;
+    /**
+     * The Object Lock mode currently in place for this object.
+     */
+    ObjectLockMode?: ObjectLockMode;
+    /**
+     * The date and time when this object's Object Lock will expire.
+     */
+    ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
+    /**
+     * The Legal Hold status for the specified object.
+     */
+    ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
   }
   export interface HeadObjectRequest {
     Bucket: BucketName;
@@ -2273,7 +2450,7 @@ declare namespace S3 {
   export type InventoryFrequency = "Daily"|"Weekly"|string;
   export type InventoryId = string;
   export type InventoryIncludedObjectVersions = "All"|"Current"|string;
-  export type InventoryOptionalField = "Size"|"LastModifiedDate"|"StorageClass"|"ETag"|"IsMultipartUploaded"|"ReplicationStatus"|"EncryptionStatus"|string;
+  export type InventoryOptionalField = "Size"|"LastModifiedDate"|"StorageClass"|"ETag"|"IsMultipartUploaded"|"ReplicationStatus"|"EncryptionStatus"|"ObjectLockRetainUntilDate"|"ObjectLockMode"|"ObjectLockLegalHoldStatus"|string;
   export type InventoryOptionalFields = InventoryOptionalField[];
   export interface InventoryS3BucketDestination {
     /**
@@ -2952,6 +3129,45 @@ declare namespace S3 {
   export type ObjectIdentifierList = ObjectIdentifier[];
   export type ObjectKey = string;
   export type ObjectList = Object[];
+  export interface ObjectLockConfiguration {
+    /**
+     * Indicates whether this object has an Object Lock configuration enabled.
+     */
+    ObjectLockEnabled?: ObjectLockEnabled;
+    /**
+     * The Object Lock rule in place for the specified object.
+     */
+    Rule?: ObjectLockRule;
+  }
+  export type ObjectLockEnabled = "Enabled"|string;
+  export type ObjectLockEnabledForBucket = boolean;
+  export interface ObjectLockLegalHold {
+    /**
+     * Indicates whether the specified object has a Legal Hold in place.
+     */
+    Status?: ObjectLockLegalHoldStatus;
+  }
+  export type ObjectLockLegalHoldStatus = "ON"|"OFF"|string;
+  export type ObjectLockMode = "GOVERNANCE"|"COMPLIANCE"|string;
+  export type ObjectLockRetainUntilDate = Date;
+  export interface ObjectLockRetention {
+    /**
+     * Indicates the Retention mode for the specified object.
+     */
+    Mode?: ObjectLockRetentionMode;
+    /**
+     * 
+     */
+    RetainUntilDate?: _Date;
+  }
+  export type ObjectLockRetentionMode = "GOVERNANCE"|"COMPLIANCE"|string;
+  export interface ObjectLockRule {
+    /**
+     * The default retention period that you want to apply to new objects placed in the specified bucket.
+     */
+    DefaultRetention?: DefaultRetention;
+  }
+  export type ObjectLockToken = string;
   export type ObjectStorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|string;
   export interface ObjectVersion {
     ETag?: ETag;
@@ -3278,6 +3494,54 @@ declare namespace S3 {
      */
     VersionId?: ObjectVersionId;
   }
+  export interface PutObjectLegalHoldOutput {
+    RequestCharged?: RequestCharged;
+  }
+  export interface PutObjectLegalHoldRequest {
+    /**
+     * The bucket containing the object that you want to place a Legal Hold on.
+     */
+    Bucket: BucketName;
+    /**
+     * The key name for the object that you want to place a Legal Hold on.
+     */
+    Key: ObjectKey;
+    /**
+     * Container element for the Legal Hold configuration you want to apply to the specified object.
+     */
+    LegalHold?: ObjectLockLegalHold;
+    RequestPayer?: RequestPayer;
+    /**
+     * The version ID of the object that you want to place a Legal Hold on.
+     */
+    VersionId?: ObjectVersionId;
+    /**
+     * The MD5 signature for the configuration included in your request.
+     */
+    ContentMD5?: ContentMD5;
+  }
+  export interface PutObjectLockConfigurationOutput {
+    RequestCharged?: RequestCharged;
+  }
+  export interface PutObjectLockConfigurationRequest {
+    /**
+     * The bucket whose Object Lock configuration you want to create or replace.
+     */
+    Bucket: BucketName;
+    /**
+     * The Object Lock configuration that you want to apply to the specified bucket.
+     */
+    ObjectLockConfiguration?: ObjectLockConfiguration;
+    RequestPayer?: RequestPayer;
+    /**
+     * 
+     */
+    Token?: ObjectLockToken;
+    /**
+     * The MD5 signature for the configuration included in your request.
+     */
+    ContentMD5?: ContentMD5;
+  }
   export interface PutObjectOutput {
     /**
      * If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
@@ -3411,6 +3675,48 @@ declare namespace S3 {
      * The tag-set for the object. The tag-set must be encoded as URL Query parameters. (For example, "Key1=Value1")
      */
     Tagging?: TaggingHeader;
+    /**
+     * The Object Lock mode that you want to apply to this object.
+     */
+    ObjectLockMode?: ObjectLockMode;
+    /**
+     * The date and time when you want this object's Object Lock to expire.
+     */
+    ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
+    /**
+     * The Legal Hold status that you want to apply to the specified object.
+     */
+    ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
+  }
+  export interface PutObjectRetentionOutput {
+    RequestCharged?: RequestCharged;
+  }
+  export interface PutObjectRetentionRequest {
+    /**
+     * The bucket that contains the object you want to apply this Object Retention configuration to.
+     */
+    Bucket: BucketName;
+    /**
+     * The key name for the object that you want to apply this Object Retention configuration to.
+     */
+    Key: ObjectKey;
+    /**
+     * The container element for the Object Retention configuration.
+     */
+    Retention?: ObjectLockRetention;
+    RequestPayer?: RequestPayer;
+    /**
+     * The version ID for the object that you want to apply this Object Retention configuration to.
+     */
+    VersionId?: ObjectVersionId;
+    /**
+     * 
+     */
+    BypassGovernanceRetention?: BypassGovernanceRetention;
+    /**
+     * The MD5 signature for the configuration included in your request.
+     */
+    ContentMD5?: ContentMD5;
   }
   export interface PutObjectTaggingOutput {
     VersionId?: ObjectVersionId;
@@ -3432,7 +3738,7 @@ declare namespace S3 {
      */
     ContentMD5?: ContentMD5;
     /**
-     * The PublicAccessBlock configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when &amp;S3; considers a bucket or object public, see For more information about when Amazon S3 considers a bucket or object public, see The Meaning of "Public" in the Amazon Simple Storage Service Developer Guide.
+     * The PublicAccessBlock configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see The Meaning of "Public" in the Amazon Simple Storage Service Developer Guide.
      */
     PublicAccessBlockConfiguration: PublicAccessBlockConfiguration;
   }
@@ -3828,7 +4134,7 @@ declare namespace S3 {
      */
     Details?: Stats;
   }
-  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|string;
+  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|string;
   export interface StorageClassAnalysis {
     /**
      * A container used to describe how data related to the storage class analysis should be exported.
@@ -4089,6 +4395,7 @@ declare namespace S3 {
     RoutingRules?: RoutingRules;
   }
   export type WebsiteRedirectLocation = string;
+  export type Years = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

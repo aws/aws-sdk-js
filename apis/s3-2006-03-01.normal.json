@@ -625,6 +625,48 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html",
       "documentation": "<p>Returns the access control list (ACL) of an object.</p>"
     },
+    "GetObjectLegalHold": {
+      "name": "GetObjectLegalHold",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}/{Key+}?legal-hold"
+      },
+      "input": {
+        "shape": "GetObjectLegalHoldRequest"
+      },
+      "output": {
+        "shape": "GetObjectLegalHoldOutput"
+      },
+      "documentation": "<p>Gets an object's current Legal Hold status.</p>"
+    },
+    "GetObjectLockConfiguration": {
+      "name": "GetObjectLockConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?object-lock"
+      },
+      "input": {
+        "shape": "GetObjectLockConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetObjectLockConfigurationOutput"
+      },
+      "documentation": "<p>Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.</p>"
+    },
+    "GetObjectRetention": {
+      "name": "GetObjectRetention",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}/{Key+}?retention"
+      },
+      "input": {
+        "shape": "GetObjectRetentionRequest"
+      },
+      "output": {
+        "shape": "GetObjectRetentionOutput"
+      },
+      "documentation": "<p>Retrieves an object's retention settings.</p>"
+    },
     "GetObjectTagging": {
       "name": "GetObjectTagging",
       "http": {
@@ -1091,6 +1133,48 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUTacl.html",
       "documentation": "<p>uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket</p>"
     },
+    "PutObjectLegalHold": {
+      "name": "PutObjectLegalHold",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}/{Key+}?legal-hold"
+      },
+      "input": {
+        "shape": "PutObjectLegalHoldRequest"
+      },
+      "output": {
+        "shape": "PutObjectLegalHoldOutput"
+      },
+      "documentation": "<p>Applies a Legal Hold configuration to the specified object.</p>"
+    },
+    "PutObjectLockConfiguration": {
+      "name": "PutObjectLockConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}?object-lock"
+      },
+      "input": {
+        "shape": "PutObjectLockConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutObjectLockConfigurationOutput"
+      },
+      "documentation": "<p>Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.</p>"
+    },
+    "PutObjectRetention": {
+      "name": "PutObjectRetention",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}/{Key+}?retention"
+      },
+      "input": {
+        "shape": "PutObjectRetentionRequest"
+      },
+      "output": {
+        "shape": "PutObjectRetentionOutput"
+      },
+      "documentation": "<p>Places an Object Retention configuration on an object.</p>"
+    },
     "PutObjectTagging": {
       "name": "PutObjectTagging",
       "http": {
@@ -1515,6 +1599,9 @@
         "shape": "Bucket",
         "locationName": "Bucket"
       }
+    },
+    "BypassGovernanceRetention": {
+      "type": "boolean"
     },
     "BytesProcessed": {
       "type": "long"
@@ -2110,6 +2197,24 @@
           "documentation": "<p>The tag-set for the object destination object this value must be used in conjunction with the TaggingDirective. The tag-set must be encoded as URL Query parameters</p>",
           "location": "header",
           "locationName": "x-amz-tagging"
+        },
+        "ObjectLockMode": {
+          "shape": "ObjectLockMode",
+          "documentation": "<p>The Object Lock mode that you want to apply to the copied object.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-mode"
+        },
+        "ObjectLockRetainUntilDate": {
+          "shape": "ObjectLockRetainUntilDate",
+          "documentation": "<p>The date and time when you want the copied object's Object Lock to expire.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-retain-until-date"
+        },
+        "ObjectLockLegalHoldStatus": {
+          "shape": "ObjectLockLegalHoldStatus",
+          "documentation": "<p>Specifies whether you want to apply a Legal Hold to the copied object.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-legal-hold"
         }
       }
     },
@@ -2241,6 +2346,12 @@
           "documentation": "<p>Allows grantee to write the ACL for the applicable bucket.</p>",
           "location": "header",
           "locationName": "x-amz-grant-write-acp"
+        },
+        "ObjectLockEnabledForBucket": {
+          "shape": "ObjectLockEnabledForBucket",
+          "documentation": "<p>Specifies whether you want S3 Object Lock to be enabled for the new bucket.</p>",
+          "location": "header",
+          "locationName": "x-amz-bucket-object-lock-enabled"
         }
       },
       "payload": "CreateBucketConfiguration"
@@ -2445,6 +2556,24 @@
           "documentation": "<p>The tag-set for the object. The tag-set must be encoded as URL Query parameters</p>",
           "location": "header",
           "locationName": "x-amz-tagging"
+        },
+        "ObjectLockMode": {
+          "shape": "ObjectLockMode",
+          "documentation": "<p>Specifies the Object Lock mode that you want to apply to the uploaded object.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-mode"
+        },
+        "ObjectLockRetainUntilDate": {
+          "shape": "ObjectLockRetainUntilDate",
+          "documentation": "<p>Specifies the date and time when you want the Object Lock to expire.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-retain-until-date"
+        },
+        "ObjectLockLegalHoldStatus": {
+          "shape": "ObjectLockLegalHoldStatus",
+          "documentation": "<p>Specifies whether you want to apply a Legal Hold to the uploaded object.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-legal-hold"
         }
       }
     },
@@ -2460,6 +2589,24 @@
     },
     "DaysAfterInitiation": {
       "type": "integer"
+    },
+    "DefaultRetention": {
+      "type": "structure",
+      "members": {
+        "Mode": {
+          "shape": "ObjectLockRetentionMode",
+          "documentation": "<p>The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.</p>"
+        },
+        "Days": {
+          "shape": "Days",
+          "documentation": "<p>The number of days that you want to specify for the default retention period.</p>"
+        },
+        "Years": {
+          "shape": "Years",
+          "documentation": "<p>The number of years that you want to specify for the default retention period.</p>"
+        }
+      },
+      "documentation": "<p>The container element for specifying the default Object Lock retention settings for new objects placed in the specified bucket.</p>"
     },
     "Delete": {
       "type": "structure",
@@ -2755,6 +2902,12 @@
           "shape": "RequestPayer",
           "location": "header",
           "locationName": "x-amz-request-payer"
+        },
+        "BypassGovernanceRetention": {
+          "shape": "BypassGovernanceRetention",
+          "documentation": "<p/>",
+          "location": "header",
+          "locationName": "x-amz-bypass-governance-retention"
         }
       }
     },
@@ -2840,6 +2993,12 @@
           "shape": "RequestPayer",
           "location": "header",
           "locationName": "x-amz-request-payer"
+        },
+        "BypassGovernanceRetention": {
+          "shape": "BypassGovernanceRetention",
+          "documentation": "<p>Specifies whether you want to delete this object even if it has a Governance-type Object Lock in place. You must have sufficient permissions to perform this operation.</p>",
+          "location": "header",
+          "locationName": "x-amz-bypass-governance-retention"
         }
       },
       "payload": "Delete"
@@ -3020,7 +3179,9 @@
         "s3:ObjectCreated:CompleteMultipartUpload",
         "s3:ObjectRemoved:*",
         "s3:ObjectRemoved:Delete",
-        "s3:ObjectRemoved:DeleteMarkerCreated"
+        "s3:ObjectRemoved:DeleteMarkerCreated",
+        "s3:ObjectRestore:Post",
+        "s3:ObjectRestore:Completed"
       ]
     },
     "EventList": {
@@ -3617,6 +3778,72 @@
         }
       }
     },
+    "GetObjectLegalHoldOutput": {
+      "type": "structure",
+      "members": {
+        "LegalHold": {
+          "shape": "ObjectLockLegalHold",
+          "documentation": "<p>The current Legal Hold status for the specified object.</p>"
+        }
+      },
+      "payload": "LegalHold"
+    },
+    "GetObjectLegalHoldRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Key"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The bucket containing the object whose Legal Hold status you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Key": {
+          "shape": "ObjectKey",
+          "documentation": "<p>The key name for the object whose Legal Hold status you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "Key"
+        },
+        "VersionId": {
+          "shape": "ObjectVersionId",
+          "documentation": "<p>The version ID of the object whose Legal Hold status you want to retrieve.</p>",
+          "location": "querystring",
+          "locationName": "versionId"
+        },
+        "RequestPayer": {
+          "shape": "RequestPayer",
+          "location": "header",
+          "locationName": "x-amz-request-payer"
+        }
+      }
+    },
+    "GetObjectLockConfigurationOutput": {
+      "type": "structure",
+      "members": {
+        "ObjectLockConfiguration": {
+          "shape": "ObjectLockConfiguration",
+          "documentation": "<p>The specified bucket's Object Lock configuration.</p>"
+        }
+      },
+      "payload": "ObjectLockConfiguration"
+    },
+    "GetObjectLockConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The bucket whose Object Lock configuration you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        }
+      }
+    },
     "GetObjectOutput": {
       "type": "structure",
       "members": {
@@ -3782,6 +4009,24 @@
           "documentation": "<p>The number of tags, if any, on the object.</p>",
           "location": "header",
           "locationName": "x-amz-tagging-count"
+        },
+        "ObjectLockMode": {
+          "shape": "ObjectLockMode",
+          "documentation": "<p>The Object Lock mode currently in place for this object.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-mode"
+        },
+        "ObjectLockRetainUntilDate": {
+          "shape": "ObjectLockRetainUntilDate",
+          "documentation": "<p>The date and time when this object's Object Lock will expire.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-retain-until-date"
+        },
+        "ObjectLockLegalHoldStatus": {
+          "shape": "ObjectLockLegalHoldStatus",
+          "documentation": "<p/>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-legal-hold"
         }
       },
       "payload": "Body"
@@ -3903,6 +4148,48 @@
           "documentation": "<p>Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' GET request for the part specified. Useful for downloading just a part of an object.</p>",
           "location": "querystring",
           "locationName": "partNumber"
+        }
+      }
+    },
+    "GetObjectRetentionOutput": {
+      "type": "structure",
+      "members": {
+        "Retention": {
+          "shape": "ObjectLockRetention",
+          "documentation": "<p>The container element for an object's retention settings.</p>"
+        }
+      },
+      "payload": "Retention"
+    },
+    "GetObjectRetentionRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Key"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The bucket containing the object whose retention settings you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Key": {
+          "shape": "ObjectKey",
+          "documentation": "<p>The key name for the object whose retention settings you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "Key"
+        },
+        "VersionId": {
+          "shape": "ObjectVersionId",
+          "documentation": "<p>The version ID for the object whose retention settings you want to retrieve.</p>",
+          "location": "querystring",
+          "locationName": "versionId"
+        },
+        "RequestPayer": {
+          "shape": "RequestPayer",
+          "location": "header",
+          "locationName": "x-amz-request-payer"
         }
       }
     },
@@ -4250,6 +4537,24 @@
           "documentation": "<p>The count of parts this object has.</p>",
           "location": "header",
           "locationName": "x-amz-mp-parts-count"
+        },
+        "ObjectLockMode": {
+          "shape": "ObjectLockMode",
+          "documentation": "<p>The Object Lock mode currently in place for this object.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-mode"
+        },
+        "ObjectLockRetainUntilDate": {
+          "shape": "ObjectLockRetainUntilDate",
+          "documentation": "<p>The date and time when this object's Object Lock will expire.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-retain-until-date"
+        },
+        "ObjectLockLegalHoldStatus": {
+          "shape": "ObjectLockLegalHoldStatus",
+          "documentation": "<p>The Legal Hold status for the specified object.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-legal-hold"
         }
       }
     },
@@ -4531,7 +4836,10 @@
         "ETag",
         "IsMultipartUploaded",
         "ReplicationStatus",
-        "EncryptionStatus"
+        "EncryptionStatus",
+        "ObjectLockRetainUntilDate",
+        "ObjectLockMode",
+        "ObjectLockLegalHoldStatus"
       ]
     },
     "InventoryOptionalFields": {
@@ -5782,6 +6090,90 @@
       },
       "flattened": true
     },
+    "ObjectLockConfiguration": {
+      "type": "structure",
+      "members": {
+        "ObjectLockEnabled": {
+          "shape": "ObjectLockEnabled",
+          "documentation": "<p>Indicates whether this object has an Object Lock configuration enabled.</p>"
+        },
+        "Rule": {
+          "shape": "ObjectLockRule",
+          "documentation": "<p>The Object Lock rule in place for the specified object.</p>"
+        }
+      },
+      "documentation": "<p>The container element for Object Lock configuration parameters.</p>"
+    },
+    "ObjectLockEnabled": {
+      "type": "string",
+      "enum": [
+        "Enabled"
+      ]
+    },
+    "ObjectLockEnabledForBucket": {
+      "type": "boolean"
+    },
+    "ObjectLockLegalHold": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ObjectLockLegalHoldStatus",
+          "documentation": "<p>Indicates whether the specified object has a Legal Hold in place.</p>"
+        }
+      },
+      "documentation": "<p>A Legal Hold configuration for an object.</p>"
+    },
+    "ObjectLockLegalHoldStatus": {
+      "type": "string",
+      "enum": [
+        "ON",
+        "OFF"
+      ]
+    },
+    "ObjectLockMode": {
+      "type": "string",
+      "enum": [
+        "GOVERNANCE",
+        "COMPLIANCE"
+      ]
+    },
+    "ObjectLockRetainUntilDate": {
+      "type": "timestamp"
+    },
+    "ObjectLockRetention": {
+      "type": "structure",
+      "members": {
+        "Mode": {
+          "shape": "ObjectLockRetentionMode",
+          "documentation": "<p>Indicates the Retention mode for the specified object.</p>"
+        },
+        "RetainUntilDate": {
+          "shape": "Date",
+          "documentation": "<p/>"
+        }
+      },
+      "documentation": "<p>A Retention configuration for an object.</p>"
+    },
+    "ObjectLockRetentionMode": {
+      "type": "string",
+      "enum": [
+        "GOVERNANCE",
+        "COMPLIANCE"
+      ]
+    },
+    "ObjectLockRule": {
+      "type": "structure",
+      "members": {
+        "DefaultRetention": {
+          "shape": "DefaultRetention",
+          "documentation": "<p>The default retention period that you want to apply to new objects placed in the specified bucket.</p>"
+        }
+      },
+      "documentation": "<p>The container element for an Object Lock rule.</p>"
+    },
+    "ObjectLockToken": {
+      "type": "string"
+    },
     "ObjectStorageClass": {
       "type": "string",
       "enum": [
@@ -6641,6 +7033,113 @@
       },
       "payload": "AccessControlPolicy"
     },
+    "PutObjectLegalHoldOutput": {
+      "type": "structure",
+      "members": {
+        "RequestCharged": {
+          "shape": "RequestCharged",
+          "location": "header",
+          "locationName": "x-amz-request-charged"
+        }
+      }
+    },
+    "PutObjectLegalHoldRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Key"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The bucket containing the object that you want to place a Legal Hold on.</p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Key": {
+          "shape": "ObjectKey",
+          "documentation": "<p>The key name for the object that you want to place a Legal Hold on.</p>",
+          "location": "uri",
+          "locationName": "Key"
+        },
+        "LegalHold": {
+          "shape": "ObjectLockLegalHold",
+          "documentation": "<p>Container element for the Legal Hold configuration you want to apply to the specified object.</p>",
+          "locationName": "LegalHold",
+          "xmlNamespace": {
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        },
+        "RequestPayer": {
+          "shape": "RequestPayer",
+          "location": "header",
+          "locationName": "x-amz-request-payer"
+        },
+        "VersionId": {
+          "shape": "ObjectVersionId",
+          "documentation": "<p>The version ID of the object that you want to place a Legal Hold on.</p>",
+          "location": "querystring",
+          "locationName": "versionId"
+        },
+        "ContentMD5": {
+          "shape": "ContentMD5",
+          "documentation": "<p>The MD5 signature for the configuration included in your request.</p>",
+          "location": "header",
+          "locationName": "Content-MD5"
+        }
+      },
+      "payload": "LegalHold"
+    },
+    "PutObjectLockConfigurationOutput": {
+      "type": "structure",
+      "members": {
+        "RequestCharged": {
+          "shape": "RequestCharged",
+          "location": "header",
+          "locationName": "x-amz-request-charged"
+        }
+      }
+    },
+    "PutObjectLockConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The bucket whose Object Lock configuration you want to create or replace.</p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "ObjectLockConfiguration": {
+          "shape": "ObjectLockConfiguration",
+          "documentation": "<p>The Object Lock configuration that you want to apply to the specified bucket.</p>",
+          "locationName": "ObjectLockConfiguration",
+          "xmlNamespace": {
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        },
+        "RequestPayer": {
+          "shape": "RequestPayer",
+          "location": "header",
+          "locationName": "x-amz-request-payer"
+        },
+        "Token": {
+          "shape": "ObjectLockToken",
+          "documentation": "<p/>",
+          "location": "header",
+          "locationName": "x-amz-bucket-object-lock-token"
+        },
+        "ContentMD5": {
+          "shape": "ContentMD5",
+          "documentation": "<p>The MD5 signature for the configuration included in your request.</p>",
+          "location": "header",
+          "locationName": "Content-MD5"
+        }
+      },
+      "payload": "ObjectLockConfiguration"
+    },
     "PutObjectOutput": {
       "type": "structure",
       "members": {
@@ -6853,9 +7352,90 @@
           "documentation": "<p>The tag-set for the object. The tag-set must be encoded as URL Query parameters. (For example, \"Key1=Value1\")</p>",
           "location": "header",
           "locationName": "x-amz-tagging"
+        },
+        "ObjectLockMode": {
+          "shape": "ObjectLockMode",
+          "documentation": "<p>The Object Lock mode that you want to apply to this object.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-mode"
+        },
+        "ObjectLockRetainUntilDate": {
+          "shape": "ObjectLockRetainUntilDate",
+          "documentation": "<p>The date and time when you want this object's Object Lock to expire.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-retain-until-date"
+        },
+        "ObjectLockLegalHoldStatus": {
+          "shape": "ObjectLockLegalHoldStatus",
+          "documentation": "<p>The Legal Hold status that you want to apply to the specified object.</p>",
+          "location": "header",
+          "locationName": "x-amz-object-lock-legal-hold"
         }
       },
       "payload": "Body"
+    },
+    "PutObjectRetentionOutput": {
+      "type": "structure",
+      "members": {
+        "RequestCharged": {
+          "shape": "RequestCharged",
+          "location": "header",
+          "locationName": "x-amz-request-charged"
+        }
+      }
+    },
+    "PutObjectRetentionRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Key"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The bucket that contains the object you want to apply this Object Retention configuration to.</p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Key": {
+          "shape": "ObjectKey",
+          "documentation": "<p>The key name for the object that you want to apply this Object Retention configuration to.</p>",
+          "location": "uri",
+          "locationName": "Key"
+        },
+        "Retention": {
+          "shape": "ObjectLockRetention",
+          "documentation": "<p>The container element for the Object Retention configuration.</p>",
+          "locationName": "Retention",
+          "xmlNamespace": {
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        },
+        "RequestPayer": {
+          "shape": "RequestPayer",
+          "location": "header",
+          "locationName": "x-amz-request-payer"
+        },
+        "VersionId": {
+          "shape": "ObjectVersionId",
+          "documentation": "<p>The version ID for the object that you want to apply this Object Retention configuration to.</p>",
+          "location": "querystring",
+          "locationName": "versionId"
+        },
+        "BypassGovernanceRetention": {
+          "shape": "BypassGovernanceRetention",
+          "documentation": "<p/>",
+          "location": "header",
+          "locationName": "x-amz-bypass-governance-retention"
+        },
+        "ContentMD5": {
+          "shape": "ContentMD5",
+          "documentation": "<p>The MD5 signature for the configuration included in your request.</p>",
+          "location": "header",
+          "locationName": "Content-MD5"
+        }
+      },
+      "payload": "Retention"
     },
     "PutObjectTaggingOutput": {
       "type": "structure",
@@ -6926,7 +7506,7 @@
         },
         "PublicAccessBlockConfiguration": {
           "shape": "PublicAccessBlockConfiguration",
-          "documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when &amp;S3; considers a bucket or object public, see For more information about when Amazon S3 considers a bucket or object public, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status\">The Meaning of \"Public\"</a> in the Amazon Simple Storage Service Developer Guide.</p>",
+          "documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status\">The Meaning of \"Public\"</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>",
           "locationName": "PublicAccessBlockConfiguration",
           "xmlNamespace": {
             "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -7748,7 +8328,8 @@
         "REDUCED_REDUNDANCY",
         "STANDARD_IA",
         "ONEZONE_IA",
-        "INTELLIGENT_TIERING"
+        "INTELLIGENT_TIERING",
+        "GLACIER"
       ]
     },
     "StorageClassAnalysis": {
@@ -8290,6 +8871,9 @@
     },
     "WebsiteRedirectLocation": {
       "type": "string"
+    },
+    "Years": {
+      "type": "integer"
     }
   }
 }

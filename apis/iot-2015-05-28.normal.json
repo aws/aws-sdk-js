@@ -5319,6 +5319,10 @@
           "shape": "IotAnalyticsAction",
           "documentation": "<p>Sends message data to an AWS IoT Analytics channel.</p>"
         },
+        "iotEvents": {
+          "shape": "IotEventsAction",
+          "documentation": "<p>Sends an input to an AWS IoT Events detector.</p>"
+        },
         "stepFunctions": {
           "shape": "StepFunctionsAction",
           "documentation": "<p>Starts execution of a Step Functions state machine.</p>"
@@ -9579,6 +9583,11 @@
     "InlineDocument": {
       "type": "string"
     },
+    "InputName": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
     "IotAnalyticsAction": {
       "type": "structure",
       "members": {
@@ -9596,6 +9605,28 @@
         }
       },
       "documentation": "<p>Sends messge data to an AWS IoT Analytics channel.</p>"
+    },
+    "IotEventsAction": {
+      "type": "structure",
+      "required": [
+        "inputName",
+        "roleArn"
+      ],
+      "members": {
+        "inputName": {
+          "shape": "InputName",
+          "documentation": "<p>The name of the AWS IoT Events input.</p>"
+        },
+        "messageId": {
+          "shape": "MessageId",
+          "documentation": "<p>[Optional] Use this to ensure that only one input (message) with a given messageId will be processed by an AWS IoT Events detector.</p>"
+        },
+        "roleArn": {
+          "shape": "AwsArn",
+          "documentation": "<p>The ARN of the role that grants AWS IoT permission to send an input to an AWS IoT Events detector. (\"Action\":\"iotevents:BatchPutMessage\").</p>"
+        }
+      },
+      "documentation": "<p>Sends an input to an AWS IoT Events detector.</p>"
     },
     "IsAuthenticated": {
       "type": "boolean"
@@ -11776,6 +11807,10 @@
         "RAW",
         "JSON"
       ]
+    },
+    "MessageId": {
+      "type": "string",
+      "max": 128
     },
     "MetricValue": {
       "type": "structure",

@@ -637,5 +637,8 @@
   },
   "transfer": {
     "name": "Transfer"
+  },
+  "globalaccelerator": {
+    "name": "GlobalAccelerator"
   }
 }

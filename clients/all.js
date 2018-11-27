@@ -157,5 +157,6 @@ module.exports = {
   Amplify: require('./amplify'),
   DataSync: require('./datasync'),
   RoboMaker: require('./robomaker'),
-  Transfer: require('./transfer')
+  Transfer: require('./transfer'),
+  GlobalAccelerator: require('./globalaccelerator')
 };

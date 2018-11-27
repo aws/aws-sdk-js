@@ -1436,6 +1436,10 @@ declare namespace Iot {
      */
     iotAnalytics?: IotAnalyticsAction;
     /**
+     * Sends an input to an AWS IoT Events detector.
+     */
+    iotEvents?: IotEventsAction;
+    /**
      * Starts execution of a Step Functions state machine.
      */
     stepFunctions?: StepFunctionsAction;
@@ -3961,6 +3965,7 @@ declare namespace Iot {
   export type IndexSchema = string;
   export type IndexStatus = "ACTIVE"|"BUILDING"|"REBUILDING"|string;
   export type InlineDocument = string;
+  export type InputName = string;
   export interface IotAnalyticsAction {
     /**
      * (deprecated) The ARN of the IoT Analytics channel to which message data will be sent.
@@ -3974,6 +3979,20 @@ declare namespace Iot {
      * The ARN of the role which has a policy that grants IoT Analytics permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).
      */
     roleArn?: AwsArn;
+  }
+  export interface IotEventsAction {
+    /**
+     * The name of the AWS IoT Events input.
+     */
+    inputName: InputName;
+    /**
+     * [Optional] Use this to ensure that only one input (message) with a given messageId will be processed by an AWS IoT Events detector.
+     */
+    messageId?: MessageId;
+    /**
+     * The ARN of the role that grants AWS IoT permission to send an input to an AWS IoT Events detector. ("Action":"iotevents:BatchPutMessage").
+     */
+    roleArn: AwsArn;
   }
   export type IsAuthenticated = boolean;
   export type IsDefaultVersion = boolean;
@@ -5352,6 +5371,7 @@ declare namespace Iot {
   export type MaximumPerMinute = number;
   export type Message = string;
   export type MessageFormat = "RAW"|"JSON"|string;
+  export type MessageId = string;
   export interface MetricValue {
     /**
      * If the comparisonOperator calls for a numeric value, use this to specify that numeric value to be compared with the metric.

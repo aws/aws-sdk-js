@@ -158,6 +158,7 @@ export abstract class ConfigurationServicePlaceholders {
   datasync?: AWS.DataSync.Types.ClientConfiguration;
   robomaker?: AWS.RoboMaker.Types.ClientConfiguration;
   transfer?: AWS.Transfer.Types.ClientConfiguration;
+  globalaccelerator?: AWS.GlobalAccelerator.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -318,4 +319,5 @@ export interface ConfigurationServiceApiVersions {
   datasync?: AWS.DataSync.Types.apiVersion;
   robomaker?: AWS.RoboMaker.Types.apiVersion;
   transfer?: AWS.Transfer.Types.apiVersion;
+  globalaccelerator?: AWS.GlobalAccelerator.Types.apiVersion;
 }

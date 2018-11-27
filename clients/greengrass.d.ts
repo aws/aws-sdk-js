@@ -12,35 +12,51 @@ declare class Greengrass extends Service {
   constructor(options?: Greengrass.Types.ClientConfiguration)
   config: Config & Greengrass.Types.ClientConfiguration;
   /**
-   * Associates a role with a group. Your AWS Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
+   * Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
    */
   associateRoleToGroup(params: Greengrass.Types.AssociateRoleToGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.AssociateRoleToGroupResponse) => void): Request<Greengrass.Types.AssociateRoleToGroupResponse, AWSError>;
   /**
-   * Associates a role with a group. Your AWS Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
+   * Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
    */
   associateRoleToGroup(callback?: (err: AWSError, data: Greengrass.Types.AssociateRoleToGroupResponse) => void): Request<Greengrass.Types.AssociateRoleToGroupResponse, AWSError>;
   /**
-   * Associates a role with your account. AWS Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
+   * Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
    */
   associateServiceRoleToAccount(params: Greengrass.Types.AssociateServiceRoleToAccountRequest, callback?: (err: AWSError, data: Greengrass.Types.AssociateServiceRoleToAccountResponse) => void): Request<Greengrass.Types.AssociateServiceRoleToAccountResponse, AWSError>;
   /**
-   * Associates a role with your account. AWS Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
+   * Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
    */
   associateServiceRoleToAccount(callback?: (err: AWSError, data: Greengrass.Types.AssociateServiceRoleToAccountResponse) => void): Request<Greengrass.Types.AssociateServiceRoleToAccountResponse, AWSError>;
   /**
-   * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+   * Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
+   */
+  createConnectorDefinition(params: Greengrass.Types.CreateConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionResponse, AWSError>;
+  /**
+   * Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
+   */
+  createConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionResponse, AWSError>;
+  /**
+   * Creates a version of a connector definition which has already been defined.
+   */
+  createConnectorDefinitionVersion(params: Greengrass.Types.CreateConnectorDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionVersionResponse, AWSError>;
+  /**
+   * Creates a version of a connector definition which has already been defined.
+   */
+  createConnectorDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionVersionResponse, AWSError>;
+  /**
+   * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinition(params: Greengrass.Types.CreateCoreDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionResponse, AWSError>;
   /**
-   * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+   * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionResponse, AWSError>;
   /**
-   * Creates a version of a core definition that has already been defined. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+   * Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinitionVersion(params: Greengrass.Types.CreateCoreDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a version of a core definition that has already been defined. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+   * Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionVersionResponse, AWSError>;
   /**
@@ -84,11 +100,11 @@ declare class Greengrass extends Service {
    */
   createFunctionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateFunctionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateFunctionDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
+   * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
    */
   createGroup(params: Greengrass.Types.CreateGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateGroupResponse) => void): Request<Greengrass.Types.CreateGroupResponse, AWSError>;
   /**
-   * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
+   * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
    */
   createGroup(callback?: (err: AWSError, data: Greengrass.Types.CreateGroupResponse) => void): Request<Greengrass.Types.CreateGroupResponse, AWSError>;
   /**
@@ -163,6 +179,14 @@ declare class Greengrass extends Service {
    * Creates a version of a subscription definition which has already been defined.
    */
   createSubscriptionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionVersionResponse, AWSError>;
+  /**
+   * Deletes a connector definition.
+   */
+  deleteConnectorDefinition(params: Greengrass.Types.DeleteConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteConnectorDefinitionResponse) => void): Request<Greengrass.Types.DeleteConnectorDefinitionResponse, AWSError>;
+  /**
+   * Deletes a connector definition.
+   */
+  deleteConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteConnectorDefinitionResponse) => void): Request<Greengrass.Types.DeleteConnectorDefinitionResponse, AWSError>;
   /**
    * Deletes a core definition.
    */
@@ -259,6 +283,22 @@ declare class Greengrass extends Service {
    * Retrieves the connectivity information for a core.
    */
   getConnectivityInfo(callback?: (err: AWSError, data: Greengrass.Types.GetConnectivityInfoResponse) => void): Request<Greengrass.Types.GetConnectivityInfoResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition.
+   */
+  getConnectorDefinition(params: Greengrass.Types.GetConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition.
+   */
+  getConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  getConnectorDefinitionVersion(params: Greengrass.Types.GetConnectorDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionVersionResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  getConnectorDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionVersionResponse, AWSError>;
   /**
    * Retrieves information about a core definition version.
    */
@@ -420,6 +460,22 @@ declare class Greengrass extends Service {
    */
   listBulkDeployments(callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentsResponse, AWSError>;
   /**
+   * Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  listConnectorDefinitionVersions(params: Greengrass.Types.ListConnectorDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionVersionsResponse, AWSError>;
+  /**
+   * Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  listConnectorDefinitionVersions(callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionVersionsResponse, AWSError>;
+  /**
+   * Retrieves a list of connector definitions.
+   */
+  listConnectorDefinitions(params: Greengrass.Types.ListConnectorDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionsResponse, AWSError>;
+  /**
+   * Retrieves a list of connector definitions.
+   */
+  listConnectorDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionsResponse, AWSError>;
+  /**
    * Lists the versions of a core definition.
    */
   listCoreDefinitionVersions(params: Greengrass.Types.ListCoreDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListCoreDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListCoreDefinitionVersionsResponse, AWSError>;
@@ -580,6 +636,14 @@ declare class Greengrass extends Service {
    */
   updateConnectivityInfo(callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectivityInfoResponse) => void): Request<Greengrass.Types.UpdateConnectivityInfoResponse, AWSError>;
   /**
+   * Updates a connector definition.
+   */
+  updateConnectorDefinition(params: Greengrass.Types.UpdateConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectorDefinitionResponse) => void): Request<Greengrass.Types.UpdateConnectorDefinitionResponse, AWSError>;
+  /**
+   * Updates a connector definition.
+   */
+  updateConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectorDefinitionResponse) => void): Request<Greengrass.Types.UpdateConnectorDefinitionResponse, AWSError>;
+  /**
    * Updates a core definition.
    */
   updateCoreDefinition(params: Greengrass.Types.UpdateCoreDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateCoreDefinitionResponse) => void): Request<Greengrass.Types.UpdateCoreDefinitionResponse, AWSError>;
@@ -647,7 +711,7 @@ declare class Greengrass extends Service {
 declare namespace Greengrass {
   export interface AssociateRoleToGroupRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -756,13 +820,33 @@ declare namespace Greengrass {
      */
     PortNumber?: __integer;
   }
+  export interface Connector {
+    /**
+     * The ARN of the connector.
+     */
+    ConnectorArn?: __string;
+    /**
+     * A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.
+     */
+    Id?: __string;
+    /**
+     * The parameters or configuration that the connector uses.
+     */
+    Parameters?: __mapOf__string;
+  }
+  export interface ConnectorDefinitionVersion {
+    /**
+     * A list of references to connectors in this version, with their corresponding configuration settings.
+     */
+    Connectors?: __listOfConnector;
+  }
   export interface Core {
     /**
      * The ARN of the certificate associated with the core.
      */
     CertificateArn?: __string;
     /**
-     * A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''.
+     * A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
     Id?: __string;
     /**
@@ -779,6 +863,82 @@ declare namespace Greengrass {
      * A list of cores in the core definition version.
      */
     Cores?: __listOfCore;
+  }
+  export interface CreateConnectorDefinitionRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * Information about the initial version of the connector definition.
+     */
+    InitialVersion?: ConnectorDefinitionVersion;
+    /**
+     * The name of the connector definition.
+     */
+    Name?: __string;
+  }
+  export interface CreateConnectorDefinitionResponse {
+    /**
+     * The ARN of the definition.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the definition.
+     */
+    Id?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was last updated.
+     */
+    LastUpdatedTimestamp?: __string;
+    /**
+     * The latest version of the definition.
+     */
+    LatestVersion?: __string;
+    /**
+     * The ARN of the latest version of the definition.
+     */
+    LatestVersionArn?: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface CreateConnectorDefinitionVersionRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * A list of references to connectors in this version, with their corresponding configuration settings.
+     */
+    Connectors?: __listOfConnector;
+  }
+  export interface CreateConnectorDefinitionVersionResponse {
+    /**
+     * The ARN of the version.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the version was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the version.
+     */
+    Id?: __string;
+    /**
+     * The unique ID of the version.
+     */
+    Version?: __string;
   }
   export interface CreateCoreDefinitionRequest {
     /**
@@ -870,7 +1030,7 @@ declare namespace Greengrass {
      */
     DeploymentType?: DeploymentType;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -1014,6 +1174,10 @@ declare namespace Greengrass {
      */
     AmznClientToken?: __string;
     /**
+     * Default configuration that will apply to all Lambda functions in this function definition version
+     */
+    DefaultConfig?: FunctionDefaultConfig;
+    /**
      * The ID of the Lambda function definition.
      */
     FunctionDefinitionId: __string;
@@ -1046,7 +1210,7 @@ declare namespace Greengrass {
      */
     AmznClientToken?: __string;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1106,6 +1270,10 @@ declare namespace Greengrass {
      */
     AmznClientToken?: __string;
     /**
+     * The ARN of the connector definition version for this group.
+     */
+    ConnectorDefinitionVersionArn?: __string;
+    /**
      * The ARN of the core definition version for this group.
      */
     CoreDefinitionVersionArn?: __string;
@@ -1118,7 +1286,7 @@ declare namespace Greengrass {
      */
     FunctionDefinitionVersionArn?: __string;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -1126,7 +1294,7 @@ declare namespace Greengrass {
      */
     LoggerDefinitionVersionArn?: __string;
     /**
-     * The resource definition version ARN for this group.
+     * The ARN of the resource definition version for this group.
      */
     ResourceDefinitionVersionArn?: __string;
     /**
@@ -1432,6 +1600,14 @@ declare namespace Greengrass {
      */
     Name?: __string;
   }
+  export interface DeleteConnectorDefinitionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+  }
+  export interface DeleteConnectorDefinitionResponse {
+  }
   export interface DeleteCoreDefinitionRequest {
     /**
      * The ID of the core definition.
@@ -1458,7 +1634,7 @@ declare namespace Greengrass {
   }
   export interface DeleteGroupRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1518,7 +1694,7 @@ declare namespace Greengrass {
      */
     CertificateArn?: __string;
     /**
-     * A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''.
+     * A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
     Id?: __string;
     /**
@@ -1538,7 +1714,7 @@ declare namespace Greengrass {
   }
   export interface DisassociateRoleFromGroupRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1578,7 +1754,7 @@ declare namespace Greengrass {
      */
     FunctionConfiguration?: FunctionConfiguration;
     /**
-     * A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''.
+     * A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
     Id?: __string;
   }
@@ -1600,7 +1776,7 @@ declare namespace Greengrass {
      */
     Executable?: __string;
     /**
-     * The memory size, in KB, which the function requires.
+     * The memory size, in KB, which the function requires. This setting is not applicable and should be cleared when you run the Lambda function without containerization.
      */
     MemorySize?: __integer;
     /**
@@ -1608,17 +1784,21 @@ declare namespace Greengrass {
      */
     Pinned?: __boolean;
     /**
-     * The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned lambdas for each request.
+     * The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned Lambda functions for each request.
      */
     Timeout?: __integer;
   }
   export interface FunctionConfigurationEnvironment {
     /**
-     * If true, the Lambda function is allowed to access the host's /sys folder. Use this when the Lambda function needs to read device information from /sys.
+     * If true, the Lambda function is allowed to access the host's /sys folder. Use this when the Lambda function needs to read device information from /sys. This setting applies only when you run the Lambda function in a Greengrass container.
      */
     AccessSysfs?: __boolean;
     /**
-     * A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources.
+     * Configuration related to executing the Lambda function
+     */
+    Execution?: FunctionExecutionConfig;
+    /**
+     * A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources. ResourceAccessPolicies apply only when you run the Lambda function in a Greengrass container.
      */
     ResourceAccessPolicies?: __listOfResourceAccessPolicy;
     /**
@@ -1626,15 +1806,40 @@ declare namespace Greengrass {
      */
     Variables?: __mapOf__string;
   }
+  export interface FunctionDefaultConfig {
+    Execution?: FunctionDefaultExecutionConfig;
+  }
+  export interface FunctionDefaultExecutionConfig {
+    IsolationMode?: FunctionIsolationMode;
+  }
   export interface FunctionDefinitionVersion {
+    /**
+     * Default configuration that will apply to all Lambda functions in this function definition version
+     */
+    DefaultConfig?: FunctionDefaultConfig;
     /**
      * A list of Lambda functions in this function definition version.
      */
     Functions?: __listOfFunction;
   }
+  export interface FunctionExecutionConfig {
+    IsolationMode?: FunctionIsolationMode;
+    RunAs?: FunctionRunAsConfig;
+  }
+  export type FunctionIsolationMode = "GreengrassContainer"|"NoContainer"|string;
+  export interface FunctionRunAsConfig {
+    /**
+     * The Group ID whose permissions are used to run a Lambda function.
+     */
+    Gid?: __integer;
+    /**
+     * The User ID whose permissions are used to run a Lambda function.
+     */
+    Uid?: __integer;
+  }
   export interface GetAssociatedRoleRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1691,6 +1896,82 @@ declare namespace Greengrass {
      * A message about the connectivity info request.
      */
     Message?: __string;
+  }
+  export interface GetConnectorDefinitionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+  }
+  export interface GetConnectorDefinitionResponse {
+    /**
+     * The ARN of the definition.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the definition.
+     */
+    Id?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was last updated.
+     */
+    LastUpdatedTimestamp?: __string;
+    /**
+     * The latest version of the definition.
+     */
+    LatestVersion?: __string;
+    /**
+     * The ARN of the latest version of the definition.
+     */
+    LatestVersionArn?: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface GetConnectorDefinitionVersionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * The ID of the connector definition version.
+     */
+    ConnectorDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface GetConnectorDefinitionVersionResponse {
+    /**
+     * The ARN of the connector definition version.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the connector definition version was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * Information about the connector definition version.
+     */
+    Definition?: ConnectorDefinitionVersion;
+    /**
+     * The ID of the connector definition version.
+     */
+    Id?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * The version of the connector definition version.
+     */
+    Version?: __string;
   }
   export interface GetCoreDefinitionRequest {
     /**
@@ -1770,7 +2051,7 @@ declare namespace Greengrass {
      */
     DeploymentId: __string;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1954,7 +2235,7 @@ declare namespace Greengrass {
      */
     CertificateAuthorityId: __string;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1974,7 +2255,7 @@ declare namespace Greengrass {
   }
   export interface GetGroupCertificateConfigurationRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1994,7 +2275,7 @@ declare namespace Greengrass {
   }
   export interface GetGroupRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -2030,7 +2311,7 @@ declare namespace Greengrass {
   }
   export interface GetGroupVersionRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -2330,7 +2611,7 @@ declare namespace Greengrass {
   }
   export interface GroupOwnerSetting {
     /**
-     * If true, GreenGrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.
+     * If true, AWS IoT Greengrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.
      */
     AutoAddGroupOwner?: __boolean;
     /**
@@ -2339,6 +2620,10 @@ declare namespace Greengrass {
     GroupOwner?: __string;
   }
   export interface GroupVersion {
+    /**
+     * The ARN of the connector definition version for this group.
+     */
+    ConnectorDefinitionVersionArn?: __string;
     /**
      * The ARN of the core definition version for this group.
      */
@@ -2356,7 +2641,7 @@ declare namespace Greengrass {
      */
     LoggerDefinitionVersionArn?: __string;
     /**
-     * The resource definition version ARN for this group.
+     * The ARN of the resource definition version for this group.
      */
     ResourceDefinitionVersionArn?: __string;
     /**
@@ -2408,6 +2693,50 @@ declare namespace Greengrass {
      */
     NextToken?: __string;
   }
+  export interface ListConnectorDefinitionVersionsRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListConnectorDefinitionVersionsResponse {
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * Information about a version.
+     */
+    Versions?: __listOfVersionInformation;
+  }
+  export interface ListConnectorDefinitionsRequest {
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListConnectorDefinitionsResponse {
+    /**
+     * Information about a definition.
+     */
+    Definitions?: __listOfDefinitionInformation;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
   export interface ListCoreDefinitionVersionsRequest {
     /**
      * The ID of the core definition.
@@ -2454,7 +2783,7 @@ declare namespace Greengrass {
   }
   export interface ListDeploymentsRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -2566,7 +2895,7 @@ declare namespace Greengrass {
   }
   export interface ListGroupCertificateAuthoritiesRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -2578,7 +2907,7 @@ declare namespace Greengrass {
   }
   export interface ListGroupVersionsRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -2764,7 +3093,7 @@ declare namespace Greengrass {
   }
   export interface LocalVolumeResourceData {
     /**
-     * The absolute local path of the resource inside the lambda environment.
+     * The absolute local path of the resource inside the Lambda environment.
      */
     DestinationPath?: __string;
     /**
@@ -2772,7 +3101,7 @@ declare namespace Greengrass {
      */
     GroupOwnerSetting?: GroupOwnerSetting;
     /**
-     * The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/proc'' or ''/sys''.
+     * The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
      */
     SourcePath?: __string;
   }
@@ -2782,7 +3111,7 @@ declare namespace Greengrass {
      */
     Component?: LoggerComponent;
     /**
-     * A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''.
+     * A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
     Id?: __string;
     /**
@@ -2818,7 +3147,7 @@ declare namespace Greengrass {
      */
     Force?: __boolean;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -2838,7 +3167,7 @@ declare namespace Greengrass {
      */
     Id?: __string;
     /**
-     * The descriptive resource name, which is displayed on the Greengrass console. Max length 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
+     * The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
      */
     Name?: __string;
     /**
@@ -2866,13 +3195,17 @@ declare namespace Greengrass {
      */
     LocalVolumeResourceData?: LocalVolumeResourceData;
     /**
-     * Attributes that define an S3 machine learning resource.
+     * Attributes that define an Amazon S3 machine learning resource.
      */
     S3MachineLearningModelResourceData?: S3MachineLearningModelResourceData;
     /**
-     * Attributes that define an SageMaker machine learning resource.
+     * Attributes that define an Amazon SageMaker machine learning resource.
      */
     SageMakerMachineLearningModelResourceData?: SageMakerMachineLearningModelResourceData;
+    /**
+     * Attributes that define a secret resource, which references a secret from AWS Secrets Manager.
+     */
+    SecretsManagerSecretResourceData?: SecretsManagerSecretResourceData;
   }
   export interface ResourceDefinitionVersion {
     /**
@@ -2897,9 +3230,19 @@ declare namespace Greengrass {
      */
     DestinationPath?: __string;
     /**
-     * The ARN of the SageMaker training job that represents the source model.
+     * The ARN of the Amazon SageMaker training job that represents the source model.
      */
     SageMakerJobArn?: __string;
+  }
+  export interface SecretsManagerSecretResourceData {
+    /**
+     * The ARN of the Secrets Manager secret to make available on the core. The value of the secret's latest version (represented by the ''AWSCURRENT'' staging label) is included by default.
+     */
+    ARN?: __string;
+    /**
+     * Optional. The staging labels whose values you want to make available on the core, in addition to ''AWSCURRENT''.
+     */
+    AdditionalStagingLabelsToDownload?: __listOf__string;
   }
   export type SoftwareToUpdate = "core"|"ota_agent"|string;
   export interface StartBulkDeploymentRequest {
@@ -2912,7 +3255,7 @@ declare namespace Greengrass {
      */
     ExecutionRoleArn?: __string;
     /**
-     * The URI of the input file contained in the S3 bucket. The execution role must have ''getObject'' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100MB. Currently, Greengrass; supports only ''NewDeployment'' deployment types.
+     * The URI of the input file contained in the S3 bucket. The execution role must have ''getObject'' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''NewDeployment'' deployment types.
      */
     InputFileUri?: __string;
   }
@@ -2936,11 +3279,11 @@ declare namespace Greengrass {
   }
   export interface Subscription {
     /**
-     * A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''.
+     * A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
     Id?: __string;
     /**
-     * The source of the subscription. Can be a thing ARN, a Lambda function ARN, 'cloud' (which represents the IoT cloud), or 'GGShadowService'.
+     * The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
      */
     Source?: __string;
     /**
@@ -2948,7 +3291,7 @@ declare namespace Greengrass {
      */
     Subject?: __string;
     /**
-     * Where the message is sent to. Can be a thing ARN, a Lambda function ARN, 'cloud' (which represents the IoT cloud), or 'GGShadowService'.
+     * Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
      */
     Target?: __string;
   }
@@ -2978,6 +3321,18 @@ declare namespace Greengrass {
      * The new version of the connectivity info.
      */
     Version?: __string;
+  }
+  export interface UpdateConnectorDefinitionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface UpdateConnectorDefinitionResponse {
   }
   export interface UpdateCoreDefinitionRequest {
     /**
@@ -3021,7 +3376,7 @@ declare namespace Greengrass {
      */
     CertificateExpiryInMilliseconds?: __string;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -3041,7 +3396,7 @@ declare namespace Greengrass {
   }
   export interface UpdateGroupRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -3111,6 +3466,7 @@ declare namespace Greengrass {
   export type __boolean = boolean;
   export type __integer = number;
   export type __listOfConnectivityInfo = ConnectivityInfo[];
+  export type __listOfConnector = Connector[];
   export type __listOfCore = Core[];
   export type __listOfDefinitionInformation = DefinitionInformation[];
   export type __listOfDevice = Device[];
@@ -3122,6 +3478,7 @@ declare namespace Greengrass {
   export type __listOfResourceAccessPolicy = ResourceAccessPolicy[];
   export type __listOfSubscription = Subscription[];
   export type __listOfVersionInformation = VersionInformation[];
+  export type __listOf__string = __string[];
   export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   /**

@@ -487,6 +487,7 @@ declare namespace IoTAnalytics {
      * A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five DataSetTrigger objects.
      */
     triggers?: DatasetTriggers;
+    contentDeliveryRules?: DatasetContentDeliveryRules;
     /**
      * [Optional] How long, in days, message data is kept for the data set. If not given or set to null, the latest version of the dataset content plus the latest succeeded version (if they are different) are retained for at most 90 days.
      */
@@ -579,6 +580,7 @@ declare namespace IoTAnalytics {
      * The "DatasetTrigger" objects that specify when the data set is automatically updated.
      */
     triggers?: DatasetTriggers;
+    contentDeliveryRules?: DatasetContentDeliveryRules;
     /**
      * The status of the data set.
      */
@@ -625,6 +627,14 @@ declare namespace IoTAnalytics {
   export type DatasetActionType = "QUERY"|"CONTAINER"|string;
   export type DatasetActions = DatasetAction[];
   export type DatasetArn = string;
+  export interface DatasetContentDeliveryDestination {
+    iotEventsDestinationConfiguration?: IotEventsDestinationConfiguration;
+  }
+  export interface DatasetContentDeliveryRule {
+    entryName?: EntryName;
+    destination: DatasetContentDeliveryDestination;
+  }
+  export type DatasetContentDeliveryRules = DatasetContentDeliveryRule[];
   export type DatasetContentState = "CREATING"|"SUCCEEDED"|"FAILED"|string;
   export interface DatasetContentStatus {
     /**
@@ -993,6 +1003,11 @@ declare namespace IoTAnalytics {
   }
   export type Image = string;
   export type IncludeStatisticsFlag = boolean;
+  export interface IotEventsDestinationConfiguration {
+    inputName: IotEventsInputName;
+    roleArn: RoleArn;
+  }
+  export type IotEventsInputName = string;
   export interface LambdaActivity {
     /**
      * The name of the 'lambda' activity.
@@ -1517,6 +1532,7 @@ declare namespace IoTAnalytics {
      * A list of "DatasetTrigger" objects. The list can be empty or can contain up to five DataSetTrigger objects.
      */
     triggers?: DatasetTriggers;
+    contentDeliveryRules?: DatasetContentDeliveryRules;
     /**
      * How long, in days, message data is kept for the data set.
      */

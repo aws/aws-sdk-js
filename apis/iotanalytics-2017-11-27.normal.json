@@ -1409,6 +1409,9 @@
           "shape": "DatasetTriggers",
           "documentation": "<p>A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.</p>"
         },
+        "contentDeliveryRules": {
+          "shape": "DatasetContentDeliveryRules"
+        },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
           "documentation": "<p>[Optional] How long, in days, message data is kept for the data set. If not given or set to null, the latest version of the dataset content plus the latest succeeded version (if they are different) are retained for at most 90 days.</p>"
@@ -1526,6 +1529,9 @@
           "shape": "DatasetTriggers",
           "documentation": "<p>The \"DatasetTrigger\" objects that specify when the data set is automatically updated.</p>"
         },
+        "contentDeliveryRules": {
+          "shape": "DatasetContentDeliveryRules"
+        },
         "status": {
           "shape": "DatasetStatus",
           "documentation": "<p>The status of the data set.</p>"
@@ -1608,6 +1614,36 @@
     },
     "DatasetArn": {
       "type": "string"
+    },
+    "DatasetContentDeliveryDestination": {
+      "type": "structure",
+      "members": {
+        "iotEventsDestinationConfiguration": {
+          "shape": "IotEventsDestinationConfiguration"
+        }
+      }
+    },
+    "DatasetContentDeliveryRule": {
+      "type": "structure",
+      "required": [
+        "destination"
+      ],
+      "members": {
+        "entryName": {
+          "shape": "EntryName"
+        },
+        "destination": {
+          "shape": "DatasetContentDeliveryDestination"
+        }
+      }
+    },
+    "DatasetContentDeliveryRules": {
+      "type": "list",
+      "member": {
+        "shape": "DatasetContentDeliveryRule"
+      },
+      "max": 20,
+      "min": 0
     },
     "DatasetContentState": {
       "type": "string",
@@ -2254,6 +2290,27 @@
     },
     "IncludeStatisticsFlag": {
       "type": "boolean"
+    },
+    "IotEventsDestinationConfiguration": {
+      "type": "structure",
+      "required": [
+        "inputName",
+        "roleArn"
+      ],
+      "members": {
+        "inputName": {
+          "shape": "IotEventsInputName"
+        },
+        "roleArn": {
+          "shape": "RoleArn"
+        }
+      }
+    },
+    "IotEventsInputName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
     },
     "LambdaActivity": {
       "type": "structure",
@@ -3191,6 +3248,9 @@
         "triggers": {
           "shape": "DatasetTriggers",
           "documentation": "<p>A list of \"DatasetTrigger\" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.</p>"
+        },
+        "contentDeliveryRules": {
+          "shape": "DatasetContentDeliveryRules"
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
