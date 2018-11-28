@@ -159,6 +159,9 @@ export abstract class ConfigurationServicePlaceholders {
   robomaker?: AWS.RoboMaker.Types.ClientConfiguration;
   transfer?: AWS.Transfer.Types.ClientConfiguration;
   globalaccelerator?: AWS.GlobalAccelerator.Types.ClientConfiguration;
+  comprehendmedical?: AWS.ComprehendMedical.Types.ClientConfiguration;
+  kinesisanalyticsv2?: AWS.KinesisAnalyticsV2.Types.ClientConfiguration;
+  mediaconnect?: AWS.MediaConnect.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -320,4 +323,7 @@ export interface ConfigurationServiceApiVersions {
   robomaker?: AWS.RoboMaker.Types.apiVersion;
   transfer?: AWS.Transfer.Types.apiVersion;
   globalaccelerator?: AWS.GlobalAccelerator.Types.apiVersion;
+  comprehendmedical?: AWS.ComprehendMedical.Types.apiVersion;
+  kinesisanalyticsv2?: AWS.KinesisAnalyticsV2.Types.apiVersion;
+  mediaconnect?: AWS.MediaConnect.Types.apiVersion;
 }

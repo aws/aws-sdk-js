@@ -45,13 +45,21 @@ declare class CodeDeploy extends Service {
    */
   batchGetDeploymentGroups(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentGroupsOutput, AWSError>;
   /**
-   * Gets information about one or more instance that are part of a deployment group.
+   *   This method works, but is considered deprecated. Use BatchGetDeploymentTargets instead.    Returns an array of instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets works with all compute platforms. 
    */
   batchGetDeploymentInstances(params: CodeDeploy.Types.BatchGetDeploymentInstancesInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentInstancesOutput, AWSError>;
   /**
-   * Gets information about one or more instance that are part of a deployment group.
+   *   This method works, but is considered deprecated. Use BatchGetDeploymentTargets instead.    Returns an array of instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets works with all compute platforms. 
    */
   batchGetDeploymentInstances(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentInstancesOutput, AWSError>;
+  /**
+   *  Returns an array of targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances.   The type of targets returned depends on the deployment's compute platform:     EC2/On-premises - Information about EC2 instance targets.     AWS Lambda - Information about Lambda functions targets.     Amazon ECS - Information about ECS service targets.   
+   */
+  batchGetDeploymentTargets(params: CodeDeploy.Types.BatchGetDeploymentTargetsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentTargetsOutput, AWSError>;
+  /**
+   *  Returns an array of targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances.   The type of targets returned depends on the deployment's compute platform:     EC2/On-premises - Information about EC2 instance targets.     AWS Lambda - Information about Lambda functions targets.     Amazon ECS - Information about ECS service targets.   
+   */
+  batchGetDeploymentTargets(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentTargetsOutput, AWSError>;
   /**
    * Gets information about one or more deployments.
    */
@@ -93,11 +101,11 @@ declare class CodeDeploy extends Service {
    */
   createDeployment(callback?: (err: AWSError, data: CodeDeploy.Types.CreateDeploymentOutput) => void): Request<CodeDeploy.Types.CreateDeploymentOutput, AWSError>;
   /**
-   * Creates a deployment configuration.
+   *  Creates a deployment configuration. 
    */
   createDeploymentConfig(params: CodeDeploy.Types.CreateDeploymentConfigInput, callback?: (err: AWSError, data: CodeDeploy.Types.CreateDeploymentConfigOutput) => void): Request<CodeDeploy.Types.CreateDeploymentConfigOutput, AWSError>;
   /**
-   * Creates a deployment configuration.
+   *  Creates a deployment configuration. 
    */
   createDeploymentConfig(callback?: (err: AWSError, data: CodeDeploy.Types.CreateDeploymentConfigOutput) => void): Request<CodeDeploy.Types.CreateDeploymentConfigOutput, AWSError>;
   /**
@@ -197,11 +205,19 @@ declare class CodeDeploy extends Service {
    */
   getDeploymentInstance(callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentInstanceOutput) => void): Request<CodeDeploy.Types.GetDeploymentInstanceOutput, AWSError>;
   /**
-   * Gets information about an on-premises instance.
+   *  Returns information about a deployment target. 
+   */
+  getDeploymentTarget(params: CodeDeploy.Types.GetDeploymentTargetInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentTargetOutput) => void): Request<CodeDeploy.Types.GetDeploymentTargetOutput, AWSError>;
+  /**
+   *  Returns information about a deployment target. 
+   */
+  getDeploymentTarget(callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentTargetOutput) => void): Request<CodeDeploy.Types.GetDeploymentTargetOutput, AWSError>;
+  /**
+   *  Gets information about an on-premises instance. 
    */
   getOnPremisesInstance(params: CodeDeploy.Types.GetOnPremisesInstanceInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetOnPremisesInstanceOutput) => void): Request<CodeDeploy.Types.GetOnPremisesInstanceOutput, AWSError>;
   /**
-   * Gets information about an on-premises instance.
+   *  Gets information about an on-premises instance. 
    */
   getOnPremisesInstance(callback?: (err: AWSError, data: CodeDeploy.Types.GetOnPremisesInstanceOutput) => void): Request<CodeDeploy.Types.GetOnPremisesInstanceOutput, AWSError>;
   /**
@@ -237,13 +253,21 @@ declare class CodeDeploy extends Service {
    */
   listDeploymentGroups(callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.ListDeploymentGroupsOutput, AWSError>;
   /**
-   * Lists the instance for a deployment associated with the applicable IAM user or AWS account.
+   *   The newer BatchGetDeploymentTargets should be used instead because it works with all compute types. ListDeploymentInstances throws an exception if it is used with a compute platform other than EC2/On-premises or AWS Lambda.    Lists the instance for a deployment associated with the applicable IAM user or AWS account. 
    */
   listDeploymentInstances(params: CodeDeploy.Types.ListDeploymentInstancesInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.ListDeploymentInstancesOutput, AWSError>;
   /**
-   * Lists the instance for a deployment associated with the applicable IAM user or AWS account.
+   *   The newer BatchGetDeploymentTargets should be used instead because it works with all compute types. ListDeploymentInstances throws an exception if it is used with a compute platform other than EC2/On-premises or AWS Lambda.    Lists the instance for a deployment associated with the applicable IAM user or AWS account. 
    */
   listDeploymentInstances(callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.ListDeploymentInstancesOutput, AWSError>;
+  /**
+   *  Returns an array of target IDs that are associated a deployment. 
+   */
+  listDeploymentTargets(params: CodeDeploy.Types.ListDeploymentTargetsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.ListDeploymentTargetsOutput, AWSError>;
+  /**
+   *  Returns an array of target IDs that are associated a deployment. 
+   */
+  listDeploymentTargets(callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.ListDeploymentTargetsOutput, AWSError>;
   /**
    * Lists the deployments in a deployment group for an application registered with the applicable IAM user or AWS account.
    */
@@ -269,11 +293,11 @@ declare class CodeDeploy extends Service {
    */
   listOnPremisesInstances(callback?: (err: AWSError, data: CodeDeploy.Types.ListOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.ListOnPremisesInstancesOutput, AWSError>;
   /**
-   * Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed.
+   *  Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed. 
    */
   putLifecycleEventHookExecutionStatus(params: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusInput, callback?: (err: AWSError, data: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput) => void): Request<CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput, AWSError>;
   /**
-   * Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed.
+   *  Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed. 
    */
   putLifecycleEventHookExecutionStatus(callback?: (err: AWSError, data: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput) => void): Request<CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput, AWSError>;
   /**
@@ -375,6 +399,16 @@ declare namespace CodeDeploy {
   }
   export type AlarmList = Alarm[];
   export type AlarmName = string;
+  export interface AppSpecContent {
+    /**
+     *  The YAML-formatted or JSON-formatted revision string.   For an AWS Lambda deployment the content includes a Lambda function name, the alias for its original version, and the alias for its replacement version. The deployment shifts traffic from the original version of the Lambda function to the replacement version.   For an Amazon ECS deployment the content includes the task name, information about the load balancer that serves traffic to the container, and more.   For both types of deployments, the content can specify Lambda functions that run at specified hooks, such as BeforeInstall, during a deployment. 
+     */
+    content?: RawStringContent;
+    /**
+     *  The SHA256 hash value of the revision content. 
+     */
+    sha256?: RawStringSha256;
+  }
   export type ApplicationId = string;
   export interface ApplicationInfo {
     /**
@@ -490,11 +524,11 @@ declare namespace CodeDeploy {
   }
   export interface BatchGetDeploymentInstancesInput {
     /**
-     * The unique ID of a deployment.
+     *  The unique ID of a deployment. 
      */
     deploymentId: DeploymentId;
     /**
-     * The unique IDs of instances in the deployment group.
+     * The unique IDs of instances of the deployment.
      */
     instanceIds: InstancesList;
   }
@@ -508,15 +542,31 @@ declare namespace CodeDeploy {
      */
     errorMessage?: ErrorMessage;
   }
+  export interface BatchGetDeploymentTargetsInput {
+    /**
+     *  The unique ID of a deployment. 
+     */
+    deploymentId?: DeploymentId;
+    /**
+     *  The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats.     For deployments that use the EC2/On-premises compute platform, the target IDs are EC2 or on-premises instances IDs and their target type is instanceTarget.     For deployments that use the AWS Lambda compute platform, the target IDs are the names of Lambda functions and their target type is instanceTarget.     For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format &lt;clustername&gt;:&lt;servicename&gt;. Their target type is ecsTarget.   
+     */
+    targetIds?: TargetIdList;
+  }
+  export interface BatchGetDeploymentTargetsOutput {
+    /**
+     *  A list of target objects for a deployment. Each target object contains details about the target, such as its status and lifecycle events. The type of the target objects depends on the deployment' compute platform.     EC2/On-premises - Each target object is an EC2 or on-premises instance.     AWS Lambda - The target object is a specific version of an AWS Lambda function.     Amazon ECS - The target object is an Amazon ECS service.   
+     */
+    deploymentTargets?: DeploymentTargetList;
+  }
   export interface BatchGetDeploymentsInput {
     /**
-     * A list of deployment IDs, separated by spaces.
+     *  A list of deployment IDs, separated by spaces. 
      */
     deploymentIds: DeploymentsList;
   }
   export interface BatchGetDeploymentsOutput {
     /**
-     * Information about the deployments.
+     *  Information about the deployments. 
      */
     deploymentsInfo?: DeploymentsInfoList;
   }
@@ -559,12 +609,16 @@ declare namespace CodeDeploy {
   export type Boolean = boolean;
   export type BundleType = "tar"|"tgz"|"zip"|"YAML"|"JSON"|string;
   export type CommitId = string;
-  export type ComputePlatform = "Server"|"Lambda"|string;
+  export type ComputePlatform = "Server"|"Lambda"|"ECS"|string;
   export interface ContinueDeploymentInput {
     /**
-     * The deployment ID of the blue/green deployment for which you want to start rerouting traffic to the replacement environment.
+     *  The unique ID of a blue/green deployment for which you want to start rerouting traffic to the replacement environment. 
      */
     deploymentId?: DeploymentId;
+    /**
+     *  The status of the deployment's waiting period. READY_WAIT indicates the deployment is ready to start shifting traffic. TERMINATION_WAIT indicates the traffic is shifted, but the original target is not terminated. 
+     */
+    deploymentWaitType?: DeploymentWaitType;
   }
   export interface CreateApplicationInput {
     /**
@@ -664,6 +718,10 @@ declare namespace CodeDeploy {
      */
     ec2TagSet?: EC2TagSet;
     /**
+     *  The target ECS services in the deployment group. This only applies to deployment groups that use the Amazon ECS compute platform. A target ECS service is specified as an Amazon ECS cluster and service name pair using the format &lt;clustername&gt;:&lt;servicename&gt;. 
+     */
+    ecsServices?: ECSServiceList;
+    /**
      * Information about groups of tags applied to on-premises instances. The deployment group will include only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
      */
     onPremisesTagSet?: OnPremisesTagSet;
@@ -684,7 +742,7 @@ declare namespace CodeDeploy {
      */
     deploymentGroupName?: DeploymentGroupName;
     /**
-     * The type and location of the revision to deploy.
+     *  The type and location of the revision to deploy. 
      */
     revision?: RevisionLocation;
     /**
@@ -696,11 +754,11 @@ declare namespace CodeDeploy {
      */
     description?: Description;
     /**
-     * If set to true, then if the deployment causes the ApplicationStop deployment lifecycle event to an instance to fail, the deployment to that instance will not be considered to have failed at that point and will continue on to the BeforeInstall deployment lifecycle event. If set to false or not specified, then if the deployment causes the ApplicationStop deployment lifecycle event to fail to an instance, the deployment to that instance will stop, and the deployment to that instance will be considered to have failed.
+     *  If set to true, then if the deployment causes the ApplicationStop deployment lifecycle event to an instance to fail, the deployment to that instance will not be considered to have failed at that point and will continue on to the BeforeInstall deployment lifecycle event.   If set to false or not specified, then if the deployment causes the ApplicationStop deployment lifecycle event to fail to an instance, the deployment to that instance will stop, and the deployment to that instance will be considered to have failed. 
      */
     ignoreApplicationStopFailures?: Boolean;
     /**
-     * Information about the instances that will belong to the replacement environment in a blue/green deployment.
+     *  Information about the instances that will belong to the replacement environment in a blue/green deployment. 
      */
     targetInstances?: TargetInstances;
     /**
@@ -708,7 +766,7 @@ declare namespace CodeDeploy {
      */
     autoRollbackConfiguration?: AutoRollbackConfiguration;
     /**
-     * Indicates whether to deploy to all instances or only to instances that are not running the latest application revision.
+     *  Indicates whether to deploy to all instances or only to instances that are not running the latest application revision. 
      */
     updateOutdatedInstancesOnly?: Boolean;
     /**
@@ -718,7 +776,7 @@ declare namespace CodeDeploy {
   }
   export interface CreateDeploymentOutput {
     /**
-     * A unique deployment ID.
+     *  The unique ID of a deployment. 
      */
     deploymentId?: DeploymentId;
   }
@@ -874,6 +932,10 @@ declare namespace CodeDeploy {
      * The destination platform type for the deployment group (Lambda or Server).
      */
     computePlatform?: ComputePlatform;
+    /**
+     *  The target ECS services in the deployment group. This only applies to deployment groups that use the Amazon ECS compute platform. A target ECS service is specified as an Amazon ECS cluster and service name pair using the format &lt;clustername&gt;:&lt;servicename&gt;. 
+     */
+    ecsServices?: ECSServiceList;
   }
   export type DeploymentGroupInfoList = DeploymentGroupInfo[];
   export type DeploymentGroupName = string;
@@ -885,15 +947,15 @@ declare namespace CodeDeploy {
      */
     applicationName?: ApplicationName;
     /**
-     * The deployment group name.
+     *  The deployment group name. 
      */
     deploymentGroupName?: DeploymentGroupName;
     /**
-     * The deployment configuration name.
+     *  The deployment configuration name. 
      */
     deploymentConfigName?: DeploymentConfigName;
     /**
-     * The deployment ID.
+     *  The unique ID of a deployment. 
      */
     deploymentId?: DeploymentId;
     /**
@@ -985,7 +1047,7 @@ declare namespace CodeDeploy {
      */
     deploymentStatusMessages?: DeploymentStatusMessageList;
     /**
-     * The destination platform type for the deployment (Lambda or Server).
+     *  The destination platform type for the deployment (Lambda or Server). 
      */
     computePlatform?: ComputePlatform;
   }
@@ -1040,7 +1102,28 @@ declare namespace CodeDeploy {
      */
     deploymentOption?: DeploymentOption;
   }
+  export interface DeploymentTarget {
+    /**
+     *  The deployment type which is specific to the deployment's compute platform. 
+     */
+    deploymentTargetType?: DeploymentTargetType;
+    /**
+     *  Information about the target for a deployment that uses the EC2/On-premises compute platform. 
+     */
+    instanceTarget?: InstanceTarget;
+    /**
+     *  Information about the target for a deployment that uses the AWS Lambda compute platform. 
+     */
+    lambdaTarget?: LambdaTarget;
+    /**
+     *  Information about the target for a deployment that uses the Amazon ECS compute platform. 
+     */
+    ecsTarget?: ECSTarget;
+  }
+  export type DeploymentTargetList = DeploymentTarget[];
+  export type DeploymentTargetType = "InstanceTarget"|"LambdaTarget"|"ECSTarget"|string;
   export type DeploymentType = "IN_PLACE"|"BLUE_GREEN"|string;
+  export type DeploymentWaitType = "READY_WAIT"|"TERMINATION_WAIT"|string;
   export type DeploymentsInfoList = DeploymentInfo[];
   export type DeploymentsList = DeploymentId[];
   export interface DeregisterOnPremisesInstanceInput {
@@ -1092,6 +1175,87 @@ declare namespace CodeDeploy {
     ec2TagSetList?: EC2TagSetList;
   }
   export type EC2TagSetList = EC2TagFilterList[];
+  export type ECSClusterName = string;
+  export interface ECSService {
+    /**
+     *  The name of the target ECS service. 
+     */
+    serviceName?: ECSServiceName;
+    /**
+     *  The name of the cluster that the ECS service is associated with. 
+     */
+    clusterName?: ECSClusterName;
+  }
+  export type ECSServiceList = ECSService[];
+  export type ECSServiceName = string;
+  export interface ECSTarget {
+    /**
+     *  The unique ID of a deployment. 
+     */
+    deploymentId?: DeploymentId;
+    /**
+     *  The unique ID of a deployment target that has a type of ecsTarget. 
+     */
+    targetId?: TargetId;
+    /**
+     *  The ARN of the target. 
+     */
+    targetArn?: TargetArn;
+    /**
+     *  The date and time when the target Amazon ECS application was updated by a deployment. 
+     */
+    lastUpdatedAt?: Time;
+    /**
+     *  The lifecycle events of the deployment to this target Amazon ECS application. 
+     */
+    lifecycleEvents?: LifecycleEventList;
+    /**
+     *  The status an Amazon ECS deployment's target ECS application. 
+     */
+    status?: TargetStatus;
+    /**
+     *  The ECSTaskSet objects associated with the ECS target. 
+     */
+    taskSetsInfo?: ECSTaskSetList;
+  }
+  export interface ECSTaskSet {
+    /**
+     *  A unique ID of an ECSTaskSet. 
+     */
+    identifer?: ECSTaskSetIdentifier;
+    /**
+     *  The number of tasks in a task set. During a deployment that uses the Amazon ECS compute type, CodeDeploy asks Amazon ECS to create a new task set and uses this value to determine how many tasks to create. After the updated task set is created, CodeDeploy shifts traffic to the new task set. 
+     */
+    desiredCount?: ECSTaskSetCount;
+    /**
+     *  The number of tasks in the task set that are in the PENDING status during an Amazon ECS deployment. A task in the PENDING state is preparing to enter the RUNNING state. A task set enters the PENDING status when it launches for the first time, or when it is restarted after being in the STOPPED state. 
+     */
+    pendingCount?: ECSTaskSetCount;
+    /**
+     *  The number of tasks in the task set that are in the RUNNING status during an Amazon ECS deployment. A task in the RUNNING state is running and ready for use. 
+     */
+    runningCount?: ECSTaskSetCount;
+    /**
+     *  The status of the task set. There are three valid task set statuses:     PRIMARY - indicates the task set is serving production traffic.     ACTIVE - indicates the task set is not serving production traffic.     DRAINING - indicates the tasks in the task set are being stopped and their corresponding targets are being deregistered from their target group.   
+     */
+    status?: ECSTaskSetStatus;
+    /**
+     *  The percentage of traffic served by this task set. 
+     */
+    trafficWeight?: TrafficWeight;
+    /**
+     *  The target group associated with the task set. The target group is used by AWS CodeDeploy to manage traffic to a task set. 
+     */
+    targetGroup?: TargetGroupInfo;
+    /**
+     *  A label that identifies whether the ECS task set is an original target (BLUE) or a replacement target (GREEN). 
+     */
+    taskSetLabel?: TargetLabel;
+  }
+  export type ECSTaskSetCount = number;
+  export type ECSTaskSetIdentifier = string;
+  export type ECSTaskSetList = ECSTaskSet[];
+  export type ECSTaskSetStatus = string;
   export interface ELBInfo {
     /**
      * For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
@@ -1101,7 +1265,7 @@ declare namespace CodeDeploy {
   export type ELBInfoList = ELBInfo[];
   export type ELBName = string;
   export type ETag = string;
-  export type ErrorCode = "DEPLOYMENT_GROUP_MISSING"|"APPLICATION_MISSING"|"REVISION_MISSING"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"NO_EC2_SUBSCRIPTION"|"OVER_MAX_INSTANCES"|"NO_INSTANCES"|"TIMEOUT"|"HEALTH_CONSTRAINTS_INVALID"|"HEALTH_CONSTRAINTS"|"INTERNAL_ERROR"|"THROTTLED"|"ALARM_ACTIVE"|"AGENT_ISSUE"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"AUTO_SCALING_CONFIGURATION"|"MANUAL_STOP"|"MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"|"MISSING_ELB_INFORMATION"|"MISSING_GITHUB_TOKEN"|"ELASTIC_LOAD_BALANCING_INVALID"|"ELB_INVALID_INSTANCE"|"INVALID_LAMBDA_CONFIGURATION"|"INVALID_LAMBDA_FUNCTION"|"HOOK_EXECUTION_FAILURE"|string;
+  export type ErrorCode = "DEPLOYMENT_GROUP_MISSING"|"APPLICATION_MISSING"|"REVISION_MISSING"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"NO_EC2_SUBSCRIPTION"|"OVER_MAX_INSTANCES"|"NO_INSTANCES"|"TIMEOUT"|"HEALTH_CONSTRAINTS_INVALID"|"HEALTH_CONSTRAINTS"|"INTERNAL_ERROR"|"THROTTLED"|"ALARM_ACTIVE"|"AGENT_ISSUE"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"AUTO_SCALING_CONFIGURATION"|"MANUAL_STOP"|"MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"|"MISSING_ELB_INFORMATION"|"MISSING_GITHUB_TOKEN"|"ELASTIC_LOAD_BALANCING_INVALID"|"ELB_INVALID_INSTANCE"|"INVALID_LAMBDA_CONFIGURATION"|"INVALID_LAMBDA_FUNCTION"|"HOOK_EXECUTION_FAILURE"|"AUTOSCALING_VALIDATION_ERROR"|"INVALID_ECS_SERVICE"|"ECS_UPDATE_ERROR"|"INVALID_REVISION"|string;
   export interface ErrorInformation {
     /**
      * For information about additional error codes, see Error Codes for AWS CodeDeploy in the AWS CodeDeploy User Guide. The error code:   APPLICATION_MISSING: The application was missing. This error code will most likely be raised if the application is deleted after the deployment is created but before it is started.   DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code will most likely be raised if the deployment group is deleted after the deployment is created but before it is started.   HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.   HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.   IAM_ROLE_MISSING: The service role cannot be accessed.   IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.   INTERNAL_ERROR: There was an internal error.   NO_EC2_SUBSCRIPTION: The calling account is not subscribed to the Amazon EC2 service.   NO_INSTANCES: No instance were specified, or no instance can be found.   OVER_MAX_INSTANCES: The maximum number of instance was exceeded.   THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.   TIMEOUT: The deployment has timed out.   REVISION_MISSING: The revision ID was missing. This error code will most likely be raised if the revision is deleted after the deployment is created but before it is started.  
@@ -1114,6 +1278,8 @@ declare namespace CodeDeploy {
   }
   export type ErrorMessage = string;
   export type FileExistsBehavior = "DISALLOW"|"OVERWRITE"|"RETAIN"|string;
+  export type FilterValue = string;
+  export type FilterValueList = FilterValue[];
   export interface GenericRevisionInfo {
     /**
      * A comment about the revision.
@@ -1202,23 +1368,23 @@ declare namespace CodeDeploy {
   }
   export interface GetDeploymentInput {
     /**
-     * A deployment ID associated with the applicable IAM user or AWS account.
+     *  The unique ID of a deployment associated with the applicable IAM user or AWS account. 
      */
     deploymentId: DeploymentId;
   }
   export interface GetDeploymentInstanceInput {
     /**
-     * The unique ID of a deployment.
+     *  The unique ID of a deployment. 
      */
     deploymentId: DeploymentId;
     /**
-     * The unique ID of an instance in the deployment group.
+     *  The unique ID of an instance in the deployment group. 
      */
     instanceId: InstanceId;
   }
   export interface GetDeploymentInstanceOutput {
     /**
-     * Information about the instance.
+     *  Information about the instance. 
      */
     instanceSummary?: InstanceSummary;
   }
@@ -1228,15 +1394,31 @@ declare namespace CodeDeploy {
      */
     deploymentInfo?: DeploymentInfo;
   }
+  export interface GetDeploymentTargetInput {
+    /**
+     *  The unique ID of a deployment. 
+     */
+    deploymentId?: DeploymentId;
+    /**
+     *  The unique ID of a deployment target. 
+     */
+    targetId?: TargetId;
+  }
+  export interface GetDeploymentTargetOutput {
+    /**
+     *  A deployment target that contains information about a deployment such as its status, lifecyle events, and when it was updated last. It also contains metadata about the deployment target. The deployment target metadata depends on the deployment target's type (instanceTarget, lambdaTarget, or ecsTarget). 
+     */
+    deploymentTarget?: DeploymentTarget;
+  }
   export interface GetOnPremisesInstanceInput {
     /**
-     * The name of the on-premises instance about which to get information.
+     *  The name of the on-premises instance about which to get information. 
      */
     instanceName: InstanceName;
   }
   export interface GetOnPremisesInstanceOutput {
     /**
-     * Information about the on-premises instance.
+     *  Information about the on-premises instance. 
      */
     instanceInfo?: InstanceInfo;
   }
@@ -1302,7 +1484,7 @@ declare namespace CodeDeploy {
   export type InstanceStatusList = InstanceStatus[];
   export interface InstanceSummary {
     /**
-     * The deployment ID.
+     *  The unique ID of a deployment. 
      */
     deploymentId?: DeploymentId;
     /**
@@ -1327,13 +1509,69 @@ declare namespace CodeDeploy {
     instanceType?: InstanceType;
   }
   export type InstanceSummaryList = InstanceSummary[];
+  export interface InstanceTarget {
+    /**
+     *  The unique ID of a deployment. 
+     */
+    deploymentId?: DeploymentId;
+    /**
+     *  The unique ID of a deployment target that has a type of instanceTarget. 
+     */
+    targetId?: TargetId;
+    /**
+     *  The ARN of the target. 
+     */
+    targetArn?: TargetArn;
+    /**
+     *  The status an EC2/On-premises deployment's target instance. 
+     */
+    status?: TargetStatus;
+    /**
+     *  The date and time when the target instance was updated by a deployment. 
+     */
+    lastUpdatedAt?: Time;
+    /**
+     *  The lifecycle events of the deployment to this target instance. 
+     */
+    lifecycleEvents?: LifecycleEventList;
+    /**
+     *  A label that identifies whether the instance is an original target (BLUE) or a replacement target (GREEN). 
+     */
+    instanceLabel?: TargetLabel;
+  }
   export type InstanceType = "Blue"|"Green"|string;
   export type InstanceTypeList = InstanceType[];
   export type InstancesList = InstanceId[];
   export type Key = string;
+  export interface LambdaTarget {
+    /**
+     *  The unique ID of a deployment. 
+     */
+    deploymentId?: DeploymentId;
+    /**
+     *  The unique ID of a deployment target that has a type of lambdaTarget. 
+     */
+    targetId?: TargetId;
+    /**
+     *  The ARN of the target. 
+     */
+    targetArn?: TargetArn;
+    /**
+     *  The status an AWS Lambda deployment's target Lambda function. 
+     */
+    status?: TargetStatus;
+    /**
+     *  The date and time when the target Lambda function was updated by a deployment. 
+     */
+    lastUpdatedAt?: Time;
+    /**
+     *  The lifecycle events of the deployment to this target Lambda function. 
+     */
+    lifecycleEvents?: LifecycleEventList;
+  }
   export interface LastDeploymentInfo {
     /**
-     * The deployment ID.
+     *  The unique ID of a deployment. 
      */
     deploymentId?: DeploymentId;
     /**
@@ -1379,31 +1617,31 @@ declare namespace CodeDeploy {
   export type LifecycleMessage = string;
   export interface ListApplicationRevisionsInput {
     /**
-     * The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+     *  The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account. 
      */
     applicationName: ApplicationName;
     /**
-     * The column name to use to sort the list results:   registerTime: Sort by the time the revisions were registered with AWS CodeDeploy.   firstUsedTime: Sort by the time the revisions were first used in a deployment.   lastUsedTime: Sort by the time the revisions were last used in a deployment.   If not specified or set to null, the results will be returned in an arbitrary order.
+     * The column name to use to sort the list results:   registerTime: Sort by the time the revisions were registered with AWS CodeDeploy.   firstUsedTime: Sort by the time the revisions were first used in a deployment.   lastUsedTime: Sort by the time the revisions were last used in a deployment.    If not specified or set to null, the results will be returned in an arbitrary order. 
      */
     sortBy?: ApplicationRevisionSortBy;
     /**
-     * The order in which to sort the list results:   ascending: ascending order.   descending: descending order.   If not specified, the results will be sorted in ascending order. If set to null, the results will be sorted in an arbitrary order.
+     *  The order in which to sort the list results:    ascending: ascending order.   descending: descending order.   If not specified, the results will be sorted in ascending order. If set to null, the results will be sorted in an arbitrary order.
      */
     sortOrder?: SortOrder;
     /**
-     * An Amazon S3 bucket name to limit the search for revisions. If set to null, all of the user's buckets will be searched.
+     *  An Amazon S3 bucket name to limit the search for revisions.   If set to null, all of the user's buckets are searched. 
      */
     s3Bucket?: S3Bucket;
     /**
-     * A key prefix for the set of Amazon S3 objects to limit the search for revisions.
+     *  A key prefix for the set of Amazon S3 objects to limit the search for revisions. 
      */
     s3KeyPrefix?: S3Key;
     /**
-     * Whether to list revisions based on whether the revision is the target revision of an deployment group:   include: List revisions that are target revisions of a deployment group.   exclude: Do not list revisions that are target revisions of a deployment group.   ignore: List all revisions.  
+     *  Whether to list revisions based on whether the revision is the target revision of an deployment group:    include: List revisions that are target revisions of a deployment group.   exclude: Do not list revisions that are target revisions of a deployment group.   ignore: List all revisions.  
      */
     deployed?: ListStateFilterAction;
     /**
-     * An identifier returned from the previous list application revisions call. It can be used to return the next set of applications in the list.
+     * An identifier returned from the previous ListApplicationRevisions call. It can be used to return the next set of applications in the list.
      */
     nextToken?: NextToken;
   }
@@ -1435,7 +1673,7 @@ declare namespace CodeDeploy {
   }
   export interface ListDeploymentConfigsInput {
     /**
-     * An identifier returned from the previous list deployment configurations call. It can be used to return the next set of deployment configurations in the list. 
+     * An identifier returned from the previous ListDeploymentConfigs call. It can be used to return the next set of deployment configurations in the list. 
      */
     nextToken?: NextToken;
   }
@@ -1475,7 +1713,7 @@ declare namespace CodeDeploy {
   }
   export interface ListDeploymentInstancesInput {
     /**
-     * The unique ID of a deployment.
+     *  The unique ID of a deployment. 
      */
     deploymentId: DeploymentId;
     /**
@@ -1498,6 +1736,30 @@ declare namespace CodeDeploy {
     instancesList?: InstancesList;
     /**
      * If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment instances call to return the next set of deployment instances in the list.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListDeploymentTargetsInput {
+    /**
+     *  The unique ID of a deployment. 
+     */
+    deploymentId?: DeploymentId;
+    /**
+     *  A token identifier returned from the previous ListDeploymentTargets call. It can be used to return the next set of deployment targets in the list. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  A key used to filter the returned targets. 
+     */
+    targetFilters?: TargetFilters;
+  }
+  export interface ListDeploymentTargetsOutput {
+    /**
+     *  The unique IDs of deployment targets. 
+     */
+    targetIds?: TargetIdList;
+    /**
+     *  If a large amount of information is returned, a token identifier will also be returned. It can be used in a subsequent ListDeploymentTargets call to return the next set of deployment targets in the list. 
      */
     nextToken?: NextToken;
   }
@@ -1574,6 +1836,8 @@ declare namespace CodeDeploy {
     nextToken?: NextToken;
   }
   export type ListStateFilterAction = "include"|"exclude"|"ignore"|string;
+  export type ListenerArn = string;
+  export type ListenerArnList = ListenerArn[];
   export interface LoadBalancerInfo {
     /**
      * An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.   Adding more than one load balancer to the array is not supported.  
@@ -1583,6 +1847,10 @@ declare namespace CodeDeploy {
      * An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.   Adding more than one target group to the array is not supported.  
      */
     targetGroupInfoList?: TargetGroupInfoList;
+    /**
+     *  The target group pair information. This is an array of TargeGroupPairInfo objects with a maximum size of one. 
+     */
+    targetGroupPairInfoList?: TargetGroupPairInfoList;
   }
   export type LogTail = string;
   export type Message = string;
@@ -1610,11 +1878,11 @@ declare namespace CodeDeploy {
   export type Percentage = number;
   export interface PutLifecycleEventHookExecutionStatusInput {
     /**
-     * The ID of the deployment. Pass this ID to a Lambda function that validates a deployment lifecycle event.
+     *  The unique ID of a deployment. Pass this ID to a Lambda function that validates a deployment lifecycle event. 
      */
     deploymentId?: DeploymentId;
     /**
-     * The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook is specified in the hooks section of the AppSpec file.
+     *  The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook is specified in the hooks section of the AppSpec file. 
      */
     lifecycleEventHookExecutionId?: LifecycleEventHookExecutionId;
     /**
@@ -1634,7 +1902,7 @@ declare namespace CodeDeploy {
      */
     content?: RawStringContent;
     /**
-     * The SHA256 hash value of the revision that is specified as a RawString.
+     * The SHA256 hash value of the revision content.
      */
     sha256?: RawStringSha256;
   }
@@ -1708,9 +1976,13 @@ declare namespace CodeDeploy {
      * Information about the location of an AWS Lambda deployment revision stored as a RawString.
      */
     string?: RawString;
+    /**
+     *  The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The content is formatted as JSON or YAML and stored as a RawString. 
+     */
+    appSpecContent?: AppSpecContent;
   }
   export type RevisionLocationList = RevisionLocation[];
-  export type RevisionLocationType = "S3"|"GitHub"|"String"|string;
+  export type RevisionLocationType = "S3"|"GitHub"|"String"|"AppSpecContent"|string;
   export type Role = string;
   export interface RollbackInfo {
     /**
@@ -1753,18 +2025,18 @@ declare namespace CodeDeploy {
   export type ScriptName = string;
   export interface SkipWaitTimeForInstanceTerminationInput {
     /**
-     * The ID of the blue/green deployment for which you want to skip the instance termination wait time.
+     *  The unique ID of a blue/green deployment for which you want to skip the instance termination wait time. 
      */
     deploymentId?: DeploymentId;
   }
   export type SortOrder = "ascending"|"descending"|string;
   export interface StopDeploymentInput {
     /**
-     * The unique ID of a deployment.
+     *  The unique ID of a deployment. 
      */
     deploymentId: DeploymentId;
     /**
-     * Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.
+     *  Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision. 
      */
     autoRollbackEnabled?: NullableBoolean;
   }
@@ -1806,6 +2078,9 @@ declare namespace CodeDeploy {
   export type TagFilterList = TagFilter[];
   export type TagFilterType = "KEY_ONLY"|"VALUE_ONLY"|"KEY_AND_VALUE"|string;
   export type TagList = Tag[];
+  export type TargetArn = string;
+  export type TargetFilterName = "TargetStatus"|"ServerInstanceLabel"|string;
+  export type TargetFilters = {[key: string]: FilterValueList};
   export interface TargetGroupInfo {
     /**
      * For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. 
@@ -1814,6 +2089,23 @@ declare namespace CodeDeploy {
   }
   export type TargetGroupInfoList = TargetGroupInfo[];
   export type TargetGroupName = string;
+  export interface TargetGroupPairInfo {
+    /**
+     *  One pair of target groups. One is associated with the original task set. The second target is associated with the task set that serves traffic after the deployment completes. 
+     */
+    targetGroups?: TargetGroupInfoList;
+    /**
+     *  The path used by a load balancer to route production traffic when an Amazon ECS deployment is complete. 
+     */
+    prodTrafficRoute?: TrafficRoute;
+    /**
+     *  An optional path used by a load balancer to route test traffic after an Amazon ECS deployment. Validation can happen while test traffic is served during a deployment. 
+     */
+    testTrafficRoute?: TrafficRoute;
+  }
+  export type TargetGroupPairInfoList = TargetGroupPairInfo[];
+  export type TargetId = string;
+  export type TargetIdList = TargetId[];
   export interface TargetInstances {
     /**
      * The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment. Cannot be used in the same call as ec2TagSet.
@@ -1828,6 +2120,9 @@ declare namespace CodeDeploy {
      */
     ec2TagSet?: EC2TagSet;
   }
+  export type TargetLabel = "Blue"|"Green"|string;
+  export type TargetStatus = "Pending"|"InProgress"|"Succeeded"|"Failed"|"Skipped"|"Unknown"|"Ready"|string;
+  export type Time = Date;
   export interface TimeBasedCanary {
     /**
      * The percentage of traffic to shift in the first increment of a TimeBasedCanary deployment.
@@ -1859,6 +2154,12 @@ declare namespace CodeDeploy {
     end?: Timestamp;
   }
   export type Timestamp = Date;
+  export interface TrafficRoute {
+    /**
+     *  The ARN of one listener. The listener identifies the route between a target group and a load balancer. This is an array of strings with a maximum size of one. 
+     */
+    listenerArns?: ListenerArnList;
+  }
   export interface TrafficRoutingConfig {
     /**
      * The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by a deployment configuration .
@@ -1874,6 +2175,7 @@ declare namespace CodeDeploy {
     timeBasedLinear?: TimeBasedLinear;
   }
   export type TrafficRoutingType = "TimeBasedCanary"|"TimeBasedLinear"|"AllAtOnce"|string;
+  export type TrafficWeight = number;
   export interface TriggerConfig {
     /**
      * The name of the notification trigger.
@@ -1964,6 +2266,10 @@ declare namespace CodeDeploy {
      * Information about groups of tags applied to on-premises instances. The deployment group will include only EC2 instances identified by all the tag groups.
      */
     ec2TagSet?: EC2TagSet;
+    /**
+     *  The target ECS services in the deployment group. This only applies to deployment groups that use the Amazon ECS compute platform. A target ECS service is specified as an Amazon ECS cluster and service name pair using the format &lt;clustername&gt;:&lt;servicename&gt;. 
+     */
+    ecsServices?: ECSServiceList;
     /**
      * Information about an on-premises instance tag set. The deployment group will include only on-premises instances identified by all the tag groups.
      */

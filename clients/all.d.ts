@@ -157,3 +157,6 @@ export import DataSync = require('./datasync');
 export import RoboMaker = require('./robomaker');
 export import Transfer = require('./transfer');
 export import GlobalAccelerator = require('./globalaccelerator');
+export import ComprehendMedical = require('./comprehendmedical');
+export import KinesisAnalyticsV2 = require('./kinesisanalyticsv2');
+export import MediaConnect = require('./mediaconnect');

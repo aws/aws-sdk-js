@@ -640,5 +640,14 @@
   },
   "globalaccelerator": {
     "name": "GlobalAccelerator"
+  },
+  "comprehendmedical": {
+    "name": "ComprehendMedical"
+  },
+  "kinesisanalyticsv2": {
+    "name": "KinesisAnalyticsV2"
+  },
+  "mediaconnect": {
+    "name": "MediaConnect"
   }
 }
