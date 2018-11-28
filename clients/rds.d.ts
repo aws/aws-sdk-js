@@ -190,6 +190,14 @@ declare class RDS extends Service {
    */
   createEventSubscription(callback?: (err: AWSError, data: RDS.Types.CreateEventSubscriptionResult) => void): Request<RDS.Types.CreateEventSubscriptionResult, AWSError>;
   /**
+   *    Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem.   You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. 
+   */
+  createGlobalCluster(params: RDS.Types.CreateGlobalClusterMessage, callback?: (err: AWSError, data: RDS.Types.CreateGlobalClusterResult) => void): Request<RDS.Types.CreateGlobalClusterResult, AWSError>;
+  /**
+   *    Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem.   You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. 
+   */
+  createGlobalCluster(callback?: (err: AWSError, data: RDS.Types.CreateGlobalClusterResult) => void): Request<RDS.Types.CreateGlobalClusterResult, AWSError>;
+  /**
    * Creates a new option group. You can create up to 20 option groups.
    */
   createOptionGroup(params: RDS.Types.CreateOptionGroupMessage, callback?: (err: AWSError, data: RDS.Types.CreateOptionGroupResult) => void): Request<RDS.Types.CreateOptionGroupResult, AWSError>;
@@ -285,6 +293,14 @@ declare class RDS extends Service {
    * Deletes an RDS event notification subscription.
    */
   deleteEventSubscription(callback?: (err: AWSError, data: RDS.Types.DeleteEventSubscriptionResult) => void): Request<RDS.Types.DeleteEventSubscriptionResult, AWSError>;
+  /**
+   *  Deletes a global database cluster. The primary and secondary clusters must already be detached or destroyed first. 
+   */
+  deleteGlobalCluster(params: RDS.Types.DeleteGlobalClusterMessage, callback?: (err: AWSError, data: RDS.Types.DeleteGlobalClusterResult) => void): Request<RDS.Types.DeleteGlobalClusterResult, AWSError>;
+  /**
+   *  Deletes a global database cluster. The primary and secondary clusters must already be detached or destroyed first. 
+   */
+  deleteGlobalCluster(callback?: (err: AWSError, data: RDS.Types.DeleteGlobalClusterResult) => void): Request<RDS.Types.DeleteGlobalClusterResult, AWSError>;
   /**
    * Deletes an existing option group.
    */
@@ -486,6 +502,14 @@ declare class RDS extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: RDS.Types.EventsMessage) => void): Request<RDS.Types.EventsMessage, AWSError>;
   /**
+   *  Returns information about Aurora global database clusters. This API supports pagination.   For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
+   */
+  describeGlobalClusters(params: RDS.Types.DescribeGlobalClustersMessage, callback?: (err: AWSError, data: RDS.Types.GlobalClustersMessage) => void): Request<RDS.Types.GlobalClustersMessage, AWSError>;
+  /**
+   *  Returns information about Aurora global database clusters. This API supports pagination.   For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
+   */
+  describeGlobalClusters(callback?: (err: AWSError, data: RDS.Types.GlobalClustersMessage) => void): Request<RDS.Types.GlobalClustersMessage, AWSError>;
+  /**
    * Describes all available options.
    */
   describeOptionGroupOptions(params: RDS.Types.DescribeOptionGroupOptionsMessage, callback?: (err: AWSError, data: RDS.Types.OptionGroupOptionsMessage) => void): Request<RDS.Types.OptionGroupOptionsMessage, AWSError>;
@@ -662,6 +686,14 @@ declare class RDS extends Service {
    */
   modifyEventSubscription(callback?: (err: AWSError, data: RDS.Types.ModifyEventSubscriptionResult) => void): Request<RDS.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
+   *  Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
+   */
+  modifyGlobalCluster(params: RDS.Types.ModifyGlobalClusterMessage, callback?: (err: AWSError, data: RDS.Types.ModifyGlobalClusterResult) => void): Request<RDS.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
+   *  Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
+   */
+  modifyGlobalCluster(callback?: (err: AWSError, data: RDS.Types.ModifyGlobalClusterResult) => void): Request<RDS.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
    * Modifies an existing option group.
    */
   modifyOptionGroup(params: RDS.Types.ModifyOptionGroupMessage, callback?: (err: AWSError, data: RDS.Types.ModifyOptionGroupResult) => void): Request<RDS.Types.ModifyOptionGroupResult, AWSError>;
@@ -701,6 +733,14 @@ declare class RDS extends Service {
    * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect.  Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting.  For more information about rebooting, see Rebooting a DB Instance in the Amazon RDS User Guide. 
    */
   rebootDBInstance(callback?: (err: AWSError, data: RDS.Types.RebootDBInstanceResult) => void): Request<RDS.Types.RebootDBInstanceResult, AWSError>;
+  /**
+   *  Detaches an Aurora secondary cluster from an Aurora global database cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary cluster in a different region. 
+   */
+  removeFromGlobalCluster(params: RDS.Types.RemoveFromGlobalClusterMessage, callback?: (err: AWSError, data: RDS.Types.RemoveFromGlobalClusterResult) => void): Request<RDS.Types.RemoveFromGlobalClusterResult, AWSError>;
+  /**
+   *  Detaches an Aurora secondary cluster from an Aurora global database cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary cluster in a different region. 
+   */
+  removeFromGlobalCluster(callback?: (err: AWSError, data: RDS.Types.RemoveFromGlobalClusterResult) => void): Request<RDS.Types.RemoveFromGlobalClusterResult, AWSError>;
   /**
    * Disassociates an Identity and Access Management (IAM) role from an Aurora DB cluster. For more information, see Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf  in the Amazon Aurora User Guide.
    */
@@ -1299,7 +1339,7 @@ declare namespace RDS {
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
-     * The DB engine mode of the DB cluster, either provisioned, serverless, or parallelquery.
+     * The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, or global.
      */
     EngineMode?: String;
     /**
@@ -1310,6 +1350,10 @@ declare namespace RDS {
      * Indicates if the DB cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. 
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     *  The global cluster ID of an Aurora cluster that becomes the primary cluster in the new global database cluster. 
+     */
+    GlobalClusterIdentifier?: String;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -1387,7 +1431,7 @@ declare namespace RDS {
      */
     DBSecurityGroups?: DBSecurityGroupNameList;
     /**
-     * A list of EC2 VPC security groups to associate with this DB instance.  Amazon Aurora  Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. For more information, see CreateDBCluster. Default: The default EC2 VPC security group for the DB subnet group's VPC.
+     * A list of Amazon EC2 VPC security groups to associate with this DB instance.  Amazon Aurora  Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. For more information, see CreateDBCluster. Default: The default EC2 VPC security group for the DB subnet group's VPC.
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
@@ -1419,7 +1463,7 @@ declare namespace RDS {
      */
     Port?: IntegerOptional;
     /**
-     * Specifies if the DB instance is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the MultiAZ parameter is set to true.
+     * A value that specifies whether the DB instance is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the MultiAZ parameter is set to true.
      */
     MultiAZ?: BooleanOptional;
     /**
@@ -1743,6 +1787,39 @@ declare namespace RDS {
   export interface CreateEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface CreateGlobalClusterMessage {
+    /**
+     * The cluster identifier of the new global database cluster.
+     */
+    GlobalClusterIdentifier?: String;
+    /**
+     *  The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. 
+     */
+    SourceDBClusterIdentifier?: String;
+    /**
+     * Provides the name of the database engine to be used for this DB cluster.
+     */
+    Engine?: String;
+    /**
+     * The engine version of the Aurora global database.
+     */
+    EngineVersion?: String;
+    /**
+     *  The deletion protection setting for the new global database. The global database can't be deleted when this value is set to true. 
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     *  The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon Aurora will not create a database in the global database cluster you are creating. 
+     */
+    DatabaseName?: String;
+    /**
+     *  The storage encryption setting for the new global database cluster. 
+     */
+    StorageEncrypted?: BooleanOptional;
+  }
+  export interface CreateGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface CreateOptionGroupMessage {
     /**
      * Specifies the name of the option group to be created. Constraints:   Must be 1 to 255 letters, numbers, or hyphens   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens   Example: myoptiongroup 
@@ -1936,6 +2013,10 @@ declare namespace RDS {
      * Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when this value is set to true. 
      */
     DeletionProtection?: Boolean;
+    /**
+     *  HTTP endpoint functionality is in beta for Aurora Serverless and is subject to change.  Value that is true if the HTTP endpoint for an Aurora Serverless DB cluster is enabled and false otherwise. When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor. For more information about Aurora Serverless, see Using Amazon Aurora Serverless in the Amazon Aurora User Guide.
+     */
+    HttpEndpointEnabled?: Boolean;
   }
   export interface DBClusterBacktrack {
     /**
@@ -3083,6 +3164,15 @@ declare namespace RDS {
   export interface DeleteEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface DeleteGlobalClusterMessage {
+    /**
+     *  The cluster identifier of the global database cluster being deleted. 
+     */
+    GlobalClusterIdentifier: String;
+  }
+  export interface DeleteGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface DeleteOptionGroupMessage {
     /**
      * The name of the option group to be deleted.  You can't delete default option groups. 
@@ -3618,6 +3708,24 @@ declare namespace RDS {
      */
     Marker?: String;
   }
+  export interface DescribeGlobalClustersMessage {
+    /**
+     *  The user-supplied DB cluster identifier. If this parameter is specified, information from only the specific DB cluster is returned. This parameter isn't case-sensitive.  Constraints:   If supplied, must match an existing DBClusterIdentifier.  
+     */
+    GlobalClusterIdentifier?: String;
+    /**
+     * A filter that specifies one or more global DB clusters to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.  
+     */
+    Filters?: FilterList;
+    /**
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     *  An optional pagination token provided by a previous DescribeGlobalClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
   export interface DescribeOptionGroupOptionsMessage {
     /**
      * A required parameter. Options available for the given engine name are described.
@@ -4049,7 +4157,7 @@ declare namespace RDS {
     /**
      * A DB cluster identifier to force a failover for. This parameter is not case-sensitive. Constraints:   Must match the identifier of an existing DBCluster.  
      */
-    DBClusterIdentifier?: String;
+    DBClusterIdentifier: String;
     /**
      * The name of the instance to promote to the primary instance. You must specify the instance identifier for an Aurora Replica in the DB cluster. For example, mydbcluster-replica1.
      */
@@ -4070,6 +4178,74 @@ declare namespace RDS {
   }
   export type FilterList = Filter[];
   export type FilterValueList = String[];
+  export interface GlobalCluster {
+    /**
+     *  Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database cluster. 
+     */
+    GlobalClusterIdentifier?: String;
+    /**
+     *  The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed. 
+     */
+    GlobalClusterResourceId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the global database cluster.
+     */
+    GlobalClusterArn?: String;
+    /**
+     * Specifies the current state of this global database cluster.
+     */
+    Status?: String;
+    /**
+     *  The Aurora database engine used by the global database cluster. 
+     */
+    Engine?: String;
+    /**
+     * Indicates the database engine version.
+     */
+    EngineVersion?: String;
+    /**
+     *  The default database name within the new global database cluster. 
+     */
+    DatabaseName?: String;
+    /**
+     *  The storage encryption setting for the global database cluster. 
+     */
+    StorageEncrypted?: BooleanOptional;
+    /**
+     *  The deletion protection setting for the new global database cluster. 
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     *  The list of cluster IDs for secondary clusters within the global database cluster. Currently limited to 1 item. 
+     */
+    GlobalClusterMembers?: GlobalClusterMemberList;
+  }
+  export type GlobalClusterList = GlobalCluster[];
+  export interface GlobalClusterMember {
+    /**
+     *  The Amazon Resource Name (ARN) for each Aurora cluster. 
+     */
+    DBClusterArn?: String;
+    /**
+     *  The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global database. 
+     */
+    Readers?: ReadersArnList;
+    /**
+     *  Specifies whether the Aurora cluster is the primary cluster (that is, has read-write capability) for the Aurora global database with which it is associated. 
+     */
+    IsWriter?: Boolean;
+  }
+  export type GlobalClusterMemberList = GlobalClusterMember[];
+  export interface GlobalClustersMessage {
+    /**
+     *  An optional pagination token provided by a previous DescribeGlobalClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     *  The list of global clusters returned by this request. 
+     */
+    GlobalClusters?: GlobalClusterList;
+  }
   export interface IPRange {
     /**
      * Specifies the status of the IP range. Status can be "authorizing", "authorized", "revoking", and "revoked".
@@ -4213,6 +4389,10 @@ declare namespace RDS {
      * Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when this value is set to true. 
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     *  HTTP endpoint functionality is in beta for Aurora Serverless and is subject to change.  A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled. When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor. For more information about Aurora Serverless, see Using Amazon Aurora Serverless in the Amazon Aurora User Guide.
+     */
+    EnableHttpEndpoint?: BooleanOptional;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -4502,6 +4682,23 @@ declare namespace RDS {
   }
   export interface ModifyEventSubscriptionResult {
     EventSubscription?: EventSubscription;
+  }
+  export interface ModifyGlobalClusterMessage {
+    /**
+     *  The DB cluster identifier for the global cluster being modified. This parameter is not case-sensitive.  Constraints:   Must match the identifier of an existing global database cluster.  
+     */
+    GlobalClusterIdentifier?: String;
+    /**
+     *  The new cluster identifier for the global database cluster when modifying a global database cluster. This value is stored as a lowercase string.  Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens   The first character must be a letter   Can't end with a hyphen or contain two consecutive hyphens   Example: my-cluster2 
+     */
+    NewGlobalClusterIdentifier?: String;
+    /**
+     *  Indicates if the global database cluster has deletion protection enabled. The global database cluster can't be deleted when this value is set to true. 
+     */
+    DeletionProtection?: BooleanOptional;
+  }
+  export interface ModifyGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
   }
   export interface ModifyOptionGroupMessage {
     /**
@@ -5137,6 +5334,7 @@ declare namespace RDS {
   export type ReadReplicaDBClusterIdentifierList = String[];
   export type ReadReplicaDBInstanceIdentifierList = String[];
   export type ReadReplicaIdentifierList = String[];
+  export type ReadersArnList = String[];
   export interface RebootDBInstanceMessage {
     /**
      * The DB instance identifier. This parameter is stored as a lowercase string. Constraints:   Must match the identifier of an existing DBInstance.  
@@ -5161,6 +5359,19 @@ declare namespace RDS {
     RecurringChargeFrequency?: String;
   }
   export type RecurringChargeList = RecurringCharge[];
+  export interface RemoveFromGlobalClusterMessage {
+    /**
+     *  The cluster identifier to detach from the Aurora global database cluster. 
+     */
+    GlobalClusterIdentifier?: String;
+    /**
+     *  The Amazon Resource Name (ARN) identifying the cluster that was detached from the Aurora global database cluster. 
+     */
+    DbClusterIdentifier?: String;
+  }
+  export interface RemoveFromGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface RemoveRoleFromDBClusterMessage {
     /**
      * The name of the DB cluster to disassociate the IAM role from.

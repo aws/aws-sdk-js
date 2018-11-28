@@ -231,6 +231,22 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   *  TransactGetItems is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and region. A TransactGetItems call can contain up to 10 TransactGetItem objects, each of which contains a Get structure that specifies an item to retrieve from a table in the account and region. A call to TransactGetItems cannot retrieve items from tables in more than one AWS account or region. DynamoDB rejects the entire TransactGetItems request if any of the following is true:   A conflicting operation is in the process of updating an item to be read.   There is insufficient provisioned capacity for the transaction to be completed.   There is a user error, such as an invalid data format.  
+   */
+  transactGetItems(params: DynamoDB.Types.TransactGetItemsInput, callback?: (err: AWSError, data: DynamoDB.Types.TransactGetItemsOutput) => void): Request<DynamoDB.Types.TransactGetItemsOutput, AWSError>;
+  /**
+   *  TransactGetItems is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and region. A TransactGetItems call can contain up to 10 TransactGetItem objects, each of which contains a Get structure that specifies an item to retrieve from a table in the account and region. A call to TransactGetItems cannot retrieve items from tables in more than one AWS account or region. DynamoDB rejects the entire TransactGetItems request if any of the following is true:   A conflicting operation is in the process of updating an item to be read.   There is insufficient provisioned capacity for the transaction to be completed.   There is a user error, such as an invalid data format.  
+   */
+  transactGetItems(callback?: (err: AWSError, data: DynamoDB.Types.TransactGetItemsOutput) => void): Request<DynamoDB.Types.TransactGetItemsOutput, AWSError>;
+  /**
+   *  TransactWriteItems is a synchronous write operation that groups up to 10 action requests. These actions can target items in different tables, but not in different AWS accounts or regions, and no two actions can target the same item. For example, you cannot both ConditionCheck and Update the same item. The actions are completed atomically so that either all of them succeed, or all of them fail. They are defined by the following objects:    Put  &#x97;   Initiates a PutItem operation to write a new item. This structure specifies the primary key of the item to be written, the name of the table to write it in, an optional condition expression that must be satisfied for the write to succeed, a list of the item's attributes, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.    Update  &#x97;   Initiates an UpdateItem operation to update an existing item. This structure specifies the primary key of the item to be updated, the name of the table where it resides, an optional condition expression that must be satisfied for the update to succeed, an expression that defines one or more attributes to be updated, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.    Delete  &#x97;   Initiates a DeleteItem operation to delete an existing item. This structure specifies the primary key of the item to be deleted, the name of the table where it resides, an optional condition expression that must be satisfied for the deletion to succeed, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.    ConditionCheck  &#x97;   Applies a condition to an item that is not being modified by the transaction. This structure specifies the primary key of the item to be checked, the name of the table where it resides, a condition expression that must be satisfied for the transaction to succeed, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.   DynamoDB rejects the entire TransactWriteItems request if any of the following is true:   A condition in one of the condition expressions is not met.   A conflicting operation is in the process of updating the same item.   There is insufficient provisioned capacity for the transaction to be completed.   An item size becomes too large (bigger than 400 KB), a Local Secondary Index (LSI) becomes too large, or a similar validation error occurs because of changes made by the transaction.   There is a user error, such as an invalid data format.  
+   */
+  transactWriteItems(params: DynamoDB.Types.TransactWriteItemsInput, callback?: (err: AWSError, data: DynamoDB.Types.TransactWriteItemsOutput) => void): Request<DynamoDB.Types.TransactWriteItemsOutput, AWSError>;
+  /**
+   *  TransactWriteItems is a synchronous write operation that groups up to 10 action requests. These actions can target items in different tables, but not in different AWS accounts or regions, and no two actions can target the same item. For example, you cannot both ConditionCheck and Update the same item. The actions are completed atomically so that either all of them succeed, or all of them fail. They are defined by the following objects:    Put  &#x97;   Initiates a PutItem operation to write a new item. This structure specifies the primary key of the item to be written, the name of the table to write it in, an optional condition expression that must be satisfied for the write to succeed, a list of the item's attributes, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.    Update  &#x97;   Initiates an UpdateItem operation to update an existing item. This structure specifies the primary key of the item to be updated, the name of the table where it resides, an optional condition expression that must be satisfied for the update to succeed, an expression that defines one or more attributes to be updated, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.    Delete  &#x97;   Initiates a DeleteItem operation to delete an existing item. This structure specifies the primary key of the item to be deleted, the name of the table where it resides, an optional condition expression that must be satisfied for the deletion to succeed, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.    ConditionCheck  &#x97;   Applies a condition to an item that is not being modified by the transaction. This structure specifies the primary key of the item to be checked, the name of the table where it resides, a condition expression that must be satisfied for the transaction to succeed, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.   DynamoDB rejects the entire TransactWriteItems request if any of the following is true:   A condition in one of the condition expressions is not met.   A conflicting operation is in the process of updating the same item.   There is insufficient provisioned capacity for the transaction to be completed.   An item size becomes too large (bigger than 400 KB), a Local Secondary Index (LSI) becomes too large, or a similar validation error occurs because of changes made by the transaction.   There is a user error, such as an invalid data format.  
+   */
+  transactWriteItems(callback?: (err: AWSError, data: DynamoDB.Types.TransactWriteItemsOutput) => void): Request<DynamoDB.Types.TransactWriteItemsOutput, AWSError>;
+  /**
    * Removes the association of tags from an Amazon DynamoDB resource. You can call UntagResource up to 5 times per second, per account.  For an overview on tagging DynamoDB resources, see Tagging for DynamoDB in the Amazon DynamoDB Developer Guide.
    */
   untagResource(params: DynamoDB.Types.UntagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -515,7 +531,7 @@ declare namespace DynamoDB {
      */
     BackupStatus: BackupStatus;
     /**
-     * BackupType:    USER - On-demand backup created by you.    SYSTEM - On-demand backup automatically created by DynamoDB.  
+     * BackupType:    USER - You create and manage these using the on-demand backup feature.    SYSTEM - If you delete a table with point-in-time recovery enabled, a SYSTEM backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion.   
      */
     BackupType: BackupType;
     /**
@@ -565,7 +581,7 @@ declare namespace DynamoDB {
      */
     BackupStatus?: BackupStatus;
     /**
-     * BackupType:    USER - On-demand backup created by you.    SYSTEM - On-demand backup automatically created by DynamoDB.  
+     * BackupType:    USER - You create and manage these using the on-demand backup feature.    SYSTEM - If you delete a table with point-in-time recovery enabled, a SYSTEM backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion.   
      */
     BackupType?: BackupType;
     /**
@@ -625,11 +641,30 @@ declare namespace DynamoDB {
     ConsumedCapacity?: ConsumedCapacityMultiple;
   }
   export type BatchWriteItemRequestMap = {[key: string]: WriteRequests};
+  export type BillingMode = "PROVISIONED"|"PAY_PER_REQUEST"|string;
+  export interface BillingModeSummary {
+    /**
+     * Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later.    PROVISIONED - Sets the read/write capacity mode to PROVISIONED. We recommend using PROVISIONED for predictable workloads.    PAY_PER_REQUEST - Sets the read/write capacity mode to PAY_PER_REQUEST. We recommend using PAY_PER_REQUEST for unpredictable workloads.   
+     */
+    BillingMode?: BillingMode;
+    /**
+     * Represents the time when PAY_PER_REQUEST was last set as the read/write capacity mode.
+     */
+    LastUpdateToPayPerRequestDateTime?: _Date;
+  }
   export type BinaryAttributeValue = Buffer|Uint8Array|Blob|string;
   export type BinarySetAttributeValue = BinaryAttributeValue[];
   export type BooleanAttributeValue = boolean;
   export type BooleanObject = boolean;
   export interface Capacity {
+    /**
+     * The total number of read capacity units consumed on a table or an index.
+     */
+    ReadCapacityUnits?: ConsumedCapacityUnits;
+    /**
+     * The total number of write capacity units consumed on a table or an index.
+     */
+    WriteCapacityUnits?: ConsumedCapacityUnits;
     /**
      * The total number of capacity units consumed on a table or an index.
      */
@@ -646,6 +681,32 @@ declare namespace DynamoDB {
      */
     ComparisonOperator: ComparisonOperator;
   }
+  export interface ConditionCheck {
+    /**
+     * The primary key of the item to be checked. Each element consists of an attribute name and a value for that attribute.
+     */
+    Key: Key;
+    /**
+     * Name of the table for the check item request.
+     */
+    TableName: TableName;
+    /**
+     * A condition that must be satisfied in order for a conditional update to succeed.
+     */
+    ConditionExpression: ConditionExpression;
+    /**
+     * One or more substitution tokens for attribute names in an expression.
+     */
+    ExpressionAttributeNames?: ExpressionAttributeNameMap;
+    /**
+     * One or more values that can be substituted in an expression.
+     */
+    ExpressionAttributeValues?: ExpressionAttributeValueMap;
+    /**
+     * Use ReturnValuesOnConditionCheckFailure to get the item attributes if the ConditionCheck condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are: NONE and ALL_OLD.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
+  }
   export type ConditionExpression = string;
   export type ConditionalOperator = "AND"|"OR"|string;
   export type ConsistentRead = boolean;
@@ -658,6 +719,14 @@ declare namespace DynamoDB {
      * The total number of capacity units consumed by the operation.
      */
     CapacityUnits?: ConsumedCapacityUnits;
+    /**
+     * The total number of read capacity units consumed by the operation.
+     */
+    ReadCapacityUnits?: ConsumedCapacityUnits;
+    /**
+     * The total number of write capacity units consumed by the operation.
+     */
+    WriteCapacityUnits?: ConsumedCapacityUnits;
     /**
      * The amount of throughput consumed on the table affected by the operation.
      */
@@ -716,7 +785,7 @@ declare namespace DynamoDB {
     /**
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
      */
-    ProvisionedThroughput: ProvisionedThroughput;
+    ProvisionedThroughput?: ProvisionedThroughput;
   }
   export interface CreateGlobalTableInput {
     /**
@@ -762,9 +831,13 @@ declare namespace DynamoDB {
      */
     GlobalSecondaryIndexes?: GlobalSecondaryIndexList;
     /**
-     * Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the UpdateTable operation. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later.    PROVISIONED - Sets the billing mode to PROVISIONED. We recommend using PROVISIONED for predictable workloads.    PAY_PER_REQUEST - Sets the billing mode to PAY_PER_REQUEST. We recommend using PAY_PER_REQUEST for unpredictable workloads.   
      */
-    ProvisionedThroughput: ProvisionedThroughput;
+    BillingMode?: BillingMode;
+    /**
+     * Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the UpdateTable operation.  If you set BillingMode as PROVISIONED, you must specify this property. If you set BillingMode as PAY_PER_REQUEST, you cannot specify this property.  For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     */
+    ProvisionedThroughput?: ProvisionedThroughput;
     /**
      * The settings for DynamoDB Streams on the table. These settings consist of:    StreamEnabled - Indicates whether Streams is to be enabled (true) or disabled (false).    StreamViewType - When an item in the table is modified, StreamViewType determines what information is written to the table's stream. Valid values for StreamViewType are:    KEYS_ONLY - Only the key attributes of the modified item are written to the stream.    NEW_IMAGE - The entire item, as it appears after it was modified, is written to the stream.    OLD_IMAGE - The entire item, as it appeared before it was modified, is written to the stream.    NEW_AND_OLD_IMAGES - Both the new and the old item images of the item are written to the stream.    
      */
@@ -781,6 +854,32 @@ declare namespace DynamoDB {
     TableDescription?: TableDescription;
   }
   export type _Date = Date;
+  export interface Delete {
+    /**
+     * The primary key of the item to be deleted. Each element consists of an attribute name and a value for that attribute.
+     */
+    Key: Key;
+    /**
+     * Name of the table in which the item to be deleted resides.
+     */
+    TableName: TableName;
+    /**
+     * A condition that must be satisfied in order for a conditional delete to succeed.
+     */
+    ConditionExpression?: ConditionExpression;
+    /**
+     * One or more substitution tokens for attribute names in an expression.
+     */
+    ExpressionAttributeNames?: ExpressionAttributeNameMap;
+    /**
+     * One or more values that can be substituted in an expression.
+     */
+    ExpressionAttributeValues?: ExpressionAttributeValueMap;
+    /**
+     * Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Delete condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are: NONE and ALL_OLD.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
+  }
   export interface DeleteBackupInput {
     /**
      * The ARN associated with the backup.
@@ -990,7 +1089,7 @@ declare namespace DynamoDB {
      */
     Value?: AttributeValue;
     /**
-     * Causes DynamoDB to evaluate the value before attempting a conditional operation:   If Exists is true, DynamoDB will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a ConditionalCheckFailedException.   If Exists is false, DynamoDB assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a ConditionalCheckFailedException.   The default setting for Exists is true. If you supply a Value all by itself, DynamoDB assumes the attribute exists: You don't have to set Exists to true, because it is implied. DynamoDB returns a ValidationException if:    Exists is true but there is no Value to check. (You expect a value to exist, but don't specify what that value is.)    Exists is false but you also provide a Value. (You cannot expect an attribute to have a value, while also expecting it not to exist.)  
+     * Causes DynamoDB to evaluate the value before attempting a conditional operation:   If Exists is true, DynamoDB will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a ConditionCheckFailedException.   If Exists is false, DynamoDB assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a ConditionCheckFailedException.   The default setting for Exists is true. If you supply a Value all by itself, DynamoDB assumes the attribute exists: You don't have to set Exists to true, because it is implied. DynamoDB returns a ValidationException if:    Exists is true but there is no Value to check. (You expect a value to exist, but don't specify what that value is.)    Exists is false but you also provide a Value. (You cannot expect an attribute to have a value, while also expecting it not to exist.)  
      */
     Exists?: BooleanObject;
     /**
@@ -1007,6 +1106,24 @@ declare namespace DynamoDB {
   export type ExpressionAttributeValueMap = {[key: string]: AttributeValue};
   export type ExpressionAttributeValueVariable = string;
   export type FilterConditionMap = {[key: string]: Condition};
+  export interface Get {
+    /**
+     * A map of attribute names to AttributeValue objects that specifies the primary key of the item to retrieve.
+     */
+    Key: Key;
+    /**
+     * The name of the table from which to retrieve the specified item.
+     */
+    TableName: TableName;
+    /**
+     * A string that identifies one or more attributes of the specified item to retrieve from the table. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes of the specified item are returned. If any of the requested attributes are not found, they do not appear in the result.
+     */
+    ProjectionExpression?: ProjectionExpression;
+    /**
+     * One or more substitution tokens for attribute names in the ProjectionExpression parameter.
+     */
+    ExpressionAttributeNames?: ExpressionAttributeNameMap;
+  }
   export interface GetItemInput {
     /**
      * The name of the table containing the requested item.
@@ -1060,7 +1177,7 @@ declare namespace DynamoDB {
     /**
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
      */
-    ProvisionedThroughput: ProvisionedThroughput;
+    ProvisionedThroughput?: ProvisionedThroughput;
   }
   export interface GlobalSecondaryIndexDescription {
     /**
@@ -1207,6 +1324,13 @@ declare namespace DynamoDB {
   export type ItemCollectionSizeEstimateRange = ItemCollectionSizeEstimateBound[];
   export type ItemCount = number;
   export type ItemList = AttributeMap[];
+  export interface ItemResponse {
+    /**
+     * Map of attribute data consisting of the data type and attribute value.
+     */
+    Item?: AttributeMap;
+  }
+  export type ItemResponseList = ItemResponse[];
   export type KMSMasterKeyArn = string;
   export type KMSMasterKeyId = string;
   export type Key = {[key: string]: AttributeValue};
@@ -1412,6 +1536,7 @@ declare namespace DynamoDB {
   export type NextTokenString = string;
   export type NonKeyAttributeName = string;
   export type NonKeyAttributeNameList = NonKeyAttributeName[];
+  export type NonNegativeLongObject = number;
   export type NullAttributeValue = boolean;
   export type NumberAttributeValue = string;
   export type NumberSetAttributeValue = NumberAttributeValue[];
@@ -1452,11 +1577,11 @@ declare namespace DynamoDB {
   export type ProjectionType = "ALL"|"KEYS_ONLY"|"INCLUDE"|string;
   export interface ProvisionedThroughput {
     /**
-     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide.
+     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide. If read/write capacity mode is PAY_PER_REQUEST the value is set to 0.
      */
     ReadCapacityUnits: PositiveLongObject;
     /**
-     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide.
+     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide. If read/write capacity mode is PAY_PER_REQUEST the value is set to 0.
      */
     WriteCapacityUnits: PositiveLongObject;
   }
@@ -1476,11 +1601,37 @@ declare namespace DynamoDB {
     /**
      * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException. Eventually consistent reads require less effort than strongly consistent reads, so a setting of 50 ReadCapacityUnits per second provides 100 eventually consistent ReadCapacityUnits per second.
      */
-    ReadCapacityUnits?: PositiveLongObject;
+    ReadCapacityUnits?: NonNegativeLongObject;
     /**
      * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException.
      */
-    WriteCapacityUnits?: PositiveLongObject;
+    WriteCapacityUnits?: NonNegativeLongObject;
+  }
+  export interface Put {
+    /**
+     * A map of attribute name to attribute values, representing the primary key of the item to be written by PutItem. All of the table's primary key attributes must be specified, and their data types must match those of the table's key schema. If any attributes are present in the item that are part of an index key schema for the table, their types must match the index key schema. 
+     */
+    Item: PutItemInputAttributeMap;
+    /**
+     * Name of the table in which to write the item.
+     */
+    TableName: TableName;
+    /**
+     * A condition that must be satisfied in order for a conditional update to succeed.
+     */
+    ConditionExpression?: ConditionExpression;
+    /**
+     * One or more substitution tokens for attribute names in an expression.
+     */
+    ExpressionAttributeNames?: ExpressionAttributeNameMap;
+    /**
+     * One or more values that can be substituted in an expression.
+     */
+    ExpressionAttributeValues?: ExpressionAttributeValueMap;
+    /**
+     * Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Put condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are: NONE and ALL_OLD.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface PutItemInput {
     /**
@@ -1698,9 +1849,13 @@ declare namespace DynamoDB {
      */
     ReplicaStatus?: ReplicaStatus;
     /**
+     * The read/write capacity mode of the replica.
+     */
+    ReplicaBillingModeSummary?: BillingModeSummary;
+    /**
      * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide. 
      */
-    ReplicaProvisionedReadCapacityUnits?: PositiveLongObject;
+    ReplicaProvisionedReadCapacityUnits?: NonNegativeLongObject;
     /**
      * Autoscaling settings for a global table replica's read capacity units.
      */
@@ -1708,7 +1863,7 @@ declare namespace DynamoDB {
     /**
      * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. For more information, see Specifying Read and Write Requirements in the Amazon DynamoDB Developer Guide.
      */
-    ReplicaProvisionedWriteCapacityUnits?: PositiveLongObject;
+    ReplicaProvisionedWriteCapacityUnits?: NonNegativeLongObject;
     /**
      * AutoScaling settings for a global table replica's write capacity units.
      */
@@ -1813,13 +1968,14 @@ declare namespace DynamoDB {
   export type ReturnConsumedCapacity = "INDEXES"|"TOTAL"|"NONE"|string;
   export type ReturnItemCollectionMetrics = "SIZE"|"NONE"|string;
   export type ReturnValue = "NONE"|"ALL_OLD"|"UPDATED_OLD"|"ALL_NEW"|"UPDATED_NEW"|string;
+  export type ReturnValuesOnConditionCheckFailure = "ALL_OLD"|"NONE"|string;
   export interface SSEDescription {
     /**
      * The current state of server-side encryption:    ENABLING - Server-side encryption is being enabled.    ENABLED - Server-side encryption is enabled.    DISABLING - Server-side encryption is being disabled.    DISABLED - Server-side encryption is disabled.    UPDATING - Server-side encryption is being updated.  
      */
     Status?: SSEStatus;
     /**
-     * Server-side encryption type:    AES256 - Server-side encryption which uses the AES256 algorithm.    KMS - Server-side encryption which uses AWS Key Management Service.  
+     * Server-side encryption type:    AES256 - Server-side encryption which uses the AES256 algorithm (not applicable).    KMS - Server-side encryption which uses AWS Key Management Service. Key is stored in your account and is managed by AWS KMS (KMS charges apply).  
      */
     SSEType?: SSEType;
     /**
@@ -1830,11 +1986,11 @@ declare namespace DynamoDB {
   export type SSEEnabled = boolean;
   export interface SSESpecification {
     /**
-     * Indicates whether server-side encryption is enabled (true) or disabled (false) on the table.
+     * Indicates whether server-side encryption is enabled (true) or disabled (false) on the table. If enabled (true), server-side encryption type is set to KMS. If disabled (false) or not specified, server-side encryption is set to AWS owned CMK.
      */
     Enabled?: SSEEnabled;
     /**
-     * Server-side encryption type:    AES256 - Server-side encryption which uses the AES256 algorithm.    KMS - Server-side encryption which uses AWS Key Management Service. (default)  
+     * Server-side encryption type:    AES256 - Server-side encryption which uses the AES256 algorithm (not applicable).    KMS - Server-side encryption which uses AWS Key Management Service. Key is stored in your account and is managed by AWS KMS (KMS charges apply).  
      */
     SSEType?: SSEType;
     /**
@@ -1967,6 +2123,10 @@ declare namespace DynamoDB {
      * Number of items in the table. Please note this is an approximate value. 
      */
     ItemCount?: ItemCount;
+    /**
+     * Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later.    PROVISIONED - Sets the read/write capacity mode to PROVISIONED. We recommend using PROVISIONED for predictable workloads.    PAY_PER_REQUEST - Sets the read/write capacity mode to PAY_PER_REQUEST. We recommend using PAY_PER_REQUEST for unpredictable workloads.   
+     */
+    BillingMode?: BillingMode;
   }
   export interface SourceTableFeatureDetails {
     /**
@@ -2050,6 +2210,10 @@ declare namespace DynamoDB {
      */
     TableId?: TableId;
     /**
+     * Contains the details for the read/write capacity mode.
+     */
+    BillingModeSummary?: BillingModeSummary;
+    /**
      * Represents one or more local secondary indexes on the table. Each index is scoped to a given partition key value. Tables with one or more local secondary indexes are subject to an item collection size limit, where the amount of data within a given item collection cannot exceed 10 GB. Each element is composed of:    IndexName - The name of the local secondary index.    KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes are in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      IndexSizeBytes - Represents the total size of the index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.    ItemCount - Represents the number of items in the index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.   If the table is in the DELETING state, no information about indexes will be returned.
      */
     LocalSecondaryIndexes?: LocalSecondaryIndexDescriptionList;
@@ -2131,6 +2295,77 @@ declare namespace DynamoDB {
     AttributeName: TimeToLiveAttributeName;
   }
   export type TimeToLiveStatus = "ENABLING"|"DISABLING"|"ENABLED"|"DISABLED"|string;
+  export interface TransactGetItem {
+    /**
+     * Contains the primary key that identifies the item to get, together with the name of the table that contains the item, and optionally the specific attributes of the item to retrieve.
+     */
+    Get: Get;
+  }
+  export type TransactGetItemList = TransactGetItem[];
+  export interface TransactGetItemsInput {
+    /**
+     * An ordered array of up to 10 TransactGetItem objects, each of which contains a Get structure.
+     */
+    TransactItems: TransactGetItemList;
+    /**
+     * A value of TOTAL causes consumed capacity information to be returned, and a value of NONE prevents that information from being returned. No other value is valid.
+     */
+    ReturnConsumedCapacity?: ReturnConsumedCapacity;
+  }
+  export interface TransactGetItemsOutput {
+    /**
+     * If the ReturnConsumedCapacity value was TOTAL, this is an array of ConsumedCapacity objects, one for each table addressed by TransactGetItem objects in the TransactItems parameter. These ConsumedCapacity objects report the read-capacity units consumed by the TransactGetItems call in that table.
+     */
+    ConsumedCapacity?: ConsumedCapacityMultiple;
+    /**
+     * An ordered array of up to 10 ItemResponse objects, each of which corresponds to the TransactGetItem object in the same position in the TransactItems array. Each ItemResponse object contains a Map of the name-value pairs that are the projected attributes of the requested item. If a requested item could not be retrieved, the corresponding ItemResponse object is Null, or if the requested item has no projected attributes, the corresponding ItemResponse object is an empty Map. 
+     */
+    Responses?: ItemResponseList;
+  }
+  export interface TransactWriteItem {
+    /**
+     * A request to perform a check item operation.
+     */
+    ConditionCheck?: ConditionCheck;
+    /**
+     * A request to perform a PutItem operation.
+     */
+    Put?: Put;
+    /**
+     * A request to perform a DeleteItem operation.
+     */
+    Delete?: Delete;
+    /**
+     * A request to perform an UpdateItem operation.
+     */
+    Update?: Update;
+  }
+  export type TransactWriteItemList = TransactWriteItem[];
+  export interface TransactWriteItemsInput {
+    /**
+     * An ordered array of up to 10 TransactWriteItem objects, each of which contains a ConditionCheck, Put, Update, or Delete object. These can operate on items in different tables, but the tables must reside in the same AWS account and region, and no two of them can operate on the same item. 
+     */
+    TransactItems: TransactWriteItemList;
+    ReturnConsumedCapacity?: ReturnConsumedCapacity;
+    /**
+     * Determines whether item collection metrics are returned. If set to SIZE, the response includes statistics about item collections (if any), that were modified during the operation and are returned in the response. If set to NONE (the default), no statistics are returned. 
+     */
+    ReturnItemCollectionMetrics?: ReturnItemCollectionMetrics;
+    /**
+     * Providing a ClientRequestToken makes the call to TransactWriteItems idempotent, meaning that multiple identical calls have the same effect as one single call. Although multiple identical calls using the same client request token produce the same result on the server (no side effects), the responses to the calls may not be the same. If the ReturnConsumedCapacity&gt; parameter is set, then the initial TransactWriteItems call returns the amount of write capacity units consumed in making the changes, and subsequent TransactWriteItems calls with the same client token return the amount of read capacity units consumed in reading the item. A client request token is valid for 10 minutes after the first request that uses it completes. After 10 minutes, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 10 minutes or the result may not be idempotent. If you submit a request with the same client token but a change in other parameters within the 10 minute idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
+     */
+    ClientRequestToken?: String;
+  }
+  export interface TransactWriteItemsOutput {
+    /**
+     * The capacity units consumed by the entire TransactWriteItems operation. The values of the list are ordered according to the ordering of the TransactItems request parameter. 
+     */
+    ConsumedCapacity?: ConsumedCapacityMultiple;
+    /**
+     * A list of tables that were processed by TransactWriteItems and, for each table, information about any item collections that were affected by individual UpdateItem, PutItem or DeleteItem operations. 
+     */
+    ItemCollectionMetrics?: ItemCollectionMetricsPerTable;
+  }
   export interface UntagResourceInput {
     /**
      * The Amazon DyanamoDB resource the tags will be removed from. This value is an Amazon Resource Name (ARN).
@@ -2140,6 +2375,36 @@ declare namespace DynamoDB {
      * A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the Amazon DynamoDB resource.
      */
     TagKeys: TagKeyList;
+  }
+  export interface Update {
+    /**
+     * The primary key of the item to be updated. Each element consists of an attribute name and a value for that attribute.
+     */
+    Key: Key;
+    /**
+     * An expression that defines one or more attributes to be updated, the action to be performed on them, and new value(s) for them.
+     */
+    UpdateExpression: UpdateExpression;
+    /**
+     * Name of the table for the UpdateItem request.
+     */
+    TableName: TableName;
+    /**
+     * A condition that must be satisfied in order for a conditional update to succeed.
+     */
+    ConditionExpression?: ConditionExpression;
+    /**
+     * One or more substitution tokens for attribute names in an expression.
+     */
+    ExpressionAttributeNames?: ExpressionAttributeNameMap;
+    /**
+     * One or more values that can be substituted in an expression.
+     */
+    ExpressionAttributeValues?: ExpressionAttributeValueMap;
+    /**
+     * Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Update condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are: NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface UpdateContinuousBackupsInput {
     /**
@@ -2189,6 +2454,10 @@ declare namespace DynamoDB {
      * The name of the global table
      */
     GlobalTableName: TableName;
+    /**
+     * The billing mode of the global table. If GlobalTableBillingMode is not specified, the global table defaults to PROVISIONED capacity billing mode.
+     */
+    GlobalTableBillingMode?: BillingMode;
     /**
      * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException. 
      */
@@ -2286,6 +2555,10 @@ declare namespace DynamoDB {
      * The name of the table to be updated.
      */
     TableName: TableName;
+    /**
+     * Controls how you are charged for read and write throughput and how you manage capacity. When switching from pay-per-request to provisioned capacity, initial provisioned capacity values must be set. The initial provisioned capacity values are estimated based on the consumed read and write capacity of your table and global secondary indexes over the past 30 minutes.    PROVISIONED - Sets the billing mode to PROVISIONED. We recommend using PROVISIONED for predictable workloads.    PAY_PER_REQUEST - Sets the billing mode to PAY_PER_REQUEST. We recommend using PAY_PER_REQUEST for unpredictable workloads.   
+     */
+    BillingMode?: BillingMode;
     /**
      * The new provisioned throughput settings for the specified table or index.
      */

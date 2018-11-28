@@ -162,6 +162,8 @@ export abstract class ConfigurationServicePlaceholders {
   comprehendmedical?: AWS.ComprehendMedical.Types.ClientConfiguration;
   kinesisanalyticsv2?: AWS.KinesisAnalyticsV2.Types.ClientConfiguration;
   mediaconnect?: AWS.MediaConnect.Types.ClientConfiguration;
+  fsx?: AWS.FSx.Types.ClientConfiguration;
+  securityhub?: AWS.SecurityHub.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -326,4 +328,6 @@ export interface ConfigurationServiceApiVersions {
   comprehendmedical?: AWS.ComprehendMedical.Types.apiVersion;
   kinesisanalyticsv2?: AWS.KinesisAnalyticsV2.Types.apiVersion;
   mediaconnect?: AWS.MediaConnect.Types.apiVersion;
+  fsx?: AWS.FSx.Types.apiVersion;
+  securityhub?: AWS.SecurityHub.Types.apiVersion;
 }

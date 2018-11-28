@@ -33,6 +33,9 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "RequestLimitExceeded"
+        },
+        {
           "shape": "InternalServerError"
         }
       ],
@@ -60,6 +63,9 @@
         },
         {
           "shape": "ItemCollectionSizeLimitExceededException"
+        },
+        {
+          "shape": "RequestLimitExceeded"
         },
         {
           "shape": "InternalServerError"
@@ -211,6 +217,12 @@
         },
         {
           "shape": "ItemCollectionSizeLimitExceededException"
+        },
+        {
+          "shape": "TransactionConflictException"
+        },
+        {
+          "shape": "RequestLimitExceeded"
         },
         {
           "shape": "InternalServerError"
@@ -440,6 +452,9 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "RequestLimitExceeded"
+        },
+        {
           "shape": "InternalServerError"
         }
       ],
@@ -555,6 +570,12 @@
           "shape": "ItemCollectionSizeLimitExceededException"
         },
         {
+          "shape": "TransactionConflictException"
+        },
+        {
+          "shape": "RequestLimitExceeded"
+        },
+        {
           "shape": "InternalServerError"
         }
       ],
@@ -579,6 +600,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "RequestLimitExceeded"
         },
         {
           "shape": "InternalServerError"
@@ -680,6 +704,9 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "RequestLimitExceeded"
+        },
+        {
           "shape": "InternalServerError"
         }
       ],
@@ -710,6 +737,64 @@
         }
       ],
       "documentation": "<p>Associate a set of tags with an Amazon DynamoDB resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. You can call TagResource up to 5 times per second, per account. </p> <p>For an overview on tagging DynamoDB resources, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html\">Tagging for DynamoDB</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>",
+      "endpointdiscovery": {}
+    },
+    "TransactGetItems": {
+      "name": "TransactGetItems",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TransactGetItemsInput"
+      },
+      "output": {
+        "shape": "TransactGetItemsOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TransactionCanceledException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p> <code>TransactGetItems</code> is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and region. A <code>TransactGetItems</code> call can contain up to 10 <code>TransactGetItem</code> objects, each of which contains a <code>Get</code> structure that specifies an item to retrieve from a table in the account and region. A call to <code>TransactGetItems</code> cannot retrieve items from tables in more than one AWS account or region.</p> <p>DynamoDB rejects the entire <code>TransactGetItems</code> request if any of the following is true:</p> <ul> <li> <p>A conflicting operation is in the process of updating an item to be read.</p> </li> <li> <p>There is insufficient provisioned capacity for the transaction to be completed.</p> </li> <li> <p>There is a user error, such as an invalid data format.</p> </li> </ul>",
+      "endpointdiscovery": {}
+    },
+    "TransactWriteItems": {
+      "name": "TransactWriteItems",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TransactWriteItemsInput"
+      },
+      "output": {
+        "shape": "TransactWriteItemsOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TransactionCanceledException"
+        },
+        {
+          "shape": "TransactionInProgressException"
+        },
+        {
+          "shape": "IdempotentParameterMismatchException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p> <code>TransactWriteItems</code> is a synchronous write operation that groups up to 10 action requests. These actions can target items in different tables, but not in different AWS accounts or regions, and no two actions can target the same item. For example, you cannot both <code>ConditionCheck</code> and <code>Update</code> the same item.</p> <p>The actions are completed atomically so that either all of them succeed, or all of them fail. They are defined by the following objects:</p> <ul> <li> <p> <code>Put</code>  &#x97;   Initiates a <code>PutItem</code> operation to write a new item. This structure specifies the primary key of the item to be written, the name of the table to write it in, an optional condition expression that must be satisfied for the write to succeed, a list of the item's attributes, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.</p> </li> <li> <p> <code>Update</code>  &#x97;   Initiates an <code>UpdateItem</code> operation to update an existing item. This structure specifies the primary key of the item to be updated, the name of the table where it resides, an optional condition expression that must be satisfied for the update to succeed, an expression that defines one or more attributes to be updated, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.</p> </li> <li> <p> <code>Delete</code>  &#x97;   Initiates a <code>DeleteItem</code> operation to delete an existing item. This structure specifies the primary key of the item to be deleted, the name of the table where it resides, an optional condition expression that must be satisfied for the deletion to succeed, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.</p> </li> <li> <p> <code>ConditionCheck</code>  &#x97;   Applies a condition to an item that is not being modified by the transaction. This structure specifies the primary key of the item to be checked, the name of the table where it resides, a condition expression that must be satisfied for the transaction to succeed, and a field indicating whether or not to retrieve the item's attributes if the condition is not met.</p> </li> </ul> <p>DynamoDB rejects the entire <code>TransactWriteItems</code> request if any of the following is true:</p> <ul> <li> <p>A condition in one of the condition expressions is not met.</p> </li> <li> <p>A conflicting operation is in the process of updating the same item.</p> </li> <li> <p>There is insufficient provisioned capacity for the transaction to be completed.</p> </li> <li> <p>An item size becomes too large (bigger than 400 KB), a Local Secondary Index (LSI) becomes too large, or a similar validation error occurs because of changes made by the transaction.</p> </li> <li> <p>There is a user error, such as an invalid data format.</p> </li> </ul>",
       "endpointdiscovery": {}
     },
     "UntagResource": {
@@ -855,6 +940,12 @@
         },
         {
           "shape": "ItemCollectionSizeLimitExceededException"
+        },
+        {
+          "shape": "TransactionConflictException"
+        },
+        {
+          "shape": "RequestLimitExceeded"
         },
         {
           "shape": "InternalServerError"
@@ -1258,7 +1349,7 @@
         },
         "BackupType": {
           "shape": "BackupType",
-          "documentation": "<p>BackupType:</p> <ul> <li> <p> <code>USER</code> - On-demand backup created by you.</p> </li> <li> <p> <code>SYSTEM</code> - On-demand backup automatically created by DynamoDB.</p> </li> </ul>"
+          "documentation": "<p>BackupType:</p> <ul> <li> <p> <code>USER</code> - You create and manage these using the on-demand backup feature.</p> </li> <li> <p> <code>SYSTEM</code> - If you delete a table with point-in-time recovery enabled, a <code>SYSTEM</code> backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion. </p> </li> </ul>"
         },
         "BackupCreationDateTime": {
           "shape": "BackupCreationDateTime",
@@ -1332,7 +1423,7 @@
         },
         "BackupType": {
           "shape": "BackupType",
-          "documentation": "<p>BackupType:</p> <ul> <li> <p> <code>USER</code> - On-demand backup created by you.</p> </li> <li> <p> <code>SYSTEM</code> - On-demand backup automatically created by DynamoDB.</p> </li> </ul>"
+          "documentation": "<p>BackupType:</p> <ul> <li> <p> <code>USER</code> - You create and manage these using the on-demand backup feature.</p> </li> <li> <p> <code>SYSTEM</code> - If you delete a table with point-in-time recovery enabled, a <code>SYSTEM</code> backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion. </p> </li> </ul>"
         },
         "BackupSizeBytes": {
           "shape": "BackupSizeBytes",
@@ -1464,6 +1555,27 @@
       "max": 25,
       "min": 1
     },
+    "BillingMode": {
+      "type": "string",
+      "enum": [
+        "PROVISIONED",
+        "PAY_PER_REQUEST"
+      ]
+    },
+    "BillingModeSummary": {
+      "type": "structure",
+      "members": {
+        "BillingMode": {
+          "shape": "BillingMode",
+          "documentation": "<p>Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later.</p> <ul> <li> <p> <code>PROVISIONED</code> - Sets the read/write capacity mode to <code>PROVISIONED</code>. We recommend using <code>PROVISIONED</code> for predictable workloads.</p> </li> <li> <p> <code>PAY_PER_REQUEST</code> - Sets the read/write capacity mode to <code>PAY_PER_REQUEST</code>. We recommend using <code>PAY_PER_REQUEST</code> for unpredictable workloads. </p> </li> </ul>"
+        },
+        "LastUpdateToPayPerRequestDateTime": {
+          "shape": "Date",
+          "documentation": "<p>Represents the time when <code>PAY_PER_REQUEST</code> was last set as the read/write capacity mode.</p>"
+        }
+      },
+      "documentation": "<p>Contains the details for the read/write capacity mode.</p>"
+    },
     "BinaryAttributeValue": {
       "type": "blob"
     },
@@ -1482,6 +1594,14 @@
     "Capacity": {
       "type": "structure",
       "members": {
+        "ReadCapacityUnits": {
+          "shape": "ConsumedCapacityUnits",
+          "documentation": "<p>The total number of read capacity units consumed on a table or an index.</p>"
+        },
+        "WriteCapacityUnits": {
+          "shape": "ConsumedCapacityUnits",
+          "documentation": "<p>The total number of write capacity units consumed on a table or an index.</p>"
+        },
         "CapacityUnits": {
           "shape": "ConsumedCapacityUnits",
           "documentation": "<p>The total number of capacity units consumed on a table or an index.</p>"
@@ -1524,6 +1644,41 @@
       },
       "documentation": "<p>Represents the selection criteria for a <code>Query</code> or <code>Scan</code> operation:</p> <ul> <li> <p>For a <code>Query</code> operation, <code>Condition</code> is used for specifying the <code>KeyConditions</code> to use when querying a table or an index. For <code>KeyConditions</code>, only the following comparison operators are supported:</p> <p> <code>EQ | LE | LT | GE | GT | BEGINS_WITH | BETWEEN</code> </p> <p> <code>Condition</code> is also used in a <code>QueryFilter</code>, which evaluates the query results and returns only the desired values.</p> </li> <li> <p>For a <code>Scan</code> operation, <code>Condition</code> is used in a <code>ScanFilter</code>, which evaluates the scan results and returns only the desired values.</p> </li> </ul>"
     },
+    "ConditionCheck": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "TableName",
+        "ConditionExpression"
+      ],
+      "members": {
+        "Key": {
+          "shape": "Key",
+          "documentation": "<p>The primary key of the item to be checked. Each element consists of an attribute name and a value for that attribute.</p>"
+        },
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>Name of the table for the check item request.</p>"
+        },
+        "ConditionExpression": {
+          "shape": "ConditionExpression",
+          "documentation": "<p>A condition that must be satisfied in order for a conditional update to succeed.</p>"
+        },
+        "ExpressionAttributeNames": {
+          "shape": "ExpressionAttributeNameMap",
+          "documentation": "<p>One or more substitution tokens for attribute names in an expression.</p>"
+        },
+        "ExpressionAttributeValues": {
+          "shape": "ExpressionAttributeValueMap",
+          "documentation": "<p>One or more values that can be substituted in an expression.</p>"
+        },
+        "ReturnValuesOnConditionCheckFailure": {
+          "shape": "ReturnValuesOnConditionCheckFailure",
+          "documentation": "<p>Use <code>ReturnValuesOnConditionCheckFailure</code> to get the item attributes if the <code>ConditionCheck</code> condition fails. For <code>ReturnValuesOnConditionCheckFailure</code>, the valid values are: NONE and ALL_OLD.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to perform a check that an item exists or to check the condition of specific attributes of the item..</p>"
+    },
     "ConditionExpression": {
       "type": "string"
     },
@@ -1547,6 +1702,14 @@
         "CapacityUnits": {
           "shape": "ConsumedCapacityUnits",
           "documentation": "<p>The total number of capacity units consumed by the operation.</p>"
+        },
+        "ReadCapacityUnits": {
+          "shape": "ConsumedCapacityUnits",
+          "documentation": "<p>The total number of read capacity units consumed by the operation.</p>"
+        },
+        "WriteCapacityUnits": {
+          "shape": "ConsumedCapacityUnits",
+          "documentation": "<p>The total number of write capacity units consumed by the operation.</p>"
         },
         "Table": {
           "shape": "Capacity",
@@ -1627,8 +1790,7 @@
       "required": [
         "IndexName",
         "KeySchema",
-        "Projection",
-        "ProvisionedThroughput"
+        "Projection"
       ],
       "members": {
         "IndexName": {
@@ -1694,8 +1856,7 @@
       "required": [
         "AttributeDefinitions",
         "TableName",
-        "KeySchema",
-        "ProvisionedThroughput"
+        "KeySchema"
       ],
       "members": {
         "AttributeDefinitions": {
@@ -1718,9 +1879,13 @@
           "shape": "GlobalSecondaryIndexList",
           "documentation": "<p>One or more global secondary indexes (the maximum is five) to be created on the table. Each global secondary index in the array includes the following:</p> <ul> <li> <p> <code>IndexName</code> - The name of the global secondary index. Must be unique only for this table.</p> <p/> </li> <li> <p> <code>KeySchema</code> - Specifies the key schema for the global secondary index.</p> </li> <li> <p> <code>Projection</code> - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:</p> <ul> <li> <p> <code>ProjectionType</code> - One of the following:</p> <ul> <li> <p> <code>KEYS_ONLY</code> - Only the index and primary keys are projected into the index.</p> </li> <li> <p> <code>INCLUDE</code> - Only the specified table attributes are projected into the index. The list of projected attributes are in <code>NonKeyAttributes</code>.</p> </li> <li> <p> <code>ALL</code> - All of the table attributes are projected into the index.</p> </li> </ul> </li> <li> <p> <code>NonKeyAttributes</code> - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in <code>NonKeyAttributes</code>, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.</p> </li> </ul> </li> <li> <p> <code>ProvisionedThroughput</code> - The provisioned throughput settings for the global secondary index, consisting of read and write capacity units.</p> </li> </ul>"
         },
+        "BillingMode": {
+          "shape": "BillingMode",
+          "documentation": "<p>Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later.</p> <ul> <li> <p> <code>PROVISIONED</code> - Sets the billing mode to <code>PROVISIONED</code>. We recommend using <code>PROVISIONED</code> for predictable workloads.</p> </li> <li> <p> <code>PAY_PER_REQUEST</code> - Sets the billing mode to <code>PAY_PER_REQUEST</code>. We recommend using <code>PAY_PER_REQUEST</code> for unpredictable workloads. </p> </li> </ul>"
+        },
         "ProvisionedThroughput": {
           "shape": "ProvisionedThroughput",
-          "documentation": "<p>Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the <code>UpdateTable</code> operation.</p> <p>For current minimum and maximum provisioned throughput values, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Limits</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+          "documentation": "<p>Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the <code>UpdateTable</code> operation.</p> <p> If you set BillingMode as <code>PROVISIONED</code>, you must specify this property. If you set BillingMode as <code>PAY_PER_REQUEST</code>, you cannot specify this property. </p> <p>For current minimum and maximum provisioned throughput values, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Limits</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
         },
         "StreamSpecification": {
           "shape": "StreamSpecification",
@@ -1745,6 +1910,40 @@
     },
     "Date": {
       "type": "timestamp"
+    },
+    "Delete": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "TableName"
+      ],
+      "members": {
+        "Key": {
+          "shape": "Key",
+          "documentation": "<p>The primary key of the item to be deleted. Each element consists of an attribute name and a value for that attribute.</p>"
+        },
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>Name of the table in which the item to be deleted resides.</p>"
+        },
+        "ConditionExpression": {
+          "shape": "ConditionExpression",
+          "documentation": "<p>A condition that must be satisfied in order for a conditional delete to succeed.</p>"
+        },
+        "ExpressionAttributeNames": {
+          "shape": "ExpressionAttributeNameMap",
+          "documentation": "<p>One or more substitution tokens for attribute names in an expression.</p>"
+        },
+        "ExpressionAttributeValues": {
+          "shape": "ExpressionAttributeValueMap",
+          "documentation": "<p>One or more values that can be substituted in an expression.</p>"
+        },
+        "ReturnValuesOnConditionCheckFailure": {
+          "shape": "ReturnValuesOnConditionCheckFailure",
+          "documentation": "<p>Use <code>ReturnValuesOnConditionCheckFailure</code> to get the item attributes if the <code>Delete</code> condition fails. For <code>ReturnValuesOnConditionCheckFailure</code>, the valid values are: NONE and ALL_OLD.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to perform a <code>DeleteItem</code> operation.</p>"
     },
     "DeleteBackupInput": {
       "type": "structure",
@@ -2112,7 +2311,7 @@
         },
         "Exists": {
           "shape": "BooleanObject",
-          "documentation": "<p>Causes DynamoDB to evaluate the value before attempting a conditional operation:</p> <ul> <li> <p>If <code>Exists</code> is <code>true</code>, DynamoDB will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a <code>ConditionalCheckFailedException</code>.</p> </li> <li> <p>If <code>Exists</code> is <code>false</code>, DynamoDB assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a <code>ConditionalCheckFailedException</code>.</p> </li> </ul> <p>The default setting for <code>Exists</code> is <code>true</code>. If you supply a <code>Value</code> all by itself, DynamoDB assumes the attribute exists: You don't have to set <code>Exists</code> to <code>true</code>, because it is implied.</p> <p>DynamoDB returns a <code>ValidationException</code> if:</p> <ul> <li> <p> <code>Exists</code> is <code>true</code> but there is no <code>Value</code> to check. (You expect a value to exist, but don't specify what that value is.)</p> </li> <li> <p> <code>Exists</code> is <code>false</code> but you also provide a <code>Value</code>. (You cannot expect an attribute to have a value, while also expecting it not to exist.)</p> </li> </ul>"
+          "documentation": "<p>Causes DynamoDB to evaluate the value before attempting a conditional operation:</p> <ul> <li> <p>If <code>Exists</code> is <code>true</code>, DynamoDB will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a <code>ConditionCheckFailedException</code>.</p> </li> <li> <p>If <code>Exists</code> is <code>false</code>, DynamoDB assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a <code>ConditionCheckFailedException</code>.</p> </li> </ul> <p>The default setting for <code>Exists</code> is <code>true</code>. If you supply a <code>Value</code> all by itself, DynamoDB assumes the attribute exists: You don't have to set <code>Exists</code> to <code>true</code>, because it is implied.</p> <p>DynamoDB returns a <code>ValidationException</code> if:</p> <ul> <li> <p> <code>Exists</code> is <code>true</code> but there is no <code>Value</code> to check. (You expect a value to exist, but don't specify what that value is.)</p> </li> <li> <p> <code>Exists</code> is <code>false</code> but you also provide a <code>Value</code>. (You cannot expect an attribute to have a value, while also expecting it not to exist.)</p> </li> </ul>"
         },
         "ComparisonOperator": {
           "shape": "ComparisonOperator",
@@ -2157,6 +2356,32 @@
       "value": {
         "shape": "Condition"
       }
+    },
+    "Get": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "TableName"
+      ],
+      "members": {
+        "Key": {
+          "shape": "Key",
+          "documentation": "<p>A map of attribute names to <code>AttributeValue</code> objects that specifies the primary key of the item to retrieve.</p>"
+        },
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table from which to retrieve the specified item.</p>"
+        },
+        "ProjectionExpression": {
+          "shape": "ProjectionExpression",
+          "documentation": "<p>A string that identifies one or more attributes of the specified item to retrieve from the table. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes of the specified item are returned. If any of the requested attributes are not found, they do not appear in the result.</p>"
+        },
+        "ExpressionAttributeNames": {
+          "shape": "ExpressionAttributeNameMap",
+          "documentation": "<p>One or more substitution tokens for attribute names in the ProjectionExpression parameter.</p>"
+        }
+      },
+      "documentation": "<p>Specifies an item and related attribute values to retrieve in a <code>TransactGetItem</code> object.</p>"
     },
     "GetItemInput": {
       "type": "structure",
@@ -2214,8 +2439,7 @@
       "required": [
         "IndexName",
         "KeySchema",
-        "Projection",
-        "ProvisionedThroughput"
+        "Projection"
       ],
       "members": {
         "IndexName": {
@@ -2507,6 +2731,24 @@
       "member": {
         "shape": "AttributeMap"
       }
+    },
+    "ItemResponse": {
+      "type": "structure",
+      "members": {
+        "Item": {
+          "shape": "AttributeMap",
+          "documentation": "<p>Map of attribute data consisting of the data type and attribute value.</p>"
+        }
+      },
+      "documentation": "<p>Details for the requested item.</p>"
+    },
+    "ItemResponseList": {
+      "type": "list",
+      "member": {
+        "shape": "ItemResponse"
+      },
+      "max": 10,
+      "min": 1
     },
     "KMSMasterKeyArn": {
       "type": "string"
@@ -2867,6 +3109,10 @@
       "max": 20,
       "min": 1
     },
+    "NonNegativeLongObject": {
+      "type": "long",
+      "min": 0
+    },
     "NullAttributeValue": {
       "type": "boolean"
     },
@@ -2959,11 +3205,11 @@
       "members": {
         "ReadCapacityUnits": {
           "shape": "PositiveLongObject",
-          "documentation": "<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+          "documentation": "<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p> <p>If read/write capacity mode is <code>PAY_PER_REQUEST</code> the value is set to 0.</p>"
         },
         "WriteCapacityUnits": {
           "shape": "PositiveLongObject",
-          "documentation": "<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+          "documentation": "<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p> <p>If read/write capacity mode is <code>PAY_PER_REQUEST</code> the value is set to 0.</p>"
         }
       },
       "documentation": "<p>Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the <code>UpdateTable</code> operation.</p> <p>For current minimum and maximum provisioned throughput values, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Limits</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
@@ -2984,15 +3230,49 @@
           "documentation": "<p>The number of provisioned throughput decreases for this table during this UTC calendar day. For current maximums on provisioned throughput decreases, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Limits</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
         },
         "ReadCapacityUnits": {
-          "shape": "PositiveLongObject",
+          "shape": "NonNegativeLongObject",
           "documentation": "<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>. Eventually consistent reads require less effort than strongly consistent reads, so a setting of 50 <code>ReadCapacityUnits</code> per second provides 100 eventually consistent <code>ReadCapacityUnits</code> per second.</p>"
         },
         "WriteCapacityUnits": {
-          "shape": "PositiveLongObject",
+          "shape": "NonNegativeLongObject",
           "documentation": "<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>.</p>"
         }
       },
       "documentation": "<p>Represents the provisioned throughput settings for the table, consisting of read and write capacity units, along with data about increases and decreases.</p>"
+    },
+    "Put": {
+      "type": "structure",
+      "required": [
+        "Item",
+        "TableName"
+      ],
+      "members": {
+        "Item": {
+          "shape": "PutItemInputAttributeMap",
+          "documentation": "<p>A map of attribute name to attribute values, representing the primary key of the item to be written by <code>PutItem</code>. All of the table's primary key attributes must be specified, and their data types must match those of the table's key schema. If any attributes are present in the item that are part of an index key schema for the table, their types must match the index key schema. </p>"
+        },
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>Name of the table in which to write the item.</p>"
+        },
+        "ConditionExpression": {
+          "shape": "ConditionExpression",
+          "documentation": "<p>A condition that must be satisfied in order for a conditional update to succeed.</p>"
+        },
+        "ExpressionAttributeNames": {
+          "shape": "ExpressionAttributeNameMap",
+          "documentation": "<p>One or more substitution tokens for attribute names in an expression.</p>"
+        },
+        "ExpressionAttributeValues": {
+          "shape": "ExpressionAttributeValueMap",
+          "documentation": "<p>One or more values that can be substituted in an expression.</p>"
+        },
+        "ReturnValuesOnConditionCheckFailure": {
+          "shape": "ReturnValuesOnConditionCheckFailure",
+          "documentation": "<p>Use <code>ReturnValuesOnConditionCheckFailure</code> to get the item attributes if the <code>Put</code> condition fails. For <code>ReturnValuesOnConditionCheckFailure</code>, the valid values are: NONE and ALL_OLD.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to perform a <code>PutItem</code> operation.</p>"
     },
     "PutItemInput": {
       "type": "structure",
@@ -3302,8 +3582,12 @@
           "shape": "ReplicaStatus",
           "documentation": "<p>The current state of the region:</p> <ul> <li> <p> <code>CREATING</code> - The region is being created.</p> </li> <li> <p> <code>UPDATING</code> - The region is being updated.</p> </li> <li> <p> <code>DELETING</code> - The region is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The region is ready for use.</p> </li> </ul>"
         },
+        "ReplicaBillingModeSummary": {
+          "shape": "BillingModeSummary",
+          "documentation": "<p>The read/write capacity mode of the replica.</p>"
+        },
         "ReplicaProvisionedReadCapacityUnits": {
-          "shape": "PositiveLongObject",
+          "shape": "NonNegativeLongObject",
           "documentation": "<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>. </p>"
         },
         "ReplicaProvisionedReadCapacityAutoScalingSettings": {
@@ -3311,7 +3595,7 @@
           "documentation": "<p>Autoscaling settings for a global table replica's read capacity units.</p>"
         },
         "ReplicaProvisionedWriteCapacityUnits": {
-          "shape": "PositiveLongObject",
+          "shape": "NonNegativeLongObject",
           "documentation": "<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>. For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
         },
         "ReplicaProvisionedWriteCapacityAutoScalingSettings": {
@@ -3513,6 +3797,13 @@
         "UPDATED_NEW"
       ]
     },
+    "ReturnValuesOnConditionCheckFailure": {
+      "type": "string",
+      "enum": [
+        "ALL_OLD",
+        "NONE"
+      ]
+    },
     "SSEDescription": {
       "type": "structure",
       "members": {
@@ -3522,7 +3813,7 @@
         },
         "SSEType": {
           "shape": "SSEType",
-          "documentation": "<p>Server-side encryption type:</p> <ul> <li> <p> <code>AES256</code> - Server-side encryption which uses the AES256 algorithm.</p> </li> <li> <p> <code>KMS</code> - Server-side encryption which uses AWS Key Management Service.</p> </li> </ul>"
+          "documentation": "<p>Server-side encryption type:</p> <ul> <li> <p> <code>AES256</code> - Server-side encryption which uses the AES256 algorithm (not applicable).</p> </li> <li> <p> <code>KMS</code> - Server-side encryption which uses AWS Key Management Service. Key is stored in your account and is managed by AWS KMS (KMS charges apply).</p> </li> </ul>"
         },
         "KMSMasterKeyArn": {
           "shape": "KMSMasterKeyArn",
@@ -3539,11 +3830,11 @@
       "members": {
         "Enabled": {
           "shape": "SSEEnabled",
-          "documentation": "<p>Indicates whether server-side encryption is enabled (true) or disabled (false) on the table.</p>"
+          "documentation": "<p>Indicates whether server-side encryption is enabled (true) or disabled (false) on the table. If enabled (true), server-side encryption type is set to <code>KMS</code>. If disabled (false) or not specified, server-side encryption is set to AWS owned CMK.</p>"
         },
         "SSEType": {
           "shape": "SSEType",
-          "documentation": "<p>Server-side encryption type:</p> <ul> <li> <p> <code>AES256</code> - Server-side encryption which uses the AES256 algorithm.</p> </li> <li> <p> <code>KMS</code> - Server-side encryption which uses AWS Key Management Service. (default)</p> </li> </ul>"
+          "documentation": "<p>Server-side encryption type:</p> <ul> <li> <p> <code>AES256</code> - Server-side encryption which uses the AES256 algorithm (not applicable).</p> </li> <li> <p> <code>KMS</code> - Server-side encryption which uses AWS Key Management Service. Key is stored in your account and is managed by AWS KMS (KMS charges apply).</p> </li> </ul>"
         },
         "KMSMasterKeyId": {
           "shape": "KMSMasterKeyId",
@@ -3744,6 +4035,10 @@
         "ItemCount": {
           "shape": "ItemCount",
           "documentation": "<p>Number of items in the table. Please note this is an approximate value. </p>"
+        },
+        "BillingMode": {
+          "shape": "BillingMode",
+          "documentation": "<p>Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later.</p> <ul> <li> <p> <code>PROVISIONED</code> - Sets the read/write capacity mode to <code>PROVISIONED</code>. We recommend using <code>PROVISIONED</code> for predictable workloads.</p> </li> <li> <p> <code>PAY_PER_REQUEST</code> - Sets the read/write capacity mode to <code>PAY_PER_REQUEST</code>. We recommend using <code>PAY_PER_REQUEST</code> for unpredictable workloads. </p> </li> </ul>"
         }
       },
       "documentation": "<p>Contains the details of the table when the backup was created. </p>"
@@ -3865,6 +4160,10 @@
         "TableId": {
           "shape": "TableId",
           "documentation": "<p>Unique identifier for the table for which the backup was created. </p>"
+        },
+        "BillingModeSummary": {
+          "shape": "BillingModeSummary",
+          "documentation": "<p>Contains the details for the read/write capacity mode.</p>"
         },
         "LocalSecondaryIndexes": {
           "shape": "LocalSecondaryIndexDescriptionList",
@@ -4034,6 +4333,123 @@
         "DISABLED"
       ]
     },
+    "TransactGetItem": {
+      "type": "structure",
+      "required": [
+        "Get"
+      ],
+      "members": {
+        "Get": {
+          "shape": "Get",
+          "documentation": "<p>Contains the primary key that identifies the item to get, together with the name of the table that contains the item, and optionally the specific attributes of the item to retrieve.</p>"
+        }
+      },
+      "documentation": "<p>Specifies an item to be retrieved as part of the transaction.</p>"
+    },
+    "TransactGetItemList": {
+      "type": "list",
+      "member": {
+        "shape": "TransactGetItem"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "TransactGetItemsInput": {
+      "type": "structure",
+      "required": [
+        "TransactItems"
+      ],
+      "members": {
+        "TransactItems": {
+          "shape": "TransactGetItemList",
+          "documentation": "<p>An ordered array of up to 10 <code>TransactGetItem</code> objects, each of which contains a <code>Get</code> structure.</p>"
+        },
+        "ReturnConsumedCapacity": {
+          "shape": "ReturnConsumedCapacity",
+          "documentation": "<p>A value of <code>TOTAL</code> causes consumed capacity information to be returned, and a value of <code>NONE</code> prevents that information from being returned. No other value is valid.</p>"
+        }
+      }
+    },
+    "TransactGetItemsOutput": {
+      "type": "structure",
+      "members": {
+        "ConsumedCapacity": {
+          "shape": "ConsumedCapacityMultiple",
+          "documentation": "<p>If the <i>ReturnConsumedCapacity</i> value was <code>TOTAL</code>, this is an array of <code>ConsumedCapacity</code> objects, one for each table addressed by <code>TransactGetItem</code> objects in the <i>TransactItems</i> parameter. These <code>ConsumedCapacity</code> objects report the read-capacity units consumed by the <code>TransactGetItems</code> call in that table.</p>"
+        },
+        "Responses": {
+          "shape": "ItemResponseList",
+          "documentation": "<p>An ordered array of up to 10 <code>ItemResponse</code> objects, each of which corresponds to the <code>TransactGetItem</code> object in the same position in the <i>TransactItems</i> array. Each <code>ItemResponse</code> object contains a Map of the name-value pairs that are the projected attributes of the requested item.</p> <p>If a requested item could not be retrieved, the corresponding <code>ItemResponse</code> object is Null, or if the requested item has no projected attributes, the corresponding <code>ItemResponse</code> object is an empty Map. </p>"
+        }
+      }
+    },
+    "TransactWriteItem": {
+      "type": "structure",
+      "members": {
+        "ConditionCheck": {
+          "shape": "ConditionCheck",
+          "documentation": "<p>A request to perform a check item operation.</p>"
+        },
+        "Put": {
+          "shape": "Put",
+          "documentation": "<p>A request to perform a <code>PutItem</code> operation.</p>"
+        },
+        "Delete": {
+          "shape": "Delete",
+          "documentation": "<p>A request to perform a <code>DeleteItem</code> operation.</p>"
+        },
+        "Update": {
+          "shape": "Update",
+          "documentation": "<p>A request to perform an <code>UpdateItem</code> operation.</p>"
+        }
+      },
+      "documentation": "<p>A list of requests that can perform update, put, delete, or check operations on multiple items in one or more tables atomically.</p>"
+    },
+    "TransactWriteItemList": {
+      "type": "list",
+      "member": {
+        "shape": "TransactWriteItem"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "TransactWriteItemsInput": {
+      "type": "structure",
+      "required": [
+        "TransactItems"
+      ],
+      "members": {
+        "TransactItems": {
+          "shape": "TransactWriteItemList",
+          "documentation": "<p>An ordered array of up to 10 <code>TransactWriteItem</code> objects, each of which contains a <code>ConditionCheck</code>, <code>Put</code>, <code>Update</code>, or <code>Delete</code> object. These can operate on items in different tables, but the tables must reside in the same AWS account and region, and no two of them can operate on the same item. </p>"
+        },
+        "ReturnConsumedCapacity": {
+          "shape": "ReturnConsumedCapacity"
+        },
+        "ReturnItemCollectionMetrics": {
+          "shape": "ReturnItemCollectionMetrics",
+          "documentation": "<p>Determines whether item collection metrics are returned. If set to <code>SIZE</code>, the response includes statistics about item collections (if any), that were modified during the operation and are returned in the response. If set to <code>NONE</code> (the default), no statistics are returned. </p>"
+        },
+        "ClientRequestToken": {
+          "shape": "String",
+          "documentation": "<p>Providing a <code>ClientRequestToken</code> makes the call to <code>TransactWriteItems</code> idempotent, meaning that multiple identical calls have the same effect as one single call.</p> <p>Although multiple identical calls using the same client request token produce the same result on the server (no side effects), the responses to the calls may not be the same. If the <code>ReturnConsumedCapacity&gt;</code> parameter is set, then the initial <code>TransactWriteItems</code> call returns the amount of write capacity units consumed in making the changes, and subsequent <code>TransactWriteItems</code> calls with the same client token return the amount of read capacity units consumed in reading the item.</p> <p>A client request token is valid for 10 minutes after the first request that uses it completes. After 10 minutes, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 10 minutes or the result may not be idempotent.</p> <p>If you submit a request with the same client token but a change in other parameters within the 10 minute idempotency window, DynamoDB returns an <code>IdempotentParameterMismatch</code> exception.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "TransactWriteItemsOutput": {
+      "type": "structure",
+      "members": {
+        "ConsumedCapacity": {
+          "shape": "ConsumedCapacityMultiple",
+          "documentation": "<p>The capacity units consumed by the entire <code>TransactWriteItems</code> operation. The values of the list are ordered according to the ordering of the <code>TransactItems</code> request parameter. </p>"
+        },
+        "ItemCollectionMetrics": {
+          "shape": "ItemCollectionMetricsPerTable",
+          "documentation": "<p>A list of tables that were processed by <code>TransactWriteItems</code> and, for each table, information about any item collections that were affected by individual <code>UpdateItem</code>, <code>PutItem</code> or <code>DeleteItem</code> operations. </p>"
+        }
+      }
+    },
     "UntagResourceInput": {
       "type": "structure",
       "required": [
@@ -4050,6 +4466,45 @@
           "documentation": "<p>A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the Amazon DynamoDB resource.</p>"
         }
       }
+    },
+    "Update": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "UpdateExpression",
+        "TableName"
+      ],
+      "members": {
+        "Key": {
+          "shape": "Key",
+          "documentation": "<p>The primary key of the item to be updated. Each element consists of an attribute name and a value for that attribute.</p>"
+        },
+        "UpdateExpression": {
+          "shape": "UpdateExpression",
+          "documentation": "<p>An expression that defines one or more attributes to be updated, the action to be performed on them, and new value(s) for them.</p>"
+        },
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>Name of the table for the <code>UpdateItem</code> request.</p>"
+        },
+        "ConditionExpression": {
+          "shape": "ConditionExpression",
+          "documentation": "<p>A condition that must be satisfied in order for a conditional update to succeed.</p>"
+        },
+        "ExpressionAttributeNames": {
+          "shape": "ExpressionAttributeNameMap",
+          "documentation": "<p>One or more substitution tokens for attribute names in an expression.</p>"
+        },
+        "ExpressionAttributeValues": {
+          "shape": "ExpressionAttributeValueMap",
+          "documentation": "<p>One or more values that can be substituted in an expression.</p>"
+        },
+        "ReturnValuesOnConditionCheckFailure": {
+          "shape": "ReturnValuesOnConditionCheckFailure",
+          "documentation": "<p>Use <code>ReturnValuesOnConditionCheckFailure</code> to get the item attributes if the <code>Update</code> condition fails. For <code>ReturnValuesOnConditionCheckFailure</code>, the valid values are: NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to perform an <code>UpdateItem</code> operation.</p>"
     },
     "UpdateContinuousBackupsInput": {
       "type": "structure",
@@ -4133,6 +4588,10 @@
         "GlobalTableName": {
           "shape": "TableName",
           "documentation": "<p>The name of the global table</p>"
+        },
+        "GlobalTableBillingMode": {
+          "shape": "BillingMode",
+          "documentation": "<p>The billing mode of the global table. If <code>GlobalTableBillingMode</code> is not specified, the global table defaults to <code>PROVISIONED</code> capacity billing mode.</p>"
         },
         "GlobalTableProvisionedWriteCapacityUnits": {
           "shape": "PositiveLongObject",
@@ -4253,6 +4712,10 @@
         "TableName": {
           "shape": "TableName",
           "documentation": "<p>The name of the table to be updated.</p>"
+        },
+        "BillingMode": {
+          "shape": "BillingMode",
+          "documentation": "<p>Controls how you are charged for read and write throughput and how you manage capacity. When switching from pay-per-request to provisioned capacity, initial provisioned capacity values must be set. The initial provisioned capacity values are estimated based on the consumed read and write capacity of your table and global secondary indexes over the past 30 minutes.</p> <ul> <li> <p> <code>PROVISIONED</code> - Sets the billing mode to <code>PROVISIONED</code>. We recommend using <code>PROVISIONED</code> for predictable workloads.</p> </li> <li> <p> <code>PAY_PER_REQUEST</code> - Sets the billing mode to <code>PAY_PER_REQUEST</code>. We recommend using <code>PAY_PER_REQUEST</code> for unpredictable workloads. </p> </li> </ul>"
         },
         "ProvisionedThroughput": {
           "shape": "ProvisionedThroughput",

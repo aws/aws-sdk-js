@@ -363,6 +363,12 @@
         },
         {
           "shape": "DBSubnetGroupDoesNotCoverEnoughAZs"
+        },
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidGlobalClusterStateFault"
         }
       ],
       "documentation": "<p>Creates a new Amazon Aurora DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL DB instance. For cross-region replication where the DB cluster identified by <code>ReplicationSourceIdentifier</code> is encrypted, you must also specify the <code>PreSignedUrl</code> parameter.</p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>"
@@ -750,6 +756,35 @@
       ],
       "documentation": "<p>Creates an RDS event notification subscription. This action requires a topic ARN (Amazon Resource Name) created by either the RDS console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the type of source (SourceType) you want to be notified of, provide a list of RDS sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup.</p> <p>If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your RDS sources. If you do not specify either the SourceType nor the SourceIdentifier, you are notified of events generated from all RDS sources belonging to your customer account.</p>"
     },
+    "CreateGlobalCluster": {
+      "name": "CreateGlobalCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateGlobalClusterMessage"
+      },
+      "output": {
+        "shape": "CreateGlobalClusterResult",
+        "resultWrapper": "CreateGlobalClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterAlreadyExistsFault"
+        },
+        {
+          "shape": "GlobalClusterQuotaExceededFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "DBClusterNotFoundFault"
+        }
+      ],
+      "documentation": "<p> </p> <p> Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p>"
+    },
     "CreateOptionGroup": {
       "name": "CreateOptionGroup",
       "http": {
@@ -1036,6 +1071,29 @@
         }
       ],
       "documentation": "<p>Deletes an RDS event notification subscription.</p>"
+    },
+    "DeleteGlobalCluster": {
+      "name": "DeleteGlobalCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteGlobalClusterMessage"
+      },
+      "output": {
+        "shape": "DeleteGlobalClusterResult",
+        "resultWrapper": "DeleteGlobalClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidGlobalClusterStateFault"
+        }
+      ],
+      "documentation": "<p> Deletes a global database cluster. The primary and secondary clusters must already be detached or destroyed first. </p>"
     },
     "DeleteOptionGroup": {
       "name": "DeleteOptionGroup",
@@ -1508,6 +1566,26 @@
         "resultWrapper": "DescribeEventsResult"
       },
       "documentation": "<p>Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. Events specific to a particular DB instance, DB security group, database snapshot, or DB parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.</p>"
+    },
+    "DescribeGlobalClusters": {
+      "name": "DescribeGlobalClusters",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeGlobalClustersMessage"
+      },
+      "output": {
+        "shape": "GlobalClustersMessage",
+        "resultWrapper": "DescribeGlobalClustersResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        }
+      ],
+      "documentation": "<p> Returns information about Aurora global database clusters. This API supports pagination. </p> <p> For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>"
     },
     "DescribeOptionGroupOptions": {
       "name": "DescribeOptionGroupOptions",
@@ -2093,6 +2171,29 @@
       ],
       "documentation": "<p>Modifies an existing RDS event notification subscription. Note that you can't modify the source identifiers using this call; to change source identifiers for a subscription, use the <a>AddSourceIdentifierToSubscription</a> and <a>RemoveSourceIdentifierFromSubscription</a> calls.</p> <p>You can see a list of the event categories for a given SourceType in the <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">Events</a> topic in the <i>Amazon RDS User Guide</i> or by using the <b>DescribeEventCategories</b> action.</p>"
     },
+    "ModifyGlobalCluster": {
+      "name": "ModifyGlobalCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyGlobalClusterMessage"
+      },
+      "output": {
+        "shape": "ModifyGlobalClusterResult",
+        "resultWrapper": "ModifyGlobalClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidGlobalClusterStateFault"
+        }
+      ],
+      "documentation": "<p> Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>"
+    },
     "ModifyOptionGroup": {
       "name": "ModifyOptionGroup",
       "http": {
@@ -2210,6 +2311,32 @@
         }
       ],
       "documentation": "<p>You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect. </p> <p>Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. </p> <p>For more information about rebooting, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html\">Rebooting a DB Instance</a> in the <i>Amazon RDS User Guide.</i> </p>"
+    },
+    "RemoveFromGlobalCluster": {
+      "name": "RemoveFromGlobalCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RemoveFromGlobalClusterMessage"
+      },
+      "output": {
+        "shape": "RemoveFromGlobalClusterResult",
+        "resultWrapper": "RemoveFromGlobalClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidGlobalClusterStateFault"
+        },
+        {
+          "shape": "DBClusterNotFoundFault"
+        }
+      ],
+      "documentation": "<p> Detaches an Aurora secondary cluster from an Aurora global database cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary cluster in a different region. </p>"
     },
     "RemoveRoleFromDBCluster": {
       "name": "RemoveRoleFromDBCluster",
@@ -3579,7 +3706,7 @@
         },
         "EngineMode": {
           "shape": "String",
-          "documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.</p>"
+          "documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, or <code>global</code>.</p>"
         },
         "ScalingConfiguration": {
           "shape": "ScalingConfiguration",
@@ -3588,6 +3715,10 @@
         "DeletionProtection": {
           "shape": "BooleanOptional",
           "documentation": "<p>Indicates if the DB cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false. </p>"
+        },
+        "GlobalClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p> The global cluster ID of an Aurora cluster that becomes the primary cluster in the new global database cluster. </p>"
         },
         "SourceRegion": {
           "shape": "String",
@@ -3710,7 +3841,7 @@
         },
         "VpcSecurityGroupIds": {
           "shape": "VpcSecurityGroupIdList",
-          "documentation": "<p>A list of EC2 VPC security groups to associate with this DB instance.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. For more information, see <a>CreateDBCluster</a>.</p> <p>Default: The default EC2 VPC security group for the DB subnet group's VPC.</p>"
+          "documentation": "<p>A list of Amazon EC2 VPC security groups to associate with this DB instance.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. For more information, see <a>CreateDBCluster</a>.</p> <p>Default: The default EC2 VPC security group for the DB subnet group's VPC.</p>"
         },
         "AvailabilityZone": {
           "shape": "String",
@@ -3742,7 +3873,7 @@
         },
         "MultiAZ": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Specifies if the DB instance is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the MultiAZ parameter is set to true.</p>"
+          "documentation": "<p>A value that specifies whether the DB instance is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the MultiAZ parameter is set to true.</p>"
         },
         "EngineVersion": {
           "shape": "String",
@@ -4165,6 +4296,47 @@
         }
       }
     },
+    "CreateGlobalClusterMessage": {
+      "type": "structure",
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The cluster identifier of the new global database cluster.</p>"
+        },
+        "SourceDBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p> The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. </p>"
+        },
+        "Engine": {
+          "shape": "String",
+          "documentation": "<p>Provides the name of the database engine to be used for this DB cluster.</p>"
+        },
+        "EngineVersion": {
+          "shape": "String",
+          "documentation": "<p>The engine version of the Aurora global database.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p> The deletion protection setting for the new global database. The global database can't be deleted when this value is set to true. </p>"
+        },
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p> The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon Aurora will not create a database in the global database cluster you are creating. </p>"
+        },
+        "StorageEncrypted": {
+          "shape": "BooleanOptional",
+          "documentation": "<p> The storage encryption setting for the new global database cluster. </p>"
+        }
+      }
+    },
+    "CreateGlobalClusterResult": {
+      "type": "structure",
+      "members": {
+        "GlobalCluster": {
+          "shape": "GlobalCluster"
+        }
+      }
+    },
     "CreateOptionGroupMessage": {
       "type": "structure",
       "required": [
@@ -4380,6 +4552,10 @@
         "DeletionProtection": {
           "shape": "Boolean",
           "documentation": "<p>Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when this value is set to true. </p>"
+        },
+        "HttpEndpointEnabled": {
+          "shape": "Boolean",
+          "documentation": "<note> <p>HTTP endpoint functionality is in beta for Aurora Serverless and is subject to change.</p> </note> <p>Value that is <code>true</code> if the HTTP endpoint for an Aurora Serverless DB cluster is enabled and <code>false</code> otherwise.</p> <p>When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor.</p> <p>For more information about Aurora Serverless, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a>, <a>StopDBCluster</a>, and <a>StartDBCluster</a> actions. </p>",
@@ -5927,6 +6103,26 @@
         }
       }
     },
+    "DeleteGlobalClusterMessage": {
+      "type": "structure",
+      "required": [
+        "GlobalClusterIdentifier"
+      ],
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p> The cluster identifier of the global database cluster being deleted. </p>"
+        }
+      }
+    },
+    "DeleteGlobalClusterResult": {
+      "type": "structure",
+      "members": {
+        "GlobalCluster": {
+          "shape": "GlobalCluster"
+        }
+      }
+    },
     "DeleteOptionGroupMessage": {
       "type": "structure",
       "required": [
@@ -6619,6 +6815,27 @@
       },
       "documentation": "<p/>"
     },
+    "DescribeGlobalClustersMessage": {
+      "type": "structure",
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p> The user-supplied DB cluster identifier. If this parameter is specified, information from only the specific DB cluster is returned. This parameter isn't case-sensitive. </p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match an existing DBClusterIdentifier.</p> </li> </ul>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>A filter that specifies one or more global DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> </ul>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous <a>DescribeGlobalClusters</a> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        }
+      }
+    },
     "DescribeOptionGroupOptionsMessage": {
       "type": "structure",
       "required": [
@@ -7205,6 +7422,9 @@
     },
     "FailoverDBClusterMessage": {
       "type": "structure",
+      "required": [
+        "DBClusterIdentifier"
+      ],
       "members": {
         "DBClusterIdentifier": {
           "shape": "String",
@@ -7255,6 +7475,99 @@
       "member": {
         "shape": "String",
         "locationName": "Value"
+      }
+    },
+    "GlobalCluster": {
+      "type": "structure",
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p> Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database cluster. </p>"
+        },
+        "GlobalClusterResourceId": {
+          "shape": "String",
+          "documentation": "<p> The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed. </p>"
+        },
+        "GlobalClusterArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the global database cluster.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>Specifies the current state of this global database cluster.</p>"
+        },
+        "Engine": {
+          "shape": "String",
+          "documentation": "<p> The Aurora database engine used by the global database cluster. </p>"
+        },
+        "EngineVersion": {
+          "shape": "String",
+          "documentation": "<p>Indicates the database engine version.</p>"
+        },
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p> The default database name within the new global database cluster. </p>"
+        },
+        "StorageEncrypted": {
+          "shape": "BooleanOptional",
+          "documentation": "<p> The storage encryption setting for the global database cluster. </p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p> The deletion protection setting for the new global database cluster. </p>"
+        },
+        "GlobalClusterMembers": {
+          "shape": "GlobalClusterMemberList",
+          "documentation": "<p> The list of cluster IDs for secondary clusters within the global database cluster. Currently limited to 1 item. </p>"
+        }
+      },
+      "documentation": "<p>A data type representing an Aurora global database.</p>",
+      "wrapper": true
+    },
+    "GlobalClusterList": {
+      "type": "list",
+      "member": {
+        "shape": "GlobalCluster",
+        "locationName": "GlobalClusterMember"
+      }
+    },
+    "GlobalClusterMember": {
+      "type": "structure",
+      "members": {
+        "DBClusterArn": {
+          "shape": "String",
+          "documentation": "<p> The Amazon Resource Name (ARN) for each Aurora cluster. </p>"
+        },
+        "Readers": {
+          "shape": "ReadersArnList",
+          "documentation": "<p> The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global database. </p>"
+        },
+        "IsWriter": {
+          "shape": "Boolean",
+          "documentation": "<p> Specifies whether the Aurora cluster is the primary cluster (that is, has read-write capability) for the Aurora global database with which it is associated. </p>"
+        }
+      },
+      "documentation": "<p> A data structure with information about any primary and secondary clusters associated with an Aurora global database. </p>",
+      "wrapper": true
+    },
+    "GlobalClusterMemberList": {
+      "type": "list",
+      "member": {
+        "shape": "GlobalClusterMember",
+        "locationName": "GlobalClusterMember"
+      }
+    },
+    "GlobalClustersMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "GlobalClusters": {
+          "shape": "GlobalClusterList",
+          "documentation": "<p> The list of global clusters returned by this request. </p>"
+        }
       }
     },
     "IPRange": {
@@ -7461,6 +7774,10 @@
         "DeletionProtection": {
           "shape": "BooleanOptional",
           "documentation": "<p>Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when this value is set to true. </p>"
+        },
+        "EnableHttpEndpoint": {
+          "shape": "BooleanOptional",
+          "documentation": "<note> <p>HTTP endpoint functionality is in beta for Aurora Serverless and is subject to change.</p> </note> <p>A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.</p> <p>When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor.</p> <p>For more information about Aurora Serverless, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>"
         }
       },
       "documentation": "<p/>"
@@ -7846,6 +8163,31 @@
       "members": {
         "EventSubscription": {
           "shape": "EventSubscription"
+        }
+      }
+    },
+    "ModifyGlobalClusterMessage": {
+      "type": "structure",
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p> The DB cluster identifier for the global cluster being modified. This parameter is not case-sensitive. </p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing global database cluster.</p> </li> </ul>"
+        },
+        "NewGlobalClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p> The new cluster identifier for the global database cluster when modifying a global database cluster. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens</p> </li> <li> <p>The first character must be a letter</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p> Indicates if the global database cluster has deletion protection enabled. The global database cluster can't be deleted when this value is set to true. </p>"
+        }
+      }
+    },
+    "ModifyGlobalClusterResult": {
+      "type": "structure",
+      "members": {
+        "GlobalCluster": {
+          "shape": "GlobalCluster"
         }
       }
     },
@@ -8744,6 +9086,12 @@
         "locationName": "ReadReplicaIdentifier"
       }
     },
+    "ReadersArnList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "RebootDBInstanceMessage": {
       "type": "structure",
       "required": [
@@ -8789,6 +9137,27 @@
       "member": {
         "shape": "RecurringCharge",
         "locationName": "RecurringCharge"
+      }
+    },
+    "RemoveFromGlobalClusterMessage": {
+      "type": "structure",
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p> The cluster identifier to detach from the Aurora global database cluster. </p>"
+        },
+        "DbClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p> The Amazon Resource Name (ARN) identifying the cluster that was detached from the Aurora global database cluster. </p>"
+        }
+      }
+    },
+    "RemoveFromGlobalClusterResult": {
+      "type": "structure",
+      "members": {
+        "GlobalCluster": {
+          "shape": "GlobalCluster"
+        }
       }
     },
     "RemoveRoleFromDBClusterMessage": {

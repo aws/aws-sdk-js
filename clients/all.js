@@ -161,5 +161,7 @@ module.exports = {
   GlobalAccelerator: require('./globalaccelerator'),
   ComprehendMedical: require('./comprehendmedical'),
   KinesisAnalyticsV2: require('./kinesisanalyticsv2'),
-  MediaConnect: require('./mediaconnect')
+  MediaConnect: require('./mediaconnect'),
+  FSx: require('./fsx'),
+  SecurityHub: require('./securityhub')
 };

@@ -649,5 +649,11 @@
   },
   "mediaconnect": {
     "name": "MediaConnect"
+  },
+  "fsx": {
+    "name": "FSx"
+  },
+  "securityhub": {
+    "name": "SecurityHub"
   }
 }
