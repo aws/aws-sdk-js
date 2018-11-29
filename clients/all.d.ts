@@ -162,3 +162,5 @@ export import KinesisAnalyticsV2 = require('./kinesisanalyticsv2');
 export import MediaConnect = require('./mediaconnect');
 export import FSx = require('./fsx');
 export import SecurityHub = require('./securityhub');
+export import AppMesh = require('./appmesh');
+export import LicenseManager = require('./licensemanager');

@@ -163,5 +163,7 @@ module.exports = {
   KinesisAnalyticsV2: require('./kinesisanalyticsv2'),
   MediaConnect: require('./mediaconnect'),
   FSx: require('./fsx'),
-  SecurityHub: require('./securityhub')
+  SecurityHub: require('./securityhub'),
+  AppMesh: require('./appmesh'),
+  LicenseManager: require('./licensemanager')
 };

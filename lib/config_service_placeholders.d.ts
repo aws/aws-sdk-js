@@ -164,6 +164,8 @@ export abstract class ConfigurationServicePlaceholders {
   mediaconnect?: AWS.MediaConnect.Types.ClientConfiguration;
   fsx?: AWS.FSx.Types.ClientConfiguration;
   securityhub?: AWS.SecurityHub.Types.ClientConfiguration;
+  appmesh?: AWS.AppMesh.Types.ClientConfiguration;
+  licensemanager?: AWS.LicenseManager.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -330,4 +332,6 @@ export interface ConfigurationServiceApiVersions {
   mediaconnect?: AWS.MediaConnect.Types.apiVersion;
   fsx?: AWS.FSx.Types.apiVersion;
   securityhub?: AWS.SecurityHub.Types.apiVersion;
+  appmesh?: AWS.AppMesh.Types.apiVersion;
+  licensemanager?: AWS.LicenseManager.Types.apiVersion;
 }
