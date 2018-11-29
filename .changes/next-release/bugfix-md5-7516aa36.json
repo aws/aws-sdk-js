@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "md5",
+  "description": "enable SDK to calculate content MD5 for more new S3 operations"
+}
