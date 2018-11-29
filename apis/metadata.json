@@ -662,5 +662,8 @@
   "licensemanager": {
     "prefix": "license-manager",
     "name": "LicenseManager"
+  },
+  "kafka": {
+    "name": "Kafka"
   }
 }

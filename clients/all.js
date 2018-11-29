@@ -165,5 +165,6 @@ module.exports = {
   FSx: require('./fsx'),
   SecurityHub: require('./securityhub'),
   AppMesh: require('./appmesh'),
-  LicenseManager: require('./licensemanager')
+  LicenseManager: require('./licensemanager'),
+  Kafka: require('./kafka')
 };

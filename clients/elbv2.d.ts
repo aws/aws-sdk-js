@@ -13,11 +13,11 @@ declare class ELBv2 extends Service {
   constructor(options?: ELBv2.Types.ClientConfiguration)
   config: Config & ELBv2.Types.ClientConfiguration;
   /**
-   * Adds the specified certificate to the specified secure listener. If the certificate was already added, the call is successful but the certificate is not added again. To list the certificates for your listener, use DescribeListenerCertificates. To remove certificates from your listener, use RemoveListenerCertificates.
+   * Adds the specified certificate to the specified secure listener. If the certificate was already added, the call is successful but the certificate is not added again. To list the certificates for your listener, use DescribeListenerCertificates. To remove certificates from your listener, use RemoveListenerCertificates. To specify the default SSL server certificate, use ModifyListener.
    */
   addListenerCertificates(params: ELBv2.Types.AddListenerCertificatesInput, callback?: (err: AWSError, data: ELBv2.Types.AddListenerCertificatesOutput) => void): Request<ELBv2.Types.AddListenerCertificatesOutput, AWSError>;
   /**
-   * Adds the specified certificate to the specified secure listener. If the certificate was already added, the call is successful but the certificate is not added again. To list the certificates for your listener, use DescribeListenerCertificates. To remove certificates from your listener, use RemoveListenerCertificates.
+   * Adds the specified certificate to the specified secure listener. If the certificate was already added, the call is successful but the certificate is not added again. To list the certificates for your listener, use DescribeListenerCertificates. To remove certificates from your listener, use RemoveListenerCertificates. To specify the default SSL server certificate, use ModifyListener.
    */
   addListenerCertificates(callback?: (err: AWSError, data: ELBv2.Types.AddListenerCertificatesOutput) => void): Request<ELBv2.Types.AddListenerCertificatesOutput, AWSError>;
   /**
@@ -141,6 +141,14 @@ declare class ELBv2 extends Service {
    */
   describeLoadBalancers(callback?: (err: AWSError, data: ELBv2.Types.DescribeLoadBalancersOutput) => void): Request<ELBv2.Types.DescribeLoadBalancersOutput, AWSError>;
   /**
+   * 
+   */
+  describeProvisionedCapacity(params: ELBv2.Types.DescribeProvisionedCapacityInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeProvisionedCapacityOutput) => void): Request<ELBv2.Types.DescribeProvisionedCapacityOutput, AWSError>;
+  /**
+   * 
+   */
+  describeProvisionedCapacity(callback?: (err: AWSError, data: ELBv2.Types.DescribeProvisionedCapacityOutput) => void): Request<ELBv2.Types.DescribeProvisionedCapacityOutput, AWSError>;
+  /**
    * Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules.
    */
   describeRules(params: ELBv2.Types.DescribeRulesInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeRulesOutput) => void): Request<ELBv2.Types.DescribeRulesOutput, AWSError>;
@@ -205,6 +213,14 @@ declare class ELBv2 extends Service {
    */
   modifyLoadBalancerAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyLoadBalancerAttributesOutput) => void): Request<ELBv2.Types.ModifyLoadBalancerAttributesOutput, AWSError>;
   /**
+   * 
+   */
+  modifyProvisionedCapacity(params: ELBv2.Types.ModifyProvisionedCapacityInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyProvisionedCapacityOutput) => void): Request<ELBv2.Types.ModifyProvisionedCapacityOutput, AWSError>;
+  /**
+   * 
+   */
+  modifyProvisionedCapacity(callback?: (err: AWSError, data: ELBv2.Types.ModifyProvisionedCapacityOutput) => void): Request<ELBv2.Types.ModifyProvisionedCapacityOutput, AWSError>;
+  /**
    * Modifies the specified rule. Any existing properties that you do not modify retain their current values. To modify the actions for the default rule, use ModifyListener.
    */
   modifyRule(params: ELBv2.Types.ModifyRuleInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyRuleOutput) => void): Request<ELBv2.Types.ModifyRuleOutput, AWSError>;
@@ -229,11 +245,11 @@ declare class ELBv2 extends Service {
    */
   modifyTargetGroupAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyTargetGroupAttributesOutput) => void): Request<ELBv2.Types.ModifyTargetGroupAttributesOutput, AWSError>;
   /**
-   * Registers the specified targets with the specified target group. You can register targets by instance ID or by IP address. If the target is an EC2 instance, it must be in the running state when you register it. By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports. With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address. To remove a target from a target group, use DeregisterTargets.
+   * Registers the specified targets with the specified target group. If the target is an EC2 instance, it must be in the running state when you register it. By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports. With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address. To remove a target from a target group, use DeregisterTargets.
    */
   registerTargets(params: ELBv2.Types.RegisterTargetsInput, callback?: (err: AWSError, data: ELBv2.Types.RegisterTargetsOutput) => void): Request<ELBv2.Types.RegisterTargetsOutput, AWSError>;
   /**
-   * Registers the specified targets with the specified target group. You can register targets by instance ID or by IP address. If the target is an EC2 instance, it must be in the running state when you register it. By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports. With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address. To remove a target from a target group, use DeregisterTargets.
+   * Registers the specified targets with the specified target group. If the target is an EC2 instance, it must be in the running state when you register it. By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports. With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address. To remove a target from a target group, use DeregisterTargets.
    */
   registerTargets(callback?: (err: AWSError, data: ELBv2.Types.RegisterTargetsOutput) => void): Request<ELBv2.Types.RegisterTargetsOutput, AWSError>;
   /**
@@ -357,7 +373,7 @@ declare namespace ELBv2 {
     FixedResponseConfig?: FixedResponseActionConfig;
   }
   export type ActionOrder = number;
-  export type ActionTypeEnum = "forward"|"authenticate-oidc"|"authenticate-cognito"|"redirect"|"fixed-response"|string;
+  export type ActionTypeEnum = "forward"|"authenticate-oidc"|"redirect"|"authenticate-cognito"|"fixed-response"|string;
   export type Actions = Action[];
   export interface AddListenerCertificatesInput {
     /**
@@ -365,7 +381,7 @@ declare namespace ELBv2 {
      */
     ListenerArn: ListenerArn;
     /**
-     * The certificate to add. You can specify one certificate per call.
+     * The certificate to add. You can specify one certificate per call. Set CertificateArn to the certificate ARN but do not set IsDefault.
      */
     Certificates: CertificateList;
   }
@@ -463,7 +479,7 @@ declare namespace ELBv2 {
     /**
      * The OAuth 2.0 client secret.
      */
-    ClientSecret: AuthenticateOidcActionClientSecret;
+    ClientSecret?: AuthenticateOidcActionClientSecret;
     /**
      * The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
      */
@@ -484,12 +500,14 @@ declare namespace ELBv2 {
      * The behavior if the user is not authenticated. The following are possible values:   deny - Return an HTTP 401 Unauthorized error.   allow - Allow the request to be forwarded to the target.   authenticate - Redirect the request to the IdP authorization endpoint. This is the default value.  
      */
     OnUnauthenticatedRequest?: AuthenticateOidcActionConditionalBehaviorEnum;
+    UseExistingClientSecret?: AuthenticateOidcActionUseExistingClientSecret;
   }
   export type AuthenticateOidcActionIssuer = string;
   export type AuthenticateOidcActionScope = string;
   export type AuthenticateOidcActionSessionCookieName = string;
   export type AuthenticateOidcActionSessionTimeout = number;
   export type AuthenticateOidcActionTokenEndpoint = string;
+  export type AuthenticateOidcActionUseExistingClientSecret = boolean;
   export type AuthenticateOidcActionUserInfoEndpoint = string;
   export interface AvailabilityZone {
     /**
@@ -504,6 +522,7 @@ declare namespace ELBv2 {
      * [Network Load Balancers] The static IP address.
      */
     LoadBalancerAddresses?: LoadBalancerAddresses;
+    StaticIp?: StaticIp;
   }
   export type AvailabilityZones = AvailabilityZone[];
   export type CanonicalHostedZoneId = string;
@@ -513,7 +532,7 @@ declare namespace ELBv2 {
      */
     CertificateArn?: CertificateArn;
     /**
-     * Indicates whether the certificate is the default certificate.
+     * Indicates whether the certificate is the default certificate. Do not set IsDefault when specifying a certificate as an input parameter.
      */
     IsDefault?: Default;
   }
@@ -551,11 +570,11 @@ declare namespace ELBv2 {
      */
     SslPolicy?: SslPolicyName;
     /**
-     * [HTTPS listeners] The default SSL server certificate. You must provide exactly one default certificate. To create a certificate list, use AddListenerCertificates.
+     * [HTTPS listeners] The default SSL server certificate. You must provide exactly one certificate. Set CertificateArn to the certificate ARN but do not set IsDefault. To create a certificate list, use AddListenerCertificates.
      */
     Certificates?: CertificateList;
     /**
-     * The actions for the default rule. The rule must include one forward action or one or more fixed-response actions. If the action type is forward, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer. [HTTPS listener] If the action type is authenticate-oidc, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application. [HTTPS listener] If the action type is authenticate-cognito, you can use Amazon Cognito to authenticate users as they access your application. [Application Load Balancer] If the action type is redirect, you can redirect HTTP and HTTPS requests. [Application Load Balancer] If the action type is fixed-response, you can return a custom HTTP response.
+     * The actions for the default rule. The rule must include one forward action or one or more fixed-response actions. If the action type is forward, you specify a target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer. [HTTPS listener] If the action type is authenticate-oidc, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant. [HTTPS listener] If the action type is authenticate-cognito, you authenticate users through the user pools supported by Amazon Cognito. [Application Load Balancer] If the action type is redirect, you redirect specified client requests from one URL to another. [Application Load Balancer] If the action type is fixed-response, you drop specified client requests and return a custom HTTP response.
      */
     DefaultActions: Actions;
   }
@@ -619,7 +638,7 @@ declare namespace ELBv2 {
      */
     Priority: RulePriority;
     /**
-     * The actions. Each rule must include exactly one of the following types of actions: forward, fixed-response, or redirect. If the action type is forward, you can specify a single target group. [HTTPS listener] If the action type is authenticate-oidc, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application. [HTTPS listener] If the action type is authenticate-cognito, you can use Amazon Cognito to authenticate users as they access your application. [Application Load Balancer] If the action type is redirect, you can redirect HTTP and HTTPS requests. [Application Load Balancer] If the action type is fixed-response, you can return a custom HTTP response.
+     * The actions. Each rule must include exactly one of the following types of actions: forward, fixed-response, or redirect. If the action type is forward, you specify a target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer. [HTTPS listener] If the action type is authenticate-oidc, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant. [HTTPS listener] If the action type is authenticate-cognito, you authenticate users through the user pools supported by Amazon Cognito. [Application Load Balancer] If the action type is redirect, you redirect specified client requests from one URL to another. [Application Load Balancer] If the action type is fixed-response, you drop specified client requests and return a custom HTTP response.
      */
     Actions: Actions;
   }
@@ -635,17 +654,17 @@ declare namespace ELBv2 {
      */
     Name: TargetGroupName;
     /**
-     * The protocol to use for routing traffic to the targets. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocol is TCP.
+     * The protocol to use for routing traffic to the targets. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocol is TCP. If the target is a Lambda function, this parameter does not apply.
      */
-    Protocol: ProtocolEnum;
+    Protocol?: ProtocolEnum;
     /**
-     * The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target.
+     * The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply.
      */
-    Port: Port;
+    Port?: Port;
     /**
-     * The identifier of the virtual private cloud (VPC).
+     * The identifier of the virtual private cloud (VPC). If the target is a Lambda function, this parameter does not apply.
      */
-    VpcId: VpcId;
+    VpcId?: VpcId;
     /**
      * The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported only if the protocol of the target group is TCP. For Application Load Balancers, the default is HTTP. For Network Load Balancers, the default is TCP.
      */
@@ -655,15 +674,19 @@ declare namespace ELBv2 {
      */
     HealthCheckPort?: HealthCheckPort;
     /**
+     * Indicates whether health checks are enabled. If the target type is instance or ip, the default is true. If the target type is lambda, the default is false.
+     */
+    HealthCheckEnabled?: HealthCheckEnabled;
+    /**
      * [HTTP/HTTPS health checks] The ping path that is the destination on the targets for health checks. The default is /.
      */
     HealthCheckPath?: Path;
     /**
-     * The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. The default is 30 seconds.
+     * The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. If the target type is instance or ip, the default is 30 seconds. If the target type is lambda, the default is 35 seconds.
      */
     HealthCheckIntervalSeconds?: HealthCheckIntervalSeconds;
     /**
-     * The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2–60 seconds and the default is 5 seconds. For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.
+     * The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2–120 seconds and the default is 5 seconds if the target type is instance or ip and 30 seconds if the target type is lambda. For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.
      */
     HealthCheckTimeoutSeconds?: HealthCheckTimeoutSeconds;
     /**
@@ -679,7 +702,7 @@ declare namespace ELBv2 {
      */
     Matcher?: Matcher;
     /**
-     * The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address). The default is instance. You can't specify targets for a target group using both instance IDs and IP addresses. If the target type is ip, specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses.
+     * The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type.    instance - Targets are specified by instance ID. This is the default value.    ip - Targets are specified by IP address. You can specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses.    lambda - The target groups contains a single Lambda function.  
      */
     TargetType?: TargetTypeEnum;
   }
@@ -691,6 +714,7 @@ declare namespace ELBv2 {
   }
   export type CreatedTime = Date;
   export type DNSName = string;
+  export type DecreasesRemaining = number;
   export type Default = boolean;
   export interface DeleteListenerInput {
     /**
@@ -848,6 +872,12 @@ declare namespace ELBv2 {
      */
     NextMarker?: Marker;
   }
+  export interface DescribeProvisionedCapacityInput {
+    LoadBalancerArn: LoadBalancerArn;
+  }
+  export interface DescribeProvisionedCapacityOutput {
+    ProvisionedCapacity?: ProvisionedCapacity;
+  }
   export interface DescribeRulesInput {
     /**
      * The Amazon Resource Name (ARN) of the listener.
@@ -990,14 +1020,30 @@ declare namespace ELBv2 {
   export type FixedResponseActionContentType = string;
   export type FixedResponseActionMessage = string;
   export type FixedResponseActionStatusCode = string;
+  export type HealthCheckEnabled = boolean;
   export type HealthCheckIntervalSeconds = number;
   export type HealthCheckPort = string;
   export type HealthCheckThresholdCount = number;
   export type HealthCheckTimeoutSeconds = number;
+  export interface HostHeaderConditionConfig {
+    Values?: ListOfString;
+  }
   export type HttpCode = string;
+  export interface HttpHeaderConditionConfig {
+    HttpHeaderName?: HttpHeaderConditionName;
+    Values?: ListOfString;
+  }
+  export type HttpHeaderConditionName = string;
+  export interface HttpRequestMethodConditionConfig {
+    Values?: HttpRequestMethodList;
+  }
+  export type HttpRequestMethodEnum = "GET"|"HEAD"|"POST"|"PUT"|"DELETE"|"CONNECT"|"OPTIONS"|"TRACE"|"PATCH"|string;
+  export type HttpRequestMethodList = HttpRequestMethodEnum[];
   export type IpAddress = string;
   export type IpAddressType = "ipv4"|"dualstack"|string;
   export type IsDefault = boolean;
+  export type LBCapacityUnits = number;
+  export type LastModifiedTime = Date;
   export interface Limit {
     /**
      * The name of the limit. The possible values are:   application-load-balancers   listeners-per-application-load-balancer   listeners-per-network-load-balancer   network-load-balancers   rules-per-application-load-balancer   target-groups   targets-per-application-load-balancer   targets-per-availability-zone-per-network-load-balancer   targets-per-network-load-balancer  
@@ -1161,11 +1207,11 @@ declare namespace ELBv2 {
      */
     SslPolicy?: SslPolicyName;
     /**
-     * [HTTPS listeners] The default SSL server certificate. You must provide exactly one default certificate. To create a certificate list, use AddListenerCertificates.
+     * [HTTPS listeners] The default SSL server certificate. You must provide exactly one certificate. Set CertificateArn to the certificate ARN but do not set IsDefault. To create a certificate list, use AddListenerCertificates.
      */
     Certificates?: CertificateList;
     /**
-     * The actions for the default rule. The rule must include one forward action or one or more fixed-response actions. If the action type is forward, you can specify a single target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer. [HTTPS listener] If the action type is authenticate-oidc, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application. [HTTPS listener] If the action type is authenticate-cognito, you can use Amazon Cognito to authenticate users as they access your application. [Application Load Balancer] If the action type is redirect, you can redirect HTTP and HTTPS requests. [Application Load Balancer] If the action type is fixed-response, you can return a custom HTTP response.
+     * The actions for the default rule. The rule must include one forward action or one or more fixed-response actions. If the action type is forward, you specify a target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer. [HTTPS listener] If the action type is authenticate-oidc, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant. [HTTPS listener] If the action type is authenticate-cognito, you authenticate users through the user pools supported by Amazon Cognito. [Application Load Balancer] If the action type is redirect, you redirect specified client requests from one URL to another. [Application Load Balancer] If the action type is fixed-response, you drop specified client requests and return a custom HTTP response.
      */
     DefaultActions?: Actions;
   }
@@ -1191,6 +1237,13 @@ declare namespace ELBv2 {
      */
     Attributes?: LoadBalancerAttributes;
   }
+  export interface ModifyProvisionedCapacityInput {
+    LoadBalancerArn: LoadBalancerArn;
+    MinimumLBCapacityUnits: LBCapacityUnits;
+  }
+  export interface ModifyProvisionedCapacityOutput {
+    ProvisionedCapacity?: ProvisionedCapacity;
+  }
   export interface ModifyRuleInput {
     /**
      * The Amazon Resource Name (ARN) of the rule.
@@ -1201,7 +1254,7 @@ declare namespace ELBv2 {
      */
     Conditions?: RuleConditionList;
     /**
-     * The actions. If the action type is forward, you can specify a single target group. If the action type is authenticate-oidc, you can use an identity provider that is OpenID Connect (OIDC) compliant to authenticate users as they access your application. If the action type is authenticate-cognito, you can use Amazon Cognito to authenticate users as they access your application.
+     * The actions. If the action type is forward, you specify a target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer or TCP for a Network Load Balancer. [HTTPS listener] If the action type is authenticate-oidc, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant. [HTTPS listener] If the action type is authenticate-cognito, you authenticate users through the user pools supported by Amazon Cognito. [Application Load Balancer] If the action type is redirect, you redirect specified client requests from one URL to another. [Application Load Balancer] If the action type is fixed-response, you drop specified client requests and return a custom HTTP response.
      */
     Actions?: Actions;
   }
@@ -1233,7 +1286,7 @@ declare namespace ELBv2 {
      */
     TargetGroupArn: TargetGroupArn;
     /**
-     * The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported only if the protocol of the target group is TCP.
+     * The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported only if the protocol of the target group is TCP. If the protocol of the target group is TCP, you can't modify this setting.
      */
     HealthCheckProtocol?: ProtocolEnum;
     /**
@@ -1245,11 +1298,15 @@ declare namespace ELBv2 {
      */
     HealthCheckPath?: Path;
     /**
-     * The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds.
+     * Indicates whether health checks are enabled.
+     */
+    HealthCheckEnabled?: HealthCheckEnabled;
+    /**
+     * The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. If the protocol of the target group is TCP, you can't modify this setting.
      */
     HealthCheckIntervalSeconds?: HealthCheckIntervalSeconds;
     /**
-     * [HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check.
+     * [HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check. If the protocol of the target group is TCP, you can't modify this setting.
      */
     HealthCheckTimeoutSeconds?: HealthCheckTimeoutSeconds;
     /**
@@ -1261,7 +1318,7 @@ declare namespace ELBv2 {
      */
     UnhealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * [HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.
+     * [HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target. If the protocol of the target group is TCP, you can't modify this setting.
      */
     Matcher?: Matcher;
   }
@@ -1274,8 +1331,21 @@ declare namespace ELBv2 {
   export type Name = string;
   export type PageSize = number;
   export type Path = string;
+  export interface PathPatternConditionConfig {
+    Values?: ListOfString;
+  }
   export type Port = number;
-  export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|string;
+  export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|"TLS"|"UDP"|string;
+  export interface ProvisionedCapacity {
+    MinimumLBCapacityUnits?: LBCapacityUnits;
+    Status?: ProvisionedCapacityStatus;
+    DecreasesRemaining?: DecreasesRemaining;
+    LastModifiedTime?: LastModifiedTime;
+  }
+  export type ProvisionedCapacityStatus = "disabled"|"pending"|"provisioned"|"pre-warmed"|string;
+  export interface QueryStringConditionConfig {
+    Values?: ListOfString;
+  }
   export interface RedirectActionConfig {
     /**
      * The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP.
@@ -1314,7 +1384,7 @@ declare namespace ELBv2 {
      */
     TargetGroupArn: TargetGroupArn;
     /**
-     * The targets.
+     * The targets. To register a target by instance ID, specify the instance ID. To register a target by IP address, specify the IP address. To register a Lambda function, specify the ARN of the Lambda function.
      */
     Targets: TargetDescriptions;
   }
@@ -1326,7 +1396,7 @@ declare namespace ELBv2 {
      */
     ListenerArn: ListenerArn;
     /**
-     * The certificate to remove. You can specify one certificate per call.
+     * The certificate to remove. You can specify one certificate per call. Set CertificateArn to the certificate ARN but do not set IsDefault.
      */
     Certificates: CertificateList;
   }
@@ -1379,6 +1449,11 @@ declare namespace ELBv2 {
      * The condition value. If the field name is host-header, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.   A-Z, a-z, 0-9   - .   * (matches 0 or more characters)   ? (matches exactly 1 character)   If the field name is path-pattern, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
      */
     Values?: ListOfString;
+    HostHeaderConfig?: HostHeaderConditionConfig;
+    PathPatternConfig?: PathPatternConditionConfig;
+    HttpHeaderConfig?: HttpHeaderConditionConfig;
+    QueryStringConfig?: QueryStringConditionConfig;
+    HttpRequestMethodConfig?: HttpRequestMethodConditionConfig;
   }
   export type RuleConditionList = RuleCondition[];
   export type RulePriority = number;
@@ -1480,6 +1555,7 @@ declare namespace ELBv2 {
   export type SslProtocol = string;
   export type SslProtocols = SslProtocol[];
   export type StateReason = string;
+  export type StaticIp = boolean;
   export type String = string;
   export type StringValue = string;
   export type SubnetId = string;
@@ -1492,6 +1568,7 @@ declare namespace ELBv2 {
      * [Network Load Balancers] The allocation ID of the Elastic IP address.
      */
     AllocationId?: AllocationId;
+    StaticIp?: StaticIp;
   }
   export type SubnetMappings = SubnetMapping[];
   export type Subnets = SubnetId[];
@@ -1522,7 +1599,7 @@ declare namespace ELBv2 {
   export type TagValue = string;
   export interface TargetDescription {
     /**
-     * The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address.
+     * The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address. If the target type is lambda, specify the ARN of the Lambda function.
      */
     Id: TargetId;
     /**
@@ -1530,7 +1607,7 @@ declare namespace ELBv2 {
      */
     Port?: Port;
     /**
-     * An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer. This parameter is not supported if the target type of the target group is instance. If the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside the VPC, this parameter is required. With an Application Load Balancer, if the IP address is outside the VPC for the target group, the only supported value is all.
+     * An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer. This parameter is not supported if the target type of the target group is instance. If the target type is ip and the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside the VPC, this parameter is required. With an Application Load Balancer, if the target type is ip and the IP address is outside the VPC for the target group, the only supported value is all. If the target type is lambda, this parameter is optional and the only supported value is all.
      */
     AvailabilityZone?: ZoneName;
   }
@@ -1564,6 +1641,10 @@ declare namespace ELBv2 {
      * The port to use to connect with the target.
      */
     HealthCheckPort?: HealthCheckPort;
+    /**
+     * Indicates whether health checks are enabled.
+     */
+    HealthCheckEnabled?: HealthCheckEnabled;
     /**
      * The approximate amount of time, in seconds, between health checks of an individual target.
      */
@@ -1601,7 +1682,7 @@ declare namespace ELBv2 {
   export type TargetGroupArns = TargetGroupArn[];
   export interface TargetGroupAttribute {
     /**
-     * The name of the attribute. The following attributes are supported by both Application Load Balancers and Network Load Balancers:    deregistration_delay.timeout_seconds - The amount of time, in seconds, for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds.   The following attributes are supported by only Application Load Balancers:    slow_start.duration_seconds - The time period, in seconds, during which a newly registered target receives a linearly increasing share of the traffic to the target group. After this time period ends, the target receives its full share of traffic. The range is 30-900 seconds (15 minutes). Slow start mode is disabled by default.    stickiness.enabled - Indicates whether sticky sessions are enabled. The value is true or false. The default is false.    stickiness.type - The type of sticky sessions. The possible value is lb_cookie.    stickiness.lb_cookie.duration_seconds - The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).   The following attributes are supported by only Network Load Balancers:    proxy_protocol_v2.enabled - Indicates whether Proxy Protocol version 2 is enabled. The value is true or false. The default is false.  
+     * The name of the attribute. The following attribute is supported by both Application Load Balancers and Network Load Balancers:    deregistration_delay.timeout_seconds - The amount of time, in seconds, for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds. If the target is a Lambda function, this attribute is not supported.   The following attributes are supported by Application Load Balancers if the target is not a Lambda function:    slow_start.duration_seconds - The time period, in seconds, during which a newly registered target receives a linearly increasing share of the traffic to the target group. After this time period ends, the target receives its full share of traffic. The range is 30-900 seconds (15 minutes). Slow start mode is disabled by default.    stickiness.enabled - Indicates whether sticky sessions are enabled. The value is true or false. The default is false.    stickiness.type - The type of sticky sessions. The possible value is lb_cookie.    stickiness.lb_cookie.duration_seconds - The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).   The following attribute is supported only if the target is a Lambda function.    lambda.multi_value_headers.enabled - Indicates whether the request and response headers exchanged between the load balancer and the Lambda function include arrays of values or strings. The value is true or false. The default is false. If the value is false and the request contains a duplicate header field name or query parameter key, the load balancer uses the last value sent by the client.   The following attribute is supported only by Network Load Balancers:    proxy_protocol_v2.enabled - Indicates whether Proxy Protocol version 2 is enabled. The value is true or false. The default is false.  
      */
     Key?: TargetGroupAttributeKey;
     /**
@@ -1621,7 +1702,7 @@ declare namespace ELBv2 {
      */
     State?: TargetHealthStateEnum;
     /**
-     * The reason code. If the target state is healthy, a reason code is not provided. If the target state is initial, the reason code can be one of the following values:    Elb.RegistrationInProgress - The target is in the process of being registered with the load balancer.    Elb.InitialHealthChecking - The load balancer is still sending the target the minimum number of health checks required to determine its health status.   If the target state is unhealthy, the reason code can be one of the following values:    Target.ResponseCodeMismatch - The health checks did not return an expected HTTP code.    Target.Timeout - The health check requests timed out.    Target.FailedHealthChecks - The health checks failed because the connection to the target timed out, the target response was malformed, or the target failed the health check for an unknown reason.    Elb.InternalError - The health checks failed due to an internal error.   If the target state is unused, the reason code can be one of the following values:    Target.NotRegistered - The target is not registered with the target group.    Target.NotInUse - The target group is not used by any load balancer or the target is in an Availability Zone that is not enabled for its load balancer.    Target.IpUnusable - The target IP address is reserved for use by a load balancer.    Target.InvalidState - The target is in the stopped or terminated state.   If the target state is draining, the reason code can be the following value:    Target.DeregistrationInProgress - The target is in the process of being deregistered and the deregistration delay period has not expired.  
+     * The reason code. If the target state is healthy, a reason code is not provided. If the target state is initial, the reason code can be one of the following values:    Elb.RegistrationInProgress - The target is in the process of being registered with the load balancer.    Elb.InitialHealthChecking - The load balancer is still sending the target the minimum number of health checks required to determine its health status.   If the target state is unhealthy, the reason code can be one of the following values:    Target.ResponseCodeMismatch - The health checks did not return an expected HTTP code.    Target.Timeout - The health check requests timed out.    Target.FailedHealthChecks - The health checks failed because the connection to the target timed out, the target response was malformed, or the target failed the health check for an unknown reason.    Elb.InternalError - The health checks failed due to an internal error.   If the target state is unused, the reason code can be one of the following values:    Target.NotRegistered - The target is not registered with the target group.    Target.NotInUse - The target group is not used by any load balancer or the target is in an Availability Zone that is not enabled for its load balancer.    Target.IpUnusable - The target IP address is reserved for use by a load balancer.    Target.InvalidState - The target is in the stopped or terminated state.   If the target state is draining, the reason code can be the following value:    Target.DeregistrationInProgress - The target is in the process of being deregistered and the deregistration delay period has not expired.   If the target state is unavailable, the reason code can be the following value:    Target.HealthCheckDisabled - Health checks are disabled for the target group.  
      */
     Reason?: TargetHealthReasonEnum;
     /**
@@ -1644,10 +1725,10 @@ declare namespace ELBv2 {
     TargetHealth?: TargetHealth;
   }
   export type TargetHealthDescriptions = TargetHealthDescription[];
-  export type TargetHealthReasonEnum = "Elb.RegistrationInProgress"|"Elb.InitialHealthChecking"|"Target.ResponseCodeMismatch"|"Target.Timeout"|"Target.FailedHealthChecks"|"Target.NotRegistered"|"Target.NotInUse"|"Target.DeregistrationInProgress"|"Target.InvalidState"|"Target.IpUnusable"|"Elb.InternalError"|string;
+  export type TargetHealthReasonEnum = "Elb.RegistrationInProgress"|"Elb.InitialHealthChecking"|"Target.ResponseCodeMismatch"|"Target.Timeout"|"Target.FailedHealthChecks"|"Target.NotRegistered"|"Target.NotInUse"|"Target.DeregistrationInProgress"|"Target.InvalidState"|"Target.IpUnusable"|"Target.HealthCheckDisabled"|"Elb.InternalError"|string;
   export type TargetHealthStateEnum = "initial"|"healthy"|"unhealthy"|"unused"|"draining"|"unavailable"|string;
   export type TargetId = string;
-  export type TargetTypeEnum = "instance"|"ip"|string;
+  export type TargetTypeEnum = "instance"|"ip"|"lambda"|string;
   export type VpcId = string;
   export type ZoneName = string;
   /**

@@ -26,10 +26,13 @@
           "shape": "ConcurrentModificationException"
         },
         {
+          "shape": "ManagedRuleException"
+        },
+        {
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Deletes the specified rule.</p> <p>Before you can delete the rule, you must remove all targets, using <a>RemoveTargets</a>.</p> <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect.</p>"
+      "documentation": "<p>Deletes the specified rule.</p> <p>Before you can delete the rule, you must remove all targets, using <a>RemoveTargets</a>.</p> <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect.</p> <p>Managed rules are rules created and managed by another AWS service on your behalf. These rules are created by those other AWS services to support functionality in those services. You can delete these rules using the <code>Force</code> option, but you should do so only if you are sure the other service is not still using that rule.</p>"
     },
     "DescribeEventBus": {
       "name": "DescribeEventBus",
@@ -92,6 +95,9 @@
           "shape": "ConcurrentModificationException"
         },
         {
+          "shape": "ManagedRuleException"
+        },
+        {
           "shape": "InternalException"
         }
       ],
@@ -112,6 +118,9 @@
         },
         {
           "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ManagedRuleException"
         },
         {
           "shape": "InternalException"
@@ -246,6 +255,9 @@
           "shape": "ConcurrentModificationException"
         },
         {
+          "shape": "ManagedRuleException"
+        },
+        {
           "shape": "InternalException"
         }
       ],
@@ -272,6 +284,9 @@
         },
         {
           "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ManagedRuleException"
         },
         {
           "shape": "InternalException"
@@ -319,6 +334,9 @@
         },
         {
           "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ManagedRuleException"
         },
         {
           "shape": "InternalException"
@@ -470,6 +488,10 @@
         "Name": {
           "shape": "RuleName",
           "documentation": "<p>The name of the rule.</p>"
+        },
+        "Force": {
+          "shape": "Boolean",
+          "documentation": "<p>If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.</p>"
         }
       }
     },
@@ -536,6 +558,10 @@
         "RoleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role associated with the rule.</p>"
+        },
+        "ManagedBy": {
+          "shape": "ManagedBy",
+          "documentation": "<p>If this is a managed rule, created by an AWS service on your behalf, this field displays the principal name of the AWS service that created the rule.</p>"
         }
       }
     },
@@ -770,6 +796,11 @@
           "documentation": "<p>Indicates whether there are additional results to retrieve. If there are no more results, the value is null.</p>"
         }
       }
+    },
+    "ManagedBy": {
+      "type": "string",
+      "max": 128,
+      "min": 1
     },
     "MessageGroupId": {
       "type": "string"
@@ -1025,6 +1056,10 @@
         "Ids": {
           "shape": "TargetIdList",
           "documentation": "<p>The IDs of the targets to remove from the rule.</p>"
+        },
+        "Force": {
+          "shape": "Boolean",
+          "documentation": "<p>If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to remove targets. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.</p>"
         }
       }
     },
@@ -1100,6 +1135,10 @@
         "RoleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the role that is used for target invocation.</p>"
+        },
+        "ManagedBy": {
+          "shape": "ManagedBy",
+          "documentation": "<p>If the rule was created on behalf of your account by an AWS service, this field displays the principal name of the service that created the rule.</p>"
         }
       },
       "documentation": "<p>Contains information about a rule in Amazon CloudWatch Events.</p>"
@@ -1360,5 +1399,5 @@
       "max": 10
     }
   },
-  "documentation": "<p>Amazon CloudWatch Events helps you to respond to state changes in your AWS resources. When your resources change state, they automatically send events into an event stream. You can create rules that match selected events in the stream and route them to targets to take action. You can also use rules to take action on a pre-determined schedule. For example, you can configure rules to:</p> <ul> <li> <p>Automatically invoke an AWS Lambda function to update DNS entries when an event notifies you that Amazon EC2 instance enters the running state.</p> </li> <li> <p>Direct specific API records from AWS CloudTrail to an Amazon Kinesis data stream for detailed analysis of potential security or availability risks.</p> </li> <li> <p>Periodically invoke a built-in target to create a snapshot of an Amazon EBS volume.</p> </li> </ul> <p>For more information about the features of Amazon CloudWatch Events, see the <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events\">Amazon CloudWatch Events User Guide</a>.</p>"
+  "documentation": "<p>Amazon CloudWatch Events helps you to respond to state changes in your AWS resources. When your resources change state, they automatically send events into an event stream. You can create rules that match selected events in the stream and route them to targets to take action. You can also use rules to take action on a predetermined schedule. For example, you can configure rules to:</p> <ul> <li> <p>Automatically invoke an AWS Lambda function to update DNS entries when an event notifies you that Amazon EC2 instance enters the running state.</p> </li> <li> <p>Direct specific API records from AWS CloudTrail to an Amazon Kinesis data stream for detailed analysis of potential security or availability risks.</p> </li> <li> <p>Periodically invoke a built-in target to create a snapshot of an Amazon EBS volume.</p> </li> </ul> <p>For more information about the features of Amazon CloudWatch Events, see the <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events\">Amazon CloudWatch Events User Guide</a>.</p>"
 }

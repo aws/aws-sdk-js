@@ -513,6 +513,16 @@
       "max": 32,
       "min": 1
     },
+    "AvailabilityZoneDetail": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of a corresponding availability zone.</p>"
+        }
+      },
+      "documentation": "<p>A list of availability zones corresponding to the segments in a trace.</p>"
+    },
     "BackendConnectionErrors": {
       "type": "structure",
       "members": {
@@ -779,6 +789,82 @@
         "KMS"
       ]
     },
+    "ErrorRootCause": {
+      "type": "structure",
+      "members": {
+        "Services": {
+          "shape": "ErrorRootCauseServices",
+          "documentation": "<p>A list of services corresponding to an error. A service identifies a segment and it contains a name, account ID, type, and inferred flag.</p>"
+        }
+      },
+      "documentation": "<p>The root cause of a trace summary error.</p>"
+    },
+    "ErrorRootCauseEntity": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the entity.</p>"
+        },
+        "Exceptions": {
+          "shape": "RootCauseExceptions",
+          "documentation": "<p>The types and messages of the exceptions.</p>"
+        },
+        "Remote": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>A flag that denotes a remote subsegment.</p>"
+        }
+      },
+      "documentation": "<p>A collection of segments and corresponding subsegments associated to a trace summary error.</p>"
+    },
+    "ErrorRootCauseEntityPath": {
+      "type": "list",
+      "member": {
+        "shape": "ErrorRootCauseEntity"
+      }
+    },
+    "ErrorRootCauseService": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The service name.</p>"
+        },
+        "Names": {
+          "shape": "ServiceNames",
+          "documentation": "<p>A collection of associated service names.</p>"
+        },
+        "Type": {
+          "shape": "String",
+          "documentation": "<p>The type associated to the service.</p>"
+        },
+        "AccountId": {
+          "shape": "String",
+          "documentation": "<p>The account ID associated to the service.</p>"
+        },
+        "EntityPath": {
+          "shape": "ErrorRootCauseEntityPath",
+          "documentation": "<p>The path of root cause entities found on the service. </p>"
+        },
+        "Inferred": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>A Boolean value indicating if the service is inferred from the trace.</p>"
+        }
+      },
+      "documentation": "<p>A collection of fields identifying the services in a trace summary error.</p>"
+    },
+    "ErrorRootCauseServices": {
+      "type": "list",
+      "member": {
+        "shape": "ErrorRootCauseService"
+      }
+    },
+    "ErrorRootCauses": {
+      "type": "list",
+      "member": {
+        "shape": "ErrorRootCause"
+      }
+    },
     "ErrorStatistics": {
       "type": "structure",
       "members": {
@@ -796,6 +882,82 @@
         }
       },
       "documentation": "<p>Information about requests that failed with a 4xx Client Error status code.</p>"
+    },
+    "FaultRootCause": {
+      "type": "structure",
+      "members": {
+        "Services": {
+          "shape": "FaultRootCauseServices",
+          "documentation": "<p>A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.</p>"
+        }
+      },
+      "documentation": "<p>The root cause information for a trace summary fault.</p>"
+    },
+    "FaultRootCauseEntity": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the entity.</p>"
+        },
+        "Exceptions": {
+          "shape": "RootCauseExceptions",
+          "documentation": "<p>The types and messages of the exceptions.</p>"
+        },
+        "Remote": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>A flag that denotes a remote subsegment.</p>"
+        }
+      },
+      "documentation": "<p>A collection of segments and corresponding subsegments associated to a trace summary fault error.</p>"
+    },
+    "FaultRootCauseEntityPath": {
+      "type": "list",
+      "member": {
+        "shape": "FaultRootCauseEntity"
+      }
+    },
+    "FaultRootCauseService": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The service name.</p>"
+        },
+        "Names": {
+          "shape": "ServiceNames",
+          "documentation": "<p>A collection of associated service names.</p>"
+        },
+        "Type": {
+          "shape": "String",
+          "documentation": "<p>The type associated to the service.</p>"
+        },
+        "AccountId": {
+          "shape": "String",
+          "documentation": "<p>The account ID associated to the service.</p>"
+        },
+        "EntityPath": {
+          "shape": "FaultRootCauseEntityPath",
+          "documentation": "<p>The path of root cause entities found on the service. </p>"
+        },
+        "Inferred": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>A Boolean value indicating if the service is inferred from the trace.</p>"
+        }
+      },
+      "documentation": "<p>A collection of fields identifying the services in a trace summary fault.</p>"
+    },
+    "FaultRootCauseServices": {
+      "type": "list",
+      "member": {
+        "shape": "FaultRootCauseService"
+      }
+    },
+    "FaultRootCauses": {
+      "type": "list",
+      "member": {
+        "shape": "FaultRootCause"
+      }
     },
     "FaultStatistics": {
       "type": "structure",
@@ -969,7 +1131,7 @@
         },
         "EndTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The end of the time frame for which to generate a graph.</p>"
+          "documentation": "<p>The end of the timeframe for which to generate a graph.</p>"
         },
         "GroupName": {
           "shape": "GroupName",
@@ -1002,7 +1164,7 @@
         },
         "ContainsOldGroupVersions": {
           "shape": "Boolean",
-          "documentation": "<p>A flag indicating whether or not the group's filter expression has been consistent, or if the returned service graph may show traces from an older version of the group's filter expression.</p>"
+          "documentation": "<p>A flag indicating whether the group's filter expression has been consistent, or if the returned service graph may show traces from an older version of the group's filter expression.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -1199,6 +1361,16 @@
       },
       "documentation": "<p>Information about an HTTP request.</p>"
     },
+    "InstanceIdDetail": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "String",
+          "documentation": "<p>The ID of a corresponding EC2 instance.</p>"
+        }
+      },
+      "documentation": "<p>A list of EC2 instance IDs corresponding to the segments in a trace. </p>"
+    },
     "Integer": {
       "type": "integer"
     },
@@ -1304,6 +1476,112 @@
     "ResourceARN": {
       "type": "string",
       "max": 500
+    },
+    "ResourceARNDetail": {
+      "type": "structure",
+      "members": {
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN of a corresponding resource.</p>"
+        }
+      },
+      "documentation": "<p>A list of resources ARNs corresponding to the segments in a trace.</p>"
+    },
+    "ResponseTimeRootCause": {
+      "type": "structure",
+      "members": {
+        "Services": {
+          "shape": "ResponseTimeRootCauseServices",
+          "documentation": "<p>A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.</p>"
+        }
+      },
+      "documentation": "<p>The root cause information for a response time warning.</p>"
+    },
+    "ResponseTimeRootCauseEntity": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the entity.</p>"
+        },
+        "Coverage": {
+          "shape": "NullableDouble",
+          "documentation": "<p>The types and messages of the exceptions.</p>"
+        },
+        "Remote": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>A flag that denotes a remote subsegment.</p>"
+        }
+      },
+      "documentation": "<p>A collection of segments and corresponding subsegments associated to a response time warning.</p>"
+    },
+    "ResponseTimeRootCauseEntityPath": {
+      "type": "list",
+      "member": {
+        "shape": "ResponseTimeRootCauseEntity"
+      }
+    },
+    "ResponseTimeRootCauseService": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The service name.</p>"
+        },
+        "Names": {
+          "shape": "ServiceNames",
+          "documentation": "<p>A collection of associated service names.</p>"
+        },
+        "Type": {
+          "shape": "String",
+          "documentation": "<p>The type associated to the service.</p>"
+        },
+        "AccountId": {
+          "shape": "String",
+          "documentation": "<p>The account ID associated to the service.</p>"
+        },
+        "EntityPath": {
+          "shape": "ResponseTimeRootCauseEntityPath",
+          "documentation": "<p>The path of root cause entities found on the service. </p>"
+        },
+        "Inferred": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>A Boolean value indicating if the service is inferred from the trace.</p>"
+        }
+      },
+      "documentation": "<p>A collection of fields identifying the service in a response time warning.</p>"
+    },
+    "ResponseTimeRootCauseServices": {
+      "type": "list",
+      "member": {
+        "shape": "ResponseTimeRootCauseService"
+      }
+    },
+    "ResponseTimeRootCauses": {
+      "type": "list",
+      "member": {
+        "shape": "ResponseTimeRootCause"
+      }
+    },
+    "RootCauseException": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the exception.</p>"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The message of the exception.</p>"
+        }
+      },
+      "documentation": "<p>The exception associated with a root cause.</p>"
+    },
+    "RootCauseExceptions": {
+      "type": "list",
+      "member": {
+        "shape": "RootCauseException"
+      }
     },
     "RuleName": {
       "type": "string",
@@ -1792,6 +2070,12 @@
       },
       "documentation": "<p>A collection of segment documents with matching trace IDs.</p>"
     },
+    "TraceAvailabilityZones": {
+      "type": "list",
+      "member": {
+        "shape": "AvailabilityZoneDetail"
+      }
+    },
     "TraceId": {
       "type": "string",
       "max": 35,
@@ -1803,10 +2087,22 @@
         "shape": "TraceId"
       }
     },
+    "TraceInstanceIds": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceIdDetail"
+      }
+    },
     "TraceList": {
       "type": "list",
       "member": {
         "shape": "Trace"
+      }
+    },
+    "TraceResourceARNs": {
+      "type": "list",
+      "member": {
+        "shape": "ResourceARNDetail"
       }
     },
     "TraceSegmentDocument": {
@@ -1864,6 +2160,38 @@
         "ServiceIds": {
           "shape": "ServiceIds",
           "documentation": "<p>Service IDs from the trace's segment documents.</p>"
+        },
+        "ResourceARNs": {
+          "shape": "TraceResourceARNs",
+          "documentation": "<p>A list of resource ARNs for any resource corresponding to the trace segments.</p>"
+        },
+        "InstanceIds": {
+          "shape": "TraceInstanceIds",
+          "documentation": "<p>A list of EC2 instance IDs for any instance corresponding to the trace segments.</p>"
+        },
+        "AvailabilityZones": {
+          "shape": "TraceAvailabilityZones",
+          "documentation": "<p>A list of availability zones for any zone corresponding to the trace segments.</p>"
+        },
+        "EntryPoint": {
+          "shape": "ServiceId",
+          "documentation": "<p>The root of a trace.</p>"
+        },
+        "FaultRootCauses": {
+          "shape": "FaultRootCauses",
+          "documentation": "<p>A collection of FaultRootCause structures corresponding to the the trace segments.</p>"
+        },
+        "ErrorRootCauses": {
+          "shape": "ErrorRootCauses",
+          "documentation": "<p>A collection of ErrorRootCause structures corresponding to the trace segments.</p>"
+        },
+        "ResponseTimeRootCauses": {
+          "shape": "ResponseTimeRootCauses",
+          "documentation": "<p>A collection of ResponseTimeRootCause structures corresponding to the trace segments.</p>"
+        },
+        "Revision": {
+          "shape": "Integer",
+          "documentation": "<p>The revision number of a trace.</p>"
         }
       },
       "documentation": "<p>Metadata generated from the segment documents in a trace.</p>"
@@ -1961,7 +2289,7 @@
         },
         "GroupARN": {
           "shape": "GroupARN",
-          "documentation": "<p>The ARN that was generated upon create.</p>"
+          "documentation": "<p>The ARN that was generated upon creation.</p>"
         },
         "FilterExpression": {
           "shape": "FilterExpression",

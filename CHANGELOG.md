@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.366.0-->
+<!--LATEST=2.367.0-->
 <!--ENTRYINSERT-->
+
+## 2.367.0
+* feature: CloudWatchEvents: Support for Managed Rules (rules that are created and maintained by the AWS services in your account) is added.
+* feature: ELBv2: This release allows Application Load Balancers to route traffic to Lambda functions, in addition to instances and IP addresses.
+* feature: Kafka: This is the initial SDK release for Amazon Managed Streaming for Kafka (Amazon MSK). Amazon MSK is a service that you can use to easily build, monitor, and manage Apache Kafka clusters in the cloud.
+* feature: Lambda: AWS Lambda now supports Lambda Layers and Ruby as a runtime. Lambda Layers are a new type of artifact that contains arbitrary code and data, and may be referenced by zero, one, or more functions at the same time.  You can also now develop your AWS Lambda function code using the Ruby programming language.
+* feature: S3: Fixed issue with ObjectLockRetainUntilDate in S3 PutObject
+* feature: ServerlessApplicationRepository: AWS Serverless Application Repository now supports nested applications. You can nest individual applications as components of a larger application to make it easy to assemble and deploy new serverless architectures. 
+* feature: StepFunctions: AWS Step Functions is now integrated with eight additional AWS services: Amazon ECS, AWS Fargate, Amazon DynamoDB, Amazon SNS, Amazon SQS, AWS Batch, AWS Glue, and Amazon SageMaker. To learn more, please see https://docs.aws.amazon.com/step-functions/index.html
+* feature: XRay: GetTraceSummaries - Now provides additional information regarding your application traces such as Availability Zone, Instance ID, Resource ARN details, Revision, Entry Point, Root Cause Exceptions and Root Causes for Fault, Error and Response Time.
 
 ## 2.366.0
 * feature: AppMesh: AWS App Mesh is a service mesh that makes it easy to monitor and control communications between microservices of an application. AWS App Mesh APIs are available for preview in eu-west-1, us-east-1, us-east-2, and us-west-2 regions.

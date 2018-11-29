@@ -76,6 +76,14 @@ declare class ServerlessApplicationRepository extends Service {
    */
   getCloudFormationTemplate(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.GetCloudFormationTemplateResponse) => void): Request<ServerlessApplicationRepository.Types.GetCloudFormationTemplateResponse, AWSError>;
   /**
+   * Retrieves the list of applications nested in the containing application.
+   */
+  listApplicationDependencies(params: ServerlessApplicationRepository.Types.ListApplicationDependenciesRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse, AWSError>;
+  /**
+   * Retrieves the list of applications nested in the containing application.
+   */
+  listApplicationDependencies(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse, AWSError>;
+  /**
    * Lists versions for the specified application.
    */
   listApplicationVersions(params: ServerlessApplicationRepository.Types.ListApplicationVersionsRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationVersionsResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationVersionsResponse, AWSError>;
@@ -115,6 +123,16 @@ declare class ServerlessApplicationRepository extends Service {
   updateApplication(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.UpdateApplicationResponse) => void): Request<ServerlessApplicationRepository.Types.UpdateApplicationResponse, AWSError>;
 }
 declare namespace ServerlessApplicationRepository {
+  export interface ApplicationDependencySummary {
+    /**
+     * The Amazon Resource Name (ARN) of the nested application.
+     */
+    ApplicationId: __string;
+    /**
+     * The semantic version of the nested application.
+     */
+    SemanticVersion: __string;
+  }
   export interface ApplicationPolicyStatement {
     /**
      * For the list of actions supported for this operation, see Application 
@@ -327,12 +345,15 @@ declare namespace ServerlessApplicationRepository {
  If the application contains IAM resources, you can specify either CAPABILITY_IAM
  or CAPABILITY_NAMED_IAM. If the application contains IAM resources
  with custom names, you must specify CAPABILITY_NAMED_IAM.The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+ AWS::Lambda::Permission,
+ AWS::IAM:Policy,
  AWS::ApplicationAutoScaling::ScalingPolicy,
  AWS::S3::BucketPolicy,
  AWS::SQS::QueuePolicy, and
- AWS::SNS:TopicPolicy.If your application template contains any of the above resources, we recommend that you review
+ AWS::SNS::TopicPolicy.If your application template contains any of the above resources, we recommend that you review
  all permissions associated with the application before deploying. If you don't specify
  this parameter for an application that requires capabilities, the call will fail.Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
+ 
      */
     RequiredCapabilities?: __listOfCapability;
     /**
@@ -375,44 +396,31 @@ declare namespace ServerlessApplicationRepository {
  If the application contains IAM resources, you can specify either CAPABILITY_IAM
  or CAPABILITY_NAMED_IAM. If the application contains IAM resources
  with custom names, you must specify CAPABILITY_NAMED_IAM.The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+ AWS::Lambda::Permission,
+ AWS::IAM:Policy,
  AWS::ApplicationAutoScaling::ScalingPolicy,
  AWS::S3::BucketPolicy,
  AWS::SQS::QueuePolicy, and
  AWS::SNS:TopicPolicy.If your application template contains any of the above resources, we recommend that you review
  all permissions associated with the application before deploying. If you don't specify
  this parameter for an application that requires capabilities, the call will fail.Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
+ 
      */
     Capabilities?: __listOf__string;
     /**
-     * This property corresponds to the parameter of the same name for the
- AWS CloudFormation
- 
- CreateChangeSet
- API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
      */
     ChangeSetName?: __string;
     /**
-     * This property corresponds to the parameter of the same name for the
- AWS CloudFormation
- 
- CreateChangeSet
- API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
      */
     ClientToken?: __string;
     /**
-     * This property corresponds to the parameter of the same name for the
- AWS CloudFormation
- 
- CreateChangeSet
- API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
      */
     Description?: __string;
     /**
-     * This property corresponds to the parameter of the same name for the
- AWS CloudFormation
- 
- CreateChangeSet
- API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
      */
     NotificationArns?: __listOf__string;
     /**
@@ -420,19 +428,11 @@ declare namespace ServerlessApplicationRepository {
      */
     ParameterOverrides?: __listOfParameterValue;
     /**
-     * This property corresponds to the parameter of the same name for the
- AWS CloudFormation
- 
- CreateChangeSet
- API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
      */
     ResourceTypes?: __listOf__string;
     /**
-     * This property corresponds to the parameter of the same name for the
- AWS CloudFormation
- 
- CreateChangeSet
- API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
      */
     RollbackConfiguration?: RollbackConfiguration;
     /**
@@ -442,19 +442,11 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion?: __string;
     /**
-     * This property corresponds to the parameter of the same name for the
- AWS CloudFormation
- 
- CreateChangeSet
- API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
      */
     StackName: __string;
     /**
-     * This property corresponds to the parameter of the same name for the
- AWS CloudFormation
- 
- CreateChangeSet
- API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
      */
     Tags?: __listOfTag;
     /**
@@ -647,6 +639,34 @@ declare namespace ServerlessApplicationRepository {
      */
     TemplateUrl?: __string;
   }
+  export interface ListApplicationDependenciesRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationId: __string;
+    /**
+     * The total number of items to return.
+     */
+    MaxItems?: MaxItems;
+    /**
+     * A token to specify where to start paginating.
+     */
+    NextToken?: __string;
+    /**
+     * The semantic version of the application to get.
+     */
+    SemanticVersion?: __string;
+  }
+  export interface ListApplicationDependenciesResponse {
+    /**
+     * An array of application summaries nested in the application.
+     */
+    Dependencies?: __listOfApplicationDependencySummary;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: __string;
+  }
   export interface ListApplicationVersionsRequest {
     /**
      * The Amazon Resource Name (ARN) of the application.
@@ -792,55 +812,34 @@ declare namespace ServerlessApplicationRepository {
   }
   export interface RollbackConfiguration {
     /**
-     * This property corresponds to the content of the same name for the
- AWS CloudFormation
- 
- RollbackConfiguration
- Data Type.
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackConfiguration Data Type.
      */
     MonitoringTimeInMinutes?: __integer;
     /**
-     * This property corresponds to the content of the same name for the
- AWS CloudFormation
- 
- RollbackConfiguration
- Data Type.
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackConfiguration Data Type.
      */
     RollbackTriggers?: __listOfRollbackTrigger;
   }
   export interface RollbackTrigger {
     /**
-     * This property corresponds to the content of the same name for the
- AWS CloudFormation
- 
- RollbackTrigger
- Data Type.
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackTrigger Data Type.
      */
     Arn: __string;
     /**
-     * This property corresponds to the content of the same name for the
- AWS CloudFormation
- 
- RollbackTrigger
- Data Type.
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackTrigger Data Type.
      */
     Type: __string;
   }
   export type Status = "PREPARING"|"ACTIVE"|"EXPIRED"|string;
   export interface Tag {
     /**
-     * This property corresponds to the content of the same name for the
- AWS CloudFormation
- 
- Tag
- Data Type.
+     * This property corresponds to the content of the same name for the AWS CloudFormation Tag Data Type.
      */
     Key: __string;
     /**
-     * This property corresponds to the content of the same name for the
- AWS CloudFormation
- 
+     * This property corresponds to the content of the same name for the AWS CloudFormation 
  Tag
+ 
  Data Type.
      */
     Value: __string;
@@ -951,12 +950,15 @@ declare namespace ServerlessApplicationRepository {
  If the application contains IAM resources, you can specify either CAPABILITY_IAM
  or CAPABILITY_NAMED_IAM. If the application contains IAM resources
  with custom names, you must specify CAPABILITY_NAMED_IAM.The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+ AWS::Lambda::Permission,
+ AWS::IAM:Policy,
  AWS::ApplicationAutoScaling::ScalingPolicy,
  AWS::S3::BucketPolicy,
  AWS::SQS::QueuePolicy, and
- AWS::SNS:TopicPolicy.If your application template contains any of the above resources, we recommend that you review
+ AWS::SNS::TopicPolicy.If your application template contains any of the above resources, we recommend that you review
  all permissions associated with the application before deploying. If you don't specify
  this parameter for an application that requires capabilities, the call will fail.Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
+ 
      */
     RequiredCapabilities: __listOfCapability;
     /**
@@ -1001,6 +1003,7 @@ declare namespace ServerlessApplicationRepository {
   }
   export type __boolean = boolean;
   export type __integer = number;
+  export type __listOfApplicationDependencySummary = ApplicationDependencySummary[];
   export type __listOfApplicationPolicyStatement = ApplicationPolicyStatement[];
   export type __listOfApplicationSummary = ApplicationSummary[];
   export type __listOfCapability = Capability[];

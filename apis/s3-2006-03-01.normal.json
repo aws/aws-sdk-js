@@ -6138,7 +6138,8 @@
       ]
     },
     "ObjectLockRetainUntilDate": {
-      "type": "timestamp"
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
     },
     "ObjectLockRetention": {
       "type": "structure",

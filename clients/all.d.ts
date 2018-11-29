@@ -164,3 +164,4 @@ export import FSx = require('./fsx');
 export import SecurityHub = require('./securityhub');
 export import AppMesh = require('./appmesh');
 export import LicenseManager = require('./licensemanager');
+export import Kafka = require('./kafka');

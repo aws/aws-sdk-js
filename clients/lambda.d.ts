@@ -13,6 +13,14 @@ declare class Lambda extends Service {
   constructor(options?: Lambda.Types.ClientConfiguration)
   config: Config & Lambda.Types.ClientConfiguration;
   /**
+   * Adds permissions to the resource-based policy of a version of a function layer. Use this action to grant layer usage permission to other accounts. You can grant permission to a single account, all AWS accounts, or all accounts in an organization. To revoke permission, call RemoveLayerVersionPermission with the statement ID that you specified when you added it.
+   */
+  addLayerVersionPermission(params: Lambda.Types.AddLayerVersionPermissionRequest, callback?: (err: AWSError, data: Lambda.Types.AddLayerVersionPermissionResponse) => void): Request<Lambda.Types.AddLayerVersionPermissionResponse, AWSError>;
+  /**
+   * Adds permissions to the resource-based policy of a version of a function layer. Use this action to grant layer usage permission to other accounts. You can grant permission to a single account, all AWS accounts, or all accounts in an organization. To revoke permission, call RemoveLayerVersionPermission with the statement ID that you specified when you added it.
+   */
+  addLayerVersionPermission(callback?: (err: AWSError, data: Lambda.Types.AddLayerVersionPermissionResponse) => void): Request<Lambda.Types.AddLayerVersionPermissionResponse, AWSError>;
+  /**
    * Adds a permission to the resource policy associated with the specified AWS Lambda function. You use resource policies to grant permissions to event sources that use the push model. In a push model, event sources (such as Amazon S3 and custom applications) invoke your Lambda function. Each permission you add to the resource policy allows an event source permission to invoke the Lambda function.  Permissions apply to the Amazon Resource Name (ARN) used to invoke the function, which can be unqualified (the unpublished version of the function), or include a version or alias. If a client uses a version or alias to invoke a function, use the Qualifier parameter to apply permissions to that ARN. For more information about versioning, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:AddPermission action.
    */
   addPermission(params: Lambda.Types.AddPermissionRequest, callback?: (err: AWSError, data: Lambda.Types.AddPermissionResponse) => void): Request<Lambda.Types.AddPermissionResponse, AWSError>;
@@ -77,6 +85,14 @@ declare class Lambda extends Service {
    */
   deleteFunctionConcurrency(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a version of a function layer. Deleted versions can no longer be viewed or added to functions. However, a copy of the version remains in Lambda until no functions refer to it.
+   */
+  deleteLayerVersion(params: Lambda.Types.DeleteLayerVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a version of a function layer. Deleted versions can no longer be viewed or added to functions. However, a copy of the version remains in Lambda until no functions refer to it.
+   */
+  deleteLayerVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Retrieves details about your account's limits and usage in a region.
    */
   getAccountSettings(params: Lambda.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: Lambda.Types.GetAccountSettingsResponse) => void): Request<Lambda.Types.GetAccountSettingsResponse, AWSError>;
@@ -116,6 +132,22 @@ declare class Lambda extends Service {
    * Returns the configuration information of the Lambda function. This the same information you provided as parameters when uploading the function by using CreateFunction. If you are using the versioning feature, you can retrieve this information for a specific function version by using the optional Qualifier parameter and specifying the function version or alias that points to it. If you don't provide it, the API returns information about the $LATEST version of the function. For more information about versioning, see AWS Lambda Function Versioning and Aliases. This operation requires permission for the lambda:GetFunctionConfiguration operation.
    */
   getFunctionConfiguration(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
+  /**
+   * Returns information about a version of a function layer, with a link to download the layer archive that's valid for 10 minutes.
+   */
+  getLayerVersion(params: Lambda.Types.GetLayerVersionRequest, callback?: (err: AWSError, data: Lambda.Types.GetLayerVersionResponse) => void): Request<Lambda.Types.GetLayerVersionResponse, AWSError>;
+  /**
+   * Returns information about a version of a function layer, with a link to download the layer archive that's valid for 10 minutes.
+   */
+  getLayerVersion(callback?: (err: AWSError, data: Lambda.Types.GetLayerVersionResponse) => void): Request<Lambda.Types.GetLayerVersionResponse, AWSError>;
+  /**
+   * Returns the permission policy for a layer version. For more information, see AddLayerVersionPermission.
+   */
+  getLayerVersionPolicy(params: Lambda.Types.GetLayerVersionPolicyRequest, callback?: (err: AWSError, data: Lambda.Types.GetLayerVersionPolicyResponse) => void): Request<Lambda.Types.GetLayerVersionPolicyResponse, AWSError>;
+  /**
+   * Returns the permission policy for a layer version. For more information, see AddLayerVersionPermission.
+   */
+  getLayerVersionPolicy(callback?: (err: AWSError, data: Lambda.Types.GetLayerVersionPolicyResponse) => void): Request<Lambda.Types.GetLayerVersionPolicyResponse, AWSError>;
   /**
    * Returns the resource policy associated with the specified Lambda function. This action requires permission for the lambda:GetPolicy action. 
    */
@@ -165,6 +197,22 @@ declare class Lambda extends Service {
    */
   listFunctions(callback?: (err: AWSError, data: Lambda.Types.ListFunctionsResponse) => void): Request<Lambda.Types.ListFunctionsResponse, AWSError>;
   /**
+   * Lists the versions of a function layer. Versions that have been deleted aren't listed. Specify a runtime identifier to list only versions that indicate that they're compatible with that runtime.
+   */
+  listLayerVersions(params: Lambda.Types.ListLayerVersionsRequest, callback?: (err: AWSError, data: Lambda.Types.ListLayerVersionsResponse) => void): Request<Lambda.Types.ListLayerVersionsResponse, AWSError>;
+  /**
+   * Lists the versions of a function layer. Versions that have been deleted aren't listed. Specify a runtime identifier to list only versions that indicate that they're compatible with that runtime.
+   */
+  listLayerVersions(callback?: (err: AWSError, data: Lambda.Types.ListLayerVersionsResponse) => void): Request<Lambda.Types.ListLayerVersionsResponse, AWSError>;
+  /**
+   * Lists function layers and shows information about the latest version of each. Specify a runtime identifier to list only layers that indicate that they're compatible with that runtime.
+   */
+  listLayers(params: Lambda.Types.ListLayersRequest, callback?: (err: AWSError, data: Lambda.Types.ListLayersResponse) => void): Request<Lambda.Types.ListLayersResponse, AWSError>;
+  /**
+   * Lists function layers and shows information about the latest version of each. Specify a runtime identifier to list only layers that indicate that they're compatible with that runtime.
+   */
+  listLayers(callback?: (err: AWSError, data: Lambda.Types.ListLayersResponse) => void): Request<Lambda.Types.ListLayersResponse, AWSError>;
+  /**
    * Returns a list of tags assigned to a function when supplied the function ARN (Amazon Resource Name). For more information on Tagging, see Tagging Lambda Functions in the AWS Lambda Developer Guide.
    */
   listTags(params: Lambda.Types.ListTagsRequest, callback?: (err: AWSError, data: Lambda.Types.ListTagsResponse) => void): Request<Lambda.Types.ListTagsResponse, AWSError>;
@@ -181,6 +229,14 @@ declare class Lambda extends Service {
    */
   listVersionsByFunction(callback?: (err: AWSError, data: Lambda.Types.ListVersionsByFunctionResponse) => void): Request<Lambda.Types.ListVersionsByFunctionResponse, AWSError>;
   /**
+   * Creates a function layer from a ZIP archive. Each time you call PublishLayerVersion with the same version name, a new version is created. Add layers to your function with CreateFunction or UpdateFunctionConfiguration.
+   */
+  publishLayerVersion(params: Lambda.Types.PublishLayerVersionRequest, callback?: (err: AWSError, data: Lambda.Types.PublishLayerVersionResponse) => void): Request<Lambda.Types.PublishLayerVersionResponse, AWSError>;
+  /**
+   * Creates a function layer from a ZIP archive. Each time you call PublishLayerVersion with the same version name, a new version is created. Add layers to your function with CreateFunction or UpdateFunctionConfiguration.
+   */
+  publishLayerVersion(callback?: (err: AWSError, data: Lambda.Types.PublishLayerVersionResponse) => void): Request<Lambda.Types.PublishLayerVersionResponse, AWSError>;
+  /**
    * Publishes a version of your function from the current snapshot of $LATEST. That is, AWS Lambda takes a snapshot of the function code and configuration information from $LATEST and publishes a new version. The code and configuration cannot be modified after publication. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases. 
    */
   publishVersion(params: Lambda.Types.PublishVersionRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
@@ -196,6 +252,14 @@ declare class Lambda extends Service {
    * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions. For more information, see Managing Concurrency.
    */
   putFunctionConcurrency(callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
+  /**
+   * Removes a statement from the permissions policy for a layer version. For more information, see AddLayerVersionPermission.
+   */
+  removeLayerVersionPermission(params: Lambda.Types.RemoveLayerVersionPermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes a statement from the permissions policy for a layer version. For more information, see AddLayerVersionPermission.
+   */
+  removeLayerVersionPermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes permissions from a function. You can remove individual permissions from an resource policy associated with a Lambda function by providing a statement ID that you provided when you added the permission. When you remove permissions, disable the event source mapping or trigger configuration first to avoid errors. Permissions apply to the Amazon Resource Name (ARN) used to invoke the function, which can be unqualified (the unpublished version of the function), or include a version or alias. If a client uses a version or alias to invoke a function, use the Qualifier parameter to apply permissions to that ARN. For more information about versioning, see AWS Lambda Function Versioning and Aliases.  You need permission for the lambda:RemovePermission action.
    */
@@ -287,9 +351,49 @@ declare namespace Lambda {
     FunctionCount?: Long;
   }
   export type Action = string;
+  export interface AddLayerVersionPermissionRequest {
+    /**
+     * The name of the layer.
+     */
+    LayerName: LayerName;
+    /**
+     * The version number.
+     */
+    VersionNumber: LayerVersionNumber;
+    /**
+     * An identifier that distinguishes the policy from others on the same layer version.
+     */
+    StatementId: StatementId;
+    /**
+     * The API action that grants access to the layer. For example, lambda:GetLayerVersion.
+     */
+    Action: LayerPermissionAllowedAction;
+    /**
+     * An account ID, or * to grant permission to all AWS accounts.
+     */
+    Principal: LayerPermissionAllowedPrincipal;
+    /**
+     * With the principal set to *, grant permission to all accounts in the specified organization.
+     */
+    OrganizationId?: OrganizationId;
+    /**
+     * Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.
+     */
+    RevisionId?: String;
+  }
+  export interface AddLayerVersionPermissionResponse {
+    /**
+     * The permission statement.
+     */
+    Statement?: String;
+    /**
+     * A unique identifier for the current revision of the policy.
+     */
+    RevisionId?: String;
+  }
   export interface AddPermissionRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -372,6 +476,7 @@ declare namespace Lambda {
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type BlobStream = Buffer|Uint8Array|Blob|string|Readable;
   export type Boolean = boolean;
+  export type CompatibleRuntimes = Runtime[];
   export interface Concurrency {
     /**
      * The number of concurrent executions reserved for this function. For more information, see Managing Concurrency.
@@ -428,7 +533,7 @@ declare namespace Lambda {
   }
   export interface CreateFunctionRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -487,6 +592,10 @@ declare namespace Lambda {
      * The list of tags (key-value pairs) assigned to the new function. For more information, see Tagging Lambda Functions in the AWS Lambda Developer Guide.
      */
     Tags?: Tags;
+    /**
+     * A list of function layers to add to the function's execution environment.
+     */
+    Layers?: LayerList;
   }
   export type _Date = Date;
   export interface DeadLetterConfig {
@@ -513,19 +622,29 @@ declare namespace Lambda {
   }
   export interface DeleteFunctionConcurrencyRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
   }
   export interface DeleteFunctionRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
      * Specify a version to delete. You cannot delete a version that is referenced by an alias.
      */
     Qualifier?: Qualifier;
+  }
+  export interface DeleteLayerVersionRequest {
+    /**
+     * The name of the layer.
+     */
+    LayerName: LayerName;
+    /**
+     * The version number.
+     */
+    VersionNumber: LayerVersionNumber;
   }
   export type Description = string;
   export type Enabled = boolean;
@@ -662,7 +781,7 @@ declare namespace Lambda {
      */
     MemorySize?: MemorySize;
     /**
-     * The date and time that the function was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ssTZD).
+     * The date and time that the function was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
      */
     LastModified?: Timestamp;
     /**
@@ -701,6 +820,10 @@ declare namespace Lambda {
      * Represents the latest updated revision of the function or alias.
      */
     RevisionId?: String;
+    /**
+     * A list of function layers.
+     */
+    Layers?: LayersReferenceList;
   }
   export type FunctionList = FunctionConfiguration[];
   export type FunctionName = string;
@@ -735,7 +858,7 @@ declare namespace Lambda {
   }
   export interface GetFunctionConfigurationRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: NamespacedFunctionName;
     /**
@@ -745,7 +868,7 @@ declare namespace Lambda {
   }
   export interface GetFunctionRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: NamespacedFunctionName;
     /**
@@ -770,6 +893,70 @@ declare namespace Lambda {
      * The concurrent execution limit set for this function. For more information, see Managing Concurrency.
      */
     Concurrency?: Concurrency;
+  }
+  export interface GetLayerVersionPolicyRequest {
+    /**
+     * The name of the layer.
+     */
+    LayerName: LayerName;
+    /**
+     * The version number.
+     */
+    VersionNumber: LayerVersionNumber;
+  }
+  export interface GetLayerVersionPolicyResponse {
+    /**
+     * The policy document.
+     */
+    Policy?: String;
+    /**
+     * A unique identifier for the current revision of the policy.
+     */
+    RevisionId?: String;
+  }
+  export interface GetLayerVersionRequest {
+    /**
+     * The name of the layer.
+     */
+    LayerName: LayerName;
+    /**
+     * The version number.
+     */
+    VersionNumber: LayerVersionNumber;
+  }
+  export interface GetLayerVersionResponse {
+    /**
+     * Details about the layer version.
+     */
+    Content?: LayerVersionContentOutput;
+    /**
+     * The Amazon Resource Name (ARN) of the function layer.
+     */
+    LayerArn?: LayerArn;
+    /**
+     * The ARN of the layer version.
+     */
+    LayerVersionArn?: LayerVersionArn;
+    /**
+     * The description of the version.
+     */
+    Description?: Description;
+    /**
+     * The date that the layer version was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    CreatedDate?: Timestamp;
+    /**
+     * The version number.
+     */
+    Version?: LayerVersionNumber;
+    /**
+     * The layer's compatible runtimes.
+     */
+    CompatibleRuntimes?: CompatibleRuntimes;
+    /**
+     * The layer's software license.
+     */
+    LicenseInfo?: LicenseInfo;
   }
   export interface GetPolicyRequest {
     /**
@@ -796,7 +983,7 @@ declare namespace Lambda {
   export type Integer = number;
   export interface InvocationRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: NamespacedFunctionName;
     /**
@@ -845,7 +1032,7 @@ declare namespace Lambda {
   export type InvocationType = "Event"|"RequestResponse"|"DryRun"|string;
   export interface InvokeAsyncRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: NamespacedFunctionName;
     /**
@@ -860,6 +1047,99 @@ declare namespace Lambda {
     Status?: HttpStatus;
   }
   export type KMSKeyArn = string;
+  export interface Layer {
+    /**
+     * The Amazon Resource Name (ARN) of the function layer.
+     */
+    Arn?: LayerVersionArn;
+    /**
+     * The size of the layer archive in bytes.
+     */
+    CodeSize?: Long;
+  }
+  export type LayerArn = string;
+  export type LayerList = LayerVersionArn[];
+  export type LayerName = string;
+  export type LayerPermissionAllowedAction = string;
+  export type LayerPermissionAllowedPrincipal = string;
+  export type LayerVersionArn = string;
+  export interface LayerVersionContentInput {
+    /**
+     * The Amazon S3 bucket of the layer archive.
+     */
+    S3Bucket?: S3Bucket;
+    /**
+     * The Amazon S3 key of the layer archive.
+     */
+    S3Key?: S3Key;
+    /**
+     * For versioned objects, the version of the layer archive object to use.
+     */
+    S3ObjectVersion?: S3ObjectVersion;
+    /**
+     * The base64-encoded contents of the layer archive. AWS SDK and AWS CLI clients handle the encoding for you.
+     */
+    ZipFile?: _Blob;
+  }
+  export interface LayerVersionContentOutput {
+    /**
+     * A link to the layer archive in Amazon S3 that is valid for 10 minutes.
+     */
+    Location?: String;
+    /**
+     * The SHA-256 hash of the layer archive.
+     */
+    CodeSha256?: String;
+    /**
+     * The size of the layer archive in bytes.
+     */
+    CodeSize?: Long;
+  }
+  export type LayerVersionNumber = number;
+  export type LayerVersionsList = LayerVersionsListItem[];
+  export interface LayerVersionsListItem {
+    /**
+     * The ARN of the layer version.
+     */
+    LayerVersionArn?: LayerVersionArn;
+    /**
+     * The version number.
+     */
+    Version?: LayerVersionNumber;
+    /**
+     * The description of the version.
+     */
+    Description?: Description;
+    /**
+     * The date that the version was created, in ISO 8601 format. For example, 2018-11-27T15:10:45.123+0000.
+     */
+    CreatedDate?: Timestamp;
+    /**
+     * The layer's compatible runtimes.
+     */
+    CompatibleRuntimes?: CompatibleRuntimes;
+    /**
+     * The layer's open-source license.
+     */
+    LicenseInfo?: LicenseInfo;
+  }
+  export type LayersList = LayersListItem[];
+  export interface LayersListItem {
+    /**
+     * The name of the layer.
+     */
+    LayerName?: LayerName;
+    /**
+     * The Amazon Resource Name (ARN) of the function layer.
+     */
+    LayerArn?: LayerArn;
+    /**
+     * The newest version of the layer.
+     */
+    LatestMatchingVersion?: LayerVersionsListItem;
+  }
+  export type LayersReferenceList = Layer[];
+  export type LicenseInfo = string;
   export interface ListAliasesRequest {
     /**
      * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
@@ -944,6 +1224,58 @@ declare namespace Lambda {
      */
     Functions?: FunctionList;
   }
+  export interface ListLayerVersionsRequest {
+    /**
+     * A runtime identifier. For example, go1.x.
+     */
+    CompatibleRuntime?: Runtime;
+    /**
+     * The name of the layer.
+     */
+    LayerName: LayerName;
+    /**
+     * A pagination token returned by a previous call.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of versions to return.
+     */
+    MaxItems?: MaxLayerListItems;
+  }
+  export interface ListLayerVersionsResponse {
+    /**
+     * A pagination token returned when the response doesn't contain all versions.
+     */
+    NextMarker?: String;
+    /**
+     * A list of versions.
+     */
+    LayerVersions?: LayerVersionsList;
+  }
+  export interface ListLayersRequest {
+    /**
+     * A runtime identifier. For example, go1.x.
+     */
+    CompatibleRuntime?: Runtime;
+    /**
+     * A pagination token returned by a previous call.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of layers to return.
+     */
+    MaxItems?: MaxLayerListItems;
+  }
+  export interface ListLayersResponse {
+    /**
+     * A pagination token returned when the response doesn't contain all layers.
+     */
+    NextMarker?: String;
+    /**
+     * A list of function layers.
+     */
+    Layers?: LayersList;
+  }
   export interface ListTagsRequest {
     /**
      * The ARN (Amazon Resource Name) of the function. For more information, see Tagging Lambda Functions in the AWS Lambda Developer Guide.
@@ -983,12 +1315,70 @@ declare namespace Lambda {
   export type LogType = "None"|"Tail"|string;
   export type Long = number;
   export type MasterRegion = string;
+  export type MaxLayerListItems = number;
   export type MaxListItems = number;
   export type MemorySize = number;
   export type NameSpacedFunctionArn = string;
   export type NamespacedFunctionName = string;
   export type NamespacedStatementId = string;
+  export type OrganizationId = string;
   export type Principal = string;
+  export interface PublishLayerVersionRequest {
+    /**
+     * The name of the layer.
+     */
+    LayerName: LayerName;
+    /**
+     * The description of the version.
+     */
+    Description?: Description;
+    /**
+     * The function layer archive.
+     */
+    Content: LayerVersionContentInput;
+    /**
+     * A list of compatible function runtimes. Used for filtering with ListLayers and ListLayerVersions.
+     */
+    CompatibleRuntimes?: CompatibleRuntimes;
+    /**
+     * The layer's software license. It can be any of the following:   An SPDX license identifier. For example, MIT.   The URL of a license hosted on the internet. For example, https://opensource.org/licenses/MIT.   The full text of the license.  
+     */
+    LicenseInfo?: LicenseInfo;
+  }
+  export interface PublishLayerVersionResponse {
+    /**
+     * Details about the layer version.
+     */
+    Content?: LayerVersionContentOutput;
+    /**
+     * The Amazon Resource Name (ARN) of the function layer.
+     */
+    LayerArn?: LayerArn;
+    /**
+     * The ARN of the layer version.
+     */
+    LayerVersionArn?: LayerVersionArn;
+    /**
+     * The description of the version.
+     */
+    Description?: Description;
+    /**
+     * The date that the layer version was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    CreatedDate?: Timestamp;
+    /**
+     * The version number.
+     */
+    Version?: LayerVersionNumber;
+    /**
+     * The layer's compatible runtimes.
+     */
+    CompatibleRuntimes?: CompatibleRuntimes;
+    /**
+     * The layer's software license.
+     */
+    LicenseInfo?: LicenseInfo;
+  }
   export interface PublishVersionRequest {
     /**
      * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
@@ -1009,7 +1399,7 @@ declare namespace Lambda {
   }
   export interface PutFunctionConcurrencyRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -1018,9 +1408,27 @@ declare namespace Lambda {
     ReservedConcurrentExecutions: ReservedConcurrentExecutions;
   }
   export type Qualifier = string;
+  export interface RemoveLayerVersionPermissionRequest {
+    /**
+     * The name of the layer.
+     */
+    LayerName: LayerName;
+    /**
+     * The version number.
+     */
+    VersionNumber: LayerVersionNumber;
+    /**
+     * The identifier that was specified when the statement was added.
+     */
+    StatementId: StatementId;
+    /**
+     * Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.
+     */
+    RevisionId?: String;
+  }
   export interface RemovePermissionRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -1039,7 +1447,7 @@ declare namespace Lambda {
   export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"java8"|"python2.7"|"python3.6"|"python3.7"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"nodejs4.3-edge"|"go1.x"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"java8"|"python2.7"|"python3.6"|"python3.7"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"provided"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;
@@ -1137,7 +1545,7 @@ declare namespace Lambda {
   }
   export interface UpdateFunctionCodeRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -1171,7 +1579,7 @@ declare namespace Lambda {
   }
   export interface UpdateFunctionConfigurationRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -1222,6 +1630,10 @@ declare namespace Lambda {
      * An optional value you can use to ensure you are updating the latest update of the function version or alias. If the RevisionID you pass doesn't match the latest RevisionId of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias RevisionID using either GetFunction or GetAlias.
      */
     RevisionId?: String;
+    /**
+     * A list of function layers to add to the function's execution environment.
+     */
+    Layers?: LayerList;
   }
   export type Version = string;
   export interface VpcConfig {

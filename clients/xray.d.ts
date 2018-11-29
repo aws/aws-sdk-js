@@ -200,6 +200,12 @@ declare namespace XRay {
   export type AttributeKey = string;
   export type AttributeMap = {[key: string]: AttributeValue};
   export type AttributeValue = string;
+  export interface AvailabilityZoneDetail {
+    /**
+     * The name of a corresponding availability zone.
+     */
+    Name?: String;
+  }
   export interface BackendConnectionErrors {
     /**
      * 
@@ -377,6 +383,55 @@ declare namespace XRay {
   export type EncryptionKeyId = string;
   export type EncryptionStatus = "UPDATING"|"ACTIVE"|string;
   export type EncryptionType = "NONE"|"KMS"|string;
+  export interface ErrorRootCause {
+    /**
+     * A list of services corresponding to an error. A service identifies a segment and it contains a name, account ID, type, and inferred flag.
+     */
+    Services?: ErrorRootCauseServices;
+  }
+  export interface ErrorRootCauseEntity {
+    /**
+     * The name of the entity.
+     */
+    Name?: String;
+    /**
+     * The types and messages of the exceptions.
+     */
+    Exceptions?: RootCauseExceptions;
+    /**
+     * A flag that denotes a remote subsegment.
+     */
+    Remote?: NullableBoolean;
+  }
+  export type ErrorRootCauseEntityPath = ErrorRootCauseEntity[];
+  export interface ErrorRootCauseService {
+    /**
+     * The service name.
+     */
+    Name?: String;
+    /**
+     * A collection of associated service names.
+     */
+    Names?: ServiceNames;
+    /**
+     * The type associated to the service.
+     */
+    Type?: String;
+    /**
+     * The account ID associated to the service.
+     */
+    AccountId?: String;
+    /**
+     * The path of root cause entities found on the service. 
+     */
+    EntityPath?: ErrorRootCauseEntityPath;
+    /**
+     * A Boolean value indicating if the service is inferred from the trace.
+     */
+    Inferred?: NullableBoolean;
+  }
+  export type ErrorRootCauseServices = ErrorRootCauseService[];
+  export type ErrorRootCauses = ErrorRootCause[];
   export interface ErrorStatistics {
     /**
      * The number of requests that failed with a 419 throttling status code.
@@ -391,6 +446,55 @@ declare namespace XRay {
      */
     TotalCount?: NullableLong;
   }
+  export interface FaultRootCause {
+    /**
+     * A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.
+     */
+    Services?: FaultRootCauseServices;
+  }
+  export interface FaultRootCauseEntity {
+    /**
+     * The name of the entity.
+     */
+    Name?: String;
+    /**
+     * The types and messages of the exceptions.
+     */
+    Exceptions?: RootCauseExceptions;
+    /**
+     * A flag that denotes a remote subsegment.
+     */
+    Remote?: NullableBoolean;
+  }
+  export type FaultRootCauseEntityPath = FaultRootCauseEntity[];
+  export interface FaultRootCauseService {
+    /**
+     * The service name.
+     */
+    Name?: String;
+    /**
+     * A collection of associated service names.
+     */
+    Names?: ServiceNames;
+    /**
+     * The type associated to the service.
+     */
+    Type?: String;
+    /**
+     * The account ID associated to the service.
+     */
+    AccountId?: String;
+    /**
+     * The path of root cause entities found on the service. 
+     */
+    EntityPath?: FaultRootCauseEntityPath;
+    /**
+     * A Boolean value indicating if the service is inferred from the trace.
+     */
+    Inferred?: NullableBoolean;
+  }
+  export type FaultRootCauseServices = FaultRootCauseService[];
+  export type FaultRootCauses = FaultRootCause[];
   export interface FaultStatistics {
     /**
      * The number of requests that failed with untracked 5xx Server Error status codes.
@@ -502,7 +606,7 @@ declare namespace XRay {
      */
     StartTime: Timestamp;
     /**
-     * The end of the time frame for which to generate a graph.
+     * The end of the timeframe for which to generate a graph.
      */
     EndTime: Timestamp;
     /**
@@ -532,7 +636,7 @@ declare namespace XRay {
      */
     Services?: ServiceList;
     /**
-     * A flag indicating whether or not the group's filter expression has been consistent, or if the returned service graph may show traces from an older version of the group's filter expression.
+     * A flag indicating whether the group's filter expression has been consistent, or if the returned service graph may show traces from an older version of the group's filter expression.
      */
     ContainsOldGroupVersions?: Boolean;
     /**
@@ -667,6 +771,12 @@ declare namespace XRay {
      */
     ClientIp?: String;
   }
+  export interface InstanceIdDetail {
+    /**
+     * The ID of a corresponding EC2 instance.
+     */
+    Id?: String;
+  }
   export type Integer = number;
   export type NullableBoolean = boolean;
   export type NullableDouble = number;
@@ -724,6 +834,72 @@ declare namespace XRay {
   export type RequestCount = number;
   export type ReservoirSize = number;
   export type ResourceARN = string;
+  export interface ResourceARNDetail {
+    /**
+     * The ARN of a corresponding resource.
+     */
+    ARN?: String;
+  }
+  export interface ResponseTimeRootCause {
+    /**
+     * A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.
+     */
+    Services?: ResponseTimeRootCauseServices;
+  }
+  export interface ResponseTimeRootCauseEntity {
+    /**
+     * The name of the entity.
+     */
+    Name?: String;
+    /**
+     * The types and messages of the exceptions.
+     */
+    Coverage?: NullableDouble;
+    /**
+     * A flag that denotes a remote subsegment.
+     */
+    Remote?: NullableBoolean;
+  }
+  export type ResponseTimeRootCauseEntityPath = ResponseTimeRootCauseEntity[];
+  export interface ResponseTimeRootCauseService {
+    /**
+     * The service name.
+     */
+    Name?: String;
+    /**
+     * A collection of associated service names.
+     */
+    Names?: ServiceNames;
+    /**
+     * The type associated to the service.
+     */
+    Type?: String;
+    /**
+     * The account ID associated to the service.
+     */
+    AccountId?: String;
+    /**
+     * The path of root cause entities found on the service. 
+     */
+    EntityPath?: ResponseTimeRootCauseEntityPath;
+    /**
+     * A Boolean value indicating if the service is inferred from the trace.
+     */
+    Inferred?: NullableBoolean;
+  }
+  export type ResponseTimeRootCauseServices = ResponseTimeRootCauseService[];
+  export type ResponseTimeRootCauses = ResponseTimeRootCause[];
+  export interface RootCauseException {
+    /**
+     * The name of the exception.
+     */
+    Name?: String;
+    /**
+     * The message of the exception.
+     */
+    Message?: String;
+  }
+  export type RootCauseExceptions = RootCauseException[];
   export type RuleName = string;
   export type SampledCount = number;
   export interface SamplingRule {
@@ -1073,9 +1249,12 @@ declare namespace XRay {
      */
     Segments?: SegmentList;
   }
+  export type TraceAvailabilityZones = AvailabilityZoneDetail[];
   export type TraceId = string;
   export type TraceIdList = TraceId[];
+  export type TraceInstanceIds = InstanceIdDetail[];
   export type TraceList = Trace[];
+  export type TraceResourceARNs = ResourceARNDetail[];
   export type TraceSegmentDocument = string;
   export type TraceSegmentDocumentList = TraceSegmentDocument[];
   export interface TraceSummary {
@@ -1123,6 +1302,38 @@ declare namespace XRay {
      * Service IDs from the trace's segment documents.
      */
     ServiceIds?: ServiceIds;
+    /**
+     * A list of resource ARNs for any resource corresponding to the trace segments.
+     */
+    ResourceARNs?: TraceResourceARNs;
+    /**
+     * A list of EC2 instance IDs for any instance corresponding to the trace segments.
+     */
+    InstanceIds?: TraceInstanceIds;
+    /**
+     * A list of availability zones for any zone corresponding to the trace segments.
+     */
+    AvailabilityZones?: TraceAvailabilityZones;
+    /**
+     * The root of a trace.
+     */
+    EntryPoint?: ServiceId;
+    /**
+     * A collection of FaultRootCause structures corresponding to the the trace segments.
+     */
+    FaultRootCauses?: FaultRootCauses;
+    /**
+     * A collection of ErrorRootCause structures corresponding to the trace segments.
+     */
+    ErrorRootCauses?: ErrorRootCauses;
+    /**
+     * A collection of ResponseTimeRootCause structures corresponding to the trace segments.
+     */
+    ResponseTimeRootCauses?: ResponseTimeRootCauses;
+    /**
+     * The revision number of a trace.
+     */
+    Revision?: Integer;
   }
   export type TraceSummaryList = TraceSummary[];
   export interface TraceUser {
@@ -1174,7 +1385,7 @@ declare namespace XRay {
      */
     GroupName?: GroupName;
     /**
-     * The ARN that was generated upon create.
+     * The ARN that was generated upon creation.
      */
     GroupARN?: GroupARN;
     /**

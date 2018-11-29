@@ -12,11 +12,11 @@ declare class CloudWatchEvents extends Service {
   constructor(options?: CloudWatchEvents.Types.ClientConfiguration)
   config: Config & CloudWatchEvents.Types.ClientConfiguration;
   /**
-   * Deletes the specified rule. Before you can delete the rule, you must remove all targets, using RemoveTargets. When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect.
+   * Deletes the specified rule. Before you can delete the rule, you must remove all targets, using RemoveTargets. When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect. Managed rules are rules created and managed by another AWS service on your behalf. These rules are created by those other AWS services to support functionality in those services. You can delete these rules using the Force option, but you should do so only if you are sure the other service is not still using that rule.
    */
   deleteRule(params: CloudWatchEvents.Types.DeleteRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified rule. Before you can delete the rule, you must remove all targets, using RemoveTargets. When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect.
+   * Deletes the specified rule. Before you can delete the rule, you must remove all targets, using RemoveTargets. When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect. Managed rules are rules created and managed by another AWS service on your behalf. These rules are created by those other AWS services to support functionality in those services. You can delete these rules using the Force option, but you should do so only if you are sure the other service is not still using that rule.
    */
   deleteRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -200,6 +200,10 @@ declare namespace CloudWatchEvents {
      * The name of the rule.
      */
     Name: RuleName;
+    /**
+     * If this is a managed rule, created by an AWS service on your behalf, you must specify Force as True to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using DescribeRule or ListRules and checking the ManagedBy field of the response.
+     */
+    Force?: Boolean;
   }
   export interface DescribeEventBusRequest {
   }
@@ -252,6 +256,10 @@ declare namespace CloudWatchEvents {
      * The Amazon Resource Name (ARN) of the IAM role associated with the rule.
      */
     RoleArn?: RoleArn;
+    /**
+     * If this is a managed rule, created by an AWS service on your behalf, this field displays the principal name of the AWS service that created the rule.
+     */
+    ManagedBy?: ManagedBy;
   }
   export interface DisableRuleRequest {
     /**
@@ -391,6 +399,7 @@ declare namespace CloudWatchEvents {
      */
     NextToken?: NextToken;
   }
+  export type ManagedBy = string;
   export type MessageGroupId = string;
   export interface NetworkConfiguration {
     /**
@@ -554,6 +563,10 @@ declare namespace CloudWatchEvents {
      * The IDs of the targets to remove from the rule.
      */
     Ids: TargetIdList;
+    /**
+     * If this is a managed rule, created by an AWS service on your behalf, you must specify Force as True to remove targets. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using DescribeRule or ListRules and checking the ManagedBy field of the response.
+     */
+    Force?: Boolean;
   }
   export interface RemoveTargetsResponse {
     /**
@@ -610,6 +623,10 @@ declare namespace CloudWatchEvents {
      * The Amazon Resource Name (ARN) of the role that is used for target invocation.
      */
     RoleArn?: RoleArn;
+    /**
+     * If the rule was created on behalf of your account by an AWS service, this field displays the principal name of the service that created the rule.
+     */
+    ManagedBy?: ManagedBy;
   }
   export type RuleArn = string;
   export type RuleDescription = string;

@@ -12,11 +12,11 @@ declare class StepFunctions extends Service {
   constructor(options?: StepFunctions.Types.ClientConfiguration)
   config: Config & StepFunctions.Types.ClientConfiguration;
   /**
-   * Creates an activity. An activity is a task which you write in any programming language and host on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
+   * Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
    */
   createActivity(params: StepFunctions.Types.CreateActivityInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates an activity. An activity is a task which you write in any programming language and host on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
+   * Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
    */
   createActivity(callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
@@ -44,75 +44,75 @@ declare class StepFunctions extends Service {
    */
   deleteStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineOutput) => void): Request<StepFunctions.Types.DeleteStateMachineOutput, AWSError>;
   /**
-   * Describes an activity.
+   * Describes an activity.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   describeActivity(params: StepFunctions.Types.DescribeActivityInput, callback?: (err: AWSError, data: StepFunctions.Types.DescribeActivityOutput) => void): Request<StepFunctions.Types.DescribeActivityOutput, AWSError>;
   /**
-   * Describes an activity.
+   * Describes an activity.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   describeActivity(callback?: (err: AWSError, data: StepFunctions.Types.DescribeActivityOutput) => void): Request<StepFunctions.Types.DescribeActivityOutput, AWSError>;
   /**
-   * Describes an execution.
+   * Describes an execution.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   describeExecution(params: StepFunctions.Types.DescribeExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.DescribeExecutionOutput) => void): Request<StepFunctions.Types.DescribeExecutionOutput, AWSError>;
   /**
-   * Describes an execution.
+   * Describes an execution.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   describeExecution(callback?: (err: AWSError, data: StepFunctions.Types.DescribeExecutionOutput) => void): Request<StepFunctions.Types.DescribeExecutionOutput, AWSError>;
   /**
-   * Describes a state machine.
+   * Describes a state machine.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   describeStateMachine(params: StepFunctions.Types.DescribeStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineOutput) => void): Request<StepFunctions.Types.DescribeStateMachineOutput, AWSError>;
   /**
-   * Describes a state machine.
+   * Describes a state machine.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   describeStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineOutput) => void): Request<StepFunctions.Types.DescribeStateMachineOutput, AWSError>;
   /**
-   * Describes the state machine associated with a specific execution.
+   * Describes the state machine associated with a specific execution.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   describeStateMachineForExecution(params: StepFunctions.Types.DescribeStateMachineForExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineForExecutionOutput) => void): Request<StepFunctions.Types.DescribeStateMachineForExecutionOutput, AWSError>;
   /**
-   * Describes the state machine associated with a specific execution.
+   * Describes the state machine associated with a specific execution.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   describeStateMachineForExecution(callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineForExecutionOutput) => void): Request<StepFunctions.Types.DescribeStateMachineForExecutionOutput, AWSError>;
   /**
-   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). 
+   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). Polling with GetActivityTask can cause latency in some implementations. See Avoid Latency When Polling for Activity Tasks in the Step Functions Developer Guide. 
    */
   getActivityTask(params: StepFunctions.Types.GetActivityTaskInput, callback?: (err: AWSError, data: StepFunctions.Types.GetActivityTaskOutput) => void): Request<StepFunctions.Types.GetActivityTaskOutput, AWSError>;
   /**
-   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). 
+   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). Polling with GetActivityTask can cause latency in some implementations. See Avoid Latency When Polling for Activity Tasks in the Step Functions Developer Guide. 
    */
   getActivityTask(callback?: (err: AWSError, data: StepFunctions.Types.GetActivityTaskOutput) => void): Request<StepFunctions.Types.GetActivityTaskOutput, AWSError>;
   /**
-   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
+   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
    */
   getExecutionHistory(params: StepFunctions.Types.GetExecutionHistoryInput, callback?: (err: AWSError, data: StepFunctions.Types.GetExecutionHistoryOutput) => void): Request<StepFunctions.Types.GetExecutionHistoryOutput, AWSError>;
   /**
-   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
+   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
    */
   getExecutionHistory(callback?: (err: AWSError, data: StepFunctions.Types.GetExecutionHistoryOutput) => void): Request<StepFunctions.Types.GetExecutionHistoryOutput, AWSError>;
   /**
-   * Lists the existing activities. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
+   * Lists the existing activities. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listActivities(params: StepFunctions.Types.ListActivitiesInput, callback?: (err: AWSError, data: StepFunctions.Types.ListActivitiesOutput) => void): Request<StepFunctions.Types.ListActivitiesOutput, AWSError>;
   /**
-   * Lists the existing activities. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
+   * Lists the existing activities. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listActivities(callback?: (err: AWSError, data: StepFunctions.Types.ListActivitiesOutput) => void): Request<StepFunctions.Types.ListActivitiesOutput, AWSError>;
   /**
-   * Lists the executions of a state machine that meet the filtering criteria. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
+   * Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listExecutions(params: StepFunctions.Types.ListExecutionsInput, callback?: (err: AWSError, data: StepFunctions.Types.ListExecutionsOutput) => void): Request<StepFunctions.Types.ListExecutionsOutput, AWSError>;
   /**
-   * Lists the executions of a state machine that meet the filtering criteria. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
+   * Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listExecutions(callback?: (err: AWSError, data: StepFunctions.Types.ListExecutionsOutput) => void): Request<StepFunctions.Types.ListExecutionsOutput, AWSError>;
   /**
-   * Lists the existing state machines. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
+   * Lists the existing state machines. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listStateMachines(params: StepFunctions.Types.ListStateMachinesInput, callback?: (err: AWSError, data: StepFunctions.Types.ListStateMachinesOutput) => void): Request<StepFunctions.Types.ListStateMachinesOutput, AWSError>;
   /**
-   * Lists the existing state machines. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
+   * Lists the existing state machines. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listStateMachines(callback?: (err: AWSError, data: StepFunctions.Types.ListStateMachinesOutput) => void): Request<StepFunctions.Types.ListStateMachinesOutput, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class StepFunctions extends Service {
    */
   sendTaskSuccess(callback?: (err: AWSError, data: StepFunctions.Types.SendTaskSuccessOutput) => void): Request<StepFunctions.Types.SendTaskSuccessOutput, AWSError>;
   /**
-   * Starts a state machine execution.
+   * Starts a state machine execution.   StartExecution is idempotent. If StartExecution is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 ExecutionAlreadyExists error. Names can be reused after 90 days.  
    */
   startExecution(params: StepFunctions.Types.StartExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.StartExecutionOutput) => void): Request<StepFunctions.Types.StartExecutionOutput, AWSError>;
   /**
-   * Starts a state machine execution.
+   * Starts a state machine execution.   StartExecution is idempotent. If StartExecution is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 ExecutionAlreadyExists error. Names can be reused after 90 days.  
    */
   startExecution(callback?: (err: AWSError, data: StepFunctions.Types.StartExecutionOutput) => void): Request<StepFunctions.Types.StartExecutionOutput, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class StepFunctions extends Service {
    */
   stopExecution(callback?: (err: AWSError, data: StepFunctions.Types.StopExecutionOutput) => void): Request<StepFunctions.Types.StopExecutionOutput, AWSError>;
   /**
-   * Updates an existing state machine by modifying its definition and/or roleArn. Running executions will continue to use the previous definition and roleArn.  All StartExecution calls within a few seconds will use the updated definition and roleArn. Executions started immediately after calling UpdateStateMachine may use the previous state machine definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error. 
+   * Updates an existing state machine by modifying its definition and/or roleArn. Running executions will continue to use the previous definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error.  All StartExecution calls within a few seconds will use the updated definition and roleArn. Executions started immediately after calling UpdateStateMachine may use the previous state machine definition and roleArn.  
    */
   updateStateMachine(params: StepFunctions.Types.UpdateStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.UpdateStateMachineOutput) => void): Request<StepFunctions.Types.UpdateStateMachineOutput, AWSError>;
   /**
-   * Updates an existing state machine by modifying its definition and/or roleArn. Running executions will continue to use the previous definition and roleArn.  All StartExecution calls within a few seconds will use the updated definition and roleArn. Executions started immediately after calling UpdateStateMachine may use the previous state machine definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error. 
+   * Updates an existing state machine by modifying its definition and/or roleArn. Running executions will continue to use the previous definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error.  All StartExecution calls within a few seconds will use the updated definition and roleArn. Executions started immediately after calling UpdateStateMachine may use the previous state machine definition and roleArn.  
    */
   updateStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.UpdateStateMachineOutput) => void): Request<StepFunctions.Types.UpdateStateMachineOutput, AWSError>;
 }
@@ -169,11 +169,11 @@ declare namespace StepFunctions {
     /**
      * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the failure.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export type ActivityList = ActivityListItem[];
   export interface ActivityListItem {
@@ -194,11 +194,11 @@ declare namespace StepFunctions {
     /**
      * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the failure.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export interface ActivityScheduledEventDetails {
     /**
@@ -208,7 +208,7 @@ declare namespace StepFunctions {
     /**
      * The JSON data input to the activity task.
      */
-    input?: Data;
+    input?: SensitiveData;
     /**
      * The maximum allowed duration of the activity task.
      */
@@ -228,20 +228,20 @@ declare namespace StepFunctions {
     /**
      * The JSON data output by the activity task.
      */
-    output?: Data;
+    output?: SensitiveData;
   }
   export interface ActivityTimedOutEventDetails {
     /**
      * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the timeout.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export type Arn = string;
-  export type Cause = string;
+  export type ConnectorParameters = string;
   export interface CreateActivityInput {
     /**
      * The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
@@ -260,11 +260,11 @@ declare namespace StepFunctions {
   }
   export interface CreateStateMachineInput {
     /**
-     * The name of the state machine. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
+     * The name of the state machine.  A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name: Name;
     /**
-     * The Amazon States Language definition of the state machine.
+     * The Amazon States Language definition of the state machine. See Amazon States Language.
      */
     definition: Definition;
     /**
@@ -282,7 +282,6 @@ declare namespace StepFunctions {
      */
     creationDate: Timestamp;
   }
-  export type Data = string;
   export type Definition = string;
   export interface DeleteActivityInput {
     /**
@@ -354,11 +353,11 @@ declare namespace StepFunctions {
     /**
      * The string that contains the JSON input data of the execution.
      */
-    input: Data;
+    input: SensitiveData;
     /**
      * The JSON output data of the execution.  This field is set only if the execution succeeds. If the execution fails, this field is null. 
      */
-    output?: Data;
+    output?: SensitiveData;
   }
   export interface DescribeStateMachineForExecutionInput {
     /**
@@ -376,7 +375,7 @@ declare namespace StepFunctions {
      */
     name: Name;
     /**
-     * The Amazon States Language definition of the state machine.
+     * The Amazon States Language definition of the state machine. See Amazon States Language.
      */
     definition: Definition;
     /**
@@ -408,7 +407,7 @@ declare namespace StepFunctions {
      */
     status?: StateMachineStatus;
     /**
-     * The Amazon States Language definition of the state machine.
+     * The Amazon States Language definition of the state machine. See Amazon States Language.
      */
     definition: Definition;
     /**
@@ -420,27 +419,26 @@ declare namespace StepFunctions {
      */
     creationDate: Timestamp;
   }
-  export type Error = string;
   export type EventId = number;
   export interface ExecutionAbortedEventDetails {
     /**
      * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the failure.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export interface ExecutionFailedEventDetails {
     /**
      * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the failure.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export type ExecutionList = ExecutionListItem[];
   export interface ExecutionListItem {
@@ -473,7 +471,7 @@ declare namespace StepFunctions {
     /**
      * The JSON data input to the execution.
      */
-    input?: Data;
+    input?: SensitiveData;
     /**
      * The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
      */
@@ -484,17 +482,17 @@ declare namespace StepFunctions {
     /**
      * The JSON data output by the execution.
      */
-    output?: Data;
+    output?: SensitiveData;
   }
   export interface ExecutionTimedOutEventDetails {
     /**
      * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the timeout.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export interface GetActivityTaskInput {
     /**
@@ -514,7 +512,7 @@ declare namespace StepFunctions {
     /**
      * The string that contains the JSON input data for the task.
      */
-    input?: Data;
+    input?: SensitiveData;
   }
   export interface GetExecutionHistoryInput {
     /**
@@ -522,7 +520,7 @@ declare namespace StepFunctions {
      */
     executionArn: Arn;
     /**
-     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
@@ -530,7 +528,7 @@ declare namespace StepFunctions {
      */
     reverseOrder?: ReverseOrder;
     /**
-     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -540,13 +538,13 @@ declare namespace StepFunctions {
      */
     events: HistoryEventList;
     /**
-     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
   export interface HistoryEvent {
     /**
-     * The date the event occurred.
+     * The date and time the event occurred.
      */
     timestamp: Timestamp;
     /**
@@ -563,13 +561,21 @@ declare namespace StepFunctions {
     previousEventId?: EventId;
     activityFailedEventDetails?: ActivityFailedEventDetails;
     /**
-     * Contains details about an activity schedule event which failed during an execution.
+     * Contains details about an activity schedule event that failed during an execution.
      */
     activityScheduleFailedEventDetails?: ActivityScheduleFailedEventDetails;
     activityScheduledEventDetails?: ActivityScheduledEventDetails;
     activityStartedEventDetails?: ActivityStartedEventDetails;
     activitySucceededEventDetails?: ActivitySucceededEventDetails;
     activityTimedOutEventDetails?: ActivityTimedOutEventDetails;
+    taskFailedEventDetails?: TaskFailedEventDetails;
+    taskScheduledEventDetails?: TaskScheduledEventDetails;
+    taskStartFailedEventDetails?: TaskStartFailedEventDetails;
+    taskStartedEventDetails?: TaskStartedEventDetails;
+    taskSubmitFailedEventDetails?: TaskSubmitFailedEventDetails;
+    taskSubmittedEventDetails?: TaskSubmittedEventDetails;
+    taskSucceededEventDetails?: TaskSucceededEventDetails;
+    taskTimedOutEventDetails?: TaskTimedOutEventDetails;
     executionFailedEventDetails?: ExecutionFailedEventDetails;
     executionStartedEventDetails?: ExecutionStartedEventDetails;
     executionSucceededEventDetails?: ExecutionSucceededEventDetails;
@@ -579,11 +585,11 @@ declare namespace StepFunctions {
     lambdaFunctionScheduleFailedEventDetails?: LambdaFunctionScheduleFailedEventDetails;
     lambdaFunctionScheduledEventDetails?: LambdaFunctionScheduledEventDetails;
     /**
-     * Contains details about a lambda function which failed to start during an execution.
+     * Contains details about a lambda function that failed to start during an execution.
      */
     lambdaFunctionStartFailedEventDetails?: LambdaFunctionStartFailedEventDetails;
     /**
-     * Contains details about a lambda function which terminated successfully during an execution.
+     * Contains details about a lambda function that terminated successfully during an execution.
      */
     lambdaFunctionSucceededEventDetails?: LambdaFunctionSucceededEventDetails;
     lambdaFunctionTimedOutEventDetails?: LambdaFunctionTimedOutEventDetails;
@@ -591,27 +597,27 @@ declare namespace StepFunctions {
     stateExitedEventDetails?: StateExitedEventDetails;
   }
   export type HistoryEventList = HistoryEvent[];
-  export type HistoryEventType = "ActivityFailed"|"ActivityScheduleFailed"|"ActivityScheduled"|"ActivityStarted"|"ActivitySucceeded"|"ActivityTimedOut"|"ChoiceStateEntered"|"ChoiceStateExited"|"ExecutionFailed"|"ExecutionStarted"|"ExecutionSucceeded"|"ExecutionAborted"|"ExecutionTimedOut"|"FailStateEntered"|"LambdaFunctionFailed"|"LambdaFunctionScheduleFailed"|"LambdaFunctionScheduled"|"LambdaFunctionStartFailed"|"LambdaFunctionStarted"|"LambdaFunctionSucceeded"|"LambdaFunctionTimedOut"|"SucceedStateEntered"|"SucceedStateExited"|"TaskStateAborted"|"TaskStateEntered"|"TaskStateExited"|"PassStateEntered"|"PassStateExited"|"ParallelStateAborted"|"ParallelStateEntered"|"ParallelStateExited"|"ParallelStateFailed"|"ParallelStateStarted"|"ParallelStateSucceeded"|"WaitStateAborted"|"WaitStateEntered"|"WaitStateExited"|string;
+  export type HistoryEventType = "ActivityFailed"|"ActivityScheduleFailed"|"ActivityScheduled"|"ActivityStarted"|"ActivitySucceeded"|"ActivityTimedOut"|"ChoiceStateEntered"|"ChoiceStateExited"|"TaskFailed"|"TaskScheduled"|"TaskStartFailed"|"TaskStarted"|"TaskSubmitFailed"|"TaskSubmitted"|"TaskSucceeded"|"TaskTimedOut"|"ExecutionFailed"|"ExecutionStarted"|"ExecutionSucceeded"|"ExecutionAborted"|"ExecutionTimedOut"|"FailStateEntered"|"LambdaFunctionFailed"|"LambdaFunctionScheduleFailed"|"LambdaFunctionScheduled"|"LambdaFunctionStartFailed"|"LambdaFunctionStarted"|"LambdaFunctionSucceeded"|"LambdaFunctionTimedOut"|"SucceedStateEntered"|"SucceedStateExited"|"TaskStateAborted"|"TaskStateEntered"|"TaskStateExited"|"PassStateEntered"|"PassStateExited"|"ParallelStateAborted"|"ParallelStateEntered"|"ParallelStateExited"|"ParallelStateFailed"|"ParallelStateStarted"|"ParallelStateSucceeded"|"WaitStateAborted"|"WaitStateEntered"|"WaitStateExited"|string;
   export type Identity = string;
   export interface LambdaFunctionFailedEventDetails {
     /**
      * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the failure.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export interface LambdaFunctionScheduleFailedEventDetails {
     /**
      * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the failure.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export interface LambdaFunctionScheduledEventDetails {
     /**
@@ -621,7 +627,7 @@ declare namespace StepFunctions {
     /**
      * The JSON data input to the lambda function.
      */
-    input?: Data;
+    input?: SensitiveData;
     /**
      * The maximum allowed duration of the lambda function.
      */
@@ -631,35 +637,35 @@ declare namespace StepFunctions {
     /**
      * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the failure.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export interface LambdaFunctionSucceededEventDetails {
     /**
      * The JSON data output by the lambda function.
      */
-    output?: Data;
+    output?: SensitiveData;
   }
   export interface LambdaFunctionTimedOutEventDetails {
     /**
      * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the timeout.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export interface ListActivitiesInput {
     /**
-     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
-     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -669,7 +675,7 @@ declare namespace StepFunctions {
      */
     activities: ActivityList;
     /**
-     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -683,11 +689,11 @@ declare namespace StepFunctions {
      */
     statusFilter?: ExecutionStatus;
     /**
-     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
-     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -697,24 +703,24 @@ declare namespace StepFunctions {
      */
     executions: ExecutionList;
     /**
-     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
   export interface ListStateMachinesInput {
     /**
-     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
-     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
   export interface ListStateMachinesOutput {
     stateMachines: StateMachineList;
     /**
-     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -728,13 +734,13 @@ declare namespace StepFunctions {
      */
     taskToken: TaskToken;
     /**
-     * An arbitrary error code that identifies the cause of the failure.
+     * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
      * A more detailed explanation of the cause of the failure.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export interface SendTaskFailureOutput {
   }
@@ -754,23 +760,26 @@ declare namespace StepFunctions {
     /**
      * The JSON output of the task.
      */
-    output: Data;
+    output: SensitiveData;
   }
   export interface SendTaskSuccessOutput {
   }
+  export type SensitiveCause = string;
+  export type SensitiveData = string;
+  export type SensitiveError = string;
   export interface StartExecutionInput {
     /**
      * The Amazon Resource Name (ARN) of the state machine to execute.
      */
     stateMachineArn: Arn;
     /**
-     * The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide.  An execution can't use the name of another execution for 90 days. When you make multiple StartExecution calls with the same name, the new execution doesn't run and the following rules apply:   When the original execution is open and the execution input from the new call is different, the ExecutionAlreadyExists message is returned.   When the original execution is open and the execution input from the new call is identical, the Success message is returned.   When the original execution is closed, the ExecutionAlreadyExists message is returned regardless of input.    A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
+     * The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name?: Name;
     /**
      * The string that contains the JSON input data for the execution, for example:  "input": "{\"first_name\" : \"test\"}"   If you don't include any JSON input data, you still must include the two braces, for example: "input": "{}"  
      */
-    input?: Data;
+    input?: SensitiveData;
   }
   export interface StartExecutionOutput {
     /**
@@ -790,7 +799,7 @@ declare namespace StepFunctions {
     /**
      * The string that contains the JSON input data for the state.
      */
-    input?: Data;
+    input?: SensitiveData;
   }
   export interface StateExitedEventDetails {
     /**
@@ -800,7 +809,7 @@ declare namespace StepFunctions {
     /**
      * The JSON output data of the state.
      */
-    output?: Data;
+    output?: SensitiveData;
   }
   export type StateMachineList = StateMachineListItem[];
   export interface StateMachineListItem {
@@ -824,19 +833,148 @@ declare namespace StepFunctions {
      */
     executionArn: Arn;
     /**
-     * An arbitrary error code that identifies the cause of the termination.
+     * The error code of the failure.
      */
-    error?: Error;
+    error?: SensitiveError;
     /**
-     * A more detailed explanation of the cause of the termination.
+     * A more detailed explanation of the cause of the failure.
      */
-    cause?: Cause;
+    cause?: SensitiveCause;
   }
   export interface StopExecutionOutput {
     /**
      * The date the execution is stopped.
      */
     stopDate: Timestamp;
+  }
+  export interface TaskFailedEventDetails {
+    /**
+     * The action of the connected service called by a task state.
+     */
+    resourceType: Name;
+    /**
+     * The service name of the connected service in a task state.
+     */
+    resource: Name;
+    /**
+     * The error code of the failure.
+     */
+    error?: SensitiveError;
+    /**
+     * A more detailed explanation of the cause of the failure.
+     */
+    cause?: SensitiveCause;
+  }
+  export interface TaskScheduledEventDetails {
+    /**
+     * The action of the connected service called by a task state.
+     */
+    resourceType: Name;
+    /**
+     * The service name of the connected service in a task state.
+     */
+    resource: Name;
+    region: Name;
+    /**
+     * The JSON data passed to the connected service referenced in a task state.
+     */
+    parameters: ConnectorParameters;
+    /**
+     * The maximum allowed duration of the task.
+     */
+    timeoutInSeconds?: TimeoutInSeconds;
+  }
+  export interface TaskStartFailedEventDetails {
+    /**
+     * The action of the connected service called by a task state.
+     */
+    resourceType: Name;
+    /**
+     * The service name of the connected service in a task state.
+     */
+    resource: Name;
+    /**
+     * The error code of the failure.
+     */
+    error?: SensitiveError;
+    /**
+     * A more detailed explanation of the cause of the failure.
+     */
+    cause?: SensitiveCause;
+  }
+  export interface TaskStartedEventDetails {
+    /**
+     * The action of the connected service called by a task state.
+     */
+    resourceType: Name;
+    /**
+     * The service name of the connected service in a task state.
+     */
+    resource: Name;
+  }
+  export interface TaskSubmitFailedEventDetails {
+    /**
+     * The action of the connected service called by a task state.
+     */
+    resourceType: Name;
+    /**
+     * The service name of the connected service in a task state.
+     */
+    resource: Name;
+    /**
+     * The error code of the failure.
+     */
+    error?: SensitiveError;
+    /**
+     * A more detailed explanation of the cause of the failure.
+     */
+    cause?: SensitiveCause;
+  }
+  export interface TaskSubmittedEventDetails {
+    /**
+     * The action of the connected service called by a task state.
+     */
+    resourceType: Name;
+    /**
+     * The service name of the connected service in a task state.
+     */
+    resource: Name;
+    /**
+     * The response from a connected service when a task has started.
+     */
+    output?: SensitiveData;
+  }
+  export interface TaskSucceededEventDetails {
+    /**
+     * The action of the connected service called by a task state.
+     */
+    resourceType: Name;
+    /**
+     * The service name of the connected service in a task state.
+     */
+    resource: Name;
+    /**
+     * The full JSON response from a connected service when a task has succeeded. This response becomes the output of the related task.
+     */
+    output?: SensitiveData;
+  }
+  export interface TaskTimedOutEventDetails {
+    /**
+     * The action of the connected service called by a task state.
+     */
+    resourceType: Name;
+    /**
+     * The service name of the connected service in a task state.
+     */
+    resource: Name;
+    /**
+     * The error code of the failure.
+     */
+    error?: SensitiveError;
+    /**
+     * A more detailed explanation of the cause of the failure.
+     */
+    cause?: SensitiveCause;
   }
   export type TaskToken = string;
   export type TimeoutInSeconds = number;
@@ -847,7 +985,7 @@ declare namespace StepFunctions {
      */
     stateMachineArn: Arn;
     /**
-     * The Amazon States Language definition of the state machine.
+     * The Amazon States Language definition of the state machine. See Amazon States Language.
      */
     definition?: Definition;
     /**
