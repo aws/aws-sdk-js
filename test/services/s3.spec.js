@@ -2410,6 +2410,15 @@ describe('AWS.S3', function() {
       willCompute('putBucketReplication', {
         computeChecksums: true
       });
+      willCompute('putObjectLegalHold', {
+        computeChecksums: true
+      });
+      willCompute('putObjectRetention', {
+        computeChecksums: true
+      });
+      willCompute('putObjectLockConfiguration', {
+        computeChecksums: true
+      });
     });
 
     it('computes checksums if computeChecksums is off and operation requires it', function() {
@@ -2429,6 +2438,15 @@ describe('AWS.S3', function() {
         computeChecksums: false
       });
       willCompute('putBucketReplication', {
+        computeChecksums: false
+      });
+      willCompute('putObjectLegalHold', {
+        computeChecksums: false
+      });
+      willCompute('putObjectRetention', {
+        computeChecksums: false
+      });
+      willCompute('putObjectLockConfiguration', {
         computeChecksums: false
       });
     });
