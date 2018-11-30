@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.367.0-->
+<!--LATEST=2.368.0-->
 <!--ENTRYINSERT-->
+
+## 2.368.0
+* bugfix: md5: enable SDK to calculate content MD5 for more new S3 operations
+* feature: S3: Fixed issue with Content-MD5 for S3 PutObjectLegalHold, PutObjectRetention and PutObjectLockConfiguration.
 
 ## 2.367.0
 * feature: CloudWatchEvents: Support for Managed Rules (rules that are created and maintained by the AWS services in your account) is added.

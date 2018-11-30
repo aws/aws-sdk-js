@@ -1560,7 +1560,7 @@ declare namespace S3 {
     VersionId?: ObjectVersionId;
     RequestPayer?: RequestPayer;
     /**
-     * 
+     * Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation.
      */
     BypassGovernanceRetention?: BypassGovernanceRetention;
   }
@@ -2035,7 +2035,7 @@ declare namespace S3 {
      */
     ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
     /**
-     * 
+     * Indicates whether this object has an active legal hold. This field is only returned if you have permission to view an object's legal hold status.
      */
     ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
   }
@@ -3131,7 +3131,7 @@ declare namespace S3 {
   export type ObjectList = Object[];
   export interface ObjectLockConfiguration {
     /**
-     * Indicates whether this object has an Object Lock configuration enabled.
+     * Indicates whether this bucket has an Object Lock configuration enabled.
      */
     ObjectLockEnabled?: ObjectLockEnabled;
     /**
@@ -3156,7 +3156,7 @@ declare namespace S3 {
      */
     Mode?: ObjectLockRetentionMode;
     /**
-     * 
+     * The date on which this Object Lock Retention will expire.
      */
     RetainUntilDate?: _Date;
   }
@@ -3516,7 +3516,7 @@ declare namespace S3 {
      */
     VersionId?: ObjectVersionId;
     /**
-     * The MD5 signature for the configuration included in your request.
+     * The MD5 hash for the request body.
      */
     ContentMD5?: ContentMD5;
   }
@@ -3533,12 +3533,9 @@ declare namespace S3 {
      */
     ObjectLockConfiguration?: ObjectLockConfiguration;
     RequestPayer?: RequestPayer;
-    /**
-     * 
-     */
     Token?: ObjectLockToken;
     /**
-     * The MD5 signature for the configuration included in your request.
+     * The MD5 hash for the request body.
      */
     ContentMD5?: ContentMD5;
   }
@@ -3710,11 +3707,11 @@ declare namespace S3 {
      */
     VersionId?: ObjectVersionId;
     /**
-     * 
+     * Indicates whether this operation should bypass Governance-mode restrictions.j
      */
     BypassGovernanceRetention?: BypassGovernanceRetention;
     /**
-     * The MD5 signature for the configuration included in your request.
+     * The MD5 hash for the request body.
      */
     ContentMD5?: ContentMD5;
   }

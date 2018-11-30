@@ -2905,7 +2905,7 @@
         },
         "BypassGovernanceRetention": {
           "shape": "BypassGovernanceRetention",
-          "documentation": "<p/>",
+          "documentation": "<p>Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation.</p>",
           "location": "header",
           "locationName": "x-amz-bypass-governance-retention"
         }
@@ -4024,7 +4024,7 @@
         },
         "ObjectLockLegalHoldStatus": {
           "shape": "ObjectLockLegalHoldStatus",
-          "documentation": "<p/>",
+          "documentation": "<p>Indicates whether this object has an active legal hold. This field is only returned if you have permission to view an object's legal hold status.</p>",
           "location": "header",
           "locationName": "x-amz-object-lock-legal-hold"
         }
@@ -6095,7 +6095,7 @@
       "members": {
         "ObjectLockEnabled": {
           "shape": "ObjectLockEnabled",
-          "documentation": "<p>Indicates whether this object has an Object Lock configuration enabled.</p>"
+          "documentation": "<p>Indicates whether this bucket has an Object Lock configuration enabled.</p>"
         },
         "Rule": {
           "shape": "ObjectLockRule",
@@ -6150,7 +6150,7 @@
         },
         "RetainUntilDate": {
           "shape": "Date",
-          "documentation": "<p/>"
+          "documentation": "<p>The date on which this Object Lock Retention will expire.</p>"
         }
       },
       "documentation": "<p>A Retention configuration for an object.</p>"
@@ -7084,7 +7084,7 @@
         },
         "ContentMD5": {
           "shape": "ContentMD5",
-          "documentation": "<p>The MD5 signature for the configuration included in your request.</p>",
+          "documentation": "<p>The MD5 hash for the request body.</p>",
           "location": "header",
           "locationName": "Content-MD5"
         }
@@ -7128,13 +7128,12 @@
         },
         "Token": {
           "shape": "ObjectLockToken",
-          "documentation": "<p/>",
           "location": "header",
           "locationName": "x-amz-bucket-object-lock-token"
         },
         "ContentMD5": {
           "shape": "ContentMD5",
-          "documentation": "<p>The MD5 signature for the configuration included in your request.</p>",
+          "documentation": "<p>The MD5 hash for the request body.</p>",
           "location": "header",
           "locationName": "Content-MD5"
         }
@@ -7425,13 +7424,13 @@
         },
         "BypassGovernanceRetention": {
           "shape": "BypassGovernanceRetention",
-          "documentation": "<p/>",
+          "documentation": "<p>Indicates whether this operation should bypass Governance-mode restrictions.j</p>",
           "location": "header",
           "locationName": "x-amz-bypass-governance-retention"
         },
         "ContentMD5": {
           "shape": "ContentMD5",
-          "documentation": "<p>The MD5 signature for the configuration included in your request.</p>",
+          "documentation": "<p>The MD5 hash for the request body.</p>",
           "location": "header",
           "locationName": "Content-MD5"
         }
