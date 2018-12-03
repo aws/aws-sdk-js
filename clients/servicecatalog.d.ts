@@ -787,7 +787,7 @@ declare namespace ServiceCatalog {
      */
     ConstraintId?: Id;
     /**
-     * The type of constraint.    LAUNCH     NOTIFICATION     TEMPLATE   
+     * The type of constraint.    LAUNCH     NOTIFICATION    STACKSET    TEMPLATE   
      */
     Type?: ConstraintType;
     /**
@@ -804,7 +804,7 @@ declare namespace ServiceCatalog {
   export type ConstraintSummaries = ConstraintSummary[];
   export interface ConstraintSummary {
     /**
-     * The type of constraint.    LAUNCH     NOTIFICATION     TEMPLATE   
+     * The type of constraint.    LAUNCH     NOTIFICATION    STACKSET    TEMPLATE   
      */
     Type?: ConstraintType;
     /**

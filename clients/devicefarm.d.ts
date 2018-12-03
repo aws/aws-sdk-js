@@ -1037,8 +1037,31 @@ declare namespace DeviceFarm {
      * The instances belonging to this device.
      */
     instances?: DeviceInstances;
+    /**
+     * Reflects how likely a device will be available for a test run.
+     */
+    availability?: DeviceAvailability;
   }
   export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"APPIUM_VERSION"|"INSTANCE_ARN"|"INSTANCE_LABELS"|"FLEET_TYPE"|string;
+  export type DeviceAvailability = "TEMPORARY_NOT_AVAILABLE"|"BUSY"|"AVAILABLE"|"HIGHLY_AVAILABLE"|string;
+  export interface DeviceFilter {
+    /**
+     * The aspect of a device such as platform or model used as the selection criteria in a device filter. Allowed values include:   ARN: The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".   PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".   OS_VERSION: The operating system version. For example, "10.3.2".   MODEL: The device model. For example, "iPad 5th Gen".   AVAILABILITY: The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".   FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".   MANUFACTURER: The device manufacturer. For example, "Apple".   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.   REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.   INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.   INSTANCE_LABELS: The label of the device instance.   FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".  
+     */
+    attribute?: DeviceFilterAttribute;
+    /**
+     * The filter operator.   The EQUALS operator is available for every attribute except INSTANCE_LABELS.   The CONTAINS operator is available for the INSTANCE_LABELS and MODEL attributes.   The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN attributes.   The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION attribute.  
+     */
+    operator?: DeviceFilterOperator;
+    /**
+     * An array of one or more filter values used in a device filter.  Operator Values    The IN and NOT operators can take a values array that has more than one element.   The other operators require an array with a single element.    Attribute Values    The PLATFORM attribute can be set to "ANDROID" or "IOS".   The AVAILABILITY attribute can be set to "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".   The FORM_FACTOR attribute can be set to "PHONE" or "TABLET".   The FLEET_TYPE attribute can be set to "PUBLIC" or "PRIVATE".  
+     */
+    values?: DeviceFilterValues;
+  }
+  export type DeviceFilterAttribute = "ARN"|"PLATFORM"|"OS_VERSION"|"MODEL"|"AVAILABILITY"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"INSTANCE_ARN"|"INSTANCE_LABELS"|"FLEET_TYPE"|string;
+  export type DeviceFilterOperator = "EQUALS"|"LESS_THAN"|"LESS_THAN_OR_EQUALS"|"GREATER_THAN"|"GREATER_THAN_OR_EQUALS"|"IN"|"NOT_IN"|"CONTAINS"|string;
+  export type DeviceFilterValues = String[];
+  export type DeviceFilters = DeviceFilter[];
   export type DeviceFormFactor = "PHONE"|"TABLET"|string;
   export type DeviceHostPaths = String[];
   export interface DeviceInstance {
@@ -1122,6 +1145,30 @@ declare namespace DeviceFarm {
   export type DevicePoolCompatibilityResults = DevicePoolCompatibilityResult[];
   export type DevicePoolType = "CURATED"|"PRIVATE"|string;
   export type DevicePools = DevicePool[];
+  export interface DeviceSelectionConfiguration {
+    /**
+     * Used to dynamically select a set of devices for a test run. A filter is made up of an attribute, an operator, and one or more values.   Attribute: The aspect of a device such as platform or model used as the selection criteria in a device filter. Allowed values include:   ARN: The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".   PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".   OS_VERSION: The operating system version. For example, "10.3.2".   MODEL: The device model. For example, "iPad 5th Gen".   AVAILABILITY: The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".   FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".   MANUFACTURER: The device manufacturer. For example, "Apple".   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.   REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.   INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.   INSTANCE_LABELS: The label of the device instance.   FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".     Operator: The filter operator.   The EQUALS operator is available for every attribute except INSTANCE_LABELS.   The CONTAINS operator is available for the INSTANCE_LABELS and MODEL attributes.   The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN attributes.   The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION attribute.     Values: An array of one or more filter values.   The IN and NOT operators can take a values array that has more than one element.   The other operators require an array with a single element.   In a request, the AVAILABILITY attribute takes "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE" as values.    
+     */
+    filters: DeviceFilters;
+    /**
+     * The maximum number of devices to be included in a test run.
+     */
+    maxDevices: Integer;
+  }
+  export interface DeviceSelectionResult {
+    /**
+     * The filters in a device selection result.
+     */
+    filters?: DeviceFilters;
+    /**
+     * The number of devices that matched the device filter selection criteria.
+     */
+    matchedDevicesCount?: Integer;
+    /**
+     * The maximum number of devices to be selected by a device filter and included in a test run.
+     */
+    maxDevices?: Integer;
+  }
   export type Devices = Device[];
   export type Double = number;
   export interface ExecutionConfiguration {
@@ -1567,6 +1614,10 @@ declare namespace DeviceFarm {
      * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
+    /**
+     * Used to select a set of devices. A filter is made up of an attribute, an operator, and one or more values.   Attribute: The aspect of a device such as platform or model used as the selction criteria in a device filter. Allowed values include:   ARN: The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".   PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".   OS_VERSION: The operating system version. For example, "10.3.2".   MODEL: The device model. For example, "iPad 5th Gen".   AVAILABILITY: The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".   FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".   MANUFACTURER: The device manufacturer. For example, "Apple".   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.   REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.   INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.   INSTANCE_LABELS: The label of the device instance.   FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".     Operator: The filter operator.   The EQUALS operator is available for every attribute except INSTANCE_LABELS.   The CONTAINS operator is available for the INSTANCE_LABELS and MODEL attributes.   The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN attributes.   The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION attribute.     Values: An array of one or more filter values.   The IN and NOT operators can take a values array that has more than one element.   The other operators require an array with a single element.   In a request, the AVAILABILITY attribute takes "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE" as values.    
+     */
+    filters?: DeviceFilters;
   }
   export interface ListDevicesResult {
     /**
@@ -2260,7 +2311,7 @@ declare namespace DeviceFarm {
   }
   export interface Rule {
     /**
-     * The rule's stringified attribute. For example, specify the value as "\"abc\"". Allowed values include:   ARN: The ARN.   FORM_FACTOR: The form factor (for example, phone or tablet).   MANUFACTURER: The manufacturer.   PLATFORM: The platform (for example, Android or iOS).   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.   APPIUM_VERSION: The Appium version for the test.   INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.   INSTANCE_LABELS: The label of the device instance.  
+     * The rule's attribute. It is the aspect of a device such as platform or model used as selection criteria to create or update a device pool. Allowed values include:   ARN: The Amazon Resource Name (ARN) of a device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".   PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".   FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".   MANUFACTURER: The device manufacturer. For example, "Apple".   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.   REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.   APPIUM_VERSION: The Appium version for the test.   INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.   INSTANCE_LABELS: The label of the device instance.   FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".  
      */
     attribute?: DeviceAttribute;
     /**
@@ -2268,7 +2319,7 @@ declare namespace DeviceFarm {
      */
     operator?: RuleOperator;
     /**
-     * The rule's value.
+     * The rule's value. The value must be passed in as a string using escaped quotes. For example: "value": "\"ANDROID\""
      */
     value?: String;
   }
@@ -2395,6 +2446,10 @@ declare namespace DeviceFarm {
      * The ARN of the YAML-formatted test specification for the run.
      */
     testSpecArn?: AmazonResourceName;
+    /**
+     * The results of a device filter used to select the devices for a test run.
+     */
+    deviceSelectionResult?: DeviceSelectionResult;
   }
   export type Runs = Run[];
   export interface Sample {
@@ -2461,9 +2516,13 @@ declare namespace DeviceFarm {
      */
     appArn?: AmazonResourceName;
     /**
-     * The ARN of the device pool for the run to be scheduled.
+     * The ARN of the device pool for the run to be scheduled. Either  devicePoolArn  or  deviceSelectionConfiguration  are required in a request.
      */
-    devicePoolArn: AmazonResourceName;
+    devicePoolArn?: AmazonResourceName;
+    /**
+     * The filter criteria used to dynamically select a set of devices for a test run, as well as the maximum number of devices to be included in the run. Either  devicePoolArn  or  deviceSelectionConfiguration  are required in a request.
+     */
+    deviceSelectionConfiguration?: DeviceSelectionConfiguration;
     /**
      * The name for the run to be scheduled.
      */

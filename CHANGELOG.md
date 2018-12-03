@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.368.0-->
+<!--LATEST=2.369.0-->
 <!--ENTRYINSERT-->
+
+## 2.369.0
+* feature: DeviceFarm: Customers can now schedule runs without a need to create a Device Pool. They also get realtime information on public device availability.
+* feature: StorageGateway: API list-local-disks returns a list of the gateway's local disks. This release adds a field DiskAttributeList to these disks.
 
 ## 2.368.0
 * bugfix: md5: enable SDK to calculate content MD5 for more new S3 operations

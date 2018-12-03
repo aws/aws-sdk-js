@@ -1464,15 +1464,36 @@ declare namespace StorageGateway {
     GatewayARN?: GatewayARN;
   }
   export interface Disk {
+    /**
+     * The unique device ID or other distinguishing data that identifies a local disk.
+     */
     DiskId?: DiskId;
+    /**
+     * The path of a local disk in the gateway virtual machine (VM).
+     */
     DiskPath?: string;
+    /**
+     * The device node of a local disk as assigned by the virtualization environment.
+     */
     DiskNode?: string;
+    /**
+     * A value that represents the status of a local disk.
+     */
     DiskStatus?: string;
+    /**
+     * The local disk size in bytes.
+     */
     DiskSizeInBytes?: long;
     DiskAllocationType?: DiskAllocationType;
+    /**
+     * The iSCSI Qualified Name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is targetIqn::LUNNumber::region-volumeId. 
+     */
     DiskAllocationResource?: string;
+    DiskAttributeList?: DiskAttributeList;
   }
   export type DiskAllocationType = string;
+  export type DiskAttribute = string;
+  export type DiskAttributeList = DiskAttribute[];
   export type DiskId = string;
   export type DiskIds = DiskId[];
   export type Disks = Disk[];

@@ -256,7 +256,7 @@
           "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
-      "documentation": "Create a new transcoding queue. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
+      "documentation": "Create a new transcoding queue. For information about queues, see Working With Queues in the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html"
     },
     "DeleteJobTemplate": {
       "name": "DeleteJobTemplate",
@@ -2177,7 +2177,7 @@
     },
     "Commitment": {
       "type": "string",
-      "documentation": "The length of time that you commit to when you set up a pricing plan contract for a reserved queue.",
+      "documentation": "The length of the term of your reserved queue pricing plan commitment.",
       "enum": [
         "ONE_YEAR"
       ]
@@ -2385,7 +2385,7 @@
         "PricingPlan": {
           "shape": "PricingPlan",
           "locationName": "pricingPlan",
-          "documentation": "Optional; default is on-demand. Specifies whether the pricing plan for the queue is on-demand or reserved. The pricing plan for the queue determines whether you pay on-demand or reserved pricing for the transcoding jobs you run through the queue. For reserved queue pricing, you must set up a contract. You can create a reserved queue contract through the AWS Elemental MediaConvert console."
+          "documentation": "Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment. When you use the API to create a queue, the default is on-demand."
         },
         "ReservationPlanSettings": {
           "shape": "ReservationPlanSettings",
@@ -2590,7 +2590,7 @@
         "Name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "The name of the queue to be deleted.",
+          "documentation": "The name of the queue that you want to delete.",
           "location": "uri"
         }
       },
@@ -6764,7 +6764,7 @@
     },
     "PricingPlan": {
       "type": "string",
-      "documentation": "Specifies whether the pricing plan for the queue is On-demand or Reserved. The pricing plan for the queue determines whether you pay On-demand or Reserved pricing for the transcoding jobs that you run through the queue. For Reserved queue pricing, you must set up a contract. You can create a Reserved queue contract through the AWS Elemental MediaConvert console.",
+      "documentation": "Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment.",
       "enum": [
         "ON_DEMAND",
         "RESERVED"
@@ -6896,7 +6896,7 @@
         "CreatedAt": {
           "shape": "__timestampUnix",
           "locationName": "createdAt",
-          "documentation": "The time stamp in epoch seconds for queue creation."
+          "documentation": "The timestamp in epoch seconds for when you created the queue."
         },
         "Description": {
           "shape": "__string",
@@ -6906,7 +6906,7 @@
         "LastUpdated": {
           "shape": "__timestampUnix",
           "locationName": "lastUpdated",
-          "documentation": "The time stamp in epoch seconds when the queue was last updated."
+          "documentation": "The timestamp in epoch seconds for when you most recently updated the queue."
         },
         "Name": {
           "shape": "__string",
@@ -6916,7 +6916,7 @@
         "PricingPlan": {
           "shape": "PricingPlan",
           "locationName": "pricingPlan",
-          "documentation": "Specifies whether the pricing plan for the queue is On-demand or Reserved. The pricing plan for the queue determines whether you pay On-demand or Reserved pricing for the transcoding jobs that you run through the queue. For Reserved queue pricing, you must set up a contract. You can create a Reserved queue contract through the AWS Elemental MediaConvert console."
+          "documentation": "Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment."
         },
         "ProgressingJobsCount": {
           "shape": "__integer",
@@ -6941,10 +6941,10 @@
         "Type": {
           "shape": "Type",
           "locationName": "type",
-          "documentation": "Specifies whether this queue is system or custom. System queues are built in. You can't modify or delete system queues. You can create and modify custom queues."
+          "documentation": "Specifies whether this on-demand queue is system or custom. System queues are built in. You can't modify or delete system queues. You can create and modify custom queues."
         }
       },
-      "documentation": "You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.",
+      "documentation": "You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.",
       "required": [
         "Name"
       ]
@@ -7013,7 +7013,7 @@
     },
     "RenewalType": {
       "type": "string",
-      "documentation": "Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.",
+      "documentation": "Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term.",
       "enum": [
         "AUTO_RENEW",
         "EXPIRE"
@@ -7025,27 +7025,27 @@
         "Commitment": {
           "shape": "Commitment",
           "locationName": "commitment",
-          "documentation": "The length of time that you commit to when you set up a pricing plan contract for a reserved queue."
+          "documentation": "The length of the term of your reserved queue pricing plan commitment."
         },
         "ExpiresAt": {
           "shape": "__timestampUnix",
           "locationName": "expiresAt",
-          "documentation": "The time stamp, in epoch seconds, for when the pricing plan for this reserved queue expires."
+          "documentation": "The timestamp in epoch seconds for when the current pricing plan term for this reserved queue expires."
         },
         "PurchasedAt": {
           "shape": "__timestampUnix",
           "locationName": "purchasedAt",
-          "documentation": "The time stamp in epoch seconds when the reserved queue's reservation plan was created."
+          "documentation": "The timestamp in epoch seconds for when you set up the current pricing plan for this reserved queue."
         },
         "RenewalType": {
           "shape": "RenewalType",
           "locationName": "renewalType",
-          "documentation": "Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period."
+          "documentation": "Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term."
         },
         "ReservedSlots": {
           "shape": "__integer",
           "locationName": "reservedSlots",
-          "documentation": "Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console."
+          "documentation": "Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. When you increase this number, you extend your existing commitment with a new 12-month commitment for a larger number of RTS. The new commitment begins when you purchase the additional capacity. You can't decrease the number of RTS in your reserved queue."
         },
         "Status": {
           "shape": "ReservationPlanStatus",
@@ -7061,17 +7061,17 @@
         "Commitment": {
           "shape": "Commitment",
           "locationName": "commitment",
-          "documentation": "The length of time that you commit to when you set up a pricing plan contract for a reserved queue."
+          "documentation": "The length of the term of your reserved queue pricing plan commitment."
         },
         "RenewalType": {
           "shape": "RenewalType",
           "locationName": "renewalType",
-          "documentation": "Specifies whether the pricing plan contract for your reserved queue automatically renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period."
+          "documentation": "Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term. When your term is auto renewed, you extend your commitment by 12 months from the auto renew date. You can cancel this commitment."
         },
         "ReservedSlots": {
           "shape": "__integer",
           "locationName": "reservedSlots",
-          "documentation": "Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. To increase this number, create a replacement contract through the AWS Elemental MediaConvert console."
+          "documentation": "Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. You can't decrease the number of RTS in your reserved queue. You can increase the number of RTS by extending your existing commitment with a new 12-month commitment for the larger number. The new commitment begins when you purchase the additional capacity. You can't cancel your commitment or revert to your original commitment after you increase the capacity."
         }
       },
       "documentation": "Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.",
@@ -7492,7 +7492,7 @@
         "ReservationPlanSettings": {
           "shape": "ReservationPlanSettings",
           "locationName": "reservationPlanSettings",
-          "documentation": "Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues."
+          "documentation": "The new details of your pricing plan for your reserved queue. When you set up a new pricing plan to replace an expired one, you enter into another 12-month commitment. When you add capacity to your queue by increasing the number of RTS, you extend the term of your commitment to 12 months from when you add capacity. After you make these commitments, you can't cancel them."
         },
         "Status": {
           "shape": "QueueStatus",

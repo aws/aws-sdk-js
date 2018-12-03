@@ -3092,32 +3092,57 @@
       "type": "structure",
       "members": {
         "DiskId": {
-          "shape": "DiskId"
+          "shape": "DiskId",
+          "documentation": "<p>The unique device ID or other distinguishing data that identifies a local disk.</p>"
         },
         "DiskPath": {
-          "shape": "string"
+          "shape": "string",
+          "documentation": "<p>The path of a local disk in the gateway virtual machine (VM).</p>"
         },
         "DiskNode": {
-          "shape": "string"
+          "shape": "string",
+          "documentation": "<p>The device node of a local disk as assigned by the virtualization environment.</p>"
         },
         "DiskStatus": {
-          "shape": "string"
+          "shape": "string",
+          "documentation": "<p>A value that represents the status of a local disk.</p>"
         },
         "DiskSizeInBytes": {
-          "shape": "long"
+          "shape": "long",
+          "documentation": "<p>The local disk size in bytes.</p>"
         },
         "DiskAllocationType": {
           "shape": "DiskAllocationType"
         },
         "DiskAllocationResource": {
-          "shape": "string"
+          "shape": "string",
+          "documentation": "<p>The iSCSI Qualified Name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is <i>targetIqn::LUNNumber::region-volumeId</i>. </p>"
+        },
+        "DiskAttributeList": {
+          "shape": "DiskAttributeList"
         }
-      }
+      },
+      "documentation": "<p>Represents a gateway's local disk.</p>"
     },
     "DiskAllocationType": {
       "type": "string",
+      "documentation": "<p>One of the <code>DiskAllocationType</code> enumeration values that identifies how a local disk is used. Valid values: \"UPLOAD_BUFFER\", \"CACHE_STORAGE\".</p>",
       "max": 100,
       "min": 3
+    },
+    "DiskAttribute": {
+      "type": "string",
+      "max": 64,
+      "min": 1
+    },
+    "DiskAttributeList": {
+      "type": "list",
+      "member": {
+        "shape": "DiskAttribute"
+      },
+      "documentation": "<p>A list of values that represents attributes of a local disk.</p>",
+      "max": 10,
+      "min": 0
     },
     "DiskId": {
       "type": "string",
