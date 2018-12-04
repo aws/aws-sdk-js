@@ -1,0 +1,3416 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2015-10-01",
+    "endpointPrefix":"gamelift",
+    "jsonVersion":"1.1",
+    "serviceFullName":"Amazon GameLift",
+    "signatureVersion":"v4",
+    "targetPrefix":"GameLift",
+    "protocol":"json"
+  },
+  "documentation":"<fullname>Amazon GameLift Service</fullname> <p>Welcome to the <i>Amazon GameLift API Reference</i>. Amazon GameLift is a managed Amazon Web Services (AWS) service for developers who need a scalable, server-based solution for multiplayer games. Amazon GameLift provides setup and deployment of game servers, and handles infrastructure scaling and session management. For more information about the GameLift service, including a feature overview, getting started guide, and tutorial, see the accompanying <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a>.</p> <p>This reference describes the low-level service API for GameLift. You can call this API directly or use the <a href=\"https://aws.amazon.com/tools/\">AWS SDK</a> for your preferred language. The AWS SDK includes a set of high-level GameLift actions multiplayer game sessions. Alternatively, you can use the <a href=\"https://aws.amazon.com/cli/\">AWS command-line interface</a> (CLI) tool, which includes commands for GameLift. For administrative actions, you can use the Amazon GameLift console. </p> <p><b>Managing Game and Player Sessions Through GameLift</b></p> <p>Call these actions from your game clients and/or services to create and manage multiplayer game sessions.</p> <ul> <li> <b>Game sessions</b> <ul> <li><a>CreateGameSession</a></li> <li><a>DescribeGameSessions</a></li> <li><a>DescribeGameSessionDetails</a></li> <li><a>UpdateGameSession</a></li> </ul> </li> <li> <b>Player sessions</b> <ul> <li><a>CreatePlayerSession</a></li> <li><a>CreatePlayerSessions</a></li> <li><a>DescribePlayerSessions</a></li> </ul> </li> <li> <b>Other actions:</b> <ul> <li><a>GetGameSessionLogUrl</a></li> </ul> </li> </ul> <p><b>Setting Up Game Servers</b></p> <p>Use these administrative actions to configure GameLift to host your game servers. When configuring GameLift, you'll need to (1) configure a build for your game and provide build files, and (2) set up one or more fleets to host game sessions.</p> <ul> <li> <b>Build actions:</b> <ul> <li><a>ListBuilds</a></li> <li><a>CreateBuild</a></li> <li><a>DescribeBuild</a></li> <li><a>UpdateBuild</a></li> <li><a>DeleteBuild</a></li> <li><a>RequestUploadCredentials</a></li> </ul> </li> <li> <b>Fleet actions:</b> <ul> <li><a>ListFleets</a></li> <li><a>CreateFleet</a></li> <li>Describe fleet actions: <ul> <li><a>DescribeFleetAttributes</a></li> <li><a>DescribeFleetCapacity</a></li> <li><a>DescribeFleetPortSettings</a></li> <li><a>DescribeFleetUtilization</a></li> <li><a>DescribeEC2InstanceLimits</a></li> <li><a>DescribeFleetEvents</a></li> </ul> </li> <li>Update fleet actions: <ul> <li><a>UpdateFleetAttributes</a></li> <li><a>UpdateFleetCapacity</a></li> <li><a>UpdateFleetPortSettings</a></li> </ul> </li> <li><a>DeleteFleet</a></li> </ul> </li> <li> <b>Alias actions:</b> <ul> <li><a>ListAliases</a></li> <li><a>CreateAlias</a></li> <li><a>DescribeAlias</a></li> <li><a>UpdateAlias</a></li> <li><a>DeleteAlias</a></li> <li><a>ResolveAlias</a></li> </ul> </li> <li> <b>Scaling policy actions:</b> <ul> <li><a>PutScalingPolicy</a></li> <li><a>DescribeScalingPolicies</a></li> <li><a>DeleteScalingPolicy</a></li> </ul> </li> </ul>",
+  "operations":{
+    "CreateAlias":{
+      "name":"CreateAlias",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreateAliasInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"CreateAliasOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"ConflictException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Please resolve the conflict before retrying this request.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause the resource to exceed the allowed service limit. Please resolve the issue before retrying.</p>"
+        }
+      ],
+      "documentation":"<p>Creates an alias for a fleet. You can use an alias to anonymize your fleet by referencing an alias instead of a specific fleet when you create game sessions. Amazon GameLift supports two types of routing strategies for aliases: simple and terminal. Use a simple alias to point to an active fleet. Use a terminal alias to display a message to incoming traffic instead of routing players to an active fleet. This option is useful when a game server is no longer supported but you want to provide better messaging than a standard 404 error.</p> <p>To create a fleet alias, specify an alias name, routing strategy, and optional description. If successful, a new alias record is returned, including an alias ID, which you can reference when creating a game session. To reassign the alias to another fleet ID, call <a>UpdateAlias</a>.</p>"
+    },
+    "CreateBuild":{
+      "name":"CreateBuild",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreateBuildInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"CreateBuildOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"ConflictException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Please resolve the conflict before retrying this request.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        }
+      ],
+      "documentation":"<p>Initializes a new build record and generates information required to upload a game build to Amazon GameLift. Once the build record has been created and is in an INITIALIZED state, you can upload your game build.</p> <important><p>To create a build, use the CLI command <code>upload-build</code>, which creates a new build record and uploads the build files in one step. (See the <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a> for more details on the CLI and the upload process.) Call the <code>CreateBuild</code> action only if you have your own Amazon Simple Storage Service (Amazon S3) client and need to manually upload your build files.</p></important> <p>To create a new build, optionally specify a build name and version. This metadata is stored with other properties in the build record and is displayed in the GameLift console (but not visible to players). If successful, this action returns the newly created build record along with an Amazon S3 storage location and AWS account credentials. Use the location and credentials to upload your game build.</p>"
+    },
+    "CreateFleet":{
+      "name":"CreateFleet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreateFleetInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"CreateFleetOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"ConflictException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Please resolve the conflict before retrying this request.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause the resource to exceed the allowed service limit. Please resolve the issue before retrying.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Creates a new fleet to host game servers. A fleet consists of a set of Amazon Elastic Compute Cloud (Amazon EC2) instances of a certain type, which defines the CPU, memory, storage, and networking capacity of each host in the fleet. See <a href=\"https://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for more information. Each instance in the fleet hosts a game server created from the specified game build. Once a fleet is in an ACTIVE state, it can begin hosting game sessions.</p> <p>To create a new fleet, provide a name and the EC2 instance type for the new fleet, and specify the build and server launch path. Builds must be in a READY state before they can be used to build fleets. When configuring the new fleet, you can optionally (1) provide a set of launch parameters to be passed to a game server when activated; (2) limit incoming traffic to a specified range of IP addresses and port numbers; (3) set game session protection for all instances in the fleet, and (4) configure Amazon GameLift to store game session logs by specifying the path to the logs stored in your game server files. If the call is successful, Amazon GameLift performs the following tasks:</p> <ul> <li>Creates a fleet record and sets the state to NEW.</li> <li>Sets the fleet's capacity to 1 \"desired\" and 1 \"active\" EC2 instance count.</li> <li>Creates an EC2 instance and begins the process of initializing the fleet and activating a game server on the instance.</li> <li>Begins writing events to the fleet event log, which can be accessed in the GameLift console.</li> </ul> <p>Once a fleet is created, use the following actions to change certain fleet properties (server launch parameters and log paths cannot be changed):</p> <ul> <li> <a>UpdateFleetAttributes</a> -- Update fleet metadata, including name and description.</li> <li> <a>UpdateFleetCapacity</a> -- Increase or decrease the number of instances you want the fleet to maintain.</li> <li> <a>UpdateFleetPortSettings</a> -- Change the IP addresses and ports that allow access to incoming traffic.</li> </ul>"
+    },
+    "CreateGameSession":{
+      "name":"CreateGameSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreateGameSessionInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"CreateGameSessionOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ConflictException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Please resolve the conflict before retrying this request.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidFleetStatusException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the fleet. Please resolve the conflict before retrying.</p>"
+        },
+        {
+          "shape":"TerminalRoutingStrategyException",
+          "exception":true,
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"FleetCapacityExceededException",
+          "exception":true,
+          "documentation":"<p>The specified fleet has no available instances to fulfill a request to create a new game session. Such requests should only be retried once the fleet capacity has been increased. </p>"
+        }
+      ],
+      "documentation":"<p>Creates a multiplayer game session for players. This action creates a game session record and assigns the new session to an instance in the specified fleet, which activates the server initialization process in your game server. A fleet must be in an ACTIVE state before a game session can be created for it.</p> <p>To create a game session, specify either a fleet ID or an alias ID and indicate the maximum number of players the game session allows. You can also provide a name and a set of properties for your game (optional). If successful, a <a>GameSession</a> object is returned containing session properties, including an IP address. By default, newly created game sessions are set to accept adding any new players to the game session. Use <a>UpdateGameSession</a> to change the creation policy.</p>"
+    },
+    "CreatePlayerSession":{
+      "name":"CreatePlayerSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreatePlayerSessionInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"CreatePlayerSessionOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidGameSessionStatusException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the game instance. Such requests should not be retried by clients without resolving the conflict.</p>"
+        },
+        {
+          "shape":"GameSessionFullException",
+          "exception":true,
+          "documentation":"<p>The game instance is currently full and cannot allow the requested player(s) to join. This exception occurs in response to a <a>CreatePlayerSession</a> request. </p>"
+        },
+        {
+          "shape":"TerminalRoutingStrategyException",
+          "exception":true,
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        }
+      ],
+      "documentation":"<p>Adds a player to a game session and creates a player session record. A game session must be in an ACTIVE state, have a creation policy of ALLOW_ALL, and have an open player slot before players can be added to the session.</p> <p>To create a player session, specify a game session ID and player ID. If successful, the player is added to the game session and a new <a>PlayerSession</a> object is returned. </p>"
+    },
+    "CreatePlayerSessions":{
+      "name":"CreatePlayerSessions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreatePlayerSessionsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"CreatePlayerSessionsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidGameSessionStatusException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the game instance. Such requests should not be retried by clients without resolving the conflict.</p>"
+        },
+        {
+          "shape":"GameSessionFullException",
+          "exception":true,
+          "documentation":"<p>The game instance is currently full and cannot allow the requested player(s) to join. This exception occurs in response to a <a>CreatePlayerSession</a> request. </p>"
+        },
+        {
+          "shape":"TerminalRoutingStrategyException",
+          "exception":true,
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        }
+      ],
+      "documentation":"<p>Adds a group of players to a game session. Similar to <a>CreatePlayerSession</a>, this action allows you to add multiple players in a single call, which is useful for games that provide party and/or matchmaking features. A game session must be in an ACTIVE state, have a creation policy of ALLOW_ALL, and have an open player slot before players can be added to the session.</p> <p>To create player sessions, specify a game session ID and a list of player IDs. If successful, the players are added to the game session and a set of new <a>PlayerSession</a> objects is returned. </p>"
+    },
+    "DeleteAlias":{
+      "name":"DeleteAlias",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteAliasInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes an alias. This action removes all record of the alias; game clients attempting to access a game server using the deleted alias receive an error. To delete an alias, specify the alias ID to be deleted.</p>"
+    },
+    "DeleteBuild":{
+      "name":"DeleteBuild",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteBuildInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes a build. This action permanently deletes the build record and any uploaded build files.</p> <p>To delete a build, specify its ID. Deleting a build does not affect the status of any active fleets, but you can no longer create new fleets for the deleted build.</p>"
+    },
+    "DeleteFleet":{
+      "name":"DeleteFleet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteFleetInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidFleetStatusException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the fleet. Please resolve the conflict before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"InvalidFleetStatusException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the fleet. Please resolve the conflict before retrying.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes everything related to a fleet. Before deleting a fleet, you must set the fleet's desired capacity to zero. See <a>UpdateFleetCapacity</a>.</p> <p>This action removes the fleet's resources and the fleet record. Once a fleet is deleted, you can no longer use that fleet.</p>"
+    },
+    "DeleteScalingPolicy":{
+      "name":"DeleteScalingPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteScalingPolicyInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes a fleet scaling policy. This action means that the policy is no longer in force and removes all record of it. To delete a scaling policy, specify both the scaling policy name and the fleet ID it is associated with. </p>"
+    },
+    "DescribeAlias":{
+      "name":"DescribeAlias",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeAliasInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeAliasOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves properties for a specified alias. To get the alias, specify an alias ID. If successful, an <a>Alias</a> object is returned.</p>"
+    },
+    "DescribeBuild":{
+      "name":"DescribeBuild",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeBuildInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeBuildOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves properties for a build. To get a build record, specify a build ID. If successful, an object containing the build properties is returned.</p>"
+    },
+    "DescribeEC2InstanceLimits":{
+      "name":"DescribeEC2InstanceLimits",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeEC2InstanceLimitsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeEC2InstanceLimitsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves the following information for the specified EC2 instance type:</p> <ul> <li>maximum number of instances allowed per AWS account (service limit)</li> <li>current usage level for the AWS account </li> </ul> <p>Service limits vary depending on region. Available regions for GameLift can be found in the AWS Management Console for GameLift (see the drop-down list in the upper right corner).</p>"
+    },
+    "DescribeFleetAttributes":{
+      "name":"DescribeFleetAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeFleetAttributesInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeFleetAttributesOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves fleet properties, including metadata, status, and configuration, for one or more fleets. You can request attributes for all fleets, or specify a list of one or more fleet IDs. When requesting all fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>FleetAttributes</a> object is returned for each requested fleet ID. When specifying a list of fleet IDs, attribute objects are returned only for fleets that currently exist. </p> <note><p>Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.</p></note>"
+    },
+    "DescribeFleetCapacity":{
+      "name":"DescribeFleetCapacity",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeFleetCapacityInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeFleetCapacityOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves the current status of fleet capacity for one or more fleets. This information includes the number of instances that have been requested for the fleet and the number currently active. You can request capacity for all fleets, or specify a list of one or more fleet IDs. When requesting all fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>FleetCapacity</a> object is returned for each requested fleet ID. When specifying a list of fleet IDs, attribute objects are returned only for fleets that currently exist. </p> <note><p>Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.</p></note>"
+    },
+    "DescribeFleetEvents":{
+      "name":"DescribeFleetEvents",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeFleetEventsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeFleetEventsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves entries from the fleet event log. You can specify a time range to limit the result set. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a collection of event log entries matching the request are returned.</p>"
+    },
+    "DescribeFleetPortSettings":{
+      "name":"DescribeFleetPortSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeFleetPortSettingsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeFleetPortSettingsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves the port settings for a fleet. Port settings are used to limit incoming traffic access to game servers in the fleet. To get a fleet's port settings, specify a fleet ID. If successful, an <a>IpPermission</a> object is returned for the requested fleet ID. If the requested fleet has been deleted, the result set will be empty.</p>"
+    },
+    "DescribeFleetUtilization":{
+      "name":"DescribeFleetUtilization",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeFleetUtilizationInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeFleetUtilizationOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves utilization statistics for one or more fleets. You can request utilization data for all fleets, or specify a list of one or more fleet IDs. When requesting all fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>FleetUtilization</a> object is returned for each requested fleet ID. When specifying a list of fleet IDs, utilization objects are returned only for fleets that currently exist. </p> <note><p>Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.</p></note>"
+    },
+    "DescribeGameSessionDetails":{
+      "name":"DescribeGameSessionDetails",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeGameSessionDetailsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeGameSessionDetailsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"TerminalRoutingStrategyException",
+          "exception":true,
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+        }
+      ],
+      "documentation":"<p>Retrieves properties, including the protection policy in force, for one or more game sessions. This action can be used in several ways: (1) provide a <i>GameSessionId</i> to request details for a specific game session; (2) provide either a <i>FleetId</i> or an <i>AliasId</i> to request properties for all game sessions running on a fleet. </p> <p>To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>GameSessionDetail</a> object is returned for each session matching the request.</p>"
+    },
+    "DescribeGameSessions":{
+      "name":"DescribeGameSessions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeGameSessionsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeGameSessionsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"TerminalRoutingStrategyException",
+          "exception":true,
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+        }
+      ],
+      "documentation":"<p>Retrieves properties for one or more game sessions. This action can be used in several ways: (1) provide a <i>GameSessionId</i> to request properties for a specific game session; (2) provide a <i>FleetId</i> or an <i>AliasId</i> to request properties for all game sessions running on a fleet. </p> <p>To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>GameSession</a> object is returned for each session matching the request.</p>"
+    },
+    "DescribePlayerSessions":{
+      "name":"DescribePlayerSessions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribePlayerSessionsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribePlayerSessionsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves properties for one or more player sessions. This action can be used in several ways: (1) provide a <i>PlayerSessionId</i> parameter to request properties for a specific player session; (2) provide a <i>GameSessionId</i> parameter to request properties for all player sessions in the specified game session; (3) provide a <i>PlayerId</i> parameter to request properties for all player sessions of a specified player. </p> <p>To get game session record(s), specify only one of the following: a player session ID, a game session ID, or a player ID. You can filter this request by player session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>PlayerSession</a> object is returned for each session matching the request.</p>"
+    },
+    "DescribeScalingPolicies":{
+      "name":"DescribeScalingPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeScalingPoliciesInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeScalingPoliciesOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves all scaling policies applied to a fleet. </p> <p>To get a fleet's scaling policies, specify the fleet ID. You can filter this request by policy status, such as to retrieve only active scaling policies. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, set of <a>ScalingPolicy</a> objects is returned for the fleet.</p>"
+    },
+    "GetGameSessionLogUrl":{
+      "name":"GetGameSessionLogUrl",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"GetGameSessionLogUrlInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"GetGameSessionLogUrlOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves the location of stored game session logs for a specified game session. When a game session is terminated, Amazon GameLift automatically stores the logs in Amazon S3. Use this URL to download the logs.</p> <note><p>See the <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift\">AWS Service Limits</a> page for maximum log file sizes. Log files that exceed this limit are not saved.</p></note>"
+    },
+    "ListAliases":{
+      "name":"ListAliases",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ListAliasesInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"ListAliasesOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves a collection of alias records for this AWS account. You can filter the result set by alias name and/or routing strategy type. Use the pagination parameters to retrieve results in sequential pages. </p> <note><p>Aliases are not listed in any particular order.</p></note>"
+    },
+    "ListBuilds":{
+      "name":"ListBuilds",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ListBuildsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"ListBuildsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves build records for all builds associated with an AWS account. You can filter the result set by build status. Use the pagination parameters to retrieve results in a set of sequential pages. </p> <note><p>Build records are not listed in any particular order.</p></note>"
+    },
+    "ListFleets":{
+      "name":"ListFleets",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ListFleetsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"ListFleetsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves a collection of fleet records for this AWS account. You can filter the result set by build ID. Use the pagination parameters to retrieve results in sequential pages. </p> <note><p>Fleet records are not listed in any particular order.</p></note>"
+    },
+    "PutScalingPolicy":{
+      "name":"PutScalingPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"PutScalingPolicyInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"PutScalingPolicyOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        }
+      ],
+      "documentation":"<p>Creates or updates a scaling policy for a fleet. An active scaling policy prompts GameLift to track a certain metric for a fleet and automatically change the fleet's capacity in specific circumstances. Each scaling policy contains one rule statement. Fleets can have multiple scaling policies in force simultaneously.</p> <p>A scaling policy rule statement has the following structure:</p> <p>If <i>[MetricName]</i> is <i>[ComparisonOperator]</i> <i>[Threshold]</i> for <i>[EvaluationPeriods]</i> minutes, then <i>[ScalingAdjustmentType]</i> to/by <i>[ScalingAdjustment]</i>.</p> <p>For example, this policy: \"If the number of idle instances exceeds 20 for more than 15 minutes, then reduce the fleet capacity by 10 instances\" could be implemented as the following rule statement: </p> <p>If [IdleInstances] is [GreaterThanOrEqualToThreshold] [20] for [15] minutes, then [ChangeInCapacity] by [-10]. </p> <p>To create or update a scaling policy, specify a unique combination of name and fleet ID, and set the rule values. All parameters for this action are required. If successful, the policy name is returned. Scaling policies cannot be suspended or made inactive. To stop enforcing a scaling policy, call <a>DeleteScalingPolicy</a>.</p>"
+    },
+    "RequestUploadCredentials":{
+      "name":"RequestUploadCredentials",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"RequestUploadCredentialsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"RequestUploadCredentialsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.</p> <important><p>Call this action only if you need credentials for a build created with <a>CreateBuild</a>. This is a rare situation; in most cases, builds are created using the CLI command <code>upload-build</code>, which creates a build record and also uploads build files. </p></important> <p>Upload credentials are returned when you create the build, but they have a limited lifespan. You can get fresh credentials and use them to re-upload game files until the state of that build changes to READY. Once this happens, you must create a brand new build.</p>"
+    },
+    "ResolveAlias":{
+      "name":"ResolveAlias",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ResolveAliasInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"ResolveAliasOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"TerminalRoutingStrategyException",
+          "exception":true,
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves the fleet ID that a specified alias is currently pointing to. </p>"
+    },
+    "UpdateAlias":{
+      "name":"UpdateAlias",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateAliasInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"UpdateAliasOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        }
+      ],
+      "documentation":"<p>Updates properties for an alias. To update properties, specify the alias ID to be updated and provide the information to be changed. To reassign an alias to another fleet, provide an updated routing strategy. If successful, the updated alias record is returned.</p>"
+    },
+    "UpdateBuild":{
+      "name":"UpdateBuild",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateBuildInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"UpdateBuildOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        }
+      ],
+      "documentation":"<p>Updates metadata in a build record, including the build name and version. To update the metadata, specify the build ID to update and provide the new values. If successful, a build object containing the updated metadata is returned. </p>"
+    },
+    "UpdateFleetAttributes":{
+      "name":"UpdateFleetAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateFleetAttributesInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"UpdateFleetAttributesOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"ConflictException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Please resolve the conflict before retrying this request.</p>"
+        },
+        {
+          "shape":"InvalidFleetStatusException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the fleet. Please resolve the conflict before retrying.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause the resource to exceed the allowed service limit. Please resolve the issue before retrying.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Updates fleet properties, including name and description, for a fleet. To update metadata, specify the fleet ID and the property values you want to change. If successful, the fleet ID for the updated fleet is returned.</p>"
+    },
+    "UpdateFleetCapacity":{
+      "name":"UpdateFleetCapacity",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateFleetCapacityInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"UpdateFleetCapacityOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"ConflictException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Please resolve the conflict before retrying this request.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause the resource to exceed the allowed service limit. Please resolve the issue before retrying.</p>"
+        },
+        {
+          "shape":"InvalidFleetStatusException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the fleet. Please resolve the conflict before retrying.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Updates capacity settings for a fleet. Use this action to specify the number of EC2 instances (hosts) you want this fleet to contain. Before calling this action, you may want to call <a>DescribeEC2InstanceLimits</a> to get the maximum capacity based on the fleet's EC2 instance type.</p> <p>If you're using auto-scaling (see <a>PutScalingPolicy</a>), you may want to specify a minimum and/or maximum capacity. If you don't provide these boundaries, auto-scaling can set capacity anywhere between zero and the <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift\">service limits</a>.</p> <p>To update fleet capacity, specify the fleet ID and the desired number of instances. If successful, Amazon GameLift starts or terminates instances so that the fleet's active instance count matches the desired instance count. You can view a fleet's current capacity information by calling <a>DescribeFleetCapacity</a>. If the desired instance count is higher than the instance type's limit, the \"Limit Exceeded\" exception will occur.</p>"
+    },
+    "UpdateFleetPortSettings":{
+      "name":"UpdateFleetPortSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateFleetPortSettingsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"UpdateFleetPortSettingsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"ConflictException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Please resolve the conflict before retrying this request.</p>"
+        },
+        {
+          "shape":"InvalidFleetStatusException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the fleet. Please resolve the conflict before retrying.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause the resource to exceed the allowed service limit. Please resolve the issue before retrying.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        }
+      ],
+      "documentation":"<p>Updates port settings for a fleet. To update settings, specify the fleet ID to be updated and list the permissions you want to update. List the permissions you want to add in <i>InboundPermissionAuthorizations</i>, and permissions you want to remove in <i>InboundPermissionRevocations</i>. Permissions to be removed must match existing fleet permissions. If successful, the fleet ID for the updated fleet is returned.</p>"
+    },
+    "UpdateGameSession":{
+      "name":"UpdateGameSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateGameSessionInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"UpdateGameSessionOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"ConflictException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Please resolve the conflict before retrying this request.</p>"
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"InvalidGameSessionStatusException",
+          "exception":true,
+          "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the game instance. Such requests should not be retried by clients without resolving the conflict.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        }
+      ],
+      "documentation":"<p>Updates game session properties. This includes the session name, maximum player count, protection policy, which controls whether or not an active game session can be terminated during a scale-down event, and the player session creation policy, which controls whether or not new players can join the session. To update a game session, specify the game session ID and the values you want to change. If successful, an updated <a>GameSession</a> object is returned. </p>"
+    }
+  },
+  "shapes":{
+    "Alias":{
+      "type":"structure",
+      "members":{
+        "AliasId":{
+          "shape":"AliasId",
+          "documentation":"<p>Unique identifier for a fleet alias.</p>"
+        },
+        "Name":{
+          "shape":"FreeText",
+          "documentation":"<p>Descriptive label associated with this alias. Alias names do not need to be unique.</p>"
+        },
+        "Description":{
+          "shape":"FreeText",
+          "documentation":"<p>Human-readable description of the alias.</p>"
+        },
+        "RoutingStrategy":{"shape":"RoutingStrategy"},
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        },
+        "LastUpdatedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time stamp indicating when this object was last modified. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        }
+      },
+      "documentation":"<p>Properties describing a fleet alias.</p>"
+    },
+    "AliasId":{
+      "type":"string",
+      "pattern":"^alias-\\S+"
+    },
+    "AliasList":{
+      "type":"list",
+      "member":{"shape":"Alias"}
+    },
+    "AwsCredentials":{
+      "type":"structure",
+      "members":{
+        "AccessKeyId":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Access key for an AWS account.</p>"
+        },
+        "SecretAccessKey":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Secret key for an AWS account.</p>"
+        },
+        "SessionToken":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Token specific to a build ID.</p>"
+        }
+      },
+      "sensitive":true,
+      "documentation":"<p>AWS access credentials required to upload game build files to Amazon GameLift. These credentials are generated with <a>CreateBuild</a>, and are valid for a limited time. If they expire before you upload your game build, get a new set by calling <a>RequestUploadCredentials</a>.</p>"
+    },
+    "Build":{
+      "type":"structure",
+      "members":{
+        "BuildId":{
+          "shape":"BuildId",
+          "documentation":"<p>Unique identifier for a build.</p>"
+        },
+        "Name":{
+          "shape":"FreeText",
+          "documentation":"<p>Descriptive label associated with this build. Build names do not need to be unique. It can be set using <a>CreateBuild</a> or <a>UpdateBuild</a>.</p>"
+        },
+        "Version":{
+          "shape":"FreeText",
+          "documentation":"<p>Version associated with this build. Version strings do not need to be unique to a build. This value can be set using <a>CreateBuild</a> or <a>UpdateBuild</a>.</p>"
+        },
+        "Status":{
+          "shape":"BuildStatus",
+          "documentation":"<p>Current status of the build. Possible build states include: <ul><li>INITIALIZED: A new build has been defined, but no files have been uploaded. You cannot create fleets for builds that are in this state. When a build is successfully created, the build state is set to this value. </li><li>READY: The game build has been successfully uploaded. You can now create new fleets for this build.</li><li>FAILED: The game build upload failed. You cannot create new fleets for this build. </li></ul></p>"
+        },
+        "SizeOnDisk":{
+          "shape":"PositiveLong",
+          "documentation":"<p>File size of the uploaded game build, expressed in bytes. When the build state is INITIALIZED, this value is 0.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        }
+      },
+      "documentation":"<p>Properties describing a game build.</p>"
+    },
+    "BuildId":{
+      "type":"string",
+      "pattern":"^build-\\S+"
+    },
+    "BuildList":{
+      "type":"list",
+      "member":{"shape":"Build"}
+    },
+    "BuildStatus":{
+      "type":"string",
+      "enum":[
+        "INITIALIZED",
+        "READY",
+        "FAILED"
+      ]
+    },
+    "ComparisonOperatorType":{
+      "type":"string",
+      "enum":[
+        "GreaterThanOrEqualToThreshold",
+        "GreaterThanThreshold",
+        "LessThanThreshold",
+        "LessThanOrEqualToThreshold"
+      ]
+    },
+    "ConflictException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "documentation":"<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Please resolve the conflict before retrying this request.</p>"
+    },
+    "CreateAliasInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "RoutingStrategy"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this alias. Alias names do not need to be unique.</p>"
+        },
+        "Description":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Human-readable description of the alias.</p>"
+        },
+        "RoutingStrategy":{
+          "shape":"RoutingStrategy",
+          "documentation":"<p>Object specifying the fleet and routing type to use for the alias.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "CreateAliasOutput":{
+      "type":"structure",
+      "members":{
+        "Alias":{
+          "shape":"Alias",
+          "documentation":"<p>Object containing the newly created alias record.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "CreateBuildInput":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this build. Build names do not need to be unique. A build name can be changed later using <a>UpdateBuild</a>.</p>"
+        },
+        "Version":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Version associated with this build. Version strings do not need to be unique to a build. A build version can be changed later using <a>UpdateBuild</a>.</p>"
+        },
+        "StorageLocation":{"shape":"S3Location"}
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "CreateBuildOutput":{
+      "type":"structure",
+      "members":{
+        "Build":{
+          "shape":"Build",
+          "documentation":"<p>Set of properties for the newly created build.</p>"
+        },
+        "UploadCredentials":{
+          "shape":"AwsCredentials",
+          "documentation":"<p>AWS credentials required when uploading a game build to the storage location. These credentials have a limited lifespan and are valid only for the build they were issued for. If you need to get fresh credentials, call <a>RequestUploadCredentials</a>.</p>"
+        },
+        "StorageLocation":{
+          "shape":"S3Location",
+          "documentation":"<p>Amazon S3 path and key, identifying where the game build files are stored.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "CreateFleetInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "BuildId",
+        "ServerLaunchPath",
+        "EC2InstanceType"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this fleet. Fleet names do not need to be unique.</p>"
+        },
+        "Description":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Human-readable description of the fleet.</p>"
+        },
+        "BuildId":{
+          "shape":"BuildId",
+          "documentation":"<p>Unique identifier for the build you want the new fleet to use.</p>"
+        },
+        "ServerLaunchPath":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Path to the launch executable for the game server. A game server is built into a <code>C:\\game</code> drive. This value must be expressed as <code>C:\\game\\[launchpath]</code>. Example: If, when built, your game server files are in a folder called \"MyGame\", your log path should be <code>C:\\game\\MyGame\\server.exe</code>.</p>"
+        },
+        "ServerLaunchParameters":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Parameters required to launch your game server. These parameters should be expressed as a string of command-line parameters. Example: \"+sv_port 33435 +start_lobby\".</p>"
+        },
+        "LogPaths":{
+          "shape":"StringList",
+          "documentation":"<p>Path to game-session log files generated by your game server. Once a game session has been terminated, Amazon GameLift captures and stores the logs on Amazon S3. Use the GameLift console to access the stored logs.</p>"
+        },
+        "EC2InstanceType":{
+          "shape":"EC2InstanceType",
+          "documentation":"<p>Type of EC2 instances used in the fleet. EC2 instance types define the CPU, memory, storage, and networking capacity of the fleetaposs hosts. Amazon GameLift supports the EC2 instance types listed below. See <a href=\"https://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for detailed descriptions of each.</p>"
+        },
+        "EC2InboundPermissions":{
+          "shape":"IpPermissionsList",
+          "documentation":"<p>Access limits for incoming traffic. Setting these values limits game server access to incoming traffic using specified IP ranges and port numbers. Some ports in a range may be restricted. You can provide one or more sets of permissions for the fleet.</p>"
+        },
+        "NewGameSessionProtectionPolicy":{
+          "shape":"ProtectionPolicy",
+          "documentation":"<p>Game session protection policy to apply to all instances created in this fleet. If this parameter is not set, new instances in this fleet will default to no protection. Protection can be set for individual instances using <a>UpdateGameSession</a>. <ul><li>NoProtection: The game session can be terminated during a scale-down event.</li> <li>FullProtection: If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.</li></ul></p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "CreateFleetOutput":{
+      "type":"structure",
+      "members":{
+        "FleetAttributes":{
+          "shape":"FleetAttributes",
+          "documentation":"<p>Properties for the newly created fleet.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "CreateGameSessionInput":{
+      "type":"structure",
+      "required":["MaximumPlayerSessionCount"],
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet. Each request must reference either a fleet ID or alias ID, but not both.</p>"
+        },
+        "AliasId":{
+          "shape":"AliasId",
+          "documentation":"<p>Unique identifier for a fleet alias. Each request must reference either a fleet ID or alias ID, but not both.</p>"
+        },
+        "MaximumPlayerSessionCount":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Maximum number of players that can be connected simultaneously to the game session. </p>"
+        },
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this game session. Session names do not need to be unique.</p>"
+        },
+        "GameProperties":{
+          "shape":"GamePropertyList",
+          "documentation":"<p>Set of properties used to administer a game session. These properties are passed to your game server.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "CreateGameSessionOutput":{
+      "type":"structure",
+      "members":{
+        "GameSession":{
+          "shape":"GameSession",
+          "documentation":"<p>Object containing the newly created game session record.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "CreatePlayerSessionInput":{
+      "type":"structure",
+      "required":[
+        "GameSessionId",
+        "PlayerId"
+      ],
+      "members":{
+        "GameSessionId":{
+          "shape":"GameSessionId",
+          "documentation":"<p>Unique identifier for a game session. Specify the game session you want to add a player to.</p>"
+        },
+        "PlayerId":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Unique identifier for the player to be added.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "CreatePlayerSessionOutput":{
+      "type":"structure",
+      "members":{
+        "PlayerSession":{
+          "shape":"PlayerSession",
+          "documentation":"<p>Object containing the newly created player session record.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "CreatePlayerSessionsInput":{
+      "type":"structure",
+      "required":[
+        "GameSessionId",
+        "PlayerIds"
+      ],
+      "members":{
+        "GameSessionId":{
+          "shape":"GameSessionId",
+          "documentation":"<p>Unique identifier for a game session. </p>"
+        },
+        "PlayerIds":{
+          "shape":"PlayerIdList",
+          "documentation":"<p>List of unique identifiers for the players to be added.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "CreatePlayerSessionsOutput":{
+      "type":"structure",
+      "members":{
+        "PlayerSessions":{
+          "shape":"PlayerSessionList",
+          "documentation":"<p>Collection of player session objects created for the added players.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DeleteAliasInput":{
+      "type":"structure",
+      "required":["AliasId"],
+      "members":{
+        "AliasId":{
+          "shape":"AliasId",
+          "documentation":"<p>Unique identifier for a fleet alias. Specify the alias you want to delete. </p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DeleteBuildInput":{
+      "type":"structure",
+      "required":["BuildId"],
+      "members":{
+        "BuildId":{
+          "shape":"BuildId",
+          "documentation":"<p>Unique identifier for the build you want to delete. </p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DeleteFleetInput":{
+      "type":"structure",
+      "required":["FleetId"],
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for the fleet you want to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DeleteScalingPolicyInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "FleetId"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this scaling policy. Policy names do not need to be unique.</p>"
+        },
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeAliasInput":{
+      "type":"structure",
+      "required":["AliasId"],
+      "members":{
+        "AliasId":{
+          "shape":"AliasId",
+          "documentation":"<p>Unique identifier for a fleet alias. Specify the alias you want to retrieve. </p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeAliasOutput":{
+      "type":"structure",
+      "members":{
+        "Alias":{
+          "shape":"Alias",
+          "documentation":"<p>Object containing the requested alias.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribeBuildInput":{
+      "type":"structure",
+      "required":["BuildId"],
+      "members":{
+        "BuildId":{
+          "shape":"BuildId",
+          "documentation":"<p>Unique identifier for the build you want to retrieve properties for. </p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeBuildOutput":{
+      "type":"structure",
+      "members":{
+        "Build":{
+          "shape":"Build",
+          "documentation":"<p>Set of properties describing the requested build.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribeEC2InstanceLimitsInput":{
+      "type":"structure",
+      "members":{
+        "EC2InstanceType":{
+          "shape":"EC2InstanceType",
+          "documentation":"<p>Type of EC2 instances used in the fleet. EC2 instance types define the CPU, memory, storage, and networking capacity of the fleetaposs hosts. Amazon GameLift supports the EC2 instance types listed below. See <a href=\"https://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for detailed descriptions of each. Leave this parameter blank to retrieve limits for all types.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeEC2InstanceLimitsOutput":{
+      "type":"structure",
+      "members":{
+        "EC2InstanceLimits":{
+          "shape":"EC2InstanceLimitList",
+          "documentation":"<p>Object containing the maximum number of instances for the specified instance type.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribeFleetAttributesInput":{
+      "type":"structure",
+      "members":{
+        "FleetIds":{
+          "shape":"FleetIdList",
+          "documentation":"<p>Unique identifiers for the fleet(s) that you want to retrieve attributes for. Leave this parameter empty to retrieve attributes for all fleets.</p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages. This parameter is ignored when the request specifies one or a list of fleet IDs.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeFleetAttributesOutput":{
+      "type":"structure",
+      "members":{
+        "FleetAttributes":{
+          "shape":"FleetAttributesList",
+          "documentation":"<p>Collection of objects containing attribute metadata for each requested fleet ID. </p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribeFleetCapacityInput":{
+      "type":"structure",
+      "members":{
+        "FleetIds":{
+          "shape":"FleetIdList",
+          "documentation":"<p>Unique identifier for the fleet(s) you want to retrieve capacity information for. </p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages. This parameter is ignored when the request specifies one or a list of fleet IDs.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeFleetCapacityOutput":{
+      "type":"structure",
+      "members":{
+        "FleetCapacity":{
+          "shape":"FleetCapacityList",
+          "documentation":"<p>Collection of objects containing capacity information for each requested fleet ID. Leave this parameter empty to retrieve capacity information for all fleets.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribeFleetEventsInput":{
+      "type":"structure",
+      "required":["FleetId"],
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for the fleet to get event logs for. </p>"
+        },
+        "StartTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Earliest date to retrieve event logs for. If no start time is specified, this call returns entries starting from when the fleet was created to the specified end time. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        },
+        "EndTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Most recent date to retrieve event logs for. If no end time is specified, this call returns entries from the specified start time up to the present. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeFleetEventsOutput":{
+      "type":"structure",
+      "members":{
+        "Events":{
+          "shape":"EventList",
+          "documentation":"<p>Collection of objects containing event log entries for the specified fleet.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribeFleetPortSettingsInput":{
+      "type":"structure",
+      "required":["FleetId"],
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for the fleet you want to retrieve port settings for. </p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeFleetPortSettingsOutput":{
+      "type":"structure",
+      "members":{
+        "InboundPermissions":{
+          "shape":"IpPermissionsList",
+          "documentation":"<p>Object containing port settings for the requested fleet ID.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribeFleetUtilizationInput":{
+      "type":"structure",
+      "members":{
+        "FleetIds":{
+          "shape":"FleetIdList",
+          "documentation":"<p>Unique identifier for the fleet(s) you want to retrieve utilization data for. Leave this parameter empty to retrieve utilization data for all fleets.</p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages. This parameter is ignored when the request specifies one or a list of fleet IDs.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeFleetUtilizationOutput":{
+      "type":"structure",
+      "members":{
+        "FleetUtilization":{
+          "shape":"FleetUtilizationList",
+          "documentation":"<p>Collection of objects containing utilization information for each requested fleet ID.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribeGameSessionDetailsInput":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet. Specify a fleet to retrieve information on all game sessions active on the fleet.</p>"
+        },
+        "GameSessionId":{
+          "shape":"GameSessionId",
+          "documentation":"<p>Unique identifier for a game session. Specify the game session to retrieve information on.</p>"
+        },
+        "AliasId":{
+          "shape":"AliasId",
+          "documentation":"<p>Unique identifier for a fleet alias. Specify an alias to retrieve information on all game sessions active on the fleet.</p>"
+        },
+        "StatusFilter":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Game session status to filter results on. Possible game session states include ACTIVE, TERMINATED, ACTIVATING and TERMINATING (the last two are transitory). </p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeGameSessionDetailsOutput":{
+      "type":"structure",
+      "members":{
+        "GameSessionDetails":{
+          "shape":"GameSessionDetailList",
+          "documentation":"<p>Collection of objects containing game session properties and the protection policy currently in force for each session matching the request.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribeGameSessionsInput":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet. Specify a fleet to retrieve information on all game sessions active on the fleet.</p>"
+        },
+        "GameSessionId":{
+          "shape":"GameSessionId",
+          "documentation":"<p>Unique identifier for a game session. Specify the game session to retrieve information on.</p>"
+        },
+        "AliasId":{
+          "shape":"AliasId",
+          "documentation":"<p>Unique identifier for a fleet alias. Specify an alias to retrieve information on all game sessions active on the fleet.</p>"
+        },
+        "StatusFilter":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Game session status to filter results on. Possible game session states include ACTIVE, TERMINATED, ACTIVATING and TERMINATING (the last two are transitory). </p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeGameSessionsOutput":{
+      "type":"structure",
+      "members":{
+        "GameSessions":{
+          "shape":"GameSessionList",
+          "documentation":"<p>Collection of objects containing game session properties for each session matching the request.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribePlayerSessionsInput":{
+      "type":"structure",
+      "members":{
+        "GameSessionId":{
+          "shape":"GameSessionId",
+          "documentation":"<p>Unique identifier for a game session.</p>"
+        },
+        "PlayerId":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Unique identifier for a player.</p>"
+        },
+        "PlayerSessionId":{
+          "shape":"PlayerSessionId",
+          "documentation":"<p>Unique identifier for a player session.</p>"
+        },
+        "PlayerSessionStatusFilter":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Player session status to filter results on. Possible player session states include: <ul><li>RESERVED: The player session request has been received, but the player has not yet connected to the game server and/or been validated. </li><li>ACTIVE: The player has been validated by the game server and is currently connected.</li><li>COMPLETED: The player connection has been dropped.</li><li>TIMEDOUT: A player session request was received, but the player did not connect and/or was not validated within the time-out limit (60 seconds).</li></ul></p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages. If a player session ID is specified, this parameter is ignored.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. If a player session ID is specified, this parameter is ignored.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribePlayerSessionsOutput":{
+      "type":"structure",
+      "members":{
+        "PlayerSessions":{
+          "shape":"PlayerSessionList",
+          "documentation":"<p>Collection of objects containing properties for each player session that matches the request.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "DescribeScalingPoliciesInput":{
+      "type":"structure",
+      "required":["FleetId"],
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet. Specify the fleet to retrieve scaling policies for.</p>"
+        },
+        "StatusFilter":{
+          "shape":"ScalingStatusType",
+          "documentation":"<p>Game session status to filter results on. A scaling policy is only in force when in an Active state. <ul> <li>ACTIVE: The scaling policy is currently in force.</li> <li>UPDATEREQUESTED: A request to update the scaling policy has been received.</li> <li>UPDATING: A change is being made to the scaling policy.</li> <li>DELETEREQUESTED: A request to delete the scaling policy has been received.</li> <li>DELETING: The scaling policy is being deleted.</li> <li>DELETED: The scaling policy has been deleted.</li> <li>ERROR: An error occurred in creating the policy. It should be removed and recreated.</li> </ul></p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeScalingPoliciesOutput":{
+      "type":"structure",
+      "members":{
+        "ScalingPolicies":{
+          "shape":"ScalingPolicyList",
+          "documentation":"<p>Collection of objects containing the scaling policies matching the request.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "Double":{"type":"double"},
+    "EC2InstanceCounts":{
+      "type":"structure",
+      "members":{
+        "DESIRED":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Ideal number of active instances in the fleet.</p>"
+        },
+        "MINIMUM":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Minimum value allowed for the fleet's instance count.</p>"
+        },
+        "MAXIMUM":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Maximum value allowed for the fleet's instance count.</p>"
+        },
+        "PENDING":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Number of instances in the fleet that are starting but not yet active.</p>"
+        },
+        "ACTIVE":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Actual number of active instances in the fleet.</p>"
+        },
+        "IDLE":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Number of active instances in the fleet that are not currently hosting a game session.</p>"
+        },
+        "TERMINATING":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Number of instances in the fleet that are no longer active but haven't yet been terminated. </p>"
+        }
+      },
+      "documentation":"<p>Current status of fleet capacity. The number of active instances should match or be in the process of matching the number of desired instances. Pending and terminating counts are non-zero only if fleet capacity is adjusting to an <a>UpdateFleetCapacity</a> request, or if access to resources is temporarily affected.</p>"
+    },
+    "EC2InstanceLimit":{
+      "type":"structure",
+      "members":{
+        "EC2InstanceType":{
+          "shape":"EC2InstanceType",
+          "documentation":"<p>Type of EC2 instances used in the fleet. EC2 instance types define the CPU, memory, storage, and networking capacity of the fleetaposs hosts. Amazon GameLift supports the EC2 instance types listed below. See <a href=\"https://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for detailed descriptions of each.</p>"
+        },
+        "CurrentInstances":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Number of instances of the specified type that are currently in use by this AWS account. </p>"
+        },
+        "InstanceLimit":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Number of instances allowed.</p>"
+        }
+      },
+      "documentation":"<p>Maximum number of instances allowed based on the Amazon Elastic Compute Cloud (Amazon EC2) instance type. Instance limits can be retrieved by calling <a>DescribeEC2InstanceLimits</a>.</p>"
+    },
+    "EC2InstanceLimitList":{
+      "type":"list",
+      "member":{"shape":"EC2InstanceLimit"}
+    },
+    "EC2InstanceType":{
+      "type":"string",
+      "enum":[
+        "t2.micro",
+        "t2.small",
+        "t2.medium",
+        "t2.large",
+        "c3.large",
+        "c3.xlarge",
+        "c3.2xlarge",
+        "c3.4xlarge",
+        "c3.8xlarge",
+        "c4.large",
+        "c4.xlarge",
+        "c4.2xlarge",
+        "c4.4xlarge",
+        "c4.8xlarge",
+        "r3.large",
+        "r3.xlarge",
+        "r3.2xlarge",
+        "r3.4xlarge",
+        "r3.8xlarge",
+        "m3.medium",
+        "m3.large",
+        "m3.xlarge",
+        "m3.2xlarge",
+        "m4.large",
+        "m4.xlarge",
+        "m4.2xlarge",
+        "m4.4xlarge",
+        "m4.10xlarge"
+      ]
+    },
+    "Event":{
+      "type":"structure",
+      "members":{
+        "EventId":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Unique identifier for a fleet event.</p>"
+        },
+        "ResourceId":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Unique identifier for the resource, such as a fleet ID.</p>"
+        },
+        "EventCode":{
+          "shape":"EventCode",
+          "documentation":"<p>Type of event being logged.</p>"
+        },
+        "Message":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Additional information related to the event.</p>"
+        },
+        "EventTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time stamp indicating when this event occurred. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        }
+      },
+      "documentation":"<p>Log entry describing an event involving an Amazon GameLift resource (such as a fleet).</p>"
+    },
+    "EventCode":{
+      "type":"string",
+      "enum":[
+        "GENERIC_EVENT",
+        "FLEET_CREATED",
+        "FLEET_DELETED",
+        "FLEET_SCALING_EVENT",
+        "FLEET_STATE_DOWNLOADING",
+        "FLEET_STATE_VALIDATING",
+        "FLEET_STATE_BUILDING",
+        "FLEET_STATE_ACTIVATING",
+        "FLEET_STATE_ACTIVE",
+        "FLEET_STATE_ERROR",
+        "FLEET_INITIALIZATION_FAILED",
+        "FLEET_BINARY_DOWNLOAD_FAILED",
+        "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND",
+        "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE",
+        "FLEET_VALIDATION_TIMED_OUT",
+        "FLEET_ACTIVATION_FAILED",
+        "FLEET_ACTIVATION_FAILED_NO_INSTANCES",
+        "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"
+      ]
+    },
+    "EventList":{
+      "type":"list",
+      "member":{"shape":"Event"}
+    },
+    "FleetAttributes":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet.</p>"
+        },
+        "Description":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Human-readable description of the fleet.</p>"
+        },
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this fleet. Fleet names do not need to be unique.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        },
+        "TerminationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time stamp indicating when this fleet was terminated. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        },
+        "Status":{
+          "shape":"FleetStatus",
+          "documentation":"<p>Current status of the fleet. Possible fleet states include: <ul><li>NEW: A new fleet has been defined and hosts allocated.</li><li>DOWNLOADING/VALIDATING/BUILDING/ACTIVATING: The new fleet is being set up with the game build, and new hosts are being started.</li><li>ACTIVE: Hosts can now accept game sessions.</li><li>ERROR: An error occurred when downloading, validating, building, or activating the fleet.</li><li>DELETING: Hosts are responding to a delete fleet request.</li><li>TERMINATED: The fleet no longer exists.</li></ul></p>"
+        },
+        "BuildId":{
+          "shape":"BuildId",
+          "documentation":"<p>Unique identifier for a build.</p>"
+        },
+        "ServerLaunchPath":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Path to the launch executable for the game server. A game server is built into a <code>C:\\game</code> drive. This value must be expressed as <code>C:\\game\\[launchpath]</code>. Example: If, when built, your game server files are in a folder called \"MyGame\", your log path should be <code>C:\\game\\MyGame\\server.exe</code>.</p>"
+        },
+        "ServerLaunchParameters":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Parameters required to launch your game server. These parameters should be expressed as a string of command-line parameters. Example: \"+sv_port 33435 +start_lobby\".</p>"
+        },
+        "LogPaths":{
+          "shape":"StringList",
+          "documentation":"<p>Path to game-session log files generated by your game server. Once a game session has been terminated, Amazon GameLift captures and stores the logs on Amazon S3. Use the GameLift console to access the stored logs.</p>"
+        },
+        "NewGameSessionProtectionPolicy":{
+          "shape":"ProtectionPolicy",
+          "documentation":"<p>Type of game session protection to set for all new instances started in the fleet. <ul><li>NoProtection: The game session can be terminated during a scale-down event.</li> <li>FullProtection: If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.</li></ul></p>"
+        }
+      },
+      "documentation":"<p>General properties describing a fleet.</p>"
+    },
+    "FleetAttributesList":{
+      "type":"list",
+      "member":{"shape":"FleetAttributes"}
+    },
+    "FleetCapacity":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet.</p>"
+        },
+        "InstanceType":{
+          "shape":"EC2InstanceType",
+          "documentation":"<p>Type of EC2 instances used in the fleet. EC2 instance types define the CPU, memory, storage, and networking capacity of the fleetaposs hosts. Amazon GameLift supports the EC2 instance types listed below. See <a href=\"https://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for detailed descriptions of each.</p>"
+        },
+        "InstanceCounts":{
+          "shape":"EC2InstanceCounts",
+          "documentation":"<p>Current status of fleet capacity.</p>"
+        }
+      },
+      "documentation":"<p>Information about the fleet's capacity. Fleet capacity is measured in EC2 instances. By default, new fleets have a capacity of one instance, but can be updated as needed. The maximum number of instances for a fleet is determined by the fleet's instance type.</p>"
+    },
+    "FleetCapacityExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "documentation":"<p>The specified fleet has no available instances to fulfill a request to create a new game session. Such requests should only be retried once the fleet capacity has been increased. </p>"
+    },
+    "FleetCapacityList":{
+      "type":"list",
+      "member":{"shape":"FleetCapacity"}
+    },
+    "FleetId":{
+      "type":"string",
+      "pattern":"^fleet-\\S+"
+    },
+    "FleetIdList":{
+      "type":"list",
+      "member":{"shape":"FleetId"},
+      "min":1
+    },
+    "FleetStatus":{
+      "type":"string",
+      "enum":[
+        "NEW",
+        "DOWNLOADING",
+        "VALIDATING",
+        "BUILDING",
+        "ACTIVATING",
+        "ACTIVE",
+        "DELETING",
+        "ERROR",
+        "TERMINATED"
+      ]
+    },
+    "FleetUtilization":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet.</p>"
+        },
+        "ActiveGameSessionCount":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Number of active game sessions currently being hosted on fleet game servers.</p>"
+        },
+        "CurrentPlayerSessionCount":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Number of active player sessions currently being hosted on fleet game servers.</p>"
+        },
+        "MaximumPlayerSessionCount":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Maximum players allowed across all game sessions currently hosted in the fleet.</p>"
+        }
+      },
+      "documentation":"<p>Current status of fleet utilization, including the number of game and player sessions being hosted.</p>"
+    },
+    "FleetUtilizationList":{
+      "type":"list",
+      "member":{"shape":"FleetUtilization"}
+    },
+    "FreeText":{"type":"string"},
+    "GameProperty":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{"shape":"GamePropertyKey"},
+        "Value":{"shape":"GamePropertyValue"}
+      },
+      "documentation":"<p>Set of key-value pairs containing information your game server requires to set up sessions. This object allows you to pass in any set of data needed for your game. For more information, see the <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a>.</p>"
+    },
+    "GamePropertyKey":{
+      "type":"string",
+      "max":32
+    },
+    "GamePropertyList":{
+      "type":"list",
+      "member":{"shape":"GameProperty"},
+      "max":16
+    },
+    "GamePropertyValue":{
+      "type":"string",
+      "max":96
+    },
+    "GameSession":{
+      "type":"structure",
+      "members":{
+        "GameSessionId":{
+          "shape":"GameSessionId",
+          "documentation":"<p>Unique identifier for a game session.</p>"
+        },
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this game session. Session names do not need to be unique.</p>"
+        },
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        },
+        "TerminationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time stamp indicating when this fleet was terminated. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        },
+        "CurrentPlayerSessionCount":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Number of players currently in the game session.</p>"
+        },
+        "MaximumPlayerSessionCount":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Maximum number of players allowed in the game session.</p>"
+        },
+        "Status":{
+          "shape":"GameSessionStatus",
+          "documentation":"<p>Current status of the game session. A game session must be in an ACTIVE state to have player sessions.</p>"
+        },
+        "GameProperties":{
+          "shape":"GamePropertyList",
+          "documentation":"<p>Set of custom properties for the game session.</p>"
+        },
+        "IpAddress":{
+          "shape":"IpAddress",
+          "documentation":"<p>IP address of the game session.</p>"
+        },
+        "PlayerSessionCreationPolicy":{
+          "shape":"PlayerSessionCreationPolicy",
+          "documentation":"<p>Indicates whether or not the game session is accepting new players.</p>"
+        }
+      },
+      "documentation":"<p>Properties describing a game session.</p>"
+    },
+    "GameSessionDetail":{
+      "type":"structure",
+      "members":{
+        "GameSession":{"shape":"GameSession"},
+        "ProtectionPolicy":{
+          "shape":"ProtectionPolicy",
+          "documentation":"<p>Current status of protection for the game session. <ul><li>NoProtection: The game session can be terminated during a scale-down event.</li> <li>FullProtection: If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.</li></ul></p>"
+        }
+      },
+      "documentation":"<p>A game session's properties and the protection policy currently in force.</p>"
+    },
+    "GameSessionDetailList":{
+      "type":"list",
+      "member":{"shape":"GameSessionDetail"}
+    },
+    "GameSessionFullException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "documentation":"<p>The game instance is currently full and cannot allow the requested player(s) to join. This exception occurs in response to a <a>CreatePlayerSession</a> request. </p>"
+    },
+    "GameSessionId":{
+      "type":"string",
+      "pattern":"^(gamei-|gsess-)\\S+"
+    },
+    "GameSessionList":{
+      "type":"list",
+      "member":{"shape":"GameSession"}
+    },
+    "GameSessionStatus":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "ACTIVATING",
+        "TERMINATED",
+        "TERMINATING"
+      ]
+    },
+    "GetGameSessionLogUrlInput":{
+      "type":"structure",
+      "required":["GameSessionId"],
+      "members":{
+        "GameSessionId":{
+          "shape":"GameSessionId",
+          "documentation":"<p>Unique identifier for a game session. Specify the game session you want to get logs for.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "GetGameSessionLogUrlOutput":{
+      "type":"structure",
+      "members":{
+        "PreSignedUrl":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Location of the requested game session logs, available for download.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "Integer":{"type":"integer"},
+    "InternalServiceException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "fault":true,
+      "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+    },
+    "InvalidFleetStatusException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the fleet. Please resolve the conflict before retrying.</p>"
+    },
+    "InvalidGameSessionStatusException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the game instance. Such requests should not be retried by clients without resolving the conflict.</p>"
+    },
+    "InvalidRequestException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+    },
+    "IpAddress":{"type":"string"},
+    "IpPermission":{
+      "type":"structure",
+      "required":[
+        "FromPort",
+        "ToPort",
+        "IpRange",
+        "Protocol"
+      ],
+      "members":{
+        "FromPort":{
+          "shape":"PortNumber",
+          "documentation":"<p>Starting value for a range of allowed port numbers. </p>"
+        },
+        "ToPort":{
+          "shape":"PortNumber",
+          "documentation":"<p>Ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than <i>FromPort</i>.</p>"
+        },
+        "IpRange":{
+          "shape":"NonBlankString",
+          "documentation":"<p>Range of allowed IP addresses. This value must be expressed in <a href=\"https://tools.ietf.org/id/cidr\">CIDR notation</a>. Example: \"<code>000.000.000.000/[subnet mask]</code>\" or optionally the shortened version \"<code>0.0.0.0/[subnet mask]</code>\".</p>"
+        },
+        "Protocol":{
+          "shape":"IpProtocol",
+          "documentation":"<p>Network communication protocol used by the fleet.</p>"
+        }
+      },
+      "documentation":"<p>IP addresses and port settings used to limit access by incoming traffic (players) to a fleet. Permissions specify a range of IP addresses and port settings that must be used to gain access to a game server on a fleet machine.</p>"
+    },
+    "IpPermissionsList":{
+      "type":"list",
+      "member":{"shape":"IpPermission"},
+      "max":50
+    },
+    "IpProtocol":{
+      "type":"string",
+      "enum":[
+        "TCP",
+        "UDP"
+      ]
+    },
+    "LimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "documentation":"<p>The requested operation would cause the resource to exceed the allowed service limit. Please resolve the issue before retrying.</p>"
+    },
+    "ListAliasesInput":{
+      "type":"structure",
+      "members":{
+        "RoutingStrategyType":{
+          "shape":"RoutingStrategyType",
+          "documentation":"<p>Type of routing to filter results on. Use this parameter to retrieve only aliases of a certain type. To retrieve all aliases, leave this parameter empty. Possible routing types include: <ul><li>SIMPLE: The alias resolves to one specific fleet. Use this type when routing to active fleets.</li><li>TERMINAL: The alias does not resolve to a fleet but instead can be used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException with the <a>RoutingStrategy</a> message embedded.</li></ul></p>"
+        },
+        "Name":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Descriptive label associated with this alias. Alias names do not need to be unique.</p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages.</p>"
+        },
+        "NextToken":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "ListAliasesOutput":{
+      "type":"structure",
+      "members":{
+        "Aliases":{
+          "shape":"AliasList",
+          "documentation":"<p>Collection of alias records that match the list request. </p>"
+        },
+        "NextToken":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "ListBuildsInput":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"BuildStatus",
+          "documentation":"<p>Build state to filter results on. Use this parameter to retrieve builds in a certain state. To retrieve all builds, leave this parameter empty. Possible build states include: <ul><li>INITIALIZED: A new build has been defined, but no files have been uploaded. You cannot create fleets for builds that are in this state. When a build is successfully created, the build state is set to this value. </li><li>READY: The game build has been successfully uploaded. You can now create new fleets for this build.</li><li>FAILED: The game build upload failed. You cannot create new fleets for this build. </li></ul></p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages.</p>"
+        },
+        "NextToken":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "ListBuildsOutput":{
+      "type":"structure",
+      "members":{
+        "Builds":{
+          "shape":"BuildList",
+          "documentation":"<p>Collection of build records that match the request. </p>"
+        },
+        "NextToken":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "ListFleetsInput":{
+      "type":"structure",
+      "members":{
+        "BuildId":{
+          "shape":"BuildId",
+          "documentation":"<p>Unique identifier of the build to return fleets for. Use this parameter to return only fleets using the specified build. To retrieve all fleets, leave this parameter empty.</p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "ListFleetsOutput":{
+      "type":"structure",
+      "members":{
+        "FleetIds":{
+          "shape":"FleetIdList",
+          "documentation":"<p>Set of fleet IDs matching the list request. You can retrieve additional information about all returned fleets by passing this result set to a call to <a>DescribeFleetAttributes</a>, <a>DescribeFleetCapacity</a>, and <a>DescribeFleetUtilization</a>.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "MetricName":{
+      "type":"string",
+      "enum":[
+        "ActivatingGameSessions",
+        "ActiveGameSessions",
+        "ActiveInstances",
+        "AvailablePlayerSessions",
+        "CurrentPlayerSessions",
+        "IdleInstances"
+      ]
+    },
+    "NonBlankString":{
+      "type":"string",
+      "pattern":"[^\\s]+"
+    },
+    "NonEmptyString":{
+      "type":"string",
+      "min":1
+    },
+    "NonZeroAndMaxString":{
+      "type":"string",
+      "min":1,
+      "max":1024
+    },
+    "NotFoundException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+    },
+    "PlayerIdList":{
+      "type":"list",
+      "member":{"shape":"NonZeroAndMaxString"},
+      "min":1,
+      "max":25
+    },
+    "PlayerSession":{
+      "type":"structure",
+      "members":{
+        "PlayerSessionId":{
+          "shape":"PlayerSessionId",
+          "documentation":"<p>Unique identifier for a player session.</p>"
+        },
+        "PlayerId":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Unique identifier for a player.</p>"
+        },
+        "GameSessionId":{
+          "shape":"GameSessionId",
+          "documentation":"<p>Unique identifier for a game session.</p>"
+        },
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        },
+        "TerminationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time stamp indicating when this fleet was terminated. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+        },
+        "Status":{
+          "shape":"PlayerSessionStatus",
+          "documentation":"<p>Current status of the player session. Possible player session states include: <ul><li>RESERVED: The player session request has been received, but the player has not yet connected to the game server and/or been validated. </li><li>ACTIVE: The player has been validated by the game server and is currently connected.</li><li>COMPLETED: The player connection has been dropped.</li><li>TIMEDOUT: A player session request was received, but the player did not connect and/or was not validated within the time-out limit (60 seconds).</li></ul></p>"
+        },
+        "IpAddress":{
+          "shape":"IpAddress",
+          "documentation":"<p>Game session IP address. All player sessions reference the game session location. </p>"
+        }
+      },
+      "documentation":"<p>Properties describing a player session.</p>"
+    },
+    "PlayerSessionCreationPolicy":{
+      "type":"string",
+      "enum":[
+        "ACCEPT_ALL",
+        "DENY_ALL"
+      ]
+    },
+    "PlayerSessionId":{
+      "type":"string",
+      "pattern":"^psess-\\S+"
+    },
+    "PlayerSessionList":{
+      "type":"list",
+      "member":{"shape":"PlayerSession"}
+    },
+    "PlayerSessionStatus":{
+      "type":"string",
+      "enum":[
+        "RESERVED",
+        "ACTIVE",
+        "COMPLETED",
+        "TIMEDOUT"
+      ]
+    },
+    "PortNumber":{
+      "type":"integer",
+      "min":1025,
+      "max":60000
+    },
+    "PositiveInteger":{
+      "type":"integer",
+      "min":1
+    },
+    "PositiveLong":{
+      "type":"long",
+      "min":1
+    },
+    "ProtectionPolicy":{
+      "type":"string",
+      "enum":[
+        "NoProtection",
+        "FullProtection"
+      ]
+    },
+    "PutScalingPolicyInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "FleetId",
+        "ScalingAdjustment",
+        "ScalingAdjustmentType",
+        "Threshold",
+        "ComparisonOperator",
+        "EvaluationPeriods",
+        "MetricName"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this scaling policy. Policy names do not need to be unique. A fleet can have only one scaling policy with the same name.</p>"
+        },
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identity for the fleet to scale with this policy.</p>"
+        },
+        "ScalingAdjustment":{
+          "shape":"Integer",
+          "documentation":"<p>Amount of adjustment to make, based on the scaling adjustment type.</p>"
+        },
+        "ScalingAdjustmentType":{
+          "shape":"ScalingAdjustmentType",
+          "documentation":"<p>Type of adjustment to make to a fleet's instance count (see <a>FleetCapacity</a>): <ul> <li>ChangeInCapacity: add (or subtract) the scaling adjustment value from the current instance count. Positive values scale up while negative values scale down.</li> <li>ExactCapacity: set the instance count to the scaling adjustment value.</li> <li>PercentChangeInCapacity: increase or reduce the current instance count by the scaling adjustment, read as a percentage. Positive values scale up while negative values scale down; for example, a value of \"-10\" scales the fleet down by 10%.</li> </ul></p>"
+        },
+        "Threshold":{
+          "shape":"Double",
+          "documentation":"<p>Metric value used to trigger a scaling event.</p>"
+        },
+        "ComparisonOperator":{
+          "shape":"ComparisonOperatorType",
+          "documentation":"<p>Comparison operator to use when measuring the metric against the threshold value. </p>"
+        },
+        "EvaluationPeriods":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>Name of the Service-defined metric that is used to trigger an adjustment. <ul> <li>ActivatingGameSessions: number of game sessions in the process of being created (game session status = ACTIVATING).</li> <li>ActiveGameSessions: number of game sessions currently running (game session status = ACTIVE).</li> <li>CurrentPlayerSessions: number of active or reserved player sessions (player session status = ACTIVE or RESERVED). </li> <li>AvailablePlayerSessions: number of player session slots currently available in active game sessions across the fleet, calculated by subtracting a game session's current player session count from its maximum player session count. This number includes game sessions that are not currently accepting players (game session PlayerSessionCreationPolicy = DENY_ALL).</li> <li>ActiveInstances: number of instances currently running a game session.</li> <li>IdleInstances: number of instances not currently running a game session.</li> </ul></p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "PutScalingPolicyOutput":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this scaling policy. Policy names do not need to be unique.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "RequestUploadCredentialsInput":{
+      "type":"structure",
+      "required":["BuildId"],
+      "members":{
+        "BuildId":{
+          "shape":"BuildId",
+          "documentation":"<p>Unique identifier for the build you want to get credentials for. </p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "RequestUploadCredentialsOutput":{
+      "type":"structure",
+      "members":{
+        "UploadCredentials":{
+          "shape":"AwsCredentials",
+          "documentation":"<p>AWS credentials required when uploading a game build to the storage location. These credentials have a limited lifespan and are valid only for the build they were issued for.</p>"
+        },
+        "StorageLocation":{
+          "shape":"S3Location",
+          "documentation":"<p>Amazon S3 path and key, identifying where the game build files are stored.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "ResolveAliasInput":{
+      "type":"structure",
+      "required":["AliasId"],
+      "members":{
+        "AliasId":{
+          "shape":"AliasId",
+          "documentation":"<p>Unique identifier for the alias you want to resolve. </p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "ResolveAliasOutput":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Fleet ID associated with the requested alias.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "RoutingStrategy":{
+      "type":"structure",
+      "members":{
+        "Type":{
+          "shape":"RoutingStrategyType",
+          "documentation":"<p>Type of routing strategy. Possible routing types include: <ul><li>SIMPLE: The alias resolves to one specific fleet. Use this type when routing to active fleets.</li><li>TERMINAL: The alias does not resolve to a fleet but instead can be used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException with the <a>RoutingStrategy</a> message embedded.</li></ul></p>"
+        },
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet.</p>"
+        },
+        "Message":{
+          "shape":"FreeText",
+          "documentation":"<p>Message text to be used with a terminal routing strategy.</p>"
+        }
+      },
+      "documentation":"<p>Routing configuration for a fleet alias. </p>"
+    },
+    "RoutingStrategyType":{
+      "type":"string",
+      "enum":[
+        "SIMPLE",
+        "TERMINAL"
+      ]
+    },
+    "S3Location":{
+      "type":"structure",
+      "members":{
+        "Bucket":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Amazon S3 bucket identifier.</p>"
+        },
+        "Key":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>Amazon S3 bucket key.</p>"
+        },
+        "RoleArn":{"shape":"NonEmptyString"}
+      },
+      "documentation":"<p>Location in Amazon Simple Storage Service (Amazon S3) where a build's files are stored. This location is assigned in response to a <a>CreateBuild</a> call, and is always in the same region as the service used to create the build. For more details see the <a href=\"http://aws.amazon.com/documentation/s3/\">Amazon S3 documentation</a>.</p>"
+    },
+    "ScalingAdjustmentType":{
+      "type":"string",
+      "enum":[
+        "ChangeInCapacity",
+        "ExactCapacity",
+        "PercentChangeInCapacity"
+      ]
+    },
+    "ScalingPolicy":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identity for the fleet associated with this scaling policy.</p>"
+        },
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this scaling policy. Policy names do not need to be unique.</p>"
+        },
+        "Status":{
+          "shape":"ScalingStatusType",
+          "documentation":"<p>Current status of the scaling policy. The scaling policy is only in force when in an Active state. <ul> <li>ACTIVE: The scaling policy is currently in force.</li> <li>UPDATEREQUESTED: A request to update the scaling policy has been received.</li> <li>UPDATING: A change is being made to the scaling policy.</li> <li>DELETEREQUESTED: A request to delete the scaling policy has been received.</li> <li>DELETING: The scaling policy is being deleted.</li> <li>DELETED: The scaling policy has been deleted.</li> <li>ERROR: An error occurred in creating the policy. It should be removed and recreated.</li> </ul></p>"
+        },
+        "ScalingAdjustment":{
+          "shape":"Integer",
+          "documentation":"<p>Amount of adjustment to make, based on the scaling adjustment type.</p>"
+        },
+        "ScalingAdjustmentType":{
+          "shape":"ScalingAdjustmentType",
+          "documentation":"<p>Type of adjustment to make to a fleet's instance count (see <a>FleetCapacity</a>): <ul> <li>ChangeInCapacity: add (or subtract) the scaling adjustment value from the current instance count. Positive values scale up while negative values scale down.</li> <li>ExactCapacity: set the instance count to the scaling adjustment value.</li> <li>PercentChangeInCapacity: increase or reduce the current instance count by the scaling adjustment, read as a percentage. Positive values scale up while negative values scale down.</li> </ul></p>"
+        },
+        "ComparisonOperator":{
+          "shape":"ComparisonOperatorType",
+          "documentation":"<p>Comparison operator to use when measuring a metric against the threshold value. </p>"
+        },
+        "Threshold":{
+          "shape":"Double",
+          "documentation":"<p>Metric value used to trigger a scaling event.</p>"
+        },
+        "EvaluationPeriods":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>Name of the GameLift-defined metric that is used to trigger an adjustment. <ul> <li>ActivatingGameSessions: number of game sessions in the process of being created (game session status = ACTIVATING).</li> <li>ActiveGameSessions: number of game sessions currently running (game session status = ACTIVE).</li> <li>CurrentPlayerSessions: number of active or reserved player sessions (player session status = ACTIVE or RESERVED). </li> <li>AvailablePlayerSessions: number of player session slots currently available in active game sessions across the fleet, calculated by subtracting a game session's current player session count from its maximum player session count. This number does include game sessions that are not currently accepting players (game session PlayerSessionCreationPolicy = DENY_ALL).</li> <li>ActiveInstances: number of instances currently running a game session.</li> <li>IdleInstances: number of instances not currently running a game session.</li> </ul></p>"
+        }
+      },
+      "documentation":"<p>Rule that controls how a fleet is scaled. Scaling policies are uniquely identified by the combination of name and fleet ID.</p>"
+    },
+    "ScalingPolicyList":{
+      "type":"list",
+      "member":{"shape":"ScalingPolicy"}
+    },
+    "ScalingStatusType":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "UPDATE_REQUESTED",
+        "UPDATING",
+        "DELETE_REQUESTED",
+        "DELETING",
+        "DELETED",
+        "ERROR"
+      ]
+    },
+    "StringList":{
+      "type":"list",
+      "member":{"shape":"NonZeroAndMaxString"}
+    },
+    "TerminalRoutingStrategyException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+    },
+    "Timestamp":{"type":"timestamp"},
+    "UnauthorizedException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"NonEmptyString"}
+      },
+      "exception":true,
+      "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+    },
+    "UpdateAliasInput":{
+      "type":"structure",
+      "required":["AliasId"],
+      "members":{
+        "AliasId":{
+          "shape":"AliasId",
+          "documentation":"<p>Unique identifier for a fleet alias. Specify the alias you want to update. </p>"
+        },
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this alias. Alias names do not need to be unique.</p>"
+        },
+        "Description":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Human-readable description of the alias.</p>"
+        },
+        "RoutingStrategy":{
+          "shape":"RoutingStrategy",
+          "documentation":"<p>Object specifying the fleet and routing type to use for the alias.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "UpdateAliasOutput":{
+      "type":"structure",
+      "members":{
+        "Alias":{
+          "shape":"Alias",
+          "documentation":"<p>Object containing the updated alias configuration.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "UpdateBuildInput":{
+      "type":"structure",
+      "required":["BuildId"],
+      "members":{
+        "BuildId":{
+          "shape":"BuildId",
+          "documentation":"<p>Unique identifier for the build you want to update. </p>"
+        },
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this build. Build names do not need to be unique.</p>"
+        },
+        "Version":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Version associated with this build. Version strings do not need to be unique to a build.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "UpdateBuildOutput":{
+      "type":"structure",
+      "members":{
+        "Build":{
+          "shape":"Build",
+          "documentation":"<p>Object containing the updated build record.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "UpdateFleetAttributesInput":{
+      "type":"structure",
+      "required":["FleetId"],
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for the fleet you want to update attribute metadata for. </p>"
+        },
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this fleet. Fleet names do not need to be unique.</p>"
+        },
+        "Description":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Human-readable description of the fleet.</p>"
+        },
+        "NewGameSessionProtectionPolicy":{
+          "shape":"ProtectionPolicy",
+          "documentation":"<p>Game session protection policy to apply to all new instances created in this fleet. Instances that already exist will not be affected. You can set protection for individual instances using <a>UpdateGameSession</a>. <ul><li>NoProtection: The game session can be terminated during a scale-down event.</li> <li>FullProtection: If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.</li></ul></p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "UpdateFleetAttributesOutput":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for the updated fleet.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "UpdateFleetCapacityInput":{
+      "type":"structure",
+      "required":["FleetId"],
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for the fleet you want to update capacity for. </p>"
+        },
+        "DesiredInstances":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Number of EC2 instances you want this fleet to host.</p>"
+        },
+        "MinSize":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Minimum value allowed for the fleet's instance count. Default if not set is 0.</p>"
+        },
+        "MaxSize":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Maximum value allowed for the fleet's instance count. Default if not set is 1.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "UpdateFleetCapacityOutput":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for the updated fleet.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "UpdateFleetPortSettingsInput":{
+      "type":"structure",
+      "required":["FleetId"],
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for the fleet you want to update port settings for. </p>"
+        },
+        "InboundPermissionAuthorizations":{
+          "shape":"IpPermissionsList",
+          "documentation":"<p>Collection of port settings to be added to the fleet record.</p>"
+        },
+        "InboundPermissionRevocations":{
+          "shape":"IpPermissionsList",
+          "documentation":"<p>Collection of port settings to be removed from the fleet record.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "UpdateFleetPortSettingsOutput":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for the updated fleet.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "UpdateGameSessionInput":{
+      "type":"structure",
+      "required":["GameSessionId"],
+      "members":{
+        "GameSessionId":{
+          "shape":"GameSessionId",
+          "documentation":"<p>Unique identifier for a game session. Specify the game session you want to update. </p>"
+        },
+        "MaximumPlayerSessionCount":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Maximum number of players that can be simultaneously connected to the game session.</p>"
+        },
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this game session. Session names do not need to be unique.</p>"
+        },
+        "PlayerSessionCreationPolicy":{
+          "shape":"PlayerSessionCreationPolicy",
+          "documentation":"<p>Policy determining whether or not the game session accepts new players.</p>"
+        },
+        "ProtectionPolicy":{
+          "shape":"ProtectionPolicy",
+          "documentation":"<p>Game session protection policy to apply to this game session only. <ul><li>NoProtection: The game session can be terminated during a scale-down event.</li> <li>FullProtection: If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.</li></ul></p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "UpdateGameSessionOutput":{
+      "type":"structure",
+      "members":{
+        "GameSession":{
+          "shape":"GameSession",
+          "documentation":"<p>Object containing the updated game session metadata.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "WholeNumber":{
+      "type":"integer",
+      "min":0
+    }
+  },
+  "examples":{
+  }
+}

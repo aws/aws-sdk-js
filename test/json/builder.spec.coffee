@@ -104,7 +104,7 @@ describe 'AWS.JSON.Builder', ->
       now.setMilliseconds(100)
       params = Build: When: now
       formatted = AWS.util.date.iso8601(now).replace(/\.\d+Z$/, '')
-      expect(build(rules, params)).to.match(new RegExp('\\{"Build":\\{"When":"'+formatted+'\\.\\d+Z"\\}\\}'))
+      expect(build(rules, params)).to.match(new RegExp('\\{"Build":\\{"When":"'+formatted+'"\\}\\}'))
 
     it 'translates integers formatted as strings', ->
       rules =

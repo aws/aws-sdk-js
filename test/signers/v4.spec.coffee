@@ -11,16 +11,16 @@ buildRequest = ->
   req.httpRequest.headers['X-Amz-User-Agent'] = 'aws-sdk-js/0.1'
   req.httpRequest
 
-buildSigner = (request) ->
-  return new AWS.Signers.V4(request || buildRequest(), 'dynamodb')
+buildSigner = (request, signatureCache) ->
+  return new AWS.Signers.V4(request || buildRequest(), 'dynamodb', signatureCache || true)
 
 describe 'AWS.Signers.V4', ->
   date = new Date(1935346573456)
   datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '')
   creds = null
-  signature = '0e24aaa0cc86cdc1b73143a147e731cf8c93d450cfcf1d18b2b7473f810b7a1d'
+  signature = '31fac5ed29db737fbcafac527470ca6d9283283197c5e6e94ea40ddcec14a9c1'
   authorization = 'AWS4-HMAC-SHA256 Credential=akid/20310430/region/dynamodb/aws4_request, ' +
-    'SignedHeaders=host;x-amz-date;x-amz-security-token;x-amz-target;x-amz-user-agent, ' +
+    'SignedHeaders=host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target;x-amz-user-agent, ' +
     'Signature=' + signature
   signer = null
 
@@ -60,6 +60,11 @@ describe 'AWS.Signers.V4', ->
     it 'should generate proper signature', ->
       expect(signer.signature(creds, datetime)).to.equal(signature)
 
+    it 'should not compute SHA 256 checksum more than once', ->
+      spy = helpers.spyOn(AWS.util.crypto, 'sha256').andCallThrough()
+      signer.signature(creds, datetime)
+      expect(spy.calls.length).to.eql(1)
+
     describe 'caching', ->
       callCount = null
       calls = null
@@ -75,6 +80,12 @@ describe 'AWS.Signers.V4', ->
         expect(calls.length).to.equal(callCount + 1)
         signer.signature(creds, datetime)
         expect(calls.length).to.equal(callCount + 2)
+
+      it 'busts cache if caching is disabled', ->
+        signer = buildSigner(null, false)
+        callCount = calls.length
+        signer.signature(creds, datetime)
+        expect(calls.length).to.equal(callCount + 5)
 
       it 'busts cache if region changes', ->
         signer.request.region = 'new-region'
@@ -106,7 +117,10 @@ describe 'AWS.Signers.V4', ->
 
   describe 'canonicalString', ->
     it 'sorts the search string', ->
-      req = new AWS.CloudSearchDomain({endpoint: 'host.domain.com'}).search({query: 'foo', cursor: 'initial', queryOptions: '{}'}).build()
+      req = new AWS.CloudSearchDomain({endpoint: 'host.domain.com'})
+        .search({query: 'foo', cursor: 'initial', queryOptions: '{}'})
+        .removeListener('build', AWS.CloudSearchDomain.prototype.convertGetToPost)
+        .build()
       signer = new AWS.Signers.V4(req.httpRequest, 'cloudsearchdomain')
       expect(signer.canonicalString().split('\n')[2]).to.equal('cursor=initial&format=sdk&pretty=true&q=foo&q.options=%7B%7D')
 
@@ -124,6 +138,7 @@ describe 'AWS.Signers.V4', ->
     it 'should return headers', ->
       expect(signer.canonicalHeaders()).to.eql [
         'host:localhost',
+        'x-amz-content-sha256:3128b8d4f3108b3e1677a38eb468d1c6dec926a58eaea235d034b9c71c3864d4',
         'x-amz-date:' + datetime,
         'x-amz-security-token:session',
         'x-amz-target:DynamoDB_20111205.ListTables',
@@ -149,3 +164,17 @@ describe 'AWS.Signers.V4', ->
     it 'should strip starting and end of line spaces', ->
       signer.request.headers = {'Header': ' \t   Value  \t  '}
       expect(signer.canonicalHeaders()).to.equal('header:Value')
+
+  describe 'presigned urls', ->
+
+    it 'hoists content-type to the query string', ->
+      req = new AWS.S3().putObject(Bucket: 'bucket', Key: 'key', ContentType: 'text/plain').build()
+      signer = new AWS.Signers.V4(req.httpRequest, 's3')
+      signer.updateForPresigned({}, '')
+      expect(signer.canonicalString().split('\n')[2]).to.contain('Content-Type=text%2Fplain')
+
+    it 'hoists content-md5 to the query string', ->
+      req = new AWS.S3().putObject(Bucket: 'bucket', Key: 'key', ContentMD5: 'foobar==').build()
+      signer = new AWS.Signers.V4(req.httpRequest, 's3')
+      signer.updateForPresigned({}, '')
+      expect(signer.canonicalString().split('\n')[2]).to.contain('Content-MD5=foobar%3D%3D')

@@ -1,4 +1,10 @@
 {
+  "acm": {
+    "name": "ACM"
+  },
+  "apigateway": {
+    "name": "APIGateway"
+  },
   "autoscaling": {
     "name": "AutoScaling"
   },
@@ -7,7 +13,10 @@
   },
   "cloudfront": {
     "name": "CloudFront",
-    "versions": ["2013-05-12*", "2013-11-11*", "2014-05-31*"]
+    "versions": ["2013-05-12*", "2013-11-11*", "2014-05-31*", "2014-10-21*", "2014-11-06*", "2015-04-17*", "2015-07-27*", "2015-09-17*", "2016-01-13*"]
+  },
+  "cloudhsm": {
+    "name": "CloudHSM"
   },
   "cloudsearch": {
     "name": "CloudSearch"
@@ -22,16 +31,31 @@
     "prefix": "monitoring",
     "name": "CloudWatch"
   },
+  "cloudwatchevents": {
+    "prefix": "events",
+    "name": "CloudWatchEvents",
+    "versions": ["2014-02-03*"]
+  },
   "cloudwatchlogs": {
     "prefix": "logs",
     "name": "CloudWatchLogs"
   },
+  "codecommit": {
+    "name": "CodeCommit"
+  },
   "codedeploy": {
     "name": "CodeDeploy"
+  },
+  "codepipeline": {
+    "name": "CodePipeline"
   },
   "cognitoidentity": {
     "prefix": "cognito-identity",
     "name": "CognitoIdentity"
+  },
+  "cognitoidentityserviceprovider": {
+    "prefix": "cognito-idp",
+    "name": "CognitoIdentityServiceProvider"
   },
   "cognitosync": {
     "prefix": "cognito-sync",
@@ -44,19 +68,43 @@
   "datapipeline": {
     "name": "DataPipeline"
   },
+  "devicefarm": {
+    "name": "DeviceFarm"
+  },
   "directconnect": {
     "name": "DirectConnect"
+  },
+  "directoryservice": {
+    "prefix": "ds",
+    "name": "DirectoryService"
+  },
+  "dms": {
+    "name": "DMS"
   },
   "dynamodb": {
     "name": "DynamoDB"
   },
+  "dynamodbstreams": {
+    "prefix": "streams.dynamodb",
+    "name": "DynamoDBStreams"
+  },
   "ec2": {
     "name": "EC2",
-    "versions": ["2013-06-15*", "2013-10-15*", "2014-02-01*", "2014-05-01*", "2014-06-15*", "2014-09-01*"]
+    "versions": ["2013-06-15*", "2013-10-15*", "2014-02-01*", "2014-05-01*", "2014-06-15*", "2014-09-01*", "2014-10-01*", "2015-03-01*", "2015-04-15*"]
+  },
+  "ecr": {
+    "name": "ECR"
+  },
+  "ecs": {
+    "name": "ECS"
+  },
+  "efs": {
+    "prefix": "elasticfilesystem",
+    "name": "EFS"
   },
   "elasticache": {
     "name": "ElastiCache",
-    "versions": ["2012-11-15*", "2014-03-24*", "2014-07-15*"]
+    "versions": ["2012-11-15*", "2014-03-24*", "2014-07-15*", "2014-09-30*"]
   },
   "elasticbeanstalk": {
     "name": "ElasticBeanstalk"
@@ -69,8 +117,17 @@
     "prefix": "elasticmapreduce",
     "name": "EMR"
   },
+  "es": {
+    "name": "ES"
+  },
   "elastictranscoder": {
     "name": "ElasticTranscoder"
+  },
+  "firehose": {
+    "name": "Firehose"
+  },
+  "gamelift": {
+    "name": "GameLift"
   },
   "glacier": {
     "name": "Glacier"
@@ -81,6 +138,17 @@
   "importexport": {
     "name": "ImportExport"
   },
+  "inspector": {
+    "name": "Inspector",
+    "versions": ["2015-08-18*"]
+  },
+  "iot": {
+    "name": "Iot"
+  },
+  "iotdata": {
+    "prefix": "iot-data",
+    "name": "IotData"
+  },
   "kinesis": {
     "name": "Kinesis"
   },
@@ -90,11 +158,25 @@
   "lambda": {
     "name": "Lambda"
   },
+  "machinelearning": {
+    "name": "MachineLearning"
+  },
+  "marketplacecommerceanalytics": {
+    "name": "MarketplaceCommerceAnalytics"
+  },
+  "marketplacemetering": {
+      "prefix": "meteringmarketplace",
+      "name": "MarketplaceMetering"
+  },
+  "mobileanalytics": {
+    "name": "MobileAnalytics"
+  },
   "opsworks": {
     "name": "OpsWorks"
   },
   "rds": {
-    "name": "RDS"
+    "name": "RDS",
+    "versions": ["2014-09-01*"]
   },
   "redshift": {
     "name": "Redshift"
@@ -122,6 +204,9 @@
   "sqs": {
     "name": "SQS"
   },
+  "ssm": {
+    "name": "SSM"
+  },
   "storagegateway": {
     "name": "StorageGateway"
   },
@@ -133,5 +218,11 @@
   },
   "swf": {
     "name": "SWF"
+  },
+  "waf": {
+    "name": "WAF"
+  },
+  "workspaces": {
+    "name": "WorkSpaces"
   }
 }

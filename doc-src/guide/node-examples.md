@@ -4,7 +4,7 @@
 
 All of these examples assume that the AWS library is required,
 credentials are loaded via environment variables (`AWS_ACCESS_KEY_ID`
-and `AWS_SECRET_ACCESS_KEY`), and the region is set via 
+and `AWS_SECRET_ACCESS_KEY`), and the region is set via
 `AWS.config.update({region: 'us-west-2'});` or the `AWS_REGION` environment
 variable.
 
@@ -77,7 +77,7 @@ ec2.runInstances(params, function(err, data) {
 
   // Add tags to the instance
   params = {Resources: [instanceId], Tags: [
-    {Key: 'Name', Value: instanceName}
+    {Key: 'Name', Value: 'instanceName'}
   ]};
   ec2.createTags(params, function(err) {
     console.log("Tagging instance", err ? "failure" : "success");
@@ -97,9 +97,12 @@ The following example lists all buckets associated with your AWS account:
 ```javascript
 var s3 = new AWS.S3();
 s3.listBuckets(function(err, data) {
-  for (var index in data.Buckets) {
-    var bucket = data.Buckets[index];
-    console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
+  if (err) { console.log("Error:", err); }
+  else {
+    for (var index in data.Buckets) {
+      var bucket = data.Buckets[index];
+      console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
+    }
   }
 });
 ```
@@ -111,10 +114,13 @@ object 'myKey' of bucket 'myBucket':
 
 ```javascript
 var s3 = new AWS.S3({params: {Bucket: 'myBucket', Key: 'myKey'}});
-s3.createBucket(function() {
-  s3.upload({Body: 'Hello!'}, function() {
-    console.log("Successfully uploaded data to myBucket/myKey");
-  });
+s3.createBucket(function(err) {
+  if (err) { console.log("Error:", err); }
+  else {
+    s3.upload({Body: 'Hello!'}, function() {
+      console.log("Successfully uploaded data to myBucket/myKey");
+    });
+  }
 });
 ```
 

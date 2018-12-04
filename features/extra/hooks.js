@@ -1,24 +1,41 @@
 var util = require('util');
-var realExit = process.exit;
+var jmespath = require('jmespath');
 
 module.exports = function () {
-  var world = require("./world.js").WorldInstance;
-  this.World = require("./world.js").World;
-
-  world.cleanupTasks = new world.AWS.SequentialExecutor();
-
-  process.exit = function(code) {
-    var finalCallback = function() { realExit(code); };
-    world.cleanupTasks.emit('cleanup', [], finalCallback);
-  };
-
-  this.AfterAll = function(callback) {
-    world.cleanupTasks.onAsync('cleanup', callback.bind(world));
-  }
+  this.World = require('./world.js').World;
 
   this.Before(function(callback) {
     this.params = {};
     callback();
+  });
+
+  /* Global S3 steps */
+  this.Given(/^I create a shared bucket$/, function(callback) {
+    if (this.sharedBucket) return callback();
+
+    this.sharedBucket = this.uniqueName('aws-sdk-js-shared-integration');
+    this.request('s3', 'createBucket', {Bucket: this.sharedBucket}, function(err) {
+      this.cacheBucketName(this.sharedBucket);
+      if (err) callback.fail(err);
+      else callback();
+    });
+  });
+
+  this.Given(/^I create a bucket$/, function(callback) {
+    this.bucket = this.uniqueName('aws-sdk-js-integration');
+    this.request('s3', 'createBucket', {Bucket: this.bucket}, callback);
+  });
+
+  this.When(/^I delete the bucket$/, function(callback) {
+    this.request('s3', 'deleteBucket', {Bucket: this.bucket}, callback);
+  });
+
+  this.Then(/^the bucket should exist$/, function(next) {
+    this.s3.waitFor('bucketExists', {Bucket: this.bucket}, next);
+  });
+
+  this.Then(/^the bucket should not exist$/, function(callback) {
+    this.s3.waitFor('bucketNotExists', {Bucket: this.bucket}, callback);
   });
 
   /* Global error code steps */
@@ -37,20 +54,20 @@ module.exports = function () {
   });
 
   this.Then(/^the value at "([^"]*)" should be a list$/, function (path, callback) {
-    var value = this.AWS.util.jamespath.find(path, this.data);
-    this.assert.ok(Array.isArray(value), "expected " + util.inspect(value) + " to be a list");
+    var value = jmespath.search(this.data, path);
+    this.assert.ok(Array.isArray(value), 'expected ' + util.inspect(value) + ' to be a list');
     callback();
   });
 
   this.Then(/^the value at "([^"]*)" should be a number$/, function (path, callback) {
-    var value = this.AWS.util.jamespath.find(path, this.data);
-    this.assert.ok(typeof value === 'number', "expected " + util.inspect(value) + " to be a number");
+    var value = jmespath.search(this.data, path);
+    this.assert.ok(typeof value === 'number', 'expected ' + util.inspect(value) + ' to be a number');
     callback();
   });
 
   this.Then(/^the value at "([^"]*)" should be a string$/, function (path, callback) {
-    var value = this.AWS.util.jamespath.find(path, this.data);
-    this.assert.ok(typeof value === 'string', "expected " + util.inspect(value) + " to be a string");
+    var value = jmespath.search(this.data, path);
+    this.assert.ok(typeof value === 'string', 'expected ' + util.inspect(value) + ' to be a string');
     callback();
   });
 
@@ -74,7 +91,7 @@ module.exports = function () {
   });
 
   this.Then(/^I should get the error:$/, function(table, callback) {
-    var err = table.hashes()[0]
+    var err = table.hashes()[0];
     this.assert.equal(this.error.code, err.code);
     this.assert.equal(this.error.message, err.message);
     callback();
@@ -85,13 +102,13 @@ module.exports = function () {
     callback();
   });
 
-  this.Given(/^I paginate the "([^"]*)" operation with limit (\d+)(?: and max pages (\d+))?$/, function(operation, limit, maxPages, callback) {
+  this.Given(/^I paginate the "([^"]*)" operation(?: with limit (\d+))?(?: and max pages (\d+))?$/, function(operation, limit, maxPages, callback) {
     limit = parseInt(limit);
     if (maxPages) maxPages = parseInt(maxPages);
 
     var world = this;
     this.numPages = 0;
-    this.numMarkers = 0
+    this.numMarkers = 0;
     this.operation = operation;
     this.paginationConfig = this.service.paginationConfig(operation);
     this.params = this.params || {};
@@ -120,6 +137,11 @@ module.exports = function () {
     callback();
   });
 
+  this.Then(/^I should get at least one page$/, function(callback) {
+    this.assert.compare(this.numPages, '>=', 1);
+    callback();
+  });
+
   this.Then(/^I should get (\d+) pages$/, function(numPages, callback) {
     this.assert.equal(this.numPages, parseInt(numPages));
     callback();
@@ -133,6 +155,25 @@ module.exports = function () {
   this.Then(/^the last page should not contain a marker$/, function(callback) {
     var marker = this.paginationConfig.outputToken;
     this.assert.equal(this.data[marker], null);
+    callback();
+  });
+
+
+  this.Then(/^the result at (\w+) should contain a property (\w+) with an? (\w+)$/, function(wrapper, property, type, callback) {
+    if (type === 'Array' || type === 'Date') {
+      this.assert.equal(this.AWS.util.isType(this.data[wrapper][property], type), true);
+    } else {
+      this.assert.equal(typeof this.data[wrapper][property], type);
+    }
+    callback();
+  });
+
+  this.Then(/^the result should contain a property (\w+) with an? (\w+)$/, function(property, type, callback) {
+    if (type === 'Array' || type === 'Date') {
+      this.assert.equal(this.AWS.util.isType(this.data[property], type), true);
+    } else {
+      this.assert.equal(typeof this.data[property], type);
+    }
     callback();
   });
 

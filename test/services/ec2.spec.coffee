@@ -21,7 +21,6 @@ describe 'AWS.EC2', ->
       ec2.copySnapshot params, ->
         parts = @request.httpRequest.body.split('&').sort()
         [
-          'AWSAccessKeyId=akid',
           'Action=CopySnapshot',
           'DestinationRegion=mock-region',
           'PresignedUrl=https%3A%2F%2Fec2.src-region.amazonaws.com%2F%3F' +
@@ -30,7 +29,7 @@ describe 'AWS.EC2', ->
             "%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3Dakid%252F19700101" +
             "%252Fsrc-region%252Fec2%252Faws4_request%26X-Amz-Date%3D19700101T000000Z" +
             "%26X-Amz-Expires%3D3600%26X-Amz-Security-Token%3Dsession" +
-            "%26X-Amz-Signature%3D59789a2b46cde824a9e2e4fae739605ec3b8796f8c5266c4f4023bdc9a6ba15e" +
+            "%26X-Amz-Signature%3D37f45901157b4599bfcd4bf42b26f958d503f357aed899488a78f494825d34be" +
             "%26X-Amz-SignedHeaders%3Dhost",
           'SourceRegion=src-region',
           'SourceSnapshotId=snap-123456789'
@@ -42,8 +41,6 @@ describe 'AWS.EC2', ->
       req = ec2.describeTags(Filters: [{Name: 'filter', Values: ['v1', 'v2']}])
       req.build()
       expect(req.httpRequest.params).to.eql
-        AWSAccessKeyId: 'akid'
-        SecurityToken: 'session'
         Action: 'DescribeTags'
         Version: ec2.api.apiVersion
         'Filter.1.Name': 'filter'
@@ -87,5 +84,10 @@ describe 'AWS.EC2', ->
         parse (error, data) ->
           expect(error.code).to.equal(400)
           expect(error.message).to.equal(null)
+          expect(data).to.equal(null)
+
+      it 'extracts the request id', ->
+        parse (error, data) ->
+          expect(error.requestId).to.equal('ab123mno-6432-dceb-asdf-123mno543123')
           expect(data).to.equal(null)
 

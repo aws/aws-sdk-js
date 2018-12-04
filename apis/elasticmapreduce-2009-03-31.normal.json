@@ -1,16 +1,16 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2009-03-31",
     "endpointPrefix":"elasticmapreduce",
     "jsonVersion":"1.1",
+    "protocol":"json",
     "serviceAbbreviation":"Amazon EMR",
     "serviceFullName":"Amazon Elastic MapReduce",
     "signatureVersion":"v4",
     "targetPrefix":"ElasticMapReduce",
-    "timestampFormat":"unixTimestamp",
-    "protocol":"json"
+    "timestampFormat":"unixTimestamp"
   },
-  "documentation":"<p> This is the <i>Amazon Elastic MapReduce API Reference</i>. This guide provides descriptions and samples of the Amazon Elastic MapReduce APIs.</p> <p>Amazon Elastic MapReduce (Amazon EMR) is a web service that makes it easy to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several AWS products to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehousing.</p>",
   "operations":{
     "AddInstanceGroups":{
       "name":"AddInstanceGroups",
@@ -18,24 +18,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AddInstanceGroupsInput",
-        "documentation":"<p>Input to an AddInstanceGroups call.</p>"
-      },
-      "output":{
-        "shape":"AddInstanceGroupsOutput",
-        "documentation":"<p>Output from an AddInstanceGroups call.</p>"
-      },
+      "input":{"shape":"AddInstanceGroupsInput"},
+      "output":{"shape":"AddInstanceGroupsOutput"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "error":{
-            "code":"InternalFailure",
-            "httpStatusCode":500
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>AddInstanceGroups adds an instance group to a running cluster.</p>"
     },
@@ -45,24 +31,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AddJobFlowStepsInput",
-        "documentation":"<p> The input argument to the <a>AddJobFlowSteps</a> operation. </p>"
-      },
-      "output":{
-        "shape":"AddJobFlowStepsOutput",
-        "documentation":"<p> The output for the <a>AddJobFlowSteps</a> operation. </p>"
-      },
+      "input":{"shape":"AddJobFlowStepsInput"},
+      "output":{"shape":"AddJobFlowStepsOutput"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "error":{
-            "code":"InternalFailure",
-            "httpStatusCode":500
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p> AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow. </p> <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p> <p> A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. </p> <p> Elastic MapReduce executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. </p> <p> You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.</p>"
     },
@@ -72,26 +44,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AddTagsInput",
-        "documentation":"<p>This input identifies a cluster and a list of tags to attach. </p>"
-      },
-      "output":{
-        "shape":"AddTagsOutput",
-        "documentation":"<p>This output indicates the result of adding tags to a resource. </p>"
-      },
+      "input":{"shape":"AddTagsInput"},
+      "output":{"shape":"AddTagsOutput"},
       "errors":[
-        {
-          "shape":"InternalServerException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "exception":true,
-          "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
-        }
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
     },
@@ -101,26 +58,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeClusterInput",
-        "documentation":"<p>This input determines which cluster to describe.</p>"
-      },
-      "output":{
-        "shape":"DescribeClusterOutput",
-        "documentation":"<p>This output contains the description of the cluster.</p>"
-      },
+      "input":{"shape":"DescribeClusterInput"},
+      "output":{"shape":"DescribeClusterOutput"},
       "errors":[
-        {
-          "shape":"InternalServerException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "exception":true,
-          "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
-        }
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. For information about the cluster steps, see <a>ListSteps</a>.</p>"
     },
@@ -130,27 +72,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeJobFlowsInput",
-        "documentation":"<p> The input for the <a>DescribeJobFlows</a> operation. </p>"
-      },
-      "output":{
-        "shape":"DescribeJobFlowsOutput",
-        "documentation":"<p> The output for the <a>DescribeJobFlows</a> operation. </p>"
-      },
+      "input":{"shape":"DescribeJobFlowsInput"},
+      "output":{"shape":"DescribeJobFlowsOutput"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "error":{
-            "code":"InternalFailure",
-            "httpStatusCode":500
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
-      "deprecated":true,
-      "documentation":"<p> This API is deprecated and will eventually be removed. We recommend you use <a>ListClusters</a>, <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a> instead.</p> <p> DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time.</p> <p> Regardless of supplied parameters, only job flows created within the last two months are returned.</p> <p> If no parameters are supplied, then job flows matching either of the following criteria are returned:</p> <ul> <li>Job flows created and completed in the last two weeks</li> <li> Job flows created within the last two months that are in one of the following states: <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>, <code>STARTING</code> </li> </ul> <p> Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions. </p>"
+      "documentation":"<p> This API is deprecated and will eventually be removed. We recommend you use <a>ListClusters</a>, <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a> instead.</p> <p> DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time.</p> <p> Regardless of supplied parameters, only job flows created within the last two months are returned.</p> <p> If no parameters are supplied, then job flows matching either of the following criteria are returned:</p> <ul> <li>Job flows created and completed in the last two weeks</li> <li> Job flows created within the last two months that are in one of the following states: <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>, <code>STARTING</code> </li> </ul> <p> Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions. </p>",
+      "deprecated":true
     },
     "DescribeStep":{
       "name":"DescribeStep",
@@ -158,26 +86,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeStepInput",
-        "documentation":"<p>This input determines which step to describe.</p>"
-      },
-      "output":{
-        "shape":"DescribeStepOutput",
-        "documentation":"<p>This output contains the description of the cluster step.</p>"
-      },
+      "input":{"shape":"DescribeStepInput"},
+      "output":{"shape":"DescribeStepOutput"},
       "errors":[
-        {
-          "shape":"InternalServerException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "exception":true,
-          "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
-        }
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Provides more detail about the cluster step.</p>"
     },
@@ -187,26 +100,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListBootstrapActionsInput",
-        "documentation":"<p>This input determines which bootstrap actions to retrieve.</p>"
-      },
-      "output":{
-        "shape":"ListBootstrapActionsOutput",
-        "documentation":"<p>This output contains the boostrap actions detail .</p>"
-      },
+      "input":{"shape":"ListBootstrapActionsInput"},
+      "output":{"shape":"ListBootstrapActionsOutput"},
       "errors":[
-        {
-          "shape":"InternalServerException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "exception":true,
-          "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
-        }
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Provides information about the bootstrap actions associated with a cluster.</p>"
     },
@@ -216,26 +114,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListClustersInput",
-        "documentation":"<p>This input determines how the ListClusters action filters the list of clusters that it returns.</p>"
-      },
-      "output":{
-        "shape":"ListClustersOutput",
-        "documentation":"<p>This contains a ClusterSummaryList with the cluster details; for example, the cluster IDs, names, and status.</p>"
-      },
+      "input":{"shape":"ListClustersInput"},
+      "output":{"shape":"ListClustersOutput"},
       "errors":[
-        {
-          "shape":"InternalServerException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "exception":true,
-          "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
-        }
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Provides the status of all clusters visible to this AWS account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls. </p>"
     },
@@ -245,26 +128,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListInstanceGroupsInput",
-        "documentation":"<p>This input determines which instance groups to retrieve.</p>"
-      },
-      "output":{
-        "shape":"ListInstanceGroupsOutput",
-        "documentation":"<p>This input determines which instance groups to retrieve.</p>"
-      },
+      "input":{"shape":"ListInstanceGroupsInput"},
+      "output":{"shape":"ListInstanceGroupsOutput"},
       "errors":[
-        {
-          "shape":"InternalServerException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "exception":true,
-          "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
-        }
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Provides all available details about the instance groups in a cluster.</p>"
     },
@@ -274,26 +142,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListInstancesInput",
-        "documentation":"<p>This input determines which instances to list.</p>"
-      },
-      "output":{
-        "shape":"ListInstancesOutput",
-        "documentation":"<p>This output contains the list of instances.</p>"
-      },
+      "input":{"shape":"ListInstancesInput"},
+      "output":{"shape":"ListInstancesOutput"},
       "errors":[
-        {
-          "shape":"InternalServerException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "exception":true,
-          "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
-        }
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Provides information about the cluster instances that Amazon EMR provisions on behalf of a user when it creates the cluster. For example, this operation indicates when the EC2 instances reach the Ready state, when instances become available to Amazon EMR to use for jobs, and the IP addresses for cluster instances, etc. </p>"
     },
@@ -303,26 +156,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListStepsInput",
-        "documentation":"<p>This input determines which steps to list.</p>"
-      },
-      "output":{
-        "shape":"ListStepsOutput",
-        "documentation":"<p>This output contains the list of steps.</p>"
-      },
+      "input":{"shape":"ListStepsInput"},
+      "output":{"shape":"ListStepsOutput"},
       "errors":[
-        {
-          "shape":"InternalServerException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "exception":true,
-          "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
-        }
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Provides a list of steps for the cluster. </p>"
     },
@@ -332,20 +170,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ModifyInstanceGroupsInput",
-        "documentation":"<p>Change the size of some instance groups.</p>"
-      },
+      "input":{"shape":"ModifyInstanceGroupsInput"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "error":{
-            "code":"InternalFailure",
-            "httpStatusCode":500
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>ModifyInstanceGroups modifies the number of nodes and configuration settings of an instance group. The input parameters include the new target instance count for the group and the instance group ID. The call will either succeed or fail atomically.</p>"
     },
@@ -355,26 +182,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RemoveTagsInput",
-        "documentation":"<p>This input identifies a cluster and a list of tags to remove. </p>"
-      },
-      "output":{
-        "shape":"RemoveTagsOutput",
-        "documentation":"<p>This output indicates the result of removing tags from a resource. </p>"
-      },
+      "input":{"shape":"RemoveTagsInput"},
+      "output":{"shape":"RemoveTagsOutput"},
       "errors":[
-        {
-          "shape":"InternalServerException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "exception":true,
-          "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
-        }
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p> <p>The following example removes the stack tag with value Prod from a cluster:</p>"
     },
@@ -384,24 +196,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RunJobFlowInput",
-        "documentation":"<p> Input to the <a>RunJobFlow</a> operation. </p>"
-      },
-      "output":{
-        "shape":"RunJobFlowOutput",
-        "documentation":"<p> The result of the <a>RunJobFlow</a> operation. </p>"
-      },
+      "input":{"shape":"RunJobFlowInput"},
+      "output":{"shape":"RunJobFlowOutput"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "error":{
-            "code":"InternalFailure",
-            "httpStatusCode":500
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p> RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. Once the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the job flow will transition to the WAITING state rather than shutting down once the steps have completed. </p> <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p> <p>For long running job flows, we recommend that you periodically store your results.</p>"
     },
@@ -411,20 +209,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"SetTerminationProtectionInput",
-        "documentation":"<p> The input argument to the <a>TerminationProtection</a> operation. </p>"
-      },
+      "input":{"shape":"SetTerminationProtectionInput"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "error":{
-            "code":"InternalFailure",
-            "httpStatusCode":500
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p> SetTerminationProtection locks a job flow so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster.</p> <p> SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.</p> <p> To terminate a job flow that has been locked by setting SetTerminationProtection to <code>true</code>, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to <code>false</code>. </p> <p> For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/UsingEMR_TerminationProtection.html\">Protecting a Job Flow from Termination</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i></p>"
     },
@@ -434,20 +221,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"SetVisibleToAllUsersInput",
-        "documentation":"<p>The input to the SetVisibleToAllUsers action.</p>"
-      },
+      "input":{"shape":"SetVisibleToAllUsersInput"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "error":{
-            "code":"InternalFailure",
-            "httpStatusCode":500
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified job flows. This action works on running job flows. You can also set the visibility of a job flow when you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers action can be called only by an IAM user who created the job flow or the AWS account that owns the job flow.</p>"
     },
@@ -457,22 +233,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"TerminateJobFlowsInput",
-        "documentation":"<p> Input to the <a>TerminateJobFlows</a> operation. </p>"
-      },
+      "input":{"shape":"TerminateJobFlowsInput"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "error":{
-            "code":"InternalFailure",
-            "httpStatusCode":500
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
-      "documentation":"<p> TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created. </p> <p> The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 5-20 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances. </p>"
+      "documentation":"<p> TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created. </p> <p> The maximum number of JobFlows allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 5-20 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances. </p>"
     }
   },
   "shapes":{
@@ -589,13 +354,14 @@
           "documentation":"<p>This option is for advanced users only. This is meta information about third-party applications that third-party vendors use for testing purposes.</p>"
         }
       },
-      "documentation":"<p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p> <ul> <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li> <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li> <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition, respectively.</li> </ul>"
+      "documentation":"<p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p> <ul> <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li> <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li> <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition, respectively.</li> </ul> <note><p>In Amazon EMR releases 4.0 and greater, the only accepted parameter is the application name. To pass arguments to applications, you supply a configuration for each application.</p></note>"
     },
     "ApplicationList":{
       "type":"list",
       "member":{"shape":"Application"}
     },
     "Boolean":{"type":"boolean"},
+    "BooleanObject":{"type":"boolean"},
     "BootstrapActionConfig":{
       "type":"structure",
       "required":[
@@ -658,7 +424,11 @@
         },
         "RunningAmiVersion":{
           "shape":"String",
-          "documentation":"<p>The AMI version running on this cluster. This differs from the requested version only if the requested version is a meta version, such as \"latest\". </p>"
+          "documentation":"<p>The AMI version running on this cluster. </p>"
+        },
+        "ReleaseLabel":{
+          "shape":"String",
+          "documentation":"<p>The release label for the Amazon EMR release. For Amazon EMR 3.x and 2.x AMIs, use amiVersion instead instead of ReleaseLabel.</p>"
         },
         "AutoTerminate":{
           "shape":"Boolean",
@@ -683,6 +453,18 @@
         "ServiceRole":{
           "shape":"String",
           "documentation":"<p>The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.</p>"
+        },
+        "NormalizedInstanceHours":{
+          "shape":"Integer",
+          "documentation":"<p>An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.</p>"
+        },
+        "MasterPublicDnsName":{
+          "shape":"String",
+          "documentation":"<p>The public DNS name of the master EC2 instance.</p>"
+        },
+        "Configurations":{
+          "shape":"ConfigurationList",
+          "documentation":"<note><p>Amazon EMR releases 4.x or later.</p></note> <p>The list of Configurations supplied to the EMR cluster.</p>"
         }
       },
       "documentation":"<p>The detailed description of the cluster.</p>"
@@ -762,6 +544,10 @@
         "Status":{
           "shape":"ClusterStatus",
           "documentation":"<p>The details about the current status of the cluster.</p>"
+        },
+        "NormalizedInstanceHours":{
+          "shape":"Integer",
+          "documentation":"<p>An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.</p>"
         }
       },
       "documentation":"<p>The summary description of the cluster.</p>"
@@ -809,6 +595,28 @@
     "CommandList":{
       "type":"list",
       "member":{"shape":"Command"}
+    },
+    "Configuration":{
+      "type":"structure",
+      "members":{
+        "Classification":{
+          "shape":"String",
+          "documentation":"<p>The classification of a configuration. For more information see, <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/API/EmrConfigurations.html\">Amazon EMR Configurations</a>. </p>"
+        },
+        "Configurations":{
+          "shape":"ConfigurationList",
+          "documentation":"<p>A list of configurations you apply to this configuration object. </p>"
+        },
+        "Properties":{
+          "shape":"StringMap",
+          "documentation":"<p>A set of properties supplied to the Configuration object.</p>"
+        }
+      },
+      "documentation":"<note><p>Amazon EMR releases 4.x or later.</p></note> <p>Specifies a hardware and software configuration of the EMR cluster. This includes configurations for applications and software bundled with Amazon EMR. The Configuration object is a JSON object which is defined by a classification and a set of properties. Configurations can be nested, so a configuration may have its own Configuration objects listed.</p>"
+    },
+    "ConfigurationList":{
+      "type":"list",
+      "member":{"shape":"Configuration"}
     },
     "Date":{"type":"timestamp"},
     "DescribeClusterInput":{
@@ -892,9 +700,75 @@
       },
       "documentation":"<p>This output contains the description of the cluster step.</p>"
     },
+    "EC2InstanceIdsList":{
+      "type":"list",
+      "member":{"shape":"InstanceId"}
+    },
     "EC2InstanceIdsToTerminateList":{
       "type":"list",
       "member":{"shape":"InstanceId"}
+    },
+    "EbsBlockDevice":{
+      "type":"structure",
+      "members":{
+        "VolumeSpecification":{
+          "shape":"VolumeSpecification",
+          "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+        },
+        "Device":{
+          "shape":"String",
+          "documentation":"<p>The device name that is exposed to the instance, such as /dev/sdh.</p>"
+        }
+      },
+      "documentation":"<p>Configuration of requested EBS block device associated with the instance group.</p>"
+    },
+    "EbsBlockDeviceConfig":{
+      "type":"structure",
+      "required":["VolumeSpecification"],
+      "members":{
+        "VolumeSpecification":{
+          "shape":"VolumeSpecification",
+          "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+        },
+        "VolumesPerInstance":{
+          "shape":"Integer",
+          "documentation":"<p>Number of EBS volumes with specific volume configuration, that will be associated with every instance in the instance group </p>"
+        }
+      },
+      "documentation":"<p>Configuration of requested EBS block device associated with the instance group with count of volumes that will be associated to every instance.</p>"
+    },
+    "EbsBlockDeviceConfigList":{
+      "type":"list",
+      "member":{"shape":"EbsBlockDeviceConfig"}
+    },
+    "EbsBlockDeviceList":{
+      "type":"list",
+      "member":{"shape":"EbsBlockDevice"}
+    },
+    "EbsConfiguration":{
+      "type":"structure",
+      "members":{
+        "EbsBlockDeviceConfigs":{"shape":"EbsBlockDeviceConfigList"},
+        "EbsOptimized":{"shape":"BooleanObject"}
+      }
+    },
+    "EbsVolume":{
+      "type":"structure",
+      "members":{
+        "Device":{
+          "shape":"String",
+          "documentation":"<p>The device name that is exposed to the instance, such as /dev/sdh.</p>"
+        },
+        "VolumeId":{
+          "shape":"String",
+          "documentation":"<p>The volume identifier of the EBS volume.</p>"
+        }
+      },
+      "documentation":"<p>EBS block device that's attached to an EC2 instance.</p>"
+    },
+    "EbsVolumeList":{
+      "type":"list",
+      "member":{"shape":"EbsVolume"}
     },
     "Ec2InstanceAttributes":{
       "type":"structure",
@@ -914,14 +788,34 @@
         "IamInstanceProfile":{
           "shape":"String",
           "documentation":"<p>The IAM role that was specified when the job flow was launched. The EC2 instances of the job flow assume this role.</p>"
+        },
+        "EmrManagedMasterSecurityGroup":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the Amazon EC2 security group for the master node.</p>"
+        },
+        "EmrManagedSlaveSecurityGroup":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the Amazon EC2 security group for the slave nodes.</p>"
+        },
+        "ServiceAccessSecurityGroup":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the Amazon EC2 security group for the Amazon EMR service to access clusters in VPC private subnets.</p>"
+        },
+        "AdditionalMasterSecurityGroups":{
+          "shape":"StringList",
+          "documentation":"<p>A list of additional Amazon EC2 security group IDs for the master node.</p>"
+        },
+        "AdditionalSlaveSecurityGroups":{
+          "shape":"StringList",
+          "documentation":"<p>A list of additional Amazon EC2 security group IDs for the slave nodes.</p>"
         }
       },
       "documentation":"<p>Provides information about the EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.</p>"
     },
     "ErrorCode":{
       "type":"string",
-      "min":1,
-      "max":256
+      "max":256,
+      "min":1
     },
     "ErrorMessage":{"type":"string"},
     "HadoopJarStepConfig":{
@@ -999,6 +893,14 @@
         "Status":{
           "shape":"InstanceStatus",
           "documentation":"<p>The current status of the instance.</p>"
+        },
+        "InstanceGroupId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the instance group to which this instance belongs.</p>"
+        },
+        "EbsVolumes":{
+          "shape":"EbsVolumeList",
+          "documentation":"<p>The list of EBS volumes that are attached to this instance.</p>"
         }
       },
       "documentation":"<p>Represents an EC2 instance provisioned as part of cluster.</p>"
@@ -1041,6 +943,22 @@
         "Status":{
           "shape":"InstanceGroupStatus",
           "documentation":"<p>The current status of the instance group.</p>"
+        },
+        "Configurations":{
+          "shape":"ConfigurationList",
+          "documentation":"<note><p>Amazon EMR releases 4.x or later.</p></note> <p>The list of configurations supplied for an EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).</p>"
+        },
+        "EbsBlockDevices":{
+          "shape":"EbsBlockDeviceList",
+          "documentation":"<p>The EBS block devices that are mapped to this instance group.</p>"
+        },
+        "EbsOptimized":{
+          "shape":"BooleanObject",
+          "documentation":"<p>If the instance group is EBS-optimized. An Amazon EBS–optimized instance uses an optimized configuration stack and provides additional, dedicated capacity for Amazon EBS I/O. </p>"
+        },
+        "ShrinkPolicy":{
+          "shape":"ShrinkPolicy",
+          "documentation":"<p>Policy for customizing shrink operations.</p>"
         }
       },
       "documentation":"<p>This entity represents an instance group, which is a group of instances that have common purpose. For example, CORE instance group is used for HDFS.</p>"
@@ -1076,6 +994,14 @@
         "InstanceCount":{
           "shape":"Integer",
           "documentation":"<p>Target number of instances for the instance group. </p>"
+        },
+        "Configurations":{
+          "shape":"ConfigurationList",
+          "documentation":"<note><p>Amazon EMR releases 4.x or later.</p></note> <p>The list of configurations supplied for an EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).</p>"
+        },
+        "EbsConfiguration":{
+          "shape":"EbsConfiguration",
+          "documentation":"<p>EBS configurations that will be attached to each Amazon EC2 instance in the instance group. </p>"
         }
       },
       "documentation":"<p>Configuration defining a new instance group.</p>"
@@ -1182,7 +1108,11 @@
         },
         "EC2InstanceIdsToTerminate":{
           "shape":"EC2InstanceIdsToTerminateList",
-          "documentation":"<p>The EC2 InstanceIds to terminate. For advanced users only. Once you terminate the instances, the instance group will not return to its original requested size.</p>"
+          "documentation":"<p>The EC2 InstanceIds to terminate. Once you terminate the instances, the instance group will not return to its original requested size.</p>"
+        },
+        "ShrinkPolicy":{
+          "shape":"ShrinkPolicy",
+          "documentation":"<p>Policy for customizing shrink operations.</p>"
         }
       },
       "documentation":"<p>Modify an instance group size.</p>"
@@ -1282,6 +1212,24 @@
       "type":"list",
       "member":{"shape":"Instance"}
     },
+    "InstanceResizePolicy":{
+      "type":"structure",
+      "members":{
+        "InstancesToTerminate":{
+          "shape":"EC2InstanceIdsList",
+          "documentation":"<p>Specific list of instances to be terminated when shrinking an instance group.</p>"
+        },
+        "InstancesToProtect":{
+          "shape":"EC2InstanceIdsList",
+          "documentation":"<p>Specific list of instances to be protected when shrinking an instance group.</p>"
+        },
+        "InstanceTerminationTimeout":{
+          "shape":"Integer",
+          "documentation":"<p>Decommissioning timeout override for the specific list of instances to be terminated.</p>"
+        }
+      },
+      "documentation":"<p>Custom policy for requesting termination protection or termination of specific instances when shrinking an instance group.</p>"
+    },
     "InstanceRoleType":{
       "type":"string",
       "enum":[
@@ -1362,8 +1310,8 @@
     },
     "InstanceType":{
       "type":"string",
-      "min":1,
       "max":256,
+      "min":1,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "Integer":{"type":"integer"},
@@ -1371,12 +1319,8 @@
       "type":"structure",
       "members":{
       },
-      "error":{
-        "code":"InternalFailure",
-        "httpStatusCode":500
-      },
-      "exception":true,
-      "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
+      "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>",
+      "exception":true
     },
     "InternalServerException":{
       "type":"structure",
@@ -1386,9 +1330,9 @@
           "documentation":"<p>The message associated with the exception.</p>"
         }
       },
+      "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>",
       "exception":true,
-      "fault":true,
-      "documentation":"<p>This exception occurs when there is an internal failure in the EMR service.</p>"
+      "fault":true
     },
     "InvalidRequestException":{
       "type":"structure",
@@ -1402,8 +1346,8 @@
           "documentation":"<p>The message associated with the exception.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
+      "documentation":"<p>This exception occurs when there is something wrong with user input.</p>",
+      "exception":true
     },
     "JobFlowDetail":{
       "type":"structure",
@@ -1428,7 +1372,7 @@
         },
         "AmiVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions currently supported by Amazon ElasticMapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i></p>"
+          "documentation":"<p>The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions currently supported by Amazon ElasticMapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer Guide.</i></p>"
         },
         "ExecutionStatusDetail":{
           "shape":"JobFlowExecutionStatusDetail",
@@ -1471,6 +1415,7 @@
     },
     "JobFlowExecutionState":{
       "type":"string",
+      "documentation":"<p> The type of instance. </p> <enumValues> <value name=\"JobFlowExecutionState$COMPLETED\"> <p>A small instance</p> </value> <value name=\"JobFlowExecutionState$FAILED\"> <p>A large instance</p> </value> </enumValues>",
       "enum":[
         "STARTING",
         "BOOTSTRAPPING",
@@ -1480,8 +1425,7 @@
         "TERMINATED",
         "COMPLETED",
         "FAILED"
-      ],
-      "documentation":"<p> The type of instance. </p> <enumValues> <value name=\"JobFlowExecutionState$COMPLETED\"> <p>A small instance</p> </value> <value name=\"JobFlowExecutionState$FAILED\"> <p>A large instance</p> </value> </enumValues>"
+      ]
     },
     "JobFlowExecutionStateList":{
       "type":"list",
@@ -1550,7 +1494,7 @@
         },
         "KeepJobFlowAliveWhenNoSteps":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the job flow should terminate after completing all steps.</p>"
+          "documentation":"<p>Specifies whether the job flow should be kept alive after completing all steps.</p>"
         },
         "TerminationProtected":{
           "shape":"Boolean",
@@ -1558,11 +1502,31 @@
         },
         "HadoopVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The Hadoop version for the job flow. Valid inputs are \"0.18\", \"0.20\", or \"0.20.205\". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.</p>"
+          "documentation":"<p>The Hadoop version for the job flow. Valid inputs are \"0.18\" (deprecated), \"0.20\" (deprecated), \"0.20.205\" (deprecated), \"1.0.3\", \"2.2.0\", or \"2.4.0\". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.</p>"
         },
         "Ec2SubnetId":{
           "shape":"XmlStringMaxLen256",
           "documentation":"<p> To launch the job flow in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal Amazon Web Services cloud, outside of an Amazon VPC. </p> <p> Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a Amazon VPC. </p>"
+        },
+        "EmrManagedMasterSecurityGroup":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>The identifier of the Amazon EC2 security group for the master node.</p>"
+        },
+        "EmrManagedSlaveSecurityGroup":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>The identifier of the Amazon EC2 security group for the slave nodes.</p>"
+        },
+        "ServiceAccessSecurityGroup":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>The identifier of the Amazon EC2 security group for the Amazon EMR service to access clusters in VPC private subnets.</p>"
+        },
+        "AdditionalMasterSecurityGroups":{
+          "shape":"SecurityGroupsList",
+          "documentation":"<p>A list of additional Amazon EC2 security group IDs for the master node.</p>"
+        },
+        "AdditionalSlaveSecurityGroups":{
+          "shape":"SecurityGroupsList",
+          "documentation":"<p>A list of additional Amazon EC2 security group IDs for the slave nodes.</p>"
         }
       },
       "documentation":"<p>A description of the Amazon EC2 instance running the job flow. A valid JobFlowInstancesConfig must contain at least InstanceGroups, which is the recommended configuration. However, a valid alternative is to have MasterInstanceType, SlaveInstanceType, and InstanceCount (all three must be present).</p>"
@@ -1791,6 +1755,10 @@
           "shape":"StepStateList",
           "documentation":"<p>The filter to limit the step list based on certain states.</p>"
         },
+        "StepIds":{
+          "shape":"XmlStringList",
+          "documentation":"<p>The filter to limit the step list based on the identifier of the steps.</p>"
+        },
         "Marker":{
           "shape":"Marker",
           "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
@@ -1810,7 +1778,7 @@
           "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
-      "documentation":"<p>This output contains the list of steps.</p>"
+      "documentation":"<p>This output contains the list of steps returned in reverse order. This means that the last step is the first element in the list.</p>"
     },
     "Marker":{"type":"string"},
     "MarketType":{
@@ -1891,7 +1859,11 @@
         },
         "AmiVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid: </p> <ul> <li>\"latest\" (uses the latest AMI)</li> <li>The version number of the AMI to use, for example, \"2.0\"</li> </ul> <p>If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the <a>JobFlowInstancesConfig</a> <code>HadoopVersion</code> parameter to modify the version of Hadoop from the defaults shown above.</p> <p>For details about the AMI versions currently supported by Amazon Elastic MapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i> </p>"
+          "documentation":"<note><p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use ReleaseLabel.</p></note> <p>The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid: </p> <ul> <li>The version number of the AMI to use, for example, \"2.0.\"</li> </ul> <p>If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the <a>JobFlowInstancesConfig</a> <code>HadoopVersion</code> parameter to modify the version of Hadoop from the defaults shown above.</p> <p>For details about the AMI versions currently supported by Amazon Elastic MapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i> </p>"
+        },
+        "ReleaseLabel":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<note><p>Amazon EMR releases 4.x or later.</p></note> <p>The release label for the Amazon EMR release. For Amazon EMR 3.x and 2.x AMIs, use amiVersion instead instead of ReleaseLabel.</p>"
         },
         "Instances":{
           "shape":"JobFlowInstancesConfig",
@@ -1907,11 +1879,19 @@
         },
         "SupportedProducts":{
           "shape":"SupportedProductsList",
-          "documentation":"<p>A list of strings that indicates third-party software to use with the job flow. For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html\">Use Third Party Applications with Amazon EMR</a>. Currently supported values are:</p> <ul> <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li> <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li> </ul>"
+          "documentation":"<note><p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.</p></note> <p>A list of strings that indicates third-party software to use with the job flow. For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html\">Use Third Party Applications with Amazon EMR</a>. Currently supported values are:</p> <ul> <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li> <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li> </ul>"
         },
         "NewSupportedProducts":{
           "shape":"NewSupportedProductsList",
-          "documentation":"<p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p> <ul> <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li> <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li> <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition respectively.</li> </ul>"
+          "documentation":"<note><p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.</p></note> <p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p> <ul> <li>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</li> <li>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</li> <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition respectively.</li> <li>\"mapr-m7\" - launch the cluster using MapR M7 Edition.</li> <li>\"hunk\" - launch the cluster with the Hunk Big Data Analtics Platform.</li> <li>\"hue\"- launch the cluster with Hue installed.</li> <li>\"spark\" - launch the cluster with Apache Spark installed.</li> <li>\"ganglia\" - launch the cluster with the Ganglia Monitoring System installed.</li> </ul>"
+        },
+        "Applications":{
+          "shape":"ApplicationList",
+          "documentation":"<note><p>Amazon EMR releases 4.x or later.</p></note> <p>A list of applications for the cluster. Valid values are: \"Hadoop\", \"Hive\", \"Mahout\", \"Pig\", and \"Spark.\" They are case insensitive.</p>"
+        },
+        "Configurations":{
+          "shape":"ConfigurationList",
+          "documentation":"<note><p>Amazon EMR releases 4.x or later.</p></note> <p>The list of configurations supplied for the EMR cluster you are creating.</p>"
         },
         "VisibleToAllUsers":{
           "shape":"Boolean",
@@ -1919,7 +1899,7 @@
         },
         "JobFlowRole":{
           "shape":"XmlString",
-          "documentation":"<p>An IAM role for the job flow. The EC2 instances of the job flow assume this role. The default role is <code>EMRJobflowDefault</code>. In order to use the default role, you must have already created it using the CLI.</p>"
+          "documentation":"<p>Also called instance profile and EC2 role. An IAM role for an EMR cluster. The EC2 instances of the cluster assume this role. The default role is <code>EMR_EC2_DefaultRole</code>. In order to use the default role, you must have already created it using the CLI or console.</p>"
         },
         "ServiceRole":{
           "shape":"XmlString",
@@ -1957,6 +1937,10 @@
       },
       "documentation":"<p>Configuration of the script to run during a bootstrap action.</p>"
     },
+    "SecurityGroupsList":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen256"}
+    },
     "SetTerminationProtectionInput":{
       "type":"structure",
       "required":[
@@ -1992,6 +1976,20 @@
         }
       },
       "documentation":"<p>The input to the SetVisibleToAllUsers action.</p>"
+    },
+    "ShrinkPolicy":{
+      "type":"structure",
+      "members":{
+        "DecommissionTimeout":{
+          "shape":"Integer",
+          "documentation":"<p>The desired timeout for decommissioning an instance. Overrides the default YARN decommissioning timeout.</p>"
+        },
+        "InstanceResizePolicy":{
+          "shape":"InstanceResizePolicy",
+          "documentation":"<p>Custom policy for requesting termination protection or termination of specific instances when shrinking an instance group.</p>"
+        }
+      },
+      "documentation":"<p>Policy for customizing shrink operations. Allows configuration of decommissioning timeout and targeted instance shrinking.</p>"
     },
     "Step":{
       "type":"structure",
@@ -2130,7 +2128,7 @@
       "members":{
         "Code":{
           "shape":"StepStateChangeReasonCode",
-          "documentation":"<p>The programmable code for the state change reason. </p>"
+          "documentation":"<p>The programmable code for the state change reason. Note: Currently, the service provides no code for the state change. </p>"
         },
         "Message":{
           "shape":"String",
@@ -2175,6 +2173,14 @@
         "Name":{
           "shape":"String",
           "documentation":"<p>The name of the cluster step. </p>"
+        },
+        "Config":{
+          "shape":"HadoopStepConfig",
+          "documentation":"<p>The Hadoop job configuration of the cluster step. </p>"
+        },
+        "ActionOnFailure":{
+          "shape":"ActionOnFailure",
+          "documentation":"<p>This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. </p>"
         },
         "Status":{
           "shape":"StepStatus",
@@ -2262,10 +2268,32 @@
       },
       "documentation":"<p> Input to the <a>TerminateJobFlows</a> operation. </p>"
     },
+    "VolumeSpecification":{
+      "type":"structure",
+      "required":[
+        "VolumeType",
+        "SizeInGB"
+      ],
+      "members":{
+        "VolumeType":{
+          "shape":"String",
+          "documentation":"<p>The volume type. Volume types supported are gp2, io1, standard. </p>"
+        },
+        "Iops":{
+          "shape":"Integer",
+          "documentation":"<p>The number of I/O operations per second (IOPS) that the volume supports. </p>"
+        },
+        "SizeInGB":{
+          "shape":"Integer",
+          "documentation":"<p>The volume size, in gibibytes (GiB). This can be a number from 1 – 1024. If the volume type is EBS-optimized, the minimum value is 10. </p>"
+        }
+      },
+      "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster. </p>"
+    },
     "XmlString":{
       "type":"string",
-      "min":0,
       "max":10280,
+      "min":0,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "XmlStringList":{
@@ -2274,9 +2302,10 @@
     },
     "XmlStringMaxLen256":{
       "type":"string",
-      "min":0,
       "max":256,
+      "min":0,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     }
-  }
+  },
+  "documentation":"<p>Amazon Elastic MapReduce (Amazon EMR) is a web service that makes it easy to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several AWS products to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehousing.</p>"
 }

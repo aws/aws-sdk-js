@@ -16,7 +16,6 @@ Feature: AWS CloudFormation
 
   @pagination
   Scenario: Paginating responses
-    Given I paginate the "listStacks" operation with limit 100
-    Then I should get more than one page
-    And I should get numPages - 1 markers
+    Given I paginate the "listStacks" operation 
+    Then I should get at least one page
     And the last page should not contain a marker

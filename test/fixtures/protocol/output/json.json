@@ -134,6 +134,57 @@
     ]
   },
   {
+    "description": "Timestamp members",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "TimeMember": {
+            "shape": "TimeType"
+          },
+          "StructMember": {
+            "shape": "TimeContainer"
+          }
+        }
+      },
+      "TimeType": {
+        "type": "timestamp"
+      },
+      "TimeContainer": {
+        "type": "structure",
+        "members": {
+          "foo": {
+            "shape": "TimeType"
+          }
+        }
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "TimeMember": 1398796238,
+          "StructMember": {
+            "foo": 1398796238
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"TimeMember\": 1398796238, \"StructMember\": {\"foo\": 1398796238}}"
+        }
+      }
+    ]
+  },
+  {
     "description": "Lists",
     "metadata": {
       "protocol": "json"
@@ -144,6 +195,12 @@
         "members": {
           "ListMember": {
             "shape": "ListType"
+          },
+          "ListMemberMap": {
+            "shape": "ListTypeMap"
+          },
+          "ListMemberStruct": {
+            "shape": "ListTypeStruct"
           }
         }
       },
@@ -153,8 +210,30 @@
           "shape": "StringType"
         }
       },
+      "ListTypeMap": {
+        "type": "list",
+        "member": {
+          "shape": "MapType"
+        }
+      },
+      "ListTypeStruct": {
+        "type": "list",
+        "member": {
+          "shape": "StructType"
+        }
+      },
       "StringType": {
         "type": "string"
+      },
+      "StructType": {
+        "type": "structure",
+        "members": {
+        }
+      },
+      "MapType": {
+        "type": "string",
+        "key": { "shape": "StringType" },
+        "value": { "shape": "StringType" }
       }
     },
     "cases": [
@@ -172,6 +251,24 @@
           "status_code": 200,
           "headers": {},
           "body": "{\"ListMember\": [\"a\", \"b\"]}"
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "ListMember": ["a", null],
+          "ListMemberMap": [{}, null, null, {}],
+          "ListMemberStruct": [{}, null, null, {}]
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"ListMember\": [\"a\", null], \"ListMemberMap\": [{}, null, null, {}], \"ListMemberStruct\": [{}, null, null, {}]}"
         }
       }
     ]

@@ -81,6 +81,16 @@ describe 'AWS.Protocol.Rest', ->
         input.members.Id = location: 'querystring', locationName: 'id-param'
         expect(build().httpRequest.path).to.equal('/path?id-param=abc')
 
+      it 'performs querystring param replacements on lists', ->
+        request.params = Id: ['abc', 'def', 'ghi']
+        defop input: input, http: requestUri: '/path'
+        input.members.Id =
+          type: 'list'
+          location: 'querystring'
+          locationName: 'a'
+          member: type: 'string'
+        expect(build().httpRequest.path).to.equal('/path?a=abc&a=def&a=ghi')
+
       it 'omits querystring when param is not provided', ->
         defop input: input, http: requestUri: '/path'
         input.members.Id = location: 'querystring', locationName: 'id-param'
@@ -215,11 +225,11 @@ describe 'AWS.Protocol.Rest', ->
 
     describe 'status code', ->
       it 'extracts the http status when instructed to', ->
-        output.members.Result = type: 'integer', location: 'status'
+        output.members.Result = type: 'integer', location: 'statusCode'
         response.httpResponse.statusCode = 200
         expect(extract().data.Result).to.equal(200)
 
       it 'casts string status codes to integers', ->
-        output.members.Result = type: 'integer', location: 'status'
+        output.members.Result = type: 'integer', location: 'statusCode'
         response.httpResponse.statusCode = '202'
         expect(extract().data.Result).to.equal(202)

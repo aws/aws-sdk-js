@@ -163,8 +163,9 @@ AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY, AMAZON_SESSION_TOKEN (optional)
 #### Credentials from Disk
 
 You can also load configuration and credentials from disk using
-`AWS.config.loadFromPath` by passing a file to a JSON document
-containing the configuration data. For example, if you had a file
+`AWS.config.loadFromPath` by passing a path to a JSON document
+containing the configuration data. The path specified is relative
+to your process's current working directory. For example, if you had a file
 named 'config.json' with the contents:
 
 ```javascript
@@ -238,15 +239,23 @@ AWS.config.apiVersion = '2012-05-04';
 ### Configuring a Proxy
 
 If you cannot connect to the internet directly, the SDK supports the use of
-HTTP or HTTPS proxies through global or per-service configuration options. To
-set a proxy, pass the `proxy` option to the `httpOptions` setting of your
-config object. This is how you could set a global proxy:
+HTTP or HTTPS proxies through the use of a third party HTTP agent such as
+[proxy-agent](https://github.com/TooTallNate/node-proxy-agent). You can visit
+[npmjs.org](http://npmjs.org) for a list of other proxy libraries.
+
+##### Installation
 
 ```javascript
+npm install proxy-agent --save
+```
+
+##### In your code
+
+```javascript
+var proxy = require('proxy-agent');
+
 AWS.config.update({
-  httpOptions: {
-    proxy: 'http://localhost:8080'
-  }
+  httpOptions: { agent: proxy('http://internal.proxy.com') }
 });
 
 var s3 = new AWS.S3();
@@ -254,6 +263,37 @@ s3.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
   console.log(err, data);
 });
 ```
+
+### Registering Certificate Bundles
+
+The default trust stores included with node.js includes the certificates needed to
+access AWS services. In some cases, it might be preferable to include only a specific
+set of certificates.
+
+```javascript
+var fs = require('fs');
+var https = require('https');
+
+var certs = [
+  fs.readFileSync('/path/to/cert.pem')
+];
+
+AWS.config.update({
+  httpOptions: {
+    agent: new https.Agent({
+      rejectUnauthorized: true,
+      ca: certs
+    })
+  }
+});
+
+var s3 = new AWS.S3({apiVersion: '2006-03-01'});
+s3.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
+  console.log(err, data);
+});
+```
+
+
 
 ## Service-Specific Configuration
 

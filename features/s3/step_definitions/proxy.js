@@ -2,7 +2,7 @@ var url = require('url');
 var http = require('http');
 
 module.exports = function() {
-  this.Before("@s3", "@proxy", function(callback) {
+  this.Before('@s3', '@proxy', function(callback) {
     setupProxyServer.call(this);
 
     this.service = this.s3 = new this.AWS.S3({

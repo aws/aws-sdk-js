@@ -11,18 +11,25 @@ tools used to generate the default hosted version of the SDK. This chapter
 outlines the steps to build the SDK on your own with extra services and API
 versions.
 
-## Setting Up
+## Using the SDK Builder
 
-In order to build the SDK, you first need to clone the Git repository containing
-the SDK source. These instructions assume you have [Git](http://git-scm.org) and
-a version of [Node.js](http://nodejs.org) installed on your machine.
+The easiest way to create your own build of the AWS SDK for JavaScript is to
+use the SDK builder hosted at
+[https://sdk.amazonaws.com/builder/js](https://sdk.amazonaws.com/builder/js).
+
+## Using Command Line Tools
+
+In order to build the SDK using command line tools, you first need to clone
+the Git repository containing the SDK source. These instructions assume
+you have [Git](http://git-scm.org) and a version of
+[Node.js](http://nodejs.org) installed on your machine.
 
 First, clone the repository from GitHub and cd into the directory:
 
 ```bash
 git clone git://github.com/aws/aws-sdk-js
 cd aws-sdk-js
-git checkout v2.0.28
+git checkout v2.3.8
 ```
 
 After you have cloned the repository, you need to download the dependency modules
@@ -34,7 +41,7 @@ npm install
 
 You should now be able to build a packaged version of the SDK.
 
-## Building
+### Building
 
 The builder tool is found in `dist-tools/browser-builder.js`. You can run
 this script by typing:
@@ -81,8 +88,9 @@ command:
 node dist-tools/browser-builder.js dynamodb-2011-12-05,dynamodb-2012-08-10
 ```
 
-Available service identifiers and API versions can be found by looking at the
-file list in https://github.com/aws/aws-sdk-js/tree/master/lib/services/api
+The available service identifiers and API versions can be found by viewing the
+service-specific configuration files at:
+<https://github.com/aws/aws-sdk-js/tree/master/apis>.
 
 #### Building All Services
 
@@ -92,10 +100,23 @@ as a command-line argument:
 ```bash
 node dist-tools/browser-builder.js all > aws-sdk-full.js
 ```
+#### Selecting Custom Services
 
-### Building the SDK as a Dependency with Browserify
+If you are building the SDK as a dependency in an application using browserify,
+you may also need to customize the selected set of services used. To do this,
+you can pass the `AWS_SERVICES` environment variable to your browserify
+command containing the list of services you want in the same format listed
+above:
 
-The SDK can be built as library dependency to any application running
+```sh
+$ AWS_SERVICES=ec2,s3,dynamodb browserify index.js > browser-app.js
+```
+
+The above bundle will contain the AWS.EC2, AWS.S3, and AWS.DynamoDB services.
+
+## Building the SDK as a Dependency with Browserify
+
+The SDK can also be built as library dependency to any application running
 in the browser via [browserify](http://browserify.org). Consider the following
 small Node.js application (`index.js`) that uses the SDK:
 
@@ -114,17 +135,3 @@ $ browserify index.js > browser-app.js
 
 The application, including all of its dependencies (the SDK), will now be
 available in the browser through `browser-app.js`.
-
-### Selecting Custom Services
-
-If you are building the SDK as a dependency in an application using browserify,
-you may also need to customize the selected set of services used. To do this,
-you can pass the `AWS_SERVICES` environment variable to your browserify
-command containing the list of services you want in the same format listed
-above:
-
-```sh
-$ AWS_SERVICES=ec2,s3,dynamodb browserify index.js > browser-app.js
-```
-
-The above bundle will contain the AWS.EC2, AWS.S3, and AWS.DynamoDB services.

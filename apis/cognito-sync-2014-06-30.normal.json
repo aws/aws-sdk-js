@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2014-06-30",
     "endpointPrefix":"cognito-sync",
@@ -7,8 +8,87 @@
     "signatureVersion":"v4",
     "protocol":"rest-json"
   },
-  "documentation":"<fullname>Amazon Cognito Sync</fullname> <p>Amazon Cognito Sync provides an AWS service and client library that enable cross-device syncing of application-related user data. High-level client libraries are available for both iOS and Android. You can use these libraries to persist data locally so that it's available even if the device is offline. Developer credentials don't need to be stored on the mobile device to access the service. You can use Amazon Cognito to obtain a normalized user ID and credentials. User data is persisted in a dataset that can store up to 1 MB of key-value pairs, and you can have up to 20 datasets per user identity.</p> <p>With Amazon Cognito Sync, the data stored for each identity is accessible only to credentials assigned to that identity. In order to use the Cognito Sync service, you need to make API calls using credentials retrieved with <a href=\"http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/Welcome.html\">Amazon Cognito Identity service</a>.</p>",
+  "documentation":"<fullname>Amazon Cognito Sync</fullname> <p>Amazon Cognito Sync provides an AWS service and client library that enable cross-device syncing of application-related user data. High-level client libraries are available for both iOS and Android. You can use these libraries to persist data locally so that it's available even if the device is offline. Developer credentials don't need to be stored on the mobile device to access the service. You can use Amazon Cognito to obtain a normalized user ID and credentials. User data is persisted in a dataset that can store up to 1 MB of key-value pairs, and you can have up to 20 datasets per user identity.</p> <p>With Amazon Cognito Sync, the data stored for each identity is accessible only to credentials assigned to that identity. In order to use the Cognito Sync service, you need to make API calls using credentials retrieved with <a href=\"http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/Welcome.html\">Amazon Cognito Identity service</a>.</p> <p>If you want to use Cognito Sync in an Android or iOS application, you will probably want to make API calls via the AWS Mobile SDK. To learn more, see the <a href=\"http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-sync.html\">Developer Guide for Android</a> and the <a href=\"http://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-sync.html\">Developer Guide for iOS</a>.</p>",
   "operations":{
+    "BulkPublish":{
+      "name":"BulkPublish",
+      "http":{
+        "method":"POST",
+        "requestUri":"/identitypools/{IdentityPoolId}/bulkpublish",
+        "responseCode":200
+      },
+      "input":{
+        "shape":"BulkPublishRequest",
+        "documentation":"The input for the BulkPublish operation."
+      },
+      "output":{
+        "shape":"BulkPublishResponse",
+        "documentation":"The output for the BulkPublish operation."
+      },
+      "errors":[
+        {
+          "shape":"NotAuthorizedException",
+          "error":{
+            "code":"NotAuthorizedError",
+            "httpStatusCode":403,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown when a user is not authorized to access the requested resource."
+        },
+        {
+          "shape":"InvalidParameterException",
+          "error":{
+            "code":"InvalidParameter",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{
+            "code":"ResourceNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the resource doesn't exist."
+        },
+        {
+          "shape":"InternalErrorException",
+          "error":{
+            "code":"InternalError",
+            "httpStatusCode":500
+          },
+          "exception":true,
+          "fault":true,
+          "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"DuplicateRequestException",
+          "error":{
+            "code":"DuplicateRequest",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool."
+        },
+        {
+          "shape":"AlreadyStreamedException",
+          "error":{
+            "code":"AlreadyStreamed",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully."
+        }
+      ],
+      "documentation":"<p>Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream. Customers are limited to one successful bulk publish per 24 hours. Bulk publish is an asynchronous request, customers can see the status of the request via the GetBulkPublishDetails operation.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>"
+    },
     "DeleteDataset":{
       "name":"DeleteDataset",
       "http":{
@@ -64,9 +144,29 @@
           "exception":true,
           "fault":true,
           "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
+        },
+        {
+          "shape":"ResourceConflictException",
+          "error":{
+            "code":"ResourceConflict",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict."
         }
       ],
-      "documentation":"Deletes the specific dataset. The dataset will be deleted permanently, and the action can't be undone. Datasets that this dataset was merged with will no longer report the merge. Any consequent operation on this dataset will result in a ResourceNotFoundException."
+      "documentation":"<p>Deletes the specific dataset. The dataset will be deleted permanently, and the action can't be undone. Datasets that this dataset was merged with will no longer report the merge. Any subsequent operation on this dataset will result in a ResourceNotFoundException.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>"
     },
     "DescribeDataset":{
       "name":"DescribeDataset",
@@ -77,7 +177,7 @@
       },
       "input":{
         "shape":"DescribeDatasetRequest",
-        "documentation":"A request for metadata about a dataset (creation date, number of records, size) by owner and dataset name."
+        "documentation":"A request for meta data about a dataset (creation date, number of records, size) by owner and dataset name."
       },
       "output":{
         "shape":"DescribeDatasetResponse",
@@ -123,9 +223,19 @@
           "exception":true,
           "fault":true,
           "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
         }
       ],
-      "documentation":"Gets metadata about a dataset by identity and dataset name. The credentials used to make this API call need to have access to the identity data. With Amazon Cognito Sync, each identity has access only to its own data. You should use Amazon Cognito Identity service to retrieve the credentials necessary to make this API call."
+      "documentation":"<p>Gets meta data about a dataset by identity and dataset name. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.</p>"
     },
     "DescribeIdentityPoolUsage":{
       "name":"DescribeIdentityPoolUsage",
@@ -182,9 +292,19 @@
           "exception":true,
           "fault":true,
           "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
         }
       ],
-      "documentation":"Gets usage details (for example, data storage) about a particular identity pool."
+      "documentation":"<p>Gets usage details (for example, data storage) about a particular identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>"
     },
     "DescribeIdentityUsage":{
       "name":"DescribeIdentityUsage",
@@ -241,24 +361,34 @@
           "exception":true,
           "fault":true,
           "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
         }
       ],
-      "documentation":"Gets usage information for an identity, including number of datasets and data usage."
+      "documentation":"<p>Gets usage information for an identity, including number of datasets and data usage.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>"
     },
-    "GetIdentityPoolConfiguration":{
-      "name":"GetIdentityPoolConfiguration",
+    "GetBulkPublishDetails":{
+      "name":"GetBulkPublishDetails",
       "http":{
-        "method":"GET",
-        "requestUri":"/identitypools/{IdentityPoolId}/configuration",
+        "method":"POST",
+        "requestUri":"/identitypools/{IdentityPoolId}/getBulkPublishDetails",
         "responseCode":200
       },
       "input":{
-        "shape":"GetIdentityPoolConfigurationRequest",
-        "documentation":"<p>A request to <code>GetIdentityPoolConfigurationRequest</code>.</p>"
+        "shape":"GetBulkPublishDetailsRequest",
+        "documentation":"The input for the GetBulkPublishDetails operation."
       },
       "output":{
-        "shape":"GetIdentityPoolConfigurationResponse",
-        "documentation":"<p>The response from <code>GetIdentityPoolConfigurationResponse</code>.</p>"
+        "shape":"GetBulkPublishDetailsResponse",
+        "documentation":"The output for the GetBulkPublishDetails operation."
       },
       "errors":[
         {
@@ -302,7 +432,145 @@
           "documentation":"Indicates an internal service error."
         }
       ],
-      "documentation":"<p>Gets the configuration settings of an identity pool.</p>"
+      "documentation":"<p>Get the status of the last BulkPublish operation for an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>"
+    },
+    "GetCognitoEvents":{
+      "name":"GetCognitoEvents",
+      "http":{
+        "method":"GET",
+        "requestUri":"/identitypools/{IdentityPoolId}/events",
+        "responseCode":200
+      },
+      "input":{
+        "shape":"GetCognitoEventsRequest",
+        "documentation":"<p>A request for a list of the configured Cognito Events</p>"
+      },
+      "output":{
+        "shape":"GetCognitoEventsResponse",
+        "documentation":"<p>The response from the GetCognitoEvents request</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidParameterException",
+          "error":{
+            "code":"InvalidParameter",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{
+            "code":"ResourceNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the resource doesn't exist."
+        },
+        {
+          "shape":"NotAuthorizedException",
+          "error":{
+            "code":"NotAuthorizedError",
+            "httpStatusCode":403,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown when a user is not authorized to access the requested resource."
+        },
+        {
+          "shape":"InternalErrorException",
+          "error":{
+            "code":"InternalError",
+            "httpStatusCode":500
+          },
+          "exception":true,
+          "fault":true,
+          "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
+        }
+      ],
+      "documentation":"<p>Gets the events and the corresponding Lambda functions associated with an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>"
+    },
+    "GetIdentityPoolConfiguration":{
+      "name":"GetIdentityPoolConfiguration",
+      "http":{
+        "method":"GET",
+        "requestUri":"/identitypools/{IdentityPoolId}/configuration",
+        "responseCode":200
+      },
+      "input":{
+        "shape":"GetIdentityPoolConfigurationRequest",
+        "documentation":"<p>The input for the GetIdentityPoolConfiguration operation.</p>"
+      },
+      "output":{
+        "shape":"GetIdentityPoolConfigurationResponse",
+        "documentation":"<p>The output for the GetIdentityPoolConfiguration operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"NotAuthorizedException",
+          "error":{
+            "code":"NotAuthorizedError",
+            "httpStatusCode":403,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown when a user is not authorized to access the requested resource."
+        },
+        {
+          "shape":"InvalidParameterException",
+          "error":{
+            "code":"InvalidParameter",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{
+            "code":"ResourceNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the resource doesn't exist."
+        },
+        {
+          "shape":"InternalErrorException",
+          "error":{
+            "code":"InternalError",
+            "httpStatusCode":500
+          },
+          "exception":true,
+          "fault":true,
+          "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
+        }
+      ],
+      "documentation":"<p>Gets the configuration settings of an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>"
     },
     "ListDatasets":{
       "name":"ListDatasets",
@@ -349,9 +617,19 @@
           "exception":true,
           "fault":true,
           "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
         }
       ],
-      "documentation":"Lists datasets for an identity. The credentials used to make this API call need to have access to the identity data. With Amazon Cognito Sync, each identity has access only to its own data. You should use Amazon Cognito Identity service to retrieve the credentials necessary to make this API call."
+      "documentation":"<p>Lists datasets for an identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>ListDatasets can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use the Cognito Identity credentials to make this API call.</p>"
     },
     "ListIdentityPoolUsage":{
       "name":"ListIdentityPoolUsage",
@@ -398,9 +676,19 @@
           "exception":true,
           "fault":true,
           "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
         }
       ],
-      "documentation":"Gets a list of identity pools registered with Cognito."
+      "documentation":"<p>Gets a list of identity pools registered with Cognito.</p> <p>ListIdentityPoolUsage can only be called with developer credentials. You cannot make this API call with the temporary user credentials provided by Cognito Identity.</p>"
     },
     "ListRecords":{
       "name":"ListRecords",
@@ -459,7 +747,7 @@
           "documentation":"Indicates an internal service error."
         }
       ],
-      "documentation":"Gets paginated records, optionally changed after a particular sync count for a dataset and identity. The credentials used to make this API call need to have access to the identity data. With Amazon Cognito Sync, each identity has access only to its own data. You should use Amazon Cognito Identity service to retrieve the credentials necessary to make this API call."
+      "documentation":"<p>Gets paginated records, optionally changed after a particular sync count for a dataset and identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>ListRecords can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.</p>"
     },
     "RegisterDevice":{
       "name":"RegisterDevice",
@@ -470,11 +758,11 @@
       },
       "input":{
         "shape":"RegisterDeviceRequest",
-        "documentation":"<p>A request to <code>RegisterDevice</code>.</p>"
+        "documentation":"<p>A request to RegisterDevice.</p>"
       },
       "output":{
         "shape":"RegisterDeviceResponse",
-        "documentation":"<p>Response to a <code>RegisterDevice</code> request.</p>"
+        "documentation":"<p>Response to a RegisterDevice request.</p>"
       },
       "errors":[
         {
@@ -525,9 +813,84 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
         }
       ],
-      "documentation":"<p>Registers a device to receive push sync notifications.</p>"
+      "documentation":"<p>Registers a device to receive push sync notifications.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>"
+    },
+    "SetCognitoEvents":{
+      "name":"SetCognitoEvents",
+      "http":{
+        "method":"POST",
+        "requestUri":"/identitypools/{IdentityPoolId}/events",
+        "responseCode":200
+      },
+      "input":{
+        "shape":"SetCognitoEventsRequest",
+        "documentation":"<p>A request to configure Cognito Events\"</p>\""
+      },
+      "errors":[
+        {
+          "shape":"InvalidParameterException",
+          "error":{
+            "code":"InvalidParameter",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{
+            "code":"ResourceNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the resource doesn't exist."
+        },
+        {
+          "shape":"NotAuthorizedException",
+          "error":{
+            "code":"NotAuthorizedError",
+            "httpStatusCode":403,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown when a user is not authorized to access the requested resource."
+        },
+        {
+          "shape":"InternalErrorException",
+          "error":{
+            "code":"InternalError",
+            "httpStatusCode":500
+          },
+          "exception":true,
+          "fault":true,
+          "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
+        }
+      ],
+      "documentation":"<p>Sets the AWS Lambda function for a given event type for an identity pool. This request only updates the key/value pair specified. Other key/values pairs are not updated. To remove a key value pair, pass a empty value for the particular key.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>"
     },
     "SetIdentityPoolConfiguration":{
       "name":"SetIdentityPoolConfiguration",
@@ -538,11 +901,11 @@
       },
       "input":{
         "shape":"SetIdentityPoolConfigurationRequest",
-        "documentation":"<p>A request to <code>SetIdentityPoolConfiguration</code>.</p>"
+        "documentation":"<p>The input for the SetIdentityPoolConfiguration operation.</p>"
       },
       "output":{
         "shape":"SetIdentityPoolConfigurationResponse",
-        "documentation":"<p>Response to a <code>SetIdentityPoolConfiguration</code> request.</p>"
+        "documentation":"<p>The output for the SetIdentityPoolConfiguration operation</p>"
       },
       "errors":[
         {
@@ -584,9 +947,29 @@
           "exception":true,
           "fault":true,
           "documentation":"Indicates an internal service error."
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
+        },
+        {
+          "shape":"ConcurrentModificationException",
+          "error":{
+            "code":"ConcurrentModification",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>Thrown if there are parallel requests to modify a resource.</p>"
         }
       ],
-      "documentation":"<p>Sets the necessary configuration for push sync.</p>"
+      "documentation":"<p>Sets the necessary configuration for push sync.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>"
     },
     "SubscribeToDataset":{
       "name":"SubscribeToDataset",
@@ -597,11 +980,11 @@
       },
       "input":{
         "shape":"SubscribeToDatasetRequest",
-        "documentation":"<p>A request to <code>SubscribeToDatasetRequest</code>.</p>"
+        "documentation":"<p>A request to SubscribeToDatasetRequest.</p>"
       },
       "output":{
         "shape":"SubscribeToDatasetResponse",
-        "documentation":"<p>Response to a <code>SubscribeToDataset</code> request.</p>"
+        "documentation":"<p>Response to a SubscribeToDataset request.</p>"
       },
       "errors":[
         {
@@ -652,9 +1035,19 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
         }
       ],
-      "documentation":"<p>Subscribes to receive notifications when a dataset is modified by another device.</p>"
+      "documentation":"<p>Subscribes to receive notifications when a dataset is modified by another device.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>"
     },
     "UnsubscribeFromDataset":{
       "name":"UnsubscribeFromDataset",
@@ -665,11 +1058,11 @@
       },
       "input":{
         "shape":"UnsubscribeFromDatasetRequest",
-        "documentation":"<p>A request to <code>UnsubscribeFromDataset</code>.</p>"
+        "documentation":"<p>A request to UnsubscribeFromDataset.</p>"
       },
       "output":{
         "shape":"UnsubscribeFromDatasetResponse",
-        "documentation":"<p>Response to an <code>UnsubscribeFromDataset</code> request.</p>"
+        "documentation":"<p>Response to an UnsubscribeFromDataset request.</p>"
       },
       "errors":[
         {
@@ -720,9 +1113,19 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Thrown if the request is throttled."
         }
       ],
-      "documentation":"<p>Unsubscribe from receiving notifications when a dataset is modified by another device.</p>"
+      "documentation":"<p>Unsubscribes from receiving notifications when a dataset is modified by another device.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>"
     },
     "UpdateRecords":{
       "name":"UpdateRecords",
@@ -791,6 +1194,26 @@
           "documentation":"Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict."
         },
         {
+          "shape":"InvalidLambdaFunctionOutputException",
+          "error":{
+            "code":"InvalidLambdaFunctionOutput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>The AWS Lambda function returned invalid output or an exception.</p>"
+        },
+        {
+          "shape":"LambdaThrottledException",
+          "error":{
+            "code":"LambdaThrottled",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>AWS Lambda throttled your account, please contact AWS Support</p>"
+        },
+        {
           "shape":"TooManyRequestsException",
           "error":{
             "code":"TooManyRequests",
@@ -811,10 +1234,27 @@
           "documentation":"Indicates an internal service error."
         }
       ],
-      "documentation":"Posts updates to records and add and delete records for a dataset and user. The credentials used to make this API call need to have access to the identity data. With Amazon Cognito Sync, each identity has access only to its own data. You should use Amazon Cognito Identity service to retrieve the credentials necessary to make this API call."
+      "documentation":"<p>Posts updates to records and adds and deletes records for a dataset and user.</p> <p>The sync count in the record patch is your last known sync count for that record. The server will reject an UpdateRecords request with a ResourceConflictException if you try to patch a record with a new value but a stale sync count.</p> <p>For example, if the sync count on the server is 5 for a key called highScore and you try and submit a new highScore with sync count of 4, the request will be rejected. To obtain the current sync count for a record, call ListRecords. On a successful update of the record, the response returns the new sync count for that record. You should present that sync count the next time you try to update that same record. When the record does not exist, specify the sync count as 0.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>"
     }
   },
   "shapes":{
+    "AlreadyStreamedException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{
+          "shape":"ExceptionMessage",
+          "documentation":"The message associated with the AlreadyStreamedException exception."
+        }
+      },
+      "error":{
+        "code":"AlreadyStreamed",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully."
+    },
     "ApplicationArn":{
       "type":"string",
       "pattern":"arn:aws:sns:[-0-9a-z]+:\\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+"
@@ -830,7 +1270,75 @@
       "pattern":"arn:aws:iam::\\d+:role/.*"
     },
     "Boolean":{"type":"boolean"},
+    "BulkPublishRequest":{
+      "type":"structure",
+      "required":["IdentityPoolId"],
+      "members":{
+        "IdentityPoolId":{
+          "shape":"IdentityPoolId",
+          "location":"uri",
+          "locationName":"IdentityPoolId",
+          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+        }
+      },
+      "documentation":"The input for the BulkPublish operation."
+    },
+    "BulkPublishResponse":{
+      "type":"structure",
+      "members":{
+        "IdentityPoolId":{
+          "shape":"IdentityPoolId",
+          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+        }
+      },
+      "documentation":"The output for the BulkPublish operation."
+    },
+    "BulkPublishStatus":{
+      "type":"string",
+      "enum":[
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "FAILED",
+        "SUCCEEDED"
+      ]
+    },
     "ClientContext":{"type":"string"},
+    "CognitoEventType":{"type":"string"},
+    "CognitoStreams":{
+      "type":"structure",
+      "members":{
+        "StreamName":{
+          "shape":"StreamName",
+          "documentation":"The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool."
+        },
+        "RoleArn":{
+          "shape":"AssumeRoleArn",
+          "documentation":"The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream."
+        },
+        "StreamingStatus":{
+          "shape":"StreamingStatus",
+          "documentation":"Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>"
+        }
+      },
+      "documentation":"Configuration options for configure Cognito streams."
+    },
+    "ConcurrentModificationException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{
+          "shape":"String",
+          "documentation":"<p>The message returned by a ConcurrentModicationException.</p>"
+        }
+      },
+      "error":{
+        "code":"ConcurrentModification",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>Thrown if there are parallel requests to modify a resource.</p>"
+    },
     "Dataset":{
       "type":"structure",
       "members":{
@@ -942,14 +1450,14 @@
           "documentation":"A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.' (dot)."
         }
       },
-      "documentation":"A request for metadata about a dataset (creation date, number of records, size) by owner and dataset name."
+      "documentation":"A request for meta data about a dataset (creation date, number of records, size) by owner and dataset name."
     },
     "DescribeDatasetResponse":{
       "type":"structure",
       "members":{
         "Dataset":{
           "shape":"Dataset",
-          "documentation":"Metadata for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don't exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs."
+          "documentation":"Meta data for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don't exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs."
         }
       },
       "documentation":"Response to a successful DescribeDataset request."
@@ -1014,7 +1522,92 @@
       "min":1,
       "max":256
     },
+    "DuplicateRequestException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{
+          "shape":"ExceptionMessage",
+          "documentation":"The message associated with the DuplicateRequestException exception."
+        }
+      },
+      "error":{
+        "code":"DuplicateRequest",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool."
+    },
+    "Events":{
+      "type":"map",
+      "key":{"shape":"CognitoEventType"},
+      "value":{"shape":"LambdaFunctionArn"},
+      "max":1
+    },
     "ExceptionMessage":{"type":"string"},
+    "GetBulkPublishDetailsRequest":{
+      "type":"structure",
+      "required":["IdentityPoolId"],
+      "members":{
+        "IdentityPoolId":{
+          "shape":"IdentityPoolId",
+          "location":"uri",
+          "locationName":"IdentityPoolId",
+          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+        }
+      },
+      "documentation":"The input for the GetBulkPublishDetails operation."
+    },
+    "GetBulkPublishDetailsResponse":{
+      "type":"structure",
+      "members":{
+        "IdentityPoolId":{
+          "shape":"IdentityPoolId",
+          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+        },
+        "BulkPublishStartTime":{
+          "shape":"Date",
+          "documentation":"The date/time at which the last bulk publish was initiated."
+        },
+        "BulkPublishCompleteTime":{
+          "shape":"Date",
+          "documentation":"If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation completed."
+        },
+        "BulkPublishStatus":{
+          "shape":"BulkPublishStatus",
+          "documentation":"Status of the last bulk publish operation, valid values are: <p>NOT_STARTED - No bulk publish has been requested for this identity pool</p> <p>IN_PROGRESS - Data is being published to the configured stream</p> <p>SUCCEEDED - All data for the identity pool has been published to the configured stream</p> <p>FAILED - Some portion of the data has failed to publish, check FailureMessage for the cause.</p>"
+        },
+        "FailureMessage":{
+          "shape":"String",
+          "documentation":"If BulkPublishStatus is FAILED this field will contain the error message that caused the bulk publish to fail."
+        }
+      },
+      "documentation":"The output for the GetBulkPublishDetails operation."
+    },
+    "GetCognitoEventsRequest":{
+      "type":"structure",
+      "required":["IdentityPoolId"],
+      "members":{
+        "IdentityPoolId":{
+          "shape":"IdentityPoolId",
+          "location":"uri",
+          "locationName":"IdentityPoolId",
+          "documentation":"<p>The Cognito Identity Pool ID for the request</p>"
+        }
+      },
+      "documentation":"<p>A request for a list of the configured Cognito Events</p>"
+    },
+    "GetCognitoEventsResponse":{
+      "type":"structure",
+      "members":{
+        "Events":{
+          "shape":"Events",
+          "documentation":"<p>The Cognito Events returned from the GetCognitoEvents request</p>"
+        }
+      },
+      "documentation":"<p>The response from the GetCognitoEvents request</p>"
+    },
     "GetIdentityPoolConfigurationRequest":{
       "type":"structure",
       "required":["IdentityPoolId"],
@@ -1026,7 +1619,7 @@
           "documentation":"<p>A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. This is the ID of the pool for which to return a configuration.</p>"
         }
       },
-      "documentation":"<p>A request to <code>GetIdentityPoolConfigurationRequest</code>.</p>"
+      "documentation":"<p>The input for the GetIdentityPoolConfiguration operation.</p>"
     },
     "GetIdentityPoolConfigurationResponse":{
       "type":"structure",
@@ -1037,21 +1630,25 @@
         },
         "PushSync":{
           "shape":"PushSync",
-          "documentation":"<p>Configuration options applied to the identity pool.</p>"
+          "documentation":"<p>Options to apply to this identity pool for push synchronization.</p>"
+        },
+        "CognitoStreams":{
+          "shape":"CognitoStreams",
+          "documentation":"Options to apply to this identity pool for Amazon Cognito streams."
         }
       },
-      "documentation":"<p>The response from <code>GetIdentityPoolConfigurationResponse</code>.</p>"
+      "documentation":"<p>The output for the GetIdentityPoolConfiguration operation.</p>"
     },
     "IdentityId":{
       "type":"string",
       "min":1,
-      "max":50,
+      "max":55,
       "pattern":"[\\w-]+:[0-9a-f-]+"
     },
     "IdentityPoolId":{
       "type":"string",
       "min":1,
-      "max":50,
+      "max":55,
       "pattern":"[\\w-]+:[0-9a-f-]+"
     },
     "IdentityPoolUsage":{
@@ -1129,7 +1726,10 @@
       "type":"structure",
       "required":["message"],
       "members":{
-        "message":{"shape":"ExceptionMessage"}
+        "message":{
+          "shape":"ExceptionMessage",
+          "documentation":"Message returned by InvalidConfigurationException."
+        }
       },
       "error":{
         "code":"InvalidConfiguration",
@@ -1137,6 +1737,23 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "InvalidLambdaFunctionOutputException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{
+          "shape":"ExceptionMessage",
+          "documentation":"<p>A message returned when an InvalidLambdaFunctionOutputException occurs</p>"
+        }
+      },
+      "error":{
+        "code":"InvalidLambdaFunctionOutput",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>The AWS Lambda function returned invalid output or an exception.</p>"
     },
     "InvalidParameterException":{
       "type":"structure",
@@ -1154,6 +1771,24 @@
       },
       "exception":true,
       "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+    },
+    "LambdaFunctionArn":{"type":"string"},
+    "LambdaThrottledException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{
+          "shape":"ExceptionMessage",
+          "documentation":"<p>A message returned when an LambdaThrottledException is thrown</p>"
+        }
+      },
+      "error":{
+        "code":"LambdaThrottled",
+        "httpStatusCode":429,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>AWS Lambda throttled your account, please contact AWS Support</p>"
     },
     "LimitExceededException":{
       "type":"structure",
@@ -1520,7 +2155,7 @@
           "documentation":"<p>The push token.</p>"
         }
       },
-      "documentation":"<p>A request to <code>RegisterDevice</code>.</p>"
+      "documentation":"<p>A request to RegisterDevice.</p>"
     },
     "RegisterDeviceResponse":{
       "type":"structure",
@@ -1530,7 +2165,7 @@
           "documentation":"<p>The unique ID generated for this device by Cognito.</p>"
         }
       },
-      "documentation":"<p>Response to a <code>RegisterDevice</code> request.</p>"
+      "documentation":"<p>Response to a RegisterDevice request.</p>"
     },
     "ResourceConflictException":{
       "type":"structure",
@@ -1566,6 +2201,26 @@
       "exception":true,
       "documentation":"Thrown if the resource doesn't exist."
     },
+    "SetCognitoEventsRequest":{
+      "type":"structure",
+      "required":[
+        "IdentityPoolId",
+        "Events"
+      ],
+      "members":{
+        "IdentityPoolId":{
+          "shape":"IdentityPoolId",
+          "location":"uri",
+          "locationName":"IdentityPoolId",
+          "documentation":"<p>The Cognito Identity Pool to use when configuring Cognito Events</p>"
+        },
+        "Events":{
+          "shape":"Events",
+          "documentation":"<p>The events to configure</p>"
+        }
+      },
+      "documentation":"<p>A request to configure Cognito Events\"</p>\""
+    },
     "SetIdentityPoolConfigurationRequest":{
       "type":"structure",
       "required":["IdentityPoolId"],
@@ -1578,10 +2233,14 @@
         },
         "PushSync":{
           "shape":"PushSync",
-          "documentation":"<p>Configuration options to be applied to the identity pool.</p>"
+          "documentation":"<p>Options to apply to this identity pool for push synchronization.</p>"
+        },
+        "CognitoStreams":{
+          "shape":"CognitoStreams",
+          "documentation":"Options to apply to this identity pool for Amazon Cognito streams."
         }
       },
-      "documentation":"<p>A request to <code>SetIdentityPoolConfiguration</code>.</p>"
+      "documentation":"<p>The input for the SetIdentityPoolConfiguration operation.</p>"
     },
     "SetIdentityPoolConfigurationResponse":{
       "type":"structure",
@@ -1592,10 +2251,26 @@
         },
         "PushSync":{
           "shape":"PushSync",
-          "documentation":"<p>Configuration options applied to the identity pool.</p>"
+          "documentation":"<p>Options to apply to this identity pool for push synchronization.</p>"
+        },
+        "CognitoStreams":{
+          "shape":"CognitoStreams",
+          "documentation":"Options to apply to this identity pool for Amazon Cognito streams."
         }
       },
-      "documentation":"<p>Response to a <code>SetIdentityPoolConfiguration</code> request.</p>"
+      "documentation":"<p>The output for the SetIdentityPoolConfiguration operation</p>"
+    },
+    "StreamName":{
+      "type":"string",
+      "min":1,
+      "max":128
+    },
+    "StreamingStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "String":{"type":"string"},
     "SubscribeToDatasetRequest":{
@@ -1632,13 +2307,13 @@
           "documentation":"<p>The unique ID generated for this device by Cognito.</p>"
         }
       },
-      "documentation":"<p>A request to <code>SubscribeToDatasetRequest</code>.</p>"
+      "documentation":"<p>A request to SubscribeToDatasetRequest.</p>"
     },
     "SubscribeToDatasetResponse":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Response to a <code>SubscribeToDataset</code> request.</p>"
+      "documentation":"<p>Response to a SubscribeToDataset request.</p>"
     },
     "SyncSessionToken":{"type":"string"},
     "TooManyRequestsException":{
@@ -1692,13 +2367,13 @@
           "documentation":"<p>The unique ID generated for this device by Cognito.</p>"
         }
       },
-      "documentation":"<p>A request to <code>UnsubscribeFromDataset</code>.</p>"
+      "documentation":"<p>A request to UnsubscribeFromDataset.</p>"
     },
     "UnsubscribeFromDatasetResponse":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Response to an <code>UnsubscribeFromDataset</code> request.</p>"
+      "documentation":"<p>Response to an UnsubscribeFromDataset request.</p>"
     },
     "UpdateRecordsRequest":{
       "type":"structure",
@@ -1743,7 +2418,7 @@
           "shape":"ClientContext",
           "location":"header",
           "locationName":"x-amz-Client-Context",
-          "documentation":"Intended to supply a device ID that will populate the <code>lastModifiedBy</code> field referenced in other methods. The <code>ClientContext</code> field is not yet implemented."
+          "documentation":"Intended to supply a device ID that will populate the lastModifiedBy field referenced in other methods. The ClientContext field is not yet implemented."
         }
       },
       "documentation":"A request to post updates to records or add and delete records for a dataset and user."
@@ -1758,5 +2433,7 @@
       },
       "documentation":"Returned for a successful UpdateRecordsRequest."
     }
+  },
+  "examples":{
   }
 }

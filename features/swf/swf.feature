@@ -4,12 +4,17 @@ Feature: Amazon Simple Workflow Service
 
   I want to use Amazon Simple Workflow Service
 
-  Scenario: Domains
-    Given I register a SWF domain with prefix "aws-js-sdk-integration"
-    And I list SWF domains with status "REGISTERED"
-    Then the SWF domain should be in the list
-    And I delete the SWF domain
+  Scenario: Listing domains
+    Given I run the "listDomains" operation with params:
+    """
+    { "registrationStatus": "REGISTERED" }
+    """
+    Then the request should be successful
+    And the value at "domainInfos" should be a list
 
   Scenario: Error handling
-    Given I try to create a SWF domain with an empty name
-    Then the error code should be "ValidationException"
+    Given I run the "describeDomain" operation with params:
+    """
+    { "name": "fake-domain" }
+    """
+    Then the error code should be "UnknownResourceFault"

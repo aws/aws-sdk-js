@@ -1,0 +1,4313 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2015-07-09",
+    "endpointPrefix":"apigateway",
+    "protocol":"rest-json",
+    "serviceFullName":"Amazon API Gateway",
+    "signatureVersion":"v4"
+  },
+  "operations":{
+    "CreateApiKey":{
+      "name":"CreateApiKey",
+      "http":{
+        "method":"POST",
+        "requestUri":"/apikeys",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateApiKeyRequest"},
+      "output":{"shape":"ApiKey"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"}
+      ],
+      "documentation":"<p>Create an <a>ApiKey</a> resource. </p>"
+    },
+    "CreateAuthorizer":{
+      "name":"CreateAuthorizer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis/{restapi_id}/authorizers",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateAuthorizerRequest"},
+      "output":{"shape":"Authorizer"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Adds a new <a>Authorizer</a> resource to an existing <a>RestApi</a> resource.</p>"
+    },
+    "CreateBasePathMapping":{
+      "name":"CreateBasePathMapping",
+      "http":{
+        "method":"POST",
+        "requestUri":"/domainnames/{domain_name}/basepathmappings",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateBasePathMappingRequest"},
+      "output":{"shape":"BasePathMapping"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"ConflictException"},
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Creates a new <a>BasePathMapping</a> resource.</p>"
+    },
+    "CreateDeployment":{
+      "name":"CreateDeployment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis/{restapi_id}/deployments",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateDeploymentRequest"},
+      "output":{"shape":"Deployment"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Creates a <a>Deployment</a> resource, which makes a specified <a>RestApi</a> callable over the internet.</p>"
+    },
+    "CreateDomainName":{
+      "name":"CreateDomainName",
+      "http":{
+        "method":"POST",
+        "requestUri":"/domainnames",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateDomainNameRequest"},
+      "output":{"shape":"DomainName"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Creates a new domain name.</p>"
+    },
+    "CreateModel":{
+      "name":"CreateModel",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis/{restapi_id}/models",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateModelRequest"},
+      "output":{"shape":"Model"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Adds a new <a>Model</a> resource to an existing <a>RestApi</a> resource.</p>"
+    },
+    "CreateResource":{
+      "name":"CreateResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis/{restapi_id}/resources/{parent_id}",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateResourceRequest"},
+      "output":{"shape":"Resource"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Creates a <a>Resource</a> resource.</p>"
+    },
+    "CreateRestApi":{
+      "name":"CreateRestApi",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateRestApiRequest"},
+      "output":{"shape":"RestApi"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Creates a new <a>RestApi</a> resource.</p>"
+    },
+    "CreateStage":{
+      "name":"CreateStage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis/{restapi_id}/stages",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateStageRequest"},
+      "output":{"shape":"Stage"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Creates a new <a>Stage</a> resource that references a pre-existing <a>Deployment</a> for the API. </p>"
+    },
+    "DeleteApiKey":{
+      "name":"DeleteApiKey",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/apikeys/{api_Key}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteApiKeyRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Deletes the <a>ApiKey</a> resource.</p>"
+    },
+    "DeleteAuthorizer":{
+      "name":"DeleteAuthorizer",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/authorizers/{authorizer_id}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteAuthorizerRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"}
+      ],
+      "documentation":"<p>Deletes an existing <a>Authorizer</a> resource.</p>"
+    },
+    "DeleteBasePathMapping":{
+      "name":"DeleteBasePathMapping",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/domainnames/{domain_name}/basepathmappings/{base_path}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteBasePathMappingRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Deletes the <a>BasePathMapping</a> resource.</p>"
+    },
+    "DeleteClientCertificate":{
+      "name":"DeleteClientCertificate",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/clientcertificates/{clientcertificate_id}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteClientCertificateRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"}
+      ],
+      "documentation":"<p>Deletes the <a>ClientCertificate</a> resource.</p>"
+    },
+    "DeleteDeployment":{
+      "name":"DeleteDeployment",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/deployments/{deployment_id}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteDeploymentRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Deletes a <a>Deployment</a> resource. Deleting a deployment will only succeed if there are no <a>Stage</a> resources associated with it.</p>"
+    },
+    "DeleteDomainName":{
+      "name":"DeleteDomainName",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/domainnames/{domain_name}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteDomainNameRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Deletes the <a>DomainName</a> resource.</p>"
+    },
+    "DeleteIntegration":{
+      "name":"DeleteIntegration",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteIntegrationRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Represents a delete integration.</p>"
+    },
+    "DeleteIntegrationResponse":{
+      "name":"DeleteIntegrationResponse",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteIntegrationResponseRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Represents a delete integration response.</p>"
+    },
+    "DeleteMethod":{
+      "name":"DeleteMethod",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteMethodRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Deletes an existing <a>Method</a> resource.</p>"
+    },
+    "DeleteMethodResponse":{
+      "name":"DeleteMethodResponse",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteMethodResponseRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Deletes an existing <a>MethodResponse</a> resource.</p>"
+    },
+    "DeleteModel":{
+      "name":"DeleteModel",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/models/{model_name}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteModelRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"}
+      ],
+      "documentation":"<p>Deletes a model.</p>"
+    },
+    "DeleteResource":{
+      "name":"DeleteResource",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteResourceRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Deletes a <a>Resource</a> resource.</p>"
+    },
+    "DeleteRestApi":{
+      "name":"DeleteRestApi",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteRestApiRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"}
+      ],
+      "documentation":"<p>Deletes the specified API.</p>"
+    },
+    "DeleteStage":{
+      "name":"DeleteStage",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/stages/{stage_name}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteStageRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"}
+      ],
+      "documentation":"<p>Deletes a <a>Stage</a> resource.</p>"
+    },
+    "FlushStageAuthorizersCache":{
+      "name":"FlushStageAuthorizersCache",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/stages/{stage_name}/cache/authorizers",
+        "responseCode":202
+      },
+      "input":{"shape":"FlushStageAuthorizersCacheRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Flushes all authorizer cache entries on a stage.</p>"
+    },
+    "FlushStageCache":{
+      "name":"FlushStageCache",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/stages/{stage_name}/cache/data",
+        "responseCode":202
+      },
+      "input":{"shape":"FlushStageCacheRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Flushes a stage's cache.</p>"
+    },
+    "GenerateClientCertificate":{
+      "name":"GenerateClientCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/clientcertificates",
+        "responseCode":201
+      },
+      "input":{"shape":"GenerateClientCertificateRequest"},
+      "output":{"shape":"ClientCertificate"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Generates a <a>ClientCertificate</a> resource.</p>"
+    },
+    "GetAccount":{
+      "name":"GetAccount",
+      "http":{
+        "method":"GET",
+        "requestUri":"/account"
+      },
+      "input":{"shape":"GetAccountRequest"},
+      "output":{"shape":"Account"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets information about the current <a>Account</a> resource.</p>"
+    },
+    "GetApiKey":{
+      "name":"GetApiKey",
+      "http":{
+        "method":"GET",
+        "requestUri":"/apikeys/{api_Key}"
+      },
+      "input":{"shape":"GetApiKeyRequest"},
+      "output":{"shape":"ApiKey"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets information about the current <a>ApiKey</a> resource.</p>"
+    },
+    "GetApiKeys":{
+      "name":"GetApiKeys",
+      "http":{
+        "method":"GET",
+        "requestUri":"/apikeys"
+      },
+      "input":{"shape":"GetApiKeysRequest"},
+      "output":{"shape":"ApiKeys"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets information about the current <a>ApiKeys</a> resource.</p>"
+    },
+    "GetAuthorizer":{
+      "name":"GetAuthorizer",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/authorizers/{authorizer_id}"
+      },
+      "input":{"shape":"GetAuthorizerRequest"},
+      "output":{"shape":"Authorizer"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Describe an existing <a>Authorizer</a> resource.</p>"
+    },
+    "GetAuthorizers":{
+      "name":"GetAuthorizers",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/authorizers"
+      },
+      "input":{"shape":"GetAuthorizersRequest"},
+      "output":{"shape":"Authorizers"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Describe an existing <a>Authorizers</a> resource.</p>"
+    },
+    "GetBasePathMapping":{
+      "name":"GetBasePathMapping",
+      "http":{
+        "method":"GET",
+        "requestUri":"/domainnames/{domain_name}/basepathmappings/{base_path}"
+      },
+      "input":{"shape":"GetBasePathMappingRequest"},
+      "output":{"shape":"BasePathMapping"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Describe a <a>BasePathMapping</a> resource.</p>"
+    },
+    "GetBasePathMappings":{
+      "name":"GetBasePathMappings",
+      "http":{
+        "method":"GET",
+        "requestUri":"/domainnames/{domain_name}/basepathmappings"
+      },
+      "input":{"shape":"GetBasePathMappingsRequest"},
+      "output":{"shape":"BasePathMappings"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Represents a collection of <a>BasePathMapping</a> resources.</p>"
+    },
+    "GetClientCertificate":{
+      "name":"GetClientCertificate",
+      "http":{
+        "method":"GET",
+        "requestUri":"/clientcertificates/{clientcertificate_id}"
+      },
+      "input":{"shape":"GetClientCertificateRequest"},
+      "output":{"shape":"ClientCertificate"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets information about the current <a>ClientCertificate</a> resource.</p>"
+    },
+    "GetClientCertificates":{
+      "name":"GetClientCertificates",
+      "http":{
+        "method":"GET",
+        "requestUri":"/clientcertificates"
+      },
+      "input":{"shape":"GetClientCertificatesRequest"},
+      "output":{"shape":"ClientCertificates"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets a collection of <a>ClientCertificate</a> resources.</p>"
+    },
+    "GetDeployment":{
+      "name":"GetDeployment",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/deployments/{deployment_id}"
+      },
+      "input":{"shape":"GetDeploymentRequest"},
+      "output":{"shape":"Deployment"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Gets information about a <a>Deployment</a> resource.</p>"
+    },
+    "GetDeployments":{
+      "name":"GetDeployments",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/deployments"
+      },
+      "input":{"shape":"GetDeploymentsRequest"},
+      "output":{"shape":"Deployments"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Gets information about a <a>Deployments</a> collection.</p>"
+    },
+    "GetDomainName":{
+      "name":"GetDomainName",
+      "http":{
+        "method":"GET",
+        "requestUri":"/domainnames/{domain_name}"
+      },
+      "input":{"shape":"GetDomainNameRequest"},
+      "output":{"shape":"DomainName"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Represents a domain name that is contained in a simpler, more intuitive URL that can be called.</p>"
+    },
+    "GetDomainNames":{
+      "name":"GetDomainNames",
+      "http":{
+        "method":"GET",
+        "requestUri":"/domainnames"
+      },
+      "input":{"shape":"GetDomainNamesRequest"},
+      "output":{"shape":"DomainNames"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Represents a collection of <a>DomainName</a> resources.</p>"
+    },
+    "GetExport":{
+      "name":"GetExport",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/stages/{stage_name}/exports/{export_type}",
+        "responseCode":200
+      },
+      "input":{"shape":"GetExportRequest"},
+      "output":{"shape":"ExportResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Exports a deployed version of a <a>RestApi</a> in a specified format.</p>"
+    },
+    "GetIntegration":{
+      "name":"GetIntegration",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration"
+      },
+      "input":{"shape":"GetIntegrationRequest"},
+      "output":{"shape":"Integration"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Represents a get integration.</p>"
+    },
+    "GetIntegrationResponse":{
+      "name":"GetIntegrationResponse",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}"
+      },
+      "input":{"shape":"GetIntegrationResponseRequest"},
+      "output":{"shape":"IntegrationResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Represents a get integration response.</p>"
+    },
+    "GetMethod":{
+      "name":"GetMethod",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}"
+      },
+      "input":{"shape":"GetMethodRequest"},
+      "output":{"shape":"Method"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Describe an existing <a>Method</a> resource.</p>"
+    },
+    "GetMethodResponse":{
+      "name":"GetMethodResponse",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}"
+      },
+      "input":{"shape":"GetMethodResponseRequest"},
+      "output":{"shape":"MethodResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Describes a <a>MethodResponse</a> resource.</p>"
+    },
+    "GetModel":{
+      "name":"GetModel",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/models/{model_name}"
+      },
+      "input":{"shape":"GetModelRequest"},
+      "output":{"shape":"Model"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Describes an existing model defined for a <a>RestApi</a> resource.</p>"
+    },
+    "GetModelTemplate":{
+      "name":"GetModelTemplate",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/models/{model_name}/default_template"
+      },
+      "input":{"shape":"GetModelTemplateRequest"},
+      "output":{"shape":"Template"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Generates a sample mapping template that can be used to transform a payload into the structure of a model.</p>"
+    },
+    "GetModels":{
+      "name":"GetModels",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/models"
+      },
+      "input":{"shape":"GetModelsRequest"},
+      "output":{"shape":"Models"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Describes existing <a>Models</a> defined for a <a>RestApi</a> resource.</p>"
+    },
+    "GetResource":{
+      "name":"GetResource",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}"
+      },
+      "input":{"shape":"GetResourceRequest"},
+      "output":{"shape":"Resource"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Lists information about a resource.</p>"
+    },
+    "GetResources":{
+      "name":"GetResources",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/resources"
+      },
+      "input":{"shape":"GetResourcesRequest"},
+      "output":{"shape":"Resources"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Lists information about a collection of <a>Resource</a> resources.</p>"
+    },
+    "GetRestApi":{
+      "name":"GetRestApi",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}"
+      },
+      "input":{"shape":"GetRestApiRequest"},
+      "output":{"shape":"RestApi"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Lists the <a>RestApi</a> resource in the collection.</p>"
+    },
+    "GetRestApis":{
+      "name":"GetRestApis",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis"
+      },
+      "input":{"shape":"GetRestApisRequest"},
+      "output":{"shape":"RestApis"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Lists the <a>RestApis</a> resources for your collection.</p>"
+    },
+    "GetSdk":{
+      "name":"GetSdk",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/stages/{stage_name}/sdks/{sdk_type}",
+        "responseCode":200
+      },
+      "input":{"shape":"GetSdkRequest"},
+      "output":{"shape":"SdkResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Generates a client SDK for a <a>RestApi</a> and <a>Stage</a>.</p>"
+    },
+    "GetStage":{
+      "name":"GetStage",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/stages/{stage_name}"
+      },
+      "input":{"shape":"GetStageRequest"},
+      "output":{"shape":"Stage"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets information about a <a>Stage</a> resource.</p>"
+    },
+    "GetStages":{
+      "name":"GetStages",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/stages"
+      },
+      "input":{"shape":"GetStagesRequest"},
+      "output":{"shape":"Stages"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets information about one or more <a>Stage</a> resources.</p>"
+    },
+    "ImportRestApi":{
+      "name":"ImportRestApi",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis?mode=import",
+        "responseCode":201
+      },
+      "input":{"shape":"ImportRestApiRequest"},
+      "output":{"shape":"RestApi"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>A feature of the Amazon API Gateway control service for creating a new API from an external API definition file.</p>"
+    },
+    "PutIntegration":{
+      "name":"PutIntegration",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration",
+        "responseCode":201
+      },
+      "input":{"shape":"PutIntegrationRequest"},
+      "output":{"shape":"Integration"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Represents a put integration.</p>"
+    },
+    "PutIntegrationResponse":{
+      "name":"PutIntegrationResponse",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}",
+        "responseCode":201
+      },
+      "input":{"shape":"PutIntegrationResponseRequest"},
+      "output":{"shape":"IntegrationResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
+      ],
+      "documentation":"<p>Represents a put integration.</p>"
+    },
+    "PutMethod":{
+      "name":"PutMethod",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}",
+        "responseCode":201
+      },
+      "input":{"shape":"PutMethodRequest"},
+      "output":{"shape":"Method"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Add a method to an existing <a>Resource</a> resource.</p>"
+    },
+    "PutMethodResponse":{
+      "name":"PutMethodResponse",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}",
+        "responseCode":201
+      },
+      "input":{"shape":"PutMethodResponseRequest"},
+      "output":{"shape":"MethodResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Adds a <a>MethodResponse</a> to an existing <a>Method</a> resource.</p>"
+    },
+    "PutRestApi":{
+      "name":"PutRestApi",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/restapis/{restapi_id}"
+      },
+      "input":{"shape":"PutRestApiRequest"},
+      "output":{"shape":"RestApi"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>A feature of the Amazon API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.</p>"
+    },
+    "TestInvokeAuthorizer":{
+      "name":"TestInvokeAuthorizer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis/{restapi_id}/authorizers/{authorizer_id}"
+      },
+      "input":{"shape":"TestInvokeAuthorizerRequest"},
+      "output":{"shape":"TestInvokeAuthorizerResponse"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Simulate the execution of an <a>Authorizer</a> in your <a>RestApi</a> with headers, parameters, and an incoming request body.</p>"
+    },
+    "TestInvokeMethod":{
+      "name":"TestInvokeMethod",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}"
+      },
+      "input":{"shape":"TestInvokeMethodRequest"},
+      "output":{"shape":"TestInvokeMethodResponse"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Simulate the execution of a <a>Method</a> in your <a>RestApi</a> with headers, parameters, and an incoming request body.</p>"
+    },
+    "UpdateAccount":{
+      "name":"UpdateAccount",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/account"
+      },
+      "input":{"shape":"UpdateAccountRequest"},
+      "output":{"shape":"Account"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Changes information about the current <a>Account</a> resource.</p>"
+    },
+    "UpdateApiKey":{
+      "name":"UpdateApiKey",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/apikeys/{api_Key}"
+      },
+      "input":{"shape":"UpdateApiKeyRequest"},
+      "output":{"shape":"ApiKey"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Changes information about an <a>ApiKey</a> resource.</p>"
+    },
+    "UpdateAuthorizer":{
+      "name":"UpdateAuthorizer",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/authorizers/{authorizer_id}"
+      },
+      "input":{"shape":"UpdateAuthorizerRequest"},
+      "output":{"shape":"Authorizer"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Updates an existing <a>Authorizer</a> resource.</p>"
+    },
+    "UpdateBasePathMapping":{
+      "name":"UpdateBasePathMapping",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/domainnames/{domain_name}/basepathmappings/{base_path}"
+      },
+      "input":{"shape":"UpdateBasePathMappingRequest"},
+      "output":{"shape":"BasePathMapping"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Changes information about the <a>BasePathMapping</a> resource.</p>"
+    },
+    "UpdateClientCertificate":{
+      "name":"UpdateClientCertificate",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/clientcertificates/{clientcertificate_id}"
+      },
+      "input":{"shape":"UpdateClientCertificateRequest"},
+      "output":{"shape":"ClientCertificate"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"}
+      ],
+      "documentation":"<p>Changes information about an <a>ClientCertificate</a> resource.</p>"
+    },
+    "UpdateDeployment":{
+      "name":"UpdateDeployment",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/deployments/{deployment_id}"
+      },
+      "input":{"shape":"UpdateDeploymentRequest"},
+      "output":{"shape":"Deployment"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Changes information about a <a>Deployment</a> resource.</p>"
+    },
+    "UpdateDomainName":{
+      "name":"UpdateDomainName",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/domainnames/{domain_name}"
+      },
+      "input":{"shape":"UpdateDomainNameRequest"},
+      "output":{"shape":"DomainName"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Changes information about the <a>DomainName</a> resource.</p>"
+    },
+    "UpdateIntegration":{
+      "name":"UpdateIntegration",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration"
+      },
+      "input":{"shape":"UpdateIntegrationRequest"},
+      "output":{"shape":"Integration"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
+      ],
+      "documentation":"<p>Represents an update integration.</p>"
+    },
+    "UpdateIntegrationResponse":{
+      "name":"UpdateIntegrationResponse",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}"
+      },
+      "input":{"shape":"UpdateIntegrationResponseRequest"},
+      "output":{"shape":"IntegrationResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Represents an update integration response.</p>"
+    },
+    "UpdateMethod":{
+      "name":"UpdateMethod",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}"
+      },
+      "input":{"shape":"UpdateMethodRequest"},
+      "output":{"shape":"Method"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Updates an existing <a>Method</a> resource.</p>"
+    },
+    "UpdateMethodResponse":{
+      "name":"UpdateMethodResponse",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}",
+        "responseCode":201
+      },
+      "input":{"shape":"UpdateMethodResponseRequest"},
+      "output":{"shape":"MethodResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Updates an existing <a>MethodResponse</a> resource.</p>"
+    },
+    "UpdateModel":{
+      "name":"UpdateModel",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/models/{model_name}"
+      },
+      "input":{"shape":"UpdateModelRequest"},
+      "output":{"shape":"Model"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Changes information about a model.</p>"
+    },
+    "UpdateResource":{
+      "name":"UpdateResource",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/resources/{resource_id}"
+      },
+      "input":{"shape":"UpdateResourceRequest"},
+      "output":{"shape":"Resource"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Changes information about a <a>Resource</a> resource.</p>"
+    },
+    "UpdateRestApi":{
+      "name":"UpdateRestApi",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}"
+      },
+      "input":{"shape":"UpdateRestApiRequest"},
+      "output":{"shape":"RestApi"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Changes information about the specified API.</p>"
+    },
+    "UpdateStage":{
+      "name":"UpdateStage",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/stages/{stage_name}"
+      },
+      "input":{"shape":"UpdateStageRequest"},
+      "output":{"shape":"Stage"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Changes information about a <a>Stage</a> resource.</p>"
+    }
+  },
+  "shapes":{
+    "Account":{
+      "type":"structure",
+      "members":{
+        "cloudwatchRoleArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies the Amazon resource name (ARN) of an Amazon CloudWatch role for the current <a>Account</a> resource.</p>"
+        },
+        "throttleSettings":{
+          "shape":"ThrottleSettings",
+          "documentation":"<p>Specifies the application programming interface (API) throttle settings for the current <a>Account</a> resource.</p>"
+        }
+      },
+      "documentation":"<p>Represents an AWS account that is associated with Amazon API Gateway.</p>"
+    },
+    "ApiKey":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the API Key.</p>"
+        },
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the API Key.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the API Key.</p>"
+        },
+        "enabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether the API Key can be used by callers.</p>"
+        },
+        "stageKeys":{
+          "shape":"ListOfString",
+          "documentation":"<p>A list of <a>Stage</a> resources that are associated with the <a>ApiKey</a> resource.</p>"
+        },
+        "createdDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date when the API Key was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+        },
+        "lastUpdatedDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>When the API Key was last updated, in ISO 8601 format.</p>"
+        }
+      },
+      "documentation":"<p>A resource that can be distributed to callers for executing <a>Method</a> resources that require an API key. API keys can be mapped to any <a>Stage</a> on any <a>RestApi</a>, which indicates that the callers with the API key can make requests to that stage.</p>"
+    },
+    "ApiKeys":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfApiKey",
+          "documentation":"<p>The current page of any <a>ApiKey</a> resources in the collection of <a>ApiKey</a> resources.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Represents a collection of <a>ApiKey</a> resources.</p>"
+    },
+    "Authorizer":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The identifier for the authorizer resource.</p>"
+        },
+        "name":{
+          "shape":"String",
+          "documentation":"<p>[Required] The name of the authorizer.</p>"
+        },
+        "type":{
+          "shape":"AuthorizerType",
+          "documentation":"<p>[Required] The type of the authorizer. Currently, the only valid type is TOKEN.</p>"
+        },
+        "authType":{
+          "shape":"String",
+          "documentation":"<p>Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.</p>"
+        },
+        "authorizerUri":{
+          "shape":"String",
+          "documentation":"<p>[Required] Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN authorizers, this must be a well-formed Lambda function URI. The URI should be of the form <code>arn:aws:apigateway:{region}:lambda:path/{service_api}</code>. <code>Region</code> is used to determine the right endpoint. In this case, <code>path</code> is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations</p>"
+        },
+        "authorizerCredentials":{
+          "shape":"String",
+          "documentation":"<p>Specifies the credentials required for the authorizer, if any. Two options are available. To specify an IAM Role for Amazon API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.</p>"
+        },
+        "identitySource":{
+          "shape":"String",
+          "documentation":"<p>[Required] The source of the identity in an incoming request. For TOKEN authorizers, this value is a mapping expression with the same syntax as integration parameter mappings. The only valid source for tokens is 'header', so the expression should match 'method.request.header.[headerName]'. The value of the header '[headerName]' will be interpreted as the incoming token.</p>"
+        },
+        "identityValidationExpression":{
+          "shape":"String",
+          "documentation":"<p>A validation expression for the incoming identity. For TOKEN authorizers, this value should be a regular expression. The incoming token from the client is matched against this expression, and will proceed if the token matches. If the token doesn't match, the client receives a 401 Unauthorized response.</p>"
+        },
+        "authorizerResultTtlInSeconds":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The TTL in seconds of cached authorizer results. If greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.</p>"
+        }
+      },
+      "documentation":"<p>Represents an authorization layer for methods. If enabled on a method, API Gateway will activate the authorizer when a client calls the method.</p>"
+    },
+    "AuthorizerType":{
+      "type":"string",
+      "documentation":"<p>The authorizer type. Only current value is TOKEN.</p>",
+      "enum":["TOKEN"]
+    },
+    "Authorizers":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfAuthorizer",
+          "documentation":"<p>Gets the current list of <a>Authorizer</a> resources in the collection.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Represents a collection of <a>Authorizer</a> resources.</p>"
+    },
+    "BadRequestException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "BasePathMapping":{
+      "type":"structure",
+      "members":{
+        "basePath":{
+          "shape":"String",
+          "documentation":"<p>The base path name that callers of the API must provide as part of the URL after the domain name.</p>"
+        },
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The name of the API.</p>"
+        },
+        "stage":{
+          "shape":"String",
+          "documentation":"<p>The name of the API's stage.</p>"
+        }
+      },
+      "documentation":"<p>Represents the base path that callers of the API that must provide as part of the URL after the domain name.</p>"
+    },
+    "BasePathMappings":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfBasePathMapping",
+          "documentation":"<p>The current page of any <a>BasePathMapping</a> resources in the collection of base path mapping resources.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Represents a collection of <a>BasePathMapping</a> resources.</p>"
+    },
+    "Blob":{"type":"blob"},
+    "Boolean":{"type":"boolean"},
+    "CacheClusterSize":{
+      "type":"string",
+      "documentation":"<p>Returns the size of the <b>CacheCluster</b>.</p>",
+      "enum":[
+        "0.5",
+        "1.6",
+        "6.1",
+        "13.5",
+        "28.4",
+        "58.2",
+        "118",
+        "237"
+      ]
+    },
+    "CacheClusterStatus":{
+      "type":"string",
+      "documentation":"<p>Returns the status of the <b>CacheCluster</b>.</p>",
+      "enum":[
+        "CREATE_IN_PROGRESS",
+        "AVAILABLE",
+        "DELETE_IN_PROGRESS",
+        "NOT_AVAILABLE",
+        "FLUSH_IN_PROGRESS"
+      ]
+    },
+    "ClientCertificate":{
+      "type":"structure",
+      "members":{
+        "clientCertificateId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the Client Certificate.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the Client Certificate.</p>"
+        },
+        "pemEncodedCertificate":{
+          "shape":"String",
+          "documentation":"<p>The PEM-encoded public key of the Client Certificate, that can be used to configure certificate authentication in the integration endpoint .</p>"
+        },
+        "createdDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date when the Client Certificate was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+        },
+        "expirationDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date when the Client Certificate will expire, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+        }
+      },
+      "documentation":"<p>Represents a Client Certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p>"
+    },
+    "ClientCertificates":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfClientCertificate",
+          "documentation":"<p>The current page of any <a>ClientCertificate</a> resources in the collection of <a>ClientCertificate</a> resources.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Represents a collection of <a>ClientCertificate</a> resources.</p>"
+    },
+    "ConflictException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
+    "CreateApiKeyRequest":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>ApiKey</a>.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the <a>ApiKey</a>.</p>"
+        },
+        "enabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether the <a>ApiKey</a> can be used by callers.</p>"
+        },
+        "stageKeys":{
+          "shape":"ListOfStageKeys",
+          "documentation":"<p>Specifies whether the <a>ApiKey</a> can be used by callers.</p>"
+        }
+      },
+      "documentation":"<p>Request to create an <a>ApiKey</a> resource.</p>"
+    },
+    "CreateAuthorizerRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "name",
+        "type",
+        "authorizerUri",
+        "identitySource"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier under which the <a>Authorizer</a> will be created.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "name":{
+          "shape":"String",
+          "documentation":"<p>[Required] The name of the authorizer.</p>"
+        },
+        "type":{
+          "shape":"AuthorizerType",
+          "documentation":"<p>[Required] The type of the authorizer.</p>"
+        },
+        "authType":{
+          "shape":"String",
+          "documentation":"<p>Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.</p>"
+        },
+        "authorizerUri":{
+          "shape":"String",
+          "documentation":"<p>[Required] Specifies the authorizer's Uniform Resource Identifier (URI).</p>"
+        },
+        "authorizerCredentials":{
+          "shape":"String",
+          "documentation":"<p>Specifies the credentials required for the authorizer, if any.</p>"
+        },
+        "identitySource":{
+          "shape":"String",
+          "documentation":"<p>[Required] The source of the identity in an incoming request.</p>"
+        },
+        "identityValidationExpression":{
+          "shape":"String",
+          "documentation":"<p>A validation expression for the incoming identity.</p>"
+        },
+        "authorizerResultTtlInSeconds":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The TTL of cached authorizer results.</p>"
+        }
+      },
+      "documentation":"<p>Request to add a new <a>Authorizer</a> to an existing <a>RestApi</a> resource.</p>"
+    },
+    "CreateBasePathMappingRequest":{
+      "type":"structure",
+      "required":[
+        "domainName",
+        "restApiId"
+      ],
+      "members":{
+        "domainName":{
+          "shape":"String",
+          "documentation":"<p>The domain name of the <a>BasePathMapping</a> resource to create.</p>",
+          "location":"uri",
+          "locationName":"domain_name"
+        },
+        "basePath":{
+          "shape":"String",
+          "documentation":"<p>The base path name that callers of the API must provide as part of the URL after the domain name. This value must be unique for all of the mappings across a single API. Leave this blank if you do not want callers to specify a base path name after the domain name.</p>"
+        },
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The name of the API that you want to apply this mapping to.</p>"
+        },
+        "stage":{
+          "shape":"String",
+          "documentation":"<p>The name of the API's stage that you want to use for this mapping. Leave this blank if you do not want callers to explicitly specify the stage name after any base path name.</p>"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to create a new <a>BasePathMapping</a> resource.</p>"
+    },
+    "CreateDeploymentRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "stageName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> resource identifier for the <a>Deployment</a> resource to create.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>Stage</a> resource for the <a>Deployment</a> resource to create.</p>"
+        },
+        "stageDescription":{
+          "shape":"String",
+          "documentation":"<p>The description of the <a>Stage</a> resource for the <a>Deployment</a> resource to create.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description for the <a>Deployment</a> resource to create.</p>"
+        },
+        "cacheClusterEnabled":{
+          "shape":"NullableBoolean",
+          "documentation":"<p>Enables a cache cluster for the <a>Stage</a> resource specified in the input.</p>"
+        },
+        "cacheClusterSize":{
+          "shape":"CacheClusterSize",
+          "documentation":"<p>Specifies the cache cluster size for the <a>Stage</a> resource specified in the input, if a cache cluster is enabled.</p>"
+        },
+        "variables":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A map that defines the stage variables for the <a>Stage</a> resource that is associated with the new deployment. Variable names can have alphanumeric characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to create a <a>Deployment</a> resource.</p>"
+    },
+    "CreateDomainNameRequest":{
+      "type":"structure",
+      "required":[
+        "domainName",
+        "certificateName",
+        "certificateBody",
+        "certificatePrivateKey",
+        "certificateChain"
+      ],
+      "members":{
+        "domainName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>DomainName</a> resource.</p>"
+        },
+        "certificateName":{
+          "shape":"String",
+          "documentation":"<p>The name of the certificate.</p>"
+        },
+        "certificateBody":{
+          "shape":"String",
+          "documentation":"<p>The body of the server certificate provided by your certificate authority.</p>"
+        },
+        "certificatePrivateKey":{
+          "shape":"String",
+          "documentation":"<p>Your certificate's private key.</p>"
+        },
+        "certificateChain":{
+          "shape":"String",
+          "documentation":"<p>The intermediate certificates and optionally the root certificate, one after the other without any blank lines. If you include the root certificate, your certificate chain must start with intermediate certificates and end with the root certificate. Use the intermediate certificates that were provided by your certificate authority. Do not include any intermediaries that are not in the chain of trust path.</p>"
+        }
+      },
+      "documentation":"<p>A request to create a new domain name.</p>"
+    },
+    "CreateModelRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "name",
+        "contentType"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier under which the <a>Model</a> will be created.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the model.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the model.</p>"
+        },
+        "schema":{
+          "shape":"String",
+          "documentation":"<p>The schema for the model. For <code>application/json</code> models, this should be <a href=\"http://json-schema.org/documentation.html\" target=\"_blank\">JSON-schema draft v4</a> model.</p>"
+        },
+        "contentType":{
+          "shape":"String",
+          "documentation":"<p>The content-type for the model.</p>"
+        }
+      },
+      "documentation":"<p>Request to add a new <a>Model</a> to an existing <a>RestApi</a> resource.</p>"
+    },
+    "CreateResourceRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "parentId",
+        "pathPart"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> for the resource. </p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "parentId":{
+          "shape":"String",
+          "documentation":"<p>The parent resource's identifier.</p>",
+          "location":"uri",
+          "locationName":"parent_id"
+        },
+        "pathPart":{
+          "shape":"String",
+          "documentation":"<p>The last path segment for this resource.</p>"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to create a <a>Resource</a> resource.</p>"
+    },
+    "CreateRestApiRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>RestApi</a>.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the <a>RestApi</a>.</p>"
+        },
+        "cloneFrom":{
+          "shape":"String",
+          "documentation":"<p>The Id of the <a>RestApi</a> that you want to clone from.</p>"
+        }
+      },
+      "documentation":"<p>The POST Request to add a new <a>RestApi</a> resource to your collection.</p>"
+    },
+    "CreateStageRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "stageName",
+        "deploymentId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Stage</a> resource to create.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name for the <a>Stage</a> resource.</p>"
+        },
+        "deploymentId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>Deployment</a> resource for the <a>Stage</a> resource.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the <a>Stage</a> resource.</p>"
+        },
+        "cacheClusterEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Whether cache clustering is enabled for the stage.</p>"
+        },
+        "cacheClusterSize":{
+          "shape":"CacheClusterSize",
+          "documentation":"<p>The stage's cache cluster size.</p>"
+        },
+        "variables":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A map that defines the stage variables for the new <a>Stage</a> resource. Variable names can have alphanumeric characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to create a <a>Stage</a> resource.</p>"
+    },
+    "DeleteApiKeyRequest":{
+      "type":"structure",
+      "required":["apiKey"],
+      "members":{
+        "apiKey":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>ApiKey</a> resource to be deleted.</p>",
+          "location":"uri",
+          "locationName":"api_Key"
+        }
+      },
+      "documentation":"<p>A request to delete the <a>ApiKey</a> resource.</p>"
+    },
+    "DeleteAuthorizerRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "authorizerId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Authorizer</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "authorizerId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>Authorizer</a> resource.</p>",
+          "location":"uri",
+          "locationName":"authorizer_id"
+        }
+      },
+      "documentation":"<p>Request to delete an existing <a>Authorizer</a> resource.</p>"
+    },
+    "DeleteBasePathMappingRequest":{
+      "type":"structure",
+      "required":[
+        "domainName",
+        "basePath"
+      ],
+      "members":{
+        "domainName":{
+          "shape":"String",
+          "documentation":"<p>The domain name of the <a>BasePathMapping</a> resource to delete.</p>",
+          "location":"uri",
+          "locationName":"domain_name"
+        },
+        "basePath":{
+          "shape":"String",
+          "documentation":"<p>The base path name of the <a>BasePathMapping</a> resource to delete.</p>",
+          "location":"uri",
+          "locationName":"base_path"
+        }
+      },
+      "documentation":"<p>A request to delete the <a>BasePathMapping</a> resource.</p>"
+    },
+    "DeleteClientCertificateRequest":{
+      "type":"structure",
+      "required":["clientCertificateId"],
+      "members":{
+        "clientCertificateId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>ClientCertificate</a> resource to be deleted.</p>",
+          "location":"uri",
+          "locationName":"clientcertificate_id"
+        }
+      },
+      "documentation":"<p>A request to delete the <a>ClientCertificate</a> resource.</p>"
+    },
+    "DeleteDeploymentRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "deploymentId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Deployment</a> resource to delete.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "deploymentId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>Deployment</a> resource to delete.</p>",
+          "location":"uri",
+          "locationName":"deployment_id"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to delete a <a>Deployment</a> resource.</p>"
+    },
+    "DeleteDomainNameRequest":{
+      "type":"structure",
+      "required":["domainName"],
+      "members":{
+        "domainName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>DomainName</a> resource to be deleted.</p>",
+          "location":"uri",
+          "locationName":"domain_name"
+        }
+      },
+      "documentation":"<p>A request to delete the <a>DomainName</a> resource.</p>"
+    },
+    "DeleteIntegrationRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a delete integration request's API identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a delete integration request's resource identifier.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies a delete integration request's HTTP method.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        }
+      },
+      "documentation":"<p>Represents a delete integration request.</p>"
+    },
+    "DeleteIntegrationResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod",
+        "statusCode"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a delete integration response request's API identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a delete integration response request's resource identifier.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies a delete integration response request's HTTP method.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>Specifies a delete integration response request's status code.</p>",
+          "location":"uri",
+          "locationName":"status_code"
+        }
+      },
+      "documentation":"<p>Represents a delete integration response request.</p>"
+    },
+    "DeleteMethodRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The <a>Resource</a> identifier for the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>The HTTP verb that identifies the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        }
+      },
+      "documentation":"<p>Request to delete an existing <a>Method</a> resource.</p>"
+    },
+    "DeleteMethodResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod",
+        "statusCode"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>MethodResponse</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The <a>Resource</a> identifier for the <a>MethodResponse</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>The HTTP verb identifier for the parent <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>The status code identifier for the <a>MethodResponse</a> resource.</p>",
+          "location":"uri",
+          "locationName":"status_code"
+        }
+      },
+      "documentation":"<p>A request to delete an existing <a>MethodResponse</a> resource.</p>"
+    },
+    "DeleteModelRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "modelName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> under which the model will be deleted.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "modelName":{
+          "shape":"String",
+          "documentation":"<p>The name of the model to delete.</p>",
+          "location":"uri",
+          "locationName":"model_name"
+        }
+      },
+      "documentation":"<p>Request to delete an existing model in an existing <a>RestApi</a> resource.</p>"
+    },
+    "DeleteResourceRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Resource</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>Resource</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        }
+      },
+      "documentation":"<p>Request to delete a <a>Resource</a>.</p>"
+    },
+    "DeleteRestApiRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the <a>RestApi</a> you want to delete.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        }
+      },
+      "documentation":"<p>Request to delete the specified API from your collection.</p>"
+    },
+    "DeleteStageRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "stageName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Stage</a> resource to delete.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>Stage</a> resource to delete.</p>",
+          "location":"uri",
+          "locationName":"stage_name"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to delete a <a>Stage</a> resource.</p>"
+    },
+    "Deployment":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The identifier for the deployment resource.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description for the deployment resource.</p>"
+        },
+        "createdDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date and time that the deployment resource was created.</p>"
+        },
+        "apiSummary":{
+          "shape":"PathToMapOfMethodSnapshot",
+          "documentation":"<p>Gets a summary of the <a>RestApi</a> at the date and time that the deployment resource was created.</p>"
+        }
+      },
+      "documentation":"<p>An immutable representation of a <a>RestApi</a> resource that can be called by users using <a>Stages</a>. A deployment must be associated with a <a>Stage</a> for it to be callable over the Internet.</p>"
+    },
+    "Deployments":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfDeployment",
+          "documentation":"<p>The current page of any <a>Deployment</a> resources in the collection of deployment resources.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Represents a collection resource that contains zero or more references to your existing deployments, and links that guide you on ways to interact with your collection. The collection offers a paginated view of the contained deployments.</p>"
+    },
+    "DomainName":{
+      "type":"structure",
+      "members":{
+        "domainName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>DomainName</a> resource.</p>"
+        },
+        "certificateName":{
+          "shape":"String",
+          "documentation":"<p>The name of the certificate.</p>"
+        },
+        "certificateUploadDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date when the certificate was uploaded, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+        },
+        "distributionDomainName":{
+          "shape":"String",
+          "documentation":"<p>The domain name of the Amazon CloudFront distribution. For more information, see the <a href=\"http://aws.amazon.com/documentation/cloudfront/\" target=\"_blank\">Amazon CloudFront documentation</a>.</p>"
+        }
+      },
+      "documentation":"<p>Represents a domain name that is contained in a simpler, more intuitive URL that can be called.</p>"
+    },
+    "DomainNames":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfDomainName",
+          "documentation":"<p>The current page of any <a>DomainName</a> resources in the collection of <a>DomainName</a> resources.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Represents a collection of <a>DomainName</a> resources.</p>"
+    },
+    "Double":{"type":"double"},
+    "ExportResponse":{
+      "type":"structure",
+      "members":{
+        "contentType":{
+          "shape":"String",
+          "documentation":"<p>The content-type header value in the HTTP response. This will correspond to a valid 'accept' type in the request.</p>",
+          "location":"header",
+          "locationName":"Content-Type"
+        },
+        "contentDisposition":{
+          "shape":"String",
+          "documentation":"<p>The content-disposition header value in the HTTP reseponse.</p>",
+          "location":"header",
+          "locationName":"Content-Disposition"
+        },
+        "body":{
+          "shape":"Blob",
+          "documentation":"<p>The binary blob response to <a>GetExport</a>, which contains the export.</p>"
+        }
+      },
+      "documentation":"<p>The binary blob response to <a>GetExport</a>, which contains the generated SDK.</p>",
+      "payload":"body"
+    },
+    "FlushStageAuthorizersCacheRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "stageName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The API identifier of the stage to flush.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name of the stage to flush.</p>",
+          "location":"uri",
+          "locationName":"stage_name"
+        }
+      },
+      "documentation":"<p>Request to flush authorizer cache entries on a specified stage.</p>"
+    },
+    "FlushStageCacheRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "stageName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The API identifier of the stage to flush its cache.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name of the stage to flush its cache.</p>",
+          "location":"uri",
+          "locationName":"stage_name"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to flush a stage's cache.</p>"
+    },
+    "GenerateClientCertificateRequest":{
+      "type":"structure",
+      "members":{
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the <a>ClientCertificate</a>.</p>"
+        }
+      },
+      "documentation":"<p>A request to generate a <a>ClientCertificate</a> resource.</p>"
+    },
+    "GetAccountRequest":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Requests Amazon API Gateway to get information about the current <a>Account</a> resource.</p>"
+    },
+    "GetApiKeyRequest":{
+      "type":"structure",
+      "required":["apiKey"],
+      "members":{
+        "apiKey":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>ApiKey</a> resource.</p>",
+          "location":"uri",
+          "locationName":"api_Key"
+        }
+      },
+      "documentation":"<p>A request to get information about the current <a>ApiKey</a> resource.</p>"
+    },
+    "GetApiKeysRequest":{
+      "type":"structure",
+      "members":{
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the current <a>ApiKeys</a> resource to get information about.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of <a>ApiKeys</a> to get information about.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>A request to get information about the current <a>ApiKeys</a> resource.</p>"
+    },
+    "GetAuthorizerRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "authorizerId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Authorizer</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "authorizerId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>Authorizer</a> resource.</p>",
+          "location":"uri",
+          "locationName":"authorizer_id"
+        }
+      },
+      "documentation":"<p>Request to describe an existing <a>Authorizer</a> resource.</p>"
+    },
+    "GetAuthorizersRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Authorizers</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "position":{
+          "shape":"String",
+          "documentation":"<p>If not all <a>Authorizer</a> resources in the response were present, the position will specificy where to start the next page of results.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>Limit the number of <a>Authorizer</a> resources in the response.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>Request to describe an existing <a>Authorizers</a> resource.</p>"
+    },
+    "GetBasePathMappingRequest":{
+      "type":"structure",
+      "required":[
+        "domainName",
+        "basePath"
+      ],
+      "members":{
+        "domainName":{
+          "shape":"String",
+          "documentation":"<p>The domain name of the <a>BasePathMapping</a> resource to be described.</p>",
+          "location":"uri",
+          "locationName":"domain_name"
+        },
+        "basePath":{
+          "shape":"String",
+          "documentation":"<p>The base path name that callers of the API must provide as part of the URL after the domain name. This value must be unique for all of the mappings across a single API. Leave this blank if you do not want callers to specify any base path name after the domain name.</p>",
+          "location":"uri",
+          "locationName":"base_path"
+        }
+      },
+      "documentation":"<p>Request to describe a <a>BasePathMapping</a> resource.</p>"
+    },
+    "GetBasePathMappingsRequest":{
+      "type":"structure",
+      "required":["domainName"],
+      "members":{
+        "domainName":{
+          "shape":"String",
+          "documentation":"<p>The domain name of a <a>BasePathMapping</a> resource.</p>",
+          "location":"uri",
+          "locationName":"domain_name"
+        },
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the current <a>BasePathMapping</a> resource in the collection to get information about.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of <a>BasePathMapping</a> resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>A request to get information about a collection of <a>BasePathMapping</a> resources.</p>"
+    },
+    "GetClientCertificateRequest":{
+      "type":"structure",
+      "required":["clientCertificateId"],
+      "members":{
+        "clientCertificateId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>ClientCertificate</a> resource to be described.</p>",
+          "location":"uri",
+          "locationName":"clientcertificate_id"
+        }
+      },
+      "documentation":"<p>A request to get information about the current <a>ClientCertificate</a> resource.</p>"
+    },
+    "GetClientCertificatesRequest":{
+      "type":"structure",
+      "members":{
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the current <a>ClientCertificate</a> resource in the collection to get information about.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of <a>ClientCertificate</a> resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>A request to get information about a collection of <a>ClientCertificate</a> resources.</p>"
+    },
+    "GetDeploymentRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "deploymentId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Deployment</a> resource to get information about.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "deploymentId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>Deployment</a> resource to get information about.</p>",
+          "location":"uri",
+          "locationName":"deployment_id"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to get information about a <a>Deployment</a> resource.</p>"
+    },
+    "GetDeploymentsRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the collection of <a>Deployment</a> resources to get information about.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the current <a>Deployment</a> resource in the collection to get information about.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of <a>Deployment</a> resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to get information about a <a>Deployments</a> collection.</p>"
+    },
+    "GetDomainNameRequest":{
+      "type":"structure",
+      "required":["domainName"],
+      "members":{
+        "domainName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>DomainName</a> resource.</p>",
+          "location":"uri",
+          "locationName":"domain_name"
+        }
+      },
+      "documentation":"<p>Request to get the name of a <a>DomainName</a> resource.</p>"
+    },
+    "GetDomainNamesRequest":{
+      "type":"structure",
+      "members":{
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the current domain names to get information about.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of <a>DomainName</a> resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>Request to describe a collection of <a>DomainName</a> resources.</p>"
+    },
+    "GetExportRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "stageName",
+        "exportType"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> to be exported.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>Stage</a> that will be exported.</p>",
+          "location":"uri",
+          "locationName":"stage_name"
+        },
+        "exportType":{
+          "shape":"String",
+          "documentation":"<p>The type of export. Currently only 'swagger' is supported.</p>",
+          "location":"uri",
+          "locationName":"export_type"
+        },
+        "parameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A key-value map of query string parameters that specify properties of the export, depending on the requested exportType. For exportType 'swagger', any combination of the following parameters are supported: 'integrations' will export x-amazon-apigateway-integration extensions 'authorizers' will export x-amazon-apigateway-authorizer extensions 'postman' will export with Postman extensions, allowing for import to the Postman tool</p>",
+          "location":"querystring"
+        },
+        "accepts":{
+          "shape":"String",
+          "documentation":"<p>The content-type of the export, for example 'application/json'. Currently 'application/json' and 'application/yaml' are supported for exportType 'swagger'. Should be specifed in the 'Accept' header for direct API requests.</p>",
+          "location":"header",
+          "locationName":"Accept"
+        }
+      },
+      "documentation":"<p>Request a new export of a <a>RestApi</a> for a particular <a>Stage</a>.</p>"
+    },
+    "GetIntegrationRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a get integration request's API identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a get integration request's resource identifier</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies a get integration request's HTTP method.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        }
+      },
+      "documentation":"<p>Represents a get integration request.</p>"
+    },
+    "GetIntegrationResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod",
+        "statusCode"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a get integration response request's API identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a get integration response request's resource identifier.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies a get integration response request's HTTP method.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>Specifies a get integration response request's status code.</p>",
+          "location":"uri",
+          "locationName":"status_code"
+        }
+      },
+      "documentation":"<p>Represents a get integration response request.</p>"
+    },
+    "GetMethodRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The <a>Resource</a> identifier for the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies the put method request's HTTP method type.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        }
+      },
+      "documentation":"<p>Request to describe an existing <a>Method</a> resource.</p>"
+    },
+    "GetMethodResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod",
+        "statusCode"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>MethodResponse</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The <a>Resource</a> identifier for the <a>MethodResponse</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>The HTTP verb identifier for the parent <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>The status code identifier for the <a>MethodResponse</a> resource.</p>",
+          "location":"uri",
+          "locationName":"status_code"
+        }
+      },
+      "documentation":"<p>Request to describe a <a>MethodResponse</a> resource.</p>"
+    },
+    "GetModelRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "modelName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier under which the <a>Model</a> exists.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "modelName":{
+          "shape":"String",
+          "documentation":"<p>The name of the model as an identifier.</p>",
+          "location":"uri",
+          "locationName":"model_name"
+        },
+        "flatten":{
+          "shape":"Boolean",
+          "documentation":"<p>Resolves all external model references and returns a flattened model schema.</p>",
+          "location":"querystring",
+          "locationName":"flatten"
+        }
+      },
+      "documentation":"<p>Request to list information about a model in an existing <a>RestApi</a> resource.</p>"
+    },
+    "GetModelTemplateRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "modelName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the <a>RestApi</a> under which the model exists.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "modelName":{
+          "shape":"String",
+          "documentation":"<p>The name of the model for which to generate a template.</p>",
+          "location":"uri",
+          "locationName":"model_name"
+        }
+      },
+      "documentation":"<p>Request to generate a sample mapping template used to transform the payload.</p>"
+    },
+    "GetModelsRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the next set of results in the <a>Models</a> resource to get information about.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of models in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>Request to list existing <a>Models</a> defined for a <a>RestApi</a> resource.</p>"
+    },
+    "GetResourceRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The identifier for the <a>Resource</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        }
+      },
+      "documentation":"<p>Request to list information about a resource.</p>"
+    },
+    "GetResourcesRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the Resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the next set of results in the current <a>Resources</a> resource to get information about.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of <a>Resource</a> resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>Request to list information about a collection of resources.</p>"
+    },
+    "GetRestApiRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        }
+      },
+      "documentation":"<p>The GET request to list an existing <a>RestApi</a> defined for your collection. </p>"
+    },
+    "GetRestApisRequest":{
+      "type":"structure",
+      "members":{
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the current <a>RestApis</a> resource in the collection to get information about.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of <a>RestApi</a> resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>The GET request to list existing <a>RestApis</a> defined for your collection.</p>"
+    },
+    "GetSdkRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "stageName",
+        "sdkType"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> that the SDK will use.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>Stage</a> that the SDK will use.</p>",
+          "location":"uri",
+          "locationName":"stage_name"
+        },
+        "sdkType":{
+          "shape":"String",
+          "documentation":"<p>The language for the generated SDK. Currently javascript, android, and objectivec (for iOS) are supported.</p>",
+          "location":"uri",
+          "locationName":"sdk_type"
+        },
+        "parameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A key-value map of query string parameters that specify properties of the SDK, depending on the requested sdkType. For sdkType 'objectivec', a parameter named \"classPrefix\" is required. For sdkType 'android', parameters named \"groupId\", \"artifactId\", \"artifactVersion\", and \"invokerPackage\" are required.</p>",
+          "location":"querystring"
+        }
+      },
+      "documentation":"<p>Request a new generated client SDK for a <a>RestApi</a> and <a>Stage</a>.</p>"
+    },
+    "GetStageRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "stageName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Stage</a> resource to get information about.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>Stage</a> resource to get information about.</p>",
+          "location":"uri",
+          "locationName":"stage_name"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to get information about a <a>Stage</a> resource.</p>"
+    },
+    "GetStagesRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The stages' API identifiers.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "deploymentId":{
+          "shape":"String",
+          "documentation":"<p>The stages' deployment identifiers.</p>",
+          "location":"querystring",
+          "locationName":"deploymentId"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to get information about one or more <a>Stage</a> resources.</p>"
+    },
+    "ImportRestApiRequest":{
+      "type":"structure",
+      "required":["body"],
+      "members":{
+        "failOnWarnings":{
+          "shape":"Boolean",
+          "documentation":"<p>A query parameter to indicate whether to rollback the API creation (<code>true</code>) or not (<code>false</code>) when a warning is encountered. The default value is <code>false</code>.</p>",
+          "location":"querystring",
+          "locationName":"failonwarnings"
+        },
+        "parameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Custom header parameters as part of the request.</p>",
+          "location":"querystring"
+        },
+        "body":{
+          "shape":"Blob",
+          "documentation":"<p>The POST request body containing external API definitions. Currently, only Swagger definition JSON files are supported.</p>"
+        }
+      },
+      "documentation":"<p>A POST request to import an API to Amazon API Gateway using an input of an API definition file.</p>",
+      "payload":"body"
+    },
+    "Integer":{"type":"integer"},
+    "Integration":{
+      "type":"structure",
+      "members":{
+        "type":{
+          "shape":"IntegrationType",
+          "documentation":"<p>Specifies the integration's type. The valid value is <code>HTTP</code>, <code>AWS</code>, or <code>MOCK</code>.</p>"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies the integration's HTTP method type.</p>"
+        },
+        "uri":{
+          "shape":"String",
+          "documentation":"<p>Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the <a href=\"https://www.ietf.org/rfc/rfc3986.txt\" target=\"_blank\">RFC-3986 specification</a>. For AWS integrations, the URI should be of the form <code>arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}</code>. <code>Region</code>, <code>subdomain</code> and <code>service</code> are used to determine the right endpoint. For AWS services that use the <code>Action=</code> query string parameter, <code>service_api</code> should be a valid action for the desired service. For RESTful AWS service APIs, <code>path</code> is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>.</p>"
+        },
+        "credentials":{
+          "shape":"String",
+          "documentation":"<p>Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for Amazon API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string <code>arn:aws:iam::\\*:user/\\*</code>. To use resource-based permissions on supported AWS services, specify null.</p>"
+        },
+        "requestParameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Represents requests parameters that are sent with the backend request. Request parameters are represented as a key/value map, with a destination as the key and a source as the value. A source must match an existing method request parameter, or a static value. Static values must be enclosed with single quotes, and be pre-encoded based on their destination in the request. The destination must match the pattern <code>integration.request.{location}.{name}</code>, where <code>location</code> is either querystring, path, or header. <code>name</code> must be a valid, unique parameter name.</p>"
+        },
+        "requestTemplates":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Specifies the integration's request templates.</p>"
+        },
+        "cacheNamespace":{
+          "shape":"String",
+          "documentation":"<p>Specifies the integration's cache namespace.</p>"
+        },
+        "cacheKeyParameters":{
+          "shape":"ListOfString",
+          "documentation":"<p>Specifies the integration's cache key parameters.</p>"
+        },
+        "integrationResponses":{
+          "shape":"MapOfIntegrationResponse",
+          "documentation":"<p>Specifies the integration's responses.</p>"
+        }
+      },
+      "documentation":"<p>Represents a HTTP, AWS, or Mock integration.</p>"
+    },
+    "IntegrationResponse":{
+      "type":"structure",
+      "members":{
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>Specifies the status code that is used to map the integration response to an existing <a>MethodResponse</a>.</p>"
+        },
+        "selectionPattern":{
+          "shape":"String",
+          "documentation":"<p>Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the backend. If the backend is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS backends, the HTTP status code is matched.</p>"
+        },
+        "responseParameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Represents response parameters that can be read from the backend response. Response parameters are represented as a key/value map, with a destination as the key and a source as the value. A destination must match an existing response parameter in the <a>MethodResponse</a>. The source can be a header from the backend response, or a static value. Static values are specified using enclosing single quotes, and backend response headers can be read using the pattern <code>integration.response.header.{name}</code>.</p>"
+        },
+        "responseTemplates":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Specifies the templates used to transform the integration response body. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.</p>"
+        }
+      },
+      "documentation":"<p>Represents an integration response. The status code must map to an existing <a>MethodResponse</a>, and parameters and templates can be used to transform the backend response.</p>"
+    },
+    "IntegrationType":{
+      "type":"string",
+      "documentation":"<p>The integration type. The valid value is <code>HTTP</code>, <code>AWS</code>, or <code>MOCK</code>.</p>",
+      "enum":[
+        "HTTP",
+        "AWS",
+        "MOCK"
+      ]
+    },
+    "LimitExceededException":{
+      "type":"structure",
+      "members":{
+        "retryAfterSeconds":{
+          "shape":"String",
+          "location":"header",
+          "locationName":"Retry-After"
+        },
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":429},
+      "exception":true
+    },
+    "ListOfApiKey":{
+      "type":"list",
+      "member":{"shape":"ApiKey"}
+    },
+    "ListOfAuthorizer":{
+      "type":"list",
+      "member":{"shape":"Authorizer"}
+    },
+    "ListOfBasePathMapping":{
+      "type":"list",
+      "member":{"shape":"BasePathMapping"}
+    },
+    "ListOfClientCertificate":{
+      "type":"list",
+      "member":{"shape":"ClientCertificate"}
+    },
+    "ListOfDeployment":{
+      "type":"list",
+      "member":{"shape":"Deployment"}
+    },
+    "ListOfDomainName":{
+      "type":"list",
+      "member":{"shape":"DomainName"}
+    },
+    "ListOfModel":{
+      "type":"list",
+      "member":{"shape":"Model"}
+    },
+    "ListOfPatchOperation":{
+      "type":"list",
+      "member":{"shape":"PatchOperation"},
+      "documentation":"A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list."
+    },
+    "ListOfResource":{
+      "type":"list",
+      "member":{"shape":"Resource"}
+    },
+    "ListOfRestApi":{
+      "type":"list",
+      "member":{"shape":"RestApi"}
+    },
+    "ListOfStage":{
+      "type":"list",
+      "member":{"shape":"Stage"}
+    },
+    "ListOfStageKeys":{
+      "type":"list",
+      "member":{"shape":"StageKey"}
+    },
+    "ListOfString":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "Long":{"type":"long"},
+    "MapOfHeaderValues":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
+    },
+    "MapOfIntegrationResponse":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"IntegrationResponse"}
+    },
+    "MapOfMethod":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"Method"}
+    },
+    "MapOfMethodResponse":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"MethodResponse"}
+    },
+    "MapOfMethodSettings":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"MethodSetting"}
+    },
+    "MapOfMethodSnapshot":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"MethodSnapshot"}
+    },
+    "MapOfStringToBoolean":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"NullableBoolean"}
+    },
+    "MapOfStringToList":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"ListOfString"}
+    },
+    "MapOfStringToString":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
+    },
+    "Method":{
+      "type":"structure",
+      "members":{
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>The HTTP method.</p>"
+        },
+        "authorizationType":{
+          "shape":"String",
+          "documentation":"<p>The method's authorization type.</p>"
+        },
+        "authorizerId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the identifier of an <a>Authorizer</a> to use on this Method. The authorizationType must be CUSTOM.</p>"
+        },
+        "apiKeyRequired":{
+          "shape":"NullableBoolean",
+          "documentation":"<p>Specifies whether the method requires a valid <a>ApiKey</a>.</p>"
+        },
+        "requestParameters":{
+          "shape":"MapOfStringToBoolean",
+          "documentation":"<p>Represents request parameters that can be accepted by Amazon API Gateway. Request parameters are represented as a key/value map, with a source as the key and a Boolean flag as the value. The Boolean flag is used to specify whether the parameter is required. A source must match the pattern <code>method.request.{location}.{name}</code>, where <code>location</code> is either querystring, path, or header. <code>name</code> is a valid, unique parameter name. Sources specified here are available to the integration for mapping to integration request parameters or templates.</p>"
+        },
+        "requestModels":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Specifies the <a>Model</a> resources used for the request's content type. Request models are represented as a key/value map, with a content type as the key and a <a>Model</a> name as the value.</p>"
+        },
+        "methodResponses":{
+          "shape":"MapOfMethodResponse",
+          "documentation":"<p>Represents available responses that can be sent to the caller. Method responses are represented as a key/value map, with an HTTP status code as the key and a <a>MethodResponse</a> as the value. The status codes are available for the <a>Integration</a> responses to map to.</p>"
+        },
+        "methodIntegration":{
+          "shape":"Integration",
+          "documentation":"<p>The method's integration.</p>"
+        }
+      },
+      "documentation":"<p>Represents a method.</p>"
+    },
+    "MethodResponse":{
+      "type":"structure",
+      "members":{
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>The method response's status code.</p>"
+        },
+        "responseParameters":{
+          "shape":"MapOfStringToBoolean",
+          "documentation":"<p>Represents response parameters that can be sent back to the caller by Amazon API Gateway. Response parameters are represented as a key/value map, with a destination as the key and a boolean flag as the value, which is used to specify whether the parameter is required. A destination must match the pattern <code>method.response.header.{name}</code>, where <code>name</code> is a valid, unique header name. Destinations specified here are available to the integration for mapping from integration response parameters.</p>"
+        },
+        "responseModels":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Specifies the <a>Model</a> resources used for the response's content-type. Response models are represented as a key/value map, with a content-type as the key and a <a>Model</a> name as the value.</p>"
+        }
+      },
+      "documentation":"<p>Represents a method response. Amazon API Gateway sends back the status code to the caller as the HTTP status code. Parameters and models can be used to transform the response from the method's integration.</p>"
+    },
+    "MethodSetting":{
+      "type":"structure",
+      "members":{
+        "metricsEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether Amazon CloudWatch metrics are enabled for this method. The PATCH path for this setting is <code>/{method_setting_key}/metrics/enabled</code>, and the value is a Boolean.</p>"
+        },
+        "loggingLevel":{
+          "shape":"String",
+          "documentation":"<p>Specifies the logging level for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/loglevel</code>, and the available levels are <code>OFF</code>, <code>ERROR</code>, and <code>INFO</code>.</p>"
+        },
+        "dataTraceEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies the whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
+        },
+        "throttlingBurstLimit":{
+          "shape":"Integer",
+          "documentation":"<p>Specifies the throttling burst limit. The PATCH path for this setting is <code>/{method_setting_key}/throttling/burstLimit</code>, and the value is an integer.</p>"
+        },
+        "throttlingRateLimit":{
+          "shape":"Double",
+          "documentation":"<p>Specifies the throttling rate limit. The PATCH path for this setting is <code>/{method_setting_key}/throttling/rateLimit</code>, and the value is a double.</p>"
+        },
+        "cachingEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached. The PATCH path for this setting is <code>/{method_setting_key}/caching/enabled</code>, and the value is a Boolean.</p>"
+        },
+        "cacheTtlInSeconds":{
+          "shape":"Integer",
+          "documentation":"<p>Specifies the time to live (TTL) in seconds, for cached responses. The higher a the TTL, the longer the response will be cached. The PATCH path for this setting is <code>/{method_setting_key}/caching/ttlInSeconds</code>, and the value is an integer.</p>"
+        },
+        "cacheDataEncrypted":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether the cached responses are encrypted. The PATCH path for this setting is <code>/{method_setting_key}/caching/dataEncrypted</code>, and the value is a Boolean.</p>"
+        },
+        "requireAuthorizationForCacheControl":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether authorization is required for a cache invalidation request. The PATCH path for this setting is <code>/{method_setting_key}/caching/requireAuthorizationForCacheControl</code>, and the value is a Boolean.</p>"
+        },
+        "unauthorizedCacheControlHeaderStrategy":{
+          "shape":"UnauthorizedCacheControlHeaderStrategy",
+          "documentation":"<p>Specifies the strategy on how to handle the unauthorized requests for cache invalidation. The PATCH path for this setting is <code>/{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy</code>, and the available values are <code>FAIL_WITH_403</code>, <code>SUCCEED_WITH_RESPONSE_HEADER</code>, <code>SUCCEED_WITHOUT_RESPONSE_HEADER</code>.</p>"
+        }
+      },
+      "documentation":"<p>Specifies the method setting properties.</p>"
+    },
+    "MethodSnapshot":{
+      "type":"structure",
+      "members":{
+        "authorizationType":{
+          "shape":"String",
+          "documentation":"<p>Specifies the type of authorization used for the method.</p>"
+        },
+        "apiKeyRequired":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether the method requires a valid <a>ApiKey</a>.</p>"
+        }
+      },
+      "documentation":"<p>Represents a summary of a <a>Method</a> resource, given a particular date and time.</p>"
+    },
+    "Model":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The identifier for the model resource.</p>"
+        },
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the model.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the model.</p>"
+        },
+        "schema":{
+          "shape":"String",
+          "documentation":"<p>The schema for the model. For <code>application/json</code> models, this should be <a href=\"http://json-schema.org/documentation.html\" target=\"_blank\">JSON-schema draft v4</a> model.</p>"
+        },
+        "contentType":{
+          "shape":"String",
+          "documentation":"<p>The content-type for the model.</p>"
+        }
+      },
+      "documentation":"<p>Represents the structure of a request or response payload for a method.</p>"
+    },
+    "Models":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfModel",
+          "documentation":"<p>Gets the current <a>Model</a> resource in the collection.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Represents a collection of <a>Model</a> resources.</p>"
+    },
+    "NotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":404},
+      "exception":true
+    },
+    "NullableBoolean":{"type":"boolean"},
+    "NullableInteger":{"type":"integer"},
+    "PatchOperation":{
+      "type":"structure",
+      "members":{
+        "op":{
+          "shape":"op",
+          "documentation":"<p>A patch operation whose value indicates the operation to perform. Its value MUST be one of \"add\", \"remove\", \"replace\", \"move\", \"copy\", or \"test\"; other values are errors. </p>"
+        },
+        "path":{
+          "shape":"String",
+          "documentation":"<p>Operation objects MUST have exactly one \"path\" member. That member's value is a string containing a `JSON-Pointer` value that references a location within the target document (the \"target location\") where the operation is performed.</p>"
+        },
+        "value":{
+          "shape":"String",
+          "documentation":"<p>The actual value content. </p>"
+        },
+        "from":{
+          "shape":"String",
+          "documentation":"<p>The \"move\" and \"copy\" operation object MUST contain a \"from\" member, which is a string containing a <code>JSON Pointer</code> value that references the location in the target document to move the value from.</p>"
+        }
+      },
+      "documentation":"A single patch operation to apply to the specified resource. Please refer to http://tools.ietf.org/html/rfc6902#section-4 for an explanation of how each operation is used."
+    },
+    "PathToMapOfMethodSnapshot":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"MapOfMethodSnapshot"}
+    },
+    "PutIntegrationRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod",
+        "type"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a put integration request's API identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a put integration request's resource ID.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies a put integration request's HTTP method.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "type":{
+          "shape":"IntegrationType",
+          "documentation":"<p>Specifies a put integration input's type.</p>"
+        },
+        "integrationHttpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies a put integration HTTP method. When the integration type is HTTP or AWS, this field is required.</p>",
+          "locationName":"httpMethod"
+        },
+        "uri":{
+          "shape":"String",
+          "documentation":"<p>Specifies a put integration input's Uniform Resource Identifier (URI). When the integration type is HTTP or AWS, this field is required. For integration with Lambda as an AWS service proxy, this value is of the 'arn:aws:apigateway:&lt;region&gt;:lambda:path/2015-03-31/functions/&lt;functionArn&gt;/invocations' format.</p>"
+        },
+        "credentials":{
+          "shape":"String",
+          "documentation":"<p>Specifies whether credentials are required for a put integration.</p>"
+        },
+        "requestParameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Represents request parameters that are sent with the backend request. Request parameters are represented as a key/value map, with a destination as the key and a source as the value. A source must match an existing method request parameter, or a static value. Static values must be enclosed with single quotes, and be pre-encoded based on their destination in the request. The destination must match the pattern <code>integration.request.{location}.{name}</code>, where <code>location</code> is either querystring, path, or header. <code>name</code> must be a valid, unique parameter name.</p>"
+        },
+        "requestTemplates":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Specifies the templates used to transform the method request body. Request templates are represented as a key/value map, with a content-type as the key and a template as the value.</p>"
+        },
+        "cacheNamespace":{
+          "shape":"String",
+          "documentation":"<p>Specifies a put integration input's cache namespace.</p>"
+        },
+        "cacheKeyParameters":{
+          "shape":"ListOfString",
+          "documentation":"<p>Specifies a put integration input's cache key parameters.</p>"
+        }
+      },
+      "documentation":"<p>Represents a put integration request.</p>"
+    },
+    "PutIntegrationResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod",
+        "statusCode"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a put integration response request's API identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a put integration response request's resource identifier.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies a put integration response request's HTTP method.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>Specifies the status code that is used to map the integration response to an existing <a>MethodResponse</a>.</p>",
+          "location":"uri",
+          "locationName":"status_code"
+        },
+        "selectionPattern":{
+          "shape":"String",
+          "documentation":"<p>Specifies the selection pattern of a put integration response.</p>"
+        },
+        "responseParameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Represents response parameters that can be read from the backend response. Response parameters are represented as a key/value map, with a destination as the key and a source as the value. A destination must match an existing response parameter in the <a>Method</a>. The source can be a header from the backend response, or a static value. Static values are specified using enclosing single quotes, and backend response headers can be read using the pattern <code>integration.response.header.{name}</code>.</p>"
+        },
+        "responseTemplates":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Specifies a put integration response's templates.</p>"
+        }
+      },
+      "documentation":"<p>Represents a put integration response request.</p>"
+    },
+    "PutMethodRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod",
+        "authorizationType"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the new <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The <a>Resource</a> identifier for the new <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies the put method request's HTTP method type.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "authorizationType":{
+          "shape":"String",
+          "documentation":"<p>Specifies the type of authorization used for the method.</p>"
+        },
+        "authorizerId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the identifier of an <a>Authorizer</a> to use on this Method, if the type is CUSTOM.</p>"
+        },
+        "apiKeyRequired":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether the method required a valid <a>ApiKey</a>.</p>"
+        },
+        "requestParameters":{
+          "shape":"MapOfStringToBoolean",
+          "documentation":"<p>Represents requests parameters that are sent with the backend request. Request parameters are represented as a key/value map, with a destination as the key and a source as the value. A source must match an existing method request parameter, or a static value. Static values must be enclosed with single quotes, and be pre-encoded based on their destination in the request. The destination must match the pattern <code>integration.request.{location}.{name}</code>, where <code>location</code> is either querystring, path, or header. <code>name</code> must be a valid, unique parameter name.</p>"
+        },
+        "requestModels":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Specifies the <a>Model</a> resources used for the request's content type. Request models are represented as a key/value map, with a content type as the key and a <a>Model</a> name as the value.</p>"
+        }
+      },
+      "documentation":"<p>Request to add a method to an existing <a>Resource</a> resource.</p>"
+    },
+    "PutMethodResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod",
+        "statusCode"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The <a>Resource</a> identifier for the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>The HTTP verb that identifies the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>The method response's status code.</p>",
+          "location":"uri",
+          "locationName":"status_code"
+        },
+        "responseParameters":{
+          "shape":"MapOfStringToBoolean",
+          "documentation":"<p>Represents response parameters that can be sent back to the caller by Amazon API Gateway. Response parameters are represented as a key/value map, with a destination as the key and a Boolean flag as the value. The Boolean flag is used to specify whether the parameter is required. A destination must match the pattern <code>method.response.header.{name}</code>, where <code>name</code> is a valid, unique header name. Destinations specified here are available to the integration for mapping from integration response parameters.</p>"
+        },
+        "responseModels":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Specifies the <a>Model</a> resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a <a>Model</a> name as the value.</p>"
+        }
+      },
+      "documentation":"<p>Request to add a <a>MethodResponse</a> to an existing <a>Method</a> resource.</p>"
+    },
+    "PutMode":{
+      "type":"string",
+      "enum":[
+        "merge",
+        "overwrite"
+      ]
+    },
+    "PutRestApiRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "body"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> to be updated. </p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "mode":{
+          "shape":"PutMode",
+          "documentation":"<p>The <code>mode</code> query parameter to specify the update mode. Valid values are \"merge\" and \"overwrite\". By default, the update mode is \"merge\".</p>",
+          "location":"querystring",
+          "locationName":"mode"
+        },
+        "failOnWarnings":{
+          "shape":"Boolean",
+          "documentation":"<p>A query parameter to indicate whether to rollback the API update (<code>true</code>) or not (<code>false</code>) when a warning is encountered. The default value is <code>false</code>.</p>",
+          "location":"querystring",
+          "locationName":"failonwarnings"
+        },
+        "parameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Custom headers supplied as part of the request. </p>",
+          "location":"querystring"
+        },
+        "body":{
+          "shape":"Blob",
+          "documentation":"<p>The PUT request body containing external API definitions. Currently, only Swagger definition JSON files are supported.</p>"
+        }
+      },
+      "documentation":"<p>A PUT request to update an existing API, with external API definitions specified as the request body.</p>",
+      "payload":"body"
+    },
+    "Resource":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The resource's identifier.</p>"
+        },
+        "parentId":{
+          "shape":"String",
+          "documentation":"<p>The parent resource's identifier.</p>"
+        },
+        "pathPart":{
+          "shape":"String",
+          "documentation":"<p>The last path segment for this resource.</p>"
+        },
+        "path":{
+          "shape":"String",
+          "documentation":"<p>The full path for this resource.</p>"
+        },
+        "resourceMethods":{
+          "shape":"MapOfMethod",
+          "documentation":"<p>Map of methods for this resource, which is included only if the request uses the <b>embed</b> query option.</p>"
+        }
+      },
+      "documentation":"<p>Represents a resource.</p>"
+    },
+    "Resources":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfResource",
+          "documentation":"<p>Gets the current <a>Resource</a> resource in the collection.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Represents a collection of <a>Resource</a> resources.</p>"
+    },
+    "RestApi":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The API's identifier. This identifier is unique across all of your APIs in Amazon API Gateway.</p>"
+        },
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The API's name.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The API's description.</p>"
+        },
+        "createdDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date when the API was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+        },
+        "warnings":{"shape":"ListOfString"}
+      },
+      "documentation":"<p>Represents a REST API.</p>"
+    },
+    "RestApis":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfRestApi",
+          "documentation":"<p>An array of links to the current page of <a>RestApi</a> resources.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Contains references to your APIs and links that guide you in ways to interact with your collection. A collection offers a paginated view of your APIs.</p>"
+    },
+    "SdkResponse":{
+      "type":"structure",
+      "members":{
+        "contentType":{
+          "shape":"String",
+          "documentation":"<p>The content-type header value in the HTTP response.</p>",
+          "location":"header",
+          "locationName":"Content-Type"
+        },
+        "contentDisposition":{
+          "shape":"String",
+          "documentation":"<p>The content-disposition header value in the HTTP reseponse.</p>",
+          "location":"header",
+          "locationName":"Content-Disposition"
+        },
+        "body":{
+          "shape":"Blob",
+          "documentation":"<p>The binary blob response to <a>GetSdk</a>, which contains the generated SDK.</p>"
+        }
+      },
+      "documentation":"<p>The binary blob response to <a>GetSdk</a>, which contains the generated SDK.</p>",
+      "payload":"body"
+    },
+    "ServiceUnavailableException":{
+      "type":"structure",
+      "members":{
+        "retryAfterSeconds":{
+          "shape":"String",
+          "location":"header",
+          "locationName":"Retry-After"
+        },
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":503},
+      "exception":true,
+      "fault":true
+    },
+    "Stage":{
+      "type":"structure",
+      "members":{
+        "deploymentId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>Deployment</a> that the stage points to.</p>"
+        },
+        "clientCertificateId":{"shape":"String"},
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to Amazon API Gateway.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The stage's description.</p>"
+        },
+        "cacheClusterEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether a cache cluster is enabled for the stage.</p>"
+        },
+        "cacheClusterSize":{
+          "shape":"CacheClusterSize",
+          "documentation":"<p>The size of the cache cluster for the stage, if enabled.</p>"
+        },
+        "cacheClusterStatus":{
+          "shape":"CacheClusterStatus",
+          "documentation":"<p>The status of the cache cluster for the stage, if enabled.</p>"
+        },
+        "methodSettings":{
+          "shape":"MapOfMethodSettings",
+          "documentation":"<p>A map that defines the method settings for a <a>Stage</a> resource. Keys are defined as <code>{resource_path}/{http_method}</code> for an individual method override, or <code>\\*/\\*</code> for the settings applied to all methods in the stage.</p>"
+        },
+        "variables":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A map that defines the stage variables for a <a>Stage</a> resource. Variable names can have alphanumeric characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
+        },
+        "createdDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date and time that the stage was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+        },
+        "lastUpdatedDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date and time that information about the stage was last updated, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+        }
+      },
+      "documentation":"<p>Represents a unique identifier for a version of a deployed <a>RestApi</a> that is callable by users.</p>"
+    },
+    "StageKey":{
+      "type":"structure",
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>A list of <a>Stage</a> resources that are associated with the <a>ApiKey</a> resource.</p>"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The stage name in the <a>RestApi</a> that the stage key references.</p>"
+        }
+      },
+      "documentation":"<p>A reference to a unique stage identified in the format <code>{restApiId}/{stage}</code>.</p>"
+    },
+    "Stages":{
+      "type":"structure",
+      "members":{
+        "item":{
+          "shape":"ListOfStage",
+          "documentation":"<p>An individual <a>Stage</a> resource.</p>"
+        }
+      },
+      "documentation":"<p>A list of <a>Stage</a> resource that are associated with the <a>ApiKey</a> resource.</p>"
+    },
+    "StatusCode":{
+      "type":"string",
+      "documentation":"<p>The status code.</p>",
+      "pattern":"[1-5]\\d\\d"
+    },
+    "String":{"type":"string"},
+    "Template":{
+      "type":"structure",
+      "members":{
+        "value":{
+          "shape":"String",
+          "documentation":"<p>The Apache <a href=\"http://velocity.apache.org/engine/devel/vtl-reference-guide.html\" target=\"_blank\">Velocity Template Language (VTL)</a> template content used for the template resource.</p>"
+        }
+      },
+      "documentation":"<p>Represents a mapping template used to transform a payload.</p>"
+    },
+    "TestInvokeAuthorizerRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "authorizerId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a test invoke authorizer request's <a>RestApi</a> identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "authorizerId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a test invoke authorizer request's <a>Authorizer</a> ID.</p>",
+          "location":"uri",
+          "locationName":"authorizer_id"
+        },
+        "headers":{
+          "shape":"MapOfHeaderValues",
+          "documentation":"<p>[Required] A key-value map of headers to simulate an incoming invocation request. This is where the incoming authorization token, or identity source, should be specified.</p>"
+        },
+        "pathWithQueryString":{
+          "shape":"String",
+          "documentation":"<p>[Optional] The URI path, including query string, of the simulated invocation request. Use this to specify path parameters and query string parameters.</p>"
+        },
+        "body":{
+          "shape":"String",
+          "documentation":"<p>[Optional] The simulated request body of an incoming invocation request.</p>"
+        },
+        "stageVariables":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A key-value map of stage variables to simulate an invocation on a deployed <a>Stage</a>.</p>"
+        },
+        "additionalContext":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>[Optional] A key-value map of additional context variables.</p>"
+        }
+      },
+      "documentation":"<p>Make a request to simulate the execution of an <a>Authorizer</a>.</p>"
+    },
+    "TestInvokeAuthorizerResponse":{
+      "type":"structure",
+      "members":{
+        "clientStatus":{
+          "shape":"Integer",
+          "documentation":"<p>The HTTP status code that the client would have received. Value is 0 if the authorizer succeeded.</p>"
+        },
+        "log":{
+          "shape":"String",
+          "documentation":"<p>The Amazon API Gateway execution log for the test authorizer request.</p>"
+        },
+        "latency":{
+          "shape":"Long",
+          "documentation":"<p>The execution latency of the test authorizer request</p>"
+        },
+        "principalId":{
+          "shape":"String",
+          "documentation":"<p>The principal identity returned by the <a>Authorizer</a></p>"
+        },
+        "policy":{
+          "shape":"String",
+          "documentation":"<p>The policy JSON document returned by the <a>Authorizer</a></p>"
+        },
+        "authorization":{"shape":"MapOfStringToList"}
+      },
+      "documentation":"<p>Represents the response of the test invoke request in for a custom <a>Authorizer</a></p>"
+    },
+    "TestInvokeMethodRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a test invoke method request's API identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies a test invoke method request's resource ID.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies a test invoke method request's HTTP method.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "pathWithQueryString":{
+          "shape":"String",
+          "documentation":"<p>The URI path, including query string, of the simulated invocation request. Use this to specify path parameters and query string parameters.</p>"
+        },
+        "body":{
+          "shape":"String",
+          "documentation":"<p>The simulated request body of an incoming invocation request.</p>"
+        },
+        "headers":{
+          "shape":"MapOfHeaderValues",
+          "documentation":"<p>A key-value map of headers to simulate an incoming invocation request.</p>"
+        },
+        "clientCertificateId":{
+          "shape":"String",
+          "documentation":"<p>A <a>ClientCertificate</a> identifier to use in the test invocation. API Gateway will use use the certificate when making the HTTPS request to the defined backend endpoint.</p>"
+        },
+        "stageVariables":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A key-value map of stage variables to simulate an invocation on a deployed <a>Stage</a>.</p>"
+        }
+      },
+      "documentation":"<p>Make a request to simulate the execution of a <a>Method</a>.</p>"
+    },
+    "TestInvokeMethodResponse":{
+      "type":"structure",
+      "members":{
+        "status":{
+          "shape":"Integer",
+          "documentation":"<p>The HTTP status code.</p>"
+        },
+        "body":{
+          "shape":"String",
+          "documentation":"<p>The body of HTTP response.</p>"
+        },
+        "headers":{
+          "shape":"MapOfHeaderValues",
+          "documentation":"<p>The headers of HTTP response.</p>"
+        },
+        "log":{
+          "shape":"String",
+          "documentation":"<p>The Amazon API Gateway execution log for the test invoke request.</p>"
+        },
+        "latency":{
+          "shape":"Long",
+          "documentation":"<p>The execution latency of the test invoke request.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response of the test invoke request in HTTP method.</p>"
+    },
+    "ThrottleSettings":{
+      "type":"structure",
+      "members":{
+        "burstLimit":{
+          "shape":"Integer",
+          "documentation":"<p>Returns the burstLimit when <b>ThrottleSettings</b> is called.</p>"
+        },
+        "rateLimit":{
+          "shape":"Double",
+          "documentation":"<p>Returns the rateLimit when <b>ThrottleSettings</b> is called.</p>"
+        }
+      },
+      "documentation":"<p>Returns the throttle settings.</p>"
+    },
+    "Timestamp":{"type":"timestamp"},
+    "TooManyRequestsException":{
+      "type":"structure",
+      "members":{
+        "retryAfterSeconds":{
+          "shape":"String",
+          "location":"header",
+          "locationName":"Retry-After"
+        },
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":429},
+      "exception":true
+    },
+    "UnauthorizedCacheControlHeaderStrategy":{
+      "type":"string",
+      "enum":[
+        "FAIL_WITH_403",
+        "SUCCEED_WITH_RESPONSE_HEADER",
+        "SUCCEED_WITHOUT_RESPONSE_HEADER"
+      ]
+    },
+    "UnauthorizedException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":401},
+      "exception":true
+    },
+    "UpdateAccountRequest":{
+      "type":"structure",
+      "members":{
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to change information about the current <a>Account</a> resource.</p>"
+    },
+    "UpdateApiKeyRequest":{
+      "type":"structure",
+      "required":["apiKey"],
+      "members":{
+        "apiKey":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>ApiKey</a> resource to be updated.</p>",
+          "location":"uri",
+          "locationName":"api_Key"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>A request to change information about an <a>ApiKey</a> resource.</p>"
+    },
+    "UpdateAuthorizerRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "authorizerId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Authorizer</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "authorizerId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>Authorizer</a> resource.</p>",
+          "location":"uri",
+          "locationName":"authorizer_id"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>Request to update an existing <a>Authorizer</a> resource.</p>"
+    },
+    "UpdateBasePathMappingRequest":{
+      "type":"structure",
+      "required":[
+        "domainName",
+        "basePath"
+      ],
+      "members":{
+        "domainName":{
+          "shape":"String",
+          "documentation":"<p>The domain name of the <a>BasePathMapping</a> resource to change.</p>",
+          "location":"uri",
+          "locationName":"domain_name"
+        },
+        "basePath":{
+          "shape":"String",
+          "documentation":"<p>The base path of the <a>BasePathMapping</a> resource to change.</p>",
+          "location":"uri",
+          "locationName":"base_path"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>A request to change information about the <a>BasePathMapping</a> resource.</p>"
+    },
+    "UpdateClientCertificateRequest":{
+      "type":"structure",
+      "required":["clientCertificateId"],
+      "members":{
+        "clientCertificateId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>ClientCertificate</a> resource to be updated.</p>",
+          "location":"uri",
+          "locationName":"clientcertificate_id"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>A request to change information about an <a>ClientCertificate</a> resource.</p>"
+    },
+    "UpdateDeploymentRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "deploymentId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The replacement identifier of the <a>RestApi</a> resource for the <a>Deployment</a> resource to change information about.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "deploymentId":{
+          "shape":"String",
+          "documentation":"<p>The replacment identifier for the <a>Deployment</a> resource to change information about.</p>",
+          "location":"uri",
+          "locationName":"deployment_id"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to change information about a <a>Deployment</a> resource.</p>"
+    },
+    "UpdateDomainNameRequest":{
+      "type":"structure",
+      "required":["domainName"],
+      "members":{
+        "domainName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>DomainName</a> resource to be changed.</p>",
+          "location":"uri",
+          "locationName":"domain_name"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>A request to change information about the <a>DomainName</a> resource.</p>"
+    },
+    "UpdateIntegrationRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>Represents an update integration request's API identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>Represents an update integration request's resource identifier.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Represents an update integration request's HTTP method.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents an update integration request.</p>"
+    },
+    "UpdateIntegrationResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod",
+        "statusCode"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>Specifies an update integration response request's API identifier.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies an update integration response request's resource identifier.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies an update integration response request's HTTP method.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>Specifies an update integration response request's status code.</p>",
+          "location":"uri",
+          "locationName":"status_code"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents an update integration response request.</p>"
+    },
+    "UpdateMethodRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The <a>Resource</a> identifier for the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>The HTTP verb that identifies the <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>Request to update an existing <a>Method</a> resource.</p>"
+    },
+    "UpdateMethodResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId",
+        "httpMethod",
+        "statusCode"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>MethodResponse</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The <a>Resource</a> identifier for the <a>MethodResponse</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "httpMethod":{
+          "shape":"String",
+          "documentation":"<p>The HTTP verb identifier for the parent <a>Method</a> resource.</p>",
+          "location":"uri",
+          "locationName":"http_method"
+        },
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>The status code identifier for the <a>MethodResponse</a> resource.</p>",
+          "location":"uri",
+          "locationName":"status_code"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>A request to update an existing <a>MethodResponse</a> resource.</p>"
+    },
+    "UpdateModelRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "modelName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier under which the model exists.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "modelName":{
+          "shape":"String",
+          "documentation":"<p>The name of the model to update.</p>",
+          "location":"uri",
+          "locationName":"model_name"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>Request to update an existing model in an existing <a>RestApi</a> resource.</p>"
+    },
+    "UpdateResourceRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "resourceId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Resource</a> resource.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "resourceId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>Resource</a> resource.</p>",
+          "location":"uri",
+          "locationName":"resource_id"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>Request to change information about a <a>Resource</a> resource.</p>"
+    },
+    "UpdateRestApiRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the <a>RestApi</a> you want to update.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>Request to update an existing <a>RestApi</a> resource in your collection.</p>"
+    },
+    "UpdateStageRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "stageName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Stage</a> resource to change information about.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name of the <a>Stage</a> resource to change information about.</p>",
+          "location":"uri",
+          "locationName":"stage_name"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+        }
+      },
+      "documentation":"<p>Requests Amazon API Gateway to change information about a <a>Stage</a> resource.</p>"
+    },
+    "op":{
+      "type":"string",
+      "enum":[
+        "add",
+        "remove",
+        "replace",
+        "move",
+        "copy",
+        "test"
+      ]
+    }
+  },
+  "documentation":"<fullname>Amazon API Gateway</fullname> <p>Amazon API Gateway helps developers deliver robust, secure and scalable mobile and web application backends. Amazon API Gateway allows developers to securely connect mobile and web applications to APIs that run on AWS Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>"
+}

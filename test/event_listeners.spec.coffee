@@ -5,9 +5,10 @@ MockService = helpers.MockService
 describe 'AWS.EventListeners', ->
 
   oldSetTimeout = setTimeout
+  oldMathRandom = Math.random
   config = null; service = null; totalWaited = null; delays = []
   successHandler = null; errorHandler = null; completeHandler = null
-  retryHandler = null
+  retryHandler = null; randomValues = []
 
   beforeEach ->
     # Mock the timer manually
@@ -22,6 +23,15 @@ describe 'AWS.EventListeners', ->
     service = new MockService(maxRetries: 3)
     service.config.credentials = AWS.util.copy(service.config.credentials)
 
+    #Mock the random method
+    `Math.random = helpers.createSpy('random');`
+    Math.random.andCallFake () ->
+      val = oldMathRandom()
+      randomValues.push(val)
+      val
+
+    randomValues = []
+
     # Helpful handlers
     successHandler = helpers.createSpy('success')
     errorHandler = helpers.createSpy('error')
@@ -29,7 +39,7 @@ describe 'AWS.EventListeners', ->
     retryHandler = helpers.createSpy('retry')
 
   # Safely tear down setTimeout hack
-  afterEach -> `setTimeout = oldSetTimeout`
+  afterEach -> `setTimeout = oldSetTimeout; Math.random = oldMathRandom`
 
   makeRequest = (callback) ->
     request = service.makeRequest('mockMethod', foo: 'bar')
@@ -49,7 +59,7 @@ describe 'AWS.EventListeners', ->
         expect(req).to.equal(request)
         throw "ERROR"
       response = request.send(->)
-      expect(response.error).to.equal("ERROR")
+      expect(response.error.message).to.equal("ERROR")
 
     it 'sends error event if credentials are not set', ->
       service.config.credentialProvider = null
@@ -111,37 +121,59 @@ describe 'AWS.EventListeners', ->
         expect(req).to.equal(request)
         throw "ERROR"
       response = request.send(->)
-      expect(response.error).to.equal("ERROR")
+      expect(response.error.message).to.equal("ERROR")
 
   describe 'afterBuild', ->
-    sendRequest = (body) ->
+    request = null
+    fs = null
+
+    sendRequest = (body, callback) ->
       request = makeRequest()
-      request.removeAllListeners('sign')
-      request.on('build', (req) -> req.httpRequest.body = body)
+      request.removeAllListeners 'sign'
+      request.on 'build', (req) -> req.httpRequest.body = body
+      if callback
+        request.send(callback)
+      else
+        request.send()
+        request
+
+    describe 'adds Content-Length header', ->
+      contentLength = (body) ->
+        sendRequest(body).httpRequest.headers['Content-Length']
+
+      it 'builds Content-Length in the request headers for string content', ->
+        expect(contentLength('FOOBAR')).to.equal(6)
+
+      it 'builds Content-Length for string "0"', ->
+        expect(contentLength('0')).to.equal(1)
+
+      it 'builds Content-Length for utf-8 string body', ->
+        expect(contentLength('tï№')).to.equal(6)
+
+      it 'builds Content-Length for buffer body', ->
+        expect(contentLength(new AWS.util.Buffer('tï№'))).to.equal(6)
+
+      if AWS.util.isNode()
+        it 'builds Content-Length for file body', (done) ->
+          fs = require('fs')
+          file = fs.createReadStream(__filename)
+          sendRequest file, (err) ->
+            done()
+
+  describe 'restart', ->
+    request = null
+
+    it 'constructs a fresh httpRequest object', ->
+      request = makeRequest()
+      httpRequest = request.httpRequest
+      request.on 'build', ->
+        if !@threwSimulatedError
+          @threwSimulatedError = true
+          err = new Error('simulated error')
+          err.retryable = true
+          throw err
       request.build()
-      request
-
-    contentLength = (body) ->
-      sendRequest(body).httpRequest.headers['Content-Length']
-
-    it 'builds Content-Length in the request headers for string content', ->
-      expect(contentLength('FOOBAR')).to.equal(6)
-
-    it 'builds Content-Length for string "0"', ->
-      expect(contentLength('0')).to.equal(1)
-
-    it 'builds Content-Length for utf-8 string body', ->
-      expect(contentLength('tï№')).to.equal(6)
-
-    it 'builds Content-Length for buffer body', ->
-      expect(contentLength(new AWS.util.Buffer('tï№'))).to.equal(6)
-
-    if AWS.util.isNode()
-      it 'builds Content-Length for file body', ->
-        fs = require('fs')
-        file = fs.createReadStream(__filename)
-        fileLen = fs.lstatSync(file.path).size
-        expect(contentLength(file)).to.equal(fileLen)
+      expect(request.httpRequest).not.to.eql(httpRequest)
 
   describe 'sign', ->
     it 'takes the request object as a parameter', ->
@@ -151,7 +183,7 @@ describe 'AWS.EventListeners', ->
         expect(req).to.equal(request)
         throw "ERROR"
       response = request.send(->)
-      expect(response.error).to.equal("ERROR")
+      expect(response.error.message).to.equal("ERROR")
 
     it 'uses the api.signingName if provided', ->
       helpers.mockHttpResponse 200, {}, ''
@@ -203,6 +235,21 @@ describe 'AWS.EventListeners', ->
       request.signedAt = new Date(request.signedAt - 60 * 12 * 1000)
       request.send()
       expect(signHandler.calls.length).to.equal(2)
+
+  describe 'httpHeaders', ->
+
+    afterEach ->
+      AWS.config.systemClockOffset = 0
+
+    it 'applies clock skew offset when correcClockSkew is true', ->
+      service = new MockService({maxRetries: 3, correctClockSkew: true})
+      serverDate = new Date(new Date().getTime() - 300000)
+      helpers.mockHttpResponse 200, {date: serverDate.toString()}, ''
+      helpers.spyOn(AWS.util, 'isClockSkewed').andReturn true
+      request = makeRequest()
+      response = request.send()
+      offset = Math.abs(AWS.config.systemClockOffset)
+      expect(offset > 299000 && offset < 310000).to.equal(true)
 
   describe 'httpData', ->
     beforeEach ->
@@ -270,6 +317,25 @@ describe 'AWS.EventListeners', ->
       expect(request.response.error.code).to.equal('UnknownEndpoint')
       expect(request.response.error.message).to.contain(
         'This service may not be available in the `mock-region\' region.')
+    it 'retries ENOTFOUND errors', ->
+      helpers.mockHttpResponse
+        code: 'NetworkingError'
+        errno: 'ENOTFOUND'
+        region: 'mock-region'
+        hostname: 'svc.mock-region.example.com'
+        retryable: true
+      service.config.maxRetries = 10
+      sendHandler = helpers.createSpy('send')
+      request = makeRequest()
+      request.on('send', sendHandler)
+      response = request.send()
+
+      expect(retryHandler.calls.length).not.to.equal(0)
+      expect(errorHandler.calls.length).not.to.equal(0)
+      expect(completeHandler.calls.length).not.to.equal(0)
+      expect(successHandler.calls.length).to.equal(0)
+      expect(response.retryCount).to.equal(service.config.maxRetries)
+      expect(sendHandler.calls.length).to.equal(service.config.maxRetries + 1)
 
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->
@@ -295,7 +361,32 @@ describe 'AWS.EventListeners', ->
       helpers.mockHttpResponse
         code: 'NetworkingError', message: 'Cannot connect'
       makeRequest(->)
-      expect(delays).to.eql([30, 60, 120])
+      baseDelays = [100, 200, 400]
+      expectedDelays = ((baseDelays[i] * randomValues[i]) for i in [0..service.numRetries()-1])
+      expect(delays).to.eql(expectedDelays)
+
+    it 'retries with falloff using custom base', ->
+      service.config.update(retryDelayOptions: {base: 30})
+      helpers.mockHttpResponse
+        code: 'NetworkingError', message: 'Cannot connect'
+      makeRequest(->)
+      baseDelays = [30, 60, 120]
+      expectedDelays = ((baseDelays[i] * randomValues[i]) for i in [0..service.numRetries()-1])
+      expect(delays).to.eql(expectedDelays)
+
+    it 'retries with falloff using custom backoff', ->
+      service.config.update(retryDelayOptions: {customBackoff: (retryCount) -> 2 * retryCount })
+      helpers.mockHttpResponse
+        code: 'NetworkingError', message: 'Cannot connect'
+      makeRequest(->)
+      expect(delays).to.eql([0, 2, 4])
+
+    it 'retries with falloff using custom backoff instead of base', ->
+      service.config.update(retryDelayOptions: {base: 100, customBackoff: (retryCount) -> 2 * retryCount })
+      helpers.mockHttpResponse
+        code: 'NetworkingError', message: 'Cannot connect'
+      makeRequest(->)
+      expect(delays).to.eql([0, 2, 4])
 
     it 'uses retry from error.retryDelay property', ->
       helpers.mockHttpResponse
@@ -321,7 +412,9 @@ describe 'AWS.EventListeners', ->
 
       response = makeRequest(->)
 
-      expect(totalWaited).to.equal(90)
+      baseDelays = [100, 200]
+      expectedDelays = ((baseDelays[i] * randomValues[i]) for i in [0..delays.length-1])
+      expect(totalWaited).to.equal(expectedDelays.reduce (a, b) -> a + b)
       expect(response.retryCount).to.be.lessThan(service.config.maxRetries)
       expect(response.data).to.equal('foo')
       expect(errorHandler.calls.length).to.equal(0)
@@ -368,9 +461,34 @@ describe 'AWS.EventListeners', ->
       response = request.send()
       expect(response.retryCount).to.equal(service.config.maxRetries)
 
-    it 'does not retry other signature errors', ->
-      helpers.mockHttpResponse 403, {}, ''
+    ['RequestTimeTooSkewed', 'RequestExpired', 'RequestInTheFuture',
+      'InvalidSignatureException', 'SignatureDoesNotMatch',
+      'AuthFailure'].forEach (code) ->
+      it 'retries clock skew errors', ->
+        helpers.mockHttpResponse 400, {}, ''
+        AWS.config.isClockSkewed = true
+        service = new MockService({maxRetries: 3, correctClockSkew: true})
+        request = makeRequest()
+        request.on 'extractError', (resp) ->
+          resp.error =
+            code: code
+            message: 'Client clock is skewed'
+        response = request.send()
+        expect(response.retryCount).to.equal(service.config.maxRetries)
 
+    it 'does not apply clock skew correction when correctClockSkew is false', ->
+      helpers.mockHttpResponse 400, {}, ''
+      AWS.config.isClockSkewed = true
+      request = makeRequest()
+      request.on 'extractError', (resp) ->
+        resp.error =
+          code: 'RequestTimeTooSkewed'
+          message: 'Client clock is skewed'
+      response = request.send()
+      expect(response.retryCount).to.equal(0)
+
+    it 'does not retry other signature errors if clock is not skewed', ->
+      helpers.mockHttpResponse 403, {}, ''
       request = makeRequest()
       request.on 'extractError', (resp) ->
         resp.error =
@@ -515,7 +633,7 @@ describe 'AWS.EventListeners', ->
             expect(-> request.send()).not.to.throw()
             expect(completeHandler.calls.length).not.to.equal(0)
             expect(retryHandler.calls.length).to.equal(0)
-            expect(result.name).to.equal('ReferenceError')
+            expect(result.code).to.equal('ReferenceError')
             d.exit()
 
         it 'does not leak service error into domain', ->
@@ -545,12 +663,12 @@ describe 'AWS.EventListeners', ->
             innerDomain = createDomain()
             innerDomain.enter()
             innerDomain.add(request)
-            innerDomain.on 'error', ->
+            innerDomain.on 'error', (domErr) ->
               gotInnerError = true
               expect(gotOuterError).to.equal(false)
               expect(gotInnerError).to.equal(true)
-              expect(err.domainThrown).to.equal(false)
-              expect(err.domain).to.equal(innerDomain)
+              expect(domErr.domainThrown).to.equal(false)
+              expect(domErr.domain).to.equal(innerDomain)
               done()
 
             request.send ->

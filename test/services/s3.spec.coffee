@@ -8,8 +8,9 @@ describe 'AWS.S3', ->
   s3 = null
   request = (operation, params) -> s3.makeRequest(operation, params)
 
-  beforeEach ->
+  beforeEach (done) ->
     s3 = new AWS.S3(region: undefined)
+    done()
 
   describe 'dnsCompatibleBucketName', ->
 
@@ -42,6 +43,11 @@ describe 'AWS.S3', ->
       expect(s3.dnsCompatibleBucketName('1.2.3.4')).to.equal(false)
       expect(s3.dnsCompatibleBucketName('a.b.c.d')).to.equal(true)
 
+  describe 'constructor', ->
+    it 'requires endpoint if s3BucketEndpoint is passed', ->
+      expect(-> new AWS.S3(s3BucketEndpoint: true)).to.throw(
+        /An endpoint must be provided/)
+
   describe 'endpoint', ->
 
     it 'sets hostname to s3.amazonaws.com when region is un-specified', ->
@@ -72,6 +78,51 @@ describe 'AWS.S3', ->
       expect(req.endpoint.hostname).to.equal('s3.amazonaws.com')
       expect(req.path).to.equal('/bucket/key')
 
+    it 'does not enable path style if endpoint is a bucket', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar', s3BucketEndpoint: true)
+      req = build('listObjects', Bucket: 'bucket')
+      expect(req.endpoint.hostname).to.equal('foo.bar')
+      expect(req.path).to.equal('/')
+      expect(req.virtualHostedBucket).to.equal('bucket')
+
+    it 'allows user override if an endpoint is specified', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar', s3ForcePathStyle: true)
+      req = build('listObjects', Bucket: 'bucket')
+      expect(req.endpoint.hostname).to.equal('foo.bar')
+      expect(req.path).to.equal('/bucket')
+
+    it 'does not allow non-bucket operations with s3BucketEndpoint set', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar', s3BucketEndpoint: true, paramValidation: true)
+      req = s3.listBuckets().build()
+      expect(req.response.error.code).to.equal('ConfigError')
+
+    describe 'with useAccelerateEndpoint set to true', ->
+      beforeEach ->
+        s3 = new AWS.S3(useAccelerateEndpoint: true)
+
+      it 'changes the hostname to use s3-accelerate for dns-comaptible buckets', ->
+        req = build('getObject', {Bucket: 'foo', Key: 'bar'})
+        expect(req.endpoint.hostname).to.equal('foo.s3-accelerate.amazonaws.com')
+
+      it 'overrides s3BucketEndpoint configuration when s3BucketEndpoint is set', ->
+        s3 = new AWS.S3(useAccelerateEndpoint: true, s3BucketEndpoint: true, endpoint: 'foo.region.amazonaws.com')
+        req = build('getObject', {Bucket: 'foo', Key: 'baz'})
+        expect(req.endpoint.hostname).to.equal('foo.s3-accelerate.amazonaws.com')
+
+      describe 'does not use s3-accelerate', ->
+        it 'on dns-incompatible buckets', ->
+          req = build('getObject', {Bucket: 'foo.baz', Key: 'bar'})
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+
+        it 'on excluded operations', ->
+          req = build('listBuckets')
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+          req = build('createBucket', {Bucket: 'foo'})
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+          req = build('deleteBucket', {Bucket: 'foo'})
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+
+
     describe 'uri escaped params', ->
       it 'uri-escapes path and querystring params', ->
         # bucket param ends up as part of the hostname
@@ -90,6 +141,60 @@ describe 'AWS.S3', ->
 
         req = build('listObjects', { Bucket: 'bucket', MaxKeys:123 })
         expect(req.path).to.equal('/?max-keys=123')
+
+    describe 'adding Expect: 100-continue', ->
+      if AWS.util.isNode()
+        it 'does not add expect header to payloads less than 1MB', ->
+          req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 - 1))
+          expect(req.headers['Expect']).not.to.exist
+
+        it 'adds expect header to payloads greater than 1MB', ->
+          req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 + 1))
+          expect(req.headers['Expect']).to.equal('100-continue')
+
+      if AWS.util.isBrowser()
+        beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
+
+        it 'does not add expect header in the browser', ->
+          req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 + 1))
+          expect(req.headers['Expect']).not.to.exist
+
+    describe 'with s3DisableBodySigning set to true', ->
+
+      it 'will disable body signing when using signature version 4 and the endpoint uses https', ->
+        s3 = new AWS.S3(s3DisableBodySigning: true, signatureVersion: 'v4')
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['X-Amz-Content-Sha256']).to.equal('UNSIGNED-PAYLOAD')
+
+      it 'will compute contentMD5', ->
+        s3 = new AWS.S3(s3DisableBodySigning: true, signatureVersion: 'v4')
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['Content-MD5']).to.equal('XzY+DlipXwbL6bvGYsXftg==')
+
+      it 'will not disable body signing when the endpoint is not https', ->
+        s3 = new AWS.S3(s3DisableBodySigning: true, signatureVersion: 'v4', sslEnabled: false)
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['X-Amz-Content-Sha256']).to.exist
+        expect(req.headers['X-Amz-Content-Sha256']).to.not.equal('UNSIGNED-PAYLOAD')
+
+      it 'will have no effect when sigv2 signing is used', ->
+        s3 = new AWS.S3(s3DisableBodySigning: true, signatureVersion: 's3', sslEnabled: true)
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['X-Amz-Content-Sha256']).to.not.exist
+
+    describe 'with s3DisableBodySigning set to false', ->
+
+      it 'will sign the body when sigv4 is used', ->
+        s3 = new AWS.S3(s3DisableBodySigning: false, signatureVersion: 'v4')
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['X-Amz-Content-Sha256']).to.exist
+        expect(req.headers['X-Amz-Cotnent-Sha256']).to.not.equal('UNSIGNED-PAYLOAD')
+
+      it 'will have no effect when sigv2 signing is used', ->
+        s3 = new AWS.S3(s3DisableBodySigning: false, signatureVersion: 's3', sslEnabled: true)
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['X-Amz-Content-Sha256']).to.not.exist
+
 
     describe 'adding Content-Type', ->
       beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
@@ -190,25 +295,49 @@ describe 'AWS.S3', ->
       req.build()
       expect(req.response.error.code).to.equal('ConfigError')
 
-    it 'encodes SSECustomerKey and fills in MD5', ->
-      req = s3.putObject
-        Bucket: 'bucket', Key: 'key', Body: 'data'
-        SSECustomerKey: 'KEY', SSECustomerAlgorithm: 'AES256'
-      req.build()
-      expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key']).
-        to.equal('S0VZ')
-      expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key-MD5']).
-        to.equal('TzFsSjRNSnJoM1o2UjFLaWR0NlZjQT09')
+    describe 'SSECustomerKey', ->
+      it 'encodes strings keys and fills in MD5', ->
+        req = s3.putObject
+          Bucket: 'bucket', Key: 'key', Body: 'data'
+          SSECustomerKey: 'KEY', SSECustomerAlgorithm: 'AES256'
+        req.build()
+        expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key']).
+          to.equal('S0VZ')
+        expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key-MD5']).
+          to.equal('O1lJ4MJrh3Z6R1Kidt6VcA==')
 
-    it 'encodes CopySourceSSECustomerKey and fills in MD5', ->
-      req = s3.copyObject
-        Bucket: 'bucket', Key: 'key', CopySource: 'bucket/oldkey', Body: 'data'
-        CopySourceSSECustomerKey: 'KEY', CopySourceSSECustomerAlgorithm: 'AES256'
-      req.build()
-      expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key']).
-        to.equal('S0VZ')
-      expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key-MD5']).
-        to.equal('TzFsSjRNSnJoM1o2UjFLaWR0NlZjQT09')
+      it 'encodes blob keys and fills in MD5', ->
+        req = s3.putObject
+          Bucket: 'bucket', Key: 'key', Body: 'data'
+          SSECustomerKey: new AWS.util.Buffer('098f6bcd4621d373cade4e832627b4f6', 'hex')
+          SSECustomerAlgorithm: 'AES256'
+        req.build()
+        expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key']).
+          to.equal('CY9rzUYh03PK3k6DJie09g==')
+        expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key-MD5']).
+          to.equal('YM1UqSjLvLtue1WVurRqng==')
+
+    describe 'CopySourceSSECustomerKey', ->
+      it 'encodes string keys and fills in MD5', ->
+        req = s3.copyObject
+          Bucket: 'bucket', Key: 'key', CopySource: 'bucket/oldkey', Body: 'data'
+          CopySourceSSECustomerKey: 'KEY', CopySourceSSECustomerAlgorithm: 'AES256'
+        req.build()
+        expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key']).
+          to.equal('S0VZ')
+        expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key-MD5']).
+          to.equal('O1lJ4MJrh3Z6R1Kidt6VcA==')
+
+      it 'encodes blob keys and fills in MD5', ->
+        req = s3.copyObject
+          Bucket: 'bucket', Key: 'key', CopySource: 'bucket/oldkey', Body: 'data'
+          CopySourceSSECustomerKey: new AWS.util.Buffer('098f6bcd4621d373cade4e832627b4f6', 'hex')
+          CopySourceSSECustomerAlgorithm: 'AES256'
+        req.build()
+        expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key']).
+          to.equal('CY9rzUYh03PK3k6DJie09g==')
+        expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key-MD5']).
+          to.equal('YM1UqSjLvLtue1WVurRqng==')
 
   describe 'retry behavior', ->
     it 'retries RequestTimeout errors', ->
@@ -243,6 +372,7 @@ describe 'AWS.S3', ->
       resp = new AWS.Response(req)
       resp.httpResponse.body = new Buffer(body || '')
       resp.httpResponse.statusCode = statusCode
+      resp.httpResponse.headers = {'x-amz-request-id': 'RequestId', 'x-amz-id-2': 'ExtendedRequestId'}
       req.emit('extractError', [resp])
       resp.error
 
@@ -266,6 +396,22 @@ describe 'AWS.S3', ->
       expect(error.code).to.equal('NotFound')
       expect(error.message).to.equal(null)
 
+    it 'extracts the region', ->
+      body = """
+        <Error>
+          <Code>InvalidArgument</Code>
+          <Message>Provided param is bad</Message>
+          <Region>eu-west-1</Region>
+        </Error>
+        """
+      error = extractError(400, body)
+      expect(error.region).to.equal('eu-west-1')
+
+    it 'extracts the request ids', ->
+      error = extractError(400)
+      expect(error.requestId).to.equal('RequestId')
+      expect(error.extendedRequestId).to.equal('ExtendedRequestId')
+
     it 'misc errors not known to return an empty body', ->
       error = extractError(412) # made up
       expect(error.code).to.equal(412)
@@ -281,6 +427,15 @@ describe 'AWS.S3', ->
       error = extractError(403, body)
       expect(error.code).to.equal('ErrorCode')
       expect(error.message).to.equal('ErrorMessage')
+
+  describe 'retryableError', ->
+
+    it 'should retry on authorization header with updated region', ->
+      err = {code: 'AuthorizationHeaderMalformed', statusCode:400, region: "eu-west-1"}
+      req = request()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal("eu-west-1")
 
   # tests from this point on are "special cases" for specific aws operations
 
@@ -434,14 +589,110 @@ describe 'AWS.S3', ->
         expect(error.retryable).to.equal(true)
         expect(data).to.equal(null)
 
+  describe 'copyObject', ->
+
+    it 'returns data when the resp is 200 with valid response', ->
+      headers =
+        'x-amz-id-2': 'Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg=='
+        'x-amz-request-id': '656c76696e6727732072657175657374'
+      body =
+        """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <CopyObjectResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+          <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>
+          <Bucket>Example-Bucket</Bucket>
+          <Key>Example-Object</Key>
+          <ETag>"3858f62230ac3c915f300c664312c11f-9"</ETag>
+        </CopyObjectResult>
+        """
+
+      helpers.mockHttpResponse 200, headers, body
+      s3.copyObject (error, data) ->
+        expect(error).to.equal(null)
+        expect(data).to.eql({
+          CopyObjectResult: {
+            ETag: '"3858f62230ac3c915f300c664312c11f-9"'
+          }
+        })
+        expect(this.requestId).to.equal('656c76696e6727732072657175657374')
+
+    it 'returns an error when the resp is 200 with an error xml document', ->
+      body =
+      """
+      <?xml version="1.0" encoding="UTF-8"?>
+      <Error>
+        <Code>InternalError</Code>
+        <Message>We encountered an internal error. Please try again.</Message>
+        <RequestId>656c76696e6727732072657175657374</RequestId>
+        <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
+      </Error>
+      """
+
+      helpers.mockHttpResponse 200, {}, body
+      s3.copyObject (error, data) ->
+        expect(error ).to.be.instanceOf(Error)
+        expect(error.code).to.equal('InternalError')
+        expect(error.message).to.equal('We encountered an internal error. Please try again.')
+        expect(error.statusCode).to.equal(200)
+        expect(error.retryable).to.equal(true)
+        expect(data).to.equal(null)
+
+  describe 'uploadPartCopy', ->
+
+    it 'returns data when the resp is 200 with valid response', ->
+      headers =
+        'x-amz-id-2': 'Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg=='
+        'x-amz-request-id': '656c76696e6727732072657175657374'
+      body =
+        """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <CopyPartResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+          <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>
+          <Bucket>Example-Bucket</Bucket>
+          <Key>Example-Object</Key>
+          <ETag>"3858f62230ac3c915f300c664312c11f-9"</ETag>
+        </CopyPartResult>
+        """
+
+      helpers.mockHttpResponse 200, headers, body
+      s3.uploadPartCopy {Bucket: 'bucket', Key: 'key', CopySource: 'bucket/key'}, (error, data) ->
+        expect(error).to.equal(null)
+        expect(data).to.eql({
+          CopyPartResult: {
+            ETag: '"3858f62230ac3c915f300c664312c11f-9"'
+          }
+        })
+        expect(this.requestId).to.equal('656c76696e6727732072657175657374')
+
+    it 'returns an error when the resp is 200 with an error xml document', ->
+      body =
+      """
+      <?xml version="1.0" encoding="UTF-8"?>
+      <Error>
+        <Code>InternalError</Code>
+        <Message>We encountered an internal error. Please try again.</Message>
+        <RequestId>656c76696e6727732072657175657374</RequestId>
+        <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
+      </Error>
+      """
+
+      helpers.mockHttpResponse 200, {}, body
+      s3.uploadPartCopy (error, data) ->
+        expect(error ).to.be.instanceOf(Error)
+        expect(error.code).to.equal('InternalError')
+        expect(error.message).to.equal('We encountered an internal error. Please try again.')
+        expect(error.statusCode).to.equal(200)
+        expect(error.retryable).to.equal(true)
+        expect(data).to.equal(null)
+
   describe 'getBucketLocation', ->
 
-    it 'returns null for the location constraint when not present', ->
+    it 'returns empty string for the location constraint when not present', ->
       body = '<?xml version="1.0" encoding="UTF-8"?>\n<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/"/>'
       helpers.mockHttpResponse 200, {}, body
       s3.getBucketLocation (error, data) ->
         expect(error).to.equal(null)
-        expect(data).to.eql({})
+        expect(data).to.eql({LocationConstraint: ''})
 
     it 'parses the location constraint from the root xml', ->
       headers = { 'x-amz-request-id': 'abcxyz' }
@@ -457,11 +708,42 @@ describe 'AWS.S3', ->
       loc = null
       s3 = new AWS.S3(region:'eu-west-1')
       s3.makeRequest = (op, params) ->
+        expect(params).to['be'].a('object')
         loc = params.CreateBucketConfiguration.LocationConstraint
       s3.createBucket(Bucket:'name')
       expect(loc).to.equal('eu-west-1')
 
-    it 'correctly builds the xml', ->
+    it 'auto-populates the LocationConstraint based on the region when using bound params', ->
+      loc = null
+      s3 = new AWS.S3(region:'eu-west-1', Bucket:'name')
+      s3.makeRequest = (op, params) ->
+        expect(params).to['be'].a('object')
+        loc = params.CreateBucketConfiguration.LocationConstraint
+      s3.createBucket(AWS.util.fn.noop)
+      expect(loc).to.equal('eu-west-1')
+
+    it 'auto-populates the LocationConstraint based on the region when using invalid params', ->
+      loc = null
+      s3 = new AWS.S3(region:'eu-west-1', Bucket:'name')
+      s3.makeRequest = (op, params) ->
+        expect(params).to['be'].a('object')
+        loc = params.CreateBucketConfiguration.LocationConstraint
+      s3.createBucket(null)
+      expect(loc).to.equal('eu-west-1')
+      s3.createBucket(undefined)
+      expect(loc).to.equal('eu-west-1')
+
+    it 'auto-populates the LocationConstraint based on the region when using invalid params and a valid callback', ->
+      loc = null
+      s3 = new AWS.S3(region:'eu-west-1', Bucket:'name')
+      s3.makeRequest = (op, params, cb) ->
+        expect(params).to['be'].a('object')
+        loc = params.CreateBucketConfiguration.LocationConstraint
+        cb() if typeof cb == 'function'
+      called = 0
+      s3.createBucket(undefined, () -> called = 1)
+      expect(loc).to.equal('eu-west-1')
+      expect(called).to.equal(1)
 
   AWS.util.each AWS.S3.prototype.computableChecksumOperations, (operation) ->
     describe operation, ->
@@ -489,13 +771,17 @@ describe 'AWS.S3', ->
       willCompute 'deleteObjects', computeChecksums: true
       willCompute 'putBucketCors', computeChecksums: true
       willCompute 'putBucketLifecycle', computeChecksums: true
+      willCompute 'putBucketLifecycleConfiguration', computeChecksums: true
       willCompute 'putBucketTagging', computeChecksums: true
+      willCompute 'putBucketReplication', computeChecksums: true
 
     it 'computes checksums if computeChecksums is off and operation requires it', ->
       willCompute 'deleteObjects', computeChecksums: false
       willCompute 'putBucketCors', computeChecksums: false
       willCompute 'putBucketLifecycle', computeChecksums: false
+      willCompute 'putBucketLifecycleConfiguration', computeChecksums: false
       willCompute 'putBucketTagging', computeChecksums: false
+      willCompute 'putBucketReplication', computeChecksums: false
 
     it 'does not compute checksums if computeChecksums is off', ->
       willCompute 'putObject', computeChecksums: false, hash: null
@@ -513,16 +799,16 @@ describe 'AWS.S3', ->
         expect(req.build(->).httpRequest.headers['Content-MD5']).to.equal(undefined)
 
       it 'throws an error in SigV4, if a non-file stream is provided', (done) ->
-        s3 = new AWS.S3(signatureVersion: 'v4')
+        s3 = new AWS.S3({signatureVersion: 'v4'})
         req = s3.putObject(Bucket: 'example', Key: 'key', Body: new Stream.Stream)
         req.send (err) ->
           expect(err.message).to.contain('stream objects are not supported')
           done()
 
-      it 'opens separate stream if a file object is provided', (done) ->
+      it 'opens separate stream if a file object is provided (signed payload)', (done) ->
         hash = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
         helpers.mockResponse data: ETag: 'etag'
-        
+
         fs = require('fs')
         mock = helpers.spyOn(fs, 'createReadStream').andCallFake ->
           tr = new Stream.Transform
@@ -533,7 +819,7 @@ describe 'AWS.S3', ->
           tr.end()
           tr
 
-        s3 = new AWS.S3(signatureVersion: 'v4')
+        s3 = new AWS.S3({signatureVersion: 'v4', s3DisableBodySigning: false})
         stream = fs.createReadStream('path/to/file')
         req = s3.putObject(Bucket: 'example', Key: 'key', Body: stream)
         req.send (err) ->
@@ -545,11 +831,14 @@ describe 'AWS.S3', ->
 
   describe 'getSignedUrl', ->
     date = null
-    beforeEach ->
+    beforeEach (done) ->
       date = AWS.util.date.getDate
       AWS.util.date.getDate = -> new Date(0)
-    afterEach ->
+      done()
+
+    afterEach (done) ->
       AWS.util.date.getDate = date
+      done()
 
     it 'gets a signed URL for getObject', ->
       url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'key')
@@ -578,6 +867,10 @@ describe 'AWS.S3', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key')
       expect(url).to.equal('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=J%2BnWZ0lPUfLV0kio8ONhJmAttGc%3D&x-amz-security-token=session')
 
+    it 'gets a signed URL for putObject with Metadata', ->
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', Metadata: {someKey: 'someValue'})
+      expect(url).to.equal('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=5Lcbv0WLGWseQhtmNQ8WwIpX6Kw%3D&x-amz-meta-somekey=someValue&x-amz-security-token=session')
+
     it 'gets a signed URL for putObject with special characters', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: '!@#$%^&*();\':"{}[],./?`~')
       expect(url).to.equal('https://bucket.s3.amazonaws.com/%21%40%23%24%25%5E%26%2A%28%29%3B%27%3A%22%7B%7D%5B%5D%2C./%3F%60~?AWSAccessKeyId=akid&Expires=900&Signature=9nEltJACZKsriZqU2cmRel6g8LQ%3D&x-amz-security-token=session')
@@ -585,6 +878,24 @@ describe 'AWS.S3', ->
     it 'gets a signed URL for putObject with a body (and checksum)', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', Body: 'body')
       expect(url).to.equal('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Content-MD5=hBotaJrYa9FhFEdFPCLG%2FA%3D%3D&Expires=900&Signature=4ycA2tpHKxfFnNCdqnK1d5BG8gc%3D&x-amz-security-token=session')
+
+    it 'gets a signed URL for putObject with a sse-c algorithm', ->
+      s3 = new AWS.S3
+        signatureVersion: 'v4'
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', SSECustomerAlgorithm: 'AES256')
+      expect(url).to.equal('https://bucket.s3.mock-region.amazonaws.com/key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fmock-region%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=60b08f91f820fa1c698ac477fec7b5e3cec7b682e09e769e1a55a4d5a3b99077&X-Amz-SignedHeaders=host%3Bx-amz-server-side-encryption-customer-algorithm&x-amz-server-side-encryption-customer-algorithm=AES256');
+
+    it 'gets a signed URL for putObject with a sse-c key', ->
+      s3 = new AWS.S3
+        signatureVersion: 'v4'
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', SSECustomerAlgorithm: 'AES256', SSECustomerKey: 'c2FtcGxlIGtleXNhbXBsZSBrZXlzYW1wbGUga2V5c2E=')
+      expect(url).to.equal('https://bucket.s3.mock-region.amazonaws.com/key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fmock-region%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=e4f57734798fdadc0b2b43ca5a5e1f28824786c3ac74c30d7abb77d6ef59b0da&X-Amz-SignedHeaders=host%3Bx-amz-server-side-encryption-customer-algorithm%3Bx-amz-server-side-encryption-customer-key%3Bx-amz-server-side-encryption-customer-key-md5&x-amz-server-side-encryption-customer-algorithm=AES256&x-amz-server-side-encryption-customer-key=YzJGdGNHeGxJR3RsZVhOaGJYQnNaU0JyWlhsellXMXdiR1VnYTJWNWMyRT0%3D&x-amz-server-side-encryption-customer-key-MD5=VzaXhwL7H9upBc%2Fb9UqH8g%3D%3D');
+
+    it 'gets a signed URL for putObject with CacheControl', ->
+      s3 = new AWS.S3
+        signatureVersion: 'v4'
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', CacheControl: 'max-age=10000')
+      expect(url).to.equal('https://bucket.s3.mock-region.amazonaws.com/key?Cache-Control=max-age%3D10000&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fmock-region%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=39ad1f8dc3aa377c2b184a0be7657dfb606628c74796c1a48394ef134ff6233a&X-Amz-SignedHeaders=cache-control%3Bhost')
 
     it 'gets a signed URL and appends to existing query parameters', ->
       url = s3.getSignedUrl('listObjects', Bucket: 'bucket', Prefix: 'prefix')
@@ -594,6 +905,16 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3(signatureVersion: 'v4', region: undefined)
       url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'object')
       expect(url).to.equal('https://bucket.s3.amazonaws.com/object?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=05ae40d2d22c93549a1de0686232ff56baf556876ec497d0d8349431f98b8dfe&X-Amz-SignedHeaders=host')
+
+    it 'gets a signed URL for putObject using SigV4', ->
+      s3 = new AWS.S3(signatureVersion: 'v4', region: undefined)
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'object')
+      expect(url).to.equal('https://bucket.s3.amazonaws.com/object?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=1b6f75301a2e480bcfbb53d47d8940c28c8657ea70f23c24846a5595a53b1dfe&X-Amz-SignedHeaders=host')
+
+    it 'gets a signed URL for putObject using SigV4 with body', ->
+      s3 = new AWS.S3(signatureVersion: 'v4', region: undefined)
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'object', Body: 'foo')
+      expect(url).to.equal('https://bucket.s3.amazonaws.com/object?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae&X-Amz-Credential=akid%2F19700101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=600a64aff20c4ea6c28d11fd0639fb33a0107d072f4c2dd1ea38a16d057513f3&X-Amz-SignedHeaders=host%3Bx-amz-content-sha256')
 
     it 'errors when expiry time is greater than a week out on SigV4', (done) ->
       err = null; data = null
@@ -605,3 +926,7 @@ describe 'AWS.S3', ->
         expect(err.message).to.equal(error)
         #expect(-> s3.getSignedUrl('getObject', params)).to.throw(error) # sync mode
         done()
+
+    it 'errors if ContentLength is passed as parameter', ->
+      expect(-> s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', ContentLength: 5)).to.
+        throw(/ContentLength is not supported in pre-signed URLs/)

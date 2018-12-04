@@ -4,30 +4,35 @@ module.exports = function() {
     callback();
   });
 
-  this.Given(/^I create a Redshift cluster security group with prefix name "([^"]*)"$/, function(prefix, callback) {
-    this.clusterGroupName = this.uniqueName(prefix);
-    var params = { Description: 'Description', ClusterSecurityGroupName: this.clusterGroupName };
-    this.request(null, 'createClusterSecurityGroup', params, callback, false);
+  this.Given(/^I create a Redshift cluster parameter group with prefix name "([^"]*)"$/, function(prefix, callback) {
+    this.parameterGroupName = this.uniqueName(prefix);
+    var params = {
+      Description: 'Description',
+      ParameterGroupName: this.parameterGroupName,
+      ParameterGroupFamily: 'redshift-1.0'
+    };
+    this.request(null, 'createClusterParameterGroup', params, callback, false);
   });
 
-  this.Given(/^the Redshift cluster security group name is in the result$/, function(callback) {
-    var name = this.data.ClusterSecurityGroup.ClusterSecurityGroupName;
-    this.assert.equal(name, this.clusterGroupName);
-    callback();
-  });
-  this.Given(/^I describe Redshift cluster security groups$/, function(callback) {
-    var params = {ClusterSecurityGroupName: this.clusterGroupName};
-    this.request(null, 'describeClusterSecurityGroups', params, callback);
-  });
-
-  this.Then(/^the Redshift cluster security group should be in the list$/, function(callback) {
-    var item = this.data.ClusterSecurityGroups[0];
-    this.assert.equal(item.ClusterSecurityGroupName, this.clusterGroupName);
+  this.Given(/^the Redshift cluster parameter group name is in the result$/, function(callback) {
+    this.assert.equal(this.data.ClusterParameterGroup.ParameterGroupName, this.parameterGroupName);
     callback();
   });
 
-  this.Then(/^I delete the Redshift cluster security group$/, function(callback) {
-    var params = {ClusterSecurityGroupName: this.clusterGroupName};
-    this.request(null, 'deleteClusterSecurityGroup', params, callback);
+  this.Given(/^I describe Redshift cluster parameter groups$/, function(callback) {
+    this.request(null, 'describeClusterParameterGroups', {}, callback);
+  });
+
+  this.Then(/^the Redshift cluster parameter group should be in the list$/, function(callback) {
+    var name = this.parameterGroupName;
+    this.assert.contains(this.data.ParameterGroups, function(parameterGroup) {
+      return parameterGroup.ParameterGroupName === name;
+    });
+    callback();
+  });
+
+  this.Then(/^I delete the Redshift cluster parameter group$/, function(callback) {
+    var params = {ParameterGroupName: this.parameterGroupName};
+    this.request(null, 'deleteClusterParameterGroup', params, callback);
   });
 };

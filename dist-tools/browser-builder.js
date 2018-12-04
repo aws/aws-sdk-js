@@ -52,7 +52,7 @@ function build(options, callback) {
     options = {};
   }
 
-  var img = require('browserify/node_modules/insert-module-globals');
+  var img = require('insert-module-globals');
   img.vars.process = function() { return '{browser:true}'; };
 
   if (options.services) process.env.AWS_SERVICES = options.services;
@@ -73,11 +73,11 @@ function build(options, callback) {
 
 // run if we called this tool directly
 if (require.main === module) {
-  var options = {
+  var opts = {
     services: process.argv[2] || process.env.SERVICES,
     minify: process.env.MINIFY ? true : false
   };
-  build(options, function(err, code) {
+  build(opts, function(err, code) {
     if (err) console.error(err.message);
     else console.log(code);
   });

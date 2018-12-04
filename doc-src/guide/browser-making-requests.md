@@ -103,6 +103,23 @@ s3.getObject({Bucket: 'bucket', Key: 'key'}).on('success', function(response) {
 }).send();
 ```
 
+#### The `nextPage` and `hasNextPage` methods
+
+If the data returned by a service request spans multiple pages, further pages
+can be accessed by calling `response.nextPage()`. This method will send a new
+request; its response can be captured either with a callback or with success and
+error listeners. Calling `response.hasNextPage()` will return a boolean
+indicating whether calling `response.nextPage()` could return additional data:
+
+```javascript
+s3.listObjects({Bucket: 'bucket'}).on('success', function handlePage(response) {
+  // do something with response.data
+  if (response.hasNextPage()) {
+    response.nextPage().on('success', handlePage).send();
+  }
+}).send();
+```
+
 ### Simplified Callback Method
 
 Each operation supports a simplified callback that can be passed as the last
@@ -168,7 +185,7 @@ with the serialized response data from the service.
 For example:
 
 ```javascript
-s3.listBuckets().done(function(response) {
+s3.listBuckets().on('success', function(response) {
   console.log(response.data);
 }).send();
 ```
@@ -197,7 +214,7 @@ as the first parameter to the event:
 
 ```javascript
 s3.config.credentials.accessKeyId = 'invalid';
-s3.listBuckets().fail(function(error, response) {
+s3.listBuckets().on('error', function(error, response) {
   console.log(error);
   // or:
   console.log(response.error);
@@ -277,3 +294,52 @@ request.
 
 The above example will print either "Success! Always!", or "Error! Always!",
 depending on whether the request succeeded or not.
+
+## Support for Promises
+
+Each operation supports returning a promise if promises are globally
+available when the SDK in imported or a Promises implementation is
+provided to the SDK.
+ 
+### Setting a Promise Dependency
+ 
+By default, the SDK will add the `promise()` method to AWS.Request if the
+`Promise` constructor is available globally, either natively or pulled in
+by a 3rd party library. It is also possible to configure the SDK to use
+a 3rd party implementation of promises, such as bluebird, instead:
+ 
+```javascript
+// Bluebird already loaded
+AWS.config.setPromisesDependency(Promise);
+```
+Pass in your favorite Promise library to `AWS.config.setPromisesDependency`
+or call it without a parameter to revert back to whichever Promise
+implementation is globally available.
+
+### Returned Promise Method
+
+The `promise()` method is called directly on a `AWS.Request` object.
+Remember that a request is returned when an operation is called without
+a callback function supplied. Callbacks can still be registered to
+events emitted by the request. Calling the `promise()` method will
+immediately send then the request, and return a promise that is fulfilled
+with the response `data` property or rejected with the response `error`
+property:
+
+```javascript
+// create the AWS.Request object
+var request = new AWS.EC2().describeInstances();
+
+// create the promise object
+var promise = request.promise();
+
+// handle promise's fulfilled/rejected states
+promise.then(
+  function(data) {
+    /* process the data */
+  },
+  function(error) {
+    /* handle the error */
+  }
+);
+```

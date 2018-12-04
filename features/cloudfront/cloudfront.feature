@@ -6,8 +6,8 @@ Feature: Amazon CloudFront
 
   Scenario: Listing distributions
     Given I list CloudFront distributions
-    Then the result should contain a property Quantity with a number
-    And the result should contain a property Items with an Array
+    Then the result at DistributionList should contain a property Quantity with a number
+    And the result at DistributionList should contain a property Items with an Array
 
   # Let this fail with NoSuchOrigin to confirm we serialized inputs
   # but without creating a distribution.
@@ -22,7 +22,3 @@ Feature: Amazon CloudFront
   Scenario: Error handling
     Given I create a CloudFront distribution with name prefix ""
     Then the error code should be "InvalidArgument"
-    And the error message should be:
-    """
-    The parameter CallerReference is too small.
-    """

@@ -14,8 +14,7 @@ GIT
 
 GIT
   remote: git://github.com/lsegal/yard.git
-  revision: 462a42d788fe4fdd809f4c3d0bbf92e6ecc338f4
-  branch: frameless
+  revision: 106c5d0987d4414247d246dae3d4c588235c5dde
   specs:
     yard (0.8.7.6)
 
@@ -23,9 +22,6 @@ GEM
   remote: https://rubygems.org/
   specs:
     kpeg (1.0.0)
-    mini_portile (0.5.2)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
     rake (10.1.1)
     rdiscount (2.1.7)
     redcarpet (3.2.0)
@@ -36,7 +32,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nokogiri
   parsejs!
   rake
   rdiscount
@@ -45,3 +40,6 @@ DEPENDENCIES
   yard!
   yard-js!
   yard-sitemap (~> 1.0)
+
+BUNDLED WITH
+   1.10.5

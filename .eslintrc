@@ -11,11 +11,14 @@
     "quotes": [2, "single"],
     "strict": 0,
     "curly": 0,
+    "no-empty": 0,
     "no-underscore-dangle": 0,
     "new-cap": 0,
     "dot-notation": 0,
     "no-use-before-define": 0,
     "space-after-keywords": [2, "always"],
-    "no-trailing-spaces": 2
+    "space-before-blocks": [2, "always"],
+    "no-trailing-spaces": 2,
+    "space-unary-ops": 0
   }
 }

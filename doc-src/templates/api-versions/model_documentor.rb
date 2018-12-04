@@ -1,4 +1,3 @@
-require 'nokogiri'
 require 'ostruct'
 
 module Documentor
@@ -81,23 +80,36 @@ class MethodDocumentor
 
   attr_reader :lines
 
-  def initialize(operation_name, operation, api, klass)
+  def initialize(operation_name, operation, api, klass, options = {}, examples = {})
     desc = documentation(operation)
     desc ||= "Calls the #{method_name(operation_name, false)} API operation."
     desc = desc.gsub(/^\s+/, '').strip
+
+    if options[:flatten_dynamodb_attrs]
+      desc = ""
+    end
 
     @lines = [desc, '']
 
     ## @param tags
 
     @lines << "@param params [Object]"
-    @lines += shapes(api, operation['input']).map {|line| "  " + line }
+    @lines += shapes(api, operation['input'], options).map {|line| "  " + line }
+
+    if examples
+      examples.each do |example|
+        @lines << "@example #{example['title']}"
+        @lines << ""
+        @lines << " /* #{example['description']} */"
+        @lines << ""
+        @lines << generate_shared_example(api, example, klass, method_name(operation_name)).split("\n").map {|line| "  " + line}
+      end
+    end
 
     ## @example tag
-
     @lines << "@example Calling the #{method_name(operation_name)} operation"
     @lines << generate_example(api, klass, method_name(operation_name),
-                operation['input']).split("\n").map {|line| "  " + line }
+                operation['input'], options).split("\n").map {|line| "  " + line }
     @lines << ""
 
     ## @callback tag
@@ -113,7 +125,7 @@ class MethodDocumentor
     @lines << "  @param data [Object] the de-serialized data returned from"
     @lines << "    the request. Set to `null` if a request error occurs."
 
-    output = shapes(api, operation['output'])
+    output = shapes(api, operation['output'], options)
     output = output.map {|line| "    " + line }
     if output.size > 0
       @lines << "    The `data` object has the following properties:"
@@ -132,30 +144,170 @@ class MethodDocumentor
     end
   end
 
-  def shapes(api, rules)
+  def shapes(api, rules, options = {})
     rules = api['shapes'][rules['shape']] if rules && rules['shape']
     if rules and rules['members']
       rules['members'].map do |name, member_rules|
         if member_rules['shape']
           member_rules = api['shapes'][member_rules['shape']].merge(member_rules)
         end
-        ShapeDocumentor.new(api, member_rules, :name => name).lines
+        opts = {:name => name}.merge(options)
+        ShapeDocumentor.new(api, member_rules, opts).lines
       end.flatten
     else
       []
     end
   end
 
-  def generate_example(api, klass, name, input)
-    ExampleShapeVisitor.new(api).example(klass, name, input)
+  def generate_example(api, klass, name, input, options = {})
+    ExampleShapeVisitor.new(api, options).example(klass, name, input)
+  end
+
+  def generate_shared_example(api, example, klass, name)
+    SharedExampleVisitor.new(api, example, klass, name).example
+  end
+
+end
+
+class SharedExampleVisitor
+  def initialize(api, example, klass, name)
+    @api = api
+    @example = example
+    @klass = klass
+    @name = name
+    @comments = example['comments']
+  end
+
+  def shape_type(type)
+    case type
+      when 'structure' then 'StructureShape'
+      when 'list' then 'ListShape'
+      when 'map' then 'MapShape'
+      when 'boolean' then 'BooleanShape'
+      when 'timestamp' then 'TimestampShape'
+      when 'float', 'double', 'bigdecimal' then 'FloatShape'
+      when 'integer', 'long', 'short', 'biginteger' then 'IntegerShape'
+      when 'string', 'character' then 'StringShape'
+      when 'base64' then 'Base64Shape'
+      when 'binary', 'blob' then 'BinaryShape'
+      else type
+    end
+  end
+
+  def example
+    operation = @name[0].upcase + @name[1..-1]
+    operation_input = @api['operations'][operation]['input']
+    if operation_input
+      input_shape_name = operation_input['shape']
+      input_shape = @api['shapes'][input_shape_name]
+      input = visit(input_shape, @example['input'], "", [], @comments['input'])
+    else
+      input = "{}"
+    end
+
+    lines = ["var params = #{input};"]
+    lines << "#{@klass.downcase}.#{@name}(params, function(err, data) {"
+    lines << "  if (err) console.log(err, err.stack); // an error occurred"
+    lines << "  else     console.log(data);           // successful response"
+
+    operation_output = @api['operations'][operation]['output']
+    if operation_output
+      output_shape_name = operation_output['shape']
+      output_shape = @api['shapes'][output_shape_name]
+      if output = visit(output_shape, @example['output'], "  ", [], @comments['output'])
+        lines << "  /*"
+        lines << "  data = #{output}"
+        lines << "  */"
+      end
+    end
+
+
+    lines << "});"
+    lines.join("\n")
+  end
+
+  def visit(shape, value, indent, path, comments)
+    case shape_type(shape['type'])
+      when 'StructureShape' then structure(shape, value, indent, path, comments)
+      when 'MapShape' then map(shape, value, indent, path, comments)
+      when 'ListShape' then list(shape, value, indent, path, comments)
+      when 'StringShape' then value.inspect
+      when 'TimestampShape' then "<Date Representation>"
+      when 'BinaryShape' then "<Binary String>"
+      else value
+    end
+  end
+
+  def structure(shape, value, indent, path, comments)
+    lines = ["{"]
+    value_length = value.length
+    value.each_with_index do |(key, val), index|
+      path << ".#{key}"
+      comment = apply_comment(path, comments)
+      shape_name = shape['members'][key]['shape']
+      shape_val = visit(@api['shapes'][shape_name], val, "#{indent} ", path, comments)
+      if index < value_length - 1 then
+        comment = ", " + comment
+      end
+      lines << "#{indent} #{key}: #{shape_val}#{comment}"
+      path.pop
+    end
+    lines << "#{indent}}"
+    lines.join("\n")
+  end
+
+  def map(shape, value, indent, path, comments)
+    lines = ["{"]
+    value_length = value.length
+    value.each_with_index do |(key, val), index|
+      path << ".#{key}"
+      comment = apply_comment(path, comments)
+      shape_name = shape['value']['shape']
+      shape_val = visit(@api['shapes'][shape_name], val, "#{indent}  ", path, comments)
+      if index < value_length - 1 then
+        comment = ", " + comment
+      end
+      lines << "#{indent} \"#{key}\": #{shape_val}#{comment}"
+      path.pop
+    end
+    lines << "#{indent}}"
+    lines.join("\n")
+  end
+
+  def list(shape, value, indent, path, comments)
+    lines = ["["]
+    value_length = value.length
+    value.each_with_index do |member, index|
+      path << "[#{index}]"
+      comment = apply_comment(path, comments)
+      shape_name = shape['member']['shape']
+      shape_val = visit(@api['shapes'][shape_name], member, "#{indent} ", path, comments)
+      if index < value_length - 1 then
+        comment = ", " + comment
+      end
+      lines << "#{indent}   #{shape_val}#{comment}"
+      path.pop
+    end
+    lines << "#{indent}]"
+    lines.join("\n")
+  end
+
+  def apply_comment(path, comments)
+    key = path.join().sub(/^\./, '')
+    if comments && comments[key]
+      "// #{comments[key]}"
+    else
+      ""
+    end
   end
 
 end
 
 class ExampleShapeVisitor
-  def initialize(api, required_only = false)
+  def initialize(api, options = {})
     @api = api
-    @required_only = required_only
+    @required_only = options[:required_only] || false
+    @flatten_dynamodb_attrs = options[:flatten_dynamodb_attrs]
     @visited = Hash.new { 0 }
     @recursive = {}
   end
@@ -179,7 +331,10 @@ class ExampleShapeVisitor
     return "" if node.nil?
     result = ""
     @visited[node['shape']] += 1
-    if !node['shape'] || @visited[node['shape']] < 2
+
+    if @flatten_dynamodb_attrs && node['shape'] == "AttributeValue"
+      result = 'someValue /* "str" | 10 | true | false | null | [1, "a"] | {a: "b"} */'
+    elsif !node['shape'] || @visited[node['shape']] < 2
       node = @api['shapes'][node['shape']].merge(node) if node['shape']
       if (meth = "visit_" + (node['type'] || 'string')) && respond_to?(meth)
         result = send(meth, node, required)
@@ -322,6 +477,18 @@ class ShapeDocumentor
     @type = self.class.type_for(rules)
     @lines = []
     @nested_lines = []
+    @flatten_dynamodb_attrs = options[:flatten_dynamodb_attrs]
+
+    if @flatten_dynamodb_attrs && rules['shape'] == "AttributeValue"
+      desc = <<-doc_client.gsub(/\n/, '').strip
+&mdash; a serializable JavaScript object. 
+For information about the supported types see the 
+[DynamoDB Data Model](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html)
+doc_client
+      @lines = ["#{prefix}* `#{name}` #{desc}"]
+      @nested_lines += [desc]
+      return
+    end
 
     if structure?
       required_map = (rules['required'] || []).inject({}) {|h,k| h[k] = true; h }
@@ -341,7 +508,7 @@ class ShapeDocumentor
 
       # sanity check, I don't think this should ever raise, but if it
       # does we will have to document the key shape
-      key_child = child_shape(rules['key'] || {}, :prefix => prefix)
+      #key_child = child_shape(rules['key'] || {}, :prefix => prefix)
       #raise "unhandled map key type" if key_child.type != 'String'
 
       child = child_shape(rules['value'] || {}, :prefix => prefix)
@@ -379,7 +546,7 @@ class ShapeDocumentor
     else
       text << "&mdash; (`#{@type}`)"
     end
-    if docs = documentation(rules)
+    if (docs = documentation(rules)) && !@flatten_dynamodb_attrs
       text << " #{docs}"
     end
     text.join(' ')
@@ -390,15 +557,18 @@ class ShapeDocumentor
   def child_shape(rules, options = {})
     @visited[rules['shape']] += 1
     if @visited[rules['shape']] < 2
-      ShapeDocumentor.new(@api, rules, {
-        :prefix => prefix + '    ', :visited => @visited }.merge(options))
+      ret = ShapeDocumentor.new(@api, rules, {
+        :prefix => prefix + '    ', :visited => @visited,
+        :flatten_dynamodb_attrs => @flatten_dynamodb_attrs }.merge(options))
     else
-      OpenStruct.new({
+      ret = OpenStruct.new({
         :nested_lines => [], :lines => [],
         :type => @api['shapes'] ?
           ShapeDocumentor.type_for(@api['shapes'][rules['shape']]) :
           rules['shape']
       }.merge(options))
     end
+    @visited[rules['shape']] -= 1
+    ret
   end
 end

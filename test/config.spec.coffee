@@ -58,6 +58,12 @@ describe 'AWS.Config', ->
     it 'can be set to an integer', ->
       expect(configure(maxRetries: 2).maxRetries).to.equal(2)
 
+  describe 'retryDelayOptions', ->
+    it 'defaults to "base: 100"', ->
+      expect(configure().retryDelayOptions).to.eql({base: 100})
+    it 'can set "base" to an integer', ->
+      expect(configure(retryDelayOptions: {base: 30}).retryDelayOptions).to.eql({base: 30})
+
   describe 'paramValidation', ->
     it 'defaults to true', ->
       expect(configure().paramValidation).to.equal(true)
@@ -79,6 +85,22 @@ describe 'AWS.Config', ->
   describe 'systemClockOffset', ->
     it 'defaults to 0', ->
       expect(configure().systemClockOffset).to.equal(0)
+
+  describe 'correctClockSkew', ->
+    it 'defaults to false', ->
+      expect(configure().correctClockSkew).to.equal(false)
+
+  describe 'customUserAgent', ->
+    it 'defaults to null', ->
+      expect(configure().customUserAgent).to.equal(null)
+
+  describe 'useAccelerateEndpoint', ->
+    it 'defaults to false', ->
+      expect(configure().useAccelerateEndpoint).to.equal(false)
+
+  describe 's3DisableBodySigning', ->
+    it 'defaults to true', ->
+      expect(configure().s3DisableBodySigning).to.equal(true)
 
   describe 'set', ->
     it 'should set a default value for a key', ->
@@ -216,3 +238,9 @@ describe 'AWS.config', ->
     AWS.config = {}
     expect(AWS.config).to.eql({})
     AWS.config = oldConfig
+
+  describe 'setPromisesDependency', ->
+    it 'updates promise support on requests', ->
+      utilSpy = helpers.spyOn(AWS.util, 'addPromisesToRequests')
+      AWS.config.setPromisesDependency(->)
+      expect(utilSpy.calls.length).to.equal(1)

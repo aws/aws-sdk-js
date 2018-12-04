@@ -5,5 +5,8 @@
   },
   "dynamodb": {
     "params": { "TableName": "aws-sdk-js-integration-test" }
+  },
+  "devicefarm": {
+    "region": "us-west-2"
   }
 }

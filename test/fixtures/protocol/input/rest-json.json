@@ -87,6 +87,132 @@
     ]
   },
   {
+    "description": "String to string maps in querystring",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "PipelineId": {
+            "shape": "StringType",
+            "location": "uri"
+          },
+          "QueryDoc": {
+            "shape": "MapStringStringType",
+            "location": "querystring"
+          }
+        }
+      },
+      "MapStringStringType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType"
+        },
+        "value": {
+          "shape": "StringType"
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/2014-01-01/jobsByPipeline/{PipelineId}"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "PipelineId": "foo",
+          "QueryDoc": {
+            "bar": "baz",
+            "fizz": "buzz"
+          }
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/2014-01-01/jobsByPipeline/foo?bar=baz&fizz=buzz",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "String to string list maps in querystring",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "PipelineId": {
+            "shape": "StringType",
+            "location": "uri"
+          },
+          "QueryDoc": {
+            "shape": "MapStringStringListType",
+            "location": "querystring"
+          }
+        }
+      },
+      "MapStringStringListType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType"
+        },
+        "value": {
+          "shape": "StringListType"
+        }
+      },
+      "StringListType": {
+        "type": "list",
+        "member": {
+          "shape": "StringType"
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/2014-01-01/jobsByPipeline/{PipelineId}"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "PipelineId": "id",
+          "QueryDoc": {
+            "foo": ["bar", "baz"],
+            "fizz": ["buzz", "pop"]
+          }
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/2014-01-01/jobsByPipeline/id?foo=bar&foo=baz&fizz=buzz&fizz=pop",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
     "description": "URI parameter and querystring params",
     "metadata": {
       "protocol": "rest-json",
@@ -191,7 +317,7 @@
       {
         "given": {
           "http": {
-            "method": "GET",
+            "method": "POST",
             "requestUri": "/2014-01-01/jobsByPipeline/{PipelineId}"
           },
           "input": {
@@ -270,7 +396,7 @@
       {
         "given": {
           "http": {
-            "method": "GET",
+            "method": "POST",
             "requestUri": "/2014-01-01/jobsByPipeline/{PipelineId}"
           },
           "input": {
@@ -339,7 +465,7 @@
       {
         "given": {
           "http": {
-            "method": "GET",
+            "method": "POST",
             "requestUri": "/2014-01-01/vaults/{vaultName}/archives"
           },
           "input": {
@@ -375,9 +501,12 @@
           "foo": {
             "location":"querystring",
             "locationName":"param-name",
-            "type": "string"
+            "shape": "Foo"
           }
         }
+      },
+      "Foo": {
+        "type": "string"
       }
     },
     "cases": [
@@ -411,6 +540,333 @@
           "method": "POST",
           "body": "",
           "uri": "/path?abc=mno&param-name="
+        }
+      }
+    ]
+  },
+  {
+    "description": "Recursive shapes",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "RecursiveStruct": {
+            "shape": "RecursiveStructType"
+          }
+        }
+      },
+      "RecursiveStructType": {
+        "type": "structure",
+        "members": {
+          "NoRecurse": {
+            "shape": "StringType"
+          },
+          "RecursiveStruct": {
+            "shape": "RecursiveStructType"
+          },
+          "RecursiveList": {
+            "shape": "RecursiveListType"
+          },
+          "RecursiveMap": {
+            "shape": "RecursiveMapType"
+          }
+        }
+      },
+      "RecursiveListType": {
+        "type": "list",
+        "member": {
+          "shape": "RecursiveStructType"
+        }
+      },
+      "RecursiveMapType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType"
+        },
+        "value": {
+          "shape": "RecursiveStructType"
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "NoRecurse": "foo"
+          }
+        },
+        "serialized": {
+          "uri": "/path" ,
+          "headers": {},
+          "body": "{\"RecursiveStruct\": {\"NoRecurse\": \"foo\"}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "RecursiveStruct": {
+              "NoRecurse": "foo"
+            }
+          }
+        },
+        "serialized": {
+          "uri": "/path",
+          "headers": {},
+          "body": "{\"RecursiveStruct\": {\"RecursiveStruct\": {\"NoRecurse\": \"foo\"}}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "RecursiveStruct": {
+              "RecursiveStruct": {
+                "RecursiveStruct": {
+                  "NoRecurse": "foo"
+                }
+              }
+            }
+          }
+        },
+        "serialized": {
+          "uri": "/path",
+          "headers": {},
+          "body": "{\"RecursiveStruct\": {\"RecursiveStruct\": {\"RecursiveStruct\": {\"RecursiveStruct\": {\"NoRecurse\": \"foo\"}}}}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "RecursiveList": [
+              {
+                "NoRecurse": "foo"
+              },
+              {
+                "NoRecurse": "bar"
+              }
+            ]
+          }
+        },
+        "serialized": {
+          "uri": "/path",
+          "headers": {},
+          "body": "{\"RecursiveStruct\": {\"RecursiveList\": [{\"NoRecurse\": \"foo\"}, {\"NoRecurse\": \"bar\"}]}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "RecursiveList": [
+              {
+                "NoRecurse": "foo"
+              },
+              {
+                "RecursiveStruct": {
+                  "NoRecurse": "bar"
+                }
+              }
+            ]
+          }
+        },
+        "serialized": {
+          "uri": "/path",
+          "headers": {},
+          "body": "{\"RecursiveStruct\": {\"RecursiveList\": [{\"NoRecurse\": \"foo\"}, {\"RecursiveStruct\": {\"NoRecurse\": \"bar\"}}]}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "RecursiveMap": {
+              "foo": {
+                "NoRecurse": "foo"
+              },
+              "bar": {
+                "NoRecurse": "bar"
+              }
+            }
+          }
+        },
+        "serialized": {
+          "uri": "/path",
+          "headers": {},
+          "body": "{\"RecursiveStruct\": {\"RecursiveMap\": {\"foo\": {\"NoRecurse\": \"foo\"}, \"bar\": {\"NoRecurse\": \"bar\"}}}}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Timestamp values",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "TimeArg": {
+            "shape": "TimestampType"
+          },
+          "TimeArgInHeader": {
+            "shape": "TimestampType",
+            "location": "header",
+            "locationName": "x-amz-timearg"
+          }
+        }
+      },
+      "TimestampType": {
+        "type": "timestamp"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "TimeArg": 1422172800
+        },
+        "serialized": {
+          "uri": "/path",
+          "headers": {},
+          "body": "{\"TimeArg\": 1422172800}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "TimeArgInHeader": 1422172800
+        },
+        "serialized": {
+          "uri": "/path",
+          "headers": {"x-amz-timearg": "Sun, 25 Jan 2015 08:00:00 GMT"},
+          "body": ""
+        }
+      }
+    ]
+  },
+  {
+    "description": "Named locations in JSON body",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "TimeArg": {
+            "shape": "TimestampType",
+            "locationName": "timestamp_location"
+          }
+        }
+      },
+      "TimestampType": {
+        "type": "timestamp"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "TimeArg": 1422172800
+        },
+        "serialized": {
+          "uri": "/path",
+          "headers": {},
+          "body": "{\"timestamp_location\": 1422172800}"
         }
       }
     ]

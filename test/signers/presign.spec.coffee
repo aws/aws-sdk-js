@@ -1,6 +1,6 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
-cw = new AWS.CloudWatch()
+cw = new AWS.CloudWatch(paramValidation: true)
 
 describe 'AWS.Signers.Presign', ->
   resultUrl = "https://monitoring.mock-region.amazonaws.com/?" +
@@ -20,6 +20,9 @@ describe 'AWS.Signers.Presign', ->
 
   it 'presigns synchronously', ->
     expect(cw.listMetrics().presign()).to.equal(resultUrl)
+
+  it 'throws errors on synchronous presign failures', ->
+    expect(-> cw.listMetrics(InvalidParameter: true).presign()).to.throw(/Unexpected key/)
 
   it 'allows specifying different expiry time', ->
     expect(cw.listMetrics().presign(900)).to.contain('X-Amz-Expires=900&')

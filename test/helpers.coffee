@@ -8,6 +8,9 @@ else
   AWS = window.AWS
   global = window
 
+if global.jasmine
+  global.jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000
+
 _it = it
 global.it = (label, fn) ->
   if label.match(/\(no phantomjs\)/) and navigator and navigator.userAgent.match(/phantomjs/i)
@@ -16,7 +19,6 @@ global.it = (label, fn) ->
 
 EventEmitter = require('events').EventEmitter
 Buffer = AWS.util.Buffer
-semver = require('semver')
 
 require('util').print = (data) ->
   process.stdout.write(data)
@@ -122,7 +124,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
         null
 
   AWS.util.arrayEach data.slice(), (str) ->
-    if AWS.util.isNode() && (httpResp._events.readable || semver.gt(process.version, 'v0.11.3'))
+    if AWS.util.isNode() && httpResp._events.readable
       httpResp.emit('readable')
     else
       httpResp.emit('data', new Buffer(str))
@@ -166,6 +168,7 @@ setupMockResponse = (cb) ->
   AWS.events.on 'validate', (req) ->
     ['sign', 'send'].forEach (evt) -> req.removeAllListeners(evt)
     req.removeListener('extractData', AWS.EventListeners.CorePost.EXTRACT_REQUEST_ID)
+    req.removeListener('extractError', AWS.EventListeners.CorePost.EXTRACT_REQUEST_ID)
     Object.keys(AWS.EventListeners).forEach (ns) ->
       if AWS.EventListeners[ns].EXTRACT_DATA
         req.removeListener('extractData', AWS.EventListeners[ns].EXTRACT_DATA)

@@ -4,6 +4,7 @@ require_relative './model_documentor'
 $APIS_DIR = File.expand_path(File.dirname(__FILE__) +
                              "/../../../apis")
 $API_FILE_MATCH = /(?:^|\/)([^\/]+?)-(\d+-\d+-\d+)\.normal\.json$/
+$dynamodb_model = nil #Track model for documenting the document client additions
 
 YARD::Tags::Library.define_tag 'Service', :service
 YARD::Tags::Library.define_tag 'Waiter Resource States', :waiter
@@ -47,6 +48,20 @@ class WaiterObject < YARD::CodeObjects::Base
   def title; name.to_s end
 end
 
+YARD::Parser::SourceParser.after_parse_list do
+  $dynamodb_model['operations'].each do |op_name, operation|
+    next unless op_name =~ /^(?:Scan|Query|.+Item)$/
+    obj_name = op_name.sub(/Item$/, '').sub(/^./) {|m| m.downcase}
+    obj_path = "AWS.DynamoDB.DocumentClient.#{obj_name}"
+
+    if obj = YARD::Registry.at(obj_path)
+      docs = MethodDocumentor.new(obj_name, operation, $dynamodb_model,
+        'DocumentClient', :flatten_dynamodb_attrs => true).lines.join("\n")
+      obj.docstring = obj.docstring.all + "\n" + docs
+    end
+  end
+end
+
 class ApiDocumentor
   def initialize(root = :root)
     @root = root
@@ -74,11 +89,11 @@ class ApiDocumentor
     _, klass, version = *file.match($API_FILE_MATCH)
     identifier, klass = *class_info_for(klass.downcase)
     name = version_suffix ? klass + '_' + version.gsub('-', '') : klass
-
     log.progress("Parsing AWS.#{klass} (#{version})")
     svc = YARD::CodeObjects::ClassObject.new(@root, name)
 
     model = load_model(file)
+    $dynamodb_model = model if klass == 'DynamoDB' && version == '2012-08-10'
     add_class_documentation(svc, klass, model, version)
     add_methods(svc, klass, model)
     add_waiters(svc, klass, model)
@@ -123,6 +138,9 @@ API operation.
 @example Constructing a #{klass} object
   var #{klass.downcase} = new AWS.#{klass}({apiVersion: '#{api_version}'});
 
+@option options [map] params An optional map of parameters to bind to every
+  request sent by this service object. For more information on bound parameters,
+  see ["Working with Services" in the Getting Started Guide](/AWSJavaScriptSDK/guide/node-services.html#Bound_Parameters).
 @option options [String] endpoint The endpoint URI to send requests
   to.  The default endpoint is built from the configured `region`.
   The endpoint should be a string like `'https://{service}.{region}.amazonaws.com'`.
@@ -139,9 +157,10 @@ eof
   end
 
   def add_methods(service, klass, model)
+    examples = load_examples(klass.downcase) || {}
     model['operations'].each_pair do |name, operation|
       meth = YARDJS::CodeObjects::PropertyObject.new(service, name[0].downcase + name[1..-1])
-      docs = MethodDocumentor.new(name, operation, model, klass).lines.join("\n")
+      docs = MethodDocumentor.new(name, operation, model, klass, {}, examples[name]).lines.join("\n")
       meth.property_type = :function
       meth.parameters = [['params', '{}'], ['callback', nil]]
       meth.signature = "#{name}(params = {}, [callback])"
@@ -188,8 +207,8 @@ eof
       obj.operation.docstring.add_tag YARD::Tags::Tag.new(:waiter, "{#{obj.path}}")
       obj.docstring = <<-eof
 Waits for the `#{name}` state by periodically calling the underlying
-{#{operation_name}} operation every #{config['interval']} seconds
-(at most #{config['max_attempts']} times).
+{#{operation_name}} operation every #{config['delay']} seconds
+(at most #{config['maxAttempts']} times).
 
 @callback (see #{obj.operation.path})
 @param (see #{obj.operation.path})
@@ -197,7 +216,7 @@ Waits for the `#{name}` state by periodically calling the underlying
 @see #{operation_name}
 eof
 
-      waiter_ex = ExampleShapeVisitor.new(model, true).example(
+      waiter_ex = ExampleShapeVisitor.new(model, :required_only => true).example(
         service.name.to_s.downcase, 'waitFor', model['operations'][config['operation']]['input'])
       waiter_ex = waiter_ex.sub(/\.waitFor\(/, ".waitFor('#{name}', ")
       waiter_ex = waiter_ex.sub(/\{\s+\}/, "{\n  // ... input parameters ...\n}")
@@ -226,7 +245,7 @@ eof
   def load_model(file)
     json = JSON.parse(File.read(file))
 
-    waiters_file = file.sub(/\.normal\.json$/, '.waiters.json')
+    waiters_file = file.sub(/\.normal\.json$/, '.waiters2.json')
     if File.exist? waiters_file
       json = json.merge(JSON.parse(File.read(waiters_file)))
     end
@@ -243,5 +262,13 @@ eof
     end
 
     raise "Unknown class name for #{prefix}"
+  end
+
+  def load_examples(name)
+    paths = Dir[File.join($APIS_DIR, "#{name}-*.examples.json")]
+    unless paths.empty?
+      json = JSON.parse(File.read(paths[0]))
+      json['examples']
+    end
   end
 end

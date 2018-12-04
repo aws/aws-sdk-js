@@ -8,10 +8,19 @@ The quickest way to get started with the SDK is to load it using the hosted
 package directly from Amazon Web Services. To do this, simply add the following
 script tag to your HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.28.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.8.min.js"></script>
 
 You can also download this package by clicking the following link:
-[aws-sdk-2.0.28.min.js](https://sdk.amazonaws.com/js/aws-sdk-2.0.28.min.js)
+[aws-sdk-2.3.8.min.js](https://sdk.amazonaws.com/js/aws-sdk-2.3.8.min.js)
+
+## Using Bower
+
+You can also use [Bower](http://bower.io/) to install the SDK by typing the
+following into a terminal window:
+
+```sh
+bower install aws-sdk-js
+```
 
 Once the SDK is loaded in your page, the module will be available from
 the global variable `AWS` (or `window.AWS`).

@@ -14,5 +14,5 @@ Feature: AWS Support
     Then the error code should be "ValidationException"
     And the error message should contain:
     """
-    1 validation error detected: Value 'INVALID-CODE' at 'serviceCode' failed to satisfy constraint
+    1 validation error detected: Value at 'serviceCode' failed to satisfy constraint
     """

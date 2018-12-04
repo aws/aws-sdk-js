@@ -16,6 +16,7 @@ if AWS.util.isNode()
 
       afterEach ->
         AWS.CredentialProviderChain.defaultProviders = defaultProviders
+        process.env = {}
 
       it 'returns an error by default', ->
         chain.resolve (err) ->

@@ -15,7 +15,7 @@ module.exports = function() {
           OriginProtocolPolicy: 'match-viewer'
         }
       }],
-      Quantity: 1,
+      Quantity: 1
     },
     DefaultCacheBehavior: {
       TargetOriginId: 'origin',

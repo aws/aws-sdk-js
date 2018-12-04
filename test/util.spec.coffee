@@ -57,7 +57,7 @@ describe 'AWS.util.queryParamsToString', ->
     expect(spy.calls.length).to.equal(6)
 
   it 'handles values as lists', ->
-    expect(qpts(a: ['1', '2', '3'], b: '4')).to.equal('a=1&a=2&a=3&b=4')
+    expect(qpts(a: ['c', 'b', 'a'], b: '4')).to.equal('a=a&a=b&a=c&b=4')
 
   it 'escapes list values', ->
     expect(qpts(a: ['+', '&', '*'], b: '4')).to.equal('a=%26&a=%2A&a=%2B&b=4')
@@ -107,17 +107,17 @@ describe 'AWS.util.date', ->
         expect(util.getDate().getTime()).to.equal(0)
 
   describe 'iso8601', ->
-    it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
+    it 'should return date formatted as YYYYMMDDTHHmmssZ', ->
       date = new Date(600000); date.setMilliseconds(0)
       helpers.spyOn(util, 'getDate').andCallFake -> date
-      expect(util.iso8601()).to.equal('1970-01-01T00:10:00.000Z')
+      expect(util.iso8601()).to.equal('1970-01-01T00:10:00Z')
 
     it 'should allow date parameter', ->
       date = new Date(660000); date.setMilliseconds(0)
-      expect(util.iso8601(date)).to.equal('1970-01-01T00:11:00.000Z')
+      expect(util.iso8601(date)).to.equal('1970-01-01T00:11:00Z')
 
   describe 'rfc822', ->
-    it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
+    it 'should return date formatted as YYYYMMDDTHHmmssZ', ->
       date = new Date(600000); date.setMilliseconds(0)
       helpers.spyOn(util, 'getDate').andCallFake -> date
       expect(util.rfc822()).to.match(/^Thu, 0?1 Jan 1970 00:10:00 (GMT|UTC)$/)
@@ -200,6 +200,19 @@ describe 'AWS.util.ini', ->
       expect(map.section1.key2).to.equal('value2;value3')
       expect(map.emptysection).to.equal(undefined)
 
+    it 'ignores leading and trailing white space', ->
+      ini = '''
+      [section1] ; comment at end of line
+      \r\tkey1=\t\rvalue1\t\r
+      \v\f\tkey2=value2\f\v
+      \u00a0key3   =  \u00a0value3\u3000
+      [emptysection]
+      '''
+      map = AWS.util.ini.parse(ini)
+      expect(map.section1.key1).to.equal('value1')
+      expect(map.section1.key2).to.equal('value2')
+      expect(map.section1.key3).to.equal('value3')
+
 describe 'AWS.util.buffer', ->
   describe 'concat', ->
     it 'concatenates a list of buffers', ->
@@ -277,6 +290,21 @@ describe 'AWS.util.crypto', ->
         tr.push(new AWS.util.Buffer(input))
         tr.end()
         util.sha256 tr, 'hex', (e, d) ->
+          expect(d).to.equal(result)
+          done()
+
+    if AWS.util.isBrowser()
+      it 'handles Blobs (no phantomjs)', (done) ->
+        result = 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+        util.sha256 new Blob([1,2,3]), 'hex', (e, d) ->
+          expect(e).to.eql(null)
+          expect(d).to.equal(result)
+          done()
+
+      it 'handles Uint8Array objects directly', (done) ->
+        result = '039058c6f2c0cb492c533b0a4d14ef77cc0f78abccced5287d84a1a2011cfb81'
+        util.sha256 new Uint8Array([1,2,3]), 'hex', (e, d) ->
+          expect(e).to.eql(null)
           expect(d).to.equal(result)
           done()
 
@@ -515,56 +543,134 @@ describe 'AWS.util.base64', ->
       expect(base64.decode('Zm9v').toString()).to.equal('foo')
       expect(base64.decode('0ZHFnQ==').toString()).to.equal('ёŝ')
 
-describe 'AWS.util.jamespath', ->
-  query = AWS.util.jamespath.query
-  find = AWS.util.jamespath.find
+describe 'AWS.util.hoistPayloadMember', ->
+  hoist = AWS.util.hoistPayloadMember
 
-  describe 'query', ->
-    it 'can find a toplevel element of a data structure', ->
-      expect(query('foo', foo: 'value')).to.eql(['value'])
+  service = null
+  buildService = (api) ->
+    service = new AWS.Service endpoint: 'http://localhost', apiConfig: api
 
-    it 'can find a nested element of a data structure', ->
-      expect(query('foo.bar.baz', foo: bar: baz: 'value')).to.eql(['value'])
+  it 'hoists structure payload members', ->
+    api =
+      'metadata': 'protocol': 'rest-xml'
+      'operations': 'sample': 'output': 'shape': 'OutputShape'
+      'shapes':
+        'OutputShape':
+          'type': 'structure'
+          'payload': 'Data'
+          'members':
+            'Data': 'shape': 'SingleStructure'
+        'StringType': 'type': 'string'
+        'SingleStructure':
+          'type': 'structure'
+          'members': 'Foo': 'shape': 'StringType'
+    httpResp =
+      'status_code': 200
+      'headers': 'X-Foo': 'baz'
+      'body': '<OperationNameResponse><Foo>abc</Foo></OperationNameResponse>'
+    buildService(api)
+    helpers.mockHttpResponse httpResp.status_code, httpResp.headers, httpResp.body
+    req = service.sample()
+    req.send()
+    hoist(req.response)
+    expect(req.response.data.Foo).to.eql('abc')
+    expect(req.response.data.Data.Foo).to.eql('abc')
 
-    it 'can index an element (positive and negative indexes)', ->
-      data = foo: bar: [{baz: 'wrong'}, {baz: 'right'}, {baz: 'wrong'}]
-      expect(query('foo.bar[1].baz', data)).to.eql(['right'])
-      expect(query('foo.bar[-2].baz', data)).to.eql(['right'])
+  it 'does not hoist streaming payload members', ->
+    api =
+      'metadata': 'protocol': 'rest-xml'
+      'operations': 'sample': 'output': 'shape': 'OutputShape'
+      'shapes':
+        'OutputShape':
+          'type': 'structure'
+          'payload': 'Stream'
+          'members': 'Stream': 'shape': 'BlobStream'
+        'BlobStream':
+          'type': 'blob'
+          'streaming': true
+    httpResp =
+      'status_code': 200
+      'headers': {}
+      'body': 'abc'
+    buildService(api)
+    helpers.mockHttpResponse httpResp.status_code, httpResp.headers, httpResp.body
+    req = service.sample()
+    req.send()
+    hoist(req.response)
+    expect(req.response.data.Stream.toString()).to.eql('abc')
 
-    it 'can index an element with wildcard', ->
-      data = foo: bar: [{baz: 'wrong'}, {baz: 'right'}, {baz: 'wrong'}]
-      expect(query('foo.bar[*].baz', data)).to.eql(['wrong', 'right', 'wrong'])
+describe 'AWS.util.extractRequestId', ->
+  api =
+    'metadata': 'protocol': 'rest-xml'
+    'operations': 'sample': 'output': 'shape': 'OutputShape'
+    'shapes':
+      'OutputShape':
+        'type': 'structure'
+        'payload': 'Data'
+        'members':
+          'Data': 'shape': 'SingleStructure'
+      'StringType': 'type': 'string'
+      'SingleStructure':
+        'type': 'structure'
+        'members': 'Foo': 'shape': 'StringType'
+  service = new AWS.Service endpoint: 'http://localhost', apiConfig: api
 
-    it 'returns empty array if element is not found', ->
-      data = foo: notBar: baz: 'value'
-      expect(query('foo.bar.baz', data)).to.eql([])
+  it 'sets requestId on the response when requestId is valid', ->
+    helpers.mockHttpResponse 200, {'x-amz-request-id': 'RequestId1'}, {}
+    req = service.sample()
+    req.send()
+    AWS.util.extractRequestId(req.response)
+    expect(req.response.requestId).to.equal('RequestId1')
 
-    it 'allows multiple expressions to be ORed', ->
-      data = foo: {key1: 'wrong'}, bar: {key2: 'right'}
-      expect(query('foo.key2 || bar.key2', data)).to.eql(['right'])
+  it 'sets requestId on the response on error status codes', ->
+    helpers.mockHttpResponse 403, {'x-amz-request-id': 'RequestId1'}
+    req = service.sample()
+    req.send()
+    AWS.util.extractRequestId(req.response)
+    expect(req.response.requestId).to.equal('RequestId1')
 
-    it 'returns multiple matches if a wildcard is used', ->
-      data = foo:
-        child1: bar: 'value1'
-        child2: bar: 'value2'
-        child3: bar: 'value3'
-      expect(query('foo.*.bar', data)).to.eql(['value1', 'value2', 'value3'])
+  it 'sets requestId on the error on error status codes', ->
+    helpers.mockHttpResponse 403, {'x-amz-request-id': 'RequestId1'}
+    req = service.sample()
+    req.send()
+    AWS.util.extractRequestId(req.response)
+    expect(req.response.error.requestId).to.equal('RequestId1')
 
-    it 'can support wildcard on both token and index', ->
-      data = foo:
-        child1: ['value1', 'value2']
-        child2: ['value3']
-        child4: 'notarray'
-      expect(query('foo.*[*]', data)).to.eql(['value1', 'value2', 'value3'])
+describe 'AWS.util.addPromisesToRequests', ->
+  afterEach ->
+    delete AWS.Request.prototype.promise
 
-    it 'can support array flattening', ->
-      data = foo: [ {bar: 1}, {bar: 2}, {bar: 3} ]
-      expect(query('foo[].bar', data)).to.eql([1, 2, 3])
+  if typeof Promise != 'undefined'
+    describe 'with native promises', ->
+      it 'can use native promises', ->
+        AWS.util.addPromisesToRequests(AWS.Request)
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
 
+      it 'will use specified dependency over native promises', ->
+        service = new helpers.MockService()
+        count = 0
+        P = -> count++
+        AWS.util.addPromisesToRequests(AWS.Request, P)
+        req = service.makeRequest('mockMethod')
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+        reqSpy = helpers.spyOn(req, 'promise').andCallThrough()
+        req.promise()
+        expect(count).to.equal(reqSpy.calls.length)
 
-  describe 'find', ->
-    it 'returns the first match of query', ->
-      expect(find('foo.*', foo: bar: 1, baz: 2)).to.equal(1)
+  else
+    describe 'without native promises', ->
+      it 'will not add promise method if no dependency is provided', ->
+        AWS.util.addPromisesToRequests(AWS.Request)
+        expect(typeof AWS.Request.prototype.promise).to.equal('undefined')
 
-    it 'returns null if no match is found', ->
-      expect(find('invalid.*', foo: bar: 1, baz: 2)).not.to.exist
+      it 'will add promise method if dependency is provided', ->
+        P = ->
+        AWS.util.addPromisesToRequests(AWS.Request, P)
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+
+      it 'will remove promise method if dependency is not a function', ->
+        P = ->
+        AWS.util.addPromisesToRequests(AWS.Request, P)
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+        AWS.util.addPromisesToRequests(AWS.Request, null)
+        expect(typeof AWS.Request.prototype.promise).to.equal('undefined')

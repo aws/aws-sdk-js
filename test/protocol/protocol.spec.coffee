@@ -1,8 +1,9 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
+util = AWS.util
 
 sortQS = (body) ->
-  AWS.util.queryParamsToString(AWS.util.queryStringParse(body))
+  util.queryParamsToString(AWS.util.queryStringParse(body))
 
 protocols =
   ec2:
@@ -51,17 +52,23 @@ setupTests = (svcName, type) ->
                 outputCase(svc, _case, i)
 
 inputCase = (svc, _case, i, done) ->
-  req = svc[_case.op](_case.params)
+  params = formatData(_case.params, svc.api.operations[_case.op].input)
+  req = svc[_case.op](params)
   req.build()
 
   data = _case.serialized
-  expect(req.httpRequest.path).to.equal(data.uri)
+  reqUrl = util.urlParse(req.httpRequest.path)
+  dataUrl = util.urlParse(data.uri)
+  expect(reqUrl.pathname).to.equal(dataUrl.pathname)
+  expect(util.queryStringParse(reqUrl.query)).to.eql(util.queryStringParse(dataUrl.query))
+
 
   if svc.api.protocol == 'query' or svc.api.protocol == 'ec2'
     expect(sortQS(req.httpRequest.body)).to.equal(sortQS(data.body))
-  else if svc.api.protocol.match(/json/)
-    expect(req.httpRequest.body.replace(/\s+/g, '')).to.equal(
-      data.body.replace(/\s+/g, ''))
+  else if svc.api.protocol.match(/(json|xml)/)
+    if req.httpRequest.body == '{}' then req.httpRequest.body = ''
+    expect(req.httpRequest.body.replace(/\s+/g, '')).to
+      .equal(data.body.replace(/\s+/g, ''))
   else
     expect(req.httpRequest.body).to.equal(data.body)
 
@@ -69,18 +76,59 @@ inputCase = (svc, _case, i, done) ->
     for k, v of data.headers
       expect(req.httpRequest.headers[k]).to.eql(v)
 
+
 outputCase = (svc, _case, i, done) ->
   resp = _case.response
   helpers.mockHttpResponse resp.status_code, resp.headers, resp.body
 
   req = svc[_case.op](_case.params)
   req.send()
-  for k, v of _case.result
-    if k.match('Blob')
-      expect(req.response.data[k].toString()).to.equal(v.toString())
-    else
-      expect(req.response.data[k]).to.eql(v)
+  expectedData = formatData(_case.result, svc.api.operations[_case.op].output)
+  resultData = formatData(req.response.data, svc.api.operations[_case.op].output)
+  for k, v of expectedData
+    expect(resultData[k]).to.eql(v)
 
+formatData = (data, shape) ->
+  if shape.type == 'structure'
+    params = {}
+    for key,value of data
+      member = shape.members[key]
+      if member
+        result = formatData(value, member)
+        if result != undefined
+          params[key] = result
+    return params
+  else if shape.type == 'list'
+    params = []
+    for item in data
+      result = formatData(item, shape.member)
+      if result != undefined
+        params.push(result)
+    return params
+  else if shape.type == 'map'
+    params = {}
+    for key of data
+      result = formatData(data[key], shape.value)
+      if result != undefined
+        params[key] = result
+    return params
+  else if shape.type == 'binary'
+    return data.toString()
+  else if shape.type == 'timestamp'
+    return shape.toType(data)
+  else if shape.type == 'integer'
+    return shape.toType(data)
+  else if shape.type == 'float'
+    return shape.toType(data)
+  else if shape.type == 'boolean'
+    return shape.toType(data)
+  else
+    return data
+
+   
 describe 'AWS protocol support', ->
   tests 'ec2'
   tests 'query'
+  tests 'json'
+  tests 'rest-json'
+  tests 'rest-xml'

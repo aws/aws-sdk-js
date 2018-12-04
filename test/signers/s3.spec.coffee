@@ -276,6 +276,17 @@ describe 'AWS.Signers.S3', ->
       /?versionId=a%2Bb
       """)
 
+    it 'includes the replication subresource without a value', ->
+      path = '/?replication'
+      expect(stringToSign()).to.equal("""
+      POST
+
+
+
+      x-amz-date:DATE-STRING
+      /?replication
+      """)
+
     it 'includes the non-encoded query string get header overrides', ->
       path = '/?response-content-type=a%2Bb' # a+b
       expect(stringToSign()).to.equal("""

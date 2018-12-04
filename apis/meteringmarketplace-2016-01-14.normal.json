@@ -1,0 +1,151 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2016-01-14",
+    "endpointPrefix":"metering.marketplace",
+    "jsonVersion":"1.1",
+    "protocol":"json",
+    "serviceFullName":"AWSMarketplace Metering",
+    "signatureVersion":"v4",
+    "signingName":"aws-marketplace",
+    "targetPrefix":"AWSMPMeteringService"
+  },
+  "operations":{
+    "MeterUsage":{
+      "name":"MeterUsage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"MeterUsageRequest"},
+      "output":{"shape":"MeterUsageResult"},
+      "errors":[
+        {"shape":"InternalServiceErrorException"},
+        {"shape":"InvalidProductCodeException"},
+        {"shape":"InvalidUsageDimensionException"},
+        {"shape":"InvalidEndpointRegionException"},
+        {"shape":"TimestampOutOfBoundsException"},
+        {"shape":"DuplicateRequestException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>API to emit metering records. For identical requests, the API is idempotent. It simply returns the metering record ID. </p>"
+    }
+  },
+  "shapes":{
+    "Boolean":{"type":"boolean"},
+    "DuplicateRequestException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>A metering record has already been emitted by the same EC2 instance for the given {usageDimension, timestamp} with a different usageQuantity. </p>",
+      "exception":true
+    },
+    "InternalServiceErrorException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>An internal error has occurred. Retry your request. If the problem persists, post a message with details on the AWS forums.</p>",
+      "exception":true,
+      "fault":true
+    },
+    "InvalidEndpointRegionException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The endpoint being called is in a region different from your EC2 instance. The region of the Metering service endpoint and the region of the EC2 instance must match.</p>",
+      "exception":true
+    },
+    "InvalidProductCodeException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The product code passed does not match the product code used for publishing the product.</p>",
+      "exception":true
+    },
+    "InvalidUsageDimensionException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The usage dimension does not match one of the UsageDimensions associated with products.</p>",
+      "exception":true
+    },
+    "MeterUsageRequest":{
+      "type":"structure",
+      "required":[
+        "ProductCode",
+        "Timestamp",
+        "UsageDimension",
+        "UsageQuantity",
+        "DryRun"
+      ],
+      "members":{
+        "ProductCode":{
+          "shape":"ProductCode",
+          "documentation":"<p>Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.</p>"
+        },
+        "Timestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored. </p>"
+        },
+        "UsageDimension":{
+          "shape":"UsageDimension",
+          "documentation":"<p>It will be one of the 'fcp dimension name' provided during the publishing of the product.</p>"
+        },
+        "UsageQuantity":{
+          "shape":"UsageQuantity",
+          "documentation":"<p>Consumption value for the hour.</p>"
+        },
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException. </p>"
+        }
+      }
+    },
+    "MeterUsageResult":{
+      "type":"structure",
+      "members":{
+        "MeteringRecordId":{"shape":"String"}
+      }
+    },
+    "ProductCode":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "String":{"type":"string"},
+    "ThrottlingException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The calls to the MeterUsage API are throttled.</p>",
+      "exception":true
+    },
+    "Timestamp":{"type":"timestamp"},
+    "TimestampOutOfBoundsException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The timestamp value passed in the meterUsage() is out of allowed range.</p>",
+      "exception":true
+    },
+    "UsageDimension":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "UsageQuantity":{
+      "type":"integer",
+      "max":10000,
+      "min":0
+    },
+    "errorMessage":{"type":"string"}
+  },
+  "documentation":"<fullname>AWS Marketplace Metering Service</fullname> <p>This reference provides descriptions of the low-level AWS Marketplace Metering Service API. </p> <p>AWS Marketplace sellers can use this API to submit usage data for custom usage dimensions.</p> <p><b>Submitting Metering Records</b></p> <ul> <li> <p><i>MeterUsage</i>- Submits the metering record for a Marketplace product.</p> </li> </ul>"
+}

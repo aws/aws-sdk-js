@@ -55,7 +55,30 @@ Please be aware of the following notes prior to opening a pull request:
    yet available in the SDK, please talk to us beforehand to avoid any
    duplication of effort.
 
+### Testing
+
+To run the tests locally, install `phantomjs`. You can do so using [Homebrew][homebrew]:
+
+```
+brew install phantomjs
+```
+
+Then, to run all tests:
+
+```
+npm test
+```
+
+To run a particular test subset e.g. just the unit tests:
+
+```
+npm run-script unit
+```
+
+See the implementation of the `test` script in `package.json` for more options.
+
 [issues]: https://github.com/aws/aws-sdk-js/issues
 [pr]: https://github.com/aws/aws-sdk-js/pulls
 [license]: http://aws.amazon.com/apache2.0/
 [cla]: http://en.wikipedia.org/wiki/Contributor_License_Agreement
+[homebrew]: http://brew.sh/

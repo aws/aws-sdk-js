@@ -1,11 +1,6 @@
 module.exports = function() {
-  this.Before("@cloudsearch-2011-02-01", function (callback) {
-    this.service = new this.AWS.CloudSearch({apiVersion: '2011-02-01'});
-    callback();
-  });
-
-  this.Before("@cloudsearch-2013-01-01", function (callback) {
-    this.service = new this.AWS.CloudSearch({apiVersion: '2013-01-01'});
+  this.Before("@cloudsearch", function (callback) {
+    this.service = new this.AWS.CloudSearch();
     callback();
   });
 
@@ -14,22 +9,12 @@ module.exports = function() {
     this.request(null, 'createDomain', {DomainName: this.domainName}, callback, false);
   });
 
-  this.Given(/^I define a CloudSearch index field with source attributes$/, function(callback) {
+  this.Given(/^I define a CloudSearch index field$/, function(callback) {
     var params = {
       DomainName: this.domainName,
       IndexField: {
         IndexFieldName: 'fieldname',
-        IndexFieldType: 'text',
-        SourceAttributes: [{
-          SourceDataFunction: 'Map',
-          SourceDataMap: {
-            SourceName: 'sourcedata',
-            Cases: {
-              case1: 'value1',
-              case2: 'value2'
-            }
-          }
-        }]
+        IndexFieldType: 'text'
       }
     };
     this.request(null, 'defineIndexField', params, callback);

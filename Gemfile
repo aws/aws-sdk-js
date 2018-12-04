@@ -4,8 +4,7 @@ gem 'rake'
 
 group :documentation do
   gem 'rdiscount'
-  gem 'nokogiri'
-  gem 'yard', github: 'lsegal/yard', branch: 'frameless'
+  gem 'yard', github: 'lsegal/yard'
   gem 'yard-sitemap', '~> 1.0'
   gem 'yard-js', github: 'lsegal/yard-js'
   gem 'parsejs', github: 'lsegal/parsejs'

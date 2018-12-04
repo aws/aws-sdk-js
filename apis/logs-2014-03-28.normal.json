@@ -1,15 +1,48 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2014-03-28",
     "endpointPrefix":"logs",
     "jsonVersion":"1.1",
+    "protocol":"json",
     "serviceFullName":"Amazon CloudWatch Logs",
     "signatureVersion":"v4",
-    "targetPrefix":"Logs_20140328",
-    "protocol":"json"
+    "targetPrefix":"Logs_20140328"
   },
-  "documentation":"<fullname>Amazon CloudWatch Logs API Reference</fullname> <p>This is the <i>Amazon CloudWatch Logs API Reference</i>. Amazon CloudWatch Logs enables you to monitor, store, and access your system, application, and custom log files. This guide provides detailed information about Amazon CloudWatch Logs actions, data types, parameters, and errors. For detailed information about Amazon CloudWatch Logs features and their associated API calls, go to the <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide\">Amazon CloudWatch Developer Guide</a>. </p> <p>Use the following links to get started using the <i>Amazon CloudWatch Logs API Reference</i>:</p> <ul> <li> <a href=\"http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Amazon CloudWatch Logs actions.</li> <li> <a href=\"http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_Types.html\">Data Types</a>: An alphabetical list of all Amazon CloudWatch Logs data types.</li> <li> <a href=\"http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/CommonParameters.html\">Common Parameters</a>: Parameters that all Query actions can use.</li> <li> <a href=\"http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/CommonErrors.html\">Common Errors</a>: Client and server errors that all actions can return.</li> <li> <a href=\"http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html\">Regions and Endpoints</a>: Itemized regions and endpoints for all AWS products.</li> </ul> <p>In addition to using the Amazon CloudWatch Logs API, you can also use the following SDKs and third-party libraries to access Amazon CloudWatch Logs programmatically.</p> <ul> <li><a href=\"http://aws.amazon.com/documentation/sdkforjava/\">AWS SDK for Java Documentation</a></li> <li><a href=\"http://aws.amazon.com/documentation/sdkfornet/\">AWS SDK for .NET Documentation</a></li> <li><a href=\"http://aws.amazon.com/documentation/sdkforphp/\">AWS SDK for PHP Documentation</a></li> <li><a href=\"http://aws.amazon.com/documentation/sdkforruby/\">AWS SDK for Ruby Documentation</a></li> </ul> <p>Developers in the AWS developer community also provide their own libraries, which you can find at the following AWS developer centers:</p> <ul> <li><a href=\"http://aws.amazon.com/java/\">AWS Java Developer Center</a></li> <li><a href=\"http://aws.amazon.com/php/\">AWS PHP Developer Center</a></li> <li><a href=\"http://aws.amazon.com/python/\">AWS Python Developer Center</a></li> <li><a href=\"http://aws.amazon.com/ruby/\">AWS Ruby Developer Center</a></li> <li><a href=\"http://aws.amazon.com/net/\">AWS Windows and .NET Developer Center</a></li> </ul>",
   "operations":{
+    "CancelExportTask":{
+      "name":"CancelExportTask",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CancelExportTaskRequest"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidOperationException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p> Cancels an export task if it is in <code>PENDING</code> or <code>RUNNING</code> state. </p>"
+    },
+    "CreateExportTask":{
+      "name":"CreateExportTask",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateExportTaskRequest"},
+      "output":{"shape":"CreateExportTaskResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"}
+      ],
+      "documentation":"<p> Creates an <code>ExportTask</code> which allows you to efficiently export data from a Log Group to your Amazon S3 bucket. </p> <p> This is an asynchronous call. If all the required information is provided, this API will initiate an export task and respond with the task Id. Once started, <code>DescribeExportTasks</code> can be used to get the status of an export task. You can only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time, per account. </p> <p> You can export logs from multiple log groups or multiple time ranges to the same Amazon S3 bucket. To separate out log data for each export task, you can specify a prefix that will be used as the Amazon S3 key prefix for all exported objects. </p>"
+    },
     "CreateLogGroup":{
       "name":"CreateLogGroup",
       "http":{
@@ -18,32 +51,11 @@
       },
       "input":{"shape":"CreateLogGroupRequest"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceAlreadyExistsException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource already exists.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>Returned if you have reached the maximum number of resources that can be created.</p>"
-        },
-        {
-          "shape":"OperationAbortedException",
-          "exception":true,
-          "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Creates a new log group with the specified name. The name of the log group must be unique within a region for an AWS account. You can create up to 500 log groups per account. </p> <p> You must use the following guidelines when naming a log group: <ul> <li>Log group names can be between 1 and 512 characters long.</li> <li>Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).</li> </ul> </p>"
     },
@@ -55,29 +67,27 @@
       },
       "input":{"shape":"CreateLogStreamRequest"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceAlreadyExistsException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource already exists.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Creates a new log stream in the specified log group. The name of the log stream must be unique within the log group. There is no limit on the number of log streams that can exist in a log group. </p> <p> You must use the following guidelines when naming a log stream: <ul> <li>Log stream names can be between 1 and 512 characters long.</li> <li>The ':' colon character is not allowed.</li> </ul> </p>"
+    },
+    "DeleteDestination":{
+      "name":"DeleteDestination",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteDestinationRequest"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p> Deletes the destination with the specified name and eventually disables all the subscription filters that publish to it. This will not delete the physical resource encapsulated by the destination. </p>"
     },
     "DeleteLogGroup":{
       "name":"DeleteLogGroup",
@@ -87,27 +97,10 @@
       },
       "input":{"shape":"DeleteLogGroupRequest"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"OperationAbortedException",
-          "exception":true,
-          "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Deletes the log group with the specified name and permanently deletes all the archived log events associated with it. </p>"
     },
@@ -119,27 +112,10 @@
       },
       "input":{"shape":"DeleteLogStreamRequest"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"OperationAbortedException",
-          "exception":true,
-          "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Deletes a log stream and permanently deletes all the archived log events associated with it. </p>"
     },
@@ -151,27 +127,10 @@
       },
       "input":{"shape":"DeleteMetricFilterRequest"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"OperationAbortedException",
-          "exception":true,
-          "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Deletes a metric filter associated with the specified log group. </p>"
     },
@@ -183,29 +142,55 @@
       },
       "input":{"shape":"DeleteRetentionPolicyRequest"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"OperationAbortedException",
-          "exception":true,
-          "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Deletes the retention policy of the specified log group. Log events would not expire if they belong to log groups without a retention policy. </p>"
+    },
+    "DeleteSubscriptionFilter":{
+      "name":"DeleteSubscriptionFilter",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteSubscriptionFilterRequest"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p> Deletes a subscription filter associated with the specified log group. </p>"
+    },
+    "DescribeDestinations":{
+      "name":"DescribeDestinations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeDestinationsRequest"},
+      "output":{"shape":"DescribeDestinationsResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p> Returns all the destinations that are associated with the AWS account making the request. The list returned in the response is ASCII-sorted by destination name. </p> <p> By default, this operation returns up to 50 destinations. If there are more destinations to list, the response would contain a <code class=\"code\">nextToken</code> value in the response body. You can also limit the number of destinations returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. </p>"
+    },
+    "DescribeExportTasks":{
+      "name":"DescribeExportTasks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeExportTasksRequest"},
+      "output":{"shape":"DescribeExportTasksResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p> Returns all the export tasks that are associated with the AWS account making the request. The export tasks can be filtered based on <code>TaskId</code> or <code>TaskStatus</code>. </p> <p> By default, this operation returns up to 50 export tasks that satisfy the specified filters. If there are more export tasks to list, the response would contain a <code class=\"code\">nextToken</code> value in the response body. You can also limit the number of export tasks returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. </p>"
     },
     "DescribeLogGroups":{
       "name":"DescribeLogGroups",
@@ -216,17 +201,8 @@
       "input":{"shape":"DescribeLogGroupsRequest"},
       "output":{"shape":"DescribeLogGroupsResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Returns all the log groups that are associated with the AWS account making the request. The list returned in the response is ASCII-sorted by log group name. </p> <p> By default, this operation returns up to 50 log groups. If there are more log groups to list, the response would contain a <code class=\"code\">nextToken</code> value in the response body. You can also limit the number of log groups returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. </p>"
     },
@@ -239,24 +215,11 @@
       "input":{"shape":"DescribeLogStreamsRequest"},
       "output":{"shape":"DescribeLogStreamsResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p> Returns all the log streams that are associated with the specified log group. The list returned in the response is ASCII-sorted by log stream name. </p> <p> By default, this operation returns up to 50 log streams. If there are more log streams to list, the response would contain a <code class=\"code\">nextToken</code> value in the response body. You can also limit the number of log streams returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. </p>"
+      "documentation":"<p> Returns all the log streams that are associated with the specified log group. The list returned in the response is ASCII-sorted by log stream name. </p> <p> By default, this operation returns up to 50 log streams. If there are more log streams to list, the response would contain a <code class=\"code\">nextToken</code> value in the response body. You can also limit the number of log streams returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. This operation has a limit of five transactions per second, after which transactions are throttled. </p>"
     },
     "DescribeMetricFilters":{
       "name":"DescribeMetricFilters",
@@ -267,24 +230,41 @@
       "input":{"shape":"DescribeMetricFiltersRequest"},
       "output":{"shape":"DescribeMetricFiltersResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Returns all the metrics filters associated with the specified log group. The list returned in the response is ASCII-sorted by filter name. </p> <p> By default, this operation returns up to 50 metric filters. If there are more metric filters to list, the response would contain a <code class=\"code\">nextToken</code> value in the response body. You can also limit the number of metric filters returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. </p>"
+    },
+    "DescribeSubscriptionFilters":{
+      "name":"DescribeSubscriptionFilters",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeSubscriptionFiltersRequest"},
+      "output":{"shape":"DescribeSubscriptionFiltersResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p> Returns all the subscription filters associated with the specified log group. The list returned in the response is ASCII-sorted by filter name. </p> <p> By default, this operation returns up to 50 subscription filters. If there are more subscription filters to list, the response would contain a <code class=\"code\">nextToken</code> value in the response body. You can also limit the number of subscription filters returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. </p>"
+    },
+    "FilterLogEvents":{
+      "name":"FilterLogEvents",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"FilterLogEventsRequest"},
+      "output":{"shape":"FilterLogEventsResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p> Retrieves log events, optionally filtered by a filter pattern from the specified log group. You can provide an optional time range to filter the results on the event <code class=\"code\">timestamp</code>. You can limit the streams searched to an explicit list of <code class=\"code\">logStreamNames</code>. </p> <p> By default, this operation returns as much matching log events as can fit in a response size of 1MB, up to 10,000 log events, or all the events found within a time-bounded scan window. If the response includes a <code class=\"code\">nextToken</code>, then there is more data to search, and the search can be resumed with a new request providing the nextToken. The response will contain a list of <code class=\"code\">searchedLogStreams</code> that contains information about which streams were searched in the request and whether they have been searched completely or require further pagination. The <code class=\"code\">limit</code> parameter in the request. can be used to specify the maximum number of events to return in a page. </p>"
     },
     "GetLogEvents":{
       "name":"GetLogEvents",
@@ -295,24 +275,40 @@
       "input":{"shape":"GetLogEventsRequest"},
       "output":{"shape":"GetLogEventsResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Retrieves log events from the specified log stream. You can provide an optional time range to filter the results on the event <code class=\"code\">timestamp</code>. </p> <p> By default, this operation returns as much log events as can fit in a response size of 1MB, up to 10,000 log events. The response will always include a <code class=\"code\">nextForwardToken</code> and a <code class=\"code\">nextBackwardToken</code> in the response body. You can use any of these tokens in subsequent <code class=\"code\">GetLogEvents</code> requests to paginate through events in either forward or backward direction. You can also limit the number of log events returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. </p>"
+    },
+    "PutDestination":{
+      "name":"PutDestination",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutDestinationRequest"},
+      "output":{"shape":"PutDestinationResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p> Creates or updates a <code>Destination</code>. A destination encapsulates a physical resource (such as a Kinesis stream) and allows you to subscribe to a real-time stream of log events of a different account, ingested through <code class=\"code\">PutLogEvents</code> requests. Currently, the only supported physical resource is a Amazon Kinesis stream belonging to the same account as the destination. </p> <p> A destination controls what is written to its Amazon Kinesis stream through an access policy. By default, PutDestination does not set any access policy with the destination, which means a cross-account user will not be able to call <code>PutSubscriptionFilter</code> against this destination. To enable that, the destination owner must call <code>PutDestinationPolicy</code> after PutDestination. </p>"
+    },
+    "PutDestinationPolicy":{
+      "name":"PutDestinationPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutDestinationPolicyRequest"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p> Creates or updates an access policy associated with an existing <code>Destination</code>. An access policy is an <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html\">IAM policy document</a> that is used to authorize claims to register a subscription filter against a given destination. </p>"
     },
     "PutLogEvents":{
       "name":"PutLogEvents",
@@ -323,37 +319,14 @@
       "input":{"shape":"PutLogEventsRequest"},
       "output":{"shape":"PutLogEventsResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"InvalidSequenceTokenException",
-          "exception":true
-        },
-        {
-          "shape":"DataAlreadyAcceptedException",
-          "exception":true
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"OperationAbortedException",
-          "exception":true,
-          "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidSequenceTokenException"},
+        {"shape":"DataAlreadyAcceptedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p> Uploads a batch of log events to the specified log stream. </p> <p> Every PutLogEvents request must include the <code class=\"code\">sequenceToken</code> obtained from the response of the previous request. An upload in a newly created log stream does not require a <code class=\"code\">sequenceToken</code>. </p> <p> The batch of events must satisfy the following constraints: <ul> <li>The maximum batch size is 32,768 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.</li> <li>None of the log events in the batch can be more than 2 hours in the future.</li> <li>None of the log events in the batch can be older than 14 days or the retention period of the log group.</li> <li>The log events in the batch must be in chronological ordered by their <code class=\"code\">timestamp</code>.</li> <li>The maximum number of log events in a batch is 1,000.</li> </ul> </p>"
+      "documentation":"<p> Uploads a batch of log events to the specified log stream. </p> <p> Every PutLogEvents request must include the <code class=\"code\">sequenceToken</code> obtained from the response of the previous request. An upload in a newly created log stream does not require a <code class=\"code\">sequenceToken</code>. </p> <p> The batch of events must satisfy the following constraints: <ul> <li>The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.</li> <li>None of the log events in the batch can be more than 2 hours in the future.</li> <li>None of the log events in the batch can be older than 14 days or the retention period of the log group.</li> <li>The log events in the batch must be in chronological ordered by their <code class=\"code\">timestamp</code>.</li> <li>The maximum number of log events in a batch is 10,000.</li> <li>A batch of log events in a single PutLogEvents request cannot span more than 24 hours. Otherwise, the PutLogEvents operation will fail.</li> </ul> </p>"
     },
     "PutMetricFilter":{
       "name":"PutMetricFilter",
@@ -363,34 +336,13 @@
       },
       "input":{"shape":"PutMetricFilterRequest"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"OperationAbortedException",
-          "exception":true,
-          "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>Returned if you have reached the maximum number of resources that can be created.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p> Creates or updates a metric filter and associates it with the specified log group. Metric filters allow you to configure rules to extract metric data from log events ingested through <code class=\"code\">PutLogEvents</code> requests. </p>"
+      "documentation":"<p> Creates or updates a metric filter and associates it with the specified log group. Metric filters allow you to configure rules to extract metric data from log events ingested through <code class=\"code\">PutLogEvents</code> requests. </p> <p> The maximum number of metric filters that can be associated with a log group is 100. </p>"
     },
     "PutRetentionPolicy":{
       "name":"PutRetentionPolicy",
@@ -400,29 +352,28 @@
       },
       "input":{"shape":"PutRetentionPolicyRequest"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "exception":true,
-          "documentation":"<p>Returned if the specified resource does not exist.</p>"
-        },
-        {
-          "shape":"OperationAbortedException",
-          "exception":true,
-          "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Sets the retention of the specified log group. A retention policy allows you to configure the number of days you want to retain log events in the specified log group. </p>"
+    },
+    "PutSubscriptionFilter":{
+      "name":"PutSubscriptionFilter",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutSubscriptionFilterRequest"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p> Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through <code class=\"code\">PutLogEvents</code> requests and have them delivered to a specific destination. Currently, the supported destinations are: <ul> <li> An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery. </li> <li> A logical destination (used via an ARN of <code>Destination</code>) belonging to a different account, for cross-account delivery. </li> <li> An Amazon Kinesis Firehose stream belonging to the same account as the subscription filter, for same-account delivery. </li> <li> An AWS Lambda function belonging to the same account as the subscription filter, for same-account delivery. </li> </ul> </p> <p> Currently there can only be one subscription filter associated with a log group. </p>"
     },
     "TestMetricFilter":{
       "name":"TestMetricFilter",
@@ -433,28 +384,84 @@
       "input":{"shape":"TestMetricFilterRequest"},
       "output":{"shape":"TestMetricFilterResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>Returned if the service cannot complete the request.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p> Tests the filter pattern of a metric filter against a sample of log event messages. You can use this operation to validate the correctness of a metric filter pattern. </p>"
     }
   },
   "shapes":{
+    "AccessPolicy":{
+      "type":"string",
+      "min":1
+    },
     "Arn":{"type":"string"},
+    "CancelExportTaskRequest":{
+      "type":"structure",
+      "required":["taskId"],
+      "members":{
+        "taskId":{
+          "shape":"ExportTaskId",
+          "documentation":"<p>Id of the export task to cancel.</p>"
+        }
+      }
+    },
+    "CreateExportTaskRequest":{
+      "type":"structure",
+      "required":[
+        "logGroupName",
+        "from",
+        "to",
+        "destination"
+      ],
+      "members":{
+        "taskName":{
+          "shape":"ExportTaskName",
+          "documentation":"<p>The name of the export task.</p>"
+        },
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group to export.</p>"
+        },
+        "logStreamNamePrefix":{
+          "shape":"LogStreamName",
+          "documentation":"<p>Will only export log streams that match the provided logStreamNamePrefix. If you don't specify a value, no prefix filter is applied.</p>"
+        },
+        "from":{
+          "shape":"Timestamp",
+          "documentation":"<p>A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. It indicates the start time of the range for the request. Events with a timestamp prior to this time will not be exported.</p>"
+        },
+        "to":{
+          "shape":"Timestamp",
+          "documentation":"<p>A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. It indicates the end time of the range for the request. Events with a timestamp later than this time will not be exported.</p>"
+        },
+        "destination":{
+          "shape":"ExportDestinationBucket",
+          "documentation":"<p>Name of Amazon S3 bucket to which the log data will be exported.</p> <p><b>Note:</b> Only buckets in the same AWS region are supported.</p>"
+        },
+        "destinationPrefix":{
+          "shape":"ExportDestinationPrefix",
+          "documentation":"<p>Prefix that will be used as the start of Amazon S3 key for every object exported. If not specified, this defaults to 'exportedlogs'.</p>"
+        }
+      }
+    },
+    "CreateExportTaskResponse":{
+      "type":"structure",
+      "members":{
+        "taskId":{
+          "shape":"ExportTaskId",
+          "documentation":"<p>Id of the export task that got created.</p>"
+        }
+      }
+    },
     "CreateLogGroupRequest":{
       "type":"structure",
       "required":["logGroupName"],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"}
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group to create.</p>"
+        }
       }
     },
     "CreateLogStreamRequest":{
@@ -464,8 +471,14 @@
         "logStreamName"
       ],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"},
-        "logStreamName":{"shape":"LogStreamName"}
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group under which the log stream is to be created.</p>"
+        },
+        "logStreamName":{
+          "shape":"LogStreamName",
+          "documentation":"<p>The name of the log stream to create.</p>"
+        }
       }
     },
     "DataAlreadyAcceptedException":{
@@ -477,13 +490,26 @@
     },
     "Days":{
       "type":"integer",
-      "documentation":"Specifies the number of days you want to retain log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, 3653."
+      "documentation":"<p>Specifies the number of days you want to retain log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, 3653.</p>"
+    },
+    "DeleteDestinationRequest":{
+      "type":"structure",
+      "required":["destinationName"],
+      "members":{
+        "destinationName":{
+          "shape":"DestinationName",
+          "documentation":"<p>The name of destination to delete.</p>"
+        }
+      }
     },
     "DeleteLogGroupRequest":{
       "type":"structure",
       "required":["logGroupName"],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"}
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group to delete.</p>"
+        }
       }
     },
     "DeleteLogStreamRequest":{
@@ -493,8 +519,14 @@
         "logStreamName"
       ],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"},
-        "logStreamName":{"shape":"LogStreamName"}
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group under which the log stream to delete belongs.</p>"
+        },
+        "logStreamName":{
+          "shape":"LogStreamName",
+          "documentation":"<p>The name of the log stream to delete.</p>"
+        }
       }
     },
     "DeleteMetricFilterRequest":{
@@ -504,27 +536,103 @@
         "filterName"
       ],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"},
-        "filterName":{"shape":"FilterName"}
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group that is associated with the metric filter to delete.</p>"
+        },
+        "filterName":{
+          "shape":"FilterName",
+          "documentation":"<p>The name of the metric filter to delete.</p>"
+        }
       }
     },
     "DeleteRetentionPolicyRequest":{
       "type":"structure",
       "required":["logGroupName"],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"}
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group that is associated with the retention policy to delete.</p>"
+        }
+      }
+    },
+    "DeleteSubscriptionFilterRequest":{
+      "type":"structure",
+      "required":[
+        "logGroupName",
+        "filterName"
+      ],
+      "members":{
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group that is associated with the subscription filter to delete.</p>"
+        },
+        "filterName":{
+          "shape":"FilterName",
+          "documentation":"<p>The name of the subscription filter to delete.</p>"
+        }
+      }
+    },
+    "Descending":{"type":"boolean"},
+    "DescribeDestinationsRequest":{
+      "type":"structure",
+      "members":{
+        "DestinationNamePrefix":{
+          "shape":"DestinationName",
+          "documentation":"<p>Will only return destinations that match the provided destinationNamePrefix. If you don't specify a value, no prefix is applied.</p>"
+        },
+        "nextToken":{"shape":"NextToken"},
+        "limit":{"shape":"DescribeLimit"}
+      }
+    },
+    "DescribeDestinationsResponse":{
+      "type":"structure",
+      "members":{
+        "destinations":{"shape":"Destinations"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "DescribeExportTasksRequest":{
+      "type":"structure",
+      "members":{
+        "taskId":{
+          "shape":"ExportTaskId",
+          "documentation":"<p>Export task that matches the specified task Id will be returned. This can result in zero or one export task.</p>"
+        },
+        "statusCode":{
+          "shape":"ExportTaskStatusCode",
+          "documentation":"<p>All export tasks that matches the specified status code will be returned. This can return zero or more export tasks.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p> A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous <code class=\"code\">DescribeExportTasks</code> request. </p>"
+        },
+        "limit":{
+          "shape":"DescribeLimit",
+          "documentation":"<p> The maximum number of items returned in the response. If you don't specify a value, the request would return up to 50 items. </p>"
+        }
+      }
+    },
+    "DescribeExportTasksResponse":{
+      "type":"structure",
+      "members":{
+        "exportTasks":{"shape":"ExportTasks"},
+        "nextToken":{"shape":"NextToken"}
       }
     },
     "DescribeLimit":{
       "type":"integer",
-      "min":1,
+      "documentation":"<p>The maximum number of results to return.</p>",
       "max":50,
-      "documentation":"The maximum number of results to return."
+      "min":1
     },
     "DescribeLogGroupsRequest":{
       "type":"structure",
       "members":{
-        "logGroupNamePrefix":{"shape":"LogGroupName"},
+        "logGroupNamePrefix":{
+          "shape":"LogGroupName",
+          "documentation":"<p>Will only return log groups that match the provided logGroupNamePrefix. If you don't specify a value, no prefix filter is applied.</p>"
+        },
         "nextToken":{
           "shape":"NextToken",
           "documentation":"<p> A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous <code class=\"code\">DescribeLogGroups</code> request. </p>"
@@ -546,8 +654,22 @@
       "type":"structure",
       "required":["logGroupName"],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"},
-        "logStreamNamePrefix":{"shape":"LogStreamName"},
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The log group name for which log streams are to be listed.</p>"
+        },
+        "logStreamNamePrefix":{
+          "shape":"LogStreamName",
+          "documentation":"<p> Will only return log streams that match the provided logStreamNamePrefix. If you don't specify a value, no prefix filter is applied. </p>"
+        },
+        "orderBy":{
+          "shape":"OrderBy",
+          "documentation":"<p> Specifies what to order the returned log streams by. Valid arguments are 'LogStreamName' or 'LastEventTime'. If you don't specify a value, results are ordered by LogStreamName. If 'LastEventTime' is chosen, the request cannot also contain a logStreamNamePrefix. </p>"
+        },
+        "descending":{
+          "shape":"Descending",
+          "documentation":"<p> If set to true, results are returned in descending order. If you don't specify a value or set it to false, results are returned in ascending order. </p>"
+        },
         "nextToken":{
           "shape":"NextToken",
           "documentation":"<p> A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous <code class=\"code\">DescribeLogStreams</code> request. </p>"
@@ -569,8 +691,14 @@
       "type":"structure",
       "required":["logGroupName"],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"},
-        "filterNamePrefix":{"shape":"FilterName"},
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The log group name for which metric filters are to be listed.</p>"
+        },
+        "filterNamePrefix":{
+          "shape":"FilterName",
+          "documentation":"<p>Will only return metric filters that match the provided filterNamePrefix. If you don't specify a value, no prefix filter is applied.</p>"
+        },
         "nextToken":{
           "shape":"NextToken",
           "documentation":"<p> A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous <code class=\"code\">DescribeMetricFilters</code> request. </p>"
@@ -588,17 +716,187 @@
         "nextToken":{"shape":"NextToken"}
       }
     },
+    "DescribeSubscriptionFiltersRequest":{
+      "type":"structure",
+      "required":["logGroupName"],
+      "members":{
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The log group name for which subscription filters are to be listed.</p>"
+        },
+        "filterNamePrefix":{
+          "shape":"FilterName",
+          "documentation":"<p>Will only return subscription filters that match the provided filterNamePrefix. If you don't specify a value, no prefix filter is applied.</p>"
+        },
+        "nextToken":{"shape":"NextToken"},
+        "limit":{"shape":"DescribeLimit"}
+      }
+    },
+    "DescribeSubscriptionFiltersResponse":{
+      "type":"structure",
+      "members":{
+        "subscriptionFilters":{"shape":"SubscriptionFilters"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "Destination":{
+      "type":"structure",
+      "members":{
+        "destinationName":{
+          "shape":"DestinationName",
+          "documentation":"<p>Name of the destination.</p>"
+        },
+        "targetArn":{
+          "shape":"TargetArn",
+          "documentation":"<p>ARN of the physical target where the log events will be delivered (eg. ARN of a Kinesis stream).</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>A role for impersonation for delivering log events to the target.</p>"
+        },
+        "accessPolicy":{
+          "shape":"AccessPolicy",
+          "documentation":"<p>An IAM policy document that governs which AWS accounts can create subscription filters against this destination.</p>"
+        },
+        "arn":{
+          "shape":"Arn",
+          "documentation":"<p>ARN of this destination.</p>"
+        },
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC specifying when this destination was created.</p>"
+        }
+      },
+      "documentation":"<p>A cross account destination that is the recipient of subscription log events.</p>"
+    },
+    "DestinationArn":{
+      "type":"string",
+      "min":1
+    },
+    "DestinationName":{
+      "type":"string",
+      "max":512,
+      "min":1,
+      "pattern":"[^:*]*"
+    },
+    "Destinations":{
+      "type":"list",
+      "member":{"shape":"Destination"}
+    },
+    "EventId":{"type":"string"},
     "EventMessage":{
       "type":"string",
-      "min":1,
-      "max":32768
+      "min":1
     },
     "EventNumber":{"type":"long"},
     "EventsLimit":{
       "type":"integer",
-      "min":1,
+      "documentation":"<p>The maximum number of events to return.</p>",
       "max":10000,
-      "documentation":"The maximum number of events to return."
+      "min":1
+    },
+    "ExportDestinationBucket":{
+      "type":"string",
+      "max":512,
+      "min":1
+    },
+    "ExportDestinationPrefix":{"type":"string"},
+    "ExportTask":{
+      "type":"structure",
+      "members":{
+        "taskId":{
+          "shape":"ExportTaskId",
+          "documentation":"<p>Id of the export task.</p>"
+        },
+        "taskName":{
+          "shape":"ExportTaskName",
+          "documentation":"<p>The name of the export task.</p>"
+        },
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group from which logs data was exported.</p>"
+        },
+        "from":{
+          "shape":"Timestamp",
+          "documentation":"<p>A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this time are not exported.</p>"
+        },
+        "to":{
+          "shape":"Timestamp",
+          "documentation":"<p>A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.</p>"
+        },
+        "destination":{
+          "shape":"ExportDestinationBucket",
+          "documentation":"<p>Name of Amazon S3 bucket to which the log data was exported.</p>"
+        },
+        "destinationPrefix":{
+          "shape":"ExportDestinationPrefix",
+          "documentation":"<p>Prefix that was used as the start of Amazon S3 key for every object exported.</p>"
+        },
+        "status":{
+          "shape":"ExportTaskStatus",
+          "documentation":"<p>Status of the export task.</p>"
+        },
+        "executionInfo":{
+          "shape":"ExportTaskExecutionInfo",
+          "documentation":"<p>Execution info about the export task.</p>"
+        }
+      },
+      "documentation":"<p>Represents an export task.</p>"
+    },
+    "ExportTaskExecutionInfo":{
+      "type":"structure",
+      "members":{
+        "creationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A point in time when the export task got created.</p>"
+        },
+        "completionTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A point in time when the export task got completed.</p>"
+        }
+      },
+      "documentation":"<p>Represents the status of an export task.</p>"
+    },
+    "ExportTaskId":{
+      "type":"string",
+      "max":512,
+      "min":1
+    },
+    "ExportTaskName":{
+      "type":"string",
+      "max":512,
+      "min":1
+    },
+    "ExportTaskStatus":{
+      "type":"structure",
+      "members":{
+        "code":{
+          "shape":"ExportTaskStatusCode",
+          "documentation":"<p>Status code of the export task.</p>"
+        },
+        "message":{
+          "shape":"ExportTaskStatusMessage",
+          "documentation":"<p>Status message related to the <code class=\"code\">code</code>.</p>"
+        }
+      },
+      "documentation":"<p>Represents the status of an export task.</p>"
+    },
+    "ExportTaskStatusCode":{
+      "type":"string",
+      "enum":[
+        "CANCELLED",
+        "COMPLETED",
+        "FAILED",
+        "PENDING",
+        "PENDING_CANCEL",
+        "RUNNING"
+      ]
+    },
+    "ExportTaskStatusMessage":{"type":"string"},
+    "ExportTasks":{
+      "type":"list",
+      "member":{"shape":"ExportTask"},
+      "documentation":"<p>A list of export tasks.</p>"
     },
     "ExtractedValues":{
       "type":"map",
@@ -607,20 +905,100 @@
     },
     "FilterCount":{
       "type":"integer",
-      "documentation":"The number of metric filters associated with the log group."
+      "documentation":"<p>The number of metric filters associated with the log group.</p>"
+    },
+    "FilterLogEventsRequest":{
+      "type":"structure",
+      "required":["logGroupName"],
+      "members":{
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p> The name of the log group to query. </p>"
+        },
+        "logStreamNames":{
+          "shape":"InputLogStreamNames",
+          "documentation":"<p> Optional list of log stream names within the specified log group to search. Defaults to all the log streams in the log group. </p>"
+        },
+        "startTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. If provided, events with a timestamp prior to this time are not returned.</p>"
+        },
+        "endTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. If provided, events with a timestamp later than this time are not returned.</p>"
+        },
+        "filterPattern":{
+          "shape":"FilterPattern",
+          "documentation":"<p> A valid CloudWatch Logs filter pattern to use for filtering the response. If not provided, all the events are matched. </p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A pagination token obtained from a <code class=\"code\">FilterLogEvents</code> response to continue paginating the FilterLogEvents results. This token is omitted from the response when there are no other events to display.</p>"
+        },
+        "limit":{
+          "shape":"EventsLimit",
+          "documentation":"<p>The maximum number of events to return in a page of results. Default is 10,000 events.</p>"
+        },
+        "interleaved":{
+          "shape":"Interleaved",
+          "documentation":"<p>If provided, the API will make a best effort to provide responses that contain events from multiple log streams within the log group interleaved in a single response. If not provided, all the matched log events in the first log stream will be searched first, then those in the next log stream, etc.</p>"
+        }
+      }
+    },
+    "FilterLogEventsResponse":{
+      "type":"structure",
+      "members":{
+        "events":{
+          "shape":"FilteredLogEvents",
+          "documentation":"<p>A list of <code class=\"code\">FilteredLogEvent</code> objects representing the matched events from the request.</p>"
+        },
+        "searchedLogStreams":{
+          "shape":"SearchedLogStreams",
+          "documentation":"<p>A list of <code class=\"code\">SearchedLogStream</code> objects indicating which log streams have been searched in this request and whether each has been searched completely or still has more to be paginated.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A pagination token obtained from a <code class=\"code\">FilterLogEvents</code> response to continue paginating the FilterLogEvents results. This token is omitted from the response when there are no other events to display.</p>"
+        }
+      }
     },
     "FilterName":{
       "type":"string",
-      "min":1,
+      "documentation":"<p>A name for a metric or subscription filter.</p>",
       "max":512,
-      "pattern":"[^:*]*",
-      "documentation":"The name of the metric filter."
+      "min":1,
+      "pattern":"[^:*]*"
     },
     "FilterPattern":{
       "type":"string",
-      "min":0,
-      "max":512,
-      "documentation":"A symbolic description of how Amazon CloudWatch Logs should interpret the data in each log entry. For example, a log entry may contain timestamps, IP addresses, strings, and so on. You use the pattern to specify what to look for in the log stream."
+      "documentation":"<p>A symbolic description of how CloudWatch Logs should interpret the data in each log event. For example, a log event may contain timestamps, IP addresses, strings, and so on. You use the filter pattern to specify what to look for in the log event message.</p>",
+      "max":1024,
+      "min":0
+    },
+    "FilteredLogEvent":{
+      "type":"structure",
+      "members":{
+        "logStreamName":{
+          "shape":"LogStreamName",
+          "documentation":"<p>The name of the log stream this event belongs to.</p>"
+        },
+        "timestamp":{"shape":"Timestamp"},
+        "message":{
+          "shape":"EventMessage",
+          "documentation":"<p>The data contained in the log event.</p>"
+        },
+        "ingestionTime":{"shape":"Timestamp"},
+        "eventId":{
+          "shape":"EventId",
+          "documentation":"<p>A unique identifier for this event.</p>"
+        }
+      },
+      "documentation":"<p>Represents a matched event from a <code class=\"code\">FilterLogEvents</code> request.</p>"
+    },
+    "FilteredLogEvents":{
+      "type":"list",
+      "member":{"shape":"FilteredLogEvent"},
+      "documentation":"<p>A list of matched <code class=\"code\">FilteredLogEvent</code> objects returned from a <code class=\"code\">FilterLogEvents</code> request.</p>"
     },
     "GetLogEventsRequest":{
       "type":"structure",
@@ -629,8 +1007,14 @@
         "logStreamName"
       ],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"},
-        "logStreamName":{"shape":"LogStreamName"},
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group to query.</p>"
+        },
+        "logStreamName":{
+          "shape":"LogStreamName",
+          "documentation":"<p>The name of the log stream to query.</p>"
+        },
         "startTime":{"shape":"Timestamp"},
         "endTime":{"shape":"Timestamp"},
         "nextToken":{
@@ -639,11 +1023,11 @@
         },
         "limit":{
           "shape":"EventsLimit",
-          "documentation":"<p> The maximum number of log events returned in the response. If you don't specify a value, the request would return as much log events as can fit in a response size of 1MB, up to 10,000 log events. </p>"
+          "documentation":"<p> The maximum number of log events returned in the response. If you don't specify a value, the request would return as many log events as can fit in a response size of 1MB, up to 10,000 log events. </p>"
         },
         "startFromHead":{
           "shape":"StartFromHead",
-          "documentation":"If set to true, the earliest log events would be returned first. The default is false (the latest log events are returned first)."
+          "documentation":"<p>If set to true, the earliest log events would be returned first. The default is false (the latest log events are returned first).</p>"
         }
       }
     },
@@ -665,21 +1049,36 @@
         "timestamp":{"shape":"Timestamp"},
         "message":{"shape":"EventMessage"}
       },
-      "documentation":"A log event is a record of some activity that was recorded by the application or resource being monitored. The log event record that Amazon CloudWatch Logs understands contains two properties: the timestamp of when the event occurred, and the raw event message."
+      "documentation":"<p>A log event is a record of some activity that was recorded by the application or resource being monitored. The log event record that CloudWatch Logs understands contains two properties: the timestamp of when the event occurred, and the raw event message.</p>"
     },
     "InputLogEvents":{
       "type":"list",
       "member":{"shape":"InputLogEvent"},
-      "min":1,
-      "max":1000,
-      "documentation":"A list of events belonging to a log stream."
+      "documentation":"<p>A list of log events belonging to a log stream.</p>",
+      "max":10000,
+      "min":1
+    },
+    "InputLogStreamNames":{
+      "type":"list",
+      "member":{"shape":"LogStreamName"},
+      "documentation":"<p>A list of log stream names.</p>",
+      "max":100,
+      "min":1
+    },
+    "Interleaved":{"type":"boolean"},
+    "InvalidOperationException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Returned if the operation is not valid on the specified resource</p>",
+      "exception":true
     },
     "InvalidParameterException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>"
+      "documentation":"<p>Returned if a parameter of the request is incorrectly specified.</p>",
+      "exception":true
     },
     "InvalidSequenceTokenException":{
       "type":"structure",
@@ -692,9 +1091,10 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>Returned if you have reached the maximum number of resources that can be created.</p>"
+      "documentation":"<p>Returned if you have reached the maximum number of resources that can be created.</p>",
+      "exception":true
     },
+    "LogEventIndex":{"type":"integer"},
     "LogGroup":{
       "type":"structure",
       "members":{
@@ -708,14 +1108,14 @@
     },
     "LogGroupName":{
       "type":"string",
-      "min":1,
       "max":512,
+      "min":1,
       "pattern":"[\\.\\-_/#A-Za-z0-9]+"
     },
     "LogGroups":{
       "type":"list",
       "member":{"shape":"LogGroup"},
-      "documentation":"A list of log groups."
+      "documentation":"<p>A list of log groups.</p>"
     },
     "LogStream":{
       "type":"structure",
@@ -729,18 +1129,19 @@
         "arn":{"shape":"Arn"},
         "storedBytes":{"shape":"StoredBytes"}
       },
-      "documentation":"A log stream is sequence of log events that share the same emitter."
+      "documentation":"<p>A log stream is sequence of log events from a single emitter of logs.</p>"
     },
     "LogStreamName":{
       "type":"string",
-      "min":1,
       "max":512,
+      "min":1,
       "pattern":"[^:*]*"
     },
+    "LogStreamSearchedCompletely":{"type":"boolean"},
     "LogStreams":{
       "type":"list",
       "member":{"shape":"LogStream"},
-      "documentation":"A list of log streams."
+      "documentation":"<p>A list of log streams.</p>"
     },
     "MetricFilter":{
       "type":"structure",
@@ -750,7 +1151,7 @@
         "metricTransformations":{"shape":"MetricTransformations"},
         "creationTime":{"shape":"Timestamp"}
       },
-      "documentation":"Metric filters can be used to express how Amazon CloudWatch Logs would extract metric observations from ingested log events and transform them to metric data in a CloudWatch metric."
+      "documentation":"<p>Metric filters can be used to express how CloudWatch Logs would extract metric observations from ingested log events and transform them to metric data in a CloudWatch metric.</p>"
     },
     "MetricFilterMatchRecord":{
       "type":"structure",
@@ -770,15 +1171,15 @@
     },
     "MetricName":{
       "type":"string",
+      "documentation":"<p>The name of the CloudWatch metric to which the monitored log information should be published. For example, you may publish to a metric called ErrorCount.</p>",
       "max":255,
-      "pattern":"[^:*$]*",
-      "documentation":"The name of the CloudWatch metric to which the monitored log information should be published. For example, you may publish to a metric called ErrorCount."
+      "pattern":"[^:*$]*"
     },
     "MetricNamespace":{
       "type":"string",
+      "documentation":"<p>The destination namespace of the new CloudWatch metric.</p>",
       "max":255,
-      "pattern":"[^:*$]*",
-      "documentation":"The destination namespace of the new CloudWatch metric."
+      "pattern":"[^:*$]*"
     },
     "MetricTransformation":{
       "type":"structure",
@@ -796,24 +1197,32 @@
     "MetricTransformations":{
       "type":"list",
       "member":{"shape":"MetricTransformation"},
-      "min":1,
-      "max":1
+      "max":1,
+      "min":1
     },
     "MetricValue":{
       "type":"string",
-      "max":100,
-      "documentation":"What to publish to the metric. For example, if you're counting the occurrences of a particular term like \"Error\", the value will be \"1\" for each occurrence. If you're counting the bytes transferred the published value will be the value in the log event."
+      "documentation":"<p>What to publish to the metric. For example, if you're counting the occurrences of a particular term like \"Error\", the value will be \"1\" for each occurrence. If you're counting the bytes transferred the published value will be the value in the log event.</p>",
+      "max":100
     },
     "NextToken":{
       "type":"string",
-      "documentation":"A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous request. The token expires after 24 hours."
+      "documentation":"<p>A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous request. The token expires after 24 hours.</p>",
+      "min":1
     },
     "OperationAbortedException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>"
+      "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>",
+      "exception":true
+    },
+    "OrderBy":{
+      "type":"string",
+      "enum":[
+        "LogStreamName",
+        "LastEventTime"
+      ]
     },
     "OutputLogEvent":{
       "type":"structure",
@@ -827,6 +1236,51 @@
       "type":"list",
       "member":{"shape":"OutputLogEvent"}
     },
+    "PutDestinationPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "destinationName",
+        "accessPolicy"
+      ],
+      "members":{
+        "destinationName":{
+          "shape":"DestinationName",
+          "documentation":"<p>A name for an existing destination.</p>"
+        },
+        "accessPolicy":{
+          "shape":"AccessPolicy",
+          "documentation":"<p>An IAM policy document that authorizes cross-account users to deliver their log events to associated destination.</p>"
+        }
+      }
+    },
+    "PutDestinationRequest":{
+      "type":"structure",
+      "required":[
+        "destinationName",
+        "targetArn",
+        "roleArn"
+      ],
+      "members":{
+        "destinationName":{
+          "shape":"DestinationName",
+          "documentation":"<p>A name for the destination.</p>"
+        },
+        "targetArn":{
+          "shape":"TargetArn",
+          "documentation":"<p>The ARN of an Amazon Kinesis stream to deliver matching log events to.</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The ARN of an IAM role that grants CloudWatch Logs permissions to do Amazon Kinesis PutRecord requests on the desitnation stream.</p>"
+        }
+      }
+    },
+    "PutDestinationResponse":{
+      "type":"structure",
+      "members":{
+        "destination":{"shape":"Destination"}
+      }
+    },
     "PutLogEventsRequest":{
       "type":"structure",
       "required":[
@@ -835,8 +1289,14 @@
         "logEvents"
       ],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"},
-        "logStreamName":{"shape":"LogStreamName"},
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group to put log events to.</p>"
+        },
+        "logStreamName":{
+          "shape":"LogStreamName",
+          "documentation":"<p>The name of the log stream to put log events to.</p>"
+        },
         "logEvents":{"shape":"InputLogEvents"},
         "sequenceToken":{
           "shape":"SequenceToken",
@@ -847,7 +1307,8 @@
     "PutLogEventsResponse":{
       "type":"structure",
       "members":{
-        "nextSequenceToken":{"shape":"SequenceToken"}
+        "nextSequenceToken":{"shape":"SequenceToken"},
+        "rejectedLogEventsInfo":{"shape":"RejectedLogEventsInfo"}
       }
     },
     "PutMetricFilterRequest":{
@@ -859,10 +1320,22 @@
         "metricTransformations"
       ],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"},
-        "filterName":{"shape":"FilterName"},
-        "filterPattern":{"shape":"FilterPattern"},
-        "metricTransformations":{"shape":"MetricTransformations"}
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group to associate the metric filter with.</p>"
+        },
+        "filterName":{
+          "shape":"FilterName",
+          "documentation":"<p>A name for the metric filter.</p>"
+        },
+        "filterPattern":{
+          "shape":"FilterPattern",
+          "documentation":"<p>A valid CloudWatch Logs filter pattern for extracting metric data out of ingested log events.</p>"
+        },
+        "metricTransformations":{
+          "shape":"MetricTransformations",
+          "documentation":"<p>A collection of information needed to define how metric data gets emitted.</p>"
+        }
       }
     },
     "PutRetentionPolicyRequest":{
@@ -872,47 +1345,131 @@
         "retentionInDays"
       ],
       "members":{
-        "logGroupName":{"shape":"LogGroupName"},
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group to associate the retention policy with.</p>"
+        },
         "retentionInDays":{"shape":"Days"}
+      }
+    },
+    "PutSubscriptionFilterRequest":{
+      "type":"structure",
+      "required":[
+        "logGroupName",
+        "filterName",
+        "filterPattern",
+        "destinationArn"
+      ],
+      "members":{
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group to associate the subscription filter with.</p>"
+        },
+        "filterName":{
+          "shape":"FilterName",
+          "documentation":"<p>A name for the subscription filter.</p>"
+        },
+        "filterPattern":{
+          "shape":"FilterPattern",
+          "documentation":"<p>A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events.</p>"
+        },
+        "destinationArn":{
+          "shape":"DestinationArn",
+          "documentation":"<p>The ARN of the destination to deliver matching log events to. Currently, the supported destinations are: <ul> <li> An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery. </li> <li> A logical destination (used via an ARN of <code>Destination</code>) belonging to a different account, for cross-account delivery. </li> <li> An Amazon Kinesis Firehose stream belonging to the same account as the subscription filter, for same-account delivery. </li> <li> An AWS Lambda function belonging to the same account as the subscription filter, for same-account delivery. </li> </ul> </p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination (used via an ARN of <code>Destination</code>) for cross-account delivery.</p>"
+        }
+      }
+    },
+    "RejectedLogEventsInfo":{
+      "type":"structure",
+      "members":{
+        "tooNewLogEventStartIndex":{"shape":"LogEventIndex"},
+        "tooOldLogEventEndIndex":{"shape":"LogEventIndex"},
+        "expiredLogEventEndIndex":{"shape":"LogEventIndex"}
       }
     },
     "ResourceAlreadyExistsException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>Returned if the specified resource already exists.</p>"
+      "documentation":"<p>Returned if the specified resource already exists.</p>",
+      "exception":true
     },
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>Returned if the specified resource does not exist.</p>"
+      "documentation":"<p>Returned if the specified resource does not exist.</p>",
+      "exception":true
+    },
+    "RoleArn":{
+      "type":"string",
+      "min":1
+    },
+    "SearchedLogStream":{
+      "type":"structure",
+      "members":{
+        "logStreamName":{
+          "shape":"LogStreamName",
+          "documentation":"<p>The name of the log stream.</p>"
+        },
+        "searchedCompletely":{
+          "shape":"LogStreamSearchedCompletely",
+          "documentation":"<p>Indicates whether all the events in this log stream were searched or more data exists to search by paginating further.</p>"
+        }
+      },
+      "documentation":"<p>An object indicating the search status of a log stream in a <code class=\"code\">FilterLogEvents</code> request.</p>"
+    },
+    "SearchedLogStreams":{
+      "type":"list",
+      "member":{"shape":"SearchedLogStream"},
+      "documentation":"<p>A list of <code class=\"code\">SearchedLogStream</code> objects indicating the search status for log streams in a <code class=\"code\">FilterLogEvents</code> request.</p>"
     },
     "SequenceToken":{
       "type":"string",
-      "min":1,
-      "documentation":"A string token used for making PutLogEvents requests. A <code class=\"code\">sequenceToken</code> can only be used once, and PutLogEvents requests must include the <code class=\"code\">sequenceToken</code> obtained from the response of the previous request."
+      "documentation":"<p>A string token used for making PutLogEvents requests. A <code class=\"code\">sequenceToken</code> can only be used once, and PutLogEvents requests must include the <code class=\"code\">sequenceToken</code> obtained from the response of the previous request.</p>",
+      "min":1
     },
     "ServiceUnavailableException":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>Returned if the service cannot complete the request.</p>",
       "exception":true,
-      "fault":true,
-      "documentation":"<p>Returned if the service cannot complete the request.</p>"
+      "fault":true
     },
     "StartFromHead":{"type":"boolean"},
     "StoredBytes":{
       "type":"long",
       "min":0
     },
+    "SubscriptionFilter":{
+      "type":"structure",
+      "members":{
+        "filterName":{"shape":"FilterName"},
+        "logGroupName":{"shape":"LogGroupName"},
+        "filterPattern":{"shape":"FilterPattern"},
+        "destinationArn":{"shape":"DestinationArn"},
+        "roleArn":{"shape":"RoleArn"},
+        "creationTime":{"shape":"Timestamp"}
+      }
+    },
+    "SubscriptionFilters":{
+      "type":"list",
+      "member":{"shape":"SubscriptionFilter"}
+    },
+    "TargetArn":{
+      "type":"string",
+      "min":1
+    },
     "TestEventMessages":{
       "type":"list",
       "member":{"shape":"EventMessage"},
-      "min":1,
-      "max":50
+      "max":50,
+      "min":1
     },
     "TestMetricFilterRequest":{
       "type":"structure",
@@ -922,7 +1479,10 @@
       ],
       "members":{
         "filterPattern":{"shape":"FilterPattern"},
-        "logEventMessages":{"shape":"TestEventMessages"}
+        "logEventMessages":{
+          "shape":"TestEventMessages",
+          "documentation":"<p>A list of log event messages to test.</p>"
+        }
       }
     },
     "TestMetricFilterResponse":{
@@ -933,10 +1493,11 @@
     },
     "Timestamp":{
       "type":"long",
-      "min":0,
-      "documentation":"A point in time expressed as the number milliseconds since Jan 1, 1970 00:00:00 UTC."
+      "documentation":"<p>A point in time expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.</p>",
+      "min":0
     },
     "Token":{"type":"string"},
     "Value":{"type":"string"}
-  }
+  },
+  "documentation":"<fullname>Amazon CloudWatch Logs API Reference</fullname> <p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from Amazon Elastic Compute Cloud (Amazon EC2) instances, Amazon CloudTrail, or other sources. You can then retrieve the associated log data from CloudWatch Logs using the Amazon CloudWatch console, the CloudWatch Logs commands in the AWS CLI, the CloudWatch Logs API, or the CloudWatch Logs SDK.</p> <p>You can use CloudWatch Logs to:</p> <ul> <li> <p><b>Monitor Logs from Amazon EC2 Instances in Real-time</b>: You can use CloudWatch Logs to monitor applications and systems using log data. For example, CloudWatch Logs can track the number of errors that occur in your application logs and send you a notification whenever the rate of errors exceeds a threshold you specify. CloudWatch Logs uses your log data for monitoring; so, no code changes are required. For example, you can monitor application logs for specific literal terms (such as \"NullReferenceException\") or count the number of occurrences of a literal term at a particular position in log data (such as \"404\" status codes in an Apache access log). When the term you are searching for is found, CloudWatch Logs reports the data to a Amazon CloudWatch metric that you specify.</p> </li> <li> <p><b>Monitor Amazon CloudTrail Logged Events</b>: You can create alarms in Amazon CloudWatch and receive notifications of particular API activity as captured by CloudTrail and use the notification to perform troubleshooting.</p> </li> <li> <p><b>Archive Log Data</b>: You can use CloudWatch Logs to store your log data in highly durable storage. You can change the log retention setting so that any log events older than this setting are automatically deleted. The CloudWatch Logs agent makes it easy to quickly send both rotated and non-rotated log data off of a host and into the log service. You can then access the raw log data when you need it.</p> </li> </ul>"
 }

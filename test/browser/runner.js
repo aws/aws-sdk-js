@@ -10,7 +10,7 @@ function waitFor(testFx, onReady, timeOutMillis) {
       } else {
         if(!condition) {
           console.log("'waitFor()' timeout");
-          phantom.exit(1);
+          setTimeout(function(){ phantom.exit(1); }, 0);
         } else {
           typeof(onReady) === "string" ? eval(onReady) : onReady();
           clearInterval(interval);
@@ -28,7 +28,7 @@ page.onConsoleMessage = function(msg) {
 page.open(system.args[1] || 'test/browser/runner.html', function(status){
   if (status !== "success") {
     console.log("Unable to access network");
-    phantom.exit();
+    setTimeout(function(){ phantom.exit(); }, 0);
   } else {
     var index = 0;
     function printStatus() {
@@ -75,7 +75,7 @@ page.open(system.args[1] || 'test/browser/runner.html', function(status){
           return 0;
         }
       });
-      phantom.exit(exitCode);
+      setTimeout(function() { phantom.exit(exitCode); }, 0);
     });
   }
 });
