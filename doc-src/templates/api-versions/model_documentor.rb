@@ -12,6 +12,15 @@ module Documentor
     end
     docs = docs.gsub(/\{(\S+)\}/, '`{\1}`')
     docs = docs.gsub(/\s+/, ' ').strip
+    ## The markdown to html converter incorrectly replaces underscores and asterisks in 'code' tags with 'em' tags.
+    ## html escape these symbols to get around this.
+    docs = docs.gsub(/<code>(.+?)<\/code>/m) do
+      ## strip out extraneous code blocks
+      text = $1.gsub('`','')
+      text = text.gsub('_', '&#95;')
+      text = text.gsub('*', '&#42;')
+      "<code>#{text}</code>"
+    end
     docs == '' ? nil : docs
   end
 
@@ -80,10 +89,156 @@ class MethodDocumentor
 
   attr_reader :lines
 
+  def event_stream_output(operation, api)
+    @eventStreamOutputShape = nil
+    @eventStreamOutputName = nil
+    output = operation['output']
+    if output && output['shape']
+      outputShapeName = output['shape']
+      outputShape = api['shapes'][outputShapeName]
+      if outputShape['eventstream']
+        @eventStreamOutputShape = outputShapeName
+        @eventStreamOutputName = output
+      else
+        outputShape['members'].each_pair do |memberName, member|
+          if api['shapes'][member['shape']]['eventstream']
+            @eventStreamOutputShape = member['shape']
+            @eventStreamOutputName = memberName
+          end
+        end
+      end
+    end
+  end
+
+  def node_event_stream_output_examples(klass, operation_name, operation, api)
+    lines = []
+    if @eventStreamOutputShape
+      lines << "@example Node.js EventStream Example"
+      lines << "  // In Node.js, events are streamed and can be read as they arrive."
+      lines << "  #{klass.downcase}.#{method_name(operation_name)}({/** params **/}, function(err, data) {"
+      lines << "    if (err) {"
+      lines << "      // handle error"
+      lines << "      return console.error(err);"
+      lines << "    }"
+      lines << ""
+      lines << "    var eventStream = data.#{@eventStreamOutputName};"
+      lines << ""
+      lines << "    eventStream.on('data', function(event) {"
+      lines << "      // Check the top-level field to determine which event this is."
+      memberNum = 0
+      members = api['shapes'][@eventStreamOutputShape]['members']
+      members.each_pair do |memberName, member|
+        prefix = ""
+        if memberNum > 0
+          prefix = "} else "
+        end
+        lines << "      #{prefix}if (event.#{memberName}) {"
+        lines << "        // handle #{memberName} event"
+        if (memberNum == members.count - 1)
+          lines << "      }"
+        end
+        memberNum = memberNum + 1
+      end
+      lines << "    });"
+      lines << "    eventStream.on('error', function(err) { /** Handle error events **/});"
+      lines << "    eventStream.on('end', function() { /** Finished reading all events **/});"
+      lines << "  });"
+      lines << ""
+    end
+    lines
+  end
+
+  def browser_event_stream_output_examples(klass, operation_name, operation, api)
+    lines = []
+    if @eventStreamOutputShape
+      lines << "@example Browser EventStream Example"
+      lines << "  // In browsers, events aren't processed until the response is fully buffered."
+      lines << "  // Events will be accessible as an array."
+      lines << "  #{klass.downcase}.#{method_name(operation_name)}({/** params **/}, function(err, data) {"
+      lines << "    if (err) {"
+      lines << "      // handle error"
+      lines << "      return console.error(err);"
+      lines << "    }"
+      lines << ""
+      lines << "    var events = data.#{@eventStreamOutputName};"
+      lines << ""
+      lines << "    for (var event of events) {"
+      lines << "      // Check the top-level field to determine which event this is."
+      memberNum = 0
+      members = api['shapes'][@eventStreamOutputShape]['members']
+      members.each_pair do |memberName, member|
+        prefix = ""
+        if memberNum > 0
+          prefix = "} else "
+        end
+        lines << "      #{prefix}if (event.#{memberName}) {"
+        lines << "        // handle #{memberName} event"
+        if (memberNum == members.count - 1)
+          lines << "      }"
+        end
+        memberNum = memberNum + 1
+      end
+      lines << "    }"
+      lines << "  });"
+      lines << ""
+    end
+    lines
+  end
+
+  def async_event_stream_output_examples(klass, operation_name, operation, api)
+    lines = []
+    if @eventStreamOutputShape
+      lines << "@example Async Iterator EventStream Example (Experimental)"
+      lines << "  // In Node.js v10.x, Readable streams have experimental support for async iteration."
+      lines << "  // Instead of listening to the event stream's 'data' event, you can use a for...await loop."
+      lines << "  async function example() {"
+      lines << "    try {"
+      lines << "      const result = await #{klass.downcase}.#{method_name(operation_name)}({/** params **/}).promise();"
+      lines << ""
+      lines << "      const events = data.#{@eventStreamOutputName};"
+      lines << ""
+      lines << "      for await (const event of events) {"
+      lines << "        // Check the top-level field to determine which event this is."
+      memberNum = 0
+      members = api['shapes'][@eventStreamOutputShape]['members']
+      members.each_pair do |memberName, member|
+        prefix = ""
+        if memberNum > 0
+          prefix = "} else "
+        end
+        lines << "        #{prefix}if (event.#{memberName}) {"
+        lines << "          // handle #{memberName} event"
+        if (memberNum == members.count - 1)
+          lines << "        }"
+        end
+        memberNum = memberNum + 1
+      end
+      lines << "      }"
+      lines << "    } catch (err) {"
+      lines << "      // handle error"
+      lines << "    }"
+      lines << "  }"
+      lines << ""
+    end
+    lines
+  end
+
+
+  def event_stream_output_examples(klass, operation_name, operation, api)
+    lines = []
+    
+    lines << node_event_stream_output_examples(klass, operation_name, operation, api)
+    lines << browser_event_stream_output_examples(klass, operation_name, operation, api)
+    lines << async_event_stream_output_examples(klass, operation_name, operation, api)
+    lines
+  end
+
   def initialize(operation_name, operation, api, klass, options = {}, examples = {})
     desc = documentation(operation)
     desc ||= "Calls the #{method_name(operation_name, false)} API operation."
     desc = desc.gsub(/^\s+/, '').strip
+
+    event_stream_output(operation, api)
 
     if options[:flatten_dynamodb_attrs]
       desc = ""
@@ -95,15 +250,23 @@ class MethodDocumentor
 
     @lines << "@param params [Object]"
     @lines += shapes(api, operation['input'], options).map {|line| "  " + line }
-
     if examples
       examples.each do |example|
-        @lines << "@example #{example['title']}"
-        @lines << ""
-        @lines << " /* #{example['description']} */"
-        @lines << ""
-        @lines << generate_shared_example(api, example, klass, method_name(operation_name)).split("\n").map {|line| "  " + line}
+        begin
+          sharedExample = generate_shared_example(api, example, klass, method_name(operation_name)).split("\n").map {|line| "  " + line}
+          @lines << "@example #{example['title']}"
+          @lines << ""
+          @lines << " /* #{example['description']} */"
+          @lines << ""
+          @lines << sharedExample
+        rescue => exception
+          puts "[warn]: Error encountered generating example for #{klass}.#{operation_name}: #{exception}"
+        end
       end
+    end
+
+    if @eventStreamOutputShape
+      @lines << event_stream_output_examples(klass, operation_name, operation, api)
     end
 
     ## @example tag
@@ -141,6 +304,16 @@ class MethodDocumentor
     if operation['documentation_url']
       @lines << "@see #{operation['documentation_url']}"
       @lines << "  #{api['serviceAbbreviation']} Documentation for #{operation_name}"
+    end
+
+    ## Service Reference
+    if api['metadata']['uid']
+      @lines << '<div class="tags">'
+      @lines << '<p class="tag_title">Service Reference:</p>'
+      @lines << '<ul class="see">'
+      @lines << '<li><a href="/goto/WebAPI/' + api['metadata']['uid'] + '/' + operation_name + '">' + operation_name +  '</a></li>'
+      @lines << '</ul>'
+      @lines << '</div>'
     end
   end
 
@@ -188,7 +361,6 @@ class SharedExampleVisitor
       when 'float', 'double', 'bigdecimal' then 'FloatShape'
       when 'integer', 'long', 'short', 'biginteger' then 'IntegerShape'
       when 'string', 'character' then 'StringShape'
-      when 'base64' then 'Base64Shape'
       when 'binary', 'blob' then 'BinaryShape'
       else type
     end
@@ -376,17 +548,22 @@ class ExampleShapeVisitor
   end
 
   def visit_map(node, required = false)
-    data = indent("someKey: " + traverse(node['value']))
+    data = indent("'<#{node['key']['shape']}>': " + traverse(node['value']))
     lines = ["{" + mark_rec_shape(node) + (required ? " /* required */" : "")]
     lines << data + ","
-    lines << "  /* anotherKey: ... */"
+    lines << "  /* '<#{node['key']['shape']}>': ... */"
     lines << "}"
     lines.join("\n")
   end
 
   def visit_string(node, required = false)
-    value = node['enum'] ? node['enum'].join(' | ') : 'STRING_VALUE'
-    "'#{value}'"
+    if node['jsonvalue']
+      "any /* This value will be JSON encoded on your behalf with JSON.stringify() */"
+    elsif node['enum']
+      node['enum'].join(' | ')
+    else
+      "'STRING_VALUE'"
+    end
   end
 
   def visit_integer(node, required = false)
@@ -404,13 +581,13 @@ class ExampleShapeVisitor
     "true || false"
   end
 
-  def visit_base64(node, required = false)
-    "new Buffer('...') || 'STRING_VALUE'"
-  end
-
   def visit_binary(node, required = false)
     value = "new Buffer('...') || 'STRING_VALUE'"
-    value += " || streamObject" if node['streaming']
+    if node['streaming']
+      value += " || streamObject"
+    else
+      value += " /* Strings will be Base-64 encoded on your behalf */"
+    end
     value
   end
   alias visit_blob visit_binary
@@ -441,28 +618,48 @@ class ShapeDocumentor
   attr_reader :type
 
   def self.type_for(rules)
-    type = case rules['type']
-    when 'structure' then 'map'
-    when 'list' then 'Array'
-    when 'map' then 'map'
-    when 'string', nil then 'String'
-    when 'integer' then 'Integer'
-    when 'long' then 'Integer'
-    when 'float' then 'Float'
-    when 'double' then 'Float'
-    when 'bigdecimal' then 'Float'
-    when 'boolean' then 'Boolean'
-    when 'base64' then 'Buffer, Typed Array, Blob, String'
-    when 'binary' then 'Buffer, Typed Array, Blob, String'
-    when 'blob' then 'Buffer, Typed Array, Blob, String'
-    when 'timestamp' then 'Date'
-    else raise "unhandled type: #{rules['type']}"
+    type = rules['type']
+    normalizedType = type
+
+    if type == 'structure'
+      if rules['eventstream']
+        normalizedType = 'ReadableStream<Events> | Array<Events>'
+      else
+        normalizedType = 'map'
+      end
+    elsif type == 'list'
+      normalizedType = 'Array'
+    elsif type == 'map'
+      normalizedType = 'map'
+    elsif type == 'string' || type == nil
+      normalizedType = 'String'
+    elsif type == 'integer'
+      normalizedType = 'Integer'
+    elsif type == 'long'
+      normalizedType = 'Integer'
+    elsif type == 'float'
+      normalizedType = 'Float'
+    elsif type == 'double'
+      normalizedType = 'Float'
+    elsif type == 'bigdecimal'
+      normalizedType = 'Float'
+    elsif type == 'boolean'
+      normalizedType = 'Boolean'
+    elsif type == 'binary' || type == 'blob'
+      normalizedType = 'Buffer'
+      unless rules['eventpayload']
+        normalizedType += ', Typed Array, Blob, String'
+      end
+    elsif type == 'timestamp'
+      normalizedType = 'Date'
+    else
+      raise "unhandled type: #{rules['type']}"
     end
 
     # TODO : update this format description once we add streaming uploads
-    type += ', ReadableStream' if rules['streaming']
+    normalizedType += ', ReadableStream' if rules['streaming']
 
-    type
+    normalizedType
   end
 
   def initialize(api, rules, options = {})
@@ -475,6 +672,7 @@ class ShapeDocumentor
     @required = !!options[:required]
     @visited = options[:visited] || Hash.new { 0 }
     @type = self.class.type_for(rules)
+    @isEventStream = rules['eventstream']
     @lines = []
     @nested_lines = []
     @flatten_dynamodb_attrs = options[:flatten_dynamodb_attrs]
@@ -518,11 +716,22 @@ doc_client
     end
 
     @lines = ["#{prefix}* `#{name}` #{description}"]
+    
+    if @isEventStream
+      @lines << "#{name} is an object-mode Readable stream in Node.js v0.10.x and higher. Attach a listener to the `data` event to receive events."
+      @lines << "#{name} is an array of events in browsers."
+      @lines << "The possible events that may be returned are listed below. Note that the top-level field in each event matches the event name."
+    end
+
     @lines += @nested_lines
 
     if rules['enum']
       @lines << "#{prefix}   Possible values include:"
       @lines += rules['enum'].map{|v| "#{prefix}   * `#{v.inspect}`" }
+    end
+
+    if rules['idempotencyToken']
+      @lines << "#{prefix}   If a token is not provided, the SDK will use a version 4 UUID."
     end
 
   end

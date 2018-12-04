@@ -2,14 +2,14 @@ require 'json'
 
 def write_configuration
   config_cmd = <<-eof
-    node -e 'c=require("./").config.credentials;c.refresh(function() {
-      console.log(c.accessKeyId, c.secretAccessKey, c.sessionToken)
-    });'
+    c=require('./').config.credentials;c.refresh(function() {
+      console.log(c.accessKeyId, c.secretAccessKey, c.sessionToken);
+    });
   eof
   config = {}
   if File.exist?('configuration')
     config = JSON.parse(File.read('configuration'))
-    out = `#{config_cmd}`.split(/\s+/)
+    out = `node -e "#{config_cmd}"`.split(/\s+/)
     config['accessKeyId'] ||= out[0]
     config['secretAccessKey'] ||= out[1]
     config['sessionToken'] ||= out[2] if out[2] && out[2] != "undefined"
@@ -35,7 +35,7 @@ namespace :browser do
   task :setup_dist_tools do
     unless File.directory?("dist-tools/node_modules")
       Dir.chdir('dist-tools') do
-        sh "npm install --production"
+        sh "npm install"
       end
     end
   end
@@ -50,7 +50,7 @@ namespace :browser do
   end
 
   task :build_all => [:setup_dist_tools, :dist_path] do
-    sh({"MINIFY" => ""}, "#{$BUILDER} all > dist/aws-sdk-all.js")
+    sh({"MINIFY" => "1"}, "#{$BUILDER} all > dist/aws-sdk-all.js")
   end
 
   desc 'Caches assets to the dist-tools build server'
@@ -73,14 +73,11 @@ namespace :browser do
     write_configuration
     mkdir_p "test/browser/build"
     cp "dist/aws-sdk-all.js", "test/browser/build/aws-sdk-all.js"
-    sh "coffee -c test/helpers.coffee"
-    files = Dir.glob("test/**/*.coffee").join(" ")
+    files = "test/helpers.js ";
+    files += Dir.glob("test/**/*.spec.js").delete_if{|name| name.start_with?("test/react-native/")}.sort().join(" ")
     sh({"SERVICES" => "all"}, $BROWSERIFY +
-       " -t coffeeify -i domain #{files} > #{$BROWSERIFY_TEST}")
-    rm_f "test/helpers.js"
+       " -i domain #{files} > #{$BROWSERIFY_TEST}")
     rm_f "test/configuration.js"
-    sh "open test/browser/runner.html" if ENV['OPEN']
-    sh "phantomjs test/browser/runner.js"
   end
 
   task :dist_path do

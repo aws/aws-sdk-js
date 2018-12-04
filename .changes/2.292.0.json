@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "SageMaker updated the default endpoint URL to support Private Link via the CLI/SDK."
+    }
+]

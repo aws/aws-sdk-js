@@ -147,11 +147,16 @@ module.exports = {
     if (!fs.existsSync(fixturePath)) fs.mkdirSync(fixturePath);
     var filename = path.join(fixturePath, name);
     var body;
-    switch (size) {
-      case 'empty': body = new Buffer(0); break;
-      case 'small': body = new Buffer(1024 * 1024); break;
-      case 'large': body = new Buffer(1024 * 1024 * 20); break;
+    if (typeof size === 'string') {
+      switch (size) {
+        case 'empty': body = new Buffer(0); break;
+        case 'small': body = new Buffer(1024 * 1024); break;
+        case 'large': body = new Buffer(1024 * 1024 * 20); break;
+      }
+    } else if (typeof size === 'number') {
+      body = new Buffer(size);
     }
+
     fs.writeFileSync(filename, body);
     return filename;
   },

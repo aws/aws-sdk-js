@@ -8,3 +8,5 @@ doc
 test/browser/build
 test/browser/sample/appinfo.js
 dist/aws-sdk-all.js
+yarn.lock
+package-lock.json

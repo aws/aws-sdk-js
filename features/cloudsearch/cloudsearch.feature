@@ -4,16 +4,10 @@ Feature: Amazon CloudSearch (2013-01-01)
 
   I want to use Amazon CloudSearch
 
-  Scenario: Domain creation
-    Given I create a domain with name prefix "aws-js-sdk"
-    Then DomainStatus should show that Created is true
-    And I delete the domain
-
-  Scenario: Defining an index field
-    Given I create a domain with name prefix "aws-js-sdk"
-    And I define a CloudSearch index field
-    Then the status code should be 200
-    And I delete the domain
+  Scenario: Describing domain
+    Given I run the "describeDomains" operation
+    Then the request should be successful
+    And the value at "DomainStatusList" should be a list
 
   Scenario: Error handling
     Given I create a domain with name prefix ""

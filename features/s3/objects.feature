@@ -110,7 +110,6 @@ Feature: Working with Objects in S3
     Then the HTTP response should have a content length of 16
     And the MD5 checksum of the response data should equal the generated checksum
 
-
   @presigned
   Scenario: Putting to a pre-signed URL
     Given I get a pre-signed URL to PUT the key "presigned"
@@ -124,6 +123,15 @@ Feature: Working with Objects in S3
     Given I get a pre-signed URL to PUT the key "hello" with data "CHECKSUMMED"
     And I access the URL via HTTP PUT with data "NOT CHECKSUMMED"
     Then the HTTP response should contain "SignatureDoesNotMatch"
+
+  @presigned_post
+  Scenario: POSTing an object with a presigned form
+    Given I create a presigned form to POST the key "presignedPost" with the data "PRESIGNED POST CONTENTS"
+    And I POST the form
+    Then the object "presignedPost" should exist
+    When I get the object "presignedPost"
+    Then the object "presignedPost" should contain "PRESIGNED POST CONTENTS"
+    Then the HTTP response should have a content length of 23
 
   @streams
   Scenario: Streaming objects
@@ -206,4 +214,64 @@ Feature: Working with Objects in S3
   @error
   Scenario: Error handling
     Given I put "data" to the invalid key ""
-    Then the status code should be 400
+    Then the error code should be "UriParameterError"
+
+  @bucket-slashes
+  Scenario: Sigv4 Bucket with trailing slash
+    Given I use signatureVersion "v4"
+    When I put "" to the key "" with bucket suffix "/"
+    Then the object "/" should exist
+  
+  @bucket-slashes
+  Scenario: Sigv4 Bucket with dobule trailing slashes
+    Given I use signatureVersion "v4"
+    When I put "" to the key "" with bucket suffix "//"
+    Then the object "//" should exist
+
+  @bucket-slashes
+  Scenario: Sigv4 Bucket with slashes without trailing slash
+    Given I use signatureVersion "v4"
+    When I put "" to the key "" with bucket suffix "/a/b"
+    Then the object "a/b/" should exist
+
+  @bucket-slashes
+  Scenario: Sigv4 Bucket with slashes with Key
+    Given I use signatureVersion "v4"
+    When I put "" to the key "foo" with bucket suffix "/a/b"
+    Then the object "a/b/foo" should exist
+
+  @bucket-slashes
+  Scenario: Sigv4 Bucket with trailing slashes with Key
+    Given I use signatureVersion "v4"
+    When I put "" to the key "foo" with bucket suffix "/a/b/"
+    Then the object "a/b//foo" should exist
+
+  @bucket-slashes
+  Scenario: Sigv2 Bucket with trailing slash
+    Given I use signatureVersion "v2"
+    When I put "" to the key "" with bucket suffix "/"
+    Then the object "/" should exist
+  
+  @bucket-slashes
+  Scenario: Sigv2 Bucket with double trailing slashes
+    Given I use signatureVersion "v2"
+    When I put "" to the key "" with bucket suffix "//"
+    Then the object "//" should exist
+
+  @bucket-slashes
+  Scenario: Sigv2 Bucket with slashes without trailing slash
+    Given I use signatureVersion "v2"
+    When I put "" to the key "" with bucket suffix "/a/b"
+    Then the object "a/b/" should exist
+
+  @bucket-slashes
+  Scenario: Sigv2 Bucket with slashes with Key
+    Given I use signatureVersion "v2"
+    When I put "" to the key "foo" with bucket suffix "/a/b"
+    Then the object "a/b/foo" should exist
+
+  @bucket-slashes
+  Scenario: Sigv2 Bucket with trailing slashes with Key
+    Given I use signatureVersion "v2"
+    When I put "" to the key "foo" with bucket suffix "/a/b/"
+    Then the object "a/b//foo" should exist

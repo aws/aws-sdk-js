@@ -12,9 +12,24 @@
     "name": "ApplicationAutoScaling",
     "cors": true
   },
+  "appstream": {
+    "name": "AppStream"
+  },
   "autoscaling": {
     "name": "AutoScaling",
     "cors": true
+  },
+  "batch": {
+    "name": "Batch"
+  },
+  "budgets": {
+    "name": "Budgets"
+  },
+  "clouddirectory": {
+    "name": "CloudDirectory",
+    "versions": [
+      "2016-05-10*"
+    ]
   },
   "cloudformation": {
     "name": "CloudFormation",
@@ -22,7 +37,25 @@
   },
   "cloudfront": {
     "name": "CloudFront",
-    "versions": ["2013-05-12*", "2013-11-11*", "2014-05-31*", "2014-10-21*", "2014-11-06*", "2015-04-17*", "2015-07-27*", "2015-09-17*", "2016-01-13*", "2016-01-28*", "2016-08-01*", "2016-08-20*"],
+    "versions": [
+      "2013-05-12*",
+      "2013-11-11*",
+      "2014-05-31*",
+      "2014-10-21*",
+      "2014-11-06*",
+      "2015-04-17*",
+      "2015-07-27*",
+      "2015-09-17*",
+      "2016-01-13*",
+      "2016-01-28*",
+      "2016-08-01*",
+      "2016-08-20*",
+      "2016-09-07*",
+      "2016-09-29*",
+      "2016-11-25*",
+      "2017-03-25*",
+      "2017-10-30*"
+    ],
     "cors": true
   },
   "cloudhsm": {
@@ -47,12 +80,18 @@
   "cloudwatchevents": {
     "prefix": "events",
     "name": "CloudWatchEvents",
-    "versions": ["2014-02-03*"],
+    "versions": [
+      "2014-02-03*"
+    ],
     "cors": true
   },
   "cloudwatchlogs": {
     "prefix": "logs",
     "name": "CloudWatchLogs",
+    "cors": true
+  },
+  "codebuild": {
+    "name": "CodeBuild",
     "cors": true
   },
   "codecommit": {
@@ -87,6 +126,10 @@
     "name": "ConfigService",
     "cors": true
   },
+  "cur": {
+    "name": "CUR",
+    "cors": true
+  },
   "datapipeline": {
     "name": "DataPipeline"
   },
@@ -119,7 +162,20 @@
   },
   "ec2": {
     "name": "EC2",
-    "versions": ["2013-06-15*", "2013-10-15*", "2014-02-01*", "2014-05-01*", "2014-06-15*", "2014-09-01*", "2014-10-01*", "2015-03-01*", "2015-04-15*", "2015-10-01*"],
+    "versions": [
+      "2013-06-15*",
+      "2013-10-15*",
+      "2014-02-01*",
+      "2014-05-01*",
+      "2014-06-15*",
+      "2014-09-01*",
+      "2014-10-01*",
+      "2015-03-01*",
+      "2015-04-15*",
+      "2015-10-01*",
+      "2016-04-01*",
+      "2016-09-15*"
+    ],
     "cors": true
   },
   "ecr": {
@@ -132,11 +188,17 @@
   },
   "efs": {
     "prefix": "elasticfilesystem",
-    "name": "EFS"
+    "name": "EFS",
+    "cors": true
   },
   "elasticache": {
     "name": "ElastiCache",
-    "versions": ["2012-11-15*", "2014-03-24*", "2014-07-15*", "2014-09-30*"],
+    "versions": [
+      "2012-11-15*",
+      "2014-03-24*",
+      "2014-07-15*",
+      "2014-09-30*"
+    ],
     "cors": true
   },
   "elasticbeanstalk": {
@@ -176,6 +238,9 @@
   "glacier": {
     "name": "Glacier"
   },
+  "health": {
+    "name": "Health"
+  },
   "iam": {
     "name": "IAM"
   },
@@ -184,7 +249,9 @@
   },
   "inspector": {
     "name": "Inspector",
-    "versions": ["2015-08-18*"],
+    "versions": [
+      "2015-08-18*"
+    ],
     "cors": true
   },
   "iot": {
@@ -211,6 +278,14 @@
     "name": "Lambda",
     "cors": true
   },
+  "lexruntime": {
+    "prefix": "runtime.lex",
+    "name": "LexRuntime",
+    "cors": true
+  },
+  "lightsail": {
+    "name": "Lightsail"
+  },
   "machinelearning": {
     "name": "MachineLearning",
     "cors": true
@@ -220,8 +295,13 @@
     "cors": true
   },
   "marketplacemetering": {
-      "prefix": "meteringmarketplace",
-      "name": "MarketplaceMetering"
+    "prefix": "meteringmarketplace",
+    "name": "MarketplaceMetering"
+  },
+  "mturk": {
+    "prefix": "mturk-requester",
+    "name": "MTurk",
+    "cors": true
   },
   "mobileanalytics": {
     "name": "MobileAnalytics",
@@ -231,14 +311,36 @@
     "name": "OpsWorks",
     "cors": true
   },
+  "opsworkscm": {
+    "name": "OpsWorksCM"
+  },
+  "organizations": {
+    "name": "Organizations"
+  },
+  "pinpoint": {
+    "name": "Pinpoint"
+  },
+  "polly": {
+    "name": "Polly",
+    "cors": true
+  },
   "rds": {
     "name": "RDS",
-    "versions": ["2014-09-01*"],
+    "versions": [
+      "2014-09-01*"
+    ],
     "cors": true
   },
   "redshift": {
     "name": "Redshift",
     "cors": true
+  },
+  "rekognition": {
+    "name": "Rekognition",
+    "cors": true
+  },
+  "resourcegroupstaggingapi": {
+    "name": "ResourceGroupsTaggingAPI"
   },
   "route53": {
     "name": "Route53",
@@ -262,9 +364,15 @@
     "name": "SES",
     "cors": true
   },
+  "shield": {
+    "name": "Shield"
+  },
   "simpledb": {
     "prefix": "sdb",
     "name": "SimpleDB"
+  },
+  "sms": {
+    "name": "SMS"
   },
   "snowball": {
     "name": "Snowball"
@@ -285,6 +393,10 @@
     "name": "StorageGateway",
     "cors": true
   },
+  "stepfunctions": {
+    "prefix": "states",
+    "name": "StepFunctions"
+  },
   "sts": {
     "name": "STS",
     "cors": true
@@ -295,11 +407,194 @@
   "swf": {
     "name": "SWF"
   },
+  "xray": {
+    "name": "XRay"
+  },
   "waf": {
     "name": "WAF",
     "cors": true
   },
+  "wafregional": {
+    "prefix": "waf-regional",
+    "name": "WAFRegional"
+  },
+  "workdocs": {
+    "name": "WorkDocs",
+    "cors": true
+  },
   "workspaces": {
     "name": "WorkSpaces"
+  },
+  "codestar": {
+    "name": "CodeStar"
+  },
+  "lexmodelbuildingservice": {
+    "prefix": "lex-models",
+    "name": "LexModelBuildingService",
+    "cors": true
+  },
+  "marketplaceentitlementservice": {
+    "prefix": "entitlement.marketplace",
+    "name": "MarketplaceEntitlementService"
+  },
+  "athena": {
+    "name": "Athena"
+  },
+  "greengrass": {
+    "name": "Greengrass"
+  },
+  "dax": {
+    "name": "DAX"
+  },
+  "migrationhub": {
+    "prefix": "AWSMigrationHub",
+    "name": "MigrationHub"
+  },
+  "cloudhsmv2": {
+    "name": "CloudHSMV2"
+  },
+  "glue": {
+    "name": "Glue"
+  },
+  "mobile": {
+    "name": "Mobile"
+  },
+  "pricing": {
+    "name": "Pricing",
+    "cors": true
+  },
+  "costexplorer": {
+    "prefix": "ce",
+    "name": "CostExplorer"
+  },
+  "mediaconvert": {
+    "name": "MediaConvert"
+  },
+  "medialive": {
+    "name": "MediaLive"
+  },
+  "mediapackage": {
+    "name": "MediaPackage"
+  },
+  "mediastore": {
+    "name": "MediaStore"
+  },
+  "mediastoredata": {
+    "prefix": "mediastore-data",
+    "name": "MediaStoreData"
+  },
+  "appsync": {
+    "name": "AppSync"
+  },
+  "guardduty": {
+    "name": "GuardDuty"
+  },
+  "mq": {
+    "name": "MQ"
+  },
+  "comprehend": {
+    "name": "Comprehend"
+  },
+  "iotjobsdataplane": {
+    "prefix": "iot-jobs-data",
+    "name": "IoTJobsDataPlane"
+  },
+  "kinesisvideoarchivedmedia": {
+    "prefix": "kinesis-video-archived-media",
+    "name": "KinesisVideoArchivedMedia",
+    "cors": true
+  },
+  "kinesisvideomedia": {
+    "prefix": "kinesis-video-media",
+    "name": "KinesisVideoMedia"
+  },
+  "kinesisvideo": {
+    "name": "KinesisVideo",
+    "cors": true
+  },
+  "sagemakerruntime": {
+    "prefix": "runtime.sagemaker",
+    "name": "SageMakerRuntime"
+  },
+  "sagemaker": {
+    "name": "SageMaker"
+  },
+  "translate": {
+    "name": "Translate",
+    "cors": true
+  },
+  "resourcegroups": {
+    "prefix": "resource-groups",
+    "name": "ResourceGroups"
+  },
+  "alexaforbusiness": {
+    "name": "AlexaForBusiness"
+  },
+  "cloud9": {
+    "name": "Cloud9"
+  },
+  "serverlessapplicationrepository": {
+    "prefix": "serverlessrepo",
+    "name": "ServerlessApplicationRepository"
+  },
+  "servicediscovery": {
+    "name": "ServiceDiscovery"
+  },
+  "workmail": {
+    "name": "WorkMail"
+  },
+  "autoscalingplans": {
+    "prefix": "autoscaling-plans",
+    "name": "AutoScalingPlans"
+  },
+  "transcribeservice": {
+    "prefix": "transcribe",
+    "name": "TranscribeService"
+  },
+  "connect": {
+    "name": "Connect"
+  },
+  "acmpca": {
+    "prefix": "acm-pca",
+    "name": "ACMPCA"
+  },
+  "fms": {
+    "name": "FMS"
+  },
+  "secretsmanager": {
+    "name": "SecretsManager",
+    "cors": true
+  },
+  "iotanalytics": {
+    "name": "IoTAnalytics"
+  },
+  "iot1clickdevicesservice": {
+    "prefix": "iot1click-devices",
+    "name": "IoT1ClickDevicesService"
+  },
+  "iot1clickprojects": {
+    "prefix": "iot1click-projects",
+    "name": "IoT1ClickProjects"
+  },
+  "pi": {
+    "name": "PI"
+  },
+  "neptune": {
+    "name": "Neptune"
+  },
+  "mediatailor": {
+    "name": "MediaTailor"
+  },
+  "eks": {
+    "name": "EKS"
+  },
+  "macie": {
+    "name": "Macie"
+  },
+  "dlm": {
+    "name": "DLM"
+  },
+  "signer": {
+    "name": "Signer"
   }
 }

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "AWS CodeBuild Adds Support for Windows Builds."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds CloudWatch Logs integration capabilities to RDS Aurora MySQL clusters"
+    }
+]

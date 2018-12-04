@@ -1,10 +1,11 @@
 require('../lib/node_loader');
 var AWS = require('../lib/core');
-var Service = require('../lib/service');
-var apiLoader = require('../lib/api_loader');
+var Service = AWS.Service;
+var apiLoader = AWS.apiLoader;
 
 apiLoader.services['lambda'] = {};
 AWS.Lambda = Service.defineService('lambda', ['2014-11-11', '2015-03-31']);
+require('../lib/services/lambda');
 Object.defineProperty(apiLoader.services['lambda'], '2014-11-11', {
   get: function get() {
     var model = require('../apis/lambda-2014-11-11.min.json');

@@ -7,9 +7,11 @@
     "protocol":"json",
     "serviceAbbreviation":"CodeDeploy",
     "serviceFullName":"AWS CodeDeploy",
+    "serviceId":"CodeDeploy",
     "signatureVersion":"v4",
     "targetPrefix":"CodeDeploy_20141006",
-    "timestampFormat":"unixTimestamp"
+    "timestampFormat":"unixTimestamp",
+    "uid":"codedeploy-2014-10-06"
   },
   "operations":{
     "AddTagsToOnPremisesInstances":{
@@ -21,6 +23,7 @@
       "input":{"shape":"AddTagsToOnPremisesInstancesInput"},
       "errors":[
         {"shape":"InstanceNameRequiredException"},
+        {"shape":"InvalidInstanceNameException"},
         {"shape":"TagRequiredException"},
         {"shape":"InvalidTagException"},
         {"shape":"TagLimitExceededException"},
@@ -79,7 +82,7 @@
         {"shape":"InvalidDeploymentGroupNameException"},
         {"shape":"BatchLimitExceededException"}
       ],
-      "documentation":"<p>Get information about one or more deployment groups.</p>"
+      "documentation":"<p>Gets information about one or more deployment groups.</p>"
     },
     "BatchGetDeploymentInstances":{
       "name":"BatchGetDeploymentInstances",
@@ -129,6 +132,23 @@
       ],
       "documentation":"<p>Gets information about one or more on-premises instances.</p>"
     },
+    "ContinueDeployment":{
+      "name":"ContinueDeployment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ContinueDeploymentInput"},
+      "errors":[
+        {"shape":"DeploymentIdRequiredException"},
+        {"shape":"DeploymentDoesNotExistException"},
+        {"shape":"DeploymentAlreadyCompletedException"},
+        {"shape":"InvalidDeploymentIdException"},
+        {"shape":"DeploymentIsNotInReadyStateException"},
+        {"shape":"UnsupportedActionForDeploymentTypeException"}
+      ],
+      "documentation":"<p>For a blue/green deployment, starts the process of rerouting traffic from instances in the original environment to instances in the replacement environment without waiting for a specified wait time to elapse. (Traffic rerouting, which is achieved by registering instances in the replacement environment with the load balancer, can start as soon as all instances have a status of Ready.) </p>"
+    },
     "CreateApplication":{
       "name":"CreateApplication",
       "http":{
@@ -141,7 +161,8 @@
         {"shape":"ApplicationNameRequiredException"},
         {"shape":"InvalidApplicationNameException"},
         {"shape":"ApplicationAlreadyExistsException"},
-        {"shape":"ApplicationLimitExceededException"}
+        {"shape":"ApplicationLimitExceededException"},
+        {"shape":"InvalidComputePlatformException"}
       ],
       "documentation":"<p>Creates an application.</p>"
     },
@@ -167,7 +188,16 @@
         {"shape":"DeploymentConfigDoesNotExistException"},
         {"shape":"DescriptionTooLongException"},
         {"shape":"DeploymentLimitExceededException"},
-        {"shape":"InvalidAutoRollbackConfigException"}
+        {"shape":"InvalidTargetInstancesException"},
+        {"shape":"InvalidAutoRollbackConfigException"},
+        {"shape":"InvalidLoadBalancerInfoException"},
+        {"shape":"InvalidFileExistsBehaviorException"},
+        {"shape":"InvalidRoleException"},
+        {"shape":"InvalidAutoScalingGroupException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InvalidUpdateOutdatedInstancesOnlyValueException"},
+        {"shape":"InvalidIgnoreApplicationStopFailuresValueException"},
+        {"shape":"InvalidGitHubAccountTokenException"}
       ],
       "documentation":"<p>Deploys an application revision through the specified deployment group.</p>"
     },
@@ -184,7 +214,9 @@
         {"shape":"DeploymentConfigNameRequiredException"},
         {"shape":"DeploymentConfigAlreadyExistsException"},
         {"shape":"InvalidMinimumHealthyHostValueException"},
-        {"shape":"DeploymentConfigLimitExceededException"}
+        {"shape":"DeploymentConfigLimitExceededException"},
+        {"shape":"InvalidComputePlatformException"},
+        {"shape":"InvalidTrafficRoutingConfigurationException"}
       ],
       "documentation":"<p>Creates a deployment configuration.</p>"
     },
@@ -216,7 +248,14 @@
         {"shape":"TriggerTargetsLimitExceededException"},
         {"shape":"InvalidAlarmConfigException"},
         {"shape":"AlarmsLimitExceededException"},
-        {"shape":"InvalidAutoRollbackConfigException"}
+        {"shape":"InvalidAutoRollbackConfigException"},
+        {"shape":"InvalidLoadBalancerInfoException"},
+        {"shape":"InvalidDeploymentStyleException"},
+        {"shape":"InvalidBlueGreenDeploymentConfigurationException"},
+        {"shape":"InvalidEC2TagCombinationException"},
+        {"shape":"InvalidOnPremisesTagCombinationException"},
+        {"shape":"TagSetListLimitExceededException"},
+        {"shape":"InvalidInputException"}
       ],
       "documentation":"<p>Creates a deployment group to which application revisions will be deployed.</p>"
     },
@@ -264,6 +303,23 @@
         {"shape":"InvalidRoleException"}
       ],
       "documentation":"<p>Deletes a deployment group.</p>"
+    },
+    "DeleteGitHubAccountToken":{
+      "name":"DeleteGitHubAccountToken",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteGitHubAccountTokenInput"},
+      "output":{"shape":"DeleteGitHubAccountTokenOutput"},
+      "errors":[
+        {"shape":"GitHubAccountTokenNameRequiredException"},
+        {"shape":"GitHubAccountTokenDoesNotExistException"},
+        {"shape":"InvalidGitHubAccountTokenNameException"},
+        {"shape":"ResourceValidationException"},
+        {"shape":"OperationNotSupportedException"}
+      ],
+      "documentation":"<p>Deletes a GitHub account connection.</p>"
     },
     "DeregisterOnPremisesInstance":{
       "name":"DeregisterOnPremisesInstance",
@@ -470,7 +526,9 @@
         {"shape":"DeploymentNotStartedException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"InvalidDeploymentIdException"},
-        {"shape":"InvalidInstanceStatusException"}
+        {"shape":"InvalidInstanceStatusException"},
+        {"shape":"InvalidInstanceTypeException"},
+        {"shape":"InvalidDeploymentInstanceTypeException"}
       ],
       "documentation":"<p>Lists the instance for a deployment associated with the applicable IAM user or AWS account.</p>"
     },
@@ -495,6 +553,21 @@
       ],
       "documentation":"<p>Lists the deployments in a deployment group for an application registered with the applicable IAM user or AWS account.</p>"
     },
+    "ListGitHubAccountTokenNames":{
+      "name":"ListGitHubAccountTokenNames",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListGitHubAccountTokenNamesInput"},
+      "output":{"shape":"ListGitHubAccountTokenNamesOutput"},
+      "errors":[
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"ResourceValidationException"},
+        {"shape":"OperationNotSupportedException"}
+      ],
+      "documentation":"<p>Lists the names of stored connections to GitHub accounts.</p>"
+    },
     "ListOnPremisesInstances":{
       "name":"ListOnPremisesInstances",
       "http":{
@@ -509,6 +582,25 @@
         {"shape":"InvalidNextTokenException"}
       ],
       "documentation":"<p>Gets a list of names for one or more on-premises instances.</p> <p>Unless otherwise specified, both registered and deregistered on-premises instance names will be listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.</p>"
+    },
+    "PutLifecycleEventHookExecutionStatus":{
+      "name":"PutLifecycleEventHookExecutionStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutLifecycleEventHookExecutionStatusInput"},
+      "output":{"shape":"PutLifecycleEventHookExecutionStatusOutput"},
+      "errors":[
+        {"shape":"InvalidLifecycleEventHookExecutionStatusException"},
+        {"shape":"InvalidLifecycleEventHookExecutionIdException"},
+        {"shape":"LifecycleEventAlreadyCompletedException"},
+        {"shape":"DeploymentIdRequiredException"},
+        {"shape":"DeploymentDoesNotExistException"},
+        {"shape":"InvalidDeploymentIdException"},
+        {"shape":"UnsupportedActionForDeploymentTypeException"}
+      ],
+      "documentation":"<p>Sets the result of a Lambda validation function. The function validates one or both lifecycle events (<code>BeforeAllowTraffic</code> and <code>AfterAllowTraffic</code>) and returns <code>Succeeded</code> or <code>Failed</code>.</p>"
     },
     "RegisterApplicationRevision":{
       "name":"RegisterApplicationRevision",
@@ -536,13 +628,17 @@
       "input":{"shape":"RegisterOnPremisesInstanceInput"},
       "errors":[
         {"shape":"InstanceNameAlreadyRegisteredException"},
+        {"shape":"IamArnRequiredException"},
+        {"shape":"IamSessionArnAlreadyRegisteredException"},
         {"shape":"IamUserArnAlreadyRegisteredException"},
         {"shape":"InstanceNameRequiredException"},
         {"shape":"IamUserArnRequiredException"},
         {"shape":"InvalidInstanceNameException"},
-        {"shape":"InvalidIamUserArnException"}
+        {"shape":"InvalidIamSessionArnException"},
+        {"shape":"InvalidIamUserArnException"},
+        {"shape":"MultipleIamArnsProvidedException"}
       ],
-      "documentation":"<p>Registers an on-premises instance.</p>"
+      "documentation":"<p>Registers an on-premises instance.</p> <note> <p>Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request. You cannot use both.</p> </note>"
     },
     "RemoveTagsFromOnPremisesInstances":{
       "name":"RemoveTagsFromOnPremisesInstances",
@@ -553,6 +649,7 @@
       "input":{"shape":"RemoveTagsFromOnPremisesInstancesInput"},
       "errors":[
         {"shape":"InstanceNameRequiredException"},
+        {"shape":"InvalidInstanceNameException"},
         {"shape":"TagRequiredException"},
         {"shape":"InvalidTagException"},
         {"shape":"TagLimitExceededException"},
@@ -560,6 +657,23 @@
         {"shape":"InstanceNotRegisteredException"}
       ],
       "documentation":"<p>Removes one or more tags from one or more on-premises instances.</p>"
+    },
+    "SkipWaitTimeForInstanceTermination":{
+      "name":"SkipWaitTimeForInstanceTermination",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SkipWaitTimeForInstanceTerminationInput"},
+      "errors":[
+        {"shape":"DeploymentIdRequiredException"},
+        {"shape":"DeploymentDoesNotExistException"},
+        {"shape":"DeploymentAlreadyCompletedException"},
+        {"shape":"InvalidDeploymentIdException"},
+        {"shape":"DeploymentNotStartedException"},
+        {"shape":"UnsupportedActionForDeploymentTypeException"}
+      ],
+      "documentation":"<p>In a blue/green deployment, overrides any specified wait time and starts terminating instances immediately after the traffic routing is completed.</p>"
     },
     "StopDeployment":{
       "name":"StopDeployment",
@@ -619,7 +733,14 @@
         {"shape":"TriggerTargetsLimitExceededException"},
         {"shape":"InvalidAlarmConfigException"},
         {"shape":"AlarmsLimitExceededException"},
-        {"shape":"InvalidAutoRollbackConfigException"}
+        {"shape":"InvalidAutoRollbackConfigException"},
+        {"shape":"InvalidLoadBalancerInfoException"},
+        {"shape":"InvalidDeploymentStyleException"},
+        {"shape":"InvalidBlueGreenDeploymentConfigurationException"},
+        {"shape":"InvalidEC2TagCombinationException"},
+        {"shape":"InvalidOnPremisesTagCombinationException"},
+        {"shape":"TagSetListLimitExceededException"},
+        {"shape":"InvalidInputException"}
       ],
       "documentation":"<p>Changes information about a deployment group.</p>"
     }
@@ -642,6 +763,10 @@
         }
       },
       "documentation":"<p>Represents the input of, and adds tags to, an on-premises instance operation.</p>"
+    },
+    "AdditionalDeploymentStatusInfo":{
+      "type":"string",
+      "deprecated":true
     },
     "Alarm":{
       "type":"structure",
@@ -716,6 +841,14 @@
         "linkedToGitHub":{
           "shape":"Boolean",
           "documentation":"<p>True if the user has authenticated with GitHub for the specified application; otherwise, false.</p>"
+        },
+        "gitHubAccountName":{
+          "shape":"GitHubAccountTokenName",
+          "documentation":"<p>The name for a connection to a GitHub account.</p>"
+        },
+        "computePlatform":{
+          "shape":"ComputePlatform",
+          "documentation":"<p>The destination platform type for deployment of the application (<code>Lambda</code> or <code>Server</code>).</p>"
         }
       },
       "documentation":"<p>Information about an application.</p>"
@@ -821,7 +954,7 @@
           "documentation":"<p>Information to get about the application revisions, including type and location.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get application revisions operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetApplicationRevisions operation.</p>"
     },
     "BatchGetApplicationRevisionsOutput":{
       "type":"structure",
@@ -839,17 +972,18 @@
           "documentation":"<p>Additional information about the revisions, including the type and location.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get application revisions operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetApplicationRevisions operation.</p>"
     },
     "BatchGetApplicationsInput":{
       "type":"structure",
+      "required":["applicationNames"],
       "members":{
         "applicationNames":{
           "shape":"ApplicationsList",
           "documentation":"<p>A list of application names separated by spaces.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get applications operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetApplications operation.</p>"
     },
     "BatchGetApplicationsOutput":{
       "type":"structure",
@@ -859,7 +993,7 @@
           "documentation":"<p>Information about the applications.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get applications operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetApplications operation.</p>"
     },
     "BatchGetDeploymentGroupsInput":{
       "type":"structure",
@@ -877,7 +1011,7 @@
           "documentation":"<p>The deployment groups' names.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get deployment groups operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetDeploymentGroups operation.</p>"
     },
     "BatchGetDeploymentGroupsOutput":{
       "type":"structure",
@@ -891,7 +1025,7 @@
           "documentation":"<p>Information about errors that may have occurred during the API call.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get deployment groups operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetDeploymentGroups operation.</p>"
     },
     "BatchGetDeploymentInstancesInput":{
       "type":"structure",
@@ -909,7 +1043,7 @@
           "documentation":"<p>The unique IDs of instances in the deployment group.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get deployment instances operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetDeploymentInstances operation.</p>"
     },
     "BatchGetDeploymentInstancesOutput":{
       "type":"structure",
@@ -923,17 +1057,18 @@
           "documentation":"<p>Information about errors that may have occurred during the API call.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get deployment instance operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetDeploymentInstances operation.</p>"
     },
     "BatchGetDeploymentsInput":{
       "type":"structure",
+      "required":["deploymentIds"],
       "members":{
         "deploymentIds":{
           "shape":"DeploymentsList",
           "documentation":"<p>A list of deployment IDs, separated by spaces.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get deployments operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetDeployments operation.</p>"
     },
     "BatchGetDeploymentsOutput":{
       "type":"structure",
@@ -943,17 +1078,18 @@
           "documentation":"<p>Information about the deployments.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get deployments operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetDeployments operation.</p>"
     },
     "BatchGetOnPremisesInstancesInput":{
       "type":"structure",
+      "required":["instanceNames"],
       "members":{
         "instanceNames":{
           "shape":"InstanceNameList",
           "documentation":"<p>The names of the on-premises instances about which to get information.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get on-premises instances operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetOnPremisesInstances operation.</p>"
     },
     "BatchGetOnPremisesInstancesOutput":{
       "type":"structure",
@@ -963,7 +1099,7 @@
           "documentation":"<p>Information about the on-premises instances.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get on-premises instances operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetOnPremisesInstances operation.</p>"
     },
     "BatchLimitExceededException":{
       "type":"structure",
@@ -971,6 +1107,38 @@
       },
       "documentation":"<p>The maximum number of names or IDs allowed for this request (100) was exceeded.</p>",
       "exception":true
+    },
+    "BlueGreenDeploymentConfiguration":{
+      "type":"structure",
+      "members":{
+        "terminateBlueInstancesOnDeploymentSuccess":{
+          "shape":"BlueInstanceTerminationOption",
+          "documentation":"<p>Information about whether to terminate instances in the original fleet during a blue/green deployment.</p>"
+        },
+        "deploymentReadyOption":{
+          "shape":"DeploymentReadyOption",
+          "documentation":"<p>Information about the action to take when newly provisioned instances are ready to receive traffic in a blue/green deployment.</p>"
+        },
+        "greenFleetProvisioningOption":{
+          "shape":"GreenFleetProvisioningOption",
+          "documentation":"<p>Information about how instances are provisioned for a replacement environment in a blue/green deployment.</p>"
+        }
+      },
+      "documentation":"<p>Information about blue/green deployment options for a deployment group.</p>"
+    },
+    "BlueInstanceTerminationOption":{
+      "type":"structure",
+      "members":{
+        "action":{
+          "shape":"InstanceAction",
+          "documentation":"<p>The action to take on instances in the original environment after a successful blue/green deployment.</p> <ul> <li> <p>TERMINATE: Instances are terminated after a specified wait time.</p> </li> <li> <p>KEEP_ALIVE: Instances are left running after they are deregistered from the load balancer and removed from the deployment group.</p> </li> </ul>"
+        },
+        "terminationWaitTimeInMinutes":{
+          "shape":"Duration",
+          "documentation":"<p>The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment. The maximum setting is 2880 minutes (2 days).</p>"
+        }
+      },
+      "documentation":"<p>Information about whether instances in the original environment are terminated when a blue/green deployment is successful.</p>"
     },
     "Boolean":{"type":"boolean"},
     "BucketNameFilterRequiredException":{
@@ -985,10 +1153,28 @@
       "enum":[
         "tar",
         "tgz",
-        "zip"
+        "zip",
+        "YAML",
+        "JSON"
       ]
     },
     "CommitId":{"type":"string"},
+    "ComputePlatform":{
+      "type":"string",
+      "enum":[
+        "Server",
+        "Lambda"
+      ]
+    },
+    "ContinueDeploymentInput":{
+      "type":"structure",
+      "members":{
+        "deploymentId":{
+          "shape":"DeploymentId",
+          "documentation":"<p>The deployment ID of the blue/green deployment for which you want to start rerouting traffic to the replacement environment.</p>"
+        }
+      }
+    },
     "CreateApplicationInput":{
       "type":"structure",
       "required":["applicationName"],
@@ -996,9 +1182,13 @@
         "applicationName":{
           "shape":"ApplicationName",
           "documentation":"<p>The name of the application. This name must be unique with the applicable IAM user or AWS account.</p>"
+        },
+        "computePlatform":{
+          "shape":"ComputePlatform",
+          "documentation":"<p> The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>).</p>"
         }
       },
-      "documentation":"<p>Represents the input of a create application operation.</p>"
+      "documentation":"<p>Represents the input of a CreateApplication operation.</p>"
     },
     "CreateApplicationOutput":{
       "type":"structure",
@@ -1008,7 +1198,7 @@
           "documentation":"<p>A unique application ID.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a create application operation.</p>"
+      "documentation":"<p>Represents the output of a CreateApplication operation.</p>"
     },
     "CreateDeploymentConfigInput":{
       "type":"structure",
@@ -1021,9 +1211,17 @@
         "minimumHealthyHosts":{
           "shape":"MinimumHealthyHosts",
           "documentation":"<p>The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.</p> <p>The type parameter takes either of the following values:</p> <ul> <li> <p>HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.</p> </li> </ul> <p>The value parameter takes an integer.</p> <p>For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.</p>"
+        },
+        "trafficRoutingConfig":{
+          "shape":"TrafficRoutingConfig",
+          "documentation":"<p>The configuration that specifies how the deployment traffic will be routed.</p>"
+        },
+        "computePlatform":{
+          "shape":"ComputePlatform",
+          "documentation":"<p>The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>&gt;).</p>"
         }
       },
-      "documentation":"<p>Represents the input of a create deployment configuration operation.</p>"
+      "documentation":"<p>Represents the input of a CreateDeploymentConfig operation.</p>"
     },
     "CreateDeploymentConfigOutput":{
       "type":"structure",
@@ -1033,7 +1231,7 @@
           "documentation":"<p>A unique deployment configuration ID.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a create deployment configuration operation.</p>"
+      "documentation":"<p>Represents the output of a CreateDeploymentConfig operation.</p>"
     },
     "CreateDeploymentGroupInput":{
       "type":"structure",
@@ -1053,15 +1251,15 @@
         },
         "deploymentConfigName":{
           "shape":"DeploymentConfigName",
-          "documentation":"<p>If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation.</p> <note> <p>CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or the deployment group.</p> </note> <p>The predefined deployment configurations include the following:</p> <ul> <li> <p> <b>CodeDeployDefault.AllAtOnce</b> attempts to deploy an application revision to as many instances as possible at once. The status of the overall deployment will be displayed as <b>Succeeded</b> if the application revision is deployed to one or more of the instances. The status of the overall deployment will be displayed as <b>Failed</b> if the application revision is not deployed to any of the instances. Using an example of nine instances, CodeDeployDefault.AllAtOnce will attempt to deploy to all nine instances at once. The overall deployment will succeed if deployment to even a single instance is successful; it will fail only if deployments to all nine instances fail. </p> </li> <li> <p> <b>CodeDeployDefault.HalfAtATime</b> deploys to up to half of the instances at a time (with fractions rounded down). The overall deployment succeeds if the application revision is deployed to at least half of the instances (with fractions rounded up); otherwise, the deployment fails. In the example of nine instances, it will deploy to up to four instances at a time. The overall deployment succeeds if deployment to five or more instances succeed; otherwise, the deployment fails. The deployment may be successfully deployed to some instances even if the overall deployment fails.</p> </li> <li> <p> <b>CodeDeployDefault.OneAtATime</b> deploys the application revision to only one instance at a time.</p> <p>For deployment groups that contain more than one instance:</p> <ul> <li> <p>The overall deployment succeeds if the application revision is deployed to all of the instances. The exception to this rule is if deployment to the last instance fails, the overall deployment still succeeds. This is because AWS CodeDeploy allows only one instance at a time to be taken offline with the CodeDeployDefault.OneAtATime configuration.</p> </li> <li> <p>The overall deployment fails as soon as the application revision fails to be deployed to any but the last instance. The deployment may be successfully deployed to some instances even if the overall deployment fails.</p> </li> <li> <p>In an example using nine instances, it will deploy to one instance at a time. The overall deployment succeeds if deployment to the first eight instances is successful; the overall deployment fails if deployment to any of the first eight instances fails.</p> </li> </ul> <p>For deployment groups that contain only one instance, the overall deployment is successful only if deployment to the single instance is successful</p> </li> </ul>"
+          "documentation":"<p>If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation.</p> <p>CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or the deployment group.</p> <p>For more information about the predefined deployment configurations in AWS CodeDeploy, see <a href=\"http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html\">Working with Deployment Groups in AWS CodeDeploy</a> in the AWS CodeDeploy User Guide.</p>"
         },
         "ec2TagFilters":{
           "shape":"EC2TagFilterList",
-          "documentation":"<p>The Amazon EC2 tags on which to filter.</p>"
+          "documentation":"<p>The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags. Cannot be used in the same call as ec2TagSet.</p>"
         },
         "onPremisesInstanceTagFilters":{
           "shape":"TagFilterList",
-          "documentation":"<p>The on-premises instance tags on which to filter.</p>"
+          "documentation":"<p>The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags. Cannot be used in the same call as OnPremisesTagSet.</p>"
         },
         "autoScalingGroups":{
           "shape":"AutoScalingGroupNameList",
@@ -1077,14 +1275,34 @@
         },
         "alarmConfiguration":{
           "shape":"AlarmConfiguration",
-          "documentation":"<p>Information to add about Amazon CloudWatch alarms when the deployment group is created. </p>"
+          "documentation":"<p>Information to add about Amazon CloudWatch alarms when the deployment group is created.</p>"
         },
         "autoRollbackConfiguration":{
           "shape":"AutoRollbackConfiguration",
           "documentation":"<p>Configuration information for an automatic rollback that is added when a deployment group is created.</p>"
+        },
+        "deploymentStyle":{
+          "shape":"DeploymentStyle",
+          "documentation":"<p>Information about the type of deployment, in-place or blue/green, that you want to run and whether to route deployment traffic behind a load balancer.</p>"
+        },
+        "blueGreenDeploymentConfiguration":{
+          "shape":"BlueGreenDeploymentConfiguration",
+          "documentation":"<p>Information about blue/green deployment options for a deployment group.</p>"
+        },
+        "loadBalancerInfo":{
+          "shape":"LoadBalancerInfo",
+          "documentation":"<p>Information about the load balancer used in a deployment.</p>"
+        },
+        "ec2TagSet":{
+          "shape":"EC2TagSet",
+          "documentation":"<p>Information about groups of tags applied to EC2 instances. The deployment group will include only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.</p>"
+        },
+        "onPremisesTagSet":{
+          "shape":"OnPremisesTagSet",
+          "documentation":"<p>Information about groups of tags applied to on-premises instances. The deployment group will include only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a create deployment group operation.</p>"
+      "documentation":"<p>Represents the input of a CreateDeploymentGroup operation.</p>"
     },
     "CreateDeploymentGroupOutput":{
       "type":"structure",
@@ -1094,7 +1312,7 @@
           "documentation":"<p>A unique deployment group ID.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a create deployment group operation.</p>"
+      "documentation":"<p>Represents the output of a CreateDeploymentGroup operation.</p>"
     },
     "CreateDeploymentInput":{
       "type":"structure",
@@ -1124,6 +1342,10 @@
           "shape":"Boolean",
           "documentation":"<p>If set to true, then if the deployment causes the ApplicationStop deployment lifecycle event to an instance to fail, the deployment to that instance will not be considered to have failed at that point and will continue on to the BeforeInstall deployment lifecycle event.</p> <p>If set to false or not specified, then if the deployment causes the ApplicationStop deployment lifecycle event to fail to an instance, the deployment to that instance will stop, and the deployment to that instance will be considered to have failed.</p>"
         },
+        "targetInstances":{
+          "shape":"TargetInstances",
+          "documentation":"<p>Information about the instances that will belong to the replacement environment in a blue/green deployment.</p>"
+        },
         "autoRollbackConfiguration":{
           "shape":"AutoRollbackConfiguration",
           "documentation":"<p>Configuration information for an automatic rollback that is added when a deployment is created.</p>"
@@ -1131,9 +1353,13 @@
         "updateOutdatedInstancesOnly":{
           "shape":"Boolean",
           "documentation":"<p>Indicates whether to deploy to all instances or only to instances that are not running the latest application revision.</p>"
+        },
+        "fileExistsBehavior":{
+          "shape":"FileExistsBehavior",
+          "documentation":"<p>Information about how AWS CodeDeploy handles files that already exist in a deployment target location but weren't part of the previous successful deployment.</p> <p>The fileExistsBehavior parameter takes any of the following values:</p> <ul> <li> <p>DISALLOW: The deployment fails. This is also the default behavior if no option is specified.</p> </li> <li> <p>OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.</p> </li> <li> <p>RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.</p> </li> </ul>"
         }
       },
-      "documentation":"<p>Represents the input of a create deployment operation.</p>"
+      "documentation":"<p>Represents the input of a CreateDeployment operation.</p>"
     },
     "CreateDeploymentOutput":{
       "type":"structure",
@@ -1143,7 +1369,7 @@
           "documentation":"<p>A unique deployment ID.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a create deployment operation.</p>"
+      "documentation":"<p>Represents the output of a CreateDeployment operation.</p>"
     },
     "DeleteApplicationInput":{
       "type":"structure",
@@ -1154,7 +1380,7 @@
           "documentation":"<p>The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a delete application operation.</p>"
+      "documentation":"<p>Represents the input of a DeleteApplication operation.</p>"
     },
     "DeleteDeploymentConfigInput":{
       "type":"structure",
@@ -1165,7 +1391,7 @@
           "documentation":"<p>The name of a deployment configuration associated with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a delete deployment configuration operation.</p>"
+      "documentation":"<p>Represents the input of a DeleteDeploymentConfig operation.</p>"
     },
     "DeleteDeploymentGroupInput":{
       "type":"structure",
@@ -1183,7 +1409,7 @@
           "documentation":"<p>The name of an existing deployment group for the specified application.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a delete deployment group operation.</p>"
+      "documentation":"<p>Represents the input of a DeleteDeploymentGroup operation.</p>"
     },
     "DeleteDeploymentGroupOutput":{
       "type":"structure",
@@ -1193,7 +1419,27 @@
           "documentation":"<p>If the output contains no data, and the corresponding deployment group contained at least one Auto Scaling group, AWS CodeDeploy successfully removed all corresponding Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group. If the output contains data, AWS CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a delete deployment group operation.</p>"
+      "documentation":"<p>Represents the output of a DeleteDeploymentGroup operation.</p>"
+    },
+    "DeleteGitHubAccountTokenInput":{
+      "type":"structure",
+      "members":{
+        "tokenName":{
+          "shape":"GitHubAccountTokenName",
+          "documentation":"<p>The name of the GitHub account connection to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a DeleteGitHubAccount operation.</p>"
+    },
+    "DeleteGitHubAccountTokenOutput":{
+      "type":"structure",
+      "members":{
+        "tokenName":{
+          "shape":"GitHubAccountTokenName",
+          "documentation":"<p>The name of the GitHub account connection that was deleted.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a DeleteGitHubAccountToken operation.</p>"
     },
     "DeploymentAlreadyCompletedException":{
       "type":"structure",
@@ -1242,6 +1488,14 @@
         "createTime":{
           "shape":"Timestamp",
           "documentation":"<p>The time at which the deployment configuration was created.</p>"
+        },
+        "computePlatform":{
+          "shape":"ComputePlatform",
+          "documentation":"<p>The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>).</p>"
+        },
+        "trafficRoutingConfig":{
+          "shape":"TrafficRoutingConfig",
+          "documentation":"<p>The configuration specifying how the deployment traffic will be routed. Only deployments with a Lambda compute platform can specify this.</p>"
         }
       },
       "documentation":"<p>Information about a deployment configuration.</p>"
@@ -1320,11 +1574,11 @@
         },
         "ec2TagFilters":{
           "shape":"EC2TagFilterList",
-          "documentation":"<p>The Amazon EC2 tags on which to filter.</p>"
+          "documentation":"<p>The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances with any of the specified tags.</p>"
         },
         "onPremisesInstanceTagFilters":{
           "shape":"TagFilterList",
-          "documentation":"<p>The on-premises instance tags on which to filter.</p>"
+          "documentation":"<p>The on-premises instance tags on which to filter. The deployment group includes on-premises instances with any of the specified tags.</p>"
         },
         "autoScalingGroups":{
           "shape":"AutoScalingGroupList",
@@ -1349,6 +1603,38 @@
         "autoRollbackConfiguration":{
           "shape":"AutoRollbackConfiguration",
           "documentation":"<p>Information about the automatic rollback configuration associated with the deployment group.</p>"
+        },
+        "deploymentStyle":{
+          "shape":"DeploymentStyle",
+          "documentation":"<p>Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.</p>"
+        },
+        "blueGreenDeploymentConfiguration":{
+          "shape":"BlueGreenDeploymentConfiguration",
+          "documentation":"<p>Information about blue/green deployment options for a deployment group.</p>"
+        },
+        "loadBalancerInfo":{
+          "shape":"LoadBalancerInfo",
+          "documentation":"<p>Information about the load balancer to use in a deployment.</p>"
+        },
+        "lastSuccessfulDeployment":{
+          "shape":"LastDeploymentInfo",
+          "documentation":"<p>Information about the most recent successful deployment to the deployment group.</p>"
+        },
+        "lastAttemptedDeployment":{
+          "shape":"LastDeploymentInfo",
+          "documentation":"<p>Information about the most recent attempted deployment to the deployment group.</p>"
+        },
+        "ec2TagSet":{
+          "shape":"EC2TagSet",
+          "documentation":"<p>Information about groups of tags applied to an EC2 instance. The deployment group includes only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.</p>"
+        },
+        "onPremisesTagSet":{
+          "shape":"OnPremisesTagSet",
+          "documentation":"<p>Information about groups of tags applied to an on-premises instance. The deployment group includes only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.</p>"
+        },
+        "computePlatform":{
+          "shape":"ComputePlatform",
+          "documentation":"<p>The destination platform type for the deployment group (<code>Lambda</code> or <code>Server</code>).</p>"
         }
       },
       "documentation":"<p>Information about a deployment group.</p>"
@@ -1407,6 +1693,10 @@
           "shape":"DeploymentId",
           "documentation":"<p>The deployment ID.</p>"
         },
+        "previousRevision":{
+          "shape":"RevisionLocation",
+          "documentation":"<p>Information about the application revision that was deployed to the deployment group before the most recent successful deployment.</p>"
+        },
         "revision":{
           "shape":"RevisionLocation",
           "documentation":"<p>Information about the location of stored application artifacts and the service from which to retrieve them.</p>"
@@ -1458,9 +1748,52 @@
         "rollbackInfo":{
           "shape":"RollbackInfo",
           "documentation":"<p>Information about a deployment rollback.</p>"
+        },
+        "deploymentStyle":{
+          "shape":"DeploymentStyle",
+          "documentation":"<p>Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.</p>"
+        },
+        "targetInstances":{
+          "shape":"TargetInstances",
+          "documentation":"<p>Information about the instances that belong to the replacement environment in a blue/green deployment.</p>"
+        },
+        "instanceTerminationWaitTimeStarted":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether the wait period set for the termination of instances in the original environment has started. Status is 'false' if the KEEP_ALIVE option is specified; otherwise, 'true' as soon as the termination wait period starts.</p>"
+        },
+        "blueGreenDeploymentConfiguration":{
+          "shape":"BlueGreenDeploymentConfiguration",
+          "documentation":"<p>Information about blue/green deployment options for this deployment.</p>"
+        },
+        "loadBalancerInfo":{
+          "shape":"LoadBalancerInfo",
+          "documentation":"<p>Information about the load balancer used in the deployment.</p>"
+        },
+        "additionalDeploymentStatusInfo":{
+          "shape":"AdditionalDeploymentStatusInfo",
+          "documentation":"<p>Provides information about the results of a deployment, such as whether instances in the original environment in a blue/green deployment were not terminated.</p>"
+        },
+        "fileExistsBehavior":{
+          "shape":"FileExistsBehavior",
+          "documentation":"<p>Information about how AWS CodeDeploy handles files that already exist in a deployment target location but weren't part of the previous successful deployment.</p> <ul> <li> <p>DISALLOW: The deployment fails. This is also the default behavior if no option is specified.</p> </li> <li> <p>OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.</p> </li> <li> <p>RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.</p> </li> </ul>"
+        },
+        "deploymentStatusMessages":{
+          "shape":"DeploymentStatusMessageList",
+          "documentation":"<p>Messages that contain information about the status of a deployment.</p>"
+        },
+        "computePlatform":{
+          "shape":"ComputePlatform",
+          "documentation":"<p>The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>).</p>"
         }
       },
       "documentation":"<p>Information about a deployment.</p>"
+    },
+    "DeploymentIsNotInReadyStateException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The deployment does not have a status of Ready and can't continue yet.</p>",
+      "exception":true
     },
     "DeploymentLimitExceededException":{
       "type":"structure",
@@ -1475,6 +1808,13 @@
       },
       "documentation":"<p>The specified deployment has not started.</p>",
       "exception":true
+    },
+    "DeploymentOption":{
+      "type":"string",
+      "enum":[
+        "WITH_TRAFFIC_CONTROL",
+        "WITHOUT_TRAFFIC_CONTROL"
+      ]
     },
     "DeploymentOverview":{
       "type":"structure",
@@ -1498,9 +1838,34 @@
         "Skipped":{
           "shape":"InstanceCount",
           "documentation":"<p>The number of instances in the deployment in a skipped state.</p>"
+        },
+        "Ready":{
+          "shape":"InstanceCount",
+          "documentation":"<p>The number of instances in a replacement environment ready to receive traffic in a blue/green deployment.</p>"
         }
       },
       "documentation":"<p>Information about the deployment status of the instances in the deployment.</p>"
+    },
+    "DeploymentReadyAction":{
+      "type":"string",
+      "enum":[
+        "CONTINUE_DEPLOYMENT",
+        "STOP_DEPLOYMENT"
+      ]
+    },
+    "DeploymentReadyOption":{
+      "type":"structure",
+      "members":{
+        "actionOnTimeout":{
+          "shape":"DeploymentReadyAction",
+          "documentation":"<p>Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment.</p> <ul> <li> <p>CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment.</p> </li> <li> <p>STOP_DEPLOYMENT: Do not register new instances with a load balancer unless traffic rerouting is started using <a>ContinueDeployment</a>. If traffic rerouting is not started before the end of the specified wait period, the deployment status is changed to Stopped.</p> </li> </ul>"
+        },
+        "waitTimeInMinutes":{
+          "shape":"Duration",
+          "documentation":"<p>The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout</p>"
+        }
+      },
+      "documentation":"<p>Information about how traffic is rerouted to instances in a replacement environment in a blue/green deployment.</p>"
     },
     "DeploymentStatus":{
       "type":"string",
@@ -1510,12 +1875,38 @@
         "InProgress",
         "Succeeded",
         "Failed",
-        "Stopped"
+        "Stopped",
+        "Ready"
       ]
     },
     "DeploymentStatusList":{
       "type":"list",
       "member":{"shape":"DeploymentStatus"}
+    },
+    "DeploymentStatusMessageList":{
+      "type":"list",
+      "member":{"shape":"ErrorMessage"}
+    },
+    "DeploymentStyle":{
+      "type":"structure",
+      "members":{
+        "deploymentType":{
+          "shape":"DeploymentType",
+          "documentation":"<p>Indicates whether to run an in-place deployment or a blue/green deployment.</p>"
+        },
+        "deploymentOption":{
+          "shape":"DeploymentOption",
+          "documentation":"<p>Indicates whether to route deployment traffic behind a load balancer.</p>"
+        }
+      },
+      "documentation":"<p>Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.</p>"
+    },
+    "DeploymentType":{
+      "type":"string",
+      "enum":[
+        "IN_PLACE",
+        "BLUE_GREEN"
+      ]
     },
     "DeploymentsInfoList":{
       "type":"list",
@@ -1534,7 +1925,7 @@
           "documentation":"<p>The name of the on-premises instance to deregister.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a deregister on-premises instance operation.</p>"
+      "documentation":"<p>Represents the input of a DeregisterOnPremisesInstance operation.</p>"
     },
     "Description":{"type":"string"},
     "DescriptionTooLongException":{
@@ -1566,6 +1957,7 @@
       },
       "documentation":"<p>Diagnostic information about executable scripts that are part of a deployment.</p>"
     },
+    "Duration":{"type":"integer"},
     "EC2TagFilter":{
       "type":"structure",
       "members":{
@@ -1582,7 +1974,7 @@
           "documentation":"<p>The tag filter type:</p> <ul> <li> <p>KEY_ONLY: Key only.</p> </li> <li> <p>VALUE_ONLY: Value only.</p> </li> <li> <p>KEY_AND_VALUE: Key and value.</p> </li> </ul>"
         }
       },
-      "documentation":"<p>Information about a tag filter.</p>"
+      "documentation":"<p>Information about an EC2 tag filter.</p>"
     },
     "EC2TagFilterList":{
       "type":"list",
@@ -1596,6 +1988,35 @@
         "KEY_AND_VALUE"
       ]
     },
+    "EC2TagSet":{
+      "type":"structure",
+      "members":{
+        "ec2TagSetList":{
+          "shape":"EC2TagSetList",
+          "documentation":"<p>A list containing other lists of EC2 instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.</p>"
+        }
+      },
+      "documentation":"<p>Information about groups of EC2 instance tags.</p>"
+    },
+    "EC2TagSetList":{
+      "type":"list",
+      "member":{"shape":"EC2TagFilterList"}
+    },
+    "ELBInfo":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"ELBName",
+          "documentation":"<p>For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.</p>"
+        }
+      },
+      "documentation":"<p>Information about a load balancer in Elastic Load Balancing to use in a deployment. Instances are registered directly with a load balancer, and traffic is routed to the load balancer.</p>"
+    },
+    "ELBInfoList":{
+      "type":"list",
+      "member":{"shape":"ELBInfo"}
+    },
+    "ELBName":{"type":"string"},
     "ETag":{"type":"string"},
     "ErrorCode":{
       "type":"string",
@@ -1617,7 +2038,15 @@
         "AGENT_ISSUE",
         "AUTO_SCALING_IAM_ROLE_PERMISSIONS",
         "AUTO_SCALING_CONFIGURATION",
-        "MANUAL_STOP"
+        "MANUAL_STOP",
+        "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION",
+        "MISSING_ELB_INFORMATION",
+        "MISSING_GITHUB_TOKEN",
+        "ELASTIC_LOAD_BALANCING_INVALID",
+        "ELB_INVALID_INSTANCE",
+        "INVALID_LAMBDA_CONFIGURATION",
+        "INVALID_LAMBDA_FUNCTION",
+        "HOOK_EXECUTION_FAILURE"
       ]
     },
     "ErrorInformation":{
@@ -1625,7 +2054,7 @@
       "members":{
         "code":{
           "shape":"ErrorCode",
-          "documentation":"<p>The error code:</p> <ul> <li> <p>APPLICATION_MISSING: The application was missing. This error code will most likely be raised if the application is deleted after the deployment is created but before it is started.</p> </li> <li> <p>DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code will most likely be raised if the deployment group is deleted after the deployment is created but before it is started.</p> </li> <li> <p>HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.</p> </li> <li> <p>HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.</p> </li> <li> <p>IAM_ROLE_MISSING: The service role cannot be accessed.</p> </li> <li> <p>IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.</p> </li> <li> <p>INTERNAL_ERROR: There was an internal error.</p> </li> <li> <p>NO_EC2_SUBSCRIPTION: The calling account is not subscribed to the Amazon EC2 service.</p> </li> <li> <p>NO_INSTANCES: No instance were specified, or no instance can be found.</p> </li> <li> <p>OVER_MAX_INSTANCES: The maximum number of instance was exceeded.</p> </li> <li> <p>THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.</p> </li> <li> <p>TIMEOUT: The deployment has timed out.</p> </li> <li> <p>REVISION_MISSING: The revision ID was missing. This error code will most likely be raised if the revision is deleted after the deployment is created but before it is started.</p> </li> </ul>"
+          "documentation":"<p>For information about additional error codes, see <a href=\"http://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html\">Error Codes for AWS CodeDeploy</a> in the <a href=\"http://docs.aws.amazon.com/codedeploy/latest/userguide\">AWS CodeDeploy User Guide</a>.</p> <p>The error code:</p> <ul> <li> <p>APPLICATION_MISSING: The application was missing. This error code will most likely be raised if the application is deleted after the deployment is created but before it is started.</p> </li> <li> <p>DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code will most likely be raised if the deployment group is deleted after the deployment is created but before it is started.</p> </li> <li> <p>HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.</p> </li> <li> <p>HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.</p> </li> <li> <p>IAM_ROLE_MISSING: The service role cannot be accessed.</p> </li> <li> <p>IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.</p> </li> <li> <p>INTERNAL_ERROR: There was an internal error.</p> </li> <li> <p>NO_EC2_SUBSCRIPTION: The calling account is not subscribed to the Amazon EC2 service.</p> </li> <li> <p>NO_INSTANCES: No instance were specified, or no instance can be found.</p> </li> <li> <p>OVER_MAX_INSTANCES: The maximum number of instance was exceeded.</p> </li> <li> <p>THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.</p> </li> <li> <p>TIMEOUT: The deployment has timed out.</p> </li> <li> <p>REVISION_MISSING: The revision ID was missing. This error code will most likely be raised if the revision is deleted after the deployment is created but before it is started.</p> </li> </ul>"
         },
         "message":{
           "shape":"ErrorMessage",
@@ -1635,6 +2064,14 @@
       "documentation":"<p>Information about a deployment error.</p>"
     },
     "ErrorMessage":{"type":"string"},
+    "FileExistsBehavior":{
+      "type":"string",
+      "enum":[
+        "DISALLOW",
+        "OVERWRITE",
+        "RETAIN"
+      ]
+    },
     "GenericRevisionInfo":{
       "type":"structure",
       "members":{
@@ -1670,7 +2107,7 @@
           "documentation":"<p>The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get application operation.</p>"
+      "documentation":"<p>Represents the input of a GetApplication operation.</p>"
     },
     "GetApplicationOutput":{
       "type":"structure",
@@ -1680,7 +2117,7 @@
           "documentation":"<p>Information about the application.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get application operation.</p>"
+      "documentation":"<p>Represents the output of a GetApplication operation.</p>"
     },
     "GetApplicationRevisionInput":{
       "type":"structure",
@@ -1698,7 +2135,7 @@
           "documentation":"<p>Information about the application revision to get, including type and location.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get application revision operation.</p>"
+      "documentation":"<p>Represents the input of a GetApplicationRevision operation.</p>"
     },
     "GetApplicationRevisionOutput":{
       "type":"structure",
@@ -1716,7 +2153,7 @@
           "documentation":"<p>General information about the revision.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get application revision operation.</p>"
+      "documentation":"<p>Represents the output of a GetApplicationRevision operation.</p>"
     },
     "GetDeploymentConfigInput":{
       "type":"structure",
@@ -1727,7 +2164,7 @@
           "documentation":"<p>The name of a deployment configuration associated with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get deployment configuration operation.</p>"
+      "documentation":"<p>Represents the input of a GetDeploymentConfig operation.</p>"
     },
     "GetDeploymentConfigOutput":{
       "type":"structure",
@@ -1737,7 +2174,7 @@
           "documentation":"<p>Information about the deployment configuration.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get deployment configuration operation.</p>"
+      "documentation":"<p>Represents the output of a GetDeploymentConfig operation.</p>"
     },
     "GetDeploymentGroupInput":{
       "type":"structure",
@@ -1755,7 +2192,7 @@
           "documentation":"<p>The name of an existing deployment group for the specified application.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get deployment group operation.</p>"
+      "documentation":"<p>Represents the input of a GetDeploymentGroup operation.</p>"
     },
     "GetDeploymentGroupOutput":{
       "type":"structure",
@@ -1765,7 +2202,7 @@
           "documentation":"<p>Information about the deployment group.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get deployment group operation.</p>"
+      "documentation":"<p>Represents the output of a GetDeploymentGroup operation.</p>"
     },
     "GetDeploymentInput":{
       "type":"structure",
@@ -1776,7 +2213,7 @@
           "documentation":"<p>A deployment ID associated with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get deployment operation.</p>"
+      "documentation":"<p>Represents the input of a GetDeployment operation.</p>"
     },
     "GetDeploymentInstanceInput":{
       "type":"structure",
@@ -1794,7 +2231,7 @@
           "documentation":"<p>The unique ID of an instance in the deployment group.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get deployment instance operation.</p>"
+      "documentation":"<p>Represents the input of a GetDeploymentInstance operation.</p>"
     },
     "GetDeploymentInstanceOutput":{
       "type":"structure",
@@ -1804,7 +2241,7 @@
           "documentation":"<p>Information about the instance.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get deployment instance operation.</p>"
+      "documentation":"<p>Represents the output of a GetDeploymentInstance operation.</p>"
     },
     "GetDeploymentOutput":{
       "type":"structure",
@@ -1814,7 +2251,7 @@
           "documentation":"<p>Information about the deployment.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get deployment operation.</p>"
+      "documentation":"<p>Represents the output of a GetDeployment operation.</p>"
     },
     "GetOnPremisesInstanceInput":{
       "type":"structure",
@@ -1825,7 +2262,7 @@
           "documentation":"<p>The name of the on-premises instance about which to get information.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get on-premises instance operation.</p>"
+      "documentation":"<p>Represents the input of a GetOnPremisesInstance operation.</p>"
     },
     "GetOnPremisesInstanceOutput":{
       "type":"structure",
@@ -1835,7 +2272,26 @@
           "documentation":"<p>Information about the on-premises instance.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get on-premises instance operation.</p>"
+      "documentation":"<p>Represents the output of a GetOnPremisesInstance operation.</p>"
+    },
+    "GitHubAccountTokenDoesNotExistException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>No GitHub account connection exists with the named specified in the call.</p>",
+      "exception":true
+    },
+    "GitHubAccountTokenName":{"type":"string"},
+    "GitHubAccountTokenNameList":{
+      "type":"list",
+      "member":{"shape":"GitHubAccountTokenName"}
+    },
+    "GitHubAccountTokenNameRequiredException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The call is missing a required GitHub account connection name.</p>",
+      "exception":true
     },
     "GitHubLocation":{
       "type":"structure",
@@ -1851,6 +2307,38 @@
       },
       "documentation":"<p>Information about the location of application artifacts stored in GitHub.</p>"
     },
+    "GreenFleetProvisioningAction":{
+      "type":"string",
+      "enum":[
+        "DISCOVER_EXISTING",
+        "COPY_AUTO_SCALING_GROUP"
+      ]
+    },
+    "GreenFleetProvisioningOption":{
+      "type":"structure",
+      "members":{
+        "action":{
+          "shape":"GreenFleetProvisioningAction",
+          "documentation":"<p>The method used to add instances to a replacement environment.</p> <ul> <li> <p>DISCOVER_EXISTING: Use instances that already exist or will be created manually.</p> </li> <li> <p>COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling group to define and create instances in a new Auto Scaling group.</p> </li> </ul>"
+        }
+      },
+      "documentation":"<p>Information about the instances that belong to the replacement environment in a blue/green deployment.</p>"
+    },
+    "IamArnRequiredException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>No IAM ARN was included in the request. You must use an IAM session ARN or IAM user ARN in the request.</p>",
+      "exception":true
+    },
+    "IamSessionArn":{"type":"string"},
+    "IamSessionArnAlreadyRegisteredException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The request included an IAM session ARN that has already been used to register a different instance.</p>",
+      "exception":true
+    },
     "IamUserArn":{"type":"string"},
     "IamUserArnAlreadyRegisteredException":{
       "type":"structure",
@@ -1865,6 +2353,13 @@
       },
       "documentation":"<p>An IAM user ARN was not specified.</p>",
       "exception":true
+    },
+    "InstanceAction":{
+      "type":"string",
+      "enum":[
+        "TERMINATE",
+        "KEEP_ALIVE"
+      ]
     },
     "InstanceArn":{"type":"string"},
     "InstanceCount":{"type":"long"},
@@ -1889,6 +2384,10 @@
         "instanceName":{
           "shape":"InstanceName",
           "documentation":"<p>The name of the on-premises instance.</p>"
+        },
+        "iamSessionArn":{
+          "shape":"IamSessionArn",
+          "documentation":"<p>The ARN of the IAM session associated with the on-premises instance.</p>"
         },
         "iamUserArn":{
           "shape":"IamUserArn",
@@ -1958,7 +2457,8 @@
         "Succeeded",
         "Failed",
         "Skipped",
-        "Unknown"
+        "Unknown",
+        "Ready"
       ]
     },
     "InstanceStatusList":{
@@ -1987,6 +2487,10 @@
         "lifecycleEvents":{
           "shape":"LifecycleEventList",
           "documentation":"<p>A list of lifecycle events for this instance.</p>"
+        },
+        "instanceType":{
+          "shape":"InstanceType",
+          "documentation":"<p>Information about which environment an instance belongs to in a blue/green deployment.</p> <ul> <li> <p>BLUE: The instance is part of the original environment.</p> </li> <li> <p>GREEN: The instance is part of the replacement environment.</p> </li> </ul>"
         }
       },
       "documentation":"<p>Information about an instance in a deployment.</p>"
@@ -1994,6 +2498,17 @@
     "InstanceSummaryList":{
       "type":"list",
       "member":{"shape":"InstanceSummary"}
+    },
+    "InstanceType":{
+      "type":"string",
+      "enum":[
+        "Blue",
+        "Green"
+      ]
+    },
+    "InstanceTypeList":{
+      "type":"list",
+      "member":{"shape":"InstanceType"}
     },
     "InstancesList":{
       "type":"list",
@@ -2027,11 +2542,25 @@
       "documentation":"<p>The Auto Scaling group was specified in an invalid format or does not exist.</p>",
       "exception":true
     },
+    "InvalidBlueGreenDeploymentConfigurationException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The configuration for the blue/green deployment group was provided in an invalid format. For information about deployment configuration format, see <a>CreateDeploymentConfig</a>.</p>",
+      "exception":true
+    },
     "InvalidBucketNameFilterException":{
       "type":"structure",
       "members":{
       },
       "documentation":"<p>The bucket name either doesn't exist or was specified in an invalid format.</p>",
+      "exception":true
+    },
+    "InvalidComputePlatformException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The computePlatform is invalid. The computePlatform should be <code>Lambda</code> or <code>Server</code>.</p>",
       "exception":true
     },
     "InvalidDeployedStateFilterException":{
@@ -2062,11 +2591,32 @@
       "documentation":"<p>At least one of the deployment IDs was specified in an invalid format.</p>",
       "exception":true
     },
+    "InvalidDeploymentInstanceTypeException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An instance type was specified for an in-place deployment. Instance types are supported for blue/green deployments only.</p>",
+      "exception":true
+    },
     "InvalidDeploymentStatusException":{
       "type":"structure",
       "members":{
       },
       "documentation":"<p>The specified deployment status doesn't exist or cannot be determined.</p>",
+      "exception":true
+    },
+    "InvalidDeploymentStyleException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An invalid deployment style was specified. Valid deployment types include \"IN_PLACE\" and \"BLUE_GREEN\". Valid deployment options include \"WITH_TRAFFIC_CONTROL\" and \"WITHOUT_TRAFFIC_CONTROL\".</p>",
+      "exception":true
+    },
+    "InvalidEC2TagCombinationException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but only one of these data types can be used in a single call.</p>",
       "exception":true
     },
     "InvalidEC2TagException":{
@@ -2076,11 +2626,60 @@
       "documentation":"<p>The tag was specified in an invalid format.</p>",
       "exception":true
     },
+    "InvalidFileExistsBehaviorException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An invalid fileExistsBehavior option was specified to determine how AWS CodeDeploy handles files or directories that already exist in a deployment target location but weren't part of the previous successful deployment. Valid values include \"DISALLOW\", \"OVERWRITE\", and \"RETAIN\".</p>",
+      "exception":true
+    },
+    "InvalidGitHubAccountTokenException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The GitHub token is not valid.</p>",
+      "exception":true
+    },
+    "InvalidGitHubAccountTokenNameException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The format of the specified GitHub account connection name is invalid.</p>",
+      "exception":true
+    },
+    "InvalidIamSessionArnException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The IAM session ARN was specified in an invalid format.</p>",
+      "exception":true
+    },
     "InvalidIamUserArnException":{
       "type":"structure",
       "members":{
       },
       "documentation":"<p>The IAM user ARN was specified in an invalid format.</p>",
+      "exception":true
+    },
+    "InvalidIgnoreApplicationStopFailuresValueException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The IgnoreApplicationStopFailures value is invalid. For AWS Lambda deployments, <code>false</code> is expected. For EC2/On-premises deployments, <code>true</code> or <code>false</code> is expected.</p>",
+      "exception":true
+    },
+    "InvalidInputException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The specified input was specified in an invalid format.</p>",
+      "exception":true
+    },
+    "InvalidInstanceIdException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p> </p>",
       "exception":true
     },
     "InvalidInstanceNameException":{
@@ -2097,11 +2696,39 @@
       "documentation":"<p>The specified instance status does not exist.</p>",
       "exception":true
     },
+    "InvalidInstanceTypeException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An invalid instance type was specified for instances in a blue/green deployment. Valid values include \"Blue\" for an original environment and \"Green\" for a replacement environment.</p>",
+      "exception":true
+    },
     "InvalidKeyPrefixFilterException":{
       "type":"structure",
       "members":{
       },
       "documentation":"<p>The specified key prefix filter was specified in an invalid format.</p>",
+      "exception":true
+    },
+    "InvalidLifecycleEventHookExecutionIdException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>A lifecycle event hook is invalid. Review the <code>hooks</code> section in your AppSpec file to ensure the lifecycle events and <code>hooks</code> functions are valid.</p>",
+      "exception":true
+    },
+    "InvalidLifecycleEventHookExecutionStatusException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The result of a Lambda validation function that verifies a lifecycle event is invalid. It should return <code>Succeeded</code> or <code>Failed</code>.</p>",
+      "exception":true
+    },
+    "InvalidLoadBalancerInfoException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An invalid load balancer name, or no load balancer name, was specified.</p>",
       "exception":true
     },
     "InvalidMinimumHealthyHostValueException":{
@@ -2116,6 +2743,13 @@
       "members":{
       },
       "documentation":"<p>The next token was specified in an invalid format.</p>",
+      "exception":true
+    },
+    "InvalidOnPremisesTagCombinationException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet, but only one of these data types can be used in a single call.</p>",
       "exception":true
     },
     "InvalidOperationException":{
@@ -2174,11 +2808,25 @@
       "documentation":"<p>The specified tag filter was specified in an invalid format.</p>",
       "exception":true
     },
+    "InvalidTargetInstancesException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The target instance configuration is invalid. Possible causes include:</p> <ul> <li> <p>Configuration data for target instances was entered for an in-place deployment.</p> </li> <li> <p>The limit of 10 tags for a tag type was exceeded.</p> </li> <li> <p>The combined length of the tag names exceeded the limit. </p> </li> <li> <p>A specified tag is not currently applied to any instances.</p> </li> </ul>",
+      "exception":true
+    },
     "InvalidTimeRangeException":{
       "type":"structure",
       "members":{
       },
       "documentation":"<p>The specified time range was specified in an invalid format.</p>",
+      "exception":true
+    },
+    "InvalidTrafficRoutingConfigurationException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p> The configuration that specifies how traffic is routed during a deployment is invalid.</p>",
       "exception":true
     },
     "InvalidTriggerConfigException":{
@@ -2188,7 +2836,36 @@
       "documentation":"<p>The trigger was specified in an invalid format.</p>",
       "exception":true
     },
+    "InvalidUpdateOutdatedInstancesOnlyValueException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The UpdateOutdatedInstancesOnly value is invalid. For AWS Lambda deployments, <code>false</code> is expected. For EC2/On-premises deployments, <code>true</code> or <code>false</code> is expected.</p>",
+      "exception":true
+    },
     "Key":{"type":"string"},
+    "LastDeploymentInfo":{
+      "type":"structure",
+      "members":{
+        "deploymentId":{
+          "shape":"DeploymentId",
+          "documentation":"<p>The deployment ID.</p>"
+        },
+        "status":{
+          "shape":"DeploymentStatus",
+          "documentation":"<p>The status of the most recent deployment.</p>"
+        },
+        "endTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp indicating when the most recent deployment to the deployment group completed.</p>"
+        },
+        "createTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp indicating when the most recent deployment to the deployment group started.</p>"
+        }
+      },
+      "documentation":"<p>Information about the most recent attempted or successful deployment to a deployment group.</p>"
+    },
     "LifecycleErrorCode":{
       "type":"string",
       "enum":[
@@ -2226,6 +2903,14 @@
       },
       "documentation":"<p>Information about a deployment lifecycle event.</p>"
     },
+    "LifecycleEventAlreadyCompletedException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An attempt to return the status of an already completed lifecycle event occurred.</p>",
+      "exception":true
+    },
+    "LifecycleEventHookExecutionId":{"type":"string"},
     "LifecycleEventList":{
       "type":"list",
       "member":{"shape":"LifecycleEvent"}
@@ -2283,7 +2968,7 @@
           "documentation":"<p>An identifier returned from the previous list application revisions call. It can be used to return the next set of applications in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list application revisions operation.</p>"
+      "documentation":"<p>Represents the input of a ListApplicationRevisions operation.</p>"
     },
     "ListApplicationRevisionsOutput":{
       "type":"structure",
@@ -2297,7 +2982,7 @@
           "documentation":"<p>If a large amount of information is returned, an identifier will also be returned. It can be used in a subsequent list application revisions call to return the next set of application revisions in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list application revisions operation.</p>"
+      "documentation":"<p>Represents the output of a ListApplicationRevisions operation.</p>"
     },
     "ListApplicationsInput":{
       "type":"structure",
@@ -2307,7 +2992,7 @@
           "documentation":"<p>An identifier returned from the previous list applications call. It can be used to return the next set of applications in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list applications operation.</p>"
+      "documentation":"<p>Represents the input of a ListApplications operation.</p>"
     },
     "ListApplicationsOutput":{
       "type":"structure",
@@ -2321,7 +3006,7 @@
           "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list applications call to return the next set of applications, will also be returned. in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list applications operation.</p>"
+      "documentation":"<p>Represents the output of a ListApplications operation.</p>"
     },
     "ListDeploymentConfigsInput":{
       "type":"structure",
@@ -2331,7 +3016,7 @@
           "documentation":"<p>An identifier returned from the previous list deployment configurations call. It can be used to return the next set of deployment configurations in the list. </p>"
         }
       },
-      "documentation":"<p>Represents the input of a list deployment configurations operation.</p>"
+      "documentation":"<p>Represents the input of a ListDeploymentConfigs operation.</p>"
     },
     "ListDeploymentConfigsOutput":{
       "type":"structure",
@@ -2345,7 +3030,7 @@
           "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment configurations call to return the next set of deployment configurations in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list deployment configurations operation.</p>"
+      "documentation":"<p>Represents the output of a ListDeploymentConfigs operation.</p>"
     },
     "ListDeploymentGroupsInput":{
       "type":"structure",
@@ -2360,7 +3045,7 @@
           "documentation":"<p>An identifier returned from the previous list deployment groups call. It can be used to return the next set of deployment groups in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list deployment groups operation.</p>"
+      "documentation":"<p>Represents the input of a ListDeploymentGroups operation.</p>"
     },
     "ListDeploymentGroupsOutput":{
       "type":"structure",
@@ -2378,7 +3063,7 @@
           "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment groups call to return the next set of deployment groups in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list deployment groups operation.</p>"
+      "documentation":"<p>Represents the output of a ListDeploymentGroups operation.</p>"
     },
     "ListDeploymentInstancesInput":{
       "type":"structure",
@@ -2395,9 +3080,13 @@
         "instanceStatusFilter":{
           "shape":"InstanceStatusList",
           "documentation":"<p>A subset of instances to list by status:</p> <ul> <li> <p>Pending: Include those instance with pending deployments.</p> </li> <li> <p>InProgress: Include those instance where deployments are still in progress.</p> </li> <li> <p>Succeeded: Include those instances with successful deployments.</p> </li> <li> <p>Failed: Include those instance with failed deployments.</p> </li> <li> <p>Skipped: Include those instance with skipped deployments.</p> </li> <li> <p>Unknown: Include those instance with deployments in an unknown state.</p> </li> </ul>"
+        },
+        "instanceTypeFilter":{
+          "shape":"InstanceTypeList",
+          "documentation":"<p>The set of instances in a blue/green deployment, either those in the original environment (\"BLUE\") or those in the replacement environment (\"GREEN\"), for which you want to view instance information.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list deployment instances operation.</p>"
+      "documentation":"<p>Represents the input of a ListDeploymentInstances operation.</p>"
     },
     "ListDeploymentInstancesOutput":{
       "type":"structure",
@@ -2411,7 +3100,7 @@
           "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment instances call to return the next set of deployment instances in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list deployment instances operation.</p>"
+      "documentation":"<p>Represents the output of a ListDeploymentInstances operation.</p>"
     },
     "ListDeploymentsInput":{
       "type":"structure",
@@ -2437,7 +3126,7 @@
           "documentation":"<p>An identifier returned from the previous list deployments call. It can be used to return the next set of deployments in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list deployments operation.</p>"
+      "documentation":"<p>Represents the input of a ListDeployments operation.</p>"
     },
     "ListDeploymentsOutput":{
       "type":"structure",
@@ -2451,7 +3140,31 @@
           "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployments call to return the next set of deployments in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list deployments operation.</p>"
+      "documentation":"<p>Represents the output of a ListDeployments operation.</p>"
+    },
+    "ListGitHubAccountTokenNamesInput":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>An identifier returned from the previous ListGitHubAccountTokenNames call. It can be used to return the next set of names in the list. </p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a ListGitHubAccountTokenNames operation.</p>"
+    },
+    "ListGitHubAccountTokenNamesOutput":{
+      "type":"structure",
+      "members":{
+        "tokenNameList":{
+          "shape":"GitHubAccountTokenNameList",
+          "documentation":"<p>A list of names of connections to GitHub accounts.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent ListGitHubAccountTokenNames call to return the next set of names in the list. </p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a ListGitHubAccountTokenNames operation.</p>"
     },
     "ListOnPremisesInstancesInput":{
       "type":"structure",
@@ -2469,7 +3182,7 @@
           "documentation":"<p>An identifier returned from the previous list on-premises instances call. It can be used to return the next set of on-premises instances in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list on-premises instances operation.</p>"
+      "documentation":"<p>Represents the input of a ListOnPremisesInstances operation.</p>"
     },
     "ListOnPremisesInstancesOutput":{
       "type":"structure",
@@ -2493,6 +3206,20 @@
         "ignore"
       ]
     },
+    "LoadBalancerInfo":{
+      "type":"structure",
+      "members":{
+        "elbInfoList":{
+          "shape":"ELBInfoList",
+          "documentation":"<p>An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.</p> <note> <p> Adding more than one load balancer to the array is not supported. </p> </note>"
+        },
+        "targetGroupInfoList":{
+          "shape":"TargetGroupInfoList",
+          "documentation":"<p>An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.</p> <note> <p> Adding more than one target group to the array is not supported. </p> </note>"
+        }
+      },
+      "documentation":"<p>Information about the Elastic Load Balancing load balancer or target group used in a deployment.</p>"
+    },
     "LogTail":{"type":"string"},
     "Message":{"type":"string"},
     "MinimumHealthyHosts":{
@@ -2504,7 +3231,7 @@
         },
         "type":{
           "shape":"MinimumHealthyHostsType",
-          "documentation":"<p>The minimum healthy instance type:</p> <ul> <li> <p>HOST_COUNT: The minimum number of healthy instance as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The minimum number of healthy instance as a percentage of the total number of instance in the deployment.</p> </li> </ul> <p>In an example of nine instance, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment will be successful if six or more instances are deployed to successfully; otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a time. The deployment will be successful if four or more instance are deployed to successfully; otherwise, the deployment fails.</p> <note> <p>In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime will return a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy will try to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment still succeeds.</p> </note>"
+          "documentation":"<p>The minimum healthy instance type:</p> <ul> <li> <p>HOST_COUNT: The minimum number of healthy instance as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The minimum number of healthy instance as a percentage of the total number of instance in the deployment.</p> </li> </ul> <p>In an example of nine instance, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment will be successful if six or more instances are deployed to successfully; otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a time. The deployment will be successful if four or more instance are deployed to successfully; otherwise, the deployment fails.</p> <note> <p>In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime will return a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy will try to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment still succeeds.</p> </note> <p>For more information, see <a href=\"http://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html\">AWS CodeDeploy Instance Health</a> in the <i>AWS CodeDeploy User Guide</i>.</p>"
         }
       },
       "documentation":"<p>Information about minimum healthy instance.</p>"
@@ -2517,8 +3244,79 @@
       ]
     },
     "MinimumHealthyHostsValue":{"type":"integer"},
+    "MultipleIamArnsProvidedException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Both an IAM user ARN and an IAM session ARN were included in the request. Use only one ARN type.</p>",
+      "exception":true
+    },
     "NextToken":{"type":"string"},
     "NullableBoolean":{"type":"boolean"},
+    "OnPremisesTagSet":{
+      "type":"structure",
+      "members":{
+        "onPremisesTagSetList":{
+          "shape":"OnPremisesTagSetList",
+          "documentation":"<p>A list containing other lists of on-premises instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.</p>"
+        }
+      },
+      "documentation":"<p>Information about groups of on-premises instance tags.</p>"
+    },
+    "OnPremisesTagSetList":{
+      "type":"list",
+      "member":{"shape":"TagFilterList"}
+    },
+    "OperationNotSupportedException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The API used does not support the deployment.</p>",
+      "exception":true
+    },
+    "Percentage":{"type":"integer"},
+    "PutLifecycleEventHookExecutionStatusInput":{
+      "type":"structure",
+      "members":{
+        "deploymentId":{
+          "shape":"DeploymentId",
+          "documentation":"<p>The ID of the deployment. Pass this ID to a Lambda function that validates a deployment lifecycle event.</p>"
+        },
+        "lifecycleEventHookExecutionId":{
+          "shape":"LifecycleEventHookExecutionId",
+          "documentation":"<p>The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook is specified in the <code>hooks</code> section of the AppSpec file.</p>"
+        },
+        "status":{
+          "shape":"LifecycleEventStatus",
+          "documentation":"<p>The result of a Lambda function that validates a deployment lifecycle event (<code>Succeeded</code> or <code>Failed</code>).</p>"
+        }
+      }
+    },
+    "PutLifecycleEventHookExecutionStatusOutput":{
+      "type":"structure",
+      "members":{
+        "lifecycleEventHookExecutionId":{
+          "shape":"LifecycleEventHookExecutionId",
+          "documentation":"<p>The execution ID of the lifecycle event hook. A hook is specified in the <code>hooks</code> section of the deployment's AppSpec file.</p>"
+        }
+      }
+    },
+    "RawString":{
+      "type":"structure",
+      "members":{
+        "content":{
+          "shape":"RawStringContent",
+          "documentation":"<p>The YAML-formatted or JSON-formatted revision string. It includes information about which Lambda function to update and optional Lambda functions that validate deployment lifecycle events.</p>"
+        },
+        "sha256":{
+          "shape":"RawStringSha256",
+          "documentation":"<p>The SHA256 hash value of the revision that is specified as a RawString.</p>"
+        }
+      },
+      "documentation":"<p>A revision for an AWS Lambda deployment that is a YAML-formatted or JSON-formatted string. For AWS Lambda deployments, the revision is the same as the AppSpec file.</p>"
+    },
+    "RawStringContent":{"type":"string"},
+    "RawStringSha256":{"type":"string"},
     "RegisterApplicationRevisionInput":{
       "type":"structure",
       "required":[
@@ -2539,18 +3337,19 @@
           "documentation":"<p>Information about the application revision to register, including type and location.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a register application revision operation.</p>"
+      "documentation":"<p>Represents the input of a RegisterApplicationRevision operation.</p>"
     },
     "RegisterOnPremisesInstanceInput":{
       "type":"structure",
-      "required":[
-        "instanceName",
-        "iamUserArn"
-      ],
+      "required":["instanceName"],
       "members":{
         "instanceName":{
           "shape":"InstanceName",
           "documentation":"<p>The name of the on-premises instance to register.</p>"
+        },
+        "iamSessionArn":{
+          "shape":"IamSessionArn",
+          "documentation":"<p>The ARN of the IAM session to associate with the on-premises instance.</p>"
         },
         "iamUserArn":{
           "shape":"IamUserArn",
@@ -2582,9 +3381,16 @@
           "documentation":"<p>The names of the on-premises instances from which to remove tags.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a remove tags from on-premises instances operation.</p>"
+      "documentation":"<p>Represents the input of a RemoveTagsFromOnPremisesInstances operation.</p>"
     },
     "Repository":{"type":"string"},
+    "ResourceValidationException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The specified resource could not be validated.</p>",
+      "exception":true
+    },
     "RevisionDoesNotExistException":{
       "type":"structure",
       "members":{
@@ -2595,8 +3401,14 @@
     "RevisionInfo":{
       "type":"structure",
       "members":{
-        "revisionLocation":{"shape":"RevisionLocation"},
-        "genericRevisionInfo":{"shape":"GenericRevisionInfo"}
+        "revisionLocation":{
+          "shape":"RevisionLocation",
+          "documentation":"<p>Information about the location and type of an application revision.</p>"
+        },
+        "genericRevisionInfo":{
+          "shape":"GenericRevisionInfo",
+          "documentation":"<p>Information about an application revision, including usage details and associated deployment groups.</p>"
+        }
       },
       "documentation":"<p>Information about an application revision.</p>"
     },
@@ -2609,10 +3421,20 @@
       "members":{
         "revisionType":{
           "shape":"RevisionLocationType",
-          "documentation":"<p>The type of application revision:</p> <ul> <li> <p>S3: An application revision stored in Amazon S3.</p> </li> <li> <p>GitHub: An application revision stored in GitHub.</p> </li> </ul>"
+          "documentation":"<p>The type of application revision:</p> <ul> <li> <p>S3: An application revision stored in Amazon S3.</p> </li> <li> <p>GitHub: An application revision stored in GitHub (EC2/On-premises deployments only)</p> </li> <li> <p>String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments only)</p> </li> </ul>"
         },
-        "s3Location":{"shape":"S3Location"},
-        "gitHubLocation":{"shape":"GitHubLocation"}
+        "s3Location":{
+          "shape":"S3Location",
+          "documentation":"<p>Information about the location of a revision stored in Amazon S3. </p>"
+        },
+        "gitHubLocation":{
+          "shape":"GitHubLocation",
+          "documentation":"<p>Information about the location of application artifacts stored in GitHub.</p>"
+        },
+        "string":{
+          "shape":"RawString",
+          "documentation":"<p>Information about the location of an AWS Lambda deployment revision stored as a RawString.</p>"
+        }
       },
       "documentation":"<p>Information about the location of an application revision.</p>"
     },
@@ -2624,7 +3446,8 @@
       "type":"string",
       "enum":[
         "S3",
-        "GitHub"
+        "GitHub",
+        "String"
       ]
     },
     "RevisionRequiredException":{
@@ -2689,6 +3512,15 @@
       "documentation":"<p>Information about the location of application artifacts stored in Amazon S3.</p>"
     },
     "ScriptName":{"type":"string"},
+    "SkipWaitTimeForInstanceTerminationInput":{
+      "type":"structure",
+      "members":{
+        "deploymentId":{
+          "shape":"DeploymentId",
+          "documentation":"<p>The ID of the blue/green deployment for which you want to skip the instance termination wait time.</p>"
+        }
+      }
+    },
     "SortOrder":{
       "type":"string",
       "enum":[
@@ -2709,7 +3541,7 @@
           "documentation":"<p>Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a stop deployment operation.</p>"
+      "documentation":"<p>Represents the input of a StopDeployment operation.</p>"
     },
     "StopDeploymentOutput":{
       "type":"structure",
@@ -2723,7 +3555,7 @@
           "documentation":"<p>An accompanying status message.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a stop deployment operation.</p>"
+      "documentation":"<p>Represents the output of a StopDeployment operation.</p>"
     },
     "StopStatus":{
       "type":"string",
@@ -2794,6 +3626,81 @@
       "documentation":"<p>A tag was not specified.</p>",
       "exception":true
     },
+    "TagSetListLimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The number of tag groups included in the tag set list exceeded the maximum allowed limit of 3.</p>",
+      "exception":true
+    },
+    "TargetGroupInfo":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"TargetGroupName",
+          "documentation":"<p>For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. </p>"
+        }
+      },
+      "documentation":"<p>Information about a target group in Elastic Load Balancing to use in a deployment. Instances are registered as targets in a target group, and traffic is routed to the target group.</p>"
+    },
+    "TargetGroupInfoList":{
+      "type":"list",
+      "member":{"shape":"TargetGroupInfo"}
+    },
+    "TargetGroupName":{"type":"string"},
+    "TargetInstances":{
+      "type":"structure",
+      "members":{
+        "tagFilters":{
+          "shape":"EC2TagFilterList",
+          "documentation":"<p>The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment. Cannot be used in the same call as ec2TagSet.</p>"
+        },
+        "autoScalingGroups":{
+          "shape":"AutoScalingGroupNameList",
+          "documentation":"<p>The names of one or more Auto Scaling groups to identify a replacement environment for a blue/green deployment.</p>"
+        },
+        "ec2TagSet":{
+          "shape":"EC2TagSet",
+          "documentation":"<p>Information about the groups of EC2 instance tags that an instance must be identified by in order for it to be included in the replacement environment for a blue/green deployment. Cannot be used in the same call as tagFilters.</p>"
+        }
+      },
+      "documentation":"<p>Information about the instances to be used in the replacement environment in a blue/green deployment.</p>"
+    },
+    "ThrottlingException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An API function was called too frequently.</p>",
+      "exception":true
+    },
+    "TimeBasedCanary":{
+      "type":"structure",
+      "members":{
+        "canaryPercentage":{
+          "shape":"Percentage",
+          "documentation":"<p>The percentage of traffic to shift in the first increment of a <code>TimeBasedCanary</code> deployment.</p>"
+        },
+        "canaryInterval":{
+          "shape":"WaitTimeInMins",
+          "documentation":"<p>The number of minutes between the first and second traffic shifts of a <code>TimeBasedCanary</code> deployment.</p>"
+        }
+      },
+      "documentation":"<p>A configuration that shifts traffic from one version of a Lambda function to another in two increments. The original and target Lambda function versions are specified in the deployment's AppSpec file.</p>"
+    },
+    "TimeBasedLinear":{
+      "type":"structure",
+      "members":{
+        "linearPercentage":{
+          "shape":"Percentage",
+          "documentation":"<p>The percentage of traffic that is shifted at the start of each increment of a <code>TimeBasedLinear</code> deployment.</p>"
+        },
+        "linearInterval":{
+          "shape":"WaitTimeInMins",
+          "documentation":"<p>The number of minutes between each incremental traffic shift of a <code>TimeBasedLinear</code> deployment.</p>"
+        }
+      },
+      "documentation":"<p>A configuration that shifts traffic from one version of a Lambda function to another in equal increments, with an equal number of minutes between each increment. The original and target Lambda function versions are specified in the deployment's AppSpec file.</p>"
+    },
     "TimeRange":{
       "type":"structure",
       "members":{
@@ -2809,6 +3716,32 @@
       "documentation":"<p>Information about a time range.</p>"
     },
     "Timestamp":{"type":"timestamp"},
+    "TrafficRoutingConfig":{
+      "type":"structure",
+      "members":{
+        "type":{
+          "shape":"TrafficRoutingType",
+          "documentation":"<p>The type of traffic shifting (<code>TimeBasedCanary</code> or <code>TimeBasedLinear</code>) used by a deployment configuration .</p>"
+        },
+        "timeBasedCanary":{
+          "shape":"TimeBasedCanary",
+          "documentation":"<p>A configuration that shifts traffic from one version of a Lambda function to another in two increments. The original and target Lambda function versions are specified in the deployment's AppSpec file.</p>"
+        },
+        "timeBasedLinear":{
+          "shape":"TimeBasedLinear",
+          "documentation":"<p>A configuration that shifts traffic from one version of a Lambda function to another in equal increments, with an equal number of minutes between each increment. The original and target Lambda function versions are specified in the deployment's AppSpec file.</p>"
+        }
+      },
+      "documentation":"<p>The configuration that specifies how traffic is shifted from one version of a Lambda function to another version during an AWS Lambda deployment.</p>"
+    },
+    "TrafficRoutingType":{
+      "type":"string",
+      "enum":[
+        "TimeBasedCanary",
+        "TimeBasedLinear",
+        "AllAtOnce"
+      ]
+    },
     "TriggerConfig":{
       "type":"structure",
       "members":{
@@ -2839,9 +3772,11 @@
         "DeploymentFailure",
         "DeploymentStop",
         "DeploymentRollback",
+        "DeploymentReady",
         "InstanceStart",
         "InstanceSuccess",
-        "InstanceFailure"
+        "InstanceFailure",
+        "InstanceReady"
       ]
     },
     "TriggerEventTypeList":{
@@ -2857,6 +3792,13 @@
       "documentation":"<p>The maximum allowed number of triggers was exceeded.</p>",
       "exception":true
     },
+    "UnsupportedActionForDeploymentTypeException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>A call was submitted that is not supported for the specified deployment type.</p>",
+      "exception":true
+    },
     "UpdateApplicationInput":{
       "type":"structure",
       "members":{
@@ -2869,7 +3811,7 @@
           "documentation":"<p>The new name to give the application.</p>"
         }
       },
-      "documentation":"<p>Represents the input of an update application operation.</p>"
+      "documentation":"<p>Represents the input of an UpdateApplication operation.</p>"
     },
     "UpdateDeploymentGroupInput":{
       "type":"structure",
@@ -2916,14 +3858,34 @@
         },
         "alarmConfiguration":{
           "shape":"AlarmConfiguration",
-          "documentation":"<p>Information to add or change about Amazon CloudWatch alarms when the deployment group is updated. </p>"
+          "documentation":"<p>Information to add or change about Amazon CloudWatch alarms when the deployment group is updated.</p>"
         },
         "autoRollbackConfiguration":{
           "shape":"AutoRollbackConfiguration",
           "documentation":"<p>Information for an automatic rollback configuration that is added or changed when a deployment group is updated.</p>"
+        },
+        "deploymentStyle":{
+          "shape":"DeploymentStyle",
+          "documentation":"<p>Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.</p>"
+        },
+        "blueGreenDeploymentConfiguration":{
+          "shape":"BlueGreenDeploymentConfiguration",
+          "documentation":"<p>Information about blue/green deployment options for a deployment group.</p>"
+        },
+        "loadBalancerInfo":{
+          "shape":"LoadBalancerInfo",
+          "documentation":"<p>Information about the load balancer used in a deployment.</p>"
+        },
+        "ec2TagSet":{
+          "shape":"EC2TagSet",
+          "documentation":"<p>Information about groups of tags applied to on-premises instances. The deployment group will include only EC2 instances identified by all the tag groups.</p>"
+        },
+        "onPremisesTagSet":{
+          "shape":"OnPremisesTagSet",
+          "documentation":"<p>Information about an on-premises instance tag set. The deployment group will include only on-premises instances identified by all the tag groups.</p>"
         }
       },
-      "documentation":"<p>Represents the input of an update deployment group operation.</p>"
+      "documentation":"<p>Represents the input of an UpdateDeploymentGroup operation.</p>"
     },
     "UpdateDeploymentGroupOutput":{
       "type":"structure",
@@ -2933,10 +3895,11 @@
           "documentation":"<p>If the output contains no data, and the corresponding deployment group contained at least one Auto Scaling group, AWS CodeDeploy successfully removed all corresponding Auto Scaling lifecycle event hooks from the AWS account. If the output contains data, AWS CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the output of an update deployment group operation.</p>"
+      "documentation":"<p>Represents the output of an UpdateDeploymentGroup operation.</p>"
     },
     "Value":{"type":"string"},
-    "VersionId":{"type":"string"}
+    "VersionId":{"type":"string"},
+    "WaitTimeInMins":{"type":"integer"}
   },
-  "documentation":"<fullname>AWS CodeDeploy</fullname> <p> <b>Overview</b> </p> <p>This reference guide provides descriptions of the AWS CodeDeploy APIs. For more information about AWS CodeDeploy, see the <a href=\"http://docs.aws.amazon.com/codedeploy/latest/userguide\">AWS CodeDeploy User Guide</a>.</p> <p> <b>Using the APIs</b> </p> <p>You can use the AWS CodeDeploy APIs to work with the following:</p> <ul> <li> <p>Applications are unique identifiers used by AWS CodeDeploy to ensure the correct combinations of revisions, deployment configurations, and deployment groups are being referenced during deployments.</p> <p>You can use the AWS CodeDeploy APIs to create, delete, get, list, and update applications.</p> </li> <li> <p>Deployment configurations are sets of deployment rules and success and failure conditions used by AWS CodeDeploy during deployments.</p> <p>You can use the AWS CodeDeploy APIs to create, delete, get, and list deployment configurations.</p> </li> <li> <p>Deployment groups are groups of instances to which application revisions can be deployed.</p> <p>You can use the AWS CodeDeploy APIs to create, delete, get, list, and update deployment groups.</p> </li> <li> <p>Instances represent Amazon EC2 instances to which application revisions are deployed. Instances are identified by their Amazon EC2 tags or Auto Scaling group names. Instances belong to deployment groups.</p> <p>You can use the AWS CodeDeploy APIs to get and list instance.</p> </li> <li> <p>Deployments represent the process of deploying revisions to instances.</p> <p>You can use the AWS CodeDeploy APIs to create, get, list, and stop deployments.</p> </li> <li> <p>Application revisions are archive files stored in Amazon S3 buckets or GitHub repositories. These revisions contain source content (such as source code, web pages, executable files, and deployment scripts) along with an application specification (AppSpec) file. (The AppSpec file is unique to AWS CodeDeploy; it defines the deployment actions you want AWS CodeDeploy to execute.) For application revisions stored in Amazon S3 buckets, an application revision is uniquely identified by its Amazon S3 object key and its ETag, version, or both. For application revisions stored in GitHub repositories, an application revision is uniquely identified by its repository name and commit ID. Application revisions are deployed through deployment groups.</p> <p>You can use the AWS CodeDeploy APIs to get, list, and register application revisions.</p> </li> </ul>"
+  "documentation":"<fullname>AWS CodeDeploy</fullname> <p>AWS CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances, on-premises instances running in your own facility, or serverless AWS Lambda functions.</p> <p>You can deploy a nearly unlimited variety of application content, such as an updated Lambda function, code, web and configuration files, executables, packages, scripts, multimedia files, and so on. AWS CodeDeploy can deploy application content stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories. You do not need to make changes to your existing code before you can use AWS CodeDeploy.</p> <p>AWS CodeDeploy makes it easier for you to rapidly release new features, helps you avoid downtime during application deployment, and handles the complexity of updating your applications, without many of the risks associated with error-prone manual deployments.</p> <p> <b>AWS CodeDeploy Components</b> </p> <p>Use the information in this guide to help you work with the following AWS CodeDeploy components:</p> <ul> <li> <p> <b>Application</b>: A name that uniquely identifies the application you want to deploy. AWS CodeDeploy uses this name, which functions as a container, to ensure the correct combination of revision, deployment configuration, and deployment group are referenced during a deployment.</p> </li> <li> <p> <b>Deployment group</b>: A set of individual instances or CodeDeploy Lambda applications. A Lambda deployment group contains a group of applications. An EC2/On-premises deployment group contains individually tagged instances, Amazon EC2 instances in Auto Scaling groups, or both. </p> </li> <li> <p> <b>Deployment configuration</b>: A set of deployment rules and deployment success and failure conditions used by AWS CodeDeploy during a deployment.</p> </li> <li> <p> <b>Deployment</b>: The process and the components used in the process of updating a Lambda function or of installing content on one or more instances. </p> </li> <li> <p> <b>Application revisions</b>: For an AWS Lambda deployment, this is an AppSpec file that specifies the Lambda function to update and one or more functions to validate deployment lifecycle events. For an EC2/On-premises deployment, this is an archive file containing source content—source code, web pages, executable files, and deployment scripts—along with an AppSpec file. Revisions are stored in Amazon S3 buckets or GitHub repositories. For Amazon S3, a revision is uniquely identified by its Amazon S3 object key and its ETag, version, or both. For GitHub, a revision is uniquely identified by its commit ID.</p> </li> </ul> <p>This guide also contains information to help you get details about the instances in your deployments, to make on-premises instances available for AWS CodeDeploy deployments, and to get details about a Lambda function deployment.</p> <p> <b>AWS CodeDeploy Information Resources</b> </p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/codedeploy/latest/userguide\">AWS CodeDeploy User Guide</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/codedeploy/latest/APIReference/\">AWS CodeDeploy API Reference Guide</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/cli/latest/reference/deploy/index.html\">AWS CLI Reference for AWS CodeDeploy</a> </p> </li> <li> <p> <a href=\"https://forums.aws.amazon.com/forum.jspa?forumID=179\">AWS CodeDeploy Developer Forum</a> </p> </li> </ul>"
 }

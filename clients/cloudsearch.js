@@ -1,7 +1,7 @@
 require('../lib/node_loader');
 var AWS = require('../lib/core');
-var Service = require('../lib/service');
-var apiLoader = require('../lib/api_loader');
+var Service = AWS.Service;
+var apiLoader = AWS.apiLoader;
 
 apiLoader.services['cloudsearch'] = {};
 AWS.CloudSearch = Service.defineService('cloudsearch', ['2011-02-01', '2013-01-01']);

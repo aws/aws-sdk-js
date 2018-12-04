@@ -2,7 +2,7 @@
 
 var path = require('path');
 
-var AWS = require('../');
+var AWS = require('../index');
 
 var license = [
   '// AWS SDK for JavaScript v' + AWS.VERSION,
@@ -14,36 +14,6 @@ function minify(code) {
   var uglify = require('uglify-js');
   var minified = uglify.minify(code, {fromString: true});
   return minified.code;
-}
-
-function stripComments(code) {
-  var lines = code.split(/\r?\n/);
-  var multiLine = false;
-  lines = lines.map(function (line) {
-    var rLine = line;
-    if (line.match(/^\s*\/\//)) {
-      rLine = null;
-    } else if (line.match(/^\s*\/\*/)) {
-      multiLine = true;
-      rLine = null;
-    }
-
-    if (multiLine) {
-      var multiLineEnd = line.match(/\*\/(.*)/);
-      if (multiLineEnd) {
-        multiLine = false;
-        rLine = multiLineEnd[1];
-      } else {
-        rLine = null;
-      }
-    }
-
-    return rLine;
-  }).filter(function(l) { return l !== null; });
-
-  var newCode = lines.join('\n');
-  newCode = newCode.replace(/\/\*\*[\s\S]+?Copyright\s+.+?Amazon[\s\S]+?\*\//g, '');
-  return newCode;
 }
 
 function build(options, callback) {
@@ -64,7 +34,6 @@ function build(options, callback) {
 
     var code = (data || '').toString();
     if (options.minify) code = minify(code);
-    else code = stripComments(code);
 
     code = license + code;
     callback(null, code);

@@ -55,6 +55,16 @@ Please be aware of the following notes prior to opening a pull request:
    yet available in the SDK, please talk to us beforehand to avoid any
    duplication of effort.
 
+3. Wherever possible, pull requests should contain tests as appropriate.
+   Bugfixes should contain tests that exercise the corrected behavior (i.e., the
+   test should fail without the bugfix and pass with it), and new features 
+   should be accompanied by tests exercising the feature.
+
+4. Pull requests that contain failing tests will not be merged until the test
+   failures are addressed. Pull requests that cause a significant drop in the
+   SDK's test coverage percentage are unlikely to be merged until tests have
+   been added.
+
 ### Testing
 
 To run the tests locally, install `phantomjs`. You can do so using [Homebrew][homebrew]:
@@ -72,7 +82,7 @@ npm test
 To run a particular test subset e.g. just the unit tests:
 
 ```
-npm run-script unit
+npm run unit
 ```
 
 See the implementation of the `test` script in `package.json` for more options.
@@ -85,7 +95,7 @@ Our goal with the changelog is to document all changes made with each version of
 When submitting a pull request, please run the `add-change` script and commit the resulting JSON file so that your change gets added to the changelog.
 From SDK root:
 ```
-node ./scripts/changelog/add-change.js
+npm run add-change
 ```
 
 See the [add-change cli notes](./scripts/changelog/README.md) for more information.

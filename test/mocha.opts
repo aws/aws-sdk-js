@@ -1,4 +1,3 @@
---compilers coffee:coffee-script
 --reporter dot
 --ui bdd
 --timeout 4000

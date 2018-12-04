@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "AWS AppSync now supports for None Data Source, CreateApiKey now supports setting expiration on API keys, new API UpdateApiKey supports updating expiration on API keys. "
+    },
+    {
+        "type": "feature",
+        "category": "LexModelBuildingService",
+        "description": "Amazon Lex now provides the ability to export and import your Amazon Lex chatbot definition as a JSON file."
+    }
+]

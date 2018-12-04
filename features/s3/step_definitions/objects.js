@@ -102,8 +102,11 @@ module.exports = function () {
   });
 
   this.When(/^I get a pre\-signed URL to GET the key "([^"]*)"$/, function(key, callback) {
-    this.signedUrl = this.s3.getSignedUrl('getObject', {Bucket: this.sharedBucket, Key: key});
-    callback();
+    var world = this;
+    this.s3.getSignedUrl('getObject', {Bucket: this.sharedBucket, Key: key}, function(err, url) {
+      world.signedUrl = url;
+      callback();
+    });
   });
 
   this.When(/^I access the URL via HTTP GET$/, function(callback) {
@@ -117,10 +120,13 @@ module.exports = function () {
   });
 
   this.Given(/^I get a pre\-signed URL to PUT the key "([^"]*)"(?: with data "([^"]*)")?$/, function(key, body, callback) {
+    var world = this;
     var params = {Bucket: this.sharedBucket, Key: key};
     if (body) params.Body = body;
-    this.signedUrl = this.s3.getSignedUrl('putObject', params);
-    callback();
+    this.s3.getSignedUrl('putObject', params, function(err, url) {
+      world.signedUrl = url;
+      callback();
+    });
   });
 
   this.Given(/^I access the URL via HTTP PUT with data "([^"]*)"$/, function(body, callback) {
@@ -137,6 +143,58 @@ module.exports = function () {
         world.data += chunk.toString();
       }).on('end', callback);
     }).on('error', callback.fail).end(data);
+  });
+
+  this.Given(
+    /^I create a presigned form to POST the key "([^"]*)" with the data "([^"]*)"$/,
+    function (key, data, callback) {
+      var world = this;
+      var boundary = this.postBoundary = '----WebKitFormBoundaryLL0mBKIuuLUKr7be';
+      var conditions = [
+          ['content-length-range', data.length - 1, data.length + 1]
+        ],
+        params = {
+          Bucket: this.sharedBucket,
+          Fields: {key: key},
+          Conditions: conditions
+        };
+      this.s3.createPresignedPost(params, function(err, postData) {
+        var body = Object.keys(postData.fields).reduce(function(body, fieldName) {
+          body += '--' + boundary + '\r\n';
+          body += 'Content-Disposition: form-data; name="' + fieldName + '"\r\n\r\n';
+          return body + postData.fields[fieldName] + '\r\n';
+        }, '');
+        body += '--' + world.postBoundary + '\r\n';
+        body += 'Content-Disposition: form-data; name="file"; filename="' + key + '"\r\n';
+        body += 'Content-Type: text/plain\r\n\r\n';
+        body += data + '\r\n';
+        body += '--' + world.postBoundary + '\r\n';
+        body += 'Content-Disposition: form-data; name="submit"\r\n';
+        body += 'Content-Type: text/plain\r\n\r\n';
+        body += 'submit\r\n';
+        body += '--' + world.postBoundary + '--\r\n';
+        world.postBody = body;
+        world.postAction = postData.url;
+        callback();
+      });
+    }
+  );
+
+  this.Given(/^I POST the form$/, function (callback) {
+    var world = this;
+    var options = require('url').parse(this.postAction);
+    options.method = 'POST';
+    options.headers = {
+      'Content-Type': 'multipart/form-data; boundary=' + this.postBoundary,
+      'Content-Length': this.postBody.length
+    };
+    require('https').request(options, function(res) {
+      res.on('data', function (chunk) {
+        world.data += chunk.toString();
+      }).on('end', callback);
+    })
+      .on('error', callback.fail)
+      .end(this.postBody);
   });
 
   this.Then(/^the HTTP response should equal "([^"]*)"$/, function(data, callback) {
@@ -251,6 +309,24 @@ module.exports = function () {
       } else {
         next();
       }
+    });
+  });
+
+  this.Given(/^I use signatureVersion "([^"]*)"$/, function(signatureVersion, next) {
+    this.s3Slashes = new this.AWS.S3({signatureVersion: signatureVersion});
+    next();
+  });
+
+  this.When(/^I put "([^"]*)" to the key "([^"]*)" with bucket suffix "([^"]*)"$/, function(data, key, suffix, next) {
+    var world = this;
+    var params = {
+      Bucket: this.sharedBucket + suffix,
+      Key: key,
+      Body: data
+    };
+    this.s3Slashes.putObject(params, function(err, data) {
+      world.assert.equal(!!err, false);
+      next();
     });
   });
 };

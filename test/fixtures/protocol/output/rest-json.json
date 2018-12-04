@@ -42,10 +42,6 @@
           },
           "Char": {
             "shape": "CharType"
-          },
-          "ImaStringLocation": {
-            "shape": "StringType",
-            "locationName": "stringLocation"
           }
         }
       },
@@ -97,8 +93,7 @@
           "Float": 1.2,
           "Double": 1.3,
           "Long": 200,
-          "Char": "a",
-          "ImaStringLocation": "myloc"
+          "Char": "a"
         },
         "response": {
           "status_code": 200,
@@ -106,7 +101,7 @@
             "ImaHeader": "test",
             "X-Foo": "abc"
           },
-          "body": "{\"Str\": \"myname\", \"Num\": 123, \"FalseBool\": false, \"TrueBool\": true, \"Float\": 1.2, \"Double\": 1.3, \"Long\": 200, \"Char\": \"a\", \"stringLocation\": \"myloc\"}"
+          "body": "{\"Str\": \"myname\", \"Num\": 123, \"FalseBool\": false, \"TrueBool\": true, \"Float\": 1.2, \"Double\": 1.3, \"Long\": 200, \"Char\": \"a\"}"
         }
       }
     ]
@@ -171,24 +166,54 @@
       "OutputShape": {
         "type": "structure",
         "members": {
-          "TimeMember": {
-            "shape": "TimeType"
+          "TimeArg": {
+            "shape": "TimestampType"
+          },
+          "TimeArgInHeader": {
+            "shape": "TimestampType",
+            "location": "header",
+            "locationName": "x-amz-timearg"
+          },
+          "TimeCustom": {
+            "timestampFormat": "rfc822",
+            "shape": "TimestampType"
+          },
+          "TimeCustomInHeader": {
+            "timestampFormat": "unixTimestamp",
+            "shape": "TimestampType",
+            "location": "header",
+            "locationName": "x-amz-timecustom"
+          },
+          "TimeFormat": {
+            "shape": "TimestampFormatType"
+          },
+          "TimeFormatInHeader": {
+            "shape": "TimestampFormatType",
+            "location": "header",
+            "locationName": "x-amz-timeformat"
           },
           "StructMember": {
             "shape": "TimeContainer"
           }
         }
       },
-      "TimeType": {
-        "type": "timestamp"
-      },
       "TimeContainer": {
         "type": "structure",
         "members": {
           "foo": {
-            "shape": "TimeType"
+            "shape": "TimestampType"
+          },
+          "bar": {
+            "shape": "TimestampFormatType"
           }
         }
+      },
+      "TimestampFormatType": {
+        "timestampFormat": "iso8601",
+        "type": "timestamp"
+      },
+      "TimestampType": {
+        "type": "timestamp"
       }
     },
     "cases": [
@@ -200,15 +225,25 @@
           "name": "OperationName"
         },
         "result": {
-          "TimeMember": 1398796238,
+          "TimeArg": 1398796238,
+          "TimeArgInHeader": 1398796238,
+          "TimeCustom": 1398796238,
+          "TimeCustomInHeader": 1398796238,
+          "TimeFormat": 1398796238,
+          "TimeFormatInHeader": 1398796238,
           "StructMember": {
-            "foo": 1398796238
+            "foo": 1398796238,
+            "bar": 1398796238
           }
         },
         "response": {
           "status_code": 200,
-          "headers": {},
-          "body": "{\"TimeMember\": 1398796238, \"StructMember\": {\"foo\": 1398796238}}"
+          "headers": {
+            "x-amz-timearg": "Tue, 29 Apr 2014 18:30:38 GMT",
+            "x-amz-timecustom": "1398796238",
+            "x-amz-timeformat": "2014-04-29T18:30:38Z"
+          },
+          "body": "{\"TimeArg\": 1398796238, \"TimeCustom\": \"Tue, 29 Apr 2014 18:30:38 GMT\", \"TimeFormat\": \"2014-04-29T18:30:38Z\", \"StructMember\": {\"foo\": 1398796238, \"bar\": \"2014-04-29T18:30:38Z\"}}"
         }
       }
     ]
@@ -418,115 +453,6 @@
     ]
   },
   {
-    "description": "Complex Outputs with locationName members",
-    "metadata": {
-      "protocol": "rest-json"
-    },
-    "shapes": {
-      "OutputShape": {
-        "type": "structure",
-        "members": {
-          "ListMembers": {
-            "shape": "SingleStruct",
-            "locationName": "ListMember"
-          },
-          "Num": {
-            "shape": "IntegerType",
-            "locationName": "num"
-          },
-          "FalseBool": {
-            "shape": "BooleanType",
-            "locationName": "falseBool"
-          },
-          "TrueBool": {
-            "shape": "BooleanType",
-            "locationName": "trueBool"
-          },
-          "Float": {
-            "shape": "FloatType",
-            "locationName": "float"
-          },
-          "Double": {
-            "shape": "DoubleType",
-            "locationName": "double"
-          },
-          "Long": {
-            "shape": "LongType",
-            "locationName": "long"
-          },
-          "Char": {
-            "shape": "CharType",
-            "locationName": "char"
-          }
-        }
-      },
-      "ListType": {
-        "type": "list",
-        "member": {
-          "shape": "SingleStruct"
-        }
-      },
-      "StringType": {
-        "type": "string"
-      },
-      "IntegerType": {
-        "type": "integer"
-      },
-      "BooleanType": {
-        "type": "boolean"
-      },
-      "FloatType": {
-        "type": "float"
-      },
-      "DoubleType": {
-        "type": "double"
-      },
-      "LongType": {
-        "type": "long"
-      },
-      "CharType": {
-        "type": "character"
-      },
-      "SingleStruct": {
-        "type": "structure",
-        "members": {
-          "Foo": {
-            "shape": "StringType",
-            "locationName": "foo"
-          }
-        }
-      }
-    },
-    "cases": [
-      {
-        "given": {
-          "output": {
-            "shape": "OutputShape"
-          },
-          "name": "OperationName"
-        },
-        "result": {
-          "ListMembers": [{"Foo": "a"}, {"Foo": "b"}],
-          "Num": 123,
-          "FalseBool": false,
-          "TrueBool": true,
-          "Float": 1.2,
-          "Double": 1.3,
-          "Long": 200,
-          "Char": "a"
-        },
-        "response": {
-          "status_code": 200,
-          "headers": {
-            "ImaHeader": "test",
-            "X-Foo": "abc"
-          },
-          "body": "{\"ListMember\": [{\"foo\": \"a\"}, {\"foo\": \"b\"}], \"num\": 123, \"falseBool\": false, \"trueBool\": true, \"float\": 1.2, \"double\": 1.3, \"long\": 200, \"char\": \"a\"}"
-        }
-      }
-    ]
-  },
-  {
     "description": "Ignores extra data",
     "metadata": {
       "protocol": "rest-json"
@@ -557,6 +483,26 @@
           "status_code": 200,
           "headers": {},
           "body": "{\"foo\": \"bar\"}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Ignores undefined output",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {},
+    "cases": [
+      {
+        "given": {
+          "name": "OperationName"
+        },
+        "result": {},
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "OK"
         }
       }
     ]
@@ -605,74 +551,22 @@
         "result": {
           "AllHeaders": {
             "Content-Length": "10",
-            "x-Foo": "bar",
-            "X-bam": "boo"
+            "X-Foo": "bar",
+            "X-Bam": "boo"
           },
           "PrefixedHeaders": {
             "Foo": "bar",
-            "bam": "boo"
+            "Bam": "boo"
           }
         },
         "response": {
           "status_code": 200,
           "headers": {
             "Content-Length": "10",
-            "x-Foo": "bar",
-            "X-bam": "boo"
+            "X-Foo": "bar",
+            "X-Bam": "boo"
           },
           "body": "{}"
-        }
-      }
-    ]
-  },
-  {
-    "description": "List payload",
-    "metadata": {
-      "protocol": "rest-json"
-    },
-    "shapes": {
-      "OutputShape": {
-        "type": "structure",
-        "payload": "ListData",
-        "members": {
-          "Header": {
-            "shape": "StringType",
-            "location": "header",
-            "locationName": "X-Foo"
-          },
-          "ListData": {
-            "shape": "ListType"
-          }
-        }
-      },
-      "ListType": {
-        "type": "list",
-        "member": {
-          "shape": "StringType"
-        }
-      },
-      "StringType": {
-        "type": "string"
-      }
-    },
-    "cases": [
-      {
-        "given": {
-          "output": {
-            "shape": "OutputShape"
-          },
-          "name": "OperationName"
-        },
-        "result": {
-          "Header": "baz",
-          "ListData": ["a", "b", "c"]
-        },
-        "response": {
-          "status_code": 200,
-          "headers": {
-            "X-Foo": "baz"
-          },
-          "body": "[\"a\", \"b\", \"c\"]"
         }
       }
     ]
@@ -767,6 +661,77 @@
           "status_code": 200,
           "headers": {},
           "body": "abc"
+        }
+      }
+    ]
+  },
+  {
+    "description": "JSON value trait",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "HeaderField": {
+            "shape": "StringType",
+            "jsonvalue": true,
+            "location": "header",
+            "locationName": "X-Amz-Foo"
+          },
+          "BodyField":{
+            "shape": "StringType",
+            "jsonvalue": true
+          },
+          "BodyListField": {
+            "shape": "ListType"
+          }
+        }
+      },
+      "StringType": {
+        "type": "string"
+      },
+      "ListType": {
+        "type": "list",
+        "member": {
+          "shape": "StringType",
+          "jsonvalue": true
+        }
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "HeaderField": {"Foo":"Bar"},
+          "BodyField": {"Foo":"Bar"}
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {"X-Amz-Foo": "eyJGb28iOiJCYXIifQ=="},
+          "body": "{\"BodyField\":\"{\\\"Foo\\\":\\\"Bar\\\"}\"}"
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "BodyListField": [{"Foo":"Bar"}]
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"BodyListField\":[\"{\\\"Foo\\\":\\\"Bar\\\"}\"]}"
         }
       }
     ]

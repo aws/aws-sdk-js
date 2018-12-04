@@ -1,6 +1,4 @@
 require('../lib/node_loader');
-var AWS = require('../lib/core');
-
 module.exports = {
   ACM: require('./acm'),
   APIGateway: require('./apigateway'),
@@ -13,6 +11,7 @@ module.exports = {
   CloudWatch: require('./cloudwatch'),
   CloudWatchEvents: require('./cloudwatchevents'),
   CloudWatchLogs: require('./cloudwatchlogs'),
+  CodeBuild: require('./codebuild'),
   CodeCommit: require('./codecommit'),
   CodeDeploy: require('./codedeploy'),
   CodePipeline: require('./codepipeline'),
@@ -20,6 +19,7 @@ module.exports = {
   CognitoIdentityServiceProvider: require('./cognitoidentityserviceprovider'),
   CognitoSync: require('./cognitosync'),
   ConfigService: require('./configservice'),
+  CUR: require('./cur'),
   DeviceFarm: require('./devicefarm'),
   DirectConnect: require('./directconnect'),
   DynamoDB: require('./dynamodb'),
@@ -27,6 +27,7 @@ module.exports = {
   EC2: require('./ec2'),
   ECR: require('./ecr'),
   ECS: require('./ecs'),
+  EFS: require('./efs'),
   ElastiCache: require('./elasticache'),
   ElasticBeanstalk: require('./elasticbeanstalk'),
   ELB: require('./elb'),
@@ -41,12 +42,16 @@ module.exports = {
   Kinesis: require('./kinesis'),
   KMS: require('./kms'),
   Lambda: require('./lambda'),
+  LexRuntime: require('./lexruntime'),
   MachineLearning: require('./machinelearning'),
   MarketplaceCommerceAnalytics: require('./marketplacecommerceanalytics'),
+  MTurk: require('./mturk'),
   MobileAnalytics: require('./mobileanalytics'),
   OpsWorks: require('./opsworks'),
+  Polly: require('./polly'),
   RDS: require('./rds'),
   Redshift: require('./redshift'),
+  Rekognition: require('./rekognition'),
   Route53: require('./route53'),
   Route53Domains: require('./route53domains'),
   S3: require('./s3'),
@@ -57,5 +62,12 @@ module.exports = {
   SSM: require('./ssm'),
   StorageGateway: require('./storagegateway'),
   STS: require('./sts'),
-  WAF: require('./waf')
+  WAF: require('./waf'),
+  WorkDocs: require('./workdocs'),
+  LexModelBuildingService: require('./lexmodelbuildingservice'),
+  Pricing: require('./pricing'),
+  KinesisVideoArchivedMedia: require('./kinesisvideoarchivedmedia'),
+  KinesisVideo: require('./kinesisvideo'),
+  Translate: require('./translate'),
+  SecretsManager: require('./secretsmanager')
 };

@@ -87,7 +87,7 @@ class ApiDocumentor
 
   def generate_api(file, version_suffix = true)
     _, klass, version = *file.match($API_FILE_MATCH)
-    identifier, klass, dualstack = *class_info_for(klass.downcase)
+    identifier, klass, dualstack = *class_info_for(klass)
     name = version_suffix ? klass + '_' + version.gsub('-', '') : klass
     log.progress("Parsing AWS.#{klass} (#{version})")
     svc = YARD::CodeObjects::ClassObject.new(@root, name)
@@ -276,7 +276,9 @@ eof
   end
 
   def load_examples(name, version)
-    paths = Dir[File.join($APIS_DIR, "#{name}-#{version}.examples.json")]
+    @info ||= JSON.parse(File.read(File.join($APIS_DIR, 'metadata.json')))
+    prefix = @info[name]['prefix'] || name
+    paths = Dir[File.join($APIS_DIR, "#{prefix}-#{version}.examples.json")]
     unless paths.empty?
       json = JSON.parse(File.read(paths[0]))
       json['examples']

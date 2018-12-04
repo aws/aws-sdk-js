@@ -1,37 +1,33 @@
 language: node_js
 node_js:
-#  - "0.8"
+# - "0.8"
   - "0.10"
   - "0.12"
   - "4.2"
-  - "node"
-
-cache:
-  directories:
-    - "travis-phantomjs"
-
-before_install:
-  - "if [[ `node -v` == v0.8.* ]]; then npm install -g npm || exit 0; fi"
-  - "export PATH=$PWD/travis-phantomjs:$PATH"
-  - "phantomjs --version"
-  - "if [ $(phantomjs --version) != '2.0.0' ]; then rm -rf $PWD/travis-phantomjs; mkdir -p $PWD/travis-phantomjs; fi"
-  - "if [ $(phantomjs --version) != '2.0.0' ]; then wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2; fi"
-  - "if [ $(phantomjs --version) != '2.0.0' ]; then tar -xvf $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -C $PWD/travis-phantomjs; fi"
-  - "phantomjs --version"
-
-script:
-  - "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
-  - "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
-
+  - "4.4"
+  - "5"
+  - "6"
+  - "7"
+  - "8"
+  - "9"
+  - "10"
 env:
-  matrix:
-    - COVERAGE=1
+  - TEST_SCRIPT=coverage
 
 sudo: false
 
-# env:
-#   global:
-#     - secure: "..."
-#   matrix:
-#     - UNIT=1
-#     - AWS_REGION=us-east-1 INTEGRATION=1
+matrix:
+  include:
+  - node_js: "8"
+    env: TEST_SCRIPT=test
+
+addons:
+  rake: 
+  chrome: stable 
+
+before script:
+  - export CHROME_BIN=/usr/bin/chromium-browser
+
+script:
+  - npm run $TEST_SCRIPT
+  - "if [[ $TEST_SCRIPT == 'coverage' ]]; then node ./node_modules/.bin/codecov || exit 0; fi"
