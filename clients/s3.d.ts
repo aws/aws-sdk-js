@@ -2446,7 +2446,7 @@ declare namespace S3 {
      */
     Prefix: Prefix;
   }
-  export type InventoryFormat = "CSV"|"ORC"|string;
+  export type InventoryFormat = "CSV"|"ORC"|"Parquet"|string;
   export type InventoryFrequency = "Daily"|"Weekly"|string;
   export type InventoryId = string;
   export type InventoryIncludedObjectVersions = "All"|"Current"|string;

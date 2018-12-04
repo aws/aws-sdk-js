@@ -74,6 +74,7 @@ declare namespace Health {
      * The ID of the affected entity.
      */
     entityValue?: entityValue;
+    entityUrl?: entityUrl;
     /**
      * The 12-digit AWS account number that contains the affected entity.
      */
@@ -469,6 +470,7 @@ declare namespace Health {
   export type entityArnList = entityArn[];
   export type entityStatusCode = "IMPAIRED"|"UNIMPAIRED"|"UNKNOWN"|string;
   export type entityStatusCodeList = entityStatusCode[];
+  export type entityUrl = string;
   export type entityValue = string;
   export type entityValueList = entityValue[];
   export type eventAggregateField = "eventTypeCategory"|string;

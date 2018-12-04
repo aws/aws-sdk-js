@@ -4807,7 +4807,8 @@
       "type": "string",
       "enum": [
         "CSV",
-        "ORC"
+        "ORC",
+        "Parquet"
       ]
     },
     "InventoryFrequency": {

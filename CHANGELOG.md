@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.369.0-->
+<!--LATEST=2.370.0-->
 <!--ENTRYINSERT-->
+
+## 2.370.0
+* feature: Health: AWS Health API DescribeAffectedEntities operation now includes a field that returns the URL of the affected entity.
+* feature: S3: S3 Inventory reports can now be generated in Parquet format by setting the Destination Format to be 'Parquet'.
 
 ## 2.369.0
 * feature: DeviceFarm: Customers can now schedule runs without a need to create a Device Pool. They also get realtime information on public device availability.

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Health",
+        "description": "AWS Health API DescribeAffectedEntities operation now includes a field that returns the URL of the affected entity."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "S3 Inventory reports can now be generated in Parquet format by setting the Destination Format to be 'Parquet'."
+    }
+]
