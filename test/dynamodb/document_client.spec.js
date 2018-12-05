@@ -1657,4 +1657,8 @@
     });
   });
 
+  describe('validate supported operations', function() {
+
+  });
+
 }).call(this);
