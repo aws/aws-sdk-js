@@ -66,6 +66,16 @@ declare namespace MediaTailor {
      * The URL that is used to initiate a playback session for devices that support DASH. 
      */
     ManifestEndpointPrefix?: __string;
+    /**
+     * The setting that controls whether MediaTailor includes the Location tag in DASH Manifests. MediaTailor populates the Location tag with the URL for manifest update requests, to be used by players that don't support sticky redirects. Disable this if you have CDN routing rules set up for accessing MediaTailor manifests and you are either using client-side reporting or your players support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The EMT_DEFAULT setting enables the inclusion of the tag and is the default value.
+     */
+    MpdLocation?: __string;
+  }
+  export interface DashConfigurationForPut {
+    /**
+     * The setting that controls whether MediaTailor includes the Location tag in DASH Manifests. MediaTailor populates the Location tag with the URL for manifest update requests, to be used by players that don't support sticky redirects. Disable this if you have CDN routing rules set up for accessing MediaTailor manifests and you are either using client-side reporting or your players support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The EMT_DEFAULT setting enables the inclusion of the tag and is the default value.
+     */
+    MpdLocation?: __string;
   }
   export interface DeletePlaybackConfigurationRequest {
     /**
@@ -174,6 +184,10 @@ declare namespace MediaTailor {
      * The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. 
      */
     CdnConfiguration?: CdnConfiguration;
+    /**
+     * The configuration object for DASH content. 
+     */
+    DashConfiguration?: DashConfigurationForPut;
     /**
      * The identifier for the configuration.
      */

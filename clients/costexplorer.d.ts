@@ -12,11 +12,11 @@ declare class CostExplorer extends Service {
   constructor(options?: CostExplorer.Types.ClientConfiguration)
   config: Config & CostExplorer.Types.ClientConfiguration;
   /**
-   * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the  GetDimensionValues  operation. Master accounts in an organization in AWS Organizations have access to all member accounts.
+   * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Master accounts in an organization in AWS Organizations have access to all member accounts.
    */
   getCostAndUsage(params: CostExplorer.Types.GetCostAndUsageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageResponse) => void): Request<CostExplorer.Types.GetCostAndUsageResponse, AWSError>;
   /**
-   * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the  GetDimensionValues  operation. Master accounts in an organization in AWS Organizations have access to all member accounts.
+   * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Master accounts in an organization in AWS Organizations have access to all member accounts.
    */
   getCostAndUsage(callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageResponse) => void): Request<CostExplorer.Types.GetCostAndUsageResponse, AWSError>;
   /**
@@ -36,19 +36,19 @@ declare class CostExplorer extends Service {
    */
   getDimensionValues(callback?: (err: AWSError, data: CostExplorer.Types.GetDimensionValuesResponse) => void): Request<CostExplorer.Types.GetDimensionValuesResponse, AWSError>;
   /**
-   * Retrieves the reservation coverage for your account. This allows you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization's master account can see the coverage of the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
+   * Retrieves the reservation coverage for your account. This enables you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization's master account can see the coverage of the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
    */
   getReservationCoverage(params: CostExplorer.Types.GetReservationCoverageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetReservationCoverageResponse) => void): Request<CostExplorer.Types.GetReservationCoverageResponse, AWSError>;
   /**
-   * Retrieves the reservation coverage for your account. This allows you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization's master account can see the coverage of the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
+   * Retrieves the reservation coverage for your account. This enables you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization's master account can see the coverage of the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
    */
   getReservationCoverage(callback?: (err: AWSError, data: CostExplorer.Types.GetReservationCoverageResponse) => void): Request<CostExplorer.Types.GetReservationCoverageResponse, AWSError>;
   /**
-   * Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing. AWS generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After AWS has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings.  For example, AWS automatically aggregates your EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. AWS recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. AWS also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for c4.large, because that is the smallest size instance in the c4 instance family.
+   * Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing. AWS generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After AWS has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings.  For example, AWS automatically aggregates your Amazon EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. AWS recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. AWS also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for c4.large because that is the smallest size instance in the c4 instance family.
    */
   getReservationPurchaseRecommendation(params: CostExplorer.Types.GetReservationPurchaseRecommendationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetReservationPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetReservationPurchaseRecommendationResponse, AWSError>;
   /**
-   * Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing. AWS generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After AWS has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings.  For example, AWS automatically aggregates your EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. AWS recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. AWS also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for c4.large, because that is the smallest size instance in the c4 instance family.
+   * Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing. AWS generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After AWS has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings.  For example, AWS automatically aggregates your Amazon EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. AWS recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. AWS also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for c4.large because that is the smallest size instance in the c4 instance family.
    */
   getReservationPurchaseRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetReservationPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetReservationPurchaseRecommendationResponse, AWSError>;
   /**
@@ -78,17 +78,25 @@ declare namespace CostExplorer {
   export type Context = "COST_AND_USAGE"|"RESERVATIONS"|string;
   export interface Coverage {
     /**
-     * The amount of instance usage that a reservation covered, in hours.
+     * The amount of instance usage that the reservation covered, in hours.
      */
     CoverageHours?: CoverageHours;
+    /**
+     * The amount of instance usage that the reservation covered, in normalized units.
+     */
+    CoverageNormalizedUnits?: CoverageNormalizedUnits;
+    /**
+     * The amount of cost that the reservation covered.
+     */
+    CoverageCost?: CoverageCost;
   }
   export interface CoverageByTime {
     /**
-     * The period over which this coverage was used.
+     * The period that this coverage was used over.
      */
     TimePeriod?: DateInterval;
     /**
-     * The groups of instances that are covered by a reservation.
+     * The groups of instances that the reservation covered.
      */
     Groups?: ReservationCoverageGroups;
     /**
@@ -96,13 +104,19 @@ declare namespace CostExplorer {
      */
     Total?: Coverage;
   }
+  export interface CoverageCost {
+    /**
+     * How much an On-Demand instance cost.
+     */
+    OnDemandCost?: OnDemandCost;
+  }
   export interface CoverageHours {
     /**
-     * The number of instance running hours that are covered by On-Demand Instances.
+     * The number of instance running hours that On-Demand Instances covered.
      */
     OnDemandHours?: OnDemandHours;
     /**
-     * The number of instance running hours that are covered by reservations.
+     * The number of instance running hours that reservations covered.
      */
     ReservedHours?: ReservedHours;
     /**
@@ -110,11 +124,30 @@ declare namespace CostExplorer {
      */
     TotalRunningHours?: TotalRunningHours;
     /**
-     * The percentage of instance hours that are covered by a reservation.
+     * The percentage of instance hours that a reservation covered.
      */
     CoverageHoursPercentage?: CoverageHoursPercentage;
   }
   export type CoverageHoursPercentage = string;
+  export interface CoverageNormalizedUnits {
+    /**
+     * The number of normalized units that are covered by On-Demand Instances instead of a reservation.
+     */
+    OnDemandNormalizedUnits?: OnDemandNormalizedUnits;
+    /**
+     * The number of normalized units that a reservation covers.
+     */
+    ReservedNormalizedUnits?: ReservedNormalizedUnits;
+    /**
+     * The total number of normalized units that you used.
+     */
+    TotalRunningNormalizedUnits?: TotalRunningNormalizedUnits;
+    /**
+     * The percentage of your used instance normalized units that a reservation covers.
+     */
+    CoverageNormalizedUnitsPercentage?: CoverageNormalizedUnitsPercentage;
+  }
+  export type CoverageNormalizedUnitsPercentage = string;
   export type CoveragesByTime = CoverageByTime[];
   export interface DateInterval {
     /**
@@ -174,7 +207,7 @@ declare namespace CostExplorer {
      */
     Tenancy?: GenericString;
     /**
-     * Whether the recommendation is for a current generation instance. 
+     * Whether the recommendation is for a current-generation instance. 
      */
     CurrentGeneration?: GenericBoolean;
     /**
@@ -202,7 +235,7 @@ declare namespace CostExplorer {
      */
     Region?: GenericString;
     /**
-     * Whether the recommendation is for a current generation instance.
+     * Whether the recommendation is for a current-generation instance.
      */
     CurrentGeneration?: GenericBoolean;
     /**
@@ -288,7 +321,7 @@ declare namespace CostExplorer {
      */
     TimePeriod?: DateInterval;
     /**
-     * Sets the AWS cost granularity to MONTHLY or DAILY. If Granularity isn't set, the response object doesn't include the Granularity, either MONTHLY or DAILY. 
+     * Sets the AWS cost granularity to MONTHLY or DAILY. If Granularity isn't set, the response object doesn't include the Granularity, either MONTHLY or DAILY.  The GetCostAndUsageRequest operation supports only DAILY and MONTHLY granularities.
      */
     Granularity?: Granularity;
     /**
@@ -296,7 +329,7 @@ declare namespace CostExplorer {
      */
     Filter?: Expression;
     /**
-     * Which metrics are returned in the query. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost, NormalizedUsageAmount, UnblendedCost, and UsageQuantity.   If you return the UsageQuantity metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate usageQuantity across all of EC2, the results aren't meaningful because EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful UsageQuantity metrics, filter by UsageType or UsageTypeGroups.    Metrics is required for GetCostAndUsage requests.
+     * Which metrics are returned in the query. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost, NormalizedUsageAmount, UnblendedCost, and UsageQuantity.   If you return the UsageQuantity metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate usageQuantity across all of Amazon EC2, the results aren't meaningful because Amazon EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful UsageQuantity metrics, filter by UsageType or UsageTypeGroups.    Metrics is required for GetCostAndUsage requests.
      */
     Metrics?: MetricNames;
     /**
@@ -332,7 +365,7 @@ declare namespace CostExplorer {
      */
     Metric: Metric;
     /**
-     * How granular you want the forecast to be. You can get 3 months of DAILY forecasts or 12 months of MONTHLY forecasts.
+     * How granular you want the forecast to be. You can get 3 months of DAILY forecasts or 12 months of MONTHLY forecasts. The GetCostForecast operation supports only DAILY and MONTHLY granularities.
      */
     Granularity: Granularity;
     /**
@@ -364,11 +397,11 @@ declare namespace CostExplorer {
      */
     TimePeriod: DateInterval;
     /**
-     * The name of the dimension. Each Dimension is available for different a Context. For more information, see Context.
+     * The name of the dimension. Each Dimension is available for a different Context. For more information, see Context.
      */
     Dimension: Dimension;
     /**
-     * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization operation. If the context is set to COST_AND_USAGE the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.  
+     * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization operation. If the context is set to COST_AND_USAGE, the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.  
      */
     Context?: Context;
     /**
@@ -378,7 +411,7 @@ declare namespace CostExplorer {
   }
   export interface GetDimensionValuesResponse {
     /**
-     * The filters that you used to filter your request. Some dimensions are available only for a specific context: If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.  
+     * The filters that you used to filter your request. Some dimensions are available only for a specific context. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.  
      */
     DimensionValues: DimensionValuesWithAttributesList;
     /**
@@ -396,7 +429,7 @@ declare namespace CostExplorer {
   }
   export interface GetReservationCoverageRequest {
     /**
-     * The start and end dates of the period for which you want to retrieve data about reservation coverage. You can retrieve data for a maximum of 13 months: the last 12 months and the current month. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01. 
+     * The start and end dates of the period that you want to retrieve data about reservation coverage for. You can retrieve data for a maximum of 13 months: the last 12 months and the current month. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01. 
      */
     TimePeriod: DateInterval;
     /**
@@ -404,13 +437,14 @@ declare namespace CostExplorer {
      */
     GroupBy?: GroupDefinitions;
     /**
-     * The granularity of the AWS cost data for the reservation. Valid values are MONTHLY and DAILY. If GroupBy is set, Granularity can't be set. If Granularity isn't set, the response object doesn't include Granularity, either MONTHLY or DAILY.
+     * The granularity of the AWS cost data for the reservation. Valid values are MONTHLY and DAILY. If GroupBy is set, Granularity can't be set. If Granularity isn't set, the response object doesn't include Granularity, either MONTHLY or DAILY. The GetReservationCoverage operation supports only DAILY and MONTHLY granularities.
      */
     Granularity?: Granularity;
     /**
-     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY    GetReservationCoverage uses the same  Expression  object as the other operations, but only AND is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR'd together. If you don't provide a SERVICE filter, Cost Explorer defaults to EC2.
+     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY    GetReservationCoverage uses the same Expression object as the other operations, but only AND is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR'd together. If you don't provide a SERVICE filter, Cost Explorer defaults to EC2.
      */
     Filter?: Expression;
+    Metrics?: MetricNames;
     /**
      * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
      */
@@ -422,7 +456,7 @@ declare namespace CostExplorer {
      */
     CoveragesByTime: CoveragesByTime;
     /**
-     * The total amount of instance usage that is covered by a reservation.
+     * The total amount of instance usage that a reservation covered.
      */
     Total?: Coverage;
     /**
@@ -456,7 +490,7 @@ declare namespace CostExplorer {
      */
     PaymentOption?: PaymentOption;
     /**
-     * The hardware specifications for the service instances that you want recommendations for, such as standard or convertible EC2 instances.
+     * The hardware specifications for the service instances that you want recommendations for, such as standard or convertible Amazon EC2 instances.
      */
     ServiceSpecification?: ServiceSpecification;
     /**
@@ -484,7 +518,7 @@ declare namespace CostExplorer {
   }
   export interface GetReservationUtilizationRequest {
     /**
-     * Sets the start and end dates for retrieving Reserved Instance (RI) utilization. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01. 
+     * Sets the start and end dates for retrieving RI utilization. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01. 
      */
     TimePeriod: DateInterval;
     /**
@@ -492,11 +526,11 @@ declare namespace CostExplorer {
      */
     GroupBy?: GroupDefinitions;
     /**
-     * If GroupBy is set, Granularity can't be set. If Granularity isn't set, the response object doesn't include Granularity, either MONTHLY or DAILY. If both GroupBy and Granularity aren't set, GetReservationUtilization defaults to DAILY.
+     * If GroupBy is set, Granularity can't be set. If Granularity isn't set, the response object doesn't include Granularity, either MONTHLY or DAILY. If both GroupBy and Granularity aren't set, GetReservationUtilization defaults to DAILY. The GetReservationUtilization operation supports only DAILY and MONTHLY granularities.
      */
     Granularity?: Granularity;
     /**
-     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   SCOPE   TENANCY    GetReservationUtilization uses the same  Expression  object as the other operations, but only AND is supported among each dimension, and nesting is supported up to only one level deep. If there are multiple values for a dimension, they are OR'd together.
+     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   SCOPE   TENANCY    GetReservationUtilization uses the same Expression object as the other operations, but only AND is supported among each dimension, and nesting is supported up to only one level deep. If there are multiple values for a dimension, they are OR'd together.
      */
     Filter?: Expression;
     /**
@@ -506,11 +540,11 @@ declare namespace CostExplorer {
   }
   export interface GetReservationUtilizationResponse {
     /**
-     * The amount of time that you utilized your RIs.
+     * The amount of time that you used your RIs.
      */
     UtilizationsByTime: UtilizationsByTime;
     /**
-     * The total amount of time that you utilized your RIs.
+     * The total amount of time that you used your RIs.
      */
     Total?: ReservationAggregates;
     /**
@@ -581,11 +615,11 @@ declare namespace CostExplorer {
   export type Groups = Group[];
   export interface InstanceDetails {
     /**
-     * The EC2 instances that AWS recommends that you purchase.
+     * The Amazon EC2 instances that AWS recommends that you purchase.
      */
     EC2InstanceDetails?: EC2InstanceDetails;
     /**
-     * The RDS instances that AWS recommends that you purchase.
+     * The Amazon RDS instances that AWS recommends that you purchase.
      */
     RDSInstanceDetails?: RDSInstanceDetails;
     /**
@@ -624,12 +658,15 @@ declare namespace CostExplorer {
   export type NextPageToken = string;
   export type NonNegativeInteger = number;
   export type OfferingClass = "STANDARD"|"CONVERTIBLE"|string;
+  export type OnDemandCost = string;
   export type OnDemandCostOfRIHoursUsed = string;
   export type OnDemandHours = string;
+  export type OnDemandNormalizedUnits = string;
   export type PageSize = number;
   export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|"LIGHT_UTILIZATION"|"MEDIUM_UTILIZATION"|"HEAVY_UTILIZATION"|string;
   export type PredictionIntervalLevel = number;
   export type PurchasedHours = string;
+  export type PurchasedUnits = string;
   export interface RDSInstanceDetails {
     /**
      * The instance family of the recommended reservation.
@@ -660,7 +697,7 @@ declare namespace CostExplorer {
      */
     LicenseModel?: GenericString;
     /**
-     * Whether the recommendation is for a current generation instance. 
+     * Whether the recommendation is for a current-generation instance. 
      */
     CurrentGeneration?: GenericBoolean;
     /**
@@ -682,7 +719,7 @@ declare namespace CostExplorer {
      */
     Region?: GenericString;
     /**
-     * Whether the recommendation is for a current generation instance.
+     * Whether the recommendation is for a current-generation instance.
      */
     CurrentGeneration?: GenericBoolean;
     /**
@@ -692,27 +729,43 @@ declare namespace CostExplorer {
   }
   export interface ReservationAggregates {
     /**
-     * The percentage of RI time that you used.
+     * The percentage of reservation time that you used.
      */
     UtilizationPercentage?: UtilizationPercentage;
     /**
-     * How many RI hours that you purchased.
+     * The percentage of Amazon EC2 reservation time that you used, converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
+     */
+    UtilizationPercentageInUnits?: UtilizationPercentageInUnits;
+    /**
+     * How many reservation hours that you purchased.
      */
     PurchasedHours?: PurchasedHours;
     /**
-     * The total number of RI hours that you used.
+     * How many Amazon EC2 reservation hours that you purchased, converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
+     */
+    PurchasedUnits?: PurchasedUnits;
+    /**
+     * The total number of reservation hours that you used.
      */
     TotalActualHours?: TotalActualHours;
     /**
-     * The number of RI hours that you didn't use.
+     * The total number of Amazon EC2 reservation hours that you used, converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
+     */
+    TotalActualUnits?: TotalActualUnits;
+    /**
+     * The number of reservation hours that you didn't use.
      */
     UnusedHours?: UnusedHours;
     /**
-     * How much your RIs would cost if charged On-Demand rates.
+     * The number of Amazon EC2 reservation hours that you didn't use, converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
+     */
+    UnusedUnits?: UnusedUnits;
+    /**
+     * How much your reservation would cost if charged On-Demand rates.
      */
     OnDemandCostOfRIHoursUsed?: OnDemandCostOfRIHoursUsed;
     /**
-     * How much you saved due to purchasing and utilizing RIs. AWS calculates this by subtracting TotalAmortizedFee from OnDemandCostOfRIHoursUsed.
+     * How much you saved due to purchasing and utilizing reservation. AWS calculates this by subtracting TotalAmortizedFee from OnDemandCostOfRIHoursUsed.
      */
     NetRISavings?: NetRISavings;
     /**
@@ -720,15 +773,15 @@ declare namespace CostExplorer {
      */
     TotalPotentialRISavings?: TotalPotentialRISavings;
     /**
-     * The upfront cost of your RI, amortized over the RI period.
+     * The upfront cost of your reservation, amortized over the reservation period.
      */
     AmortizedUpfrontFee?: AmortizedUpfrontFee;
     /**
-     * The monthly cost of your RI, amortized over the RI period.
+     * The monthly cost of your reservation, amortized over the reservation period.
      */
     AmortizedRecurringFee?: AmortizedRecurringFee;
     /**
-     * The total cost of your RI, amortized over the RI period.
+     * The total cost of your reservation, amortized over the reservation period.
      */
     TotalAmortizedFee?: TotalAmortizedFee;
   }
@@ -794,7 +847,7 @@ declare namespace CostExplorer {
      */
     MinimumNumberOfInstancesUsedPerHour?: GenericString;
     /**
-     * The minimum number of hours that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     * The minimum number of normalized units that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
      */
     MinimumNormalizedUnitsUsedPerHour?: GenericString;
     /**
@@ -878,27 +931,28 @@ declare namespace CostExplorer {
   export type ReservationPurchaseRecommendations = ReservationPurchaseRecommendation[];
   export interface ReservationUtilizationGroup {
     /**
-     * The key for a specific RI attribute.
+     * The key for a specific reservation attribute.
      */
     Key?: ReservationGroupKey;
     /**
-     * The value of a specific RI attribute.
+     * The value of a specific reservation attribute.
      */
     Value?: ReservationGroupValue;
     /**
-     * The attributes for this group of RIs.
+     * The attributes for this group of reservations.
      */
     Attributes?: Attributes;
     /**
-     * How much you used this group of RIs.
+     * How much you used this group of reservations.
      */
     Utilization?: ReservationAggregates;
   }
   export type ReservationUtilizationGroups = ReservationUtilizationGroup[];
   export type ReservedHours = string;
+  export type ReservedNormalizedUnits = string;
   export interface ResultByTime {
     /**
-     * The time period covered by a result.
+     * The time period that the result covers.
      */
     TimePeriod?: DateInterval;
     /**
@@ -906,11 +960,11 @@ declare namespace CostExplorer {
      */
     Total?: Metrics;
     /**
-     * The groups that are included in this time period.
+     * The groups that this time period includes.
      */
     Groups?: Groups;
     /**
-     * Whether this result is estimated.
+     * Whether the result is estimated.
      */
     Estimated?: Estimated;
   }
@@ -918,7 +972,7 @@ declare namespace CostExplorer {
   export type SearchString = string;
   export interface ServiceSpecification {
     /**
-     * The EC2 hardware specifications that you want AWS to provide recommendations for.
+     * The Amazon EC2 hardware specifications that you want AWS to provide recommendations for.
      */
     EC2Specification?: EC2Specification;
   }
@@ -926,35 +980,39 @@ declare namespace CostExplorer {
   export type TagList = Entity[];
   export interface TagValues {
     /**
-     * The key for a tag.
+     * The key for the tag.
      */
     Key?: TagKey;
     /**
-     * The specific value of a tag.
+     * The specific value of the tag.
      */
     Values?: Values;
   }
   export type TermInYears = "ONE_YEAR"|"THREE_YEARS"|string;
   export type TotalActualHours = string;
+  export type TotalActualUnits = string;
   export type TotalAmortizedFee = string;
   export type TotalPotentialRISavings = string;
   export type TotalRunningHours = string;
+  export type TotalRunningNormalizedUnits = string;
   export type UnusedHours = string;
+  export type UnusedUnits = string;
   export interface UtilizationByTime {
     /**
-     * The period of time over which this utilization was used.
+     * The period of time that this utilization was used for.
      */
     TimePeriod?: DateInterval;
     /**
-     * The groups that are included in this utilization result.
+     * The groups that this utilization result uses.
      */
     Groups?: ReservationUtilizationGroups;
     /**
-     * The total number of RI hours that were used.
+     * The total number of reservation hours that were used.
      */
     Total?: ReservationAggregates;
   }
   export type UtilizationPercentage = string;
+  export type UtilizationPercentageInUnits = string;
   export type UtilizationsByTime = UtilizationByTime[];
   export type Value = string;
   export type Values = Value[];

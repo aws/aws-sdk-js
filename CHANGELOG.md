@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.370.0-->
+<!--LATEST=2.371.0-->
 <!--ENTRYINSERT-->
+
+## 2.371.0
+* feature: CostExplorer: Add normalized unit support for both GetReservationUtilization and GetReservationCoverage API.
+* feature: MQ: This release adds support for cost allocation tagging. You can now create, delete, and list tags for AmazonMQ resources. For more information about tagging, see AWS Tagging Strategies.
+* feature: MediaTailor: AWS Elemental MediaTailor SDK now includes a new parameter to control the Location tag of DASH manifests.
 
 ## 2.370.0
 * feature: Health: AWS Health API DescribeAffectedEntities operation now includes a field that returns the URL of the affected entity.

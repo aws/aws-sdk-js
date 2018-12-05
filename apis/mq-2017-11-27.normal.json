@@ -83,6 +83,36 @@
       ],
       "documentation": "Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version)."
     },
+    "CreateTags": {
+      "name": "CreateTags",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/tags/{resource-arn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "CreateTagsRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "HTTP Status Code 404: Resource not found due to incorrect input. Correct your request and then retry it."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request."
+        }
+      ],
+      "documentation": "Add a tag to a resource."
+    },
     "CreateUser": {
       "name": "CreateUser",
       "http": {
@@ -154,6 +184,36 @@
         }
       ],
       "documentation": "Deletes a broker. Note: This API is asynchronous."
+    },
+    "DeleteTags": {
+      "name": "DeleteTags",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/tags/{resource-arn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteTagsRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "HTTP Status Code 404: Resource not found due to incorrect input. Correct your request and then retry it."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request."
+        }
+      ],
+      "documentation": "Remove a tag from a resource."
     },
     "DeleteUser": {
       "name": "DeleteUser",
@@ -418,6 +478,40 @@
         }
       ],
       "documentation": "Returns a list of all configurations."
+    },
+    "ListTags": {
+      "name": "ListTags",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/tags/{resource-arn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsRequest"
+      },
+      "output": {
+        "shape": "ListTagsResponse",
+        "documentation": "HTTP Status Code 200: OK."
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "HTTP Status Code 404: Resource not found due to incorrect input. Correct your request and then retry it."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request."
+        }
+      ],
+      "documentation": "Lists tags for a resource."
     },
     "ListUsers": {
       "name": "ListUsers",
@@ -711,7 +805,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "Required. The version of the broker engine."
+          "documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html"
         },
         "Id": {
           "shape": "__string",
@@ -727,6 +821,11 @@
           "shape": "__string",
           "locationName": "name",
           "documentation": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long."
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "The list of all tags associated with this configuration."
         }
       },
       "documentation": "Returns information about all configurations."
@@ -826,7 +925,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0."
+          "documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html"
         },
         "HostInstanceType": {
           "shape": "__string",
@@ -857,6 +956,11 @@
           "shape": "__listOf__string",
           "locationName": "subnetIds",
           "documentation": "The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets."
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "Create tags when creating the broker."
         },
         "Users": {
           "shape": "__listOfUser",
@@ -892,12 +996,17 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0."
+          "documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html"
         },
         "Name": {
           "shape": "__string",
           "locationName": "name",
           "documentation": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long."
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "Create tags when creating the configuration."
         }
       },
       "documentation": "Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version)."
@@ -931,6 +1040,26 @@
           "documentation": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long."
         }
       }
+    },
+    "CreateTagsRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn",
+          "documentation": "the Amazon Resource Name (ARN)"
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "The key-value pair for the resource tag."
+        }
+      },
+      "documentation": "A map of the key-value pairs for the resource tag.",
+      "required": [
+        "ResourceArn"
+      ]
     },
     "CreateUserRequest": {
       "type": "structure",
@@ -1008,6 +1137,27 @@
           "documentation": "The unique ID that Amazon MQ generates for the broker."
         }
       }
+    },
+    "DeleteTagsRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn",
+          "documentation": "the Amazon Resource Name (ARN)"
+        },
+        "TagKeys": {
+          "shape": "__listOf__string",
+          "location": "querystring",
+          "locationName": "tagKeys",
+          "documentation": "An array of tag keys to delete"
+        }
+      },
+      "required": [
+        "TagKeys",
+        "ResourceArn"
+      ]
     },
     "DeleteUserRequest": {
       "type": "structure",
@@ -1112,7 +1262,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0."
+          "documentation": "The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html"
         },
         "HostInstanceType": {
           "shape": "__string",
@@ -1132,7 +1282,7 @@
         "PendingEngineVersion": {
           "shape": "__string",
           "locationName": "pendingEngineVersion",
-          "documentation": "The version of the broker engine to upgrade to."
+          "documentation": "The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html"
         },
         "PubliclyAccessible": {
           "shape": "__boolean",
@@ -1148,6 +1298,11 @@
           "shape": "__listOf__string",
           "locationName": "subnetIds",
           "documentation": "The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets."
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "The list of all tags associated with this broker."
         },
         "Users": {
           "shape": "__listOfUserSummary",
@@ -1196,7 +1351,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "Required. The version of the broker engine."
+          "documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html"
         },
         "Id": {
           "shape": "__string",
@@ -1212,6 +1367,11 @@
           "shape": "__string",
           "locationName": "name",
           "documentation": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long."
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "The list of all tags associated with this configuration."
         }
       }
     },
@@ -1439,6 +1599,30 @@
         }
       }
     },
+    "ListTagsRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn",
+          "documentation": "the Amazon Resource Name (ARN)"
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ]
+    },
+    "ListTagsResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "The key-value pair for the resource tag."
+        }
+      }
+    },
     "ListUsersRequest": {
       "type": "structure",
       "members": {
@@ -1628,7 +1812,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0."
+          "documentation": "The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html"
         },
         "Logs": {
           "shape": "Logs",
@@ -1662,7 +1846,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "The version of the broker engine to upgrade to."
+          "documentation": "The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html"
         },
         "Logs": {
           "shape": "Logs",
@@ -1918,6 +2102,15 @@
     "__listOf__string": {
       "type": "list",
       "member": {
+        "shape": "__string"
+      }
+    },
+    "__mapOf__string": {
+      "type": "map",
+      "key": {
+        "shape": "__string"
+      },
+      "value": {
         "shape": "__string"
       }
     },
