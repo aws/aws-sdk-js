@@ -282,6 +282,14 @@ describe('AWS.S3', function() {
     });
 
     describe('will throw an error when', function() {
+      it('using sigv4 and the "Bucket" parameter starts with a forward slash', function(done) {
+        var s3 = new AWS.S3({signatureVersion: 'v4'});
+        s3.createBucket({Bucket: '/foo'}, function(err, data) {
+          expect(err.code).to.eql('InvalidBucket');
+          done();
+        });
+      });
+
       it('using sigv4 and the "Bucket" parameter contains forward slashes and "Key" is not defined', function(done) {
         var s3 = new AWS.S3({signatureVersion: 'v4'});
         s3.createBucket({Bucket: 'foo/bar'}, function(err, data) {
