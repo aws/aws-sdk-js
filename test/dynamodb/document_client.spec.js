@@ -1658,7 +1658,26 @@
   });
 
   describe('validate supported operations', function() {
-
+    var serviceClientOperationsMap = {
+      batchGet: 'batchGetItem',
+      batchWrite: 'batchWriteItem',
+      delete: 'deleteItem',
+      get: 'getItem',
+      put: 'putItem',
+      query: 'query',
+      scan: 'scan',
+      update: 'updateItem',
+      transactGet: 'transactGetItems',
+      transactWrite: 'transactWriteItems'
+    };
+    var client = new AWS.DynamoDB.DocumentClient({paramValidation: false});
+    AWS.util.arrayEach(Object.keys(serviceClientOperationsMap), function(operation) {
+      var request = client[operation]({});
+      it('operation' + operation + ' is available', function() {
+        request.emit('validate', [request]);
+        expect(request.operation).to.eql(serviceClientOperationsMap[operation]);
+      });
+    });
   });
 
 }).call(this);
