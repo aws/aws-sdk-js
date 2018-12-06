@@ -2457,6 +2457,11 @@
           "locationName": "inputSecurityGroups",
           "documentation": "A list of security groups referenced by IDs to attach to the input."
         },
+        "MediaConnectFlows": {
+          "shape": "__listOfMediaConnectFlowRequest",
+          "locationName": "mediaConnectFlows",
+          "documentation": "A list of the MediaConnect Flows that you want to use in this input. You can specify as few as one\nFlow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a\nseparate Availability Zone as this ensures your EML input is redundant to AZ issues.\n"
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -2467,6 +2472,11 @@
           "locationName": "requestId",
           "documentation": "Unique identifier of the request to ensure the request is handled\nexactly once in case of retries.\n",
           "idempotencyToken": true
+        },
+        "RoleArn": {
+          "shape": "__string",
+          "locationName": "roleArn",
+          "documentation": "The Amazon Resource Name (ARN) of the role this input assumes during and after creation."
         },
         "Sources": {
           "shape": "__listOfInputSourceRequest",
@@ -2851,10 +2861,20 @@
           "locationName": "id",
           "documentation": "The generated ID of the input (unique for user account, immutable)."
         },
+        "MediaConnectFlows": {
+          "shape": "__listOfMediaConnectFlow",
+          "locationName": "mediaConnectFlows",
+          "documentation": "A list of MediaConnect Flows for this input."
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
           "documentation": "The user-assigned name (This is a mutable value)."
+        },
+        "RoleArn": {
+          "shape": "__string",
+          "locationName": "roleArn",
+          "documentation": "The Amazon Resource Name (ARN) of the role this input assumes during and after creation."
         },
         "SecurityGroups": {
           "shape": "__listOf__string",
@@ -4015,7 +4035,7 @@
         "Bitrate": {
           "shape": "__integerMin1000",
           "locationName": "bitrate",
-          "documentation": "Average bitrate in bits/second. Required for VBR, CBR, and ABR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000."
+          "documentation": "Average bitrate in bits/second. Required when the rate control mode is VBR or CBR. Not used for QVBR. In an MS Smooth output group, each output must have a unique value when its bitrate is rounded down to the nearest multiple of 1000."
         },
         "BufFillPct": {
           "shape": "__integerMin0Max100",
@@ -4100,7 +4120,7 @@
         "MaxBitrate": {
           "shape": "__integerMin1000",
           "locationName": "maxBitrate",
-          "documentation": "Maximum bitrate in bits/second (for VBR and QVBR modes only).\n\nRequired when rateControlMode is \"qvbr\"."
+          "documentation": "For QVBR: See the tooltip for Quality level \n\nFor VBR: Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video."
         },
         "MinIInterval": {
           "shape": "__integerMin0Max30",
@@ -4135,12 +4155,12 @@
         "QvbrQualityLevel": {
           "shape": "__integerMin1Max10",
           "locationName": "qvbrQualityLevel",
-          "documentation": "Target quality value. Applicable only to QVBR mode. 1 is the lowest quality and 10 is the\nhighest and approaches lossless. Typical levels for content distribution are between 6 and 8."
+          "documentation": "Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:\n- Primary screen: Quality level: 8 to 10. Max bitrate: 4M\n- PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M\n- Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M"
         },
         "RateControlMode": {
           "shape": "H264RateControlMode",
           "locationName": "rateControlMode",
-          "documentation": "Rate control mode. \n\n- CBR: Constant Bit Rate\n- VBR: Variable Bit Rate\n- QVBR: Encoder dynamically controls the bitrate to meet the desired quality (specified\nthrough the qvbrQualityLevel field). The bitrate will not exceed the bitrate specified in\nthe maxBitrate field and will not fall below the bitrate required to meet the desired\nquality level."
+          "documentation": "Rate control mode. \n\nQVBR: Quality will match the specified quality level except when it is constrained by the\nmaximum bitrate.  Recommended if you or your viewers pay for bandwidth.\n\nVBR: Quality and bitrate vary, depending on the video complexity. Recommended instead of QVBR\nif you want to maintain a specific average bitrate over the duration of the channel.\n\nCBR: Quality varies, depending on the video complexity. Recommended only if you distribute\nyour assets to devices that cannot handle variable bitrates."
         },
         "ScanType": {
           "shape": "H264ScanType",
@@ -4814,10 +4834,20 @@
           "locationName": "id",
           "documentation": "The generated ID of the input (unique for user account, immutable)."
         },
+        "MediaConnectFlows": {
+          "shape": "__listOfMediaConnectFlow",
+          "locationName": "mediaConnectFlows",
+          "documentation": "A list of MediaConnect Flows for this input."
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
           "documentation": "The user-assigned name (This is a mutable value)."
+        },
+        "RoleArn": {
+          "shape": "__string",
+          "locationName": "roleArn",
+          "documentation": "The Amazon Resource Name (ARN) of the role this input assumes during and after creation."
         },
         "SecurityGroups": {
           "shape": "__listOf__string",
@@ -5257,7 +5287,8 @@
         "RTMP_PUSH",
         "RTMP_PULL",
         "URL_PULL",
-        "MP4_FILE"
+        "MP4_FILE",
+        "MEDIACONNECT"
       ],
       "documentation": "Placeholder documentation for InputType"
     },
@@ -6048,6 +6079,28 @@
       "min": 1,
       "max": 1000,
       "documentation": "Placeholder documentation for MaxResults"
+    },
+    "MediaConnectFlow": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The unique ARN of the MediaConnect Flow being used as a source."
+        }
+      },
+      "documentation": "The settings for a MediaConnect Flow."
+    },
+    "MediaConnectFlowRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the MediaConnect Flow that you want to use as a source."
+        }
+      },
+      "documentation": "The settings for a MediaConnect Flow."
     },
     "Mp2CodingMode": {
       "type": "string",
@@ -7788,10 +7841,20 @@
           "locationName": "inputSecurityGroups",
           "documentation": "A list of security groups referenced by IDs to attach to the input."
         },
+        "MediaConnectFlows": {
+          "shape": "__listOfMediaConnectFlowRequest",
+          "locationName": "mediaConnectFlows",
+          "documentation": "A list of the MediaConnect Flow ARNs that you want to use as the source of the input. You can specify as few as one\nFlow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a\nseparate Availability Zone as this ensures your EML input is redundant to AZ issues.\n"
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
           "documentation": "Name of the input."
+        },
+        "RoleArn": {
+          "shape": "__string",
+          "locationName": "roleArn",
+          "documentation": "The Amazon Resource Name (ARN) of the role this input assumes during and after creation."
         },
         "Sources": {
           "shape": "__listOfInputSourceRequest",
@@ -8393,6 +8456,20 @@
         "shape": "InputWhitelistRuleCidr"
       },
       "documentation": "Placeholder documentation for __listOfInputWhitelistRuleCidr"
+    },
+    "__listOfMediaConnectFlow": {
+      "type": "list",
+      "member": {
+        "shape": "MediaConnectFlow"
+      },
+      "documentation": "Placeholder documentation for __listOfMediaConnectFlow"
+    },
+    "__listOfMediaConnectFlowRequest": {
+      "type": "list",
+      "member": {
+        "shape": "MediaConnectFlowRequest"
+      },
+      "documentation": "Placeholder documentation for __listOfMediaConnectFlowRequest"
     },
     "__listOfOffering": {
       "type": "list",

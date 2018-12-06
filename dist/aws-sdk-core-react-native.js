@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.371.0',
+	  VERSION: '2.372.0',
 
 	  /**
 	   * @api private
@@ -5230,7 +5230,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @option options dynamoDbCrc32 [Boolean] whether to validate the CRC32
 	   *   checksum of HTTP response bodies returned by DynamoDB. Default: `true`.
 	   * @option options clientSideMonitoring [Boolean] whether to collect and
-	   * publish this client's performance metrics of all its API requests.
+	   *   publish this client's performance metrics of all its API requests.
 	   * @option options endpointDiscoveryEnabled [Boolean] whether to enable endpoint
 	   *   discovery for operations that allow optionally using an endpoint returned by
 	   *   the service.

@@ -60,6 +60,14 @@ declare class CodeBuild extends Service {
    */
   deleteProject(callback?: (err: AWSError, data: CodeBuild.Types.DeleteProjectOutput) => void): Request<CodeBuild.Types.DeleteProjectOutput, AWSError>;
   /**
+   *  Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials. 
+   */
+  deleteSourceCredentials(params: CodeBuild.Types.DeleteSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteSourceCredentialsOutput) => void): Request<CodeBuild.Types.DeleteSourceCredentialsOutput, AWSError>;
+  /**
+   *  Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials. 
+   */
+  deleteSourceCredentials(callback?: (err: AWSError, data: CodeBuild.Types.DeleteSourceCredentialsOutput) => void): Request<CodeBuild.Types.DeleteSourceCredentialsOutput, AWSError>;
+  /**
    * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
    */
   deleteWebhook(params: CodeBuild.Types.DeleteWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
@@ -67,6 +75,14 @@ declare class CodeBuild extends Service {
    * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
    */
   deleteWebhook(callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
+  /**
+   *  Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. 
+   */
+  importSourceCredentials(params: CodeBuild.Types.ImportSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.ImportSourceCredentialsOutput) => void): Request<CodeBuild.Types.ImportSourceCredentialsOutput, AWSError>;
+  /**
+   *  Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. 
+   */
+  importSourceCredentials(callback?: (err: AWSError, data: CodeBuild.Types.ImportSourceCredentialsOutput) => void): Request<CodeBuild.Types.ImportSourceCredentialsOutput, AWSError>;
   /**
    * Resets the cache for a project.
    */
@@ -108,6 +124,14 @@ declare class CodeBuild extends Service {
    */
   listProjects(callback?: (err: AWSError, data: CodeBuild.Types.ListProjectsOutput) => void): Request<CodeBuild.Types.ListProjectsOutput, AWSError>;
   /**
+   *  Returns a list of SourceCredentialsInfo objects. 
+   */
+  listSourceCredentials(params: CodeBuild.Types.ListSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListSourceCredentialsOutput) => void): Request<CodeBuild.Types.ListSourceCredentialsOutput, AWSError>;
+  /**
+   *  Returns a list of SourceCredentialsInfo objects. 
+   */
+  listSourceCredentials(callback?: (err: AWSError, data: CodeBuild.Types.ListSourceCredentialsOutput) => void): Request<CodeBuild.Types.ListSourceCredentialsOutput, AWSError>;
+  /**
    * Starts running a build.
    */
   startBuild(params: CodeBuild.Types.StartBuildInput, callback?: (err: AWSError, data: CodeBuild.Types.StartBuildOutput) => void): Request<CodeBuild.Types.StartBuildOutput, AWSError>;
@@ -144,6 +168,7 @@ declare namespace CodeBuild {
   export type ArtifactNamespace = "NONE"|"BUILD_ID"|string;
   export type ArtifactPackaging = "NONE"|"ZIP"|string;
   export type ArtifactsType = "CODEPIPELINE"|"S3"|"NO_ARTIFACTS"|string;
+  export type AuthType = "OAUTH"|"BASIC_AUTH"|"PERSONAL_ACCESS_TOKEN"|string;
   export interface BatchDeleteBuildsInput {
     /**
      * The IDs of the builds to delete.
@@ -479,6 +504,18 @@ declare namespace CodeBuild {
   }
   export interface DeleteProjectOutput {
   }
+  export interface DeleteSourceCredentialsInput {
+    /**
+     *  The Amazon Resource Name (ARN) of the token.
+     */
+    arn: NonEmptyString;
+  }
+  export interface DeleteSourceCredentialsOutput {
+    /**
+     *  The Amazon Resource Name (ARN) of the token. 
+     */
+    arn?: NonEmptyString;
+  }
   export interface DeleteWebhookInput {
     /**
      * The name of the AWS CodeBuild project.
@@ -543,6 +580,30 @@ declare namespace CodeBuild {
   export type EnvironmentVariables = EnvironmentVariable[];
   export type GitCloneDepth = number;
   export type ImageVersions = String[];
+  export interface ImportSourceCredentialsInput {
+    /**
+     *  The Bitbucket username when the authType is BASIC_AUTH. This parameter is not valid for other types of source providers or connections. 
+     */
+    username?: NonEmptyString;
+    /**
+     *  For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is the app password. 
+     */
+    token: SensitiveNonEmptyString;
+    /**
+     *  The source provider used for this project. 
+     */
+    serverType: ServerType;
+    /**
+     *  The type of authentication used to connect to a GitHub, GitHub Enterprise, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the AWS CodeBuild console. 
+     */
+    authType: AuthType;
+  }
+  export interface ImportSourceCredentialsOutput {
+    /**
+     *  The Amazon Resource Name (ARN) of the token. 
+     */
+    arn?: NonEmptyString;
+  }
   export interface InvalidateProjectCacheInput {
     /**
      * The name of the AWS CodeBuild build project that the cache is reset for.
@@ -628,6 +689,14 @@ declare namespace CodeBuild {
      * The list of build project names, with each build project name representing a single build project.
      */
     projects?: ProjectNames;
+  }
+  export interface ListSourceCredentialsInput {
+  }
+  export interface ListSourceCredentialsOutput {
+    /**
+     *  A list of SourceCredentialsInfo objects. Each SourceCredentialsInfo object includes the authentication type, token ARN, and type of source provider for one set of credentials. 
+     */
+    sourceCredentialsInfos?: SourceCredentialsInfos;
   }
   export interface LogsConfig {
     /**
@@ -879,7 +948,7 @@ declare namespace CodeBuild {
      */
     buildspec?: String;
     /**
-     * Information about the authorization settings for AWS CodeBuild to access the source code to be built. This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly (unless the build project's source type value is BITBUCKET or GITHUB).
+     * Information about the authorization settings for AWS CodeBuild to access the source code to be built. This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly.
      */
     auth?: SourceAuth;
     /**
@@ -918,10 +987,12 @@ declare namespace CodeBuild {
     location?: String;
   }
   export type SecurityGroupIds = NonEmptyString[];
+  export type SensitiveNonEmptyString = string;
+  export type ServerType = "GITHUB"|"BITBUCKET"|"GITHUB_ENTERPRISE"|string;
   export type SortOrderType = "ASCENDING"|"DESCENDING"|string;
   export interface SourceAuth {
     /**
-     * The authorization type to use. The only valid value is OAUTH, which represents the OAuth authorization type.
+     *   This data type is deprecated and is no longer accurate or used.   The authorization type to use. The only valid value is OAUTH, which represents the OAuth authorization type.
      */
     type: SourceAuthType;
     /**
@@ -930,6 +1001,21 @@ declare namespace CodeBuild {
     resource?: String;
   }
   export type SourceAuthType = "OAUTH"|string;
+  export interface SourceCredentialsInfo {
+    /**
+     *  The Amazon Resource Name (ARN) of the token. 
+     */
+    arn?: NonEmptyString;
+    /**
+     *  The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, or BITBUCKET. 
+     */
+    serverType?: ServerType;
+    /**
+     *  The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, or PERSONAL_ACCESS_TOKEN. 
+     */
+    authType?: AuthType;
+  }
+  export type SourceCredentialsInfos = SourceCredentialsInfo[];
   export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"NO_SOURCE"|string;
   export interface StartBuildInput {
     /**

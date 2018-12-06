@@ -141,14 +141,6 @@ declare class ELBv2 extends Service {
    */
   describeLoadBalancers(callback?: (err: AWSError, data: ELBv2.Types.DescribeLoadBalancersOutput) => void): Request<ELBv2.Types.DescribeLoadBalancersOutput, AWSError>;
   /**
-   * 
-   */
-  describeProvisionedCapacity(params: ELBv2.Types.DescribeProvisionedCapacityInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeProvisionedCapacityOutput) => void): Request<ELBv2.Types.DescribeProvisionedCapacityOutput, AWSError>;
-  /**
-   * 
-   */
-  describeProvisionedCapacity(callback?: (err: AWSError, data: ELBv2.Types.DescribeProvisionedCapacityOutput) => void): Request<ELBv2.Types.DescribeProvisionedCapacityOutput, AWSError>;
-  /**
    * Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules.
    */
   describeRules(params: ELBv2.Types.DescribeRulesInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeRulesOutput) => void): Request<ELBv2.Types.DescribeRulesOutput, AWSError>;
@@ -212,14 +204,6 @@ declare class ELBv2 extends Service {
    * Modifies the specified attributes of the specified Application Load Balancer or Network Load Balancer. If any of the specified attributes can't be modified as requested, the call fails. Any existing attributes that you do not modify retain their current values.
    */
   modifyLoadBalancerAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyLoadBalancerAttributesOutput) => void): Request<ELBv2.Types.ModifyLoadBalancerAttributesOutput, AWSError>;
-  /**
-   * 
-   */
-  modifyProvisionedCapacity(params: ELBv2.Types.ModifyProvisionedCapacityInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyProvisionedCapacityOutput) => void): Request<ELBv2.Types.ModifyProvisionedCapacityOutput, AWSError>;
-  /**
-   * 
-   */
-  modifyProvisionedCapacity(callback?: (err: AWSError, data: ELBv2.Types.ModifyProvisionedCapacityOutput) => void): Request<ELBv2.Types.ModifyProvisionedCapacityOutput, AWSError>;
   /**
    * Modifies the specified rule. Any existing properties that you do not modify retain their current values. To modify the actions for the default rule, use ModifyListener.
    */
@@ -373,7 +357,7 @@ declare namespace ELBv2 {
     FixedResponseConfig?: FixedResponseActionConfig;
   }
   export type ActionOrder = number;
-  export type ActionTypeEnum = "forward"|"authenticate-oidc"|"redirect"|"authenticate-cognito"|"fixed-response"|string;
+  export type ActionTypeEnum = "forward"|"authenticate-oidc"|"authenticate-cognito"|"redirect"|"fixed-response"|string;
   export type Actions = Action[];
   export interface AddListenerCertificatesInput {
     /**
@@ -479,7 +463,7 @@ declare namespace ELBv2 {
     /**
      * The OAuth 2.0 client secret.
      */
-    ClientSecret?: AuthenticateOidcActionClientSecret;
+    ClientSecret: AuthenticateOidcActionClientSecret;
     /**
      * The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
      */
@@ -500,14 +484,12 @@ declare namespace ELBv2 {
      * The behavior if the user is not authenticated. The following are possible values:   deny - Return an HTTP 401 Unauthorized error.   allow - Allow the request to be forwarded to the target.   authenticate - Redirect the request to the IdP authorization endpoint. This is the default value.  
      */
     OnUnauthenticatedRequest?: AuthenticateOidcActionConditionalBehaviorEnum;
-    UseExistingClientSecret?: AuthenticateOidcActionUseExistingClientSecret;
   }
   export type AuthenticateOidcActionIssuer = string;
   export type AuthenticateOidcActionScope = string;
   export type AuthenticateOidcActionSessionCookieName = string;
   export type AuthenticateOidcActionSessionTimeout = number;
   export type AuthenticateOidcActionTokenEndpoint = string;
-  export type AuthenticateOidcActionUseExistingClientSecret = boolean;
   export type AuthenticateOidcActionUserInfoEndpoint = string;
   export interface AvailabilityZone {
     /**
@@ -522,7 +504,6 @@ declare namespace ELBv2 {
      * [Network Load Balancers] The static IP address.
      */
     LoadBalancerAddresses?: LoadBalancerAddresses;
-    StaticIp?: StaticIp;
   }
   export type AvailabilityZones = AvailabilityZone[];
   export type CanonicalHostedZoneId = string;
@@ -714,7 +695,6 @@ declare namespace ELBv2 {
   }
   export type CreatedTime = Date;
   export type DNSName = string;
-  export type DecreasesRemaining = number;
   export type Default = boolean;
   export interface DeleteListenerInput {
     /**
@@ -872,12 +852,6 @@ declare namespace ELBv2 {
      */
     NextMarker?: Marker;
   }
-  export interface DescribeProvisionedCapacityInput {
-    LoadBalancerArn: LoadBalancerArn;
-  }
-  export interface DescribeProvisionedCapacityOutput {
-    ProvisionedCapacity?: ProvisionedCapacity;
-  }
   export interface DescribeRulesInput {
     /**
      * The Amazon Resource Name (ARN) of the listener.
@@ -1025,25 +999,10 @@ declare namespace ELBv2 {
   export type HealthCheckPort = string;
   export type HealthCheckThresholdCount = number;
   export type HealthCheckTimeoutSeconds = number;
-  export interface HostHeaderConditionConfig {
-    Values?: ListOfString;
-  }
   export type HttpCode = string;
-  export interface HttpHeaderConditionConfig {
-    HttpHeaderName?: HttpHeaderConditionName;
-    Values?: ListOfString;
-  }
-  export type HttpHeaderConditionName = string;
-  export interface HttpRequestMethodConditionConfig {
-    Values?: HttpRequestMethodList;
-  }
-  export type HttpRequestMethodEnum = "GET"|"HEAD"|"POST"|"PUT"|"DELETE"|"CONNECT"|"OPTIONS"|"TRACE"|"PATCH"|string;
-  export type HttpRequestMethodList = HttpRequestMethodEnum[];
   export type IpAddress = string;
   export type IpAddressType = "ipv4"|"dualstack"|string;
   export type IsDefault = boolean;
-  export type LBCapacityUnits = number;
-  export type LastModifiedTime = Date;
   export interface Limit {
     /**
      * The name of the limit. The possible values are:   application-load-balancers   listeners-per-application-load-balancer   listeners-per-network-load-balancer   network-load-balancers   rules-per-application-load-balancer   target-groups   targets-per-application-load-balancer   targets-per-availability-zone-per-network-load-balancer   targets-per-network-load-balancer  
@@ -1237,13 +1196,6 @@ declare namespace ELBv2 {
      */
     Attributes?: LoadBalancerAttributes;
   }
-  export interface ModifyProvisionedCapacityInput {
-    LoadBalancerArn: LoadBalancerArn;
-    MinimumLBCapacityUnits: LBCapacityUnits;
-  }
-  export interface ModifyProvisionedCapacityOutput {
-    ProvisionedCapacity?: ProvisionedCapacity;
-  }
   export interface ModifyRuleInput {
     /**
      * The Amazon Resource Name (ARN) of the rule.
@@ -1331,21 +1283,8 @@ declare namespace ELBv2 {
   export type Name = string;
   export type PageSize = number;
   export type Path = string;
-  export interface PathPatternConditionConfig {
-    Values?: ListOfString;
-  }
   export type Port = number;
-  export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|"TLS"|"UDP"|string;
-  export interface ProvisionedCapacity {
-    MinimumLBCapacityUnits?: LBCapacityUnits;
-    Status?: ProvisionedCapacityStatus;
-    DecreasesRemaining?: DecreasesRemaining;
-    LastModifiedTime?: LastModifiedTime;
-  }
-  export type ProvisionedCapacityStatus = "disabled"|"pending"|"provisioned"|"pre-warmed"|string;
-  export interface QueryStringConditionConfig {
-    Values?: ListOfString;
-  }
+  export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|string;
   export interface RedirectActionConfig {
     /**
      * The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP.
@@ -1449,11 +1388,6 @@ declare namespace ELBv2 {
      * The condition value. If the field name is host-header, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.   A-Z, a-z, 0-9   - .   * (matches 0 or more characters)   ? (matches exactly 1 character)   If the field name is path-pattern, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
      */
     Values?: ListOfString;
-    HostHeaderConfig?: HostHeaderConditionConfig;
-    PathPatternConfig?: PathPatternConditionConfig;
-    HttpHeaderConfig?: HttpHeaderConditionConfig;
-    QueryStringConfig?: QueryStringConditionConfig;
-    HttpRequestMethodConfig?: HttpRequestMethodConditionConfig;
   }
   export type RuleConditionList = RuleCondition[];
   export type RulePriority = number;
@@ -1555,7 +1489,6 @@ declare namespace ELBv2 {
   export type SslProtocol = string;
   export type SslProtocols = SslProtocol[];
   export type StateReason = string;
-  export type StaticIp = boolean;
   export type String = string;
   export type StringValue = string;
   export type SubnetId = string;
@@ -1568,7 +1501,6 @@ declare namespace ELBv2 {
      * [Network Load Balancers] The allocation ID of the Elastic IP address.
      */
     AllocationId?: AllocationId;
-    StaticIp?: StaticIp;
   }
   export type SubnetMappings = SubnetMapping[];
   export type Subnets = SubnetId[];

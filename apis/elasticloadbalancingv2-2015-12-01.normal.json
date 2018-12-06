@@ -34,12 +34,6 @@
         },
         {
           "shape": "CertificateNotFoundException"
-        },
-        {
-          "shape": "UnsupportedCertificateException"
-        },
-        {
-          "shape": "UnsupportedProtocolException"
         }
       ],
       "documentation": "<p>Adds the specified certificate to the specified secure listener.</p> <p>If the certificate was already added, the call is successful but the certificate is not added again.</p> <p>To list the certificates for your listener, use <a>DescribeListenerCertificates</a>. To remove certificates from your listener, use <a>RemoveListenerCertificates</a>. To specify the default SSL server certificate, use <a>ModifyListener</a>.</p>"
@@ -125,9 +119,6 @@
         },
         {
           "shape": "TooManyTargetsException"
-        },
-        {
-          "shape": "UnsupportedCertificateException"
         },
         {
           "shape": "TooManyActionsException"
@@ -489,25 +480,6 @@
       ],
       "documentation": "<p>Describes the specified load balancers or all of your load balancers.</p> <p>To describe the listeners for a load balancer, use <a>DescribeListeners</a>. To describe the attributes for a load balancer, use <a>DescribeLoadBalancerAttributes</a>.</p>"
     },
-    "DescribeProvisionedCapacity": {
-      "name": "DescribeProvisionedCapacity",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "DescribeProvisionedCapacityInput"
-      },
-      "output": {
-        "shape": "DescribeProvisionedCapacityOutput",
-        "resultWrapper": "DescribeProvisionedCapacityResult"
-      },
-      "errors": [
-        {
-          "shape": "LoadBalancerNotFoundException"
-        }
-      ]
-    },
     "DescribeRules": {
       "name": "DescribeRules",
       "http": {
@@ -706,9 +678,6 @@
           "shape": "TooManyTargetsException"
         },
         {
-          "shape": "UnsupportedCertificateException"
-        },
-        {
           "shape": "TooManyActionsException"
         },
         {
@@ -739,37 +708,6 @@
         }
       ],
       "documentation": "<p>Modifies the specified attributes of the specified Application Load Balancer or Network Load Balancer.</p> <p>If any of the specified attributes can't be modified as requested, the call fails. Any existing attributes that you do not modify retain their current values.</p>"
-    },
-    "ModifyProvisionedCapacity": {
-      "name": "ModifyProvisionedCapacity",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "ModifyProvisionedCapacityInput"
-      },
-      "output": {
-        "shape": "ModifyProvisionedCapacityOutput",
-        "resultWrapper": "ModifyProvisionedCapacityResult"
-      },
-      "errors": [
-        {
-          "shape": "LoadBalancerNotFoundException"
-        },
-        {
-          "shape": "InvalidConfigurationRequestException"
-        },
-        {
-          "shape": "MinimumLBCapacityUnitsDecreaseThrottlingException"
-        },
-        {
-          "shape": "MinimumLBCapacityUnitsLimitExceededException"
-        },
-        {
-          "shape": "InsufficientCapacityException"
-        }
-      ]
     },
     "ModifyRule": {
       "name": "ModifyRule",
@@ -1110,8 +1048,8 @@
       "enum": [
         "forward",
         "authenticate-oidc",
-        "redirect",
         "authenticate-cognito",
+        "redirect",
         "fixed-response"
       ]
     },
@@ -1294,7 +1232,8 @@
         "AuthorizationEndpoint",
         "TokenEndpoint",
         "UserInfoEndpoint",
-        "ClientId"
+        "ClientId",
+        "ClientSecret"
       ],
       "members": {
         "Issuer": {
@@ -1340,9 +1279,6 @@
         "OnUnauthenticatedRequest": {
           "shape": "AuthenticateOidcActionConditionalBehaviorEnum",
           "documentation": "<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>"
-        },
-        "UseExistingClientSecret": {
-          "shape": "AuthenticateOidcActionUseExistingClientSecret"
         }
       },
       "documentation": "<p>Request parameters when using an identity provider (IdP) that is compliant with OpenID Connect (OIDC) to authenticate users.</p>"
@@ -1362,9 +1298,6 @@
     "AuthenticateOidcActionTokenEndpoint": {
       "type": "string"
     },
-    "AuthenticateOidcActionUseExistingClientSecret": {
-      "type": "boolean"
-    },
     "AuthenticateOidcActionUserInfoEndpoint": {
       "type": "string"
     },
@@ -1382,9 +1315,6 @@
         "LoadBalancerAddresses": {
           "shape": "LoadBalancerAddresses",
           "documentation": "<p>[Network Load Balancers] The static IP address.</p>"
-        },
-        "StaticIp": {
-          "shape": "StaticIp"
         }
       },
       "documentation": "<p>Information about an Availability Zone.</p>"
@@ -1659,9 +1589,6 @@
     "DNSName": {
       "type": "string"
     },
-    "DecreasesRemaining": {
-      "type": "integer"
-    },
     "Default": {
       "type": "boolean"
     },
@@ -1898,25 +1825,6 @@
         }
       }
     },
-    "DescribeProvisionedCapacityInput": {
-      "type": "structure",
-      "required": [
-        "LoadBalancerArn"
-      ],
-      "members": {
-        "LoadBalancerArn": {
-          "shape": "LoadBalancerArn"
-        }
-      }
-    },
-    "DescribeProvisionedCapacityOutput": {
-      "type": "structure",
-      "members": {
-        "ProvisionedCapacity": {
-          "shape": "ProvisionedCapacity"
-        }
-      }
-    },
     "DescribeRulesInput": {
       "type": "structure",
       "members": {
@@ -2145,58 +2053,8 @@
       "max": 120,
       "min": 2
     },
-    "HostHeaderConditionConfig": {
-      "type": "structure",
-      "members": {
-        "Values": {
-          "shape": "ListOfString"
-        }
-      }
-    },
     "HttpCode": {
       "type": "string"
-    },
-    "HttpHeaderConditionConfig": {
-      "type": "structure",
-      "members": {
-        "HttpHeaderName": {
-          "shape": "HttpHeaderConditionName"
-        },
-        "Values": {
-          "shape": "ListOfString"
-        }
-      }
-    },
-    "HttpHeaderConditionName": {
-      "type": "string"
-    },
-    "HttpRequestMethodConditionConfig": {
-      "type": "structure",
-      "members": {
-        "Values": {
-          "shape": "HttpRequestMethodList"
-        }
-      }
-    },
-    "HttpRequestMethodEnum": {
-      "type": "string",
-      "enum": [
-        "GET",
-        "HEAD",
-        "POST",
-        "PUT",
-        "DELETE",
-        "CONNECT",
-        "OPTIONS",
-        "TRACE",
-        "PATCH"
-      ]
-    },
-    "HttpRequestMethodList": {
-      "type": "list",
-      "member": {
-        "shape": "HttpRequestMethodEnum"
-      }
     },
     "IpAddress": {
       "type": "string"
@@ -2210,12 +2068,6 @@
     },
     "IsDefault": {
       "type": "boolean"
-    },
-    "LBCapacityUnits": {
-      "type": "integer"
-    },
-    "LastModifiedTime": {
-      "type": "timestamp"
     },
     "Limit": {
       "type": "structure",
@@ -2543,29 +2395,6 @@
         }
       }
     },
-    "ModifyProvisionedCapacityInput": {
-      "type": "structure",
-      "required": [
-        "LoadBalancerArn",
-        "MinimumLBCapacityUnits"
-      ],
-      "members": {
-        "LoadBalancerArn": {
-          "shape": "LoadBalancerArn"
-        },
-        "MinimumLBCapacityUnits": {
-          "shape": "LBCapacityUnits"
-        }
-      }
-    },
-    "ModifyProvisionedCapacityOutput": {
-      "type": "structure",
-      "members": {
-        "ProvisionedCapacity": {
-          "shape": "ProvisionedCapacity"
-        }
-      }
-    },
     "ModifyRuleInput": {
       "type": "structure",
       "required": [
@@ -2691,14 +2520,6 @@
       "max": 1024,
       "min": 1
     },
-    "PathPatternConditionConfig": {
-      "type": "structure",
-      "members": {
-        "Values": {
-          "shape": "ListOfString"
-        }
-      }
-    },
     "Port": {
       "type": "integer",
       "max": 65535,
@@ -2709,44 +2530,8 @@
       "enum": [
         "HTTP",
         "HTTPS",
-        "TCP",
-        "TLS",
-        "UDP"
+        "TCP"
       ]
-    },
-    "ProvisionedCapacity": {
-      "type": "structure",
-      "members": {
-        "MinimumLBCapacityUnits": {
-          "shape": "LBCapacityUnits"
-        },
-        "Status": {
-          "shape": "ProvisionedCapacityStatus"
-        },
-        "DecreasesRemaining": {
-          "shape": "DecreasesRemaining"
-        },
-        "LastModifiedTime": {
-          "shape": "LastModifiedTime"
-        }
-      }
-    },
-    "ProvisionedCapacityStatus": {
-      "type": "string",
-      "enum": [
-        "disabled",
-        "pending",
-        "provisioned",
-        "pre-warmed"
-      ]
-    },
-    "QueryStringConditionConfig": {
-      "type": "structure",
-      "members": {
-        "Values": {
-          "shape": "ListOfString"
-        }
-      }
     },
     "RedirectActionConfig": {
       "type": "structure",
@@ -2927,21 +2712,6 @@
         "Values": {
           "shape": "ListOfString",
           "documentation": "<p>The condition value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ \" ' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>"
-        },
-        "HostHeaderConfig": {
-          "shape": "HostHeaderConditionConfig"
-        },
-        "PathPatternConfig": {
-          "shape": "PathPatternConditionConfig"
-        },
-        "HttpHeaderConfig": {
-          "shape": "HttpHeaderConditionConfig"
-        },
-        "QueryStringConfig": {
-          "shape": "QueryStringConditionConfig"
-        },
-        "HttpRequestMethodConfig": {
-          "shape": "HttpRequestMethodConditionConfig"
         }
       },
       "documentation": "<p>Information about a condition for a rule.</p>"
@@ -3139,9 +2909,6 @@
     "StateReason": {
       "type": "string"
     },
-    "StaticIp": {
-      "type": "boolean"
-    },
     "String": {
       "type": "string"
     },
@@ -3161,9 +2928,6 @@
         "AllocationId": {
           "shape": "AllocationId",
           "documentation": "<p>[Network Load Balancers] The allocation ID of the Elastic IP address.</p>"
-        },
-        "StaticIp": {
-          "shape": "StaticIp"
         }
       },
       "documentation": "<p>Information about a subnet mapping.</p>"

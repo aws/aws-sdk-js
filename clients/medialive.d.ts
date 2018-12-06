@@ -849,6 +849,13 @@ creating multiple resources.
      */
     InputSecurityGroups?: __listOf__string;
     /**
+     * A list of the MediaConnect Flows that you want to use in this input. You can specify as few as one
+Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a
+separate Availability Zone as this ensures your EML input is redundant to AZ issues.
+
+     */
+    MediaConnectFlows?: __listOfMediaConnectFlowRequest;
+    /**
      * Name of the input.
      */
     Name?: __string;
@@ -858,6 +865,10 @@ exactly once in case of retries.
 
      */
     RequestId?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
+     */
+    RoleArn?: __string;
     /**
      * The source URLs for a PULL-type input. Every PULL type input needs
 exactly two source URLs for redundancy.
@@ -1095,9 +1106,17 @@ one destination per packager.
      */
     Id?: __string;
     /**
+     * A list of MediaConnect Flows for this input.
+     */
+    MediaConnectFlows?: __listOfMediaConnectFlow;
+    /**
      * The user-assigned name (This is a mutable value).
      */
     Name?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
+     */
+    RoleArn?: __string;
     /**
      * A list of IDs for all the security groups attached to the input.
      */
@@ -1635,7 +1654,7 @@ one destination per packager.
      */
     AfdSignaling?: AfdSignaling;
     /**
-     * Average bitrate in bits/second. Required for VBR, CBR, and ABR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.
+     * Average bitrate in bits/second. Required when the rate control mode is VBR or CBR. Not used for QVBR. In an MS Smooth output group, each output must have a unique value when its bitrate is rounded down to the nearest multiple of 1000.
      */
     Bitrate?: __integerMin1000;
     /**
@@ -1703,9 +1722,9 @@ one destination per packager.
      */
     LookAheadRateControl?: H264LookAheadRateControl;
     /**
-     * Maximum bitrate in bits/second (for VBR and QVBR modes only).
+     * For QVBR: See the tooltip for Quality level 
 
-Required when rateControlMode is "qvbr".
+For VBR: Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
      */
     MaxBitrate?: __integerMin1000;
     /**
@@ -1733,19 +1752,23 @@ Required when rateControlMode is "qvbr".
      */
     Profile?: H264Profile;
     /**
-     * Target quality value. Applicable only to QVBR mode. 1 is the lowest quality and 10 is the
-highest and approaches lossless. Typical levels for content distribution are between 6 and 8.
+     * Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:
+- Primary screen: Quality level: 8 to 10. Max bitrate: 4M
+- PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
+- Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M
      */
     QvbrQualityLevel?: __integerMin1Max10;
     /**
      * Rate control mode. 
 
-- CBR: Constant Bit Rate
-- VBR: Variable Bit Rate
-- QVBR: Encoder dynamically controls the bitrate to meet the desired quality (specified
-through the qvbrQualityLevel field). The bitrate will not exceed the bitrate specified in
-the maxBitrate field and will not fall below the bitrate required to meet the desired
-quality level.
+QVBR: Quality will match the specified quality level except when it is constrained by the
+maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
+
+VBR: Quality and bitrate vary, depending on the video complexity. Recommended instead of QVBR
+if you want to maintain a specific average bitrate over the duration of the channel.
+
+CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
+your assets to devices that cannot handle variable bitrates.
      */
     RateControlMode?: H264RateControlMode;
     /**
@@ -2115,9 +2138,17 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
      */
     Id?: __string;
     /**
+     * A list of MediaConnect Flows for this input.
+     */
+    MediaConnectFlows?: __listOfMediaConnectFlow;
+    /**
      * The user-assigned name (This is a mutable value).
      */
     Name?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
+     */
+    RoleArn?: __string;
     /**
      * A list of IDs for all the security groups attached to the input.
      */
@@ -2344,7 +2375,7 @@ pulled from.
      */
     InputAttachmentNameReference: __string;
   }
-  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|string;
+  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|string;
   export interface InputWhitelistRule {
     /**
      * The IPv4 CIDR that's whitelisted.
@@ -2761,6 +2792,18 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
   }
   export type M3u8TimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export type MaxResults = number;
+  export interface MediaConnectFlow {
+    /**
+     * The unique ARN of the MediaConnect Flow being used as a source.
+     */
+    FlowArn?: __string;
+  }
+  export interface MediaConnectFlowRequest {
+    /**
+     * The ARN of the MediaConnect Flow that you want to use as a source.
+     */
+    FlowArn?: __string;
+  }
   export type Mp2CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|string;
   export interface Mp2Settings {
     /**
@@ -3707,9 +3750,20 @@ one destination per packager.
      */
     InputSecurityGroups?: __listOf__string;
     /**
+     * A list of the MediaConnect Flow ARNs that you want to use as the source of the input. You can specify as few as one
+Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a
+separate Availability Zone as this ensures your EML input is redundant to AZ issues.
+
+     */
+    MediaConnectFlows?: __listOfMediaConnectFlowRequest;
+    /**
      * Name of the input.
      */
     Name?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
+     */
+    RoleArn?: __string;
     /**
      * The source URLs for a PULL-type input. Every PULL type input needs
 exactly two source URLs for redundancy.
@@ -3869,6 +3923,8 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfInputSourceRequest = InputSourceRequest[];
   export type __listOfInputWhitelistRule = InputWhitelistRule[];
   export type __listOfInputWhitelistRuleCidr = InputWhitelistRuleCidr[];
+  export type __listOfMediaConnectFlow = MediaConnectFlow[];
+  export type __listOfMediaConnectFlowRequest = MediaConnectFlowRequest[];
   export type __listOfOffering = Offering[];
   export type __listOfOutput = Output[];
   export type __listOfOutputDestination = OutputDestination[];

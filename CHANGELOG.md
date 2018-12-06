@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.371.0-->
+<!--LATEST=2.372.0-->
 <!--ENTRYINSERT-->
+
+## 2.372.0
+* feature: CodeBuild: Support personal access tokens for GitHub source and app passwords for Bitbucket source
+* feature: ELBv2: This release allows Application Load Balancers to route traffic to Lambda functions, in addition to instances and IP addresses.
+* feature: MediaLive: This release enables the AWS Elemental MediaConnect input type in AWS Elemental MediaLive. This can then be used to automatically create and manage AWS Elemental MediaConnect Flow Outputs when you create a channel using those inputs.
 
 ## 2.371.0
 * feature: CostExplorer: Add normalized unit support for both GetReservationUtilization and GetReservationCoverage API.
