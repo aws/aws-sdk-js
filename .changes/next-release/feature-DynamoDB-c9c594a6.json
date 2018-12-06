@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "DynamoDB",
+  "description": "Add DynamoDB document client support for transaction operations"
+}

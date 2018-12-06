@@ -54,6 +54,16 @@ export class DocumentClient {
      * Edits an existing item's attributes, or adds a new item to the table if it does not already exist by delegating to AWS.DynamoDB.updateItem().
      */
     update(params: DocumentClient.UpdateItemInput, callback?: (err: AWSError, data: DocumentClient.UpdateItemOutput) => void): Request<DocumentClient.UpdateItemOutput, AWSError>;
+
+    /**
+     * Atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and region.
+     */
+    transactGet(params: DynamoDB.TransactGetItemsInput, callback?: (err: AWSError, data: DynamoDB.TransactGetItemsOutput) => void): Request<DynamoDB.TransactGetItemsOutput, AWSError>;
+
+    /**
+     * Synchronous write operation that groups up to 10 action requests
+     */
+    transactWrite(params: DynamoDB.TransactWriteItemsInput, callback?: (err: AWSError, data: DynamoDB.TransactWriteItemsOutput) => void): Request<DynamoDB.TransactWriteItemsOutput, AWSError>;
 }
 
 export namespace DocumentClient {
