@@ -1248,7 +1248,7 @@
                   Value: 'value2'
                 }, {
                   Key: 'étiquette',
-                  Value: 'valeur à être encodé'
+                  Value: 'valeur%20%C3%A0%20%C3%AAtre%20encod%C3%A9'
                 }
               ]
             });
