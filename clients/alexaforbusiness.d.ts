@@ -60,6 +60,14 @@ declare class AlexaForBusiness extends Service {
    */
   createAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateAddressBookResponse) => void): Request<AlexaForBusiness.Types.CreateAddressBookResponse, AWSError>;
   /**
+   * Creates a recurring schedule for usage reports to deliver to the specified S3 location with a specified daily or weekly interval.
+   */
+  createBusinessReportSchedule(params: AlexaForBusiness.Types.CreateBusinessReportScheduleRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.CreateBusinessReportScheduleResponse, AWSError>;
+  /**
+   * Creates a recurring schedule for usage reports to deliver to the specified S3 location with a specified daily or weekly interval.
+   */
+  createBusinessReportSchedule(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.CreateBusinessReportScheduleResponse, AWSError>;
+  /**
    * Adds a new conference provider under the user's AWS account.
    */
   createConferenceProvider(params: AlexaForBusiness.Types.CreateConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.CreateConferenceProviderResponse, AWSError>;
@@ -115,6 +123,14 @@ declare class AlexaForBusiness extends Service {
    * Deletes an address book by the address book ARN.
    */
   deleteAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteAddressBookResponse) => void): Request<AlexaForBusiness.Types.DeleteAddressBookResponse, AWSError>;
+  /**
+   * Deletes the recurring report delivery schedule with the specified schedule ARN.
+   */
+  deleteBusinessReportSchedule(params: AlexaForBusiness.Types.DeleteBusinessReportScheduleRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.DeleteBusinessReportScheduleResponse, AWSError>;
+  /**
+   * Deletes the recurring report delivery schedule with the specified schedule ARN.
+   */
+  deleteBusinessReportSchedule(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.DeleteBusinessReportScheduleResponse, AWSError>;
   /**
    * Deletes a conference provider.
    */
@@ -299,6 +315,14 @@ declare class AlexaForBusiness extends Service {
    * Gets skill group details by skill group ARN.
    */
   getSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetSkillGroupResponse) => void): Request<AlexaForBusiness.Types.GetSkillGroupResponse, AWSError>;
+  /**
+   * Lists the details of the schedules that a user configured.
+   */
+  listBusinessReportSchedules(params: AlexaForBusiness.Types.ListBusinessReportSchedulesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListBusinessReportSchedulesResponse) => void): Request<AlexaForBusiness.Types.ListBusinessReportSchedulesResponse, AWSError>;
+  /**
+   * Lists the details of the schedules that a user configured.
+   */
+  listBusinessReportSchedules(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListBusinessReportSchedulesResponse) => void): Request<AlexaForBusiness.Types.ListBusinessReportSchedulesResponse, AWSError>;
   /**
    * Lists conference providers under a specific AWS account.
    */
@@ -516,6 +540,14 @@ declare class AlexaForBusiness extends Service {
    */
   updateAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateAddressBookResponse) => void): Request<AlexaForBusiness.Types.UpdateAddressBookResponse, AWSError>;
   /**
+   * Updates the configuration of the report delivery schedule with the specified schedule ARN.
+   */
+  updateBusinessReportSchedule(params: AlexaForBusiness.Types.UpdateBusinessReportScheduleRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.UpdateBusinessReportScheduleResponse, AWSError>;
+  /**
+   * Updates the configuration of the report delivery schedule with the specified schedule ARN.
+   */
+  updateBusinessReportSchedule(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.UpdateBusinessReportScheduleResponse, AWSError>;
+  /**
    * Updates an existing conference provider's settings.
    */
   updateConferenceProvider(params: AlexaForBusiness.Types.UpdateConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.UpdateConferenceProviderResponse, AWSError>;
@@ -662,6 +694,92 @@ declare namespace AlexaForBusiness {
   export type Boolean = boolean;
   export type BulletPoint = string;
   export type BulletPoints = BulletPoint[];
+  export interface BusinessReport {
+    /**
+     * The status of the report generation execution (RUNNING, SUCCEEDED, or FAILED).
+     */
+    Status?: BusinessReportStatus;
+    /**
+     * The failure code.
+     */
+    FailureCode?: BusinessReportFailureCode;
+    /**
+     * The S3 location of the output reports.
+     */
+    S3Location?: BusinessReportS3Location;
+    /**
+     * The time of report delivery.
+     */
+    DeliveryTime?: Timestamp;
+    /**
+     * The download link where a user can download the report.
+     */
+    DownloadUrl?: BusinessReportDownloadUrl;
+  }
+  export interface BusinessReportContentRange {
+    /**
+     * The interval of the content range.
+     */
+    Interval?: BusinessReportInterval;
+  }
+  export type BusinessReportDownloadUrl = string;
+  export type BusinessReportFailureCode = "ACCESS_DENIED"|"NO_SUCH_BUCKET"|"INTERNAL_FAILURE"|string;
+  export type BusinessReportFormat = "CSV"|"CSV_ZIP"|string;
+  export type BusinessReportInterval = "ONE_DAY"|"ONE_WEEK"|string;
+  export interface BusinessReportRecurrence {
+    /**
+     * The start date.
+     */
+    StartDate?: _Date;
+  }
+  export interface BusinessReportS3Location {
+    /**
+     * The path of the business report.
+     */
+    Path?: BusinessReportS3Path;
+    /**
+     * The S3 bucket name of the output reports.
+     */
+    BucketName?: CustomerS3BucketName;
+  }
+  export type BusinessReportS3Path = string;
+  export interface BusinessReportSchedule {
+    /**
+     * The ARN of the business report schedule.
+     */
+    ScheduleArn?: Arn;
+    /**
+     * The name identifier of the schedule.
+     */
+    ScheduleName?: BusinessReportScheduleName;
+    /**
+     * The S3 bucket name of the output reports.
+     */
+    S3BucketName?: CustomerS3BucketName;
+    /**
+     * The S3 key where the report is delivered.
+     */
+    S3KeyPrefix?: S3KeyPrefix;
+    /**
+     * The format of the generated report (individual CSV files or zipped files of individual files).
+     */
+    Format?: BusinessReportFormat;
+    /**
+     * The content range of the reports.
+     */
+    ContentRange?: BusinessReportContentRange;
+    /**
+     * The recurrence of the reports.
+     */
+    Recurrence?: BusinessReportRecurrence;
+    /**
+     * The details of the last business report delivery for a specified time interval.
+     */
+    LastBusinessReport?: BusinessReport;
+  }
+  export type BusinessReportScheduleList = BusinessReportSchedule[];
+  export type BusinessReportScheduleName = string;
+  export type BusinessReportStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|string;
   export interface Category {
     /**
      * The ID of the skill store category.
@@ -781,6 +899,42 @@ declare namespace AlexaForBusiness {
      */
     AddressBookArn?: Arn;
   }
+  export interface CreateBusinessReportScheduleRequest {
+    /**
+     * The name identifier of the schedule.
+     */
+    ScheduleName?: BusinessReportScheduleName;
+    /**
+     * The S3 bucket name of the output reports.
+     */
+    S3BucketName?: CustomerS3BucketName;
+    /**
+     * The S3 key where the report is delivered.
+     */
+    S3KeyPrefix?: S3KeyPrefix;
+    /**
+     * The format of the generated report (individual CSV files or zipped files of individual files).
+     */
+    Format: BusinessReportFormat;
+    /**
+     * The content range of the reports.
+     */
+    ContentRange: BusinessReportContentRange;
+    /**
+     * The recurrence of the reports.
+     */
+    Recurrence?: BusinessReportRecurrence;
+    /**
+     * The client request token.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateBusinessReportScheduleResponse {
+    /**
+     * The ARN of the business report schedule.
+     */
+    ScheduleArn?: Arn;
+  }
   export interface CreateConferenceProviderRequest {
     /**
      * The name of the conference provider.
@@ -829,7 +983,7 @@ declare namespace AlexaForBusiness {
     /**
      * The phone number of the contact in E.164 format.
      */
-    PhoneNumber: E164PhoneNumber;
+    PhoneNumber?: E164PhoneNumber;
     /**
      * A unique, user-specified identifier for this request that ensures idempotency.
      */
@@ -973,6 +1127,8 @@ declare namespace AlexaForBusiness {
      */
     UserArn?: Arn;
   }
+  export type CustomerS3BucketName = string;
+  export type _Date = string;
   export interface DeleteAddressBookRequest {
     /**
      * The ARN of the address book to delete.
@@ -980,6 +1136,14 @@ declare namespace AlexaForBusiness {
     AddressBookArn: Arn;
   }
   export interface DeleteAddressBookResponse {
+  }
+  export interface DeleteBusinessReportScheduleRequest {
+    /**
+     * The ARN of the business report schedule.
+     */
+    ScheduleArn: Arn;
+  }
+  export interface DeleteBusinessReportScheduleResponse {
   }
   export interface DeleteConferenceProviderRequest {
     /**
@@ -1413,6 +1577,26 @@ declare namespace AlexaForBusiness {
   export type IconUrl = string;
   export type InvocationPhrase = string;
   export type Key = string;
+  export interface ListBusinessReportSchedulesRequest {
+    /**
+     * The token used to list the remaining schedules from the previous API call.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of schedules listed in the call.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListBusinessReportSchedulesResponse {
+    /**
+     * The schedule of the reports.
+     */
+    BusinessReportSchedules?: BusinessReportScheduleList;
+    /**
+     * The token used to list the remaining schedules from the previous API call.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListConferenceProvidersRequest {
     /**
      * The tokens used for pagination.
@@ -1598,6 +1782,7 @@ declare namespace AlexaForBusiness {
   export type NextToken = string;
   export type OneClickIdDelay = string;
   export type OneClickPinDelay = string;
+  export type OutboundPhoneNumber = string;
   export interface PSTNDialIn {
     /**
      * The zip code.
@@ -1606,7 +1791,7 @@ declare namespace AlexaForBusiness {
     /**
      * The phone number to call to join the conference.
      */
-    PhoneNumber: PhoneNumber;
+    PhoneNumber: OutboundPhoneNumber;
     /**
      * The delay duration before Alexa enters the conference ID with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.
      */
@@ -1616,7 +1801,6 @@ declare namespace AlexaForBusiness {
      */
     OneClickPinDelay: OneClickPinDelay;
   }
-  export type PhoneNumber = string;
   export type PrivacyPolicy = string;
   export type ProductDescription = string;
   export type ProductId = string;
@@ -1888,6 +2072,7 @@ declare namespace AlexaForBusiness {
   export type RoomSkillParameterKey = string;
   export type RoomSkillParameterValue = string;
   export type RoomSkillParameters = RoomSkillParameter[];
+  export type S3KeyPrefix = string;
   export type SampleUtterances = Utterance[];
   export interface SearchAddressBooksRequest {
     /**
@@ -2366,6 +2551,34 @@ declare namespace AlexaForBusiness {
     Description?: AddressBookDescription;
   }
   export interface UpdateAddressBookResponse {
+  }
+  export interface UpdateBusinessReportScheduleRequest {
+    /**
+     * The ARN of the business report schedule.
+     */
+    ScheduleArn: Arn;
+    /**
+     * The S3 location of the output reports.
+     */
+    S3BucketName?: CustomerS3BucketName;
+    /**
+     * The S3 key where the report is delivered.
+     */
+    S3KeyPrefix?: S3KeyPrefix;
+    /**
+     * The format of the generated report (individual CSV files or zipped files of individual files).
+     */
+    Format?: BusinessReportFormat;
+    /**
+     * The name identifier of the schedule.
+     */
+    ScheduleName?: BusinessReportScheduleName;
+    /**
+     * The recurrence of the reports.
+     */
+    Recurrence?: BusinessReportRecurrence;
+  }
+  export interface UpdateBusinessReportScheduleResponse {
   }
   export interface UpdateConferenceProviderRequest {
     /**

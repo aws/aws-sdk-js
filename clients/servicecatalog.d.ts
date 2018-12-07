@@ -356,11 +356,11 @@ declare class ServiceCatalog extends Service {
    */
   disassociateTagOptionFromResource(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput, AWSError>;
   /**
-   * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization. By calling this API Service Catalog will use FAS credentials to call organizations:EnableAWSServiceAccess so that your shares can be in sync with any changes in your AWS Organizations.
+   * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization. By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.
    */
   enableAWSOrganizationsAccess(params: ServiceCatalog.Types.EnableAWSOrganizationsAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput, AWSError>;
   /**
-   * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization. By calling this API Service Catalog will use FAS credentials to call organizations:EnableAWSServiceAccess so that your shares can be in sync with any changes in your AWS Organizations.
+   * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization. By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.
    */
   enableAWSOrganizationsAccess(callback?: (err: AWSError, data: ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput, AWSError>;
   /**
@@ -2285,11 +2285,11 @@ declare namespace ServiceCatalog {
   export type NotificationArns = NotificationArn[];
   export interface OrganizationNode {
     /**
-     * 
+     * The organization node type.
      */
     Type?: OrganizationNodeType;
     /**
-     * 
+     * The identifier of the organization node.
      */
     Value?: OrganizationNodeValue;
   }

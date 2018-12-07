@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.372.0
+// AWS SDK for JavaScript v2.373.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -147562,7 +147562,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.372.0',
+  VERSION: '2.373.0',
 
   /**
    * @api private
@@ -149444,20 +149444,6 @@ var DynamoDBSet = require('./set');
 AWS.DynamoDB.DocumentClient = AWS.util.inherit({
 
   /**
-   * @api private
-   */
-  operations: {
-    batchGetItem: 'batchGet',
-    batchWriteItem: 'batchWrite',
-    putItem: 'put',
-    getItem: 'get',
-    deleteItem: 'delete',
-    updateItem: 'update',
-    scan: 'scan',
-    query: 'query'
-  },
-
-  /**
    * Creates a DynamoDB document client with a set of configuration options.
    *
    * @option options params [map] An optional map of parameters to bind to every
@@ -149507,6 +149493,36 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
   /**
+   * @api private
+   */
+  makeServiceRequest: function(operation, params, callback) {
+    var self = this;
+    var request = self.service[operation](params);
+    self.setupRequest(request);
+    self.setupResponse(request);
+    if (typeof callback === 'function') {
+      request.send(callback);
+    }
+    return request;
+  },
+
+  /**
+   * @api private
+   */
+  serviceClientOperationsMap: {
+    batchGet: 'batchGetItem',
+    batchWrite: 'batchWriteItem',
+    delete: 'deleteItem',
+    get: 'getItem',
+    put: 'putItem',
+    query: 'query',
+    scan: 'scan',
+    update: 'updateItem',
+    transactGet: 'transactGetItems',
+    transactWrite: 'transactWriteItems'
+  },
+
+  /**
    * Returns the attributes of one or more items from one or more tables
    * by delegating to `AWS.DynamoDB.batchGetItem()`.
    *
@@ -149542,14 +149558,8 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
    *
    */
   batchGet: function(params, callback) {
-    var self = this;
-    var request = self.service.batchGetItem(params);
-    self.setupRequest(request);
-    self.setupResponse(request);
-    if (typeof callback === 'function') {
-      request.send(callback);
-    }
-    return request;
+    var operation = this.serviceClientOperationsMap['batchGet'];
+    return this.makeServiceRequest(operation, params, callback);
   },
 
   /**
@@ -149593,14 +149603,8 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
    *
    */
   batchWrite: function(params, callback) {
-    var self = this;
-    var request = self.service.batchWriteItem(params);
-    self.setupRequest(request);
-    self.setupResponse(request);
-    if (typeof callback === 'function') {
-      request.send(callback);
-    }
-    return request;
+    var operation = this.serviceClientOperationsMap['batchWrite'];
+    return this.makeServiceRequest(operation, params, callback);
   },
 
   /**
@@ -149629,14 +149633,8 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
    *
    */
   delete: function(params, callback) {
-    var self = this;
-    var request = self.service.deleteItem(params);
-    self.setupRequest(request);
-    self.setupResponse(request);
-    if (typeof callback === 'function') {
-      request.send(callback);
-    }
-    return request;
+    var operation = this.serviceClientOperationsMap['delete'];
+    return this.makeServiceRequest(operation, params, callback);
   },
 
   /**
@@ -149664,14 +149662,8 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
    *
    */
   get: function(params, callback) {
-    var self = this;
-    var request = self.service.getItem(params);
-    self.setupRequest(request);
-    self.setupResponse(request);
-    if (typeof callback === 'function') {
-      request.send(callback);
-    }
-    return request;
+    var operation = this.serviceClientOperationsMap['get'];
+    return this.makeServiceRequest(operation, params, callback);
   },
 
   /**
@@ -149703,15 +149695,9 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
    *  });
    *
    */
-  put: function put(params, callback) {
-    var self = this;
-    var request = self.service.putItem(params);
-    self.setupRequest(request);
-    self.setupResponse(request);
-    if (typeof callback === 'function') {
-      request.send(callback);
-    }
-    return request;
+  put: function(params, callback) {
+    var operation = this.serviceClientOperationsMap['put'];
+    return this.makeServiceRequest(operation, params, callback);
   },
 
   /**
@@ -149745,14 +149731,8 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
    *
    */
   update: function(params, callback) {
-    var self = this;
-    var request = self.service.updateItem(params);
-    self.setupRequest(request);
-    self.setupResponse(request);
-    if (typeof callback === 'function') {
-      request.send(callback);
-    }
-    return request;
+    var operation = this.serviceClientOperationsMap['update'];
+    return this.makeServiceRequest(operation, params, callback);
   },
 
   /**
@@ -149779,14 +149759,8 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
    *
    */
   scan: function(params, callback) {
-    var self = this;
-    var request = self.service.scan(params);
-    self.setupRequest(request);
-    self.setupResponse(request);
-    if (typeof callback === 'function') {
-      request.send(callback);
-    }
-    return request;
+    var operation = this.serviceClientOperationsMap['scan'];
+    return this.makeServiceRequest(operation, params, callback);
   },
 
    /**
@@ -149816,14 +149790,92 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     *
     */
   query: function(params, callback) {
-    var self = this;
-    var request = self.service.query(params);
-    self.setupRequest(request);
-    self.setupResponse(request);
-    if (typeof callback === 'function') {
-      request.send(callback);
-    }
-    return request;
+    var operation = this.serviceClientOperationsMap['query'];
+    return this.makeServiceRequest(operation, params, callback);
+  },
+
+  /**
+   * Synchronous write operation that groups up to 10 action requests
+   *
+   * Supply the same parameters as {AWS.DynamoDB.transactWriteItems} with
+   * `AttributeValue`s substituted by native JavaScript types.
+   *
+   * @see AWS.DynamoDB.transactWriteItems
+   * @example Get items from multiple tables
+   *  var params = {
+   *    TransactItems: [{
+   *      Put: {
+   *        TableName : 'Table0',
+   *        Item: {
+   *          HashKey: 'haskey',
+   *          NumAttribute: 1,
+   *          BoolAttribute: true,
+   *          ListAttribute: [1, 'two', false],
+   *          MapAttribute: { foo: 'bar'},
+   *          NullAttribute: null
+   *        }
+   *      }
+   *    }, {
+   *      Update: {
+   *        TableName: 'Table1',
+   *        Key: { HashKey : 'hashkey' },
+   *        UpdateExpression: 'set #a = :x + :y',
+   *        ConditionExpression: '#a < :MAX',
+   *        ExpressionAttributeNames: {'#a' : 'Sum'},
+   *        ExpressionAttributeValues: {
+   *          ':x' : 20,
+   *          ':y' : 45,
+   *          ':MAX' : 100,
+   *        }
+   *      }
+   *    }]
+   *  };
+   *
+   *  documentClient.transactWrite(params, function(err, data) {
+   *    if (err) console.log(err);
+   *    else console.log(data);
+   *  });
+   */
+  transactWrite: function(params, callback) {
+    var operation = this.serviceClientOperationsMap['transactWrite'];
+    return this.makeServiceRequest(operation, params, callback);
+  },
+
+  /**
+   * Atomically retrieves multiple items from one or more tables (but not from indexes)
+   * in a single account and region.
+   *
+   * Supply the same parameters as {AWS.DynamoDB.transactGetItems} with
+   * `AttributeValue`s substituted by native JavaScript types.
+   *
+   * @see AWS.DynamoDB.transactGetItems
+   * @example Get items from multiple tables
+   *  var params = {
+   *    TransactItems: [{
+   *      Get: {
+   *        TableName : 'Table0',
+   *        Key: {
+   *          HashKey: 'hashkey0'
+   *        }
+   *      }
+   *    }, {
+   *      Get: {
+   *        TableName : 'Table1',
+   *        Key: {
+   *          HashKey: 'hashkey1'
+   *        }
+   *      }
+   *    }]
+   *  };
+   *
+   *  documentClient.transactGet(params, function(err, data) {
+   *    if (err) console.log(err);
+   *    else console.log(data);
+   *  });
+   */
+  transactGet: function(params, callback) {
+    var operation = this.serviceClientOperationsMap['transactGet'];
+    return this.makeServiceRequest(operation, params, callback);
   },
 
   /**
@@ -167586,7 +167638,7 @@ var LRUCache = /** @class */ (function () {
 }());
 exports.LRUCache = LRUCache;
 },{}],375:[function(require,module,exports){
-// AWS SDK for JavaScript v2.372.0
+// AWS SDK for JavaScript v2.373.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

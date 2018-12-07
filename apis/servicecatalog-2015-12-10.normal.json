@@ -1029,7 +1029,7 @@
           "shape": "OperationNotSupportedException"
         }
       ],
-      "documentation": "<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization.</p> <p>By calling this API Service Catalog will use FAS credentials to call organizations:EnableAWSServiceAccess so that your shares can be in sync with any changes in your AWS Organizations.</p>"
+      "documentation": "<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization.</p> <p>By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.</p>"
     },
     "ExecuteProvisionedProductPlan": {
       "name": "ExecuteProvisionedProductPlan",
@@ -4191,14 +4191,14 @@
       "members": {
         "Type": {
           "shape": "OrganizationNodeType",
-          "documentation": "<p/>"
+          "documentation": "<p>The organization node type.</p>"
         },
         "Value": {
           "shape": "OrganizationNodeValue",
-          "documentation": "<p/>"
+          "documentation": "<p>The identifier of the organization node.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Information about the organization node.</p>"
     },
     "OrganizationNodeType": {
       "type": "string",
