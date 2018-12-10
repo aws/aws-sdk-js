@@ -11,6 +11,7 @@ export {FileSystemCredentials} from './credentials/file_system_credentials';
 export {SAMLCredentials} from './credentials/saml_credentials';
 export {SharedIniFileCredentials} from './credentials/shared_ini_file_credentials';
 export {TemporaryCredentials} from './credentials/temporary_credentials';
+export {ChainableTemporaryCredentials} from './credentials/chainable_temporary_credentials';
 export {WebIdentityCredentials} from './credentials/web_identity_credentials';
 export {Endpoint} from './endpoint';
 export {EventListeners} from './event_listeners';
