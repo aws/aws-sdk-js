@@ -3039,7 +3039,7 @@
         },
         "value": {
           "shape": "String",
-          "documentation": "<p>The account setting value for the specified principal ARN. Accepted values are <code>ENABLED</code> and <code>DISABLED</code>.</p>"
+          "documentation": "<p>The account setting value for the specified principal ARN. Accepted values are <code>enabled</code> and <code>disabled</code>.</p>"
         },
         "principalArn": {
           "shape": "String",
@@ -3588,7 +3588,7 @@
         },
         "value": {
           "shape": "String",
-          "documentation": "<p>The current account setting for the resource name. If <code>ENABLED</code>, then the resource will receive the new Amazon Resource Name (ARN) and resource identifier (ID) format. If <code>DISABLED</code>, then the resource will receive the old Amazon Resource Name (ARN) and resource identifier (ID) format.</p>"
+          "documentation": "<p>The current account setting for the resource name. If <code>enabled</code>, then the resource will receive the new Amazon Resource Name (ARN) and resource identifier (ID) format. If <code>disabled</code>, then the resource will receive the old Amazon Resource Name (ARN) and resource identifier (ID) format.</p>"
         },
         "principalArn": {
           "shape": "String",

@@ -44,6 +44,14 @@ declare class MediaStore extends Service {
    */
   deleteCorsPolicy(callback?: (err: AWSError, data: MediaStore.Types.DeleteCorsPolicyOutput) => void): Request<MediaStore.Types.DeleteCorsPolicyOutput, AWSError>;
   /**
+   * Removes an object lifecycle policy from a container.
+   */
+  deleteLifecyclePolicy(params: MediaStore.Types.DeleteLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteLifecyclePolicyOutput) => void): Request<MediaStore.Types.DeleteLifecyclePolicyOutput, AWSError>;
+  /**
+   * Removes an object lifecycle policy from a container.
+   */
+  deleteLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.DeleteLifecyclePolicyOutput) => void): Request<MediaStore.Types.DeleteLifecyclePolicyOutput, AWSError>;
+  /**
    * Retrieves the properties of the requested container. This request is commonly used to retrieve the endpoint of a container. An endpoint is a value assigned by the service when a new container is created. A container's endpoint does not change after it has been assigned. The DescribeContainer request returns a single Container object based on ContainerName. To return all Container objects that are associated with a specified AWS account, use ListContainers.
    */
   describeContainer(params: MediaStore.Types.DescribeContainerInput, callback?: (err: AWSError, data: MediaStore.Types.DescribeContainerOutput) => void): Request<MediaStore.Types.DescribeContainerOutput, AWSError>;
@@ -68,6 +76,14 @@ declare class MediaStore extends Service {
    */
   getCorsPolicy(callback?: (err: AWSError, data: MediaStore.Types.GetCorsPolicyOutput) => void): Request<MediaStore.Types.GetCorsPolicyOutput, AWSError>;
   /**
+   * Retrieves the object lifecycle policy that is assigned to a container.
+   */
+  getLifecyclePolicy(params: MediaStore.Types.GetLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.GetLifecyclePolicyOutput) => void): Request<MediaStore.Types.GetLifecyclePolicyOutput, AWSError>;
+  /**
+   * Retrieves the object lifecycle policy that is assigned to a container.
+   */
+  getLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.GetLifecyclePolicyOutput) => void): Request<MediaStore.Types.GetLifecyclePolicyOutput, AWSError>;
+  /**
    * Lists the properties of all containers in AWS Elemental MediaStore.  You can query to receive all the containers in one response. Or you can include the MaxResults parameter to receive a limited number of containers in each response. In this case, the response includes a token. To get the next set of containers, send the command again, this time with the NextToken parameter (with the returned token as its value). The next set of responses appears, with a token if there are still more containers to receive.  See also DescribeContainer, which gets the properties of one container. 
    */
   listContainers(params: MediaStore.Types.ListContainersInput, callback?: (err: AWSError, data: MediaStore.Types.ListContainersOutput) => void): Request<MediaStore.Types.ListContainersOutput, AWSError>;
@@ -91,6 +107,14 @@ declare class MediaStore extends Service {
    * Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser's XMLHttpRequest capability. To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.
    */
   putCorsPolicy(callback?: (err: AWSError, data: MediaStore.Types.PutCorsPolicyOutput) => void): Request<MediaStore.Types.PutCorsPolicyOutput, AWSError>;
+  /**
+   * Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. 
+   */
+  putLifecyclePolicy(params: MediaStore.Types.PutLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutLifecyclePolicyOutput) => void): Request<MediaStore.Types.PutLifecyclePolicyOutput, AWSError>;
+  /**
+   * Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. 
+   */
+  putLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.PutLifecyclePolicyOutput) => void): Request<MediaStore.Types.PutLifecyclePolicyOutput, AWSError>;
 }
 declare namespace MediaStore {
   export type AllowedHeaders = Header[];
@@ -127,17 +151,17 @@ declare namespace MediaStore {
   export type CorsPolicy = CorsRule[];
   export interface CorsRule {
     /**
-     * One or more response headers that you want users to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object). Each CORS rule must have at least one AllowedOrigin element. The string value can include only one wildcard character (*), for example, http://*.example.com. Additionally, you can specify only one wildcard character to allow cross-origin access for all origins.
+     * One or more response headers that you want users to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object). Each CORS rule must have at least one AllowedOrigins element. The string value can include only one wildcard character (*), for example, http://*.example.com. Additionally, you can specify only one wildcard character to allow cross-origin access for all origins.
      */
-    AllowedOrigins?: AllowedOrigins;
+    AllowedOrigins: AllowedOrigins;
     /**
-     * Identifies an HTTP method that the origin that is specified in the rule is allowed to execute. Each CORS rule must contain at least one AllowedMethod and one AllowedOrigin element.
+     * Identifies an HTTP method that the origin that is specified in the rule is allowed to execute. Each CORS rule must contain at least one AllowedMethods and one AllowedOrigins element.
      */
     AllowedMethods?: AllowedMethods;
     /**
      * Specifies which headers are allowed in a preflight OPTIONS request through the Access-Control-Request-Headers header. Each header name that is specified in Access-Control-Request-Headers must have a corresponding entry in the rule. Only the headers that were requested are sent back.  This element can contain only one wildcard character (*).
      */
-    AllowedHeaders?: AllowedHeaders;
+    AllowedHeaders: AllowedHeaders;
     /**
      * The time in seconds that your browser caches the preflight response for the specified resource. A CORS rule can have only one MaxAgeSeconds element.
      */
@@ -183,6 +207,14 @@ declare namespace MediaStore {
   }
   export interface DeleteCorsPolicyOutput {
   }
+  export interface DeleteLifecyclePolicyInput {
+    /**
+     * The name of the container that holds the object lifecycle policy.
+     */
+    ContainerName: ContainerName;
+  }
+  export interface DeleteLifecyclePolicyOutput {
+  }
   export interface DescribeContainerInput {
     /**
      * The name of the container to query.
@@ -216,9 +248,25 @@ declare namespace MediaStore {
     ContainerName: ContainerName;
   }
   export interface GetCorsPolicyOutput {
+    /**
+     * The CORS policy assigned to the container.
+     */
     CorsPolicy: CorsPolicy;
   }
+  export interface GetLifecyclePolicyInput {
+    /**
+     * The name of the container that the object lifecycle policy is assigned to.
+     */
+    ContainerName: ContainerName;
+  }
+  export interface GetLifecyclePolicyOutput {
+    /**
+     * The object lifecycle policy that is assigned to the container.
+     */
+    LifecyclePolicy: LifecyclePolicy;
+  }
   export type Header = string;
+  export type LifecyclePolicy = string;
   export interface ListContainersInput {
     /**
      * Only if you used MaxResults in the first command, enter the token (which was included in the previous response) to obtain the next set of containers. This token is included in a response only if there actually are more containers to list.
@@ -266,6 +314,18 @@ declare namespace MediaStore {
     CorsPolicy: CorsPolicy;
   }
   export interface PutCorsPolicyOutput {
+  }
+  export interface PutLifecyclePolicyInput {
+    /**
+     * The name of the container that you want to assign the object lifecycle policy to.
+     */
+    ContainerName: ContainerName;
+    /**
+     * The object lifecycle policy to apply to the container.
+     */
+    LifecyclePolicy: LifecyclePolicy;
+  }
+  export interface PutLifecyclePolicyOutput {
   }
   export type TimeStamp = Date;
   /**

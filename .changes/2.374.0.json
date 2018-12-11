@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This update adds the GetContactAttributes operation to retrieve the attributes associated with a contact."
+    },
+    {
+        "type": "feature",
+        "category": "MediaStore",
+        "description": "This release adds Delete Object Lifecycling to AWS MediaStore Containers."
+    }
+]

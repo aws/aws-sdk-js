@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.373.0',
+	  VERSION: '2.374.0',
 
 	  /**
 	   * @api private
@@ -389,6 +389,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  fn: {
 	    noop: function() {},
+	    callback: function (err) { if (err) throw err; },
 
 	    /**
 	     * Turn a synchronous function into as "async" function by making it call
@@ -5586,6 +5587,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.expired = false;
 	    this.expireTime = null;
+	    this.refreshCallbacks = [];
 	    if (arguments.length === 1 && typeof arguments[0] === 'object') {
 	      var creds = arguments[0].credentials || arguments[0];
 	      this.accessKeyId = creds.accessKeyId;
@@ -5709,6 +5711,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  refresh: function refresh(callback) {
 	    this.expired = false;
+	    callback();
+	  },
+
+	  /**
+	   * @api private
+	   * @param callback
+	   */
+	  coalesceRefresh: function coalesceRefresh(callback, sync) {
+	    var self = this;
+	    if (self.refreshCallbacks.push(callback) === 1) {
+	      self.load(function onLoad(err) {
+	        AWS.util.arrayEach(self.refreshCallbacks, function(callback) {
+	          if (sync) {
+	            callback(err);
+	          } else {
+	            // callback could throw, so defer to ensure all callbacks are notified
+	            AWS.util.defer(function () {
+	              callback(err);
+	            });
+	          }
+	        });
+	        self.refreshCallbacks.length = 0;
+	      });
+	    }
+	  },
+
+	  /**
+	   * @api private
+	   * @param callback
+	   */
+	  load: function load(callback) {
 	    callback();
 	  }
 	});

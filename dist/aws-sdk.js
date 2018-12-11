@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.373.0
+// AWS SDK for JavaScript v2.374.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -144364,7 +144364,7 @@ Object.defineProperty(apiLoader.services['apigateway'], '2015-07-09', {
 
 module.exports = AWS.APIGateway;
 
-},{"../apis/apigateway-2015-07-09.min.json":4,"../apis/apigateway-2015-07-09.paginators.json":5,"../lib/core":267,"../lib/node_loader":264,"../lib/services/apigateway":318}],188:[function(require,module,exports){
+},{"../apis/apigateway-2015-07-09.min.json":4,"../apis/apigateway-2015-07-09.paginators.json":5,"../lib/core":267,"../lib/node_loader":264,"../lib/services/apigateway":319}],188:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -144561,7 +144561,7 @@ Object.defineProperty(apiLoader.services['cloudfront'], '2018-11-05', {
 
 module.exports = AWS.CloudFront;
 
-},{"../apis/cloudfront-2016-11-25.min.json":13,"../apis/cloudfront-2016-11-25.paginators.json":14,"../apis/cloudfront-2016-11-25.waiters2.json":15,"../apis/cloudfront-2017-03-25.min.json":16,"../apis/cloudfront-2017-03-25.paginators.json":17,"../apis/cloudfront-2017-03-25.waiters2.json":18,"../apis/cloudfront-2017-10-30.min.json":19,"../apis/cloudfront-2017-10-30.paginators.json":20,"../apis/cloudfront-2017-10-30.waiters2.json":21,"../apis/cloudfront-2018-06-18.min.json":22,"../apis/cloudfront-2018-06-18.paginators.json":23,"../apis/cloudfront-2018-06-18.waiters2.json":24,"../apis/cloudfront-2018-11-05.min.json":25,"../apis/cloudfront-2018-11-05.paginators.json":26,"../apis/cloudfront-2018-11-05.waiters2.json":27,"../lib/core":267,"../lib/node_loader":264,"../lib/services/cloudfront":319}],193:[function(require,module,exports){
+},{"../apis/cloudfront-2016-11-25.min.json":13,"../apis/cloudfront-2016-11-25.paginators.json":14,"../apis/cloudfront-2016-11-25.waiters2.json":15,"../apis/cloudfront-2017-03-25.min.json":16,"../apis/cloudfront-2017-03-25.paginators.json":17,"../apis/cloudfront-2017-03-25.waiters2.json":18,"../apis/cloudfront-2017-10-30.min.json":19,"../apis/cloudfront-2017-10-30.paginators.json":20,"../apis/cloudfront-2017-10-30.waiters2.json":21,"../apis/cloudfront-2018-06-18.min.json":22,"../apis/cloudfront-2018-06-18.paginators.json":23,"../apis/cloudfront-2018-06-18.waiters2.json":24,"../apis/cloudfront-2018-11-05.min.json":25,"../apis/cloudfront-2018-11-05.paginators.json":26,"../apis/cloudfront-2018-11-05.waiters2.json":27,"../lib/core":267,"../lib/node_loader":264,"../lib/services/cloudfront":320}],193:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -144764,7 +144764,7 @@ Object.defineProperty(apiLoader.services['cognitoidentity'], '2014-06-30', {
 
 module.exports = AWS.CognitoIdentity;
 
-},{"../apis/cognito-identity-2014-06-30.min.json":41,"../apis/cognito-identity-2014-06-30.paginators.json":42,"../lib/core":267,"../lib/node_loader":264,"../lib/services/cognitoidentity":320}],203:[function(require,module,exports){
+},{"../apis/cognito-identity-2014-06-30.min.json":41,"../apis/cognito-identity-2014-06-30.paginators.json":42,"../lib/core":267,"../lib/node_loader":264,"../lib/services/cognitoidentity":321}],203:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -144915,7 +144915,7 @@ Object.defineProperty(apiLoader.services['dynamodb'], '2012-08-10', {
 
 module.exports = AWS.DynamoDB;
 
-},{"../apis/dynamodb-2011-12-05.min.json":54,"../apis/dynamodb-2011-12-05.paginators.json":55,"../apis/dynamodb-2011-12-05.waiters2.json":56,"../apis/dynamodb-2012-08-10.min.json":57,"../apis/dynamodb-2012-08-10.paginators.json":58,"../apis/dynamodb-2012-08-10.waiters2.json":59,"../lib/core":267,"../lib/node_loader":264,"../lib/services/dynamodb":321}],210:[function(require,module,exports){
+},{"../apis/dynamodb-2011-12-05.min.json":54,"../apis/dynamodb-2011-12-05.paginators.json":55,"../apis/dynamodb-2011-12-05.waiters2.json":56,"../apis/dynamodb-2012-08-10.min.json":57,"../apis/dynamodb-2012-08-10.paginators.json":58,"../apis/dynamodb-2012-08-10.waiters2.json":59,"../lib/core":267,"../lib/node_loader":264,"../lib/services/dynamodb":322}],210:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -144957,7 +144957,7 @@ Object.defineProperty(apiLoader.services['ec2'], '2016-11-15', {
 
 module.exports = AWS.EC2;
 
-},{"../apis/ec2-2016-11-15.min.json":60,"../apis/ec2-2016-11-15.paginators.json":61,"../apis/ec2-2016-11-15.waiters2.json":62,"../lib/core":267,"../lib/node_loader":264,"../lib/services/ec2":322}],212:[function(require,module,exports){
+},{"../apis/ec2-2016-11-15.min.json":60,"../apis/ec2-2016-11-15.paginators.json":61,"../apis/ec2-2016-11-15.waiters2.json":62,"../lib/core":267,"../lib/node_loader":264,"../lib/services/ec2":323}],212:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -145243,7 +145243,7 @@ Object.defineProperty(apiLoader.services['iotdata'], '2015-05-28', {
 
 module.exports = AWS.IotData;
 
-},{"../apis/iot-data-2015-05-28.min.json":100,"../lib/core":267,"../lib/node_loader":264,"../lib/services/iotdata":323}],226:[function(require,module,exports){
+},{"../apis/iot-data-2015-05-28.min.json":100,"../lib/core":267,"../lib/node_loader":264,"../lib/services/iotdata":324}],226:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -145354,7 +145354,7 @@ Object.defineProperty(apiLoader.services['lambda'], '2015-03-31', {
 
 module.exports = AWS.Lambda;
 
-},{"../apis/lambda-2014-11-11.min.json":110,"../apis/lambda-2014-11-11.paginators.json":111,"../apis/lambda-2015-03-31.min.json":112,"../apis/lambda-2015-03-31.paginators.json":113,"../lib/core":267,"../lib/node_loader":264,"../lib/services/lambda":324}],231:[function(require,module,exports){
+},{"../apis/lambda-2014-11-11.min.json":110,"../apis/lambda-2014-11-11.paginators.json":111,"../apis/lambda-2015-03-31.min.json":112,"../apis/lambda-2015-03-31.paginators.json":113,"../lib/core":267,"../lib/node_loader":264,"../lib/services/lambda":325}],231:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -145416,7 +145416,7 @@ Object.defineProperty(apiLoader.services['machinelearning'], '2014-12-12', {
 
 module.exports = AWS.MachineLearning;
 
-},{"../apis/machinelearning-2014-12-12.min.json":118,"../apis/machinelearning-2014-12-12.paginators.json":119,"../apis/machinelearning-2014-12-12.waiters2.json":120,"../lib/core":267,"../lib/node_loader":264,"../lib/services/machinelearning":325}],234:[function(require,module,exports){
+},{"../apis/machinelearning-2014-12-12.min.json":118,"../apis/machinelearning-2014-12-12.paginators.json":119,"../apis/machinelearning-2014-12-12.waiters2.json":120,"../lib/core":267,"../lib/node_loader":264,"../lib/services/machinelearning":326}],234:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -145517,7 +145517,7 @@ Object.defineProperty(apiLoader.services['polly'], '2016-06-10', {
 
 module.exports = AWS.Polly;
 
-},{"../apis/polly-2016-06-10.min.json":133,"../apis/polly-2016-06-10.paginators.json":134,"../lib/core":267,"../lib/node_loader":264,"../lib/services/polly":326}],239:[function(require,module,exports){
+},{"../apis/polly-2016-06-10.min.json":133,"../apis/polly-2016-06-10.paginators.json":134,"../lib/core":267,"../lib/node_loader":264,"../lib/services/polly":327}],239:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -145596,7 +145596,7 @@ Object.defineProperty(apiLoader.services['rds'], '2014-10-31', {
 
 module.exports = AWS.RDS;
 
-},{"../apis/rds-2013-01-10.min.json":137,"../apis/rds-2013-01-10.paginators.json":138,"../apis/rds-2013-02-12.min.json":139,"../apis/rds-2013-02-12.paginators.json":140,"../apis/rds-2013-09-09.min.json":141,"../apis/rds-2013-09-09.paginators.json":142,"../apis/rds-2013-09-09.waiters2.json":143,"../apis/rds-2014-09-01.min.json":144,"../apis/rds-2014-09-01.paginators.json":145,"../apis/rds-2014-10-31.min.json":146,"../apis/rds-2014-10-31.paginators.json":147,"../apis/rds-2014-10-31.waiters2.json":148,"../lib/core":267,"../lib/node_loader":264,"../lib/services/rds":327}],241:[function(require,module,exports){
+},{"../apis/rds-2013-01-10.min.json":137,"../apis/rds-2013-01-10.paginators.json":138,"../apis/rds-2013-02-12.min.json":139,"../apis/rds-2013-02-12.paginators.json":140,"../apis/rds-2013-09-09.min.json":141,"../apis/rds-2013-09-09.paginators.json":142,"../apis/rds-2013-09-09.waiters2.json":143,"../apis/rds-2014-09-01.min.json":144,"../apis/rds-2014-09-01.paginators.json":145,"../apis/rds-2014-10-31.min.json":146,"../apis/rds-2014-10-31.paginators.json":147,"../apis/rds-2014-10-31.waiters2.json":148,"../lib/core":267,"../lib/node_loader":264,"../lib/services/rds":328}],241:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -145659,7 +145659,7 @@ Object.defineProperty(apiLoader.services['route53'], '2013-04-01', {
 
 module.exports = AWS.Route53;
 
-},{"../apis/route53-2013-04-01.min.json":154,"../apis/route53-2013-04-01.paginators.json":155,"../apis/route53-2013-04-01.waiters2.json":156,"../lib/core":267,"../lib/node_loader":264,"../lib/services/route53":328}],244:[function(require,module,exports){
+},{"../apis/route53-2013-04-01.min.json":154,"../apis/route53-2013-04-01.paginators.json":155,"../apis/route53-2013-04-01.waiters2.json":156,"../lib/core":267,"../lib/node_loader":264,"../lib/services/route53":329}],244:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -145701,7 +145701,7 @@ Object.defineProperty(apiLoader.services['s3'], '2006-03-01', {
 
 module.exports = AWS.S3;
 
-},{"../apis/s3-2006-03-01.min.json":161,"../apis/s3-2006-03-01.paginators.json":162,"../apis/s3-2006-03-01.waiters2.json":163,"../lib/core":267,"../lib/node_loader":264,"../lib/services/s3":329}],246:[function(require,module,exports){
+},{"../apis/s3-2006-03-01.min.json":161,"../apis/s3-2006-03-01.paginators.json":162,"../apis/s3-2006-03-01.waiters2.json":163,"../lib/core":267,"../lib/node_loader":264,"../lib/services/s3":330}],246:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -145803,7 +145803,7 @@ Object.defineProperty(apiLoader.services['sqs'], '2012-11-05', {
 
 module.exports = AWS.SQS;
 
-},{"../apis/sqs-2012-11-05.min.json":170,"../apis/sqs-2012-11-05.paginators.json":171,"../lib/core":267,"../lib/node_loader":264,"../lib/services/sqs":330}],251:[function(require,module,exports){
+},{"../apis/sqs-2012-11-05.min.json":170,"../apis/sqs-2012-11-05.paginators.json":171,"../lib/core":267,"../lib/node_loader":264,"../lib/services/sqs":331}],251:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -145864,7 +145864,7 @@ Object.defineProperty(apiLoader.services['sts'], '2011-06-15', {
 
 module.exports = AWS.STS;
 
-},{"../apis/sts-2011-06-15.min.json":178,"../apis/sts-2011-06-15.paginators.json":179,"../lib/core":267,"../lib/node_loader":264,"../lib/services/sts":331}],254:[function(require,module,exports){
+},{"../apis/sts-2011-06-15.min.json":178,"../apis/sts-2011-06-15.paginators.json":179,"../lib/core":267,"../lib/node_loader":264,"../lib/services/sts":332}],254:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -146051,7 +146051,7 @@ module.exports = exports = {
     convertToBuffer: convertToBuffer,
 }
 
-},{"buffer/":350}],260:[function(require,module,exports){
+},{"buffer/":351}],260:[function(require,module,exports){
 var hashUtils = require('./browserHashUtils');
 
 /**
@@ -146302,7 +146302,7 @@ function ii(a, b, c, d, x, s, t) {
     return cmn(c ^ (b | (~d)), a, b, x, s, t);
 }
 
-},{"./browserHashUtils":259,"buffer/":350}],262:[function(require,module,exports){
+},{"./browserHashUtils":259,"buffer/":351}],262:[function(require,module,exports){
 var Buffer = require('buffer/').Buffer;
 var hashUtils = require('./browserHashUtils');
 
@@ -146470,7 +146470,7 @@ Sha1.prototype.processBlock = function processBlock() {
     }
 }
 
-},{"./browserHashUtils":259,"buffer/":350}],263:[function(require,module,exports){
+},{"./browserHashUtils":259,"buffer/":351}],263:[function(require,module,exports){
 var Buffer = require('buffer/').Buffer;
 var hashUtils = require('./browserHashUtils');
 
@@ -146711,7 +146711,7 @@ Sha256.prototype.hashBuffer = function () {
     state[7] += state7;
 };
 
-},{"./browserHashUtils":259,"buffer/":350}],264:[function(require,module,exports){
+},{"./browserHashUtils":259,"buffer/":351}],264:[function(require,module,exports){
 (function (process){
 var util = require('./util');
 
@@ -146736,6 +146736,7 @@ module.exports = AWS;
 require('./credentials');
 require('./credentials/credential_provider_chain');
 require('./credentials/temporary_credentials');
+require('./credentials/chainable_temporary_credentials');
 require('./credentials/web_identity_credentials');
 require('./credentials/cognito_identity_credentials');
 require('./credentials/saml_credentials');
@@ -146753,7 +146754,7 @@ if (typeof process === 'undefined') {
 }
 
 }).call(this,require('_process'))
-},{"./browserCryptoLib":258,"./core":267,"./credentials":268,"./credentials/cognito_identity_credentials":269,"./credentials/credential_provider_chain":270,"./credentials/saml_credentials":271,"./credentials/temporary_credentials":272,"./credentials/web_identity_credentials":273,"./event-stream/buffered-create-event-stream":281,"./http/xhr":290,"./realclock/browserClock":309,"./util":341,"./xml/browser_parser":342,"_process":356,"buffer/":350,"querystring/":363,"url/":365}],265:[function(require,module,exports){
+},{"./browserCryptoLib":258,"./core":267,"./credentials":268,"./credentials/chainable_temporary_credentials":269,"./credentials/cognito_identity_credentials":270,"./credentials/credential_provider_chain":271,"./credentials/saml_credentials":272,"./credentials/temporary_credentials":273,"./credentials/web_identity_credentials":274,"./event-stream/buffered-create-event-stream":282,"./http/xhr":291,"./realclock/browserClock":310,"./util":342,"./xml/browser_parser":343,"_process":357,"buffer/":351,"querystring/":364,"url/":366}],265:[function(require,module,exports){
 var AWS = require('../core'),
     url = AWS.util.url,
     crypto = AWS.util.crypto.lib,
@@ -147539,7 +147540,7 @@ AWS.Config = AWS.util.inherit({
  */
 AWS.config = new AWS.Config();
 
-},{"./core":267,"./credentials":268,"./credentials/credential_provider_chain":270}],267:[function(require,module,exports){
+},{"./core":267,"./credentials":268,"./credentials/credential_provider_chain":271}],267:[function(require,module,exports){
 /**
  * The main AWS namespace
  */
@@ -147562,7 +147563,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.373.0',
+  VERSION: '2.374.0',
 
   /**
    * @api private
@@ -147650,7 +147651,7 @@ AWS.util.memoizedProperty(AWS, 'endpointCache', function() {
   return new AWS.EndpointCache(AWS.config.endpointCacheSize);
 }, true);
 
-},{"../vendor/endpoint-cache":373,"./api_loader":257,"./config":266,"./event_listeners":288,"./http":289,"./json/builder":291,"./json/parser":292,"./model/api":293,"./model/operation":295,"./model/paginator":296,"./model/resource_waiter":297,"./model/shape":298,"./param_validator":299,"./protocol/json":302,"./protocol/query":303,"./protocol/rest":304,"./protocol/rest_json":305,"./protocol/rest_xml":306,"./request":312,"./resource_waiter":313,"./response":314,"./sequential_executor":316,"./service":317,"./signers/request_signer":333,"./util":341,"./xml/builder":343}],268:[function(require,module,exports){
+},{"../vendor/endpoint-cache":374,"./api_loader":257,"./config":266,"./event_listeners":289,"./http":290,"./json/builder":292,"./json/parser":293,"./model/api":294,"./model/operation":296,"./model/paginator":297,"./model/resource_waiter":298,"./model/shape":299,"./param_validator":300,"./protocol/json":303,"./protocol/query":304,"./protocol/rest":305,"./protocol/rest_json":306,"./protocol/rest_xml":307,"./request":313,"./resource_waiter":314,"./response":315,"./sequential_executor":317,"./service":318,"./signers/request_signer":334,"./util":342,"./xml/builder":344}],268:[function(require,module,exports){
 var AWS = require('./core');
 
 /**
@@ -147721,6 +147722,7 @@ AWS.Credentials = AWS.util.inherit({
 
     this.expired = false;
     this.expireTime = null;
+    this.refreshCallbacks = [];
     if (arguments.length === 1 && typeof arguments[0] === 'object') {
       var creds = arguments[0].credentials || arguments[0];
       this.accessKeyId = creds.accessKeyId;
@@ -147845,6 +147847,37 @@ AWS.Credentials = AWS.util.inherit({
   refresh: function refresh(callback) {
     this.expired = false;
     callback();
+  },
+
+  /**
+   * @api private
+   * @param callback
+   */
+  coalesceRefresh: function coalesceRefresh(callback, sync) {
+    var self = this;
+    if (self.refreshCallbacks.push(callback) === 1) {
+      self.load(function onLoad(err) {
+        AWS.util.arrayEach(self.refreshCallbacks, function(callback) {
+          if (sync) {
+            callback(err);
+          } else {
+            // callback could throw, so defer to ensure all callbacks are notified
+            AWS.util.defer(function () {
+              callback(err);
+            });
+          }
+        });
+        self.refreshCallbacks.length = 0;
+      });
+    }
+  },
+
+  /**
+   * @api private
+   * @param callback
+   */
+  load: function load(callback) {
+    callback();
   }
 });
 
@@ -147867,6 +147900,205 @@ AWS.Credentials.deletePromisesFromClass = function deletePromisesFromClass() {
 AWS.util.addPromises(AWS.Credentials);
 
 },{"./core":267}],269:[function(require,module,exports){
+var AWS = require('../core');
+var STS = require('../../clients/sts');
+
+/**
+ * Represents temporary credentials retrieved from {AWS.STS}. Without any
+ * extra parameters, credentials will be fetched from the
+ * {AWS.STS.getSessionToken} operation. If an IAM role is provided, the
+ * {AWS.STS.assumeRole} operation will be used to fetch credentials for the
+ * role instead.
+ *
+ * AWS.ChainableTemporaryCredentials differs from AWS.TemporaryCredentials in
+ * the way masterCredentials and refreshes are handled.
+ * AWS.ChainableTemporaryCredentials refreshes expired credentials using the
+ * masterCredentials passed by the user to support chaining of STS credentials.
+ * However, AWS.TemporaryCredentials recursively collapses the masterCredentials
+ * during instantiation, precluding the ability to refresh credentials which
+ * require intermediate, temporary credentials.
+ *
+ * For example, if the application should use RoleA, which must be assumed from
+ * RoleB, and the environment provides credentials which can assume RoleB, then
+ * AWS.ChainableTemporaryCredentials must be used to support refreshing the
+ * temporary credentials for RoleA:
+ *
+ * ```javascript
+ * var roleACreds = new AWS.ChainableTemporaryCredentials({
+ *   params: {RoleArn: 'RoleA'},
+ *   masterCredentials: new AWS.ChainableTemporaryCredentials({
+ *     params: {RoleArn: 'RoleB'},
+ *     masterCredentials: new AWS.EnvironmentCredentials('AWS')
+ *   })
+ * });
+ * ```
+ *
+ * If AWS.TemporaryCredentials had been used in the previous example,
+ * `roleACreds` would fail to refresh because `roleACreds` would
+ * use the environment credentials for the AssumeRole request.
+ *
+ * Another difference is that AWS.ChainableTemporaryCredentials creates the STS
+ * service instance during instantiation while AWS.TemporaryCredentials creates
+ * the STS service instance during the first refresh. Creating the service
+ * instance during instantiation effectively captures the master credentials
+ * from the global config, so that subsequent changes to the global config do
+ * not affect the master credentials used to refresh the temporary credentials.
+ *
+ * This allows an instance of AWS.ChainableTemporaryCredentials to be assigned
+ * to AWS.config.credentials:
+ *
+ * ```javascript
+ * var envCreds = new AWS.EnvironmentCredentials('AWS');
+ * AWS.config.credentials = envCreds;
+ * // masterCredentials will be envCreds
+ * AWS.config.credentials = new AWS.ChainableTemporaryCredentials({
+ *   params: {RoleArn: '...'}
+ * });
+ * ```
+ *
+ * Similarly, to use the CredentialProviderChain's default providers as the
+ * master credentials, simply create a new instance of
+ * AWS.ChainableTemporaryCredentials:
+ *
+ * ```javascript
+ * AWS.config.credentials = new ChainableTemporaryCredentials({
+ *   params: {RoleArn: '...'}
+ * });
+ * ```
+ *
+ * @!attribute service
+ *   @return [AWS.STS] the STS service instance used to
+ *     get and refresh temporary credentials from AWS STS.
+ * @note (see constructor)
+ */
+AWS.ChainableTemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
+  /**
+   * Creates a new temporary credentials object.
+   *
+   * @param options [map] a set of options
+   * @option options params [map] ({}) a map of options that are passed to the
+   *   {AWS.STS.assumeRole} or {AWS.STS.getSessionToken} operations.
+   *   If a `RoleArn` parameter is passed in, credentials will be based on the
+   *   IAM role. If a `SerialNumber` parameter is passed in, {tokenCodeFn} must
+   *   also be passed in or an error will be thrown.
+   * @option options masterCredentials [AWS.Credentials] (null) the master
+   *   (source) credentials used to get and refresh temporary credentials from
+   *   AWS STS. By default, {AWS.config.credentials} or
+   *   {AWS.config.credentialProvider} will be used.
+   * @option options tokenCodeFn [Function] (null) Function to provide
+   *   `TokenCode`, if `SerialNumber` is provided for profile in {params}. Function
+   *   is called with value of `SerialNumber` and `callback`, and should provide
+   *   the `TokenCode` or an error to the callback in the format
+   *   `callback(err, token)`.
+   * @example Creating a new credentials object for generic temporary credentials
+   *   AWS.config.credentials = new AWS.ChainableTemporaryCredentials();
+   * @example Creating a new credentials object for an IAM role
+   *   AWS.config.credentials = new AWS.ChainableTemporaryCredentials({
+   *     params: {
+   *       RoleArn: 'arn:aws:iam::1234567890:role/TemporaryCredentials'
+   *     }
+   *   });
+   * @see AWS.STS.assumeRole
+   * @see AWS.STS.getSessionToken
+   */
+  constructor: function ChainableTemporaryCredentials(options) {
+    AWS.Credentials.call(this);
+    options = options || {};
+    this.errorCode = 'ChainableTemporaryCredentialsProviderFailure';
+    this.expired = true;
+    this.tokenCodeFn = null;
+
+    var params = AWS.util.copy(options.params) || {}
+    if (params.RoleArn) {
+      params.RoleSessionName = params.RoleSessionName || 'temporary-credentials';
+    }
+    if (params.SerialNumber) {
+      if (!options.tokenCodeFn || (typeof options.tokenCodeFn !== 'function')) {
+        throw new AWS.util.error(
+          new Error('tokenCodeFn must be a function when params.SerialNumber is given'),
+          {code: this.errorCode}
+        );
+      } else {
+        this.tokenCodeFn = options.tokenCodeFn;
+      }
+    }
+    this.service = new STS({
+      params: params,
+      credentials: options.masterCredentials || AWS.config.credentials
+    });
+  },
+
+  /**
+   * Refreshes credentials using {AWS.STS.assumeRole} or
+   * {AWS.STS.getSessionToken}, depending on whether an IAM role ARN was passed
+   * to the credentials {constructor}.
+   *
+   * @callback callback function(err)
+   *   Called when the STS service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @see get
+   */
+  refresh: function refresh(callback) {
+    this.coalesceRefresh(callback || AWS.util.fn.callback);
+  },
+
+  /**
+   * @api private
+   * @param callback
+   */
+  load: function load(callback) {
+    var self = this;
+    var operation = self.service.config.params.RoleArn ? 'assumeRole' : 'getSessionToken';
+    this.getTokenCode(function (err, tokenCode) {
+      var params = {};
+      if (err) {
+        callback(err);
+        return;
+      }
+      if (tokenCode) {
+        params.TokenCode = tokenCode;
+      }
+      self.service[operation](params, function (err, data) {
+        if (!err) {
+          self.service.credentialsFrom(data, self);
+        }
+        callback(err);
+      });
+    });
+  },
+
+  /**
+   * @api private
+   */
+  getTokenCode: function getTokenCode(callback) {
+    var self = this;
+    if (this.tokenCodeFn) {
+      this.tokenCodeFn(this.service.config.params.SerialNumber, function (err, token) {
+        if (err) {
+          var message = err;
+          if (err instanceof Error) {
+            message = err.message;
+          }
+          callback(
+            AWS.util.error(
+              new Error('Error fetching MFA token: ' + message),
+              { code: self.errorCode}
+            )
+          );
+          return;
+        }
+        callback(null, token);
+      });
+    } else {
+      callback(null);
+    }
+  }
+});
+
+},{"../../clients/sts":253,"../core":267}],270:[function(require,module,exports){
 var AWS = require('../core');
 var CognitoIdentity = require('../../clients/cognitoidentity');
 var STS = require('../../clients/sts');
@@ -148026,6 +148258,14 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
    * @see AWS.Credentials.get
    */
   refresh: function refresh(callback) {
+    this.coalesceRefresh(callback || AWS.util.fn.callback);
+  },
+
+  /**
+   * @api private
+   * @param callback
+   */
+  load: function load(callback) {
     var self = this;
     self.createClients();
     self.data = null;
@@ -148245,7 +148485,7 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   })()
 });
 
-},{"../../clients/cognitoidentity":202,"../../clients/sts":253,"../core":267}],270:[function(require,module,exports){
+},{"../../clients/cognitoidentity":202,"../../clients/sts":253,"../core":267}],271:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -148420,7 +148660,7 @@ AWS.CredentialProviderChain.deletePromisesFromClass = function deletePromisesFro
 
 AWS.util.addPromises(AWS.CredentialProviderChain);
 
-},{"../core":267}],271:[function(require,module,exports){
+},{"../core":267}],272:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -148490,10 +148730,15 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
    * @see get
    */
   refresh: function refresh(callback) {
+    this.coalesceRefresh(callback || AWS.util.fn.callback);
+  },
+
+  /**
+   * @api private
+   */
+  load: function load(callback) {
     var self = this;
     self.createClients();
-    if (!callback) callback = function(err) { if (err) throw err; };
-
     self.service.assumeRoleWithSAML(function (err, data) {
       if (!err) {
         self.service.credentialsFrom(data, self);
@@ -148511,7 +148756,7 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":253,"../core":267}],272:[function(require,module,exports){
+},{"../../clients/sts":253,"../core":267}],273:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -148521,6 +148766,10 @@ var STS = require('../../clients/sts');
  * {AWS.STS.getSessionToken} operation. If an IAM role is provided, the
  * {AWS.STS.assumeRole} operation will be used to fetch credentials for the
  * role instead.
+ *
+ * @note AWS.TemporaryCredentials is deprecated, but remains available for
+ *   backwards compatibility. {AWS.ChainableTemporaryCredentials} is the
+ *   preferred class for temporary credentials.
  *
  * To setup temporary credentials, configure a set of master credentials
  * using the standard credentials providers (environment, EC2 instance metadata,
@@ -148592,12 +148841,17 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
    *   @param err [Error] if an error occurred, this value will be filled
    * @see get
    */
-  refresh: function refresh(callback) {
+  refresh: function refresh (callback) {
+    this.coalesceRefresh(callback || AWS.util.fn.callback);
+  },
+
+  /**
+   * @api private
+   */
+  load: function load (callback) {
     var self = this;
     self.createClients();
-    if (!callback) callback = function(err) { if (err) throw err; };
-
-    self.masterCredentials.get(function() {
+    self.masterCredentials.get(function () {
       self.service.config.credentials = self.masterCredentials;
       var operation = self.params.RoleArn ?
         self.service.assumeRole : self.service.getSessionToken;
@@ -148613,7 +148867,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
   /**
    * @api private
    */
-  loadMasterCredentials: function loadMasterCredentials(masterCredentials) {
+  loadMasterCredentials: function loadMasterCredentials (masterCredentials) {
     this.masterCredentials = masterCredentials || AWS.config.credentials;
     while (this.masterCredentials.masterCredentials) {
       this.masterCredentials = this.masterCredentials.masterCredentials;
@@ -148627,13 +148881,13 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
   /**
    * @api private
    */
-  createClients: function() {
+  createClients: function () {
     this.service = this.service || new STS({params: this.params});
   }
 
 });
 
-},{"../../clients/sts":253,"../core":267}],273:[function(require,module,exports){
+},{"../../clients/sts":253,"../core":267}],274:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -148718,10 +148972,15 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
    * @see get
    */
   refresh: function refresh(callback) {
+    this.coalesceRefresh(callback || AWS.util.fn.callback);
+  },
+
+  /**
+   * @api private
+   */
+  load: function load(callback) {
     var self = this;
     self.createClients();
-    if (!callback) callback = function(err) { if (err) throw err; };
-
     self.service.assumeRoleWithWebIdentity(function (err, data) {
       self.data = null;
       if (!err) {
@@ -148745,7 +149004,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":253,"../core":267}],274:[function(require,module,exports){
+},{"../../clients/sts":253,"../core":267}],275:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var util = require('./util');
@@ -149104,7 +149363,7 @@ module.exports = {
   invalidateCachedEndpoint: invalidateCachedEndpoints,
 }
 }).call(this,require('_process'))
-},{"./core":267,"./util":341,"_process":356}],275:[function(require,module,exports){
+},{"./core":267,"./util":342,"_process":357}],276:[function(require,module,exports){
 var AWS = require('../core');
 var util = AWS.util;
 var typeOf = require('./types').typeOf;
@@ -149400,7 +149659,7 @@ function filterEmptySetValues(set) {
  */
 module.exports = AWS.DynamoDB.Converter;
 
-},{"../core":267,"./numberValue":277,"./set":278,"./types":280}],276:[function(require,module,exports){
+},{"../core":267,"./numberValue":278,"./set":279,"./types":281}],277:[function(require,module,exports){
 var AWS = require('../core');
 var Translator = require('./translator');
 var DynamoDBSet = require('./set');
@@ -149980,7 +150239,7 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
  */
 module.exports = AWS.DynamoDB.DocumentClient;
 
-},{"../core":267,"./set":278,"./translator":279}],277:[function(require,module,exports){
+},{"../core":267,"./set":279,"./translator":280}],278:[function(require,module,exports){
 var util = require('../core').util;
 
 /**
@@ -150024,7 +150283,7 @@ var DynamoDBNumberValue = util.inherit({
  * @api private
  */
 module.exports = DynamoDBNumberValue;
-},{"../core":267}],278:[function(require,module,exports){
+},{"../core":267}],279:[function(require,module,exports){
 var util = require('../core').util;
 var typeOf = require('./types').typeOf;
 
@@ -150089,7 +150348,7 @@ var DynamoDBSet = util.inherit({
  */
 module.exports = DynamoDBSet;
 
-},{"../core":267,"./types":280}],279:[function(require,module,exports){
+},{"../core":267,"./types":281}],280:[function(require,module,exports){
 var util = require('../core').util;
 var convert = require('./converter');
 
@@ -150178,7 +150437,7 @@ Translator.prototype.translateScalar = function(value, shape) {
  */
 module.exports = Translator;
 
-},{"../core":267,"./converter":275}],280:[function(require,module,exports){
+},{"../core":267,"./converter":276}],281:[function(require,module,exports){
 var util = require('../core').util;
 
 function typeOf(data) {
@@ -150229,7 +150488,7 @@ module.exports = {
   isBinary: isBinary
 };
 
-},{"../core":267}],281:[function(require,module,exports){
+},{"../core":267}],282:[function(require,module,exports){
 var eventMessageChunker = require('../event-stream/event-message-chunker').eventMessageChunker;
 var parseEvent = require('./parse-event').parseEvent;
 
@@ -150251,7 +150510,7 @@ function createEventStream(body, parser, model) {
 module.exports = {
     createEventStream: createEventStream
 };
-},{"../event-stream/event-message-chunker":282,"./parse-event":284}],282:[function(require,module,exports){
+},{"../event-stream/event-message-chunker":283,"./parse-event":285}],283:[function(require,module,exports){
 /**
  * Takes in a buffer of event messages and splits them into individual messages.
  * @param {Buffer} buffer
@@ -150282,7 +150541,7 @@ function eventMessageChunker(buffer) {
 module.exports = {
     eventMessageChunker: eventMessageChunker
 };
-},{}],283:[function(require,module,exports){
+},{}],284:[function(require,module,exports){
 var util = require('../core').util;
 var toBuffer = require('./to-buffer').toBuffer;
 
@@ -150376,7 +150635,7 @@ function negate(bytes) {
 module.exports = {
     Int64: Int64
 };
-},{"../core":267,"./to-buffer":287}],284:[function(require,module,exports){
+},{"../core":267,"./to-buffer":288}],285:[function(require,module,exports){
 var parseMessage = require('./parse-message').parseMessage;
 
 /**
@@ -150450,7 +150709,7 @@ function parseError(message) {
 module.exports = {
     parseEvent: parseEvent
 };
-},{"./parse-message":285}],285:[function(require,module,exports){
+},{"./parse-message":286}],286:[function(require,module,exports){
 var Int64 = require('./int64').Int64;
 
 var splitMessage = require('./split-message').splitMessage;
@@ -150579,7 +150838,7 @@ function parseMessage(message) {
 module.exports = {
     parseMessage: parseMessage
 };
-},{"./int64":283,"./split-message":286}],286:[function(require,module,exports){
+},{"./int64":284,"./split-message":287}],287:[function(require,module,exports){
 var util = require('../core').util;
 var toBuffer = require('./to-buffer').toBuffer;
 
@@ -150650,7 +150909,7 @@ function splitMessage(message) {
 module.exports = {
     splitMessage: splitMessage
 };
-},{"../core":267,"./to-buffer":287}],287:[function(require,module,exports){
+},{"../core":267,"./to-buffer":288}],288:[function(require,module,exports){
 var Buffer = require('../core').util.Buffer;
 /**
  * Converts data into Buffer.
@@ -150669,7 +150928,7 @@ function toBuffer(data, encoding) {
 module.exports = {
     toBuffer: toBuffer
 };
-},{"../core":267}],288:[function(require,module,exports){
+},{"../core":267}],289:[function(require,module,exports){
 var AWS = require('./core');
 var SequentialExecutor = require('./sequential_executor');
 var DISCOVER_ENDPOINT = require('./discover_endpoint').discoverEndpoint;
@@ -151278,7 +151537,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":267,"./discover_endpoint":274,"./protocol/json":302,"./protocol/query":303,"./protocol/rest":304,"./protocol/rest_json":305,"./protocol/rest_xml":306,"./sequential_executor":316,"util":367}],289:[function(require,module,exports){
+},{"./core":267,"./discover_endpoint":275,"./protocol/json":303,"./protocol/query":304,"./protocol/rest":305,"./protocol/rest_json":306,"./protocol/rest_xml":307,"./sequential_executor":317,"util":368}],290:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -151515,7 +151774,7 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":267}],290:[function(require,module,exports){
+},{"./core":267}],291:[function(require,module,exports){
 var AWS = require('../core');
 var EventEmitter = require('events').EventEmitter;
 require('../http');
@@ -151653,7 +151912,7 @@ AWS.HttpClient.prototype = AWS.XHRClient.prototype;
  */
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":267,"../http":289,"events":351}],291:[function(require,module,exports){
+},{"../core":267,"../http":290,"events":352}],292:[function(require,module,exports){
 var util = require('../util');
 
 function JsonBuilder() { }
@@ -151714,7 +151973,7 @@ function translateScalar(value, shape) {
  */
 module.exports = JsonBuilder;
 
-},{"../util":341}],292:[function(require,module,exports){
+},{"../util":342}],293:[function(require,module,exports){
 var util = require('../util');
 
 function JsonParser() { }
@@ -151783,7 +152042,7 @@ function translateScalar(value, shape) {
  */
 module.exports = JsonParser;
 
-},{"../util":341}],293:[function(require,module,exports){
+},{"../util":342}],294:[function(require,module,exports){
 var Collection = require('./collection');
 var Operation = require('./operation');
 var Shape = require('./shape');
@@ -151859,7 +152118,7 @@ function Api(api, options) {
  */
 module.exports = Api;
 
-},{"../util":341,"./collection":294,"./operation":295,"./paginator":296,"./resource_waiter":297,"./shape":298}],294:[function(require,module,exports){
+},{"../util":342,"./collection":295,"./operation":296,"./paginator":297,"./resource_waiter":298,"./shape":299}],295:[function(require,module,exports){
 var memoizedProperty = require('../util').memoizedProperty;
 
 function memoize(name, value, factory, nameTr) {
@@ -151885,7 +152144,7 @@ function Collection(iterable, options, factory, nameTr, callback) {
  */
 module.exports = Collection;
 
-},{"../util":341}],295:[function(require,module,exports){
+},{"../util":342}],296:[function(require,module,exports){
 var Shape = require('./shape');
 
 var util = require('../util');
@@ -152000,7 +152259,7 @@ function hasEventStream(topLevelShape) {
  */
 module.exports = Operation;
 
-},{"../util":341,"./shape":298}],296:[function(require,module,exports){
+},{"../util":342,"./shape":299}],297:[function(require,module,exports){
 var property = require('../util').property;
 
 function Paginator(name, paginator) {
@@ -152016,7 +152275,7 @@ function Paginator(name, paginator) {
  */
 module.exports = Paginator;
 
-},{"../util":341}],297:[function(require,module,exports){
+},{"../util":342}],298:[function(require,module,exports){
 var util = require('../util');
 var property = util.property;
 
@@ -152051,7 +152310,7 @@ function ResourceWaiter(name, waiter, options) {
  */
 module.exports = ResourceWaiter;
 
-},{"../util":341}],298:[function(require,module,exports){
+},{"../util":342}],299:[function(require,module,exports){
 var Collection = require('./collection');
 
 var util = require('../util');
@@ -152443,7 +152702,7 @@ Shape.shapes = {
  */
 module.exports = Shape;
 
-},{"../util":341,"./collection":294}],299:[function(require,module,exports){
+},{"../util":342,"./collection":295}],300:[function(require,module,exports){
 var AWS = require('./core');
 
 /**
@@ -152715,7 +152974,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":267}],300:[function(require,module,exports){
+},{"./core":267}],301:[function(require,module,exports){
 var AWS = require('../core');
 var rest = AWS.Protocol.Rest;
 
@@ -152832,7 +153091,7 @@ AWS.Polly.Presigner = AWS.util.inherit({
     }
 });
 
-},{"../core":267}],301:[function(require,module,exports){
+},{"../core":267}],302:[function(require,module,exports){
 var util =  require('../util');
 var AWS = require('../core');
 
@@ -152922,7 +153181,7 @@ function validateHostname(hostname) {
 module.exports = {
   populateHostPrefix: populateHostPrefix
 }
-},{"../core":267,"../util":341}],302:[function(require,module,exports){
+},{"../core":267,"../util":342}],303:[function(require,module,exports){
 var util = require('../util');
 var JsonBuilder = require('../json/builder');
 var JsonParser = require('../json/parser');
@@ -152997,7 +153256,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":291,"../json/parser":292,"../util":341,"./helpers":301}],303:[function(require,module,exports){
+},{"../json/builder":292,"../json/parser":293,"../util":342,"./helpers":302}],304:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var QueryParamSerializer = require('../query/query_param_serializer');
@@ -153109,7 +153368,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":267,"../model/shape":298,"../query/query_param_serializer":307,"../util":341,"./helpers":301}],304:[function(require,module,exports){
+},{"../core":267,"../model/shape":299,"../query/query_param_serializer":308,"../util":342,"./helpers":302}],305:[function(require,module,exports){
 var util = require('../util');
 var populateHostPrefix = require('./helpers').populateHostPrefix;
 
@@ -153259,7 +153518,7 @@ module.exports = {
   generateURI: generateURI
 };
 
-},{"../util":341,"./helpers":301}],305:[function(require,module,exports){
+},{"../util":342,"./helpers":302}],306:[function(require,module,exports){
 var util = require('../util');
 var Rest = require('./rest');
 var Json = require('./json');
@@ -153357,7 +153616,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":291,"../json/parser":292,"../util":341,"./json":302,"./rest":304}],306:[function(require,module,exports){
+},{"../json/builder":292,"../json/parser":293,"../util":342,"./json":303,"./rest":305}],307:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var Rest = require('./rest');
@@ -153467,7 +153726,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":267,"../util":341,"./rest":304}],307:[function(require,module,exports){
+},{"../core":267,"../util":342,"./rest":305}],308:[function(require,module,exports){
 var util = require('../util');
 
 function QueryParamSerializer() {
@@ -153553,7 +153812,7 @@ function serializeMember(name, value, rules, fn) {
  */
 module.exports = QueryParamSerializer;
 
-},{"../util":341}],308:[function(require,module,exports){
+},{"../util":342}],309:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -153771,7 +154030,7 @@ AWS.RDS.Signer = AWS.util.inherit({
         return true;
     }
 });
-},{"../core":267}],309:[function(require,module,exports){
+},{"../core":267}],310:[function(require,module,exports){
 module.exports = {
   //provide realtime clock for performance measurement
   now: function now() {
@@ -153782,7 +154041,7 @@ module.exports = {
   }
 }
 
-},{}],310:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
 var util = require('./util');
 var regionConfig = require('./region_config_data.json');
 
@@ -153856,7 +154115,7 @@ function configureEndpoint(service) {
  */
 module.exports = configureEndpoint;
 
-},{"./region_config_data.json":311,"./util":341}],311:[function(require,module,exports){
+},{"./region_config_data.json":312,"./util":342}],312:[function(require,module,exports){
 module.exports={
   "rules": {
     "*/*": {
@@ -153921,7 +154180,7 @@ module.exports={
   }
 }
 
-},{}],312:[function(require,module,exports){
+},{}],313:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var AcceptorStateMachine = require('./state_machine');
@@ -154731,7 +154990,7 @@ AWS.util.addPromises(AWS.Request);
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,require('_process'))
-},{"./core":267,"./state_machine":340,"_process":356,"jmespath":355}],313:[function(require,module,exports){
+},{"./core":267,"./state_machine":341,"_process":357,"jmespath":356}],314:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -154937,7 +155196,7 @@ AWS.ResourceWaiter = inherit({
   }
 });
 
-},{"./core":267,"jmespath":355}],314:[function(require,module,exports){
+},{"./core":267,"jmespath":356}],315:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 var jmespath = require('jmespath');
@@ -155140,7 +155399,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":267,"jmespath":355}],315:[function(require,module,exports){
+},{"./core":267,"jmespath":356}],316:[function(require,module,exports){
 var AWS = require('../core');
 var byteLength = AWS.util.string.byteLength;
 var Buffer = AWS.util.Buffer;
@@ -155856,7 +156115,7 @@ AWS.util.addPromises(AWS.S3.ManagedUpload);
  */
 module.exports = AWS.S3.ManagedUpload;
 
-},{"../core":267}],316:[function(require,module,exports){
+},{"../core":267}],317:[function(require,module,exports){
 var AWS = require('./core');
 
 /**
@@ -156092,7 +156351,7 @@ AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.
  * @api private
  */
 module.exports = AWS.SequentialExecutor;
-},{"./core":267}],317:[function(require,module,exports){
+},{"./core":267}],318:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var Api = require('./model/api');
@@ -156890,7 +157149,7 @@ AWS.util.mixin(AWS.Service, AWS.SequentialExecutor);
 module.exports = AWS.Service;
 
 }).call(this,require('_process'))
-},{"./core":267,"./model/api":293,"./region_config":310,"_process":356}],318:[function(require,module,exports){
+},{"./core":267,"./model/api":294,"./region_config":311,"_process":357}],319:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.APIGateway.prototype, {
@@ -156921,7 +157180,7 @@ AWS.util.update(AWS.APIGateway.prototype, {
 });
 
 
-},{"../core":267}],319:[function(require,module,exports){
+},{"../core":267}],320:[function(require,module,exports){
 var AWS = require('../core');
 
 // pull in CloudFront signer
@@ -156935,7 +157194,7 @@ AWS.util.update(AWS.CloudFront.prototype, {
 
 });
 
-},{"../cloudfront/signer":265,"../core":267}],320:[function(require,module,exports){
+},{"../cloudfront/signer":265,"../core":267}],321:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.CognitoIdentity.prototype, {
@@ -156952,7 +157211,7 @@ AWS.util.update(AWS.CognitoIdentity.prototype, {
   }
 });
 
-},{"../core":267}],321:[function(require,module,exports){
+},{"../core":267}],322:[function(require,module,exports){
 var AWS = require('../core');
 require('../dynamodb/document_client');
 
@@ -157012,7 +157271,7 @@ AWS.util.update(AWS.DynamoDB.prototype, {
   }
 });
 
-},{"../core":267,"../dynamodb/document_client":276}],322:[function(require,module,exports){
+},{"../core":267,"../dynamodb/document_client":277}],323:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.EC2.prototype, {
@@ -157076,7 +157335,7 @@ AWS.util.update(AWS.EC2.prototype, {
   }
 });
 
-},{"../core":267}],323:[function(require,module,exports){
+},{"../core":267}],324:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -157178,7 +157437,7 @@ AWS.util.update(AWS.IotData.prototype, {
 
 });
 
-},{"../core":267}],324:[function(require,module,exports){
+},{"../core":267}],325:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.Lambda.prototype, {
@@ -157193,7 +157452,7 @@ AWS.util.update(AWS.Lambda.prototype, {
 });
 
 
-},{"../core":267}],325:[function(require,module,exports){
+},{"../core":267}],326:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.MachineLearning.prototype, {
@@ -157219,9 +157478,9 @@ AWS.util.update(AWS.MachineLearning.prototype, {
 
 });
 
-},{"../core":267}],326:[function(require,module,exports){
+},{"../core":267}],327:[function(require,module,exports){
 require('../polly/presigner');
-},{"../polly/presigner":300}],327:[function(require,module,exports){
+},{"../polly/presigner":301}],328:[function(require,module,exports){
 var AWS = require('../core');
 require('../rds/signer');
  /**
@@ -157283,7 +157542,7 @@ require('../rds/signer');
      });
    }
  });
-},{"../core":267,"../rds/signer":308}],328:[function(require,module,exports){
+},{"../core":267,"../rds/signer":309}],329:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.Route53.prototype, {
@@ -157317,7 +157576,7 @@ AWS.util.update(AWS.Route53.prototype, {
   }
 });
 
-},{"../core":267}],329:[function(require,module,exports){
+},{"../core":267}],330:[function(require,module,exports){
 var AWS = require('../core');
 var v4Credentials = require('../signers/v4_credentials');
 
@@ -158395,7 +158654,7 @@ AWS.util.update(AWS.S3.prototype, {
   }
 });
 
-},{"../core":267,"../s3/managed_upload":315,"../signers/v4_credentials":339}],330:[function(require,module,exports){
+},{"../core":267,"../s3/managed_upload":316,"../signers/v4_credentials":340}],331:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.SQS.prototype, {
@@ -158528,7 +158787,7 @@ AWS.util.update(AWS.SQS.prototype, {
   }
 });
 
-},{"../core":267}],331:[function(require,module,exports){
+},{"../core":267}],332:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.STS.prototype, {
@@ -158577,7 +158836,7 @@ AWS.util.update(AWS.STS.prototype, {
   }
 });
 
-},{"../core":267}],332:[function(require,module,exports){
+},{"../core":267}],333:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -158698,7 +158957,7 @@ AWS.Signers.Presign = inherit({
  */
 module.exports = AWS.Signers.Presign;
 
-},{"../core":267}],333:[function(require,module,exports){
+},{"../core":267}],334:[function(require,module,exports){
 var AWS = require('../core');
 
 var inherit = AWS.util.inherit;
@@ -158739,7 +158998,7 @@ require('./v4');
 require('./s3');
 require('./presign');
 
-},{"../core":267,"./presign":332,"./s3":334,"./v2":335,"./v3":336,"./v3https":337,"./v4":338}],334:[function(require,module,exports){
+},{"../core":267,"./presign":333,"./s3":335,"./v2":336,"./v3":337,"./v3https":338,"./v4":339}],335:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -158916,7 +159175,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.S3;
 
-},{"../core":267}],335:[function(require,module,exports){
+},{"../core":267}],336:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -158966,7 +159225,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.V2;
 
-},{"../core":267}],336:[function(require,module,exports){
+},{"../core":267}],337:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -159045,7 +159304,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.V3;
 
-},{"../core":267}],337:[function(require,module,exports){
+},{"../core":267}],338:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -159072,7 +159331,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
  */
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":267,"./v3":336}],338:[function(require,module,exports){
+},{"../core":267,"./v3":337}],339:[function(require,module,exports){
 var AWS = require('../core');
 var v4Credentials = require('./v4_credentials');
 var inherit = AWS.util.inherit;
@@ -159289,7 +159548,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
  */
 module.exports = AWS.Signers.V4;
 
-},{"../core":267,"./v4_credentials":339}],339:[function(require,module,exports){
+},{"../core":267,"./v4_credentials":340}],340:[function(require,module,exports){
 var AWS = require('../core');
 
 /**
@@ -159391,7 +159650,7 @@ module.exports = {
   }
 };
 
-},{"../core":267}],340:[function(require,module,exports){
+},{"../core":267}],341:[function(require,module,exports){
 function AcceptorStateMachine(states, state) {
   this.currentState = state || null;
   this.states = states || {};
@@ -159438,7 +159697,7 @@ AcceptorStateMachine.prototype.addState = function addState(name, acceptState, f
  */
 module.exports = AcceptorStateMachine;
 
-},{}],341:[function(require,module,exports){
+},{}],342:[function(require,module,exports){
 (function (process,setImmediate){
 /* eslint guard-for-in:0 */
 var AWS;
@@ -159653,6 +159912,7 @@ var util = {
 
   fn: {
     noop: function() {},
+    callback: function (err) { if (err) throw err; },
 
     /**
      * Turn a synchronous function into as "async" function by making it call
@@ -160382,7 +160642,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require('_process'),require("timers").setImmediate)
-},{"../apis/metadata.json":123,"./core":267,"_process":356,"fs":349,"timers":364,"uuid":368}],342:[function(require,module,exports){
+},{"../apis/metadata.json":123,"./core":267,"_process":357,"fs":350,"timers":365,"uuid":369}],343:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -160582,7 +160842,7 @@ function parseUnknown(xml) {
  */
 module.exports = DomXmlParser;
 
-},{"../model/shape":298,"../util":341}],343:[function(require,module,exports){
+},{"../model/shape":299,"../util":342}],344:[function(require,module,exports){
 var util = require('../util');
 var XmlNode = require('./xml-node').XmlNode;
 var XmlText = require('./xml-text').XmlText;
@@ -160686,7 +160946,7 @@ function applyNamespaces(xml, shape, isRoot) {
  */
 module.exports = XmlBuilder;
 
-},{"../util":341,"./xml-node":346,"./xml-text":347}],344:[function(require,module,exports){
+},{"../util":342,"./xml-node":347,"./xml-text":348}],345:[function(require,module,exports){
 /**
  * Escapes characters that can not be in an XML attribute.
  */
@@ -160700,7 +160960,7 @@ function escapeAttribute(value) {
 module.exports = {
     escapeAttribute: escapeAttribute
 };
-},{}],345:[function(require,module,exports){
+},{}],346:[function(require,module,exports){
 /**
  * Escapes characters that can not be in an XML element.
  */
@@ -160714,7 +160974,7 @@ function escapeElement(value) {
 module.exports = {
     escapeElement: escapeElement
 };
-},{}],346:[function(require,module,exports){
+},{}],347:[function(require,module,exports){
 var escapeAttribute = require('./escape-attribute').escapeAttribute;
 
 /**
@@ -160760,7 +161020,7 @@ XmlNode.prototype.toString = function () {
 module.exports = {
     XmlNode: XmlNode
 };
-},{"./escape-attribute":344}],347:[function(require,module,exports){
+},{"./escape-attribute":345}],348:[function(require,module,exports){
 var escapeElement = require('./escape-element').escapeElement;
 
 /**
@@ -160781,7 +161041,7 @@ XmlText.prototype.toString = function () {
 module.exports = {
     XmlText: XmlText
 };
-},{"./escape-element":345}],348:[function(require,module,exports){
+},{"./escape-element":346}],349:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -160934,9 +161194,9 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],349:[function(require,module,exports){
-
 },{}],350:[function(require,module,exports){
+
+},{}],351:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -162729,7 +162989,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":348,"ieee754":352,"isarray":354}],351:[function(require,module,exports){
+},{"base64-js":349,"ieee754":353,"isarray":355}],352:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -163033,7 +163293,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],352:[function(require,module,exports){
+},{}],353:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -163119,7 +163379,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],353:[function(require,module,exports){
+},{}],354:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -163144,14 +163404,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],354:[function(require,module,exports){
+},{}],355:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],355:[function(require,module,exports){
+},{}],356:[function(require,module,exports){
 (function(exports) {
   "use strict";
 
@@ -164820,7 +165080,7 @@ module.exports = Array.isArray || function (arr) {
   exports.strictDeepEqual = strictDeepEqual;
 })(typeof exports === "undefined" ? this.jmespath = {} : exports);
 
-},{}],356:[function(require,module,exports){
+},{}],357:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -165006,7 +165266,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],357:[function(require,module,exports){
+},{}],358:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 ;(function(root) {
@@ -165540,7 +165800,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],358:[function(require,module,exports){
+},{}],359:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -165626,7 +165886,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],359:[function(require,module,exports){
+},{}],360:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -165713,13 +165973,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],360:[function(require,module,exports){
+},{}],361:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":358,"./encode":359}],361:[function(require,module,exports){
+},{"./decode":359,"./encode":360}],362:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -165801,7 +166061,7 @@ module.exports = function(qs, sep, eq, options) {
   return obj;
 };
 
-},{}],362:[function(require,module,exports){
+},{}],363:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -165867,9 +166127,9 @@ module.exports = function(obj, sep, eq, name) {
          encodeURIComponent(stringifyPrimitive(obj));
 };
 
-},{}],363:[function(require,module,exports){
-arguments[4][360][0].apply(exports,arguments)
-},{"./decode":361,"./encode":362,"dup":360}],364:[function(require,module,exports){
+},{}],364:[function(require,module,exports){
+arguments[4][361][0].apply(exports,arguments)
+},{"./decode":362,"./encode":363,"dup":361}],365:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -165948,7 +166208,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":356,"timers":364}],365:[function(require,module,exports){
+},{"process/browser.js":357,"timers":365}],366:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -166657,14 +166917,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":357,"querystring":360}],366:[function(require,module,exports){
+},{"punycode":358,"querystring":361}],367:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],367:[function(require,module,exports){
+},{}],368:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -167254,7 +167514,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":366,"_process":356,"inherits":353}],368:[function(require,module,exports){
+},{"./support/isBuffer":367,"_process":357,"inherits":354}],369:[function(require,module,exports){
 var v1 = require('./v1');
 var v4 = require('./v4');
 
@@ -167264,7 +167524,7 @@ uuid.v4 = v4;
 
 module.exports = uuid;
 
-},{"./v1":371,"./v4":372}],369:[function(require,module,exports){
+},{"./v1":372,"./v4":373}],370:[function(require,module,exports){
 /**
  * Convert array of 16 byte values to UUID string format of the form:
  * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
@@ -167289,7 +167549,7 @@ function bytesToUuid(buf, offset) {
 
 module.exports = bytesToUuid;
 
-},{}],370:[function(require,module,exports){
+},{}],371:[function(require,module,exports){
 (function (global){
 // Unique ID creation requires a high quality random # generator.  In the
 // browser this is a little complicated due to unknown quality of Math.random()
@@ -167326,7 +167586,7 @@ if (!rng) {
 module.exports = rng;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],371:[function(require,module,exports){
+},{}],372:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -167428,7 +167688,7 @@ function v1(options, buf, offset) {
 
 module.exports = v1;
 
-},{"./lib/bytesToUuid":369,"./lib/rng":370}],372:[function(require,module,exports){
+},{"./lib/bytesToUuid":370,"./lib/rng":371}],373:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -167459,7 +167719,7 @@ function v4(options, buf, offset) {
 
 module.exports = v4;
 
-},{"./lib/bytesToUuid":369,"./lib/rng":370}],373:[function(require,module,exports){
+},{"./lib/bytesToUuid":370,"./lib/rng":371}],374:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var LRU_1 = require("./utils/LRU");
@@ -167529,7 +167789,7 @@ var EndpointCache = /** @class */ (function () {
     return EndpointCache;
 }());
 exports.EndpointCache = EndpointCache;
-},{"./utils/LRU":374}],374:[function(require,module,exports){
+},{"./utils/LRU":375}],375:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var LinkedListNode = /** @class */ (function () {
@@ -167637,8 +167897,8 @@ var LRUCache = /** @class */ (function () {
     return LRUCache;
 }());
 exports.LRUCache = LRUCache;
-},{}],375:[function(require,module,exports){
-// AWS SDK for JavaScript v2.373.0
+},{}],376:[function(require,module,exports){
+// AWS SDK for JavaScript v2.374.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
@@ -167660,5 +167920,5 @@ if (typeof self !== 'undefined') self.AWS = AWS;
  * browser builder will strip out this line if services are supplied on the command line.
  */
 require('../clients/browser_default');
-},{"../clients/browser_default":190,"./browser_loader":264,"./core":267}]},{},[375]);
+},{"../clients/browser_default":190,"./browser_loader":264,"./core":267}]},{},[376]);
 

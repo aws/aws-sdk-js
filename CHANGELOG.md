@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.373.0-->
+<!--LATEST=2.374.0-->
 <!--ENTRYINSERT-->
+
+## 2.374.0
+* feature: Connect: This update adds the GetContactAttributes operation to retrieve the attributes associated with a contact.
+* feature: MediaStore: This release adds Delete Object Lifecycling to AWS MediaStore Containers.
 
 ## 2.373.0
 * feature: AlexaForBusiness: Alexa for Business now allows IT administrators to create ad-hoc or scheduled usage reports, which help customers understand how Alexa is used in their workplace. To learn how to create usage reports, see https://docs.aws.amazon.com/a4b/latest/ag/creating-reports.html
