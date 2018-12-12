@@ -2687,6 +2687,10 @@ declare namespace SageMaker {
      * The ParameterRanges object that specifies the ranges of hyperparameters that this tuning job searches.
      */
     ParameterRanges: ParameterRanges;
+    /**
+     * Specifies whether to use early stopping for training jobs launched by the hyperparameter tuning job. One of the following values:  OFF  Training jobs launched by the hyperparameter tuning job do not use early stopping.  AUTO  Amazon SageMaker stops training jobs launched by the hyperparameter tuning job when they are no longer improving as measured by the objective metric of the tuning job.  
+     */
+    TrainingJobEarlyStoppingType?: TrainingJobEarlyStoppingType;
   }
   export type HyperParameterTuningJobName = string;
   export interface HyperParameterTuningJobObjective {
@@ -4682,6 +4686,7 @@ declare namespace SageMaker {
      */
     StoppingCondition: StoppingCondition;
   }
+  export type TrainingJobEarlyStoppingType = "Off"|"Auto"|string;
   export type TrainingJobName = string;
   export type TrainingJobSortByOptions = "Name"|"CreationTime"|"Status"|"FinalObjectiveMetricValue"|string;
   export type TrainingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;

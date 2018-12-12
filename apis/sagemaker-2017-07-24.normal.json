@@ -4403,6 +4403,10 @@
         "ParameterRanges": {
           "shape": "ParameterRanges",
           "documentation": "<p>The <a>ParameterRanges</a> object that specifies the ranges of hyperparameters that this tuning job searches.</p>"
+        },
+        "TrainingJobEarlyStoppingType": {
+          "shape": "TrainingJobEarlyStoppingType",
+          "documentation": "<p>Specifies whether to use early stopping for training jobs launched by the hyperparameter tuning job. One of the following values:</p> <dl> <dt>OFF</dt> <dd> <p>Training jobs launched by the hyperparameter tuning job do not use early stopping.</p> </dd> <dt>AUTO</dt> <dd> <p>Amazon SageMaker stops training jobs launched by the hyperparameter tuning job when they are no longer improving as measured by the objective metric of the tuning job.</p> </dd> </dl>"
         }
       },
       "documentation": "<p>Configures a hyperparameter tuning job.</p>"
@@ -7937,6 +7941,13 @@
         }
       },
       "documentation": "<p>Defines the input needed to run a training job using the algorithm.</p>"
+    },
+    "TrainingJobEarlyStoppingType": {
+      "type": "string",
+      "enum": [
+        "Off",
+        "Auto"
+      ]
     },
     "TrainingJobName": {
       "type": "string",

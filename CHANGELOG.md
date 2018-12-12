@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.374.0-->
+<!--LATEST=2.375.0-->
 <!--ENTRYINSERT-->
+
+## 2.375.0
+* feature: EKS: Added support for updating kubernetes version of Amazon EKS clusters.
+* feature: Glue: API Update for Glue: this update enables encryption of password inside connection objects stored in AWS Glue Data Catalog using DataCatalogEncryptionSettings.  In addition, a new "HidePassword" flag is added to GetConnection and GetConnections to return connections without passwords.
+* feature: Route53: You can now specify a new region, eu-north-1 (in Stockholm, Sweden), as a region for latency-based or geoproximity routing.
+* feature: SageMaker: Amazon SageMaker Automatic Model Tuning now supports early stopping of training jobs. With early stopping, training jobs that are unlikely to generate good models will be automatically stopped during a Hyperparameter Tuning Job.
 
 ## 2.374.0
 * feature: Connect: This update adds the GetContactAttributes operation to retrieve the attributes associated with a contact.

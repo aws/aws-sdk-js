@@ -3187,7 +3187,7 @@
         },
         "ConnectionProperties": {
           "shape": "ConnectionProperties",
-          "documentation": "<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is \"<code>USERNAME</code>\".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The S3 path of the a jar file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use).</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for the JDBC connection.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client. The default is false.</p> </li> </ul>"
+          "documentation": "<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is \"<code>USERNAME</code>\".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the key you designate to encrypt the password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The S3 path of the a jar file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use).</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for the JDBC connection.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client. The default is false.</p> </li> </ul>"
         },
         "PhysicalConnectionRequirements": {
           "shape": "PhysicalConnectionRequirements",
@@ -3252,6 +3252,23 @@
     "ConnectionName": {
       "type": "string"
     },
+    "ConnectionPasswordEncryption": {
+      "type": "structure",
+      "required": [
+        "ReturnConnectionPasswordEncrypted"
+      ],
+      "members": {
+        "ReturnConnectionPasswordEncrypted": {
+          "shape": "Boolean",
+          "documentation": "<p>When the <code>ReturnConnectionPasswordEncrypted</code> flag is set to \"true\", passwords remain encrypted in the responses of <code>GetConnection</code> and <code>GetConnections</code>. This encryption takes effect independently from catalog encryption. </p>"
+        },
+        "AwsKmsKeyId": {
+          "shape": "NameString",
+          "documentation": "<p>A KMS key used to protect access to the JDBC source. </p> <p>All users in your account should be granted the <code>kms:encrypt</code> permission to encrypt passwords before storing them in the Data Catalog (through the AWS Glue <code>CreateConnection</code> operation).</p> <p>The decrypt permission should be granted only to KMS key admins and IAM roles designated for AWS Glue crawlers.</p>"
+        }
+      },
+      "documentation": "<p>The data structure used by the Data Catalog to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.</p> <p>When a <code>CreationConnection</code> request arrives containing a password, the Data Catalog first encrypts the password using your KMS key, and then encrypts the whole connection object again if catalog encryption is also enabled.</p> <p>This encryption requires that you set KMS key permissions to enable or restrict access on the password key according to your security requirements. For example, you may want only admin users to have decrypt permission on the password key.</p>"
+    },
     "ConnectionProperties": {
       "type": "map",
       "key": {
@@ -3270,6 +3287,7 @@
         "PORT",
         "USERNAME",
         "PASSWORD",
+        "ENCRYPTED_PASSWORD",
         "JDBC_DRIVER_JAR_URI",
         "JDBC_DRIVER_CLASS_NAME",
         "JDBC_ENGINE",
@@ -4049,6 +4067,10 @@
         "EncryptionAtRest": {
           "shape": "EncryptionAtRest",
           "documentation": "<p>Specifies encryption-at-rest configuration for the Data Catalog.</p>"
+        },
+        "ConnectionPasswordEncryption": {
+          "shape": "ConnectionPasswordEncryption",
+          "documentation": "<p>When password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.</p>"
         }
       },
       "documentation": "<p>Contains configuration information for maintaining Data Catalog security.</p>"
@@ -4725,6 +4747,10 @@
         "Name": {
           "shape": "NameString",
           "documentation": "<p>The name of the connection definition to retrieve.</p>"
+        },
+        "HidePassword": {
+          "shape": "Boolean",
+          "documentation": "<p>Allow you to retrieve the connection metadata without displaying the password. For instance, the AWS Glue console uses this flag to retrieve connections, since the console does not display passwords. Set this parameter where the caller may not have permission to use the KMS key to decrypt the password, but does have permission to access the rest of the connection metadata (that is, the other connection properties).</p>"
         }
       }
     },
@@ -4761,6 +4787,10 @@
         "Filter": {
           "shape": "GetConnectionsFilter",
           "documentation": "<p>A filter that controls which connections will be returned.</p>"
+        },
+        "HidePassword": {
+          "shape": "Boolean",
+          "documentation": "<p>Allow you to retrieve the connection metadata without displaying the password. For instance, the AWS Glue console uses this flag to retrieve connections, since the console does not display passwords. Set this parameter where the caller may not have permission to use the KMS key to decrypt the password, but does have permission to access the rest of the connection metadata (that is, the other connection properties).</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -7052,7 +7082,7 @@
         },
         "PartitionKeys": {
           "shape": "ColumnList",
-          "documentation": "<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p>"
+          "documentation": "<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p> <p>When creating a table used by Athena, and you do not specify any <code>partitionKeys</code>, you must at least set the value of <code>partitionKeys</code> to an empty list. For example:</p> <p> <code>\"PartitionKeys\": []</code> </p>"
         },
         "ViewOriginalText": {
           "shape": "ViewTextString",
@@ -7133,7 +7163,7 @@
         },
         "PartitionKeys": {
           "shape": "ColumnList",
-          "documentation": "<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p>"
+          "documentation": "<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p> <p>When creating a table used by Athena, and you do not specify any <code>partitionKeys</code>, you must at least set the value of <code>partitionKeys</code> to an empty list. For example:</p> <p> <code>\"PartitionKeys\": []</code> </p>"
         },
         "ViewOriginalText": {
           "shape": "ViewTextString",
