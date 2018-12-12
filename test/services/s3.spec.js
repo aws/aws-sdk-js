@@ -545,6 +545,15 @@ describe('AWS.S3', function() {
       expect(req.path).to.equal('/bucket');
     });
 
+    it('allows user to use key that is substring of bucket', function() {
+      var req = build('putObject', {
+        Bucket: 'foobar',
+        Key: 'foo'
+      })
+      expect(req.path).to.equal('/foo');
+      expect(req.virtualHostedBucket).to.equal('foobar');
+    });
+
     it('does not allow non-bucket operations with s3BucketEndpoint set', function() {
       s3 = new AWS.S3({
         endpoint: 'foo.bar',
