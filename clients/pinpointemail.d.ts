@@ -36,6 +36,14 @@ declare class PinpointEmail extends Service {
    */
   createDedicatedIpPool(callback?: (err: AWSError, data: PinpointEmail.Types.CreateDedicatedIpPoolResponse) => void): Request<PinpointEmail.Types.CreateDedicatedIpPoolResponse, AWSError>;
   /**
+   * Create a new predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon Pinpoint then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the GetDeliverabilityTestReport operation to view the results of the test.
+   */
+  createDeliverabilityTestReport(params: PinpointEmail.Types.CreateDeliverabilityTestReportRequest, callback?: (err: AWSError, data: PinpointEmail.Types.CreateDeliverabilityTestReportResponse) => void): Request<PinpointEmail.Types.CreateDeliverabilityTestReportResponse, AWSError>;
+  /**
+   * Create a new predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon Pinpoint then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the GetDeliverabilityTestReport operation to view the results of the test.
+   */
+  createDeliverabilityTestReport(callback?: (err: AWSError, data: PinpointEmail.Types.CreateDeliverabilityTestReportResponse) => void): Request<PinpointEmail.Types.CreateDeliverabilityTestReportResponse, AWSError>;
+  /**
    * Verifies an email identity for use with Amazon Pinpoint. In Amazon Pinpoint, an identity is an email address or domain that you use when you send email. Before you can use an identity to send email with Amazon Pinpoint, you first have to verify it. By verifying an address, you demonstrate that you're the owner of the address, and that you've given Amazon Pinpoint permission to send email from the address. When you verify an email address, Amazon Pinpoint sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon Pinpoint detects these records in the DNS configuration for your domain. It usually takes around 72 hours to complete the domain verification process.
    */
   createEmailIdentity(params: PinpointEmail.Types.CreateEmailIdentityRequest, callback?: (err: AWSError, data: PinpointEmail.Types.CreateEmailIdentityResponse) => void): Request<PinpointEmail.Types.CreateEmailIdentityResponse, AWSError>;
@@ -84,6 +92,14 @@ declare class PinpointEmail extends Service {
    */
   getAccount(callback?: (err: AWSError, data: PinpointEmail.Types.GetAccountResponse) => void): Request<PinpointEmail.Types.GetAccountResponse, AWSError>;
   /**
+   * Retrieve a list of the blacklists that your dedicated IP addresses appear on.
+   */
+  getBlacklistReports(params: PinpointEmail.Types.GetBlacklistReportsRequest, callback?: (err: AWSError, data: PinpointEmail.Types.GetBlacklistReportsResponse) => void): Request<PinpointEmail.Types.GetBlacklistReportsResponse, AWSError>;
+  /**
+   * Retrieve a list of the blacklists that your dedicated IP addresses appear on.
+   */
+  getBlacklistReports(callback?: (err: AWSError, data: PinpointEmail.Types.GetBlacklistReportsResponse) => void): Request<PinpointEmail.Types.GetBlacklistReportsResponse, AWSError>;
+  /**
    * Get information about an existing configuration set, including the dedicated IP pool that it's associated with, whether or not it's enabled for sending email, and more. In Amazon Pinpoint, configuration sets are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.
    */
   getConfigurationSet(params: PinpointEmail.Types.GetConfigurationSetRequest, callback?: (err: AWSError, data: PinpointEmail.Types.GetConfigurationSetResponse) => void): Request<PinpointEmail.Types.GetConfigurationSetResponse, AWSError>;
@@ -116,6 +132,30 @@ declare class PinpointEmail extends Service {
    */
   getDedicatedIps(callback?: (err: AWSError, data: PinpointEmail.Types.GetDedicatedIpsResponse) => void): Request<PinpointEmail.Types.GetDedicatedIpsResponse, AWSError>;
   /**
+   * Show the status of the Deliverability dashboard. When the Deliverability dashboard is enabled, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, AWS prorates the monthly charge based on how many days have elapsed in the current calendar month.
+   */
+  getDeliverabilityDashboardOptions(params: PinpointEmail.Types.GetDeliverabilityDashboardOptionsRequest, callback?: (err: AWSError, data: PinpointEmail.Types.GetDeliverabilityDashboardOptionsResponse) => void): Request<PinpointEmail.Types.GetDeliverabilityDashboardOptionsResponse, AWSError>;
+  /**
+   * Show the status of the Deliverability dashboard. When the Deliverability dashboard is enabled, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, AWS prorates the monthly charge based on how many days have elapsed in the current calendar month.
+   */
+  getDeliverabilityDashboardOptions(callback?: (err: AWSError, data: PinpointEmail.Types.GetDeliverabilityDashboardOptionsResponse) => void): Request<PinpointEmail.Types.GetDeliverabilityDashboardOptionsResponse, AWSError>;
+  /**
+   * Retrieve the results of a predictive inbox placement test.
+   */
+  getDeliverabilityTestReport(params: PinpointEmail.Types.GetDeliverabilityTestReportRequest, callback?: (err: AWSError, data: PinpointEmail.Types.GetDeliverabilityTestReportResponse) => void): Request<PinpointEmail.Types.GetDeliverabilityTestReportResponse, AWSError>;
+  /**
+   * Retrieve the results of a predictive inbox placement test.
+   */
+  getDeliverabilityTestReport(callback?: (err: AWSError, data: PinpointEmail.Types.GetDeliverabilityTestReportResponse) => void): Request<PinpointEmail.Types.GetDeliverabilityTestReportResponse, AWSError>;
+  /**
+   * Retrieve inbox placement and engagement rates for the domains that you use to send email.
+   */
+  getDomainStatisticsReport(params: PinpointEmail.Types.GetDomainStatisticsReportRequest, callback?: (err: AWSError, data: PinpointEmail.Types.GetDomainStatisticsReportResponse) => void): Request<PinpointEmail.Types.GetDomainStatisticsReportResponse, AWSError>;
+  /**
+   * Retrieve inbox placement and engagement rates for the domains that you use to send email.
+   */
+  getDomainStatisticsReport(callback?: (err: AWSError, data: PinpointEmail.Types.GetDomainStatisticsReportResponse) => void): Request<PinpointEmail.Types.GetDomainStatisticsReportResponse, AWSError>;
+  /**
    * Provides information about a specific identity associated with your Amazon Pinpoint account, including the identity's verification status, its DKIM authentication status, and its custom Mail-From settings.
    */
   getEmailIdentity(params: PinpointEmail.Types.GetEmailIdentityRequest, callback?: (err: AWSError, data: PinpointEmail.Types.GetEmailIdentityResponse) => void): Request<PinpointEmail.Types.GetEmailIdentityResponse, AWSError>;
@@ -139,6 +179,14 @@ declare class PinpointEmail extends Service {
    * List all of the dedicated IP pools that exist in your Amazon Pinpoint account in the current AWS Region.
    */
   listDedicatedIpPools(callback?: (err: AWSError, data: PinpointEmail.Types.ListDedicatedIpPoolsResponse) => void): Request<PinpointEmail.Types.ListDedicatedIpPoolsResponse, AWSError>;
+  /**
+   * Show a list of the predictive inbox placement tests that you've performed, regardless of their statuses. For predictive inbox placement tests that are complete, you can use the GetDeliverabilityTestReport operation to view the results.
+   */
+  listDeliverabilityTestReports(params: PinpointEmail.Types.ListDeliverabilityTestReportsRequest, callback?: (err: AWSError, data: PinpointEmail.Types.ListDeliverabilityTestReportsResponse) => void): Request<PinpointEmail.Types.ListDeliverabilityTestReportsResponse, AWSError>;
+  /**
+   * Show a list of the predictive inbox placement tests that you've performed, regardless of their statuses. For predictive inbox placement tests that are complete, you can use the GetDeliverabilityTestReport operation to view the results.
+   */
+  listDeliverabilityTestReports(callback?: (err: AWSError, data: PinpointEmail.Types.ListDeliverabilityTestReportsResponse) => void): Request<PinpointEmail.Types.ListDeliverabilityTestReportsResponse, AWSError>;
   /**
    * Returns a list of all of the email identities that are associated with your Amazon Pinpoint account. An identity can be either an email address or a domain. This operation returns identities that are verified as well as those that aren't.
    */
@@ -212,6 +260,14 @@ declare class PinpointEmail extends Service {
    */
   putDedicatedIpWarmupAttributes(callback?: (err: AWSError, data: PinpointEmail.Types.PutDedicatedIpWarmupAttributesResponse) => void): Request<PinpointEmail.Types.PutDedicatedIpWarmupAttributesResponse, AWSError>;
   /**
+   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, we prorate the monthly charge based on how many days have elapsed in the current calendar month.
+   */
+  putDeliverabilityDashboardOption(params: PinpointEmail.Types.PutDeliverabilityDashboardOptionRequest, callback?: (err: AWSError, data: PinpointEmail.Types.PutDeliverabilityDashboardOptionResponse) => void): Request<PinpointEmail.Types.PutDeliverabilityDashboardOptionResponse, AWSError>;
+  /**
+   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, we prorate the monthly charge based on how many days have elapsed in the current calendar month.
+   */
+  putDeliverabilityDashboardOption(callback?: (err: AWSError, data: PinpointEmail.Types.PutDeliverabilityDashboardOptionResponse) => void): Request<PinpointEmail.Types.PutDeliverabilityDashboardOptionResponse, AWSError>;
+  /**
    * Used to enable or disable DKIM authentication for an email identity.
    */
   putEmailIdentityDkimAttributes(params: PinpointEmail.Types.PutEmailIdentityDkimAttributesRequest, callback?: (err: AWSError, data: PinpointEmail.Types.PutEmailIdentityDkimAttributesResponse) => void): Request<PinpointEmail.Types.PutEmailIdentityDkimAttributesResponse, AWSError>;
@@ -255,6 +311,25 @@ declare class PinpointEmail extends Service {
 declare namespace PinpointEmail {
   export type AmazonResourceName = string;
   export type BehaviorOnMxFailure = "USE_DEFAULT_VALUE"|"REJECT_MESSAGE"|string;
+  export type BlacklistEntries = BlacklistEntry[];
+  export interface BlacklistEntry {
+    /**
+     * The name of the blacklist that the IP address appears on.
+     */
+    RblName?: RblName;
+    /**
+     * The time when the blacklisting event occurred, shown in Unix time format.
+     */
+    ListingTime?: Timestamp;
+    /**
+     * Additional information about the blacklisting event, as provided by the blacklist maintainer.
+     */
+    Description?: BlacklistingDescription;
+  }
+  export type BlacklistItemName = string;
+  export type BlacklistItemNames = BlacklistItemName[];
+  export type BlacklistReport = {[key: string]: BlacklistEntries};
+  export type BlacklistingDescription = string;
   export interface Body {
     /**
      * An object that represents the version of the message that is displayed in email clients that don't support HTML, or clients where the recipient has disabled HTML rendering.
@@ -347,6 +422,30 @@ declare namespace PinpointEmail {
   }
   export interface CreateDedicatedIpPoolResponse {
   }
+  export interface CreateDeliverabilityTestReportRequest {
+    /**
+     * A unique name that helps you to identify the predictive inbox placement test when you retrieve the results.
+     */
+    ReportName?: ReportName;
+    /**
+     * The email address that the predictive inbox placement test email was sent from.
+     */
+    FromEmailAddress: EmailAddress;
+    /**
+     * The HTML body of the message that you sent when you performed the predictive inbox placement test.
+     */
+    Content: EmailContent;
+  }
+  export interface CreateDeliverabilityTestReportResponse {
+    /**
+     * A unique string that identifies the predictive inbox placement test.
+     */
+    ReportId: ReportId;
+    /**
+     * The status of the predictive inbox placement test. If the status is IN_PROGRESS, then the predictive inbox placement test is currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the test. If the status is COMPLETE, then the test is finished, and you can use the GetDeliverabilityTestReport to view the results of the test.
+     */
+    DeliverabilityTestStatus: DeliverabilityTestStatus;
+  }
   export interface CreateEmailIdentityRequest {
     /**
      * The email address or domain that you want to verify.
@@ -368,6 +467,21 @@ declare namespace PinpointEmail {
     DkimAttributes?: DkimAttributes;
   }
   export type CustomRedirectDomain = string;
+  export interface DailyVolume {
+    /**
+     * The date that the DailyVolume metrics apply to, in Unix time.
+     */
+    StartDate?: Timestamp;
+    /**
+     * An object that contains inbox placement metrics for a specific day in the analysis period.
+     */
+    VolumeStatistics?: VolumeStatistics;
+    /**
+     * An object that contains inbox placement metrics for a specifid day in the analysis period, broken out by the recipient's email provider.
+     */
+    DomainIspPlacements?: DomainIspPlacements;
+  }
+  export type DailyVolumes = DailyVolume[];
   export interface DedicatedIp {
     /**
      * An IP address that is reserved for use by your Amazon Pinpoint account.
@@ -424,6 +538,35 @@ declare namespace PinpointEmail {
   }
   export interface DeleteEmailIdentityResponse {
   }
+  export interface DeliverabilityTestReport {
+    /**
+     * A unique string that identifies the predictive inbox placement test.
+     */
+    ReportId?: ReportId;
+    /**
+     * A name that helps you identify a predictive inbox placement test report.
+     */
+    ReportName?: ReportName;
+    /**
+     * The subject line for an email that you submitted in a predictive inbox placement test.
+     */
+    Subject?: DeliverabilityTestSubject;
+    /**
+     * The sender address that you specified for the predictive inbox placement test.
+     */
+    FromEmailAddress?: EmailAddress;
+    /**
+     * The date and time when the predictive inbox placement test was created, in Unix time format.
+     */
+    CreateDate?: Timestamp;
+    /**
+     * The status of the predictive inbox placement test. If the status is IN_PROGRESS, then the predictive inbox placement test is currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the test. If the status is COMPLETE, then the test is finished, and you can use the GetDeliverabilityTestReport to view the results of the test.
+     */
+    DeliverabilityTestStatus?: DeliverabilityTestStatus;
+  }
+  export type DeliverabilityTestReports = DeliverabilityTestReport[];
+  export type DeliverabilityTestStatus = "IN_PROGRESS"|"COMPLETED"|string;
+  export type DeliverabilityTestSubject = string;
   export interface DeliveryOptions {
     /**
      * The name of the dedicated IP pool that you want to associate with the configuration set.
@@ -463,6 +606,29 @@ declare namespace PinpointEmail {
   export type DkimStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
   export type DnsToken = string;
   export type DnsTokenList = DnsToken[];
+  export interface DomainIspPlacement {
+    /**
+     * The name of the email provider that the inbox placement data applies to.
+     */
+    IspName?: IspName;
+    /**
+     * The total number of messages that were sent from the selected domain to the specified email provider that arrived in recipients' inboxes.
+     */
+    InboxRawCount?: Volume;
+    /**
+     * The total number of messages that were sent from the selected domain to the specified email provider that arrived in recipients' spam or junk mail folders.
+     */
+    SpamRawCount?: Volume;
+    /**
+     * The percentage of messages that were sent from the selected domain to the specified email provider that arrived in recipients' inboxes.
+     */
+    InboxPercentage?: Percentage;
+    /**
+     * The percentage of messages that were sent from the selected domain to the specified email provider that arrived in recipients' spam or junk mail folders.
+     */
+    SpamPercentage?: Percentage;
+  }
+  export type DomainIspPlacements = DomainIspPlacement[];
   export type EmailAddress = string;
   export type EmailAddressList = EmailAddress[];
   export interface EmailContent {
@@ -561,6 +727,18 @@ declare namespace PinpointEmail {
      */
     ProductionAccessEnabled?: Enabled;
   }
+  export interface GetBlacklistReportsRequest {
+    /**
+     * A list of IP addresses that you want to retrieve blacklist information about. You can only specify the dedicated IP addresses that you use to send email using Amazon Pinpoint or Amazon SES.
+     */
+    BlacklistItemNames: BlacklistItemNames;
+  }
+  export interface GetBlacklistReportsResponse {
+    /**
+     * An object that contains information about a blacklist that one of your dedicated IP addresses appears on.
+     */
+    BlacklistReport: BlacklistReport;
+  }
   export interface GetConfigurationSetEventDestinationsRequest {
     /**
      * The name of the configuration set that contains the event destination.
@@ -637,6 +815,62 @@ declare namespace PinpointEmail {
      */
     NextToken?: NextToken;
   }
+  export interface GetDeliverabilityDashboardOptionsRequest {
+  }
+  export interface GetDeliverabilityDashboardOptionsResponse {
+    /**
+     * Indicates whether the Deliverability dashboard is enabled. If the value is true, then the dashboard is enabled.
+     */
+    DashboardEnabled: Enabled;
+  }
+  export interface GetDeliverabilityTestReportRequest {
+    /**
+     * A unique string that identifies the predictive inbox placement test.
+     */
+    ReportId: ReportId;
+  }
+  export interface GetDeliverabilityTestReportResponse {
+    /**
+     * An object that contains the results of the predictive inbox placement test.
+     */
+    DeliverabilityTestReport: DeliverabilityTestReport;
+    /**
+     * An object that specifies how many test messages that were sent during the predictive inbox placement test were delivered to recipients' inboxes, how many were sent to recipients' spam folders, and how many weren't delivered.
+     */
+    OverallPlacement: PlacementStatistics;
+    /**
+     * An object that describes how the test email was handled by several email providers, including Gmail, Hotmail, Yahoo, AOL, and others.
+     */
+    IspPlacements: IspPlacements;
+    /**
+     * An object that contains the message that you sent when you performed this predictive inbox placement test.
+     */
+    Message?: MessageContent;
+  }
+  export interface GetDomainStatisticsReportRequest {
+    /**
+     * The domain that you want to obtain deliverability metrics for.
+     */
+    Domain: Identity;
+    /**
+     * The first day (in Unix time) that you want to obtain domain deliverability metrics for.
+     */
+    StartDate: Timestamp;
+    /**
+     * The last day (in Unix time) that you want to obtain domain deliverability metrics for. The EndDate that you specify has to be less than or equal to 30 days after the StartDate.
+     */
+    EndDate: Timestamp;
+  }
+  export interface GetDomainStatisticsReportResponse {
+    /**
+     * An object that contains deliverability metrics for the domain that you specified. The data in this object is a summary of all of the data that was collected from the StartDate to the EndDate.
+     */
+    OverallVolume: OverallVolume;
+    /**
+     * An object that contains deliverability metrics for the domain that you specified. This object contains data for each day, starting on the StartDate and ending on the EndDate.
+     */
+    DailyVolumes: DailyVolumes;
+  }
   export interface GetEmailIdentityRequest {
     /**
      * The email identity that you want to retrieve details for.
@@ -683,6 +917,18 @@ declare namespace PinpointEmail {
   export type IdentityInfoList = IdentityInfo[];
   export type IdentityType = "EMAIL_ADDRESS"|"DOMAIN"|"MANAGED_DOMAIN"|string;
   export type Ip = string;
+  export type IspName = string;
+  export interface IspPlacement {
+    /**
+     * The name of the email provider that the inbox placement data applies to.
+     */
+    IspName?: IspName;
+    /**
+     * An object that contains inbox placement metrics for a specific email provider.
+     */
+    PlacementStatistics?: PlacementStatistics;
+  }
+  export type IspPlacements = IspPlacement[];
   export interface KinesisFirehoseDestination {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that Amazon Pinpoint uses when sending email events to the Amazon Kinesis Data Firehose stream.
@@ -731,6 +977,26 @@ declare namespace PinpointEmail {
     DedicatedIpPools?: ListOfDedicatedIpPools;
     /**
      * A token that indicates that there are additional IP pools to list. To view additional IP pools, issue another request to ListDedicatedIpPools, passing this token in the NextToken parameter.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListDeliverabilityTestReportsRequest {
+    /**
+     * A token returned from a previous call to ListDeliverabilityTestReports to indicate the position in the list of predictive inbox placement tests.
+     */
+    NextToken?: NextToken;
+    /**
+     * The number of results to show in a single call to ListDeliverabilityTestReports. If the number of results is larger than the number you specified in this parameter, then the response includes a NextToken element, which you can use to obtain additional results. The value you specify has to be at least 0, and can be no more than 1000.
+     */
+    PageSize?: MaxItems;
+  }
+  export interface ListDeliverabilityTestReportsResponse {
+    /**
+     * An object that contains a lists of predictive inbox placement tests that you've performed.
+     */
+    DeliverabilityTestReports: DeliverabilityTestReports;
+    /**
+     * A token that indicates that there are additional predictive inbox placement tests to list. To view additional predictive inbox placement tests, issue another request to ListDeliverabilityTestReports, and pass this token in the NextToken parameter.
      */
     NextToken?: NextToken;
   }
@@ -784,6 +1050,7 @@ declare namespace PinpointEmail {
      */
     Body: Body;
   }
+  export type MessageContent = string;
   export type MessageData = string;
   export interface MessageTag {
     /**
@@ -800,12 +1067,49 @@ declare namespace PinpointEmail {
   export type MessageTagValue = string;
   export type NextToken = string;
   export type OutboundMessageId = string;
+  export interface OverallVolume {
+    /**
+     * An object that contains information about the numbers of messages that arrived in recipients' inboxes and junk mail folders.
+     */
+    VolumeStatistics?: VolumeStatistics;
+    /**
+     * The percentage of emails that were sent from the domain that were read by their recipients.
+     */
+    ReadRatePercent?: Percentage;
+    /**
+     * An object that contains inbox and junk mail placement metrics for individual email providers.
+     */
+    DomainIspPlacements?: DomainIspPlacements;
+  }
+  export type Percentage = number;
   export type Percentage100Wrapper = number;
   export interface PinpointDestination {
     /**
      * The Amazon Resource Name (ARN) of the Amazon Pinpoint project that you want to send email events to.
      */
     ApplicationArn?: AmazonResourceName;
+  }
+  export interface PlacementStatistics {
+    /**
+     * The percentage of emails that arrived in recipients' inboxes during the predictive inbox placement test.
+     */
+    InboxPercentage?: Percentage;
+    /**
+     * The percentage of emails that arrived in recipients' spam or junk mail folders during the predictive inbox placement test.
+     */
+    SpamPercentage?: Percentage;
+    /**
+     * The percentage of emails that didn't arrive in recipients' inboxes at all during the predictive inbox placement test.
+     */
+    MissingPercentage?: Percentage;
+    /**
+     * The percentage of emails that were authenticated by using Sender Policy Framework (SPF) during the predictive inbox placement test.
+     */
+    SpfPercentage?: Percentage;
+    /**
+     * The percentage of emails that were authenticated by using DomainKeys Identified Mail (DKIM) during the predictive inbox placement test.
+     */
+    DkimPercentage?: Percentage;
   }
   export type PoolName = string;
   export interface PutAccountDedicatedIpWarmupAttributesRequest {
@@ -896,6 +1200,14 @@ declare namespace PinpointEmail {
   }
   export interface PutDedicatedIpWarmupAttributesResponse {
   }
+  export interface PutDeliverabilityDashboardOptionRequest {
+    /**
+     * Indicates whether the Deliverability dashboard is enabled. If the value is true, then the dashboard is enabled.
+     */
+    DashboardEnabled: Enabled;
+  }
+  export interface PutDeliverabilityDashboardOptionResponse {
+  }
   export interface PutEmailIdentityDkimAttributesRequest {
     /**
      * The email identity that you want to change the DKIM settings for.
@@ -943,13 +1255,16 @@ declare namespace PinpointEmail {
     Data: RawMessageData;
   }
   export type RawMessageData = Buffer|Uint8Array|Blob|string;
+  export type RblName = string;
+  export type ReportId = string;
+  export type ReportName = string;
   export interface ReputationOptions {
     /**
      * If true, tracking of reputation metrics is enabled for the configuration set. If false, tracking of reputation metrics is disabled for the configuration set.
      */
     ReputationMetricsEnabled?: Enabled;
     /**
-     * The date and time when the reputation metrics were last given a fresh start. When your account is given a fresh start, your reputation metrics are calculated starting from the date of the fresh start.
+     * The date and time (in Unix time) when the reputation metrics were last given a fresh start. When your account is given a fresh start, your reputation metrics are calculated starting from the date of the fresh start.
      */
     LastFreshStart?: LastFreshStart;
   }
@@ -1017,6 +1332,7 @@ declare namespace PinpointEmail {
      */
     TopicArn: AmazonResourceName;
   }
+  export type Timestamp = Date;
   export interface TrackingOptions {
     /**
      * The domain that you want to use for tracking open and click events.
@@ -1038,6 +1354,25 @@ declare namespace PinpointEmail {
     EventDestination: EventDestinationDefinition;
   }
   export interface UpdateConfigurationSetEventDestinationResponse {
+  }
+  export type Volume = number;
+  export interface VolumeStatistics {
+    /**
+     * The total number of emails that arrived in recipients' inboxes.
+     */
+    InboxRawCount?: Volume;
+    /**
+     * The total number of emails that arrived in recipients' spam or junk mail folders.
+     */
+    SpamRawCount?: Volume;
+    /**
+     * An estimate of the percentage of emails sent from the current domain that will arrive in recipients' inboxes.
+     */
+    ProjectedInbox?: Volume;
+    /**
+     * An estimate of the percentage of emails sent from the current domain that will arrive in recipients' spam or junk mail folders.
+     */
+    ProjectedSpam?: Volume;
   }
   export type WarmupStatus = "IN_PROGRESS"|"DONE"|string;
   /**

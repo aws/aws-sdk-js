@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.375.0-->
+<!--LATEST=2.376.0-->
 <!--ENTRYINSERT-->
+
+## 2.376.0
+* feature: PinpointEmail: This release adds new operations for the Amazon Pinpoint Deliverability Dashboard. You can use the Deliverability Dashboard to view response and inbox placement metrics for the domains that you use to send email. You can also perform tests on individual email messages to determine how often your messages are delivered to the inbox on several major email providers.
 
 ## 2.375.0
 * feature: EKS: Added support for updating kubernetes version of Amazon EKS clusters.
