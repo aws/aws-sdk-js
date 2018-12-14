@@ -498,7 +498,8 @@
     "name": "MQ"
   },
   "comprehend": {
-    "name": "Comprehend"
+    "name": "Comprehend",
+    "cors": true
   },
   "iotjobsdataplane": {
     "prefix": "iot-jobs-data",
