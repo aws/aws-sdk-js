@@ -118,9 +118,31 @@
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "SkillNotLinkedException"
         }
       ],
       "documentation": "<p>Associates a skill with a skill group.</p>"
+    },
+    "AssociateSkillWithUsers": {
+      "name": "AssociateSkillWithUsers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateSkillWithUsersRequest"
+      },
+      "output": {
+        "shape": "AssociateSkillWithUsersResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Makes a private skill available for enrolled users to enable on their devices.</p>"
     },
     "CreateAddressBook": {
       "name": "CreateAddressBook",
@@ -597,6 +619,25 @@
         }
       ],
       "documentation": "<p>Disassociates a skill from a skill group.</p>"
+    },
+    "DisassociateSkillFromUsers": {
+      "name": "DisassociateSkillFromUsers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateSkillFromUsersRequest"
+      },
+      "output": {
+        "shape": "DisassociateSkillFromUsersResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Makes a private skill unavailable for enrolled users and prevents them from enabling it on their devices.</p>"
     },
     "DisassociateSkillGroupFromRoom": {
       "name": "DisassociateSkillGroupFromRoom",
@@ -1632,6 +1673,26 @@
       }
     },
     "AssociateSkillWithSkillGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "AssociateSkillWithUsersRequest": {
+      "type": "structure",
+      "required": [
+        "SkillId"
+      ],
+      "members": {
+        "OrganizationArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the organization.</p>"
+        },
+        "SkillId": {
+          "shape": "SkillId",
+          "documentation": "<p>The private skill ID you want to make available to enrolled users.&gt;</p>"
+        }
+      }
+    },
+    "AssociateSkillWithUsersResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2790,6 +2851,26 @@
       "type": "structure",
       "members": {}
     },
+    "DisassociateSkillFromUsersRequest": {
+      "type": "structure",
+      "required": [
+        "SkillId"
+      ],
+      "members": {
+        "OrganizationArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the organization.</p>"
+        },
+        "SkillId": {
+          "shape": "SkillId",
+          "documentation": "<p> The private skill ID you want to make unavailable for enrolled users.</p>"
+        }
+      }
+    },
+    "DisassociateSkillFromUsersResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DisassociateSkillGroupFromRoomRequest": {
       "type": "structure",
       "members": {
@@ -3246,7 +3327,7 @@
       "members": {
         "SkillGroupArn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN of the skill group for which to list enabled skills. Required.</p>"
+          "documentation": "<p>The ARN of the skill group for which to list enabled skills.</p>"
         },
         "EnablementType": {
           "shape": "EnablementTypeFilter",
@@ -3258,11 +3339,11 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.</p>"
+          "documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.</p>"
         },
         "MaxResults": {
           "shape": "SkillListMaxResults",
-          "documentation": "<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.</p>"
+          "documentation": "<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>"
         }
       }
     },
@@ -4954,5 +5035,5 @@
       "pattern": "[a-zA-Z0-9@_+.-]*"
     }
   },
-  "documentation": "<p>Alexa for Business helps you use Alexa in your organization. Alexa for Business provides the tools you to manage Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit and the Alexa for Business API operations. You can also make these available as private skills for your organization. Alexa for Business makes it efficient to voice-enable your products and services, thus providing context-aware voice experiences for your customers. In addition, Alexa for Business enables Alexa Voice Services (AVS) device manufacturers to centrally deploy and manage their devices in Alexa for Business as shared devices as a part of their existing management flow. </p>"
+  "documentation": "<p>Alexa for Business helps you use Alexa in your organization. Alexa for Business provides you with the tools to manage Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit and the Alexa for Business API operations. You can also make these available as private skills for your organization. Alexa for Business makes it efficient to voice-enable your products and services, thus providing context-aware voice experiences for your customers. Device makers building with the Alexa Voice Service (AVS) can create fully integrated solutions, register their products with Alexa for Business, and manage them as shared devices in their organization. </p>"
 }

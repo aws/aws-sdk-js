@@ -52,6 +52,14 @@ declare class AlexaForBusiness extends Service {
    */
   associateSkillWithSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse, AWSError>;
   /**
+   * Makes a private skill available for enrolled users to enable on their devices.
+   */
+  associateSkillWithUsers(params: AlexaForBusiness.Types.AssociateSkillWithUsersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithUsersResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithUsersResponse, AWSError>;
+  /**
+   * Makes a private skill available for enrolled users to enable on their devices.
+   */
+  associateSkillWithUsers(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithUsersResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithUsersResponse, AWSError>;
+  /**
    * Creates an address book with the specified details.
    */
   createAddressBook(params: AlexaForBusiness.Types.CreateAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateAddressBookResponse) => void): Request<AlexaForBusiness.Types.CreateAddressBookResponse, AWSError>;
@@ -227,6 +235,14 @@ declare class AlexaForBusiness extends Service {
    * Disassociates a skill from a skill group.
    */
   disassociateSkillFromSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse, AWSError>;
+  /**
+   * Makes a private skill unavailable for enrolled users and prevents them from enabling it on their devices.
+   */
+  disassociateSkillFromUsers(params: AlexaForBusiness.Types.DisassociateSkillFromUsersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromUsersResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromUsersResponse, AWSError>;
+  /**
+   * Makes a private skill unavailable for enrolled users and prevents them from enabling it on their devices.
+   */
+  disassociateSkillFromUsers(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromUsersResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromUsersResponse, AWSError>;
   /**
    * Disassociates a skill group from a specified room. This disables all skills in the skill group on all devices in the room.
    */
@@ -689,6 +705,18 @@ declare namespace AlexaForBusiness {
     SkillId: SkillId;
   }
   export interface AssociateSkillWithSkillGroupResponse {
+  }
+  export interface AssociateSkillWithUsersRequest {
+    /**
+     * The ARN of the organization.
+     */
+    OrganizationArn?: Arn;
+    /**
+     * The private skill ID you want to make available to enrolled users.&gt;
+     */
+    SkillId: SkillId;
+  }
+  export interface AssociateSkillWithUsersResponse {
   }
   export type AuthorizationResult = {[key: string]: Value};
   export type Boolean = boolean;
@@ -1405,6 +1433,18 @@ declare namespace AlexaForBusiness {
   }
   export interface DisassociateSkillFromSkillGroupResponse {
   }
+  export interface DisassociateSkillFromUsersRequest {
+    /**
+     * The ARN of the organization.
+     */
+    OrganizationArn?: Arn;
+    /**
+     *  The private skill ID you want to make unavailable for enrolled users.
+     */
+    SkillId: SkillId;
+  }
+  export interface DisassociateSkillFromUsersResponse {
+  }
   export interface DisassociateSkillGroupFromRoomRequest {
     /**
      * The ARN of the skill group to disassociate from a room. Required.
@@ -1647,7 +1687,7 @@ declare namespace AlexaForBusiness {
   }
   export interface ListSkillsRequest {
     /**
-     * The ARN of the skill group for which to list enabled skills. Required.
+     * The ARN of the skill group for which to list enabled skills.
      */
     SkillGroupArn?: Arn;
     /**
@@ -1659,11 +1699,11 @@ declare namespace AlexaForBusiness {
      */
     SkillType?: SkillTypeFilter;
     /**
-     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults. Required.
+     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. Required.
+     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     MaxResults?: SkillListMaxResults;
   }

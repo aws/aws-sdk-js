@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.376.0-->
+<!--LATEST=2.377.0-->
 <!--ENTRYINSERT-->
+
+## 2.377.0
+* feature: AlexaForBusiness: Released new APIs for managing private skill access to Enrolled Users.  These API's are the equivalent of the A4B console for Private Skills checkbox "Available for Users".
+* feature: Comprehend: enable cors
 
 ## 2.376.0
 * feature: PinpointEmail: This release adds new operations for the Amazon Pinpoint Deliverability Dashboard. You can use the Deliverability Dashboard to view response and inbox placement metrics for the domains that you use to send email. You can also perform tests on individual email messages to determine how often your messages are delivered to the inbox on several major email providers.
