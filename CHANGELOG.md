@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.377.0-->
+<!--LATEST=2.378.0-->
 <!--ENTRYINSERT-->
+
+## 2.378.0
+* feature: ECR: This release adds support for ECR repository tagging.
+* feature: QuickSight: Amazon QuickSight's RegisterUser API now generates a user invitation URL when registering a user with the QuickSight identity type. This URL can then be used by the registered QuickSight user to complete the user registration process. This release also corrects some HTTP return status codes.
 
 ## 2.377.0
 * feature: AlexaForBusiness: Released new APIs for managing private skill access to Enrolled Users.  These API's are the equivalent of the A4B console for Private Skills checkbox "Available for Users".

@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.377.0
+// AWS SDK for JavaScript v2.378.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -60669,14 +60669,17 @@ module.exports={
           "repositoryName"
         ],
         "members": {
-          "repositoryName": {}
+          "repositoryName": {},
+          "tags": {
+            "shape": "S12"
+          }
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "repository": {
-            "shape": "S13"
+            "shape": "S17"
           }
         }
       }
@@ -60722,7 +60725,7 @@ module.exports={
         "type": "structure",
         "members": {
           "repository": {
-            "shape": "S13"
+            "shape": "S17"
           }
         }
       }
@@ -60783,7 +60786,7 @@ module.exports={
                 "repositoryName": {},
                 "imageDigest": {},
                 "imageTags": {
-                  "shape": "S1p"
+                  "shape": "S1t"
                 },
                 "imageSizeInBytes": {
                   "type": "long"
@@ -60819,7 +60822,7 @@ module.exports={
           "repositories": {
             "type": "list",
             "member": {
-              "shape": "S13"
+              "shape": "S17"
             }
           },
           "nextToken": {}
@@ -60937,7 +60940,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "imageTags": {
-                  "shape": "S1p"
+                  "shape": "S1t"
                 },
                 "imageDigest": {},
                 "imagePushedAt": {
@@ -61038,6 +61041,25 @@ module.exports={
         }
       }
     },
+    "ListTagsForResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tags": {
+            "shape": "S12"
+          }
+        }
+      }
+    },
     "PutImage": {
       "input": {
         "type": "structure",
@@ -61130,6 +61152,45 @@ module.exports={
         }
       }
     },
+    "TagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {},
+          "tags": {
+            "shape": "S12"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {},
+          "tagKeys": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "UploadLayerPart": {
       "input": {
         "type": "structure",
@@ -61206,7 +61267,17 @@ module.exports={
         "imageManifest": {}
       }
     },
-    "S13": {
+    "S12": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "Key": {},
+          "Value": {}
+        }
+      }
+    },
+    "S17": {
       "type": "structure",
       "members": {
         "repositoryArn": {},
@@ -61218,7 +61289,7 @@ module.exports={
         }
       }
     },
-    "S1p": {
+    "S1t": {
       "type": "list",
       "member": {}
     }
@@ -149173,7 +149244,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.377.0',
+  VERSION: '2.378.0',
 
   /**
    * @api private
@@ -169507,7 +169578,7 @@ var LRUCache = /** @class */ (function () {
 }());
 exports.LRUCache = LRUCache;
 },{}],379:[function(require,module,exports){
-// AWS SDK for JavaScript v2.377.0
+// AWS SDK for JavaScript v2.378.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
