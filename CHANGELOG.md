@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.378.0-->
+<!--LATEST=2.379.0-->
 <!--ENTRYINSERT-->
+
+## 2.379.0
+* bugfix: S3: fix fo #2418, putObject with key as substring of bucket results in extra folder
+* feature: ApiGatewayManagementApi: This is the initial SDK release for the Amazon API Gateway Management API, which allows you to directly manage runtime aspects of your APIs. This release makes it easy to send data directly to clients connected to your WebSocket-based APIs.
+* feature: ApiGatewayV2: This is the initial SDK release for the Amazon API Gateway v2 APIs. This SDK will allow you to manage and configure APIs in Amazon API Gateway; this first release provides the capabilities that allow you to programmatically setup and manage WebSocket APIs end to end. 
+* feature: EC2: Client VPN, is a client-based VPN service. With Client VPN, you can securely access resources in AWS as well as access resources in on-premises from any location using OpenVPN based devices. With Client VPN, you can set network based firewall rules that can restrict access to networks based on Active Directory groups.
+* feature: ElasticBeanstalk: This release adds a new resource that Elastic Beanstalk will soon support, EC2 launch template, to environment resource descriptions.
 
 ## 2.378.0
 * feature: ECR: This release adds support for ECR repository tagging.

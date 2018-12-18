@@ -69,6 +69,14 @@ declare class EC2 extends Service {
    */
   allocateHosts(callback?: (err: AWSError, data: EC2.Types.AllocateHostsResult) => void): Request<EC2.Types.AllocateHostsResult, AWSError>;
   /**
+   * Applies a security group to the association between the target network and the Client VPN endpoint. This action replaces the existing security groups with the specified security groups.
+   */
+  applySecurityGroupsToClientVpnTargetNetwork(params: EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkRequest, callback?: (err: AWSError, data: EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkResult) => void): Request<EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkResult, AWSError>;
+  /**
+   * Applies a security group to the association between the target network and the Client VPN endpoint. This action replaces the existing security groups with the specified security groups.
+   */
+  applySecurityGroupsToClientVpnTargetNetwork(callback?: (err: AWSError, data: EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkResult) => void): Request<EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkResult, AWSError>;
+  /**
    * Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see IP Addresses Per Network Interface Per Instance Type in the Amazon Elastic Compute Cloud User Guide.
    */
   assignIpv6Addresses(params: EC2.Types.AssignIpv6AddressesRequest, callback?: (err: AWSError, data: EC2.Types.AssignIpv6AddressesResult) => void): Request<EC2.Types.AssignIpv6AddressesResult, AWSError>;
@@ -92,6 +100,14 @@ declare class EC2 extends Service {
    * Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
    */
   associateAddress(callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
+  /**
+   * Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.
+   */
+  associateClientVpnTargetNetwork(params: EC2.Types.AssociateClientVpnTargetNetworkRequest, callback?: (err: AWSError, data: EC2.Types.AssociateClientVpnTargetNetworkResult) => void): Request<EC2.Types.AssociateClientVpnTargetNetworkResult, AWSError>;
+  /**
+   * Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.
+   */
+  associateClientVpnTargetNetwork(callback?: (err: AWSError, data: EC2.Types.AssociateClientVpnTargetNetworkResult) => void): Request<EC2.Types.AssociateClientVpnTargetNetworkResult, AWSError>;
   /**
    * Associates a set of DHCP options (that you've previously created) with the specified VPC, or associates no DHCP options with the VPC. After you associate the options with the VPC, any existing instances and all new instances that you launch in that VPC use the options. You don't need to restart or relaunch the instances. They automatically pick up the changes within a few hours, depending on how frequently the instance renews its DHCP lease. You can explicitly renew the lease using the operating system on the instance. For more information, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
    */
@@ -180,6 +196,14 @@ declare class EC2 extends Service {
    * Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time. For more information, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   attachVpnGateway(callback?: (err: AWSError, data: EC2.Types.AttachVpnGatewayResult) => void): Request<EC2.Types.AttachVpnGatewayResult, AWSError>;
+  /**
+   * Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in AWS or on-premises networks.
+   */
+  authorizeClientVpnIngress(params: EC2.Types.AuthorizeClientVpnIngressRequest, callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
+  /**
+   * Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in AWS or on-premises networks.
+   */
+  authorizeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
   /**
    * [EC2-VPC only] Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination IPv4 or IPv6 CIDR address ranges, or to one or more destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide. For more information about security group limits, see Amazon VPC Limits. Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. You can optionally specify a description for the rule. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.
    */
@@ -308,6 +332,22 @@ declare class EC2 extends Service {
    * Creates a new Capacity Reservation with the specified attributes. Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This gives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. By creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. For more information, see Capacity Reservations in the Amazon Elastic Compute Cloud User Guide. Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to fulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try again at a later time, try in a different Availability Zone, or request a smaller capacity reservation. If your application is flexible across instance types and sizes, try to create a Capacity Reservation with different instance attributes. Your request could also fail if the requested quantity exceeds your On-Demand Instance limit for the selected instance type. If your request fails due to limit constraints, increase your On-Demand Instance limit for the required instance type and try again. For more information about increasing your instance limits, see Amazon EC2 Service Limits in the Amazon Elastic Compute Cloud User Guide.
    */
   createCapacityReservation(callback?: (err: AWSError, data: EC2.Types.CreateCapacityReservationResult) => void): Request<EC2.Types.CreateCapacityReservationResult, AWSError>;
+  /**
+   * Creates a Client VPN endpoint. A Client VPN endpoint is the resource you create and configure to enable and manage client VPN sessions. It is the destination endpoint at which all client VPN sessions are terminated.
+   */
+  createClientVpnEndpoint(params: EC2.Types.CreateClientVpnEndpointRequest, callback?: (err: AWSError, data: EC2.Types.CreateClientVpnEndpointResult) => void): Request<EC2.Types.CreateClientVpnEndpointResult, AWSError>;
+  /**
+   * Creates a Client VPN endpoint. A Client VPN endpoint is the resource you create and configure to enable and manage client VPN sessions. It is the destination endpoint at which all client VPN sessions are terminated.
+   */
+  createClientVpnEndpoint(callback?: (err: AWSError, data: EC2.Types.CreateClientVpnEndpointResult) => void): Request<EC2.Types.CreateClientVpnEndpointResult, AWSError>;
+  /**
+   * Adds a route to a network to a Client VPN endpoint. Each Client VPN endpoint has a route table that describes the available destination network routes. Each route in the route table specifies the path for traﬃc to speciﬁc resources or networks.
+   */
+  createClientVpnRoute(params: EC2.Types.CreateClientVpnRouteRequest, callback?: (err: AWSError, data: EC2.Types.CreateClientVpnRouteResult) => void): Request<EC2.Types.CreateClientVpnRouteResult, AWSError>;
+  /**
+   * Adds a route to a network to a Client VPN endpoint. Each Client VPN endpoint has a route table that describes the available destination network routes. Each route in the route table specifies the path for traﬃc to speciﬁc resources or networks.
+   */
+  createClientVpnRoute(callback?: (err: AWSError, data: EC2.Types.CreateClientVpnRouteResult) => void): Request<EC2.Types.CreateClientVpnRouteResult, AWSError>;
   /**
    * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the us-east-1 region, and 9059, which is reserved in the eu-west-1 region.  For more information about VPN customer gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.  You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. 
    */
@@ -636,6 +676,22 @@ declare class EC2 extends Service {
    * Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself. For more information about virtual private gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   createVpnGateway(callback?: (err: AWSError, data: EC2.Types.CreateVpnGatewayResult) => void): Request<EC2.Types.CreateVpnGatewayResult, AWSError>;
+  /**
+   * Deletes the specified Client VPN endpoint. You must disassociate all target networks before you can delete a Client VPN endpoint.
+   */
+  deleteClientVpnEndpoint(params: EC2.Types.DeleteClientVpnEndpointRequest, callback?: (err: AWSError, data: EC2.Types.DeleteClientVpnEndpointResult) => void): Request<EC2.Types.DeleteClientVpnEndpointResult, AWSError>;
+  /**
+   * Deletes the specified Client VPN endpoint. You must disassociate all target networks before you can delete a Client VPN endpoint.
+   */
+  deleteClientVpnEndpoint(callback?: (err: AWSError, data: EC2.Types.DeleteClientVpnEndpointResult) => void): Request<EC2.Types.DeleteClientVpnEndpointResult, AWSError>;
+  /**
+   * Deletes a route from a Client VPN endpoint. You can only delete routes that you manually added using the CreateClientVpnRoute action. You cannot delete routes that were automatically added when associating a subnet. To remove routes that have been automatically added, disassociate the target subnet from the Client VPN endpoint.
+   */
+  deleteClientVpnRoute(params: EC2.Types.DeleteClientVpnRouteRequest, callback?: (err: AWSError, data: EC2.Types.DeleteClientVpnRouteResult) => void): Request<EC2.Types.DeleteClientVpnRouteResult, AWSError>;
+  /**
+   * Deletes a route from a Client VPN endpoint. You can only delete routes that you manually added using the CreateClientVpnRoute action. You cannot delete routes that were automatically added when associating a subnet. To remove routes that have been automatically added, disassociate the target subnet from the Client VPN endpoint.
+   */
+  deleteClientVpnRoute(callback?: (err: AWSError, data: EC2.Types.DeleteClientVpnRouteResult) => void): Request<EC2.Types.DeleteClientVpnRouteResult, AWSError>;
   /**
    * Deletes the specified customer gateway. You must delete the VPN connection before you can delete the customer gateway.
    */
@@ -1004,6 +1060,46 @@ declare class EC2 extends Service {
    * Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink. You cannot use this request to return information about other instances.
    */
   describeClassicLinkInstances(callback?: (err: AWSError, data: EC2.Types.DescribeClassicLinkInstancesResult) => void): Request<EC2.Types.DescribeClassicLinkInstancesResult, AWSError>;
+  /**
+   * Describes the authorization rules for a specified Client VPN endpoint.
+   */
+  describeClientVpnAuthorizationRules(params: EC2.Types.DescribeClientVpnAuthorizationRulesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnAuthorizationRulesResult) => void): Request<EC2.Types.DescribeClientVpnAuthorizationRulesResult, AWSError>;
+  /**
+   * Describes the authorization rules for a specified Client VPN endpoint.
+   */
+  describeClientVpnAuthorizationRules(callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnAuthorizationRulesResult) => void): Request<EC2.Types.DescribeClientVpnAuthorizationRulesResult, AWSError>;
+  /**
+   * Describes active client connections and connections that have been terminated within the last 60 minutes for the specified Client VPN endpoint.
+   */
+  describeClientVpnConnections(params: EC2.Types.DescribeClientVpnConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnConnectionsResult) => void): Request<EC2.Types.DescribeClientVpnConnectionsResult, AWSError>;
+  /**
+   * Describes active client connections and connections that have been terminated within the last 60 minutes for the specified Client VPN endpoint.
+   */
+  describeClientVpnConnections(callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnConnectionsResult) => void): Request<EC2.Types.DescribeClientVpnConnectionsResult, AWSError>;
+  /**
+   * Describes one or more Client VPN endpoints in the account.
+   */
+  describeClientVpnEndpoints(params: EC2.Types.DescribeClientVpnEndpointsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnEndpointsResult) => void): Request<EC2.Types.DescribeClientVpnEndpointsResult, AWSError>;
+  /**
+   * Describes one or more Client VPN endpoints in the account.
+   */
+  describeClientVpnEndpoints(callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnEndpointsResult) => void): Request<EC2.Types.DescribeClientVpnEndpointsResult, AWSError>;
+  /**
+   * Describes the routes for the specified Client VPN endpoint.
+   */
+  describeClientVpnRoutes(params: EC2.Types.DescribeClientVpnRoutesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnRoutesResult) => void): Request<EC2.Types.DescribeClientVpnRoutesResult, AWSError>;
+  /**
+   * Describes the routes for the specified Client VPN endpoint.
+   */
+  describeClientVpnRoutes(callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnRoutesResult) => void): Request<EC2.Types.DescribeClientVpnRoutesResult, AWSError>;
+  /**
+   * Describes the target networks associated with the specified Client VPN endpoint.
+   */
+  describeClientVpnTargetNetworks(params: EC2.Types.DescribeClientVpnTargetNetworksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnTargetNetworksResult) => void): Request<EC2.Types.DescribeClientVpnTargetNetworksResult, AWSError>;
+  /**
+   * Describes the target networks associated with the specified Client VPN endpoint.
+   */
+  describeClientVpnTargetNetworks(callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnTargetNetworksResult) => void): Request<EC2.Types.DescribeClientVpnTargetNetworksResult, AWSError>;
   /**
    * Describes one or more of your conversion tasks. For more information, see the VM Import/Export User Guide. For information about the import manifest referenced by this API action, see VM Import Manifest.
    */
@@ -1741,6 +1837,14 @@ declare class EC2 extends Service {
    */
   disassociateAddress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Disassociates a target network from the specified Client VPN endpoint. When you disassociate the last target network from a Client VPN, the following happens:   The route that was automatically added for the VPC is deleted   All active client connections are terminated   New client connections are disallowed   The Client VPN endpoint's status changes to pending-associate   
+   */
+  disassociateClientVpnTargetNetwork(params: EC2.Types.DisassociateClientVpnTargetNetworkRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateClientVpnTargetNetworkResult) => void): Request<EC2.Types.DisassociateClientVpnTargetNetworkResult, AWSError>;
+  /**
+   * Disassociates a target network from the specified Client VPN endpoint. When you disassociate the last target network from a Client VPN, the following happens:   The route that was automatically added for the VPC is deleted   All active client connections are terminated   New client connections are disallowed   The Client VPN endpoint's status changes to pending-associate   
+   */
+  disassociateClientVpnTargetNetwork(callback?: (err: AWSError, data: EC2.Types.DisassociateClientVpnTargetNetworkResult) => void): Request<EC2.Types.DisassociateClientVpnTargetNetworkResult, AWSError>;
+  /**
    * Disassociates an IAM instance profile from a running or stopped instance. Use DescribeIamInstanceProfileAssociations to get the association ID.
    */
   disassociateIamInstanceProfile(params: EC2.Types.DisassociateIamInstanceProfileRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateIamInstanceProfileResult) => void): Request<EC2.Types.DisassociateIamInstanceProfileResult, AWSError>;
@@ -1820,6 +1924,22 @@ declare class EC2 extends Service {
    * Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see ClassicLink in the Amazon Elastic Compute Cloud User Guide.
    */
   enableVpcClassicLinkDnsSupport(callback?: (err: AWSError, data: EC2.Types.EnableVpcClassicLinkDnsSupportResult) => void): Request<EC2.Types.EnableVpcClassicLinkDnsSupportResult, AWSError>;
+  /**
+   * Downloads the client certificate revocation list for the specified Client VPN endpoint.
+   */
+  exportClientVpnClientCertificateRevocationList(params: EC2.Types.ExportClientVpnClientCertificateRevocationListRequest, callback?: (err: AWSError, data: EC2.Types.ExportClientVpnClientCertificateRevocationListResult) => void): Request<EC2.Types.ExportClientVpnClientCertificateRevocationListResult, AWSError>;
+  /**
+   * Downloads the client certificate revocation list for the specified Client VPN endpoint.
+   */
+  exportClientVpnClientCertificateRevocationList(callback?: (err: AWSError, data: EC2.Types.ExportClientVpnClientCertificateRevocationListResult) => void): Request<EC2.Types.ExportClientVpnClientCertificateRevocationListResult, AWSError>;
+  /**
+   * Downloads the contents of the client configuration file for the specified Client VPN endpoint. The client configuration file includes the Client VPN endpoint and certificate information clients need to establish a connection with the Client VPN endpoint.
+   */
+  exportClientVpnClientConfiguration(params: EC2.Types.ExportClientVpnClientConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.ExportClientVpnClientConfigurationResult) => void): Request<EC2.Types.ExportClientVpnClientConfigurationResult, AWSError>;
+  /**
+   * Downloads the contents of the client configuration file for the specified Client VPN endpoint. The client configuration file includes the Client VPN endpoint and certificate information clients need to establish a connection with the Client VPN endpoint.
+   */
+  exportClientVpnClientConfiguration(callback?: (err: AWSError, data: EC2.Types.ExportClientVpnClientConfigurationResult) => void): Request<EC2.Types.ExportClientVpnClientConfigurationResult, AWSError>;
   /**
    * Exports routes from the specified transit gateway route table to the specified S3 bucket. By default, all routes are exported. Alternatively, you can filter by CIDR range.
    */
@@ -1901,6 +2021,14 @@ declare class EC2 extends Service {
    */
   getTransitGatewayRouteTablePropagations(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayRouteTablePropagationsResult) => void): Request<EC2.Types.GetTransitGatewayRouteTablePropagationsResult, AWSError>;
   /**
+   * Uploads a client certificate revocation list to the specified Client VPN endpoint. Uploading a client certificate revocation list overwrites the existing client certificate revocation list. Uploading a client certificate revocation list resets existing client connections.
+   */
+  importClientVpnClientCertificateRevocationList(params: EC2.Types.ImportClientVpnClientCertificateRevocationListRequest, callback?: (err: AWSError, data: EC2.Types.ImportClientVpnClientCertificateRevocationListResult) => void): Request<EC2.Types.ImportClientVpnClientCertificateRevocationListResult, AWSError>;
+  /**
+   * Uploads a client certificate revocation list to the specified Client VPN endpoint. Uploading a client certificate revocation list overwrites the existing client certificate revocation list. Uploading a client certificate revocation list resets existing client connections.
+   */
+  importClientVpnClientCertificateRevocationList(callback?: (err: AWSError, data: EC2.Types.ImportClientVpnClientCertificateRevocationListResult) => void): Request<EC2.Types.ImportClientVpnClientCertificateRevocationListResult, AWSError>;
+  /**
    * Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI). For more information, see Importing a VM as an Image Using VM Import/Export in the VM Import/Export User Guide.
    */
   importImage(params: EC2.Types.ImportImageRequest, callback?: (err: AWSError, data: EC2.Types.ImportImageResult) => void): Request<EC2.Types.ImportImageResult, AWSError>;
@@ -1948,6 +2076,14 @@ declare class EC2 extends Service {
    * Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation's instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.
    */
   modifyCapacityReservation(callback?: (err: AWSError, data: EC2.Types.ModifyCapacityReservationResult) => void): Request<EC2.Types.ModifyCapacityReservationResult, AWSError>;
+  /**
+   * Modifies the specified Client VPN endpoint. You can only modify an endpoint's server certificate information, client connection logging information, DNS server, and description. Modifying the DNS server resets existing client connections.
+   */
+  modifyClientVpnEndpoint(params: EC2.Types.ModifyClientVpnEndpointRequest, callback?: (err: AWSError, data: EC2.Types.ModifyClientVpnEndpointResult) => void): Request<EC2.Types.ModifyClientVpnEndpointResult, AWSError>;
+  /**
+   * Modifies the specified Client VPN endpoint. You can only modify an endpoint's server certificate information, client connection logging information, DNS server, and description. Modifying the DNS server resets existing client connections.
+   */
+  modifyClientVpnEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyClientVpnEndpointResult) => void): Request<EC2.Types.ModifyClientVpnEndpointResult, AWSError>;
   /**
    * Modifies the specified EC2 Fleet. While the EC2 Fleet is being modified, it is in the modifying state.
    */
@@ -2381,6 +2517,14 @@ declare class EC2 extends Service {
    */
   restoreAddressToClassic(callback?: (err: AWSError, data: EC2.Types.RestoreAddressToClassicResult) => void): Request<EC2.Types.RestoreAddressToClassicResult, AWSError>;
   /**
+   * Removes an ingress authorization rule from a Client VPN endpoint. 
+   */
+  revokeClientVpnIngress(params: EC2.Types.RevokeClientVpnIngressRequest, callback?: (err: AWSError, data: EC2.Types.RevokeClientVpnIngressResult) => void): Request<EC2.Types.RevokeClientVpnIngressResult, AWSError>;
+  /**
+   * Removes an ingress authorization rule from a Client VPN endpoint. 
+   */
+  revokeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.RevokeClientVpnIngressResult) => void): Request<EC2.Types.RevokeClientVpnIngressResult, AWSError>;
+  /**
    * [EC2-VPC only] Removes one or more egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupEgress(params: EC2.Types.RevokeSecurityGroupEgressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -2436,6 +2580,14 @@ declare class EC2 extends Service {
    * Stops an Amazon EBS-backed instance. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate Your Instance in the Amazon Elastic Compute Cloud User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your Windows instance, Amazon EC2 charges you for a full instance hour. If you stop and restart your Windows instance, a new instance hour begins and Amazon EC2 charges you for another full instance hour even if you are still within the same 60-minute period when it was stopped. Every time you start your Linux instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't start, stop, or hibernate Spot Instances, and you can't stop or hibernate instance store-backed instances. For information about using hibernation for Spot Instances, see Hibernating Interrupted Spot Instances in the Amazon Elastic Compute Cloud User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshooting Stopping Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   stopInstances(callback?: (err: AWSError, data: EC2.Types.StopInstancesResult) => void): Request<EC2.Types.StopInstancesResult, AWSError>;
+  /**
+   * Terminates active Client VPN endpoint connections. This action can be used to terminate a specific client connection, or up to five connections established by a specific user.
+   */
+  terminateClientVpnConnections(params: EC2.Types.TerminateClientVpnConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.TerminateClientVpnConnectionsResult) => void): Request<EC2.Types.TerminateClientVpnConnectionsResult, AWSError>;
+  /**
+   * Terminates active Client VPN endpoint connections. This action can be used to terminate a specific client connection, or up to five connections established by a specific user.
+   */
+  terminateClientVpnConnections(callback?: (err: AWSError, data: EC2.Types.TerminateClientVpnConnectionsResult) => void): Request<EC2.Types.TerminateClientVpnConnectionsResult, AWSError>;
   /**
    * Shuts down one or more instances. This operation is idempotent; if you terminate an instance more than once, each call succeeds.  If you specify multiple instances and the request fails (for example, because of a single incorrect instance ID), none of the instances are terminated. Terminated instances remain visible after termination (for approximately one hour). By default, Amazon EC2 deletes all EBS volumes that were attached when the instance launched. Volumes attached after instance launch continue running. You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, any attached EBS volumes with the DeleteOnTermination block device mapping parameter set to true are automatically deleted. For more information about the differences between stopping and terminating instances, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide. For more information about troubleshooting, see Troubleshooting Terminating Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -2996,6 +3148,30 @@ declare namespace EC2 {
     Principal?: String;
   }
   export type AllowedPrincipalSet = AllowedPrincipal[];
+  export interface ApplySecurityGroupsToClientVpnTargetNetworkRequest {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The ID of the VPC in which the associated target network is located.
+     */
+    VpcId: String;
+    /**
+     * The IDs of the security groups to apply to the associated target network. Up to 5 security groups can be applied to an associated target network.
+     */
+    SecurityGroupIds: ClientVpnSecurityGroupIdSet;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ApplySecurityGroupsToClientVpnTargetNetworkResult {
+    /**
+     * The IDs of the applied security groups.
+     */
+    SecurityGroupIds?: ClientVpnSecurityGroupIdSet;
+  }
   export type ArchitectureValues = "i386"|"x86_64"|"arm64"|string;
   export interface AssignIpv6AddressesRequest {
     /**
@@ -3074,6 +3250,30 @@ declare namespace EC2 {
      * [EC2-VPC] The ID that represents the association of the Elastic IP address with an instance.
      */
     AssociationId?: String;
+  }
+  export interface AssociateClientVpnTargetNetworkRequest {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The ID of the subnet to associate with the Client VPN endpoint.
+     */
+    SubnetId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AssociateClientVpnTargetNetworkResult {
+    /**
+     * The unique ID of the target network association.
+     */
+    AssociationId?: String;
+    /**
+     * The current state of the target network association.
+     */
+    Status?: AssociationStatus;
   }
   export interface AssociateDhcpOptionsRequest {
     /**
@@ -3193,7 +3393,30 @@ declare namespace EC2 {
      */
     VpcId?: String;
   }
+  export type AssociatedNetworkType = "vpc"|string;
+  export interface AssociatedTargetNetwork {
+    /**
+     *  The ID of the subnet. 
+     */
+    NetworkId?: String;
+    /**
+     *  The target network type. 
+     */
+    NetworkType?: AssociatedNetworkType;
+  }
+  export type AssociatedTargetNetworkSet = AssociatedTargetNetwork[];
   export type AssociationIdList = String[];
+  export interface AssociationStatus {
+    /**
+     * The state of the target network association.
+     */
+    Code?: AssociationStatusCode;
+    /**
+     * A message about the status of the target network association, if applicable.
+     */
+    Message?: String;
+  }
+  export type AssociationStatusCode = "associating"|"associated"|"association-failed"|"disassociating"|"disassociated"|string;
   export interface AttachClassicLinkVpcRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -3306,6 +3529,65 @@ declare namespace EC2 {
      * The attribute value. The value is case-sensitive.
      */
     Value?: String;
+  }
+  export interface AuthorizationRule {
+    /**
+     * The ID of the Client VPN endpoint with which the authorization rule is associated.
+     */
+    ClientVpnEndpointId?: String;
+    /**
+     * A brief description of the authorization rule.
+     */
+    Description?: String;
+    /**
+     * The ID of the Active Directory group to which the authorization rule grants access.
+     */
+    GroupId?: String;
+    /**
+     * Indicates whether the authorization rule grants access to all clients.
+     */
+    AccessAll?: Boolean;
+    /**
+     * The IPv4 address range, in CIDR notation, of the network to which the authorization rule applies.
+     */
+    DestinationCidr?: String;
+    /**
+     * The current state of the authorization rule.
+     */
+    Status?: ClientVpnAuthorizationRuleStatus;
+  }
+  export type AuthorizationRuleSet = AuthorizationRule[];
+  export interface AuthorizeClientVpnIngressRequest {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The IPv4 address range, in CIDR notation, of the network for which access is being authorized.
+     */
+    TargetNetworkCidr: String;
+    /**
+     * The ID of the Active Directory group to grant access.
+     */
+    AccessGroupId?: String;
+    /**
+     * Indicates whether to grant access to all clients. Use true to grant all clients who successfully establish a VPN connection access to the network.
+     */
+    AuthorizeAllGroups?: Boolean;
+    /**
+     * A brief description of the authorization rule.
+     */
+    Description?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AuthorizeClientVpnIngressResult {
+    /**
+     * The current state of the authorization rule.
+     */
+    Status?: ClientVpnAuthorizationRuleStatus;
   }
   export interface AuthorizeSecurityGroupEgressRequest {
     /**
@@ -3642,21 +3924,21 @@ declare namespace EC2 {
     /**
      * The error code.
      */
-    Code: CancelBatchErrorCode;
+    Code?: CancelBatchErrorCode;
     /**
      * The description for the error code.
      */
-    Message: String;
+    Message?: String;
   }
   export interface CancelSpotFleetRequestsErrorItem {
     /**
      * The error.
      */
-    Error: CancelSpotFleetRequestsError;
+    Error?: CancelSpotFleetRequestsError;
     /**
      * The ID of the Spot Fleet request.
      */
-    SpotFleetRequestId: String;
+    SpotFleetRequestId?: String;
   }
   export type CancelSpotFleetRequestsErrorSet = CancelSpotFleetRequestsErrorItem[];
   export interface CancelSpotFleetRequestsRequest {
@@ -3687,15 +3969,15 @@ declare namespace EC2 {
     /**
      * The current state of the Spot Fleet request.
      */
-    CurrentSpotFleetRequestState: BatchState;
+    CurrentSpotFleetRequestState?: BatchState;
     /**
      * The previous state of the Spot Fleet request.
      */
-    PreviousSpotFleetRequestState: BatchState;
+    PreviousSpotFleetRequestState?: BatchState;
     /**
      * The ID of the Spot Fleet request.
      */
-    SpotFleetRequestId: String;
+    SpotFleetRequestId?: String;
   }
   export type CancelSpotFleetRequestsSuccessSet = CancelSpotFleetRequestsSuccessItem[];
   export type CancelSpotInstanceRequestState = "active"|"open"|"closed"|"cancelled"|"completed"|string;
@@ -3826,6 +4108,18 @@ declare namespace EC2 {
     CapacityReservationId?: String;
   }
   export type CapacityReservationTenancy = "default"|"dedicated"|string;
+  export interface CertificateAuthentication {
+    /**
+     *  The ARN of the client certificate.  
+     */
+    ClientRootCertificateChain?: String;
+  }
+  export interface CertificateAuthenticationRequest {
+    /**
+     *  The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in AWS Certificate Manager (ACM). 
+     */
+    ClientRootCertificateChainArn?: String;
+  }
   export interface CidrAuthorizationContext {
     /**
      * The plain-text authorization message for the prefix and account.
@@ -3877,15 +4171,26 @@ declare namespace EC2 {
     /**
      * The name of the load balancer.
      */
-    Name: String;
+    Name?: String;
   }
   export type ClassicLoadBalancers = ClassicLoadBalancer[];
   export interface ClassicLoadBalancersConfig {
     /**
      * One or more Classic Load Balancers.
      */
-    ClassicLoadBalancers: ClassicLoadBalancers;
+    ClassicLoadBalancers?: ClassicLoadBalancers;
   }
+  export interface ClientCertificateRevocationListStatus {
+    /**
+     * The state of the client certificate revocation list.
+     */
+    Code?: ClientCertificateRevocationListStatusCode;
+    /**
+     * A message about the status of the client certificate revocation list, if applicable.
+     */
+    Message?: String;
+  }
+  export type ClientCertificateRevocationListStatusCode = "pending"|"active"|string;
   export interface ClientData {
     /**
      * A user-defined comment about the disk upload.
@@ -3904,6 +4209,226 @@ declare namespace EC2 {
      */
     UploadStart?: DateTime;
   }
+  export interface ClientVpnAuthentication {
+    /**
+     * The authentication type used.
+     */
+    Type?: ClientVpnAuthenticationType;
+    /**
+     * Information about the Active Directory, if applicable.
+     */
+    ActiveDirectory?: DirectoryServiceAuthentication;
+    /**
+     * Information about the authentication certificates, if applicable.
+     */
+    MutualAuthentication?: CertificateAuthentication;
+  }
+  export type ClientVpnAuthenticationList = ClientVpnAuthentication[];
+  export interface ClientVpnAuthenticationRequest {
+    /**
+     * The type of client authentication to be used. Specify certificate-authentication to use certificate-based authentication, or directory-service-authentication to use Active Directory authentication.
+     */
+    Type?: ClientVpnAuthenticationType;
+    /**
+     * Information about the Active Directory to be used, if applicable. You must provide this information if Type is directory-service-authentication.
+     */
+    ActiveDirectory?: DirectoryServiceAuthenticationRequest;
+    /**
+     * Information about the authentication certificates to be used, if applicable. You must provide this information if Type is certificate-authentication.
+     */
+    MutualAuthentication?: CertificateAuthenticationRequest;
+  }
+  export type ClientVpnAuthenticationRequestList = ClientVpnAuthenticationRequest[];
+  export type ClientVpnAuthenticationType = "certificate-authentication"|"directory-service-authentication"|string;
+  export interface ClientVpnAuthorizationRuleStatus {
+    /**
+     * The state of the authorization rule.
+     */
+    Code?: ClientVpnAuthorizationRuleStatusCode;
+    /**
+     * A message about the status of the authorization rule, if applicable.
+     */
+    Message?: String;
+  }
+  export type ClientVpnAuthorizationRuleStatusCode = "authorizing"|"active"|"failed"|"revoking"|string;
+  export interface ClientVpnConnection {
+    /**
+     * The ID of the Client VPN endpoint to which the client is connected.
+     */
+    ClientVpnEndpointId?: String;
+    /**
+     *  The current date and time. 
+     */
+    Timestamp?: String;
+    /**
+     * The ID of the client connection.
+     */
+    ConnectionId?: String;
+    /**
+     * The username of the client who established the client connection. This information is only provided if Active Directory client authentication is used.
+     */
+    Username?: String;
+    /**
+     * The date and time the client connection was established.
+     */
+    ConnectionEstablishedTime?: String;
+    /**
+     * The number of bytes sent by the client.
+     */
+    IngressBytes?: String;
+    /**
+     * The number of bytes received by the client.
+     */
+    EgressBytes?: String;
+    /**
+     * The number of packets sent by the client.
+     */
+    IngressPackets?: String;
+    /**
+     * The number of packets received by the client.
+     */
+    EgressPackets?: String;
+    /**
+     * The IP address of the client.
+     */
+    ClientIp?: String;
+    /**
+     *  The common name associated with the client. This is either the name of the client certificate, or the Active Directory user name. 
+     */
+    CommonName?: String;
+    /**
+     * The current state of the client connection.
+     */
+    Status?: ClientVpnConnectionStatus;
+    /**
+     * The date and time the client connection was terminated.
+     */
+    ConnectionEndTime?: String;
+  }
+  export type ClientVpnConnectionSet = ClientVpnConnection[];
+  export interface ClientVpnConnectionStatus {
+    /**
+     * The state of the client connection.
+     */
+    Code?: ClientVpnConnectionStatusCode;
+    /**
+     * A message about the status of the client connection, if applicable.
+     */
+    Message?: String;
+  }
+  export type ClientVpnConnectionStatusCode = "active"|"failed-to-terminate"|"terminating"|"terminated"|string;
+  export interface ClientVpnEndpoint {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId?: String;
+    /**
+     * A brief description of the endpoint.
+     */
+    Description?: String;
+    /**
+     * The current state of the Client VPN endpoint.
+     */
+    Status?: ClientVpnEndpointStatus;
+    /**
+     * The date and time the Client VPN endpoint was created.
+     */
+    CreationTime?: String;
+    /**
+     * The date and time the Client VPN endpoint was deleted, if applicable. Information about deleted Client VPN endpoints is retained for 24 hours, unless a new Client VPN is created with the same name.
+     */
+    DeletionTime?: String;
+    /**
+     * The DNS name to be used by clients when establishing a connection.
+     */
+    DnsName?: String;
+    /**
+     * The IPv4 address range, in CIDR notation, from which client IP addresses are assigned.
+     */
+    ClientCidrBlock?: String;
+    /**
+     *  Indicates whether VPN split tunneling is supported. 
+     */
+    SplitTunnel?: Boolean;
+    /**
+     * The protocol used by the VPN session.
+     */
+    VpnProtocol?: VpnProtocol;
+    /**
+     *  The transport protocol used by the Client VPN endpoint. 
+     */
+    TransportProtocol?: TransportProtocol;
+    /**
+     * Information about the associated target networks. A target network is a subnet in a VPC.
+     */
+    AssociatedTargetNetworks?: AssociatedTargetNetworkSet;
+    /**
+     * The ARN of the server certificate.
+     */
+    ServerCertificateArn?: String;
+    /**
+     * Information about the authentication method used by the Client VPN endpoint.
+     */
+    AuthenticationOptions?: ClientVpnAuthenticationList;
+    /**
+     * Information about the client connection logging options for the Client VPN endpoint.
+     */
+    ConnectionLogOptions?: ConnectionLogResponseOptions;
+  }
+  export interface ClientVpnEndpointStatus {
+    /**
+     * The state of the Client VPN endpoint. Possible states include:    pending-associate - The Client VPN endpoint has been created but no target networks have been associated. The Client VPN endpoint cannot accept connections.    available - The Client VPN endpoint has been created and a target network has been associated. The Client VPN endpoint can accept connections.    deleting - The Client VPN endpoint is being deleted. The Client VPN endpoint cannot accept connections.    deleted - The Client VPN endpoint has been deleted. The Client VPN endpoint cannot accept connections.  
+     */
+    Code?: ClientVpnEndpointStatusCode;
+    /**
+     * A message about the status of the Client VPN endpoint.
+     */
+    Message?: String;
+  }
+  export type ClientVpnEndpointStatusCode = "pending-associate"|"available"|"deleting"|"deleted"|string;
+  export interface ClientVpnRoute {
+    /**
+     * The ID of the Client VPN endpoint with which the route is associated.
+     */
+    ClientVpnEndpointId?: String;
+    /**
+     * The IPv4 address range, in CIDR notation, of the route destination.
+     */
+    DestinationCidr?: String;
+    /**
+     * The ID of the subnet through which traffic is routed.
+     */
+    TargetSubnet?: String;
+    /**
+     *  The route type. 
+     */
+    Type?: String;
+    /**
+     * Indicates how the route was associated with the Client VPN endpoint. associate indicates that the route was automatically added when the target network was associated with the Client VPN endpoint. add-route indicates that the route was manually added using the CreateClientVpnRoute action.
+     */
+    Origin?: String;
+    /**
+     * The current state of the route.
+     */
+    Status?: ClientVpnRouteStatus;
+    /**
+     * A brief description of the route.
+     */
+    Description?: String;
+  }
+  export type ClientVpnRouteSet = ClientVpnRoute[];
+  export interface ClientVpnRouteStatus {
+    /**
+     * The state of the Client VPN endpoint route.
+     */
+    Code?: ClientVpnRouteStatusCode;
+    /**
+     * A message about the status of the Client VPN endpoint route, if applicable.
+     */
+    Message?: String;
+  }
+  export type ClientVpnRouteStatusCode = "creating"|"active"|"failed"|"deleting"|string;
+  export type ClientVpnSecurityGroupIdSet = String[];
   export interface ConfirmProductInstanceRequest {
     /**
      * The ID of the instance.
@@ -3927,6 +4452,34 @@ declare namespace EC2 {
      * The return value of the request. Returns true if the specified product code is owned by the requester and associated with the specified instance.
      */
     Return?: Boolean;
+  }
+  export interface ConnectionLogOptions {
+    /**
+     * Indicates whether connection logging is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The name of the CloudWatch Logs log group.
+     */
+    CloudwatchLogGroup?: String;
+    /**
+     * The name of the CloudWatch Logs log stream to which the connection data is published.
+     */
+    CloudwatchLogStream?: String;
+  }
+  export interface ConnectionLogResponseOptions {
+    /**
+     * Indicates whether client connection logging is enabled for the Client VPN endpoint.
+     */
+    Enabled?: Boolean;
+    /**
+     * The name of the Amazon CloudWatch Logs log group to which connection logging data is published.
+     */
+    CloudwatchLogGroup?: String;
+    /**
+     * The name of the Amazon CloudWatch Logs log stream to which connection logging data is published.
+     */
+    CloudwatchLogStream?: String;
   }
   export interface ConnectionNotification {
     /**
@@ -4185,6 +4738,86 @@ declare namespace EC2 {
      * Information about the Capacity Reservation.
      */
     CapacityReservation?: CapacityReservation;
+  }
+  export interface CreateClientVpnEndpointRequest {
+    /**
+     * The IPv4 address range, in CIDR notation, from which to assign client IP addresses. The address range cannot overlap with the local CIDR of the VPC in which the associated subnet is located, or the routes that you add manually. The address range cannot be changed after the Client VPN endpoint has been created. The CIDR block should be /22 or greater.
+     */
+    ClientCidrBlock: String;
+    /**
+     * The ARN of the server certificate. For more information, see the AWS Certificate Manager User Guide .
+     */
+    ServerCertificateArn: String;
+    /**
+     * Information about the authentication method to be used to authenticate clients.
+     */
+    AuthenticationOptions: ClientVpnAuthenticationRequestList;
+    /**
+     * Information about the client connection logging options. If you enable client connection logging, data about client connections is sent to a Cloudwatch Logs log stream. The following information is logged:   Client connection requests   Client connection results (successful and unsuccessful)   Reasons for unsuccessful client connection requests   Client connection termination time  
+     */
+    ConnectionLogOptions: ConnectionLogOptions;
+    /**
+     * Information about the DNS servers to be used for DNS resolution. A Client VPN endpoint can have up to two DNS servers. If no DNS server is specified, the DNS address of the VPC that is to be associated with Client VPN endpoint is used as the DNS server.
+     */
+    DnsServers?: ValueStringList;
+    /**
+     * The transport protocol to be used by the VPN session. Default value: udp 
+     */
+    TransportProtocol?: TransportProtocol;
+    /**
+     * A brief description of the Client VPN endpoint.
+     */
+    Description?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see  How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateClientVpnEndpointResult {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId?: String;
+    /**
+     * The current state of the Client VPN endpoint.
+     */
+    Status?: ClientVpnEndpointStatus;
+    /**
+     * The DNS name to be used by clients when establishing their VPN session.
+     */
+    DnsName?: String;
+  }
+  export interface CreateClientVpnRouteRequest {
+    /**
+     * The ID of the Client VPN endpoint to which to add the route.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The IPv4 address range, in CIDR notation, of the route destination. For example:   To add a route for Internet access, enter 0.0.0.0/0    To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range   To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range   Route address ranges cannot overlap with the CIDR range specified for client allocation.
+     */
+    DestinationCidrBlock: String;
+    /**
+     * The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint.
+     */
+    TargetVpcSubnetId: String;
+    /**
+     * A brief description of the route.
+     */
+    Description?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateClientVpnRouteResult {
+    /**
+     * The current state of the route.
+     */
+    Status?: ClientVpnRouteStatus;
   }
   export interface CreateCustomerGatewayRequest {
     /**
@@ -4978,7 +5611,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of one or more resources, separated by spaces.
+     * The IDs of one or more resources, separated by spaces. Constraints: Up to 1000 resource IDs. We recommend breaking up this request into smaller batches.
      */
     Resources: ResourceIdList;
     /**
@@ -5131,7 +5764,7 @@ declare namespace EC2 {
      */
     Encrypted?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+     * The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
      */
     Iops?: Integer;
     /**
@@ -5439,6 +6072,46 @@ declare namespace EC2 {
   export type DefaultRouteTableAssociationValue = "enable"|"disable"|string;
   export type DefaultRouteTablePropagationValue = "enable"|"disable"|string;
   export type DefaultTargetCapacityType = "spot"|"on-demand"|string;
+  export interface DeleteClientVpnEndpointRequest {
+    /**
+     * The ID of the Client VPN to be deleted.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteClientVpnEndpointResult {
+    /**
+     * The current state of the Client VPN endpoint.
+     */
+    Status?: ClientVpnEndpointStatus;
+  }
+  export interface DeleteClientVpnRouteRequest {
+    /**
+     * The ID of the Client VPN endpoint from which the route is to be deleted.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The ID of the target subnet used by the route.
+     */
+    TargetVpcSubnetId?: String;
+    /**
+     * The IPv4 address range, in CIDR notation, of the route to be deleted.
+     */
+    DestinationCidrBlock: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteClientVpnRouteResult {
+    /**
+     * The current state of the route.
+     */
+    Status?: ClientVpnRouteStatus;
+  }
   export interface DeleteCustomerGatewayRequest {
     /**
      * The ID of the customer gateway.
@@ -5824,7 +6497,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of one or more resources, separated by spaces.
+     * The IDs of one or more resources, separated by spaces. Constraints: Up to 1000 resource IDs. We recommend breaking up this request into smaller batches.
      */
     Resources: ResourceIdList;
     /**
@@ -6227,6 +6900,170 @@ declare namespace EC2 {
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: String;
+  }
+  export interface DescribeClientVpnAuthorizationRulesRequest {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface DescribeClientVpnAuthorizationRulesResult {
+    /**
+     * Information about the authorization rules.
+     */
+    AuthorizationRules?: AuthorizationRuleSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeClientVpnConnectionsRequest {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.
+     */
+    Filters?: FilterList;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeClientVpnConnectionsResult {
+    /**
+     * Information about the active and terminated client connections.
+     */
+    Connections?: ClientVpnConnectionSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeClientVpnEndpointsRequest {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointIds?: ValueStringList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeClientVpnEndpointsResult {
+    /**
+     * Information about the Client VPN endpoints.
+     */
+    ClientVpnEndpoints?: EndpointSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeClientVpnRoutesRequest {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeClientVpnRoutesResult {
+    /**
+     * Information about the Client VPN endpoint routes.
+     */
+    Routes?: ClientVpnRouteSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeClientVpnTargetNetworksRequest {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The IDs of the target network associations.
+     */
+    AssociationIds?: ValueStringList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeClientVpnTargetNetworksResult {
+    /**
+     * Information about the associated target networks.
+     */
+    ClientVpnTargetNetworks?: TargetNetworkSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
   }
   export type DescribeConversionTaskList = ConversionTask[];
   export interface DescribeConversionTasksRequest {
@@ -7809,7 +8646,7 @@ declare namespace EC2 {
     /**
      * The running instances. This list is refreshed periodically and might be out of date.
      */
-    ActiveInstances: ActiveInstanceSet;
+    ActiveInstances?: ActiveInstanceSet;
     /**
      * The token required to retrieve the next set of results. This value is null when there are no more results to return.
      */
@@ -7817,7 +8654,7 @@ declare namespace EC2 {
     /**
      * The ID of the Spot Fleet request.
      */
-    SpotFleetRequestId: String;
+    SpotFleetRequestId?: String;
   }
   export interface DescribeSpotFleetRequestHistoryRequest {
     /**
@@ -7849,11 +8686,11 @@ declare namespace EC2 {
     /**
      * Information about the events in the history of the Spot Fleet request.
      */
-    HistoryRecords: HistoryRecords;
+    HistoryRecords?: HistoryRecords;
     /**
      * The last date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). All records up to this time were retrieved. If nextToken indicates that there are more results, this value is not present.
      */
-    LastEvaluatedTime: DateTime;
+    LastEvaluatedTime?: DateTime;
     /**
      * The token required to retrieve the next set of results. This value is null when there are no more results to return.
      */
@@ -7861,11 +8698,11 @@ declare namespace EC2 {
     /**
      * The ID of the Spot Fleet request.
      */
-    SpotFleetRequestId: String;
+    SpotFleetRequestId?: String;
     /**
      * The starting date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
      */
-    StartTime: DateTime;
+    StartTime?: DateTime;
   }
   export interface DescribeSpotFleetRequestsRequest {
     /**
@@ -7893,7 +8730,7 @@ declare namespace EC2 {
     /**
      * Information about the configuration of your Spot Fleet.
      */
-    SpotFleetRequestConfigs: SpotFleetRequestConfigSet;
+    SpotFleetRequestConfigs?: SpotFleetRequestConfigSet;
   }
   export interface DescribeSpotInstanceRequestsRequest {
     /**
@@ -8752,6 +9589,18 @@ declare namespace EC2 {
   }
   export type DhcpOptionsIdStringList = String[];
   export type DhcpOptionsList = DhcpOptions[];
+  export interface DirectoryServiceAuthentication {
+    /**
+     * The ID of the Active Directory used for authentication.
+     */
+    DirectoryId?: String;
+  }
+  export interface DirectoryServiceAuthenticationRequest {
+    /**
+     * The ID of the Active Directory to be used for authentication.
+     */
+    DirectoryId?: String;
+  }
   export interface DisableTransitGatewayRouteTablePropagationRequest {
     /**
      * The ID of the propagation route table.
@@ -8823,6 +9672,30 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+  }
+  export interface DisassociateClientVpnTargetNetworkRequest {
+    /**
+     * The ID of the Client VPN endpoint from which to disassociate the target network.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The ID of the target network association.
+     */
+    AssociationId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisassociateClientVpnTargetNetworkResult {
+    /**
+     * The ID of the target network association.
+     */
+    AssociationId?: String;
+    /**
+     * The current state of the target network association.
+     */
+    Status?: AssociationStatus;
   }
   export interface DisassociateIamInstanceProfileRequest {
     /**
@@ -8971,6 +9844,16 @@ declare namespace EC2 {
     HostedZoneId?: String;
   }
   export type DnsEntrySet = DnsEntry[];
+  export interface DnsServersOptionsModifyStructure {
+    /**
+     * The IPv4 address range, in CIDR notation, of the DNS servers to be used. You can specify up to two DNS servers. Ensure that the DNS servers can be reached by the clients. The specified values overwrite the existing values.
+     */
+    CustomDnsServers?: ValueStringList;
+    /**
+     * Indicates whether DNS servers should be used. Specify False to delete the existing DNS servers.
+     */
+    Enabled?: Boolean;
+  }
   export type DnsSupportValue = "enable"|"disable"|string;
   export type DomainType = "vpc"|"standard"|string;
   export type Double = number;
@@ -8980,7 +9863,7 @@ declare namespace EC2 {
      */
     DeleteOnTermination?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For io1, this represents the number of IOPS that are provisioned for the volume. For gp2, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-10,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most regions. Maximum io1IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) that the volume supports. For io1, this represents the number of IOPS that are provisioned for the volume. For gp2, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most Regions. Maximum io1IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
      */
     Iops?: Integer;
     /**
@@ -9210,6 +10093,7 @@ declare namespace EC2 {
     Return?: Boolean;
   }
   export type EndDateType = "unlimited"|"limited"|string;
+  export type EndpointSet = ClientVpnEndpoint[];
   export type EventCode = "instance-reboot"|"system-reboot"|"system-maintenance"|"instance-retirement"|"instance-stop"|string;
   export interface EventInformation {
     /**
@@ -9228,6 +10112,42 @@ declare namespace EC2 {
   export type EventType = "instanceChange"|"fleetRequestChange"|"error"|string;
   export type ExcessCapacityTerminationPolicy = "noTermination"|"default"|string;
   export type ExecutableByStringList = String[];
+  export interface ExportClientVpnClientCertificateRevocationListRequest {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ExportClientVpnClientCertificateRevocationListResult {
+    /**
+     * Information about the client certificate revocation list.
+     */
+    CertificateRevocationList?: String;
+    /**
+     * The current state of the client certificate revocation list.
+     */
+    Status?: ClientCertificateRevocationListStatus;
+  }
+  export interface ExportClientVpnClientConfigurationRequest {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ExportClientVpnClientConfigurationResult {
+    /**
+     * the contents of the client configuration file.
+     */
+    ClientConfiguration?: String;
+  }
   export type ExportEnvironment = "citrix"|"vmware"|"microsoft"|string;
   export interface ExportTask {
     /**
@@ -9975,15 +10895,15 @@ declare namespace EC2 {
     /**
      * Information about the event.
      */
-    EventInformation: EventInformation;
+    EventInformation?: EventInformation;
     /**
      * The event type.    error - An error with the Spot Fleet request.    fleetRequestChange - A change in the status or configuration of the Spot Fleet request.    instanceChange - An instance was launched or terminated.    Information - An informational event.  
      */
-    EventType: EventType;
+    EventType?: EventType;
     /**
      * The date and time of the event, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
      */
-    Timestamp: DateTime;
+    Timestamp?: DateTime;
   }
   export interface HistoryRecordEntry {
     /**
@@ -10403,6 +11323,26 @@ declare namespace EC2 {
   export type ImageList = Image[];
   export type ImageState = "pending"|"available"|"invalid"|"deregistered"|"transient"|"failed"|"error"|string;
   export type ImageTypeValues = "machine"|"kernel"|"ramdisk"|string;
+  export interface ImportClientVpnClientCertificateRevocationListRequest {
+    /**
+     * The ID of the Client VPN endpoint to which the client certificate revocation list applies.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The client certificate revocation list file. For more information, see Generate a Client Certificate Revocation List in the AWS Client VPN Admin Guide.
+     */
+    CertificateRevocationList: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ImportClientVpnClientCertificateRevocationListResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
+  }
   export interface ImportImageRequest {
     /**
      * The architecture of the virtual machine. Valid values: i386 | x86_64 
@@ -12339,6 +13279,38 @@ declare namespace EC2 {
   export interface ModifyCapacityReservationResult {
     /**
      * Information about the Capacity Reservation.
+     */
+    Return?: Boolean;
+  }
+  export interface ModifyClientVpnEndpointRequest {
+    /**
+     * The ID of the Client VPN endpoint to modify.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The ARN of the server certificate to be used. The server certificate must be provisioned in AWS Certificate Manager (ACM).
+     */
+    ServerCertificateArn?: String;
+    /**
+     * Information about the client connection logging options. If you enable client connection logging, data about client connections is sent to a Cloudwatch Logs log stream. The following information is logged:   Client connection requests   Client connection results (successful and unsuccessful)   Reasons for unsuccessful client connection requests   Client connection termination time  
+     */
+    ConnectionLogOptions?: ConnectionLogOptions;
+    /**
+     * Information about the DNS servers to be used by Client VPN connections. A Client VPN endpoint can have up to two DNS servers.
+     */
+    DnsServers?: DnsServersOptionsModifyStructure;
+    /**
+     * A brief description of the Client VPN endpoint.
+     */
+    Description?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyClientVpnEndpointResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
      */
     Return?: Boolean;
   }
@@ -14456,7 +15428,7 @@ declare namespace EC2 {
     /**
      * The ID of the Spot Fleet request.
      */
-    SpotFleetRequestId: String;
+    SpotFleetRequestId?: String;
   }
   export interface RequestSpotInstancesRequest {
     /**
@@ -15120,6 +16092,34 @@ declare namespace EC2 {
      * The move status for the IP address.
      */
     Status?: Status;
+  }
+  export interface RevokeClientVpnIngressRequest {
+    /**
+     * The ID of the Client VPN endpoint with which the authorization rule is associated.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The IPv4 address range, in CIDR notation, of the network for which access is being removed.
+     */
+    TargetNetworkCidr: String;
+    /**
+     * The ID of the Active Directory group for which to revoke access. 
+     */
+    AccessGroupId?: String;
+    /**
+     * Indicates whether access should be revoked for all clients.
+     */
+    RevokeAllGroups?: Boolean;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface RevokeClientVpnIngressResult {
+    /**
+     * The current state of the authorization rule.
+     */
+    Status?: ClientVpnAuthorizationRuleStatus;
   }
   export interface RevokeSecurityGroupEgressRequest {
     /**
@@ -16342,19 +17342,19 @@ declare namespace EC2 {
     /**
      * The creation date and time of the request.
      */
-    CreateTime: DateTime;
+    CreateTime?: DateTime;
     /**
      * The configuration of the Spot Fleet request.
      */
-    SpotFleetRequestConfig: SpotFleetRequestConfigData;
+    SpotFleetRequestConfig?: SpotFleetRequestConfigData;
     /**
      * The ID of the Spot Fleet request.
      */
-    SpotFleetRequestId: String;
+    SpotFleetRequestId?: String;
     /**
      * The state of the Spot Fleet request.
      */
-    SpotFleetRequestState: BatchState;
+    SpotFleetRequestState?: BatchState;
   }
   export interface SpotFleetRequestConfigData {
     /**
@@ -16986,15 +17986,42 @@ declare namespace EC2 {
     /**
      * The Amazon Resource Name (ARN) of the target group.
      */
-    Arn: String;
+    Arn?: String;
   }
   export type TargetGroups = TargetGroup[];
   export interface TargetGroupsConfig {
     /**
      * One or more target groups.
      */
-    TargetGroups: TargetGroups;
+    TargetGroups?: TargetGroups;
   }
+  export interface TargetNetwork {
+    /**
+     * The ID of the association.
+     */
+    AssociationId?: String;
+    /**
+     * The ID of the VPC in which the target network (subnet) is located.
+     */
+    VpcId?: String;
+    /**
+     * The ID of the subnet specified as the target network.
+     */
+    TargetNetworkId?: String;
+    /**
+     * The ID of the Client VPN endpoint with which the target network is associated.
+     */
+    ClientVpnEndpointId?: String;
+    /**
+     * The current state of the target network association.
+     */
+    Status?: AssociationStatus;
+    /**
+     * The IDs of the security groups applied to the target network association.
+     */
+    SecurityGroups?: ValueStringList;
+  }
+  export type TargetNetworkSet = TargetNetwork[];
   export interface TargetReservationValue {
     /**
      * The total value of the Convertible Reserved Instances that make up the exchange. This is the sum of the list value, remaining upfront price, and additional upfront cost of the exchange.
@@ -17008,6 +18035,53 @@ declare namespace EC2 {
   export type TargetReservationValueSet = TargetReservationValue[];
   export type TelemetryStatus = "UP"|"DOWN"|string;
   export type Tenancy = "default"|"dedicated"|"host"|string;
+  export interface TerminateClientVpnConnectionsRequest {
+    /**
+     * The ID of the Client VPN endpoint to which the client is connected.
+     */
+    ClientVpnEndpointId: String;
+    /**
+     * The ID of the client connection to be terminated.
+     */
+    ConnectionId?: String;
+    /**
+     * The name of the user who initiated the connection. Use this option to terminate all active connections for the specified user. This option can only be used if the user has established up to five connections.
+     */
+    Username?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface TerminateClientVpnConnectionsResult {
+    /**
+     * The ID of the Client VPN endpoint.
+     */
+    ClientVpnEndpointId?: String;
+    /**
+     * The user who established the terminated client connections.
+     */
+    Username?: String;
+    /**
+     * The current state of the client connections.
+     */
+    ConnectionStatuses?: TerminateConnectionStatusSet;
+  }
+  export interface TerminateConnectionStatus {
+    /**
+     * The ID of the client connection.
+     */
+    ConnectionId?: String;
+    /**
+     * The state of the client connection.
+     */
+    PreviousStatus?: ClientVpnConnectionStatus;
+    /**
+     * A message about the status of the client connection, if applicable.
+     */
+    CurrentStatus?: ClientVpnConnectionStatus;
+  }
+  export type TerminateConnectionStatusSet = TerminateConnectionStatus[];
   export interface TerminateInstancesRequest {
     /**
      * One or more instance IDs. Constraints: Up to 1000 instance IDs. We recommend breaking up this request into smaller batches.
@@ -17392,6 +18466,7 @@ declare namespace EC2 {
      */
     Ipv6Support?: Ipv6SupportValue;
   }
+  export type TransportProtocol = "tcp"|"udp"|string;
   export type TunnelOptionsList = VpnTunnelOptionsSpecification[];
   export interface UnassignIpv6AddressesRequest {
     /**
@@ -17465,7 +18540,7 @@ declare namespace EC2 {
     /**
      * Information about the error.
      */
-    Error: UnsuccessfulItemError;
+    Error?: UnsuccessfulItemError;
     /**
      * The ID of the resource.
      */
@@ -17475,11 +18550,11 @@ declare namespace EC2 {
     /**
      * The error code.
      */
-    Code: String;
+    Code?: String;
     /**
      * The error message accompanying the error code.
      */
-    Message: String;
+    Message?: String;
   }
   export type UnsuccessfulItemList = UnsuccessfulItem[];
   export type UnsuccessfulItemSet = UnsuccessfulItem[];
@@ -17656,7 +18731,7 @@ declare namespace EC2 {
      */
     VolumeId?: String;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-10,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most regions. Maximum io1IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most regions. Maximum io1IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
      */
     Iops?: Integer;
     /**
@@ -18224,6 +19299,7 @@ declare namespace EC2 {
   }
   export type VpnGatewayIdStringList = String[];
   export type VpnGatewayList = VpnGateway[];
+  export type VpnProtocol = "openvpn"|string;
   export type VpnState = "pending"|"available"|"deleting"|"deleted"|string;
   export interface VpnStaticRoute {
     /**

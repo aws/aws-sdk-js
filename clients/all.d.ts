@@ -165,3 +165,5 @@ export import SecurityHub = require('./securityhub');
 export import AppMesh = require('./appmesh');
 export import LicenseManager = require('./licensemanager');
 export import Kafka = require('./kafka');
+export import ApiGatewayManagementApi = require('./apigatewaymanagementapi');
+export import ApiGatewayV2 = require('./apigatewayv2');

@@ -666,5 +666,11 @@
   },
   "kafka": {
     "name": "Kafka"
+  },
+  "apigatewaymanagementapi": {
+    "name": "ApiGatewayManagementApi"
+  },
+  "apigatewayv2": {
+    "name": "ApiGatewayV2"
   }
 }

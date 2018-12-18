@@ -167,6 +167,8 @@ export abstract class ConfigurationServicePlaceholders {
   appmesh?: AWS.AppMesh.Types.ClientConfiguration;
   licensemanager?: AWS.LicenseManager.Types.ClientConfiguration;
   kafka?: AWS.Kafka.Types.ClientConfiguration;
+  apigatewaymanagementapi?: AWS.ApiGatewayManagementApi.Types.ClientConfiguration;
+  apigatewayv2?: AWS.ApiGatewayV2.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -336,4 +338,6 @@ export interface ConfigurationServiceApiVersions {
   appmesh?: AWS.AppMesh.Types.apiVersion;
   licensemanager?: AWS.LicenseManager.Types.apiVersion;
   kafka?: AWS.Kafka.Types.apiVersion;
+  apigatewaymanagementapi?: AWS.ApiGatewayManagementApi.Types.apiVersion;
+  apigatewayv2?: AWS.ApiGatewayV2.Types.apiVersion;
 }

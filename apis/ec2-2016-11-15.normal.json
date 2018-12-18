@@ -110,6 +110,20 @@
       },
       "documentation": "<p>Allocates a Dedicated Host to your account. At a minimum, specify the instance size type, Availability Zone, and quantity of hosts to allocate.</p>"
     },
+    "ApplySecurityGroupsToClientVpnTargetNetwork": {
+      "name": "ApplySecurityGroupsToClientVpnTargetNetwork",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ApplySecurityGroupsToClientVpnTargetNetworkRequest"
+      },
+      "output": {
+        "shape": "ApplySecurityGroupsToClientVpnTargetNetworkResult"
+      },
+      "documentation": "<p>Applies a security group to the association between the target network and the Client VPN endpoint. This action replaces the existing security groups with the specified security groups.</p>"
+    },
     "AssignIpv6Addresses": {
       "name": "AssignIpv6Addresses",
       "http": {
@@ -148,6 +162,20 @@
         "shape": "AssociateAddressResult"
       },
       "documentation": "<p>Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account.</p> <p>[VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.</p> <important> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the <i>Elastic IP Addresses</i> section of <a href=\"http://aws.amazon.com/ec2/pricing/\">Amazon EC2 Pricing</a>.</p> </important>"
+    },
+    "AssociateClientVpnTargetNetwork": {
+      "name": "AssociateClientVpnTargetNetwork",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateClientVpnTargetNetworkRequest"
+      },
+      "output": {
+        "shape": "AssociateClientVpnTargetNetworkResult"
+      },
+      "documentation": "<p>Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.</p>"
     },
     "AssociateDhcpOptions": {
       "name": "AssociateDhcpOptions",
@@ -296,6 +324,20 @@
         "shape": "AttachVpnGatewayResult"
       },
       "documentation": "<p>Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+    },
+    "AuthorizeClientVpnIngress": {
+      "name": "AuthorizeClientVpnIngress",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AuthorizeClientVpnIngressRequest"
+      },
+      "output": {
+        "shape": "AuthorizeClientVpnIngressResult"
+      },
+      "documentation": "<p>Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in AWS or on-premises networks.</p>"
     },
     "AuthorizeSecurityGroupEgress": {
       "name": "AuthorizeSecurityGroupEgress",
@@ -508,6 +550,34 @@
         "shape": "CreateCapacityReservationResult"
       },
       "documentation": "<p>Creates a new Capacity Reservation with the specified attributes.</p> <p>Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This gives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. By creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html\">Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to fulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try again at a later time, try in a different Availability Zone, or request a smaller capacity reservation. If your application is flexible across instance types and sizes, try to create a Capacity Reservation with different instance attributes.</p> <p>Your request could also fail if the requested quantity exceeds your On-Demand Instance limit for the selected instance type. If your request fails due to limit constraints, increase your On-Demand Instance limit for the required instance type and try again. For more information about increasing your instance limits, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 Service Limits</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "CreateClientVpnEndpoint": {
+      "name": "CreateClientVpnEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateClientVpnEndpointRequest"
+      },
+      "output": {
+        "shape": "CreateClientVpnEndpointResult"
+      },
+      "documentation": "<p>Creates a Client VPN endpoint. A Client VPN endpoint is the resource you create and configure to enable and manage client VPN sessions. It is the destination endpoint at which all client VPN sessions are terminated.</p>"
+    },
+    "CreateClientVpnRoute": {
+      "name": "CreateClientVpnRoute",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateClientVpnRouteRequest"
+      },
+      "output": {
+        "shape": "CreateClientVpnRouteResult"
+      },
+      "documentation": "<p>Adds a route to a network to a Client VPN endpoint. Each Client VPN endpoint has a route table that describes the available destination network routes. Each route in the route table specifies the path for traﬃc to speciﬁc resources or networks.</p>"
     },
     "CreateCustomerGateway": {
       "name": "CreateCustomerGateway",
@@ -1070,6 +1140,34 @@
         "shape": "CreateVpnGatewayResult"
       },
       "documentation": "<p>Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself.</p> <p>For more information about virtual private gateways, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+    },
+    "DeleteClientVpnEndpoint": {
+      "name": "DeleteClientVpnEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteClientVpnEndpointRequest"
+      },
+      "output": {
+        "shape": "DeleteClientVpnEndpointResult"
+      },
+      "documentation": "<p>Deletes the specified Client VPN endpoint. You must disassociate all target networks before you can delete a Client VPN endpoint.</p>"
+    },
+    "DeleteClientVpnRoute": {
+      "name": "DeleteClientVpnRoute",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteClientVpnRouteRequest"
+      },
+      "output": {
+        "shape": "DeleteClientVpnRouteResult"
+      },
+      "documentation": "<p>Deletes a route from a Client VPN endpoint. You can only delete routes that you manually added using the <b>CreateClientVpnRoute</b> action. You cannot delete routes that were automatically added when associating a subnet. To remove routes that have been automatically added, disassociate the target subnet from the Client VPN endpoint.</p>"
     },
     "DeleteCustomerGateway": {
       "name": "DeleteCustomerGateway",
@@ -1651,6 +1749,76 @@
         "shape": "DescribeClassicLinkInstancesResult"
       },
       "documentation": "<p>Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink. You cannot use this request to return information about other instances.</p>"
+    },
+    "DescribeClientVpnAuthorizationRules": {
+      "name": "DescribeClientVpnAuthorizationRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeClientVpnAuthorizationRulesRequest"
+      },
+      "output": {
+        "shape": "DescribeClientVpnAuthorizationRulesResult"
+      },
+      "documentation": "<p>Describes the authorization rules for a specified Client VPN endpoint.</p>"
+    },
+    "DescribeClientVpnConnections": {
+      "name": "DescribeClientVpnConnections",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeClientVpnConnectionsRequest"
+      },
+      "output": {
+        "shape": "DescribeClientVpnConnectionsResult"
+      },
+      "documentation": "<p>Describes active client connections and connections that have been terminated within the last 60 minutes for the specified Client VPN endpoint.</p>"
+    },
+    "DescribeClientVpnEndpoints": {
+      "name": "DescribeClientVpnEndpoints",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeClientVpnEndpointsRequest"
+      },
+      "output": {
+        "shape": "DescribeClientVpnEndpointsResult"
+      },
+      "documentation": "<p>Describes one or more Client VPN endpoints in the account.</p>"
+    },
+    "DescribeClientVpnRoutes": {
+      "name": "DescribeClientVpnRoutes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeClientVpnRoutesRequest"
+      },
+      "output": {
+        "shape": "DescribeClientVpnRoutesResult"
+      },
+      "documentation": "<p>Describes the routes for the specified Client VPN endpoint.</p>"
+    },
+    "DescribeClientVpnTargetNetworks": {
+      "name": "DescribeClientVpnTargetNetworks",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeClientVpnTargetNetworksRequest"
+      },
+      "output": {
+        "shape": "DescribeClientVpnTargetNetworksResult"
+      },
+      "documentation": "<p>Describes the target networks associated with the specified Client VPN endpoint.</p>"
     },
     "DescribeConversionTasks": {
       "name": "DescribeConversionTasks",
@@ -2925,6 +3093,20 @@
       },
       "documentation": "<p>Disassociates an Elastic IP address from the instance or network interface it's associated with.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p>"
     },
+    "DisassociateClientVpnTargetNetwork": {
+      "name": "DisassociateClientVpnTargetNetwork",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateClientVpnTargetNetworkRequest"
+      },
+      "output": {
+        "shape": "DisassociateClientVpnTargetNetworkResult"
+      },
+      "documentation": "<p>Disassociates a target network from the specified Client VPN endpoint. When you disassociate the last target network from a Client VPN, the following happens:</p> <ul> <li> <p>The route that was automatically added for the VPC is deleted</p> </li> <li> <p>All active client connections are terminated</p> </li> <li> <p>New client connections are disallowed</p> </li> <li> <p>The Client VPN endpoint's status changes to <code>pending-associate</code> </p> </li> </ul>"
+    },
     "DisassociateIamInstanceProfile": {
       "name": "DisassociateIamInstanceProfile",
       "http": {
@@ -3055,6 +3237,34 @@
         "shape": "EnableVpcClassicLinkDnsSupportResult"
       },
       "documentation": "<p>Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "ExportClientVpnClientCertificateRevocationList": {
+      "name": "ExportClientVpnClientCertificateRevocationList",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ExportClientVpnClientCertificateRevocationListRequest"
+      },
+      "output": {
+        "shape": "ExportClientVpnClientCertificateRevocationListResult"
+      },
+      "documentation": "<p>Downloads the client certificate revocation list for the specified Client VPN endpoint.</p>"
+    },
+    "ExportClientVpnClientConfiguration": {
+      "name": "ExportClientVpnClientConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ExportClientVpnClientConfigurationRequest"
+      },
+      "output": {
+        "shape": "ExportClientVpnClientConfigurationResult"
+      },
+      "documentation": "<p>Downloads the contents of the client configuration file for the specified Client VPN endpoint. The client configuration file includes the Client VPN endpoint and certificate information clients need to establish a connection with the Client VPN endpoint.</p>"
     },
     "ExportTransitGatewayRoutes": {
       "name": "ExportTransitGatewayRoutes",
@@ -3196,6 +3406,20 @@
       },
       "documentation": "<p>Gets information about the route table propagations for the specified transit gateway route table.</p>"
     },
+    "ImportClientVpnClientCertificateRevocationList": {
+      "name": "ImportClientVpnClientCertificateRevocationList",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ImportClientVpnClientCertificateRevocationListRequest"
+      },
+      "output": {
+        "shape": "ImportClientVpnClientCertificateRevocationListResult"
+      },
+      "documentation": "<p>Uploads a client certificate revocation list to the specified Client VPN endpoint. Uploading a client certificate revocation list overwrites the existing client certificate revocation list.</p> <p>Uploading a client certificate revocation list resets existing client connections.</p>"
+    },
     "ImportImage": {
       "name": "ImportImage",
       "http": {
@@ -3279,6 +3503,20 @@
         "shape": "ModifyCapacityReservationResult"
       },
       "documentation": "<p>Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation's instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.</p>"
+    },
+    "ModifyClientVpnEndpoint": {
+      "name": "ModifyClientVpnEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyClientVpnEndpointRequest"
+      },
+      "output": {
+        "shape": "ModifyClientVpnEndpointResult"
+      },
+      "documentation": "<p>Modifies the specified Client VPN endpoint. You can only modify an endpoint's server certificate information, client connection logging information, DNS server, and description. Modifying the DNS server resets existing client connections.</p>"
     },
     "ModifyFleet": {
       "name": "ModifyFleet",
@@ -3982,6 +4220,20 @@
       },
       "documentation": "<p>Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface.</p>"
     },
+    "RevokeClientVpnIngress": {
+      "name": "RevokeClientVpnIngress",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RevokeClientVpnIngressRequest"
+      },
+      "output": {
+        "shape": "RevokeClientVpnIngressResult"
+      },
+      "documentation": "<p>Removes an ingress authorization rule from a Client VPN endpoint. </p>"
+    },
     "RevokeSecurityGroupEgress": {
       "name": "RevokeSecurityGroupEgress",
       "http": {
@@ -4073,6 +4325,20 @@
         "shape": "StopInstancesResult"
       },
       "documentation": "<p>Stops an Amazon EBS-backed instance.</p> <p>You can use the Stop action to hibernate an instance if the instance is <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#enabling-hibernation\">enabled for hibernation</a> and it meets the <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites\">hibernation prerequisites</a>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html\">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your Windows instance, Amazon EC2 charges you for a full instance hour. If you stop and restart your Windows instance, a new instance hour begins and Amazon EC2 charges you for another full instance hour even if you are still within the same 60-minute period when it was stopped. Every time you start your Linux instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage.</p> <p>You can't start, stop, or hibernate Spot Instances, and you can't stop or hibernate instance store-backed instances. For information about using hibernation for Spot Instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html#hibernate-spot-instances\">Hibernating Interrupted Spot Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs.</p> <p>Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html\">Troubleshooting Stopping Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "TerminateClientVpnConnections": {
+      "name": "TerminateClientVpnConnections",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TerminateClientVpnConnectionsRequest"
+      },
+      "output": {
+        "shape": "TerminateClientVpnConnectionsResult"
+      },
+      "documentation": "<p>Terminates active Client VPN endpoint connections. This action can be used to terminate a specific client connection, or up to five connections established by a specific user.</p>"
     },
     "TerminateInstances": {
       "name": "TerminateInstances",
@@ -4626,6 +4892,43 @@
         "locationName": "item"
       }
     },
+    "ApplySecurityGroupsToClientVpnTargetNetworkRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId",
+        "VpcId",
+        "SecurityGroupIds"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>"
+        },
+        "VpcId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the VPC in which the associated target network is located.</p>"
+        },
+        "SecurityGroupIds": {
+          "shape": "ClientVpnSecurityGroupIdSet",
+          "documentation": "<p>The IDs of the security groups to apply to the associated target network. Up to 5 security groups can be applied to an associated target network.</p>",
+          "locationName": "SecurityGroupId"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ApplySecurityGroupsToClientVpnTargetNetworkResult": {
+      "type": "structure",
+      "members": {
+        "SecurityGroupIds": {
+          "shape": "ClientVpnSecurityGroupIdSet",
+          "documentation": "<p>The IDs of the applied security groups.</p>",
+          "locationName": "securityGroupIds"
+        }
+      }
+    },
     "ArchitectureValues": {
       "type": "string",
       "enum": [
@@ -4745,6 +5048,42 @@
           "shape": "String",
           "documentation": "<p>[EC2-VPC] The ID that represents the association of the Elastic IP address with an instance.</p>",
           "locationName": "associationId"
+        }
+      }
+    },
+    "AssociateClientVpnTargetNetworkRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId",
+        "SubnetId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>"
+        },
+        "SubnetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the subnet to associate with the Client VPN endpoint.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "AssociateClientVpnTargetNetworkResult": {
+      "type": "structure",
+      "members": {
+        "AssociationId": {
+          "shape": "String",
+          "documentation": "<p>The unique ID of the target network association.</p>",
+          "locationName": "associationId"
+        },
+        "Status": {
+          "shape": "AssociationStatus",
+          "documentation": "<p>The current state of the target network association.</p>",
+          "locationName": "status"
         }
       }
     },
@@ -4938,12 +5277,67 @@
         }
       }
     },
+    "AssociatedNetworkType": {
+      "type": "string",
+      "enum": [
+        "vpc"
+      ]
+    },
+    "AssociatedTargetNetwork": {
+      "type": "structure",
+      "members": {
+        "NetworkId": {
+          "shape": "String",
+          "documentation": "<p> <b>The ID of the subnet.</b> </p>",
+          "locationName": "networkId"
+        },
+        "NetworkType": {
+          "shape": "AssociatedNetworkType",
+          "documentation": "<p> <b>The target network type.</b> </p>",
+          "locationName": "networkType"
+        }
+      },
+      "documentation": "<p>Describes a target network that is associated with a Client VPN endpoint. A target network is a subnet in a VPC.</p>"
+    },
+    "AssociatedTargetNetworkSet": {
+      "type": "list",
+      "member": {
+        "shape": "AssociatedTargetNetwork",
+        "locationName": "item"
+      }
+    },
     "AssociationIdList": {
       "type": "list",
       "member": {
         "shape": "String",
         "locationName": "AssociationId"
       }
+    },
+    "AssociationStatus": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "AssociationStatusCode",
+          "documentation": "<p>The state of the target network association.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>A message about the status of the target network association, if applicable.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes the state of a target network association.</p>"
+    },
+    "AssociationStatusCode": {
+      "type": "string",
+      "enum": [
+        "associating",
+        "associated",
+        "association-failed",
+        "disassociating",
+        "disassociated"
+      ]
     },
     "AttachClassicLinkVpcRequest": {
       "type": "structure",
@@ -5143,6 +5537,92 @@
         }
       },
       "documentation": "<p>Describes a value for a resource attribute that is a String.</p>"
+    },
+    "AuthorizationRule": {
+      "type": "structure",
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint with which the authorization rule is associated.</p>",
+          "locationName": "clientVpnEndpointId"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A brief description of the authorization rule.</p>",
+          "locationName": "description"
+        },
+        "GroupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Active Directory group to which the authorization rule grants access.</p>",
+          "locationName": "groupId"
+        },
+        "AccessAll": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the authorization rule grants access to all clients.</p>",
+          "locationName": "accessAll"
+        },
+        "DestinationCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation, of the network to which the authorization rule applies.</p>",
+          "locationName": "destinationCidr"
+        },
+        "Status": {
+          "shape": "ClientVpnAuthorizationRuleStatus",
+          "documentation": "<p>The current state of the authorization rule.</p>",
+          "locationName": "status"
+        }
+      },
+      "documentation": "<p> <b>Information about an authorization rule.</b> </p>"
+    },
+    "AuthorizationRuleSet": {
+      "type": "list",
+      "member": {
+        "shape": "AuthorizationRule",
+        "locationName": "item"
+      }
+    },
+    "AuthorizeClientVpnIngressRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId",
+        "TargetNetworkCidr"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>"
+        },
+        "TargetNetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation, of the network for which access is being authorized.</p>"
+        },
+        "AccessGroupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Active Directory group to grant access.</p>"
+        },
+        "AuthorizeAllGroups": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to grant access to all clients. Use <code>true</code> to grant all clients who successfully establish a VPN connection access to the network.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A brief description of the authorization rule.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "AuthorizeClientVpnIngressResult": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ClientVpnAuthorizationRuleStatus",
+          "documentation": "<p>The current state of the authorization rule.</p>",
+          "locationName": "status"
+        }
+      }
     },
     "AuthorizeSecurityGroupEgressRequest": {
       "type": "structure",
@@ -5754,10 +6234,6 @@
     },
     "CancelSpotFleetRequestsError": {
       "type": "structure",
-      "required": [
-        "Code",
-        "Message"
-      ],
       "members": {
         "Code": {
           "shape": "CancelBatchErrorCode",
@@ -5774,10 +6250,6 @@
     },
     "CancelSpotFleetRequestsErrorItem": {
       "type": "structure",
-      "required": [
-        "Error",
-        "SpotFleetRequestId"
-      ],
       "members": {
         "Error": {
           "shape": "CancelSpotFleetRequestsError",
@@ -5842,11 +6314,6 @@
     },
     "CancelSpotFleetRequestsSuccessItem": {
       "type": "structure",
-      "required": [
-        "CurrentSpotFleetRequestState",
-        "PreviousSpotFleetRequestState",
-        "SpotFleetRequestId"
-      ],
       "members": {
         "CurrentSpotFleetRequestState": {
           "shape": "BatchState",
@@ -6119,6 +6586,27 @@
         "dedicated"
       ]
     },
+    "CertificateAuthentication": {
+      "type": "structure",
+      "members": {
+        "ClientRootCertificateChain": {
+          "shape": "String",
+          "documentation": "<p> <b>The ARN of the client certificate. </b> </p>",
+          "locationName": "clientRootCertificateChain"
+        }
+      },
+      "documentation": "<p> <b>Information about the client certificate used for authentication.</b> </p>"
+    },
+    "CertificateAuthenticationRequest": {
+      "type": "structure",
+      "members": {
+        "ClientRootCertificateChainArn": {
+          "shape": "String",
+          "documentation": "<p> <b>The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in AWS Certificate Manager (ACM).</b> </p>"
+        }
+      },
+      "documentation": "<p> <b>Information about the client certificate to be used for authentication.</b> </p>"
+    },
     "CidrAuthorizationContext": {
       "type": "structure",
       "required": [
@@ -6213,9 +6701,6 @@
     },
     "ClassicLoadBalancer": {
       "type": "structure",
-      "required": [
-        "Name"
-      ],
       "members": {
         "Name": {
           "shape": "String",
@@ -6236,9 +6721,6 @@
     },
     "ClassicLoadBalancersConfig": {
       "type": "structure",
-      "required": [
-        "ClassicLoadBalancers"
-      ],
       "members": {
         "ClassicLoadBalancers": {
           "shape": "ClassicLoadBalancers",
@@ -6247,6 +6729,29 @@
         }
       },
       "documentation": "<p>Describes the Classic Load Balancers to attach to a Spot Fleet. Spot Fleet registers the running Spot Instances with these Classic Load Balancers.</p>"
+    },
+    "ClientCertificateRevocationListStatus": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "ClientCertificateRevocationListStatusCode",
+          "documentation": "<p>The state of the client certificate revocation list.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>A message about the status of the client certificate revocation list, if applicable.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes the state of a client certificate revocation list.</p>"
+    },
+    "ClientCertificateRevocationListStatusCode": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "active"
+      ]
     },
     "ClientData": {
       "type": "structure",
@@ -6269,6 +6774,374 @@
         }
       },
       "documentation": "<p>Describes the client-specific data.</p>"
+    },
+    "ClientVpnAuthentication": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "ClientVpnAuthenticationType",
+          "documentation": "<p>The authentication type used.</p>",
+          "locationName": "type"
+        },
+        "ActiveDirectory": {
+          "shape": "DirectoryServiceAuthentication",
+          "documentation": "<p>Information about the Active Directory, if applicable.</p>",
+          "locationName": "activeDirectory"
+        },
+        "MutualAuthentication": {
+          "shape": "CertificateAuthentication",
+          "documentation": "<p>Information about the authentication certificates, if applicable.</p>",
+          "locationName": "mutualAuthentication"
+        }
+      },
+      "documentation": "<p>Describes the authentication methods used by a Client VPN endpoint. Client VPN supports Active Directory and mutual authentication. For more information, see <a href=\"vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication\">Authentication</a> in the <i>AWS Client VPN Admin Guide</i>.</p>"
+    },
+    "ClientVpnAuthenticationList": {
+      "type": "list",
+      "member": {
+        "shape": "ClientVpnAuthentication",
+        "locationName": "item"
+      }
+    },
+    "ClientVpnAuthenticationRequest": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "ClientVpnAuthenticationType",
+          "documentation": "<p>The type of client authentication to be used. Specify <code>certificate-authentication</code> to use certificate-based authentication, or <code>directory-service-authentication</code> to use Active Directory authentication.</p>"
+        },
+        "ActiveDirectory": {
+          "shape": "DirectoryServiceAuthenticationRequest",
+          "documentation": "<p>Information about the Active Directory to be used, if applicable. You must provide this information if <b>Type</b> is <code>directory-service-authentication</code>.</p>"
+        },
+        "MutualAuthentication": {
+          "shape": "CertificateAuthenticationRequest",
+          "documentation": "<p>Information about the authentication certificates to be used, if applicable. You must provide this information if <b>Type</b> is <code>certificate-authentication</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes the authentication method to be used by a Client VPN endpoint. Client VPN supports Active Directory and mutual authentication. For more information, see <a href=\"vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication\">Athentication</a> in the <i>AWS Client VPN Admin Guide</i>.</p>"
+    },
+    "ClientVpnAuthenticationRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "ClientVpnAuthenticationRequest"
+      }
+    },
+    "ClientVpnAuthenticationType": {
+      "type": "string",
+      "enum": [
+        "certificate-authentication",
+        "directory-service-authentication"
+      ]
+    },
+    "ClientVpnAuthorizationRuleStatus": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "ClientVpnAuthorizationRuleStatusCode",
+          "documentation": "<p>The state of the authorization rule.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>A message about the status of the authorization rule, if applicable.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes the state of an authorization rule.</p>"
+    },
+    "ClientVpnAuthorizationRuleStatusCode": {
+      "type": "string",
+      "enum": [
+        "authorizing",
+        "active",
+        "failed",
+        "revoking"
+      ]
+    },
+    "ClientVpnConnection": {
+      "type": "structure",
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint to which the client is connected.</p>",
+          "locationName": "clientVpnEndpointId"
+        },
+        "Timestamp": {
+          "shape": "String",
+          "documentation": "<p> <b>The current date and time.</b> </p>",
+          "locationName": "timestamp"
+        },
+        "ConnectionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the client connection.</p>",
+          "locationName": "connectionId"
+        },
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>The username of the client who established the client connection. This information is only provided if Active Directory client authentication is used.</p>",
+          "locationName": "username"
+        },
+        "ConnectionEstablishedTime": {
+          "shape": "String",
+          "documentation": "<p>The date and time the client connection was established.</p>",
+          "locationName": "connectionEstablishedTime"
+        },
+        "IngressBytes": {
+          "shape": "String",
+          "documentation": "<p>The number of bytes sent by the client.</p>",
+          "locationName": "ingressBytes"
+        },
+        "EgressBytes": {
+          "shape": "String",
+          "documentation": "<p>The number of bytes received by the client.</p>",
+          "locationName": "egressBytes"
+        },
+        "IngressPackets": {
+          "shape": "String",
+          "documentation": "<p>The number of packets sent by the client.</p>",
+          "locationName": "ingressPackets"
+        },
+        "EgressPackets": {
+          "shape": "String",
+          "documentation": "<p>The number of packets received by the client.</p>",
+          "locationName": "egressPackets"
+        },
+        "ClientIp": {
+          "shape": "String",
+          "documentation": "<p>The IP address of the client.</p>",
+          "locationName": "clientIp"
+        },
+        "CommonName": {
+          "shape": "String",
+          "documentation": "<p> <b>The common name associated with the client. This is either the name of the client certificate, or the Active Directory user name.</b> </p>",
+          "locationName": "commonName"
+        },
+        "Status": {
+          "shape": "ClientVpnConnectionStatus",
+          "documentation": "<p>The current state of the client connection.</p>",
+          "locationName": "status"
+        },
+        "ConnectionEndTime": {
+          "shape": "String",
+          "documentation": "<p>The date and time the client connection was terminated.</p>",
+          "locationName": "connectionEndTime"
+        }
+      },
+      "documentation": "<p>Describes a client connection.</p>"
+    },
+    "ClientVpnConnectionSet": {
+      "type": "list",
+      "member": {
+        "shape": "ClientVpnConnection",
+        "locationName": "item"
+      }
+    },
+    "ClientVpnConnectionStatus": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "ClientVpnConnectionStatusCode",
+          "documentation": "<p>The state of the client connection.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>A message about the status of the client connection, if applicable.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes the status of a client connection.</p>"
+    },
+    "ClientVpnConnectionStatusCode": {
+      "type": "string",
+      "enum": [
+        "active",
+        "failed-to-terminate",
+        "terminating",
+        "terminated"
+      ]
+    },
+    "ClientVpnEndpoint": {
+      "type": "structure",
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>",
+          "locationName": "clientVpnEndpointId"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A brief description of the endpoint.</p>",
+          "locationName": "description"
+        },
+        "Status": {
+          "shape": "ClientVpnEndpointStatus",
+          "documentation": "<p>The current state of the Client VPN endpoint.</p>",
+          "locationName": "status"
+        },
+        "CreationTime": {
+          "shape": "String",
+          "documentation": "<p>The date and time the Client VPN endpoint was created.</p>",
+          "locationName": "creationTime"
+        },
+        "DeletionTime": {
+          "shape": "String",
+          "documentation": "<p>The date and time the Client VPN endpoint was deleted, if applicable. Information about deleted Client VPN endpoints is retained for 24 hours, unless a new Client VPN is created with the same name.</p>",
+          "locationName": "deletionTime"
+        },
+        "DnsName": {
+          "shape": "String",
+          "documentation": "<p>The DNS name to be used by clients when establishing a connection.</p>",
+          "locationName": "dnsName"
+        },
+        "ClientCidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation, from which client IP addresses are assigned.</p>",
+          "locationName": "clientCidrBlock"
+        },
+        "SplitTunnel": {
+          "shape": "Boolean",
+          "documentation": "<p> <b>Indicates whether VPN split tunneling is supported.</b> </p>",
+          "locationName": "splitTunnel"
+        },
+        "VpnProtocol": {
+          "shape": "VpnProtocol",
+          "documentation": "<p>The protocol used by the VPN session.</p>",
+          "locationName": "vpnProtocol"
+        },
+        "TransportProtocol": {
+          "shape": "TransportProtocol",
+          "documentation": "<p> <b>The transport protocol used by the Client VPN endpoint.</b> </p>",
+          "locationName": "transportProtocol"
+        },
+        "AssociatedTargetNetworks": {
+          "shape": "AssociatedTargetNetworkSet",
+          "documentation": "<p>Information about the associated target networks. A target network is a subnet in a VPC.</p>",
+          "locationName": "associatedTargetNetwork"
+        },
+        "ServerCertificateArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the server certificate.</p>",
+          "locationName": "serverCertificateArn"
+        },
+        "AuthenticationOptions": {
+          "shape": "ClientVpnAuthenticationList",
+          "documentation": "<p>Information about the authentication method used by the Client VPN endpoint.</p>",
+          "locationName": "authenticationOptions"
+        },
+        "ConnectionLogOptions": {
+          "shape": "ConnectionLogResponseOptions",
+          "documentation": "<p>Information about the client connection logging options for the Client VPN endpoint.</p>",
+          "locationName": "connectionLogOptions"
+        }
+      },
+      "documentation": "<p>Describes a Client VPN endpoint.</p>"
+    },
+    "ClientVpnEndpointStatus": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "ClientVpnEndpointStatusCode",
+          "documentation": "<p>The state of the Client VPN endpoint. Possible states include:</p> <ul> <li> <p> <code>pending-associate</code> - The Client VPN endpoint has been created but no target networks have been associated. The Client VPN endpoint cannot accept connections.</p> </li> <li> <p> <code>available</code> - The Client VPN endpoint has been created and a target network has been associated. The Client VPN endpoint can accept connections.</p> </li> <li> <p> <code>deleting</code> - The Client VPN endpoint is being deleted. The Client VPN endpoint cannot accept connections.</p> </li> <li> <p> <code>deleted</code> - The Client VPN endpoint has been deleted. The Client VPN endpoint cannot accept connections.</p> </li> </ul>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>A message about the status of the Client VPN endpoint.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes the state of a Client VPN endpoint.</p>"
+    },
+    "ClientVpnEndpointStatusCode": {
+      "type": "string",
+      "enum": [
+        "pending-associate",
+        "available",
+        "deleting",
+        "deleted"
+      ]
+    },
+    "ClientVpnRoute": {
+      "type": "structure",
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint with which the route is associated.</p>",
+          "locationName": "clientVpnEndpointId"
+        },
+        "DestinationCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation, of the route destination.</p>",
+          "locationName": "destinationCidr"
+        },
+        "TargetSubnet": {
+          "shape": "String",
+          "documentation": "<p>The ID of the subnet through which traffic is routed.</p>",
+          "locationName": "targetSubnet"
+        },
+        "Type": {
+          "shape": "String",
+          "documentation": "<p> <b>The route type.</b> </p>",
+          "locationName": "type"
+        },
+        "Origin": {
+          "shape": "String",
+          "documentation": "<p>Indicates how the route was associated with the Client VPN endpoint. <code>associate</code> indicates that the route was automatically added when the target network was associated with the Client VPN endpoint. <code>add-route</code> indicates that the route was manually added using the <b>CreateClientVpnRoute</b> action.</p>",
+          "locationName": "origin"
+        },
+        "Status": {
+          "shape": "ClientVpnRouteStatus",
+          "documentation": "<p>The current state of the route.</p>",
+          "locationName": "status"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A brief description of the route.</p>",
+          "locationName": "description"
+        }
+      },
+      "documentation": "<p> <b>Information about a Client VPN endpoint route.</b> </p>"
+    },
+    "ClientVpnRouteSet": {
+      "type": "list",
+      "member": {
+        "shape": "ClientVpnRoute",
+        "locationName": "item"
+      }
+    },
+    "ClientVpnRouteStatus": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "ClientVpnRouteStatusCode",
+          "documentation": "<p>The state of the Client VPN endpoint route.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>A message about the status of the Client VPN endpoint route, if applicable.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes the state of a Client VPN endpoint route.</p>"
+    },
+    "ClientVpnRouteStatusCode": {
+      "type": "string",
+      "enum": [
+        "creating",
+        "active",
+        "failed",
+        "deleting"
+      ]
+    },
+    "ClientVpnSecurityGroupIdSet": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "item"
+      }
     },
     "ConfirmProductInstanceRequest": {
       "type": "structure",
@@ -6306,6 +7179,42 @@
           "locationName": "return"
         }
       }
+    },
+    "ConnectionLogOptions": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether connection logging is enabled.</p>"
+        },
+        "CloudwatchLogGroup": {
+          "shape": "String",
+          "documentation": "<p>The name of the CloudWatch Logs log group.</p>"
+        },
+        "CloudwatchLogStream": {
+          "shape": "String",
+          "documentation": "<p>The name of the CloudWatch Logs log stream to which the connection data is published.</p>"
+        }
+      },
+      "documentation": "<p>Describes the client connection logging options for the Client VPN endpoint.</p>"
+    },
+    "ConnectionLogResponseOptions": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether client connection logging is enabled for the Client VPN endpoint.</p>"
+        },
+        "CloudwatchLogGroup": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon CloudWatch Logs log group to which connection logging data is published.</p>"
+        },
+        "CloudwatchLogStream": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon CloudWatch Logs log stream to which connection logging data is published.</p>"
+        }
+      },
+      "documentation": "<p>Information about the client connection logging options for a Client VPN endpoint.</p>"
     },
     "ConnectionNotification": {
       "type": "structure",
@@ -6689,6 +7598,115 @@
           "shape": "CapacityReservation",
           "documentation": "<p>Information about the Capacity Reservation.</p>",
           "locationName": "capacityReservation"
+        }
+      }
+    },
+    "CreateClientVpnEndpointRequest": {
+      "type": "structure",
+      "required": [
+        "ClientCidrBlock",
+        "ServerCertificateArn",
+        "AuthenticationOptions",
+        "ConnectionLogOptions"
+      ],
+      "members": {
+        "ClientCidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation, from which to assign client IP addresses. The address range cannot overlap with the local CIDR of the VPC in which the associated subnet is located, or the routes that you add manually. The address range cannot be changed after the Client VPN endpoint has been created. The CIDR block should be /22 or greater.</p>"
+        },
+        "ServerCertificateArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the server certificate. For more information, see the <a href=\"acm/latest/userguide/acm-overview.html\">AWS Certificate Manager User Guide</a> .</p>"
+        },
+        "AuthenticationOptions": {
+          "shape": "ClientVpnAuthenticationRequestList",
+          "documentation": "<p>Information about the authentication method to be used to authenticate clients.</p>",
+          "locationName": "Authentication"
+        },
+        "ConnectionLogOptions": {
+          "shape": "ConnectionLogOptions",
+          "documentation": "<p>Information about the client connection logging options.</p> <p>If you enable client connection logging, data about client connections is sent to a Cloudwatch Logs log stream. The following information is logged:</p> <ul> <li> <p>Client connection requests</p> </li> <li> <p>Client connection results (successful and unsuccessful)</p> </li> <li> <p>Reasons for unsuccessful client connection requests</p> </li> <li> <p>Client connection termination time</p> </li> </ul>"
+        },
+        "DnsServers": {
+          "shape": "ValueStringList",
+          "documentation": "<p>Information about the DNS servers to be used for DNS resolution. A Client VPN endpoint can have up to two DNS servers. If no DNS server is specified, the DNS address of the VPC that is to be associated with Client VPN endpoint is used as the DNS server.</p>"
+        },
+        "TransportProtocol": {
+          "shape": "TransportProtocol",
+          "documentation": "<p>The transport protocol to be used by the VPN session.</p> <p>Default value: <code>udp</code> </p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A brief description of the Client VPN endpoint.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\"> How to Ensure Idempotency</a>.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateClientVpnEndpointResult": {
+      "type": "structure",
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>",
+          "locationName": "clientVpnEndpointId"
+        },
+        "Status": {
+          "shape": "ClientVpnEndpointStatus",
+          "documentation": "<p>The current state of the Client VPN endpoint.</p>",
+          "locationName": "status"
+        },
+        "DnsName": {
+          "shape": "String",
+          "documentation": "<p>The DNS name to be used by clients when establishing their VPN session.</p>",
+          "locationName": "dnsName"
+        }
+      }
+    },
+    "CreateClientVpnRouteRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId",
+        "DestinationCidrBlock",
+        "TargetVpcSubnetId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint to which to add the route.</p>"
+        },
+        "DestinationCidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation, of the route destination. For example:</p> <ul> <li> <p>To add a route for Internet access, enter <code>0.0.0.0/0</code> </p> </li> <li> <p>To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range</p> </li> <li> <p>To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range</p> </li> </ul> <p>Route address ranges cannot overlap with the CIDR range specified for client allocation.</p>"
+        },
+        "TargetVpcSubnetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A brief description of the route.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "CreateClientVpnRouteResult": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ClientVpnRouteStatus",
+          "documentation": "<p>The current state of the route.</p>",
+          "locationName": "status"
         }
       }
     },
@@ -7876,7 +8894,7 @@
         },
         "Resources": {
           "shape": "ResourceIdList",
-          "documentation": "<p>The IDs of one or more resources, separated by spaces.</p>",
+          "documentation": "<p>The IDs of one or more resources, separated by spaces.</p> <p>Constraints: Up to 1000 resource IDs. We recommend breaking up this request into smaller batches.</p>",
           "locationName": "ResourceId"
         },
         "Tags": {
@@ -8099,7 +9117,7 @@
         },
         "Iops": {
           "shape": "Integer",
-          "documentation": "<p>The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed only on <a href=\"AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This parameter is valid only for Provisioned IOPS SSD (io1) volumes.</p>"
+          "documentation": "<p>The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed only on <a href=\"AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This parameter is valid only for Provisioned IOPS SSD (io1) volumes.</p>"
         },
         "KmsKeyId": {
           "shape": "String",
@@ -8575,6 +9593,67 @@
         "spot",
         "on-demand"
       ]
+    },
+    "DeleteClientVpnEndpointRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN to be deleted.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DeleteClientVpnEndpointResult": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ClientVpnEndpointStatus",
+          "documentation": "<p>The current state of the Client VPN endpoint.</p>",
+          "locationName": "status"
+        }
+      }
+    },
+    "DeleteClientVpnRouteRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId",
+        "DestinationCidrBlock"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint from which the route is to be deleted.</p>"
+        },
+        "TargetVpcSubnetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the target subnet used by the route.</p>"
+        },
+        "DestinationCidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation, of the route to be deleted.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DeleteClientVpnRouteResult": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ClientVpnRouteStatus",
+          "documentation": "<p>The current state of the route.</p>",
+          "locationName": "status"
+        }
+      }
     },
     "DeleteCustomerGatewayRequest": {
       "type": "structure",
@@ -9228,7 +10307,7 @@
         },
         "Resources": {
           "shape": "ResourceIdList",
-          "documentation": "<p>The IDs of one or more resources, separated by spaces.</p>",
+          "documentation": "<p>The IDs of one or more resources, separated by spaces.</p> <p>Constraints: Up to 1000 resource IDs. We recommend breaking up this request into smaller batches.</p>",
           "locationName": "resourceId"
         },
         "Tags": {
@@ -9859,6 +10938,228 @@
         },
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeClientVpnAuthorizationRulesRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next page of results.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>"
+        }
+      }
+    },
+    "DescribeClientVpnAuthorizationRulesResult": {
+      "type": "structure",
+      "members": {
+        "AuthorizationRules": {
+          "shape": "AuthorizationRuleSet",
+          "documentation": "<p>Information about the authorization rules.</p>",
+          "locationName": "authorizationRule"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeClientVpnConnectionsRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>",
+          "locationName": "Filter"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeClientVpnConnectionsResult": {
+      "type": "structure",
+      "members": {
+        "Connections": {
+          "shape": "ClientVpnConnectionSet",
+          "documentation": "<p>Information about the active and terminated client connections.</p>",
+          "locationName": "connections"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeClientVpnEndpointsRequest": {
+      "type": "structure",
+      "members": {
+        "ClientVpnEndpointIds": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>",
+          "locationName": "ClientVpnEndpointId"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next page of results.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>",
+          "locationName": "Filter"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeClientVpnEndpointsResult": {
+      "type": "structure",
+      "members": {
+        "ClientVpnEndpoints": {
+          "shape": "EndpointSet",
+          "documentation": "<p>Information about the Client VPN endpoints.</p>",
+          "locationName": "clientVpnEndpoint"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeClientVpnRoutesRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next page of results.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeClientVpnRoutesResult": {
+      "type": "structure",
+      "members": {
+        "Routes": {
+          "shape": "ClientVpnRouteSet",
+          "documentation": "<p>Information about the Client VPN endpoint routes.</p>",
+          "locationName": "routes"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeClientVpnTargetNetworksRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>"
+        },
+        "AssociationIds": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The IDs of the target network associations.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next page of results.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>",
+          "locationName": "Filter"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeClientVpnTargetNetworksResult": {
+      "type": "structure",
+      "members": {
+        "ClientVpnTargetNetworks": {
+          "shape": "TargetNetworkSet",
+          "documentation": "<p>Information about the associated target networks.</p>",
+          "locationName": "clientVpnTargetNetworks"
+        },
+        "NextToken": {
+          "shape": "NextToken",
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
@@ -12090,10 +13391,6 @@
     },
     "DescribeSpotFleetInstancesResponse": {
       "type": "structure",
-      "required": [
-        "ActiveInstances",
-        "SpotFleetRequestId"
-      ],
       "members": {
         "ActiveInstances": {
           "shape": "ActiveInstanceSet",
@@ -12155,12 +13452,6 @@
     },
     "DescribeSpotFleetRequestHistoryResponse": {
       "type": "structure",
-      "required": [
-        "HistoryRecords",
-        "LastEvaluatedTime",
-        "SpotFleetRequestId",
-        "StartTime"
-      ],
       "members": {
         "HistoryRecords": {
           "shape": "HistoryRecords",
@@ -12218,9 +13509,6 @@
     },
     "DescribeSpotFleetRequestsResponse": {
       "type": "structure",
-      "required": [
-        "SpotFleetRequestConfigs"
-      ],
       "members": {
         "NextToken": {
           "shape": "String",
@@ -13484,6 +14772,27 @@
         "locationName": "item"
       }
     },
+    "DirectoryServiceAuthentication": {
+      "type": "structure",
+      "members": {
+        "DirectoryId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Active Directory used for authentication.</p>",
+          "locationName": "directoryId"
+        }
+      },
+      "documentation": "<p>Describes an Active Directory.</p>"
+    },
+    "DirectoryServiceAuthenticationRequest": {
+      "type": "structure",
+      "members": {
+        "DirectoryId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Active Directory to be used for authentication.</p>"
+        }
+      },
+      "documentation": "<p>Describes the Active Directory to be used for client authentication.</p>"
+    },
     "DisableTransitGatewayRouteTablePropagationRequest": {
       "type": "structure",
       "required": [
@@ -13595,6 +14904,42 @@
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
+        }
+      }
+    },
+    "DisassociateClientVpnTargetNetworkRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId",
+        "AssociationId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint from which to disassociate the target network.</p>"
+        },
+        "AssociationId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the target network association.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DisassociateClientVpnTargetNetworkResult": {
+      "type": "structure",
+      "members": {
+        "AssociationId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the target network association.</p>",
+          "locationName": "associationId"
+        },
+        "Status": {
+          "shape": "AssociationStatus",
+          "documentation": "<p>The current state of the target network association.</p>",
+          "locationName": "status"
         }
       }
     },
@@ -13853,6 +15198,20 @@
         "locationName": "item"
       }
     },
+    "DnsServersOptionsModifyStructure": {
+      "type": "structure",
+      "members": {
+        "CustomDnsServers": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The IPv4 address range, in CIDR notation, of the DNS servers to be used. You can specify up to two DNS servers. Ensure that the DNS servers can be reached by the clients. The specified values overwrite the existing values.</p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether DNS servers should be used. Specify <code>False</code> to delete the existing DNS servers.</p>"
+        }
+      },
+      "documentation": "<p>Information about the DNS server to be used.</p>"
+    },
     "DnsSupportValue": {
       "type": "string",
       "enum": [
@@ -13880,7 +15239,7 @@
         },
         "Iops": {
           "shape": "Integer",
-          "documentation": "<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code>, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code>, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-10,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href=\"AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>",
+          "documentation": "<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code>, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code>, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-16,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most Regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href=\"AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>",
           "locationName": "iops"
         },
         "SnapshotId": {
@@ -14312,6 +15671,13 @@
         "limited"
       ]
     },
+    "EndpointSet": {
+      "type": "list",
+      "member": {
+        "shape": "ClientVpnEndpoint",
+        "locationName": "item"
+      }
+    },
     "EventCode": {
       "type": "string",
       "enum": [
@@ -14363,6 +15729,63 @@
       "member": {
         "shape": "String",
         "locationName": "ExecutableBy"
+      }
+    },
+    "ExportClientVpnClientCertificateRevocationListRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ExportClientVpnClientCertificateRevocationListResult": {
+      "type": "structure",
+      "members": {
+        "CertificateRevocationList": {
+          "shape": "String",
+          "documentation": "<p>Information about the client certificate revocation list.</p>",
+          "locationName": "certificateRevocationList"
+        },
+        "Status": {
+          "shape": "ClientCertificateRevocationListStatus",
+          "documentation": "<p>The current state of the client certificate revocation list.</p>",
+          "locationName": "status"
+        }
+      }
+    },
+    "ExportClientVpnClientConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ExportClientVpnClientConfigurationResult": {
+      "type": "structure",
+      "members": {
+        "ClientConfiguration": {
+          "shape": "String",
+          "documentation": "<p>the contents of the client configuration file.</p>",
+          "locationName": "clientConfiguration"
+        }
       }
     },
     "ExportEnvironment": {
@@ -15590,11 +17013,6 @@
     },
     "HistoryRecord": {
       "type": "structure",
-      "required": [
-        "EventInformation",
-        "EventType",
-        "Timestamp"
-      ],
       "members": {
         "EventInformation": {
           "shape": "EventInformation",
@@ -16295,6 +17713,37 @@
         "kernel",
         "ramdisk"
       ]
+    },
+    "ImportClientVpnClientCertificateRevocationListRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId",
+        "CertificateRevocationList"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint to which the client certificate revocation list applies.</p>"
+        },
+        "CertificateRevocationList": {
+          "shape": "String",
+          "documentation": "<p>The client certificate revocation list file. For more information, see <a href=\"vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate\">Generate a Client Certificate Revocation List</a> in the <i>AWS Client VPN Admin Guide</i>.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ImportClientVpnClientCertificateRevocationListResult": {
+      "type": "structure",
+      "members": {
+        "Return": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName": "return"
+        }
+      }
     },
     "ImportImageRequest": {
       "type": "structure",
@@ -19091,7 +20540,7 @@
       "type": "string",
       "max": 128,
       "min": 3,
-      "pattern": "[a-zA-Z0-9\\(\\)\\.-/_]+"
+      "pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+"
     },
     "LaunchTemplateNameStringList": {
       "type": "list",
@@ -19592,6 +21041,48 @@
         "Return": {
           "shape": "Boolean",
           "documentation": "<p>Information about the Capacity Reservation.</p>",
+          "locationName": "return"
+        }
+      }
+    },
+    "ModifyClientVpnEndpointRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint to modify.</p>"
+        },
+        "ServerCertificateArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the server certificate to be used. The server certificate must be provisioned in AWS Certificate Manager (ACM).</p>"
+        },
+        "ConnectionLogOptions": {
+          "shape": "ConnectionLogOptions",
+          "documentation": "<p>Information about the client connection logging options.</p> <p>If you enable client connection logging, data about client connections is sent to a Cloudwatch Logs log stream. The following information is logged:</p> <ul> <li> <p>Client connection requests</p> </li> <li> <p>Client connection results (successful and unsuccessful)</p> </li> <li> <p>Reasons for unsuccessful client connection requests</p> </li> <li> <p>Client connection termination time</p> </li> </ul>"
+        },
+        "DnsServers": {
+          "shape": "DnsServersOptionsModifyStructure",
+          "documentation": "<p>Information about the DNS servers to be used by Client VPN connections. A Client VPN endpoint can have up to two DNS servers.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A brief description of the Client VPN endpoint.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ModifyClientVpnEndpointResult": {
+      "type": "structure",
+      "members": {
+        "Return": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
         }
       }
@@ -23047,9 +24538,6 @@
     },
     "RequestSpotFleetResponse": {
       "type": "structure",
-      "required": [
-        "SpotFleetRequestId"
-      ],
       "members": {
         "SpotFleetRequestId": {
           "shape": "String",
@@ -24131,6 +25619,45 @@
         "Status": {
           "shape": "Status",
           "documentation": "<p>The move status for the IP address.</p>",
+          "locationName": "status"
+        }
+      }
+    },
+    "RevokeClientVpnIngressRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId",
+        "TargetNetworkCidr"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint with which the authorization rule is associated.</p>"
+        },
+        "TargetNetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation, of the network for which access is being removed.</p>"
+        },
+        "AccessGroupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Active Directory group for which to revoke access. </p>"
+        },
+        "RevokeAllGroups": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether access should be revoked for all clients.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "RevokeClientVpnIngressResult": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ClientVpnAuthorizationRuleStatus",
+          "documentation": "<p>The current state of the authorization rule.</p>",
           "locationName": "status"
         }
       }
@@ -25899,12 +27426,6 @@
     },
     "SpotFleetRequestConfig": {
       "type": "structure",
-      "required": [
-        "CreateTime",
-        "SpotFleetRequestConfig",
-        "SpotFleetRequestId",
-        "SpotFleetRequestState"
-      ],
       "members": {
         "ActivityStatus": {
           "shape": "ActivityStatus",
@@ -26980,9 +28501,6 @@
     },
     "TargetGroup": {
       "type": "structure",
-      "required": [
-        "Arn"
-      ],
       "members": {
         "Arn": {
           "shape": "String",
@@ -27003,9 +28521,6 @@
     },
     "TargetGroupsConfig": {
       "type": "structure",
-      "required": [
-        "TargetGroups"
-      ],
       "members": {
         "TargetGroups": {
           "shape": "TargetGroups",
@@ -27014,6 +28529,49 @@
         }
       },
       "documentation": "<p>Describes the target groups to attach to a Spot Fleet. Spot Fleet registers the running Spot Instances with these target groups.</p>"
+    },
+    "TargetNetwork": {
+      "type": "structure",
+      "members": {
+        "AssociationId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the association.</p>",
+          "locationName": "associationId"
+        },
+        "VpcId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the VPC in which the target network (subnet) is located.</p>",
+          "locationName": "vpcId"
+        },
+        "TargetNetworkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the subnet specified as the target network.</p>",
+          "locationName": "targetNetworkId"
+        },
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint with which the target network is associated.</p>",
+          "locationName": "clientVpnEndpointId"
+        },
+        "Status": {
+          "shape": "AssociationStatus",
+          "documentation": "<p>The current state of the target network association.</p>",
+          "locationName": "status"
+        },
+        "SecurityGroups": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The IDs of the security groups applied to the target network association.</p>",
+          "locationName": "securityGroups"
+        }
+      },
+      "documentation": "<p>Describes a target network associated with a Client VPN endpoint.</p>"
+    },
+    "TargetNetworkSet": {
+      "type": "list",
+      "member": {
+        "shape": "TargetNetwork",
+        "locationName": "item"
+      }
     },
     "TargetReservationValue": {
       "type": "structure",
@@ -27052,6 +28610,78 @@
         "dedicated",
         "host"
       ]
+    },
+    "TerminateClientVpnConnectionsRequest": {
+      "type": "structure",
+      "required": [
+        "ClientVpnEndpointId"
+      ],
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint to which the client is connected.</p>"
+        },
+        "ConnectionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the client connection to be terminated.</p>"
+        },
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>The name of the user who initiated the connection. Use this option to terminate all active connections for the specified user. This option can only be used if the user has established up to five connections.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "TerminateClientVpnConnectionsResult": {
+      "type": "structure",
+      "members": {
+        "ClientVpnEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Client VPN endpoint.</p>",
+          "locationName": "clientVpnEndpointId"
+        },
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>The user who established the terminated client connections.</p>",
+          "locationName": "username"
+        },
+        "ConnectionStatuses": {
+          "shape": "TerminateConnectionStatusSet",
+          "documentation": "<p>The current state of the client connections.</p>",
+          "locationName": "connectionStatuses"
+        }
+      }
+    },
+    "TerminateConnectionStatus": {
+      "type": "structure",
+      "members": {
+        "ConnectionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the client connection.</p>",
+          "locationName": "connectionId"
+        },
+        "PreviousStatus": {
+          "shape": "ClientVpnConnectionStatus",
+          "documentation": "<p>The state of the client connection.</p>",
+          "locationName": "previousStatus"
+        },
+        "CurrentStatus": {
+          "shape": "ClientVpnConnectionStatus",
+          "documentation": "<p>A message about the status of the client connection, if applicable.</p>",
+          "locationName": "currentStatus"
+        }
+      },
+      "documentation": "<p>Information about a terminated Client VPN endpoint client connection.</p>"
+    },
+    "TerminateConnectionStatusSet": {
+      "type": "list",
+      "member": {
+        "shape": "TerminateConnectionStatus",
+        "locationName": "item"
+      }
     },
     "TerminateInstancesRequest": {
       "type": "structure",
@@ -27733,6 +29363,13 @@
       },
       "documentation": "<p>Describes the VPC attachment options.</p>"
     },
+    "TransportProtocol": {
+      "type": "string",
+      "enum": [
+        "tcp",
+        "udp"
+      ]
+    },
     "TunnelOptionsList": {
       "type": "list",
       "member": {
@@ -27872,9 +29509,6 @@
     },
     "UnsuccessfulItem": {
       "type": "structure",
-      "required": [
-        "Error"
-      ],
       "members": {
         "Error": {
           "shape": "UnsuccessfulItemError",
@@ -27891,10 +29525,6 @@
     },
     "UnsuccessfulItemError": {
       "type": "structure",
-      "required": [
-        "Code",
-        "Message"
-      ],
       "members": {
         "Code": {
           "shape": "String",
@@ -28214,7 +29844,7 @@
         },
         "Iops": {
           "shape": "Integer",
-          "documentation": "<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-10,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href=\"AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>",
+          "documentation": "<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-16,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href=\"AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>",
           "locationName": "iops"
         },
         "Tags": {
@@ -29240,6 +30870,12 @@
         "shape": "VpnGateway",
         "locationName": "item"
       }
+    },
+    "VpnProtocol": {
+      "type": "string",
+      "enum": [
+        "openvpn"
+      ]
     },
     "VpnState": {
       "type": "string",

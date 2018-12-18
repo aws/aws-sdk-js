@@ -2424,7 +2424,7 @@
         },
         "Health": {
           "shape": "EnvironmentHealth",
-          "documentation": "<p>Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:</p> <ul> <li> <p> <code>Red</code>: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.</p> </li> <li> <p> <code>Yellow</code>: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.</p> </li> <li> <p> <code>Green</code>: Indicates the environment is healthy and fully functional.</p> </li> <li> <p> <code>Grey</code>: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an <code>UpdateEnvironment</code> or <code>RestartEnvironement</code> request.</p> </li> </ul> <p> Default: <code>Grey</code> </p>"
+          "documentation": "<p>Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:</p> <ul> <li> <p> <code>Red</code>: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.</p> </li> <li> <p> <code>Yellow</code>: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.</p> </li> <li> <p> <code>Green</code>: Indicates the environment is healthy and fully functional.</p> </li> <li> <p> <code>Grey</code>: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an <code>UpdateEnvironment</code> or <code>RestartEnvironment</code> request.</p> </li> </ul> <p> Default: <code>Grey</code> </p>"
         },
         "HealthStatus": {
           "shape": "EnvironmentHealthStatus",
@@ -2537,7 +2537,7 @@
         },
         "Message": {
           "shape": "Message",
-          "documentation": "<p>The retrieved information.</p>"
+          "documentation": "<p>The retrieved information. Currently contains a presigned Amazon S3 URL. The files are deleted after 15 minutes.</p> <p>Anyone in possession of this URL can access the files before they are deleted. Make the URL available only to trusted parties.</p>"
         }
       },
       "documentation": "<p>The information retrieved from the Amazon EC2 instances.</p>"
@@ -2605,6 +2605,10 @@
           "shape": "LaunchConfigurationList",
           "documentation": "<p>The Auto Scaling launch configurations in use by this environment.</p>"
         },
+        "LaunchTemplates": {
+          "shape": "LaunchTemplateList",
+          "documentation": "<p>The Amazon EC2 launch templates in use by this environment.</p>"
+        },
         "LoadBalancers": {
           "shape": "LoadBalancerList",
           "documentation": "<p>The LoadBalancers in use by this environment.</p>"
@@ -2655,11 +2659,11 @@
       "members": {
         "Name": {
           "shape": "String",
-          "documentation": "<p>The name of this environment tier.</p>"
+          "documentation": "<p>The name of this environment tier.</p> <p>Valid values:</p> <ul> <li> <p>For <i>Web server tier</i> – <code>WebServer</code> </p> </li> <li> <p>For <i>Worker tier</i> – <code>Worker</code> </p> </li> </ul>"
         },
         "Type": {
           "shape": "String",
-          "documentation": "<p>The type of this environment tier.</p>"
+          "documentation": "<p>The type of this environment tier.</p> <p>Valid values:</p> <ul> <li> <p>For <i>Web server tier</i> – <code>Standard</code> </p> </li> <li> <p>For <i>Worker tier</i> – <code>SQS/HTTP</code> </p> </li> </ul>"
         },
         "Version": {
           "shape": "String",
@@ -2923,6 +2927,22 @@
       "type": "list",
       "member": {
         "shape": "LaunchConfiguration"
+      }
+    },
+    "LaunchTemplate": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the launch template.</p>"
+        }
+      },
+      "documentation": "<p>Describes an Amazon EC2 launch template.</p>"
+    },
+    "LaunchTemplateList": {
+      "type": "list",
+      "member": {
+        "shape": "LaunchTemplate"
       }
     },
     "LaunchedAt": {

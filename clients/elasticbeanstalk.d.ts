@@ -1443,7 +1443,7 @@ declare namespace ElasticBeanstalk {
      */
     AbortableOperationInProgress?: AbortableOperationInProgress;
     /**
-     * Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:    Red: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.    Yellow: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.    Green: Indicates the environment is healthy and fully functional.    Grey: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an UpdateEnvironment or RestartEnvironement request.    Default: Grey 
+     * Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:    Red: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.    Yellow: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.    Green: Indicates the environment is healthy and fully functional.    Grey: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an UpdateEnvironment or RestartEnvironment request.    Default: Grey 
      */
     Health?: EnvironmentHealth;
     /**
@@ -1498,7 +1498,7 @@ declare namespace ElasticBeanstalk {
      */
     SampleTimestamp?: SampleTimestamp;
     /**
-     * The retrieved information.
+     * The retrieved information. Currently contains a presigned Amazon S3 URL. The files are deleted after 15 minutes. Anyone in possession of this URL can access the files before they are deleted. Make the URL available only to trusted parties.
      */
     Message?: Message;
   }
@@ -1535,6 +1535,10 @@ declare namespace ElasticBeanstalk {
      */
     LaunchConfigurations?: LaunchConfigurationList;
     /**
+     * The Amazon EC2 launch templates in use by this environment.
+     */
+    LaunchTemplates?: LaunchTemplateList;
+    /**
      * The LoadBalancers in use by this environment.
      */
     LoadBalancers?: LoadBalancerList;
@@ -1562,11 +1566,11 @@ declare namespace ElasticBeanstalk {
   export type EnvironmentStatus = "Launching"|"Updating"|"Ready"|"Terminating"|"Terminated"|string;
   export interface EnvironmentTier {
     /**
-     * The name of this environment tier.
+     * The name of this environment tier. Valid values:   For Web server tier – WebServer    For Worker tier – Worker   
      */
     Name?: String;
     /**
-     * The type of this environment tier.
+     * The type of this environment tier. Valid values:   For Web server tier – Standard    For Worker tier – SQS/HTTP   
      */
     Type?: String;
     /**
@@ -1720,6 +1724,13 @@ declare namespace ElasticBeanstalk {
     Name?: ResourceId;
   }
   export type LaunchConfigurationList = LaunchConfiguration[];
+  export interface LaunchTemplate {
+    /**
+     * The ID of the launch template.
+     */
+    Id?: ResourceId;
+  }
+  export type LaunchTemplateList = LaunchTemplate[];
   export type LaunchedAt = Date;
   export interface ListAvailableSolutionStacksResultMessage {
     /**

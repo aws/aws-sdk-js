@@ -166,5 +166,7 @@ module.exports = {
   SecurityHub: require('./securityhub'),
   AppMesh: require('./appmesh'),
   LicenseManager: require('./licensemanager'),
-  Kafka: require('./kafka')
+  Kafka: require('./kafka'),
+  ApiGatewayManagementApi: require('./apigatewaymanagementapi'),
+  ApiGatewayV2: require('./apigatewayv2')
 };
