@@ -545,6 +545,34 @@ describe('AWS.S3', function() {
       expect(req.path).to.equal('/bucket');
     });
 
+    it('allows user to use key that is substring of bucket', function() {
+      var req = build('putObject', {
+        Bucket: 'foobar',
+        Key: 'foo'
+      })
+      expect(req.path).to.equal('/foo');
+      expect(req.virtualHostedBucket).to.equal('foobar');
+    });
+
+    it('allows user to use key that matches bucket', function() {
+      var req = build('putObject', {
+        Bucket: 'foobar',
+        Key: 'foobar'
+      })
+      expect(req.path).to.equal('/foobar');
+      expect(req.virtualHostedBucket).to.equal('foobar');
+    });
+
+    it('allows user to use key, with querystring param, that matches bucket', function() {
+      var req = build('headObject', {
+        Bucket: 'foobar',
+        Key: 'foobar',
+        VersionId: 'null'
+      })
+      expect(req.path).to.equal('/foobar?versionId=null');
+      expect(req.virtualHostedBucket).to.equal('foobar');
+    });
+
     it('does not allow non-bucket operations with s3BucketEndpoint set', function() {
       s3 = new AWS.S3({
         endpoint: 'foo.bar',
@@ -1561,6 +1589,24 @@ describe('AWS.S3', function() {
           expect(req.httpRequest.region).to.equal('eu-west-1');
           expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3.eu-west-1.amazonaws.com');
           expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+
+        it('prepends bucket to hostname and includes full object key in path when bucket matches object', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo');
         });
       });
 

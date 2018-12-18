@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "S3",
+  "description": "fix fo #2418, putObject with key as substring of bucket results in extra folder"
+}
