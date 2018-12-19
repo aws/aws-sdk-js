@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for specifying partition as a strategy for EC2 Placement Groups. This new strategy allows one to launch instances into partitions that do not share certain underlying hardware between partitions, to assist with building and deploying highly available replicated applications. "
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Batch Transform Jobs now supports TFRecord as a Split Type. ListCompilationJobs API action now supports SortOrder and SortBy inputs."
+    },
+    {
+        "type": "feature",
+        "category": "WAF",
+        "description": "This release adds rule-level control for rule group. If a rule group contains a rule that blocks legitimate traffic, previously you had to override the entire rule group to COUNT in order to allow the traffic. You can now use the UpdateWebACL API to exclude specific rules within a rule group. Excluding rules changes the action for the individual rules to COUNT. Excluded rules will be recorded in the new \"excludedRules\" attribute of the WAF logs."
+    },
+    {
+        "type": "feature",
+        "category": "WAFRegional",
+        "description": "This release adds rule-level control for rule group. If a rule group contains a rule that blocks legitimate traffic, previously you had to override the entire rule group to COUNT in order to allow the traffic. You can now use the UpdateWebACL API to exclude specific rules within a rule group. Excluding rules changes the action for the individual rules to COUNT. Excluded rules will be recorded in the new \"excludedRules\" attribute of the WAF logs."
+    }
+]
