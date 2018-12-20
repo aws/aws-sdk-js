@@ -512,7 +512,8 @@
   },
   "kinesisvideomedia": {
     "prefix": "kinesis-video-media",
-    "name": "KinesisVideoMedia"
+    "name": "KinesisVideoMedia",
+    "cors": true
   },
   "kinesisvideo": {
     "name": "KinesisVideo",
