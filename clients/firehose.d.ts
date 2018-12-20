@@ -68,27 +68,27 @@ declare class Firehose extends Service {
    */
   putRecordBatch(callback?: (err: AWSError, data: Firehose.Types.PutRecordBatchOutput) => void): Request<Firehose.Types.PutRecordBatchOutput, AWSError>;
   /**
-   * Enables server-side encryption (SSE) for the delivery stream. This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Firehose first sets the status of the stream to ENABLING then to ENABLED. You can continue to read and write data to your stream while its status is ENABLING but they won't get encrypted. It can take up to 5 seconds after the encryption status changes to ENABLED before all records written to the delivery stream are encrypted. To check the encryption state of a delivery stream, use DescribeDeliveryStream.  You can only enable SSE for a delivery stream that uses DirectPut as its source.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption thirteen times and StopDeliveryStreamEncryption twelve times for the same stream in a 24-hour period.
+   * Enables server-side encryption (SSE) for the delivery stream.  This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the status of the stream to ENABLING, and then to ENABLED. You can continue to read and write data to your stream while its status is ENABLING, but the data is not encrypted. It can take up to 5 seconds after the encryption status changes to ENABLED before all records written to the delivery stream are encrypted. To find out whether a record or a batch of records was encrypted, check the response elements PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted, respectively. To check the encryption state of a delivery stream, use DescribeDeliveryStream. You can only enable SSE for a delivery stream that uses DirectPut as its source.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption 13 times and StopDeliveryStreamEncryption 12 times for the same delivery stream in a 24-hour period.
    */
   startDeliveryStreamEncryption(params: Firehose.Types.StartDeliveryStreamEncryptionInput, callback?: (err: AWSError, data: Firehose.Types.StartDeliveryStreamEncryptionOutput) => void): Request<Firehose.Types.StartDeliveryStreamEncryptionOutput, AWSError>;
   /**
-   * Enables server-side encryption (SSE) for the delivery stream. This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Firehose first sets the status of the stream to ENABLING then to ENABLED. You can continue to read and write data to your stream while its status is ENABLING but they won't get encrypted. It can take up to 5 seconds after the encryption status changes to ENABLED before all records written to the delivery stream are encrypted. To check the encryption state of a delivery stream, use DescribeDeliveryStream.  You can only enable SSE for a delivery stream that uses DirectPut as its source.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption thirteen times and StopDeliveryStreamEncryption twelve times for the same stream in a 24-hour period.
+   * Enables server-side encryption (SSE) for the delivery stream.  This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the status of the stream to ENABLING, and then to ENABLED. You can continue to read and write data to your stream while its status is ENABLING, but the data is not encrypted. It can take up to 5 seconds after the encryption status changes to ENABLED before all records written to the delivery stream are encrypted. To find out whether a record or a batch of records was encrypted, check the response elements PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted, respectively. To check the encryption state of a delivery stream, use DescribeDeliveryStream. You can only enable SSE for a delivery stream that uses DirectPut as its source.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption 13 times and StopDeliveryStreamEncryption 12 times for the same delivery stream in a 24-hour period.
    */
   startDeliveryStreamEncryption(callback?: (err: AWSError, data: Firehose.Types.StartDeliveryStreamEncryptionOutput) => void): Request<Firehose.Types.StartDeliveryStreamEncryptionOutput, AWSError>;
   /**
-   * Disables server-side encryption (SSE) for the delivery stream. This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Firehose first sets the status of the stream to DISABLING then to DISABLED. You can continue to read and write data to your stream while its status is DISABLING. It can take up to 5 seconds after the encryption status changes to DISABLED before all records written to the delivery stream are no longer subject to encryption. To check the encryption state of a delivery stream, use DescribeDeliveryStream.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption thirteen times and StopDeliveryStreamEncryption twelve times for the same stream in a 24-hour period.
+   * Disables server-side encryption (SSE) for the delivery stream.  This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the status of the stream to DISABLING, and then to DISABLED. You can continue to read and write data to your stream while its status is DISABLING. It can take up to 5 seconds after the encryption status changes to DISABLED before all records written to the delivery stream are no longer subject to encryption. To find out whether a record or a batch of records was encrypted, check the response elements PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted, respectively. To check the encryption state of a delivery stream, use DescribeDeliveryStream.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption 13 times and StopDeliveryStreamEncryption 12 times for the same delivery stream in a 24-hour period.
    */
   stopDeliveryStreamEncryption(params: Firehose.Types.StopDeliveryStreamEncryptionInput, callback?: (err: AWSError, data: Firehose.Types.StopDeliveryStreamEncryptionOutput) => void): Request<Firehose.Types.StopDeliveryStreamEncryptionOutput, AWSError>;
   /**
-   * Disables server-side encryption (SSE) for the delivery stream. This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Firehose first sets the status of the stream to DISABLING then to DISABLED. You can continue to read and write data to your stream while its status is DISABLING. It can take up to 5 seconds after the encryption status changes to DISABLED before all records written to the delivery stream are no longer subject to encryption. To check the encryption state of a delivery stream, use DescribeDeliveryStream.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption thirteen times and StopDeliveryStreamEncryption twelve times for the same stream in a 24-hour period.
+   * Disables server-side encryption (SSE) for the delivery stream.  This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the status of the stream to DISABLING, and then to DISABLED. You can continue to read and write data to your stream while its status is DISABLING. It can take up to 5 seconds after the encryption status changes to DISABLED before all records written to the delivery stream are no longer subject to encryption. To find out whether a record or a batch of records was encrypted, check the response elements PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted, respectively. To check the encryption state of a delivery stream, use DescribeDeliveryStream.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption 13 times and StopDeliveryStreamEncryption 12 times for the same delivery stream in a 24-hour period.
    */
   stopDeliveryStreamEncryption(callback?: (err: AWSError, data: Firehose.Types.StopDeliveryStreamEncryptionOutput) => void): Request<Firehose.Types.StopDeliveryStreamEncryptionOutput, AWSError>;
   /**
-   * Adds or updates tags for the specified delivery stream. A tag is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.   Each delivery stream can have up to 50 tags.   This operation has a limit of five transactions per second per account. 
+   * Adds or updates tags for the specified delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.  Each delivery stream can have up to 50 tags.  This operation has a limit of five transactions per second per account. 
    */
   tagDeliveryStream(params: Firehose.Types.TagDeliveryStreamInput, callback?: (err: AWSError, data: Firehose.Types.TagDeliveryStreamOutput) => void): Request<Firehose.Types.TagDeliveryStreamOutput, AWSError>;
   /**
-   * Adds or updates tags for the specified delivery stream. A tag is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.   Each delivery stream can have up to 50 tags.   This operation has a limit of five transactions per second per account. 
+   * Adds or updates tags for the specified delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.  Each delivery stream can have up to 50 tags.  This operation has a limit of five transactions per second per account. 
    */
   tagDeliveryStream(callback?: (err: AWSError, data: Firehose.Types.TagDeliveryStreamOutput) => void): Request<Firehose.Types.TagDeliveryStreamOutput, AWSError>;
   /**
@@ -377,7 +377,7 @@ declare namespace Firehose {
      */
     TypeName: ElasticsearchTypeName;
     /**
-     * The Elasticsearch index rotation period. Index rotation appends a time stamp to the IndexName to facilitate the expiration of old data. For more information, see Index Rotation for the Amazon ES Destination. The default value is OneDay.
+     * The Elasticsearch index rotation period. Index rotation appends a timestamp to the IndexName to facilitate the expiration of old data. For more information, see Index Rotation for the Amazon ES Destination. The default value is OneDay.
      */
     IndexRotationPeriod?: ElasticsearchIndexRotationPeriod;
     /**
@@ -469,7 +469,7 @@ declare namespace Firehose {
      */
     TypeName?: ElasticsearchTypeName;
     /**
-     * The Elasticsearch index rotation period. Index rotation appends a time stamp to IndexName to facilitate the expiration of old data. For more information, see Index Rotation for the Amazon ES Destination. Default value is OneDay.
+     * The Elasticsearch index rotation period. Index rotation appends a timestamp to IndexName to facilitate the expiration of old data. For more information, see Index Rotation for the Amazon ES Destination. Default value is OneDay.
      */
     IndexRotationPeriod?: ElasticsearchIndexRotationPeriod;
     /**
@@ -517,6 +517,7 @@ declare namespace Firehose {
   }
   export type ErrorCode = string;
   export type ErrorMessage = string;
+  export type ErrorOutputPrefix = string;
   export interface ExtendedS3DestinationConfiguration {
     /**
      * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
@@ -530,6 +531,10 @@ declare namespace Firehose {
      * The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see Amazon S3 Object Name Format in the Amazon Kinesis Data Firehose Developer Guide.
      */
     Prefix?: Prefix;
+    /**
+     * A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name. 
+     */
+    ErrorOutputPrefix?: ErrorOutputPrefix;
     /**
      * The buffering option.
      */
@@ -577,6 +582,10 @@ declare namespace Firehose {
      */
     Prefix?: Prefix;
     /**
+     * A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+     */
+    ErrorOutputPrefix?: ErrorOutputPrefix;
+    /**
      * The buffering option.
      */
     BufferingHints: BufferingHints;
@@ -623,6 +632,10 @@ declare namespace Firehose {
      */
     Prefix?: Prefix;
     /**
+     * A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+     */
+    ErrorOutputPrefix?: ErrorOutputPrefix;
+    /**
      * The buffering option.
      */
     BufferingHints?: BufferingHints;
@@ -661,7 +674,7 @@ declare namespace Firehose {
   export type HECToken = string;
   export interface HiveJsonSerDe {
     /**
-     * Indicates how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see Class DateTimeFormat. You can also use the special value millis to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses java.sql.Timestamp::valueOf by default.
+     * Indicates how you want Kinesis Data Firehose to parse the date and timestamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see Class DateTimeFormat. You can also use the special value millis to parse timestamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses java.sql.Timestamp::valueOf by default.
      */
     TimestampFormats?: ListOfNonEmptyStrings;
   }
@@ -699,7 +712,7 @@ declare namespace Firehose {
      */
     RoleARN?: RoleARN;
     /**
-     * Kinesis Data Firehose starts retrieving records from the Kinesis data stream starting with this time stamp.
+     * Kinesis Data Firehose starts retrieving records from the Kinesis data stream starting with this timestamp.
      */
     DeliveryStartTimestamp?: DeliveryStartTimestamp;
   }
@@ -1120,6 +1133,10 @@ declare namespace Firehose {
      */
     Prefix?: Prefix;
     /**
+     * A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+     */
+    ErrorOutputPrefix?: ErrorOutputPrefix;
+    /**
      * The buffering option. If no value is specified, BufferingHints object default values are used.
      */
     BufferingHints?: BufferingHints;
@@ -1150,6 +1167,10 @@ declare namespace Firehose {
      */
     Prefix?: Prefix;
     /**
+     * A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+     */
+    ErrorOutputPrefix?: ErrorOutputPrefix;
+    /**
      * The buffering option. If no value is specified, BufferingHints object default values are used.
      */
     BufferingHints: BufferingHints;
@@ -1179,6 +1200,10 @@ declare namespace Firehose {
      * The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see Amazon S3 Object Name Format in the Amazon Kinesis Data Firehose Developer Guide.
      */
     Prefix?: Prefix;
+    /**
+     * A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+     */
+    ErrorOutputPrefix?: ErrorOutputPrefix;
     /**
      * The buffering option. If no value is specified, BufferingHints object default values are used.
      */

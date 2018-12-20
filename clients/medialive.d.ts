@@ -1796,6 +1796,10 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     SpatialAq?: H264SpatialAq;
     /**
+     * If set to fixed, use gopNumBFrames B-frames per sub-GOP. If set to dynamic, optimize the number of B-frames used for each sub-GOP to improve visual quality.
+     */
+    SubgopLength?: H264SubGopLength;
+    /**
      * Produces a bitstream compliant with SMPTE RP-2027.
      */
     Syntax?: H264Syntax;
@@ -1811,6 +1815,7 @@ This field is optional; when no value is specified the encoder will choose the n
     TimecodeInsertion?: H264TimecodeInsertionBehavior;
   }
   export type H264SpatialAq = "DISABLED"|"ENABLED"|string;
+  export type H264SubGopLength = "DYNAMIC"|"FIXED"|string;
   export type H264Syntax = "DEFAULT"|"RP2027"|string;
   export type H264TemporalAq = "DISABLED"|"ENABLED"|string;
   export type H264TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
@@ -1998,7 +2003,7 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
      */
     SegmentLength?: __integerMin1;
     /**
-     * When set to useInputSegmentation, the output segment or fragment points are set by the RAI markers from the input streams.
+     * useInputSegmentation has been deprecated. The configured segment size is always used.
      */
     SegmentationMode?: HlsSegmentationMode;
     /**
@@ -2096,6 +2101,12 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
   }
   export type HlsStreamInfResolution = "EXCLUDE"|"INCLUDE"|string;
   export type HlsTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
+  export interface HlsTimedMetadataScheduleActionSettings {
+    /**
+     * Base64 string formatted according to the ID3 specification: http://id3.org/id3v2.4.0-structure
+     */
+    Id3: __string;
+  }
   export type HlsTsFileMode = "SEGMENTED_FILES"|"SINGLE_FILE"|string;
   export type HlsWebdavHttpTransferMode = "CHUNKED"|"NON_CHUNKED"|string;
   export interface HlsWebdavSettings {
@@ -2880,7 +2891,7 @@ Options:
      */
     RestartDelay?: __integerMin0;
     /**
-     * When set to useInputSegmentation, the output segment or fragment points are set by the RAI markers from the input streams.
+     * useInputSegmentation has been deprecated. The configured segment size is always used.
      */
     SegmentationMode?: SmoothGroupSegmentationMode;
     /**
@@ -3266,6 +3277,10 @@ Valid values: 1, 2, 4, 6, 8
     ScheduleActionStartSettings: ScheduleActionStartSettings;
   }
   export interface ScheduleActionSettings {
+    /**
+     * Settings to emit HLS metadata
+     */
+    HlsTimedMetadataSettings?: HlsTimedMetadataScheduleActionSettings;
     /**
      * Settings to switch an input
      */

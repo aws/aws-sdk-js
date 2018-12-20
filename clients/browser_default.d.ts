@@ -66,6 +66,7 @@ export import LexModelBuildingService = require('./lexmodelbuildingservice');
 export import Pricing = require('./pricing');
 export import Comprehend = require('./comprehend');
 export import KinesisVideoArchivedMedia = require('./kinesisvideoarchivedmedia');
+export import KinesisVideoMedia = require('./kinesisvideomedia');
 export import KinesisVideo = require('./kinesisvideo');
 export import Translate = require('./translate');
 export import SecretsManager = require('./secretsmanager');

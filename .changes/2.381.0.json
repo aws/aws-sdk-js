@@ -1,0 +1,37 @@
+[
+    {
+        "type": "bugfix",
+        "category": "S3",
+        "description": "fix putObject using stream <1mb"
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Amazon Cognito now has API support for updating the Secure Sockets Layer (SSL) certificate for the custom domain for your user pool."
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "This SDK release adds functionality to stop training Custom Document Classifier or Custom Entity Recognizer in Amazon Comprehend."
+    },
+    {
+        "type": "feature",
+        "category": "Firehose",
+        "description": "Support for specifying customized s3 keys and supplying a separate prefix for failed-records"
+    },
+    {
+        "type": "feature",
+        "category": "KinesisVideoMedia",
+        "description": "enable cors to make KinesisVideoMedia available by default in browser build"
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "This release provides support for ID3 tags and video quality setting for subgop_length."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "With this release, Amazon Transcribe now supports transcriptions from audio sources in Italian (it-IT)."
+    }
+]

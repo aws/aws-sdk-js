@@ -4187,6 +4187,11 @@
           "locationName": "spatialAq",
           "documentation": "If set to enabled, adjust quantization within each frame based on spatial variation of content complexity."
         },
+        "SubgopLength": {
+          "shape": "H264SubGopLength",
+          "locationName": "subgopLength",
+          "documentation": "If set to fixed, use gopNumBFrames B-frames per sub-GOP. If set to dynamic, optimize the number of B-frames used for each sub-GOP to improve visual quality."
+        },
         "Syntax": {
           "shape": "H264Syntax",
           "locationName": "syntax",
@@ -4212,6 +4217,14 @@
         "ENABLED"
       ],
       "documentation": "Placeholder documentation for H264SpatialAq"
+    },
+    "H264SubGopLength": {
+      "type": "string",
+      "enum": [
+        "DYNAMIC",
+        "FIXED"
+      ],
+      "documentation": "Placeholder documentation for H264SubGopLength"
     },
     "H264Syntax": {
       "type": "string",
@@ -4535,7 +4548,7 @@
         "SegmentationMode": {
           "shape": "HlsSegmentationMode",
           "locationName": "segmentationMode",
-          "documentation": "When set to useInputSegmentation, the output segment or fragment points are set by the RAI markers from the input streams."
+          "documentation": "useInputSegmentation has been deprecated. The configured segment size is always used."
         },
         "SegmentsPerSubdirectory": {
           "shape": "__integerMin1",
@@ -4763,6 +4776,20 @@
         "TDRL"
       ],
       "documentation": "Placeholder documentation for HlsTimedMetadataId3Frame"
+    },
+    "HlsTimedMetadataScheduleActionSettings": {
+      "type": "structure",
+      "members": {
+        "Id3": {
+          "shape": "__string",
+          "locationName": "id3",
+          "documentation": "Base64 string formatted according to the ID3 specification: http://id3.org/id3v2.4.0-structure"
+        }
+      },
+      "documentation": "Settings for the action to emit HLS metadata",
+      "required": [
+        "Id3"
+      ]
     },
     "HlsTsFileMode": {
       "type": "string",
@@ -6202,7 +6229,7 @@
         "SegmentationMode": {
           "shape": "SmoothGroupSegmentationMode",
           "locationName": "segmentationMode",
-          "documentation": "When set to useInputSegmentation, the output segment or fragment points are set by the RAI markers from the input streams."
+          "documentation": "useInputSegmentation has been deprecated. The configured segment size is always used."
         },
         "SendDelayMs": {
           "shape": "__integerMin0Max10000",
@@ -6911,6 +6938,11 @@
     "ScheduleActionSettings": {
       "type": "structure",
       "members": {
+        "HlsTimedMetadataSettings": {
+          "shape": "HlsTimedMetadataScheduleActionSettings",
+          "locationName": "hlsTimedMetadataSettings",
+          "documentation": "Settings to emit HLS metadata"
+        },
         "InputSwitchSettings": {
           "shape": "InputSwitchScheduleActionSettings",
           "locationName": "inputSwitchSettings",

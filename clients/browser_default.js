@@ -68,6 +68,7 @@ module.exports = {
   Pricing: require('./pricing'),
   Comprehend: require('./comprehend'),
   KinesisVideoArchivedMedia: require('./kinesisvideoarchivedmedia'),
+  KinesisVideoMedia: require('./kinesisvideomedia'),
   KinesisVideo: require('./kinesisvideo'),
   Translate: require('./translate'),
   SecretsManager: require('./secretsmanager')

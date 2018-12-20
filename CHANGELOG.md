@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.380.0-->
+<!--LATEST=2.381.0-->
 <!--ENTRYINSERT-->
+
+## 2.381.0
+* bugfix: S3: fix putObject using stream <1mb
+* feature: CognitoIdentityServiceProvider: Amazon Cognito now has API support for updating the Secure Sockets Layer (SSL) certificate for the custom domain for your user pool.
+* feature: Comprehend: This SDK release adds functionality to stop training Custom Document Classifier or Custom Entity Recognizer in Amazon Comprehend.
+* feature: Firehose: Support for specifying customized s3 keys and supplying a separate prefix for failed-records
+* feature: KinesisVideoMedia: enable cors to make KinesisVideoMedia available by default in browser build
+* feature: MediaLive: This release provides support for ID3 tags and video quality setting for subgop_length.
+* feature: TranscribeService: With this release, Amazon Transcribe now supports transcriptions from audio sources in Italian (it-IT).
 
 ## 2.380.0
 * feature: EC2: This release adds support for specifying partition as a strategy for EC2 Placement Groups. This new strategy allows one to launch instances into partitions that do not share certain underlying hardware between partitions, to assist with building and deploying highly available replicated applications. 

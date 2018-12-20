@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "KinesisVideoMedia",
-  "description": "enable cors to make KinesisVideoMedia available by default in browser build"
-}

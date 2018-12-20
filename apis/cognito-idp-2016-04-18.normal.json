@@ -3618,6 +3618,37 @@
       ],
       "documentation": "<p>Updates the specified user pool app client with the specified attributes. If you don't provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool app client settings with .</p>"
     },
+    "UpdateUserPoolDomain": {
+      "name": "UpdateUserPoolDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateUserPoolDomainRequest"
+      },
+      "output": {
+        "shape": "UpdateUserPoolDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "NotAuthorizedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalErrorException"
+        }
+      ],
+      "documentation": "<p>Updates the Secure Sockets Layer (SSL) certificate for the custom domain for your user pool.</p> <p>You can use this operation to provide the Amazon Resource Name (ARN) of a new certificate to Amazon Cognito. You cannot use it to change the domain for a user pool.</p> <p>A custom domain is used to host the Amazon Cognito hosted UI, which provides sign-up and sign-in pages for your application. When you set up a custom domain, you provide a certificate that you manage with AWS Certificate Manager (ACM). When necessary, you can use this operation to change the certificate that you applied to your custom domain.</p> <p>Usually, this is unnecessary following routine certificate renewal with ACM. When you renew your existing certificate in ACM, the ARN for your certificate remains the same, and your custom domain uses the new certificate automatically.</p> <p>However, if you replace your existing certificate with a new one, ACM gives the new certificate a new ARN. To apply the new certificate to your custom domain, you must provide this ARN to Amazon Cognito.</p> <p>When you add your new certificate in ACM, you must choose US East (N. Virginia) as the AWS Region.</p> <p>After you submit your request, Amazon Cognito requires up to 1 hour to distribute your new certificate to your custom domain.</p> <p>For more information about adding a custom domain to your user pool, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html\">Using Your Own Domain for the Hosted UI</a>.</p>"
+    },
     "VerifySoftwareToken": {
       "name": "VerifySoftwareToken",
       "http": {
@@ -5473,7 +5504,7 @@
         },
         "WriteAttributes": {
           "shape": "ClientPermissionListType",
-          "documentation": "<p>The write attributes.</p>"
+          "documentation": "<p>The user pool attributes that the app client can write to.</p> <p>If your app client allows users to sign in through an identity provider, this array must include all attributes that are mapped to identity provider attributes. Amazon Cognito updates mapped attributes when users sign in to your application through an identity provider. If your app client lacks write access to a mapped attribute, Amazon Cognito throws an error when it attempts to update the attribute. For more information, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html\">Specifying Identity Provider Attribute Mappings for Your User Pool</a>.</p>"
         },
         "ExplicitAuthFlows": {
           "shape": "ExplicitAuthFlowsListType",
@@ -5541,7 +5572,7 @@
         },
         "CustomDomainConfig": {
           "shape": "CustomDomainConfigType",
-          "documentation": "<p>The configuration for a custom domain that hosts the sign-up and sign-in webpages for your application.</p> <p>Provide this parameter only if you want to use own custom domain for your user pool. Otherwise, you can exclude this parameter and use the Amazon Cognito hosted domain instead.</p> <p>For more information about the hosted domain and custom domains, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html\">Configuring a User Pool Domain</a>.</p>"
+          "documentation": "<p>The configuration for a custom domain that hosts the sign-up and sign-in webpages for your application.</p> <p>Provide this parameter only if you want to use a custom domain for your user pool. Otherwise, you can exclude this parameter and use the Amazon Cognito hosted domain instead.</p> <p>For more information about the hosted domain and custom domains, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html\">Configuring a User Pool Domain</a>.</p>"
         }
       }
     },
@@ -7838,7 +7869,7 @@
         },
         "Mutable": {
           "shape": "BooleanType",
-          "documentation": "<p>Specifies whether the value of the attribute can be changed.</p>",
+          "documentation": "<p>Specifies whether the value of the attribute can be changed.</p> <p>For any user pool attribute that's mapped to an identity provider attribute, you must set this parameter to <code>true</code>. Amazon Cognito updates mapped attributes when users sign in to your application through an identity provider. If an attribute is immutable, Amazon Cognito throws an error when it attempts to update the attribute. For more information, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html\">Specifying Identity Provider Attribute Mappings for Your User Pool</a>.</p>",
           "box": true
         },
         "Required": {
@@ -8622,6 +8653,39 @@
         }
       },
       "documentation": "<p>Represents the response from the server to the request to update the user pool client.</p>"
+    },
+    "UpdateUserPoolDomainRequest": {
+      "type": "structure",
+      "required": [
+        "Domain",
+        "UserPoolId",
+        "CustomDomainConfig"
+      ],
+      "members": {
+        "Domain": {
+          "shape": "DomainType",
+          "documentation": "<p>The domain name for the custom domain that hosts the sign-up and sign-in pages for your application. For example: <code>auth.example.com</code>. </p> <p>This string can include only lowercase letters, numbers, and hyphens. Do not use a hyphen for the first or last character. Use periods to separate subdomain names.</p>"
+        },
+        "UserPoolId": {
+          "shape": "UserPoolIdType",
+          "documentation": "<p>The ID of the user pool that is associated with the custom domain that you are updating the certificate for.</p>"
+        },
+        "CustomDomainConfig": {
+          "shape": "CustomDomainConfigType",
+          "documentation": "<p>The configuration for a custom domain that hosts the sign-up and sign-in pages for your application. Use this object to specify an SSL certificate that is managed by ACM.</p>"
+        }
+      },
+      "documentation": "<p>The UpdateUserPoolDomain request input.</p>"
+    },
+    "UpdateUserPoolDomainResponse": {
+      "type": "structure",
+      "members": {
+        "CloudFrontDomain": {
+          "shape": "DomainType",
+          "documentation": "<p>The Amazon CloudFront endpoint that Amazon Cognito set up when you added the custom domain to your user pool.</p>"
+        }
+      },
+      "documentation": "<p>The UpdateUserPoolDomain response output.</p>"
     },
     "UpdateUserPoolRequest": {
       "type": "structure",
