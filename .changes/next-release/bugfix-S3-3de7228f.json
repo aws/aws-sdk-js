@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "S3",
+  "description": "fix putObject using stream <1mb"
+}
