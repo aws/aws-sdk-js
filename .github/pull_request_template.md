@@ -7,5 +7,5 @@ Thank you for your pull request. Please provide a description below.
 
 - [ ] `npm run test` passes
 - [ ] `.d.ts` file is updated
-- [ ] changelog is added
+- [ ] changelog is added, `npm run add-change`
 - [ ] run `bundle exec rake docs:api` and inspect `doc/latest/index.html` if documentation is changed
