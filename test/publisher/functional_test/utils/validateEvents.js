@@ -36,9 +36,11 @@ function validateApiCallEvent(event, expected) {
   if (event.Type !== 'ApiCall' || expected.Type !== 'ApiCall') return false;
   const keysToValidate = [
     //shared monitoring event entries
-    'Service', 'Api', 'ClientId', 'Version', 'Timestamp', 'Region',
+    'Service', 'Api', 'ClientId', 'Version', 'Timestamp', 'Region', 'UserAgent',
     //api call monitoring events
-    'AttemptCount', 'Latency', 'MaxRetriesExceeded'
+    'AttemptCount', 'Latency', 'MaxRetriesExceeded', 'ApiCallTimeout', 'FinalAwsException',
+    'FinalAwsExceptionMessage', 'FinalSdkException', 'FinalSdkExceptionMessage',
+    'FinalHttpStatusCode'
   ]
   for (const keyToValidate of keysToValidate) {
     if (!validateEntry(event, expected, keyToValidate)) return false;
@@ -51,9 +53,9 @@ function validateApiCallAttemptEvent(event, expected) {
   if (event.Type !== 'ApiCallAttempt' || expected.Type !== 'ApiCallAttempt') return false;
   const keysToValidate = [
     //shared monitoring event entries
-    'Service', 'Api', 'ClientId', 'Version', 'Timestamp', 'Region',
+    'Service', 'Api', 'ClientId', 'Version', 'Timestamp', 'Region', 'UserAgent',
     //api call attempt monitoring event entries
-    'Fqdn', 'UserAgent', 'AttemptLatency', 'SessionToken', 'AccessKey', 'HttpStatusCode',
+    'Fqdn', 'AttemptLatency', 'SessionToken', 'AccessKey', 'HttpStatusCode',
     'AwsException', 'AwsExceptionMessage', 'SdkException', 'SdkExceptionMessage', 'XAmznRequestId', 
     'XAmzRequestId', 'XAmzId2'
   ]
