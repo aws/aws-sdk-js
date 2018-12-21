@@ -17,6 +17,8 @@
 --define-class-expr (AWS\.util\.)?inherit
 --update-class-expr (AWS\.util\.)?update
 --mixin-module-expr (AWS\.util\.)?mixin
+--tag class_abstract:"Abstract Class"
+--tag method_abstract:"Abstract Method"
 lib/core.js
 lib/**/*.js
 -
