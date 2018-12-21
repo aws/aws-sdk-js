@@ -806,23 +806,27 @@
         });
       });
       describe('needsRefresh', function() {
-        return it('can be expired based on expire time from EC2 Metadata service', function() {
+        return it('can be expired based on expire time from EC2 Metadata service', function(done) {
           mockMetadataService(new Date(0));
-          creds.refresh(function() {});
-          return expect(creds.needsRefresh()).to.equal(true);
+          creds.refresh(function () {
+            expect(creds.needsRefresh()).to.equal(true);
+            done();
+          });
         });
       });
-      return describe('refresh', function() {
-        it('loads credentials from EC2 Metadata service', function() {
+      describe('refresh', function() {
+        it('loads credentials from EC2 Metadata service', function(done) {
           mockMetadataService(new Date(AWS.util.date.getDate().getTime() + 100000));
-          creds.refresh(function() {});
-          expect(creds.metadata.Code).to.equal('Success');
-          expect(creds.accessKeyId).to.equal('KEY');
-          expect(creds.secretAccessKey).to.equal('SECRET');
-          expect(creds.sessionToken).to.equal('TOKEN');
-          return expect(creds.needsRefresh()).to.equal(false);
+          creds.refresh(function () {
+            expect(creds.metadata.Code).to.equal('Success');
+            expect(creds.accessKeyId).to.equal('KEY');
+            expect(creds.secretAccessKey).to.equal('SECRET');
+            expect(creds.sessionToken).to.equal('TOKEN');
+            expect(creds.needsRefresh()).to.equal(false);
+            done();
+          });
         });
-        return it('does try to load creds second time if Metadata service failed', function() {
+        it('does try to load creds second time if Metadata service failed', function() {
           var spy;
           spy = helpers.spyOn(creds.metadataService, 'loadCredentials').andCallFake(function(cb) {
             return cb(new Error('INVALID SERVICE'));
@@ -837,6 +841,15 @@
               });
             });
           });
+        });
+        it('fails if the loaded credentials are expired', function (done) {
+          mockMetadataService(new Date(Date.now() - 1))
+          creds.refresh(function (err) {
+            expect(err).to.be.not.null;
+            expect(err.message).to.equal('EC2 Instance Metadata Serivce provided expired credentials');
+            expect(err.code).to.equal('EC2MetadataCredentialsProviderFailure');
+            done();
+          })
         });
       });
     });
