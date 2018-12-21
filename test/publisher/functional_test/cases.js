@@ -89,7 +89,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -137,7 +139,11 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalAwsException": "TestOperationException",
+          "FinalAwsExceptionMessage": "There was an error",
+          "FinalHttpStatusCode": 400
         }
       ]
     },
@@ -203,7 +209,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 2,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -250,7 +258,10 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalSdkException": "ANY_STR",
+          "FinalSdkExceptionMessage": "Unexpected exception was thrown"
         }
       ]
     },
@@ -315,7 +326,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 2,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -367,7 +380,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -471,7 +486,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -551,7 +568,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -605,7 +624,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -660,7 +681,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -714,7 +737,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -761,7 +786,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -808,7 +835,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -855,7 +884,9 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -934,7 +965,11 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 2,
           "MaxRetriesExceeded": 1,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalAwsException": "ServiceUnavailable",
+          "FinalAwsExceptionMessage": "Service is unavailable",
+          "FinalHttpStatusCode": 503
         }
       ]
     },
@@ -1011,7 +1046,81 @@ module.exports = {
           "Latency": "ANY_INT",
           "AttemptCount": 2,
           "MaxRetriesExceeded": 1,
-          "Region": "us-west-2"
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalSdkException": "ANY_STR",
+          "FinalSdkExceptionMessage": "Retryable exception was thrown"
+        }
+      ]
+    },
+    {
+      "description": "Test final uses the exception from final attempt",
+      "apiCalls": [
+        {
+          "serviceId": "CSM Test",
+          "operationName": "TestOperation",
+          "params": {},
+          "attemptResponses": [
+            {
+              "sdkException": {
+                "isRetryable": true,
+                "message": "First retryable exception"
+              }
+            },
+            {
+              "sdkException": {
+                "isRetryable": false,
+                "message": "Second un-retryable exception"
+              }
+            }
+          ]
+        }
+      ],
+      "expectedMonitoringEvents": [
+        {
+          "Version": 1,
+          "Type": "ApiCallAttempt",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "AttemptLatency": "ANY_INT",
+          "Fqdn": "csmtest.us-west-2.amazonaws.com",
+          "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
+          "AccessKey": "myaccesskey",
+          "SdkException": "ANY_STR",
+          "SdkExceptionMessage": "First retryable exception"
+        },
+        {
+          "Version": 1,
+          "Type": "ApiCallAttempt",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "AttemptLatency": "ANY_INT",
+          "Fqdn": "csmtest.us-west-2.amazonaws.com",
+          "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
+          "AccessKey": "myaccesskey",
+          "SdkException": "ANY_STR",
+          "SdkExceptionMessage": "Second un-retryable exception"
+        },
+        {
+          "Version": 1,
+          "Type": "ApiCall",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "Latency": "ANY_INT",
+          "AttemptCount": 2,
+          "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalSdkException": "ANY_STR",
+          "FinalSdkExceptionMessage": "Second un-retryable exception"
         }
       ]
     }
