@@ -775,7 +775,7 @@ describe('endpoint discovery', function() {
     });
 
     if (AWS.util.isNode()) {
-      it('turn on endpoint discovery from environmental variable', function() {
+      it('turn on endpoint discovery from environmental variable AWS_ENABLE_ENDPOINT_DISCOVERY', function() {
         var client = new AWS.Service({
           endpointDiscoveryEnabled: false,
           apiConfig: new AWS.Model.Api(api),
@@ -804,6 +804,37 @@ describe('endpoint discovery', function() {
         expect(error).not.to.eql(undefined);
         expect(error.code).to.eql('ConfigurationException');
         expect(error.message).to.eql('environmental variable AWS_ENABLE_ENDPOINT_DISCOVERY cannot be set to nothing');
+      });
+
+      it('turn on endpoint discovery from environmental variable AWS_ENDPOINT_DISCOVERY_ENABLED', function() {
+        var client = new AWS.Service({
+          endpointDiscoveryEnabled: false,
+          apiConfig: new AWS.Model.Api(api),
+        });
+        var spy = helpers.createSpy('send inject');
+        AWS.events.on('sign', function(req) {
+          if(req.operation === 'describeEndpoints') {
+            spy(req);
+          }
+        });
+        process.env.AWS_ENDPOINT_DISCOVERY_ENABLED = '1';
+        helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
+        client.makeRequest('optionalEDOperation', {Query: 'query'}).send();
+        expect(spy.calls.length).to.eql(1);
+        client.makeRequest('requiredEDOperation',  {Query: 'query', Record: 'record'}).send();
+        expect(spy.calls.length).to.eql(2);
+
+        process.env.AWS_ENDPOINT_DISCOVERY_ENABLED = undefined;
+        request = client.makeRequest('optionalEDOperation', {Query: 'query'});
+        var error;
+        try {
+          request.send();
+        } catch(e) {
+          error = e;
+        }
+        expect(error).not.to.eql(undefined);
+        expect(error.code).to.eql('ConfigurationException');
+        expect(error.message).to.eql('environmental variable AWS_ENDPOINT_DISCOVERY_ENABLED cannot be set to nothing');
       });
   
       it('turn on endpoint discovery from config file', function() {
