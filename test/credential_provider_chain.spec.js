@@ -89,7 +89,7 @@
             return expect(creds.sessionToken).to.equal(void 0);
           });
         });
-        return it('accepts providers as functions, elavuating them during resolution', function() {
+        it('accepts providers as functions, evaluating them during resolution', function() {
           var provider;
           provider = function() {
             return {
@@ -103,6 +103,37 @@
             expect(creds.secretAccessKey).to.equal('xyz');
             return expect(creds.sessionToken).to.equal(void 0);
           });
+        });
+        it('coalesces concurrent calls', function (done) {
+          var provderCalls = 0;
+          var getCalls = 0;
+          var credsInstance = {
+            get: function get(callback) {
+              getCalls++;
+              setImmediate(function () {
+                this.accessKeyId = 'abc'
+                this.secretAccessKey = 'xyz'
+                callback();
+              });
+            }
+          };
+          var provider = function () {
+            provderCalls++;
+            return credsInstance;
+          };
+          var count = 10;
+          var callbackCount = 0;
+          var chain = new AWS.CredentialProviderChain([provider]);
+          for (var i = 0; i < count; i++) {
+            chain.resolve(function (err, creds) {
+              if (++callbackCount === count) {
+                expect(provderCalls).to.equal(1);
+                expect(getCalls).to.equal(1);
+                expect(creds).to.equal(credsInstance);
+                done();
+              }
+            });
+          }
         });
       });
       if (typeof Promise === 'function') {
