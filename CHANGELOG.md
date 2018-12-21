@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.381.0-->
+<!--LATEST=2.382.0-->
 <!--ENTRYINSERT-->
+
+## 2.382.0
+* bugfix: CredentailProviderChain: CredentialProviderChain.resolve now coalesces calls, so that concurrent requests for a service instance which has yet to resolve credentials will not result in a stampede to assign config.credentials
+* bugfix: documentation: swap abstract Yard tag for custom tags to support compatibility with google-closure-compiler
+* feature: ACMPCA: This release marks the introduction of waiters in ACM PCA, which allow you to control the progression of your code based on the presence or state of certain resources. Waiters can be implemented in the DescribeCertificateAuthorityAuditReport, GetCertificate, and GetCertificateAuthorityCsr API operations.
+* feature: DynamoDB: Added provisionedThroughPut exception on the request level for transaction APIs.
+* feature: EC2MetadataCredentials: refresh now passes an error to callback if metadata service responds with expired credentials
+* feature: PinpointSMSVoice: Configuration sets can now use Amazon SNS as an event destination.
+* feature: StepFunctions: This release adds support for cost allocation tagging. You can now create, delete, and list tags for AWS Step Functions activity and state machine resources. For more information about tagging, see AWS Tagging Strategies.
 
 ## 2.381.0
 * bugfix: S3: fix putObject using stream <1mb

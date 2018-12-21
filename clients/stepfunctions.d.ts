@@ -84,37 +84,45 @@ declare class StepFunctions extends Service {
    */
   getActivityTask(callback?: (err: AWSError, data: StepFunctions.Types.GetActivityTaskOutput) => void): Request<StepFunctions.Types.GetActivityTaskOutput, AWSError>;
   /**
-   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
    */
   getExecutionHistory(params: StepFunctions.Types.GetExecutionHistoryInput, callback?: (err: AWSError, data: StepFunctions.Types.GetExecutionHistoryOutput) => void): Request<StepFunctions.Types.GetExecutionHistoryOutput, AWSError>;
   /**
-   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
    */
   getExecutionHistory(callback?: (err: AWSError, data: StepFunctions.Types.GetExecutionHistoryOutput) => void): Request<StepFunctions.Types.GetExecutionHistoryOutput, AWSError>;
   /**
-   * Lists the existing activities. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
+   * Lists the existing activities. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listActivities(params: StepFunctions.Types.ListActivitiesInput, callback?: (err: AWSError, data: StepFunctions.Types.ListActivitiesOutput) => void): Request<StepFunctions.Types.ListActivitiesOutput, AWSError>;
   /**
-   * Lists the existing activities. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
+   * Lists the existing activities. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listActivities(callback?: (err: AWSError, data: StepFunctions.Types.ListActivitiesOutput) => void): Request<StepFunctions.Types.ListActivitiesOutput, AWSError>;
   /**
-   * Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
+   * Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listExecutions(params: StepFunctions.Types.ListExecutionsInput, callback?: (err: AWSError, data: StepFunctions.Types.ListExecutionsOutput) => void): Request<StepFunctions.Types.ListExecutionsOutput, AWSError>;
   /**
-   * Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
+   * Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listExecutions(callback?: (err: AWSError, data: StepFunctions.Types.ListExecutionsOutput) => void): Request<StepFunctions.Types.ListExecutionsOutput, AWSError>;
   /**
-   * Lists the existing state machines. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
+   * Lists the existing state machines. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listStateMachines(params: StepFunctions.Types.ListStateMachinesInput, callback?: (err: AWSError, data: StepFunctions.Types.ListStateMachinesOutput) => void): Request<StepFunctions.Types.ListStateMachinesOutput, AWSError>;
   /**
-   * Lists the existing state machines. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
+   * Lists the existing state machines. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   listStateMachines(callback?: (err: AWSError, data: StepFunctions.Types.ListStateMachinesOutput) => void): Request<StepFunctions.Types.ListStateMachinesOutput, AWSError>;
+  /**
+   * List tags for a given resource.
+   */
+  listTagsForResource(params: StepFunctions.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: StepFunctions.Types.ListTagsForResourceOutput) => void): Request<StepFunctions.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * List tags for a given resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: StepFunctions.Types.ListTagsForResourceOutput) => void): Request<StepFunctions.Types.ListTagsForResourceOutput, AWSError>;
   /**
    * Used by workers to report that the task identified by the taskToken failed.
    */
@@ -155,6 +163,22 @@ declare class StepFunctions extends Service {
    * Stops an execution.
    */
   stopExecution(callback?: (err: AWSError, data: StepFunctions.Types.StopExecutionOutput) => void): Request<StepFunctions.Types.StopExecutionOutput, AWSError>;
+  /**
+   * Add a tag to a Step Functions resource.
+   */
+  tagResource(params: StepFunctions.Types.TagResourceInput, callback?: (err: AWSError, data: StepFunctions.Types.TagResourceOutput) => void): Request<StepFunctions.Types.TagResourceOutput, AWSError>;
+  /**
+   * Add a tag to a Step Functions resource.
+   */
+  tagResource(callback?: (err: AWSError, data: StepFunctions.Types.TagResourceOutput) => void): Request<StepFunctions.Types.TagResourceOutput, AWSError>;
+  /**
+   * Remove a tag from a Step Functions resource
+   */
+  untagResource(params: StepFunctions.Types.UntagResourceInput, callback?: (err: AWSError, data: StepFunctions.Types.UntagResourceOutput) => void): Request<StepFunctions.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Remove a tag from a Step Functions resource
+   */
+  untagResource(callback?: (err: AWSError, data: StepFunctions.Types.UntagResourceOutput) => void): Request<StepFunctions.Types.UntagResourceOutput, AWSError>;
   /**
    * Updates an existing state machine by modifying its definition and/or roleArn. Running executions will continue to use the previous definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error.  All StartExecution calls within a few seconds will use the updated definition and roleArn. Executions started immediately after calling UpdateStateMachine may use the previous state machine definition and roleArn.  
    */
@@ -528,7 +552,7 @@ declare namespace StepFunctions {
      */
     reverseOrder?: ReverseOrder;
     /**
-     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -538,7 +562,7 @@ declare namespace StepFunctions {
      */
     events: HistoryEventList;
     /**
-     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -665,7 +689,7 @@ declare namespace StepFunctions {
      */
     maxResults?: PageSize;
     /**
-     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -675,7 +699,7 @@ declare namespace StepFunctions {
      */
     activities: ActivityList;
     /**
-     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -693,7 +717,7 @@ declare namespace StepFunctions {
      */
     maxResults?: PageSize;
     /**
-     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -703,7 +727,7 @@ declare namespace StepFunctions {
      */
     executions: ExecutionList;
     /**
-     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
@@ -713,16 +737,28 @@ declare namespace StepFunctions {
      */
     maxResults?: PageSize;
     /**
-     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
   }
   export interface ListStateMachinesOutput {
     stateMachines: StateMachineList;
     /**
-     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
+  }
+  export interface ListTagsForResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+     */
+    resourceArn: Arn;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * An array of tags associated with the resource.
+     */
+    tags?: TagList;
   }
   export type Name = string;
   export type PageSize = number;
@@ -847,13 +883,39 @@ declare namespace StepFunctions {
      */
     stopDate: Timestamp;
   }
+  export interface Tag {
+    /**
+     * The key of a tag.
+     */
+    key?: TagKey;
+    /**
+     * The value of a tag.
+     */
+    value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+     */
+    resourceArn: Arn;
+    /**
+     * The list of tags to add to a resource. Tags may only contain unicode letters, digits, whitespace, or these symbols: _ . : / = + - @.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceOutput {
+  }
+  export type TagValue = string;
   export interface TaskFailedEventDetails {
     /**
-     * The action of the connected service called by a task state.
+     * The action of the resource called by a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the connected service in a task state.
+     * The service name of the resource in a task state.
      */
     resource: Name;
     /**
@@ -867,16 +929,19 @@ declare namespace StepFunctions {
   }
   export interface TaskScheduledEventDetails {
     /**
-     * The action of the connected service called by a task state.
+     * The action of the resource called by a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the connected service in a task state.
+     * The service name of the resource in a task state.
      */
     resource: Name;
+    /**
+     * The region of the scheduled task
+     */
     region: Name;
     /**
-     * The JSON data passed to the connected service referenced in a task state.
+     * The JSON data passed to the resource referenced in a task state.
      */
     parameters: ConnectorParameters;
     /**
@@ -886,11 +951,11 @@ declare namespace StepFunctions {
   }
   export interface TaskStartFailedEventDetails {
     /**
-     * The action of the connected service called by a task state.
+     * The action of the resource called by a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the connected service in a task state.
+     * The service name of the resource in a task state.
      */
     resource: Name;
     /**
@@ -904,21 +969,21 @@ declare namespace StepFunctions {
   }
   export interface TaskStartedEventDetails {
     /**
-     * The action of the connected service called by a task state.
+     * The action of the resource called by a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the connected service in a task state.
+     * The service name of the resource in a task state.
      */
     resource: Name;
   }
   export interface TaskSubmitFailedEventDetails {
     /**
-     * The action of the connected service called by a task state.
+     * The action of the resource called by a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the connected service in a task state.
+     * The service name of the resource in a task state.
      */
     resource: Name;
     /**
@@ -932,39 +997,39 @@ declare namespace StepFunctions {
   }
   export interface TaskSubmittedEventDetails {
     /**
-     * The action of the connected service called by a task state.
+     * The action of the resource called by a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the connected service in a task state.
+     * The service name of the resource in a task state.
      */
     resource: Name;
     /**
-     * The response from a connected service when a task has started.
+     * The response from a resource when a task has started.
      */
     output?: SensitiveData;
   }
   export interface TaskSucceededEventDetails {
     /**
-     * The action of the connected service called by a task state.
+     * The action of the resource called by a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the connected service in a task state.
+     * The service name of the resource in a task state.
      */
     resource: Name;
     /**
-     * The full JSON response from a connected service when a task has succeeded. This response becomes the output of the related task.
+     * The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task.
      */
     output?: SensitiveData;
   }
   export interface TaskTimedOutEventDetails {
     /**
-     * The action of the connected service called by a task state.
+     * The action of the resource called by a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the connected service in a task state.
+     * The service name of the resource in a task state.
      */
     resource: Name;
     /**
@@ -979,6 +1044,18 @@ declare namespace StepFunctions {
   export type TaskToken = string;
   export type TimeoutInSeconds = number;
   export type Timestamp = Date;
+  export interface UntagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+     */
+    resourceArn: Arn;
+    /**
+     * The list of tags to remove from the resource.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceOutput {
+  }
   export interface UpdateStateMachineInput {
     /**
      * The Amazon Resource Name (ARN) of the state machine.

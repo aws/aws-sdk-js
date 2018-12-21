@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.381.0',
+	  VERSION: '2.382.0',
 
 	  /**
 	   * @api private
@@ -4064,7 +4064,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * The service class representing an AWS service.
 	 *
-	 * @abstract
+	 * @class_abstract This class is an abstract class.
 	 *
 	 * @!attribute apiVersions
 	 *   @return [Array<String>] the list of API versions supported by this service.
@@ -4484,7 +4484,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Override this method to setup any custom request listeners for each
 	   * new request to the service.
 	   *
-	   * @abstract
+	   * @method_abstract This is an abstract method.
 	   */
 	  setupRequestListeners: function setupRequestListeners(request) {
 	  },
@@ -5825,6 +5825,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      this.providers = AWS.CredentialProviderChain.defaultProviders.slice(0);
 	    }
+	    this.resolveCallbacks = [];
 	  },
 
 	  /**
@@ -5865,38 +5866,47 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return [AWS.CredentialProviderChain] the provider, for chaining.
 	   */
 	  resolve: function resolve(callback) {
-	    if (this.providers.length === 0) {
+	    var self = this;
+	    if (self.providers.length === 0) {
 	      callback(new Error('No providers'));
-	      return this;
+	      return self;
 	    }
 
-	    var index = 0;
-	    var providers = this.providers.slice(0);
+	    if (self.resolveCallbacks.push(callback) === 1) {
+	      var index = 0;
+	      var providers = self.providers.slice(0);
 
-	    function resolveNext(err, creds) {
-	      if ((!err && creds) || index === providers.length) {
-	        callback(err, creds);
-	        return;
+	      function resolveNext(err, creds) {
+	        if ((!err && creds) || index === providers.length) {
+	          AWS.util.arrayEach(self.resolveCallbacks, function (callback) {
+	            AWS.util.defer(function () {
+	              callback(err, creds);
+	            });
+	          });
+	          self.resolveCallbacks.length = 0;
+	          return;
+	        }
+
+	        var provider = providers[index++];
+	        if (typeof provider === 'function') {
+	          creds = provider.call();
+	        } else {
+	          creds = provider;
+	        }
+
+	        if (creds.get) {
+	          creds.get(function (getErr) {
+	            resolveNext(getErr, getErr ? null : creds);
+	          });
+	        } else {
+	          resolveNext(null, creds);
+	        }
 	      }
 
-	      var provider = providers[index++];
-	      if (typeof provider === 'function') {
-	        creds = provider.call();
-	      } else {
-	        creds = provider;
-	      }
-
-	      if (creds.get) {
-	        creds.get(function(getErr) {
-	          resolveNext(getErr, getErr ? null : creds);
-	        });
-	      } else {
-	        resolveNext(null, creds);
-	      }
+	      resolveNext();
 	    }
 
-	    resolveNext();
-	    return this;
+	    return self;
 	  }
 	});
 

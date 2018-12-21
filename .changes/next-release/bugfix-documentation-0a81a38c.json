@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "documentation",
-  "description": "swap abstract Yard tag for custom tags to support compatibility with google-closure-compiler"
-}

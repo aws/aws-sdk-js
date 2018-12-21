@@ -286,7 +286,7 @@
           "documentation": "The name of the Amazon CloudWatch Log Group that you want to record events in."
         }
       },
-      "documentation": "An object that contains information about a event destination that sends data to Amazon CloudWatch Logs.",
+      "documentation": "An object that contains information about an event destination that sends data to Amazon CloudWatch Logs.",
       "required": []
     },
     "CreateConfigurationSetEventDestinationRequest": {
@@ -306,7 +306,7 @@
           "documentation": "A name that identifies the event destination."
         }
       },
-      "documentation": "CreateConfigurationSetEventDestinationRequest",
+      "documentation": "Create a new event destination in a configuration set.",
       "required": [
         "ConfigurationSetName"
       ]
@@ -324,7 +324,7 @@
           "documentation": "The name that you want to give the configuration set."
         }
       },
-      "documentation": "CreateConfigurationSetRequest"
+      "documentation": "A request to create a new configuration set."
     },
     "CreateConfigurationSetResponse": {
       "type": "structure",
@@ -395,6 +395,9 @@
         "Name": {
           "shape": "String",
           "documentation": "A name that identifies the event destination configuration."
+        },
+        "SnsDestination": {
+          "shape": "SnsDestination"
         }
       },
       "documentation": "An object that defines an event destination."
@@ -414,6 +417,9 @@
         },
         "MatchingEventTypes": {
           "shape": "EventTypes"
+        },
+        "SnsDestination": {
+          "shape": "SnsDestination"
         }
       },
       "documentation": "An object that defines a single event destination.",
@@ -481,7 +487,7 @@
           "documentation": "The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination that you want to use in the event destination."
         }
       },
-      "documentation": "An object that contains information about a event destination that sends data to Amazon Kinesis Data Firehose.",
+      "documentation": "An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.",
       "required": []
     },
     "NonEmptyString": {
@@ -559,6 +565,17 @@
         }
       },
       "documentation": "An object that that contains the Message ID of a Voice message that was sent successfully."
+    },
+    "SnsDestination": {
+      "type": "structure",
+      "members": {
+        "TopicArn": {
+          "shape": "String",
+          "documentation": "The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to."
+        }
+      },
+      "documentation": "An object that contains information about an event destination that sends data to Amazon SNS.",
+      "required": []
     },
     "String": {
       "type": "string"

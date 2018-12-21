@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "CredentailProviderChain",
-  "description": "CredentialProviderChain.resolve now coalesces calls, so that concurrent requests for a service instance which has yet to resolve credentials will not result in a stampede to assign config.credentials"
-}

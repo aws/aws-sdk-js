@@ -139,6 +139,7 @@ declare namespace PinpointSMSVoice {
      * A name that identifies the event destination configuration.
      */
     Name?: String;
+    SnsDestination?: SnsDestination;
   }
   export interface EventDestinationDefinition {
     CloudWatchLogsDestination?: CloudWatchLogsDestination;
@@ -148,6 +149,7 @@ declare namespace PinpointSMSVoice {
     Enabled?: Boolean;
     KinesisFirehoseDestination?: KinesisFirehoseDestination;
     MatchingEventTypes?: EventTypes;
+    SnsDestination?: SnsDestination;
   }
   export type EventDestinations = EventDestination[];
   export type EventType = "INITIATED_CALL"|"RINGING"|"ANSWERED"|"COMPLETED_CALL"|"BUSY"|"FAILED"|"NO_ANSWER"|string;
@@ -224,6 +226,12 @@ declare namespace PinpointSMSVoice {
      * A unique identifier for the voice message.
      */
     MessageId?: String;
+  }
+  export interface SnsDestination {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.
+     */
+    TopicArn?: String;
   }
   export type String = string;
   export interface UpdateConfigurationSetEventDestinationRequest {
