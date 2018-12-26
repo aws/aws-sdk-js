@@ -53,6 +53,18 @@
             return expect(creds.sessionToken).to.equal('session');
           });
         });
+        it('should be able to resolve credentials synchronously', function() {
+          process.env['AMAZON_ACCESS_KEY_ID'] = 'akid';
+          process.env['AMAZON_SECRET_ACCESS_KEY'] = 'secret';
+          process.env['AMAZON_SESSION_TOKEN'] = 'session';
+          var credentials = null;
+          chain.resolve(function(err, creds) {
+            credentials = creds;
+          });
+          expect(credentials.accessKeyId).to.equal('akid');
+          expect(credentials.secretAccessKey).to.equal('secret');
+          expect(credentials.sessionToken).to.equal('session');
+        });
         it('prefers AWS credentials to AMAZON credentials', function() {
           process.env['AWS_ACCESS_KEY_ID'] = 'akid';
           process.env['AWS_SECRET_ACCESS_KEY'] = 'secret';
