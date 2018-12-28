@@ -58,12 +58,12 @@ export class DocumentClient {
     /**
      * Atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and region.
      */
-    transactGet(params: DynamoDB.TransactGetItemsInput, callback?: (err: AWSError, data: DynamoDB.TransactGetItemsOutput) => void): Request<DynamoDB.TransactGetItemsOutput, AWSError>;
+    transactGet(params: DocumentClient.TransactGetItemsInput, callback?: (err: AWSError, data: DocumentClient.TransactGetItemsOutput) => void): Request<DocumentClient.TransactGetItemsOutput, AWSError>;
 
     /**
      * Synchronous write operation that groups up to 10 action requests
      */
-    transactWrite(params: DynamoDB.TransactWriteItemsInput, callback?: (err: AWSError, data: DynamoDB.TransactWriteItemsOutput) => void): Request<DynamoDB.TransactWriteItemsOutput, AWSError>;
+    transactWrite(params: DocumentClient.TransactWriteItemsInput, callback?: (err: AWSError, data: DocumentClient.TransactWriteItemsOutput) => void): Request<DocumentClient.TransactWriteItemsOutput, AWSError>;
 }
 
 export namespace DocumentClient {
