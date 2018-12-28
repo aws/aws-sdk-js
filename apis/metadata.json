@@ -486,7 +486,8 @@
   },
   "mediastoredata": {
     "prefix": "mediastore-data",
-    "name": "MediaStoreData"
+    "name": "MediaStoreData",
+    "cors": true
   },
   "appsync": {
     "name": "AppSync"

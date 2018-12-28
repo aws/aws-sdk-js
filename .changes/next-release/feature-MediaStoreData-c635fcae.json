@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "MediaStoreData",
+  "description": "enable cors to make MediaStoreData available in default browser build"
+}
