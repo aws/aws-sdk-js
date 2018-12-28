@@ -911,17 +911,39 @@
       })
     })
 
-    it('should emit api call events corresponding to event interface', function() {
+    it('should emit api call events when request succeeds', function(done) {
       helpers.mockHttpResponse(200, {}, ['FOO', 'BAR']); 
-      var client = new MockService();
+      var client = new MockService({});
       client.on('apiCall', function apiCallListener(event) {
         expect(event.Type).to.equal('ApiCall');
-        expect(event.Service).to.equal('MockService');
+        expect(event.Service).to.equal('mockservice');
         expect(event.Api).to.equal('operationName');
-        expect(Math.abs(event.Timestemp - Date.now()) < 100).to.equal(true);
+        expect(Math.abs(event.Timestamp - Date.now()) < 100).to.equal(true);
         expect(event.Version).to.equal(1);
-        expect(event.AttemptCount).to.equal(0);
+        expect(event.AttemptCount).to.equal(1);
         expect(typeof event.Latency).to.equal('number');
+        expect(typeof event.UserAgent).to.equal('string');
+        expect(event.FinalHttpStatusCode).to.equal(200);
+        done();
+      });
+      client.makeRequest('operationName', function(err, data) {});
+    });
+
+    it('should emit api call events when request fails for aws exception', function(done) {
+      helpers.mockHttpResponse(500, {}, ['ServiceUnavailableException']); 
+      var client = new MockService({maxRetries: 0});
+      client.on('apiCall', function apiCallListener(event) {
+        expect(event.Type).to.equal('ApiCall');
+        expect(event.Service).to.equal('mockservice');
+        expect(event.Api).to.equal('operationName');
+        expect(Math.abs(event.Timestamp - Date.now()) < 100).to.equal(true);
+        expect(event.Version).to.equal(1);
+        expect(event.AttemptCount).to.equal(1);
+        expect(typeof event.Latency).to.equal('number');
+        expect(typeof event.UserAgent).to.equal('string');
+        expect(event.FinalHttpStatusCode).to.equal(500);
+        expect(event.FinalAwsException).to.equal('ServiceUnavailableException');
+        done();
       });
       client.makeRequest('operationName', function(err, data) {});
     });

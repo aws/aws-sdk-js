@@ -122,6 +122,50 @@ if (AWS.util.isNode()) {
         publisher.trimFields(mockEvent);
         expect(mockEvent.AwsExceptionMessage.length).to.equal(512);
       });
+
+      it('trims FinalSdkException to 128 characters', function () {
+        var mockEvent = { FinalSdkException: mockValue };
+        var publisher = new Publisher({
+          clientId: 'Foo'
+        });
+
+        expect(mockEvent.FinalSdkException.length).to.equal(1000);
+        publisher.trimFields(mockEvent);
+        expect(mockEvent.FinalSdkException.length).to.equal(128);
+      });
+
+      it('trims FinalSdkExceptionMessage to 512 characters', function () {
+        var mockEvent = { FinalSdkExceptionMessage: mockValue };
+        var publisher = new Publisher({
+          clientId: 'Foo'
+        });
+
+        expect(mockEvent.FinalSdkExceptionMessage.length).to.equal(1000);
+        publisher.trimFields(mockEvent);
+        expect(mockEvent.FinalSdkExceptionMessage.length).to.equal(512);
+      });
+
+      it('trims AwsExceptionMessage to 128 characters', function () {
+        var mockEvent = { FinalAwsException: mockValue };
+        var publisher = new Publisher({
+          clientId: 'Foo'
+        });
+
+        expect(mockEvent.FinalAwsException.length).to.equal(1000);
+        publisher.trimFields(mockEvent);
+        expect(mockEvent.FinalAwsException.length).to.equal(128);
+      });
+
+      it('trims FinalAwsExceptionMessage to 512 characters', function () {
+        var mockEvent = { FinalAwsExceptionMessage: mockValue };
+        var publisher = new Publisher({
+          clientId: 'Foo'
+        });
+
+        expect(mockEvent.FinalAwsExceptionMessage.length).to.equal(1000);
+        publisher.trimFields(mockEvent);
+        expect(mockEvent.FinalAwsExceptionMessage.length).to.equal(512);
+      });
     });
 
     describe('eventHandler', function () {

@@ -11,7 +11,7 @@ module.exports = {
     },
     "optionalEventFields": {
       "ApiCall": {
-        "APICallTimeout": "ANY_INT"
+        "ApiCallTimeout": "ANY_INT"
       },
       "ApiCallAttempt": {
         "DestinationIp": "ANY_STR",
@@ -27,7 +27,7 @@ module.exports = {
   },
   "cases": [
     {
-      "description": "Test a single client API call with no configuration provided",
+      "description": "Tests a single client API call with no configuration provided",
       "configuration": {
         "accessKey": "myaccesskey",
         "region": "us-west-2",
@@ -66,35 +66,37 @@ module.exports = {
       ],
       "expectedMonitoringEvents": [
         {
+          "Version": 1,
           "Type": "ApiCallAttempt",
           "Service": "CSM Test",
           "Api": "TestOperation",
           "ClientId": "",
-          "Version": 1,
           "Timestamp": "ANY_INT",
           "AttemptLatency": "ANY_INT",
           "Fqdn": "csmtest.us-west-2.amazonaws.com",
-          "UserAgent": "ANY_STR",
           "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
           "AccessKey": "myaccesskey",
           "HttpStatusCode": 200
         },
         {
+          "Version": 1,
           "Type": "ApiCall",
           "Service": "CSM Test",
           "Api": "TestOperation",
           "ClientId": "",
           "Timestamp": "ANY_INT",
-          "Version": 1,
-          "AttemptCount": 1,
           "Latency": "ANY_INT",
-          "Region": "us-west-2",
+          "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
     {
-      "description": "Test a single client API call with bad request",
+      "description": "Tests a single client API call with bad request",
       "apiCalls": [
         {
           "serviceId": "CSM Test",
@@ -112,37 +114,41 @@ module.exports = {
       ],
       "expectedMonitoringEvents": [
         {
+          "Version": 1,
           "Type": "ApiCallAttempt",
           "Service": "CSM Test",
           "Api": "TestOperation",
           "ClientId": "",
-          "Version": 1,
           "Timestamp": "ANY_INT",
           "AttemptLatency": "ANY_INT",
           "Fqdn": "csmtest.us-west-2.amazonaws.com",
-          "UserAgent": "ANY_STR",
           "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
           "AccessKey": "myaccesskey",
           "HttpStatusCode": 400,
           "AwsException": "TestOperationException",
           "AwsExceptionMessage": "There was an error"
         },
         {
+          "Version": 1,
           "Type": "ApiCall",
           "Service": "CSM Test",
           "Api": "TestOperation",
           "ClientId": "",
           "Timestamp": "ANY_INT",
-          "Version": 1,
-          "AttemptCount": 1,
           "Latency": "ANY_INT",
-          "Region": "us-west-2",
+          "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalAwsException": "TestOperationException",
+          "FinalAwsExceptionMessage": "There was an error",
+          "FinalHttpStatusCode": 400
         }
       ]
     },
     {
-      "description": "Test a single client API call with retries",
+      "description": "Tests a single client API call with retries",
       "apiCalls": [
         {
           "serviceId": "CSM Test",
@@ -164,51 +170,53 @@ module.exports = {
       ],
       "expectedMonitoringEvents": [
         {
+          "Version": 1,
           "Type": "ApiCallAttempt",
           "Service": "CSM Test",
           "Api": "TestOperation",
           "ClientId": "",
-          "Version": 1,
           "Timestamp": "ANY_INT",
           "AttemptLatency": "ANY_INT",
           "Fqdn": "csmtest.us-west-2.amazonaws.com",
-          "UserAgent": "ANY_STR",
           "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
           "AccessKey": "myaccesskey",
           "HttpStatusCode": 503,
           "AwsException": "ServiceUnavailable",
           "AwsExceptionMessage": "Service is unavailable"
         },
         {
+          "Version": 1,
           "Type": "ApiCallAttempt",
           "Service": "CSM Test",
           "Api": "TestOperation",
           "ClientId": "",
-          "Version": 1,
           "Timestamp": "ANY_INT",
           "AttemptLatency": "ANY_INT",
           "Fqdn": "csmtest.us-west-2.amazonaws.com",
-          "UserAgent": "ANY_STR",
           "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
           "AccessKey": "myaccesskey",
           "HttpStatusCode": 200
         },
         {
+          "Version": 1,
           "Type": "ApiCall",
           "Service": "CSM Test",
           "Api": "TestOperation",
           "ClientId": "",
           "Timestamp": "ANY_INT",
-          "Version": 1,
-          "AttemptCount": 2,
           "Latency": "ANY_INT",
-          "Region": "us-west-2",
+          "AttemptCount": 2,
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
     {
-      "description": "Test a single client API call with non-retryable SDK exception",
+      "description": "Tests a single client API call with non-retryable SDK exception",
       "apiCalls": [
         {
           "serviceId": "CSM Test",
@@ -226,31 +234,34 @@ module.exports = {
       ],
       "expectedMonitoringEvents": [
         {
+          "Version": 1,
           "Type": "ApiCallAttempt",
           "Service": "CSM Test",
           "Api": "TestOperation",
           "ClientId": "",
-          "Version": 1,
           "Timestamp": "ANY_INT",
           "AttemptLatency": "ANY_INT",
           "Fqdn": "csmtest.us-west-2.amazonaws.com",
-          "UserAgent": "ANY_STR",
           "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
           "AccessKey": "myaccesskey",
           "SdkException": "ANY_STR",
           "SdkExceptionMessage": "Unexpected exception was thrown"
         },
         {
+          "Version": 1,
           "Type": "ApiCall",
           "Service": "CSM Test",
           "Api": "TestOperation",
           "ClientId": "",
           "Timestamp": "ANY_INT",
-          "Version": 1,
-          "AttemptCount": 1,
           "Latency": "ANY_INT",
-          "Region": "us-west-2",
+          "AttemptCount": 1,
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalSdkException": "ANY_STR",
+          "FinalSdkExceptionMessage": "Unexpected exception was thrown"
         }
       ]
     },
@@ -314,8 +325,10 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 2,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -366,8 +379,10 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -470,8 +485,10 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -550,8 +567,10 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -604,8 +623,10 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -659,8 +680,10 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -713,8 +736,10 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -760,8 +785,10 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -807,8 +834,10 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
@@ -854,14 +883,105 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 1,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalHttpStatusCode": 200
         }
       ]
     },
     {
-      "description": "Test a single client API call with exceeded retries",
+      "description": "Test max retries from AWS exception",
       "configuration": {
+        "accessKey": "myaccesskey",
+        "region": "us-west-2",
+        "environmentVariables": {
+          "AWS_CSM_ENABLED": "true"
+        },
+        "sharedConfigFile": {},
+        "maxRetries": 1
+      },
+      "apiCalls": [
+        {
+          "serviceId": "CSM Test",
+          "operationName": "TestOperation",
+          "params": {},
+          "attemptResponses": [
+            {
+              "httpStatus": 503,
+              "responseHeaders": {},
+              "errorCode": "ServiceUnavailable",
+              "errorMessage": "Service is unavailable"
+            },
+            {
+              "httpStatus": 503,
+              "responseHeaders": {},
+              "errorCode": "ServiceUnavailable",
+              "errorMessage": "Service is unavailable"
+            }
+          ]
+        }
+      ],
+      "expectedMonitoringEvents": [
+        {
+          "Version": 1,
+          "Type": "ApiCallAttempt",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "AttemptLatency": "ANY_INT",
+          "Fqdn": "csmtest.us-west-2.amazonaws.com",
+          "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
+          "AccessKey": "myaccesskey",
+          "HttpStatusCode": 503,
+          "AwsException": "ServiceUnavailable",
+          "AwsExceptionMessage": "Service is unavailable"
+        },
+        {
+          "Version": 1,
+          "Type": "ApiCallAttempt",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "AttemptLatency": "ANY_INT",
+          "Fqdn": "csmtest.us-west-2.amazonaws.com",
+          "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
+          "AccessKey": "myaccesskey",
+          "HttpStatusCode": 503,
+          "AwsException": "ServiceUnavailable",
+          "AwsExceptionMessage": "Service is unavailable"
+        },
+        {
+          "Version": 1,
+          "Type": "ApiCall",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "Latency": "ANY_INT",
+          "AttemptCount": 2,
+          "MaxRetriesExceeded": 1,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalAwsException": "ServiceUnavailable",
+          "FinalAwsExceptionMessage": "Service is unavailable",
+          "FinalHttpStatusCode": 503
+        }
+      ]
+    },
+    {
+      "description": "Test max retries from SDK exception",
+      "configuration": {
+        "accessKey": "myaccesskey",
+        "region": "us-west-2",
+        "environmentVariables": {
+          "AWS_CSM_ENABLED": "true"
+        },
+        "sharedConfigFile": {},
         "maxRetries": 1
       },
       "apiCalls": [
@@ -925,8 +1045,82 @@ module.exports = {
           "Timestamp": "ANY_INT",
           "Latency": "ANY_INT",
           "AttemptCount": 2,
-          "Region": "us-west-2",
           "MaxRetriesExceeded": 1,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalSdkException": "ANY_STR",
+          "FinalSdkExceptionMessage": "Retryable exception was thrown"
+        }
+      ]
+    },
+    {
+      "description": "Test final uses the exception from final attempt",
+      "apiCalls": [
+        {
+          "serviceId": "CSM Test",
+          "operationName": "TestOperation",
+          "params": {},
+          "attemptResponses": [
+            {
+              "sdkException": {
+                "isRetryable": true,
+                "message": "First retryable exception"
+              }
+            },
+            {
+              "sdkException": {
+                "isRetryable": false,
+                "message": "Second un-retryable exception"
+              }
+            }
+          ]
+        }
+      ],
+      "expectedMonitoringEvents": [
+        {
+          "Version": 1,
+          "Type": "ApiCallAttempt",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "AttemptLatency": "ANY_INT",
+          "Fqdn": "csmtest.us-west-2.amazonaws.com",
+          "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
+          "AccessKey": "myaccesskey",
+          "SdkException": "ANY_STR",
+          "SdkExceptionMessage": "First retryable exception"
+        },
+        {
+          "Version": 1,
+          "Type": "ApiCallAttempt",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "AttemptLatency": "ANY_INT",
+          "Fqdn": "csmtest.us-west-2.amazonaws.com",
+          "Region": "us-west-2",
+          "UserAgent": "ANY_STR",
+          "AccessKey": "myaccesskey",
+          "SdkException": "ANY_STR",
+          "SdkExceptionMessage": "Second un-retryable exception"
+        },
+        {
+          "Version": 1,
+          "Type": "ApiCall",
+          "Service": "CSM Test",
+          "Api": "TestOperation",
+          "ClientId": "",
+          "Timestamp": "ANY_INT",
+          "Latency": "ANY_INT",
+          "AttemptCount": 2,
+          "MaxRetriesExceeded": 0,
+          "UserAgent": "ANY_STR",
+          "Region": "us-west-2",
+          "FinalSdkException": "ANY_STR",
+          "FinalSdkExceptionMessage": "Second un-retryable exception"
         }
       ]
     }
