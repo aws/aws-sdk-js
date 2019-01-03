@@ -173,7 +173,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Creates the content of a data set by applying a SQL action.</p>"
+      "documentation": "<p>Creates the content of a data set by applying a \"queryAction\" (a SQL query) or a \"containerAction\" (executing a containerized application).</p>"
     },
     "CreateDatastore": {
       "name": "CreateDatastore",
@@ -1151,7 +1151,7 @@
         },
         "messages": {
           "shape": "Messages",
-          "documentation": "<p>The list of messages to be sent. Each message has format: '{ \"messageId\": \"string\", \"payload\": \"string\"}'.</p>"
+          "documentation": "<p>The list of messages to be sent. Each message has format: '{ \"messageId\": \"string\", \"payload\": \"string\"}'.</p> <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_); no other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: \"^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$\". </p> </li> <li> <p>Cannot be greater than 255 characters.</p> </li> <li> <p>Are case-insensitive. (Fields named \"foo\" and \"FOO\" in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {\"temp_01\": 29} or {\"_temp_01\": 29} are valid, but {\"temp-01\": 29}, {\"01_temp\": 29} or {\"__temp_01\": 29} are invalid in message payloads. </p>"
         }
       }
     },
@@ -1410,7 +1410,8 @@
           "documentation": "<p>A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.</p>"
         },
         "contentDeliveryRules": {
-          "shape": "DatasetContentDeliveryRules"
+          "shape": "DatasetContentDeliveryRules",
+          "documentation": "<p>When data set contents are created they are delivered to destinations specified here.</p>"
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
@@ -1530,7 +1531,8 @@
           "documentation": "<p>The \"DatasetTrigger\" objects that specify when the data set is automatically updated.</p>"
         },
         "contentDeliveryRules": {
-          "shape": "DatasetContentDeliveryRules"
+          "shape": "DatasetContentDeliveryRules",
+          "documentation": "<p>When data set contents are created they are delivered to destinations specified here.</p>"
         },
         "status": {
           "shape": "DatasetStatus",
@@ -1560,14 +1562,14 @@
         },
         "queryAction": {
           "shape": "SqlQueryDatasetAction",
-          "documentation": "<p>An \"SqlQueryDatasetAction\" object that contains the SQL query to modify the message.</p>"
+          "documentation": "<p>An \"SqlQueryDatasetAction\" object that uses an SQL query to automatically create data set contents.</p>"
         },
         "containerAction": {
           "shape": "ContainerDatasetAction",
           "documentation": "<p>Information which allows the system to run a containerized application in order to create the data set contents. The application must be in a Docker container along with any needed support libraries.</p>"
         }
       },
-      "documentation": "<p>A \"DatasetAction\" object specifying the query that creates the data set content.</p>"
+      "documentation": "<p>A \"DatasetAction\" object that specifies how data set contents are automatically created.</p>"
     },
     "DatasetActionName": {
       "type": "string",
@@ -1619,9 +1621,11 @@
       "type": "structure",
       "members": {
         "iotEventsDestinationConfiguration": {
-          "shape": "IotEventsDestinationConfiguration"
+          "shape": "IotEventsDestinationConfiguration",
+          "documentation": "<p>Configuration information for delivery of data set contents to AWS IoT Events.</p>"
         }
-      }
+      },
+      "documentation": "<p>The destination to which data set contents are delivered.</p>"
     },
     "DatasetContentDeliveryRule": {
       "type": "structure",
@@ -1630,12 +1634,15 @@
       ],
       "members": {
         "entryName": {
-          "shape": "EntryName"
+          "shape": "EntryName",
+          "documentation": "<p>The name of the data set content delivery rules entry.</p>"
         },
         "destination": {
-          "shape": "DatasetContentDeliveryDestination"
+          "shape": "DatasetContentDeliveryDestination",
+          "documentation": "<p>The destination to which data set contents are delivered.</p>"
         }
-      }
+      },
+      "documentation": "<p>When data set contents are created they are delivered to destination specified here.</p>"
     },
     "DatasetContentDeliveryRules": {
       "type": "list",
@@ -1708,10 +1715,10 @@
       "members": {
         "datasetName": {
           "shape": "DatasetName",
-          "documentation": "<p>The name of the data set whose latest contents will be used as input to the notebook or application.</p>"
+          "documentation": "<p>The name of the data set whose latest contents are used as input to the notebook or application.</p>"
         }
       },
-      "documentation": "<p>The data set whose latest contents will be used as input to the notebook or application.</p>"
+      "documentation": "<p>The data set whose latest contents are used as input to the notebook or application.</p>"
     },
     "DatasetEntries": {
       "type": "list",
@@ -1792,7 +1799,7 @@
         },
         "dataset": {
           "shape": "TriggeringDataset",
-          "documentation": "<p>The data set whose content creation will trigger the creation of this data set's contents.</p>"
+          "documentation": "<p>The data set whose content creation triggers the creation of this data set's contents.</p>"
         }
       },
       "documentation": "<p>The \"DatasetTrigger\" that specifies when the data set is automatically updated.</p>"
@@ -1993,14 +2000,14 @@
       "members": {
         "offsetSeconds": {
           "shape": "OffsetSeconds",
-          "documentation": "<p>The number of seconds of estimated \"in flight\" lag time of message data.</p>"
+          "documentation": "<p>The number of seconds of estimated \"in flight\" lag time of message data. When you create data set contents using message data from a specified time frame, some message data may still be \"in flight\" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the \"in flight\" time of your message data, so that data not processed from a previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.</p>"
         },
         "timeExpression": {
           "shape": "TimeExpression",
           "documentation": "<p>An expression by which the time of the message data may be determined. This may be the name of a timestamp field, or a SQL expression which is used to derive the time the message data was generated.</p>"
         }
       },
-      "documentation": "<p>When you create data set contents using message data from a specified time frame, some message data may still be \"in flight\" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the \"in flight\" time of your message data, so that data not processed from the previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.</p>"
+      "documentation": "<p>Used to limit data to that which has arrived since the last execution of the action.</p>"
     },
     "DescribeChannelRequest": {
       "type": "structure",
@@ -2299,12 +2306,15 @@
       ],
       "members": {
         "inputName": {
-          "shape": "IotEventsInputName"
+          "shape": "IotEventsInputName",
+          "documentation": "<p>The name of the AWS IoT Events input to which data set contents are delivered.</p>"
         },
         "roleArn": {
-          "shape": "RoleArn"
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to deliver data set contents to an AWS IoT Events input.</p>"
         }
-      }
+      },
+      "documentation": "<p>Configuration information for delivery of data set contents to AWS IoT Events.</p>"
     },
     "IotEventsInputName": {
       "type": "string",
@@ -2398,6 +2408,18 @@
           "documentation": "<p>The maximum number of results to return in this request.</p>",
           "location": "querystring",
           "locationName": "maxResults"
+        },
+        "scheduledOnOrAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter to limit results to those data set contents whose creation is scheduled on or after the given time. See the field <code>triggers.schedule</code> in the CreateDataset request. (timestamp)</p>",
+          "location": "querystring",
+          "locationName": "scheduledOnOrAfter"
+        },
+        "scheduledBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter to limit results to those data set contents whose creation is scheduled before the given time. See the field <code>triggers.schedule</code> in the CreateDataset request. (timestamp)</p>",
+          "location": "querystring",
+          "locationName": "scheduledBefore"
         }
       }
     },
@@ -2576,7 +2598,7 @@
         },
         "attribute": {
           "shape": "AttributeName",
-          "documentation": "<p>The name of the attribute that will contain the result of the math operation.</p>"
+          "documentation": "<p>The name of the attribute that contains the result of the math operation.</p>"
         },
         "math": {
           "shape": "MathExpression",
@@ -2665,7 +2687,7 @@
           "documentation": "<p>The URI of the location where data set contents are stored, usually the URI of a file in an S3 bucket.</p>"
         }
       },
-      "documentation": "<p>The URI of the location where data set contents are stored, usually the URI of a file in an S3 bucket.</p>"
+      "documentation": "<p>The value of the variable as a structure that specifies an output file URI.</p>"
     },
     "Pipeline": {
       "type": "structure",
@@ -2808,7 +2830,7 @@
       "members": {
         "deltaTime": {
           "shape": "DeltaTime",
-          "documentation": "<p>Used to limit data to that which has arrived since the last execution of the action. When you create data set contents using message data from a specified time frame, some message data may still be \"in flight\" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the \"in flight\" time of you message data, so that data not processed from a previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.</p>"
+          "documentation": "<p>Used to limit data to that which has arrived since the last execution of the action.</p>"
         }
       },
       "documentation": "<p>Information which is used to filter message data, to segregate it according to the time frame in which it arrives.</p>"
@@ -3144,7 +3166,7 @@
       "members": {
         "resourceArn": {
           "shape": "ResourceArn",
-          "documentation": "<p>The ARN of the resource whose tags will be modified.</p>",
+          "documentation": "<p>The ARN of the resource whose tags you want to modify.</p>",
           "location": "querystring",
           "locationName": "resourceArn"
         },
@@ -3177,10 +3199,10 @@
       "members": {
         "name": {
           "shape": "DatasetName",
-          "documentation": "<p>The name of the data set whose content generation will trigger the new data set content generation.</p>"
+          "documentation": "<p>The name of the data set whose content generation triggers the new data set content generation.</p>"
         }
       },
-      "documentation": "<p>Information about the data set whose content generation will trigger the new data set content generation.</p>"
+      "documentation": "<p>Information about the data set whose content generation triggers the new data set content generation.</p>"
     },
     "UnlimitedRetentionPeriod": {
       "type": "boolean"
@@ -3194,13 +3216,13 @@
       "members": {
         "resourceArn": {
           "shape": "ResourceArn",
-          "documentation": "<p>The ARN of the resource whose tags will be removed.</p>",
+          "documentation": "<p>The ARN of the resource whose tags you want to remove.</p>",
           "location": "querystring",
           "locationName": "resourceArn"
         },
         "tagKeys": {
           "shape": "TagKeyList",
-          "documentation": "<p>The keys of those tags which will be removed.</p>",
+          "documentation": "<p>The keys of those tags which you want to remove.</p>",
           "location": "querystring",
           "locationName": "tagKeys"
         }
@@ -3250,7 +3272,8 @@
           "documentation": "<p>A list of \"DatasetTrigger\" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.</p>"
         },
         "contentDeliveryRules": {
-          "shape": "DatasetContentDeliveryRules"
+          "shape": "DatasetContentDeliveryRules",
+          "documentation": "<p>When data set contents are created they are delivered to destinations specified here.</p>"
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",

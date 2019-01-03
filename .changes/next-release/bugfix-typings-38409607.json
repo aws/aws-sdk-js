@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "typings",
-  "description": "update Attribute value to any for transaction operations input and output"
-}

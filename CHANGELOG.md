@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.382.0-->
+<!--LATEST=2.383.0-->
 <!--ENTRYINSERT-->
+
+## 2.383.0
+* bugfix: credentials: Make CredentialProviderChain coalesce resolvation synchronous
+* bugfix: typings: update Attribute value to any for transaction operations input and output
+* feature: IoTAnalytics: ListDatasetContents now has a filter to limit results by date scheduled.
+* feature: MediaStoreData: enable cors to make MediaStoreData available in default browser build
 
 ## 2.382.0
 * bugfix: CredentailProviderChain: CredentialProviderChain.resolve now coalesces calls, so that concurrent requests for a service instance which has yet to resolve credentials will not result in a stampede to assign config.credentials

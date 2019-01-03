@@ -44,11 +44,11 @@ declare class IoTAnalytics extends Service {
    */
   createDataset(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetResponse) => void): Request<IoTAnalytics.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates the content of a data set by applying a SQL action.
+   * Creates the content of a data set by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application).
    */
   createDatasetContent(params: IoTAnalytics.Types.CreateDatasetContentRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetContentResponse) => void): Request<IoTAnalytics.Types.CreateDatasetContentResponse, AWSError>;
   /**
-   * Creates the content of a data set by applying a SQL action.
+   * Creates the content of a data set by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application).
    */
   createDatasetContent(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetContentResponse) => void): Request<IoTAnalytics.Types.CreateDatasetContentResponse, AWSError>;
   /**
@@ -325,7 +325,7 @@ declare namespace IoTAnalytics {
      */
     channelName: ChannelName;
     /**
-     * The list of messages to be sent. Each message has format: '{ "messageId": "string", "payload": "string"}'.
+     * The list of messages to be sent. Each message has format: '{ "messageId": "string", "payload": "string"}'. Note that the field names of message payloads (data) that you send to AWS IoT Analytics:   Must contain only alphanumeric characters and undescores (_); no other special characters are allowed.   Must begin with an alphabetic character or single underscore (_).   Cannot contain hyphens (-).   In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$".    Cannot be greater than 255 characters.   Are case-insensitive. (Fields named "foo" and "FOO" in the same payload are considered duplicates.)   For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. 
      */
     messages: Messages;
   }
@@ -487,6 +487,9 @@ declare namespace IoTAnalytics {
      * A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five DataSetTrigger objects.
      */
     triggers?: DatasetTriggers;
+    /**
+     * When data set contents are created they are delivered to destinations specified here.
+     */
     contentDeliveryRules?: DatasetContentDeliveryRules;
     /**
      * [Optional] How long, in days, message data is kept for the data set. If not given or set to null, the latest version of the dataset content plus the latest succeeded version (if they are different) are retained for at most 90 days.
@@ -580,6 +583,9 @@ declare namespace IoTAnalytics {
      * The "DatasetTrigger" objects that specify when the data set is automatically updated.
      */
     triggers?: DatasetTriggers;
+    /**
+     * When data set contents are created they are delivered to destinations specified here.
+     */
     contentDeliveryRules?: DatasetContentDeliveryRules;
     /**
      * The status of the data set.
@@ -604,7 +610,7 @@ declare namespace IoTAnalytics {
      */
     actionName?: DatasetActionName;
     /**
-     * An "SqlQueryDatasetAction" object that contains the SQL query to modify the message.
+     * An "SqlQueryDatasetAction" object that uses an SQL query to automatically create data set contents.
      */
     queryAction?: SqlQueryDatasetAction;
     /**
@@ -628,10 +634,19 @@ declare namespace IoTAnalytics {
   export type DatasetActions = DatasetAction[];
   export type DatasetArn = string;
   export interface DatasetContentDeliveryDestination {
+    /**
+     * Configuration information for delivery of data set contents to AWS IoT Events.
+     */
     iotEventsDestinationConfiguration?: IotEventsDestinationConfiguration;
   }
   export interface DatasetContentDeliveryRule {
+    /**
+     * The name of the data set content delivery rules entry.
+     */
     entryName?: EntryName;
+    /**
+     * The destination to which data set contents are delivered.
+     */
     destination: DatasetContentDeliveryDestination;
   }
   export type DatasetContentDeliveryRules = DatasetContentDeliveryRule[];
@@ -668,7 +683,7 @@ declare namespace IoTAnalytics {
   export type DatasetContentVersion = string;
   export interface DatasetContentVersionValue {
     /**
-     * The name of the data set whose latest contents will be used as input to the notebook or application.
+     * The name of the data set whose latest contents are used as input to the notebook or application.
      */
     datasetName: DatasetName;
   }
@@ -718,7 +733,7 @@ declare namespace IoTAnalytics {
      */
     schedule?: Schedule;
     /**
-     * The data set whose content creation will trigger the creation of this data set's contents.
+     * The data set whose content creation triggers the creation of this data set's contents.
      */
     dataset?: TriggeringDataset;
   }
@@ -823,7 +838,7 @@ declare namespace IoTAnalytics {
   }
   export interface DeltaTime {
     /**
-     * The number of seconds of estimated "in flight" lag time of message data.
+     * The number of seconds of estimated "in flight" lag time of message data. When you create data set contents using message data from a specified time frame, some message data may still be "in flight" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the "in flight" time of your message data, so that data not processed from a previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.
      */
     offsetSeconds: OffsetSeconds;
     /**
@@ -1004,7 +1019,13 @@ declare namespace IoTAnalytics {
   export type Image = string;
   export type IncludeStatisticsFlag = boolean;
   export interface IotEventsDestinationConfiguration {
+    /**
+     * The name of the AWS IoT Events input to which data set contents are delivered.
+     */
     inputName: IotEventsInputName;
+    /**
+     * The ARN of the role which grants AWS IoT Analytics permission to deliver data set contents to an AWS IoT Events input.
+     */
     roleArn: RoleArn;
   }
   export type IotEventsInputName = string;
@@ -1060,6 +1081,14 @@ declare namespace IoTAnalytics {
      * The maximum number of results to return in this request.
      */
     maxResults?: MaxResults;
+    /**
+     * A filter to limit results to those data set contents whose creation is scheduled on or after the given time. See the field triggers.schedule in the CreateDataset request. (timestamp)
+     */
+    scheduledOnOrAfter?: Timestamp;
+    /**
+     * A filter to limit results to those data set contents whose creation is scheduled before the given time. See the field triggers.schedule in the CreateDataset request. (timestamp)
+     */
+    scheduledBefore?: Timestamp;
   }
   export interface ListDatasetContentsResponse {
     /**
@@ -1166,7 +1195,7 @@ declare namespace IoTAnalytics {
      */
     name: ActivityName;
     /**
-     * The name of the attribute that will contain the result of the math operation.
+     * The name of the attribute that contains the result of the math operation.
      */
     attribute: AttributeName;
     /**
@@ -1303,7 +1332,7 @@ declare namespace IoTAnalytics {
   }
   export interface QueryFilter {
     /**
-     * Used to limit data to that which has arrived since the last execution of the action. When you create data set contents using message data from a specified time frame, some message data may still be "in flight" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the "in flight" time of you message data, so that data not processed from a previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.
+     * Used to limit data to that which has arrived since the last execution of the action.
      */
     deltaTime?: DeltaTime;
   }
@@ -1477,7 +1506,7 @@ declare namespace IoTAnalytics {
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     * The ARN of the resource whose tags will be modified.
+     * The ARN of the resource whose tags you want to modify.
      */
     resourceArn: ResourceArn;
     /**
@@ -1492,18 +1521,18 @@ declare namespace IoTAnalytics {
   export type Timestamp = Date;
   export interface TriggeringDataset {
     /**
-     * The name of the data set whose content generation will trigger the new data set content generation.
+     * The name of the data set whose content generation triggers the new data set content generation.
      */
     name: DatasetName;
   }
   export type UnlimitedRetentionPeriod = boolean;
   export interface UntagResourceRequest {
     /**
-     * The ARN of the resource whose tags will be removed.
+     * The ARN of the resource whose tags you want to remove.
      */
     resourceArn: ResourceArn;
     /**
-     * The keys of those tags which will be removed.
+     * The keys of those tags which you want to remove.
      */
     tagKeys: TagKeyList;
   }
@@ -1532,6 +1561,9 @@ declare namespace IoTAnalytics {
      * A list of "DatasetTrigger" objects. The list can be empty or can contain up to five DataSetTrigger objects.
      */
     triggers?: DatasetTriggers;
+    /**
+     * When data set contents are created they are delivered to destinations specified here.
+     */
     contentDeliveryRules?: DatasetContentDeliveryRules;
     /**
      * How long, in days, message data is kept for the data set.
