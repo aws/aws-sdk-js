@@ -404,7 +404,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p> Updates engine-specific attributes on a specified server. The server enters the <code>MODIFYING</code> state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's private key (<code>CHEF_PIVOTAL_KEY</code>), a Chef server's admin password (<code>CHEF_DELIVERY_ADMIN_PASSWORD</code>), or a Puppet server's admin password (<code>PUPPET_ADMIN_PASSWORD</code>). </p> <p> This operation is asynchronous. </p> <p> This operation can only be called for servers in <code>HEALTHY</code> or <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is raised. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
+      "documentation": "<p> Updates engine-specific attributes on a specified server. The server enters the <code>MODIFYING</code> state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's private key (<code>CHEF_PIVOTAL_KEY</code>) or a Puppet server's admin password (<code>PUPPET_ADMIN_PASSWORD</code>). </p> <p> This operation is asynchronous. </p> <p> This operation can only be called for servers in <code>HEALTHY</code> or <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is raised. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
     }
   },
   "shapes": {
@@ -961,15 +961,15 @@
       "members": {
         "ExportAttributeName": {
           "shape": "String",
-          "documentation": "<p>The name of the export attribute. Currently supported export attribute is \"Userdata\" which exports a userdata script filled out with parameters provided in the <code>InputAttributes</code> list.</p>"
+          "documentation": "<p>The name of the export attribute. Currently, the supported export attribute is <code>Userdata</code>. This exports a user data script that includes parameters and values provided in the <code>InputAttributes</code> list.</p>"
         },
         "ServerName": {
           "shape": "ServerName",
-          "documentation": "<p>The name of the Server to which the attribute is being exported from </p>"
+          "documentation": "<p>The name of the server from which you are exporting the attribute.</p>"
         },
         "InputAttributes": {
           "shape": "EngineAttributes",
-          "documentation": "<p>The list of engine attributes. The list type is <code>EngineAttribute</code>. <code>EngineAttribute</code> is a pair of attribute name and value. For <code>ExportAttributeName</code> \"Userdata\", currently supported input attribute names are: - \"RunList\": For Chef, an ordered list of roles and/or recipes that are run in the exact order. For Puppet, this parameter is ignored. - \"OrganizationName\": For Chef, an organization name. AWS OpsWorks for Chef Server always creates the organization \"default\". For Puppet, this parameter is ignored. - \"NodeEnvironment\": For Chef, a node environment (eg. development, staging, onebox). For Puppet, this parameter is ignored. - \"NodeClientVersion\": For Chef, version of Chef Engine (3 numbers separated by dots, eg. \"13.8.5\"). If empty, it uses the latest one. For Puppet, this parameter is ignored. </p>"
+          "documentation": "<p>The list of engine attributes. The list type is <code>EngineAttribute</code>. An <code>EngineAttribute</code> list item is a pair that includes an attribute name and its value. For the <code>Userdata</code> ExportAttributeName, the following are supported engine attribute names.</p> <ul> <li> <p> <b>RunList</b> In Chef, a list of roles or recipes that are run in the specified order. In Puppet, this parameter is ignored.</p> </li> <li> <p> <b>OrganizationName</b> In Chef, an organization name. AWS OpsWorks for Chef Automate always creates the organization <code>default</code>. In Puppet, this parameter is ignored.</p> </li> <li> <p> <b>NodeEnvironment</b> In Chef, a node environment (for example, development, staging, or one-box). In Puppet, this parameter is ignored.</p> </li> <li> <p> <b>NodeClientVersion</b> In Chef, the version of the Chef engine (three numbers separated by dots, such as 13.8.5). If this attribute is empty, OpsWorks for Chef Automate uses the most current version. In Puppet, this parameter is ignored.</p> </li> </ul>"
         }
       }
     },
@@ -978,11 +978,11 @@
       "members": {
         "EngineAttribute": {
           "shape": "EngineAttribute",
-          "documentation": "<p>The requested engine attribute pair with attribute name and value. </p>"
+          "documentation": "<p>The requested engine attribute pair with attribute name and value.</p>"
         },
         "ServerName": {
           "shape": "ServerName",
-          "documentation": "<p>The requested ServerName. </p>"
+          "documentation": "<p>The server name used in the request.</p>"
         }
       }
     },
