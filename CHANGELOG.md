@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.383.0-->
+<!--LATEST=2.384.0-->
 <!--ENTRYINSERT-->
+
+## 2.384.0
+* feature: DeviceFarm: "This release provides support for running Appium Node.js and Appium Ruby tests on AWS Device Farm.
 
 ## 2.383.0
 * bugfix: credentials: Make CredentialProviderChain coalesce resolvation synchronous
