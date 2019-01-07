@@ -11,7 +11,7 @@
     "signingName": "appmesh",
     "uid": "appmesh-2018-10-01"
   },
-  "documentation": "<p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and\n         control containerized microservices. App Mesh standardizes how your microservices\n         communicate, giving you end-to-end visibility and helping to ensure high-availability for\n         your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for every\n         microservice in an application. You can use App Mesh with Amazon ECS\n         (using the Amazon EC2 launch type), Amazon EKS, and Kubernetes on AWS.</p>\n         <note>\n            <p>App Mesh supports containerized microservice applications that use service discovery\n            naming for their components. To use App Mesh, you must have a containerized application\n            running on Amazon EC2 instances, hosted in either Amazon ECS, Amazon EKS, or Kubernetes on AWS. For\n            more information about service discovery on Amazon ECS, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguideservice-discovery.html\">Service Discovery</a> in the\n               <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> is supported.\n            For more information, see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
+  "documentation": "<p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and\n         control containerized microservices. App Mesh standardizes how your microservices\n         communicate, giving you end-to-end visibility and helping to ensure high-availability for\n         your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for every\n         microservice in an application. You can use App Mesh with Amazon ECS\n         (using the Amazon EC2 launch type), Amazon EKS, and Kubernetes on AWS.</p>\n         <note>\n            <p>App Mesh supports containerized microservice applications that use service discovery\n            naming for their components. To use App Mesh, you must have a containerized application\n            running on Amazon EC2 instances, hosted in either Amazon ECS, Amazon EKS, or Kubernetes on AWS. For\n            more information about service discovery on Amazon ECS, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the\n               <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> is supported.\n            For more information, see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
   "operations": {
     "CreateMesh": {
       "name": "CreateMesh",
@@ -370,7 +370,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Describes an existing cluster.</p>"
+      "documentation": "<p>Describes an existing service mesh.</p>"
     },
     "DescribeRoute": {
       "name": "DescribeRoute",
@@ -748,6 +748,11 @@
     "ServiceName": {
       "type": "string"
     },
+    "HealthCheckThreshold": {
+      "type": "integer",
+      "min": 2,
+      "max": 10
+    },
     "DeleteMeshOutput": {
       "type": "structure",
       "members": {
@@ -862,6 +867,12 @@
       },
       "documentation": "<p>The DNS service discovery information for your virtual node.</p>"
     },
+    "HealthCheckIntervalMillis": {
+      "type": "long",
+      "box": true,
+      "min": 5000,
+      "max": 300000
+    },
     "VirtualNodeRef": {
       "type": "structure",
       "members": {
@@ -966,14 +977,6 @@
       },
       "max": 10
     },
-    "DurationMillis": {
-      "type": "long",
-      "box": true
-    },
-    "NonNegativeInt": {
-      "type": "integer",
-      "min": 0
-    },
     "MeshRef": {
       "type": "structure",
       "members": {
@@ -1052,6 +1055,12 @@
       },
       "documentation": "",
       "payload": "virtualRouter"
+    },
+    "HealthCheckTimeoutMillis": {
+      "type": "long",
+      "box": true,
+      "min": 2000,
+      "max": 60000
     },
     "CreateVirtualRouterInput": {
       "type": "structure",
@@ -1552,11 +1561,11 @@
         },
         "createdAt": {
           "shape": "Timestamp",
-          "documentation": "<p>The Unix epoch timestamp in seconds for when the cluster was created.</p>"
+          "documentation": "<p>The Unix epoch timestamp in seconds for when the resource was created.</p>"
         },
         "lastUpdatedAt": {
           "shape": "Timestamp",
-          "documentation": "<p>The Unix epoch timestamp in seconds for when the cluster was last updated.</p>"
+          "documentation": "<p>The Unix epoch timestamp in seconds for when the resource was last updated.</p>"
         },
         "uid": {
           "shape": "String",
@@ -1758,7 +1767,7 @@
       "members": {
         "healthCheck": {
           "shape": "HealthCheckPolicy",
-          "documentation": "<p>The health check information for the listener.</p>\n         <note>\n            <p>Listener health checks are not available during the App Mesh preview.</p>\n         </note>"
+          "documentation": "<p>The health check information for the listener.</p>"
         },
         "portMapping": {
           "shape": "PortMapping",
@@ -1772,37 +1781,44 @@
     },
     "HealthCheckPolicy": {
       "type": "structure",
+      "required": [
+        "healthyThreshold",
+        "intervalMillis",
+        "protocol",
+        "timeoutMillis",
+        "unhealthyThreshold"
+      ],
       "members": {
         "healthyThreshold": {
-          "shape": "NonNegativeInt",
+          "shape": "HealthCheckThreshold",
           "documentation": "<p>The number of consecutive successful health checks that must occur before declaring\n         listener healthy.</p>"
         },
         "intervalMillis": {
-          "shape": "DurationMillis",
+          "shape": "HealthCheckIntervalMillis",
           "documentation": "<p>The time period in milliseconds between each health check execution.</p>"
         },
         "path": {
           "shape": "String",
-          "documentation": "<p>The destination path for the health check request.</p>"
+          "documentation": "<p>The destination path for the health check request. This is only required if the\n         specified protocol is HTTP; if the protocol is TCP, then this parameter is ignored.</p>"
         },
         "port": {
           "shape": "PortNumber",
-          "documentation": "<p>The destination port for the health check request.</p>"
+          "documentation": "<p>The destination port for the health check request. This port must match the port defined\n         in the <a>PortMapping</a> for the listener.</p>"
         },
         "protocol": {
           "shape": "PortProtocol",
           "documentation": "<p>The protocol for the health check request.</p>"
         },
         "timeoutMillis": {
-          "shape": "DurationMillis",
+          "shape": "HealthCheckTimeoutMillis",
           "documentation": "<p>The amount of time to wait when receiving a response from the health check, in\n         milliseconds.</p>"
         },
         "unhealthyThreshold": {
-          "shape": "NonNegativeInt",
+          "shape": "HealthCheckThreshold",
           "documentation": "<p>The number of consecutive failed health checks that must occur before declaring a\n         virtual node unhealthy. </p>"
         }
       },
-      "documentation": "<p>An object representing the health check policy for a virtual node's listener.</p>\n         <note>\n            <p>Listener health checks are not available during the App Mesh preview.</p>\n         </note>"
+      "documentation": "<p>An object representing the health check policy for a virtual node's listener.</p>"
     },
     "ListVirtualRoutersInput": {
       "type": "structure",
